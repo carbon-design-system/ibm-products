@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
@@ -2193,38 +2193,45 @@ describe(componentName, () => {
   });
 });
 
+const duplicateOnClickFn = jest.fn();
+const addOnClickFn = jest.fn();
+const selectAllOnClickFn = jest.fn();
+const publishOnClickFn = jest.fn();
+const downloadOnClickFn = jest.fn();
+const deleteOnClickFn = jest.fn();
+
 const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: duplicateOnClickFn,
     },
     {
       label: 'Add',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: addOnClickFn,
     },
     {
       label: 'Select all',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: selectAllOnClickFn,
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: publishOnClickFn,
     },
     {
       label: 'Download',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: downloadOnClickFn,
     },
     {
       label: 'Delete',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: deleteOnClickFn,
       hasDivider: true,
       kind: 'danger',
     },
@@ -2304,7 +2311,7 @@ describe('batch action testing', () => {
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
       const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
-      await act(() => click(firstCheckbox));
+      await click(firstCheckbox);
 
       expect(
         container.querySelector(
@@ -2314,15 +2321,19 @@ describe('batch action testing', () => {
 
       // Given the default offsetWidth mocks, 2 batch actions should be visible
       // in addition to the MenuButton
-      screen.getByLabelText(getBatchActions()[0].label);
-      screen.getByLabelText(getBatchActions()[1].label);
+      await click(screen.getByLabelText(getBatchActions()[0].label));
+      expect(duplicateOnClickFn).toHaveBeenCalledTimes(1);
+
+      await click(screen.getByLabelText(getBatchActions()[1].label));
+      expect(addOnClickFn).toHaveBeenCalledTimes(1);
+
       const menuButton = screen.getByRole('button', { name: /More/i });
       const cancelButton = screen.getByRole('button', { name: /Cancel/i });
       const selectAllButton = screen.getByRole('button', {
         name: /Select all/i,
       });
       expect(menuButton).toBeInTheDocument();
-      await act(() => click(menuButton));
+      await click(menuButton);
       const options = Array.from(
         screen.getByRole('menu', { name: /More/i }).children
       );
@@ -2337,10 +2348,34 @@ describe('batch action testing', () => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
 
-      //coverage
-      fireEvent.click(options[0]);
-      fireEvent.click(cancelButton);
-      fireEvent.click(selectAllButton);
+      const checkMenuItem = async (
+        remainingBatchIndex,
+        clickHandlerFn,
+        initiateMenuOpen
+      ) => {
+        if (initiateMenuOpen) {
+          await click(menuButton);
+        }
+        const displayedMenuElement = document.querySelector(
+          `.${carbon.prefix}--menu`
+        );
+        const menuItems = Array.from(displayedMenuElement.children);
+
+        const menuItem = menuItems.filter(
+          (item) =>
+            item.textContent === getBatchActions()[remainingBatchIndex].label
+        )[0];
+        await click(menuItem);
+        expect(clickHandlerFn).toHaveBeenCalledTimes(1);
+      };
+
+      await checkMenuItem(2, selectAllOnClickFn);
+      await checkMenuItem(3, publishOnClickFn, true);
+      await checkMenuItem(4, downloadOnClickFn, true);
+      await checkMenuItem(5, deleteOnClickFn, true);
+      await click(cancelButton);
+      await click(firstCheckbox);
+      await click(selectAllButton);
     });
   });
 });

@@ -38,7 +38,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__title:before {
-  content: "IBM ";
+  content: 'IBM ';
   font-weight: initial;
 }
 

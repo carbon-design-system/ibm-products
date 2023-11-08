@@ -91,7 +91,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { visibleColumns, state, dispatch, onColResizeEnd } =
             datagridState;
           const { columnResizing } = state;
-          const { columnWidths } = columnResizing;
+          const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
           return (
             <TableHeader

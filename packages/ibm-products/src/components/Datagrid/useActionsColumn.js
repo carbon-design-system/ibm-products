@@ -38,6 +38,7 @@ const useActionsColumn = (hooks) => {
         const { cell } = cellData;
         const { row, column } = cell;
         if (column.isAction) {
+          const isColumnSticky = !!column.sticky;
           return [
             props,
             {
@@ -48,7 +49,8 @@ const useActionsColumn = (hooks) => {
                       className={`${blockClass}__actions-column-loading`}
                     />
                   )}
-                  {!isFetching && rowActions.length <= 2 && (
+                  {/* Icon buttons */}
+                  {!isFetching && rowActions.length <= 2 && !isColumnSticky && (
                     <div
                       className={`${blockClass}_actions-column`}
                       style={{ display: 'flex' }}
@@ -104,7 +106,8 @@ const useActionsColumn = (hooks) => {
                       })}
                     </div>
                   )}
-                  {!isFetching && rowActions.length > 2 && (
+                  {/* Overflow menu */}
+                  {!isFetching && (rowActions.length > 2 || isColumnSticky) && (
                     <div>
                       <OverflowMenu
                         align="left"
@@ -155,9 +158,11 @@ const useActionsColumn = (hooks) => {
               className: cx({
                 [`${blockClass}__actions-column-cell`]: true,
                 [`${blockClass}__cell`]: true,
+                [`${blockClass}__actions-column-cell-non-sticky`]:
+                  !isColumnSticky,
               }),
               style: {
-                width: rowActions.length > 2 ? 48 : 96,
+                width: rowActions.length > 2 || isColumnSticky ? 48 : 96,
               },
             },
           ];
@@ -173,12 +178,13 @@ const useActionsColumn = (hooks) => {
       const addHeaderWidth = (props, cellData) => {
         const { column } = cellData;
         if (column.isAction) {
+          const isColumnSticky = !!column.sticky;
           return [
             props,
             {
               style: {
                 ...props.style,
-                width: rowActions.length > 2 ? 48 : 96, // set header width based on action length
+                width: rowActions.length > 2 || isColumnSticky ? 48 : 96, // set header width based on action length
               },
             },
           ];

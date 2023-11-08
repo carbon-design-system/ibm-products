@@ -65,15 +65,18 @@ const defaults = {
     DataSpreadsheet: false,
     Datagrid: false,
     EditTearsheet: false,
+    EditTearsheetForm: false,
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
     /* new component flags here - comment used by generate CLI */
+
+    // Novice to pro components not yet reviewed and released:
+    Checklist: false,
   },
 
   // feature level flags
   feature: {
-    'a-new-feature': false,
     'default-portal-target-body': true,
     'Datagrid.useInfiniteScroll': false,
     'Datagrid.useInlineEdit': false,

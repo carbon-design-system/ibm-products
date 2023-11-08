@@ -21,6 +21,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 import { usePreviousValue } from '../../global/js/hooks';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'RemoveModal';
 
@@ -42,6 +43,7 @@ export let RemoveModal = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      portalTarget: portalTargetIn,
       preventCloseOnClickOutside,
       primaryButtonDisabled,
       primaryButtonText,
@@ -56,6 +58,7 @@ export let RemoveModal = forwardRef(
     const previousState = usePreviousValue({ open });
     const [userInput, setUserInput] = useState('');
     const idRef = useRef(uuidv4());
+    const renderPortalUse = usePortalTarget(portalTargetIn);
     const onChangeHandler = (e) => {
       setUserInput(e.target.value);
     };
@@ -80,7 +83,7 @@ export let RemoveModal = forwardRef(
       }
     }, [open, previousState?.open]);
 
-    return (
+    return renderPortalUse(
       <ComposedModal
         {...rest}
         className={cx(blockClass, className)}
@@ -181,6 +184,10 @@ RemoveModal.propTypes = {
    * Specify whether the Modal is currently open
    */
   open: PropTypes.bool.isRequired,
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
   /**
    * Prevent closing on click outside of modal
    */

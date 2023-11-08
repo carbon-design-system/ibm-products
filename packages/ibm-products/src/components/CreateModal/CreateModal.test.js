@@ -83,8 +83,10 @@ describe(componentName, () => {
   });
 
   it('is not visible when open is not true', async () => {
-    const { container } = render(<RenderComponent open={false} />);
-    expect(container.firstChild).not.toHaveClass('is-visible');
+    render(<RenderComponent open={false} />);
+    expect(screen.getByRole('presentation', { hidden: true })).not.toHaveClass(
+      'is-visible'
+    );
   });
 
   it('forwards a ref to an appropriate node', async () => {
@@ -158,7 +160,7 @@ describe(componentName, () => {
 
   it('applies focus to selected element', async () => {
     const textInputId = 'test-input-id';
-    const { container } = render(
+    render(
       <RenderComponent>
         <TextInput
           key="form-field-1"
@@ -169,7 +171,7 @@ describe(componentName, () => {
         />
       </RenderComponent>
     );
-    const firstInput = container.querySelector(`#${textInputId}`);
+    const firstInput = screen.getByRole('textbox');
     expect(firstInput === document.activeElement).toBeTruthy();
   });
 

@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import { CommonHeader } from "./CommonHeader";
+import { CommonHeader } from './CommonHeader';
 
-import "./_example.scss";
-import { SamplePage } from "./SamplePage";
+import './_example.scss';
+import { SamplePage } from './SamplePage';
 
 export const Example = () => (
   <div className="example">
-    <CommonHeader className='header-area' />
-    <div className='content-area'>
+    <CommonHeader className="header-area" />
+    <div className="content-area">
       <SamplePage />
     </div>
   </div>

@@ -55,7 +55,8 @@ export let NotFoundEmptyState = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          `${blockClass}-position--${illustrationPosition}`
+          `${blockClass}-position--${illustrationPosition}`,
+          `${blockClass}-type--notFound`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

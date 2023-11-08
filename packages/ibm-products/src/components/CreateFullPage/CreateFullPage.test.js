@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   expectWarn,
@@ -52,6 +52,7 @@ const finalStepOnNextNonPromise = jest.fn();
 const finalStepOnNextRejectFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
+const onMountFn = jest.fn();
 
 const defaultFullPageProps = {
   nextButtonText,
@@ -111,6 +112,7 @@ const renderCreateFullPage = ({
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         hasFieldset
         fieldsetLegendText="Title1"
+        onMount={onMountFn}
       >
         {stepFormField}
       </CreateFullPageStep>
@@ -118,6 +120,7 @@ const renderCreateFullPage = ({
         title="Title 2"
         description="2"
         fieldsetLegendText="2"
+        invalid={false}
       >
         {stepFormField}
       </CreateFullPageStep>
@@ -125,6 +128,7 @@ const renderCreateFullPage = ({
         title="Title 3"
         description="3"
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
+        invalid
       >
         {stepFormField}
       </CreateFullPageStep>
@@ -169,6 +173,18 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  const { ResizeObserver } = window;
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+  afterEach(() => {
+    window.ResizeObserver = ResizeObserver;
+  });
+
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
@@ -196,6 +212,45 @@ describe(componentName, () => {
     });
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
+
+  it('should render the CreateFullPage on the specified initialStep prop provided', () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+      initialStep: 2,
+    });
+    const createFullPageSteps = container.querySelector(
+      `.${blockClass}__content .${blockClass}__form`
+    ).children;
+
+    expect(
+      createFullPageSteps[1].classList.contains(
+        `.${blockClass}__step__step--visible-step`
+      )
+    );
+  });
+
+  it('renders the first step if an invalid initialStep value is provided', () =>
+    expectWarn(
+      `${CreateFullPage.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateFullPage.displayName} has.`,
+      () => {
+        const { container } = renderCreateFullPage({
+          ...defaultFullPageProps,
+          // Starting on 0 step is invalid since the steps start with a value of 1
+          // This will cause a console warning
+          initialStep: 0,
+        });
+        const createFullPageSteps = container.querySelector(
+          `.${blockClass}__content .${blockClass}__form`
+        ).children;
+        expect(
+          createFullPageSteps[0].classList.contains(
+            `.${blockClass}__step__step--visible-step`
+          )
+        );
+        // The onMount prop will get called here because the first step is rendered
+        expect(onMountFn).toHaveBeenCalledTimes(1);
+      }
+    ));
 
   it('should not render any CreateFullPage steps when there are no FullPageStep components included', async () => {
     const { container } = renderEmptyCreateFullPage({
@@ -472,5 +527,59 @@ describe(componentName, () => {
     expect(
       createFullPageSteps[0].classList.contains(`.${blockClass}__step-fieldset`)
     );
+  });
+
+  it('renders a header if title is provided ', () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+      title: 'Page title',
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+
+    expect(headerSelector).toBeInTheDocument();
+  });
+
+  it('renders a header if breadcrumbs are provided', () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+      breadcrumbs: [
+        { key: '0', href: '/', label: 'Home page' },
+        { key: '1', href: '/', label: 'Application name' },
+      ],
+      breadcrumbsOverflowAriaLabel: 'breadcrumbs overflow aria-label',
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+
+    expect(headerSelector).toBeInTheDocument();
+  });
+
+  it("doesn't render a header if title or breadcrumbs are not provided  ", () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+    expect(headerSelector).not.toBeInTheDocument();
+  });
+
+  it('renders an error icon if the step invalid prop is set to true', async () => {
+    renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
+
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 1' })
+        .querySelector(`.${carbon.prefix}--progress__warning`)
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 2' })
+        .querySelector(`.${carbon.prefix}--progress__warning`)
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 3' })
+        .querySelector(`.${carbon.prefix}--progress__warning`)
+    ).toBeInTheDocument();
   });
 });

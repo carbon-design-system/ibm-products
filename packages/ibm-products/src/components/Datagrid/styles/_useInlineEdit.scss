@@ -116,18 +116,15 @@ $row-heights: (
     justify-content: flex-start;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns
-  &:not(
-      .#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
-    ) {
-    .#{variables.$block-class}__inline-edit-button-icon {
-      display: none;
-    }
+  .#{variables.$block-class}__inline-edit-button-icon {
+    display: none;
+  }
 
-    /* stylelint-disable-next-line */
-    &:hover {
-      .#{variables.$block-class}__inline-edit-button-icon {
-        display: block;
-      }
+  /* stylelint-disable-next-line */
+  &:hover,
+  &.#{variables.$block-class}__inline-edit-button--active {
+    .#{variables.$block-class}__inline-edit-button-icon {
+      display: block;
     }
   }
 }
@@ -255,7 +252,7 @@ $row-heights: (
 // containers, using default border caused grid area width to be changed and
 // outlines were not present be
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active::before {
+  .#{variables.$block-class}__grid-container-active::before {
   position: absolute;
   z-index: 2;
   bottom: 0;
@@ -269,7 +266,7 @@ $row-heights: (
 }
 
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active::after {
+  .#{variables.$block-class}__grid-container-active::after {
   position: absolute;
   z-index: 2;
   right: 0;
@@ -283,7 +280,7 @@ $row-heights: (
 }
 
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active
+  .#{variables.$block-class}__grid-container-active
   .#{c4p-settings.$carbon-prefix}--data-table-content::before {
   position: absolute;
   z-index: 2;
@@ -296,16 +293,16 @@ $row-heights: (
 }
 
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::before,
+  .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::before,
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::after {
+  .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::after {
   height: calc(
     100% - 2px - var(--#{variables.$block-class}--grid-header-height)
   );
 }
 
 .#{variables.$block-class}
-  .#{variables.$block-class}__grid-container-grid-active
+  .#{variables.$block-class}__grid-container-active
   .#{variables.$block-class}__table-container {
   outline: 2px solid $link-inverse;
   outline-offset: -2px;

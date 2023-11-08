@@ -45,12 +45,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 .#{$block-class} .#{$block-class}__body {
   @include type.type-style('body-compact-02');
 
+  overflow: hidden auto;
   min-height: $spacing-10;
   padding: 0 20% 0 $spacing-05;
   margin-bottom: $spacing-06;
   grid-row: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .#{$block-class}

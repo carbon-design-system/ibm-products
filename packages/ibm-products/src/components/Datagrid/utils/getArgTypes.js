@@ -76,6 +76,20 @@ export const ARG_TYPES = {
     description:
       'This value controls the height of the expanded content area. _This value is set/passed inside of the `datagridState` object._',
   },
+  expanderButtonTitleExpanded: {
+    control: {
+      type: 'text',
+    },
+    description:
+      'This value controls the expander title/aria-label when expanded. _This value is set/passed inside of the `datagridState` object._',
+  },
+  expanderButtonTitleCollapsed: {
+    control: {
+      type: 'text',
+    },
+    description:
+      'This value controls the expander title/aria-label when expanded. _This value is set/passed inside of the `datagridState` object._',
+  },
   customizeColumnsProps: {
     control: 'object',
     description:

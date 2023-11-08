@@ -93,26 +93,38 @@ export const ButtonSetWithOverflow = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttons]);
 
-  const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
-    return (
-      <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, key, kind, ...other }) => {
-          const kindFix = kind === 'default' ? 'primary' : kind;
-          return (
-            <Button
-              {...other}
-              key={key && `button-set-${key}`}
-              size={buttonSize}
-              type="button"
-              kind={kindFix}
-            >
-              {label}
-            </Button>
-          );
-        })}
-      </ButtonSet>
-    );
-  });
+  const AButtonSet = React.forwardRef(
+    ({ isHidden = false, buttons, ...rest }, ref) => {
+      return (
+        <ButtonSet {...rest} ref={ref}>
+          {buttons.map(({ label, key, kind, id, ...other }) => {
+            const kindFix = kind === 'default' ? 'primary' : kind;
+            return (
+              <Button
+                {...other}
+                key={key && `button-set-${key}`}
+                size={buttonSize}
+                type="button"
+                kind={kindFix}
+                id={id ? (isHidden ? `${id}--hidden` : id) : null}
+              >
+                {label}
+              </Button>
+            );
+          })}
+        </ButtonSet>
+      );
+    }
+  );
+
+  AButtonSet.propTypes = {
+    /**
+     *  isHidden - Used to conditionally change id if one is passed to the `AButtonSet` component
+     *  in order to avoid duplicate ids between the visible and hidden button set buttons
+     */
+    isHidden: PropTypes.bool,
+  };
+
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <MenuButton {...rest} ref={ref} label={buttonSetOverflowLabel}>
@@ -155,6 +167,7 @@ export const ButtonSetWithOverflow = ({
           ref={sizingContainerRefSet}
           size={buttonSize}
           buttons={buttons}
+          isHidden
         />
       </div>
       {/* Hidden ButtonMenu used to report min size to host via onWidthChange */}

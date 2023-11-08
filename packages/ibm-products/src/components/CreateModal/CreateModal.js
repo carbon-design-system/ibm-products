@@ -23,6 +23,7 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
@@ -59,6 +60,7 @@ export let CreateModal = React.forwardRef(
       subtitle,
       description,
       secondaryButtonText,
+      portalTarget: portalTargetIn,
       primaryButtonText,
       disableSubmit,
       selectorPrimaryFocus,
@@ -68,7 +70,9 @@ export let CreateModal = React.forwardRef(
     },
     ref
   ) => {
-    return (
+    const renderPortalUse = usePortalTarget(portalTargetIn);
+
+    return renderPortalUse(
       <ComposedModal
         {...rest}
         selectorPrimaryFocus={selectorPrimaryFocus}
@@ -147,6 +151,12 @@ CreateModal.propTypes = {
    * Specifies whether the CreateModal is open or not.
    */
   open: PropTypes.bool,
+
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
+
   /**
    * Specifies the primary button's text in the modal.
    */

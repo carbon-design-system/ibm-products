@@ -105,7 +105,7 @@ describe(componentName, () => {
       ...defaultProps,
       onRequestSubmit,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, getByRole } = render(<ImportModal {...props} />);
 
     expect(
       getByText(props.inputButtonText).classList.contains(
@@ -115,7 +115,7 @@ describe(componentName, () => {
     await act(() => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
     expect(
@@ -136,9 +136,9 @@ describe(componentName, () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, getByRole } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -159,9 +159,9 @@ describe(componentName, () => {
       fetchErrorBody: '',
       fetchErrorHeader: '',
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, getByRole } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -181,9 +181,9 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, getByRole } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -205,9 +205,9 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, getByRole } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -234,9 +234,9 @@ describe(componentName, () => {
       invalidFileTypeErrorBody: '',
       invalidFileTypeErrorHeader: '',
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, getByRole } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -251,10 +251,11 @@ describe(componentName, () => {
   it('should successfully use the drag and drop component to upload a file and then remove the file', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, getByRole } = render(<ImportModal {...defaultProps} />);
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
 
-    change(container.querySelector(`.${carbon.prefix}--file-input`), {
+    const modal = getByRole('presentation');
+    change(modal.querySelector(`.${carbon.prefix}--file-input`), {
       target: { files },
     });
     expect(getByText('foo.jpeg')).toBeVisible();
@@ -262,11 +263,9 @@ describe(componentName, () => {
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
     await act(() =>
-      click(container.querySelector(`.${carbon.prefix}--file-close`))
+      click(modal.querySelector(`.${carbon.prefix}--file-close`))
     );
-    expect(
-      container.querySelector(`.${carbon.prefix}--file-filename`)
-    ).toBeNull();
+    expect(modal.querySelector(`.${carbon.prefix}--file-filename`)).toBeNull();
   });
 
   it('should display max size error for file that is too big', async () => {
@@ -276,9 +275,9 @@ describe(componentName, () => {
       ...defaultProps,
       maxFileSize: 1,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, getByRole } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -299,9 +298,9 @@ describe(componentName, () => {
       maxFileSizeErrorHeader: '',
       maxFileSize: 1,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, getByRole } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(getByRole('textbox'), {
       target: { value: 'test.pdf' },
     });
     await act(() => click(getByText(defaultProps.inputButtonText)));
@@ -324,8 +323,10 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ImportModal {...defaultProps} />);
-    expect(container.firstChild).toHaveClass(defaultProps.className);
+    render(<ImportModal {...defaultProps} />);
+    expect(screen.getByRole('presentation')).toHaveClass(
+      defaultProps.className
+    );
   });
 
   const dataTestId = 'data-testid';

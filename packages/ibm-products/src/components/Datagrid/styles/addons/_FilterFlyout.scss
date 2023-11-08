@@ -9,6 +9,7 @@
 // stylelint-disable carbon/layout-token-use
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/layout' as *;
@@ -16,7 +17,8 @@
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
 
-$action-set-height: rem(64px);
+/* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+$action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout__container {
   position: relative;
@@ -27,9 +29,11 @@ $action-set-height: rem(64px);
   top: $spacing-09;
   right: 0;
   display: none;
-  width: rem(642px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  width: to-rem(642px);
   background-color: $layer-02;
-  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  box-shadow: 0 1px to-rem(8px) 0 rgba(0, 0, 0, 0.25);
 }
 
 .#{variables.$block-class}-filter-flyout--open {
@@ -37,12 +41,15 @@ $action-set-height: rem(64px);
 }
 
 .#{variables.$block-class}-filter-flyout--batch {
-  min-height: rem(346px);
-  grid-template-rows: 1fr rem(48px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  min-height: to-rem(346px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  grid-template-rows: 1fr to-rem(48px);
 }
 
 .#{variables.$block-class}-filter-flyout--instant {
-  min-height: rem(282px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  min-height: to-rem(282px);
   grid-template-rows: 1fr;
 }
 
@@ -52,11 +59,14 @@ $action-set-height: rem(64px);
 
 .#{variables.$block-class}-filter-flyout__inner-container::before {
   position: absolute;
-  top: rem(-7px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  top: to-rem(-7px);
   right: 1px;
   display: block;
-  width: rem(46px);
-  height: rem(15px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  width: to-rem(46px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  height: to-rem(15px);
   background-color: $layer-02;
   content: '';
 }
@@ -70,7 +80,8 @@ $action-set-height: rem(64px);
 
 .#{variables.$block-class}-filter-flyout__filters {
   display: grid;
-  gap: rem(16px) rem(32px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  gap: to-rem(16px) rem(32px);
   grid-template-columns: 1fr 1fr;
 }
 
@@ -85,7 +96,8 @@ $action-set-height: rem(64px);
 .#{variables.$block-class}-filter-flyout__trigger--open.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--icon-only {
   position: relative;
   background-color: $layer-02;
-  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  box-shadow: 0 1px to-rem(8px) 0 rgba(0, 0, 0, 0.25);
 }
 
 .#{variables.$block-class}-filter-flyout

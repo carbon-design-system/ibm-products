@@ -21,6 +21,7 @@ export const DROPDOWN = 'dropdown';
 
 /** Constants for event emitters */
 export const CLEAR_FILTERS = 'clearFilters';
+export const CLEAR_SINGLE_FILTER = 'clearSingleFilter';
 
 /** Constants for panel dimensions */
 export const PANEL_WIDTH = 320;

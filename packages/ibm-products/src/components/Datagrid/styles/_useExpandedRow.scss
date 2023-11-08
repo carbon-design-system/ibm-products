@@ -52,9 +52,22 @@
   width: $spacing-07;
   height: $spacing-07;
   min-height: $spacing-07;
+  align-items: center;
   justify-content: center;
   padding: 0;
   .#{variables.$block-class}__row-expander--icon {
     fill: $layer-selected-inverse;
   }
+}
+
+.#{variables.$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr:hover
+  + .#{variables.$block-class}__expanded-row,
+.#{variables.$block-class} .#{variables.$block-class}__expanded-row:hover,
+.#{variables.$block-class}
+  .#{variables.$block-class}__expandable-row--hover
+  td {
+  background: $layer-hover;
 }

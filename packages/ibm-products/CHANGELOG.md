@@ -3,6 +3,251 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.0...@carbon/ibm-products@2.15.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* datagrid batch actions release review fixes ([#3771](https://github.com/carbon-design-system/ibm-products/issues/3771)) ([bf36dc9](https://github.com/carbon-design-system/ibm-products/commit/bf36dc9079b65746be70ab5896dc67baa4aad4d9))
+* **Datagrid:** stop propagation of row expander click event ([#3769](https://github.com/carbon-design-system/ibm-products/issues/3769)) ([2ac6864](https://github.com/carbon-design-system/ibm-products/commit/2ac6864bce9dad258264e5b570db2fe2825eae56))
+* replace prop from 'ariaLabel' to 'aria-label' ([#3765](https://github.com/carbon-design-system/ibm-products/issues/3765)) ([af02b7d](https://github.com/carbon-design-system/ibm-products/commit/af02b7d6976eadb6ed36e2aa26028410734d7352))
+* Storybook error "Failed prop type: req'd titleText is missing from Dropdown" ([#3764](https://github.com/carbon-design-system/ibm-products/issues/3764)) ([2b9414e](https://github.com/carbon-design-system/ibm-products/commit/2b9414e894c16670b609be476df6d9dffd2bbc41))
+
+
+
+
+
+# [2.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.14.0...@carbon/ibm-products@2.15.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* change overflow menu's tooltip alignment to 'left' ([#3730](https://github.com/carbon-design-system/ibm-products/issues/3730)) ([4e3a4e8](https://github.com/carbon-design-system/ibm-products/commit/4e3a4e8aaf827db0efb02749392cec701fa1e770))
+* **Checklist:** update colors and story structures ([#3739](https://github.com/carbon-design-system/ibm-products/issues/3739)) ([c154555](https://github.com/carbon-design-system/ibm-products/commit/c154555e8987216ecdd3da91244b2e6c038db191))
+* **CreateTearsheet & CreateFullPage:** Influencer step error indicator extension ([#3717](https://github.com/carbon-design-system/ibm-products/issues/3717)) ([04654b2](https://github.com/carbon-design-system/ibm-products/commit/04654b26852e9db8495a81e1c9691327a14a4a16))
+* datagrid header review fixes ([#3743](https://github.com/carbon-design-system/ibm-products/issues/3743)) ([d1b68e3](https://github.com/carbon-design-system/ibm-products/commit/d1b68e31f01176d1ed0e2f5c20d8990f5a3cd672))
+* **Datagrid:** address resize end issues ([#3745](https://github.com/carbon-design-system/ibm-products/issues/3745)) ([ae15a37](https://github.com/carbon-design-system/ibm-products/commit/ae15a373c6637fbe2052fb2d35ab7fb5903640cc))
+* **Datagrid:** adhere to min width if provided ([#3707](https://github.com/carbon-design-system/ibm-products/issues/3707)) ([49458f8](https://github.com/carbon-design-system/ibm-products/commit/49458f8a8310f47306e19bf6a40352e73738f195))
+* **Datagrid:** correct number of items displayed when viewing all checkbox filters ([#3726](https://github.com/carbon-design-system/ibm-products/issues/3726)) ([21a99cf](https://github.com/carbon-design-system/ibm-products/commit/21a99cfc79ef83a00c849bf5924d63d7a500c3cf))
+* **EditTearsheet:** Correctly assign action handlers to associated buttons ([#3751](https://github.com/carbon-design-system/ibm-products/issues/3751)) ([2a0024d](https://github.com/carbon-design-system/ibm-products/commit/2a0024d90d0e0edfd7126a49d95be507d0db4e4b))
+* for gallery examples ([#3729](https://github.com/carbon-design-system/ibm-products/issues/3729)) ([72c600b](https://github.com/carbon-design-system/ibm-products/commit/72c600bc32cf73636e5085b6c31f1ea36c8a2e50))
+* update to Carbon 11 compatible versions to latest ([#3734](https://github.com/carbon-design-system/ibm-products/issues/3734)) ([f3a2c0e](https://github.com/carbon-design-system/ibm-products/commit/f3a2c0ee60ff49e56e62589f73a7fdfd2b8e2d2e))
+
+
+### Features
+
+* add prefix hook ([#3727](https://github.com/carbon-design-system/ibm-products/issues/3727)) ([36b51a9](https://github.com/carbon-design-system/ibm-products/commit/36b51a91b4741c49a2b7361c6d9dc6404f54f2d7))
+
+
+
+
+
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.13.0...@carbon/ibm-products@2.14.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** semantically hide spacer col ([#3722](https://github.com/carbon-design-system/ibm-products/issues/3722)) ([28376e9](https://github.com/carbon-design-system/ibm-products/commit/28376e97aba4b15dfea5e111872ac4d8b1389ed3))
+* **Datagrid:** top align cell content for extra large row height ([#3709](https://github.com/carbon-design-system/ibm-products/issues/3709)) ([a9ce489](https://github.com/carbon-design-system/ibm-products/commit/a9ce4899180394cdd309d8a80ddda06977a1efac))
+* **TagSet:** remove only from tag set tests ([#3719](https://github.com/carbon-design-system/ibm-products/issues/3719)) ([d4edc78](https://github.com/carbon-design-system/ibm-products/commit/d4edc7823babea3d71a21882121df3b35144b311))
+
+
+### Features
+
+* **TagSet:** allow for tag rendering in overflow ([#3646](https://github.com/carbon-design-system/ibm-products/issues/3646)) ([cc793a3](https://github.com/carbon-design-system/ibm-products/commit/cc793a31cec978959f205f074f768c4ccbef31aa))
+
+
+
+
+
+# [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.1...@carbon/ibm-products@2.13.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **Datagrid:** address incorrect order of fn args ([#3712](https://github.com/carbon-design-system/ibm-products/issues/3712)) ([2d1c87c](https://github.com/carbon-design-system/ibm-products/commit/2d1c87c0578168ead661a32283897d86d700bf21))
+* **Datagrid:** import filter summary styles from datagrid ([#3689](https://github.com/carbon-design-system/ibm-products/issues/3689)) ([4d32a6f](https://github.com/carbon-design-system/ibm-products/commit/4d32a6f6702bf6868d2aa00859273229fa372933))
+* sb warning - use actions column not enabled ([#3686](https://github.com/carbon-design-system/ibm-products/issues/3686)) ([e7dde77](https://github.com/carbon-design-system/ibm-products/commit/e7dde77d5d25860cb6fcb95cc16768b6fd0a3db8))
+* sb warning - use actions column not enabled ([#3693](https://github.com/carbon-design-system/ibm-products/issues/3693)) ([67954e3](https://github.com/carbon-design-system/ibm-products/commit/67954e31af36db33f5b2940988914607d3c85d51))
+* sb warning - use actions column not enabled ([#3695](https://github.com/carbon-design-system/ibm-products/issues/3695)) ([52f34ee](https://github.com/carbon-design-system/ibm-products/commit/52f34eec3d9464278c4608c0766416403ae8a4c7))
+* Storybook error 'multiForm is not a DOM element' ([#3698](https://github.com/carbon-design-system/ibm-products/issues/3698)) ([341d7d2](https://github.com/carbon-design-system/ibm-products/commit/341d7d217d597357a3f41e542d41d4692de82493))
+* Storybook error 'triggerclassname is not a DOM element' ([#3703](https://github.com/carbon-design-system/ibm-products/issues/3703)) ([fbb7429](https://github.com/carbon-design-system/ibm-products/commit/fbb7429e4c023f9a278a39caa3d047b4eb5f83a3))
+* Storybook error "labeltext of type object supplied to Toggle" ([#3700](https://github.com/carbon-design-system/ibm-products/issues/3700)) ([be992be](https://github.com/carbon-design-system/ibm-products/commit/be992bea7c7fccf098d98a6966690b129466564c))
+* update to Carbon 11 compatible versions to latest ([#3603](https://github.com/carbon-design-system/ibm-products/issues/3603)) ([847d4c0](https://github.com/carbon-design-system/ibm-products/commit/847d4c079d90742ca828dd83ed9402309bb20c54))
+
+
+### Features
+
+* new Checklist component ([#3626](https://github.com/carbon-design-system/ibm-products/issues/3626)) ([0499dcd](https://github.com/carbon-design-system/ibm-products/commit/0499dcd8c5e1e6f7dc4e91bc5d67b338f3bbb24d))
+
+
+
+
+
+## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.0...@carbon/ibm-products@2.12.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** fix back button in full page ([#3677](https://github.com/carbon-design-system/ibm-products/issues/3677)) ([31f2a64](https://github.com/carbon-design-system/ibm-products/commit/31f2a64d19182b5196d4ff210060c36d27e31dda))
+* **Datagrid:** address issues with current approach to getting col titles for customize columns tearsheet ([#3669](https://github.com/carbon-design-system/ibm-products/issues/3669)) ([e9534a6](https://github.com/carbon-design-system/ibm-products/commit/e9534a6ac2cfcdd66c0a37f60482c14337bcf259))
+* **Datagrid:** do not always show edit icons ([#3674](https://github.com/carbon-design-system/ibm-products/issues/3674)) ([14684b8](https://github.com/carbon-design-system/ibm-products/commit/14684b871b172fceedc728cf3e4e1e11ad2dd6b0))
+* remove 'subcomponents' from storybook settings ([#3668](https://github.com/carbon-design-system/ibm-products/issues/3668)) ([2113ac4](https://github.com/carbon-design-system/ibm-products/commit/2113ac4b2bbda6d8df4d17fac80836d1dd57e841))
+* Storybook console error 'role=boolean' ([#3660](https://github.com/carbon-design-system/ibm-products/issues/3660)) ([35dfa96](https://github.com/carbon-design-system/ibm-products/commit/35dfa961d465abc3aa68fd7e40eccc80d0d30bf6))
+* Storybook warning "selectDisabled is not a valid prop for a DOM element" ([#3666](https://github.com/carbon-design-system/ibm-products/issues/3666)) ([1091875](https://github.com/carbon-design-system/ibm-products/commit/1091875d1bfbfa8b0c9cdfe46ea2ce2959999fad))
+
+
+
+
+
+# [2.12.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.3...@carbon/ibm-products@2.12.0) (2023-10-24)
+
+
+### Bug Fixes
+
+* **ButtonMenu:** a11y timing out ([#3661](https://github.com/carbon-design-system/ibm-products/issues/3661)) ([eaaa6be](https://github.com/carbon-design-system/ibm-products/commit/eaaa6be94284d54991c0fdef6382579340103ecd))
+* Card CSS typo ([#3629](https://github.com/carbon-design-system/ibm-products/issues/3629)) ([5d9d5f8](https://github.com/carbon-design-system/ibm-products/commit/5d9d5f820cf632bb01f4e97fe11eac3b81557a78))
+* console error 'future React will block javascript: URLs' ([#3652](https://github.com/carbon-design-system/ibm-products/issues/3652)) ([f40d0c1](https://github.com/carbon-design-system/ibm-products/commit/f40d0c13efdcb17df0468b0de0852c2ee063132d))
+* console error 'Invalid argument supplied to oneOf(...), oneOfType(...)' ([#3651](https://github.com/carbon-design-system/ibm-products/issues/3651)) ([c5557e8](https://github.com/carbon-design-system/ibm-products/commit/c5557e810e92c2e36fac4209443295ab7827c858))
+* **create-full-page:** header extensions ([#3488](https://github.com/carbon-design-system/ibm-products/issues/3488)) ([42c16bf](https://github.com/carbon-design-system/ibm-products/commit/42c16bf2b7028c0488ce3afbe89a6ddd77f174f3))
+* **Datagrid:** add disabled/locked col drag functionality back ([#3598](https://github.com/carbon-design-system/ibm-products/issues/3598)) ([b36deb7](https://github.com/carbon-design-system/ibm-products/commit/b36deb710d0a72d015b087d8bff85e0b37ce3fa7))
+* **status icon:** updated icons ([#3482](https://github.com/carbon-design-system/ibm-products/issues/3482)) ([b5e5729](https://github.com/carbon-design-system/ibm-products/commit/b5e5729492859cedf8c45e97c560dbcd3e23938a))
+* Storybook error 'Invalid prop cellSize' ([#3653](https://github.com/carbon-design-system/ibm-products/issues/3653)) ([dd9f116](https://github.com/carbon-design-system/ibm-products/commit/dd9f11600055bb31e98667016a3f2515b30eda57))
+* Storybook error 'isDelete is not a DOM element' ([#3657](https://github.com/carbon-design-system/ibm-products/issues/3657)) ([f31a9af](https://github.com/carbon-design-system/ibm-products/commit/f31a9af27c23d32332682a3453829196993d1d8c))
+* Storybook error 'placeHolderText is not a DOM element' ([#3654](https://github.com/carbon-design-system/ibm-products/issues/3654)) ([d2cbb1a](https://github.com/carbon-design-system/ibm-products/commit/d2cbb1accc0c8fc057d4cf6cec82a5bb059ab9b6))
+* Storybook error "renderIcon is not a DOM element" ([#3656](https://github.com/carbon-design-system/ibm-products/issues/3656)) ([1b146e2](https://github.com/carbon-design-system/ibm-products/commit/1b146e2a741aa1d0916a9bf5de2ea1a9c90a814e))
+* Storybook warning 'light prop is deprecated' ([#3658](https://github.com/carbon-design-system/ibm-products/issues/3658)) ([f483d56](https://github.com/carbon-design-system/ibm-products/commit/f483d560ed006eba78475eea33a849f122fc7b51))
+
+
+### Features
+
+* **Datagrid:** adds view all feature for checkboxes ([#3560](https://github.com/carbon-design-system/ibm-products/issues/3560)) ([821c232](https://github.com/carbon-design-system/ibm-products/commit/821c2322f58cabe1c78f1866f318c8fd54eb12b0))
+* **Datagrid:** remove filter tags individually from `FilterSummary` ([#3582](https://github.com/carbon-design-system/ibm-products/issues/3582)) ([ad74bc6](https://github.com/carbon-design-system/ibm-products/commit/ad74bc65502e3c59d8a3cad6b19abfce6a1d98dd))
+
+
+
+
+
+## [2.11.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.2...@carbon/ibm-products@2.11.3) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Tearsheet:** address Element type issue ([#3621](https://github.com/carbon-design-system/ibm-products/issues/3621)) ([81e07df](https://github.com/carbon-design-system/ibm-products/commit/81e07df5ae4c6804fe47b6b6d47d3a999e0e83bd))
+
+
+
+
+
+## [2.11.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.1...@carbon/ibm-products@2.11.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Datagrid:** reset col order in tearsheet onClose ([#3578](https://github.com/carbon-design-system/ibm-products/issues/3578)) ([b97cf0f](https://github.com/carbon-design-system/ibm-products/commit/b97cf0f906fc8e441db593e1df391ad4650c0633))
+* **Pattern-Saving:** Reversed the icons for default state (save) and success state(checkmark) ([#3571](https://github.com/carbon-design-system/ibm-products/issues/3571)) ([a5eadfb](https://github.com/carbon-design-system/ibm-products/commit/a5eadfb7d642b027b6e85e889c3934bed03396eb))
+
+
+
+
+
+## [2.11.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.0...@carbon/ibm-products@2.11.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* datagrid actions review fixes ([#3579](https://github.com/carbon-design-system/ibm-products/issues/3579)) ([c9f5e2b](https://github.com/carbon-design-system/ibm-products/commit/c9f5e2bb72008e04ccfe7e6c8f9f2c90b36696f8))
+* **Datagrid:** expander title / aria-label updates ([#3564](https://github.com/carbon-design-system/ibm-products/issues/3564)) ([1bcff24](https://github.com/carbon-design-system/ibm-products/commit/1bcff24517b3d66d369ef6ae4f7759b7a479fabc))
+* **EditTearsheet:** Derive influencer nav items from form titles ([#3583](https://github.com/carbon-design-system/ibm-products/issues/3583)) ([7846c4b](https://github.com/carbon-design-system/ibm-products/commit/7846c4b657b2d0c1a7cb8dcb76bed823d6881fbd)), closes [#3574](https://github.com/carbon-design-system/ibm-products/issues/3574)
+* move dnd kit deps out of dev deps ([#3576](https://github.com/carbon-design-system/ibm-products/issues/3576)) ([a65ed6e](https://github.com/carbon-design-system/ibm-products/commit/a65ed6e1576d970c1feb519c0c1cfae9ede77b5a))
+* to rem usage ([#3570](https://github.com/carbon-design-system/ibm-products/issues/3570)) ([e9f938f](https://github.com/carbon-design-system/ibm-products/commit/e9f938fd236a1c99aa1989773979e43d90b2e77a))
+
+
+
+
+
+# [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.2...@carbon/ibm-products@2.11.0) (2023-10-10)
+
+
+### Bug Fixes
+
+* **ButtonSetWithOverflow:** fix duplicate id issue ([#3545](https://github.com/carbon-design-system/ibm-products/issues/3545)) ([eed0e4d](https://github.com/carbon-design-system/ibm-products/commit/eed0e4d19ce13704333ba41d64415ba85910f46e))
+* checkbox in column customisation ([#3542](https://github.com/carbon-design-system/ibm-products/issues/3542)) ([4b94fa8](https://github.com/carbon-design-system/ibm-products/commit/4b94fa88581b071ad287f1e120348342c28b3187))
+* datagrid empty state fixes ([#3528](https://github.com/carbon-design-system/ibm-products/issues/3528)) ([9df5e1d](https://github.com/carbon-design-system/ibm-products/commit/9df5e1db016a6234bff1fd650cb8f0e324bdebaf))
+* datagrid pagination review fixes ([#3492](https://github.com/carbon-design-system/ibm-products/issues/3492)) ([998a059](https://github.com/carbon-design-system/ibm-products/commit/998a0595cbc2120db1b3b503046754a45d1563e0))
+* **Datagrid:** expandable row add background on row hover ([#3550](https://github.com/carbon-design-system/ibm-products/issues/3550)) ([5084b0f](https://github.com/carbon-design-system/ibm-products/commit/5084b0f2b64ce22ab5d6a872ae105120a1a78f7a))
+* **Datagrid:** refactor expandable implementation ([#3525](https://github.com/carbon-design-system/ibm-products/issues/3525)) ([9677581](https://github.com/carbon-design-system/ibm-products/commit/9677581b6b15d3580f308cc9d790a80cbd083521))
+* invalid aria-label ([#3496](https://github.com/carbon-design-system/ibm-products/issues/3496)) ([3644522](https://github.com/carbon-design-system/ibm-products/commit/364452272b1000745d6e67ea704337447ce774ac))
+* Should our CSS use of carbon rem be to-rem ([#3558](https://github.com/carbon-design-system/ibm-products/issues/3558)) ([0c3839c](https://github.com/carbon-design-system/ibm-products/commit/0c3839ce49ef622ed2b303daee84fd1ce8d6e829))
+
+
+### Features
+
+* Modal portalTarget ([#3436](https://github.com/carbon-design-system/ibm-products/issues/3436)) ([a988d5c](https://github.com/carbon-design-system/ibm-products/commit/a988d5c11f9e03bb1cb3e6bcb473558e68f236c9))
+* with dnd kit ([#3513](https://github.com/carbon-design-system/ibm-products/issues/3513)) ([d0df0a2](https://github.com/carbon-design-system/ibm-products/commit/d0df0a2175c110d07b931b00d058dce8f7c94013))
+
+
+
+
+
+## [2.10.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.1...@carbon/ibm-products@2.10.2) (2023-09-29)
+
+
+### Bug Fixes
+
+* **EditTearsheet:** export edit tearsheet form component ([#3520](https://github.com/carbon-design-system/ibm-products/issues/3520)) ([ee053a7](https://github.com/carbon-design-system/ibm-products/commit/ee053a71587f54f51d0300d3f0ec98060f9e8e78))
+* ensure no td border appears on tr:hover ([#3514](https://github.com/carbon-design-system/ibm-products/issues/3514)) ([db74221](https://github.com/carbon-design-system/ibm-products/commit/db74221d6b8e0eea472da3fbe6adead9967e8856))
+* fixed tooltip alignment ([#3503](https://github.com/carbon-design-system/ibm-products/issues/3503)) ([f8b330c](https://github.com/carbon-design-system/ibm-products/commit/f8b330c69ef9736d9d84a8faa5264303b32f8426))
+* remove td bottom border when state is empty ([#3498](https://github.com/carbon-design-system/ibm-products/issues/3498)) ([cce033e](https://github.com/carbon-design-system/ibm-products/commit/cce033e90d646cb64c9d332b8a6cd487fb91069a))
+* update to Carbon 11 compatible versions to latest ([#3477](https://github.com/carbon-design-system/ibm-products/issues/3477)) ([c58ac80](https://github.com/carbon-design-system/ibm-products/commit/c58ac80c8c5760415b5b54cb96666b6b40a4472f))
+
+
+
+
+
+## [2.10.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.0...@carbon/ibm-products@2.10.1) (2023-09-26)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.9.0...@carbon/ibm-products@2.10.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* datagrid row height click ([#3480](https://github.com/carbon-design-system/ibm-products/issues/3480)) ([be38b68](https://github.com/carbon-design-system/ibm-products/commit/be38b6852ab0e949dad2f51c9c7d7fe58e79c7d1))
+* datagrid toolbar accessibility ([#3460](https://github.com/carbon-design-system/ibm-products/issues/3460)) ([033897d](https://github.com/carbon-design-system/ibm-products/commit/033897dba61d2dc78af2a0d01d62dd5cc57700bc))
+* **datagrid:** empty state fix ([#3389](https://github.com/carbon-design-system/ibm-products/issues/3389)) ([ac5939b](https://github.com/carbon-design-system/ibm-products/commit/ac5939bce71f1deae97071c47b8ac0cdcc97fd58))
+* filter flyout outside click ([#3473](https://github.com/carbon-design-system/ibm-products/issues/3473)) ([e2d05c6](https://github.com/carbon-design-system/ibm-products/commit/e2d05c647c4ebdf21b702da39eddd68f488d0e11))
+
+
+### Features
+
+* **createfullpage:** initialstep added ([#3449](https://github.com/carbon-design-system/ibm-products/issues/3449)) ([7cb13d4](https://github.com/carbon-design-system/ibm-products/commit/7cb13d42cbc89e68f077d8f28bf1a637fffa7c02))
+
+
+
+
+
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.1...@carbon/ibm-products@2.9.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **build:** temporarily remove drag support in customize cols ([#3458](https://github.com/carbon-design-system/ibm-products/issues/3458)) ([1ea9725](https://github.com/carbon-design-system/ibm-products/commit/1ea97254df8104e1c2421a44d8d7e140fd2158bf))
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
 
 

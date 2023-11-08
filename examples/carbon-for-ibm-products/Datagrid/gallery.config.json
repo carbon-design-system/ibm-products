@@ -1,3 +1,14 @@
 {
-  "label": "Datagrid"
+  "label": "Datagrid",
+  "package-config": {
+    "flags": {
+      "component": {
+        "Datagrid": true
+      }
+    }
+  },
+  "dependencies": {
+    "namor": "1.1.2"
+  },
+  "devDependencies": {}
 }

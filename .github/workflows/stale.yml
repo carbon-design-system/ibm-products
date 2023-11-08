@@ -1,0 +1,23 @@
+name: Stale # close stale issues
+on:
+  schedule:
+    - cron: '30 7 * * 4' # runs 7:30 on Thursdays
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v8
+        with:
+          any-of-labels:
+            'status: needs reproduction,status: waiting for author 💬'
+          stale-issue-message: |
+            This issue is stale because it has been open for 30 days with no activity.
+            Remove the stale label or add a comment, otherwise this issue will be closed in 14 days.
+          close-issue-message: |
+            This issue was closed because it has received no activity for 14 days.
+          stale-issue-label: 'stale 🍞'
+          close-issue-label: 'status: won’t fix 🔚'
+          days-before-stale: 30
+          days-before-close: 14
+          days-before-pr-close: -1

@@ -22,6 +22,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { pkg } from '../../settings';
@@ -61,6 +62,7 @@ export let ImportModal = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      portalTarget: portalTargetIn,
       primaryButtonText,
       secondaryButtonText,
       title,
@@ -73,6 +75,7 @@ export let ImportModal = forwardRef(
     const carbonPrefix = usePrefix();
     const [files, setFiles] = useState([]);
     const [importUrl, setImportUrl] = useState('');
+    const renderPortalUse = usePortalTarget(portalTargetIn);
 
     const isInvalidFileType = (file) => {
       const acceptSet = new Set(accept);
@@ -185,7 +188,7 @@ export let ImportModal = forwardRef(
     const fileStatusString = `${numberOfValidFiles} / ${numberOfFiles} ${fileUploadLabel}`;
     const blockClass = `${pkg.prefix}--import-modal`;
 
-    return (
+    return renderPortalUse(
       <ComposedModal
         {...rest}
         {...{ open, ref, ...getDevtoolsProps(componentName) }}
@@ -376,6 +379,10 @@ ImportModal.propTypes = {
    * Specify whether the Modal is currently open
    */
   open: PropTypes.bool.isRequired,
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
   /**
    * Specify the text for the primary button
    */

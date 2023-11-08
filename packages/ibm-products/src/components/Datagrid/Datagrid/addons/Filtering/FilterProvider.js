@@ -1,12 +1,19 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { DATE, DROPDOWN, NUMBER, RADIO, CHECKBOX } from './constants';
+import {
+  DATE,
+  DROPDOWN,
+  NUMBER,
+  RADIO,
+  CHECKBOX,
+  CLEAR_SINGLE_FILTER,
+} from './constants';
 
 export const FilterContext = createContext();
 
@@ -27,22 +34,102 @@ const EventEmitter = {
   },
 };
 
-const prepareFiltersForTags = (filters) => {
+const removeFilterItem = (state, index) => state.splice(index, 1);
+
+const updateFilterState = (state, type, value) => {
+  if (type === CHECKBOX) {
+    return;
+  }
+  if (type === DATE) {
+    const filterTagIndex = state.findIndex(
+      (val) =>
+        formatDateRange(val.value[0], val.value[1]) ===
+        formatDateRange(value[0], value[1])
+    );
+    return removeFilterItem(state, filterTagIndex);
+  }
+  const filterTagIndex = state.findIndex((val) => val.value === value);
+  return removeFilterItem(state, filterTagIndex);
+};
+
+export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
+  const tempState = [...state.filters];
+  tempState.forEach((f, filterIndex) => {
+    if (f.id === key) {
+      const filterValues = f.value;
+      const filterType = f.type;
+      updateFilterState(tempState, filterType, value);
+      if (filterType === CHECKBOX) {
+        /**
+          When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
+          This checks if all the checkboxes are selected = false and removes it from the array
+        */
+        const valueIndex = filterValues.findIndex((val) => val.id === value);
+        filterValues[valueIndex].selected = false;
+        const updatedFilterObject = {
+          ...f,
+          value: [...filterValues],
+        };
+        tempState[filterIndex] = updatedFilterObject;
+        const index = tempState.findIndex((filter) => filter.id === key);
+
+        // If all the selected state is false remove from array
+        const shouldRemoveFromArray = tempState[index].value.every(
+          (val) => val.selected === false
+        );
+
+        if (shouldRemoveFromArray) {
+          removeFilterItem(tempState, index);
+        }
+      }
+    }
+  });
+  setAllFilters(tempState);
+};
+
+const handleSingleFilterRemoval = (key, value) => {
+  EventEmitter.dispatch(CLEAR_SINGLE_FILTER, { key, value });
+};
+
+const formatDateRange = (startDate, endDate) => {
+  const startDateObj = new Date(startDate);
+  const endDateObj = new Date(endDate);
+  return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
+};
+
+const prepareFiltersForTags = (filters, renderDateLabel) => {
   const tags = [];
 
   filters.forEach(({ id, type, value }) => {
+    const sharedFilterProps = {
+      filter: true,
+      onClose: () => handleSingleFilterRemoval(id, value),
+    };
+
     if (type === DROPDOWN || type === RADIO || type === NUMBER) {
-      tags.push({ key: id, value });
+      tags.push({
+        key: id,
+        value,
+        ...sharedFilterProps,
+      });
     } else if (type === DATE) {
       const [startDate, endDate] = value;
       tags.push({
         key: id,
-        value: `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`,
+        value:
+          renderDateLabel?.(startDate, endDate) ??
+          formatDateRange(startDate, endDate),
+        ...sharedFilterProps,
       });
     } else if (type === CHECKBOX) {
       value.forEach((checkbox) => {
         if (checkbox.selected) {
-          tags.push({ key: id, value: checkbox.value });
+          tags.push({
+            key: id,
+            value: checkbox.value,
+            ...sharedFilterProps,
+            onClose: () => handleSingleFilterRemoval(id, checkbox.value),
+          });
         }
       });
     }
@@ -51,8 +138,9 @@ const prepareFiltersForTags = (filters) => {
   return tags;
 };
 
-export const FilterProvider = ({ children, filters }) => {
-  const filterTags = prepareFiltersForTags(filters);
+export const FilterProvider = ({ children, filters, filterProps }) => {
+  const { renderDateLabel } = filterProps || {};
+  const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
@@ -67,5 +155,6 @@ FilterProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  filterProps: PropTypes.object,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

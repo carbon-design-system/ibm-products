@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
@@ -92,10 +93,10 @@
       &.#{c4p-settings.$carbon-prefix}--data-table--sm,
       &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
-          /* stylelint-disable-next-line carbon/layout-token-use */
-          padding-top: rem(7px);
-          /* stylelint-disable-next-line carbon/layout-token-use */
-          padding-bottom: rem(6px);
+          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+          padding-top: to-rem(7px);
+          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+          padding-bottom: to-rem(6px);
         }
       }
 
@@ -123,8 +124,8 @@
       }
 
       .#{c4p-settings.$carbon-prefix}--table-column-checkbox {
-        /* stylelint-disable-next-line carbon/layout-token-use */
-        padding-top: rem(13px);
+        /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+        padding-top: to-rem(13px);
       }
     }
 
@@ -288,6 +289,7 @@
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  border-bottom: none;
   background: transparent;
 }
 
@@ -297,6 +299,10 @@
 
 .#{$block-class}__empty-state .#{$block-class}__grid-container {
   flex: 1 1 auto;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__empty-state-cell {
+  border-bottom: none;
 }
 
 .#{$block-class}__resizer {
@@ -341,6 +347,32 @@
   }
 }
 
+.#{$block-class}__header-actions-column:hover {
+  background-color: $layer-accent;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  opacity: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
+  opacity: 1;
+}
+
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-09;
   &.#{$block-class}__select-all-sticky-left {
@@ -354,8 +386,7 @@
 .#{$block-class}__simple-body {
   position: relative;
   display: table;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   //makes thin scrollbar in chrome and firefox
   scrollbar-width: thin;
 }

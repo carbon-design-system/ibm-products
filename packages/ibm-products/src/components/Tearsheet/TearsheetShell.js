@@ -7,7 +7,6 @@
 
 // Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
-import { createPortal } from 'react-dom';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Other standard imports.
@@ -15,6 +14,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 
 // Carbon and package components we use.
 import {
@@ -28,6 +28,7 @@ import {
 
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -95,18 +96,7 @@ export const TearsheetShell = React.forwardRef(
   ) => {
     const carbonPrefix = usePrefix();
     const bcModalHeader = `${carbonPrefix}--modal-header`;
-    // node the modal tearsheet is hosted in
-    const [portalTarget, setPortalTarget] = useState(null);
-    useEffect(() => {
-      if (portalTargetIn) {
-        setPortalTarget(portalTargetIn);
-      } else {
-        if (pkg.isFeatureEnabled('default-portal-target-body')) {
-          setPortalTarget(document.body);
-        }
-      }
-    }, [portalTargetIn]);
-
+    const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef();
     const resizer = useRef(null);
     const modalRef = ref || localRef;
@@ -217,13 +207,13 @@ export const TearsheetShell = React.forwardRef(
       // Include an ActionSet if and only if one or more actions is given.
       const includeActions = actions && actions?.length > 0;
 
-      return (portalTarget ? createPortal : (children) => children)(
+      return renderPortalUse(
         <ComposedModal
           {
             // Pass through any other property values.
             ...rest
           }
-          aria-label={title}
+          aria-label={getNodeTextContent(title)}
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
@@ -332,8 +322,7 @@ export const TearsheetShell = React.forwardRef(
             </Wrap>
           </Wrap>
           <div className={`${bc}__resize-detector`} ref={resizer} />
-        </ComposedModal>,
-        portalTarget
+        </ComposedModal>
       );
     } else {
       pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
@@ -345,6 +334,11 @@ export const TearsheetShell = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetShell.displayName = componentName;
+
+export const portalType =
+  typeof Element === 'undefined'
+    ? PropTypes.object
+    : PropTypes.instanceOf(Element);
 
 export const deprecatedProps = {
   /**
@@ -487,9 +481,9 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: portalType,
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.

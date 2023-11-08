@@ -107,7 +107,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ) {
-  max-width: rem(232px);
+  /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+  max-width: to-rem(232px);
   flex: 0 1 25%;
 }
 

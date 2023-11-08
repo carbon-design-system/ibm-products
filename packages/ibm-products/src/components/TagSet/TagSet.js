@@ -6,7 +6,6 @@
 //
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -28,8 +27,8 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   align: 'start',
-  // allTagsModalTarget: document.body,
   overflowAlign: 'bottom',
+  overflowType: 'default',
 };
 
 export let TagSet = React.forwardRef(
@@ -38,12 +37,13 @@ export let TagSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       align = defaults.align,
-      allTagsModalTarget: allTagsModalTargetIn, // = defaults.allTagsModalTarget,
+      allTagsModalTarget,
       className,
       maxVisible,
       multiline,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
+      overflowType = defaults.overflowType,
       allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
@@ -65,21 +65,10 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
-    const [allTagsModalTarget, setAllTagsModalTarget] = useState(null);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
-
-    useEffect(() => {
-      if (allTagsModalTargetIn) {
-        setAllTagsModalTarget(allTagsModalTargetIn);
-      } else {
-        if (pkg.isFeatureEnabled('default-portal-target-body')) {
-          setAllTagsModalTarget(document.body);
-        }
-      }
-    }, [allTagsModalTargetIn]);
 
     useEffect(() => {
       const newSizingTags = [];
@@ -138,6 +127,7 @@ export let TagSet = React.forwardRef(
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
+          overflowType={overflowType}
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
@@ -149,6 +139,7 @@ export let TagSet = React.forwardRef(
       displayCount,
       overflowAlign,
       overflowClassName,
+      overflowType,
       showAllTagsLabel,
       tags,
     ]);
@@ -251,18 +242,15 @@ export let TagSet = React.forwardRef(
             {displayedTags}
           </div>
         </div>
-
-        {(allTagsModalTarget ? createPortal : (children) => children)(
-          <TagSetModal
-            allTags={tags}
-            open={showAllModalOpen}
-            title={allTagsModalTitle}
-            onClose={handleModalClose}
-            searchLabel={allTagsModalSearchLabel}
-            searchPlaceholder={allTagsModalSearchPlaceholderText}
-          />,
-          allTagsModalTarget
-        )}
+        <TagSetModal
+          allTags={tags}
+          open={showAllModalOpen}
+          title={allTagsModalTitle}
+          onClose={handleModalClose}
+          searchLabel={allTagsModalSearchLabel}
+          searchPlaceholder={allTagsModalSearchPlaceholderText}
+          portalTarget={allTagsModalTarget}
+        />
       </div>
     );
   }
@@ -353,6 +341,10 @@ TagSet.propTypes = {
    * overflowClassName for the tooltip popup
    */
   overflowClassName: PropTypes.string,
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
   /**
    * label for the overflow show all tags link.
    *

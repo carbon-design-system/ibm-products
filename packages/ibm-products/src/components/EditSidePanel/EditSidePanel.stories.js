@@ -160,7 +160,7 @@ const Template = (args) => {
           />
           <Dropdown
             id="create-side-panel-dropdown-options-a"
-            ariaLabel="Dropdown"
+            aria-label="Dropdown"
             items={items}
             initialSelectedItem="Day(s)"
             label="Options"

@@ -97,6 +97,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             [`${menuClass}-icon-only`]: width <= minWidthBeforeOverflowIcon,
           },
         ])}
+        tabIndex={totalSelected > 0 ? 0 : -1}
       >
         {toolbarBatchActions?.map((batchAction, index) => {
           const hidden = index < 2 && !displayAllInMenu;
@@ -149,6 +150,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
                 iconDescription={batchAction.label}
+                tabIndex={totalSelected > 0 ? 0 : -1}
               >
                 {batchAction.label}
               </TableBatchAction>

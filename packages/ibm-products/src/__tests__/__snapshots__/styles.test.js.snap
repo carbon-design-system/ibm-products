@@ -20,7 +20,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-heading-04-font-weight, 400);
   line-height: var(--cds-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-heading-04-letter-spacing, 0);
+  font-weight: 600;
   color: var(--cds-text-primary, #161616);
+}
+
+.c4p--about-modal .c4p--about-modal__title:before {
+  content: "IBM ";
+  font-weight: initial;
 }
 
 .c4p--about-modal .c4p--about-modal__body {

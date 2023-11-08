@@ -177,19 +177,7 @@ Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
   closeIconDescription: 'Close',
-  title: (
-    <>
-      IBM{' '}
-      <span
-        style={
-          // stylelint-disable-next-line carbon/type-token-use
-          { fontWeight: '600' }
-        }
-      >
-        Product name
-      </span>
-    </>
-  ),
+  title: 'Product name',
   version: 'Version 0.0.0',
   copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };

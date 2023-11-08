@@ -32,8 +32,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class} .#{$block-class}__title {
   @include type.type-style('heading-04');
+  @include font-weight('semibold');
 
   color: $text-primary;
+}
+
+.#{$block-class} .#{$block-class}__title:before {
+  content: "IBM ";
+  font-weight: initial;
 }
 
 .#{$block-class} .#{$block-class}__body {

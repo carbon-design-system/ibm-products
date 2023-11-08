@@ -213,7 +213,7 @@ AboutModal.propTypes = {
    * IBM 8-bar logo represented alongside the IBM Services logotype.
    * Please follow these guidelines to ensure proper execution.
    */
-  title: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 
   /**
    * Text that provides information on the version number of your product.

@@ -103,6 +103,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   [`${blockClass}__sortableColumn`]:
                     datagridState.isTableSortable && header.id !== 'spacer',
                   [`${blockClass}__isSorted`]: header.isSorted,
+                  [`${blockClass}__header-actions-column`]: header.isAction,
                 },
                 header.getHeaderProps().className
               )}
@@ -111,7 +112,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {header.getResizerProps && (
+              {header.getResizerProps && !header.isAction && (
                 <>
                   <input
                     {...header.getResizerProps()}

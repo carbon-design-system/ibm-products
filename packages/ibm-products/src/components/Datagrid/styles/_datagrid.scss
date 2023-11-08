@@ -347,6 +347,32 @@
   }
 }
 
+.#{$block-class}__header-actions-column:hover {
+  background-color: $layer-accent;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  opacity: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
+  opacity: 1;
+}
+
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-09;
   &.#{$block-class}__select-all-sticky-left {

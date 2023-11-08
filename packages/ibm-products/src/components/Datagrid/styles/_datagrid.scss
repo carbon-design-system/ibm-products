@@ -346,6 +346,32 @@
   }
 }
 
+.#{$block-class}__header-actions-column:hover {
+  background-color: $layer-accent;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{$carbon-prefix}--overflow-menu {
+  opacity: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{$carbon-prefix}--overflow-menu,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{$carbon-prefix}--overflow-menu:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{$carbon-prefix}--overflow-menu[aria-expanded='true'] {
+  opacity: 1;
+}
+
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-09;
 

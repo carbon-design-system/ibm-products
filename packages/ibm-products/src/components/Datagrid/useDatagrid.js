@@ -41,6 +41,15 @@ const useDatagrid = (params, ...plugins) => {
     useSortBy,
     useExpanded,
   ];
+
+  // Disable resizing
+  if (params.disableResizing) {
+    const resizeIndex = defaultPlugins.findIndex(
+      (p) => p.pluginName === 'useResizeColumns'
+    );
+    defaultPlugins.splice(resizeIndex, 1);
+  }
+
   const defaultEndPlugins = [
     usePagination,
     useRowSelect,

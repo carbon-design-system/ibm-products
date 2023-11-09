@@ -17,7 +17,9 @@ const blockClass = `${pkg.prefix}--carousel__item`;
 const componentName = 'CarouselItem';
 
 /**
- * TODO: A description of the component.
+ * The Carousel acts as a scaffold for other Novice to Pro content.
+ *
+ * This component is not intended for general use.
  */
 export let CarouselItem = ({ children, className, ...rest }) => {
   const itemRef = useRef();

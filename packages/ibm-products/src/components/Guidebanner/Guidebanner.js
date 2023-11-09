@@ -31,14 +31,6 @@ const defaults = {
 };
 
 /**
- * MIGRATION TODO LIST
- * TODO: scroll buttons don't work
- * TODO: scrollPosition/setScrollPosition doesn't seem to be working
- * TODO: ~icon button tooltips are not consistent colors~
- * TODO: ~close button styling needs tightening~
- */
-
-/**
  * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
  */

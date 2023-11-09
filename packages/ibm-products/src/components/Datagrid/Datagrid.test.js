@@ -7,7 +7,8 @@
  */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
 
@@ -799,68 +800,72 @@ const BatchActions = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const StickyActionsColumn = ({ ...rest } = {}) => {
+const editActionClickFn = jest.fn();
+const voteActionClickFn = jest.fn();
+const retireActionClickFn = jest.fn();
+const deleteActionClickFn = jest.fn();
+
+const ActionsColumnExample = ({
+  isFetching = false,
+  shouldDisableMenuItem = null,
+  shouldHideMenuItem = null,
+  disabled = false,
+  twoActions = false,
+  sticky = 'right',
+  ...rest
+} = {}) => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader,
       {
         Header: '',
         accessor: 'actions',
-        sticky: 'right',
+        sticky,
         width: 60,
         isAction: true,
       },
     ],
-    []
+    [sticky]
   );
   const [data] = useState(makeData(10));
-  const [msg, setMsg] = useState('click action menu');
-  const onActionClick = (actionId, row) => {
-    const { original } = row;
-    setMsg(
-      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
-    );
-  };
-
+  const rowActions = [
+    {
+      id: 'edit',
+      itemText: 'Edit',
+      onClick: editActionClickFn,
+      disabled,
+      shouldHideMenuItem,
+      shouldDisableMenuItem,
+    },
+    {
+      id: 'vote',
+      itemText: 'Vote',
+      onClick: voteActionClickFn,
+    },
+    {
+      id: 'retire',
+      itemText: 'Retire',
+      onClick: retireActionClickFn,
+    },
+    {
+      id: 'delete',
+      itemText: 'Delete',
+      hasDivider: true,
+      isDelete: true,
+      onClick: deleteActionClickFn,
+    },
+  ];
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      rowActions: [
-        {
-          id: 'edit',
-          itemText: 'Edit',
-          onClick: onActionClick,
-        },
-        {
-          id: 'vote',
-          itemText: 'Vote',
-          onClick: onActionClick,
-        },
-        {
-          id: 'retire',
-          itemText: 'Retire',
-          onClick: onActionClick,
-        },
-        {
-          id: 'delete',
-          itemText: 'Delete',
-          hasDivider: true,
-          isDelete: true,
-          onClick: onActionClick,
-        },
-      ],
+      rowActions: !twoActions ? rowActions : [...rowActions].slice(0, 2),
+      isFetching,
     },
     useStickyColumn,
     useActionsColumn
   );
-  return (
-    <Wrapper>
-      <h3>{msg}</h3>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-      <p>More details documentation check the Notes section below</p>
-    </Wrapper>
-  );
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 beforeAll(() => {
@@ -2069,119 +2074,228 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
-  it('Sticky Actions Column', async () => {
-    render(
-      <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
+  const getOverflowMenuItems = () => {
+    return document.querySelectorAll(
+      `.${carbon.prefix}--overflow-menu-options button`
+    );
+  };
+
+  it('should render sticky action column and click each menu item', async () => {
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+    render(<ActionsColumnExample data-testid={dataTestId} />);
+
+    const tableRows = screen.getAllByRole('row');
+    const headerRow = tableRows[0];
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
     );
 
-    expect(
-      screen.findByText(
-        'More details documentation check the Notes section below'
-      )
-    ).toBeDefined();
-    for (
-      var i = 0;
-      i <
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length;
-      i++
-    ) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[16].classList[0]
-      ).toEqual('c4p--datagrid__right-sticky-column-cell');
-    }
+    expect(headerRow).toHaveClass(`${blockClass}__sticky`);
+    bodyRows.forEach((row) => {
+      const stickyActionColumnCell = row.lastElementChild;
+      expect(stickyActionColumnCell).toHaveClass(
+        `${blockClass}__actions-column-cell`
+      );
+      expect(stickyActionColumnCell).toHaveClass(
+        `${blockClass}__right-sticky-column-cell`
+      );
+    });
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
+    const overflowMenu = within(bodyRows[0]).getByRole('button', {
+      name: 'Options',
+    });
+    await click(overflowMenu);
+
+    // Click each item inside of overflow menu, menu closes after clicking on a menu item
+    // so we need to click the overflow menu again each time to view the menu items again
+    const editActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Edit'
+    )[0];
+    await click(editActionButton);
+    expect(editActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const voteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Vote'
+    )[0];
+    await click(voteActionButton);
+    expect(voteActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const retireActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Retire'
+    )[0];
+    await click(retireActionButton);
+    expect(retireActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Delete'
+    )[0];
+    await click(deleteActionButton);
+    expect(deleteActionClickFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render stick actions and test disabled states', async () => {
+    const { rerender } = render(
+      <ActionsColumnExample disabled data-testid={dataTestId} />
+    );
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+    const overflowMenu = within(bodyRows[0]).getByRole('button', {
+      name: 'Options',
+    });
+    await click(overflowMenu);
+
+    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Edit'
+    )[0];
+
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldDisableMenuItem function successfully disables a menu item
+    const disableActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldDisableMenuItem={disableActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(disableActionItemFn).toHaveBeenCalled();
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldHideMenuItem function successfully hides a menu item
+    const hideActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldHideMenuItem={hideActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(hideActionItemFn).toHaveBeenCalled();
+    expect(getOverflowMenuItems().length).toEqual(3); // Previously was 4, but we've hidden the delete action in this test
+  });
+
+  it('should render a non sticky actions column and click each menu item', async () => {
+    render(<ActionsColumnExample sticky={null} data-testid={dataTestId} />);
+
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
     );
 
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Edit');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0]
+    bodyRows.forEach((row) => {
+      const actionColumnCell = row.lastElementChild.previousElementSibling;
+      expect(actionColumnCell).toHaveClass(
+        `${blockClass}__actions-column-cell`
+      );
+      expect(actionColumnCell).not.toHaveClass(
+        `${blockClass}__right-sticky-column-cell`
+      );
+    });
+  });
+
+  it('should click non stick row action when not inside of overflow menu', async () => {
+    const { rerender } = render(
+      <ActionsColumnExample
+        isFetching={true}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
     );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [edit] on row:'
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
     );
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
+    const firstBodyRow = bodyRows[0];
+    const lastCellElement =
+      firstBodyRow.lastElementChild.previousElementSibling;
+    const iconSkeletonElement = lastCellElement.children[0].children[0];
+    expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
+    expect(iconSkeletonElement).toHaveClass(
+      `${blockClass}__actions-column-loading`
     );
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Retire');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0]
+
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
     );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [retire] on row:'
+    const editActionButton = within(firstBodyRow).getByRole('button', {
+      name: 'Edit',
+    });
+    const voteActionButton = within(firstBodyRow).getByRole('button', {
+      name: 'Vote',
+    });
+    await click(editActionButton);
+    expect(editActionClickFn).toHaveBeenCalledTimes(1);
+    await click(voteActionButton);
+    expect(voteActionClickFn).toHaveBeenCalledTimes(1);
+
+    const hideIconOnlyItem = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        shouldHideMenuItem={hideIconOnlyItem}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
     );
+    expect(within(firstBodyRow).getAllByRole('button').length).toEqual(1); // Previously was 2 but we've hidden the other in this test
   });
 });
+
+const duplicateOnClickFn = jest.fn();
+const addOnClickFn = jest.fn();
+const selectAllOnClickFn = jest.fn();
+const publishOnClickFn = jest.fn();
+const downloadOnClickFn = jest.fn();
+const deleteOnClickFn = jest.fn();
 
 const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: duplicateOnClickFn,
     },
     {
       label: 'Add',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: addOnClickFn,
     },
     {
       label: 'Select all',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: selectAllOnClickFn,
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: publishOnClickFn,
     },
     {
       label: 'Download',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: downloadOnClickFn,
     },
     {
       label: 'Delete',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: deleteOnClickFn,
       hasDivider: true,
       kind: 'danger',
     },
@@ -2261,7 +2375,7 @@ describe('batch action testing', () => {
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
       const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
-      await act(() => click(firstCheckbox));
+      await click(firstCheckbox);
 
       expect(
         container.querySelector(
@@ -2271,15 +2385,19 @@ describe('batch action testing', () => {
 
       // Given the default offsetWidth mocks, 2 batch actions should be visible
       // in addition to the MenuButton
-      screen.getByLabelText(getBatchActions()[0].label);
-      screen.getByLabelText(getBatchActions()[1].label);
+      await click(screen.getByLabelText(getBatchActions()[0].label));
+      expect(duplicateOnClickFn).toHaveBeenCalledTimes(1);
+
+      await click(screen.getByLabelText(getBatchActions()[1].label));
+      expect(addOnClickFn).toHaveBeenCalledTimes(1);
+
       const menuButton = screen.getByRole('button', { name: /More/i });
       const cancelButton = screen.getByRole('button', { name: /Cancel/i });
       const selectAllButton = screen.getByRole('button', {
         name: /Select all/i,
       });
       expect(menuButton).toBeInTheDocument();
-      await act(() => click(menuButton));
+      await click(menuButton);
       const options = Array.from(
         screen.getByRole('menu', { name: /More/i }).children
       );
@@ -2294,10 +2412,34 @@ describe('batch action testing', () => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
 
-      //coverage
-      fireEvent.click(options[0]);
-      fireEvent.click(cancelButton);
-      fireEvent.click(selectAllButton);
+      const checkMenuItem = async (
+        remainingBatchIndex,
+        clickHandlerFn,
+        initiateMenuOpen
+      ) => {
+        if (initiateMenuOpen) {
+          await click(menuButton);
+        }
+        const displayedMenuElement = document.querySelector(
+          `.${carbon.prefix}--menu`
+        );
+        const menuItems = Array.from(displayedMenuElement.children);
+
+        const menuItem = menuItems.filter(
+          (item) =>
+            item.textContent === getBatchActions()[remainingBatchIndex].label
+        )[0];
+        await click(menuItem);
+        expect(clickHandlerFn).toHaveBeenCalledTimes(1);
+      };
+
+      await checkMenuItem(2, selectAllOnClickFn);
+      await checkMenuItem(3, publishOnClickFn, true);
+      await checkMenuItem(4, downloadOnClickFn, true);
+      await checkMenuItem(5, deleteOnClickFn, true);
+      await click(cancelButton);
+      await click(firstCheckbox);
+      await click(selectAllButton);
     });
   });
 });

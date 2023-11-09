@@ -191,6 +191,17 @@ useDatagrid({
 });
 ```
 
+Disabling the resizable columns is possible by specifying
+`disableResizing: true` within the `useDatagrid` hook.
+
+```jsx
+useDatagrid({
+  columns,
+  data,
+  disableResizing: true,
+});
+```
+
 ## Rendering the table toolbar
 
 <img src={datagridActionsExample} />

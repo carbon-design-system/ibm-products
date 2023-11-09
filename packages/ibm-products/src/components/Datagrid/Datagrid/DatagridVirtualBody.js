@@ -1,10 +1,10 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020 - 2023
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from 'carbon-components-react';
@@ -23,11 +23,6 @@ const rowSizeMap = {
   md: 40,
   lg: 48,
   xl: 64,
-  // TODO: deprecate the below values in next major release (v8) on carbon-components-react
-  short: 32,
-  compact: 24,
-  normal: 48,
-  tall: 64,
 };
 
 const defaultRowHeight = rowSizeMap.lg;
@@ -56,8 +51,8 @@ const DatagridVirtualBody = (datagridState) => {
 
   useResizeObserver(gridRef, handleVirtualGridResize);
 
-  const syncScroll = (e) => {
-    const virtualBody = e.target;
+  const syncScroll = (event) => {
+    const virtualBody = event.target;
     document.querySelector(`.${blockClass}__head-wrap`).scrollLeft =
       virtualBody.scrollLeft;
     const spacerColumn = document.querySelector(
@@ -85,10 +80,7 @@ const DatagridVirtualBody = (datagridState) => {
       >
         <DatagridHead {...datagridState} />
       </div>
-      <TableBody
-        {...getTableBodyProps({ role: false })}
-        onScroll={(e) => syncScroll(e)}
-      >
+      <TableBody {...getTableBodyProps({ role: false })} onScroll={syncScroll}>
         <VariableSizeList
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}

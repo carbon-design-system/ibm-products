@@ -1,10 +1,10 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import { useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import useParentDimensions from './useParentDimensions';
@@ -15,12 +15,19 @@ const useInfiniteScroll = (hooks) => {
   useResizeTable(hooks);
 
   const useInstance = (instance) => {
-    const { isFetching, tableHeight, innerListRef, fetchMoreData, tableId } =
-      instance;
+    const {
+      isFetching,
+      tableHeight,
+      innerListRef,
+      fetchMoreData,
+      tableId,
+      loadMoreThreshold,
+    } = instance;
     const tableElement = document.querySelector(`#${tableId}`);
     const totalTableHeight = tableHeight || tableElement?.clientHeight;
 
-    const loadMoreThreshold = 200;
+    const loadMoreThresholdValue =
+      typeof loadMoreThreshold === 'number' ? loadMoreThreshold : 200;
 
     const emptyFetchData = () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,7 +44,7 @@ const useInfiniteScroll = (hooks) => {
           !isFetching &&
           scrollDirection === 'forward' &&
           scrollOffset + totalTableHeight >=
-            innerListRef.current.clientHeight - loadMoreThreshold
+            innerListRef.current.clientHeight - loadMoreThresholdValue
         ) {
           if (fetchMoreData) {
             fetchMore();

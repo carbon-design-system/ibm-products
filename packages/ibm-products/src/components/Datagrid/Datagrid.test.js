@@ -1147,36 +1147,15 @@ describe(componentName, () => {
 
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
-    render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
+    render(<TenThousandEntries data-testid={dataTestId} />);
+
+    const tableBody =
+      screen.getAllByRole('rowgroup')[1].firstElementChild.firstElementChild;
+    const tableBodyHeight = tableBody.style.height;
+    expect(parseInt(tableBodyHeight)).toEqual(480000);
 
     expect(
-      parseInt(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].style.height,
-        10
-      )
-    ).toEqual(480000);
-
-    expect(
-      parseInt(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].style.height,
-        10
-      ) /
-        parseInt(
-          screen
-            .getByRole('table')
-            .getElementsByTagName('tbody')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0].style.height
-        )
+      parseInt(tableBodyHeight) / 48 // 48 is default row height
     ).toEqual(10000);
   });
 

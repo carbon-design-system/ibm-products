@@ -80,7 +80,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{$carbon-prefix}--data-table--compact,
       &.#{$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
           padding-top: $spacing-01;
@@ -88,7 +87,6 @@
         }
       }
 
-      &.#{$carbon-prefix}--data-table--short,
       &.#{$carbon-prefix}--data-table--sm,
       &.#{$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
@@ -99,7 +97,6 @@
         }
       }
 
-      &.#{$carbon-prefix}--data-table--tall,
       &.#{$carbon-prefix}--data-table--lg,
       &.#{$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
@@ -111,7 +108,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-    &.#{$carbon-prefix}--data-table--tall,
     &.#{$carbon-prefix}--data-table--lg,
     &.#{$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
@@ -129,7 +125,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{$carbon-prefix}--data-table--tall,
       &.#{$carbon-prefix}--data-table--lg,
       &.#{$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {

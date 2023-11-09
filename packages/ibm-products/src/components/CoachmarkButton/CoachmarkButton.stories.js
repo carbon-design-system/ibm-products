@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Crossroads16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -52,6 +53,7 @@ const Template = (args) => {
           kind="tertiary"
           label="Show information"
           size="md"
+          renderIcon={Crossroads16}
           {...args}
         />
       }

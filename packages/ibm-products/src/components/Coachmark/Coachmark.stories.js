@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { Crossroads16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -116,7 +117,12 @@ export const floating = prepareStory(Template, {
     align: 'bottom',
     overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
     target: (
-      <CoachmarkButton kind="tertiary" size="md" label="Show information">
+      <CoachmarkButton
+        kind="tertiary"
+        size="md"
+        label="Show information"
+        renderIcon={Crossroads16}
+      >
         Click Me
       </CoachmarkButton>
     ),

@@ -73,6 +73,10 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    Guidebanner: false,
+    GuidebannerElement: false,
+    GuidebannerElementButton: false,
+    GuidebannerElementLink: false,
   },
 
   // feature level flags

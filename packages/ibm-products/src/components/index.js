@@ -82,3 +82,9 @@ export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 export { Checklist } from './Checklist';
+export {
+  Guidebanner,
+  GuidebannerElement,
+  GuidebannerElementButton,
+  GuidebannerElementLink,
+} from './Guidebanner';

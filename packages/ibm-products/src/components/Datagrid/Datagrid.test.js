@@ -806,6 +806,10 @@ const retireActionClickFn = jest.fn();
 const deleteActionClickFn = jest.fn();
 
 const ActionsColumnExample = ({
+  isFetching = false,
+  shouldDisableMenuItem = null,
+  shouldHideMenuItem = null,
+  disabled = false,
   twoActions = false,
   sticky = 'right',
   ...rest
@@ -829,6 +833,9 @@ const ActionsColumnExample = ({
       id: 'edit',
       itemText: 'Edit',
       onClick: editActionClickFn,
+      disabled,
+      shouldHideMenuItem,
+      shouldDisableMenuItem,
     },
     {
       id: 'vote',
@@ -853,6 +860,7 @@ const ActionsColumnExample = ({
       columns,
       data,
       rowActions: !twoActions ? rowActions : [...rowActions].slice(0, 2),
+      isFetching,
     },
     useStickyColumn,
     useActionsColumn
@@ -2087,6 +2095,12 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
+  const getOverflowMenuItems = () => {
+    return document.querySelectorAll(
+      `.${carbon.prefix}--overflow-menu-options button`
+    );
+  };
+
   it('should render sticky action column and click each menu item', async () => {
     const user = userEvent.setup({ delay: null });
     const { click } = user;
@@ -2113,12 +2127,6 @@ describe(componentName, () => {
       name: 'Options',
     });
     await click(overflowMenu);
-
-    const getOverflowMenuItems = () => {
-      return document.querySelectorAll(
-        `.${carbon.prefix}--overflow-menu-options button`
-      );
-    };
 
     // Click each item inside of overflow menu, menu closes after clicking on a menu item
     // so we need to click the overflow menu again each time to view the menu items again
@@ -2150,6 +2158,50 @@ describe(componentName, () => {
     expect(deleteActionClickFn).toHaveBeenCalledTimes(1);
   });
 
+  it('should render stick actions and test disabled states', async () => {
+    const { rerender } = render(
+      <ActionsColumnExample disabled data-testid={dataTestId} />
+    );
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+    const overflowMenu = within(bodyRows[0]).getByRole('button', {
+      name: 'Options',
+    });
+    await click(overflowMenu);
+
+    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Edit'
+    )[0];
+
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldDisableMenuItem function successfully disables a menu item
+    const disableActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldDisableMenuItem={disableActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(disableActionItemFn).toHaveBeenCalled();
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldHideMenuItem function successfully hides a menu item
+    const hideActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldHideMenuItem={hideActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(hideActionItemFn).toHaveBeenCalled();
+    expect(getOverflowMenuItems().length).toEqual(3); // Previously was 4, but we've hidden the delete action in this test
+  });
+
   it('should render a non sticky actions column and click each menu item', async () => {
     render(<ActionsColumnExample sticky={null} data-testid={dataTestId} />);
 
@@ -2170,8 +2222,13 @@ describe(componentName, () => {
   });
 
   it('should click non stick row action when not inside of overflow menu', async () => {
-    render(
-      <ActionsColumnExample twoActions sticky={null} data-testid={dataTestId} />
+    const { rerender } = render(
+      <ActionsColumnExample
+        isFetching={true}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
     );
     const user = userEvent.setup({ delay: null });
     const { click } = user;
@@ -2180,6 +2237,22 @@ describe(componentName, () => {
       (row) => !row.classList.contains(`${blockClass}__head`)
     );
     const firstBodyRow = bodyRows[0];
+    const lastCellElement =
+      firstBodyRow.lastElementChild.previousElementSibling;
+    const iconSkeletonElement = lastCellElement.children[0].children[0];
+    expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
+    expect(iconSkeletonElement).toHaveClass(
+      `${blockClass}__actions-column-loading`
+    );
+
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
+    );
     const editActionButton = within(firstBodyRow).getByRole('button', {
       name: 'Edit',
     });
@@ -2190,6 +2263,18 @@ describe(componentName, () => {
     expect(editActionClickFn).toHaveBeenCalledTimes(1);
     await click(voteActionButton);
     expect(voteActionClickFn).toHaveBeenCalledTimes(1);
+
+    const hideIconOnlyItem = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        shouldHideMenuItem={hideIconOnlyItem}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
+    );
+    expect(within(firstBodyRow).getAllByRole('button').length).toEqual(1); // Previously was 2 but we've hidden the other in this test
   });
 });
 

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { Launch16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -53,7 +52,6 @@ const Template = (args) => {
           kind="tertiary"
           label="Show information"
           size="md"
-          renderIcon={Launch16}
           {...args}
         />
       }

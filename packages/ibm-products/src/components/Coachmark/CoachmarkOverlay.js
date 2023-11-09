@@ -59,10 +59,7 @@ export let CoachmarkOverlay = forwardRef(
 
     const handleKeyPress = (event) => {
       const { shiftKey, key } = event;
-      // if (key === 'Tab') {
-      //   setA11yDragMode(false);
-      // } else
-      if (key === 'Enter' || key === 'Space') {
+      if (key === 'Enter' || key === ' ') {
         setA11yDragMode((prevVal) => !prevVal);
       } else if (a11yDragMode) {
         const distanceToMove = shiftKey ? 128 : 32;

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { Launch16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -105,7 +104,6 @@ export const tooltip = prepareStory(Template, {
     theme: 'dark',
     align: 'bottom',
     positionTune: { x: 0, y: 0 },
-    //portalTarget: '#CoachmarkExample',
     target: (
       <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
     ),
@@ -118,12 +116,7 @@ export const floating = prepareStory(Template, {
     align: 'bottom',
     overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
     target: (
-      <CoachmarkButton
-        kind="tertiary"
-        size="md"
-        renderIcon={Launch16}
-        label="Show information"
-      >
+      <CoachmarkButton kind="tertiary" size="md" label="Show information">
         Click Me
       </CoachmarkButton>
     ),

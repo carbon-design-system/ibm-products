@@ -53,8 +53,17 @@ export let CoachmarkOverlayElements = React.forwardRef(
     const buttonFocusRef = useRef();
     const scrollRef = useRef();
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [currentProgStep, setCurrentProgStep] = useState(0);
+    const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
+
+    const setCurrentProgStep = (value) => {
+      if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
+        setTimeout(() => {
+          buttonFocusRef.current.focus();
+        }, 1000);
+      }
+      _setCurrentProgStep(value);
+    };
 
     const numProgSteps = Children.count(children);
     const progStepFloor = 0;

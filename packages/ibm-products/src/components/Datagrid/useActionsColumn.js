@@ -91,6 +91,7 @@ const useActionsColumn = (hooks) => {
                               hasIconOnly
                               light
                               iconDescription={itemText}
+                              ariaLabel={itemText}
                               kind="ghost"
                               className={cx({
                                 [`${blockClass}__disabled-row-action`]:

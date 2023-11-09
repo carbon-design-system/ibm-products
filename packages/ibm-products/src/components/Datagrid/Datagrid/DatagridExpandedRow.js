@@ -39,7 +39,7 @@ const DatagridExpandedRow =
             height: expandedContentHeight ? expandedContentHeight : null,
           }}
         >
-          {ExpandedRowContentComponent(datagridState)}
+          <ExpandedRowContentComponent {...datagridState} />
         </div>
       </tr>
     );

@@ -81,7 +81,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--compact,
       &.#{c4p-settings.$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
           padding-top: $spacing-01;
@@ -89,7 +88,6 @@
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--short,
       &.#{c4p-settings.$carbon-prefix}--data-table--sm,
       &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
@@ -100,7 +98,6 @@
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
@@ -112,7 +109,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-    &.#{c4p-settings.$carbon-prefix}--data-table--tall,
     &.#{c4p-settings.$carbon-prefix}--data-table--lg,
     &.#{c4p-settings.$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
@@ -130,7 +126,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
@@ -345,6 +340,32 @@
     border-right: $spacing-01 solid $border-strong-01;
     background-color: $background-selected-hover;
   }
+}
+
+.#{$block-class}__header-actions-column:hover {
+  background-color: $layer-accent;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  opacity: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
+  opacity: 1;
 }
 
 .#{$block-class}__head-hidden-select-all {

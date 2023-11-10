@@ -49,7 +49,11 @@ const links = [
 const onCloseReturnsTrue = jest.fn(() => true);
 const onCloseReturnsFalse = jest.fn(() => false);
 const titleText = `Watson ${uuidv4()} Ops`;
-const title = titleText;
+const title = (
+  <>
+    IBM <span>{titleText}</span>
+  </>
+);
 
 // render an AboutModal with version, logo, title, copyrightText and any other required props
 const renderComponent = ({ ...rest } = {}) =>

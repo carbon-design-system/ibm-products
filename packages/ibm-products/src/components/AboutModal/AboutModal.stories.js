@@ -137,6 +137,44 @@ export default {
         disable: true,
       },
     },
+    title: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'short title',
+          1: 'long title'
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: (
+          <>
+            IBM{' '}
+            <span
+              style={
+                // stylelint-disable-next-line carbon/type-token-use
+                { fontWeight: '600' }
+              }
+            >
+              Product name
+            </span>
+          </>
+        ),
+        1: (
+          <>
+            IBM{' '}
+            <span
+              style={
+                // stylelint-disable-next-line carbon/type-token-use
+                { fontWeight: '600' }
+              }
+            >
+              Product name example that is longer than one line
+            </span>
+          </>
+        ),
+      },
+    },
   },
 };
 
@@ -177,7 +215,6 @@ Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
   closeIconDescription: 'Close',
-  title: 'Product name',
   version: 'Version 0.0.0',
   copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
@@ -188,6 +225,7 @@ export const aboutModal = prepareStory(
   {
     storyName: aboutModalStoryName,
     args: {
+      title: 0,
       additionalInfo: 0,
       ...commonArgs,
     },
@@ -200,6 +238,7 @@ export const fullyLoaded = prepareStory(
   {
     storyName: fullyLoadedStoryName,
     args: {
+      title: 1,
       links: 3,
       content: 2,
       additionalInfo: 1,

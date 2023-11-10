@@ -44,9 +44,6 @@ export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
   tags: ['autodocs'],
-
-  subcomponents: { ToolbarGroup, ToolbarButton },
-
   parameters: {
     docs: {
       page: DocsPage,
@@ -144,7 +141,7 @@ function _Toolbar(args) {
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <OverflowMenu ariaLabel="List" flipped>
+        <OverflowMenu aria-label="List" flipped>
           <OverflowMenuItem itemText="Color palette" />
           <OverflowMenuItem itemText="Text creation" />
           <OverflowMenuItem itemText="Bulleted list" />

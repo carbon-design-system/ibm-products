@@ -90,5 +90,4 @@ export const Example = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-
 export default Example;

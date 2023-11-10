@@ -58,7 +58,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 .#{$story-class}__error--text {
   @include type.type-style('label-01');
 
-  padding-bottom: $spacing-05;
+  margin-bottom: $spacing-05;
 }
 
 .#{$block-class}

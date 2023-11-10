@@ -91,6 +91,41 @@ passing in the overall \`<CreateFullPage />\` component and the
           },
         },
         {
+          story: stories.createFullPageWithHeader,
+          description: `This is used when you want to show a header title and breadcrumbs. This can be created by
+passing in a title or breadcrumbs to the \`<CreateFullPage />\` component  as shown below:`,
+          source: {
+            code: `<CreateFullPage
+  title='Page title'
+  breadcrumbsOverflowAriaLabel='Open and close additional breadcrumb item list.'
+  breadcrumbs={[
+    { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
+    { key: '1', label: 'Breadcrumb 2', href: '/', },
+    { key: '2', label: 'Breadcrumb 3', href:'/' },
+    { key: '3', label: 'Breadcrumb 4', isCurrentPage: true }
+  ]}
+  maxVisibleBreadcrumbs={3}
+  {...props}
+>
+    <CreateFullPageStep {...createFullPageStepProps}>...</CreateFullPageStep>
+</CreateFullPage>`,
+          },
+        },
+        {
+          story: stories.createFullPageWithStepInErrorState,
+          description: `Passing an invalid prop to the step will show up an error icon on the progress indicator step indicating an error state in that step`,
+          source: {
+            code: `<CreateFullPage {...createFullPageProps}>
+  <CreateFullPageStep
+    title="Topic name"
+    invalid={true}
+  >
+    Step content
+  </CreateFullPageStep>
+</CreateFullPage>`,
+          },
+        },
+        {
           title: 'Using custom components',
           description: `It is possible to use custom components that return \`CreateFullPageStep\`s in
 order to help reduce the amount of logic in the component that contains the main

@@ -13,7 +13,6 @@ import { pkg } from '../../settings';
 
 import { Button, Form, FormGroup, TextInput } from '@carbon/react';
 
-import { Tearsheet } from '.';
 import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
 
 import {
@@ -36,7 +35,6 @@ export default {
   title: getStoryTitle(TearsheetNarrow.displayName),
   component: TearsheetNarrow,
   tags: ['autodocs'],
-  subcomponents: { Tearsheet },
   parameters: { layout: 'fullscreen', styles /* docs: { page: mdx } */ },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),

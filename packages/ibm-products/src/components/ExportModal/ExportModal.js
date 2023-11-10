@@ -26,6 +26,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'ExportModal';
 
@@ -58,6 +59,7 @@ export let ExportModal = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      portalTarget: portalTargetIn,
       preformattedExtensions = defaults.preformattedExtensions,
       preformattedExtensionsLabel,
       primaryButtonText,
@@ -77,6 +79,7 @@ export let ExportModal = forwardRef(
     const [dirtyInput, setDirtyInput] = useState(false);
     // by default (if it exists) use the first extension in the extension array
     const [extension, setExtension] = useState('');
+    const renderPortalUse = usePortalTarget(portalTargetIn);
 
     useEffect(() => {
       setName(filename);
@@ -132,7 +135,7 @@ export let ExportModal = forwardRef(
       ['data-modal-primary-focus']: true,
     };
 
-    return (
+    return renderPortalUse(
       <ComposedModal
         {...rest}
         className={cx(blockClass, className)}
@@ -292,6 +295,10 @@ ExportModal.propTypes = {
    * Specify whether the Modal is currently open
    */
   open: PropTypes.bool,
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
   /**
    * Array of extensions to display as radio buttons
    */

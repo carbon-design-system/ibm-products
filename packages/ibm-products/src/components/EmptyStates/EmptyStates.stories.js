@@ -15,15 +15,7 @@ import {
 } from '../../global/js/utils/story-helper';
 // import mdx from './EmptyState.mdx';
 
-import {
-  EmptyState,
-  ErrorEmptyState,
-  NoDataEmptyState,
-  NoTagsEmptyState,
-  NotFoundEmptyState,
-  NotificationsEmptyState,
-  UnauthorizedEmptyState,
-} from '.';
+import { EmptyState } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 // import styles from './_storybook-styles.scss';
@@ -32,14 +24,6 @@ export default {
   title: getStoryTitle(EmptyState.displayName),
   component: EmptyState,
   tags: ['autodocs'],
-  subcomponents: {
-    ErrorEmptyState,
-    NoDataEmptyState,
-    NoTagsEmptyState,
-    NotFoundEmptyState,
-    NotificationsEmptyState,
-    UnauthorizedEmptyState,
-  },
   parameters: {
     // styles,
     docs: {

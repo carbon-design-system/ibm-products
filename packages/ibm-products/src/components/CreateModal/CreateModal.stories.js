@@ -41,9 +41,7 @@ export default {
   },
   argTypes: {
     open: {
-      control: {
-        disable: true,
-      },
+      control: false,
     },
   },
 };

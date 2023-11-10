@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.0...@carbon/ibm-cloud-cognitive-core@2.4.1) (2023-11-03)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#3734](https://github.com/carbon-design-system/ibm-products/issues/3734)) ([f3a2c0e](https://github.com/carbon-design-system/ibm-products/commit/f3a2c0ee60ff49e56e62589f73a7fdfd2b8e2d2e))
+
+
+
+
+
+# [2.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.3.2...@carbon/ibm-cloud-cognitive-core@2.4.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* remove Style as an export ([#3687](https://github.com/carbon-design-system/ibm-products/issues/3687)) ([bcdb784](https://github.com/carbon-design-system/ibm-products/commit/bcdb7849e4de0a3fded0cadaf5241898e3e1edc1))
+* update to Carbon 11 compatible versions to latest ([#3603](https://github.com/carbon-design-system/ibm-products/issues/3603)) ([847d4c0](https://github.com/carbon-design-system/ibm-products/commit/847d4c079d90742ca828dd83ed9402309bb20c54))
+
+
+### Features
+
+* new Checklist component ([#3626](https://github.com/carbon-design-system/ibm-products/issues/3626)) ([0499dcd](https://github.com/carbon-design-system/ibm-products/commit/0499dcd8c5e1e6f7dc4e91bc5d67b338f3bbb24d))
+
+
+
+
+
+## [2.3.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.3.1...@carbon/ibm-cloud-cognitive-core@2.3.2) (2023-10-24)
+
+
+### Bug Fixes
+
+* **create-full-page:** header extensions ([#3488](https://github.com/carbon-design-system/ibm-products/issues/3488)) ([42c16bf](https://github.com/carbon-design-system/ibm-products/commit/42c16bf2b7028c0488ce3afbe89a6ddd77f174f3))
+
+
+
+
+
+## [2.3.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.3.0...@carbon/ibm-cloud-cognitive-core@2.3.1) (2023-09-29)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#3477](https://github.com/carbon-design-system/ibm-products/issues/3477)) ([c58ac80](https://github.com/carbon-design-system/ibm-products/commit/c58ac80c8c5760415b5b54cb96666b6b40a4472f))
+
+
+
+
+
+# [2.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.2.1...@carbon/ibm-cloud-cognitive-core@2.3.0) (2023-09-12)
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.2.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.2.0...@carbon/ibm-cloud-cognitive-core@2.2.1) (2023-08-30)
 
 

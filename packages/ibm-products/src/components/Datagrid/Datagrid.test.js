@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *
@@ -8,7 +9,6 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
 import {
@@ -18,9 +18,9 @@ import {
   mockHTMLElement,
 } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
-import { pkg } from '../../settings';
 
 import {
+  useDatagrid,
   useInfiniteScroll,
   useSelectRows,
   useDisableSelectRows,
@@ -35,6 +35,7 @@ import {
   useActionsColumn,
   useColumnOrder,
   useColumnRightAlign,
+  useColumnCenterAlign,
 } from '.';
 
 import {
@@ -46,7 +47,9 @@ import {
   TableBatchAction,
 } from '@carbon/react';
 import { Download, Restart, Filter, Activity, Add } from '@carbon/react/icons';
-import { carbon } from '../../settings';
+import { carbon, pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
@@ -238,7 +241,6 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
     setPageSize(pageSize);
@@ -247,20 +249,16 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-      // eslint-disable-next-line react/prop-types
       page={state.pageIndex + 1} // react-table is zero-based
-      // eslint-disable-next-line react/prop-types
       pageSize={state.pageSize}
-      // eslint-disable-next-line react/prop-types
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-      // eslint-disable-next-line react/prop-types
       totalItems={rows.length}
       onChange={updatePagination}
     />
   );
 };
 
-const EmptyUsage = ({ ...rest } = {}) => {
+const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty State Title';
@@ -275,6 +273,7 @@ const EmptyUsage = ({ ...rest } = {}) => {
     emptyStateTitle,
     emptyStateDescription,
     emptyStateSize,
+    emptyStateType,
     illustrationTheme,
     DatagridActions,
     DatagridBatchActions,
@@ -440,7 +439,6 @@ const range = (len) => {
   return arr;
 };
 
-// eslint-disable-next-line react/prop-types
 const Wrapper = ({ children }) => (
   <div
     style={{
@@ -892,6 +890,13 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
+  it('check total column count', () => {
+    render(<BasicUsage />);
+    expect(screen.getAllByRole('columnheader').length).toEqual(
+      defaultHeader.length
+    );
+  });
+
   it('renders a basic data grid component with devTools attribute', async () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -964,7 +969,9 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1080,55 +1087,25 @@ describe(componentName, () => {
 
   //Empty State
   it('renders an empty table', async () => {
-    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
-    expect(
-      screen.getByRole('table').getElementsByTagName('tbody')[0].className
-    ).toEqual('c4p--datagrid__empty-state-body');
+    const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
+    screen.getByText('Empty State Title');
+    screen.getByText('Description test explaining why this card is empty.');
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-noData`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length
-    ).toEqual(1);
+    rerender(<EmptyUsage emptyStateType="error" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-error`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0].textContent
-    ).toBeNull;
+    rerender(<EmptyUsage emptyStateType="notFound" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-notFound`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('svg')[0]
-    ).toBeDefined();
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('h3')[0].textContent
-    ).toEqual('Empty State Title');
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0].textContent
-    ).toEqual('Description test explaining why this card is empty.');
+    rerender(<EmptyUsage emptyStateType="12345" />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('Initial Load', async () => {
@@ -1287,7 +1264,9 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1405,17 +1384,16 @@ describe(componentName, () => {
   });
 
   function clickRow(rowNumber) {
-    const row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[rowNumber];
-
-    const rowExpander = row.querySelector(
-      `button[aria-label="Expand current row"]`
+    const rows = screen.getAllByRole('row');
+    const bodyRows = rows.filter(
+      (r) =>
+        !r.classList.contains('c4p--datagrid__head') &&
+        !r.classList.contains('c4p--datagrid__expanded-row')
     );
-    fireEvent.click(rowExpander);
+    const row = bodyRows[rowNumber];
 
-    setTimeout(1000);
+    const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
+    fireEvent.click(rowExpander);
 
     expect(
       screen
@@ -1427,30 +1405,17 @@ describe(componentName, () => {
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0].lastChild
-        .textContent
+        .getElementsByClassName('c4p--datagrid__expanded-row')[0].textContent
     ).toEqual(`Content for ${rowNumber}`);
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
+    const rowExpanderCollapse = row.querySelector(
+      `button[aria-label="Collapse row"]`
     );
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row').length
-    ).toBe(0);
+    fireEvent.click(rowExpanderCollapse);
   }
 
   it('Expanded Row', async () => {
-    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
+    render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
     clickRow(8);
@@ -1517,20 +1482,10 @@ describe(componentName, () => {
 
   it('Nested Table', async () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
-    fireEvent.click(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('c4p--datagrid__expanded-row-content');
+    const firstRowExpander = screen.getAllByLabelText('Expand row')[0];
+    const firstRow = screen.getAllByRole('row')[1];
+    fireEvent.click(firstRowExpander);
+    expect(firstRow.nextSibling).toHaveClass('c4p--datagrid__expanded-row');
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1667,11 +1622,13 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     expect(
-      screen.getByLabelText('Row height', { selector: 'button' })
+      screen.getByLabelText('Row settings', { selector: 'button' })
     ).toHaveClass(`c4p--datagrid__row-size-button--open`);
     expect(
       document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
@@ -1682,7 +1639,7 @@ describe(componentName, () => {
           `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
         )[0]
         .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     const rowDropDown = [
       'Extra large',
@@ -1787,67 +1744,106 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
-  const RightAlignedColumns = () => {
-    const columns = React.useMemo(
-      () => [
-        ...defaultHeader.slice(0, 3),
-        {
-          Header: 'Age',
-          accessor: 'age',
-          rightAlignedColumn: true,
-        },
-        {
-          Header: 'Visits',
-          accessor: 'visits',
-          rightAlignedColumn: true,
-        },
-      ],
-      []
-    );
+  const rightAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      rightAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      rightAlignedColumn: true,
+    },
+  ];
+
+  const centerAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      centerAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      centerAlignedColumn: true,
+    },
+  ];
+
+  const CustomAlignColumns = ({ customCols }) => {
     const [data] = useState(makeData(10));
     const datagridState = useDatagrid(
       {
-        columns,
+        columns: customCols,
         data,
       },
-      useColumnRightAlign
+      useColumnRightAlign,
+      useColumnCenterAlign
     );
 
-    return <Datagrid datagridState={{ ...datagridState }} />;
+    return <Datagrid datagridState={datagridState} />;
   };
 
-  it('Right Aligned Columns', async () => {
+  it('should render right aligned columns', async () => {
     render(
-      <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
+      <CustomAlignColumns
+        customCols={rightAlignedColumnsData}
+        data-testid={dataTestId}
+      />
     );
-    const numRows = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr').length;
 
-    for (var i = 0; i < numRows; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[3]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const ageColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
 
-    for (var j = 0; j < numRows; j++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(j)
-          .getElementsByTagName('td')[4]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(`${blockClass}__right-align-cell-renderer`);
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__right-align-cell-renderer`
+    );
+  });
+
+  it('should render center aligned columns', async () => {
+    render(
+      <CustomAlignColumns
+        customCols={centerAlignedColumnsData}
+        data-testid={dataTestId}
+      />
+    );
+
+    const ageColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
+
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
   });
 
   it('Row Size Dropdown', async () => {
@@ -2049,7 +2045,9 @@ describe(componentName, () => {
       `${carbon.prefix}--tooltip-content`
     );
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -2283,7 +2281,7 @@ describe('batch action testing', () => {
 
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
-      const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
+      const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
       await act(() => click(firstCheckbox));
 
       expect(
@@ -2297,6 +2295,10 @@ describe('batch action testing', () => {
       screen.getByLabelText(getBatchActions()[0].label);
       screen.getByLabelText(getBatchActions()[1].label);
       const menuButton = screen.getByRole('button', { name: /More/i });
+      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
+      const selectAllButton = screen.getByRole('button', {
+        name: /Select all/i,
+      });
       expect(menuButton).toBeInTheDocument();
       await act(() => click(menuButton));
       const options = Array.from(
@@ -2312,6 +2314,11 @@ describe('batch action testing', () => {
       remainingBatchActions.forEach((batchAction, index) => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
+
+      //coverage
+      fireEvent.click(options[0]);
+      fireEvent.click(cancelButton);
+      fireEvent.click(selectAllButton);
     });
   });
 });

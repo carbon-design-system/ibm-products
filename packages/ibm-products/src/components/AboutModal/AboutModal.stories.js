@@ -128,14 +128,10 @@ export default {
       },
     },
     logo: {
-      control: {
-        disable: true,
-      },
+      control: false,
     },
     open: {
-      control: {
-        disable: true,
-      },
+      control: false,
     },
     title: {
       control: {

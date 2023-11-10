@@ -26,7 +26,7 @@ import {
   NumberInput,
   InlineNotification,
   Toggle,
-  Tooltip,
+  DefinitionTooltip,
   RadioButtonGroup,
   RadioButton,
   FormGroup,
@@ -35,11 +35,19 @@ import {
 } from '@carbon/react';
 import DocsPage from './CreateFullPage.docs-page';
 
+const breadcrumbs = {
+  'No breadcrumb': null,
+  'A single breadcrumb': [{ href: '/', key: '0', label: 'Home page' }],
+  'Two breadcrumbs': [
+    { key: '0', href: '/', label: 'Home page' },
+    { key: '1', href: '/', label: 'Application name' },
+  ],
+};
+
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
   tags: ['autodocs'],
-  subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',
@@ -49,10 +57,20 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: {
+    breadcrumbs: {
+      control: {
+        type: 'select',
+        labels: Object.keys(breadcrumbs),
+      },
+      options: Object.values(breadcrumbs).map((_k, i) => i),
+      mapping: Object.values(breadcrumbs),
+    },
+  },
 };
 
 const defaultFullPageProps = {
-  title: 'Create topic',
+  secondaryTitle: 'Create topic',
   nextButtonText: 'Next',
   backButtonText: 'Back',
   cancelButtonText: 'Cancel',
@@ -130,24 +148,21 @@ const Template = ({ ...args }) => {
                 />
               )}
               <div>
-                <Tooltip
-                  triggerClassName={`${storyClass}__tooltip`}
-                  direction="right"
-                  tabIndex={0}
-                >
-                  <p className={`${storyClass}__error--text`}>
-                    Once toggled on, an inline error notification will appear
-                    upon clicking next. This is an example usage of how to
-                    prevent the next step if some kind of error occurred during
-                    the `onNext` handler.
-                  </p>
-                </Tooltip>
+                <div>
+                  <DefinitionTooltip
+                    className={`${storyClass}__error--text`}
+                    size="sm"
+                    definition={
+                      'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                    }
+                  >
+                    Simulate error
+                  </DefinitionTooltip>
+                </div>
                 <Toggle
-                  className={`${storyClass}__error--toggle`}
                   id="simulated-error-toggle"
                   size="sm"
-                  labelText="Simulate error"
-                  onClick={() => setShouldReject((prev) => !prev)}
+                  onToggle={(event) => setShouldReject(event)}
                 />
               </div>
               <Checkbox
@@ -329,23 +344,20 @@ const TemplateWithSections = ({ ...args }) => {
                   />
                 )}
                 <div>
-                  <Tooltip
-                    triggerClassName={`${storyClass}__tooltip`}
-                    direction="right"
-                    tabIndex={0}
-                  >
-                    <p className={`${storyClass}__error--text`}>
-                      Once toggled on, an inline error notification will appear
-                      upon clicking next. This is an example usage of how to
-                      prevent the next step if some kind of error occurred
-                      during the `onNext` handler.
-                    </p>
-                  </Tooltip>
+                  <div>
+                    <DefinitionTooltip
+                      className={`${storyClass}__error--text`}
+                      size="sm"
+                      definition={
+                        'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                      }
+                    >
+                      Simulate error
+                    </DefinitionTooltip>
+                  </div>
                   <Toggle
-                    className={`${storyClass}__error--toggle`}
                     id="simulated-error-toggle"
                     size="sm"
-                    labelText="Simulate error"
                     onToggle={(event) => setShouldReject(event)}
                   />
                 </div>
@@ -472,6 +484,51 @@ const TemplateWithSections = ({ ...args }) => {
   );
 };
 
+const TemplateWithError = ({ ...args }) => {
+  const [textInput, setTextInput] = useState('');
+  const [isInvalid, setIsInvalid] = useState(true);
+  const [isFirstStepInvalid, setIsFirstStepInvalid] = useState(true);
+
+  return (
+    <CreateFullPage {...args}>
+      <CreateFullPageStep
+        title="Partition"
+        subtitle="One or more partitions make up a topic. A partition is an ordered list
+        of messages."
+        invalid={isFirstStepInvalid}
+        disableSubmit={isFirstStepInvalid}
+      >
+        <Grid>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <TextInput
+              id="test-6"
+              invalidText="A valid value is required"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+              onChange={(e) => {
+                setTextInput(e.target.value);
+                setIsInvalid(e.target.value ? false : true);
+                setIsFirstStepInvalid(e.target.value ? false : true);
+              }}
+              onBlur={() => {
+                textInput.length === 0 && setIsInvalid(true);
+              }}
+              invalid={isInvalid}
+            />
+          </Column>
+        </Grid>
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Core Configuration">
+        <Grid>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            Test step
+          </Column>
+        </Grid>
+      </CreateFullPageStep>
+    </CreateFullPage>
+  );
+};
+
 export const createFullPage = prepareStory(Template, {
   args: {
     ...defaultFullPageProps,
@@ -483,3 +540,28 @@ export const createFullPageWithSections = prepareStory(TemplateWithSections, {
     ...defaultFullPageProps,
   },
 });
+
+export const createFullPageWithHeader = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+    title: 'Page title',
+    breadcrumbsOverflowAriaLabel:
+      'Open and close additional breadcrumb item list.',
+    breadcrumbs: [
+      { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
+      { key: '1', label: 'Breadcrumb 2', href: '/' },
+      { key: '2', label: 'Breadcrumb 3', href: '/' },
+      { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
+    ],
+    maxVisibleBreadcrumbs: 3,
+  },
+});
+
+export const createFullPageWithStepInErrorState = prepareStory(
+  TemplateWithError,
+  {
+    args: {
+      ...defaultFullPageProps,
+    },
+  }
+);

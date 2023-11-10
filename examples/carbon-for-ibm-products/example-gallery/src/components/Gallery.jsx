@@ -11,7 +11,7 @@ const blockClass = `gallery`;
 const packagePath =
   'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
 
-export const Gallery = ({site}) => {
+export const Gallery = ({ site }) => {
   const [filteredConfig, setFilteredConfig] = useState([]);
 
   const getLink = (dir) => {
@@ -25,11 +25,11 @@ export const Gallery = ({site}) => {
   };
 
   useEffect(() => {
-    config.forEach(item => {
-      item.url = getLink(item.directory, site)
-    })
+    config.forEach((item) => {
+      item.url = getLink(item.directory, site);
+    });
     setFilteredConfig(config);
-  }, [config, site])
+  }, [config, site]);
 
   const handleSearch = (ev) => {
     if (!ev.target.value) {
@@ -39,7 +39,6 @@ export const Gallery = ({site}) => {
       setFilteredConfig(config.filter((item) => filter.test(item.label)));
     }
   };
-
 
   return (
     <div className={blockClass}>

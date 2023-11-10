@@ -22,6 +22,7 @@ import {
 import { InformationFilled, Copy, ErrorFilled } from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
@@ -79,6 +80,7 @@ export let APIKeyModal = forwardRef(
       onRequestEdit,
       onRequestGenerate,
       open,
+      portalTarget: portalTargetIn,
       previousStepButtonText,
       showAPIKeyLabel,
 
@@ -94,6 +96,7 @@ export let APIKeyModal = forwardRef(
     const copyRef = useRef();
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
+    const renderPortalUse = usePortalTarget(portalTargetIn);
     const hasSteps = Boolean(customSteps.length);
     const apiKeyLoaded = apiKey && !loading;
     const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
@@ -206,7 +209,7 @@ export let APIKeyModal = forwardRef(
       }
     };
 
-    return (
+    return renderPortalUse(
       <ComposedModal
         {...rest}
         {...{ open, ref, ...getDevtoolsProps(componentName) }}
@@ -509,6 +512,10 @@ APIKeyModal.propTypes = {
    * designates if modal is open or closed
    */
   open: PropTypes.bool.isRequired,
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
   /**
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */

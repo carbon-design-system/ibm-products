@@ -41,6 +41,7 @@ const {
   writeGalleryConfig,
   writeGalleryTests,
 } = require('./gallery-config');
+const { updateExample } = require('./update-example');
 
 const updateGalleryConfig = () => {
   const directoryPath = path.join(
@@ -68,6 +69,14 @@ const updateGalleryConfig = () => {
   // construct test for examples
   const examplesTestFile = path.join(directoryPath, 'gallery-examples.test.js');
   writeGalleryTests(examplesTestFile, directories);
+
+  // update each example
+  directories.forEach((dir) => {
+    const config = mergedConfig.find((item) => item.directory === dir);
+    // log out and provide feedback as part of the update process.
+    console.log(`Checking / updating example: ${dir}`, config);
+    updateExample(dir, config);
+  });
 };
 
 updateGalleryConfig();

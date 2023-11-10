@@ -132,7 +132,7 @@ const Template = (args) => {
           />
           <Dropdown
             id="create-tearsheet-narrow-dropdown-options-c"
-            ariaLabel="Dropdown"
+            aria-label="Dropdown"
             initialSelectedItem="Day(s)"
             items={items}
             label="Options"
@@ -248,7 +248,7 @@ const WithValidationTemplate = (args) => {
             />
             <Dropdown
               id="create-tearsheet-narrow-dropdown-options-c"
-              ariaLabel="Dropdown"
+              aria-label="Dropdown"
               initialSelectedItem="Day(s)"
               items={items}
               label="Options"
@@ -291,6 +291,5 @@ export const withMultipleForms = prepareStory(WithValidationTemplate, {
   storyName: withMultipleFormsStoryName,
   args: {
     ...defaultStoryProps,
-    multiForm: true,
   },
 });

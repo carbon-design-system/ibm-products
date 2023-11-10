@@ -52,8 +52,22 @@ export default {
 };
 
 const defaultProps = {
-  children:
-    'Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context.',
+  children: (
+    // 'Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context. Use case-specific content that explains the concept or adds context.',
+    <ul>
+      <li>
+        Use <b>case-specific</b> content that explains the concept or adds
+        context.
+      </li>
+      <li>
+        Use case-specific <i>content that</i> explains the concept or adds
+        context.
+      </li>
+      <li>
+        Use case-specific content that explains the concept or adds context.
+      </li>
+    </ul>
+  ),
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
   collapsible: false,

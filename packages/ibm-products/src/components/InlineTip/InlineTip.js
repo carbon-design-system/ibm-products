@@ -101,14 +101,13 @@ export let InlineTip = React.forwardRef(
         <div className={`${blockClass}__close-icon-wrapper`}>
           <IconButton
             className={`${blockClass}__close-icon`}
-            hasIconOnly
-            iconDescription={closeIconDescription}
             kind="ghost"
             label={closeIconDescription}
             onClick={onClose}
-            renderIcon={() => <Close size={16} />}
             size="lg"
-          />
+          >
+            <Close size={16} />
+          </IconButton>
         </div>
 
         {/* Hide the idea icon if is narrow and showing an image */}

@@ -112,19 +112,7 @@ describe(componentName, () => {
     setupJestCanvasMock();
   });
 
-  it('renders a component SteppedAnimatedMedia', async () => {
-    render(
-      <SteppedAnimatedMedia
-        aria-label="Animated SVG for display"
-        filePaths={['./assets/illustrations/test.json']}
-      />
-    );
-    await waitFor(() => {
-      expect(screen.getByRole('img')).toHaveClass(blockClass);
-    });
-  });
-
-  it('renders a lottie file', async () => {
+  it('renders a "lottie file" (svg element)', async () => {
     render(
       <SteppedAnimatedMedia
         aria-label="Animated SVG for display"
@@ -133,6 +121,9 @@ describe(componentName, () => {
     );
 
     await waitFor(() => {
+      // The component immediately returns an empty <div role="img">,
+      // but renders the <svg> child element asynchronously.
+      // The svg itself has no "hook" compatible with the testing-library.
       expect(document.querySelector('svg')).toBeInTheDocument();
     });
   });

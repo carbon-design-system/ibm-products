@@ -59,6 +59,7 @@ $purple: #7f3ae7;
 }
 
 .#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media svg {
+  // Overrides the inline CSS of "100%".
   width: $media-width !important;
   height: $media-height !important;
 }
@@ -170,49 +171,49 @@ $purple: #7f3ae7;
 }
 
 .#{$block-class}__close-icon-wrapper {
-  position: absolute !important;
+  position: absolute;
   top: 0;
   right: 0;
 }
 
-.#{$block-class}__close-icon {
-  padding: to-rem(6px) 0 0 0 !important;
-  block-size: $spacing-07 !important;
+.#{$block-class} .#{$block-class}__close-icon {
+  padding: to-rem(6px) 0 0 0;
+  block-size: $spacing-07;
   color: $white-0;
-  inline-size: $spacing-07 !important;
-  min-block-size: $spacing-07 !important;
+  inline-size: $spacing-07;
+  min-block-size: $spacing-07;
 
   &:active,
   &:hover {
-    background-color: $purple !important;
-    color: $text-primary !important;
+    background-color: $purple;
+    color: $text-primary;
   }
 
-  svg > path {
+  path {
     margin: 0;
-    fill: $white-0 !important;
+    fill: $white-0;
   }
 }
 
-.#{$block-class}__toggle-btn {
+.#{$block-class} .#{$block-class}__toggle-btn {
   border: none;
-  margin: 0 $spacing-05 0 calc(-1 * $spacing-05) !important;
-  color: $blue-30 !important;
+  margin: 0 $spacing-05 0 calc(-1 * $spacing-05);
+  color: $blue-30;
 
   &:hover {
-    background-color: $purple-70-hover !important;
-    color: $gray-10 !important;
+    background-color: $purple-70-hover;
+    color: $gray-10;
   }
 }
 
-.#{$block-class}__close-btn {
-  border: to-rem(1px) solid $white-0 !important;
-  color: $white-0 !important;
+.#{$block-class} .#{$block-class}__close-btn {
+  border: to-rem(1px) solid $white-0;
+  color: $white-0;
 
   &:active,
   &:hover {
-    background-color: $gray-10 !important;
-    color: $gray-100 !important;
+    background-color: $gray-10;
+    color: $gray-100;
   }
 
   // The "render icon" CSS seems to be missing in the latest Carbon button.

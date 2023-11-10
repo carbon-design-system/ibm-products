@@ -121,8 +121,9 @@ describe(componentName, () => {
         {children}
       </InlineTip>
     );
-    userEvent.click(document.querySelector('button'));
-    screen.getByText(readLessLabel);
+    const { click } = userEvent;
+    click(screen.getByRole('button', { name: readMoreLabel }));
+    expect(screen.getByText(readLessLabel)).toBeInTheDocument();
   });
 
   it(`renders an image`, () => {
@@ -134,7 +135,7 @@ describe(componentName, () => {
         {children}
       </InlineTip>
     );
-    expect(document.querySelector('img')).toBeInTheDocument();
+    expect(screen.getByRole('img')).toBeInTheDocument();
   });
 
   it(`renders in the narrow format`, () => {

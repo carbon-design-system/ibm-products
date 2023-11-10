@@ -21,6 +21,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
 import { DocsPage } from './ExpandableRow.docs-page';
+import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
@@ -157,11 +158,16 @@ const sharedDatagridProps = {
   expanderButtonTitleCollapsed: 'Expand row',
 };
 
+const ExpansionRenderer = ({ row }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={`${prefix}__test-class-with-prefix-hook`}>
+      Content for row index: {row.id}
+    </div>
+  );
+};
+
 const ExpandedRows = ({ ...args }) => {
-  const expansionRenderer = ({ row }) => {
-    console.log(row);
-    return <div>Content for row index: {row.id}</div>;
-  };
   const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
@@ -176,7 +182,7 @@ const ExpandedRows = ({ ...args }) => {
       },
       DatagridActions,
       DatagridPagination,
-      ExpandedRowContentComponent: expansionRenderer,
+      ExpandedRowContentComponent: ExpansionRenderer,
       tags: ['autodocs'],
       ...args.defaultGridProps,
     },

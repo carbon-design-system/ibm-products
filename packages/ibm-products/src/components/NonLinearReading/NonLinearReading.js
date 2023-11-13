@@ -46,7 +46,6 @@ export let NonLinearReading = React.forwardRef(
         {...rest}
         className={cx(blockClass, `${blockClass}__${theme}`, className)}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {' '}

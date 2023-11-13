@@ -55,7 +55,7 @@ describe(componentName, () => {
 
   it('applies className to the containing node', () => {
     renderComponent({ className: className });
-    expect(screen.getByRole('main')).toHaveClass(className);
+    expect(document.querySelector(`.${className}`)).toBeInTheDocument();
   });
 
   it('adds additional props to the containing node', () => {

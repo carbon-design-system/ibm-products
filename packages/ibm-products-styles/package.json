@@ -39,7 +39,6 @@
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build-css-update-maps": "node ../../../ibm-products/scripts/updateSourceMaps.js",
-    "ci-check": "node scripts/import",
     "clean": "rimraf css scss",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"

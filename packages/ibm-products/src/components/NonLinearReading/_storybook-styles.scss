@@ -5,14 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/react/scss/colors' as *;
-// @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
-// @use '../../global/styles/project-settings' as c4p-settings;
 
 // For demo purposes, have text surrounding component match styling in component.
 #storybook-root {

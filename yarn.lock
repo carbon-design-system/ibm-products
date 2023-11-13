@@ -1746,6 +1746,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+  version: 0.0.0-use.local
+  resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
+  dependencies:
+    chalk: ^4.1.2
+    copyfiles: ^2.4.1
+    cross-env: ^7.0.3
+    npm-check-updates: ^16.11.1
+    npm-run-all: ^4.1.5
+    rimraf: ^5.0.1
+    sass: ^1.64.2
+    yargs: ^17.7.2
+  peerDependencies:
+    "@carbon/grid": ^11.21.1
+    "@carbon/layout": ^11.20.1
+    "@carbon/motion": ^11.16.1
+    "@carbon/themes": ^11.26.1
+    "@carbon/type": ^11.25.1
+  languageName: unknown
+  linkType: soft
+
 "@carbon/ibm-products@workspace:packages/ibm-products":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products@workspace:packages/ibm-products"

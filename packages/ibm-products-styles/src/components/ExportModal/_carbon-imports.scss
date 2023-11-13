@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// ExportModal uses the following Carbon components:
+// Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
+// RadioButton, RadioButtonGroup, FormGroup, Loading
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/radio-button';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/loading';

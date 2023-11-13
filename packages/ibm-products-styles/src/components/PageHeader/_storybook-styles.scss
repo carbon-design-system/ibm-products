@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+@use '@carbon/react/scss/components/ui-shell';
+@use '@carbon/react/scss/components/data-table';
+@use '@carbon/react/scss/components/button';
+
+$story-class: 'page-header-stories';
+
+.#{$story-class}__content-switcher {
+  justify-content: flex-start;
+}
+
+.#{$story-class}__content-switcher button {
+  width: auto;
+}
+
+.#{$story-class}__dummy-content {
+  position: relative; // used to raise the stacking context and check it still goes under the page header
+  padding-top: $spacing-05;
+  margin-top: $spacing-05;
+  background-color: $background;
+  color: $text-primary;
+}
+
+.#{$story-class}__dummy-content-block {
+  min-height: 120vh;
+  background: $layer-01;
+  background-clip: content-box;
+}
+
+.#{$story-class}__dummy-content-text {
+  @include type.type-style('body-compact-01');
+
+  padding: $spacing-05;
+}
+
+.#{$story-class}__status-icon {
+  fill: $support-success;
+  vertical-align: middle;
+}
+
+.#{$story-class}__app {
+  position: relative;
+  display: flex;
+  // min and max height needed to prevent scroll off screen (verify on in context page)
+  min-height: 100vh;
+  max-height: 100vh;
+  flex-direction: column;
+}
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$story-class}__viewport--scroll {
+  overflow-y: auto;
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  height: calc(100% - #{$spacing-09});
+  margin-top: $spacing-09;
+}
+
+.#{$story-class}__viewport--scroll .#{$story-class}__content-container {
+  overflow-y: initial;
+}
+
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  max-height: 50vh;
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $layer-accent-01;
+  color: $text-primary;
+}

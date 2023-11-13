@@ -1,0 +1,15 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// APIKeyModal uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
+// InlineLoading, Form, Button
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/inline-loading';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/button';

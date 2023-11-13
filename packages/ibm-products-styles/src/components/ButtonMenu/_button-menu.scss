@@ -1,0 +1,60 @@
+//
+// Copyright IBM Corp. 2021, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// TODO: @use(s) of Carbon settings and component styles and other
+// related component styles used by ButtonMenu
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--button-menu;
+
+.#{$block-class} {
+  min-width: 160px;
+  &.#{$block-class}__wrapper--primary,
+  &.#{$block-class}__wrapper--primary.#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+    background-color: $button-primary;
+  }
+  &.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__wrapper--primary:hover {
+    background-color: $button-primary-hover;
+  }
+
+  &.#{$block-class}__wrapper--tertiary,
+  &.#{$block-class}__wrapper--tertiary.#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+    background-color: $button-tertiary;
+  }
+  &.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__wrapper--tertiary:hover {
+    background-color: $button-tertiary-hover;
+  }
+
+  &.#{$block-class}__wrapper--ghost,
+  &.#{$block-class}__wrapper--ghost.#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+    background-color: transparent;
+  }
+  &.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__wrapper--ghost:hover {
+    background-color: $layer-hover;
+  }
+
+  .#{$block-class}__trigger {
+    @include type.type-style('body-compact-01');
+
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+  }
+}
+
+.#{$block-class}__options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  content: initial;
+}

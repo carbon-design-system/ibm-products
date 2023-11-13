@@ -1,0 +1,83 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--import-modal;
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  display: none;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
+  max-width: none;
+}
+
+.#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
+  .#{c4p-settings.$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{c4p-settings.$carbon-prefix}--file
+  .#{c4p-settings.$carbon-prefix}--file-container,
+.#{c4p-settings.$carbon-prefix}--file
+  ~ .#{c4p-settings.$carbon-prefix}--file-container {
+  margin-top: 0;
+}
+
+.#{c4p-settings.$carbon-prefix}--modal-container--sm
+  .#{c4p-settings.$carbon-prefix}--modal-header {
+  padding-right: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__input-group {
+  display: flex;
+}
+
+.#{$block-class}__import-button.#{c4p-settings.$carbon-prefix}--btn {
+  margin-left: $spacing-03;
+}
+
+.#{$block-class}__file-container {
+  width: 100%;
+}
+
+.#{$block-class} .#{$block-class}__file-drop-header,
+.#{$block-class} .#{$block-class}__label {
+  margin-bottom: $spacing-03;
+  @include type.type-style('heading-compact-01');
+}
+
+.#{$block-class}__helper-text {
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-03;
+  @include type.type-style('helper-text-01');
+}
+
+.#{$block-class}__body {
+  padding-right: calc(20% - #{$spacing-05});
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file__selected-file {
+  max-width: none;
+  background: $layer-02;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file {
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input:disabled {
+  background: $layer-02;
+}

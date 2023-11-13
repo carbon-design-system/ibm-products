@@ -1,0 +1,67 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/ui-shell' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$story-class: 'create-full-page-stories';
+$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  height: 100vh;
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $border-subtle-01;
+  color: $text-primary;
+  overflow-y: auto;
+}
+
+.#{$story-class}__step-fieldset--no-label
+  .#{c4p-settings.$carbon-prefix}--fieldset
+  legend {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.#{$story-class}__tooltip {
+  position: relative;
+  // stylelint-disable-next-line carbon/layout-token-use
+  top: calc(#{$spacing-05} + #{$spacing-01});
+  left: $spacing-11;
+}
+
+.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{c4p-settings.$carbon-prefix}--label {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.#{c4p-settings.$carbon-prefix}--form-item {
+  margin-bottom: $spacing-05;
+}
+
+.#{$story-class}__error--text {
+  @include type.type-style('label-01');
+
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}
+  .#{$block-class}__step-description.#{$story-class}__step-description {
+  padding-left: 0;
+}

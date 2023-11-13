@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
+
+.#{$storybook-block-class}--full-height {
+  height: 100vh;
+  max-height: var(--doc-story-height); // set in core if needed;
+}
+
+.#{$storybook-block-class}__add {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}

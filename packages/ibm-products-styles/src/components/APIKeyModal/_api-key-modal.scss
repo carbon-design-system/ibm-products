@@ -1,0 +1,52 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  display: none;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--inline-loading {
+  min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$block-class}__body {
+  padding-right: calc(20% - #{$spacing-05});
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  padding-right: calc(20% - #{$spacing-05});
+  margin-top: $spacing-03;
+}
+
+.#{$block-class}__messaging-text {
+  flex: 1;
+  margin-left: $spacing-03;
+  @include type.type-style('label-01');
+}
+
+.#{$block-class}__messaging-text > * {
+  font: inherit;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
+}

@@ -1,0 +1,25 @@
+/**
+ * Copyright IBM Corp. 2023, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@mixin side-panel-decorator($prefix) {
+  .#{$prefix}container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  .#{$prefix}content {
+    flex-grow: 1;
+  }
+
+  .#{$prefix}toggle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

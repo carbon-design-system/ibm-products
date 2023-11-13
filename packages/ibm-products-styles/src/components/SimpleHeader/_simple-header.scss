@@ -1,0 +1,37 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+@use '../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--simple-header;
+
+.#{$block-class} {
+  width: 100%;
+  padding: $spacing-04 $spacing-07;
+  border-bottom: 1px solid $border-subtle-01;
+  background-color: $layer-01;
+}
+
+.#{$block-class}__title {
+  @include type.type-style('heading-04');
+}
+
+.#{$block-class}__breadcrumbs + .#{$block-class}__title {
+  // add margin top to the title if breadcrumbs exist
+  margin-top: $spacing-02;
+}
+
+.#{$block-class}__breadcrumbs .#{$carbon-prefix}--breadcrumb-item,
+.#{$block-class}__breadcrumbs
+  .#{$carbon-prefix}--breadcrumb-item
+  .#{$carbon-prefix}--link {
+  @include type.type-style('label-01');
+}

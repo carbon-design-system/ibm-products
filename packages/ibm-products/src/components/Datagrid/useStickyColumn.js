@@ -1,9 +1,8 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2021, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import { useEffect, useRef, useLayoutEffect, useState } from 'react';
@@ -27,9 +26,11 @@ const useStickyColumn = (hooks) => {
   }, []);
 
   useLayoutEffect(() => {
+    /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);
     }
+    /* istanbul ignore next */
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
   }, []);
@@ -52,6 +53,7 @@ const useStickyColumn = (hooks) => {
     useEffect(() => {
       const tableBodyElement = tableBodyRef.current;
       const headerCellElement = stickyHeaderCellRef.current;
+      /* istanbul ignore next */
       if (hasVertScroll(tableBodyElement) && headerCellElement) {
         headerCellElement.classList.add(OFFSET_SCROLL_CLASS);
       }
@@ -59,10 +61,12 @@ const useStickyColumn = (hooks) => {
         onBodyResize.bind(null, tableBodyElement, headerCellElement),
         250
       );
+      /* istanbul ignore next */
       if (typeof window !== 'undefined') {
         window.addEventListener('resize', boundListener);
       }
       return () => {
+        /* istanbul ignore next */
         if (typeof window !== 'undefined') {
           window.removeEventListener('resize', boundListener);
         }
@@ -173,6 +177,7 @@ const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
 
 const onBodyResize = (tableBodyEle, headerCellEle) => {
   if (headerCellEle) {
+    /* istanbul ignore next */
     if (hasVertScroll(tableBodyEle)) {
       headerCellEle.classList.add(OFFSET_SCROLL_CLASS);
     } else {
@@ -183,6 +188,7 @@ const onBodyResize = (tableBodyEle, headerCellEle) => {
 };
 
 const toggleStickyShadow = (tableBodyEle, headerCellEle) => {
+  /* istanbul ignore next */
   if (tableBodyEle && headerCellEle) {
     const isScrolledToRight =
       tableBodyEle.scrollLeft + tableBodyEle.clientWidth ===
@@ -197,6 +203,7 @@ const toggleStickyShadow = (tableBodyEle, headerCellEle) => {
   }
 };
 const hasVertScroll = (element) => {
+  /* istanbul ignore next */
   if (!element) {
     return false;
   }

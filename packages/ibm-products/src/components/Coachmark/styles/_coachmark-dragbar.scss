@@ -19,45 +19,6 @@
   .#{$block-class} {
     display: flex;
 
-    // &__light {
-    //   .#{$block-class}--close-btn {
-    //     &:active {
-    //       background-color: $active-secondary;
-    //     }
-
-    //     &:focus {
-    //       border-color: transparent !important;
-    //       border-radius: 0;
-    //       box-shadow: inset 0 0 0 1px $inverse-02,
-    //         inset 0 0 0 $spacing-01 $white-0;
-    //       outline: 1px solid transparent;
-    //     }
-    //   }
-
-    //   .#{$handle-class} {
-    //     &:focus {
-    //       &::before {
-    //         border: 1px solid $white-0;
-    //         outline: 1px solid transparent;
-    //       }
-    //     }
-    //   }
-    // }
-
-    // &__dark {
-    //   .#{$block-class}--close-btn {
-    //     &:focus {
-    //       border: none;
-    //       border-radius: 0;
-    //       box-shadow: inset 0 0 0 1px $focus,
-    //         inset 0 0 0 $spacing-01 $ui-background;
-    //     }
-
-    //     &:active {
-    //       background-color: $button-tertiary-active;
-    //     }
-    //   }
-    // }
     svg {
       color: $inverse-01;
     }

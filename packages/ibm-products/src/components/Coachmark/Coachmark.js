@@ -232,7 +232,7 @@ Coachmark.propTypes = {
     'top-left',
     'top-right',
   ]),
-  // TODO: UPDATE COMMENT HERE - UPDATE MDX TO HAVE DIRECTION TO USE ONLY OVERLAY ELEMENTS>...
+
   /**
    * Coachmark should use a single CoachmarkOverlayElements component as a child.
    * @see CoachmarkOverlayElements

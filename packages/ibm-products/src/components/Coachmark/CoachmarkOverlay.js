@@ -83,7 +83,7 @@ export let CoachmarkOverlay = forwardRef(
     };
 
     let styledTune = {};
-    // TODO: check this... this feels like it should be in a hook with no dep array.
+
     if (isBeacon || isDraggable) {
       if (coachmark.targetRect) {
         styledTune = {

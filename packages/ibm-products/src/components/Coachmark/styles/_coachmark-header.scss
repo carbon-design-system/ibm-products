@@ -17,22 +17,6 @@
 
   .#{$block-class} {
     display: flex;
-
-    // &__light {
-    //   #{$block-class}--close-btn {
-    //     &:active {
-    //       background-color: $active-secondary;
-    //     }
-    //   }
-    // }
-
-    // &__dark {
-    //   #{$block-class}--close-btn {
-    //     &:active {
-    //       background-color: $button-tertiary-active;
-    //     }
-    //   }
-    // }
   }
 }
 

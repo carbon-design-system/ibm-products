@@ -56,6 +56,13 @@ const renderCoachmarkFixed = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   beforeEach(() => {
+    const prefersReducedMotion = false;
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: prefersReducedMotion,
+      })),
+    });
     window.IntersectionObserver = jest.fn().mockImplementation(() => ({
       observe: () => null,
       unobserve: () => null,

@@ -21,6 +21,7 @@ import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-dragbar`;
+const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
 const componentName = 'CoachmarkDragbar';
 
 const defaults = {
@@ -38,6 +39,7 @@ const defaults = {
 export let CoachmarkDragbar = React.forwardRef(
   (
     {
+      a11yKeyboardHandler,
       closeIconDescription = defaults.closeIconDescription,
       onClose = defaults.onClose,
       onDrag = defaults.onDrag,
@@ -91,8 +93,9 @@ export let CoachmarkDragbar = React.forwardRef(
       >
         <button
           type="button"
-          className={`${blockClass}__handle`}
+          className={`${overlayBlockClass}__handle`}
           onMouseDown={handleDragStart}
+          onKeyDown={a11yKeyboardHandler}
         >
           <Draggable16 />
         </button>
@@ -104,7 +107,7 @@ export let CoachmarkDragbar = React.forwardRef(
             renderIcon={Close16}
             iconDescription={closeIconDescription}
             hasIconOnly
-            className={`${blockClass}--close-btn`}
+            className={`${overlayBlockClass}--close-btn`}
             onClick={onClose}
           />
         )}
@@ -124,6 +127,10 @@ CoachmarkDragbar.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkDragbar.propTypes = {
+  /**
+   * Handler to manage keyboard interactions with the dragbar.
+   */
+  a11yKeyboardHandler: PropTypes.func.isRequired,
   /**
    * Tooltip text and aria label for the Close button icon.
    */

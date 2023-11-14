@@ -17,6 +17,8 @@
   $carousel-item-class: #{$pkg-prefix}--carousel__item;
 
   .#{$block-class} {
+    padding: $spacing-01 $spacing-05 0;
+
     &__content {
       padding-bottom: $spacing-05;
     }

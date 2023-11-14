@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Launch16 } from '@carbon/icons-react';
+import { Crossroads16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -105,7 +105,6 @@ export const tooltip = prepareStory(Template, {
     theme: 'dark',
     align: 'bottom',
     positionTune: { x: 0, y: 0 },
-    //portalTarget: '#CoachmarkExample',
     target: (
       <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
     ),
@@ -121,8 +120,8 @@ export const floating = prepareStory(Template, {
       <CoachmarkButton
         kind="tertiary"
         size="md"
-        renderIcon={Launch16}
-        label="Show Information"
+        label="Show information"
+        renderIcon={Crossroads16}
       >
         Click Me
       </CoachmarkButton>

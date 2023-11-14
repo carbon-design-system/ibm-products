@@ -52,6 +52,7 @@ export let CoachmarkBeacon = React.forwardRef(
         ref={ref}
         style={overlayPositionStyle}
         {...getDevtoolsProps(componentName)}
+        role="tooltip"
       >
         <button
           tabIndex={0}
@@ -60,7 +61,7 @@ export let CoachmarkBeacon = React.forwardRef(
           aria-label={label}
           className={`${blockClass}__target`}
         >
-          <svg className={`${blockClass}__center`}>
+          <svg className={`${blockClass}__center`} alt="">
             <circle r={1} cx={38} cy={38} />
           </svg>
         </button>

@@ -19,6 +19,7 @@ import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-header`;
+const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
 const componentName = 'CoachmarkHeader';
 
 const defaults = {
@@ -62,7 +63,7 @@ export let CoachmarkHeader = React.forwardRef(
             renderIcon={Close16}
             iconDescription={closeIconDescription}
             hasIconOnly
-            className={`${blockClass}--close-btn`}
+            className={`${overlayBlockClass}--close-btn`}
             onClick={onClose}
           />
         )}

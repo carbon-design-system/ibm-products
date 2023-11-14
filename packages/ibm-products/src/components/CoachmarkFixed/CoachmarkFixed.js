@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -20,7 +20,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-fixed`;
+const coachmarkClass = `${pkg.prefix}--coachmark`;
+const blockClass = `${coachmarkClass}-fixed`;
+const overlayBlockClass = `${coachmarkClass}-overlay`;
 const componentName = 'CoachmarkFixed';
 
 const defaults = {
@@ -60,10 +62,16 @@ export let CoachmarkFixed = React.forwardRef(
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
     const [fixedIsVisible, setFixedIsVisible] = useState(false);
-
-    const handleClose = () => {
-      setFixedIsVisible(false);
-    };
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
+    const handleClose = useCallback(() => {
+      if (prefersReducedMotion.matches) {
+        setIsOpen(false);
+      } else {
+        setFixedIsVisible(false);
+      }
+    }, [prefersReducedMotion.matches]);
 
     const handleTransitionEnd = (e) => {
       if (e.propertyName === 'transform' && !fixedIsVisible) {
@@ -80,9 +88,27 @@ export let CoachmarkFixed = React.forwardRef(
       setShouldResetPosition(true);
     };
 
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          handleClose();
+        }
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+
     const contextValue = {
       buttonProps: {
         'aria-expanded': isOpen,
+        tabIndex: 0,
         onClick: handleTargetClick,
         // Compensate for accidental open/close on double-click.
         // Only open on double-click.
@@ -145,6 +171,10 @@ export let CoachmarkFixed = React.forwardRef(
                 onClose={handleClose}
                 onTransitionEnd={handleTransitionEnd}
                 theme={theme}
+                className={cx(
+                  fixedIsVisible && `${overlayBlockClass}--is-visible`,
+                  overlayBlockClass
+                )}
               >
                 {children}
               </CoachmarkOverlay>,

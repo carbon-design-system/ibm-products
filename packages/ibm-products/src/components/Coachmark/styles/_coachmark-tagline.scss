@@ -35,6 +35,7 @@
     // stylelint-disable-next-line carbon/motion-duration-use
     transition: opacity 240ms carbon--motion(exit, productive) 300ms;
     transition-delay: 240ms;
+
     @media (prefers-reduced-motion) {
       transition: none;
     }
@@ -86,6 +87,11 @@
       text-align: left;
       @include carbon--type-style('body-short-01');
 
+      &:focus {
+        box-shadow: inset 0 0 0 3px $purple-70, inset 0 0 0 $spacing-02 $white-0;
+        outline: 1px solid transparent;
+      }
+
       &:hover {
         cursor: pointer !important;
       }
@@ -98,8 +104,20 @@
     &--close-btn {
       width: $spacing-07;
       height: $spacing-07;
+      border-color: transparent !important;
+      border-radius: 0;
       margin-left: auto !important;
       color: $white-0;
+      outline: 1px solid transparent;
+
+      &:active {
+        background-color: $active-secondary;
+      }
+
+      &:focus {
+        box-shadow: inset 0 0 0 1px $inverse-02,
+          inset 0 0 0 $spacing-01 $white-0 !important;
+      }
 
       svg > path {
         margin: 0;

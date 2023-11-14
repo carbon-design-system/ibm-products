@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useEffect, useState } from 'react';
 import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -34,6 +34,7 @@ export let CoachmarkStackHome = forwardRef(
     {
       className,
       description,
+      isOpen,
       media,
       navLinkLabels,
       onClickNavItem,
@@ -45,6 +46,16 @@ export let CoachmarkStackHome = forwardRef(
     },
     ref
   ) => {
+    const buttonFocusRef = useRef();
+    const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+    useEffect(() => {
+      setTimeout(() => {
+        if (isOpen && buttonFocusRef.current) {
+          buttonFocusRef.current.focus();
+        }
+      }, 100);
+    }, [isOpen]);
+
     if (!navLinkLabels) {
       return pconsole.warn(
         `${componentName} is a Novice to Pro internal component and is not intended for general use.`
@@ -65,7 +76,12 @@ export let CoachmarkStackHome = forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        <CoachmarkHeader onClose={onClose} />
+        <CoachmarkHeader
+          onClose={() => {
+            setLinkFocusIndex(0);
+            onClose();
+          }}
+        />
         <div className={`${overlayClass}__body`}>
           <div className={`${overlayClass}-element`}>
             {!media && <Idea20 className={`${blockClass}__icon-idea`} />}
@@ -92,24 +108,22 @@ export let CoachmarkStackHome = forwardRef(
 
             <ul className={`${blockClass}__nav-links`}>
               {navLinkLabels.map((label, index) => {
-                return (
-                  <li key={index}>
-                    <Button
-                      kind="ghost"
-                      size="sm"
-                      onClick={() => {
-                        onClickNavItem(index + 1);
-                      }}
-                    >
-                      {label}
-                    </Button>
-                  </li>
-                );
+                if (index === linkFocusIndex) {
+                  return renderNavLink(index, label, buttonFocusRef);
+                } else {
+                  return renderNavLink(index, label);
+                }
               })}
             </ul>
             {closeButtonLabel && (
               <div className={`${overlayClass}__footer`}>
-                <Button size="sm" onClick={onClose}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setLinkFocusIndex(0);
+                    onClose();
+                  }}
+                >
                   {closeButtonLabel}
                 </Button>
               </div>
@@ -119,6 +133,24 @@ export let CoachmarkStackHome = forwardRef(
       </div>,
       portalNode
     );
+
+    function renderNavLink(index, label, ref = null) {
+      return (
+        <li key={index}>
+          <Button
+            kind="ghost"
+            size="sm"
+            onClick={() => {
+              setLinkFocusIndex(index);
+              onClickNavItem(index + 1);
+            }}
+            ref={ref}
+          >
+            {label}
+          </Button>
+        </li>
+      );
+    }
   }
 );
 
@@ -148,6 +180,10 @@ CoachmarkStackHome.propTypes = {
    * The description of the Coachmark.
    */
   description: PropTypes.node.isRequired,
+  /**
+   * If the stack home is open.
+   */
+  isOpen: PropTypes.bool.isRequired,
   /**
    * The object describing an image in one of two shapes.
    *

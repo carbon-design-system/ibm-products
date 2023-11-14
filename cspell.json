@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -87,6 +83,8 @@
     "disttags",
     "dragbar",
     "draggable",
+    "draghandle",
+    "dragmode",
     "gridcell",
     "guidebanner",
     "homescreen",

@@ -1174,18 +1174,25 @@ describe(componentName, () => {
 
   it('Clickable Row', async () => {
     const alertMock = jest.spyOn(window, 'alert');
-    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
+    render(<ClickableRow data-testid={dataTestId} />);
+    const node = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-    );
+    fireEvent.click(node);
 
     setTimeout(() => {
       expect(alertMock).toHaveBeenCalledTimes(2);
     }, 1000);
+
+    fireEvent.keyDown(node, { key: 'Enter' });
+
+    setTimeout(() => {
+      expect(alertMock).toHaveBeenCalledTimes(2);
+    }, 1000);
+
+    fireEvent.keyDown(node, { key: '1' });
   });
 
   function completeHoverOperation(rowNumber) {

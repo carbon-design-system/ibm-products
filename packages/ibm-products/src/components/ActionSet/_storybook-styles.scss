@@ -6,7 +6,7 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
-@use '../../global/styles/display-box' as *;
+@use '@carbon/ibm-products-styles/scss/global/styles/display-box' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--action-set;
 

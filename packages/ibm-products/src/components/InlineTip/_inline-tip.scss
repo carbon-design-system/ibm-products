@@ -1,0 +1,229 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * The InlineTip specifically is theme-agnostic, and so we have to 
+ * use color tokens to keep the colors static instead of theme tokens 
+ * that will change depending on the selected theme.
+ * 
+ * We are triggering a *large* amount of linting errors.
+ * So, we're using the following "disable" rules for the entire file 
+ * instead of many individual rules.
+ */
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--inline-tip;
+// Images and animation are the same fixed size
+$media-height: to-rem(118px);
+$media-width: calc(#{$media-height} * 2);
+$purple: #7f3ae7;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+}
+// layout only: wide
+.#{$block-class}__wide {
+  padding: $spacing-05 $spacing-10 $spacing-05 $spacing-09;
+}
+// layout: wide, with image
+.#{$block-class}__wide.#{$block-class}__has-media {
+  padding-right: $spacing-09;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media {
+  padding-left: $spacing-10;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media img {
+  display: block;
+  height: $media-height;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media svg {
+  // Overrides the inline CSS of "100%".
+  width: $media-width !important;
+  height: $media-height !important;
+}
+
+// layout only: narrow
+.#{$block-class}__narrow {
+  flex-direction: column-reverse;
+  padding: to-rem(52px) $spacing-07 $spacing-05 $spacing-05;
+}
+// layout: narrow, with image
+.#{$block-class}__narrow.#{$block-class}__has-media {
+  padding-top: $spacing-07;
+  padding-right: $spacing-05;
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__media {
+  padding-bottom: $spacing-05;
+
+  img {
+    width: 100%;
+  }
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__content {
+  padding-right: $spacing-05;
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__footer {
+  justify-content: space-between;
+}
+.#{$block-class}__narrow.#{$block-class}__has-media
+  .#{$block-class}__footer
+  .#{$block-class}__close-btn {
+  margin-right: calc(-1 * $spacing-05);
+}
+
+// All links in use by this component and provided by the user must reflect the 'dark' theme.
+.#{$block-class} a {
+  color: $blue-30;
+
+  &:visited,
+  &:hover,
+  &:visited:hover {
+    color: $blue-30;
+  }
+}
+
+.#{$block-class}__title {
+  @include type-style('productive-heading-01');
+
+  color: $white-0;
+}
+
+.#{$block-class}__body {
+  @include type-style('body-short-01');
+
+  color: $gray-10;
+}
+.#{$block-class}__body p {
+  @include type-style('body-short-01');
+
+  margin-bottom: $spacing-03;
+  font-size: inherit;
+  line-height: inherit;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.#{$block-class}__body .#{$block-class}__secondary-btn {
+  margin-top: $spacing-03;
+}
+.#{$block-class}__body
+  .#{$block-class}__secondary-btn
+  .#{$block-class}__button {
+  margin-left: calc(-1 * $spacing-05);
+  color: $blue-30;
+
+  &:active,
+  &:hover {
+    background-color: $purple;
+    color: $gray-10;
+  }
+}
+
+.#{$block-class}__footer {
+  display: flex;
+  padding-top: $spacing-05;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// When 'collapsed', a text-only preview with ellipsis is shown.
+.#{$block-class}__preview-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.#{$block-class}__icon-idea {
+  position: absolute;
+  width: to-rem(20px);
+  color: $white-0;
+  inset: $spacing-05 0 0 $spacing-05;
+}
+
+.#{$block-class}__close-icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.#{$block-class} .#{$block-class}__close-icon {
+  padding: to-rem(6px) 0 0 0;
+  block-size: $spacing-07;
+  color: $white-0;
+  inline-size: $spacing-07;
+  min-block-size: $spacing-07;
+
+  &:active,
+  &:hover {
+    background-color: $purple;
+    color: $text-primary;
+  }
+
+  path {
+    margin: 0;
+    fill: $white-0;
+  }
+}
+
+.#{$block-class} .#{$block-class}__toggle-btn {
+  border: none;
+  margin: 0 $spacing-05 0 calc(-1 * $spacing-05);
+  color: $blue-30;
+
+  &:hover {
+    background-color: $purple-70-hover;
+    color: $gray-10;
+  }
+}
+
+.#{$block-class} .#{$block-class}__close-btn {
+  border: to-rem(1px) solid $white-0;
+  color: $white-0;
+
+  &:active,
+  &:hover {
+    background-color: $gray-10;
+    color: $gray-100;
+  }
+
+  // The "render icon" CSS seems to be missing in the latest Carbon button.
+  // Specifically, getting the icon to move to right-hand side of the content area.
+  // Repeating here.
+  svg {
+    position: absolute;
+    right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+}

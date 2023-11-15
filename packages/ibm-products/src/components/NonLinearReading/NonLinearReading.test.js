@@ -33,15 +33,6 @@ const renderComponent = ({ ...rest } = {}) => {
 };
 
 describe(componentName, () => {
-  // This component does not follow HTML standards in terms of
-  // functionality, and there is no pre-defined "role" that applies
-  // to this component. "Role" has been removed.
-
-  // it('renders a component NonLinearReading', () => {
-  //   renderComponent();
-  //   expect(screen.getByRole('main')).toHaveClass(blockClass);
-  // });
-
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);

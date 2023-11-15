@@ -112,6 +112,20 @@ passing in a title or breadcrumbs to the \`<CreateFullPage />\` component  as sh
           },
         },
         {
+          story: stories.createFullPageWithStepInErrorState,
+          description: `Passing an invalid prop to the step will show up an error icon on the progress indicator step indicating an error state in that step`,
+          source: {
+            code: `<CreateFullPage {...createFullPageProps}>
+  <CreateFullPageStep
+    title="Topic name"
+    invalid={true}
+  >
+    Step content
+  </CreateFullPageStep>
+</CreateFullPage>`,
+          },
+        },
+        {
           title: 'Using custom components',
           description: `It is possible to use custom components that return \`CreateFullPageStep\`s in
 order to help reduce the amount of logic in the component that contains the main

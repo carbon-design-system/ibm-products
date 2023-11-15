@@ -42,6 +42,7 @@ export let CreateTearsheetStep = forwardRef(
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
       introStep,
+      invalid,
       onMount,
       onNext,
       onPrevious,
@@ -68,6 +69,7 @@ export let CreateTearsheetStep = forwardRef(
       shouldIncludeStep,
       secondaryLabel,
       title,
+      invalid,
     });
 
     // This useEffect reports back the onMount value so that they can be used
@@ -208,6 +210,11 @@ CreateTearsheetStep.propTypes = {
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
    */
   introStep: PropTypes.bool,
+
+  /**
+   * This optional prop will indicate an error icon on the progress indicator step item
+   */
+  invalid: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.

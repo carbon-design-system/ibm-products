@@ -484,6 +484,51 @@ const TemplateWithSections = ({ ...args }) => {
   );
 };
 
+const TemplateWithError = ({ ...args }) => {
+  const [textInput, setTextInput] = useState('');
+  const [isInvalid, setIsInvalid] = useState(true);
+  const [isFirstStepInvalid, setIsFirstStepInvalid] = useState(true);
+
+  return (
+    <CreateFullPage {...args}>
+      <CreateFullPageStep
+        title="Partition"
+        subtitle="One or more partitions make up a topic. A partition is an ordered list
+        of messages."
+        invalid={isFirstStepInvalid}
+        disableSubmit={isFirstStepInvalid}
+      >
+        <Grid>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            <TextInput
+              id="test-6"
+              invalidText="A valid value is required"
+              labelText="Topic name"
+              placeholder="Enter topic name"
+              onChange={(e) => {
+                setTextInput(e.target.value);
+                setIsInvalid(e.target.value ? false : true);
+                setIsFirstStepInvalid(e.target.value ? false : true);
+              }}
+              onBlur={() => {
+                textInput.length === 0 && setIsInvalid(true);
+              }}
+              invalid={isInvalid}
+            />
+          </Column>
+        </Grid>
+      </CreateFullPageStep>
+      <CreateFullPageStep title="Core Configuration">
+        <Grid>
+          <Column xlg={5} lg={5} md={4} sm={4}>
+            Test step
+          </Column>
+        </Grid>
+      </CreateFullPageStep>
+    </CreateFullPage>
+  );
+};
+
 export const createFullPage = prepareStory(Template, {
   args: {
     ...defaultFullPageProps,
@@ -511,3 +556,12 @@ export const createFullPageWithHeader = prepareStory(Template, {
     maxVisibleBreadcrumbs: 3,
   },
 });
+
+export const createFullPageWithStepInErrorState = prepareStory(
+  TemplateWithError,
+  {
+    args: {
+      ...defaultFullPageProps,
+    },
+  }
+);

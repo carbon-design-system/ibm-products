@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.69.3"
+    "sass": "^1.69.3"PKG_DEPS
   },
   "devDependencies": {
     "@types/react": "^18.2.28",
@@ -32,7 +32,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.11"
+    "vite": "^4.4.11"PKG_DEV_DEPS
   },
   "browserslist": {
     "production": [

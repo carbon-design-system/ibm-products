@@ -79,6 +79,7 @@ export default {
           <Dropdown
             id="tss-had"
             label="Choose an option"
+            titleText="Choose an option"
             items={['option 1', 'option 2', 'option 3', 'option 4']}
           />
         ),

@@ -74,6 +74,7 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    InlineTip: false,
   },
 
   // feature level flags

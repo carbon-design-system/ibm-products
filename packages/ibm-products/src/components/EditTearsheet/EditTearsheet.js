@@ -50,7 +50,7 @@ export let EditTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
-      onHandleModalClick,
+      onRequestSubmit,
       onFormChange,
       sideNavAriaLabel = defaults.sideNavAriaLabel,
 
@@ -103,14 +103,16 @@ export let EditTearsheet = forwardRef(
         {...getDevtoolsProps(componentName)}
         actions={[
           {
+            key: 'edit-action-button-submit',
             label: submitButtonText,
-            onClick: onHandleModalClick,
+            onClick: onRequestSubmit,
             kind: 'primary',
           },
           {
+            key: 'edit-action-button-cancel',
             label: cancelButtonText,
-            onClick: onHandleModalClick,
-            kind: 'secondary',
+            onClick: onClose,
+            kind: 'ghost',
           },
         ]}
         className={cx(blockClass, className)}
@@ -205,9 +207,9 @@ EditTearsheet.propTypes = {
   onFormChange: PropTypes.func,
 
   /**
-   * Specifies whether the tearsheet is currently open.
+   * Specify a handler for submitting the tearsheet.
    */
-  onHandleModalClick: PropTypes.func,
+  onRequestSubmit: PropTypes.func.isRequired,
 
   /**
    * Specifies whether the tearsheet is currently open.

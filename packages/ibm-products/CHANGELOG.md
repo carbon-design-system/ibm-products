@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.1...@carbon/ibm-products@2.15.2) (2023-11-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** destructure key to fix eslint unique key error ([#3772](https://github.com/carbon-design-system/ibm-products/issues/3772)) ([ce54e35](https://github.com/carbon-design-system/ibm-products/commit/ce54e3572ec2f2e0c27d462a89c9c42d6a5c2c5b))
+* **Datagrid:** match designs, frozen/non frozen action button behavior ([#3778](https://github.com/carbon-design-system/ibm-products/issues/3778)) ([ad6ce58](https://github.com/carbon-design-system/ibm-products/commit/ad6ce584f4cc897347f2f4231f839c0e68f98d66))
+* **Datagrid:** properly render component via jsx ([#3787](https://github.com/carbon-design-system/ibm-products/issues/3787)) ([ed0f7bf](https://github.com/carbon-design-system/ibm-products/commit/ed0f7bfabaf7d7771c5f9b6f0d9ba2ec183374be))
+
+
+
+
+
+## [2.15.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.0...@carbon/ibm-products@2.15.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* datagrid batch actions release review fixes ([#3771](https://github.com/carbon-design-system/ibm-products/issues/3771)) ([bf36dc9](https://github.com/carbon-design-system/ibm-products/commit/bf36dc9079b65746be70ab5896dc67baa4aad4d9))
+* **Datagrid:** stop propagation of row expander click event ([#3769](https://github.com/carbon-design-system/ibm-products/issues/3769)) ([2ac6864](https://github.com/carbon-design-system/ibm-products/commit/2ac6864bce9dad258264e5b570db2fe2825eae56))
+* replace prop from 'ariaLabel' to 'aria-label' ([#3765](https://github.com/carbon-design-system/ibm-products/issues/3765)) ([af02b7d](https://github.com/carbon-design-system/ibm-products/commit/af02b7d6976eadb6ed36e2aa26028410734d7352))
+* Storybook error "Failed prop type: req'd titleText is missing from Dropdown" ([#3764](https://github.com/carbon-design-system/ibm-products/issues/3764)) ([2b9414e](https://github.com/carbon-design-system/ibm-products/commit/2b9414e894c16670b609be476df6d9dffd2bbc41))
+
+
+
+
+
+# [2.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.14.0...@carbon/ibm-products@2.15.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* change overflow menu's tooltip alignment to 'left' ([#3730](https://github.com/carbon-design-system/ibm-products/issues/3730)) ([4e3a4e8](https://github.com/carbon-design-system/ibm-products/commit/4e3a4e8aaf827db0efb02749392cec701fa1e770))
+* **Checklist:** update colors and story structures ([#3739](https://github.com/carbon-design-system/ibm-products/issues/3739)) ([c154555](https://github.com/carbon-design-system/ibm-products/commit/c154555e8987216ecdd3da91244b2e6c038db191))
+* **CreateTearsheet & CreateFullPage:** Influencer step error indicator extension ([#3717](https://github.com/carbon-design-system/ibm-products/issues/3717)) ([04654b2](https://github.com/carbon-design-system/ibm-products/commit/04654b26852e9db8495a81e1c9691327a14a4a16))
+* datagrid header review fixes ([#3743](https://github.com/carbon-design-system/ibm-products/issues/3743)) ([d1b68e3](https://github.com/carbon-design-system/ibm-products/commit/d1b68e31f01176d1ed0e2f5c20d8990f5a3cd672))
+* **Datagrid:** address resize end issues ([#3745](https://github.com/carbon-design-system/ibm-products/issues/3745)) ([ae15a37](https://github.com/carbon-design-system/ibm-products/commit/ae15a373c6637fbe2052fb2d35ab7fb5903640cc))
+* **Datagrid:** adhere to min width if provided ([#3707](https://github.com/carbon-design-system/ibm-products/issues/3707)) ([49458f8](https://github.com/carbon-design-system/ibm-products/commit/49458f8a8310f47306e19bf6a40352e73738f195))
+* **Datagrid:** correct number of items displayed when viewing all checkbox filters ([#3726](https://github.com/carbon-design-system/ibm-products/issues/3726)) ([21a99cf](https://github.com/carbon-design-system/ibm-products/commit/21a99cfc79ef83a00c849bf5924d63d7a500c3cf))
+* **EditTearsheet:** Correctly assign action handlers to associated buttons ([#3751](https://github.com/carbon-design-system/ibm-products/issues/3751)) ([2a0024d](https://github.com/carbon-design-system/ibm-products/commit/2a0024d90d0e0edfd7126a49d95be507d0db4e4b))
+* for gallery examples ([#3729](https://github.com/carbon-design-system/ibm-products/issues/3729)) ([72c600b](https://github.com/carbon-design-system/ibm-products/commit/72c600bc32cf73636e5085b6c31f1ea36c8a2e50))
+* update to Carbon 11 compatible versions to latest ([#3734](https://github.com/carbon-design-system/ibm-products/issues/3734)) ([f3a2c0e](https://github.com/carbon-design-system/ibm-products/commit/f3a2c0ee60ff49e56e62589f73a7fdfd2b8e2d2e))
+
+
+### Features
+
+* add prefix hook ([#3727](https://github.com/carbon-design-system/ibm-products/issues/3727)) ([36b51a9](https://github.com/carbon-design-system/ibm-products/commit/36b51a91b4741c49a2b7361c6d9dc6404f54f2d7))
+
+
+
+
+
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.13.0...@carbon/ibm-products@2.14.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** semantically hide spacer col ([#3722](https://github.com/carbon-design-system/ibm-products/issues/3722)) ([28376e9](https://github.com/carbon-design-system/ibm-products/commit/28376e97aba4b15dfea5e111872ac4d8b1389ed3))
+* **Datagrid:** top align cell content for extra large row height ([#3709](https://github.com/carbon-design-system/ibm-products/issues/3709)) ([a9ce489](https://github.com/carbon-design-system/ibm-products/commit/a9ce4899180394cdd309d8a80ddda06977a1efac))
+* **TagSet:** remove only from tag set tests ([#3719](https://github.com/carbon-design-system/ibm-products/issues/3719)) ([d4edc78](https://github.com/carbon-design-system/ibm-products/commit/d4edc7823babea3d71a21882121df3b35144b311))
+
+
+### Features
+
+* **TagSet:** allow for tag rendering in overflow ([#3646](https://github.com/carbon-design-system/ibm-products/issues/3646)) ([cc793a3](https://github.com/carbon-design-system/ibm-products/commit/cc793a31cec978959f205f074f768c4ccbef31aa))
+
+
+
+
+
 # [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.1...@carbon/ibm-products@2.13.0) (2023-10-27)
 
 

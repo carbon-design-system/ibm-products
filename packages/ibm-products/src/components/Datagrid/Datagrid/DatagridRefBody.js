@@ -27,7 +27,8 @@ const DatagridRefBody = (datagridState) => {
     >
       {rows.map((row) => {
         prepareRow(row);
-        return row.RowRenderer({ ...datagridState, row });
+        const { key } = row.getRowProps();
+        return row.RowRenderer({ ...datagridState, row, key });
       })}
     </tbody>
   );

@@ -108,6 +108,24 @@ const CreateFlow = () => {
 };`,
         },
         {
+          story: stories.withErrorState,
+          title: 'Create tearsheet with step in error state',
+          description:
+            'Passing an invalid prop to the step will show up an error icon on the progress indicator step indicating an error state in that step',
+          source: {
+            code: `<CreateTearsheet {...createTearsheetProps}>
+      <CreateTearsheetStep
+      {...stepProps}
+      invalid={true}
+    >
+      Step in error state
+    </CreateTearsheetStep>
+  </CreateTearsheet>
+  );
+};`,
+          },
+        },
+        {
           title: 'Class names',
           description: `Additionally, to get the preferred styling when including your own children as
 sections, you can utilize the below included class names.

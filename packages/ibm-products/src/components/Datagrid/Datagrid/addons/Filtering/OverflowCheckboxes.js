@@ -19,7 +19,7 @@ const OverflowCheckboxes = ({
   const firstFiveItems = filtersState[column].value.slice(0, 5);
   const restOfTheItems = filtersState[column].value.slice(
     5,
-    filtersState[column].value.length - 1
+    filtersState[column].value.length
   );
 
   const renderCheckbox = (option) => (

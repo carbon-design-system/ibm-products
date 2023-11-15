@@ -63,6 +63,7 @@ export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
                   label={step.title}
                   key={stepIndex}
                   secondaryLabel={step.secondaryLabel}
+                  invalid={step.invalid}
                 />
               );
             })}

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.1...@carbon/ibm-products@2.15.2) (2023-11-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** destructure key to fix eslint unique key error ([#3772](https://github.com/carbon-design-system/ibm-products/issues/3772)) ([ce54e35](https://github.com/carbon-design-system/ibm-products/commit/ce54e3572ec2f2e0c27d462a89c9c42d6a5c2c5b))
+* **Datagrid:** match designs, frozen/non frozen action button behavior ([#3778](https://github.com/carbon-design-system/ibm-products/issues/3778)) ([ad6ce58](https://github.com/carbon-design-system/ibm-products/commit/ad6ce584f4cc897347f2f4231f839c0e68f98d66))
+* **Datagrid:** properly render component via jsx ([#3787](https://github.com/carbon-design-system/ibm-products/issues/3787)) ([ed0f7bf](https://github.com/carbon-design-system/ibm-products/commit/ed0f7bfabaf7d7771c5f9b6f0d9ba2ec183374be))
+
+
+
+
+
 ## [2.15.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.0...@carbon/ibm-products@2.15.1) (2023-11-07)
 
 

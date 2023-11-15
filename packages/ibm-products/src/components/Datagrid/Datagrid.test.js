@@ -37,6 +37,7 @@ import {
   useColumnOrder,
   useColumnRightAlign,
   useColumnCenterAlign,
+  useEditableCell,
 } from '.';
 
 import {
@@ -57,6 +58,11 @@ const blockClass = `${pkg.prefix}--datagrid`;
 import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
+import {
+  FilteringUsage,
+  filterProps,
+} from './Extensions/Filtering/Panel.stories';
 const { click, hover, unhover } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -307,11 +313,13 @@ const TenThousandEntries = ({ ...rest } = {}) => {
     {
       columns,
       data,
+      rowSize: 'lg',
+      ...rest,
     },
     useInfiniteScroll
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const IsHoverOnRow = () => {
@@ -626,17 +634,31 @@ const SelectableRow = ({ ...rest } = {}) => {
 };
 
 const SortableColumns = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        disableSortBy: true,
+      },
+    ],
+    []
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
+      ...rest,
     },
     useSortableColumns
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const newPersonWithTwoLines = () => {
@@ -688,19 +710,20 @@ const TopAlignment = forwardRef(({ ...rest }, ref) => {
   return <Datagrid ref={ref} datagridState={{ ...datagridState }} {...rest} />;
 });
 
-const ClickableRow = ({ ...rest } = {}) => {
+const ClickableRow = ({ onRowClickFn, ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      onRowClick: (row) => alert(`Clicked ${row.id}`),
+      onRowClick: onRowClickFn,
+      ...rest,
     },
     useOnRowClick
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const InfiniteScroll = () => {
@@ -928,6 +951,31 @@ describe(componentName, () => {
     ).toEqual(10);
   });
 
+  it('renders a basic table and resizes column', async () => {
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { keyboard, tab } = user;
+    render(<BasicUsage data-testid={dataTestId} />);
+    await click(screen.getByTestId(dataTestId));
+    await tab();
+    // Input range resizer now has focus
+    await keyboard('[ArrowRight]');
+    const firstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const firstColumnWidth = firstColumnHeader.style.width;
+    expect(parseInt(firstColumnWidth)).toEqual(152);
+    await keyboard('[ArrowRight]');
+    const resizedFirstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const resizedFirstColumnWidth = resizedFirstColumnHeader.style.width;
+    expect(parseInt(resizedFirstColumnWidth)).toEqual(154);
+    await keyboard('[ArrowLeft]');
+    const revertResizedFirstColumnHeader =
+      screen.getAllByRole('columnheader')[0];
+    const revertResizedFirstColumnWidth =
+      revertResizedFirstColumnHeader.style.width;
+    expect(parseInt(revertResizedFirstColumnWidth)).toEqual(152);
+  });
+
   it('renders a Batch Actions Table', async () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
@@ -1149,7 +1197,9 @@ describe(componentName, () => {
   });
 
   it('renders Ten Thousand table entries', async () => {
-    render(<TenThousandEntries data-testid={dataTestId} />);
+    const { rerender } = render(
+      <TenThousandEntries data-testid={dataTestId} />
+    );
 
     const tableBody =
       screen.getAllByRole('rowgroup')[1].firstElementChild.firstElementChild;
@@ -1159,6 +1209,21 @@ describe(componentName, () => {
     expect(
       parseInt(tableBodyHeight) / 48 // 48 is default row height
     ).toEqual(10000);
+
+    rerender(
+      <TenThousandEntries
+        virtualHeight={400}
+        data-testid={dataTestId}
+        loadMoreThreshold={300}
+      />
+    );
+    const rowGroups = screen.getAllByRole('rowgroup');
+    const bodyRowGroup = rowGroups[1];
+    const virtualScrollingElement = bodyRowGroup.firstElementChild;
+    fireEvent.scroll(virtualScrollingElement, { target: { scrollY: 5000 } });
+    expect(virtualScrollingElement.scrollLeft).toEqual(
+      bodyRowGroup.previousElementSibling.scrollLeft
+    );
   });
 
   it('With Pagination', async () => {
@@ -1173,19 +1238,46 @@ describe(componentName, () => {
   });
 
   it('Clickable Row', async () => {
-    const alertMock = jest.spyOn(window, 'alert');
-    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
+    const onRowClickFn = jest.fn();
+    const { rerender } = render(
+      <ClickableRow onRowClickFn={onRowClickFn} data-testid={dataTestId} />
+    );
+    const rows = screen.getAllByRole('row');
+    const bodyRows = rows.filter(
+      (r) =>
+        !r.classList.contains('c4p--datagrid__head') &&
+        !r.classList.contains('c4p--datagrid__expanded-row')
     );
 
-    setTimeout(() => {
-      expect(alertMock).toHaveBeenCalledTimes(2);
-    }, 1000);
+    const firstBodyRow = bodyRows[0];
+
+    fireEvent.click(firstBodyRow);
+    expect(onRowClickFn).toHaveBeenCalledTimes(1);
+
+    rerender(
+      <ClickableRow
+        isFetching
+        onRowClickFn={onRowClickFn}
+        data-testid={dataTestId}
+      />
+    );
+    const newRows = screen.getAllByRole('row');
+    const newBodyRows = newRows.filter(
+      (r) =>
+        !r.classList.contains('c4p--datagrid__head') &&
+        !r.classList.contains('c4p--datagrid__expanded-row')
+    );
+    const newBodyRow = newBodyRows[0];
+    newBodyRow.focus();
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { keyboard } = user;
+    await keyboard('{Enter}');
+    expect(onRowClickFn).toHaveBeenCalledTimes(2);
+    newBodyRow.focus();
+    await keyboard('{Shift}');
+    expect(onRowClickFn).toHaveBeenCalledTimes(2);
   });
 
   function completeHoverOperation(rowNumber) {
@@ -1379,18 +1471,13 @@ describe(componentName, () => {
     const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
     fireEvent.click(rowExpander);
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')
-    ).toBeDefined();
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0].textContent
-    ).toEqual(`Content for ${rowNumber}`);
+    expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
+    expect(row.nextElementSibling.textContent).toEqual(
+      `Content for ${rowNumber}`
+    );
+
+    fireEvent.mouseOver(row.nextElementSibling);
+    fireEvent.mouseLeave(row.nextElementSibling);
 
     const rowExpanderCollapse = row.querySelector(
       `button[aria-label="Collapse row"]`
@@ -1398,7 +1485,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it('Expanded Row', async () => {
+  it('Expanded Row', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
@@ -1434,34 +1521,29 @@ describe(componentName, () => {
   });
 
   it('Nested Rows', async () => {
-    render(<NestedRows data-testid={dataTestId}></NestedRows>);
+    render(<NestedRows data-testid={dataTestId} />);
 
-    const row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    const firstRow = row
-      .getElementsByTagName('td')[0]
-      .getElementsByTagName('button')[0];
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const firstBodyRow = bodyRows[0];
+    const firstRowExpander = within(firstBodyRow).getByLabelText('Expand row');
+    fireEvent.click(firstRowExpander);
+    expect(firstBodyRow).toHaveClass(`${blockClass}__carbon-row-expanded`);
 
-    fireEvent.click(firstRow);
+    const newAllRows = screen.getAllByRole('row');
+    const newBodyRows = newAllRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const nestedRow = newBodyRows[1];
 
-    expect(row.classList[0]).toEqual('c4p--datagrid__carbon-row-expanded');
-
-    const nestedRow = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[1];
-
-    if (nestedRow.className === 'c4p--datagrid__carbon-nested-row') {
-      fireEvent.click(
-        nestedRow
-          .getElementsByTagName('td')[0]
-          .getElementsByTagName('button')[0]
-      );
+    if (nestedRow.className === `${blockClass}__carbon-nested-row`) {
+      const nestedRowExpander = within(nestedRow).getByLabelText('Expand row');
+      fireEvent.click(nestedRowExpander);
     }
 
-    expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
+    expect(nestedRow).toHaveClass(`${blockClass}__carbon-nested-row`);
   });
 
   it('Nested Table', async () => {
@@ -1746,9 +1828,9 @@ describe(componentName, () => {
   const centerAlignedColumnsData = [
     ...defaultHeader.slice(0, 3),
     {
-      Header: 'Age',
+      Header: () => <span>Age</span>,
       accessor: 'age',
-      centerAlignedColumn: true,
+      rightAlignedColumn: true,
       disableSortBy: true,
     },
     {
@@ -1766,7 +1848,8 @@ describe(componentName, () => {
         data,
       },
       useColumnRightAlign,
-      useColumnCenterAlign
+      useColumnCenterAlign,
+      useSortableColumns
     );
 
     return <Datagrid datagridState={datagridState} />;
@@ -1821,9 +1904,7 @@ describe(componentName, () => {
     );
     const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
     const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
-    expect(bodyAgeCell).toHaveClass(
-      `${blockClass}__center-align-cell-renderer`
-    );
+    expect(bodyAgeCell).toHaveClass(`${blockClass}__right-align-cell-renderer`);
     expect(bodyAgeCell).toHaveClass(`sortDisabled`);
     expect(bodyVisitsCell).toHaveClass(
       `${blockClass}__center-align-cell-renderer`
@@ -1930,26 +2011,33 @@ describe(componentName, () => {
     );
   });
 
-  it('Sortable Columns', async () => {
-    render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
+  it('should render sortable columns and toggle between sortable states for all column headers', async () => {
+    render(<SortableColumns data-testid={dataTestId} />);
 
-    const headerRow = screen
-      .getByRole('table')
-      .getElementsByTagName('thead')[0]
-      .getElementsByTagName('tr')[0];
+    const rows = screen.getAllByRole('row');
+    const headerRow = rows[0];
+    const columnHeaders = within(headerRow).getAllByRole('columnheader');
 
-    for (var i = 0; i < headerRow.getElementsByTagName('th').length - 1; i++) {
-      fireEvent.click(
-        headerRow
-          .getElementsByTagName('th')
-          .item(i)
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('button')[0]
+    Array.from(columnHeaders).map(async (colHeader, index) => {
+      // The last column definition opts out of sorting by specifying `disableSortBy`
+      // so we should not include testing for the last column header
+      if (index === defaultHeader.length) {
+        return;
+      }
+      const sortableColumnHeaderButton = within(colHeader).getByRole('button');
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'ascending'
       );
-      expect(headerRow.getElementsByTagName('th')[i].classList[2]).toEqual(
-        'c4p--datagrid__isSorted'
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'descending'
       );
-    }
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'none'
+      );
+    });
   });
 
   it('Customizing Columns', async () => {
@@ -2255,6 +2343,69 @@ describe(componentName, () => {
     );
     expect(within(firstBodyRow).getAllByRole('button').length).toEqual(1); // Previously was 2 but we've hidden the other in this test
   });
+
+  const EditableCellUsage = ({ ...args }) => {
+    const [data, setData] = useState(makeData(3));
+    const columns = React.useMemo(() => getInlineEditColumns(), []);
+    pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+    pkg.feature['Datagrid.useInlineEdit'] = true;
+    pkg._silenceWarnings(true);
+
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        onDataUpdate: setData,
+        ...args.defaultGridProps,
+      },
+      useEditableCell
+    );
+
+    // Warnings are ordinarily silenced in storybook, add this to test.
+    pkg._silenceWarnings(false);
+    pkg.feature['Datagrid.useEditableCell'] = true;
+    pkg._silenceWarnings(true);
+
+    return <Datagrid datagridState={datagridState} />;
+  };
+  it('should test the basic interactions of the editable cell datagrid', async () => {
+    const { container } = render(<EditableCellUsage />);
+    const tableElement = screen.getByRole('grid');
+    const rowButtons = screen.getAllByRole('button');
+    const firstEditableCell = rowButtons[0];
+
+    await click(firstEditableCell);
+    expect(firstEditableCell).toHaveClass(
+      `${blockClass}__inline-edit-button--active`
+    );
+    await click(container);
+    expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
+  });
+
+  it('should test basic interactions of filter panel', async () => {
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          gridTitle: 'Data table title',
+          gridDescription: 'Additional information if needed',
+          useDenseHeader: false,
+          emptyStateTitle: 'No filters match',
+          emptyStateDescription:
+            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+          filterProps,
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const panelContainer = toolbar.nextElementSibling;
+    const toolbarButtons = within(toolbar).getAllByRole('button');
+    const filterToggleButton = toolbarButtons[0];
+    // Open filter panel
+    await click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+  });
 });
 
 const duplicateOnClickFn = jest.fn();
@@ -2312,6 +2463,7 @@ const TestBatch = () => {
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
+      DatagridPagination,
     },
     useSelectRows,
     useSelectAllWithToggle,
@@ -2440,6 +2592,35 @@ describe('batch action testing', () => {
       await click(cancelButton);
       await click(firstCheckbox);
       await click(selectAllButton);
+    });
+
+    it('renders batch action with select all and checks indeterminate behavior', () => {
+      render(<TestBatch />);
+      const bodyElement = screen.getAllByRole('rowgroup')[1];
+      const allRows = screen.getAllByRole('row');
+      // const selectAllCheckbox = within(allRows[0]).getByLabelText('Toggle All Current Page Rows Selected');
+      const selectAllCheckbox = within(allRows[0]).getByLabelText('Select all');
+      click(selectAllCheckbox);
+      const carbonTableToolbar = screen.getByLabelText('data table toolbar');
+      expect(carbonTableToolbar).toBeInTheDocument();
+      const bodyRows = allRows.filter(
+        (r) =>
+          !r.classList.contains('c4p--datagrid__head') &&
+          !r.classList.contains('c4p--datagrid__expanded-row')
+      );
+      const firstBodyRow = bodyRows[0];
+      const firstRowCheckbox = within(firstBodyRow).getByRole('checkbox');
+      click(firstRowCheckbox);
+      // Should remove all checked checkboxes in the body
+      click(selectAllCheckbox);
+      let totalChecked = 0;
+      const allBodyCheckboxes = within(bodyElement).getAllByRole('checkbox');
+      allBodyCheckboxes.forEach((c) => {
+        if (c.checked) {
+          totalChecked = totalChecked + 1;
+        }
+      });
+      expect(totalChecked).toEqual(0);
     });
   });
 });

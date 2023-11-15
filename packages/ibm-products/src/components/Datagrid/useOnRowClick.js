@@ -47,7 +47,7 @@ const useOnRowClick = (hooks) => {
       const onKeyDown = (event) => {
         const { key } = event;
         if (key === 'Enter') {
-          onClick();
+          onClick(event);
         }
       };
 

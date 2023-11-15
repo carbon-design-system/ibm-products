@@ -4211,6 +4211,15 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-shadow: rgba(0, 0, 0, 0.8);
   --cds-skeleton-background: #292929;
   --cds-skeleton-element: #393939;
+  --cds-slug-background: #c6c6c6;
+  --cds-slug-background-hover: #e0e0e0;
+  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-hollow-hover: #b5b5b5;
   --cds-support-caution-major: #ff832b;
   --cds-support-caution-minor: #f1c21b;
   --cds-support-caution-undefined: #a56eff;
@@ -6397,10 +6406,15 @@ button.c4p--add-select__global-filter-toggle--open {
   color: var(--cds-text-inverse, #ffffff);
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-list {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.5rem;
 }
-.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item,
-.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item .cds--tag {
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
+  background-color: var(--cds-background-inverse-hover, #474747);
+}
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default,
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default .cds--tag {
   font-size: var(--cds-body-compact-01-font-size, 0.875rem);
   font-weight: var(--cds-body-compact-01-font-weight, 400);
   line-height: var(--cds-body-compact-01-line-height, 1.28572);
@@ -8021,6 +8035,15 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-shadow: rgba(0, 0, 0, 0.8);
   --cds-skeleton-background: #333333;
   --cds-skeleton-element: #525252;
+  --cds-slug-background: #c6c6c6;
+  --cds-slug-background-hover: #e0e0e0;
+  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-hollow-hover: #b5b5b5;
   --cds-support-caution-major: #ff832b;
   --cds-support-caution-minor: #f1c21b;
   --cds-support-caution-undefined: #a56eff;
@@ -8414,6 +8437,15 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-shadow: rgba(0, 0, 0, 0.8);
   --cds-skeleton-background: #292929;
   --cds-skeleton-element: #393939;
+  --cds-slug-background: #c6c6c6;
+  --cds-slug-background-hover: #e0e0e0;
+  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  --cds-slug-hollow-hover: #b5b5b5;
   --cds-support-caution-major: #ff832b;
   --cds-support-caution-minor: #f1c21b;
   --cds-support-caution-undefined: #a56eff;

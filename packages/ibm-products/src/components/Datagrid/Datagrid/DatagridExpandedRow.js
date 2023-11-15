@@ -14,9 +14,10 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const DatagridExpandedRow =
   (ExpandedRowContentComponent) => (datagridState) => {
     const { row } = datagridState;
-    const { expandedContentHeight } = row || {};
+    const { expandedContentHeight } = row;
 
     const toggleParentHoverClass = (event, eventType) => {
+      /* istanbul ignore else */
       if (event?.target?.parentNode?.previousElementSibling) {
         const parentNode = event.target.parentNode.previousElementSibling;
         if (eventType === 'enter') {
@@ -36,10 +37,10 @@ const DatagridExpandedRow =
         <div
           className={`${blockClass}__expanded-row-content`}
           style={{
-            height: expandedContentHeight ? expandedContentHeight : null,
+            height: expandedContentHeight && expandedContentHeight,
           }}
         >
-          {ExpandedRowContentComponent(datagridState)}
+          <ExpandedRowContentComponent {...datagridState} />
         </div>
       </tr>
     );

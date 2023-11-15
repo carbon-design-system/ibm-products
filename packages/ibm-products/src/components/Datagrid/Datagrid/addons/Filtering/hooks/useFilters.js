@@ -70,6 +70,7 @@ const useFilters = ({
   reactTableFiltersState,
   onCancel = () => {},
   panelOpen,
+  autoHideFilters,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -227,7 +228,11 @@ const useFilters = ({
     }
 
     const renderCheckboxes = () => {
-      if (variation === PANEL && filtersState[column].value.length > 10) {
+      if (
+        variation === PANEL &&
+        filtersState[column].value.length > 10 &&
+        !autoHideFilters
+      ) {
         return (
           <OverflowCheckboxes
             components={components}

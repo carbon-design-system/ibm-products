@@ -144,7 +144,7 @@ const DefaultTemplate = ({ ...args }) => {
           />
           <Dropdown
             id="create-side-panel-dropdown-options-a"
-            ariaLabel="Dropdown"
+            aria-label="Dropdown"
             items={items}
             initialSelectedItem="Day(s)"
             label="Options"
@@ -242,7 +242,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           />
           <Dropdown
             id="create-side-panel-dropdown-options-b"
-            ariaLabel="Dropdown"
+            aria-label="Dropdown"
             initialSelectedItem="Day(s)"
             items={items}
             label="Options"
@@ -308,7 +308,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
           <Dropdown
             id="create-side-panel-dropdown-bu"
             titleText="Business unit"
-            ariaLabel="Dropdown"
+            aria-label="Dropdown"
             initialSelectedItem="IBM Cloud platform"
             items={['IBM Cloud platform', 'AI Ops', 'Watson']}
             label="Business unit"
@@ -364,7 +364,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             />
             <Dropdown
               id="create-side-panel-dropdown-options-c"
-              ariaLabel="Dropdown"
+              aria-label="Dropdown"
               initialSelectedItem="Day(s)"
               items={items}
               label="Options"

@@ -30,13 +30,14 @@ import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+const gcClass = `${blockClass}__grid-container`;
 
 export const DatagridContent = ({ datagridState, title }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
   const {
-    getTableProps = () => {},
+    getTableProps,
     getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
@@ -59,6 +60,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     page,
     rows,
   } = datagridState;
+  const { columnResizing } = state;
 
   const contentRows = (DatagridPagination && page) || rows;
   const gridAreaRef = useRef();
@@ -90,27 +92,29 @@ export const DatagridContent = ({ datagridState, title }) => {
           { [`${blockClass}__variable-row-height`]: variableRowHeight },
           { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
           { [`${blockClass}__table-grid-active`]: gridActive },
+          {
+            [`${blockClass}__table-is-resizing`]:
+              typeof columnResizing.isResizingColumn === 'string',
+          },
           getTableProps()?.className
         )}
         role={withInlineEdit ? 'grid' : undefined}
         tabIndex={withInlineEdit ? 0 : -1}
         onKeyDown={
-          withInlineEdit
-            ? (event) =>
-                handleGridKeyPress({
-                  event,
-                  dispatch,
-                  instance: datagridState,
-                  keysPressedList,
-                  state: inlineEditState,
-                  usingMac,
-                })
-            : null
+          /* istanbul ignore next */
+          withInlineEdit &&
+          ((event) =>
+            handleGridKeyPress({
+              event,
+              dispatch,
+              instance: datagridState,
+              keysPressedList,
+              state: inlineEditState,
+              usingMac,
+            }))
         }
         onFocus={
-          withInlineEdit
-            ? () => handleGridFocus(inlineEditState, dispatch)
-            : null
+          withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
         }
         title={title}
       >
@@ -151,6 +155,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     clearSingleFilter(id, setAllFilters, state)
   );
 
+  /* istanbul ignore next */
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary
@@ -158,26 +163,23 @@ export const DatagridContent = ({ datagridState, title }) => {
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
         renderLabel={filterProps.renderLabel}
+        overflowType="tag"
       />
     );
 
   return (
     <>
       <TableContainer
-        className={cx(
-          `${blockClass}__grid-container`,
-          withVirtualScroll || fullHeightDatagrid
-            ? `${blockClass}__full-height`
-            : '',
-          DatagridPagination ? `${blockClass}__with-pagination` : '',
-          useDenseHeader ? `${blockClass}__dense-header` : '',
-          {
-            [`${blockClass}__grid-container-grid-active`]: gridActive,
-            [`${blockClass}__grid-container-inline-edit`]: withInlineEdit,
-            [`${blockClass}__grid-container-grid-active--without-toolbar`]:
-              withInlineEdit && !DatagridActions,
-          }
-        )}
+        className={cx(`${gcClass}`, {
+          [`${gcClass}-active`]: gridActive,
+          [`${gcClass}-active--without-toolbar`]:
+            withInlineEdit && !DatagridActions,
+          [`${gcClass}-inline-edit`]: withInlineEdit,
+          [`${blockClass}__full-height`]:
+            withVirtualScroll || fullHeightDatagrid,
+          [`${blockClass}__with-pagination`]: DatagridPagination,
+          [`${blockClass}__dense-header`]: useDenseHeader,
+        })}
         title={gridTitle}
         description={gridDescription}
       >
@@ -194,6 +196,7 @@ export const DatagridContent = ({ datagridState, title }) => {
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}
+              autoHideFilters={filterProps.autoHideFilters}
             />
           )}
           <div className={`${blockClass}__table-container-inner`}>

@@ -14,6 +14,7 @@ import { CreateTearsheet } from './CreateTearsheet';
 import DocsPage from './CreateTearsheet.docs-page';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
+import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
 
 export default {
   title: getStoryTitle(CreateTearsheet.displayName),
@@ -55,6 +56,13 @@ export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
 
 export const withIntroStep = prepareStory(MultiStepWithIntro, {
   storyName: 'Create tearsheet with intro step',
+  args: {
+    ...createTearsheetProps,
+  },
+});
+
+export const withErrorState = prepareStory(MultiStepWithStepInErrorState, {
+  storyName: 'Create tearsheet with step in error state',
   args: {
     ...createTearsheetProps,
   },

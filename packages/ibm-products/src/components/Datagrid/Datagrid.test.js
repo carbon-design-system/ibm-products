@@ -7,9 +7,9 @@
  */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
 import {
@@ -19,9 +19,9 @@ import {
   mockHTMLElement,
 } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
-import { pkg } from '../../settings';
 
 import {
+  useDatagrid,
   useInfiniteScroll,
   useSelectRows,
   useDisableSelectRows,
@@ -36,6 +36,8 @@ import {
   useActionsColumn,
   useColumnOrder,
   useColumnRightAlign,
+  useColumnCenterAlign,
+  useEditableCell,
 } from '.';
 
 import {
@@ -47,13 +49,20 @@ import {
   TableBatchAction,
 } from '@carbon/react';
 import { Download, Restart, Filter, Activity, Add } from '@carbon/react/icons';
-import { carbon } from '../../settings';
+import { carbon, pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
 import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
+import {
+  FilteringUsage,
+  filterProps,
+} from './Extensions/Filtering/Panel.stories';
 const { click, hover, unhover } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -304,6 +313,7 @@ const TenThousandEntries = ({ ...rest } = {}) => {
     {
       columns,
       data,
+      rowSize: 'lg',
     },
     useInfiniteScroll
   );
@@ -797,68 +807,72 @@ const BatchActions = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const StickyActionsColumn = ({ ...rest } = {}) => {
+const editActionClickFn = jest.fn();
+const voteActionClickFn = jest.fn();
+const retireActionClickFn = jest.fn();
+const deleteActionClickFn = jest.fn();
+
+const ActionsColumnExample = ({
+  isFetching = false,
+  shouldDisableMenuItem = null,
+  shouldHideMenuItem = null,
+  disabled = false,
+  twoActions = false,
+  sticky = 'right',
+  ...rest
+} = {}) => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader,
       {
         Header: '',
         accessor: 'actions',
-        sticky: 'right',
+        sticky,
         width: 60,
         isAction: true,
       },
     ],
-    []
+    [sticky]
   );
   const [data] = useState(makeData(10));
-  const [msg, setMsg] = useState('click action menu');
-  const onActionClick = (actionId, row) => {
-    const { original } = row;
-    setMsg(
-      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
-    );
-  };
-
+  const rowActions = [
+    {
+      id: 'edit',
+      itemText: 'Edit',
+      onClick: editActionClickFn,
+      disabled,
+      shouldHideMenuItem,
+      shouldDisableMenuItem,
+    },
+    {
+      id: 'vote',
+      itemText: 'Vote',
+      onClick: voteActionClickFn,
+    },
+    {
+      id: 'retire',
+      itemText: 'Retire',
+      onClick: retireActionClickFn,
+    },
+    {
+      id: 'delete',
+      itemText: 'Delete',
+      hasDivider: true,
+      isDelete: true,
+      onClick: deleteActionClickFn,
+    },
+  ];
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      rowActions: [
-        {
-          id: 'edit',
-          itemText: 'Edit',
-          onClick: onActionClick,
-        },
-        {
-          id: 'vote',
-          itemText: 'Vote',
-          onClick: onActionClick,
-        },
-        {
-          id: 'retire',
-          itemText: 'Retire',
-          onClick: onActionClick,
-        },
-        {
-          id: 'delete',
-          itemText: 'Delete',
-          hasDivider: true,
-          isDelete: true,
-          onClick: onActionClick,
-        },
-      ],
+      rowActions: !twoActions ? rowActions : [...rowActions].slice(0, 2),
+      isFetching,
     },
     useStickyColumn,
     useActionsColumn
   );
-  return (
-    <Wrapper>
-      <h3>{msg}</h3>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-      <p>More details documentation check the Notes section below</p>
-    </Wrapper>
-  );
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 beforeAll(() => {
@@ -888,6 +902,13 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
+  it('check total column count', () => {
+    render(<BasicUsage />);
+    expect(screen.getAllByRole('columnheader').length).toEqual(
+      defaultHeader.length
+    );
+  });
+
   it('renders a basic data grid component with devTools attribute', async () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -912,6 +933,31 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr').length
     ).toEqual(10);
+  });
+
+  it('renders a basic table and resizes column', async () => {
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { keyboard, tab } = user;
+    render(<BasicUsage data-testid={dataTestId} />);
+    await click(screen.getByTestId(dataTestId));
+    await tab();
+    // Input range resizer now has focus
+    await keyboard('[ArrowRight]');
+    const firstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const firstColumnWidth = firstColumnHeader.style.width;
+    expect(parseInt(firstColumnWidth)).toEqual(152);
+    await keyboard('[ArrowRight]');
+    const resizedFirstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const resizedFirstColumnWidth = resizedFirstColumnHeader.style.width;
+    expect(parseInt(resizedFirstColumnWidth)).toEqual(154);
+    await keyboard('[ArrowLeft]');
+    const revertResizedFirstColumnHeader =
+      screen.getAllByRole('columnheader')[0];
+    const revertResizedFirstColumnWidth =
+      revertResizedFirstColumnHeader.style.width;
+    expect(parseInt(revertResizedFirstColumnWidth)).toEqual(152);
   });
 
   it('renders a Batch Actions Table', async () => {
@@ -1135,36 +1181,15 @@ describe(componentName, () => {
   });
 
   it('renders Ten Thousand table entries', async () => {
-    render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
+    render(<TenThousandEntries data-testid={dataTestId} />);
+
+    const tableBody =
+      screen.getAllByRole('rowgroup')[1].firstElementChild.firstElementChild;
+    const tableBodyHeight = tableBody.style.height;
+    expect(parseInt(tableBodyHeight)).toEqual(480000);
 
     expect(
-      parseInt(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].style.height,
-        10
-      )
-    ).toEqual(480000);
-
-    expect(
-      parseInt(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].style.height,
-        10
-      ) /
-        parseInt(
-          screen
-            .getByRole('table')
-            .getElementsByTagName('tbody')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0].style.height
-        )
+      parseInt(tableBodyHeight) / 48 // 48 is default row height
     ).toEqual(10000);
   });
 
@@ -1181,18 +1206,25 @@ describe(componentName, () => {
 
   it('Clickable Row', async () => {
     const alertMock = jest.spyOn(window, 'alert');
-    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
+    render(<ClickableRow data-testid={dataTestId} />);
+    const node = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-    );
+    fireEvent.click(node);
 
     setTimeout(() => {
       expect(alertMock).toHaveBeenCalledTimes(2);
     }, 1000);
+
+    fireEvent.keyDown(node, { key: 'Enter' });
+
+    setTimeout(() => {
+      expect(alertMock).toHaveBeenCalledTimes(2);
+    }, 1000);
+
+    fireEvent.keyDown(node, { key: '1' });
   });
 
   function completeHoverOperation(rowNumber) {
@@ -1386,18 +1418,13 @@ describe(componentName, () => {
     const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
     fireEvent.click(rowExpander);
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')
-    ).toBeDefined();
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0].textContent
-    ).toEqual(`Content for ${rowNumber}`);
+    expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
+    expect(row.nextElementSibling.textContent).toEqual(
+      `Content for ${rowNumber}`
+    );
+
+    fireEvent.mouseOver(row.nextElementSibling);
+    fireEvent.mouseLeave(row.nextElementSibling);
 
     const rowExpanderCollapse = row.querySelector(
       `button[aria-label="Collapse row"]`
@@ -1405,7 +1432,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it('Expanded Row', async () => {
+  it('Expanded Row', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
@@ -1441,34 +1468,29 @@ describe(componentName, () => {
   });
 
   it('Nested Rows', async () => {
-    render(<NestedRows data-testid={dataTestId}></NestedRows>);
+    render(<NestedRows data-testid={dataTestId} />);
 
-    const row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    const firstRow = row
-      .getElementsByTagName('td')[0]
-      .getElementsByTagName('button')[0];
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const firstBodyRow = bodyRows[0];
+    const firstRowExpander = within(firstBodyRow).getByLabelText('Expand row');
+    fireEvent.click(firstRowExpander);
+    expect(firstBodyRow).toHaveClass(`${blockClass}__carbon-row-expanded`);
 
-    fireEvent.click(firstRow);
+    const newAllRows = screen.getAllByRole('row');
+    const newBodyRows = newAllRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const nestedRow = newBodyRows[1];
 
-    expect(row.classList[0]).toEqual('c4p--datagrid__carbon-row-expanded');
-
-    const nestedRow = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[1];
-
-    if (nestedRow.className === 'c4p--datagrid__carbon-nested-row') {
-      fireEvent.click(
-        nestedRow
-          .getElementsByTagName('td')[0]
-          .getElementsByTagName('button')[0]
-      );
+    if (nestedRow.className === `${blockClass}__carbon-nested-row`) {
+      const nestedRowExpander = within(nestedRow).getByLabelText('Expand row');
+      fireEvent.click(nestedRowExpander);
     }
 
-    expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
+    expect(nestedRow).toHaveClass(`${blockClass}__carbon-nested-row`);
   });
 
   it('Nested Table', async () => {
@@ -1735,67 +1757,106 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
-  const RightAlignedColumns = () => {
-    const columns = React.useMemo(
-      () => [
-        ...defaultHeader.slice(0, 3),
-        {
-          Header: 'Age',
-          accessor: 'age',
-          rightAlignedColumn: true,
-        },
-        {
-          Header: 'Visits',
-          accessor: 'visits',
-          rightAlignedColumn: true,
-        },
-      ],
-      []
-    );
+  const rightAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      rightAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      rightAlignedColumn: true,
+    },
+  ];
+
+  const centerAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      centerAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      centerAlignedColumn: true,
+    },
+  ];
+
+  const CustomAlignColumns = ({ customCols }) => {
     const [data] = useState(makeData(10));
     const datagridState = useDatagrid(
       {
-        columns,
+        columns: customCols,
         data,
       },
-      useColumnRightAlign
+      useColumnRightAlign,
+      useColumnCenterAlign
     );
 
-    return <Datagrid datagridState={{ ...datagridState }} />;
+    return <Datagrid datagridState={datagridState} />;
   };
 
-  it('Right Aligned Columns', async () => {
+  it('should render right aligned columns', async () => {
     render(
-      <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
+      <CustomAlignColumns
+        customCols={rightAlignedColumnsData}
+        data-testid={dataTestId}
+      />
     );
-    const numRows = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr').length;
 
-    for (var i = 0; i < numRows; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[3]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const ageColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
 
-    for (var j = 0; j < numRows; j++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(j)
-          .getElementsByTagName('td')[4]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(`${blockClass}__right-align-cell-renderer`);
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__right-align-cell-renderer`
+    );
+  });
+
+  it('should render center aligned columns', async () => {
+    render(
+      <CustomAlignColumns
+        customCols={centerAlignedColumnsData}
+        data-testid={dataTestId}
+      />
+    );
+
+    const ageColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
+
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
   });
 
   it('Row Size Dropdown', async () => {
@@ -2042,119 +2103,291 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
-  it('Sticky Actions Column', async () => {
+  const getOverflowMenuItems = () => {
+    return document.querySelectorAll(
+      `.${carbon.prefix}--overflow-menu-options button`
+    );
+  };
+
+  it('should render sticky action column and click each menu item', async () => {
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+    render(<ActionsColumnExample data-testid={dataTestId} />);
+
+    const tableRows = screen.getAllByRole('row');
+    const headerRow = tableRows[0];
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+
+    expect(headerRow).toHaveClass(`${blockClass}__sticky`);
+    bodyRows.forEach((row) => {
+      const stickyActionColumnCell = row.lastElementChild;
+      expect(stickyActionColumnCell).toHaveClass(
+        `${blockClass}__actions-column-cell`
+      );
+      expect(stickyActionColumnCell).toHaveClass(
+        `${blockClass}__right-sticky-column-cell`
+      );
+    });
+
+    const overflowMenu = within(bodyRows[0]).getByRole('button', {
+      name: 'Options',
+    });
+    await click(overflowMenu);
+
+    // Click each item inside of overflow menu, menu closes after clicking on a menu item
+    // so we need to click the overflow menu again each time to view the menu items again
+    const editActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Edit'
+    )[0];
+    await click(editActionButton);
+    expect(editActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const voteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Vote'
+    )[0];
+    await click(voteActionButton);
+    expect(voteActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const retireActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Retire'
+    )[0];
+    await click(retireActionButton);
+    expect(retireActionClickFn).toHaveBeenCalledTimes(1);
+
+    await click(overflowMenu);
+    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Delete'
+    )[0];
+    await click(deleteActionButton);
+    expect(deleteActionClickFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render stick actions and test disabled states', async () => {
+    const { rerender } = render(
+      <ActionsColumnExample disabled data-testid={dataTestId} />
+    );
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+    const overflowMenu = within(bodyRows[0]).getByRole('button', {
+      name: 'Options',
+    });
+    await click(overflowMenu);
+
+    const deleteActionButton = Array.from(getOverflowMenuItems()).filter(
+      (item) => item.textContent === 'Edit'
+    )[0];
+
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldDisableMenuItem function successfully disables a menu item
+    const disableActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldDisableMenuItem={disableActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(disableActionItemFn).toHaveBeenCalled();
+    expect(deleteActionButton).toHaveAttribute('disabled');
+
+    // Test that shouldHideMenuItem function successfully hides a menu item
+    const hideActionItemFn = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        shouldHideMenuItem={hideActionItemFn}
+        data-testid={dataTestId}
+      />
+    );
+    await click(overflowMenu);
+    expect(hideActionItemFn).toHaveBeenCalled();
+    expect(getOverflowMenuItems().length).toEqual(3); // Previously was 4, but we've hidden the delete action in this test
+  });
+
+  it('should render a non sticky actions column and click each menu item', async () => {
+    render(<ActionsColumnExample sticky={null} data-testid={dataTestId} />);
+
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+
+    bodyRows.forEach((row) => {
+      const actionColumnCell = row.lastElementChild.previousElementSibling;
+      expect(actionColumnCell).toHaveClass(
+        `${blockClass}__actions-column-cell`
+      );
+      expect(actionColumnCell).not.toHaveClass(
+        `${blockClass}__right-sticky-column-cell`
+      );
+    });
+  });
+
+  it('should click non stick row action when not inside of overflow menu', async () => {
+    const { rerender } = render(
+      <ActionsColumnExample
+        isFetching={true}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
+    );
+    const user = userEvent.setup({ delay: null });
+    const { click } = user;
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
+    const firstBodyRow = bodyRows[0];
+    const lastCellElement =
+      firstBodyRow.lastElementChild.previousElementSibling;
+    const iconSkeletonElement = lastCellElement.children[0].children[0];
+    expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
+    expect(iconSkeletonElement).toHaveClass(
+      `${blockClass}__actions-column-loading`
+    );
+
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
+    );
+    const editActionButton = within(firstBodyRow).getByRole('button', {
+      name: 'Edit',
+    });
+    const voteActionButton = within(firstBodyRow).getByRole('button', {
+      name: 'Vote',
+    });
+    await click(editActionButton);
+    expect(editActionClickFn).toHaveBeenCalledTimes(1);
+    await click(voteActionButton);
+    expect(voteActionClickFn).toHaveBeenCalledTimes(1);
+
+    const hideIconOnlyItem = jest.fn(() => true);
+    rerender(
+      <ActionsColumnExample
+        isFetching={false}
+        shouldHideMenuItem={hideIconOnlyItem}
+        twoActions
+        sticky={null}
+        data-testid={dataTestId}
+      />
+    );
+    expect(within(firstBodyRow).getAllByRole('button').length).toEqual(1); // Previously was 2 but we've hidden the other in this test
+  });
+
+  const EditableCellUsage = ({ ...args }) => {
+    const [data, setData] = useState(makeData(3));
+    const columns = React.useMemo(() => getInlineEditColumns(), []);
+    pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+    pkg.feature['Datagrid.useInlineEdit'] = true;
+    pkg._silenceWarnings(true);
+
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        onDataUpdate: setData,
+        ...args.defaultGridProps,
+      },
+      useEditableCell
+    );
+
+    // Warnings are ordinarily silenced in storybook, add this to test.
+    pkg._silenceWarnings(false);
+    pkg.feature['Datagrid.useEditableCell'] = true;
+    pkg._silenceWarnings(true);
+
+    return <Datagrid datagridState={datagridState} />;
+  };
+  it('should test the basic interactions of the editable cell datagrid', async () => {
+    const { container } = render(<EditableCellUsage />);
+    const tableElement = screen.getByRole('grid');
+    const rowButtons = screen.getAllByRole('button');
+    const firstEditableCell = rowButtons[0];
+
+    await click(firstEditableCell);
+    expect(firstEditableCell).toHaveClass(
+      `${blockClass}__inline-edit-button--active`
+    );
+    await click(container);
+    expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
+  });
+
+  it('should test basic interactions of filter panel', async () => {
     render(
-      <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
+      <FilteringUsage
+        defaultGridProps={{
+          gridTitle: 'Data table title',
+          gridDescription: 'Additional information if needed',
+          useDenseHeader: false,
+          emptyStateTitle: 'No filters match',
+          emptyStateDescription:
+            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+          filterProps,
+        }}
+      />
     );
-
-    expect(
-      screen.findByText(
-        'More details documentation check the Notes section below'
-      )
-    ).toBeDefined();
-    for (
-      var i = 0;
-      i <
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length;
-      i++
-    ) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[16].classList[0]
-      ).toEqual('c4p--datagrid__right-sticky-column-cell');
-    }
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Edit');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [edit] on row:'
-    );
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Retire');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0]
-    );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [retire] on row:'
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const panelContainer = toolbar.nextElementSibling;
+    const toolbarButtons = within(toolbar).getAllByRole('button');
+    const filterToggleButton = toolbarButtons[0];
+    // Open filter panel
+    await click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
     );
   });
 });
+
+const duplicateOnClickFn = jest.fn();
+const addOnClickFn = jest.fn();
+const selectAllOnClickFn = jest.fn();
+const publishOnClickFn = jest.fn();
+const downloadOnClickFn = jest.fn();
+const deleteOnClickFn = jest.fn();
 
 const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: duplicateOnClickFn,
     },
     {
       label: 'Add',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: addOnClickFn,
     },
     {
       label: 'Select all',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: selectAllOnClickFn,
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: publishOnClickFn,
     },
     {
       label: 'Download',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: downloadOnClickFn,
     },
     {
       label: 'Delete',
       renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: () => {},
+      onClick: deleteOnClickFn,
       hasDivider: true,
       kind: 'danger',
     },
@@ -2171,6 +2404,7 @@ const TestBatch = () => {
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
+      DatagridPagination,
     },
     useSelectRows,
     useSelectAllWithToggle,
@@ -2233,8 +2467,8 @@ describe('batch action testing', () => {
 
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
-      const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
-      await act(() => click(firstCheckbox));
+      const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
+      await click(firstCheckbox);
 
       expect(
         container.querySelector(
@@ -2244,15 +2478,19 @@ describe('batch action testing', () => {
 
       // Given the default offsetWidth mocks, 2 batch actions should be visible
       // in addition to the MenuButton
-      screen.getByLabelText(getBatchActions()[0].label);
-      screen.getByLabelText(getBatchActions()[1].label);
+      await click(screen.getByLabelText(getBatchActions()[0].label));
+      expect(duplicateOnClickFn).toHaveBeenCalledTimes(1);
+
+      await click(screen.getByLabelText(getBatchActions()[1].label));
+      expect(addOnClickFn).toHaveBeenCalledTimes(1);
+
       const menuButton = screen.getByRole('button', { name: /More/i });
       const cancelButton = screen.getByRole('button', { name: /Cancel/i });
       const selectAllButton = screen.getByRole('button', {
         name: /Select all/i,
       });
       expect(menuButton).toBeInTheDocument();
-      await act(() => click(menuButton));
+      await click(menuButton);
       const options = Array.from(
         screen.getByRole('menu', { name: /More/i }).children
       );
@@ -2267,10 +2505,63 @@ describe('batch action testing', () => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
 
-      //coverage
-      fireEvent.click(options[0]);
-      fireEvent.click(cancelButton);
-      fireEvent.click(selectAllButton);
+      const checkMenuItem = async (
+        remainingBatchIndex,
+        clickHandlerFn,
+        initiateMenuOpen
+      ) => {
+        if (initiateMenuOpen) {
+          await click(menuButton);
+        }
+        const displayedMenuElement = document.querySelector(
+          `.${carbon.prefix}--menu`
+        );
+        const menuItems = Array.from(displayedMenuElement.children);
+
+        const menuItem = menuItems.filter(
+          (item) =>
+            item.textContent === getBatchActions()[remainingBatchIndex].label
+        )[0];
+        await click(menuItem);
+        expect(clickHandlerFn).toHaveBeenCalledTimes(1);
+      };
+
+      await checkMenuItem(2, selectAllOnClickFn);
+      await checkMenuItem(3, publishOnClickFn, true);
+      await checkMenuItem(4, downloadOnClickFn, true);
+      await checkMenuItem(5, deleteOnClickFn, true);
+      await click(cancelButton);
+      await click(firstCheckbox);
+      await click(selectAllButton);
+    });
+
+    it('renders batch action with select all and checks indeterminate behavior', () => {
+      render(<TestBatch />);
+      const bodyElement = screen.getAllByRole('rowgroup')[1];
+      const allRows = screen.getAllByRole('row');
+      // const selectAllCheckbox = within(allRows[0]).getByLabelText('Toggle All Current Page Rows Selected');
+      const selectAllCheckbox = within(allRows[0]).getByLabelText('Select all');
+      click(selectAllCheckbox);
+      const carbonTableToolbar = screen.getByLabelText('data table toolbar');
+      expect(carbonTableToolbar).toBeInTheDocument();
+      const bodyRows = allRows.filter(
+        (r) =>
+          !r.classList.contains('c4p--datagrid__head') &&
+          !r.classList.contains('c4p--datagrid__expanded-row')
+      );
+      const firstBodyRow = bodyRows[0];
+      const firstRowCheckbox = within(firstBodyRow).getByRole('checkbox');
+      click(firstRowCheckbox);
+      // Should remove all checked checkboxes in the body
+      click(selectAllCheckbox);
+      let totalChecked = 0;
+      const allBodyCheckboxes = within(bodyElement).getAllByRole('checkbox');
+      allBodyCheckboxes.forEach((c) => {
+        if (c.checked) {
+          totalChecked = totalChecked + 1;
+        }
+      });
+      expect(totalChecked).toEqual(0);
     });
   });
 });

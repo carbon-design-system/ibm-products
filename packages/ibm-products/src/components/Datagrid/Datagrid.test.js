@@ -1485,7 +1485,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it('Expanded Row', () => {
+  it('should render with expandable rows and test by toggling the row open and closed', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
@@ -2011,7 +2011,8 @@ describe(componentName, () => {
     );
   });
 
-  it('should render sortable columns and toggle between sortable states for all column headers', async () => {
+  it('should render sortable columns and toggle between sortable states for all column headers', () => {
+    const { click } = userEvent;
     render(<SortableColumns data-testid={dataTestId} />);
 
     const rows = screen.getAllByRole('row');
@@ -2025,15 +2026,15 @@ describe(componentName, () => {
         return;
       }
       const sortableColumnHeaderButton = within(colHeader).getByRole('button');
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'ascending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'descending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'none'
       );

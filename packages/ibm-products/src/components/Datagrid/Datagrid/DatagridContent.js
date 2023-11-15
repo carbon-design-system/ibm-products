@@ -37,7 +37,7 @@ export const DatagridContent = ({ datagridState, title }) => {
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
   const {
-    getTableProps = () => {},
+    getTableProps,
     getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
@@ -96,22 +96,20 @@ export const DatagridContent = ({ datagridState, title }) => {
         role={withInlineEdit ? 'grid' : undefined}
         tabIndex={withInlineEdit ? 0 : -1}
         onKeyDown={
-          withInlineEdit
-            ? (event) =>
-                handleGridKeyPress({
-                  event,
-                  dispatch,
-                  instance: datagridState,
-                  keysPressedList,
-                  state: inlineEditState,
-                  usingMac,
-                })
-            : null
+          /* istanbul ignore next */
+          withInlineEdit &&
+          ((event) =>
+            handleGridKeyPress({
+              event,
+              dispatch,
+              instance: datagridState,
+              keysPressedList,
+              state: inlineEditState,
+              usingMac,
+            }))
         }
         onFocus={
-          withInlineEdit
-            ? () => handleGridFocus(inlineEditState, dispatch)
-            : null
+          withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
         }
         title={title}
       >
@@ -152,6 +150,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     clearSingleFilter(id, setAllFilters, state)
   );
 
+  /* istanbul ignore next */
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary

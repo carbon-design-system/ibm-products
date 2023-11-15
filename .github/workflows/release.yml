@@ -1,9 +1,11 @@
-name: v2 release # Builds and releases @carbon/v11 supported version of @carbon/ibm-products
+name: v2 release inner # Builds and releases @carbon/v11 supported version of @carbon/ibm-products
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
+  workflow_call:
+    inputs:
+      release-type:
+        default: ''
+        type: string
 
 jobs:
   Release:
@@ -41,5 +43,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
-          yarn lerna --canary preminor --no-verify-access --create-release
-          github --yes
+          yarn lerna ${{ inputs.release-type }} --no-verify-access
+          --create-release github --yes

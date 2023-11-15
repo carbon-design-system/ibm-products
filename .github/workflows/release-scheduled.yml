@@ -9,4 +9,4 @@ jobs:
   Release:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./release-inner.yml
+      - uses: ./release.yml

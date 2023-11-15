@@ -1125,7 +1125,7 @@ describe(componentName, () => {
   //Empty State
   it('renders an empty table', async () => {
     const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
-    screen.getByText('Empty State Title');
+    screen.getAllByText('Empty State Title');
     screen.getByText('Description test explaining why this card is empty.');
     expect(screen.getByRole('img')).toHaveClass(
       `${pkg.prefix}--empty-state__illustration-noData`

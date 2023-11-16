@@ -138,12 +138,15 @@ export default {
         type: 'select',
         labels: {
           0: 'short title',
-          1: 'long title'
+          1: 'long title',
+          2: 'short title with formatting',
         },
       },
-      options: [0, 1],
+      options: [0, 1, 2],
       mapping: {
-        0: (
+        0: <>IBM Product name</>,
+        1: <>IBM Product name example that is longer than one line</>,
+        2: (
           <>
             IBM{' '}
             <span
@@ -153,19 +156,6 @@ export default {
               }
             >
               Product name
-            </span>
-          </>
-        ),
-        1: (
-          <>
-            IBM{' '}
-            <span
-              style={
-                // stylelint-disable-next-line carbon/type-token-use
-                { fontWeight: '600' }
-              }
-            >
-              Product name example that is longer than one line
             </span>
           </>
         ),
@@ -234,7 +224,7 @@ export const fullyLoaded = prepareStory(
   {
     storyName: fullyLoadedStoryName,
     args: {
-      title: 1,
+      title: 2,
       links: 3,
       content: 2,
       additionalInfo: 1,

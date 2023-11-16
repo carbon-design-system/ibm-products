@@ -293,11 +293,12 @@ const TenThousandEntries = ({ ...rest }) => {
       columns,
       data,
       rowSize: 'lg',
+      ...rest,
     },
     useInfiniteScroll
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const IsHoverOnRow = () => {
@@ -612,17 +613,31 @@ const SelectableRow = ({ ...rest }) => {
 };
 
 const SortableColumns = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        disableSortBy: true,
+      },
+    ],
+    []
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
+      ...rest,
     },
     useSortableColumns
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const newPersonWithTwoLines = () => {
@@ -674,19 +689,20 @@ const TopAlignment = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const ClickableRow = ({ ...rest }) => {
+const ClickableRow = ({ onRowClickFn, ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      onRowClick: (row) => alert(`Clicked ${row.id}`),
+      onRowClick: onRowClickFn,
+      ...rest,
     },
     useOnRowClick
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const InfiniteScroll = () => {
@@ -1183,7 +1199,9 @@ describe(componentName, () => {
 
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
-    render(<TenThousandEntries data-testid={dataTestId} />);
+    const { rerender } = render(
+      <TenThousandEntries data-testid={dataTestId} />
+    );
 
     const tableBody =
       screen.getAllByRole('rowgroup')[1].firstElementChild.firstElementChild;
@@ -1193,6 +1211,21 @@ describe(componentName, () => {
     expect(
       parseInt(tableBodyHeight) / 48 // 48 is default row height
     ).toEqual(10000);
+
+    rerender(
+      <TenThousandEntries
+        virtualHeight={400}
+        data-testid={dataTestId}
+        loadMoreThreshold={300}
+      />
+    );
+    const rowGroups = screen.getAllByRole('rowgroup');
+    const bodyRowGroup = rowGroups[1];
+    const virtualScrollingElement = bodyRowGroup.firstElementChild;
+    fireEvent.scroll(virtualScrollingElement, { target: { scrollY: 5000 } });
+    expect(virtualScrollingElement.scrollLeft).toEqual(
+      bodyRowGroup.previousElementSibling.scrollLeft
+    );
   });
 
   it('With Pagination', () => {
@@ -1200,39 +1233,46 @@ describe(componentName, () => {
 
     expect(document.getElementById('bx-pagination-select-4')).toBeDefined();
     expect(document.getElementById('bx-pagination-select-6')).toBeDefined();
-
-    /*fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[0]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–5 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 20 pages');
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[1]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–10 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 10 pages');
-
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[2]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–25 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 4 pages');
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[3]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–50 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 2 pages');*/
   });
 
-  it('Clickable Row', () => {
-    const alertMock = jest.spyOn(window, 'alert');
-    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
+  it('Clickable Row', async () => {
+    const onRowClickFn = jest.fn();
+    const { rerender } = render(
+      <ClickableRow onRowClickFn={onRowClickFn} data-testid={dataTestId} />
+    );
+    const rows = screen.getAllByRole('row');
+    const bodyRows = rows.filter(
+      (r) =>
+        !r.classList.contains(`${blockClass}__head`) &&
+        !r.classList.contains(`${blockClass}__expanded-row`)
     );
 
-    setTimeout(() => {
-      expect(alertMock).toHaveBeenCalledTimes(2);
-    }, 1000);
+    const firstBodyRow = bodyRows[0];
+
+    fireEvent.click(firstBodyRow);
+    expect(onRowClickFn).toHaveBeenCalledTimes(1);
+
+    rerender(
+      <ClickableRow
+        isFetching
+        onRowClickFn={onRowClickFn}
+        data-testid={dataTestId}
+      />
+    );
+    const newRows = screen.getAllByRole('row');
+    const newBodyRows = newRows.filter(
+      (r) =>
+        !r.classList.contains(`${blockClass}__head`) &&
+        !r.classList.contains(`${blockClass}__expanded-row`)
+    );
+    const newBodyRow = newBodyRows[0];
+    newBodyRow.focus();
+    const { keyboard } = userEvent;
+    keyboard('{Enter}');
+    expect(onRowClickFn).toHaveBeenCalledTimes(2);
+    newBodyRow.focus();
+    keyboard('{Shift}');
+    expect(onRowClickFn).toHaveBeenCalledTimes(2);
   });
 
   function completeHoverOperation(rowNumber) {
@@ -1890,9 +1930,9 @@ describe(componentName, () => {
   const centerAlignedColumnsData = [
     ...defaultHeader.slice(0, 3),
     {
-      Header: 'Age',
+      Header: () => <span>Age</span>,
       accessor: 'age',
-      centerAlignedColumn: true,
+      rightAlignedColumn: true,
       disableSortBy: true,
     },
     {
@@ -1910,7 +1950,8 @@ describe(componentName, () => {
         data,
       },
       useColumnRightAlign,
-      useColumnCenterAlign
+      useColumnCenterAlign,
+      useSortableColumns
     );
 
     return <Datagrid datagridState={{ ...datagridState }} />;
@@ -1965,9 +2006,7 @@ describe(componentName, () => {
     );
     const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
     const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
-    expect(bodyAgeCell).toHaveClass(
-      `${blockClass}__center-align-cell-renderer`
-    );
+    expect(bodyAgeCell).toHaveClass(`${blockClass}__right-align-cell-renderer`);
     expect(bodyAgeCell).toHaveClass(`sortDisabled`);
     expect(bodyVisitsCell).toHaveClass(
       `${blockClass}__center-align-cell-renderer`
@@ -2049,13 +2088,6 @@ describe(componentName, () => {
         .getElementsByTagName('button')[1]
     );
 
-    /*var rowDropDown = ['More than super', 'Super tall row', 'Medium', 'Teeny tiny row'];
-    
-    const rows = document.getElementsByClassName('bx--toolbar-content')[0].getElementsByClassName('c4p--datagrid__row-size-dropdown')[0];
-
-    for(let k = 0; k < rows; k++){
-      expect(document.getElementsByClassName('bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right')[0].getElementsByTagName('div')[k].getElementsByTagName('label')[0].getElementsByTagName('span')[0].textContent).toEqual(rowDropDown[k]);
-    }*/
     expect(alertMock).toHaveBeenCalledTimes(1);
 
     fireEvent.click(
@@ -2165,26 +2197,33 @@ describe(componentName, () => {
     );
   });
 
-  it('Sortable Columns', () => {
-    render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
+  it('should render sortable columns and toggle between sortable states for all column headers', async () => {
+    render(<SortableColumns data-testid={dataTestId} />);
 
-    const headerRow = screen
-      .getByRole('table')
-      .getElementsByTagName('thead')[0]
-      .getElementsByTagName('tr')[0];
+    const rows = screen.getAllByRole('row');
+    const headerRow = rows[0];
+    const columnHeaders = within(headerRow).getAllByRole('columnheader');
 
-    for (var i = 0; i < headerRow.getElementsByTagName('th').length - 1; i++) {
-      fireEvent.click(
-        headerRow
-          .getElementsByTagName('th')
-          .item(i)
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('button')[0]
+    Array.from(columnHeaders).map(async (colHeader, index) => {
+      // The last column definition opts out of sorting by specifying `disableSortBy`
+      // so we should not include testing for the last column header
+      if (index === defaultHeader.length) {
+        return;
+      }
+      const sortableColumnHeaderButton = within(colHeader).getByRole('button');
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'ascending'
       );
-      expect(headerRow.getElementsByTagName('th')[i].classList[2]).toEqual(
-        'c4p--datagrid__isSorted'
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'descending'
       );
-    }
+      fireEvent.click(sortableColumnHeaderButton);
+      expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
+        'none'
+      );
+    });
   });
 
   it('Customizing Columns', () => {

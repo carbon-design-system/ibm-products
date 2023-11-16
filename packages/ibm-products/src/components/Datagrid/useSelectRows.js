@@ -83,17 +83,17 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const onSelectHandler = (e) => {
-    e.stopPropagation(); // avoid triggering onRowClick
+  const onSelectHandler = (event) => {
+    event.stopPropagation(); // avoid triggering onRowClick
     if (radio) {
       toggleAllRowsSelected(false);
       if (onRadioSelect) {
         onRadioSelect(row);
       }
     }
-    onChange(e);
-    onRowSelect?.(row, e);
-    handleToggleRowSelected(dispatch, row);
+    onChange(event);
+    onRowSelect?.(row, event);
+    handleToggleRowSelected(dispatch, row, event.target.checked);
   };
 
   const selectDisabled = isFetching || row.getRowProps().disabled;

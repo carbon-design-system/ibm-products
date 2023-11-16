@@ -52,25 +52,42 @@ export const handleColumnResizingEvent = (
   });
 };
 
-export const handleToggleRowSelected = (dispatch, rowData) =>
+export const handleToggleRowSelected = (dispatch, rowData, isChecked) =>
   dispatch({
     type: TOGGLE_ROW_SELECTED,
-    payload: { rowData },
+    payload: { rowData, isChecked },
   });
 
 export const stateReducer = (newState, action) => {
   switch (action.type) {
     case TOGGLE_ROW_SELECTED: {
-      const { rowData } = action.payload || {};
+      const { rowData, isChecked } = action.payload || {};
       if (!rowData) {
         return;
       }
+      if (isChecked) {
+        return {
+          ...newState,
+          selectedRowData: {
+            ...newState.selectedRowData,
+            [rowData.index]: rowData,
+          },
+        };
+      }
+      if (rowData && !isChecked) {
+        const newData = { ...newState.selectedRowData };
+        const dataWithRemovedRow = Object.fromEntries(
+          Object.entries(newData).filter(([key]) => {
+            return parseInt(key) !== parseInt(rowData.index);
+          })
+        );
+        return {
+          ...newState,
+          selectedRowData: dataWithRemovedRow,
+        };
+      }
       return {
         ...newState,
-        selectedRowData: {
-          ...newState.selectedRowData,
-          [rowData.index]: rowData,
-        },
       };
     }
     case INIT: {

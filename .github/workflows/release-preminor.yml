@@ -2,8 +2,6 @@ name: v2 pre-release # Builds and releases @carbon/v11 supported version of @car
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
   Release:

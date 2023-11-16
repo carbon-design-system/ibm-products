@@ -35,7 +35,7 @@ const renderCoachmarkWithButton = ({ ...rest } = {}) =>
         <CoachmarkButton
           data-testid={childDataTestId}
           kind="tertiary"
-          label="Show Information"
+          label="Show information"
           size="md"
           {...rest}
         />

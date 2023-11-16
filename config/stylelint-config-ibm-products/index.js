@@ -48,7 +48,7 @@ module.exports = {
     ),
     // -----
   ],
-  plugins: ['stylelint-plugin-carbon-tokens'],
+  plugins: ['stylelint-plugin-carbon-tokens', 'stylelint-use-logical'],
   rules: {
     'scss/double-slash-comment-inline': null,
     'scss/comment-no-empty': null,
@@ -73,5 +73,6 @@ module.exports = {
     ],
     'no-duplicate-selectors': null,
     'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
+    'csstools/use-logical': null,
   },
 };

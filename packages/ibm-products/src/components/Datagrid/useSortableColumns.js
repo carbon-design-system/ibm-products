@@ -10,6 +10,7 @@ import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { Button } from 'carbon-components-react';
 import { ArrowUp16, Arrows16 } from '@carbon/icons-react';
+import { SelectAll } from './Datagrid/DatagridSelectAll';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -32,13 +33,13 @@ const getAriaSortValue = (
   }
   const { isSorted, isSortedDesc } = col || {};
   if (!isSorted) {
-    return defaultSortableLabelText || 'none';
+    return defaultSortableLabelText;
   }
   if (isSorted && !isSortedDesc) {
-    return ascendingSortableLabelText || 'ascending';
+    return ascendingSortableLabelText;
   }
   if (isSorted && isSortedDesc) {
-    return descendingSortableLabelText || 'descending';
+    return descendingSortableLabelText;
   }
 };
 
@@ -90,8 +91,12 @@ const useSortableColumns = (hooks) => {
         );
       };
       const Header = (headerProp) =>
-        column.disableSortBy === true ? (
-          column.Header
+        column.disableSortBy === true || column.id === 'datagridSelection' ? (
+          column.disableSortBy ? (
+            column.Header
+          ) : (
+            <SelectAll {...instance} />
+          )
         ) : (
           <Button
             aria-sort={getAriaSortValue(headerProp?.column, {
@@ -118,7 +123,12 @@ const useSortableColumns = (hooks) => {
       return {
         ...column,
         Header,
-        minWidth: column.disableSortBy === true ? 0 : 90,
+        minWidth:
+          column.disableSortBy === true
+            ? 0
+            : column.minWidth
+            ? column.minWidth
+            : 90,
       };
     });
     return instance.customizeColumnsProps?.isTearsheetOpen

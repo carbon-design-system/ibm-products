@@ -1,11 +1,10 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2023
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-// @flow
+
 import React, { useLayoutEffect, useState } from 'react';
 import { DataTable } from 'carbon-components-react';
 import cx from 'classnames';
@@ -16,6 +15,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const SelectAll = (datagridState) => {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   useLayoutEffect(() => {
+    /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);
     }
@@ -41,6 +41,7 @@ const SelectAll = (datagridState) => {
       <div
         className={cx(`${blockClass}__head-hidden-select-all`, {
           [`${blockClass}__select-all-sticky-left`]:
+            /* istanbul ignore next */
             isFirstColumnStickyLeft && windowSize > 671,
         })}
       />
@@ -50,6 +51,17 @@ const SelectAll = (datagridState) => {
     ? getToggleAllPageRowsSelectedProps
     : getToggleAllRowsSelectedProps;
   const { onChange, ...selectProps } = getProps();
+  const { indeterminate } = selectProps;
+
+  const handleSelectAllChange = (event) => {
+    if (indeterminate) {
+      return onChange?.({
+        target: { checked: false },
+      });
+    }
+    return onChange?.(event);
+  };
+
   return (
     <div
       className={cx(
@@ -57,6 +69,7 @@ const SelectAll = (datagridState) => {
         `${blockClass}__checkbox-cell`,
         {
           [`${blockClass}__checkbox-cell-sticky-left`]:
+            /* istanbul ignore next */
             isFirstColumnStickyLeft && windowSize > 671,
         }
       )}
@@ -64,7 +77,7 @@ const SelectAll = (datagridState) => {
       <TableSelectAll
         {...selectProps}
         name={`${tableId}-select-all-checkbox-name`}
-        onSelect={onChange}
+        onSelect={handleSelectAllChange}
         disabled={isFetching || selectProps.disabled}
         id={`${tableId}-select-all-checkbox-id`}
       />

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// @flow
 import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { DataTable } from 'carbon-components-react';
@@ -14,16 +13,15 @@ import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
 import {
   handleColumnResizeEndEvent,
-  handleColumnResizeStartEvent,
   handleColumnResizingEvent,
 } from './addons/stateReducer';
-import getColTitle from '../utils/getColTitle';
+import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const getAccessibilityProps = (header) => {
   const props = {};
-  const title = getColTitle(header);
+  const title = getNodeTextContent(header.Header);
   if (title) {
     props.title = title;
   } else {
@@ -37,81 +35,39 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
     const { tableId } = datagridState;
-    if (tableId) {
-      const gridElement = document.querySelector(`#${tableId}`);
-      const tableElement = gridElement.querySelector('table');
-      const headerRowElement = document.querySelector(
-        `#${tableId} .${blockClass}__head`
+    const gridElement = document.querySelector(`#${tableId}`);
+    const tableElement = gridElement.querySelector('table');
+    const headerRowElement = document.querySelector(
+      `#${tableId} .${blockClass}__head`
+    );
+    const hasHorizontalScrollbar =
+      tableElement.scrollWidth > tableElement.clientWidth;
+    const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
+    const tableToolbar = gridElement.querySelector(
+      `.${blockClass}__table-toolbar`
+    );
+    const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
+    const setCustomValues = ({ rowHeight = 48, gridHeight }) => {
+      headerRowElement.style.setProperty(
+        `--${blockClass}--row-height`,
+        px(rowHeight)
       );
-      const hasHorizontalScrollbar =
-        tableElement.scrollWidth > tableElement.clientWidth;
-      const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
-      const tableToolbar = gridElement.querySelector(
-        `.${blockClass}__table-toolbar`
+      headerRowElement.style.setProperty(
+        `--${blockClass}--grid-height`,
+        px(gridHeight - scrollBuffer - tableToolbarHeight)
       );
-      const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
-      const setCustomValues = ({ rowHeight = 48, gridHeight }) => {
-        headerRowElement.style.setProperty(
-          `--${blockClass}--row-height`,
-          px(rowHeight)
-        );
-        headerRowElement.style.setProperty(
-          `--${blockClass}--grid-height`,
-          px(gridHeight - scrollBuffer - tableToolbarHeight)
-        );
-        headerRowElement.style.setProperty(
-          `--${blockClass}--header-height`,
-          px(headerRowElement.offsetHeight)
-        );
-      };
-      setCustomValues({
-        gridHeight: gridElement.offsetHeight,
-        rowHeight: headerRowElement.clientHeight,
-      });
-    }
+      headerRowElement.style.setProperty(
+        `--${blockClass}--header-height`,
+        px(headerRowElement.offsetHeight)
+      );
+    };
+    setCustomValues({
+      gridHeight: gridElement.offsetHeight,
+      rowHeight: headerRowElement.clientHeight,
+    });
   }, [datagridState.rowSize, datagridState.tableId, datagridState]);
 
   const [incrementAmount] = useState(2);
-
-  const getClientXPosition = (event) => {
-    let isTouchEvent = false;
-    if (event.type === 'touchstart') {
-      // Do not respond to multiple touches (e.g. 2 or 3 fingers)
-      if (event.touches && event.touches.length > 1) {
-        return;
-      }
-      isTouchEvent = true;
-    }
-    const clientX = isTouchEvent
-      ? Math.round(event.touches[0].clientX)
-      : event.clientX;
-    const closestHeader = event.target.closest('th');
-    const closestHeaderCoords = closestHeader.getBoundingClientRect();
-    const headerOffset = closestHeaderCoords.left;
-    const offsetValue = clientX - headerOffset;
-    return offsetValue;
-  };
-
-  useEffect(() => {
-    const { isResizing } = datagridState.state;
-    if (isResizing) {
-      const { onColResizeEnd } = datagridState;
-      document.addEventListener('mouseup', () => {
-        handleColumnResizeEndEvent(
-          datagridState.dispatch,
-          onColResizeEnd,
-          isResizing
-        );
-        document.activeElement.blur();
-      });
-    }
-    return () => {
-      document.removeEventListener('mouseup', () =>
-        handleColumnResizeEndEvent(datagridState.dispatch)
-      );
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datagridState.state.isResizing]);
 
   return (
     <TableRow
@@ -132,8 +88,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { minWidth } = header || 50;
           const { visibleColumns, state, dispatch, onColResizeEnd } =
             datagridState;
-          const { columnResizing, isResizing } = state;
-          const { columnWidths } = columnResizing;
+          const { columnResizing } = state;
+          const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
           return (
             <TableHeader
@@ -143,39 +99,30 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   [`${blockClass}__resizableColumn`]: header.getResizerProps,
                   [`${blockClass}__isResizing`]: header.isResizing,
                   [`${blockClass}__sortableColumn`]:
-                    datagridState.isTableSortable,
+                    datagridState.isTableSortable && header.id !== 'spacer',
                   [`${blockClass}__isSorted`]: header.isSorted,
+                  [`${blockClass}__header-actions-column`]: header.isAction,
                 },
                 header.getHeaderProps().className
               )}
               key={header.id}
+              aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {header.getResizerProps && (
+              {header.getResizerProps && !header.isAction && (
                 <>
                   <input
                     {...header.getResizerProps()}
-                    onMouseMove={(event) => {
-                      if (isResizing) {
-                        const newWidth = getClientXPosition(event);
-                        // Sets a min width for resizing so at least one character from the column header is visible
-                        if (newWidth >= 50) {
-                          handleColumnResizingEvent(dispatch, header, newWidth);
-                        }
-                      }
-                    }}
-                    onMouseDown={() =>
-                      handleColumnResizeStartEvent(dispatch, header.id)
-                    }
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {
+                        const originalColMinWidth = originalCol.minWidth || 90;
                         const currentColumnWidth =
                           columnWidths[header.id] ||
                           (datagridState.isTableSortable &&
-                          originalCol.width < 90
-                            ? 90
+                          originalCol.width < originalColMinWidth
+                            ? originalColMinWidth
                             : originalCol.width);
                         if (key === 'ArrowLeft') {
                           if (
@@ -207,7 +154,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                       handleColumnResizeEndEvent(
                         dispatch,
                         onColResizeEnd,
-                        header.id
+                        header.id,
+                        true
                       )
                     }
                     className={cx(`${blockClass}__col-resizer-range`)}

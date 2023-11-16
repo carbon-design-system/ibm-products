@@ -85,7 +85,12 @@ export { EditUpdateCards } from './EditUpdateCards';
 
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
-export { Guidebanner } from './Guidebanner';
+export {
+  Guidebanner,
+  GuidebannerElement,
+  GuidebannerElementButton,
+  GuidebannerElementLink,
+} from './Guidebanner';
 export { NonLinearReading } from './NonLinearReading';
 
 export { Coachmark } from './Coachmark';
@@ -96,8 +101,9 @@ export { CoachmarkOverlayElements } from './CoachmarkOverlayElements';
 export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
 export { CoachmarkStack } from './CoachmarkStack';
 
-export { InlineTip } from './InlineTip';
+export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { InterstitialScreen } from './InterstitialScreen';
 export { InterstitialScreenView } from './InterstitialScreenView';
 export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
+
 export { Checklist } from './Checklist';

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Launch16 } from '@carbon/icons-react';
+import { Crossroads16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -51,9 +51,9 @@ const Template = (args) => {
       target={
         <CoachmarkButton
           kind="tertiary"
-          label="Show Information"
+          label="Show information"
           size="md"
-          renderIcon={Launch16}
+          renderIcon={Crossroads16}
           {...args}
         />
       }

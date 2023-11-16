@@ -6,8 +6,8 @@
  */
 
 // Import portions of React that are needed.
-import React, { forwardRef, useRef } from 'react';
-
+import React, { forwardRef, useRef, useState, useEffect } from 'react';
+import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -49,12 +49,41 @@ export let CoachmarkOverlay = forwardRef(
     },
     ref
   ) => {
+    const { winHeight, winWidth } = useWindowDimensions();
+    const [a11yDragMode, setA11yDragMode] = useState(false);
     const overlayRef = useRef();
     const coachmark = useCoachmark();
     const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
+    const isVisible = className && className.includes('is-visible');
+
+    const handleKeyPress = (event) => {
+      const { shiftKey, key } = event;
+      if (key === 'Enter' || key === ' ') {
+        setA11yDragMode((prevVal) => !prevVal);
+      } else if (a11yDragMode) {
+        const distanceToMove = shiftKey ? 128 : 32;
+        switch (key) {
+          case 'ArrowLeft':
+            handleDrag(distanceToMove * -1, 0);
+            break;
+          case 'ArrowRight':
+            handleDrag(distanceToMove, 0);
+            break;
+          case 'ArrowUp':
+            handleDrag(0, distanceToMove * -1);
+            break;
+          case 'ArrowDown':
+            handleDrag(0, distanceToMove);
+            break;
+          default:
+            break;
+        }
+      }
+    };
+
     let styledTune = {};
-    // TODO: check this... this feels like it should be in a hook with no dep array.
+
     if (isBeacon || isDraggable) {
       if (coachmark.targetRect) {
         styledTune = {
@@ -75,15 +104,41 @@ export let CoachmarkOverlay = forwardRef(
       }
     }
 
+    function handleDragBounds(x, y) {
+      let xRes = x;
+      let yRes = y;
+      const xMax = winWidth - 288;
+      const yMax = winHeight - 150;
+      if (xRes < 0) {
+        xRes = 0;
+      } else if (xRes > xMax) {
+        xRes = xMax;
+      }
+      if (yRes < 0) {
+        yRes = 0;
+      } else if (yRes > yMax) {
+        yRes = yMax;
+      }
+
+      return { targetX: xRes, targetY: yRes };
+    }
+
     function handleDrag(movementX, movementY) {
       const overlay = overlayRef.current;
       const { x, y } = overlay.getBoundingClientRect();
+
+      const { targetX, targetY } = handleDragBounds(
+        x + movementX,
+        y + movementY
+      );
+
       overlay.style.transform = 'none';
       overlay.style.position = 'fixed';
-      overlay.style.left = `${x + movementX}px`;
-      overlay.style.top = `${y + movementY}px`;
+      overlay.style.left = `${targetX}px`;
+      overlay.style.top = `${targetY}px`;
       overlay.style.bottom = 'auto';
     }
+    const contentId = uuidv4();
 
     return (
       <div
@@ -94,25 +149,60 @@ export let CoachmarkOverlay = forwardRef(
           `${blockClass}__${theme}`,
           (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
+          a11yDragMode && `${blockClass}--is-dragmode`,
           className
         )}
         ref={overlayRef}
         style={styledTune}
+        aria-labelledby={contentId}
+        tabIndex={-1}
         {...getDevtoolsProps(componentName)}
       >
         {isDraggable ? (
-          <CoachmarkDragbar onDrag={handleDrag} onClose={onClose} />
+          <CoachmarkDragbar
+            a11yKeyboardHandler={handleKeyPress}
+            onBlur={() => setA11yDragMode(false)}
+            onDrag={handleDrag}
+            theme={theme}
+            onClose={onClose}
+          />
         ) : (
           <CoachmarkHeader onClose={onClose} />
         )}
-        <div className={`${blockClass}__body`} ref={ref}>
-          {children}
+        <div className={`${blockClass}__body`} ref={ref} id={contentId}>
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, { isVisible })
+          )}
         </div>
         {isBeacon && <span className={`${blockClass}__caret`} />}
       </div>
     );
   }
 );
+
+function getWindowDimensions() {
+  const { innerWidth: winWidth, innerHeight: winHeight } = window;
+  return {
+    winWidth,
+    winHeight,
+  };
+}
+
+const useWindowDimensions = () => {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return windowDimensions;
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkOverlay = pkg.checkComponentEnabled(CoachmarkOverlay, componentName);

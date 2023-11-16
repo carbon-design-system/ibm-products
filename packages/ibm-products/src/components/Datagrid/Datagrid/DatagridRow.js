@@ -27,7 +27,7 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize, withNestedRows } = datagridState;
+  const { row, rowSize, withNestedRows, prepareRow, key } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -41,6 +41,9 @@ const DatagridRow = (datagridState) => {
   };
 
   const hoverHandler = (event) => {
+    if (!withNestedRows) {
+      return;
+    }
     const subRowCount = getVisibleNestedRowCount(row);
     const totalNestedRowIndicatorHeight = px(subRowCount * rowHeights[rowSize]);
     const hoverRow = event.target.closest(
@@ -74,75 +77,80 @@ const DatagridRow = (datagridState) => {
     });
   };
 
+  const renderExpandedRow = () => {
+    if (row.isExpanded) {
+      prepareRow(row);
+      return row?.RowExpansionRenderer?.({ ...datagridState, row });
+    }
+    return null;
+  };
+
+  const handleMouseLeave = (event) => {
+    const hoverRow = event.target.closest(
+      `.${blockClass}__carbon-row-expanded`
+    );
+    hoverRow?.classList.remove(
+      `${blockClass}__carbon-row-expanded-hover-active`
+    );
+  };
+
+  const handleOnKeyUp = (event) => {
+    if (!withNestedRows) {
+      return;
+    }
+    if (event.key === 'Enter' || event.key === 'Space') {
+      focusRemover();
+      hoverHandler(event);
+    }
+  };
+
+  const rowClassNames = cx(`${blockClass}__carbon-row`, {
+    [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+    [`${blockClass}__carbon-row-expandable`]: row.canExpand,
+    [`${carbon.prefix}--data-table--selected`]: row.isSelected,
+  });
+
   return (
-    <TableRow
-      className={cx(`${blockClass}__carbon-row`, {
-        [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
-        [`${blockClass}__carbon-row-expandable`]: row.canExpand,
-        [`${carbon.prefix}--data-table--selected`]: row.isSelected,
-      })}
-      {...row.getRowProps({ role: false })}
-      key={row.id}
-      onMouseEnter={(event) => {
-        if (!withNestedRows) {
-          return;
-        }
-        hoverHandler(event);
-      }}
-      onMouseLeave={(event) => {
-        const hoverRow = event.target.closest(
-          `.${blockClass}__carbon-row-expanded`
-        );
-        hoverRow?.classList.remove(
-          `${blockClass}__carbon-row-expanded-hover-active`
-        );
-      }}
-      onFocus={(event) => {
-        if (!withNestedRows) {
-          return;
-        }
-        hoverHandler(event);
-      }}
-      onBlur={() => {
-        focusRemover();
-      }}
-      onKeyUp={(event) => {
-        if (!withNestedRows) {
-          return;
-        }
-        if (event.key === 'Enter' || event.key === 'Space') {
-          focusRemover();
-          hoverHandler(event);
-        }
-      }}
-    >
-      {row.cells.map((cell, index) => {
-        const cellProps = cell.getCellProps({ role: false });
-        const { children, ...restProps } = cellProps;
-        const content = children || (
-          <>
-            {!row.isSkeleton && cell.render('Cell')}
-            {row.isSkeleton && <SkeletonText />}
-          </>
-        );
-        if (cell && cell.column && cell.column.id === selectionColumnId) {
-          // directly render component without the wrapping TableCell
-          return cell.render('Cell', { key: cell.column.id });
-        }
-        return (
-          <TableCell
-            className={cx(`${blockClass}__cell`, {
-              [`${blockClass}__expandable-row-cell`]:
-                row.canExpand && index === 0,
-            })}
-            {...restProps}
-            key={cell.column.id}
-          >
-            {content}
-          </TableCell>
-        );
-      })}
-    </TableRow>
+    <React.Fragment key={key}>
+      <TableRow
+        className={rowClassNames}
+        {...row.getRowProps({ role: false })}
+        key={row.id}
+        onMouseEnter={hoverHandler}
+        onMouseLeave={handleMouseLeave}
+        onFocus={hoverHandler}
+        onBlur={focusRemover}
+        onKeyUp={handleOnKeyUp}
+      >
+        {row.cells.map((cell, index) => {
+          const cellProps = cell.getCellProps({ role: false });
+          const { children, ...restProps } = cellProps;
+          const content = children || (
+            <>
+              {!row.isSkeleton && cell.render('Cell')}
+              {row.isSkeleton && <SkeletonText />}
+            </>
+          );
+          if (cell?.column?.id === selectionColumnId) {
+            // directly render component without the wrapping TableCell
+            return cell.render('Cell', { key: cell.column.id });
+          }
+          return (
+            <TableCell
+              className={cx(`${blockClass}__cell`, {
+                [`${blockClass}__expandable-row-cell`]:
+                  row.canExpand && index === 0,
+              })}
+              {...restProps}
+              key={cell.column.id}
+            >
+              {content}
+            </TableCell>
+          );
+        })}
+      </TableRow>
+      {renderExpandedRow()}
+    </React.Fragment>
   );
 };
 

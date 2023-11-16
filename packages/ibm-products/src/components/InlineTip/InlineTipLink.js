@@ -41,7 +41,7 @@ const componentName = 'InlineTipLink';
 // };
 
 /**
- * TODO: A description of the component.
+ * TODO: A standard Carbon link, styled specifically for use inside InlineTip.
  */
 export let InlineTipLink = React.forwardRef(
   (

@@ -7,12 +7,18 @@
  */
 
 import React, { useState } from 'react';
+import { TooltipIcon } from 'carbon-components-react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useFiltering } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useFiltering,
+  useColumnCenterAlign,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
@@ -90,7 +96,9 @@ const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Password strength',
       accessor: 'passwordStrength',
+      width: 160,
       filter: 'checkbox',
+      centerAlignedColumn: true,
       Cell: ({ cell: { value } }) => {
         const iconProps = {
           size: 'sm',
@@ -100,16 +108,12 @@ const FilteringUsage = ({ defaultGridProps }) => {
         };
 
         return (
-          <span
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <StatusIcon {...iconProps} />
-            {iconProps.iconDescription}
-          </span>
+          <TooltipIcon
+            tooltipText={iconProps.iconDescription}
+            onClick={action('onClick')}
+            renderIcon={() => <StatusIcon {...iconProps} />}
+            direction="top"
+          />
         );
       },
     },
@@ -144,7 +148,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       emptyStateTitle,
       emptyStateDescription,
     },
-    useFiltering
+    useFiltering,
+    useColumnCenterAlign
   );
 
   return <Datagrid datagridState={datagridState} />;

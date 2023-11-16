@@ -25,6 +25,7 @@ const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
 const componentName = 'CoachmarkOverlayElements';
 
 const defaults = {
+  isVisible: false,
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
@@ -39,6 +40,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
     {
       className,
       children,
+      isVisible = defaults.isVisible,
       media,
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
@@ -51,8 +53,17 @@ export let CoachmarkOverlayElements = React.forwardRef(
     const buttonFocusRef = useRef();
     const scrollRef = useRef();
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [currentProgStep, setCurrentProgStep] = useState(0);
+    const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
+
+    const setCurrentProgStep = (value) => {
+      if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
+        setTimeout(() => {
+          buttonFocusRef.current.focus();
+        }, 1000);
+      }
+      _setCurrentProgStep(value);
+    };
 
     const numProgSteps = Children.count(children);
     const progStepFloor = 0;
@@ -65,6 +76,15 @@ export let CoachmarkOverlayElements = React.forwardRef(
         buttonFocusRef.current.focus();
       }
     }, []);
+
+    useEffect(() => {
+      setTimeout(() => {
+        if (buttonFocusRef.current && isVisible) {
+          buttonFocusRef.current.focus();
+        }
+      }, 100);
+    }, [isVisible]);
+
     if (!coachmark) {
       return pconsole.warn(
         `The ${componentName} is a composable container element which should be used only within the scope of a Coachmark or a CoachmarkFixed component.`
@@ -110,7 +130,11 @@ export let CoachmarkOverlayElements = React.forwardRef(
                   'coachmark-carousel-controls'
                 )}
               >
-                <Button size="sm" {...coachmark.closeButtonProps}>
+                <Button
+                  size="sm"
+                  {...coachmark.closeButtonProps}
+                  ref={buttonFocusRef}
+                >
                   {closeButtonLabel}
                 </Button>
               </div>
@@ -219,6 +243,11 @@ CoachmarkOverlayElements.propTypes = {
    * The label for the Close button.
    */
   closeButtonLabel: PropTypes.string,
+  /**
+   * The visibility of CoachmarkOverlayElements is
+   * managed in the parent component.
+   */
+  isVisible: PropTypes.bool,
   /**
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.

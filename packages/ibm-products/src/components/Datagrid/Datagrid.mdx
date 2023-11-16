@@ -191,6 +191,17 @@ useDatagrid({
 });
 ```
 
+Disabling the resizable columns is possible by specifying
+`disableResizing: true` within the `useDatagrid` hook.
+
+```jsx
+useDatagrid({
+  columns,
+  data,
+  disableResizing: true,
+});
+```
+
 ## Rendering the table toolbar
 
 <img src={datagridActionsExample} />
@@ -1061,6 +1072,7 @@ const datagridState = useDatagrid(
     virtualHeight: 540,
     emptyStateTitle: 'Empty state title',
     emptyStateDescription: 'Description explaining why the table is empty',
+    loadMoreThreshold: 200,
   },
   useInfiniteScroll
 );
@@ -1101,6 +1113,8 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
   },
   useNestedRows
 );
@@ -1269,6 +1283,9 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    ascendingSortableLabelText: 'none',
+    descendingSortableLabelText: 'ascending',
+    defaultSortableLabelText: 'descending',
   },
   useSortableColumns
 );

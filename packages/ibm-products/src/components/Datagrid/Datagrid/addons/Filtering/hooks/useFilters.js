@@ -5,7 +5,7 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   Checkbox,
   DatePicker,
@@ -27,6 +27,7 @@ import {
   PANEL,
 } from '../constants';
 import { getInitialStateFromFilters } from '../utils';
+import { usePreviousValue } from '../../../../../../global/js/hooks';
 
 const useFilters = ({
   updateMethod,
@@ -35,6 +36,7 @@ const useFilters = ({
   variation,
   reactTableFiltersState,
   onCancel = () => {},
+  panelOpen,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -45,10 +47,16 @@ const useFilters = ({
     reactTableFiltersState
   );
 
+  const previousState = usePreviousValue({ panelOpen });
+
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const lastAppliedFilters = useRef(JSON.stringify(reactTableFiltersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  const holdingPrevFiltersRef = useRef();
+  const holdingLastAppliedFiltersRef = useRef([]);
+  const holdingPrevFiltersObjectArrayRef = useRef([]);
 
   /** Methods */
   // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
@@ -57,9 +65,19 @@ const useFilters = ({
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
     setAllFilters(JSON.parse(lastAppliedFilters.current));
+
+    // Set the temp prev refs, these will be used to populate the prev values once the
+    // panel opens again
+    holdingPrevFiltersRef.current = JSON.parse(prevFiltersRef.current);
+    holdingLastAppliedFiltersRef.current = JSON.parse(
+      prevFiltersObjectArrayRef.current
+    );
+    holdingPrevFiltersObjectArrayRef.current = JSON.parse(
+      lastAppliedFilters.current
+    );
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
     // When we reset we want the "initialFilters" to be an empty array
     const resetFiltersArray = [];
 
@@ -81,7 +99,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
-  };
+  }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
     // If no end date is selected return because we need the end date to do computations
@@ -327,6 +345,35 @@ const useFilters = ({
 
     return <React.Fragment key={column}>{filter}</React.Fragment>;
   };
+
+  /** This useEffect will properly handle the previous filters when the panel closes
+   * 1. If the panel closes we need to call the reset fn but also store the
+   * previous filters in a (new) temporary place.
+   * 2. When the panel opens again, take the values from the temporary place
+   * and populate the filter state with them
+   */
+  useEffect(() => {
+    if (!panelOpen && previousState?.panelOpen) {
+      setAllFilters(holdingLastAppliedFiltersRef.current);
+    }
+    if (panelOpen && !previousState?.panelOpen) {
+      if (
+        holdingPrevFiltersRef.current &&
+        holdingLastAppliedFiltersRef.current &&
+        holdingPrevFiltersObjectArrayRef.current
+      ) {
+        setFiltersState(holdingPrevFiltersRef.current);
+        setFiltersObjectArray(holdingLastAppliedFiltersRef.current);
+        setAllFilters(JSON.parse(prevFiltersObjectArrayRef.current));
+      }
+    }
+  }, [
+    panelOpen,
+    previousState,
+    previousState?.panelOpen,
+    reset,
+    setAllFilters,
+  ]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

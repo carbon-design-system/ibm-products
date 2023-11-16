@@ -74,7 +74,12 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     InlineTip: false,
+    InlineTipButton: false,
+    InlineTipLink: false,
     Guidebanner: false,
+    GuidebannerElement: false,
+    GuidebannerElementButton: false,
+    GuidebannerElementLink: false,
     NonLinearReading: false,
     InterstitialScreen: false,
     InterstitialScreenView: false,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,8 @@ import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+const toolbarClass = `${blockClass}__table-toolbar`;
+const menuClass = `${blockClass}__button-menu`;
 
 const { TableToolbar } = DataTable;
 
@@ -31,7 +33,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toolbarBatchActions,
     setGlobalFilter,
   } = datagridState;
-  const totalSelected = Object.keys(selectedRowIds || {})?.length;
+  const selectedKeys = Object.keys(selectedRowIds || {});
+  const totalSelected = selectedKeys.length;
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside
@@ -71,32 +74,18 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         renderIcon={
           width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
         }
-        className={cx(`${blockClass}__button-menu`, {
-          [`${blockClass}__button-menu--icon-only`]:
-            width <= minWidthBeforeOverflowIcon,
-        })}
-        menuOptionsClass={`${blockClass}__button-menu-options`}
+        className={cx([
+          menuClass,
+          {
+            [`${menuClass}--icon-only`]: width <= minWidthBeforeOverflowIcon,
+          },
+        ])}
+        menuOptionsClass={`${menuClass}-options`}
         flipped
       >
-        {toolbarBatchActions &&
-          toolbarBatchActions.map((batchAction, index) => {
-            if (index < 2) {
-              if (displayAllInMenu) {
-                return (
-                  <ButtonMenuItem
-                    key={`${batchAction.label}-${index}`}
-                    itemText={batchAction.label}
-                    onClick={() => {
-                      batchAction.onClick();
-                      if (batchAction.type === 'select_all') {
-                        toggleAllRowsSelected(true);
-                      }
-                    }}
-                  />
-                );
-              }
-              return null;
-            }
+        {toolbarBatchActions?.map((batchAction, index) => {
+          const hidden = index < 2 && !displayAllInMenu;
+          if (!hidden) {
             return (
               <ButtonMenuItem
                 key={`${batchAction.label}-${index}`}
@@ -109,7 +98,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                 }}
               />
             );
-          })}
+          }
+        })}
       </ButtonMenu>
     );
   };
@@ -161,15 +151,12 @@ const DatagridToolbar = (datagridState) => {
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
 
-  const getRowHeight = rowSize ? rowSize : 'lg';
+  const getRowHeight = rowSize || 'lg';
 
   return batchActions && DatagridActions ? (
     <div
       ref={ref}
-      className={cx(
-        `${blockClass}__table-toolbar`,
-        `${blockClass}__table-toolbar--${getRowHeight}`
-      )}
+      className={cx([toolbarClass, `${toolbarClass}--${getRowHeight}`])}
     >
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
@@ -178,7 +165,7 @@ const DatagridToolbar = (datagridState) => {
       </TableToolbar>
     </div>
   ) : DatagridActions ? (
-    <div className={`${blockClass}__table-toolbar`}>
+    <div className={toolbarClass}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}

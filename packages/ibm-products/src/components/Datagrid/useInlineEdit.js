@@ -29,9 +29,6 @@ const useInlineEdit = (hooks, usingEditableCell) => {
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
-    const totalInlineEditColumns = instance.columns.filter(
-      (item) => item.inlineEdit
-    )?.length;
 
     const renderInlineEditComponent = (type) => (
       <InlineEditCell
@@ -40,7 +37,6 @@ const useInlineEdit = (hooks, usingEditableCell) => {
         value={cell.value}
         cell={cell}
         instance={instance}
-        totalInlineEditColumns={totalInlineEditColumns}
         type={type}
       />
     );
@@ -80,7 +76,6 @@ const useInlineEdit = (hooks, usingEditableCell) => {
                 instance={instance}
                 disabled
                 nonEditCell
-                totalInlineEditColumns={totalInlineEditColumns}
                 type="text"
               />
             )}

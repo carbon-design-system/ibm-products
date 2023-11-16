@@ -17,7 +17,7 @@ import { Tag } from 'carbon-components-react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 const componentName = 'TagSet';
@@ -31,6 +31,7 @@ const defaults = {
   // allTagsModalTarget: document.body,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
+  overflowType: 'default',
 };
 
 export let TagSet = React.forwardRef(
@@ -45,6 +46,7 @@ export let TagSet = React.forwardRef(
       multiline,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
+      overflowType = defaults.overflowType,
       overflowDirection = defaults.overflowDirection,
       allTagsModalTitle,
       allTagsModalSearchLabel,
@@ -98,7 +100,6 @@ export let TagSet = React.forwardRef(
                   <Tag
                     {...other} // ensure id is not duplicated
                     data-original-id={id}
-                    filter={false}
                   >
                     {label}
                   </Tag>
@@ -115,7 +116,7 @@ export let TagSet = React.forwardRef(
       let newDisplayedTags =
         tags && tags.length > 0
           ? tags.map(({ label, ...other }, index) => (
-              <Tag {...other} filter={false} key={`displayed-tag-${index}`}>
+              <Tag {...other} key={`displayed-tag-${index}`}>
                 {label}
               </Tag>
             ))
@@ -141,6 +142,7 @@ export let TagSet = React.forwardRef(
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
+          overflowType={overflowType}
           overflowDirection={overflowDirection}
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
@@ -152,6 +154,7 @@ export let TagSet = React.forwardRef(
     }, [
       displayCount,
       overflowAlign,
+      overflowType,
       overflowClassName,
       overflowDirection,
       showAllTagsLabel,
@@ -350,6 +353,10 @@ TagSet.propTypes = {
    */
   overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
+  /**
    * label for the overflow show all tags link.
    *
    * **Note:** Required if more than 10 tags
@@ -360,14 +367,12 @@ TagSet.propTypes = {
    * with properties: **label**\* (required) to supply the tag content, and
    * other properties will be passed to the Carbon Tag component, such as
    * **type**, **disabled**, **ref**, **className** , and any other Tag props.
-   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
-   * as HTML attributes.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
    */
   tags: PropTypes.arrayOf(
     PropTypes.shape({
-      ...prepareProps(Tag.propTypes, 'filter'),
+      ...Tag.propTypes,
       label: PropTypes.string.isRequired,
       // we duplicate this prop to improve the DocGen
       type: PropTypes.oneOf(tagTypes),

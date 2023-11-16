@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,12 @@ import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import FilterPanel from './addons/Filtering/FilterPanel';
 import { FilterSummary } from '../../FilterSummary';
 import { FilterContext } from './addons/Filtering';
-import { CLEAR_FILTERS } from './addons/Filtering/constants';
+import {
+  CLEAR_FILTERS,
+  CLEAR_SINGLE_FILTER,
+} from './addons/Filtering/constants';
+import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
+import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 
 const { TableContainer, Table } = DataTable;
 
@@ -33,7 +38,7 @@ export const DatagridContent = ({ datagridState, title }) => {
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
   const {
-    getTableProps = () => {},
+    getTableProps,
     getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
@@ -51,10 +56,13 @@ export const DatagridContent = ({ datagridState, title }) => {
     DatagridActions,
     totalColumnsWidth,
     gridRef,
+    setAllFilters,
     state,
+    page,
+    rows,
   } = datagridState;
 
-  const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
+  const contentRows = (DatagridPagination && page) || rows;
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
@@ -90,27 +98,25 @@ export const DatagridContent = ({ datagridState, title }) => {
         role={withInlineEdit && 'grid'}
         tabIndex={withInlineEdit && 0}
         onKeyDown={
-          withInlineEdit
-            ? (event) =>
-                handleGridKeyPress({
-                  event,
-                  dispatch,
-                  instance: datagridState,
-                  keysPressedList,
-                  state: inlineEditState,
-                  usingMac,
-                })
-            : null
+          /* istanbul ignore next */
+          withInlineEdit &&
+          ((event) =>
+            handleGridKeyPress({
+              event,
+              dispatch,
+              instance: datagridState,
+              keysPressedList,
+              state: inlineEditState,
+              usingMac,
+            }))
         }
         onFocus={
-          withInlineEdit
-            ? () => handleGridFocus(inlineEditState, dispatch)
-            : null
+          withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
         }
         title={title}
       >
-        {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
-        <DatagridBody {...datagridState} rows={rows} />
+        {!withVirtualScroll && <DatagridHead {...datagridState} />}
+        <DatagridBody {...datagridState} rows={contentRows} />
       </Table>
     );
   };
@@ -142,12 +148,19 @@ export const DatagridContent = ({ datagridState, title }) => {
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
+  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+    clearSingleFilter(id, setAllFilters, state)
+  );
+
+  /* istanbul ignore next */
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        renderLabel={filterProps.renderLabel}
+        overflowType="tag"
       />
     );
 
@@ -204,7 +217,7 @@ export const DatagridContent = ({ datagridState, title }) => {
           </div>
         </div>
       </TableContainer>
-      {rows?.length > 0 && !isFetching && DatagridPagination && (
+      {contentRows?.length > 0 && !isFetching && DatagridPagination && (
         <DatagridPagination {...datagridState} />
       )}
       {CustomizeColumnsTearsheet && (

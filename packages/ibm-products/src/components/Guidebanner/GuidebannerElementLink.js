@@ -26,7 +26,7 @@ const componentName = 'GuidebannerElementLink';
 /**
  * A link styled specifically for the GuidebannerElement.
  */
-const GuidebannerElementLink = ({ children, className, ...rest }) => {
+export let GuidebannerElementLink = ({ children, className, ...rest }) => {
   return (
     <Link
       {...rest}
@@ -40,6 +40,16 @@ const GuidebannerElementLink = ({ children, className, ...rest }) => {
     </Link>
   );
 };
+
+// Return a placeholder if not released and not enabled by feature flag
+GuidebannerElementLink = pkg.checkComponentEnabled(
+  GuidebannerElementLink,
+  componentName
+);
+
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+GuidebannerElementLink.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -55,5 +65,3 @@ GuidebannerElementLink.propTypes = {
    */
   className: PropTypes.string,
 };
-
-export { GuidebannerElementLink };

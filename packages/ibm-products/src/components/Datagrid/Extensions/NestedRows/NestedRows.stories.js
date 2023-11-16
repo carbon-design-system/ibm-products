@@ -185,6 +185,8 @@ const nestedRowsControlProps = {
   rowSize: sharedDatagridProps.rowSize,
   rowSizes: sharedDatagridProps.rowSizes,
   onRowSizeChange: sharedDatagridProps.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
 };
 const nestedRowsStoryName = 'With nested rows';
 export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
@@ -196,6 +198,8 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
     rowSize: ARG_TYPES.rowSize,
     rowSizes: ARG_TYPES.rowSizes,
     onRowSizeChange: ARG_TYPES.onRowSizeChange,
+    expanderButtonTitleExpanded: ARG_TYPES.expanderButtonTitleExpanded,
+    expanderButtonTitleCollapsed: ARG_TYPES.expanderButtonTitleCollapsed,
   },
   args: {
     ...nestedRowsControlProps,

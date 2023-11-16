@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import cx from 'classnames';
 import PropTypes, { Component } from 'prop-types';
 import { createPortal } from 'react-dom';
@@ -18,6 +24,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
+const overlayBlockClass = `${blockClass}-overlay`;
 const componentName = 'Coachmark';
 
 const defaults = {
@@ -66,11 +73,28 @@ export let Coachmark = forwardRef(
     const backupRef = useRef();
     const _coachmarkRef = ref || backupRef;
     const _overlayRef = overlayRef || overlayBackupRef;
+
     const closeOverlay = () => {
       setIsOpen(false);
     };
 
-    const handleClose = () => {
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          handleClose();
+        }
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+    const handleClose = useCallback(() => {
       if (isStacked) {
         // If stacked, do not unmount,
         // only call its ("parent") onClose method.
@@ -79,7 +103,7 @@ export let Coachmark = forwardRef(
         setIsOpen(false);
         onClose();
       }
-    };
+    }, [isStacked, onClose]);
 
     const handleTargetClick = (e) => {
       setTargetRect(e.target.getBoundingClientRect());
@@ -98,6 +122,7 @@ export let Coachmark = forwardRef(
     const contextValue = {
       buttonProps: {
         'aria-expanded': isOpen,
+        tabIndex: 0,
         onClick: handleTargetClick,
         // Compensate for accidental open/close on double-click.
         // Only open on double-click.
@@ -162,7 +187,10 @@ export let Coachmark = forwardRef(
                 kind={overlayKind}
                 onClose={handleClose}
                 theme={theme}
-                className={overlayClassName}
+                className={cx(
+                  overlayClassName,
+                  `${overlayBlockClass}--is-visible`
+                )}
               >
                 {children}
               </CoachmarkOverlay>,
@@ -204,7 +232,7 @@ Coachmark.propTypes = {
     'top-left',
     'top-right',
   ]),
-  // TODO: UPDATE COMMENT HERE - UPDATE MDX TO HAVE DIRECTION TO USE ONLY OVERLAY ELEMENTS>...
+
   /**
    * Coachmark should use a single CoachmarkOverlayElements component as a child.
    * @see CoachmarkOverlayElements

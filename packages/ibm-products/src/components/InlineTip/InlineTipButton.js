@@ -40,7 +40,7 @@ const componentName = 'InlineTipButton';
 // };
 
 /**
- * TODO: A description of the component.
+ * TODO: A standard Carbon button, styled specifically for use inside InlineTip.
  */
 export let InlineTipButton = React.forwardRef(
   (

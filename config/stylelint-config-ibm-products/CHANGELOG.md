@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.34](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.33...stylelint-config-ibm-products@0.0.34) (2023-10-31)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3659](https://github.com/carbon-design-system/ibm-products/issues/3659)) ([9e49ac7](https://github.com/carbon-design-system/ibm-products/commit/9e49ac7357549482b1d112e77a688076be6cdb41)), closes [#3671](https://github.com/carbon-design-system/ibm-products/issues/3671) [#3665](https://github.com/carbon-design-system/ibm-products/issues/3665)
+
+
+
+
+
+## [0.0.33](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.32...stylelint-config-ibm-products@0.0.33) (2023-10-10)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3495](https://github.com/carbon-design-system/ibm-products/issues/3495)) ([0c41c26](https://github.com/carbon-design-system/ibm-products/commit/0c41c267edf1919355bd56f3e8b8968de5ba8465))
+
+
+
+
+
 ## [0.0.32](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.31...stylelint-config-ibm-products@0.0.32) (2023-08-15)
 
 

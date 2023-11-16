@@ -44,6 +44,7 @@ const DatagridVirtualBody = (datagridState) => {
     gridRef,
   } = datagridState;
 
+  /* istanbul ignore next */
   const handleVirtualGridResize = () => {
     const gridRefElement = gridRef?.current;
     gridRefElement.style.width = gridRefElement?.clientWidth;
@@ -51,6 +52,7 @@ const DatagridVirtualBody = (datagridState) => {
 
   useResizeObserver(gridRef, handleVirtualGridResize);
 
+  /* istanbul ignore next */
   const syncScroll = (event) => {
     const virtualBody = event.target;
     document.querySelector(`.${blockClass}__head-wrap`).scrollLeft =

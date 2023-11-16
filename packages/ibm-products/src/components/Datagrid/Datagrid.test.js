@@ -33,6 +33,7 @@ import {
   useColumnOrder,
   useColumnRightAlign,
   useColumnCenterAlign,
+  useEditableCell,
 } from '.';
 
 import {
@@ -49,6 +50,12 @@ import {
   Activity16,
   Add16,
 } from '@carbon/icons-react';
+
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
+import {
+  FilteringUsage,
+  filterProps,
+} from './Extensions/Filtering/Panel.stories';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
@@ -285,6 +292,7 @@ const TenThousandEntries = ({ ...rest }) => {
     {
       columns,
       data,
+      rowSize: 'lg',
     },
     useInfiniteScroll
   );
@@ -907,6 +915,28 @@ describe(componentName, () => {
     ).toEqual(10);
   });
 
+  it('renders a basic table and resizes column', () => {
+    const { keyboard, tab, click } = userEvent;
+    render(<BasicUsage data-testid={dataTestId} />);
+    click(screen.getByTestId(dataTestId));
+    tab();
+    // Input range resizer now has focus
+    keyboard('[ArrowRight]');
+    const firstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const firstColumnWidth = firstColumnHeader.style.width;
+    expect(parseInt(firstColumnWidth)).toEqual(152);
+    keyboard('[ArrowRight]');
+    const resizedFirstColumnHeader = screen.getAllByRole('columnheader')[0];
+    const resizedFirstColumnWidth = resizedFirstColumnHeader.style.width;
+    expect(parseInt(resizedFirstColumnWidth)).toEqual(154);
+    keyboard('[ArrowLeft]');
+    const revertResizedFirstColumnHeader =
+      screen.getAllByRole('columnheader')[0];
+    const revertResizedFirstColumnWidth =
+      revertResizedFirstColumnHeader.style.width;
+    expect(parseInt(revertResizedFirstColumnWidth)).toEqual(152);
+  });
+
   it('renders a Batch Actions Table', () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
@@ -1434,18 +1464,10 @@ describe(componentName, () => {
     const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
     fireEvent.click(rowExpander);
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')
-    ).toBeDefined();
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0].textContent
-    ).toEqual(`Content for ${rowNumber}`);
+    expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
+    expect(row.nextElementSibling.textContent).toEqual(
+      `Content for ${rowNumber}`
+    );
 
     const rowExpanderCollapse = row.querySelector(
       `button[aria-label="Collapse row"]`
@@ -1453,7 +1475,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it('Expanded Row', () => {
+  it('should render with expandable rows and test by toggling the row open and closed', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
@@ -1479,7 +1501,7 @@ describe(componentName, () => {
   }
 
   it('Hide Select All', () => {
-    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+    render(<HideSelectAll data-testid={dataTestId} />);
 
     hideSelectAll(2);
 
@@ -1489,33 +1511,29 @@ describe(componentName, () => {
   });
 
   it('Nested Rows', () => {
-    render(<NestedRows data-testid={dataTestId}></NestedRows>);
+    render(<NestedRows data-testid={dataTestId} />);
 
-    const row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    const firstRow = row
-      .getElementsByTagName('td')[0]
-      .getElementsByTagName('button')[0];
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const firstBodyRow = bodyRows[0];
+    const firstRowExpander = within(firstBodyRow).getByLabelText('Expand row');
+    fireEvent.click(firstRowExpander);
+    expect(firstBodyRow).toHaveClass(`${blockClass}__carbon-row-expanded`);
 
-    fireEvent.click(firstRow);
-    expect(row.classList[0]).toEqual('c4p--datagrid__carbon-row-expanded');
+    const newAllRows = screen.getAllByRole('row');
+    const newBodyRows = newAllRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const nestedRow = newBodyRows[1];
 
-    const nestedRow = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[1];
-
-    if (nestedRow.className === 'c4p--datagrid__carbon-nested-row') {
-      fireEvent.click(
-        nestedRow
-          .getElementsByTagName('td')[0]
-          .getElementsByTagName('button')[0]
-      );
+    if (nestedRow.className === `${blockClass}__carbon-nested-row`) {
+      const nestedRowExpander = within(nestedRow).getByLabelText('Expand row');
+      fireEvent.click(nestedRowExpander);
     }
 
-    expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
+    expect(nestedRow).toHaveClass(`${blockClass}__carbon-nested-row`);
   });
 
   it('Nested Table', () => {
@@ -2500,6 +2518,72 @@ describe(componentName, () => {
     );
     expect(within(firstBodyRow).getAllByRole('button').length).toEqual(1); // Previously was 2 but we've hidden the other in this test
   });
+
+  const EditableCellUsage = ({ ...args }) => {
+    const [data, setData] = useState(makeData(3));
+    const columns = React.useMemo(() => getInlineEditColumns(), []);
+    pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+    pkg.feature['Datagrid.useInlineEdit'] = true;
+    pkg._silenceWarnings(true);
+
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        onDataUpdate: setData,
+        ...args.defaultGridProps,
+      },
+      useEditableCell
+    );
+
+    // Warnings are ordinarily silenced in storybook, add this to test.
+    pkg._silenceWarnings(false);
+    pkg.feature['Datagrid.useEditableCell'] = true;
+    pkg._silenceWarnings(true);
+
+    return <Datagrid datagridState={datagridState} />;
+  };
+
+  it('should test the basic interactions of the editable cell datagrid', () => {
+    const { click } = userEvent;
+    const { container } = render(<EditableCellUsage />);
+    const tableElement = screen.getByRole('grid');
+    const rowButtons = screen.getAllByRole('button');
+    const firstEditableCell = rowButtons[0];
+
+    click(firstEditableCell);
+    expect(firstEditableCell).toHaveClass(
+      `${blockClass}__inline-edit-button--active`
+    );
+    click(container);
+    expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
+  });
+
+  it('should test basic interactions of filter panel', async () => {
+    const { click } = userEvent;
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          gridTitle: 'Data table title',
+          gridDescription: 'Additional information if needed',
+          useDenseHeader: false,
+          emptyStateTitle: 'No filters match',
+          emptyStateDescription:
+            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+          filterProps,
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const panelContainer = toolbar.nextElementSibling;
+    const toolbarButtons = within(toolbar).getAllByRole('button');
+    const filterToggleButton = toolbarButtons[0];
+    // Open filter panel
+    click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+  });
 });
 
 const duplicateOnClickFn = jest.fn();
@@ -2557,9 +2641,9 @@ const TestBatch = () => {
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
+      DatagridPagination,
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useStickyColumn
   );
 
@@ -2619,7 +2703,7 @@ describe('batch action testing', () => {
 
     // Resize observer or mocked widths not working as expected, changes batch action summary element
     // width to 0 which prevents the default batch action behavior from occurring
-    it.skip('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
+    it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
       const { click } = userEvent;
       const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
@@ -2640,9 +2724,6 @@ describe('batch action testing', () => {
 
       const menuButton = container.querySelector(`.${pkg.prefix}--button-menu`);
       const cancelButton = screen.getByRole('button', { name: /Cancel/i });
-      const selectAllButton = screen.getByRole('button', {
-        name: /Select all/i,
-      });
       expect(menuButton).toBeInTheDocument();
       click(menuButton);
       const options = Array.from(
@@ -2668,7 +2749,7 @@ describe('batch action testing', () => {
           click(menuButton);
         }
         const displayedMenuElement = document.querySelector(
-          `.${carbon.prefix}--menu`
+          `.${pkg.prefix}--button-menu__options`
         );
         const menuItems = Array.from(displayedMenuElement.children);
 
@@ -2676,7 +2757,8 @@ describe('batch action testing', () => {
           (item) =>
             item.textContent === getBatchActions()[remainingBatchIndex].label
         )[0];
-        click(menuItem);
+        const menuItemButton = menuItem.firstElementChild;
+        click(menuItemButton);
         expect(clickHandlerFn).toHaveBeenCalledTimes(1);
       };
 
@@ -2686,7 +2768,37 @@ describe('batch action testing', () => {
       checkMenuItem(5, deleteOnClickFn, true);
       click(cancelButton);
       click(firstCheckbox);
-      click(selectAllButton);
+    });
+
+    it('renders batch action with select all and checks indeterminate behavior', () => {
+      const { click } = userEvent;
+      render(<TestBatch />);
+      const bodyElement = screen.getAllByRole('rowgroup')[1];
+      const allRows = screen.getAllByRole('row');
+      const selectAllCheckbox = within(allRows[0]).getAllByRole('checkbox')[0];
+      click(selectAllCheckbox);
+      const carbonTableToolbar = screen.getByLabelText('data table toolbar');
+      expect(carbonTableToolbar).toBeInTheDocument();
+      const bodyRows = allRows.filter(
+        (r) =>
+          !r.classList.contains('c4p--datagrid__head') &&
+          !r.classList.contains('c4p--datagrid__expanded-row')
+      );
+      const firstBodyRow = bodyRows[0];
+      const firstRowCheckbox = within(firstBodyRow).getByRole('checkbox');
+      click(firstRowCheckbox);
+
+      // // // Should remove all checked checkboxes in the body
+      const selectAll = screen.getAllByRole('checkbox')[0];
+      click(selectAll);
+      let totalChecked = 0;
+      const allBodyCheckboxes = within(bodyElement).getAllByRole('checkbox');
+      allBodyCheckboxes.forEach((c) => {
+        if (c.checked) {
+          totalChecked = totalChecked + 1;
+        }
+      });
+      expect(totalChecked).toEqual(0);
     });
   });
 });

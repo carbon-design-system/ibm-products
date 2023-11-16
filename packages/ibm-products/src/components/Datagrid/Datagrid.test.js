@@ -161,6 +161,7 @@ const BasicUsage = ({ ...rest }) => {
   const datagridState = useDatagrid({
     columns,
     data,
+    resizerAriaLabel: 'Custom column resizer label',
   });
 
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
@@ -918,6 +919,10 @@ describe(componentName, () => {
   it('renders a basic table and resizes column', () => {
     const { keyboard, tab, click } = userEvent;
     render(<BasicUsage data-testid={dataTestId} />);
+    const resizerInput = screen.getAllByLabelText(
+      'Custom column resizer label'
+    );
+    expect(resizerInput.length).toEqual(defaultHeader.length);
     click(screen.getByTestId(dataTestId));
     tab();
     // Input range resizer now has focus

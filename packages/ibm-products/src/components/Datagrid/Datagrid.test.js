@@ -1496,12 +1496,12 @@ describe(componentName, () => {
     const rows = screen.getAllByRole('row');
     const bodyRows = rows.filter(
       (r) =>
-        !r.classList.contains('c4p--datagrid__head') &&
-        !r.classList.contains('c4p--datagrid__expanded-row')
+        !r.classList.contains(`${blockClass}__head`) &&
+        !r.classList.contains(`${blockClass}__expanded-row`)
     );
     const row = bodyRows[rowNumber];
 
-    const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
+    const rowExpander = within(row).getByLabelText('Expand row');
     fireEvent.click(rowExpander);
 
     expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
@@ -1509,9 +1509,7 @@ describe(componentName, () => {
       `Content for ${rowNumber}`
     );
 
-    const rowExpanderCollapse = row.querySelector(
-      `button[aria-label="Collapse row"]`
-    );
+    const rowExpanderCollapse = within(row).getByLabelText('Collapse row');
     fireEvent.click(rowExpanderCollapse);
   }
 
@@ -1523,30 +1521,26 @@ describe(componentName, () => {
   });
 
   function hideSelectAll(rowNumber) {
-    var row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[rowNumber];
-    var button = row
-      .getElementsByTagName('td')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('input')[0];
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const row = bodyRows[rowNumber];
+    const rowCheckbox = within(row).getByRole('checkbox');
 
-    fireEvent.click(button);
+    fireEvent.click(rowCheckbox);
+    expect(Array.from(row.classList)).toContain(
+      `${carbon.prefix}--data-table--selected`
+    );
 
-    expect(row.classList[1]).toEqual('bx--data-table--selected');
-
-    fireEvent.click(button);
-    expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
+    fireEvent.click(rowCheckbox);
+    expect(Array.from(row.classList)).toContain(`${blockClass}__carbon-row`);
   }
 
-  it('Hide Select All', () => {
+  it('should test that selectable rows toggle the correct class when they are selected and unselected', () => {
     render(<HideSelectAll data-testid={dataTestId} />);
-
     hideSelectAll(2);
-
     hideSelectAll(5);
-
     hideSelectAll(8);
   });
 

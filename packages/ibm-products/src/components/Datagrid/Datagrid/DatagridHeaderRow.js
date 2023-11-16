@@ -31,6 +31,7 @@ const getAccessibilityProps = (header) => {
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
+  const { resizerAriaLabel } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -175,7 +176,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     className={cx(`${blockClass}__col-resizer-range`)}
                     type="range"
                     defaultValue={originalCol.width}
-                    aria-label="Resize column"
+                    aria-label={resizerAriaLabel || 'Resize column'}
                   />
                   <span className={`${blockClass}__col-resize-indicator`} />
                 </>

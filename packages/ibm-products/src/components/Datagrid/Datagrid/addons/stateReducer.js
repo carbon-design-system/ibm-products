@@ -11,6 +11,7 @@ const COLUMN_RESIZE_START = 'columnStartResizing';
 const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
+const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
@@ -51,8 +52,27 @@ export const handleColumnResizingEvent = (
   });
 };
 
+export const handleToggleRowSelected = (dispatch, rowData) =>
+  dispatch({
+    type: TOGGLE_ROW_SELECTED,
+    payload: { rowData },
+  });
+
 export const stateReducer = (newState, action) => {
   switch (action.type) {
+    case TOGGLE_ROW_SELECTED: {
+      const { rowData } = action.payload || {};
+      if (!rowData) {
+        return;
+      }
+      return {
+        ...newState,
+        selectedRowData: {
+          ...newState.selectedRowData,
+          [rowData.index]: rowData,
+        },
+      };
+    }
     case INIT: {
       return {
         ...newState,

@@ -915,7 +915,7 @@ describe(componentName, () => {
     ).toEqual(10);
   });
 
-  it('renders a basic table and resizes column', async () => {
+  it('renders a basic table and resizes column', () => {
     const { keyboard, tab, click } = userEvent;
     render(<BasicUsage data-testid={dataTestId} />);
     click(screen.getByTestId(dataTestId));
@@ -1468,9 +1468,6 @@ describe(componentName, () => {
     expect(row.nextElementSibling.textContent).toEqual(
       `Content for ${rowNumber}`
     );
-
-    fireEvent.mouseOver(row.nextElementSibling);
-    fireEvent.mouseLeave(row.nextElementSibling);
 
     const rowExpanderCollapse = row.querySelector(
       `button[aria-label="Collapse row"]`

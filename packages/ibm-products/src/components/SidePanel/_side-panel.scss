@@ -110,10 +110,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     position: sticky;
     z-index: 4;
     top: 0;
-    height: calc(
-      var(--#{$block-class}--title-container-height) -
-        var(--#{$block-class}--label-text-height)
-    );
     padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     background-color: $layer-01;
 
@@ -169,6 +165,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     position: inherit;
     z-index: 4;
+    margin-bottom: calc(-1 * var(--#{$block-class}--label-text-height));
     background-color: $layer-01;
     opacity: var(--#{$block-class}--subtitle-opacity);
     transform: translateY(var(--#{$block-class}--title-y-position));

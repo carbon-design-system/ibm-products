@@ -69,6 +69,17 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   const [incrementAmount] = useState(2);
 
+  const handleOnMouseDownResize = (event, resizeProps) => {
+    const { onMouseDown } = { ...resizeProps() };
+    // When event.button is 2, that is a right click
+    // and we do not want to resize
+    if (event.button === 2 || event.ctrlKey) {
+      event.target.blur();
+      return;
+    }
+    onMouseDown?.(event);
+  };
+
   return (
     <TableRow
       {...headerGroup.getHeaderGroupProps({ role: false })}
@@ -114,6 +125,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                 <>
                   <input
                     {...header.getResizerProps()}
+                    onMouseDown={(event) =>
+                      handleOnMouseDownResize(event, header.getResizerProps)
+                    }
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {

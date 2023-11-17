@@ -2427,7 +2427,6 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky;
   z-index: 4;
   top: 0;
-  height: calc(var(--c4p--side-panel--title-container-height) - var(--c4p--side-panel--label-text-height));
   padding: 1rem 1rem 0.5rem 1rem;
   background-color: var(--cds-layer-01, #f4f4f4);
   /* stylelint-disable-next-line max-nesting-depth */
@@ -2488,6 +2487,7 @@ p.c4p--about-modal__copyright-text:first-child {
   -webkit-line-clamp: 2;
   position: inherit;
   z-index: 4;
+  margin-bottom: calc(-1 * var(--c4p--side-panel--label-text-height));
   background-color: var(--cds-layer-01, #f4f4f4);
   opacity: var(--c4p--side-panel--subtitle-opacity);
   transform: translateY(var(--c4p--side-panel--title-y-position));

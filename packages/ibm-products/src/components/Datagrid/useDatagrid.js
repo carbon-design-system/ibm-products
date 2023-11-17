@@ -58,9 +58,13 @@ const useDatagrid = (params, ...plugins) => {
   ];
   const clientEndPlugins = params.endPlugins || [];
 
+  const defaultColumn = {
+    minWidth: 50,
+  };
+
   const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
   const tableState = useTable(
-    { tableId, ...params, stateReducer },
+    { tableId, ...params, stateReducer, defaultColumn },
     ...defaultPlugins,
     ...plugins,
     ...defaultEndPlugins,

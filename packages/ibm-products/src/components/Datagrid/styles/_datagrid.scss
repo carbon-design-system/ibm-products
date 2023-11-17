@@ -320,6 +320,11 @@
   background-color: $hover-selected-ui;
 }
 
+.#{$block-class}__grid-container
+  table.#{$block-class}__table-simple.#{$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
+  overflow-y: hidden;
+}
+
 .#{$block-class}__resizableColumn {
   &.#{$block-class}__isResizing {
     .#{$block-class}__resizer {

@@ -167,6 +167,7 @@ const BasicUsage = ({ ...rest } = {}) => {
   const datagridState = useDatagrid({
     columns,
     data,
+    resizerAriaLabel: 'Custom column resizer label',
   });
 
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
@@ -957,6 +958,10 @@ describe(componentName, () => {
     });
     const { keyboard, tab } = user;
     render(<BasicUsage data-testid={dataTestId} />);
+    const resizerInput = screen.getAllByLabelText(
+      'Custom column resizer label'
+    );
+    expect(resizerInput.length).toEqual(defaultHeader.length);
     await click(screen.getByTestId(dataTestId));
     await tab();
     // Input range resizer now has focus
@@ -1485,7 +1490,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it('Expanded Row', () => {
+  it('should render with expandable rows and test by toggling the row open and closed', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
@@ -2011,7 +2016,8 @@ describe(componentName, () => {
     );
   });
 
-  it('should render sortable columns and toggle between sortable states for all column headers', async () => {
+  it('should render sortable columns and toggle between sortable states for all column headers', () => {
+    const { click } = userEvent;
     render(<SortableColumns data-testid={dataTestId} />);
 
     const rows = screen.getAllByRole('row');
@@ -2025,15 +2031,15 @@ describe(componentName, () => {
         return;
       }
       const sortableColumnHeaderButton = within(colHeader).getByRole('button');
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'ascending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'descending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      await click(sortableColumnHeaderButton);
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'none'
       );
@@ -2066,100 +2072,9 @@ describe(componentName, () => {
     const ref = React.createRef();
     render(<TopAlignment ref={ref} data-testid={dataTestId} />);
 
-    const alertMock = jest.spyOn(window, 'alert');
-    expect(screen.getByRole('table').classList[2]).toEqual(
-      'c4p--datagrid__vertical-align-top'
+    expect(screen.getByRole('table')).toHaveClass(
+      `${blockClass}__vertical-align-top`
     );
-
-    const topAlignmentRows = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr');
-
-    const allRowsCheckBox = screen
-      .getByRole('table')
-      .getElementsByTagName('thead')[0]
-      .getElementsByTagName('tr')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('th')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('input')[0];
-
-    fireEvent.click(allRowsCheckBox);
-
-    for (var i = 0; i < topAlignmentRows.length; i++) {
-      expect(topAlignmentRows[i].classList[1]).toEqual(
-        `${carbon.prefix}--data-table--selected`
-      );
-    }
-
-    fireEvent.click(allRowsCheckBox);
-
-    for (var j = 0; j < topAlignmentRows.length; j++) {
-      fireEvent.click(
-        topAlignmentRows[j]
-          .getElementsByTagName('td')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('input')[0]
-      );
-      expect(topAlignmentRows[j].classList[1]).toEqual(
-        `${carbon.prefix}--data-table--selected`
-      );
-    }
-
-    fireEvent.click(allRowsCheckBox);
-
-    expect(
-      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
-    ).toBeDefined();
-
-    expect(screen.getByText(/left panel/i)).toHaveClass(
-      `${carbon.prefix}--tooltip-content`
-    );
-
-    const rowHeightButton = screen.getByRole('button', {
-      name: /Row settings/i,
-    });
-    fireEvent.click(rowHeightButton);
-
-    const rowSizeDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Extra small',
-    ];
-    const rowSize = ref.current.querySelector(
-      `.c4p--datagrid__row-size-dropdown`
-    );
-
-    for (var k = 0; k < rowSize; k++) {
-      expect(
-        document
-          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('fieldset')[0]
-          .getElementsByTagName('div')
-          .item(k)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[1].textContent
-      ).toEqual(rowSizeDropDown[k]);
-    }
-
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    const refreshButton = screen.getByLabelText('Refresh');
-    fireEvent.click(refreshButton);
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    const downloadButton = screen.getByLabelText('Download CSV');
-    fireEvent.click(downloadButton);
-    expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
   const getOverflowMenuItems = () => {

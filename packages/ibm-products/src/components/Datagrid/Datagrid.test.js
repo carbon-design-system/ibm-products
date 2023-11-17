@@ -2193,7 +2193,8 @@ describe(componentName, () => {
     );
   });
 
-  it('should render sortable columns and toggle between sortable states for all column headers', async () => {
+  it('should render sortable columns and toggle between sortable states for all column headers', () => {
+    const { click } = userEvent;
     render(<SortableColumns data-testid={dataTestId} />);
 
     const rows = screen.getAllByRole('row');
@@ -2207,15 +2208,18 @@ describe(componentName, () => {
         return;
       }
       const sortableColumnHeaderButton = within(colHeader).getByRole('button');
-      fireEvent.click(sortableColumnHeaderButton);
+      click(sortableColumnHeaderButton);
+      await new Promise((resolve) => setTimeout(() => resolve(), 0));
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'ascending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      click(sortableColumnHeaderButton);
+      await new Promise((resolve) => setTimeout(() => resolve(), 0));
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'descending'
       );
-      fireEvent.click(sortableColumnHeaderButton);
+      click(sortableColumnHeaderButton);
+      await new Promise((resolve) => setTimeout(() => resolve(), 0));
       expect(sortableColumnHeaderButton.getAttribute('aria-sort')).toEqual(
         'none'
       );

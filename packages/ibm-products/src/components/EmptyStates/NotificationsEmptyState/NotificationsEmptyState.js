@@ -107,7 +107,7 @@ NotificationsEmptyState.propTypes = {
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
    * based on your app's current theme value. Example:
-   * `illustrationTheme theme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
+   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 

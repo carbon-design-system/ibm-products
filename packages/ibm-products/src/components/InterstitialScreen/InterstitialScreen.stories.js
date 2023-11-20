@@ -278,7 +278,6 @@ export const interstitialScreenModal = prepareStory(TemplateModal, {
         className="NoImageExampleModal"
       >
         <InterstitialScreenViewModule
-          className="GenericModalView"
           title="Use case-specific heading"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
@@ -294,7 +293,6 @@ export const interstitialScreenModalWithImage = prepareStory(TemplateModal, {
     children: (
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
-          className="GenericModalView"
           title="Use case-specific heading"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
@@ -317,7 +315,6 @@ export const interstitialScreenModalMultiples = prepareStory(
             className="NoImageExampleModal"
           >
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
@@ -327,7 +324,6 @@ export const interstitialScreenModalMultiples = prepareStory(
             className="NoImageExampleModal"
           >
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
@@ -337,7 +333,6 @@ export const interstitialScreenModalMultiples = prepareStory(
             className="NoImageExampleModal"
           >
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
@@ -360,21 +355,18 @@ export const interstitialScreenModalMultiplesHeader = prepareStory(
         <>
           <InterstitialScreenView stepTitle="Step 1">
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 2">
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 3">
             <InterstitialScreenViewModule
-              className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />

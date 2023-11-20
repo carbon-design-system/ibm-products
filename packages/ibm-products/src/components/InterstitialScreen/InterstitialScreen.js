@@ -20,10 +20,14 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg, carbon } from '../../settings';
-import { ArrowRight16, Close16 } from '@carbon/icons-react';
+import { ArrowRight16 } from '@carbon/icons-react'; //Close16
 import {
   Button,
   Column,
+  ComposedModal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
   Grid,
   ProgressIndicator,
   ProgressStep,
@@ -73,7 +77,7 @@ export let InterstitialScreen = React.forwardRef(
     {
       children,
       className,
-      closeIconDescription = defaults.closeIconDescription,
+      // closeIconDescription = defaults.closeIconDescription,
       domainName = defaults.domainName,
       hideProgressIndicator = defaults.hideProgressIndicator,
       isFullScreen = defaults.isFullScreen,
@@ -137,25 +141,26 @@ export let InterstitialScreen = React.forwardRef(
       scrollRef.current.scrollToView(targetStep);
       setProgStep(targetStep);
     };
-    useEffect(() => {
-      function updateScrollPosition(event) {
-        // update the scroll position
-        //event.stopPropagation();
-        //event.preventDefault();
-        console.log('SCROLLING... ', event);
-      }
-      const scrollDiv = bodyScrollRef.current;
-      if (scrollDiv) {
-        scrollDiv.addEventListener('wheel', updateScrollPosition, {
-          passive: false,
-        });
-        return () => {
-          scrollDiv.removeEventListener('wheel', updateScrollPosition, {
-            passive: false,
-          });
-        };
-      }
-    }, []);
+    // useEffect(() => {
+    //   function updateScrollPosition(event) {
+    //     // update the scroll position
+    //     //event.stopPropagation();
+    //     //event.preventDefault();
+    //     console.log('SCROLLING... ', event);
+    //   }
+    //   const scrollDiv = bodyScrollRef.current;
+    //   if (scrollDiv) {
+    //     scrollDiv.addEventListener('wheel', updateScrollPosition, {
+    //       passive: false,
+    //     });
+    //     return () => {
+    //       scrollDiv.removeEventListener('wheel', updateScrollPosition, {
+    //         passive: false,
+    //       });
+    //     };
+    //   }
+    // }, []);
+
     useEffect(() => {
       startButtonRef.current?.focus();
     }, [isOpen, progStep]);
@@ -183,35 +188,29 @@ export let InterstitialScreen = React.forwardRef(
     }
     const domainProductDelimiter =
       domainName !== '' && productName !== '' ? ' | ' : '';
-    return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          variantClass,
-          isVisibleClass
-        )}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      >
-        <div className={containerClass}>
-          {isFullScreen && (
-            <div className={`${blockClass}--header`}>
-              {domainName}
-              {domainProductDelimiter}
-              <strong>{productName}</strong>
-            </div>
+
+    const renderModal = (childElements) => {
+      return (
+        <ComposedModal
+          {...rest}
+          className={cx(
+            // blockClass, // Apply the block class to the main HTML element
+            className // Apply any supplied class names to the main HTML element.
+            // variantClass,
+            // isVisibleClass
           )}
-          <header
+          onClose={onClose}
+          open={isOpen}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <ModalHeader
             className={cx(
               headerBlockClass,
               headerTitle && 'has-title',
               headerClassName
             )}
+            buttonOnClick={handleClose}
           >
             {headerTitle && <h2>{headerTitle}</h2>}
             {!hideProgressIndicator && (
@@ -225,150 +224,313 @@ export let InterstitialScreen = React.forwardRef(
                 </ProgressIndicator>
               </div>
             )}
+          </ModalHeader>
+          <ModalBody>{childElements}</ModalBody>
+          <ModalFooter>{renderFooter()}</ModalFooter>
+        </ComposedModal>
+      );
+    };
 
-            {!isFullScreen && (
-              <Button
-                className={`${blockClass}--close-icon`}
-                hasIconOnly
-                iconDescription={closeIconDescription}
-                kind="ghost"
-                renderIcon={Close16}
-                type="button"
-                size="lg"
-                onClick={handleClose}
-              />
-            )}
-          </header>
-          <div className={cx(`${blockClass}--body`)} ref={bodyScrollRef}>
-            {mediaIsDefined ? (
-              <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
-                <Row className={cx(`${blockClass}--body-row`)}>
+    const renderFullScreen = (childElements) => {
+      return (
+        <div
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            className, // Apply any supplied class names to the main HTML element.
+            variantClass,
+            isVisibleClass
+          )}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <div className={containerClass}>
+            <div className={`${blockClass}--header`}>
+              {domainName}
+              {domainProductDelimiter}
+              <strong>{productName}</strong>
+            </div>
+
+            <header
+              className={cx(
+                headerBlockClass,
+                headerTitle && 'has-title',
+                headerClassName
+              )}
+            >
+              {headerTitle && <h2>{headerTitle}</h2>}
+              {!hideProgressIndicator && (
+                <div className={`${blockClass}--progress`}>
+                  <ProgressIndicator vertical={false} currentIndex={progStep}>
+                    {childArray.map((child, idx) => {
+                      return (
+                        <ProgressStep key={idx} label={child.props.stepTitle} />
+                      );
+                    })}
+                  </ProgressIndicator>
+                </div>
+              )}
+            </header>
+
+            {childElements}
+            {renderFooter()}
+          </div>
+        </div>
+      );
+    };
+
+    const renderBody = () => {
+      return (
+        // <div className={containerClass}>
+        //   {isFullScreen && (
+        //     <div className={`${blockClass}--header`}>
+        //       {domainName}
+        //       {domainProductDelimiter}
+        //       <strong>{productName}</strong>
+        //     </div>
+        //   )}
+        //   <header
+        //     className={cx(
+        //       headerBlockClass,
+        //       headerTitle && 'has-title',
+        //       headerClassName
+        //     )}
+        //   >
+        //     {headerTitle && <h2>{headerTitle}</h2>}
+        //     {!hideProgressIndicator && (
+        //       <div className={`${blockClass}--progress`}>
+        //         <ProgressIndicator vertical={false} currentIndex={progStep}>
+        //           {childArray.map((child, idx) => {
+        //             return (
+        //               <ProgressStep key={idx} label={child.props.stepTitle} />
+        //             );
+        //           })}
+        //         </ProgressIndicator>
+        //       </div>
+        //     )}
+
+        //     {!isFullScreen && (
+        //       <Button
+        //         className={`${blockClass}--close-icon`}
+        //         hasIconOnly
+        //         iconDescription={closeIconDescription}
+        //         kind="ghost"
+        //         renderIcon={Close16}
+        //         type="button"
+        //         size="lg"
+        //         onClick={handleClose}
+        //       />
+        //     )}
+        //   </header>
+        <div className={cx(`${blockClass}--body`)} ref={bodyScrollRef}>
+          {mediaIsDefined ? (
+            <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
+              <Row className={cx(`${blockClass}--body-row`)}>
+                <Column
+                  xlg={contentBreakpoints.xlg}
+                  lg={contentBreakpoints.lg}
+                  md={contentBreakpoints.md}
+                  sm={contentBreakpoints.sm}
+                >
+                  <div className={cx(`${blockClass}--content`)}>
+                    {isMultiStep ? (
+                      <div className={`${blockClass}__carousel`}>
+                        <Carousel disableArrowScroll ref={scrollRef}>
+                          {children}
+                        </Carousel>
+                      </div>
+                    ) : (
+                      childArray[0]
+                    )}
+                  </div>
+                </Column>
+                {mediaIsDefined && (
                   <Column
-                    xlg={contentBreakpoints.xlg}
-                    lg={contentBreakpoints.lg}
-                    md={contentBreakpoints.md}
-                    sm={contentBreakpoints.sm}
+                    xlg={mediaBreakpoints.xlg}
+                    lg={mediaBreakpoints.lg}
+                    md={mediaBreakpoints.md}
+                    sm={mediaBreakpoints.sm}
+                    className={cx(`${blockClass}--media-container`)}
                   >
-                    <div className={cx(`${blockClass}--content`)}>
-                      {isMultiStep ? (
-                        <div className={`${blockClass}__carousel`}>
-                          <Carousel disableArrowScroll ref={scrollRef}>
-                            {children}
-                          </Carousel>
-                        </div>
+                    <div className={`${blockClass}--media`}>
+                      {media.render ? (
+                        media.render()
                       ) : (
-                        childArray[0]
+                        <SteppedAnimatedMedia
+                          className={`${blockClass}--stepped-animated-media`}
+                          filePaths={media.filePaths}
+                          playStep={progStep}
+                        />
                       )}
                     </div>
                   </Column>
-                  {mediaIsDefined && (
-                    <Column
-                      xlg={mediaBreakpoints.xlg}
-                      lg={mediaBreakpoints.lg}
-                      md={mediaBreakpoints.md}
-                      sm={mediaBreakpoints.sm}
-                      className={cx(`${blockClass}--media-container`)}
-                    >
-                      <div className={`${blockClass}--media`}>
-                        {media.render ? (
-                          media.render()
-                        ) : (
-                          <SteppedAnimatedMedia
-                            className={`${blockClass}--stepped-animated-media`}
-                            filePaths={media.filePaths}
-                            playStep={progStep}
-                          />
-                        )}
-                      </div>
-                    </Column>
-                  )}
-                </Row>
-              </Grid>
-            ) : (
-              <div className={cx(`${blockClass}--content`)}>
-                {isMultiStep ? (
-                  <div className={`${blockClass}__carousel`}>
-                    <Carousel disableArrowScroll ref={scrollRef}>
-                      {children}
-                    </Carousel>
-                  </div>
-                ) : (
-                  <div>{childArray[0]}</div>
                 )}
-              </div>
-            )}
-          </div>
-
-          <div className={`${blockClass}--footer`}>
-            {/* <div> */}
-            {isMultiStep && skipButtonLabel !== '' && (
-              <Button
-                className={`${blockClass}--skip-btn`}
-                kind="ghost"
-                size="lg"
-                title={skipButtonLabel}
-                type="button"
-                onClick={handleClose}
-              >
-                {skipButtonLabel}
-              </Button>
-            )}
-            {/* </div> */}
-            <div className={`${blockClass}--footer-controls`}>
-              {isMultiStep && progStep > 0 && (
-                <Button
-                  className={`${blockClass}--prev-btn`}
-                  kind="secondary"
-                  size="lg"
-                  type="button"
-                  title={previousButtonLabel}
-                  onClick={handleClickPrev}
-                >
-                  {previousButtonLabel}
-                </Button>
-              )}
-
-              {isMultiStep && progStep < progStepCeil && (
-                <Button
-                  className={`${blockClass}--next-btn`}
-                  renderIcon={ArrowRight16}
-                  ref={nextButtonRef}
-                  size="lg"
-                  type="button"
-                  title={nextButtonLabel}
-                  onClick={handleClickNext}
-                >
-                  {nextButtonLabel}
-                </Button>
-              )}
-              {isMultiStep && progStep === progStepCeil && (
-                <Button
-                  className={`${blockClass}--start-btn`}
-                  ref={startButtonRef}
-                  renderIcon={ArrowRight16}
-                  size="lg"
-                  title={startButtonLabel}
-                  onClick={handleClose}
-                >
-                  {startButtonLabel}
-                </Button>
-              )}
-              {!isMultiStep && (
-                <Button
-                  className={`${blockClass}--start-btn`}
-                  ref={startButtonRef}
-                  size="lg"
-                  title={startButtonLabel}
-                  onClick={handleClose}
-                >
-                  {startButtonLabel}
-                </Button>
+              </Row>
+            </Grid>
+          ) : (
+            <div className={cx(`${blockClass}--content`)}>
+              {isMultiStep ? (
+                <div className={`${blockClass}__carousel`}>
+                  <Carousel disableArrowScroll ref={scrollRef}>
+                    {children}
+                  </Carousel>
+                </div>
+              ) : (
+                <div>{childArray[0]}</div>
               )}
             </div>
+          )}
+        </div>
+
+        //   <div className={`${blockClass}--footer`}>
+        //     {/* <div> */}
+        //     {isMultiStep && skipButtonLabel !== '' && (
+        //       <Button
+        //         className={`${blockClass}--skip-btn`}
+        //         kind="ghost"
+        //         size="lg"
+        //         title={skipButtonLabel}
+        //         type="button"
+        //         onClick={handleClose}
+        //       >
+        //         {skipButtonLabel}
+        //       </Button>
+        //     )}
+        //     {/* </div> */}
+        //     <div className={`${blockClass}--footer-controls`}>
+        //       {isMultiStep && progStep > 0 && (
+        //         <Button
+        //           className={`${blockClass}--prev-btn`}
+        //           kind="secondary"
+        //           size="lg"
+        //           type="button"
+        //           title={previousButtonLabel}
+        //           onClick={handleClickPrev}
+        //         >
+        //           {previousButtonLabel}
+        //         </Button>
+        //       )}
+
+        //       {isMultiStep && progStep < progStepCeil && (
+        //         <Button
+        //           className={`${blockClass}--next-btn`}
+        //           renderIcon={ArrowRight16}
+        //           ref={nextButtonRef}
+        //           size="lg"
+        //           type="button"
+        //           title={nextButtonLabel}
+        //           onClick={handleClickNext}
+        //         >
+        //           {nextButtonLabel}
+        //         </Button>
+        //       )}
+        //       {isMultiStep && progStep === progStepCeil && (
+        //         <Button
+        //           className={`${blockClass}--start-btn`}
+        //           ref={startButtonRef}
+        //           renderIcon={ArrowRight16}
+        //           size="lg"
+        //           title={startButtonLabel}
+        //           onClick={handleClose}
+        //         >
+        //           {startButtonLabel}
+        //         </Button>
+        //       )}
+        //       {!isMultiStep && (
+        //         <Button
+        //           className={`${blockClass}--start-btn`}
+        //           ref={startButtonRef}
+        //           size="lg"
+        //           title={startButtonLabel}
+        //           onClick={handleClose}
+        //         >
+        //           {startButtonLabel}
+        //         </Button>
+        //       )}
+        //     </div>
+        //   </div>
+        // </div>
+      );
+    };
+
+    const renderFooter = () => {
+      return (
+        <div className={`${blockClass}--footer`}>
+          {/* <div> */}
+          {isMultiStep && skipButtonLabel !== '' && (
+            <Button
+              className={`${blockClass}--skip-btn`}
+              kind="ghost"
+              size="lg"
+              title={skipButtonLabel}
+              type="button"
+              onClick={handleClose}
+            >
+              {skipButtonLabel}
+            </Button>
+          )}
+          {/* </div> */}
+          <div className={`${blockClass}--footer-controls`}>
+            {isMultiStep && progStep > 0 && (
+              <Button
+                className={`${blockClass}--prev-btn`}
+                kind="secondary"
+                size="lg"
+                type="button"
+                title={previousButtonLabel}
+                onClick={handleClickPrev}
+              >
+                {previousButtonLabel}
+              </Button>
+            )}
+
+            {isMultiStep && progStep < progStepCeil && (
+              <Button
+                className={`${blockClass}--next-btn`}
+                renderIcon={ArrowRight16}
+                ref={nextButtonRef}
+                size="lg"
+                type="button"
+                title={nextButtonLabel}
+                onClick={handleClickNext}
+              >
+                {nextButtonLabel}
+              </Button>
+            )}
+            {isMultiStep && progStep === progStepCeil && (
+              <Button
+                className={`${blockClass}--start-btn`}
+                ref={startButtonRef}
+                renderIcon={ArrowRight16}
+                size="lg"
+                title={startButtonLabel}
+                onClick={handleClose}
+              >
+                {startButtonLabel}
+              </Button>
+            )}
+            {!isMultiStep && (
+              <Button
+                className={`${blockClass}--start-btn`}
+                ref={startButtonRef}
+                size="lg"
+                title={startButtonLabel}
+                onClick={handleClose}
+              >
+                {startButtonLabel}
+              </Button>
+            )}
           </div>
         </div>
-      </div>
-    );
+      );
+    };
+
+    return isFullScreen
+      ? renderFullScreen(renderBody())
+      : renderModal(renderBody());
   }
 );
 

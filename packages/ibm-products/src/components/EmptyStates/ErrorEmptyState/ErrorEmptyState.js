@@ -52,7 +52,11 @@ export let ErrorEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <ErrorIllustration theme={illustrationTheme} size={size} />
+        <ErrorIllustration
+          title={title}
+          theme={illustrationTheme}
+          size={size}
+        />
         <EmptyStateContent
           action={action}
           link={link}

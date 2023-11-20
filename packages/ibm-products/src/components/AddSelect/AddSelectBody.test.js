@@ -267,7 +267,7 @@ describe(componentName, () => {
     render(<AddSelectBody {...singleProps} />);
     const input = screen.getByPlaceholderText('Find categories');
     fireEvent.change(input, { target: { value: 'aaa' } });
-    expect(screen.getByText(singleProps.noResultsTitle));
+    expect(screen.getAllByText(singleProps.noResultsTitle));
   });
 
   it('displays child items', () => {

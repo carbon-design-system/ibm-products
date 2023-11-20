@@ -52,7 +52,11 @@ export let UnauthorizedEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <UnauthorizedIllustration size={size} theme={illustrationTheme} />
+        <UnauthorizedIllustration
+          size={size}
+          title={title}
+          theme={illustrationTheme}
+        />
         <EmptyStateContent
           action={action}
           link={link}

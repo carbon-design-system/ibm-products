@@ -56,7 +56,11 @@ export let NotificationsEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NotificationsIllustration size={size} theme={illustrationTheme} />
+        <NotificationsIllustration
+          size={size}
+          title={title}
+          theme={illustrationTheme}
+        />
         <EmptyStateContent
           action={action}
           link={link}

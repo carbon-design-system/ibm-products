@@ -52,7 +52,11 @@ export let NoTagsEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NoTagsIllustration theme={illustrationTheme} size={size} />
+        <NoTagsIllustration
+          title={title}
+          theme={illustrationTheme}
+          size={size}
+        />
         <EmptyStateContent
           action={action}
           link={link}
@@ -96,7 +100,7 @@ NoTagsEmptyState.propTypes = {
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
    * based on your app's current theme value. Example:
-   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
+   * `illustrationtitle={title} theme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 

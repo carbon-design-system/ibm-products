@@ -56,7 +56,11 @@ export let NotificationsEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NotificationsIllustration size={size} theme={illustrationTheme} />
+        <NotificationsIllustration
+          size={size}
+          title={title}
+          theme={illustrationTheme}
+        />
         <EmptyStateContent
           action={action}
           link={link}
@@ -103,7 +107,7 @@ NotificationsEmptyState.propTypes = {
    * Empty state illustration theme variations.
    * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
    * based on your app's current theme value. Example:
-   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
+   * `illustrationtitle={title} theme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 

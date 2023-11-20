@@ -52,7 +52,11 @@ export let NotFoundEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NotFoundIllustration theme={illustrationTheme} size={size} />
+        <NotFoundIllustration
+          title={title}
+          theme={illustrationTheme}
+          size={size}
+        />
         <EmptyStateContent
           action={action}
           link={link}

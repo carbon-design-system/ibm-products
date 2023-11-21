@@ -8,3 +8,4 @@ on:
 jobs:
   Release:
     uses: ./.github/workflows/release.yml
+    secrets: inherit

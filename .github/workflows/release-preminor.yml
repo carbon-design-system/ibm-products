@@ -1,0 +1,12 @@
+name: v2 pre-release # Builds and releases @carbon/v11 supported version of @carbon/ibm-products
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./release.yml
+        with:
+          release-type: '--canary preminor'

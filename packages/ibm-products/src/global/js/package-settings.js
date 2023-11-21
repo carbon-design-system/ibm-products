@@ -79,7 +79,6 @@ const defaults = {
   // feature level flags
   feature: {
     'default-portal-target-body': true,
-    'Datagrid.useInfiniteScroll': false,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
     'Datagrid.useExpandedRow': false,

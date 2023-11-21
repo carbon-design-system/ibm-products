@@ -4,8 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
-@use '../../../ibm-products/src/global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 .component-playground .#{c4p-settings.$pkg-prefix}--side-panel__overlay {
   z-index: 7999;

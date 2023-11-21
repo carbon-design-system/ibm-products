@@ -7,6 +7,4 @@ on:
 
 jobs:
   Release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./release.yml
+    uses: ./.github/workflows/release.yml

@@ -5,8 +5,6 @@ on:
 
 jobs:
   Release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./release.yml
-        with:
-          release-type: '--canary preminor'
+    uses: ./.github/workflows/release.yml
+    with:
+      release-type: '--canary preminor'

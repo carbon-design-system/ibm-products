@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.1...@carbon/ibm-cloud-cognitive-core@2.5.0) (2023-11-21)
+
+
+### Features
+
+* new InlineTip and SteppedAnimatedMedia components ([#3800](https://github.com/carbon-design-system/ibm-products/issues/3800)) ([bd79dc8](https://github.com/carbon-design-system/ibm-products/commit/bd79dc8e0f402465813163f1f2021526f96dabb5))
+
+
+
+
+
 ## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.0...@carbon/ibm-cloud-cognitive-core@2.4.1) (2023-11-03)
 
 

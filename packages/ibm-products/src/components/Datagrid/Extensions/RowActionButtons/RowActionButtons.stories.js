@@ -232,12 +232,6 @@ const RowActionButtonsOverflow = ({ ...args }) => {
     useActionsColumn
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useActionsColumn` hook
-  pkg.feature['Datagrid.useActionsColumn'] = true;
-  pkg._silenceWarnings(true);
-
   return <Datagrid datagridState={datagridState} />;
 };
 
@@ -286,7 +280,6 @@ export const ManyRowActionButtonsUsageStory = prepareStory(
     },
     args: {
       ...manyRowActionButtonsProps,
-      featureFlags: ['Datagrid.useActionsColumn'],
     },
   }
 );

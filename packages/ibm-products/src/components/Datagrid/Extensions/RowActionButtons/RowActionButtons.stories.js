@@ -19,7 +19,6 @@ import {
   useStickyColumn,
   useActionsColumn,
   useSelectRows,
-  useSelectAllWithToggle,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DocsPage } from './RowActionButtons.docs-page';
@@ -140,7 +139,6 @@ const RowActionButtons = ({ ...args }) => {
       {
         Header: '',
         accessor: 'actions',
-        sticky: 'right',
         isAction: true,
       },
     ],
@@ -202,6 +200,51 @@ export const RowActionButtonsUsageStory = prepareStory(
   }
 );
 
+const RowActionButtonsOverflow = ({ ...args }) => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const rows = React.useMemo(() => data, [data]);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data: rows,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      DatagridActions,
+      DatagridPagination,
+      ...args.defaultGridProps,
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useActionsColumn` hook
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
+
+  return <Datagrid datagridState={datagridState} />;
+};
+
+const RowActionButtonOverflowTemplateWrapper = ({ ...args }) => {
+  return <RowActionButtonsOverflow defaultGridProps={{ ...args }} />;
+};
+
 const manyRowActionButtonsProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
@@ -229,9 +272,10 @@ const manyRowActionButtonsProps = {
     },
   ],
 };
+
 const manyRowActionButtonsStoryName = 'With many row action buttons';
 export const ManyRowActionButtonsUsageStory = prepareStory(
-  RowActionButtonTemplateWrapper,
+  RowActionButtonOverflowTemplateWrapper,
   {
     storyName: manyRowActionButtonsStoryName,
     argTypes: {
@@ -278,7 +322,6 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
     useStickyColumn,
     useActionsColumn,
     useSelectRows,
-    useSelectAllWithToggle
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test.

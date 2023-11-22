@@ -26,6 +26,97 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    items: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no items',
+          1: 'three items',
+          2: 'with hierarchy',
+        },
+      },
+      options: [0, 1, 2],
+      mapping: {
+        0: { entries: [] },
+        1: {
+          entries: [
+            {
+              id: '1',
+              title: 'Kansas',
+              value: 'kansas',
+            },
+            {
+              id: '2',
+              title: 'Texas',
+              value: 'texas',
+            },
+            {
+              id: '3',
+              title: 'Florida',
+              value: 'florida',
+            },
+          ],
+        },
+        2: {
+          entries: [
+            {
+              id: '1',
+              title: 'Kansas',
+              value: 'kansas',
+            },
+            {
+              id: '2',
+              title: 'Texas',
+              value: 'texas',
+            },
+            {
+              id: '3',
+              title: 'Florida',
+              value: 'florida',
+            },
+            {
+              id: '4',
+              title: 'California',
+              value: 'california',
+              children: {
+                entries: [
+                  {
+                    id: '5',
+                    title: 'Los Angeles',
+                    value: 'la',
+                    children: {
+                      entries: [
+                        {
+                          id: '6',
+                          title: 'Beverly Hills',
+                          value: 'bh',
+                        },
+                        {
+                          id: '7',
+                          title: 'Malibu',
+                          value: 'malibu',
+                          children: {
+                            entries: [
+                              {
+                                id: '8',
+                                title: 'Malibu Rd',
+                                value: 'malibu-rd',
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
 };
 
 const defaultProps = {
@@ -34,25 +125,6 @@ const defaultProps = {
   globalSearchLabel: 'global search label',
   globalSearchPlaceholder: 'Find categories',
   illustrationTheme: 'light',
-  items: {
-    entries: [
-      {
-        id: '1',
-        title: 'Kansas',
-        value: 'kansas',
-      },
-      {
-        id: '2',
-        title: 'Texas',
-        value: 'texas',
-      },
-      {
-        id: '3',
-        title: 'Florida',
-        value: 'florida',
-      },
-    ],
-  },
   itemsLabel: 'Categories',
   navIconDescription: 'View children',
   noResultsTitle: 'No results',
@@ -77,54 +149,14 @@ const Template = (args, context) => {
 
 export const Default = prepareStory(Template, {
   args: {
+    items: 1,
     ...defaultProps,
   },
 });
 
 export const WithHierarchy = prepareStory(Template, {
   args: {
+    items: 2,
     ...defaultProps,
-    items: {
-      entries: [
-        ...defaultProps.items.entries,
-        {
-          id: '4',
-          title: 'California',
-          value: 'california',
-          children: {
-            entries: [
-              {
-                id: '5',
-                title: 'Los Angeles',
-                value: 'la',
-                children: {
-                  entries: [
-                    {
-                      id: '6',
-                      title: 'Third Level',
-                      value: 'third level',
-                    },
-                    {
-                      id: '7',
-                      title: 'another Level',
-                      value: 'another level',
-                      children: {
-                        entries: [
-                          {
-                            id: '8',
-                            title: 'last level',
-                            value: 'last level',
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-      ],
-    },
   },
 });

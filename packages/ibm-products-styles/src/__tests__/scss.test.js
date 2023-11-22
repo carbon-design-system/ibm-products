@@ -7,7 +7,7 @@
 
 const { resolve } = require('path');
 const { sync: glob } = require('glob');
-import { scssCheck } from '../global/js/utils/test-helper';
+import { scssCheck } from './test-helper';
 
 const g = (globString) =>
   glob(resolve(__dirname, globString), {

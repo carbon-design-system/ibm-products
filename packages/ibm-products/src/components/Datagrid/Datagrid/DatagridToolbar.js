@@ -30,7 +30,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toolbarBatchActions,
     setGlobalFilter,
     rows,
+    batchActionMenuButtonLabel,
+    translateWithIdBatchActions,
   } = datagridState;
+  const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
 
@@ -90,7 +93,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
     return (
       <MenuButton
-        label="More"
+        label={batchActionMenuButtonLabelText}
         className={cx([
           menuClass,
           {
@@ -135,6 +138,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       onCancel={onCancelHandler}
       onSelectAll={onSelectAllHandler}
       totalCount={rows && rows.length}
+      translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&

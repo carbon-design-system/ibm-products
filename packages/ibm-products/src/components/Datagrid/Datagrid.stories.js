@@ -532,7 +532,6 @@ export const BatchActions = () => {
       onSelectAllRows: () => console.log('onSelectAll batch action callback'),
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useActionsColumn,
     useStickyColumn
   );

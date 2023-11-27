@@ -32,7 +32,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
+    batchActionMenuButtonLabel,
+    translateWithIdBatchActions,
   } = datagridState;
+  const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
 
@@ -70,7 +73,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     }
     return (
       <ButtonMenu
-        label={width > minWidthBeforeOverflowIcon ? 'More' : null}
+        label={
+          width > minWidthBeforeOverflowIcon
+            ? batchActionMenuButtonLabelText
+            : null
+        }
         renderIcon={
           width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
         }
@@ -115,6 +122,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         toggleAllRowsSelected(false);
         setGlobalFilter(null);
       }}
+      translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&

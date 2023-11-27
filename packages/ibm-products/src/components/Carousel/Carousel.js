@@ -10,13 +10,11 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
+  // useState,
 } from 'react';
 
-import { clamp, debounce } from 'lodash';
 import PropTypes from 'prop-types';
 import { CarouselItem } from './CarouselItem';
-import { useIsOverflow, useWindowEvent } from './utils';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -28,13 +26,25 @@ const componentName = 'Carousel';
 // Default values for props
 const defaults = {
   disableArrowScroll: false,
-  scrollTune: 0,
+  onScroll: () => {},
+  onChangeIsScrollable: () => {},
 };
 
 /**
  * The Carousel acts as a scaffold for other Novice to Pro content.
  *
  * This component is not intended for general use.
+ *
+ * Expected scrolling behavior.
+ * 1. Scroll the maximum number of visible items at a time.
+ * 2. The left-most item should always be left-aligned in the viewport.
+ *
+ * Exception.
+ * 1. After scrolling to the last (right-most) item,
+ *      if some of its content remains hidden,
+ *      then nudge it to the right until it is right-aligned.
+ * 2. From the right-aligned position, when scrolling left,
+ *      the left-most item should again be left-aligned.
  */
 export let Carousel = React.forwardRef(
   (
@@ -43,95 +53,176 @@ export let Carousel = React.forwardRef(
       className,
       disableArrowScroll = defaults.disableArrowScroll,
       fadedEdgeColor,
-      scrollableChange,
-      scrollTune = defaults.scrollTune,
+      onChangeIsScrollable = defaults.onChangeIsScrollable,
+      onScroll = defaults.onScroll,
       ...rest
     },
     ref
   ) => {
-    const [isScrolling, setIsScrolling] = useState(false);
-    const [currentViewID, _setCurrentViewID] = useState(0);
-    const carouselScrollPromiseDelay = 700;
-    const totalViews = React.Children.count(children) || 1;
+    const carouselRef = useRef();
+    const scrollRef = useRef();
     const leftFadedEdgeColor = fadedEdgeColor?.left || fadedEdgeColor;
     const rightFadedEdgeColor = fadedEdgeColor?.right || fadedEdgeColor;
-    const currentViewIDRef = useRef(currentViewID);
-    const scrollRef = useRef();
-    const carouselRef = useRef();
-    const mountedRef = useRef(true);
-    const isScrollable = useIsOverflow(scrollRef);
-    // Scrolling has no complete callback, nor does it return a promise.
-    // Since there is no way to tell when a scroll is finished we can set a timeout.
-    // Chrome appears to be the slowest implementation.
-    // Here is the spec: https://drafts.csswg.org/cssom-view/#concept-smooth-scroll
-    // found issue: https://github.com/w3c/csswg-drafts/issues/3744
 
-    const scrollPosition = () => {
-      return scrollRef.current?.scrollLeft;
-    };
+    // Return the current state of the carousel.
+    const getWidths = useCallback(() => {
+      const ref = scrollRef.current;
+      // carousel items (DOM)
+      const items = ref.querySelectorAll(`.${blockClass}__item`);
+      // viewport's width
+      const clientWidth = ref.clientWidth;
+      // scroll position
+      const scrollLeft = parseInt(ref.scrollLeft, 10);
+      // scrollable width
+      const scrollWidth = ref.scrollWidth;
 
-    const maxScroll = () => {
-      return scrollRef.current?.scrollWidth - scrollRef.current?.clientWidth;
-    };
+      let itemWidths = [];
+      items.forEach((item) => itemWidths.push(item.clientWidth));
 
-    const resolveScroll = useCallback((resolve) => {
-      if (mountedRef.current) {
-        setIsScrolling(false);
-        const percentage = scrollPosition() / maxScroll();
-        return resolve(parseFloat(percentage.toFixed(2)));
-      }
+      return {
+        clientWidth,
+        itemWidths,
+        scrollLeft,
+        scrollWidth,
+      };
     }, []);
 
-    const scrollPromise = useCallback(() => {
-      return new Promise((resolve) => {
-        setTimeout(() => resolveScroll(resolve), carouselScrollPromiseDelay);
-      });
-    }, [resolveScroll]);
+    // Trigger callbacks to report state of the carousel
+    const handleScroll = useCallback(() => {
+      const { clientWidth, scrollLeft, scrollWidth } = getWidths();
+      // The maximum scrollLeft achievable is the scrollable width - the viewport width.
+      const scrollLeftMax = scrollWidth - clientWidth;
+      // if isNaN(scrollLeft / scrollLeftMax), then set to zero
+      const scrollPercent =
+        parseFloat((scrollLeft / scrollLeftMax).toFixed(2)) || 0;
 
-    const scrollToView = useCallback(
-      (viewID) => {
-        if (!isScrolling && scrollRef.current && mountedRef.current) {
-          const targetViewID = clamp(viewID, 0, totalViews - 1);
-          setCurrentViewID(targetViewID);
-          setIsScrolling(true);
-          scrollRef.current.scrollLeft =
-            scrollRef.current?.offsetWidth * targetViewID + scrollTune;
-          return scrollPromise();
-        }
-        return new Promise((resolve) => resolveScroll(resolve));
-      },
-      [isScrolling, resolveScroll, scrollPromise, scrollTune, totalViews]
-    );
-
-    const scrollNext = useCallback(() => {
-      return scrollToView(currentViewID + 1);
-    }, [currentViewID, scrollToView]);
-
-    const scrollPrev = useCallback(() => {
-      return scrollToView(currentViewID - 1);
-    }, [currentViewID, scrollToView]);
-
-    const handleResize = debounce(() => {
-      scrollToView(currentViewIDRef.current);
-    }, 200);
-
-    const setCurrentViewID = (val) => {
-      currentViewIDRef.current = val;
-      _setCurrentViewID(val);
-    };
-
-    // EFFECTS
-    useWindowEvent('resize', handleResize);
-    // SAVE POINT
-
-    useEffect(() => {
-      if (scrollableChange && mountedRef.current) {
-        scrollableChange(isScrollable);
+      if (!scrollRef.current) {
+        return;
       }
-    }, [isScrollable, scrollableChange]);
 
+      // Callback 1: Does the carousel have enough content to enable scrolling?
+      onChangeIsScrollable(scrollWidth > clientWidth);
+
+      // Callback 2: Return the percentage of current scroll, between 0 and 1.
+      onScroll(scrollPercent);
+    }, [getWidths, onChangeIsScrollable, onScroll]);
+
+    const handleNext = useCallback(() => {
+      const { clientWidth, itemWidths, scrollLeft } = getWidths();
+      let newScrollLeft = 0;
+      const maxScrollLeft = scrollLeft + clientWidth;
+
+      // Cycle through all items, from the beginning.
+      for (let index = 0; index < itemWidths.length - 1; index++) {
+        const itemWidth = itemWidths[index];
+        if (newScrollLeft + itemWidth < maxScrollLeft) {
+          newScrollLeft += itemWidth;
+        } else {
+          break;
+        }
+      }
+
+      console.log(
+        'clientWidth, itemWidths, scrollLeft,',
+        clientWidth,
+        itemWidths,
+        scrollLeft
+      );
+
+      scrollRef.current.scrollLeft = parseInt(newScrollLeft, 10);
+
+      handleScroll();
+    }, [getWidths, handleScroll]);
+
+    const handlePrev = useCallback(() => {
+      const { clientWidth, itemWidths, scrollLeft, scrollWidth } = getWidths();
+      let newScrollLeft = scrollWidth;
+      let maxScrollLeft;
+
+      // Exception; if already scrolled all the way to the left,
+      // then skip this action.
+      if (scrollLeft === 0) {
+        return;
+      }
+
+      if (scrollLeft + clientWidth < scrollWidth) {
+        // Default: the carousel's scroll is not all the way to the right.
+        // The default max scroll is (the current scroll - the viewport's width)
+        maxScrollLeft = scrollLeft - clientWidth;
+      } else {
+        // Exception: if scrolled all the way to the right, then the items are right-aligned with the component.
+        // Set the initial target scroll to (the max scrollable width - the viewport's width)...
+        maxScrollLeft = scrollWidth - clientWidth;
+        // ...and starting from the last item, find the maximum scroll that can be left-aligned.
+        // Cycle through all items, from the end.
+        for (let index = itemWidths.length - 1; index >= 0; index--) {
+          if (scrollLeft - clientWidth + itemWidths[index] < maxScrollLeft) {
+            maxScrollLeft -= itemWidths[index];
+          } else {
+            break;
+          }
+        }
+      }
+
+      // Calculate exact scroll.
+      // Cycle through all items, from the end.
+      for (let index = itemWidths.length - 1; index >= 0; index--) {
+        const itemWidth = itemWidths[index];
+        if (newScrollLeft - itemWidth >= maxScrollLeft) {
+          newScrollLeft -= itemWidth;
+        } else {
+          break;
+        }
+      }
+
+      scrollRef.current.scrollLeft = parseInt(newScrollLeft, 10);
+
+      handleScroll();
+    }, [getWidths, handleScroll]);
+
+    const handleReset = useCallback(() => {
+      scrollRef.current.scrollLeft = 0;
+    }, []);
+
+    // Trigger a callback after first render (and applied CSS).
     useEffect(() => {
-      function updateScrollPosition(event) {
+      // Normally, we can trigger a callback "immediately after first
+      // render", because we will be doing more "logical" work (update
+      // a state, show / hide a feature, etc.), and the final, applied
+      // CSS,can "catch up" asynchronously without breaking anything.
+      setTimeout(() => {
+        // Because we are making calculations based on the final,
+        // applied CSS, we must wait for one more "tick".
+        handleScroll();
+      }, 0);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // On window.resize, reset carousel to zero.
+    useEffect(() => {
+      const handleWindowResize = () => {
+        scrollRef.current.scrollLeft = 0;
+        handleScroll();
+      };
+
+      window.addEventListener('resize', handleWindowResize);
+      return () => window.removeEventListener('resize', handleWindowResize);
+    }, [handleScroll]);
+
+    // On scrollRef.scrollend, trigger a callback.
+    useEffect(() => {
+      const handleScrollend = () => {
+        handleScroll();
+      };
+
+      const scrollDiv = scrollRef.current;
+      scrollDiv.addEventListener('scrollend', handleScrollend);
+      return () => scrollDiv.removeEventListener('scrollend', handleScrollend);
+    }, [handleScroll]);
+
+    // Disable wheel scrolling
+    useEffect(() => {
+      function handleWheel(event) {
         // update the scroll position
         event.stopPropagation();
         event.preventDefault();
@@ -139,19 +230,20 @@ export let Carousel = React.forwardRef(
       }
       const scrollDiv = scrollRef.current;
       if (scrollDiv) {
-        scrollDiv.addEventListener('wheel', updateScrollPosition, {
+        scrollDiv.addEventListener('wheel', handleWheel, {
           passive: false,
         });
         return () => {
-          scrollDiv.removeEventListener('wheel', updateScrollPosition, {
+          scrollDiv.removeEventListener('wheel', handleWheel, {
             passive: false,
           });
         };
       }
     }, []);
 
+    // Enable arrow scrolling from within the carousel
     useEffect(() => {
-      function keypress(event) {
+      function handleKeydown(event) {
         const { key } = event;
 
         if (
@@ -163,28 +255,29 @@ export let Carousel = React.forwardRef(
           event.cancelBubble = false;
         }
       }
-      const outerDiv = carouselRef.current;
-      if (outerDiv) {
-        outerDiv.addEventListener('keydown', keypress);
-        return () => outerDiv.removeEventListener('keydown', keypress);
+
+      const carouselDiv = carouselRef.current;
+      if (carouselDiv) {
+        carouselDiv.addEventListener('keydown', handleKeydown);
+        return () => carouselDiv.removeEventListener('keydown', handleKeydown);
       }
     }, [disableArrowScroll]);
 
-    useEffect(() => {
-      return () => {
-        mountedRef.current = false;
-      };
-    }, []);
-
+    // Enable external function calls
     useImperativeHandle(
       ref,
       () => ({
-        scrollNext,
-        scrollPrev,
-        scrollToView,
-        maxScroll,
+        scrollNext() {
+          handleNext();
+        },
+        scrollPrev() {
+          handlePrev();
+        },
+        scrollReset() {
+          handleReset();
+        },
       }),
-      [scrollNext, scrollPrev, scrollToView]
+      [handleNext, handlePrev, handleReset]
     );
 
     return (
@@ -226,8 +319,6 @@ export let Carousel = React.forwardRef(
   }
 );
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 Carousel.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
@@ -238,12 +329,10 @@ Carousel.propTypes = {
    * Provide the contents of the Carousel.
    */
   children: PropTypes.node.isRequired,
-
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
   /**
    * Disables the ability of the Carousel to scroll
    * use a keyboard's left and right arrow keys.
@@ -252,21 +341,23 @@ Carousel.propTypes = {
   /**
    * Enables the edges of the component to have faded styling.
    *
-   * Pass a single string to specify the same color for left and right.
+   * Pass a single string (`$color`) to specify the same color for left and right.
    *
-   * Pass `{ left: $color1, right: $color2 }` to specify different colors.
+   * Or pass an object (`{ left: $color1, right: $color2 }`) to specify different colors.
    */
   fadedEdgeColor: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({ left: PropTypes.string, right: PropTypes.string }),
   ]),
   /**
-   * Determines how much of the Carousel moves into view on rotation.
-   */
-  scrollTune: PropTypes.number,
-  /**
    * An optional callback function that returns `true`
-   * when the carousel has completed scrolling a single item.
+   * when the carousel has enough content to be scrollable,
+   * and `false` when there is not enough content.
    */
-  scrollableChange: PropTypes.func,
+  onChangeIsScrollable: PropTypes.func,
+  /**
+   * An optional callback function that returns the scroll position as
+   * a value between 0 and 1.
+   */
+  onScroll: PropTypes.func,
 };

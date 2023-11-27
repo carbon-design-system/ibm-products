@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useIntersection } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -22,26 +21,10 @@ const componentName = 'CarouselItem';
  * This component is not intended for general use.
  */
 export let CarouselItem = ({ children, className, ...rest }) => {
-  const itemRef = useRef();
-  const isInView = useIntersection(itemRef, 0.85);
-
-  useEffect(() => {
-    const matches = itemRef.current?.querySelectorAll(
-      'a, button, [role="button"], [tabindex]'
-    );
-    if (matches) {
-      const ti = isInView ? 0 : -1;
-      [...matches].forEach((match) => {
-        match.tabIndex = ti;
-      });
-    }
-  }, [isInView]);
-
   return (
     <div
       {...rest}
       className={cx(blockClass, className)}
-      ref={itemRef}
       {...getDevtoolsProps(componentName)}
     >
       {children}

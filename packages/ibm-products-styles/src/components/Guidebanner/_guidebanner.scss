@@ -129,7 +129,7 @@ $purple-3: #7433e3;
   @include when-collapsed() {
     max-height: $spacing-03;
     margin-top: 0;
-    opacity: 0;
+    opacity: 0.5;
   }
 }
 // The last carousel item is wider, with more padding-right,

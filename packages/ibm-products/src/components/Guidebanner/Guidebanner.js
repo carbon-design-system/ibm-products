@@ -58,13 +58,8 @@ export let Guidebanner = React.forwardRef(
     const [showNavigation, setShowNavigation] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
 
-    const handleScrollableChange = (value) => {
-      setShowNavigation(value);
-    };
-
     const handleClickToggle = () => {
-      setScrollPosition(0);
-      scrollRef.current.scrollToView(0);
+      // scrollRef.current.scrollReset();
       setIsCollapsed((prevState) => !prevState);
     };
 
@@ -89,8 +84,12 @@ export let Guidebanner = React.forwardRef(
           // against the Guidebanner's gradient background.
           fadedEdgeColor={{ left: blue90, right: purple70 }}
           ref={scrollRef}
-          scrollableChange={handleScrollableChange}
-          scrollTune={-450}
+          onChangeIsScrollable={(value) => {
+            setShowNavigation(value);
+          }}
+          onScroll={(scrollPercent) => {
+            setScrollPosition(scrollPercent);
+          }}
         >
           {children}
         </Carousel>
@@ -126,11 +125,8 @@ export let Guidebanner = React.forwardRef(
                   kind="ghost"
                   label={previousIconDescription}
                   onClick={() => {
-                    scrollRef.current
-                      .scrollPrev()
-                      .then((scrollPercentage) =>
-                        setScrollPosition(scrollPercentage)
-                      );
+                    console.log('scrollRef.current', scrollRef.current);
+                    scrollRef.current.scrollPrev();
                   }}
                   size="md"
                 >
@@ -150,11 +146,7 @@ export let Guidebanner = React.forwardRef(
                   kind="ghost"
                   label={nextIconDescription}
                   onClick={() => {
-                    scrollRef.current
-                      .scrollNext()
-                      .then((scrollPercentage) =>
-                        setScrollPosition(scrollPercentage)
-                      );
+                    scrollRef.current.scrollNext();
                   }}
                   size="md"
                 >

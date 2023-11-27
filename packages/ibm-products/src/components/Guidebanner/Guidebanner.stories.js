@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -89,9 +88,6 @@ const DefaultLink = () => (
   </GuidebannerElementLink>
 );
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
 const Template = ({ children, ...rest }) => {
   // Normally GuidebannerElement are listed directly as children of Guidebanner,
   // but as a story we have to wrap the JSX in a React.Fragment.
@@ -147,27 +143,27 @@ export const manyInsights = prepareStory(Template, {
     children: (
       <React.Fragment>
         <GuidebannerElement
-          title="Use-case specific heading"
+          title="1 Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonLarge />}
         />
         <GuidebannerElement
-          title="Use-case specific heading"
+          title="2 Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonSmall />}
         />
         <GuidebannerElement
-          title="Use-case specific heading"
+          title="3 Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonSmall />}
         />
         <GuidebannerElement
-          title="Use-case specific heading"
+          title="4 Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultLink />}
         />
         <GuidebannerElement
-          title="Use-case specific heading"
+          title="5 Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultLink />}
         />

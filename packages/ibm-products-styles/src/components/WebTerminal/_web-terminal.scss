@@ -78,6 +78,10 @@ $block-class: #{$pkg-prefix}--web-terminal;
   @include theme($g100);
 }
 
+.#{$carbon-prefix}--overflow-menu-options__btn {
+  text-decoration: none;
+}
+
 // Terminal body styles
 .#{$block-class}__body {
   height: 100%;

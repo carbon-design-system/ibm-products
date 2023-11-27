@@ -9,8 +9,9 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/type';
-@use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
-  as *;
+// @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+//   as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator' as *;
 
 $story-prefix: side-panel-stories__;
 

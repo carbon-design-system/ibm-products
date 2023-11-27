@@ -89,8 +89,8 @@ module.exports = {
         alias: {
           ALIAS_STORY_STYLE_CONFIG$: path.resolve(
             configType === 'DEVELOPMENT'
-              ? '../ibm-products-styles/scss/config-dev.scss'
-              : '../ibm-products-styles/scss/config.scss'
+              ? '../ibm-products-styles/src/config-dev.scss'
+              : '../ibm-products-styles/src/config.scss'
           ),
         },
       },

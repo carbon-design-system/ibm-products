@@ -530,6 +530,7 @@ export const BatchActions = () => {
       DatagridBatchActions,
       rowActions: getRowActions(),
       onSelectAllRows: () => console.log('onSelectAll batch action callback'),
+      batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,
     useSelectAllWithToggle,

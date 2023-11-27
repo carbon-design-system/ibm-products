@@ -26,7 +26,6 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowActionButtons`,
@@ -163,12 +162,6 @@ const RowActionButtons = ({ ...args }) => {
     useActionsColumn
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useActionsColumn` hook
-  pkg.feature['Datagrid.useActionsColumn'] = true;
-  pkg._silenceWarnings(true);
-
   return <Datagrid datagridState={datagridState} />;
 };
 
@@ -195,7 +188,6 @@ export const RowActionButtonsUsageStory = prepareStory(
     },
     args: {
       ...rowActionButtonsProps,
-      featureFlags: ['Datagrid.useActionsColumn'],
     },
   }
 );
@@ -314,14 +306,8 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
     },
     useStickyColumn,
     useActionsColumn,
-    useSelectRows,
+    useSelectRows
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useActionsColumn` hook
-  pkg.feature['Datagrid.useActionsColumn'] = true;
-  pkg._silenceWarnings(true);
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -385,7 +371,6 @@ export const RowActionButtonsBatchActionsUsageStory = prepareStory(
     },
     args: {
       ...rowActionButtonsBatchActionsProps,
-      featureFlags: ['Datagrid.useActionsColumn'],
     },
   }
 );

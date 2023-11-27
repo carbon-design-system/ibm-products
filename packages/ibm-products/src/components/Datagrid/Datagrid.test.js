@@ -2397,8 +2397,7 @@ describe(componentName, () => {
       (row) => !row.classList.contains(`${blockClass}__head`)
     );
     const firstBodyRow = bodyRows[0];
-    const lastCellElement =
-      firstBodyRow.lastElementChild;
+    const lastCellElement = firstBodyRow.lastElementChild;
     const iconSkeletonElement = lastCellElement.children[0].children[0];
     expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
     expect(iconSkeletonElement).toHaveClass(

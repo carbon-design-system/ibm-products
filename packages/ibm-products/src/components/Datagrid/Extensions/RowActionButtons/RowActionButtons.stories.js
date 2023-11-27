@@ -312,7 +312,7 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
     },
     useStickyColumn,
     useActionsColumn,
-    useSelectRows,
+    useSelectRows
   );
 
   return <Datagrid datagridState={datagridState} />;

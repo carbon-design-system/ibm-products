@@ -131,11 +131,12 @@ const s = [
           'c/TooltipTrigger',
           'c/TearsheetShell',
           'c/SimpleHeader',
+          'c/SteppedAnimatedMedia',
         ],
       },
       {
         n: 'Novice to pro',
-        s: ['c/Checklist', 'c/Guidebanner'],
+        s: ['c/Checklist', 'c/Guidebanner', 'c/InlineTip'],
       },
     ],
   },

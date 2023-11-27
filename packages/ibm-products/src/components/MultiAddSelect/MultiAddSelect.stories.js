@@ -31,6 +31,200 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    items: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no items',
+          1: 'three items',
+          2: 'with hierarchy',
+          3: 'with modifiers',
+          4: 'with avatars',
+        },
+      },
+      options: [0, 1, 2, 3, 4],
+      mapping: {
+        0: { entries: [] },
+        1: {
+          entries: [
+            {
+              id: '1',
+              value: '1',
+              title: 'item 1',
+              subtitle: 'item 1 subtitle',
+              meta: (
+                <div className={`${blockClass}-entry`}>
+                  <p className={`${blockClass}-entry-title`}>html support</p>
+                  <p className={`${blockClass}-entry-body`}>
+                    also supports nodes in the meta attribute
+                  </p>
+                </div>
+              ),
+            },
+            {
+              id: '2',
+              value: '2',
+              title: 'item 2',
+              meta: [
+                {
+                  id: 'description',
+                  title: 'description',
+                  value: 'description text',
+                },
+                {
+                  id: 'secondary_category',
+                  title: 'secondary category',
+                  value: 'knowledge accelerator',
+                },
+              ],
+            },
+            {
+              id: '3',
+              value: '3',
+              title: 'item 3',
+              subtitle: 'item 3 subtitle',
+            },
+          ],
+        },
+        2: {
+          sortBy: ['title'],
+          entries: [
+            {
+              id: '1',
+              value: 'folder 1',
+              title: 'folder 1',
+              children: {
+                sortBy: ['title', 'size'],
+                filterBy: 'fileType',
+                entries: [
+                  {
+                    id: '1-1',
+                    value: 'file1.pdf',
+                    title: 'file1.pdf',
+                    fileType: 'pdf',
+                    size: '100',
+                    icon: (props) => <Document size={16} {...props} />,
+                    tag: 'business',
+                    children: {
+                      entries: [
+                        {
+                          id: '9000',
+                          value: '9000.html',
+                          title: '9000.html',
+                          fileType: 'html',
+                          size: '9000',
+                          icon: (props) => <Document size={16} {...props} />,
+                        },
+                      ],
+                    },
+                  },
+                  {
+                    id: '1-2',
+                    value: 'index.js',
+                    title: 'index.js',
+                    fileType: 'js',
+                    size: '200',
+                    icon: (props) => <Document size={16} {...props} />,
+                  },
+                  {
+                    id: '1-3',
+                    value: 'sitemap.xml',
+                    title: 'sitemap.xml',
+                    fileType: 'xml',
+                    size: '10',
+                    icon: (props) => <Document size={16} {...props} />,
+                  },
+                ],
+              },
+            },
+            {
+              id: '2',
+              value: 'folder 2',
+              title: 'folder 2',
+              children: {
+                entries: [
+                  {
+                    id: '7000',
+                    value: '7000.html',
+                    title: '7000.html',
+                    fileType: 'html',
+                    size: '7000',
+                    icon: (props) => <Document size={16} {...props} />,
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        3: {
+          modifiers: {
+            id: 'role',
+            label: 'Role',
+            options: ['editor', 'viewer', 'admin'],
+          },
+          entries: [
+            {
+              id: '1',
+              value: '1',
+              title: 'item 1',
+              subtitle: 'item 1 subtitle',
+              role: 'editor',
+            },
+            {
+              id: '2',
+              value: '2',
+              title: 'item 2',
+              role: 'editor',
+            },
+            {
+              id: '3',
+              value: '3',
+              title: 'item 3',
+              subtitle: 'item 3 subtitle',
+              role: 'admin',
+            },
+          ],
+        },
+        4: {
+          entries: [
+            {
+              id: '1',
+              value: '1',
+              title: 'item 1',
+              subtitle: 'item 1 subtitle',
+              avatar: {
+                src: image,
+                alt: 'head shot',
+                theme: 'light',
+              },
+            },
+            {
+              id: '2',
+              value: '2',
+              title: 'item 2',
+              subtitle: 'item 2 subtitle',
+              avatar: {
+                icon: (props) => <Group size={24} {...props} />,
+                backgroundColor: 'dark-green',
+                theme: 'light',
+              },
+            },
+            {
+              id: '3',
+              value: '3',
+              title: 'item 3',
+              subtitle: 'item 3 subtitle',
+              avatar: {
+                icon: (props) => <Group size={24} {...props} />,
+                theme: 'light',
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
 };
 
 const defaultProps = {
@@ -43,47 +237,6 @@ const defaultProps = {
   globalSearchPlaceholder: 'Find business terms',
   illustrationTheme: 'light',
   influencerTitle: 'Selected business terms',
-  items: {
-    entries: [
-      {
-        id: '1',
-        value: '1',
-        title: 'item 1',
-        subtitle: 'item 1 subtitle',
-        meta: (
-          <div className={`${blockClass}-entry`}>
-            <p className={`${blockClass}-entry-title`}>html support</p>
-            <p className={`${blockClass}-entry-body`}>
-              also supports nodes in the meta attribute
-            </p>
-          </div>
-        ),
-      },
-      {
-        id: '2',
-        value: '2',
-        title: 'item 2',
-        meta: [
-          {
-            id: 'description',
-            title: 'description',
-            value: 'description text',
-          },
-          {
-            id: 'secondary_category',
-            title: 'secondary category',
-            value: 'knowledge accelerator',
-          },
-        ],
-      },
-      {
-        id: '3',
-        value: '3',
-        title: 'item 3',
-        subtitle: 'item 3 subtitle',
-      },
-    ],
-  },
   itemsLabel: 'Business terms',
   metaIconDescription: 'View meta information',
   metaPanelTitle: 'Personal information',
@@ -114,12 +267,14 @@ const Template = (args, context) => {
 
 export const Default = prepareStory(Template, {
   args: {
+    items: 1,
     ...defaultProps,
   },
 });
 
 export const WithHierarchy = prepareStory(Template, {
   args: {
+    items: 2,
     ...defaultProps,
     globalFilters: [
       {
@@ -141,152 +296,19 @@ export const WithHierarchy = prepareStory(Template, {
     globalFiltersPrimaryButtonText: 'Apply',
     globalFiltersSecondaryButtonText: 'Reset',
     globalSortBy: ['title'],
-    items: {
-      sortBy: ['title'],
-      entries: [
-        {
-          id: '1',
-          value: 'folder 1',
-          title: 'folder 1',
-          children: {
-            sortBy: ['title', 'size'],
-            filterBy: 'fileType',
-            entries: [
-              {
-                id: '1-1',
-                value: 'file1.pdf',
-                title: 'file1.pdf',
-                fileType: 'pdf',
-                size: '100',
-                icon: (props) => <Document size={16} {...props} />,
-                tag: 'business',
-                children: {
-                  entries: [
-                    {
-                      id: '9000',
-                      value: '9000.html',
-                      title: '9000.html',
-                      fileType: 'html',
-                      size: '9000',
-                      icon: (props) => <Document size={16} {...props} />,
-                    },
-                  ],
-                },
-              },
-              {
-                id: '1-2',
-                value: 'index.js',
-                title: 'index.js',
-                fileType: 'js',
-                size: '200',
-                icon: (props) => <Document size={16} {...props} />,
-              },
-              {
-                id: '1-3',
-                value: 'sitemap.xml',
-                title: 'sitemap.xml',
-                fileType: 'xml',
-                size: '10',
-                icon: (props) => <Document size={16} {...props} />,
-              },
-            ],
-          },
-        },
-        {
-          id: '2',
-          value: 'folder 2',
-          title: 'folder 2',
-          children: {
-            entries: [
-              {
-                id: '7000',
-                value: '7000.html',
-                title: '7000.html',
-                fileType: 'html',
-                size: '7000',
-                icon: (props) => <Document size={16} {...props} />,
-              },
-            ],
-          },
-        },
-      ],
-    },
   },
 });
 
 export const WithModifiers = prepareStory(Template, {
   args: {
+    items: 3,
     ...defaultProps,
-    items: {
-      modifiers: {
-        id: 'role',
-        label: 'Role',
-        options: ['editor', 'viewer', 'admin'],
-      },
-      entries: [
-        {
-          id: '1',
-          value: '1',
-          title: 'item 1',
-          subtitle: 'item 1 subtitle',
-          role: 'editor',
-        },
-        {
-          id: '2',
-          value: '2',
-          title: 'item 2',
-          role: 'editor',
-        },
-        {
-          id: '3',
-          value: '3',
-          title: 'item 3',
-          subtitle: 'item 3 subtitle',
-          role: 'admin',
-        },
-      ],
-    },
   },
 });
 
 export const WithAvatars = prepareStory(Template, {
   args: {
+    items: 4,
     ...defaultProps,
-    items: {
-      entries: [
-        {
-          id: '1',
-          value: '1',
-          title: 'item 1',
-          subtitle: 'item 1 subtitle',
-          avatar: {
-            src: image,
-            alt: 'head shot',
-            theme: 'light',
-          },
-        },
-        {
-          id: '2',
-          value: '2',
-          title: 'item 2',
-          subtitle: 'item 2 subtitle',
-          avatar: {
-            icon: (props) => <Group size={24} {...props} />,
-            backgroundColor: 'dark-green',
-            theme: 'light',
-          },
-        },
-        {
-          id: '3',
-          value: '3',
-          title: 'item 3',
-          subtitle: 'item 3 subtitle',
-          avatar: {
-            icon: (props) => <Group size={24} {...props} />,
-            theme: 'light',
-          },
-        },
-      ],
-    },
   },
 });

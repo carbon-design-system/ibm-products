@@ -45,6 +45,7 @@ export default {
       },
     },
   },
+  excludeStories: ['FilteringUsage', 'filterProps'],
 };
 
 // This is to show off the View all button in checkboxes
@@ -89,7 +90,7 @@ const getBatchActions = () => {
   ];
 };
 
-const FilteringUsage = ({ defaultGridProps }) => {
+export const FilteringUsage = ({ defaultGridProps }) => {
   const {
     gridDescription,
     gridTitle,
@@ -193,7 +194,6 @@ const FilteringUsage = ({ defaultGridProps }) => {
   // Warnings are ordinarily silenced in storybook, add this to test
   pkg._silenceWarnings(false);
   // Enable feature flag for `useFiltering` hook
-  pkg.feature['Datagrid.useActionsColumn'] = true;
   pkg.feature['Datagrid.useFiltering'] = true;
   pkg._silenceWarnings(true);
 
@@ -202,6 +202,155 @@ const FilteringUsage = ({ defaultGridProps }) => {
 
 const FilteringTemplateWrapper = ({ ...args }) => {
   return <FilteringUsage defaultGridProps={{ ...args }} />;
+};
+
+export const filterProps = {
+  variation: 'panel',
+  updateMethod: 'batch',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  panelIconDescription: `Open filters`,
+  closeIconDescription: 'Close panel',
+  sections: [
+    {
+      categoryTitle: 'Category title',
+      hasAccordion: true,
+      filters: [
+        {
+          filterLabel: 'Joined',
+          filter: {
+            type: 'date',
+            column: 'joined',
+            props: {
+              DatePicker: {
+                datePickerType: 'range',
+              },
+              DatePickerInput: {
+                start: {
+                  id: 'date-picker-input-id-start',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined start date',
+                },
+                end: {
+                  id: 'date-picker-input-id-end',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined end date',
+                },
+              },
+            },
+          },
+        },
+        {
+          filterLabel: 'Status',
+          filter: {
+            type: 'dropdown',
+            column: 'status',
+            props: {
+              Dropdown: {
+                id: 'marital-status-dropdown',
+                ['aria-label']: 'Marital status dropdown',
+                items: ['relationship', 'complicated', 'single'],
+                label: 'Marital status',
+                titleText: 'Marital status',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      categoryTitle: 'Category title',
+      filters: [
+        {
+          filterLabel: 'Role',
+          filter: {
+            type: 'radio',
+            column: 'role',
+            props: {
+              FormGroup: {
+                legendText: 'Role',
+              },
+              RadioButtonGroup: {
+                orientation: 'vertical',
+                legend: 'Role legend',
+                name: 'role-radio-button-group',
+              },
+              RadioButton: [
+                {
+                  id: 'developer',
+                  labelText: 'Developer',
+                  value: 'developer',
+                },
+                {
+                  id: 'designer',
+                  labelText: 'Designer',
+                  value: 'designer',
+                },
+                {
+                  id: 'researcher',
+                  labelText: 'Researcher',
+                  value: 'researcher',
+                },
+              ],
+            },
+          },
+        },
+        {
+          filterLabel: 'Visits',
+          filter: {
+            type: 'number',
+            column: 'visits',
+            props: {
+              NumberInput: {
+                min: 0,
+                id: 'visits-number-input',
+                invalidText: 'A valid value is required',
+                label: 'Visits',
+                placeholder: 'Type a number amount of visits',
+              },
+            },
+          },
+        },
+        {
+          filterLabel: 'Password strength',
+          filter: {
+            type: 'checkbox',
+            column: 'passwordStrength',
+            props: {
+              FormGroup: {
+                legendText: 'Password strength',
+              },
+              Checkbox: [
+                {
+                  id: 'normal',
+                  labelText: 'Normal',
+                  value: 'normal',
+                },
+                {
+                  id: 'minor-warning',
+                  labelText: 'Minor warning',
+                  value: 'minor-warning',
+                },
+                {
+                  id: 'critical',
+                  labelText: 'Critical',
+                  value: 'critical',
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  ],
+  onPanelOpen: action('onPanelOpen'),
+  onPanelClose: action('onPanelClose'),
+  panelTitle: 'Filter',
+  renderDateLabel: (start, end) => {
+    const startDateObj = new Date(start);
+    const endDateObj = new Date(end);
+    return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
+  },
 };
 
 export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
@@ -219,154 +368,7 @@ export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
     emptyStateTitle: 'No filters match',
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'panel',
-      updateMethod: 'batch',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      panelIconDescription: `Open filters`,
-      closeIconDescription: 'Close panel',
-      sections: [
-        {
-          categoryTitle: 'Category title',
-          hasAccordion: true,
-          filters: [
-            {
-              filterLabel: 'Joined',
-              filter: {
-                type: 'date',
-                column: 'joined',
-                props: {
-                  DatePicker: {
-                    datePickerType: 'range',
-                  },
-                  DatePickerInput: {
-                    start: {
-                      id: 'date-picker-input-id-start',
-                      placeholder: 'mm/dd/yyyy',
-                      labelText: 'Joined start date',
-                    },
-                    end: {
-                      id: 'date-picker-input-id-end',
-                      placeholder: 'mm/dd/yyyy',
-                      labelText: 'Joined end date',
-                    },
-                  },
-                },
-              },
-            },
-            {
-              filterLabel: 'Status',
-              filter: {
-                type: 'dropdown',
-                column: 'status',
-                props: {
-                  Dropdown: {
-                    id: 'marital-status-dropdown',
-                    ['aria-label']: 'Marital status dropdown',
-                    items: ['relationship', 'complicated', 'single'],
-                    label: 'Marital status',
-                    titleText: 'Marital status',
-                  },
-                },
-              },
-            },
-          ],
-        },
-        {
-          categoryTitle: 'Category title',
-          filters: [
-            {
-              filterLabel: 'Role',
-              filter: {
-                type: 'radio',
-                column: 'role',
-                props: {
-                  FormGroup: {
-                    legendText: 'Role',
-                  },
-                  RadioButtonGroup: {
-                    orientation: 'vertical',
-                    legend: 'Role legend',
-                    name: 'role-radio-button-group',
-                  },
-                  RadioButton: [
-                    {
-                      id: 'developer',
-                      labelText: 'Developer',
-                      value: 'developer',
-                    },
-                    {
-                      id: 'designer',
-                      labelText: 'Designer',
-                      value: 'designer',
-                    },
-                    {
-                      id: 'researcher',
-                      labelText: 'Researcher',
-                      value: 'researcher',
-                    },
-                  ],
-                },
-              },
-            },
-            {
-              filterLabel: 'Visits',
-              filter: {
-                type: 'number',
-                column: 'visits',
-                props: {
-                  NumberInput: {
-                    min: 0,
-                    id: 'visits-number-input',
-                    invalidText: 'A valid value is required',
-                    label: 'Visits',
-                    placeholder: 'Type a number amount of visits',
-                  },
-                },
-              },
-            },
-            {
-              filterLabel: 'Password strength',
-              filter: {
-                type: 'checkbox',
-                column: 'passwordStrength',
-                props: {
-                  FormGroup: {
-                    legendText: 'Password strength',
-                  },
-                  Checkbox: [
-                    {
-                      id: 'normal',
-                      labelText: 'Normal',
-                      value: 'normal',
-                    },
-                    {
-                      id: 'minor-warning',
-                      labelText: 'Minor warning',
-                      value: 'minor-warning',
-                    },
-                    {
-                      id: 'critical',
-                      labelText: 'Critical',
-                      value: 'critical',
-                    },
-                  ],
-                },
-              },
-            },
-          ],
-        },
-      ],
-      onPanelOpen: action('onPanelOpen'),
-      onPanelClose: action('onPanelClose'),
-      panelTitle: 'Filter',
-      renderDateLabel: (start, end) => {
-        const startDateObj = new Date(start);
-        const endDateObj = new Date(end);
-        return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
-      },
-    },
+    filterProps,
   },
 });
 

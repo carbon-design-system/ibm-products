@@ -5,17 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import { IconSkeleton, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useActionsColumn = (hooks) => {
-  useEffect(() => {
-    pkg.checkReportFeatureEnabled('Datagrid.useActionsColumn');
-  }, []);
-
   const useAttachActionsOnInstance = (instance) => {
     const {
       rowActions,

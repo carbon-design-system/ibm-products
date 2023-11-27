@@ -31,45 +31,55 @@ const getAccessibilityProps = (header) => {
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
+  const { resizerAriaLabel } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
     const { tableId } = datagridState;
-    if (tableId) {
-      const gridElement = document.querySelector(`#${tableId}`);
-      const tableElement = gridElement.querySelector('table');
-      const headerRowElement = document.querySelector(
-        `#${tableId} .${blockClass}__head`
+    const gridElement = document.querySelector(`#${tableId}`);
+    const tableElement = gridElement.querySelector('table');
+    const headerRowElement = document.querySelector(
+      `#${tableId} .${blockClass}__head`
+    );
+    const hasHorizontalScrollbar =
+      tableElement.scrollWidth > tableElement.clientWidth;
+    const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
+    const tableToolbar = gridElement.querySelector(
+      `.${blockClass}__table-toolbar`
+    );
+    const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
+    const setCustomValues = ({ rowHeight, gridHeight }) => {
+      headerRowElement.style.setProperty(
+        `--${blockClass}--row-height`,
+        px(rowHeight)
       );
-      const hasHorizontalScrollbar =
-        tableElement.scrollWidth > tableElement.clientWidth;
-      const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
-      const tableToolbar = gridElement.querySelector(
-        `.${blockClass}__table-toolbar`
+      headerRowElement.style.setProperty(
+        `--${blockClass}--grid-height`,
+        px(gridHeight - scrollBuffer - tableToolbarHeight)
       );
-      const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
-      const setCustomValues = ({ rowHeight = 48, gridHeight }) => {
-        headerRowElement.style.setProperty(
-          `--${blockClass}--row-height`,
-          px(rowHeight)
-        );
-        headerRowElement.style.setProperty(
-          `--${blockClass}--grid-height`,
-          px(gridHeight - scrollBuffer - tableToolbarHeight)
-        );
-        headerRowElement.style.setProperty(
-          `--${blockClass}--header-height`,
-          px(headerRowElement.offsetHeight)
-        );
-      };
-      setCustomValues({
-        gridHeight: gridElement.offsetHeight,
-        rowHeight: headerRowElement.clientHeight,
-      });
-    }
+      headerRowElement.style.setProperty(
+        `--${blockClass}--header-height`,
+        px(headerRowElement.offsetHeight)
+      );
+    };
+    setCustomValues({
+      gridHeight: gridElement.offsetHeight,
+      rowHeight: headerRowElement.clientHeight,
+    });
   }, [datagridState.rowSize, datagridState.tableId, datagridState]);
 
   const [incrementAmount] = useState(2);
+
+  const handleOnMouseDownResize = (event, resizeProps) => {
+    const { onMouseDown } = { ...resizeProps() };
+    // When event.button is 2, that is a right click
+    // and we do not want to resize
+    if (event.button === 2 || event.ctrlKey) {
+      event.target.blur();
+      return;
+    }
+    onMouseDown?.(event);
+  };
 
   return (
     <TableRow
@@ -116,6 +126,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                 <>
                   <input
                     {...header.getResizerProps()}
+                    onMouseDown={(event) =>
+                      handleOnMouseDownResize(event, header.getResizerProps)
+                    }
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {
@@ -163,7 +176,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     className={cx(`${blockClass}__col-resizer-range`)}
                     type="range"
                     defaultValue={originalCol.width}
-                    aria-label="Resize column"
+                    aria-label={resizerAriaLabel || 'Resize column'}
                   />
                   <span className={`${blockClass}__col-resize-indicator`} />
                 </>

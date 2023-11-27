@@ -2372,7 +2372,7 @@ describe(componentName, () => {
     );
 
     bodyRows.forEach((row) => {
-      const actionColumnCell = row.lastElementChild.previousElementSibling;
+      const actionColumnCell = row.lastElementChild;
       expect(actionColumnCell).toHaveClass(
         `${blockClass}__actions-column-cell`
       );
@@ -2382,7 +2382,7 @@ describe(componentName, () => {
     });
   });
 
-  it('should click non stick row action when not inside of overflow menu', async () => {
+  it('should click non sticky row action when not inside of overflow menu', async () => {
     const { rerender } = render(
       <ActionsColumnExample
         isFetching={true}
@@ -2397,8 +2397,7 @@ describe(componentName, () => {
       (row) => !row.classList.contains(`${blockClass}__head`)
     );
     const firstBodyRow = bodyRows[0];
-    const lastCellElement =
-      firstBodyRow.lastElementChild.previousElementSibling;
+    const lastCellElement = firstBodyRow.lastElementChild;
     const iconSkeletonElement = lastCellElement.children[0].children[0];
     expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
     expect(iconSkeletonElement).toHaveClass(

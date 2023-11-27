@@ -10,7 +10,8 @@
 @use '@carbon/styles/scss/spacing';
 // @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
 //   as *;
-@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator' as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
+  as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
 $story-prefix: create-side-panel-stories__;

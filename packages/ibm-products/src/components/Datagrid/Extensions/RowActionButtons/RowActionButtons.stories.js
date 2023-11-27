@@ -27,7 +27,6 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 import { getBatchActions } from '../../Datagrid.stories';
 
 export default {
@@ -147,12 +146,6 @@ const RowActionButtons = ({ ...args }) => {
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useActionsColumn` hook
-  pkg.feature['Datagrid.useActionsColumn'] = true;
-  pkg._silenceWarnings(true);
-
   const datagridState = useDatagrid(
     {
       columns,
@@ -195,7 +188,6 @@ export const RowActionButtonsUsageStory = prepareStory(
     },
     args: {
       ...rowActionButtonsProps,
-      featureFlags: ['Datagrid.useActionsColumn'],
     },
   }
 );

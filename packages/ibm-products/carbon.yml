@@ -224,7 +224,7 @@ assets:
       - data-display
   data-grid:
     name: Data grid
-    status: experimental
+    status: stable
     type: component
     platform: web
     framework: react
@@ -233,7 +233,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-datagrid-datagrid-canary
+        url: https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-datagrid-datagrid
     tags:
       - input-control
       - content-block

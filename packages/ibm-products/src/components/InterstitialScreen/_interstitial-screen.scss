@@ -19,7 +19,6 @@
 @mixin interstitial-screen {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--interstitial-screen;
-  $model-content-block-class: #{$carbon-prefix}--modal-content;
   $carousel: #{$pkg-prefix}--carousel;
   $carousel-item: #{$pkg-prefix}--carousel__item;
   $one-grid-column: calc(100% / 16);
@@ -109,6 +108,11 @@
       height: 100%;
     }
 
+    &--internal-body {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
     // HEADER
     &--internal-header {
       position: relative;
@@ -159,11 +163,12 @@
       #{$block}--next-btn,
       #{$block}--start-btn {
         width: calc($one-grid-column * 3);
-        min-width: carbon--mini-units(29);
+        //min-width: carbon--mini-units(29);
+        min-width: carbon--mini-units(25);
       }
 
       #{$block}--skip-btn {
-        min-width: carbon--mini-units(29);
+        //min-width: carbon--mini-units(29);
         max-width: none;
         flex-grow: 1;
       }
@@ -242,11 +247,6 @@
           min-height: initial;
         }
       }
-    }
-
-    .#{$model-content-block-class} {
-      padding-bottom: $spacing-09;
-      margin-bottom: 0;
     }
   }
 }

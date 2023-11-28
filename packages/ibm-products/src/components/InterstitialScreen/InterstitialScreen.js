@@ -40,6 +40,7 @@ import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const headerBlockClass = `${blockClass}--internal-header`;
+const bodyBlockClass = `${blockClass}--internal-body`;
 const bcModalClass = `${carbon.prefix}--modal`;
 const componentName = 'InterstitialScreen';
 
@@ -225,7 +226,7 @@ export let InterstitialScreen = React.forwardRef(
               </div>
             )}
           </ModalHeader>
-          <ModalBody>{childElements}</ModalBody>
+          <ModalBody className={bodyBlockClass}>{childElements}</ModalBody>
           <ModalFooter>{renderFooter()}</ModalFooter>
         </ComposedModal>
       );

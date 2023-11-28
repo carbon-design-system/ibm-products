@@ -521,7 +521,6 @@ export const BatchActions = () => {
       batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useActionsColumn,
     useStickyColumn
   );

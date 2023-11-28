@@ -16,6 +16,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { handleSelectAllRowData } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const toolbarClass = `${blockClass}__table-toolbar`;
@@ -32,8 +33,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
+    dispatch,
+    getRowId,
     batchActionMenuButtonLabel,
     translateWithIdBatchActions,
+    rows,
   } = datagridState;
   const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
@@ -101,6 +105,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                   batchAction.onClick();
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
+                    handleSelectAllRowData({
+                      dispatch,
+                      rows,
+                      getRowId,
+                    });
                   }
                 }}
               />
@@ -139,6 +148,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                   batchAction.onClick();
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
+                    handleSelectAllRowData({
+                      dispatch,
+                      rows,
+                      getRowId,
+                    });
                   }
                 }}
                 iconDescription={batchAction.label}

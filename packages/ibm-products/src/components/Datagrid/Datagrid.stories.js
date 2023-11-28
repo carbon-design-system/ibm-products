@@ -559,7 +559,6 @@ export const BatchActions = () => {
       rowActions: getRowActions(),
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useActionsColumn,
     useStickyColumn
   );

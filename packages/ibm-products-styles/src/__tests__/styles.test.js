@@ -6,7 +6,7 @@
  */
 
 const { resolve } = require('path');
-import { scssCompile } from '../global/js/utils/test-helper';
+import { scssCompile } from './test-helper';
 
 describe('CSS export checks', () => {
   // This test will fail if the generated CSS changes and no longer matches

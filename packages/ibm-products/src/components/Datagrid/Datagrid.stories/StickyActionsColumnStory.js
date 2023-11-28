@@ -45,7 +45,7 @@
 
 //     ## Sample usage:
 //     1. include \`useActionsColumn\` hook
-//     2. add \`isAction = true\` to the column object in which you which to add the overflow menu actions
+//     2. add \`isAction = true\` to the column object in which you wish to add the overflow menu actions
 //     3. add \`rowActions = []\` array to the props
 //       - \`rowActions[].id\` for callback to identify the action is called
 //       - \`rowActions[].onClick(actionId: string, row: Row, event: ClickEvent)\` callback on menuitem clicked. [Row properties](https://react-table.tanstack.com/docs/api/useTable#row-properties)

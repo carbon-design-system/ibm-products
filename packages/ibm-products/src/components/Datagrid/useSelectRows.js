@@ -12,6 +12,7 @@ import { TableSelectRow } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
 import { pkg, carbon } from '../../settings';
+import { handleToggleRowSelected } from './Datagrid/addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const checkboxClass = `${pkg.prefix}--datagrid__checkbox-cell`;
@@ -70,6 +71,7 @@ const SelectRow = (datagridState) => {
     onRowSelect,
     columns,
     withStickyColumn,
+    dispatch,
   } = datagridState;
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -81,16 +83,17 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const onSelectHandler = (e) => {
-    e.stopPropagation(); // avoid triggering onRowClick
+  const onSelectHandler = (event) => {
+    event.stopPropagation(); // avoid triggering onRowClick
     if (radio) {
       toggleAllRowsSelected(false);
       if (onRadioSelect) {
         onRadioSelect(row);
       }
     }
-    onChange(e);
-    onRowSelect?.(row, e);
+    onChange(event);
+    onRowSelect?.(row, event);
+    handleToggleRowSelected(dispatch, row, event.target.checked);
   };
 
   const selectDisabled = isFetching || row.getRowProps().disabled;

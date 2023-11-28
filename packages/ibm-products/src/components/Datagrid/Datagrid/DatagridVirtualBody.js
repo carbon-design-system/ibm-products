@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
@@ -40,6 +40,7 @@ const DatagridVirtualBody = (datagridState) => {
     page,
     handleResize,
     gridRef,
+    tableId,
   } = datagridState;
 
   /* istanbul ignore next */
@@ -49,19 +50,6 @@ const DatagridVirtualBody = (datagridState) => {
   };
 
   useResizeObserver(gridRef, handleVirtualGridResize);
-
-  /* istanbul ignore next */
-  const syncScroll = (event) => {
-    const virtualBody = event.target;
-    document.querySelector(`.${blockClass}__head-wrap`).scrollLeft =
-      virtualBody.scrollLeft;
-    const spacerColumn = document.querySelector(
-      `.${blockClass}__head-wrap thead th:last-child`
-    );
-    spacerColumn.style.width = px(
-      32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
-    ); // scrollbar width to header column to fix header alignment
-  };
 
   useEffect(() => {
     handleResize();
@@ -73,6 +61,30 @@ const DatagridVirtualBody = (datagridState) => {
   }
 
   const visibleRows = (DatagridPagination && page) || rows;
+  const testRef = useRef();
+
+  // Sync the scrollLeft position of the virtual body to the table header
+  useEffect(() => {
+    function handleScroll(event) {
+      const virtualBody = event.target;
+      document.querySelector(
+        `#${tableId} .${blockClass}__head-wrap`
+      ).scrollLeft = virtualBody.scrollLeft;
+      const spacerColumn = document.querySelector(
+        `#${tableId} .${blockClass}__head-wrap thead th:last-child`
+      );
+      spacerColumn.style.width = px(
+        32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
+      ); // scrollbar width to header column to fix header alignment
+    }
+
+    const testRefValue = testRef.current;
+    testRefValue.addEventListener('scroll', handleScroll);
+
+    return () => {
+      testRefValue.removeEventListener('scroll', handleScroll);
+    };
+  });
 
   return (
     <>
@@ -82,7 +94,7 @@ const DatagridVirtualBody = (datagridState) => {
       >
         <DatagridHead {...datagridState} />
       </div>
-      <TableBody {...getTableBodyProps()} onScroll={syncScroll}>
+      <TableBody {...getTableBodyProps()}>
         <VariableSizeList
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}
@@ -94,6 +106,7 @@ const DatagridVirtualBody = (datagridState) => {
           estimatedItemSize={rowHeight}
           onScroll={onScroll}
           innerRef={innerListRef}
+          outerRef={testRef}
           ref={listRef}
           className={`${blockClass}__virtual-scrollbar`}
           style={{ width: gridRef.current?.clientWidth }}

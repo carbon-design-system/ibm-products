@@ -73,10 +73,10 @@ export const DraggableItemsList = ({
       return;
     }
 
-    const fromVisibleIndex = columns.findIndex((col) =>
+    const fromVisibleIndex = updatedDragCols.findIndex((col) =>
       matchedColsById(col, active)
     );
-    const toVisibleIndex = columns.findIndex((col) =>
+    const toVisibleIndex = updatedDragCols.findIndex((col) =>
       matchedColsById(col, over)
     );
 

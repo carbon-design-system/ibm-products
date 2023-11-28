@@ -13,7 +13,7 @@ const path = require('path');
 // Our project setup, as a monorepo, has introduced relative path issues in our
 // sass source maps. Changing the relative path each source map uses to find
 // the correct node_module directory fixes this issue.
-readdir(path.join(__dirname, '../packages/ibm-products/css'), (err, files) => {
+readdir(path.join(__dirname, '../packages/ibm-products-styles/css'), (err, files) => {
   if (err) {
     console.log(err);
     return;
@@ -21,7 +21,7 @@ readdir(path.join(__dirname, '../packages/ibm-products/css'), (err, files) => {
   files.forEach((file) => {
     if (file.endsWith('.map')) {
       readFile(
-        path.join(__dirname, `../packages/ibm-products/css/${file}`),
+        path.join(__dirname, `../packages/ibm-products-styles/css/${file}`),
         'utf-8',
         (err, fileContents) => {
           if (err) {
@@ -35,7 +35,7 @@ readdir(path.join(__dirname, '../packages/ibm-products/css'), (err, files) => {
             .join('../../../../node_modules/');
 
           writeFile(
-            path.join(__dirname, `../packages/ibm-products/css/${file}`),
+            path.join(__dirname, `../packages/ibm-products-styles/css/${file}`),
             updatedMap,
             'utf-8',
             (err) => {

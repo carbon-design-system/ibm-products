@@ -183,7 +183,6 @@ const ExpandedRows = ({ ...args }) => {
       DatagridPagination,
       ExpandedRowContentComponent: ExpansionRenderer,
       tags: ['autodocs'],
-      expanderButtonTitleExpanded: 'Testing',
       ...args.defaultGridProps,
     },
     useExpandedRow

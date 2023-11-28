@@ -24,7 +24,8 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize, withNestedRows, prepareRow, key } = datagridState;
+  const { row, rowSize, withNestedRows, prepareRow, key, tableId } =
+    datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -67,7 +68,7 @@ const DatagridRow = (datagridState) => {
 
   const focusRemover = () => {
     const elements = document.querySelectorAll(
-      `.${blockClass}__carbon-row-expanded`
+      `#${tableId} .${blockClass}__carbon-row-expanded`
     );
     elements.forEach((el) => {
       el.classList.remove(`${blockClass}__carbon-row-expanded-hover-active`);
@@ -118,6 +119,7 @@ const DatagridRow = (datagridState) => {
         onFocus={hoverHandler}
         onBlur={focusRemover}
         onKeyUp={handleOnKeyUp}
+        data-nested-row-id={row.id}
       >
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();

@@ -2965,7 +2965,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper {
-  padding-left: 0;
+  padding: 0;
 }
 
 .c4p--datagrid__draggable-handleStyle {

@@ -16,6 +16,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { handleSelectAllRowData } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const toolbarClass = `${blockClass}__table-toolbar`;
@@ -32,7 +33,13 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
+    dispatch,
+    getRowId,
+    batchActionMenuButtonLabel,
+    translateWithIdBatchActions,
+    rows,
   } = datagridState;
+  const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
 
@@ -70,7 +77,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     }
     return (
       <ButtonMenu
-        label={width > minWidthBeforeOverflowIcon ? 'More' : null}
+        label={
+          width > minWidthBeforeOverflowIcon
+            ? batchActionMenuButtonLabelText
+            : null
+        }
         renderIcon={
           width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
         }
@@ -94,6 +105,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                   batchAction.onClick();
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
+                    handleSelectAllRowData({
+                      dispatch,
+                      rows,
+                      getRowId,
+                    });
                   }
                 }}
               />
@@ -115,6 +131,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         toggleAllRowsSelected(false);
         setGlobalFilter(null);
       }}
+      translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
@@ -131,6 +148,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                   batchAction.onClick();
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
+                    handleSelectAllRowData({
+                      dispatch,
+                      rows,
+                      getRowId,
+                    });
                   }
                 }}
                 iconDescription={batchAction.label}

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.61.1...@carbon/ibm-products@1.62.0) (2023-11-28)
+
+
+### Bug Fixes
+
+* batch actions review fixes v1 ([#3794](https://github.com/carbon-design-system/ibm-products/issues/3794)) ([4cd2ad1](https://github.com/carbon-design-system/ibm-products/commit/4cd2ad1a4b46c691b91c44b22a1f26659f81404d))
+* **Checklist:** update checklist styling and stories v1 to match v2 ([#3761](https://github.com/carbon-design-system/ibm-products/issues/3761)) ([a3d9201](https://github.com/carbon-design-system/ibm-products/commit/a3d9201071e054d98a87c1560cebd37e3a24e8cb))
+* **Coachmark:** accessibility improvements ([#3615](https://github.com/carbon-design-system/ibm-products/issues/3615)) ([d2bbb5d](https://github.com/carbon-design-system/ibm-products/commit/d2bbb5d0aa7b67a89f4a5d007f3d66e07e492263)), closes [#3706](https://github.com/carbon-design-system/ibm-products/issues/3706) [#3723](https://github.com/carbon-design-system/ibm-products/issues/3723) [#3746](https://github.com/carbon-design-system/ibm-products/issues/3746) [#3750](https://github.com/carbon-design-system/ibm-products/issues/3750) [#3757](https://github.com/carbon-design-system/ibm-products/issues/3757) [#3762](https://github.com/carbon-design-system/ibm-products/issues/3762) [#3768](https://github.com/carbon-design-system/ibm-products/issues/3768) [#3770](https://github.com/carbon-design-system/ibm-products/issues/3770)
+* **Datagrid:** destructure key to fix eslint unique key error ([#3775](https://github.com/carbon-design-system/ibm-products/issues/3775)) ([6581171](https://github.com/carbon-design-system/ibm-products/commit/6581171ba537b1976e7a598af4c698b0bf4c0a00))
+* **Datagrid:** fix visible scroll bar when resizing with pagination ([#3809](https://github.com/carbon-design-system/ibm-products/issues/3809)) ([06d03d1](https://github.com/carbon-design-system/ibm-products/commit/06d03d10906730db5350e231c27483038a3a4a0e))
+* **Datagrid:** infinite scroll review changes ([#3777](https://github.com/carbon-design-system/ibm-products/issues/3777)) ([df0dcbe](https://github.com/carbon-design-system/ibm-products/commit/df0dcbe8db6b7743bce495277541ae0f900dbafe))
+* **Datagrid:** match designs, frozen/non frozen action button behavior ([#3779](https://github.com/carbon-design-system/ibm-products/issues/3779)) ([7ae4eae](https://github.com/carbon-design-system/ibm-products/commit/7ae4eae25de0eaa1a64c8c9cbb5def5055a8f4f0))
+* **Datagrid:** remove hardcoded label, add cb fn for TableBatchActions ([#3853](https://github.com/carbon-design-system/ibm-products/issues/3853)) ([fad6a25](https://github.com/carbon-design-system/ibm-products/commit/fad6a251591f7be977d3963ae79e95f2e057f922))
+* **Datagrid:** render expanded component via jsx ([#3789](https://github.com/carbon-design-system/ibm-products/issues/3789)) ([76152cf](https://github.com/carbon-design-system/ibm-products/commit/76152cf1644db206f288b879c2af509164134ac0))
+* **Datagrid:** review fixes from resizable columns review (v1) ([#3826](https://github.com/carbon-design-system/ibm-products/issues/3826)) ([c7831ed](https://github.com/carbon-design-system/ibm-products/commit/c7831ed9f72a2ac021acef97c33c3f5ee6a66220))
+* empty state accessibility fix v1 ([#3838](https://github.com/carbon-design-system/ibm-products/issues/3838)) ([c525b0d](https://github.com/carbon-design-system/ibm-products/commit/c525b0d475f73e3738887e09a11b5a40bffe678f))
+* move spacer and actions to the end v1 ([#3852](https://github.com/carbon-design-system/ibm-products/issues/3852)) ([7e81ed1](https://github.com/carbon-design-system/ibm-products/commit/7e81ed147ab2860fee36744e52c6ac8adca4e6df))
+
+
+### Features
+
+* **Datagrid:** return select row data object ([#3828](https://github.com/carbon-design-system/ibm-products/issues/3828)) ([d903a0c](https://github.com/carbon-design-system/ibm-products/commit/d903a0c4804c9846f76d6ce3793c5eb6b4d156b2))
+
+
+
+
+
 ## [1.61.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.61.0...@carbon/ibm-products@1.61.1) (2023-11-07)
 
 

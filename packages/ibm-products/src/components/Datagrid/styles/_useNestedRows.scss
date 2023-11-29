@@ -36,7 +36,7 @@
 
 .#{$block-class}
   tr.#{$block-class}__carbon-nested-row
-  + :not(tr.#{$block-class}__carbon-nested-row)::before {
+  + :not(tr.#{$block-class}__carbon-nested-row)::after {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: -1px;

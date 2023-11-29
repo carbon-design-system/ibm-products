@@ -329,6 +329,7 @@ export const SelectableRow = () => {
       emptyStateTitle,
       emptyStateDescription,
       onRowSelect: (row, event) => console.log(row, event),
+      batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,
     useStickyColumn
@@ -558,7 +559,6 @@ export const BatchActions = () => {
       rowActions: getRowActions(),
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useActionsColumn,
     useStickyColumn
   );

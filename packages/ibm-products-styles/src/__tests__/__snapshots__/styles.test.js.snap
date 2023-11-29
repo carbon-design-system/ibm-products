@@ -3166,6 +3166,10 @@ p.c4p--about-modal__copyright-text:first-child {
   overflow-x: hidden;
 }
 
+.c4p--tearsheet-create .c4p--tearsheet-create__content .cds--form {
+  height: inherit;
+}
+
 .c4p--tearsheet-create .c4p--tearsheet-create__content .cds--grid {
   padding: 0;
   margin: 0;

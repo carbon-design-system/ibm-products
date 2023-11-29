@@ -14,7 +14,6 @@ import { makeData } from './utils/makeData';
 
 import {
   checkLogging,
-  expectError,
   expectWarn,
   mockHTMLElement,
 } from '../../global/js/utils/test-helper';
@@ -291,25 +290,9 @@ const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
   return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
 };
 
-const TenThousandEntriesWithoutFeatureFlag = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10000));
-  pkg.feature['Datagrid.useInfiniteScroll'] = false;
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useInfiniteScroll
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
-};
-
 const TenThousandEntries = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
-  pkg.feature['Datagrid.useInfiniteScroll'] = true;
   const datagridState = useDatagrid(
     {
       columns,
@@ -1186,19 +1169,6 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
-  });
-
-  //Ten Thousand Entries
-  it('render logs an error if infinite scroll not enabled', async () => {
-    expectError(
-      'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
-      () => {
-        render(
-          <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
-        );
-      },
-      true
-    );
   });
 
   it('renders Ten Thousand table entries', async () => {
@@ -2193,7 +2163,7 @@ describe(componentName, () => {
     );
 
     bodyRows.forEach((row) => {
-      const actionColumnCell = row.lastElementChild.previousElementSibling;
+      const actionColumnCell = row.lastElementChild;
       expect(actionColumnCell).toHaveClass(
         `${blockClass}__actions-column-cell`
       );
@@ -2203,7 +2173,7 @@ describe(componentName, () => {
     });
   });
 
-  it('should click non stick row action when not inside of overflow menu', async () => {
+  it('should click non sticky row action when not inside of overflow menu', async () => {
     const { rerender } = render(
       <ActionsColumnExample
         isFetching={true}
@@ -2219,8 +2189,7 @@ describe(componentName, () => {
       (row) => !row.classList.contains(`${blockClass}__head`)
     );
     const firstBodyRow = bodyRows[0];
-    const lastCellElement =
-      firstBodyRow.lastElementChild.previousElementSibling;
+    const lastCellElement = firstBodyRow.lastElementChild;
     const iconSkeletonElement = lastCellElement.children[0].children[0];
     expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
     expect(iconSkeletonElement).toHaveClass(

@@ -8,4 +8,4 @@
 // a build of carbon css with our required feature flags set
 
 @use '@carbon/styles';
-@use '@carbon/ibm-products-styles/scss/global/styles/project-settings';
+@use '../../ibm-products-styles/src/global/styles/project-settings'

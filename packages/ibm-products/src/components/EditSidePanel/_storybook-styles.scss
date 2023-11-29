@@ -8,7 +8,9 @@
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+// @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+//   as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
   as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--edit-side-panel;

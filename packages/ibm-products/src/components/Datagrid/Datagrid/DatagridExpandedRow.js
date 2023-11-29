@@ -34,14 +34,16 @@ const DatagridExpandedRow =
         onMouseEnter={(event) => toggleParentHoverClass(event, 'enter')}
         onMouseLeave={(event) => toggleParentHoverClass(event)}
       >
-        <div
-          className={`${blockClass}__expanded-row-content`}
-          style={{
-            height: expandedContentHeight && expandedContentHeight,
-          }}
-        >
-          <ExpandedRowContentComponent {...datagridState} />
-        </div>
+        <td className={`${blockClass}__expanded-row-cell-wrapper`}>
+          <div
+            className={`${blockClass}__expanded-row-content`}
+            style={{
+              height: expandedContentHeight && expandedContentHeight,
+            }}
+          >
+            <ExpandedRowContentComponent {...datagridState} />
+          </div>
+        </td>
       </tr>
     );
   };

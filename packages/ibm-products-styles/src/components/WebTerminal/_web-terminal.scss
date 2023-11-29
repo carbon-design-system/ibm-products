@@ -78,7 +78,8 @@ $block-class: #{$pkg-prefix}--web-terminal;
   @include theme($g100);
 }
 
-.#{$carbon-prefix}--overflow-menu-options__btn {
+.#{$block-class}__documentation-overflow
+  .#{$carbon-prefix}--overflow-menu-options__btn {
   text-decoration: none;
 }
 

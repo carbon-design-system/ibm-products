@@ -61,7 +61,11 @@ export let NoDataEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NoDataIllustration theme={illustrationTheme} size={size} />
+        <NoDataIllustration
+          title={title}
+          theme={illustrationTheme}
+          size={size}
+        />
         <EmptyStateContent
           action={action}
           link={link}

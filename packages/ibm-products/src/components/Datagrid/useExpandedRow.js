@@ -24,7 +24,11 @@ const useExpandedRow = (hooks) => {
         expandedRowsHeight[row.index] || expandedContentHeight,
       RowExpansionRenderer: DatagridExpandedRow(ExpandedRowContentComponent),
     }));
-    Object.assign(instance, { rows: rowsWithExpand, setExpandedRowHeight });
+    Object.assign(instance, {
+      rows: rowsWithExpand,
+      setExpandedRowHeight,
+      withExpandedRows: true,
+    });
   };
   hooks.useInstance.push(useInstance);
 };

@@ -15,8 +15,14 @@ export const useFocusRowExpander = ({
   instance,
   lastExpandedRowIndex,
   blockClass,
+  activeElement,
 }) => {
   useEffect(() => {
+    // We need to return at this point so that the focus is not stolen from
+    // other interactive elements in the Datagrid
+    if (!activeElement.classList.contains(`${blockClass}__row-expander`)) {
+      return;
+    }
     const tableId = instance?.tableId;
     const rowElements = document.querySelectorAll(`#${tableId} tbody tr`);
     if (lastExpandedRowIndex) {
@@ -39,5 +45,6 @@ export const useFocusRowExpander = ({
     instance?.expandedRows,
     lastExpandedRowIndex,
     blockClass,
+    activeElement,
   ]);
 };

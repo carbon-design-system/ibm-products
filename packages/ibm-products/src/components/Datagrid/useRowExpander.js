@@ -25,6 +25,7 @@ const useRowExpander = (hooks) => {
     instance: tempState?.current,
     lastExpandedRowIndex: lastExpandedRowIndex?.current,
     blockClass,
+    activeElement: document.activeElement,
   });
 
   const visibleColumns = (columns) => {

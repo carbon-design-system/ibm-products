@@ -56,6 +56,7 @@ export const MultiStepTearsheet = ({
   nextButtonText,
   submitButtonText,
   title,
+  ...rest
 }) => {
   const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
@@ -112,6 +113,7 @@ export const MultiStepTearsheet = ({
           })
         }
         firstFocusElement={firstFocusElement}
+        {...rest}
       >
         <CreateTearsheetStep
           onNext={() => {

@@ -10555,6 +10555,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
 }
 
+.c4p--web-terminal__documentation-overflow .cds--overflow-menu-options__btn {
+  text-decoration: none;
+}
+
 .c4p--web-terminal__body {
   height: 100%;
 }

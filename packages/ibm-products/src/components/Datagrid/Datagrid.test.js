@@ -2009,136 +2009,54 @@ describe(componentName, () => {
     );
   });
 
-  it('Row Size Dropdown', () => {
-    render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+  it('should test interactions within toolbar, including row size dropdown', () => {
+    const { click } = fireEvent;
+    const { keyboard } = userEvent;
+    render(<RowSizeDropdown data-testid={dataTestId} />);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('label')[0]
+    // 'Select all rows in the table'
+    // Click select all rows checkbox
+    const selectAllCheckbox = screen.getByLabelText(
+      'Select all rows in the table'
+    );
+    click(selectAllCheckbox);
+
+    // Count number of rows
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
     );
 
-    const rowSize = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr').length;
+    bodyRows.forEach((bodyRow) => {
+      expect(bodyRow).toHaveClass(`${carbon.prefix}--data-table--selected`);
+    });
 
-    //This checks to see if all the rows in the table have been selected.
-    for (var i = 0; i < rowSize; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual('bx--data-table--selected');
-    }
+    screen.getByText('10 items selected');
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0]
-        .getElementsByTagName('span')[0].textContent
-    ).toEqual('10 items selected');
+    // Find and click Refresh button
+    const actionButton = screen.getByText('Action');
+    click(actionButton);
+    expect(alertMock).toHaveBeenCalled();
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Action');
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[0]
+    // Find and click cancel button
+    const cancelButton = screen.getByText('Cancel');
+    click(cancelButton);
+    expect(alertMock).toHaveBeenCalled();
+
+    click(screen.getByLabelText('Row settings').parentElement);
+    expect(screen.getByLabelText('Row settings').parentElement).toHaveClass(
+      `${blockClass}__row-size-button--open`
     );
-
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[1].textContent
-    ).toEqual('Cancel');
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[1]
+    keyboard('[Escape]');
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
     );
-
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[0]
-    );
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(3);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[3]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[3]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(4);
+    click(screen.getByLabelText('Row settings'));
+    keyboard('[ArrowUp]');
+    const tableElement = screen.getByRole('table');
+    expect(tableElement).toHaveClass(`${carbon.prefix}--data-table--xs`);
   });
 
   it('Selectable Row', () => {

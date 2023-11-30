@@ -1935,6 +1935,10 @@ describe(componentName, () => {
     await keyboard('[ArrowUp]');
     const tableElement = screen.getByRole('table');
     expect(tableElement).toHaveClass(`${carbon.prefix}--data-table--md`);
+    click(screen.getAllByRole('columnheader')[0]);
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
+    );
   });
 
   it('Selectable Row', async () => {

@@ -2053,10 +2053,17 @@ describe(componentName, () => {
     expect(screen.getByLabelText('Row settings')).not.toHaveClass(
       `${blockClass}__row-settings-trigger--open`
     );
-    click(screen.getByLabelText('Row settings'));
+    click(screen.getByLabelText('Row settings').parentElement);
     keyboard('[ArrowUp]');
     const tableElement = screen.getByRole('table');
     expect(tableElement).toHaveClass(`${carbon.prefix}--data-table--xs`);
+    userEvent.tab();
+    fireEvent.focusOut(
+      screen.getByLabelText('Row settings').parentElement.parentElement
+    );
+    expect(screen.getByLabelText('Row settings').parentElement).not.toHaveClass(
+      `${blockClass}__row-size-button--open`
+    );
   });
 
   it('Selectable Row', () => {

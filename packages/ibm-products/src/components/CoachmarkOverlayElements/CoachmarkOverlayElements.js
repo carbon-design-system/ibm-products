@@ -142,7 +142,13 @@ export let CoachmarkOverlayElements = React.forwardRef(
           </>
         ) : (
           <>
-            <Carousel disableArrowScroll ref={scrollRef}>
+            <Carousel
+              disableArrowScroll
+              ref={scrollRef}
+              onScroll={(scrollPercent) => {
+                setScrollPosition(scrollPercent);
+              }}
+            >
               {children}
             </Carousel>
             <div className={cx(`${blockClass}__footer`)}>
@@ -161,11 +167,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                       progStepFloor,
                       progStepCeil
                     );
-                    scrollRef.current
-                      .scrollToView(targetStep)
-                      .then((scrollPercentage) => {
-                        setScrollPosition(scrollPercentage);
-                      });
+                    scrollRef.current.scrollToView(targetStep);
                     setCurrentProgStep(targetStep);
                   }}
                 >
@@ -185,11 +187,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                       progStepFloor,
                       progStepCeil
                     );
-                    scrollRef.current
-                      .scrollToView(targetStep)
-                      .then((scrollPercentage) => {
-                        setScrollPosition(scrollPercentage);
-                      });
+                    scrollRef.current.scrollToView(targetStep);
                     setCurrentProgStep(targetStep);
                   }}
                 >

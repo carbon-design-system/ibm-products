@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useIntersection } from './utils';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -25,34 +24,22 @@ const componentName = 'CarouselItem';
 /**
  * TODO: A description of the component.
  */
-const CarouselItem = ({ children, className, ...rest }) => {
-  const itemRef = useRef();
-  const isInView = useIntersection(itemRef, 0.85);
-
-  useEffect(() => {
-    const matches = itemRef.current?.querySelectorAll(
-      'a, button, [role="button"], [tabindex]'
+const CarouselItem = React.forwardRef(
+  ({ children, className, ...rest }, ref) => {
+    return (
+      <div
+        {...rest}
+        className={cx(blockClass, className)}
+        {...getDevtoolsProps(componentName)}
+        ref={ref}
+      >
+        {children}
+      </div>
     );
-    if (matches) {
-      const ti = isInView ? 0 : -1;
-      [...matches].forEach((match) => {
-        match.tabIndex = ti;
-      });
-    }
-  }, [isInView]);
+  }
+);
 
-  return (
-    <div
-      {...rest}
-      className={cx(blockClass, className)}
-      ref={itemRef}
-      {...getDevtoolsProps(componentName)}
-    >
-      {children}
-    </div>
-  );
-};
-
+CarouselItem.displayName = componentName;
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.

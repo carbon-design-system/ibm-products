@@ -24,6 +24,7 @@ const defaults = {
     CreateTearsheet: true,
     CreateTearsheetStep: true,
     CreateTearsheetDivider: true,
+    Datagrid: true,
     EditInPlace: true,
     EmptyState: true,
     ErrorEmptyState: true,
@@ -63,7 +64,6 @@ const defaults = {
     EditSidePanel: false,
     CancelableTextEdit: false,
     DataSpreadsheet: false,
-    Datagrid: false,
     EditTearsheet: false,
     EditTearsheetForm: false,
     EditTearsheetNarrow: false,
@@ -80,12 +80,10 @@ const defaults = {
   // feature level flags
   feature: {
     'default-portal-target-body': true,
-    'Datagrid.useInfiniteScroll': false,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
     'Datagrid.useExpandedRow': false,
     'Datagrid.useNestedRows': false,
-    'Datagrid.useActionsColumn': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,

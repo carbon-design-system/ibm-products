@@ -10,7 +10,7 @@
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings; // loads config.css or config-dev.scss from ibm-prodcuts/src (see main.js)
-@use '../../ibm-products/src/index-without-carbon.scss';
+@use '../../ibm-products-styles/src/index-without-carbon.scss';
 
 // Load all Carbon styles now
 @use '../css/carbon';

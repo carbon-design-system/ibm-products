@@ -6,7 +6,8 @@
 //
 
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings';
+// @use '@carbon/ibm-products-styles/scss/global/styles/project-settings';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings';
 
 .storybook--inline-tip-wide {
   max-width: 784px;

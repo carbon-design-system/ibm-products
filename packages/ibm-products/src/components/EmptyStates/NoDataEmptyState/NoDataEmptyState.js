@@ -62,9 +62,9 @@ export let NoDataEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <NoDataIllustration
+          title={title}
           theme={illustrationTheme}
           size={size}
-          title={title}
         />
         <EmptyStateContent
           action={action}

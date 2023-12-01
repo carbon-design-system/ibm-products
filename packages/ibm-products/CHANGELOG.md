@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.17.0...@carbon/ibm-products@2.17.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **Datagrid:** use getRowId to set selectedRowData instead of index ([#3855](https://github.com/carbon-design-system/ibm-products/issues/3855)) ([522e990](https://github.com/carbon-design-system/ibm-products/commit/522e9904dea7adf8798cc0824373cadf6747ca39))
+* no data empty state title ([#3862](https://github.com/carbon-design-system/ibm-products/issues/3862)) ([b99a106](https://github.com/carbon-design-system/ibm-products/commit/b99a106df0089874222e186cfeecab74530fe071))
+* update Carbon 11 compatible versions to latest ([#3806](https://github.com/carbon-design-system/ibm-products/issues/3806)) ([1f78945](https://github.com/carbon-design-system/ibm-products/commit/1f78945fca30b46789822949d1bef08a3ec36c47))
+
+
+
+
+
+# [2.17.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.16.0...@carbon/ibm-products@2.17.0) (2023-11-28)
+
+
+### Bug Fixes
+
+* **Datagrid:** remove hardcoded label, add cb fn for TableBatchActions ([#3851](https://github.com/carbon-design-system/ibm-products/issues/3851)) ([83d90eb](https://github.com/carbon-design-system/ibm-products/commit/83d90eb6f44c0f8d25f8460e00462a3b91aef212))
+* move spacer and actions to the end ([#3846](https://github.com/carbon-design-system/ibm-products/issues/3846)) ([26b323f](https://github.com/carbon-design-system/ibm-products/commit/26b323fc7695d7e393ecb388efdc6aae9f505b9f))
+
+
+### Features
+
+* datagrid base release ([#3839](https://github.com/carbon-design-system/ibm-products/issues/3839)) ([d52200b](https://github.com/carbon-design-system/ibm-products/commit/d52200b3e90421774d68a3b69e6e02342d026734))
+* publish styles as independant package ([#3799](https://github.com/carbon-design-system/ibm-products/issues/3799)) ([df080be](https://github.com/carbon-design-system/ibm-products/commit/df080be8a240a510a723805e535f7c75d438461a))
+
+
+
+
+
+# [2.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.2...@carbon/ibm-products@2.16.0) (2023-11-21)
+
+
+### Bug Fixes
+
+* clickable row review fixes ([#3795](https://github.com/carbon-design-system/ibm-products/issues/3795)) ([21c3e58](https://github.com/carbon-design-system/ibm-products/commit/21c3e58be3d98ddaf466423c3931a7006303c03b))
+* **Datagrid:** fix visible scroll bar when resizing with pagination ([#3805](https://github.com/carbon-design-system/ibm-products/issues/3805)) ([5195e45](https://github.com/carbon-design-system/ibm-products/commit/5195e45bab5b3875e24f20b469b05230f76fdd9b))
+* **Datagrid:** review fixes from resizable columns review ([#3813](https://github.com/carbon-design-system/ibm-products/issues/3813)) ([0cf6dfd](https://github.com/carbon-design-system/ibm-products/commit/0cf6dfda924c322a2acfa4f1b4749ff1099d0b1f))
+* empty state accessibility update ([#3834](https://github.com/carbon-design-system/ibm-products/issues/3834)) ([b9080da](https://github.com/carbon-design-system/ibm-products/commit/b9080dae976048207888cfb25b313dece349ced9))
+* side panel scrolled height ([#3823](https://github.com/carbon-design-system/ibm-products/issues/3823)) ([7d55acc](https://github.com/carbon-design-system/ibm-products/commit/7d55acc11cf826e1520c9b04eccb393ac18f000d))
+* unhandling error that caused by extra columns for issue [#3455](https://github.com/carbon-design-system/ibm-products/issues/3455) ([#3810](https://github.com/carbon-design-system/ibm-products/issues/3810)) ([45d4da3](https://github.com/carbon-design-system/ibm-products/commit/45d4da33c80d2d2145c5629ed38a84ac216c8061))
+
+
+### Features
+
+* **Datagrid:** selectable rows return all row data selected via react-table `state` ([#3827](https://github.com/carbon-design-system/ibm-products/issues/3827)) ([b3d7a60](https://github.com/carbon-design-system/ibm-products/commit/b3d7a608436fc8f0075b2992a7e44f08fdf880a8))
+* new InlineTip and SteppedAnimatedMedia components ([#3800](https://github.com/carbon-design-system/ibm-products/issues/3800)) ([bd79dc8](https://github.com/carbon-design-system/ibm-products/commit/bd79dc8e0f402465813163f1f2021526f96dabb5))
+
+
+
+
+
 ## [2.15.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.1...@carbon/ibm-products@2.15.2) (2023-11-14)
 
 

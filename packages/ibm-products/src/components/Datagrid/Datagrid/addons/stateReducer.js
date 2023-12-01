@@ -11,6 +11,8 @@ const COLUMN_RESIZE_START = 'columnStartResizing';
 const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
+const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
+const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
@@ -51,8 +53,79 @@ export const handleColumnResizingEvent = (
   });
 };
 
+export const handleToggleRowSelected = ({
+  dispatch,
+  rowData,
+  isChecked,
+  getRowId,
+  selectAll,
+}) =>
+  dispatch({
+    type: TOGGLE_ROW_SELECTED,
+    payload: { rowData, isChecked, getRowId, selectAll },
+  });
+
+export const handleSelectAllRowData = ({
+  dispatch,
+  rows,
+  getRowId,
+  indeterminate,
+  isChecked,
+}) =>
+  dispatch({
+    type: TOGGLE_ALL_ROWS_SELECTED,
+    payload: { rows, getRowId, indeterminate, isChecked },
+  });
+
 export const stateReducer = (newState, action) => {
   switch (action.type) {
+    case TOGGLE_ALL_ROWS_SELECTED: {
+      const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
+      if (rows) {
+        const newSelectedRowData = {};
+        rows.forEach((row) => {
+          newSelectedRowData[getRowId(row, row.index)] = row;
+        });
+        return {
+          ...newState,
+          selectedRowData:
+            indeterminate || !isChecked ? {} : newSelectedRowData,
+        };
+      }
+      return {
+        ...newState,
+      };
+    }
+    case TOGGLE_ROW_SELECTED: {
+      const { rowData, isChecked, getRowId } = action.payload || {};
+      if (!rowData) {
+        return;
+      }
+      if (isChecked) {
+        return {
+          ...newState,
+          selectedRowData: {
+            ...newState.selectedRowData,
+            [getRowId(rowData, rowData.index)]: rowData,
+          },
+        };
+      }
+      if (rowData && !isChecked) {
+        const newData = { ...newState.selectedRowData };
+        const dataWithRemovedRow = Object.fromEntries(
+          Object.entries(newData).filter(([key]) => {
+            return parseInt(key) !== parseInt(rowData.index);
+          })
+        );
+        return {
+          ...newState,
+          selectedRowData: dataWithRemovedRow,
+        };
+      }
+      return {
+        ...newState,
+      };
+    }
     case INIT: {
       return {
         ...newState,

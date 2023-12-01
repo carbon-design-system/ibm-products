@@ -13,9 +13,9 @@ __metadata:
   linkType: hard
 
 "@adobe/css-tools@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@adobe/css-tools@npm:4.3.1"
-  checksum: ad43456379ff391132aff687ece190cb23ea69395e23c9b96690eeabe2468da89a4aaf266e4f8b6eaab53db3d1064107ce0f63c3a974e864f4a04affc768da3f
+  version: 4.3.2
+  resolution: "@adobe/css-tools@npm:4.3.2"
+  checksum: 9667d61d55dc3b0a315c530ae84e016ce5267c4dd8ac00abb40108dc98e07b98e3090ce8b87acd51a41a68d9e84dcccb08cdf21c902572a9cf9dcaf830da4ae3
   languageName: node
   linkType: hard
 
@@ -1653,7 +1653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@npm:^11.20.1":
+"@carbon/colors@npm:^11.20.0":
   version: 11.20.1
   resolution: "@carbon/colors@npm:11.20.1"
   checksum: eb9d983c1ec4852f8542ea21f8bb31d383c417d55fe60a3d1ab8a0e85b617f41699b91657240f07f789b852abe48828f1546da92b1c46de9cfe21c81bb612fd7
@@ -1667,7 +1667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.21.1":
+"@carbon/grid@npm:^11.21.0, @carbon/grid@npm:^11.21.1":
   version: 11.21.1
   resolution: "@carbon/grid@npm:11.21.1"
   dependencies:
@@ -1703,11 +1703,12 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.10
     "@carbon/grid": ^11.21.1
+    "@carbon/ibm-products-styles": ^2.17.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.41.1
+    "@carbon/react": ^1.44.0
     "@carbon/storybook-addon-theme": ^2.0.5
-    "@carbon/themes": ^11.26.1
+    "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
     "@storybook/addon-actions": ^7.2.3
     "@storybook/addon-controls": ^7.2.3
@@ -1746,6 +1747,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/ibm-products-styles@^2.17.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+  version: 0.0.0-use.local
+  resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
+  dependencies:
+    chalk: ^4.1.2
+    copyfiles: ^2.4.1
+    cross-env: ^7.0.3
+    glob: ^10.3.3
+    jest: ^29.6.2
+    jest-config-ibm-cloud-cognitive: ^1.1.1
+    jest-environment-jsdom: ^29.6.2
+    npm-check-updates: ^16.11.1
+    npm-run-all: ^4.1.5
+    rimraf: ^5.0.1
+    sass: ^1.64.2
+    yargs: ^17.7.2
+  peerDependencies:
+    "@carbon/grid": ^11.21.1
+    "@carbon/layout": ^11.20.1
+    "@carbon/motion": ^11.16.1
+    "@carbon/themes": ^11.28.0
+    "@carbon/type": ^11.25.1
+  languageName: unknown
+  linkType: soft
+
 "@carbon/ibm-products@workspace:packages/ibm-products":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products@workspace:packages/ibm-products"
@@ -1753,6 +1779,7 @@ __metadata:
     "@babel/cli": ^7.22.10
     "@babel/core": ^7.22.10
     "@babel/runtime": ^7.22.10
+    "@carbon/ibm-products-styles": ^2.17.1
     "@carbon/telemetry": ^0.1.0
     "@dnd-kit/core": ^6.0.8
     "@dnd-kit/sortable": ^7.0.2
@@ -1782,61 +1809,61 @@ __metadata:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.41.1
-    "@carbon/themes": ^11.26.1
+    "@carbon/react": ^1.44.0
+    "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@npm:^10.45.1":
+"@carbon/icon-helpers@npm:^10.45.0":
   version: 10.45.1
   resolution: "@carbon/icon-helpers@npm:10.45.1"
   checksum: 37e490ae7cec63512e1e8db107f7753503dffcc8eea7f932701cf62c4d6f1b94d857f10cd96836c25c1fc4fc01cbbbd0456f50493db941847e0c6e926c8d8541
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.29.1":
-  version: 11.29.1
-  resolution: "@carbon/icons-react@npm:11.29.1"
+"@carbon/icons-react@npm:^11.31.0":
+  version: 11.31.0
+  resolution: "@carbon/icons-react@npm:11.31.0"
   dependencies:
-    "@carbon/icon-helpers": ^10.45.1
+    "@carbon/icon-helpers": ^10.45.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
-  checksum: 3af6a96f05c7ae68e6f541b6ae098ec292ede8397a2560a88e2ddc6e047473bbbb503496aed341804339195c61ba0755d24df5e224cfe6764bb3f330e1b18453
+  checksum: 2a42fe082e5067ac166687d05829166962c5c80e25f547677734437e490fb064febb680518f69df4abb5e6ce3ed24acd729b629ba409fe50c605e01a9aae2d52
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.20.1":
+"@carbon/layout@npm:^11.20.0, @carbon/layout@npm:^11.20.1":
   version: 11.20.1
   resolution: "@carbon/layout@npm:11.20.1"
   checksum: 8db3a31c08ab1fc62bd06404a72ca1e724c938d1ac73c708a63b06103fe054a5ab4294b1fba3471e3f55140ebe0e91e32872a2828dda73a32801fccb670acd35
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.16.1":
+"@carbon/motion@npm:^11.16.0, @carbon/motion@npm:^11.16.1":
   version: 11.16.1
   resolution: "@carbon/motion@npm:11.16.1"
   checksum: 1b7644fb19a9154a7d690128ed2fe831232576308dfeb30c694d533e5f8d357dbaf1b3bed7d4c274acb407d84d1ade087583d4f9aec4a8ac1aa9dfffb6922098
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.41.1":
-  version: 1.41.1
-  resolution: "@carbon/react@npm:1.41.1"
+"@carbon/react@npm:^1.44.0":
+  version: 1.44.0
+  resolution: "@carbon/react@npm:1.44.0"
   dependencies:
     "@babel/runtime": ^7.18.3
     "@carbon/feature-flags": ^0.16.0
-    "@carbon/icons-react": ^11.29.1
-    "@carbon/layout": ^11.20.1
-    "@carbon/styles": ^1.41.1
+    "@carbon/icons-react": ^11.31.0
+    "@carbon/layout": ^11.20.0
+    "@carbon/styles": ^1.44.0
     "@carbon/telemetry": 0.1.0
     classnames: 2.3.2
     copy-to-clipboard: ^3.3.1
-    downshift: 8.2.2
+    downshift: 8.2.3
     flatpickr: 4.6.9
     invariant: ^2.2.3
     lodash.debounce: ^4.0.8
@@ -1853,7 +1880,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 8c9bca0e9e2d23e4e9898e4215ab98c63367f462d65e533ba63060fbdc8f0b87c197995394850ac6440d8f3079cebb6f66f09d1cd43be4e2c27b1bd2cf8bc8db
+  checksum: ce211e31ff1777857c345970e43a8b6c99ab1fca089fea0872ba0a9a32ff97eebac9f0b0cd6552d0c7d75e68dec149c743fc4f7d18d53c5515faeb72c9062bc5
   languageName: node
   linkType: hard
 
@@ -1882,24 +1909,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.41.1":
-  version: 1.41.1
-  resolution: "@carbon/styles@npm:1.41.1"
+"@carbon/styles@npm:^1.44.0":
+  version: 1.44.0
+  resolution: "@carbon/styles@npm:1.44.0"
   dependencies:
-    "@carbon/colors": ^11.20.1
+    "@carbon/colors": ^11.20.0
     "@carbon/feature-flags": ^0.16.0
-    "@carbon/grid": ^11.21.1
-    "@carbon/layout": ^11.20.1
-    "@carbon/motion": ^11.16.1
-    "@carbon/themes": ^11.26.1
-    "@carbon/type": ^11.25.1
+    "@carbon/grid": ^11.21.0
+    "@carbon/layout": ^11.20.0
+    "@carbon/motion": ^11.16.0
+    "@carbon/themes": ^11.28.0
+    "@carbon/type": ^11.25.0
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 7f81549bc5e63dea98c49fa4526fadccfc23e6a7fbcb089ca102f7a690c1e9196ce6676f7e53dada76c01ecd81c0b22042520edeab0933112c7f072f449cdcf5
+  checksum: 1144ae7d1b4dccc70b8a512cddbce1f618024990fd00e03626e69888c90041d9777a2460e1944b556f61846cbe93dccdb063b65e4fc2f50b60bab3625b528a0c
   languageName: node
   linkType: hard
 
@@ -1912,19 +1939,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.26.1":
-  version: 11.26.1
-  resolution: "@carbon/themes@npm:11.26.1"
+"@carbon/themes@npm:^11.28.0":
+  version: 11.28.0
+  resolution: "@carbon/themes@npm:11.28.0"
   dependencies:
-    "@carbon/colors": ^11.20.1
-    "@carbon/layout": ^11.20.1
-    "@carbon/type": ^11.25.1
+    "@carbon/colors": ^11.20.0
+    "@carbon/layout": ^11.20.0
+    "@carbon/type": ^11.25.0
     color: ^4.0.0
-  checksum: 02b4d4c45c147865fec62b9bbcb7b5f4540dbb18a8e78c14a4195fd83a2477ef871450f1c5d3382adb2dc4865648000c57bb692662570ebfb75d3185b4b3296c
+  checksum: 52bc43b1b5ee846afc870c1898fadd3efe258fa66cb0e66672a1e20179c3833d6e517be433b339f6538887593342aba27f3130c0c3a61646c505eb16b24e06c2
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.25.1":
+"@carbon/type@npm:^11.25.0, @carbon/type@npm:^11.25.1":
   version: 11.25.1
   resolution: "@carbon/type@npm:11.25.1"
   dependencies:
@@ -10436,9 +10463,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.2.2":
-  version: 8.2.2
-  resolution: "downshift@npm:8.2.2"
+"downshift@npm:8.2.3":
+  version: 8.2.3
+  resolution: "downshift@npm:8.2.3"
   dependencies:
     "@babel/runtime": ^7.22.15
     compute-scroll-into-view: ^3.0.3
@@ -10447,7 +10474,7 @@ __metadata:
     tslib: ^2.6.2
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 6477ea1255d5590bbd2432e68a82967d609fdf61e9ee0c12407370e861ec894419feb72158c7487206838ae93de4b16751daf07e3fe98076ece7cda50d8b2c38
+  checksum: d218096d0b8488b6504553e2dd4199e24da96ffcba43e2d97bf9e87a3ed30a8a626bcc191e3c800981f52f2d7673d50bfe5fb34e091d1338e9df0f08a34fc658
   languageName: node
   linkType: hard
 

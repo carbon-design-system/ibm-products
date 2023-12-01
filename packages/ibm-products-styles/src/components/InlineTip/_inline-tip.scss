@@ -6,12 +6,12 @@
 //
 
 /**
- * The InlineTip specifically is theme-agnostic, and so we have to 
- * use color tokens to keep the colors static instead of theme tokens 
+ * The InlineTip specifically is theme-agnostic, and so we have to
+ * use color tokens to keep the colors static instead of theme tokens
  * that will change depending on the selected theme.
- * 
+ *
  * We are triggering a *large* amount of linting errors.
- * So, we're using the following "disable" rules for the entire file 
+ * So, we're using the following "disable" rules for the entire file
  * instead of many individual rules.
  */
 

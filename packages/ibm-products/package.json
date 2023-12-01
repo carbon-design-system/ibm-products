@@ -89,8 +89,8 @@
     "@carbon/grid": "^11.21.1",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
-    "@carbon/react": "^1.42.1",
-    "@carbon/themes": "^11.27.1",
+    "@carbon/react": "^1.44.0",
+    "@carbon/themes": "^11.28.0",
     "@carbon/type": "^11.25.1",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"

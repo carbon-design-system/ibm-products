@@ -143,27 +143,27 @@ export const manyInsights = prepareStory(Template, {
     children: (
       <React.Fragment>
         <GuidebannerElement
-          title="1 Use-case specific heading"
+          title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonLarge />}
         />
         <GuidebannerElement
-          title="2 Use-case specific heading"
+          title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonSmall />}
         />
         <GuidebannerElement
-          title="3 Use-case specific heading"
+          title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultButtonSmall />}
         />
         <GuidebannerElement
-          title="4 Use-case specific heading"
+          title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultLink />}
         />
         <GuidebannerElement
-          title="5 Use-case specific heading"
+          title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context."
           button={<DefaultLink />}
         />

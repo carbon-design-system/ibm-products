@@ -49,7 +49,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--carousel;
 
 .#{$block-class}__elements {
   display: flex;
-  overflow: hidden scroll;
+  overflow: hidden;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;

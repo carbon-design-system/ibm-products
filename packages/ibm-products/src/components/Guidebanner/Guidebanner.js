@@ -69,10 +69,6 @@ export let Guidebanner = React.forwardRef(
     const [showNavigation, setShowNavigation] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
 
-    const handleScrollableChange = (value) => {
-      setShowNavigation(value);
-    };
-
     const handleClickToggle = () => {
       setScrollPosition(0);
       scrollRef.current.scrollToView(0);
@@ -99,9 +95,13 @@ export let Guidebanner = React.forwardRef(
           // These colors are to match the Carousel's faded edges
           // against the Guidebanner's gradient background.
           fadedEdgeColor={{ left: blue90, right: purple70 }}
+          onChangeIsScrollable={(value) => {
+            setShowNavigation(value);
+          }}
+          onScroll={(scrollPercent) => {
+            setScrollPosition(scrollPercent);
+          }}
           ref={scrollRef}
-          scrollableChange={handleScrollableChange}
-          scrollTune={-450}
         >
           {children}
         </Carousel>
@@ -138,11 +138,7 @@ export let Guidebanner = React.forwardRef(
                 tooltipPosition="top"
                 iconDescription={previousIconDescription}
                 onClick={() => {
-                  scrollRef.current
-                    .scrollPrev()
-                    .then((scrollPercentage) =>
-                      setScrollPosition(scrollPercentage)
-                    );
+                  scrollRef.current.scrollPrev();
                 }}
               ></Button>
               <Button
@@ -160,11 +156,7 @@ export let Guidebanner = React.forwardRef(
                 tooltipAlignment="end"
                 iconDescription={nextIconDescription}
                 onClick={() => {
-                  scrollRef.current
-                    .scrollNext()
-                    .then((scrollPercentage) =>
-                      setScrollPosition(scrollPercentage)
-                    );
+                  scrollRef.current.scrollNext();
                 }}
               ></Button>
             </>

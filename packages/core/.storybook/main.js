@@ -10,10 +10,10 @@ const { dirname, join, resolve } = require('path');
 
 module.exports = {
   addons: [
-    getAbsolutePath("@storybook/addon-actions"),
-    getAbsolutePath("@storybook/addon-docs"),
-    getAbsolutePath("@storybook/addon-controls"),
-    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath('@storybook/addon-actions'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-links'),
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -22,13 +22,13 @@ module.exports = {
         },
       },
     },
-    getAbsolutePath("@storybook/addon-viewport"),
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
-    "@carbon/storybook-addon-theme/preset.js",
+    getAbsolutePath('@storybook/addon-viewport'),
+    getAbsolutePath('@storybook/addon-mdx-gfm'),
+    '@carbon/storybook-addon-theme/preset.js',
   ],
 
   framework: {
-    name: getAbsolutePath("@storybook/react-webpack5"),
+    name: getAbsolutePath('@storybook/react-webpack5'),
     options: {
       //   fastRefresh: true,
       //   strictMode: true,
@@ -101,5 +101,5 @@ module.exports = {
 };
 
 function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
+  return dirname(require.resolve(join(value, 'package.json')));
 }

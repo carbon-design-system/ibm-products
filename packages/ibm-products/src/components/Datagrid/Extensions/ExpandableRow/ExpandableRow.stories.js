@@ -19,7 +19,6 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
@@ -189,12 +188,6 @@ const ExpandedRows = ({ ...args }) => {
     useExpandedRow
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useExpandedRow` hook
-  pkg.feature['Datagrid.useExpandedRow'] = true;
-  pkg._silenceWarnings(true);
-
   return <Datagrid datagridState={datagridState} />;
 };
 
@@ -222,6 +215,5 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...expandableRowControlProps,
-    featureFlags: ['Datagrid.useExpandedRow'],
   },
 });

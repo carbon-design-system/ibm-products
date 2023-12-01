@@ -1,11 +1,10 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-// @flow
+
 import React from 'react';
 import { DataTable, SkeletonText } from 'carbon-components-react';
 import { px } from '@carbon/layout';
@@ -27,7 +26,15 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize, withNestedRows, prepareRow, key } = datagridState;
+  const {
+    row,
+    rowSize,
+    withNestedRows,
+    prepareRow,
+    key,
+    tableId,
+    withExpandedRows,
+  } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -70,7 +77,7 @@ const DatagridRow = (datagridState) => {
 
   const focusRemover = () => {
     const elements = document.querySelectorAll(
-      `.${blockClass}__carbon-row-expanded`
+      `#${tableId} .${blockClass}__carbon-row-expanded`
     );
     elements.forEach((el) => {
       el.classList.remove(`${blockClass}__carbon-row-expanded-hover-active`);
@@ -110,6 +117,15 @@ const DatagridRow = (datagridState) => {
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
   });
 
+  const setAdditionalRowProps = () => {
+    if (withNestedRows || withExpandedRows) {
+      return {
+        'data-nested-row-id': row.id,
+      };
+    }
+    return {};
+  };
+
   return (
     <React.Fragment key={key}>
       <TableRow
@@ -121,6 +137,7 @@ const DatagridRow = (datagridState) => {
         onFocus={hoverHandler}
         onBlur={focusRemover}
         onKeyUp={handleOnKeyUp}
+        {...setAdditionalRowProps()}
       >
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps({ role: false });

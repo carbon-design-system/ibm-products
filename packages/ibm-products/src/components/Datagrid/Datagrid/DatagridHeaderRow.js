@@ -72,6 +72,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   const handleOnMouseDownResize = (event, resizeProps) => {
     const { onMouseDown } = { ...resizeProps() };
+    event.target.focus();
     // When event.button is 2, that is a right click
     // and we do not want to resize
     if (event.button === 2 || event.ctrlKey) {

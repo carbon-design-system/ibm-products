@@ -10,13 +10,23 @@ import React, { useRef } from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
+import { useFocusRowExpander } from './useFocusRowExpander';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const useNestedRowExpander = (hooks) => {
   const tempState = useRef();
+  const lastExpandedRowIndex = useRef();
   const useInstance = (instance) => {
     tempState.current = instance;
   };
+
+  useFocusRowExpander({
+    instance: tempState?.current,
+    lastExpandedRowIndex: lastExpandedRowIndex?.current,
+    blockClass,
+    activeElement: document.activeElement,
+  });
+
   const visibleColumns = (columns) => {
     const expanderColumn = {
       id: 'expander',
@@ -27,6 +37,7 @@ const useNestedRowExpander = (hooks) => {
             // Prevents `onRowClick` from being called if `useOnRowClick` is included
             event.stopPropagation();
             row.toggleRowExpanded();
+            lastExpandedRowIndex.current = row.id;
           },
         };
         const {

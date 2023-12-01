@@ -2963,6 +2963,16 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background: var(--cds-layer-hover, #e5e5e5);
 }
 
+.c4p--datagrid .bx--data-table tbody tr:hover td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .bx--data-table .c4p--datagrid__carbon-row-expanded td.c4p--datagrid__expandable-row-cell {
+  border: none;
+}
+
+.c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper {
+  padding: 0;
+}
+
 .c4p--datagrid__draggable-handleStyle {
   display: flex;
   align-items: center;

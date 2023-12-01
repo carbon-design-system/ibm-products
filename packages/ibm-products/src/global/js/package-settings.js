@@ -96,8 +96,6 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
-    'Datagrid.useExpandedRow': false,
-    'Datagrid.useNestedRows': false,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,

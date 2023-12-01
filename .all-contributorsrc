@@ -249,6 +249,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "SeonyuK",
+      "name": "SeonyuK",
+      "avatar_url": "https://avatars.githubusercontent.com/u/144151347?v=4",
+      "profile": "https://github.com/SeonyuK",
+      "contributions": [
+        "a11y"
+      ]
     }
   ],
   "contributorsPerLine": 5,

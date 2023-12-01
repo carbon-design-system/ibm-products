@@ -13,7 +13,13 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useExpandedRow,
+  useSelectRows,
+} from '../../index';
+import { getBatchActions } from '../../Datagrid.stories';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
@@ -225,8 +231,11 @@ const ExpandedRows = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ExpandedRowContentComponent: ExpansionRenderer,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useExpandedRow
   );
 

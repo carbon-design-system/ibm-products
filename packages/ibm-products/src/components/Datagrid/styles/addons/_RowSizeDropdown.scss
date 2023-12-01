@@ -67,3 +67,12 @@
 .#{$block-class}__row-size__row-settings-trigger--open.#{$carbon-prefix}--btn--ghost {
   background-color: $ui-02;
 }
+
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-center
+  td.#{$block-class}__expandable-row-cell,
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-top
+  td.#{$block-class}__expandable-row-cell {
+  padding-top: $spacing-03;
+}

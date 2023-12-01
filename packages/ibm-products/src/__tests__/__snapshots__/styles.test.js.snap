@@ -2686,6 +2686,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-02, #ffffff);
 }
 
+.c4p--datagrid table.bx--data-table--xl.c4p--datagrid__vertical-align-center td.c4p--datagrid__expandable-row-cell,
+.c4p--datagrid table.bx--data-table--xl.c4p--datagrid__vertical-align-top td.c4p--datagrid__expandable-row-cell {
+  padding-top: var(--cds-spacing-03, 0.5rem);
+}
+
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36

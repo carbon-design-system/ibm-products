@@ -13,14 +13,19 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useExpandedRow,
+  useSelectRows,
+} from '../../index';
+import { getBatchActions } from '../../Datagrid.stories';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
@@ -29,13 +34,6 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
-  },
-  argTypes: {
-    featureFlags: {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 
@@ -154,11 +152,10 @@ const sharedDatagridProps = {
 };
 
 const ExpansionRenderer = ({ row, expandedContentAlign }) => {
-  console.log(row);
   const prefix = usePrefix();
   return (
     <div
-      className={`expanded-content ${prefix}--test-hook-from-expanded-row-class`}
+      className={`expanded-content ${prefix}--test-hook-from-expanded-row-class--${row.id}`}
       style={{ justifyContent: `${expandedContentAlign}` }}
     >
       <div className="expanded-content__child">
@@ -208,12 +205,6 @@ const ExpandedRows = ({ ...args }) => {
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useExpandedRow` hook
-  pkg.feature['Datagrid.useExpandedRow'] = true;
-  pkg._silenceWarnings(true);
-
   const datagridState = useDatagrid(
     {
       columns,
@@ -225,8 +216,11 @@ const ExpandedRows = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ExpandedRowContentComponent: ExpansionRenderer,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useExpandedRow
   );
 
@@ -256,6 +250,5 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...expandableRowControlProps,
-    featureFlags: ['Datagrid.useExpandedRow'],
   },
 });

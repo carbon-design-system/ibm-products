@@ -19,7 +19,6 @@ import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
@@ -27,13 +26,6 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
-  },
-  argTypes: {
-    featureFlags: {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 
@@ -175,12 +167,6 @@ const SingleLevelNestedRows = ({ ...args }) => {
     useNestedRows
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useNestedRows` hook
-  pkg.feature['Datagrid.useNestedRows'] = true;
-  pkg._silenceWarnings(true);
-
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
@@ -205,7 +191,6 @@ export const SingleLevelNestedRowsUsageStory = prepareStory(
     },
     args: {
       ...nestedRowsControlProps,
-      featureFlags: ['Datagrid.useNestedRows'],
     },
   }
 );
@@ -213,12 +198,6 @@ export const SingleLevelNestedRowsUsageStory = prepareStory(
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10, 5, 2, 2));
-
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useNestedRows` hook
-  pkg.feature['Datagrid.useNestedRows'] = true;
-  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -252,6 +231,5 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...nestedRowsControlProps,
-    featureFlags: ['Datagrid.useNestedRows'],
   },
 });

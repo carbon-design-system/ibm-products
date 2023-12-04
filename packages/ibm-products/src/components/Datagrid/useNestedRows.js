@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect } from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import useNestedRowExpander from './useNestedRowExpander';
@@ -13,10 +12,6 @@ import useNestedRowExpander from './useNestedRowExpander';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useNestedRows = (hooks) => {
-  useEffect(() => {
-    pkg.checkReportFeatureEnabled('Datagrid.useNestedRows');
-  }, []);
-
   useNestedRowExpander(hooks);
   const marginLeft = 24;
 

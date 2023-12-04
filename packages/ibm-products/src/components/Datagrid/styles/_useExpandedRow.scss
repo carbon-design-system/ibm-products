@@ -63,3 +63,24 @@
 .#{$block-class} .#{$block-class}__expandable-row--hover td {
   background: $layer-hover;
 }
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  tbody
+  tr:hover
+  td.#{$block-class}__expanded-row-cell-wrapper,
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  td.#{$block-class}__expanded-row-cell-wrapper,
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  .#{$block-class}__carbon-row-expanded
+  td.#{$block-class}__expandable-row-cell {
+  border: none;
+}
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  td.#{$block-class}__expanded-row-cell-wrapper {
+  padding: 0;
+}

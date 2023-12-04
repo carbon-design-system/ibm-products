@@ -2686,6 +2686,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-02, #ffffff);
 }
 
+.c4p--datagrid table.bx--data-table--xl.c4p--datagrid__vertical-align-center td.c4p--datagrid__expandable-row-cell,
+.c4p--datagrid table.bx--data-table--xl.c4p--datagrid__vertical-align-top td.c4p--datagrid__expandable-row-cell {
+  padding-top: var(--cds-spacing-03, 0.5rem);
+}
+
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
@@ -2956,6 +2961,16 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--datagrid .c4p--datagrid__expanded-row:hover,
 .c4p--datagrid .c4p--datagrid__expandable-row--hover td {
   background: var(--cds-layer-hover, #e5e5e5);
+}
+
+.c4p--datagrid .bx--data-table tbody tr:hover td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .bx--data-table .c4p--datagrid__carbon-row-expanded td.c4p--datagrid__expandable-row-cell {
+  border: none;
+}
+
+.c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper {
+  padding: 0;
 }
 
 .c4p--datagrid__draggable-handleStyle {

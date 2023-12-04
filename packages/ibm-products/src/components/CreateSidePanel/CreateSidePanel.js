@@ -152,7 +152,7 @@ CreateSidePanel.propTypes = {
   /**
    * Unique identifier
    */
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 
   /**
    * Specifies an optional handler which is called when the CreateSidePanel

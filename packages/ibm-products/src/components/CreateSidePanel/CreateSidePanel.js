@@ -38,6 +38,7 @@ export let CreateSidePanel = React.forwardRef(
       disableSubmit,
       formTitle,
       formDescription,
+      id,
       onRequestClose,
       onRequestSubmit,
       open,
@@ -76,6 +77,7 @@ export let CreateSidePanel = React.forwardRef(
         <SidePanel
           {...rest}
           {...{
+            id,
             open,
             ref,
             selectorPageContent,
@@ -146,6 +148,11 @@ CreateSidePanel.propTypes = {
    * Specifies a required field that provides a title for a form
    */
   formTitle: PropTypes.node.isRequired,
+
+  /**
+   * Unique identifier
+   */
+  id: PropTypes.string.isRequired,
 
   /**
    * Specifies an optional handler which is called when the CreateSidePanel

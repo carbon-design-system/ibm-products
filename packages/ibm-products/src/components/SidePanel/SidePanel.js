@@ -60,7 +60,7 @@ export let SidePanel = React.forwardRef(
       closeIconDescription = defaults.closeIconDescription,
       condensedActions,
       currentStep = defaults.currentStep,
-      id,
+      id = blockClass,
       includeOverlay,
       labelText,
       navigationBackIconDescription = defaults.navigationBackIconDescription,
@@ -885,7 +885,7 @@ SidePanel.propTypes = {
   /**
    * Unique identifier
    */
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 
   /**
    * Determines whether the side panel should render with an overlay

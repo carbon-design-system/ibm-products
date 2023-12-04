@@ -1894,7 +1894,11 @@ describe(componentName, () => {
   });
 
   it('Row Size Dropdown', async () => {
-    render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { click, keyboard } = user;
+    render(<RowSizeDropdown data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1902,41 +1906,46 @@ describe(componentName, () => {
     const selectAllCheckbox = screen.getByLabelText(
       'Select all rows in the table'
     );
-    fireEvent.click(selectAllCheckbox);
+    await click(selectAllCheckbox);
 
     // Count number of rows
-    const rowSize = screen.getByTestId(dataTestId).querySelector(`tbody`)
-      .children.length;
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
 
-    //This checks to see if all the rows in the table have been selected.
-    for (var i = 0; i < rowSize; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbon.prefix}--data-table--selected`);
-    }
+    bodyRows.forEach((bodyRow) => {
+      expect(bodyRow).toHaveClass(`${carbon.prefix}--data-table--selected`);
+    });
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0]
-        .getElementsByTagName('span')[0].textContent
-    ).toEqual('10 items selected');
+    screen.getByText('10 items selected');
 
     // Find and click Refresh button
     const actionButton = screen.getByText('Action');
-    fireEvent.click(actionButton);
+    await click(actionButton);
     expect(alertMock).toHaveBeenCalled();
 
     // Find and click cancel button
     const cancelButton = screen.getByText('Cancel');
-    fireEvent.click(cancelButton);
+    await click(cancelButton);
     expect(alertMock).toHaveBeenCalled();
+
+    await click(screen.getByLabelText('Row settings'));
+    expect(screen.getByLabelText('Row settings')).toHaveClass(
+      `${blockClass}__row-size__row-settings-trigger--open`
+    );
+    await keyboard('[Escape]');
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
+    );
+    await click(screen.getByLabelText('Row settings'));
+    await keyboard('[ArrowUp]');
+    const tableElement = screen.getByRole('table');
+    expect(tableElement).toHaveClass(`${carbon.prefix}--data-table--md`);
+    click(screen.getAllByRole('columnheader')[0]);
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
+    );
   });
 
   it('Selectable Row', async () => {

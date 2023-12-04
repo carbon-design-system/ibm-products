@@ -143,21 +143,21 @@ describe('SidePanel', () => {
     const { container, rerender } = render(<SlideIn placement="left" open />);
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
-    expect(style.marginLeft).toBe('30rem');
+    expect(style.marginInlineStart).toBe('30rem');
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
     await act(() => userEvent.click(closeIconButton));
     rerender(<SlideIn placement="left" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginLeft).toBe('0px');
+    expect(updatedStyles.marginInlineStart).toBe('0px');
   });
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
     const { container, rerender } = render(<SlideIn placement="right" open />);
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
-    expect(style.marginRight).toBe('30rem');
+    expect(style.marginInlineEnd).toBe('30rem');
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
@@ -167,7 +167,7 @@ describe('SidePanel', () => {
     rerender(<SlideIn placement="right" open={false} />);
     fireEvent.animationEnd(outerElement);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginRight).toBe('0px');
+    expect(updatedStyles.marginInlineEnd).toBe('0px');
     expect(onUnmountFn).toHaveBeenCalled();
   });
 
@@ -182,7 +182,7 @@ describe('SidePanel', () => {
     );
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
-    expect(style.marginRight).toBe('30rem');
+    expect(style.marginInlineEnd).toBe('30rem');
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
@@ -192,7 +192,7 @@ describe('SidePanel', () => {
     fireEvent.animationEnd(outerElement);
     rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginRight).toBe('0px');
+    expect(updatedStyles.marginInlineEnd).toBe('0px');
   });
 
   it('should test overlay exit animation', async () => {
@@ -466,6 +466,6 @@ describe('SidePanel', () => {
     );
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
-    expect(style.marginLeft).toBe('0px');
+    expect(style.marginInlineStart).toBe('0px');
   });
 });

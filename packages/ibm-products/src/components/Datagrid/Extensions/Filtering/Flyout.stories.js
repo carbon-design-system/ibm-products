@@ -8,7 +8,7 @@
 
 import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
-import { Add } from '@carbon/react/icons';
+import { getBatchActions } from '../../Datagrid.stories';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -27,6 +27,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
+import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
@@ -44,38 +45,6 @@ export default {
       },
     },
   },
-};
-
-const getBatchActions = () => {
-  return [
-    {
-      label: 'Duplicate',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Add',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Publish to catalog',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Download',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Delete',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-      hasDivider: true,
-      kind: 'danger',
-    },
-  ];
 };
 
 const FilteringUsage = ({ defaultGridProps }) => {
@@ -323,6 +292,7 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
     featureFlags: ['Datagrid.useFiltering'],
   },

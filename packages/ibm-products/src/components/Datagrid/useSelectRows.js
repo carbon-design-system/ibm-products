@@ -29,14 +29,29 @@ const useSelectRows = (hooks) => {
       withSelectRows: true,
     });
   });
-  hooks.visibleColumns.push((columns) => [
-    {
-      id: selectionColumnId,
-      Header: (gridState) => <SelectAll {...gridState} />,
-      Cell: (gridState) => <SelectRow {...gridState} />,
-    },
-    ...columns,
-  ]);
+  hooks.visibleColumns.push((columns) => {
+    // Ensures that the first column is the row expander in the
+    // case of selected rows and expandable rows being used together
+    const newColOrder = [...columns];
+    const expanderColumnIndex = newColOrder.findIndex(
+      (col) => col.id === 'expander'
+    );
+    const expanderCol =
+      expanderColumnIndex > -1
+        ? newColOrder.splice(expanderColumnIndex, 1)
+        : [];
+    return [
+      ...(expanderColumnIndex > -1 && expanderCol && expanderCol.length
+        ? expanderCol
+        : []),
+      {
+        id: selectionColumnId,
+        Header: (gridState) => <SelectAll {...gridState} />,
+        Cell: (gridState) => <SelectRow {...gridState} />,
+      },
+      ...newColOrder,
+    ];
+  });
 };
 
 const useHighlightSelection = (hooks) => {

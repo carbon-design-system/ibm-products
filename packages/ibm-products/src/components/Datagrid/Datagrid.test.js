@@ -1527,7 +1527,7 @@ describe(componentName, () => {
     fireEvent.click(rowExpanderCollapse);
   }
 
-  it.only('should render with expandable rows and test by toggling the row open and closed', () => {
+  it('should render with expandable rows and test by toggling the row open and closed', () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);

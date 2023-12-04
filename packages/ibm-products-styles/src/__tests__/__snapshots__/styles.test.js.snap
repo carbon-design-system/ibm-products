@@ -3879,7 +3879,7 @@ p.c4p--about-modal__copyright-text:first-child {
   position: relative;
 }
 
-.c4p--datagrid tr.c4p--datagrid__carbon-nested-row + :not(tr.c4p--datagrid__carbon-nested-row)::before {
+.c4p--datagrid tr.c4p--datagrid__carbon-nested-row + :not(tr.c4p--datagrid__carbon-nested-row)::after {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: -1px;
@@ -4233,6 +4233,11 @@ p.c4p--about-modal__copyright-text:first-child {
   background-color: var(--cds-layer-02, #ffffff);
 }
 
+.c4p--datagrid table.cds--data-table--xl.c4p--datagrid__vertical-align-center td.c4p--datagrid__expandable-row-cell,
+.c4p--datagrid table.cds--data-table--xl.c4p--datagrid__vertical-align-top td.c4p--datagrid__expandable-row-cell {
+  padding-top: 0.5rem;
+}
+
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
@@ -4533,6 +4538,16 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--datagrid .c4p--datagrid__expanded-row:hover,
 .c4p--datagrid .c4p--datagrid__expandable-row--hover td {
   background: var(--cds-layer-hover);
+}
+
+.c4p--datagrid .cds--data-table tbody tr:hover td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .cds--data-table td.c4p--datagrid__expanded-row-cell-wrapper,
+.c4p--datagrid .cds--data-table .c4p--datagrid__carbon-row-expanded td.c4p--datagrid__expandable-row-cell {
+  border: none;
+}
+
+.c4p--datagrid .cds--data-table td.c4p--datagrid__expanded-row-cell-wrapper {
+  padding: 0;
 }
 
 .c4p--datagrid__draggable-handleStyle {
@@ -5987,6 +6002,9 @@ button.c4p--add-select__global-filter-toggle--open {
   }
 }
 .c4p--notifications-panel__container {
+  --cds-ai-gradient-end: rgba(38, 38, 38, 0);
+  --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
+  --cds-ai-gradient-start-02: transparent;
   --cds-background: #161616;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -6069,9 +6087,19 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
   --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-02: transparent;
+  --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
+  --cds-slug-callout-aura-start-hover-02: transparent;
+  --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
+  --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
+  --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;
@@ -9774,6 +9802,9 @@ button.c4p--add-select__global-filter-toggle--open {
   despite of which carbon theme the user has.
 */
 .c4p--web-terminal {
+  --cds-ai-gradient-end: rgba(38, 38, 38, 0);
+  --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
+  --cds-ai-gradient-start-02: transparent;
   --cds-background: #262626;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -9856,9 +9887,19 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
   --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-02: transparent;
+  --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
+  --cds-slug-callout-aura-start-hover-02: transparent;
+  --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
+  --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
+  --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;
@@ -10160,7 +10201,6 @@ button.c4p--add-select__global-filter-toggle--open {
   border-left: 1px solid #262626;
   color: var(--cds-text-primary, #161616);
   /* stylelint-disable-next-line  */
-  background-color: #161616;
 }
 
 .c4p--web-terminal__bar {
@@ -10176,6 +10216,9 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--web-terminal__documentation-overflow {
+  --cds-ai-gradient-end: rgba(38, 38, 38, 0);
+  --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
+  --cds-ai-gradient-start-02: transparent;
   --cds-background: #161616;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -10258,9 +10301,19 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
   --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end-hover-02: transparent;
+  --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
+  --cds-slug-callout-aura-start-hover-02: transparent;
+  --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
+  --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
+  --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
+  --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
+  --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;
@@ -10560,7 +10613,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--web-terminal__body {
-  height: 100%;
+  height: calc(100vh - 3rem);
 }
 
 .c4p--web-terminal-content-wrapper {

@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-import { within } from '@testing-library/dom';
+import { waitFor, within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
 
@@ -367,7 +367,7 @@ const ExpandedRow = ({ ...rest }) => {
     useExpandedRow
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 const SelectItemsInAllPages = ({ ...rest }) => {
@@ -1497,7 +1497,8 @@ describe(componentName, () => {
     fireEvent.click(clickableRow);
   });
 
-  function clickRow(rowNumber) {
+  async function clickRow(rowNumber, triggerAnotherExpander) {
+    const { click } = userEvent;
     const rows = screen.getAllByRole('row');
     const bodyRows = rows.filter(
       (r) =>
@@ -1507,12 +1508,20 @@ describe(componentName, () => {
     const row = bodyRows[rowNumber];
 
     const rowExpander = within(row).getByLabelText('Expand row');
-    fireEvent.click(rowExpander);
+    await waitFor(() => click(rowExpander));
 
     expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
     expect(row.nextElementSibling.textContent).toEqual(
       `Content for ${rowNumber}`
     );
+
+    if (triggerAnotherExpander) {
+      const nextRow = bodyRows[rowNumber + 1];
+      const nextRowExpanderExpand =
+        within(nextRow).getByLabelText('Expand row');
+      fireEvent.click(nextRowExpanderExpand);
+      return;
+    }
 
     const rowExpanderCollapse = within(row).getByLabelText('Collapse row');
     fireEvent.click(rowExpanderCollapse);
@@ -1522,7 +1531,7 @@ describe(componentName, () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
-    clickRow(8);
+    clickRow(8, true);
   });
 
   function hideSelectAll(rowNumber) {

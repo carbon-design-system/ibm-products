@@ -13,13 +13,18 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useExpandedRow,
+  useSelectRows,
+} from '../../index';
+import { getBatchActions } from '../../Datagrid.stories';
 import styles from '../../_storybook-styles.scss';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
@@ -184,16 +189,13 @@ const ExpandedRows = ({ ...args }) => {
       DatagridPagination,
       ExpandedRowContentComponent: ExpansionRenderer,
       tags: ['autodocs'],
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useExpandedRow
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useExpandedRow` hook
-  pkg.feature['Datagrid.useExpandedRow'] = true;
-  pkg._silenceWarnings(true);
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -222,6 +224,5 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...expandableRowControlProps,
-    featureFlags: ['Datagrid.useExpandedRow'],
   },
 });

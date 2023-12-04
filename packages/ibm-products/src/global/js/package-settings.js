@@ -85,8 +85,6 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
-    'Datagrid.useExpandedRow': false,
-    'Datagrid.useNestedRows': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,

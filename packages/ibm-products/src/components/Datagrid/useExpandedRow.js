@@ -5,16 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useState } from 'react';
-import { pkg } from '../../settings';
+import { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
 import useRowExpander from './useRowExpander';
 
 const useExpandedRow = (hooks) => {
-  useEffect(() => {
-    pkg.checkReportFeatureEnabled('Datagrid.useExpandedRow');
-  }, []);
-
   useRowExpander(hooks);
   const useInstance = (instance) => {
     const { rows, expandedContentHeight, ExpandedRowContentComponent } =
@@ -29,7 +24,11 @@ const useExpandedRow = (hooks) => {
         expandedRowsHeight[row.index] || expandedContentHeight,
       RowExpansionRenderer: DatagridExpandedRow(ExpandedRowContentComponent),
     }));
-    Object.assign(instance, { rows: rowsWithExpand, setExpandedRowHeight });
+    Object.assign(instance, {
+      rows: rowsWithExpand,
+      setExpandedRowHeight,
+      withExpandedRows: true,
+    });
   };
   hooks.useInstance.push(useInstance);
 };

@@ -502,7 +502,7 @@ export let SidePanel = React.forwardRef(
             : null;
           pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
-          pageContentElement.style.marginLeft = 0;
+          pageContentElement.style.marginInlineStart = 0;
           pageContentElement.style.transition = !reducedMotion.matches
             ? `margin-inline-start ${moderate02}`
             : null;

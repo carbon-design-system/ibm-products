@@ -29,6 +29,7 @@ const renderComponent = ({ ...rest } = {}, children = <p>test</p>) =>
     <>
       <CreateSidePanel
         open
+        id="create-sidepanel-id"
         {...{
           title,
           subtitle,

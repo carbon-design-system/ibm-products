@@ -24,7 +24,7 @@ const App = () => {
   const [sidePanelOpen, setSidePanelOpen] = useState(false);
   const [cardToEdit, setCardToEdit] = useState();
   const [narrowTearsheetOpen, setNarrowTearsheetOpen] = useState(false);
-  const [wideTearsheetOpen, setWideTearsheetOpen] = useState(false);
+  const [wideTearsheetOpen, setWideTearsheetOpen] = useState(true);
   const [multiStepTearsheetOpen, setMultiStepTearsheetOpen] = useState(false);
   const [componentConfig, setComponentConfig] = useState({
     cards: {},

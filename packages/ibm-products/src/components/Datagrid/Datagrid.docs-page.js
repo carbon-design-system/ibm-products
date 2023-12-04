@@ -363,6 +363,7 @@ const datagridState = useDatagrid(
     columns,
     data,
     onRowSelect: (row, event) => console.log(row, event),
+    batchActionMenuButtonLabel: 'More',
   },
   useSelectRows
 );

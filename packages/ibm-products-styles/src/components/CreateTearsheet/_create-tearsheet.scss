@@ -89,6 +89,12 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 
 .#{$create-tearsheet-block-class}
   .#{$create-tearsheet-block-class}__content
+  .#{c4p-settings.$carbon-prefix}--form {
+  height: inherit;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__content
   .#{c4p-settings.$carbon-prefix}--grid {
   padding: 0;
   margin: 0;

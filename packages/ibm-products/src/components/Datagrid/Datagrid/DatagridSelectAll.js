@@ -9,6 +9,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
+import { handleSelectAllRowData } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -33,6 +34,10 @@ const SelectAll = (datagridState) => {
     radio,
     columns,
     withStickyColumn,
+    dispatch,
+    rows,
+    getRowId,
+    toggleAllRowsSelected,
   } = datagridState;
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
@@ -55,10 +60,23 @@ const SelectAll = (datagridState) => {
 
   const handleSelectAllChange = (event) => {
     if (indeterminate) {
+      handleSelectAllRowData({
+        dispatch,
+        rows,
+        getRowId,
+        indeterminate: true,
+      });
+      toggleAllRowsSelected(false);
       return onChange?.({
         target: { checked: false },
       });
     }
+    handleSelectAllRowData({
+      dispatch,
+      rows,
+      getRowId,
+      isChecked: event.target.checked,
+    });
     return onChange?.(event);
   };
 

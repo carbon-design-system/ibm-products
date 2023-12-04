@@ -1,20 +1,19 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const { resolve } = require('path');
 const { merge } = require('webpack-merge');
-const path = require('path');
+const { dirname, join, resolve } = require('path');
 
 module.exports = {
   addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-docs',
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
+    getAbsolutePath('@storybook/addon-actions'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-links'),
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -23,26 +22,30 @@ module.exports = {
         },
       },
     },
-    '@storybook/addon-viewport',
-    '@storybook/addon-mdx-gfm',
+    getAbsolutePath('@storybook/addon-viewport'),
+    getAbsolutePath('@storybook/addon-mdx-gfm'),
     '@carbon/storybook-addon-theme/preset.js',
   ],
+
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-webpack5'),
     options: {
       //   fastRefresh: true,
       //   strictMode: true,
     },
   },
+
   features: {
     // setting storyStoryV7 to false allows the storybook to build
     storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
   },
+
   stories: [
     '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
     '../+(docs|src)/**/*+(-story|.stories).*',
     '../../../examples/**/*+(-story|.stories).*',
   ],
+
   // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
   webpackFinal: async (configuration, { configType }) =>
     merge(configuration, {
@@ -87,12 +90,16 @@ module.exports = {
       },
       resolve: {
         alias: {
-          ALIAS_STORY_STYLE_CONFIG$: path.resolve(
+          ALIAS_STORY_STYLE_CONFIG$: resolve(
             configType === 'DEVELOPMENT'
-              ? '../ibm-products-styles/scss/config-dev.scss'
-              : '../ibm-products-styles/scss/config.scss'
+              ? '../ibm-products-styles/src/config-dev.scss'
+              : '../ibm-products-styles/src/config.scss'
           ),
         },
       },
     }),
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

@@ -136,6 +136,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://github.com/punnoosewilson"><img src="https://avatars.githubusercontent.com/u/40118548?v=4?s=100" width="100px;" alt="PUNNOOSE WILSON"/><br /><sub><b>PUNNOOSE WILSON</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=punnoosewilson" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/SeonyuK"><img src="https://avatars.githubusercontent.com/u/144151347?v=4?s=100" width="100px;" alt="SeonyuK"/><br /><sub><b>SeonyuK</b></sub></a><br /><a href="#a11y-SeonyuK" title="Accessibility">️️️️♿️</a></td>
     </tr>
   </tbody>
 </table>

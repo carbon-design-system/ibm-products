@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.17.0...@carbon/ibm-products@2.17.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **Datagrid:** use getRowId to set selectedRowData instead of index ([#3855](https://github.com/carbon-design-system/ibm-products/issues/3855)) ([522e990](https://github.com/carbon-design-system/ibm-products/commit/522e9904dea7adf8798cc0824373cadf6747ca39))
+* no data empty state title ([#3862](https://github.com/carbon-design-system/ibm-products/issues/3862)) ([b99a106](https://github.com/carbon-design-system/ibm-products/commit/b99a106df0089874222e186cfeecab74530fe071))
+* update Carbon 11 compatible versions to latest ([#3806](https://github.com/carbon-design-system/ibm-products/issues/3806)) ([1f78945](https://github.com/carbon-design-system/ibm-products/commit/1f78945fca30b46789822949d1bef08a3ec36c47))
+
+
+
+
+
+# [2.17.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.16.0...@carbon/ibm-products@2.17.0) (2023-11-28)
+
+
+### Bug Fixes
+
+* **Datagrid:** remove hardcoded label, add cb fn for TableBatchActions ([#3851](https://github.com/carbon-design-system/ibm-products/issues/3851)) ([83d90eb](https://github.com/carbon-design-system/ibm-products/commit/83d90eb6f44c0f8d25f8460e00462a3b91aef212))
+* move spacer and actions to the end ([#3846](https://github.com/carbon-design-system/ibm-products/issues/3846)) ([26b323f](https://github.com/carbon-design-system/ibm-products/commit/26b323fc7695d7e393ecb388efdc6aae9f505b9f))
+
+
+### Features
+
+* datagrid base release ([#3839](https://github.com/carbon-design-system/ibm-products/issues/3839)) ([d52200b](https://github.com/carbon-design-system/ibm-products/commit/d52200b3e90421774d68a3b69e6e02342d026734))
+* publish styles as independant package ([#3799](https://github.com/carbon-design-system/ibm-products/issues/3799)) ([df080be](https://github.com/carbon-design-system/ibm-products/commit/df080be8a240a510a723805e535f7c75d438461a))
+
+
+
+
+
 # [2.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.2...@carbon/ibm-products@2.16.0) (2023-11-21)
 
 

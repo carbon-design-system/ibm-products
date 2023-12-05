@@ -78,6 +78,10 @@ const defaults = {
     GuidebannerElementButton: false,
     GuidebannerElementLink: false,
     InlineTip: false,
+    Guidebanner: false,
+    GuidebannerElement: false,
+    GuidebannerElementButton: false,
+    GuidebannerElementLink: false,
   },
 
   // feature level flags

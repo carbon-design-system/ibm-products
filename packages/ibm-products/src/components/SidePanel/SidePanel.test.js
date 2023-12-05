@@ -152,7 +152,7 @@ describe('SidePanel', () => {
     await act(() => userEvent.click(closeIconButton));
     rerender(<SlideIn placement="left" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginInlineStart).toBe('0px');
+    expect(updatedStyles.marginInlineStart).toBe('0');
   });
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
@@ -169,7 +169,7 @@ describe('SidePanel', () => {
     rerender(<SlideIn placement="right" open={false} />);
     fireEvent.animationEnd(outerElement);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginInlineEnd).toBe('0px');
+    expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();
   });
 
@@ -194,7 +194,7 @@ describe('SidePanel', () => {
     fireEvent.animationEnd(outerElement);
     rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
     const updatedStyles = getComputedStyle(pageContent);
-    expect(updatedStyles.marginInlineEnd).toBe('0px');
+    expect(updatedStyles.marginInlineEnd).toBe('0');
   });
 
   it('should test overlay exit animation', async () => {
@@ -469,6 +469,6 @@ describe('SidePanel', () => {
     );
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
-    expect(style.marginInlineStart).toBe('0px');
+    expect(style.marginInlineStart).toBe('0');
   });
 });

@@ -136,7 +136,12 @@ const s = [
       },
       {
         n: 'Novice to pro',
-        s: ['c/Checklist', 'c/Guidebanner', 'c/InlineTip'],
+        s: [
+          'c/Checklist',
+          'c/Guidebanner',
+          'c/InlineTip',
+          'c/NonLinearReading',
+        ],
       },
     ],
   },

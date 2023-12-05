@@ -78,6 +78,7 @@ const defaults = {
     GuidebannerElementButton: false,
     GuidebannerElementLink: false,
     InlineTip: false,
+    NonLinearReading: false,
   },
 
   // feature level flags

@@ -124,6 +124,7 @@ const s = [
           'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
+          'c/Carousel',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
@@ -135,7 +136,7 @@ const s = [
       },
       {
         n: 'Novice to pro',
-        s: ['c/Checklist', 'c/InlineTip'],
+        s: ['c/Checklist', 'c/Guidebanner', 'c/InlineTip'],
       },
     ],
   },

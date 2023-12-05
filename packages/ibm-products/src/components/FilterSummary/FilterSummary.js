@@ -1,15 +1,16 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import { Button } from 'carbon-components-react';
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { TagSet } from '../TagSet';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -22,17 +23,24 @@ let FilterSummary = React.forwardRef(
       filters = [],
       renderLabel = null,
       overflowType = 'default',
+      clearButtonInline = true,
     },
     ref
   ) => {
+    const filterSummaryId = `${blockClass}__${uuidv4()}`;
     const tagFilters = filters.map(({ key, value, ...rest }) => ({
       ...rest,
       type: 'gray',
       label: renderLabel?.(key, value) ?? `${key}: ${value}`,
     }));
 
+    const filterSummaryClearButton = useRef();
     return (
-      <div ref={ref} className={cx([blockClass, className])}>
+      <div
+        ref={ref}
+        className={cx([blockClass, className])}
+        id={filterSummaryId}
+      >
         <TagSet
           allTagsModalSearchLabel="Search all tags"
           allTagsModalSearchPlaceholderText="Search all tags"
@@ -40,8 +48,18 @@ let FilterSummary = React.forwardRef(
           showAllTagsLabel="View all tags"
           tags={tagFilters}
           overflowType={overflowType}
+          className={cx({
+            [`${blockClass}__clear-button-inline`]: clearButtonInline,
+          })}
+          containingElementSelector={`#${filterSummaryId}`}
+          measurementOffset={filterSummaryClearButton?.current?.offsetWidth}
         />
-        <Button kind="ghost" size="sm" onClick={clearFilters}>
+        <Button
+          kind="ghost"
+          size="sm"
+          onClick={clearFilters}
+          ref={filterSummaryClearButton}
+        >
           {clearFiltersText}
         </Button>
       </div>
@@ -54,6 +72,7 @@ FilterSummary.displayName = componentName;
 
 FilterSummary.propTypes = {
   className: PropTypes.string,
+  clearButtonInline: PropTypes.boolean,
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,

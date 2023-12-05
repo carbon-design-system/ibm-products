@@ -474,6 +474,7 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -668,6 +669,7 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -830,6 +832,7 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -992,6 +995,7 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -1154,6 +1158,7 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });

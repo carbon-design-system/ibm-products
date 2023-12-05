@@ -321,6 +321,7 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -358,6 +359,7 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });

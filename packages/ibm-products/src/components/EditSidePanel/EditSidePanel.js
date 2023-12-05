@@ -44,6 +44,7 @@ export let EditSidePanel = React.forwardRef(
       children,
       className,
       disableSubmit,
+      id,
       formTitle,
       formDescription,
       onRequestClose,
@@ -95,6 +96,7 @@ export let EditSidePanel = React.forwardRef(
           title,
           subtitle,
           selectorPrimaryFocus,
+          id,
           ...getDevtoolsProps(componentName),
         }}
         placement={placement}
@@ -167,6 +169,11 @@ EditSidePanel.propTypes = {
    * Specifies a required field that provides a title for a form
    */
   formTitle: PropTypes.node.isRequired,
+
+  /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
 
   /**
    * Specifies an optional handler which is called when the CreateSidePanel

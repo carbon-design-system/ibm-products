@@ -161,10 +161,9 @@ export let TagSet = React.forwardRef(
         );
         const measurementOffsetValue =
           typeof measurementOffset === 'number' ? measurementOffset : 0;
-        let spaceAvailable =
-          typeof optionalContainingElement === 'object'
-            ? optionalContainingElement.offsetWidth - measurementOffsetValue
-            : tagSetRef.current.offsetWidth;
+        let spaceAvailable = optionalContainingElement
+          ? optionalContainingElement.offsetWidth - measurementOffsetValue
+          : tagSetRef.current.offsetWidth;
 
         for (let i in sizingTags) {
           const tagWidth = sizingTags[i]?.offsetWidth || 0;

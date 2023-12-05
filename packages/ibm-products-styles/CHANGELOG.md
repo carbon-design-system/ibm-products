@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.16.0...@carbon/ibm-products-styles@2.17.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** fix step height to fill available space ([#3860](https://github.com/carbon-design-system/ibm-products/issues/3860)) ([3f0e0d9](https://github.com/carbon-design-system/ibm-products/commit/3f0e0d95cc57a8003f243e1469726c333809a285))
+* manually bump styles package version ([#3858](https://github.com/carbon-design-system/ibm-products/issues/3858)) ([a18b72a](https://github.com/carbon-design-system/ibm-products/commit/a18b72aa07a76db1429743c9d830b1d20acf7056))
+* **WebTerminal:** removed web terminal styling ([#3848](https://github.com/carbon-design-system/ibm-products/issues/3848)) ([e6fa105](https://github.com/carbon-design-system/ibm-products/commit/e6fa1050a6864f709df280638aa1875362dcc53a))
+
+
+
+
+
 # 2.16.0 (2023-11-28)
 
 

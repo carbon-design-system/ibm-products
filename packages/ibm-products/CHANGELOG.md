@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.17.0...@carbon/ibm-products@2.17.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **Datagrid:** use getRowId to set selectedRowData instead of index ([#3855](https://github.com/carbon-design-system/ibm-products/issues/3855)) ([522e990](https://github.com/carbon-design-system/ibm-products/commit/522e9904dea7adf8798cc0824373cadf6747ca39))
+* no data empty state title ([#3862](https://github.com/carbon-design-system/ibm-products/issues/3862)) ([b99a106](https://github.com/carbon-design-system/ibm-products/commit/b99a106df0089874222e186cfeecab74530fe071))
+* update Carbon 11 compatible versions to latest ([#3806](https://github.com/carbon-design-system/ibm-products/issues/3806)) ([1f78945](https://github.com/carbon-design-system/ibm-products/commit/1f78945fca30b46789822949d1bef08a3ec36c47))
+
+
+
+
+
 # [2.17.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.16.0...@carbon/ibm-products@2.17.0) (2023-11-28)
 
 

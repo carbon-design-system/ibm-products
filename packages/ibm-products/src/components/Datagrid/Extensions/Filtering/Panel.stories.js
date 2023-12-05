@@ -20,8 +20,9 @@ import {
 } from '../../../../global/js/utils/story-helper';
 
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { Add } from '@carbon/react/icons';
+import { getBatchActions } from '../../Datagrid.stories';
 import { DatagridActions } from '../../utils/DatagridActions';
+import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { DocsPage } from './Filtering.docs-page';
 import { StatusIcon } from '../../../StatusIcon';
 import { action } from '@storybook/addon-actions';
@@ -57,38 +58,6 @@ const dummyCheckboxes = Array(25)
     value: 'dummy-checkbox',
     disabled: true,
   }));
-
-const getBatchActions = () => {
-  return [
-    {
-      label: 'Duplicate',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Add',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Publish to catalog',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Download',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Delete',
-      renderIcon: () => <Add size={16} />,
-      onClick: action('Clicked batch action button'),
-      hasDivider: true,
-      kind: 'danger',
-    },
-  ];
-};
 
 export const FilteringUsage = ({ defaultGridProps }) => {
   const {
@@ -346,6 +315,7 @@ export const filterProps = {
   onPanelOpen: action('onPanelOpen'),
   onPanelClose: action('onPanelClose'),
   panelTitle: 'Filter',
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   renderDateLabel: (start, end) => {
     const startDateObj = new Date(start);
     const endDateObj = new Date(end);
@@ -530,6 +500,7 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -725,6 +696,7 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -888,6 +860,7 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -1051,6 +1024,7 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -1214,6 +1188,7 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -1377,6 +1352,7 @@ export const PanelManyCheckboxes = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });

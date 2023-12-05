@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.62.0...@carbon/ibm-products@1.62.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* **Datagrid:** always force expander to be first column ([#3886](https://github.com/carbon-design-system/ibm-products/issues/3886)) ([b251fab](https://github.com/carbon-design-system/ibm-products/commit/b251fab8e942a051604f30674a7218bc5215ad6a))
+* **Datagrid:** expandable/nested review fixes, custom hook for keeping expander focus (v1) ([#3864](https://github.com/carbon-design-system/ibm-products/issues/3864)) ([0048ef8](https://github.com/carbon-design-system/ibm-products/commit/0048ef81e3263d0c21ddc0e53c16b8eb9a955995))
+* **Datagrid:** use getRowId to set items in selectedRowData ([#3859](https://github.com/carbon-design-system/ibm-products/issues/3859)) ([c1b8fea](https://github.com/carbon-design-system/ibm-products/commit/c1b8feac66356f936435a274e170ec39750fde4a))
+* inconsistent prev/next behaviour ([#3876](https://github.com/carbon-design-system/ibm-products/issues/3876)) ([90e2e0b](https://github.com/carbon-design-system/ibm-products/commit/90e2e0b149d0e5985ce05e6c342e3fbc88ba783e))
+
+
+
+
+
 # [1.62.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.61.1...@carbon/ibm-products@1.62.0) (2023-11-28)
 
 

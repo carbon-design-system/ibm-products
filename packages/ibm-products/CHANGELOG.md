@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.17.1...@carbon/ibm-products@2.17.2) (2023-12-05)
+
+
+### Bug Fixes
+
+* adds id to sidepanel ([#3896](https://github.com/carbon-design-system/ibm-products/issues/3896)) ([4de63a2](https://github.com/carbon-design-system/ibm-products/commit/4de63a26e0e6c6645590144366fb72e6a4b64876))
+* create tearsheet reset bug ([#3877](https://github.com/carbon-design-system/ibm-products/issues/3877)) ([97d8e11](https://github.com/carbon-design-system/ibm-products/commit/97d8e11d6eb455227cf16071d11cfae92d5a2eaf))
+* **Datagrid:** always force expander to be first column ([#3885](https://github.com/carbon-design-system/ibm-products/issues/3885)) ([50784fc](https://github.com/carbon-design-system/ibm-products/commit/50784fc373f287ac4ec8929f19413b5872c1e267))
+* **Datagrid:** expandable/nested review fixes, custom hook for keeping expander focus ([#3861](https://github.com/carbon-design-system/ibm-products/issues/3861)) ([ae33c58](https://github.com/carbon-design-system/ibm-products/commit/ae33c58fe13f5b352d782a6ba64e8d428c65c498))
+* published side panel error ([#3900](https://github.com/carbon-design-system/ibm-products/issues/3900)) ([b1487f6](https://github.com/carbon-design-system/ibm-products/commit/b1487f600e4d6be683ec16de3783a721dad38f2d))
+* update Carbon 11 compatible versions to latest ([#3880](https://github.com/carbon-design-system/ibm-products/issues/3880)) ([b96b1f2](https://github.com/carbon-design-system/ibm-products/commit/b96b1f2982336f15f504cf75d2d50f30c88c93a9))
+
+
+
+
+
 ## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.17.0...@carbon/ibm-products@2.17.1) (2023-11-30)
 
 

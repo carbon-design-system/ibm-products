@@ -49,6 +49,7 @@ const defaultStoryProps = {
       <strong>investigate</strong> incident management within this side panel.
     </>
   ),
+  id: 'storybook-sidepanel',
 };
 
 const headerData = [

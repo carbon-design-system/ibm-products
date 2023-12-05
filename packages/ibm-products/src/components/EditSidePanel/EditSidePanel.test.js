@@ -34,6 +34,7 @@ const renderEditPanel = ({ ...rest } = {}, children = childrenContent) =>
   render(
     <EditSidePanel
       open
+      id="edit-sidepanel-id"
       {...{
         title,
         subtitle,

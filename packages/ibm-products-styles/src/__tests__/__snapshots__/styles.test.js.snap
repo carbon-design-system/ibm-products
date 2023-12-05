@@ -2486,6 +2486,7 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-heading-03-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
+  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
   padding-right: var(--c4p--side-panel--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -2515,6 +2516,7 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-heading-compact-02-letter-spacing, 0);
   display: -webkit-box;
   overflow: hidden;
+  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
   padding-right: var(--c4p--side-panel--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

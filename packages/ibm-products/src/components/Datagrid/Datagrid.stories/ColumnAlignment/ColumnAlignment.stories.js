@@ -11,7 +11,6 @@ import { Tooltip } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
-  getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
 import {
@@ -29,7 +28,6 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StatusIcon } from '../../../StatusIcon';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -214,7 +212,7 @@ const columnAlignmentControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
 };
-const columnAlignmentStoryName = 'With column alignment';
+const columnAlignmentStoryName = 'Column alignment';
 export const ColumnAlignmentStory = prepareStory(BasicTemplateWrapper, {
   storyName: columnAlignmentStoryName,
   argTypes: {

@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
-  getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid } from '../../index';
@@ -22,7 +21,6 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Header`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -185,7 +183,7 @@ const basicUsageControlProps = {
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
-const basicUsageStoryName = 'With header';
+const basicUsageStoryName = 'Header';
 export const HeaderBasicUsageStory = prepareStory(BasicTemplateWrapper, {
   storyName: basicUsageStoryName,
   argTypes: {

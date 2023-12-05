@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 // flow.
 export const useFocusRowExpander = ({
   instance,
-  lastExpandedRowIndex,
+  lastExpandedRowIndex = 0,
   blockClass,
   activeElement,
 }) => {
@@ -25,20 +25,18 @@ export const useFocusRowExpander = ({
     }
     const tableId = instance?.tableId;
     const rowElements = document.querySelectorAll(`#${tableId} tbody tr`);
-    if (lastExpandedRowIndex) {
-      const rowElementsArray = Array.from(rowElements);
-      const activeRow = rowElementsArray.filter((r) => {
-        if (r.getAttribute('data-nested-row-id') === lastExpandedRowIndex) {
-          return r;
-        }
-        return null;
-      });
-      if (activeRow.length) {
-        const rowExpander = activeRow[0].querySelector(
-          `.${blockClass}__row-expander`
-        );
-        rowExpander.focus();
+    const rowElementsArray = Array.from(rowElements);
+    const activeRow = rowElementsArray.filter((r) => {
+      if (r.getAttribute('data-nested-row-id') === lastExpandedRowIndex) {
+        return r;
       }
+      return null;
+    });
+    if (activeRow.length) {
+      const rowExpander = activeRow[0].querySelector(
+        `.${blockClass}__row-expander`
+      );
+      rowExpander.focus();
     }
   }, [
     instance?.tableId,

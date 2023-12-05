@@ -2625,7 +2625,7 @@ p.c4p--about-modal__copyright-text:first-child {
   margin: 0;
 }
 .c4p--side-panel__container .c4p--side-panel__slug-and-close {
-  position: absolute;
+  position: fixed;
   z-index: 5;
   top: 0;
   right: 0;

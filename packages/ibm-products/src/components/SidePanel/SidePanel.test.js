@@ -35,6 +35,7 @@ const onUnmountFn = jest.fn();
 const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
     <SidePanel
+      id="sidepanel-id"
       {...{
         title,
         open: true,
@@ -58,6 +59,7 @@ const SlideIn = ({
   return (
     <div>
       <SidePanel
+        id="sidepanel-id"
         actionToolbarButtons={actionToolbarButtons}
         title={title}
         subtitle={subtitle}
@@ -210,6 +212,7 @@ describe('SidePanel', () => {
         includeOverlay
         open={false}
         onRequestClose={onRequestCloseFn}
+        id="sidepanel-id"
       >
         Content
       </SidePanel>

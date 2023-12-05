@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Other standard imports.
@@ -60,6 +60,7 @@ export let SidePanel = React.forwardRef(
       closeIconDescription = defaults.closeIconDescription,
       condensedActions,
       currentStep = defaults.currentStep,
+      id = blockClass,
       includeOverlay,
       labelText,
       navigationBackIconDescription = defaults.navigationBackIconDescription,
@@ -97,6 +98,14 @@ export let SidePanel = React.forwardRef(
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
+    const getActionsContainerElement = useCallback(() => {
+      const sidePanelOuter = document.querySelector(`#${id}`);
+      return (
+        sidePanelOuter &&
+        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
+      );
+    }, [id]);
+
     // scroll panel to top going between steps
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
@@ -104,7 +113,7 @@ export let SidePanel = React.forwardRef(
         const scrollableSection = panelRef.current.querySelector(
           `.${blockClass}__inner-content`
         );
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const initialTitleHeight = document.querySelector(
           `.${blockClass}__title-container`
         )?.offsetHeight;
@@ -120,7 +129,7 @@ export let SidePanel = React.forwardRef(
           );
         }
       }
-    }, [currentStep, ref, size, previousState?.size]);
+    }, [currentStep, ref, size, previousState?.size, id]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -148,7 +157,7 @@ export let SidePanel = React.forwardRef(
 
     useEffect(() => {
       if (open && actions && actions.length && animationComplete) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const actionsContainer = getActionsContainerElement();
         let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
         actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
@@ -157,7 +166,14 @@ export let SidePanel = React.forwardRef(
           actionsHeight
         );
       }
-    }, [actions, condensedActions, open, animationComplete]);
+    }, [
+      actions,
+      condensedActions,
+      open,
+      animationComplete,
+      id,
+      getActionsContainerElement,
+    ]);
 
     // Add console warning if labelText is provided without a title.
     // This combination is not allowed.
@@ -172,21 +188,13 @@ export let SidePanel = React.forwardRef(
     /* istanbul ignore next */
     const handleResize = ({ height }) => {
       setPanelHeight(height);
-      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+      const sidePanelOuter = document.querySelector(`#${id}`);
       const actionsContainer = getActionsContainerElement();
       let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
       actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
       sidePanelOuter?.style?.setProperty(
         `--${blockClass}--content-bottom-padding`,
         actionsHeight
-      );
-    };
-
-    const getActionsContainerElement = () => {
-      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
-      return (
-        sidePanelOuter &&
-        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
       );
     };
 
@@ -200,9 +208,9 @@ export let SidePanel = React.forwardRef(
         title.length &&
         !reducedMotion.matches
       ) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const sidePanelScrollArea = document.querySelector(
-          `#${blockClass}-outer .${blockClass}__inner-content`
+          `#${id} .${blockClass}__inner-content`
         );
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-text`
@@ -371,7 +379,7 @@ export let SidePanel = React.forwardRef(
           });
       }
       if (open && !animateTitle) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-container .${blockClass}__title-text`
         );
@@ -413,6 +421,7 @@ export let SidePanel = React.forwardRef(
       title,
       size,
       reducedMotion.matches,
+      id,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -715,7 +724,7 @@ export let SidePanel = React.forwardRef(
             <motion.div
               {...getDevtoolsProps(componentName)}
               {...rest}
-              id={`${blockClass}-outer`}
+              id={id}
               className={mainPanelClassNames}
               onBlur={handleBlur}
               ref={contentRef}
@@ -873,6 +882,11 @@ SidePanel.propTypes = {
    * Sets the current step of the side panel
    */
   currentStep: PropTypes.number,
+
+  /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
 
   /**
    * Determines whether the side panel should render with an overlay

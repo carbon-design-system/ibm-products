@@ -10,9 +10,7 @@ import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,

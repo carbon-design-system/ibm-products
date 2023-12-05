@@ -9,9 +9,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';

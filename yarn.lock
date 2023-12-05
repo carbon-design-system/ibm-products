@@ -2803,7 +2803,7 @@ __metadata:
     "@carbon/grid": ^10.43.2
     "@carbon/icons-react": ^10.49.2
     carbon-components: ^10.58.12
-    carbon-components-react: ^7.59.16
+    carbon-components-react: ^7.59.17
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -2865,7 +2865,7 @@ __metadata:
     babel-loader: ^9.1.2
     babel-preset-ibm-cloud-cognitive: ^0.14.28
     carbon-components: ^10.58.12
-    carbon-components-react: ^7.59.16
+    carbon-components-react: ^7.59.17
     carbon-icons: ^7.0.7
     css-loader: ^6.7.3
     fast-sass-loader: ^2.0.1
@@ -2926,7 +2926,7 @@ __metadata:
     "@carbon/themes": ^10.55.3
     "@carbon/type": ^10.45.3
     carbon-components: ^10.58.12
-    carbon-components-react: ^7.59.16
+    carbon-components-react: ^7.59.17
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -2951,7 +2951,7 @@ __metadata:
     babel-plugin-macros: ^3.1.0
     babel-preset-ibm-cloud-cognitive: ^0.14.28
     carbon-components: 10.58.12
-    carbon-components-react: 7.59.16
+    carbon-components-react: 7.59.17
     carbon-icons: 7.0.7
     classnames: ^2.3.2
     clean-css-cli: ^5.6.2
@@ -10523,9 +10523,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@npm:7.59.16, carbon-components-react@npm:^7.59.16":
-  version: 7.59.16
-  resolution: "carbon-components-react@npm:7.59.16"
+"carbon-components-react@npm:7.59.17, carbon-components-react@npm:^7.59.17":
+  version: 7.59.17
+  resolution: "carbon-components-react@npm:7.59.17"
   dependencies:
     "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
@@ -10552,7 +10552,7 @@ __metadata:
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
-  checksum: 46ca58e0ef958dc3584177f722e21c9d4ec8f04df416029e8eb7c003a8ed4837c6c840556fdf6b522f90129952cfe9e6bf3f8ddaa1bd769e53199625412e0cd7
+  checksum: 18c7658900406b32c3568e95d1091445836aecc0b18bf862b6a884e6c12c16783f2bf7c1bc7f5aad07e3c1673e321066c1e28a2c735ca260913e48c3a971d8f4
   languageName: node
   linkType: hard
 

@@ -98,6 +98,14 @@ export let SidePanel = React.forwardRef(
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
+    const getActionsContainerElement = useCallback(() => {
+      const sidePanelOuter = document.querySelector(`#${id}`);
+      return (
+        sidePanelOuter &&
+        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
+      );
+    }, [id]);
+
     // scroll panel to top going between steps
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
@@ -189,14 +197,6 @@ export let SidePanel = React.forwardRef(
         actionsHeight
       );
     };
-
-    const getActionsContainerElement = useCallback(() => {
-      const sidePanelOuter = document.querySelector(`#${id}`);
-      return (
-        sidePanelOuter &&
-        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
-      );
-    }, [id]);
 
     // Title and subtitle scroll animation
     useEffect(() => {

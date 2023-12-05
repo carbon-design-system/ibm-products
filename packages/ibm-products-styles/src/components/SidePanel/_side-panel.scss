@@ -45,6 +45,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
+  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
   padding-right: var(--#{$block-class}--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -351,7 +352,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: absolute;
+    position: fixed;
     z-index: 5;
     top: 0;
     right: 0;

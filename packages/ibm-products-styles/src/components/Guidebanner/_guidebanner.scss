@@ -1,94 +1,248 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2023, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
-@use '@carbon/type/scss/font-family' as *;
+/**
+ * The Guidebanner specifically is theme-agnostic, and so we have to 
+ * use color tokens to keep the colors static instead of theme tokens 
+ * that will change depending on the selected theme.
+ * 
+ * Because of this, we are triggering a *large* amount of linting errors.
+ * So, we're adding a few "disable" rules for the file instead of 60 
+ * individual rules.
+ */
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/motion-duration-use */
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
 
 // Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{c4p-settings.$pkg-prefix}--about-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--guidebanner;
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-container {
-  grid-template-rows: auto auto 1fr auto;
+// Each GuidebannerElement is contained in a CarouselItem.
+$carousel-item: #{c4p-settings.$pkg-prefix}--carousel__item;
+
+@mixin when-collapsed($selector: '&') {
+  .#{c4p-settings.$pkg-prefix}--guidebanner__collapsible-collapsed
+    #{$selector} {
+    @content;
+  }
 }
 
-.#{$block-class} .#{$block-class}__logo {
-  margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
+$horizontal-margin: to-rem(52px);
+// Guidebanner-specific colors.
+$purple-1: #9b63ff;
+$purple-2: #7f3ae7;
+$purple-3: #7433e3;
+
+.#{$block-class} {
+  // Due to the Guidebanner's dark background,
+  // apply dark theme by default for all elements:
+  // i.e. light text, icons, tooltips, etc.
+  @include theme(themes.$g100, true);
+
+  position: relative;
+  background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+  background-color: $blue-90;
 }
 
-.#{$block-class} .#{$block-class}__header {
-  padding: 0 20% 0 $spacing-05;
-  margin-bottom: 0;
-  grid-row: auto;
+.#{$block-class}__icon-idea {
+  position: absolute;
+  top: $spacing-05;
+  left: $spacing-05;
+
+  path {
+    fill: $gray-10;
+  }
 }
 
-.#{$block-class} .#{$block-class}__title {
-  @include type.type-style('heading-04');
+.#{$block-class}__title {
+  @include type-style('heading-compact-02');
 
-  color: $text-primary;
+  padding: $spacing-05 to-rem(175px) 0 $horizontal-margin;
+  color: $gray-10;
 }
 
-.#{$block-class} .#{$block-class}__body {
-  @include type.type-style('body-compact-02');
+.#{$block-class}__close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.#{$block-class}__close-button button {
+  width: $spacing-07;
+  height: $spacing-07;
+  min-height: $spacing-07;
+  padding-top: 6px;
 
-  overflow: hidden auto;
-  min-height: $spacing-10;
-  padding: 0 20% 0 $spacing-05;
-  margin-bottom: $spacing-06;
-  grid-row: auto;
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+  }
+
+  path {
+    fill: $white-0;
+  }
 }
 
-.#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  bottom: #{$spacing-06};
-  background-image: linear-gradient(to bottom, #00000000, $layer-01);
+// Specify Carousel look and feel.
+.#{$block-class}__carousel {
+  padding: 0 0 $spacing-05 0;
+  color: $gray-10;
+
+  @include when-collapsed() {
+    margin-bottom: 0;
+  }
 }
 
-.#{$block-class} .#{$block-class}__links-container {
-  @include type.type-style('body-compact-01');
+// All carousel elements are 400px wide,
+// except the last one (see below).
+.#{$block-class}__carousel .#{$carousel-item} .#{$block-class}__element {
+  display: flex;
+  width: to-rem(400px); // 25rem
+  max-height: to-rem(512px); // 32rem
+  flex-flow: column;
+  flex-shrink: 0;
+  padding-left: $horizontal-margin;
+  margin: $spacing-05 0 0 0;
+  opacity: 1;
+  scroll-snap-align: start;
+  transition: max-height 50ms motion(exit, productive),
+    margin-top 50ms motion(exit, productive),
+    opacity 300ms motion(exit, productive);
 
-  margin-top: $spacing-06;
+  @include when-collapsed() {
+    max-height: $spacing-03;
+    margin-top: 0;
+    opacity: 0;
+  }
+}
+// The last carousel item is wider, with more padding-right,
+// to provide more space against the right edge of the carousel.
+.#{$block-class}__carousel
+  .#{$carousel-item}:last-child
+  .#{$block-class}__element {
+  width: to-rem(448px); // 28rem
+  padding-right: $horizontal-margin;
 }
 
-.#{$block-class} .#{$block-class}__version {
-  color: $text-secondary;
+.#{$block-class}__carousel .#{$carousel-item} .#{$block-class}__element-title {
+  @include type-style('heading-compact-01');
+
+  margin: $spacing-05 0 0 0;
 }
 
-.#{$block-class} .#{$block-class}__links-container a + a {
-  padding-left: $spacing-03;
-  border-left: 1px solid $border-strong-01;
-  margin-left: $spacing-03;
+.#{$block-class}__carousel .#{$block-class}__element-content {
+  @include type-style('body-01');
+
+  margin-bottom: $spacing-05;
 }
 
-.#{$block-class} .#{$block-class}__content,
-.#{$block-class} .#{$block-class}__copyright-text {
-  @include type.type-style('label-01');
+// Button with crossroads icon
+.#{$block-class}__carousel .#{c4p-settings.$carbon-prefix}--btn--tertiary {
+  border-color: $white-0;
+  color: $white-0;
 
-  margin-top: $spacing-06;
-  margin-bottom: 0;
-  color: $text-secondary;
+  &:active,
+  &:hover {
+    border-color: $white-0;
+    background-color: $white-0;
+    color: $gray-100;
+  }
+
+  // The "render icon" CSS seems to be missing in the latest Carbon button.
+  // Specifically, getting the icon to move to right-hand side of the content area.
+  // Repeating here.
+  svg {
+    position: absolute;
+    right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
 }
 
-.#{$block-class} .#{$block-class}__copyright-text {
-  margin-top: $spacing-05;
+.#{$block-class}__carousel .#{c4p-settings.$carbon-prefix}--btn--ghost {
+  margin-left: calc(-1 * $spacing-05);
+  color: $blue-30;
+
+  &:active,
+  &:hover {
+    background-color: $purple-2;
+    color: $gray-10;
+  }
 }
 
-p.c4p--about-modal__content:first-child,
-p.c4p--about-modal__copyright-text:first-child {
-  margin-top: $spacing-07;
+.#{$block-class}__carousel .#{$block-class}__element-link {
+  color: $blue-30;
+
+  &:visited {
+    color: $blue-30;
+  }
+
+  &:active,
+  &:hover {
+    color: $blue-20;
+  }
 }
 
-.#{$block-class} .#{$block-class}__footer {
-  display: block;
-  height: auto;
-  padding: $spacing-05;
-  background-color: $layer-02;
+.#{$block-class}__navigation {
+  display: flex;
+  border-top: to-rem(1px) solid $purple-60;
+
+  @include when-collapsed() {
+    border-top: none;
+  }
+}
+.#{$block-class}__navigation .#{$block-class}__toggle-button {
+  margin-left: calc($horizontal-margin - to-rem(18px));
+  color: $blue-30;
+
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+    color: $gray-10;
+  }
+}
+
+// Push navigation buttons to the right
+.#{$block-class}__navigation .#{$block-class}__back-button {
+  margin-left: auto;
+}
+// Hide navigation buttons when collapsed
+.#{$block-class}__navigation .#{$block-class}__back-button,
+.#{$block-class}__navigation .#{$block-class}__next-button {
+  @include when-collapsed() {
+    display: none;
+  }
+}
+.#{$block-class}__navigation .#{$block-class}__back-button button,
+.#{$block-class}__navigation .#{$block-class}__next-button button {
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+  }
+
+  path {
+    fill: $white-0;
+  }
+
+  &[disabled] path {
+    fill: $purple-1;
+  }
 }

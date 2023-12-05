@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { TagSet } from '../TagSet';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -26,6 +27,7 @@ let FilterSummary = React.forwardRef(
     },
     ref
   ) => {
+    const filterSummaryId = `${blockClass}__${uuidv4()}`;
     const tagFilters = filters.map(({ key, value, ...rest }) => {
       return {
         ...rest,
@@ -34,7 +36,6 @@ let FilterSummary = React.forwardRef(
       };
     });
 
-    const filterSummaryId = `filter-summary-test-id`;
     const filterSummaryClearButton = useRef();
     return (
       <div

@@ -27,6 +27,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 import { getBatchActions } from '../../Datagrid.stories';
+import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
@@ -290,6 +291,7 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
     featureFlags: ['Datagrid.useFiltering'],
   },
@@ -319,6 +321,7 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -356,6 +359,7 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });

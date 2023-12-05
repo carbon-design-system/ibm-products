@@ -795,6 +795,19 @@ const filters = [
 
 Filter panel coming soon.
 
+### Customizing the filter tag labels
+
+You can customize the rendering of the filter tag labels by supplying the
+`renderLabel` property to your `filterProps` as seen below. Otherwise it will
+default to `key: value`.
+
+```jsx
+filterProps: {
+  ...otherFilterProps,
+  renderLabel: (key, value) => myCustomTagLabelFormatter(key, value),
+},
+```
+
 ### Putting it all together
 
 ```jsx

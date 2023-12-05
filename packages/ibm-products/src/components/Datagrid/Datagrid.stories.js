@@ -256,7 +256,7 @@ export const InfiniteScroll = () => {
   );
 };
 
-export const TenThousandEntries = () => {
+export const WithVirtualizedData = () => {
   const [data] = useState(makeData(10000));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
@@ -270,7 +270,7 @@ export const TenThousandEntries = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const WithPagination = () => {
+export const Pagination = () => {
   const [data] = useState(makeData(100));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid({

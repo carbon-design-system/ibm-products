@@ -48,14 +48,22 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'no children',
+          0: 'one child',
           1: 'three children',
           2: 'four children',
         },
       },
       options: [0, 1, 2],
       mapping: {
-        0: <></>,
+        0: (
+          <TextInput
+            id="1"
+            key="form-field-1"
+            labelText="Text input label"
+            helperText="Helper text goes here"
+            placeholder="Placeholder"
+          />
+        ),
         1: (
           <>
             <TextInput

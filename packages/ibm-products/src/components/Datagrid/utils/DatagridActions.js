@@ -47,12 +47,17 @@ export const DatagridActions = (datagridState) => {
     getFilterFlyoutProps,
     FilterFlyout,
     data,
+    setIsFetching,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');
   };
   const refreshColumns = () => {
-    alert('refreshing...');
+    console.log('refresh function');
+    setIsFetching(true);
+    setTimeout(() => {
+      setIsFetching(false)
+    }, 2000);
   };
 
   const searchForAColumn = 'Search';

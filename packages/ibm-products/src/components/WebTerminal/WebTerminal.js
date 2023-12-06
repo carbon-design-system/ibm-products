@@ -165,7 +165,7 @@ export let WebTerminal = React.forwardRef(
           />
         </header>
         <Theme theme="g100">
-        <div className={`${blockClass}__body`}>{children}</div>
+          <div className={`${blockClass}__body`}>{children}</div>
         </Theme>
       </div>
     ) : null;

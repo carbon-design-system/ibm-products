@@ -3443,6 +3443,10 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background: var(--cds-ui-01, #f4f4f4);
 }
 
+.c4p--filter-summary .c4p--tag-set.c4p--tag-set.c4p--filter-summary__clear-button-inline {
+  width: auto;
+}
+
 .c4p--datagrid__datagridWrap {
   display: block;
   width: 100%;

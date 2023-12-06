@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -29,6 +29,7 @@ const allTagsModalSearchThreshold = 10;
 const defaults = {
   align: 'start',
   // allTagsModalTarget: document.body,
+  measurementOffset: 0,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
   overflowType: 'default',
@@ -53,6 +54,8 @@ export let TagSet = React.forwardRef(
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
       tags,
+      containingElementRef,
+      measurementOffset = defaults.measurementOffset,
 
       // Collect any other property values passed in.
       ...rest
@@ -170,7 +173,12 @@ export let TagSet = React.forwardRef(
       let willFit = 0;
 
       if (sizingTags.length > 0) {
-        let spaceAvailable = tagSetRef.current.offsetWidth;
+        const optionalContainingElement = containingElementRef?.current;
+        const measurementOffsetValue =
+          typeof measurementOffset === 'number' ? measurementOffset : 0;
+        let spaceAvailable = optionalContainingElement
+          ? optionalContainingElement.offsetWidth - measurementOffsetValue
+          : tagSetRef.current.offsetWidth;
 
         for (let i in sizingTags) {
           const tagWidth = sizingTags[i].offsetWidth;
@@ -200,7 +208,14 @@ export let TagSet = React.forwardRef(
       } else {
         setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
       }
-    }, [maxVisible, multiline, sizingTags, tagSetRef]);
+    }, [
+      maxVisible,
+      multiline,
+      sizingTags,
+      tagSetRef,
+      containingElementRef,
+      measurementOffset,
+    ]);
 
     useEffect(() => {
       checkFullyVisibleTags();
@@ -226,7 +241,10 @@ export let TagSet = React.forwardRef(
 
     useResizeObserver(sizingContainerRef, handleSizerTagsResize);
 
-    useResizeObserver(tagSetRef, handleResize);
+    const resizeOption = containingElementRef
+      ? containingElementRef
+      : tagSetRef;
+    useResizeObserver(resizeOption, handleResize);
 
     return (
       <div
@@ -333,9 +351,19 @@ TagSet.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  containingElementRef: PropTypes.object,
+  /**
    * maximum visible tags
    */
   maxVisible: PropTypes.number,
+  /**
+   * Specify offset amount for measure available space, only used when `containingElementSelector`
+   * is also provided
+   */
+  measurementOffset: PropTypes.number,
   /**
    * display tags in multiple lines
    */

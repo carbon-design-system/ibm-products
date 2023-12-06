@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,4 +16,9 @@ $block-class: #{$pkg-prefix}--filter-summary;
   padding: $spacing-03;
   border-top: 1px solid $ui-03;
   background: $ui-01;
+}
+
+.#{$block-class}
+  .#{$pkg-prefix}--tag-set.#{$pkg-prefix}--tag-set.#{$block-class}__clear-button-inline {
+  width: auto;
 }

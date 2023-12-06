@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Other standard imports.
@@ -60,6 +60,7 @@ export let SidePanel = React.forwardRef(
       closeIconDescription = defaults.closeIconDescription,
       condensedActions,
       currentStep = defaults.currentStep,
+      id = blockClass,
       includeOverlay,
       labelText,
       navigationBackIconDescription = defaults.navigationBackIconDescription,
@@ -73,6 +74,7 @@ export let SidePanel = React.forwardRef(
       selectorPrimaryFocus,
       size = defaults.size,
       slideIn,
+      slug,
       subtitle,
       title,
 
@@ -96,6 +98,14 @@ export let SidePanel = React.forwardRef(
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
+    const getActionsContainerElement = useCallback(() => {
+      const sidePanelOuter = document.querySelector(`#${id}`);
+      return (
+        sidePanelOuter &&
+        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
+      );
+    }, [id]);
+
     // scroll panel to top going between steps
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
@@ -103,7 +113,7 @@ export let SidePanel = React.forwardRef(
         const scrollableSection = panelRef.current.querySelector(
           `.${blockClass}__inner-content`
         );
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const initialTitleHeight = document.querySelector(
           `.${blockClass}__title-container`
         )?.offsetHeight;
@@ -119,7 +129,7 @@ export let SidePanel = React.forwardRef(
           );
         }
       }
-    }, [currentStep, ref, size, previousState?.size]);
+    }, [currentStep, ref, size, previousState?.size, id]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -147,7 +157,7 @@ export let SidePanel = React.forwardRef(
 
     useEffect(() => {
       if (open && actions && actions.length && animationComplete) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const actionsContainer = getActionsContainerElement();
         let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
         actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
@@ -156,7 +166,14 @@ export let SidePanel = React.forwardRef(
           actionsHeight
         );
       }
-    }, [actions, condensedActions, open, animationComplete]);
+    }, [
+      actions,
+      condensedActions,
+      open,
+      animationComplete,
+      id,
+      getActionsContainerElement,
+    ]);
 
     // Add console warning if labelText is provided without a title.
     // This combination is not allowed.
@@ -171,21 +188,13 @@ export let SidePanel = React.forwardRef(
     /* istanbul ignore next */
     const handleResize = ({ height }) => {
       setPanelHeight(height);
-      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+      const sidePanelOuter = document.querySelector(`#${id}`);
       const actionsContainer = getActionsContainerElement();
       let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
       actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
       sidePanelOuter?.style?.setProperty(
         `--${blockClass}--content-bottom-padding`,
         actionsHeight
-      );
-    };
-
-    const getActionsContainerElement = () => {
-      const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
-      return (
-        sidePanelOuter &&
-        sidePanelOuter.querySelector(`.${blockClass}__actions-container`)
       );
     };
 
@@ -199,9 +208,9 @@ export let SidePanel = React.forwardRef(
         title.length &&
         !reducedMotion.matches
       ) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const sidePanelScrollArea = document.querySelector(
-          `#${blockClass}-outer .${blockClass}__inner-content`
+          `#${id} .${blockClass}__inner-content`
         );
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-text`
@@ -370,7 +379,7 @@ export let SidePanel = React.forwardRef(
           });
       }
       if (open && !animateTitle) {
-        const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
+        const sidePanelOuter = document.querySelector(`#${id}`);
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-container .${blockClass}__title-text`
         );
@@ -412,6 +421,7 @@ export let SidePanel = React.forwardRef(
       title,
       size,
       reducedMotion.matches,
+      id,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -476,9 +486,9 @@ export let SidePanel = React.forwardRef(
       if (!open && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
-          pageContentElement.style.marginRight = 0;
+          pageContentElement.style.marginInlineEnd = 0;
         } else if (pageContentElement) {
-          pageContentElement.style.marginLeft = 0;
+          pageContentElement.style.marginInlineStart = 0;
         }
       }
     }, [open, placement, selectorPageContent, slideIn]);
@@ -493,18 +503,19 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
+        pageContentElement.style.inlineSize = 'auto';
         if (placement && placement === 'right' && pageContentElement) {
-          pageContentElement.style.marginRight = 0;
+          pageContentElement.style.marginInlineEnd = 0;
           pageContentElement.style.transition = !reducedMotion.matches
-            ? `margin-right ${moderate02}`
+            ? `margin-inline-end ${moderate02}`
             : null;
-          pageContentElement.style.marginRight = SIDE_PANEL_SIZES[size];
+          pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
-          pageContentElement.style.marginLeft = 0;
+          pageContentElement.style.marginInlineStart = 0;
           pageContentElement.style.transition = !reducedMotion.matches
-            ? `margin-left ${moderate02}`
+            ? `margin-inline-start ${moderate02}`
             : null;
-          pageContentElement.style.marginLeft = SIDE_PANEL_SIZES[size];
+          pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
         }
       }
     }, [
@@ -554,114 +565,130 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}__container-without-overlay`]:
           !includeOverlay && !slideIn,
         [`${blockClass}__container-is-animating`]: !animationComplete || !open,
+        [`${blockClass}__container--has-slug`]: slug,
       },
     ]);
 
-    const renderHeader = () => (
-      <>
-        <div
-          className={cx(`${blockClass}__title-container`, {
-            [`${blockClass}__on-detail-step`]: currentStep > 0,
-            [`${blockClass}__on-detail-step-without-title`]:
-              currentStep > 0 && !title,
-            [`${blockClass}__title-container--no-title-animation`]:
-              !animateTitle,
-            [`${blockClass}__title-container-is-animating`]:
-              !animationComplete || !open,
-            [`${blockClass}__title-container-without-title`]: !title,
-            [`${blockClass}__title-container--reduced-motion`]:
-              reducedMotion.matches,
-          })}
-        >
-          {currentStep > 0 && (
+    const renderHeader = () => {
+      let normalizedSlug;
+      if (slug) {
+        normalizedSlug = React.cloneElement(slug, {
+          // slug size is sm unless actions and size > md
+          size: actions.length && /l/.test(size) ? 'md' : 'sm',
+        });
+      }
+
+      return (
+        <>
+          <div
+            className={cx(`${blockClass}__title-container`, {
+              [`${blockClass}__on-detail-step`]: currentStep > 0,
+              [`${blockClass}__on-detail-step-without-title`]:
+                currentStep > 0 && !title,
+              [`${blockClass}__title-container--no-title-animation`]:
+                !animateTitle,
+              [`${blockClass}__title-container-is-animating`]:
+                !animationComplete || !open,
+              [`${blockClass}__title-container-without-title`]: !title,
+              [`${blockClass}__title-container--reduced-motion`]:
+                reducedMotion.matches,
+            })}
+          >
+            {currentStep > 0 && (
+              <Button
+                aria-label={navigationBackIconDescription}
+                kind="ghost"
+                size="sm"
+                disabled={false}
+                renderIcon={(props) => <ArrowLeft size={20} {...props} />}
+                iconDescription={navigationBackIconDescription}
+                className={`${blockClass}__navigation-back-button`}
+                onClick={onNavigationBack}
+              />
+            )}
+            {title && title.length && labelText && labelText.length && (
+              <p className={`${blockClass}__label-text`}>{labelText}</p>
+            )}
+            {title && title.length && renderTitle()}
+          </div>
+
+          <div className={`${blockClass}__slug-and-close`}>
+            {normalizedSlug}
             <Button
-              aria-label={navigationBackIconDescription}
+              aria-label={closeIconDescription}
               kind="ghost"
               size="sm"
-              disabled={false}
-              renderIcon={(props) => <ArrowLeft size={20} {...props} />}
-              iconDescription={navigationBackIconDescription}
-              className={`${blockClass}__navigation-back-button`}
-              onClick={onNavigationBack}
+              renderIcon={(props) => <Close size={20} {...props} />}
+              iconDescription={closeIconDescription}
+              className={`${blockClass}__close-button`}
+              onClick={onRequestClose}
+              ref={sidePanelCloseRef}
             />
-          )}
-          {title && title.length && labelText && labelText.length && (
-            <p className={`${blockClass}__label-text`}>{labelText}</p>
-          )}
-          {title && title.length && renderTitle()}
-        </div>
-        <Button
-          aria-label={closeIconDescription}
-          kind="ghost"
-          size="sm"
-          renderIcon={(props) => <Close size={20} {...props} />}
-          iconDescription={closeIconDescription}
-          className={`${blockClass}__close-button`}
-          onClick={onRequestClose}
-          ref={sidePanelCloseRef}
-        />
-        {subtitle && (
-          <p
-            className={cx(`${blockClass}__subtitle-text`, {
-              [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
-              [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
-                !animateTitle &&
-                (!actionToolbarButtons || !actionToolbarButtons.length),
-              [`${blockClass}__subtitle-text-is-animating`]:
-                !animationComplete && animateTitle,
-              [`${blockClass}__subtitle-without-title`]: !title,
-            })}
-          >
-            {subtitle}
-          </p>
-        )}
-        {actionToolbarButtons && actionToolbarButtons.length && (
-          <div
-            className={cx(`${blockClass}__action-toolbar`, {
-              [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
-            })}
-          >
-            {actionToolbarButtons.map(
-              ({
-                label,
-                kind,
-                icon,
-                tooltipPosition,
-                tooltipAlignment,
-                leading,
-                disabled,
-                className,
-                onClick,
-                ...rest
-              }) => (
-                <Button
-                  {...rest}
-                  key={label}
-                  kind={kind || 'ghost'}
-                  size="sm"
-                  renderIcon={icon}
-                  iconDescription={label}
-                  tooltipPosition={tooltipPosition || 'bottom'}
-                  tooltipAlignment={tooltipAlignment || 'start'}
-                  hasIconOnly={!leading}
-                  disabled={disabled}
-                  className={cx([
-                    `${blockClass}__action-toolbar-button`,
-                    className,
-                    {
-                      [`${blockClass}__action-toolbar-leading-button`]: leading,
-                    },
-                  ])}
-                  onClick={onClick}
-                >
-                  {leading && label}
-                </Button>
-              )
-            )}
           </div>
-        )}
-      </>
-    );
+          {subtitle && (
+            <p
+              className={cx(`${blockClass}__subtitle-text`, {
+                [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+                [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
+                  !animateTitle &&
+                  (!actionToolbarButtons || !actionToolbarButtons.length),
+                [`${blockClass}__subtitle-text-is-animating`]:
+                  !animationComplete && animateTitle,
+                [`${blockClass}__subtitle-without-title`]: !title,
+              })}
+            >
+              {subtitle}
+            </p>
+          )}
+          {actionToolbarButtons && actionToolbarButtons.length && (
+            <div
+              className={cx(`${blockClass}__action-toolbar`, {
+                [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+              })}
+            >
+              {actionToolbarButtons.map(
+                ({
+                  label,
+                  kind,
+                  icon,
+                  tooltipPosition,
+                  tooltipAlignment,
+                  leading,
+                  disabled,
+                  className,
+                  onClick,
+                  ...rest
+                }) => (
+                  <Button
+                    {...rest}
+                    key={label}
+                    kind={kind || 'ghost'}
+                    size="sm"
+                    renderIcon={icon}
+                    iconDescription={label}
+                    tooltipPosition={tooltipPosition || 'bottom'}
+                    tooltipAlignment={tooltipAlignment || 'start'}
+                    hasIconOnly={!leading}
+                    disabled={disabled}
+                    className={cx([
+                      `${blockClass}__action-toolbar-button`,
+                      className,
+                      {
+                        [`${blockClass}__action-toolbar-leading-button`]:
+                          leading,
+                      },
+                    ])}
+                    onClick={onClick}
+                  >
+                    {leading && label}
+                  </Button>
+                )
+              )}
+            </div>
+          )}
+        </>
+      );
+    };
 
     const renderTitle = () => (
       <>
@@ -697,7 +724,7 @@ export let SidePanel = React.forwardRef(
             <motion.div
               {...getDevtoolsProps(componentName)}
               {...rest}
-              id={`${blockClass}-outer`}
+              id={id}
               className={mainPanelClassNames}
               onBlur={handleBlur}
               ref={contentRef}
@@ -857,6 +884,11 @@ SidePanel.propTypes = {
   currentStep: PropTypes.number,
 
   /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
+
+  /**
    * Determines whether the side panel should render with an overlay
    */
   includeOverlay: PropTypes.bool,
@@ -924,6 +956,11 @@ SidePanel.propTypes = {
    * Determines if this panel slides in
    */
   slideIn: PropTypes.bool,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
 
   /**
    * Sets the subtitle text

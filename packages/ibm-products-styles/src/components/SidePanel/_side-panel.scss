@@ -45,7 +45,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
-  padding-right: $spacing-09;
+  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
+  padding-right: var(--#{$block-class}--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -61,6 +62,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   --#{$block-class}--content-bottom-padding: #{$spacing-10};
   --#{$block-class}--collapsed-title-y-position: 1rem;
   --#{$block-class}--label-text-height: 0;
+  --#{$block-class}--title-padding-right: #{$spacing-09};
 
   position: fixed;
   // Need to disable stylelint until dart sass namespace support is added
@@ -140,6 +142,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       background-color: transparent;
     }
   }
+  &.#{$block-class}__container--has-slug {
+    --#{$block-class}--title-padding-right: #{$spacing-12};
+  }
   &.#{$block-class}__container-is-animating {
     pointer-events: none;
   }
@@ -174,7 +179,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include type.type-style('label-01');
 
     overflow: hidden;
-    padding-right: $spacing-05;
+    padding-right: var(--#{$block-class}--title-padding-right);
     opacity: var(--#{$block-class}--subtitle-opacity);
     text-overflow: ellipsis;
     transform: translateY(var(--#{$block-class}--title-y-position));
@@ -242,6 +247,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
         var(--#{$block-class}--label-text-height)
     );
     overflow-x: hidden;
+  }
+
+  &.#{$block-class}__container--has-slug .#{$block-class}__inner-content {
+    @include utilities.ai-gradient('bottom');
   }
 
   .#{$block-class}__inner-content-with-actions {
@@ -330,19 +339,26 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
-    position: absolute;
-    z-index: 5;
-    top: $spacing-03;
-    right: $spacing-05;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: $spacing-03;
+    margin-bottom: 0;
   }
 
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button
     .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;
   }
+
+  .#{$block-class}__slug-and-close {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    display: flex;
+  }
+
   .#{$block-class}__body-content {
     padding: $spacing-05;
     padding-top: 0;

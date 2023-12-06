@@ -384,6 +384,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
     >
       <Datagrid datagridState={{ ...datagridState }} />
       <SidePanel
+        id="storybook-id"
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
         selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}

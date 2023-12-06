@@ -371,7 +371,7 @@ const ExpandedRow = ({ ...rest } = {}) => {
     useExpandedRow
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 const SelectItemsInAllPages = ({ ...rest } = {}) => {
@@ -1434,29 +1434,36 @@ describe(componentName, () => {
     fireEvent.click(clickableRow);
   });
 
-  function clickRow(rowNumber) {
+  async function clickRow(rowNumber, triggerAnotherExpander) {
+    const user = userEvent.setup({ delay: null });
+    const { click, hover, unhover } = user;
     const rows = screen.getAllByRole('row');
     const bodyRows = rows.filter(
       (r) =>
-        !r.classList.contains('c4p--datagrid__head') &&
-        !r.classList.contains('c4p--datagrid__expanded-row')
+        !r.classList.contains(`${pkg.prefix}--datagrid__head`) &&
+        !r.classList.contains(`${pkg.prefix}--datagrid__expanded-row`)
     );
     const row = bodyRows[rowNumber];
 
-    const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
-    fireEvent.click(rowExpander);
+    const rowExpander = within(row).getByLabelText('Expand row');
+    await click(rowExpander);
 
     expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
     expect(row.nextElementSibling.textContent).toEqual(
       `Content for ${rowNumber}`
     );
 
-    fireEvent.mouseOver(row.nextElementSibling);
-    fireEvent.mouseLeave(row.nextElementSibling);
+    hover(row.nextElementSibling);
+    unhover(row.nextElementSibling);
 
-    const rowExpanderCollapse = row.querySelector(
-      `button[aria-label="Collapse row"]`
-    );
+    if (triggerAnotherExpander) {
+      const nextRow = bodyRows[rowNumber + 1];
+      const nextRowExpanderExpand =
+        within(nextRow).getByLabelText('Expand row');
+      fireEvent.click(nextRowExpanderExpand);
+      return;
+    }
+    const rowExpanderCollapse = within(row).getByLabelText('Collapse row');
     fireEvent.click(rowExpanderCollapse);
   }
 
@@ -1464,7 +1471,7 @@ describe(componentName, () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
-    clickRow(8);
+    clickRow(8, true);
   });
 
   function hideSelectAll(rowNumber) {

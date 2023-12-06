@@ -59,7 +59,6 @@ export let Guidebanner = React.forwardRef(
     const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
 
     const handleClickToggle = () => {
-      // scrollRef.current.scrollReset();
       setIsCollapsed((prevState) => !prevState);
     };
 
@@ -125,7 +124,6 @@ export let Guidebanner = React.forwardRef(
                   kind="ghost"
                   label={previousIconDescription}
                   onClick={() => {
-                    console.log('scrollRef.current', scrollRef.current);
                     scrollRef.current.scrollPrev();
                   }}
                   size="md"

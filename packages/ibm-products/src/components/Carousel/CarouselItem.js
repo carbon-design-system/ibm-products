@@ -6,32 +6,40 @@
  */
 
 import React from 'react';
+
+// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
+// Carbon and package components we use.
+/* TODO: @import(s) of carbon components and other package components. */
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--carousel__item`;
 const componentName = 'CarouselItem';
 
 /**
- * The Carousel acts as a scaffold for other Novice to Pro content.
- *
- * This component is not intended for general use.
+ * TODO: A description of the component.
  */
-export let CarouselItem = ({ children, className, ...rest }) => {
-  return (
-    <div
-      {...rest}
-      className={cx(blockClass, className)}
-      {...getDevtoolsProps(componentName)}
-    >
-      {children}
-    </div>
-  );
-};
+const CarouselItem = React.forwardRef(
+  ({ children, className, ...rest }, ref) => {
+    return (
+      <div
+        {...rest}
+        className={cx(blockClass, className)}
+        {...getDevtoolsProps(componentName)}
+        ref={ref}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 
+CarouselItem.displayName = componentName;
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -46,3 +54,5 @@ CarouselItem.propTypes = {
    */
   className: PropTypes.string,
 };
+
+export { CarouselItem };

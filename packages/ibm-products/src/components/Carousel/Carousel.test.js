@@ -60,7 +60,7 @@ describe(componentName, () => {
 
   // We are using https://react.dev/reference/react/useImperativeHandle
   // to return only methods specific to the Carousel's functionality:
-  // scrollNext, scrollPrev, scrollToView, and maxScroll.
+  // scrollNext, scrollPrev, scrollToReset, and scrollToView.
   it('forwards a ref to specific callback functions only', () => {
     const ref = React.createRef();
     render(<Carousel ref={ref}> </Carousel>);

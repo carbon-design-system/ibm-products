@@ -240,16 +240,6 @@ export const Default = prepareStory(Template, {
   },
 });
 
-export const DefaultWithDarkTheme = prepareStory(Template, {
-  storyName: 'Create Modal using dark theme',
-  args: {
-    story: DefaultWithDarkTheme,
-    className: 'sb--use-carbon-theme-g90',
-    children: 2,
-    ...defaultProps,
-  },
-});
-
 export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
   storyName: 'Create Modal with form validation',
   args: {

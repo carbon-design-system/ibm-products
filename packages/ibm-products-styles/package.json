@@ -1,0 +1,67 @@
+{
+  "name": "@carbon/ibm-products-styles",
+  "description": "Carbon for IBM Products styles",
+  "version": "2.17.2",
+  "license": "Apache-2.0",
+  "installConfig": {
+    "hoistingLimits": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
+    "directory": "packages/ibm-products-styles"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "files": [
+    "css",
+    "scss",
+    "index.scss"
+  ],
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-s clean build-first build-all build-css-update-maps",
+    "build-all": "run-p 'build:*'",
+    "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
+    "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
+    "build-css-update-maps": "node ../../../ibm-products/scripts/updateSourceMaps.js",
+    "clean": "rimraf css scss",
+    "test": "jest --colors",
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2",
+    "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
+    "glob": "^10.3.3",
+    "jest": "^29.6.2",
+    "jest-config-ibm-cloud-cognitive": "^1.1.1",
+    "jest-environment-jsdom": "^29.6.2",
+    "npm-check-updates": "^16.11.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.1",
+    "sass": "^1.64.2",
+    "yargs": "^17.7.2"
+  },
+  "peerDependencies": {
+    "@carbon/grid": "^11.21.1",
+    "@carbon/layout": "^11.20.1",
+    "@carbon/motion": "^11.16.1",
+    "@carbon/themes": "^11.28.0",
+    "@carbon/type": "^11.25.1"
+  }
+}

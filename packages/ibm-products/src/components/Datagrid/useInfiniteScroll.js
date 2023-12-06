@@ -5,20 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import useParentDimensions from './useParentDimensions';
 import useResizeTable from './useResizeTable';
 
-import { pkg } from '../../settings';
-
 const useInfiniteScroll = (hooks) => {
   useParentDimensions(hooks);
   useResizeTable(hooks);
-
-  useEffect(() => {
-    pkg.checkReportFeatureEnabled('Datagrid.useInfiniteScroll');
-  }, []);
 
   const useInstance = (instance) => {
     const {

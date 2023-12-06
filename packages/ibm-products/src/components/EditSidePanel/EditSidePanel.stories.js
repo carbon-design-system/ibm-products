@@ -100,6 +100,7 @@ const Template = (args) => {
       </Grid>
       <EditSidePanel
         {...args}
+        id="storybook-id"
         open={open}
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}

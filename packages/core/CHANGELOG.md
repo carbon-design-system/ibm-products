@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.6.1...@carbon/ibm-cloud-cognitive-core@2.6.2) (2023-12-05)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#3880](https://github.com/carbon-design-system/ibm-products/issues/3880)) ([b96b1f2](https://github.com/carbon-design-system/ibm-products/commit/b96b1f2982336f15f504cf75d2d50f30c88c93a9))
+
+
+
+
+
+## [2.6.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.6.0...@carbon/ibm-cloud-cognitive-core@2.6.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#3806](https://github.com/carbon-design-system/ibm-products/issues/3806)) ([1f78945](https://github.com/carbon-design-system/ibm-products/commit/1f78945fca30b46789822949d1bef08a3ec36c47))
+
+
+
+
+
+# [2.6.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.5.0...@carbon/ibm-cloud-cognitive-core@2.6.0) (2023-11-28)
+
+
+### Features
+
+* publish styles as independant package ([#3799](https://github.com/carbon-design-system/ibm-products/issues/3799)) ([df080be](https://github.com/carbon-design-system/ibm-products/commit/df080be8a240a510a723805e535f7c75d438461a))
+
+
+
+
+
+# [2.5.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.1...@carbon/ibm-cloud-cognitive-core@2.5.0) (2023-11-21)
+
+
+### Features
+
+* new InlineTip and SteppedAnimatedMedia components ([#3800](https://github.com/carbon-design-system/ibm-products/issues/3800)) ([bd79dc8](https://github.com/carbon-design-system/ibm-products/commit/bd79dc8e0f402465813163f1f2021526f96dabb5))
+
+
+
+
+
 ## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.0...@carbon/ibm-cloud-cognitive-core@2.4.1) (2023-11-03)
 
 

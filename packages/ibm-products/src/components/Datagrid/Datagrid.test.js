@@ -14,7 +14,6 @@ import { makeData } from './utils/makeData';
 
 import {
   checkLogging,
-  expectError,
   expectWarn,
   mockHTMLElement,
 } from '../../global/js/utils/test-helper';
@@ -291,25 +290,9 @@ const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
   return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
 };
 
-const TenThousandEntriesWithoutFeatureFlag = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10000));
-  pkg.feature['Datagrid.useInfiniteScroll'] = false;
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useInfiniteScroll
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
-};
-
 const TenThousandEntries = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
-  pkg.feature['Datagrid.useInfiniteScroll'] = true;
   const datagridState = useDatagrid(
     {
       columns,
@@ -388,7 +371,7 @@ const ExpandedRow = ({ ...rest } = {}) => {
     useExpandedRow
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 const SelectItemsInAllPages = ({ ...rest } = {}) => {
@@ -1146,7 +1129,7 @@ describe(componentName, () => {
   //Empty State
   it('renders an empty table', async () => {
     const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
-    screen.getByText('Empty State Title');
+    screen.getAllByText('Empty State Title');
     screen.getByText('Description test explaining why this card is empty.');
     expect(screen.getByRole('img')).toHaveClass(
       `${pkg.prefix}--empty-state__illustration-noData`
@@ -1186,19 +1169,6 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
-  });
-
-  //Ten Thousand Entries
-  it('render logs an error if infinite scroll not enabled', async () => {
-    expectError(
-      'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
-      () => {
-        render(
-          <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
-        );
-      },
-      true
-    );
   });
 
   it('renders Ten Thousand table entries', async () => {
@@ -1464,29 +1434,36 @@ describe(componentName, () => {
     fireEvent.click(clickableRow);
   });
 
-  function clickRow(rowNumber) {
+  async function clickRow(rowNumber, triggerAnotherExpander) {
+    const user = userEvent.setup({ delay: null });
+    const { click, hover, unhover } = user;
     const rows = screen.getAllByRole('row');
     const bodyRows = rows.filter(
       (r) =>
-        !r.classList.contains('c4p--datagrid__head') &&
-        !r.classList.contains('c4p--datagrid__expanded-row')
+        !r.classList.contains(`${pkg.prefix}--datagrid__head`) &&
+        !r.classList.contains(`${pkg.prefix}--datagrid__expanded-row`)
     );
     const row = bodyRows[rowNumber];
 
-    const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
-    fireEvent.click(rowExpander);
+    const rowExpander = within(row).getByLabelText('Expand row');
+    await click(rowExpander);
 
     expect(row.nextElementSibling).toHaveClass(`${blockClass}__expanded-row`);
     expect(row.nextElementSibling.textContent).toEqual(
       `Content for ${rowNumber}`
     );
 
-    fireEvent.mouseOver(row.nextElementSibling);
-    fireEvent.mouseLeave(row.nextElementSibling);
+    hover(row.nextElementSibling);
+    unhover(row.nextElementSibling);
 
-    const rowExpanderCollapse = row.querySelector(
-      `button[aria-label="Collapse row"]`
-    );
+    if (triggerAnotherExpander) {
+      const nextRow = bodyRows[rowNumber + 1];
+      const nextRowExpanderExpand =
+        within(nextRow).getByLabelText('Expand row');
+      fireEvent.click(nextRowExpanderExpand);
+      return;
+    }
+    const rowExpanderCollapse = within(row).getByLabelText('Collapse row');
     fireEvent.click(rowExpanderCollapse);
   }
 
@@ -1494,7 +1471,7 @@ describe(componentName, () => {
     render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
-    clickRow(8);
+    clickRow(8, true);
   });
 
   function hideSelectAll(rowNumber) {
@@ -1917,7 +1894,11 @@ describe(componentName, () => {
   });
 
   it('Row Size Dropdown', async () => {
-    render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { click, keyboard } = user;
+    render(<RowSizeDropdown data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1925,41 +1906,46 @@ describe(componentName, () => {
     const selectAllCheckbox = screen.getByLabelText(
       'Select all rows in the table'
     );
-    fireEvent.click(selectAllCheckbox);
+    await click(selectAllCheckbox);
 
     // Count number of rows
-    const rowSize = screen.getByTestId(dataTestId).querySelector(`tbody`)
-      .children.length;
+    const tableRows = screen.getAllByRole('row');
+    const bodyRows = tableRows.filter(
+      (row) => !row.classList.contains(`${blockClass}__head`)
+    );
 
-    //This checks to see if all the rows in the table have been selected.
-    for (var i = 0; i < rowSize; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbon.prefix}--data-table--selected`);
-    }
+    bodyRows.forEach((bodyRow) => {
+      expect(bodyRow).toHaveClass(`${carbon.prefix}--data-table--selected`);
+    });
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0]
-        .getElementsByTagName('span')[0].textContent
-    ).toEqual('10 items selected');
+    screen.getByText('10 items selected');
 
     // Find and click Refresh button
     const actionButton = screen.getByText('Action');
-    fireEvent.click(actionButton);
+    await click(actionButton);
     expect(alertMock).toHaveBeenCalled();
 
     // Find and click cancel button
     const cancelButton = screen.getByText('Cancel');
-    fireEvent.click(cancelButton);
+    await click(cancelButton);
     expect(alertMock).toHaveBeenCalled();
+
+    await click(screen.getByLabelText('Row settings'));
+    expect(screen.getByLabelText('Row settings')).toHaveClass(
+      `${blockClass}__row-size__row-settings-trigger--open`
+    );
+    await keyboard('[Escape]');
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
+    );
+    await click(screen.getByLabelText('Row settings'));
+    await keyboard('[ArrowUp]');
+    const tableElement = screen.getByRole('table');
+    expect(tableElement).toHaveClass(`${carbon.prefix}--data-table--md`);
+    click(screen.getAllByRole('columnheader')[0]);
+    expect(screen.getByLabelText('Row settings')).not.toHaveClass(
+      `${blockClass}__row-settings-trigger--open`
+    );
   });
 
   it('Selectable Row', async () => {
@@ -2193,7 +2179,7 @@ describe(componentName, () => {
     );
 
     bodyRows.forEach((row) => {
-      const actionColumnCell = row.lastElementChild.previousElementSibling;
+      const actionColumnCell = row.lastElementChild;
       expect(actionColumnCell).toHaveClass(
         `${blockClass}__actions-column-cell`
       );
@@ -2203,7 +2189,7 @@ describe(componentName, () => {
     });
   });
 
-  it('should click non stick row action when not inside of overflow menu', async () => {
+  it('should click non sticky row action when not inside of overflow menu', async () => {
     const { rerender } = render(
       <ActionsColumnExample
         isFetching={true}
@@ -2219,8 +2205,7 @@ describe(componentName, () => {
       (row) => !row.classList.contains(`${blockClass}__head`)
     );
     const firstBodyRow = bodyRows[0];
-    const lastCellElement =
-      firstBodyRow.lastElementChild.previousElementSibling;
+    const lastCellElement = firstBodyRow.lastElementChild;
     const iconSkeletonElement = lastCellElement.children[0].children[0];
     expect(iconSkeletonElement).toHaveClass(`${carbon.prefix}--icon--skeleton`);
     expect(iconSkeletonElement).toHaveClass(

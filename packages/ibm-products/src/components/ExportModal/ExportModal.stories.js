@@ -44,6 +44,47 @@ export default {
       ),
     },
   },
+  argTypes: {
+    validExtensions: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no extension validation',
+          1: 'pdf extension validation',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: [],
+        1: ['pdf'],
+      },
+    },
+    preformattedExtensions: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no preformatted extensions',
+          1: 'preformatted extensions',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: [],
+        1: [
+          {
+            extension: 'YAML',
+            description: 'best for IBM managed cloud',
+          },
+          {
+            extension: 'BAR',
+            description: 'best for integration server',
+          },
+        ],
+      },
+    },
+    invalidInputText: { control: 'text', if: { arg: 'validExtensions', neq: 'none' } },
+    preformattedExtensionsLabel: { control: 'text', if: { arg: 'preformattedExtensions', neq: 'none' } },
+  },
 };
 
 const defaultProps = {
@@ -56,6 +97,7 @@ const defaultProps = {
   secondaryButtonText: 'Cancel',
   title: 'Export',
   inputType: 'text',
+  successful: true,
 };
 
 const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
@@ -102,20 +144,6 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
   );
 };
 
-export const WithSuccessMessage = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    successful: true,
-  },
-});
-
-export const WithErrorMessage = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    successful: false,
-  },
-});
-
 export const Standard = prepareStory(Template, {
   args: {
     ...defaultProps,
@@ -126,7 +154,7 @@ export const Standard = prepareStory(Template, {
 export const WithExtensionValidation = prepareStory(Template, {
   args: {
     ...defaultProps,
-    validExtensions: ['pdf'],
+    validExtensions: 1,
     filename: '',
     invalidInputText: 'File must have valid extension .pdf',
     body: 'File must be exported in a PDF format.',
@@ -138,16 +166,7 @@ export const WithPreformattedExtensions = prepareStory(Template, {
   args: {
     ...defaultProps,
     filename: 'test',
-    preformattedExtensions: [
-      {
-        extension: 'YAML',
-        description: 'best for IBM managed cloud',
-      },
-      {
-        extension: 'BAR',
-        description: 'best for integration server',
-      },
-    ],
+    preformattedExtensions: 1,
     preformattedExtensionsLabel: 'Choose an export format',
     storyInitiallyOpen: true,
   },

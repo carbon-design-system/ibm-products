@@ -54,7 +54,7 @@ export let TagSet = React.forwardRef(
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
       tags,
-      containingElementSelector,
+      containingElementRef,
       measurementOffset = defaults.measurementOffset,
 
       // Collect any other property values passed in.
@@ -173,9 +173,7 @@ export let TagSet = React.forwardRef(
       let willFit = 0;
 
       if (sizingTags.length > 0) {
-        const optionalContainingElement = document.querySelector(
-          `${containingElementSelector}`
-        );
+        const optionalContainingElement = containingElementRef?.current;
         const measurementOffsetValue =
           typeof measurementOffset === 'number' ? measurementOffset : 0;
         let spaceAvailable = optionalContainingElement
@@ -215,7 +213,7 @@ export let TagSet = React.forwardRef(
       multiline,
       sizingTags,
       tagSetRef,
-      containingElementSelector,
+      containingElementRef,
       measurementOffset,
     ]);
 
@@ -243,7 +241,10 @@ export let TagSet = React.forwardRef(
 
     useResizeObserver(sizingContainerRef, handleSizerTagsResize);
 
-    useResizeObserver(tagSetRef, handleResize);
+    const resizeOption = containingElementRef
+      ? containingElementRef
+      : tagSetRef;
+    useResizeObserver(resizeOption, handleResize);
 
     return (
       <div
@@ -350,9 +351,10 @@ TagSet.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Optional selector used to measure space available
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
    */
-  containingElementSelector: PropTypes.string,
+  containingElementRef: PropTypes.object,
   /**
    * maximum visible tags
    */

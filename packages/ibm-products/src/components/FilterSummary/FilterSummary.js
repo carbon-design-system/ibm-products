@@ -35,9 +35,11 @@ let FilterSummary = React.forwardRef(
     }));
 
     const filterSummaryClearButton = useRef();
+    const filterSummaryRef = useRef();
+    const localRef = filterSummaryRef || ref;
     return (
       <div
-        ref={ref}
+        ref={localRef}
         className={cx([blockClass, className])}
         id={filterSummaryId}
       >
@@ -51,7 +53,7 @@ let FilterSummary = React.forwardRef(
           className={cx({
             [`${blockClass}__clear-button-inline`]: clearButtonInline,
           })}
-          containingElementSelector={`#${filterSummaryId}`}
+          containingElementRef={localRef}
           measurementOffset={filterSummaryClearButton?.current?.offsetWidth}
         />
         <Button

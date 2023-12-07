@@ -1,34 +1,37 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useState } from 'react';
+import { Tooltip } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid } from '../../index';
+  Datagrid,
+  useDatagrid,
+  useColumnRightAlign,
+  useColumnCenterAlign,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
-// import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './ColumnAlignment.docs-page';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StatusIcon } from '../../../StatusIcon';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Header`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
     styles,
+    docs: { page: DocsPage },
     layout: 'fullscreen',
-    // docs: { page: mdx },
   },
 };
 
@@ -50,12 +53,40 @@ const defaultHeader = [
   {
     Header: 'Age',
     accessor: 'age',
-    width: 50,
+    width: 120,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
-    width: 60,
+    width: 120,
+  },
+  {
+    Header: 'Bonus',
+    accessor: 'bonus',
+    width: 120,
+    rightAlignedColumn: true,
+  },
+  {
+    Header: 'Password strength',
+    accessor: 'passwordStrength',
+    width: 160,
+    centerAlignedColumn: true,
+    Cell: ({ cell: { value } }) => {
+      const iconProps = {
+        size: 'sm',
+        theme: 'light',
+        kind: value,
+        iconDescription: value,
+      };
+
+      return (
+        <Tooltip label={iconProps.iconDescription}>
+          <button type="button" className="sb--tooltip-trigger">
+            <StatusIcon {...iconProps} />
+          </button>
+        </Tooltip>
+      );
+    },
   },
   {
     Header: 'Someone 1',
@@ -144,56 +175,49 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
+  expandedContentHeight: 96,
 };
 
-const BasicUsage = ({ ...args }) => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader,
-      {
-        Header: 'Someone 11',
-        accessor: 'someone11',
-        multiLineWrap: true,
-      },
-    ],
-    []
-  );
+const ColumnAlignment = ({ ...args }) => {
+  const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
-  const datagridState = useDatagrid({
-    columns,
-    data: rows,
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data: rows,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      DatagridActions,
+      DatagridPagination,
+      ...args.defaultGridProps,
     },
-    DatagridActions,
-    DatagridPagination,
-    ...args.defaultGridProps,
-  });
+    useColumnCenterAlign,
+    useColumnRightAlign
+  );
 
   return <Datagrid datagridState={datagridState} />;
 };
 
 const BasicTemplateWrapper = ({ ...args }) => {
-  return <BasicUsage defaultGridProps={{ ...args }} />;
+  return <ColumnAlignment defaultGridProps={{ ...args }} />;
 };
 
-const basicUsageControlProps = {
+const columnAlignmentControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
-  useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
-const basicUsageStoryName = 'With header';
-export const HeaderBasicUsageStory = prepareStory(BasicTemplateWrapper, {
-  storyName: basicUsageStoryName,
+const columnAlignmentStoryName = 'Column alignment';
+export const ColumnAlignmentStory = prepareStory(BasicTemplateWrapper, {
+  storyName: columnAlignmentStoryName,
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
   },
   args: {
-    ...basicUsageControlProps,
+    ...columnAlignmentControlProps,
   },
 });

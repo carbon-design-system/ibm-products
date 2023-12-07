@@ -14,9 +14,10 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const DatagridExpandedRow =
   (ExpandedRowContentComponent) => (datagridState) => {
     const { row } = datagridState;
-    const { expandedContentHeight } = row || {};
+    const { expandedContentHeight } = row;
 
     const toggleParentHoverClass = (event, eventType) => {
+      /* istanbul ignore else */
       if (event?.target?.parentNode?.previousElementSibling) {
         const parentNode = event.target.parentNode.previousElementSibling;
         if (eventType === 'enter') {
@@ -33,14 +34,16 @@ const DatagridExpandedRow =
         onMouseEnter={(event) => toggleParentHoverClass(event, 'enter')}
         onMouseLeave={(event) => toggleParentHoverClass(event)}
       >
-        <div
-          className={`${blockClass}__expanded-row-content`}
-          style={{
-            height: expandedContentHeight ? expandedContentHeight : null,
-          }}
-        >
-          {ExpandedRowContentComponent(datagridState)}
-        </div>
+        <td className={`${blockClass}__expanded-row-cell-wrapper`}>
+          <div
+            className={`${blockClass}__expanded-row-content`}
+            style={{
+              height: expandedContentHeight && expandedContentHeight,
+            }}
+          >
+            <ExpandedRowContentComponent {...datagridState} />
+          </div>
+        </td>
       </tr>
     );
   };

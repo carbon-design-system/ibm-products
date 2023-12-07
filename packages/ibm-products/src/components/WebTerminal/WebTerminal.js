@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Close, Help } from '@carbon/react/icons';
-import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import { Button, OverflowMenu, OverflowMenuItem, Theme } from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
 import { useWebTerminal } from './hooks';
 
@@ -127,6 +127,7 @@ export let WebTerminal = React.forwardRef(
         }}
         onAnimationEnd={onAnimationEnd}
       >
+        
         <header className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
@@ -163,7 +164,9 @@ export let WebTerminal = React.forwardRef(
             onAnimationEnd={(event) => event.stopPropagation()}
           />
         </header>
-        <div className={`${blockClass}__body`}>{children}</div>
+        <Theme theme="g100">
+          <div className={`${blockClass}__body`}>{children}</div>
+        </Theme>
       </div>
     ) : null;
   }

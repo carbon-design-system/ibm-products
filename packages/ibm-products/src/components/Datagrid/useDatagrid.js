@@ -41,6 +41,14 @@ const useDatagrid = (params, ...plugins) => {
     useSortBy,
     useExpanded,
   ];
+
+  // Disable resizing
+  if (params.disableResizing) {
+    const resizeIndex = defaultPlugins.findIndex(
+      (p) => p.pluginName === 'useResizeColumns'
+    );
+    defaultPlugins.splice(resizeIndex, 1);
+  }
   const defaultEndPlugins = [
     usePagination,
     useRowSelect,
@@ -49,9 +57,13 @@ const useDatagrid = (params, ...plugins) => {
   ];
   const clientEndPlugins = params.endPlugins || [];
 
+  const defaultColumn = {
+    minWidth: 50,
+  };
+
   const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
   const tableState = useTable(
-    { tableId, ...params, stateReducer },
+    { tableId, ...params, stateReducer, defaultColumn },
     ...defaultPlugins,
     ...plugins,
     ...defaultEndPlugins,

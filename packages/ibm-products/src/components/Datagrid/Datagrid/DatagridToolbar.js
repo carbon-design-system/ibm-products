@@ -16,6 +16,7 @@ import {
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { handleSelectAllRowData } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
@@ -30,7 +31,12 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toolbarBatchActions,
     setGlobalFilter,
     rows,
+    dispatch,
+    getRowId,
+    batchActionMenuButtonLabel,
+    translateWithIdBatchActions,
   } = datagridState;
+  const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
 
@@ -90,7 +96,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
     return (
       <MenuButton
-        label="More"
+        label={batchActionMenuButtonLabelText}
         className={cx([
           menuClass,
           {
@@ -124,6 +130,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const onSelectAllHandler = () => {
     toggleAllRowsSelected(true);
     onSelectAllRows?.(true);
+    handleSelectAllRowData({
+      dispatch,
+      rows,
+      getRowId,
+    });
   };
 
   // Only display the first two batch actions, the rest are
@@ -136,6 +147,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       onCancel={onCancelHandler}
       onSelectAll={onSelectAllHandler}
       totalCount={rows && rows.length}
+      translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&

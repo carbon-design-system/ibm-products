@@ -148,6 +148,22 @@ useDatagrid({
   data,
   onColResizeEnd: (currentColumn, allColumns) =>
       console.log(currentColumn, allColumns),
+  resizerAriaLabel: 'Resize column',
+});
+          `,
+        },
+      },
+      {
+        description:
+          'Disabling the resizable columns is possible by specifying `disableResizing: true` within the `useDatagrid` hook. To pass in your own translated label for the column resizer, add the `resizerAriaLabel` property',
+        source: {
+          language: 'jsx',
+          code: `
+useDatagrid({
+  columns,
+  data,
+  disableResizing: true,
+  resizerAriaLabel: 'Resize column',
 });
           `,
         },
@@ -256,6 +272,7 @@ const datagridState = useDatagrid(
     isFetching,
     fetchMoreData: fetchData,
     virtualHeight: 540,
+    loadMoreThreshold: 200,
     emptyStateTitle: 'Empty state title',
     emptyStateDescription: 'Description explaining why the table is empty',
   },
@@ -346,6 +363,7 @@ const datagridState = useDatagrid(
     columns,
     data,
     onRowSelect: (row, event) => console.log(row, event),
+    batchActionMenuButtonLabel: 'More',
   },
   useSelectRows
 );

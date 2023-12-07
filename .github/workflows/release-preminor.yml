@@ -1,0 +1,11 @@
+name: v2 prerelease # Builds and releases @carbon/v11 supported version of @carbon/ibm-products
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Release:
+    uses: ./.github/workflows/release.yml
+    with:
+      release-type: '--canary preminor'
+    secrets: inherit

@@ -95,8 +95,15 @@ if (name) {
       `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
   );
 
+  // NOTE: Styles except storybook are in a separate package @carbon/ibm-products-styles
+  const stylePackagePath = '../ibm-products-styles';
   // add new component to end of src/components/_index.scss
-  const componentSCSSIndexPath = join('src', 'components', '_index.scss');
+  const componentSCSSIndexPath = join(
+    stylePackagePath,
+    'src',
+    'components',
+    '_index.scss'
+  );
   const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
   outputFileSync(
     componentSCSSIndexPath,
@@ -105,6 +112,7 @@ if (name) {
 
   // add new component to end of src/components/_index-with-carbon.scss
   const componentWithCarbonSCSSIndexPath = join(
+    stylePackagePath,
     'src',
     'components',
     '_index-with-carbon.scss'
@@ -118,4 +126,21 @@ if (name) {
     componentWithCarbonSCSSIndexData +
       `@use './${substitutions.DISPLAY_NAME}/index-with-carbon' as *;\n`
   );
+
+  fs.mkdirSync(
+    join(`${stylePackagePath}`, `src/components/${substitutions.DISPLAY_NAME}`)
+  );
+  // move files to correct location
+  [
+    '_carbon-imports.scss',
+    '_index.scss',
+    '_index-with-carbon.scss',
+    `_${substitutions.STYLE_NAME}.scss`,
+  ].forEach((file) => {
+    const curPath = join(
+      `src/components/${substitutions.DISPLAY_NAME}/${file}`
+    );
+    const newPath = join(stylePackagePath, curPath);
+    fs.renameSync(curPath, newPath);
+  });
 }

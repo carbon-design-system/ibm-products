@@ -401,6 +401,7 @@ const useFilters = ({
    * and populate the filter state with them
    */
   useEffect(() => {
+    console.log('here');
     if (!panelOpen && previousState?.panelOpen) {
       revertToPreviousFilters();
       setAllFilters(holdingLastAppliedFiltersRef.current);

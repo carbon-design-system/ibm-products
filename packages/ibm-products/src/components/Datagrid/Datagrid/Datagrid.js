@@ -40,6 +40,7 @@ export let Datagrid = React.forwardRef(
       className,
       state: { filters },
     } = datagridState;
+    console.log('filters: ', filters);
 
     const rows =
       (DatagridPagination && datagridState.page) || datagridState.rows;

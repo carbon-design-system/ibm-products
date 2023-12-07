@@ -34,7 +34,8 @@
     "carbon for ibm products"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "run-s clean build-all",

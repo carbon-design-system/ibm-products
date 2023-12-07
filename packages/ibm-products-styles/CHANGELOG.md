@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.17.2...@carbon/ibm-products-styles@2.18.0) (2023-12-07)
+
+
+### Bug Fixes
+
+* fixes 3890 ([#3891](https://github.com/carbon-design-system/ibm-products/issues/3891)) ([3b7b6fd](https://github.com/carbon-design-system/ibm-products/commit/3b7b6fd11223d2cc517cd59438f7449b33ea7375))
+* **WebTerminal:** Apply inline theming web terminal. ([#3888](https://github.com/carbon-design-system/ibm-products/issues/3888)) ([80a54db](https://github.com/carbon-design-system/ibm-products/commit/80a54dbf22bdaefe2b7965902268941dc702f624))
+
+
+### Features
+
+* **FilterSummary:** enable filter summary clear button to be placed inline ([#3906](https://github.com/carbon-design-system/ibm-products/issues/3906)) ([e154f89](https://github.com/carbon-design-system/ibm-products/commit/e154f89d4295f646522d7f0d20c49323c69b4c75))
+* new NonLinearReading component ([#3889](https://github.com/carbon-design-system/ibm-products/issues/3889)) ([962fbb6](https://github.com/carbon-design-system/ibm-products/commit/962fbb61ea2897db2b954afb8ebd5e721afe30c9))
+* port Guidebanner component w Carousel to v2 ([#3905](https://github.com/carbon-design-system/ibm-products/issues/3905)) ([e89a3f2](https://github.com/carbon-design-system/ibm-products/commit/e89a3f2575387e5f46338955c4aa4d07de663e3b))
+
+
+
+
+
 ## [2.17.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.17.1...@carbon/ibm-products-styles@2.17.2) (2023-12-05)
 
 

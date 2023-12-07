@@ -10215,7 +10215,6 @@ button.c4p--add-select__global-filter-toggle--open {
   border-left: 1px solid #262626;
   color: var(--cds-text-primary, #161616);
   /* stylelint-disable-next-line  */
-  background-color: #161616;
 }
 
 .c4p--web-terminal__bar {
@@ -10628,7 +10627,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--web-terminal__body {
-  height: 100%;
+  height: calc(100vh - 3rem);
 }
 
 .c4p--web-terminal-content-wrapper {

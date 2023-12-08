@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
 import { pkg } from '../../../settings';
-// cspell:words columnheader
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -61,7 +60,6 @@ const SelectAllWithToggle = ({
     columns[0]?.sticky === 'left' && withStickyColumn;
   return (
     <th
-      role="columnheader"
       scope="col"
       className={cx(`${blockClass}__select-all-toggle-on`, {
         [`${blockClass}__select-all-sticky-left`]:

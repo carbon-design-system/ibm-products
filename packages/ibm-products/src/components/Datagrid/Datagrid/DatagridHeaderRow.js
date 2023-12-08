@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2020, 2023
  *
@@ -28,6 +29,67 @@ const getAccessibilityProps = (header) => {
     props['aria-hidden'] = true;
   }
   return props;
+};
+
+const ResizeHeader = ({
+  resizerProps,
+  header,
+  handleOnMouseDownResize,
+  originalCol,
+  columnWidths,
+  datagridState,
+  incrementAmount,
+  minWidth,
+  dispatch,
+  onColResizeEnd,
+  resizerAriaLabel,
+}) => {
+  const { role, ...headerProps } = resizerProps;
+  const mouseDownHandler = (evt) => {
+    handleOnMouseDownResize(evt, resizerProps);
+  };
+  const keyDownHandler = (evt) => {
+    const { key } = evt;
+    if (key === 'ArrowLeft' || key === 'ArrowRight') {
+      const originalColMinWidth = originalCol.minWidth || 90;
+      const currentColumnWidth =
+        columnWidths[header.id] ||
+        (datagridState.isTableSortable &&
+        originalCol.width < originalColMinWidth
+          ? originalColMinWidth
+          : originalCol.width);
+      if (key === 'ArrowLeft') {
+        if (currentColumnWidth - incrementAmount > Math.max(minWidth, 50)) {
+          const newWidth = currentColumnWidth - incrementAmount;
+          handleColumnResizingEvent(dispatch, header, newWidth, true);
+        }
+      }
+      if (key === 'ArrowRight') {
+        const newWidth = currentColumnWidth + incrementAmount;
+        handleColumnResizingEvent(dispatch, header, newWidth, true);
+      }
+    }
+  };
+  const keyUpHandler = () => {
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+  };
+  return (
+    <>
+      <input
+        {...headerProps}
+        // avoid unnecessary role assignment
+        {...(role === 'separator' ? {} : { role })}
+        onMouseDown={mouseDownHandler}
+        onKeyDown={keyDownHandler}
+        onKeyUp={keyUpHandler}
+        className={`${blockClass}__col-resizer-range`}
+        type="range"
+        defaultValue={originalCol.width}
+        aria-label={resizerAriaLabel || 'Resize column'}
+      />
+      <span className={`${blockClass}__col-resize-indicator`} />
+    </>
+  );
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
@@ -71,7 +133,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   const [incrementAmount] = useState(2);
 
   const handleOnMouseDownResize = (event, resizeProps) => {
-    const { onMouseDown } = { ...resizeProps() };
+    const { onMouseDown } = { ...resizeProps };
     // When event.button is 2, that is a right click
     // and we do not want to resize
     if (event.button === 2 || event.ctrlKey) {
@@ -81,13 +143,18 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     onMouseDown?.(event);
   };
 
+  const {
+    className: headerGroupClassName,
+    role,
+    ...headerGroupProps
+  } = headerGroup.getHeaderGroupProps();
+
   return (
     <TableRow
-      {...headerGroup.getHeaderGroupProps()}
-      className={cx(
-        `${blockClass}__head`,
-        headerGroup.getHeaderGroupProps().className
-      )}
+      {...headerGroupProps}
+      // avoid unnecessary role assignment
+      {...(role === 'row' ? {} : { role })}
+      className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
       {datagridState.headers
@@ -103,83 +170,46 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { columnResizing } = state;
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
+          const {
+            role,
+            className: headerClassName,
+            ...headerProps
+          } = header.getHeaderProps();
+          const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader
-              {...header.getHeaderProps()}
-              className={cx(
-                {
-                  [`${blockClass}__resizableColumn`]: header.getResizerProps,
-                  [`${blockClass}__isResizing`]: header.isResizing,
-                  [`${blockClass}__sortableColumn`]:
-                    datagridState.isTableSortable && header.id !== 'spacer',
-                  [`${blockClass}__isSorted`]: header.isSorted,
-                  [`${blockClass}__header-actions-column`]: header.isAction,
-                },
-                header.getHeaderProps().className
-              )}
+              {...headerProps}
+              className={cx(headerClassName, {
+                [`${blockClass}__resizableColumn`]: resizerProps,
+                [`${blockClass}__isResizing`]: header.isResizing,
+                [`${blockClass}__sortableColumn`]:
+                  datagridState.isTableSortable && header.id !== 'spacer',
+                [`${blockClass}__isSorted`]: header.isSorted,
+                [`${blockClass}__header-actions-column`]: header.isAction,
+              })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
+              // avoid unnecessary role assignment
+              {...(role === 'columnheader' ? {} : { role })}
             >
               {header.render('Header')}
-              {header.getResizerProps && !header.isAction && (
-                <>
-                  <input
-                    {...header.getResizerProps()}
-                    onMouseDown={(event) =>
-                      handleOnMouseDownResize(event, header.getResizerProps)
-                    }
-                    onKeyDown={(event) => {
-                      const { key } = event;
-                      if (key === 'ArrowLeft' || key === 'ArrowRight') {
-                        const originalColMinWidth = originalCol.minWidth || 90;
-                        const currentColumnWidth =
-                          columnWidths[header.id] ||
-                          (datagridState.isTableSortable &&
-                          originalCol.width < originalColMinWidth
-                            ? originalColMinWidth
-                            : originalCol.width);
-                        if (key === 'ArrowLeft') {
-                          if (
-                            currentColumnWidth - incrementAmount >
-                            Math.max(minWidth, 50)
-                          ) {
-                            const newWidth =
-                              currentColumnWidth - incrementAmount;
-                            handleColumnResizingEvent(
-                              dispatch,
-                              header,
-                              newWidth,
-                              true
-                            );
-                          }
-                        }
-                        if (key === 'ArrowRight') {
-                          const newWidth = currentColumnWidth + incrementAmount;
-                          handleColumnResizingEvent(
-                            dispatch,
-                            header,
-                            newWidth,
-                            true
-                          );
-                        }
-                      }
-                    }}
-                    onKeyUp={() =>
-                      handleColumnResizeEndEvent(
-                        dispatch,
-                        onColResizeEnd,
-                        header.id,
-                        true
-                      )
-                    }
-                    className={cx(`${blockClass}__col-resizer-range`)}
-                    type="range"
-                    defaultValue={originalCol.width}
-                    aria-label={resizerAriaLabel || 'Resize column'}
-                  />
-                  <span className={`${blockClass}__col-resize-indicator`} />
-                </>
+              {resizerProps && !header.isAction && (
+                <ResizeHeader
+                  {...{
+                    resizerProps,
+                    header,
+                    handleOnMouseDownResize,
+                    originalCol,
+                    columnWidths,
+                    datagridState,
+                    incrementAmount,
+                    minWidth,
+                    dispatch,
+                    onColResizeEnd,
+                    resizerAriaLabel,
+                  }}
+                />
               )}
             </TableHeader>
           );

@@ -124,11 +124,13 @@ const DatagridRow = (datagridState) => {
     return {};
   };
 
+  const { role, ...rowProps } = row.getRowProps();
+
   return (
     <React.Fragment key={key}>
       <TableRow
         className={rowClassNames}
-        {...row.getRowProps()}
+        {...rowProps}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -136,10 +138,12 @@ const DatagridRow = (datagridState) => {
         onBlur={focusRemover}
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
+        // avoid unnecessary role assignment to rows
+        {...(role === 'row' ? {} : { role })}
       >
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
-          const { children, ...restProps } = cellProps;
+          const { children, role, ...restProps } = cellProps;
           const content = children || (
             <>
               {!row.isSkeleton && cell.render('Cell')}
@@ -158,6 +162,8 @@ const DatagridRow = (datagridState) => {
               })}
               {...restProps}
               key={cell.column.id}
+              // avoid unnecessary role assignment to cells
+              {...(role === 'cell' ? {} : { role })}
             >
               {content}
             </TableCell>

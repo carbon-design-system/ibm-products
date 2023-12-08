@@ -140,12 +140,9 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(initialData ?? makeData(20));
-  const [isFetching, setIsFetching] = useState(false);
 
   const datagridState = useDatagrid(
     {
-      isFetching,
-      setIsFetching,
       columns,
       data,
       initialState,

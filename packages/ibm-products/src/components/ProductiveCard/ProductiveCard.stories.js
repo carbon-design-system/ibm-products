@@ -80,6 +80,7 @@ docs: {
         labels: {
           0: 'No AI slug',
           1: 'with AI Slug',
+          2: 'Boolean true',
         },
         default: 0,
       },
@@ -130,7 +131,7 @@ const Template = (opts) => {
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ProductiveCard {...args} slug={slug && sampleSlug}>
+        <ProductiveCard {...args} slug={slug && (slug === 2 || sampleSlug)}>
           {children}
         </ProductiveCard>
       </Column>

@@ -88,10 +88,11 @@ docs: {
         labels: {
           0: 'No AI slug',
           1: 'with AI Slug',
+          2: 'Boolean true',
         },
         default: 0,
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
   },
   decorators: [
@@ -126,7 +127,7 @@ const Template = (opts) => {
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard {...args} slug={slug && sampleSlug}>
+        <ExpressiveCard {...args} slug={slug && (slug === 2 || sampleSlug)}>
           {children}
         </ExpressiveCard>
       </Column>
@@ -149,7 +150,7 @@ const MediaTemplate = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          slug={slug && sampleSlug}
+          slug={slug && (slug === 2 || sampleSlug)}
           {...args}
         >
           {children}

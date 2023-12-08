@@ -571,7 +571,7 @@ export let SidePanel = React.forwardRef(
 
     const renderHeader = () => {
       let normalizedSlug;
-      if (slug) {
+      if (slug && slug?.type?.displayName === 'Slug') {
         normalizedSlug = React.cloneElement(slug, {
           // slug size is sm unless actions and size > md
           size: actions.length && /l/.test(size) ? 'md' : 'sm',

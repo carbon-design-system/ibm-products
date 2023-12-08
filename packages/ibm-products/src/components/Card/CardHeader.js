@@ -73,7 +73,7 @@ export let CardHeader = ({
   if (slug) {
     if (inClickableCard) {
       normalizedSlug = hollowSlugIcon;
-    } else {
+    } else if (typeof slug !== 'boolean') {
       normalizedSlug = React.cloneElement(slug, {
         size: label || titleSize === 'large' ? 'sm' : 'xs',
       });
@@ -164,9 +164,9 @@ CardHeader.propTypes = {
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
   /**
-   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   * For all cases a `Slug` component can be provided, alternatively a can be supplied for clickable tiles.
    */
-  slug: PropTypes.node,
+  slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
   title: PropTypes.oneOfType([
     PropTypes.string,

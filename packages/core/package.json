@@ -33,7 +33,7 @@
     "@carbon/ibm-products-styles": "^2.18.0",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
-    "@carbon/react": "^1.44.0",
+    "@carbon/react": "^1.45.0",
     "@carbon/storybook-addon-theme": "^2.0.5",
     "@carbon/themes": "^11.28.0",
     "@carbon/type": "^11.25.1",

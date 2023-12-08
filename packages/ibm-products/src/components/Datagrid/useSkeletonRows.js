@@ -8,7 +8,6 @@
 const useSkeletons = (hooks) => {
   const useInstance = (instance) => {
     const { isFetching, rows } = instance;
-    console.log({isFetching});
     const skeletonRow = (id) => ({ isSkeleton: true, values: 'skeleton', id });
     const rowsWithSkeletons = [
       ...rows,

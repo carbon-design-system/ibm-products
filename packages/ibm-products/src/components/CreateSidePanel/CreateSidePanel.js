@@ -187,7 +187,7 @@ CreateSidePanel.propTypes = {
   selectorPrimaryFocus: PropTypes.node.isRequired,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
    */
   slug: PropTypes.node,
 

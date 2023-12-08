@@ -229,7 +229,7 @@ EditSidePanel.propTypes = {
   slideIn: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
    */
   slug: PropTypes.node,
 

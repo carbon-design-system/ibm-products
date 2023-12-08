@@ -68,6 +68,7 @@ export let Card = forwardRef(
       secondaryButtonKind = defaults.secondaryButtonKind,
       secondaryButtonPlacement = defaults.secondaryButtonPlacement,
       secondaryButtonText,
+      slug,
       title,
       titleSize = defaults.titleSize,
 
@@ -175,6 +176,7 @@ export let Card = forwardRef(
             [`${blockClass}__productive`]: productive,
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
+            [`${blockClass}--has-slug`]: slug,
           },
           className
         ),
@@ -210,12 +212,14 @@ export let Card = forwardRef(
       primaryButtonDisabled,
       description,
       hasActions: hasActions,
+      inClickableCard: hasClickEvent,
       label,
       secondaryButtonDisabled,
       secondaryButtonHref,
       secondaryButtonIcon,
       secondaryButtonPlacement,
       secondaryButtonText,
+      slug,
       title,
       titleSize,
     });
@@ -327,6 +331,12 @@ Card.propTypes = {
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
+
+  /**
+   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

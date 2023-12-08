@@ -11,6 +11,7 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/utilities';
 
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
@@ -23,6 +24,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   cursor: pointer;
   // stylelint-disable-next-line carbon/motion-easing-use
   transition: background-color $duration-fast-02;
+}
+
+.#{$block-class}__clickable:focus {
+  @include utilities.focus-outline('outline');
 }
 
 .#{$block-class}__clickable:hover {
@@ -52,6 +57,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__header {
   padding: $spacing-05;
+  padding-right: 0; // makes for consistent slug position across productive and expressive
 }
 
 .#{$block-class}__header-label-only {
@@ -121,3 +127,70 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   padding-top: $spacing-05;
   padding-left: $spacing-05;
 }
+
+// +++ adjustments for slug
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
+  @include utilities.callout-gradient();
+
+  position: absolute;
+  top: 0;
+  right: $spacing-05;
+}
+
+.#{$block-class}__header-container--has-slug {
+  position: relative;
+  width: 100%;
+  padding-right: $spacing-07;
+}
+
+.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label {
+  padding-right: $spacing-09;
+}
+
+.#{$block-class}__clickable {
+  position: relative;
+}
+
+.#{$block-class}__clickable .#{c4p-settings.$carbon-prefix}--slug,
+.#{$block-class}__clickable .#{c4p-settings.$carbon-prefix}--slug-icon {
+  pointer-events: none;
+}
+
+.#{$block-class}--has-slug {
+  @include utilities.callout-gradient();
+
+  border: 1px solid $border-tile;
+}
+
+.#{$block-class}__clickable.#{$block-class}--has-slug::before {
+  @include utilities.callout-gradient('hover');
+
+  position: absolute;
+  display: block;
+  block-size: 100%;
+  content: '';
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  opacity: 0;
+  transition: opacity $duration-fast-02 motion(standard, productive);
+}
+
+.#{$block-class}__clickable.#{$block-class}--has-slug:hover::before {
+  opacity: 1;
+}
+
+.#{$block-class}__clickable .#{$block-class}__content-container {
+  position: relative;
+  z-index: 1;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug-icon rect {
+  stroke: $icon-primary;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug-icon path {
+  fill: $icon-primary;
+}
+
+// --- adjustments for slug

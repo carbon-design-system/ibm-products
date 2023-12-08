@@ -8,7 +8,13 @@
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { TrashCan, Edit } from '@carbon/react/icons';
-import { Grid, Column, usePrefix } from '@carbon/react';
+import {
+  Grid,
+  Column,
+  usePrefix,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
+} from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -16,6 +22,26 @@ import {
 import { ProductiveCard } from '.';
 // import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
+
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),
@@ -47,6 +73,17 @@ docs: {
         type: 'select',
       },
       options: [4, 8, 12, 16],
+    },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
     },
   },
   decorators: [
@@ -88,11 +125,14 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSizeSm, columnSizeMd, columnSizeLg, ...args } = opts;
+  const { children, columnSizeSm, columnSizeMd, columnSizeLg, slug, ...args } =
+    opts;
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ProductiveCard {...args}>{children}</ProductiveCard>
+        <ProductiveCard {...args} slug={slug && sampleSlug}>
+          {children}
+        </ProductiveCard>
       </Column>
     </Grid>
   );

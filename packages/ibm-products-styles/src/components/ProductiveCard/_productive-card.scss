@@ -16,10 +16,6 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__productive {
-  .#{$block-class}__header {
-    padding-right: 0;
-  }
-
   .#{$block-class}__title {
     @include type.type-style('heading-compact-02');
   }

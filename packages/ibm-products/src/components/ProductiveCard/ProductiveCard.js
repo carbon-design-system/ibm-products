@@ -149,6 +149,10 @@ ProductiveCard.propTypes = {
    */
   secondaryButtonText: PropTypes.node,
   /**
+   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+  /**
    * Title that's displayed at the top of the card
    */
   title: PropTypes.oneOfType([

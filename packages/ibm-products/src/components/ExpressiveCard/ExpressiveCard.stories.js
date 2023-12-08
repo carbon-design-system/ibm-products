@@ -8,7 +8,15 @@
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
-import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
+import {
+  AspectRatio,
+  Column,
+  Grid,
+  usePrefix,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
+} from '@carbon/react';
+
 import {
   getStoryTitle,
   prepareStory,
@@ -16,6 +24,26 @@ import {
 import { ExpressiveCard } from '.';
 // import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
+
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
 
 export default {
   title: getStoryTitle(ExpressiveCard.displayName),
@@ -54,6 +82,17 @@ docs: {
       },
       options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
   decorators: [
     (Story) => {
@@ -81,11 +120,15 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSizeSm, columnSizeMd, columnSizeLg, ...args } = opts;
+  const { children, columnSizeSm, columnSizeMd, columnSizeLg, slug, ...args } =
+    opts;
+
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard {...args}>{children}</ExpressiveCard>
+        <ExpressiveCard {...args} slug={slug && sampleSlug}>
+          {children}
+        </ExpressiveCard>
       </Column>
     </Grid>
   );
@@ -98,6 +141,7 @@ const MediaTemplate = (opts) => {
     columnSizeMd,
     columnSizeLg,
     mediaRatio = '1x1',
+    slug,
     ...args
   } = opts;
   return (
@@ -105,6 +149,7 @@ const MediaTemplate = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
+          slug={slug && sampleSlug}
           {...args}
         >
           {children}

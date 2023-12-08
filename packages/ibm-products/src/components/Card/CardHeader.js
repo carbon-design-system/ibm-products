@@ -164,7 +164,7 @@ CardHeader.propTypes = {
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
   /**
-   * For all cases a `Slug` component can be provided, alternatively a can be supplied for clickable tiles.
+   * **Experimental:** For all cases a `Slug` component can be provided, alternatively a can be supplied for clickable tiles.
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 

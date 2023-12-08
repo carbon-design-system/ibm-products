@@ -3,8 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/carbon-for-ibm-products.community.umd.js",
+  "module": "./dist/carbon-for-ibm-products.community.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/carbon-for-ibm-products.community.es.js",
+      "require": "./dist/carbon-for-ibm-products.community.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

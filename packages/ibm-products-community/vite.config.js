@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/lib/index.js'),
+      entry: resolve(__dirname, 'src/index.js'),
       name: 'IBMProductsCommunity',
       formats: ['es', 'umd'],
       fileName: (format) => `ibm-products-community.${format}.js`,

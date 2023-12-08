@@ -99,7 +99,6 @@ const formatDateRange = (startDate, endDate) => {
 
 const prepareFiltersForTags = (filters, renderDateLabel) => {
   const tags = [];
-  console.log(filters);
 
   filters.forEach(({ id, type, value }) => {
     const sharedFilterProps = {
@@ -135,7 +134,6 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
       });
     }
   });
-  console.log(tags);
 
   return tags;
 };
@@ -144,15 +142,6 @@ export const FilterProvider = ({ children, filters, filterProps }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
-  // console.log(filters);
-  // FilterTags is incorrect with deselect and then refresh
-  // Filters still has the correct values but somewhere along the way
-  // filterTags gets out of sync, likely from prepareFiltersForTags
-
-  // ******* Latest findings *******
-  // Filters has the filter still set but the values are not correct
-  // For example, if you deselect a checkbox and refresh the grid
-  // the `selected` value in the filter is now false
 
   const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
 

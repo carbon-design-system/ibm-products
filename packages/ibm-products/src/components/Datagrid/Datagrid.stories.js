@@ -32,8 +32,6 @@ import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
-import * as HeaderStory from './Datagrid.stories/Header/Header.stories';
-import * as ColumnAlignmentStory from './Datagrid.stories/ColumnAlignment/ColumnAlignment.stories';
 import { DocsPage } from './Datagrid.docs-page';
 
 export default {
@@ -284,9 +282,6 @@ export const Pagination = () => {
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
-
-export const Header = HeaderStory.HeaderBasicUsageStory;
-export const ColumnAlignment = ColumnAlignmentStory.ColumnAlignmentStory;
 
 export const SelectableRow = () => {
   const [data] = useState(makeData(10));

@@ -203,6 +203,7 @@ export const DatagridContent = ({ datagridState, title }) => {
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}
+              isFetching={isFetching}
             />
           )}
           <div className={`${blockClass}__table-container-inner`}>

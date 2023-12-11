@@ -22,7 +22,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Header`,
+  title: `${getStoryTitle(Datagrid.displayName)}`,
   component: Datagrid,
   parameters: {
     styles,
@@ -183,7 +183,7 @@ const basicUsageControlProps = {
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
-const basicUsageStoryName = 'With header';
+const basicUsageStoryName = 'Header';
 export const HeaderBasicUsageStory = prepareStory(BasicTemplateWrapper, {
   storyName: basicUsageStoryName,
   argTypes: {

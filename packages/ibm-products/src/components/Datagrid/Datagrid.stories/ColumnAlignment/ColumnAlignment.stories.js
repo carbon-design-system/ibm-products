@@ -29,7 +29,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
+  title: `${getStoryTitle(Datagrid.displayName)}`,
   component: Datagrid,
   parameters: {
     styles,
@@ -213,7 +213,7 @@ const columnAlignmentControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
 };
-const columnAlignmentStoryName = 'With column alignment';
+const columnAlignmentStoryName = 'Column alignment';
 export const ColumnAlignmentStory = prepareStory(BasicTemplateWrapper, {
   storyName: columnAlignmentStoryName,
   argTypes: {

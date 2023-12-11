@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
+import { makeData } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
@@ -20,7 +20,6 @@ import {
   useDatagrid,
   useDisableSelectRows,
   useInfiniteScroll,
-  useRowIsMouseOver,
   useSelectAllWithToggle,
   useSelectRows,
   useSortableColumns,

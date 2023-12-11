@@ -78,7 +78,7 @@ const ResizeHeader = ({
       <input
         {...headerProps}
         // avoid unnecessary role assignment
-        {...(role === 'separator' ? {} : { role })}
+        {...(role === 'separator' && { role })}
         onMouseDown={mouseDownHandler}
         onKeyDown={keyDownHandler}
         onKeyUp={keyUpHandler}
@@ -153,7 +153,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     <TableRow
       {...headerGroupProps}
       // avoid unnecessary role assignment
-      {...(role === 'row' ? {} : { role })}
+      {...(role === 'row' && { role })}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
@@ -191,7 +191,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
               // avoid unnecessary role assignment
-              {...(role === 'columnheader' ? {} : { role })}
+              {...(role === 'columnheader' && { role })}
             >
               {header.render('Header')}
               {resizerProps && !header.isAction && (

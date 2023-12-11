@@ -139,7 +139,7 @@ const DatagridRow = (datagridState) => {
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
         // avoid unnecessary role assignment to rows
-        {...(role === 'row' ? {} : { role })}
+        {...(role === 'row' && { role })}
       >
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
@@ -163,7 +163,7 @@ const DatagridRow = (datagridState) => {
               {...restProps}
               key={cell.column.id}
               // avoid unnecessary role assignment to cells
-              {...(role === 'cell' ? {} : { role })}
+              {...(role === 'cell' && { role })}
             >
               {content}
             </TableCell>

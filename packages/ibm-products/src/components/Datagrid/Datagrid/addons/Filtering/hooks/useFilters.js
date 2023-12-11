@@ -99,6 +99,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
+    lastAppliedFilters.current = JSON.stringify([]);
   }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {

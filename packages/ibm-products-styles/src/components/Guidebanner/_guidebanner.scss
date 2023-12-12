@@ -246,3 +246,28 @@ $purple-3: #7433e3;
     fill: $purple-1;
   }
 }
+
+// Exception handling.
+// If "withLeftgutter", then:
+// - insert 1 rem of more "space" on the left.
+// - move icon 1 rem more to the right.
+.#{$block-class}__with-left-gutter .#{$block-class}__icon-idea {
+  left: $spacing-07;
+}
+.#{$block-class}__with-left-gutter .#{$block-class}__title {
+  padding-left: calc($horizontal-margin + $spacing-05);
+}
+.#{$block-class}__with-left-gutter .#{$block-class}__navigation {
+  padding-left: $spacing-05;
+}
+// Override Carousel settings
+// - insert 1 rem of more "space" on the left.
+.#{$block-class}__with-left-gutter
+  .#{c4p-settings.$pkg-prefix}--carousel__elements-container {
+  padding-left: $spacing-05;
+}
+// - expand "fade" to cover more of the left side of the carousel.
+.#{$block-class}__with-left-gutter
+  .#{c4p-settings.$pkg-prefix}--carousel__elements-container--scrolled {
+  width: $spacing-10;
+}

@@ -52,6 +52,7 @@ export default {
 
 const defaultProps = {
   onClose: () => action('onClose()')(),
+  withLeftGutter: false,
   title: 'Page-related heading that can stand on its own',
 };
 

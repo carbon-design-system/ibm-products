@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.18.0...@carbon/ibm-products-styles@2.18.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* **Checklist:** add carbon scss import files ([#3951](https://github.com/carbon-design-system/ibm-products/issues/3951)) ([4be8bc2](https://github.com/carbon-design-system/ibm-products/commit/4be8bc2aa03793036769bb22a00d2b39abcece1a))
+
+
+
+
+
 # [2.18.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.17.2...@carbon/ibm-products-styles@2.18.0) (2023-12-07)
 
 

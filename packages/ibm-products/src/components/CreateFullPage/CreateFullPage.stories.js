@@ -66,6 +66,9 @@ export default {
       options: Object.values(breadcrumbs).map((_k, i) => i),
       mapping: Object.values(breadcrumbs),
     },
+    children: {
+      control:  false,
+    },
   },
 };
 

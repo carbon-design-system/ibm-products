@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.62.1...@carbon/ibm-products@1.63.0) (2023-12-12)
+
+
+### Bug Fixes
+
+* update Carbon 10 compatible versions to latest ([#3845](https://github.com/carbon-design-system/ibm-products/issues/3845)) ([e837f27](https://github.com/carbon-design-system/ibm-products/commit/e837f275334c9ddc96726eb9cbcf56bf001a0e61))
+
+
+### Features
+
+* **FilterSummary:** enable filter summary clear button to be placed inline (v1) ([#3907](https://github.com/carbon-design-system/ibm-products/issues/3907)) ([69953ab](https://github.com/carbon-design-system/ibm-products/commit/69953ab94d8cd187f93e87ca34064734b51971a2))
+
+
+
+
+
 ## [1.62.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.62.0...@carbon/ibm-products@1.62.1) (2023-12-05)
 
 

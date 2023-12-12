@@ -22,7 +22,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}`,
+  title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
   parameters: {
     styles,

@@ -5,21 +5,39 @@ import {
 } from '../../global/js/utils/story-helper';
 import { InterstitialScreen } from '.';
 
+<Meta title="Interstitial Screen" component={InterstitialScreen} />
+
 # InterstitialScreen
 
 ## Table of Contents
 
 - [Overview](#overview)
+- [Expected Componsability](#expected-composability)
+- [About Novice to pro](#about-novice-to-pro)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
 
 ## Overview
 
-<!-- TODO: Overview. -->
+[Interstitial screen](https://pages.github.ibm.com/cdai-design/pal/components/onboarding/interstitial/usage)
+can be a full page or an overlay, and are shown on the first time a user
+accesses a new experience (e.g. upon first login or first time opening a page
+where a newly purchased capability is presented).
+
+## Expected Componsability
+
+Interstital Screen was designed to be used with N number of
+**InterstitialScreenView** children. As a convenience, a provided
+**InterstitialScreenViewModule** is also available, although not required as a
+child of InterstitialScreenView.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
 
 ## Example usage
-
-<!-- TODO: One example per designed use case. -->
 
 <Canvas>
   <Story
@@ -27,9 +45,30 @@ import { InterstitialScreen } from '.';
   />
 </Canvas>
 
-## Code sample
+## Interstitial Screen Code sample
 
-<!-- <CodesandboxLink exampleDirectory="InterstitialScreen" /> -->
+```jsx
+<InterstitialScreen
+  domainName="IBM"
+  hideProgressIndicator
+  isOpen
+  media={null}
+  nextButtonLabel="Next"
+  onClose={function noRefCheck() {}}
+  previousButtonLabel="Back"
+  productName="Product"
+  skipButtonLabel="Skip"
+  startButtonLabel="Get started"
+>
+  <InterstitialScreenView className="NoImageExampleModal" stepTitle="Step 1">
+    <InterstitialScreenViewModule
+      description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+      size="sm"
+      title="Use case-specific heading"
+    />
+  </InterstitialScreenView>
+</InterstitialScreen>
+```
 
 ## Component API
 

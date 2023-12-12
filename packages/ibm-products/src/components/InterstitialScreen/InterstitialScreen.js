@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { ArrowRight16 } from '@carbon/icons-react'; //Close16
 import {
   Button,
@@ -41,7 +41,6 @@ import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const headerBlockClass = `${blockClass}--internal-header`;
 const bodyBlockClass = `${blockClass}--internal-body`;
-const bcModalClass = `${carbon.prefix}--modal`;
 const componentName = 'InterstitialScreen';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -78,7 +77,7 @@ export let InterstitialScreen = React.forwardRef(
     {
       children,
       className,
-      // closeIconDescription = defaults.closeIconDescription,
+      closeIconDescription = defaults.closeIconDescription,
       domainName = defaults.domainName,
       hideProgressIndicator = defaults.hideProgressIndicator,
       isFullScreen = defaults.isFullScreen,
@@ -119,10 +118,11 @@ export let InterstitialScreen = React.forwardRef(
       md: 8,
       sm: 4,
     };
-    const variantClass = isFullScreen ? `full-screen` : `modal ${bcModalClass}`;
-    const containerClass = isFullScreen
-      ? cx(`${blockClass}--container`)
-      : cx(`${bcModalClass}-container`, `${blockClass}--container`);
+
+    const variantClass = isFullScreen
+      ? `${blockClass}--full-screen`
+      : `${blockClass}--modal`;
+
     const progStepFloor = 0;
     const progStepCeil = childArray.length - 1;
 
@@ -131,36 +131,26 @@ export let InterstitialScreen = React.forwardRef(
       onClose();
     }, [onClose]);
 
+    const scrollBodyToTop = () => {
+      bodyScrollRef.current.scroll({
+        top: 0,
+        behavior: 'smooth',
+      });
+    };
+
     const handleClickPrev = () => {
       const targetStep = clamp(progStep - 1, progStepFloor, progStepCeil);
       scrollRef.current.scrollToView(targetStep);
+      scrollBodyToTop();
       setProgStep(targetStep);
     };
 
     const handleClickNext = () => {
       const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
       scrollRef.current.scrollToView(targetStep);
+      scrollBodyToTop();
       setProgStep(targetStep);
     };
-    // useEffect(() => {
-    //   function updateScrollPosition(event) {
-    //     // update the scroll position
-    //     //event.stopPropagation();
-    //     //event.preventDefault();
-    //     console.log('SCROLLING... ', event);
-    //   }
-    //   const scrollDiv = bodyScrollRef.current;
-    //   if (scrollDiv) {
-    //     scrollDiv.addEventListener('wheel', updateScrollPosition, {
-    //       passive: false,
-    //     });
-    //     return () => {
-    //       scrollDiv.removeEventListener('wheel', updateScrollPosition, {
-    //         passive: false,
-    //       });
-    //     };
-    //   }
-    // }, []);
 
     useEffect(() => {
       startButtonRef.current?.focus();
@@ -200,6 +190,7 @@ export let InterstitialScreen = React.forwardRef(
             // variantClass,
             // isVisibleClass
           )}
+          size="lg"
           onClose={onClose}
           open={isOpen}
           ref={ref}
@@ -208,9 +199,10 @@ export let InterstitialScreen = React.forwardRef(
           <ModalHeader
             className={cx(
               headerBlockClass,
-              headerTitle && 'has-title',
+              headerTitle && `${headerBlockClass}--has-title`,
               headerClassName
             )}
+            iconDescription={closeIconDescription}
             buttonOnClick={handleClose}
           >
             {headerTitle && <h2>{headerTitle}</h2>}
@@ -248,7 +240,7 @@ export let InterstitialScreen = React.forwardRef(
           ref={ref}
           {...getDevtoolsProps(componentName)}
         >
-          <div className={containerClass}>
+          <div className={cx([{ [`${blockClass}--container`]: isFullScreen }])}>
             <div className={`${blockClass}--header`}>
               {domainName}
               {domainProductDelimiter}
@@ -258,7 +250,7 @@ export let InterstitialScreen = React.forwardRef(
             <header
               className={cx(
                 headerBlockClass,
-                headerTitle && 'has-title',
+                headerTitle && `${headerBlockClass}--has-title`,
                 headerClassName
               )}
             >
@@ -285,47 +277,6 @@ export let InterstitialScreen = React.forwardRef(
 
     const renderBody = () => {
       return (
-        // <div className={containerClass}>
-        //   {isFullScreen && (
-        //     <div className={`${blockClass}--header`}>
-        //       {domainName}
-        //       {domainProductDelimiter}
-        //       <strong>{productName}</strong>
-        //     </div>
-        //   )}
-        //   <header
-        //     className={cx(
-        //       headerBlockClass,
-        //       headerTitle && 'has-title',
-        //       headerClassName
-        //     )}
-        //   >
-        //     {headerTitle && <h2>{headerTitle}</h2>}
-        //     {!hideProgressIndicator && (
-        //       <div className={`${blockClass}--progress`}>
-        //         <ProgressIndicator vertical={false} currentIndex={progStep}>
-        //           {childArray.map((child, idx) => {
-        //             return (
-        //               <ProgressStep key={idx} label={child.props.stepTitle} />
-        //             );
-        //           })}
-        //         </ProgressIndicator>
-        //       </div>
-        //     )}
-
-        //     {!isFullScreen && (
-        //       <Button
-        //         className={`${blockClass}--close-icon`}
-        //         hasIconOnly
-        //         iconDescription={closeIconDescription}
-        //         kind="ghost"
-        //         renderIcon={Close16}
-        //         type="button"
-        //         size="lg"
-        //         onClick={handleClose}
-        //       />
-        //     )}
-        //   </header>
         <div className={cx(`${blockClass}--body`)} ref={bodyScrollRef}>
           {mediaIsDefined ? (
             <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
@@ -385,75 +336,6 @@ export let InterstitialScreen = React.forwardRef(
             </div>
           )}
         </div>
-
-        //   <div className={`${blockClass}--footer`}>
-        //     {/* <div> */}
-        //     {isMultiStep && skipButtonLabel !== '' && (
-        //       <Button
-        //         className={`${blockClass}--skip-btn`}
-        //         kind="ghost"
-        //         size="lg"
-        //         title={skipButtonLabel}
-        //         type="button"
-        //         onClick={handleClose}
-        //       >
-        //         {skipButtonLabel}
-        //       </Button>
-        //     )}
-        //     {/* </div> */}
-        //     <div className={`${blockClass}--footer-controls`}>
-        //       {isMultiStep && progStep > 0 && (
-        //         <Button
-        //           className={`${blockClass}--prev-btn`}
-        //           kind="secondary"
-        //           size="lg"
-        //           type="button"
-        //           title={previousButtonLabel}
-        //           onClick={handleClickPrev}
-        //         >
-        //           {previousButtonLabel}
-        //         </Button>
-        //       )}
-
-        //       {isMultiStep && progStep < progStepCeil && (
-        //         <Button
-        //           className={`${blockClass}--next-btn`}
-        //           renderIcon={ArrowRight16}
-        //           ref={nextButtonRef}
-        //           size="lg"
-        //           type="button"
-        //           title={nextButtonLabel}
-        //           onClick={handleClickNext}
-        //         >
-        //           {nextButtonLabel}
-        //         </Button>
-        //       )}
-        //       {isMultiStep && progStep === progStepCeil && (
-        //         <Button
-        //           className={`${blockClass}--start-btn`}
-        //           ref={startButtonRef}
-        //           renderIcon={ArrowRight16}
-        //           size="lg"
-        //           title={startButtonLabel}
-        //           onClick={handleClose}
-        //         >
-        //           {startButtonLabel}
-        //         </Button>
-        //       )}
-        //       {!isMultiStep && (
-        //         <Button
-        //           className={`${blockClass}--start-btn`}
-        //           ref={startButtonRef}
-        //           size="lg"
-        //           title={startButtonLabel}
-        //           onClick={handleClose}
-        //         >
-        //           {startButtonLabel}
-        //         </Button>
-        //       )}
-        //     </div>
-        //   </div>
-        // </div>
       );
     };
 
@@ -467,7 +349,6 @@ export let InterstitialScreen = React.forwardRef(
               kind="ghost"
               size="lg"
               title={skipButtonLabel}
-              type="button"
               onClick={handleClose}
             >
               {skipButtonLabel}
@@ -480,7 +361,6 @@ export let InterstitialScreen = React.forwardRef(
                 className={`${blockClass}--prev-btn`}
                 kind="secondary"
                 size="lg"
-                type="button"
                 title={previousButtonLabel}
                 onClick={handleClickPrev}
               >
@@ -494,7 +374,6 @@ export let InterstitialScreen = React.forwardRef(
                 renderIcon={ArrowRight16}
                 ref={nextButtonRef}
                 size="lg"
-                type="button"
                 title={nextButtonLabel}
                 onClick={handleClickNext}
               >

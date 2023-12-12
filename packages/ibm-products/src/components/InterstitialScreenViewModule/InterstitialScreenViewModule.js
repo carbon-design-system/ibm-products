@@ -33,13 +33,8 @@ const componentName = 'InterstitialScreenViewModule';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-// Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
-
 /**
- * TODO: A description of the component.
+ * View module to help in building interstitial screen views.
  */
 export let InterstitialScreenViewModule = React.forwardRef(
   (
@@ -62,12 +57,7 @@ export let InterstitialScreenViewModule = React.forwardRef(
         }
         className={cx(
           blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
+          className // Apply any supplied class names to the main HTML element.
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

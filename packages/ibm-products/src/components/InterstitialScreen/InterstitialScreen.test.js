@@ -23,152 +23,61 @@ const className = `Classname-${uuidv4()}`;
 const InterstitialScreenViewModuleTitle = `Title-${uuidv4()}`;
 const dataTestId = uuidv4();
 
+// render a CreateModal with title, subtitle, description, and any other required props
+const renderComponent = ({ ...rest } = {}) =>
+  render(
+    <InterstitialScreen
+      isOpen={true}
+      onClose={() => {
+        console.log('Closed');
+      }}
+      data-testid={dataTestId}
+      {...rest}
+    >
+      <InterstitialScreenView stepTitle="Step 1">
+        <InterstitialScreenViewModule
+          title={InterstitialScreenViewModuleTitle}
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+    </InterstitialScreen>
+  );
+
 describe(componentName, () => {
   it('renders a component InterstitialScreen', () => {
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    renderComponent();
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <InterstitialScreen
-        isOpen={true}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, () => {
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    renderComponent();
     screen.getByText(InterstitialScreenViewModuleTitle);
   });
 
   it('applies className to the containing node', () => {
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        className={className}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    renderComponent();
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        className={className}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    renderComponent();
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        className={className}
-        ref={ref}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
+    renderComponent({ ref: ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(
-      <InterstitialScreen
-        isOpen={true}
-        className={className}
-        onClose={() => {
-          console.log('Closed');
-        }}
-        data-testid={dataTestId}
-      >
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            title={InterstitialScreenViewModuleTitle}
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          />
-        </InterstitialScreenView>
-      </InterstitialScreen>
-    );
-
+    renderComponent();
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

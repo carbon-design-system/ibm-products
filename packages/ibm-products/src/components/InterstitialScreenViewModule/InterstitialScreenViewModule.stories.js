@@ -35,6 +35,10 @@ export default {
     className: {
       control: { type: 'text' },
     },
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
   },
   parameters: {
     styles,

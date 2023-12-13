@@ -82,8 +82,6 @@ export default {
         ],
       },
     },
-    //invalidInputText: { control: 'text', if: { arg: 'validExtensions', neq: 'none' } },
-    //preformattedExtensionsLabel: { control: 'text', if: { arg: 'preformattedExtensions', neq: 'none' } },
   },
 };
 

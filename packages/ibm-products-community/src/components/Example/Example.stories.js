@@ -1,7 +1,8 @@
-import Example from './Example';
+import { getStoryTitle } from '../../../../ibm-products/src/global/js/utils/story-helper';
+import { Example } from '.';
 
 export default {
-  title: 'Community/Example',
+  title: getStoryTitle(Example.displayName),
   component: Example,
   tags: ['autodocs'],
 };

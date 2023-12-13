@@ -26,8 +26,12 @@
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.6",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.39",
     "cross-env": "^7.0.3",
     "rimraf": "^5.0.1",
     "sass": "^1.64.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.10"
   }
 }

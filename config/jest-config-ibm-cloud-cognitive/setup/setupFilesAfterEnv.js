@@ -8,6 +8,7 @@
 // `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
 import '@testing-library/jest-dom';
+import { setupJestCanvasMock } from 'jest-canvas-mock';
 
 import chalk from 'chalk';
 import util from 'util';
@@ -45,6 +46,7 @@ const oldConsole = {};
 
   global.beforeEach(() => {
     unexpectedConsoleCallStacks.length = 0;
+    setupJestCanvasMock();
   });
 
   global.afterEach(() => {

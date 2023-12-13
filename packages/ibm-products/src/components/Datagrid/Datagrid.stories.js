@@ -7,7 +7,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
+import { makeData } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
@@ -20,7 +20,6 @@ import {
   useDatagrid,
   useDisableSelectRows,
   useInfiniteScroll,
-  useRowIsMouseOver,
   useSelectAllWithToggle,
   useSelectRows,
   useSortableColumns,
@@ -142,7 +141,6 @@ export const BasicUsage = () => {
   const datagridState = useDatagrid({
     columns,
     data: rows,
-    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
     onColResizeEnd: (currentColumn, allColumns) =>
       console.log(currentColumn, allColumns),
   });
@@ -254,7 +252,7 @@ export const InfiniteScroll = () => {
   );
 };
 
-export const TenThousandEntries = () => {
+export const WithVirtualizedData = () => {
   const [data] = useState(makeData(10000));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
@@ -268,7 +266,7 @@ export const TenThousandEntries = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const WithPagination = () => {
+export const Pagination = () => {
   const [data] = useState(makeData(100));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid({
@@ -280,37 +278,6 @@ export const WithPagination = () => {
     },
     DatagridPagination,
   });
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const IsHoverOnRow = () => {
-  const Cell = ({ row }) => {
-    if (row.isMouseOver) {
-      return 'yes hovering!';
-    }
-    return '';
-  };
-  const [data] = useState(makeData(10));
-  const columns = React.useMemo(
-    () => [
-      ...getColumns(data).slice(0, 3),
-      {
-        Header: 'Is hover on row?',
-        id: 'isHoveringColumn',
-        disableSortBy: true,
-        Cell,
-      },
-    ],
-    []
-  );
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useRowIsMouseOver
-  );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
@@ -330,6 +297,7 @@ export const SelectableRow = () => {
       emptyStateTitle,
       emptyStateDescription,
       onRowSelect: (row, event) => console.log(row, event),
+      batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,
     useStickyColumn
@@ -559,7 +527,6 @@ export const BatchActions = () => {
       rowActions: getRowActions(),
     },
     useSelectRows,
-    useSelectAllWithToggle,
     useActionsColumn,
     useStickyColumn
   );
@@ -579,42 +546,6 @@ export const DisableSelectRow = () => {
       endPlugins: [useDisableSelectRows],
       shouldDisableSelectRow: (row) => row.id % 2 === 0,
       disableSelectAll: true,
-    },
-    useSelectRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-const makeDataWithTwoLines = (length) =>
-  range(length).map(() => newPersonWithTwoLines());
-
-export const TopAlignment = () => {
-  const [data] = useState(makeDataWithTwoLines(10));
-  const columns = React.useMemo(() => getColumns(data).slice(0, 3), []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      verticalAlign: 'top',
-      variableRowHeight: true,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-        },
-        {
-          value: 'lg',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-        },
-      ],
-      DatagridActions,
-      DatagridBatchActions,
     },
     useSelectRows
   );

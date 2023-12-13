@@ -61,7 +61,7 @@ const useFilters = ({
   /** Methods */
   // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
   // there when they opened the flyout
-  const revertToPreviousFilters = () => {
+  const revertToPreviousFilters = useCallback(() => {
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
     setAllFilters(JSON.parse(lastAppliedFilters.current));
@@ -75,7 +75,7 @@ const useFilters = ({
     holdingPrevFiltersObjectArrayRef.current = JSON.parse(
       lastAppliedFilters.current
     );
-  };
+  }, [setAllFilters]);
 
   const reset = useCallback(() => {
     // When we reset we want the "initialFilters" to be an empty array
@@ -99,6 +99,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
+    lastAppliedFilters.current = JSON.stringify([]);
   }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
@@ -354,6 +355,7 @@ const useFilters = ({
    */
   useEffect(() => {
     if (!panelOpen && previousState?.panelOpen) {
+      revertToPreviousFilters();
       setAllFilters(holdingLastAppliedFiltersRef.current);
     }
     if (panelOpen && !previousState?.panelOpen) {
@@ -373,6 +375,7 @@ const useFilters = ({
     previousState?.panelOpen,
     reset,
     setAllFilters,
+    revertToPreviousFilters,
   ]);
 
   const cancel = () => {

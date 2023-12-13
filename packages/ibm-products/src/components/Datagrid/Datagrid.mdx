@@ -188,17 +188,20 @@ useDatagrid({
   data,
   onColResizeEnd: (currentColumn, allColumns) =>
     console.log(currentColumn, allColumns),
+  resizerAriaLabel: 'Resize column',
 });
 ```
 
 Disabling the resizable columns is possible by specifying
-`disableResizing: true` within the `useDatagrid` hook.
+`disableResizing: true` within the `useDatagrid` hook. To pass in your own
+translated label for the column resizer, add the `resizerAriaLabel` property.
 
 ```jsx
 useDatagrid({
   columns,
   data,
   disableResizing: true,
+  resizerAriaLabel: 'Resize column',
 });
 ```
 
@@ -792,6 +795,19 @@ const filters = [
 
 Filter panel coming soon.
 
+### Customizing the filter tag labels
+
+You can customize the rendering of the filter tag labels by supplying the
+`renderLabel` property to your `filterProps` as seen below. Otherwise it will
+default to `key: value`.
+
+```jsx
+filterProps: {
+  ...otherFilterProps,
+  renderLabel: (key, value) => myCustomTagLabelFormatter(key, value),
+},
+```
+
 ### Putting it all together
 
 ```jsx
@@ -1221,6 +1237,7 @@ const datagridState = useDatagrid(
     columns,
     data,
     onRowSelect: (row, event) => console.log(row, event),
+    batchActionMenuButtonLabel: 'More',
   },
   useSelectRows
 );

@@ -26,6 +26,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { getBatchActions } from '../../Datagrid.stories';
+import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Panel`,
@@ -179,6 +180,7 @@ export const filterProps = {
   onPanelOpen: action('onPanelOpen'),
   onPanelClose: action('onPanelClose'),
   panelTitle: 'Filter',
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   renderDateLabel: (start, end) => {
     const startDateObj = new Date(start);
     const endDateObj = new Date(end);
@@ -472,6 +474,7 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -666,6 +669,7 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -828,6 +832,7 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -990,6 +995,7 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });
@@ -1152,6 +1158,7 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
   },
 });

@@ -19,7 +19,6 @@ import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
@@ -27,13 +26,6 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
-  },
-  argTypes: {
-    featureFlags: {
-      table: {
-        disable: true,
-      },
-    },
   },
 };
 
@@ -151,15 +143,61 @@ const sharedDatagridProps = {
   ],
 };
 
+const nestedRowsControlProps = {
+  gridTitle: sharedDatagridProps.gridTitle,
+  gridDescription: sharedDatagridProps.gridDescription,
+  useDenseHeader: sharedDatagridProps.useDenseHeader,
+  rowSize: sharedDatagridProps.rowSize,
+  rowSizes: sharedDatagridProps.rowSizes,
+  onRowSizeChange: sharedDatagridProps.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+
+const SingleLevelNestedRows = ({ ...args }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10, 2));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      ...args.defaultGridProps,
+    },
+    useNestedRows
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+const SingleLevelNestedRowsWrapper = ({ ...args }) => {
+  return <SingleLevelNestedRows defaultGridProps={{ ...args }} />;
+};
+
+const singleNestedRowsStoryName = 'With single-level nested rows';
+export const SingleLevelNestedRowsUsageStory = prepareStory(
+  SingleLevelNestedRowsWrapper,
+  {
+    storyName: singleNestedRowsStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      rowSize: ARG_TYPES.rowSize,
+      rowSizes: ARG_TYPES.rowSizes,
+      onRowSizeChange: ARG_TYPES.onRowSizeChange,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
+    },
+    args: {
+      ...nestedRowsControlProps,
+    },
+  }
+);
+
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10, 5, 2, 2));
-
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useNestedRows` hook
-  pkg.feature['Datagrid.useNestedRows'] = true;
-  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -178,16 +216,6 @@ const BasicTemplateWrapper = ({ ...args }) => {
   return <NestedRows defaultGridProps={{ ...args }} />;
 };
 
-const nestedRowsControlProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
-  gridDescription: sharedDatagridProps.gridDescription,
-  useDenseHeader: sharedDatagridProps.useDenseHeader,
-  rowSize: sharedDatagridProps.rowSize,
-  rowSizes: sharedDatagridProps.rowSizes,
-  onRowSizeChange: sharedDatagridProps.onRowSizeChange,
-  expanderButtonTitleExpanded: 'Collapse row',
-  expanderButtonTitleCollapsed: 'Expand row',
-};
 const nestedRowsStoryName = 'With nested rows';
 export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
   storyName: nestedRowsStoryName,
@@ -203,6 +231,5 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...nestedRowsControlProps,
-    featureFlags: ['Datagrid.useNestedRows'],
   },
 });

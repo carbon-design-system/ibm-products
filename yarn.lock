@@ -2791,6 +2791,8 @@ __metadata:
     "@babel/cli": ^7.23.4
     "@babel/core": ^7.23.6
     cross-env: ^7.0.3
+    rimraf: ^5.0.1
+    sass: ^1.64.2
   peerDependencies:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1

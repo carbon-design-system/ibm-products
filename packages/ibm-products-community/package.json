@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-community",
   "description": "Carbon for IBM Products Community package",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,7 +10,8 @@
     "build-all": "run-p 'build:*'",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
-    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'"
+    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
+    "clean": "rimraf es lib css scss"
   },
   "peerDependencies": {
     "@carbon/grid": "^11.21.1",
@@ -25,6 +26,8 @@
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.6",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "rimraf": "^5.0.1",
+    "sass": "^1.64.2"
   }
 }

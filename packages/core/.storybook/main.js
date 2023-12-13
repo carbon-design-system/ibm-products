@@ -42,6 +42,7 @@ module.exports = {
 
   stories: [
     '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
+    '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
     '../+(docs|src)/**/*+(-story|.stories).*',
     '../../../examples/**/*+(-story|.stories).*',
   ],

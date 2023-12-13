@@ -47,12 +47,10 @@ const s = [
             n: 'Datagrid',
             s: [
               'c/Datagrid',
-              'c/Datagrid/Extensions/Header',
               'c/Datagrid/Extensions/RowHeightSettings',
               'c/Datagrid/Extensions/RowActionButtons',
               'c/Datagrid/Extensions/ExpandableRow',
               'c/Datagrid/Extensions/NestedRows',
-              'c/Datagrid/Extensions/ColumnAlignment',
               'c/Datagrid/Extensions/ClickableRow',
               'c/Datagrid/Extensions/InlineEdit',
               'c/Datagrid/Extensions/ColumnCustomization',

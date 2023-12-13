@@ -82,8 +82,8 @@ export default {
         ],
       },
     },
-    invalidInputText: { control: 'text', if: { arg: 'validExtensions', neq: 'none' } },
-    preformattedExtensionsLabel: { control: 'text', if: { arg: 'preformattedExtensions', neq: 'none' } },
+    //invalidInputText: { control: 'text', if: { arg: 'validExtensions', neq: 'none' } },
+    //preformattedExtensionsLabel: { control: 'text', if: { arg: 'preformattedExtensions', neq: 'none' } },
   },
 };
 
@@ -147,6 +147,11 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
 export const Standard = prepareStory(Template, {
   args: {
     ...defaultProps,
+    validExtensions: 0,
+    preformattedExtensions: 0,
+    invalidInputText: 'File must have valid extension .pdf',
+    body: '',
+    preformattedExtensionsLabel: 'Choose an export format',
     storyInitiallyOpen: true,
   },
 });
@@ -155,9 +160,11 @@ export const WithExtensionValidation = prepareStory(Template, {
   args: {
     ...defaultProps,
     validExtensions: 1,
+    preformattedExtensions: 0,
     filename: '',
     invalidInputText: 'File must have valid extension .pdf',
     body: 'File must be exported in a PDF format.',
+    preformattedExtensionsLabel: 'Choose an export format',
     storyInitiallyOpen: true,
   },
 });
@@ -166,7 +173,10 @@ export const WithPreformattedExtensions = prepareStory(Template, {
   args: {
     ...defaultProps,
     filename: 'test',
+    validExtensions: 0,
     preformattedExtensions: 1,
+    invalidInputText: 'File must have valid extension .pdf',
+    body: '',
     preformattedExtensionsLabel: 'Choose an export format',
     storyInitiallyOpen: true,
   },

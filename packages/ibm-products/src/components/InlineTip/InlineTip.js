@@ -59,7 +59,7 @@ export let InlineTip = React.forwardRef(
       onClose,
       tertiaryButtonLabel,
       title = defaults.title,
-      withLeftGutter,
+      withLeftGutter = defaults.withLeftGutter,
       ...rest
     },
     ref

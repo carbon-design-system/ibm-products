@@ -7,7 +7,7 @@
 
 // Package all scss files here for those that want them all bundled up.
 
-@use './_Canary/canary';
+@use './_Canary/index-with-carbon' as *;
 
 @use './APIKeyModal/index-with-carbon' as *;
 @use './AboutModal/index-with-carbon' as *;

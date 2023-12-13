@@ -2615,11 +2615,11 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.10
     "@carbon/grid": ^11.21.1
-    "@carbon/ibm-products-styles": ^2.17.2
+    "@carbon/ibm-products-styles": ^2.18.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
     "@carbon/react": ^1.44.0
-    "@carbon/storybook-addon-theme": ^2.0.5
+    "@carbon/storybook-addon-theme": ^2.0.6
     "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
     "@storybook/addon-actions": ^7.6.2
@@ -2660,7 +2660,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@^2.17.2, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@^2.18.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2692,7 +2692,7 @@ __metadata:
     "@babel/cli": ^7.22.10
     "@babel/core": ^7.22.10
     "@babel/runtime": ^7.22.10
-    "@carbon/ibm-products-styles": ^2.17.2
+    "@carbon/ibm-products-styles": ^2.18.1
     "@carbon/telemetry": ^0.1.0
     "@dnd-kit/core": ^6.0.8
     "@dnd-kit/sortable": ^7.0.2
@@ -2797,7 +2797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^2.0.5, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@^2.0.6, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:

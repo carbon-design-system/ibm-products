@@ -115,6 +115,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     background-color: $layer-01;
 
+    &:has(.#{$block-class}__navigation-back-button) {
+      padding-top: $spacing-07;
+    }
+
+    &:has(
+        .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+      ) {
+      padding-top: $spacing-08;
+    }
+
     /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       @include setDividerStyles();
@@ -129,8 +139,15 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       margin-bottom: 0;
     }
     &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
-      top: $spacing-09;
+      top: $spacing-07;
     }
+
+    &.#{$block-class}__on-detail-step
+      .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
+      ~ .#{$block-class}__collapsed-title-text {
+      top: $spacing-08;
+    }
+
     &.#{$block-class}__title-container-without-title {
       padding: 0;
     }
@@ -326,29 +343,30 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
-    position: relative;
+    position: fixed;
     z-index: 5;
-    top: calc(-1 * #{$spacing-03});
-    left: calc(-1 * #{$spacing-03});
+    top: 0;
+    left: 0;
   }
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
-    min-width: 2rem;
-    padding: 0;
-    color: $text-primary;
-  }
-
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
     display: flex;
+    width: $spacing-07;
+    height: $spacing-07;
     align-items: center;
     justify-content: center;
-    margin: $spacing-03;
-    margin-bottom: 0;
+    padding: 0;
+    color: $text-primary;
+
+    .#{c4p-settings.$carbon-prefix}--btn__icon {
+      margin: 0;
+    }
   }
 
-  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button
-    .#{c4p-settings.$carbon-prefix}--btn__icon {
-    margin: 0;
+  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__navigation-back-button,
+  .#{c4p-settings.$carbon-prefix}--btn--md.#{$block-class}__close-button {
+    width: $spacing-08;
+    height: $spacing-08;
   }
 
   .#{$block-class}__slug-and-close {

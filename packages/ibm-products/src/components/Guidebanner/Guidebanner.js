@@ -33,6 +33,7 @@ const componentName = 'Guidebanner';
 
 const defaults = {
   collapsible: false,
+  withLeftGutter: false,
   // Labels
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
@@ -52,6 +53,7 @@ export let Guidebanner = React.forwardRef(
       className,
       collapsible = defaults.collapsible,
       onClose,
+      withLeftGutter = defaults.withLeftGutter,
       // Labels
       closeIconDescription = defaults.closeIconDescription,
       collapseButtonLabel = defaults.collapseButtonLabel,
@@ -82,8 +84,9 @@ export let Guidebanner = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          [collapsible ? `${blockClass}__collapsible` : null],
-          [isCollapsed ? `${blockClass}__collapsible-collapsed` : null]
+          collapsible && `${blockClass}__collapsible`,
+          isCollapsed && `${blockClass}__collapsible-collapsed`,
+          withLeftGutter && `${blockClass}__with-left-gutter`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
@@ -267,4 +270,10 @@ Guidebanner.propTypes = {
    * Title text.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * If true, insert 1 rem of "space" on the left of the component.
+   * This will allow the component's content to line up with other
+   * content on the page under special circumstances.
+   */
+  withLeftGutter: PropTypes.bool,
 };

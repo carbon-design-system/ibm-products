@@ -67,7 +67,7 @@ export default {
       mapping: Object.values(breadcrumbs),
     },
     children: {
-      control:  false,
+      control: false,
     },
   },
 };

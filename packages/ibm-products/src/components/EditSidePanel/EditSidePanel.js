@@ -229,6 +229,11 @@ EditSidePanel.propTypes = {
   slideIn: PropTypes.bool,
 
   /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+
+  /**
    * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
    */
   subtitle: PropTypes.node,

@@ -68,6 +68,7 @@ export let Card = forwardRef(
       secondaryButtonKind = defaults.secondaryButtonKind,
       secondaryButtonPlacement = defaults.secondaryButtonPlacement,
       secondaryButtonText,
+      slug,
       title,
       titleSize = defaults.titleSize,
 
@@ -175,6 +176,8 @@ export let Card = forwardRef(
             [`${blockClass}__productive`]: productive,
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
+            [`${blockClass}--has-slug`]:
+              (clickable && slug === true) || typeof slug === 'object',
           },
           className
         ),
@@ -210,12 +213,14 @@ export let Card = forwardRef(
       primaryButtonDisabled,
       description,
       hasActions: hasActions,
+      inClickableCard: hasClickEvent,
       label,
       secondaryButtonDisabled,
       secondaryButtonHref,
       secondaryButtonIcon,
       secondaryButtonPlacement,
       secondaryButtonText,
+      slug,
       title,
       titleSize,
     });
@@ -327,6 +332,13 @@ Card.propTypes = {
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
+
+  /**
+   * **Experimental:** For all cases a `Slug` component can be provided.
+   * Clickable tiles only accept a boolean value of true and display a hollow slug.
+   */
+  slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

@@ -42,6 +42,9 @@ export let InlineTipButton = React.forwardRef(
   }
 );
 
+InlineTipButton = pkg.checkComponentEnabled(InlineTipButton, componentName);
+InlineTipButton.displayName = componentName;
+
 InlineTipButton.propTypes = {
   /**
    * Provide the contents of the InlineTipButton.

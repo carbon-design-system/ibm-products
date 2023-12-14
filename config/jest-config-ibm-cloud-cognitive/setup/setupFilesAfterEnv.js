@@ -8,6 +8,7 @@
 // `setupFilesAfterEnv` enables running the code immediately after the test framework has been installed in the environment - https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 
 import '@testing-library/jest-dom';
+import { setupJestCanvasMock } from 'jest-canvas-mock';
 
 import chalk from 'chalk';
 import util from 'util';
@@ -45,6 +46,18 @@ const oldConsole = {};
 
   global.beforeEach(() => {
     unexpectedConsoleCallStacks.length = 0;
+
+    // We use `lottie-web` to create complex, animated <svg> elements
+    // from json files. As of this update, only InlineTip (importing
+    // SteppedAnimatedMedia) needs to mock a canvas to pass a test.
+
+    // But, other unrelated components like PageHeader and ComboButton
+    // are failing tests and pointing to SteppedAnimatedMedia as the
+    // culprit. We haven't found the source of the issue, but adding
+    // setupJestCanvasMock() here seems to eliminate these errors.
+
+    // For more details, see also the comment in `InlineTip.test.js @ beforeEach()`.
+    setupJestCanvasMock();
   });
 
   global.afterEach(() => {

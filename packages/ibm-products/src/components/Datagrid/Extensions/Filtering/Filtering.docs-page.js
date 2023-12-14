@@ -280,6 +280,12 @@ const filters = [
           // Add any other Carbon RadioButton props here
         },
       ],
+      DefaultRadioButton: {
+        id: 'any__unique-id-for-any-radio-button',
+        labelText: 'Any',
+        value: 'Any',
+        // Add any other Carbon RadioButton props here
+      }
     },
   },
   {

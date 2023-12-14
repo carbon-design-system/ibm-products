@@ -11,7 +11,8 @@
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
-    "clean": "rimraf es lib css scss"
+    "clean": "rimraf es lib css scss",
+    "test": "jest --colors"
   },
   "peerDependencies": {
     "@carbon/grid": "^11.21.1",
@@ -28,6 +29,9 @@
     "@babel/core": "^7.23.6",
     "babel-preset-ibm-cloud-cognitive": "^0.14.39",
     "cross-env": "^7.0.3",
+    "jest": "^29.6.2",
+    "jest-config-ibm-cloud-cognitive": "^1.1.1",
+    "jest-environment-jsdom": "^29.6.2",
     "rimraf": "^5.0.1",
     "sass": "^1.64.2"
   },

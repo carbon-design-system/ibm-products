@@ -570,11 +570,13 @@ export let SidePanel = React.forwardRef(
     ]);
 
     const renderHeader = () => {
+      let slugCloseSize =
+        actions && actions.length && /l/.test(size) ? 'md' : 'sm';
       let normalizedSlug;
-      if (slug) {
+      if (slug && slug?.type?.displayName === 'Slug') {
         normalizedSlug = React.cloneElement(slug, {
           // slug size is sm unless actions and size > md
-          size: actions.length && /l/.test(size) ? 'md' : 'sm',
+          size: slugCloseSize,
         });
       }
 
@@ -598,7 +600,7 @@ export let SidePanel = React.forwardRef(
               <Button
                 aria-label={navigationBackIconDescription}
                 kind="ghost"
-                size="sm"
+                size={slugCloseSize}
                 disabled={false}
                 renderIcon={(props) => <ArrowLeft size={20} {...props} />}
                 iconDescription={navigationBackIconDescription}
@@ -617,7 +619,7 @@ export let SidePanel = React.forwardRef(
             <Button
               aria-label={closeIconDescription}
               kind="ghost"
-              size="sm"
+              size={slugCloseSize}
               renderIcon={(props) => <Close size={20} {...props} />}
               iconDescription={closeIconDescription}
               className={`${blockClass}__close-button`}
@@ -958,7 +960,7 @@ SidePanel.propTypes = {
   slideIn: PropTypes.bool,
 
   /**
-   * Provide a `Slug` component to be rendered inside the `SidePanel` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
    */
   slug: PropTypes.node,
 

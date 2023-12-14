@@ -31,7 +31,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    layout: 'padded',
+    layout: 'fullscreen',
     docs: {
       page: DocsPage,
     },

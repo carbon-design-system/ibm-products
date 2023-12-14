@@ -2432,6 +2432,12 @@ p.c4p--about-modal__copyright-text:first-child {
   background-color: var(--cds-layer-01, #f4f4f4);
   /* stylelint-disable-next-line max-nesting-depth */
 }
+.c4p--side-panel__container .c4p--side-panel__title-container:has(.c4p--side-panel__navigation-back-button) {
+  padding-top: 2rem;
+}
+.c4p--side-panel__container .c4p--side-panel__title-container:has(.c4p--side-panel__navigation-back-button.cds--btn--md) {
+  padding-top: 2.5rem;
+}
 .c4p--side-panel__container .c4p--side-panel__title-container::before {
   position: absolute;
   bottom: 0;
@@ -2452,7 +2458,10 @@ p.c4p--about-modal__copyright-text:first-child {
   margin-bottom: 0;
 }
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__on-detail-step .c4p--side-panel__collapsed-title-text {
-  top: 3rem;
+  top: 2rem;
+}
+.c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__on-detail-step .c4p--side-panel__navigation-back-button.cds--btn--md ~ .c4p--side-panel__collapsed-title-text {
+  top: 2.5rem;
 }
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container-without-title {
   padding: 0;
@@ -2605,26 +2614,29 @@ p.c4p--about-modal__copyright-text:first-child {
   margin-right: 0.5rem;
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__navigation-back-button {
-  position: relative;
+  position: fixed;
   z-index: 5;
-  top: calc(-1 * 0.5rem);
-  left: calc(-1 * 0.5rem);
+  top: 0;
+  left: 0;
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__navigation-back-button,
 .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button {
-  min-width: 2rem;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   color: var(--cds-text-primary, #161616);
 }
-.c4p--side-panel__container .cds--btn.c4p--side-panel__close-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.5rem;
-  margin-bottom: 0;
-}
+.c4p--side-panel__container .cds--btn.c4p--side-panel__navigation-back-button .cds--btn__icon,
 .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button .cds--btn__icon {
   margin: 0;
+}
+.c4p--side-panel__container .cds--btn--md.c4p--side-panel__navigation-back-button,
+.c4p--side-panel__container .cds--btn--md.c4p--side-panel__close-button {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 .c4p--side-panel__container .c4p--side-panel__slug-and-close {
   position: fixed;

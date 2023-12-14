@@ -32,10 +32,14 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   beforeEach(() => {
-    // We use the lottie package to create animated <svg> elements from json files.
-    // Lottie uses the browser > DOM > <canvas> to do this.
-    // The testing environment uses `jsdom` instead, and <canvas> is not available.
+    // InlineTip imports SteppedAnimatedMedia, which imports the `lottie-web` package.
+    // We use `lottie-web` to create complex, animated <svg> elements from json files.
+
+    // Lottie uses the browser > DOM > <canvas> to do this, but the test
+    // environment uses `jsdom` instead, and <canvas> is not available.
     // So, we need to use jest-canvas-mock to mock the <canvas>.
+
+    // See also setupFilesAfterEnv.js
     setupJestCanvasMock();
   });
 

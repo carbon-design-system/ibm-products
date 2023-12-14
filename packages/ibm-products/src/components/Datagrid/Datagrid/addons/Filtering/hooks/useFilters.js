@@ -37,11 +37,13 @@ const useFilters = ({
   reactTableFiltersState,
   onCancel = () => {},
   panelOpen,
+  isFetching,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
     getInitialStateFromFilters(filters, variation, reactTableFiltersState)
   );
+  const [fetchingReset, setFetchingReset] = useState(false);
 
   const [filtersObjectArray, setFiltersObjectArray] = useState(
     reactTableFiltersState
@@ -99,6 +101,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
+    lastAppliedFilters.current = JSON.stringify([]);
   }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
@@ -384,6 +387,20 @@ const useFilters = ({
     setAllFilters,
     revertToPreviousFilters,
   ]);
+
+  // Re-applies filters if the Datagrid goes into a fetching state while panel is open
+  // and has had filters changed without applying
+  useEffect(() => {
+    if (isFetching && !fetchingReset) {
+      setFiltersState(JSON.parse(prevFiltersRef.current));
+      setFiltersObjectArray(JSON.parse(prevFiltersRef.current));
+      setAllFilters(JSON.parse(prevFiltersObjectArrayRef.current));
+      setFetchingReset(true);
+    }
+    if (!isFetching) {
+      setFetchingReset(false);
+    }
+  }, [isFetching, reactTableFiltersState, setAllFilters, fetchingReset]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

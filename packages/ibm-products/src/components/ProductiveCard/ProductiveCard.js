@@ -149,7 +149,8 @@ ProductiveCard.propTypes = {
    */
   secondaryButtonText: PropTypes.node,
   /**
-   * **Experimental:** For all cases a `Slug` component can be provided, alternatively a can be supplied for clickable tiles.
+   * **Experimental:** For all cases a `Slug` component can be provided.
+   * Clickable tiles only accept a boolean value of true and display a hollow slug.
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   /**

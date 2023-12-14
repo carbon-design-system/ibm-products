@@ -80,7 +80,7 @@ docs: {
         labels: {
           0: 'No AI slug',
           1: 'with AI Slug',
-          2: 'Boolean true',
+          2: 'with hollow slug (boolean)',
         },
         default: 0,
       },

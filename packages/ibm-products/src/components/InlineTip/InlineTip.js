@@ -45,6 +45,7 @@ const defaults = {
   collapseButtonLabel: 'Read less',
   expandButtonLabel: 'Read more',
   narrow: false,
+  withLeftGutter: false,
   onClick: () => {},
   onClose: () => {},
 };
@@ -55,24 +56,20 @@ const defaults = {
 export let InlineTip = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
+      action,
+      children,
       className,
-      /* TODO: add other props for InlineTip, with default values if needed */
-
       closeIconDescription = defaults.closeIconDescription,
       collapsible = defaults.collapsible,
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
+      media,
       narrow = defaults.narrow,
       onClick,
       onClose,
       tertiaryButtonLabel,
-      action,
       title = defaults.title,
-      media,
-
+      withLeftGutter = defaults.withLeftGutter,
       // Collect any other property values passed in.
       ...rest
     },
@@ -108,10 +105,11 @@ export let InlineTip = React.forwardRef(
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
-          [collapsible ? `${blockClass}__collapsible` : null],
-          [isCollapsed ? `${blockClass}__collapsible-collapsed` : null],
+          collapsible && `${blockClass}__collapsible`,
+          isCollapsed && `${blockClass}__collapsible-collapsed`,
+          media && `${blockClass}__has-media`,
           [narrow ? `${blockClass}__narrow` : `${blockClass}__wide`],
-          [media ? `${blockClass}__has-media` : null]
+          withLeftGutter && !narrow && `${blockClass}__with-left-gutter`
         )}
         ref={ref}
         role="complementary"
@@ -271,4 +269,12 @@ InlineTip.propTypes = {
    * The title of the InlineTip.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * If true, insert 1 rem of "space" on the left of the component.
+   * This will allow the component's content to line up with other
+   * content on the page under special circumstances.
+   *
+   * This will only be applied when `narrow` is false.
+   */
+  withLeftGutter: PropTypes.bool,
 };

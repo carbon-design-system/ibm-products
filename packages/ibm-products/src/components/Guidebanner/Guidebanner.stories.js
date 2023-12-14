@@ -31,7 +31,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    layout: 'padded',
+    layout: 'fullscreen',
     docs: {
       page: DocsPage,
     },
@@ -53,6 +53,7 @@ export default {
 const defaultProps = {
   onClose: () => action('onClose()')(),
   title: 'Page-related heading that can stand on its own',
+  withLeftGutter: false,
 };
 
 const DefaultButtonLarge = () => (

@@ -46,6 +46,17 @@ const oldConsole = {};
 
   global.beforeEach(() => {
     unexpectedConsoleCallStacks.length = 0;
+
+    // We use `lottie-web` to create complex, animated <svg> elements
+    // from json files. As of this update, only InlineTip (importing
+    // SteppedAnimatedMedia) needs to mock a canvas to pass a test.
+
+    // But, other unrelated components like PageHeader and ComboButton
+    // are failing tests and pointing to SteppedAnimatedMedia as the
+    // culprit. We haven't found the source of the issue, but adding
+    // setupJestCanvasMock() here seems to eliminate these errors.
+
+    // For more details, see also the comment in `InlineTip.test.js @ beforeEach()`.
     setupJestCanvasMock();
   });
 

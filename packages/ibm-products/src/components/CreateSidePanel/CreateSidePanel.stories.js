@@ -17,6 +17,8 @@ import {
   HeaderContainer,
   HeaderName,
   usePrefix,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
@@ -34,6 +36,26 @@ import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
 const prefix = 'create-side-panel-stories__';
+
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
 
 const defaultStoryProps = {
   title: 'Create partitions',
@@ -69,10 +91,23 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
+  },
   decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
 };
 
-const DefaultTemplate = ({ ...args }) => {
+const DefaultTemplate = ({ slug, ...args }) => {
   const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   return (
@@ -91,6 +126,7 @@ const DefaultTemplate = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
+        slug={slug && sampleSlug}
       >
         <TextInput
           id="create-side-panel-topic-name-a"
@@ -165,7 +201,7 @@ const DefaultTemplate = ({ ...args }) => {
   );
 };
 
-const TemplateWithFormValidation = ({ ...args }) => {
+const TemplateWithFormValidation = ({ slug, ...args }) => {
   const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
@@ -187,6 +223,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
         selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
+        slug={slug && sampleSlug}
       >
         <TextInput
           id="create-side-panel-topic-name-b"
@@ -263,7 +300,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
   );
 };
 
-const TemplateWithMultipleForms = ({ ...args }) => {
+const TemplateWithMultipleForms = ({ slug, ...args }) => {
   const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
@@ -285,6 +322,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
         selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
+        slug={slug && sampleSlug}
       >
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}

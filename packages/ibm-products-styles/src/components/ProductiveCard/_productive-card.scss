@@ -16,10 +16,6 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__productive {
-  .#{$block-class}__header {
-    padding-right: 0;
-  }
-
   .#{$block-class}__title {
     @include type.type-style('heading-compact-02');
   }
@@ -49,7 +45,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
   .#{$block-class}__actions-header {
     margin-top: calc(-1 * #{$spacing-02});
-    margin-right: $spacing-03;
   }
 
   .#{$block-class}__actions-header-ghost-button {

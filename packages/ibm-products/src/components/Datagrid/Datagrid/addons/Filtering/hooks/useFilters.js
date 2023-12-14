@@ -71,11 +71,13 @@ const useFilters = ({
   onCancel = () => {},
   panelOpen,
   autoHideFilters,
+  isFetching,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
     getInitialStateFromFilters(filters, variation, reactTableFiltersState)
   );
+  const [fetchingReset, setFetchingReset] = useState(false);
 
   const [filtersObjectArray, setFiltersObjectArray] = useState(
     reactTableFiltersState
@@ -133,6 +135,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
+    lastAppliedFilters.current = JSON.stringify([]);
   }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
@@ -321,41 +324,49 @@ const useFilters = ({
         filter = renderCheckboxes();
         break;
       case RADIO:
-        filter = (
-          <FormGroup {...components.FormGroup}>
-            <RadioButtonGroup
-              {...components.RadioButtonGroup}
-              valueSelected={
-                filtersState[column]?.value === ''
-                  ? 'Any'
-                  : filtersState[column]?.value
-              }
-              onChange={(selected) => {
-                setFiltersState({
-                  ...filtersState,
-                  [column]: {
+        {
+          const { name } = { ...components.RadioButtonGroup };
+          filter = (
+            <FormGroup {...components.FormGroup}>
+              <RadioButtonGroup
+                {...components.RadioButtonGroup}
+                valueSelected={
+                  filtersState[column]?.value === ''
+                    ? components.DefaultRadioButton?.value ?? 'Any'
+                    : filtersState[column]?.value
+                }
+                onChange={(selected) => {
+                  setFiltersState({
+                    ...filtersState,
+                    [column]: {
+                      value: selected,
+                      type,
+                    },
+                  });
+                  applyFilters({
+                    column,
                     value: selected,
                     type,
-                  },
-                });
-                applyFilters({
-                  column,
-                  value: selected,
-                  type,
-                });
-                components.RadioButtonGroup.onChange?.(selected);
-              }}
-            >
-              <RadioButton id="any" labelText="Any" value="Any" />
-              {components.RadioButton.map((radio) => (
+                  });
+                  components.RadioButtonGroup.onChange?.(selected);
+                }}
+              >
                 <RadioButton
-                  key={radio.id ?? radio.labelText ?? radio.value}
-                  {...radio}
+                  id={components?.DefaultRadioButton?.id ?? `any__${name}`}
+                  labelText={components?.DefaultRadioButton?.labelText ?? 'Any'}
+                  value={components?.DefaultRadioButton?.value ?? 'Any'}
+                  {...components.DefaultRadioButton}
                 />
-              ))}
-            </RadioButtonGroup>
-          </FormGroup>
-        );
+                {components.RadioButton.map((radio) => (
+                  <RadioButton
+                    key={radio.id ?? radio.labelText ?? radio.value}
+                    {...radio}
+                  />
+                ))}
+              </RadioButtonGroup>
+            </FormGroup>
+          );
+        }
         break;
       case DROPDOWN:
         filter = (
@@ -424,6 +435,20 @@ const useFilters = ({
     setAllFilters,
     revertToPreviousFilters,
   ]);
+
+  // Re-applies filters if the Datagrid goes into a fetching state while panel is open
+  // and has had filters changed without applying
+  useEffect(() => {
+    if (isFetching && !fetchingReset) {
+      setFiltersState(JSON.parse(prevFiltersRef.current));
+      setFiltersObjectArray(JSON.parse(prevFiltersRef.current));
+      setAllFilters(JSON.parse(prevFiltersObjectArrayRef.current));
+      setFetchingReset(true);
+    }
+    if (!isFetching) {
+      setFetchingReset(false);
+    }
+  }, [isFetching, reactTableFiltersState, setAllFilters, fetchingReset]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

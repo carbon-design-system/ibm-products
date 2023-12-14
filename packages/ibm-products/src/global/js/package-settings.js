@@ -78,6 +78,8 @@ const defaults = {
     GuidebannerElementButton: false,
     GuidebannerElementLink: false,
     InlineTip: false,
+    InlineTipButton: false,
+    InlineTipLink: false,
     NonLinearReading: false,
   },
 

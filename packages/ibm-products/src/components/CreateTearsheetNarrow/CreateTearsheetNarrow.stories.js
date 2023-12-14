@@ -29,6 +29,9 @@ export default {
   title: getStoryTitle(CreateTearsheetNarrow.displayName),
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
+  argTypes: {
+    children: { control: { disable: true } },
+  },
   parameters: {
     styles,
     docs: {

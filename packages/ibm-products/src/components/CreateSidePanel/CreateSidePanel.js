@@ -185,6 +185,12 @@ CreateSidePanel.propTypes = {
    * Specifies which DOM element in the form should be focused.
    */
   selectorPrimaryFocus: PropTypes.node.isRequired,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+
   /**
    * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
    */

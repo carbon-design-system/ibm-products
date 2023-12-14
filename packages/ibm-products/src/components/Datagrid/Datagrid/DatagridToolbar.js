@@ -188,7 +188,7 @@ const DatagridToolbar = (datagridState) => {
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
@@ -196,7 +196,7 @@ const DatagridToolbar = (datagridState) => {
   ) : DatagridActions ? (
     <div className={blockClass}>
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>

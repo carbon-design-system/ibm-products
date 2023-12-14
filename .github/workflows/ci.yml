@@ -72,6 +72,25 @@ jobs:
         run: yarn
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p
+  test-community:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/gallium
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: test-community-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn
+      - name: CI tests for community
+        run: yarn ci-check:test:community
 
   check_gallery:
     runs-on: ubuntu-latest

@@ -181,7 +181,7 @@ const DatagridToolbar = (datagridState) => {
       className={cx([toolbarClass, `${toolbarClass}--${getRowHeight}`])}
     >
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
@@ -189,7 +189,7 @@ const DatagridToolbar = (datagridState) => {
   ) : DatagridActions ? (
     <div className={toolbarClass}>
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>

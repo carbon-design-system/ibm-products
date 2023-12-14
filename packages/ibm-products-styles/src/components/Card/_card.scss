@@ -128,19 +128,35 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   padding-left: $spacing-05;
 }
 
+.#{$block-class}__header-container--has-actions {
+  padding-right: $spacing-03;
+}
+
 // +++ adjustments for slug
+.#{$block-class} {
+  position: relative;
+}
+
+.#{$block-class}__media + .#{$block-class}__content-container {
+  /* display relative to container when media displayed */
+  position: relative;
+}
+
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
   @include utilities.callout-gradient();
 
   position: absolute;
-  top: 0;
+  top: $spacing-05;
   right: $spacing-05;
 }
 
 .#{$block-class}__header-container--has-slug {
-  position: relative;
   width: 100%;
   padding-right: $spacing-07;
+}
+
+.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions {
+  padding-right: $spacing-08;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label {

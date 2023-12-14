@@ -176,7 +176,8 @@ export let Card = forwardRef(
             [`${blockClass}__productive`]: productive,
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
-            [`${blockClass}--has-slug`]: slug,
+            [`${blockClass}--has-slug`]:
+              (clickable && slug === true) || typeof slug === 'object',
           },
           className
         ),

@@ -75,7 +75,8 @@ export let CardHeader = ({
       normalizedSlug = hollowSlugIcon;
     } else if (typeof slug !== 'boolean') {
       normalizedSlug = React.cloneElement(slug, {
-        size: label || titleSize === 'large' ? 'sm' : 'xs',
+        size:
+          (label && title) || (title && titleSize === 'large') ? 'sm' : 'xs',
       });
     }
   }
@@ -86,6 +87,7 @@ export let CardHeader = ({
         className={cx([
           `${headerClass}-container`,
           { [`${headerClass}-container--has-slug`]: !!slug },
+          { [`${headerClass}-container--has-actions`]: !!hasActions },
           {
             [`${headerClass}-container--large-tile-or-label`]:
               title && (label || titleSize === 'large'),

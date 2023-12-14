@@ -39,7 +39,7 @@ describe(componentName, () => {
     // environment uses `jsdom` instead, and <canvas> is not available.
     // So, we need to use jest-canvas-mock to mock the <canvas>.
 
-    // See also setupFilesAfterEnv.js
+    // See also the comment in `setupFilesAfterEnv.js @ beforeEach()`.
     setupJestCanvasMock();
   });
 

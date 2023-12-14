@@ -27,6 +27,7 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
+    children: { control: { disable: true } },
   },
   parameters: {
     styles,

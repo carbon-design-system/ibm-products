@@ -7,29 +7,22 @@
  */
 
 import React, { useState } from 'react';
-import { TooltipIcon } from 'carbon-components-react';
 import { Edit16, TrashCan16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import {
-  Datagrid,
-  useDatagrid,
-  useColumnRightAlign,
-  useColumnCenterAlign,
-} from '../../index';
+import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
-import { StatusIcon } from '../../../StatusIcon';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
+  title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
   parameters: {
     styles,
@@ -55,41 +48,12 @@ const defaultHeader = [
   {
     Header: 'Age',
     accessor: 'age',
-    width: 120,
+    width: 50,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
-    width: 120,
-  },
-  {
-    Header: 'Bonus',
-    accessor: 'bonus',
-    width: 120,
-    rightAlignedColumn: true,
-  },
-  {
-    Header: 'Password strength',
-    accessor: 'passwordStrength',
-    width: 160,
-    centerAlignedColumn: true,
-    Cell: ({ cell: { value } }) => {
-      const iconProps = {
-        size: 'sm',
-        theme: 'light',
-        kind: value,
-        iconDescription: value,
-      };
-
-      return (
-        <TooltipIcon
-          tooltipText={iconProps.iconDescription}
-          onClick={action('onClick')}
-          renderIcon={() => <StatusIcon {...iconProps} />}
-          direction="top"
-        />
-      );
-    },
+    width: 60,
   },
   {
     Header: 'Someone 1',
@@ -178,49 +142,56 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
-  expandedContentHeight: 96,
 };
 
-const ColumnAlignment = ({ ...args }) => {
-  const columns = React.useMemo(() => [...defaultHeader], []);
+const BasicUsage = ({ ...args }) => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true,
+      },
+    ],
+    []
+  );
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data: rows,
-      initialState: {
-        pageSize: 10,
-        pageSizes: [5, 10, 25, 50],
-      },
-      DatagridActions,
-      DatagridPagination,
-      ...args.defaultGridProps,
+  const datagridState = useDatagrid({
+    columns,
+    data: rows,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
     },
-    useColumnCenterAlign,
-    useColumnRightAlign
-  );
+    DatagridActions,
+    DatagridPagination,
+    ...args.defaultGridProps,
+  });
 
   return <Datagrid datagridState={datagridState} />;
 };
 
 const BasicTemplateWrapper = ({ ...args }) => {
-  return <ColumnAlignment defaultGridProps={{ ...args }} />;
+  return <BasicUsage defaultGridProps={{ ...args }} />;
 };
 
-const columnAlignmentControlProps = {
+const basicUsageControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
+  useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
-const columnAlignmentStoryName = 'With column alignment';
-export const ColumnAlignmentStory = prepareStory(BasicTemplateWrapper, {
-  storyName: columnAlignmentStoryName,
+const basicUsageStoryName = 'Header';
+export const HeaderBasicUsageStory = prepareStory(BasicTemplateWrapper, {
+  storyName: basicUsageStoryName,
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
   },
   args: {
-    ...columnAlignmentControlProps,
+    ...basicUsageControlProps,
   },
 });

@@ -322,41 +322,49 @@ const useFilters = ({
         filter = renderCheckboxes();
         break;
       case RADIO:
-        filter = (
-          <FormGroup {...components.FormGroup}>
-            <RadioButtonGroup
-              {...components.RadioButtonGroup}
-              valueSelected={
-                filtersState[column]?.value === ''
-                  ? 'Any'
-                  : filtersState[column]?.value
-              }
-              onChange={(selected) => {
-                setFiltersState({
-                  ...filtersState,
-                  [column]: {
+        {
+          const { name } = { ...components.RadioButtonGroup };
+          filter = (
+            <FormGroup {...components.FormGroup}>
+              <RadioButtonGroup
+                {...components.RadioButtonGroup}
+                valueSelected={
+                  filtersState[column]?.value === ''
+                    ? components.DefaultRadioButton?.value ?? 'Any'
+                    : filtersState[column]?.value
+                }
+                onChange={(selected) => {
+                  setFiltersState({
+                    ...filtersState,
+                    [column]: {
+                      value: selected,
+                      type,
+                    },
+                  });
+                  applyFilters({
+                    column,
                     value: selected,
                     type,
-                  },
-                });
-                applyFilters({
-                  column,
-                  value: selected,
-                  type,
-                });
-                components.RadioButtonGroup.onChange?.(selected);
-              }}
-            >
-              <RadioButton id="any" labelText="Any" value="Any" />
-              {components.RadioButton.map((radio) => (
+                  });
+                  components.RadioButtonGroup.onChange?.(selected);
+                }}
+              >
                 <RadioButton
-                  key={radio.id ?? radio.labelText ?? radio.value}
-                  {...radio}
+                  id={components?.DefaultRadioButton?.id ?? `any__${name}`}
+                  labelText={components?.DefaultRadioButton?.labelText ?? 'Any'}
+                  value={components?.DefaultRadioButton?.value ?? 'Any'}
+                  {...components.DefaultRadioButton}
                 />
-              ))}
-            </RadioButtonGroup>
-          </FormGroup>
-        );
+                {components.RadioButton.map((radio) => (
+                  <RadioButton
+                    key={radio.id ?? radio.labelText ?? radio.value}
+                    {...radio}
+                  />
+                ))}
+              </RadioButtonGroup>
+            </FormGroup>
+          );
+        }
         break;
       case DROPDOWN:
         filter = (

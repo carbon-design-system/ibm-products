@@ -32,7 +32,7 @@ export default {
   component: Guidebanner,
   parameters: {
     styles,
-    layout: 'padded',
+    layout: 'fullscreen',
     docs: {
       page: mdx,
     },
@@ -54,6 +54,7 @@ export default {
 const defaultProps = {
   onClose: () => alert('Clicked the button.'),
   title: 'Page-related heading that can stand on its own',
+  withLeftGutter: false,
 };
 
 const DefaultButtonLarge = () => (

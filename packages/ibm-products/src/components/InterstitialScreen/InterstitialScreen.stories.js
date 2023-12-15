@@ -44,7 +44,7 @@ export default {
 
 const getSelectedMedia = (media) => {
   switch (media) {
-    case 'Render a static image':
+    case 'With a static image':
       return {
         render: () => (
           <div
@@ -57,7 +57,7 @@ const getSelectedMedia = (media) => {
         ),
         breakpoints: { xlg: 8, lg: 8 },
       };
-    case 'Render an animation':
+    case 'With an animation':
       return {
         filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
         breakpoints: { xlg: 8, lg: 8 },
@@ -260,7 +260,7 @@ const defaultProps = {
 
 const defaultPropsImage = {
   ...defaultProps,
-  media: 'Render a static image',
+  media: 'With a static image',
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

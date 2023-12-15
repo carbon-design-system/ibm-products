@@ -32,7 +32,7 @@ const renderComponent = ({ ...rest } = {}) =>
         console.log('Closed');
       }}
       data-testid={dataTestId}
-      {...rest}
+      {...{ ...rest }}
     >
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
@@ -44,40 +44,130 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component InterstitialScreen', () => {
-    renderComponent();
+  it('renders a component InterstitialScreen (Modal)', () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+  it('renders a component InterstitialScreen (Full Screen)', () => {
+    renderComponent({
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  it(`renders children`, () => {
-    renderComponent();
+  it('has no accessibility violations (Modal)', async () => {
+    const { container } = renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    await expect(() => container.toBeAccessible());
+    await expect(() => container.toHaveNoAxeViolations());
+  });
+
+  it('has no accessibility violations (Full Screen)', async () => {
+    const { container } = renderComponent({
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    await expect(() => container.toBeAccessible());
+    await expect(() => container.toHaveNoAxeViolations());
+  });
+
+  it(`renders children (Modal)`, () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
     screen.getByText(InterstitialScreenViewModuleTitle);
   });
 
-  it('applies className to the containing node', () => {
-    renderComponent();
+  it(`renders children (Full Screen)`, () => {
+    renderComponent({
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    screen.getByText(InterstitialScreenViewModuleTitle);
+  });
+
+  it('applies className to the containing node (Modal)', () => {
+    renderComponent({
+      className: className,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    renderComponent();
+  it('applies className to the containing node (Full Screen)', () => {
+    renderComponent({
+      className: className,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
+  });
+
+  it('adds additional props to the containing node (Modal)', () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    renderComponent({ ref: ref });
-    expect(ref.current).toHaveClass(blockClass);
+  it('adds additional props to the containing node (Full Screen)', () => {
+    renderComponent({
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    screen.getByTestId(dataTestId);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    renderComponent();
+  it('forwards a ref to an appropriate node (Modal)', () => {
+    const tmpRef = React.createRef();
+    renderComponent({
+      ref: tmpRef,
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    expect(tmpRef.current).toHaveClass(blockClass);
+  });
+
+  it('forwards a ref to an appropriate node (Full Screen)', () => {
+    const tmpRef = React.createRef();
+    renderComponent({
+      ref: tmpRef,
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
+    expect(tmpRef.current).toHaveClass(blockClass);
+  });
+
+  it('adds the Devtools attribute to the containing node (Modal)', () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
+    );
+  });
+
+  it('adds the Devtools attribute to the containing node (Full Screen)', () => {
+    renderComponent({
+      className: blockClass,
+      isFullScreen: true,
+      interstitialAriaLabel: 'Full Screen Interstitial Screen',
+    });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

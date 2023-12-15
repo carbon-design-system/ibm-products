@@ -80,6 +80,7 @@ export let InterstitialScreen = React.forwardRef(
       closeIconDescription = defaults.closeIconDescription,
       domainName = defaults.domainName,
       hideProgressIndicator = defaults.hideProgressIndicator,
+      interstitialAriaLabel,
       isFullScreen = defaults.isFullScreen,
       isOpen = defaults.isOpen,
       media,
@@ -97,6 +98,8 @@ export let InterstitialScreen = React.forwardRef(
     },
     ref
   ) => {
+    const backupRef = useRef();
+    const _forwardedRef = ref || backupRef;
     const scrollRef = useRef();
     const startButtonRef = useRef();
     const nextButtonRef = useRef();
@@ -193,7 +196,8 @@ export let InterstitialScreen = React.forwardRef(
           size="lg"
           onClose={onClose}
           open={isOpen}
-          ref={ref}
+          forwardedRef={_forwardedRef}
+          aria-label={interstitialAriaLabel}
           {...getDevtoolsProps(componentName)}
         >
           <ModalHeader
@@ -227,16 +231,14 @@ export let InterstitialScreen = React.forwardRef(
     const renderFullScreen = (childElements) => {
       return (
         <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
+          {...rest}
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             className, // Apply any supplied class names to the main HTML element.
             variantClass,
             isVisibleClass
           )}
+          aria-label={interstitialAriaLabel}
           ref={ref}
           {...getDevtoolsProps(componentName)}
         >
@@ -458,6 +460,11 @@ InterstitialScreen.propTypes = {
    * Optional parameter to hide the progress indicator when multiple steps are used.
    */
   hideProgressIndicator: PropTypes.bool,
+
+  /**
+   * The aria label applied to the Interstitial Screen component
+   */
+  interstitialAriaLabel: PropTypes.string.isRequired,
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.

@@ -67,6 +67,7 @@ const defaultProps = {
     action(`Clicked the close button`)();
   },
   title: 'Use case-specific heading',
+  withLeftGutter: false,
 };
 
 /**

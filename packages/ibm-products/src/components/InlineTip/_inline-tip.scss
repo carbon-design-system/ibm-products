@@ -70,6 +70,18 @@
           }
         }
       }
+
+      // Exception handling.
+      // If "withLeftgutter", then:
+      // - insert 1 rem of more "space" on the left.
+      // - move icon 1 rem more to the right.
+      &.#{$block-class}__with-left-gutter {
+        padding-left: $spacing-10;
+
+        .#{$block-class}__icon-idea {
+          left: $spacing-07;
+        }
+      }
     }
 
     // layout only: narrow

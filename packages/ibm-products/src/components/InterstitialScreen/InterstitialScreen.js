@@ -59,6 +59,7 @@ const defaults = {
   closeIconDescription: 'Close',
   domainName: '',
   hideProgressIndicator: false,
+  interstitialAriaLabel: 'Interstitial screen',
   isFullScreen: false,
   isOpen: false,
   nextButtonLabel: 'Next',
@@ -80,7 +81,7 @@ export let InterstitialScreen = React.forwardRef(
       closeIconDescription = defaults.closeIconDescription,
       domainName = defaults.domainName,
       hideProgressIndicator = defaults.hideProgressIndicator,
-      interstitialAriaLabel,
+      interstitialAriaLabel = defaults.interstitialAriaLabel,
       isFullScreen = defaults.isFullScreen,
       isOpen = defaults.isOpen,
       media,
@@ -464,7 +465,7 @@ InterstitialScreen.propTypes = {
   /**
    * The aria label applied to the Interstitial Screen component
    */
-  interstitialAriaLabel: PropTypes.string.isRequired,
+  interstitialAriaLabel: PropTypes.string,
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.

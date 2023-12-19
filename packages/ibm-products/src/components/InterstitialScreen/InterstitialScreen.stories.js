@@ -82,7 +82,9 @@ const StoryCardTemplate = ({ title }) => {
 const GenerateExampleObjects = ({ total, startValue, copyPrefix }) => {
   const allElements = [];
   for (let i = startValue; i < startValue + total; i++) {
-    allElements.push(<StoryCardTemplate title={`${copyPrefix} ${i}`} />);
+    allElements.push(
+      <StoryCardTemplate key={i} title={`${copyPrefix} ${i}`} />
+    );
   }
   return allElements;
 };
@@ -96,7 +98,6 @@ const TemplateModal = ({ children, ...args }) => {
 
   const { media } = args;
   const selectedMedia = getSelectedMedia(media);
-  console.log('selectedMedia', selectedMedia);
 
   return (
     <>

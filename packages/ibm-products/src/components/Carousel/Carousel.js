@@ -208,9 +208,11 @@ const Carousel = React.forwardRef(
     useEffect(() => {
       function handleWheel(event) {
         // update the scroll position
-        event.stopPropagation();
-        event.preventDefault();
-        event.cancelBubble = false;
+        if (event.shiftKey) {
+          event.stopPropagation();
+          event.preventDefault();
+          event.cancelBubble = false;
+        }
       }
       const scrollDiv = scrollRef.current;
       if (scrollDiv) {

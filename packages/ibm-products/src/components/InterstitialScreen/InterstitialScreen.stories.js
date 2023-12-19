@@ -272,6 +272,7 @@ export const interstitialScreenModalWithImage = prepareStory(TemplateModal, {
   args: {
     ...defaultPropsImage,
     hideProgressIndicator: true,
+    interstitialAriaLabel: 'Interstitial Screen',
     children: (
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
@@ -292,6 +293,7 @@ export const interstitialScreenModalMultiplesHeader = prepareStory(
       ...defaultPropsImage,
       hideProgressIndicator: false,
       headerTitle: 'Use case-specific title',
+      interstitialAriaLabel: 'Interstitial Screen',
       children: (
         <>
           <InterstitialScreenView stepTitle="Step 1">

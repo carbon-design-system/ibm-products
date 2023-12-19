@@ -143,14 +143,14 @@ export let InterstitialScreen = React.forwardRef(
 
     const handleClickPrev = () => {
       const targetStep = clamp(progStep - 1, progStepFloor, progStepCeil);
-      scrollRef.current.scrollToView(targetStep);
+      scrollRef.current.scrollPrev();
       scrollBodyToTop();
       setProgStep(targetStep);
     };
 
     const handleClickNext = () => {
       const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
-      scrollRef.current.scrollToView(targetStep);
+      scrollRef.current.scrollNext();
       scrollBodyToTop();
       setProgStep(targetStep);
     };

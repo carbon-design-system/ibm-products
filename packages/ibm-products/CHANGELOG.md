@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.63.0...@carbon/ibm-products@1.64.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Datagrid:** address duplicate id with radio filters ([#3964](https://github.com/carbon-design-system/ibm-products/issues/3964)) ([ea80749](https://github.com/carbon-design-system/ibm-products/commit/ea80749e9546dfa6054b4e8298aa5714d9729caf))
+* **Datagrid:** reapply filters during fetching state ([#3958](https://github.com/carbon-design-system/ibm-products/issues/3958)) ([ac94e5b](https://github.com/carbon-design-system/ibm-products/commit/ac94e5b5f2550821a96d22cbed1d78d459937bc1))
+* **Guidebanner:** allow adding 1rem space on the left, v1 ([#3977](https://github.com/carbon-design-system/ibm-products/issues/3977)) ([f7b9cd9](https://github.com/carbon-design-system/ibm-products/commit/f7b9cd9aae46801a41684dbd5f69535bf68e2b4b))
+* **InlineTip:** allow adding 1rem space on the left, v1 ([#3978](https://github.com/carbon-design-system/ibm-products/issues/3978)) ([640e175](https://github.com/carbon-design-system/ibm-products/commit/640e17511db934ddc7ab7dd78061e2e317971dc3))
+
+
+### Features
+
+* **Datagrid:** clear out filter history on reset ([#3961](https://github.com/carbon-design-system/ibm-products/issues/3961)) ([b7425f3](https://github.com/carbon-design-system/ibm-products/commit/b7425f3cc9edbfe9ca54950a67060dd4f87bf198))
+* **Datagrid:** support timestamp date formats in filtering ([#3968](https://github.com/carbon-design-system/ibm-products/issues/3968)) ([237984e](https://github.com/carbon-design-system/ibm-products/commit/237984ece28d57abff62d6920659a47625ebd6ae))
+
+
+
+
+
 # [1.63.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.62.1...@carbon/ibm-products@1.63.0) (2023-12-12)
 
 

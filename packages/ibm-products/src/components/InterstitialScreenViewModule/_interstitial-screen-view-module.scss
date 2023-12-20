@@ -16,32 +16,9 @@
   $interstitial-block-class: #{$pkg-prefix}--interstitial-screen;
   $block-class: #{$interstitial-block-class}-view-module;
 
-  /*
-  /**
-   * The amount of top padding applied to this component. Default is 'sm'
-   * 'sm' = $spacing-07 (32px)
-   * 'md' = $spacing-11 (80px)
-   * 'lg' = $spacing-12 (96px)
-   size: PropTypes.oneOf(['sm', 'md', 'lg']),
-*/
-
   .#{$block-class} {
     margin: $spacing-07;
 
-    // &--sm {
-    //   margin-top: $spacing-07;
-    //   margin-bottom: $spacing-07;
-    // }
-
-    // &--md {
-    //   margin-top: $spacing-11;
-    //   margin-bottom: $spacing-11;
-    // }
-
-    // &--lg {
-    //   margin-top: $spacing-12;
-    //   margin-bottom: $spacing-12;
-    // }
     &--heading {
       @include carbon--type-style('expressive-heading-05');
 

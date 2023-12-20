@@ -81,6 +81,9 @@ const defaults = {
     GuidebannerElementButton: false,
     GuidebannerElementLink: false,
     NonLinearReading: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     Checklist: false,
     Coachmark: false,
     CoachmarkBeacon: false,
@@ -89,6 +92,7 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
+
     /* new component flags here - comment used by generate CLI */
   },
 

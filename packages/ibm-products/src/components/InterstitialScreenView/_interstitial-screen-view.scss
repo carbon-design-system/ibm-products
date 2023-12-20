@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin interstitial-screen-view {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--interstitial-screen-view;
+
+  .#{$block-class} {
+    height: 100%;
+  }
+}
+
+@include exports('interstitial-screen-view') {
+  @include interstitial-screen-view;
+}

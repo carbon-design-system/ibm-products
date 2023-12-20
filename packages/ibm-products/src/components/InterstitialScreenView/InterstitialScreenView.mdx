@@ -1,0 +1,53 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { InterstitialScreenView } from '.';
+
+# InterstitialScreenView
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+InterstitialScreenView is designed as a child of **InterstitialScreen**. The
+provided `stepTitle` prop is used as an aria-label within the component, as well
+as by the parent InterstitialScreen component when multiple
+InterstitialScreenView's are used in a Carbon
+[ProgressIndicator](https://v10.carbondesignsystem.com/components/progress-indicator/usage/)
+to display the user's progression.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+<Canvas>
+  <Story
+    id={getStoryId(
+      InterstitialScreenView.displayName,
+      'interstitial-screen-view'
+    )}
+  />
+</Canvas>
+
+## Code sample
+
+```jsx
+<InterstitialScreenView stepTitle="Step 1">
+  <div>Hello world</div>
+</InterstitialScreenView>
+```
+
+## Component API
+
+<ArgsTable />

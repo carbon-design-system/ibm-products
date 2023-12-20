@@ -1,0 +1,51 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { InterstitialScreenViewModule } from '.';
+
+# InterstitialScreenViewModule
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+InterstitialScreenViewModule is an optional view module to jump start
+development and is designed to be used as a child of InterstitialScreenView.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+<Canvas>
+  <Story
+    id={getStoryId(
+      InterstitialScreenViewModule.displayName,
+      'interstitial-screen-view-module'
+    )}
+  />
+</Canvas>
+
+## Code sample
+
+```jsx
+<InterstitialScreenViewModule
+  className="MyInterstitialScreenViewModule"
+  description="This is an example of a description"
+  title="Example title"
+/>
+```
+
+## Component API
+
+<ArgsTable />

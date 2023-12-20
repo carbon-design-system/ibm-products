@@ -5,6 +5,6 @@ es
 lib
 umd
 dist
-
+.history
 # Managed by Lerna - https://github.com/lerna/lerna/tree/main/commands/version#--conventional-commits
 CHANGELOG.md

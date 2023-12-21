@@ -82,14 +82,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
         @include setPanelSize($size_value);
       }
     }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
-      right: 0;
-      border-left: 1px solid $border-subtle-02;
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
-      left: 0;
-      border-right: 1px solid $border-subtle-02;
-    }
+  }
+  &.#{$block-class}__container-right-placement {
+    right: 0;
+    border-left: 1px solid $border-subtle-02;
+  }
+  &.#{$block-class}__container-left-placement {
+    left: 0;
+    border-right: 1px solid $border-subtle-02;
   }
   &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
     .#{$block-class}__title-container {

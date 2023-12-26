@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.65.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.64.0...@carbon/ibm-products@1.65.0) (2023-12-26)
+
+
+### Features
+
+* **InterstitialScreen:** Novice to Pro component ([#3236](https://github.com/carbon-design-system/ibm-products/issues/3236)) ([6d2a3cf](https://github.com/carbon-design-system/ibm-products/commit/6d2a3cfff31f7977a45ffd1392b3fdfd71ad8570))
+
+
+
+
+
 # [1.64.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.63.0...@carbon/ibm-products@1.64.0) (2023-12-19)
 
 

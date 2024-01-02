@@ -26,7 +26,7 @@ import { Close } from '@carbon/react/icons';
 import { FilterContext } from '.';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
 
@@ -96,6 +96,8 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
+  const shouldReduceMotion = useReducedMotion();
+
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
@@ -142,6 +144,7 @@ const FilterPanel = ({
           ]}
           className={`${componentClass}__action-set`}
           ref={actionSetRef}
+          custom={shouldReduceMotion}
           variants={actionSetVariants}
         />
       )
@@ -205,9 +208,10 @@ const FilterPanel = ({
       })}
       initial={false}
       animate={panelOpen ? 'visible' : 'hidden'}
+      custom={shouldReduceMotion}
       variants={panelVariants}
     >
-      <motion.div variants={innerContainerVariants}>
+      <motion.div custom={shouldReduceMotion} variants={innerContainerVariants}>
         <header
           ref={filterHeadingRef}
           className={cx(`${componentClass}__heading`, {

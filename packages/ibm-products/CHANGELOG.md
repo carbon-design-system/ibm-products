@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.1...@carbon/ibm-products@2.19.2) (2024-01-02)
+
+
+### Bug Fixes
+
+* add lottie-web to ibm-products package.json ([#3990](https://github.com/carbon-design-system/ibm-products/issues/3990)) ([89d435a](https://github.com/carbon-design-system/ibm-products/commit/89d435a1663451ea0bb19c494045a8c92af96fe3))
+
+
+
+
+
 ## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.0...@carbon/ibm-products@2.19.1) (2023-12-26)
 
 **Note:** Version bump only for package @carbon/ibm-products

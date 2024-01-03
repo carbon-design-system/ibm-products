@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,7 @@ import { rem } from '@carbon/layout';
 import { pkg } from '../../../../../settings';
 import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
 import cx from 'classnames';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   panelVariants,
   innerContainerVariants,
@@ -97,6 +97,8 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
+  const shouldReduceMotion = useReducedMotion();
+
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
@@ -145,6 +147,7 @@ const FilterPanel = ({
           ]}
           className={`${componentClass}__action-set`}
           ref={actionSetRef}
+          custom={shouldReduceMotion}
           variants={actionSetVariants}
         />
       )
@@ -208,9 +211,10 @@ const FilterPanel = ({
       })}
       initial={false}
       animate={panelOpen ? 'visible' : 'hidden'}
+      custom={shouldReduceMotion}
       variants={panelVariants}
     >
-      <motion.div variants={innerContainerVariants}>
+      <motion.div custom={shouldReduceMotion} variants={innerContainerVariants}>
         <header
           ref={filterHeadingRef}
           className={cx(`${componentClass}__heading`, {

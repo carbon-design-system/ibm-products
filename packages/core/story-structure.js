@@ -87,13 +87,22 @@ const s = [
           {
             n: 'Empty state',
             s: [
-              'c/EmptyState',
-              'c/ErrorEmptyState',
-              'c/NoDataEmptyState',
-              'c/NoTagsEmptyState',
-              'c/NotFoundEmptyState',
-              'c/NotificationsEmptyState',
-              'c/UnauthorizedEmptyState',
+              {
+                n: 'V1',
+                s: [
+                  'c/EmptyState',
+                  'c/ErrorEmptyState',
+                  'c/NoDataEmptyState',
+                  'c/NoTagsEmptyState',
+                  'c/NotFoundEmptyState',
+                  'c/NotificationsEmptyState',
+                  'c/UnauthorizedEmptyState',
+                ],
+              },
+              {
+                n: 'V2',
+                s: ['c/EmptyStateV2'],
+              }
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },

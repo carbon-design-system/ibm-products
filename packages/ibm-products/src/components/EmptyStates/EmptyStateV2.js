@@ -17,6 +17,11 @@ import EmptyStateIllustration from './EmptyStateIllustration';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
 
+/**
+ * This is the V2 version of the `EmptyState` component. To use you must pass the `v2` prop to the V1 version of the component `EmptyState` and use the props below.
+ * In order to avoid breaking changes in the future `EmptyStateV2` is not actually directly importable.
+ */
+
 export let EmptyStateV2 = React.forwardRef((props, ref) => {
   const {
     action,

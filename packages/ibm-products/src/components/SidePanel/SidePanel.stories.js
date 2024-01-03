@@ -25,7 +25,10 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
 } from '@carbon/react';
+
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import {
   getStoryTitle,
@@ -46,6 +49,7 @@ const defaultStoryProps = {
       <strong>investigate</strong> incident management within this side panel.
     </>
   ),
+  id: 'storybook-sidepanel',
 };
 
 const headerData = [
@@ -218,6 +222,26 @@ const actionSets = [
   [],
 ];
 
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
+
 // eslint-disable-next-line react/prop-types
 const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
@@ -381,12 +405,23 @@ docs: {
         disable: true,
       },
     },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
   decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
+const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const testRef = useRef();
   return (
@@ -400,6 +435,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
         ref={testRef}
+        slug={slug && sampleSlug}
       >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
@@ -408,7 +444,7 @@ const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, ...args }) => {
+const StepTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   return (
@@ -423,6 +459,7 @@ const StepTemplate = ({ actions, ...args }) => {
         currentStep={currentStep}
         onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
         actions={actionSets[actions]}
+        slug={slug && sampleSlug}
       >
         <ChildrenContentWithSteps
           currentStep={currentStep}
@@ -434,7 +471,7 @@ const StepTemplate = ({ actions, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, ...args }) => {
+const SlideInTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -450,6 +487,7 @@ const SlideInTemplate = ({ actions, ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
+        slug={slug && sampleSlug}
       >
         <ChildrenContent />
       </SidePanel>

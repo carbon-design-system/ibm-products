@@ -18,6 +18,8 @@ import {
   HeaderContainer,
   HeaderName,
   usePrefix,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 
@@ -31,6 +33,26 @@ import { EditSidePanel } from '.';
 import styles from './_storybook-styles.scss';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
+
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
 
 const defaultStoryProps = {
   title: 'Edit platform quotas',
@@ -67,6 +89,17 @@ export default {
     formTitle: { control: { type: 'text' } },
     formDescription: { control: { type: 'text' } },
     open: { control: { disable: true } },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
   parameters: {
     layout: 'fullscreen',
@@ -83,7 +116,7 @@ export default {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const Template = (args) => {
+const Template = ({ slug, ...args }) => {
   const carbonPrefix = usePrefix();
   const items = ['Day(s)', 'Month(s)', 'Year(s)'];
   const [open, setOpen] = useState(false);
@@ -100,11 +133,13 @@ const Template = (args) => {
       </Grid>
       <EditSidePanel
         {...args}
+        id="storybook-id"
         open={open}
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!topicValue.length}
         selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
+        slug={slug && sampleSlug}
       >
         <TextInput
           id="create-side-panel-topic-name-a"

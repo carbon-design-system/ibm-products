@@ -84,3 +84,12 @@
 .#{variables.$block-class}__row-size__row-settings-trigger--open.#{c4p-settings.$carbon-prefix}--btn--ghost {
   background-color: $layer-02;
 }
+
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  td.#{variables.$block-class}__expandable-row-cell,
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  td.#{variables.$block-class}__expandable-row-cell {
+  padding-top: $spacing-03;
+}

@@ -42,6 +42,9 @@ export let InlineTipLink = React.forwardRef(
   }
 );
 
+InlineTipLink = pkg.checkComponentEnabled(InlineTipLink, componentName);
+InlineTipLink.displayName = componentName;
+
 InlineTipLink.propTypes = {
   /**
    * Provide the contents of the InlineTipLink.

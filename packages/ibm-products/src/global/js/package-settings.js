@@ -74,7 +74,14 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    Guidebanner: false,
+    GuidebannerElement: false,
+    GuidebannerElementButton: false,
+    GuidebannerElementLink: false,
     InlineTip: false,
+    InlineTipButton: false,
+    InlineTipLink: false,
+    NonLinearReading: false,
   },
 
   // feature level flags
@@ -82,8 +89,6 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
-    'Datagrid.useExpandedRow': false,
-    'Datagrid.useNestedRows': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,

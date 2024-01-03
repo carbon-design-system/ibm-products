@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,7 @@ import { Close } from '@carbon/react/icons';
 import { FilterContext } from '.';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
 
@@ -53,6 +53,7 @@ const FilterPanel = ({
   searchPlaceholder = 'Find filters',
   reactTableFiltersState = [],
   autoHideFilters = false,
+  isFetching = false,
 }) => {
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
@@ -78,6 +79,7 @@ const FilterPanel = ({
     onCancel,
     panelOpen,
     autoHideFilters,
+    isFetching,
   });
 
   /** Refs */
@@ -93,6 +95,8 @@ const FilterPanel = ({
       filtersState,
       prevFiltersRef,
     });
+
+  const shouldReduceMotion = useReducedMotion();
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -140,6 +144,7 @@ const FilterPanel = ({
           ]}
           className={`${componentClass}__action-set`}
           ref={actionSetRef}
+          custom={shouldReduceMotion}
           variants={actionSetVariants}
         />
       )
@@ -203,9 +208,10 @@ const FilterPanel = ({
       })}
       initial={false}
       animate={panelOpen ? 'visible' : 'hidden'}
+      custom={shouldReduceMotion}
       variants={panelVariants}
     >
-      <motion.div variants={innerContainerVariants}>
+      <motion.div custom={shouldReduceMotion} variants={innerContainerVariants}>
         <header
           ref={filterHeadingRef}
           className={cx(`${componentClass}__heading`, {
@@ -279,6 +285,7 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
+  isFetching: PropTypes.bool,
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,

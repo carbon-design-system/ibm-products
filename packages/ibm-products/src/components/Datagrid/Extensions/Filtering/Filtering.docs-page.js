@@ -280,6 +280,12 @@ const filters = [
           // Add any other Carbon RadioButton props here
         },
       ],
+      DefaultRadioButton: {
+        id: 'any__unique-id-for-any-radio-button',
+        labelText: 'Any',
+        value: 'Any',
+        // Add any other Carbon RadioButton props here
+      }
     },
   },
   {
@@ -303,6 +309,19 @@ const filters = [
       {
         subTitle: 'Create your filters for panel variant',
         description: 'Filter panel coming soon.',
+      },
+      {
+        subTitle: 'Customizing the filter tag labels',
+        description:
+          'You can customize the rendering of the filter tag labels by supplying the `renderLabel` property to your `filterProps` as seen below. Otherwise it will default to `key: value`.',
+        source: {
+          code: `
+filterProps: {
+  ...otherFilterProps,
+  renderLabel: (key, value) => myCustomTagLabelFormatter(key, value),
+},
+          `,
+        },
       },
       {
         subTitle: 'Putting it all together',
@@ -360,6 +379,8 @@ filterProps: {
   flyoutIconDescription: string,
   /** Array of objects to render filters in flyout */
   filters: object[]
+  /** Applies custom formatting to filter tags */
+  renderLabel: Function
 }
           `,
         },

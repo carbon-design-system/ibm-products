@@ -101,6 +101,16 @@ export let TagSet = React.forwardRef(
       setSizingTags(newSizingTags);
     }, [tags]);
 
+    const handleTagOnClose = useCallback(
+      (onClose, index) => {
+        onClose?.();
+        if (index <= displayCount - 1) {
+          setPopoverOpen(false);
+        }
+      },
+      [displayCount]
+    );
+
     useEffect(() => {
       // create visible and overflow tags
       let newDisplayedTags =
@@ -109,12 +119,7 @@ export let TagSet = React.forwardRef(
               <Tag
                 {...other}
                 key={`displayed-tag-${index}`}
-                onClose={() => {
-                  onClose?.();
-                  if (index <= displayCount - 1) {
-                    setPopoverOpen(false);
-                  }
-                }}
+                onClose={() => handleTagOnClose(onClose, index)}
               >
                 {label}
               </Tag>
@@ -159,6 +164,7 @@ export let TagSet = React.forwardRef(
       showAllTagsLabel,
       tags,
       popoverOpen,
+      handleTagOnClose,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {

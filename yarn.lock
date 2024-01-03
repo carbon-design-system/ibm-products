@@ -2742,7 +2742,7 @@ __metadata:
     "@carbon/ibm-products-styles": ^2.19.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.45.0
+    "@carbon/react": ^1.46.1
     "@carbon/storybook-addon-theme": ^2.0.6
     "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
@@ -2802,7 +2802,7 @@ __metadata:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.45.0
+    "@carbon/react": ^1.46.1
     "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
     react: ^18.2.0
@@ -2873,7 +2873,7 @@ __metadata:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.45.0
+    "@carbon/react": ^1.46.1
     "@carbon/themes": ^11.28.0
     "@carbon/type": ^11.25.1
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -2888,16 +2888,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.32.0":
-  version: 11.32.0
-  resolution: "@carbon/icons-react@npm:11.32.0"
+"@carbon/icons-react@npm:^11.33.0":
+  version: 11.33.0
+  resolution: "@carbon/icons-react@npm:11.33.0"
   dependencies:
     "@carbon/icon-helpers": ^10.45.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
-  checksum: 2c3a3fa62007cb0cb22a4dbe2f5b1618cc4ea137c58de0c9dd7e18c0b128857662280cee6b0edd4410848f3c820337c3a2ec6697e8790ea49519e286ffd63bf3
+  checksum: 4d4ccb88135c04fd580251a5c75bb84d261f72d1c79b7af7017c329359402663f99454a74eedb26c0a9c8185e075f812edecf288510f040129e2530ad4177134
   languageName: node
   linkType: hard
 
@@ -2915,16 +2915,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.45.0":
-  version: 1.45.0
-  resolution: "@carbon/react@npm:1.45.0"
+"@carbon/react@npm:^1.46.1":
+  version: 1.46.1
+  resolution: "@carbon/react@npm:1.46.1"
   dependencies:
     "@babel/runtime": ^7.18.3
     "@carbon/feature-flags": ^0.16.0
-    "@carbon/icons-react": ^11.32.0
+    "@carbon/icons-react": ^11.33.0
     "@carbon/layout": ^11.20.0
-    "@carbon/styles": ^1.45.0
-    "@carbon/telemetry": 0.1.0
+    "@carbon/styles": ^1.46.0
+    "@ibm/telemetry-js": ^1.1.0
     classnames: 2.3.2
     copy-to-clipboard: ^3.3.1
     downshift: 8.2.3
@@ -2944,7 +2944,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 15b194893440bc677f630355538fb63c6da8e1eb64f8930558afc7887e7bef67cdb27a42a9ba1fcb9004a86ee6a1cdd37506e8495b7618691b0a679a0fd2d708
+  checksum: 3642c6211dea38dc2ad51ee3bbbc5a6b671952452f2d0527b1d51baee4b4455542a8fcec76ea479984113d3537cac54ac89e44f0aa189e96b9c9dcd0155ce7f0
   languageName: node
   linkType: hard
 
@@ -2973,9 +2973,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.45.0":
-  version: 1.45.0
-  resolution: "@carbon/styles@npm:1.45.0"
+"@carbon/styles@npm:^1.46.0":
+  version: 1.46.0
+  resolution: "@carbon/styles@npm:1.46.0"
   dependencies:
     "@carbon/colors": ^11.20.0
     "@carbon/feature-flags": ^0.16.0
@@ -2990,7 +2990,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: da44d24fc23987b3a03fe8d9ce670dee9560e2291ca4cac7e69b8a676b83b88e8bb56279759d39a1a9611e2f90ee50f25ba8193dc0def5b5243b85df3d7e4a3d
+  checksum: 854d1c8d61f3df4f11e6cefce0baa92f2f1d547e7fb05ac17936c9500f277842561c8ebe04f561321e0eb653eb5ae0ddc4b3d4480e58b01a37237b489eb54577
   languageName: node
   linkType: hard
 
@@ -4126,6 +4126,15 @@ __metadata:
   version: 6.0.0-next.6
   resolution: "@ibm/plex@npm:6.0.0-next.6"
   checksum: cb7bece0f8688cf92a3fa37ab47c5921f22a2eb5e40dd72a3d6bbcd715910b0d79f9d160e229514a0c78c70679676746a93f4791a57407fc6aa636105aa11891
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@ibm/telemetry-js@npm:1.1.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: aeec7caec4acb044c09e738571a4fbeb70aef93f9a00233006bcc3b4b25248fa4017c6e70a8578faa028edb614fe19a66a9e6f32d0bf1fcdeb61c61839b324bc
   languageName: node
   linkType: hard
 

@@ -55,6 +55,9 @@ export default {
         ),
       },
     },
+    portalTarget: {
+      control: false,
+    },
   },
 };
 

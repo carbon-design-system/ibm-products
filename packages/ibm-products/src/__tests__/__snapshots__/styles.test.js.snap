@@ -2691,13 +2691,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-top: var(--cds-spacing-03, 0.5rem);
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-flyout__container {
   position: relative;
 }
@@ -2753,7 +2746,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--datagrid-filter-flyout__filters {
   display: grid;
   gap: 1rem 2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .c4p--datagrid-filter-flyout__trigger--open.bx--btn.bx--btn--icon-only {
@@ -2764,6 +2757,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--datagrid-filter-flyout .bx--fieldset {
   margin-bottom: 0;
+}
+
+.c4p--datagrid-filter-flyout__stacked {
+  grid-template-columns: 1fr;
 }
 
 /*

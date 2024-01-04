@@ -304,7 +304,7 @@ export let APIKeyModal = forwardRef(
             {getSecondaryButtonText()}
           </Button>
           <Button
-            {...(apiKeyLoaded ? copyButtonProps : {})}
+            {...(apiKeyLoaded && copyButtonProps)}
             type="submit"
             kind="primary"
             onClick={submitHandler}

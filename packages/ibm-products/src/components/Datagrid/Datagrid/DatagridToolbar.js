@@ -16,6 +16,7 @@ import {
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { handleSelectAllRowData } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
@@ -30,6 +31,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     toolbarBatchActions,
     setGlobalFilter,
     rows,
+    dispatch,
+    getRowId,
     batchActionMenuButtonLabel,
     translateWithIdBatchActions,
   } = datagridState;
@@ -100,6 +103,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             [`${menuClass}-icon-only`]: width <= minWidthBeforeOverflowIcon,
           },
         ])}
+        tabIndex={totalSelected > 0 ? 0 : -1}
       >
         {toolbarBatchActions?.map((batchAction, index) => {
           const hidden = index < 2 && !displayAllInMenu;
@@ -126,6 +130,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const onSelectAllHandler = () => {
     toggleAllRowsSelected(true);
     onSelectAllRows?.(true);
+    handleSelectAllRowData({
+      dispatch,
+      rows,
+      getRowId,
+    });
   };
 
   // Only display the first two batch actions, the rest are
@@ -153,6 +162,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
                 iconDescription={batchAction.label}
+                tabIndex={totalSelected > 0 ? 0 : -1}
               >
                 {batchAction.label}
               </TableBatchAction>
@@ -178,7 +188,7 @@ const DatagridToolbar = (datagridState) => {
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
@@ -186,7 +196,7 @@ const DatagridToolbar = (datagridState) => {
   ) : DatagridActions ? (
     <div className={blockClass}>
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>

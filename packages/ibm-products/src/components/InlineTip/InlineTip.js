@@ -33,6 +33,7 @@ const defaults = {
   collapseButtonLabel: 'Read less',
   expandButtonLabel: 'Read more',
   narrow: false,
+  withLeftGutter: false,
   onClick: () => {},
   onClose: () => {},
 };
@@ -45,19 +46,20 @@ const defaults = {
 export let InlineTip = React.forwardRef(
   (
     {
+      action,
       children,
       className,
       closeIconDescription = defaults.closeIconDescription,
       collapsible = defaults.collapsible,
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
+      media,
       narrow = defaults.narrow,
       onClick,
       onClose,
       tertiaryButtonLabel,
-      action,
       title = defaults.title,
-      media,
+      withLeftGutter = defaults.withLeftGutter,
       ...rest
     },
     ref
@@ -89,10 +91,11 @@ export let InlineTip = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          [collapsible ? `${blockClass}__collapsible` : null],
-          [isCollapsed ? `${blockClass}__collapsible-collapsed` : null],
+          collapsible && `${blockClass}__collapsible`,
+          isCollapsed && `${blockClass}__collapsible-collapsed`,
+          media && `${blockClass}__has-media`,
           [narrow ? `${blockClass}__narrow` : `${blockClass}__wide`],
-          [media ? `${blockClass}__has-media` : null]
+          withLeftGutter && !narrow && `${blockClass}__with-left-gutter`
         )}
         ref={ref}
         role="complementary"
@@ -248,4 +251,12 @@ InlineTip.propTypes = {
    * The title of the InlineTip.
    */
   title: PropTypes.string.isRequired,
+  /**
+   * If true, insert 1 rem of "space" on the left of the component.
+   * This will allow the component's content to line up with other
+   * content on the page under special circumstances.
+   *
+   * This will only be applied when `narrow` is false.
+   */
+  withLeftGutter: PropTypes.bool,
 };

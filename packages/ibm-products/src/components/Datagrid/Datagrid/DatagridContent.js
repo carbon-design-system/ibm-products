@@ -197,6 +197,7 @@ export const DatagridContent = ({ datagridState, title }) => {
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}
               autoHideFilters={filterProps.autoHideFilters}
+              isFetching={isFetching}
             />
           )}
           <div className={`${blockClass}__table-container-inner`}>

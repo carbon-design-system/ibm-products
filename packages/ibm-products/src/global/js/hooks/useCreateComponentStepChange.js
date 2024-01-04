@@ -63,7 +63,7 @@ export const useCreateComponentStepChange = ({
   useEffect(() => {
     const onUnmount = () => {
       if (componentName !== 'CreateFullPage') {
-        setCurrentStep(0);
+        setCurrentStep(1);
       }
       setIsSubmitting(false);
       onClose();

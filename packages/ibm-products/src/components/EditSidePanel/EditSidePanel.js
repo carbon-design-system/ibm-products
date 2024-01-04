@@ -44,6 +44,7 @@ export let EditSidePanel = React.forwardRef(
       children,
       className,
       disableSubmit,
+      id,
       formTitle,
       formDescription,
       onRequestClose,
@@ -95,6 +96,7 @@ export let EditSidePanel = React.forwardRef(
           title,
           subtitle,
           selectorPrimaryFocus,
+          id,
           ...getDevtoolsProps(componentName),
         }}
         placement={placement}
@@ -169,6 +171,11 @@ EditSidePanel.propTypes = {
   formTitle: PropTypes.node.isRequired,
 
   /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
+
+  /**
    * Specifies an optional handler which is called when the CreateSidePanel
    * is closed.
    */
@@ -220,6 +227,11 @@ EditSidePanel.propTypes = {
    * Specifies which DOM element in the form should be focused.
    */
   slideIn: PropTypes.bool,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
 
   /**
    * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.

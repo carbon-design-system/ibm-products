@@ -38,6 +38,7 @@ export let CreateSidePanel = React.forwardRef(
       disableSubmit,
       formTitle,
       formDescription,
+      id,
       onRequestClose,
       onRequestSubmit,
       open,
@@ -76,6 +77,7 @@ export let CreateSidePanel = React.forwardRef(
         <SidePanel
           {...rest}
           {...{
+            id,
             open,
             ref,
             selectorPageContent,
@@ -148,6 +150,11 @@ CreateSidePanel.propTypes = {
   formTitle: PropTypes.node.isRequired,
 
   /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
+
+  /**
    * Specifies an optional handler which is called when the CreateSidePanel
    * is closed.
    */
@@ -178,6 +185,12 @@ CreateSidePanel.propTypes = {
    * Specifies which DOM element in the form should be focused.
    */
   selectorPrimaryFocus: PropTypes.node.isRequired,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+
   /**
    * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
    */

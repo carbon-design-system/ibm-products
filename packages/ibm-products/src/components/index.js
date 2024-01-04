@@ -89,3 +89,11 @@ export { CoachmarkFixed } from './CoachmarkFixed';
 export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
 export { CoachmarkOverlayElements } from './CoachmarkOverlayElements';
 export { CoachmarkStack } from './CoachmarkStack';
+export {
+  Guidebanner,
+  GuidebannerElement,
+  GuidebannerElementButton,
+  GuidebannerElementLink,
+} from './Guidebanner';
+export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
+export { NonLinearReading } from './NonLinearReading';

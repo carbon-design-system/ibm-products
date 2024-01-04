@@ -731,8 +731,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__actions-container.c4p--action-set--xs {
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 16rem;
   max-width: 100%;
 }
@@ -750,8 +749,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__actions-container.c4p--action-set--sm {
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 20rem;
   max-width: 100%;
 }
@@ -769,8 +767,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__actions-container.c4p--action-set--md {
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 30rem;
   max-width: 100%;
 }
@@ -788,8 +785,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__actions-container.c4p--action-set--lg {
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 40rem;
   max-width: 100%;
 }
@@ -807,8 +803,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__actions-container.c4p--action-set--max {
+.c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 75%;
   max-width: 100%;
 }
@@ -819,6 +814,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--max {
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
+}
+.c4p--side-panel__container .c4p--side-panel__actions-container {
+  width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-with-action-toolbar.c4p--side-panel__with-condensed-header .c4p--side-panel__title-container::before {
   content: none;

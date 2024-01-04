@@ -35,6 +35,27 @@ export default {
     styles,
     docs: { page: DocsPage },
   },
+  argTypes: {
+    generateSuccessBody: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'short body',
+          1: 'long body',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: <p>API key successfully created.</p>,
+        1: (
+          <p>
+            This is your unique API key and is non-recoverable. If you lose this
+            API key, you will have to reset it.
+          </p>
+        ),
+      },
+    },
+  },
 };
 
 const defaultProps = {
@@ -53,12 +74,6 @@ const defaultProps = {
   downloadFileType: 'json',
   open: true,
   closeButtonText: 'Close',
-  generateSuccessBody: (
-    <p>
-      This is your unique API key and is non-recoverable. If you lose this API
-      key, you will have to reset it.
-    </p>
-  ),
   generateSuccessTitle: 'API key successfully created',
   editSuccessTitle: 'API key successfully saved',
   loadingText: 'Generating...',
@@ -270,7 +285,7 @@ const MultiStepTemplate = (args) => {
               description={loading ? 'Saving...' : 'Generating...'}
             />
           )}
-          {editSuccess && (
+          {q && (
             <div className={`${blockClass}__messaging`}>
               Edited successfully
             </div>
@@ -352,6 +367,7 @@ export const Generate = prepareStory(TemplateWithState, {
     ...defaultProps,
     generateButtonText: 'Generate API key',
     generateTitle: 'Generate an API key',
+    generateSuccessBody: 1,
     body: '(Optional description text) To connect securely to [product name], your application or tool needs an API key with permission to access resources such as [product resource name].',
     nameHelperText:
       'Providing the application name will help you identify your API key later.',

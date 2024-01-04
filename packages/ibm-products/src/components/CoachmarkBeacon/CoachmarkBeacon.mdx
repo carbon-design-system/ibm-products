@@ -1,0 +1,59 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkBeacon } from '.';
+
+# CoachmarkBeacon
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Note on theming](#note-on-theming)
+- [Example usage](#example-usage)
+- [Code Sample](#code-sample)
+- [Component API](#component-api)
+
+## Overview
+
+[Beacons](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage/#tooltip)
+use a pulsing action to call a user’s attention to a specific area in the UI.
+
+The `target` prop of the Coachmark should always be either a CoachmarkBeacon or
+a CoachmarkButton.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Note on theming
+
+The CoachmarkBeacon is theme-agnostic; it is always a blue visual displayed in
+one of two states, animated or active.
+
+## Example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(CoachmarkBeacon.displayName, 'coachmark-beacon')} />
+  </div>
+</Canvas>
+
+## Code sample
+
+```jsx
+<Coachmark
+  theme={'light'}
+  target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
+>
+  ...
+</Coachmark>
+```
+
+## Component API
+
+<ArgsTable />

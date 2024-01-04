@@ -1,0 +1,12 @@
+{
+  "label": "Coachmark-Stack",
+  "package-config": {
+    "flags": {
+      "component": {
+        "CoachmarkStack": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

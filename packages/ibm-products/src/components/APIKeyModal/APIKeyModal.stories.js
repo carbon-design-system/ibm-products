@@ -285,7 +285,7 @@ const MultiStepTemplate = (args) => {
               description={loading ? 'Saving...' : 'Generating...'}
             />
           )}
-          {q && (
+          {editSuccess && (
             <div className={`${blockClass}__messaging`}>
               Edited successfully
             </div>

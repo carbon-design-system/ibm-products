@@ -82,7 +82,7 @@ $action-set-height: to-rem(64px);
   display: grid;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   gap: to-rem(16px) rem(32px);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 // Carbon overrides
@@ -103,4 +103,8 @@ $action-set-height: to-rem(64px);
 .#{variables.$block-class}-filter-flyout
   .#{c4p-settings.$carbon-prefix}--fieldset {
   margin-bottom: 0;
+}
+
+.#{variables.$block-class}-filter-flyout__stacked {
+  grid-template-columns: 1fr;
 }

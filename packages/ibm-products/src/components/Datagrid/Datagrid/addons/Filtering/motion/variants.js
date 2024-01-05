@@ -53,7 +53,7 @@ export const innerContainerVariants = {
 export const actionSetVariants = {
   hidden: (shouldReduceMotion) => ({
     y: shouldReduceMotion ? 0 : ACTION_SET_HEIGHT,
-    opacity: shouldReduceMotion ? DURATIONS.moderate01 : 1,
+    opacity: shouldReduceMotion ? 0 : 1,
     transition: {
       duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,

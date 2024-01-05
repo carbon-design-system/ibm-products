@@ -25,11 +25,11 @@
     "clean:finally:files": "rimraf coverage node_modules results",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn run-all --no-sort clean",
-    "format": "prettier ./packages/ibm-products/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
+    "format": "prettier ./packages/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
-    "lint:js": "eslint ./packages/ibm-products/ --fix --ext .js,.jsx",
-    "lint:styles": "stylelint ./packages/ibm-products/**/*.scss",
+    "lint:js": "eslint packages",
+    "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
@@ -144,15 +144,16 @@
     }
   },
   "lint-staged": {
-    "packages/ibm-products/**/*": [
-      "npx prettier --write --ignore-unknown"
+    "**/*.{js,jsx,ts,tsx}": [
+      "npx prettier --cache --write",
+      "npx eslint"
     ],
-    "packages/ibm-products/**/*.{js,jsx}": [
-      "npx eslint --fix",
-      "npx cspell"
+    "**/*.scss": [
+      "npx prettier --cache --write",
+      "npx stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
-    "packages/ibm-products/**/*.scss": [
-      "npx stylelint"
+    "!(*sass).md": [
+      "npx prettier --cache --write"
     ]
   },
   "dependencies": {

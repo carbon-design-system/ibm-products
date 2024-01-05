@@ -28,7 +28,7 @@
     "format": "prettier ./packages/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
-    "lint:js": "eslint packages",
+    "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
@@ -146,7 +146,8 @@
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
-      "npx eslint"
+      "npx eslint --fix",
+      "npx cspell"
     ],
     "**/*.scss": [
       "npx prettier --cache --write",

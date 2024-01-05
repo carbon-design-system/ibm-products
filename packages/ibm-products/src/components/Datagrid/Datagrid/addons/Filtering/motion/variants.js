@@ -36,14 +36,14 @@ export const innerContainerVariants = {
   hidden: (shouldReduceMotion) => ({
     opacity: 0,
     transition: {
-      duration: shouldReduceMotion ? 0 : DURATIONS.fast01,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
     },
   }),
   visible: (shouldReduceMotion) => ({
     opacity: 1,
     transition: {
-      duration: shouldReduceMotion ? 0 : DURATIONS.fast02,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
       when: 'beforeChildren',
     },
@@ -52,17 +52,20 @@ export const innerContainerVariants = {
 
 export const actionSetVariants = {
   hidden: (shouldReduceMotion) => ({
-    y: ACTION_SET_HEIGHT,
+    y: shouldReduceMotion ? 0 : ACTION_SET_HEIGHT,
+    opacity: shouldReduceMotion ? DURATIONS.moderate01 : 1,
     transition: {
-      duration: shouldReduceMotion ? 0 : DURATIONS.fast01,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
     },
   }),
   visible: (shouldReduceMotion) => ({
     y: 0,
+    opacity: 1,
     transition: {
-      duration: shouldReduceMotion ? 0 : DURATIONS.fast02,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
+      delay: shouldReduceMotion ? 0.075 : 0,
     },
   }),
 };

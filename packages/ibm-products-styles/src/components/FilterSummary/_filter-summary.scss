@@ -16,26 +16,13 @@ $block-class: #{$pkg-prefix}--filter-summary;
   width: 100%;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   height: to-rem(48px);
-  align-items: start;
+  align-items: center;
   padding: $spacing-03;
   border-top: 1px solid $border-subtle-01;
   background: $layer-01;
-  &.#{$block-class}__expanded {
-    height: fit-content;
-  }
 }
 
 .#{$block-class}
   .#{$pkg-prefix}--tag-set.#{$pkg-prefix}--tag-set.#{$block-class}__clear-button-inline {
   width: auto;
-}
-
-.#{$block-class}__view-all--wrapper {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.#{$block-class}__expanded .#{$block-class}__clear-all-button.#{$carbon-prefix}--btn {
-  margin-right: 2rem;
 }

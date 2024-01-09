@@ -11,7 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Close16, Idea16 } from '@carbon/icons-react';
+import { Close, Idea } from '@carbon/icons-react';
 import { Button } from '@carbon/react';
 import { useCoachmark } from './utils/context';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -65,19 +65,21 @@ export let CoachmarkTagline = React.forwardRef(
           {...coachmark.buttonProps}
         >
           <div className={`${blockClass}__idea`}>
-            <Idea16 />
+            <Idea size={16} />
           </div>
           <div>{title}</div>
         </button>
-        <Button
-          kind="ghost"
-          size="sm"
-          renderIcon={Close16}
-          iconDescription={closeIconDescription}
-          hasIconOnly
-          className={`${blockClass}--close-btn`}
-          onClick={onClose}
-        />
+        <div className={`${blockClass}--close-btn-container`}>
+          <Button
+            kind="ghost"
+            size="sm"
+            renderIcon={Close}
+            iconDescription={closeIconDescription}
+            hasIconOnly
+            className={`${blockClass}--close-btn`}
+            onClick={onClose}
+          />
+        </div>
       </div>
     );
   }

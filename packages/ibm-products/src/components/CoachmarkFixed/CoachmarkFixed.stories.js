@@ -8,12 +8,14 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
+import { Link as CarbonLink } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
+  getSelectedCarbonTheme,
 } from '../../global/js/utils/story-helper';
 
+import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkFixed } from '.';
 import mdx from './CoachmarkFixed.mdx';
 
@@ -24,9 +26,17 @@ export default {
   component: CoachmarkFixed,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    children: {
+      control: { type: null },
+    },
+    portalTarget: {
+      control: { type: null },
+    },
+    theme: {
+      control: { type: null },
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -39,12 +49,32 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const theme = getSelectedCarbonTheme();
   return (
-    <CoachmarkFixed
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <CoachmarkFixed {...args} theme={theme}>
+      <CoachmarkOverlayElements
+        closeButtonLabel="Done"
+        nextButtonText="Next"
+        previousButtonLabel="Back"
+      >
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="Link opens in new tab."
+          button={
+            <CarbonLink href="https://www.ibm.com" target="_blank">
+              Learn more
+            </CarbonLink>
+          }
+        />
+        <CoachmarkOverlayElement
+          title="Hello World 2"
+          description="Link opens on this page."
+          button={
+            <CarbonLink href="https://www.ibm.com">Learn more</CarbonLink>
+          }
+        />
+      </CoachmarkOverlayElements>
+    </CoachmarkFixed>
   );
 };
 
@@ -54,7 +84,9 @@ const Template = (args) => {
  */
 export const coachmarkFixed = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#CoachmarkFixed-args
-    children: 'hello, world',
+    tagline: 'Why are there two types of severity scores?',
+    onClose: () => console.log('CLOSE'),
+    portalTarget: '#root:not([hidden="true"])',
+    className: 'myCoachmarkFixed',
   },
 });

@@ -10,54 +10,81 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
+import {
+  Coachmark,
+  CoachmarkOverlayElement,
+  CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkBeacon } from '.';
+import { BEACON_KIND } from '../Coachmark/utils/enums';
 
 const blockClass = `${pkg.prefix}--coachmark-beacon`;
 const componentName = CoachmarkBeacon.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
+const childDataTestId = `beacon-${uuidv4()}`;
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
+
+const renderCoachmarkWithBeacon = ({ ...rest } = {}) =>
+  render(
+    <Coachmark
+      theme={'dark'}
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={
+        <CoachmarkBeacon
+          data-testid={childDataTestId}
+          kind={BEACON_KIND.DEFAULT}
+          {...rest}
+        />
+      }
+    >
+      <CoachmarkOverlayElements closeButtonLabel="Done">
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="this is a description test"
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
+  );
 
 describe(componentName, () => {
-  it('renders a component CoachmarkBeacon', async () => {
-    render(<CoachmarkBeacon> </CoachmarkBeacon>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  it('renders a component CoachmarkBeacon', () => {
+    renderCoachmarkWithBeacon({ label: 'Show information' });
+    expect(screen.getByTestId(childDataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<CoachmarkBeacon> </CoachmarkBeacon>);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    const { container } = renderCoachmarkWithBeacon({
+      label: 'Show information',
+    });
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, async () => {
-    render(<CoachmarkBeacon>{children}</CoachmarkBeacon>);
-    screen.getByText(children);
+  it('applies className to the containing node', () => {
+    renderCoachmarkWithBeacon({ className, label: 'Show information' });
+    expect(screen.getByTestId(childDataTestId)).toHaveClass(className);
   });
 
-  it('applies className to the containing node', async () => {
-    render(<CoachmarkBeacon className={className}> </CoachmarkBeacon>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+  it('adds additional props to the containing node', () => {
+    const testingLabel = `testing-labels-${uuidv4()}`;
+    renderCoachmarkWithBeacon({
+      label: testingLabel,
+    });
+    screen.getByLabelText(testingLabel);
   });
 
-  it('adds additional props to the containing node', async () => {
-    render(<CoachmarkBeacon data-testid={dataTestId}> </CoachmarkBeacon>);
-    screen.getByTestId(dataTestId);
+  it('forwards a ref to an appropriate node', () => {
+    const testRef = React.createRef();
+    renderCoachmarkWithBeacon({ ref: testRef, label: 'Show information' });
+    expect(testRef.current).toHaveClass(blockClass);
   });
 
-  it('forwards a ref to an appropriate node', async () => {
-    const ref = React.createRef();
-    render(<CoachmarkBeacon ref={ref}> </CoachmarkBeacon>);
-    expect(ref.current).toHaveClass(blockClass);
-  });
+  it('adds the Devtools attribute to the containing node', () => {
+    renderCoachmarkWithBeacon({ label: 'Show information' });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    render(<CoachmarkBeacon data-testid={dataTestId}> </CoachmarkBeacon>);
-
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+    expect(screen.getByTestId(childDataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });

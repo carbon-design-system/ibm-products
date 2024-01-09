@@ -8,7 +8,11 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/motion' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
 // or
@@ -18,8 +22,70 @@
 // TODO: @use(s) of IBM Products component styles used by CoachmarkStack
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{c4p-settings.$pkg-prefix}--coachmark-stack;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
+$elements-block-class: #{c4p-settings.$pkg-prefix}--coachmark-stack-element;
+$overlay-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay;
+$stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
+
+.#{$elements-block-class} {
+  $block: &;
+
+  position: fixed;
+  z-index: 5901;
+  right: $spacing-05;
+  bottom: -100%;
+  //opacity: 0;
+  transform: translateY(100%);
+  visibility: hidden;
+
+  &--is-mounted {
+    bottom: 0;
+    /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+    transition: transform 240ms motion(exit, productive);
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+  }
+
+  &--is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  // Stack the level-one item behind the level-two item.
+  &--is-stacked {
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: perspective(carbon--mini-units(18))
+      translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
+    transform-origin: top center;
+    visibility: visible;
+
+    &__light {
+      background-color: $gray-90;
+    }
+
+    &__dark {
+      background-color: $button-tertiary-active;
+    }
+  }
+}
+
+// ALL SUBSEQUENT ITEMS ARE THE "CHILD" STACK ITEMS
+.#{$elements-block-class} ~ .#{$elements-block-class} {
+  z-index: 5902;
+}
+
+// SPECIFIC TO THE HOME ELEMENT
+.#{$stack-home-class} {
+  &__nav-links {
+    margin-top: $spacing-04;
+    margin-left: calc(-1 * $spacing-05);
+  }
+
+  &__icon-idea {
+    margin-bottom: $spacing-03;
+  }
+}

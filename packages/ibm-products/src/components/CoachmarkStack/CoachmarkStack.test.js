@@ -10,52 +10,120 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
+import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
+import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--coachmark-stack`;
+const overlayBlockClass = `${pkg.prefix}--coachmark-overlay--stack`;
 const componentName = CoachmarkStack.displayName;
+const dataTestId = uuidv4();
+const childDataTestId = `coachmark_${uuidv4()}`;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
+const childrenContent = [
+  <CoachmarkOverlayElements closeButtonLabel={'Close 1'} key="1">
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
+
+  <CoachmarkOverlayElements
+    data-testid={childDataTestId}
+    closeButtonLabel={'Close 2'}
+    key="2"
+  >
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
+
+  <CoachmarkOverlayElements closeButtonLabel={'Close 3'} key="3">
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
+];
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
+
+const renderCoachmarkStack = ({ ...rest } = {}, children = childrenContent) =>
+  render(<CoachmarkStack {...rest}>{children}</CoachmarkStack>);
 
 describe(componentName, () => {
-  it('renders a component CoachmarkStack', async () => {
-    render(<CoachmarkStack> </CoachmarkStack>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  it('renders a component CoachmarkStack', () => {
+    renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(overlayBlockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<CoachmarkStack> </CoachmarkStack>);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    const { container } = renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+    });
+    await act(async () => {
+      await expect(container).toBeAccessible(componentName);
+      await expect(container).toHaveNoAxeViolations();
+    });
   });
 
-  it(`renders children`, async () => {
-    render(<CoachmarkStack>{children}</CoachmarkStack>);
-    screen.getByText(children);
-  });
-
-  it('applies className to the containing node', async () => {
-    render(<CoachmarkStack className={className}> </CoachmarkStack>);
-    expect(screen.getByRole('main')).toHaveClass(className);
-  });
-
-  it('adds additional props to the containing node', async () => {
-    render(<CoachmarkStack data-testid={dataTestId}> </CoachmarkStack>);
+  it(`adds additional props to the containing node and renders children`, () => {
+    renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+    });
     screen.getByTestId(dataTestId);
+    screen.getByTestId(childDataTestId);
   });
 
-  it('forwards a ref to an appropriate node', async () => {
+  it('applies className to the containing node', () => {
+    renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+      className,
+    });
+
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<CoachmarkStack ref={ref}> </CoachmarkStack>);
+    renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+      ref,
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    render(<CoachmarkStack data-testid={dataTestId}> </CoachmarkStack>);
+  it('adds the Devtools attribute to the containing node', () => {
+    renderCoachmarkStack({
+      title: 'Coachmark Stack',
+      description: 'Coachmark Stack Description',
+      navLinkLabels: ['Label 1', 'Label 2', 'Label 3'],
+      tagline: 'Test Tagline',
+      'data-testid': dataTestId,
+    });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

@@ -14,7 +14,8 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
-
+import { Button } from '@carbon/react';
+import { useCoachmark } from '../Coachmark';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -39,24 +40,21 @@ const componentName = 'CoachmarkButton';
 // };
 
 /**
- * TODO: A description of the component.
+ * Use CoachmarkButton for the target prop of a Coachmark component.
  */
 export let CoachmarkButton = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
-      className,
-      /* TODO: add other props for CoachmarkButton, with default values if needed */
-
-      // Collect any other property values passed in.
-      ...rest
-    },
-    ref
-  ) => {
+  ({ className, label, ...rest }, ref) => {
+    const coachmark = useCoachmark();
+    if (!coachmark) {
+      return (
+        <div>
+          CoachmarkButton is to be use exclusively within the target prop of
+          Coachmark
+        </div>
+      );
+    }
     return (
-      <div
+      <Button
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -71,11 +69,13 @@ export let CoachmarkButton = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        role="button"
+        aria-label={label}
         {...getDevtoolsProps(componentName)}
+        {...coachmark.buttonProps}
       >
-        {children}
-      </div>
+        {label}
+      </Button>
     );
   }
 );
@@ -92,14 +92,11 @@ CoachmarkButton.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkButton.propTypes = {
   /**
-   * Provide the contents of the CoachmarkButton.
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * The aria label.
+   */
+  label: PropTypes.string.isRequired,
 };

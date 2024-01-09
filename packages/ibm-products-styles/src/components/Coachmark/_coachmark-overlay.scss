@@ -20,6 +20,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 
@@ -49,8 +50,8 @@ $draghandle-btn-class: #{$block-class}__handle;
     right: $spacing-05;
     bottom: 0;
     transform: translateY(100%);
-    /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
-    transition: 240ms carbon--motion(exit, productive);
+
+    transition: 240ms motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }

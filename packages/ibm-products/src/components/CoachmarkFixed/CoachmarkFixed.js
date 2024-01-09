@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,67 +15,181 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
+import { createPortal } from 'react-dom';
+import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
+import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
+import { CoachmarkContext } from '../Coachmark/utils/context';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-fixed`;
+const coachmarkClass = `${pkg.prefix}--coachmark`;
+const blockClass = `${coachmarkClass}-fixed`;
+const overlayBlockClass = `${coachmarkClass}-overlay`;
 const componentName = 'CoachmarkFixed';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
-// Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
+const defaults = {
+  onClose: () => {},
+  theme: 'light',
+  tagline: '',
+};
 
 /**
- * TODO: A description of the component.
+ * Fixed coachmarks are used to call out specific functionality or concepts
+ * within the UI that may not be intuitive but are important for the
+ * user to gain understanding of the product's main value and discover new use cases.
+ * This variant allows the a coachmark overlay to be displayed by interacting with the tagline.
  */
 export let CoachmarkFixed = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
+      children,
       className,
-      /* TODO: add other props for CoachmarkFixed, with default values if needed */
-
+      onClose = defaults.onClose,
+      portalTarget,
+      tagline = defaults.tagline,
+      theme = defaults.theme,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
+    const overlayRef = useRef();
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
+      : document.querySelector('body');
+    const [isOpen, setIsOpen] = useState(false);
+    const [shouldResetPosition, setShouldResetPosition] = useState(false);
+    const [targetRect, setTargetRect] = useState();
+    const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
+    const [fixedIsVisible, setFixedIsVisible] = useState(false);
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
+    const handleClose = useCallback(() => {
+      console.log('HANDLING CLOSE HERE...');
+      if (prefersReducedMotion.matches) {
+        setIsOpen(false);
+      } else {
+        setFixedIsVisible(false);
+      }
+    }, [prefersReducedMotion.matches]);
+
+    const handleTransitionEnd = (e) => {
+      console.log(
+        'Hererrrrrreee at transition end... ',
+        e.propertyName === 'transform' && !fixedIsVisible
+      );
+      if (e.propertyName === 'transform' && !fixedIsVisible) {
+        setIsOpen(false);
+        onClose();
+      }
+    };
+
+    const handleTargetClick = (e) => {
+      setTargetRect(e.target.getBoundingClientRect());
+      setTargetOffset({ x: e.target.offsetLeft, y: e.target.offsetTop });
+      // reset position for all other kinds
+      setIsOpen(false);
+      setShouldResetPosition(true);
+    };
+
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          handleClose();
         }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+
+    const contextValue = {
+      buttonProps: {
+        'aria-expanded': isOpen,
+        tabIndex: 0,
+        onClick: handleTargetClick,
+        // Compensate for accidental open/close on double-click.
+        // Only open on double-click.
+        onDoubleClick: handleTargetClick,
+      },
+      closeButtonProps: {
+        onClick: handleClose,
+      },
+      targetRect: targetRect,
+      targetOffset: targetOffset,
+      isOpen: isOpen,
+      tacos: 'tacos',
+    };
+
+    // instead of toggling on/off,
+    // keep open and reset to original position
+    useEffect(() => {
+      if (shouldResetPosition) {
+        setShouldResetPosition(false);
+        setIsOpen(true);
+      }
+    }, [shouldResetPosition]);
+
+    useEffect(() => {
+      setFixedIsVisible(isOpen);
+    }, [isOpen]);
+
+    // On unmount:
+    // - DO NOT "Close()" the coachmark.
+    //   - This triggers a "signal" to close it forever.
+    //   - "Closing" should only ever be a user-triggered event.
+    // - DO "hide" the coachmark.
+    //   - The app is doing the action for the user.
+    //   - The user will have the opportunity to open it again.
+    useEffect(() => {
+      return () => setIsOpen(false);
+    }, []);
+
+    return (
+      <CoachmarkContext.Provider value={contextValue}>
+        <div
           {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
+            // Pass through any other property values as HTML attributes.
+            ...rest
           }
-        )}
-        ref={ref}
-        role="main"
-        {...getDevtoolsProps(componentName)}
-      >
-        {children}
-      </div>
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            `${blockClass}__${theme}`,
+            className // Apply any supplied class names to the main HTML element.
+          )}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <CoachmarkTagline title={tagline} onClose={onClose} />
+          {isOpen &&
+            createPortal(
+              <CoachmarkOverlay
+                ref={overlayRef}
+                fixedIsVisible={fixedIsVisible}
+                kind={COACHMARK_OVERLAY_KIND.FIXED}
+                onClose={handleClose}
+                onTransitionEnd={handleTransitionEnd}
+                theme={theme}
+                className={cx(
+                  fixedIsVisible && `${overlayBlockClass}--is-visible`,
+                  overlayBlockClass
+                )}
+              >
+                {children}
+              </CoachmarkOverlay>,
+              portalNode
+            )}
+        </div>
+      </CoachmarkContext.Provider>
     );
   }
 );
@@ -91,15 +205,37 @@ CoachmarkFixed.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkFixed.propTypes = {
+  // TODO: Add this to MDX as will be done with Coachmark
   /**
-   * Provide the contents of the CoachmarkFixed.
+   * CoachmarkFixed should use a single CoachmarkOverlayElements component as a child.
    */
   children: PropTypes.node.isRequired,
-
   /**
-   * Provide an optional class to be applied to the containing node.
+   * Optional class name for this component.
    */
   className: PropTypes.string,
+  /**
+   * Function to call when the Coachmark closes.
+   */
+  onClose: PropTypes.func,
+  /**
+   * By default, the Coachmark will be appended to the end of `document.body`.
+   * The Coachmark will remain persistent as the user navigates the app until
+   * the user closes the Coachmark.
+   *
+   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
+   * element or other component by specifying a CSS selector. The Coachmark will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the Coachmark will disappear.
+   */
+  portalTarget: PropTypes.string,
+  /**
+   * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
+   */
+  tagline: PropTypes.string.isRequired,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * Determines the theme of the component.
+   */
+  theme: PropTypes.oneOf(['light', 'dark']),
 };

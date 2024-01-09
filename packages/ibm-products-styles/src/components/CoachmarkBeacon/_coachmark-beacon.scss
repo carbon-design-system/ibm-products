@@ -16,7 +16,7 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/button/tokens' as *;
-
+@use '@carbon/styles/scss/motion' as *;
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
 // or
@@ -118,7 +118,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
     fill-opacity: 0;
     r: 1px;
     stroke-opacity: 0;
-    transition-timing-function: carbon--motion(entrance, productive);
+    transition-timing-function: motion(entrance, productive);
   }
 
   31% {
@@ -144,7 +144,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
     fill-opacity: 0;
     r: 12px;
     stroke-opacity: 0;
-    transition-timing-function: carbon--motion(entrance, productive);
+    transition-timing-function: motion(entrance, productive);
   }
 
   31% {

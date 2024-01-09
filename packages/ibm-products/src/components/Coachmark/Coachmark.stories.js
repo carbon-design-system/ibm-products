@@ -8,7 +8,7 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
+import { Crossroads } from '@carbon/react/icons';
 import {
   getStoryTitle,
   getSelectedCarbonTheme,
@@ -108,13 +108,31 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmark = prepareStory(Template, {
+export const tooltip = prepareStory(Template, {
   args: {
     theme: 'dark',
     align: 'bottom',
     positionTune: { x: 0, y: 0 },
     target: (
       <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
+    ),
+  },
+});
+
+export const floating = prepareStory(Template, {
+  args: {
+    theme: 'dark',
+    align: 'bottom',
+    overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
+    target: (
+      <CoachmarkButton
+        kind="tertiary"
+        size="md"
+        label="Show information"
+        renderIcon={Crossroads}
+      >
+        Click Me
+      </CoachmarkButton>
     ),
   },
 });

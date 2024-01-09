@@ -6,7 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, {
+  Children,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
+import { createPortal } from 'react-dom';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -21,61 +28,229 @@ import { pkg /*, carbon */ } from '../../settings';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-stack`;
 const componentName = 'CoachmarkStack';
+const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
+import { CoachmarkStackHome } from './CoachmarkStackHome';
+import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
+import { CoachmarkContext } from '../Coachmark/utils/context';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
+const defaults = {
+  onClose: () => {},
+  // Pass through to CoachmarkStackHome
+  theme: 'light',
+};
 
-// Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
+// NOTE
+// The stack is limited to a depth of two Coachmarks:
+// - a single parent CoachmarkStackHome
+// - a single child Coachmark when stacked
+// The parent will include links to all the children.
+// No child Coachmark will include links to any other child Coachmarks.
 
 /**
- * TODO: A description of the component.
+ * Stacked coachmarks are used to call out specific functionality or concepts
+ * within the UI that may not be intuitive but are important for the
+ * user to gain understanding of the product's main value and discover new use cases.
+ * This variant allows the stacking of multiple coachmark overlays to be displayed by interacting with the tagline.
  */
 export let CoachmarkStack = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
+      children,
       className,
-      /* TODO: add other props for CoachmarkStack, with default values if needed */
-
-      // Collect any other property values passed in.
+      onClose = defaults.onClose,
+      // Pass through to CoachmarkStackHome
+      description,
+      media,
+      navLinkLabels,
+      portalTarget = defaults.portalTarget,
+      closeButtonLabel,
+      tagline,
+      theme = defaults.theme,
+      title,
       ...rest
     },
     ref
   ) => {
-    return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
+      : document.querySelector('body');
+    const stackHomeRef = useRef();
+    const stackedCoachmarkRefs = useRef([]);
+    const [isOpen, setIsOpen] = useState(false);
+    // selectedItemNumber -1 = parent close button was clicked, remove entire stack
+    // selectedItemNumber 0 = (default) the parent is visible, all children are hidden
+    // selectedItemNumber 1+ = a child is visible and stacked atop the parent
+    const [selectedItemNumber, setSelectedItemNumber] = useState(0);
+    // // The parent height and width values to return to after unstacked
+    const [parentHeight, setParentHeight] = useState(null);
+    // parent height = child height when stacked behind a child that is shorter
+    const childArray = Children.toArray(children);
+    const mountedRef = useRef();
+    // same value as CSS animation speed
+    const delayMs = 240;
+
+    // Unmount or unstack a child
+    const handleClickNavItem = (itemNumber) => {
+      setSelectedItemNumber(itemNumber);
+    };
+    const handleClose = useCallback(
+      (isParentCloseButton) => {
+        if (isParentCloseButton) {
+          // Trigger slide-out animation
+          setSelectedItemNumber(-1);
+
+          // Unmount after animation is complete
+          const timer = setTimeout(() => {
+            setIsOpen(false);
+            onClose();
+          }, delayMs);
+          return () => clearTimeout(timer);
+        } else {
+          // Unstack child
+          setSelectedItemNumber(0);
         }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
+      },
+      [onClose]
+    );
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          selectedItemNumber === 0 ? handleClose(true) : handleClose(false);
+        }
+      },
+      [handleClose, selectedItemNumber]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+
+    const contextValue = {
+      buttonProps: {
+        tabIndex: 0,
+        'aria-expanded': isOpen,
+        onClick: () => {
+          setIsOpen(true);
+        },
+        // Compensate for accidental open/close on double-click.
+        // Only open on double-click.
+        onDoubleClick: () => {
+          setIsOpen(true);
+        },
+      },
+      closeButtonProps: {
+        onClick: () => handleClose(false),
+      },
+      isOpen: isOpen,
+    };
+    useEffect(() => {
+      mountedRef.current = true;
+      return () => {
+        mountedRef.current = false;
+      };
+    }, []);
+    useEffect(() => {
+      setTimeout(() => {
+        if (stackHomeRef.current) {
+          setParentHeight(stackHomeRef.current.clientHeight + 16);
+        }
+      }, 0);
+    }, [stackHomeRef]);
+
+    useEffect(() => {
+      const targetSelectedItem = selectedItemNumber - 1;
+      if (!parentHeight) {
+        return;
+      }
+      stackHomeRef.current.style.height = `${parentHeight}px`;
+      if (!isOpen || targetSelectedItem < 0) {
+        stackHomeRef.current.focus();
+        return;
+      }
+
+      const targetHomeHeight =
+        stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
+
+      stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+      stackedCoachmarkRefs.current[targetSelectedItem].focus();
+    }, [selectedItemNumber, isOpen, parentHeight]);
+
+    const wrappedChildren = Children.map(childArray, (child, idx) => {
+      const mountedClass = mountedRef.current
+        ? `${elementBlockClass}--is-mounted`
+        : '';
+      return (
+        <CoachmarkOverlay
+          key={idx}
+          ref={(ref) => (stackedCoachmarkRefs.current[idx] = ref)}
+          kind={COACHMARK_OVERLAY_KIND.STACKED}
+          onClose={() => handleClose(false)}
+          theme={theme}
+          fixedIsVisible={false}
+          className={cx(
+            elementBlockClass,
+            mountedClass,
+            idx === selectedItemNumber - 1 &&
+              `${elementBlockClass}--is-visible`,
+            mountedRef.current && `${elementBlockClass}--is-mounted`
+          )}
+        >
+          {child}
+        </CoachmarkOverlay>
+      );
+    });
+
+    return (
+      <CoachmarkContext.Provider value={contextValue}>
+        <div
           {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
+            // Pass through any other property values as HTML attributes.
+            ...rest
           }
-        )}
-        ref={ref}
-        role="main"
-        {...getDevtoolsProps(componentName)}
-      >
-        {children}
-      </div>
+          className={cx(
+            blockClass,
+            `${pkg.prefix}--coachmark-overlay--stack`,
+            className
+          )}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <CoachmarkTagline title={tagline} onClose={onClose} />
+
+          <CoachmarkStackHome
+            ref={stackHomeRef}
+            className={cx(
+              `${pkg.prefix}--coachmark-overlay`,
+              `${pkg.prefix}--coachmark-overlay__${theme}`,
+              elementBlockClass,
+              selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
+              selectedItemNumber > 0 &&
+                `${elementBlockClass}--is-stacked__${theme}`,
+              isOpen && `${elementBlockClass}--is-visible`,
+              mountedRef.current && `${elementBlockClass}--is-mounted`
+            )}
+            isOpen={isOpen && selectedItemNumber < 1}
+            description={description}
+            media={media}
+            navLinkLabels={navLinkLabels}
+            onClickNavItem={handleClickNavItem}
+            onClose={() => {
+              handleClose(true);
+            }}
+            portalTarget={portalTarget}
+            closeButtonLabel={closeButtonLabel}
+            title={title}
+          />
+          {createPortal(wrappedChildren, portalNode)}
+        </div>
+      </CoachmarkContext.Provider>
     );
   }
 );
@@ -92,7 +267,7 @@ CoachmarkStack.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkStack.propTypes = {
   /**
-   * Provide the contents of the CoachmarkStack.
+   * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
    */
   children: PropTypes.node.isRequired,
 
@@ -101,5 +276,63 @@ CoachmarkStack.propTypes = {
    */
   className: PropTypes.string,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * The label for the button that will close the Stack
+   */
+  closeButtonLabel: PropTypes.string,
+
+  // Pass through to CoachmarkStackHome
+  /**
+   * The description of the Coachmark.
+   */
+  description: PropTypes.node.isRequired,
+
+  /**
+   * The object describing an image in one of two shapes.
+   *
+   * If a single media element is required, use `{render}`.
+   *
+   * If a stepped animation is required, use `{filePaths}`.
+   *
+   * @see {@link MEDIA_PROP_TYPE}.
+   */
+  media: PropTypes.oneOfType([
+    PropTypes.shape({
+      render: PropTypes.func,
+    }),
+    PropTypes.shape({
+      filePaths: PropTypes.arrayOf(PropTypes.string),
+    }),
+  ]),
+
+  /**
+   * The labels used to link to the stackable Coachmarks.
+   */
+  navLinkLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+  /**
+   * Function to call when the CoachmarkStack closes.
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Where in the DOM to render the stack.
+   * The default is `document.body`.
+   */
+  portalTarget: PropTypes.string,
+
+  /**
+   * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
+   */
+  tagline: PropTypes.string.isRequired,
+
+  /**
+   * Determines the theme of the component.
+   */
+  theme: PropTypes.oneOf(['light', 'dark']),
+
+  /**
+   * The title of the Coachmark.
+   */
+  title: PropTypes.string.isRequired,
 };

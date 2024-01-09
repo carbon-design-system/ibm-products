@@ -30,6 +30,7 @@ const defaults = {
   measurementOffset: 0,
   overflowAlign: 'bottom',
   overflowType: 'default',
+  onOverflowTagChange: () => {}
 };
 
 export let TagSet = React.forwardRef(
@@ -52,6 +53,7 @@ export let TagSet = React.forwardRef(
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
+      onOverflowTagChange = defaults.onOverflowTagChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -137,6 +139,7 @@ export let TagSet = React.forwardRef(
         />
       );
 
+      onOverflowTagChange?.(newOverflowTags)
       setDisplayedTags(newDisplayedTags);
     }, [
       displayCount,
@@ -145,6 +148,7 @@ export let TagSet = React.forwardRef(
       overflowType,
       showAllTagsLabel,
       tags,
+      onOverflowTagChange
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -348,6 +352,10 @@ TagSet.propTypes = {
    * display tags in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * Handler to get overflow tags
+   */
+  onOverflowTagChange: PropTypes.func,
   /**
    * overflowAlign from the standard tooltip. Default center.
    */

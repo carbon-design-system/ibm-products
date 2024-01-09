@@ -13,7 +13,7 @@
 @use '@carbon/styles/scss/breakpoint';
 @use './variables' as *;
 
-.#{$block-class}__table-toolbar>section {
+.#{$block-class}__table-toolbar > section {
   z-index: 2;
   overflow: visible; // RowSizeDropdown depend on this
 }
@@ -109,7 +109,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-
     &.#{c4p-settings.$carbon-prefix}--data-table--lg,
     &.#{c4p-settings.$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
@@ -127,7 +126,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
@@ -281,7 +279,10 @@
   }
 }
 
-.#{$block-class}__empty-state .#{c4p-settings.$carbon-prefix}--data-table tbody tr:not([data-child-row]):hover {
+.#{$block-class}__empty-state
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr:not([data-child-row]):hover {
   background: inherit;
 }
 
@@ -327,7 +328,8 @@
   background-color: $background-selected-hover;
 }
 
-.#{$block-class}__grid-container table.#{$block-class}__table-simple.#{c4p-settings.$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
+.#{$block-class}__grid-container
+  table.#{$block-class}__table-simple.#{c4p-settings.$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
   overflow-y: hidden;
 }
 
@@ -356,13 +358,25 @@
   background-color: $layer-accent;
 }
 
-.#{$block-class} .#{$block-class}__carbon-row .#{$block-class}__actions-column-cell-non-sticky .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
   opacity: 0;
 }
 
-.#{$block-class} .#{$block-class}__carbon-row:hover .#{$block-class}__actions-column-cell-non-sticky .#{c4p-settings.$carbon-prefix}--btn--icon-only,
-.#{$block-class} .#{$block-class}__carbon-row .#{$block-class}__actions-column-cell-non-sticky .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
-.#{$block-class} .#{$block-class}__carbon-row .#{$block-class}__actions-column-cell-non-sticky .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
   opacity: 1;
 }
 
@@ -403,7 +417,7 @@
   overflow: auto;
 }
 
-.#{$block-class}__sticky.#{$block-class}__table-simple thead>div {
+.#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
   overflow: hidden;
   /* stylelint-disable-next-line declaration-no-important */
   width: 100% !important;
@@ -479,7 +493,9 @@
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--row-height);
     /* stylelint-disable-next-line carbon/layout-token-use */
-    left: calc(var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05});
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
     width: 1px;
     height: var(--#{$block-class}--indicator-height);
     border-left: 1px solid $border-subtle-selected-01;
@@ -530,11 +546,17 @@
   }
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  ) {
   position: relative;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  )::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -544,26 +566,33 @@
   content: '';
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$carbon-prefix}--batch-summary__para {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-summary__para {
   white-space: nowrap;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$carbon-prefix}--batch-actions .#{c4p-settings.$carbon-prefix}--batch-actions--active {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-actions
+  .#{c4p-settings.$carbon-prefix}--batch-actions--active {
   overflow-x: hidden;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
   display: flex;
   min-width: $spacing-08;
   justify-content: center;
   margin-right: $spacing-04;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
   min-width: calc(#{$spacing-12} + #{$spacing-03});
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu
+  .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
   display: flex;
   width: 100%;
   min-width: $spacing-09;
@@ -618,7 +647,8 @@
   background-color: $interactive;
 }
 
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger svg {
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
   fill: $background;
 }
 
@@ -637,7 +667,8 @@
   background-color: transparent;
 }
 
-.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--modal-container {
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
   position: absolute;
 }
 
@@ -652,11 +683,15 @@
   background-color: $layer-accent;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--action-list .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--action-list
+  .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
   padding: 0;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--action-list .#{c4p-settings.$carbon-prefix}--btn__icon {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--action-list
+  .#{c4p-settings.$carbon-prefix}--btn__icon {
   margin-top: 0;
 }
 
@@ -678,7 +713,9 @@
   outline: 0;
 }
 
-.#{$block-class} .#{$block-class}__col-resizer-range:focus+.#{$block-class}__col-resize-indicator::before {
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::before {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -689,7 +726,9 @@
   transform: translate(-50%, -50%);
 }
 
-.#{$block-class} .#{$block-class}__col-resizer-range:focus+.#{$block-class}__col-resize-indicator {
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator {
   position: absolute;
   z-index: 2;
   right: calc(#{$spacing-03} * -1);
@@ -701,13 +740,17 @@
   transform: translate(-50%, 0);
 }
 
-.#{$block-class} .#{$block-class}__col-resizer-range:focus+.#{$block-class}__col-resize-indicator::after {
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::after {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: calc(var(--#{$block-class}--row-height) - 20px);
   right: $spacing-02;
   width: 1px;
-  height: calc(var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height));
+  height: calc(
+    var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
+  );
   background-color: $layer-active-01;
   content: '';
 }

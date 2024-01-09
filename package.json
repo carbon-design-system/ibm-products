@@ -29,7 +29,7 @@
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:js": "eslint packages --fix",
-    "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
+    "lint:styles": "stylelint '**/*.scss'",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
@@ -151,7 +151,7 @@
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
-      "npx stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
+      "npx stylelint"
     ],
     "!(*sass).md": [
       "npx prettier --cache --write"

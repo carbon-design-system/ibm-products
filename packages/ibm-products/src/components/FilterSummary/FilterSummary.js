@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2022, 2024
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import React, { useRef } from 'react';
 import { Button } from '@carbon/react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { TagSet } from '../TagSet';
@@ -40,7 +39,6 @@ let FilterSummary = React.forwardRef(
     const filterSummaryClearButton = useRef();
     const filterSummaryRef = useRef();
     const localRef = filterSummaryRef || ref;
-
     return (
       <div
         ref={localRef}
@@ -65,7 +63,6 @@ let FilterSummary = React.forwardRef(
           size="sm"
           onClick={clearFilters}
           ref={filterSummaryClearButton}
-          className={`${blockClass}__clear-all-button`}
         >
           {clearFiltersText}
         </Button>

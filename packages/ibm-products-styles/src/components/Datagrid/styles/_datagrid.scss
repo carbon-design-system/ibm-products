@@ -279,6 +279,13 @@
   }
 }
 
+.#{$block-class}__empty-state
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr:not([data-child-row]):hover {
+  background: inherit;
+}
+
 .#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover {
   background: transparent;
 }
@@ -375,6 +382,7 @@
 
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-09;
+
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
     z-index: 1;

@@ -51,7 +51,7 @@ $draghandle-btn-class: #{$block-class}__handle;
     bottom: 0;
     transform: translateY(100%);
 
-    transition: 240ms motion(exit, productive);
+    transition: transform $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }

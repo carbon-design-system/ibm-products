@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable max-nesting-depth */
+
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
@@ -41,7 +43,7 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
   &--is-mounted {
     bottom: 0;
     /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
-    transition: transform 240ms motion(exit, productive);
+    transition: transform $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }
@@ -64,10 +66,12 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
     visibility: visible;
 
     &__light {
+      /* stylelint-disable-next-line carbon/theme-token-use */
       background-color: $gray-90;
     }
 
     &__dark {
+      /* stylelint-disable-next-line carbon/theme-token-use */
       background-color: $button-tertiary-active;
     }
   }

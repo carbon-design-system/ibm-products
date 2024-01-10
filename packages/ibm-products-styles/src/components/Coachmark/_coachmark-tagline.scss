@@ -1,4 +1,3 @@
-/* stylelint-disable max-nesting-depth */
 //
 // Copyright IBM Corp. 2023, 2023
 //
@@ -6,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable max-nesting-depth */
 /* stylelint-disable carbon/theme-token-use */
 /* stylelint-disable declaration-no-important */
 
@@ -39,8 +39,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
   grid-template-columns: [ctacol] auto [closebtncol] $spacing-08;
   opacity: 1;
   // stylelint-disable-next-line carbon/motion-duration-use
-  transition: opacity 240ms motion(exit, productive) 300ms;
-  transition-delay: 240ms;
+  transition: opacity $duration-moderate-02 motion(exit, productive) 300ms;
+  transition-delay: $duration-moderate-02;
 
   @media (prefers-reduced-motion) {
     transition: none;
@@ -54,7 +54,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
     inset: 0;
     opacity: 0;
     /* stylelint-disable-next-line carbon/motion-duration-use */
-    transition: opacity 240ms motion(exit, productive);
+    transition: opacity $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }
@@ -103,11 +103,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
       justify-self: center;
     }
   }
+
   &--close-btn-container {
     width: $spacing-07;
     height: $spacing-07;
     margin-left: auto;
   }
+
   &--close-btn {
     width: $spacing-07;
     height: $spacing-07;

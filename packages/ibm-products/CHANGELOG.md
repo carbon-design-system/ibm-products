@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.66.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.65.0...@carbon/ibm-products@1.66.0) (2024-01-09)
+
+
+### Bug Fixes
+
+* **SidePanel:** action buttons layout at 2xl (v1) ([#3999](https://github.com/carbon-design-system/ibm-products/issues/3999)) ([f573b79](https://github.com/carbon-design-system/ibm-products/commit/f573b7915cbd53a226ba79191e969f20db5493ca))
+
+
+### Features
+
+* **Datagrid:** add reduced motion support to filter panel ([#3996](https://github.com/carbon-design-system/ibm-products/issues/3996)) ([3932bfd](https://github.com/carbon-design-system/ibm-products/commit/3932bfda72ca1341081a3fc595978792f5131e1b))
+
+
+
+
+
 # [1.65.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.64.0...@carbon/ibm-products@1.65.0) (2023-12-26)
 
 

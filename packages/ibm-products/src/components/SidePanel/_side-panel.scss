@@ -73,8 +73,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         @include setPanelSize($size_value);
         .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
         .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-        .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
-        .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+        .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
           @include setPanelSize($size_value);
         }
       }
@@ -86,6 +85,9 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         left: 0;
         border-right: 1px solid $decorative-01;
       }
+    }
+    .#{$block-class}__actions-container {
+      width: 100%;
     }
     &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
       .#{$block-class}__title-container {

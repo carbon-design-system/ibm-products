@@ -72,7 +72,7 @@ let FilterSummary = React.forwardRef(
         key={type}
         initial={{
           opacity: 0,
-          y: -48,
+          y: -16,
         }}
         animate={{
           opacity: 1,
@@ -80,7 +80,7 @@ let FilterSummary = React.forwardRef(
         }}
         exit={{
           opacity: 0,
-          y: -48,
+          y: -16,
         }}
         transition={{
           duration: DURATIONS.moderate01,

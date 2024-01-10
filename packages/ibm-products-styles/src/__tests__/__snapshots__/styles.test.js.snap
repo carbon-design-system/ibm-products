@@ -3425,6 +3425,10 @@ p.c4p--about-modal__copyright-text:first-child {
   max-width: 280px;
 }
 
+.c4p--datagrid__empty-state .cds--data-table tbody tr:not([data-child-row]):hover {
+  background: inherit;
+}
+
 .c4p--datagrid__empty-state .c4p--datagrid__table-simple tr:hover {
   background: transparent;
 }

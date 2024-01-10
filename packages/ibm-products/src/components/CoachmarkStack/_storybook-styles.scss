@@ -8,3 +8,6 @@
 @use '../../../../ibm-products-styles/src/global/styles/project-settings';
 
 // TODO: add any additional styles used by CoachmarkStack.stories.js
+.docs-story div {
+  transform: none;
+}

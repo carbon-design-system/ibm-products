@@ -11,9 +11,10 @@ import React from 'react';
 
 import {
   getStoryTitle,
+  getSelectedCarbonTheme,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-
+import { Coachmark, CoachmarkOverlayElement, CoachmarkBeacon } from '..';
 import { CoachmarkOverlayElements } from '.';
 import mdx from './CoachmarkOverlayElements.mdx';
 
@@ -23,10 +24,14 @@ export default {
   title: getStoryTitle(CoachmarkOverlayElements.displayName),
   component: CoachmarkOverlayElements,
   tags: ['autodocs'],
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    children: {
+      control: { type: null },
+    },
+    media: {
+      control: { type: null },
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -34,27 +39,38 @@ export default {
     },
   },
 };
+const Anim1 = new URL('./assets/anim1.json', import.meta.url).pathname;
+const Anim2 = new URL('./assets/anim2.json', import.meta.url).pathname;
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
 const Template = (args) => {
+  const theme = getSelectedCarbonTheme();
   return (
-    <CoachmarkOverlayElements
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <Coachmark
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={<CoachmarkBeacon label="Show information" kind={'default'} />}
+      theme={theme}
+    >
+      <CoachmarkOverlayElements {...args}>
+        <CoachmarkOverlayElement
+          title="Example 1"
+          description="This is an example description."
+        />
+        <CoachmarkOverlayElement
+          title="Example 2"
+          description="This is another example description."
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
   );
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
 export const coachmarkOverlayElements = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#CoachmarkOverlayElements-args
-    children: 'hello, world',
+    closeButtonLabel: 'Done',
+    nextButtonText: 'Next',
+    previousButtonLabel: 'Back',
+    className: 'myOverlayElements',
+    media: { filePaths: [Anim1, Anim2] },
   },
 });

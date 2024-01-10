@@ -15,19 +15,40 @@ import { CoachmarkButton } from '.';
 
 ## Overview
 
-{/* TODO: Overview. */}
+CoachmarkButton components use a ghost variant Carbon button specifically
+designed to be used in the target prop of a Coachmark component
+[floating](https://pages.github.ibm.com/cdai-design/pal/components/onboarding/coachmark/usage#floating)
+variant.
 
 ## Example usage
 
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
+  </div>
 </Canvas>
 
 ## Code sample
 
-{/* <CodesandboxLink exampleDirectory="CoachmarkButton" /> */}
+```jsx
+<Coachmark
+  theme={'light'}
+  target={
+    <CoachmarkButton
+      kind="tertiary"
+      label="Show information"
+      size="md"
+      renderIcon={Crossroads}
+      label="Click Me"
+      className="myButton"
+    />
+  }
+>
+  ...
+</Coachmark>
+```
 
 ## Component API
 

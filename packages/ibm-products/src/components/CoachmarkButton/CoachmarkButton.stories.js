@@ -8,12 +8,18 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
+import { Crossroads } from '@carbon/react/icons';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark';
 import {
   getStoryTitle,
   prepareStory,
+  getSelectedCarbonTheme,
 } from '../../global/js/utils/story-helper';
-
+import {
+  Coachmark,
+  CoachmarkOverlayElement,
+  CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkButton } from '.';
 import mdx from './CoachmarkButton.mdx';
 
@@ -35,16 +41,30 @@ export default {
   },
 };
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
 const Template = (args) => {
+  const theme = getSelectedCarbonTheme();
   return (
-    <CoachmarkButton
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <Coachmark
+      align={'bottom'}
+      overlayKind={COACHMARK_OVERLAY_KIND.FLOATING}
+      target={
+        <CoachmarkButton
+          kind="tertiary"
+          label="Show information"
+          size="md"
+          renderIcon={Crossroads}
+          {...args}
+        />
+      }
+      theme={theme}
+    >
+      <CoachmarkOverlayElements closeButtonLabel="Done">
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="this is a description test"
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
   );
 };
 
@@ -54,7 +74,7 @@ const Template = (args) => {
  */
 export const coachmarkButton = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#CoachmarkButton-args
-    children: 'hello, world',
+    label: 'Click Me',
+    className: 'myButton',
   },
 });

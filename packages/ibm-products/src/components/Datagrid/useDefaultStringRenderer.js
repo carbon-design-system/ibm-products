@@ -13,15 +13,14 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const useDefaultStringRenderer = (hooks) => {
   const StringRenderer = (tableProps) => (
-    <div
+    <span
       className={cx(`${blockClass}__defaultStringRenderer`, {
         [`${blockClass}__defaultStringRenderer--multiline`]:
           tableProps.column?.multiLineWrap || tableProps?.multiLineWrapAll,
       })}
-      title={tableProps.value}
     >
       {tableProps.value}
-    </div>
+    </span>
   );
 
   const HeaderRenderer = (header) => (

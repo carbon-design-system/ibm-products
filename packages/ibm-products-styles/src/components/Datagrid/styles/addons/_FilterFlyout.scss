@@ -1,10 +1,9 @@
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+//
+// Copyright IBM Corp. 2022, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 // stylelint-disable carbon/layout-token-use
 
@@ -82,7 +81,7 @@ $action-set-height: to-rem(64px);
   display: grid;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   gap: to-rem(16px) rem(32px);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 // Carbon overrides
@@ -103,4 +102,8 @@ $action-set-height: to-rem(64px);
 .#{variables.$block-class}-filter-flyout
   .#{c4p-settings.$carbon-prefix}--fieldset {
   margin-bottom: 0;
+}
+
+.#{variables.$block-class}-filter-flyout__stacked {
+  grid-template-columns: 1fr;
 }

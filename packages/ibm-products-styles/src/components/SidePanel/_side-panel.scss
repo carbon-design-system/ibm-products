@@ -199,9 +199,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     overflow: hidden;
     padding-right: var(--#{$block-class}--title-padding-right);
+    margin-top: var(--#{$block-class}--title-y-position);
     opacity: var(--#{$block-class}--subtitle-opacity);
     text-overflow: ellipsis;
-    transform: translateY(var(--#{$block-class}--title-y-position));
     white-space: nowrap;
   }
   .#{$block-class}__collapsed-title-text {

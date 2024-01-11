@@ -25,6 +25,11 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    portalTarget: {
+      control: false,
+    },
+  },
 };
 
 const resourceName = 'bx1001';

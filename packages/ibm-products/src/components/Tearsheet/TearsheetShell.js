@@ -128,6 +128,7 @@ export const TearsheetShell = React.forwardRef(
     handleStackChange.checkFocus = function () {
       // if we are now the topmost tearsheet, ensure we have focus
       if (
+        open &&
         position === depth &&
         modalRef.current &&
         !modalRef.current.contains(document.activeElement)

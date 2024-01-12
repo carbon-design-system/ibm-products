@@ -117,7 +117,6 @@ const FilterPanel = ({
   };
 
   const apply = () => {
-    console.log('clicked apply');
     setAllFilters(filtersObjectArray);
     // From the user
     onApply();

@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { TagSet } from '../TagSet';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -19,11 +20,12 @@ let FilterSummary = React.forwardRef(
     {
       className = '',
       clearFiltersText = 'Clear filters',
-      clearFilters = () => {},
-      filters = [],
+      clearFilters,
+      filters,
       renderLabel = null,
       overflowType = 'default',
       clearButtonInline = true,
+      ...rest
     },
     ref
   ) => {
@@ -41,9 +43,11 @@ let FilterSummary = React.forwardRef(
     const localRef = filterSummaryRef || ref;
     return (
       <div
+        {...getDevtoolsProps(componentName)}
+        id={filterSummaryId}
+        {...rest}
         ref={localRef}
         className={cx([blockClass, className])}
-        id={filterSummaryId}
       >
         <TagSet
           allTagsModalSearchLabel="Search all tags"

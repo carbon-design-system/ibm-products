@@ -62,6 +62,10 @@ import {
   FilteringUsage,
   filterProps,
 } from './Extensions/Filtering/Panel.stories';
+import {
+  FilteringUsage as FlyoutUsage,
+  filterProps as flyoutProps,
+} from './Extensions/Filtering/Flyout.stories';
 const { click, hover, unhover } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -2282,17 +2286,30 @@ describe(componentName, () => {
     expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
   });
 
+  const sharedFilterGridProps = {
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  };
+
   it('should test basic interactions of filter panel', async () => {
+    const updatedFilterProps = { ...filterProps };
+    // Removing certain properties to test default function parameters in FilterPanel
+    delete updatedFilterProps.panelTitle;
+    delete updatedFilterProps.closeIconDescription;
+    delete updatedFilterProps.updateMethod;
+    delete updatedFilterProps.primaryActionLabel;
+    delete updatedFilterProps.secondaryActionLabel;
+    delete updatedFilterProps.onPanelOpen;
+    delete updatedFilterProps.onPanelClose;
     render(
       <FilteringUsage
         defaultGridProps={{
-          gridTitle: 'Data table title',
-          gridDescription: 'Additional information if needed',
-          useDenseHeader: false,
-          emptyStateTitle: 'No filters match',
-          emptyStateDescription:
-            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-          filterProps,
+          ...sharedFilterGridProps,
+          filterProps: updatedFilterProps,
         }}
       />
     );
@@ -2304,6 +2321,54 @@ describe(componentName, () => {
     await click(filterToggleButton);
     expect(panelContainer).toHaveClass(
       `${blockClass}__table-container--filter-open`
+    );
+
+    const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
+    await click(normalCheckbox);
+
+    const applyButton = screen.getByRole('button', { name: 'Apply' });
+    await click(applyButton);
+
+    const panelCloseButton = screen.getByLabelText('Close filter panel');
+    await click(panelCloseButton);
+    expect(panelContainer).not.toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+  });
+  it('should test basic interactions of filter flyout', async () => {
+    const updatedFilterProps = { ...flyoutProps };
+    // Removing certain properties to test default function parameters in FilterFlyout
+    delete updatedFilterProps.panelTitle;
+    delete updatedFilterProps.updateMethod;
+    delete updatedFilterProps.primaryActionLabel;
+    delete updatedFilterProps.secondaryActionLabel;
+    delete updatedFilterProps.flyoutIconDescription;
+    delete updatedFilterProps.onFlyoutOpen;
+    delete updatedFilterProps.onFlyoutClose;
+    const { container } = render(
+      <FlyoutUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: updatedFilterProps,
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const flyoutTrigger = within(toolbar).getByRole('button', {
+      name: 'Open filters',
+    });
+    const filterFlyoutTriggerPopover =
+      flyoutTrigger.parentElement.parentElement;
+
+    // Open filter flyout
+    await click(flyoutTrigger);
+    expect(filterFlyoutTriggerPopover.nextElementSibling).toHaveClass(
+      `${blockClass}-filter-flyout--open`
+    );
+
+    await click(container);
+    expect(filterFlyoutTriggerPopover.nextElementSibling).not.toHaveClass(
+      `${blockClass}-filter-flyout--open`
     );
   });
 });

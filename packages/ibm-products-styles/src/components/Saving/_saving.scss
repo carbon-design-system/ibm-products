@@ -12,6 +12,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--saving;
+// $carbon-prefix: 'cds';
 
 .#{$block-class}__message {
   display: flex;
@@ -31,4 +32,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--saving;
 
 .#{$block-class}__buttons {
   display: flex;
+}
+
+.#{$block-class}__buttons .#{c4p-settings.$carbon-prefix}--btn .#{c4p-settings.$carbon-prefix}--inline-loading{
+  min-block-size: auto;
 }

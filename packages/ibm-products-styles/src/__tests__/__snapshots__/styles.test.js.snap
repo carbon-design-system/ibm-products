@@ -5493,6 +5493,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--card__media + .c4p--card__content-container {
+  /* display relative to container when media displayed */
   position: relative;
 }
 
@@ -9092,6 +9093,10 @@ button.c4p--add-select__global-filter-toggle--open {
 
 .c4p--saving__buttons {
   display: flex;
+}
+
+.c4p--saving__buttons .cds--btn .cds--inline-loading {
+  min-block-size: auto;
 }
 
 @keyframes rotating {

@@ -40,7 +40,7 @@ let FilterSummary = React.forwardRef(
 
     const filterSummaryClearButton = useRef();
     const filterSummaryRef = useRef();
-    const localRef = filterSummaryRef || ref;
+    const localRef = ref || filterSummaryRef;
     return (
       <div
         {...getDevtoolsProps(componentName)}

@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   border-left: 1px solid $layer-active-02;
+  background-color: $layer-01;
 }
 
 .#{variables.$block-class}__right-sticky-column-header {

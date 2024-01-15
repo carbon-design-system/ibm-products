@@ -34,6 +34,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--saving;
   display: flex;
 }
 
-.#{$block-class}__buttons .#{c4p-settings.$carbon-prefix}--btn .#{c4p-settings.$carbon-prefix}--inline-loading{
+.#{$block-class}__buttons
+  .#{c4p-settings.$carbon-prefix}--btn
+  .#{c4p-settings.$carbon-prefix}--inline-loading {
   min-block-size: auto;
 }

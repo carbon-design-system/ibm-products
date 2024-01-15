@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2023, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   DURATIONS,
   EASINGS,
@@ -5,57 +12,60 @@ import {
 import { ACTION_SET_HEIGHT, PANEL_WIDTH } from '../constants';
 
 export const panelVariants = {
-  hidden: {
+  hidden: (shouldReduceMotion) => ({
     width: 0,
     overflow: 'hidden',
     transition: {
-      duration: DURATIONS.fast02,
-      ease: EASINGS.productive.exit,
+      duration: shouldReduceMotion ? 0 : DURATIONS.fast02,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
       when: 'afterChildren',
     },
-  },
-  visible: {
+  }),
+  visible: (shouldReduceMotion) => ({
     width: PANEL_WIDTH,
     overflow: 'visible',
     transition: {
-      duration: DURATIONS.moderate02,
-      ease: EASINGS.productive.entrance,
+      duration: shouldReduceMotion ? 0 : DURATIONS.moderate02,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
       when: 'beforeChildren',
     },
-  },
+  }),
 };
 
 export const innerContainerVariants = {
-  hidden: {
+  hidden: (shouldReduceMotion) => ({
     opacity: 0,
     transition: {
-      duration: DURATIONS.fast01,
-      ease: EASINGS.productive.exit,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
     },
-  },
-  visible: {
+  }),
+  visible: (shouldReduceMotion) => ({
     opacity: 1,
     transition: {
-      duration: DURATIONS.fast02,
-      ease: EASINGS.productive.entrance,
-      when: 'beforeChildren',
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
+      when: shouldReduceMotion ? null : 'beforeChildren',
     },
-  },
+  }),
 };
 
 export const actionSetVariants = {
-  hidden: {
-    y: ACTION_SET_HEIGHT,
+  hidden: (shouldReduceMotion) => ({
+    y: shouldReduceMotion ? 0 : ACTION_SET_HEIGHT,
+    opacity: shouldReduceMotion ? 0 : 1,
     transition: {
-      duration: DURATIONS.fast01,
-      ease: EASINGS.productive.exit,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
     },
-  },
-  visible: {
+  }),
+  visible: (shouldReduceMotion) => ({
     y: 0,
+    opacity: 1,
     transition: {
-      duration: DURATIONS.fast02,
-      ease: EASINGS.productive.entrance,
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
+      delay: shouldReduceMotion ? 0.075 : 0,
     },
-  },
+  }),
 };

@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.1...@carbon/ibm-products@2.19.2) (2024-01-02)
+
+
+### Bug Fixes
+
+* add lottie-web to ibm-products package.json ([#3990](https://github.com/carbon-design-system/ibm-products/issues/3990)) ([89d435a](https://github.com/carbon-design-system/ibm-products/commit/89d435a1663451ea0bb19c494045a8c92af96fe3))
+
+
+
+
+
+## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.0...@carbon/ibm-products@2.19.1) (2023-12-26)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.19.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.18.1...@carbon/ibm-products@2.19.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* add missing N2P component exports ([#3974](https://github.com/carbon-design-system/ibm-products/issues/3974)) ([a03df87](https://github.com/carbon-design-system/ibm-products/commit/a03df8742a1f462e853b95e80e080f765d8d3943))
+* **Datagrid:** address duplicate id with radio filters ([#3962](https://github.com/carbon-design-system/ibm-products/issues/3962)) ([0274aef](https://github.com/carbon-design-system/ibm-products/commit/0274aeffc90a916509b6f94611262e35351013a1))
+* **Datagrid:** re-apply filters during fetching state ([#3955](https://github.com/carbon-design-system/ibm-products/issues/3955)) ([29e5de9](https://github.com/carbon-design-system/ibm-products/commit/29e5de9f655a6bec1150e8048655a5a87cd20068))
+* **Guidebanner:** allow adding 1rem space on the left ([#3965](https://github.com/carbon-design-system/ibm-products/issues/3965)) ([fcd0388](https://github.com/carbon-design-system/ibm-products/commit/fcd038879e19b6498c63d2848fc5ae25c74c086c))
+* **InlineTip:** allow adding 1rem space on the left, v2 ([#3969](https://github.com/carbon-design-system/ibm-products/issues/3969)) ([feaa1ce](https://github.com/carbon-design-system/ibm-products/commit/feaa1cecf0386213170ace8489cbfb0ebe45f500))
+* removes unnecessary roles from datagrid ([#3957](https://github.com/carbon-design-system/ibm-products/issues/3957)) ([45db4ae](https://github.com/carbon-design-system/ibm-products/commit/45db4ae33b8aa35224f7b8c44261a057930f4eaa))
+
+
+### Features
+
+* Cards ai ([#3953](https://github.com/carbon-design-system/ibm-products/issues/3953)) ([e7ab94e](https://github.com/carbon-design-system/ibm-products/commit/e7ab94eca8dcb86ce7227f83c6ed0923c413df32))
+* **Datagrid:** clear out filter history on reset ([#3960](https://github.com/carbon-design-system/ibm-products/issues/3960)) ([48e4820](https://github.com/carbon-design-system/ibm-products/commit/48e4820f56a8f892c63eaa1a3d32cd3f0e6cf96b))
+* **Datagrid:** support timestamp date formats in filtering ([#3967](https://github.com/carbon-design-system/ibm-products/issues/3967)) ([fecea90](https://github.com/carbon-design-system/ibm-products/commit/fecea9083ea7eb8a71f84ee654592849739efb62))
+* side panel for create and edit + type check ([#3954](https://github.com/carbon-design-system/ibm-products/issues/3954)) ([8589f2e](https://github.com/carbon-design-system/ibm-products/commit/8589f2ef537d2001f1a04cb98b8dddb915f20ef8))
+
+
+
+
+
 ## [2.18.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.18.0...@carbon/ibm-products@2.18.1) (2023-12-12)
 
 **Note:** Version bump only for package @carbon/ibm-products

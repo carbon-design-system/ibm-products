@@ -27,15 +27,35 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    accept: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'image (png, jpeg or gif)',
+          1: 'document (doc or pdf)',
+          2: 'development (html, css or javascript)',
+        },
+      },
+      options: [0, 1, 2],
+      mapping: {
+        0: ['image/png', 'image/jpeg', 'image/gif'],
+        1: ['application/doc', 'application/docx', 'application/pdf'],
+        2: ['text/plain', 'text/css', 'text/html', 'text/javascript'],
+      },
+    },
+    portalTarget: {
+      control: false,
+    },
+  },
 };
 
 const defaultProps = {
-  accept: ['image/jpeg', 'image/png'],
   className: 'test-class',
   defaultErrorBody: 'Select a new file and try again.',
   defaultErrorHeader: 'Import failed',
   description:
-    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB; .jpg and .png file extensions only.)',
+    'You can specify a file to import by either dragging it into the drag and drop area or by specifying a URL. (Maximum file size of 500KB)',
   fetchErrorBody: 'Unable to fetch URL.',
   fetchErrorHeader: 'Import failed',
   fileDropHeader: 'Add files using drag and drop',
@@ -72,6 +92,7 @@ const TemplateWithState = (args) => {
 
 export const Standard = prepareStory(TemplateWithState, {
   args: {
+    accept: 0,
     ...defaultProps,
   },
 });

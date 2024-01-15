@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.19.0...@carbon/ibm-products-styles@2.19.1) (2023-12-26)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.19.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.18.1...@carbon/ibm-products-styles@2.19.0) (2023-12-19)
+
+
+### Bug Fixes
+
+* **Guidebanner:** allow adding 1rem space on the left ([#3965](https://github.com/carbon-design-system/ibm-products/issues/3965)) ([fcd0388](https://github.com/carbon-design-system/ibm-products/commit/fcd038879e19b6498c63d2848fc5ae25c74c086c))
+* **InlineTip:** allow adding 1rem space on the left, v2 ([#3969](https://github.com/carbon-design-system/ibm-products/issues/3969)) ([feaa1ce](https://github.com/carbon-design-system/ibm-products/commit/feaa1cecf0386213170ace8489cbfb0ebe45f500))
+
+
+### Features
+
+* Cards ai ([#3953](https://github.com/carbon-design-system/ibm-products/issues/3953)) ([e7ab94e](https://github.com/carbon-design-system/ibm-products/commit/e7ab94eca8dcb86ce7227f83c6ed0923c413df32))
+* side panel for create and edit + type check ([#3954](https://github.com/carbon-design-system/ibm-products/issues/3954)) ([8589f2e](https://github.com/carbon-design-system/ibm-products/commit/8589f2ef537d2001f1a04cb98b8dddb915f20ef8))
+
+
+
+
+
 ## [2.18.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.18.0...@carbon/ibm-products-styles@2.18.1) (2023-12-12)
 
 

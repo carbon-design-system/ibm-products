@@ -77,19 +77,21 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       @include setPanelSize($size_value);
       .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
       .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
-      .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
         @include setPanelSize($size_value);
       }
     }
-    &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
-      right: 0;
-      border-left: 1px solid $border-subtle-02;
-    }
-    &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
-      left: 0;
-      border-right: 1px solid $border-subtle-02;
-    }
+  }
+  .#{$block-class}__actions-container {
+    width: 100%;
+  }
+  &.#{$block-class}__container-right-placement {
+    right: 0;
+    border-left: 1px solid $border-subtle-02;
+  }
+  &.#{$block-class}__container-left-placement {
+    left: 0;
+    border-right: 1px solid $border-subtle-02;
   }
   &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
     .#{$block-class}__title-container {

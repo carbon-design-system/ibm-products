@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.66.0...@carbon/ibm-products@1.67.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* **Datagrid:** use correct motion specs for reduced motion ([#4024](https://github.com/carbon-design-system/ibm-products/issues/4024)) ([ab342ab](https://github.com/carbon-design-system/ibm-products/commit/ab342abbb6698ff6cc15d66af359e0479c19367e))
+
+
+### Features
+
+* **Datagrid:** add responsive updates to filter flyout (v1) ([#4002](https://github.com/carbon-design-system/ibm-products/issues/4002)) ([842efc1](https://github.com/carbon-design-system/ibm-products/commit/842efc13806aa7595e46fcbdced66c4b1f0c5caf))
+
+
+
+
+
 # [1.66.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.65.0...@carbon/ibm-products@1.66.0) (2024-01-09)
 
 

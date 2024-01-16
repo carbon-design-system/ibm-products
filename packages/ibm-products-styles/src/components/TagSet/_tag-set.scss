@@ -145,6 +145,10 @@ $block-class-modal: #{$_block-class}-modal;
     margin-bottom: $spacing-03;
   }
 
+  .#{$block-class-overflow}__tag-list--alt {
+    margin-bottom: 0;
+  }
+
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
     .#{$carbon-prefix}--tag {
     background-color: $background-inverse-hover;

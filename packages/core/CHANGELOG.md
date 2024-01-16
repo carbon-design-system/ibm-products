@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.8.1...@carbon/ibm-cloud-cognitive-core@2.8.2) (2024-01-16)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#3993](https://github.com/carbon-design-system/ibm-products/issues/3993)) ([c44ff55](https://github.com/carbon-design-system/ibm-products/commit/c44ff558cc753821289bec1b4a14d96c8bc42b46))
+* update format and lint ([#4011](https://github.com/carbon-design-system/ibm-products/issues/4011)) ([8adfa5d](https://github.com/carbon-design-system/ibm-products/commit/8adfa5d49b7d5fac53fe1e336c28ee7ad4f29503))
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.8.0...@carbon/ibm-cloud-cognitive-core@2.8.1) (2023-12-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

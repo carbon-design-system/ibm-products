@@ -12,7 +12,6 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--saving;
-// $carbon-prefix: 'cds';
 
 .#{$block-class}__message {
   display: flex;

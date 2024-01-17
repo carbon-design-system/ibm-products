@@ -93,8 +93,7 @@ const DatagridRow = (datagridState) => {
   };
 
   const handleMouseLeave = (event) => {
-    if(mouseHover)
-    {
+    if (mouseHover) {
       setMouseOverRowIndex(null);
     }
     const hoverRow = event.target.closest(

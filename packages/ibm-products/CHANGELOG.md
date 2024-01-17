@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.2...@carbon/ibm-products@2.20.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* datagrid empty state hover background color ([#4008](https://github.com/carbon-design-system/ibm-products/issues/4008)) ([21466c8](https://github.com/carbon-design-system/ibm-products/commit/21466c879fd4328e12d5ca1f1abc9d319b27dfa9))
+* **Datagrid:** use correct motion specs for reduced motion filter panel ([#4010](https://github.com/carbon-design-system/ibm-products/issues/4010)) ([7d75155](https://github.com/carbon-design-system/ibm-products/commit/7d75155386eee89b4ebd5c571e311a70daa3fdef))
+* **SidePanel:** check for element before proceeding, add warning ([#4034](https://github.com/carbon-design-system/ibm-products/issues/4034)) ([f6378ff](https://github.com/carbon-design-system/ibm-products/commit/f6378ffe2e16acf10d2a7a436d071d65672ceb62))
+* **Tearsheet:** stop trying to focus closed tearsheets ([#3989](https://github.com/carbon-design-system/ibm-products/issues/3989)) ([788bb86](https://github.com/carbon-design-system/ibm-products/commit/788bb86ce710aeba473a2022cfc404d59ab91348)), closes [#3988](https://github.com/carbon-design-system/ibm-products/issues/3988)
+* update Carbon 11 compatible versions to latest ([#3993](https://github.com/carbon-design-system/ibm-products/issues/3993)) ([c44ff55](https://github.com/carbon-design-system/ibm-products/commit/c44ff558cc753821289bec1b4a14d96c8bc42b46))
+
+
+### Features
+
+* **Datagrid:** add reduced motion support to filter panel ([#3994](https://github.com/carbon-design-system/ibm-products/issues/3994)) ([a9f1dc5](https://github.com/carbon-design-system/ibm-products/commit/a9f1dc5dc25024a8bac34a755610c83dc8a69daa))
+* **Datagrid:** add responsive updates to filter flyout ([#4001](https://github.com/carbon-design-system/ibm-products/issues/4001)) ([6fa5e6b](https://github.com/carbon-design-system/ibm-products/commit/6fa5e6b12d30718f747f3075155c37b8ff560239))
+
+
+
+
+
 ## [2.19.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.1...@carbon/ibm-products@2.19.2) (2024-01-02)
 
 

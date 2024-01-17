@@ -159,6 +159,7 @@ const DatagridRow = (datagridState) => {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
           }
+          const title = content?.props?.children[0]?.props?.value;
           return (
             <TableCell
               className={cx(`${blockClass}__cell`, {
@@ -169,6 +170,7 @@ const DatagridRow = (datagridState) => {
               key={cell.column.id}
               // avoid unnecessary role assignment to cells
               {...(role === 'cell' && { role })}
+              title={title}
             >
               {content}
             </TableCell>

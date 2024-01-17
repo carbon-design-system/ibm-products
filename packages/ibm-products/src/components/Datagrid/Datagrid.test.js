@@ -58,14 +58,14 @@ import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
-import {
-  FilteringUsage,
-  filterProps,
-} from './Extensions/Filtering/Panel.stories';
+import { FilteringUsage } from './Extensions/Filtering/Panel.stories';
 import {
   FilteringUsage as FlyoutUsage,
   filterProps as flyoutProps,
 } from './Extensions/Filtering/Flyout.stories';
+
+import { filterProps as testFilterProps } from './utils/filterPropsForTesting';
+
 const { click, hover, unhover } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -2300,20 +2300,11 @@ describe(componentName, () => {
       advanceTimers: jest.advanceTimersByTime,
     });
     const { keyboard } = user;
-    const updatedFilterProps = { ...filterProps };
-    // Removing certain properties to test default function parameters in FilterPanel
-    delete updatedFilterProps.panelTitle;
-    delete updatedFilterProps.closeIconDescription;
-    delete updatedFilterProps.updateMethod;
-    delete updatedFilterProps.primaryActionLabel;
-    delete updatedFilterProps.secondaryActionLabel;
-    delete updatedFilterProps.onPanelOpen;
-    delete updatedFilterProps.onPanelClose;
     render(
       <FilteringUsage
         defaultGridProps={{
           ...sharedFilterGridProps,
-          filterProps: updatedFilterProps,
+          filterProps: testFilterProps,
         }}
       />
     );
@@ -2487,7 +2478,7 @@ describe(componentName, () => {
       ref={ref}
       defaultGridProps={{
         ...sharedFilterGridProps,
-        filterProps,
+        filterProps: testFilterProps,
         initialState: {
           filters: [
             {

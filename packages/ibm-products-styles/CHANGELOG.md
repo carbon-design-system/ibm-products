@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.19.1...@carbon/ibm-products-styles@2.20.0) (2024-01-16)
+
+
+### Bug Fixes
+
+* datagrid empty state hover background color ([#4008](https://github.com/carbon-design-system/ibm-products/issues/4008)) ([21466c8](https://github.com/carbon-design-system/ibm-products/commit/21466c879fd4328e12d5ca1f1abc9d319b27dfa9))
+* **SidePanel:** action buttons layout at 2xl (v2) ([#4000](https://github.com/carbon-design-system/ibm-products/issues/4000)) ([8141984](https://github.com/carbon-design-system/ibm-products/commit/8141984a1d831c36f5b9be78845383293303a936))
+* update format and lint ([#4011](https://github.com/carbon-design-system/ibm-products/issues/4011)) ([8adfa5d](https://github.com/carbon-design-system/ibm-products/commit/8adfa5d49b7d5fac53fe1e336c28ee7ad4f29503))
+
+
+### Features
+
+* **Datagrid:** add responsive updates to filter flyout ([#4001](https://github.com/carbon-design-system/ibm-products/issues/4001)) ([6fa5e6b](https://github.com/carbon-design-system/ibm-products/commit/6fa5e6b12d30718f747f3075155c37b8ff560239))
+
+
+
+
+
 ## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.19.0...@carbon/ibm-products-styles@2.19.1) (2023-12-26)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

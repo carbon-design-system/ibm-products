@@ -2739,7 +2739,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.10
     "@carbon/grid": ^11.21.1
-    "@carbon/ibm-products-styles": ^2.19.1
+    "@carbon/ibm-products-styles": ^2.20.0
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
     "@carbon/react": ^1.46.1
@@ -2810,7 +2810,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@^2.19.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@^2.20.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2842,7 +2842,7 @@ __metadata:
     "@babel/cli": ^7.22.10
     "@babel/core": ^7.22.10
     "@babel/runtime": ^7.22.10
-    "@carbon/ibm-products-styles": ^2.19.1
+    "@carbon/ibm-products-styles": ^2.20.0
     "@carbon/telemetry": ^0.1.0
     "@dnd-kit/core": ^6.0.8
     "@dnd-kit/sortable": ^7.0.2

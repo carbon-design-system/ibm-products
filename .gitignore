@@ -56,3 +56,5 @@ package-lock.json
 
 // cspell:enable
 .yarn/install-state.gz
+
+.history

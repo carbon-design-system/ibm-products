@@ -18,7 +18,6 @@ const useDefaultStringRenderer = (hooks) => {
         [`${blockClass}__defaultStringRenderer--multiline`]:
           tableProps.column?.multiLineWrap || tableProps?.multiLineWrapAll,
       })}
-      title={tableProps.value}
     >
       {tableProps.value}
     </div>

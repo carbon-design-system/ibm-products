@@ -17,7 +17,7 @@ import {
   expectWarn,
   mockHTMLElement,
 } from '../../global/js/utils/test-helper';
-import { Datagrid } from '.';
+import { Datagrid, useFilterContext } from '.';
 
 import {
   useDatagrid,
@@ -2296,6 +2296,10 @@ describe(componentName, () => {
   };
 
   it('should test basic interactions of filter panel', async () => {
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+    const { keyboard } = user;
     const updatedFilterProps = { ...filterProps };
     // Removing certain properties to test default function parameters in FilterPanel
     delete updatedFilterProps.panelTitle;
@@ -2334,7 +2338,83 @@ describe(componentName, () => {
     expect(panelContainer).not.toHaveClass(
       `${blockClass}__table-container--filter-open`
     );
+
+    // Reopen filter panel
+    await click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+
+    // Add value to number input and apply to filter panel
+    const visitsInput = screen.getByPlaceholderText('Type a number amount of visits');
+    await click(visitsInput);
+    await keyboard('5');
+    expect(visitsInput).toHaveFocus();
+    await click(applyButton);
+    console.log(applyButton.getAttribute('disabled'));
+    console.log(document.querySelector(`.${pkg.prefix}--filter-summary`));
+    // const visitFilterTags = screen.getAllByTitle('Visits: 5');
+    // expect(Array.from(visitFilterTags).length).toEqual(2); // Only one visible tag, but the TagSet renders two tags (one visible and one hidden which is used for measure available space)
+
+    // Add value to radio button and apply to filter panel
+    const radio = screen.getByRole('radio', { name: 'Developer' });
+    await click(radio);
+    await click(applyButton);
+
+    // Add value to dropdown and apply to filter panel
+    const statusAccordion = screen.getByRole('button', { name: 'Status' });
+    await click(statusAccordion);
+    const statusDropdown = screen.getByRole('combobox', { name: 'Marital status' });
+    await click(statusDropdown);
+    const dropdownOption = screen.getByRole('option', { name: 'single' });
+    await click(dropdownOption);
+    await click(applyButton);
+
+    // Add beginning date but no end date, confirm no changes are made since we need a beginning and end date
+    const dateInput = screen.getAllByPlaceholderText('mm/dd/yyyy');
+    await click(dateInput[0]);
+    await keyboard('01/01/2024');
+    await click(applyButton);
+    // Apply radio button change
+    const designerRadio = screen.getByRole('radio', { name: 'Designer' });
+    await click(designerRadio);
+    await click(applyButton);
+    // Apply valid date filter
+    const dateInputs = screen.getAllByPlaceholderText('mm/dd/yyyy');
+    await click(dateInputs[0]);
+    await keyboard('01/01/2024');
+    await click(dateInputs[1]);
+    await keyboard('01/02/2024');
+    await click(applyButton);
+    // Reset to "Any" radio filter
+    const anyRadio = screen.getByRole('radio', { name: 'Any' });
+    await click(anyRadio);
+    await click(applyButton);
+    // Reset number input to empty string
+    await click(visitsInput);
+    await keyboard('{Space}');
+    await click(applyButton);
+    // Apply single checkbox
+    await click(normalCheckbox);
+    await click(applyButton);
+    // Remove checkbox
+    await click(normalCheckbox);
+    await click(applyButton);
   });
+
+  const FilterUsageError = () => {
+    useFilterContext();
+    return <div />;
+  }
+
+  it('should simulate useFilterContext error', async () => {
+    await expect(() => {
+      render(
+        <FilterUsageError />
+      )
+    }).toThrow('useFilterContext was used outside of its Provider');
+  });
+
   it('should test basic interactions of filter flyout', async () => {
     const updatedFilterProps = { ...flyoutProps };
     // Removing certain properties to test default function parameters in FilterFlyout
@@ -2350,6 +2430,7 @@ describe(componentName, () => {
         defaultGridProps={{
           ...sharedFilterGridProps,
           filterProps: updatedFilterProps,
+          updateMethod: 'instant'
         }}
       />
     );
@@ -2366,10 +2447,66 @@ describe(componentName, () => {
       `${blockClass}-filter-flyout--open`
     );
 
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    // Toggle radio button
+    const radio = screen.getByRole('radio', { name: 'Developer' });
+    await click(radio);
+    await click(cancelButton);
+
     await click(container);
     expect(filterFlyoutTriggerPopover.nextElementSibling).not.toHaveClass(
       `${blockClass}-filter-flyout--open`
     );
+  });
+
+  it('should render initial filters in flyout', async () => {
+    render(
+      <FlyoutUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: flyoutProps,
+          initialState: {
+            filters: [
+              {
+                id: 'role',
+                type: 'radio',
+                value: 'developer',
+              },
+            ],
+          }
+        }}
+      />
+    );
+    const filterTags = screen.getAllByTitle('Role: developer');
+    expect(Array.from(filterTags).length).toEqual(2); // Only one visible tag, but the TagSet renders two tags (one visible and one hidden which is used for measure available space)
+  });
+
+  it('should render initial filters in panel', async () => {
+    const ref = React.createRef();
+    render(<FilteringUsage
+      ref={ref}
+      defaultGridProps={{
+        ...sharedFilterGridProps,
+        filterProps,
+        initialState: {
+          filters: [
+            {
+              id: 'role',
+              type: 'radio',
+              value: 'developer',
+            },
+          ],
+        }
+      }}
+    />);
+    const filterTags = screen.getAllByTitle('Role: developer');
+    expect(Array.from(filterTags).length).toEqual(2); // Only one visible tag, but the TagSet renders two tags (one visible and one hidden which is used for measure available space)
+    const clearButton = screen.getByRole('button', { name: /Clear filters/i });
+    await click(clearButton);
+    const tableElement = screen.getByRole('table');
+    const innerContainer = tableElement.parentElement.parentElement;
+    // After filter summary is removed (via Clear filters button) inner should only have 1 child
+    expect(innerContainer.childElementCount).toEqual(1);
   });
 });
 

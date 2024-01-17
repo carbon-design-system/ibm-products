@@ -34,6 +34,8 @@ const DatagridRow = (datagridState) => {
     key,
     tableId,
     withExpandedRows,
+    mouseHover,
+    setMouseOverRowIndex,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -93,6 +95,9 @@ const DatagridRow = (datagridState) => {
   };
 
   const handleMouseLeave = (event) => {
+    if (mouseHover) {
+      setMouseOverRowIndex(null);
+    }
     const hoverRow = event.target.closest(
       `.${blockClass}__carbon-row-expanded`
     );

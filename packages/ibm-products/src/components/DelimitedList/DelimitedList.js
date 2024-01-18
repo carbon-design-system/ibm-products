@@ -26,8 +26,7 @@ const defaults = {
 
 /**
  * `DelimitedList` converts an array of items into a single line of
- * comma-separated values. If the line is longer than it's parent
- * container's width, then it will be truncated with an ellipsis.
+ * comma-separated values.
  */
 export let DelimitedList = React.forwardRef(
   (
@@ -47,7 +46,7 @@ export let DelimitedList = React.forwardRef(
       <div
         {...rest}
         className={cx(blockClass, className, [
-          truncate && items.length > 0 && `${blockClass}-truncate`,
+          truncate && `${blockClass}-truncate`,
         ])}
         ref={ref}
         role="main"

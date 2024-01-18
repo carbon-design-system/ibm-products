@@ -542,7 +542,8 @@
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) td:first-child{
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
+  td:first-child {
   position: relative;
 }
 

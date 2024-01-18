@@ -16,7 +16,10 @@ export const generateDummyCheckboxes = Array(25)
     disabled: true,
   }));
 
-export const filterProps = (includeManyCheckboxes = false) => {
+export const filterProps = ({
+  includeManyCheckboxes = false,
+  dropdownOnChange = () => {},
+} = {}) => {
   const checkboxList = [
     {
       id: 'normal',
@@ -80,6 +83,7 @@ export const filterProps = (includeManyCheckboxes = false) => {
                   items: ['relationship', 'complicated', 'single'],
                   label: 'Marital status',
                   titleText: 'Marital status',
+                  onChange: dropdownOnChange,
                 },
               },
             },

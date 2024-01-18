@@ -2303,11 +2303,14 @@ describe(componentName, () => {
       advanceTimers: jest.advanceTimersByTime,
     });
     const { keyboard } = user;
+    const dropdownOnChange = jest.fn();
     render(
       <FilteringUsage
         defaultGridProps={{
           ...sharedFilterGridProps,
-          filterProps: testFilterProps(),
+          filterProps: testFilterProps({
+            dropdownOnChange,
+          }),
         }}
       />
     );
@@ -2347,13 +2350,11 @@ describe(componentName, () => {
     await keyboard('5');
     expect(visitsInput).toHaveFocus();
     await click(applyButton);
-    // const visitFilterTags = screen.getAllByTitle('Visits: 5');
-    // expect(Array.from(visitFilterTags).length).toEqual(2); // Only one visible tag, but the TagSet renders two tags (one visible and one hidden which is used for measure available space)
 
     // Add value to radio button and apply to filter panel
     const radio = screen.getByRole('radio', { name: 'Developer' });
     await click(radio);
-    await click(applyButton);
+    expect(radio.checked).toEqual(true);
 
     // Add value to dropdown and apply to filter panel
     const statusAccordion = screen.getByRole('button', { name: 'Status' });
@@ -2364,38 +2365,39 @@ describe(componentName, () => {
     await click(statusDropdown);
     const dropdownOption = screen.getByRole('option', { name: 'single' });
     await click(dropdownOption);
-    await click(applyButton);
+    expect(dropdownOnChange).toHaveBeenCalledTimes(1);
 
     // Add beginning date but no end date, confirm no changes are made since we need a beginning and end date
     const dateInput = screen.getAllByPlaceholderText('mm/dd/yyyy');
     await click(dateInput[0]);
     await keyboard('01/01/2024');
-    await click(applyButton);
+    expect(dateInput[0].value).toEqual('01/01/2024');
     // Apply radio button change
     const designerRadio = screen.getByRole('radio', { name: 'Designer' });
     await click(designerRadio);
-    await click(applyButton);
+    expect(designerRadio.checked).toEqual(true);
     // Apply valid date filter
     const dateInputs = screen.getAllByPlaceholderText('mm/dd/yyyy');
     await click(dateInputs[0]);
     await keyboard('01/01/2024');
     await click(dateInputs[1]);
     await keyboard('01/02/2024');
-    await click(applyButton);
+    expect(dateInput[0].value).toEqual('01/01/2024');
+    expect(dateInput[1].value).toEqual('01/02/2024');
     // Reset to "Any" radio filter
     const anyRadio = screen.getByRole('radio', { name: 'Any' });
     await click(anyRadio);
-    await click(applyButton);
+    expect(anyRadio.checked).toEqual(true);
     // Reset number input to empty string
     await click(visitsInput);
-    await keyboard('{Space}');
-    await click(applyButton);
+    fireEvent.change(visitsInput, { target: { value: '' } });
+    expect(visitsInput.value).toEqual('');
     // Apply single checkbox
     await click(normalCheckbox);
-    await click(applyButton);
+    expect(normalCheckbox.checked).toEqual(true);
     // Remove checkbox
     await click(normalCheckbox);
-    await click(applyButton);
+    expect(normalCheckbox.checked).toEqual(false);
   });
 
   const FilterUsageError = () => {
@@ -2631,7 +2633,7 @@ describe(componentName, () => {
       <FilteringUsage
         defaultGridProps={{
           ...sharedFilterGridProps,
-          filterProps: testFilterProps(true),
+          filterProps: testFilterProps({ includeManyCheckboxes: true }),
           initialState: {
             filters: [
               {
@@ -2669,8 +2671,6 @@ describe(componentName, () => {
     const checkboxElement = screen.getByRole('checkbox', { name: 'Critical' });
     await click(checkboxElement);
     expect(checkboxElement.checked).toEqual(true);
-    const applyButton = screen.getByRole('button', { name: 'Apply' });
-    await click(applyButton);
   });
 });
 

@@ -192,7 +192,6 @@ export const DatagridContent = ({ datagridState, title }) => {
         >
           {filterProps?.variation === 'panel' && (
             <FilterPanel
-              updateMethod="batch"
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}

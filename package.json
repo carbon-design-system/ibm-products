@@ -160,5 +160,5 @@
   "dependencies": {
     "stylelint-plugin-carbon-tokens": "2.3.1"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@4.0.2"
 }

@@ -94,12 +94,7 @@ export const TagSetOverflow = React.forwardRef(
           </Tag>
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
-              <ul
-                className={cx(`${blockClass}__tag-list`, {
-                  [`${blockClass}__tag-list--alt`]:
-                    overflowTags.length <= allTagsModalSearchThreshold,
-                })}
-              >
+              <ul className={`${blockClass}__tag-list`}>
                 {overflowTags
                   .filter((_, index) =>
                     overflowTags.length > allTagsModalSearchThreshold

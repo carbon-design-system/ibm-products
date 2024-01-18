@@ -542,13 +542,13 @@
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) td:first-child{
   position: relative;
 }
 
 .#{$block-class}
   .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
-  :first-child:not(.#{$carbon-prefix}--checkbox--inline)::before {
+  td:first-child:not(.#{$carbon-prefix}--checkbox--inline)::before {
   position: absolute;
   top: 0;
   left: 0;

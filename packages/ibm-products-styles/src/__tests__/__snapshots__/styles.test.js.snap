@@ -8376,7 +8376,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem;
+}
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link {
+  margin-top: 0.5rem;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
   background-color: var(--cds-background-inverse-hover, #474747);

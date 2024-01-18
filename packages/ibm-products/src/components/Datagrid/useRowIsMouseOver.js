@@ -31,7 +31,7 @@ const useRowIsMouseOver = (hooks) => {
 
     Object.assign(instance, {
       rows: rowsWithMouseOver,
-      mouseHover: true,
+      withMouseHover: true,
       setMouseOverRowIndex,
     });
     hooks.getRowProps.push(getRowProps);

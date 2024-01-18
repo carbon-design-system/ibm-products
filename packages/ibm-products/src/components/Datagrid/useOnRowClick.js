@@ -28,9 +28,7 @@ const useOnRowClick = (hooks) => {
               row.classList.remove(`${carbon.prefix}--data-table--selected`);
             });
           }
-          const closestRow = event.target.closest(
-            `.${pkg.prefix}--datagrid__carbon-row`
-          );
+          const closestRow = event.currentTarget.closest('tr');
           closestRow.classList.add(`${carbon.prefix}--data-table--selected`);
 
           if (!withSelectRows) {

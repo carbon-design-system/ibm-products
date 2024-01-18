@@ -139,7 +139,6 @@ const useFilters = ({
   }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
-    console.log('apply');
     // If no end date is selected return because we need the end date to do computations
     if (type === DATE && value.length > 0 && !value[1]) {
       return;

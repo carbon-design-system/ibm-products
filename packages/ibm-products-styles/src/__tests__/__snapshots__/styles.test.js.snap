@@ -9062,6 +9062,10 @@ button.c4p--add-select__global-filter-toggle--open {
   display: flex;
 }
 
+.c4p--saving__buttons .cds--btn .cds--inline-loading {
+  min-block-size: auto;
+}
+
 @keyframes rotating {
   0% {
     transform: scaleY(-1) rotate(360deg);

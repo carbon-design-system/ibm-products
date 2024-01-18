@@ -45,9 +45,10 @@ export default {
       },
     },
   },
+  excludeStories: ['FilteringUsage', 'filterProps'],
 };
 
-const FilteringUsage = ({ defaultGridProps }) => {
+export const FilteringUsage = ({ defaultGridProps }) => {
   const {
     gridDescription,
     gridTitle,
@@ -328,6 +329,18 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
   },
 });
 
+export const filterProps = {
+  variation: 'flyout',
+  updateMethod: 'instant',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  flyoutIconDescription: 'Open filters',
+  onFlyoutOpen: action('onFlyoutOpen'),
+  onFlyoutClose: action('onFlyoutClose'),
+  filters,
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
+};
+
 export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
   storyName: 'Filter flyout with initial filters',
   argTypes: {
@@ -352,17 +365,7 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     emptyStateTitle: 'No filters match',
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'flyout',
-      updateMethod: 'instant',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      onFlyoutOpen: action('onFlyoutOpen'),
-      onFlyoutClose: action('onFlyoutClose'),
-      filters,
-      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
-    },
+    filterProps,
     featureFlags: ['Datagrid.useFiltering'],
   },
 });

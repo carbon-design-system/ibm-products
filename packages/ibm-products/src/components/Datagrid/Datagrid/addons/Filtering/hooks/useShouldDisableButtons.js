@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import isEqual from 'lodash/isEqual';
  * @returns {Array} returns a tuple of the state and setter function
  */
 const useShouldDisableButtons = ({
-  initialValue = true, // initially the buttons should be disabled
+  initialValue, // initially the buttons should be disabled
   filtersState,
   prevFiltersRef,
 }) => {

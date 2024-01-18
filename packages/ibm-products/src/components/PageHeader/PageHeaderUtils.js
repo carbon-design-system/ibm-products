@@ -85,7 +85,7 @@ export const utilCheckUpdateVerticalSpace = (
 
     // The header offset calculation is either going to work out at 0 if we have no gap between scrolling container
     // top and the measuring ref top, or the difference between. It does not change on scroll or resize.
-    update.headerOffset = offsetMeasuringTop - scrollableContainerTop;
+    update.headerOffset = offsetMeasuringTop === 0 ? offsetMeasuringTop - scrollableContainerTop: 0;
 
     /* istanbul ignore next */
     update.breadcrumbRowHeight = breadcrumbRowEl

@@ -24,7 +24,8 @@
     "es",
     "lib",
     "scss",
-    "flags.js"
+    "flags.js",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -48,7 +49,7 @@
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
-    "postinstall": "carbon-telemetry collect --install",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
@@ -76,10 +77,10 @@
   "dependencies": {
     "@babel/runtime": "^7.22.10",
     "@carbon/ibm-products-styles": "^2.20.0",
-    "@carbon/telemetry": "^0.1.0",
     "@dnd-kit/core": "^6.0.8",
     "@dnd-kit/sortable": "^7.0.2",
     "@dnd-kit/utilities": "^3.2.1",
+    "@ibm/telemetry-js": "^1.1.0",
     "framer-motion": "^6.5.1 < 7",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",

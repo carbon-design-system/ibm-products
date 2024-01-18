@@ -173,6 +173,25 @@ const FilteringTemplateWrapper = ({ ...args }) => {
   return <FilteringUsage defaultGridProps={{ ...args }} />;
 };
 
+// Example usage of mapping locale to flatpickr date format or placeholder value (m/d/Y or mm/dd/yyyy)
+export const getDateFormat = (lang, full) => {
+  const formatObj = new Intl.DateTimeFormat(lang).formatToParts(new Date());
+  return formatObj
+    .map(({ type, value }) => {
+      switch (type) {
+        case 'day':
+          return full ? 'dd' : 'd';
+        case 'month':
+          return full ? 'mm' : 'm';
+        case 'year':
+          return full ? 'yyyy' : 'Y';
+        default:
+          return value;
+      }
+    })
+    .join('');
+};
+
 export const filterProps = {
   variation: 'panel',
   updateMethod: 'batch',
@@ -193,16 +212,18 @@ export const filterProps = {
             props: {
               DatePicker: {
                 datePickerType: 'range',
+                locale: navigator?.language || 'en',
+                dateFormat: getDateFormat(navigator?.language || 'en'),
               },
               DatePickerInput: {
                 start: {
                   id: 'date-picker-input-id-start',
-                  placeholder: 'mm/dd/yyyy',
+                  placeholder: getDateFormat(navigator?.language || 'en', true),
                   labelText: 'Joined start date',
                 },
                 end: {
                   id: 'date-picker-input-id-end',
-                  placeholder: 'mm/dd/yyyy',
+                  placeholder: getDateFormat(navigator?.language || 'en', true),
                   labelText: 'Joined end date',
                 },
               },

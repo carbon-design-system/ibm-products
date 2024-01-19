@@ -144,81 +144,38 @@ const useFilters = ({
       return;
     }
 
-    const filtersObjectArrayCopy = [...filtersObjectArray];
+    const filterCopy = [...filtersObjectArray];
     // // check if the filter already exists in the array
-    const filter = filtersObjectArrayCopy.find((item) => item.id === column);
+    const filter = filterCopy.find((item) => item.id === column);
 
     // // if filter exists in array then update the filter's new value
     if (filter) {
       filter.value = value;
     } else {
-      filtersObjectArrayCopy.push({ id: column, value, type });
+      filterCopy.push({ id: column, value, type });
     }
 
-    // ATTENTION: this is where you would reset or remove individual filters from the filters array
-    if (type === CHECKBOX) {
-      /**
-      When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
-      This checks if all the checkboxes are selected = false and removes it from the array
-     */
-      const index = filtersObjectArrayCopy.findIndex(
-        (filter) => filter.id === column
-      );
+    const index = filterCopy.findIndex(({ id }) => id === column);
 
-      // If all the selected state is false remove from array
-      const shouldRemoveFromArray = filtersObjectArrayCopy[index].value.every(
-        (val) => val.selected === false
-      );
+    const clearCheckbox =
+      type === CHECKBOX &&
+      filterCopy[index].value.every(({ selected }) => selected === false);
+    const clearDate = type === DATE && value.length === 0;
+    const clearAny = (type === DROPDOWN || type === RADIO) && value === 'Any';
+    const clearNum = type === NUMBER && value === '';
+    const shouldClear = clearCheckbox || clearDate || clearAny || clearNum;
 
-      if (shouldRemoveFromArray) {
-        filtersObjectArrayCopy.splice(index, 1);
-      }
-    } else if (type === DATE) {
-      if (value.length === 0) {
-        /**
-        Checks to see if the date value is an empty array, if it is that means the user wants
-        to reset the date filter
-      */
-        const index = filtersObjectArrayCopy.findIndex(
-          (filter) => filter.id === column
-        );
-
-        // Remove it from the filters array since there is nothing to filter
-        filtersObjectArrayCopy.splice(index, 1);
-      }
-    } else if (type === DROPDOWN || type === RADIO) {
-      if (value === 'Any') {
-        /**
-        Checks to see if the selected value is 'Any', that means the user wants
-        to reset specific filter
-      */
-        const index = filtersObjectArrayCopy.findIndex(
-          (filter) => filter.id === column
-        );
-
-        // Remove it from the filters array
-        filtersObjectArrayCopy.splice(index, 1);
-      }
-    } else if (type === NUMBER) {
-      // If the value is empty remove it from the filtersObjectArray
-      if (value === '') {
-        // Find the column that uses number and displays an empty string
-        const index = filtersObjectArrayCopy.findIndex(
-          (filter) => filter.id === column
-        );
-
-        // Remove it from the filters array
-        filtersObjectArrayCopy.splice(index, 1);
-      }
+    if (shouldClear) {
+      filterCopy.splice(index, 1);
     }
 
-    setFiltersObjectArray(filtersObjectArrayCopy);
+    setFiltersObjectArray(filterCopy);
 
-    // // Automatically apply the filters if the updateMethod is instant
     if (updateMethod === INSTANT) {
-      setAllFilters(filtersObjectArrayCopy);
+      setAllFilters(filterCopy);
     }
   };
+
   /** Render the individual filter component */
   const renderFilter = ({ type, column, props: components }) => {
     let filter;

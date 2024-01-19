@@ -51,18 +51,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   -webkit-line-clamp: 2;
 }
 
+.#{$block-class}--scrolls {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
 .#{$block-class}__container {
   --#{$block-class}--subtitle-opacity: 1;
-  --#{$block-class}--title-container-height: 0;
-  --#{$block-class}--title-text-height: 0;
-  --#{$block-class}--subtitle-container-height: 0;
-  --#{$block-class}--action-bar-container-height: 0;
   --#{$block-class}--divider-opacity: 0;
-  --#{$block-class}--title-y-position: 0;
-  --#{$block-class}--content-bottom-padding: #{$spacing-10};
-  --#{$block-class}--collapsed-title-y-position: 1rem;
-  --#{$block-class}--label-text-height: 0;
-  --#{$block-class}--title-padding-right: #{$spacing-09};
+  --#{$block-class}--title-padding-right: #{$spacing-07};
+  --#{$block-class}--actions-height: #{$spacing-10};
 
   position: fixed;
   // Need to disable stylelint until dart sass namespace support is added
@@ -82,6 +80,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       }
     }
   }
+
+  &:not(.#{$block-class}--scrolls) {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  &.#{$block-class}__container--condensed-actions {
+    --#{$block-class}--actions-height: #{$spacing-09};
+  }
+
   .#{$block-class}__actions-container {
     width: 100%;
   }
@@ -93,32 +101,22 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     left: 0;
     border-right: 1px solid $border-subtle-02;
   }
-  &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
-    .#{$block-class}__title-container {
-      /* stylelint-disable-next-line max-nesting-depth */
-      &::before {
-        content: none;
-      }
-    }
-    .#{$block-class}__action-toolbar {
-      /* stylelint-disable-next-line max-nesting-depth */
-      &::before {
-        @include setDividerStyles();
-      }
-    }
-  }
+
   &.#{$block-class}__container-without-overlay {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
   .#{$block-class}__title-container {
+    --#{$block-class}--title-padding-bottom: #{$spacing-05};
+
     position: sticky;
     z-index: 4;
     top: 0;
     padding: $spacing-05;
+    padding-bottom: 0;
     background-color: $layer-01;
 
-    &:has(~ .#{$block-class}__subtitle-text) {
-      padding-bottom: $spacing-03;
+    &:has(.#{$block-class}__subtitle-text) {
+      --#{$block-class}--title-padding-bottom: #{$spacing-03};
     }
 
     &:has(.#{$block-class}__navigation-back-button) {
@@ -134,7 +132,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       @include setDividerStyles();
+
+      z-index: 9;
     }
+
+    &.#{$block-class}__title-container--no-title-animation::before {
+      opacity: 1;
+    }
+
     &.#{$block-class}__title-container--reduced-motion {
       z-index: 5;
       border-bottom: 1px solid $border-subtle-02;
@@ -165,38 +170,26 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       background-color: transparent;
     }
   }
+  &.#{$block-class}__container--has-actions,
   &.#{$block-class}__container--has-slug {
-    --#{$block-class}--title-padding-right: #{$spacing-12};
+    --#{$block-class}--title-padding-right: #{$spacing-10};
   }
-  &.#{$block-class}__container-is-animating {
-    pointer-events: none;
+
+  &.#{$block-class}__container--has-actions.#{$block-class}__container--has-slug {
+    --#{$block-class}--title-padding-right: #{$spacing-11};
   }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-    top: 0;
-  }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-    top: var(--#{$block-class}--title-text-height);
-  }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height)
-    );
-  }
+
   .#{$block-class}__title-text {
     @include type.type-style('heading-03');
     @include setCommonTitleStyles();
 
     position: inherit;
     z-index: 4;
-    margin-bottom: calc(-1 * var(--#{$block-class}--label-text-height));
+    /* border-bottom used instead of padding which wrapped text shows through */
+    border-bottom: var(--#{$block-class}--title-padding-bottom) solid
+      transparent;
     background-color: $layer-01;
     opacity: var(--#{$block-class}--subtitle-opacity);
-    transform: translateY(var(--#{$block-class}--title-y-position));
   }
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
@@ -205,7 +198,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-right: var(--#{$block-class}--title-padding-right);
     opacity: var(--#{$block-class}--subtitle-opacity);
     text-overflow: ellipsis;
-    transform: translateY(var(--#{$block-class}--title-y-position));
     white-space: nowrap;
   }
   .#{$block-class}__collapsed-title-text {
@@ -215,133 +207,46 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     position: absolute;
     top: $spacing-05;
     opacity: var(--#{$block-class}--divider-opacity);
-    // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
   }
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
     overflow: hidden;
-    padding: 0 $spacing-09 $spacing-05 $spacing-05;
+    padding-right: var(--#{$block-class}--title-padding-right);
+    padding-bottom: $spacing-05;
+
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     opacity: var(--#{$block-class}--subtitle-opacity);
   }
   .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-    position: fixed;
     z-index: 2;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--label-text-height)
-    );
     background-color: $layer-01;
   }
 
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
-    top: var(--#{$block-class}--title-text-height);
-  }
-
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+  .#{$block-class}__title-text + .#{$block-class}__subtitle-text {
     padding-top: $spacing-05;
-    padding-right: $spacing-09;
-  }
-
-  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
-    top: 0;
-  }
-
-  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-    position: fixed;
-    height: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--label-text-height)
-    );
   }
 
   .#{$block-class}__inner-content {
-    overflow: auto;
-    height: calc(100vh - 3rem);
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin-top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height) +
-        var(--#{$block-class}--action-bar-container-height) +
-        var(--#{$block-class}--label-text-height)
-    );
-    overflow-x: hidden;
+    margin-top: $spacing-03;
   }
 
   &.#{$block-class}__container--has-slug .#{$block-class}__inner-content {
     @include utilities.ai-gradient('bottom');
   }
 
-  .#{$block-class}__inner-content-with-actions {
-    height: calc(
-      100vh - (var(--#{$block-class}--content-bottom-padding) + 2rem)
-    );
-  }
-
-  .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
-    height: calc(
-      100vh -
-        calc(
-          var(--#{$block-class}--title-text-height) +
-            var(--#{$block-class}--subtitle-container-height) +
-            var(--#{$block-class}--action-bar-container-height)
-        ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
-    );
-    padding-top: $spacing-05;
-  }
-
-  .#{$block-class}__inner-content.#{$block-class}__static-inner-content-no-actions {
-    height: calc(
-      100vh -
-        calc(
-          var(--#{$block-class}--title-text-height) +
-            var(--#{$block-class}--subtitle-container-height) +
-            var(--#{$block-class}--action-bar-container-height) +
-            var(--#{$block-class}--label-text-height)
-        )
-    );
-  }
-
-  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-    position: fixed;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height)
-    );
-    width: 100%;
-    border-bottom: 1px solid $layer-active-01;
-  }
-
-  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
-    + .#{$block-class}__body-content {
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin-top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
-    );
-  }
-
   .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-    border-bottom: 1px solid $layer-active-01;
     margin-bottom: $spacing-05;
   }
+
   .#{$block-class}__action-toolbar {
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
-    top: var(--#{$block-class}--title-height);
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 $spacing-05;
-    margin-bottom: $spacing-03;
     background-color: $layer-01;
-    transition: transform $duration-moderate-01 motion(standard);
   }
 
   .#{$block-class}__action-toolbar-leading-button {
@@ -349,7 +254,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
-    position: fixed;
+    position: absolute;
     z-index: 5;
     top: 0;
     left: 0;
@@ -376,8 +281,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: fixed;
-    z-index: 5;
+    position: absolute;
+    z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;
     display: flex;
@@ -392,10 +297,11 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include setPanelSize(100%);
   }
   .#{$block-class}__actions-container {
-    position: fixed;
+    position: sticky; // stick to bottom
     bottom: 0;
     border-top: 1px solid $border-subtle-02;
     background-color: $layer-01;
+
     &.#{$action-set-block-class}--2xl {
       .#{$action-set-block-class}__action-button {
         width: 100%;
@@ -411,12 +317,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
       flex-direction: column;
     }
-    .#{$action-set-block-class}__action-button {
-      height: $spacing-10;
-    }
-    &.#{$block-class}__actions-container-condensed
-      .#{$action-set-block-class}__action-button {
-      height: $spacing-09;
+
+    .#{$action-set-block-class}__action-button.#{$action-set-block-class}__action-button {
+      // extra class needed to override default size
+      height: var(--#{$block-class}--actions-height);
     }
   }
   &.#{$block-class}__container.#{$block-class}__container--xs

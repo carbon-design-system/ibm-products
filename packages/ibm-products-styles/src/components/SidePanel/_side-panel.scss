@@ -229,7 +229,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__inner-content {
-    margin-top: $spacing-03;
+    padding-top: $spacing-03;
   }
 
   &.#{$block-class}__container--has-slug .#{$block-class}__inner-content {

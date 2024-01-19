@@ -529,18 +529,19 @@ const CustomizingColumns = ({ ...rest }) => {
   );
 };
 
-const NestedRows = ({ ...rest }) => {
+const NestedRows = ({ initialState = {}, ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10, 5, 2, 2));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      initialState,
     },
     useNestedRows
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 const NestedTable = ({ ...rest }) => {
@@ -1582,6 +1583,31 @@ describe(componentName, () => {
     }
 
     expect(nestedRow).toHaveClass(`${blockClass}__carbon-nested-row`);
+  });
+
+  it('should render nested rows with some initially expanded', async () => {
+    render(
+      <NestedRows
+        initialState={{
+          expandedRowIds: {
+            1: true,
+            3: true,
+          },
+        }}
+      />
+    );
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const rowId1 = bodyRows.filter(
+      (r) => r.getAttribute('data-nested-row-id') === '1'
+    );
+    const rowId3 = bodyRows.filter(
+      (r) => r.getAttribute('data-nested-row-id') === '3'
+    );
+    expect(rowId1[0]).toHaveClass(`${blockClass}__carbon-row-expanded`);
+    expect(rowId3[0]).toHaveClass(`${blockClass}__carbon-row-expanded`);
   });
 
   it('Nested Table', () => {

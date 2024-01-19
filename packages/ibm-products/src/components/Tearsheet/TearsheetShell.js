@@ -99,6 +99,7 @@ export const TearsheetShell = React.forwardRef(
     const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef();
     const resizer = useRef(null);
+    const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
 
@@ -144,6 +145,74 @@ export const TearsheetShell = React.forwardRef(
         : modalRef.current;
       setTimeout(() => element.focus(), 1);
     };
+
+    // useEffect hook to handle focus trapping
+    useEffect(() => {
+      if (open) {
+        // Querying focusable element in the tearsheet
+        // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
+        const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${bc}__header--no-close-icon,[aria-hidden="true"],[tabindex="-1"])`;
+        // Queries to include element types button, input, select, textarea
+        const queryButton = `button${notQuery}`;
+        const queryInput = `input${notQuery}`;
+        const querySelect = `select${notQuery}`;
+        const queryTextarea = `textarea${notQuery}`;
+        // Final query
+        const query = `${queryButton},${queryInput},${querySelect},${queryTextarea}`;
+
+        const modalEl = modalRef?.current;
+        // Selecting all focusable elements based on the above conditions
+        const focusableElements = modalEl.querySelectorAll(`${query}`);
+
+        // Taking first & last element from the tearsheet
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        // Focusing the first element
+        setTimeout(() => {
+          firstElement.focus();
+        }, 0);
+
+        // Handling the key event
+        const handleKeyDown = (event) => {
+          // Checking whether the key is tab or not
+          if (event.key === 'Tab') {
+            if (event.shiftKey && document.activeElement === firstElement) {
+              // Prevents the default "Tab" behavior
+              event.preventDefault();
+              // if the user press shift+tab and the current element is the first element then focus last element
+              lastElement.focus();
+            } else if (
+              (
+                !event.shiftKey 
+                && document.activeElement === lastElement
+                ) || (
+                  event.shiftKey
+                  && !Array.prototype.includes.call(focusableElements, document.activeElement)
+                )
+            ) {
+              event.preventDefault();
+              // focusing the first element when
+              // (1) user not press shift+tab and current element is last element
+              // that means user reached the last element
+              // OR (2) user press shift+tab and the current element not in focusable element list
+              // means, in narrow tearsheet case initially it focuses to the main content
+              // and main content tabindex is -1 (it may change) in those scenario focusing
+              // to an element available in the focusable list
+              firstElement.focus();
+            }
+          }
+        };
+
+        // Subscribing to keydown event
+        modalEl.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+          // Unsubscribing from keydown event
+          modalEl.removeEventListener('keydown', handleKeyDown);
+        };
+      }
+    }, [open, modalRef, carbonPrefix]);
 
     useEffect(() => {
       const notify = () =>
@@ -281,7 +350,11 @@ export const TearsheetShell = React.forwardRef(
               <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
             </ModalHeader>
           )}
-          <Wrap element={ModalBody} className={`${bc}__body`}>
+          <Wrap
+            ref={modalBodyRef}
+            element={ModalBody}
+            className={`${bc}__body`}
+          >
             <Wrap
               className={cx({
                 [`${bc}__influencer`]: true,

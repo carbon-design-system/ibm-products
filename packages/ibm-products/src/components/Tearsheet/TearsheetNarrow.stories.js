@@ -194,8 +194,9 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #1"
           open={open1}
           onClose={() => setOpen1(false)}
+          selectorPrimaryFocus="#main-content"
         >
-          <div className="tearsheet-stories__narrow-content-block">
+          <div tabIndex={-1} id="main-content" className="tearsheet-stories__narrow-content-block">
             Main content 1
           </div>
         </TearsheetNarrow>
@@ -205,8 +206,9 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #2"
           open={open2}
           onClose={() => setOpen2(false)}
+          selectorPrimaryFocus="#main-content"
         >
-          <div className="tearsheet-stories__narrow-content-block">
+          <div tabIndex={-1} id="main-content" className="tearsheet-stories__narrow-content-block">
             Main content 2
           </div>
         </TearsheetNarrow>
@@ -216,8 +218,9 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #3"
           open={open3}
           onClose={() => setOpen3(false)}
+          selectorPrimaryFocus="#main-content"
         >
-          <div className="tearsheet-stories__narrow-content-block">
+          <div tabIndex={-1} id="main-content" className="tearsheet-stories__narrow-content-block">
             Main content 3
           </div>
         </TearsheetNarrow>

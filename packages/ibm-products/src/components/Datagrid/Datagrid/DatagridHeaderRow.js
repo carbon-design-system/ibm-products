@@ -44,6 +44,7 @@ const ResizeHeader = ({
   onColResizeEnd,
   resizerAriaLabel,
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const { role, ...headerProps } = resizerProps;
   const mouseDownHandler = (evt) => {
     handleOnMouseDownResize(evt, resizerProps);
@@ -77,8 +78,6 @@ const ResizeHeader = ({
     <>
       <input
         {...headerProps}
-        // avoid unnecessary role assignment
-        {...(role === 'separator' && { role })}
         onMouseDown={mouseDownHandler}
         onKeyDown={keyDownHandler}
         onKeyUp={keyUpHandler}
@@ -145,6 +144,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   const {
     className: headerGroupClassName,
+    // eslint-disable-next-line no-unused-vars
     role,
     ...headerGroupProps
   } = headerGroup.getHeaderGroupProps();
@@ -152,8 +152,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   return (
     <TableRow
       {...headerGroupProps}
-      // avoid unnecessary role assignment
-      {...(role === 'row' && { role })}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
@@ -171,6 +169,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
           const {
+            // eslint-disable-next-line no-unused-vars
             role,
             className: headerClassName,
             ...headerProps
@@ -190,8 +189,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
-              // avoid unnecessary role assignment
-              {...(role === 'columnheader' && { role })}
             >
               {header.render('Header')}
               {resizerProps && !header.isAction && (

@@ -58,10 +58,12 @@ import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
+import { FilteringUsage } from './Extensions/Filtering/Panel.stories';
 import {
-  FilteringUsage,
-  filterProps,
-} from './Extensions/Filtering/Panel.stories';
+  FilteringUsage as FlyoutUsage,
+  filterProps as flyoutProps,
+} from './Extensions/Filtering/Flyout.stories';
+import { filterProps as testFilterProps } from './utils/filterPropsForTesting';
 const { click, hover, unhover } = userEvent.setup({
   // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
@@ -533,18 +535,19 @@ const CustomizingColumns = ({ ...rest } = {}) => {
   );
 };
 
-const NestedRows = ({ ...rest } = {}) => {
+const NestedRows = ({ initialState = {}, ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10, 5, 2, 2));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      initialState,
     },
     useNestedRows
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+  return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
 const NestedTable = ({ ...rest } = {}) => {
@@ -1528,6 +1531,31 @@ describe(componentName, () => {
     expect(nestedRow).toHaveClass(`${blockClass}__carbon-nested-row`);
   });
 
+  it('should render nested rows with some initially expanded', async () => {
+    render(
+      <NestedRows
+        initialState={{
+          expandedRowIds: {
+            1: true,
+            3: true,
+          },
+        }}
+      />
+    );
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const rowId1 = bodyRows.filter(
+      (r) => r.getAttribute('data-nested-row-id') === '1'
+    );
+    const rowId3 = bodyRows.filter(
+      (r) => r.getAttribute('data-nested-row-id') === '3'
+    );
+    expect(rowId1[0]).toHaveClass(`${blockClass}__carbon-row-expanded`);
+    expect(rowId3[0]).toHaveClass(`${blockClass}__carbon-row-expanded`);
+  });
+
   it('Nested Table', async () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
     const firstRowExpander = screen.getAllByLabelText('Expand row')[0];
@@ -2282,17 +2310,21 @@ describe(componentName, () => {
     expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
   });
 
+  const sharedFilterGridProps = {
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  };
+
   it('should test basic interactions of filter panel', async () => {
     render(
       <FilteringUsage
         defaultGridProps={{
-          gridTitle: 'Data table title',
-          gridDescription: 'Additional information if needed',
-          useDenseHeader: false,
-          emptyStateTitle: 'No filters match',
-          emptyStateDescription:
-            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-          filterProps,
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps,
         }}
       />
     );
@@ -2304,6 +2336,54 @@ describe(componentName, () => {
     await click(filterToggleButton);
     expect(panelContainer).toHaveClass(
       `${blockClass}__table-container--filter-open`
+    );
+
+    const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
+    await click(normalCheckbox);
+
+    const applyButton = screen.getByRole('button', { name: 'Apply' });
+    await click(applyButton);
+
+    const panelCloseButton = screen.getByLabelText('Close filter panel');
+    await click(panelCloseButton);
+    expect(panelContainer).not.toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+  });
+  it('should test basic interactions of filter flyout', async () => {
+    const updatedFilterProps = { ...flyoutProps };
+    // Removing certain properties to test default function parameters in FilterFlyout
+    delete updatedFilterProps.panelTitle;
+    delete updatedFilterProps.updateMethod;
+    delete updatedFilterProps.primaryActionLabel;
+    delete updatedFilterProps.secondaryActionLabel;
+    delete updatedFilterProps.flyoutIconDescription;
+    delete updatedFilterProps.onFlyoutOpen;
+    delete updatedFilterProps.onFlyoutClose;
+    const { container } = render(
+      <FlyoutUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: updatedFilterProps,
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const flyoutTrigger = within(toolbar).getByRole('button', {
+      name: 'Open filters',
+    });
+    const filterFlyoutTriggerPopover =
+      flyoutTrigger.parentElement.parentElement;
+
+    // Open filter flyout
+    await click(flyoutTrigger);
+    expect(filterFlyoutTriggerPopover.nextElementSibling).toHaveClass(
+      `${blockClass}-filter-flyout--open`
+    );
+
+    await click(container);
+    expect(filterFlyoutTriggerPopover.nextElementSibling).not.toHaveClass(
+      `${blockClass}-filter-flyout--open`
     );
   });
 });

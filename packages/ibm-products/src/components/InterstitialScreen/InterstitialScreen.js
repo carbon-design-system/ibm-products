@@ -188,6 +188,7 @@ export let InterstitialScreen = React.forwardRef(
       return (
         <ComposedModal
           {...rest}
+          preventCloseOnClickOutside={true}
           className={cx(
             // blockClass, // Apply the block class to the main HTML element
             className // Apply any supplied class names to the main HTML element.

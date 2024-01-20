@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable max-nesting-depth */
+/* stylelint-disable declaration-no-important */
+
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
@@ -89,7 +92,7 @@ $one-grid-column: calc(100% / 16);
   &--container {
     min-width: 47rem;
     max-width: 82rem;
-    margin: calc($spacing-10 * 2) auto;
+    margin: calc($spacing-10 * 2) auto; // stylelint-disable-line carbon/layout-token-use
     background-color: $background;
   }
 
@@ -226,11 +229,14 @@ $one-grid-column: calc(100% / 16);
       background-color: $gray-100;
       /* stylelint-disable-next-line carbon/theme-token-use */
       color: $gray-10;
+      /* stylelint-disable-next-line carbon/type-token-use */
       font-weight: normal !important; // overrides type style above
+      /* stylelint-disable-next-line carbon/type-token-use */
       line-height: $spacing-09 !important;
 
       b {
-        font-weight: var(--cds-heading-01-font-weight, 600);
+        /* stylelint-disable-next-line carbon/type-token-use */
+        font-weight: 600;
       }
     }
 

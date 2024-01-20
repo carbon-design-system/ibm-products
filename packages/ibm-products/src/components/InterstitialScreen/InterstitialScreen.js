@@ -169,7 +169,7 @@ export let InterstitialScreen = React.forwardRef(
     }, [isOpen, progStep, onClose]);
 
     useEffect(() => {
-      //for modal only, "is-visible" triggers animation
+      // for modal only, "is-visible" triggers animation
       setIsVisibleClass(!isFullScreen && isOpen ? 'is-visible' : null);
       nextButtonRef?.current?.focus();
     }, [isFullScreen, isOpen]);
@@ -200,8 +200,6 @@ export let InterstitialScreen = React.forwardRef(
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             className // Apply any supplied class names to the main HTML element.
-            // variantClass,
-            // isVisibleClass
           )}
           size="lg"
           onClose={onClose}
@@ -354,7 +352,6 @@ export let InterstitialScreen = React.forwardRef(
     const renderFooter = () => {
       return (
         <div className={`${blockClass}--footer`}>
-          {/* <div> */}
           {isMultiStep && skipButtonLabel !== '' && (
             <Button
               className={`${blockClass}--skip-btn`}
@@ -366,7 +363,6 @@ export let InterstitialScreen = React.forwardRef(
               {skipButtonLabel}
             </Button>
           )}
-          {/* </div> */}
           <div className={`${blockClass}--footer-controls`}>
             {isMultiStep && progStep > 0 && (
               <Button

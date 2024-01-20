@@ -177,10 +177,6 @@ export const TearsheetShell = React.forwardRef(
         // To decide the first and last elements
         let focusable = checkForFocusableElements();
 
-        // Taking first & last element from the tearsheet
-        // const firstElement = focusableElements[0];
-        // const lastElement = focusableElements[focusableElements.length - 1];
-
         // Focusing the first element
         setTimeout(() => {
           focusable.first.focus();

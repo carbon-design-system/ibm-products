@@ -25,6 +25,9 @@ import { Example as ExportModalExample } from './ExportModal/src/Example/Example
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
+import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
+import { Example as InterstitialScreenViewExample } from './InterstitialScreenView/src/Example/Example';
+import { Example as InterstitialScreenViewModuleExample } from './InterstitialScreenViewModule/src/Example/Example';
 import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
 import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
 import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
@@ -136,6 +139,24 @@ describe('All examples', () => {
 
   it('ImportModal renders', () => {
     render(<ImportModalExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreen renders', () => {
+    render(<InterstitialScreenExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreenView renders', () => {
+    render(<InterstitialScreenViewExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreenViewModule renders', () => {
+    render(<InterstitialScreenViewModuleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

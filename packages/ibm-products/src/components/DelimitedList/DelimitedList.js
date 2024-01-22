@@ -49,7 +49,6 @@ export let DelimitedList = React.forwardRef(
           truncate && `${blockClass}-truncate`,
         ])}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {items.length > 0 ? items.join(delimiter) : '–'}

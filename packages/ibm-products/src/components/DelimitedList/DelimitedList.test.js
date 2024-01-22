@@ -22,37 +22,58 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component DelimitedList', async () => {
-    render(<DelimitedList> </DelimitedList>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<DelimitedList />);
+    expect(document.querySelectorAll(`.${blockClass}`).length).toBe(1);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<DelimitedList> </DelimitedList>);
+    const { container } = render(<DelimitedList />);
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    render(<DelimitedList className={className}> </DelimitedList>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(<DelimitedList className={className} />);
+    expect(document.querySelector(`.${blockClass}`)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<DelimitedList data-testid={dataTestId}> </DelimitedList>);
+    render(<DelimitedList data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<DelimitedList ref={ref}> </DelimitedList>);
+    render(<DelimitedList ref={ref} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<DelimitedList data-testid={dataTestId}> </DelimitedList>);
+    render(<DelimitedList data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });
+
+  it('delimits a list using a comma', async () => {
+    render(<DelimitedList delimiter=", " items={['Item 1', 'Item 2']} />);
+    expect(screen.getByText(/Item 1, Item 2/)).toBeInTheDocument();
+  });
+
+  // `testing-library` only renders HTML using jsdom, and CSS is never
+  // applied. As such, the CSS-only properties used to shorten a list
+  // and append "..." can't be tested for.
+
+  // it('truncates a list using an ellipsis', async () => {
+  //   render(
+  //     <div style={{ width: '8rem' }}>
+  //       <DelimitedList
+  //         delimiter=", "
+  //         items={['Item 1', 'Item 2', 'Item 3', 'Item 4']}
+  //       />
+  //     </div>
+  //   );
+  //   expect(screen.getByText(/Item 1, Item 2, It.../)).toBeInTheDocument();
+  // });
 });

@@ -141,7 +141,7 @@ export const TearsheetShell = React.forwardRef(
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
       const focusable = checkForFocusableElements();
-      focusable.first.focus();
+      focusable?.first?.focus();
     };
 
     const checkForFocusableElements = useCallback(() => {

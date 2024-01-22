@@ -108,6 +108,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="standard"
               id="tile-1"
+              tabIndex={selectedCategory === 'standard' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span
@@ -120,6 +121,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="premium"
               id="tile-2"
+              tabIndex={selectedCategory === 'premium' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span
@@ -132,6 +134,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="plus"
               id="tile-3"
+              tabIndex={selectedCategory === 'plus' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span

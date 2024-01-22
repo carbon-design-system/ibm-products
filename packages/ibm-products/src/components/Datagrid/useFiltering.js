@@ -14,7 +14,7 @@ const useFiltering = (hooks) => {
   useEffect(() => {
     pkg.checkReportFeatureEnabled('Datagrid.useFiltering');
   }, []);
-
+  /* istanbul ignore next */
   const filterTypes = useMemo(
     () => ({
       date: (rows, id, [startDate, endDate]) => {

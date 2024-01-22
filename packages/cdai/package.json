@@ -36,9 +36,9 @@
   },
   "peerDependencies": {
     "@carbon/grid": "^10.43.2",
-    "@carbon/icons-react": "^10.49.2",
-    "carbon-components": "^10.58.12",
-    "carbon-components-react": "^7.59.17",
+    "@carbon/icons-react": "^10.49.3",
+    "carbon-components": "^10.58.13",
+    "carbon-components-react": "^7.59.19",
     "prop-types": "^15.8.1",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

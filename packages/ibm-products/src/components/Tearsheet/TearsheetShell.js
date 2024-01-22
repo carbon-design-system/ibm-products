@@ -159,11 +159,11 @@ export const TearsheetShell = React.forwardRef(
 
         const modalEl = modalRef?.current;
         // Selecting all focusable elements based on the above conditions
-        const focusableElements = modalEl.querySelectorAll(`${query}`);
+        const focusableElements = modalEl?.querySelectorAll(`${query}`);
 
         return {
           first: focusableElements[0],
-          last: focusableElements[focusableElements.length - 1],
+          last: focusableElements[focusableElements?.length - 1],
           all: focusableElements
         };
     }, [carbonPrefix, modalRef]);
@@ -177,7 +177,7 @@ export const TearsheetShell = React.forwardRef(
 
         // Focusing the first element
         setTimeout(() => {
-          focusable.first.focus();
+          focusable?.first?.focus();
         }, 0);
 
         // Handling the key event
@@ -188,16 +188,16 @@ export const TearsheetShell = React.forwardRef(
             focusable = checkForFocusableElements();
 
             setTimeout(() => {
-              if (event.shiftKey && !Array.prototype.includes.call(focusable.all, document.activeElement)) {
+              if (event.shiftKey && !Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
                 // Prevents the default "Tab" behavior
                 event.preventDefault();
                 // if the user press shift+tab and the current element not in focusable items
                 focusable.last.focus();
-              } else if (!Array.prototype.includes.call(focusable.all, document.activeElement)) {
+              } else if (!Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
                 event.preventDefault();
                 // user pressing tab key only then
                 // focusing the first element if the current element is not in focusable items
-                focusable.first.focus();
+                focusable?.first?.focus();
               }
             }, 0);
           }

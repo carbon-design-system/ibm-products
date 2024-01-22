@@ -162,8 +162,8 @@ export const TearsheetShell = React.forwardRef(
         const focusableElements = modalEl?.querySelectorAll(`${query}`);
 
         return {
-          first: focusableElements[0],
-          last: focusableElements[focusableElements?.length - 1],
+          first: focusableElements?.[0],
+          last: focusableElements?.[focusableElements?.length - 1],
           all: focusableElements
         };
     }, [carbonPrefix, modalRef]);
@@ -192,7 +192,7 @@ export const TearsheetShell = React.forwardRef(
                 // Prevents the default "Tab" behavior
                 event.preventDefault();
                 // if the user press shift+tab and the current element not in focusable items
-                focusable.last.focus();
+                focusable?.last?.focus();
               } else if (!Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
                 event.preventDefault();
                 // user pressing tab key only then

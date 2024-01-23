@@ -2,7 +2,8 @@
 library:
   id: ibm-products
   name: IBM Products
-  description: Discover React-based solutions designed for IBM’s product portfolio.
+  description:
+    Discover React-based solutions designed for IBM’s product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
   designKits:
     ibm-products-g10-figma:
@@ -94,7 +95,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-buttonmenu
+        url: https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-button-menu
     tags:
       - input-control
   button-set-with-overflow:

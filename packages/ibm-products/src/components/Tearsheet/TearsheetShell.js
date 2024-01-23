@@ -71,6 +71,7 @@ export const TearsheetShell = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       actions,
+      ariaLabel,
       children,
       className,
       closeIconDescription,
@@ -295,7 +296,7 @@ export const TearsheetShell = React.forwardRef(
             // Pass through any other property values.
             ...rest
           }
-          aria-label={getNodeTextContent(title)}
+          aria-label={ariaLabel || getNodeTextContent(title)}
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.

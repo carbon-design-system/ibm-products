@@ -45,7 +45,7 @@ export const innerContainerVariants = {
     transition: {
       duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
       ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
-      when: 'beforeChildren',
+      when: shouldReduceMotion ? null : 'beforeChildren',
     },
   }),
 };

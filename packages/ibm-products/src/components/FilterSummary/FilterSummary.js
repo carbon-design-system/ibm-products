@@ -17,6 +17,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { DURATIONS, EASINGS } from '../../global/js/utils/motionConstants';
 import { useWindowResize, usePreviousValue } from '../../global/js/hooks';
 import debounce from 'lodash/debounce';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -25,11 +26,12 @@ let FilterSummary = React.forwardRef(
     {
       className = '',
       clearFiltersText = 'Clear filters',
-      clearFilters = () => {},
-      filters = [],
+      clearFilters,
+      filters,
       renderLabel = null,
       overflowType = 'default',
       clearButtonInline = true,
+      ...rest
     },
     ref
   ) => {
@@ -119,11 +121,13 @@ let FilterSummary = React.forwardRef(
 
     return (
       <div
+        {...getDevtoolsProps(componentName)}
+        id={filterSummaryId}
+        {...rest}
         ref={localRef}
         className={cx([blockClass, className], {
           [`${blockClass}__expanded`]: multiline,
         })}
-        id={filterSummaryId}
       >
         <AnimatePresence mode="wait" exitBeforeEnter>
           {!multiline && renderTagSet('single')}

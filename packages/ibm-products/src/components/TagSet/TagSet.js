@@ -30,7 +30,7 @@ const defaults = {
   measurementOffset: 0,
   overflowAlign: 'bottom',
   overflowType: 'default',
-  onOverflowTagChange: () => {}
+  onOverflowTagChange: () => {},
 };
 
 export let TagSet = React.forwardRef(
@@ -139,7 +139,7 @@ export let TagSet = React.forwardRef(
         />
       );
 
-      onOverflowTagChange?.(newOverflowTags)
+      onOverflowTagChange?.(newOverflowTags);
       setDisplayedTags(newDisplayedTags);
     }, [
       displayCount,
@@ -148,7 +148,7 @@ export let TagSet = React.forwardRef(
       overflowType,
       showAllTagsLabel,
       tags,
-      onOverflowTagChange
+      onOverflowTagChange,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {

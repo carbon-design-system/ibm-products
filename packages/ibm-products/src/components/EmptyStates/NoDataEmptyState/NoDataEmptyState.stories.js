@@ -63,12 +63,14 @@ export const WithDarkModeIllustration = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
     illustrationTheme: 'dark',
+    illustrationDescription: 'Test alt text',
   },
 });
 
 export const withAction = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
+    illustrationDescription: 'Test alt text',
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
@@ -78,6 +80,7 @@ export const withAction = prepareStory(Template, {
 
 export const withActionIconButton = prepareStory(Template, {
   args: {
+    illustrationDescription: 'Test alt text',
     ...defaultStoryProps,
     action: {
       text: 'Create new',
@@ -95,6 +98,7 @@ export const withLink = prepareStory(Template, {
       text: 'View documentation',
       href: 'https://www.carbondesignsystem.com',
     },
+    illustrationDescription: 'Test alt text',
   },
 });
 
@@ -111,5 +115,6 @@ export const withActionAndLink = prepareStory(Template, {
       text: 'View documentation',
       href: 'https://www.carbondesignsystem.com',
     },
+    illustrationDescription: 'Test alt text',
   },
 });

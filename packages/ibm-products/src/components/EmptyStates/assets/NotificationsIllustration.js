@@ -17,7 +17,7 @@ import uuidv4 from '../../../global/js/utils/uuidv4';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 
-export const NotificationsIllustration = ({ theme, title, size, ...rest }) => {
+export const NotificationsIllustration = ({ theme, title, size,alt, ...rest }) => {
   const svgId = uuidv4();
 
   return (
@@ -26,6 +26,7 @@ export const NotificationsIllustration = ({ theme, title, size, ...rest }) => {
       xmlns="http://www.w3.org/2000/svg"
       width={80}
       height={80}
+      aria-label={alt}
       viewBox="0 0 80 80"
       className={cx([
         `${blockClass}__illustration`,
@@ -290,4 +291,5 @@ NotificationsIllustration.propTypes = {
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
   title: PropTypes.string,
+  alt:PropTypes.string.isRequired,
 };

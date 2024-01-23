@@ -68,7 +68,6 @@ export let ErrorEmptyState = React.forwardRef(
           title={title}
           alt={illustrationDescription}
         />
-        <div>illustration desc :{illustrationDescription}</div>
         <EmptyStateContent
           action={action}
           link={link}

@@ -32,7 +32,7 @@
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.12"PKG_DEV_DEPS
+    "vite": "^4.5.2"PKG_DEV_DEPS
   },
   "browserslist": {
     "production": [

@@ -68,7 +68,7 @@ const useFilters = ({
   setAllFilters,
   variation,
   reactTableFiltersState,
-  onCancel = () => {},
+  onCancel,
   panelOpen,
   autoHideFilters,
   isFetching,

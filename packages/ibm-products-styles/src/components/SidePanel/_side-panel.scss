@@ -57,7 +57,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 .#{$block-class}__container {
-  --#{$block-class}--title-height: 0;
   --#{$block-class}--title-stop: #{$spacing-05};
   --#{$block-class}--title-animation-progress: 0;
   --#{$block-class}--scroll-animation-progress: 0;
@@ -65,7 +64,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   --#{$block-class}--actions-height: #{$spacing-10};
 
   position: fixed;
-  // Need to disable stylelint until dart sass namespace support is added
   z-index: utilities.z('modal');
   top: $spacing-09;
   display: grid;
@@ -78,9 +76,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}__container--#{$size} {
       @include setPanelSize($size_value);
-      .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
-      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      .#{$block-class}__header.#{$block-class}__header--no-title-animation,
+      .#{$block-class}__header--no-title-animation
+        .#{$block-class}__subtitle-text {
         @include setPanelSize($size_value);
       }
     }
@@ -107,11 +105,12 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     border-right: 1px solid $border-subtle-02;
   }
 
-  &.#{$block-class}__container-without-overlay {
+  &.#{$block-class}__container--slide-in,
+  &.#{$block-class}__container:not(:has(+ .#{$block-class}__overlay)) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
 
-  .#{$block-class}__title-container {
+  .#{$block-class}__header {
     --#{$block-class}--title-padding-bottom: #{$spacing-05};
 
     position: sticky;
@@ -143,49 +142,54 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       z-index: 9;
     }
 
-    &.#{$block-class}__title-container--no-title-animation {
+    &.#{$block-class}__header--no-title-animation {
       position: relative;
       top: 0;
     }
 
-    &.#{$block-class}__title-container--no-title-animation::before {
+    &.#{$block-class}__header--no-title-animation::before {
       opacity: 1;
     }
 
-    &.#{$block-class}__title-container--reduced-motion {
+    &.#{$block-class}__header--reduced-motion {
       z-index: 5;
       border-bottom: 1px solid $border-subtle-02;
       margin-bottom: $spacing-05;
     }
-    &.#{$block-class}__title-container--reduced-motion.#{$block-class}__title-container--no-title-animation {
+
+    &.#{$block-class}__header--reduced-motion.#{$block-class}__header--no-title-animation {
       border-bottom: 0;
       margin-bottom: 0;
     }
-    &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
+
+    &.#{$block-class}--on-detail-step .#{$block-class}__collapsed-title-text {
       top: $spacing-05;
     }
 
-    &.#{$block-class}__on-detail-step
+    &.#{$block-class}--on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
       top: $spacing-06;
     }
 
-    &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
+    &.#{$block-class}--on-detail-step:not(:has(.#{$block-class}__title-text)) {
       height: calc(#{$spacing-08} + #{$spacing-02});
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     }
-    &.#{$block-class}__title-container-without-title::before {
+
+    &:not(:has(.#{$block-class}__title-text))::before {
       background-color: transparent;
     }
   }
 
-  &.#{$block-class}__container--has-actions,
+  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}__container--has-slug {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
-  &.#{$block-class}__container--has-actions.#{$block-class}__container--has-slug {
+  &.#{$block-class}__container:has(
+      .#{$block-class}__action-toolbar
+    ).#{$block-class}__container--has-slug {
     --#{$block-class}--title-padding-right: #{$spacing-11};
   }
 
@@ -222,8 +226,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     );
   }
 
-  .#{$block-class}__title-container--no-title-animation
-    .#{$block-class}__title-text {
+  .#{$block-class}__header--no-title-animation .#{$block-class}__title-text {
     position: static;
   }
 
@@ -243,7 +246,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     position: absolute;
     /* stylelint-disable-next-line carbon/layout-token-use */
-    top: 0; // var(--#{$block-class}--title-stop);
+    top: 0;
     opacity: var(--#{$block-class}--title-animation-progress);
   }
 
@@ -268,7 +271,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
   }
 
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+  .#{$block-class}__header--no-title-animation .#{$block-class}__subtitle-text {
     z-index: 2;
     background-color: $layer-01;
   }
@@ -277,7 +280,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-05;
   }
 
-  .#{$block-class}__title-container:has(.#{$block-class}__action-toolbar)
+  .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
     + .#{$block-class}__inner-content {
     padding-top: $spacing-03;
   }
@@ -342,10 +345,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding: $spacing-05;
     padding-top: 0;
   }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__actions-container.#{$action-set-block-class}--2xl {
-    @include setPanelSize(100%);
-  }
+
   .#{$block-class}__actions-container {
     position: sticky; // stick to bottom
     bottom: 0;

@@ -77,11 +77,13 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       @include setPanelSize($size_value);
       .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
       .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
-      .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
         @include setPanelSize($size_value);
       }
     }
+  }
+  .#{$block-class}__actions-container {
+    width: 100%;
   }
   &.#{$block-class}__container-right-placement {
     right: 0;
@@ -112,8 +114,12 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     position: sticky;
     z-index: 4;
     top: 0;
-    padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+    padding: $spacing-05;
     background-color: $layer-01;
+
+    &:has(~ .#{$block-class}__subtitle-text) {
+      padding-bottom: $spacing-03;
+    }
 
     &:has(.#{$block-class}__navigation-back-button) {
       padding-top: $spacing-07;

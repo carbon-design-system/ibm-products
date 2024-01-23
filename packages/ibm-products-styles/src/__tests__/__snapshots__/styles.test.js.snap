@@ -2313,8 +2313,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__actions-container.c4p--action-set--xs {
+.c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 16rem;
   max-width: 100%;
 }
@@ -2324,8 +2323,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__actions-container.c4p--action-set--sm {
+.c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 20rem;
   max-width: 100%;
 }
@@ -2335,8 +2333,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__actions-container.c4p--action-set--md {
+.c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 30rem;
   max-width: 100%;
 }
@@ -2346,8 +2343,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__actions-container.c4p--action-set--lg {
+.c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 40rem;
   max-width: 100%;
 }
@@ -2357,10 +2353,12 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--side-panel__container.c4p--side-panel__container--2xl .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--2xl .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--2xl .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
-.c4p--side-panel__container.c4p--side-panel__container--2xl .c4p--side-panel__actions-container.c4p--action-set--2xl {
+.c4p--side-panel__container.c4p--side-panel__container--2xl .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   width: 75%;
   max-width: 100%;
+}
+.c4p--side-panel__container .c4p--side-panel__actions-container {
+  width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement {
   right: 0;
@@ -3427,6 +3425,10 @@ p.c4p--about-modal__copyright-text:first-child {
   max-width: 280px;
 }
 
+.c4p--datagrid__empty-state .cds--data-table tbody tr:not([data-child-row]):hover {
+  background: inherit;
+}
+
 .c4p--datagrid__empty-state .c4p--datagrid__table-simple tr:hover {
   background: transparent;
 }
@@ -4232,13 +4234,6 @@ p.c4p--about-modal__copyright-text:first-child {
   padding-top: 0.5rem;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
 .c4p--datagrid-filter-flyout__container {
   position: relative;
@@ -4304,7 +4299,7 @@ p.c4p--about-modal__copyright-text:first-child {
   display: grid;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   gap: 1rem 2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .c4p--datagrid-filter-flyout__trigger.cds--btn {
@@ -4323,6 +4318,10 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .c4p--datagrid-filter-flyout .cds--fieldset {
   margin-bottom: 0;
+}
+
+.c4p--datagrid-filter-flyout__stacked {
+  grid-template-columns: 1fr;
 }
 
 /*
@@ -8377,7 +8376,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem;
+}
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link {
+  margin-top: 0.5rem;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
   background-color: var(--cds-background-inverse-hover, #474747);
@@ -9061,6 +9062,10 @@ button.c4p--add-select__global-filter-toggle--open {
 
 .c4p--saving__buttons {
   display: flex;
+}
+
+.c4p--saving__buttons .cds--btn .cds--inline-loading {
+  min-block-size: auto;
 }
 
 @keyframes rotating {

@@ -127,7 +127,6 @@ export let WebTerminal = React.forwardRef(
         }}
         onAnimationEnd={onAnimationEnd}
       >
-        
         <header className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (

@@ -28,6 +28,7 @@ import { Button } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
 import { overlayVariants, panelVariants } from './motion/variants';
+import pconsole from '../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -503,7 +504,13 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
-        pageContentElement.style.inlineSize = 'auto';
+        if (pageContentElement) {
+          pageContentElement.style.inlineSize = 'auto';
+        } else {
+          pconsole.warn(
+            'SidePanel prop `selectorPageContent` was not provided a selector that matches any element on your page. If an element is not found, the panel will render as a slide over.'
+          );
+        }
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginInlineEnd = 0;
           pageContentElement.style.transition = !reducedMotion.matches

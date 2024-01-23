@@ -160,52 +160,63 @@ export const TearsheetShell = React.forwardRef(
       return {
         first: focusableElements?.[0],
         last: focusableElements?.[focusableElements.length - 1],
-        all: focusableElements
+        all: focusableElements,
       };
-  }, [modalRef]);
+    }, [modalRef]);
 
-  // useEffect hook to handle focus trapping
-  useEffect(() => {
-    if (open) {
-      const modalEl = modalRef?.current?.innerModal?.current;
-      // To decide the first and last elements
-      let focusable = checkForFocusableElements();
+    // useEffect hook to handle focus trapping
+    useEffect(() => {
+      if (open) {
+        const modalEl = modalRef?.current?.innerModal?.current;
+        // To decide the first and last elements
+        let focusable = checkForFocusableElements();
 
-      // Focusing the first element
-      setTimeout(() => focusable?.first?.focus(), 0);
+        // Focusing the first element
+        setTimeout(() => focusable?.first?.focus(), 0);
 
-      // Handling the key event
-      const handleKeyDown = (event) => {
-        // Checking whether the key is tab or not
-        if (event.key === 'Tab') {
-          // updating the focusable elements list
-          focusable = checkForFocusableElements();
+        // Handling the key event
+        const handleKeyDown = (event) => {
+          // Checking whether the key is tab or not
+          if (event.key === 'Tab') {
+            // updating the focusable elements list
+            focusable = checkForFocusableElements();
 
-          setTimeout(() => {
-            if (event.shiftKey && !Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
-              // Prevents the default "Tab" behavior
-              event.preventDefault();
-              // if the user press shift+tab and the current element not in focusable items
-              focusable?.last?.focus();
-            } else if (!Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
-              event.preventDefault();
-              // user pressing tab key only then
-              // focusing the first element if the current element is not in focusable items
-              focusable?.first?.focus();
-            }
-          }, 0);
-        }
-      };
+            setTimeout(() => {
+              if (
+                event.shiftKey &&
+                !Array.prototype.includes.call(
+                  focusable?.all,
+                  document?.activeElement
+                )
+              ) {
+                // Prevents the default "Tab" behavior
+                event.preventDefault();
+                // if the user press shift+tab and the current element not in focusable items
+                focusable?.last?.focus();
+              } else if (
+                !Array.prototype.includes.call(
+                  focusable?.all,
+                  document?.activeElement
+                )
+              ) {
+                event.preventDefault();
+                // user pressing tab key only then
+                // focusing the first element if the current element is not in focusable items
+                focusable?.first?.focus();
+              }
+            }, 0);
+          }
+        };
 
-      // Subscribing to keydown event
-      modalEl.addEventListener('keydown', handleKeyDown);
+        // Subscribing to keydown event
+        modalEl.addEventListener('keydown', handleKeyDown);
 
-      return () => {
-        // Unsubscribing from keydown event
-        modalEl.removeEventListener('keydown', handleKeyDown);
-      };
-    }
-  }, [open, modalRef, checkForFocusableElements]);
+        return () => {
+          // Unsubscribing from keydown event
+          modalEl.removeEventListener('keydown', handleKeyDown);
+        };
+      }
+    }, [open, modalRef, checkForFocusableElements]);
 
     useEffect(() => {
       const notify = () =>

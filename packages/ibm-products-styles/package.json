@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-styles",
   "description": "Carbon for IBM Products styles",
-  "version": "2.20.0",
+  "version": "2.20.1",
   "license": "Apache-2.0",
   "installConfig": {
     "hoistingLimits": "none"
@@ -38,7 +38,7 @@
     "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
-    "build-css-update-maps": "node ../../../ibm-products/scripts/updateSourceMaps.js",
+    "build-css-update-maps": "node ../../scripts/updateSourceMaps.js",
     "clean": "rimraf css scss",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",

@@ -6,8 +6,12 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  baseFontSize,
+  spacing05 /* matches title container padding */,
+} from '@carbon/layout';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -90,7 +94,35 @@ export let SidePanel = React.forwardRef(
     const endTrapRef = useRef();
     const sidePanelInnerRef = useRef();
     const sidePanelCloseRef = useRef();
+    const scrollSectionRef = useRef();
+    const titleContainerRef = useRef();
+    const titleRef = useRef();
+    const collapsedTitleRef = useRef();
+    const labelTextRef = useRef();
+    const subtitleRef = useRef();
     const previousState = usePreviousValue({ size, open });
+    const [titleAnimationDistance, setTitleAnimationDistance] = useState(-1);
+    const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
+    const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+
+    useEffect(() => {
+      setDoAnimateTitle(animateTitle);
+    }, [animateTitle]);
+
+    const handleScroll = useCallback(() => {
+      const panelRef = ref || sidePanelRef;
+      const scrollTop = scrollSectionRef.current.scrollTop;
+
+      panelRef.current.style.setProperty(
+        `--${blockClass}--title-animation-progress`,
+        Math.min(scrollTop, titleAnimationDistance) / titleAnimationDistance
+      );
+
+      panelRef.current.style.setProperty(
+        `--${blockClass}--scroll-animation-progress`,
+        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
+      );
+    }, [scrollAnimationDistance, ref, titleAnimationDistance]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -101,9 +133,9 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       const panelRef = ref || sidePanelRef;
       if (panelRef && panelRef.current) {
-        const scrollableSection = panelRef.current.querySelector(
-          `.${blockClass}__inner-content`
-        );
+        const scrollableSection =
+          scrollSectionRef.current ?? sidePanelInnerRef.current;
+
         scrollableSection.scrollTop = 0;
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the title container
@@ -150,29 +182,73 @@ export let SidePanel = React.forwardRef(
 
     // Title and subtitle scroll animation
     useEffect(() => {
+      const panelRef = ref || sidePanelRef;
       if (
+        panelRef?.current &&
         open &&
         animateTitle &&
         animationComplete &&
+        titleRef?.current &&
         title &&
         title.length &&
         !reducedMotion.matches
       ) {
-        // Calculate the opacity of the title, subtitle and bottom border
-        // NOTE: If height of label and subtitle is less than distance to scroll to not
-        // treat as animateTitle === false
-        console.log('To do: add opacity calculation');
+        const scrollEl = scrollSectionRef.current;
+        const titleEl = titleRef.current;
+
+        panelRef.current.style.setProperty(
+          `--${blockClass}--title-height`,
+          `${titleEl?.clientHeight ?? 0}px`
+        );
+
+        const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
+        const subtitleHeight = subtitleRef?.current?.offsetHeight ?? 0;
+
+        const titleAnimationDistance = parseFloat(spacing05, 10) * baseFontSize;
+        setTitleAnimationDistance(titleAnimationDistance);
+        panelRef.current.style.setProperty(
+          `--${blockClass}--title-animation-distance`,
+          titleAnimationDistance
+        );
+
+        // TODO: review 0 for slide over with and without label ??
+        // titleEl.offsetHeight - titleEl.clientHeight when with ActionBar
+        const titleVerticalPadding = actionToolbarButtons
+          ? titleEl.offsetHeight - titleEl.clientHeight
+          : 0;
+
+        const scrollAnimationDistance =
+          labelHeight + subtitleHeight + titleVerticalPadding;
+        setScrollAnimationDistance(scrollAnimationDistance);
+
+        panelRef.current.style.setProperty(
+          `--${blockClass}--scroll-animation-distance`,
+          scrollAnimationDistance
+        );
+
+        if (scrollEl) {
+          // will need updating on resize
+          setDoAnimateTitle(
+            (!!labelText || !!actionToolbarButtons || !!subtitle) &&
+              scrollEl.scrollHeight >=
+                scrollEl.clientHeight + titleAnimationDistance
+          );
+
+          scrollEl.addEventListener('scroll', handleScroll);
+        }
       }
-      console.log('To do: remove this');
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       open,
-      animateTitle,
+      doAnimateTitle,
       animationComplete,
+      handleScroll,
       title,
       size,
       reducedMotion.matches,
       id,
+      scrollSectionRef.current,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -322,12 +398,16 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}__container--has-slug`]: slug,
         [`${blockClass}__container--has-actions`]: actionToolbarButtons?.length,
         [`${blockClass}__container--condensed-actions`]: condensedActions,
-        [`${blockClass}--scrolls`]: !animateTitle,
       },
     ]);
 
     const renderTitle = () => (
-      <>
+      <div
+        className={cx(`${blockClass}__title`, {
+          [`${blockClass}__title--no-label`]: !labelTextRef.current,
+        })}
+        ref={titleRef}
+      >
         <h2
           className={`${blockClass}__title-text`}
           title={title}
@@ -335,16 +415,18 @@ export let SidePanel = React.forwardRef(
         >
           {title}
         </h2>
-        {animateTitle && !reducedMotion.matches && (
+
+        {doAnimateTitle && !reducedMotion.matches && (
           <h2
             className={`${blockClass}__collapsed-title-text`}
             title={title}
             aria-hidden={true}
+            ref={collapsedTitleRef}
           >
             {title}
           </h2>
         )}
-      </>
+      </div>
     );
 
     const renderHeader = () => {
@@ -365,13 +447,14 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}__on-detail-step-without-title`]:
               currentStep > 0 && !title,
             [`${blockClass}__title-container--no-title-animation`]:
-              !animateTitle,
+              !doAnimateTitle,
             [`${blockClass}__title-container-is-animating`]:
               !animationComplete || !open,
             [`${blockClass}__title-container-without-title`]: !title,
             [`${blockClass}__title-container--reduced-motion`]:
               reducedMotion.matches,
           })}
+          ref={titleContainerRef}
         >
           {/* back button */}
           {currentStep > 0 && (
@@ -388,7 +471,9 @@ export let SidePanel = React.forwardRef(
           )}
           {/* label */}
           {title && title.length && labelText && labelText.length && (
-            <p className={`${blockClass}__label-text`}>{labelText}</p>
+            <p className={`${blockClass}__label-text`} ref={labelTextRef}>
+              {labelText}
+            </p>
           )}
           {/* title */}
           {title && title.length && renderTitle()}
@@ -410,14 +495,15 @@ export let SidePanel = React.forwardRef(
           {subtitle && (
             <p
               className={cx(`${blockClass}__subtitle-text`, {
-                [`${blockClass}__subtitle-text-no-animation`]: !animateTitle,
+                [`${blockClass}__subtitle-text-no-animation`]: !doAnimateTitle,
                 [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
-                  !animateTitle &&
+                  !doAnimateTitle &&
                   (!actionToolbarButtons || !actionToolbarButtons.length),
                 [`${blockClass}__subtitle-text-is-animating`]:
-                  !animationComplete && animateTitle,
+                  !animationComplete && doAnimateTitle,
                 [`${blockClass}__subtitle-without-title`]: !title,
               })}
+              ref={subtitleRef}
             >
               {subtitle}
             </p>
@@ -426,7 +512,7 @@ export let SidePanel = React.forwardRef(
           {actionToolbarButtons && actionToolbarButtons.length && (
             <div
               className={cx(`${blockClass}__action-toolbar`, {
-                [`${blockClass}__action-toolbar-no-animation`]: !animateTitle,
+                [`${blockClass}__action-toolbar-no-animation`]: !doAnimateTitle,
               })}
             >
               {actionToolbarButtons.map(
@@ -473,6 +559,24 @@ export let SidePanel = React.forwardRef(
       );
     };
 
+    const renderMain = () => {
+      return (
+        <div
+          ref={sidePanelInnerRef}
+          className={cx(`${blockClass}__inner-content`, {
+            [`${blockClass}__static-inner-content`]: !doAnimateTitle,
+            [`${blockClass}__static-inner-content-no-actions`]:
+              !doAnimateTitle && !actions?.length,
+            [`${blockClass}__inner-content-with-actions`]:
+              actions && actions.length,
+            [`${blockClass}--scrolls`]: !doAnimateTitle,
+          })}
+        >
+          <div className={`${blockClass}__body-content`}>{children}</div>
+        </div>
+      );
+    };
+
     const contentRef = ref || sidePanelRef;
 
     return (
@@ -505,23 +609,27 @@ export let SidePanel = React.forwardRef(
                 Focus sentinel
               </span>
 
-              {/* header */}
-              {renderHeader()}
+              {doAnimateTitle ? (
+                <div
+                  ref={scrollSectionRef}
+                  className={`${blockClass}__scrolling-section ${blockClass}--scrolls`}
+                >
+                  {/* header */}
+                  {renderHeader()}
 
-              {/* main */}
-              <div
-                ref={sidePanelInnerRef}
-                className={cx(`${blockClass}__inner-content`, {
-                  [`${blockClass}__static-inner-content`]: !animateTitle,
-                  [`${blockClass}__static-inner-content-no-actions`]:
-                    !animateTitle && !actions?.length,
-                  [`${blockClass}__inner-content-with-actions`]:
-                    actions && actions.length,
-                  [`${blockClass}--scrolls`]: animateTitle,
-                })}
-              >
-                <div className={`${blockClass}__body-content`}>{children}</div>
-              </div>
+                  {/* main */}
+                  {renderMain()}
+                </div>
+              ) : (
+                <>
+                  {/* header */}
+                  {renderHeader()}
+
+                  {/* main */}
+                  {renderMain()}
+                </>
+              )}
+
               {/* footer */}
               <ActionSet
                 actions={actions}

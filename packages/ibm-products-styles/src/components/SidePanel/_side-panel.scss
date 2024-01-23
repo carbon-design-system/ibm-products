@@ -39,7 +39,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   height: 1px;
   background-color: $border-subtle-02;
   content: '';
-  opacity: var(--#{$block-class}--divider-opacity);
+  opacity: var(--#{$block-class}--scroll-animation-progress);
 }
 
 @mixin setCommonTitleStyles() {
@@ -57,8 +57,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 .#{$block-class}__container {
-  --#{$block-class}--subtitle-opacity: 1;
-  --#{$block-class}--divider-opacity: 0;
+  --#{$block-class}--title-height: 0;
+  --#{$block-class}--title-stop: #{$spacing-05};
+  --#{$block-class}--title-animation-progress: 0;
+  --#{$block-class}--scroll-animation-progress: 0;
   --#{$block-class}--title-padding-right: #{$spacing-07};
   --#{$block-class}--actions-height: #{$spacing-10};
 
@@ -66,10 +68,13 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   // Need to disable stylelint until dart sass namespace support is added
   z-index: utilities.z('modal');
   top: $spacing-09;
+  display: grid;
   height: calc(100% - 3rem);
   box-sizing: border-box;
   background-color: $layer-01;
   color: $text-primary;
+  grid-template-rows: 1fr auto; /* titles and content */
+
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}__container--#{$size} {
       @include setPanelSize($size_value);
@@ -81,9 +86,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  &:not(.#{$block-class}--scrolls) {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+  &:not(:has(.#{$block-class}__scrolling-section)) {
+    /* if the title does not scroll then we have a child scrolling section. */
+    grid-template-rows: auto 1fr auto; /* titles content actions */
   }
 
   &.#{$block-class}__container--condensed-actions {
@@ -105,12 +110,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}__container-without-overlay {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
+
   .#{$block-class}__title-container {
     --#{$block-class}--title-padding-bottom: #{$spacing-05};
 
     position: sticky;
     z-index: 4;
-    top: 0;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
     padding: $spacing-05;
     padding-bottom: 0;
     background-color: $layer-01;
@@ -136,6 +143,11 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       z-index: 9;
     }
 
+    &.#{$block-class}__title-container--no-title-animation {
+      position: relative;
+      top: 0;
+    }
+
     &.#{$block-class}__title-container--no-title-animation::before {
       opacity: 1;
     }
@@ -150,18 +162,15 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       margin-bottom: 0;
     }
     &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
-      top: $spacing-07;
+      top: $spacing-05;
     }
 
     &.#{$block-class}__on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
-      top: $spacing-08;
+      top: $spacing-06;
     }
 
-    &.#{$block-class}__title-container-without-title {
-      padding: 0;
-    }
     &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
       height: calc(#{$spacing-08} + #{$spacing-02});
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
@@ -170,6 +179,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       background-color: transparent;
     }
   }
+
   &.#{$block-class}__container--has-actions,
   &.#{$block-class}__container--has-slug {
     --#{$block-class}--title-padding-right: #{$spacing-10};
@@ -179,35 +189,73 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     --#{$block-class}--title-padding-right: #{$spacing-11};
   }
 
-  .#{$block-class}__title-text {
-    @include type.type-style('heading-03');
-    @include setCommonTitleStyles();
+  .#{$block-class}__scrolling-section {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
 
-    position: inherit;
+  .#{$block-class}__title {
+    position: sticky;
     z-index: 4;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--title-stop);
+
     /* border-bottom used instead of padding which wrapped text shows through */
     border-bottom: var(--#{$block-class}--title-padding-bottom) solid
       transparent;
     background-color: $layer-01;
-    opacity: var(--#{$block-class}--subtitle-opacity);
   }
+
+  .#{$block-class}__title-text {
+    @include type.type-style('heading-03');
+    @include setCommonTitleStyles();
+
+    opacity: calc(1 - var(--#{$block-class}--title-animation-progress));
+  }
+
+  .#{$block-class}__title--no-label .#{$block-class}__title-text {
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    transform: translateY(
+      calc(
+        -1 * #{$spacing-05} * var(--#{$block-class}--title-animation-progress)
+      )
+    );
+  }
+
+  .#{$block-class}__title-container--no-title-animation
+    .#{$block-class}__title-text {
+    position: static;
+  }
+
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
 
     overflow: hidden;
     padding-right: var(--#{$block-class}--title-padding-right);
-    opacity: var(--#{$block-class}--subtitle-opacity);
+    opacity: calc(1 - var(--#{$block-class}--title-animation-progress));
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .#{$block-class}__collapsed-title-text {
     @include type.type-style('heading-compact-02');
     @include setCommonTitleStyles();
 
     position: absolute;
-    top: $spacing-05;
-    opacity: var(--#{$block-class}--divider-opacity);
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: 0; // var(--#{$block-class}--title-stop);
+    opacity: var(--#{$block-class}--title-animation-progress);
   }
+
+  .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    transform: translateY(
+      calc(
+        #{$spacing-05} * (1 - var(--#{$block-class}--title-animation-progress))
+      )
+    );
+  }
+
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
@@ -217,8 +265,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    opacity: var(--#{$block-class}--subtitle-opacity);
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
   }
+
   .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
     z-index: 2;
     background-color: $layer-01;
@@ -228,7 +277,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-05;
   }
 
-  .#{$block-class}__inner-content {
+  .#{$block-class}__title-container:has(.#{$block-class}__action-toolbar)
+    + .#{$block-class}__inner-content {
     padding-top: $spacing-03;
   }
 
@@ -236,8 +286,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include utilities.ai-gradient('bottom');
   }
 
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-    margin-bottom: $spacing-05;
+  .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
+    padding-top: $spacing-05;
   }
 
   .#{$block-class}__action-toolbar {
@@ -254,7 +304,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
-    position: absolute;
+    position: fixed;
     z-index: 5;
     top: 0;
     left: 0;
@@ -281,7 +331,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: absolute;
+    position: fixed;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;

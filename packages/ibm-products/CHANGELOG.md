@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.68.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.67.0...@carbon/ibm-products@1.68.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* **ButtonMenu:** export as canary ([#4134](https://github.com/carbon-design-system/ibm-products/issues/4134)) ([20f962b](https://github.com/carbon-design-system/ibm-products/commit/20f962b1338920d81c96d4d2ea45c33f5ef419c8))
+* **DataGrid:** nested rows on click on child row v1 ([#4067](https://github.com/carbon-design-system/ibm-products/issues/4067)) ([4bec862](https://github.com/carbon-design-system/ibm-products/commit/4bec862c497c8b41f64156d2c2379de0298e2ca4))
+
+
+### Features
+
+* **Datagrid:** add support for initially expanded nested rows ([#4089](https://github.com/carbon-design-system/ibm-products/issues/4089)) ([0046a1a](https://github.com/carbon-design-system/ibm-products/commit/0046a1a1840d96747c7f87008665c77f1ae99560))
+
+
+
+
+
 # [1.67.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.66.0...@carbon/ibm-products@1.67.0) (2024-01-16)
 
 

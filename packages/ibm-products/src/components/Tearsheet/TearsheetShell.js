@@ -138,42 +138,44 @@ export const TearsheetShell = React.forwardRef(
       }
     };
 
+    const checkForFocusableElements = useCallback(() => {
+      // Querying focusable element in the tearsheet
+      // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
+      const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${bc}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
+      // Queries to include element types button, input, select, textarea
+      const queryButton = `button${notQuery}`;
+      const queryInput = `input${notQuery}`;
+      const querySelect = `select${notQuery}`;
+      const queryTextarea = `textarea${notQuery}`;
+      const queryLink = `[href]${notQuery}`;
+      // Final query
+      const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}`;
+
+      const modalEl = modalRef?.current;
+      // Selecting all focusable elements based on the above conditions
+      const focusableElements = modalEl?.querySelectorAll(`${query}`);
+
+      return {
+        first: focusableElements?.[0],
+        last: focusableElements?.[focusableElements?.length - 1],
+        all: focusableElements,
+      };
+    }, [carbonPrefix, modalRef]);
+
+    const savedCheckForFocusableCallback = useRef(checkForFocusableElements);
+
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      const focusable = checkForFocusableElements();
+      const focusable = savedCheckForFocusableCallback.current();
       focusable?.first?.focus();
     };
-
-    const checkForFocusableElements = useCallback(() => {
-        // Querying focusable element in the tearsheet
-        // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
-        const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${bc}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
-        // Queries to include element types button, input, select, textarea
-        const queryButton = `button${notQuery}`;
-        const queryInput = `input${notQuery}`;
-        const querySelect = `select${notQuery}`;
-        const queryTextarea = `textarea${notQuery}`;
-        const queryLink = `[href]${notQuery}`;
-        // Final query
-        const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}`;
-
-        const modalEl = modalRef?.current;
-        // Selecting all focusable elements based on the above conditions
-        const focusableElements = modalEl?.querySelectorAll(`${query}`);
-
-        return {
-          first: focusableElements?.[0],
-          last: focusableElements?.[focusableElements?.length - 1],
-          all: focusableElements
-        };
-    }, [carbonPrefix, modalRef]);
 
     // useEffect hook to handle focus trapping
     useEffect(() => {
       if (open) {
         const modalEl = modalRef?.current;
         // To decide the first and last elements
-        let focusable = checkForFocusableElements();
+        let focusable = savedCheckForFocusableCallback.current();
 
         // Focusing the first element
         setTimeout(() => {
@@ -185,15 +187,26 @@ export const TearsheetShell = React.forwardRef(
           // Checking whether the key is tab or not
           if (event.key === 'Tab') {
             // updating the focusable elements list
-            focusable = checkForFocusableElements();
+            focusable = savedCheckForFocusableCallback.current();
 
             setTimeout(() => {
-              if (event.shiftKey && !Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
+              if (
+                event.shiftKey &&
+                !Array.prototype.includes.call(
+                  focusable?.all,
+                  document?.activeElement
+                )
+              ) {
                 // Prevents the default "Tab" behavior
                 event.preventDefault();
                 // if the user press shift+tab and the current element not in focusable items
                 focusable?.last?.focus();
-              } else if (!Array.prototype.includes.call(focusable?.all, document?.activeElement)) {
+              } else if (
+                !Array.prototype.includes.call(
+                  focusable?.all,
+                  document?.activeElement
+                )
+              ) {
                 event.preventDefault();
                 // user pressing tab key only then
                 // focusing the first element if the current element is not in focusable items
@@ -211,7 +224,7 @@ export const TearsheetShell = React.forwardRef(
           modalEl.removeEventListener('keydown', handleKeyDown);
         };
       }
-    }, [open, modalRef, carbonPrefix, checkForFocusableElements]);
+    }, [open, modalRef, carbonPrefix]);
 
     useEffect(() => {
       const notify = () =>

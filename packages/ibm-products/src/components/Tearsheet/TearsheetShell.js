@@ -185,7 +185,7 @@ export const TearsheetShell = React.forwardRef(
           if (event.key === 'Tab') {
             // updating the focusable elements list
             focusable = savedCheckForFocusableCallback.current();
-    
+
             setTimeout(() => {
               if (
                 event.shiftKey &&

@@ -123,23 +123,7 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
-    handleStackChange.checkFocus = function () {
-      // if we are now the topmost tearsheet, ensure we have focus
-      if (
-        position === depth &&
-        modalRef.current &&
-        !modalRef.current.innerModal.current.contains(document.activeElement)
-      ) {
-        handleStackChange.claimFocus();
-      }
-    };
-
-    // Callback to give the tearsheet the opportunity to claim focus
-    handleStackChange.claimFocus = function () {
-      const focusable = checkForFocusableElements();
-      focusable?.first?.focus();
-    };
-
+    // below callback for finding focusable elements from modal element
     const checkForFocusableElements = useCallback(() => {
       // Querying focusable element in the tearsheet
       // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
@@ -163,13 +147,34 @@ export const TearsheetShell = React.forwardRef(
         all: focusableElements,
       };
     }, [modalRef]);
+    // ref for above callback
+    // useRef to avoid stale closure when invoking checkForFocusableElements()
+    // callback from multiple functions
+    const savedCheckForFocusableCallback = useRef(checkForFocusableElements);
+
+    handleStackChange.checkFocus = function () {
+      // if we are now the topmost tearsheet, ensure we have focus
+      if (
+        position === depth &&
+        modalRef.current &&
+        !modalRef.current.innerModal.current.contains(document.activeElement)
+      ) {
+        handleStackChange.claimFocus();
+      }
+    };
+
+    // Callback to give the tearsheet the opportunity to claim focus
+    handleStackChange.claimFocus = function () {
+      const focusable = savedCheckForFocusableCallback.current();
+      focusable?.first?.focus();
+    };
 
     // useEffect hook to handle focus trapping
     useEffect(() => {
       if (open) {
         const modalEl = modalRef?.current?.innerModal?.current;
         // To decide the first and last elements
-        let focusable = checkForFocusableElements();
+        let focusable = savedCheckForFocusableCallback.current();
 
         // Focusing the first element
         setTimeout(() => focusable?.first?.focus(), 0);
@@ -179,8 +184,8 @@ export const TearsheetShell = React.forwardRef(
           // Checking whether the key is tab or not
           if (event.key === 'Tab') {
             // updating the focusable elements list
-            focusable = checkForFocusableElements();
-
+            focusable = savedCheckForFocusableCallback.current();
+    
             setTimeout(() => {
               if (
                 event.shiftKey &&
@@ -216,7 +221,7 @@ export const TearsheetShell = React.forwardRef(
           modalEl.removeEventListener('keydown', handleKeyDown);
         };
       }
-    }, [open, modalRef, checkForFocusableElements]);
+    }, [open, modalRef]);
 
     useEffect(() => {
       const notify = () =>

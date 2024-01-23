@@ -34,6 +34,7 @@ import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
+import imageTruncatedList from './TruncatedList--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -157,6 +158,11 @@ const config = [
     label: 'Tearsheet',
     directory: 'Tearsheet',
     thumbnail: `url(${imageTearsheet}`,
+  },
+  {
+    label: 'Truncated-List',
+    directory: 'TruncatedList',
+    thumbnail: `url(${imageTruncatedList}`,
   },
   {
     label: 'UserProfileImage',

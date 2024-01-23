@@ -16,6 +16,7 @@ import {
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -88,13 +89,14 @@ export let SidePanel = React.forwardRef(
     ref
   ) => {
     const [animationComplete, setAnimationComplete] = useState(false);
-    const sidePanelRef = useRef();
-    const sidePanelOverlayRef = useRef();
+    const localRef = useRef();
+    const sidePanelRef = ref || localRef;
+    const overlayRef = useRef();
     const startTrapRef = useRef();
     const endTrapRef = useRef();
-    const sidePanelInnerRef = useRef();
-    const sidePanelCloseRef = useRef();
-    const scrollSectionRef = useRef();
+    const innerContentRef = useRef();
+    const closeRef = useRef();
+    const animatedScrollRef = useRef();
     const headerRef = useRef();
     const titleRef = useRef();
     const collapsedTitleRef = useRef();
@@ -110,19 +112,18 @@ export let SidePanel = React.forwardRef(
     }, [animateTitle]);
 
     const handleScroll = useCallback(() => {
-      const panelRef = ref || sidePanelRef;
-      const scrollTop = scrollSectionRef.current.scrollTop;
+      const scrollTop = animatedScrollRef.current.scrollTop;
 
-      panelRef.current.style.setProperty(
+      sidePanelRef.current.style.setProperty(
         `--${blockClass}--title-animation-progress`,
         Math.min(scrollTop, titleAnimationDistance) / titleAnimationDistance
       );
 
-      panelRef.current.style.setProperty(
+      sidePanelRef.current.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
         Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
       );
-    }, [scrollAnimationDistance, ref, titleAnimationDistance]);
+    }, [scrollAnimationDistance, sidePanelRef, titleAnimationDistance]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -131,10 +132,9 @@ export let SidePanel = React.forwardRef(
 
     // scroll panel to top going between steps
     useEffect(() => {
-      const panelRef = ref || sidePanelRef;
-      if (panelRef && panelRef.current) {
+      if (sidePanelRef && sidePanelRef.current) {
         const scrollableSection =
-          scrollSectionRef.current ?? sidePanelInnerRef.current;
+          animatedScrollRef.current ?? innerContentRef.current;
 
         scrollableSection.scrollTop = 0;
         // The size of the panel has changed while it is still opened
@@ -144,7 +144,7 @@ export let SidePanel = React.forwardRef(
           scrollableSection.scrollTop = 0;
         }
       }
-    }, [currentStep, ref, size, previousState?.size, id]);
+    }, [currentStep, sidePanelRef, size, previousState?.size, id]);
 
     // set initial focus when side panel opens
     useEffect(() => {
@@ -157,7 +157,7 @@ export let SidePanel = React.forwardRef(
         if (primaryFocusElement) {
           return primaryFocusElement;
         } else {
-          return sidePanelCloseRef && sidePanelCloseRef.current;
+          return closeRef && closeRef.current;
         }
       };
 
@@ -166,7 +166,7 @@ export let SidePanel = React.forwardRef(
         target?.focus();
       };
       if (open && animationComplete) {
-        focusButton(sidePanelInnerRef.current);
+        focusButton(innerContentRef.current);
       }
     }, [selectorPrimaryFocus, open, animationComplete]);
 
@@ -180,11 +180,9 @@ export let SidePanel = React.forwardRef(
       }
     }, [labelText, title]);
 
-    // Calculate scroll distances
-    useEffect(() => {
-      const panelRef = ref || sidePanelRef;
+    const checkSetDoAnimateTitle = () => {
       if (
-        panelRef?.current &&
+        sidePanelRef?.current &&
         open &&
         animateTitle &&
         animationComplete &&
@@ -193,7 +191,6 @@ export let SidePanel = React.forwardRef(
         title.length &&
         !reducedMotion.matches
       ) {
-        const scrollEl = scrollSectionRef.current;
         const titleEl = titleRef.current;
         const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
         const subtitleHeight = subtitleRef?.current?.offsetHeight ?? 0;
@@ -211,44 +208,96 @@ export let SidePanel = React.forwardRef(
         setScrollAnimationDistance(scrollAnimationDistance);
 
         // used to calculate the header moves
-        panelRef.current.style.setProperty(
+        sidePanelRef.current.style.setProperty(
           `--${blockClass}--scroll-animation-distance`,
           scrollAnimationDistance
         );
 
-        if (scrollEl) {
-          // will need updating on resize
-          setDoAnimateTitle(
-            (!!labelText || !!actionToolbarButtons || !!subtitle) &&
-              scrollEl.scrollHeight >=
-                scrollEl.clientHeight + titleAnimationDistance
-          );
+        let scrollEl = animatedScrollRef.current;
 
-          scrollEl.addEventListener('scroll', handleScroll);
+        if (!scrollEl && animateTitle && !doAnimateTitle) {
+          // may be switching back based on resize
+          scrollEl = innerContentRef.current;
         }
+
+        if (scrollEl) {
+          /* turn off/on animated scroll and add event listener */
+          const bufferHeight = 16; /* px 1 rem could measure the change in inner-content padding instead but this is simpler */
+
+          const canDoAnimateTitle =
+            (!!labelText || !!actionToolbarButtons || !!subtitle) &&
+            scrollEl.scrollHeight - scrollEl.clientHeight >=
+              Math.max(titleAnimationDistance, scrollAnimationDistance) +
+                bufferHeight;
+
+          if (doAnimateTitle !== canDoAnimateTitle) {
+            // will need updating on resize
+            setDoAnimateTitle(canDoAnimateTitle);
+          }
+        }
+      }
+    };
+
+    useEffect(() => {
+      if (doAnimateTitle && animatedScrollRef.current) {
+        // only add scroll if the doAnimateTitle is already true
+        // should come back through if false and canDoAnimateTitle is true
+        animatedScrollRef.current.addEventListener('scroll', handleScroll);
+      }
+
+      if (!doAnimateTitle) {
+        sidePanelRef.current.style.setProperty(
+          `--${blockClass}--title-animation-progress`,
+          0
+        );
+
+        sidePanelRef.current.style.setProperty(
+          `--${blockClass}--scroll-animation-progress`,
+          0
+        );
+      }
+    }, [animatedScrollRef, doAnimateTitle, handleScroll, sidePanelRef]);
+
+    /* istanbul ignore next */
+    const handleResize = () => {
+      checkSetDoAnimateTitle();
+    };
+
+    // Calculate scroll distances
+    useEffect(() => {
+      if (
+        sidePanelRef?.current &&
+        open &&
+        animateTitle &&
+        animationComplete &&
+        titleRef?.current &&
+        title &&
+        title.length &&
+        !reducedMotion.matches
+      ) {
+        checkSetDoAnimateTitle();
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       open,
-      doAnimateTitle,
+      doAnimateTitle /* use do instead of animateTitle directly */,
       animationComplete,
       handleScroll,
       title,
       size,
       reducedMotion.matches,
       id,
-      scrollSectionRef.current,
+      animatedScrollRef.current,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
     useEffect(() => {
       const handleOutsideClick = (event) => {
-        const panelRef = ref || sidePanelRef;
         if (
-          panelRef.current &&
-          sidePanelOverlayRef.current &&
-          sidePanelOverlayRef.current.contains(event.target) &&
+          sidePanelRef.current &&
+          overlayRef.current &&
+          overlayRef.current.contains(event.target) &&
           onRequestClose
         ) {
           onRequestClose();
@@ -273,8 +322,8 @@ export let SidePanel = React.forwardRef(
       onRequestClose,
       open,
       preventCloseOnClickOutside,
-      ref,
       onUnmount,
+      sidePanelRef,
     ]);
 
     // initializes the side panel to close
@@ -357,9 +406,9 @@ export let SidePanel = React.forwardRef(
       relatedTarget: currentActiveNode,
     }) => {
       // focus trap should only be set if the side panel is a `slideOver` type
-      if (open && sidePanelInnerRef && !slideIn) {
+      if (open && innerContentRef && !slideIn) {
         wrapFocus({
-          bodyNode: sidePanelInnerRef.current,
+          bodyNode: innerContentRef.current,
           startTrapRef,
           endTrapRef,
           currentActiveNode,
@@ -469,7 +518,7 @@ export let SidePanel = React.forwardRef(
               iconDescription={closeIconDescription}
               className={`${blockClass}__close-button`}
               onClick={onRequestClose}
-              ref={sidePanelCloseRef}
+              ref={closeRef}
             />
           </div>
           {/* subtitle */}
@@ -535,13 +584,9 @@ export let SidePanel = React.forwardRef(
     const renderMain = () => {
       return (
         <div
-          ref={sidePanelInnerRef}
+          ref={innerContentRef}
           className={cx(`${blockClass}__inner-content`, {
-            [`${blockClass}__static-inner-content`]: !doAnimateTitle,
-            [`${blockClass}__static-inner-content-no-actions`]:
-              !doAnimateTitle && !actions?.length,
-            [`${blockClass}__inner-content-with-actions`]:
-              actions && actions.length,
+            [`${blockClass}__inner-content--static`]: !doAnimateTitle,
             [`${blockClass}--scrolls`]: !doAnimateTitle,
           })}
         >
@@ -550,7 +595,7 @@ export let SidePanel = React.forwardRef(
       );
     };
 
-    const contentRef = ref || sidePanelRef;
+    useResizeObserver(sidePanelRef, handleResize, [open]);
 
     return (
       <AnimatePresence>
@@ -562,7 +607,7 @@ export let SidePanel = React.forwardRef(
               id={id}
               className={mainPanelClassNames}
               onBlur={handleBlur}
-              ref={contentRef}
+              ref={sidePanelRef}
               role="complementary"
               aria-label={title}
               onAnimationComplete={onAnimationEnd}
@@ -584,8 +629,8 @@ export let SidePanel = React.forwardRef(
 
               {doAnimateTitle ? (
                 <div
-                  ref={scrollSectionRef}
-                  className={`${blockClass}__scrolling-section ${blockClass}--scrolls`}
+                  ref={animatedScrollRef}
+                  className={`${blockClass}__animated-scroll-wrapper ${blockClass}--scrolls`}
                 >
                   {/* header */}
                   {renderHeader()}
@@ -626,7 +671,7 @@ export let SidePanel = React.forwardRef(
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  ref={sidePanelOverlayRef}
+                  ref={overlayRef}
                   className={`${blockClass}__overlay`}
                 />
               )}

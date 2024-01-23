@@ -84,7 +84,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  &:not(:has(.#{$block-class}__scrolling-section)) {
+  &:not(:has(.#{$block-class}__animated-scroll-wrapper)) {
     /* if the title does not scroll then we have a child scrolling section. */
     grid-template-rows: auto 1fr auto; /* titles content actions */
   }
@@ -193,7 +193,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     --#{$block-class}--title-padding-right: #{$spacing-11};
   }
 
-  .#{$block-class}__scrolling-section {
+  .#{$block-class}__animated-scroll-wrapper {
     display: grid;
     grid-template-rows: auto 1fr;
   }
@@ -214,7 +214,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include type.type-style('heading-03');
     @include setCommonTitleStyles();
 
-    opacity: calc(1 - var(--#{$block-class}--title-animation-progress));
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__title-text {
@@ -235,7 +235,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     overflow: hidden;
     padding-right: var(--#{$block-class}--title-padding-right);
-    opacity: calc(1 - var(--#{$block-class}--title-animation-progress));
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -247,7 +247,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     position: absolute;
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: 0;
-    opacity: var(--#{$block-class}--title-animation-progress);
+    opacity: var(--#{$block-class}--scroll-animation-progress);
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
@@ -289,7 +289,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include utilities.ai-gradient('bottom');
   }
 
-  .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
+  .#{$block-class}__inner-content.#{$block-class}__inner-content--static {
     padding-top: $spacing-05;
   }
 

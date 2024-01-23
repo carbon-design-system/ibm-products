@@ -1,0 +1,12 @@
+{
+  "label": "Delimited-List",
+  "package-config": {
+    "flags": {
+      "component": {
+        "DelimitedList": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

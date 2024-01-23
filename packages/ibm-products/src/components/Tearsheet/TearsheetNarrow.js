@@ -121,6 +121,12 @@ TearsheetNarrow.propTypes = {
   ]),
 
   /**
+   * The aria-label for the tearsheet, which is optional.
+   * if it is not passed, the title will be used as the aria-label.
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
    * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,

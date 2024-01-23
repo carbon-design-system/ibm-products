@@ -30,19 +30,19 @@ export let EmptyStateV2 = React.forwardRef((props, ref) => {
     illustrationDescription,
     illustrationPosition = 'top',
     illustrationTheme,
+    kind,
     link,
     size = 'lg',
     subtitle,
     title,
-    variant,
     ...rest
   } = props;
 
   const illustrationProps = {
+    kind,
     size,
     theme: illustrationTheme,
     title: illustrationDescription,
-    variant,
   };
 
   return (
@@ -53,7 +53,7 @@ export let EmptyStateV2 = React.forwardRef((props, ref) => {
         className,
         `${blockClass}-position--${illustrationPosition}`,
         {
-          [`${blockClass}-type--${variant}`]: variant,
+          [`${blockClass}-type--${kind}`]: kind,
         },
       ])}
       ref={ref}
@@ -69,7 +69,7 @@ export let EmptyStateV2 = React.forwardRef((props, ref) => {
           ])}
         />
       )}
-      {!customIllustration && variant && (
+      {!customIllustration && kind && (
         <EmptyStateIllustration {...illustrationProps} />
       )}
       <div className={`${blockClass}__content`}>
@@ -125,7 +125,7 @@ EmptyStateV2.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Source for the illustration image if you choose to use your own custom image. Passing an illustration prop will supersede the variant option.
+   * Source for the illustration image if you choose to use your own custom image. Passing an illustration prop will supersede the kind option.
    */
   illustration: PropTypes.string,
 
@@ -148,6 +148,18 @@ EmptyStateV2.propTypes = {
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 
   /**
+   * Determines which predefined illustration will be displayed
+   */
+  kind: PropTypes.oneOf([
+    'error',
+    'noData',
+    'noTags',
+    'notFound',
+    'notifications',
+    'unauthorized',
+  ]),
+
+  /**
    * Props for the link. Refer to the Carbon Components link documentation for full list of props.
    */
   link: PropTypes.shape({
@@ -168,17 +180,6 @@ EmptyStateV2.propTypes = {
    * Empty state heading
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  /**
-   * Determines which predefined illustration will be displayed
-   */
-  variant: PropTypes.oneOf([
-    'error',
-    'noData',
-    'noTags',
-    'notFound',
-    'notifications',
-    'unauthorized',
-  ]),
 };
 
 EmptyStateV2.displayName = componentName;

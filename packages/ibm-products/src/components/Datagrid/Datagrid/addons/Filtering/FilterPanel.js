@@ -194,9 +194,12 @@ const FilterPanel = ({
     const actionSetHeight =
       actionSetRef.current?.getBoundingClientRect().height;
 
-    const height = `calc(100vh - ${filterHeadingHeight}px - ${
-      showFilterSearch ? filterSearchHeight : 0
-    }px - ${updateMethod === BATCH ? actionSetHeight : 0}px)`;
+    const height = panelOpen
+      ? `calc(100vh - ${filterHeadingHeight}px - ${
+          /* istanbul ignore next */
+          showFilterSearch ? filterSearchHeight : 0
+        }px - ${updateMethod === BATCH ? actionSetHeight : 0}px)`
+      : 0;
 
     return height;
   };

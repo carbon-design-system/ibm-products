@@ -50,9 +50,17 @@
     }
   }
 
-  .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
+  .#{$carbon-prefix}--overflow-menu-options
+    > .c4p--datagrid__row-size-dropdown {
     left: $spacing-01;
     width: 112px;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--pagination,
+  .#{$block-class}
+    .#{$carbon-prefix}--pagination
+    .#{$carbon-prefix}--select-input {
+    background-color: $ui-02;
   }
 }
 

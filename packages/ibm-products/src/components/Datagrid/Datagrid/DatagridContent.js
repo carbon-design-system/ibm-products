@@ -86,43 +86,46 @@ export const DatagridContent = ({ datagridState, title }) => {
 
   const renderTable = () => {
     return (
-      <Table
-        {...getTableProps()}
-        className={cx(
-          withVirtualScroll ? '' : `${blockClass}__table-simple`,
-          `${blockClass}__vertical-align-${verticalAlign}`,
-          { [`${blockClass}__variable-row-height`]: variableRowHeight },
-          { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
-          { [`${blockClass}__table-grid-active`]: gridActive },
-          {
-            [`${blockClass}__table-is-resizing`]:
-              typeof columnResizing.isResizingColumn === 'string',
-          },
-          getTableProps()?.className
-        )}
-        role={withInlineEdit && 'grid'}
-        tabIndex={withInlineEdit && 0}
-        onKeyDown={
-          /* istanbul ignore next */
-          withInlineEdit &&
-          ((event) =>
-            handleGridKeyPress({
-              event,
-              dispatch,
-              instance: datagridState,
-              keysPressedList,
-              state: inlineEditState,
-              usingMac,
-            }))
-        }
-        onFocus={
-          withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
-        }
-        title={title}
-      >
-        {!withVirtualScroll && <DatagridHead {...datagridState} />}
-        <DatagridBody {...datagridState} rows={contentRows} />
-      </Table>
+      <>
+        <Table
+          {...getTableProps()}
+          className={cx(
+            withVirtualScroll ? '' : `${blockClass}__table-simple`,
+            `${blockClass}__vertical-align-${verticalAlign}`,
+            { [`${blockClass}__variable-row-height`]: variableRowHeight },
+            { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
+            { [`${blockClass}__table-grid-active`]: gridActive },
+            {
+              [`${blockClass}__table-is-resizing`]:
+                typeof columnResizing.isResizingColumn === 'string',
+            },
+            getTableProps()?.className
+          )}
+          role={withInlineEdit && 'grid'}
+          tabIndex={withInlineEdit && 0}
+          onKeyDown={
+            /* istanbul ignore next */
+            withInlineEdit &&
+            ((event) =>
+              handleGridKeyPress({
+                event,
+                dispatch,
+                instance: datagridState,
+                keysPressedList,
+                state: inlineEditState,
+                usingMac,
+              }))
+          }
+          onFocus={
+            withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
+          }
+          title={title}
+        >
+          {!withVirtualScroll && <DatagridHead {...datagridState} />}
+          <DatagridBody {...datagridState} rows={contentRows} />
+        </Table>
+        {filterProps?.variation === 'panel' && renderPagination()}
+      </>
     );
   };
 
@@ -168,6 +171,12 @@ export const DatagridContent = ({ datagridState, title }) => {
         overflowType="tag"
       />
     );
+
+  const renderPagination = () => {
+    if (contentRows?.length > 0 && !isFetching && DatagridPagination) {
+      return <DatagridPagination {...datagridState} />;
+    }
+  };
 
   return (
     <>
@@ -223,9 +232,7 @@ export const DatagridContent = ({ datagridState, title }) => {
           </div>
         </div>
       </TableContainer>
-      {contentRows?.length > 0 && !isFetching && DatagridPagination && (
-        <DatagridPagination {...datagridState} />
-      )}
+      {filterProps?.variation !== 'panel' && renderPagination()}
       {CustomizeColumnsTearsheet && (
         <CustomizeColumnsTearsheet instance={datagridState} />
       )}

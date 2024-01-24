@@ -84,7 +84,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  &:not(:has(.#{$block-class}__animated-scroll-wrapper)) {
+  &:not(:has(.#{$block-class}__animated-scroll-wrapper)),
+  &.#{$block-class}__container--has-no-animated-scroll-wrapper {
     /* if the title does not scroll then we have a child scrolling section. */
     grid-template-rows: auto 1fr auto; /* titles content actions */
   }
@@ -106,7 +107,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   &.#{$block-class}__container--slide-in,
-  &.#{$block-class}__container:not(:has(+ .#{$block-class}__overlay)) {
+  &.#{$block-class}__container:not(:has(+ .#{$block-class}__overlay)),
+  &.#{$block-class}__container--has-no-overlay {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
 
@@ -121,17 +123,20 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-bottom: 0;
     background-color: $layer-01;
 
-    &:has(.#{$block-class}__subtitle-text) {
+    &:has(.#{$block-class}__subtitle-text),
+    &.#{$block-class}__header--has-subtitle {
       --#{$block-class}--title-padding-bottom: #{$spacing-03};
     }
 
-    &:has(.#{$block-class}__navigation-back-button) {
+    &:has(.#{$block-class}__navigation-back-button),
+    &.#{$block-class}__header--has-navigation-back {
       padding-top: $spacing-07;
     }
 
     &:has(
         .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
-      ) {
+      ),
+    &.#{$block-class}__header--has-navigation-back.#{c4p-settings.$carbon-prefix}--btn--md {
       padding-top: $spacing-08;
     }
 
@@ -177,20 +182,23 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     }
 
-    &:not(:has(.#{$block-class}__title-text))::before {
+    &:not(:has(.#{$block-class}__title-text))::before,
+    &.#{$block-class}__header--has-no-title::before {
       background-color: transparent;
     }
   }
 
   &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}__container--has-action-toolbar,
   &.#{$block-class}__container--has-slug {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
-  &.#{$block-class}__container:has(
-      .#{$block-class}__action-toolbar
-    ).#{$block-class}__container--has-slug {
-    --#{$block-class}--title-padding-right: #{$spacing-11};
+  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}__container--has-action-toolbar {
+    &.#{$block-class}__container--has-slug {
+      --#{$block-class}--title-padding-right: #{$spacing-11};
+    }
   }
 
   .#{$block-class}__animated-scroll-wrapper {
@@ -279,8 +287,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__title-text + .#{$block-class}__subtitle-text {
     padding-top: $spacing-05;
   }
+  .#{$block-class}__inner-content {
+    padding: $spacing-05;
+    padding-top: 0;
+  }
 
   .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
+    + .#{$block-class}__inner-content,
+  .#{$block-class}__header--has-action-toolbar
     + .#{$block-class}__inner-content {
     padding-top: $spacing-03;
   }
@@ -339,11 +353,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     top: 0;
     right: 0;
     display: flex;
-  }
-
-  .#{$block-class}__body-content {
-    padding: $spacing-05;
-    padding-top: 0;
   }
 
   .#{$block-class}__actions-container {

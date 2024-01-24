@@ -199,12 +199,13 @@ export let SidePanel = React.forwardRef(
         setTitleAnimationDistance(titleAnimationDistance);
 
         // Adjusts space at bottom of titles by changing where scrolling finishes
-        const titleVerticalPadding = actionToolbarButtons
+        // Styles use border to save use of get computed style
+        const titleVerticalBorder = actionToolbarButtons
           ? titleEl.offsetHeight - titleEl.clientHeight
           : 0;
 
         const scrollAnimationDistance =
-          labelHeight + subtitleHeight + titleVerticalPadding;
+          labelHeight + subtitleHeight + titleVerticalBorder;
         setScrollAnimationDistance(scrollAnimationDistance);
 
         // used to calculate the header moves
@@ -221,14 +222,19 @@ export let SidePanel = React.forwardRef(
         }
 
         if (scrollEl) {
-          /* turn off/on animated scroll and add event listener */
-          const bufferHeight = 16; /* px 1 rem could measure the change in inner-content padding instead but this is simpler */
+          const innerComputed = window?.getComputedStyle(
+            innerContentRef.current
+          );
+          const innerPaddingHeight = innerComputed
+            ? parseFloat(innerComputed?.paddingTop, 10) +
+              parseFloat(innerComputed?.paddingBottom, 10)
+            : 0;
 
           const canDoAnimateTitle =
             (!!labelText || !!actionToolbarButtons || !!subtitle) &&
             scrollEl.scrollHeight - scrollEl.clientHeight >=
               Math.max(titleAnimationDistance, scrollAnimationDistance) +
-                bufferHeight;
+                innerPaddingHeight;
 
           if (doAnimateTitle !== canDoAnimateTitle) {
             // will need updating on resize
@@ -245,7 +251,7 @@ export let SidePanel = React.forwardRef(
         animatedScrollRef.current.addEventListener('scroll', handleScroll);
       }
 
-      if (!doAnimateTitle) {
+      if (!doAnimateTitle && sidePanelRef.current) {
         sidePanelRef.current.style.setProperty(
           `--${blockClass}--title-animation-progress`,
           0
@@ -590,7 +596,7 @@ export let SidePanel = React.forwardRef(
             [`${blockClass}--scrolls`]: !doAnimateTitle,
           })}
         >
-          <div className={`${blockClass}__body-content`}>{children}</div>
+          {children}
         </div>
       );
     };

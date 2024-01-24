@@ -26,7 +26,6 @@ export const NotificationsIllustration = ({ theme, title, size,alt, ...rest }) =
       xmlns="http://www.w3.org/2000/svg"
       width={80}
       height={80}
-      aria-label={alt}
       viewBox="0 0 80 80"
       className={cx([
         `${blockClass}__illustration`,
@@ -35,7 +34,7 @@ export const NotificationsIllustration = ({ theme, title, size,alt, ...rest }) =
       ])}
       role="img"
     >
-      <title>{title}</title>
+      <title>{alt}</title>
       {theme === 'dark' ? (
         <>
           <defs>

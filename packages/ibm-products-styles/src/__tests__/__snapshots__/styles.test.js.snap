@@ -2394,9 +2394,12 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky;
   z-index: 4;
   top: 0;
-  padding: 1rem 1rem 0.5rem 1rem;
+  padding: 1rem;
   background-color: var(--cds-layer-01, #f4f4f4);
   /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--side-panel__container .c4p--side-panel__title-container:has(~ .c4p--side-panel__subtitle-text) {
+  padding-bottom: 0.5rem;
 }
 .c4p--side-panel__container .c4p--side-panel__title-container:has(.c4p--side-panel__navigation-back-button) {
   padding-top: 2rem;

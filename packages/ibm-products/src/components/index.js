@@ -91,3 +91,4 @@ export {
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
 export { TruncatedList } from './TruncatedList';
+export { DelimitedList } from './DelimitedList';

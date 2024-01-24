@@ -57,6 +57,7 @@ const s = [
             ],
           },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
+          { n: 'DelimitedList', s: ['c/DelimitedList'] },
         ],
       },
       {

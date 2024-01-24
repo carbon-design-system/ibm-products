@@ -147,7 +147,7 @@ describe(name, () => {
 
   it('should render the NoDataEmptyState', () => {
     const { container, rerender } = render(
-      <NoDataEmptyState {...defaultProps} />
+      <NoDataEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NoDataEmptyState {...defaultProps} illustrationTheme="dark" />);
@@ -164,7 +164,7 @@ describe(name, () => {
 
   it('should render the ErrorEmptyState component', () => {
     const { container, rerender } = render(
-      <ErrorEmptyState {...defaultProps} />
+      <ErrorEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(<ErrorEmptyState {...defaultProps} illustrationTheme="dark" />);
@@ -181,7 +181,7 @@ describe(name, () => {
 
   it('should render the NoTagsEmptyState component', () => {
     const { container, rerender } = render(
-      <NoTagsEmptyState {...defaultProps} />
+      <NoTagsEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NoTagsEmptyState {...defaultProps} illustrationTheme="dark" />);
@@ -198,7 +198,7 @@ describe(name, () => {
 
   it('should render the NotFoundEmptyState component', () => {
     const { container, rerender } = render(
-      <NotFoundEmptyState {...defaultProps} />
+      <NotFoundEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(<NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />);
@@ -215,7 +215,7 @@ describe(name, () => {
 
   it('should render the NotificationsEmptyState component', () => {
     const { container, rerender } = render(
-      <NotificationsEmptyState {...defaultProps} />
+      <NotificationsEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(
@@ -236,7 +236,7 @@ describe(name, () => {
 
   it('should render the UnauthorizedEmptyState component', () => {
     const { container, rerender } = render(
-      <UnauthorizedEmptyState {...defaultProps} />
+      <UnauthorizedEmptyState {...defaultProps} illustrationDescription="Test alt text" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
     rerender(

@@ -32,6 +32,7 @@ export let UnauthorizedEmptyState = React.forwardRef(
       action,
       className,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -55,7 +56,7 @@ export let UnauthorizedEmptyState = React.forwardRef(
         <UnauthorizedIllustration
           size={size}
           title={title}
-          theme={illustrationTheme}
+          alt={illustrationDescription}
         />
         <EmptyStateContent
           action={action}
@@ -106,6 +107,11 @@ UnauthorizedEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
+   /**
+   * The alt text for empty state svg images
+   */
+   illustrationDescription: PropTypes.string.isRequired,
 
   /**
    * Empty state link object

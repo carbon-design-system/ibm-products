@@ -2394,9 +2394,12 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky;
   z-index: 4;
   top: 0;
-  padding: 1rem 1rem 0.5rem 1rem;
+  padding: 1rem;
   background-color: var(--cds-layer-01, #f4f4f4);
   /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--side-panel__container .c4p--side-panel__title-container:has(~ .c4p--side-panel__subtitle-text) {
+  padding-bottom: 0.5rem;
 }
 .c4p--side-panel__container .c4p--side-panel__title-container:has(.c4p--side-panel__navigation-back-button) {
   padding-top: 2rem;
@@ -4234,13 +4237,6 @@ p.c4p--about-modal__copyright-text:first-child {
   padding-top: 0.5rem;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
 .c4p--datagrid-filter-flyout__container {
   position: relative;
@@ -4306,7 +4302,7 @@ p.c4p--about-modal__copyright-text:first-child {
   display: grid;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   gap: 1rem 2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .c4p--datagrid-filter-flyout__trigger.cds--btn {
@@ -4325,6 +4321,10 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .c4p--datagrid-filter-flyout .cds--fieldset {
   margin-bottom: 0;
+}
+
+.c4p--datagrid-filter-flyout__stacked {
+  grid-template-columns: 1fr;
 }
 
 /*
@@ -8379,7 +8379,9 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5rem;
+}
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link {
+  margin-top: 0.5rem;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
   background-color: var(--cds-background-inverse-hover, #474747);

@@ -2198,7 +2198,7 @@ __metadata:
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/sortable": "npm:^7.0.2"
     "@dnd-kit/utilities": "npm:^3.2.1"
-    "@ibm/telemetry-js": "npm:^1.1.0"
+    "@ibm/telemetry-js": "npm:^1.2.0"
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
     chalk: "npm:^4.1.2"
     change-case: "npm:^4.1.2"
@@ -3495,6 +3495,15 @@ __metadata:
   bin:
     ibmtelemetry: dist/collect.js
   checksum: 4a7b5fcf565d52e6c46e21c6c1afbc7e985eb2d78e2d1f3b6c282deee14a6c307427ee4868feeae3c36523aaf2c8fc013f366be121db2a712351262ad967112c
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ibm/telemetry-js@npm:1.2.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: dd942eaecc6bdf40f91309fc783b2d1b654e9cb73dd0b98ec54eef53816cad027c60ccaf6415cc81dd3ee1f8686159733ac226f6c13288419269a001a7b81b3b
   languageName: node
   linkType: hard
 

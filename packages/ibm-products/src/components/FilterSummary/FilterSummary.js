@@ -79,7 +79,7 @@ FilterSummary.displayName = componentName;
 
 FilterSummary.propTypes = {
   className: PropTypes.string,
-  clearButtonInline: PropTypes.boolean,
+  clearButtonInline: PropTypes.bool,
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,

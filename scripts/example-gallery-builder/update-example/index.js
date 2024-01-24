@@ -92,12 +92,6 @@ const updateExample = (name, config) => {
       substitutions.KEYWORDS = substitutions.STYLE_NAME;
     }
 
-    const pkgDeps = config['dependencies'];
-    const pkgDevDeps = config['devDependencies'];
-
-    substitutions.PKG_DEPS = depsToString(pkgDeps);
-    substitutions.PKG_DEV_DEPS = depsToString(pkgDevDeps);
-
     const pkgConfig = config['package-config'];
 
     // will there be config (written later)
@@ -163,7 +157,32 @@ const updateExample = (name, config) => {
         const readTemplate =
           altTemplate && fs.existsSync(altTemplate) ? altTemplate : template;
 
-        const data = compile(readFileSync(readTemplate, 'utf8'), substitutions);
+        let data = compile(readFileSync(readTemplate, 'utf8'), substitutions);
+
+        if (newFilename === 'package.json') {
+          ['dependencies', 'devDependencies'].forEach((section) => {
+            const deps = config[section];
+            if (deps) {
+              /* adds the deps to the end of the dependency section */
+              const stringyDeps = depsToString(deps);
+              const regex = new RegExp(
+                `(${section}": \\{([^}]|\\n)*)(\\n\\s*\\})`
+              );
+              const match = regex.exec(data);
+              // match explained
+              // 0 whole match
+              // 1 starts with the section name and ": {
+              // 1 includes anything not } allowing \n
+              // 2 is a result of combining ^} with \n and contained entirely in 1
+              // 3 is the last \n white space and }
+              data = data.replace(
+                regex,
+                `${match[1]}${stringyDeps}${match[3]}`
+              );
+            }
+          });
+        }
+
         outputFileSync(newPath, data);
       }
     });

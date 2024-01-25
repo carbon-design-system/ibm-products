@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -69,6 +69,8 @@ export let TagSet = React.forwardRef(
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
 
+    const [popoverOpen, setPopoverOpen] = useState(false);
+
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
@@ -99,12 +101,26 @@ export let TagSet = React.forwardRef(
       setSizingTags(newSizingTags);
     }, [tags]);
 
+    const handleTagOnClose = useCallback(
+      (onClose, index) => {
+        onClose?.();
+        if (index <= displayCount - 1) {
+          setPopoverOpen(false);
+        }
+      },
+      [displayCount]
+    );
+
     useEffect(() => {
       // create visible and overflow tags
       let newDisplayedTags =
         tags && tags.length > 0
-          ? tags.map(({ label, ...other }, index) => (
-              <Tag {...other} key={`displayed-tag-${index}`}>
+          ? tags.map(({ label, onClose, ...other }, index) => (
+              <Tag
+                {...other}
+                key={`displayed-tag-${index}`}
+                onClose={() => handleTagOnClose(onClose, index)}
+              >
                 {label}
               </Tag>
             ))
@@ -134,6 +150,8 @@ export let TagSet = React.forwardRef(
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
+          popoverOpen={popoverOpen}
+          setPopoverOpen={setPopoverOpen}
         />
       );
 
@@ -145,6 +163,8 @@ export let TagSet = React.forwardRef(
       overflowType,
       showAllTagsLabel,
       tags,
+      popoverOpen,
+      handleTagOnClose,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {

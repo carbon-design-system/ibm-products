@@ -124,6 +124,7 @@ const DatagridRow = (datagridState) => {
     return {};
   };
 
+  // eslint-disable-next-line no-unused-vars
   const { role, ...rowProps } = row.getRowProps();
 
   return (
@@ -138,11 +139,10 @@ const DatagridRow = (datagridState) => {
         onBlur={focusRemover}
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
-        // avoid unnecessary role assignment to rows
-        {...(role === 'row' && { role })}
       >
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
+          // eslint-disable-next-line no-unused-vars
           const { children, role, ...restProps } = cellProps;
           const content = children || (
             <>
@@ -154,6 +154,7 @@ const DatagridRow = (datagridState) => {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
           }
+          const title = content?.props?.children[0]?.props?.value;
           return (
             <TableCell
               className={cx(`${blockClass}__cell`, {
@@ -162,8 +163,7 @@ const DatagridRow = (datagridState) => {
               })}
               {...restProps}
               key={cell.column.id}
-              // avoid unnecessary role assignment to cells
-              {...(role === 'cell' && { role })}
+              title={title}
             >
               {content}
             </TableCell>

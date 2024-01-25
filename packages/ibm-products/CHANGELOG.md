@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.20.0...@carbon/ibm-products@2.21.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* **DataGrid:** nested rows on click on child row ([#4055](https://github.com/carbon-design-system/ibm-products/issues/4055)) ([d6bcf02](https://github.com/carbon-design-system/ibm-products/commit/d6bcf02a37113da8062006b50d43c5f50ad66e84))
+* datatable cell accessibility adjustment ([#4046](https://github.com/carbon-design-system/ibm-products/issues/4046)) ([a359d7f](https://github.com/carbon-design-system/ibm-products/commit/a359d7fc8bd9b4fca470c971151ebab93cc5753f))
+* remove unnecessary datagrid roles ([#4072](https://github.com/carbon-design-system/ibm-products/issues/4072)) ([2b09059](https://github.com/carbon-design-system/ibm-products/commit/2b09059e8f9cd8e2f4a98be063bbac7ee0e1e394))
+* update Carbon 11 compatible versions to latest ([#4049](https://github.com/carbon-design-system/ibm-products/issues/4049)) ([484e00c](https://github.com/carbon-design-system/ibm-products/commit/484e00c29732922fa62f4489322250c27fde0c06))
+* update generate script ([#4063](https://github.com/carbon-design-system/ibm-products/issues/4063)) ([c284f25](https://github.com/carbon-design-system/ibm-products/commit/c284f25ce1c5eb4ce357cc3e26f84219c50502bd))
+
+
+### Features
+
+* **Datagrid:** add support for initially expanded nested rows ([#4088](https://github.com/carbon-design-system/ibm-products/issues/4088)) ([58ea07f](https://github.com/carbon-design-system/ibm-products/commit/58ea07f7743b8385b84ee9892bc35f720f5c5c9f))
+* **Tearsheet:** support aria-label ([#4130](https://github.com/carbon-design-system/ibm-products/issues/4130)) ([01d8f56](https://github.com/carbon-design-system/ibm-products/commit/01d8f56b1f75b309cfbfdc763065d88e54bfa9e1))
+
+
+
+
+
 # [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.2...@carbon/ibm-products@2.20.0) (2024-01-16)
 
 

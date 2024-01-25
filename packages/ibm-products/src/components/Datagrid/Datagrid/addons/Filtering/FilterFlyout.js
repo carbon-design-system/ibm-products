@@ -54,6 +54,11 @@ const FilterFlyout = ({
   const [open, setOpen] = useState(false);
   const [stackedLayout, setStackedLayout] = useState(false);
 
+  const handleCancel = () => {
+    setOpen(false);
+    onCancel();
+  };
+
   const {
     filtersState,
     prevFiltersObjectArrayRef,
@@ -69,7 +74,7 @@ const FilterFlyout = ({
     setAllFilters,
     variation: FLYOUT,
     reactTableFiltersState,
-    onCancel,
+    onCancel: handleCancel,
   });
 
   const { width } = breakpoints.md;
@@ -186,7 +191,6 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
-              disabled: shouldDisableButtons,
             },
           ]}
           size="md"

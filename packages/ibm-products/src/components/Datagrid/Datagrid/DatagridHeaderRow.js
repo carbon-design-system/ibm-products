@@ -154,7 +154,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     if (isTableSortable) {
       return;
     }
-    return !isTableSortable && <ColumnHeaderSlug slug={slug} />;
+    return <ColumnHeaderSlug slug={slug} />;
   };
 
   return (

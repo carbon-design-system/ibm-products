@@ -155,7 +155,6 @@ export const DatagridContent = ({ datagridState, title }) => {
     clearSingleFilter(id, setAllFilters, state)
   );
 
-  /* istanbul ignore next */
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary
@@ -192,7 +191,6 @@ export const DatagridContent = ({ datagridState, title }) => {
         >
           {filterProps?.variation === 'panel' && (
             <FilterPanel
-              updateMethod="batch"
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}

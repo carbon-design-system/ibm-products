@@ -49,6 +49,11 @@ export default {
       page: DocsPage,
     },
   },
+  argTypes: {
+    vertical: {
+      control: 'boolean',
+    },
+  },
 };
 
 function _Toolbar(args) {
@@ -164,10 +169,8 @@ function _Toolbar(args) {
   );
 }
 
-_Toolbar.argTypes = {
-  vertical: {
-    control: false,
-  },
+_Toolbar.args = {
+  vertical: false,
 };
 
 function vertical(args) {

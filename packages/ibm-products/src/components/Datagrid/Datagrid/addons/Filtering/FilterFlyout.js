@@ -28,17 +28,24 @@ import { px, breakpoints } from '@carbon/layout';
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
+const defaults = {
+  flyoutIconDescription: 'Open filters',
+  title: 'Filter',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+};
+
 const FilterFlyout = ({
-  updateMethod = BATCH,
-  flyoutIconDescription = 'Open filters',
+  updateMethod,
+  flyoutIconDescription = defaults.flyoutIconDescription,
   filters = [],
-  title = 'Filter',
-  primaryActionLabel = 'Apply',
+  title = defaults.title,
+  primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
   onFlyoutClose = () => {},
   onApply = () => {},
   onCancel = () => {},
-  secondaryActionLabel = 'Cancel',
+  secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
   data = [],
   reactTableFiltersState = [],
@@ -46,6 +53,11 @@ const FilterFlyout = ({
   /** State */
   const [open, setOpen] = useState(false);
   const [stackedLayout, setStackedLayout] = useState(false);
+
+  const handleCancel = () => {
+    setOpen(false);
+    onCancel();
+  };
 
   const {
     filtersState,
@@ -62,7 +74,7 @@ const FilterFlyout = ({
     setAllFilters,
     variation: FLYOUT,
     reactTableFiltersState,
-    onCancel,
+    onCancel: handleCancel,
   });
 
   const { width } = breakpoints.md;
@@ -81,6 +93,8 @@ const FilterFlyout = ({
       prevFiltersRef,
     });
 
+  // Skip resize testing
+  /* istanbul ignore next */
   const handleResize = (current) => {
     const filterFlyoutRefPosition =
       flyoutInnerRef?.current.getBoundingClientRect();
@@ -177,7 +191,6 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
-              disabled: shouldDisableButtons,
             },
           ]}
           size="md"

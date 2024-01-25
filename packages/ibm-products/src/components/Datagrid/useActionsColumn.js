@@ -7,7 +7,12 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { IconSkeleton, OverflowMenu, OverflowMenuItem, IconButton } from '@carbon/react';
+import {
+  IconSkeleton,
+  OverflowMenu,
+  OverflowMenuItem,
+  IconButton,
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -53,7 +58,9 @@ const useActionsColumn = (hooks) => {
                       style={{ display: 'flex' }}
                     >
                       {rowActions.map((action, index) => {
-                        const preparedActionProps = prepareProps(action, ['isDelete']);
+                        const preparedActionProps = prepareProps(action, [
+                          'isDelete',
+                        ]);
                         const {
                           align,
                           id,

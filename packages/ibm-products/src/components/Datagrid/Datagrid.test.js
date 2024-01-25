@@ -2704,7 +2704,10 @@ describe(componentName, () => {
               {
                 id: 'joined',
                 type: 'date',
-                value: [new Date('01/01/2022'), todayDate],
+                value: [
+                  new Date('01/01/2022').toLocaleDateString('en-US'),
+                  todayDate.toLocaleDateString('en-US'),
+                ],
               },
             ],
           },

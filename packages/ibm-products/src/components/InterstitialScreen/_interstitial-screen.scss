@@ -75,6 +75,7 @@
       height: 100%;
       .#{$carousel-item} {
         flex: 0 0 100% !important;
+        scroll-snap-align: start;
       }
     }
 

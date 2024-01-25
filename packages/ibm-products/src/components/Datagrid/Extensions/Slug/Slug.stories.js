@@ -97,18 +97,19 @@ const defaultHeader = [
   {
     Header: 'Age',
     accessor: 'age',
-    width: 50,
+    width: 60,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
-    width: 60,
+    width: 120,
     slug: columnSlug,
   },
   {
     Header: 'Someone 1',
     accessor: 'someone1',
     slug: columnSlug,
+    width: 200,
   },
   {
     Header: 'Someone 2',

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, isValidElement, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
@@ -17,6 +17,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
+import { ColumnHeaderSlug } from './addons/Slug/ColumnHeaderSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -92,7 +93,7 @@ const ResizeHeader = ({
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel } = datagridState;
+  const { resizerAriaLabel, isTableSortable } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -148,27 +149,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     role,
     ...headerGroupProps
   } = headerGroup.getHeaderGroupProps();
-  const slugRef = useRef();
-
-  const handleSlugClick = (event) => {
-    console.log(event);
-  }
 
   const renderSlug = (slug) => {
-    if (slug && isValidElement(slug)){
-      const normalizedSlug = React.cloneElement(slug, {
-        size: 'mini',
-        ref: slugRef,
-        onClick: handleSlugClick,
-      });
-      return normalizedSlug
+    if (isTableSortable) {
+      return;
     }
-    return;
-  }
-  // if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
-  //   return;
-  // }
-  console.log(slugRef?.current);
+    return !isTableSortable && <ColumnHeaderSlug slug={slug} />;
+  };
 
   return (
     <TableRow
@@ -206,7 +193,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   datagridState.isTableSortable && header.id !== 'spacer',
                 [`${blockClass}__isSorted`]: header.isSorted,
                 [`${blockClass}__header-actions-column`]: header.isAction,
-                [`${blockClass}__with-slug`]: header.slug && React.isValidElement(header.slug),
+                [`${blockClass}__with-slug`]:
+                  header.slug && React.isValidElement(header.slug),
               })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}

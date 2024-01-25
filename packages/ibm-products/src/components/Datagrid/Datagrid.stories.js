@@ -10,16 +10,8 @@ import React, { useState, useEffect } from 'react';
 import { makeData } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
-import { Activity, Add, FolderOpen, View, Folders } from '@carbon/react/icons';
-import {
-  TableBatchAction,
-  TableBatchActions,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
-  unstable__SlugActions as SlugActions,
-  IconButton,
-  Button
-} from '@carbon/react';
+import { Activity, Add } from '@carbon/react/icons';
+import { TableBatchAction, TableBatchActions } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import {
   Datagrid,
@@ -63,35 +55,6 @@ export default {
   excludeStories: ['getBatchActions'],
 };
 
-const columnSlug = <Slug className="slug-container" autoAlign={false} align="bottom-right">
-<SlugContent>
-  <div>
-    <p className="secondary">AI Explained</p>
-    <h1>84%</h1>
-    <p className="secondary bold">Confidence score</p>
-    <p className="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-    </p>
-    <hr />
-    <p className="secondary">Model type</p>
-    <p className="bold">Foundation model</p>
-  </div>
-  <SlugActions>
-    <IconButton kind="ghost" label="View">
-      <View />
-    </IconButton>
-    <IconButton kind="ghost" label="Open Folder">
-      <FolderOpen />
-    </IconButton>
-    <IconButton kind="ghost" label="Folders">
-      <Folders />
-    </IconButton>
-    <Button>View details</Button>
-  </SlugActions>
-</SlugContent>
-</Slug>;
-
 const getColumns = (rows) => {
   return [
     {
@@ -124,7 +87,6 @@ const getColumns = (rows) => {
       Header: 'Status',
       accessor: 'status',
       width: getAutoSizedColumnWidth(rows, 'status', 'Status'),
-      slug: columnSlug
     },
     {
       Header: 'Joined',

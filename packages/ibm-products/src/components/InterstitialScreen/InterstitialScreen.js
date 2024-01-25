@@ -14,7 +14,6 @@ import React, {
   useState,
 } from 'react';
 import { clamp } from 'lodash';
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -71,7 +70,10 @@ const defaults = {
 };
 
 /**
- * TODO: A description of the component.
+ * InterstitialScreen can be a full page or an overlay, and are
+ * shown on the first time a user accesses a new experience
+ * (e.g. upon first login or first time opening a page where a
+ * newly purchased capability is presented).
  */
 export let InterstitialScreen = React.forwardRef(
   (
@@ -161,7 +163,7 @@ export let InterstitialScreen = React.forwardRef(
     }, [isOpen, progStep]);
 
     useEffect(() => {
-      //for modal only, "is-visible" triggers animation
+      // for modal only, "is-visible" triggers animation
       setIsVisibleClass(!isFullScreen && isOpen ? 'is-visible' : null);
       nextButtonRef?.current?.focus();
     }, [isFullScreen, isOpen]);
@@ -188,11 +190,10 @@ export let InterstitialScreen = React.forwardRef(
       return (
         <ComposedModal
           {...rest}
+          preventCloseOnClickOutside={true}
           className={cx(
-            // blockClass, // Apply the block class to the main HTML element
+            blockClass, // Apply the block class to the main HTML element
             className // Apply any supplied class names to the main HTML element.
-            // variantClass,
-            // isVisibleClass
           )}
           size="lg"
           onClose={onClose}
@@ -345,7 +346,6 @@ export let InterstitialScreen = React.forwardRef(
     const renderFooter = () => {
       return (
         <div className={`${blockClass}--footer`}>
-          {/* <div> */}
           {isMultiStep && skipButtonLabel !== '' && (
             <Button
               className={`${blockClass}--skip-btn`}
@@ -357,7 +357,7 @@ export let InterstitialScreen = React.forwardRef(
               {skipButtonLabel}
             </Button>
           )}
-          {/* </div> */}
+
           <div className={`${blockClass}--footer-controls`}>
             {isMultiStep && progStep > 0 && (
               <Button

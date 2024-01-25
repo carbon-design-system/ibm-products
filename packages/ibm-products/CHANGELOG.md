@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.68.0...@carbon/ibm-products@1.69.0) (2024-01-24)
+
+
+### Features
+
+* **ButtonMenu:** export button menu item component (v1) ([#4155](https://github.com/carbon-design-system/ibm-products/issues/4155)) ([8fcc02d](https://github.com/carbon-design-system/ibm-products/commit/8fcc02dc93e502c6af99691e5b108bbb1cf1d007))
+
+
+
+
+
 # [1.68.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.67.0...@carbon/ibm-products@1.68.0) (2024-01-23)
 
 

@@ -28,17 +28,24 @@ import { carbon } from '../../../../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
+const defaults = {
+  flyoutIconDescription: 'Open filters',
+  title: 'Filter',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+};
+
 const FilterFlyout = ({
-  updateMethod = BATCH,
-  flyoutIconDescription = 'Open filters',
+  updateMethod,
+  flyoutIconDescription = defaults.flyoutIconDescription,
   filters = [],
-  title = 'Filter',
-  primaryActionLabel = 'Apply',
+  title = defaults.title,
+  primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
   onFlyoutClose = () => {},
   onApply = () => {},
   onCancel = () => {},
-  secondaryActionLabel = 'Cancel',
+  secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
   data = [],
   reactTableFiltersState = [],
@@ -80,6 +87,8 @@ const FilterFlyout = ({
       prevFiltersRef,
     });
 
+  // Skip resize testing
+  /* istanbul ignore next */
   const handleResize = (current) => {
     const filterFlyoutRefPosition =
       flyoutInnerRef?.current.getBoundingClientRect();

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { TagSet } from '../TagSet';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -19,11 +20,12 @@ let FilterSummary = React.forwardRef(
     {
       className = '',
       clearFiltersText = 'Clear filters',
-      clearFilters = () => {},
-      filters = [],
+      clearFilters,
+      filters,
       renderLabel = null,
       overflowType = 'default',
       clearButtonInline = true,
+      ...rest
     },
     ref
   ) => {
@@ -32,16 +34,19 @@ let FilterSummary = React.forwardRef(
       ...rest,
       type: 'gray',
       label: renderLabel?.(key, value) ?? `${key}: ${value}`,
+      title: clearFiltersText,
     }));
 
     const filterSummaryClearButton = useRef();
     const filterSummaryRef = useRef();
-    const localRef = filterSummaryRef || ref;
+    const localRef = ref || filterSummaryRef;
     return (
       <div
+        {...getDevtoolsProps(componentName)}
+        id={filterSummaryId}
+        {...rest}
         ref={localRef}
         className={cx([blockClass, className])}
-        id={filterSummaryId}
       >
         <TagSet
           allTagsModalSearchLabel="Search all tags"
@@ -74,7 +79,7 @@ FilterSummary.displayName = componentName;
 
 FilterSummary.propTypes = {
   className: PropTypes.string,
-  clearButtonInline: PropTypes.boolean,
+  clearButtonInline: PropTypes.bool,
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,

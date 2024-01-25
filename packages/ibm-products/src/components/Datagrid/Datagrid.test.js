@@ -14,7 +14,7 @@ import { makeData } from './utils/makeData';
 
 import { carbon, pkg } from '../../settings';
 import { expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
-import { Datagrid } from '.';
+import { Datagrid, useFilterContext } from '.';
 
 import {
   useDatagrid,
@@ -52,12 +52,16 @@ import {
 } from '@carbon/icons-react';
 
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
+import { FilteringUsage } from './Extensions/Filtering/Panel.stories';
 import {
-  FilteringUsage,
-  filterProps,
-} from './Extensions/Filtering/Panel.stories';
+  FilteringUsage as FlyoutUsage,
+  filterProps as flyoutProps,
+} from './Extensions/Filtering/Flyout.stories';
 
-// import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
+import {
+  generateDummyCheckboxes,
+  filterProps as testFilterProps,
+} from './utils/filterPropsForTesting';
 
 import namor from 'namor';
 
@@ -2436,18 +2440,25 @@ describe(componentName, () => {
     expect(tableElement).not.toHaveClass(`${blockClass}__table-grid-active`);
   });
 
+  const sharedFilterGridProps = {
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  };
+
   it('should test basic interactions of filter panel', async () => {
-    const { click } = userEvent;
+    const { keyboard, click } = userEvent;
+    const dropdownOnChange = jest.fn();
     render(
       <FilteringUsage
         defaultGridProps={{
-          gridTitle: 'Data table title',
-          gridDescription: 'Additional information if needed',
-          useDenseHeader: false,
-          emptyStateTitle: 'No filters match',
-          emptyStateDescription:
-            'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-          filterProps,
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps({
+            dropdownOnChange,
+          }),
         }}
       />
     );
@@ -2460,6 +2471,358 @@ describe(componentName, () => {
     expect(panelContainer).toHaveClass(
       `${blockClass}__table-container--filter-open`
     );
+    const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
+    click(normalCheckbox);
+
+    const applyButton = screen.getByRole('button', { name: 'Apply' });
+    click(applyButton);
+
+    const panelCloseButton = screen.getByLabelText('Close filter panel');
+    click(panelCloseButton);
+    expect(panelContainer).not.toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+    // Reopen filter panel
+    click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+
+    // Add value to number input and apply to filter panel
+    const visitsInput = screen.getByPlaceholderText(
+      'Type a number amount of visits'
+    );
+    click(visitsInput);
+    keyboard('5');
+    expect(visitsInput).toHaveFocus();
+    click(applyButton);
+
+    // Add value to radio button and apply to filter panel
+    const radio = screen.getByRole('radio', { name: 'Developer' });
+    click(radio);
+    expect(radio.checked).toEqual(true);
+
+    // Add value to dropdown and apply to filter panel
+    const statusAccordion = screen.getByRole('button', { name: 'Status' });
+    click(statusAccordion);
+    const statusDropdown = screen.getByRole('button', {
+      name: 'Marital status',
+    });
+    click(statusDropdown.firstElementChild);
+    const dropdownOption = screen.getByRole('option', { name: 'single' });
+    click(dropdownOption);
+    expect(dropdownOnChange).toHaveBeenCalledTimes(1);
+
+    // Add beginning date but no end date, confirm no changes are made since we need a beginning and end date
+    const dateInput = screen.getAllByPlaceholderText('mm/dd/yyyy');
+    click(dateInput[0]);
+    keyboard('01/01/2024');
+    expect(dateInput[0].value).toEqual('01/01/2024');
+    // Apply radio button change
+    const designerRadio = screen.getByRole('radio', { name: 'Designer' });
+    click(designerRadio);
+    expect(designerRadio.checked).toEqual(true);
+    // Apply valid date filter
+    const dateInputs = screen.getAllByPlaceholderText('mm/dd/yyyy');
+    click(dateInputs[0]);
+    keyboard('01/01/2024');
+    click(dateInputs[1]);
+    keyboard('01/02/2024');
+    expect(dateInput[0].value).toEqual('01/01/2024');
+    expect(dateInput[1].value).toEqual('01/02/2024');
+    // Reset to "Any" radio filter
+    const anyRadio = screen.getByRole('radio', { name: 'Any' });
+    click(anyRadio);
+    expect(anyRadio.checked).toEqual(true);
+    // Reset number input to empty string
+    click(visitsInput);
+    fireEvent.change(visitsInput, { target: { value: '' } });
+    expect(visitsInput.value).toEqual('');
+    // Apply single checkbox
+    click(normalCheckbox);
+    expect(normalCheckbox.checked).toEqual(true);
+    // Remove checkbox
+    click(normalCheckbox);
+    expect(normalCheckbox.checked).toEqual(false);
+  });
+
+  const FilterUsageError = () => {
+    useFilterContext();
+    return <div />;
+  };
+
+  it('should simulate useFilterContext error', async () => {
+    expect(() => {
+      render(<FilterUsageError />);
+    }).toThrow('useFilterContext was used outside of its Provider');
+  });
+
+  it('should test basic interactions of filter flyout', async () => {
+    const { click } = userEvent;
+    const updatedFilterProps = { ...flyoutProps };
+    // Removing certain properties to test default function parameters in FilterFlyout
+    delete updatedFilterProps.panelTitle;
+    delete updatedFilterProps.updateMethod;
+    delete updatedFilterProps.primaryActionLabel;
+    delete updatedFilterProps.secondaryActionLabel;
+    delete updatedFilterProps.flyoutIconDescription;
+    delete updatedFilterProps.onFlyoutOpen;
+    delete updatedFilterProps.onFlyoutClose;
+    const { container } = render(
+      <FlyoutUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: updatedFilterProps,
+          updateMethod: 'instant',
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const flyoutTrigger = within(toolbar).getByRole('button', {
+      name: 'Open filters',
+    });
+
+    // Open filter flyout
+    click(flyoutTrigger);
+    expect(flyoutTrigger.nextElementSibling).toHaveClass(
+      `${blockClass}-filter-flyout--open`
+    );
+
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    // Toggle radio button
+    const radio = screen.getByRole('radio', { name: 'Developer' });
+    click(radio);
+    click(cancelButton);
+
+    click(container);
+    expect(flyoutTrigger.nextElementSibling).not.toHaveClass(
+      `${blockClass}-filter-flyout--open`
+    );
+  });
+
+  it('should render initial filters in flyout', async () => {
+    render(
+      <FlyoutUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: flyoutProps,
+          initialState: {
+            filters: [
+              {
+                id: 'role',
+                type: 'radio',
+                value: 'developer',
+              },
+            ],
+          },
+        }}
+      />
+    );
+    const filterTags = screen.getAllByTitle('Role: developer');
+    expect(Array.from(filterTags).length).toEqual(1);
+  });
+
+  it('should render initial filters in panel', async () => {
+    const { click } = userEvent;
+    const ref = React.createRef();
+    render(
+      <FilteringUsage
+        ref={ref}
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps(),
+          initialState: {
+            filters: [
+              {
+                id: 'role',
+                type: 'radio',
+                value: 'developer',
+              },
+            ],
+          },
+        }}
+      />
+    );
+    const filterTags = screen.getAllByTitle('Role: developer');
+    expect(Array.from(filterTags).length).toEqual(2); // Only one visible tag, but the TagSet renders two tags (one visible and one hidden which is used for measure available space)
+    const clearButton = screen.getByRole('button', { name: /Clear filters/i });
+    click(clearButton);
+    const tableElement = screen.getByRole('table');
+    const innerContainer = tableElement.parentElement.parentElement;
+    // After filter summary is removed (via Clear filters button) inner should only have 1 child
+    expect(innerContainer.childElementCount).toEqual(1);
+  });
+
+  const findFilterTagAndRemove = async () => {
+    const { click } = userEvent;
+    const filterTagCloseButtons = screen.getAllByTitle('Clear filters');
+    const visibleFilterTags = filterTagCloseButtons.filter((el) =>
+      el.parentElement.parentElement.classList.contains(
+        `${pkg.prefix}--tag-set__displayed-tag`
+      )
+    );
+    click(visibleFilterTags[0]);
+    const checkAgainForCloseFilterButton =
+      screen.queryAllByTitle('Clear filters');
+    expect(checkAgainForCloseFilterButton).toEqual([]);
+  };
+
+  it('should render initial filters in panel and test close button on filter tag', async () => {
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps(),
+          initialState: {
+            filters: [
+              {
+                id: 'role',
+                type: 'radio',
+                value: 'developer',
+              },
+            ],
+          },
+        }}
+      />
+    );
+
+    await findFilterTagAndRemove();
+  });
+
+  it('should test default `renderDateLabel` displays filter tag as expected', async () => {
+    const updatedFilterProps = Object.assign(testFilterProps(), {
+      renderDateLabel: null,
+    });
+    const todayDate = new Date();
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: updatedFilterProps,
+          initialState: {
+            filters: [
+              {
+                id: 'joined',
+                type: 'date',
+                value: [new Date('01/01/2022'), todayDate],
+              },
+            ],
+          },
+        }}
+      />
+    );
+    const filterTags = screen.getAllByTitle(
+      `Joined: 1/1/2022 - ${todayDate.toLocaleDateString()}`
+    );
+    filterTags.forEach((filterTag) => {
+      expect(filterTag).toBeInTheDocument();
+    });
+    await findFilterTagAndRemove();
+  });
+
+  it('should test removal of checkbox filter tag', async () => {
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps(),
+          initialState: {
+            filters: [
+              {
+                id: 'passwordStrength',
+                type: 'checkbox',
+                value: [
+                  {
+                    id: 'normal',
+                    labelText: 'Normal',
+                    value: 'normal',
+                    selected: true,
+                  },
+                  {
+                    id: 'minor-warning',
+                    labelText: 'Minor warning',
+                    value: 'minor-warning',
+                    selected: false,
+                  },
+                  {
+                    id: 'critical',
+                    labelText: 'Critical',
+                    value: 'critical',
+                    selected: false,
+                  },
+                ],
+              },
+            ],
+          },
+        }}
+      />
+    );
+    await findFilterTagAndRemove();
+  });
+  it.skip('should test overflow checkbox list and removal of checkbox filter tag', async () => {
+    const { click } = userEvent;
+    const defaultCheckboxFilters = [
+      {
+        id: 'normal',
+        labelText: 'Normal',
+        value: 'normal',
+        selected: true,
+      },
+      {
+        id: 'minor-warning',
+        labelText: 'Minor warning',
+        value: 'minor-warning',
+        selected: false,
+      },
+      {
+        id: 'critical',
+        labelText: 'Critical',
+        value: 'critical',
+        selected: false,
+      },
+    ];
+    render(
+      <FilteringUsage
+        defaultGridProps={{
+          ...sharedFilterGridProps,
+          filterProps: testFilterProps({ includeManyCheckboxes: true }),
+          initialState: {
+            filters: [
+              {
+                id: 'passwordStrength',
+                type: 'checkbox',
+                value: [...defaultCheckboxFilters, ...generateDummyCheckboxes],
+              },
+            ],
+          },
+        }}
+      />
+    );
+    const toolbar = screen.getByLabelText('data table toolbar').parentElement;
+    const panelContainer = toolbar.nextElementSibling;
+    const toolbarButtons = within(toolbar).getAllByRole('button');
+    const filterToggleButton = toolbarButtons[0];
+    // Open filter panel
+    click(filterToggleButton);
+    expect(panelContainer).toHaveClass(
+      `${blockClass}__table-container--filter-open`
+    );
+    const checkboxTotal = [
+      ...defaultCheckboxFilters,
+      ...generateDummyCheckboxes,
+    ].length;
+    const viewMoreButton = screen.getByRole('button', {
+      name: `View all (${checkboxTotal})`,
+    });
+    expect(viewMoreButton).toBeInTheDocument();
+    click(viewMoreButton);
+    const viewLessButton = screen.getByRole('button', { name: 'View less' });
+    expect(viewLessButton).toBeInTheDocument();
+    click(viewLessButton);
+    expect(viewMoreButton).toBeInTheDocument();
+    const checkboxElement = screen.getByRole('checkbox', { name: 'Critical' });
+    click(checkboxElement);
+    expect(checkboxElement.checked).toEqual(true);
   });
 });
 

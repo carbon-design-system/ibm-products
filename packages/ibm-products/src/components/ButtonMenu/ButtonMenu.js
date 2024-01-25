@@ -68,6 +68,7 @@ export let ButtonMenu = React.forwardRef(
         )}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
         size={size}
+        ariaLabel={label}
         renderIcon={() => (
           <div
             className={cx([

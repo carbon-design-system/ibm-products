@@ -102,9 +102,8 @@ describe(componentName, () => {
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    await act(() =>
-      click(modal.querySelector(`.${carbon.prefix}--btn--primary`))
-    );
+    await act(() => click(getByText(props.copyButtonText)));
+
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
     getByLabelText(defaultProps.copyIconDescription);
   });

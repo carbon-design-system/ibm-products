@@ -22,12 +22,18 @@
 // SidePanel uses the following IBM Products components:
 // ActionSet
 @use '../ActionSet/action-set';
+@use 'sass:list';
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 @mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
-  width: $size;
+  /* any value is single value list */
+  width: list.nth($size, 1);
+  @if list.length($size) > 1 {
+    min-width: list.nth($size, 2);
+  }
+
   max-width: 100%;
 }
 

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement, useRef } from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
@@ -148,6 +148,27 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     role,
     ...headerGroupProps
   } = headerGroup.getHeaderGroupProps();
+  const slugRef = useRef();
+
+  const handleSlugClick = (event) => {
+    console.log(event);
+  }
+
+  const renderSlug = (slug) => {
+    if (slug && isValidElement(slug)){
+      const normalizedSlug = React.cloneElement(slug, {
+        size: 'mini',
+        ref: slugRef,
+        onClick: handleSlugClick,
+      });
+      return normalizedSlug
+    }
+    return;
+  }
+  // if (slug && slugRef.current && slugRef.current.contains(evt.target)) {
+  //   return;
+  // }
+  console.log(slugRef?.current);
 
   return (
     <TableRow
@@ -185,12 +206,14 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   datagridState.isTableSortable && header.id !== 'spacer',
                 [`${blockClass}__isSorted`]: header.isSorted,
                 [`${blockClass}__header-actions-column`]: header.isAction,
+                [`${blockClass}__with-slug`]: header.slug && React.isValidElement(header.slug),
               })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
+              {renderSlug(header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

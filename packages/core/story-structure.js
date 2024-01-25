@@ -56,6 +56,7 @@ const s = [
               'c/Datagrid/Extensions/Skeleton',
             ],
           },
+          { n: 'DelimitedList', s: ['c/DelimitedList'] },
         ],
       },
       {
@@ -148,11 +149,9 @@ const s = [
     s: [
       {
         n: 'Components',
-        s: [
-          { n: 'Example', s: ['c/ExampleCommunityComponent'] }
-        ]
-      }
-    ]
+        s: [{ n: 'Example', s: ['c/ExampleCommunityComponent'] }],
+      },
+    ],
   },
   {
     n: 'Carbon',
@@ -172,14 +171,14 @@ const getSectionOrder = (sArray) =>
     .map((entry) =>
       typeof entry === 'string'
         ? // if the entry is a string, return it (without the prefix)
-        getEntryDisplayName(entry)
+          getEntryDisplayName(entry)
         : // if the entry is another structure, return its name, but first get
-        // the fully materialized paths it contains and add the entry name
-        // to the front of each
-        [
-          getSectionOrder(entry.s).map((path) => `${entry.n}/${path}`),
-          entry.n,
-        ]
+          // the fully materialized paths it contains and add the entry name
+          // to the front of each
+          [
+            getSectionOrder(entry.s).map((path) => `${entry.n}/${path}`),
+            entry.n,
+          ]
     )
     .flat(Infinity);
 
@@ -212,13 +211,13 @@ const getPath = (s, componentAndPrefix, componentName) =>
       found ||
       (typeof next === 'string'
         ? // if this entry is a string, and it matches the component name
-        // we're looking for, return it as an array, else return null
-        getEntryPrefixAndComponentName(next) === componentAndPrefix
+          // we're looking for, return it as an array, else return null
+          getEntryPrefixAndComponentName(next) === componentAndPrefix
           ? [getEntryDisplayName(next)]
           : null
         : // if this entry is another structure, find the materialized path
-        // into it and prepend its name if found and return null otherwise
-        prepend(next.n, getPath(next.s, componentAndPrefix, componentName))),
+          // into it and prepend its name if found and return null otherwise
+          prepend(next.n, getPath(next.s, componentAndPrefix, componentName))),
     null
   );
 

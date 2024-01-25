@@ -28,6 +28,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
+import { getDateFormat } from './Panel.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
@@ -45,9 +46,10 @@ export default {
       },
     },
   },
+  excludeStories: ['FilteringUsage', 'filterProps'],
 };
 
-const FilteringUsage = ({ defaultGridProps }) => {
+export const FilteringUsage = ({ defaultGridProps }) => {
   const {
     gridDescription,
     gridTitle,
@@ -168,16 +170,18 @@ const filters = [
     props: {
       DatePicker: {
         datePickerType: 'range',
+        locale: navigator?.language || 'en',
+        dateFormat: getDateFormat(navigator?.language || 'en'),
       },
       DatePickerInput: {
         start: {
           id: 'date-picker-input-id-start',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined start date',
         },
         end: {
           id: 'date-picker-input-id-end',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined end date',
         },
       },
@@ -328,6 +332,18 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
   },
 });
 
+export const filterProps = {
+  variation: 'flyout',
+  updateMethod: 'instant',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  flyoutIconDescription: 'Open filters',
+  onFlyoutOpen: action('onFlyoutOpen'),
+  onFlyoutClose: action('onFlyoutClose'),
+  filters,
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
+};
+
 export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
   storyName: 'Filter flyout with initial filters',
   argTypes: {
@@ -352,17 +368,7 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     emptyStateTitle: 'No filters match',
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'flyout',
-      updateMethod: 'instant',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      onFlyoutOpen: action('onFlyoutOpen'),
-      onFlyoutClose: action('onFlyoutClose'),
-      filters,
-      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
-    },
+    filterProps,
     featureFlags: ['Datagrid.useFiltering'],
   },
 });

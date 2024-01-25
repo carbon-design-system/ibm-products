@@ -45,6 +45,7 @@
         position: sticky;
         z-index: 1;
         left: 0;
+        background-color: $layer-01;
       }
     }
 
@@ -68,6 +69,7 @@
       &.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         left: 0;
+        background-color: $layer-01;
       }
     }
 
@@ -346,7 +348,7 @@
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $background-selected-hover;
+  background-color: $layer-selected-hover;
 
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;

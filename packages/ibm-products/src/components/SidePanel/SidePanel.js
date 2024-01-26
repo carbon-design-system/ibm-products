@@ -8,10 +8,6 @@
 // Import portions of React that are needed.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  baseFontSize,
-  spacing05 /* matches header padding */,
-} from '@carbon/layout';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -103,7 +99,6 @@ export let SidePanel = React.forwardRef(
     const labelTextRef = useRef();
     const subtitleRef = useRef();
     const previousState = usePreviousValue({ size, open });
-    const [titleAnimationDistance, setTitleAnimationDistance] = useState(-1);
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
 
@@ -115,15 +110,10 @@ export let SidePanel = React.forwardRef(
       const scrollTop = animatedScrollRef.current.scrollTop;
 
       sidePanelRef.current.style.setProperty(
-        `--${blockClass}--title-animation-progress`,
-        Math.min(scrollTop, titleAnimationDistance) / titleAnimationDistance
-      );
-
-      sidePanelRef.current.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
         Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
       );
-    }, [scrollAnimationDistance, sidePanelRef, titleAnimationDistance]);
+    }, [scrollAnimationDistance, sidePanelRef]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -195,9 +185,6 @@ export let SidePanel = React.forwardRef(
         const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
         const subtitleHeight = subtitleRef?.current?.offsetHeight ?? 0;
 
-        const titleAnimationDistance = parseFloat(spacing05, 10) * baseFontSize;
-        setTitleAnimationDistance(titleAnimationDistance);
-
         // Adjusts space at bottom of titles by changing where scrolling finishes
         // Styles use border to save use of get computed style
         const titleVerticalBorder = actionToolbarButtons
@@ -233,8 +220,7 @@ export let SidePanel = React.forwardRef(
           const canDoAnimateTitle =
             (!!labelText || !!actionToolbarButtons || !!subtitle) &&
             scrollEl.scrollHeight - scrollEl.clientHeight >=
-              Math.max(titleAnimationDistance, scrollAnimationDistance) +
-                innerPaddingHeight;
+              scrollAnimationDistance + innerPaddingHeight;
 
           if (doAnimateTitle !== canDoAnimateTitle) {
             // will need updating on resize
@@ -252,11 +238,6 @@ export let SidePanel = React.forwardRef(
       }
 
       if (!doAnimateTitle && sidePanelRef.current) {
-        sidePanelRef.current.style.setProperty(
-          `--${blockClass}--title-animation-progress`,
-          0
-        );
-
         sidePanelRef.current.style.setProperty(
           `--${blockClass}--scroll-animation-progress`,
           0

@@ -71,6 +71,7 @@ const defaults = {
     EditFullPage: false,
     EditUpdateCards: false,
     ButtonMenu: false,
+    ButtonMenuItem: false,
 
     // Novice to pro components not yet reviewed and released:
     InlineTip: false,

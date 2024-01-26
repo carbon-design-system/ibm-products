@@ -233,3 +233,27 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
     ...nestedRowsControlProps,
   },
 });
+
+const nestedRowsInitialStateStoryName = 'With initially expanded nested rows';
+export const NestedRowsInitialUsageStory = prepareStory(BasicTemplateWrapper, {
+  storyName: nestedRowsInitialStateStoryName,
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    rowSize: ARG_TYPES.rowSize,
+    rowSizes: ARG_TYPES.rowSizes,
+    onRowSizeChange: ARG_TYPES.onRowSizeChange,
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
+  },
+  args: {
+    ...nestedRowsControlProps,
+    initialState: {
+      expandedRowIds: {
+        1: true,
+        3: true,
+      },
+    },
+  },
+});

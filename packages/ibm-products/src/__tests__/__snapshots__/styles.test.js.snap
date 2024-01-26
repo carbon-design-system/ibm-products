@@ -839,8 +839,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 4;
   top: 0;
   height: calc(var(--c4p--side-panel--title-container-height) - var(--c4p--side-panel--label-text-height));
-  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+  padding: var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #f4f4f4);
+}
+.c4p--side-panel__container .c4p--side-panel__title-container:has(~ .c4p--side-panel__subtitle-text) {
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 .c4p--side-panel__container .c4p--side-panel__title-container::before {
   position: absolute;
@@ -2140,11 +2143,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateY(-50%);
 }
 
-.c4p--datagrid .bx--data-table--selected:not(.c4p--datagrid__active-row) {
+.c4p--datagrid .bx--data-table--selected:not(.c4p--datagrid__active-row) td:first-child {
   position: relative;
 }
 
-.c4p--datagrid .bx--data-table--selected:not(.c4p--datagrid__active-row) :first-child:not(.bx--checkbox--inline)::before {
+.c4p--datagrid .bx--data-table--selected:not(.c4p--datagrid__active-row) td:first-child:not(.bx--checkbox--inline)::before {
   position: absolute;
   top: 0;
   left: 0;

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *
@@ -49,6 +48,7 @@ import {
   Filter16,
   Activity16,
   Add16,
+  Edit16,
 } from '@carbon/icons-react';
 
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
@@ -839,11 +839,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
+      renderIcon: Edit16
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
+      renderIcon: Add16
     },
     {
       id: 'retire',

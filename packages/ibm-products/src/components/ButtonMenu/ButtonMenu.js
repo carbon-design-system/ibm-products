@@ -69,7 +69,7 @@ export let ButtonMenu = React.forwardRef(
         )}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
         size={size}
-        ariaLabel={menuAriaLabel??label??undefined}
+        ariaLabel={menuAriaLabel ?? label ?? undefined}
         renderIcon={() => (
           <div
             className={cx([
@@ -135,12 +135,12 @@ ButtonMenu.propTypes = {
    */
   label: PropTypes.node,
 
-    /**
-   * Provide the menuAriaLabel prop to be passed to the ButtonMenu component. 
+  /**
+   * Provide the menuAriaLabel prop to be passed to the ButtonMenu component.
    * This optional label should contain or match the visible labels or
-   *  it will automatically take button label 
+   *  it will automatically take button label
    */
-    menuAriaLabel: PropTypes.string,
+  menuAriaLabel: PropTypes.string,
 
   /**
    * class name applied to the overflow options

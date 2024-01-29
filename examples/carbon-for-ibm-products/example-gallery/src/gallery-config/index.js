@@ -18,6 +18,7 @@ import imageCreateTearsheet from './CreateTearsheet--thumbnail.png';
 import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageDatagrid from './Datagrid--thumbnail.png';
+import imageDeleteMe from './DeleteMe--thumbnail.png';
 import imageDelimitedList from './DelimitedList--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
@@ -86,6 +87,11 @@ const config = [
     label: 'Datagrid',
     directory: 'Datagrid',
     thumbnail: `url(${imageDatagrid}`,
+  },
+  {
+    label: 'Delete-Me',
+    directory: 'DeleteMe',
+    thumbnail: `url(${imageDeleteMe}`,
   },
   {
     label: 'Delimited-List',

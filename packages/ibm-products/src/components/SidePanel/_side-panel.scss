@@ -112,8 +112,12 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         var(--#{$block-class}--title-container-height) -
           var(--#{$block-class}--label-text-height)
       );
-      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+      padding: $spacing-05;
       background-color: $ui-01;
+
+      &:has(~ .#{$block-class}__subtitle-text) {
+        padding-bottom: $spacing-03;
+      }
 
       &::before {
         @include setDividerStyles();

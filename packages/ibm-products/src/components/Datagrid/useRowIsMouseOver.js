@@ -29,7 +29,11 @@ const useRowIsMouseOver = (hooks) => {
       isMouseOver: row.index === mouseOverRowIndex,
     }));
 
-    Object.assign(instance, { rows: rowsWithMouseOver });
+    Object.assign(instance, {
+      rows: rowsWithMouseOver,
+      withMouseHover: true,
+      setMouseOverRowIndex,
+    });
     hooks.getRowProps.push(getRowProps);
   };
 

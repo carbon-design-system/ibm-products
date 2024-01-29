@@ -839,13 +839,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
-      renderIcon: Edit16
+      icon: Edit16,
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
-      renderIcon: Add16
+      icon: Add16,
     },
     {
       id: 'retire',

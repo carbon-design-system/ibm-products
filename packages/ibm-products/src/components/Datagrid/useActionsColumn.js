@@ -59,7 +59,7 @@ const useActionsColumn = (hooks) => {
                     >
                       {rowActions.map((action, index) => {
                         const preparedActionProps = prepareProps(action, [
-                          'isDelete'
+                          'isDelete',
                         ]);
                         const {
                           id,
@@ -67,7 +67,7 @@ const useActionsColumn = (hooks) => {
                           onClick,
                           shouldHideMenuItem,
                           align,
-                          renderIcon,
+                          icon,
                           ...rest
                         } = preparedActionProps;
                         const hidden =
@@ -92,7 +92,7 @@ const useActionsColumn = (hooks) => {
                               tooltipPosition={align || 'top'}
                               kind="ghost"
                               name={itemText} //for test use
-                              renderIcon={renderIcon}
+                              renderIcon={icon}
                               iconDescription={itemText}
                               className={cx({
                                 [`${blockClass}__disabled-row-action`]:

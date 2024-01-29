@@ -1,0 +1,12 @@
+{
+  "label": "Delete-Me",
+  "package-config": {
+    "flags": {
+      "component": {
+        "DeleteMe": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

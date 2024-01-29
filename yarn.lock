@@ -2195,10 +2195,10 @@ __metadata:
     "@babel/core": "npm:^7.22.10"
     "@babel/runtime": "npm:^7.22.10"
     "@carbon/ibm-products-styles": "npm:^2.20.1"
-    "@carbon/telemetry": "npm:^0.1.0"
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/sortable": "npm:^7.0.2"
     "@dnd-kit/utilities": "npm:^3.2.1"
+    "@ibm/telemetry-js": "npm:^1.2.0"
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
     chalk: "npm:^4.1.2"
     change-case: "npm:^4.1.2"
@@ -2346,7 +2346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/telemetry@npm:0.1.0, @carbon/telemetry@npm:^0.1.0":
+"@carbon/telemetry@npm:0.1.0":
   version: 0.1.0
   resolution: "@carbon/telemetry@npm:0.1.0"
   bin:
@@ -3495,6 +3495,15 @@ __metadata:
   bin:
     ibmtelemetry: dist/collect.js
   checksum: 4a7b5fcf565d52e6c46e21c6c1afbc7e985eb2d78e2d1f3b6c282deee14a6c307427ee4868feeae3c36523aaf2c8fc013f366be121db2a712351262ad967112c
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ibm/telemetry-js@npm:1.2.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: dd942eaecc6bdf40f91309fc783b2d1b654e9cb73dd0b98ec54eef53816cad027c60ccaf6415cc81dd3ee1f8686159733ac226f6c13288419269a001a7b81b3b
   languageName: node
   linkType: hard
 
@@ -22026,12 +22035,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-carbon@npm:^1.16.0":
-  version: 1.16.0
-  resolution: "stylelint-config-carbon@npm:1.16.0"
+"stylelint-config-carbon@npm:^1.17.1":
+  version: 1.17.1
+  resolution: "stylelint-config-carbon@npm:1.17.1"
   dependencies:
     stylelint-a11y: "npm:^1.2.3"
-    stylelint-config-idiomatic-order: "npm:^9.0.0"
+    stylelint-config-idiomatic-order: "npm:^10.0.0"
     stylelint-config-prettier: "npm:^9.0.3"
     stylelint-config-standard: "npm:^34.0.0"
     stylelint-config-standard-scss: "npm:^11.0.0"
@@ -22042,7 +22051,7 @@ __metadata:
     stylelint-use-logical: "npm:^2.1.0"
   peerDependencies:
     stylelint: ^15.0.0
-  checksum: 55b478dfdd8d9fdf42da8bc36c7e0cf416fa614194284ed26fd098b0de2f87700c17c377d9a0a37438cb4d21b9d7d7bd9a31d399e7ab3b35ddae5598c32bb792
+  checksum: 085efa294d98dae2a488f67940d1997200f0e09c29ee6ffb2283545fd681460fd4b1a87b9298bbc030794c5a858831f34f2598d1e1d8c1f07d29909eed999106
   languageName: node
   linkType: hard
 
@@ -22050,7 +22059,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products"
   dependencies:
-    stylelint-config-carbon: "npm:^1.16.0"
+    stylelint-config-carbon: "npm:^1.17.1"
     stylelint-config-idiomatic-order: "npm:^9.0.0"
     stylelint-config-standard: "npm:^34.0.0"
     stylelint-config-standard-scss: "npm:^10.0.0"
@@ -22061,6 +22070,17 @@ __metadata:
     stylelint: ^15.10.2
   languageName: unknown
   linkType: soft
+
+"stylelint-config-idiomatic-order@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "stylelint-config-idiomatic-order@npm:10.0.0"
+  dependencies:
+    stylelint-order: "npm:^6.0.2"
+  peerDependencies:
+    stylelint: ">=11"
+  checksum: 46c8b45ddaf7430ef09bc820a244b9e762cbc7457024b5439e9c20b30417a9873c44d01403185a232b1c1d823a1ce5373e488b9c08126626d43c49417505d0b6
+  languageName: node
+  linkType: hard
 
 "stylelint-config-idiomatic-order@npm:^9.0.0":
   version: 9.0.0
@@ -22216,7 +22236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-order@npm:^6.0.0":
+"stylelint-order@npm:^6.0.0, stylelint-order@npm:^6.0.2":
   version: 6.0.4
   resolution: "stylelint-order@npm:6.0.4"
   dependencies:

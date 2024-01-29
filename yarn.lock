@@ -9611,7 +9611,7 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.19.6
     "@babel/preset-env": ^7.20.2
     "@babel/preset-react": ^7.18.6
-    browserslist-config-carbon: ^10.6.1
+    browserslist-config-carbon: ^11.2.0
     npm-check-updates: ^16.7.4
   languageName: unknown
   linkType: soft
@@ -10033,10 +10033,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist-config-carbon@npm:^10.6.1":
-  version: 10.6.1
-  resolution: "browserslist-config-carbon@npm:10.6.1"
-  checksum: 3559284de6d97be8059bbe9cd0b3a499619931eef291e64eeb229793fa7452811af1037d753556ebfa97d8aadb6be1d785d9ae657494f65954b2fccc1270c773
+"browserslist-config-carbon@npm:^11.2.0":
+  version: 11.2.0
+  resolution: "browserslist-config-carbon@npm:11.2.0"
+  checksum: da1fbcf5b4344bdcd37fdc9b3959394b9f22ec46856a16c131b860c5ff26089106750fc88c4f382965a27305053baeb60e1748dd588f1e5a3d0e153c19eb708f
   languageName: node
   linkType: hard
 
@@ -10498,17 +10498,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30000844, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001179, caniuse-lite@npm:^1.0.30001449":
-  version: 1.0.30001519
-  resolution: "caniuse-lite@npm:1.0.30001519"
-  checksum: 66085133ede05d947e30b62fed2cbae18e5767afda8b0de38840883e1cfe5846bf1568ddbafd31647544e59112355abedaf9c867ac34541bfc20d69e7a19d94c
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001487":
-  version: 1.0.30001551
-  resolution: "caniuse-lite@npm:1.0.30001551"
-  checksum: ffdee85b1c130cbebf0aa978ba839f3525f8e304855ba9bf0fbefaac8dd8c40051a7e19ac84a7cf4ba026410abcbe6f8b45560b22ee417c52daecaf955108e65
+"caniuse-lite@npm:^1.0.30000844, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001179, caniuse-lite@npm:^1.0.30001449, caniuse-lite@npm:^1.0.30001487":
+  version: 1.0.30001581
+  resolution: "caniuse-lite@npm:1.0.30001581"
+  checksum: ca4e2cd9d0acf5e3c71fa2e7cd65561e4532d32b640145f634c333792074bb63de1239b35abfb6b6d372f97caf26f8d97faac7ba51ef190717ad2d3ae9c0d7a2
   languageName: node
   linkType: hard
 

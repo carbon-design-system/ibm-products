@@ -22,12 +22,18 @@
 // SidePanel uses the following IBM Products components:
 // ActionSet
 @use '../ActionSet/action-set';
+@use 'sass:list';
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 @mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
-  width: $size;
+  /* any value is single value list */
+  width: list.nth($size, 1);
+  @if list.length($size) > 1 {
+    min-width: list.nth($size, 2);
+  }
+
   max-width: 100%;
 }
 
@@ -39,7 +45,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   height: 1px;
   background-color: $border-subtle-02;
   content: '';
-  opacity: var(--#{$block-class}--divider-opacity);
+  opacity: var(--#{$block-class}--scroll-animation-progress);
 }
 
 @mixin setCommonTitleStyles() {
@@ -51,37 +57,48 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   -webkit-line-clamp: 2;
 }
 
+.#{$block-class}--scrolls {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
 .#{$block-class}__container {
-  --#{$block-class}--subtitle-opacity: 1;
-  --#{$block-class}--title-container-height: 0;
-  --#{$block-class}--title-text-height: 0;
-  --#{$block-class}--subtitle-container-height: 0;
-  --#{$block-class}--action-bar-container-height: 0;
-  --#{$block-class}--divider-opacity: 0;
-  --#{$block-class}--title-y-position: 0;
-  --#{$block-class}--content-bottom-padding: #{$spacing-10};
-  --#{$block-class}--collapsed-title-y-position: 1rem;
-  --#{$block-class}--label-text-height: 0;
-  --#{$block-class}--title-padding-right: #{$spacing-09};
+  --#{$block-class}--title-stop: #{$spacing-05};
+  --#{$block-class}--scroll-animation-progress: 0;
+  --#{$block-class}--title-padding-right: #{$spacing-07};
+  --#{$block-class}--actions-height: #{$spacing-10};
 
   position: fixed;
-  // Need to disable stylelint until dart sass namespace support is added
   z-index: utilities.z('modal');
   top: $spacing-09;
+  display: grid;
   height: calc(100% - 3rem);
   box-sizing: border-box;
   background-color: $layer-01;
   color: $text-primary;
+  grid-template-rows: 1fr auto; /* titles and content */
+
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}__container--#{$size} {
       @include setPanelSize($size_value);
-      .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
-      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+      .#{$block-class}__header.#{$block-class}__header--no-title-animation,
+      .#{$block-class}__header--no-title-animation
+        .#{$block-class}__subtitle-text {
         @include setPanelSize($size_value);
       }
     }
   }
+
+  &:not(:has(.#{$block-class}__animated-scroll-wrapper)),
+  &.#{$block-class}__container--has-no-animated-scroll-wrapper {
+    /* if the title does not scroll then we have a child scrolling section. */
+    grid-template-rows: auto 1fr auto; /* titles content actions */
+  }
+
+  &.#{$block-class}__container--condensed-actions {
+    --#{$block-class}--actions-height: #{$spacing-09};
+  }
+
   .#{$block-class}__actions-container {
     width: 100%;
   }
@@ -93,255 +110,215 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     left: 0;
     border-right: 1px solid $border-subtle-02;
   }
-  &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
-    .#{$block-class}__title-container {
-      /* stylelint-disable-next-line max-nesting-depth */
-      &::before {
-        content: none;
-      }
-    }
-    .#{$block-class}__action-toolbar {
-      /* stylelint-disable-next-line max-nesting-depth */
-      &::before {
-        @include setDividerStyles();
-      }
-    }
-  }
-  &.#{$block-class}__container-without-overlay {
+
+  &.#{$block-class}__container--slide-in,
+  &.#{$block-class}__container:not(:has(+ .#{$block-class}__overlay)),
+  &.#{$block-class}__container--has-no-overlay {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
-  .#{$block-class}__title-container {
+
+  .#{$block-class}__header {
+    --#{$block-class}--title-padding-bottom: #{$spacing-05};
+
     position: sticky;
     z-index: 4;
-    top: 0;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
     padding: $spacing-05;
+    padding-bottom: 0;
     background-color: $layer-01;
 
-    &:has(~ .#{$block-class}__subtitle-text) {
-      padding-bottom: $spacing-03;
+    &:has(.#{$block-class}__subtitle-text),
+    &.#{$block-class}__header--has-subtitle {
+      --#{$block-class}--title-padding-bottom: #{$spacing-03};
     }
 
-    &:has(.#{$block-class}__navigation-back-button) {
+    &:has(.#{$block-class}__navigation-back-button),
+    &.#{$block-class}__header--has-navigation-back {
       padding-top: $spacing-07;
     }
 
     &:has(
         .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
-      ) {
+      ),
+    &.#{$block-class}__header--has-navigation-back.#{c4p-settings.$carbon-prefix}--btn--md {
       padding-top: $spacing-08;
     }
 
     /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       @include setDividerStyles();
+
+      z-index: 9;
     }
-    &.#{$block-class}__title-container--reduced-motion {
+
+    &.#{$block-class}__header--no-title-animation {
+      position: relative;
+      top: 0;
+    }
+
+    &.#{$block-class}__header--no-title-animation::before {
+      opacity: 1;
+    }
+
+    &.#{$block-class}__header--reduced-motion {
       z-index: 5;
       border-bottom: 1px solid $border-subtle-02;
       margin-bottom: $spacing-05;
     }
-    &.#{$block-class}__title-container--reduced-motion.#{$block-class}__title-container--no-title-animation {
+
+    &.#{$block-class}__header--reduced-motion.#{$block-class}__header--no-title-animation {
       border-bottom: 0;
       margin-bottom: 0;
     }
-    &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
-      top: $spacing-07;
+
+    &.#{$block-class}--on-detail-step .#{$block-class}__collapsed-title-text {
+      top: $spacing-05;
     }
 
-    &.#{$block-class}__on-detail-step
+    &.#{$block-class}--on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
-      top: $spacing-08;
+      top: $spacing-06;
     }
 
-    &.#{$block-class}__title-container-without-title {
-      padding: 0;
-    }
-    &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
+    &.#{$block-class}--on-detail-step:not(:has(.#{$block-class}__title-text)) {
       height: calc(#{$spacing-08} + #{$spacing-02});
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     }
-    &.#{$block-class}__title-container-without-title::before {
+
+    &:not(:has(.#{$block-class}__title-text))::before,
+    &.#{$block-class}__header--has-no-title::before {
       background-color: transparent;
     }
   }
+
+  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}__container--has-action-toolbar,
   &.#{$block-class}__container--has-slug {
-    --#{$block-class}--title-padding-right: #{$spacing-12};
+    --#{$block-class}--title-padding-right: #{$spacing-10};
   }
-  &.#{$block-class}__container-is-animating {
-    pointer-events: none;
+
+  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}__container--has-action-toolbar {
+    &.#{$block-class}__container--has-slug {
+      --#{$block-class}--title-padding-right: #{$spacing-11};
+    }
   }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-    top: 0;
+
+  .#{$block-class}__animated-scroll-wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-    top: var(--#{$block-class}--title-text-height);
+
+  .#{$block-class}__title {
+    position: sticky;
+    z-index: 4;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--title-stop);
+
+    /* border-bottom used instead of padding which wrapped text shows through */
+    border-bottom: var(--#{$block-class}--title-padding-bottom) solid
+      transparent;
+    background-color: $layer-01;
   }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height)
-    );
-  }
+
   .#{$block-class}__title-text {
     @include type.type-style('heading-03');
     @include setCommonTitleStyles();
 
-    position: inherit;
-    z-index: 4;
-    margin-bottom: calc(-1 * var(--#{$block-class}--label-text-height));
-    background-color: $layer-01;
-    opacity: var(--#{$block-class}--subtitle-opacity);
-    transform: translateY(var(--#{$block-class}--title-y-position));
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
   }
+
+  .#{$block-class}__title--no-label .#{$block-class}__title-text {
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    transform: translateY(
+      calc(
+        -1 * #{$spacing-05} * var(--#{$block-class}--scroll-animation-progress)
+      )
+    );
+  }
+
+  .#{$block-class}__header--no-title-animation .#{$block-class}__title-text {
+    position: static;
+  }
+
   .#{$block-class}__label-text {
     @include type.type-style('label-01');
 
     overflow: hidden;
     padding-right: var(--#{$block-class}--title-padding-right);
-    opacity: var(--#{$block-class}--subtitle-opacity);
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     text-overflow: ellipsis;
-    transform: translateY(var(--#{$block-class}--title-y-position));
     white-space: nowrap;
   }
+
   .#{$block-class}__collapsed-title-text {
     @include type.type-style('heading-compact-02');
     @include setCommonTitleStyles();
 
     position: absolute;
-    top: $spacing-05;
-    opacity: var(--#{$block-class}--divider-opacity);
-    // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: 0;
+    opacity: var(--#{$block-class}--scroll-animation-progress);
   }
+
+  .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    transform: translateY(
+      calc(
+        #{$spacing-05} * (1 - var(--#{$block-class}--scroll-animation-progress))
+      )
+    );
+  }
+
   .#{$block-class}__subtitle-text {
     @include type.type-style('body-compact-01');
 
     overflow: hidden;
-    padding: 0 $spacing-09 $spacing-05 $spacing-05;
+    padding-right: var(--#{$block-class}--title-padding-right);
+    padding-bottom: $spacing-05;
+
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    opacity: var(--#{$block-class}--subtitle-opacity);
+    opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
   }
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-    position: fixed;
+
+  .#{$block-class}__header--no-title-animation .#{$block-class}__subtitle-text {
     z-index: 2;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--label-text-height)
-    );
     background-color: $layer-01;
   }
 
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
-    top: var(--#{$block-class}--title-text-height);
-  }
-
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+  .#{$block-class}__title-text + .#{$block-class}__subtitle-text {
     padding-top: $spacing-05;
-    padding-right: $spacing-09;
   }
-
-  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
-    top: 0;
-  }
-
-  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-    position: fixed;
-    height: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--label-text-height)
-    );
-  }
-
   .#{$block-class}__inner-content {
-    overflow: auto;
-    height: calc(100vh - 3rem);
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin-top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height) +
-        var(--#{$block-class}--action-bar-container-height) +
-        var(--#{$block-class}--label-text-height)
-    );
-    overflow-x: hidden;
+    padding: $spacing-05;
+    padding-top: 0;
+  }
+
+  .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
+    + .#{$block-class}__inner-content,
+  .#{$block-class}__header--has-action-toolbar
+    + .#{$block-class}__inner-content {
+    padding-top: $spacing-03;
   }
 
   &.#{$block-class}__container--has-slug .#{$block-class}__inner-content {
     @include utilities.ai-gradient('bottom');
   }
 
-  .#{$block-class}__inner-content-with-actions {
-    height: calc(
-      100vh - (var(--#{$block-class}--content-bottom-padding) + 2rem)
-    );
-  }
-
-  .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
-    height: calc(
-      100vh -
-        calc(
-          var(--#{$block-class}--title-text-height) +
-            var(--#{$block-class}--subtitle-container-height) +
-            var(--#{$block-class}--action-bar-container-height)
-        ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
-    );
+  .#{$block-class}__inner-content.#{$block-class}__inner-content--static {
     padding-top: $spacing-05;
   }
 
-  .#{$block-class}__inner-content.#{$block-class}__static-inner-content-no-actions {
-    height: calc(
-      100vh -
-        calc(
-          var(--#{$block-class}--title-text-height) +
-            var(--#{$block-class}--subtitle-container-height) +
-            var(--#{$block-class}--action-bar-container-height) +
-            var(--#{$block-class}--label-text-height)
-        )
-    );
-  }
-
-  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-    position: fixed;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height)
-    );
-    width: 100%;
-    border-bottom: 1px solid $layer-active-01;
-  }
-
-  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
-    + .#{$block-class}__body-content {
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin-top: calc(
-      var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
-    );
-  }
-
-  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-    border-bottom: 1px solid $layer-active-01;
-    margin-bottom: $spacing-05;
-  }
   .#{$block-class}__action-toolbar {
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
-    top: var(--#{$block-class}--title-height);
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 $spacing-05;
-    margin-bottom: $spacing-03;
     background-color: $layer-01;
-    transition: transform $duration-moderate-01 motion(standard);
   }
 
   .#{$block-class}__action-toolbar-leading-button {
@@ -377,25 +354,18 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
   .#{$block-class}__slug-and-close {
     position: fixed;
-    z-index: 5;
+    z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;
     display: flex;
   }
 
-  .#{$block-class}__body-content {
-    padding: $spacing-05;
-    padding-top: 0;
-  }
-  &.#{$block-class}__container-is-animating
-    .#{$block-class}__actions-container.#{$action-set-block-class}--2xl {
-    @include setPanelSize(100%);
-  }
   .#{$block-class}__actions-container {
-    position: fixed;
+    position: sticky; // stick to bottom
     bottom: 0;
     border-top: 1px solid $border-subtle-02;
     background-color: $layer-01;
+
     &.#{$action-set-block-class}--2xl {
       .#{$action-set-block-class}__action-button {
         width: 100%;
@@ -411,12 +381,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
       flex-direction: column;
     }
-    .#{$action-set-block-class}__action-button {
-      height: $spacing-10;
-    }
-    &.#{$block-class}__actions-container-condensed
-      .#{$action-set-block-class}__action-button {
-      height: $spacing-09;
+
+    .#{$action-set-block-class}__action-button.#{$action-set-block-class}__action-button {
+      // extra class needed to override default size
+      height: var(--#{$block-class}--actions-height);
     }
   }
   &.#{$block-class}__container.#{$block-class}__container--xs

@@ -60,35 +60,35 @@ const headerData = [
 const rowData = [
   {
     id: 'a',
-    value: 'Cell text',
+    value: 'Cell text a',
   },
   {
     id: 'b',
-    value: 'Cell text',
+    value: 'Cell text b',
   },
   {
     id: 'c',
-    value: 'Cell text',
+    value: 'Cell text c',
   },
   {
     id: 'd',
-    value: 'Cell text',
+    value: 'Cell text d',
   },
   {
     id: 'e',
-    value: 'Cell text',
+    value: 'Cell text d',
   },
   {
     id: 'f',
-    value: 'Cell text',
+    value: 'Cell text f',
   },
   {
     id: 'g',
-    value: 'Cell text',
+    value: 'Cell text g',
   },
   {
     id: 'h',
-    value: 'Cell text',
+    value: 'Cell text h',
   },
 ];
 

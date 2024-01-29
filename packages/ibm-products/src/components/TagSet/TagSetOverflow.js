@@ -1,11 +1,11 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -36,13 +36,13 @@ export const TagSetOverflow = React.forwardRef(
       overflowTags,
       overflowType,
       showAllTagsLabel,
-
+      popoverOpen,
+      setPopoverOpen,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const [popoverOpen, setPopoverOpen] = useState(false);
     const localRef = useRef();
     const overflowTagContent = useRef(null);
 
@@ -182,6 +182,14 @@ TagSetOverflow.propTypes = {
    * Type of rendering displayed inside of the tag overflow component
    */
   overflowType: PropTypes.oneOf(['default', 'tag']),
+  /**
+   * Open state of the popover
+   */
+  popoverOpen: PropTypes.bool,
+  /**
+   * Setter function for the popoverOpen state value
+   */
+  setPopoverOpen: PropTypes.func,
   /**
    * label for the overflow show all tags link
    */

@@ -56,6 +56,7 @@ const s = [
               'c/Datagrid/Extensions/Skeleton',
             ],
           },
+          { n: 'DelimitedList', s: ['c/DelimitedList'] },
         ],
       },
       {

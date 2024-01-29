@@ -59,7 +59,7 @@ const useActionsColumn = (hooks) => {
                     >
                       {rowActions.map((action, index) => {
                         const preparedActionProps = prepareProps(action, [
-                          'isDelete',
+                          'isDelete'
                         ]);
                         const {
                           align,
@@ -93,6 +93,7 @@ const useActionsColumn = (hooks) => {
                               align={align || 'top'}
                               label={itemText}
                               kind="ghost"
+                              name={itemText} //for test use
                               className={cx({
                                 [`${blockClass}__disabled-row-action`]:
                                   getDisabledState(row.index),

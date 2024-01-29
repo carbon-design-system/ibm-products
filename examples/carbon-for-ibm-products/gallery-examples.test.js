@@ -11,6 +11,7 @@ import { init } from './test-common';
 
 import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example';
 import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
+import { Example as BigNumbersExample } from './BigNumbers/src/Example/Example';
 import { Example as CascadeExample } from './Cascade/src/Example/Example';
 import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
 import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
@@ -53,6 +54,12 @@ describe('All examples', () => {
 
   it('AboutModal renders', () => {
     render(<AboutModalExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('BigNumbers renders', () => {
+    render(<BigNumbersExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -7,3 +7,5 @@
 
 // Import any Carbon component styles used from BigNumbers in this file.
 // BigNumbers uses the following Carbon components:
+@use '@carbon/react/scss/components/skeleton-styles';
+@use '@carbon/react/scss/components/tooltip';

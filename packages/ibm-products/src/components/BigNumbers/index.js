@@ -6,9 +6,3 @@
  */
 
 export { BigNumbers } from './BigNumbers';
-export { BigNumbersSkeleton } from './BigNumbersSkeleton';
-export const BigNumbersSize = {
-  Default: 'default',
-  Large: 'lg',
-  XLarge: 'xl',
-};

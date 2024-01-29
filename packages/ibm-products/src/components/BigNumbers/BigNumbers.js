@@ -16,11 +16,14 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import classnames from 'classnames';
 // Carbon and package components we use.
-import { ArrowUp } from '@carbon/react/icons';
-import { Tooltip } from '@carbon/react';
-import { BigNumbersSize } from '.';
+import { ArrowUp, Information } from '@carbon/react/icons';
+import { Tooltip, SkeletonText } from '@carbon/react';
+import { TooltipTrigger } from '../TooltipTrigger';
+import { BigNumbersSize } from './utils/enums';
+import uuidv4 from '../../global/js/utils/uuidv4';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--big-numbers`;
+const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;
 const componentName = 'BigNumbers';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -36,55 +39,26 @@ const componentName = 'BigNumbers';
 
 // Default values for props
 const defaults = {
-  total: 0,
+  forceShowTotal: false,
+  fractionDigits: 1,
+  loading: false,
   locale: 'en-US',
   percentage: false,
   size: BigNumbersSize.Default,
-  value: null,
-  forceShowTotal: false,
+  total: 0,
   trending: false,
   truncate: true,
+  value: null,
 };
 
 /**
- * Ensure that the value includes a percentage if specified by prop,
- * or otherwise the value is properly formatted.
- * @param {string} locale Locale value to be used in formatting numbers.
- * @param {boolean} percentage Whether a percent sign should be included.
- * @param {number|null} value The value to be formatted.
- * @param {boolean} truncate Whether or not the value should be truncated.
- * @returns {string} Formatted string.
- */
-const truncateValue = (locale, percentage, value, truncate) => {
-  if (value === null) {
-    return '–';
-  } else if (percentage) {
-    return (
-      <div className={`${blockClass}__percentage`}>
-        {formatValue(locale, value, truncate)}
-        <span className={`${blockClass}__percentage-mark`}>%</span>
-      </div>
-    );
-  } else {
-    return formatValue(locale, value, truncate);
-  }
-};
-
-/**
- * Ensure that the value is formatted correctly based on whether it should be truncated or not.
- * @param {string} locale Locale value to be used in formatting numbers.
- * @param {number} value The value to format.
- * @param {boolean} truncate Whether or not the value should be truncated.
- * @returns {string} The formatted value.
- */
-const formatValue = (locale, value, truncate) => {
-  return truncate
-    ? Intl.NumberFormat(locale, { notation: 'compact' }).format(value)
-    : Intl.NumberFormat(locale).format(value);
-};
-
-/**
- * TODO: A description of the component.
+ * BigNumbers is used to display large values in a small area. The display of
+ * values can be the value itself, or grouped in a numerator / denominator fashion.
+ * Control over the total fraction decimals displayed as well as how the
+ * values/totals are displayed are done via a locale prop. Other optional props
+ * allow control over size, truncation, if the value is a percentage, the addition
+ * of a button as well as tool tip functionality.
+ * The default locale is English (`en-US`) if one is not provided or if the provided one is not supported.
  */
 export let BigNumbers = React.forwardRef(
   (
@@ -92,6 +66,11 @@ export let BigNumbers = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       className,
       forceShowTotal = defaults.forceShowTotal,
+      fractionDigits = defaults.fractionDigits,
+      iconButton,
+      information,
+      loading = defaults.loading,
+      label,
       locale = defaults.locale,
       percentage = defaults.percentage,
       size = defaults.size,
@@ -99,19 +78,22 @@ export let BigNumbers = React.forwardRef(
       trending = defaults.trending,
       truncate = defaults.truncate,
       value = defaults.value,
-      iconButton,
-      information,
-      label,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const ICAClasses = classnames(className, {
+    const labelID = uuidv4();
+    const BigNumbersClasses = classnames(className, {
       [`${blockClass}--lg`]: size === BigNumbersSize.Large,
       [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
     });
-    const supportedLocal =
+    const BigNumbersSkeletonClasses = classnames(className, {
+      [`${skeletonBlockClass}--lg`]: size === BigNumbersSize.Large,
+      [`${skeletonBlockClass}--xl`]: size === BigNumbersSize.XLarge,
+    });
+
+    const supportedLocale =
       Intl.NumberFormat.supportedLocalesOf(locale).length > 0
         ? locale
         : defaults.locale;
@@ -127,16 +109,83 @@ export let BigNumbers = React.forwardRef(
       }
     };
 
+    /**
+     * Ensure that the value includes a percentage if specified by prop,
+     * or otherwise the value is properly formatted.
+     * @param {string} locale Locale value to be used in formatting numbers.
+     * @param {boolean} percentage Whether a percent sign should be included.
+     * @param {number|null} value The value to be formatted.
+     * @param {boolean} truncate Whether or not the value should be truncated.
+     * @returns {string} Formatted string.
+     */
+    const truncateValue = (locale, percentage, value, truncate) => {
+      if (value === null) {
+        return '–';
+      } else if (percentage) {
+        return (
+          <div className={`${blockClass}__percentage`}>
+            {formatValue(locale, value, truncate)}
+            <span className={`${blockClass}__percentage-mark`}>%</span>
+          </div>
+        );
+      } else {
+        return formatValue(locale, value, truncate);
+      }
+    };
+
+    /**
+     * Ensure that the value is formatted correctly based on whether it should be truncated or not.
+     * @param {string} locale Locale value to be used in formatting numbers.
+     * @param {number} value The value to format.
+     * @param {boolean} truncate Whether or not the value should be truncated.
+     * @returns {string} The formatted value.
+     */
+    const formatValue = (locale, value, truncate) => {
+      return truncate
+        ? Intl.NumberFormat(locale, {
+            notation: 'compact',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: Math.round(fractionDigits),
+          }).format(value)
+        : Intl.NumberFormat(locale).format(value);
+    };
+
     const truncatedValue = truncateValue(
-      supportedLocal,
+      supportedLocale,
       percentage,
       value,
       truncate
     );
-    const truncatedTotal = formatValue(supportedLocal, total, truncate);
-    const shouldDisplayDivisor =
+    const truncatedTotal = formatValue(supportedLocale, total, truncate);
+
+    const shouldDisplayDenominator =
       (!percentage && total > value && truncatedValue !== truncatedTotal) ||
-      (forceShowTotal && truncatedTotal > 0);
+      (forceShowTotal && total > 0);
+
+    if (loading) {
+      return (
+        <div
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(
+            className,
+            skeletonBlockClass,
+            BigNumbersSkeletonClasses
+          )}
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <SkeletonText className={`${skeletonBlockClass}__label`} />
+          <SkeletonText
+            heading
+            className={`${skeletonBlockClass}__value`}
+            width="80%"
+          />
+        </div>
+      );
+    }
 
     return (
       <div
@@ -146,7 +195,7 @@ export let BigNumbers = React.forwardRef(
         }
         className={cx(
           blockClass, // Apply the block class to the main HTML element
-          ICAClasses,
+          BigNumbersClasses,
           className, // Apply any supplied class names to the main HTML element.
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
@@ -154,15 +203,23 @@ export let BigNumbers = React.forwardRef(
             // example: [`${blockClass}__here-if-small`]: size === 'sm',
           }
         )}
+        aria-labelledby={labelID}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <span className={`${blockClass}__row`}>
-          <h4 className={`${blockClass}__label`}>{label} </h4>
+          <h4 id={labelID} className={`${blockClass}__label`}>
+            {label}{' '}
+          </h4>
           {information && (
-            <Tooltip showIcon={true} direction={'right'}>
-              {information}
+            <Tooltip
+              label={information}
+              align={'right'}
+              className={`${blockClass}__info`}
+            >
+              <TooltipTrigger>
+                <Information size={16} />
+              </TooltipTrigger>
             </Tooltip>
           )}
         </span>
@@ -170,11 +227,13 @@ export let BigNumbers = React.forwardRef(
           {trending && (
             <ArrowUp className={`${blockClass}__trend`} size={iconSize()} />
           )}
-          <span className={`${blockClass}__value`}>{truncatedValue}</span>
-          {shouldDisplayDivisor ? (
+          <span aria-label="Value" className={`${blockClass}__value`}>
+            {truncatedValue}
+          </span>
+          {shouldDisplayDenominator ? (
             <span className={`${blockClass}__total`}>
               {' '}
-              <span>/{truncatedTotal}</span>
+              <span aria-label="Total">/{truncatedTotal}</span>
             </span>
           ) : null}
           {iconButton}
@@ -209,17 +268,33 @@ BigNumbers.propTypes = {
    */
   forceShowTotal: PropTypes.bool,
 
-  /** Displays an iconButton next to the BigNumbers value */
+  /**
+   * Optional value to control the maximum fraction digits
+   * used when truncating the value and total.
+   * @type number
+   */
+  fractionDigits: PropTypes.number,
+
+  /** Displays an iconButton next to the BigNumbers value
+   * @type node
+   */
   iconButton: PropTypes.node,
 
-  /** Pass in content to the body of the information tooltip. */
-  information: PropTypes.node,
+  /** Pass in content to the body of the information tooltip.
+   * @type string
+   */
+  information: PropTypes.string,
 
   /**
    * Text label for BigNumbers.
    * @type string
    */
   label: PropTypes.string.isRequired,
+
+  /** Specify if the BigNumbers is in a loading state
+   * @type bool
+   */
+  loading: PropTypes.bool,
 
   /**
    * Locale value to determine approach to formatting numbers.
@@ -233,7 +308,9 @@ BigNumbers.propTypes = {
    */
   percentage: PropTypes.bool,
 
-  /** The size of the BigNumbers. */
+  /** The size of the BigNumbers.
+   * @type string
+   */
   size: PropTypes.oneOf(Object.values(BigNumbersSize)),
 
   /**
@@ -242,10 +319,14 @@ BigNumbers.propTypes = {
    */
   total: PropTypes.number,
 
-  /** Display trending icon. */
+  /** Display trending icon.
+   * @type boolean
+   */
   trending: PropTypes.bool,
 
-  /** Specify whether or not the values should be truncated. */
+  /** Specify whether or not the values should be truncated.
+   * @type boolean
+   */
   truncate: PropTypes.bool,
 
   /**

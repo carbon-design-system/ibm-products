@@ -8,13 +8,15 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
+import { Button } from '@carbon/react';
+import { Edit } from '@carbon/react/icons';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import { BigNumbers, BigNumbersSize } from '.'; // BigNumbersSkeleton
+import { BigNumbers } from '.';
+import { BigNumbersSize } from './utils/enums';
 
 import mdx from './BigNumbers.mdx';
 
@@ -26,6 +28,10 @@ export default {
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
+    loading: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
     size: {
       options: Object.values(BigNumbersSize),
       control: { type: 'radio' },
@@ -38,6 +44,7 @@ export default {
       options: [true, false],
       control: { type: 'boolean' },
     },
+
     trending: {
       options: [true, false],
       control: { type: 'boolean' },
@@ -45,9 +52,6 @@ export default {
     truncate: {
       options: [true, false],
       control: { type: 'boolean' },
-    },
-    information: {
-      control: { type: null },
     },
     locale: {
       options: [
@@ -102,15 +106,14 @@ export default {
 
 const defaultProps = {
   label: 'Label',
-  value: 10000,
-  total: 100000,
+  value: 12345,
+  total: 123456,
   percentage: false,
   size: BigNumbersSize.Default,
   forceShowTotal: false,
   trending: false,
   truncate: true,
   locale: 'en-US',
-  information: false,
 };
 
 /**
@@ -133,5 +136,29 @@ const Template = (args) => {
 export const bigNumbers = prepareStory(Template, {
   args: {
     ...defaultProps,
+  },
+});
+
+export const withNullValue = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    value: null,
+  },
+});
+
+export const withEditButton = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    information: 'Information Label',
+    iconButton: (
+      <Button
+        renderIcon={Edit}
+        iconDescription="Icon Description"
+        kind="ghost"
+        size={'sm'}
+        hasIconOnly
+        onClick={() => console.log('clicked icon')}
+      />
+    ),
   },
 });

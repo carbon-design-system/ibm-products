@@ -90,4 +90,4 @@ export {
 } from './Guidebanner';
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
-export { BigNumbers, BigNumbersSkeleton } from './BigNumbers';
+export { BigNumbers } from './BigNumbers';

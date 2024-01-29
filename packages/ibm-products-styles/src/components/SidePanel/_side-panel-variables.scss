@@ -5,10 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* One or two values
+  * - width (first value)
+  * - min-width (optional second value)
+*/
 $side-panel-sizes: (
   xs: 16rem,
   sm: 20rem,
   md: 30rem,
   lg: 40rem,
-  2xl: 75%,
+  2xl: 40rem 75%,
 );

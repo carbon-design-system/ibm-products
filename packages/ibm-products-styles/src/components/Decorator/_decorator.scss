@@ -1,0 +1,245 @@
+/* stylelint-disable carbon/type-token-use */
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable function-no-unknown */
+
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Decorator uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by Decorator
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--decorator;
+$block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
+
+// TODO:
+// ~general styling
+// ~border
+// ~rounded corners or square
+// interactive colors and behaviors
+// md or sm
+
+.#{$block-class} {
+  @include type.type-style('body-compact-01');
+
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.#{$block-class}__label {
+  height: to-rem(26px);
+  color: $text-secondary;
+  line-height: to-rem(24px);
+}
+.#{$block-class}__value {
+  height: to-rem(26px);
+  color: $text-primary;
+  line-height: to-rem(24px);
+}
+
+// .#{$block-class}--dark {
+// }
+
+// .#{$block-class}--light {
+// }
+
+.#{$block-class}--square {
+  padding: 0;
+  border-radius: 0;
+}
+
+.#{$block-class}--sm {
+  // TODO:
+}
+
+// TRUNCATION
+
+.#{$block-class}-truncate-end {
+  display: flex;
+
+  .#{$block-class}__value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.#{$block-class}-truncate-start {
+  display: flex;
+
+  .#{$block-class}__value {
+    overflow: hidden;
+    direction: rtl;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// DECORATOR STYLES, STATIC
+
+// DECORATOR AS DEFAULT (NON-INTERACTIVE)
+// DECORATOR AS LINK
+// DECORATOR AS SINGLE BUTTON
+.#{$block-class}--default,
+.#{$block-class}--link,
+.#{$block-class}--button {
+  padding: 0 $spacing-03;
+  border: 1px solid $border-subtle-02;
+  border-radius: $spacing-12;
+  background-color: $background-hover;
+}
+.#{$block-class}--default .#{$block-class}__label,
+.#{$block-class}--link .#{$block-class}__label,
+.#{$block-class}--button .#{$block-class}__label {
+  padding: 0 $spacing-03;
+  border-right: 1px solid $border-subtle;
+}
+.#{$block-class}--default .#{$block-class}__value,
+.#{$block-class}--link .#{$block-class}__value,
+.#{$block-class}--button .#{$block-class}__value {
+  padding: 0 $spacing-03;
+}
+// DECORATOR CONTAINING DUAL BUTTONS
+.#{$block-class}--buttons .#{$block-class}__label {
+  padding: 0 $spacing-03 0 $spacing-05;
+  border-width: to-rem(1px);
+  border-style: solid;
+  border-color: $border-subtle-02 $border-subtle $border-subtle-02
+    $border-subtle-02;
+  border-radius: $spacing-12 0 0 $spacing-12;
+  background-color: $background-hover;
+
+  .#{$block-class-icon} {
+    margin-right: $spacing-03;
+    margin-left: 0;
+  }
+}
+.#{$block-class}--buttons .#{$block-class}__value {
+  padding: 0 $spacing-05 0 $spacing-03;
+  border-width: to-rem(1px) to-rem(1px) to-rem(1px) 0;
+  border-style: solid;
+  border-color: $border-subtle-02;
+  border-radius: 0 $spacing-12 $spacing-12 0;
+  background-color: $background-hover;
+}
+
+// DECORATOR STYLES, INTERACTIVE
+
+// DECORATOR AS LINK
+.#{$block-class}--link {
+  padding: 0 $spacing-03;
+  text-decoration: none;
+}
+.#{$block-class}--link .#{$block-class}__value {
+  color: $link-primary;
+}
+.#{$block-class}--link:hover .#{$block-class}__value {
+  color: $link-primary-hover;
+  text-decoration: underline;
+}
+.#{$block-class}--link:focus,
+.#{$block-class}--link:hover {
+  border-color: $border-strong-01;
+  background-color: $background-active;
+  cursor: pointer;
+
+  .#{$block-class}__label {
+    border-right-color: $border-strong-01;
+  }
+}
+
+// DECORATOR AS SINGLE BUTTON
+.#{$block-class}--button {
+  display: flex;
+  padding: 0 $spacing-03;
+}
+.#{$block-class}--button:focus,
+.#{$block-class}--button:hover {
+  border-color: $border-strong-01;
+  background-color: $background-active;
+  cursor: pointer;
+
+  .#{$block-class}__label {
+    border-right-color: $border-strong-01;
+  }
+}
+
+// DECORATOR CONTAINING DUAL BUTTONS
+.#{$block-class}--buttons button {
+  display: flex;
+  align-items: center;
+}
+.#{$block-class}--buttons button:focus,
+.#{$block-class}--buttons button:hover {
+  border-color: $border-strong-01;
+  background-color: $background-active;
+  cursor: pointer;
+
+  .#{$block-class}__label {
+    border-right-color: $border-strong-01;
+  }
+}
+// EXCEPTION (APPLIES TO DUAL BUTTONS ONLY)
+// Issue. The label includes a right-border by default,
+//   while the value has no left-border.
+//   When hovering over the value, it's missing a border.
+// Fix. When hovering over the Decorator,
+//   hide label's right-border, and
+//   show value's left-border.
+.#{$block-class}--buttons:focus .#{$block-class}__label,
+.#{$block-class}--buttons:hover .#{$block-class}__label {
+  border-right: 0;
+}
+.#{$block-class}--buttons:focus .#{$block-class}__value,
+.#{$block-class}--buttons:hover .#{$block-class}__value {
+  border-left: 1px solid $border-strong-01;
+}
+
+// ICONS
+
+.#{$block-class-icon} {
+  display: inline-block;
+  margin-left: $spacing-03;
+}
+
+// MAGNITUDE ICON COLORS
+
+.#{$block-class-icon}__magnitude-unknown {
+  fill: $icon-primary;
+}
+
+.#{$block-class-icon}__magnitude-benign {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  fill: #009d9a;
+}
+
+.#{$block-class-icon}__magnitude-low {
+  fill: $support-warning;
+}
+
+.#{$block-class-icon}__magnitude-medium {
+  /* $carbon--orange-40 */
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  fill: #ff832b;
+}
+
+.#{$block-class-icon}__magnitude-high {
+  fill: $support-error;
+}
+
+.#{$block-class-icon}__magnitude-critical {
+  fill: $support-error;
+}

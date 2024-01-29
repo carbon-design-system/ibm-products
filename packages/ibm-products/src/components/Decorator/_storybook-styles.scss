@@ -1,0 +1,20 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+
+// TODO: add any additional styles used by Decorator.stories.js
+.decorator-stories__viewport-truncation {
+  max-width: 70vw;
+  border: 1px solid #ccc;
+  margin: 2rem;
+  padding: 2rem;
+
+  p {
+    margin-bottom: 1rem;
+  }
+}

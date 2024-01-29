@@ -57,6 +57,7 @@ const s = [
             ],
           },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'Decorator', s: ['c/Decorator'] },
         ],
       },
       {

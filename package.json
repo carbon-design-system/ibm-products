@@ -57,6 +57,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/eslint-parser": "^7.22.10",
+    "@babel/preset-react": "^7.17.12",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@testing-library/dom": "^8.11.4",
@@ -96,6 +97,13 @@
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-react"
+        ]
+      }
+    },
     "extends": [
       "carbon"
     ],
@@ -108,9 +116,16 @@
     },
     "overrides": [
       {
-        "files": ["*.ts", "*.tsx"],
-        "plugins": ["@typescript-eslint"],
-        "extends": ["plugin:@typescript-eslint/recommended"],
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "plugins": [
+          "@typescript-eslint"
+        ],
+        "extends": [
+          "plugin:@typescript-eslint/recommended"
+        ],
         "parser": "@typescript-eslint/parser",
         "rules": {
           "no-unused-vars": "off",

@@ -52,6 +52,7 @@ const s = [
             ],
           },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
+          { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },

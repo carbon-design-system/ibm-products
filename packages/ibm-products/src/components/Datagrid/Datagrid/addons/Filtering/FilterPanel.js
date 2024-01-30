@@ -38,10 +38,19 @@ const componentClass = `${blockClass}-filter-panel`;
 
 const MotionActionSet = motion(ActionSet);
 
+const defaults = {
+  title: 'Filter',
+  closeIconDescription: 'Close filter panel',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  searchLabelText: 'Filter search',
+  searchPlaceholder: 'Find filters',
+};
+
 const FilterPanel = ({
-  title = 'Filter',
-  closeIconDescription = 'Close filter panel',
-  updateMethod = BATCH,
+  title = defaults.title,
+  closeIconDescription = defaults.closeIconDescription,
+  updateMethod,
   filterSections,
   setAllFilters,
   onApply = () => {},
@@ -50,10 +59,10 @@ const FilterPanel = ({
   onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
-  primaryActionLabel = 'Apply',
-  secondaryActionLabel = 'Cancel',
-  searchLabelText = 'Filter search',
-  searchPlaceholder = 'Find filters',
+  primaryActionLabel = defaults.primaryActionLabel,
+  secondaryActionLabel = defaults.secondaryActionLabel,
+  searchLabelText = defaults.searchLabelText,
+  searchPlaceholder = defaults.searchPlaceholder,
   reactTableFiltersState = [],
   isFetching = false,
 }) => {
@@ -235,6 +244,7 @@ const FilterPanel = ({
             onClick={closePanel}
           />
           {showFilterSearch && (
+            /* istanbul ignore next */
             <div ref={filterSearchRef} className={`${componentClass}__search`}>
               <Search
                 labelText={searchLabelText}

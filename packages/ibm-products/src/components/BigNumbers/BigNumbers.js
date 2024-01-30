@@ -227,9 +227,19 @@ export let BigNumbers = React.forwardRef(
           {trending && (
             <ArrowUp className={`${blockClass}__trend`} size={iconSize()} />
           )}
-          <span className={`${blockClass}__value`}>{truncatedValue}</span>
+          <span
+            role="math"
+            aria-label="Value"
+            className={`${blockClass}__value`}
+          >
+            {truncatedValue}
+          </span>
           {shouldDisplayDenominator ? (
-            <span className={`${blockClass}__total`}>
+            <span
+              role="math"
+              aria-label="Total"
+              className={`${blockClass}__total`}
+            >
               <span>/{truncatedTotal}</span>
             </span>
           ) : null}

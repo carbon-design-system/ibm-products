@@ -158,6 +158,7 @@ export const withEditButton = prepareStory(Template, {
         size={'sm'}
         hasIconOnly
         onClick={() => console.log('clicked icon')}
+        tooltipPosition="bottom"
       />
     ),
   },

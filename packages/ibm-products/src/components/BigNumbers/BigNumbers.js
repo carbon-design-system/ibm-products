@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 import classnames from 'classnames';
 // Carbon and package components we use.
 import { ArrowUp, Information } from '@carbon/react/icons';
@@ -209,7 +209,7 @@ export let BigNumbers = React.forwardRef(
       >
         <span className={`${blockClass}__row`}>
           <h4 id={labelID} className={`${blockClass}__label`}>
-            {label}{' '}
+            {label}
           </h4>
           {information && (
             <Tooltip
@@ -217,7 +217,7 @@ export let BigNumbers = React.forwardRef(
               align={'right'}
               className={`${blockClass}__info`}
             >
-              <TooltipTrigger>
+              <TooltipTrigger className={`${blockClass}__tooltip-trigger`}>
                 <Information size={16} />
               </TooltipTrigger>
             </Tooltip>
@@ -227,13 +227,10 @@ export let BigNumbers = React.forwardRef(
           {trending && (
             <ArrowUp className={`${blockClass}__trend`} size={iconSize()} />
           )}
-          <span aria-label="Value" className={`${blockClass}__value`}>
-            {truncatedValue}
-          </span>
+          <span className={`${blockClass}__value`}>{truncatedValue}</span>
           {shouldDisplayDenominator ? (
             <span className={`${blockClass}__total`}>
-              {' '}
-              <span aria-label="Total">/{truncatedTotal}</span>
+              <span>/{truncatedTotal}</span>
             </span>
           ) : null}
           {iconButton}

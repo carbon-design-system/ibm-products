@@ -200,11 +200,14 @@ const FilterFlyout = ({
   };
 
   /** Effects */
+  // Close flyout when clicking outside
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
       target.className === `${carbonPrefix}--list-box__menu-item__option`;
 
+    // Do not do anything if flyout is closed or if clicking on anything
+    // rendered via a portal
     if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;
     }

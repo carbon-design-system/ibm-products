@@ -2764,13 +2764,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   grid-template-columns: 1fr;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-panel__container {
   position: relative;
   width: 20rem;

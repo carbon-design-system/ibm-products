@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.8.3...@carbon/ibm-cloud-cognitive-core@2.9.0) (2024-01-30)
+
+
+### Features
+
+* **DelimitedList:** new component DelimitedList ([#4069](https://github.com/carbon-design-system/ibm-products/issues/4069)) ([2e60709](https://github.com/carbon-design-system/ibm-products/commit/2e60709976b08718ec437890e9721e9a1b83500c)), closes [#4047](https://github.com/carbon-design-system/ibm-products/issues/4047)
+* update ai-gradient to phase 2 spec ([#4145](https://github.com/carbon-design-system/ibm-products/issues/4145)) ([4e51d13](https://github.com/carbon-design-system/ibm-products/commit/4e51d132ae60b7aa154eaa433b1a58cdd98fbca2))
+
+
+
+
+
 ## [2.8.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.8.2...@carbon/ibm-cloud-cognitive-core@2.8.3) (2024-01-23)
 
 

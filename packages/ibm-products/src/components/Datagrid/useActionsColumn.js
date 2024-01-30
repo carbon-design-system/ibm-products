@@ -11,8 +11,10 @@ import {
   IconSkeleton,
   OverflowMenu,
   OverflowMenuItem,
+  Button,
 } from 'carbon-components-react';
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useActionsColumn = (hooks) => {
@@ -56,14 +58,18 @@ const useActionsColumn = (hooks) => {
                       style={{ display: 'flex' }}
                     >
                       {rowActions.map((action, index) => {
+                        const preparedActionProps = prepareProps(action, [
+                          'isDelete',
+                        ]);
                         const {
                           id,
                           itemText,
                           onClick,
-                          icon,
                           shouldHideMenuItem,
+                          align,
+                          icon,
                           ...rest
-                        } = action;
+                        } = preparedActionProps;
                         const hidden =
                           typeof shouldHideMenuItem === 'function' &&
                           shouldHideMenuItem(row);
@@ -81,14 +87,13 @@ const useActionsColumn = (hooks) => {
                             )}
                             key={`${itemText}__${index}`}
                           >
-                            <OverflowMenu
+                            <Button
                               {...rest}
-                              renderIcon={icon}
-                              hasIconOnly
-                              light
-                              iconDescription={itemText}
-                              ariaLabel={itemText}
+                              tooltipPosition={align || 'top'}
                               kind="ghost"
+                              name={itemText} //for test use
+                              renderIcon={icon}
+                              iconDescription={itemText}
                               className={cx({
                                 [`${blockClass}__disabled-row-action`]:
                                   getDisabledState(row.index),
@@ -101,6 +106,7 @@ const useActionsColumn = (hooks) => {
                                 e.stopPropagation();
                                 onClick(id, row, e);
                               }}
+                              hasIconOnly
                             />
                           </div>
                         );

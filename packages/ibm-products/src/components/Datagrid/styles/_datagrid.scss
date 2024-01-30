@@ -359,22 +359,22 @@
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$carbon-prefix}--overflow-menu {
+  .#{$carbon-prefix}--btn--icon-only {
   opacity: 0;
 }
 
 .#{$block-class}
   .#{$block-class}__carbon-row:hover
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$carbon-prefix}--overflow-menu,
+  .#{$carbon-prefix}--btn--icon-only,
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$carbon-prefix}--overflow-menu:focus,
+  .#{$carbon-prefix}--btn--icon-only:focus,
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$carbon-prefix}--overflow-menu[aria-expanded='true'] {
+  .#{$carbon-prefix}--btn--icon-only[aria-expanded='true'] {
   opacity: 1;
 }
 

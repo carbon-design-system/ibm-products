@@ -17,17 +17,15 @@ import stripBanner from 'rollup-plugin-strip-banner';
 import {
   loadBaseTsCompilerOpts,
   loadTsCompilerOpts,
-} from '../../../config/typescript-config-carbon/index.js';
+} from 'typescript-config-carbon';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 const packageJson = JSON.parse(readFileSync('./package.json'));
 
 async function build() {
-  // console.log(packageJson);
   const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
   const __dirname = path.dirname(__filename); // get the name of the directory
   const reactEntrypoint = {
-    // filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     rootDir: 'src',
     outputDirectory: path.resolve(__dirname, '..'),

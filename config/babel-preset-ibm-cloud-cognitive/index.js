@@ -11,27 +11,25 @@ const {
   env: { BABEL_ENV },
 } = process;
 
-module.exports = () => {
-  return {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
-          targets: {
-            browsers: ['extends browserslist-config-carbon'],
-          },
+export default {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
+        targets: {
+          browsers: ['extends browserslist-config-carbon'],
         },
-      ],
-      '@babel/preset-react',
-      '@babel/preset-typescript',
+      },
     ],
-    plugins: [
-      'dev-expression',
-      '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-export-namespace-from',
-      '@babel/plugin-proposal-export-default-from',
-      '@babel/plugin-transform-react-constant-elements',
-    ],
-  };
+    '@babel/preset-react',
+    '@babel/preset-typescript',
+  ],
+  plugins: [
+    'dev-expression',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-transform-react-constant-elements',
+  ],
 };

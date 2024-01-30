@@ -1,14 +1,15 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const { merge } = require('webpack-merge');
-const { dirname, join, resolve } = require('path');
+import { merge } from 'webpack-merge';
+import { dirname, join, resolve } from 'path';
+import config from 'babel-preset-ibm-cloud-cognitive';
 
-module.exports = {
+export default {
   addons: [
     getAbsolutePath('@storybook/addon-actions'),
     getAbsolutePath('@storybook/addon-docs'),
@@ -62,7 +63,7 @@ module.exports = {
           {
             test: /\.stories\.js$/,
             loader: 'babel-loader',
-            options: require('babel-preset-ibm-cloud-cognitive')(),
+            options: config,
           },
           {
             test: /\.scss$/,

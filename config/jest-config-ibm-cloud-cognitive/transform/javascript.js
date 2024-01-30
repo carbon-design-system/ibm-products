@@ -8,6 +8,6 @@
 // babel-jest is changing module pattern, see https://github.com/facebook/jest/issues/11444
 const babelJestMd = require('babel-jest');
 const babelJest = babelJestMd.__esModule ? babelJestMd.default : babelJestMd;
-const babelOptions = require('babel-preset-ibm-cloud-cognitive');
+import babelOptions from 'babel-preset-ibm-cloud-cognitive';
 
 module.exports = babelJest.createTransformer(babelOptions());

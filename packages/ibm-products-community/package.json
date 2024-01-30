@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "type": "module",
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p 'build:*'",

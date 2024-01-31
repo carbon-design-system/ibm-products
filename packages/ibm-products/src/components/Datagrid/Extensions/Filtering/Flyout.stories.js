@@ -28,6 +28,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
+import { getDateFormat } from './Panel.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
@@ -169,16 +170,18 @@ const filters = [
     props: {
       DatePicker: {
         datePickerType: 'range',
+        locale: navigator?.language || 'en',
+        dateFormat: getDateFormat(navigator?.language || 'en'),
       },
       DatePickerInput: {
         start: {
           id: 'date-picker-input-id-start',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined start date',
         },
         end: {
           id: 'date-picker-input-id-end',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined end date',
         },
       },

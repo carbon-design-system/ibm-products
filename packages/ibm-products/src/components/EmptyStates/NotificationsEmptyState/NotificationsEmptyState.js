@@ -65,8 +65,7 @@ export let NotificationsEmptyState = React.forwardRef(
         <NotificationsIllustration
           size={size}
           theme={illustrationTheme}
-          title={title}
-          alt={illustrationDescription}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -124,9 +123,9 @@ NotificationsEmptyState.propTypes = {
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 
   /**
-   * The alt text for empty state svg images
+   * The alt text for empty state svg images. If not provided , title will be used.
    */
-  illustrationDescription: PropTypes.string.isRequired,
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state link object

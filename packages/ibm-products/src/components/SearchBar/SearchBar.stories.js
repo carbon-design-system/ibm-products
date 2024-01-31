@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 // TODO: import action to handle events if required.
 import { action } from '@storybook/addon-actions';
 
@@ -23,10 +23,20 @@ export default {
   title: getStoryTitle(SearchBar.displayName),
   component: SearchBar,
   tags: ['autodocs'],
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    value: { control: { disable: true } },
+    onChange: { control: { disable: true } },
+    className: { control: { disable: true } },
+    hideScopesLabel: { control: { disable: true } },
+    onSubmit: { control: { disable: true } },
+    scopeToString: { control: { disable: true } },
+    scopes: { control: { disable: true } },
+    scopesTypeLabel: { control: { disable: true } },
+    selectedScopes: { control: { disable: true } },
+    sortItems: { control: { disable: true } },
+    titleText: { control: { disable: true } },
+    translateWithId: { control: { disable: true } },
+  },
   parameters: {
     styles,
     docs: {
@@ -52,7 +62,6 @@ const scopes = [
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
-  labelText: 'Label Text',
   placeHolderText: 'Search...',
   submitLabel: 'Search',
   onChange: (newVal) => action('onChange')(newVal),

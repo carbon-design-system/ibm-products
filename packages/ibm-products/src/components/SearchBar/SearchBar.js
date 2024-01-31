@@ -209,7 +209,7 @@ SearchBar.propTypes = {
   hideScopesLabel: PropTypes.bool,
 
   /** @type {string} The label text for the search text input. */
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
 
   /** @type {Function} Function handler for when the user changes their query search. */
   onChange: PropTypes.func,

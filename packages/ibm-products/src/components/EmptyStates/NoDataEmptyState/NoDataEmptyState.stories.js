@@ -57,7 +57,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-
   },
 });
 

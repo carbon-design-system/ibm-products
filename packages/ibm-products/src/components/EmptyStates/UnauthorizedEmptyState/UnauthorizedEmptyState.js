@@ -123,10 +123,10 @@ UnauthorizedEmptyState.propTypes = {
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 
-   /**
+  /**
    * The alt text for empty state svg images
    */
-   illustrationDescription: PropTypes.string.isRequired,
+  illustrationDescription: PropTypes.string.isRequired,
 
   /**
    * Empty state link object

@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default } from 'jest-config-ibm-cloud-cognitive';
+module.exports = require('jest-config-ibm-cloud-cognitive');

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.20.1...@carbon/ibm-products-styles@2.21.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* add min width to 2xl size ([#4019](https://github.com/carbon-design-system/ibm-products/issues/4019)) ([b99ad7c](https://github.com/carbon-design-system/ibm-products/commit/b99ad7cdeea5fad07f474766306f5cd8d1082e5b))
+* **Datagrid:** fix placement of pagination when used with filter panel ([#4152](https://github.com/carbon-design-system/ibm-products/issues/4152)) ([d486005](https://github.com/carbon-design-system/ibm-products/commit/d4860054d31a0a3bbc9e0e1440402fdb8690e8bb))
+* **Datagrid:** sticky row action column solid background ([#4051](https://github.com/carbon-design-system/ibm-products/issues/4051)) ([307c316](https://github.com/carbon-design-system/ibm-products/commit/307c3164629f48741ddeb0739c1333f886e5804e))
+
+
+### Features
+
+* **DelimitedList:** new component DelimitedList ([#4069](https://github.com/carbon-design-system/ibm-products/issues/4069)) ([2e60709](https://github.com/carbon-design-system/ibm-products/commit/2e60709976b08718ec437890e9721e9a1b83500c)), closes [#4047](https://github.com/carbon-design-system/ibm-products/issues/4047)
+* update ai-gradient to phase 2 spec ([#4145](https://github.com/carbon-design-system/ibm-products/issues/4145)) ([4e51d13](https://github.com/carbon-design-system/ibm-products/commit/4e51d132ae60b7aa154eaa433b1a58cdd98fbca2))
+
+
+
+
+
 ## [2.20.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.20.0...@carbon/ibm-products-styles@2.20.1) (2024-01-23)
 
 

@@ -269,6 +269,15 @@
         "infra",
         "review"
       ]
+    },
+    {
+      "login": "makafsal",
+      "name": "Afsal K",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9197089?v=4",
+      "profile": "http://iamafsal.in/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

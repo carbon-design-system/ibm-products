@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.1.2...@carbon/ibm-products-community@0.2.0) (2024-01-30)
+
+
+### Features
+
+* update ai-gradient to phase 2 spec ([#4145](https://github.com/carbon-design-system/ibm-products/issues/4145)) ([4e51d13](https://github.com/carbon-design-system/ibm-products/commit/4e51d132ae60b7aa154eaa433b1a58cdd98fbca2))
+
+
+
+
+
 ## [0.1.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.1.1...@carbon/ibm-products-community@0.1.2) (2024-01-23)
 
 

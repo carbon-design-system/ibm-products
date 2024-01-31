@@ -49,7 +49,6 @@ export const WithDarkModeIllustration = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
     illustrationTheme: 'dark',
-
   },
 });
 

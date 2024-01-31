@@ -28,7 +28,7 @@ const { name } = EmptyState;
 const defaultProps = {
   title: 'Empty state title',
   subtitle: 'Empty state subtitle',
-  illustrationDescription:"Test alt text"
+  illustrationDescription: 'Test alt text',
 };
 
 describe(name, () => {
@@ -97,10 +97,7 @@ describe(name, () => {
 
   it('should render a custom illustration', () => {
     const { container } = render(
-      <EmptyState
-        {...defaultProps}
-        illustration={CustomIllustration}
-      />
+      <EmptyState {...defaultProps} illustration={CustomIllustration} />
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();

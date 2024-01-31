@@ -59,9 +59,13 @@ module.exports = {
   ],
   testTimeout: 120000,
   transform: {
-    '^.+\\.(js|jsx)$': require.resolve('./transform/javascript.js'),
+    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(
+      './transform/javascript.js'
+    ),
     '^.+\\.css$': require.resolve('./transform/css.js'),
-    '^(?!.*\\.(js|jsx|css|json)$)': require.resolve('./transform/file.js'),
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': require.resolve(
+      './transform/file.js'
+    ),
   },
   testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: [

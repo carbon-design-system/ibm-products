@@ -83,6 +83,13 @@ export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 export { Checklist } from './Checklist';
+export { Coachmark } from './Coachmark';
+export { CoachmarkBeacon } from './CoachmarkBeacon';
+export { CoachmarkButton } from './CoachmarkButton';
+export { CoachmarkFixed } from './CoachmarkFixed';
+export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
+export { CoachmarkOverlayElements } from './CoachmarkOverlayElements';
+export { CoachmarkStack } from './CoachmarkStack';
 export {
   Guidebanner,
   GuidebannerElement,
@@ -91,3 +98,4 @@ export {
 } from './Guidebanner';
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
+export { DelimitedList } from './DelimitedList';

@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
@@ -45,6 +46,7 @@
         position: sticky;
         z-index: 1;
         left: 0;
+        background-color: $layer-01;
       }
     }
 
@@ -68,6 +70,7 @@
       &.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         left: 0;
+        background-color: $layer-01;
       }
     }
 
@@ -155,6 +158,16 @@
   background-color: $background;
 }
 
+.#{$block-class} th.#{$block-class}__with-slug {
+  @include ai-gradient('top', 100%);
+}
+
+.#{$block-class}
+  th.#{$block-class}__with-slug
+  .#{c4p-settings.$carbon-prefix}--slug {
+  margin-left: $spacing-03;
+}
+
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
@@ -181,6 +194,12 @@
     width: 100%;
     height: 100%;
     overflow-x: auto;
+  }
+
+  .#{$block-class}-filter-panel
+    + .#{$block-class}__table-container-inner
+    .#{c4p-settings.$carbon-prefix}--data-table-content {
+    height: fit-content;
   }
 
   table.#{$block-class}__table-simple {
@@ -233,6 +252,10 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     white-space: initial;
+  }
+
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug {
+    width: fit-content;
   }
 
   .#{$block-class}__expanded-row {
@@ -346,7 +369,7 @@
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $background-selected-hover;
+  background-color: $layer-selected-hover;
 
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;

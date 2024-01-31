@@ -80,3 +80,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   ) {
   min-width: auto;
 }
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--pagination {
+  background-color: $layer-02;
+}

@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -69,6 +73,9 @@
     "automerge",
     "buildhome",
     "checkmark",
+    "Coachmark",
+    "Coachmarks",
+    "codemods",
     "codesandbox",
     "colindex",
     "columnheader",
@@ -80,6 +87,7 @@
     "Datagrid",
     "disttag",
     "disttags",
+    "Dragbar",
     "draggable",
     "editinplace",
     "editsidepanel",
@@ -109,8 +117,8 @@
     "rowgroup",
     "rowheader",
     "rowindex",
-    "scrollend",
     "sbdocs",
+    "scrollend",
     "semibold",
     "serializers",
     "setsize",

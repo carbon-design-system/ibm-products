@@ -47,7 +47,14 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity, Add } from '@carbon/react/icons';
+import {
+  Download,
+  Restart,
+  Filter,
+  Activity,
+  Add,
+  Edit,
+} from '@carbon/react/icons';
 import { carbon, pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -851,11 +858,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
+      icon: Edit,
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
+      icon: Add,
     },
     {
       id: 'retire',
@@ -2580,7 +2589,10 @@ describe(componentName, () => {
               {
                 id: 'joined',
                 type: 'date',
-                value: [new Date('01/01/2022'), todayDate],
+                value: [
+                  new Date('01/01/2022').toLocaleDateString('en-US'),
+                  todayDate.toLocaleDateString('en-US'),
+                ],
               },
             ],
           },

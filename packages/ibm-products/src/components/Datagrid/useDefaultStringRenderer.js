@@ -23,21 +23,27 @@ const useDefaultStringRenderer = (hooks) => {
     </div>
   );
 
-  const HeaderRenderer = (header) => (
-    <div
-      className={`${blockClass}__defaultStringRenderer`}
-      title={typeof header === 'string' ? header : ''}
-      key={typeof header === 'string' ? header : ''}
-    >
-      {header}
-    </div>
-  );
+  const HeaderRenderer = (header, slug) => {
+    return (
+      <div
+        className={cx(`${blockClass}__defaultStringRenderer`, {
+          [`${blockClass}__defaultStringRenderer--slug`]:
+            slug && React.isValidElement(slug),
+        })}
+        title={typeof header === 'string' ? header : ''}
+        key={typeof header === 'string' ? header : ''}
+      >
+        {header}
+      </div>
+    );
+  };
 
   const visibleColumns = (columns) => {
     const columnsWithDefaultCells = columns.map((column) => ({
       Cell: StringRenderer,
       ...column,
-      Header: column.HeaderRenderer || HeaderRenderer(column.Header),
+      Header:
+        column.HeaderRenderer || HeaderRenderer(column.Header, column.slug),
     }));
     return [...columnsWithDefaultCells];
   };

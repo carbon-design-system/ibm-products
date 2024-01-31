@@ -5,7 +5,6 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "type": "module",
   "installConfig": {
     "hoistingLimits": "none"
   },

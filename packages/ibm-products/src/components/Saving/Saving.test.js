@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { Saving } from '.';
+console.log(Saving);
 
 const componentName = Saving.displayName;
 const defaultProps = {

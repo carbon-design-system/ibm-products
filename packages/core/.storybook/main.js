@@ -7,9 +7,8 @@
 
 import { merge } from 'webpack-merge';
 import { dirname, join, resolve } from 'path';
-import config from 'babel-preset-ibm-cloud-cognitive';
 
-export default {
+module.exports = {
   addons: [
     getAbsolutePath('@storybook/addon-actions'),
     getAbsolutePath('@storybook/addon-docs'),
@@ -47,6 +46,7 @@ export default {
     '../+(docs|src)/**/*+(-story|.stories).*',
     '../../../examples/**/*+(-story|.stories).*',
   ],
+
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
@@ -63,7 +63,7 @@ export default {
           {
             test: /\.stories\.js$/,
             loader: 'babel-loader',
-            options: config,
+            options: require('babel-preset-ibm-cloud-cognitive')(),
           },
           {
             test: /\.scss$/,

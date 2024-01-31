@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default } from 'babel-preset-ibm-cloud-cognitive';
+module.exports = require('babel-preset-ibm-cloud-cognitive')();

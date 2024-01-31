@@ -7,24 +7,21 @@
 
 'use strict';
 
-import { babel } from '@rollup/plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import path from 'path';
-import { rollup } from 'rollup';
-import stripBanner from 'rollup-plugin-strip-banner';
-import {
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const typescript = require('@rollup/plugin-typescript');
+const path = require('path');
+const { rollup } = require('rollup');
+const stripBanner = require('rollup-plugin-strip-banner');
+const {
   loadBaseTsCompilerOpts,
   loadTsCompilerOpts,
-} from 'typescript-config-carbon';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
+} = require('typescript-config-carbon');
+const { readFileSync } = require('fs');
 const packageJson = JSON.parse(readFileSync('./package.json'));
 
 async function build() {
-  const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
-  const __dirname = path.dirname(__filename); // get the name of the directory
   const reactEntrypoint = {
     filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     rootDir: 'src',

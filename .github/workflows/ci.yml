@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/gallium
+          node-version: '18.x'
           cache: yarn
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -38,7 +38,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/gallium
+          node-version: '18.x'
           cache: yarn
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -58,7 +58,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/gallium
+          node-version: '18.x'
           cache: yarn
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -78,7 +78,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/gallium
+          node-version: '18.x'
           cache: yarn
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -98,7 +98,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/gallium
+          node-version: '18.x'
           cache: yarn
       - name: Cache dependencies
         uses: actions/cache@v2

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
+import { ColumnHeaderSlug } from './Datagrid/addons/Slug/ColumnHeaderSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -62,7 +63,15 @@ const useSortableColumns = (hooks) => {
       descendingSortableLabelText,
       defaultSortableLabelText,
     } = instance;
-    const onSortClick = (column) => {
+    const onSortClick = (event, column) => {
+      const slug =
+        event.target.classList.contains(`${carbon.prefix}--slug`) ||
+        event.target.closest(`.${carbon.prefix}--slug`);
+      // Do not continue with sorting if we find a slug
+      if (slug) {
+        event.stopPropagation();
+        return;
+      }
       const key = column.id;
       const sortDesc = column.isSortedDesc;
       const { newSortDesc, newOrder } = getNewSortOrder(sortDesc);
@@ -105,9 +114,16 @@ const useSortableColumns = (hooks) => {
               defaultSortableLabelText,
             })}
             aria-pressed={getAriaPressedValue(headerProp?.column)}
-            onClick={() => onSortClick(headerProp?.column)}
+            onClick={(event) => onSortClick(event, headerProp?.column)}
             kind="ghost"
-            renderIcon={(props) => icon(headerProp?.column, props)}
+            renderIcon={(props) => {
+              return (
+                <>
+                  <ColumnHeaderSlug slug={headerProp?.column?.slug} />
+                  {icon(headerProp?.column, props)}
+                </>
+              );
+            }}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {

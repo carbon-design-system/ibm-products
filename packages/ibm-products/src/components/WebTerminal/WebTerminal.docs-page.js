@@ -14,6 +14,7 @@ const DocsPage = () => (
         title: 'Getting Started',
         source: {
           code: `import { WebTerminalProvider } from '@carbon/ibm-products';
+
 const App = () => {
   return (
     <WebTerminalProvider>
@@ -36,18 +37,21 @@ const App = () => {
 2. \`openWebTerminal\` sets the \`open\` state to true
 3. \`closeWebTerminal\` sets the \`open\` state to false
 4. \`toggleWebTerminal\` toggles between true and false
+
 Example:
 `,
         source: {
           code: `const MyComponent = () => {
   const { open, openWebTerminal, closeWebTerminal, toggleWebTerminal } =
     useWebTerminal();
+
   return (
     <div>
       <button onClick={() => openWebTerminal()}>Open web terminal</button>
       <button onClick={() => closeWebTerminal()}>Close web terminal</button>
       <button onClick={() => toggleWebTerminal()}>Toggle web terminal</button>
       <p>The web terminal is now {open}</p>
+
       <WebTerminal>...</WebTerminal>
     </div>
   );
@@ -70,6 +74,7 @@ Simply pass your own terminal component as children.
           code: `<WebTerminalContentWrapper>
   content
 </WebTerminalContentWrapper>
+
 <WebTerminal>
   ...
 </WebTerminal>`,
@@ -87,8 +92,10 @@ Simply pass your own terminal component as children.
         subTitle: 'Help users with helpful documentation links',
         description: `Optionally you can pass documentation links to help point your users to useful
 documentation for your terminal, or kubernetes commands etc.
+
 The documentation links should reflect the same props as \`OverflowMenuItem\` from
 carbon.
+
 Learn more:
 https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
 `,

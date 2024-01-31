@@ -39,14 +39,11 @@
     "provenance": true
   },
   "scripts": {
-    "new-build": "node scripts/build",
     "build": "run-s clean build-all",
     "build-all": "run-p 'build:*'",
     "build:css": "copyfiles '../ibm-products-styles/css/**/*.*' ./ -u 2",
     "build:scss": "copyfiles '../ibm-products-styles/scss/**/*.*' ./ -u 2",
-    "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
-    "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
-    "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
+    "build:js-new": "node scripts/build",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",

@@ -74,7 +74,8 @@ const banner = `/**
 // Base babel config for js and ts
 const babelConfig = {
   babelrc: false,
-  exclude: ['node_modules/**'],
+  exclude: ['/node_modules/'],
+  ignore: ['/node_modules/'],
   presets: [
     [
       '@babel/preset-env',
@@ -101,13 +102,10 @@ const babelConfig = {
 
 function getTsCompilerOptions() {
   const baseOpts = loadBaseTsCompilerOpts();
-  // const projectTsConfigPath = path.resolve(__dirname, '../tsconfig.json');
   const projectTsConfigPath = path.resolve('./tsconfig.json');
   const overrideOpts = loadTsCompilerOpts(projectTsConfigPath);
   return { ...baseOpts, ...overrideOpts };
-  // return {}
 }
-console.log('getTsCompilerOptions: ', getTsCompilerOptions());
 
 function getRollupConfig(input, rootDir, outDir) {
   return {

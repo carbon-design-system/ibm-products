@@ -49,6 +49,7 @@ import {
   Filter16,
   Activity16,
   Add16,
+  Edit16,
 } from '@carbon/icons-react';
 
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
@@ -844,11 +845,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
+      icon: Edit16,
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
+      icon: Add16,
     },
     {
       id: 'retire',
@@ -2704,7 +2707,10 @@ describe(componentName, () => {
               {
                 id: 'joined',
                 type: 'date',
-                value: [new Date('01/01/2022'), todayDate],
+                value: [
+                  new Date('01/01/2022').toLocaleDateString('en-US'),
+                  todayDate.toLocaleDateString('en-US'),
+                ],
               },
             ],
           },

@@ -839,8 +839,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 4;
   top: 0;
   height: calc(var(--c4p--side-panel--title-container-height) - var(--c4p--side-panel--label-text-height));
-  padding: var(--cds-spacing-05, 1rem) var(--cds-spacing-05, 1rem) var(--cds-spacing-03, 0.5rem) var(--cds-spacing-05, 1rem);
+  padding: var(--cds-spacing-05, 1rem);
   background-color: var(--cds-ui-01, #f4f4f4);
+}
+.c4p--side-panel__container .c4p--side-panel__title-container:has(~ .c4p--side-panel__subtitle-text) {
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 .c4p--side-panel__container .c4p--side-panel__title-container::before {
   position: absolute;
@@ -1977,13 +1980,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-layer-accent, #e0e0e0);
 }
 
-.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--overflow-menu {
+.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--btn--icon-only {
   opacity: 0;
 }
 
-.c4p--datagrid .c4p--datagrid__carbon-row:hover .c4p--datagrid__actions-column-cell-non-sticky .bx--overflow-menu,
-.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--overflow-menu:focus,
-.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--overflow-menu[aria-expanded=true] {
+.c4p--datagrid .c4p--datagrid__carbon-row:hover .c4p--datagrid__actions-column-cell-non-sticky .bx--btn--icon-only,
+.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--btn--icon-only:focus,
+.c4p--datagrid .c4p--datagrid__carbon-row .c4p--datagrid__actions-column-cell-non-sticky .bx--btn--icon-only[aria-expanded=true] {
   opacity: 1;
 }
 

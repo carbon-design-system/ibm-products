@@ -32,6 +32,7 @@ export default {
 const defaultStoryProps = {
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
+  illustrationDescription: 'Test alt text',
 };
 
 const Template = (args) => {
@@ -41,7 +42,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-    illustrationDescription: 'Test alt text',
   },
 });
 
@@ -49,14 +49,12 @@ export const WithDarkModeIllustration = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
     illustrationTheme: 'dark',
-    illustrationDescription: 'Test alt text',
   },
 });
 
 export const withAction = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-    illustrationDescription: 'Test alt text',
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
@@ -67,7 +65,6 @@ export const withAction = prepareStory(Template, {
 export const withActionIconButton = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-    illustrationDescription: 'Test alt text',
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
@@ -80,7 +77,6 @@ export const withActionIconButton = prepareStory(Template, {
 export const withLink = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-    illustrationDescription: 'Test alt text',
     link: {
       text: 'View documentation',
       href: 'https://www.carbondesignsystem.com',

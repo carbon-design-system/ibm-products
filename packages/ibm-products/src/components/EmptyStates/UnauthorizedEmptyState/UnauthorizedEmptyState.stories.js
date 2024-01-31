@@ -46,6 +46,7 @@ export default {
 const defaultStoryProps = {
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
+  illustrationDescription: 'Test alt text',
 };
 
 const Template = (args) => {
@@ -55,7 +56,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultStoryProps,
-    illustrationDescription: 'Test alt text',
   },
 });
 

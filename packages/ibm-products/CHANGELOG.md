@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.22.0...@carbon/ibm-products@2.23.0) (2024-01-31)
+
+
+### Bug Fixes
+
+* side panel and tearsheet fixes ([#4183](https://github.com/carbon-design-system/ibm-products/issues/4183)) ([ee0f3ed](https://github.com/carbon-design-system/ibm-products/commit/ee0f3ed5a2f1ce10aa9850d13854bcf37d07d79a))
+
+
+### Features
+
+* **Datagrid:** add ai slug support to col headers ([#4163](https://github.com/carbon-design-system/ibm-products/issues/4163)) ([f0b17e2](https://github.com/carbon-design-system/ibm-products/commit/f0b17e284ce38157bdd08543c962fb43f4090ad7))
+* **Datagrid:** add expand icon button in filter summary ([#4030](https://github.com/carbon-design-system/ibm-products/issues/4030)) ([bc7641f](https://github.com/carbon-design-system/ibm-products/commit/bc7641f6cab65a1a1d7f759a36185e14f64ad224))
+
+
+
+
+
+# [2.22.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.21.0...@carbon/ibm-products@2.22.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* close filter flyout on cancel ([#4142](https://github.com/carbon-design-system/ibm-products/issues/4142)) ([d5dc4e7](https://github.com/carbon-design-system/ibm-products/commit/d5dc4e75c9e54a84854010579b62e25efeaf0a55))
+* **Datagrid:** fix placement of pagination when used with filter panel ([#4152](https://github.com/carbon-design-system/ibm-products/issues/4152)) ([d486005](https://github.com/carbon-design-system/ibm-products/commit/d4860054d31a0a3bbc9e0e1440402fdb8690e8bb))
+* **Datagrid:** resolve useRowIsMouseOver issue ([#4061](https://github.com/carbon-design-system/ibm-products/issues/4061)) ([b3166a1](https://github.com/carbon-design-system/ibm-products/commit/b3166a174e6c6665d6a4b9f407bf1e010477d7c7))
+* **TagSet:** close tag set overflow upon displayed tag `onClose` being called ([#3997](https://github.com/carbon-design-system/ibm-products/issues/3997)) ([56c8bb2](https://github.com/carbon-design-system/ibm-products/commit/56c8bb2f21f85b07c4ba950e6db6c36e3f0c0b9a))
+
+
+### Features
+
+* **DelimitedList:** new component DelimitedList ([#4069](https://github.com/carbon-design-system/ibm-products/issues/4069)) ([2e60709](https://github.com/carbon-design-system/ibm-products/commit/2e60709976b08718ec437890e9721e9a1b83500c)), closes [#4047](https://github.com/carbon-design-system/ibm-products/issues/4047)
+* update ai-gradient to phase 2 spec ([#4145](https://github.com/carbon-design-system/ibm-products/issues/4145)) ([4e51d13](https://github.com/carbon-design-system/ibm-products/commit/4e51d132ae60b7aa154eaa433b1a58cdd98fbca2))
+
+
+
+
+
+# [2.21.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.20.0...@carbon/ibm-products@2.21.0) (2024-01-23)
+
+
+### Bug Fixes
+
+* **DataGrid:** nested rows on click on child row ([#4055](https://github.com/carbon-design-system/ibm-products/issues/4055)) ([d6bcf02](https://github.com/carbon-design-system/ibm-products/commit/d6bcf02a37113da8062006b50d43c5f50ad66e84))
+* datatable cell accessibility adjustment ([#4046](https://github.com/carbon-design-system/ibm-products/issues/4046)) ([a359d7f](https://github.com/carbon-design-system/ibm-products/commit/a359d7fc8bd9b4fca470c971151ebab93cc5753f))
+* remove unnecessary datagrid roles ([#4072](https://github.com/carbon-design-system/ibm-products/issues/4072)) ([2b09059](https://github.com/carbon-design-system/ibm-products/commit/2b09059e8f9cd8e2f4a98be063bbac7ee0e1e394))
+* update Carbon 11 compatible versions to latest ([#4049](https://github.com/carbon-design-system/ibm-products/issues/4049)) ([484e00c](https://github.com/carbon-design-system/ibm-products/commit/484e00c29732922fa62f4489322250c27fde0c06))
+* update generate script ([#4063](https://github.com/carbon-design-system/ibm-products/issues/4063)) ([c284f25](https://github.com/carbon-design-system/ibm-products/commit/c284f25ce1c5eb4ce357cc3e26f84219c50502bd))
+
+
+### Features
+
+* **Datagrid:** add support for initially expanded nested rows ([#4088](https://github.com/carbon-design-system/ibm-products/issues/4088)) ([58ea07f](https://github.com/carbon-design-system/ibm-products/commit/58ea07f7743b8385b84ee9892bc35f720f5c5c9f))
+* **Tearsheet:** support aria-label ([#4130](https://github.com/carbon-design-system/ibm-products/issues/4130)) ([01d8f56](https://github.com/carbon-design-system/ibm-products/commit/01d8f56b1f75b309cfbfdc763065d88e54bfa9e1))
+
+
+
+
+
 # [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.19.2...@carbon/ibm-products@2.20.0) (2024-01-16)
 
 

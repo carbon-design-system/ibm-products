@@ -201,7 +201,7 @@ describe(name, () => {
       <NotFoundEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    rerender(<NotFoundEmptyState {...defaultProps} />);
+    rerender(<NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 

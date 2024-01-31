@@ -144,28 +144,11 @@ function getRollupConfig(input, rootDir, outDir) {
       }),
       babel(babelConfig),
       stripBanner(),
-      // {
-      //   transform(_code, id) {
-      //     // Make sure to mark feature-flags.js as having side-effects to make
-      //     // sure it gets included in the final bundle
-      //     if (id === path.join(__dirname, '..', 'src', 'feature-flags.js')) {
-      //       return {
-      //         moduleSideEffects: true,
-      //       };
-      //     }
-      //   },
-      // },
     ],
   };
 }
 
-build()
-  .then(() => {
-    console.log(
-      '************************************\nCOMPLETE\n************************************'
-    );
-  })
-  .catch((error) => {
-    console.log(error);
-    process.exit(1);
-  });
+build().catch((error) => {
+  console.log(error);
+  process.exit(1);
+});

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { merge } from 'webpack-merge';
-import { dirname, join, resolve } from 'path';
+const { merge } = require('webpack-merge');
+const { dirname, join, resolve } = require('path');
 
 module.exports = {
   addons: [

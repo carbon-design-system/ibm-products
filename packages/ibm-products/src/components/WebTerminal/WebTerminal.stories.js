@@ -22,7 +22,7 @@ import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminalProvider } from './hooks';
 
 import styles from './_storybook-styles.scss';
-import DocsPage from './WebTerminal.mdx';
+import DocsPage from './WebTerminal.docs-page';
 
 const actions = [
   {

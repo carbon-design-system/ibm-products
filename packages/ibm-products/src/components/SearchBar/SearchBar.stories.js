@@ -35,27 +35,48 @@ export default {
   },
 };
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
-const Template = ({...args}) => {
-  return (
-    <SearchBar
-      {...args}
-      onChange={(newVal) => action('onChange')(newVal.value)}
-    />
-  );
+const scopes = [
+  {
+    id: 'scope-2',
+    text: 'Scope 2',
+  },
+  {
+    id: 'scope-1',
+    text: 'Scope 1',
+  },
+  {
+    id: 'scope-3',
+    text: 'Scope 3',
+  },
+];
+
+const defaultProps = {
+  clearButtonLabelText: 'Clear',
+  labelText: 'Label Text',
+  placeHolderText: 'Search...',
+  submitLabel: 'Search',
+  onChange: (newVal) => action('onChange')(newVal),
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
-export const searchBar = prepareStory(Template, {
+const DefaultTemplate = ({ ...args }) => {
+  return <SearchBar {...args} />;
+};
+
+const ScopesTemplate = ({ ...args }) => {
+  return <SearchBar {...args} />;
+};
+
+export const Default = prepareStory(DefaultTemplate, {
   args: {
-    clearButtonLabelText: 'Clear',
-    labelText: 'Label Text',
-    placeHolderText: 'Search...',
-    submitLabel: 'Search'
+    ...defaultProps,
+  },
+});
+
+export const Scopes = prepareStory(ScopesTemplate, {
+  args: {
+    ...defaultProps,
+    scopes,
+    scopesTypeLabel: 'Scopes',
+    scopeToString: (item) => (item ? item.text : ''),
   },
 });

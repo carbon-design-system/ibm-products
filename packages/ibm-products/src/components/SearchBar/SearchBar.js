@@ -37,10 +37,8 @@ const componentName = 'SearchBar';
 const defaults = {
   onSubmit: () => {},
   onChange: () => {},
-  scopeToString: () => {},
   scopes: [],
   selectedScopes: [],
-  titleText: 'Scopes multiselect',
   hideScopesLabel: true,
 };
 
@@ -58,13 +56,12 @@ export let SearchBar = React.forwardRef(
       onChange = defaults.onChange,
       onSubmit = defaults.onSubmit,
       placeHolderText,
-      scopeToString = defaults.scopeToString,
+      scopeToString,
       scopes = defaults.scopes,
       scopesTypeLabel,
       selectedScopes = defaults.selectedScopes,
       sortItems,
       submitLabel,
-      titleText = defaults.titleText,
       translateWithId,
       value,
 
@@ -105,7 +102,7 @@ export let SearchBar = React.forwardRef(
     const handleSearchScopeChange = ({ selectedItems }) => {
       onChange({
         selectedScopes: selectedItems,
-        value: value,
+        value: text,
       });
     };
 
@@ -147,7 +144,7 @@ export let SearchBar = React.forwardRef(
             itemToString={scopeToString}
             translateWithId={translateWithId}
             sortItems={sortItems}
-            titleText={titleText}
+            size="lg"
           />
         ) : null}
         <Search

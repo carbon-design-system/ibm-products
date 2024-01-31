@@ -65,6 +65,7 @@ const defaultProps = {
   placeHolderText: 'Search...',
   submitLabel: 'Search',
   onChange: (newVal) => action('onChange')(newVal),
+  onSubmit: (newVal) => action('onSubmit')(newVal),
 };
 
 const DefaultTemplate = ({ ...args }) => {
@@ -81,11 +82,38 @@ export const Default = prepareStory(DefaultTemplate, {
   },
 });
 
+export const InitialValue = prepareStory(DefaultTemplate, {
+  args: {
+    ...defaultProps,
+    value: 'Initial value',
+  },
+});
+
 export const Scopes = prepareStory(ScopesTemplate, {
   args: {
     ...defaultProps,
     scopes,
     scopesTypeLabel: 'Scopes',
+    scopeToString: (item) => (item ? item.text : ''),
+  },
+});
+
+export const UnsortedScopes = prepareStory(ScopesTemplate, {
+  args: {
+    ...defaultProps,
+    scopes,
+    scopesTypeLabel: 'Scopes',
+    sortItems: (items) => items,
+    scopeToString: (item) => (item ? item.text : ''),
+  },
+});
+
+export const SelectedScopes = prepareStory(DefaultTemplate, {
+  args: {
+    ...defaultProps,
+    scopes,
+    scopesTypeLabel: 'Scopes',
+    selectedScopes: [scopes[0]],
     scopeToString: (item) => (item ? item.text : ''),
   },
 });

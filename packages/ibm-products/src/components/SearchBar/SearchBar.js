@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -56,9 +56,9 @@ export let SearchBar = React.forwardRef(
       onChange = defaults.onChange,
       onSubmit = defaults.onSubmit,
       placeHolderText,
-      scopeToString,
       scopes = defaults.scopes,
       scopesTypeLabel,
+      scopeToString,
       selectedScopes = defaults.selectedScopes,
       sortItems,
       submitLabel,
@@ -70,7 +70,7 @@ export let SearchBar = React.forwardRef(
     },
     ref
   ) => {
-    const [text, setText] = useState(value);
+    const [text, setText] = useState(value || '');
     const [isInputDirty, setIsInputDirty] = useState(false);
 
     useEffect(() => {

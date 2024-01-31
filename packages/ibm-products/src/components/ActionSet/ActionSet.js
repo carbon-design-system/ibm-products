@@ -85,6 +85,20 @@ const defaults = {
   size: 'md',
 };
 
+// Current
+// Single full width up to medium
+// Double 50% up to a value larger than Flyout (642px, 40.125rem)
+// Triple 25% (max 232px)
+// Quad 25% (max 232px)
+
+// Proposed
+// Double stacked if < 25rem
+// Double 50% > 25rem && < 45rem
+// Triple stacked if < 35rem
+// Triple 25% max 14.5rem
+// Quad stacked if < 45 rem
+// Quad 25% mas 14.5rem
+
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
  * of prop values and applying some layout rules. When the size is 'sm'
@@ -137,35 +151,38 @@ export const ActionSet = React.forwardRef(
     );
 
     return (
-      <ButtonSet
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass,
-          className,
+      <div className={`${blockClass}__container`}>
+        <ButtonSet
           {
-            [`${blockClass}--row-single`]: !stacking && buttons.length === 1,
-            [`${blockClass}--row-double`]: !stacking && buttons.length === 2,
-            [`${blockClass}--row-triple`]: !stacking && buttons.length === 3,
-            [`${blockClass}--row-quadruple`]: !stacking && buttons.length >= 4,
-            [`${blockClass}--stacking`]: stacking,
-          },
-          `${blockClass}--${size}`
-        )}
-        ref={ref}
-        role="presentation"
-        stacked={stacking}
-      >
-        {buttons.map((action, index) => (
-          <ActionSetButton
-            key={action.key || index}
-            {...action}
-            size={buttonSize}
-          />
-        ))}
-      </ButtonSet>
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(
+            blockClass,
+            className,
+            {
+              [`${blockClass}--row-single`]: !stacking && buttons.length === 1,
+              [`${blockClass}--row-double`]: !stacking && buttons.length === 2,
+              [`${blockClass}--row-triple`]: !stacking && buttons.length === 3,
+              [`${blockClass}--row-quadruple`]:
+                !stacking && buttons.length >= 4,
+              [`${blockClass}--stacking`]: stacking,
+            },
+            `${blockClass}--${size}`
+          )}
+          ref={ref}
+          role="presentation"
+          stacked={stacking}
+        >
+          {buttons.map((action, index) => (
+            <ActionSetButton
+              key={action.key || index}
+              {...action}
+              size={buttonSize}
+            />
+          ))}
+        </ButtonSet>
+      </div>
     );
   }
 );

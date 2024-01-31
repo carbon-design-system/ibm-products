@@ -40,7 +40,7 @@ export default {
       mapping: actionsMapping({}, action),
     },
     containerWidth: {
-      control: { type: 'range', min: 150, max: 800, step: 10 },
+      control: { type: 'range', min: 150, max: 1600, step: 10 },
     },
   },
   decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],

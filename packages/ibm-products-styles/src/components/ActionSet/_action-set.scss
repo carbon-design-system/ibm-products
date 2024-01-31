@@ -12,9 +12,75 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 @use '../../global/styles/project-settings' as c4p-settings;
+@use '../SidePanel/side-panel-variables' as spv;
+@use 'sass:map';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
+
+@mixin action-set-column() {
+  --flex-direction: column;
+
+  .#{$action-set-block-class}__action-button {
+    width: 100%;
+    max-width: none;
+    flex: initial;
+  }
+}
+
+@mixin action-set-layout() {
+  --flex-direction: row;
+
+  /* for actions container query - note this changes the size calculation */
+  container-name: action-set;
+  container-type: inline-size;
+
+  .#{$action-set-block-class} {
+    flex-direction: var(--flex-direction);
+  }
+
+  .#{$action-set-block-class}.#{$action-set-block-class} // extra classes needed for specificity
+    .#{$action-set-block-class}__action-button {
+    /* stylelint-disable-next-line */
+    max-width: to-rem(232px);
+    /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+    flex: 0 1 25%;
+  }
+
+  .#{$action-set-block-class}.#{$action-set-block-class}
+    .#{$action-set-block-class}__action-button--ghost {
+    max-width: none;
+    flex: 1 1 25%;
+  }
+
+  @container (width <= 45rem) {
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-quadruple {
+      @include action-set-column();
+    }
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-double {
+      max-width: none;
+      flex-basis: 50%;
+    }
+  }
+
+  @container (width <= 35rem) {
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-triple {
+      @include action-set-column();
+    }
+  }
+
+  @container (width <= 25rem) {
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-double {
+      @include action-set-column();
+    }
+  }
+}
+
+.#{$action-set-block-class}__container {
+  @include action-set-layout();
+
+  width: 100%;
+}
 
 .#{$action-set-block-class} {
   align-items: stretch;
@@ -35,86 +101,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 }
 
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive,
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn {
-  max-width: none;
-}
-
 .#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
   .#{$action-set-block-class}__action-button--ghost {
   padding-left: $spacing-07;
-}
-
-// For row-single in medium,
-// or for ghosts in row-single,
-// buttons are 100% width
-.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--md
-  .#{$action-set-block-class}__action-button,
-.#{$action-set-block-class}.#{$action-set-block-class}--row-single
-  .#{$action-set-block-class}__action-button--ghost {
-  flex: 0 0 100%;
-}
-
-// For ghosts in row-double,
-// buttons are 75% width and expand to use any remaining space
-.#{$action-set-block-class}.#{$action-set-block-class}--row-double
-  .#{$action-set-block-class}__action-button--ghost {
-  flex: 1 1 75%;
-}
-
-// For row-single in large (non-ghost),
-// or row-double in medium or large,
-// buttons are 50% width
-.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--lg
-  .#{$action-set-block-class}__action-button:not(
-    .#{$action-set-block-class}__action-button--ghost
-  ),
-.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--md
-  .#{$action-set-block-class}__action-button,
-.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--lg
-  .#{$action-set-block-class}__action-button,
-.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
-  .#{$action-set-block-class}__action-button--ghost {
-  flex: 0 1 50%;
-}
-
-// For ghosts in row-triple,
-// buttons are 50% width and expand to use any remaining space
-.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
-  .#{$action-set-block-class}__action-button--ghost {
-  flex: 1 1 50%;
-}
-
-// For row-triple in large (non-ghost),
-// or any non-ghosts in extra large or 2xl,
-// or row-quadruple (non-ghost),
-// buttons are 25% width with a 2xl of 232px
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
-  .#{$action-set-block-class}__action-button:not(
-    .#{$action-set-block-class}__action-button--ghost
-  ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--xl
-  .#{$action-set-block-class}__action-button:not(
-    .#{$action-set-block-class}__action-button--ghost
-  ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--2xl
-  .#{$action-set-block-class}__action-button:not(
-    .#{$action-set-block-class}__action-button--ghost
-  ),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
-  .#{$action-set-block-class}__action-button:not(
-    .#{$action-set-block-class}__action-button--ghost
-  ) {
-  /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
-  max-width: to-rem(232px);
-  flex: 0 1 25%;
-}
-
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
-  .#{$action-set-block-class}__action-button--ghost {
-  flex: 1 1 25%;
 }
 
 .#{$action-set-block-class}

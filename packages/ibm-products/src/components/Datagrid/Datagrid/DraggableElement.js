@@ -51,7 +51,7 @@ const DraggableElement = ({
   );
 
   const style = {
-    transform: !disabled ? CSS.Transform.toString(transform): {},
+    transform: !disabled ? CSS.Transform.toString(transform) : {},
     transition,
   };
 

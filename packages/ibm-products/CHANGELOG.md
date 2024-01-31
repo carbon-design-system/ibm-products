@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.22.0...@carbon/ibm-products@2.23.0) (2024-01-31)
+
+
+### Bug Fixes
+
+* side panel and tearsheet fixes ([#4183](https://github.com/carbon-design-system/ibm-products/issues/4183)) ([ee0f3ed](https://github.com/carbon-design-system/ibm-products/commit/ee0f3ed5a2f1ce10aa9850d13854bcf37d07d79a))
+
+
+### Features
+
+* **Datagrid:** add ai slug support to col headers ([#4163](https://github.com/carbon-design-system/ibm-products/issues/4163)) ([f0b17e2](https://github.com/carbon-design-system/ibm-products/commit/f0b17e284ce38157bdd08543c962fb43f4090ad7))
+* **Datagrid:** add expand icon button in filter summary ([#4030](https://github.com/carbon-design-system/ibm-products/issues/4030)) ([bc7641f](https://github.com/carbon-design-system/ibm-products/commit/bc7641f6cab65a1a1d7f759a36185e14f64ad224))
+
+
+
+
+
 # [2.22.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.21.0...@carbon/ibm-products@2.22.0) (2024-01-30)
 
 

@@ -182,6 +182,12 @@
     overflow-x: auto;
   }
 
+  .#{$block-class}-filter-panel
+    + .#{$block-class}__table-container-inner
+    .#{$carbon-prefix}--data-table-content {
+    height: fit-content;
+  }
+
   table.#{$block-class}__table-simple {
     display: flex;
     overflow: auto;

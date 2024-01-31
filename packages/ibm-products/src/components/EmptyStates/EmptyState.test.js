@@ -176,6 +176,8 @@ describe(name, () => {
     );
   });
 
+  
+
   it('should render the NoTagsEmptyState component', async () => {
     const { container, rerender } = render(
       <NoTagsEmptyState {...defaultProps} />
@@ -253,9 +255,11 @@ describe(name, () => {
   });
 
   it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', async () =>
+
     expectError(required('illustrationDescription', 'EmptyState'), () => {
       render(
-        <EmptyState {...defaultProps} illustration={CustomIllustration} />
+        <EmptyState  title= 'Empty state title'
+        subtitle= 'Empty state subtitle' illustration={CustomIllustration} />
       );
     }));
 });

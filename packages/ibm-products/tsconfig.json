@@ -2,7 +2,7 @@
   "extends": "typescript-config-carbon/tsconfig.base.json",
   "compilerOptions": {
     // TODO: Turn back on once stricter typings for internal utilities are complete
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
   "include": ["src/**/*"]
 }

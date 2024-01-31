@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 
 import {
   getStoryTitle,
@@ -38,12 +38,11 @@ export default {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const Template = (args) => {
+const Template = ({...args}) => {
   return (
     <SearchBar
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
       {...args}
+      onChange={(newVal) => action('onChange')(newVal.value)}
     />
   );
 };
@@ -54,7 +53,9 @@ const Template = (args) => {
  */
 export const searchBar = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#SearchBar-args
-    children: 'hello, world',
+    clearButtonLabelText: 'Clear',
+    labelText: 'Label Text',
+    placeHolderText: 'Search...',
+    submitLabel: 'Search'
   },
 });

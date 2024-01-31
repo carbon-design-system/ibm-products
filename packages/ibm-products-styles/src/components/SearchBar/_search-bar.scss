@@ -6,13 +6,19 @@
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/react/scss/colors' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
+@use '@carbon/styles/scss/utilities' as *;
+
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
-// or
-// TODO: @use '@carbon/react/scss/grid';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/themes/scss/tokens';
 
 // SearchBar uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by SearchBar
@@ -20,6 +26,6 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
+.#{$block-class} {
+  display: flex;
+}

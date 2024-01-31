@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
+import { Search, Button, MultiSelect } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--search-bar`;
@@ -34,48 +34,142 @@ const componentName = 'SearchBar';
 // or assumption when a prop is not supplied.
 
 // Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
+const defaults = {
+  onSubmit: () => {},
+  onChange: () => {},
+  scopeToString: () => {},
+  scopes: [],
+  selectedScopes: [],
+  titleText: 'Scopes multiselect',
+  hideScopesLabel: true,
+};
 
 /**
- * TODO: A description of the component.
+ * Search bar with input field and search button
  */
 export let SearchBar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
       className,
-      /* TODO: add other props for SearchBar, with default values if needed */
+      clearButtonLabelText,
+      hideScopesLabel = defaults.hideScopesLabel,
+      labelText,
+      onChange = defaults.onChange,
+      onSubmit = defaults.onSubmit,
+      placeHolderText,
+      scopeToString = defaults.scopeToString,
+      scopes = defaults.scopes,
+      scopesTypeLabel,
+      selectedScopes = defaults.selectedScopes,
+      sortItems,
+      submitLabel,
+      titleText = defaults.titleText,
+      translateWithId,
+      value,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    const [text, setText] = useState(value);
+    const [isInputDirty, setIsInputDirty] = useState(false);
+
+    useEffect(() => {
+      if (!text || !text.length) {
+        setIsInputDirty(false);
+      } else {
+        setIsInputDirty(true);
+      }
+    }, [text]);
+    /**
+     * Handler for form submit that calls onSubmit prop.
+     * @param {Event} event Submit event generated.
+     */
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const eventObject = { value: value };
+
+      if (scopes.length > 0) {
+        eventObject.selectedScopes = selectedScopes;
+      }
+
+      onSubmit(eventObject);
+    };
+
+    /**
+     * Handler for when scope selection changes that calls onChangeProp.
+     * @param {{selectedItems: Array<any>}} {selectedItems} Object containing array of selected items.
+     */
+    const handleSearchScopeChange = ({ selectedItems }) => {
+      onChange({
+        selectedScopes: selectedItems,
+        value: value,
+      });
+    };
+
+    /**
+     * Handler for search input changes that calls onChange prop.
+     * @param {KeyboardEvent} event Event object from input change.
+     */
+    const handleInputChange = (event) => {
+      const { value } = event.target;
+      const eventObject = { value };
+
+      if (scopes.length > 0) {
+        eventObject.selectedScopes = selectedScopes;
+      }
+
+      setText(value);
+      onChange(eventObject);
+    };
+
     return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
+      <form
+        {...rest}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
+        className={cx(blockClass, className, {
+          [`${blockClass}--hide-scopes-label`]: hideScopesLabel,
+        })}
+        onSubmit={handleSubmit}
       >
-        {children}
-      </div>
+        {scopes?.length ? (
+          <MultiSelect
+            id={`${blockClass}__multi-select`}
+            name="search-scopes"
+            className={`${blockClass}__scopes`}
+            label={scopesTypeLabel}
+            onChange={handleSearchScopeChange}
+            initialSelectedItems={selectedScopes}
+            items={scopes}
+            itemToString={scopeToString}
+            translateWithId={translateWithId}
+            sortItems={sortItems}
+            titleText={titleText}
+          />
+        ) : null}
+        <Search
+          className={`${blockClass}__input`}
+          closeButtonLabelText={clearButtonLabelText}
+          labelText={labelText}
+          name="search-input"
+          onChange={handleInputChange}
+          placeholder={placeHolderText}
+          value={text}
+          size="lg"
+        />
+        <Button
+          name="search-submit"
+          kind="primary"
+          type="submit"
+          className={`${blockClass}__submit`}
+          disabled={!isInputDirty}
+        >
+          {submitLabel}
+        </Button>
+      </form>
     );
   }
 );
@@ -87,19 +181,83 @@ SearchBar = pkg.checkComponentEnabled(SearchBar, componentName);
 // is used in preference to relying on function.name.
 SearchBar.displayName = componentName;
 
+const conditionalScopePropValidator = (
+  props,
+  propName,
+  componentName,
+  ...rest
+) => {
+  if (props.scopes && props.scopes.length > 0 && !props[propName]) {
+    return new Error(
+      `Required \`${propName}\` when \`scopes\` prop type is supplied to \`${componentName}\`. Validation failed.`
+    );
+  }
+
+  return PropTypes.string(props, propName, componentName, ...rest);
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 SearchBar.propTypes = {
-  /**
-   * Provide the contents of the SearchBar.
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
+  /** @type {string} Optional additional class name. */
   className: PropTypes.string,
 
-  /* TODO: add types and DocGen for all props. */
+  /** @type {string} The label text for the search text input. */
+  clearButtonLabelText: PropTypes.string.isRequired,
+
+  /**
+   * Whether or not the scopes MultiSelect label is visually hidden.
+   */
+  hideScopesLabel: PropTypes.bool,
+
+  /** @type {string} The label text for the search text input. */
+  labelText: PropTypes.string.isRequired,
+
+  /** @type {Function} Function handler for when the user changes their query search. */
+  onChange: PropTypes.func,
+
+  /** @type {Function} Function handler for when the user submits a search. */
+  onSubmit: PropTypes.func,
+
+  /** @type {string} Placeholder text to be displayed in the search input. */
+  placeHolderText: PropTypes.string.isRequired,
+
+  /** @type {Function} Function to get the text for each scope to display in dropdown. */
+  scopeToString: PropTypes.func,
+
+  /** @type {Array<any>} Array of allowed search scopes. */
+  scopes: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  ),
+
+  /** @type {string} The name text for the search scope type. */
+  // eslint-disable-next-line react/require-default-props
+  scopesTypeLabel: conditionalScopePropValidator,
+
+  /** @type {Array<any> Array of initially selected search scopes. */
+  selectedScopes: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  ),
+
+  /**
+   * Optional custom sorting algorithm for an array of scope items.
+   * By default, scope items are sorted in ascending alphabetical order,
+   * with "selected" items moved to the start of the scope items array.
+   */
+  sortItems: PropTypes.func, // eslint-disable-line react/require-default-props
+
+  /** @type {string} The label text for the search submit button. */
+  submitLabel: PropTypes.string.isRequired,
+
+  /**
+   * Provide accessible label text for the scopes MultiSelect.
+   */
+  titleText: PropTypes.string,
+
+  /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
+  translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
+
+  /** @type {string} Search query value. */
+  value: PropTypes.string,
 };

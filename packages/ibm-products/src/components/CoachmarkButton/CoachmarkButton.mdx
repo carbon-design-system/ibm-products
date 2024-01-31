@@ -1,0 +1,55 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkButton } from '.';
+
+# CoachmarkButton
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+CoachmarkButton components use a ghost variant Carbon button specifically
+designed to be used in the target prop of a Coachmark component
+[floating](https://pages.github.ibm.com/cdai-design/pal/components/onboarding/coachmark/usage#floating)
+variant.
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas>
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
+  </div>
+</Canvas>
+
+## Code sample
+
+```jsx
+<Coachmark
+  theme={'light'}
+  target={
+    <CoachmarkButton
+      kind="tertiary"
+      label="Show information"
+      size="md"
+      renderIcon={Crossroads}
+      label="Click Me"
+      className="myButton"
+    />
+  }
+>
+  ...
+</Coachmark>
+```
+
+## Component API
+
+<ArgsTable />

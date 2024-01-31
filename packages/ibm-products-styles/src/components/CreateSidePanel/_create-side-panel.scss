@@ -24,25 +24,6 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   padding-right: calc(20% - #{$spacing-05});
 }
 
-@each $size, $value in side-panel-vars.$side-panel-sizes {
-  .#{$create-side-panel-block-class}.#{$side-panel-block-class}__container--#{$size}
-    .#{$side-panel-block-class}__title-text {
-    width: calc(#{$value} - #{$spacing-05});
-    // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
-    margin-bottom: $spacing-02;
-  }
-  .#{$create-side-panel-block-class}.#{$side-panel-block-class}__container--#{$size}
-    .#{$side-panel-block-class}__subtitle-text {
-    width: calc(#{$value} - #{$spacing-05});
-    // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: calc((#{$value} * 0.2) - #{$spacing-05});
-    padding-bottom: $spacing-05;
-    border-bottom: 1px solid $layer-accent-01;
-    color: $text-secondary;
-  }
-}
-
 .#{c4p-settings.$carbon-prefix}--form.#{$create-side-panel-block-class}__form {
   padding-top: $spacing-05;
 }
@@ -70,24 +51,6 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   display: none;
 }
 
-.#{$create-side-panel-block-class}__title {
-  @include type.type-style('heading-03');
-
-  margin-bottom: $spacing-02;
-}
-
-.#{$create-side-panel-block-class}__subtitle {
-  @include type.type-style('body-compact-01');
-
-  margin-bottom: $spacing-03;
+.#{$create-side-panel-block-class} .#{$side-panel-block-class}__subtitle-text {
   color: $text-secondary;
-}
-.#{$side-panel-block-class}
-  .#{$create-side-panel-block-class}__actions-container {
-  position: absolute;
-  z-index: 4;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  margin-bottom: 0;
 }

@@ -54,10 +54,9 @@ export let NoDataEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <NoDataIllustration
-          title={title}
           theme={illustrationTheme}
           size={size}
-          alt={illustrationDescription}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -99,9 +98,9 @@ NoDataEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The alt text for empty state svg images
+   * The alt text for empty state svg images.If not provided , title will be used.
    */
-  illustrationDescription: PropTypes.string.isRequired,
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state illustration theme variations.

@@ -54,10 +54,9 @@ export let NotFoundEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <NotFoundIllustration
-          title={title}
           theme={illustrationTheme}
           size={size}
-          alt={illustrationDescription}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -102,9 +101,9 @@ NotFoundEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The alt text for empty state svg images
+   * The alt text for empty state svg images.If not provided , title will be used.
    */
-  illustrationDescription: PropTypes.string.isRequired,
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state illustration theme variations.

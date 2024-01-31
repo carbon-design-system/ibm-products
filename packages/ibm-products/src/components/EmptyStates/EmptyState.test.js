@@ -255,7 +255,11 @@ describe(name, () => {
   it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () =>
     expectError(required('illustrationDescription', 'EmptyState'), () => {
       render(
-        <EmptyState {...defaultProps} illustration={CustomIllustration} />
+        <EmptyState
+          title="Empty state title"
+          subtitle="Empty state subtitle"
+          illustration={CustomIllustration}
+        />
       );
     }));
 });

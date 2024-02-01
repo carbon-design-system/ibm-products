@@ -141,7 +141,7 @@ export let SearchBar = React.forwardRef(
         <Search
           className={`${blockClass}__input`}
           closeButtonLabelText={clearButtonLabelText}
-          labelText={labelText}
+          labelText={labelText || ''}
           name="search-input"
           onChange={handleInputChange}
           placeholder={placeHolderText}

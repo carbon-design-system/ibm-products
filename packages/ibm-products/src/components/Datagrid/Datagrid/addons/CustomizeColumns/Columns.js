@@ -47,6 +47,7 @@ const Columns = ({
     [columns, setColumnsObject]
   );
 
+  const filteredStickyColumn = columns?.filter((item) => !item.sticky)?.map(item=> item);
   return (
     <div
       className={`${blockClass}__customize-columns-column-list`}
@@ -89,7 +90,7 @@ const Columns = ({
             }
             onChange={() => {
               onSelectColumn(
-                columns,
+                filteredStickyColumn,
                 getVisibleColumnsCount() !== columns.length
               );
             }}

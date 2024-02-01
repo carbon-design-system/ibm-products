@@ -146,16 +146,16 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "npx prettier --cache --write",
-      "npx eslint --fix",
-      "npx cspell"
+      "prettier --cache --write",
+      "eslint",
+      "cspell"
     ],
     "**/*.scss": [
-      "npx prettier --cache --write",
-      "npx stylelint"
+      "prettier --cache --write",
+      "stylelint"
     ],
-    "**/*.md": [
-      "npx prettier --cache --write"
+    "!(*sass).md": [
+      "prettier --cache --write"
     ]
   },
   "dependencies": {

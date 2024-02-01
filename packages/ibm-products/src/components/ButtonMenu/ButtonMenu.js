@@ -15,6 +15,7 @@ import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 import { Button, OverflowMenu } from 'carbon-components-react';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;
@@ -69,7 +70,7 @@ export let ButtonMenu = React.forwardRef(
         )}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
         size={size}
-        ariaLabel={menuAriaLabel ?? label ?? undefined}
+        ariaLabel={menuAriaLabel ?? getNodeTextContent(label) ?? undefined}
         renderIcon={() => (
           <div
             className={cx([

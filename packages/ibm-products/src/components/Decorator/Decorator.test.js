@@ -14,49 +14,99 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { Decorator } from '.';
 
 const blockClass = `${pkg.prefix}--decorator`;
+const blockClassIcon = `${pkg.prefix}--decorator-icon`;
 const componentName = Decorator.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
+const href = 'http://www.ibm.com';
+const label = 'IP';
+const score = 5;
+const scoreTitle = '"Medium" magnitude. Score 5 out of 10';
+const value = '192.168.0.50';
+const valueTitle = 'IP address is 192.168.0.50';
+
+const renderComponent = ({ ...rest } = {}) =>
+  render(<Decorator value={value} data-testid={dataTestId} {...rest} />);
+
 describe(componentName, () => {
-  it.skip('renders a component Decorator', async () => {
-    render(<Decorator> </Decorator>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  it('renders a component Decorator (non-interactive)', async () => {
+    const { container } = renderComponent();
+    const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
+    expect(decorator);
+  });
+
+  it('renders a component Decorator as a link', async () => {
+    renderComponent({ href: href });
+    expect(screen.getByRole('link'));
+  });
+
+  it('renders a component Decorator as one button', async () => {
+    renderComponent({ onClick: () => {} });
+    expect(screen.getAllByRole('button').length).toBe(1);
+  });
+
+  it('renders a component Decorator with two buttons', async () => {
+    renderComponent({ onClickLabel: () => {}, onClickValue: () => {} });
+    expect(screen.getAllByRole('button').length).toBe(2);
+  });
+
+  it('renders a label', async () => {
+    renderComponent({ label: label });
+    screen.getByText(label);
+  });
+
+  it('renders a value', async () => {
+    renderComponent({ value: value });
+    screen.getByText(value);
+  });
+
+  it('renders a score', async () => {
+    renderComponent({ score: score });
+    screen.getByText(scoreTitle);
+  });
+
+  it('does not render the icon', async () => {
+    const { container } = renderComponent({
+      score: score,
+      hideIcon: true,
+    });
+    const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
+    expect(decorator).not.toHaveClass(blockClassIcon);
+  });
+
+  it('renders an alternate title for the value', async () => {
+    renderComponent({ valueTitle: valueTitle });
+    screen.getByTitle(valueTitle);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Decorator> </Decorator>);
+    const { container } = renderComponent();
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
-  it.skip(`renders children`, async () => {
-    render(<Decorator>{children}</Decorator>);
-    screen.getByText(children);
-  });
-
-  it.skip('applies className to the containing node', async () => {
-    render(<Decorator className={className}> </Decorator>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+  it('applies className to the containing node', async () => {
+    const { container } = renderComponent({ className: className });
+    const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
+    expect(decorator).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<Decorator data-testid={dataTestId}> </Decorator>);
+    renderComponent({ className: className });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<Decorator ref={ref}> </Decorator>);
+    renderComponent({ ref: ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<Decorator data-testid={dataTestId}> </Decorator>);
-
+    renderComponent();
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

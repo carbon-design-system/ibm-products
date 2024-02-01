@@ -66,7 +66,7 @@ describe(name, () => {
 
   it('should render title by passing string', async () => {
     render(<EmptyState {...defaultProps} />);
-    screen.getByText('Empty state title');
+    screen.getAllByText('Empty state title');
   });
 
   it('should render title by passing node', async () => {

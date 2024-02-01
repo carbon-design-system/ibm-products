@@ -27,6 +27,7 @@ const defaults = {
     Datagrid: true,
     EditInPlace: true,
     EmptyState: true,
+    EmptyStateV2: true,
     ErrorEmptyState: true,
     ExportModal: true,
     ExpressiveCard: true,
@@ -77,7 +78,7 @@ const defaults = {
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
     DelimitedList: false,
-    
+
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:

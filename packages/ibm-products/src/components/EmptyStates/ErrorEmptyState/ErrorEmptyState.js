@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { ErrorIllustration } from '../assets/ErrorIllustration';
+import ErrorIllustration from '../assets/ErrorIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

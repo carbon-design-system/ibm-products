@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -69,6 +73,7 @@
     "automerge",
     "buildhome",
     "checkmark",
+    "Coachmark",
     "codemods",
     "codesandbox",
     "colindex",
@@ -110,8 +115,8 @@
     "rowgroup",
     "rowheader",
     "rowindex",
-    "scrollend",
     "sbdocs",
+    "scrollend",
     "semibold",
     "serializers",
     "setsize",

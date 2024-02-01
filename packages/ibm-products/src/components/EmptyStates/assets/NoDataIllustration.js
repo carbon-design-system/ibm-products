@@ -187,3 +187,5 @@ NoDataIllustration.propTypes = {
   theme: PropTypes.oneOf(['light', 'dark']),
   title: PropTypes.string,
 };
+
+export default NoDataIllustration;

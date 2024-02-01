@@ -315,19 +315,15 @@ Decorator.propTypes = {
   /**
    * If not defined, it will behave as `display:inline-block`.
    *
-   * If `end` it will append "..." to the `value` if there is not enough
-   * space to display the entire value.
+   * If `end` it will append "..." to the `value` if there is not enough space.
    *
-   * If `start` it will prepend "..." to the `value` if there is not
-   * enough space to display the entire value.
+   * If `start` it will prepend "..." to the `value` if there is not enough space.
    *
    * If `{maxLength, front, back}` it will inject "..." in the middle
    * of the `value` regardless of available space.
    */
-  truncateValue: PropTypes.oneOf([
-    'end',
-    'start',
-    // Properties for midline truncation.
+  truncateValue: PropTypes.oneOfType([
+    PropTypes.oneOf(['end', 'start']),
     PropTypes.shape({
       maxLength: PropTypes.number,
       front: PropTypes.number,
@@ -337,7 +333,7 @@ Decorator.propTypes = {
   /**
    * The value of the data.
    */
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   /**
    * Overrides the default title for the Decorator's value.
    */

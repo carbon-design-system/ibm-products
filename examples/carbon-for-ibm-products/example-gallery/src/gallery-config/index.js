@@ -11,6 +11,13 @@ const defaultOrNot = (item) => item.default || item;
 /* --- import Thumbnails */ import imageAPIKeyModal from './APIKeyModal--thumbnail.png';
 import imageAboutModal from './AboutModal--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
+import imageCoachmark from './Coachmark--thumbnail.png';
+import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
+import imageCoachmarkButton from './CoachmarkButton--thumbnail.png';
+import imageCoachmarkFixed from './CoachmarkFixed--thumbnail.png';
+import imageCoachmarkOverlayElement from './CoachmarkOverlayElement--thumbnail.png';
+import imageCoachmarkOverlayElements from './CoachmarkOverlayElements--thumbnail.png';
+import imageCoachmarkStack from './CoachmarkStack--thumbnail.png';
 import imageCreateFullPage from './CreateFullPage--thumbnail.png';
 import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
@@ -18,6 +25,7 @@ import imageCreateTearsheet from './CreateTearsheet--thumbnail.png';
 import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageDatagrid from './Datagrid--thumbnail.png';
+import imageDelimitedList from './DelimitedList--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
@@ -52,6 +60,41 @@ const config = [
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
   {
+    label: 'Coachmark',
+    directory: 'Coachmark',
+    thumbnail: `url(${imageCoachmark}`,
+  },
+  {
+    label: 'Coachmark-Beacon',
+    directory: 'CoachmarkBeacon',
+    thumbnail: `url(${imageCoachmarkBeacon}`,
+  },
+  {
+    label: 'Coachmark-Button',
+    directory: 'CoachmarkButton',
+    thumbnail: `url(${imageCoachmarkButton}`,
+  },
+  {
+    label: 'Coachmark-Fixed',
+    directory: 'CoachmarkFixed',
+    thumbnail: `url(${imageCoachmarkFixed}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Element',
+    directory: 'CoachmarkOverlayElement',
+    thumbnail: `url(${imageCoachmarkOverlayElement}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Elements',
+    directory: 'CoachmarkOverlayElements',
+    thumbnail: `url(${imageCoachmarkOverlayElements}`,
+  },
+  {
+    label: 'Coachmark-Stack',
+    directory: 'CoachmarkStack',
+    thumbnail: `url(${imageCoachmarkStack}`,
+  },
+  {
     label: 'Create Full Page',
     directory: 'CreateFullPage',
     thumbnail: `url(${imageCreateFullPage}`,
@@ -85,6 +128,11 @@ const config = [
     label: 'Datagrid',
     directory: 'Datagrid',
     thumbnail: `url(${imageDatagrid}`,
+  },
+  {
+    label: 'Delimited-List',
+    directory: 'DelimitedList',
+    thumbnail: `url(${imageDelimitedList}`,
   },
   {
     label: 'EditInPlace',

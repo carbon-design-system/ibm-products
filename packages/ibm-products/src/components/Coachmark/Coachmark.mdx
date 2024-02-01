@@ -1,0 +1,111 @@
+import { Story, ArgsTable, Source, Canvas, Meta } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { Coachmark, CoachmarkFixed } from '..';
+
+<Meta title="Coachmark" component={Coachmark} />
+
+# Coachmark
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Note on theming](#note-on-theming)
+- [Overview](#overview)
+- [Tooltip example usage](#tooltip-example-usage)
+- [Tooltip code sample](#tooltip-code-sample)
+- [Floating example usage](#floating-example-usage)
+- [Floating code sample](#floating-code-sample)
+- [Component API](#component-api)
+
+## Overview
+
+[Coachmarks](https://pages.github.ibm.com/cdai-design/pal/components/onboarding/coachmark/usage)
+are just-in-time messages used to draw a user’s attention to a particular spot,
+and explain new functionality or concepts they might not otherwise notice or
+understand.
+
+**Note:**
+
+- The target prop should always be either a CoachmarkBeacon or a
+  CoachmarkButton.
+- BEACON_KIND, COACHMARK_OVERLAY_KIND, COACHMARK_ALIGNMENT are enums exported as
+  a convenience from Coachmark.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Note on theming
+
+The Coachmark uses the theme prop (e.g., theme='dark') to set the appropriate
+background and font colors for the overlay. Specify a value ('light' or 'dark')
+to display properly within your usage.
+
+## Tooltip example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(Coachmark.displayName, 'tooltip')} />
+  </div>
+</Canvas>
+
+## Tooltip code sample
+
+```jsx
+<Coachmark
+  theme={'light'}
+  target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+</Coachmark>
+```
+
+## Floating example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(Coachmark.displayName, 'floating')} />
+  </div>
+</Canvas>
+
+## Floating code sample
+
+```jsx
+<Coachmark
+  theme={'dark'}
+  align={'bottom'}
+  overlayKind={'floating'}
+  target={
+    <CoachmarkButton
+      kind="tertiary"
+      size="md"
+      label="Show information"
+      renderIcon={Crossroads16}
+    >
+      Click Me
+    </CoachmarkButton>
+  }
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+</Coachmark>
+```
+
+## Component API
+
+<ArgsTable />

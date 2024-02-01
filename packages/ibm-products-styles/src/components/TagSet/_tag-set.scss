@@ -142,7 +142,10 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow}__tag-list {
     display: flex;
     flex-direction: column;
-    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class-overflow}__show-all-tags-link {
+    margin-top: $spacing-03;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag

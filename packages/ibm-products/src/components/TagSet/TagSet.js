@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,6 +30,7 @@ const defaults = {
   measurementOffset: 0,
   overflowAlign: 'bottom',
   overflowType: 'default',
+  onOverflowTagChange: () => {},
 };
 
 export let TagSet = React.forwardRef(
@@ -52,6 +53,7 @@ export let TagSet = React.forwardRef(
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
+      onOverflowTagChange = defaults.onOverflowTagChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -68,6 +70,8 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
+
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
@@ -99,12 +103,26 @@ export let TagSet = React.forwardRef(
       setSizingTags(newSizingTags);
     }, [tags]);
 
+    const handleTagOnClose = useCallback(
+      (onClose, index) => {
+        onClose?.();
+        if (index <= displayCount - 1) {
+          setPopoverOpen(false);
+        }
+      },
+      [displayCount]
+    );
+
     useEffect(() => {
       // create visible and overflow tags
       let newDisplayedTags =
         tags && tags.length > 0
-          ? tags.map(({ label, ...other }, index) => (
-              <Tag {...other} key={`displayed-tag-${index}`}>
+          ? tags.map(({ label, onClose, ...other }, index) => (
+              <Tag
+                {...other}
+                key={`displayed-tag-${index}`}
+                onClose={() => handleTagOnClose(onClose, index)}
+              >
                 {label}
               </Tag>
             ))
@@ -134,9 +152,12 @@ export let TagSet = React.forwardRef(
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
+          popoverOpen={popoverOpen}
+          setPopoverOpen={setPopoverOpen}
         />
       );
 
+      onOverflowTagChange?.(newOverflowTags);
       setDisplayedTags(newDisplayedTags);
     }, [
       displayCount,
@@ -145,6 +166,9 @@ export let TagSet = React.forwardRef(
       overflowType,
       showAllTagsLabel,
       tags,
+      onOverflowTagChange,
+      popoverOpen,
+      handleTagOnClose,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -348,6 +372,10 @@ TagSet.propTypes = {
    * display tags in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * Handler to get overflow tags
+   */
+  onOverflowTagChange: PropTypes.func,
   /**
    * overflowAlign from the standard tooltip. Default center.
    */

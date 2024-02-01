@@ -6,7 +6,7 @@
  */
 import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 
-export const useResizeObserver = (ref, callback) => {
+export const useResizeObserver = (ref, callback, deps = []) => {
   const [width, setWidth] = useState(-1);
   const [height, setHeight] = useState(-1);
   const entriesToHandle = useRef(null);
@@ -41,7 +41,8 @@ export const useResizeObserver = (ref, callback) => {
       return;
     }
     getInitialSize();
-  }, [width, height, ref]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, ref.current, ...deps]);
 
   useLayoutEffect(() => {
     if (!ref?.current) {
@@ -79,6 +80,6 @@ export const useResizeObserver = (ref, callback) => {
       observer = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref.current]);
+  }, [ref.current, ...deps]);
   return { width, height };
 };

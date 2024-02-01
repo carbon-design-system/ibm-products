@@ -1,0 +1,12 @@
+{
+  "label": "Coachmark-Overlay-Element",
+  "package-config": {
+    "flags": {
+      "component": {
+        "CoachmarkOverlayElement": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

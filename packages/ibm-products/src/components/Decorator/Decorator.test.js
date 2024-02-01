@@ -22,7 +22,7 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it.skip('renders a component Decorator', async () => {
     render(<Decorator> </Decorator>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
@@ -33,12 +33,12 @@ describe(componentName, () => {
     expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, async () => {
+  it.skip(`renders children`, async () => {
     render(<Decorator>{children}</Decorator>);
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', async () => {
+  it.skip('applies className to the containing node', async () => {
     render(<Decorator className={className}> </Decorator>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });

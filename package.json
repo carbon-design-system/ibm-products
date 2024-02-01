@@ -25,7 +25,7 @@
     "clean:finally:files": "rimraf coverage node_modules results",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn run-all --no-sort clean",
-    "format": "prettier ./packages/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
+    "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:js": "eslint packages --fix",

@@ -151,7 +151,7 @@
     ],
     "**/*.scss": [
       "prettier --cache --write",
-      "stylelint"
+      "stylelint --allow-empty-input"
     ],
     "!(*sass).md": [
       "prettier --cache --write"

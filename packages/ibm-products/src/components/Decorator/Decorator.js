@@ -90,15 +90,12 @@ export let Decorator = React.forwardRef(
 
     // These class names apply to all types of Decorator.
     const classNames = useMemo(() => {
-      return cx(
-        blockClass,
-        className,
-        `${blockClass}--${theme}`,
-        small && `${blockClass}--sm`,
-        truncateValue === 'end' && `${blockClass}--truncate-end`,
-        truncateValue === 'start' && `${blockClass}--truncate-start`,
-        truncateValue?.maxLength && `${blockClass}--truncate-midline`
-      );
+      return cx(blockClass, className, `${blockClass}--${theme}`, {
+        [`${blockClass}--sm`]: small,
+        [`${blockClass}--truncate-end`]: truncateValue === 'end',
+        [`${blockClass}--truncate-start`]: truncateValue === 'start',
+        [`${blockClass}--truncate-midline`]: truncateValue?.maxLength,
+      });
     }, [className, small, theme, truncateValue]);
 
     // These properties apply to all <DecoratorIcons>.

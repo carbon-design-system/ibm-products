@@ -105,25 +105,25 @@ const TemplateTruncation = (args) => {
         No truncation applied.
         <br />
         <Decorator {...args} />
-        <div className={`${storyClass}__blue-box`}>
+        <span className={`${storyClass}__blue-box`}>
           <Decorator {...args} />
-        </div>
+        </span>
       </p>
       <p>
         <strong>{'truncate="end"'}</strong>
         <br />
         <Decorator {...args} truncateValue="end" />
-        <div className={`${storyClass}__blue-box`}>
+        <span className={`${storyClass}__blue-box`}>
           <Decorator {...args} truncateValue="end" />
-        </div>
+        </span>
       </p>
       <p>
         <strong>{'truncate="start"'}</strong>
         <br />
         <Decorator {...args} truncateValue="start" />
-        <div className={`${storyClass}__blue-box`}>
+        <span className={`${storyClass}__blue-box`}>
           <Decorator {...args} truncateValue="start" />
-        </div>
+        </span>
       </p>
       <p>
         <strong>{'truncate={{ maxLength: 20, front: 6, back: 6 }}'}</strong> is

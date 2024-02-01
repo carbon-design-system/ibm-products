@@ -24,7 +24,8 @@
 }
 
 .decorator-stories__blue-box {
-  max-width: 50vw;
+  display: block;
+  max-width: 20rem;
   margin-top: $spacing-02;
   /* stylelint-disable-next-line carbon/theme-token-use */
   outline: 1px solid $blue-60;

@@ -24,15 +24,6 @@ const componentName = 'SearchBar';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
 // Default values for props
 const defaults = {
   onSubmit: () => {},

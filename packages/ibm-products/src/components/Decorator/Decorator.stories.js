@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -20,13 +19,35 @@ import mdx from './Decorator.mdx';
 import styles from './_storybook-styles.scss';
 const storyClass = 'decorator-stories';
 
+const scoreOptions = {
+  '-1 (less than 0 is treated as 0)': -1,
+  '0 ': 0,
+  '1 ': 1,
+  '2 ': 2,
+  '3 ': 3,
+  '4 ': 4,
+  '5 ': 5,
+  '6 ': 6,
+  '7 ': 7,
+  '8 ': 8,
+  '9 ': 9,
+  '10 ': 10,
+  '11 (greater than 10 is treated as 10)': 11,
+  'null or undefined': null,
+};
+
 export default {
   title: getStoryTitle(Decorator.displayName),
   component: Decorator,
   tags: ['autodocs'],
   argTypes: {
     score: {
-      control: { type: 'range', min: 0, max: 10 },
+      control: {
+        type: 'select',
+        labels: Object.keys(scoreOptions),
+      },
+      options: Object.values(scoreOptions).map((_k, i) => i),
+      mapping: Object.values(scoreOptions),
     },
   },
   parameters: {
@@ -37,36 +58,76 @@ export default {
   },
 };
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
+const defaultProps = {
+  hideIcon: false,
+  label: 'IP',
+  score: 5,
+  scoreThresholds: [0, 4, 7, 10],
+  small: false,
+  theme: 'light',
+  value: '192.168.0.50',
+  valueTitle: '',
+};
+
 const Template = (args) => {
   return <Decorator {...args} />;
+};
+
+const TemplateSmall = (args) => {
+  return (
+    <>
+      Small Decorator <Decorator {...args} /> where{' '}
+      <strong>small={'{true}'}.</strong>
+    </>
+  );
 };
 
 const TemplateTruncation = (args) => {
   return (
     <div className={`${storyClass}__viewport-truncation`}>
-      <p>Resize the browser window to see results.</p>
       <p>
-        When <strong>truncate</strong> is not defined, the {"Decorator's "}
-        layout is equivalent to <em>display:inline-block</em>.
+        Resize this area or the browser window to preview truncation behavior.
+      </p>
+      <p>
+        The{' '}
+        <span
+          style={{
+            border: '1px solid #0f62fe',
+            display: 'inline-block',
+            padding: '0 4px',
+          }}
+        >
+          blue box
+        </span>{' '}
+        is an example of a container with a limited width.
+      </p>
+      <p>
+        No truncation applied.
         <br />
         <Decorator {...args} />
+        <div className={`${storyClass}__blue-box`}>
+          <Decorator {...args} />
+        </div>
       </p>
       <p>
-        <strong>{'truncate="end"'}</strong> shrinks to fit its container.
+        <strong>{'truncate="end"'}</strong>
         <br />
         <Decorator {...args} truncateValue="end" />
+        <div className={`${storyClass}__blue-box`}>
+          <Decorator {...args} truncateValue="end" />
+        </div>
       </p>
       <p>
-        <strong>{'truncate="start"'}</strong> shrinks to fit its container.
+        <strong>{'truncate="start"'}</strong>
         <br />
         <Decorator {...args} truncateValue="start" />
+        <div className={`${storyClass}__blue-box`}>
+          <Decorator {...args} truncateValue="start" />
+        </div>
       </p>
       <p>
         <strong>{'truncate={{ maxLength: 20, front: 6, back: 6 }}'}</strong> is
-        referred to as the {'"midline"'} truncation, and {"it's"} layout is
+        referred to as a {'"midline"'} truncation, and {"it's"} layout is
         equivalent to <em>display:inline-block</em>. <br />
         <Decorator
           {...args}
@@ -81,37 +142,38 @@ const TemplateTruncation = (args) => {
   );
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
 // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Decorator-args
 export const decorator = prepareStory(Template, {
   args: {
-    // score: 2,
-    // onContextMenu: (event, values) => action('onContextMenu')(values),
+    ...defaultProps,
+    label: 'Label',
+    value: 'Value',
+    onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
+
 export const asLink = prepareStory(Template, {
   args: {
-    // score: 5,
+    ...defaultProps,
+    label: 'URL',
     href: 'http://www.ibm.com',
-    // onContextMenu: (event, values) => action('onContextMenu')(values),
+    value: 'ibm.com',
+    onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
 
 export const asSingleButton = prepareStory(Template, {
   args: {
-    // score: 2,
+    ...defaultProps,
     onClick: (event, values) => action('onClick')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
 
-export const withDualButtons = prepareStory(Template, {
+export const asDualButtons = prepareStory(Template, {
   args: {
-    // score: 2,
-    onClickType: (event, values) => action('onClickLabel')(values),
+    ...defaultProps,
+    onClickLabel: (event, values) => action('onClickLabel')(values),
     onClickValue: (event, values) => action('onClickValue')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
@@ -119,6 +181,15 @@ export const withDualButtons = prepareStory(Template, {
 
 export const truncatedValue = prepareStory(TemplateTruncation, {
   args: {
-    value: 'a b c d e f g h i j k l m n o p q r s t u v w x y z',
+    ...defaultProps,
+    value:
+      'aa bb cc dd ee ff gg hh ii jj kk ll mm nn oo pp qq rr ss tt uu vv ww xx yy zz',
+  },
+});
+
+export const small = prepareStory(TemplateSmall, {
+  args: {
+    ...defaultProps,
+    small: true,
   },
 });

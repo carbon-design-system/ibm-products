@@ -15,9 +15,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-// Carbon and package components we use.
-// import { Link } from '@carbon/react';
-
 import { getIcon, truncate } from './constants';
 import { DecoratorIcon } from './DecoratorIcon';
 
@@ -28,20 +25,20 @@ const componentName = 'Decorator';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 const defaults = {
-  // score: 0,
-  scoreDescription: (score, scoreThresholds) =>
-    score
-      ? `Score ${score} out of ${scoreThresholds.slice(-1)[0]}`
-      : 'No score',
+  scoreDescription: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds.slice(-1)[0]
+    }`;
+  },
   scoreThresholds: [0, 4, 7, 10],
-  size: 'md',
   theme: 'light',
-  label: 'Xxy',
-  value: 'Xxy',
 };
 
 /**
- * The Decorator groups a key/value pair to look like a single UI element.
+ * The Decorator groups a key/value pair to look and behave like a single UI element.
  */
 export let Decorator = React.forwardRef(
   (
@@ -49,35 +46,35 @@ export let Decorator = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       className,
       hideIcon,
-      hideLabel,
-      href = defaults.href,
+      href,
       onClick,
-      onClickType,
+      onClickLabel,
       onClickValue,
       onContextMenu,
-      score = defaults.score,
+      score,
       scoreDescription = defaults.scoreDescription,
       scoreThresholds = defaults.scoreThresholds,
-      size = defaults.size,
+      small,
       theme = defaults.theme,
-      title,
-      truncateValue = defaults.truncateValue,
-      label = defaults.label,
-      value = defaults.value,
-      withSquareCorners,
+      valueTitle,
+      truncateValue,
+      label,
+      value,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const { svgPath, magnitudeType } = useMemo(() => {
+    const { svgPath, magnitude } = useMemo(() => {
       return getIcon(score, scoreThresholds);
     }, [score, scoreThresholds]);
 
     const _scoreDescription = useMemo(() => {
-      return scoreDescription(score, scoreThresholds);
-    }, [score, scoreDescription, scoreThresholds]);
+      return scoreDescription(score, scoreThresholds, magnitude);
+    }, [magnitude, score, scoreDescription, scoreThresholds]);
 
+    // If a "midline" truncation has been defined, then refer that,
+    // else refer to the original value.
     const _value = useMemo(() => {
       if (truncateValue?.maxLength) {
         return truncate(
@@ -91,86 +88,70 @@ export let Decorator = React.forwardRef(
       return value;
     }, [truncateValue, value]);
 
-    const handleOnClick = (event) => {
-      onClick(event, { score, label, value, magnitudeType });
+    // These class names apply to all types of Decorator.
+    const classNames = useMemo(() => {
+      return cx(
+        blockClass,
+        className,
+        `${blockClass}--${theme}`,
+        small && `${blockClass}--sm`,
+        truncateValue === 'end' && `${blockClass}--truncate-end`,
+        truncateValue === 'start' && `${blockClass}--truncate-start`,
+        truncateValue?.maxLength && `${blockClass}--truncate-midline`
+      );
+    }, [className, small, theme, truncateValue]);
+
+    // These properties apply to all <DecoratorIcons>.
+    const iconProps = {
+      className: `${blockClass}__icon`,
+      magnitude: magnitude.toLowerCase(), // e.g. "Medium" -> "medium"
+      path: svgPath,
+      title: _scoreDescription,
     };
 
-    const handleOnClickType = (event) => {
-      onClickType(event, { score, label, value, magnitudeType });
+    const handleOnClick = (event) => {
+      onClick(event, { score, label, value, magnitude });
+    };
+
+    const handleOnClickLabel = (event) => {
+      onClickLabel(event, { score, label, value, magnitude });
     };
 
     const handleOnClickValue = (event) => {
-      onClickValue(event, { score, label, value, magnitudeType });
+      onClickValue(event, { score, label, value, magnitude });
     };
 
     const handleOnContextMenu = (event) => {
-      onContextMenu &&
-        onContextMenu(event, { score, label, value, magnitudeType });
+      onContextMenu && onContextMenu(event, { score, label, value, magnitude });
     };
 
     // RETURN DUAL BUTTONS
-    if (onClickType && onClickValue) {
+    if (onClickLabel && onClickValue) {
       return (
         <span
           {...rest}
           {...getDevtoolsProps(componentName)}
-          className={cx(
-            blockClass,
-            className,
-            `${blockClass}--${theme}`,
-            `${blockClass}--buttons`,
-            size === 'sm' && `${blockClass}--sm`,
-            withSquareCorners && `${blockClass}--square`
-          )}
+          className={cx(classNames, `${blockClass}--buttons`)}
           ref={ref}
         >
-          {hideLabel ? (
-            <>
-              {!hideIcon && (
-                <DecoratorIcon
-                  className={`${blockClass}__icon`}
-                  magnitudeType={magnitudeType}
-                  path={svgPath}
-                  title={_scoreDescription}
-                />
-              )}
-              <button
-                className={`${blockClass}__value`}
-                onClick={handleOnClickValue}
-                onContextMenu={handleOnContextMenu}
-                type="button"
-              >
-                {value}
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className={`${blockClass}__label`}
-                onClick={handleOnClickType}
-                onContextMenu={handleOnContextMenu}
-                type="button"
-              >
-                {!hideIcon && (
-                  <DecoratorIcon
-                    className={`${blockClass}__icon`}
-                    magnitudeType={magnitudeType}
-                    path={svgPath}
-                    title={_scoreDescription}
-                  />
-                )}
-                {label}
-              </button>
-              <button
-                className={`${blockClass}__value`}
-                onClick={handleOnClickValue}
-                onContextMenu={handleOnContextMenu}
-                type="button"
-              >
-                {value}
-              </button>
-            </>
-          )}
+          <button
+            className={`${blockClass}__label`}
+            onClick={handleOnClickLabel}
+            onContextMenu={handleOnContextMenu}
+            type="button"
+          >
+            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!!label && label}
+          </button>
+          <button
+            className={`${blockClass}__value`}
+            onClick={handleOnClickValue}
+            onContextMenu={handleOnContextMenu}
+            title={valueTitle || value}
+            type="button"
+          >
+            {_value}
+          </button>
         </span>
       );
     }
@@ -181,31 +162,17 @@ export let Decorator = React.forwardRef(
         <button
           {...rest}
           {...getDevtoolsProps(componentName)}
-          className={cx(
-            blockClass,
-            className,
-            `${blockClass}--${theme}`,
-            `${blockClass}--button`,
-            size === 'sm' && `${blockClass}--sm`,
-            withSquareCorners && `${blockClass}--square`
-          )}
+          className={cx(classNames, `${blockClass}--button`)}
           onClick={handleOnClick}
           onContextMenu={handleOnContextMenu}
           ref={ref}
           type="button"
         >
-          {!hideIcon && (
-            <DecoratorIcon
-              className={`${blockClass}__icon`}
-              magnitudeType={magnitudeType}
-              path={svgPath}
-              title={_scoreDescription}
-            />
-          )}
-          {!hideLabel && (
-            <span className={`${blockClass}__label`}>{label}</span>
-          )}
-          <span className={`${blockClass}__value`}>{value}</span>
+          {!hideIcon && <DecoratorIcon {...iconProps} />}
+          {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+          <span className={`${blockClass}__value`} title={valueTitle || value}>
+            {_value}
+          </span>
         </button>
       );
     }
@@ -217,30 +184,14 @@ export let Decorator = React.forwardRef(
           {...rest}
           {...getDevtoolsProps(componentName)}
           href={href}
-          className={cx(
-            blockClass,
-            className,
-            `${blockClass}--${theme}`,
-            `${blockClass}--link`,
-            size === 'sm' && `${blockClass}--sm`,
-            withSquareCorners && `${blockClass}--square`
-          )}
+          className={cx(classNames, `${blockClass}--link`)}
           onContextMenu={handleOnContextMenu}
           ref={ref}
         >
-          {!hideIcon && (
-            <DecoratorIcon
-              className={`${blockClass}__icon`}
-              magnitudeType={magnitudeType}
-              path={svgPath}
-              title={_scoreDescription}
-            />
-          )}
-          {!hideLabel && (
-            <span className={`${blockClass}__label`}>{label}</span>
-          )}
-          <span className={`${blockClass}__value`} title={title || value}>
-            {value}
+          {!hideIcon && <DecoratorIcon {...iconProps} />}
+          {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+          <span className={`${blockClass}__value`} title={valueTitle || value}>
+            {_value}
           </span>
         </a>
       );
@@ -251,30 +202,13 @@ export let Decorator = React.forwardRef(
       <span
         {...rest}
         {...getDevtoolsProps(componentName)}
-        className={cx(
-          blockClass,
-          className,
-          `${blockClass}--${theme}`,
-          `${blockClass}--default`,
-          size === 'sm' && `${blockClass}--sm`,
-          withSquareCorners && `${blockClass}--square`,
-          truncateValue === 'end' && `${blockClass}-truncate-end`,
-          truncateValue === 'start' && `${blockClass}-truncate-start`,
-          truncateValue?.maxLength && `${blockClass}-truncate-midline`
-        )}
+        className={cx(classNames, `${blockClass}--default`)}
         onContextMenu={handleOnContextMenu}
         ref={ref}
       >
-        {!hideIcon && (
-          <DecoratorIcon
-            className={`${blockClass}__icon`}
-            magnitudeType={magnitudeType}
-            path={svgPath}
-            title={_scoreDescription}
-          />
-        )}
-        {!hideLabel && <span className={`${blockClass}__label`}>{label}</span>}
-        <span className={`${blockClass}__value`} title={title || value}>
+        {!hideIcon && <DecoratorIcon {...iconProps} />}
+        {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+        <span className={`${blockClass}__value`} title={valueTitle || value}>
           {_value}
         </span>
       </span>
@@ -298,15 +232,11 @@ Decorator.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Hide the icon.
+   * Do not show the icon, regardless of score.
    */
   hideIcon: PropTypes.bool,
   /**
-   * Hide the label.
-   */
-  hideLabel: PropTypes.bool,
-  /**
-   * Optional: defining `href` will render the entire component as a link.
+   * Defining `href` will render the entire component as a link.
    */
   href: PropTypes.string,
   /**
@@ -314,27 +244,42 @@ Decorator.propTypes = {
    */
   label: PropTypes.string,
   /**
-   * Optional: defining `onClick` will render the entire component as a button.
+   * Defining `onClick` will render the entire component as a single button.
+   *
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
   onClick: PropTypes.func,
   /**
-   * Optional: defining `onClickType` and `onClickValue` together
+   * Defining `onClickLabel` and `onClickValue` together
    * will render the `label` and `value` as individual buttons.
+   *
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClickType: PropTypes.func,
+  onClickLabel: PropTypes.func,
   /**
-   * Optional: defining `onClickType` and `onClickValue` together
+   * Defining `onClickLabel` and `onClickValue` together
    * will render the `label` and `value` as individual buttons.
+   *
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
   onClickValue: PropTypes.func,
   /**
    * Optional callback function for right-click events.
+   * This one function can be applied to any component variation.
+   *
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
   onContextMenu: PropTypes.func,
   /**
    * Determines the color, shape, and type of magnitude of the icon.
    *
-   * If you don't wish to render the icon, use `hideIcon`.
+   * A number of less than `scoreThresholds[first]` will be treated as `scoreThresholds[first]`.
+   *
+   * A number of more than `scoreThresholds[last]` will be treated as `scoreThresholds[last]`.
+   *
+   * `null` or `undefined` will return "Unknown" (icon = "ring").
+   *
+   * If you don't want to show the icon at all, set `hideIcon={true}`.
    *
    * See also `scoreThresholds`.
    */
@@ -342,14 +287,22 @@ Decorator.propTypes = {
   /**
    * Callback function for building the score's descriptive text for screen readers.
    *
-   * In the form of "Score X out of Y", where X is the `score`
-   * and Y is the last element of the `scoreDescription` array.
+   * The default description is in the form of `"(magnitude)" magnitude: score X out of Y"`.
+   * E.g. `"Medium" magnitude: score 5 out of 10`.
+   *
+   * Where `magnitude` is the label associated with the specific score,
+   * X is the `score`, and Y is the last element of the `scoreDescription` array.
    */
   scoreDescription: PropTypes.func,
   /**
    * An array of 4 numbers determines the range of thresholds.
-   * E.g. [0, 4, 7, 10]. 0 or less = "benign", 1-3="low", 4-6="medium",
-   * 7-9="high", 10 or more = "critical".
+   *
+   * E.g. `[0, 4, 7, 10]`
+   * <br/>- 0 or less = "Benign"
+   * <br/>- 1-3="Low"
+   * <br/>- 4-6="Medium"
+   * <br/>- 7-9="High"
+   * <br/>- 10 or more = "Critical"
    *
    * See also `score`.
    */
@@ -357,18 +310,13 @@ Decorator.propTypes = {
   /**
    * Styled smaller to better fit with surrounding text.
    */
-  size: PropTypes.oneOf(['sm', 'md']),
+  small: PropTypes.bool,
   /**
    * Determines the theme of the component.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
   /**
-   * TODO: ??? vs scoreDescription?
-   */
-  title: PropTypes.string,
-  /**
-   * TODO:
-   * If defined, it will truncate the `value` of the component.
+   * If not defined, it will behave as `display:inline-block`.
    *
    * If `end` it will append "..." to the `value` if there is not enough
    * space to display the entire value.
@@ -378,8 +326,6 @@ Decorator.propTypes = {
    *
    * If `{maxLength, front, back}` it will inject "..." in the middle
    * of the `value` regardless of available space.
-   *
-   * If not defined, it will behave as `display:inline-block`.
    */
   truncateValue: PropTypes.oneOf([
     'end',
@@ -396,7 +342,7 @@ Decorator.propTypes = {
    */
   value: PropTypes.string,
   /**
-   * The default style is rounded corners. Set to `true` to square the corners.
+   * Overrides the default title for the Decorator's value.
    */
-  withSquareCorners: PropTypes.bool,
+  valueTitle: PropTypes.string,
 };

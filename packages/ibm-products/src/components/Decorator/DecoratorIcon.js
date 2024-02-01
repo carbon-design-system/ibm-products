@@ -22,7 +22,7 @@ const componentName = 'DecoratorIcon';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 const defaults = {
-  magnitudeType: 'unknown',
+  magnitude: 'unknown',
   height: 16,
   viewBox: '0 0 16 16',
   width: 16,
@@ -38,7 +38,7 @@ export let DecoratorIcon = React.forwardRef(
 
       className,
       height = defaults.height,
-      magnitudeType = defaults.magnitudeType,
+      magnitude = defaults.magnitude,
       path,
       title,
       viewBox,
@@ -57,7 +57,7 @@ export let DecoratorIcon = React.forwardRef(
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}__magnitude-${magnitudeType}`,
+          `${blockClass}__magnitude-${magnitude}`,
 
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
@@ -101,7 +101,7 @@ DecoratorIcon.propTypes = {
 
   /* TODO: add types and DocGen for all props. */
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  magnitudeType: PropTypes.oneOf([
+  magnitude: PropTypes.oneOf([
     'unknown',
     'benign',
     'low',

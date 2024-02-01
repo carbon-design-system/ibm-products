@@ -28,71 +28,36 @@ $block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
 // TODO:
 // ~general styling
 // ~border
-// ~rounded corners or square
-// interactive colors and behaviors
-// md or sm
+// ~md or sm
+// theming
+// interactive colors and behaviors (in design review/update)
 
+// CORE STYLING FOR ALL DECORATORS
 .#{$block-class} {
   @include type.type-style('body-compact-01');
 
   display: inline-flex;
+  max-width: 100%;
+  height: 1.625rem;
   align-items: center;
-  white-space: nowrap;
+  line-height: $spacing-06;
 }
-
 .#{$block-class}__label {
-  height: to-rem(26px);
+  height: inherit;
   color: $text-secondary;
-  line-height: to-rem(24px);
 }
 .#{$block-class}__value {
-  height: to-rem(26px);
-  color: $text-primary;
-  line-height: to-rem(24px);
+  overflow: hidden;
+  height: inherit;
+  color: $text-secondary;
 }
-
-// .#{$block-class}--dark {
-// }
-
-// .#{$block-class}--light {
-// }
-
-.#{$block-class}--square {
-  padding: 0;
-  border-radius: 0;
+.#{$block-class-icon} {
+  margin-left: $spacing-03;
 }
-
-.#{$block-class}--sm {
-  // TODO:
-}
-
-// TRUNCATION
-
-.#{$block-class}-truncate-end {
-  display: flex;
-
-  .#{$block-class}__value {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-.#{$block-class}-truncate-start {
-  display: flex;
-
-  .#{$block-class}__value {
-    overflow: hidden;
-    direction: rtl;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-// DECORATOR STYLES, STATIC
-
-// DECORATOR AS DEFAULT (NON-INTERACTIVE)
-// DECORATOR AS LINK
-// DECORATOR AS SINGLE BUTTON
+// GENERAL STYLING FOR:
+//   - DEFAULT (NON-INTERACTIVE)
+//   - LINK
+//   - SINGLE BUTTON
 .#{$block-class}--default,
 .#{$block-class}--link,
 .#{$block-class}--button {
@@ -112,7 +77,48 @@ $block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
 .#{$block-class}--button .#{$block-class}__value {
   padding: 0 $spacing-03;
 }
-// DECORATOR CONTAINING DUAL BUTTONS
+// SPECIFIC STYLING FOR LINK
+.#{$block-class}--link {
+  padding: 0 $spacing-03;
+  text-decoration: none;
+}
+.#{$block-class}--link .#{$block-class}__value {
+  color: $link-primary;
+}
+.#{$block-class}--link:hover .#{$block-class}__value {
+  color: $link-primary-hover;
+  text-decoration: underline;
+}
+.#{$block-class}--link:focus,
+.#{$block-class}--link:hover {
+  border-color: $border-strong-01;
+  background-color: $background-active;
+  cursor: pointer;
+
+  .#{$block-class}__label {
+    border-right-color: $border-strong-01;
+  }
+}
+// SPECIFIC STYLING FOR SINGLE BUTTON
+.#{$block-class}--button {
+  display: flex;
+  padding: 0 $spacing-03;
+}
+.#{$block-class}--button:focus,
+.#{$block-class}--button:hover {
+  border-color: $border-strong-01;
+  background-color: $background-active;
+  cursor: pointer;
+
+  .#{$block-class}__label {
+    border-right-color: $border-strong-01;
+  }
+}
+// SPECIFIC STYLING FOR DUAL BUTTONS
+.#{$block-class}--buttons button {
+  display: flex;
+  align-items: center;
+}
 .#{$block-class}--buttons .#{$block-class}__label {
   padding: 0 $spacing-03 0 $spacing-05;
   border-width: to-rem(1px);
@@ -136,52 +142,6 @@ $block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
   background-color: $background-hover;
 }
 
-// DECORATOR STYLES, INTERACTIVE
-
-// DECORATOR AS LINK
-.#{$block-class}--link {
-  padding: 0 $spacing-03;
-  text-decoration: none;
-}
-.#{$block-class}--link .#{$block-class}__value {
-  color: $link-primary;
-}
-.#{$block-class}--link:hover .#{$block-class}__value {
-  color: $link-primary-hover;
-  text-decoration: underline;
-}
-.#{$block-class}--link:focus,
-.#{$block-class}--link:hover {
-  border-color: $border-strong-01;
-  background-color: $background-active;
-  cursor: pointer;
-
-  .#{$block-class}__label {
-    border-right-color: $border-strong-01;
-  }
-}
-
-// DECORATOR AS SINGLE BUTTON
-.#{$block-class}--button {
-  display: flex;
-  padding: 0 $spacing-03;
-}
-.#{$block-class}--button:focus,
-.#{$block-class}--button:hover {
-  border-color: $border-strong-01;
-  background-color: $background-active;
-  cursor: pointer;
-
-  .#{$block-class}__label {
-    border-right-color: $border-strong-01;
-  }
-}
-
-// DECORATOR CONTAINING DUAL BUTTONS
-.#{$block-class}--buttons button {
-  display: flex;
-  align-items: center;
-}
 .#{$block-class}--buttons button:focus,
 .#{$block-class}--buttons button:hover {
   border-color: $border-strong-01;
@@ -208,11 +168,49 @@ $block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
   border-left: 1px solid $border-strong-01;
 }
 
-// ICONS
+// MODIFIER, SMALL
 
-.#{$block-class-icon} {
-  display: inline-block;
-  margin-left: $spacing-03;
+.#{$block-class}.#{$block-class}--sm {
+  height: 1.25rem;
+  padding: 0 $spacing-02;
+  font-size: 0.75rem;
+  line-height: 1.2rem;
+  vertical-align: middle;
+}
+.#{$block-class}--sm .#{$block-class-icon} {
+  margin-left: $spacing-02;
+}
+.#{$block-class}--sm.#{$block-class}--default,
+.#{$block-class}--sm.#{$block-class}--link,
+.#{$block-class}--sm.#{$block-class}--button,
+.#{$block-class}--sm.#{$block-class}--buttons button {
+  padding: 0 $spacing-02;
+}
+.#{$block-class}--sm.#{$block-class}--default .#{$block-class}__label,
+.#{$block-class}--sm.#{$block-class}--link .#{$block-class}__label,
+.#{$block-class}--sm.#{$block-class}--button .#{$block-class}__label,
+.#{$block-class}--sm.#{$block-class}--buttons button .#{$block-class}__label {
+  padding: 0 $spacing-02;
+}
+.#{$block-class}--sm.#{$block-class}--default .#{$block-class}__value,
+.#{$block-class}--sm.#{$block-class}--link .#{$block-class}__value,
+.#{$block-class}--sm.#{$block-class}--button .#{$block-class}__value,
+.#{$block-class}--sm.#{$block-class}--buttons button .#{$block-class}__value {
+  padding: 0 $spacing-02;
+}
+
+// MODIFIER, TRUNCATION
+
+.#{$block-class}--truncate-end .#{$block-class}__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.#{$block-class}--truncate-start .#{$block-class}__value {
+  overflow: hidden;
+  direction: rtl;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // MAGNITUDE ICON COLORS

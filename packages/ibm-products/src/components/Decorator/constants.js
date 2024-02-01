@@ -21,31 +21,35 @@ const svgPaths = {
 };
 
 const getIcon = (score, thresholds) => {
-  let magnitudeType = 'unknown';
+  let magnitude = 'Unknown';
 
-  if (score <= thresholds[0]) {
-    magnitudeType = 'benign';
-  } else if (score < thresholds[1]) {
-    magnitudeType = 'low';
-  } else if (score < thresholds[2]) {
-    magnitudeType = 'medium';
-  } else if (score < thresholds[3]) {
-    magnitudeType = 'high';
-  } else if (score >= thresholds[3]) {
-    magnitudeType = 'critical';
+  if (typeof score === 'number') {
+    if (score <= thresholds[0]) {
+      magnitude = 'Benign';
+    } else if (score < thresholds[1]) {
+      magnitude = 'Low';
+    } else if (score < thresholds[2]) {
+      magnitude = 'Medium';
+    } else if (score < thresholds[3]) {
+      magnitude = 'High';
+    } else if (score >= thresholds[3]) {
+      magnitude = 'Critical';
+    }
   }
 
-  return { svgPath: svgPaths[magnitudeType], magnitudeType };
+  const path = magnitude.toLowerCase();
+
+  return { svgPath: svgPaths[path], magnitude };
 };
 
 const truncate = (inputText, maxLength, front, back) => {
-  let truncationValue = inputText;
+  let truncatedText = inputText;
   if (inputText.length > maxLength) {
-    truncationValue = `${inputText.substring(0, front)}…${inputText.substr(
+    truncatedText = `${inputText.substring(0, front)}…${inputText.substr(
       inputText.length - back
     )}`;
   }
-  return truncationValue;
+  return truncatedText;
 };
 
 export { getIcon, truncate };

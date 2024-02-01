@@ -6,15 +6,26 @@
 //
 
 @forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 // TODO: add any additional styles used by Decorator.stories.js
 .decorator-stories__viewport-truncation {
-  max-width: 70vw;
-  border: 1px solid #ccc;
-  margin: 2rem;
-  padding: 2rem;
+  width: 80vw;
+  padding: $spacing-07;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  border: 1px solid $cool-gray-30;
+  margin: $spacing-07;
 
+  /* stylelint-disable-next-line max-nesting-depth */
   p {
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-05;
   }
+}
+
+.decorator-stories__blue-box {
+  max-width: 50vw;
+  margin-top: $spacing-02;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  outline: 1px solid $blue-60;
 }

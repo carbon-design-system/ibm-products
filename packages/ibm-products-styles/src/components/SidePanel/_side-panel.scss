@@ -81,11 +81,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}__container--#{$size} {
       @include setPanelSize($size_value);
-      .#{$block-class}__header.#{$block-class}__header--no-title-animation,
-      .#{$block-class}__header--no-title-animation
-        .#{$block-class}__subtitle-text {
-        @include setPanelSize($size_value);
-      }
     }
   }
 
@@ -365,27 +360,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     bottom: 0;
     border-top: 1px solid $border-subtle-02;
     background-color: $layer-01;
-
-    &.#{$action-set-block-class}--2xl {
-      .#{$action-set-block-class}__action-button {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      @include breakpoint(md) {
-        flex-direction: row;
-        .#{$action-set-block-class}__action-button {
-          width: 25%;
-        }
-      }
-
-      flex-direction: column;
-    }
-
-    .#{$action-set-block-class}__action-button.#{$action-set-block-class}__action-button {
-      // extra class needed to override default size
-      height: var(--#{$block-class}--actions-height);
-    }
   }
   &.#{$block-class}__container.#{$block-class}__container--xs
     .#{$block-class}__actions-container.#{$action-set-block-class}--sm {

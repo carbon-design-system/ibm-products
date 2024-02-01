@@ -26,24 +26,31 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     max-width: none;
     flex: initial;
   }
+
+  .#{$action-set-block-class}__action-button--ghost {
+    padding-left: $spacing-05;
+  }
 }
 
 @mixin action-set-layout() {
-  --flex-direction: row;
-
   /* for actions container query - note this changes the size calculation */
   container-name: action-set;
   container-type: inline-size;
 
   .#{$action-set-block-class} {
+    --flex-direction: row;
+
     flex-direction: var(--flex-direction);
   }
 
+  /* stylelint-disable-next-line */
+  $min-action-width: to-rem(176px);
+
   .#{$action-set-block-class}.#{$action-set-block-class} // extra classes needed for specificity
     .#{$action-set-block-class}__action-button {
+    min-width: $min-action-width;
     /* stylelint-disable-next-line */
     max-width: to-rem(232px);
-    /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
     flex: 0 1 25%;
   }
 
@@ -53,24 +60,30 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     flex: 1 1 25%;
   }
 
-  @container (width <= 45rem) {
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-quadruple {
+  @container (width <= #{4 * $min-action-width}) {
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--quadruple {
       @include action-set-column();
     }
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-double {
-      max-width: none;
-      flex-basis: 50%;
+
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--double {
+      // Note that at 642px(40.125rem) flyout filter expects 1 row
+      .#{$action-set-block-class}__action-button {
+        max-width: none;
+        flex-basis: 50%;
+      }
     }
   }
 
-  @container (width <= 35rem) {
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-triple {
+  @container (width <= #{3 * $min-action-width}) {
+    // Note that by 640px(40rem) sidepanel expects 1 row
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--triple {
       @include action-set-column();
     }
   }
 
-  @container (width <= 25rem) {
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--row-double {
+  @container (width <= #{2 * $min-action-width}) {
+    // Note that by 480px(30rem) side panel expects 1 row
+    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--double {
       @include action-set-column();
     }
   }

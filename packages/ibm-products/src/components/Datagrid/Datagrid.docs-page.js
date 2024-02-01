@@ -353,6 +353,7 @@ return (
         description: `When building a Datagrid that requires selectable rows, use the \`useSelectRows\` hook.
 - Include \`useSelectRows\` hook
 - Add \`onRowSelect\` to the \`useDatagrid\` hook, this is a callback function called when on a row's selection checkbox onChange, and sends back the row object and the event
+- Add \`onAllRowSelect\` to the \`useDatagrid\` hook, this is a callback function called when on all rows selection checkbox onChange, and sends back all rows object and the event
         `,
         source: {
           code: `
@@ -363,6 +364,7 @@ const datagridState = useDatagrid(
     columns,
     data,
     onRowSelect: (row, event) => console.log(row, event),
+    onAllRowSelect: (rows, event) => console.log(rows, event),
     batchActionMenuButtonLabel: 'More',
   },
   useSelectRows

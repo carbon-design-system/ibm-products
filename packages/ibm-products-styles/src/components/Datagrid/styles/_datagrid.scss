@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
@@ -157,6 +158,16 @@
   background-color: $background;
 }
 
+.#{$block-class} th.#{$block-class}__with-slug {
+  @include ai-gradient('top', 100%);
+}
+
+.#{$block-class}
+  th.#{$block-class}__with-slug
+  .#{c4p-settings.$carbon-prefix}--slug {
+  margin-left: $spacing-03;
+}
+
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
@@ -241,6 +252,10 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     white-space: initial;
+  }
+
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug {
+    width: fit-content;
   }
 
   .#{$block-class}__expanded-row {

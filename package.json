@@ -154,7 +154,7 @@
       "npx prettier --cache --write",
       "npx stylelint"
     ],
-    "!(*sass).md": [
+    "**/*.md": [
       "npx prettier --cache --write"
     ]
   },

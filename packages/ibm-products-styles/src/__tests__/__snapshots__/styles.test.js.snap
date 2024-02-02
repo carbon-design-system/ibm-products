@@ -129,75 +129,94 @@ p.c4p--about-modal__copyright-text:first-child {
   * - width (first value)
   * - min-width (optional second value)
 */
-.c4p--action-set__container {
+.c4p--action-set.c4p--action-set {
   /* for actions container query - note this changes the size calculation */
   container-name: action-set;
   container-type: inline-size;
   /* stylelint-disable-next-line */
+  display: inline-block;
   width: 100%;
+  vertical-align: bottom;
 }
-.c4p--action-set__container .c4p--action-set {
+.c4p--action-set.c4p--action-set .c4p--action-set__inner {
   --flex-direction: row;
   flex-direction: var(--flex-direction);
+  align-items: stretch;
+  justify-content: flex-end;
+  background-color: var(--cds-layer-01, #f4f4f4);
 }
-.c4p--action-set__container .c4p--action-set.c4p--action-set .c4p--action-set__action-button {
-  min-width: 11rem;
+.c4p--action-set.c4p--action-set.c4p--action-set .c4p--action-set__action-button {
   /* stylelint-disable-next-line */
   max-width: 14.5rem;
   flex: 0 1 25%;
 }
-.c4p--action-set__container .c4p--action-set.c4p--action-set .c4p--action-set__action-button--ghost {
+.c4p--action-set.c4p--action-set.c4p--action-set--auto-stack .c4p--action-set__action-button {
+  min-width: 11rem;
+}
+.c4p--action-set.c4p--action-set.c4p--action-set .c4p--action-set__action-button--ghost {
   max-width: none;
   flex: 1 1 25%;
+  padding-left: 2rem; /* increased padding when inline */
 }
 @container (width <= 44rem) {
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--quadruple {
+  .c4p--action-set.c4p--action-set.c4p--action-set--quadruple .c4p--action-set__action-button {
+    flex: 1 1 25%;
+  }
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--quadruple .c4p--action-set__inner {
     --flex-direction: column;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--quadruple .c4p--action-set__action-button {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--quadruple .c4p--action-set__inner .c4p--action-set__action-button {
     width: 100%;
     max-width: none;
     flex: initial;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--quadruple .c4p--action-set__action-button--ghost {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--quadruple .c4p--action-set__inner .c4p--action-set__action-button--ghost {
     padding-left: 1rem;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--double .c4p--action-set__action-button {
+  .c4p--action-set.c4p--action-set.c4p--action-set.c4p--action-set--double .c4p--action-set__action-button {
     max-width: none;
     flex-basis: 50%;
   }
 }
 @container (width <= 33rem) {
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--triple {
+  .c4p--action-set.c4p--action-set.c4p--action-set--triple .c4p--action-set__action-button {
+    flex: 1 1 33.3333333333%;
+  }
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--triple .c4p--action-set__inner {
     --flex-direction: column;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--triple .c4p--action-set__action-button {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--triple .c4p--action-set__inner .c4p--action-set__action-button {
     width: 100%;
     max-width: none;
     flex: initial;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--triple .c4p--action-set__action-button--ghost {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--triple .c4p--action-set__inner .c4p--action-set__action-button--ghost {
     padding-left: 1rem;
+  }
+  .c4p--action-set.c4p--action-set.c4p--action-set--single .c4p--action-set__action-button {
+    max-width: none;
+    flex: 1 1 100%;
   }
 }
 @container (width <= 22rem) {
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--double {
+  .c4p--action-set.c4p--action-set.c4p--action-set--double .c4p--action-set__action-button {
+    flex: 1 1 50%;
+  }
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--double .c4p--action-set__inner {
     --flex-direction: column;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--double .c4p--action-set__action-button {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--double .c4p--action-set__inner .c4p--action-set__action-button {
     width: 100%;
     max-width: none;
     flex: initial;
   }
-  .c4p--action-set__container .c4p--action-set.c4p--action-set.c4p--action-set--double .c4p--action-set__action-button--ghost {
+  .c4p--action-set.c4p--action-set.c4p--action-set--auto-stack.c4p--action-set--double .c4p--action-set__inner .c4p--action-set__action-button--ghost {
     padding-left: 1rem;
   }
 }
 
-.c4p--action-set {
-  align-items: stretch;
-  justify-content: flex-end;
-  background-color: var(--cds-layer-01, #f4f4f4);
+.c4p--action-set__inner {
+  display: flex;
 }
 
 .c4p--action-set .c4p--action-set__action-button {
@@ -212,10 +231,6 @@ p.c4p--about-modal__copyright-text:first-child {
   height: 4rem;
   padding-top: 1rem;
   padding-bottom: 2rem;
-}
-
-.c4p--action-set:not(.c4p--action-set--stacking) .c4p--action-set__action-button--ghost {
-  padding-left: 2rem;
 }
 
 .c4p--action-set .c4p--action-set__action-button .cds--inline-loading {

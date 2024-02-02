@@ -8634,7 +8634,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--page-header .c4p--page-header__title-row {
   --title-row-margin-top: 0.125rem; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
-  margin-top: var(--title-row-margin-top);
   margin-bottom: 0;
   transform: translateY(0.125rem);
 }

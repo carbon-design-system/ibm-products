@@ -158,6 +158,14 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
+          {
+            n: 'Interstitial Screen',
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
+          },
           'c/InlineTip',
           'c/NonLinearReading',
         ],

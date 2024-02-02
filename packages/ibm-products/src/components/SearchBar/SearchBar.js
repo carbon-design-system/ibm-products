@@ -62,6 +62,7 @@ export let SearchBar = React.forwardRef(
     ref
   ) => {
     const [text, setText] = useState(value || '');
+    const [_selectedScopes, setSelectedScopes] = useState(selectedScopes || []);
     const [isInputDirty, setIsInputDirty] = useState(false);
 
     useEffect(() => {
@@ -77,10 +78,10 @@ export let SearchBar = React.forwardRef(
      */
     const handleSubmit = (event) => {
       event.preventDefault();
-      const eventObject = { value: value };
+      const eventObject = { value: text };
 
       if (scopes.length > 0) {
-        eventObject.selectedScopes = selectedScopes;
+        eventObject.selectedScopes = _selectedScopes;
       }
 
       onSubmit(eventObject);
@@ -91,6 +92,8 @@ export let SearchBar = React.forwardRef(
      * @param {{selectedItems: Array<any>}} {selectedItems} Object containing array of selected items.
      */
     const handleSearchScopeChange = ({ selectedItems }) => {
+      setSelectedScopes(selectedItems);
+
       onChange({
         selectedScopes: selectedItems,
         value: text,

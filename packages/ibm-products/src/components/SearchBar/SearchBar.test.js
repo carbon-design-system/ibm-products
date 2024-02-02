@@ -16,11 +16,15 @@ const blockClass = `${pkg.prefix}--search-bar`;
 const componentName = SearchBar.displayName;
 const dataTestId = uuidv4();
 const scopesTypeLabel = 'Scopes';
+const mockOnSubmit = jest.fn();
+const mockOnChange = jest.fn();
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
   placeHolderText: 'Search...',
   submitLabel: 'Search',
+  onChange: mockOnChange,
+  onSubmit: mockOnSubmit,
 };
 
 const scopes = [
@@ -69,6 +73,13 @@ describe(componentName, () => {
     expect(searchBox).toBeInTheDocument();
     expect(submitButton).toBeEnabled();
 
+    fireEvent.click(submitButton);
+
+    expect(mockOnSubmit).toHaveBeenCalled();
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      value,
+    });
+
     fireEvent.click(clearButton);
 
     expect(searchBox.value).toBe('');
@@ -77,9 +88,7 @@ describe(componentName, () => {
   });
 
   it('type search text, that enables submit button, and click submit button, then clear text field', async () => {
-    const mockSubmitFn = jest.fn();
-
-    renderComponent({ ...defaultProps, onSubmit: mockSubmitFn });
+    renderComponent({ ...defaultProps });
 
     const text = 'carbon';
     const searchBox = screen.getByRole('searchbox');
@@ -96,7 +105,7 @@ describe(componentName, () => {
 
     fireEvent.click(submitButton);
 
-    expect(mockSubmitFn).toHaveBeenCalled();
+    expect(mockOnSubmit).toHaveBeenCalled();
 
     fireEvent.click(clearButton);
 
@@ -105,7 +114,7 @@ describe(componentName, () => {
     expect(clearButton).toHaveClass(`${carbon.prefix}--search-close--hidden`);
   });
 
-  it('renders with scopes multi-select dropdown', async () => {
+  it('renders with scopes multi-select dropdown, open and close it', async () => {
     renderComponent({
       ...defaultProps,
       scopes,
@@ -114,33 +123,62 @@ describe(componentName, () => {
 
     const scopesListBox = screen.getByRole('combobox');
     const scopesListBoxLabel = screen.getByText(scopesTypeLabel);
+    const listEl = screen.getByRole('listbox');
 
     expect(scopesListBox).toBeInTheDocument();
     expect(scopesListBoxLabel).toBeInTheDocument();
-  });
 
-  it('click on scopes dropdown to open first, then close', async () => {
-    renderComponent({
-      ...defaultProps,
-      scopes,
-      scopesTypeLabel,
-    });
-
-    const scopesListBox = screen.getByRole('combobox');
     fireEvent.click(scopesListBox);
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'true');
     expect(scopesListBox).toHaveAttribute('aria-haspopup', 'listbox');
-
-    // List options in a <ul>
-    const listEl = screen.getByRole('listbox');
-    // Check <li>s with same length as scopes
     expect(listEl.children).toHaveLength(scopes.length);
 
     fireEvent.click(scopesListBox);
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'false');
     expect(listEl.children).toHaveLength(0);
+  });
+
+  it('select scope, type text, and calls submit with an expected object', async () => {
+    renderComponent({
+      ...defaultProps,
+      scopes,
+      scopesTypeLabel,
+      value: text,
+    });
+
+    const text = 'carbon';
+    const scopesListBox = screen.getByRole('combobox');
+    const searchBox = screen.getByRole('searchbox');
+    const submitButton = screen.getByText(defaultProps.submitLabel);
+
+    fireEvent.change(searchBox, { target: { value: text } });
+    fireEvent.click(scopesListBox);
+
+    const listItems = screen.getAllByRole('option');
+
+    listItems.forEach((item, index) => {
+      fireEvent.click(item);
+
+      expect(item).toHaveAttribute('aria-selected', 'true');
+      expect(mockOnChange).toHaveBeenCalled();
+      expect(mockOnChange).toHaveBeenCalledWith({
+        value: text,
+        selectedScopes: scopes.slice(0, index),
+      });
+    });
+
+    expect(submitButton).toBeEnabled();
+    fireEvent.click(submitButton);
+    expect(mockOnSubmit).toHaveBeenCalled();
+
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        value: text,
+        selectedScopes: scopes,
+      })
+    );
   });
 
   it('has no accessibility violations', async () => {

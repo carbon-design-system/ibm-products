@@ -271,9 +271,7 @@ describe(`${componentName}.validateActions`, () => {
       `${carbon.prefix}--btn--expressive`,
       `${blockClass}__action-button--expressive`
     );
-    screen.debug();
     rerender(<ActionSet actions={[{ ...actionG, isExpressive: false }]} />);
-    screen.debug();
     expect(actionButton).not.toHaveClass(
       `${carbon.prefix}--btn--expressive`,
       `${blockClass}__action-button--expressive`

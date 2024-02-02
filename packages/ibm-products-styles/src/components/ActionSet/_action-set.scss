@@ -14,21 +14,24 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../SidePanel/side-panel-variables' as spv;
 @use 'sass:map';
+@use 'sass:math';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 @mixin action-set-column() {
-  --flex-direction: column;
+  .#{$action-set-block-class}__inner {
+    --flex-direction: column;
 
-  .#{$action-set-block-class}__action-button {
-    width: 100%;
-    max-width: none;
-    flex: initial;
-  }
+    .#{$action-set-block-class}__action-button {
+      width: 100%;
+      max-width: none;
+      flex: initial;
+    }
 
-  .#{$action-set-block-class}__action-button--ghost {
-    padding-left: $spacing-05;
+    .#{$action-set-block-class}__action-button--ghost {
+      padding-left: $spacing-05;
+    }
   }
 }
 
@@ -37,35 +40,48 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   container-name: action-set;
   container-type: inline-size;
 
-  .#{$action-set-block-class} {
+  .#{$action-set-block-class}__inner {
     --flex-direction: row;
 
     flex-direction: var(--flex-direction);
+    align-items: stretch;
+    justify-content: flex-end;
+    background-color: $layer-01;
   }
 
   /* stylelint-disable-next-line */
-  $min-action-width: to-rem(176px);
+  $min-auto-stack-action-width: to-rem(176px);
 
-  .#{$action-set-block-class}.#{$action-set-block-class} // extra classes needed for specificity
+  &.#{$action-set-block-class} // extra classes needed for specificity
     .#{$action-set-block-class}__action-button {
-    min-width: $min-action-width;
     /* stylelint-disable-next-line */
     max-width: to-rem(232px);
     flex: 0 1 25%;
   }
 
-  .#{$action-set-block-class}.#{$action-set-block-class}
+  &.#{$action-set-block-class}--auto-stack // extra classes needed for specificity
+    .#{$action-set-block-class}__action-button {
+    min-width: $min-auto-stack-action-width;
+  }
+
+  &.#{$action-set-block-class}
     .#{$action-set-block-class}__action-button--ghost {
     max-width: none;
     flex: 1 1 25%;
+    padding-left: $spacing-07; /* increased padding when inline */
   }
 
-  @container (width <= #{4 * $min-action-width}) {
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--quadruple {
+  @container (width <= #{4 * $min-auto-stack-action-width}) {
+    &.#{$action-set-block-class}--quadruple
+      .#{$action-set-block-class}__action-button {
+      flex: 1 1 25%;
+    }
+
+    &.#{$action-set-block-class}--auto-stack.#{$action-set-block-class}--quadruple {
       @include action-set-column();
     }
 
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--double {
+    &.#{$action-set-block-class}.#{$action-set-block-class}--double {
       // Note that at 642px(40.125rem) flyout filter expects 1 row
       .#{$action-set-block-class}__action-button {
         max-width: none;
@@ -74,31 +90,48 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  @container (width <= #{3 * $min-action-width}) {
+  @container (width <= #{3 * $min-auto-stack-action-width}) {
+    &.#{$action-set-block-class}--triple
+      .#{$action-set-block-class}__action-button {
+      flex: 1 1 math.div(100%, 3);
+    }
+
     // Note that by 640px(40rem) sidepanel expects 1 row
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--triple {
+    &.#{$action-set-block-class}--auto-stack.#{$action-set-block-class}--triple {
       @include action-set-column();
+    }
+
+    &.#{$action-set-block-class}--single
+      .#{$action-set-block-class}__action-button {
+      max-width: none;
+      flex: 1 1 100%;
     }
   }
 
-  @container (width <= #{2 * $min-action-width}) {
+  @container (width <= #{2 * $min-auto-stack-action-width}) {
+    &.#{$action-set-block-class}--double
+      .#{$action-set-block-class}__action-button {
+      flex: 1 1 50%;
+    }
+
     // Note that by 480px(30rem) side panel expects 1 row
-    .#{$action-set-block-class}.#{$action-set-block-class}.#{$action-set-block-class}--double {
+    &.#{$action-set-block-class}--auto-stack.#{$action-set-block-class}--double {
       @include action-set-column();
     }
   }
 }
 
-.#{$action-set-block-class}__container {
+.#{$action-set-block-class}.#{$action-set-block-class} {
+  // some of the button set settings are quite specific
   @include action-set-layout();
 
+  display: inline-block;
   width: 100%;
+  vertical-align: bottom;
 }
 
-.#{$action-set-block-class} {
-  align-items: stretch;
-  justify-content: flex-end;
-  background-color: $layer-01;
+.#{$action-set-block-class}__inner {
+  display: flex;
 }
 
 .#{$action-set-block-class} .#{$action-set-block-class}__action-button {
@@ -112,11 +145,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
   }
-}
-
-.#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
-  .#{$action-set-block-class}__action-button--ghost {
-  padding-left: $spacing-07;
 }
 
 .#{$action-set-block-class}

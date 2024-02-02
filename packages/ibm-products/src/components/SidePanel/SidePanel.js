@@ -638,6 +638,7 @@ export let SidePanel = React.forwardRef(
               {/* footer */}
               <ActionSet
                 actions={actions}
+                autoStack
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
               />

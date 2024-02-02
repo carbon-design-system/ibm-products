@@ -89,7 +89,7 @@ const actionOrder = (kind) =>
   }[kind] ?? 3);
 
 // prior to changes
-// Single full width up to medium
+// Single full width up to medium 40rem
 // Double 50% up to a value larger than Flyout (642px, 40.125rem)
 // Triple 25% (max 232px)
 // Quad 25% (max 232px)
@@ -114,8 +114,8 @@ export const ActionSet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       actions,
+      autoStack = false,
       buttonSize,
       className,
 
@@ -165,22 +165,23 @@ export const ActionSet = React.forwardRef(
     );
 
     return (
-      <div className={`${blockClass}__container`} ref={localRef}>
-        <ButtonSet
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          className={cx(blockClass, className, {
-            [`${blockClass}--single`]: orderedActions?.length === 1,
-            [`${blockClass}--double`]: orderedActions?.length === 2,
-            [`${blockClass}--triple`]: orderedActions?.length === 3,
-            [`${blockClass}--quadruple`]: orderedActions?.length >= 4,
-            [`${blockClass}--stacked`]: stacked,
-          })}
-          role="presentation"
-          ref={innerRef}
-        >
+      <ButtonSet
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(blockClass, className, {
+          [`${blockClass}--single`]: orderedActions?.length === 1,
+          [`${blockClass}--double`]: orderedActions?.length === 2,
+          [`${blockClass}--triple`]: orderedActions?.length === 3,
+          [`${blockClass}--quadruple`]: orderedActions?.length >= 4,
+          [`${blockClass}--auto-stack`]: autoStack,
+          [`${blockClass}--stacked`]: stacked,
+        })}
+        role="presentation"
+        ref={localRef}
+      >
+        <div className={`${blockClass}__inner`} ref={innerRef}>
           {orderedActions?.map((action, index) => (
             <ActionSetButton
               key={orderedActions.key || index}
@@ -188,8 +189,8 @@ export const ActionSet = React.forwardRef(
               size={buttonSize}
             />
           ))}
-        </ButtonSet>
-      </div>
+        </div>
+      </ButtonSet>
     );
   }
 );
@@ -286,6 +287,11 @@ ActionSet.propTypes = {
       })
     ),
   ]),
+
+  /**
+   * auto stack actions based on container queries
+   */
+  autoStack: PropTypes.bool,
 
   /**
    * The size of buttons to use for the actions. The allowed values are

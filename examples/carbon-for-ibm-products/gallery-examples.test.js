@@ -13,6 +13,13 @@ import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example
 import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
 import { Example as BigNumbersExample } from './BigNumbers/src/Example/Example';
 import { Example as CascadeExample } from './Cascade/src/Example/Example';
+import { Example as CoachmarkExample } from './Coachmark/src/Example/Example';
+import { Example as CoachmarkBeaconExample } from './CoachmarkBeacon/src/Example/Example';
+import { Example as CoachmarkButtonExample } from './CoachmarkButton/src/Example/Example';
+import { Example as CoachmarkFixedExample } from './CoachmarkFixed/src/Example/Example';
+import { Example as CoachmarkOverlayElementExample } from './CoachmarkOverlayElement/src/Example/Example';
+import { Example as CoachmarkOverlayElementsExample } from './CoachmarkOverlayElements/src/Example/Example';
+import { Example as CoachmarkStackExample } from './CoachmarkStack/src/Example/Example';
 import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
 import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
 import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example';
@@ -66,6 +73,48 @@ describe('All examples', () => {
 
   it('Cascade renders', () => {
     render(<CascadeExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('Coachmark renders', () => {
+    render(<CoachmarkExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkBeacon renders', () => {
+    render(<CoachmarkBeaconExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkButton renders', () => {
+    render(<CoachmarkButtonExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkFixed renders', () => {
+    render(<CoachmarkFixedExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkOverlayElement renders', () => {
+    render(<CoachmarkOverlayElementExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkOverlayElements renders', () => {
+    render(<CoachmarkOverlayElementsExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkStack renders', () => {
+    render(<CoachmarkStackExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -12,6 +12,13 @@ const defaultOrNot = (item) => item.default || item;
 import imageAboutModal from './AboutModal--thumbnail.png';
 import imageBigNumbers from './BigNumbers--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
+import imageCoachmark from './Coachmark--thumbnail.png';
+import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
+import imageCoachmarkButton from './CoachmarkButton--thumbnail.png';
+import imageCoachmarkFixed from './CoachmarkFixed--thumbnail.png';
+import imageCoachmarkOverlayElement from './CoachmarkOverlayElement--thumbnail.png';
+import imageCoachmarkOverlayElements from './CoachmarkOverlayElements--thumbnail.png';
+import imageCoachmarkStack from './CoachmarkStack--thumbnail.png';
 import imageCreateFullPage from './CreateFullPage--thumbnail.png';
 import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
@@ -58,6 +65,41 @@ const config = [
     thumbnail: `url(${imageBigNumbers}`,
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
+  {
+    label: 'Coachmark',
+    directory: 'Coachmark',
+    thumbnail: `url(${imageCoachmark}`,
+  },
+  {
+    label: 'Coachmark-Beacon',
+    directory: 'CoachmarkBeacon',
+    thumbnail: `url(${imageCoachmarkBeacon}`,
+  },
+  {
+    label: 'Coachmark-Button',
+    directory: 'CoachmarkButton',
+    thumbnail: `url(${imageCoachmarkButton}`,
+  },
+  {
+    label: 'Coachmark-Fixed',
+    directory: 'CoachmarkFixed',
+    thumbnail: `url(${imageCoachmarkFixed}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Element',
+    directory: 'CoachmarkOverlayElement',
+    thumbnail: `url(${imageCoachmarkOverlayElement}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Elements',
+    directory: 'CoachmarkOverlayElements',
+    thumbnail: `url(${imageCoachmarkOverlayElements}`,
+  },
+  {
+    label: 'Coachmark-Stack',
+    directory: 'CoachmarkStack',
+    thumbnail: `url(${imageCoachmarkStack}`,
+  },
   {
     label: 'Create Full Page',
     directory: 'CreateFullPage',

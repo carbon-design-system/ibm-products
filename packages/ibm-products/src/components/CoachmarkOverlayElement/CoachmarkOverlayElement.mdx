@@ -1,0 +1,83 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkOverlayElement } from '.';
+
+# CoachmarkOverlayElement
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Note on theming](#note-on-theming)
+- [Example usage](#example-usage)
+- [Code Sample](#code-sample)
+- [Component API](#component-api)
+
+## Overview
+
+The CoachmarkOverlayElement is a composable element reserved for use within a
+CoachmarkOverlayElements container, which should be used only within the scope
+of a Coachmark or a CoachmarkFixed component. There can be one to N number of
+CoachmarkOverlayElement components as children to a single
+CoachmarkOverlayElements. When more than one CoachmarkOverlayElement components
+are used in a CoachmarkOverlayElements, the components are displayed in a
+paginated fashion within a carousel.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Note on theming
+
+The CoachmarkOverlayElement does not directly take a theme prop; rather, it
+relies on the cascade from classes being set in the
+Coachmark/CoachmarkFixed/CoachmarkStack components.
+
+## Example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story
+      id={getStoryId(
+        CoachmarkOverlayElement.displayName,
+        'coachmark-overlay-element'
+      )}
+    />
+  </div>
+</Canvas>
+
+## Code sample
+
+```jsx
+<Coachmark ... >
+  <CoachmarkOverlayElements ...>
+
+    <CoachmarkOverlayElement
+      title='Hello World'
+      description='Link opens in new tab.'
+      button={
+        <Link href='https://www.ibm.com' target='_blank' renderIcon={Crossroads16}>
+          Learn more
+        </Link>
+      } />
+
+     <CoachmarkOverlayElement
+        title='Hello World'
+        description='Link opens on this page.'
+        button={<Link href='https://www.ibm.com'>Learn more</Link>}
+      />
+
+  </CoachmarkOverlayElements>
+
+</Coachmark>
+
+```
+
+## Component API
+
+<ArgsTable />

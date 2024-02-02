@@ -27,6 +27,7 @@ import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
 import { Example as DatagridExample } from './Datagrid/src/Example/Example';
 import { Example as DelimitedListExample } from './DelimitedList/src/Example/Example';
+import { Example as DescriptionListExample } from './DescriptionList/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
@@ -156,6 +157,12 @@ describe('All examples', () => {
 
   it('DelimitedList renders', () => {
     render(<DelimitedListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('DescriptionList renders', () => {
+    render(<DescriptionListExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

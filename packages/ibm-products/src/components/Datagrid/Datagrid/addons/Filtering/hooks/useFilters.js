@@ -28,7 +28,13 @@ import {
   RadioButton,
   RadioButtonGroup,
 } from '@carbon/react';
-import React, { useCallback, useEffect, useRef, useState, useContext } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from 'react';
 
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
@@ -183,7 +189,7 @@ const useFilters = ({
       type: SAVED_FILTERS,
       payload: {
         savedFilters: filterCopy,
-      }
+      },
     });
 
     if (updateMethod === INSTANT) {
@@ -408,8 +414,6 @@ const useFilters = ({
     revertToPreviousFilters,
   ]);
 
-  console.log(filtersObjectArray);
-
   // Re-applies filters if the Datagrid goes into a fetching state while panel is open
   // and has had filters changed without applying
   useEffect(() => {
@@ -420,14 +424,34 @@ const useFilters = ({
       setFetchingReset(true);
     }
     if (isFetching && fetchingReset) {
+      const cleanFilters = (originalFilterState) => {
+        const copy = { ...originalFilterState };
+        const updatedFilters = savedFilters.map((f) => {
+          if (Object.hasOwn(copy, f.id)) {
+            copy[f.id] = f;
+            return copy;
+          }
+          return copy;
+        });
+        return updatedFilters[0];
+      };
       setFiltersObjectArray(savedFilters);
-      setFiltersState(savedFilters);
-      console.log('test', filtersObjectArray);
+      const filterStateCopy = cleanFilters(filtersState);
+      setFiltersState(filterStateCopy);
     }
     if (!isFetching) {
       setFetchingReset(false);
     }
-  }, [isFetching, reactTableFiltersState, setAllFilters, fetchingReset, dispatch, savedFilters, filtersObjectArray]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    isFetching,
+    reactTableFiltersState,
+    setAllFilters,
+    fetchingReset,
+    dispatch,
+    savedFilters,
+    filtersObjectArray,
+  ]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

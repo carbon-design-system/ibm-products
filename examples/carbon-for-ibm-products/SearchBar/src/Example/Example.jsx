@@ -4,25 +4,24 @@ import React, { useState } from 'react';
 
 // ----------------------------------------------------
 // This is an example showing use of the
-// AboutModal component
+// SearchBar component
 // from the @carbon/ibm-products component library.
 // ----------------------------------------------------
 
-import { SearchBar } from '';
+import { SearchBar } from '@carbon/ibm-products';
 
 import './_example.scss';
 
 export const Example = () => {
-  // const [status, setStatus] = useState('default');
-  // const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  // const onSaveHandler = async () => {
-  //   setStatus('in-progress');
-  //   await wait(2000);
-  //   setStatus('success');
-  // };
-  return (
-    <h1>Hi</h1>
-  );
+  const defaultProps = {
+    clearButtonLabelText: 'Clear',
+    placeHolderText: 'Search...',
+    submitLabel: 'Search',
+    onChange: (newVal) => console.log('onChange: ', newVal),
+    onSubmit: (newVal) => console.log('onSubmit: ', newVal),
+  };
+
+  return <SearchBar {...defaultProps} />;
 };
 
 export default Example;

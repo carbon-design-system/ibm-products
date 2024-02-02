@@ -38,6 +38,7 @@ import imagePageHeader from './PageHeader--thumbnail.png';
 import imageProductiveCard from './ProductiveCard--thumbnail.png';
 import imageRemoveModal from './RemoveModal--thumbnail.png';
 import imageSaving from './Saving--thumbnail.png';
+import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
@@ -190,6 +191,11 @@ const config = [
     thumbnail: `url(${imageRemoveModal}`,
   },
   { label: 'Saving', directory: 'Saving', thumbnail: `url(${imageSaving}` },
+  {
+    label: 'Search-Bar',
+    directory: 'SearchBar',
+    thumbnail: `url(${imageSearchBar}`,
+  },
   {
     label: 'SidePanel',
     directory: 'SidePanel',

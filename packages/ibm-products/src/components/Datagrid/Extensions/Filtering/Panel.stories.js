@@ -165,6 +165,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
   // Enable feature flag for `useFiltering` hook
   pkg.feature['Datagrid.useFiltering'] = true;
   pkg._silenceWarnings(true);
+
   return <Datagrid datagridState={datagridState} />;
 };
 

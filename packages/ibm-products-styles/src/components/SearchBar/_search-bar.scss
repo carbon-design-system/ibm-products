@@ -11,13 +11,6 @@
 
 @use '@carbon/styles/scss/utilities' as *;
 
-// Other Carbon settings if needed
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/themes/scss/tokens';
-
-// SearchBar uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by SearchBar
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
 

@@ -108,12 +108,9 @@ const s = [
           { n: 'Notifications', s: ['c/NotificationsPanel'] },
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
-          { 
+          {
             n: 'Search bar',
-            s: [
-              'c/SearchBar',
-              'c/SearchBarScopes'
-            ]
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
           },
           { n: 'Status icons', s: ['c/StatusIcon'] },
           { n: 'Toolbars', s: ['c/Toolbar'] },

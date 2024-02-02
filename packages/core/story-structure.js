@@ -54,6 +54,7 @@ const s = [
               'c/Datagrid/Extensions/EditableCell',
               'c/Datagrid/Extensions/ColumnCustomization',
               'c/Datagrid/Extensions/Skeleton',
+              'c/Datagrid/Extensions/Slug',
             ],
           },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
@@ -143,6 +144,23 @@ const s = [
       {
         n: 'Novice to pro',
         s: [
+          {
+            n: 'Coachmark',
+            s: [
+              'c/Coachmark',
+              'c/CoachmarkFixed',
+              'c/CoachmarkStack',
+              {
+                n: 'Coachmark Elements',
+                s: [
+                  'c/CoachmarkBeacon',
+                  'c/CoachmarkButton',
+                  'c/CoachmarkOverlayElement',
+                  'c/CoachmarkOverlayElements',
+                ],
+              },
+            ],
+          },
           'c/Checklist',
           'c/Guidebanner',
           'c/InlineTip',

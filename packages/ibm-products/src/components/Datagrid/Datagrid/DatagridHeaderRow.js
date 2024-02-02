@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
+import { ColumnHeaderSlug } from './addons/Slug/ColumnHeaderSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -92,7 +93,7 @@ const ResizeHeader = ({
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel } = datagridState;
+  const { resizerAriaLabel, isTableSortable } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -149,6 +150,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     ...headerGroupProps
   } = headerGroup.getHeaderGroupProps();
 
+  const renderSlug = (slug) => {
+    if (isTableSortable) {
+      return;
+    }
+    return <ColumnHeaderSlug slug={slug} />;
+  };
+
   return (
     <TableRow
       {...headerGroupProps}
@@ -185,12 +193,15 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   datagridState.isTableSortable && header.id !== 'spacer',
                 [`${blockClass}__isSorted`]: header.isSorted,
                 [`${blockClass}__header-actions-column`]: header.isAction,
+                [`${blockClass}__with-slug`]:
+                  header.slug && React.isValidElement(header.slug),
               })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
+              {renderSlug(header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

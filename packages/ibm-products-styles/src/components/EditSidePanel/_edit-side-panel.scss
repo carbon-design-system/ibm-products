@@ -45,22 +45,4 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
     .#{c4p-settings.$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
-
-  .#{$side-panel-block-class} .#{$block-class}__actions-container {
-    position: absolute;
-    z-index: 4;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  .#{$block-class}__actions-container {
-    position: absolute;
-    z-index: 4;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    margin-bottom: 0;
-  }
 }

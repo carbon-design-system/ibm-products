@@ -71,10 +71,18 @@ const defaults = {
     EditUpdateCards: false,
     TruncatedList: false,
     DelimitedList: false,
+    
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    Coachmark: false,
+    CoachmarkBeacon: false,
+    CoachmarkButton: false,
+    CoachmarkFixed: false,
+    CoachmarkOverlayElement: false,
+    CoachmarkOverlayElements: false,
+    CoachmarkStack: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,
@@ -82,6 +90,9 @@ const defaults = {
     InlineTip: false,
     InlineTipButton: false,
     InlineTipLink: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     NonLinearReading: false,
   },
 

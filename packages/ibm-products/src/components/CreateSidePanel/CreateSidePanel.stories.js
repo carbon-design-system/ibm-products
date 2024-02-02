@@ -86,6 +86,7 @@ export default {
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     styles,
     docs: {
       page: DocsPage,

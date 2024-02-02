@@ -11,6 +11,13 @@ const defaultOrNot = (item) => item.default || item;
 /* --- import Thumbnails */ import imageAPIKeyModal from './APIKeyModal--thumbnail.png';
 import imageAboutModal from './AboutModal--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
+import imageCoachmark from './Coachmark--thumbnail.png';
+import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
+import imageCoachmarkButton from './CoachmarkButton--thumbnail.png';
+import imageCoachmarkFixed from './CoachmarkFixed--thumbnail.png';
+import imageCoachmarkOverlayElement from './CoachmarkOverlayElement--thumbnail.png';
+import imageCoachmarkOverlayElements from './CoachmarkOverlayElements--thumbnail.png';
+import imageCoachmarkStack from './CoachmarkStack--thumbnail.png';
 import imageCreateFullPage from './CreateFullPage--thumbnail.png';
 import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
@@ -25,6 +32,9 @@ import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
+import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
+import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
+import imageInterstitialScreenViewModule from './InterstitialScreenViewModule--thumbnail.png';
 import imageNotificationsPanel from './NotificationsPanel--thumbnail.png';
 import imageOptionsTile from './OptionsTile--thumbnail.png';
 import imagePageHeader from './PageHeader--thumbnail.png';
@@ -53,6 +63,41 @@ const config = [
     thumbnail: `url(${imageAboutModal}`,
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
+  {
+    label: 'Coachmark',
+    directory: 'Coachmark',
+    thumbnail: `url(${imageCoachmark}`,
+  },
+  {
+    label: 'Coachmark-Beacon',
+    directory: 'CoachmarkBeacon',
+    thumbnail: `url(${imageCoachmarkBeacon}`,
+  },
+  {
+    label: 'Coachmark-Button',
+    directory: 'CoachmarkButton',
+    thumbnail: `url(${imageCoachmarkButton}`,
+  },
+  {
+    label: 'Coachmark-Fixed',
+    directory: 'CoachmarkFixed',
+    thumbnail: `url(${imageCoachmarkFixed}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Element',
+    directory: 'CoachmarkOverlayElement',
+    thumbnail: `url(${imageCoachmarkOverlayElement}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Elements',
+    directory: 'CoachmarkOverlayElements',
+    thumbnail: `url(${imageCoachmarkOverlayElements}`,
+  },
+  {
+    label: 'Coachmark-Stack',
+    directory: 'CoachmarkStack',
+    thumbnail: `url(${imageCoachmarkStack}`,
+  },
   {
     label: 'Create Full Page',
     directory: 'CreateFullPage',
@@ -122,6 +167,21 @@ const config = [
     label: 'Import Modal',
     directory: 'ImportModal',
     thumbnail: `url(${imageImportModal}`,
+  },
+  {
+    label: 'Interstitial-Screen',
+    directory: 'InterstitialScreen',
+    thumbnail: `url(${imageInterstitialScreen}`,
+  },
+  {
+    label: 'Interstitial-Screen-View',
+    directory: 'InterstitialScreenView',
+    thumbnail: `url(${imageInterstitialScreenView}`,
+  },
+  {
+    label: 'Interstitial-Screen-View-Module',
+    directory: 'InterstitialScreenViewModule',
+    thumbnail: `url(${imageInterstitialScreenViewModule}`,
   },
   {
     label: 'Notifications Panel',

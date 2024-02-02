@@ -8,6 +8,7 @@
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
 
 $block-class: #{$pkg-prefix}--filter-summary;
 
@@ -16,13 +17,33 @@ $block-class: #{$pkg-prefix}--filter-summary;
   width: 100%;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   height: to-rem(48px);
-  align-items: center;
+  align-items: start;
   padding: $spacing-03;
   border-top: 1px solid $border-subtle-01;
   background: $layer-01;
+  &.#{$block-class}__expanded {
+    height: fit-content;
+  }
 }
 
 .#{$block-class}
   .#{$pkg-prefix}--tag-set.#{$pkg-prefix}--tag-set.#{$block-class}__clear-button-inline {
   width: auto;
+}
+
+.#{$block-class}__view-all--wrapper {
+  position: absolute;
+  top: $spacing-03;
+  right: 0;
+}
+
+.#{$block-class}__expanded
+  .#{$block-class}__clear-all-button.#{$carbon-prefix}--btn {
+  margin-right: $spacing-07;
+}
+
+.#{$block-class}__view-all--wrapper
+  .#{$block-class}__view-all--chevron-multiline {
+  transform: rotate(180deg);
+  transition: transform $duration-fast-01 motion(standard);
 }

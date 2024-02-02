@@ -35,11 +35,11 @@ other users.
 This project consists of a number of component library packages published on
 npm:
 
-| Package name                                          | Description                                                                                                       |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-products`](./packages/ibm-products)     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
-| [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration               |
-| [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                              |
+| Package name                                                                                                          | Description                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`@carbon/ibm-products`](./packages/ibm-products)                                                                     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration                       |
+| [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                                      |
 
 Also the following additional utility packages are published on npm:
 
@@ -52,20 +52,27 @@ published on npm.
 
 ### Version support
 
-Carbon 11 support is introduced in Carbon for IBM Products <https://github.com/carbon-design-system/ibm-products/labels/v2>
+Carbon 11 support is introduced in Carbon for IBM Products
+<https://github.com/carbon-design-system/ibm-products/labels/v2>
 
-| Package name                                | Carbon package                         | React version    |
-| --------------------------------- | ------------------------------ | ---------------  |
-| `@carbon/ibm-products`              | **`@carbon/react`**                 | 18, 17, 16
+| Package name           | Carbon package      | React version |
+| ---------------------- | ------------------- | ------------- |
+| `@carbon/ibm-products` | **`@carbon/react`** | 18, 17, 16    |
 
-The following packages support Carbon 10 and are considered <https://github.com/carbon-design-system/ibm-products/labels/v1> packages.
+The following packages support Carbon 10 and are considered
+<https://github.com/carbon-design-system/ibm-products/labels/v1> packages.
 
-| Package name                                       | Carbon package                   | React version    |
-| ------------------------------------- | --------------------------- | ---------------  |
-| `@carbon/ibm-products`<br/> `@carbon/ibm-cloud-cognitive-cdai`<br/> `@carbon/ibm-security` <br/>  | **`carbon-components-react`**<br/> `carbon-components`<br/> `@carbon/icons-react`<br/> `@carbon/icons` <br/> `@carbon/colors` <br/> `@carbon/elements` <br/> etc  | 17, 16 |
+| Package name                                                                                     | Carbon package                                                                                                                                                   | React version |
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `@carbon/ibm-products`<br/> `@carbon/ibm-cloud-cognitive-cdai`<br/> `@carbon/ibm-security` <br/> | **`carbon-components-react`**<br/> `carbon-components`<br/> `@carbon/icons-react`<br/> `@carbon/icons` <br/> `@carbon/colors` <br/> `@carbon/elements` <br/> etc | 17, 16        |
 
-If you’d like to learn more about migrating from Carbon 10 to Carbon 11, please see the Carbon [v11 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/migration/v11.md) (which includes codemods via [`@carbon/upgrade`](https://github.com/carbon-design-system/carbon/blob/main/packages/upgrade/README.md)) and the Carbon for IBM Products [v2 migration guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md).
-
+If you’d like to learn more about migrating from Carbon 10 to Carbon 11, please
+see the Carbon
+[v11 migration guide](https://github.com/carbon-design-system/carbon/blob/main/docs/migration/v11.md)
+(which includes codemods via
+[`@carbon/upgrade`](https://github.com/carbon-design-system/carbon/blob/main/packages/upgrade/README.md))
+and the Carbon for IBM Products
+[v2 migration guide](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md).
 
 ## 🙌 Contributing
 

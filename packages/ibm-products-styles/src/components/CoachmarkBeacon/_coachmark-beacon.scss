@@ -1,0 +1,166 @@
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/motion-easing-use */
+/* stylelint-disable max-nesting-depth */
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/react/scss/grid';
+
+// CoachmarkBeacon uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by CoachmarkBeacon
+$beaconAnimationTime: 2s;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
+
+.#{$block-class} {
+  position: relative;
+
+  &-default {
+    .#{$block-class}__target {
+      &::before {
+        display: none;
+      }
+      // the blue dot
+      &::after {
+        position: absolute;
+        top: calc($spacing-01 + $spacing-03);
+        left: calc($spacing-01 + $spacing-03);
+        width: $spacing-04;
+        height: $spacing-04;
+        border-radius: 50%;
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        background-color: $blue-50;
+        content: '';
+      }
+
+      &:focus {
+        outline: transparent;
+
+        &::before {
+          position: absolute;
+          top: 7px;
+          left: 7px;
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: 100%;
+          content: '';
+          /* stylelint-disable-next-line carbon/theme-token-use */
+          outline: $spacing-01 $focus solid;
+        }
+      }
+    }
+  }
+  .#{$block-class}__target {
+    // the hit area
+    position: absolute;
+    top: calc(-1 * $spacing-05);
+    left: calc(-1 * $spacing-05);
+    width: $spacing-07;
+    height: $spacing-07;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+
+    &[aria-expanded='true'] {
+      circle {
+        animation: none;
+      }
+    }
+  }
+
+  &__center {
+    position: absolute;
+    z-index: 6900;
+    top: calc(($spacing-06 - $spacing-01) * -1);
+    left: calc(($spacing-06 - $spacing-01) * -1);
+    width: $spacing-11;
+    height: $spacing-11;
+    pointer-events: none;
+
+    circle {
+      /* stylelint-disable-next-line carbon/motion-duration-use */
+      animation: ripple $beaconAnimationTime infinite;
+      fill: $support-info;
+      fill-opacity: 0;
+      -webkit-mask-image: none;
+      mask-image: none;
+      stroke: $support-info;
+      stroke-opacity: 0;
+      stroke-width: 1px;
+      transition-timing-function: motion (exit, productive);
+      @media (prefers-reduced-motion) {
+        animation: none;
+      }
+    }
+  }
+}
+@keyframes ripple {
+  0% {
+    fill-opacity: 0;
+    r: 1px;
+    stroke-opacity: 0;
+    transition-timing-function: motion(entrance, productive);
+  }
+
+  31% {
+    fill-opacity: 0.2;
+    stroke-opacity: 1;
+  }
+
+  62% {
+    fill-opacity: 0;
+    r: 32px;
+    stroke-opacity: 0;
+  }
+
+  100% {
+    fill-opacity: 0;
+    r: 32px;
+    stroke-opacity: 0;
+  }
+}
+
+@keyframes ring-ripple {
+  0% {
+    fill-opacity: 0;
+    r: 12px;
+    stroke-opacity: 0;
+    transition-timing-function: motion(entrance, productive);
+  }
+
+  31% {
+    fill-opacity: 0.2;
+    stroke-opacity: 1;
+  }
+
+  62% {
+    fill-opacity: 0;
+    r: 32px;
+    stroke-opacity: 0;
+  }
+
+  100% {
+    fill-opacity: 0;
+    r: 32px;
+    stroke-opacity: 0;
+  }
+}

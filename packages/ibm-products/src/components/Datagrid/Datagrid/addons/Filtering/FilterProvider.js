@@ -1,10 +1,10 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import {
   DATE,
@@ -13,6 +13,7 @@ import {
   RADIO,
   CHECKBOX,
   CLEAR_SINGLE_FILTER,
+  SAVED_FILTERS,
 } from './constants';
 
 export const FilterContext = createContext();
@@ -138,12 +139,31 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
   return tags;
 };
 
+const filteringReducer = (state, action) => {
+  switch (action.type) {
+    case SAVED_FILTERS: {
+      const { savedFilters } = action.payload || {};
+      return {
+        ...state,
+        savedFilters,
+      }
+    }
+    default:
+      return state;
+  }
+}
+
 export const FilterProvider = ({ children, filters, filterProps }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
 
-  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
+  const initialState = {
+    savedFilters: [],
+  };
+  const [state, dispatch] = useReducer(filteringReducer, initialState);
+
+  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen, state, dispatch };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

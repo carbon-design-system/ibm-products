@@ -63,7 +63,6 @@ const FilterPanel = ({
   reactTableFiltersState = [],
   autoHideFilters = false,
   isFetching = false,
-  dispatch,
 }) => {
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
@@ -90,7 +89,6 @@ const FilterPanel = ({
     panelOpen,
     autoHideFilters,
     isFetching,
-    dispatch
   });
 
   /** Refs */

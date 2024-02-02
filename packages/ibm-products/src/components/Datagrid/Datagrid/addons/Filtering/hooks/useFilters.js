@@ -80,7 +80,6 @@ const useFilters = ({
   panelOpen,
   autoHideFilters,
   isFetching,
-  dispatch,
 }) => {
   const { state, dispatch: localDispatch } = useContext(FilterContext);
   const { savedFilters } = state;
@@ -448,7 +447,6 @@ const useFilters = ({
     reactTableFiltersState,
     setAllFilters,
     fetchingReset,
-    dispatch,
     savedFilters,
     filtersObjectArray,
   ]);

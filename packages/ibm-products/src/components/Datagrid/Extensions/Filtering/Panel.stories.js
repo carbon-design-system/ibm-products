@@ -7,8 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Tooltip, Button } from '@carbon/react';
-import { CabinCare } from '@carbon/react/icons';
+import { Tooltip } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
@@ -141,7 +140,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(initialData ?? makeData(20));
-  const [isFetching, setIsFetching] = useState(false);
 
   const datagridState = useDatagrid(
     {
@@ -150,7 +148,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       initialState,
       DatagridActions,
       batchActions: true,
-      isFetching,
       toolbarBatchActions: getBatchActions(),
       filterProps,
       gridTitle,
@@ -168,23 +165,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
   // Enable feature flag for `useFiltering` hook
   pkg.feature['Datagrid.useFiltering'] = true;
   pkg._silenceWarnings(true);
-  return<div>
-      <Button 
-        onClick={() => {
-          setIsFetching(true);
-          new Promise((resolve) => {
-            setTimeout(() => {
-              setIsFetching(false);
-              resolve();
-            }, 2000);
-          })
-        }}
-        hasIconOnly
-        renderIcon={CabinCare}
-        iconDescription='is fetching'
-      >refresh</Button>
-      <Datagrid datagridState={datagridState} />
-    </div>;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const FilteringTemplateWrapper = ({ ...args }) => {

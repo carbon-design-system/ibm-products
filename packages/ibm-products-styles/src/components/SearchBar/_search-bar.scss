@@ -15,8 +15,8 @@
 $block-class: #{c4p-settings.$pkg-prefix}--search-bar;
 
 .#{$block-class} {
-  display: flex;
   position: relative;
+  display: flex;
 
   .#{c4p-settings.$pkg-prefix}--search-bar__scopes {
     .#{c4p-settings.$carbon-prefix}--label {

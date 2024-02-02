@@ -102,3 +102,4 @@ export { InterstitialScreenView } from './InterstitialScreenView';
 export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
 export { DelimitedList } from './DelimitedList';
 export { SearchBar } from './SearchBar';
+export { UserAvatar } from './UserAvatar';

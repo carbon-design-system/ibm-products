@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins';
+@use '@carbon/colors' as *;
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/react/scss/grid';
+
+// UserAvatar uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by UserAvatar
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+
+$block-class: #{$pkg-prefix}--user-avatar;
+
+.cds--tooltip-trigger__wrapper .#{$carbon-prefix}--btn--icon-only {
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding-block-start: inherit;
+}
+
+.#{$carbon-prefix}--tooltip-trigger__wrapper
+  .#{$carbon-prefix}--btn--icon-only
+  > :first-child {
+  width: 25px;
+  height: 25px;
+}
+
+@mixin setBgColor($buttonColor) {
+  .#{$carbon-prefix}--icon-tooltip {
+    .#{$carbon-prefix}--tooltip-trigger__wrapper
+      .#{$carbon-prefix}--btn--icon-only {
+      // stylelint-disable-next-line carbon/theme-token-use
+      background-color: $buttonColor;
+
+      &:hover {
+        // stylelint-disable-next-line carbon/theme-token-use
+        background-color: $buttonColor;
+      }
+    }
+  }
+}
+
+.#{$block-class}--light-cyan {
+  @include setBgColor($cyan-50);
+}
+.#{$block-class}--dark-cyan {
+  @include setBgColor($cyan-60);
+}

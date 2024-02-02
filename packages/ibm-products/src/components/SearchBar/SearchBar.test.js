@@ -15,9 +15,9 @@ import { SearchBar } from '.';
 const blockClass = `${pkg.prefix}--search-bar`;
 const componentName = SearchBar.displayName;
 const dataTestId = uuidv4();
-const scopesTypeLabel = 'Scopes';
 const mockOnSubmit = jest.fn();
 const mockOnChange = jest.fn();
+const value = 'Carbon';
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
@@ -29,18 +29,24 @@ const defaultProps = {
 
 const scopes = [
   {
-    id: 'scope-2',
+    id: '2',
     text: 'Scope 2',
   },
   {
-    id: 'scope-1',
+    id: '1',
     text: 'Scope 1',
   },
   {
-    id: 'scope-3',
+    id: '3',
     text: 'Scope 3',
   },
 ];
+
+const scopesDefaultProps = {
+  ...defaultProps,
+  scopes,
+  scopesTypeLabel: 'Scopes',
+};
 
 const renderComponent = (props = defaultProps) => {
   return render(<SearchBar {...props} />);
@@ -62,7 +68,6 @@ describe(componentName, () => {
   });
 
   it('has initial value, it enables submit button, and click clear button to clear input field', async () => {
-    const value = 'Initial Value';
     renderComponent({ ...defaultProps, value });
 
     const searchBox = screen.getByDisplayValue(value);
@@ -116,13 +121,13 @@ describe(componentName, () => {
 
   it('renders with scopes multi-select dropdown, open and close it', async () => {
     renderComponent({
-      ...defaultProps,
-      scopes,
-      scopesTypeLabel,
+      ...scopesDefaultProps,
     });
 
     const scopesListBox = screen.getByRole('combobox');
-    const scopesListBoxLabel = screen.getByText(scopesTypeLabel);
+    const scopesListBoxLabel = screen.getByText(
+      scopesDefaultProps.scopesTypeLabel
+    );
     const listEl = screen.getByRole('listbox');
 
     expect(scopesListBox).toBeInTheDocument();
@@ -140,20 +145,20 @@ describe(componentName, () => {
     expect(listEl.children).toHaveLength(0);
   });
 
+  it('renders with selected scopes', async () => {
+    renderComponent({ ...scopesDefaultProps });
+  });
+
   it('select scope, type text, and calls submit with an expected object', async () => {
     renderComponent({
-      ...defaultProps,
-      scopes,
-      scopesTypeLabel,
-      value: text,
+      ...scopesDefaultProps,
     });
 
-    const text = 'carbon';
     const scopesListBox = screen.getByRole('combobox');
     const searchBox = screen.getByRole('searchbox');
     const submitButton = screen.getByText(defaultProps.submitLabel);
 
-    fireEvent.change(searchBox, { target: { value: text } });
+    fireEvent.change(searchBox, { target: { value } });
     fireEvent.click(scopesListBox);
 
     const listItems = screen.getAllByRole('option');
@@ -164,9 +169,62 @@ describe(componentName, () => {
       expect(item).toHaveAttribute('aria-selected', 'true');
       expect(mockOnChange).toHaveBeenCalled();
       expect(mockOnChange).toHaveBeenCalledWith({
-        value: text,
+        value,
         selectedScopes: scopes.slice(0, index),
       });
+    });
+
+    expect(submitButton).toBeEnabled();
+    fireEvent.click(submitButton);
+    expect(mockOnSubmit).toHaveBeenCalled();
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        value,
+        selectedScopes: scopes,
+      })
+    );
+  });
+
+  it('renders with selected scopes', async () => {
+    renderComponent({
+      ...scopesDefaultProps,
+      selectedScopes: scopes,
+      value,
+    });
+
+    const submitButton = screen.getByText(defaultProps.submitLabel);
+
+    expect(submitButton).toBeEnabled();
+    fireEvent.click(submitButton);
+    expect(mockOnSubmit).toHaveBeenCalled();
+    expect(mockOnSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({
+        value,
+        selectedScopes: scopes,
+      })
+    );
+  });
+
+  it('check custom sorting is working', async () => {
+    renderComponent({
+      ...scopesDefaultProps,
+      value,
+      sortItems: (items) =>
+        items.sort((prev, next) => parseInt(next.id) - parseInt(prev.id)),
+    });
+
+    const _scopes = scopes.sort(
+      (prev, next) => parseInt(next.id) - parseInt(prev.id)
+    );
+    const scopesListBox = screen.getByRole('combobox');
+    const submitButton = screen.getByText(defaultProps.submitLabel);
+
+    fireEvent.click(scopesListBox);
+    const listItems = screen.getAllByRole('option');
+
+    listItems.forEach((item) => {
+      fireEvent.click(item);
+      expect(mockOnChange).toHaveBeenCalled();
     });
 
     expect(submitButton).toBeEnabled();
@@ -175,8 +233,8 @@ describe(componentName, () => {
 
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
-        value: text,
-        selectedScopes: scopes,
+        value,
+        selectedScopes: _scopes,
       })
     );
   });

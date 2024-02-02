@@ -32,6 +32,9 @@ import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
+import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
+import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
+import imageInterstitialScreenViewModule from './InterstitialScreenViewModule--thumbnail.png';
 import imageNotificationsPanel from './NotificationsPanel--thumbnail.png';
 import imageOptionsTile from './OptionsTile--thumbnail.png';
 import imagePageHeader from './PageHeader--thumbnail.png';
@@ -163,6 +166,21 @@ const config = [
     label: 'Import Modal',
     directory: 'ImportModal',
     thumbnail: `url(${imageImportModal}`,
+  },
+  {
+    label: 'Interstitial-Screen',
+    directory: 'InterstitialScreen',
+    thumbnail: `url(${imageInterstitialScreen}`,
+  },
+  {
+    label: 'Interstitial-Screen-View',
+    directory: 'InterstitialScreenView',
+    thumbnail: `url(${imageInterstitialScreenView}`,
+  },
+  {
+    label: 'Interstitial-Screen-View-Module',
+    directory: 'InterstitialScreenViewModule',
+    thumbnail: `url(${imageInterstitialScreenViewModule}`,
   },
   {
     label: 'Notifications Panel',

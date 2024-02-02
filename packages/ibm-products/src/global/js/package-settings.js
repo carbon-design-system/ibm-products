@@ -69,6 +69,12 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    DelimitedList: false,
+    
+    /* new component flags here - comment used by generate CLI */
+
+    // Novice to pro components not yet reviewed and released:
+    Checklist: false,
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,
@@ -76,12 +82,6 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
-    
-    /* new component flags here - comment used by generate CLI */
-
-    // Novice to pro components not yet reviewed and released:
-    Checklist: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,
@@ -89,6 +89,9 @@ const defaults = {
     InlineTip: false,
     InlineTipButton: false,
     InlineTipLink: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     NonLinearReading: false,
   },
 

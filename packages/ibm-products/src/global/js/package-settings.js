@@ -71,7 +71,7 @@ const defaults = {
     EditUpdateCards: false,
     TruncatedList: false,
     DelimitedList: false,
-    
+
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
@@ -82,7 +82,6 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
     SearchBar: false,
     /* new component flags here - comment used by generate CLI */
 

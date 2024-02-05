@@ -83,7 +83,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
-    "stylelint": "^16.2.0",
+    "stylelint": "^15.11.0",
     "stylelint-config-ibm-products": "*",
     "webpack": "^5.90.0"
   },

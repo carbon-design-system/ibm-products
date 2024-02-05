@@ -32,6 +32,7 @@ export let NotFoundEmptyState = React.forwardRef(
       action,
       className,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -53,9 +54,9 @@ export let NotFoundEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <NotFoundIllustration
-          title={title}
           theme={illustrationTheme}
           size={size}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -98,6 +99,11 @@ NotFoundEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * The alt text for empty state svg images.If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state illustration theme variations.

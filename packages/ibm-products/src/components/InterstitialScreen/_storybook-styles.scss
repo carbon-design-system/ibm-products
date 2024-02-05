@@ -1,0 +1,73 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+
+/* stylelint-disable media-feature-range-notation */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/type';
+
+.CustomLayout {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $spacing-07;
+  gap: $spacing-05;
+}
+
+.storyCardExample {
+  width: 20%;
+  height: 350px;
+  flex-grow: 1;
+  padding: $spacing-06;
+  border: 1px solid $border-inverse;
+  background-color: $layer-accent-01;
+}
+
+.GenericView {
+  /* stylelint-disable-next-line declaration-no-important */
+  margin-top: $spacing-12 !important;
+}
+
+.NoImageExampleModal {
+  $one-grid-column: calc(
+    100% / 16
+  ); // stylelint-disable-line carbon/layout-token-use
+
+  width: calc(
+    $one-grid-column * 16
+  ); // stylelint-disable-line carbon/layout-token-use
+
+  @media (min-width: 672px) {
+    width: calc(
+      $one-grid-column * 12
+    ); // stylelint-disable-line carbon/layout-token-use
+  }
+}
+
+.NoImageExampleFullScreen {
+  $one-grid-column: calc(
+    100% / 16
+  ); // stylelint-disable-line carbon/layout-token-use
+
+  width: calc(
+    $one-grid-column * 16
+  ); // stylelint-disable-line carbon/layout-token-use
+  @media (min-width: 672px) {
+    width: calc(
+      $one-grid-column * 12
+    ); // stylelint-disable-line carbon/layout-token-use
+  }
+  @media (min-width: 1056px) {
+    width: calc(
+      $one-grid-column * 8
+    ); // stylelint-disable-line carbon/layout-token-use
+  }
+}

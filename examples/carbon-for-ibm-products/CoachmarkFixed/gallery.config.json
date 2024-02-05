@@ -1,0 +1,12 @@
+{
+  "label": "Coachmark-Fixed",
+  "package-config": {
+    "flags": {
+      "component": {
+        "CoachmarkFixed": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

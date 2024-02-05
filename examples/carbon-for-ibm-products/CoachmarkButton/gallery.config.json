@@ -1,0 +1,12 @@
+{
+  "label": "Coachmark-Button",
+  "package-config": {
+    "flags": {
+      "component": {
+        "CoachmarkButton": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

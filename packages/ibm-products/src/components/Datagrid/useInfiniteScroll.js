@@ -23,7 +23,7 @@ const useInfiniteScroll = (hooks) => {
       tableId,
       loadMoreThreshold,
     } = instance;
-    var tableElement;
+    let tableElement;
     if(typeof document !=='undefined'){
       tableElement = document.querySelector(`#${tableId}`);
     }

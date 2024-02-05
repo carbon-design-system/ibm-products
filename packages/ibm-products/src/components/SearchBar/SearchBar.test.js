@@ -6,18 +6,21 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { act, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SearchBar } from '.';
+
+import userEvent from '@testing-library/user-event';
+const { click, type } = userEvent;
 
 const blockClass = `${pkg.prefix}--search-bar`;
 const componentName = SearchBar.displayName;
 const dataTestId = uuidv4();
 const mockOnSubmit = jest.fn();
 const mockOnChange = jest.fn();
-const value = 'Carbon';
+const value = 'carbon';
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
@@ -78,14 +81,18 @@ describe(componentName, () => {
     expect(searchBox).toBeInTheDocument();
     expect(submitButton).toBeEnabled();
 
-    fireEvent.click(submitButton);
+    await act(async () => {
+      await click(submitButton);
+    });
 
     expect(mockOnSubmit).toHaveBeenCalled();
     expect(mockOnSubmit).toHaveBeenCalledWith({
       value,
     });
 
-    fireEvent.click(clearButton);
+    await act(async () => {
+      await click(clearButton);
+    });
 
     expect(searchBox.value).toBe('');
     expect(submitButton).toBeDisabled();
@@ -95,24 +102,29 @@ describe(componentName, () => {
   it('type search text, that enables submit button, and click submit button, then clear text field', async () => {
     renderComponent({ ...defaultProps });
 
-    const text = 'carbon';
     const searchBox = screen.getByRole('searchbox');
     const submitButton = screen.getByText(defaultProps.submitLabel);
     const clearButton = screen.getByTitle(defaultProps.clearButtonLabelText);
 
     expect(submitButton).toBeDisabled();
 
-    fireEvent.change(searchBox, { target: { value: text } });
+    await act(async () => {
+      await type(searchBox, value);
+    });
 
-    expect(searchBox.value).toBe(text);
+    expect(searchBox.value).toBe(value);
     expect(submitButton).toBeEnabled();
     expect(clearButton).toBeInTheDocument();
 
-    fireEvent.click(submitButton);
+    await act(async () => {
+      await click(submitButton);
+    });
 
     expect(mockOnSubmit).toHaveBeenCalled();
 
-    fireEvent.click(clearButton);
+    await act(async () => {
+      await click(clearButton);
+    });
 
     expect(searchBox.value).toBe('');
     expect(submitButton).toBeDisabled();
@@ -133,13 +145,17 @@ describe(componentName, () => {
     expect(scopesListBox).toBeInTheDocument();
     expect(scopesListBoxLabel).toBeInTheDocument();
 
-    fireEvent.click(scopesListBox);
+    await act(async () => {
+      await click(scopesListBox);
+    });
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'true');
     expect(scopesListBox).toHaveAttribute('aria-haspopup', 'listbox');
     expect(listEl.children).toHaveLength(scopes.length);
 
-    fireEvent.click(scopesListBox);
+    await act(async () => {
+      await click(scopesListBox);
+    });
 
     expect(scopesListBox).toHaveAttribute('aria-expanded', 'false');
     expect(listEl.children).toHaveLength(0);
@@ -158,24 +174,39 @@ describe(componentName, () => {
     const searchBox = screen.getByRole('searchbox');
     const submitButton = screen.getByText(defaultProps.submitLabel);
 
-    fireEvent.change(searchBox, { target: { value } });
-    fireEvent.click(scopesListBox);
+    await act(async () => {
+      await type(searchBox, value);
+    });
+
+    expect(mockOnChange).toHaveBeenCalled();
+    expect(searchBox.value).toBe(value);
+
+    await act(async () => {
+      await click(scopesListBox);
+    });
 
     const listItems = screen.getAllByRole('option');
 
-    listItems.forEach((item, index) => {
-      fireEvent.click(item);
+    for (const item of listItems) {
+      await act(async () => {
+        await click(item);
+      });
 
       expect(item).toHaveAttribute('aria-selected', 'true');
       expect(mockOnChange).toHaveBeenCalled();
-      expect(mockOnChange).toHaveBeenCalledWith({
+    }
+
+    expect(mockOnChange).toHaveBeenCalledWith(
+      expect.objectContaining({
         value,
-        selectedScopes: scopes.slice(0, index),
-      });
+        selectedScopes: scopes,
+      })
+    );
+
+    await act(async () => {
+      await click(submitButton);
     });
 
-    expect(submitButton).toBeEnabled();
-    fireEvent.click(submitButton);
     expect(mockOnSubmit).toHaveBeenCalled();
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -195,7 +226,11 @@ describe(componentName, () => {
     const submitButton = screen.getByText(defaultProps.submitLabel);
 
     expect(submitButton).toBeEnabled();
-    fireEvent.click(submitButton);
+
+    await act(async () => {
+      await click(submitButton);
+    });
+
     expect(mockOnSubmit).toHaveBeenCalled();
     expect(mockOnSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -219,16 +254,26 @@ describe(componentName, () => {
     const scopesListBox = screen.getByRole('combobox');
     const submitButton = screen.getByText(defaultProps.submitLabel);
 
-    fireEvent.click(scopesListBox);
-    const listItems = screen.getAllByRole('option');
-
-    listItems.forEach((item) => {
-      fireEvent.click(item);
-      expect(mockOnChange).toHaveBeenCalled();
+    await act(async () => {
+      await click(scopesListBox);
     });
 
+    const listItems = screen.getAllByRole('option');
+
+    for (const item of listItems) {
+      await act(async () => {
+        await click(item);
+      });
+
+      expect(mockOnChange).toHaveBeenCalled();
+    }
+
     expect(submitButton).toBeEnabled();
-    fireEvent.click(submitButton);
+
+    await act(async () => {
+      await click(submitButton);
+    });
+
     expect(mockOnSubmit).toHaveBeenCalled();
 
     expect(mockOnSubmit).toHaveBeenCalledWith(

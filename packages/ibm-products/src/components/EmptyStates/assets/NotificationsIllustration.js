@@ -287,7 +287,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 NotificationsIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };

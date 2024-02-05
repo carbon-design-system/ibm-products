@@ -42,6 +42,7 @@ import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
 import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/Example';
 import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example';
 import { Example as SavingExample } from './Saving/src/Example/Example';
+import { Example as SearchBarExample } from './SearchBar/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
@@ -249,6 +250,12 @@ describe('All examples', () => {
 
   it('Saving renders', () => {
     render(<SavingExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('SearchBar renders', () => {
+    render(<SearchBarExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

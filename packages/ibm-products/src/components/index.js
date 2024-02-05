@@ -101,3 +101,4 @@ export { InterstitialScreen } from './InterstitialScreen';
 export { InterstitialScreenView } from './InterstitialScreenView';
 export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
 export { DelimitedList } from './DelimitedList';
+export { SearchBar } from './SearchBar';

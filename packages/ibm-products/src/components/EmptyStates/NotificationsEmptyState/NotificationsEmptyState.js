@@ -36,6 +36,7 @@ export let NotificationsEmptyState = React.forwardRef(
       className,
       illustrationPosition = defaults.position,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -64,7 +65,7 @@ export let NotificationsEmptyState = React.forwardRef(
         <NotificationsIllustration
           size={size}
           theme={illustrationTheme}
-          title={title}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -107,6 +108,11 @@ NotificationsEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Designates the position of the illustration relative to the content

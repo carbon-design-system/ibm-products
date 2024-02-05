@@ -69,7 +69,7 @@ const CustomizeColumnsTearsheet = ({
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
       if (
-        (Array.isArray(col) && col.indexOf(definition) != null) ||
+        (Array.isArray(col) && col.indexOf(definition) != -1) ||
         definition.id === col.id
       ) {
         return { ...definition, isVisible: value };

@@ -179,8 +179,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     min-width: calc(
       100% +
         (
-          var(--#{$block-class}--width-px) -
-            var(--#{$block-class}--breadcrumb-row-width-px)
+          var(--#{$block-class}--width-px) - var(
+              --#{$block-class}--breadcrumb-row-width-px
+            )
         ) / 2
     );
   }
@@ -192,7 +193,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     width: 50vw;
     height: 1px;
     /* creates a full width box shadow without causing scroll */
-    box-shadow: 0 1px 0 0 $layer-accent-01, 0 1px 0 0 $layer-accent-01;
+    box-shadow:
+      0 1px 0 0 $layer-accent-01,
+      0 1px 0 0 $layer-accent-01;
     content: '';
     opacity: 0;
     transform: translateX(-50%) scaleX(1);
@@ -205,7 +208,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     )::after,
   .#{$block-class}__breadcrumb-row--has-action-bar::after {
     /* creates a full width box shadow without causing scroll */
-    box-shadow: 25vw 1px 0 0 $layer-accent-01, -25vw 1px 0 0 $layer-accent-01;
+    box-shadow:
+      25vw 1px 0 0 $layer-accent-01,
+      -25vw 1px 0 0 $layer-accent-01;
     opacity: 1;
   }
 

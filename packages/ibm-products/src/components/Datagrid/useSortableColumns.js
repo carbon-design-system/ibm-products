@@ -144,8 +144,8 @@ const useSortableColumns = (hooks) => {
           column.disableSortBy === true
             ? 0
             : column.minWidth
-            ? column.minWidth
-            : 90,
+              ? column.minWidth
+              : 90,
       };
     });
     return instance.customizeColumnsProps?.isTearsheetOpen

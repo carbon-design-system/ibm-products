@@ -487,7 +487,8 @@ export const BatchActions = () => {
       DatagridBatchActions,
       rowActions: getRowActions(),
       onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
-      onAllRowSelect: (rows, event) => console.log('onAllRowsClick called', rows, event),
+      onAllRowSelect: (rows, event) =>
+        console.log('onAllRowsClick called', rows, event),
       batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,

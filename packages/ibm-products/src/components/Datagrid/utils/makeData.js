@@ -53,8 +53,8 @@ const getPasswordStrength = () => {
   return chance > 0.66
     ? 'critical'
     : chance > 0.33
-    ? 'minor-warning'
-    : 'normal';
+      ? 'minor-warning'
+      : 'normal';
 };
 
 const renderDocLink = () => {
@@ -65,14 +65,14 @@ const renderDocLink = () => {
       chance > 0.66
         ? 'https://carbondesignsystem.com/'
         : chance > 0.33
-        ? 'https://pages.github.ibm.com/cdai-design/pal/'
-        : 'https://ibm-products.carbondesignsystem.com/',
+          ? 'https://pages.github.ibm.com/cdai-design/pal/'
+          : 'https://ibm-products.carbondesignsystem.com/',
     text:
       chance > 0.66
         ? 'Carbon Design System'
         : chance > 0.33
-        ? 'Carbon for IBM Products PAL'
-        : 'Carbon for IBM Products storybook',
+          ? 'Carbon for IBM Products PAL'
+          : 'Carbon for IBM Products storybook',
   };
   return docLinkObj;
 };
@@ -99,14 +99,14 @@ const newPerson = () => {
       statusChance > 0.66
         ? 'relationship'
         : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
+          ? 'complicated'
+          : 'single',
     role:
       roleChance > 0.66
         ? 'developer'
         : roleChance > 0.33
-        ? 'designer'
-        : 'researcher',
+          ? 'designer'
+          : 'researcher',
     joined: getRandomDateJoined(),
 
     someone1: namor.generate({ words: 1, numbers: 0 }),
@@ -133,14 +133,14 @@ const newPerson = () => {
       initialChartTypeIndex === 0
         ? inlineEditSelectItems[0]
         : initialChartTypeIndex === 1
-        ? inlineEditSelectItems[1]
-        : inlineEditSelectItems[2],
+          ? inlineEditSelectItems[1]
+          : inlineEditSelectItems[2],
     activeSince:
       activeChance > 0.66
         ? activeSinceDate
         : activeChance > 0.33
-        ? yesterdayDate
-        : '23/05/2020',
+          ? yesterdayDate
+          : '23/05/2020',
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),

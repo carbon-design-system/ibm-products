@@ -518,8 +518,8 @@ export let PageHeader = React.forwardRef(
                             breadcrumbs && breadcrumbItemForTitle
                               ? breadcrumbs.concat(breadcrumbItemForTitle)
                               : breadcrumbItemForTitle
-                              ? [breadcrumbItemForTitle]
-                              : breadcrumbs // breadcrumbs may be null or undefined
+                                ? [breadcrumbItemForTitle]
+                                : breadcrumbs // breadcrumbs may be null or undefined
                           }
                         />
                       ) : null}

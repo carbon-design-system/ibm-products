@@ -50,8 +50,8 @@ const useNestedRows = (hooks) => {
             row.depth > 1
               ? marginLeft * 2 + (row.depth - 1) * (marginLeft + marginLeft / 3)
               : row.depth === 1
-              ? marginLeft * 2
-              : 0
+                ? marginLeft * 2
+                : 0
           }px`,
         },
       },

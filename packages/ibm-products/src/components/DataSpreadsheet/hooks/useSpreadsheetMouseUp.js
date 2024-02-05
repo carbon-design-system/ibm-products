@@ -161,8 +161,8 @@ export const useSpreadsheetMouseUp = ({
             const updatedSelectionAreaPlacement = newIndexLessThanStarting
               ? newRelativePosition
               : newColumnIndex === originalColumnIndex
-              ? selectionAreaToMove.style.left
-              : newRelativePosition;
+                ? selectionAreaToMove.style.left
+                : newRelativePosition;
             selectionAreaToMove.style.left = px(updatedSelectionAreaPlacement);
           }
           // Remove the cloned column and indicator elements

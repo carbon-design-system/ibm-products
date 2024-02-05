@@ -376,10 +376,10 @@ describe(componentName, () => {
         index === 0
           ? tabLabel1
           : index === 1
-          ? tabLabel2
-          : index === 2
-          ? tabLabel3
-          : tabLabel4;
+            ? tabLabel2
+            : index === 2
+              ? tabLabel3
+              : tabLabel4;
       expect(tab.textContent).toEqual(tabContent);
     });
   });

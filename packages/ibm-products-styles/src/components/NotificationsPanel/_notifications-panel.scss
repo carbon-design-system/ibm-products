@@ -108,7 +108,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   }
   .#{$block-class}__notification:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 2px $background;
+    box-shadow:
+      inset 0 0 0 2px $focus,
+      inset 0 0 0 2px $background;
     outline: 0;
   }
   .#{$block-class}__notification {

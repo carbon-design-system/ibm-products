@@ -34,7 +34,8 @@ $motion-duration: $duration-moderate-02;
     align-items: flex-end;
     color: $text-primary;
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear $motion-duration,
+    transition:
+      visibility 0s linear $motion-duration,
       background-color $motion-duration motion(exit, expressive),
       opacity $motion-duration motion(exit, expressive);
     --#{$block-class}--stacking-scale-factor-single: 0.95;
@@ -46,7 +47,8 @@ $motion-duration: $duration-moderate-02;
     z-index: utilities.z('modal');
     align-items: flex-end;
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear,
+    transition:
+      visibility 0s linear,
       background-color $motion-duration motion(entrance, expressive),
       opacity $motion-duration motion(entrance, expressive);
     @media (prefers-reduced-motion: reduce) {
@@ -95,7 +97,8 @@ $motion-duration: $duration-moderate-02;
 
   // extra specificity to ensure this transition overrides the carbon default
   &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-    transition: transform $motion-duration motion(entrance, expressive),
+    transition:
+      transform $motion-duration motion(entrance, expressive),
       max-height $motion-duration motion(entrance, expressive);
   }
 

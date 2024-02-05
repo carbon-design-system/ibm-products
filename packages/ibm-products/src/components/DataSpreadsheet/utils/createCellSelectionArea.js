@@ -60,15 +60,15 @@ export const createCellSelectionArea = ({
       ? placementElement.getBoundingClientRect().top -
         bodyContainer.getBoundingClientRect().top
       : lowestRowIndex === 0
-      ? 0
-      : selectionAreaCellHeight * lowestRowIndex, // calculate top value here if virtualized row is not in DOM
+        ? 0
+        : selectionAreaCellHeight * lowestRowIndex, // calculate top value here if virtualized row is not in DOM
     left: placementElement
       ? placementElement.getBoundingClientRect().left -
         bodyContainer.getBoundingClientRect().left
       : lowestColumnIndex === 0
-      ? 0 + (defaultColumn.rowHeaderWidth - 4)
-      : defaultColumn.width * lowestColumnIndex +
-        (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
+        ? 0 + (defaultColumn.rowHeaderWidth - 4)
+        : defaultColumn.width * lowestColumnIndex +
+          (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
   };
   const selectionAreaElement =
     document.querySelector(`[data-matcher-id="${area.matcher}"]`) ||

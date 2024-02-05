@@ -27,11 +27,11 @@ const icon = Add16;
 const iconDescription = `Icon ${uuidv4()}`;
 const itemText = `Option ${uuidv4()}`;
 const label = `Button ${uuidv4()}`;
-const ariaLabel = `aria ${label} label`;
+const menuAriaLabel = `aria ${label} label`;
 
 const renderMenu = (menuProps = {}, itemProps = {}) => {
   const container = render(
-    <ButtonMenu {...{ ariaLabel, label }} {...menuProps}>
+    <ButtonMenu {...{ menuAriaLabel, label }} {...menuProps}>
       <ButtonMenuItem itemText="Option 1" />
       <ButtonMenuItem {...{ itemText }} {...itemProps} />
       <ButtonMenuItem itemText="Option 3" />
@@ -44,7 +44,7 @@ const renderMenu = (menuProps = {}, itemProps = {}) => {
 describe(componentName, () => {
   it('renders a component ButtonMenu', () => {
     renderMenu();
-    expect(screen.getByRole('button', { name: ariaLabel })).toHaveClass(
+    expect(screen.getByRole('button', { name: menuAriaLabel })).toHaveClass(
       blockClass
     );
   });
@@ -62,7 +62,7 @@ describe(componentName, () => {
 
   it('applies className to the containing node', () => {
     renderMenu({ className });
-    expect(screen.getByRole('button', { name: ariaLabel })).toHaveClass(
+    expect(screen.getByRole('button', { name: menuAriaLabel })).toHaveClass(
       className
     );
   });
@@ -70,7 +70,7 @@ describe(componentName, () => {
   it('renders icon and description', () => {
     renderMenu({ iconDescription, renderIcon: icon });
     const svg = screen
-      .getByRole('button', { name: ariaLabel })
+      .getByRole('button', { name: menuAriaLabel })
       .querySelector('svg');
     expect(svg).toHaveClass(`${carbon.prefix}--btn__icon`);
   });

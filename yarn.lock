@@ -13694,7 +13694,7 @@ __metadata:
     npm-run-all: "npm:^4.1.5"
     npm-upgrade: "npm:^3.1.0"
     postcss: "npm:^8.4.33"
-    prettier: "npm:^3.2.4"
+    prettier: "npm:^2.8.8"
     prettier-config-carbon: "npm:^0.11.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -19767,7 +19767,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.8.0":
+"prettier@npm:^2.8.0, prettier@npm:^2.8.8":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:

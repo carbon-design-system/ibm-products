@@ -1,0 +1,42 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { FullPageError } from '.';
+
+# FullPageError
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The FullPageError component renders a full-page error message to inform users
+about encountered issues. It's useful for providing clear feedback and guiding
+users on what to do next when errors occur.\
+[Design Guidance](https://pages.github.ibm.com/cdai-design/pal/patterns/full-page-errors/usage 'fullPageError design guidance')
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+### Generic
+
+The Generic error page without any type, The `UIShell` and `Breadcrumbs` (if
+applicable) should be implemented at the product level
+
+<Canvas>
+  <Story id={getStoryId(FullPageError.displayName, 'full-page-error')} />
+</Canvas>
+
+## Code sample
+
+{/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
+
+## Component API
+
+<ArgsTable />

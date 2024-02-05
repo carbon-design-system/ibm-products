@@ -1,0 +1,12 @@
+{
+  "label": "Search-Bar",
+  "package-config": {
+    "flags": {
+      "component": {
+        "SearchBar": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,12 @@
+{
+  "label": "Interstitial-Screen",
+  "package-config": {
+    "flags": {
+      "component": {
+        "InterstitialScreen": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

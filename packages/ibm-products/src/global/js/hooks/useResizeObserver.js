@@ -42,7 +42,7 @@ export const useResizeObserver = (ref, callback, deps = []) => {
     }
     getInitialSize();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, height, ref, ...deps]);
+  }, [width, height, ref.current, ...deps]);
 
   useLayoutEffect(() => {
     if (!ref?.current) {
@@ -80,6 +80,6 @@ export const useResizeObserver = (ref, callback, deps = []) => {
       observer = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref, ...deps]);
+  }, [ref.current, ...deps]);
   return { width, height };
 };

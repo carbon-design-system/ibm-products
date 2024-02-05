@@ -152,9 +152,6 @@
     "**/*.scss": [
       "npx prettier --cache --write",
       "npx stylelint"
-    ],
-    "!(*sass).md": [
-      "npx prettier --cache --write"
     ]
   },
   "dependencies": {

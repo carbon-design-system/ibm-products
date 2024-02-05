@@ -14,6 +14,13 @@
 @use './ActionSet';
 @use './ButtonMenu';
 @use './Cascade';
+@use './Coachmark';
+@use './CoachmarkBeacon';
+@use './CoachmarkButton';
+@use './CoachmarkFixed';
+@use './CoachmarkOverlayElement';
+@use './CoachmarkOverlayElements';
+@use './CoachmarkStack';
 @use './ComboButton';
 @use './CreateFullPage';
 @use './CreateModal';
@@ -55,4 +62,8 @@
 @use './Guidebanner';
 @use './InlineTip';
 @use './NonLinearReading';
+@use './InterstitialScreen';
+@use './InterstitialScreenView';
+@use './InterstitialScreenViewModule';
 @use './DelimitedList';
+@use './SearchBar';

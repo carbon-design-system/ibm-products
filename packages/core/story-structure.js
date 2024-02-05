@@ -54,6 +54,7 @@ const s = [
               'c/Datagrid/Extensions/EditableCell',
               'c/Datagrid/Extensions/ColumnCustomization',
               'c/Datagrid/Extensions/Skeleton',
+              'c/Datagrid/Extensions/Slug',
             ],
           },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
@@ -107,6 +108,10 @@ const s = [
           { n: 'Notifications', s: ['c/NotificationsPanel'] },
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
+          {
+            n: 'Search bar',
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
+          },
           { n: 'Status icons', s: ['c/StatusIcon'] },
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
@@ -136,8 +141,33 @@ const s = [
       {
         n: 'Novice to pro',
         s: [
+          {
+            n: 'Coachmark',
+            s: [
+              'c/Coachmark',
+              'c/CoachmarkFixed',
+              'c/CoachmarkStack',
+              {
+                n: 'Coachmark Elements',
+                s: [
+                  'c/CoachmarkBeacon',
+                  'c/CoachmarkButton',
+                  'c/CoachmarkOverlayElement',
+                  'c/CoachmarkOverlayElements',
+                ],
+              },
+            ],
+          },
           'c/Checklist',
           'c/Guidebanner',
+          {
+            n: 'Interstitial Screen',
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
+          },
           'c/InlineTip',
           'c/NonLinearReading',
         ],

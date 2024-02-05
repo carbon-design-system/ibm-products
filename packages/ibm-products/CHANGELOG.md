@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.22.0...@carbon/ibm-products@2.23.0) (2024-01-31)
+
+
+### Bug Fixes
+
+* side panel and tearsheet fixes ([#4183](https://github.com/carbon-design-system/ibm-products/issues/4183)) ([ee0f3ed](https://github.com/carbon-design-system/ibm-products/commit/ee0f3ed5a2f1ce10aa9850d13854bcf37d07d79a))
+
+
+### Features
+
+* **Datagrid:** add ai slug support to col headers ([#4163](https://github.com/carbon-design-system/ibm-products/issues/4163)) ([f0b17e2](https://github.com/carbon-design-system/ibm-products/commit/f0b17e284ce38157bdd08543c962fb43f4090ad7))
+* **Datagrid:** add expand icon button in filter summary ([#4030](https://github.com/carbon-design-system/ibm-products/issues/4030)) ([bc7641f](https://github.com/carbon-design-system/ibm-products/commit/bc7641f6cab65a1a1d7f759a36185e14f64ad224))
+
+
+
+
+
+# [2.22.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.21.0...@carbon/ibm-products@2.22.0) (2024-01-30)
+
+
+### Bug Fixes
+
+* close filter flyout on cancel ([#4142](https://github.com/carbon-design-system/ibm-products/issues/4142)) ([d5dc4e7](https://github.com/carbon-design-system/ibm-products/commit/d5dc4e75c9e54a84854010579b62e25efeaf0a55))
+* **Datagrid:** fix placement of pagination when used with filter panel ([#4152](https://github.com/carbon-design-system/ibm-products/issues/4152)) ([d486005](https://github.com/carbon-design-system/ibm-products/commit/d4860054d31a0a3bbc9e0e1440402fdb8690e8bb))
+* **Datagrid:** resolve useRowIsMouseOver issue ([#4061](https://github.com/carbon-design-system/ibm-products/issues/4061)) ([b3166a1](https://github.com/carbon-design-system/ibm-products/commit/b3166a174e6c6665d6a4b9f407bf1e010477d7c7))
+* **TagSet:** close tag set overflow upon displayed tag `onClose` being called ([#3997](https://github.com/carbon-design-system/ibm-products/issues/3997)) ([56c8bb2](https://github.com/carbon-design-system/ibm-products/commit/56c8bb2f21f85b07c4ba950e6db6c36e3f0c0b9a))
+
+
+### Features
+
+* **DelimitedList:** new component DelimitedList ([#4069](https://github.com/carbon-design-system/ibm-products/issues/4069)) ([2e60709](https://github.com/carbon-design-system/ibm-products/commit/2e60709976b08718ec437890e9721e9a1b83500c)), closes [#4047](https://github.com/carbon-design-system/ibm-products/issues/4047)
+* update ai-gradient to phase 2 spec ([#4145](https://github.com/carbon-design-system/ibm-products/issues/4145)) ([4e51d13](https://github.com/carbon-design-system/ibm-products/commit/4e51d132ae60b7aa154eaa433b1a58cdd98fbca2))
+
+
+
+
+
 # [2.21.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.20.0...@carbon/ibm-products@2.21.0) (2024-01-23)
 
 

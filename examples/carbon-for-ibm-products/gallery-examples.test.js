@@ -43,6 +43,7 @@ import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
+import { Example as UserAvatarExample } from './UserAvatar/src/Example/Example';
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
@@ -252,6 +253,12 @@ describe('All examples', () => {
 
   it('Tearsheet renders', () => {
     render(<TearsheetExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('UserAvatar renders', () => {
+    render(<UserAvatarExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

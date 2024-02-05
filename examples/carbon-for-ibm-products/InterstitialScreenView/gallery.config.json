@@ -1,0 +1,12 @@
+{
+  "label": "Interstitial-Screen-View",
+  "package-config": {
+    "flags": {
+      "component": {
+        "InterstitialScreenView": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

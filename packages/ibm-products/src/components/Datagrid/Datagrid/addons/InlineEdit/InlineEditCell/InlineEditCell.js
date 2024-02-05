@@ -490,8 +490,8 @@ export const InlineEditCell = ({
             type === 'selection'
               ? value?.text ?? value
               : type === 'date'
-                ? buildDate(value)
-                : value
+              ? buildDate(value)
+              : value
           }
           labelIcon={value?.icon || null}
           placeholder={placeholder}

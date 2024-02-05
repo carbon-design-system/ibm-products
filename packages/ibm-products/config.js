@@ -13,8 +13,8 @@ export const getStorybookPrefix = (pkg, componentName) => {
   return pkg.isComponentEnabled(componentName, true)
     ? storybookPrefixReleased
     : pkg.isComponentPublic(componentName, true)
-      ? storybookPrefixCanary
-      : storybookPrefixInternal;
+    ? storybookPrefixCanary
+    : storybookPrefixInternal;
 };
 
 /**
@@ -35,8 +35,8 @@ export const getStorybookSlug = (pkg, componentName, scenario, folders) => {
   const state = pkg.isComponentEnabled(componentName, true)
     ? 'released'
     : pkg.isComponentPublic(componentName, true)
-      ? 'canary'
-      : 'internal';
+    ? 'canary'
+    : 'internal';
 
   return `cloud-cognitive-${state}-${hFolders}${lcName}--${scenario}`;
 };

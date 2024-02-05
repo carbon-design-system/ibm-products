@@ -115,8 +115,8 @@ const makeMatcher = (arg) =>
   typeof arg === 'string'
     ? expect.stringContaining(arg)
     : arg instanceof RegExp
-      ? expect.stringMatching(arg)
-      : arg;
+    ? expect.stringMatching(arg)
+    : arg;
 
 // a utility function used by expectWarn/Error to convert a single argument
 // match or an array of argument matches to an array of expect matchers

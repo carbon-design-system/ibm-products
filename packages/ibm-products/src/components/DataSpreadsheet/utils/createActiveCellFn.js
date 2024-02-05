@@ -40,15 +40,15 @@ export const createActiveCellFn = ({
       ? placementElement.getBoundingClientRect().top -
         activeElementContainer.getBoundingClientRect().top
       : coords.row === 0
-        ? 0
-        : selectionAreaCellHeight * coords.row, // calculate top value here if virtualized row is not in DOM
+      ? 0
+      : selectionAreaCellHeight * coords.row, // calculate top value here if virtualized row is not in DOM
     left: placementElement
       ? placementElement.getBoundingClientRect().left -
         activeElementContainer.getBoundingClientRect().left
       : coords.column === 0
-        ? 0 + (defaultColumn.rowHeaderWidth - 4)
-        : selectionAreaCellWidth * coords.column +
-          (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
+      ? 0 + (defaultColumn.rowHeaderWidth - 4)
+      : selectionAreaCellWidth * coords.column +
+        (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
   };
   const activeCellButton = activeCellRef?.current;
   activeCellButton.style.width = px(

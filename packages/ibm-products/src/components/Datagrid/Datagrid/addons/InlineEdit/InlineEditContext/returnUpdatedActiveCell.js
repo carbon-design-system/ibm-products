@@ -25,20 +25,20 @@ export const returnUpdatedActiveCell = ({
           ? activeCellCoords.column + 1
           : activeCellCoords.column
         : direction === 'left'
-          ? activeCellCoords.column === 0
-            ? 0
-            : activeCellCoords.column - 1
-          : activeCellCoords.column,
+        ? activeCellCoords.column === 0
+          ? 0
+          : activeCellCoords.column - 1
+        : activeCellCoords.column,
     row:
       direction === 'up'
         ? activeCellCoords.row === 0
           ? 0
           : activeCellCoords.row - 1
         : direction === 'down'
-          ? activeCellCoords.row < instance.rows.length - 1
-            ? activeCellCoords.row + 1
-            : activeCellCoords.row
-          : activeCellCoords.row,
+        ? activeCellCoords.row < instance.rows.length - 1
+          ? activeCellCoords.row + 1
+          : activeCellCoords.row
+        : activeCellCoords.row,
   };
   const newActiveCellId = `column-${newActiveCoords.column}-row-${newActiveCoords.row}`;
   const newCellIdButton = document.querySelector(

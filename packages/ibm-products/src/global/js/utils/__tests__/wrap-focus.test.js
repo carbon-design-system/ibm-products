@@ -102,8 +102,9 @@ describe('wrapFocus', () => {
   });
 
   it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', async () => {
-    node.querySelector('#inner-modal').innerHTML =
-      `<div id="dummy-old-active-node"></div>`;
+    node.querySelector(
+      '#inner-modal'
+    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -115,8 +116,9 @@ describe('wrapFocus', () => {
   });
 
   it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', async () => {
-    node.querySelector('#inner-modal').innerHTML =
-      `<div id="dummy-old-active-node"></div>`;
+    node.querySelector(
+      '#inner-modal'
+    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),

@@ -64,8 +64,8 @@ let FilterSummary = React.forwardRef(
       typeof viewAllButtonRef?.current?.offsetWidth === 'undefined'
         ? 0
         : overflowCount > 0
-          ? 48
-          : 0;
+        ? 48
+        : 0;
     const measurementOffset =
       filterSummaryClearButton?.current?.offsetWidth + viewAllWidth;
 

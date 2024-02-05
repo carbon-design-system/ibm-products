@@ -125,7 +125,7 @@ export const ActionSet = React.forwardRef(
         'danger--ghost': 2,
         danger: 4,
         primary: 5,
-      })[kind] ?? 3;
+      }[kind] ?? 3);
 
     // order the actions with ghost/ghost-danger buttons first and primary/danger buttons last
     // (or the opposite way if we're stacking)

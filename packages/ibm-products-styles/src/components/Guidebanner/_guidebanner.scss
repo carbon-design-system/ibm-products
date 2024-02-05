@@ -122,8 +122,7 @@ $purple-3: #7433e3;
   margin: $spacing-05 0 0 0;
   opacity: 1;
   scroll-snap-align: start;
-  transition:
-    max-height 50ms motion(exit, productive),
+  transition: max-height 50ms motion(exit, productive),
     margin-top 50ms motion(exit, productive),
     opacity 300ms motion(exit, productive);
 

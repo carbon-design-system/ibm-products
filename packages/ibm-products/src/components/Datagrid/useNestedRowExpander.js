@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,7 @@ const useNestedRowExpander = (hooks) => {
     instance: tempState?.current,
     lastExpandedRowIndex: lastExpandedRowIndex?.current,
     blockClass,
-    activeElement: document.activeElement,
+    activeElement: typeof document !== 'undefined' && document.activeElement,
   });
 
   const visibleColumns = (columns) => {

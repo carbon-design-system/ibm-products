@@ -32,6 +32,7 @@ export default {
 const defaultStoryProps = {
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
+  illustrationDescription: 'Test alt text',
 };
 
 const Template = (args) => {
@@ -96,5 +97,6 @@ export const withActionAndLink = prepareStory(Template, {
       text: 'View documentation',
       href: 'https://www.carbondesignsystem.com',
     },
+    illustrationDescription: 'Test alt text',
   },
 });

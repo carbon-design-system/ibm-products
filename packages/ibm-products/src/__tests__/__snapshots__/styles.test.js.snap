@@ -1836,6 +1836,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 100%;
   overflow-x: auto;
 }
+.c4p--datagrid__grid-container .c4p--datagrid-filter-panel + .c4p--datagrid__table-container-inner .bx--data-table-content {
+  height: fit-content;
+}
 .c4p--datagrid__grid-container table.c4p--datagrid__table-simple {
   display: flex;
   overflow: auto;
@@ -3460,6 +3463,11 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
   left: var(--cds-spacing-01, 0.125rem);
   width: 112px;
+}
+
+.c4p--datagrid .bx--pagination,
+.c4p--datagrid .bx--pagination .bx--select-input {
+  background-color: var(--cds-ui-02, #ffffff);
 }
 
 .c4p--empty-state {

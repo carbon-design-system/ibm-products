@@ -340,4 +340,9 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide .#{$block-class}__buttons {
     background: $background;
   }
+
+  &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
+    .#{$carbon-prefix}--slug {
+    inset-inline-end: 0;
+  }
 }

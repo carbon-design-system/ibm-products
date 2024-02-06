@@ -364,7 +364,6 @@ export let DataSpreadsheet = React.forwardRef(
     };
 
     const handleArrowkeyPress = (arrowKey) => {
-
       event.preventDefault();
       handleInitialArrowPress();
       const coordinatesClone = { ...activeCellCoordinates };

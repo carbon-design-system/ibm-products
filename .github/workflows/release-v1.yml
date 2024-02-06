@@ -67,6 +67,9 @@ jobs:
           yarn json -I -f packages/ibm-products/package.json -e
           'this.name="@carbon/ibm-cloud-cognitive"'
 
+      - name: Update telemetry.yml project ID for legacy publish
+        run: ibm-products % sed -i '' -e s/495342db-5046-4ecf-85ea-9ffceb6f8cdf/9255f6e1-1b25-4ef4-8913-062ef88935c9/ packages/ibm-products/telemetry.yml
+
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename
         run: yarn

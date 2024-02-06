@@ -43,22 +43,22 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "^7.2.3",
-    "@storybook/api": "^7.2.3",
-    "@storybook/client-api": "^7.2.3",
-    "@storybook/client-logger": "^7.2.3",
-    "@storybook/components": "^7.2.3",
-    "@storybook/core-events": "^7.2.3",
-    "@storybook/theming": "^7.2.3",
-    "core-js": "^3.32.0",
+    "@storybook/addons": "^7.6.10",
+    "@storybook/api": "^7.6.10",
+    "@storybook/client-api": "^7.6.10",
+    "@storybook/client-logger": "^7.6.10",
+    "@storybook/components": "^7.6.10",
+    "@storybook/core-events": "^7.6.10",
+    "@storybook/theming": "^7.6.10",
+    "core-js": "^3.35.1",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.10",
-    "@babel/core": "^7.22.10",
-    "@babel/preset-react": "^7.22.5",
-    "npm-check-updates": "^16.11.1",
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "npm-check-updates": "^16.14.12",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.1"
+    "rimraf": "^5.0.5"
   }
 }

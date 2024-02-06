@@ -69,7 +69,19 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    
+    /* new component flags here - comment used by generate CLI */
+
+    // Novice to pro components not yet reviewed and released:
+    Coachmark: false,
+    CoachmarkBeacon: false,
+    CoachmarkButton: false,
+    CoachmarkFixed: false,
+    CoachmarkOverlayElement: false,
+    CoachmarkOverlayElements: false,
+    CoachmarkStack: false,
     DelimitedList: false,
+    SearchBar: false,
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
@@ -81,6 +93,9 @@ const defaults = {
     InlineTip: false,
     InlineTipButton: false,
     InlineTipLink: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     NonLinearReading: false,
   },
 

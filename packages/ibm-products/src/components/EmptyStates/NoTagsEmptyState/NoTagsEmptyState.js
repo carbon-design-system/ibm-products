@@ -36,6 +36,7 @@ export let NoTagsEmptyState = React.forwardRef(
       className,
       illustrationPosition = defaults.position,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -64,7 +65,7 @@ export let NoTagsEmptyState = React.forwardRef(
         <NoTagsIllustration
           theme={illustrationTheme}
           size={size}
-          title={title}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -117,6 +118,11 @@ NoTagsEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state link object

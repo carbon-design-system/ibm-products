@@ -28,8 +28,8 @@ $block-class: #{$pkg-prefix}--user-avatar;
   height: 4rem;
   align-items: center;
   justify-content: center;
-  border-radius: 100%;
   border: 0.5px solid transparent;
+  border-radius: 100%;
   outline: none;
   outline-offset: 3px;
 }
@@ -44,7 +44,7 @@ $block-class: #{$pkg-prefix}--user-avatar;
   }
 
   &:focus {
-    outline: 2px solid $buttonColor;
+    outline: 2px solid rgb(8, 152, 205);
   }
 }
 .#{$block-class} {

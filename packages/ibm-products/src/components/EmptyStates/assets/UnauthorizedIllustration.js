@@ -266,7 +266,7 @@ export const UnauthorizedIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 UnauthorizedIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };

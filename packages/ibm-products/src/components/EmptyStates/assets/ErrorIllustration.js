@@ -191,7 +191,7 @@ export const ErrorIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 ErrorIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };

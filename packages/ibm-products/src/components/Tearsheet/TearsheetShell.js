@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Other standard imports.
@@ -104,7 +104,7 @@ export const TearsheetShell = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
-    const { first, last, all } = useFocus(modalRef);
+    const { firstElement, keyDownListener, getFocusable } = useFocus(modalRef);
 
     const wide = size === 'wide';
 
@@ -141,58 +141,20 @@ export const TearsheetShell = React.forwardRef(
       }
     };
 
-    // const checkForFocusableElements = useCallback(() => {}, [
-    //   carbonPrefix,
-    //   modalRef,
-    // ]);
-
-    // const savedCheckForFocusableCallback = useRef(checkForFocusableElements);
-
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      // const focusable = savedCheckForFocusableCallback.current();
-      first?.focus();
+      firstElement?.focus();
     };
 
     // useEffect hook to focus first element
     useEffect(() => {
       if (open) {
-        // To decide the first and last elements
-        // let focusable = savedCheckForFocusableCallback.current();
-
         // Focusing the first element
         setTimeout(() => {
-          first?.focus();
+          firstElement?.focus();
         }, 0);
       }
-    }, [open, first]);
-
-    const handleKeyDown = (event) => {
-      // Checking whether the key is tab or not
-      if (event.key === 'Tab') {
-        // updating the focusable elements list
-        // const focusable = savedCheckForFocusableCallback.current();
-
-        setTimeout(() => {
-          if (
-            event.shiftKey &&
-            !Array.prototype.includes.call(all, document?.activeElement)
-          ) {
-            // Prevents the default "Tab" behavior
-            event.preventDefault();
-            // if the user press shift+tab and the current element not in focusable items
-            last?.focus();
-          } else if (
-            !Array.prototype.includes.call(all, document?.activeElement)
-          ) {
-            event.preventDefault();
-            // user pressing tab key only then
-            // focusing the first element if the current element is not in focusable items
-            first?.focus();
-          }
-        }, 0);
-      }
-    };
+    }, [open, firstElement]);
 
     useEffect(() => {
       const notify = () =>
@@ -280,7 +242,7 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
-          onKeyDown={handleKeyDown}
+          onKeyDown={keyDownListener}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[

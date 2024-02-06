@@ -364,12 +364,6 @@ export let DataSpreadsheet = React.forwardRef(
     };
 
     const handleArrowkeyPress = (arrowKey) => {
-      let rowColMap = {
-        ArrowLeft: 'column',
-        ArrowUp: 'row',
-        ArrowRight: 'column',
-        ArrowDown: 'row',
-      };
 
       event.preventDefault();
       handleInitialArrowPress();

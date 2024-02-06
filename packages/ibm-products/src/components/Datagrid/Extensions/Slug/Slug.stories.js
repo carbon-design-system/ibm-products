@@ -46,11 +46,11 @@ export default {
       },
     },
   },
-  excludeStories: ['exampleSlug'],
+  excludeStories: ['ExampleSlug'],
 };
 
-export const exampleSlug = (
-  <Slug className="slug-container" autoAlign={false} align="bottom-right">
+export const ExampleSlug = ({ align = 'bottom-right' }) => (
+  <Slug className="slug-container" autoAlign={false} align={align}>
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -80,7 +80,7 @@ export const exampleSlug = (
   </Slug>
 );
 
-const defaultHeader = [
+const getDefaultHeader = (rowSlug, align) => ([
   {
     Header: 'Row Index',
     accessor: (row, i) => i,
@@ -104,12 +104,12 @@ const defaultHeader = [
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
-    slug: exampleSlug,
+    slug: !rowSlug && <ExampleSlug align={align} />,
   },
   {
     Header: 'Someone 1',
     accessor: 'someone1',
-    slug: exampleSlug,
+    slug: !rowSlug && <ExampleSlug align={align} />,
     width: 200,
   },
   {
@@ -148,7 +148,7 @@ const defaultHeader = [
     Header: 'Someone 10',
     accessor: 'someone10',
   },
-];
+]);
 
 const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
@@ -206,9 +206,9 @@ const controlProps = {
   onRowSizeChange: sharedDatagridProps.onRowSizeChange,
 };
 
-const GridWithSlugColumnHeader = ({ withSorting, ...args }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 2));
+const GridWithSlugColumnHeader = ({ rowSlug, rowSlugAlign, withSorting, ...args }) => {
+  const columns = React.useMemo(() => getDefaultHeader(rowSlug, rowSlugAlign), []);
+  const [data] = useState(makeData(10, 2, { enableAIRow: rowSlug, slugAlign: rowSlugAlign }));
   const datagridState = useDatagrid(
     {
       columns,
@@ -222,11 +222,13 @@ const GridWithSlugColumnHeader = ({ withSorting, ...args }) => {
   return <Datagrid datagridState={datagridState} />;
 };
 
-const GridWithSlugColumnHeaderWrapper = ({ withSorting, ...args }) => {
+const GridWithSlugColumnHeaderWrapper = ({ rowSlug, rowSlugAlign, withSorting, ...args }) => {
   return (
     <GridWithSlugColumnHeader
       defaultGridProps={{ ...args }}
       withSorting={withSorting}
+      rowSlug={rowSlug}
+      rowSlugAlign={rowSlugAlign}
     />
   );
 };
@@ -270,6 +272,29 @@ export const SlugSortableColumnHeaderStory = prepareStory(
     args: {
       ...controlProps,
       withSorting: true,
+    },
+  }
+);
+
+const slugRowStoryName = 'Row slug';
+export const SlugRowStory = prepareStory(
+  GridWithSlugColumnHeaderWrapper,
+  {
+    storyName: slugRowStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      rowSize: ARG_TYPES.rowSize,
+      rowSizes: ARG_TYPES.rowSizes,
+      onRowSizeChange: ARG_TYPES.onRowSizeChange,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
+    },
+    args: {
+      ...controlProps,
+      rowSlug: true,
+      rowSlugAlign: 'right'
     },
   }
 );

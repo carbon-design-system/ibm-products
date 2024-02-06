@@ -44,7 +44,7 @@ $block-class: #{$pkg-prefix}--user-avatar;
   }
 
   &:focus {
-    outline: 2px solid rgb(8, 152, 205);
+    outline: 2px solid $cyan-60;
   }
 }
 .#{$block-class} {

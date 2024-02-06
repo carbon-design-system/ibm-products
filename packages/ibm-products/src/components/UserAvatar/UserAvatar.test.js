@@ -18,10 +18,9 @@ const componentName = UserAvatar.displayName;
 
 // values to use
 const dataTestId = uuidv4();
-const theme = 'light';
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(<UserAvatar {...{ theme, ...rest }} />);
+  render(<UserAvatar {...{ ...rest }} />);
 
 describe(componentName, () => {
   it('should return a circle with background color', async () => {
@@ -51,13 +50,6 @@ describe(componentName, () => {
     const { container } = renderComponent({ className: customClass });
     const element = container.querySelector(`.${blockClass}`);
     expect(element).toHaveClass(customClass);
-  });
-
-  it('should recognize theme setting', async () => {
-    const { container } = renderComponent();
-    const element = container.querySelector(`.${blockClass}`);
-    const hasThemeClass = element.className.includes('light');
-    expect(hasThemeClass).toBeTruthy();
   });
 
   it('adds additional props to the containing node', async () => {

@@ -35,6 +35,7 @@ export let ErrorEmptyState = React.forwardRef(
       action,
       className,
       illustrationPosition = defaults.position,
+      illustrationDescription,
       illustrationTheme,
       link,
       size = defaults.size,
@@ -64,7 +65,7 @@ export let ErrorEmptyState = React.forwardRef(
         <ErrorIllustration
           theme={illustrationTheme}
           size={size}
-          title={title}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -109,6 +110,11 @@ ErrorEmptyState.propTypes = {
    * Designates the position of the illustration relative to the content
    */
   illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state illustration theme variations.

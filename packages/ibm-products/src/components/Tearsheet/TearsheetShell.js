@@ -171,10 +171,9 @@ export const TearsheetShell = React.forwardRef(
       focusable?.first?.focus();
     };
 
-    // useEffect hook to handle focus trapping
+    // useEffect hook to focus first element
     useEffect(() => {
       if (open) {
-        const modalEl = modalRef?.current;
         // To decide the first and last elements
         let focusable = savedCheckForFocusableCallback.current();
 
@@ -182,50 +181,41 @@ export const TearsheetShell = React.forwardRef(
         setTimeout(() => {
           focusable?.first?.focus();
         }, 0);
-
-        // Handling the key event
-        const handleKeyDown = (event) => {
-          // Checking whether the key is tab or not
-          if (event.key === 'Tab') {
-            // updating the focusable elements list
-            focusable = savedCheckForFocusableCallback.current();
-
-            setTimeout(() => {
-              if (
-                event.shiftKey &&
-                !Array.prototype.includes.call(
-                  focusable?.all,
-                  document?.activeElement
-                )
-              ) {
-                // Prevents the default "Tab" behavior
-                event.preventDefault();
-                // if the user press shift+tab and the current element not in focusable items
-                focusable?.last?.focus();
-              } else if (
-                !Array.prototype.includes.call(
-                  focusable?.all,
-                  document?.activeElement
-                )
-              ) {
-                event.preventDefault();
-                // user pressing tab key only then
-                // focusing the first element if the current element is not in focusable items
-                focusable?.first?.focus();
-              }
-            }, 0);
-          }
-        };
-
-        // Subscribing to keydown event
-        modalEl.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-          // Unsubscribing from keydown event
-          modalEl.removeEventListener('keydown', handleKeyDown);
-        };
       }
-    }, [open, modalRef, carbonPrefix]);
+    }, [open]);
+
+    const handleKeyDown = (event) => {
+      // Checking whether the key is tab or not
+      if (event.key === 'Tab') {
+        // updating the focusable elements list
+        const focusable = savedCheckForFocusableCallback.current();
+
+        setTimeout(() => {
+          if (
+            event.shiftKey &&
+            !Array.prototype.includes.call(
+              focusable?.all,
+              document?.activeElement
+            )
+          ) {
+            // Prevents the default "Tab" behavior
+            event.preventDefault();
+            // if the user press shift+tab and the current element not in focusable items
+            focusable?.last?.focus();
+          } else if (
+            !Array.prototype.includes.call(
+              focusable?.all,
+              document?.activeElement
+            )
+          ) {
+            event.preventDefault();
+            // user pressing tab key only then
+            // focusing the first element if the current element is not in focusable items
+            focusable?.first?.focus();
+          }
+        }, 0);
+      }
+    };
 
     useEffect(() => {
       const notify = () =>
@@ -313,6 +303,7 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[

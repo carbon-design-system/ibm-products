@@ -95,7 +95,18 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
     .#{$block-class}__container {
-    background: $layer; /* override carbon ai */
+    border: 1px solid transparent;
+    /* override carbon ai removing background gradient */
+    background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
+        padding-box,
+      linear-gradient(
+          to bottom,
+          var(--cds-ai-border-start, #78a9ff),
+          var(--cds-ai-border-end, #d0e2ff)
+        )
+        border-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+    box-shadow: 0 4px 10px 2px $ai-drop-shadow;
   }
 
   // extra specificity to ensure this transition overrides the carbon default

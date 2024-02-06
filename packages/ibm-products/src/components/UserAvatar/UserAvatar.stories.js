@@ -18,7 +18,6 @@ import {
 
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
-import { User, Group } from '@carbon/react/icons';
 import styles from './_storybook-styles.scss';
 
 const defaultArgs = {

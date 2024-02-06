@@ -106,7 +106,7 @@ export let UserAvatar = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        role="button"
         {...getDevtoolsProps(componentName)}
       >
         <SetItem />

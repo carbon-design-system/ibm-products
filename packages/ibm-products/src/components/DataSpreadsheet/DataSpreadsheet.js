@@ -342,7 +342,7 @@ export let DataSpreadsheet = React.forwardRef(
         updateActiveCellCoordinates({
           coords: coordinatesClone,
           updatedValue: {
-            column: type === 'home' ? 0 : columns.length - 1,
+            column: type === 'Home' ? 0 : columns.length - 1,
           },
         });
         removeCellSelections({ spreadsheetRef });
@@ -354,34 +354,106 @@ export let DataSpreadsheet = React.forwardRef(
         columns.length,
       ]
     );
+    const checkforReturnConditon = (key) => {
+      return isEditing || key === 'Meta' || key === 'Control';
+    };
+    const clearSelectiondata = () => {
+      setSelectionAreas([]);
+      setSelectionAreaData([]);
+      removeCellSelections({ spreadsheetRef });
+    };
+
+    const handleArrowkeyPress = (arrowKey) => {
+      let rowColMap = {
+        ArrowLeft: 'column',
+        ArrowUp: 'row',
+        ArrowRight: 'column',
+        ArrowDown: 'row',
+      };
+
+      event.preventDefault();
+      handleInitialArrowPress();
+      const coordinatesClone = { ...activeCellCoordinates };
+
+      let updatedValue;
+
+      switch (arrowKey) {
+        // Left
+        case 'ArrowLeft': {
+          if (coordinatesClone.column === 'header') {
+            return;
+          }
+          if (typeof coordinatesClone.column === 'number') {
+            if (coordinatesClone.column === 0) {
+              updatedValue = { column: 'header' };
+            } else {
+              updatedValue = { column: coordinatesClone.column - 1 };
+            }
+          }
+          break;
+        }
+        // Up
+        case 'ArrowUp': {
+          if (coordinatesClone.row === 'header') {
+            return;
+          }
+          if (typeof coordinatesClone.row === 'number') {
+            // set row back to header if we are at index 0
+            if (coordinatesClone.row === 0) {
+              updatedValue = { row: 'header' };
+            } else {
+              // if we are at any other index than 0, subtract 1 from current row index
+              updatedValue = { row: coordinatesClone.row - 1 };
+            }
+          }
+          break;
+        }
+        // Right
+        case 'ArrowRight': {
+          if (coordinatesClone.column === 'header') {
+            updatedValue = { column: 0 };
+          }
+          if (typeof coordinatesClone.column === 'number') {
+            // Prevent active cell coordinates from updating if the active
+            // cell is in the last column, ie we can't go any further to the right
+            if (columns.length - 1 === coordinatesClone.column) {
+              return;
+            } else {
+              updatedValue = { column: coordinatesClone.column + 1 };
+            }
+          }
+          break;
+        }
+        // Down
+        case 'ArrowDown': {
+          if (coordinatesClone.row === 'header') {
+            updatedValue = { row: 0 };
+          }
+          if (typeof coordinatesClone.row === 'number') {
+            // Prevent active cell coordinates from updating if the active
+            // cell is in the last row, ie we can't go any further down since
+            // we are in the last row
+            if (rows.length - 1 === coordinatesClone.row) {
+              return;
+            } else {
+              updatedValue = { row: coordinatesClone.row + 1 };
+            }
+          }
+          break;
+        }
+      }
+      updateActiveCellCoordinates({ coords: coordinatesClone, updatedValue });
+    };
 
     const handleKeyPress = useCallback(
       (event) => {
         const { key } = event;
-        if (isEditing) {
-          return;
-        }
         // Command keys need to be returned as there is default browser behavior with these keys
-        if (key === 'Meta' || key === 'Control') {
+        // Needs to be returned in editing mode
+        if (checkforReturnConditon(key)) {
           return;
         }
-        // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
-        if (
-          [
-            'End',
-            'Home',
-            'ArrowLeft',
-            'ArrowUp',
-            'ArrowRight',
-            'ArrowDown',
-          ].indexOf(key) > -1 &&
-          !isEditing
-        ) {
-          event.preventDefault();
-        }
-        if (['Tab'].indexOf(key) > -1 && isEditing) {
-          return;
-        }
+
         // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
         if (
           ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
@@ -391,12 +463,10 @@ export let DataSpreadsheet = React.forwardRef(
             keysPressedList.length < 2 &&
             !includesShift(keysPressedList)
           ) {
-            setSelectionAreas([]);
-            setSelectionAreaData([]);
-            removeCellSelections({ spreadsheetRef });
+            clearSelectiondata();
           }
         }
-        if (!isEditing && keysPressedList?.length > 1) {
+        if (keysPressedList?.length > 1) {
           handleMultipleKeys({
             activeCellCoordinates,
             event,
@@ -414,29 +484,27 @@ export let DataSpreadsheet = React.forwardRef(
             usingMac,
           });
         }
-        const deleteParams = {
-          selectionAreas,
-          currentMatcher,
-          rows,
-          setActiveCellContent,
-          updateData,
-          activeCellCoordinates,
-        };
+
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
+        // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
+
         if (
           (keysPressedList.length < 2 && !includesShift(keysPressedList)) ||
           activeCellCoordinates.row === 'header' ||
           activeCellCoordinates.column === 'header'
         ) {
           switch (key) {
-            // Backspace
-            case 'Backspace': {
-              handleCellDeletion(deleteParams);
-              break;
-            }
-            // Delete
+            case 'Backspace':
             case 'Delete': {
+              const deleteParams = {
+                selectionAreas,
+                currentMatcher,
+                rows,
+                setActiveCellContent,
+                updateData,
+                activeCellCoordinates,
+              };
               handleCellDeletion(deleteParams);
               break;
             }
@@ -452,18 +520,13 @@ export let DataSpreadsheet = React.forwardRef(
               break;
             }
             // HOME
-            case 'Home': {
-              if (includesResourceKey(keysPressedList, usingMac)) {
-                return;
-              }
-              handleHomeEndKey({ type: 'home' });
-              break;
-            }
+            case 'Home':
             case 'End': {
+              event.preventDefault();
               if (includesResourceKey(keysPressedList, usingMac)) {
                 return;
               }
-              handleHomeEndKey({ type: 'end' });
+              handleHomeEndKey({ type: key });
               break;
             }
             // Tab
@@ -485,98 +548,11 @@ export let DataSpreadsheet = React.forwardRef(
               setActiveCellCoordinates(null);
               break;
             }
-            // Left
-            case 'ArrowLeft': {
-              handleInitialArrowPress();
-              const coordinatesClone = { ...activeCellCoordinates };
-              if (coordinatesClone.column === 'header') {
-                return;
-              }
-              if (typeof coordinatesClone.column === 'number') {
-                if (coordinatesClone.column === 0) {
-                  updateActiveCellCoordinates({
-                    coords: coordinatesClone,
-                    updatedValue: { column: 'header' },
-                  });
-                  return;
-                }
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { column: coordinatesClone.column - 1 },
-                });
-              }
-              break;
-            }
-            // Up
-            case 'ArrowUp': {
-              handleInitialArrowPress();
-              const coordinatesClone = { ...activeCellCoordinates };
-              if (coordinatesClone.row === 'header') {
-                return;
-              }
-              if (typeof coordinatesClone.row === 'number') {
-                // set row back to header if we are at index 0
-                if (coordinatesClone.row === 0) {
-                  updateActiveCellCoordinates({
-                    coords: coordinatesClone,
-                    updatedValue: { row: 'header' },
-                  });
-                  return;
-                }
-                // if we are at any other index than 0, subtract 1 from current row index
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { row: coordinatesClone.row - 1 },
-                });
-              }
-              break;
-            }
-            // Right
-            case 'ArrowRight': {
-              handleInitialArrowPress();
-              const coordinatesClone = { ...activeCellCoordinates };
-              if (coordinatesClone.column === 'header') {
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { column: 0 },
-                });
-              }
-              if (typeof coordinatesClone.column === 'number') {
-                // Prevent active cell coordinates from updating if the active
-                // cell is in the last column, ie we can't go any further to the right
-                if (columns.length - 1 === coordinatesClone.column) {
-                  return;
-                }
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { column: coordinatesClone.column + 1 },
-                });
-              }
-              break;
-            }
-            // Down
+            case 'ArrowLeft':
+            case 'ArrowUp':
+            case 'ArrowRight':
             case 'ArrowDown': {
-              handleInitialArrowPress();
-              const coordinatesClone = { ...activeCellCoordinates };
-              if (coordinatesClone.row === 'header') {
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { row: 0 },
-                });
-              }
-              if (typeof coordinatesClone.row === 'number') {
-                // Prevent active cell coordinates from updating if the active
-                // cell is in the last row, ie we can't go any further down since
-                // we are in the last row
-                if (rows.length - 1 === coordinatesClone.row) {
-                  return;
-                }
-                updateActiveCellCoordinates({
-                  coords: coordinatesClone,
-                  updatedValue: { row: coordinatesClone.row + 1 },
-                });
-              }
-              break;
+              handleArrowkeyPress(key);
             }
           }
         }

@@ -2,8 +2,11 @@ import { Button, Checkbox, FormGroup } from '@carbon/react';
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { componentClass } from './FilterPanel';
-import { handleCheckboxChange } from './hooks/useFilters';
+import { handleCheckboxChange } from './handleCheckboxChange';
+import { pkg } from '../../../../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+const componentClass = `${blockClass}-filter-panel`;
 
 const OverflowCheckboxes = ({
   components,

@@ -23,7 +23,7 @@
     "build:storybook": "storybook build",
     "clean": "yarn dlx rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
-    "start:storybook": "storybook dev -s ./public -p 3000",
+    "start:storybook": "storybook dev ./public -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (issue #1595)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },

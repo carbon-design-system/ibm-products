@@ -34,12 +34,12 @@ describe(componentName, () => {
 
   it('renders a component TruncatedList', async () => {
     render(
-      <TruncatedList>
+      <TruncatedList data-testid={dataTestId}>
         <ListItem>Item 1</ListItem>
         <ListItem>Item 2</ListItem>
       </TruncatedList>
     );
-    expect(document.querySelector(`.${blockClass}`)).toBeInTheDocument();
+    expect(screen.getByTestId(dataTestId)).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
@@ -65,12 +65,12 @@ describe(componentName, () => {
 
   it('applies className to the containing node', async () => {
     render(
-      <TruncatedList className={className}>
+      <TruncatedList data-testid={dataTestId} className={className}>
         <ListItem>Item 1</ListItem>
         <ListItem>Item 2</ListItem>
       </TruncatedList>
     );
-    expect(document.querySelector(`.${blockClass}`)).toHaveClass(className);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
@@ -108,7 +108,7 @@ describe(componentName, () => {
   });
 
   it('renders a limited number of items when collapsed', async () => {
-    render(
+    const { container } = render(
       <TruncatedList collapsedItemsLimit={2} expandedItemsLimit={4}>
         <ListItem>Item 1</ListItem>
         <ListItem>Item 2</ListItem>
@@ -117,6 +117,7 @@ describe(componentName, () => {
         <ListItem>Item 5</ListItem>
       </TruncatedList>
     );
-    expect(document.querySelectorAll(`li`).length).toBe(2);
+
+    expect(container.getElementsByTagName('li').length).toBe(2);
   });
 });

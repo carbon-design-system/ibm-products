@@ -143,8 +143,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
-  @include utilities.callout-gradient();
-
   position: absolute;
   top: $spacing-05;
   right: $spacing-05;
@@ -173,17 +171,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}--has-slug {
-  @include utilities.callout-gradient();
+  @include utilities.callout-gradient('default', 0, 'layer');
 
-  border: 1px solid $border-tile;
+  border: 1px solid transparent;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    0 4px 10px 2px $ai-drop-shadow;
 }
 
 .#{$block-class}__clickable.#{$block-class}--has-slug::before {
-  @include utilities.callout-gradient('hover');
+  @include utilities.callout-gradient('hover', 0, 'layer');
 
   position: absolute;
   display: block;
   block-size: 100%;
+  box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   content: '';
   inline-size: 100%;
   inset-block-start: 0;

@@ -157,7 +157,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     return <DatagridSlug slug={slug} />;
   };
 
-  const foundAIRow = rows.some(r => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   return (
     <TableRow
@@ -165,7 +165,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
-      {foundAIRow && <th scope='col' aria-hidden='false' />}
+      {foundAIRow ? <th scope="col" aria-hidden="false" /> : null}
       {datagridState.headers
         .filter(({ isVisible }) => isVisible)
         .map((header, index) => {

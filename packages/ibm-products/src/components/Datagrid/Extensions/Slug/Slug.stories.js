@@ -21,7 +21,13 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useSortableColumns } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useExpandedRow,
+  useSelectRows,
+  useSortableColumns,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
@@ -49,8 +55,8 @@ export default {
   excludeStories: ['ExampleSlug'],
 };
 
-export const ExampleSlug = ({ align = 'bottom-right' }) => (
-  <Slug className="slug-container" autoAlign={false} align={align}>
+export const ExampleSlug = ({ align = 'bottom-right', ...rest }) => (
+  <Slug className="slug-container" autoAlign={false} align={align} {...rest}>
     <SlugContent>
       <div>
         <p className="secondary">AI Explained</p>
@@ -80,7 +86,7 @@ export const ExampleSlug = ({ align = 'bottom-right' }) => (
   </Slug>
 );
 
-const getDefaultHeader = (rowSlug, align) => ([
+const getDefaultHeader = (rowSlug, align) => [
   {
     Header: 'Row Index',
     accessor: (row, i) => i,
@@ -148,7 +154,7 @@ const getDefaultHeader = (rowSlug, align) => ([
     Header: 'Someone 10',
     accessor: 'someone10',
   },
-]);
+];
 
 const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
@@ -206,9 +212,21 @@ const controlProps = {
   onRowSizeChange: sharedDatagridProps.onRowSizeChange,
 };
 
-const GridWithSlugColumnHeader = ({ rowSlug, rowSlugAlign, withSorting, ...args }) => {
-  const columns = React.useMemo(() => getDefaultHeader(rowSlug, rowSlugAlign), []);
-  const [data] = useState(makeData(10, 2, { enableAIRow: rowSlug, slugAlign: rowSlugAlign }));
+const GridWithSlugColumnHeader = ({
+  rowSlug,
+  rowSlugAlign,
+  withSorting,
+  withSelect,
+  withExpansion,
+  ...args
+}) => {
+  const columns = React.useMemo(
+    () => getDefaultHeader(rowSlug, rowSlugAlign),
+    []
+  );
+  const [data] = useState(
+    makeData(10, 2, { enableAIRow: rowSlug, slugAlign: rowSlugAlign })
+  );
   const datagridState = useDatagrid(
     {
       columns,
@@ -216,19 +234,30 @@ const GridWithSlugColumnHeader = ({ rowSlug, rowSlugAlign, withSorting, ...args 
       DatagridActions,
       ...args.defaultGridProps,
     },
-    withSorting ? useSortableColumns : ''
+    withSorting ? useSortableColumns : '',
+    withSelect ? useSelectRows : '',
+    withExpansion ? useExpandedRow : ''
   );
 
   return <Datagrid datagridState={datagridState} />;
 };
 
-const GridWithSlugColumnHeaderWrapper = ({ rowSlug, rowSlugAlign, withSorting, ...args }) => {
+const GridWithSlugColumnHeaderWrapper = ({
+  rowSlug,
+  rowSlugAlign,
+  withSorting,
+  withSelect,
+  withExpansion,
+  ...args
+}) => {
   return (
     <GridWithSlugColumnHeader
       defaultGridProps={{ ...args }}
       withSorting={withSorting}
       rowSlug={rowSlug}
       rowSlugAlign={rowSlugAlign}
+      withSelect={withSelect}
+      withExpansion={withExpansion}
     />
   );
 };
@@ -277,10 +306,30 @@ export const SlugSortableColumnHeaderStory = prepareStory(
 );
 
 const slugRowStoryName = 'Row slug';
-export const SlugRowStory = prepareStory(
+export const SlugRowStory = prepareStory(GridWithSlugColumnHeaderWrapper, {
+  storyName: slugRowStoryName,
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    rowSize: ARG_TYPES.rowSize,
+    rowSizes: ARG_TYPES.rowSizes,
+    onRowSizeChange: ARG_TYPES.onRowSizeChange,
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
+  },
+  args: {
+    ...controlProps,
+    rowSlug: true,
+    rowSlugAlign: 'right',
+  },
+});
+
+const slugRowSelectionStoryName = 'Row slug selection';
+export const SlugRowSelectionStory = prepareStory(
   GridWithSlugColumnHeaderWrapper,
   {
-    storyName: slugRowStoryName,
+    storyName: slugRowSelectionStoryName,
     argTypes: {
       gridTitle: ARG_TYPES.gridTitle,
       gridDescription: ARG_TYPES.gridDescription,
@@ -294,7 +343,33 @@ export const SlugRowStory = prepareStory(
     args: {
       ...controlProps,
       rowSlug: true,
-      rowSlugAlign: 'right'
+      rowSlugAlign: 'right',
+      withSelect: true,
+    },
+  }
+);
+
+const slugRowSelectionAndExpandStoryName = 'Row slug selection and expansion';
+export const SlugRowSelectionAndExpandStory = prepareStory(
+  GridWithSlugColumnHeaderWrapper,
+  {
+    storyName: slugRowSelectionAndExpandStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      rowSize: ARG_TYPES.rowSize,
+      rowSizes: ARG_TYPES.rowSizes,
+      onRowSizeChange: ARG_TYPES.onRowSizeChange,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
+    },
+    args: {
+      ...controlProps,
+      rowSlug: true,
+      rowSlugAlign: 'right',
+      withSelect: true,
+      withExpansion: true,
     },
   }
 );

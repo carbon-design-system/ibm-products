@@ -133,7 +133,7 @@ const DatagridRow = (datagridState) => {
 
   // eslint-disable-next-line no-unused-vars
   const { role, ...rowProps } = row.getRowProps();
-  const foundAIRow = rows.some(r => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   return (
     <React.Fragment key={key}>
@@ -148,11 +148,15 @@ const DatagridRow = (datagridState) => {
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
       >
-        {foundAIRow &&
-          row?.original?.slug ?
-            <td className={`${blockClass}__table-row-ai-enabled`}><DatagridSlug slug={row?.original?.slug} /></td>
-            : <td className={`${blockClass}__table-row-ai-spacer`} />
-        }
+        {foundAIRow ? (
+          row?.original?.slug ? (
+            <td className={`${blockClass}__table-row-ai-enabled`}>
+              <DatagridSlug slug={row?.original?.slug} />
+            </td>
+          ) : (
+            <td className={`${blockClass}__table-row-ai-spacer`} />
+          )
+        ) : null}
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars

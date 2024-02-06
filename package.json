@@ -57,12 +57,15 @@
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/eslint-parser": "^7.22.10",
+    "@babel/preset-react": "^7.17.12",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
     "cheerio": "^1.0.0-rc.12",
     "copyfiles": "^2.4.1",
     "cspell": "^7.0.0",
@@ -94,6 +97,13 @@
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
+    "parserOptions": {
+      "babelOptions": {
+        "presets": [
+          "@babel/preset-react"
+        ]
+      }
+    },
     "extends": [
       "carbon"
     ],
@@ -103,7 +113,36 @@
       ],
       "react/forbid-component-props": 0,
       "react/forbid-dom-props": 0
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "plugins": [
+          "@typescript-eslint"
+        ],
+        "extends": [
+          "plugin:@typescript-eslint/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "rules": {
+          "no-unused-vars": "off",
+          "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+              "args": "after-used",
+              "argsIgnorePattern": "^_",
+              "varsIgnorePattern": "^_"
+            }
+          ],
+          "@typescript-eslint/no-empty-function": "off",
+          "@typescript-eslint/no-explicit-any": "off",
+          "@typescript-eslint/ban-ts-comment": "off"
+        }
+      }
+    ]
   },
   "commitlint": {
     "extends": [

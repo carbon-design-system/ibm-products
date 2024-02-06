@@ -104,7 +104,7 @@ export const TearsheetShell = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
-    const { firstElement, keyDownListener, getFocusable } = useFocus(modalRef);
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     const wide = size === 'wide';
 
@@ -146,7 +146,6 @@ export const TearsheetShell = React.forwardRef(
       firstElement?.focus();
     };
 
-    // useEffect hook to focus first element
     useEffect(() => {
       if (open) {
         // Focusing the first element

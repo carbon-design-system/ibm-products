@@ -7,14 +7,15 @@
 
 import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export const useFocus = (modalRef) => {
   const carbonPrefix = usePrefix();
-  const bc = `${pkg.prefix}--tearsheet`;
-  // Querying focusable element in the tearsheet
-  // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
-  const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${bc}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
+  const tearsheetBaseClass = `${pkg.prefix}--tearsheet`;
+  // Querying focusable element in the modal
+  // Query to exclude hidden elements in the modal from querySelectorAll() method
+  // feel free to include more if needed :)
+  const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${tearsheetBaseClass}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
   // Queries to include element types button, input, select, textarea
   const queryButton = `button${notQuery}`;
   const queryInput = `input${notQuery}`;
@@ -48,7 +49,7 @@ export const useFocus = (modalRef) => {
     // Checking whether the key is tab or not
     if (event.key === 'Tab') {
       // updating the focusable elements list
-      const {first, last, all } = getFocusable();
+      const { first, last, all } = getFocusable();
 
       setTimeout(() => {
         if (

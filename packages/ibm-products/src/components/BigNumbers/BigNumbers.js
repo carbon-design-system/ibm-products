@@ -114,12 +114,12 @@ export let BigNumbers = React.forwardRef(
      * or otherwise the value is properly formatted.
      * @param {string} locale Locale value to be used in formatting numbers.
      * @param {boolean} percentage Whether a percent sign should be included.
-     * @param {number|null} value The value to be formatted.
+     * @param {number|null|undefined} value The value to be formatted.
      * @param {boolean} truncate Whether or not the value should be truncated.
      * @returns {string} Formatted string.
      */
     const truncateValue = (locale, percentage, value, truncate) => {
-      if (value === null) {
+      if (value === null || value === undefined) {
         return '–';
       } else if (percentage) {
         return (

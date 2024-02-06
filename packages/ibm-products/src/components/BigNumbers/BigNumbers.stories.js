@@ -22,6 +22,22 @@ import mdx from './BigNumbers.mdx';
 
 import styles from './_storybook-styles.scss';
 
+const numericOptions = {
+  '-123': -123,
+  '0 ': 0,
+  '12 ': 12,
+  '345 ': 345,
+  '6789 ': 6789,
+  '12345.678 ': 12345.678,
+  '678901.2456 ': 678901.2456,
+  '2345678 ': 2345678,
+  '90123456 ': 90123456,
+  '789012345 ': 789012345,
+  '6789012345 ': 6789012345,
+  'null ': null,
+  'undefined ': undefined,
+};
+
 export default {
   title: getStoryTitle(BigNumbers.displayName),
   component: BigNumbers,
@@ -31,6 +47,16 @@ export default {
     loading: {
       options: [true, false],
       control: { type: 'boolean' },
+    },
+    value: {
+      control: { type: 'select', labels: Object.keys(numericOptions) },
+      options: Object.values(numericOptions).map((_k, i) => i),
+      mapping: Object.values(numericOptions),
+    },
+    total: {
+      control: { type: 'select', labels: Object.keys(numericOptions) },
+      options: Object.values(numericOptions).map((_k, i) => i),
+      mapping: Object.values(numericOptions),
     },
     size: {
       options: Object.values(BigNumbersSize),
@@ -106,8 +132,8 @@ export default {
 
 const defaultProps = {
   label: 'Label',
-  value: 12345,
-  total: 123456,
+  value: 12345.678,
+  total: 678901.2456,
   percentage: false,
   size: BigNumbersSize.Default,
   forceShowTotal: false,
@@ -136,13 +162,6 @@ const Template = (args) => {
 export const bigNumbers = prepareStory(Template, {
   args: {
     ...defaultProps,
-  },
-});
-
-export const withNullValue = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    value: null,
   },
 });
 

@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
+    "@babel/preset-typescript": "^7.21.5",
     "@carbon/grid": "^11.21.1",
     "@carbon/ibm-products-styles": "^2.23.0",
     "@carbon/layout": "^11.20.1",

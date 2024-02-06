@@ -23,7 +23,7 @@ import {
 
 import { ActionSet } from '../../../../ActionSet';
 import { Close } from '@carbon/react/icons';
-import { FilterContext } from '.';
+import { FilterContext } from './FilterProvider';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, useReducedMotion } from 'framer-motion';

@@ -1,3 +1,5 @@
+//story
+
 /**
  * Copyright IBM Corp. 2024, 2024
  *
@@ -16,12 +18,11 @@ import {
 
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
-
+import { User, Group } from '@carbon/react/icons';
 import styles from './_storybook-styles.scss';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
-  theme: 'light',
 };
 
 export default {
@@ -39,17 +40,20 @@ export default {
       },
       options: ['light-cyan', 'dark-cyan'],
     },
-    theme: {
-      control: {
-        type: 'select',
-      },
-      options: ['light'],
-    },
     tooltipAlignment: {
       control: {
         type: 'select',
       },
-      options: ['top', 'bottom', 'left', 'right'],
+      options: [
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ],
     },
   },
   parameters: {

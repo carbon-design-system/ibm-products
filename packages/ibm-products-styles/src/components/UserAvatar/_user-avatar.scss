@@ -22,41 +22,38 @@
 
 $block-class: #{$pkg-prefix}--user-avatar;
 
-.cds--tooltip-trigger__wrapper .#{$carbon-prefix}--btn--icon-only {
+.#{$block-class} {
   display: flex;
   width: 4rem;
   height: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  padding-block-start: inherit;
-}
-
-.#{$carbon-prefix}--tooltip-trigger__wrapper
-  .#{$carbon-prefix}--btn--icon-only
-  > :first-child {
-  width: 25px;
-  height: 25px;
+  border: 0.5px solid transparent;
+  outline: none;
+  outline-offset: 3px;
 }
 
 @mixin setBgColor($buttonColor) {
-  .#{$carbon-prefix}--icon-tooltip {
-    .#{$carbon-prefix}--tooltip-trigger__wrapper
-      .#{$carbon-prefix}--btn--icon-only {
-      // stylelint-disable-next-line carbon/theme-token-use
-      background-color: $buttonColor;
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: $buttonColor;
 
-      &:hover {
-        // stylelint-disable-next-line carbon/theme-token-use
-        background-color: $buttonColor;
-      }
-    }
+  &:hover {
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: $buttonColor;
+  }
+
+  &:focus {
+    outline: 2px solid $buttonColor;
   }
 }
-
-.#{$block-class}--light-cyan {
-  @include setBgColor($cyan-50);
+.#{$block-class} {
+  &.#{$block-class}--light-cyan {
+    @include setBgColor($cyan-50);
+  }
 }
-.#{$block-class}--dark-cyan {
-  @include setBgColor($cyan-60);
+.#{$block-class} {
+  &.#{$block-class}--dark-cyan {
+    @include setBgColor($cyan-60);
+  }
 }

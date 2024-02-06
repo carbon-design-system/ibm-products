@@ -15,9 +15,10 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-import { User } from '@carbon/react/icons';
+import { User, Group } from '@carbon/react/icons';
 
-import { Button } from '@carbon/react';
+import { Tooltip, usePrefix } from '@carbon/react';
+import { TooltipTrigger } from '../TooltipTrigger';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -59,7 +60,6 @@ export let UserAvatar = React.forwardRef(
       className,
       /* TODO: add other props for UserAvatar, with default values if needed */
       renderIcon = defaults.renderIcon,
-      theme,
       tooltipText = defaults.tooltipText,
       tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
@@ -67,16 +67,37 @@ export let UserAvatar = React.forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
+    const icons = {
+      user: {
+        md: <User size={32} />,
+      },
+      group: {
+        md: <Group size={32} />,
+      },
+    };
+    const getItem = (renderIcon) => {
+      if (renderIcon === User) {
+        return icons.user['md'];
+      } else if (renderIcon === Group) {
+        return icons.group['md'];
+      } else {
+        return renderIcon;
+      }
+    };
+
+    const SetItem = getItem(renderIcon);
+
     const renderUserAvatar = () => (
       <div
         {
           // Pass through any other property values as HTML attributes.
           ...rest
         }
+        tabIndex={0}
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}--${theme}`,
           `${blockClass}--${backgroundColor}`,
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
@@ -88,16 +109,24 @@ export let UserAvatar = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        <Button
-          hasIconOnly={true}
-          renderIcon={renderIcon}
-          iconDescription={tooltipText}
-          tooltipPosition={tooltipAlignment}
-        />
+        <SetItem />
       </div>
     );
 
-    return renderUserAvatar();
+    return (
+      SetItem &&
+      (tooltipText ? (
+        <Tooltip
+          align={tooltipAlignment}
+          label={tooltipText}
+          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
+        >
+          <TooltipTrigger>{renderUserAvatar()}</TooltipTrigger>
+        </Tooltip>
+      ) : (
+        renderUserAvatar()
+      ))
+    );
   }
 );
 
@@ -122,8 +151,16 @@ UserAvatar.propTypes = {
    */
   className: PropTypes.string,
   renderIcon: PropTypes.func,
-  theme: PropTypes.oneOf(['light']).isRequired,
-  tooltipAlignment: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
   tooltipText: PropTypes.string,
   /* TODO: add types and DocGen for all props. */
 };

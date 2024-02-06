@@ -67,6 +67,8 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    TruncatedList: false,
+    DelimitedList: false,
 
     StringFormatter: false,
 
@@ -80,7 +82,6 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
     SearchBar: false,
     /* new component flags here - comment used by generate CLI */
 

@@ -46,6 +46,7 @@ export default {
 const defaultStoryProps = {
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
+  illustrationDescription: 'Test alt text',
 };
 
 const Template = (args) => {
@@ -81,7 +82,9 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: (props) => <Add size={20} {...props} />,
+      renderIcon: (props) => (
+        <Add iconDescription="test" size={20} {...props} />
+      ),
       iconDescription: 'Add icon',
     },
   },

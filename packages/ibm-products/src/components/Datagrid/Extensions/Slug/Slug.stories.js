@@ -46,9 +46,10 @@ export default {
       },
     },
   },
+  excludeStories: ['exampleSlug'],
 };
 
-const columnSlug = (
+export const exampleSlug = (
   <Slug className="slug-container" autoAlign={false} align="bottom-right">
     <SlugContent>
       <div>
@@ -103,12 +104,12 @@ const defaultHeader = [
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
-    slug: columnSlug,
+    slug: exampleSlug,
   },
   {
     Header: 'Someone 1',
     accessor: 'someone1',
-    slug: columnSlug,
+    slug: exampleSlug,
     width: 200,
   },
   {

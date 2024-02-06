@@ -8,6 +8,7 @@
 import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
+import { exampleSlug } from '../Extensions/Slug/Slug.stories';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
   const roundedMin = Math.ceil(min);
@@ -25,8 +26,8 @@ const getRandomInteger = (min, max, decimalPlaces) => {
 export const makeData = (...lens) => {
   const makeDataLevel = (depth = 0) => {
     const len = lens[depth];
-    return range(len).map(() => ({
-      ...newPerson(),
+    return range(len).map((index) => ({
+      ...newPerson(index),
       subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
     }));
   };
@@ -77,7 +78,8 @@ const renderDocLink = () => {
   return docLinkObj;
 };
 
-const newPerson = () => {
+const newPerson = (index) => {
+  console.log(index);
   const statusChance = Math.random();
   const roleChance = Math.random();
   const activeChance = Math.random();
@@ -144,6 +146,7 @@ const newPerson = () => {
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),
+    slug: index === 1 || index === 3 || index === 4 && exampleSlug
   };
 };
 

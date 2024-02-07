@@ -14,8 +14,8 @@ const UnauthorizedIllustration = lazy(() =>
   import('./assets/UnauthorizedIllustration')
 );
 
-const getIllustration = (variant) => {
-  switch (variant) {
+const getIllustration = (kind) => {
+  switch (kind) {
     case 'error':
       return ErrorIllustration;
     case 'noData':
@@ -33,8 +33,8 @@ const getIllustration = (variant) => {
   }
 };
 
-const EmptyStateIllustration = ({ variant, ...rest }) => {
-  const Illustration = getIllustration(variant);
+const EmptyStateIllustration = ({ kind, ...rest }) => {
+  const Illustration = getIllustration(kind);
   return (
     <Suspense>
       <Illustration {...rest} />
@@ -43,7 +43,7 @@ const EmptyStateIllustration = ({ variant, ...rest }) => {
 };
 
 EmptyStateIllustration.propTypes = {
-  variant: PropTypes.string,
+  kind: PropTypes.string,
 };
 
 export default EmptyStateIllustration;

@@ -15,6 +15,7 @@ import {
   unstable__SlugActions as SlugActions,
   IconButton,
   Button,
+  usePrefix,
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -212,6 +213,15 @@ const controlProps = {
   onRowSizeChange: sharedDatagridProps.onRowSizeChange,
 };
 
+const ExpansionRenderer = ({ row }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={`${prefix}__test-class-with-prefix-hook`}>
+      Content for row index: {row.id}
+    </div>
+  );
+};
+
 const GridWithSlugColumnHeader = ({
   rowSlug,
   rowSlugAlign,
@@ -232,6 +242,7 @@ const GridWithSlugColumnHeader = ({
       columns,
       data,
       DatagridActions,
+      ExpandedRowContentComponent: ExpansionRenderer,
       ...args.defaultGridProps,
     },
     withSorting ? useSortableColumns : '',
@@ -325,7 +336,7 @@ export const SlugRowStory = prepareStory(GridWithSlugColumnHeaderWrapper, {
   },
 });
 
-const slugRowSelectionStoryName = 'Row slug selection';
+const slugRowSelectionStoryName = 'Row slug with selection';
 export const SlugRowSelectionStory = prepareStory(
   GridWithSlugColumnHeaderWrapper,
   {
@@ -349,7 +360,8 @@ export const SlugRowSelectionStory = prepareStory(
   }
 );
 
-const slugRowSelectionAndExpandStoryName = 'Row slug selection and expansion';
+const slugRowSelectionAndExpandStoryName =
+  'Row slug with selection and expansion';
 export const SlugRowSelectionAndExpandStory = prepareStory(
   GridWithSlugColumnHeaderWrapper,
   {

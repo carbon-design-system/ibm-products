@@ -360,3 +360,5 @@ NoTagsIllustration.propTypes = {
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
 };
+
+export default NoTagsIllustration;

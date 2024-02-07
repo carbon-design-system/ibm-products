@@ -183,7 +183,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell"
@@ -192,7 +192,7 @@
       "npx prettier --cache --write",
       "npx stylelint"
     ],
-    "!(*sass).md": [
+    "!(examples/**/*).md": [
       "npx prettier --cache --write"
     ]
   },

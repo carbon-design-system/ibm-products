@@ -31,6 +31,7 @@ export let ErrorEmptyState = React.forwardRef(
 
       action,
       className,
+      illustrationDescription,
       illustrationTheme,
       link,
       size = defaults.size,
@@ -53,9 +54,9 @@ export let ErrorEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <ErrorIllustration
-          title={title}
           theme={illustrationTheme}
           size={size}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -95,6 +96,12 @@ ErrorEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state illustration theme variations.

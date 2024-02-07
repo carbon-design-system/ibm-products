@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.69.0...@carbon/ibm-products@1.70.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* **Button menu:** button menu accessibility issue - 3519 ([#4157](https://github.com/carbon-design-system/ibm-products/issues/4157)) ([f055057](https://github.com/carbon-design-system/ibm-products/commit/f055057a5b6934bf09fd766df64c834aeb19402b))
+* **Datagrid:** check for document before continuing ([#4204](https://github.com/carbon-design-system/ibm-products/issues/4204)) ([10eb87f](https://github.com/carbon-design-system/ibm-products/commit/10eb87fc3cf5e25c4463f4c1df2dbc8e94910226))
+* **DataGrid:** column customisation not unselect locked columns V1 ([#4194](https://github.com/carbon-design-system/ibm-products/issues/4194)) ([990bdcc](https://github.com/carbon-design-system/ibm-products/commit/990bdcc54883bdea58c2c081c5e584dbf36b73e3))
+* **DataGrid:** customize column prevent disabled drop v1 ([#4182](https://github.com/carbon-design-system/ibm-products/issues/4182)) ([da4e4cb](https://github.com/carbon-design-system/ibm-products/commit/da4e4cb797cbccf0bee97355db0c62d737cca84e))
+* **Datagrid:** fix placement of pagination when used with filter panel (v1) ([#4153](https://github.com/carbon-design-system/ibm-products/issues/4153)) ([e3625fa](https://github.com/carbon-design-system/ibm-products/commit/e3625fab3faacb43f9131fe35a5f325d815bec08))
+* **Datagrid:** resolve useRowIsMouseOver issue V1 ([#4062](https://github.com/carbon-design-system/ibm-products/issues/4062)) ([96c2916](https://github.com/carbon-design-system/ibm-products/commit/96c291601a9cda655b696239c3f0a353f623030c))
+* **DataGrid:** use action column use isdelete prop V1 ([#4173](https://github.com/carbon-design-system/ibm-products/issues/4173)) ([0b950f5](https://github.com/carbon-design-system/ibm-products/commit/0b950f59d8015f19277d26cfd41f3c153a051448))
+* **Empty state:** accessibility defect 4033 v1 ([#4144](https://github.com/carbon-design-system/ibm-products/issues/4144)) ([9f1bbcd](https://github.com/carbon-design-system/ibm-products/commit/9f1bbcdedfaa12e4103fa87a761e8ab78698876e))
+* **InterstitialScreen:** bugfix/changes from adding component ([#4127](https://github.com/carbon-design-system/ibm-products/issues/4127)) ([8db5972](https://github.com/carbon-design-system/ibm-products/commit/8db597207399b3b33ae049df3ff2e3e7f3f0da77))
+* **sidePanel:** adjust title spacing when there is no subtitle v1 ([#4158](https://github.com/carbon-design-system/ibm-products/issues/4158)) ([5bd191f](https://github.com/carbon-design-system/ibm-products/commit/5bd191fe22e461931a846f4948b5721e41898ea4))
+
+
+### Features
+
+* add the SelectAll checkbox callback function for Batch actions [#4190](https://github.com/carbon-design-system/ibm-products/issues/4190) ([#4214](https://github.com/carbon-design-system/ibm-products/issues/4214)) ([bd23ead](https://github.com/carbon-design-system/ibm-products/commit/bd23ead0f21e8947b8366f8813a896a10058ddc8))
+
+
+
+
+
 # [1.69.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.68.0...@carbon/ibm-products@1.69.0) (2024-01-24)
 
 

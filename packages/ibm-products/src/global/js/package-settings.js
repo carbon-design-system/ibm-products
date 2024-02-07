@@ -80,7 +80,6 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
     DescriptionList: false,
     SearchBar: false,
 

@@ -38,6 +38,7 @@ const SelectAll = (datagridState) => {
     rows,
     getRowId,
     toggleAllRowsSelected,
+    onAllRowSelect,
   } = datagridState;
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
@@ -67,6 +68,8 @@ const SelectAll = (datagridState) => {
         indeterminate: true,
       });
       toggleAllRowsSelected(false);
+      onAllRowSelect?.(rows, event);
+
       return onChange?.({
         target: { checked: false },
       });
@@ -77,6 +80,7 @@ const SelectAll = (datagridState) => {
       getRowId,
       isChecked: event.target.checked,
     });
+    onAllRowSelect?.(rows, event);
     return onChange?.(event);
   };
 

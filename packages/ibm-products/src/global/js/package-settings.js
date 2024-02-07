@@ -25,7 +25,6 @@ const defaults = {
     Datagrid: true,
     EditInPlace: true,
     EmptyState: true,
-    EmptyStateV2: true,
     ErrorEmptyState: true,
     ExportModal: true,
     ExpressiveCard: true,
@@ -86,6 +85,7 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,

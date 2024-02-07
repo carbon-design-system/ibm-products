@@ -1,10 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
@@ -27,7 +28,6 @@ import { DocsPage } from './Filtering.docs-page';
 import { StatusIcon } from '../../../StatusIcon';
 import { action } from '@storybook/addon-actions';
 import { makeData } from '../../utils/makeData';
-import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
 
 export default {
@@ -159,12 +159,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     useFiltering,
     useColumnCenterAlign
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useFiltering` hook
-  pkg.feature['Datagrid.useFiltering'] = true;
-  pkg._silenceWarnings(true);
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -372,7 +366,6 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -535,7 +528,6 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     initialState: {
       filters: [
         {
@@ -731,7 +723,6 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -895,7 +886,6 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -1059,7 +1049,6 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     data: [],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
@@ -1223,7 +1212,6 @@ export const PanelManyCheckboxes = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
-    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,

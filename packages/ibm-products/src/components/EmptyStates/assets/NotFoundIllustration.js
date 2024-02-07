@@ -287,7 +287,9 @@ export const NotFoundIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 NotFoundIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };
+
+export default NotFoundIllustration;

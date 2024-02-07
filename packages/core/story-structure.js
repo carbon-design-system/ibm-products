@@ -57,6 +57,7 @@ const s = [
               'c/Datagrid/Extensions/Slug',
             ],
           },
+          { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
         ],
       },

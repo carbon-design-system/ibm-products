@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { NotFoundIllustration } from '../assets/NotFoundIllustration';
+import NotFoundIllustration from '../assets/NotFoundIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -110,6 +110,11 @@ NotFoundEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
+
+  /**
    * Designates the position of the illustration relative to the content
    */
   illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
@@ -121,11 +126,6 @@ NotFoundEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
-
-  /**
-   * The alt text for empty state svg images. If not provided , title will be used.
-   */
-  illustrationDescription: PropTypes.string,
 
   /**
    * Empty state link object

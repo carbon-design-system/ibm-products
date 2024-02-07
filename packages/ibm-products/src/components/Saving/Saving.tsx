@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,68 @@ import { pkg } from '../../settings';
 
 const componentName = 'Saving';
 
+type Type = 'manual' | 'auto';
+type Status = 'default' | 'in-progress' | 'success' | 'fail';
+
+interface SavingProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Description for default state icon (manual).
+   */
+  defaultIconDescription?: string;
+  /**
+   * Default text for the save button (manual). Per design guidelines you probably don't want to display this in the auto mode.
+   */
+  defaultText?: string;
+  /**
+   * Description for fail state icon (manual).
+   */
+  failIconDescription?: string;
+  /**
+   * Text for failure state.
+   */
+  failText?: string;
+  /**
+   * Description for in progress state icon (manual).
+   */
+  inProgressIconDescription?: string;
+  /**
+   * Text for in progress state.
+   */
+  inProgressText?: string;
+  /**
+   * Function handler for cancel button (manual).
+   */
+  onRequestCancel?(event: React.MouseEvent<HTMLButtonElement>): void;
+  /**
+   * Function handler for save button (manual).
+   */
+  onRequestSave?(event: React.MouseEvent<HTMLButtonElement>): void;
+  /**
+   * Text for the secondary or cancel button (manual).
+   */
+  secondaryButtonText?: string;
+  /**
+   * The status of the save. default being the untouched default state -> in-progress being a save has been initiated -> fail or success being the outcome.
+   */
+  status: Status;
+  /**
+   * Description for success state icon (manual).
+   */
+  successIconDescription?: string;
+  /**
+   * Text for success state
+   */
+  successText?: string;
+  /**
+   * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
+   */
+  type: Type;
+}
+
 export let Saving = forwardRef(
   (
     {
@@ -39,7 +101,7 @@ export let Saving = forwardRef(
       successText,
       type,
       ...rest
-    },
+    }: SavingProps,
     ref
   ) => {
     const statusObj = {
@@ -69,7 +131,7 @@ export let Saving = forwardRef(
     return (
       <div
         {...rest}
-        ref={ref}
+        ref={ref as never}
         className={cx(blockClass, className)}
         {...getDevtoolsProps(componentName)}
       >
@@ -155,7 +217,7 @@ Saving.propTypes = {
   /**
    * The status of the save. default being the untouched default state -> in-progress being a save has been initiated -> fail or success being the outcome.
    */
-  status: PropTypes.oneOf(['default', 'in-progress', 'success', 'fail'])
+  status: PropTypes.oneOf<Status>(['default', 'in-progress', 'success', 'fail'])
     .isRequired,
   /**
    * Description for success state icon (manual).
@@ -168,7 +230,7 @@ Saving.propTypes = {
   /**
    * Designates the style of the save component. Manual uses a set of buttons and auto just displays a string. See usage guidelines for additional information.
    */
-  type: PropTypes.oneOf(['manual', 'auto']).isRequired,
+  type: PropTypes.oneOf<Type>(['manual', 'auto']).isRequired,
 };
 
 Saving.displayName = componentName;

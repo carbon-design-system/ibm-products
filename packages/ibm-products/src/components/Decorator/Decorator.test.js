@@ -32,7 +32,7 @@ const renderComponent = ({ ...rest } = {}) =>
   render(<Decorator value={value} data-testid={dataTestId} {...rest} />);
 
 describe(componentName, () => {
-  it('renders a component Decorator (non-interactive)', async () => {
+  it('renders a component Decorator (default, non-interactive)', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);

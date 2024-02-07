@@ -15,229 +15,344 @@
 
 // Decorator uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by Decorator
-@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/layout/scss/convert' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--decorator;
-$block-class-icon: #{c4p-settings.$pkg-prefix}--decorator-icon;
+//
+$label: #{$block-class}__label;
+$value: #{$block-class}__value;
+$disabled: #{$block-class}-disabled;
+//
+$default: #{$block-class}--default;
+$link: #{$block-class}--link;
+$button-enabled: '#{$block-class}--button:not(.#{$disabled})';
+$button-disabled: '#{$block-class}--button.#{$disabled}';
+$buttons-enabled: '#{$block-class}--buttons:not(.#{$disabled})';
+$buttons-disabled: '#{$block-class}--buttons.#{$disabled}';
+//
+$icon: #{$block-class}-icon;
+
+@mixin label-divider($top: 0, $right: 0, $bottom: 0, $color: $border-strong) {
+  &::after {
+    position: absolute;
+    z-index: 1;
+    top: #{$top};
+    right: #{$right};
+    bottom: #{$bottom};
+    border-right: 1px solid #{$color};
+    content: '';
+  }
+}
+@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-strong) {
+  &::after {
+    position: absolute;
+    top: #{$top};
+    bottom: #{$bottom};
+    left: #{$left};
+    border-left: 1px solid #{$color};
+    content: '';
+  }
+}
 
 // TODO:
-// ~general styling
-// ~border
-// ~md or sm
-// theming
-// interactive colors and behaviors (in design review/update)
+//   theming
 
-// CORE STYLING FOR ALL DECORATORS
+.#{$block-class}--light {
+  @include theme(themes.$g10, true);
+}
+.#{$block-class}--dark {
+  @include theme(themes.$g100, true);
+}
+
+// BASE STYLING FOR ALL DECORATORS
 .#{$block-class} {
-  @include type.type-style('body-compact-01');
-
   display: inline-flex;
   max-width: 100%;
-  height: 1.625rem;
-  align-items: center;
-  line-height: $spacing-06;
-}
-.#{$block-class}__label {
-  height: inherit;
-  color: $text-secondary;
-}
-.#{$block-class}__value {
-  overflow: hidden;
-  height: inherit;
-  color: $text-secondary;
-}
-.#{$block-class-icon} {
-  margin-left: $spacing-03;
-}
-// GENERAL STYLING FOR:
-//   - DEFAULT (NON-INTERACTIVE)
-//   - LINK
-//   - SINGLE BUTTON
-.#{$block-class}--default,
-.#{$block-class}--link,
-.#{$block-class}--button {
-  padding: 0 $spacing-03;
-  border: 1px solid $border-subtle-02;
+  align-items: normal;
   border-radius: $spacing-12;
-  background-color: $background-hover;
 }
-.#{$block-class}--default .#{$block-class}__label,
-.#{$block-class}--link .#{$block-class}__label,
-.#{$block-class}--button .#{$block-class}__label {
-  padding: 0 $spacing-03;
-  border-right: 1px solid $border-subtle;
-}
-.#{$block-class}--default .#{$block-class}__value,
-.#{$block-class}--link .#{$block-class}__value,
-.#{$block-class}--button .#{$block-class}__value {
-  padding: 0 $spacing-03;
-}
-// SPECIFIC STYLING FOR LINK
-.#{$block-class}--link {
-  padding: 0 $spacing-03;
-  text-decoration: none;
-}
-.#{$block-class}--link .#{$block-class}__value {
-  color: $link-primary;
-}
-.#{$block-class}--link:hover .#{$block-class}__value {
-  color: $link-primary-hover;
-  text-decoration: underline;
-}
-.#{$block-class}--link:focus,
-.#{$block-class}--link:hover {
-  border-color: $border-strong-01;
-  background-color: $background-active;
-  cursor: pointer;
+.#{$block-class} .#{$label} {
+  @include type.type-style('label-01');
 
-  .#{$block-class}__label {
-    border-right-color: $border-strong-01;
-  }
-}
-// SPECIFIC STYLING FOR SINGLE BUTTON
-.#{$block-class}--button {
-  display: flex;
+  position: relative;
+  display: inline-flex;
+  height: $spacing-06;
+  align-items: normal;
   padding: 0 $spacing-03;
-}
-.#{$block-class}--button:focus,
-.#{$block-class}--button:hover {
-  border-color: $border-strong-01;
-  background-color: $background-active;
-  cursor: pointer;
-
-  .#{$block-class}__label {
-    border-right-color: $border-strong-01;
-  }
-}
-// SPECIFIC STYLING FOR DUAL BUTTONS
-.#{$block-class}--buttons button {
-  display: flex;
-  align-items: center;
-}
-.#{$block-class}--buttons .#{$block-class}__label {
-  padding: 0 $spacing-03 0 $spacing-05;
-  border-width: to-rem(1px);
+  border-width: to-rem(1px) 0 to-rem(1px) to-rem(1px);
   border-style: solid;
-  border-color: $border-subtle-02 $border-subtle $border-subtle-02
-    $border-subtle-02;
+  border-color: $border-strong;
   border-radius: $spacing-12 0 0 $spacing-12;
-  background-color: $background-hover;
-
-  .#{$block-class-icon} {
-    margin-right: $spacing-03;
-    margin-left: 0;
-  }
+  background-color: $layer-01;
+  color: $text-secondary;
+  line-height: 1.8;
 }
-.#{$block-class}--buttons .#{$block-class}__value {
-  padding: 0 $spacing-05 0 $spacing-03;
+.#{$block-class} .#{$value} {
+  @include type.type-style('label-01');
+
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  height: $spacing-06;
+  align-items: normal;
+  padding: 0 $spacing-03;
   border-width: to-rem(1px) to-rem(1px) to-rem(1px) 0;
   border-style: solid;
-  border-color: $border-subtle-02;
+  border-color: $border-strong;
   border-radius: 0 $spacing-12 $spacing-12 0;
-  background-color: $background-hover;
+  background-color: $layer-01;
+  color: $text-primary;
+  line-height: 1.8;
+}
+.#{$block-class} .#{$icon} {
+  margin-top: to-rem(3px);
+  margin-right: $spacing-02;
 }
 
-.#{$block-class}--buttons button:focus,
-.#{$block-class}--buttons button:hover {
-  border-color: $border-strong-01;
-  background-color: $background-active;
+//
+// STYLING FOR DEFAULT (NON-INTERACTIVE)
+//
+.#{$default} .#{$value} {
+  @include value-divider();
+}
+
+//
+// STYLING FOR LINK
+//
+.#{$link} {
   cursor: pointer;
+  text-decoration: none;
+}
+.#{$link} .#{$label} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+}
+.#{$link} .#{$value} {
+  @include value-divider($color: $border-subtle-02);
 
-  .#{$block-class}__label {
-    border-right-color: $border-strong-01;
-  }
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+  color: $link-primary;
 }
-// EXCEPTION (APPLIES TO DUAL BUTTONS ONLY)
-// Issue. The label includes a right-border by default,
-//   while the value has no left-border.
-//   When hovering over the value, it's missing a border.
-// Fix. When hovering over the Decorator,
-//   hide label's right-border, and
-//   show value's left-border.
-.#{$block-class}--buttons:focus .#{$block-class}__label,
-.#{$block-class}--buttons:hover .#{$block-class}__label {
-  border-right: 0;
+.#{$link}:hover .#{$label} {
+  border-color: $border-strong;
 }
-.#{$block-class}--buttons:focus .#{$block-class}__value,
-.#{$block-class}--buttons:hover .#{$block-class}__value {
-  border-left: 1px solid $border-strong-01;
+.#{$link}:hover .#{$value} {
+  @include value-divider($color: $border-strong);
+
+  border-color: $border-strong;
+  color: $link-primary;
+  text-decoration: underline;
+}
+.#{$link}:focus {
+  text-decoration: none;
+}
+.#{$link}:focus .#{$value} {
+  @include value-divider($color: $focus);
+
+  border-color: $focus;
+}
+.#{$link}:active .#{$value} {
+  color: $text-primary;
 }
 
+//
+// STYLING FOR SINGLE BUTTON
+//
+.#{$button-enabled} {
+  display: flex;
+  padding: 0;
+  border: 0;
+}
+.#{$button-enabled} .#{$label} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+}
+.#{$button-enabled} .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+}
+.#{$button-enabled}:hover .#{$label} {
+  border-color: $border-strong;
+  background-color: $layer-hover-02;
+}
+.#{$button-enabled}:hover .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  border-color: $border-strong;
+  background-color: $layer-hover-02;
+}
+.#{$button-enabled}:focus .#{$label} {
+  border-color: $focus;
+  background-color: $layer-02;
+}
+.#{$button-enabled}:focus .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  border-color: $focus;
+  background-color: $layer-02;
+}
+.#{$button-enabled}:active .#{$label} {
+  background-color: $layer-selected-02;
+}
+.#{$button-enabled}:active .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  background-color: $layer-selected-02;
+}
+.#{$button-disabled} {
+  padding: 0;
+  border: 0;
+  cursor: not-allowed;
+}
+.#{$button-disabled} .#{$label} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+.#{$button-disabled} .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+
+//
+// STYLING FOR DUAL BUTTONS
+//
+.#{$buttons-enabled} .#{$label} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+}
+.#{$buttons-enabled}:not(:hover) .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+}
+.#{$buttons-enabled} .#{$value} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+}
+.#{$buttons-enabled}:hover .#{$label} {
+  border-color: $border-strong;
+}
+.#{$buttons-enabled}:hover .#{$value} {
+  @include value-divider($color: $border-strong);
+
+  border-color: $border-strong;
+}
+.#{$buttons-enabled} .#{$label}:hover {
+  background-color: $layer-hover-02;
+}
+.#{$buttons-enabled} .#{$value}:hover {
+  background-color: $layer-hover-02;
+}
+.#{$buttons-enabled} .#{$label}:focus {
+  // Nudge the line over so it occupies the same space as the label divider.
+  @include label-divider(
+    $top: -1px,
+    $right: -1px,
+    $bottom: -1px,
+    $color: $focus
+  );
+
+  border-color: $focus;
+}
+// When focusing on the label (and showing its blue divider),
+//   hide the value's grey divider.
+.#{$buttons-enabled} .#{$label}:focus + .#{$value} {
+  @include value-divider($color: transparent);
+}
+.#{$buttons-enabled} .#{$value}:focus {
+  @include value-divider($color: $focus);
+
+  border-color: $focus;
+}
+.#{$buttons-enabled} .#{$label}:active {
+  background-color: $layer-hover-02;
+}
+.#{$buttons-enabled} .#{$value}:active {
+  background-color: $layer-hover-02;
+}
+.#{$buttons-disabled} .#{$label} {
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+.#{$buttons-disabled} .#{$value} {
+  @include value-divider($color: $border-subtle-02);
+
+  border-color: $border-subtle-02;
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+
+//
 // MODIFIER, SMALL
-
-.#{$block-class}.#{$block-class}--sm {
-  height: 1.25rem;
-  padding: 0 $spacing-02;
-  font-size: 0.75rem;
-  line-height: 1.2rem;
-  vertical-align: middle;
+//
+.#{$block-class}--sm .#{$label} {
+  height: to-rem(18px);
+  padding: 0 $spacing-02 0 $spacing-03;
+  line-height: 1.333;
 }
-.#{$block-class}--sm .#{$block-class-icon} {
-  margin-left: $spacing-02;
+.#{$block-class}--sm .#{$value} {
+  height: to-rem(18px);
+  // When "small", the divider takes up 1px of 4px of the available space: so "+1px".
+  padding: 0 $spacing-03 0 calc($spacing-02 + 1px);
+  line-height: 1.333;
 }
-.#{$block-class}--sm.#{$block-class}--default,
-.#{$block-class}--sm.#{$block-class}--link,
-.#{$block-class}--sm.#{$block-class}--button,
-.#{$block-class}--sm.#{$block-class}--buttons button {
-  padding: 0 $spacing-02;
-}
-.#{$block-class}--sm.#{$block-class}--default .#{$block-class}__label,
-.#{$block-class}--sm.#{$block-class}--link .#{$block-class}__label,
-.#{$block-class}--sm.#{$block-class}--button .#{$block-class}__label,
-.#{$block-class}--sm.#{$block-class}--buttons button .#{$block-class}__label {
-  padding: 0 $spacing-02;
-}
-.#{$block-class}--sm.#{$block-class}--default .#{$block-class}__value,
-.#{$block-class}--sm.#{$block-class}--link .#{$block-class}__value,
-.#{$block-class}--sm.#{$block-class}--button .#{$block-class}__value,
-.#{$block-class}--sm.#{$block-class}--buttons button .#{$block-class}__value {
-  padding: 0 $spacing-02;
+.#{$block-class}--sm .#{$icon} {
+  margin-top: to-rem(2.5px);
 }
 
+//
 // MODIFIER, TRUNCATION
-
-.#{$block-class}--truncate-end .#{$block-class}__value {
+//
+.#{$block-class}--truncate-end .#{$value} {
+  display: inline;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.#{$block-class}--truncate-start .#{$block-class}__value {
+.#{$block-class}--truncate-start .#{$value} {
+  display: inline;
   overflow: hidden;
   direction: rtl;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+//
 // MAGNITUDE ICON COLORS
-
-.#{$block-class-icon}__magnitude-unknown {
+//
+.#{$icon}__magnitude-unknown {
   fill: $icon-primary;
 }
-
-.#{$block-class-icon}__magnitude-benign {
+.#{$icon}__magnitude-benign {
   /* stylelint-disable-next-line carbon/theme-token-use */
-  fill: #009d9a;
+  fill: $teal-50;
 }
-
-.#{$block-class-icon}__magnitude-low {
+.#{$icon}__magnitude-low {
   fill: $support-warning;
 }
-
-.#{$block-class-icon}__magnitude-medium {
-  /* $carbon--orange-40 */
+.#{$icon}__magnitude-medium {
   /* stylelint-disable-next-line carbon/theme-token-use */
-  fill: #ff832b;
+  fill: $orange-40;
 }
-
-.#{$block-class-icon}__magnitude-high {
+.#{$icon}__magnitude-high {
   fill: $support-error;
 }
-
-.#{$block-class-icon}__magnitude-critical {
+.#{$icon}__magnitude-critical {
   fill: $support-error;
+}
+.#{$block-class}-disabled svg {
+  fill: $icon-on-color-disabled;
 }

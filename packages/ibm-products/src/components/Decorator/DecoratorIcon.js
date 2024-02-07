@@ -24,6 +24,7 @@ const componentName = 'DecoratorIcon';
 const defaults = {
   magnitude: 'unknown',
   height: 16,
+  small: false,
   viewBox: '0 0 16 16',
   width: 16,
 };
@@ -40,8 +41,9 @@ export let DecoratorIcon = React.forwardRef(
       height = defaults.height,
       magnitude = defaults.magnitude,
       path,
+      small = defaults.small,
       title,
-      viewBox,
+      viewBox = defaults.viewBox,
       width = defaults.width,
       /* TODO: add other props for DecoratorIcon, with default values if needed */
 
@@ -50,30 +52,24 @@ export let DecoratorIcon = React.forwardRef(
     },
     ref
   ) => {
+    const _height = small ? 12 : height;
+    const _width = small ? 12 : width;
+
     return (
       <svg
         {...rest}
         aria-hidden={true}
         className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}__magnitude-${magnitude}`,
-
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
+          blockClass,
+          className,
+          `${blockClass}__magnitude-${magnitude}`
         )}
-        // fill="currentColor"
         focusable={false}
-        height={height}
+        height={_height}
         preserveAspectRatio="xMidYMid meet"
-        // style={{ willChange: 'transform' }}
         ref={ref}
-        style={{ minWidth: `${width}px`, minHeight: `${height}px` }}
         viewBox={viewBox}
-        width={width}
+        width={_width}
         {...getDevtoolsProps(componentName)}
       >
         {title && <title>{title}</title>}
@@ -100,7 +96,7 @@ DecoratorIcon.propTypes = {
   className: PropTypes.string,
 
   /* TODO: add types and DocGen for all props. */
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.number,
   magnitude: PropTypes.oneOf([
     'unknown',
     'benign',
@@ -110,7 +106,8 @@ DecoratorIcon.propTypes = {
     'critical',
   ]),
   path: PropTypes.string,
+  small: PropTypes.bool,
   title: PropTypes.string,
   viewBox: PropTypes.string,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  width: PropTypes.number,
 };

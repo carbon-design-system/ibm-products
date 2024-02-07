@@ -45,6 +45,7 @@ export let Decorator = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       className,
+      disabled,
       hideIcon,
       href,
       onClick,
@@ -103,6 +104,7 @@ export let Decorator = React.forwardRef(
       className: `${blockClass}__icon`,
       magnitude: magnitude.toLowerCase(), // e.g. "Medium" -> "medium"
       path: svgPath,
+      small: small,
       title: _scoreDescription,
     };
 
@@ -128,13 +130,16 @@ export let Decorator = React.forwardRef(
         <span
           {...rest}
           {...getDevtoolsProps(componentName)}
-          className={cx(classNames, `${blockClass}--buttons`)}
+          className={cx(classNames, `${blockClass}--buttons`, {
+            [`${blockClass}-disabled`]: disabled,
+          })}
           ref={ref}
         >
           <button
             className={`${blockClass}__label`}
-            onClick={handleOnClickLabel}
-            onContextMenu={handleOnContextMenu}
+            disabled={disabled}
+            onClick={!disabled && handleOnClickLabel}
+            onContextMenu={!disabled && handleOnContextMenu}
             type="button"
           >
             {!hideIcon && <DecoratorIcon {...iconProps} />}
@@ -142,8 +147,9 @@ export let Decorator = React.forwardRef(
           </button>
           <button
             className={`${blockClass}__value`}
-            onClick={handleOnClickValue}
-            onContextMenu={handleOnContextMenu}
+            disabled={disabled}
+            onClick={!disabled && handleOnClickValue}
+            onContextMenu={!disabled && handleOnContextMenu}
             title={valueTitle || value}
             type="button"
           >
@@ -159,14 +165,19 @@ export let Decorator = React.forwardRef(
         <button
           {...rest}
           {...getDevtoolsProps(componentName)}
-          className={cx(classNames, `${blockClass}--button`)}
-          onClick={handleOnClick}
-          onContextMenu={handleOnContextMenu}
+          className={cx(classNames, `${blockClass}--button`, {
+            [`${blockClass}-disabled`]: disabled,
+          })}
+          disabled={disabled}
+          onClick={!disabled && handleOnClick}
+          onContextMenu={!disabled && handleOnContextMenu}
           ref={ref}
           type="button"
         >
-          {!hideIcon && <DecoratorIcon {...iconProps} />}
-          {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+          <span className={`${blockClass}__label`}>
+            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!!label && label}
+          </span>
           <span className={`${blockClass}__value`} title={valueTitle || value}>
             {_value}
           </span>
@@ -182,11 +193,14 @@ export let Decorator = React.forwardRef(
           {...getDevtoolsProps(componentName)}
           href={href}
           className={cx(classNames, `${blockClass}--link`)}
+          onClick={handleOnClick}
           onContextMenu={handleOnContextMenu}
           ref={ref}
         >
-          {!hideIcon && <DecoratorIcon {...iconProps} />}
-          {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+          <span className={`${blockClass}__label`}>
+            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!!label && label}
+          </span>
           <span className={`${blockClass}__value`} title={valueTitle || value}>
             {_value}
           </span>
@@ -200,11 +214,12 @@ export let Decorator = React.forwardRef(
         {...rest}
         {...getDevtoolsProps(componentName)}
         className={cx(classNames, `${blockClass}--default`)}
-        onContextMenu={handleOnContextMenu}
         ref={ref}
       >
-        {!hideIcon && <DecoratorIcon {...iconProps} />}
-        {!!label && <span className={`${blockClass}__label`}>{label}</span>}
+        <span className={`${blockClass}__label`}>
+          {!hideIcon && <DecoratorIcon {...iconProps} />}
+          {!!label && label}
+        </span>
         <span className={`${blockClass}__value`} title={valueTitle || value}>
           {_value}
         </span>
@@ -228,6 +243,12 @@ Decorator.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * Optionally set button-types as `disabled`.
+   *
+   * This does not apply to default or link types.
+   */
+  disabled: PropTypes.bool,
   /**
    * Do not show the icon, regardless of score.
    */
@@ -270,17 +291,11 @@ Decorator.propTypes = {
   /**
    * Determines the color, shape, and type of magnitude of the icon.
    *
-   * A number of less than `scoreThresholds[first]` will be treated as `scoreThresholds[first]`.
-   *
-   * A number of more than `scoreThresholds[last]` will be treated as `scoreThresholds[last]`.
-   *
-   * `null` or `undefined` will return "Unknown" (icon = "ring").
+   * See also `scoreThresholds` for details.
    *
    * If you don't want to show the icon at all, set `hideIcon={true}`.
-   *
-   * See also `scoreThresholds`.
    */
-  score: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  score: PropTypes.number,
   /**
    * Callback function for building the score's descriptive text for screen readers.
    *
@@ -295,17 +310,18 @@ Decorator.propTypes = {
    * An array of 4 numbers determines the range of thresholds.
    *
    * E.g. `[0, 4, 7, 10]`
-   * <br/>- 0 or less = "Benign"
-   * <br/>- 1-3="Low"
-   * <br/>- 4-6="Medium"
-   * <br/>- 7-9="High"
-   * <br/>- 10 or more = "Critical"
+   * <br/>- `<= 0` "Benign"
+   * <br/>- `1-3` "Low"
+   * <br/>- `4-6` "Medium"
+   * <br/>- `7-9` "High"
+   * <br/>- `>= 10` "Critical"
+   * <br/>- `NaN` "Unknown"
    *
    * See also `score`.
    */
   scoreThresholds: PropTypes.arrayOf(PropTypes.number),
   /**
-   * Styled smaller to better fit with surrounding text.
+   * Styled smaller to better fit inline with text.
    */
   small: PropTypes.bool,
   /**

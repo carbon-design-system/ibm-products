@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss';
 const storyClass = 'decorator-stories';
 
 const scoreOptions = {
-  '-1 (less than 0 is treated as 0)': -1,
+  '-1 ("<= 0" is treated as 0)': -1,
   '0 ': 0,
   '1 ': 1,
   '2 ': 2,
@@ -32,8 +32,8 @@ const scoreOptions = {
   '8 ': 8,
   '9 ': 9,
   '10 ': 10,
-  '11 (greater than 10 is treated as 10)': 11,
-  'null or undefined': null,
+  '11 (">= 10" is treated as 10)': 11,
+  'NaN; treated as "Unknown"': null,
 };
 
 export default {
@@ -59,6 +59,7 @@ export default {
 };
 
 const defaultProps = {
+  disabled: false,
   hideIcon: false,
   label: 'IP',
   score: 5,
@@ -71,15 +72,6 @@ const defaultProps = {
 
 const Template = (args) => {
   return <Decorator {...args} />;
-};
-
-const TemplateSmall = (args) => {
-  return (
-    <>
-      Small Decorator <Decorator {...args} /> where{' '}
-      <strong>small={'{true}'}.</strong>
-    </>
-  );
 };
 
 const TemplateTruncation = (args) => {
@@ -146,8 +138,8 @@ const TemplateTruncation = (args) => {
 export const decorator = prepareStory(Template, {
   args: {
     ...defaultProps,
-    label: 'Label',
-    value: 'Value',
+    // label: 'Label',
+    // value: 'Value',
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
@@ -155,9 +147,9 @@ export const decorator = prepareStory(Template, {
 export const asLink = prepareStory(Template, {
   args: {
     ...defaultProps,
-    label: 'URL',
+    // label: 'URL',
     href: 'http://www.ibm.com',
-    value: 'ibm.com',
+    // value: 'ibm.com',
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
@@ -179,6 +171,13 @@ export const asDualButtons = prepareStory(Template, {
   },
 });
 
+// export const disabled = prepareStory(Template, {
+//   args: {
+//     ...defaultProps,
+//     disabled: true,
+//   },
+// });
+
 export const truncatedValue = prepareStory(TemplateTruncation, {
   args: {
     ...defaultProps,
@@ -187,7 +186,7 @@ export const truncatedValue = prepareStory(TemplateTruncation, {
   },
 });
 
-export const small = prepareStory(TemplateSmall, {
+export const small = prepareStory(Template, {
   args: {
     ...defaultProps,
     small: true,

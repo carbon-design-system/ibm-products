@@ -1,11 +1,9 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
-import { devtoolsAttribute, getDevtoolsId } from './utils/devtools';
 
 const defaults = {
   prefix: 'c4p',
@@ -70,6 +68,8 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    TruncatedList: false,
+    DelimitedList: false,
 
     /* new component flags here - comment used by generate CLI */
 
@@ -81,7 +81,6 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
     SearchBar: false,
     /* new component flags here - comment used by generate CLI */
 
@@ -170,6 +169,12 @@ const feature = new Proxy(
     },
   }
 );
+
+export const devtoolsAttribute = 'data-carbon-devtools-id';
+
+export function getDevtoolsId(componentName) {
+  return `${defaults.prefix}--${componentName}`;
+}
 
 export default {
   devtoolsAttribute,

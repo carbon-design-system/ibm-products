@@ -71,9 +71,9 @@ export let CardHeader = ({
 
   let normalizedSlug;
   if (slug) {
-    if (inClickableCard) {
+    if (inClickableCard || typeof slug === 'boolean') {
       normalizedSlug = hollowSlugIcon;
-    } else if (typeof slug !== 'boolean') {
+    } else {
       normalizedSlug = React.cloneElement(slug, {
         size:
           (label && title) || (title && titleSize === 'large') ? 'sm' : 'xs',

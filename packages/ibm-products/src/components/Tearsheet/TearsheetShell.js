@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -25,6 +25,7 @@ import {
 } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
+import { useFocus } from '../../global/js/hooks/useFocus';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -101,6 +102,7 @@ export const TearsheetShell = React.forwardRef(
     const resizer = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -123,35 +125,6 @@ export const TearsheetShell = React.forwardRef(
       setPosition(newPosition);
     }
 
-    // below callback for finding focusable elements from modal element
-    const checkForFocusableElements = useCallback(() => {
-      // Querying focusable element in the tearsheet
-      // Query to exclude hidden elements in the tearsheet from querySelectorAll() method
-      const notQuery = `:not(.${carbon.prefix}--visually-hidden,.${bc}__header--no-close-icon,.${carbon.prefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
-      // Queries to include element types button, input, select, textarea
-      const queryButton = `button${notQuery}`;
-      const queryInput = `input${notQuery}`;
-      const querySelect = `select${notQuery}`;
-      const queryTextarea = `textarea${notQuery}`;
-      const queryLink = `[href]${notQuery}`;
-      // Final query
-      const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}`;
-
-      const modalEl = modalRef?.current?.innerModal?.current;
-      // Selecting all focusable elements based on the above conditions
-      const focusableElements = modalEl?.querySelectorAll(`${query}`);
-
-      return {
-        first: focusableElements?.[0],
-        last: focusableElements?.[focusableElements?.length - 1],
-        all: focusableElements,
-      };
-    }, [modalRef]);
-    // ref for above callback
-    // useRef to avoid stale closure when invoking checkForFocusableElements()
-    // callback from multiple functions
-    const savedCheckForFocusableCallback = useRef(checkForFocusableElements);
-
     handleStackChange.checkFocus = function () {
       // if we are now the topmost tearsheet, ensure we have focus
       if (
@@ -165,63 +138,8 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      const focusable = savedCheckForFocusableCallback.current();
-      focusable?.first?.focus();
+      firstElement?.focus();
     };
-
-    // useEffect hook to handle focus trapping
-    useEffect(() => {
-      if (open) {
-        const modalEl = modalRef?.current?.innerModal?.current;
-        // To decide the first and last elements
-        let focusable = savedCheckForFocusableCallback.current();
-
-        // Focusing the first element
-        setTimeout(() => focusable?.first?.focus(), 0);
-
-        // Handling the key event
-        const handleKeyDown = (event) => {
-          // Checking whether the key is tab or not
-          if (event.key === 'Tab') {
-            // updating the focusable elements list
-            focusable = savedCheckForFocusableCallback.current();
-
-            setTimeout(() => {
-              if (
-                event.shiftKey &&
-                !Array.prototype.includes.call(
-                  focusable?.all,
-                  document?.activeElement
-                )
-              ) {
-                // Prevents the default "Tab" behavior
-                event.preventDefault();
-                // if the user press shift+tab and the current element not in focusable items
-                focusable?.last?.focus();
-              } else if (
-                !Array.prototype.includes.call(
-                  focusable?.all,
-                  document?.activeElement
-                )
-              ) {
-                event.preventDefault();
-                // user pressing tab key only then
-                // focusing the first element if the current element is not in focusable items
-                focusable?.first?.focus();
-              }
-            }, 0);
-          }
-        };
-
-        // Subscribing to keydown event
-        modalEl.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-          // Unsubscribing from keydown event
-          modalEl.removeEventListener('keydown', handleKeyDown);
-        };
-      }
-    }, [open, modalRef]);
 
     useEffect(() => {
       const notify = () =>
@@ -309,6 +227,7 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
+          onKeyDown={keyDownListener}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[

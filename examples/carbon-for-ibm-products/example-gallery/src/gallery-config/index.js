@@ -47,6 +47,7 @@ import imageStatusIcon from './StatusIcon--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
 import imageUserAvatar from './UserAvatar--thumbnail.png';
+import imageTruncatedList from './TruncatedList--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -235,6 +236,11 @@ const config = [
     label: 'User-Avatar',
     directory: 'UserAvatar',
     thumbnail: `url(${imageUserAvatar}`,
+  },
+  {
+    label: 'Truncated-List',
+    directory: 'TruncatedList',
+    thumbnail: `url(${imageTruncatedList}`,
   },
   {
     label: 'UserProfileImage',

@@ -16,7 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
-import { TooltipDefinition } from '@carbon/react';
+import { DefinitionTooltip } from '@carbon/react';
 import { StringFormatterAlignment } from './utils/enums';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--string-formatter`;
@@ -36,7 +36,7 @@ const componentName = 'StringFormatter';
 // Default values for props
 const defaults = {
   lines: 1,
-  tooltipDirection: StringFormatterAlignment.BOTTOM,
+  tooltipDirection: StringFormatterAlignment.BOTTOM_LEFT,
   truncate: false,
   width: null,
 };
@@ -76,11 +76,11 @@ export let StringFormatter = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         {truncate ? (
-          <TooltipDefinition
+          <DefinitionTooltip
             className={`${blockClass}__tooltip`}
-            align="start"
-            direction={tooltipDirection}
-            tooltipText={value}
+            align={tooltipDirection}
+            definition={value}
+            openOnHover={true}
           >
             <StringFormatterContent
               lines={lines}
@@ -88,7 +88,7 @@ export let StringFormatter = React.forwardRef(
               value={value}
               width={width}
             />
-          </TooltipDefinition>
+          </DefinitionTooltip>
         ) : (
           <StringFormatterContent
             className={className}
@@ -116,13 +116,13 @@ const DefaultStringFormatterProps = {
    */
   className: PropTypes.string,
 
-  /** @type {number} Number of lines to clamp value. */
+  /** Number of lines to clamp value. */
   lines: PropTypes.number,
   /** Whether or not the value should be truncated. */
   truncate: PropTypes.bool,
   /** Value to format. */
   value: PropTypes.string.isRequired,
-  /** Maximum width of value. */
+  /** Maximum width of value which should include */
   width: PropTypes.string,
 };
 

@@ -8,7 +8,8 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
 // or
@@ -19,7 +20,54 @@
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--string-formatter;
+$popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
+.#{$block-class} {
+  display: inline-block;
+  text-align: left;
+}
+
+.#{$block-class}--content {
+  display: inline-block;
+  text-align: left;
+}
+
+.#{$block-class}--truncate {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 80ch;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.#{$block-class}__tooltip > button {
+  border-width: 0;
+  color: currentColor;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.#{$popover-block-class} {
+  max-width: $spacing-05;
+  margin: 0 auto;
+}
+
+.#{$block-class} .#{$popover-block-class}-content {
+  max-inline-size: 20rem;
+}
+
+.#{$block-class} .#{$popover-block-class}--left .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--left-bottom .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--left-top .#{$popover-block-class} {
+  margin: 0;
+}
+
+.#{$block-class} .#{$popover-block-class}--right .#{$popover-block-class},
+.#{$block-class}
+  .#{$popover-block-class}--right-bottom
+  .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--right-top .#{$popover-block-class} {
+  margin-right: 0;
+  margin-left: auto;
+}

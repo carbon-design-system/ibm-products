@@ -2891,10 +2891,10 @@ __metadata:
     "@babel/cli": ^7.20.7
     "@babel/core": ^7.20.12
     "@babel/runtime": ^7.20.13
-    "@carbon/telemetry": ^0.1.0
     "@dnd-kit/core": ^6.0.8
     "@dnd-kit/sortable": ^7.0.2
     "@dnd-kit/utilities": ^3.2.1
+    "@ibm/telemetry-js": ^1.2.0
     babel-preset-ibm-cloud-cognitive: ^0.14.28
     chalk: ^4.1.2
     change-case: ^4.1.2
@@ -3053,7 +3053,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/telemetry@npm:0.1.0, @carbon/telemetry@npm:^0.1.0":
+"@carbon/telemetry@npm:0.1.0":
   version: 0.1.0
   resolution: "@carbon/telemetry@npm:0.1.0"
   bin:
@@ -4178,6 +4178,15 @@ __metadata:
     prop-types: ^15.0.0
     react: ">=0.14.0"
   checksum: d2f069a562e138057aa067e1483e28cea3193bbacd33ca9528131f31e656939cfeb552af760b3be437d3a8074315a8854fc6d5d89878e2746618ad930c817122
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@ibm/telemetry-js@npm:1.2.0"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: 9b187e344b0460e436285422f669eac973c8021559dcfd01fcfed38b8b485cc7e91fd61475417573bebca9d4fa421a6b058892cf2df47be663a3eb09c788bc3b
   languageName: node
   linkType: hard
 

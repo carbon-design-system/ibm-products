@@ -97,6 +97,7 @@ const s = [
               'c/NotFoundEmptyState',
               'c/NotificationsEmptyState',
               'c/UnauthorizedEmptyState',
+              'c/EmptyStateV2',
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },

@@ -5,16 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useMemo, useEffect } from 'react';
-import { pkg } from '../../settings';
+import { useMemo } from 'react';
 import { FilterFlyout } from './Datagrid/addons/Filtering';
 import { BATCH } from './Datagrid/addons/Filtering/constants';
 
 const useFiltering = (hooks) => {
-  useEffect(() => {
-    pkg.checkReportFeatureEnabled('Datagrid.useFiltering');
-  }, []);
-
   /* istanbul ignore next */
   const filterTypes = useMemo(
     () => ({

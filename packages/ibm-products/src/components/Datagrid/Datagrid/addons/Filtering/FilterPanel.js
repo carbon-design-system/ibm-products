@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 /**
  * Copyright IBM Corp. 2022, 2024
  *

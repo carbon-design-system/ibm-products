@@ -567,6 +567,9 @@ export let DataSpreadsheet = React.forwardRef(
         keysPressedList,
         usingMac,
         updateData,
+        checkforReturnConditon,
+        clearSelectiondata,
+        handleArrowkeyPress,
       ]
     );
 

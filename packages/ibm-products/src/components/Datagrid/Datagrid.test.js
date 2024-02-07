@@ -47,7 +47,14 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity, Add, Edit, } from '@carbon/react/icons';
+import {
+  Download,
+  Restart,
+  Filter,
+  Activity,
+  Add,
+  Edit,
+} from '@carbon/react/icons';
 import { carbon, pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -851,13 +858,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
-      icon: Edit
+      icon: Edit,
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
-      icon: Add
+      icon: Add,
     },
     {
       id: 'retire',

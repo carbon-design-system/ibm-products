@@ -14,14 +14,15 @@ import { handleSelectAllRowData } from './addons/stateReducer';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SelectAll = (datagridState) => {
-  const [windowSize, setWindowSize] = useState(typeof window !== 'undefined'?window.innerWidth:"");
+  const [windowSize, setWindowSize] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : ''
+  );
   useLayoutEffect(() => {
     /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);
     }
-    if(typeof window !== 'undefined')
-    {
+    if (typeof window !== 'undefined') {
       window.addEventListener('resize', updateSize);
     }
     return () => window.removeEventListener('resize', updateSize);

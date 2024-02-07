@@ -89,7 +89,9 @@ const SelectRow = (datagridState) => {
     getRowId,
   } = datagridState;
 
-  const [windowSize, setWindowSize] = useState((typeof window!=="undefined")?window.innerWidth:"");
+  const [windowSize, setWindowSize] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : ''
+  );
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize(window.innerWidth);

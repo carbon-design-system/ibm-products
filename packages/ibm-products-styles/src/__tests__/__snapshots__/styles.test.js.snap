@@ -3209,7 +3209,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid th.c4p--datagrid__with-slug {
-  background-image: linear-gradient(180deg, var(--cds-ai-gradient-start-01, rgba(242, 244, 248, 0.5)) 0%, var(--cds-ai-gradient-end, rgba(255, 255, 255, 0)) 100%, transparent 100%), linear-gradient(180deg, var(--cds-ai-gradient-start-02, rgba(237, 245, 255, 0.5)) 0%, var(--cds-ai-gradient-end, rgba(255, 255, 255, 0)) 100%, transparent 100%);
+  background-image: linear-gradient(180deg, var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)) 0%, 15%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 100%, transparent 100%);
+  border-block-end-color: var(--cds-ai-border-strong, #4589ff);
 }
 
 .c4p--datagrid th.c4p--datagrid__with-slug .cds--slug {
@@ -4228,13 +4229,6 @@ p.c4p--about-modal__copyright-text:first-child {
   grid-template-columns: 1fr;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-panel__container {
   position: relative;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
@@ -5391,7 +5385,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--card .cds--slug {
-  background: linear-gradient(0deg, var(--cds-slug-callout-aura-start, rgba(237, 245, 255, 0.6)) 0%, var(--cds-slug-callout-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 50%), linear-gradient(180deg, var(--cds-slug-callout-gradient-top, rgba(244, 244, 244, 0.85)) 0%, var(--cds-slug-callout-gradient-bottom, rgba(224, 224, 224, 0.85)) 100%) rgba(0, 0, 0, 0.01);
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -6027,6 +6020,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-ai-gradient-end: rgba(38, 38, 38, 0);
   --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
   --cds-ai-gradient-start-02: transparent;
+  --cds-ai-inner-shadow: rgba(69, 137, 255, 0.2);
   --cds-background: #161616;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -6042,11 +6036,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-strong-02: #8d8d8d;
   --cds-border-strong-03: #a8a8a8;
   --cds-border-subtle-00: #393939;
-  --cds-border-subtle-01: #393939;
-  --cds-border-subtle-02: #525252;
+  --cds-border-subtle-01: #525252;
+  --cds-border-subtle-02: #6f6f6f;
   --cds-border-subtle-03: #6f6f6f;
-  --cds-border-subtle-selected-01: #525252;
-  --cds-border-subtle-selected-02: #6f6f6f;
+  --cds-border-subtle-selected-01: #6f6f6f;
+  --cds-border-subtle-selected-02: #8d8d8d;
   --cds-border-subtle-selected-03: #8d8d8d;
   --cds-border-tile-01: #525252;
   --cds-border-tile-02: #6f6f6f;
@@ -6117,20 +6111,26 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-skeleton-element: #393939;
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
-  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end: rgba(0, 0, 0, 0);
   --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-end-hover-02: transparent;
   --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
-  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start: rgba(69, 137, 255, 0.1);
   --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
   --cds-slug-callout-aura-start-hover-02: transparent;
   --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-caret-bottom: #3d4655;
+  --cds-slug-callout-caret-bottom-background: #213250;
+  --cds-slug-callout-caret-bottom-background-actions: #192436;
+  --cds-slug-callout-caret-center: #3f68af;
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
   --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
   --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
   --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
   --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
+  --cds-slug-callout-shadow-outer-01: rgba(0, 45, 156, 0.25);
+  --cds-slug-callout-shadow-outer-02: rgba(0, 0, 0, 0.65);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;
@@ -9846,6 +9846,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-ai-gradient-end: rgba(38, 38, 38, 0);
   --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
   --cds-ai-gradient-start-02: transparent;
+  --cds-ai-inner-shadow: rgba(69, 137, 255, 0.2);
   --cds-background: #262626;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -9861,11 +9862,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-strong-02: #a8a8a8;
   --cds-border-strong-03: #c6c6c6;
   --cds-border-subtle-00: #525252;
-  --cds-border-subtle-01: #525252;
-  --cds-border-subtle-02: #6f6f6f;
+  --cds-border-subtle-01: #6f6f6f;
+  --cds-border-subtle-02: #8d8d8d;
   --cds-border-subtle-03: #8d8d8d;
-  --cds-border-subtle-selected-01: #6f6f6f;
-  --cds-border-subtle-selected-02: #8d8d8d;
+  --cds-border-subtle-selected-01: #8d8d8d;
+  --cds-border-subtle-selected-02: #a8a8a8;
   --cds-border-subtle-selected-03: #a8a8a8;
   --cds-border-tile-01: #6f6f6f;
   --cds-border-tile-02: #8d8d8d;
@@ -9936,20 +9937,26 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-skeleton-element: #525252;
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
-  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end: rgba(0, 0, 0, 0);
   --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-end-hover-02: transparent;
   --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
-  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start: rgba(69, 137, 255, 0.1);
   --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
   --cds-slug-callout-aura-start-hover-02: transparent;
   --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-caret-bottom: #465060;
+  --cds-slug-callout-caret-bottom-background: #2d3f5c;
+  --cds-slug-callout-caret-bottom-background-actions: #253042;
+  --cds-slug-callout-caret-center: #456fb5;
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
   --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
   --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
   --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
   --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
+  --cds-slug-callout-shadow-outer-01: rgba(0, 45, 156, 0.25);
+  --cds-slug-callout-shadow-outer-02: rgba(0, 0, 0, 0.65);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;
@@ -10278,6 +10285,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-ai-gradient-end: rgba(38, 38, 38, 0);
   --cds-ai-gradient-start-01: rgba(208, 226, 255, 0.2);
   --cds-ai-gradient-start-02: transparent;
+  --cds-ai-inner-shadow: rgba(69, 137, 255, 0.2);
   --cds-background: #161616;
   --cds-background-active: rgba(141, 141, 141, 0.4);
   --cds-background-brand: #0f62fe;
@@ -10293,11 +10301,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-strong-02: #8d8d8d;
   --cds-border-strong-03: #a8a8a8;
   --cds-border-subtle-00: #393939;
-  --cds-border-subtle-01: #393939;
-  --cds-border-subtle-02: #525252;
+  --cds-border-subtle-01: #525252;
+  --cds-border-subtle-02: #6f6f6f;
   --cds-border-subtle-03: #6f6f6f;
-  --cds-border-subtle-selected-01: #525252;
-  --cds-border-subtle-selected-02: #6f6f6f;
+  --cds-border-subtle-selected-01: #6f6f6f;
+  --cds-border-subtle-selected-02: #8d8d8d;
   --cds-border-subtle-selected-03: #8d8d8d;
   --cds-border-tile-01: #525252;
   --cds-border-tile-02: #6f6f6f;
@@ -10368,20 +10376,26 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-skeleton-element: #393939;
   --cds-slug-background: #c6c6c6;
   --cds-slug-background-hover: #e0e0e0;
-  --cds-slug-callout-aura-end: rgba(22, 22, 22, 0);
+  --cds-slug-callout-aura-end: rgba(0, 0, 0, 0);
   --cds-slug-callout-aura-end-hover-01: rgba(22, 22, 22, 0);
   --cds-slug-callout-aura-end-hover-02: transparent;
   --cds-slug-callout-aura-end-selected: rgba(22, 22, 22, 0);
-  --cds-slug-callout-aura-start: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-aura-start: rgba(69, 137, 255, 0.1);
   --cds-slug-callout-aura-start-hover-01: rgba(184, 211, 255, 0.3);
   --cds-slug-callout-aura-start-hover-02: transparent;
   --cds-slug-callout-aura-start-selected: rgba(208, 226, 255, 0.2);
+  --cds-slug-callout-caret-bottom: #3d4655;
+  --cds-slug-callout-caret-bottom-background: #213250;
+  --cds-slug-callout-caret-bottom-background-actions: #192436;
+  --cds-slug-callout-caret-center: #3f68af;
   --cds-slug-callout-gradient-bottom: rgba(38, 38, 38, 0.85);
   --cds-slug-callout-gradient-bottom-hover: rgba(71, 71, 71, 0.55);
   --cds-slug-callout-gradient-bottom-selected: rgba(71, 71, 71, 0.85);
   --cds-slug-callout-gradient-top: rgba(22, 22, 22, 0.85);
   --cds-slug-callout-gradient-top-hover: rgba(57, 57, 57, 0.55);
   --cds-slug-callout-gradient-top-selected: rgba(57, 57, 57, 0.85);
+  --cds-slug-callout-shadow-outer-01: rgba(0, 45, 156, 0.25);
+  --cds-slug-callout-shadow-outer-02: rgba(0, 0, 0, 0.65);
   --cds-slug-gradient: #8d8d8d linear-gradient(135deg, #f4f4f4 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-gradient-hover: #a8a8a8 linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   --cds-slug-hollow-hover: #b5b5b5;

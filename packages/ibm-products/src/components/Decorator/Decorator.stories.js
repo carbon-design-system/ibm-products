@@ -138,8 +138,6 @@ const TemplateTruncation = (args) => {
 export const decorator = prepareStory(Template, {
   args: {
     ...defaultProps,
-    // label: 'Label',
-    // value: 'Value',
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
@@ -147,9 +145,9 @@ export const decorator = prepareStory(Template, {
 export const asLink = prepareStory(Template, {
   args: {
     ...defaultProps,
-    // label: 'URL',
     href: 'http://www.ibm.com',
-    // value: 'ibm.com',
+    target: '_blank',
+    onClick: (event, values) => action('onClick')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });

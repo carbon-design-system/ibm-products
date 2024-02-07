@@ -157,7 +157,7 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN SINGLE BUTTON
-    if (onClick) {
+    if (onClick && !href) {
       return (
         <button
           {...rest}

@@ -1,0 +1,12 @@
+{
+  "label": "Truncated-List",
+  "package-config": {
+    "flags": {
+      "component": {
+        "TruncatedList": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

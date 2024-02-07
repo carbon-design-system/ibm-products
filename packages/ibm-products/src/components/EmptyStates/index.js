@@ -6,6 +6,7 @@
  */
 
 export { EmptyState } from './EmptyState';
+export { EmptyStateV2 } from './EmptyStateV2';
 export { ErrorEmptyState } from './ErrorEmptyState';
 export { NoDataEmptyState } from './NoDataEmptyState';
 export { NoTagsEmptyState } from './NoTagsEmptyState';

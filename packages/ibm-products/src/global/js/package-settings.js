@@ -1,11 +1,9 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
-import { devtoolsAttribute, getDevtoolsId } from './utils/devtools';
 
 const defaults = {
   prefix: 'c4p',
@@ -69,6 +67,12 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    TruncatedList: false,
+    DelimitedList: false,
+
+    /* new component flags here - comment used by generate CLI */
+
+    // Novice to pro components not yet reviewed and released:
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,
@@ -76,12 +80,13 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
-    DelimitedList: false,
     Decorator: false,
+    SearchBar: false,
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,
@@ -89,6 +94,9 @@ const defaults = {
     InlineTip: false,
     InlineTipButton: false,
     InlineTipLink: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     NonLinearReading: false,
   },
 
@@ -97,7 +105,6 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
-    'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,
@@ -162,6 +169,12 @@ const feature = new Proxy(
     },
   }
 );
+
+export const devtoolsAttribute = 'data-carbon-devtools-id';
+
+export function getDevtoolsId(componentName) {
+  return `${defaults.prefix}--${componentName}`;
+}
 
 export default {
   devtoolsAttribute,

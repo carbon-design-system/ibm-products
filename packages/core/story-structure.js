@@ -57,6 +57,7 @@ const s = [
               'c/Datagrid/Extensions/Slug',
             ],
           },
+          { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Decorator', s: ['c/Decorator'] },
         ],
@@ -109,6 +110,10 @@ const s = [
           { n: 'Notifications', s: ['c/NotificationsPanel'] },
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
+          {
+            n: 'Search bar',
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
+          },
           { n: 'Status icons', s: ['c/StatusIcon'] },
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
@@ -157,6 +162,14 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
+          {
+            n: 'Interstitial Screen',
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
+          },
           'c/InlineTip',
           'c/NonLinearReading',
         ],

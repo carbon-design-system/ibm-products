@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
 import React, { useMemo } from 'react';
 
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -18,7 +16,6 @@ import { pkg } from '../../settings';
 import { getIcon, truncate } from './constants';
 import { DecoratorIcon } from './DecoratorIcon';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--decorator`;
 const componentName = 'Decorator';
 

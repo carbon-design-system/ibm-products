@@ -1,9 +1,19 @@
+/**
+ * Copyright IBM Corp. 2023, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { Button, Checkbox, FormGroup } from '@carbon/react';
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { componentClass } from './FilterPanel';
-import { handleCheckboxChange } from './hooks/useFilters';
+import { handleCheckboxChange } from './handleCheckboxChange';
+import { pkg } from '../../../../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+const componentClass = `${blockClass}-filter-panel`;
 
 const OverflowCheckboxes = ({
   components,

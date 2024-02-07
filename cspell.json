@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -68,7 +72,9 @@
     "autodocs",
     "automerge",
     "buildhome",
+    "callout",
     "checkmark",
+    "Coachmark",
     "codemods",
     "codesandbox",
     "colindex",
@@ -88,6 +94,7 @@
     "expressivecard",
     "gridcell",
     "guidebanner",
+    "haspopup",
     "homescreen",
     "inlineedit",
     "listbox",
@@ -110,8 +117,8 @@
     "rowgroup",
     "rowheader",
     "rowindex",
-    "scrollend",
     "sbdocs",
+    "scrollend",
     "semibold",
     "serializers",
     "setsize",

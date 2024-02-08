@@ -87,15 +87,14 @@ export let FullPageError = React.forwardRef(
               lg={6}
               className={`${blockClass}__error-column`}
             >
-              {errorLabel && (
-                <p className={`${blockClass}__error-label`}>{errorLabel}</p>
-              )}
-              {title && (
-                <h1 className={`${blockClass}__error-title`}>{title}</h1>
-              )}
-              {description && (
-                <p className={`${blockClass}__description`}>{description}</p>
-              )}
+              <h1 className={`${blockClass}__error-title`}>
+                <span className={`${blockClass}__error-label`}>
+                  ↳ {errorLabel}
+                </span>
+                <br />
+                <span>{title}</span>
+              </h1>
+              <p className={`${blockClass}__description`}>{description}</p>
               {children}
             </Column>
             <Column sm={4} md={5} lg={10}>
@@ -146,7 +145,7 @@ FullPageError.propTypes = {
   /**
    * This will be for the main title of the FullPageError component
    */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 
   /* TODO: add types and DocGen for all props. */
 };

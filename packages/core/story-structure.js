@@ -99,7 +99,7 @@ const s = [
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
-          { n: 'FullPageError', s: ['c/FullPageError'] },
+          { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',

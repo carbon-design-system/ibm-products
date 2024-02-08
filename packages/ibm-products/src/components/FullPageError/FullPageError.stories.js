@@ -8,8 +8,8 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-import { UiShell } from './components/UiShell';
-import { Breadcrumbs } from './components/Breadcrumbs';
+import { UiShell } from './preview-components/UiShell';
+import { Breadcrumbs } from './preview-components/Breadcrumbs';
 import { Link } from '@carbon/react';
 import {
   getStoryTitle,
@@ -42,7 +42,7 @@ export default {
 
 const defaultProps = {
   title: '[Error title]',
-  errorLabel: '↳ Error ###',
+  errorLabel: 'Error ###',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
   children: (

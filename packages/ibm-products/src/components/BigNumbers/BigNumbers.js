@@ -19,8 +19,15 @@ import classnames from 'classnames';
 import { ArrowUp, Information } from '@carbon/react/icons';
 import { Tooltip, SkeletonText } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
-import { BigNumbersSize } from './utils/enums';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import {
+  formatValue,
+  getIconSize,
+  getSupportedLocale,
+  BigNumbersSize,
+  DefaultLocale,
+  Characters,
+} from './utils';
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--big-numbers`;
 const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;
@@ -28,21 +35,12 @@ const componentName = 'BigNumbers';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
 // Default values for props
 const defaults = {
   forceShowTotal: false,
   fractionDigits: 1,
   loading: false,
-  locale: 'en-US',
+  locale: DefaultLocale,
   percentage: false,
   size: BigNumbersSize.Default,
   total: 0,
@@ -68,12 +66,12 @@ export let BigNumbers = React.forwardRef(
       forceShowTotal = defaults.forceShowTotal,
       fractionDigits = defaults.fractionDigits,
       iconButton,
-      information,
       loading = defaults.loading,
       label,
       locale = defaults.locale,
       percentage = defaults.percentage,
       size = defaults.size,
+      tooltipDescription,
       total = defaults.total,
       trending = defaults.trending,
       truncate = defaults.truncate,
@@ -83,138 +81,43 @@ export let BigNumbers = React.forwardRef(
     },
     ref
   ) => {
-    const labelID = uuidv4();
     const BigNumbersClasses = classnames(className, {
       [`${blockClass}--lg`]: size === BigNumbersSize.Large,
       [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
     });
-    const BigNumbersSkeletonClasses = classnames(className, {
-      [`${skeletonBlockClass}--lg`]: size === BigNumbersSize.Large,
-      [`${skeletonBlockClass}--xl`]: size === BigNumbersSize.XLarge,
-    });
 
-    const supportedLocale =
-      Intl.NumberFormat.supportedLocalesOf(locale).length > 0
-        ? locale
-        : defaults.locale;
+    const supportedLocale = getSupportedLocale(locale);
 
-    const iconSize = () => {
-      switch (size) {
-        case BigNumbersSize.Large:
-          return 20;
-        case BigNumbersSize.XLarge:
-          return 24;
-        default:
-          return 16;
-      }
-    };
+    const truncatedValue =
+      formatValue(supportedLocale, value, fractionDigits, truncate) ??
+      Characters.Dash;
 
-    /**
-     * Ensure that the value includes a percentage if specified by prop,
-     * or otherwise the value is properly formatted.
-     * @param {string} locale Locale value to be used in formatting numbers.
-     * @param {boolean} percentage Whether a percent sign should be included.
-     * @param {number|null|undefined} value The value to be formatted.
-     * @param {boolean} truncate Whether or not the value should be truncated.
-     * @returns {string} Formatted string.
-     */
-    const truncateValue = (locale, percentage, value, truncate) => {
-      if (value === null || value === undefined) {
-        return '–';
-      } else if (percentage) {
-        return (
-          <div className={`${blockClass}__percentage`}>
-            {formatValue(locale, value, truncate)}
-            <span className={`${blockClass}__percentage-mark`}>%</span>
-          </div>
-        );
-      } else {
-        return formatValue(locale, value, truncate);
-      }
-    };
-
-    /**
-     * Ensure that the value is formatted correctly based on whether it should be truncated or not.
-     * @param {string} locale Locale value to be used in formatting numbers.
-     * @param {number} value The value to format.
-     * @param {boolean} truncate Whether or not the value should be truncated.
-     * @returns {string} The formatted value.
-     */
-    const formatValue = (locale, value, truncate) => {
-      return truncate
-        ? Intl.NumberFormat(locale, {
-            notation: 'compact',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: Math.round(fractionDigits),
-          }).format(value)
-        : Intl.NumberFormat(locale).format(value);
-    };
-
-    const truncatedValue = truncateValue(
-      supportedLocale,
-      percentage,
-      value,
-      truncate
-    );
-    const truncatedTotal = formatValue(supportedLocale, total, truncate);
+    const truncatedTotal =
+      formatValue(supportedLocale, total, fractionDigits, truncate) ??
+      'Unknown';
 
     const shouldDisplayDenominator =
       (!percentage && total > value && truncatedValue !== truncatedTotal) ||
       (forceShowTotal && total > 0);
 
     if (loading) {
-      return (
-        <div
-          {
-            // Pass through any other property values as HTML attributes.
-            ...rest
-          }
-          className={cx(
-            className,
-            skeletonBlockClass,
-            BigNumbersSkeletonClasses
-          )}
-          ref={ref}
-          {...getDevtoolsProps(componentName)}
-        >
-          <SkeletonText className={`${skeletonBlockClass}__label`} />
-          <SkeletonText
-            heading
-            className={`${skeletonBlockClass}__value`}
-            width="80%"
-          />
-        </div>
-      );
+      <SkeletonBigNumbers className={className} size={size} {...rest} />;
     }
 
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          BigNumbersClasses,
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
-        aria-labelledby={labelID}
+        {...rest}
+        className={cx(blockClass, BigNumbersClasses, className)}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
+        {/* Label and tooltip row */}
         <span className={`${blockClass}__row`}>
-          <h4 id={labelID} className={`${blockClass}__label`}>
-            {label}
-          </h4>
-          {information && (
+          <h4 className={`${blockClass}__label`}>{label}</h4>
+          {tooltipDescription && (
             <Tooltip
-              label={information}
-              align={'right'}
+              description={tooltipDescription}
+              align="right"
               className={`${blockClass}__info`}
             >
               <TooltipTrigger className={`${blockClass}__tooltip-trigger`}>
@@ -223,26 +126,38 @@ export let BigNumbers = React.forwardRef(
             </Tooltip>
           )}
         </span>
-        <span className={`${blockClass}__row`}>
+
+        {/* Trending arrow, numerator, denominator, and optional iconButton row */}
+        <span className={`${blockClass}__row`} role="math">
           {trending && (
-            <ArrowUp className={`${blockClass}__trend`} size={iconSize()} />
+            <ArrowUp
+              className={`${blockClass}__trend`}
+              size={getIconSize(size)}
+            />
           )}
-          <span
-            role="math"
-            aria-label="Value"
-            className={`${blockClass}__value`}
-          >
-            {truncatedValue}
+
+          {/* Numerator */}
+          <span className={`${blockClass}__value`}>
+            {percentage ? (
+              <div className={`${blockClass}__percentage`}>
+                {truncatedValue}
+                <span className={`${blockClass}__percentage-mark`}>%</span>
+              </div>
+            ) : (
+              truncatedValue
+            )}
           </span>
-          {shouldDisplayDenominator ? (
-            <span
-              role="math"
-              aria-label="Total"
-              className={`${blockClass}__total`}
-            >
-              <span>/{truncatedTotal}</span>
+
+          {/* Denominator */}
+          {shouldDisplayDenominator && (
+            <span className={`${blockClass}__total`}>
+              <span>
+                {Characters.Slash}
+                {truncatedTotal}
+              </span>
             </span>
-          ) : null}
+          )}
+
           {iconButton}
         </span>
       </div>
@@ -287,11 +202,6 @@ BigNumbers.propTypes = {
    */
   iconButton: PropTypes.node,
 
-  /** Pass in content to the body of the information tooltip.
-   * @type string
-   */
-  information: PropTypes.string,
-
   /**
    * Text label for BigNumbers.
    * @type string
@@ -320,6 +230,11 @@ BigNumbers.propTypes = {
    */
   size: PropTypes.oneOf(Object.values(BigNumbersSize)),
 
+  /** Label applied to a Tooltip - marked with the Information icon.
+   * @type string
+   */
+  tooltipDescription: PropTypes.string,
+
   /**
    * Total value that the main BigNumbers value is a subset of.
    * @type number
@@ -341,4 +256,46 @@ BigNumbers.propTypes = {
    * @type number
    */
   value: PropTypes.number,
+};
+
+/**
+ * SkeletonBigNumbers is used to display a skeleton version while
+ * content is loading (handled by the BigNumbers prop `loading').
+ *
+ * Note: This component is only used within BigNumbers.
+ */
+let SkeletonBigNumbers = React.forwardRef(
+  ({ className, size, ...rest }, ref) => {
+    const BigNumbersSkeletonClasses = classnames(className, {
+      [`${skeletonBlockClass}--lg`]: size === BigNumbersSize.Large,
+      [`${skeletonBlockClass}--xl`]: size === BigNumbersSize.XLarge,
+    });
+    return (
+      <div
+        {...rest}
+        className={cx(className, skeletonBlockClass, BigNumbersSkeletonClasses)}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      >
+        <SkeletonText className={`${skeletonBlockClass}__label`} />
+        <SkeletonText
+          heading
+          className={`${skeletonBlockClass}__value`}
+          width="80%"
+        />
+      </div>
+    );
+  }
+);
+
+SkeletonBigNumbers.propTypes = {
+  /**
+   * Optional class name.
+   * @type number
+   */
+  className: PropTypes.string,
+  /** The size of the BigNumbers.
+   * @type string
+   */
+  size: PropTypes.oneOf(Object.values(BigNumbersSize)),
 };

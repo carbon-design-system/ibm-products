@@ -16,7 +16,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { BigNumbers } from '.';
-import { BigNumbersSize } from './utils/enums';
+import { BigNumbersSize } from './utils';
 
 import mdx from './BigNumbers.mdx';
 
@@ -168,7 +168,7 @@ export const bigNumbers = prepareStory(Template, {
 export const withEditButton = prepareStory(Template, {
   args: {
     ...defaultProps,
-    information: 'Information Label',
+    tooltipDescription: 'Tooltip description',
     iconButton: (
       <Button
         renderIcon={Edit}

@@ -34,7 +34,7 @@ const s = [
       {
         n: 'Components',
         s: [
-          { n: 'Big Numbers', s: ['c/BigNumbers'] },
+          { n: 'Big numbers', s: ['c/BigNumbers'] },
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
 
           {

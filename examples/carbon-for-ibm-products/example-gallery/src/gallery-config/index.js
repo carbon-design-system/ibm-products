@@ -30,6 +30,7 @@ import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
+import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
@@ -48,6 +49,7 @@ import imageStringFormatter from './StringFormatter--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
 import imageTruncatedList from './TruncatedList--thumbnail.png';
+import imageUserAvatar from './UserAvatar--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -161,6 +163,11 @@ const config = [
     thumbnail: `url(${imageExpressiveCard}`,
   },
   {
+    label: 'Full-Page-Error',
+    directory: 'FullPageError',
+    thumbnail: `url(${imageFullPageError}`,
+  },
+  {
     label: 'HTTP Error',
     directory: 'HTTPErrors',
     thumbnail: `url(${imageHTTPErrors}`,
@@ -241,6 +248,11 @@ const config = [
     label: 'Truncated-List',
     directory: 'TruncatedList',
     thumbnail: `url(${imageTruncatedList}`,
+  },
+  {
+    label: 'User-Avatar',
+    directory: 'UserAvatar',
+    thumbnail: `url(${imageUserAvatar}`,
   },
   {
     label: 'UserProfileImage',

@@ -4,8 +4,12 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/type';
-@use '@carbon/react/scss/spacing' as *;
+
 @forward '../../../../ibm-products-styles/src/global/styles/project-settings';
 
 // TODO: add any additional styles used by StringFormatter.stories.js
@@ -13,4 +17,5 @@
   @include type.type-style('body-01');
 
   margin: $spacing-07;
+  color: $text-primary;
 }

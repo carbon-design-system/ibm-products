@@ -298,15 +298,6 @@ export const TearsheetShell = React.forwardRef(
                 >
                   {children}
                 </Wrap>
-                <Wrap
-                  className={cx({
-                    [`${bc}__influencer`]: true,
-                    [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-                  })}
-                  neverRender={influencerPosition !== 'right'}
-                >
-                  {influencer}
-                </Wrap>
               </Wrap>
               {includeActions && (
                 <Wrap className={`${bc}__button-container`}>
@@ -319,6 +310,15 @@ export const TearsheetShell = React.forwardRef(
                   />
                 </Wrap>
               )}
+            </Wrap>
+            <Wrap
+              className={cx({
+                [`${bc}__influencer`]: true,
+                [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+              })}
+              neverRender={influencerPosition !== 'right'}
+            >
+              {influencer}
             </Wrap>
           </Wrap>
           <div className={`${bc}__resize-detector`} ref={resizer} />

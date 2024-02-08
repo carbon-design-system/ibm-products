@@ -21,6 +21,7 @@ import {
   Tabs,
   TabList,
   TextInput,
+  Layer,
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
@@ -114,7 +115,18 @@ const description =
   describe the flow over a couple of lines in the header of the tearsheet.';
 
 const influencer = (
-  <div className="tearsheet-stories__dummy-content-block">Influencer</div>
+  <div className="tearsheet-stories__dummy-content-block">
+    Influencer
+    <TextInput labelText="Editable" value="Value" />
+    <br />
+    <TextInput labelText="Readonly" value="Value" readOnly />
+    <br />
+    <Layer>
+      <TextInput labelText="Editable on layer" value="Value" />
+      <br />
+      <TextInput labelText="Readonly on layer" value="Value" readOnly />
+    </Layer>
+  </div>
 );
 
 const label = 'The label of the tearsheet';

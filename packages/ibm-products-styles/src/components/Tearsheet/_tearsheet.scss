@@ -282,9 +282,22 @@ $motion-duration: $duration-moderate-02;
     background-color: $layer;
   }
 
-  .#{$block-class}__main .#{$block-class}__influencer {
+  .#{$block-class}__influencer {
     border-right: none;
     border-left: 1px solid $border-subtle-01;
+
+    .#{$carbon-prefix}--text-input,
+    .#{$carbon-prefix}--text-area,
+    .#{$carbon-prefix}--search-input,
+    .#{$carbon-prefix}--select-input,
+    .#{$carbon-prefix}--dropdown,
+    .#{$carbon-prefix}--dropdown-list,
+    .#{$carbon-prefix}--number input[type='number'],
+    .#{$carbon-prefix}--date-picker__input {
+      &:read-only {
+        background-color: transparent;
+      }
+    }
   }
 
   .#{$block-class}__content {
@@ -305,6 +318,9 @@ $motion-duration: $duration-moderate-02;
     .#{$carbon-prefix}--number input[type='number'],
     .#{$carbon-prefix}--date-picker__input {
       background-color: $field;
+      &:read-only {
+        background-color: transparent;
+      }
     }
 
     .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {

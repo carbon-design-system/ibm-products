@@ -69,6 +69,7 @@ const defaults = {
     EditUpdateCards: false,
     TruncatedList: false,
     DelimitedList: false,
+    FullPageError: false,
 
     /* new component flags here - comment used by generate CLI */
 

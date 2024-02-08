@@ -45,6 +45,7 @@ export let Decorator = React.forwardRef(
       disabled,
       hideIcon,
       href,
+      label,
       onClick,
       onClickLabel,
       onClickValue,
@@ -54,10 +55,9 @@ export let Decorator = React.forwardRef(
       scoreThresholds = defaults.scoreThresholds,
       small,
       theme = defaults.theme,
-      valueTitle,
       truncateValue,
-      label,
       value,
+      valueTitle,
       // Collect any other property values passed in.
       ...rest
     },
@@ -97,7 +97,7 @@ export let Decorator = React.forwardRef(
     }, [className, small, theme, truncateValue]);
 
     // These properties apply to all <DecoratorIcons>.
-    const iconProps = {
+    const decoratorIconsProps = {
       className: `${blockClass}__icon`,
       magnitude: magnitude.toLowerCase(), // e.g. "Medium" -> "medium"
       path: svgPath,
@@ -139,7 +139,7 @@ export let Decorator = React.forwardRef(
             onContextMenu={!disabled && handleOnContextMenu}
             type="button"
           >
-            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
             {!!label && label}
           </button>
           <button
@@ -172,7 +172,7 @@ export let Decorator = React.forwardRef(
           type="button"
         >
           <span className={`${blockClass}__label`}>
-            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
             {!!label && label}
           </span>
           <span className={`${blockClass}__value`} title={valueTitle || value}>
@@ -195,7 +195,7 @@ export let Decorator = React.forwardRef(
           ref={ref}
         >
           <span className={`${blockClass}__label`}>
-            {!hideIcon && <DecoratorIcon {...iconProps} />}
+            {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
             {!!label && label}
           </span>
           <span className={`${blockClass}__value`} title={valueTitle || value}>
@@ -214,7 +214,7 @@ export let Decorator = React.forwardRef(
         ref={ref}
       >
         <span className={`${blockClass}__label`}>
-          {!hideIcon && <DecoratorIcon {...iconProps} />}
+          {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
           {!!label && label}
         </span>
         <span className={`${blockClass}__value`} title={valueTitle || value}>

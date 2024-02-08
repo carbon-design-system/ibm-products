@@ -61,9 +61,6 @@ $icon: #{$block-class}-icon;
   }
 }
 
-// TODO:
-//   theming
-
 .#{$block-class}--light {
   @include theme(themes.$g10, true);
 }
@@ -141,14 +138,8 @@ $icon: #{$block-class}-icon;
   background-color: $layer-02;
   color: $link-primary;
 }
-.#{$link}:hover .#{$label} {
-  border-color: $border-strong;
-}
 .#{$link}:hover .#{$value} {
-  @include value-divider($color: $border-strong);
-
-  border-color: $border-strong;
-  color: $link-primary;
+  color: $link-primary-hover;
   text-decoration: underline;
 }
 .#{$link}:focus {
@@ -170,6 +161,7 @@ $icon: #{$block-class}-icon;
   display: flex;
   padding: 0;
   border: 0;
+  cursor: pointer;
 }
 .#{$button-enabled} .#{$label} {
   border-color: $border-subtle-02;
@@ -233,6 +225,7 @@ $icon: #{$block-class}-icon;
 .#{$buttons-enabled} .#{$label} {
   border-color: $border-subtle-02;
   background-color: $layer-02;
+  cursor: pointer;
 }
 .#{$buttons-enabled}:not(:hover) .#{$value} {
   @include value-divider($color: $border-subtle-02);

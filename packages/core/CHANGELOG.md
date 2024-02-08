@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.10.0...@carbon/ibm-cloud-cognitive-core@2.11.0) (2024-02-06)
+
+
+### Features
+
+* Gradient ai updates ([#4184](https://github.com/carbon-design-system/ibm-products/issues/4184)) ([54aa157](https://github.com/carbon-design-system/ibm-products/commit/54aa15705d613a03361476a522e242d9ff3ea5b6))
+* port Coachmark component to v2 ([#4031](https://github.com/carbon-design-system/ibm-products/issues/4031)) ([dc46cf0](https://github.com/carbon-design-system/ibm-products/commit/dc46cf02ef8c67e98c21fb0887ec704de278bd9a))
+* port InterstitialScreen component to V2 ([#4094](https://github.com/carbon-design-system/ibm-products/issues/4094)) ([827d97d](https://github.com/carbon-design-system/ibm-products/commit/827d97d36adaa4bd8a0b86b6375a78920b1da5a2))
+* **SearchBar:** Migrate SearchBar from Products v1 / Security to Products v2 ([#4202](https://github.com/carbon-design-system/ibm-products/issues/4202)) ([b8653f0](https://github.com/carbon-design-system/ibm-products/commit/b8653f0775708898160e25d55400f22900710f4a))
+
+
+
+
+
 # [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.9.0...@carbon/ibm-cloud-cognitive-core@2.10.0) (2024-01-31)
 
 

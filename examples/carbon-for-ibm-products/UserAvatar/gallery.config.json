@@ -1,0 +1,12 @@
+{
+  "label": "User-Avatar",
+  "package-config": {
+    "flags": {
+      "component": {
+        "UserAvatar": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

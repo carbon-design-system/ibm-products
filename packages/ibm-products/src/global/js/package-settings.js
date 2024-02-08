@@ -87,6 +87,7 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,
@@ -105,7 +106,6 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
-    'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,

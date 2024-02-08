@@ -71,3 +71,27 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
   margin-right: 0;
   margin-left: auto;
 }
+
+.#{$block-class} .#{$popover-block-class}--top .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--top-left
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--top-right
+  .#{$popover-block-class}-caret {
+  /* stylelint-disable-next-line declaration-no-important */
+  inset-block-start: -1px !important;
+}
+
+.#{$block-class}
+  .#{$popover-block-class}--bottom
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--bottom-left
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--bottom-right
+  .#{$popover-block-class}-caret {
+  /* stylelint-disable-next-line declaration-no-important */
+  inset-block-end: -1px !important;
+}

@@ -32,6 +32,7 @@ export default {
     docs: {
       page: mdx,
     },
+    layout: 'fullscreen',
   },
 };
 
@@ -41,6 +42,7 @@ export default {
 const Template = (args) => {
   return (
     <StringFormatter
+      className="storyStringFormatter"
       // TODO: handle events with action or local handler.
       // onTodo={action('onTodo log action')}
       {...args}

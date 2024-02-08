@@ -31,6 +31,7 @@ import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
+import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
@@ -164,6 +165,11 @@ const config = [
     label: 'Expressive Card',
     directory: 'ExpressiveCard',
     thumbnail: `url(${imageExpressiveCard}`,
+  },
+  {
+    label: 'Full-Page-Error',
+    directory: 'FullPageError',
+    thumbnail: `url(${imageFullPageError}`,
   },
   {
     label: 'HTTP Error',

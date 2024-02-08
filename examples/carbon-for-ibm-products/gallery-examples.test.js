@@ -32,6 +32,7 @@ import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
+import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
@@ -192,6 +193,12 @@ describe('All examples', () => {
 
   it('ExpressiveCard renders', () => {
     render(<ExpressiveCardExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('FullPageError renders', () => {
+    render(<FullPageErrorExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

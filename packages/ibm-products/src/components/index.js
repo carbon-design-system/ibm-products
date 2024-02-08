@@ -104,4 +104,5 @@ export { InterstitialScreenView } from './InterstitialScreenView';
 export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
 export { DelimitedList } from './DelimitedList';
 export { Decorator } from './Decorator';
+export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';

@@ -2309,7 +2309,8 @@ p.c4p--about-modal__copyright-text:first-child {
   box-sizing: border-box;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
-  grid-template-rows: 1fr auto; /* titles and content */
+  /* if the title does not scroll then we have a child scrolling section. */
+  grid-template-rows: auto 1fr auto; /* titles content and actions */
 }
 .c4p--side-panel.c4p--side-panel--xs {
   /* any value is single value list */
@@ -2337,9 +2338,8 @@ p.c4p--about-modal__copyright-text:first-child {
   min-width: 75%;
   max-width: 100%;
 }
-.c4p--side-panel:not(.c4p--side-panel--animated-title) {
-  /* if the title does not scroll then we have a child scrolling section. */
-  grid-template-rows: auto 1fr auto; /* titles content actions */
+.c4p--side-panel.c4p--side-panel--animated-title {
+  grid-template-rows: 1fr auto; /* titles and content (actions are external to this element) */
 }
 .c4p--side-panel.c4p--side-panel--condensed-actions {
   --c4p--side-panel--actions-height: 3rem;
@@ -2647,7 +2647,7 @@ p.c4p--about-modal__copyright-text:first-child {
   inset: 0;
 }
 
-.c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
+.c4p--create-side-panel.c4p--side-panel .c4p--create-side-panel__content-text {
   padding-right: calc(20% - 1rem);
 }
 
@@ -4198,13 +4198,6 @@ p.c4p--about-modal__copyright-text:first-child {
   grid-template-columns: 1fr;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-panel__container {
   position: relative;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */

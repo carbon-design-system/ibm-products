@@ -76,7 +76,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   box-sizing: border-box;
   background-color: $layer-01;
   color: $text-primary;
-  grid-template-rows: 1fr auto; /* titles and content */
+  /* if the title does not scroll then we have a child scrolling section. */
+  grid-template-rows: auto 1fr auto; /* titles content and actions */
 
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}--#{$size} {
@@ -84,9 +85,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
-  &:not(.#{$block-class}--animated-title) {
-    /* if the title does not scroll then we have a child scrolling section. */
-    grid-template-rows: auto 1fr auto; /* titles content actions */
+  &.#{$block-class}--animated-title {
+    grid-template-rows: 1fr auto; /* titles and content (actions are external to this element) */
   }
 
   &.#{$block-class}--condensed-actions {

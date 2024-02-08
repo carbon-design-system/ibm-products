@@ -16,49 +16,102 @@ import { StringFormatter } from '.';
 const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = StringFormatter.displayName;
 
-// values to use
-const children = `hello, world (${uuidv4()})`;
+/**
+ * Values to use
+ */
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const widthValue = '234px';
+const longValueString =
+  'Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page. Modify the behavior of the button by changing its event properties. Small buttons may be used when there is not enough space for a regular sized button. This issue is most found in tables. Small button should have three words or less. When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text.';
+const shortValueString = 'test content';
 
+/**
+ * Rendering function
+ */
+const renderComponent = ({ ...rest } = {}) =>
+  render(<StringFormatter {...rest} />);
+
+/**
+ * Tests...
+ */
 describe(componentName, () => {
   it('renders a component StringFormatter', async () => {
-    render(<StringFormatter> </StringFormatter>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+    });
+
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<StringFormatter> </StringFormatter>);
+    const { container } = renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+    });
+
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, async () => {
-    render(<StringFormatter>{children}</StringFormatter>);
-    screen.getByText(children);
-  });
-
   it('applies className to the containing node', async () => {
-    render(<StringFormatter className={className}> </StringFormatter>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+      className,
+    });
+
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<StringFormatter data-testid={dataTestId}> </StringFormatter>);
+    renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+      className,
+    });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<StringFormatter ref={ref}> </StringFormatter>);
+    renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+      ref,
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<StringFormatter data-testid={dataTestId}> </StringFormatter>);
-
+    renderComponent({
+      'data-testid': dataTestId,
+      value: longValueString,
+    });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('should truncate text via the `truncate` prop', async () => {
+    const { container } = renderComponent({
+      value: shortValueString,
+      truncate: true,
+    });
+    expect(
+      container.querySelector(`.${blockClass}--truncate`)
+    ).toHaveTextContent(/test content/i);
+  });
+
+  it('should apply correct style attribute when `width` provided', async () => {
+    const { container } = renderComponent({
+      value: shortValueString,
+      width: widthValue,
+      truncate: true,
+    });
+    const pageContent = container.querySelector(`.${blockClass}--truncate`);
+    const style = getComputedStyle(pageContent);
+    expect(style.maxWidth).toBe(widthValue);
   });
 });

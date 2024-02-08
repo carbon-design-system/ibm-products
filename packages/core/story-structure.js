@@ -59,7 +59,7 @@ const s = [
           },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
-          { n: 'UserAvatar', s: ['c/UserAvatar'] },
+          { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },
       {

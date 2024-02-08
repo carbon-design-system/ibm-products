@@ -9,6 +9,7 @@
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins';
 @use '@carbon/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -34,27 +35,20 @@ $block-class: #{$pkg-prefix}--user-avatar;
   outline-offset: 3px;
 }
 
-@mixin setBgColor($buttonColor) {
+@mixin setBgColor($color) {
   // stylelint-disable-next-line carbon/theme-token-use
-  background-color: $buttonColor;
-
-  &:hover {
-    // stylelint-disable-next-line carbon/theme-token-use
-    background-color: $buttonColor;
-  }
+  background-color: $color;
 
   &:focus {
     // stylelint-disable-next-line carbon/theme-token-use
-    outline: 2px solid $buttonColor;
+    outline: 2px solid $focus;
   }
 }
-.#{$block-class} {
-  &.#{$block-class}--light-cyan {
-    @include setBgColor($cyan-50);
-  }
+
+.#{$block-class}--light-cyan {
+  @include setBgColor($cyan-50);
 }
-.#{$block-class} {
-  &.#{$block-class}--dark-cyan {
-    @include setBgColor($cyan-60);
-  }
+
+.#{$block-class}--dark-cyan {
+  @include setBgColor($cyan-60);
 }

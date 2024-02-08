@@ -49,7 +49,7 @@ const componentName = 'UserAvatar';
 const defaults = {
   renderIcon: () => <User size={32} />,
   tooltipAlignment: 'bottom',
-  tooltipText: 'Iam tooltip',
+  tooltipText: 'Thomas J. Watson',
 };
 
 export let UserAvatar = React.forwardRef(
@@ -142,7 +142,7 @@ UserAvatar.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 UserAvatar.propTypes = {
   /**
-   * Provide the contents of the UserAvatar.
+   * Provide the background color need to be set for UserAvatar.
    */
   backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
 
@@ -150,7 +150,14 @@ UserAvatar.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a custom icon to use if you need to use an icon other than the default one
+   */
   renderIcon: PropTypes.func,
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
   tooltipAlignment: PropTypes.oneOf([
     'top',
     'top-left',
@@ -161,6 +168,9 @@ UserAvatar.propTypes = {
     'left',
     'right',
   ]),
+  /**
+   * Pass in the display name to have it shown on hover
+   */
   tooltipText: PropTypes.string,
   /* TODO: add types and DocGen for all props. */
 };

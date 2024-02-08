@@ -27,7 +27,8 @@ describe(componentName, () => {
     const { container } = renderComponent({
       backgroundColor: 'light-cyan',
     });
-    const element = container.querySelector(`.${blockClass}`);
+    const elements = container.getElementsByClassName(blockClass);
+    const element = elements.length > 0 ? elements[0] : null;
 
     const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
@@ -35,7 +36,7 @@ describe(componentName, () => {
 
   it('should return an icon for the avatar image', async () => {
     const { container } = renderComponent();
-    const renderedSVG = container.querySelector('svg');
+    const renderedSVG = container.getElementsByTagName('svg')[0];
     expect(renderedSVG).toBeTruthy();
   });
 
@@ -48,7 +49,8 @@ describe(componentName, () => {
   it('applies className to the containing node', async () => {
     const customClass = 'test';
     const { container } = renderComponent({ className: customClass });
-    const element = container.querySelector(`.${blockClass}`);
+    const elements = container.getElementsByClassName(blockClass);
+    const element = elements.length > 0 ? elements[0] : null;
     expect(element).toHaveClass(customClass);
   });
 

@@ -84,6 +84,6 @@ export const userAvatar = prepareStory(Template, {
   args: {
     ...defaultArgs,
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
-    tooltipText: 'Iam tooltip',
+    tooltipText: 'Thomas J. Watson',
   },
 });

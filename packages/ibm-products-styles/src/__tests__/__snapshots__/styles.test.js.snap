@@ -4229,13 +4229,6 @@ p.c4p--about-modal__copyright-text:first-child {
   grid-template-columns: 1fr;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-panel__container {
   position: relative;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */

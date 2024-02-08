@@ -173,10 +173,9 @@ export const stateReducer = (newState, action) => {
       const currentColumn = {};
       currentColumn[headerId] = newState.columnResizing.columnWidths[headerId];
       const allChangedColumns = newState.columnResizing.columnWidths;
-      const { isResizing } = newState;
-      if (isResizing) {
-        onColResizeEnd?.(currentColumn, allChangedColumns);
-      }
+
+      onColResizeEnd?.(currentColumn, allChangedColumns);
+
       if (!isKeyEvent) {
         if (typeof isKeyEvent === 'undefined') {
           // Blur resizer input if it has focus and is not from a key event resize

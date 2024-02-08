@@ -39,7 +39,12 @@ $buttons-disabled: '#{$block-class}--buttons.#{$disabled}';
 //
 $icon: #{$block-class}-icon;
 
-@mixin label-divider($top: 0, $right: 0, $bottom: 0, $color: $border-strong) {
+@mixin label-divider(
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $color: $border-subtle-02
+) {
   &::after {
     position: absolute;
     z-index: 1;
@@ -50,7 +55,7 @@ $icon: #{$block-class}-icon;
     content: '';
   }
 }
-@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-strong) {
+@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
   &::after {
     position: absolute;
     top: #{$top};
@@ -85,7 +90,7 @@ $icon: #{$block-class}-icon;
   padding: 0 $spacing-03;
   border-width: to-rem(1px) 0 to-rem(1px) to-rem(1px);
   border-style: solid;
-  border-color: $border-strong;
+  border-color: $border-subtle-02;
   border-radius: $spacing-12 0 0 $spacing-12;
   background-color: $layer-01;
   color: $text-secondary;
@@ -102,7 +107,7 @@ $icon: #{$block-class}-icon;
   padding: 0 $spacing-03;
   border-width: to-rem(1px) to-rem(1px) to-rem(1px) 0;
   border-style: solid;
-  border-color: $border-strong;
+  border-color: $border-subtle-02;
   border-radius: 0 $spacing-12 $spacing-12 0;
   background-color: $layer-01;
   color: $text-primary;
@@ -128,13 +133,11 @@ $icon: #{$block-class}-icon;
   text-decoration: none;
 }
 .#{$link} .#{$label} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
 }
 .#{$link} .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   color: $link-primary;
 }
@@ -164,13 +167,11 @@ $icon: #{$block-class}-icon;
   cursor: pointer;
 }
 .#{$button-enabled} .#{$label} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
 }
 .#{$button-enabled} .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
-  border-color: $border-subtle-02;
   background-color: $layer-02;
 }
 .#{$button-enabled}:hover .#{$label} {
@@ -178,7 +179,7 @@ $icon: #{$block-class}-icon;
   background-color: $layer-hover-02;
 }
 .#{$button-enabled}:hover .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider($color: $border-strong);
 
   border-color: $border-strong;
   background-color: $layer-hover-02;
@@ -188,7 +189,7 @@ $icon: #{$block-class}-icon;
   background-color: $layer-02;
 }
 .#{$button-enabled}:focus .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
   border-color: $focus;
   background-color: $layer-02;
@@ -197,7 +198,7 @@ $icon: #{$block-class}-icon;
   background-color: $layer-selected-02;
 }
 .#{$button-enabled}:active .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
   background-color: $layer-selected-02;
 }
@@ -207,14 +208,12 @@ $icon: #{$block-class}-icon;
   cursor: not-allowed;
 }
 .#{$button-disabled} .#{$label} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   color: $icon-on-color-disabled;
 }
 .#{$button-disabled} .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   color: $icon-on-color-disabled;
 }
@@ -223,15 +222,13 @@ $icon: #{$block-class}-icon;
 // STYLING FOR DUAL BUTTONS
 //
 .#{$buttons-enabled} .#{$label} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   cursor: pointer;
 }
 .#{$buttons-enabled}:not(:hover) .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 }
 .#{$buttons-enabled} .#{$value} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
 }
 .#{$buttons-enabled}:hover .#{$label} {
@@ -276,14 +273,12 @@ $icon: #{$block-class}-icon;
   background-color: $layer-hover-02;
 }
 .#{$buttons-disabled} .#{$label} {
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   color: $icon-on-color-disabled;
 }
 .#{$buttons-disabled} .#{$value} {
-  @include value-divider($color: $border-subtle-02);
+  @include value-divider();
 
-  border-color: $border-subtle-02;
   background-color: $layer-02;
   color: $icon-on-color-disabled;
 }

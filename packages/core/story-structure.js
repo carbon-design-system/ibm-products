@@ -61,6 +61,8 @@ const s = [
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'User avatar', s: ['c/UserAvatar'] },
+
         ],
       },
       {
@@ -99,9 +101,11 @@ const s = [
               'c/NotFoundEmptyState',
               'c/NotificationsEmptyState',
               'c/UnauthorizedEmptyState',
+              'c/EmptyStateV2',
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
+          { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',

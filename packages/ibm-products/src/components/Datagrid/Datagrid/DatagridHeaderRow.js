@@ -50,6 +50,9 @@ const ResizeHeader = ({
   const mouseDownHandler = (evt) => {
     handleOnMouseDownResize(evt, resizerProps);
   };
+  const mouseUpHandler = () => {
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+  };
   const keyDownHandler = (evt) => {
     const { key } = evt;
     if (key === 'ArrowLeft' || key === 'ArrowRight') {
@@ -80,6 +83,7 @@ const ResizeHeader = ({
       <input
         {...headerProps}
         onMouseDown={mouseDownHandler}
+        onMouseUp={mouseUpHandler}
         onKeyDown={keyDownHandler}
         onKeyUp={keyUpHandler}
         className={`${blockClass}__col-resizer-range`}

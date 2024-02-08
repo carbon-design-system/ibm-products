@@ -22,6 +22,8 @@ import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example
 import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
 import { Example as DatagridExample } from './Datagrid/src/Example/Example';
+import { Example as DelimitedListExample } from './DelimitedList/src/Example/Example';
+import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
@@ -45,6 +47,8 @@ import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example
 import { Example as CcsBaseReact16Example } from './ccs-base-react-16/src/Example/Example';
 import { Example as CcsBaseReact17Example } from './ccs-base-react-17/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
+import { Example as React16ExampleExample } from './react-16-example/src/Example/Example';
+import { Example as React17ExampleExample } from './react-17-example/src/Example/Example';
 
 describe('All examples', () => {
   init(beforeEach, afterEach);
@@ -105,6 +109,18 @@ describe('All examples', () => {
 
   it('Datagrid renders', () => {
     render(<DatagridExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('DelimitedList renders', () => {
+    render(<DelimitedListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('EditInPlace renders', () => {
+    render(<EditInPlaceExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -243,6 +259,18 @@ describe('All examples', () => {
 
   it('PrefixExample renders', () => {
     render(<PrefixExampleExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('React16Example renders', () => {
+    render(<React16ExampleExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('React17Example renders', () => {
+    render(<React17ExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

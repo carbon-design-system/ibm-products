@@ -11,6 +11,13 @@ const defaultOrNot = (item) => item.default || item;
 /* --- import Thumbnails */ import imageAPIKeyModal from './APIKeyModal--thumbnail.png';
 import imageAboutModal from './AboutModal--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
+import imageCoachmark from './Coachmark--thumbnail.png';
+import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
+import imageCoachmarkButton from './CoachmarkButton--thumbnail.png';
+import imageCoachmarkFixed from './CoachmarkFixed--thumbnail.png';
+import imageCoachmarkOverlayElement from './CoachmarkOverlayElement--thumbnail.png';
+import imageCoachmarkOverlayElements from './CoachmarkOverlayElements--thumbnail.png';
+import imageCoachmarkStack from './CoachmarkStack--thumbnail.png';
 import imageCreateFullPage from './CreateFullPage--thumbnail.png';
 import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
@@ -18,22 +25,28 @@ import imageCreateTearsheet from './CreateTearsheet--thumbnail.png';
 import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageDatagrid from './Datagrid--thumbnail.png';
+import imageDelimitedList from './DelimitedList--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
+import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
+import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
+import imageInterstitialScreenViewModule from './InterstitialScreenViewModule--thumbnail.png';
 import imageNotificationsPanel from './NotificationsPanel--thumbnail.png';
 import imageOptionsTile from './OptionsTile--thumbnail.png';
 import imagePageHeader from './PageHeader--thumbnail.png';
 import imageProductiveCard from './ProductiveCard--thumbnail.png';
 import imageRemoveModal from './RemoveModal--thumbnail.png';
 import imageSaving from './Saving--thumbnail.png';
+import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
+import imageTruncatedList from './TruncatedList--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -51,6 +64,41 @@ const config = [
     thumbnail: `url(${imageAboutModal}`,
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
+  {
+    label: 'Coachmark',
+    directory: 'Coachmark',
+    thumbnail: `url(${imageCoachmark}`,
+  },
+  {
+    label: 'Coachmark-Beacon',
+    directory: 'CoachmarkBeacon',
+    thumbnail: `url(${imageCoachmarkBeacon}`,
+  },
+  {
+    label: 'Coachmark-Button',
+    directory: 'CoachmarkButton',
+    thumbnail: `url(${imageCoachmarkButton}`,
+  },
+  {
+    label: 'Coachmark-Fixed',
+    directory: 'CoachmarkFixed',
+    thumbnail: `url(${imageCoachmarkFixed}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Element',
+    directory: 'CoachmarkOverlayElement',
+    thumbnail: `url(${imageCoachmarkOverlayElement}`,
+  },
+  {
+    label: 'Coachmark-Overlay-Elements',
+    directory: 'CoachmarkOverlayElements',
+    thumbnail: `url(${imageCoachmarkOverlayElements}`,
+  },
+  {
+    label: 'Coachmark-Stack',
+    directory: 'CoachmarkStack',
+    thumbnail: `url(${imageCoachmarkStack}`,
+  },
   {
     label: 'Create Full Page',
     directory: 'CreateFullPage',
@@ -87,6 +135,11 @@ const config = [
     thumbnail: `url(${imageDatagrid}`,
   },
   {
+    label: 'Delimited-List',
+    directory: 'DelimitedList',
+    thumbnail: `url(${imageDelimitedList}`,
+  },
+  {
     label: 'EditInPlace',
     directory: 'EditInPlace',
     thumbnail: `url(${imageEditInPlace}`,
@@ -117,6 +170,21 @@ const config = [
     thumbnail: `url(${imageImportModal}`,
   },
   {
+    label: 'Interstitial-Screen',
+    directory: 'InterstitialScreen',
+    thumbnail: `url(${imageInterstitialScreen}`,
+  },
+  {
+    label: 'Interstitial-Screen-View',
+    directory: 'InterstitialScreenView',
+    thumbnail: `url(${imageInterstitialScreenView}`,
+  },
+  {
+    label: 'Interstitial-Screen-View-Module',
+    directory: 'InterstitialScreenViewModule',
+    thumbnail: `url(${imageInterstitialScreenViewModule}`,
+  },
+  {
     label: 'Notifications Panel',
     directory: 'NotificationsPanel',
     thumbnail: `url(${imageNotificationsPanel}`,
@@ -143,6 +211,11 @@ const config = [
   },
   { label: 'Saving', directory: 'Saving', thumbnail: `url(${imageSaving}` },
   {
+    label: 'Search-Bar',
+    directory: 'SearchBar',
+    thumbnail: `url(${imageSearchBar}`,
+  },
+  {
     label: 'SidePanel',
     directory: 'SidePanel',
     thumbnail: `url(${imageSidePanel}`,
@@ -157,6 +230,11 @@ const config = [
     label: 'Tearsheet',
     directory: 'Tearsheet',
     thumbnail: `url(${imageTearsheet}`,
+  },
+  {
+    label: 'Truncated-List',
+    directory: 'TruncatedList',
+    thumbnail: `url(${imageTruncatedList}`,
   },
   {
     label: 'UserProfileImage',

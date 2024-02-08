@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-styles",
   "description": "Carbon for IBM Products styles",
-  "version": "2.19.1",
+  "version": "2.23.0",
   "license": "Apache-2.0",
   "installConfig": {
     "hoistingLimits": "none"
@@ -38,7 +38,7 @@
     "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
-    "build-css-update-maps": "node ../../../ibm-products/scripts/updateSourceMaps.js",
+    "build-css-update-maps": "node ../../scripts/updateSourceMaps.js",
     "clean": "rimraf css scss",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
@@ -48,21 +48,21 @@
     "chalk": "^4.1.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
-    "glob": "^10.3.3",
-    "jest": "^29.6.2",
+    "glob": "^10.3.10",
+    "jest": "^29.7.0",
     "jest-config-ibm-cloud-cognitive": "^1.1.2",
-    "jest-environment-jsdom": "^29.6.2",
-    "npm-check-updates": "^16.11.1",
+    "jest-environment-jsdom": "^29.7.0",
+    "npm-check-updates": "^16.14.12",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.1",
-    "sass": "^1.64.2",
+    "rimraf": "^5.0.5",
+    "sass": "^1.70.0",
     "yargs": "^17.7.2"
   },
   "peerDependencies": {
     "@carbon/grid": "^11.21.1",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
-    "@carbon/themes": "^11.28.0",
+    "@carbon/themes": "^11.30.0",
     "@carbon/type": "^11.25.1"
   }
 }

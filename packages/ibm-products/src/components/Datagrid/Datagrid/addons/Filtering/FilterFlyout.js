@@ -1,6 +1,5 @@
-// @flow
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +10,10 @@ import { IconButton, usePrefix } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState, useEffect } from 'react';
-import { useClickOutside } from '../../../../../global/js/hooks';
+import {
+  useClickOutside,
+  useWindowResize,
+} from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
 import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
@@ -20,27 +22,41 @@ import {
   useFilters,
   useShouldDisableButtons,
 } from './hooks';
+import { px, breakpoints } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
+const defaults = {
+  flyoutIconDescription: 'Open filters',
+  title: 'Filter',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+};
+
 const FilterFlyout = ({
-  updateMethod = BATCH,
-  flyoutIconDescription = 'Open filters',
+  updateMethod,
+  flyoutIconDescription = defaults.flyoutIconDescription,
   filters = [],
-  title = 'Filter',
-  primaryActionLabel = 'Apply',
+  title = defaults.title,
+  primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
   onFlyoutClose = () => {},
   onApply = () => {},
   onCancel = () => {},
-  secondaryActionLabel = 'Cancel',
+  secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
   data = [],
   reactTableFiltersState = [],
 }) => {
   /** State */
   const [open, setOpen] = useState(false);
+  const [stackedLayout, setStackedLayout] = useState(false);
+
+  const handleCancel = () => {
+    setOpen(false);
+    onCancel();
+  };
 
   const {
     filtersState,
@@ -57,11 +73,16 @@ const FilterFlyout = ({
     setAllFilters,
     variation: FLYOUT,
     reactTableFiltersState,
-    onCancel,
+    onCancel: handleCancel,
   });
+
+  const { width } = breakpoints.md;
+  const mdPxWidth = parseInt(width) * 16;
 
   /** Refs */
   const filterFlyoutRef = useRef(null);
+  const flyoutInnerRef = useRef(null);
+  const flyoutFiltersContainerRef = useRef(null);
 
   /** State from hooks */
   const [shouldDisableButtons, setShouldDisableButtons] =
@@ -70,6 +91,45 @@ const FilterFlyout = ({
       filtersState,
       prevFiltersRef,
     });
+
+  // Skip resize testing
+  /* istanbul ignore next */
+  const handleResize = (current) => {
+    const filterFlyoutRefPosition =
+      flyoutInnerRef?.current.getBoundingClientRect();
+    const originalFlyoutWidth = parseInt(
+      window.getComputedStyle(flyoutInnerRef?.current).getPropertyValue('width')
+    );
+    // Check to see if left value from flyout getBoundingClientRect is a negative number
+    // If it is, that is the amount we need to subtract from the flyout width
+    if (Math.sign(filterFlyoutRefPosition.left) === -1) {
+      const newFlyoutWidth =
+        originalFlyoutWidth - Math.abs(filterFlyoutRefPosition.left);
+      flyoutInnerRef.current.style.width = px(newFlyoutWidth);
+    }
+    // Check to see if left value from flyout getBoundingClientRect is a positive number or 0
+    // If it is, that is the amount we need to add to the flyout width until we reach the
+    // max-width of the flyout (642)
+    if (
+      (originalFlyoutWidth < 642 &&
+        Math.sign(filterFlyoutRefPosition.left) === 1) ||
+      Math.sign(filterFlyoutRefPosition.left).toString() === '0'
+    ) {
+      const newFlyoutWidth =
+        originalFlyoutWidth + Math.abs(filterFlyoutRefPosition.left);
+      flyoutInnerRef.current.style.width = px(newFlyoutWidth);
+    }
+    // Begin stacking filters at this specific point
+    if (current?.innerWidth <= mdPxWidth + 254) {
+      setStackedLayout(true);
+    } else {
+      setStackedLayout(false);
+    }
+  };
+
+  useWindowResize(({ current }) => {
+    handleResize(current);
+  });
 
   /** Memos */
   const showActionSet = updateMethod === BATCH;
@@ -84,7 +144,13 @@ const FilterFlyout = ({
   const closeFlyout = () => {
     setOpen(false);
     onFlyoutClose();
+    flyoutInnerRef.current.style.width = px(642);
   };
+
+  useEffect(() => {
+    // Initialize flyout width
+    flyoutInnerRef.current.style.width = px(642);
+  }, []);
 
   const apply = () => {
     setAllFilters(filtersObjectArray);
@@ -124,7 +190,6 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
-              disabled: shouldDisableButtons,
             },
           ]}
           size="md"
@@ -135,11 +200,14 @@ const FilterFlyout = ({
   };
 
   /** Effects */
+  // Close flyout when clicking outside
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
       target.className === `${carbonPrefix}--list-box__menu-item__option`;
 
+    // Do not do anything if flyout is closed or if clicking on anything
+    // rendered via a portal
     if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;
     }
@@ -177,10 +245,18 @@ const FilterFlyout = ({
           [`${componentClass}--batch`]: showActionSet,
           [`${componentClass}--instant`]: !showActionSet,
         })}
+        ref={flyoutInnerRef}
       >
         <div className={`${componentClass}__inner-container`}>
           <span className={`${componentClass}__title`}>{title}</span>
-          <div className={`${componentClass}__filters`}>{renderFilters()}</div>
+          <div
+            className={cx(`${componentClass}__filters`, {
+              [`${componentClass}__stacked`]: stackedLayout,
+            })}
+            ref={flyoutFiltersContainerRef}
+          >
+            {renderFilters()}
+          </div>
         </div>
         {renderActionSet()}
       </div>

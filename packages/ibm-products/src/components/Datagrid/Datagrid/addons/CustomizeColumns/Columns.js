@@ -47,7 +47,7 @@ const Columns = ({
     [columns, setColumnsObject]
   );
 
-  const filteredStickyColumn = columns?.filter((item) => !item.sticky)?.map(item=> item);
+  const filteredStickyColumn = columns?.filter((item) => !item.sticky);
   return (
     <div
       className={`${blockClass}__customize-columns-column-list`}

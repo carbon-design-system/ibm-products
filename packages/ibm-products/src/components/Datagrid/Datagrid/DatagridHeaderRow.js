@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
+import { ColumnHeaderSlug } from './addons/Slug/ColumnHeaderSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -44,6 +45,7 @@ const ResizeHeader = ({
   onColResizeEnd,
   resizerAriaLabel,
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const { role, ...headerProps } = resizerProps;
   const mouseDownHandler = (evt) => {
     handleOnMouseDownResize(evt, resizerProps);
@@ -77,8 +79,6 @@ const ResizeHeader = ({
     <>
       <input
         {...headerProps}
-        // avoid unnecessary role assignment
-        {...(role === 'separator' && { role })}
         onMouseDown={mouseDownHandler}
         onKeyDown={keyDownHandler}
         onKeyUp={keyUpHandler}
@@ -93,7 +93,7 @@ const ResizeHeader = ({
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel } = datagridState;
+  const { resizerAriaLabel, isTableSortable } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -145,15 +145,21 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   const {
     className: headerGroupClassName,
+    // eslint-disable-next-line no-unused-vars
     role,
     ...headerGroupProps
   } = headerGroup.getHeaderGroupProps();
 
+  const renderSlug = (slug) => {
+    if (isTableSortable) {
+      return;
+    }
+    return <ColumnHeaderSlug slug={slug} />;
+  };
+
   return (
     <TableRow
       {...headerGroupProps}
-      // avoid unnecessary role assignment
-      {...(role === 'row' && { role })}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
@@ -171,6 +177,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
           const {
+            // eslint-disable-next-line no-unused-vars
             role,
             className: headerClassName,
             ...headerProps
@@ -186,14 +193,15 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   datagridState.isTableSortable && header.id !== 'spacer',
                 [`${blockClass}__isSorted`]: header.isSorted,
                 [`${blockClass}__header-actions-column`]: header.isAction,
+                [`${blockClass}__with-slug`]:
+                  header.slug && React.isValidElement(header.slug),
               })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
-              // avoid unnecessary role assignment
-              {...(role === 'columnheader' && { role })}
             >
               {header.render('Header')}
+              {renderSlug(header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

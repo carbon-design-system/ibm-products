@@ -56,3 +56,9 @@ package-lock.json
 
 // cspell:enable
 .yarn/install-state.gz
+
+.history
+
+# Examples
+/examples/carbon-for-ibm-products/*/node_modules
+/examples/carbon-for-ibm-products/*/.yarn

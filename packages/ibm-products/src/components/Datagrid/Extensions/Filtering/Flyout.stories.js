@@ -1,10 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
@@ -26,8 +27,8 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
-import { pkg } from '../../../../settings';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
+import { getDateFormat } from './Panel.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
@@ -45,9 +46,10 @@ export default {
       },
     },
   },
+  excludeStories: ['FilteringUsage', 'filterProps'],
 };
 
-const FilteringUsage = ({ defaultGridProps }) => {
+export const FilteringUsage = ({ defaultGridProps }) => {
   const {
     gridDescription,
     gridTitle,
@@ -148,12 +150,6 @@ const FilteringUsage = ({ defaultGridProps }) => {
     useColumnCenterAlign
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useFiltering` hook
-  pkg.feature['Datagrid.useFiltering'] = true;
-  pkg._silenceWarnings(true);
-
   return <Datagrid datagridState={datagridState} />;
 };
 
@@ -168,16 +164,18 @@ const filters = [
     props: {
       DatePicker: {
         datePickerType: 'range',
+        locale: navigator?.language || 'en',
+        dateFormat: getDateFormat(navigator?.language || 'en'),
       },
       DatePickerInput: {
         start: {
           id: 'date-picker-input-id-start',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined start date',
         },
         end: {
           id: 'date-picker-input-id-end',
-          placeholder: 'mm/dd/yyyy',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
           labelText: 'Joined end date',
         },
       },
@@ -294,7 +292,6 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       filters,
       renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -324,9 +321,20 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
       filters,
       renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });
+
+export const filterProps = {
+  variation: 'flyout',
+  updateMethod: 'instant',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  flyoutIconDescription: 'Open filters',
+  onFlyoutOpen: action('onFlyoutOpen'),
+  onFlyoutClose: action('onFlyoutClose'),
+  filters,
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
+};
 
 export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
   storyName: 'Filter flyout with initial filters',
@@ -352,17 +360,6 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     emptyStateTitle: 'No filters match',
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'flyout',
-      updateMethod: 'instant',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      onFlyoutOpen: action('onFlyoutOpen'),
-      onFlyoutClose: action('onFlyoutClose'),
-      filters,
-      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
-    },
-    featureFlags: ['Datagrid.useFiltering'],
+    filterProps,
   },
 });

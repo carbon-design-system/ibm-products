@@ -12,6 +12,13 @@ import { init } from './test-common';
 import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example';
 import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
 import { Example as CascadeExample } from './Cascade/src/Example/Example';
+import { Example as CoachmarkExample } from './Coachmark/src/Example/Example';
+import { Example as CoachmarkBeaconExample } from './CoachmarkBeacon/src/Example/Example';
+import { Example as CoachmarkButtonExample } from './CoachmarkButton/src/Example/Example';
+import { Example as CoachmarkFixedExample } from './CoachmarkFixed/src/Example/Example';
+import { Example as CoachmarkOverlayElementExample } from './CoachmarkOverlayElement/src/Example/Example';
+import { Example as CoachmarkOverlayElementsExample } from './CoachmarkOverlayElements/src/Example/Example';
+import { Example as CoachmarkStackExample } from './CoachmarkStack/src/Example/Example';
 import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
 import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
 import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example';
@@ -19,22 +26,28 @@ import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example
 import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
 import { Example as DatagridExample } from './Datagrid/src/Example/Example';
+import { Example as DelimitedListExample } from './DelimitedList/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
+import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
+import { Example as InterstitialScreenViewExample } from './InterstitialScreenView/src/Example/Example';
+import { Example as InterstitialScreenViewModuleExample } from './InterstitialScreenViewModule/src/Example/Example';
 import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
 import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
 import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
 import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/Example';
 import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example';
 import { Example as SavingExample } from './Saving/src/Example/Example';
+import { Example as SearchBarExample } from './SearchBar/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
+import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
@@ -58,6 +71,48 @@ describe('All examples', () => {
 
   it('Cascade renders', () => {
     render(<CascadeExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('Coachmark renders', () => {
+    render(<CoachmarkExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkBeacon renders', () => {
+    render(<CoachmarkBeaconExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkButton renders', () => {
+    render(<CoachmarkButtonExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkFixed renders', () => {
+    render(<CoachmarkFixedExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkOverlayElement renders', () => {
+    render(<CoachmarkOverlayElementExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkOverlayElements renders', () => {
+    render(<CoachmarkOverlayElementsExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('CoachmarkStack renders', () => {
+    render(<CoachmarkStackExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -104,6 +159,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('DelimitedList renders', () => {
+    render(<DelimitedListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('EditInPlace renders', () => {
     render(<EditInPlaceExample />);
     // expect no errors int the console
@@ -136,6 +197,24 @@ describe('All examples', () => {
 
   it('ImportModal renders', () => {
     render(<ImportModalExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreen renders', () => {
+    render(<InterstitialScreenExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreenView renders', () => {
+    render(<InterstitialScreenViewExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('InterstitialScreenViewModule renders', () => {
+    render(<InterstitialScreenViewModuleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -176,6 +255,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('SearchBar renders', () => {
+    render(<SearchBarExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('SidePanel renders', () => {
     render(<SidePanelExample />);
     // expect no errors int the console
@@ -196,6 +281,12 @@ describe('All examples', () => {
 
   it('Tearsheet renders', () => {
     render(<TearsheetExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('TruncatedList renders', () => {
+    render(<TruncatedListExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

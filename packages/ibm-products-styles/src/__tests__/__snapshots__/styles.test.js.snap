@@ -2682,76 +2682,6 @@ p.c4p--about-modal__copyright-text:first-child {
   padding-right: calc(20% - 1rem);
 }
 
-.c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__title-text {
-  width: calc(16rem - 1rem);
-  padding-right: calc(16rem * 0.2 - 1rem);
-  margin-bottom: 0.25rem;
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text {
-  width: calc(16rem - 1rem);
-  padding-right: calc(16rem * 0.2 - 1rem);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-secondary, #525252);
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__title-text {
-  width: calc(20rem - 1rem);
-  padding-right: calc(20rem * 0.2 - 1rem);
-  margin-bottom: 0.25rem;
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text {
-  width: calc(20rem - 1rem);
-  padding-right: calc(20rem * 0.2 - 1rem);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-secondary, #525252);
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__title-text {
-  width: calc(30rem - 1rem);
-  padding-right: calc(30rem * 0.2 - 1rem);
-  margin-bottom: 0.25rem;
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__subtitle-text {
-  width: calc(30rem - 1rem);
-  padding-right: calc(30rem * 0.2 - 1rem);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-secondary, #525252);
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__title-text {
-  width: calc(40rem - 1rem);
-  padding-right: calc(40rem * 0.2 - 1rem);
-  margin-bottom: 0.25rem;
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text {
-  width: calc(40rem - 1rem);
-  padding-right: calc(40rem * 0.2 - 1rem);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-secondary, #525252);
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--2xl .c4p--side-panel__title-text {
-  width: calc(40rem 75% - 1rem);
-  padding-right: calc(40rem 75% * 0.2 - 1rem);
-  margin-bottom: 0.25rem;
-}
-
-.c4p--create-side-panel.c4p--side-panel__container--2xl .c4p--side-panel__subtitle-text {
-  width: calc(40rem 75% - 1rem);
-  padding-right: calc(40rem 75% * 0.2 - 1rem);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--cds-layer-accent-01, #e0e0e0);
-  color: var(--cds-text-secondary, #525252);
-}
-
 .cds--form.c4p--create-side-panel__form {
   padding-top: 1rem;
 }
@@ -4299,13 +4229,6 @@ p.c4p--about-modal__copyright-text:first-child {
   grid-template-columns: 1fr;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
 .c4p--datagrid-filter-panel__container {
   position: relative;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */

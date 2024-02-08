@@ -94,7 +94,7 @@ describe(componentName, () => {
   });
   it('renders error label', () => {
     render(<FullPageError {...defaultProps} />);
-    screen.getByText(errorLabel);
+    screen.getByText('↳ ' + errorLabel);
   });
 
   it('renders description', () => {

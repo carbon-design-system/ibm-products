@@ -74,7 +74,6 @@ export let Cascade = forwardRef(
     if (grid) {
       let colIdx = 0;
       const gridElm = React.Children.map(children, (row) => {
-        console.log(row);
         if (React.isValidElement(row)) {
           const cols = React.Children.map(row?.props.children, (col) => {
             colIdx = colIdx + 1;

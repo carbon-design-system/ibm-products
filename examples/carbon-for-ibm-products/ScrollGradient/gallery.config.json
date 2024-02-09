@@ -1,0 +1,12 @@
+{
+  "label": "Scroll-Gradient",
+  "package-config": {
+    "flags": {
+      "component": {
+        "ScrollGradient": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

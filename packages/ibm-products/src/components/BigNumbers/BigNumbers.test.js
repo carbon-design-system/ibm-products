@@ -117,8 +117,12 @@ describe(componentName, () => {
   });
 
   it('should display the total if the total is less than the value if forceShowTotal is true', async () => {
-    renderBigNumbers({ forceShowTotal: true, value: 1234, total: 678 });
-    expect(screen.getByLabelText('Total')).toBeVisible();
+    const { container } = renderBigNumbers({
+      forceShowTotal: true,
+      value: 1234,
+      total: 678,
+    });
+    expect(container.querySelector(`.${blockClass}__total`)).toBeVisible();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {

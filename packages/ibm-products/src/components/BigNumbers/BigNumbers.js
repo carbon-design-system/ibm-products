@@ -101,7 +101,15 @@ export let BigNumbers = React.forwardRef(
       (forceShowTotal && total > 0);
 
     if (loading) {
-      <SkeletonBigNumbers className={className} size={size} {...rest} />;
+      return (
+        <SkeletonBigNumbers
+          {...rest}
+          ref={ref}
+          className={className}
+          size={size}
+          {...getDevtoolsProps(componentName)}
+        />
+      );
     }
 
     return (

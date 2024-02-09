@@ -31,6 +31,7 @@ import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
+import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
@@ -48,6 +49,7 @@ import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
 import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
+import { Example as UserAvatarExample } from './UserAvatar/src/Example/Example';
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
@@ -189,6 +191,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('FullPageError renders', () => {
+    render(<FullPageErrorExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('HTTPErrors renders', () => {
     render(<HTTPErrorsExample />);
     // expect no errors int the console
@@ -287,6 +295,12 @@ describe('All examples', () => {
 
   it('TruncatedList renders', () => {
     render(<TruncatedListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('UserAvatar renders', () => {
+    render(<UserAvatarExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

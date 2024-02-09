@@ -98,9 +98,11 @@ const s = [
               'c/NotFoundEmptyState',
               'c/NotificationsEmptyState',
               'c/UnauthorizedEmptyState',
+              'c/EmptyStateV2',
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
+          { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',

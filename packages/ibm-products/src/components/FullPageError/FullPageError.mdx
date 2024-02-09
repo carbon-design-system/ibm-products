@@ -6,6 +6,7 @@ import {
 import { FullPageError } from '.';
 
 # FullPageError
+
 [Usage guidelines](https://pages.github.ibm.com/cdai-design/pal/patterns/full-page-errors/usage/)
 
 ## Table of Contents
@@ -16,16 +17,20 @@ import { FullPageError } from '.';
 
 ## Overview
 
-Display a full-page error when the requested page is unavailable to the user. This is typically caused by issues with the requested URL or access permissions. Errors caused by server connectivity issues are not covered in this guideline.\
-The `UIShell` and `Breadcrumbs` (if
-applicable) should be implemented at the product level\
+Display a full-page error when the requested page is unavailable to the user.
+This is typically caused by issues with the requested URL or access permissions.
+Errors caused by server connectivity issues are not covered in this guideline.\
+The `UIShell` and `Breadcrumbs` (if applicable) should be implemented at the product
+level.
 
 ## Example usage
 
 {/* TODO: One example per designed use case. */}
 
 ### Default
-The default error page can be used for full-page errors that are not 403 or 404 errors, and not caused by server connectivity issues.
+
+The default error page can be used for full-page errors that are not 403 or 404
+errors, and not caused by server connectivity issues.
 
 <Canvas>
   <Story id={getStoryId(FullPageError.displayName, 'full-page-error')} />

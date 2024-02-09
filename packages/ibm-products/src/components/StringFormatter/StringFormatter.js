@@ -15,7 +15,6 @@ import { pkg } from '../../settings';
 
 import { DefinitionTooltip } from '@carbon/react';
 import { StringFormatterAlignment } from './utils/enums';
-import { StringFormatterContent } from './StringFormatterContent';
 
 const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = 'StringFormatter';
@@ -44,6 +43,20 @@ export let StringFormatter = React.forwardRef(
     },
     ref
   ) => {
+    const stringFormatterContent = (
+      <span
+        className={cx(`${blockClass}--content`, {
+          [`${blockClass}--truncate`]: truncate,
+        })}
+        style={{
+          maxWidth: width,
+          WebkitLineClamp: lines,
+        }}
+      >
+        {value}
+      </span>
+    );
+
     return (
       <span
         {...rest}
@@ -58,21 +71,10 @@ export let StringFormatter = React.forwardRef(
             definition={value}
             openOnHover={true}
           >
-            <StringFormatterContent
-              lines={lines}
-              truncate={truncate}
-              value={value}
-              width={width}
-            />
+            {stringFormatterContent}
           </DefinitionTooltip>
         ) : (
-          <StringFormatterContent
-            className={className}
-            lines={lines}
-            truncate={truncate}
-            value={value}
-            width={width}
-          />
+          { stringFormatterContent }
         )}
       </span>
     );

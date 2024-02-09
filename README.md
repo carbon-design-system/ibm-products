@@ -146,6 +146,10 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="20%"><a href="https://github.com/SeonyuK"><img src="https://avatars.githubusercontent.com/u/144151347?v=4?s=100" width="100px;" alt="SeonyuK"/><br /><sub><b>SeonyuK</b></sub></a><br /><a href="#a11y-SeonyuK" title="Accessibility">️️️️♿️</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/elycheea"><img src="https://avatars.githubusercontent.com/u/1717398?v=4?s=100" width="100px;" alt="Elysia"/><br /><sub><b>Elysia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=elycheea" title="Code">💻</a> <a href="#infra-elycheea" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/carbon-design-system/ibm-products/pulls?q=is%3Apr+reviewed-by%3Aelycheea" title="Reviewed Pull Requests">👀</a></td>
       <td align="center" valign="top" width="20%"><a href="http://iamafsal.in/"><img src="https://avatars.githubusercontent.com/u/9197089?v=4?s=100" width="100px;" alt="Afsal K"/><br /><sub><b>Afsal K</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=makafsal" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/devadula-nandan"><img src="https://avatars.githubusercontent.com/u/47176249?v=4?s=100" width="100px;" alt="Nandan Devadula"/><br /><sub><b>Nandan Devadula</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=devadula-nandan" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/anamikaanu96"><img src="https://avatars.githubusercontent.com/u/47971732?v=4?s=100" width="100px;" alt="Anamika T S"/><br /><sub><b>Anamika T S</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=anamikaanu96" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

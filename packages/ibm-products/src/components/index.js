@@ -106,3 +106,4 @@ export { DelimitedList } from './DelimitedList';
 export { Decorator } from './Decorator';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
+export { UserAvatar } from './UserAvatar';

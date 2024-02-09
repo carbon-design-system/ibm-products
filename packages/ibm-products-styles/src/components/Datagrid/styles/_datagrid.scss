@@ -163,6 +163,15 @@
 }
 
 .#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr:has(> .#{$block-class}__table-row-ai-enabled) {
+  @include ai-gradient('left', 50%);
+
+  background-attachment: fixed;
+}
+
+.#{$block-class}
   th.#{$block-class}__with-slug
   .#{c4p-settings.$carbon-prefix}--slug {
   margin-left: $spacing-03;
@@ -790,4 +799,14 @@
 
 .#{$block-class} .#{$block-class}__col-resizer-range::-moz-range-thumb {
   visibility: hidden;
+}
+
+.#{$block-class} .#{$block-class}__table-row-ai-enabled {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class} .#{$block-class}__table-row-ai-spacer,
+.#{$block-class} .#{$block-class}__table-row-ai-enabled {
+  width: $spacing-05;
 }

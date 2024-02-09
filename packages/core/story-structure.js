@@ -57,7 +57,9 @@ const s = [
               'c/Datagrid/Extensions/Slug',
             ],
           },
+          { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },
       {
@@ -96,9 +98,11 @@ const s = [
               'c/NotFoundEmptyState',
               'c/NotificationsEmptyState',
               'c/UnauthorizedEmptyState',
+              'c/EmptyStateV2',
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
+          { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
@@ -108,6 +112,10 @@ const s = [
           { n: 'Notifications', s: ['c/NotificationsPanel'] },
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
+          {
+            n: 'Search bar',
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
+          },
           { n: 'Status icons', s: ['c/StatusIcon'] },
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
@@ -156,6 +164,14 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
+          {
+            n: 'Interstitial Screen',
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
+          },
           'c/InlineTip',
           'c/NonLinearReading',
         ],

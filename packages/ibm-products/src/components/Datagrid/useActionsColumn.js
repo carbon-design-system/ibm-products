@@ -59,7 +59,7 @@ const useActionsColumn = (hooks) => {
                     >
                       {rowActions.map((action, index) => {
                         const preparedActionProps = prepareProps(action, [
-                          'isDelete'
+                          'isDelete',
                         ]);
                         const {
                           align,

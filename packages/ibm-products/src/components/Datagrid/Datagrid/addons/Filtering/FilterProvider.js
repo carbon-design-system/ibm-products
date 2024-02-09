@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import React, { createContext, useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -146,12 +147,12 @@ const filteringReducer = (state, action) => {
       return {
         ...state,
         savedFilters,
-      }
+      };
     }
     default:
       return state;
   }
-}
+};
 
 export const FilterProvider = ({ children, filters, filterProps }) => {
   const { renderDateLabel } = filterProps || {};
@@ -163,7 +164,14 @@ export const FilterProvider = ({ children, filters, filterProps }) => {
   };
   const [state, dispatch] = useReducer(filteringReducer, initialState);
 
-  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen, state, dispatch };
+  const value = {
+    filterTags,
+    EventEmitter,
+    panelOpen,
+    setPanelOpen,
+    state,
+    dispatch,
+  };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

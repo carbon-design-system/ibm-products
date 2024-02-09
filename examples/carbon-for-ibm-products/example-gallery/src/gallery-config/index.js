@@ -30,18 +30,25 @@ import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
+import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
+import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
+import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
+import imageInterstitialScreenViewModule from './InterstitialScreenViewModule--thumbnail.png';
 import imageNotificationsPanel from './NotificationsPanel--thumbnail.png';
 import imageOptionsTile from './OptionsTile--thumbnail.png';
 import imagePageHeader from './PageHeader--thumbnail.png';
 import imageProductiveCard from './ProductiveCard--thumbnail.png';
 import imageRemoveModal from './RemoveModal--thumbnail.png';
 import imageSaving from './Saving--thumbnail.png';
+import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
+import imageTruncatedList from './TruncatedList--thumbnail.png';
+import imageUserAvatar from './UserAvatar--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -155,6 +162,11 @@ const config = [
     thumbnail: `url(${imageExpressiveCard}`,
   },
   {
+    label: 'Full-Page-Error',
+    directory: 'FullPageError',
+    thumbnail: `url(${imageFullPageError}`,
+  },
+  {
     label: 'HTTP Error',
     directory: 'HTTPErrors',
     thumbnail: `url(${imageHTTPErrors}`,
@@ -163,6 +175,21 @@ const config = [
     label: 'Import Modal',
     directory: 'ImportModal',
     thumbnail: `url(${imageImportModal}`,
+  },
+  {
+    label: 'Interstitial-Screen',
+    directory: 'InterstitialScreen',
+    thumbnail: `url(${imageInterstitialScreen}`,
+  },
+  {
+    label: 'Interstitial-Screen-View',
+    directory: 'InterstitialScreenView',
+    thumbnail: `url(${imageInterstitialScreenView}`,
+  },
+  {
+    label: 'Interstitial-Screen-View-Module',
+    directory: 'InterstitialScreenViewModule',
+    thumbnail: `url(${imageInterstitialScreenViewModule}`,
   },
   {
     label: 'Notifications Panel',
@@ -191,6 +218,11 @@ const config = [
   },
   { label: 'Saving', directory: 'Saving', thumbnail: `url(${imageSaving}` },
   {
+    label: 'Search-Bar',
+    directory: 'SearchBar',
+    thumbnail: `url(${imageSearchBar}`,
+  },
+  {
     label: 'SidePanel',
     directory: 'SidePanel',
     thumbnail: `url(${imageSidePanel}`,
@@ -205,6 +237,16 @@ const config = [
     label: 'Tearsheet',
     directory: 'Tearsheet',
     thumbnail: `url(${imageTearsheet}`,
+  },
+  {
+    label: 'Truncated-List',
+    directory: 'TruncatedList',
+    thumbnail: `url(${imageTruncatedList}`,
+  },
+  {
+    label: 'User-Avatar',
+    directory: 'UserAvatar',
+    thumbnail: `url(${imageUserAvatar}`,
   },
   {
     label: 'UserProfileImage',

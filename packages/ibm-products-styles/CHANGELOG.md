@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.23.0...@carbon/ibm-products-styles@2.24.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* use of not has selectors ([#4233](https://github.com/carbon-design-system/ibm-products/issues/4233)) ([ea006b0](https://github.com/carbon-design-system/ibm-products/commit/ea006b0fbf10038f83a4bfe8b0a963ca9b5800ea))
+
+
+### Features
+
+* **Datagrid:** update filtering copyright headers, review eslint disable rules, remove filter feature flags ([#4178](https://github.com/carbon-design-system/ibm-products/issues/4178)) ([c40af25](https://github.com/carbon-design-system/ibm-products/commit/c40af25ebd3f08646fadfb5a6742fa8190d1af7d))
+* **FullPageError:** create new FullPageError component ([#4211](https://github.com/carbon-design-system/ibm-products/issues/4211)) ([24afc41](https://github.com/carbon-design-system/ibm-products/commit/24afc41b83cca0c365082265130d56aa4c263695))
+* **TruncatedList:** new component TruncatedList ([#4139](https://github.com/carbon-design-system/ibm-products/issues/4139)) ([bc54d2f](https://github.com/carbon-design-system/ibm-products/commit/bc54d2f1f9a016776c6dc0b998c7a3bcbb021ccb))
+* **UserAvatar:** create UserAvatar component ([#4200](https://github.com/carbon-design-system/ibm-products/issues/4200)) ([3990523](https://github.com/carbon-design-system/ibm-products/commit/399052356b9492a9699809a715c0ee34e52cd6a3))
+
+
+
+
+
+# [2.23.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.22.0...@carbon/ibm-products-styles@2.23.0) (2024-02-06)
+
+
+### Bug Fixes
+
+* **PageHeader:** collapsed breadcrumb tab disappears on resize ([#4068](https://github.com/carbon-design-system/ibm-products/issues/4068)) ([534b5cf](https://github.com/carbon-design-system/ibm-products/commit/534b5cff287ab4da54366f2bc38a2afad5ebf0b0))
+
+
+### Features
+
+* Gradient ai updates ([#4184](https://github.com/carbon-design-system/ibm-products/issues/4184)) ([54aa157](https://github.com/carbon-design-system/ibm-products/commit/54aa15705d613a03361476a522e242d9ff3ea5b6))
+* port Coachmark component to v2 ([#4031](https://github.com/carbon-design-system/ibm-products/issues/4031)) ([dc46cf0](https://github.com/carbon-design-system/ibm-products/commit/dc46cf02ef8c67e98c21fb0887ec704de278bd9a))
+* port InterstitialScreen component to V2 ([#4094](https://github.com/carbon-design-system/ibm-products/issues/4094)) ([827d97d](https://github.com/carbon-design-system/ibm-products/commit/827d97d36adaa4bd8a0b86b6375a78920b1da5a2))
+* **SearchBar:** Migrate SearchBar from Products v1 / Security to Products v2 ([#4202](https://github.com/carbon-design-system/ibm-products/issues/4202)) ([b8653f0](https://github.com/carbon-design-system/ibm-products/commit/b8653f0775708898160e25d55400f22900710f4a))
+
+
+
+
+
 # [2.22.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.21.0...@carbon/ibm-products-styles@2.22.0) (2024-01-31)
 
 

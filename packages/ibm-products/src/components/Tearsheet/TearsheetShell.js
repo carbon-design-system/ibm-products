@@ -29,6 +29,7 @@ import {
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import { useFocus } from '../../global/js/hooks/useFocus';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -100,8 +101,10 @@ export const TearsheetShell = React.forwardRef(
     const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef();
     const resizer = useRef(null);
+    const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     const wide = size === 'wide';
 
@@ -140,11 +143,17 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      const element = selectorPrimaryFocus
-        ? modalRef.current.querySelector(selectorPrimaryFocus)
-        : modalRef.current;
-      setTimeout(() => element.focus(), 1);
+      firstElement?.focus();
     };
+
+    useEffect(() => {
+      if (open) {
+        // Focusing the first element
+        setTimeout(() => {
+          firstElement?.focus();
+        }, 0);
+      }
+    }, [open, firstElement]);
 
     useEffect(() => {
       const notify = () =>
@@ -232,6 +241,7 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
+          onKeyDown={keyDownListener}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[
@@ -282,7 +292,11 @@ export const TearsheetShell = React.forwardRef(
               <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
             </ModalHeader>
           )}
-          <Wrap element={ModalBody} className={`${bc}__body`}>
+          <Wrap
+            ref={modalBodyRef}
+            element={ModalBody}
+            className={`${bc}__body`}
+          >
             <Wrap
               className={cx({
                 [`${bc}__influencer`]: true,

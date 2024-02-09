@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { Monster } from '@carbon/icons-react';
+import { Monster } from '@carbon/react/icons';
 
 import {
   getStoryTitle,

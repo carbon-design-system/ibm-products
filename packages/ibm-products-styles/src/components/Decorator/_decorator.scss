@@ -39,11 +39,15 @@ $buttons-disabled: '#{$block-class}--buttons.#{$disabled}';
 //
 $icon: #{$block-class}-icon;
 
+// Use value-divider() by default for the component's dividing line.
+// Use label-divider() only when hovering/focusing the label.
+
 @mixin label-divider(
-  $top: 0,
-  $right: 0,
-  $bottom: 0,
-  $color: $border-subtle-02
+  // Nudge the line over so it occupies the same space as the value divider.
+  $top: -1px,
+  $right: -1px,
+  $bottom: -1px,
+  $color: $border-strong
 ) {
   &::after {
     position: absolute;
@@ -231,35 +235,22 @@ $icon: #{$block-class}-icon;
 .#{$buttons-enabled} .#{$value} {
   background-color: $layer-02;
 }
-.#{$buttons-enabled}:hover .#{$label} {
-  border-color: $border-strong;
-}
-.#{$buttons-enabled}:hover .#{$value} {
-  @include value-divider($color: $border-strong);
+.#{$buttons-enabled} .#{$label}:hover {
+  @include label-divider($color: $border-strong);
 
   border-color: $border-strong;
-}
-.#{$buttons-enabled} .#{$label}:hover {
   background-color: $layer-hover-02;
 }
 .#{$buttons-enabled} .#{$value}:hover {
+  @include value-divider($color: $border-strong);
+
+  border-color: $border-strong;
   background-color: $layer-hover-02;
 }
 .#{$buttons-enabled} .#{$label}:focus {
-  // Nudge the line over so it occupies the same space as the label divider.
-  @include label-divider(
-    $top: -1px,
-    $right: -1px,
-    $bottom: -1px,
-    $color: $focus
-  );
+  @include label-divider($color: $focus);
 
   border-color: $focus;
-}
-// When focusing on the label (and showing its blue divider),
-//   hide the value's grey divider.
-.#{$buttons-enabled} .#{$label}:focus + .#{$value} {
-  @include value-divider($color: transparent);
 }
 .#{$buttons-enabled} .#{$value}:focus {
   @include value-divider($color: $focus);

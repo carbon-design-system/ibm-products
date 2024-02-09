@@ -94,7 +94,6 @@ export let UserAvatar = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        tabIndex={0}
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
@@ -106,7 +105,7 @@ export let UserAvatar = React.forwardRef(
           }
         )}
         ref={ref}
-        role="button"
+        role="img"
         {...getDevtoolsProps(componentName)}
       >
         <SetItem />

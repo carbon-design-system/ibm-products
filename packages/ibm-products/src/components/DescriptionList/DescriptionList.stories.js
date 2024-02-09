@@ -21,7 +21,7 @@ import {
   DescriptionListRow,
 } from '.';
 
-import { DescriptionListSize } from './utils/enums';
+import { DescriptionListSize } from './constants';
 
 import mdx from './DescriptionList.mdx';
 

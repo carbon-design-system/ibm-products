@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
-import { DescriptionListSize } from './utils/enums';
+import { DescriptionListSize } from './constants';
 // Carbon and package components we use.
 import {
   StructuredListBody,

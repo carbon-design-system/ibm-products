@@ -3182,6 +3182,12 @@ p.c4p--about-modal__copyright-text:first-child {
   border-block-end-color: var(--cds-ai-border-strong, #4589ff);
 }
 
+.c4p--datagrid .cds--data-table tbody tr:has(> .c4p--datagrid__table-row-ai-enabled) {
+  background-image: linear-gradient(90deg, var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)) 0%, 15%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 100%);
+  border-block-end-color: var(--cds-ai-border-strong, #4589ff);
+  background-attachment: fixed;
+}
+
 .c4p--datagrid th.c4p--datagrid__with-slug .cds--slug {
   margin-left: 0.5rem;
 }
@@ -3715,6 +3721,16 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .c4p--datagrid .c4p--datagrid__col-resizer-range::-moz-range-thumb {
   visibility: hidden;
+}
+
+.c4p--datagrid .c4p--datagrid__table-row-ai-enabled {
+  display: flex;
+  align-items: center;
+}
+
+.c4p--datagrid .c4p--datagrid__table-row-ai-spacer,
+.c4p--datagrid .c4p--datagrid__table-row-ai-enabled {
+  width: 1rem;
 }
 
 /*
@@ -4910,7 +4926,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
   width: 100%;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   height: 3rem;
-  align-items: start;
+  align-items: flex-start;
   padding: 0.5rem;
   border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   background: var(--cds-layer-01, #f4f4f4);
@@ -8939,7 +8955,7 @@ button.c4p--add-select__global-filter-toggle--open {
   margin-right: 1rem;
 }
 .c4p--card__productive .c4p--card__header-container {
-  align-items: start;
+  align-items: flex-start;
 }
 
 .c4p--remove-modal .cds--modal-footer .cds--btn {

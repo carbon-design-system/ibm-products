@@ -24,6 +24,7 @@
 $block-class: #{$pkg-prefix}--user-avatar;
 
 .#{$block-class} {
+  position: relative;
   display: flex;
   width: 4rem;
   height: 4rem;
@@ -35,14 +36,16 @@ $block-class: #{$pkg-prefix}--user-avatar;
   outline-offset: 3px;
 }
 
-@mixin setBgColor($color) {
-  // stylelint-disable-next-line carbon/theme-token-use
-  background-color: $color;
-
-  &:focus {
+.#{$block-class}__tooltip {
+  &:focus-within .#{$block-class} {
     // stylelint-disable-next-line carbon/theme-token-use
     outline: 2px solid $focus;
   }
+}
+
+@mixin setBgColor($color) {
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: $color;
 }
 
 .#{$block-class}--light-cyan {

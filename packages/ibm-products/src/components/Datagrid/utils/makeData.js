@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
+import { ExampleSlug } from '../Extensions/Slug/Slug.stories';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
   const roundedMin = Math.ceil(min);
@@ -23,11 +24,13 @@ const getRandomInteger = (min, max, decimalPlaces) => {
 };
 
 export const makeData = (...lens) => {
+  const config = lens.filter(a => typeof a === 'object')[0];
+  const filteredData = lens.filter(a => typeof a === 'number');
   const makeDataLevel = (depth = 0) => {
-    const len = lens[depth];
-    return range(len).map(() => ({
-      ...newPerson(),
-      subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
+    const len = filteredData[depth];
+    return range(len).map((index) => ({
+      ...newPerson(index, config),
+      subRows: filteredData[depth + 1] ? makeDataLevel(depth + 1) : undefined,
     }));
   };
 
@@ -77,7 +80,7 @@ const renderDocLink = () => {
   return docLinkObj;
 };
 
-const newPerson = () => {
+const newPerson = (index, config) => {
   const statusChance = Math.random();
   const roleChance = Math.random();
   const activeChance = Math.random();
@@ -144,6 +147,7 @@ const newPerson = () => {
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),
+    slug: config?.enableAIRow && (index === 1 || index === 3 || index === 4) && <ExampleSlug align={config?.slugAlign} />
   };
 };
 

@@ -24,19 +24,17 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('should return a circle with background color', async () => {
-    const { container } = renderComponent({
+    renderComponent({
       backgroundColor: 'light-cyan',
     });
-    const elements = container.getElementsByClassName(blockClass);
-    const element = elements.length > 0 ? elements[0] : null;
-
+    const element = screen.getByRole('img');
     const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
   });
 
   it('should return an icon for the avatar image', async () => {
     const { container } = renderComponent();
-    const renderedSVG = container.getElementsByTagName('svg')[0];
+    const renderedSVG = container.getElementsByTagName('svg');
     expect(renderedSVG).toBeTruthy();
   });
 
@@ -48,9 +46,10 @@ describe(componentName, () => {
 
   it('applies className to the containing node', async () => {
     const customClass = 'test';
-    const { container } = renderComponent({ className: customClass });
-    const elements = container.getElementsByClassName(blockClass);
-    const element = elements.length > 0 ? elements[0] : null;
+    renderComponent({
+      className: customClass,
+    });
+    const element = screen.getByRole('img');
     expect(element).toHaveClass(customClass);
   });
 

@@ -193,7 +193,8 @@
       "npx stylelint"
     ],
     "!(examples/**/*).md": [
-      "npx prettier --cache --write"
+      "npx prettier --cache --write",
+      "npx cspell"
     ]
   },
   "dependencies": {

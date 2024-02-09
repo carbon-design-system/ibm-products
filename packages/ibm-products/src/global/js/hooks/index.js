@@ -17,3 +17,4 @@ export { useRetrieveStepData } from './useRetrieveStepData';
 export { useValidCreateStepCount } from './useValidCreateStepCount';
 export { useControllableState } from './useControllableState';
 export { usePrefix } from './usePrefix';
+export { useFocus } from './useFocus';

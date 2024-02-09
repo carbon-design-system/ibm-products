@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.23.0...@carbon/ibm-products-styles@2.24.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* use of not has selectors ([#4233](https://github.com/carbon-design-system/ibm-products/issues/4233)) ([ea006b0](https://github.com/carbon-design-system/ibm-products/commit/ea006b0fbf10038f83a4bfe8b0a963ca9b5800ea))
+
+
+### Features
+
+* **Datagrid:** update filtering copyright headers, review eslint disable rules, remove filter feature flags ([#4178](https://github.com/carbon-design-system/ibm-products/issues/4178)) ([c40af25](https://github.com/carbon-design-system/ibm-products/commit/c40af25ebd3f08646fadfb5a6742fa8190d1af7d))
+* **FullPageError:** create new FullPageError component ([#4211](https://github.com/carbon-design-system/ibm-products/issues/4211)) ([24afc41](https://github.com/carbon-design-system/ibm-products/commit/24afc41b83cca0c365082265130d56aa4c263695))
+* **TruncatedList:** new component TruncatedList ([#4139](https://github.com/carbon-design-system/ibm-products/issues/4139)) ([bc54d2f](https://github.com/carbon-design-system/ibm-products/commit/bc54d2f1f9a016776c6dc0b998c7a3bcbb021ccb))
+* **UserAvatar:** create UserAvatar component ([#4200](https://github.com/carbon-design-system/ibm-products/issues/4200)) ([3990523](https://github.com/carbon-design-system/ibm-products/commit/399052356b9492a9699809a715c0ee34e52cd6a3))
+
+
+
+
+
 # [2.23.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.22.0...@carbon/ibm-products-styles@2.23.0) (2024-02-06)
 
 

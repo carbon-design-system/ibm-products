@@ -37,7 +37,7 @@
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
     "test:community": "lerna run --stream --scope @carbon/ibm-products-community test --",
-    "spellcheck": "cspell lint",
+    "spellcheck": "cspell '**' -e './examples' --gitignore",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
@@ -193,7 +193,8 @@
       "npx stylelint"
     ],
     "!(examples/**/*).md": [
-      "npx prettier --cache --write"
+      "npx prettier --cache --write",
+      "npx cspell"
     ]
   },
   "dependencies": {

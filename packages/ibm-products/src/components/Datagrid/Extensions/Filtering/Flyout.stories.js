@@ -1,10 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
 import { TooltipIcon } from 'carbon-components-react';
@@ -25,7 +26,6 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
-import { pkg } from '../../../../settings';
 import { getBatchActions } from '../../Datagrid.stories';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { getDateFormat } from './Panel.stories';
@@ -129,12 +129,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(20));
-
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useFiltering` hook
-  pkg.feature['Datagrid.useFiltering'] = true;
-  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -297,7 +291,6 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       filters,
       renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 

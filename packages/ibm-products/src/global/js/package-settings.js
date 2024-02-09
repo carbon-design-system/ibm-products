@@ -102,7 +102,6 @@ const defaults = {
     'a-new-feature': false,
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
-    'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,13 +14,17 @@ import { handleSelectAllRowData } from './addons/stateReducer';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SelectAll = (datagridState) => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [windowSize, setWindowSize] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : ''
+  );
   useLayoutEffect(() => {
     /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);
     }
-    window.addEventListener('resize', updateSize);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateSize);
+    }
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
@@ -38,6 +42,7 @@ const SelectAll = (datagridState) => {
     rows,
     getRowId,
     toggleAllRowsSelected,
+    onAllRowSelect,
   } = datagridState;
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
@@ -67,6 +72,7 @@ const SelectAll = (datagridState) => {
         indeterminate: true,
       });
       toggleAllRowsSelected(false);
+      onAllRowSelect?.(rows, event);
       return onChange?.({
         target: { checked: false },
       });
@@ -77,6 +83,7 @@ const SelectAll = (datagridState) => {
       getRowId,
       isChecked: event.target.checked,
     });
+    onAllRowSelect?.(rows, event);
     return onChange?.(event);
   };
 

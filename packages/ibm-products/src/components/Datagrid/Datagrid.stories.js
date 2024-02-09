@@ -296,7 +296,9 @@ export const SelectableRow = () => {
       toolbarBatchActions: getBatchActions(),
       emptyStateTitle,
       emptyStateDescription,
-      onRowSelect: (row, event) => console.log(row, event),
+      onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
+      onAllRowSelect: (rows, event) =>
+        console.log('onAllRowsClick called', rows, event),
       batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,

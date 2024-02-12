@@ -5,31 +5,106 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import {
+  ComposedModal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Theme,
+} from '@carbon/react';
 // Import portions of React that are needed.
-import React, { useState, useRef, useEffect } from 'react';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-import { pkg } from '../../settings';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-// Carbon and package components we use.
-import {
-  ComposedModal,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  Theme,
-} from '@carbon/react';
+import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = 'AboutModal';
+
+interface AboutModalProps {
+  /**
+   * If you are legally required to display logos of technologies used
+   * to build your product you can provide this in the additionalInfo.
+   * Additional information will be displayed in the footer.
+   */
+  additionalInfo?: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the modal root node.
+   */
+  className?: string;
+
+  /**
+   * The accessibility title for the close icon.
+   */
+  closeIconDescription: string;
+
+  /**
+   * Subhead text providing any relevant product disclaimers including
+   * legal information (optional)
+   */
+  content?: ReactNode;
+
+  /**
+   * Trademark and copyright information. Displays first year of
+   * product release to current year.
+   */
+  copyrightText: string;
+
+  /**
+   * An array of Carbon `Link` component if there are additional information
+   * to call out within the card. The about modal should be used to display
+   * the product information and not where users go to find help (optional)
+   */
+  links?: ReactNode[];
+
+  /**
+   * A visual symbol used to represent the product.
+   */
+  logo: ReactNode;
+
+  /**
+   * Specifies aria label for AboutModal
+   */
+  modalAriaLabel?: string;
+
+  /**
+   * Specifies an optional handler which is called when the AboutModal
+   * is closed. Returning `false` prevents the AboutModal from closing.
+   */
+  onClose?: () => void | boolean;
+
+  /**
+   * Specifies whether the AboutModal is open or not.
+   */
+  open?: boolean;
+
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: ReactNode;
+
+  /**
+   * Header text that provides the product name. The IBM Services logo
+   * consists of two discrete, but required, elements: the iconic
+   * IBM 8-bar logo represented alongside the IBM Services logotype.
+   * Please follow these guidelines to ensure proper execution.
+   */
+  title: ReactNode;
+
+  /**
+   * Text that provides information on the version number of your product.
+   */
+  version: string;
+}
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -58,8 +133,8 @@ export let AboutModal = React.forwardRef(
       version,
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: AboutModalProps,
+    ref: React.Ref<HTMLDivElement>
   ) => {
     const [hasScrollingContent, setHasScrollingContent] = useState(true);
     const bodyRef = useRef();

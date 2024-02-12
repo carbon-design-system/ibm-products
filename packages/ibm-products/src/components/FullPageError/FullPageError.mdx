@@ -38,11 +38,15 @@ errors, and not caused by server connectivity issues.
 
 ### 403 variant
 
+Display an Access Denied (403) error message when the user lacks permission to access the page or data, or when login is required.
+
 <Canvas>
   <Story id={getStoryId(FullPageError.displayName, 'full-page-error-403')} />
 </Canvas>
 
 ### 404 variant
+
+Show a Page Not Found (404) error message when the requested page cannot be located on the server, typically due to outdated bookmarks, mistyped URLs, or broken links.
 
 <Canvas>
   <Story id={getStoryId(FullPageError.displayName, 'full-page-error-404')} />

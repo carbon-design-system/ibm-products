@@ -34,19 +34,6 @@ element.
 <Decorator label="IP" score={5} value="192.168.0.50" />
 ```
 
-Add `onContextMenu` to any Decorator to provide a right-click event handler.
-
-```jsx
-<Decorator
-  label="IP"
-  onContextMenu={(event, values) => {
-    /* Your code here. */
-  }}
-  score={5}
-  value="192.168.0.50"
-/>
-```
-
 ## Decorator as Link example usage
 
 <Canvas withSource="none">
@@ -73,6 +60,20 @@ adding `target="_blank"` to open in a new browser tab.
   label="IP"
   href="http://www.ibm.com"
   target="_blank"
+  score={5}
+  value="192.168.0.50"
+/>
+```
+
+Add `onContextMenu` to any interactive Decorator to provide a right-click event
+handler. Does not apply to the default, non-interactive Decorator.
+
+```jsx
+<Decorator
+  label="IP"
+  onContextMenu={(event, values) => {
+    /* Your code here. */
+  }}
   score={5}
   value="192.168.0.50"
 />

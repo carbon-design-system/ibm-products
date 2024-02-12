@@ -70,4 +70,21 @@ describe(componentName, () => {
       componentName
     );
   });
+
+  it('should return appropriately size circle based on size prop', async () => {
+    renderComponent();
+    const element = screen.getByRole('img');
+    const hasSizeClass = element.className.includes('md');
+    expect(hasSizeClass).toBeTruthy();
+  });
+
+  it('should render the initials when passed the name prop', async () => {
+    renderComponent({ name: 'Display name' });
+    expect(screen.getByText(/DN/));
+  });
+
+  it('should render the initials when simply passing two names to the name prop', async () => {
+    renderComponent({ name: 'DN' });
+    expect(screen.getByText(/DN/));
+  });
 });

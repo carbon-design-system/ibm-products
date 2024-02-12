@@ -58,8 +58,10 @@ export let UserAvatar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       backgroundColor,
       className,
+      name,
       /* TODO: add other props for UserAvatar, with default values if needed */
       renderIcon = defaults.renderIcon,
+      size = 'md',
       tooltipText = defaults.tooltipText,
       tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
@@ -70,19 +72,40 @@ export let UserAvatar = React.forwardRef(
     const carbonPrefix = usePrefix();
     const icons = {
       user: {
-        md: <User size={32} />,
+        sm: (props) => <User size={16} {...props} />,
+        md: (props) => <User size={20} {...props} />,
+        lg: (props) => <User size={24} {...props} />,
+        xl: (props) => <User size={32} {...props} />,
       },
       group: {
-        md: <Group size={32} />,
+        sm: (props) => <Group size={16} {...props} />,
+        md: (props) => <Group size={20} {...props} />,
+        lg: (props) => <Group size={24} {...props} />,
+        xl: (props) => <Group size={32} {...props} />,
       },
+    };
+    const formatInitials = () => {
+      if (name.length === 2) {
+        return name;
+      }
+      // RegEx takes in the display name and returns the first and last name. Thomas Watson and Thomas J. Watson
+      // both return JW.
+      return name
+        .match(/(^\S\S?|\b\S)?/g)
+        .join('')
+        .match(/(^\S|\S$)?/g)
+        .join('')
+        .toUpperCase();
     };
     const getItem = (renderIcon) => {
       if (renderIcon === User) {
-        return icons.user['md'];
+        return icons.user[size];
       } else if (renderIcon === Group) {
-        return icons.group['md'];
+        return icons.group[size];
+      } else if (name) {
+        return formatInitials;
       } else {
-        return renderIcon;
+        return icons['user'][size];
       }
     };
 
@@ -98,6 +121,7 @@ export let UserAvatar = React.forwardRef(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
           `${blockClass}--${backgroundColor}`,
+          `${blockClass}--${size}`,
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
             // switched classes dependant on props or state
@@ -149,11 +173,18 @@ UserAvatar.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
+  /**
+   * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
+   */
+  name: PropTypes.string,
   /**
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
   renderIcon: PropTypes.func,
+  /**
+   * Set the size of the avatar circle
+   */
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm']),
   /**
    * Specify how the trigger should align with the tooltip
    */

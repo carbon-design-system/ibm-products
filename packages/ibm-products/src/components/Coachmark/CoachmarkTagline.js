@@ -11,7 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Close, Idea } from '@carbon/icons-react';
+import { Close, Idea } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { useCoachmark } from './utils/context';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

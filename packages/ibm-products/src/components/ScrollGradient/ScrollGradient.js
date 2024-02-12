@@ -56,6 +56,9 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
+    const gradientRotation =
+      direction === ScrollGradient.ScrollDirection.X ? -90 : 0;
+
     return (
       <div
         {
@@ -74,10 +77,34 @@ export let ScrollGradient = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        {children}
+        {!hideStartGradient && (
+          <div
+            className={`${blockClass}__before`}
+            style={{
+              backgroundImage: `linear-gradient(${gradientRotation}deg, rgba(0,0,0,0), ${color} 90%)`,
+            }}
+            role="presentation"
+            aria-hidden
+          />
+        )}
+        <div
+          onScroll={this.scrollHandler}
+          ref={this.setRefs}
+          className={cx(`${blockClass}__content`, scrollElementClassName)}
+        >
+          {children}
+        </div>
+        <div
+          className={`${blockClass}__after`}
+          style={{
+            backgroundImage: `linear-gradient(${gradientRotation}deg, ${color} 10%, rgba(0,0,0,0))`,
+          }}
+          role="presentation"
+          aria-hidden
+        />
       </div>
     );
   }

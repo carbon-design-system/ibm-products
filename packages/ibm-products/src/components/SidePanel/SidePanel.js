@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -100,6 +100,8 @@ export let SidePanel = React.forwardRef(
     const previousState = usePreviousValue({ size, open });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
       setDoAnimateTitle(animateTitle);
@@ -603,7 +605,7 @@ export let SidePanel = React.forwardRef(
               initial="hidden"
               animate="visible"
               exit="exit"
-              custom={placement}
+              custom={{ placement, shouldReduceMotion }}
             >
               <span
                 ref={startTrapRef}

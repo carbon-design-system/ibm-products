@@ -31,6 +31,14 @@ export default {
   // argTypes: {
   //   egProp: { control: 'color' },
   // },
+  argTypes: {
+    kind: {
+      control: {
+        type: 'select',
+      },
+      options: ['403', '404', 'custom'],
+    },
+  },
   parameters: {
     styles,
     layout: 'fullscreen',
@@ -41,10 +49,7 @@ export default {
 };
 
 const defaultProps = {
-  title: '[Error title]',
-  errorLabel: 'Error ###',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+  kind: 'custom',
   children: (
     <>
       <Link role="link" href={'/'}>
@@ -83,5 +88,23 @@ export const fullPageError = prepareStory(Template, {
   storyName: 'Default',
   args: {
     ...defaultProps,
+    title: '[Error title]',
+    errorLabel: 'Error ###',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+  },
+});
+export const fullPageError403 = prepareStory(Template, {
+  storyName: '403',
+  args: {
+    ...defaultProps,
+    kind: '403',
+  },
+});
+export const fullPageError404 = prepareStory(Template, {
+  storyName: '404',
+  args: {
+    ...defaultProps,
+    kind: '404',
   },
 });

@@ -43,12 +43,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
     padding: 0 $spacing-07 0 0;
   }
 }
-.#{$block-class}__error-svg {
-  margin: auto $spacing-03 $spacing-11 $spacing-03;
-}
+
 .#{$block-class}__error-svg-container {
   display: flex;
   height: 100%;
+  margin: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
+  @include breakpoint(md) {
+    margin: auto $spacing-03 $spacing-11 $spacing-03;
+  }
 }
 
 .#{$block-class}__error-label,

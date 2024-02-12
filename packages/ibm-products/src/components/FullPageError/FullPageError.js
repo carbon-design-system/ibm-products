@@ -63,37 +63,45 @@ export let FullPageError = React.forwardRef(
     },
     ref
   ) => {
-    const errorTitles = {
-      403: 'Access denied',
-      404: 'Page not found',
-      custom: title,
-    };
-
-    const ErrorSVGs = {
-      403: (
-        <Error403SVG
-          className={cx(`${blockClass}__error-svg`, `${blockClass}__error-403`)}
-        />
-      ),
-      404: (
-        <Error404SVG
-          className={cx(`${blockClass}__error-svg`, `${blockClass}__error-404`)}
-        />
-      ),
-      custom: (
-        <ErrorGenericSVG
-          className={cx(
-            `${blockClass}__error-svg`,
-            `${blockClass}__error-custom`
-          )}
-        />
-      ),
-    };
-
-    const errorDescriptions = {
-      403: 'You are not authorized to access the requested page. Please verify that you are logged in to the hosting environment and your access permissions are correct.',
-      404: 'The page you requested has moved or is unavailable, or the specified URL is not valid. Please check the URL or search the site for the requested content.',
-      custom: description,
+    const errorData = {
+      403: {
+        title: 'Access denied',
+        description:
+          'You are not authorized to access the requested page. Please verify that you are logged in to the hosting environment and your access permissions are correct.',
+        svg: (
+          <Error403SVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-403`
+            )}
+          />
+        ),
+      },
+      404: {
+        title: 'Page not found',
+        description:
+          'The page you requested has moved or is unavailable, or the specified URL is not valid. Please check the URL or search the site for the requested content.',
+        svg: (
+          <Error404SVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-404`
+            )}
+          />
+        ),
+      },
+      custom: {
+        title: title,
+        description: description,
+        svg: (
+          <ErrorGenericSVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-custom`
+            )}
+          />
+        ),
+      },
     };
     return (
       <div
@@ -126,16 +134,16 @@ export let FullPageError = React.forwardRef(
                 <span className={`${blockClass}__error-label`}>
                   ↳ {kind === 'custom' ? errorLabel : `Error ${kind}`}
                 </span>
-                <span>{errorTitles[kind]}</span>
+                <span>{errorData[kind].title}</span>
               </h1>
               <p className={`${blockClass}__description`}>
-                {description || errorDescriptions[kind]}
+                {description || errorData[kind].description}
               </p>
               {children}
             </Column>
             <Column sm={4} md={5} lg={10}>
               <div className={`${blockClass}__error-svg-container`}>
-                {ErrorSVGs[kind]}
+                {errorData[kind].svg}
               </div>
             </Column>
           </Grid>
@@ -167,9 +175,9 @@ FullPageError.propTypes = {
   className: PropTypes.string,
   /**
    * String that will provide the description for the error code. <br/>
-   * This is optional for 403 and 404 kinds, and passing this would override their default texts.
+   * This is optional for 403 and 404 kinds, and passing this would override their default descriptions.
    */
-  description: PropTypes.string,
+  description: PropTypes.string.isRequired,
   /**
    * String that will describe the error that occurred
    */

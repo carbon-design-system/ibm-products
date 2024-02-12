@@ -356,7 +356,9 @@ export const NoTagsIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 NoTagsIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };
+
+export default NoTagsIllustration;

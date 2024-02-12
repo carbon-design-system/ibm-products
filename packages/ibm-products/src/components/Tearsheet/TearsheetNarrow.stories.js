@@ -246,6 +246,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
           open={open2}
           onClose={() => setOpen2(false)}
           slug={slug && sampleSlug}
+          selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
             Main content 2
@@ -258,6 +259,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
           open={open3}
           onClose={() => setOpen3(false)}
           slug={slug && sampleSlug}
+          selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
             Main content 3

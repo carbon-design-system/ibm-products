@@ -183,7 +183,9 @@ export const NoDataIllustration = ({ theme, size, alt, ...rest }) => {
 };
 
 NoDataIllustration.propTypes = {
+  alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
-  alt: PropTypes.string.isRequired,
 };
+
+export default NoDataIllustration;

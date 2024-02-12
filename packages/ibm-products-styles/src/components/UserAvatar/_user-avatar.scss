@@ -1,0 +1,57 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins';
+@use '@carbon/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/react/scss/grid';
+
+// UserAvatar uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by UserAvatar
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+
+$block-class: #{$pkg-prefix}--user-avatar;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid transparent;
+  border-radius: 100%;
+  outline: none;
+  outline-offset: 3px;
+}
+
+.#{$block-class}__tooltip {
+  &:focus-within .#{$block-class} {
+    // stylelint-disable-next-line carbon/theme-token-use
+    outline: 2px solid $focus;
+  }
+}
+
+@mixin setBgColor($color) {
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: $color;
+}
+
+.#{$block-class}--light-cyan {
+  @include setBgColor($cyan-50);
+}
+
+.#{$block-class}--dark-cyan {
+  @include setBgColor($cyan-60);
+}

@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { ErrorIllustration } from '../assets/ErrorIllustration';
+import ErrorIllustration from '../assets/ErrorIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -107,14 +107,14 @@ ErrorEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Designates the position of the illustration relative to the content
-   */
-  illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
-  /**
    * The alt text for empty state svg images. If not provided , title will be used.
    */
   illustrationDescription: PropTypes.string,
+
+  /**
+   * Designates the position of the illustration relative to the content
+   */
+  illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * Empty state illustration theme variations.

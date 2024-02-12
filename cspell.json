@@ -74,6 +74,7 @@
     "buildhome",
     "callout",
     "checkmark",
+    "Coachmark",
     "codemods",
     "codesandbox",
     "colindex",
@@ -93,6 +94,7 @@
     "expressivecard",
     "gridcell",
     "guidebanner",
+    "haspopup",
     "homescreen",
     "inlineedit",
     "listbox",
@@ -143,6 +145,7 @@
     "treeview",
     "userprofileimage",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "Coachmark"
   ]
 }

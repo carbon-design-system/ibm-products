@@ -9,7 +9,7 @@ import React, { forwardRef, useRef, useEffect, useState } from 'react';
 import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Idea } from '@carbon/icons-react';
+import { Idea } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';

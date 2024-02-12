@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.0...@carbon/ibm-products-community@0.3.1) (2024-02-09)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+# [0.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.2.0...@carbon/ibm-products-community@0.3.0) (2024-02-06)
+
+
+### Features
+
+* Gradient ai updates ([#4184](https://github.com/carbon-design-system/ibm-products/issues/4184)) ([54aa157](https://github.com/carbon-design-system/ibm-products/commit/54aa15705d613a03361476a522e242d9ff3ea5b6))
+
+
+
+
+
 # [0.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.1.2...@carbon/ibm-products-community@0.2.0) (2024-01-30)
 
 

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
-import { NotFoundEmptyState } from '../EmptyStates/NotFoundEmptyState';
+import { NotFoundEmptyState } from '../EmptyStates';
 import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';

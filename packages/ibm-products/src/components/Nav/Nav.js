@@ -18,7 +18,7 @@ import NavList from './NavList';
 import { pkg } from '../../settings';
 
 const componentName = 'Nav';
-const blockClass = `${pkg.prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--nav`;
 
 export default class Nav extends Component {
   constructor(props) {

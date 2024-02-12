@@ -169,7 +169,7 @@ const sharedDatagridProps = {
     labels: {
       findColumnPlaceholderLabel: 'Find column',
       resetToDefaultLabel: 'Reset to default',
-      customizeTearsheetHeadingLabel: 'Customize display',
+      customizeTearsheetHeadingLabel: 'Customize column',
       primaryButtonTextLabel: 'Save',
       secondaryButtonTextLabel: 'Cancel',
       instructionsLabel:

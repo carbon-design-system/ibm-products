@@ -15,6 +15,7 @@ preload
 progressbar
 rsquo
 searchbox
+srcset
 tabindex
 tbody
 valign

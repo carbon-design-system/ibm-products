@@ -25,6 +25,7 @@ import {
 } from 'carbon-components-react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
+import { useFocus } from '../../global/js/hooks/useFocus';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -101,6 +102,7 @@ export const TearsheetShell = React.forwardRef(
     const resizer = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -136,12 +138,7 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      const element = selectorPrimaryFocus
-        ? modalRef.current.innerModal.current.querySelector(
-            selectorPrimaryFocus
-          )
-        : modalRef.current.startSentinel.current;
-      setTimeout(() => element.focus(), 1);
+      firstElement?.focus();
     };
 
     useEffect(() => {
@@ -230,6 +227,7 @@ export const TearsheetShell = React.forwardRef(
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
+          onKeyDown={keyDownListener}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[

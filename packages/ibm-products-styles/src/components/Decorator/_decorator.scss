@@ -1,3 +1,4 @@
+/* stylelint-disable carbon/theme-token-use */
 /* stylelint-disable carbon/type-token-use */
 /* stylelint-disable carbon/layout-token-use */
 /* stylelint-disable function-no-unknown */
@@ -32,9 +33,9 @@ $disabled: #{$block-class}-disabled;
 //
 $default: #{$block-class}--default;
 $link: #{$block-class}--link;
-$button-enabled: '#{$block-class}--button:not(.#{$disabled})';
+$button: '#{$block-class}--button:not(.#{$disabled})';
 $button-disabled: '#{$block-class}--button.#{$disabled}';
-$buttons-enabled: '#{$block-class}--buttons:not(.#{$disabled})';
+$buttons: '#{$block-class}--buttons:not(.#{$disabled})';
 $buttons-disabled: '#{$block-class}--buttons.#{$disabled}';
 //
 $icon: #{$block-class}-icon;
@@ -164,47 +165,70 @@ $icon: #{$block-class}-icon;
 //
 // STYLING FOR SINGLE BUTTON
 //
-.#{$button-enabled} {
+.#{$button} {
   display: flex;
   padding: 0;
   border: 0;
   cursor: pointer;
 }
-.#{$button-enabled} .#{$label} {
+.#{$button} .#{$label} {
   background-color: $layer-02;
 }
-.#{$button-enabled} .#{$value} {
+.#{$button} .#{$value} {
   @include value-divider();
 
   background-color: $layer-02;
 }
-.#{$button-enabled}:hover .#{$label} {
+.#{$button}:hover .#{$label} {
   border-color: $border-strong;
   background-color: $layer-hover-02;
 }
-.#{$button-enabled}:hover .#{$value} {
+.#{$button}:hover .#{$value} {
   @include value-divider($color: $border-strong);
 
   border-color: $border-strong;
   background-color: $layer-hover-02;
 }
-.#{$button-enabled}:focus .#{$label} {
+.#{$button}:focus .#{$label} {
   border-color: $focus;
   background-color: $layer-02;
 }
-.#{$button-enabled}:focus .#{$value} {
+.#{$button}:focus .#{$value} {
   @include value-divider();
 
   border-color: $focus;
   background-color: $layer-02;
 }
-.#{$button-enabled}:active .#{$label} {
+.#{$button}:active .#{$label} {
   background-color: $layer-selected-02;
 }
-.#{$button-enabled}:active .#{$value} {
+.#{$button}:active .#{$value} {
   @include value-divider();
 
   background-color: $layer-selected-02;
+}
+// SINGLE BUTTON ICON ENHANCED ACCESSIBILITY
+// Add a border on hover & active to increase contrast
+.#{$block-class}--light {
+  &.#{$button}:hover .#{$icon}__magnitude-low,
+  &.#{$button}:active .#{$icon}__magnitude-low {
+    stroke: $yellow-60;
+    stroke-width: 1px;
+  }
+  &.#{$button}:hover .#{$icon}__magnitude-medium,
+  &.#{$button}:active .#{$icon}__magnitude-medium {
+    stroke: $orange-60;
+    stroke-width: 1px;
+  }
+}
+.#{$block-class}--dark {
+  &.#{$button}:hover .#{$icon}__magnitude-high,
+  &.#{$button}:active .#{$icon}__magnitude-high,
+  &.#{$button}:hover .#{$icon}__magnitude-critical,
+  &.#{$button}:active .#{$icon}__magnitude-critical {
+    stroke: $red-40;
+    stroke-width: 1px;
+  }
 }
 .#{$button-disabled} {
   padding: 0;
@@ -225,43 +249,66 @@ $icon: #{$block-class}-icon;
 //
 // STYLING FOR DUAL BUTTONS
 //
-.#{$buttons-enabled} .#{$label} {
+.#{$buttons} .#{$label} {
   background-color: $layer-02;
   cursor: pointer;
 }
-.#{$buttons-enabled}:not(:hover) .#{$value} {
+.#{$buttons}:not(:hover) .#{$value} {
   @include value-divider();
 }
-.#{$buttons-enabled} .#{$value} {
+.#{$buttons} .#{$value} {
   background-color: $layer-02;
 }
-.#{$buttons-enabled} .#{$label}:hover {
+.#{$buttons} .#{$label}:hover {
   @include label-divider($color: $border-strong);
 
   border-color: $border-strong;
   background-color: $layer-hover-02;
 }
-.#{$buttons-enabled} .#{$value}:hover {
+.#{$buttons} .#{$value}:hover {
   @include value-divider($color: $border-strong);
 
   border-color: $border-strong;
   background-color: $layer-hover-02;
 }
-.#{$buttons-enabled} .#{$label}:focus {
+.#{$buttons} .#{$label}:focus {
   @include label-divider($color: $focus);
 
   border-color: $focus;
 }
-.#{$buttons-enabled} .#{$value}:focus {
+.#{$buttons} .#{$value}:focus {
   @include value-divider($color: $focus);
 
   border-color: $focus;
 }
-.#{$buttons-enabled} .#{$label}:active {
+.#{$buttons} .#{$label}:active {
   background-color: $layer-hover-02;
 }
-.#{$buttons-enabled} .#{$value}:active {
+.#{$buttons} .#{$value}:active {
   background-color: $layer-hover-02;
+}
+// DUAL BUTTONS ICON ENHANCED ACCESSIBILITY
+// Add a border on hover & active to increase contrast
+.#{$block-class}--light {
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-low,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-low {
+    stroke: $yellow-60;
+    stroke-width: 1px;
+  }
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium {
+    stroke: $orange-60;
+    stroke-width: 1px;
+  }
+}
+.#{$block-class}--dark {
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high,
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-critical,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-critical {
+    stroke: $red-40;
+    stroke-width: 1px;
+  }
 }
 .#{$buttons-disabled} .#{$label} {
   background-color: $layer-02;
@@ -313,17 +360,17 @@ $icon: #{$block-class}-icon;
 // MAGNITUDE ICON COLORS
 //
 .#{$icon}__magnitude-unknown {
-  fill: $icon-primary;
+  fill: $icon-secondary;
 }
 .#{$icon}__magnitude-benign {
-  /* stylelint-disable-next-line carbon/theme-token-use */
-  fill: $teal-50;
+  fill: $teal-60;
 }
 .#{$icon}__magnitude-low {
   fill: $support-warning;
+  // stroke: $yellow-60;
+  // stroke-width: 1px;
 }
 .#{$icon}__magnitude-medium {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   fill: $orange-40;
 }
 .#{$icon}__magnitude-high {

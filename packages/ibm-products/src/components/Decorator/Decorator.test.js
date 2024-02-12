@@ -65,7 +65,7 @@ describe(componentName, () => {
 
   it('renders a score', async () => {
     renderComponent({ score: score });
-    screen.getByText(scoreTitle);
+    screen.getByTitle(scoreTitle);
   });
 
   it('does not render the icon', async () => {

@@ -86,7 +86,7 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const userAvatar = prepareStory(Template, {
+export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args

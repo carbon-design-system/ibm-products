@@ -1,16 +1,17 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { TableRow, TableCell, SkeletonText } from '@carbon/react';
 import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
+import { DatagridSlug } from './addons/Slug/DatagridSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -26,6 +27,7 @@ const rowHeights = {
 const DatagridRow = (datagridState) => {
   const {
     row,
+    rows,
     rowSize,
     withNestedRows,
     prepareRow,
@@ -131,6 +133,7 @@ const DatagridRow = (datagridState) => {
 
   // eslint-disable-next-line no-unused-vars
   const { role, ...rowProps } = row.getRowProps();
+  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   return (
     <React.Fragment key={key}>
@@ -145,6 +148,15 @@ const DatagridRow = (datagridState) => {
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
       >
+        {foundAIRow ? (
+          row?.original?.slug ? (
+            <td className={`${blockClass}__table-row-ai-enabled`}>
+              <DatagridSlug slug={row?.original?.slug} />
+            </td>
+          ) : (
+            <td className={`${blockClass}__table-row-ai-spacer`} />
+          )
+        ) : null}
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars

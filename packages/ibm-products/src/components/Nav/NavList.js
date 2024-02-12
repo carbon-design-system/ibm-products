@@ -4,14 +4,14 @@
  */
 
 import React, { Component } from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import classnames from 'classnames';
 import { bool, func, node, number, string } from 'prop-types';
 
 // import { getComponentNamespace } from '../../../globals/namespace';
 
 // import Icon from '../../Icon';
-// import NavItem, { namespace as navItemNamespace } from '../NavItem/NavItem';
+import NavItem, { blockClass as navItemBlockClass } from './NavItem';
 
 // export const navListNamespace = getComponentNamespace('nav__list');
 import { pkg } from '../../settings';
@@ -72,23 +72,23 @@ export default class NavList extends Component {
 
     const { onClick } = props;
 
-    return null; //TODO: remove
+    // return <>This is NavList</>;
 
-    // return (
-    //   <NavItem
-    //     {...props}
-    //     key={`${navItemNamespace}--${index}`}
-    //     onClick={(event, href) => {
-    //       onItemClick(event, href);
+    return (
+      <NavItem
+        {...props}
+        key={`${navItemBlockClass}--${index}`}
+        onClick={(event, href) => {
+          onItemClick(event, href);
 
-    //       if (onClick) {
-    //         onClick(event);
-    //       }
-    //     }}
-    //     activeHref={activeHref}
-    //     tabIndex={this.state.open ? 0 : -1}
-    //   />
-    // );
+          if (onClick) {
+            onClick(event);
+          }
+        }}
+        activeHref={activeHref}
+        tabIndex={this.state.open ? 0 : -1}
+      />
+    );
   }
 
   /**
@@ -126,8 +126,10 @@ export default class NavList extends Component {
       [`${blockClass}--expanded`]: open,
     });
 
-    const newChildren = React.Children.map(children, (child, index) =>
-      this.buildNewItemChild(child, index)
+    const newChildren = React.Children.map(
+      children,
+      (child, index) => this.buildNewItemChild(child, index)
+      // <>NavList newChildren</>
     );
 
     return (
@@ -147,7 +149,7 @@ export default class NavList extends Component {
             />
           )}
           <div className={`${blockClass}__content`}>{title}</div>
-          <ChevronDown16 className={`${blockClass}__icon`} />
+          <ChevronDown className={`${blockClass}__icon`} />
         </div>
         <ul
           aria-label={title}

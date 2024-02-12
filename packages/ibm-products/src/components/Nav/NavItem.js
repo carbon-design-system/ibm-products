@@ -3,7 +3,7 @@
  * @copyright IBM Security 2019 - 2021
  */
 
-import { Launch16 } from '@carbon/icons-react';
+import { Launch } from '@carbon/icons-react';
 // import setupGetInstanceId from 'carbon-components-react/es/tools/setupGetInstanceId';
 import classnames from 'classnames';
 import { bool, elementType, func, node, number, string } from 'prop-types';
@@ -137,7 +137,14 @@ export default class NavItem extends Component {
 
     const navItemTabIndex = handleDisabled(tabIndex, -1);
 
+    console.log('Children:', this.props.children);
+    console.log('ClassNames:', this.props.className);
+    console.log('Label:', this.props.label);
+    console.log('Link:', this.props.link);
+
     return (
+      // <>NavItem here</>
+
       <li
         className={classNames}
         label={label}
@@ -159,7 +166,7 @@ export default class NavItem extends Component {
           >
             {children}
             {externalLink && (
-              <Launch16 className={`${blockClass}__link--external__icon`} />
+              <Launch className={`${blockClass}__link--external__icon`} />
             )}
           </NavItemLink>
         ) : (

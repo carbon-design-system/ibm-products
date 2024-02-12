@@ -46,6 +46,7 @@ export default class Nav extends Component {
    * @returns {NavItem} The new child list item.
    */
   buildNewItemChild({ props }, index) {
+    // console.log('arriving here');
     const key = `${navItemBlockClass}--${index}`;
 
     return (
@@ -144,13 +145,20 @@ export default class Nav extends Component {
         {...other}
       >
         {heading && <h1 className={`${blockClass}__heading`}>{heading}</h1>}
+        {/* {<>Hi</>} */}
 
+        {/* child is hello, world */}
+        {/* child.type is undefined */}
+        {/* child.type.displayName is undefined */}
         <ul className={`${blockClass}__wrapper`} role="menubar">
-          {Children.map(children, (child, index) =>
-            child.type?.displayName === NavList.displayName
+          {React.Children.map(children, (child, index) => {
+            // Log the displayName of each child's type
+            console.log(child);
+
+            return child.type?.displayName === NavList.displayName
               ? this.buildNewListChild(child, index)
-              : this.buildNewItemChild(child, index)
-          )}
+              : this.buildNewItemChild(child, index);
+          })}
         </ul>
       </nav>
     );
@@ -178,7 +186,7 @@ Nav.propTypes = {
   heading: string,
 
   /** @type {string} Aria-label on the rendered `nav` element. */
-  label: string.isRequired, //TODO: required
+  label: string.isRequired,
 };
 
 Nav.displayName = componentName;

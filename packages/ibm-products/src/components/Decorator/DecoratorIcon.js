@@ -12,6 +12,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import {
+  Caution as High,
+  ChevronMini as Critical,
+  CircleFill as Benign,
+  CircleStroke as Unknown,
+  DiamondFill as Medium,
+  SquareFill as Low,
+} from '@carbon/react/icons';
+
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -19,62 +28,67 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--decorator-icon`;
 const componentName = 'DecoratorIcon';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
 const defaults = {
   magnitude: 'unknown',
-  height: 16,
   small: false,
-  viewBox: '0 0 16 16',
-  width: 16,
 };
 
 /**
- * TODO: A description of the component.
+ * The shape and color of the Decorator's icon.
  */
 export let DecoratorIcon = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
       className,
-      height = defaults.height,
       magnitude = defaults.magnitude,
-      path,
       small = defaults.small,
-      title,
-      viewBox = defaults.viewBox,
-      width = defaults.width,
-      /* TODO: add other props for DecoratorIcon, with default values if needed */
-
-      // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const _height = small ? 12 : height;
-    const _width = small ? 12 : width;
+    let Icon;
+
+    switch (magnitude) {
+      case 'benign':
+        Icon = Benign;
+        break;
+      case 'low':
+        Icon = Low;
+        break;
+      case 'medium':
+        Icon = Medium;
+        break;
+      case 'high':
+        Icon = High;
+        break;
+      case 'critical':
+        Icon = Critical;
+        break;
+      default:
+        Icon = Unknown;
+        break;
+    }
 
     return (
-      <svg
+      <Icon
         {...rest}
         aria-hidden={true}
         className={cx(
           blockClass,
           className,
-          `${blockClass}__magnitude-${magnitude}`
+          `${blockClass}__magnitude-${magnitude}`,
+          {
+            [`${blockClass}--sm`]: small,
+          }
         )}
         focusable={false}
-        height={_height}
-        preserveAspectRatio="xMidYMid meet"
         ref={ref}
-        viewBox={viewBox}
-        width={_width}
+        // Adding viewBox allows resizing `svg` elements via CSS.
+        // The "ChevronMini" icon is half size,
+        //   so set to '8 8 8 8' to match the size of the other icons.
+        viewBox={magnitude === 'critical' ? '8 8 8 8' : '0 0 16 16'}
         {...getDevtoolsProps(componentName)}
-      >
-        {title && <title>{title}</title>}
-        <path d={path} />
-      </svg>
+      />
     );
   }
 );
@@ -94,9 +108,9 @@ DecoratorIcon.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
-  /* TODO: add types and DocGen for all props. */
-  height: PropTypes.number,
+  /**
+   * Determines the shape and color of the icon.
+   */
   magnitude: PropTypes.oneOf([
     'unknown',
     'benign',
@@ -105,9 +119,8 @@ DecoratorIcon.propTypes = {
     'high',
     'critical',
   ]),
-  path: PropTypes.string,
+  /**
+   * Reduce the size of the icon in proportion to a smaller Decorator.
+   */
   small: PropTypes.bool,
-  title: PropTypes.string,
-  viewBox: PropTypes.string,
-  width: PropTypes.number,
 };

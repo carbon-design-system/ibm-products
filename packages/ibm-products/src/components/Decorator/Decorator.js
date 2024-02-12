@@ -13,16 +13,14 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-import { getIcon, truncate } from './constants';
+import { getMagnitude, truncate } from './constants';
 import { DecoratorIcon } from './DecoratorIcon';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const componentName = 'Decorator';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
 const defaults = {
-  scoreDescription: (score, scoreThresholds, magnitude) => {
+  labelTitle: (score, scoreThresholds, magnitude) => {
     if (typeof score !== 'number') {
       return 'Unknown score';
     }
@@ -46,12 +44,12 @@ export let Decorator = React.forwardRef(
       hideIcon,
       href,
       label,
+      labelTitle = defaults.labelTitle,
       onClick,
       onClickLabel,
       onClickValue,
       onContextMenu,
       score,
-      scoreDescription = defaults.scoreDescription,
       scoreThresholds = defaults.scoreThresholds,
       small,
       theme = defaults.theme,
@@ -63,15 +61,16 @@ export let Decorator = React.forwardRef(
     },
     ref
   ) => {
-    const { svgPath, magnitude } = useMemo(() => {
-      return getIcon(score, scoreThresholds);
+    const magnitude = useMemo(() => {
+      return getMagnitude(score, scoreThresholds);
     }, [score, scoreThresholds]);
 
-    const _scoreDescription = useMemo(() => {
-      return scoreDescription(score, scoreThresholds, magnitude);
-    }, [magnitude, score, scoreDescription, scoreThresholds]);
+    const _labelTitle = useMemo(() => {
+      return labelTitle && labelTitle(score, scoreThresholds, magnitude);
+    }, [magnitude, score, labelTitle, scoreThresholds]);
 
-    // If a "midline" truncation has been defined, then refer that,
+    // If a "midline" truncation has been defined,
+    // then use the formatted midline value generated here,
     // else refer to the original value.
     const _value = useMemo(() => {
       if (truncateValue?.maxLength) {
@@ -100,9 +99,7 @@ export let Decorator = React.forwardRef(
     const decoratorIconsProps = {
       className: `${blockClass}__icon`,
       magnitude: magnitude.toLowerCase(), // e.g. "Medium" -> "medium"
-      path: svgPath,
       small: small,
-      title: _scoreDescription,
     };
 
     const handleOnClick = (event) => {
@@ -137,6 +134,7 @@ export let Decorator = React.forwardRef(
             disabled={disabled}
             onClick={!disabled && handleOnClickLabel}
             onContextMenu={!disabled && handleOnContextMenu}
+            title={_labelTitle || label}
             type="button"
           >
             {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
@@ -171,7 +169,7 @@ export let Decorator = React.forwardRef(
           ref={ref}
           type="button"
         >
-          <span className={`${blockClass}__label`}>
+          <span className={`${blockClass}__label`} title={_labelTitle || label}>
             {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
             {!!label && label}
           </span>
@@ -194,7 +192,7 @@ export let Decorator = React.forwardRef(
           onContextMenu={handleOnContextMenu}
           ref={ref}
         >
-          <span className={`${blockClass}__label`}>
+          <span className={`${blockClass}__label`} title={_labelTitle || label}>
             {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
             {!!label && label}
           </span>
@@ -213,7 +211,7 @@ export let Decorator = React.forwardRef(
         className={cx(classNames, `${blockClass}--default`)}
         ref={ref}
       >
-        <span className={`${blockClass}__label`}>
+        <span className={`${blockClass}__label`} title={_labelTitle || label}>
           {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
           {!!label && label}
         </span>
@@ -259,6 +257,18 @@ Decorator.propTypes = {
    */
   label: PropTypes.string,
   /**
+   * Callback function for building the label's descriptive text for screen readers.
+   *
+   * The default description is in the form of `"(magnitude)" magnitude: score X out of Y"`.
+   * E.g. `"Medium" magnitude: score 5 out of 10`.
+   *
+   * Where `magnitude` is the label associated with the specific score,
+   * X is the `score`, and Y is the last element of the `labelTitle` array.
+   *
+   * If not defined, the title will default to the `label` prop.
+   */
+  labelTitle: PropTypes.func,
+  /**
    * Defining `onClick` will render the entire component as a single button.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
@@ -293,16 +303,6 @@ Decorator.propTypes = {
    * If you don't want to show the icon at all, set `hideIcon={true}`.
    */
   score: PropTypes.number,
-  /**
-   * Callback function for building the score's descriptive text for screen readers.
-   *
-   * The default description is in the form of `"(magnitude)" magnitude: score X out of Y"`.
-   * E.g. `"Medium" magnitude: score 5 out of 10`.
-   *
-   * Where `magnitude` is the label associated with the specific score,
-   * X is the `score`, and Y is the last element of the `scoreDescription` array.
-   */
-  scoreDescription: PropTypes.func,
   /**
    * An array of 4 numbers determines the range of thresholds.
    *

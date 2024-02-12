@@ -62,6 +62,7 @@ const defaultProps = {
   disabled: false,
   hideIcon: false,
   label: 'IP',
+  labelTitle: null,
   score: 5,
   scoreThresholds: [0, 4, 7, 10],
   small: false,

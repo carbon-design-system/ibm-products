@@ -15,7 +15,6 @@
 @use '../../global/styles/mixins';
 
 // Decorator uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by Decorator
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/styles/scss/colors' as *;
@@ -207,29 +206,6 @@ $icon: #{$block-class}-icon;
 
   background-color: $layer-selected-02;
 }
-// SINGLE BUTTON ICON ENHANCED ACCESSIBILITY
-// Add a border on hover & active to increase contrast
-.#{$block-class}--light {
-  &.#{$button}:hover .#{$icon}__magnitude-low,
-  &.#{$button}:active .#{$icon}__magnitude-low {
-    stroke: $yellow-60;
-    stroke-width: 1px;
-  }
-  &.#{$button}:hover .#{$icon}__magnitude-medium,
-  &.#{$button}:active .#{$icon}__magnitude-medium {
-    stroke: $orange-60;
-    stroke-width: 1px;
-  }
-}
-.#{$block-class}--dark {
-  &.#{$button}:hover .#{$icon}__magnitude-high,
-  &.#{$button}:active .#{$icon}__magnitude-high,
-  &.#{$button}:hover .#{$icon}__magnitude-critical,
-  &.#{$button}:active .#{$icon}__magnitude-critical {
-    stroke: $red-40;
-    stroke-width: 1px;
-  }
-}
 .#{$button-disabled} {
   padding: 0;
   border: 0;
@@ -287,29 +263,6 @@ $icon: #{$block-class}-icon;
 .#{$buttons} .#{$value}:active {
   background-color: $layer-hover-02;
 }
-// DUAL BUTTONS ICON ENHANCED ACCESSIBILITY
-// Add a border on hover & active to increase contrast
-.#{$block-class}--light {
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-low,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-low {
-    stroke: $yellow-60;
-    stroke-width: 1px;
-  }
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium {
-    stroke: $orange-60;
-    stroke-width: 1px;
-  }
-}
-.#{$block-class}--dark {
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high,
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-critical,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-critical {
-    stroke: $red-40;
-    stroke-width: 1px;
-  }
-}
 .#{$buttons-disabled} .#{$label} {
   background-color: $layer-02;
   color: $icon-on-color-disabled;
@@ -335,9 +288,6 @@ $icon: #{$block-class}-icon;
   padding: 0 $spacing-03 0 calc($spacing-02 + 1px);
   line-height: 1.333;
 }
-.#{$block-class}--sm .#{$icon} {
-  margin-top: to-rem(2.5px);
-}
 
 //
 // MODIFIER, TRUNCATION
@@ -357,7 +307,7 @@ $icon: #{$block-class}-icon;
 }
 
 //
-// MAGNITUDE ICON COLORS
+// MAGNITUDE ICON COLORS AND SIZES
 //
 .#{$icon}__magnitude-unknown {
   fill: $icon-secondary;
@@ -367,8 +317,6 @@ $icon: #{$block-class}-icon;
 }
 .#{$icon}__magnitude-low {
   fill: $support-warning;
-  // stroke: $yellow-60;
-  // stroke-width: 1px;
 }
 .#{$icon}__magnitude-medium {
   fill: $orange-40;
@@ -381,4 +329,59 @@ $icon: #{$block-class}-icon;
 }
 .#{$block-class}-disabled svg {
   fill: $icon-on-color-disabled;
+}
+
+// MODIFIER, SMALL ICON
+.#{$block-class} .#{$icon}--sm {
+  width: $spacing-04;
+  height: $spacing-04;
+  margin-top: to-rem(2.5px);
+}
+
+// DUAL BUTTONS ICON ENHANCED ACCESSIBILITY
+// Add a border to the icon on hover & active to increase contrast.
+.#{$block-class}--light {
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-low,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-low {
+    stroke: $yellow-60;
+    stroke-width: 1px;
+  }
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium {
+    stroke: $orange-60;
+    stroke-width: 1px;
+  }
+}
+.#{$block-class}--dark {
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high,
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-critical,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-critical {
+    stroke: $red-40;
+    stroke-width: 1px;
+  }
+}
+
+// SINGLE BUTTON ICON ENHANCED ACCESSIBILITY
+// Add a border to the icon on hover & active to increase contrast.
+.#{$block-class}--light {
+  &.#{$button}:hover .#{$icon}__magnitude-low,
+  &.#{$button}:active .#{$icon}__magnitude-low {
+    stroke: $yellow-60;
+    stroke-width: 1px;
+  }
+  &.#{$button}:hover .#{$icon}__magnitude-medium,
+  &.#{$button}:active .#{$icon}__magnitude-medium {
+    stroke: $orange-60;
+    stroke-width: 1px;
+  }
+}
+.#{$block-class}--dark {
+  &.#{$button}:hover .#{$icon}__magnitude-high,
+  &.#{$button}:active .#{$icon}__magnitude-high,
+  &.#{$button}:hover .#{$icon}__magnitude-critical,
+  &.#{$button}:active .#{$icon}__magnitude-critical {
+    stroke: $red-40;
+    stroke-width: 1px;
+  }
 }

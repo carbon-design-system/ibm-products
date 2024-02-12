@@ -36,7 +36,9 @@ const useSelectAllWithToggleComponent = (hooks) => {
 };
 
 const useAddClassNameToSelectRow = (hooks) => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [windowSize, setWindowSize] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : ''
+  );
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize(window.innerWidth);

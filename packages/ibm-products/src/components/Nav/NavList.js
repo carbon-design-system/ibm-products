@@ -17,7 +17,7 @@ import NavItem, { blockClass as navItemBlockClass } from './NavItem';
 import { pkg } from '../../settings';
 
 const componentName = 'NavList';
-const blockClass = `${pkg.prefix}--tag-set`;
+const blockClass = `${pkg.prefix}--nav-list`;
 
 // export const NavList = ({
 //   activeHref = '#',
@@ -72,8 +72,6 @@ export default class NavList extends Component {
 
     const { onClick } = props;
 
-    // return <>This is NavList</>;
-
     return (
       <NavItem
         {...props}
@@ -126,10 +124,8 @@ export default class NavList extends Component {
       [`${blockClass}--expanded`]: open,
     });
 
-    const newChildren = React.Children.map(
-      children,
-      (child, index) => this.buildNewItemChild(child, index)
-      // <>NavList newChildren</>
+    const newChildren = React.Children.map(children, (child, index) =>
+      this.buildNewItemChild(child, index)
     );
 
     return (

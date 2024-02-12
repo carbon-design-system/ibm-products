@@ -21,7 +21,7 @@ import NavItemLink from './NavItemLink';
 import { pkg } from '../../settings';
 
 const componentName = 'NavItem';
-export const blockClass = `${pkg.prefix}--tag-set`;
+export const blockClass = `${pkg.prefix}--nav-item`;
 
 /**
  * Navigation item component.
@@ -137,10 +137,10 @@ export default class NavItem extends Component {
 
     const navItemTabIndex = handleDisabled(tabIndex, -1);
 
-    console.log('Children:', this.props.children);
-    console.log('ClassNames:', this.props.className);
-    console.log('Label:', this.props.label);
-    console.log('Link:', this.props.link);
+    // console.log('Children:', this.props.children);
+    // console.log('ClassNames:', this.props.className);
+    // console.log('Label:', this.props.label);
+    // console.log('Link:', this.props.link);
 
     return (
       // <>NavItem here</>

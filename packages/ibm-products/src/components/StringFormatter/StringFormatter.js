@@ -74,7 +74,7 @@ export let StringFormatter = React.forwardRef(
             {stringFormatterContent}
           </DefinitionTooltip>
         ) : (
-          { stringFormatterContent }
+          stringFormatterContent
         )}
       </span>
     );

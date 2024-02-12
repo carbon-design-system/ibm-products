@@ -97,3 +97,7 @@ $carbon-block-class: #{c4p-settings.$carbon-prefix}--structured-list;
 .#{$block-class}--xs .#{$block-class}__body .#{$block-class}__cell {
   padding: $spacing-02;
 }
+
+.#{$block-class} .#{$carbon-block-class}-row--focused-within {
+  outline: none;
+}

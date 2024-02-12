@@ -80,7 +80,9 @@ let DescriptionList = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <StructuredListWrapper role="table">{children}</StructuredListWrapper>
+        <StructuredListWrapper role="table" selection={false}>
+          {children}
+        </StructuredListWrapper>
       </div>
     );
   }

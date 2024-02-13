@@ -136,8 +136,6 @@ export default class Nav extends Component {
       ...other
     } = this.props;
 
-    // return <>Nav is here</>;
-
     return (
       <nav
         className={classnames(blockClass, className)}
@@ -145,16 +143,9 @@ export default class Nav extends Component {
         {...other}
       >
         {heading && <h1 className={`${blockClass}__heading`}>{heading}</h1>}
-        {/* {<>Hi</>} */}
 
-        {/* child is hello, world */}
-        {/* child.type is undefined */}
-        {/* child.type.displayName is undefined */}
         <ul className={`${blockClass}__wrapper`} role="menubar">
           {React.Children.map(children, (child, index) => {
-            // Log the displayName of each child's type
-            console.log(child);
-
             return child.type?.displayName === NavList.displayName
               ? this.buildNewListChild(child, index)
               : this.buildNewItemChild(child, index);

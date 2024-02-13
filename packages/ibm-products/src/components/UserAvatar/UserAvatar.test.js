@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserAvatar } from '.';
+import { User } from '@carbon/react/icons';
 
 const blockClass = `${pkg.prefix}--user-avatar`;
 const componentName = UserAvatar.displayName;
@@ -33,13 +34,13 @@ describe(componentName, () => {
   });
 
   it('should return an icon for the avatar image', async () => {
-    const { container } = renderComponent();
+    const { container } = renderComponent({ renderIcon: User });
     const renderedSVG = container.getElementsByTagName('svg');
     expect(renderedSVG).toBeTruthy();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+    const { container } = renderComponent({ renderIcon: User });
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });

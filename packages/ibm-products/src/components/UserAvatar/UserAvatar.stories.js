@@ -19,12 +19,11 @@ import {
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
-import { Group, User } from '@carbon/react/icons';
+import { Add, Group, User } from '@carbon/react/icons';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
   size: 'md',
-  renderIcon: User,
 };
 
 export default {
@@ -46,8 +45,8 @@ export default {
       control: {
         type: 'select',
       },
-      options: ['no icon', 'User', 'Group'],
-      mapping: { 'no icon': User, User: User, Group: Group },
+      options: ['no icon', 'User', 'Group', 'Add'],
+      mapping: { 'no icon': User, User: User, Group: Group, Add: Add },
     },
     size: {
       control: {

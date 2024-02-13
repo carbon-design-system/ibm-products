@@ -15,7 +15,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-import { User, Group } from '@carbon/react/icons';
+import { User } from '@carbon/react/icons';
 
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
@@ -46,11 +46,11 @@ const componentName = 'UserAvatar';
  * TODO: A description of the component.
  */
 
-const defaults = {
-  renderIcon: () => <User size={32} />,
-  tooltipAlignment: 'bottom',
-  tooltipText: 'Thomas J. Watson',
-};
+// const defaults = {
+//   renderIcon: () => <User size={32} />,
+//   tooltipAlignment: 'bottom',
+//   size : 'md'
+// };
 
 export let UserAvatar = React.forwardRef(
   (
@@ -60,29 +60,21 @@ export let UserAvatar = React.forwardRef(
       className,
       name,
       /* TODO: add other props for UserAvatar, with default values if needed */
-      renderIcon = defaults.renderIcon,
-      size = 'md',
-      tooltipText = defaults.tooltipText,
-      tooltipAlignment = defaults.tooltipAlignment,
+      renderIcon,
+      size,
+      tooltipText,
+      tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
     const carbonPrefix = usePrefix();
-    const icons = {
-      user: {
-        sm: (props) => <User size={16} {...props} />,
-        md: (props) => <User size={20} {...props} />,
-        lg: (props) => <User size={24} {...props} />,
-        xl: (props) => <User size={32} {...props} />,
-      },
-      group: {
-        sm: (props) => <Group size={16} {...props} />,
-        md: (props) => <Group size={20} {...props} />,
-        lg: (props) => <Group size={24} {...props} />,
-        xl: (props) => <Group size={32} {...props} />,
-      },
+    const iconSize = {
+      sm: 16,
+      md: 20,
+      lg: 24,
+      xl: 32,
     };
     const formatInitials = () => {
       if (name.length === 2) {
@@ -98,14 +90,13 @@ export let UserAvatar = React.forwardRef(
         .toUpperCase();
     };
     const getItem = (renderIcon) => {
-      if (renderIcon === User) {
-        return icons.user[size];
-      } else if (renderIcon === Group) {
-        return icons.group[size];
+      let Iconcomponent = renderIcon;
+      if (renderIcon) {
+        return (props) => <Iconcomponent size={iconSize[size]} {...props} />;
       } else if (name) {
         return formatInitials;
       } else {
-        return icons['user'][size];
+        return (props) => <User size={iconSize[size]} {...props} />;
       }
     };
 
@@ -180,7 +171,7 @@ UserAvatar.propTypes = {
   /**
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Set the size of the avatar circle
    */

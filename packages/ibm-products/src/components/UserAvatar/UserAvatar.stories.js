@@ -19,9 +19,12 @@ import {
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
+import { User } from '@carbon/react/icons';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
+  size: 'md',
+  renderIcon: User,
 };
 
 export default {
@@ -38,6 +41,9 @@ export default {
         type: 'select',
       },
       options: ['light-cyan', 'dark-cyan'],
+    },
+    renderIcon: {
+      control: false,
     },
     size: {
       control: {

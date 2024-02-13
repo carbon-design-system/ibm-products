@@ -1,3 +1,4 @@
+//cspell: disable
 /**
  * Copyright IBM Corp. 2024, 2024
  *

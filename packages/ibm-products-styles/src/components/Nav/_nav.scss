@@ -17,17 +17,8 @@
 @use '@carbon/styles/scss/utilities';
 
 // Other Carbon settings if needed
-// @import '@carbon/layout/scss/mini-unit';
 @import '@carbon/themes/scss/tokens';
 @import '@carbon/type/scss/styles';
-
-// @import 'carbon-components/scss/globals/scss/helper-mixins';
-// @import 'carbon-components/scss/globals/scss/layout';
-
-// @import '../../globals/motion/index';
-// @import '../../globals/rtl/index';
-
-// Nav uses the following Carbon for IBM Products components:
 
 $block-class: #{c4p-settings.$pkg-prefix}--nav;
 $nav-list-block-class: #{c4p-settings.$pkg-prefix}--nav-list;
@@ -35,8 +26,6 @@ $nav-item-block-class: #{c4p-settings.$pkg-prefix}--nav-item;
 
 $nav__heading: '#{&}__heading';
 $nav__wrapper: '#{&}__wrapper';
-// $nav__list: '#{&}__list';
-// $nav__item: '#{$nav__list}__item';
 
 /// Icon position.
 /// @type Length
@@ -44,8 +33,6 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
 .#{$block-class} {
   position: relative;
-  // border-bottom: 1px solid $border-subtle;
-  // background-color: $layer;
 }
 
 .#{$block-class}:not(:first-of-type) {
@@ -123,7 +110,6 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   }
 
   &__icon {
-    // @include transition($transition-property: transform);
     transition-duration: 240ms;
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -158,17 +144,6 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   }
 }
 
-// .#{$nav-list-block-class}:focus {
-//   outline: 0;
-//   outline-width: 0;
-
-//   .#{$nav-item-block-class} {
-//     .#{$nav-item-block-class}__link {
-//       @include utilities.focus-outline('outline');
-//     }
-//   }
-// }
-
 // Navigation items.
 .#{$nav-item-block-class} {
   @include type.type-style('body-short-01');
@@ -181,7 +156,6 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   }
 
   &::before {
-    // @include transition($transition-property: transform);
     transition-property: transform;
     position: absolute;
     // z-index: z($layer: floating);
@@ -240,7 +214,6 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
   // Navigation item link.
   &__link {
-    // @include transition($transition-property: background-color);
     transition-property: background-color;
 
     position: relative;

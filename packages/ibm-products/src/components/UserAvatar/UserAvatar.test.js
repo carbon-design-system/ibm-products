@@ -72,7 +72,7 @@ describe(componentName, () => {
   });
 
   it('should return appropriately size circle based on size prop', async () => {
-    renderComponent();
+    renderComponent({ size: 'md' });
     const element = screen.getByRole('img');
     const hasSizeClass = element.className.includes('md');
     expect(hasSizeClass).toBeTruthy();

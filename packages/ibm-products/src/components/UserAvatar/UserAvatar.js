@@ -46,12 +46,6 @@ const componentName = 'UserAvatar';
  * TODO: A description of the component.
  */
 
-// const defaults = {
-//   renderIcon: () => <User size={32} />,
-//   tooltipAlignment: 'bottom',
-//   size : 'md'
-// };
-
 export let UserAvatar = React.forwardRef(
   (
     {

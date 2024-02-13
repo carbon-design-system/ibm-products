@@ -16,7 +16,7 @@ export const DatagridSlug = forwardRef(({ slug }, ref) => {
     });
     return normalizedSlug;
   }
-  return;
+  return null;
 });
 
 DatagridSlug.propTypes = {

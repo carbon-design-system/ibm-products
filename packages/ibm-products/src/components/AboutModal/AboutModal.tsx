@@ -137,8 +137,8 @@ export let AboutModal = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const [hasScrollingContent, setHasScrollingContent] = useState(true);
-    const bodyRef = useRef();
-    const contentRef = useRef();
+    const bodyRef = useRef<HTMLElement>();
+    const contentRef = useRef<HTMLDivElement>();
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
 

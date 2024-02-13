@@ -47,9 +47,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
 .#{$block-class}__error-svg-container {
   display: flex;
   height: 100%;
-  margin: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
+  padding: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
   @include breakpoint(md) {
-    margin: auto $spacing-03 $spacing-11 $spacing-03;
+    padding: auto $spacing-03 $spacing-11 $spacing-03;
   }
 }
 

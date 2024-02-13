@@ -23,7 +23,7 @@ import { pkg /*, carbon */ } from '../../settings';
 
 // Other standard imports.
 import { clamp } from 'lodash';
-import { ArrowRight } from '@carbon/icons-react'; //Close16
+import { ArrowRight } from '@carbon/react/icons';
 import {
   Button,
   Column,

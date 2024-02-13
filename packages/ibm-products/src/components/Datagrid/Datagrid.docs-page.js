@@ -1,9 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+
 import * as stories from './Datagrid.stories';
 import toolbarScreenshot from './storybook-assets/datagrid-actions-example.png';
 
-export const DocsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
@@ -475,3 +476,5 @@ return <Datagrid datagridState={datagridState} />;
     ]}
   />
 );
+
+export default DocsPage;

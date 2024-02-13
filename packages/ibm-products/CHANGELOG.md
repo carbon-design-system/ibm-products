@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.25.0...@carbon/ibm-products@2.26.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* **Datagrid:** changes getRowId parameter to original row data ([#4302](https://github.com/carbon-design-system/ibm-products/issues/4302)) ([ec1a422](https://github.com/carbon-design-system/ibm-products/commit/ec1a422c52b253758150965b05fd976995f7b01f))
+* **Datagrid:** ssr fix in select all toggle hook ([#4316](https://github.com/carbon-design-system/ibm-products/issues/4316)) ([ec82821](https://github.com/carbon-design-system/ibm-products/commit/ec828216653fb8231c3eea67e49b4a0a24d859e7))
+* render Datagrid docs as expected ([#4314](https://github.com/carbon-design-system/ibm-products/issues/4314)) ([7a9a83b](https://github.com/carbon-design-system/ibm-products/commit/7a9a83bfc81764176abe04d4eed588be63b28615))
+* **Tearsheet:** implement focus trapping within tearsheets ([#4129](https://github.com/carbon-design-system/ibm-products/issues/4129)) ([3403941](https://github.com/carbon-design-system/ibm-products/commit/340394128073cbab4979d411ab9caa5419e82d1c))
+* use flex-start instead of start and update `DatagridSlug` return ([#4307](https://github.com/carbon-design-system/ibm-products/issues/4307)) ([54112ea](https://github.com/carbon-design-system/ibm-products/commit/54112ea5eb119fe2fed7f62d97307d28c4367d30))
+* **UserAvatar:** improve interactions ([#4298](https://github.com/carbon-design-system/ibm-products/issues/4298)) ([d27dd07](https://github.com/carbon-design-system/ibm-products/commit/d27dd07ce98f9d060116e11e9a0e2ebc64d22a3b))
+
+
+### Features
+
+* **Datagrid:** add ai slug support for rows ([#4229](https://github.com/carbon-design-system/ibm-products/issues/4229)) ([3fd6ca3](https://github.com/carbon-design-system/ibm-products/commit/3fd6ca34c7451d72335807f74114cfe8dbf62741))
+* **FullPageError:** added support for 403 and 404 variants ([#4304](https://github.com/carbon-design-system/ibm-products/issues/4304)) ([4cd99ea](https://github.com/carbon-design-system/ibm-products/commit/4cd99ea17cd223a5fd9bbcc5a5d00bc3f96cb6d8))
+
+
+
+
+
 # [2.25.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.24.0...@carbon/ibm-products@2.25.0) (2024-02-09)
 
 

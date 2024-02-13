@@ -120,6 +120,17 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     );
   };
 
+  const onCancelHandler = () => {
+    handleSelectAllRowData({
+      dispatch,
+      rows: [],
+      getRowId,
+      isChecked: false
+    });
+    toggleAllRowsSelected(false);
+    setGlobalFilter(null);
+  };
+
   // Only display the first two batch actions, the rest are
   // displayed inside of the ButtonMenu if there are more than
   // 3 batch actions
@@ -127,10 +138,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
-      onCancel={() => {
-        toggleAllRowsSelected(false);
-        setGlobalFilter(null);
-      }}
+      onCancel={onCancelHandler}
       translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&

@@ -21,11 +21,27 @@ import { Restart } from '@carbon/react/icons';
 const blockClass = `${pkg.prefix}--status-indicator`;
 const componentName = 'StatusIndicator';
 
+const defaults = {
+  retryLabel: 'Retry',
+  showRetry: false,
+};
+
 /**
  * A list of icon/description pairs used to show multiple states of progress.
  */
 export let StatusIndicator = React.forwardRef(
-  ({ children, className, onRetry, retryLabel, title, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      onRetry,
+      retryLabel = defaults.retryLabel,
+      showRetry = defaults.showRetry,
+      title,
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <div
         {...rest}
@@ -35,7 +51,7 @@ export let StatusIndicator = React.forwardRef(
       >
         {title && <h1 className={`${blockClass}__title`}>{title}</h1>}
         <ul className={`${blockClass}__list`}>{children}</ul>
-        {onRetry && retryLabel && (
+        {showRetry && onRetry && retryLabel && (
           <Button
             className={`${blockClass}__button--retry`}
             kind="ghost"
@@ -72,16 +88,18 @@ StatusIndicator.propTypes = {
   className: PropTypes.string,
   /**
    * Optional callback function appears as a button at the bottom of the list.
-   *
-   * This and `retryLabel` must both be defined for the button to appear.
    */
   onRetry: PropTypes.func,
   /**
    * The text for the retry button at the bottom of the list.
-   *
-   * This and `onRetry` must both be defined for the button to appear.
    */
   retryLabel: PropTypes.string,
+  /**
+   * Set to `true` to show the retry button.
+   *
+   * `retryLabel` and `onRetry` must both be defined.
+   */
+  showRetry: PropTypes.bool,
   /**
    * The title that appears at the top of the list of indicators.
    */

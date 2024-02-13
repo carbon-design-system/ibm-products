@@ -156,10 +156,10 @@ const TemplateSuccessAsync = (args) => {
     }, 2000);
     const timer4 = setTimeout(() => {
       setStatuses(['finished', 'finished', 'active', 'finished']);
-    }, 4000);
+    }, 3000);
     const timer5 = setTimeout(() => {
       setStatuses(['finished', 'finished', 'finished', 'finished']);
-    }, 4500);
+    }, 4000);
 
     return () => {
       clearTimeout(timer1);
@@ -187,7 +187,6 @@ const TemplateSuccessAsync = (args) => {
 };
 
 const TemplateFail = (args) => {
-  const { retryLabel, ...rest } = args;
   const [isError, setIsError] = useState(false);
   const [statuses, setStatuses] = useState([
     'inactive',
@@ -225,14 +224,14 @@ const TemplateFail = (args) => {
 
   return (
     <StatusIndicator
-      {...rest}
+      {...args}
       onRetry={(event) => {
         action('onRetry')(event);
         setIsError(false);
         setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
         runDemo();
       }}
-      retryLabel={isError && retryLabel}
+      showRetry={isError}
     >
       {statuses.map((status, i) => {
         return (
@@ -249,6 +248,7 @@ const TemplateFail = (args) => {
 };
 
 const TemplateFailAsync = (args) => {
+  const [isError, setIsError] = useState(false);
   const [statuses, setStatuses] = useState([
     'inactive',
     'inactive',
@@ -256,7 +256,7 @@ const TemplateFailAsync = (args) => {
     'inactive',
   ]);
 
-  useEffect(() => {
+  const runDemo = () => {
     const timer1 = setTimeout(() => {
       setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
     }, 300);
@@ -271,6 +271,7 @@ const TemplateFailAsync = (args) => {
     }, 3000);
     const timer5 = setTimeout(() => {
       setStatuses(['error', 'finished', 'finished', 'error']);
+      setIsError(true);
     }, 4000);
 
     return () => {
@@ -280,10 +281,23 @@ const TemplateFailAsync = (args) => {
       clearTimeout(timer4);
       clearTimeout(timer5);
     };
+  };
+
+  useEffect(() => {
+    runDemo();
   }, []);
 
   return (
-    <StatusIndicator {...args}>
+    <StatusIndicator
+      {...args}
+      onRetry={(event) => {
+        action('onRetry')(event);
+        setIsError(false);
+        setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+        runDemo();
+      }}
+      showRetry={isError}
+    >
       {statuses.map((status, i) => {
         return (
           <StatusIndicatorStep
@@ -316,7 +330,6 @@ export const statusIndicator = prepareStory(Template, {
     onRetry: (event) => {
       action('onRetry')(event);
     },
-    retryLabel: 'Retry',
     title: 'List of states available',
   },
 });
@@ -327,21 +340,26 @@ export const success = prepareStory(TemplateSuccess, {
   },
 });
 
+export const fail = prepareStory(TemplateFail, {
+  args: {
+    onRetry: (event) => {
+      action('onRetry')(event);
+    },
+    title: 'Fail, synchronous',
+  },
+});
+
 export const successAsync = prepareStory(TemplateSuccessAsync, {
   args: {
     title: 'Success, asynchronous',
   },
 });
 
-export const fail = prepareStory(TemplateFail, {
-  args: {
-    retryLabel: 'Retry',
-    title: 'Fail, synchronous',
-  },
-});
 export const failAsync = prepareStory(TemplateFailAsync, {
   args: {
-    retryLabel: 'Retry',
+    onRetry: (event) => {
+      action('onRetry')(event);
+    },
     title: 'Fail, asynchronous',
   },
 });

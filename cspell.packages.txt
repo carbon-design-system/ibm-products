@@ -10,9 +10,11 @@ flatpickr
 kube
 kubernetes
 markdownlint
+pageview
 plex
 storysource
 stylelint
+tealium
 technote
 unhover
 wcag

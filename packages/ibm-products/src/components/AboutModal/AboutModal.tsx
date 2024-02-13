@@ -137,26 +137,29 @@ export let AboutModal = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const [hasScrollingContent, setHasScrollingContent] = useState(true);
-    const bodyRef = useRef<HTMLElement>();
-    const contentRef = useRef<HTMLDivElement>();
+    const bodyRef = useRef<HTMLElement | null | undefined>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
     const handleResize = () => {
+      if (!bodyRef.current?.clientHeight) {
+        return;
+      }
       setHasScrollingContent(
         // if our scroll height exceeds the client height enable scrolling
-        bodyRef.current.clientHeight <
+        bodyRef.current?.clientHeight <
           (hasScrollingContent
             ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
-              bodyRef.current.scrollHeight - 32
-            : bodyRef.current.scrollHeight)
+              bodyRef.current?.scrollHeight - 32
+            : bodyRef.current?.scrollHeight)
       );
     };
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
     useEffect(() => {
-      bodyRef.current = contentRef.current.parentElement;
+      bodyRef.current = contentRef.current?.parentElement;
     }, [bodyRef]);
 
     // Detect resize of the ModalBody to recalculate whether scrolling is enabled
@@ -184,8 +187,8 @@ export let AboutModal = React.forwardRef(
           labelClassName={`${blockClass}__title`}
         />
         <ModalBody
-          aria-label={hasScrollingContent ? '' : null}
-          aria-labelledby={hasScrollingContent ? contentId : null}
+          aria-label={hasScrollingContent ? '' : undefined}
+          aria-labelledby={hasScrollingContent ? contentId : undefined}
           className={`${blockClass}__body`}
           hasScrollingContent={hasScrollingContent}
         >

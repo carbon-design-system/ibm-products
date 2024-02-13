@@ -11,7 +11,7 @@ import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
-import { ColumnHeaderSlug } from './Datagrid/addons/Slug/ColumnHeaderSlug';
+import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -119,7 +119,7 @@ const useSortableColumns = (hooks) => {
             renderIcon={(props) => {
               return (
                 <>
-                  <ColumnHeaderSlug slug={headerProp?.column?.slug} />
+                  <DatagridSlug slug={headerProp?.column?.slug} />
                   {icon(headerProp?.column, props)}
                 </>
               );

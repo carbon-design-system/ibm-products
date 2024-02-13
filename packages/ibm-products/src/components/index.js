@@ -106,3 +106,4 @@ export { DelimitedList } from './DelimitedList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
 export { StatusIndicator, StatusIndicatorStep } from './StatusIndicator';
+export { UserAvatar } from './UserAvatar';

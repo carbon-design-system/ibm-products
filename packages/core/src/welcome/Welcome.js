@@ -8,7 +8,7 @@
 import React, { useRef, useState } from 'react';
 import PackageInfo from '../../../ibm-products/package.json';
 import { Link, Tag } from '@carbon/react';
-import { ArrowRight, Pause, Play } from '@carbon/icons-react';
+import { ArrowRight, Pause, Play } from '@carbon/react/icons';
 import lottie from 'lottie-web';
 import WelcomeLottie from './welcome-lottie.json';
 

@@ -8,7 +8,7 @@
 import React, { forwardRef, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 
-export const ColumnHeaderSlug = forwardRef(({ slug }, ref) => {
+export const DatagridSlug = forwardRef(({ slug }, ref) => {
   if (slug && isValidElement(slug)) {
     const normalizedSlug = React.cloneElement(slug, {
       size: 'mini',
@@ -16,10 +16,10 @@ export const ColumnHeaderSlug = forwardRef(({ slug }, ref) => {
     });
     return normalizedSlug;
   }
-  return;
+  return null;
 });
 
-ColumnHeaderSlug.propTypes = {
+DatagridSlug.propTypes = {
   /**
    * Specify the AI slug to be displayed
    */

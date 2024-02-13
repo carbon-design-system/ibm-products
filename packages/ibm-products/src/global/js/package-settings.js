@@ -84,6 +84,7 @@ const defaults = {
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
     SearchBar: false,
+    UserAvatar: false,
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:

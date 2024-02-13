@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--status-indicator;
+$block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
+
+.#{$block-class}__title {
+  @include type-style('heading-02');
+}
+
+// Duplicate <InlineLoading> styling for new "incomplete".
+.#{$block-class-step}--inline-loading {
+  @include type-style('label-01');
+
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: $spacing-07;
+}
+.#{$block-class-step}__animation {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: $spacing-03;
+}
+
+.#{$block-class-step}__error-message {
+  @include type-style('label-01');
+
+  margin-bottom: $spacing-03;
+  margin-left: $spacing-06;
+  color: $support-error;
+}
+
+.#{$block-class}__button--retry {
+  align-items: center;
+}
+.#{$block-class} .#{$block-class}__button--retry:not([disabled]) svg {
+  margin-left: $spacing-02;
+  fill: currentColor;
+}

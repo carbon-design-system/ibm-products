@@ -1,0 +1,89 @@
+/**
+ * Copyright IBM Corp. 2024, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+
+// Carbon and package components we use.
+import { Button } from '@carbon/react';
+import { Restart } from '@carbon/react/icons';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--status-indicator`;
+const componentName = 'StatusIndicator';
+
+/**
+ * A list of icon/description pairs used to show multiple states of progress.
+ */
+export let StatusIndicator = React.forwardRef(
+  ({ children, className, onRetry, retryLabel, title, ...rest }, ref) => {
+    return (
+      <div
+        {...rest}
+        className={cx(blockClass, className)}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      >
+        {title && <h1 className={`${blockClass}__title`}>{title}</h1>}
+        <ul className={`${blockClass}__list`}>{children}</ul>
+        {onRetry && retryLabel && (
+          <Button
+            className={`${blockClass}__button--retry`}
+            kind="ghost"
+            onClick={onRetry}
+            onKeyUp={onRetry}
+            renderIcon={() => <Restart size={16} />}
+          >
+            {retryLabel}
+          </Button>
+        )}
+      </div>
+    );
+  }
+);
+
+// Return a placeholder if not released and not enabled by feature flag
+StatusIndicator = pkg.checkComponentEnabled(StatusIndicator, componentName);
+
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+StatusIndicator.displayName = componentName;
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
+StatusIndicator.propTypes = {
+  /**
+   * Provide the contents of the StatusIndicator.
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+  /**
+   * Optional callback function appears as a button at the bottom of the list.
+   *
+   * This and `retryLabel` must both be defined for the button to appear.
+   */
+  onRetry: PropTypes.func,
+  /**
+   * The text for retry button at the bottom of the list.
+   *
+   * This and `onRetry` must both be defined for the button to appear.
+   */
+  retryLabel: PropTypes.string,
+  /**
+   * The title that appears at the top of the list of indicators.
+   */
+  title: PropTypes.string,
+};

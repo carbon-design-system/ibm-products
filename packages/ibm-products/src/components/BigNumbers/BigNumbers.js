@@ -26,7 +26,7 @@ import {
   BigNumbersSize,
   DefaultLocale,
   Characters,
-} from './utils';
+} from './constants';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--big-numbers`;

@@ -12,7 +12,7 @@ import { Edit } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { BigNumbers } from '.';
-import { BigNumbersSize } from './utils';
+import { BigNumbersSize } from './constants';
 
 const blockClass = `${pkg.prefix}--big-numbers`;
 const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;

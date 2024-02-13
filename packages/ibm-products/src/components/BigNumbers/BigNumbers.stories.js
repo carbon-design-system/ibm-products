@@ -16,7 +16,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { BigNumbers } from '.';
-import { BigNumbersSize } from './utils';
+import { BigNumbersSize } from './constants';
 
 import mdx from './BigNumbers.mdx';
 

@@ -121,7 +121,7 @@ export default class NavList extends Component {
     const { open } = this.state;
 
     const classNames = classnames(blockClass, className, {
-      [`${blockClass}--expanded`]: open,
+      [`${navItemBlockClass}--expanded`]: open,
     });
 
     const newChildren = React.Children.map(children, (child, index) =>
@@ -136,15 +136,15 @@ export default class NavList extends Component {
         onKeyPress={this.toggle}
         role="menuitem"
       >
-        <div className={`${blockClass}__link`}>
+        <div className={`${navItemBlockClass}__link`}>
           {icon && (
             <img
               alt={navigationItemTitle}
-              className={`${blockClass}__img`}
+              className={`${navItemBlockClass}__img`}
               src={icon}
             />
           )}
-          <div className={`${blockClass}__content`}>{title}</div>
+          <div className={`${navItemBlockClass}__content`}>{title}</div>
           <ChevronDown className={`${blockClass}__icon`} />
         </div>
         <ul

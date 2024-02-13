@@ -6,20 +6,284 @@
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
+@use '@carbon/styles/scss/utilities';
 
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
-// or
-// TODO: @use '@carbon/react/scss/grid';
+// @import '@carbon/layout/scss/mini-unit';
+@import '@carbon/themes/scss/tokens';
+@import '@carbon/type/scss/styles';
+
+// @import 'carbon-components/scss/globals/scss/helper-mixins';
+// @import 'carbon-components/scss/globals/scss/layout';
+
+// @import '../../globals/motion/index';
+// @import '../../globals/rtl/index';
 
 // Nav uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by Nav
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--nav;
+$nav-list-block-class: #{c4p-settings.$pkg-prefix}--nav-list;
+$nav-item-block-class: #{c4p-settings.$pkg-prefix}--nav-item;
 
-// .#{$block-class} {
-//   // TODO: Styles.
+$nav__heading: '#{&}__heading';
+$nav__wrapper: '#{&}__wrapper';
+// $nav__list: '#{&}__list';
+// $nav__item: '#{$nav__list}__item';
+
+/// Icon position.
+/// @type Length
+$nav__icon__position: translate3d(-50%, 0, 0);
+
+.#{$block-class} {
+  position: relative;
+  // border-bottom: 1px solid $border-subtle;
+  // background-color: $layer;
+}
+
+.#{$block-class}:not(:first-of-type) {
+  padding-top: $spacing-05;
+}
+
+.#{$block-class}:not(:last-of-type) {
+  padding-bottom: $spacing-05;
+}
+
+.#{$block-class}:last-of-type {
+  padding-bottom: $spacing-07;
+}
+
+.#{$block-class} + .#{$block-class} > .#{$nav__heading} {
+  padding-top: $spacing-02;
+}
+
+.#{$block-class}::before {
+  position: absolute;
+  right: $spacing-07;
+  bottom: 0;
+  left: $spacing-07;
+  display: inline-block;
+  width: auto;
+  border-bottom: to-rem(1px) solid $layer-02;
+  content: '';
+}
+
+.#{$block-class}:last-of-type::before {
+  border-width: 0;
+}
+
+.#{$block-class}__wrapper {
+  padding-left: unset;
+  margin-top: unset;
+  margin-bottom: unset;
+  list-style: none;
+
+  // @include rtl {
+  //   padding-right: unset;
+  // }
+}
+
+.#{$block-class}__heading {
+  @include type.type-style('caption-01');
+  padding: $spacing-04 $spacing-08;
+  margin-top: unset;
+  margin-bottom: unset;
+  color: $text-secondary;
+}
+
+// Navigation lists.
+.#{$nav-list-block-class} {
+  $list: &;
+
+  @include type.type-style('body-short-01');
+
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+
+  &,
+  &__item {
+    margin-bottom: $spacing-01;
+  }
+
+  &:focus {
+    outline: 0;
+    outline-width: 0;
+
+    > .#{$nav-item-block-class}__link {
+      @include utilities.focus-outline('outline');
+    }
+  }
+
+  &__icon {
+    // @include transition($transition-property: transform);
+    transition-duration: 240ms;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+    margin-top: $spacing-01;
+    margin-left: auto;
+    transform: $nav__icon__position rotate(0deg);
+    // @include rtl {
+    //   right: $spacing-02;
+    //   transform: $nav__icon__position rotate(180deg);
+    // }
+  }
+
+  &--nested {
+    transition-duration: 240ms;
+    $transition-property: (max-height, opacity);
+
+    overflow: hidden;
+
+    max-height: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+    opacity: 0;
+
+    // @include rtl {
+    //   padding-right: 0;
+    //   padding-left: unset;
+    // }
+
+    > #{$nav-item-block-class}:last-of-type {
+      margin-bottom: $spacing-03;
+    }
+  }
+}
+
+// .#{$nav-list-block-class}:focus {
+//   outline: 0;
+//   outline-width: 0;
+
+//   .#{$nav-item-block-class} {
+//     .#{$nav-item-block-class}__link {
+//       @include utilities.focus-outline('outline');
+//     }
+//   }
 // }
+
+// Navigation items.
+.#{$nav-item-block-class} {
+  @include type.type-style('body-short-01');
+
+  position: relative;
+
+  // Content including text and sometimes a product icon.
+  &__content {
+    display: flex;
+  }
+
+  &::before {
+    // @include transition($transition-property: transform);
+    transition-property: transform;
+    position: absolute;
+    // z-index: z($layer: floating);
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+    width: to-rem(4px);
+    height: 100%;
+    background-color: transparent;
+    content: '';
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    > #{$nav-item-block-class}__link {
+      color: $text-on-color-disabled;
+    }
+  }
+
+  &--active {
+    @include font-family.font-weight('semibold');
+
+    // @include rtl {
+    //   &::before {
+    //     transform: translate3d(0, 0, 0);
+    //   }
+    // }
+
+    &::before {
+      background-color: $background-brand;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  // Expanded navigation list.
+  &--expanded {
+    margin-bottom: $spacing-03;
+
+    > .#{$nav-list-block-class}--nested {
+      max-height: to-rem(320px);
+      opacity: 1;
+      transition-timing-function: $ease-in;
+    }
+
+    > .#{$nav-item-block-class}__link > .#{$nav-list-block-class}__icon {
+      transform: $nav__icon__position rotate(180deg);
+
+      // @include rtl {
+      //   transform: $nav__icon__position rotate(0);
+      // }
+    }
+  }
+
+  // Navigation item link.
+  &__link {
+    // @include transition($transition-property: background-color);
+    transition-property: background-color;
+
+    position: relative;
+    display: flex;
+    padding: $spacing-03 $spacing-02 $spacing-03 $spacing-08;
+    color: $text-primary;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: $layer-02;
+    }
+
+    &:focus {
+      @include utilities.focus-outline('outline');
+    }
+  }
+
+  &__img {
+    height: to-rem(20px);
+    margin-right: $spacing-04;
+    margin-left: -$spacing-07;
+  }
+
+  &__link--external {
+    /// External link icon selector.
+    /// @type String
+    $nav__item__link--external__icon: '#{&}__icon';
+
+    #{$nav__item__link--external__icon} {
+      flex-shrink: 0;
+      align-self: center;
+      margin-left: $spacing-02;
+      fill: $text-primary;
+      opacity: 0;
+    }
+
+    &:hover,
+    &:focus {
+      > #{$nav__item__link--external__icon} {
+        opacity: 1;
+      }
+    }
+  }
+}

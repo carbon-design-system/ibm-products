@@ -62,8 +62,128 @@ const steps = [
   },
 ];
 
+const stepsAsync = [
+  {
+    description: 'Upload profile photo for "new.employee@corp.com"',
+    errorMessage:
+      'Upload failed, image dimensions must be at least 400 x 400 pixels.',
+  },
+  {
+    description: 'Add to group "Analyst, level 1"',
+    errorMessage: 'Failed to add user to group, Error code 0xD65E7A04',
+  },
+  {
+    description: 'Update business address to ID "CA3577"',
+    errorMessage: 'Update failed, Error code 0x868EF3E6',
+  },
+  {
+    description: 'Update manager to "dev.lead@corp.com"',
+    errorMessage: 'Failed to update manager, Error code 0xB13512FD',
+  },
+];
+
 const Template = (args) => {
   return <StatusIndicator {...args} />;
+};
+
+const TemplateSuccess = (args) => {
+  const [statuses, setStatuses] = useState([
+    'inactive',
+    'inactive',
+    'inactive',
+    'inactive',
+  ]);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setStatuses(['active', 'inactive', 'inactive', 'inactive']);
+    }, 300);
+    const timer2 = setTimeout(() => {
+      setStatuses(['finished', 'active', 'inactive', 'inactive']);
+    }, 1000);
+    const timer3 = setTimeout(() => {
+      setStatuses(['finished', 'finished', 'active', 'inactive']);
+    }, 2000);
+    const timer4 = setTimeout(() => {
+      setStatuses(['finished', 'finished', 'finished', 'active']);
+    }, 4000);
+    const timer5 = setTimeout(() => {
+      setStatuses(['finished', 'finished', 'finished', 'finished']);
+    }, 4300);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(timer5);
+    };
+  }, []);
+
+  return (
+    <StatusIndicator {...args}>
+      {statuses.map((status, i) => {
+        return (
+          <StatusIndicatorStep
+            key={i}
+            errorMessage={steps[i].errorMessage}
+            description={steps[i].description}
+            status={status}
+          />
+        );
+      })}
+    </StatusIndicator>
+  );
+};
+
+const TemplateSuccessAsync = (args) => {
+  const [statuses, setStatuses] = useState([
+    'inactive',
+    'inactive',
+    'inactive',
+    'inactive',
+  ]);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+    }, 300);
+    const timer2 = setTimeout(() => {
+      setStatuses(['active', 'active', 'active', 'inactive']);
+    }, 1000);
+    const timer3 = setTimeout(() => {
+      setStatuses(['active', 'finished', 'active', 'active']);
+    }, 2000);
+    const timer4 = setTimeout(() => {
+      setStatuses(['finished', 'finished', 'active', 'finished']);
+    }, 4000);
+    const timer5 = setTimeout(() => {
+      setStatuses(['finished', 'finished', 'finished', 'finished']);
+    }, 4500);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(timer5);
+    };
+  }, []);
+
+  return (
+    <StatusIndicator {...args}>
+      {statuses.map((status, i) => {
+        return (
+          <StatusIndicatorStep
+            key={i}
+            errorMessage={stepsAsync[i].errorMessage}
+            description={stepsAsync[i].description}
+            status={status}
+          />
+        );
+      })}
+    </StatusIndicator>
+  );
 };
 
 const TemplateFail = (args) => {
@@ -128,7 +248,7 @@ const TemplateFail = (args) => {
   );
 };
 
-const TemplateSuccess = (args) => {
+const TemplateFailAsync = (args) => {
   const [statuses, setStatuses] = useState([
     'inactive',
     'inactive',
@@ -138,20 +258,20 @@ const TemplateSuccess = (args) => {
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
-      setStatuses(['active', 'inactive', 'inactive', 'inactive']);
+      setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
     }, 300);
     const timer2 = setTimeout(() => {
-      setStatuses(['finished', 'active', 'inactive', 'inactive']);
+      setStatuses(['active', 'active', 'inactive', 'active']);
     }, 1000);
     const timer3 = setTimeout(() => {
-      setStatuses(['finished', 'finished', 'active', 'inactive']);
+      setStatuses(['error', 'finished', 'active', 'active']);
     }, 2000);
     const timer4 = setTimeout(() => {
-      setStatuses(['finished', 'finished', 'finished', 'active']);
-    }, 4000);
+      setStatuses(['error', 'finished', 'finished', 'active']);
+    }, 3000);
     const timer5 = setTimeout(() => {
-      setStatuses(['finished', 'finished', 'finished', 'finished']);
-    }, 4300);
+      setStatuses(['error', 'finished', 'finished', 'error']);
+    }, 4000);
 
     return () => {
       clearTimeout(timer1);
@@ -168,8 +288,8 @@ const TemplateSuccess = (args) => {
         return (
           <StatusIndicatorStep
             key={i}
-            errorMessage={steps[i].errorMessage}
-            description={steps[i].description}
+            errorMessage={stepsAsync[i].errorMessage}
+            description={stepsAsync[i].description}
             status={status}
           />
         );
@@ -197,18 +317,31 @@ export const statusIndicator = prepareStory(Template, {
       action('onRetry')(event);
     },
     retryLabel: 'Retry',
-    title: 'Title',
+    title: 'List of states available',
+  },
+});
+
+export const success = prepareStory(TemplateSuccess, {
+  args: {
+    title: 'Success, synchronous',
+  },
+});
+
+export const successAsync = prepareStory(TemplateSuccessAsync, {
+  args: {
+    title: 'Success, asynchronous',
   },
 });
 
 export const fail = prepareStory(TemplateFail, {
   args: {
     retryLabel: 'Retry',
-    title: 'Failure demo',
+    title: 'Fail, synchronous',
   },
 });
-export const success = prepareStory(TemplateSuccess, {
+export const failAsync = prepareStory(TemplateFailAsync, {
   args: {
-    title: 'Successful demo',
+    retryLabel: 'Retry',
+    title: 'Fail, asynchronous',
   },
 });

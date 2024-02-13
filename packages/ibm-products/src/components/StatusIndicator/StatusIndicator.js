@@ -77,7 +77,7 @@ StatusIndicator.propTypes = {
    */
   onRetry: PropTypes.func,
   /**
-   * The text for retry button at the bottom of the list.
+   * The text for the retry button at the bottom of the list.
    *
    * This and `onRetry` must both be defined for the button to appear.
    */

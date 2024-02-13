@@ -16,6 +16,8 @@ import { ErrorGenericSVG } from './assets/ErrorGenericSVG';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
+import { Error404SVG } from './assets/Error404SVG';
+import { Error403SVG } from './assets/Error403SVG';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -36,9 +38,9 @@ const componentName = 'FullPageError';
 // or assumption when a prop is not supplied.
 
 // Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
+const defaults = {
+  kind: 'custom',
+};
 
 /**
  * TODO: A description of the component.
@@ -52,6 +54,7 @@ export let FullPageError = React.forwardRef(
       className,
       description,
       errorLabel,
+      kind = defaults.kind,
       title,
       /* TODO: add other props for FullPageError, with default values if needed */
 
@@ -60,6 +63,46 @@ export let FullPageError = React.forwardRef(
     },
     ref
   ) => {
+    const errorData = {
+      403: {
+        title: 'Access denied',
+        description:
+          'You are not authorized to access the requested page. Please verify that you are logged in to the hosting environment and your access permissions are correct.',
+        svg: (
+          <Error403SVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-403`
+            )}
+          />
+        ),
+      },
+      404: {
+        title: 'Page not found',
+        description:
+          'The page you requested has moved or is unavailable, or the specified URL is not valid. Please check the URL or search the site for the requested content.',
+        svg: (
+          <Error404SVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-404`
+            )}
+          />
+        ),
+      },
+      custom: {
+        title: title,
+        description: description,
+        svg: (
+          <ErrorGenericSVG
+            className={cx(
+              `${blockClass}__error-svg`,
+              `${blockClass}__error-custom`
+            )}
+          />
+        ),
+      },
+    };
     return (
       <div
         {
@@ -89,22 +132,18 @@ export let FullPageError = React.forwardRef(
             >
               <h1 className={`${blockClass}__error-title`}>
                 <span className={`${blockClass}__error-label`}>
-                  ↳ {errorLabel}
+                  ↳ {kind === 'custom' ? errorLabel : `Error ${kind}`}
                 </span>
-                <br />
-                <span>{title}</span>
+                <span>{errorData[kind].title}</span>
               </h1>
-              <p className={`${blockClass}__description`}>{description}</p>
+              <p className={`${blockClass}__description`}>
+                {description || errorData[kind].description}
+              </p>
               {children}
             </Column>
             <Column sm={4} md={5} lg={10}>
-              <div
-                style={{
-                  display: 'flex',
-                  height: '100%',
-                }}
-              >
-                <ErrorGenericSVG className={`${blockClass}__error-svg`} />
+              <div className={`${blockClass}__error-svg-container`}>
+                {errorData[kind].svg}
               </div>
             </Column>
           </Grid>
@@ -135,13 +174,18 @@ FullPageError.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * String that will provide the description for the error code
+   * String that will provide the description for the error code. <br/>
+   * This is optional for 403 and 404 kinds, and passing this would override their default descriptions.
    */
   description: PropTypes.string.isRequired,
   /**
    * String that will describe the error that occurred
    */
   errorLabel: PropTypes.string.isRequired,
+  /**
+   * The kind of error page to be displayed, default is custom
+   */
+  kind: PropTypes.oneOf(['custom', '403', '404']),
   /**
    * This will be for the main title of the FullPageError component
    */

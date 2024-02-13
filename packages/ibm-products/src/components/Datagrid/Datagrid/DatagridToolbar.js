@@ -123,12 +123,6 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   };
 
   const onCancelHandler = () => {
-    handleSelectAllRowData({
-      dispatch,
-      rows: [],
-      getRowId,
-      isChecked: false
-    });
     toggleAllRowsSelected(false);
     setGlobalFilter(null);
   };

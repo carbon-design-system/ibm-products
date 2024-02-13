@@ -130,6 +130,14 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     onMouseDown={(event) =>
                       handleOnMouseDownResize(event, header.getResizerProps)
                     }
+                    onMouseUp={() =>
+                      handleColumnResizeEndEvent(
+                        dispatch,
+                        onColResizeEnd,
+                        header.id,
+                        true
+                      )
+                    }
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {

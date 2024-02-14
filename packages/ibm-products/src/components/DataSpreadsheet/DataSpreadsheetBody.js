@@ -267,7 +267,7 @@ export const DataSpreadsheetBody = forwardRef(
     //selectionAreas will be set when ever a selection area is made.
     useEffect(() => {
       removeDuplicateSelections();
-    }, [selectionAreas]);
+    }, [selectionAreas,removeDuplicateSelections]);
 
     //this method will check for any dupplicate selection area and remove.
     //same selections are those have the same height, width, top, left styles. These inline styles are being set in createCellSelection util.
@@ -284,7 +284,7 @@ export const DataSpreadsheetBody = forwardRef(
             selectorEl.remove(); // this is identified as duplicate selwction and hence removing.
           }
         });
-    }, []);
+    }, [ref]);
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight

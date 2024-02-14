@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -27,13 +27,14 @@ import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { APIKeyModalProps } from './APIKeyModal.types';
 
 const componentName = 'APIKeyModal';
 
 // Default values for props
 const defaults = {
   apiKeyName: '',
-  customSteps: Object.freeze([]),
+  customSteps: [],
 };
 
 export let APIKeyModal = forwardRef(
@@ -86,14 +87,14 @@ export let APIKeyModal = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: APIKeyModalProps,
+    ref: React.Ref<HTMLDivElement>
   ) => {
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState<string | null | undefined>(null);
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
-    const copyRef = useRef();
+    const copyRef = useRef<HTMLButtonElement>();
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
     const renderPortalUse = usePortalTarget(portalTargetIn);
@@ -176,7 +177,7 @@ export let APIKeyModal = forwardRef(
     const onCloseHandler = () => {
       setName('');
       setCurrentStep(0);
-      onClose();
+      onClose?.();
     };
 
     const submitHandler = async (e) => {
@@ -195,9 +196,9 @@ export let APIKeyModal = forwardRef(
           }
         }
       } else if (editing) {
-        onRequestEdit(name);
+        onRequestEdit?.(name);
       } else {
-        onRequestGenerate(name);
+        onRequestGenerate?.(name);
       }
     };
 
@@ -248,7 +249,7 @@ export let APIKeyModal = forwardRef(
                 />
               )}
               {(editing || (!apiKeyLoaded && nameRequired)) && (
-                <Form onSubmit={submitHandler} aria-label={title}>
+                <Form onSubmit={submitHandler} aria-label={title ?? undefined}>
                   <TextInput
                     helperText={nameHelperText}
                     placeholder={namePlaceholder}

@@ -40,15 +40,11 @@ interface APIKeyModalCommonProps {
   /**
    * if you need more options for key creation beyond just the name use custom steps to obtain whatever data is required.
    */
-  customSteps?: Array<
-    | {
-        valid?: boolean | undefined | null;
-        content?: ReactNode | undefined | null;
-        title?: string | undefined | null;
-      }
-    | undefined
-    | null
-  >;
+  customSteps?: Array<{
+    valid?: boolean;
+    content?: ReactNode;
+    title?: string;
+  }>;
   /**
    * designates if the modal is in the edit mode
    */
@@ -154,15 +150,11 @@ type CustomStepConditionalProps = {
   /**
    * if you need more options for key creation beyond just the name use custom steps to obtain whatever data is required.
    */
-  customSteps?: Array<
-    | {
-        valid?: boolean | undefined | null;
-        content?: ReactNode | undefined | null;
-        title?: string | undefined | null;
-      }
-    | undefined
-    | null
-  >;
+  customSteps?: Array<{
+    valid?: boolean;
+    content?: ReactNode;
+    title?: string;
+  }>;
   /**
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */

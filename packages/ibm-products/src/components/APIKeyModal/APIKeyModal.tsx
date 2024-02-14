@@ -374,6 +374,7 @@ APIKeyModal.propTypes = {
   /**
    * if you need more options for key creation beyond just the name use custom steps to obtain whatever data is required.
    */
+  /**@ts-ignore*/
   customSteps: PropTypes.arrayOf(
     PropTypes.shape({
       /**

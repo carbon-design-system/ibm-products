@@ -118,8 +118,8 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       if (loading) {
         return true;
       }
-      if (hasSteps && 'valid' in customSteps[currentStep]) {
-        return !customSteps[currentStep].valid;
+      if (hasSteps && 'valid' in (customSteps?.[currentStep] || [])) {
+        return !customSteps[currentStep]?.valid;
       }
       if (!hasSteps && nameRequired && !name) {
         return true;
@@ -153,7 +153,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       } else if (apiKeyLoaded) {
         setTitle(generateSuccessTitle);
       } else if (hasSteps) {
-        setTitle(customSteps[currentStep].title);
+        setTitle(customSteps[currentStep]?.title);
       } else {
         setTitle(generateTitle);
       }
@@ -226,7 +226,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
         />
         <ModalBody className={`${blockClass}__body-container`}>
           {hasSteps && !apiKeyLoaded ? (
-            customSteps[currentStep].content
+            customSteps[currentStep]?.content
           ) : (
             <>
               {body && <p className={`${blockClass}__body`}>{body}</p>}

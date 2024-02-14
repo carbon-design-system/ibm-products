@@ -1,20 +1,5 @@
 import { ReactNode } from 'react';
 
-interface CustomStep {
-  /**
-   * designates if the step has passed whatever validation rules are in place.
-   */
-  valid: boolean;
-  /**
-   * designates content is the JSX that holds whatever inputs you need
-   */
-  content: ReactNode;
-  /**
-   * designates the title that's displayed at the top of the modal for each step
-   */
-  title: string;
-}
-
 interface APIKeyModalCommonProps {
   /**
    * the api key that's displayed to the user when a request to create is fulfilled.
@@ -55,7 +40,15 @@ interface APIKeyModalCommonProps {
   /**
    * if you need more options for key creation beyond just the name use custom steps to obtain whatever data is required.
    */
-  customSteps?: CustomStep[];
+  customSteps?: Array<
+    | {
+        valid?: boolean | undefined | null;
+        content?: ReactNode | undefined | null;
+        title?: string | undefined | null;
+      }
+    | undefined
+    | null
+  >;
   /**
    * designates if the modal is in the edit mode
    */
@@ -161,7 +154,15 @@ type CustomStepConditionalProps = {
   /**
    * if you need more options for key creation beyond just the name use custom steps to obtain whatever data is required.
    */
-  customSteps?: CustomStep[];
+  customSteps?: Array<
+    | {
+        valid?: boolean | undefined | null;
+        content?: ReactNode | undefined | null;
+        title?: string | undefined | null;
+      }
+    | undefined
+    | null
+  >;
   /**
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */

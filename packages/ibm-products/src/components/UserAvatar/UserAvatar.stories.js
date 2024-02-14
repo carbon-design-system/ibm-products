@@ -95,16 +95,10 @@ const Template = (args) => {
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
 export const Default = prepareStory(Template, {
+  storyName: 'Default',
   args: {
     ...defaultArgs,
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
-    tooltipText: 'Thomas J. Watson',
-  },
-});
-
-export const WithName = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
     name: 'thomas j. watson',
     tooltipText: 'Thomas J. Watson',
   },

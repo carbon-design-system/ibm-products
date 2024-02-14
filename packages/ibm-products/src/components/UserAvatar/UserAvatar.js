@@ -46,7 +46,6 @@ const componentName = 'UserAvatar';
 
 const defaults = {
   size: 'md',
-  name: 'thomas j. watson',
 };
 
 export let UserAvatar = React.forwardRef(
@@ -55,7 +54,7 @@ export let UserAvatar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       backgroundColor,
       className,
-      name = defaults.name,
+      name,
       /* TODO: add other props for UserAvatar, with default values if needed */
       renderIcon: RenderIcon,
       size = defaults.size,
@@ -121,7 +120,7 @@ export let UserAvatar = React.forwardRef(
       </div>
     );
 
-    return tooltipText ? (
+    if (tooltipText) {
       <Tooltip
         align={tooltipAlignment}
         label={tooltipText}
@@ -130,10 +129,9 @@ export let UserAvatar = React.forwardRef(
         <TooltipTrigger>
           <Avatar />
         </TooltipTrigger>
-      </Tooltip>
-    ) : (
-      <Avatar />
-    );
+      </Tooltip>;
+    }
+    return <Avatar />;
   }
 );
 

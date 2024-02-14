@@ -59,3 +59,21 @@ export const panelVariants = {
     opacity: shouldReduceMotion && 0,
   }),
 };
+
+export const actionSetVariants = {
+  hidden: (shouldReduceMotion) => ({
+    opacity: shouldReduceMotion ? 0 : 1,
+    transition: {
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast01,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.exit,
+    },
+  }),
+  visible: (shouldReduceMotion) => ({
+    opacity: 1,
+    transition: {
+      duration: shouldReduceMotion ? DURATIONS.moderate01 : DURATIONS.fast02,
+      ease: shouldReduceMotion ? 0 : EASINGS.productive.entrance,
+      delay: shouldReduceMotion ? 0.075 : 0,
+    },
+  }),
+};

@@ -27,7 +27,11 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { Button } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
-import { overlayVariants, panelVariants } from './motion/variants';
+import {
+  overlayVariants,
+  panelVariants,
+  actionSetVariants,
+} from './motion/variants';
 import pconsole from '../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -44,6 +48,8 @@ const defaults = {
   placement: 'right',
   size: 'md',
 };
+
+const MotionActionSet = motion(ActionSet);
 
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
@@ -638,10 +644,12 @@ export let SidePanel = React.forwardRef(
               )}
 
               {/* footer */}
-              <ActionSet
+              <MotionActionSet
                 actions={actions}
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
+                custom={shouldReduceMotion}
+                variants={actionSetVariants}
               />
 
               <span

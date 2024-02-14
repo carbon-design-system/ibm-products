@@ -14,7 +14,6 @@ import {
   ModalFooter,
   ModalBody,
   TextInput,
-  PasswordInput,
   InlineLoading,
   Form,
   Button,
@@ -37,7 +36,7 @@ const defaults = {
   customSteps: [],
 };
 
-export let APIKeyModal = forwardRef(
+export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -87,7 +86,7 @@ export let APIKeyModal = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: APIKeyModalProps,
+    },
     ref: React.Ref<HTMLDivElement>
   ) => {
     const [title, setTitle] = useState<string | null | undefined>(null);
@@ -232,7 +231,7 @@ export let APIKeyModal = forwardRef(
             <>
               {body && <p className={`${blockClass}__body`}>{body}</p>}
               {!editing && apiKey && hasAPIKeyVisibilityToggle && (
-                <PasswordInput
+                <TextInput.PasswordInput
                   value={apiKey}
                   labelText={apiKeyLabel}
                   id={apiKeyInputId.current}

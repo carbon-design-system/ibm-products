@@ -14,6 +14,7 @@ import {
   ModalFooter,
   ModalBody,
   TextInput,
+  PasswordInput,
   InlineLoading,
   Form,
   Button,
@@ -231,7 +232,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
             <>
               {body && <p className={`${blockClass}__body`}>{body}</p>}
               {!editing && apiKey && hasAPIKeyVisibilityToggle && (
-                <TextInput.PasswordInput
+                <PasswordInput
                   value={apiKey}
                   labelText={apiKeyLabel}
                   id={apiKeyInputId.current}

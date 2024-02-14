@@ -26,22 +26,30 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--decorator;
 //
-$label: #{$block-class}__label;
-$value: #{$block-class}__value;
-$disabled: #{$block-class}-disabled;
-//
 $default: #{$block-class}--default;
 $link: #{$block-class}--link;
-$button: '#{$block-class}--button:not(.#{$disabled})';
-$button-disabled: '#{$block-class}--button.#{$disabled}';
-$buttons: '#{$block-class}--buttons:not(.#{$disabled})';
-$buttons-disabled: '#{$block-class}--buttons.#{$disabled}';
+$button: '#{$block-class}--button:not(.#{$block-class}-disabled)';
+$button-disabled: '#{$block-class}--button.#{$block-class}-disabled';
+$buttons: '#{$block-class}--buttons:not(.#{$block-class}-disabled)';
+$buttons-disabled: '#{$block-class}--buttons.#{$block-class}-disabled';
+//
 //
 $icon: #{$block-class}-icon;
+$label: #{$block-class}__label;
+$value: #{$block-class}__value;
 
 // Use value-divider() by default for the component's dividing line.
+@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
+  &::after {
+    position: absolute;
+    top: #{$top};
+    bottom: #{$bottom};
+    left: #{$left};
+    border-left: 1px solid #{$color};
+    content: '';
+  }
+}
 // Use label-divider() only when hovering/focusing the label.
-
 @mixin label-divider(
   // Nudge the line over so it occupies the same space as the value divider.
   $top: -1px,
@@ -56,16 +64,6 @@ $icon: #{$block-class}-icon;
     right: #{$right};
     bottom: #{$bottom};
     border-right: 1px solid #{$color};
-    content: '';
-  }
-}
-@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
-  &::after {
-    position: absolute;
-    top: #{$top};
-    bottom: #{$bottom};
-    left: #{$left};
-    border-left: 1px solid #{$color};
     content: '';
   }
 }
@@ -188,6 +186,10 @@ $icon: #{$block-class}-icon;
   border-color: $border-strong;
   background-color: $layer-hover-02;
 }
+.#{$button}:focus {
+  // Disable browser's default "focus" style.
+  outline: none;
+}
 .#{$button}:focus .#{$label} {
   border-color: $focus;
   background-color: $layer-02;
@@ -234,6 +236,7 @@ $icon: #{$block-class}-icon;
 }
 .#{$buttons} .#{$value} {
   background-color: $layer-02;
+  cursor: pointer;
 }
 .#{$buttons} .#{$label}:hover {
   @include label-divider($color: $border-strong);
@@ -251,11 +254,15 @@ $icon: #{$block-class}-icon;
   @include label-divider($color: $focus);
 
   border-color: $focus;
+  // Disable browser's default "focus" style.
+  outline: none;
 }
 .#{$buttons} .#{$value}:focus {
   @include value-divider($color: $focus);
 
   border-color: $focus;
+  // Disable browser's default "focus" style.
+  outline: none;
 }
 .#{$buttons} .#{$label}:active {
   background-color: $layer-hover-02;
@@ -346,19 +353,24 @@ $icon: #{$block-class}-icon;
     stroke: $yellow-60;
     stroke-width: 1px;
   }
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium {
-    stroke: $orange-60;
-    stroke-width: 1px;
+  // The "diamond-fill/medium" icon has an inner and outer path.
+  // Fill the outer path to simulate a 1px border.
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium path:first-child,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium path:first-child {
+    fill: $orange-60;
   }
 }
 .#{$block-class}--dark {
-  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high,
-  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high,
+  // The "caution/high" icon has an inner and outer path.
+  // Fill the outer path to simulate a 1px border.
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high path:first-child,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high path:first-child {
+    fill: $red-40;
+  }
   &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-critical,
   &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-critical {
     stroke: $red-40;
-    stroke-width: 1px;
+    stroke-width: to-rem(0.5px);
   }
 }
 
@@ -370,18 +382,19 @@ $icon: #{$block-class}-icon;
     stroke: $yellow-60;
     stroke-width: 1px;
   }
-  &.#{$button}:hover .#{$icon}__magnitude-medium,
-  &.#{$button}:active .#{$icon}__magnitude-medium {
-    stroke: $orange-60;
-    stroke-width: 1px;
+  &.#{$button}:hover .#{$icon}__magnitude-medium path:first-child,
+  &.#{$button}:active .#{$icon}__magnitude-medium path:first-child {
+    fill: $orange-60;
   }
 }
 .#{$block-class}--dark {
-  &.#{$button}:hover .#{$icon}__magnitude-high,
-  &.#{$button}:active .#{$icon}__magnitude-high,
+  &.#{$button}:hover .#{$icon}__magnitude-high path:first-child,
+  &.#{$button}:active .#{$icon}__magnitude-high path:first-child {
+    fill: $red-40;
+  }
   &.#{$button}:hover .#{$icon}__magnitude-critical,
   &.#{$button}:active .#{$icon}__magnitude-critical {
     stroke: $red-40;
-    stroke-width: 1px;
+    stroke-width: to-rem(0.5px);
   }
 }

@@ -31,7 +31,7 @@ const getAccessibilityProps = (header) => {
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel } = datagridState;
+  const { resizerAriaLabel, isFetching } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -127,6 +127,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                 <>
                   <input
                     {...header.getResizerProps()}
+                    disabled={isFetching}
                     onMouseDown={(event) =>
                       handleOnMouseDownResize(event, header.getResizerProps)
                     }

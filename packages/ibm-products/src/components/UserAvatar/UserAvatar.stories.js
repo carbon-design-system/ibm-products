@@ -23,7 +23,6 @@ import { Add, Group, User } from '@carbon/react/icons';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
-  size: 'md',
 };
 
 export default {
@@ -45,8 +44,8 @@ export default {
       control: {
         type: 'select',
       },
-      options: ['no icon', 'User', 'Group', 'Add'],
-      mapping: { 'no icon': User, User: User, Group: Group, Add: Add },
+      options: ['No icon', 'User', 'Group', 'Add'],
+      mapping: { 'No icon': '', User: User, Group: Group, Add: Add },
     },
     size: {
       control: {

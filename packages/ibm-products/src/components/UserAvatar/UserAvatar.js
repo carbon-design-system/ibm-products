@@ -15,8 +15,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-import { User } from '@carbon/react/icons';
-
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 // Carbon and package components we use.
@@ -46,16 +44,21 @@ const componentName = 'UserAvatar';
  * TODO: A description of the component.
  */
 
+const defaults = {
+  size: 'md',
+  name: 'thomas j. watson',
+};
+
 export let UserAvatar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
       backgroundColor,
       className,
-      name,
+      name = defaults.name,
       /* TODO: add other props for UserAvatar, with default values if needed */
-      renderIcon,
-      size,
+      renderIcon: RenderIcon,
+      size = defaults.size,
       tooltipText,
       tooltipAlignment,
       // Collect any other property values passed in.
@@ -71,32 +74,29 @@ export let UserAvatar = React.forwardRef(
       xl: 32,
     };
     const formatInitials = () => {
-      if (name.length === 2) {
-        return name;
+      const parts = name.split(' ');
+      const firstChar = parts[0].charAt(0).toUpperCase();
+      if (parts.length === 1) {
+        return firstChar;
       }
-      // RegEx takes in the display name and returns the first and last name. Thomas Watson and Thomas J. Watson
-      // both return JW.
-      return name
-        .match(/(^\S\S?|\b\S)?/g)
-        .join('')
-        .match(/(^\S|\S$)?/g)
-        .join('')
-        .toUpperCase();
+      const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
+      const initials = [firstChar];
+      if (lastChar) {
+        initials.push(lastChar);
+      }
+      return ''.concat(...initials);
     };
-    const getItem = (renderIcon) => {
-      let Iconcomponent = renderIcon;
-      if (renderIcon) {
-        return (props) => <Iconcomponent size={iconSize[size]} {...props} />;
-      } else if (name) {
-        return formatInitials;
-      } else {
-        return (props) => <User size={iconSize[size]} {...props} />;
+    const getItem = () => {
+      const iconProps = { size: iconSize[size] };
+      if (RenderIcon) {
+        return <RenderIcon {...iconProps} />;
+      }
+      if (name) {
+        return formatInitials();
       }
     };
 
-    const SetItem = getItem(renderIcon);
-
-    const renderUserAvatar = () => (
+    const Avatar = () => (
       <div
         {
           // Pass through any other property values as HTML attributes.
@@ -117,23 +117,22 @@ export let UserAvatar = React.forwardRef(
         role="img"
         {...getDevtoolsProps(componentName)}
       >
-        <SetItem />
+        {getItem()}
       </div>
     );
 
-    return (
-      SetItem &&
-      (tooltipText ? (
-        <Tooltip
-          align={tooltipAlignment}
-          label={tooltipText}
-          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
-        >
-          <TooltipTrigger>{renderUserAvatar()}</TooltipTrigger>
-        </Tooltip>
-      ) : (
-        renderUserAvatar()
-      ))
+    return tooltipText ? (
+      <Tooltip
+        align={tooltipAlignment}
+        label={tooltipText}
+        className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
+      >
+        <TooltipTrigger>
+          <Avatar />
+        </TooltipTrigger>
+      </Tooltip>
+    ) : (
+      <Avatar />
     );
   }
 );

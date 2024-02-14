@@ -1,16 +1,16 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-// @flow
-import React, { useLayoutEffect, useState } from 'react';
+
+import React, { useState } from 'react';
 import cx from 'classnames';
 import { selectionColumnId } from './common-column-ids';
 import SelectAllWithToggle from './Datagrid/DatagridSelectAllWithToggle';
 import { pkg } from '../../settings';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid__select-all`;
 
@@ -36,10 +36,10 @@ const useSelectAllWithToggleComponent = (hooks) => {
 };
 
 const useAddClassNameToSelectRow = (hooks) => {
-  const [windowSize, setWindowSize] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : ''
-  );
-  useLayoutEffect(() => {
+  const [windowSize, setWindowSize] = useState(0);
+
+  useIsomorphicEffect(() => {
+    setWindowSize(window.innerWidth);
     function updateSize() {
       setWindowSize(window.innerWidth);
     }

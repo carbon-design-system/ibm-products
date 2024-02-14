@@ -69,6 +69,7 @@ export const DataSpreadsheetBody = forwardRef(
   ) => {
     const [validStartingPoint, setValidStartingPoint] = useState(false);
     const contentScrollRef = useRef();
+
     const previousState = usePreviousValue({
       selectionAreaData,
       clickAndHoldActive,
@@ -263,6 +264,27 @@ export const DataSpreadsheetBody = forwardRef(
       setSelectionAreas,
       visibleColumns,
     ]);
+    //selectionAreas will be set when ever a selection area is made.
+    useEffect(() => {
+      removeDuplicateSelections();
+    }, [selectionAreas]);
+
+    //this method will check for any dupplicate selection area and remove.
+    //same selections are those have the same height, width, top, left styles. These inline styles are being set in createCellSelection util.
+    const removeDuplicateSelections = useCallback(() => {
+      let uniqueAttrArray = [];
+      ref.current
+        .querySelectorAll(`.${blockClass}__selection-area--element`)
+        .forEach((selectorEl) => {
+          let { top, left, height, width } = selectorEl.style;
+          let uniqueAttrstr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
+          if (uniqueAttrArray.indexOf(uniqueAttrstr) == -1) {
+            uniqueAttrArray.push(uniqueAttrstr);
+          } else {
+            selectorEl.remove(); // this is identified as duplicate selwction and hence removing.
+          }
+        });
+    }, []);
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight
@@ -376,6 +398,7 @@ export const DataSpreadsheetBody = forwardRef(
               row: cell.row.index,
               column: columnIndex,
             };
+
             setSelectionAreas((prev) => {
               const selectionAreaClone = deepCloneObject(prev);
               const indexOfItemToUpdate = selectionAreaClone.findIndex(

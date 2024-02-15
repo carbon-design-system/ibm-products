@@ -1,7 +1,7 @@
 {
   "name": "ibm-products",
   "engines": {
-    "node": "20"
+    "node": ">=20.x"
   },
   "private": true,
   "version": "0.0.0",

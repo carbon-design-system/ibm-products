@@ -61,6 +61,7 @@ const s = [
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'String Formatter', s: ['c/StringFormatter'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
 
         ],

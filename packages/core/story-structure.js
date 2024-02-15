@@ -59,11 +59,10 @@ const s = [
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
           { n: 'Side panel', s: ['c/SidePanel'] },
+          { n: 'String formatter', s: ['c/StringFormatter'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          { n: 'String Formatter', s: ['c/StringFormatter'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
-
         ],
       },
       {

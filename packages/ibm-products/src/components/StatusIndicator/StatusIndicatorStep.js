@@ -14,8 +14,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 import { InlineLoading } from '@carbon/react';
-import { CircleStroke } from '@carbon/react/icons';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import {
+  CheckmarkOutline,
+  CircleStroke,
+  ErrorOutline,
+} from '@carbon/react/icons';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--status-indicator-step`;
@@ -26,45 +29,34 @@ const defaults = {
 };
 
 /**
- * An icon and description that describes one step of the `StatusIndicator`.
+ * An icon/description pair that describes one step of the `StatusIndicator`.
  */
 export let StatusIndicatorStep = React.forwardRef(
   (
     { className, description, errorMessage, status = defaults.status, ...rest },
     ref
   ) => {
-    const key = uuidv4();
-
     return (
       <li
         {...rest}
         className={cx(blockClass, className, `${blockClass}--${status}`)}
-        key={key}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {status === 'active' && (
-          <InlineLoading description={description} status="active" />
-        )}
+        <div className={`${blockClass}--details`}>
+          <div className={`${blockClass}__icon`}>
+            {status === 'inactive' && (
+              <CircleStroke size={16} viewBox="1 1 14 14" />
+            )}
+            {status === 'active' && <InlineLoading />}
+            {status === 'error' && <ErrorOutline size={16} />}
+            {status === 'finished' && <CheckmarkOutline size={16} />}
+          </div>
+          <div className={`${blockClass}__text`}>{description}</div>
+        </div>
 
-        {status === 'finished' && (
-          <InlineLoading description={description} status="finished" />
-        )}
-
-        {status === 'error' && (
-          <InlineLoading description={description} status="error" />
-        )}
         {status === 'error' && errorMessage && (
           <div className={`${blockClass}__error-message`}>{errorMessage}</div>
-        )}
-
-        {status === 'inactive' && (
-          <div className={`${blockClass}--inline-loading`}>
-            <div className={`${blockClass}__animation`}>
-              <CircleStroke size={16} viewBox="1 1 14 14" title={description} />
-            </div>
-            <div className={`${blockClass}__text`}>{description}</div>
-          </div>
         )}
       </li>
     );
@@ -90,7 +82,7 @@ StatusIndicatorStep.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The text that describes the icon.
+   * The text associated with the icon.
    */
   description: PropTypes.string.isRequired,
   /**
@@ -100,5 +92,6 @@ StatusIndicatorStep.propTypes = {
   /**
    * Each `status` represents a different icon..
    */
-  status: PropTypes.oneOf(['inactive', 'active', 'error', 'finished']),
+  status: PropTypes.oneOf(['inactive', 'active', 'error', 'finished'])
+    .isRequired,
 };

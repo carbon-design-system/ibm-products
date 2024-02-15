@@ -53,7 +53,7 @@ export let StatusIndicator = React.forwardRef(
         <ul className={`${blockClass}__list`}>{children}</ul>
         {showRetry && onRetry && retryLabel && (
           <Button
-            className={`${blockClass}__button--retry`}
+            className={`${blockClass}__button`}
             kind="ghost"
             onClick={onRetry}
             onKeyUp={onRetry}
@@ -87,21 +87,21 @@ StatusIndicator.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Optional callback function appears as a button at the bottom of the list.
+   * Optional callback function for the retry button.
    */
   onRetry: PropTypes.func,
   /**
-   * The text for the retry button at the bottom of the list.
+   * The text for the retry button.
    */
   retryLabel: PropTypes.string,
   /**
    * Set to `true` to show the retry button.
    *
-   * `retryLabel` and `onRetry` must both be defined.
+   * `retryLabel` and `onRetry` must also be defined.
    */
   showRetry: PropTypes.bool,
   /**
-   * The title that appears at the top of the list of indicators.
+   * The title that appears at the top of the list.
    */
   title: PropTypes.string,
 };

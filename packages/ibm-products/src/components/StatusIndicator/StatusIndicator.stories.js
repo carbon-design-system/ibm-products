@@ -83,7 +83,19 @@ const stepsAsync = [
 ];
 
 const Template = (args) => {
-  return <StatusIndicator {...args} />;
+  return (
+    <StatusIndicator {...args}>
+      {/* asdf */}
+      <StatusIndicatorStep status="inactive" description="Waiting" />
+      <StatusIndicatorStep status="active" description="Working" />
+      <StatusIndicatorStep
+        status="error"
+        description="Error"
+        errorMessage="Error message"
+      />
+      <StatusIndicatorStep status="finished" description="Success" />
+    </StatusIndicator>
+  );
 };
 
 const TemplateSuccess = (args) => {
@@ -126,8 +138,8 @@ const TemplateSuccess = (args) => {
         return (
           <StatusIndicatorStep
             key={i}
-            errorMessage={steps[i].errorMessage}
             description={steps[i].description}
+            errorMessage={steps[i].errorMessage}
             status={status}
           />
         );
@@ -146,7 +158,7 @@ const TemplateSuccessAsync = (args) => {
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
-      setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+      setStatuses(['inactive', 'active', 'inactive', 'inactive']);
     }, 300);
     const timer2 = setTimeout(() => {
       setStatuses(['active', 'active', 'active', 'inactive']);
@@ -231,6 +243,7 @@ const TemplateFail = (args) => {
         setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
         runDemo();
       }}
+      retryLabel="Retry"
       showRetry={isError}
     >
       {statuses.map((status, i) => {
@@ -258,7 +271,7 @@ const TemplateFailAsync = (args) => {
 
   const runDemo = () => {
     const timer1 = setTimeout(() => {
-      setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+      setStatuses(['active', 'inactive', 'inactive', 'inactive']);
     }, 300);
     const timer2 = setTimeout(() => {
       setStatuses(['active', 'active', 'inactive', 'active']);
@@ -296,6 +309,7 @@ const TemplateFailAsync = (args) => {
         setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
         runDemo();
       }}
+      retryLabel="Retry"
       showRetry={isError}
     >
       {statuses.map((status, i) => {
@@ -315,21 +329,11 @@ const TemplateFailAsync = (args) => {
 export const statusIndicator = prepareStory(Template, {
   storyName: 'StatusIndicator',
   args: {
-    children: (
-      <>
-        <StatusIndicatorStep status="inactive" description="Waiting" />
-        <StatusIndicatorStep status="active" description="Working" />
-        <StatusIndicatorStep
-          status="error"
-          description="Error"
-          errorMessage="Error message"
-        />
-        <StatusIndicatorStep status="finished" description="Success" />
-      </>
-    ),
     onRetry: (event) => {
       action('onRetry')(event);
     },
+    retryLabel: 'Retry',
+    showRetry: true,
     title: 'List of states available',
   },
 });

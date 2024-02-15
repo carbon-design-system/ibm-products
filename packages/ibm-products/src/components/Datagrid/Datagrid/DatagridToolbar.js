@@ -125,7 +125,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       dispatch,
       rows: [],
       getRowId,
-      isChecked: false
+      isChecked: false,
     });
     toggleAllRowsSelected(false);
     setGlobalFilter(null);

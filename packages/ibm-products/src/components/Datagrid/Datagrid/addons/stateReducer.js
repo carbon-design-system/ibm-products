@@ -114,7 +114,10 @@ export const stateReducer = (newState, action) => {
         const newData = { ...newState.selectedRowData };
         const dataWithRemovedRow = Object.fromEntries(
           Object.entries(newData).filter(([key]) => {
-            return parseInt(key) !== parseInt(getRowId(rowData.original, rowData.index));
+            return (
+              parseInt(key) !==
+              parseInt(getRowId(rowData.original, rowData.index))
+            );
           })
         );
         return {

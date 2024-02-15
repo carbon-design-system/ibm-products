@@ -18,6 +18,7 @@ import { ScrollGradient } from '.';
 import mdx from './ScrollGradient.mdx';
 
 import styles from './_storybook-styles.scss';
+import { scrollDirection } from './constants';
 
 export default {
   title: getStoryTitle(ScrollGradient.displayName),
@@ -34,15 +35,20 @@ export default {
     },
   },
 };
-
+const style = {
+  width: '300px',
+  height: '300px',
+};
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
   return (
     <ScrollGradient
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
+      color={'#444444'}
+      style={style}
+      className={'myScrollGradient'}
+      direction={scrollDirection.X}
       {...args}
     />
   );

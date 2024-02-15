@@ -17,14 +17,12 @@ import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-
+import { scrollDirection } from './constants';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-const scrollDirection = { X: 'X', Y: 'Y' };
 
 // Default values for props
 const defaults = {
@@ -56,8 +54,7 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const gradientRotation =
-      direction === ScrollGradient.ScrollDirection.X ? -90 : 0;
+    const gradientRotation = direction === scrollDirection.X ? -90 : 0;
 
     return (
       <div
@@ -138,7 +135,7 @@ ScrollGradient.propTypes = {
   color: PropTypes.string.isRequired,
 
   /** @type {string} Scroll direction */
-  direction: PropTypes.oneOf(['X', 'Y']),
+  direction: PropTypes.oneOf(Object.values(scrollDirection)),
 
   /** @type {(element: HTMLElement) => {}} Optional function to get reference to scrollable DOM element */
   getScrollElementRef: PropTypes.func,

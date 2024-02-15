@@ -85,7 +85,6 @@ const stepsAsync = [
 const Template = (args) => {
   return (
     <StatusIndicator {...args}>
-      {/* asdf */}
       <StatusIndicatorStep status="inactive" description="Waiting" />
       <StatusIndicatorStep status="active" description="Working" />
       <StatusIndicatorStep

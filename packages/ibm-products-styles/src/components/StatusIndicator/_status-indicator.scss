@@ -55,6 +55,7 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 }
 .#{$block-class-step}--active
   .#{c4p-settings.$carbon-prefix}--inline-loading__animation {
+  /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: to-rem(7px);
 }
 .#{$block-class-step}--error svg {
@@ -67,6 +68,7 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 .#{$block-class-step}__error-message {
   @include type-style('label-01');
 
+  /* stylelint-disable-next-line carbon/layout-token-use */
   margin-bottom: to-rem(6px);
   margin-left: $spacing-06;
   color: $text-error;

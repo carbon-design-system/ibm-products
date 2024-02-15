@@ -1,5 +1,8 @@
 {
   "name": "ibm-products",
+  "engines": {
+    "node": ">=20.x"
+  },
   "private": true,
   "version": "0.0.0",
   "repository": "git@github.com:carbon-design-system/ibm-products.git",

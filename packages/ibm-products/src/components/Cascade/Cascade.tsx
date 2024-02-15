@@ -1,11 +1,11 @@
 //
-// Copyright IBM Corp. 20201, 2021
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
 import { Grid } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -14,6 +14,21 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--cascade`;
 const componentName = 'Cascade';
+
+interface CascadeProps {
+  children: ReactNode;
+  /**
+   * Specify an optional className to be applied to
+   * the container node.
+   */
+  className?: string;
+  /**
+   * Specifies whether or not to wrap the child content in a `<Grid />`.
+   * If this is set to true it's important that the children are being wrapped in rows in columns.
+   * Check the documentation for additional clarification.
+   */
+  grid?: boolean;
+}
 
 const defaults = {
   grid: false,
@@ -39,8 +54,8 @@ export let Cascade = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: PropsWithChildren<CascadeProps>,
+    ref: React.Ref<HTMLDivElement>
   ) => {
     const props = {
       ...rest,
@@ -59,16 +74,21 @@ export let Cascade = forwardRef(
     if (grid) {
       let colIdx = 0;
       const gridElm = React.Children.map(children, (row) => {
-        const cols = React.Children.map(row.props.children, (col) => {
-          colIdx = colIdx + 1;
-          const colClassnames = cx(
-            col.props.className,
-            `${blockClass}__col`,
-            `${blockClass}__col-${colIdx}`
-          );
-          return React.cloneElement(col, { className: colClassnames });
-        });
-        return React.cloneElement(row, { children: cols });
+        if (React.isValidElement(row)) {
+          const cols = React.Children.map(row?.props.children, (col) => {
+            colIdx = colIdx + 1;
+            const colClassnames = cx(
+              col.props.className,
+              `${blockClass}__col`,
+              `${blockClass}__col-${colIdx}`
+            );
+            return React.cloneElement(col, { className: colClassnames });
+          });
+          return React.cloneElement(row as React.ReactElement, {
+            children: cols,
+          });
+        }
+        return children;
       });
       return (
         <div {...props}>

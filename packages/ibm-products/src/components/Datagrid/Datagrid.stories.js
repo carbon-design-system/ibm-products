@@ -32,7 +32,7 @@ import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
-import { DocsPage } from './Datagrid.docs-page';
+import DocsPage from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),

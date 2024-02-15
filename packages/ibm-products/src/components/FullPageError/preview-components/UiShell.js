@@ -24,7 +24,7 @@ import {
   HeaderGlobalAction,
   SkipToContent,
 } from '@carbon/react';
-import { UserAvatar } from '@carbon/icons-react';
+import { UserAvatar } from '@carbon/react/icons';
 
 export const UiShell = ({ children }) => {
   return (

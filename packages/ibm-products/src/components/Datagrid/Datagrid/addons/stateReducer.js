@@ -84,7 +84,7 @@ export const stateReducer = (newState, action) => {
       if (rows) {
         const newSelectedRowData = {};
         rows.forEach((row) => {
-          newSelectedRowData[getRowId(row, row.index)] = row;
+          newSelectedRowData[getRowId(row.original, row.index)] = row.original;
         });
         return {
           ...newState,
@@ -106,7 +106,7 @@ export const stateReducer = (newState, action) => {
           ...newState,
           selectedRowData: {
             ...newState.selectedRowData,
-            [getRowId(rowData, rowData.index)]: rowData,
+            [getRowId(rowData.original, rowData.index)]: rowData.original,
           },
         };
       }
@@ -114,7 +114,7 @@ export const stateReducer = (newState, action) => {
         const newData = { ...newState.selectedRowData };
         const dataWithRemovedRow = Object.fromEntries(
           Object.entries(newData).filter(([key]) => {
-            return parseInt(key) !== parseInt(rowData.index);
+            return parseInt(key) !== parseInt(getRowId(rowData.original, rowData.index));
           })
         );
         return {

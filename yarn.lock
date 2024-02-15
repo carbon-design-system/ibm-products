@@ -1955,12 +1955,12 @@ __metadata:
     "@babel/core": "npm:^7.23.9"
     "@babel/preset-typescript": "npm:^7.21.5"
     "@carbon/grid": "npm:^11.21.1"
-    "@carbon/ibm-products-styles": "npm:^2.23.0"
+    "@carbon/ibm-products-styles": "npm:^2.25.0"
     "@carbon/layout": "npm:^11.20.1"
     "@carbon/motion": "npm:^11.16.1"
-    "@carbon/react": "npm:^1.49.0"
-    "@carbon/storybook-addon-theme": "npm:^2.0.6"
-    "@carbon/themes": "npm:^11.30.0"
+    "@carbon/react": "npm:^1.50.0"
+    "@carbon/storybook-addon-theme": "npm:^2.0.7"
+    "@carbon/themes": "npm:^11.31.0"
     "@carbon/type": "npm:^11.25.1"
     "@storybook/addon-actions": "npm:^7.6.10"
     "@storybook/addon-controls": "npm:^7.6.10"
@@ -1979,7 +1979,7 @@ __metadata:
     "@storybook/source-loader": "npm:^7.6.10"
     "@storybook/theming": "npm:^7.6.10"
     babel-loader: "npm:^9.1.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     css-loader: "npm:^6.9.1"
     dotenv-webpack: "npm:8.0.1"
     lottie-web: "npm:^5.12.2"
@@ -2007,10 +2007,10 @@ __metadata:
     "@babel/cli": "npm:^7.23.4"
     "@babel/core": "npm:^7.23.6"
     "@babel/runtime": "npm:^7.22.10"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     cross-env: "npm:^7.0.3"
     jest: "npm:^29.6.2"
-    jest-config-ibm-cloud-cognitive: "npm:^1.1.2"
+    jest-config-ibm-cloud-cognitive: "npm:^1.1.3"
     jest-environment-jsdom: "npm:^29.6.2"
     rimraf: "npm:^5.0.1"
     sass: "npm:^1.64.2"
@@ -2018,15 +2018,15 @@ __metadata:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.49.0
-    "@carbon/themes": ^11.30.0
+    "@carbon/react": ^1.50.0
+    "@carbon/themes": ^11.31.0
     "@carbon/type": ^11.25.1
     react: ^18.2.0
     react-dom: ^18.2.0
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@npm:^2.23.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.25.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2035,7 +2035,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     glob: "npm:^10.3.10"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.1.2"
+    jest-config-ibm-cloud-cognitive: "npm:^1.1.3"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-check-updates: "npm:^16.14.12"
     npm-run-all: "npm:^4.1.5"
@@ -2046,7 +2046,7 @@ __metadata:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/themes": ^11.30.0
+    "@carbon/themes": ^11.31.0
     "@carbon/type": ^11.25.1
   languageName: unknown
   linkType: soft
@@ -2065,7 +2065,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.21.5"
     "@babel/runtime": "npm:^7.23.9"
-    "@carbon/ibm-products-styles": "npm:^2.23.0"
+    "@carbon/ibm-products-styles": "npm:^2.25.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/sortable": "npm:^8.0.0"
@@ -2076,7 +2076,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-typescript": "npm:^11.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     chalk: "npm:^4.1.2"
     change-case: "npm:4.1.2"
     copyfiles: "npm:^2.4.1"
@@ -2086,7 +2086,7 @@ __metadata:
     glob: "npm:^10.3.10"
     immutability-helper: "npm:^3.1.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.1.2"
+    jest-config-ibm-cloud-cognitive: "npm:^1.1.3"
     jest-environment-jsdom: "npm:^29.7.0"
     lodash: "npm:^4.17.21"
     lottie-web: "npm:^5.12.2"
@@ -2099,14 +2099,14 @@ __metadata:
     rollup: "npm:^2.79.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
     sass: "npm:^1.70.0"
-    typescript-config-carbon: "npm:^0.2.0"
+    typescript-config-carbon: "npm:^0.2.1"
     yargs: "npm:^17.7.2"
   peerDependencies:
     "@carbon/grid": ^11.21.1
     "@carbon/layout": ^11.20.1
     "@carbon/motion": ^11.16.1
-    "@carbon/react": ^1.49.0
-    "@carbon/themes": ^11.30.0
+    "@carbon/react": ^1.50.0
+    "@carbon/themes": ^11.31.0
     "@carbon/type": ^11.25.1
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -2120,16 +2120,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.35.0":
-  version: 11.35.0
-  resolution: "@carbon/icons-react@npm:11.35.0"
+"@carbon/icons-react@npm:^11.36.0":
+  version: 11.36.0
+  resolution: "@carbon/icons-react@npm:11.36.0"
   dependencies:
     "@carbon/icon-helpers": "npm:^10.46.0"
     "@carbon/telemetry": "npm:0.1.0"
     prop-types: "npm:^15.7.2"
   peerDependencies:
     react: ">=16"
-  checksum: d3d431efa008691024de90180ead77acb05dd77a1a352604d5b732bfbeb81a079928b6c81ca01d7dc3cdf55c26bd823b98f2717094b7a6a5cf4f39ffd8ddea74
+  checksum: ecb6ec76ce092bbd9f32dc6d1fc68a3e4895ab9ab5f5aaa8ef4dc806479dda33fb6f78798d92d1a66ff3031d446bafe7d5ee99fa325aef782d7de5335bf4ddda
   languageName: node
   linkType: hard
 
@@ -2147,15 +2147,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.49.0":
-  version: 1.49.0
-  resolution: "@carbon/react@npm:1.49.0"
+"@carbon/react@npm:^1.50.0":
+  version: 1.50.0
+  resolution: "@carbon/react@npm:1.50.0"
   dependencies:
     "@babel/runtime": "npm:^7.18.3"
     "@carbon/feature-flags": "npm:^0.16.0"
-    "@carbon/icons-react": "npm:^11.35.0"
+    "@carbon/icons-react": "npm:^11.36.0"
     "@carbon/layout": "npm:^11.20.0"
-    "@carbon/styles": "npm:^1.49.0"
+    "@carbon/styles": "npm:^1.50.0"
     "@ibm/telemetry-js": "npm:^1.2.0"
     classnames: "npm:2.5.1"
     copy-to-clipboard: "npm:^3.3.1"
@@ -2176,11 +2176,11 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 18e74975d78a8f26a464b2783a98cfa21610679e9bedc31e9f98e5b05a7ecfa157dd00569f9d54985ebfddcaeeae19096553c8f1cf57bc4f070405faeed3d70a
+  checksum: c5858a08119f512f7ff275e22df41e6c43746099133319261072acec7fe93b6e3f4f2c7310058d14b709a4a764bc3bc9edbf7e668c0f163bc0298c3b09abf957
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@npm:^2.0.6, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@npm:^2.0.7, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -2205,16 +2205,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.49.0":
-  version: 1.49.0
-  resolution: "@carbon/styles@npm:1.49.0"
+"@carbon/styles@npm:^1.50.0":
+  version: 1.50.0
+  resolution: "@carbon/styles@npm:1.50.0"
   dependencies:
     "@carbon/colors": "npm:^11.20.0"
     "@carbon/feature-flags": "npm:^0.16.0"
     "@carbon/grid": "npm:^11.21.0"
     "@carbon/layout": "npm:^11.20.0"
     "@carbon/motion": "npm:^11.16.0"
-    "@carbon/themes": "npm:^11.30.0"
+    "@carbon/themes": "npm:^11.31.0"
     "@carbon/type": "npm:^11.25.0"
     "@ibm/plex": "npm:6.0.0-next.6"
   peerDependencies:
@@ -2222,7 +2222,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 7f44cd8fb479e191e8564b986983c8ce93e5af4ac126555da9f5ca9b5c98585f40b14bbeee3a50c306fb1c72ed6169540faa2e4bad19710838178dcd2b63e605
+  checksum: cf8b476de533ba5971bb362784283be3b367d78a6ca4d122b30758e66937dc27c5fac2226c336febbc19d37a3166c29869c4ede4e70814c37c0e9ad694d736a4
   languageName: node
   linkType: hard
 
@@ -2235,15 +2235,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.30.0":
-  version: 11.30.0
-  resolution: "@carbon/themes@npm:11.30.0"
+"@carbon/themes@npm:^11.31.0":
+  version: 11.31.0
+  resolution: "@carbon/themes@npm:11.31.0"
   dependencies:
     "@carbon/colors": "npm:^11.20.0"
     "@carbon/layout": "npm:^11.20.0"
     "@carbon/type": "npm:^11.25.0"
     color: "npm:^4.0.0"
-  checksum: e22b61ba5676ec136586b34fd15e297be24dbd6f3ac5d70fbe0e1e1826b00bcd6ebf80355349c9717c6ab606cefec8078697080ecf72af13c1c465732a74ee7a
+  checksum: 71a07e8fcce8628f5b892fcfd18a22755940369153feb04302c4cd7917434d633a8154f5a701b0cd464628e8cb06958c8aacf3b4c45ee4a27a7084641c688c90
   languageName: node
   linkType: hard
 
@@ -8401,7 +8401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@npm:^0.14.39, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@npm:^0.14.40, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -15124,7 +15124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.1.2, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.1.3, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -15139,7 +15139,7 @@ __metadata:
     accessibility-checker: "npm:^3.1.65"
     axe-core: "npm:^4.8.3"
     babel-jest: "npm:^29.7.0"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.14.39"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     chalk: "npm:^4.1.2"
     jest-circus: "npm:^29.7.0"
     npm-check-updates: "npm:^16.14.12"
@@ -23676,7 +23676,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-config-carbon@npm:^0.2.0":
+"typescript-config-carbon@npm:^0.2.1":
   version: 0.2.1
   resolution: "typescript-config-carbon@npm:0.2.1"
   dependencies:

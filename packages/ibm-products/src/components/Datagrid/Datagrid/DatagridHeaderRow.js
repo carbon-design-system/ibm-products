@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, isValidElement } from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
@@ -17,7 +17,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
-import { ColumnHeaderSlug } from './addons/Slug/ColumnHeaderSlug';
+import { DatagridSlug } from './addons/Slug/DatagridSlug';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -44,6 +44,7 @@ const ResizeHeader = ({
   dispatch,
   onColResizeEnd,
   resizerAriaLabel,
+  isFetching,
 }) => {
   // eslint-disable-next-line no-unused-vars
   const { role, ...headerProps } = resizerProps;
@@ -90,6 +91,7 @@ const ResizeHeader = ({
         type="range"
         defaultValue={originalCol.width}
         aria-label={resizerAriaLabel || 'Resize column'}
+        disabled={isFetching}
       />
       <span className={`${blockClass}__col-resize-indicator`} />
     </>
@@ -97,7 +99,7 @@ const ResizeHeader = ({
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel, isTableSortable } = datagridState;
+  const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -158,8 +160,10 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     if (isTableSortable) {
       return;
     }
-    return <ColumnHeaderSlug slug={slug} />;
+    return <DatagridSlug slug={slug} />;
   };
+
+  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   return (
     <TableRow
@@ -167,6 +171,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >
+      {foundAIRow ? <th scope="col" aria-hidden="false" /> : null}
       {datagridState.headers
         .filter(({ isVisible }) => isVisible)
         .map((header, index) => {
@@ -220,6 +225,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     dispatch,
                     onColResizeEnd,
                     resizerAriaLabel,
+                    isFetching,
                   }}
                 />
               )}

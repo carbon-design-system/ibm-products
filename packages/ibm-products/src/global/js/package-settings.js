@@ -71,6 +71,8 @@ const defaults = {
     DelimitedList: false,
     FullPageError: false,
 
+    StringFormatter: false,
+
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:

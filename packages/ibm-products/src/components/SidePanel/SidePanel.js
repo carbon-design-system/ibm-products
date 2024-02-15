@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -27,7 +27,11 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { Button } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
-import { overlayVariants, panelVariants } from './motion/variants';
+import {
+  overlayVariants,
+  panelVariants,
+  actionSetVariants,
+} from './motion/variants';
 import pconsole from '../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -44,6 +48,8 @@ const defaults = {
   placement: 'right',
   size: 'md',
 };
+
+const MotionActionSet = motion(ActionSet);
 
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
@@ -100,6 +106,8 @@ export let SidePanel = React.forwardRef(
     const previousState = usePreviousValue({ size, open });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
       setDoAnimateTitle(animateTitle);
@@ -603,7 +611,7 @@ export let SidePanel = React.forwardRef(
               initial="hidden"
               animate="visible"
               exit="exit"
-              custom={placement}
+              custom={{ placement, shouldReduceMotion }}
             >
               <span
                 ref={startTrapRef}
@@ -636,10 +644,12 @@ export let SidePanel = React.forwardRef(
               )}
 
               {/* footer */}
-              <ActionSet
+              <MotionActionSet
                 actions={actions}
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
+                custom={shouldReduceMotion}
+                variants={actionSetVariants}
               />
 
               <span

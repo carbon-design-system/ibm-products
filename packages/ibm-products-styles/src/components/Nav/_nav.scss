@@ -31,6 +31,15 @@ $nav__wrapper: '#{&}__wrapper';
 /// @type Length
 $nav__icon__position: translate3d(-50%, 0, 0);
 
+@mixin rtl {
+  $rtl: '[dir="rtl"]';
+
+  &#{$rtl},
+  #{$rtl} & {
+    @content;
+  }
+}
+
 .#{$block-class} {
   position: relative;
 }
@@ -72,9 +81,9 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   margin-bottom: unset;
   list-style: none;
 
-  // @include rtl {
-  //   padding-right: unset;
-  // }
+  @include rtl {
+    padding-right: unset;
+  }
 }
 
 .#{$block-class}__heading {
@@ -116,10 +125,10 @@ $nav__icon__position: translate3d(-50%, 0, 0);
     margin-top: $spacing-01;
     margin-left: auto;
     transform: $nav__icon__position rotate(0deg);
-    // @include rtl {
-    //   right: $spacing-02;
-    //   transform: $nav__icon__position rotate(180deg);
-    // }
+    @include rtl {
+      right: $spacing-02;
+      transform: $nav__icon__position rotate(180deg);
+    }
   }
 
   &--nested {
@@ -133,10 +142,10 @@ $nav__icon__position: translate3d(-50%, 0, 0);
     margin-bottom: 0;
     opacity: 0;
 
-    // @include rtl {
-    //   padding-right: 0;
-    //   padding-left: unset;
-    // }
+    @include rtl {
+      padding-right: 0;
+      padding-left: unset;
+    }
 
     > #{$nav-item-block-class}:last-of-type {
       margin-bottom: $spacing-03;
@@ -181,11 +190,11 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   &--active {
     @include font-family.font-weight('semibold');
 
-    // @include rtl {
-    //   &::before {
-    //     transform: translate3d(0, 0, 0);
-    //   }
-    // }
+    @include rtl {
+      &::before {
+        transform: translate3d(0, 0, 0);
+      }
+    }
 
     &::before {
       background-color: $background-brand;
@@ -206,9 +215,9 @@ $nav__icon__position: translate3d(-50%, 0, 0);
     > .#{$nav-item-block-class}__link > .#{$nav-list-block-class}__icon {
       transform: $nav__icon__position rotate(180deg);
 
-      // @include rtl {
-      //   transform: $nav__icon__position rotate(0);
-      // }
+      @include rtl {
+        transform: $nav__icon__position rotate(0);
+      }
     }
   }
 

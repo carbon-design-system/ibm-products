@@ -1,50 +1,55 @@
 /**
- * @file Navigation list class.
- * @copyright IBM Security 2019 - 2021
+ * Copyright IBM Corp. 2024, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { useState, useEffect, useImperativeHandle } from 'react';
 import { ChevronDown } from '@carbon/icons-react';
-import classnames from 'classnames';
+import cx from 'classnames';
 import { bool, func, node, number, string } from 'prop-types';
-
-// import { getComponentNamespace } from '../../../globals/namespace';
-
-// import Icon from '../../Icon';
 import NavItem, { blockClass as navItemBlockClass } from './NavItem';
-
-// export const navListNamespace = getComponentNamespace('nav__list');
 import { pkg } from '../../settings';
 
 const componentName = 'NavList';
-const blockClass = `${pkg.prefix}--nav-list`;
+export const blockClass = `${pkg.prefix}--nav-list`;
 
-// export const NavList = ({
-//   activeHref = '#',
-//   children,
-//   className = '',
-//   icon = '',
-//   id = '',
-//   isExpandedOnPageload = false,
-//   navigationItemTitle = '',
-//   onItemClick = () => {},
-//   onListClick = () => {},
-//   tabIndex = 0,
-//   title = '',
-// }) => {
-//   const [open, setOpen] = useState(isExpandedOnPageload);
+// Default values for props
+const defaults = {
+  activeHref: '#',
+  className: '',
+  children: null,
+  id: '',
+  isExpandedOnPageload: false,
+  onItemClick: () => {},
+  onListClick: () => {},
+  tabIndex: 0,
+  title: '',
+  icon: '',
+  navigationItemTitle: '',
+};
 
-// };
+export let NavList = React.forwardRef(
+  (
+    {
+      activeHref = defaults.activeHref,
+      children = defaults.children,
+      className = defaults.className,
+      icon = defaults.icon,
+      id = defaults.id,
+      isExpandedOnPageload = defaults.isExpandedOnPageload,
+      navigationItemTitle = defaults.navigationItemTitle,
+      onItemClick = defaults.onItemClick,
+      onListClick = defaults.onListClick,
+      tabIndex = defaults.tabIndex,
+      title = defaults.title,
+    },
+    ref
+  ) => {
+    const [open, setOpen] = useState(isExpandedOnPageload);
 
-export default class NavList extends Component {
-  constructor(props) {
-    super(props);
-
-    const { activeHref, children } = this.props;
-    let { isExpandedOnPageload: open } = this.props;
-
-    // Reads all children, filters out children without HREF attributes, and creates an array of HREF strings.
-    if (!open) {
+    useEffect(() => {
       const hrefs = React.Children.toArray(children)
         .filter(
           ({ props: childProps }) =>
@@ -52,88 +57,64 @@ export default class NavList extends Component {
         )
         .map(({ props: childProps }) => childProps.href);
 
-      open = hrefs.includes(activeHref);
-    }
+      setOpen(hrefs.includes(activeHref) || isExpandedOnPageload);
+    }, [activeHref, children, isExpandedOnPageload]);
 
-    this.state = { open };
+    /**
+     * Closes the list.
+     */
+    const close = () => {
+      console.log(`close`);
+      if (open) {
+        setOpen(false);
+      }
+    };
 
-    this.buildNewItemChild = this.buildNewItemChild.bind(this);
-    this.toggle = this.toggle.bind(this);
-  }
+    /**
+     * Handles toggling the list.
+     * @param {SyntheticEvent} event The event fired when the list is toggled.
+     */
+    const toggle = (event) => {
+      console.log(`toggle`);
+      const { which, type } = event;
 
-  /**
-   * Creates a new child list item.
-   * @param {NavItem} child The child list item to create.
-   * @param {number} index The index of the child list item.
-   * @returns {NavItem} The new child list item.
-   */
-  buildNewItemChild({ props }, index) {
-    const { onItemClick, activeHref } = this.props;
+      // Enter (13) and spacebar (32).
+      if (which === 13 || which === 32 || type === 'click') {
+        if (!open) {
+          onListClick(id);
+        }
+        setOpen(!open);
+      }
+    };
 
-    const { onClick } = props;
+    // Expose external function calls to the parent component
+    useImperativeHandle(ref, () => ({
+      close,
+      isExpandedOnPageload,
+    }));
 
-    return (
+    const newChildren = React.Children.map(children, (child, index) => (
       <NavItem
-        {...props}
+        {...child.props}
         key={`${navItemBlockClass}--${index}`}
         onClick={(event, href) => {
           onItemClick(event, href);
-
-          if (onClick) {
-            onClick(event);
-          }
+          child.props.onClick?.(event);
         }}
         activeHref={activeHref}
-        tabIndex={this.state.open ? 0 : -1}
+        tabIndex={open ? 0 : -1}
       />
-    );
-  }
-
-  /**
-   * Closes the list.
-   */
-  close() {
-    if (this.state.open) {
-      this.setState({ open: false });
-    }
-  }
-
-  /**
-   * Handles toggling the list.
-   * @param {SyntheticEvent} event The event fired when the list is toggled.
-   */
-  toggle({ which, type }) {
-    const { open } = this.state;
-    const { id, onListClick } = this.props;
-
-    // Enter (13) and spacebar (32).
-    if (which === 13 || which === 32 || type === 'click') {
-      if (!open) {
-        onListClick(id);
-      }
-      this.setState({ open: !open });
-    }
-  }
-
-  render() {
-    const { className, children, icon, tabIndex, title, navigationItemTitle } =
-      this.props;
-    const { open } = this.state;
-
-    const classNames = classnames(blockClass, className, {
-      [`${navItemBlockClass}--expanded`]: open,
-    });
-
-    const newChildren = React.Children.map(children, (child, index) =>
-      this.buildNewItemChild(child, index)
-    );
+    ));
 
     return (
       <li
-        className={classNames}
+        ref={ref}
+        className={cx(blockClass, className, {
+          [`${navItemBlockClass}--expanded`]: open,
+        })}
         tabIndex={tabIndex}
-        onClick={this.toggle}
-        onKeyPress={this.toggle}
+        onClick={toggle}
+        onKeyPress={toggle}
         role="menuitem"
       >
         <div className={`${navItemBlockClass}__link`}>
@@ -158,21 +139,7 @@ export default class NavList extends Component {
       </li>
     );
   }
-}
-
-NavList.defaultProps = {
-  activeHref: '#',
-  className: '',
-  children: null,
-  id: '',
-  isExpandedOnPageload: false,
-  onItemClick: () => {},
-  onListClick: () => {},
-  tabIndex: 0,
-  title: '',
-  icon: '',
-  navigationItemTitle: '',
-};
+);
 
 NavList.propTypes = {
   /** @type {string} Hypertext reference for active page. */
@@ -209,4 +176,6 @@ NavList.propTypes = {
   title: string,
 };
 
-NavList.displayName = 'NavList';
+NavList.displayName = componentName;
+
+export default NavList;

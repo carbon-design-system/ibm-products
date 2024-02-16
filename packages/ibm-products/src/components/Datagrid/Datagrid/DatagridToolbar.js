@@ -181,7 +181,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   );
 };
 
-const DatagridToolbar = ({ toolbarLabel, ...datagridState }) => {
+const DatagridToolbar = ({ ariaToolbarLabel, ...datagridState }) => {
   const ref = useRef(null);
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
@@ -194,7 +194,7 @@ const DatagridToolbar = ({ toolbarLabel, ...datagridState }) => {
       ref={ref}
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
-      <TableToolbar aria-label={toolbarLabel}>
+      <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
@@ -202,7 +202,7 @@ const DatagridToolbar = ({ toolbarLabel, ...datagridState }) => {
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
-      <TableToolbar aria-label={toolbarLabel}>
+      <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
@@ -211,7 +211,7 @@ const DatagridToolbar = ({ toolbarLabel, ...datagridState }) => {
 };
 
 DatagridToolbar.propTypes = {
-  toolbarLabel: PropTypes.string,
+  ariaToolbarLabel: PropTypes.string,
 };
 
 export default DatagridToolbar;

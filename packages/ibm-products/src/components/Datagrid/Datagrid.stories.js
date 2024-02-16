@@ -499,7 +499,7 @@ export const BatchActions = () => {
   return (
     <Datagrid
       datagridState={{ ...datagridState }}
-      toolbarLabel="batch actions toolbar"
+      ariaToolbarLabel="batch actions toolbar"
     />
   );
 };

@@ -32,7 +32,7 @@ import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
 
-export const DatagridContent = ({ datagridState, title, toolbarLabel }) => {
+export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
@@ -191,7 +191,10 @@ export const DatagridContent = ({ datagridState, title, toolbarLabel }) => {
         title={gridTitle}
         description={gridDescription}
       >
-        <DatagridToolbar {...datagridState} toolbarLabel={toolbarLabel} />
+        <DatagridToolbar
+          {...datagridState}
+          ariaToolbarLabel={ariaToolbarLabel}
+        />
         <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,
@@ -233,6 +236,7 @@ export const DatagridContent = ({ datagridState, title, toolbarLabel }) => {
 };
 
 DatagridContent.propTypes = {
+  ariaToolbarLabel: PropTypes.string,
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     getFilterFlyoutProps: PropTypes.func,
@@ -265,5 +269,4 @@ DatagridContent.propTypes = {
     state: PropTypes.object,
   }),
   title: PropTypes.string,
-  toolbarLabel: PropTypes.string,
 };

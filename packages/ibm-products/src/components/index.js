@@ -98,6 +98,7 @@ export {
 } from './Guidebanner';
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
+export { BigNumbers } from './BigNumbers';
 export { TruncatedList } from './TruncatedList';
 export { InterstitialScreen } from './InterstitialScreen';
 export { InterstitialScreenView } from './InterstitialScreenView';

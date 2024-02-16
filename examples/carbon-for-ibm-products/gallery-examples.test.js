@@ -285,6 +285,10 @@ describe('All examples', () => {
 
   it('StatusIndicator renders', () => {
     render(<StatusIndicatorExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('StringFormatter renders', () => {
     render(<StringFormatterExample />);
     // expect no errors int the console

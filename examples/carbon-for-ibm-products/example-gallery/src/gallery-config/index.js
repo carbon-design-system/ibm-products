@@ -238,6 +238,8 @@ const config = [
     label: 'Status-Indicator',
     directory: 'StatusIndicator',
     thumbnail: `url(${imageStatusIndicator}`,
+  },
+  {
     label: 'String-Formatter',
     directory: 'StringFormatter',
     thumbnail: `url(${imageStringFormatter}`,

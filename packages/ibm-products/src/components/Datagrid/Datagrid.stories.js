@@ -496,7 +496,12 @@ export const BatchActions = () => {
     useStickyColumn
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <Datagrid
+      datagridState={{ ...datagridState }}
+      toolbarLabel="batch actions toolbar"
+    />
+  );
 };
 
 export const DisableSelectRow = () => {

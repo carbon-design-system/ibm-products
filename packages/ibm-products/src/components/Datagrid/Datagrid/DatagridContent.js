@@ -32,7 +32,7 @@ import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
 
-export const DatagridContent = ({ datagridState, title }) => {
+export const DatagridContent = ({ datagridState, title, toolbarLabel }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
@@ -191,7 +191,7 @@ export const DatagridContent = ({ datagridState, title }) => {
         title={gridTitle}
         description={gridDescription}
       >
-        <DatagridToolbar {...datagridState} />
+        <DatagridToolbar {...datagridState} toolbarLabel={toolbarLabel} />
         <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,
@@ -265,4 +265,5 @@ DatagridContent.propTypes = {
     state: PropTypes.object,
   }),
   title: PropTypes.string,
+  toolbarLabel: PropTypes.string,
 };

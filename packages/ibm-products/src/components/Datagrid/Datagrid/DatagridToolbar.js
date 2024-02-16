@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   TableToolbar,
   TableBatchActions,
@@ -127,7 +128,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       dispatch,
       rows: [],
       getRowId,
-      isChecked: false
+      isChecked: false,
     });
     toggleAllRowsSelected(false);
     setGlobalFilter(null);
@@ -180,7 +181,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   );
 };
 
-const DatagridToolbar = (datagridState) => {
+const DatagridToolbar = ({ toolbarLabel, ...datagridState }) => {
   const ref = useRef(null);
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
@@ -193,7 +194,7 @@ const DatagridToolbar = (datagridState) => {
       ref={ref}
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
-      <TableToolbar>
+      <TableToolbar aria-label={toolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
@@ -201,12 +202,16 @@ const DatagridToolbar = (datagridState) => {
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
-      <TableToolbar>
+      <TableToolbar aria-label={toolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>
   ) : null;
+};
+
+DatagridToolbar.propTypes = {
+  toolbarLabel: PropTypes.string,
 };
 
 export default DatagridToolbar;

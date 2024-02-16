@@ -49,6 +49,14 @@ yarn
 yarn storybook
 ```
 
+If this is the first time you're running playwright tests in the project, you
+will also need to run the follow installation command so that Playwright has the
+browsers specified in `playwright.config.js` to run the e2e tests:
+
+```bash
+yarn playwright install
+```
+
 Now you can run the playwright tests with one of the commands in the overview
 table above. This is an ongoing effort our team will be working on with some
 additions including adding these e2e tests as part of our PR checks, including

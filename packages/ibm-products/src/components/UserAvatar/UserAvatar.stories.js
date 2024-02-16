@@ -69,6 +69,10 @@ export default {
       ],
     },
   },
+  args: {
+    size: 'md',
+    tooltipAlignment: 'bottom',
+  },
   parameters: {
     styles,
     docs: {
@@ -101,5 +105,6 @@ export const Default = prepareStory(Template, {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
     name: 'thomas j. watson',
     tooltipText: 'Thomas J. Watson',
+    renderIcon: 'No icon',
   },
 });

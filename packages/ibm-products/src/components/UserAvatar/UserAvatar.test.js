@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserAvatar } from '.';
@@ -87,5 +87,19 @@ describe(componentName, () => {
   it('should render the initials when simply passing two names to the name prop', async () => {
     renderComponent({ name: 'DN' });
     expect(screen.getByText(/D/));
+  });
+
+  it('should render a tooltip if the tooltipText is supplied', async () => {
+    renderComponent({ tooltipText: 'Display name' });
+    const element = screen.getByRole('img');
+    const tooltipElement = element.closest(`span.${carbon.prefix}--tooltip`);
+    expect(tooltipElement).toBeTruthy();
+  });
+
+  it('should not render a tooltip if the tooltipText is not supplied', async () => {
+    renderComponent({ tooltipText: '' });
+    const element = screen.getByRole('img');
+    const tooltipElement = element.closest(`span.${carbon.prefix}--tooltip`);
+    expect(tooltipElement).not.toBeTruthy();
   });
 });

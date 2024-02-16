@@ -17,6 +17,7 @@ import { pkg /*, carbon */ } from '../../settings';
 
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
+import { User } from '@carbon/react/icons';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -46,6 +47,7 @@ const componentName = 'UserAvatar';
 
 const defaults = {
   size: 'md',
+  tooltipAlignment: 'bottom',
 };
 
 export let UserAvatar = React.forwardRef(
@@ -59,7 +61,7 @@ export let UserAvatar = React.forwardRef(
       renderIcon: RenderIcon,
       size = defaults.size,
       tooltipText,
-      tooltipAlignment,
+      tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },
@@ -93,6 +95,7 @@ export let UserAvatar = React.forwardRef(
       if (name) {
         return formatInitials();
       }
+      return <User {...iconProps} />;
     };
 
     const Avatar = () => (
@@ -121,15 +124,17 @@ export let UserAvatar = React.forwardRef(
     );
 
     if (tooltipText) {
-      <Tooltip
-        align={tooltipAlignment}
-        label={tooltipText}
-        className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
-      >
-        <TooltipTrigger>
-          <Avatar />
-        </TooltipTrigger>
-      </Tooltip>;
+      return (
+        <Tooltip
+          align={tooltipAlignment}
+          label={tooltipText}
+          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
+        >
+          <TooltipTrigger>
+            <Avatar />
+          </TooltipTrigger>
+        </Tooltip>
+      );
     }
     return <Avatar />;
   }

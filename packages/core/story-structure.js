@@ -60,6 +60,7 @@ const s = [
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Decorator', s: ['c/Decorator'] },
+          { n: 'String Formatter', s: ['c/StringFormatter'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },

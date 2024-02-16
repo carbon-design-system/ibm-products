@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable carbon/layout-token-use */
 /* stylelint-disable function-no-unknown */
 
 // Standard imports.
@@ -23,13 +24,12 @@
 $block-class: #{c4p-settings.$pkg-prefix}--status-indicator;
 $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 
+// Default styling
 .#{$block-class}__title {
   @include type-style('heading-02');
 
-  margin-bottom: $spacing-04;
+  margin-bottom: $spacing-02;
 }
-
-// Duplicate <InlineLoading> styling for new "incomplete".
 .#{$block-class-step}--details {
   display: flex;
   min-height: $spacing-07;
@@ -41,23 +41,39 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
   width: $spacing-06;
 }
 .#{$block-class-step}__text {
-  @include type-style('body-short-01');
+  @include type-style('body-compact-01');
 
   color: $text-primary;
 }
+.#{$block-class} .#{$block-class}__button {
+  align-items: center;
+  margin-left: $spacing-03;
+}
+.#{$block-class} .#{$block-class}__button:not([disabled]) svg {
+  margin-left: $spacing-03;
+  fill: currentColor;
+}
+
+// Text
 .#{$block-class-step}--inactive .#{$block-class-step}__text {
   color: $text-secondary;
 }
+.#{$block-class-step}--inactive svg {
+  fill: $icon-primary;
+}
 
+// Icons
+//
 // Override <InlineLoading's> large margins.
 .#{$block-class-step}--active .#{$block-class-step}__icon {
   margin-right: 0;
 }
 .#{$block-class-step}--active
   .#{c4p-settings.$carbon-prefix}--inline-loading__animation {
-  /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: to-rem(7px);
 }
+// /Override
+//
 .#{$block-class-step}--error svg {
   fill: $support-error;
 }
@@ -65,20 +81,12 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
   fill: $support-success;
 }
 
+// Error message
 .#{$block-class-step}__error-message {
   @include type-style('label-01');
 
-  /* stylelint-disable-next-line carbon/layout-token-use */
+  margin-top: to-rem(-2px);
   margin-bottom: to-rem(6px);
   margin-left: $spacing-06;
   color: $text-error;
-}
-
-.#{$block-class} .#{$block-class}__button {
-  align-items: center;
-  margin-left: $spacing-03;
-}
-.#{$block-class} .#{$block-class}__button:not([disabled]) svg {
-  margin-left: $spacing-02;
-  fill: currentColor;
 }

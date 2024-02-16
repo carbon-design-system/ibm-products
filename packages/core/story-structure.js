@@ -63,6 +63,7 @@ const s = [
             n: 'StatusIndicator',
             s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },
+          { n: 'String Formatter', s: ['c/StringFormatter'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },

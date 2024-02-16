@@ -67,6 +67,7 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,

@@ -15,6 +15,7 @@ import {
   CHECKBOX,
   CLEAR_SINGLE_FILTER,
   SAVED_FILTERS,
+  CUSTOM_MULTI,
 } from './constants';
 
 export const FilterContext = createContext();
@@ -39,7 +40,7 @@ const EventEmitter = {
 const removeFilterItem = (state, index) => state.splice(index, 1);
 
 const updateFilterState = (state, type, value) => {
-  if (type === CHECKBOX) {
+  if (type === CHECKBOX || type === CUSTOM_MULTI) {
     return;
   }
   if (type === DATE) {
@@ -61,7 +62,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
       const filterValues = f.value;
       const filterType = f.type;
       updateFilterState(tempState, filterType, value);
-      if (filterType === CHECKBOX) {
+      if (filterType === CHECKBOX || filterType === CUSTOM_MULTI) {
         /**
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
@@ -123,14 +124,14 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
           formatDateRange(startDate, endDate),
         ...sharedFilterProps,
       });
-    } else if (type === CHECKBOX) {
-      value.forEach((checkbox) => {
-        if (checkbox.selected) {
+    } else if (type === CHECKBOX || type === CUSTOM_MULTI) {
+      value.forEach((option) => {
+        if (option.selected) {
           tags.push({
             key: id,
-            value: checkbox.value,
+            value: option.value,
             ...sharedFilterProps,
-            onClose: () => handleSingleFilterRemoval(id, checkbox.value),
+            onClose: () => handleSingleFilterRemoval(id, option.value),
           });
         }
       });

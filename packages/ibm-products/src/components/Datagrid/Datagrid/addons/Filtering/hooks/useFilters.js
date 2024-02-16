@@ -8,6 +8,7 @@
 import {
   BATCH,
   CHECKBOX,
+  CUSTOM_MULTI,
   DATE,
   DROPDOWN,
   INSTANT,
@@ -168,7 +169,7 @@ const useFilters = ({
   };
 
   /** Render the individual filter component */
-  const renderFilter = ({ type, column, props: components }) => {
+  const renderFilter = ({ type, column, props: components, component }) => {
     let filter;
     const isPanel = variation === PANEL;
 
@@ -344,6 +345,42 @@ const useFilters = ({
           />
         );
         break;
+      case CUSTOM_MULTI: {
+        const CustomFilterComponent = component;
+        const ClonedFilterComponent = React.cloneElement(<CustomFilterComponent />, {
+          onChange: ({ selectedItems }) => {
+            {component.props?.onChange?.()}
+            // List of items to select/filter from
+            const allOptions = filtersState[column].value;
+
+            // Find selected items from list of options
+            const foundItems = selectedItems.map(item => {
+              if (allOptions.filter(option => option.text === item.value)) {
+                return allOptions.filter(option => option.text === item.value)[0]
+              }
+              return null;
+            }).filter(Boolean);
+            // Change selected state for those items that have been selected
+            foundItems.map(item => item.selected = true);
+            setFiltersState({
+              ...filtersState,
+              [column]: {
+                value: allOptions,
+                type,
+              }
+            });
+            applyFilters({
+              column,
+              value: [...filtersState[column].value],
+              type,
+            });
+          }
+        });
+        filter = (
+          ClonedFilterComponent
+        );
+        break;  
+      }
     }
 
     if (isPanel) {

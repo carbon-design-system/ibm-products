@@ -7,6 +7,7 @@
 
 import {
   CHECKBOX,
+  CUSTOM_MULTI,
   DATE,
   DROPDOWN,
   FLYOUT,
@@ -65,6 +66,16 @@ export const getInitialStateFromFilters = (
         value: '',
         type,
       };
+    } 
+    else if (type === CUSTOM_MULTI) {
+      initialFilterState[column] = {
+        value: props.items.map(({ text, id }) => ({
+          id,
+          value: text,
+          selected: false,
+        })),
+        type,
+      }
     }
   };
 

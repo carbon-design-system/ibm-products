@@ -158,6 +158,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     clearSingleFilter(id, setAllFilters, state)
   );
 
+  // console.log(filterTags);
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary

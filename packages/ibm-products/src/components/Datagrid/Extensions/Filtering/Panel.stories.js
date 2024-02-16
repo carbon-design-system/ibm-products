@@ -8,7 +8,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
-import { Tooltip } from '@carbon/react';
+import { Tooltip, MultiSelect } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
@@ -167,6 +167,7 @@ const FilteringTemplateWrapper = ({ ...args }) => {
   return <FilteringUsage defaultGridProps={{ ...args }} />;
 };
 
+
 // Example usage of mapping locale to flatpickr date format or placeholder value (m/d/Y or mm/dd/yyyy)
 export const getDateFormat = (lang, full) => {
   const formatObj = new Intl.DateTimeFormat(lang).formatToParts(new Date());
@@ -184,6 +185,16 @@ export const getDateFormat = (lang, full) => {
       }
     })
     .join('');
+};
+
+const propsForCustomFilter = {
+  // items: ['relationship', 'complicated', 'single'],
+  items: [
+    {text: 'relationship', id: 'relationship'},
+    {text: 'complicated', id: 'complicated'},
+    {text: 'single', id: 'single'},
+  ],
+  id: 'carbon-multiselect-example'
 };
 
 export const filterProps = {
@@ -224,20 +235,50 @@ export const filterProps = {
             },
           },
         },
+        // {
+        //   filterLabel: 'Status',
+        //   filter: {
+        //     type: 'dropdown',
+        //     column: 'status',
+        //     props: {
+        //       Dropdown: {
+        //         id: 'marital-status-dropdown',
+        //         ['aria-label']: 'Marital status dropdown',
+        //         items: ['relationship', 'complicated', 'single'],
+        //         label: 'Marital status',
+        //         titleText: 'Marital status',
+        //       },
+        //     },
+        //   },
+        // },
         {
-          filterLabel: 'Status',
+          filterLabel: 'Multi select test',
           filter: {
-            type: 'dropdown',
+            type: 'customMulti',
             column: 'status',
             props: {
-              Dropdown: {
-                id: 'marital-status-dropdown',
-                ['aria-label']: 'Marital status dropdown',
-                items: ['relationship', 'complicated', 'single'],
-                label: 'Marital status',
-                titleText: 'Marital status',
-              },
+              ...propsForCustomFilter
             },
+            component: ({ ...rest }) => <MultiSelect
+              {...propsForCustomFilter}
+              label="Multiselect Label"
+              titleText="Multiselect title"
+              itemToString={(item) => (item ? item.text : '')}
+              selectionFeedback="top-after-reopen"
+              size={'md'}
+              type={'default'}
+              disabled={false}
+              hideLabel={false}
+              invalid={false}
+              warn={false}
+              open={false}
+              warnText={'whoopsie!'}
+              invalidText={'whoopsie!'}
+              clearSelectionDescription={'Total items selected: '}
+              useTitleInItem={false}
+              clearSelectionText={'To clear selection, press Delete or Backspace,'}
+              {...rest}
+            />
           },
         },
       ],

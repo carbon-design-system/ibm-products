@@ -353,7 +353,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: fixed;
+    position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;

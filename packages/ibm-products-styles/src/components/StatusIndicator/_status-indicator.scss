@@ -47,6 +47,7 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 }
 .#{$block-class} .#{$block-class}__button {
   align-items: center;
+  margin-top: $spacing-01;
   margin-left: $spacing-03;
 }
 .#{$block-class} .#{$block-class}__button:not([disabled]) svg {

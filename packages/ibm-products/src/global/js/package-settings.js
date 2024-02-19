@@ -67,11 +67,12 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
-
     ScrollGradient: false,
+    StringFormatter: false,
 
     /* new component flags here - comment used by generate CLI */
 

@@ -11,7 +11,14 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 
-import { Button, Form, FormGroup, TextInput } from '@carbon/react';
+import {
+  Button,
+  Form,
+  FormGroup,
+  TextInput,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
+} from '@carbon/react';
 
 import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
 
@@ -57,6 +64,17 @@ export default {
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
     portalTarget: { control: { disable: true } },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
 };
 
@@ -83,9 +101,29 @@ const mainContent = (
 
 const title = 'Title of the tearsheet';
 
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
+
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, ...args }) => {
+const Template = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
@@ -113,6 +151,7 @@ const Template = ({ actions, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
+          slug={slug && sampleSlug}
         >
           {mainContent}
         </TearsheetNarrow>
@@ -122,7 +161,7 @@ const Template = ({ actions, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, ...args }) => {
+const StackedTemplate = ({ actions, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -194,6 +233,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #1"
           open={open1}
           onClose={() => setOpen1(false)}
+          slug={slug && sampleSlug}
         >
           <div className="tearsheet-stories__narrow-content-block">
             Main content 1
@@ -205,6 +245,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #2"
           open={open2}
           onClose={() => setOpen2(false)}
+          slug={slug && sampleSlug}
           selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
@@ -217,6 +258,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           title="Tearsheet #3"
           open={open3}
           onClose={() => setOpen3(false)}
+          slug={slug && sampleSlug}
           selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
@@ -250,6 +292,7 @@ export const fullyLoaded = prepareStory(Template, {
     onClose: action('onClose called'),
     title,
     actions: 0,
+    slug: 1,
   },
 });
 

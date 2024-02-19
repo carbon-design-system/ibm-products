@@ -19,6 +19,7 @@ import {
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
+import { Add, Group, User } from '@carbon/react/icons';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
@@ -39,6 +40,19 @@ export default {
       },
       options: ['light-cyan', 'dark-cyan'],
     },
+    renderIcon: {
+      control: {
+        type: 'select',
+      },
+      options: ['No icon', 'User', 'Group', 'Add'],
+      mapping: { 'No icon': '', User: User, Group: Group, Add: Add },
+    },
+    size: {
+      control: {
+        type: 'radio',
+      },
+      options: ['xl', 'lg', 'md', 'sm'],
+    },
     tooltipAlignment: {
       control: {
         type: 'select',
@@ -54,6 +68,10 @@ export default {
         'right',
       ],
     },
+  },
+  args: {
+    size: 'md',
+    tooltipAlignment: 'bottom',
   },
   parameters: {
     styles,
@@ -80,10 +98,13 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const userAvatar = prepareStory(Template, {
+export const Default = prepareStory(Template, {
+  storyName: 'Default',
   args: {
     ...defaultArgs,
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
+    name: 'thomas j. watson',
     tooltipText: 'Thomas J. Watson',
+    renderIcon: 'No icon',
   },
 });

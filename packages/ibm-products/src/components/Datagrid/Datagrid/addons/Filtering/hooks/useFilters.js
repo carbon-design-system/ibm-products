@@ -347,9 +347,11 @@ const useFilters = ({
         break;
       case CUSTOM_MULTI: {
         const CustomFilterComponent = component;
+        // console.log(typeof component, component && component());
+        console.log(components);
         const ClonedFilterComponent = React.cloneElement(<CustomFilterComponent />, {
           onChange: ({ selectedItems }) => {
-            {component.props?.onChange?.()}
+            components?.onChange?.({ selectedItems });
             // List of items to select/filter from
             const allOptions = filtersState[column].value;
 

@@ -59,6 +59,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     state,
     page,
     rows,
+    onClearFilters,
   } = datagridState;
   const { columnResizing } = state;
 
@@ -164,7 +165,10 @@ export const DatagridContent = ({ datagridState, title }) => {
       <FilterSummary
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        clearFilters={() => {
+          EventEmitter.dispatch(CLEAR_FILTERS);
+          onClearFilters?.();
+        }}
         renderLabel={filterProps.renderLabel}
         overflowType="tag"
       />
@@ -264,6 +268,7 @@ DatagridContent.propTypes = {
     setAllFilters: PropTypes.func,
     getFilterProps: PropTypes.func,
     state: PropTypes.object,
+    onClearFilters: PropTypes.func,
   }),
   title: PropTypes.string,
 };

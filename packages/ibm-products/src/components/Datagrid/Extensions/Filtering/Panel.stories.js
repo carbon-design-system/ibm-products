@@ -140,6 +140,38 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(initialData ?? makeData(20));
+  const [items, setItems] = useState([]);
+
+  const onClearFilters = () => {
+    console.log('custom clear filter cb!');
+  }
+
+  const CustomMultiSelect = ({ ...rest }) => <MultiSelect
+    {...propsForCustomFilter}
+    label="Multiselect Label"
+    titleText="Multiselect title"
+    itemToString={(item) => (item ? item.text : '')}
+    selectionFeedback="top-after-reopen"
+    size={'md'}
+    type={'default'}
+    disabled={false}
+    hideLabel={false}
+    invalid={false}
+    warn={false}
+    open={false}
+    // selectedItems={items}
+    onChange={({ selectedItems }) => {
+      console.log('test');
+      console.log(selectedItems);
+      // setItems(selectedItems);
+    }}
+    warnText={'whoopsie!'}
+    invalidText={'whoopsie!'}
+    clearSelectionDescription={'Total items selected: '}
+    useTitleInItem={false}
+    clearSelectionText={'To clear selection, press Delete or Backspace,'}
+    {...rest}
+  />
 
   const datagridState = useDatagrid(
     {
@@ -149,12 +181,13 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
-      filterProps,
+      filterProps: filterProps({ CustomMultiSelect }),
       gridTitle,
       gridDescription,
       useDenseHeader,
       emptyStateTitle,
       emptyStateDescription,
+      onClearFilters
     },
     useFiltering,
     useColumnCenterAlign
@@ -194,10 +227,13 @@ const propsForCustomFilter = {
     {text: 'complicated', id: 'complicated'},
     {text: 'single', id: 'single'},
   ],
-  id: 'carbon-multiselect-example'
+  id: 'carbon-multiselect-example',
+  onChange: (s) => console.log('custom multi select on change', s)
 };
 
-export const filterProps = {
+export const filterProps = ({
+  CustomMultiSelect,
+}) => ({
   variation: 'panel',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',
@@ -259,26 +295,7 @@ export const filterProps = {
             props: {
               ...propsForCustomFilter
             },
-            component: ({ ...rest }) => <MultiSelect
-              {...propsForCustomFilter}
-              label="Multiselect Label"
-              titleText="Multiselect title"
-              itemToString={(item) => (item ? item.text : '')}
-              selectionFeedback="top-after-reopen"
-              size={'md'}
-              type={'default'}
-              disabled={false}
-              hideLabel={false}
-              invalid={false}
-              warn={false}
-              open={false}
-              warnText={'whoopsie!'}
-              invalidText={'whoopsie!'}
-              clearSelectionDescription={'Total items selected: '}
-              useTitleInItem={false}
-              clearSelectionText={'To clear selection, press Delete or Backspace,'}
-              {...rest}
-            />
+            component: CustomMultiSelect,
           },
         },
       ],
@@ -377,7 +394,7 @@ export const filterProps = {
     const endDateObj = new Date(end);
     return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
   },
-};
+});
 
 export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
   storyName: 'Filter panel with batch update',

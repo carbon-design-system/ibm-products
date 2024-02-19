@@ -8,7 +8,8 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
 // or
@@ -19,7 +20,83 @@
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
+$scroll-gradient__layer: 1;
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  width: inherit;
+  height: inherit;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.#{$block-class}__content {
+  overflow: auto;
+  width: 100%;
+  height: inherit;
+}
+.#{$block-class}__before,
+.#{$block-class}__after {
+  position: absolute;
+  z-index: $scroll-gradient__layer;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: $duration-moderate-02;
+  transition-property: opacity;
+  transition-timing-function: motion($name: standard);
+}
+.#{$block-class}--x {
+  // TODO: Styles.
+  .#{$block-class}__before,
+  .#{$block-class}__after {
+    top: 0;
+    width: $spacing-09;
+    height: 100%;
+  }
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
+  .#{$block-class}__before {
+    left: 0;
+  }
+  .#{$block-class}__after {
+    right: 0;
+  }
+}
+.#{$block-class}--y {
+  // TODO: Styles.
+  .#{$block-class}__before,
+  .#{$block-class}__after {
+    left: 0;
+    width: 100%;
+    height: $spacing-09;
+  }
+  .#{$block-class}__before {
+    top: 0;
+  }
+  .#{$block-class}__after {
+    bottom: 0;
+  }
+}
+.#{$block-class}--initial,
+.#{$block-class}--started {
+  // TODO: Styles.
+
+  .#{$block-class}__after {
+    opacity: 1;
+  }
+}
+
+.#{$block-class}--end,
+.#{$block-class}--started {
+  // TODO: Styles.
+  > .#{$block-class}__before {
+    opacity: 1;
+  }
+}
+.#{$block-class}--initial > .#{$block-class}__before {
+  // TODO: Styles.
+  transition-duration: $duration-fast-02;
+}
+.#{$block-class}--end > .#{$block-class}__after {
+  // TODO: Styles.
+  transition-duration: $duration-fast-02;
+}

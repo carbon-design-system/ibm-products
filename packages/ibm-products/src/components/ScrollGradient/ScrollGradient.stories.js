@@ -18,7 +18,21 @@ import { ScrollGradient } from '.';
 import mdx from './ScrollGradient.mdx';
 
 import styles from './_storybook-styles.scss';
-import { scrollDirection } from './constants';
+import { ScrollDirection } from './constants';
+
+const storyCopy =
+  'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet rerum aliquid perferendis, nulla nam ad excepturi, iure earum dolorum ipsa quae cum voluptatibus nemo quis debitis, aperiam repudiandae dolore deleniti.';
+
+const storyChildren = (
+  <>
+    <p>{storyCopy}</p>
+    <p>{storyCopy}</p>
+    <p>{storyCopy}</p>
+    <p>{storyCopy}</p>
+    <p>{storyCopy}</p>
+    <p>{storyCopy}</p>
+  </>
+);
 
 export default {
   title: getStoryTitle(ScrollGradient.displayName),
@@ -48,7 +62,7 @@ const Template = (args) => {
       color={'#444444'}
       style={style}
       className={'myScrollGradient'}
-      direction={scrollDirection.X}
+      direction={ScrollDirection.X}
       {...args}
     />
   );
@@ -61,6 +75,6 @@ const Template = (args) => {
 export const scrollGradient = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ScrollGradient-args
-    children: 'hello, world',
+    children: storyChildren,
   },
 });

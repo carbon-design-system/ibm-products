@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -14,10 +14,10 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
-
+import { throttle } from 'lodash';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { scrollDirection } from './constants';
+import { ScrollDirection, ScrollStates, getScrollState } from './constants';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
@@ -26,7 +26,7 @@ const componentName = 'ScrollGradient';
 
 // Default values for props
 const defaults = {
-  direction: scrollDirection.Y,
+  direction: ScrollDirection.Y,
   hideStartGradient: false,
   onScroll: () => {},
   getScrollElementRef: () => {},
@@ -54,8 +54,24 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const gradientRotation = direction === scrollDirection.X ? -90 : 0;
+    const gradientRotation = direction === ScrollDirection.X ? -90 : 0;
+    const [position, setPosition] = useState(ScrollStates.NONE);
+    const scrollContainer = useRef();
+    const updateScrollState = () => {
+      setPosition(getScrollState(scrollContainer, direction));
+    };
 
+    const scrollHandler = (event) => {
+      onScroll(event);
+      throttle(() => {
+        updateScrollState();
+      }, 150);
+    };
+
+    const setRefs = (element) => {
+      scrollContainer.current = element;
+      getScrollElementRef(element);
+    };
     return (
       <div
         {
@@ -88,8 +104,8 @@ export let ScrollGradient = React.forwardRef(
           />
         )}
         <div
-          onScroll={this.scrollHandler}
-          ref={this.setRefs}
+          onScroll={scrollHandler}
+          ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
         >
           {children}
@@ -135,7 +151,7 @@ ScrollGradient.propTypes = {
   color: PropTypes.string.isRequired,
 
   /** @type {string} Scroll direction */
-  direction: PropTypes.oneOf(Object.values(scrollDirection)),
+  direction: PropTypes.oneOf(Object.values(ScrollDirection)),
 
   /** @type {(element: HTMLElement) => {}} Optional function to get reference to scrollable DOM element */
   getScrollElementRef: PropTypes.func,

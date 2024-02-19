@@ -59,6 +59,7 @@ const s = [
           },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'Scroll gradient', s: ['c/ScrollGradient'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },

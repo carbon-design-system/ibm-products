@@ -108,3 +108,13 @@ export const Default = prepareStory(Template, {
     renderIcon: 'No icon',
   },
 });
+
+export const WithImage = prepareStory(Template, {
+  storyName: 'WithImage',
+  args: {
+    ...defaultArgs,
+    image:
+      'https://dam.ibm.com/content/dam/worldwide-content/stock-assets/getty/image/photography/3c/b5/ti6100131.jpg.library.preview_lg_2x.1706701937316.jpg',
+    imageDescription: 'image here',
+  },
+});

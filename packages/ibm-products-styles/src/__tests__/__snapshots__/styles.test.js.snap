@@ -2562,7 +2562,7 @@ p.c4p--about-modal__copyright-text:first-child {
   height: 2.5rem;
 }
 .c4p--side-panel .c4p--side-panel__slug-and-close {
-  position: fixed;
+  position: absolute;
   z-index: 10; /* must be higher than title container border bottom */
   top: 0;
   right: 0;

@@ -86,7 +86,7 @@ describe(componentName, () => {
 
   it('should render the initials when simply passing two names to the name prop', async () => {
     renderComponent({ name: 'DN' });
-    expect(screen.getByText(/D/));
+    expect(screen.getByText(/DN/));
   });
 
   it('should render a tooltip if the tooltipText is supplied', async () => {

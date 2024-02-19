@@ -77,8 +77,9 @@ export let UserAvatar = React.forwardRef(
     const formatInitials = () => {
       const parts = name.split(' ');
       const firstChar = parts[0].charAt(0).toUpperCase();
+      const secondChar = parts[0].charAt(1).toUpperCase();
       if (parts.length === 1) {
-        return firstChar;
+        return firstChar + secondChar;
       }
       const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
       const initials = [firstChar];

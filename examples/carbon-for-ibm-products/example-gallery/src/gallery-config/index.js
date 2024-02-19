@@ -10,6 +10,7 @@
 const defaultOrNot = (item) => item.default || item;
 /* --- import Thumbnails */ import imageAPIKeyModal from './APIKeyModal--thumbnail.png';
 import imageAboutModal from './AboutModal--thumbnail.png';
+import imageBigNumbers from './BigNumbers--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
 import imageCoachmark from './Coachmark--thumbnail.png';
 import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
@@ -46,6 +47,7 @@ import imageSaving from './Saving--thumbnail.png';
 import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
+import imageStringFormatter from './StringFormatter--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
 import imageTruncatedList from './TruncatedList--thumbnail.png';
@@ -65,6 +67,11 @@ const config = [
     label: 'About Modal',
     directory: 'AboutModal',
     thumbnail: `url(${imageAboutModal}`,
+  },
+  {
+    label: 'Big-Numbers',
+    directory: 'BigNumbers',
+    thumbnail: `url(${imageBigNumbers}`,
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
   {
@@ -237,6 +244,11 @@ const config = [
     label: 'StatusIcon',
     directory: 'StatusIcon',
     thumbnail: `url(${imageStatusIcon}`,
+  },
+  {
+    label: 'String-Formatter',
+    directory: 'StringFormatter',
+    thumbnail: `url(${imageStringFormatter}`,
   },
   { label: 'TagSet', directory: 'TagSet', thumbnail: `url(${imageTagSet}` },
   {

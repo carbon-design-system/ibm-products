@@ -98,6 +98,7 @@ export {
 } from './Guidebanner';
 export { InlineTip, InlineTipButton, InlineTipLink } from './InlineTip';
 export { NonLinearReading } from './NonLinearReading';
+export { BigNumbers } from './BigNumbers';
 export { TruncatedList } from './TruncatedList';
 export { InterstitialScreen } from './InterstitialScreen';
 export { InterstitialScreenView } from './InterstitialScreenView';
@@ -106,4 +107,5 @@ export { DelimitedList } from './DelimitedList';
 export { DescriptionList } from './DescriptionList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
+export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';

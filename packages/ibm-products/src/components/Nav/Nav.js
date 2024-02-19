@@ -139,19 +139,29 @@ export let Nav = React.forwardRef(
 );
 
 Nav.propTypes = {
-  /** @type {string} Hypertext reference for active page. */
+  /**
+   * Hypertext reference for active page.
+   */
   activeHref: PropTypes.string,
 
-  /** @type {Node} Child elements. */
+  /**
+   * Child elements.
+   */
   children: PropTypes.node,
 
-  /** @type {string} Extra classes to add. */
+  /**
+   * Extra classes to add.
+   */
   className: PropTypes.string,
 
-  /** @type {string} Heading */
+  /**
+   * Heading.
+   */
   heading: PropTypes.string,
 
-  /** @type {string} Aria-label on the rendered `nav` element. */
+  /**
+   * Aria-label on the rendered `nav` element.
+   */
   label: PropTypes.string.isRequired,
 };
 

@@ -45,7 +45,7 @@ export default {
 const Template = (args) => {
   return (
     <div style={{ width: '300px' }}>
-      <Nav heading="Nav example" label="Navigation">
+      <Nav {...args}>
         <NavList title="Nav list 1">
           <NavItem key="navitem_1-1" element="span" customprop="uniqueValue">
             Nav item 1-1 (with a custom element)
@@ -56,7 +56,9 @@ const Template = (args) => {
         </NavList>
         <NavList title="Nav list 2 expanded on page load" isExpandedOnPageload>
           <NavItem key="navitem_2-1" href="#navitem_2-1">
-            Nav item 2-1
+            Nav item 2-1 - Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.
           </NavItem>
           <NavItem key="navitem_2-2" href="#navitem_2-2">
             Nav item 2-2
@@ -82,7 +84,7 @@ const Template = (args) => {
 export const nav = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Nav-args
-    children: 'hello, world',
-    label: 'test',
+    label: 'Navigation',
+    heading: 'Nav example',
   },
 });

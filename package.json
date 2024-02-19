@@ -1,5 +1,8 @@
 {
   "name": "ibm-products",
+  "engines": {
+    "node": ">=20.x"
+  },
   "private": true,
   "version": "0.0.0",
   "repository": "git@github.com:carbon-design-system/ibm-products.git",
@@ -37,7 +40,7 @@
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
     "test:community": "lerna run --stream --scope @carbon/ibm-products-community test --",
-    "spellcheck": "cspell lint",
+    "spellcheck": "cspell '**' -e './examples' --gitignore",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
@@ -60,12 +63,14 @@
     "@babel/preset-react": "^7.17.12",
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
+    "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "@typescript-eslint/parser": "^5.59.6",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "accessibility-checker": "^3.1.65",
     "cheerio": "^1.0.0-rc.12",
     "copyfiles": "^2.4.1",
     "cspell": "^8.3.2",
@@ -183,7 +188,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell"
@@ -192,8 +197,9 @@
       "npx prettier --cache --write",
       "npx stylelint"
     ],
-    "!(*sass).md": [
-      "npx prettier --cache --write"
+    "!(examples/**/*).md": [
+      "npx prettier --cache --write",
+      "npx cspell"
     ]
   },
   "dependencies": {

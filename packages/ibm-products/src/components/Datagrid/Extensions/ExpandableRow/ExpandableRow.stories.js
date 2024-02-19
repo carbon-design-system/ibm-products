@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -175,12 +175,11 @@ const ExpansionRenderer = ({ row }) => {
 const ExpandedRows = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
     {
       columns,
-      data: rows,
+      data,
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
@@ -191,6 +190,7 @@ const ExpandedRows = ({ ...args }) => {
       tags: ['autodocs'],
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
+      onRowExpand: (row, event) => console.log(row, event),
       ...args.defaultGridProps,
     },
     useSelectRows,

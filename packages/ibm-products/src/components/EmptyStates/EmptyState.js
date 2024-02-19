@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React from 'react';
+import { EmptyStateV2 } from '.';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -32,59 +33,55 @@ export const defaults = {
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let EmptyState = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
-      action,
-      className,
-      illustration,
-      illustrationDescription,
-      illustrationPosition = defaults.position,
-      link,
-      size = defaults.size,
-      subtitle,
-      title,
-
-      // Collect any other property values passed in.
-      ...rest
-    },
-    ref
-  ) => {
-    return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(blockClass, `${blockClass}-type--default`, className, {
-          [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
-        })}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      >
-        {illustration && (
-          <img
-            src={illustration}
-            alt={illustrationDescription}
-            className={cx([
-              `${blockClass}__illustration`,
-              `${blockClass}__illustration--${size}`,
-            ])}
-          />
-        )}
-        <EmptyStateContent
-          action={action}
-          link={link}
-          size={size}
-          subtitle={subtitle}
-          title={title}
-        />
-      </div>
-    );
+export let EmptyState = React.forwardRef(({ v2 = false, ...props }, ref) => {
+  // todo: deprecate v1
+  if (v2) {
+    return <EmptyStateV2 {...props} />;
   }
-);
+  const {
+    action,
+    className,
+    illustration,
+    illustrationDescription,
+    illustrationPosition = defaults.position,
+    link,
+    size = defaults.size,
+    subtitle,
+    title,
+    ...rest
+  } = props;
+  return (
+    <div
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(blockClass, `${blockClass}-type--default`, className, {
+        [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
+      })}
+      ref={ref}
+      {...getDevtoolsProps(componentName)}
+    >
+      {illustration && (
+        <img
+          src={illustration}
+          alt={illustrationDescription}
+          className={cx([
+            `${blockClass}__illustration`,
+            `${blockClass}__illustration--${size}`,
+          ])}
+        />
+      )}
+      <EmptyStateContent
+        action={action}
+        link={link}
+        size={size}
+        subtitle={subtitle}
+        title={title}
+      />
+    </div>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
@@ -147,6 +144,11 @@ EmptyState.propTypes = {
    * Empty state heading
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /**
+   * Designates which version of the EmptyState component is being used.
+   * Refer to V2 documentation separately.
+   */
+  v2: PropTypes.bool,
 };
 
 EmptyState.displayName = componentName;

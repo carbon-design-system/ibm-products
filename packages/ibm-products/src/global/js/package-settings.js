@@ -67,8 +67,12 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
+    FullPageError: false,
+
+    StringFormatter: false,
 
     /* new component flags here - comment used by generate CLI */
 
@@ -81,10 +85,12 @@ const defaults = {
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
     SearchBar: false,
+    UserAvatar: false,
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,
     GuidebannerElementButton: false,
@@ -103,7 +109,6 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInlineEdit': false,
     'Datagrid.useEditableCell': false,
-    'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,

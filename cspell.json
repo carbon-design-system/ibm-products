@@ -74,6 +74,7 @@
     "buildhome",
     "callout",
     "checkmark",
+    "Coachmark",
     "codemods",
     "codesandbox",
     "colindex",
@@ -93,6 +94,7 @@
     "expressivecard",
     "gridcell",
     "guidebanner",
+    "haspopup",
     "homescreen",
     "inlineedit",
     "listbox",
@@ -115,12 +117,14 @@
     "rowgroup",
     "rowheader",
     "rowindex",
+    "ruleset",
     "sbdocs",
     "scrollend",
     "semibold",
     "serializers",
     "setsize",
     "sidepanel",
+    "skipnav",
     "stackable",
     "stackblitz",
     "statusicon",
@@ -143,6 +147,7 @@
     "treeview",
     "userprofileimage",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "Coachmark"
   ]
 }

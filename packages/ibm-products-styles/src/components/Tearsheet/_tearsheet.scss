@@ -93,6 +93,22 @@ $motion-duration: $duration-moderate-02;
     transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 
+  &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
+    .#{$block-class}__container {
+    border: 1px solid transparent;
+    /* override carbon ai removing background gradient */
+    background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
+        padding-box,
+      linear-gradient(
+          to bottom,
+          var(--cds-ai-border-start, #78a9ff),
+          var(--cds-ai-border-end, #d0e2ff)
+        )
+        border-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+    box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+  }
+
   // extra specificity to ensure this transition overrides the carbon default
   &.#{$block-class}.#{$block-class} .#{$block-class}__container {
     transition: transform $motion-duration motion(entrance, expressive),
@@ -223,8 +239,14 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide
+    .#{$block-class}__header.#{$block-class}__header--with-close-icon,
+  &.#{$block-class}--has-slug .#{$block-class}__header.#{$block-class}__header {
+    padding-right: $spacing-11;
+  }
+
+  &.#{$block-class}--wide.#{$block-class}--has-slug
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
-    padding-right: $spacing-10;
+    margin-right: $spacing-09;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {
@@ -292,6 +314,10 @@ $motion-duration: $duration-moderate-02;
     flex-grow: 1;
   }
 
+  &.#{$block-class}--has-slug .#{$block-class}__main {
+    @include utilities.callout-gradient('default', 0);
+  }
+
   &.#{$block-class}--wide .#{$block-class}__content {
     // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
     .#{$carbon-prefix}--pagination,
@@ -320,7 +346,8 @@ $motion-duration: $duration-moderate-02;
     .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
     /* stylelint-disable-next-line prettier/prettier */
     .#{$carbon-prefix}--number--light input[type='number'],
-    .#{$carbon-prefix}--date-picker--light .#{$carbon-prefix}--date-picker__input {
+    .#{$carbon-prefix}--date-picker--light
+      .#{$carbon-prefix}--date-picker__input {
       background-color: $field-02;
     }
   }
@@ -339,5 +366,10 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--wide .#{$block-class}__buttons {
     background: $background;
+  }
+
+  &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
+    .#{$carbon-prefix}--slug {
+    inset-inline-end: 0;
   }
 }

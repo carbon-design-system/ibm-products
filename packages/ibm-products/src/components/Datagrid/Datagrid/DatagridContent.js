@@ -33,7 +33,7 @@ const { TableContainer, Table } = DataTable;
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-export const DatagridContent = ({ datagridState, title }) => {
+export const DatagridContent = ({ ariaToolbarLabel, datagridState, title }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
@@ -197,8 +197,10 @@ export const DatagridContent = ({ datagridState, title }) => {
         title={gridTitle}
         description={gridDescription}
       >
-        <DatagridToolbar {...datagridState} />
-
+        <DatagridToolbar
+          {...datagridState}
+          ariaToolbarLabel={ariaToolbarLabel}
+        />
         <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,
@@ -239,6 +241,7 @@ export const DatagridContent = ({ datagridState, title }) => {
 };
 
 DatagridContent.propTypes = {
+  ariaToolbarLabel: PropTypes.string,
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     getFilterFlyoutProps: PropTypes.func,

@@ -533,7 +533,12 @@ export const BatchActions = () => {
     useStickyColumn
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <Datagrid
+      datagridState={{ ...datagridState }}
+      ariaToolbarLabel="batch actions toolbar"
+    />
+  );
 };
 
 export const DisableSelectRow = () => {

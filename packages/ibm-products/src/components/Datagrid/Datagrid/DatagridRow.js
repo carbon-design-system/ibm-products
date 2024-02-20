@@ -116,8 +116,6 @@ const DatagridRow = (datagridState) => {
       hoverHandler(event);
     }
   };
-  // console.log(isValidElement(row?.original?.slug));
-  // console.log(rowClassNames);
 
   const setAdditionalRowProps = () => {
     if (withNestedRows || withExpandedRows) {

@@ -65,9 +65,9 @@ $sizes: (
 }
 
 @mixin photo-styling {
-  object-fit: fill;
-  border-radius: 100%;
   position: fixed;
+  border-radius: 100%;
+  object-fit: fill;
 }
 
 @mixin setBgColor($color) {
@@ -103,8 +103,8 @@ $sizes: (
 }
 
 .#{$block-class}__photo {
-  object-fit: contain;
   border-radius: 100%;
+  object-fit: contain;
 }
 .#{$block-class}__photo--xl {
   @include photo-styling;

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@1.5.0...@carbon/ibm-cloud-cognitive-core@1.6.0) (2024-02-20)
+
+
+### Features
+
+* add compliance footer ([#4226](https://github.com/carbon-design-system/ibm-products/issues/4226)) ([dac1a10](https://github.com/carbon-design-system/ibm-products/commit/dac1a100f1f4da91d15cf784b595758a1d5a134e))
+
+
+
+
+
 # [1.5.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@1.4.5...@carbon/ibm-cloud-cognitive-core@1.5.0) (2023-12-26)
 
 

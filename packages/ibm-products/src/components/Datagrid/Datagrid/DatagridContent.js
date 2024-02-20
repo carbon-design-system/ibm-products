@@ -263,7 +263,6 @@ DatagridContent.propTypes = {
     setAllFilters: PropTypes.func,
     getFilterProps: PropTypes.func,
     state: PropTypes.object,
-    onClearFilters: PropTypes.func,
   }),
   title: PropTypes.string,
 };

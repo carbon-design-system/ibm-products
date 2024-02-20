@@ -46,7 +46,12 @@ export default {
       },
     },
   },
-  excludeStories: ['FilteringUsage', 'filterProps', 'getDateFormat'],
+  excludeStories: [
+    'FilteringUsage',
+    'filterProps',
+    'getDateFormat',
+    'multiSelectProps',
+  ],
 };
 
 // This is to show off the View all button in checkboxes
@@ -187,7 +192,7 @@ export const getDateFormat = (lang, full) => {
     .join('');
 };
 
-const propsForCustomFilter = {
+export const multiSelectProps = {
   // items: ['relationship', 'complicated', 'single'],
   items: [
     { text: 'relationship', id: 'relationship' },
@@ -254,7 +259,7 @@ export const filterProps = {
             column: 'status',
             props: {
               MultiSelect: {
-                ...propsForCustomFilter,
+                ...multiSelectProps,
               },
             },
           },

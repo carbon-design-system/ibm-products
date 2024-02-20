@@ -509,7 +509,7 @@ TearsheetShell.propTypes = {
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
    */
   slug: PropTypes.node,
 

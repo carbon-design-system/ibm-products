@@ -14,6 +14,7 @@ import {
   NUMBER,
   PANEL,
   RADIO,
+  SAVED_FILTERS,
 } from '../constants';
 import {
   Checkbox,
@@ -26,11 +27,18 @@ import {
   RadioButton,
   RadioButtonGroup,
 } from '@carbon/react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from 'react';
 
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
+import { FilterContext } from '../FilterProvider';
 import { handleCheckboxChange } from '../handleCheckboxChange';
 
 const useFilters = ({
@@ -44,6 +52,8 @@ const useFilters = ({
   autoHideFilters,
   isFetching,
 }) => {
+  const { state, dispatch: localDispatch } = useContext(FilterContext);
+  const { savedFilters } = state;
   /** State */
   const [filtersState, setFiltersState] = useState(
     getInitialStateFromFilters(filters, variation, reactTableFiltersState)
@@ -141,6 +151,16 @@ const useFilters = ({
     }
 
     setFiltersObjectArray(filterCopy);
+
+    // Dispatch action from local filter context to track filters in order
+    // to keep history if `isFetching` becomes true. If so, react-table
+    // clears all filter history
+    localDispatch({
+      type: SAVED_FILTERS,
+      payload: {
+        savedFilters: filterCopy,
+      },
+    });
 
     if (updateMethod === INSTANT) {
       setAllFilters(filterCopy);
@@ -373,10 +393,34 @@ const useFilters = ({
       setAllFilters(JSON.parse(prevFiltersObjectArrayRef.current));
       setFetchingReset(true);
     }
+    if (isFetching && fetchingReset) {
+      const cleanFilters = (originalFilterState) => {
+        const copy = { ...originalFilterState };
+        const updatedFilters = savedFilters.map((f) => {
+          if (Object.hasOwn(copy, f.id)) {
+            copy[f.id] = f;
+            return copy;
+          }
+          return copy;
+        });
+        return updatedFilters[0];
+      };
+      setFiltersObjectArray(savedFilters);
+      const filterStateCopy = cleanFilters(filtersState);
+      setFiltersState(filterStateCopy);
+    }
     if (!isFetching) {
       setFetchingReset(false);
     }
-  }, [isFetching, reactTableFiltersState, setAllFilters, fetchingReset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    isFetching,
+    reactTableFiltersState,
+    setAllFilters,
+    fetchingReset,
+    savedFilters,
+    filtersObjectArray,
+  ]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

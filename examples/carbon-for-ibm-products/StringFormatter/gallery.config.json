@@ -1,0 +1,12 @@
+{
+  "label": "String-Formatter",
+  "package-config": {
+    "flags": {
+      "component": {
+        "StringFormatter": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

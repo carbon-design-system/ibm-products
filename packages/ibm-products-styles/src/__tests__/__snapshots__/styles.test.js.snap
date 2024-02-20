@@ -2562,7 +2562,7 @@ p.c4p--about-modal__copyright-text:first-child {
   height: 2.5rem;
 }
 .c4p--side-panel .c4p--side-panel__slug-and-close {
-  position: fixed;
+  position: absolute;
   z-index: 10; /* must be higher than title container border bottom */
   top: 0;
   right: 0;
@@ -2725,6 +2725,12 @@ p.c4p--about-modal__copyright-text:first-child {
   max-height: calc(100% - 3rem);
   transform: translate3d(0, min(95vh, 500px), 0);
 }
+.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__container {
+  border: 1px solid transparent;
+  /* override carbon ai removing background gradient */
+  background: linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box, linear-gradient(to bottom, var(--cds-ai-border-start, #78a9ff), var(--cds-ai-border-end, #d0e2ff)) border-box, linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+  box-shadow: 0 4px 10px 2px var(--cds-ai-drop-shadow, rgba(15, 98, 254, 0.32));
+}
 .c4p--tearsheet.c4p--tearsheet.c4p--tearsheet .c4p--tearsheet__container {
   transition: transform 240ms cubic-bezier(0, 0, 0.3, 1), max-height 240ms cubic-bezier(0, 0, 0.3, 1);
 }
@@ -2822,8 +2828,11 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-nav {
   padding: 1.5rem 2rem 0;
 }
-.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
-  padding-right: 4rem;
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon, .c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__header.c4p--tearsheet__header {
+  padding-right: 5rem;
+}
+.c4p--tearsheet.c4p--tearsheet--wide.c4p--tearsheet--has-slug .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
+  margin-right: 3rem;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
   max-width: 80%;
@@ -2876,6 +2885,9 @@ p.c4p--about-modal__copyright-text:first-child {
   overflow: auto;
   flex-grow: 1;
 }
+.c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__main {
+  background: linear-gradient(to top, var(--cds-ai-aura-start, rgba(69, 137, 255, 0.1)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%) padding-box, linear-gradient(to top, var(--cds-background, #ffffff), var(--cds-background, #ffffff)) padding-box, linear-gradient(to bottom, var(--cds-ai-border-start, #78a9ff), var(--cds-ai-border-end, #d0e2ff)) border-box, linear-gradient(to top, var(--cds-background, #ffffff), var(--cds-background, #ffffff)) border-box;
+}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination__control-buttons,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--text-input,
@@ -2913,6 +2925,9 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
   background: var(--cds-background, #ffffff);
+}
+.c4p--tearsheet.c4p--tearsheet--has-slug:not(.c4p--tearsheet--has-close) .cds--slug {
+  inset-inline-end: 0;
 }
 
 .c4p--create-tearsheet-narrow .cds--modal-header__heading,

@@ -24,8 +24,8 @@ const getRandomInteger = (min, max, decimalPlaces) => {
 };
 
 export const makeData = (...lens) => {
-  const config = lens.filter(a => typeof a === 'object')[0];
-  const filteredData = lens.filter(a => typeof a === 'number');
+  const config = lens.filter((a) => typeof a === 'object')[0];
+  const filteredData = lens.filter((a) => typeof a === 'number');
   const makeDataLevel = (depth = 0) => {
     const len = filteredData[depth];
     return range(len).map((index) => ({
@@ -147,7 +147,10 @@ const newPerson = (index, config) => {
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),
-    slug: config?.enableAIRow && (index === 1 || index === 3 || index === 4) && <ExampleSlug align={config?.slugAlign} />
+    slug: config?.enableAIRow &&
+      (index === 1 || index === 3 || index === 4) && (
+        <ExampleSlug align={config?.slugAlign} />
+      ),
   };
 };
 

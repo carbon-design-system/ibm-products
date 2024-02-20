@@ -168,7 +168,6 @@ UserAvatar.propTypes = {
    * Provide the background color need to be set for UserAvatar.
    */
   backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
-
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -177,12 +176,10 @@ UserAvatar.propTypes = {
    * When passing the image prop, supply a full path to the image to be displayed.
    */
   image: PropTypes.string,
-
   /**
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
   imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
-
   /**
    * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
    */

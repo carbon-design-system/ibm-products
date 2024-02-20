@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { slugSample } from '../../global/js/story-parts/slug';
 import {
   getStoryTitle,
   prepareStory,
@@ -25,6 +26,7 @@ export default {
     influencer: { control: { disable: true } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
+    ...slugSample.argTypes,
   },
   parameters: { styles, docs: { page: DocsPage } },
 };

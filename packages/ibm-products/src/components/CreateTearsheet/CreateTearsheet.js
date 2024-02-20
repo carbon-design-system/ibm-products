@@ -66,6 +66,7 @@ export let CreateTearsheet = forwardRef(
       onRequestSubmit,
       open,
       firstFocusElement,
+      slug,
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
@@ -172,6 +173,8 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
+    console.log('slug', slug);
+
     return (
       <TearsheetShell
         {...rest}
@@ -189,6 +192,7 @@ export let CreateTearsheet = forwardRef(
         onClose={onClose}
         open={open}
         size="wide"
+        slug={slug}
         title={title}
         verticalPosition={verticalPosition}
         ref={ref}
@@ -304,6 +308,11 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
 
   /**
    * The submit button text

@@ -22,6 +22,7 @@ import { pkg } from '../../../settings';
 import { EditTearsheet } from '../EditTearsheet';
 import { EditTearsheetForm } from '../EditTearsheetForm';
 import { action } from '@storybook/addon-actions';
+import { slugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-edit-multi-form`;
 
@@ -31,6 +32,7 @@ export const MultiFormEditTearsheet = ({
   description,
   influencerWidth,
   label,
+  slug,
   submitButtonText,
   title,
 }) => {
@@ -93,6 +95,7 @@ export const MultiFormEditTearsheet = ({
         onRequestSubmit={onSubmit}
         onClose={onClose}
         onFormChange={handleFormChange}
+        slug={slug && slugSample.Sample()}
       >
         <EditTearsheetForm
           title="Topic name"

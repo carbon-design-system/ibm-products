@@ -13,12 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import {
-  Datagrid,
-  useDatagrid,
-  useNestedRows,
-  useSelectRows,
-} from '../../index';
+import { Datagrid, useDatagrid, useNestedRows } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
@@ -274,48 +269,6 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
     ...nestedRowsControlProps,
   },
 });
-
-const SelectableNestedRows = ({ ...args }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      DatagridActions,
-      ...args.defaultGridProps,
-    },
-    useNestedRows,
-    useSelectRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-const SelectableNestedRowTemplateWrapper = ({ ...args }) => {
-  return <SelectableNestedRows defaultGridProps={{ ...args }} />;
-};
-
-const selectableNestedRowsStoryName = 'With selectable nested rows';
-export const SelectableNestedRowsUsageStory = prepareStory(
-  SelectableNestedRowTemplateWrapper,
-  {
-    storyName: selectableNestedRowsStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...nestedRowsControlProps,
-    },
-  }
-);
 
 const nestedRowsInitialStateStoryName = 'With initially expanded nested rows';
 export const NestedRowsInitialUsageStory = prepareStory(BasicTemplateWrapper, {

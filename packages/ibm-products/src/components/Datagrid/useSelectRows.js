@@ -122,7 +122,7 @@ const SelectRow = (datagridState) => {
       getRowId,
     });
   };
-  const rowId = `${tableId}-${row.index}`;
+  const rowId = `${tableId}-${row.id}-${row.index}`;
   return (
     <TableSelectRow
       {...cellProps}

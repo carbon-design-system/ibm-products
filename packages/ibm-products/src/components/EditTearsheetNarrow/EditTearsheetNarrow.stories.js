@@ -25,7 +25,8 @@ import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss';
-import { StoryDocsPage, slugSample } from '../../global/js/story-parts/slug';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
   title: getStoryTitle(EditTearsheetNarrow.displayName),
@@ -40,7 +41,7 @@ export default {
     },
   },
   argTypes: {
-    ...slugSample.argTypes,
+    ...slugArgTypes(),
   },
 };
 
@@ -85,7 +86,7 @@ const Template = ({ slug, ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && slugSample.Sample()}
+        slug={slug && SlugSample()}
         {...args}
       >
         <TextInput
@@ -188,7 +189,7 @@ const WithValidationTemplate = ({ slug, ...args }) => {
         }}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && slugSample.Sample()}
+        slug={slug && SlugSample()}
         {...args}
       >
         <FormGroup

@@ -173,8 +173,6 @@ export let CreateTearsheet = forwardRef(
       }
     };
 
-    console.log('slug', slug);
-
     return (
       <TearsheetShell
         {...rest}
@@ -310,7 +308,7 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
    */
   slug: PropTypes.node,
 

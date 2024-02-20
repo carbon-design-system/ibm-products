@@ -91,6 +91,8 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
     .#{$block-class}__container {
     border: 1px solid transparent;
+    border-bottom: 0;
+
     /* override carbon ai removing background gradient */
     background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
         padding-box,

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { slugSample } from '../../global/js/story-parts/slug';
+import { slugArgTypes } from '../../global/js/story-parts/slug';
 import {
   getStoryTitle,
   prepareStory,
@@ -29,7 +29,7 @@ export default {
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
     children: { control: { disable: true } },
-    ...slugSample.argTypes,
+    ...slugArgTypes(),
   },
   parameters: {
     styles,

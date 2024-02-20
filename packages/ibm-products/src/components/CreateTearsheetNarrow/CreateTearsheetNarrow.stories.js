@@ -24,7 +24,7 @@ import {
 import { CreateTearsheetNarrow } from '.';
 import styles from './_storybook-styles.scss';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { slugSample } from '../../global/js/story-parts/slug';
+import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
   title: getStoryTitle(CreateTearsheetNarrow.displayName),
@@ -32,7 +32,7 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     children: { control: { disable: true } },
-    ...slugSample.argTypes,
+    ...slugArgTypes(),
   },
   parameters: {
     styles,
@@ -85,7 +85,7 @@ const Template = ({ slug, ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && slugSample.Sample()}
+        slug={slug && SlugSample()}
         {...args}
       >
         <TextInput
@@ -193,7 +193,7 @@ const WithValidationTemplate = ({ slug, ...args }) => {
         }}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && slugSample.Sample()}
+        slug={slug && SlugSample()}
         {...args}
       >
         <FormGroup

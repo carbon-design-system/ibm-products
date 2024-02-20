@@ -11,7 +11,7 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 
-const Sample = (props) => (
+export const SlugSample = (props) => (
   <Slug className="slug-container" size="xs" {...props}>
     <SlugContent>
       <div>
@@ -31,18 +31,22 @@ const Sample = (props) => (
   </Slug>
 );
 
-const argTypes = {
-  slug: {
+export const slugArgTypes = ({ _default = 0, withHollow = false } = {}) => {
+  const slug = {
     control: {
       type: 'select',
       labels: {
         0: 'No AI slug',
         1: 'with AI Slug',
       },
-      default: 0,
+      default: _default,
     },
     options: [0, 1],
-  },
-};
+  };
 
-export const slugSample = { argTypes, Sample };
+  if (withHollow) {
+    slug.control.labels[2] = 'with hollow AI Slug (boolean)';
+    slug.options.push(2);
+  }
+  return { slug };
+};

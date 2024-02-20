@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { slugSample } from '../../global/js/story-parts/slug';
 import {
   getStoryTitle,
   prepareStory,
@@ -14,6 +13,7 @@ import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import DocsPage from './EditTearsheet.docs-page';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
+import { slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
   title: getStoryTitle(EditTearsheet.displayName),
@@ -26,7 +26,7 @@ export default {
     influencer: { control: { disable: true } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
-    ...slugSample.argTypes,
+    ...slugArgTypes(),
   },
   parameters: { styles, docs: { page: DocsPage } },
 };

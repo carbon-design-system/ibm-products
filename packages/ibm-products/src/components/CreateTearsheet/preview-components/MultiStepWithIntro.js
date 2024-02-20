@@ -25,7 +25,7 @@ import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
 import { NoDataIllustration } from '../../EmptyStates/assets/NoDataIllustration';
-import { slugSample } from '../../../global/js/story-parts/slug';
+import { SlugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
@@ -92,7 +92,7 @@ export const MultiStepWithIntro = ({
             }, simulatedDelay);
           })
         }
-        slug={slug && slugSample.Sample()}
+        slug={slug && SlugSample()}
       >
         <CreateTearsheetStep
           title="Select a category"

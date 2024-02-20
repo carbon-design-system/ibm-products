@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -159,16 +159,70 @@
 }
 
 .#{$block-class} th.#{$block-class}__with-slug {
-  @include ai-gradient('top', 100%);
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  box-shadow: inset 0 1px $ai-border-strong;
+}
+
+.#{$block-class} th.#{$block-class}__with-slug,
+.#{$block-class} td.#{$block-class}__slug--cell {
+  @include ai-table-gradient();
 }
 
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
-  tr:has(> .#{$block-class}__table-row-ai-enabled) {
-  @include ai-gradient('left', 50%);
+  tr.#{$block-class}__slug--row,
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row
+  + .#{$block-class}__expanded-row {
+  @include ai-table-gradient();
 
   background-attachment: fixed;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  box-shadow: inset 1px 0 $ai-border-strong;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row:hover,
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{c4p-settings.$carbon-prefix}--data-table--selected:hover,
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{$block-class}__carbon-row-expanded:hover
+  + .#{$block-class}__expanded-row,
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row {
+  @include ai-table-gradient('hover');
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row
+  td {
+  background-color: transparent;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{c4p-settings.$carbon-prefix}--data-table--selected {
+  @include ai-table-gradient('selected');
 }
 
 .#{$block-class}
@@ -804,6 +858,10 @@
 .#{$block-class} .#{$block-class}__table-row-ai-enabled {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid $border-subtle-01;
+  &.#{$block-class}__slug--expanded {
+    border: none;
+  }
 }
 
 .#{$block-class} .#{$block-class}__table-row-ai-spacer,

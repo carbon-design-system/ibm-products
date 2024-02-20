@@ -858,7 +858,6 @@
 .#{$block-class} .#{$block-class}__table-row-ai-enabled {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid $border-subtle-01;
   &.#{$block-class}__slug--expanded {
     border: none;
   }

@@ -3774,7 +3774,6 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__table-row-ai-enabled {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--datagrid .c4p--datagrid__table-row-ai-enabled.c4p--datagrid__slug--expanded {
   border: none;

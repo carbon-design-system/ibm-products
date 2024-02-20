@@ -22,7 +22,6 @@ import {
   ComposedModal,
   Layer,
   ModalHeader,
-  ModalBody,
   usePrefix,
 } from '@carbon/react';
 
@@ -298,8 +297,7 @@ export const TearsheetShell = React.forwardRef(
           )}
           <Wrap
             ref={modalBodyRef}
-            element={ModalBody}
-            className={`${bc}__body`}
+            className={`${carbonPrefix}--modal-content ${bc}__body`}
           >
             <Wrap
               className={cx({

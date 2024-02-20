@@ -19,7 +19,7 @@ export const NUMBER = 'number';
 export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
 export const DROPDOWN = 'dropdown';
-export const CUSTOM_MULTI = 'customMulti';
+export const MULTISELECT = 'multiSelect';
 
 /** Constants for event emitters */
 export const CLEAR_FILTERS = 'clearFilters';

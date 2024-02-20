@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,10 +7,10 @@
 
 import {
   CHECKBOX,
-  CUSTOM_MULTI,
   DATE,
   DROPDOWN,
   FLYOUT,
+  MULTISELECT,
   NUMBER,
   PANEL,
   RADIO,
@@ -66,16 +66,15 @@ export const getInitialStateFromFilters = (
         value: '',
         type,
       };
-    } 
-    else if (type === CUSTOM_MULTI) {
+    } else if (type === MULTISELECT) {
       initialFilterState[column] = {
-        value: props.items.map(({ text, id }) => ({
-          id,
-          value: text,
+        value: props.MultiSelect.items.map((item) => ({
+          id: typeof item === 'string' ? item : item.id,
+          value: typeof item === 'string' ? item : item.text,
           selected: false,
         })),
         type,
-      }
+      };
     }
   };
 

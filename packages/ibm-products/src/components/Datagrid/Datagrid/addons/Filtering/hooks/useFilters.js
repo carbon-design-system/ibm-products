@@ -8,10 +8,10 @@
 import {
   BATCH,
   CHECKBOX,
-  CUSTOM_MULTI,
   DATE,
   DROPDOWN,
   INSTANT,
+  MULTISELECT,
   NUMBER,
   PANEL,
   RADIO,
@@ -23,6 +23,7 @@ import {
   DatePickerInput,
   Dropdown,
   FormGroup,
+  MultiSelect,
   Layer,
   NumberInput,
   RadioButton,
@@ -140,7 +141,7 @@ const useFilters = ({
     const index = filterCopy.findIndex(({ id }) => id === column);
 
     const clearCheckbox =
-      type === CHECKBOX &&
+      (type === CHECKBOX || type === MULTISELECT) &&
       filterCopy[index].value.every(({ selected }) => selected === false);
     const clearDate = type === DATE && value.length === 0;
     const clearAny = (type === DROPDOWN || type === RADIO) && value === 'Any';
@@ -169,7 +170,7 @@ const useFilters = ({
   };
 
   /** Render the individual filter component */
-  const renderFilter = ({ type, column, props: components, component }) => {
+  const renderFilter = ({ type, column, props: components }) => {
     let filter;
     const isPanel = variation === PANEL;
 
@@ -345,43 +346,77 @@ const useFilters = ({
           />
         );
         break;
-      case CUSTOM_MULTI: {
-        const CustomFilterComponent = component;
-        // console.log(typeof component, component && component());
-        console.log(components);
-        const ClonedFilterComponent = React.cloneElement(<CustomFilterComponent />, {
-          onChange: ({ selectedItems }) => {
-            components?.onChange?.({ selectedItems });
-            // List of items to select/filter from
-            const allOptions = filtersState[column].value;
-
-            // Find selected items from list of options
-            const foundItems = selectedItems.map(item => {
-              if (allOptions.filter(option => option.text === item.value)) {
-                return allOptions.filter(option => option.text === item.value)[0]
-              }
-              return null;
-            }).filter(Boolean);
-            // Change selected state for those items that have been selected
-            foundItems.map(item => item.selected = true);
-            setFiltersState({
-              ...filtersState,
-              [column]: {
-                value: allOptions,
-                type,
-              }
-            });
-            applyFilters({
-              column,
-              value: [...filtersState[column].value],
-              type,
-            });
-          }
-        });
-        filter = (
-          ClonedFilterComponent
+      case MULTISELECT: {
+        const isStringArray =
+          components.MultiSelect.items.length &&
+          typeof components.MultiSelect.items[0] === 'string';
+        const selectedFilters = filtersState[column]?.value.filter(
+          (i) => i.selected
         );
-        break;  
+        const filteredItems = components.MultiSelect.items
+          .map((item) => {
+            if (
+              selectedFilters.filter((a) =>
+                isStringArray ? a.id === item : a.id === item.id
+              ).length
+            ) {
+              return item;
+            }
+            return null;
+          })
+          .filter(Boolean);
+        filter = (
+          <MultiSelect
+            {...components.MultiSelect}
+            selectedItems={filteredItems}
+            onChange={({ selectedItems }) => {
+              const allOptions = filtersState[column].value;
+              // Find selected items from list of options
+              const foundItems = selectedItems
+                .map((item) => {
+                  if (
+                    allOptions.filter((option) =>
+                      isStringArray ? option.id === item : option.id === item.id
+                    )
+                  ) {
+                    return allOptions.filter((option) =>
+                      isStringArray ? option.id === item : option.id === item.id
+                    )[0];
+                  }
+                  return null;
+                })
+                .filter(Boolean);
+
+              // Change selected state for those items that have been selected
+              allOptions.map((a) => (a.selected = false));
+              foundItems.map((item) => {
+                const foundOriginalItem = allOptions.filter((a) =>
+                  isStringArray ? a === item : a.id === item.id
+                );
+                if (foundOriginalItem && foundOriginalItem.length) {
+                  foundOriginalItem[0].selected = true;
+                }
+              });
+              if (!selectedItems.length) {
+                allOptions.map((a) => (a.selected = false));
+              }
+              setFiltersState({
+                ...filtersState,
+                [column]: {
+                  value: allOptions,
+                  type,
+                },
+              });
+              applyFilters({
+                column,
+                value: [...filtersState[column].value],
+                type,
+              });
+              components.MultiSelect?.onChange?.(selectedItems);
+            }}
+          />
+        );
+        break;
       }
     }
 

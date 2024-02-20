@@ -8,7 +8,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
-import { Tooltip, MultiSelect } from '@carbon/react';
+import { Tooltip } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
@@ -100,6 +100,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {
@@ -140,38 +141,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(initialData ?? makeData(20));
-  const [items, setItems] = useState([]);
-
-  const onClearFilters = () => {
-    console.log('custom clear filter cb!');
-  }
-
-  const CustomMultiSelect = ({ ...rest }) => <MultiSelect
-    {...propsForCustomFilter}
-    label="Multiselect Label"
-    titleText="Multiselect title"
-    itemToString={(item) => (item ? item.text : '')}
-    selectionFeedback="top-after-reopen"
-    size={'md'}
-    type={'default'}
-    disabled={false}
-    hideLabel={false}
-    invalid={false}
-    warn={false}
-    open={false}
-    // selectedItems={items}
-    onChange={({ selectedItems }) => {
-      console.log('test');
-      console.log(selectedItems);
-      // setItems(selectedItems);
-    }}
-    warnText={'whoopsie!'}
-    invalidText={'whoopsie!'}
-    clearSelectionDescription={'Total items selected: '}
-    useTitleInItem={false}
-    clearSelectionText={'To clear selection, press Delete or Backspace,'}
-    {...rest}
-  />
 
   const datagridState = useDatagrid(
     {
@@ -181,13 +150,12 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
-      filterProps: filterProps({ CustomMultiSelect }),
+      filterProps,
       gridTitle,
       gridDescription,
       useDenseHeader,
       emptyStateTitle,
       emptyStateDescription,
-      onClearFilters
     },
     useFiltering,
     useColumnCenterAlign
@@ -199,7 +167,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 const FilteringTemplateWrapper = ({ ...args }) => {
   return <FilteringUsage defaultGridProps={{ ...args }} />;
 };
-
 
 // Example usage of mapping locale to flatpickr date format or placeholder value (m/d/Y or mm/dd/yyyy)
 export const getDateFormat = (lang, full) => {
@@ -223,17 +190,26 @@ export const getDateFormat = (lang, full) => {
 const propsForCustomFilter = {
   // items: ['relationship', 'complicated', 'single'],
   items: [
-    {text: 'relationship', id: 'relationship'},
-    {text: 'complicated', id: 'complicated'},
-    {text: 'single', id: 'single'},
+    { text: 'relationship', id: 'relationship' },
+    { text: 'complicated', id: 'complicated' },
+    { text: 'single', id: 'single' },
   ],
   id: 'carbon-multiselect-example',
-  onChange: (s) => console.log('custom multi select on change', s)
+  label: 'Status selection',
+  titleText: 'Multiselect title',
+  itemToString: (item) => (item ? item.text : ''),
+  size: 'md',
+  type: 'default',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  open: false,
+  clearSelectionDescription: 'Total items selected: ',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
-export const filterProps = ({
-  CustomMultiSelect,
-}) => ({
+export const filterProps = {
   variation: 'panel',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',
@@ -271,31 +247,16 @@ export const filterProps = ({
             },
           },
         },
-        // {
-        //   filterLabel: 'Status',
-        //   filter: {
-        //     type: 'dropdown',
-        //     column: 'status',
-        //     props: {
-        //       Dropdown: {
-        //         id: 'marital-status-dropdown',
-        //         ['aria-label']: 'Marital status dropdown',
-        //         items: ['relationship', 'complicated', 'single'],
-        //         label: 'Marital status',
-        //         titleText: 'Marital status',
-        //       },
-        //     },
-        //   },
-        // },
         {
-          filterLabel: 'Multi select test',
+          filterLabel: 'Status',
           filter: {
-            type: 'customMulti',
+            type: 'multiSelect',
             column: 'status',
             props: {
-              ...propsForCustomFilter
+              MultiSelect: {
+                ...propsForCustomFilter,
+              },
             },
-            component: CustomMultiSelect,
           },
         },
       ],
@@ -394,7 +355,7 @@ export const filterProps = ({
     const endDateObj = new Date(end);
     return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
   },
-});
+};
 
 export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
   storyName: 'Filter panel with batch update',

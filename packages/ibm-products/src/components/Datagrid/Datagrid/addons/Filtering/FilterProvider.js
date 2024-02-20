@@ -15,7 +15,7 @@ import {
   CHECKBOX,
   CLEAR_SINGLE_FILTER,
   SAVED_FILTERS,
-  CUSTOM_MULTI,
+  MULTISELECT,
 } from './constants';
 
 export const FilterContext = createContext();
@@ -40,7 +40,7 @@ const EventEmitter = {
 const removeFilterItem = (state, index) => state.splice(index, 1);
 
 const updateFilterState = (state, type, value) => {
-  if (type === CHECKBOX || type === CUSTOM_MULTI) {
+  if (type === CHECKBOX || type === MULTISELECT) {
     return;
   }
   if (type === DATE) {
@@ -62,7 +62,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
       const filterValues = f.value;
       const filterType = f.type;
       updateFilterState(tempState, filterType, value);
-      if (filterType === CHECKBOX || filterType === CUSTOM_MULTI) {
+      if (filterType === CHECKBOX || filterType === MULTISELECT) {
         /**
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
@@ -124,7 +124,7 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
           formatDateRange(startDate, endDate),
         ...sharedFilterProps,
       });
-    } else if (type === CHECKBOX || type === CUSTOM_MULTI) {
+    } else if (type === CHECKBOX || type === MULTISELECT) {
       value.forEach((option) => {
         if (option.selected) {
           tags.push({

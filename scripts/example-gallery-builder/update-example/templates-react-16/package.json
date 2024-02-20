@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@carbon/ibm-products": "^2.21.0",
-    "@carbon/react": "^1.49.0",
+    "@carbon/react": "^1.51.0",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

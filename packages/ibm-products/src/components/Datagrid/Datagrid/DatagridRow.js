@@ -141,7 +141,7 @@ const DatagridRow = (datagridState) => {
     <React.Fragment key={key}>
       <TableRow
         {...rowProps}
-        className={rowClassNames}
+        className={cx(rowClassNames, className)}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}

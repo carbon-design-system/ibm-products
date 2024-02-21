@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.28.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.27.0...@carbon/ibm-products@2.28.0) (2024-02-21)
+
+
+### Bug Fixes
+
+* **DataGrid:** add support for selectrow and nestedrow ([#4354](https://github.com/carbon-design-system/ibm-products/issues/4354)) ([984da57](https://github.com/carbon-design-system/ibm-products/commit/984da575d578c56b9eab5794251fbedb637e5373))
+
+
+### Features
+
+* **Datagrid:** add support for multi select filter type ([#4361](https://github.com/carbon-design-system/ibm-products/issues/4361)) ([1a1c488](https://github.com/carbon-design-system/ibm-products/commit/1a1c488447748f7b8f8972cbc123e52957c274ee))
+* **Datagrid:** apply latest ai gradients to Datagrid ([#4377](https://github.com/carbon-design-system/ibm-products/issues/4377)) ([3702c93](https://github.com/carbon-design-system/ibm-products/commit/3702c93bd2cba587ecea6e441dcf0fd204f7ad95))
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+* sort icon appear in the Actions column on Datagrid [#4339](https://github.com/carbon-design-system/ibm-products/issues/4339) ([#4346](https://github.com/carbon-design-system/ibm-products/issues/4346)) ([fac6145](https://github.com/carbon-design-system/ibm-products/commit/fac6145eb3952409d910884f1d4e3270a3c6c496))
+* **useravatar:** image implementation ([#4355](https://github.com/carbon-design-system/ibm-products/issues/4355)) ([accfa2d](https://github.com/carbon-design-system/ibm-products/commit/accfa2d7736c3662c88458f2077d6e808453f4df))
+
+
+
+
+
 # [2.27.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.26.0...@carbon/ibm-products@2.27.0) (2024-02-20)
 
 

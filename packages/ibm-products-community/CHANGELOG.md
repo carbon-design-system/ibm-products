@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.2...@carbon/ibm-products-community@0.4.0) (2024-02-21)
+
+
+### Features
+
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+
+
+
+
+
 ## [0.3.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.1...@carbon/ibm-products-community@0.3.2) (2024-02-20)
 
 

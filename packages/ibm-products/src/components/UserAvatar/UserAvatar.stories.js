@@ -20,6 +20,7 @@ import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
 import { Add, Group, User } from '@carbon/react/icons';
+import headshot from './_story-assets/headshot.jpg';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
@@ -106,5 +107,14 @@ export const Default = prepareStory(Template, {
     name: 'thomas j. watson',
     tooltipText: 'Thomas J. Watson',
     renderIcon: 'No icon',
+  },
+});
+
+export const WithImage = prepareStory(Template, {
+  storyName: 'WithImage',
+  args: {
+    ...defaultArgs,
+    image: headshot,
+    imageDescription: 'image here',
   },
 });

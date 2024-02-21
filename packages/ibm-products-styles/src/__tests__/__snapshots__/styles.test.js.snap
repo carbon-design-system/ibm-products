@@ -3205,14 +3205,39 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid th.c4p--datagrid__with-slug {
-  background-image: linear-gradient(180deg, var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)) 0%, 15%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 100%, transparent 100%);
-  border-block-end-color: var(--cds-ai-border-strong, #4589ff);
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  box-shadow: inset 0 1px var(--cds-ai-border-strong, #4589ff);
 }
 
-.c4p--datagrid .cds--data-table tbody tr:has(> .c4p--datagrid__table-row-ai-enabled) {
-  background-image: linear-gradient(90deg, var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)) 0%, 15%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 100%);
-  border-block-end-color: var(--cds-ai-border-strong, #4589ff);
+.c4p--datagrid th.c4p--datagrid__with-slug,
+.c4p--datagrid td.c4p--datagrid__slug--cell {
+  background: linear-gradient(to right, var(--cds-ai-aura-start-table, rgba(69, 137, 255, 0.15)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 50%);
+}
+
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row,
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row + .c4p--datagrid__expanded-row {
+  background: linear-gradient(to right, var(--cds-ai-aura-start-table, rgba(69, 137, 255, 0.15)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 50%);
   background-attachment: fixed;
+}
+
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  box-shadow: inset 1px 0 var(--cds-ai-border-strong, #4589ff);
+}
+
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row:hover,
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row.cds--data-table--selected:hover,
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row.c4p--datagrid__carbon-row-expanded:hover + .c4p--datagrid__expanded-row,
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__expandable-row--hover.c4p--datagrid__slug--row {
+  background: linear-gradient(to right, var(--cds-ai-aura-hover-start, rgba(69, 137, 255, 0.4)) 0%, 15%, var(--cds-ai-aura-hover-end, rgba(255, 255, 255, 0)) 50%), var(--cds-ai-aura-hover-background, #edf5ff);
+}
+
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__expandable-row--hover.c4p--datagrid__slug--row td {
+  background-color: transparent;
+}
+
+.c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__slug--row.cds--data-table--selected {
+  background: linear-gradient(to right, var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%, transparent 50%), var(--cds-layer-selected);
 }
 
 .c4p--datagrid th.c4p--datagrid__with-slug .cds--slug {
@@ -3753,6 +3778,9 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__table-row-ai-enabled {
   display: flex;
   align-items: center;
+}
+.c4p--datagrid .c4p--datagrid__table-row-ai-enabled.c4p--datagrid__slug--expanded {
+  border: none;
 }
 
 .c4p--datagrid .c4p--datagrid__table-row-ai-spacer,

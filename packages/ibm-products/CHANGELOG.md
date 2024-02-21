@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.70.0...@carbon/ibm-products@1.71.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* **Datagrid:** address filter state with table refresh ([#4213](https://github.com/carbon-design-system/ibm-products/issues/4213)) ([60331ec](https://github.com/carbon-design-system/ibm-products/commit/60331ec1d83a4338c76be7a6965463ef762e8a33))
+* **Datagrid:** address ssr issues in Datagrid ([#4236](https://github.com/carbon-design-system/ibm-products/issues/4236)) ([fca7840](https://github.com/carbon-design-system/ibm-products/commit/fca7840fe87b79151fdeaecacb7dd29a784dac97))
+* **Datagrid:** changes getRowId parameter to original row data ([#4293](https://github.com/carbon-design-system/ibm-products/issues/4293)) ([ba2314a](https://github.com/carbon-design-system/ibm-products/commit/ba2314ae1ad3e847cc92873b9e203ad665b6fb02))
+* **DataGrid:** column customization improvements v1 ([#4201](https://github.com/carbon-design-system/ibm-products/issues/4201)) ([30e0e84](https://github.com/carbon-design-system/ibm-products/commit/30e0e847f24930cf0d6f1635cc8ea78335f11059))
+* **Datagrid:** fixes selectedRowData updating on cancel/unselecting (v1) ([#4326](https://github.com/carbon-design-system/ibm-products/issues/4326)) ([e059062](https://github.com/carbon-design-system/ibm-products/commit/e05906229b4fe62cbe5d80d481f5535895fc057f))
+* **Datagrid:** prevent resize during fetching state ([#4342](https://github.com/carbon-design-system/ibm-products/issues/4342)) ([1f2c493](https://github.com/carbon-design-system/ibm-products/commit/1f2c493c44441f013693f12477f466b7197ab310))
+* **Datagrid:** ssr fix in select all toggle hook ([#4317](https://github.com/carbon-design-system/ibm-products/issues/4317)) ([43f604a](https://github.com/carbon-design-system/ibm-products/commit/43f604a00de1e3d174869d45ce5900445f13f957))
+* **Tearsheet:** implement focus trapping within tearsheets in V1 ([#4133](https://github.com/carbon-design-system/ibm-products/issues/4133)) ([fcbee74](https://github.com/carbon-design-system/ibm-products/commit/fcbee74535267974da0235ee17a9f9fdbc7d5d9e))
+
+
+### Features
+
+* add isomorphic hook for ssr issues ([#4328](https://github.com/carbon-design-system/ibm-products/issues/4328)) ([d45dc0a](https://github.com/carbon-design-system/ibm-products/commit/d45dc0ae2715a871588dfc09a219133d3ddee91b))
+* **Datagrid:** add mouseUp event for onColResizeEnd [#4235](https://github.com/carbon-design-system/ibm-products/issues/4235) ([#4250](https://github.com/carbon-design-system/ibm-products/issues/4250)) ([955b839](https://github.com/carbon-design-system/ibm-products/commit/955b8392fb1f26b299cad256d0b2742630d7fd40))
+* **Datagrid:** update filtering copyright headers, review eslint disable rules, remove filter feature flags (v1) ([#4179](https://github.com/carbon-design-system/ibm-products/issues/4179)) ([dd9fed7](https://github.com/carbon-design-system/ibm-products/commit/dd9fed709604d98a6fe503d65be1ddfefa3d5a00))
+
+
+
+
+
 # [1.70.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.69.0...@carbon/ibm-products@1.70.0) (2024-02-06)
 
 

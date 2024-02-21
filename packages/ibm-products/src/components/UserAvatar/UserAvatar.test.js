@@ -13,6 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserAvatar } from '.';
 import { User } from '@carbon/react/icons';
+import headshot from './_story-assets/headshot.jpg';
 
 const blockClass = `${pkg.prefix}--user-avatar`;
 const componentName = UserAvatar.displayName;
@@ -105,8 +106,7 @@ describe(componentName, () => {
 
   it('should render image for the avatar image', async () => {
     const { container } = renderComponent({
-      image:
-        'https://dam.ibm.com/content/dam/worldwide-content/stock-assets/getty/image/photography/3c/b5/ti6100131.jpg.library.preview_lg_2x.1706701937316.jpg',
+      image: headshot,
       imageDescription: 'test alt text',
     });
     const imagePath = container.querySelector('img').getAttribute('src');

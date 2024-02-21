@@ -20,6 +20,7 @@ import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
 import { Add, Group, User } from '@carbon/react/icons';
+import headshot from './_story-assets/headshot.jpg';
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
@@ -113,8 +114,7 @@ export const WithImage = prepareStory(Template, {
   storyName: 'WithImage',
   args: {
     ...defaultArgs,
-    image:
-      'https://dam.ibm.com/content/dam/worldwide-content/stock-assets/getty/image/photography/3c/b5/ti6100131.jpg.library.preview_lg_2x.1706701937316.jpg',
+    image: headshot,
     imageDescription: 'image here',
   },
 });

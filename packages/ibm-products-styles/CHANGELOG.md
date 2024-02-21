@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.0...@carbon/ibm-products-styles@2.27.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* move ai gradient to content ([#4381](https://github.com/carbon-design-system/ibm-products/issues/4381)) ([b1d63f4](https://github.com/carbon-design-system/ibm-products/commit/b1d63f4e944b5e403a8efc17cd71aed200480a4e))
+
+
+
+
+
 # [2.27.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.26.0...@carbon/ibm-products-styles@2.27.0) (2024-02-21)
 
 

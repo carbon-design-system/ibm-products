@@ -48,6 +48,7 @@ export let ExportModal = forwardRef(
       filename,
       hidePasswordLabel,
       inputLabel,
+      inputProps,
       inputType = defaults.inputType,
       invalidInputText,
       loading,
@@ -82,14 +83,16 @@ export let ExportModal = forwardRef(
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);
+      inputProps?.onChange?.(evt);
     };
 
     const onExtensionChangeHandler = (value) => {
       setExtension(value);
     };
 
-    const onBlurHandler = () => {
+    const onBlurHandler = (evt) => {
       setDirtyInput(true);
+      inputProps?.onBlur?.(evt);
     };
 
     const onSubmitHandler = () => {
@@ -115,16 +118,18 @@ export let ExportModal = forwardRef(
 
     const blockClass = `${pkg.prefix}--export-modal`;
     const internalId = useRef(uuidv4());
-    const primaryButtonDisabled = loading || !name || hasInvalidExtension();
+    const primaryButtonDisabled =
+      loading || !name?.trim() || inputProps?.invalid || hasInvalidExtension();
     const submitted = loading || error || successful;
 
     const commonInputProps = {
-      id: `text-input--${internalId.current}`,
+      ...(inputProps || {}),
+      id: inputProps?.id || `text-input--${internalId.current}`,
       value: name,
       onChange: onNameChangeHandler,
-      labelText: inputLabel,
-      invalid: hasInvalidExtension(),
-      invalidText: invalidInputText,
+      labelText: inputProps?.labelText || inputLabel,
+      invalid: inputProps?.invalid || hasInvalidExtension(),
+      invalidText: inputProps?.invalidText || invalidInputText,
       onBlur: onBlurHandler,
       ['data-modal-primary-focus']: true,
     };
@@ -253,6 +258,10 @@ ExportModal.propTypes = {
    * label for the text input
    */
   inputLabel: PropTypes.string,
+  /**
+   * Other input properties
+   */
+  inputProps: PropTypes.object,
   /**
    * specify the type of text input
    */

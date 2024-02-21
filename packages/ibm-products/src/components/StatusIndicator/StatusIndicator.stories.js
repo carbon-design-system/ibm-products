@@ -133,16 +133,26 @@ const TemplateSuccess = (args) => {
 
   return (
     <StatusIndicator {...args}>
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            description={steps[i].description}
-            errorMessage={steps[i].errorMessage}
-            status={status}
-          />
-        );
-      })}
+      <StatusIndicatorStep
+        status={statuses[0]}
+        description={steps[0].description}
+        errorMessage={steps[0].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[1]}
+        description={steps[1].description}
+        errorMessage={steps[1].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[2]}
+        description={steps[2].description}
+        errorMessage={steps[2].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[3]}
+        description={steps[3].description}
+        errorMessage={steps[3].errorMessage}
+      />
     </StatusIndicator>
   );
 };
@@ -183,16 +193,26 @@ const TemplateSuccessAsync = (args) => {
 
   return (
     <StatusIndicator {...args}>
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            errorMessage={stepsAsync[i].errorMessage}
-            description={stepsAsync[i].description}
-            status={status}
-          />
-        );
-      })}
+      <StatusIndicatorStep
+        status={statuses[0]}
+        description={stepsAsync[0].description}
+        errorMessage={stepsAsync[0].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[1]}
+        description={stepsAsync[1].description}
+        errorMessage={stepsAsync[1].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[2]}
+        description={stepsAsync[2].description}
+        errorMessage={stepsAsync[2].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[3]}
+        description={stepsAsync[3].description}
+        errorMessage={stepsAsync[3].errorMessage}
+      />
     </StatusIndicator>
   );
 };
@@ -245,16 +265,26 @@ const TemplateFail = (args) => {
       retryLabel="Retry"
       showRetry={isError}
     >
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            description={steps[i].description}
-            errorMessage={steps[i].errorMessage}
-            status={status}
-          />
-        );
-      })}
+      <StatusIndicatorStep
+        status={statuses[0]}
+        description={steps[0].description}
+        errorMessage={steps[0].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[1]}
+        description={steps[1].description}
+        errorMessage={steps[1].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[2]}
+        description={steps[2].description}
+        errorMessage={steps[2].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[3]}
+        description={steps[3].description}
+        errorMessage={steps[3].errorMessage}
+      />
     </StatusIndicator>
   );
 };
@@ -311,16 +341,26 @@ const TemplateFailAsync = (args) => {
       retryLabel="Retry"
       showRetry={isError}
     >
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            errorMessage={stepsAsync[i].errorMessage}
-            description={stepsAsync[i].description}
-            status={status}
-          />
-        );
-      })}
+      <StatusIndicatorStep
+        status={statuses[0]}
+        description={stepsAsync[0].description}
+        errorMessage={stepsAsync[0].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[1]}
+        description={stepsAsync[1].description}
+        errorMessage={stepsAsync[1].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[2]}
+        description={stepsAsync[2].description}
+        errorMessage={stepsAsync[2].errorMessage}
+      />
+      <StatusIndicatorStep
+        status={statuses[3]}
+        description={stepsAsync[3].description}
+        errorMessage={stepsAsync[3].errorMessage}
+      />
     </StatusIndicator>
   );
 };

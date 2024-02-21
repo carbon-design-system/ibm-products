@@ -60,6 +60,10 @@ const s = [
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
+          {
+            n: 'Icon Button Bar',
+            s: ['c/IconButtonBar', 'c/IconButtonBarItem'],
+          },
         ],
       },
       {

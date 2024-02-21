@@ -1,0 +1,54 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { IconButtonBar } from '.';
+
+# IconButtonBar
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+{/* TODO: Overview. */}
+
+Quickly reduce the number of visible buttons in a toolbar by moving them into an
+overflow menu.
+
+If the item's position in the toolbar is less than this component's `length`
+prop, it will be rendered as a button. If it's greater than the `length` prop,
+it will be rendered as an overflow menu item.
+
+## Example usage
+
+<Canvas>
+  <Story id={getStoryId(IconButtonBar.displayName, 'icon-button-bar')} />
+</Canvas>
+
+## With overflow menu options
+
+<Canvas>
+  <Story id={getStoryId(IconButtonBar.displayName, 'with-overflow-options')} />
+</Canvas>
+
+The following example explains the `OverflowMenu's` options used above.
+
+```jsx
+<IconButtonBar
+  overflowMenuProps={{
+    align: 'bottom', // tooltip position
+    flipped: true, // menu to the left of the [⋮]
+    direction: 'top', // menu above the [⋮]
+    iconDescription: 'More', // tooltip text
+  }}
+>
+```
+
+## Component API
+
+<ArgsTable />

@@ -70,6 +70,8 @@ const defaults = {
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
+    IconButtonBar: false,
+    IconButtonBarItem: false,
 
     /* new component flags here - comment used by generate CLI */
 

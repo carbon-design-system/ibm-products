@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable function-no-unknown */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--icon-button-bar__item;
+
+.#{$block-class}-divider {
+  display: flex;
+  align-items: stretch;
+  padding: 0 to-rem(1px);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  span {
+    width: to-rem(1px);
+    height: 100%;
+    background-color: $border-subtle-01;
+  }
+}

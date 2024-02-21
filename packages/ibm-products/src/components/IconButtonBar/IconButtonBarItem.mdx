@@ -1,0 +1,33 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { IconButtonBarItem } from '.';
+
+# IconButtonBarItem
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+A `IconButtonBarItem` will render a button by default. If the item's position is
+greater than `IconButtonBar.length`, it will be converted to an overflow item.
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas>
+  <Story
+    id={getStoryId(IconButtonBarItem.displayName, 'icon-button-bar-item')}
+  />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

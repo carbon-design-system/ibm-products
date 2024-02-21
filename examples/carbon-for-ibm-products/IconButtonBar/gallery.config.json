@@ -1,0 +1,12 @@
+{
+  "label": "Icon-Button-Bar",
+  "package-config": {
+    "flags": {
+      "component": {
+        "IconButtonBar": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

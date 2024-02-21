@@ -2896,7 +2896,7 @@ p.c4p--about-modal__copyright-text:first-child {
   overflow: auto;
   flex-grow: 1;
 }
-.c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__main {
+.c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__content {
   background: linear-gradient(to top, var(--cds-background, var(--cds-background, #ffffff)) 0%, var(--cds-ai-aura-start, rgba(69, 137, 255, 0.1)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%) padding-box, linear-gradient(to top, var(--cds-background, var(--cds-background, #ffffff)), var(--cds-background, var(--cds-background, #ffffff))) padding-box, linear-gradient(to bottom, var(--cds-ai-border-start, #78a9ff), var(--cds-ai-border-end, #d0e2ff)) border-box, linear-gradient(to top, var(--cds-background, var(--cds-background, #ffffff)), var(--cds-background, var(--cds-background, #ffffff))) border-box;
   box-shadow: inset 0 -80px 70px -65px var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2));
 }

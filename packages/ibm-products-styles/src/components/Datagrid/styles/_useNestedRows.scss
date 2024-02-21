@@ -111,7 +111,7 @@
   td.#{$block-class}__expandable-row-cell
   + td::before,
 .#{c4p-settings.$carbon-prefix}--data-table
-  .#{$block-class}__carbon-nested-row:not(
+  .#{$block-class}__carbon-nested-row:hover:not(
     .#{$block-class}__carbon-row-expandable
   )
   td.#{$block-class}__cell:nth-of-type(2)::before {

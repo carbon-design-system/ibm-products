@@ -28,7 +28,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { getBatchActions } from '../../Datagrid.stories';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
-import { getDateFormat } from './Panel.stories';
+import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
@@ -87,6 +87,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {
@@ -251,15 +252,11 @@ const filters = [
     },
   },
   {
-    type: 'dropdown',
+    type: 'multiSelect',
     column: 'status',
     props: {
-      Dropdown: {
-        id: 'marital-status-dropdown',
-        ariaLabel: 'Marital status dropdown',
-        items: ['relationship', 'complicated', 'single'],
-        label: 'Marital status',
-        titleText: 'Marital status',
+      MultiSelect: {
+        ...multiSelectProps,
       },
     },
   },

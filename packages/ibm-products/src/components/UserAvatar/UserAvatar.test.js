@@ -7,12 +7,13 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-
+import { expectError, required } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { UserAvatar } from '.';
 import { User } from '@carbon/react/icons';
+import headshot from './_story-assets/headshot.jpg';
 
 const blockClass = `${pkg.prefix}--user-avatar`;
 const componentName = UserAvatar.displayName;
@@ -102,4 +103,18 @@ describe(componentName, () => {
     const tooltipElement = element.closest(`span.${carbon.prefix}--tooltip`);
     expect(tooltipElement).not.toBeTruthy();
   });
+
+  it('should render image for the avatar image', async () => {
+    const { container } = renderComponent({
+      image: headshot,
+      imageDescription: 'test alt text',
+    });
+    const imagePath = container.querySelector('img').getAttribute('src');
+    expect(typeof imagePath).toBe('string');
+  });
+
+  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
+    expectError(required('imageDescription', 'UserProfileImage'), () => {
+      renderComponent({ image: 'path_to_image.jpg' });
+    }));
 });

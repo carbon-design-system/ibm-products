@@ -21,6 +21,8 @@ import {
   Tabs,
   TabList,
   TextInput,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
@@ -102,6 +104,17 @@ export default {
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
     portalTarget: { control: { disable: true } },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
 };
 
@@ -160,9 +173,29 @@ const tabs = (
 
 const title = 'Title of the tearsheet';
 
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
+
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, ...args }) => {
+const Template = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -193,6 +226,7 @@ const Template = ({ actions, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
+          slug={slug && sampleSlug}
         >
           {mainContent}
         </Tearsheet>
@@ -202,7 +236,7 @@ const Template = ({ actions, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, ...args }) => {
+const StackedTemplate = ({ actions, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -294,6 +328,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           open={open1}
           onClose={() => setOpen1(false)}
           selectorPrimaryFocus="#stacked-input-1"
+          slug={slug && sampleSlug}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 1
@@ -323,6 +358,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           open={open2}
           onClose={() => setOpen2(false)}
           selectorPrimaryFocus="#stacked-input-2"
+          slug={slug && sampleSlug}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 2
@@ -339,6 +375,7 @@ const StackedTemplate = ({ actions, ...args }) => {
           open={open3}
           onClose={() => setOpen3(false)}
           selectorPrimaryFocus="#stacked-input-3"
+          slug={slug && sampleSlug}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 3
@@ -408,6 +445,7 @@ export const fullyLoaded = prepareStory(Template, {
     onClose: action('onClose called'),
     title,
     actions: 0,
+    slug: 1,
   },
 });
 

@@ -8,7 +8,7 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
+//import { gray } from '@carbon/colors';
 import {
   getStoryTitle,
   prepareStory,
@@ -51,20 +51,14 @@ export default {
 };
 const style = {
   width: '300px',
-  height: '300px',
+  height: '400px',
 };
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
   return (
-    <ScrollGradient
-      color={'#444444'}
-      style={style}
-      className={'myScrollGradient'}
-      direction={ScrollDirection.X}
-      {...args}
-    />
+    <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
   );
 };
 
@@ -76,5 +70,14 @@ export const scrollGradient = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ScrollGradient-args
     children: storyChildren,
+    direction: ScrollDirection.Y,
+  },
+});
+
+export const scrollGradientHorizontal = prepareStory(Template, {
+  args: {
+    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ScrollGradient-args
+    children: <div style={{ width: '1500px' }}>{storyChildren}</div>,
+    direction: ScrollDirection.X,
   },
 });

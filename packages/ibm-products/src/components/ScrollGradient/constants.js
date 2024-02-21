@@ -14,6 +14,9 @@ export const ScrollStates = {
 // FUNCTIONS
 
 export const getScrollState = (element, scrollDirection) => {
+  console.log('getScrollState - element: ', element);
+  console.log('getScrollState - scrollDirection: ', scrollDirection);
+  console.log('-------------------------------------------------');
   switch (scrollDirection) {
     case ScrollDirection.X: {
       if (element.scrollWidth === element.clientWidth) {

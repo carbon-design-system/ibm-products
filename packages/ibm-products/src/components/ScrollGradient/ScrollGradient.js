@@ -6,8 +6,8 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useRef } from 'react';
-
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { layer01 } from '@carbon/themes';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -15,17 +15,14 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
 import { ScrollDirection, ScrollStates, getScrollState } from './constants';
-// The block part of our conventional BEM class names (blockClass__E--M).
+
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
 // Default values for props
 const defaults = {
+  color: layer01,
   direction: ScrollDirection.Y,
   hideStartGradient: false,
   onScroll: () => {},
@@ -38,56 +35,64 @@ const defaults = {
 export let ScrollGradient = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
+      children,
       className,
       direction = defaults.direction,
-      color,
+      color = defaults.color,
       onScroll = defaults.onScroll,
       scrollElementClassName,
       getScrollElementRef = defaults.getScrollElementRef,
       hideStartGradient = defaults.hideStartGradient,
-
-      // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
     const gradientRotation = direction === ScrollDirection.X ? -90 : 0;
+    //const [scrollPosition, setScrollPosition] = useState(0);
     const [position, setPosition] = useState(ScrollStates.NONE);
     const scrollContainer = useRef();
-    const updateScrollState = () => {
-      setPosition(getScrollState(scrollContainer, direction));
-    };
 
-    const scrollHandler = (event) => {
-      onScroll(event);
-      throttle(() => {
+    const updateScrollState = throttle(() => {
+      const updatedVal = getScrollState(scrollContainer.current, direction);
+      console.log('updatedVal: ', updatedVal);
+      setPosition(updatedVal);
+    }, 150);
+
+    // const getScrollPosition = () => {
+    //   if (!scrollContainer.current) {
+    //     return 0;
+    //   }
+    //   if (direction === ScrollDirection.Y) {
+    //     return scrollContainer.current.scrollTop;
+    //   }
+    //   return scrollContainer.current.scrollLeft;
+    // };
+
+    const scrollHandler = useCallback(
+      (event) => {
+        //console.log('Looking for scroll position: ', getScrollPosition());
+        //setScrollPosition(scrollContainer.current)
+        onScroll(event);
         updateScrollState();
-      }, 150);
-    };
+      },
+      [onScroll, updateScrollState]
+    );
 
     const setRefs = (element) => {
       scrollContainer.current = element;
       getScrollElementRef(element);
     };
+    useEffect(() => {
+      scrollHandler();
+    }, [scrollHandler]);
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
+        {...rest}
         className={cx(
-          blockClass, // Apply the block class to the main HTML element
+          blockClass,
           `${blockClass}--${position.toLowerCase()}`,
           `${blockClass}--${direction.toLowerCase()}`,
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
+          className
         )}
         ref={ref}
         role="presentation"

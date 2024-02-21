@@ -30,7 +30,7 @@ $scroll-gradient__layer: 1;
   justify-content: stretch;
 }
 .#{$block-class}__content {
-  overflow: auto;
+  overflow: hidden;
   width: 100%;
   height: inherit;
 }
@@ -45,6 +45,14 @@ $scroll-gradient__layer: 1;
   transition-property: opacity;
   transition-timing-function: motion($name: standard);
 }
+
+.#{$block-class}--x .#{$block-class}__content {
+  overflow-x: auto;
+}
+.#{$block-class}--y .#{$block-class}__content {
+  overflow-y: auto;
+}
+
 .#{$block-class}--x {
   // TODO: Styles.
   .#{$block-class}__before,

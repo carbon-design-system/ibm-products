@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.14.0...@carbon/ibm-cloud-cognitive-core@2.14.1) (2024-02-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.13.0...@carbon/ibm-cloud-cognitive-core@2.14.0) (2024-02-21)
+
+
+### Features
+
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+
+
+
+
+
+# [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.12.1...@carbon/ibm-cloud-cognitive-core@2.13.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#4343](https://github.com/carbon-design-system/ibm-products/issues/4343)) ([eee92d5](https://github.com/carbon-design-system/ibm-products/commit/eee92d57859056e07851607e67f5d81a00c3c57a))
+
+
+### Features
+
+* **BigNumbers:** new component BigNumbers ([#4174](https://github.com/carbon-design-system/ibm-products/issues/4174)) ([8053304](https://github.com/carbon-design-system/ibm-products/commit/80533047724d9a3227285110edaef9d291244d44))
+* **StringFormatter:** new component StringFormatter ([#4249](https://github.com/carbon-design-system/ibm-products/issues/4249)) ([74d67d0](https://github.com/carbon-design-system/ibm-products/commit/74d67d09f3d84e85e238eb9400d5114ba69c9518))
+
+
+
+
+
 ## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.12.0...@carbon/ibm-cloud-cognitive-core@2.12.1) (2024-02-13)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

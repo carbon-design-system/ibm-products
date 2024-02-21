@@ -29,7 +29,6 @@ $motion-duration: $duration-moderate-02;
 
 @include block-wrap($block-class) {
   &.#{$block-class} {
-    // Need to disable stylelint until dart sass namespace support is added
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
@@ -42,7 +41,6 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.is-visible {
-    // Need to disable stylelint until dart sass namespace support is added
     z-index: utilities.z('modal');
     align-items: flex-end;
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
@@ -55,21 +53,18 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--stacked-1-of-2 {
-    // Need to disable stylelint until dart sass namespace support is added
     z-index: utilities.z('modal') - 1;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.33);
   }
 
   &.#{$block-class}--stacked-1-of-3 {
-    // Need to disable stylelint until dart sass namespace support is added
     z-index: utilities.z('modal') - 2;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.11);
   }
 
   &.#{$block-class}--stacked-2-of-3 {
-    // Need to disable stylelint until dart sass namespace support is added
     z-index: utilities.z('modal') - 1;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.25);
@@ -96,6 +91,8 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
     .#{$block-class}__container {
     border: 1px solid transparent;
+    border-bottom: 0;
+
     /* override carbon ai removing background gradient */
     background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
         padding-box,
@@ -241,12 +238,14 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide
     .#{$block-class}__header.#{$block-class}__header--with-close-icon,
   &.#{$block-class}--has-slug .#{$block-class}__header.#{$block-class}__header {
-    padding-right: $spacing-11;
+    padding-inline-end: $spacing-11;
   }
 
   &.#{$block-class}--wide.#{$block-class}--has-slug
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
-    margin-right: $spacing-09;
+    /* spacing 11 plus additional space for slug/close */
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {
@@ -314,8 +313,10 @@ $motion-duration: $duration-moderate-02;
     flex-grow: 1;
   }
 
-  &.#{$block-class}--has-slug .#{$block-class}__main {
+  &.#{$block-class}--has-slug .#{$block-class}__content {
     @include utilities.callout-gradient('default', 0);
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }
 
   &.#{$block-class}--wide .#{$block-class}__content {

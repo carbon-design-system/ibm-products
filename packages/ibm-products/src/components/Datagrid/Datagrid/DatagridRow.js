@@ -116,6 +116,8 @@ const DatagridRow = (datagridState) => {
     }
   };
 
+  const { className } = row.getRowProps();
+
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
     [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
     [`${blockClass}__carbon-row-expandable`]: row.canExpand,
@@ -134,8 +136,8 @@ const DatagridRow = (datagridState) => {
   return (
     <React.Fragment key={key}>
       <TableRow
-        className={rowClassNames}
         {...row.getRowProps({ role: false })}
+        className={cx(rowClassNames, className)}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -162,6 +164,8 @@ const DatagridRow = (datagridState) => {
               className={cx(`${blockClass}__cell`, {
                 [`${blockClass}__expandable-row-cell`]:
                   row.canExpand && index === 0,
+                [`${blockClass}__expandable-row-cell--is-expanded`]:
+                  row.isExpanded && index === 0,
               })}
               {...restProps}
               key={cell.column.id}

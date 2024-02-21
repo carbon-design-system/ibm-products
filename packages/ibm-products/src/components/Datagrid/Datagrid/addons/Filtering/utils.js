@@ -10,6 +10,7 @@ import {
   DATE,
   DROPDOWN,
   FLYOUT,
+  MULTISELECT,
   NUMBER,
   PANEL,
   RADIO,
@@ -62,6 +63,15 @@ export const getInitialStateFromFilters = (
     } else if (type === DROPDOWN) {
       initialFilterState[column] = {
         value: '',
+        type,
+      };
+    } else if (type === MULTISELECT) {
+      initialFilterState[column] = {
+        value: props.MultiSelect.items.map((item) => ({
+          id: typeof item === 'string' ? item : item.id,
+          value: typeof item === 'string' ? item : item.text,
+          selected: false,
+        })),
         type,
       };
     }

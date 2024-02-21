@@ -5,6 +5,10 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p 'build:*'",

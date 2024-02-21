@@ -18,6 +18,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { User } from '@carbon/react/icons';
+import '../../global/js/utils/props-helper';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -56,6 +57,8 @@ export let UserAvatar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       backgroundColor,
       className,
+      image,
+      imageDescription,
       name,
       /* TODO: add other props for UserAvatar, with default values if needed */
       renderIcon: RenderIcon,
@@ -90,6 +93,15 @@ export let UserAvatar = React.forwardRef(
     };
     const getItem = () => {
       const iconProps = { size: iconSize[size] };
+      if (image) {
+        return (
+          <img
+            alt={imageDescription}
+            src={image}
+            className={`${blockClass}__photo ${blockClass}__photo--${size}`}
+          />
+        );
+      }
       if (RenderIcon) {
         return <RenderIcon {...iconProps} />;
       }
@@ -156,11 +168,18 @@ UserAvatar.propTypes = {
    * Provide the background color need to be set for UserAvatar.
    */
   backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
-
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * When passing the image prop, supply a full path to the image to be displayed.
+   */
+  image: PropTypes.string,
+  /**
+   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+   */
+  imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
   /**
    * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
    */

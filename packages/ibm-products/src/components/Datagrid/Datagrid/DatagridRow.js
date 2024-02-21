@@ -36,6 +36,7 @@ const DatagridRow = (datagridState) => {
     withExpandedRows,
     withMouseHover,
     setMouseOverRowIndex,
+    headers,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -116,12 +117,6 @@ const DatagridRow = (datagridState) => {
     }
   };
 
-  const rowClassNames = cx(`${blockClass}__carbon-row`, {
-    [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
-    [`${blockClass}__carbon-row-expandable`]: row.canExpand,
-    [`${carbon.prefix}--data-table--selected`]: row.isSelected,
-  });
-
   const setAdditionalRowProps = () => {
     if (withNestedRows || withExpandedRows) {
       return {
@@ -132,14 +127,21 @@ const DatagridRow = (datagridState) => {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const { role, ...rowProps } = row.getRowProps();
+  const { role, className, ...rowProps } = row.getRowProps();
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
+
+  const rowClassNames = cx(`${blockClass}__carbon-row`, {
+    [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+    [`${blockClass}__carbon-row-expandable`]: row.canExpand,
+    [`${carbon.prefix}--data-table--selected`]: row.isSelected,
+    [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
+  });
 
   return (
     <React.Fragment key={key}>
       <TableRow
-        className={rowClassNames}
         {...rowProps}
+        className={cx(rowClassNames, className)}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -150,7 +152,11 @@ const DatagridRow = (datagridState) => {
       >
         {foundAIRow ? (
           row?.original?.slug ? (
-            <td className={`${blockClass}__table-row-ai-enabled`}>
+            <td
+              className={cx(`${blockClass}__table-row-ai-enabled`, {
+                [`${blockClass}__slug--expanded`]: row.isExpanded,
+              })}
+            >
               <DatagridSlug slug={row?.original?.slug} />
             </td>
           ) : (
@@ -172,11 +178,18 @@ const DatagridRow = (datagridState) => {
             return cell.render('Cell', { key: cell.column.id });
           }
           const title = content?.props?.children[0]?.props?.value;
+          const associatedHeader = headers.filter(
+            (h) => h.id === cell.column.id
+          );
           return (
             <TableCell
               className={cx(`${blockClass}__cell`, {
                 [`${blockClass}__expandable-row-cell`]:
                   row.canExpand && index === 0,
+                [`${blockClass}__slug--cell`]:
+                  associatedHeader &&
+                  associatedHeader.length &&
+                  isValidElement(associatedHeader[0]?.slug),
               })}
               {...restProps}
               key={cell.column.id}

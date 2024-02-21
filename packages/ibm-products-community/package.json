@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-community",
   "description": "Carbon for IBM Products Community package",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,8 +18,8 @@
     "@carbon/grid": "^11.21.1",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
-    "@carbon/react": "^1.50.0",
-    "@carbon/themes": "^11.31.0",
+    "@carbon/react": "^1.51.0",
+    "@carbon/themes": "^11.32.0",
     "@carbon/type": "^11.25.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

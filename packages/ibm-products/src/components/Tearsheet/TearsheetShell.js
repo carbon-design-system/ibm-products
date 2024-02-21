@@ -22,7 +22,6 @@ import {
   ComposedModal,
   Layer,
   ModalHeader,
-  ModalBody,
   usePrefix,
 } from '@carbon/react';
 
@@ -298,8 +297,7 @@ export const TearsheetShell = React.forwardRef(
           )}
           <Wrap
             ref={modalBodyRef}
-            element={ModalBody}
-            className={`${bc}__body`}
+            className={`${carbonPrefix}--modal-content ${bc}__body`}
           >
             <Wrap
               className={cx({
@@ -511,7 +509,7 @@ TearsheetShell.propTypes = {
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
    */
   slug: PropTypes.node,
 

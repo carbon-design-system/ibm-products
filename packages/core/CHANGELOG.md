@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.13.0...@carbon/ibm-cloud-cognitive-core@2.14.0) (2024-02-21)
+
+
+### Features
+
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+
+
+
+
+
 # [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.12.1...@carbon/ibm-cloud-cognitive-core@2.13.0) (2024-02-20)
 
 

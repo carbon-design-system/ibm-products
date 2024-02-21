@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.27.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.26.0...@carbon/ibm-products-styles@2.27.0) (2024-02-21)
+
+
+### Features
+
+* **Datagrid:** apply latest ai gradients to Datagrid ([#4377](https://github.com/carbon-design-system/ibm-products/issues/4377)) ([3702c93](https://github.com/carbon-design-system/ibm-products/commit/3702c93bd2cba587ecea6e441dcf0fd204f7ad95))
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+* **useravatar:** image implementation ([#4355](https://github.com/carbon-design-system/ibm-products/issues/4355)) ([accfa2d](https://github.com/carbon-design-system/ibm-products/commit/accfa2d7736c3662c88458f2077d6e808453f4df))
+
+
+
+
+
 # [2.26.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.25.0...@carbon/ibm-products-styles@2.26.0) (2024-02-20)
 
 

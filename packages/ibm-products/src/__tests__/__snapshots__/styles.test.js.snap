@@ -2346,7 +2346,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--datagrid .c4p--datagrid__carbon-row-expandable,
-.c4p--datagrid tr.c4p--datagrid__carbon-nested-row td.c4p--datagrid__cell {
+.c4p--datagrid tr.c4p--datagrid__carbon-nested-row td.c4p--datagrid__cell:not(.c4p--datagrid__expandable-row-cell) {
   position: relative;
 }
 
@@ -3003,8 +3003,10 @@ th.c4p--datagrid__select-all-toggle-on.button {
   border-bottom: 1px solid var(--cds-border-subtle, #e0e0e0);
 }
 
-.c4p--datagrid .bx--data-table .c4p--datagrid__carbon-row-expanded:hover + .c4p--datagrid__expanded-row .c4p--datagrid__expanded-row-content {
+.c4p--datagrid .bx--data-table .c4p--datagrid__carbon-row-expanded:hover + .c4p--datagrid__expanded-row .c4p--datagrid__expanded-row-content,
+.c4p--datagrid__expanded-row:hover .c4p--datagrid__expanded-row-content {
   background-color: var(--cds-layer-hover, #e5e5e5);
+  transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
 }
 
 .c4p--datagrid .bx--data-table td.c4p--datagrid__expanded-row-cell-wrapper {

@@ -33,6 +33,7 @@ import { Example as ExportModalExample } from './ExportModal/src/Example/Example
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
+import { Example as IconButtonBarExample } from './IconButtonBar/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
 import { Example as InterstitialScreenViewExample } from './InterstitialScreenView/src/Example/Example';
@@ -199,6 +200,12 @@ describe('All examples', () => {
 
   it('HTTPErrors renders', () => {
     render(<HTTPErrorsExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('IconButtonBar renders', () => {
+    render(<IconButtonBarExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

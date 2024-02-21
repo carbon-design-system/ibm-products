@@ -32,6 +32,7 @@ import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
+import imageIconButtonBar from './IconButtonBar--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
 import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
@@ -170,6 +171,11 @@ const config = [
     label: 'HTTP Error',
     directory: 'HTTPErrors',
     thumbnail: `url(${imageHTTPErrors}`,
+  },
+  {
+    label: 'Icon-Button-Bar',
+    directory: 'IconButtonBar',
+    thumbnail: `url(${imageIconButtonBar}`,
   },
   {
     label: 'Import Modal',

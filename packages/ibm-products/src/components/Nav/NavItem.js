@@ -12,7 +12,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
@@ -84,7 +83,6 @@ export let NavItem = ({
       onClick={(event) => handleDisabled(onClick(event, href))}
       onKeyPress={(event) => handleDisabled(onClick(event, href))}
       role="menuitem"
-      {...getDevtoolsProps(componentName)}
     >
       {link ? (
         <NavItemLink

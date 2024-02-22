@@ -6,3 +6,5 @@
  */
 
 export { Nav } from './Nav';
+export { NavList } from './NavList';
+export { NavItem } from './NavItem';

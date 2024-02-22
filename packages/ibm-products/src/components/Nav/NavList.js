@@ -64,7 +64,6 @@ export let NavList = React.forwardRef(
      * Closes the list.
      */
     const close = () => {
-      console.log(`close`);
       if (open) {
         setOpen(false);
       }
@@ -75,7 +74,6 @@ export let NavList = React.forwardRef(
      * @param {SyntheticEvent} event The event fired when the list is toggled.
      */
     const toggle = (event) => {
-      console.log(`toggle`);
       const { which, type } = event;
 
       // Enter (13) and spacebar (32).

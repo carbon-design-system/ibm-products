@@ -12,6 +12,7 @@ import cx from 'classnames';
 import NavList, { blockClass as navListBlockClass } from './NavList';
 import NavItem, { blockClass as navItemBlockClass } from './NavItem';
 
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 const componentName = 'Nav';
 const blockClass = `${pkg.prefix}--nav`;
@@ -93,7 +94,6 @@ export let Nav = React.forwardRef(
      * @param {string} href The URL of the list item.
      */
     const handleItemClick = (event, href, onClick) => {
-      console.log(`handleItemClick`);
       event.stopPropagation();
 
       const { type, which } = event;
@@ -125,10 +125,11 @@ export let Nav = React.forwardRef(
 
     return (
       <nav
-        {...rest}
         className={cx(blockClass, className)}
         aria-label={label}
         ref={ref}
+        {...getDevtoolsProps(componentName)}
+        {...rest}
       >
         {heading && <h1 className={`${blockClass}__heading`}>{heading}</h1>}
 

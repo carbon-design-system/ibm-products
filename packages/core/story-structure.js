@@ -60,6 +60,7 @@ const s = [
             s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },
           { n: 'String Formatter', s: ['c/StringFormatter'] },
+          { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },

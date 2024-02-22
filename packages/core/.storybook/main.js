@@ -9,6 +9,7 @@ const { merge } = require('webpack-merge');
 const { dirname, join, resolve } = require('path');
 
 module.exports = {
+  staticDirs: ['../public'],
   addons: [
     getAbsolutePath('@storybook/addon-actions'),
     getAbsolutePath('@storybook/addon-docs'),

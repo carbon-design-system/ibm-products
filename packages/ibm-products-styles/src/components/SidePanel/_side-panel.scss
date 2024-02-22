@@ -62,7 +62,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   overflow-x: hidden;
 }
 
-.#{$block-class}__container {
+.#{$block-class} {
   --#{$block-class}--title-stop: #{$spacing-05};
   --#{$block-class}--scroll-animation-progress: 0;
   --#{$block-class}--title-padding-right: #{$spacing-07};
@@ -76,47 +76,40 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   box-sizing: border-box;
   background-color: $layer-01;
   color: $text-primary;
-  grid-template-rows: 1fr auto; /* titles and content */
+  /* if the title does not scroll then we have a child scrolling section. */
+  grid-template-rows: auto 1fr auto; /* titles content and actions */
 
   @each $size, $size_value in $side-panel-sizes {
-    &.#{$block-class}__container--#{$size} {
+    &.#{$block-class}--#{$size} {
       @include setPanelSize($size_value);
-      .#{$block-class}__header.#{$block-class}__header--no-title-animation,
-      .#{$block-class}__header--no-title-animation
-        .#{$block-class}__subtitle-text {
-        @include setPanelSize($size_value);
-      }
     }
   }
 
-  &:not(:has(.#{$block-class}__animated-scroll-wrapper)),
-  &.#{$block-class}__container--has-no-animated-scroll-wrapper {
-    /* if the title does not scroll then we have a child scrolling section. */
-    grid-template-rows: auto 1fr auto; /* titles content actions */
+  &.#{$block-class}--animated-title {
+    grid-template-rows: 1fr auto; /* titles and content (actions are external to this element) */
   }
 
-  &.#{$block-class}__container--condensed-actions {
+  &.#{$block-class}--condensed-actions {
     --#{$block-class}--actions-height: #{$spacing-09};
   }
 
-  &.#{$block-class}__container--slide-in,
-  &.#{$block-class}__container:not(:has(+ .#{$block-class}__overlay)),
-  &.#{$block-class}__container--has-no-overlay {
+  &.#{$block-class}--slide-in,
+  &:not(.#{$block-class}--has-overlay) {
     box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   }
 
   .#{$block-class}__actions-container {
     width: 100%;
   }
-  &.#{$block-class}__container-right-placement {
+  &.#{$block-class}--right-placement {
     right: 0;
     border-left: 1px solid $border-subtle-02;
   }
-  &.#{$block-class}__container-left-placement {
+  &.#{$block-class}--left-placement {
     left: 0;
     border-right: 1px solid $border-subtle-02;
   }
-  &.#{$block-class}__container.#{$block-class}__container--has-slug {
+  &.#{$block-class}.#{$block-class}--has-slug {
     border-color: transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
@@ -177,36 +170,38 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       margin-bottom: 0;
     }
 
-    &.#{$block-class}--on-detail-step .#{$block-class}__collapsed-title-text {
+    &.#{$block-class}__header--on-detail-step
+      .#{$block-class}__collapsed-title-text {
       top: $spacing-05;
     }
 
-    &.#{$block-class}--on-detail-step
+    &.#{$block-class}__header--on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
       top: $spacing-06;
     }
 
-    &.#{$block-class}--on-detail-step:not(:has(.#{$block-class}__title-text)) {
+    &.#{$block-class}__header--on-detail-step:not(
+        .#{$block-class}__header--has-title
+      ) {
       height: calc(#{$spacing-08} + #{$spacing-02});
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
     }
 
-    &:not(:has(.#{$block-class}__title-text))::before,
-    &.#{$block-class}__header--has-no-title::before {
+    &:not(.#{$block-class}__header--has-title)::before {
       background-color: transparent;
     }
   }
 
-  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
-  &.#{$block-class}__container--has-action-toolbar,
-  &.#{$block-class}__container--has-slug {
+  &.#{$block-class}:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}--has-action-toolbar,
+  &.#{$block-class}--has-slug {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
-  &.#{$block-class}__container:has(.#{$block-class}__action-toolbar),
-  &.#{$block-class}__container--has-action-toolbar {
-    &.#{$block-class}__container--has-slug {
+  &.#{$block-class}:has(.#{$block-class}__action-toolbar),
+  &.#{$block-class}--has-action-toolbar {
+    &.#{$block-class}--has-slug {
       --#{$block-class}--title-padding-right: #{$spacing-11};
     }
   }
@@ -309,11 +304,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-03;
   }
 
-  &.#{$block-class}__container--has-slug .#{$block-class}--scrolls {
+  &.#{$block-class}--has-slug .#{$block-class}--scrolls {
     @include utilities.callout-gradient('default', 0, 'layer');
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
   }
 
-  .#{$block-class}__inner-content.#{$block-class}__inner-content--static {
+  .#{$block-class}__inner-content.#{$block-class}--scrolls {
     padding-top: $spacing-05;
   }
 
@@ -358,7 +356,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: fixed;
+    position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;
@@ -392,24 +390,21 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       height: var(--#{$block-class}--actions-height);
     }
   }
-  &.#{$block-class}__container.#{$block-class}__container--xs
+  &.#{$block-class}.#{$block-class}--xs
     .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
     @include setPanelSize(map-get($side-panel-sizes, xs));
   }
 }
 
 // form fields should receive correct background color
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--text-input,
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--text-area,
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--search-input,
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--select-input,
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--dropdown,
-.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--dropdown-list,
-.#{$block-class}__container
-  .#{c4p-settings.$carbon-prefix}--number
-  input[type='number'],
-.#{$block-class}__container
-  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-area,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--search-input,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--select-input,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--dropdown-list,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--number input[type='number'],
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--date-picker__input {
   background-color: $field-02;
 }
 
@@ -449,10 +444,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}__overlay {
   position: fixed;
-  // Need to disable stylelint until dart sass namespace support is added
   z-index: utilities.z('overlay');
   width: 100%;
   height: 100%;
   background-color: $overlay;
   inset: 0;
+}
+
+.#{$block-class}--has-slug + .#{$block-class}__overlay {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: $ai-overlay;
 }

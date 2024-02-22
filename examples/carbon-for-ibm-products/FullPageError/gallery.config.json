@@ -1,0 +1,12 @@
+{
+  "label": "Full-Page-Error",
+  "package-config": {
+    "flags": {
+      "component": {
+        "FullPageError": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable react/jsx-key */
-
 import { Accordion, AccordionItem, Button, Layer, Search } from '@carbon/react';
 import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';

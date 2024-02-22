@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.2...@carbon/ibm-products-community@0.4.0) (2024-02-21)
+
+
+### Features
+
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+
+
+
+
+
+## [0.3.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.1...@carbon/ibm-products-community@0.3.2) (2024-02-20)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#4343](https://github.com/carbon-design-system/ibm-products/issues/4343)) ([eee92d5](https://github.com/carbon-design-system/ibm-products/commit/eee92d57859056e07851607e67f5d81a00c3c57a))
+
+
+
+
+
+## [0.3.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.0...@carbon/ibm-products-community@0.3.1) (2024-02-09)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
 # [0.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.2.0...@carbon/ibm-products-community@0.3.0) (2024-02-06)
 
 

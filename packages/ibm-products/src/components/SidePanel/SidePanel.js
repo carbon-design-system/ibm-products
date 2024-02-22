@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -27,7 +27,11 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { Button } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
-import { overlayVariants, panelVariants } from './motion/variants';
+import {
+  overlayVariants,
+  panelVariants,
+  actionSetVariants,
+} from './motion/variants';
 import pconsole from '../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -44,6 +48,8 @@ const defaults = {
   placement: 'right',
   size: 'md',
 };
+
+const MotionActionSet = motion(ActionSet);
 
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
@@ -95,12 +101,13 @@ export let SidePanel = React.forwardRef(
     const animatedScrollRef = useRef();
     const headerRef = useRef();
     const titleRef = useRef();
-    const collapsedTitleRef = useRef();
     const labelTextRef = useRef();
     const subtitleRef = useRef();
     const previousState = usePreviousValue({ size, open });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
       setDoAnimateTitle(animateTitle);
@@ -171,6 +178,7 @@ export let SidePanel = React.forwardRef(
     }, [labelText, title]);
 
     const checkSetDoAnimateTitle = () => {
+      let canDoAnimateTitle = false;
       if (
         sidePanelRef?.current &&
         open &&
@@ -213,20 +221,19 @@ export let SidePanel = React.forwardRef(
             innerContentRef.current
           );
           const innerPaddingHeight = innerComputed
-            ? parseFloat(innerComputed?.paddingTop, 10) +
-              parseFloat(innerComputed?.paddingBottom, 10)
+            ? parseFloat(innerComputed?.paddingTop) +
+              parseFloat(innerComputed?.paddingBottom)
             : 0;
 
-          const canDoAnimateTitle =
+          canDoAnimateTitle =
             (!!labelText || !!actionToolbarButtons || !!subtitle) &&
             scrollEl.scrollHeight - scrollEl.clientHeight >=
               scrollAnimationDistance + innerPaddingHeight;
-
-          if (doAnimateTitle !== canDoAnimateTitle) {
-            // will need updating on resize
-            setDoAnimateTitle(canDoAnimateTitle);
-          }
         }
+      }
+      if (doAnimateTitle !== canDoAnimateTitle) {
+        // will need updating on resize
+        setDoAnimateTitle(canDoAnimateTitle);
       }
     };
 
@@ -414,14 +421,16 @@ export let SidePanel = React.forwardRef(
     const mainPanelClassNames = cx([
       blockClass,
       className,
-      `${blockClass}__container`,
-      `${blockClass}__container--${size}`,
+      `${blockClass}`,
+      `${blockClass}--${size}`,
       {
-        [`${blockClass}__container-right-placement`]: placement === 'right',
-        [`${blockClass}__container-left-placement`]: placement === 'left',
-        [`${blockClass}__container--slide-in`]: slideIn,
-        [`${blockClass}__container--has-slug`]: slug,
-        [`${blockClass}__container--condensed-actions`]: condensedActions,
+        [`${blockClass}--right-placement`]: placement === 'right',
+        [`${blockClass}--left-placement`]: placement === 'left',
+        [`${blockClass}--slide-in`]: slideIn,
+        [`${blockClass}--has-slug`]: slug,
+        [`${blockClass}--condensed-actions`]: condensedActions,
+        [`${blockClass}--animated-title`]: doAnimateTitle,
+        [`${blockClass}--has-overlay`]: includeOverlay,
       },
     ]);
 
@@ -445,7 +454,6 @@ export let SidePanel = React.forwardRef(
             className={`${blockClass}__collapsed-title-text`}
             title={title}
             aria-hidden={true}
-            ref={collapsedTitleRef}
           >
             {title}
           </h2>
@@ -467,9 +475,10 @@ export let SidePanel = React.forwardRef(
       return (
         <div
           className={cx(`${blockClass}__header`, {
-            [`${blockClass}--on-detail-step`]: currentStep > 0,
+            [`${blockClass}__header--on-detail-step`]: currentStep > 0,
             [`${blockClass}__header--no-title-animation`]: !doAnimateTitle,
             [`${blockClass}__header--reduced-motion`]: reducedMotion.matches,
+            [`${blockClass}__header--has-title`]: title,
           })}
           ref={headerRef}
         >
@@ -573,7 +582,6 @@ export let SidePanel = React.forwardRef(
         <div
           ref={innerContentRef}
           className={cx(`${blockClass}__inner-content`, {
-            [`${blockClass}__inner-content--static`]: !doAnimateTitle,
             [`${blockClass}--scrolls`]: !doAnimateTitle,
           })}
         >
@@ -603,7 +611,7 @@ export let SidePanel = React.forwardRef(
               initial="hidden"
               animate="visible"
               exit="exit"
-              custom={placement}
+              custom={{ placement, shouldReduceMotion }}
             >
               <span
                 ref={startTrapRef}
@@ -636,10 +644,12 @@ export let SidePanel = React.forwardRef(
               )}
 
               {/* footer */}
-              <ActionSet
+              <MotionActionSet
                 actions={actions}
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
+                custom={shouldReduceMotion}
+                variants={actionSetVariants}
               />
 
               <span

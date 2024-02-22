@@ -71,8 +71,9 @@ const defaults = {
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
-
     StringFormatter: false,
+    StatusIndicator: false,
+    StatusIndicatorStep: false,
 
     /* new component flags here - comment used by generate CLI */
 

@@ -238,12 +238,14 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide
     .#{$block-class}__header.#{$block-class}__header--with-close-icon,
   &.#{$block-class}--has-slug .#{$block-class}__header.#{$block-class}__header {
-    padding-right: $spacing-11;
+    padding-inline-end: $spacing-11;
   }
 
   &.#{$block-class}--wide.#{$block-class}--has-slug
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
-    margin-right: $spacing-09;
+    /* spacing 11 plus additional space for slug/close */
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {

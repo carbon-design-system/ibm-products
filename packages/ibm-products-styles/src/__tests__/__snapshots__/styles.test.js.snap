@@ -2836,10 +2836,12 @@ p.c4p--about-modal__copyright-text:first-child {
   padding: 1.5rem 2rem 0;
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon, .c4p--tearsheet.c4p--tearsheet--has-slug .c4p--tearsheet__header.c4p--tearsheet__header {
-  padding-right: 5rem;
+  padding-inline-end: 5rem;
 }
 .c4p--tearsheet.c4p--tearsheet--wide.c4p--tearsheet--has-slug .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
-  margin-right: 3rem;
+  /* spacing 11 plus additional space for slug/close */
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  padding-inline-end: calc(8rem);
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
   max-width: 80%;

@@ -90,23 +90,6 @@ export let CoachmarkStack = React.forwardRef(
       setSelectedItemNumber(itemNumber);
     };
 
-    const escFunction = useCallback(
-      (event) => {
-        if (event.key === 'Escape') {
-          selectedItemNumber === 0 ? handleClose(true) : handleClose(false);
-        }
-      },
-      [handleClose, selectedItemNumber]
-    );
-
-    useEffect(() => {
-      document.addEventListener('keydown', escFunction, false);
-
-      return () => {
-        document.removeEventListener('keydown', escFunction, false);
-      };
-    }, [escFunction]);
-
     const handleClose = useCallback(
       (isParentCloseButton) => {
         if (isParentCloseButton) {
@@ -126,6 +109,23 @@ export let CoachmarkStack = React.forwardRef(
       },
       [onClose]
     );
+
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          selectedItemNumber === 0 ? handleClose(true) : handleClose(false);
+        }
+      },
+      [handleClose, selectedItemNumber]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
 
     const contextValue = {
       buttonProps: {

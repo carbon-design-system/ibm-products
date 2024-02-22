@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Edit16, TrashCan16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -292,6 +292,26 @@ const ClickableRowWithPanel = ({ ...args }) => {
   const [data] = useState(makeData(10));
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [rowData, setRowData] = useState({});
+  const [focusBackElm, setFocusBackElm] = useState();
+  const sidePanelRef = useRef(sidePanelRef);
+
+  useEffect(() => {
+    if (openSidePanel) {
+      const focusableElements = sidePanelRef.current.querySelectorAll(
+        'button, [href], input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      const lastFocusableElement =
+        focusableElements[focusableElements.length - 2]; //excluding 'Focus sentinel' span
+      const handleFocus = () => {
+        focusBackElm.focus();
+      };
+      lastFocusableElement.addEventListener('blur', handleFocus);
+      return () => {
+        lastFocusableElement.removeEventListener('blur', handleFocus);
+      };
+    }
+  }, [openSidePanel]);
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -300,6 +320,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
         action()(event);
         setOpenSidePanel(true);
         setRowData(row);
+        setFocusBackElm(event.currentTarget); // set focus back to the row selected when closing side panel
       },
       DatagridActions,
       batchActions: true,
@@ -323,9 +344,12 @@ const ClickableRowWithPanel = ({ ...args }) => {
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
         selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}
-        onRequestClose={() => setOpenSidePanel(false)}
+        onRequestClose={() => {
+          setOpenSidePanel(false), focusBackElm.focus();
+        }}
         size={'sm'}
         title={'Title'}
+        ref={sidePanelRef}
         slideIn
       >
         <DataTableSidePanelContent rowData={rowData && rowData.original} />

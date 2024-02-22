@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -13,21 +13,14 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-import { getMagnitude, truncate } from './constants';
+import { getMagnitude, truncate } from './utils';
 import { DecoratorIcon } from './DecoratorIcon';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const componentName = 'Decorator';
 
 const defaults = {
-  labelTitle: (score, scoreThresholds, magnitude) => {
-    if (typeof score !== 'number') {
-      return 'Unknown score';
-    }
-    return `"${magnitude}" magnitude. Score ${score} out of ${
-      scoreThresholds.slice(-1)[0]
-    }`;
-  },
+  kind: 'default',
   scoreThresholds: [0, 4, 7, 10],
   theme: 'light',
 };
@@ -43,8 +36,9 @@ export let Decorator = React.forwardRef(
       disabled,
       hideIcon,
       href,
+      kind = defaults.kind,
       label,
-      labelTitle = defaults.labelTitle,
+      setLabelTitle = defaults.setLabelTitle,
       onClick,
       onClickLabel,
       onClickValue,
@@ -61,39 +55,18 @@ export let Decorator = React.forwardRef(
     },
     ref
   ) => {
-    const magnitude = useMemo(() => {
-      return getMagnitude(score, scoreThresholds);
-    }, [score, scoreThresholds]);
-
-    const _labelTitle = useMemo(() => {
-      return labelTitle && labelTitle(score, scoreThresholds, magnitude);
-    }, [magnitude, score, labelTitle, scoreThresholds]);
-
-    // If a "midline" truncation has been defined,
-    // then use the formatted midline value generated here,
-    // else refer to the original value.
-    const _value = useMemo(() => {
-      if (truncateValue?.maxLength) {
-        return truncate(
-          value,
-          truncateValue.maxLength,
-          truncateValue.front,
-          truncateValue.back
-        );
-      }
-
-      return value;
-    }, [truncateValue, value]);
+    const magnitude = getMagnitude(score, scoreThresholds);
+    const _labelTitle =
+      setLabelTitle && setLabelTitle(score, scoreThresholds, magnitude);
+    const _value = truncate(value, truncateValue);
 
     // These class names apply to all types of Decorator.
-    const classNames = useMemo(() => {
-      return cx(blockClass, className, `${blockClass}--${theme}`, {
-        [`${blockClass}--sm`]: small,
-        [`${blockClass}--truncate-end`]: truncateValue === 'end',
-        [`${blockClass}--truncate-start`]: truncateValue === 'start',
-        [`${blockClass}--truncate-midline`]: truncateValue?.maxLength,
-      });
-    }, [className, small, theme, truncateValue]);
+    const classNames = cx(blockClass, className, `${blockClass}--${theme}`, {
+      [`${blockClass}--sm`]: small,
+      [`${blockClass}--truncate-end`]: truncateValue === 'end',
+      [`${blockClass}--truncate-start`]: truncateValue === 'start',
+      [`${blockClass}--truncate-midline`]: truncateValue?.maxLength,
+    });
 
     // These properties apply to all <DecoratorIcons>.
     const decoratorIconsProps = {
@@ -119,7 +92,7 @@ export let Decorator = React.forwardRef(
     };
 
     // RETURN DUAL BUTTONS
-    if (onClickLabel && onClickValue) {
+    if (kind === 'dual-buttons' && onClickLabel && onClickValue) {
       return (
         <span
           {...rest}
@@ -155,7 +128,7 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN SINGLE BUTTON
-    if (onClick && !href) {
+    if (kind === 'single-button' && onClick && !href) {
       return (
         <button
           {...rest}
@@ -181,7 +154,7 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN LINK
-    if (href) {
+    if (kind === 'link' && href) {
       return (
         <a
           {...rest}
@@ -204,22 +177,24 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN DEFAULT (NON-INTERACTIVE)
-    return (
-      <span
-        {...rest}
-        {...getDevtoolsProps(componentName)}
-        className={cx(classNames, `${blockClass}--default`)}
-        ref={ref}
-      >
-        <span className={`${blockClass}__label`} title={_labelTitle || label}>
-          {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
-          {!!label && label}
+    if (kind === 'default') {
+      return (
+        <span
+          {...rest}
+          {...getDevtoolsProps(componentName)}
+          className={cx(classNames, `${blockClass}--default`)}
+          ref={ref}
+        >
+          <span className={`${blockClass}__label`} title={_labelTitle || label}>
+            {!hideIcon && <DecoratorIcon {...decoratorIconsProps} />}
+            {!!label && label}
+          </span>
+          <span className={`${blockClass}__value`} title={valueTitle || value}>
+            {_value}
+          </span>
         </span>
-        <span className={`${blockClass}__value`} title={valueTitle || value}>
-          {_value}
-        </span>
-      </span>
-    );
+      );
+    }
   }
 );
 
@@ -249,48 +224,56 @@ Decorator.propTypes = {
    */
   hideIcon: PropTypes.bool,
   /**
-   * Defining `href` will render the entire component as a link.
+   * `href` is req'd if `kind` is "link".
+   *
+   * `onClick` is optional.
+   *
+   * These two properties together will render the `label` and `value` as a single link.
    */
-  href: PropTypes.string,
+  href: PropTypes.string.isRequired.if(({ kind }) => kind === 'link'),
+  /**
+   * If `kind` is "dual-buttons" then both `onClickLabel` and `onClickValue` callback functions must be defined.
+   *
+   * If `kind` is "single-button" then the `onClick` callback function must be defined.
+   *
+   * If `kind` is "link" then `href` must be defined.
+   */
+  kind: PropTypes.oneOf(['default', 'link', 'single-button', 'dual-buttons']),
   /**
    * The label for the data.
    */
   label: PropTypes.string,
   /**
-   * Callback function for building the label's descriptive text for screen readers.
+   * `onClick` is req'd if `kind` is "single-button".
    *
-   * The default description is in the form of `"(magnitude)" magnitude: score X out of Y"`.
-   * E.g. `"Medium" magnitude: score 5 out of 10`.
-   *
-   * Where `magnitude` is the label associated with the specific score,
-   * X is the `score`, and Y is the last element of the `labelTitle` array.
-   *
-   * If not defined, the title will default to the `label` prop.
-   */
-  labelTitle: PropTypes.func,
-  /**
-   * Defining `onClick` will render the entire component as a single button.
+   * These two properties together will render the `label` and `value` as a single button.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired.if(({ kind }) => kind === 'single-button'),
   /**
-   * Defining `onClickLabel` and `onClickValue` together
-   * will render the `label` and `value` as individual buttons.
+   * `onClickLabel` and `onClickValue` is req'd if `kind` is "dual-buttons".
+   *
+   * These three properties together will render the `label` and `value` as individual buttons.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClickLabel: PropTypes.func,
+  onClickLabel: PropTypes.func.isRequired.if(
+    ({ kind }) => kind === 'dual-buttons'
+  ),
   /**
-   * Defining `onClickLabel` and `onClickValue` together
-   * will render the `label` and `value` as individual buttons.
+   * `onClickLabel` and `onClickValue` is req'd if `kind` is "dual-buttons".
+   *
+   * These three properties together will render the `label` and `value` as individual buttons.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClickValue: PropTypes.func,
+  onClickValue: PropTypes.func.isRequired.if(
+    ({ kind }) => kind === 'dual-buttons'
+  ),
   /**
    * Optional callback function for right-click events.
-   * This one function can be applied to any component variation.
+   * This one function can be applied to any component where `kind` is a link or button.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
@@ -317,6 +300,18 @@ Decorator.propTypes = {
    * See also `score`.
    */
   scoreThresholds: PropTypes.arrayOf(PropTypes.number),
+  /**
+   * Callback function for building the label's descriptive text for screen readers.
+   *
+   * The default description is in the form of `"(magnitude)" magnitude: score X out of Y"`.
+   * E.g. `"Medium" magnitude: score 5 out of 10`.
+   *
+   * Where `magnitude` is the label associated with the specific score,
+   * X is the `score`, and Y is the last element of the `setLabelTitle` array.
+   *
+   * If not defined, the title will default to the `label` prop.
+   */
+  setLabelTitle: PropTypes.func,
   /**
    * Styled smaller to better fit inline with text.
    */

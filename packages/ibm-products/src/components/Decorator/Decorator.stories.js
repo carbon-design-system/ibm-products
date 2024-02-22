@@ -64,6 +64,14 @@ const defaultProps = {
   label: 'IP',
   score: 5,
   scoreThresholds: [0, 4, 7, 10],
+  setLabelTitle: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds[scoreThresholds.length - 1]
+    }`;
+  },
   small: false,
   theme: 'light',
   value: '192.168.0.50',
@@ -146,6 +154,7 @@ export const asLink = prepareStory(Template, {
   args: {
     ...defaultProps,
     href: 'http://www.ibm.com',
+    kind: 'link',
     target: '_blank',
     onClick: (event, values) => action('onClick')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
@@ -155,6 +164,7 @@ export const asLink = prepareStory(Template, {
 export const asSingleButton = prepareStory(Template, {
   args: {
     ...defaultProps,
+    kind: 'single-button',
     onClick: (event, values) => action('onClick')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
@@ -163,6 +173,7 @@ export const asSingleButton = prepareStory(Template, {
 export const asDualButtons = prepareStory(Template, {
   args: {
     ...defaultProps,
+    kind: 'dual-buttons',
     onClickLabel: (event, values) => action('onClickLabel')(values),
     onClickValue: (event, values) => action('onClickValue')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),

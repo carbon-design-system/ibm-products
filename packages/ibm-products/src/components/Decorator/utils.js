@@ -27,14 +27,19 @@ const getMagnitude = (score, thresholds) => {
   return 'Unknown';
 };
 
-const truncate = (inputText, maxLength, front, back) => {
-  let truncatedText = inputText;
-  if (inputText.length > maxLength) {
-    truncatedText = `${inputText.substring(0, front)}…${inputText.substr(
+// If a "midline" truncation has been defined,
+// then return the formatted midline value generated here,
+// else return to the original value.
+const truncate = (inputText, truncateValue = {}) => {
+  const { maxLength, front, back } = truncateValue;
+
+  if (maxLength && inputText.length > maxLength) {
+    return `${inputText.substring(0, front)}…${inputText.substr(
       inputText.length - back
     )}`;
   }
-  return truncatedText;
+
+  return inputText;
 };
 
 export { getMagnitude, truncate };

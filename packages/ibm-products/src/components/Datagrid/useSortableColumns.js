@@ -100,8 +100,10 @@ const useSortableColumns = (hooks) => {
         return <ArrowsVertical {...iconProps} />;
       };
       const Header = (headerProp) =>
-        column.disableSortBy === true || column.id === 'datagridSelection' ? (
-          column.disableSortBy ? (
+        column.disableSortBy === true ||
+        column.id === 'datagridSelection' ||
+        column.isAction ? (
+          column.disableSortBy || column.isAction ? (
             column.Header
           ) : (
             <SelectAll {...instance} />

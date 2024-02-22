@@ -34,14 +34,9 @@ const s = [
       {
         n: 'Components',
         s: [
-          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Big numbers', s: ['c/BigNumbers'] },
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
-          { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
-          { n: 'Options tile', s: ['c/OptionsTile'] },
-          { n: 'Page header', s: ['c/PageHeader'] },
-          { n: 'Side panel', s: ['c/SidePanel'] },
-          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
+
           {
             n: 'Datagrid',
             s: [
@@ -57,8 +52,17 @@ const s = [
               'c/Datagrid/Extensions/Slug',
             ],
           },
+          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'Description list', s: ['c/DescriptionList'] },
+          { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Options tile', s: ['c/OptionsTile'] },
+          { n: 'Page header', s: ['c/PageHeader'] },
+          { n: 'Side panel', s: ['c/SidePanel'] },
+          { n: 'String formatter', s: ['c/StringFormatter'] },
+          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },

@@ -20,17 +20,10 @@ import mdx from './Nav.mdx';
 
 import styles from './_storybook-styles.scss';
 
-// const navDisplayName = Nav.displayName;
-// console.log(navDisplayName);
-
 export default {
-  title: getStoryTitle('Nav'),
+  title: getStoryTitle(Nav.displayName),
   component: Nav,
   tags: ['autodocs'],
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     styles,
     docs: {
@@ -39,9 +32,6 @@ export default {
   },
 };
 
-/**
- * TODO: Declare template(s) for one or more scenarios.
- */
 const Template = (args) => {
   return (
     <div style={{ width: '300px' }}>
@@ -77,11 +67,8 @@ const Template = (args) => {
   );
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
 export const nav = prepareStory(Template, {
+  storyName: 'Default',
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Nav-args
     label: 'Navigation',

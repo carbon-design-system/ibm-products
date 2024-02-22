@@ -9232,7 +9232,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:122.0.1":
+"chromedriver@npm:*":
   version: 122.0.1
   resolution: "chromedriver@npm:122.0.1"
   dependencies:

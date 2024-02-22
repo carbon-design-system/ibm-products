@@ -29,11 +29,8 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('renders a component StatusIndicator', async () => {
-    const { container } = renderComponent();
-    const statusIndicator = container.querySelector(
-      `[data-testid="${dataTestId}"]`
-    );
-    expect(statusIndicator);
+    renderComponent();
+    screen.getByTestId(dataTestId);
   });
 
   it('renders a child component StatusIndicatorStep', async () => {
@@ -48,11 +45,8 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = renderComponent({ className: className });
-    const statusIndicator = container.querySelector(
-      `[data-testid="${dataTestId}"]`
-    );
-    expect(statusIndicator).toHaveClass(className);
+    renderComponent({ className: className });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {

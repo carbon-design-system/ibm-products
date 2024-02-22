@@ -103,5 +103,5 @@ StatusIndicator.propTypes = {
   /**
    * The title that appears at the top of the list.
    */
-  title: PropTypes.string,
+  title: PropTypes.node,
 };

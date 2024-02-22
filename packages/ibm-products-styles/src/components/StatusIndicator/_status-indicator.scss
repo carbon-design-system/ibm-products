@@ -30,7 +30,7 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 
   margin-bottom: $spacing-02;
 }
-.#{$block-class-step}--details {
+.#{$block-class-step}__details {
   display: flex;
   min-height: $spacing-07;
   align-items: center;

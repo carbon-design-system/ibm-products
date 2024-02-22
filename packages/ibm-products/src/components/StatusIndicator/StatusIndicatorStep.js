@@ -43,7 +43,7 @@ export let StatusIndicatorStep = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <div className={`${blockClass}--details`}>
+        <div className={`${blockClass}__details`}>
           <div className={`${blockClass}__icon`}>
             {status === 'inactive' && (
               <CircleStroke size={16} viewBox="1 1 14 14" />

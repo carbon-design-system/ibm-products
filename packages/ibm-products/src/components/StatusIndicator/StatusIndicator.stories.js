@@ -46,39 +46,51 @@ export default {
 const steps = [
   {
     description: 'Open database',
-    errorMessage: 'Failed to open database, Error code 0x5E6159EF',
+    errorMessage: 'Failed to open database, Error code 0x5E6159EF.',
   },
   {
     description: 'Write to database',
-    errorMessage: 'Failed to write to database, Error code 0xD65E7A04',
+    errorMessage: 'Failed to write to database, Error code 0xD65E7A04.',
   },
   {
     description: 'Test database',
-    errorMessage: 'Test failed, Error code 0x868EF3E6',
+    errorMessage: 'Test failed, Error code 0x868EF3E6.',
   },
   {
     description: 'Close database',
-    errorMessage: 'Failed to close database, Error code 0xB13512FD',
+    errorMessage: 'Failed to close database, Error code 0xB13512FD.',
   },
 ];
 
 const stepsAsync = [
   {
-    description: 'Upload profile photo for "new.employee@corp.com"',
+    description: (
+      <>
+        Upload profile photo for <em>new.employee@corp.com</em>.
+      </>
+    ),
     errorMessage:
       'Upload failed, image dimensions must be at least 400 x 400 pixels.',
   },
   {
-    description: 'Add to group "Analyst, level 1"',
-    errorMessage: 'Failed to add user to group, Error code 0xD65E7A04',
+    description: (
+      <>
+        Add to group <em>Analyst, level 1</em>.
+      </>
+    ),
+    errorMessage: 'Failed to add user to group, Error code 0xD65E7A04.',
   },
   {
-    description: 'Update business address to ID "CA3577"',
-    errorMessage: 'Update failed, Error code 0x868EF3E6',
+    description: 'Update business address to ID "CA3577".',
+    errorMessage: 'Update failed, Error code 0x868EF3E6.',
   },
   {
-    description: 'Update manager to "dev.lead@corp.com"',
-    errorMessage: 'Failed to update manager, Error code 0xB13512FD',
+    description: (
+      <>
+        Update manager to <em>dev.lead@corp.com</em>.
+      </>
+    ),
+    errorMessage: 'Failed to update manager, Error code 0xB13512FD.',
   },
 ];
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,7 +36,12 @@ export default {
     styles,
     docs: { page: mdx },
   },
-  excludeStories: ['FilteringUsage', 'filterProps', 'getDateFormat'],
+  excludeStories: [
+    'FilteringUsage',
+    'filterProps',
+    'getDateFormat',
+    'multiSelectProps',
+  ],
 };
 
 // Example usage of mapping locale to flatpickr date format or placeholder value (m/d/Y or mm/dd/yyyy)
@@ -56,6 +61,28 @@ export const getDateFormat = (lang, full) => {
       }
     })
     .join('');
+};
+
+export const multiSelectProps = {
+  // items: ['relationship', 'complicated', 'single'],
+  items: [
+    { text: 'relationship', id: 'relationship' },
+    { text: 'complicated', id: 'complicated' },
+    { text: 'single', id: 'single' },
+  ],
+  id: 'carbon-multiselect-example',
+  label: 'Status selection',
+  titleText: 'Multiselect title',
+  itemToString: (item) => (item ? item.text : ''),
+  size: 'md',
+  type: 'default',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  open: false,
+  clearSelectionDescription: 'Total items selected: ',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
 export const filterProps = {
@@ -99,15 +126,11 @@ export const filterProps = {
         {
           filterLabel: 'Status',
           filter: {
-            type: 'dropdown',
+            type: 'multiSelect',
             column: 'status',
             props: {
-              Dropdown: {
-                id: 'marital-status-dropdown',
-                ariaLabel: 'Marital status dropdown',
-                items: ['relationship', 'complicated', 'single'],
-                label: 'Marital status',
-                titleText: 'Marital status',
+              MultiSelect: {
+                ...multiSelectProps,
               },
             },
           },
@@ -251,6 +274,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {

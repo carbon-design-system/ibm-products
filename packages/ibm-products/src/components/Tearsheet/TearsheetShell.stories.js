@@ -63,10 +63,17 @@ const dummyContent = (
       padding: '50px',
       height: '400px',
       // stylelint-disable-next-line color-named
-      background: 'pink',
     }}
   >
-    Tearsheet content
+    {Array.from({ length: 10 }, (_, k) => ({ key: `Paragraph-${k}` })).map(
+      ({ key }) => (
+        <p key={key}>
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+      )
+    )}
   </div>
 );
 

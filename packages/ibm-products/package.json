@@ -70,6 +70,7 @@
     "babel-preset-ibm-cloud-cognitive": "^0.14.40",
     "chalk": "^4.1.2",
     "change-case": "4.1.2",
+    "classnames": "^2.5.1",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "fs-extra": "^11.2.0",
@@ -106,8 +107,8 @@
     "@carbon/grid": "^11.21.1",
     "@carbon/layout": "^11.20.1",
     "@carbon/motion": "^11.16.1",
-    "@carbon/react": "^1.50.0",
-    "@carbon/themes": "^11.31.0",
+    "@carbon/react": "^1.51.0",
+    "@carbon/themes": "^11.32.0",
     "@carbon/type": "^11.25.1",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"

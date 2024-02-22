@@ -32,6 +32,7 @@ export let Nav = React.forwardRef(
       children = defaults.children,
       heading = defaults.heading,
       label,
+      ...rest
     },
     ref
   ) => {
@@ -123,12 +124,17 @@ export let Nav = React.forwardRef(
     };
 
     return (
-      <nav className={cx(blockClass, className)} aria-label={label} ref={ref}>
+      <nav
+        {...rest}
+        className={cx(blockClass, className)}
+        aria-label={label}
+        ref={ref}
+      >
         {heading && <h1 className={`${blockClass}__heading`}>{heading}</h1>}
 
         <ul className={`${blockClass}__wrapper`} role="menubar">
           {React.Children.map(children, (child, index) => {
-            return child.type.displayName === NavList.displayName
+            return child?.type?.displayName === NavList.displayName
               ? buildNewListChild(child, index)
               : buildNewItemChild(child, index);
           })}

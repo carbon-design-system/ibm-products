@@ -65,6 +65,10 @@ const s = [
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
+          {
+            n: 'StatusIndicator',
+            s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
+          },
         ],
       },
       {

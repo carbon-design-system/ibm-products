@@ -22,7 +22,6 @@ import {
   ComposedModal,
   Layer,
   ModalHeader,
-  ModalBody,
   usePrefix,
 } from '@carbon/react';
 
@@ -86,9 +85,10 @@ export const TearsheetShell = React.forwardRef(
       navigation,
       onClose,
       open,
+      portalTarget: portalTargetIn,
       selectorPrimaryFocus,
       size,
-      portalTarget: portalTargetIn,
+      slug,
       title,
       verticalPosition,
       // Collect any other property values passed in.
@@ -231,7 +231,10 @@ export const TearsheetShell = React.forwardRef(
               depth > 1 || (depth === 1 && prevDepth.current > 1),
             [`${bc}--wide`]: wide,
             [`${bc}--narrow`]: !wide,
+            [`${bc}--has-slug`]: slug,
+            [`${bc}--has-close`]: effectiveHasCloseIcon,
           })}
+          slug={slug}
           style={{
             [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
             [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
@@ -294,8 +297,7 @@ export const TearsheetShell = React.forwardRef(
           )}
           <Wrap
             ref={modalBodyRef}
-            element={ModalBody}
-            className={`${bc}__body`}
+            className={`${carbonPrefix}--modal-content ${bc}__body`}
           >
             <Wrap
               className={cx({
@@ -505,6 +507,11 @@ TearsheetShell.propTypes = {
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   */
+  slug: PropTypes.node,
 
   /**
    * The main title of the tearsheet, displayed in the header area.

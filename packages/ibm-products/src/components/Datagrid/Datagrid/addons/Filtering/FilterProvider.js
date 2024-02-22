@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import {
   DATE,
@@ -14,6 +14,8 @@ import {
   RADIO,
   CHECKBOX,
   CLEAR_SINGLE_FILTER,
+  SAVED_FILTERS,
+  MULTISELECT,
 } from './constants';
 
 export const FilterContext = createContext();
@@ -38,7 +40,7 @@ const EventEmitter = {
 const removeFilterItem = (state, index) => state.splice(index, 1);
 
 const updateFilterState = (state, type, value) => {
-  if (type === CHECKBOX) {
+  if (type === CHECKBOX || type === MULTISELECT) {
     return;
   }
   if (type === DATE) {
@@ -60,7 +62,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
       const filterValues = f.value;
       const filterType = f.type;
       updateFilterState(tempState, filterType, value);
-      if (filterType === CHECKBOX) {
+      if (filterType === CHECKBOX || filterType === MULTISELECT) {
         /**
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
@@ -122,14 +124,14 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
           formatDateRange(startDate, endDate),
         ...sharedFilterProps,
       });
-    } else if (type === CHECKBOX) {
-      value.forEach((checkbox) => {
-        if (checkbox.selected) {
+    } else if (type === CHECKBOX || type === MULTISELECT) {
+      value.forEach((option) => {
+        if (option.selected) {
           tags.push({
             key: id,
-            value: checkbox.value,
+            value: option.value,
             ...sharedFilterProps,
-            onClose: () => handleSingleFilterRemoval(id, checkbox.value),
+            onClose: () => handleSingleFilterRemoval(id, option.value),
           });
         }
       });
@@ -139,12 +141,38 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
   return tags;
 };
 
+const filteringReducer = (state, action) => {
+  switch (action.type) {
+    case SAVED_FILTERS: {
+      const { savedFilters } = action.payload || {};
+      return {
+        ...state,
+        savedFilters,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
 export const FilterProvider = ({ children, filters, filterProps }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
 
-  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
+  const initialState = {
+    savedFilters: [],
+  };
+  const [state, dispatch] = useReducer(filteringReducer, initialState);
+
+  const value = {
+    filterTags,
+    EventEmitter,
+    panelOpen,
+    setPanelOpen,
+    state,
+    dispatch,
+  };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

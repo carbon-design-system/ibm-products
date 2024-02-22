@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.14.0...@carbon/ibm-cloud-cognitive-core@2.14.1) (2024-02-21)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.13.0...@carbon/ibm-cloud-cognitive-core@2.14.0) (2024-02-21)
+
+
+### Features
+
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+
+
+
+
+
+# [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.12.1...@carbon/ibm-cloud-cognitive-core@2.13.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* update Carbon 11 compatible versions to latest ([#4343](https://github.com/carbon-design-system/ibm-products/issues/4343)) ([eee92d5](https://github.com/carbon-design-system/ibm-products/commit/eee92d57859056e07851607e67f5d81a00c3c57a))
+
+
+### Features
+
+* **BigNumbers:** new component BigNumbers ([#4174](https://github.com/carbon-design-system/ibm-products/issues/4174)) ([8053304](https://github.com/carbon-design-system/ibm-products/commit/80533047724d9a3227285110edaef9d291244d44))
+* **StringFormatter:** new component StringFormatter ([#4249](https://github.com/carbon-design-system/ibm-products/issues/4249)) ([74d67d0](https://github.com/carbon-design-system/ibm-products/commit/74d67d09f3d84e85e238eb9400d5114ba69c9518))
+
+
+
+
+
+## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.12.0...@carbon/ibm-cloud-cognitive-core@2.12.1) (2024-02-13)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.12.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.11.0...@carbon/ibm-cloud-cognitive-core@2.12.0) (2024-02-09)
+
+
+### Bug Fixes
+
+* empty state v2 storybook fix ([#4238](https://github.com/carbon-design-system/ibm-products/issues/4238)) ([38e461b](https://github.com/carbon-design-system/ibm-products/commit/38e461bc1f9b27ee5550d9bba2a0a9a6d691839e))
+* storybook static build folder update ([#4221](https://github.com/carbon-design-system/ibm-products/issues/4221)) ([a78c315](https://github.com/carbon-design-system/ibm-products/commit/a78c3150b5e566736854249e476daa623ef85396))
+
+
+### Features
+
+* add compliance footer in v2 Storybook ([#4225](https://github.com/carbon-design-system/ibm-products/issues/4225)) ([8afb1da](https://github.com/carbon-design-system/ibm-products/commit/8afb1dade0c591c1e4233f3fcd1ae32ab2854dfc))
+* **FullPageError:** create new FullPageError component ([#4211](https://github.com/carbon-design-system/ibm-products/issues/4211)) ([24afc41](https://github.com/carbon-design-system/ibm-products/commit/24afc41b83cca0c365082265130d56aa4c263695))
+* **TruncatedList:** new component TruncatedList ([#4139](https://github.com/carbon-design-system/ibm-products/issues/4139)) ([bc54d2f](https://github.com/carbon-design-system/ibm-products/commit/bc54d2f1f9a016776c6dc0b998c7a3bcbb021ccb))
+* **UserAvatar:** create UserAvatar component ([#4200](https://github.com/carbon-design-system/ibm-products/issues/4200)) ([3990523](https://github.com/carbon-design-system/ibm-products/commit/399052356b9492a9699809a715c0ee34e52cd6a3))
+
+
+
+
+
 # [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.10.0...@carbon/ibm-cloud-cognitive-core@2.11.0) (2024-02-06)
 
 

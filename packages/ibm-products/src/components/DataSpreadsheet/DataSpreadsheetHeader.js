@@ -17,6 +17,7 @@ import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { selectAllCells } from './utils/selectAllCells';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 import { useSpreadsheetMouseMove } from './hooks';
+import { checkForHoldingKey } from './utils/checkForHoldingKey';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -63,8 +64,8 @@ export const DataSpreadsheetHeader = forwardRef(
 
     const handleColumnHeaderClick = (index) => {
       return (event) => {
-        const isHoldingCommandKey = event.metaKey || event.ctrlKey;
-        const isHoldingShiftKey = event.shiftKey;
+        const isHoldingCommandKey = checkForHoldingKey(event, 'cmd');
+        const isHoldingShiftKey = checkForHoldingKey(event, 'shiftKey');
         handleHeaderCellSelection({
           type: 'column',
           activeCellCoordinates,

@@ -10,6 +10,7 @@
 const defaultOrNot = (item) => item.default || item;
 /* --- import Thumbnails */ import imageAPIKeyModal from './APIKeyModal--thumbnail.png';
 import imageAboutModal from './AboutModal--thumbnail.png';
+import imageBigNumbers from './BigNumbers--thumbnail.png';
 import imageCascade from './Cascade--thumbnail.png';
 import imageCoachmark from './Coachmark--thumbnail.png';
 import imageCoachmarkBeacon from './CoachmarkBeacon--thumbnail.png';
@@ -26,10 +27,12 @@ import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageDatagrid from './Datagrid--thumbnail.png';
 import imageDelimitedList from './DelimitedList--thumbnail.png';
+import imageDescriptionList from './DescriptionList--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
+import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
@@ -44,8 +47,11 @@ import imageSaving from './Saving--thumbnail.png';
 import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
+import imageStringFormatter from './StringFormatter--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
+import imageTruncatedList from './TruncatedList--thumbnail.png';
+import imageUserAvatar from './UserAvatar--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
@@ -61,6 +67,11 @@ const config = [
     label: 'About Modal',
     directory: 'AboutModal',
     thumbnail: `url(${imageAboutModal}`,
+  },
+  {
+    label: 'Big-Numbers',
+    directory: 'BigNumbers',
+    thumbnail: `url(${imageBigNumbers}`,
   },
   { label: 'Cascade', directory: 'Cascade', thumbnail: `url(${imageCascade}` },
   {
@@ -139,6 +150,11 @@ const config = [
     thumbnail: `url(${imageDelimitedList}`,
   },
   {
+    label: 'Description-List',
+    directory: 'DescriptionList',
+    thumbnail: `url(${imageDescriptionList}`,
+  },
+  {
     label: 'EditInPlace',
     directory: 'EditInPlace',
     thumbnail: `url(${imageEditInPlace}`,
@@ -157,6 +173,11 @@ const config = [
     label: 'Expressive Card',
     directory: 'ExpressiveCard',
     thumbnail: `url(${imageExpressiveCard}`,
+  },
+  {
+    label: 'Full-Page-Error',
+    directory: 'FullPageError',
+    thumbnail: `url(${imageFullPageError}`,
   },
   {
     label: 'HTTP Error',
@@ -224,11 +245,26 @@ const config = [
     directory: 'StatusIcon',
     thumbnail: `url(${imageStatusIcon}`,
   },
+  {
+    label: 'String-Formatter',
+    directory: 'StringFormatter',
+    thumbnail: `url(${imageStringFormatter}`,
+  },
   { label: 'TagSet', directory: 'TagSet', thumbnail: `url(${imageTagSet}` },
   {
     label: 'Tearsheet',
     directory: 'Tearsheet',
     thumbnail: `url(${imageTearsheet}`,
+  },
+  {
+    label: 'Truncated-List',
+    directory: 'TruncatedList',
+    thumbnail: `url(${imageTruncatedList}`,
+  },
+  {
+    label: 'User-Avatar',
+    directory: 'UserAvatar',
+    thumbnail: `url(${imageUserAvatar}`,
   },
   {
     label: 'UserProfileImage',

@@ -30,6 +30,7 @@ import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 
 import { useSpreadsheetMouseUp } from './hooks';
+import { checkForHoldingKey } from './utils/checkForHoldingKey';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -277,8 +278,8 @@ export const DataSpreadsheetBody = forwardRef(
             `${blockClass}__body--td`
           );
           setValidStartingPoint(isValidSelectionAreaStart);
-          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
-          const isHoldingShiftKey = event.shiftKey;
+          const isHoldingCommandKey = checkForHoldingKey(event, 'cmd');
+          const isHoldingShiftKey = checkForHoldingKey(event, 'shiftKey');
           setContainerHasFocus(true);
           const activeCoordinates = {
             row: cell.row.index,
@@ -407,7 +408,7 @@ export const DataSpreadsheetBody = forwardRef(
     const handleRowHeaderClick = useCallback(
       (index) => {
         return (event) => {
-          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
+          const isHoldingCommandKey = checkForHoldingKey(event, 'cmd');
           handleHeaderCellSelection({
             type: 'row',
             activeCellCoordinates,

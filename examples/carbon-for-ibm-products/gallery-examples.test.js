@@ -11,6 +11,7 @@ import { init } from './test-common';
 
 import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example';
 import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
+import { Example as BigNumbersExample } from './BigNumbers/src/Example/Example';
 import { Example as CascadeExample } from './Cascade/src/Example/Example';
 import { Example as CoachmarkExample } from './Coachmark/src/Example/Example';
 import { Example as CoachmarkBeaconExample } from './CoachmarkBeacon/src/Example/Example';
@@ -27,10 +28,12 @@ import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
 import { Example as DatagridExample } from './Datagrid/src/Example/Example';
 import { Example as DelimitedListExample } from './DelimitedList/src/Example/Example';
+import { Example as DescriptionListExample } from './DescriptionList/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
+import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
@@ -45,8 +48,11 @@ import { Example as SavingExample } from './Saving/src/Example/Example';
 import { Example as SearchBarExample } from './SearchBar/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
+import { Example as StringFormatterExample } from './StringFormatter/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
+import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
+import { Example as UserAvatarExample } from './UserAvatar/src/Example/Example';
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
@@ -64,6 +70,12 @@ describe('All examples', () => {
 
   it('AboutModal renders', () => {
     render(<AboutModalExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('BigNumbers renders', () => {
+    render(<BigNumbersExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -164,6 +176,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('DescriptionList renders', () => {
+    render(<DescriptionListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('EditInPlace renders', () => {
     render(<EditInPlaceExample />);
     // expect no errors int the console
@@ -184,6 +202,12 @@ describe('All examples', () => {
 
   it('ExpressiveCard renders', () => {
     render(<ExpressiveCardExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('FullPageError renders', () => {
+    render(<FullPageErrorExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -272,6 +296,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('StringFormatter renders', () => {
+    render(<StringFormatterExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('TagSet renders', () => {
     render(<TagSetExample />);
     // expect no errors int the console
@@ -280,6 +310,18 @@ describe('All examples', () => {
 
   it('Tearsheet renders', () => {
     render(<TearsheetExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('TruncatedList renders', () => {
+    render(<TruncatedListExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('UserAvatar renders', () => {
+    render(<UserAvatarExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

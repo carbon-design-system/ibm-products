@@ -93,3 +93,57 @@ jobs:
         run: yarn
       - name: CI tests for community
         run: yarn ci-check:test:community
+
+  avt-runner:
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - name: Install
+        run: yarn
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+      - name: Build project
+        run: yarn build
+      - name: Build storybook
+        run:
+          yarn storybook
+      - name: Run storybook
+        id: storybook
+        run: |
+          npx serve -l 3000 packages/core/storybook-static &
+          pid=$!
+          echo "pid=$pid" >> $GITHUB_OUTPUT
+      - uses: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+        timeout-minutes: 3
+      - name: Run AVT
+        if: github.repository == 'carbon-design-system/ibm-products'
+        run: |
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+      - name: Stop storybook
+        run: kill ${{ steps.storybook.outputs.pid }}
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-avt-report
+          path: .playwright
+
+  avt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: avt-runner
+    steps:
+      - name: Check AVT Runner job status
+        if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1

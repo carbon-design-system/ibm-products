@@ -15185,6 +15185,7 @@ __metadata:
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^2.0.0"
     npm-check-updates: "npm:^16.14.12"
+    sass: "npm:^1.51.0"
   peerDependencies:
     jest: ^29.7.0
   languageName: unknown
@@ -21668,6 +21669,19 @@ __metadata:
     sass-embedded:
       optional: true
   checksum: 9415bf9003023b85f4bd775d2780fb5259be7ee9c8679f94a9ad3bea7d080dda44ff8a33ac15d3b225fbe8a6ab0762fbc98532278a89973c4de408c3bc4a98af
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.51.0":
+  version: 1.71.1
+  resolution: "sass@npm:1.71.1"
+  dependencies:
+    chokidar: "npm:>=3.0.0 <4.0.0"
+    immutable: "npm:^4.0.0"
+    source-map-js: "npm:>=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: 51e3c667e262a80db9c80f31109dabd8d5b9a6f79e8e8aa627d83564607036ee0b13b1921d14fd317437d8cf7030d7c8cf1c3b7e11b1f4537a4a4029f6cb63a3
   languageName: node
   linkType: hard
 

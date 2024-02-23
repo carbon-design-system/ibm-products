@@ -1320,6 +1320,40 @@ const datagridState = useDatagrid(
 return <Datagrid datagridState={datagridState} />;
 ```
 
+Columns can also be initially sorted by providing a `sortableColumn` object to
+the `initialState`. The structure of the `sortableColumn` property is as
+follows:
+
+```
+{
+  id: string, // column id
+  order: string, // ASC | DESC
+}
+```
+
+See example below:
+
+```
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    ascendingSortableLabelText: 'none',
+    descendingSortableLabelText: 'ascending',
+    defaultSortableLabelText: 'descending',
+    initialState: {
+      sortableColumn: {
+        id: 'firstName', // column id
+        order: 'ASC' // sorting order
+      }
+    }
+  },
+  useSortableColumns
+);
+```
+
 ## Sticky column
 
 Sticky columns can be useful when you have many columns that create a horizontal

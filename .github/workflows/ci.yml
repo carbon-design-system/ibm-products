@@ -122,7 +122,7 @@ jobs:
           npx serve -l 3000 packages/core/storybook-static &
           pid=$!
           echo "pid=$pid" >> $GITHUB_OUTPUT
-      - uses: ./actions/wait-for-it
+      - uses: '@carbon/actions-wait-for-it'
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3

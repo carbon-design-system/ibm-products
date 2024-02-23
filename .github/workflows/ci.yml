@@ -115,7 +115,7 @@ jobs:
         run: yarn build
       - name: Build storybook
         run:
-          yarn storybook
+          yarn storybook:build
       - name: Run storybook
         id: storybook
         run: |

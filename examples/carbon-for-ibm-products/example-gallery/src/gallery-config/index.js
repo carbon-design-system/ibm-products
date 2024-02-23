@@ -27,6 +27,7 @@ import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageDatagrid from './Datagrid--thumbnail.png';
 import imageDelimitedList from './DelimitedList--thumbnail.png';
+import imageDescriptionList from './DescriptionList--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
@@ -46,6 +47,7 @@ import imageSaving from './Saving--thumbnail.png';
 import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
+import imageStatusIndicator from './StatusIndicator--thumbnail.png';
 import imageStringFormatter from './StringFormatter--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
@@ -149,6 +151,11 @@ const config = [
     thumbnail: `url(${imageDelimitedList}`,
   },
   {
+    label: 'Description-List',
+    directory: 'DescriptionList',
+    thumbnail: `url(${imageDescriptionList}`,
+  },
+  {
     label: 'EditInPlace',
     directory: 'EditInPlace',
     thumbnail: `url(${imageEditInPlace}`,
@@ -238,6 +245,11 @@ const config = [
     label: 'StatusIcon',
     directory: 'StatusIcon',
     thumbnail: `url(${imageStatusIcon}`,
+  },
+  {
+    label: 'Status-Indicator',
+    directory: 'StatusIndicator',
+    thumbnail: `url(${imageStatusIndicator}`,
   },
   {
     label: 'String-Formatter',

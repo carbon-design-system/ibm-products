@@ -1955,7 +1955,7 @@ __metadata:
     "@babel/core": "npm:^7.23.9"
     "@babel/preset-typescript": "npm:^7.21.5"
     "@carbon/grid": "npm:^11.21.1"
-    "@carbon/ibm-products-styles": "npm:^2.26.0"
+    "@carbon/ibm-products-styles": "npm:^2.27.1"
     "@carbon/layout": "npm:^11.20.1"
     "@carbon/motion": "npm:^11.16.1"
     "@carbon/react": "npm:^1.51.0"
@@ -2026,7 +2026,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@npm:^2.26.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.27.1, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2065,7 +2065,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.21.5"
     "@babel/runtime": "npm:^7.23.9"
-    "@carbon/ibm-products-styles": "npm:^2.26.0"
+    "@carbon/ibm-products-styles": "npm:^2.27.1"
     "@carbon/telemetry": "npm:^0.1.0"
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/sortable": "npm:^8.0.0"
@@ -9233,8 +9233,8 @@ __metadata:
   linkType: hard
 
 "chromedriver@npm:*":
-  version: 121.0.0
-  resolution: "chromedriver@npm:121.0.0"
+  version: 122.0.1
+  resolution: "chromedriver@npm:122.0.1"
   dependencies:
     "@testim/chrome-version": "npm:^1.1.4"
     axios: "npm:^1.6.5"
@@ -9245,7 +9245,7 @@ __metadata:
     tcp-port-used: "npm:^1.0.2"
   bin:
     chromedriver: bin/chromedriver
-  checksum: 2034325c85a459adb80dbe8156c9db339b28d6101183c769e4ac86d8768983cb9cb3fb8d4bc7b5953a08b4f4b384aed24443b8e7d4c2eab1e7d38f53691d9544
+  checksum: ceb04ff891a042a3bb05954b2489952ce93ab8c4889bfbcda9eb85d2e28a7613436edb31c9694335508a666043931c40938f257af1e9e42485cef5cbeefb6731
   languageName: node
   linkType: hard
 
@@ -14337,9 +14337,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ip@npm:2.0.0"
-  checksum: 1270b11e534a466fb4cf4426cbcc3a907c429389f7f4e4e3b288b42823562e88d6a509ceda8141a507de147ca506141f745005c0aa144569d94cf24a54eb52bc
+  version: 2.0.1
+  resolution: "ip@npm:2.0.1"
+  checksum: d6dd154e1bc5e8725adfdd6fb92218635b9cbe6d873d051bd63b178f009777f751a5eea4c67021723a7056325fc3052f8b6599af0a2d56f042c93e684b4a0349
   languageName: node
   linkType: hard
 

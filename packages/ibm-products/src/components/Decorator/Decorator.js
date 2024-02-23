@@ -21,6 +21,12 @@ const componentName = 'Decorator';
 
 const defaults = {
   kind: 'default',
+  onClick: () => {},
+  onClickLabel: () => {},
+  onClickValue: () => {},
+  onContextMenu: () => {},
+  onContextMenuLabel: () => {},
+  onContextMenuValue: () => {},
   scoreThresholds: [0, 4, 7, 10],
   theme: 'light',
 };
@@ -38,11 +44,13 @@ export let Decorator = React.forwardRef(
       href,
       kind = defaults.kind,
       label,
-      setLabelTitle = defaults.setLabelTitle,
-      onClick,
-      onClickLabel,
-      onClickValue,
-      onContextMenu,
+      setLabelTitle,
+      onClick = defaults.onClick,
+      onClickLabel = defaults.onClickLabel,
+      onClickValue = defaults.onClickValue,
+      onContextMenu = defaults.onContextMenu,
+      onContextMenuLabel = defaults.onContextMenuLabel,
+      onContextMenuValue = defaults.onContextMenuValue,
       score,
       scoreThresholds = defaults.scoreThresholds,
       small,
@@ -75,24 +83,30 @@ export let Decorator = React.forwardRef(
       small: small,
     };
 
+    // Optional callback functions if `kind` is "link" or "single-button".
     const handleOnClick = (event) => {
       onClick(event, { score, label, value, magnitude });
     };
-
-    const handleOnClickLabel = (event) => {
-      onClickLabel(event, { score, label, value, magnitude });
-    };
-
-    const handleOnClickValue = (event) => {
-      onClickValue(event, { score, label, value, magnitude });
-    };
-
     const handleOnContextMenu = (event) => {
-      onContextMenu && onContextMenu(event, { score, label, value, magnitude });
+      onContextMenu(event, { score, label, value, magnitude });
     };
 
     // RETURN DUAL BUTTONS
-    if (kind === 'dual-buttons' && onClickLabel && onClickValue) {
+    if (kind === 'dual-button') {
+      // Optional callback functions if `kind` is "dual-button" only.
+      const handleOnClickLabel = (event) => {
+        onClickLabel(event, { score, label, value, magnitude });
+      };
+      const handleOnClickValue = (event) => {
+        onClickValue(event, { score, label, value, magnitude });
+      };
+      const handleOnContextMenuLabel = (event) => {
+        onContextMenuLabel(event, { score, label, value, magnitude });
+      };
+      const handleOnContextMenuValue = (event) => {
+        onContextMenuValue(event, { score, label, value, magnitude });
+      };
+
       return (
         <span
           {...rest}
@@ -106,7 +120,7 @@ export let Decorator = React.forwardRef(
             className={`${blockClass}__label`}
             disabled={disabled}
             onClick={!disabled && handleOnClickLabel}
-            onContextMenu={!disabled && handleOnContextMenu}
+            onContextMenu={!disabled && handleOnContextMenuLabel}
             title={_labelTitle || label}
             type="button"
           >
@@ -117,7 +131,7 @@ export let Decorator = React.forwardRef(
             className={`${blockClass}__value`}
             disabled={disabled}
             onClick={!disabled && handleOnClickValue}
-            onContextMenu={!disabled && handleOnContextMenu}
+            onContextMenu={!disabled && handleOnContextMenuValue}
             title={valueTitle || value}
             type="button"
           >
@@ -128,7 +142,7 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN SINGLE BUTTON
-    if (kind === 'single-button' && onClick && !href) {
+    if (kind === 'single-button') {
       return (
         <button
           {...rest}
@@ -154,7 +168,7 @@ export let Decorator = React.forwardRef(
     }
 
     // RETURN LINK
-    if (kind === 'link' && href) {
+    if (kind === 'link') {
       return (
         <a
           {...rest}
@@ -214,9 +228,7 @@ Decorator.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Optionally set button-types as `disabled`.
-   *
-   * This does not apply to default or link types.
+   * `disabled` only applies if `kind` is "single-button" or "dual-button".
    */
   disabled: PropTypes.bool,
   /**
@@ -226,78 +238,77 @@ Decorator.propTypes = {
   /**
    * `href` is req'd if `kind` is "link".
    *
-   * `onClick` is optional.
-   *
-   * These two properties together will render the `label` and `value` as a single link.
+   * These two properties together will render the `label` and `value` as a single anchor tag.
    */
-  href: PropTypes.string.isRequired.if(({ kind }) => kind === 'link'),
+  href: PropTypes.string,
   /**
-   * If `kind` is "dual-buttons" then both `onClickLabel` and `onClickValue` callback functions must be defined.
+   * If `kind` is "dual-button" then refer to the `onClickLabel`, `onClickValue`, `onContextMenuLabel`, and `onContextMenuValue` callback functions.
    *
-   * If `kind` is "single-button" then the `onClick` callback function must be defined.
+   * If `kind` is "single-button" then refer to the `onClick` and `onContextMenu` callback functions.
    *
-   * If `kind` is "link" then `href` must be defined.
+   * If `kind` is "link" then also populate `href`.
+   *
+   * `kind's` default value is "default" and has no other requirements.
    */
-  kind: PropTypes.oneOf(['default', 'link', 'single-button', 'dual-buttons']),
+  kind: PropTypes.oneOf(['default', 'link', 'single-button', 'dual-button']),
   /**
    * The label for the data.
    */
   label: PropTypes.string,
   /**
-   * `onClick` is req'd if `kind` is "single-button".
-   *
-   * These two properties together will render the `label` and `value` as a single button.
+   * Optional callback function if `kind` is "link" or "single-button".
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClick: PropTypes.func.isRequired.if(({ kind }) => kind === 'single-button'),
+  onClick: PropTypes.func,
   /**
-   * `onClickLabel` and `onClickValue` is req'd if `kind` is "dual-buttons".
-   *
-   * These three properties together will render the `label` and `value` as individual buttons.
+   * Optional callback functions if `kind` is "dual-button" only.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClickLabel: PropTypes.func.isRequired.if(
-    ({ kind }) => kind === 'dual-buttons'
-  ),
+  onClickLabel: PropTypes.func,
   /**
-   * `onClickLabel` and `onClickValue` is req'd if `kind` is "dual-buttons".
-   *
-   * These three properties together will render the `label` and `value` as individual buttons.
+   * Optional callback functions if `kind` is "dual-button" only.
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
-  onClickValue: PropTypes.func.isRequired.if(
-    ({ kind }) => kind === 'dual-buttons'
-  ),
+  onClickValue: PropTypes.func,
   /**
-   * Optional callback function for right-click events.
-   * This one function can be applied to any component where `kind` is a link or button.
+   * Optional callback function if `kind` is "link" or "single-button".
    *
    * Returns two objects: `event` and `{ score, label, value, magnitude }`
    */
   onContextMenu: PropTypes.func,
   /**
-   * Determines the color, shape, and type of magnitude of the icon.
+   * Optional callback functions if `kind` is "dual-button" only.
    *
-   * See also `scoreThresholds` for details.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onContextMenuLabel: PropTypes.func,
+  /**
+   * Optional callback functions if `kind` is "dual-button" only.
+   *
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onContextMenuValue: PropTypes.func,
+  /**
+   * Used in conjunction with `scoreThresholds`, determines the color, shape, and type of magnitude of the icon.
    *
    * If you don't want to show the icon at all, set `hideIcon={true}`.
    */
   score: PropTypes.number,
   /**
+   * Used in conjunction with `score`, determines the color, shape, and type of magnitude of the icon.
+   *
    * An array of 4 numbers determines the range of thresholds.
    *
-   * E.g. `[0, 4, 7, 10]`
+   * Example using `[0, 4, 7, 10]`:
    * <br/>- `<= 0` "Benign"
    * <br/>- `1-3` "Low"
    * <br/>- `4-6` "Medium"
    * <br/>- `7-9` "High"
    * <br/>- `>= 10` "Critical"
    * <br/>- `NaN` "Unknown"
-   *
-   * See also `score`.
    */
   scoreThresholds: PropTypes.arrayOf(PropTypes.number),
   /**

@@ -39,17 +39,19 @@ describe(componentName, () => {
   });
 
   it('renders a component Decorator as a link', async () => {
-    renderComponent({ href: href });
+    renderComponent({ href: href, kind: 'link' });
     expect(screen.getByRole('link'));
   });
 
   it('renders a component Decorator as one button', async () => {
-    renderComponent({ onClick: () => {} });
+    renderComponent({ kind: 'single-button' });
     expect(screen.getAllByRole('button').length).toBe(1);
   });
 
   it('renders a component Decorator with two buttons', async () => {
-    renderComponent({ onClickLabel: () => {}, onClickValue: () => {} });
+    renderComponent({
+      kind: 'dual-button',
+    });
     expect(screen.getAllByRole('button').length).toBe(2);
   });
 
@@ -64,7 +66,17 @@ describe(componentName, () => {
   });
 
   it('renders a score', async () => {
-    renderComponent({ score: score });
+    renderComponent({
+      score: score,
+      setLabelTitle: (score, scoreThresholds, magnitude) => {
+        if (typeof score !== 'number') {
+          return 'Unknown score';
+        }
+        return `"${magnitude}" magnitude. Score ${score} out of ${
+          scoreThresholds[scoreThresholds.length - 1]
+        }`;
+      },
+    });
     screen.getByTitle(scoreTitle);
   });
 

@@ -41,6 +41,13 @@ export default {
   component: Decorator,
   tags: ['autodocs'],
   argTypes: {
+    kind: { control: { type: {} } },
+    onClick: { control: { type: {} } },
+    onClickLabel: { control: { type: {} } },
+    onClickValue: { control: { type: {} } },
+    onContextMenu: { control: { type: {} } },
+    onContextMenuLabel: { control: { type: {} } },
+    onContextMenuValue: { control: { type: {} } },
     score: {
       control: {
         type: 'select',
@@ -146,7 +153,6 @@ const TemplateTruncation = (args) => {
 export const decorator = prepareStory(Template, {
   args: {
     ...defaultProps,
-    onContextMenu: (event, values) => action('onContextMenu')(values),
   },
 });
 
@@ -155,7 +161,6 @@ export const asLink = prepareStory(Template, {
     ...defaultProps,
     href: 'http://www.ibm.com',
     kind: 'link',
-    target: '_blank',
     onClick: (event, values) => action('onClick')(values),
     onContextMenu: (event, values) => action('onContextMenu')(values),
   },
@@ -170,28 +175,14 @@ export const asSingleButton = prepareStory(Template, {
   },
 });
 
-export const asDualButtons = prepareStory(Template, {
+export const asDualButton = prepareStory(Template, {
   args: {
     ...defaultProps,
-    kind: 'dual-buttons',
+    kind: 'dual-button',
     onClickLabel: (event, values) => action('onClickLabel')(values),
     onClickValue: (event, values) => action('onClickValue')(values),
-    onContextMenu: (event, values) => action('onContextMenu')(values),
-  },
-});
-
-// export const disabled = prepareStory(Template, {
-//   args: {
-//     ...defaultProps,
-//     disabled: true,
-//   },
-// });
-
-export const truncatedValue = prepareStory(TemplateTruncation, {
-  args: {
-    ...defaultProps,
-    value:
-      'aa bb cc dd ee ff gg hh ii jj kk ll mm nn oo pp qq rr ss tt uu vv ww xx yy zz',
+    onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
+    onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
   },
 });
 
@@ -199,5 +190,12 @@ export const small = prepareStory(Template, {
   args: {
     ...defaultProps,
     small: true,
+  },
+});
+export const withTruncatedValues = prepareStory(TemplateTruncation, {
+  args: {
+    ...defaultProps,
+    value:
+      'aa bb cc dd ee ff gg hh ii jj kk ll mm nn oo pp qq rr ss tt uu vv ww xx yy zz',
   },
 });

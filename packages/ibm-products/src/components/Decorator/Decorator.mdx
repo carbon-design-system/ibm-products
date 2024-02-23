@@ -14,7 +14,7 @@ import { Decorator } from '.';
 - [Decorator example usage](#decorator-example-usage)
 - [Decorator as Link example usage](#decorator-as-link-example-usage)
 - [Decorator as Single Button example usage](#decorator-as-single-button-example-usage)
-- [Decorator as Dual Buttons example usage](#decorator-as-dual-buttons-example-usage)
+- [Decorator as Dual Button example usage](#decorator-as-dual-button-example-usage)
 - [Component API](#component-api)
 
 ## Overview
@@ -46,6 +46,13 @@ element.
 <Decorator
   label="IP"
   href="http://www.ibm.com"
+  kind="link"
+  onClick={(event, values) => {
+    /* Your code here. */
+  }}
+  onContextMenu={(event, values) => {
+    /* Your code here. */
+  }}
   score={5}
   value="192.168.0.50"
 />
@@ -59,21 +66,8 @@ adding `target="_blank"` to open in a new browser tab.
 <Decorator
   label="IP"
   href="http://www.ibm.com"
+  kind="link"
   target="_blank"
-  score={5}
-  value="192.168.0.50"
-/>
-```
-
-Add `onContextMenu` to any interactive Decorator to provide a right-click event
-handler. Does not apply to the default, non-interactive Decorator.
-
-```jsx
-<Decorator
-  label="IP"
-  onContextMenu={(event, values) => {
-    /* Your code here. */
-  }}
   score={5}
   value="192.168.0.50"
 />
@@ -89,8 +83,12 @@ handler. Does not apply to the default, non-interactive Decorator.
 
 ```jsx
 <Decorator
+  kind="single-button"
   label="IP"
   onClick={(event, values) => {
+    /* Your code here. */
+  }}
+  onContextMenu={(event, values) => {
     /* Your code here. */
   }}
   score={5}
@@ -98,21 +96,28 @@ handler. Does not apply to the default, non-interactive Decorator.
 />
 ```
 
-## Decorator as Dual Buttons example usage
+## Decorator as Dual Button example usage
 
 <Canvas withSource="none">
-  <Story id={getStoryId(Decorator.displayName, 'as-dual-buttons')} />
+  <Story id={getStoryId(Decorator.displayName, 'as-dual-button')} />
 </Canvas>
 
-## Decorator as Dual Buttons code sample
+## Decorator as Dual Button code sample
 
 ```jsx
 <Decorator
+  kind="dual-button"
   label="IP"
   onClickLabel={(event, values) => {
     /* Your code here. */
   }}
   onClickValue={(event, values) => {
+    /* Your code here. */
+  }}
+  onContextMenuLabel={(event, values) => {
+    /* Your code here. */
+  }}
+  onContextMenuValue={(event, values) => {
     /* Your code here. */
   }}
   score={5}

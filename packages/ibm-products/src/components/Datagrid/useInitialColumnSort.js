@@ -11,10 +11,10 @@ import { getNewSortOrder } from './useSortableColumns';
 export const useInitialColumnSort = (instance) => {
   const [hasInitialSort, setHasInitialSort] = useState(false);
   useEffect(() => {
-    const { initialState, headers, onSort } = instance;
+    const { initialState, headers, onSort, isTableSortable } = instance;
     const { sortableColumn } = initialState;
     const foundSortedCol = headers.some((h) => h.isSorted);
-    if (foundSortedCol || hasInitialSort) {
+    if (foundSortedCol || hasInitialSort || !isTableSortable) {
       return;
     }
 

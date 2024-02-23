@@ -2716,7 +2716,7 @@ p.c4p--about-modal__copyright-text:first-child {
     transition: none;
   }
 }
-.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet--has-slug {
+.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet.c4p--tearsheet {
   /* tearsheet uses --overlay-color and --overlay-opacity in ::before */
   background: initial;
 }

@@ -46,7 +46,7 @@ $motion-duration: $duration-moderate-02;
       }
     }
 
-    &.#{$block-class}.#{$block-class}--has-slug {
+    &.#{$block-class}.#{$block-class} {
       /* tearsheet uses --overlay-color and --overlay-opacity in ::before */
       background: initial;
     }

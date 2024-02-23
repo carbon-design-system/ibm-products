@@ -16,6 +16,7 @@ import { Nav, NavItem, NavList } from '.';
 const blockClass = `${pkg.prefix}--nav`;
 const componentName = Nav.displayName;
 const navListBlockClass = `${pkg.prefix}--nav-list`;
+const navItemBlockClass = `${pkg.prefix}--nav-item`;
 
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -27,9 +28,6 @@ const renderComponent = ({ ...rest } = {}) =>
     <Nav className={className} heading={navLabel} label={navLabel} {...rest}>
       <NavList title="Nav list 1">
         <NavItem href="#1-1">Nav item 1-1</NavItem>
-      </NavList>
-      <NavList title="Nav list 2">
-        <NavItem href="#2-1">Nav item 2-1</NavItem>
       </NavList>
     </Nav>
   );
@@ -89,18 +87,70 @@ describe(componentName, () => {
     expect(screen.getByText(navLabel)).toBeInTheDocument();
   });
 
-  it('expands NavList when clicked', async () => {
-    renderComponent();
+  describe(NavList.displayName, () => {
+    it('expands and closes when clicked', async () => {
+      renderComponent();
 
-    expect(document.querySelector(`.${navListBlockClass}`)).not.toHaveClass(
-      `${pkg.prefix}--nav-item--expanded`
-    );
+      expect(document.querySelector(`.${navListBlockClass}`)).not.toHaveClass(
+        `${navItemBlockClass}--expanded`
+      );
 
-    const menu = document.querySelector(`.${navListBlockClass}`);
-    fireEvent.click(menu);
+      const navList = document.querySelector(`.${navListBlockClass}`);
+      fireEvent.click(navList);
 
-    expect(document.querySelector(`.${navListBlockClass}`)).toHaveClass(
-      `${pkg.prefix}--nav-item--expanded`
-    );
+      expect(document.querySelector(`.${navListBlockClass}`)).toHaveClass(
+        `${navItemBlockClass}--expanded`
+      );
+
+      fireEvent.click(navList);
+
+      expect(document.querySelector(`.${navListBlockClass}`)).not.toHaveClass(
+        `${navItemBlockClass}--expanded`
+      );
+    });
+
+    it('expands on load when prop is true', async () => {
+      render(
+        <Nav className={className} heading={navLabel} label={navLabel}>
+          <NavList
+            isExpandedOnPageload={true}
+            data-testid={dataTestId}
+            title="Nav list 1"
+          >
+            <NavItem href="#1-1">Nav item 1-1</NavItem>
+          </NavList>
+          <NavList data-testid={`${dataTestId}-2`} title="Nav list 2">
+            <NavItem href="#2-1">Nav item 2-1</NavItem>
+          </NavList>
+        </Nav>
+      );
+
+      const lists = document.querySelectorAll(`.${navListBlockClass}`);
+
+      expect(lists[0]).toHaveClass(`${navItemBlockClass}--expanded`);
+      expect(lists[1]).not.toHaveClass(`${navItemBlockClass}--expanded`);
+    });
+  });
+
+  describe(NavItem.displayName, () => {
+    it('is disabled if prop is true', async () => {
+      render(
+        <Nav className={className} heading={navLabel} label={navLabel}>
+          <NavList title="Nav list 1">
+            <NavItem disabled={true} href="#1-1">
+              Nav item 1-1
+            </NavItem>
+          </NavList>
+          <NavList title="Nav list 2">
+            <NavItem href="#2-1">Nav item 2-1</NavItem>
+          </NavList>
+        </Nav>
+      );
+
+      const items = document.querySelectorAll(`.${navItemBlockClass}`);
+
+      expect(items[0]).toHaveClass(`${navItemBlockClass}--disabled`);
+      expect(items[1]).not.toHaveClass(`${navItemBlockClass}--disabled`);
+    });
   });
 });

@@ -2563,11 +2563,17 @@ p.c4p--about-modal__copyright-text:first-child {
   height: 2.5rem;
 }
 .c4p--side-panel .c4p--side-panel__slug-and-close {
-  position: absolute;
+  position: fixed;
   z-index: 10; /* must be higher than title container border bottom */
   top: 0;
   right: 0;
   display: flex;
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+@media (prefers-reduced-motion) {
+  .c4p--side-panel .c4p--side-panel__slug-and-close {
+    position: absolute;
+  }
 }
 .c4p--side-panel .c4p--side-panel__actions-container {
   position: sticky;

@@ -23,19 +23,39 @@
 $block-class: #{$pkg-prefix}--tearsheet;
 
 // stylelint-disable-next-line carbon/theme-token-use
-$overlay-color: $gray-100;
-
 $motion-duration: $duration-moderate-02;
 
 @include block-wrap($block-class) {
   &.#{$block-class} {
+    --overlay-color: #{$overlay};
+    --overlay-opacity: 1;
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: var(--overlay-color);
+      content: '';
+      inset: 0;
+      opacity: var(--overlay-opacity);
+
+      transition: background-color $motion-duration motion(exit, expressive),
+        opacity $motion-duration motion(exit, expressive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &.#{$block-class}.#{$block-class} {
+      /* tearsheet uses --overlay-color and --overlay-opacity in ::before */
+      background: initial;
+    }
+
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear $motion-duration,
-      background-color $motion-duration motion(exit, expressive),
-      opacity $motion-duration motion(exit, expressive);
+    transition: visibility 0s linear $motion-duration;
     --#{$block-class}--stacking-scale-factor-single: 0.95;
     --#{$block-class}--stacking-scale-factor-double: 0.9;
   }
@@ -53,27 +73,26 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--stacked-1-of-2 {
+    --overlay-opacity: 0.67;
+
     z-index: utilities.z('modal') - 1;
-    // stylelint-disable-next-line carbon/theme-token-use
-    background-color: rgba($overlay-color, 0.33);
   }
 
   &.#{$block-class}--stacked-1-of-3 {
+    --overlay-opacity: 0.22;
+
     z-index: utilities.z('modal') - 2;
-    // stylelint-disable-next-line carbon/theme-token-use
-    background-color: rgba($overlay-color, 0.11);
   }
 
   &.#{$block-class}--stacked-2-of-3 {
+    --overlay-opacity: 0.5;
+
     z-index: utilities.z('modal') - 1;
-    // stylelint-disable-next-line carbon/theme-token-use
-    background-color: rgba($overlay-color, 0.25);
   }
 
   &.#{$block-class}--stacked-2-of-2,
   &.#{$block-class}--stacked-3-of-3 {
-    // stylelint-disable-next-line carbon/theme-token-use
-    background-color: rgba($overlay-color, 0.25);
+    --overlay-opacity: 0.5;
   }
 
   .#{$block-class}__container {
@@ -367,6 +386,11 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--wide .#{$block-class}__buttons {
     background: $background;
+  }
+
+  &.#{$block-class}--has-slug {
+    /* stylelint-disable-next-line carbon/theme-token-use */
+    --overlay-color: #{$ai-overlay};
   }
 
   &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)

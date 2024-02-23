@@ -47,6 +47,7 @@ import imageSaving from './Saving--thumbnail.png';
 import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
+import imageStatusIndicator from './StatusIndicator--thumbnail.png';
 import imageStringFormatter from './StringFormatter--thumbnail.png';
 import imageTagSet from './TagSet--thumbnail.png';
 import imageTearsheet from './Tearsheet--thumbnail.png';
@@ -244,6 +245,11 @@ const config = [
     label: 'StatusIcon',
     directory: 'StatusIcon',
     thumbnail: `url(${imageStatusIcon}`,
+  },
+  {
+    label: 'Status-Indicator',
+    directory: 'StatusIndicator',
+    thumbnail: `url(${imageStatusIndicator}`,
   },
   {
     label: 'String-Formatter',

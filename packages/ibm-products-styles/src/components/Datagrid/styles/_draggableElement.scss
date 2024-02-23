@@ -90,6 +90,7 @@
 .#{variables.$block-class}__draggable-handleHolder-droppable.#{variables.$block-class}__draggable-handleHolder-droppable--origin {
   opacity: 0.5;
   transition: opacity $duration-moderate-01 motion(entrance, productive);
+  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }

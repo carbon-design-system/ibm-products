@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,9 @@ module.exports = {
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
     '^uuid$': require.resolve('uuid'),
+    // This mapping is added to resolve the alias that is set in our webpack config
+    // otherwise the webpack alias does not work in the jest environment
+    '\\.(css|scss)$': 'identity-obj-proxy',
   },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],

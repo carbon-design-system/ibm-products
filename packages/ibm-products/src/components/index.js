@@ -109,3 +109,4 @@ export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
+export { StatusIndicator } from './StatusIndicator';

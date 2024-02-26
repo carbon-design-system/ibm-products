@@ -1,8 +1,8 @@
 # Carbon for IBM Products: v2 migration guide for Security components
 
-This document will review in detail the changes in Carbon for IBM Products v1 to
-v2. Because Carbon for IBM Products v2 uses Carbon v11, which utilizes Sass
-modules, there is a requirement for teams to use the
+This document will review in detail the changes in @carbon/ibm-security to
+Carbon for IBM Products v2. Because Carbon for IBM Products v2 uses Carbon v11,
+which utilizes Sass modules, there is a requirement for teams to use the
 [Dart Sass package](https://sass-lang.com/dart-sass) (`sass`), as opposed to
 `node-sass`. This introduces some new sass concepts such as
 [`@use`](https://sass-lang.com/documentation/at-rules/use) vs

@@ -58,6 +58,7 @@ module.exports = {
     '/lib/',
     '/umd/',
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    'ace-node\\.js',
   ],
   watchPathIgnorePatterns: [
     '/.avt/',

@@ -86,7 +86,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   return (
     <TableRow
-      {...headerGroup.getHeaderGroupProps({ role: false })}
+      {...headerGroup.getHeaderGroupProps({ role: undefined })}
       className={cx(
         `${blockClass}__head`,
         headerGroup.getHeaderGroupProps().className
@@ -108,7 +108,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const originalCol = visibleColumns[index];
           return (
             <TableHeader
-              {...header.getHeaderProps({ role: false })}
+              {...header.getHeaderProps({ role: undefined })}
               className={cx(
                 {
                   [`${blockClass}__resizableColumn`]: header.getResizerProps,

@@ -172,6 +172,11 @@ Nav.propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+// Return a placeholder if not released and not enabled by feature flag
+Nav = pkg.checkComponentEnabled(Nav, componentName);
+
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
 Nav.displayName = componentName;
 
 export default Nav;

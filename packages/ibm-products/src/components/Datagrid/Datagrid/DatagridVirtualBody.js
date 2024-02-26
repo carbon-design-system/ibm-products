@@ -82,7 +82,10 @@ const DatagridVirtualBody = (datagridState) => {
       >
         <DatagridHead {...datagridState} />
       </div>
-      <TableBody {...getTableBodyProps({ role: undefined })} onScroll={syncScroll}>
+      <TableBody
+        {...getTableBodyProps({ role: undefined })}
+        onScroll={syncScroll}
+      >
         <VariableSizeList
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}

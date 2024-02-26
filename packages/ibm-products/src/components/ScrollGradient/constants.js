@@ -1,3 +1,5 @@
+import { useState, useLayoutEffect, useEffect, useCallback } from 'react';
+
 export const ScrollDirection = { X: 'X', Y: 'Y' };
 
 export const ScrollStates = {
@@ -14,9 +16,9 @@ export const ScrollStates = {
 // FUNCTIONS
 
 export const getScrollState = (element, scrollDirection) => {
-  console.log('getScrollState - element: ', element);
-  console.log('getScrollState - scrollDirection: ', scrollDirection);
-  console.log('-------------------------------------------------');
+  // console.log('getScrollState - element: ', element);
+  // console.log('getScrollState - scrollDirection: ', scrollDirection);
+  // console.log('-------------------------------------------------');
   switch (scrollDirection) {
     case ScrollDirection.X: {
       if (element.scrollWidth === element.clientWidth) {
@@ -45,4 +47,62 @@ export const getScrollState = (element, scrollDirection) => {
       return ScrollStates.STARTED;
     }
   }
+};
+
+export const useIsOverflow = (ref) => {
+  const [isHorizontallyScrollable, setIsHorizontallyScrollable] = useState();
+  const [isVerticallyScrollable, setIsVerticallyScrollable] = useState();
+  const [mutationObserver, setMutationObserver] = useState();
+  const [resizeObserver, setResizeObserver] = useState();
+
+  const checkOverflow = useCallback(() => {
+    if (!ref.current) {
+      return;
+    }
+    setIsHorizontallyScrollable(
+      ref.current.scrollWidth > ref.current.clientWidth
+    );
+    setIsVerticallyScrollable(
+      ref.current.scrollHeight > ref.current.clientHeight
+    );
+  }, [ref]);
+
+  useEffect(() => {
+    if (!mutationObserver) {
+      return;
+    }
+
+    return () => {
+      if (mutationObserver) {
+        mutationObserver.disconnect();
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
+  });
+
+  useLayoutEffect(() => {
+    const { current } = ref;
+    if (current) {
+      if ('ResizeObserver' in window && !resizeObserver) {
+        setResizeObserver(new ResizeObserver(checkOverflow).observe(current));
+      }
+      if ('MutationObserver' in window && !mutationObserver) {
+        setMutationObserver(
+          new MutationObserver(checkOverflow).observe(current, {
+            attributes: false,
+            childList: true,
+            subtree: false,
+          })
+        );
+      }
+      checkOverflow();
+    }
+  }, [ref, checkOverflow, mutationObserver, resizeObserver]);
+
+  return {
+    xScrollable: isHorizontallyScrollable,
+    yScrollable: isVerticallyScrollable,
+  };
 };

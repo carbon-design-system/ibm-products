@@ -50,15 +50,25 @@ export default {
   },
 };
 const style = {
-  width: '300px',
-  height: '400px',
+  width: '100%',
+  height: '100%',
 };
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
   return (
-    <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
+    <div
+      style={{
+        width: '300px',
+        height: '400px',
+        resize: 'both',
+        outline: 'thin #666 solid',
+        overflow: 'auto',
+      }}
+    >
+      <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
+    </div>
   );
 };
 

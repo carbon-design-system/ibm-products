@@ -15,8 +15,12 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
-import { ScrollDirection, ScrollStates, getScrollState } from './constants';
-
+import {
+  ScrollDirection,
+  ScrollStates,
+  getScrollState,
+  useIsOverflow,
+} from './constants';
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
 
@@ -47,16 +51,21 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    const gradientRotation = direction === ScrollDirection.X ? -90 : 0;
+    // const gradientRotation = direction === ScrollDirection.X ? -90 : 0;
     //const [scrollPosition, setScrollPosition] = useState(0);
     const [position, setPosition] = useState(ScrollStates.NONE);
     const scrollContainer = useRef();
 
     const updateScrollState = throttle(() => {
       const updatedVal = getScrollState(scrollContainer.current, direction);
-      console.log('updatedVal: ', updatedVal);
+      //console.log('updatedVal: ', updatedVal);
       setPosition(updatedVal);
     }, 150);
+
+    // const handleContainerResize = () => {
+    //   console.log('RESIZING... ');
+    //   //scrollContainer.current
+    // };
 
     // const getScrollPosition = () => {
     //   if (!scrollContainer.current) {
@@ -82,9 +91,23 @@ export let ScrollGradient = React.forwardRef(
       scrollContainer.current = element;
       getScrollElementRef(element);
     };
+
+    useEffect(() => {
+      if (color) {
+        document.documentElement.style.setProperty(
+          `--${blockClass}--gradient-color`,
+          color
+        );
+      }
+    }, [color]);
+
     useEffect(() => {
       scrollHandler();
     }, [scrollHandler]);
+
+    const { xScrollable, yScrollable } = useIsOverflow(scrollContainer);
+    console.log('Scrollable? ', xScrollable);
+
     return (
       <div
         {...rest}
@@ -92,6 +115,10 @@ export let ScrollGradient = React.forwardRef(
           blockClass,
           `${blockClass}--${position.toLowerCase()}`,
           `${blockClass}--${direction.toLowerCase()}`,
+          {
+            [`${blockClass}--x-scrollable`]: xScrollable,
+            [`${blockClass}--y-scrollable`]: yScrollable,
+          },
           className
         )}
         ref={ref}
@@ -100,10 +127,10 @@ export let ScrollGradient = React.forwardRef(
       >
         {!hideStartGradient && (
           <div
-            className={`${blockClass}__before`}
-            style={{
-              backgroundImage: `linear-gradient(${gradientRotation}deg, rgba(0,0,0,0), ${color} 90%)`,
-            }}
+            className={cx(`${blockClass}__before`, `${blockClass}__start`)}
+            // style={{
+            //   backgroundImage: `linear-gradient(${gradientRotation}deg, rgba(0,0,0,0), ${color} 90%)`,
+            // }}
             role="presentation"
             aria-hidden
           />
@@ -116,10 +143,10 @@ export let ScrollGradient = React.forwardRef(
           {children}
         </div>
         <div
-          className={`${blockClass}__after`}
-          style={{
-            backgroundImage: `linear-gradient(${gradientRotation}deg, ${color} 10%, rgba(0,0,0,0))`,
-          }}
+          className={cx(`${blockClass}__after`, `${blockClass}__end`)}
+          // style={{
+          //   backgroundImage: `linear-gradient(${gradientRotation}deg, ${color} 10%, rgba(0,0,0,0))`,
+          // }}
           role="presentation"
           aria-hidden
         />

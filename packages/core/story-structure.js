@@ -56,6 +56,7 @@ const s = [
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Decorator', s: ['c/Decorator'] },
+          { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },

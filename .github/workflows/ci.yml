@@ -113,9 +113,6 @@ jobs:
         run: yarn playwright install --with-deps
       - name: Build project
         run: yarn build
-      - name: Build storybook
-        run:
-          yarn storybook:build
       - name: Run storybook
         id: storybook
         run: |

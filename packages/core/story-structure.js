@@ -55,6 +55,7 @@ const s = [
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'Decorator', s: ['c/Decorator'] },
           { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
@@ -67,6 +68,8 @@ const s = [
           {
             n: 'Icon Button Bar',
             s: ['c/IconButtonBar', 'c/IconButtonBarItem'],
+            n: 'StatusIndicator',
+            s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },
         ],
       },

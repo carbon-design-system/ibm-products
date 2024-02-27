@@ -1,7 +1,7 @@
 # Contributing
 
 IBMers should complete steps documented on
-[W3 Developer](https://w3.ibm.com/developer/docs/open-source/contributing/)
+[W3 Developer](https://w3.ibm.com/developer/docs/open-source/oss-contributing/)
 before contributing to open source projects.
 
 Also refer to

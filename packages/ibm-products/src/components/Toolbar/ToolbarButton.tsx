@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,10 +16,21 @@ import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
 
 export const blockClass = `${toolbarClass}__button`;
 
+interface ToolbarButtonProps extends React.ComponentProps<typeof IconButton> {
+  /** Determines whether the caret is rendered */
+  caret?: boolean;
+  /** Provide an optional class to be applied to the containing node */
+  className?: string;
+  /** Specifies the label for the icon button */
+  iconDescription: string;
+  /** Specifies the icon to be used by the ToolbarButton component */
+  renderIcon: React.ElementType,
+}
+
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
 export let ToolbarButton = forwardRef(
   (
-    { caret, children, className, renderIcon, iconDescription = '', ...rest },
+    { caret = false, children, className, renderIcon, iconDescription = '', ...rest }: React.PropsWithChildren<ToolbarButtonProps>,
     ref
   ) => {
     const Icon = renderIcon;

@@ -24,13 +24,20 @@ interface ToolbarButtonProps extends React.ComponentProps<typeof IconButton> {
   /** Specifies the label for the icon button */
   iconDescription: string;
   /** Specifies the icon to be used by the ToolbarButton component */
-  renderIcon: React.ElementType,
+  renderIcon: React.ElementType;
 }
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
 export let ToolbarButton = forwardRef(
   (
-    { caret = false, children, className, renderIcon, iconDescription = '', ...rest }: React.PropsWithChildren<ToolbarButtonProps>,
+    {
+      caret = false,
+      children,
+      className,
+      renderIcon,
+      iconDescription = '',
+      ...rest
+    }: React.PropsWithChildren<ToolbarButtonProps>,
     ref
   ) => {
     const Icon = renderIcon;

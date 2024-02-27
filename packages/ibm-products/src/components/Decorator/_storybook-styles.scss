@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+// TODO: add any additional styles used by Decorator.stories.js
+.decorator-stories__viewport-truncation {
+  width: 80vw;
+  padding: $spacing-07;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  border: 1px solid $cool-gray-30;
+  margin: $spacing-07;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  p {
+    margin-bottom: $spacing-05;
+  }
+}
+
+.decorator-stories__blue-box {
+  display: block;
+  max-width: 20rem;
+  margin-top: $spacing-02;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  outline: 1px solid $blue-60;
+}

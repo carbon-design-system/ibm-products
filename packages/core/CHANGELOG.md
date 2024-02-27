@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.14.1...@carbon/ibm-cloud-cognitive-core@2.15.0) (2024-02-27)
+
+
+### Features
+
+* **Decorator:** new component Decorator ([#4170](https://github.com/carbon-design-system/ibm-products/issues/4170)) ([9cea98a](https://github.com/carbon-design-system/ibm-products/commit/9cea98a32f2d169763c52d26bf123b20e886911c)), closes [#4348](https://github.com/carbon-design-system/ibm-products/issues/4348) [#4188](https://github.com/carbon-design-system/ibm-products/issues/4188) [#4227](https://github.com/carbon-design-system/ibm-products/issues/4227) [#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)
+* **DescriptionList:** new component DescriptionList ([#4208](https://github.com/carbon-design-system/ibm-products/issues/4208)) ([0a55d40](https://github.com/carbon-design-system/ibm-products/commit/0a55d4092668355828cda5e44538e365baca9f2d))
+* new component status indicator ([#4419](https://github.com/carbon-design-system/ibm-products/issues/4419)) ([79c9794](https://github.com/carbon-design-system/ibm-products/commit/79c9794947fe6d58936fd4cf8a279f81870f8d5e))
+
+
+
+
+
 ## [2.14.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.14.0...@carbon/ibm-cloud-cognitive-core@2.14.1) (2024-02-21)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

@@ -10,21 +10,8 @@
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
-// Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
-// or
-// TODO: @use '@carbon/react/scss/grid';
 
-// ScrollGradient uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by ScrollGradient
-
-// The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
-$scroll-gradient__layer: 1;
-
-:root {
-  --#{$block-class}--gradient-color: $layer-01;
-}
 
 .#{$block-class} {
   position: relative;
@@ -39,152 +26,77 @@ $scroll-gradient__layer: 1;
   width: 100%;
   height: inherit;
 }
-.#{$block-class}__start,
-.#{$block-class}__end {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.#{$block-class}__content-children {
   width: 100%;
   height: 100%;
+}
+// All gradients
+.#{$block-class}__start-vertical,
+.#{$block-class}__start-horizontal,
+.#{$block-class}__end-vertical,
+.#{$block-class}__end-horizontal {
+  position: absolute;
+  z-index: 1;
+  display: none;
   pointer-events: none;
 }
 
-.#{$block-class}__start::before,
-.#{$block-class}__start::after,
-.#{$block-class}__end::before,
-.#{$block-class}__end::after {
-  position: absolute;
-  //z-index: 1;
-}
-
 // Vertical start
-.#{$block-class}--y-scrollable .#{$block-class}__start::before {
+.#{$block-class}--y-scrollable .#{$block-class}__start-vertical {
   top: 0;
   left: 0;
-  width: 100%;
   height: $spacing-09;
-  background-image: linear-gradient(
-    0deg,
-    transparent,
-    var(--#{$block-class}--gradient-color) 90%
-  );
-  content: '';
 }
 // Vertical end
-.#{$block-class}--y-scrollable .#{$block-class}__end::before {
+.#{$block-class}--y-scrollable .#{$block-class}__end-vertical {
   bottom: 0;
   left: 0;
-  width: 100%;
   height: $spacing-09;
-  background: linear-gradient();
-  background-image: linear-gradient(
-    0deg,
-    var(--#{$block-class}--gradient-color) 10%,
-    transparent
-  );
-  content: '';
 }
 
 // Horizontal start
-.#{$block-class}--x-scrollable .#{$block-class}__start::after {
+.#{$block-class}--x-scrollable .#{$block-class}__start-horizontal {
   top: 0;
   left: 0;
   width: $spacing-09;
-  height: 100%;
-  background-image: linear-gradient(
-    -90deg,
-    transparent,
-    var(--#{$block-class}--gradient-color) 90%
-  );
-  content: '';
 }
 
 // Horizontal end
-.#{$block-class}--x-scrollable .#{$block-class}__end::after {
+.#{$block-class}--x-scrollable .#{$block-class}__end-horizontal {
   top: 0;
   right: 0;
   width: $spacing-09;
-  height: 100%;
-  background-image: linear-gradient(
-    -90deg,
-    var(--#{$block-class}--gradient-color) 10%,
-    transparent
-  );
-  content: '';
 }
 
-// .#{$block-class}__before,
-// .#{$block-class}__after {
-//   position: absolute;
-//   z-index: $scroll-gradient__layer;
-//   display: block;
-//   opacity: 0;
-//   pointer-events: none;
-//   transition-duration: $duration-moderate-02;
-//   transition-property: opacity;
-//   transition-timing-function: motion($name: standard);
-// }
+// Vertical start states
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical,
+.#{$block-class}--y-end.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical {
+  display: block;
+}
 
-// .#{$block-class}--x .#{$block-class}__content {
-//   overflow-x: auto;
-// }
-// .#{$block-class}--y .#{$block-class}__content {
-//   overflow-y: auto;
-// }
+// Vertical end states
+.#{$block-class}--y-initial.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical,
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical {
+  display: block;
+}
 
-// .#{$block-class}--x {
-//   // TODO: Styles.
-//   .#{$block-class}__before,
-//   .#{$block-class}__after {
-//     top: 0;
-//     width: $spacing-09;
-//     height: 100%;
-//   }
+// Horizontal start states
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal,
+.#{$block-class}--x-end.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal {
+  display: block;
+}
 
-//   .#{$block-class}__before {
-//     left: 0;
-//   }
-//   .#{$block-class}__after {
-//     right: 0;
-//   }
-// }
-
-// .#{$block-class}--y {
-//   // TODO: Styles.
-//   .#{$block-class}__before,
-//   .#{$block-class}__after {
-//     left: 0;
-//     width: 100%;
-//     height: $spacing-09;
-//   }
-//   .#{$block-class}__before {
-//     top: 0;
-//   }
-//   .#{$block-class}__after {
-//     bottom: 0;
-//   }
-// }
-// .#{$block-class}--initial,
-// .#{$block-class}--started {
-//   // TODO: Styles.
-
-//   .#{$block-class}__after {
-//     opacity: 1;
-//   }
-// }
-
-// .#{$block-class}--end,
-// .#{$block-class}--started {
-//   // TODO: Styles.
-//   > .#{$block-class}__before {
-//     opacity: 1;
-//   }
-// }
-// .#{$block-class}--initial > .#{$block-class}__before {
-//   // TODO: Styles.
-//   transition-duration: $duration-fast-02;
-// }
-// .#{$block-class}--end > .#{$block-class}__after {
-//   // TODO: Styles.
-//   transition-duration: $duration-fast-02;
-// }
+// Horizontal end states
+.#{$block-class}--x-initial.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal,
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal {
+  display: block;
+}

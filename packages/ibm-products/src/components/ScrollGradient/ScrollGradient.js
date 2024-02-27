@@ -7,13 +7,12 @@
 
 // Import portions of React that are needed.
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { layer01 } from '@carbon/themes';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { throttle } from 'lodash';
 import {
   ScrollDirection,
@@ -26,7 +25,6 @@ const componentName = 'ScrollGradient';
 
 // Default values for props
 const defaults = {
-  color: layer01,
   direction: ScrollDirection.Y,
   hideStartGradient: false,
   onScroll: () => {},
@@ -42,7 +40,7 @@ export let ScrollGradient = React.forwardRef(
       children,
       className,
       direction = defaults.direction,
-      color = defaults.color,
+      color,
       onScroll = defaults.onScroll,
       scrollElementClassName,
       getScrollElementRef = defaults.getScrollElementRef,
@@ -51,36 +49,30 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
-    // const gradientRotation = direction === ScrollDirection.X ? -90 : 0;
-    //const [scrollPosition, setScrollPosition] = useState(0);
-    const [position, setPosition] = useState(ScrollStates.NONE);
+    const [verticalPosition, setVerticalPosition] = useState(ScrollStates.NONE);
+    const [horizontalPosition, setHorizontalPosition] = useState(
+      ScrollStates.NONE
+    );
     const scrollContainer = useRef();
+    const contentChildrenContainer = useRef();
+
+    const gradientColor = color ? color : `var(--${carbon.prefix}-layer-01)`;
 
     const updateScrollState = throttle(() => {
-      const updatedVal = getScrollState(scrollContainer.current, direction);
-      //console.log('updatedVal: ', updatedVal);
-      setPosition(updatedVal);
+      const updatedVerticalVal = getScrollState(
+        scrollContainer.current,
+        ScrollDirection.Y
+      );
+      const updatedHorizontalVal = getScrollState(
+        scrollContainer.current,
+        ScrollDirection.X
+      );
+      setVerticalPosition(updatedVerticalVal);
+      setHorizontalPosition(updatedHorizontalVal);
     }, 150);
-
-    // const handleContainerResize = () => {
-    //   console.log('RESIZING... ');
-    //   //scrollContainer.current
-    // };
-
-    // const getScrollPosition = () => {
-    //   if (!scrollContainer.current) {
-    //     return 0;
-    //   }
-    //   if (direction === ScrollDirection.Y) {
-    //     return scrollContainer.current.scrollTop;
-    //   }
-    //   return scrollContainer.current.scrollLeft;
-    // };
 
     const scrollHandler = useCallback(
       (event) => {
-        //console.log('Looking for scroll position: ', getScrollPosition());
-        //setScrollPosition(scrollContainer.current)
         onScroll(event);
         updateScrollState();
       },
@@ -93,27 +85,29 @@ export let ScrollGradient = React.forwardRef(
     };
 
     useEffect(() => {
-      if (color) {
-        document.documentElement.style.setProperty(
-          `--${blockClass}--gradient-color`,
-          color
-        );
-      }
-    }, [color]);
-
-    useEffect(() => {
       scrollHandler();
     }, [scrollHandler]);
 
     const { xScrollable, yScrollable } = useIsOverflow(scrollContainer);
-    console.log('Scrollable? ', xScrollable);
+
+    const gradientRight =
+      yScrollable && scrollContainer.current && contentChildrenContainer.current
+        ? scrollContainer.current.offsetWidth -
+          contentChildrenContainer.current.offsetWidth
+        : 0;
+    const gradientBottom =
+      xScrollable && scrollContainer.current && contentChildrenContainer.current
+        ? scrollContainer.current.offsetHeight -
+          contentChildrenContainer.current.offsetHeight
+        : 0;
 
     return (
       <div
         {...rest}
         className={cx(
           blockClass,
-          `${blockClass}--${position.toLowerCase()}`,
+          `${blockClass}--x-${horizontalPosition.toLowerCase()}`,
+          `${blockClass}--y-${verticalPosition.toLowerCase()}`,
           `${blockClass}--${direction.toLowerCase()}`,
           {
             [`${blockClass}--x-scrollable`]: xScrollable,
@@ -125,28 +119,59 @@ export let ScrollGradient = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        {!hideStartGradient && (
-          <div
-            className={cx(`${blockClass}__before`, `${blockClass}__start`)}
-            // style={{
-            //   backgroundImage: `linear-gradient(${gradientRotation}deg, rgba(0,0,0,0), ${color} 90%)`,
-            // }}
-            role="presentation"
-            aria-hidden
-          />
-        )}
         <div
           onScroll={scrollHandler}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
         >
-          {children}
+          <div
+            ref={contentChildrenContainer}
+            className={`${blockClass}__content-children`}
+          >
+            {children}
+          </div>
         </div>
+
+        {/* Gradient elements */}
+        {!hideStartGradient && (
+          <>
+            <div
+              className={cx(`${blockClass}__start-vertical`)}
+              style={{
+                right: gradientRight,
+                backgroundImage: `linear-gradient(0deg, transparent, ${gradientColor} 90%)`,
+              }}
+              role="presentation"
+              aria-hidden
+            />
+            <div
+              className={cx(`${blockClass}__start-horizontal`)}
+              style={{
+                backgroundImage: `linear-gradient(-90deg, transparent, ${gradientColor} 90%)`,
+                bottom: gradientBottom,
+              }}
+              role="presentation"
+              aria-hidden
+            />
+          </>
+        )}
         <div
-          className={cx(`${blockClass}__after`, `${blockClass}__end`)}
-          // style={{
-          //   backgroundImage: `linear-gradient(${gradientRotation}deg, ${color} 10%, rgba(0,0,0,0))`,
-          // }}
+          className={cx(`${blockClass}__end-vertical`)}
+          style={{
+            right: gradientRight,
+            bottom: gradientBottom,
+            backgroundImage: `linear-gradient(0deg, ${gradientColor} 10%, transparent)`,
+          }}
+          role="presentation"
+          aria-hidden
+        />
+        <div
+          className={cx(`${blockClass}__end-horizontal`)}
+          style={{
+            right: gradientRight,
+            bottom: gradientBottom,
+            backgroundImage: `linear-gradient(-90deg, ${gradientColor} 10%, transparent)`,
+          }}
           role="presentation"
           aria-hidden
         />

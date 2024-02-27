@@ -135,7 +135,7 @@ const DatagridRow = (datagridState) => {
     <React.Fragment key={key}>
       <TableRow
         className={rowClassNames}
-        {...row.getRowProps({ role: false })}
+        {...row.getRowProps({ role: undefined })}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -145,7 +145,7 @@ const DatagridRow = (datagridState) => {
         {...setAdditionalRowProps()}
       >
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps({ role: false });
+          const cellProps = cell.getCellProps({ role: undefined });
           const { children, ...restProps } = cellProps;
           const content = children || (
             <>

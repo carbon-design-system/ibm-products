@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+
+// TODO: add any additional styles used by DescriptionList.stories.js
+
+$drag-class: #{c4p-settings.$pkg-prefix}__draggable-item;
+
+.#{$drag-class} {
+  width: 320px;
+  height: 3rem;
+  border-bottom: 1px solid $border-subtle;
+  background-color: paleturquoise;
+  cursor: grab;
+  list-style-type: none;
+}
+
+.#{$drag-class}__dragging {
+  position: relative;
+  z-index: 100000;
+  background-color: pink;
+  cursor: grabbing;
+}
+
+.#{$drag-class}__assistive-text {
+  position: absolute;
+  visibility: hidden;
+}

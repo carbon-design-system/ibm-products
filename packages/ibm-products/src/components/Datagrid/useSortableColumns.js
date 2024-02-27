@@ -20,6 +20,22 @@ const ordering = {
   NONE: 'NONE',
 };
 
+export const getNewSortOrder = (sortOrder) => {
+  const order = {
+    newSortDesc: undefined,
+    newOrder: ordering.NONE,
+  };
+  if (sortOrder === false) {
+    order.newOrder = ordering.DESC;
+    order.newSortDesc = true;
+  }
+  if (sortOrder === undefined) {
+    order.newOrder = ordering.ASC;
+    order.newSortDesc = false;
+  }
+  return order;
+};
+
 const getAriaSortValue = (
   col,
   {
@@ -91,8 +107,10 @@ const useSortableColumns = (hooks) => {
         );
       };
       const Header = (headerProp) =>
-        column.disableSortBy === true || column.id === 'datagridSelection' ? (
-          column.disableSortBy ? (
+        column.disableSortBy === true ||
+        column.id === 'datagridSelection' ||
+        column.isAction ? (
+          column.disableSortBy || column.isAction ? (
             column.Header
           ) : (
             <SelectAll {...instance} />
@@ -141,21 +159,6 @@ const useSortableColumns = (hooks) => {
     Object.assign(instance, { manualSortBy: !!onSort, isTableSortable: true });
   };
 
-  const getNewSortOrder = (sortOrder) => {
-    const order = {
-      newSortDesc: undefined,
-      newOrder: ordering.NONE,
-    };
-    if (sortOrder === false) {
-      order.newOrder = ordering.DESC;
-      order.newSortDesc = true;
-    }
-    if (sortOrder === undefined) {
-      order.newOrder = ordering.ASC;
-      order.newSortDesc = false;
-    }
-    return order;
-  };
   hooks.visibleColumns.push(sortableVisibleColumns);
   hooks.useInstance.push(sortInstanceProps);
 };

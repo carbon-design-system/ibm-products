@@ -116,7 +116,7 @@ describe(componentName, () => {
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it.only('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', () => {
     renderCoachmarkStack({
       title: 'Coachmark Stack',
       description: 'Coachmark Stack Description',

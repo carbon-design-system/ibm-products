@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
 import {
   DataTable,
@@ -120,6 +121,17 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     );
   };
 
+  const onCancelHandler = () => {
+    handleSelectAllRowData({
+      dispatch,
+      rows: [],
+      getRowId,
+      isChecked: false,
+    });
+    toggleAllRowsSelected(false);
+    setGlobalFilter(null);
+  };
+
   // Only display the first two batch actions, the rest are
   // displayed inside of the ButtonMenu if there are more than
   // 3 batch actions
@@ -127,10 +139,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
-      onCancel={() => {
-        toggleAllRowsSelected(false);
-        setGlobalFilter(null);
-      }}
+      onCancel={onCancelHandler}
       translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
@@ -167,7 +176,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   );
 };
 
-const DatagridToolbar = (datagridState) => {
+const DatagridToolbar = ({ ariaToolbarLabel, ...datagridState }) => {
   const ref = useRef(null);
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
@@ -180,7 +189,7 @@ const DatagridToolbar = (datagridState) => {
       ref={ref}
       className={cx([toolbarClass, `${toolbarClass}--${getRowHeight}`])}
     >
-      <TableToolbar>
+      <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
@@ -188,12 +197,16 @@ const DatagridToolbar = (datagridState) => {
     </div>
   ) : DatagridActions ? (
     <div className={toolbarClass}>
-      <TableToolbar>
+      <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>
   ) : null;
+};
+
+DatagridToolbar.propTypes = {
+  ariaToolbarLabel: PropTypes.string,
 };
 
 export default DatagridToolbar;

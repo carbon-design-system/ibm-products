@@ -9,6 +9,11 @@
     "access": "public",
     "provenance": true
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
+    "directory": "packages/ibm-products-community"
+  },
   "scripts": {
     "build": "run-s clean build-all",
     "build-all": "run-p 'build:*'",

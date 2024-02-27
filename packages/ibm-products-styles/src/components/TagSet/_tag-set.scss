@@ -107,7 +107,7 @@ $block-class-modal: #{$_block-class}-modal;
 
   &.#{$block-class-modal} .#{$block-class-modal}__fade::after {
     position: absolute;
-    top: calc(-1 * #{$spacing-11});
+    top: calc(-1 * #{$spacing-07});
     left: 0;
     width: 100%;
     height: $spacing-07;

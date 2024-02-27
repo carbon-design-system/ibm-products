@@ -25,7 +25,7 @@ const componentName = 'ScrollGradient';
 
 // Default values for props
 const defaults = {
-  direction: ScrollDirection.Y,
+  color: `var(--${carbon.prefix}-layer-01)`,
   hideStartGradient: false,
   onScroll: () => {},
   getScrollElementRef: () => {},
@@ -39,8 +39,7 @@ export let ScrollGradient = React.forwardRef(
     {
       children,
       className,
-      direction = defaults.direction,
-      color,
+      color = defaults.color,
       onScroll = defaults.onScroll,
       scrollElementClassName,
       getScrollElementRef = defaults.getScrollElementRef,
@@ -55,8 +54,6 @@ export let ScrollGradient = React.forwardRef(
     );
     const scrollContainer = useRef();
     const contentChildrenContainer = useRef();
-
-    const gradientColor = color ? color : `var(--${carbon.prefix}-layer-01)`;
 
     const updateScrollState = throttle(() => {
       const updatedVerticalVal = getScrollState(
@@ -108,7 +105,6 @@ export let ScrollGradient = React.forwardRef(
           blockClass,
           `${blockClass}--x-${horizontalPosition.toLowerCase()}`,
           `${blockClass}--y-${verticalPosition.toLowerCase()}`,
-          `${blockClass}--${direction.toLowerCase()}`,
           {
             [`${blockClass}--x-scrollable`]: xScrollable,
             [`${blockClass}--y-scrollable`]: yScrollable,
@@ -139,7 +135,7 @@ export let ScrollGradient = React.forwardRef(
               className={cx(`${blockClass}__start-vertical`)}
               style={{
                 right: gradientRight,
-                backgroundImage: `linear-gradient(0deg, transparent, ${gradientColor} 90%)`,
+                backgroundImage: `linear-gradient(0deg, transparent, ${color} 90%)`,
               }}
               role="presentation"
               aria-hidden
@@ -147,7 +143,7 @@ export let ScrollGradient = React.forwardRef(
             <div
               className={cx(`${blockClass}__start-horizontal`)}
               style={{
-                backgroundImage: `linear-gradient(-90deg, transparent, ${gradientColor} 90%)`,
+                backgroundImage: `linear-gradient(-90deg, transparent, ${color} 90%)`,
                 bottom: gradientBottom,
               }}
               role="presentation"
@@ -160,7 +156,7 @@ export let ScrollGradient = React.forwardRef(
           style={{
             right: gradientRight,
             bottom: gradientBottom,
-            backgroundImage: `linear-gradient(0deg, ${gradientColor} 10%, transparent)`,
+            backgroundImage: `linear-gradient(0deg, ${color} 10%, transparent)`,
           }}
           role="presentation"
           aria-hidden
@@ -170,7 +166,7 @@ export let ScrollGradient = React.forwardRef(
           style={{
             right: gradientRight,
             bottom: gradientBottom,
-            backgroundImage: `linear-gradient(-90deg, ${gradientColor} 10%, transparent)`,
+            backgroundImage: `linear-gradient(-90deg, ${color} 10%, transparent)`,
           }}
           role="presentation"
           aria-hidden
@@ -205,10 +201,7 @@ ScrollGradient.propTypes = {
   className: PropTypes.string,
 
   /** @type {string} Fade out color. Any valid CSS color value works */
-  color: PropTypes.string.isRequired,
-
-  /** @type {string} Scroll direction */
-  direction: PropTypes.oneOf(Object.values(ScrollDirection)),
+  color: PropTypes.string,
 
   /** @type {(element: HTMLElement) => {}} Optional function to get reference to scrollable DOM element */
   getScrollElementRef: PropTypes.func,

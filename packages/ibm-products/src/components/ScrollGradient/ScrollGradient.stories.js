@@ -18,20 +18,19 @@ import { ScrollGradient } from '.';
 import mdx from './ScrollGradient.mdx';
 
 import styles from './_storybook-styles.scss';
-import { ScrollDirection } from './constants';
 
 const storyCopy =
   'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet rerum aliquid perferendis, nulla nam ad excepturi, iure earum dolorum ipsa quae cum voluptatibus nemo quis debitis, aperiam repudiandae dolore deleniti.';
 
 const storyChildren = (
-  <>
+  <div style={{ padding: 16 }}>
     <p>{storyCopy}</p>
     <p>{storyCopy}</p>
     <p>{storyCopy}</p>
     <p>{storyCopy}</p>
     <p>{storyCopy}</p>
     <p>{storyCopy}</p>
-  </>
+  </div>
 );
 
 export default {
@@ -56,38 +55,38 @@ const style = {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
+const templateStyle = {
+  width: 300,
+  height: 400,
+  resize: 'both',
+  overflow: 'auto',
+  outline: 'thin solid black',
+};
+
 const Template = (args) => {
   return (
-    <div
-      style={{
-        width: '300px',
-        height: '400px',
-        resize: 'both',
-        outline: 'thin #666 solid',
-        overflow: 'auto',
-      }}
-    >
+    <div style={templateStyle}>
       <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
     </div>
   );
 };
 
-/**
- * TODO: Declare one or more stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
-export const scrollGradient = prepareStory(Template, {
+const TemplateBothAxis = (args) => {
+  return (
+    <div style={{ ...templateStyle, height: 250 }}>
+      <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
+    </div>
+  );
+};
+
+export const scrollGradientVertical = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ScrollGradient-args
     children: storyChildren,
-    direction: ScrollDirection.Y,
   },
 });
 
-export const scrollGradientHorizontal = prepareStory(Template, {
+export const scrollGradientXAndYAxis = prepareStory(TemplateBothAxis, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ScrollGradient-args
     children: <div style={{ width: '1500px' }}>{storyChildren}</div>,
-    direction: ScrollDirection.X,
   },
 });

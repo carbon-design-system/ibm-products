@@ -109,6 +109,7 @@ const s = [
               'c/EmptyStateV2',
             ],
           },
+          { n: 'Drag and drop', s: ['c/DragAndDrop'] },
           { n: 'Export', s: ['c/ExportModal'] },
           { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },

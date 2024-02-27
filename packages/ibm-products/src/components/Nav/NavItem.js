@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -23,28 +23,36 @@ import NavItemLink from './NavItemLink';
 export const blockClass = `${pkg.prefix}--nav-item`;
 const componentName = 'NavItem';
 
+// Default values for props
+const defaults = {
+  activeHref: '#',
+  disabled: false,
+  element: 'a',
+  link: true,
+  onClick: () => {},
+  tabIndex: 0,
+};
+
 /**
  * Navigation item component.
  */
-export let NavItem = ({
-  activeHref,
-  children,
+export const NavItem = ({
+  activeHref = defaults.activeHref,
+  children = defaults.children,
   className,
   current,
-  disabled,
-  element,
+  disabled = defaults.disabled,
+  element = defaults.element,
   handleItemSelect,
   href,
   id,
-  label = '',
-  link = true,
-  onClick,
-  tabIndex = 0,
+  label,
+  link = defaults.link,
+  onClick = defaults.onClick,
+  tabIndex = defaults.tabIndex,
   // Collect any other property values passed in.
-  ...other
+  ...rest
 }) => {
-  const [currentItem, setCurrentItem] = useState(current);
-
   const internalId = useRef(uuidv4());
   const instanceId = `${blockClass}__${internalId.current}`;
   const navItemId = id || instanceId;
@@ -54,15 +62,10 @@ export let NavItem = ({
     isAbsoluteLink.test(href) && href.indexOf(window.location.host) === -1;
   const linkClassName = `${blockClass}__link`;
 
-  const classNames = cx(blockClass, className, {
-    [`${blockClass}--active`]:
-      (currentItem !== null && currentItem === navItemId) ||
-      (activeHref !== undefined && activeHref === href && !externalLink),
-    [`${blockClass}--disabled`]: disabled,
-  });
+  const handleDisabled = (action, defaultValue = null) => {
+    return !disabled ? action : defaultValue;
+  };
 
-  const handleDisabled = (action, defaultValue = null) =>
-    !disabled ? action : defaultValue;
   const navItemTabIndex = handleDisabled(tabIndex, -1);
 
   const externalLinkProps = externalLink && {
@@ -70,15 +73,15 @@ export let NavItem = ({
     target: '_blank',
   };
 
-  useEffect(() => {
-    if (current !== currentItem) {
-      setCurrentItem(current);
-    }
-  }, [current, currentItem]);
-
   return (
     <li
-      className={classNames}
+      {...rest}
+      className={cx(blockClass, className, {
+        [`${blockClass}--active`]:
+          (current !== null && current === navItemId) ||
+          (activeHref !== undefined && activeHref === href && !externalLink),
+        [`${blockClass}--disabled`]: disabled,
+      })}
       label={label}
       onClick={(event) => handleDisabled(onClick(event, href))}
       onKeyPress={(event) => handleDisabled(onClick(event, href))}
@@ -93,7 +96,7 @@ export let NavItem = ({
           element={element}
           href={href}
           tabIndex={navItemTabIndex}
-          {...other}
+          {...rest}
           {...externalLinkProps}
         >
           {children}

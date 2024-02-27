@@ -37,10 +37,19 @@ const Template = (args) => {
     <div style={{ width: '300px' }}>
       <Nav {...args}>
         <NavList title="Nav list 1">
-          <NavItem key="navitem_1-1" element="span" customprop="uniqueValue">
+          <NavItem
+            key="navitem_1-1"
+            element="span"
+            customprop="uniqueValue"
+            href="#navitem_1-1"
+          >
             Nav item 1-1 (with a custom element)
           </NavItem>
-          <NavItem key="navitem_1-2" onClick={action('onClick')}>
+          <NavItem
+            key="navitem_1-2"
+            onClick={action('onClick')}
+            href="#navitem_1-2"
+          >
             Nav item 1-2
           </NavItem>
         </NavList>

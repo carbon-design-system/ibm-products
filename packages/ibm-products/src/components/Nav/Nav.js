@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -17,33 +17,17 @@ import { pkg } from '../../settings';
 const componentName = 'Nav';
 const blockClass = `${pkg.prefix}--nav`;
 
-// Default values for props
-const defaults = {
-  activeHref: undefined,
-  children: null,
-  className: '',
-  heading: null,
-};
-
 export let Nav = React.forwardRef(
-  (
-    {
-      activeHref = defaults.activeHref,
-      className = defaults.className,
-      children = defaults.children,
-      heading = defaults.heading,
-      label,
-      ...rest
-    },
-    ref
-  ) => {
-    if (!activeHref && window.location) {
-      const { hash, pathname } = window.location;
-
-      activeHref = pathname + hash;
-    }
-
+  ({ activeHref, className, children, heading, label, ...rest }, ref) => {
+    const [_activeHref, setActiveHref] = useState(activeHref);
     const navigationLists = useRef({});
+
+    useEffect(() => {
+      if (!_activeHref && window.location) {
+        const { hash, pathname } = window.location;
+        setActiveHref(pathname + hash);
+      }
+    }, [_activeHref]);
 
     /**
      * Creates a new child list item.
@@ -57,7 +41,7 @@ export let Nav = React.forwardRef(
       return (
         <NavItem
           {...child.props}
-          activeHref={activeHref}
+          activeHref={_activeHref}
           key={key}
           onClick={(event, href) =>
             handleItemClick(event, href, child.props.onClick)
@@ -78,7 +62,7 @@ export let Nav = React.forwardRef(
       return (
         <NavList
           {...child.props}
-          activeHref={activeHref}
+          activeHref={_activeHref}
           id={key}
           key={key}
           onListClick={handleListClick}
@@ -101,9 +85,9 @@ export let Nav = React.forwardRef(
       // Enter (13) and spacebar (32).
       const acceptableEvent = which === 13 || which === 32 || type === 'click';
 
-      const diffHref = href !== activeHref;
+      const diffHref = href !== _activeHref;
       if (acceptableEvent && diffHref) {
-        activeHref = href;
+        setActiveHref(href);
       }
 
       if (onClick) {

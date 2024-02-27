@@ -16,10 +16,6 @@
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/utilities';
 
-// Other Carbon settings if needed
-@import '@carbon/themes/scss/tokens';
-@import '@carbon/type/scss/styles';
-
 $block-class: #{c4p-settings.$pkg-prefix}--nav;
 $nav-list-block-class: #{c4p-settings.$pkg-prefix}--nav-list;
 $nav-item-block-class: #{c4p-settings.$pkg-prefix}--nav-item;
@@ -199,6 +195,7 @@ $nav__icon__position: translate3d(-50%, 0, 0);
     &::before {
       background-color: $background-brand;
       transform: translate3d(0, 0, 0);
+      z-index: 100;
     }
   }
 

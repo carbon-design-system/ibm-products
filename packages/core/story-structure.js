@@ -69,6 +69,7 @@ const s = [
             n: 'StatusIndicator',
             s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },
+          { n: 'Tag overflow', s: ['c/TagOverflow'] },
         ],
       },
       {

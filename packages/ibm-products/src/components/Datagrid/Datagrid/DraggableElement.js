@@ -53,13 +53,10 @@ const DraggableElement = ({
     </>
   );
 
-  console.log(transform);
-
   const style = {
     transform: !disabled ? CSS.Transform.toString(transform) : {},
     transition,
   };
-  console.log(style);
 
   return (
     <li

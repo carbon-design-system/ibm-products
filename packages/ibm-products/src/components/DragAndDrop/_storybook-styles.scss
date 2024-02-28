@@ -23,7 +23,6 @@ $horizontal-drag-height: 6rem;
   height: 3rem;
   padding: $spacing-03;
   border-bottom: 1px solid $border-subtle;
-  // background-color: paleturquoise;
   background-color: $layer;
   cursor: grab;
   list-style-type: none;
@@ -66,7 +65,7 @@ $horizontal-drag-height: 6rem;
   height: $spacing-09;
   border: 2px dashed $focus;
   /* stylelint-disable-next-line carbon/theme-token-use */
-  background-color: colors.$blue-10; // not good in dark mode
+  background-color: colors.$blue-10;
 }
 
 .#{$drag-class}__list-container {

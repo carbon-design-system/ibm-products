@@ -27,11 +27,16 @@ import {
 import {
   useSortable,
   SortableContext,
+  horizontalListSortingStrategy,
   verticalListSortingStrategy,
-  arrayMove
+  arrayMove,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import {
+  restrictToParentElement,
+  restrictToVerticalAxis,
+  restrictToHorizontalAxis,
+} from '@dnd-kit/modifiers';
 
 /* ************************ */
 
@@ -39,7 +44,7 @@ import styles from './_storybook-styles.scss';
 
 // import { ExampleComponent } from '.';
 import { pkg } from '../../settings';
-// import DocsPage from './ExampleComponent.docs-page';
+import DocsPage from './DragAndDrop.mdx';
 
 export default {
   title: getStoryTitle('DragAndDrop'),
@@ -51,12 +56,17 @@ export default {
   parameters: {
     styles,
     docs: {
-      // page:  DocsPage, // OPTIONAL: required only to customize default docs page
+      page: DocsPage, // OPTIONAL: required only to customize default docs page
     },
   },
 };
 
-const SortableItem = ({ id, children, assistiveText = 'Text for screen reader' }) => {
+const SortableItem = ({
+  id,
+  children,
+  assistiveText = 'Text for screen reader',
+  type,
+}) => {
   const {
     attributes,
     isDragging,
@@ -72,29 +82,33 @@ const SortableItem = ({ id, children, assistiveText = 'Text for screen reader' }
     transform: CSS.Translate.toString(transform),
     transition,
     zIndex: isDragging && 2000000,
-  }
+  };
 
   const draggableClass = `${pkg.prefix}__draggable-item`;
-  return <li
-    className={cx(
-      `${draggableClass}__draggable-handleHolder`,
-      draggableClass, {
-      // [`${draggableClass}__draggable-handleHolder--selected`]: selected,
-      // [`${draggableClass}__draggable-handleHolder--sticky`]: isSticky,
-      [`${draggableClass}__dragging`]: isDragging,
-    })}
-    id={id}
-    ref={setNodeRef}
-    style={style}
-    {...attributes}
-    {...listeners}
-    role='option'
-    aria-selected
-  >
-    <span className={`${draggableClass}__assistive-text`}>
-      {assistiveText}
-    </span>
-    {/* <div
+  return (
+    <li
+      className={cx(
+        `${draggableClass}--type`, // Confusing, refactor to typography or something along those lines
+        draggableClass,
+        {
+          // [`${draggableClass}__draggable-handleHolder--selected`]: selected,
+          // [`${draggableClass}__draggable-handleHolder--sticky`]: isSticky,
+          [`${draggableClass}--dragging`]: isDragging,
+          [`${draggableClass}--${type}`]: type,
+        }
+      )}
+      id={id}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      role="option"
+      aria-selected
+    >
+      <span className={`${draggableClass}__assistive-text`}>
+        {assistiveText}
+      </span>
+      {/* <div
       className={cx(
         {
           // [`${draggableClass}__draggable-handleStyle`]: !disabled,
@@ -104,11 +118,12 @@ const SortableItem = ({ id, children, assistiveText = 'Text for screen reader' }
     >
       {children}
     </div> */}
-    {children}
-  </li>
-}
+      {children}
+    </li>
+  );
+};
 
-const Template = ({ ...args }) => {
+const Template = ({ type, sortableProps, ...args }) => {
   const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   const [activeId, setActiveId] = useState(null);
   const getIndex = (id) => items.indexOf(id);
@@ -133,16 +148,33 @@ const Template = ({ ...args }) => {
         target = target.parentNode;
       }
 
-      const delta = target.offsetHeight;
+      const delta =
+        type !== 'horizontal' ? target.offsetHeight : target.offsetWidth;
 
       switch (event.code) {
-        case 'ArrowRight':
-        case 'ArrowLeft':
+        case 'ArrowRight': {
+          if (type === 'horizontal') {
+            console.log('arrow right?');
+            return { ...currentCoordinates, x: currentCoordinates.x + delta };
+          }
+          return currentCoordinates;
+        }
+        case 'ArrowLeft': {
+          if (type === 'horizontal') {
+            return { ...currentCoordinates, x: currentCoordinates.x - delta };
+          }
           // ignore right and left
           return currentCoordinates;
+        }
         case 'ArrowUp':
+          if (type === 'horizontal') {
+            return currentCoordinates;
+          }
           return { ...currentCoordinates, y: currentCoordinates.y - delta };
         case 'ArrowDown':
+          if (type === 'horizontal') {
+            return currentCoordinates;
+          }
           return { ...currentCoordinates, y: currentCoordinates.y + delta };
         case 'Space':
           break;
@@ -160,8 +192,7 @@ const Template = ({ ...args }) => {
         setItems((items) => arrayMove(items, activeIndex, overIndex));
       }
     }
-  }
-  // console.log(items);
+  };
 
   const handleDragStart = ({ active }) => {
     action('handleDragStart')();
@@ -170,39 +201,79 @@ const Template = ({ ...args }) => {
     }
 
     setActiveId(active.id);
-  }
-
-  const handleDragUpdate = () => {
-    action('handleDragUpdate')();
-  }
+  };
 
   const handleDragCancel = () => {
     setActiveId(null);
-  }
-
+  };
 
   const sensors = useSensors(pointerSensor, keyboardSensor);
+  const axisRestriction =
+    type === 'horizontal' ? restrictToHorizontalAxis : restrictToVerticalAxis;
   return (
-    <DndContext
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-      onDragStart={handleDragStart}
-      onDragMove={handleDragUpdate}
-      onDragCancel={handleDragCancel}
-      sensors={sensors}
-      modifiers={[restrictToVerticalAxis]}
-      {...args}
+    <ul
+      className={cx(`${draggableClass}__list-container`, {
+        [`${draggableClass}__list-container--horizontal`]:
+          type === 'horizontal',
+      })}
     >
-    <SortableContext
-      items={items}
-      strategy={verticalListSortingStrategy}
-    >
-      {items.map(i => <SortableItem id={i} key={`${i}__drag_key`}>{i}</SortableItem>)}
-    </SortableContext>
-    </DndContext>
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        // onDragMove={handleDragUpdate} // Some noticeable performance issues when dragging with this handler, haven't found it necessary for anything yet either
+        onDragCancel={handleDragCancel}
+        sensors={sensors}
+        modifiers={[axisRestriction, restrictToParentElement]}
+        {...args}
+      >
+        <div
+          className={cx(`${draggableClass}__draggable-underlay`, {
+            [`${draggableClass}__draggable-underlay--horizontal`]:
+              type === 'horizontal',
+          })}
+          aria-hidden="true"
+          key={`draggable-underlay`}
+        >
+          {items.map((i) => (
+            <div
+              className={`${draggableClass}__draggable-underlay-item`}
+              key={`${i}__key`}
+            />
+          ))}
+        </div>
+        <SortableContext
+          items={items}
+          strategy={verticalListSortingStrategy}
+          {...sortableProps}
+        >
+          {items.map((i) => (
+            <SortableItem id={i} key={`${i}__drag_key`} type={type}>
+              Item {i}
+            </SortableItem>
+          ))}
+        </SortableContext>
+      </DndContext>
+    </ul>
   );
 };
 
-export const exampleComponent = prepareStory(Template, {
+export const verticalExample = prepareStory(Template, {
+  storyName: 'Vertical list',
   args: {},
 });
+
+export const horizontalExample = prepareStory(Template, {
+  storyName: 'Horizontal list',
+  args: {
+    type: 'horizontal',
+    sortableProps: {
+      strategy: horizontalListSortingStrategy,
+    },
+  },
+});
+
+// export const verticalExample = prepareStory(Template, {
+//   storyName: 'Vertical list',
+//   args: {},
+// });

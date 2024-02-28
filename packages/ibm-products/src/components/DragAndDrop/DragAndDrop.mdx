@@ -1,0 +1,37 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+
+# DescriptionList
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The following are drag and drop examples building from the examples on the PAL site. While we are currently not providing these
+as exported components to use directly, they can be used as references for drag and drop interactions. We do provide styles for
+some of the drag states as detailed below.
+
+| State                  | class                                          |
+|------------------------|------------------------------------------------|
+| Default draggable item | `${pkg.prefix}__draggable-item`                |
+| Dragging               | `${pkg.prefix}__draggable-item--dragging`      |
+|                        |                                                |
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'vertical-example')} />
+</Canvas>
+
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'horizontal-example')} />
+</Canvas>

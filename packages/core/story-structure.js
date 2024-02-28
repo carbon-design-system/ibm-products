@@ -68,6 +68,8 @@ const s = [
           {
             n: 'Icon Button Bar',
             s: ['c/IconButtonBar', 'c/IconButtonBarItem'],
+          },
+          {
             n: 'StatusIndicator',
             s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },

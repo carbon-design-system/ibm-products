@@ -1,4 +1,56 @@
 {
   "name": "TagOverflow-component-example",
-  "note": "Run `update-gallery-config to generate."
+  "description": "An example showing use of the TagOverflow component from the @carbon/ibm-products component library.",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "tagoverflow",
+    "tag",
+    "overflow"
+  ],
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@carbon/ibm-products": "^2.21.0",
+    "@carbon/react": "^1.51.0",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.70.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vite": "^4.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  }
 }

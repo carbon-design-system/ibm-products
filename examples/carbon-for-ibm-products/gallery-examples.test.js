@@ -51,6 +51,7 @@ import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as StatusIndicatorExample } from './StatusIndicator/src/Example/Example';
 import { Example as StringFormatterExample } from './StringFormatter/src/Example/Example';
+import { Example as TagOverflowExample } from './TagOverflow/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
 import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
@@ -312,6 +313,12 @@ describe('All examples', () => {
 
   it('StringFormatter renders', () => {
     render(<StringFormatterExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('TagOverflow renders', () => {
+    render(<TagOverflowExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -7,7 +7,8 @@
 @use '@carbon/react/scss/theme' as *;
 @forward '../../../../ibm-products-styles/src/global/styles/project-settings';
 
-.sb-show-main {
+.sb-show-main,
+.docs-story {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: $layer-01 !important;
 }

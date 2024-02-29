@@ -14,7 +14,7 @@ import {
   Theme,
 } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -22,7 +22,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -141,20 +140,11 @@ export let AboutModal = React.forwardRef(
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
-    const handleResize = () => {
-      if (!bodyRef.current?.clientHeight) {
-        return;
-      }
-    };
-
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
     useEffect(() => {
       bodyRef.current = contentRef.current?.parentElement;
     }, [bodyRef]);
-
-    // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeObserver(bodyRef, handleResize);
 
     return renderPortalUse(
       <ComposedModal

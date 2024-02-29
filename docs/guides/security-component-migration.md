@@ -156,12 +156,12 @@ _Info here_
 
 _Renamed from 'StatusStep'_
 
-| Old prop | New prop     | Change                                                           |
-| -------- | ------------ | ---------------------------------------------------------------- |
-| status   | status       | Is now required. <br/>Acceptable values are -tacos -tacos -tacos |
-|          |              | hello                                                            |
-| errorMsg | errorMessage | Renamed                                                          |
-| label    | —            | Deprecated                                                       |
+| Old prop | New prop     | Change                                                  |
+| -------- | ------------ | ------------------------------------------------------- |
+| status   | status       | Is now required. <br/>Acceptable values are (LIST HERE) |
+|          |              | hello                                                   |
+| errorMsg | errorMessage | Renamed                                                 |
+| label    | —            | Deprecated                                              |
 
 ---
 

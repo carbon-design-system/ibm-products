@@ -30,9 +30,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-compact-02-letter-spacing, 0);
   overflow: hidden auto;
   min-height: 4rem;
-  padding: 0 20% 0 1rem;
-  margin-bottom: 1.5rem;
   grid-row: auto;
+  padding-block-start: 0;
+  padding-inline: 1rem 20%;
+}
+.c4p--about-modal .c4p--about-modal__body:not(.cds--modal-scroll-content) {
+  margin-bottom: 1.5rem;
+  padding-block-end: 0;
 }
 
 .c4p--about-modal .cds--modal-content--overflow-indicator {
@@ -4326,7 +4330,7 @@ p.c4p--about-modal__copyright-text:first-child {
   position: relative;
   z-index: 0;
   overflow: auto;
-  padding: 0 1rem;
+  padding: 0 1rem 4rem 1rem;
   overscroll-behavior: contain;
 }
 

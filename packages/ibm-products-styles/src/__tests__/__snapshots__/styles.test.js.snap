@@ -4326,7 +4326,7 @@ p.c4p--about-modal__copyright-text:first-child {
   position: relative;
   z-index: 0;
   overflow: auto;
-  padding: 0 1rem;
+  padding: 0 1rem 4rem 1rem;
   overscroll-behavior: contain;
 }
 
@@ -8397,6 +8397,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link {
   margin-top: 0.5rem;
+  color: var(--cds-link-inverse, #78a9ff);
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
   background-color: var(--cds-background-inverse-hover, #474747);

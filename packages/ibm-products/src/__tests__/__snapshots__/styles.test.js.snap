@@ -2825,7 +2825,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: relative;
   z-index: 0;
   overflow: auto;
-  padding: 0 var(--cds-spacing-05, 1rem);
+  padding: 0 var(--cds-spacing-05, 1rem) var(--cds-spacing-11, 5rem) var(--cds-spacing-05, 1rem);
   overscroll-behavior: contain;
 }
 

@@ -20,7 +20,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
 export let Datagrid = React.forwardRef(
-  ({ datagridState, title, ...rest }, ref) => {
+  ({ ariaToolbarLabel, datagridState, title, ...rest }, ref) => {
     if (!datagridState) {
       pconsole.warn(
         'Datagrid was not passed datagridState which is required to render this component.'
@@ -44,6 +44,7 @@ export let Datagrid = React.forwardRef(
     const props = {
       title,
       datagridState,
+      ariaToolbarLabel,
     };
 
     return (
@@ -89,6 +90,11 @@ Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
 Datagrid.displayName = componentName;
 
 Datagrid.propTypes = {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the TableToolbar component.
+   */
+  ariaToolbarLabel: PropTypes.string,
   /**
    * The data grid state, much of it being supplied by the useDatagrid hook
    */

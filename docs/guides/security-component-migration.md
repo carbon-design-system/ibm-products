@@ -37,11 +37,13 @@ v2 will receive weekly releases occurring every Tuesday morning.
 
 ### BigNumbers
 
-_Info here_
+_Renamed from ICA. Note: ICASkeleton was not migrated - removed in favor of the
+BigNumbers loading prop_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop | New prop       | Change                                                                                            |
+| -------- | -------------- | ------------------------------------------------------------------------------------------------- |
+| —        | fractionDigits | Optional value to control the max/min fractional digits used when truncating the value and total. |
+| —        | loading        | Specify if the BigNumbers is in a loading state - shows component in a skeleton fashion.          |
 
 ---
 
@@ -49,19 +51,31 @@ _Info here_
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop          | New prop      | Change                             |
+| ----------------- | ------------- | ---------------------------------- |
+| active            | theme         | —                                  |
+| —                 | disabled      | —                                  |
+| —                 | kind          | —                                  |
+| inline            | small         | —                                  |
+| midLineTruncation | truncateValue | —                                  |
+| noIcon            | hideIcon      | —                                  |
+| —                 | onClickLabel  | —                                  |
+| title             | valueTitle    | —                                  |
+| type              | label         | Renamed and is no longer required. |
+| fitValue          | —             | Deprecated                         |
+| noBorderRadius    | —             | Deprecated                         |
+| noType            | —             | Deprecated                         |
 
 ---
 
 ### DelimitedList
 
-_Info here_
+_Note: Append count functionality was not migrated as its implementation is
+inconsistent with the description._
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop | New prop | Change    |
+| -------- | -------- | --------- |
+| —        | —        | No change |
 
 ---
 
@@ -129,9 +143,25 @@ _Info here_
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop               | New prop   | Change          |
+| ---------------------- | ---------- | --------------- |
+| children               | children   | Is now required |
+| —                      | onRetry    | New             |
+| —                      | retryLabel | New             |
+| —                      | showRetry  | New             |
+| currentIndex           | —          | Deprecated      |
+| retry: {action, label} | —          | Deprecated      |
+
+### StatusIndicatorStep
+
+_Renamed from 'StatusStep'_
+
+| Old prop | New prop     | Change                                                           |
+| -------- | ------------ | ---------------------------------------------------------------- |
+| status   | status       | Is now required. <br/>Acceptable values are -tacos -tacos -tacos |
+|          |              | hello                                                            |
+| errorMsg | errorMessage | Renamed                                                          |
+| label    | —            | Deprecated                                                       |
 
 ---
 
@@ -149,9 +179,18 @@ _Info here_
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop              | New prop            | Change          |
+| --------------------- | ------------------- | --------------- |
+| children              | children            | Is now required |
+| collapsedItemLimit    | collapsedItemsLimit | Renamed         |
+| expandedItemLimit     | expandedItemsLimit  | Renamed         |
+| expandButtonClassName | buttonClassName     | Renamed         |
+| —                     | onClick             | New             |
+| —                     | viewLessLabel       | New             |
+| —                     | viewMoreLabel       | New             |
+| getExpandButtonLabel  | —                   | Deprecated      |
+| truncateThreshold     | —                   | Deprecated      |
+| scrollGradientColor   | —                   | Deprecated      |
 
 ---
 

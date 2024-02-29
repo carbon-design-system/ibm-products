@@ -4051,6 +4051,11 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky !important;
   z-index: 1;
   left: 0;
+  border-right: 1px solid var(--cds-layer-active-02, #c6c6c6);
+}
+
+.c4p--datagrid__right-sticky-column-header {
+  border-left: 1px solid var(--cds-layer-active-02, #c6c6c6);
 }
 
 .c4p--datagrid__left-sticky-column-cell.c4p--datagrid__left-sticky-column-cell--with-extra-select-column,

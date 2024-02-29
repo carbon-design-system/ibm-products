@@ -58,7 +58,8 @@ export let NavList = React.forwardRef(
         .map(({ props: childProps }) => childProps.href);
 
       setOpen(hrefs.includes(activeHref) || isExpandedOnPageload);
-    }, [activeHref, children, isExpandedOnPageload]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     /**
      * Closes the list.

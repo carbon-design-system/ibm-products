@@ -130,7 +130,7 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   padding-left: 0;
   margin-bottom: 0;
   opacity: 0;
-  transition-duration: 240ms;
+  transition-duration: $duration-moderate-02;
   $transition-property: (max-height, opacity);
   @include rtl {
     padding-right: 0;

@@ -55,17 +55,10 @@ const style = {
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
-const templateStyle = {
-  width: 300,
-  height: 400,
-  resize: 'both',
-  overflow: 'auto',
-  outline: 'thin solid black',
-};
 
 const Template = (args) => {
   return (
-    <div style={templateStyle}>
+    <div className="templateContainer">
       <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
     </div>
   );
@@ -73,7 +66,7 @@ const Template = (args) => {
 
 const TemplateBothAxis = (args) => {
   return (
-    <div style={{ ...templateStyle, height: 250 }}>
+    <div className="templateContainer-sm">
       <ScrollGradient style={style} className={'myScrollGradient'} {...args} />
     </div>
   );

@@ -56,6 +56,7 @@ const s = [
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Nav', s: ['c/Nav'] },
+          { n: 'Decorator', s: ['c/Decorator'] },
           { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
@@ -65,6 +66,10 @@ const s = [
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
+          {
+            n: 'StatusIndicator',
+            s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
+          },
         ],
       },
       {

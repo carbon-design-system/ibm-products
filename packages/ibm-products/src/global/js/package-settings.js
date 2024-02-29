@@ -73,6 +73,8 @@ const defaults = {
     DelimitedList: false,
     FullPageError: false,
     StringFormatter: false,
+    StatusIndicator: false,
+    StatusIndicatorStep: false,
 
     /* new component flags here - comment used by generate CLI */
 
@@ -84,6 +86,7 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
+    Decorator: false,
     DescriptionList: false,
     SearchBar: false,
     UserAvatar: false,

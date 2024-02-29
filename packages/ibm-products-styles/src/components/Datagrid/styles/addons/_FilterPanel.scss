@@ -41,7 +41,7 @@
   position: relative;
   z-index: 0;
   overflow: auto;
-  padding: 0 $spacing-05;
+  padding: 0 $spacing-05 $spacing-10 $spacing-05;
   overscroll-behavior: contain;
 }
 

@@ -356,11 +356,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: absolute;
+    position: fixed;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
     right: 0;
     display: flex;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    @media (prefers-reduced-motion) {
+      position: absolute;
+    }
   }
 
   .#{$block-class}__actions-container {

@@ -354,11 +354,17 @@ export const SortableColumns = () => {
       ascendingSortableLabelText: 'ascending',
       descendingSortableLabelText: 'descending',
       defaultSortableLabelText: 'none',
+      initialState: {
+        sortableColumn: {
+          id: 'firstName',
+          order: 'ASC',
+        },
+      },
     },
     useSortableColumns
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 export const ActionsDropdown = () => {

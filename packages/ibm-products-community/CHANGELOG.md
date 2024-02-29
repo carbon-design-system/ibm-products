@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.0...@carbon/ibm-products-community@0.4.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* update publish config in community package to public ([#4383](https://github.com/carbon-design-system/ibm-products/issues/4383)) ([e6c939f](https://github.com/carbon-design-system/ibm-products/commit/e6c939f7f2c4964f9abf0cb26f75647c3f6d502e))
+
+
+
+
+
 # [0.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.3.2...@carbon/ibm-products-community@0.4.0) (2024-02-21)
 
 

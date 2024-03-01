@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Carbon and package components we use.
 import {
@@ -40,6 +40,22 @@ const isValidChildren =
     return;
   };
 
+interface CreateModalProps extends React.ComponentProps<typeof ComposedModal> {
+  className?: string;
+  children: ReactNode;
+  onRequestClose?(): void;
+  onRequestSubmit?(): void;
+  open?: boolean;
+  title: ReactNode;
+  subtitle?: ReactNode;
+  description: ReactNode;
+  secondaryButtonText: string;
+  portalTarget?: ReactNode;
+  primaryButtonText: string;
+  disableSubmit?: boolean;
+  selectorPrimaryFocus: ReactNode;
+}
+
 /**
  * The `CreateModal` component provides a way for a user to quickly generate a new
 resource. It is triggered by a user’s action, appears on top of the main page
@@ -67,7 +83,7 @@ export let CreateModal = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: PropsWithChildren<CreateModalProps>,
     ref
   ) => {
     const renderPortalUse = usePortalTarget(portalTargetIn);
@@ -123,6 +139,7 @@ CreateModal.propTypes = {
   /**
    * Children refers to all form items within a form inside of the modal's body.
    */
+  /**@ts-ignore*/
   children: isValidChildren(),
   /**
    * Specify an optional className to be applied to the modal root node

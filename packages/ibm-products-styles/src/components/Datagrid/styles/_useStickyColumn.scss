@@ -41,6 +41,11 @@
   position: sticky !important;
   z-index: 1;
   left: 0;
+  border-right: 1px solid $layer-active-02;
+}
+
+.#{variables.$block-class}__right-sticky-column-header {
+  border-left: 1px solid $layer-active-02;
 }
 
 .#{variables.$block-class}__left-sticky-column-cell.#{variables.$block-class}__left-sticky-column-cell--with-extra-select-column,

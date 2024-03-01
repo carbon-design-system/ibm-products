@@ -1,5 +1,7 @@
 # Carbon for IBM Products: v2 migration guide for Security components
 
+<!-- markdownlint-disable MD033 MD036 -->
+
 This document will review in detail the changes in @carbon/ibm-security to
 Carbon for IBM Products v2. Because Carbon for IBM Products v2 uses Carbon v11,
 which utilizes Sass modules, there is a requirement for teams to use the
@@ -83,9 +85,9 @@ inconsistent with the description._
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop | New prop | Change                                             |
+| -------- | -------- | -------------------------------------------------- |
+| bordered | —        | Deprecated prop removed, use `border` boolean prop |
 
 ---
 
@@ -123,9 +125,10 @@ _Info here_
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop  | New prop | Change                                                                 |
+| --------- | -------- | ---------------------------------------------------------------------- |
+| direction | —        | Removed. Component should manage both horizontal and vertical scrolls. |
+| color     | color    | No longer required                                                     |
 
 ---
 
@@ -143,25 +146,24 @@ _Info here_
 
 _Info here_
 
-| Old prop               | New prop   | Change          |
-| ---------------------- | ---------- | --------------- |
-| children               | children   | Is now required |
-| —                      | onRetry    | New             |
-| —                      | retryLabel | New             |
-| —                      | showRetry  | New             |
-| currentIndex           | —          | Deprecated      |
-| retry: {action, label} | —          | Deprecated      |
+| Old prop               | New prop   | Change             |
+| ---------------------- | ---------- | ------------------ |
+| children               | children   | \* Is now required |
+| —                      | onRetry    | New                |
+| —                      | retryLabel | New                |
+| —                      | showRetry  | New                |
+| currentIndex           | —          | Deprecated         |
+| retry: {action, label} | —          | Deprecated         |
 
 ### StatusIndicatorStep
 
 _Renamed from 'StatusStep'_
 
-| Old prop | New prop     | Change                                                  |
-| -------- | ------------ | ------------------------------------------------------- |
-| status   | status       | Is now required. <br/>Acceptable values are (LIST HERE) |
-|          |              | hello                                                   |
-| errorMsg | errorMessage | Renamed                                                 |
-| label    | —            | Deprecated                                              |
+| Old prop | New prop     | Change                                                                                 |
+| -------- | ------------ | -------------------------------------------------------------------------------------- |
+| status   | status       | \* Is now required.<br/>**New values:**<br />"active", "error", "finished", "inactive" |
+| errorMsg | errorMessage | Renamed                                                                                |
+| label    | —            | Deprecated                                                                             |
 
 ---
 
@@ -169,9 +171,9 @@ _Renamed from 'StatusStep'_
 
 _Info here_
 
-| Old prop | New prop | Change |
-| -------- | -------- | ------ |
-| —        | —        | —      |
+| Old prop         | New prop         | Change                                                                                                                                                                |
+| ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| toolTipDirection | toolTipDirection | **New values:** <br/>"top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right", "left", "left-top", "left-bottom", "right", "right-top", "right-bottom" |
 
 ---
 
@@ -179,18 +181,18 @@ _Info here_
 
 _Info here_
 
-| Old prop              | New prop            | Change          |
-| --------------------- | ------------------- | --------------- |
-| children              | children            | Is now required |
-| collapsedItemLimit    | collapsedItemsLimit | Renamed         |
-| expandedItemLimit     | expandedItemsLimit  | Renamed         |
-| expandButtonClassName | buttonClassName     | Renamed         |
-| —                     | onClick             | New             |
-| —                     | viewLessLabel       | New             |
-| —                     | viewMoreLabel       | New             |
-| getExpandButtonLabel  | —                   | Deprecated      |
-| truncateThreshold     | —                   | Deprecated      |
-| scrollGradientColor   | —                   | Deprecated      |
+| Old prop              | New prop            | Change             |
+| --------------------- | ------------------- | ------------------ |
+| children              | children            | \* Is now required |
+| collapsedItemLimit    | collapsedItemsLimit | Renamed            |
+| expandedItemLimit     | expandedItemsLimit  | Renamed            |
+| expandButtonClassName | buttonClassName     | Renamed            |
+| —                     | onClick             | New                |
+| —                     | viewLessLabel       | New                |
+| —                     | viewMoreLabel       | New                |
+| getExpandButtonLabel  | —                   | Deprecated         |
+| truncateThreshold     | —                   | Deprecated         |
+| scrollGradientColor   | —                   | Deprecated         |
 
 ---
 

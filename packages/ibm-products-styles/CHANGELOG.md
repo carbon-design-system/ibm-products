@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.28.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.1...@carbon/ibm-products-styles@2.28.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* header border issue introduced with ai slug ([#4385](https://github.com/carbon-design-system/ibm-products/issues/4385)) ([76a0f82](https://github.com/carbon-design-system/ibm-products/commit/76a0f8237a12bb043c523fe7132cf62b6757fc30))
+* side panel slug and close position ([#4426](https://github.com/carbon-design-system/ibm-products/issues/4426)) ([2d73177](https://github.com/carbon-design-system/ibm-products/commit/2d73177d30e73160e126136363863ae7cb34f8fb))
+* tearsheet overlay ([#4421](https://github.com/carbon-design-system/ibm-products/issues/4421)) ([8a93722](https://github.com/carbon-design-system/ibm-products/commit/8a937221e0744bb959dd2921428907bb43529f1d))
+
+
+### Features
+
+* **Decorator:** new component Decorator ([#4170](https://github.com/carbon-design-system/ibm-products/issues/4170)) ([9cea98a](https://github.com/carbon-design-system/ibm-products/commit/9cea98a32f2d169763c52d26bf123b20e886911c)), closes [#4348](https://github.com/carbon-design-system/ibm-products/issues/4348) [#4188](https://github.com/carbon-design-system/ibm-products/issues/4188) [#4227](https://github.com/carbon-design-system/ibm-products/issues/4227) [#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)
+* **DescriptionList:** new component DescriptionList ([#4208](https://github.com/carbon-design-system/ibm-products/issues/4208)) ([0a55d40](https://github.com/carbon-design-system/ibm-products/commit/0a55d4092668355828cda5e44538e365baca9f2d))
+* new component status indicator ([#4419](https://github.com/carbon-design-system/ibm-products/issues/4419)) ([79c9794](https://github.com/carbon-design-system/ibm-products/commit/79c9794947fe6d58936fd4cf8a279f81870f8d5e))
+
+
+
+
+
 ## [2.27.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.0...@carbon/ibm-products-styles@2.27.1) (2024-02-21)
 
 

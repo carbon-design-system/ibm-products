@@ -85,6 +85,7 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
+    Decorator: false,
     DescriptionList: false,
     SearchBar: false,
     UserAvatar: false,

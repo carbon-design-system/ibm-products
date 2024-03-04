@@ -41,9 +41,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
   overflow: hidden auto;
   min-height: $spacing-10;
-  padding: 0 20% 0 $spacing-05;
-  margin-bottom: $spacing-06;
   grid-row: auto;
+  padding-block-start: 0;
+  padding-inline: $spacing-05 20%;
+
+  &:not(.#{c4p-settings.$carbon-prefix}--modal-scroll-content) {
+    margin-bottom: $spacing-06;
+    padding-block-end: 0;
+  }
 }
 
 .#{$block-class}

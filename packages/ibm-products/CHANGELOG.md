@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.28.1...@carbon/ibm-products@2.29.0) (2024-02-27)
+
+
+### Features
+
+* **AboutModal:** add typescript types ([#4320](https://github.com/carbon-design-system/ibm-products/issues/4320)) ([277f971](https://github.com/carbon-design-system/ibm-products/commit/277f97101b086b00f0b1dbb4543e45152d0f9afb))
+* **APIKeyModal:** add typescript types ([#4336](https://github.com/carbon-design-system/ibm-products/issues/4336)) ([75e1c20](https://github.com/carbon-design-system/ibm-products/commit/75e1c209b6fa11937dbbcfcb7951e9dae875924c))
+* **Datagrid:** add option to specify an initial sortable column ([#4423](https://github.com/carbon-design-system/ibm-products/issues/4423)) ([d6e306f](https://github.com/carbon-design-system/ibm-products/commit/d6e306fa2b58a454c879f911187e17076ce06ea3))
+* **Decorator:** new component Decorator ([#4170](https://github.com/carbon-design-system/ibm-products/issues/4170)) ([9cea98a](https://github.com/carbon-design-system/ibm-products/commit/9cea98a32f2d169763c52d26bf123b20e886911c)), closes [#4348](https://github.com/carbon-design-system/ibm-products/issues/4348) [#4188](https://github.com/carbon-design-system/ibm-products/issues/4188) [#4227](https://github.com/carbon-design-system/ibm-products/issues/4227) [#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)
+* **DescriptionList:** new component DescriptionList ([#4208](https://github.com/carbon-design-system/ibm-products/issues/4208)) ([0a55d40](https://github.com/carbon-design-system/ibm-products/commit/0a55d4092668355828cda5e44538e365baca9f2d))
+* new component status indicator ([#4419](https://github.com/carbon-design-system/ibm-products/issues/4419)) ([79c9794](https://github.com/carbon-design-system/ibm-products/commit/79c9794947fe6d58936fd4cf8a279f81870f8d5e))
+
+
+
+
+
 ## [2.28.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.28.0...@carbon/ibm-products@2.28.1) (2024-02-21)
 
 **Note:** Version bump only for package @carbon/ibm-products

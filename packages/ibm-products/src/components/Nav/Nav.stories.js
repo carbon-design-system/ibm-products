@@ -23,6 +23,10 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(Nav.displayName),
   component: Nav,
+  subcomponents: {
+    NavList,
+    NavItem,
+  },
   tags: ['autodocs'],
   parameters: {
     styles,
@@ -82,5 +86,6 @@ export const nav = prepareStory(Template, {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Nav-args
     label: 'Navigation',
     heading: 'Nav example',
+    activeHref: '#',
   },
 });

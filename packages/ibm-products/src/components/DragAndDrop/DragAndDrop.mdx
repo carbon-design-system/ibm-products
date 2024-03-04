@@ -1,0 +1,57 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+
+# DescriptionList
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+The following are drag and drop examples building upon the examples on the [PAL site](https://pages.github.ibm.com/cdai-design/pal/patterns/drag-and-drop/usage). While we are currently not providing these
+as exported components to use directly, they can be used as references for drag and drop interactions. The examples provided use `@dnd-kit`, also used in `@carbon/ibm-products` for customizing the order
+of columns in the Datagrid.
+
+{/* We do provide styles for some of the drag states as detailed below. */}
+
+{/* | State                  | class                                          |
+|------------------------|------------------------------------------------|
+| Default draggable item | `${pkg.prefix}__draggable-item`                |
+| Dragging               | `${pkg.prefix}__draggable-item--dragging`      | */}
+
+## Example usage
+
+### Vertical list
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'vertical-example')} />
+</Canvas>
+
+### Horizontal list
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'horizontal-example')} />
+</Canvas>
+
+### Grid
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'grid-example')} />
+</Canvas>
+
+### Grid, restrict drag to window edge
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'grid-example-restrict-to-window')} />
+</Canvas>
+
+### Grid, with large item
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'grid-example-large-item')} />
+</Canvas>
+
+### Grid, dashboard
+<Canvas>
+  <Story id={getStoryId('DragAndDrop', 'grid-dashboard')} />
+</Canvas>

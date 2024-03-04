@@ -309,6 +309,24 @@ const filters = [
       },
     },
   },
+  {
+    type: 'multiSelect',
+    column: 'status',
+    props: {
+      MultiSelect: {
+        items: [
+          { text: 'relationship', id: 'relationship' },
+          { text: 'complicated', id: 'complicated' },
+          { text: 'single', id: 'single' },
+        ],
+        id: 'carbon-multiselect-example',
+        label: 'Status selection',
+        titleText: 'Multiselect title',
+        itemToString: (item) => (item ? item.text : ''),
+        // Add any other Carbon MultiSelect props here
+      },
+    },
+  },
 ];
           `,
         },

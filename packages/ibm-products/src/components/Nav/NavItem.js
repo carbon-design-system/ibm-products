@@ -28,7 +28,6 @@ const defaults = {
   activeHref: '#',
   disabled: false,
   element: 'a',
-  link: true,
   onClick: () => {},
   tabIndex: 0,
 };
@@ -47,7 +46,6 @@ export const NavItem = ({
   href,
   id,
   label,
-  link = defaults.link,
   onClick = defaults.onClick,
   tabIndex = defaults.tabIndex,
   // Collect any other property values passed in.
@@ -84,38 +82,25 @@ export const NavItem = ({
       })}
       label={label}
       onClick={(event) => handleDisabled(onClick(event, href))}
-      onKeyPress={(event) => handleDisabled(onClick(event, href))}
+      onKeyDown={(event) => handleDisabled(onClick(event, href))}
       role="menuitem"
     >
-      {link ? (
-        <NavItemLink
-          id={navItemId}
-          className={cx(linkClassName, {
-            [`${blockClass}__link--external`]: externalLink,
-          })}
-          element={element}
-          href={href}
-          tabIndex={navItemTabIndex}
-          {...rest}
-          {...externalLinkProps}
-        >
-          {children}
-          {externalLink && (
-            <Launch className={`${blockClass}__link--external__icon`} />
-          )}
-        </NavItemLink>
-      ) : (
-        <div
-          id={navItemId}
-          className={linkClassName}
-          onClick={handleDisabled(handleItemSelect)}
-          onKeyPress={handleDisabled(handleItemSelect)}
-          role="menuitem"
-          tabIndex={navItemTabIndex}
-        >
-          {children}
-        </div>
-      )}
+      <NavItemLink
+        id={navItemId}
+        className={cx(linkClassName, {
+          [`${blockClass}__link--external`]: externalLink,
+        })}
+        element={element}
+        href={href}
+        tabIndex={navItemTabIndex}
+        {...rest}
+        {...externalLinkProps}
+      >
+        {children}
+        {externalLink && (
+          <Launch className={`${blockClass}__link--external__icon`} />
+        )}
+      </NavItemLink>
     </li>
   );
 };

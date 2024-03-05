@@ -42,7 +42,6 @@ export const NavItem = ({
   current,
   disabled = defaults.disabled,
   element = defaults.element,
-  handleItemSelect,
   href,
   id,
   label,
@@ -137,11 +136,6 @@ NavItem.propTypes = {
    * The base element to use to build the link. Defaults to `a`, can also accept alternative tag names or custom components like `Link` from `react-router`.
    */
   element: PropTypes.elementType,
-
-  /**
-   * Click handler of an item.
-   */
-  handleItemSelect: PropTypes.func,
 
   /**
    * The href of the nav item.

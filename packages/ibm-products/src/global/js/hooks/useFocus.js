@@ -22,8 +22,9 @@ export const useFocus = (modalRef) => {
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
   const queryLink = `[href]${notQuery}`;
+  const queryTabIndex = `[tabindex="0"]${notQuery}`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}`;
+  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}, ${queryTabIndex}`;
 
   const modalEl = modalRef?.current;
 

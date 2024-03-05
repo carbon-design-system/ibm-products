@@ -113,7 +113,7 @@ export let NavList = React.forwardRef(
         })}
         tabIndex={tabIndex}
         onClick={toggle}
-        onKeyPress={toggle}
+        onKeyDown={toggle}
         role="menuitem"
       >
         <div className={`${navItemBlockClass}__link`}>

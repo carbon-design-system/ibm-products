@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.28.0...@carbon/ibm-products-styles@2.29.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* about modal layout ([#4454](https://github.com/carbon-design-system/ibm-products/issues/4454)) ([c0cf58a](https://github.com/carbon-design-system/ibm-products/commit/c0cf58a1e78a4ee8f66b551d39b5705fecd4674e))
+* **Datagrid:** add missing borders to frozen header cells ([#4453](https://github.com/carbon-design-system/ibm-products/issues/4453)) ([72c38c8](https://github.com/carbon-design-system/ibm-products/commit/72c38c8325ebf40d28da8da3c192b5761dc5f1e2))
+* **Datagrid:** align nested/expanded row borders with text content ([#4388](https://github.com/carbon-design-system/ibm-products/issues/4388)) ([7e9fc3f](https://github.com/carbon-design-system/ibm-products/commit/7e9fc3f8e7df22078ebfafd4c6da6d9f1638a10f))
+* **TagSet:** address color contrast issue in overflow link button ([#4449](https://github.com/carbon-design-system/ibm-products/issues/4449)) ([5abfdd5](https://github.com/carbon-design-system/ibm-products/commit/5abfdd57fbc5047c62cc5e450e08021b79598f65))
+
+
+### Features
+
+* the button bar covers the last filter options for Datagrid filter panel [#4337](https://github.com/carbon-design-system/ibm-products/issues/4337) ([#4350](https://github.com/carbon-design-system/ibm-products/issues/4350)) ([c8392dc](https://github.com/carbon-design-system/ibm-products/commit/c8392dc1d1f756e6e9f2d8da3ac32ed447186d2b))
+* the frozen column doesn't follow the hover color on DataGrid [#4338](https://github.com/carbon-design-system/ibm-products/issues/4338) ([#4458](https://github.com/carbon-design-system/ibm-products/issues/4458)) ([176441c](https://github.com/carbon-design-system/ibm-products/commit/176441c38eca78cf7a29e2700a06d010e2371403))
+
+
+
+
+
 # [2.28.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.1...@carbon/ibm-products-styles@2.28.0) (2024-02-27)
 
 

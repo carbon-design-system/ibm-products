@@ -167,9 +167,6 @@ export let EditInPlace = forwardRef(
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
         >
-          <label className={`${blockClass}__text-input-label`} htmlFor={id}>
-            {labelText}
-          </label>
           <input
             id={id}
             className={cx(
@@ -183,6 +180,7 @@ export let EditInPlace = forwardRef(
             ref={inputRef}
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
+            aria-label={labelText}
           />
           <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
             &hellip;

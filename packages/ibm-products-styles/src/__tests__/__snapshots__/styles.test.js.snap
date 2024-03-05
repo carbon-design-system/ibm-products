@@ -30,9 +30,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-compact-02-letter-spacing, 0);
   overflow: hidden auto;
   min-height: 4rem;
-  padding: 0 20% 0 1rem;
-  margin-bottom: 1.5rem;
   grid-row: auto;
+  padding-block-start: 0;
+  padding-inline: 1rem 20%;
+}
+.c4p--about-modal .c4p--about-modal__body:not(.cds--modal-scroll-content) {
+  margin-bottom: 1.5rem;
+  padding-block-end: 0;
 }
 
 .c4p--about-modal .cds--modal-content--overflow-indicator {
@@ -3866,6 +3870,32 @@ p.c4p--about-modal__copyright-text:first-child {
   padding-left: 0.5rem;
 }
 
+.cds--data-table td.c4p--datagrid__expandable-row-cell + td,
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2) {
+  position: relative;
+}
+
+.cds--data-table td.c4p--datagrid__expandable-row-cell.c4p--datagrid__expandable-row-cell--is-expanded + td::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2)::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__expandable-row-cell + td::before {
+  position: absolute;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  bottom: -1px;
+  left: 0;
+  width: 1rem;
+  height: 1px;
+  background-color: var(--cds-layer-01, #f4f4f4);
+  content: "";
+  transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+.cds--data-table tr:hover td.c4p--datagrid__expandable-row-cell.c4p--datagrid__expandable-row-cell--is-expanded + td::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row:hover td.c4p--datagrid__expandable-row-cell + td::before,
+.cds--data-table .c4p--datagrid__expandable-row--hover td.c4p--datagrid__expandable-row-cell + td::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row:hover:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2)::before {
+  background-color: var(--cds-layer-hover);
+}
+
 .c4p--datagrid__carbon-row-expanded .c4p--datagrid__expandable-row-cell {
   border-bottom: none;
 }
@@ -4025,6 +4055,11 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky !important;
   z-index: 1;
   left: 0;
+  border-right: 1px solid var(--cds-layer-active-02, #c6c6c6);
+}
+
+.c4p--datagrid__right-sticky-column-header {
+  border-left: 1px solid var(--cds-layer-active-02, #c6c6c6);
 }
 
 .c4p--datagrid__left-sticky-column-cell.c4p--datagrid__left-sticky-column-cell--with-extra-select-column,
@@ -4496,6 +4531,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--datagrid .cds--data-table tbody tr:hover + .c4p--datagrid__expanded-row,
 .c4p--datagrid .c4p--datagrid__expanded-row:hover,
 .c4p--datagrid .c4p--datagrid__expandable-row--hover td {
+  border-top: none;
   background: var(--cds-layer-hover);
 }
 
@@ -4503,6 +4539,10 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--datagrid .cds--data-table td.c4p--datagrid__expanded-row-cell-wrapper,
 .c4p--datagrid .cds--data-table .c4p--datagrid__carbon-row-expanded td.c4p--datagrid__expandable-row-cell {
   border: none;
+}
+
+.c4p--datagrid .cds--data-table .c4p--datagrid__carbon-row-expanded:hover td:not(.c4p--datagrid__expandable-row-cell) {
+  border-bottom: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
 
 .c4p--datagrid .cds--data-table td.c4p--datagrid__expanded-row-cell-wrapper {
@@ -8397,6 +8437,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link {
   margin-top: 0.5rem;
+  color: var(--cds-link-inverse, #78a9ff);
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
   background-color: var(--cds-background-inverse-hover, #474747);

@@ -1,0 +1,12 @@
+{
+  "label": "Nav",
+  "package-config": {
+    "flags": {
+      "component": {
+        "Nav": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

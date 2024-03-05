@@ -55,6 +55,7 @@ const s = [
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
           { n: 'TruncatedList', s: ['c/TruncatedList'] },
           { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'Nav', s: ['c/Nav'] },
           { n: 'Decorator', s: ['c/Decorator'] },
           { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },

@@ -1,0 +1,12 @@
+{
+  "label": "Big-Numbers",
+  "package-config": {
+    "flags": {
+      "component": {
+        "BigNumbers": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

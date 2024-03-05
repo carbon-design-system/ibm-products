@@ -18,6 +18,7 @@ import {
   useDatagrid,
   useExpandedRow,
   useSelectRows,
+  useStickyColumn,
 } from '../../index';
 import { getBatchActions } from '../../Datagrid.stories';
 import styles from '../../_storybook-styles.scss';
@@ -193,6 +194,7 @@ const ExpandedRows = ({ ...args }) => {
       onRowExpand: (row, event) => console.log(row, event),
       ...args.defaultGridProps,
     },
+    useStickyColumn,
     useSelectRows,
     useExpandedRow
   );

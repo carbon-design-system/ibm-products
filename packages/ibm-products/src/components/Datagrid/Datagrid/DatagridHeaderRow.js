@@ -18,6 +18,7 @@ import {
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { useInitialColumnSort } from '../useInitialColumnSort';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -44,6 +45,7 @@ const ResizeHeader = ({
   dispatch,
   onColResizeEnd,
   resizerAriaLabel,
+  isFetching,
 }) => {
   // eslint-disable-next-line no-unused-vars
   const { role, ...headerProps } = resizerProps;
@@ -90,6 +92,7 @@ const ResizeHeader = ({
         type="range"
         defaultValue={originalCol.width}
         aria-label={resizerAriaLabel || 'Resize column'}
+        disabled={isFetching}
       />
       <span className={`${blockClass}__col-resize-indicator`} />
     </>
@@ -97,7 +100,8 @@ const ResizeHeader = ({
 };
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
-  const { resizerAriaLabel, isTableSortable, rows } = datagridState;
+  const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
+  useInitialColumnSort(datagridState);
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
@@ -223,6 +227,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     dispatch,
                     onColResizeEnd,
                     resizerAriaLabel,
+                    isFetching,
                   }}
                 />
               )}

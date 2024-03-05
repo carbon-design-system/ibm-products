@@ -1,9 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+
 import * as stories from './Datagrid.stories';
 import toolbarScreenshot from './storybook-assets/datagrid-actions-example.png';
 
-export const DocsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
@@ -440,6 +441,42 @@ return <Datagrid datagridState={datagridState} />;
         },
       },
       {
+        description: `Columns can also be initially sorted by providing a \`sortableColumn\` object to the \`initialState\`. The structure of
+        the \`sortableColumn\` property is as follows:
+\`
+{
+  id: string, // column id
+  order: string, // ASC | DESC
+}
+\`
+
+See example below: `,
+        source: {
+          code: `
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    ascendingSortableLabelText: 'none',
+    descendingSortableLabelText: 'ascending',
+    defaultSortableLabelText: 'descending',
+    initialState: {
+      sortableColumn: {
+        id: 'firstName', // column id
+        order: 'ASC' // sorting order
+      }
+    }
+  },
+  useSortableColumns
+);
+
+return <Datagrid datagridState={datagridState} />;
+          `,
+        },
+      },
+      {
         title: 'Sticky column',
         description: `Sticky columns can be useful when you have many columns that create a horizontal scroll and you have important data in the first or last column that you always want to be visible.
 - Include the \`useStickyColumn\` hook
@@ -475,3 +512,5 @@ return <Datagrid datagridState={datagridState} />;
     ]}
   />
 );
+
+export default DocsPage;

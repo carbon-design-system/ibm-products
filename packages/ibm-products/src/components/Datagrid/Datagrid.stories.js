@@ -32,7 +32,7 @@ import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
-import { DocsPage } from './Datagrid.docs-page';
+import DocsPage from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -354,11 +354,17 @@ export const SortableColumns = () => {
       ascendingSortableLabelText: 'ascending',
       descendingSortableLabelText: 'descending',
       defaultSortableLabelText: 'none',
+      initialState: {
+        sortableColumn: {
+          id: 'firstName',
+          order: 'ASC',
+        },
+      },
     },
     useSortableColumns
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 export const ActionsDropdown = () => {
@@ -496,7 +502,12 @@ export const BatchActions = () => {
     useStickyColumn
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <Datagrid
+      datagridState={{ ...datagridState }}
+      ariaToolbarLabel="batch actions toolbar"
+    />
+  );
 };
 
 export const DisableSelectRow = () => {

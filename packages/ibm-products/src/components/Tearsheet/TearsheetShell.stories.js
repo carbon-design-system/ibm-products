@@ -14,7 +14,11 @@ import {
 } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { Button } from '@carbon/react';
+import {
+  Button,
+  unstable__Slug as Slug,
+  unstable__SlugContent as SlugContent,
+} from '@carbon/react';
 
 // import mdx from './TearsheetShell.mdx';
 
@@ -28,7 +32,23 @@ export default {
   },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
+    influencer: {
+      control: {
+        type: 'boolean',
+      },
+    },
     portalTarget: { control: { disable: true } },
+    slug: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
 };
 
@@ -43,15 +63,42 @@ const dummyContent = (
       padding: '50px',
       height: '400px',
       // stylelint-disable-next-line color-named
-      background: 'pink',
     }}
   >
-    Tearsheet content
+    {Array.from({ length: 10 }, (_, k) => ({ key: `Paragraph-${k}` })).map(
+      ({ key }) => (
+        <p key={key}>
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+      )
+    )}
   </div>
 );
 
+const sampleSlug = (
+  <Slug className="slug-container" size="xs">
+    <SlugContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </SlugContent>
+  </Slug>
+);
+
 // Template.
-const Template = ({ open: _open, ...args }, context) => {
+const Template = ({ influencer, open: _open, slug, ...args }, context) => {
   const ref = useRef();
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
@@ -65,8 +112,17 @@ const Template = ({ open: _open, ...args }, context) => {
       <TearsheetShell
         className={className}
         {...args}
+        influencer={
+          influencer && (
+            <div className="tearsheet-stories__dummy-content-block">
+              Influencer
+            </div>
+          )
+        }
         open={open}
         onClose={() => setOpen(false)}
+        slug={slug && sampleSlug}
+        title={'Tearsheet title'}
       >
         {dummyContent}
       </TearsheetShell>

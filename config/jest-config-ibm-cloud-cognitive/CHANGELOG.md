@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.5](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.4...jest-config-ibm-cloud-cognitive@1.1.5) (2024-02-27)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+## [1.1.4](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.3...jest-config-ibm-cloud-cognitive@1.1.4) (2024-02-20)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
 ## [1.1.3](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.2...jest-config-ibm-cloud-cognitive@1.1.3) (2024-02-09)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

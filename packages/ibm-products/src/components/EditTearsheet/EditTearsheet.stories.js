@@ -13,6 +13,7 @@ import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import DocsPage from './EditTearsheet.docs-page';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
+import { slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
   title: getStoryTitle(EditTearsheet.displayName),
@@ -25,6 +26,7 @@ export default {
     influencer: { control: { disable: true } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
+    ...slugArgTypes(),
   },
   parameters: { styles, docs: { page: DocsPage } },
 };

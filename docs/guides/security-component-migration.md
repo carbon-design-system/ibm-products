@@ -1,6 +1,6 @@
-# Carbon for IBM Products: v2 migration guide for Security components
+<!-- markdownlint-disable MD033 -->
 
-<!-- markdownlint-disable MD033 MD036 -->
+# Carbon for IBM Products: v2 migration guide for Security components
 
 This document will review in detail the changes in @carbon/ibm-security to
 Carbon for IBM Products v2. Because Carbon for IBM Products v2 uses Carbon v11,
@@ -39,31 +39,77 @@ v2 will receive weekly releases occurring every Tuesday morning.
 
 ### BigNumbers
 
-_Renamed from ICA. Note: ICASkeleton was not migrated - removed in favor of the
-BigNumbers loading prop_
+Renamed from **ICA**.
 
 | Old prop | New prop       | Change                                                                                            |
 | -------- | -------------- | ------------------------------------------------------------------------------------------------- |
 | —        | fractionDigits | Optional value to control the max/min fractional digits used when truncating the value and total. |
-| —        | loading        | Specify if the BigNumbers is in a loading state - shows component in a skeleton fashion.          |
+| —        | loading        | Set to `true` to show the loading skeleton.                                                       |
+
+**ICASkeleton** was deprecated. Use the `loading` prop above, instead.
 
 ---
 
 ### Decorator
 
-_Info here_
+[Info here]
 
-| Old prop          | New prop      | Change                             |
-| ----------------- | ------------- | ---------------------------------- |
-| active            | theme         | —                                  |
-| —                 | disabled      | —                                  |
-| —                 | kind          | —                                  |
-| inline            | small         | —                                  |
-| midLineTruncation | truncateValue | —                                  |
-| noIcon            | hideIcon      | —                                  |
-| —                 | onClickLabel  | —                                  |
-| title             | valueTitle    | —                                  |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop   |
+| :--------------- |
+| children         |
+| className        |
+| score            |
+| scoreDescription |
+| scoreThresholds  |
+| value \*         |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop          | New prop      |                                                                                 |
+| :---------------- | :------------ | :------------------------------------------------------------------------------ |
+| active            | theme         | Renamed.                                                                        |
+| href              | href          | `kind="link"` now required.                                                     |
+| inline            | small         | Renamed.                                                                        |
+| midLineTruncation | truncateValue | Adds options `"start"` and `"end"` to the existing `{ maxLength, front, back }` |
+| noIcon            | hideIcon      | Renamed.                                                                        |
+| onClick           | onClick       | Available only when `kind` is `"link"` or `"single-button"`                     |
+| onContextMenu     | onContextMenu | Available only when `kind` is `"link"` or `"single-button"`                     |
+| title             | valueTitle    | Will override the value's default `title` only.                                 |
+| type              | label \*      | Renamed.                                                                        |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop           |                                                                                                                    |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------- |
+| disabled           | Applies only if `kind="single-button\|dual-button"`                                                                |
+| kind               | Defines type of Decorator to display: `"default"` (default value), `"link"`, `"single-button"`, or `"dual-button"` |
+| onClickLabel       | Available only when `kind="dual-button"`                                                                           |
+| onClickValue       | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuLabel | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuValue | Available only when `kind="dual-button"`                                                                           |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated&nbsp;prop |                                                                                                                       |
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| fitValue             | Is now the default behavior.                                                                                          |
+| noBorderRadius       | The Carbon 11 design refresh no longer supports this.                                                                 |
+| _noType_             | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+
+| Old prop          | New prop      |                                    |
+| :---------------- | :------------ | :--------------------------------- |
+| active            | theme         |                                    |
+| —                 | disabled      |                                    |
+| —                 | kind          |                                    |
+| inline            | small         |                                    |
+| midLineTruncation | truncateValue |                                    |
+| noIcon            | hideIcon      |                                    |
+| —                 | onClickLabel  |                                    |
+| title             | valueTitle    |                                    |
 | type              | label         | Renamed and is no longer required. |
+|                   |               |                                    |
 | fitValue          | —             | Deprecated                         |
 | noBorderRadius    | —             | Deprecated                         |
 | noType            | —             | Deprecated                         |
@@ -72,61 +118,61 @@ _Info here_
 
 ### DelimitedList
 
-_Note: Append count functionality was not migrated as its implementation is
-inconsistent with the description._
+Note: Append count functionality was not migrated as its implementation never
+worked consistently and didn't match the description.
 
 | Old prop | New prop | Change    |
-| -------- | -------- | --------- |
+| :------- | :------- | :-------- |
 | —        | —        | No change |
 
 ---
 
 ### DescriptionList
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change                                             |
-| -------- | -------- | -------------------------------------------------- |
+| :------- | :------- | :------------------------------------------------- |
 | bordered | —        | Deprecated prop removed, use `border` boolean prop |
 
 ---
 
 ### FilterPanel
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### IconButtonBar
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Nav
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### ScrollGradient
 
-_Info here_
+[Info here]
 
 | Old prop  | New prop | Change                                                                 |
-| --------- | -------- | ---------------------------------------------------------------------- |
+| :-------- | :------- | :--------------------------------------------------------------------- |
 | direction | —        | Removed. Component should manage both horizontal and vertical scrolls. |
 | color     | color    | No longer required                                                     |
 
@@ -134,20 +180,20 @@ _Info here_
 
 ### SearchBar
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### StatusIndicator
 
-_Info here_
+[Info here]
 
 | Old prop               | New prop   | Change             |
-| ---------------------- | ---------- | ------------------ |
+| :--------------------- | :--------- | :----------------- |
 | children               | children   | \* Is now required |
 | —                      | onRetry    | New                |
 | —                      | retryLabel | New                |
@@ -157,10 +203,10 @@ _Info here_
 
 ### StatusIndicatorStep
 
-_Renamed from 'StatusStep'_
+[Renamed from 'StatusStep']
 
 | Old prop | New prop     | Change                                                                                 |
-| -------- | ------------ | -------------------------------------------------------------------------------------- |
+| :------- | :----------- | :------------------------------------------------------------------------------------- |
 | status   | status       | \* Is now required.<br/>**New values:**<br />"active", "error", "finished", "inactive" |
 | errorMsg | errorMessage | Renamed                                                                                |
 | label    | —            | Deprecated                                                                             |
@@ -169,20 +215,20 @@ _Renamed from 'StatusStep'_
 
 ### StringFormatter
 
-_Info here_
+[Info here]
 
-| Old prop         | New prop         | Change                                                                                                                                                                |
-| ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| toolTipDirection | toolTipDirection | **New values:** <br/>"top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right", "left", "left-top", "left-bottom", "right", "right-top", "right-bottom" |
+| Old prop         | New prop         | Change                                                                                                                                                           |
+| :--------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| toolTipDirection | toolTipDirection | **New values:** "top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right", "left", "left-top", "left-bottom", "right", "right-top", "right-bottom" |
 
 ---
 
 ### TruncatedList
 
-_Info here_
+[Info here]
 
 | Old prop              | New prop            | Change             |
-| --------------------- | ------------------- | ------------------ |
+| :-------------------- | :------------------ | :----------------- |
 | children              | children            | \* Is now required |
 | collapsedItemLimit    | collapsedItemsLimit | Renamed            |
 | expandedItemLimit     | expandedItemsLimit  | Renamed            |
@@ -199,12 +245,12 @@ _Info here_
 ## Deprecated components and their replacement mappings
 
 | Component           | Replacement                                   |
-| ------------------- | --------------------------------------------- |
+| :------------------ | :-------------------------------------------- |
 | Card                | View replacement [here](#card)                |
-| DataDecorator       | View replacement [here](#xxx)                 |
+| DataDecorator       | View replacement [here](#datadecorator)       |
 | DataTablePagination | View replacement [here](#datatablepagination) |
-| ErrorPage           | View replacement [here](#xxx)                 |
-| Header              | View replacement [here](#xxx)                 |
+| ErrorPage           | View replacement [here](#errorpage)           |
+| Header              | View replacement [here](#header)              |
 | Icon                | View replacement [here](#icon)                |
 | IconButton          | View replacement [here](#iconbutton)          |
 | Panel               | View replacement [here](#panel)               |
@@ -220,170 +266,170 @@ _Info here_
 
 ### Card
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### DataDecorator
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### DataTablePagination
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### ErrorPage
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Header
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Icon
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### IconButton
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Panel
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### PanelV2
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### ProfileImage
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Shell
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### SummaryCard
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Tearsheet
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### TearsheetSmall
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Toolbar
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### TrendingCard
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---
 
 ### Wizard
 
-_Info here_
+[Info here]
 
 | Old prop | New prop | Change |
-| -------- | -------- | ------ |
+| :------- | :------- | :----- |
 | —        | —        | —      |
 
 ---

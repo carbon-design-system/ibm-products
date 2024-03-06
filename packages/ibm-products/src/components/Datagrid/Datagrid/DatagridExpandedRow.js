@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,8 +18,8 @@ const DatagridExpandedRow =
 
     const toggleParentHoverClass = (event, eventType) => {
       /* istanbul ignore else */
-      if (event?.target?.parentNode?.previousElementSibling) {
-        const parentNode = event.target.parentNode.previousElementSibling;
+      if (event?.target?.closest('tr').previousElementSibling) {
+        const parentNode = event.target.closest('tr').previousElementSibling;
         if (eventType === 'enter') {
           parentNode.classList.add(`${blockClass}__expandable-row--hover`);
         } else {

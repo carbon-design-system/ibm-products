@@ -61,7 +61,15 @@
   + .#{$block-class}__expanded-row,
 .#{$block-class} .#{$block-class}__expanded-row:hover,
 .#{$block-class} .#{$block-class}__expandable-row--hover td {
+  border-top: none;
   background: $layer-hover;
+}
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  .#{$block-class}__carbon-row-expandable
+  td {
+  border-top: none;
 }
 
 .#{$block-class}
@@ -77,6 +85,23 @@
   .#{$block-class}__carbon-row-expanded
   td.#{$block-class}__expandable-row-cell {
   border: none;
+}
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  .#{$block-class}__carbon-row-expanded:hover
+  td:not(.#{$block-class}__expandable-row-cell) {
+  border-bottom: 1px solid $border-subtle;
+}
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  .#{$block-class}__carbon-row-expanded:hover
+  + .#{$block-class}__expanded-row
+  .#{$block-class}__expanded-row-content,
+.#{$block-class}__expanded-row:hover .#{$block-class}__expanded-row-content {
+  background-color: $layer-hover;
+  transition: background-color $duration--fast-01 motion(entrance, productive);
 }
 
 .#{$block-class}

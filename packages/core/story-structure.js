@@ -57,6 +57,7 @@ const s = [
           { n: 'Delimited list', s: ['c/DelimitedList'] },
           { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Nav', s: ['c/Nav'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
           {

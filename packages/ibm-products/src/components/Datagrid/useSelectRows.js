@@ -100,7 +100,7 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const selectDisabled = isFetching || row.getRowProps().selectDisabled;
+  const selectDisabled = isFetching || row.getRowProps().disabled;
   const { onChange, title, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =

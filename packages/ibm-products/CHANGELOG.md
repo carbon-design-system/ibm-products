@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.71.0...@carbon/ibm-products@1.72.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* add aria-label to datagrid toolbar ([#4378](https://github.com/carbon-design-system/ibm-products/issues/4378)) ([5c423e3](https://github.com/carbon-design-system/ibm-products/commit/5c423e360403d159ea8631e5376e4d0373d10148))
+* **DataGrid:** add support for selectrow and nestedrow v1 ([#4360](https://github.com/carbon-design-system/ibm-products/issues/4360)) ([35c07fd](https://github.com/carbon-design-system/ibm-products/commit/35c07fd6e281f575d386644a762c0d768758049a))
+* invalid selectDisabled prop ([#4459](https://github.com/carbon-design-system/ibm-products/issues/4459)) ([525fa6f](https://github.com/carbon-design-system/ibm-products/commit/525fa6f7bd55eb150c6c60d41406265de13add4c))
+* remove false role from datagrid ([#4438](https://github.com/carbon-design-system/ibm-products/issues/4438)) ([44433e7](https://github.com/carbon-design-system/ibm-products/commit/44433e7a34132e96106903ff2dcc3a4ee842877d))
+* update to Carbon 10 compatible versions to latest ([#4403](https://github.com/carbon-design-system/ibm-products/issues/4403)) ([1ecb2ab](https://github.com/carbon-design-system/ibm-products/commit/1ecb2abdf07c27b64d93b42c2304f9cf7516fd2a))
+
+
+### Features
+
+* **Datagrid:** add new multi select filter type ([#4364](https://github.com/carbon-design-system/ibm-products/issues/4364)) ([c2f579a](https://github.com/carbon-design-system/ibm-products/commit/c2f579ae1c63cb54c530b04d040c487e129d75d4))
+* **Datagrid:** add support for initial sortable col ([#4424](https://github.com/carbon-design-system/ibm-products/issues/4424)) ([cb262d6](https://github.com/carbon-design-system/ibm-products/commit/cb262d61d94b179e2bb1de2047ae6f86fab5b146))
+* sort icon appear in the Actions column on Datagrid [#4339](https://github.com/carbon-design-system/ibm-products/issues/4339) ([#4347](https://github.com/carbon-design-system/ibm-products/issues/4347)) ([402ae78](https://github.com/carbon-design-system/ibm-products/commit/402ae781447d8c71fa28c7f3a6ae48d73a5f71cc))
+* the button bar covers the last filter options for Datagrid filter panel [#4337](https://github.com/carbon-design-system/ibm-products/issues/4337) ([#4351](https://github.com/carbon-design-system/ibm-products/issues/4351)) ([1948001](https://github.com/carbon-design-system/ibm-products/commit/1948001a3c5f16c3bcb91089f9526ebceeaafeba))
+
+
+
+
+
 # [1.71.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.70.0...@carbon/ibm-products@1.71.0) (2024-02-20)
 
 

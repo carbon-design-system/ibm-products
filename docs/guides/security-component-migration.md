@@ -376,8 +376,11 @@ worked consistently and didn't match the description.
 
 ### SummaryCard
 
-[Info here] | Old prop | New prop | Change | | :------- | :------- | :----- | |
-— test | — | — |
+[Info here]
+
+| Old prop | New prop | Change |
+| :------- | :------- | :----- |
+| —        | —        | —      |
 
 ---
 

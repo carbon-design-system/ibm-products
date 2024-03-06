@@ -14,7 +14,7 @@ import {
   Theme,
 } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -22,7 +22,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -136,34 +135,16 @@ export let AboutModal = React.forwardRef(
     }: AboutModalProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
-    const [hasScrollingContent, setHasScrollingContent] = useState(true);
     const bodyRef = useRef<HTMLElement | null | undefined>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
-
-    const handleResize = () => {
-      if (!bodyRef.current?.clientHeight) {
-        return;
-      }
-      setHasScrollingContent(
-        // if our scroll height exceeds the client height enable scrolling
-        bodyRef.current?.clientHeight <
-          (hasScrollingContent
-            ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
-              bodyRef.current?.scrollHeight - 32
-            : bodyRef.current?.scrollHeight)
-      );
-    };
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
     useEffect(() => {
       bodyRef.current = contentRef.current?.parentElement;
     }, [bodyRef]);
-
-    // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeObserver(bodyRef, handleResize);
 
     return renderPortalUse(
       <ComposedModal
@@ -187,10 +168,7 @@ export let AboutModal = React.forwardRef(
           labelClassName={`${blockClass}__title`}
         />
         <ModalBody
-          aria-label={hasScrollingContent ? '' : undefined}
-          aria-labelledby={hasScrollingContent ? contentId : undefined}
           className={`${blockClass}__body`}
-          hasScrollingContent={hasScrollingContent}
         >
           <div
             className={`${blockClass}__body-content`}

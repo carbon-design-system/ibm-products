@@ -479,9 +479,11 @@ const useFilters = ({
         });
         return updatedFilters[0];
       };
-      setFiltersObjectArray(savedFilters);
-      const filterStateCopy = cleanFilters(filtersState);
-      setFiltersState(filterStateCopy);
+      if (savedFilters && savedFilters.length) {
+        setFiltersObjectArray(savedFilters);
+        const filterStateCopy = cleanFilters(filtersState) ?? [];
+        setFiltersState(filterStateCopy);
+      }
     }
     if (!isFetching) {
       setFetchingReset(false);

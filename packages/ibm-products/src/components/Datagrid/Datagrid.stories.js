@@ -298,6 +298,8 @@ export const SelectableRow = () => {
       emptyStateTitle,
       emptyStateDescription,
       onRowSelect: (row, event) => console.log(row, event),
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id === '0',
     },
     useSelectRows,
     useStickyColumn

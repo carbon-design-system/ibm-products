@@ -174,7 +174,7 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
-          'c/InlineTip',
+          'c/Inlinetip',
           {
             n: 'Interstitial Screen',
             s: [

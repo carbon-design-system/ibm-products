@@ -46,7 +46,6 @@
         position: sticky;
         z-index: 1;
         left: 0;
-        background-color: $layer-01;
       }
     }
 
@@ -70,7 +69,6 @@
       &.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         left: 0;
-        background-color: $layer-01;
       }
     }
 
@@ -339,6 +337,21 @@
     }
   }
 
+  .#{$block-class}__carbon-row td {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-01;
+  }
+
+  .#{$block-class}__carbon-row:hover td {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-hover-01;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--data-table--selected td {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-selected-01;
+  }
+
   .#{c4p-settings.$carbon-prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
   }
@@ -432,8 +445,6 @@
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $layer-selected-hover;
-
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;
     background-color: $background-selected-hover;

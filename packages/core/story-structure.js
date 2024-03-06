@@ -53,23 +53,28 @@ const s = [
             ],
           },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
-          { n: 'TruncatedList', s: ['c/TruncatedList'] },
-          { n: 'DelimitedList', s: ['c/DelimitedList'] },
           { n: 'Decorator', s: ['c/Decorator'] },
+          { n: 'Delimited list', s: ['c/DelimitedList'] },
           { n: 'Description list', s: ['c/DescriptionList'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Nav', s: ['c/Nav'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
           { n: 'Scroll gradient', s: ['c/ScrollGradient'] },
+          {
+            n: 'Search bar',
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
+          },
           { n: 'Side panel', s: ['c/SidePanel'] },
-          { n: 'String formatter', s: ['c/StringFormatter'] },
-          { n: 'Tag set', s: ['c/TagSet'] },
-          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          { n: 'User avatar', s: ['c/UserAvatar'] },
           {
             n: 'StatusIndicator',
             s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
           },
+          { n: 'String formatter', s: ['c/StringFormatter'] },
+          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'Truncated list', s: ['c/TruncatedList'] },
+          { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },
       {
@@ -77,6 +82,7 @@ const s = [
         s: [
           { n: 'Add Select', s: ['c/SingleAddSelect', 'c/MultiAddSelect'] },
           { n: 'About modal', s: ['c/AboutModal'] },
+          { n: 'Cascade', s: ['c/Cascade'] },
           {
             n: 'Create flows',
             s: [
@@ -87,6 +93,7 @@ const s = [
               'c/CreateSidePanel',
             ],
           },
+          { n: 'Drag and drop', s: ['c/DragAndDrop'] },
           {
             n: 'Edit and update',
             s: [
@@ -122,15 +129,10 @@ const s = [
           { n: 'Notifications', s: ['c/NotificationsPanel'] },
           { n: 'Remove', s: ['c/RemoveModal'] },
           { n: 'Saving', s: ['c/Saving'] },
-          {
-            n: 'Search bar',
-            s: ['c/SearchBar', 'c/SearchBarScopes'],
-          },
           { n: 'Status icons', s: ['c/StatusIcon'] },
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
           { n: 'Web terminal', s: ['c/WebTerminal'] },
-          { n: 'Cascade', s: ['c/Cascade'] },
         ],
       },
       {
@@ -146,10 +148,10 @@ const s = [
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
-          'c/TooltipTrigger',
-          'c/TearsheetShell',
           'c/SimpleHeader',
           'c/SteppedAnimatedMedia',
+          'c/TooltipTrigger',
+          'c/TearsheetShell',
         ],
       },
       {
@@ -174,6 +176,7 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
+          'c/Inlinetip',
           {
             n: 'Interstitial Screen',
             s: [
@@ -182,8 +185,7 @@ const s = [
               'c/InterstitialScreenViewModule',
             ],
           },
-          'c/InlineTip',
-          'c/NonLinearReading',
+          { n: 'Non-linear reading', s: ['c/NonLinearReading'] },
         ],
       },
     ],

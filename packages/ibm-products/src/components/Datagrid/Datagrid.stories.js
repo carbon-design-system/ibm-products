@@ -300,6 +300,8 @@ export const SelectableRow = () => {
       onAllRowSelect: (rows, event) =>
         console.log('onAllRowsClick called', rows, event),
       batchActionMenuButtonLabel: 'More',
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id === '0',
     },
     useSelectRows,
     useStickyColumn

@@ -39,6 +39,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
+import { TearsheetNarrow } from './TearsheetNarrow';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -236,7 +237,7 @@ const Template = ({ actions, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, slug, ...args }) => {
+const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -284,6 +285,8 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
     return action;
   });
 
+  const VariableSizeTearsheet = mixedSizes ? TearsheetNarrow : Tearsheet;
+
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
@@ -303,9 +306,11 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
         <Button onClick={() => setOpen2(!open2)}>
           Toggle&nbsp;tearsheet&nbsp;2
         </Button>
-        <Button onClick={() => setOpen3(!open3)}>
-          Toggle&nbsp;tearsheet&nbsp;3
-        </Button>
+        {!mixedSizes && (
+          <Button onClick={() => setOpen3(!open3)}>
+            Toggle&nbsp;tearsheet&nbsp;3
+          </Button>
+        )}
       </ButtonSet>
       <div ref={ref}>
         <Tearsheet
@@ -338,7 +343,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
             />
           </div>
         </Tearsheet>
-        <Tearsheet
+        <VariableSizeTearsheet
           {...args}
           actions={wiredActions2}
           headerActions={
@@ -367,24 +372,26 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
               labelText="Enter an important value here"
             />
           </div>
-        </Tearsheet>
-        <Tearsheet
-          {...args}
-          actions={wiredActions3}
-          title="Tearsheet 3"
-          open={open3}
-          onClose={() => setOpen3(false)}
-          selectorPrimaryFocus="#stacked-input-3"
-          slug={slug && sampleSlug}
-        >
-          <div className="tearsheet-stories__dummy-content-block">
-            Main content 3
-            <TextInput
-              id="stacked-input-3"
-              labelText="Enter an important value here"
-            />
-          </div>
-        </Tearsheet>
+        </VariableSizeTearsheet>
+        {!mixedSizes && (
+          <Tearsheet
+            {...args}
+            actions={wiredActions3}
+            title="Tearsheet 3"
+            open={open3}
+            onClose={() => setOpen3(false)}
+            selectorPrimaryFocus="#stacked-input-3"
+            slug={slug && sampleSlug}
+          >
+            <div className="tearsheet-stories__dummy-content-block">
+              Main content 3
+              <TextInput
+                id="stacked-input-3"
+                labelText="Enter an important value here"
+              />
+            </div>
+          </Tearsheet>
+        )}
       </div>
     </>
   );
@@ -453,6 +460,19 @@ export const fullyLoaded = prepareStory(Template, {
 export const stacked = prepareStory(StackedTemplate, {
   storyName: 'Stacking tearsheets',
   args: {
+    closeIconDescription,
+    description,
+    height: 'lower',
+    influencer,
+    label,
+    actions: 7,
+  },
+});
+
+export const stackedMixedSizes = prepareStory(StackedTemplate, {
+  storyName: 'Stacking tearsheets, different sizes',
+  args: {
+    mixedSizes: true,
     closeIconDescription,
     description,
     height: 'lower',

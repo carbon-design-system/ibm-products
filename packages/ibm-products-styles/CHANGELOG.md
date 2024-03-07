@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.28.0...@carbon/ibm-products-styles@2.29.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* about modal layout ([#4454](https://github.com/carbon-design-system/ibm-products/issues/4454)) ([c0cf58a](https://github.com/carbon-design-system/ibm-products/commit/c0cf58a1e78a4ee8f66b551d39b5705fecd4674e))
+* **Datagrid:** add missing borders to frozen header cells ([#4453](https://github.com/carbon-design-system/ibm-products/issues/4453)) ([72c38c8](https://github.com/carbon-design-system/ibm-products/commit/72c38c8325ebf40d28da8da3c192b5761dc5f1e2))
+* **Datagrid:** align nested/expanded row borders with text content ([#4388](https://github.com/carbon-design-system/ibm-products/issues/4388)) ([7e9fc3f](https://github.com/carbon-design-system/ibm-products/commit/7e9fc3f8e7df22078ebfafd4c6da6d9f1638a10f))
+* **TagSet:** address color contrast issue in overflow link button ([#4449](https://github.com/carbon-design-system/ibm-products/issues/4449)) ([5abfdd5](https://github.com/carbon-design-system/ibm-products/commit/5abfdd57fbc5047c62cc5e450e08021b79598f65))
+
+
+### Features
+
+* the button bar covers the last filter options for Datagrid filter panel [#4337](https://github.com/carbon-design-system/ibm-products/issues/4337) ([#4350](https://github.com/carbon-design-system/ibm-products/issues/4350)) ([c8392dc](https://github.com/carbon-design-system/ibm-products/commit/c8392dc1d1f756e6e9f2d8da3ac32ed447186d2b))
+* the frozen column doesn't follow the hover color on DataGrid [#4338](https://github.com/carbon-design-system/ibm-products/issues/4338) ([#4458](https://github.com/carbon-design-system/ibm-products/issues/4458)) ([176441c](https://github.com/carbon-design-system/ibm-products/commit/176441c38eca78cf7a29e2700a06d010e2371403))
+
+
+
+
+
+# [2.28.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.1...@carbon/ibm-products-styles@2.28.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* header border issue introduced with ai slug ([#4385](https://github.com/carbon-design-system/ibm-products/issues/4385)) ([76a0f82](https://github.com/carbon-design-system/ibm-products/commit/76a0f8237a12bb043c523fe7132cf62b6757fc30))
+* side panel slug and close position ([#4426](https://github.com/carbon-design-system/ibm-products/issues/4426)) ([2d73177](https://github.com/carbon-design-system/ibm-products/commit/2d73177d30e73160e126136363863ae7cb34f8fb))
+* tearsheet overlay ([#4421](https://github.com/carbon-design-system/ibm-products/issues/4421)) ([8a93722](https://github.com/carbon-design-system/ibm-products/commit/8a937221e0744bb959dd2921428907bb43529f1d))
+
+
+### Features
+
+* **Decorator:** new component Decorator ([#4170](https://github.com/carbon-design-system/ibm-products/issues/4170)) ([9cea98a](https://github.com/carbon-design-system/ibm-products/commit/9cea98a32f2d169763c52d26bf123b20e886911c)), closes [#4348](https://github.com/carbon-design-system/ibm-products/issues/4348) [#4188](https://github.com/carbon-design-system/ibm-products/issues/4188) [#4227](https://github.com/carbon-design-system/ibm-products/issues/4227) [#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)
+* **DescriptionList:** new component DescriptionList ([#4208](https://github.com/carbon-design-system/ibm-products/issues/4208)) ([0a55d40](https://github.com/carbon-design-system/ibm-products/commit/0a55d4092668355828cda5e44538e365baca9f2d))
+* new component status indicator ([#4419](https://github.com/carbon-design-system/ibm-products/issues/4419)) ([79c9794](https://github.com/carbon-design-system/ibm-products/commit/79c9794947fe6d58936fd4cf8a279f81870f8d5e))
+
+
+
+
+
+## [2.27.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.0...@carbon/ibm-products-styles@2.27.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* move ai gradient to content ([#4381](https://github.com/carbon-design-system/ibm-products/issues/4381)) ([b1d63f4](https://github.com/carbon-design-system/ibm-products/commit/b1d63f4e944b5e403a8efc17cd71aed200480a4e))
+
+
+
+
+
+# [2.27.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.26.0...@carbon/ibm-products-styles@2.27.0) (2024-02-21)
+
+
+### Features
+
+* **Datagrid:** apply latest ai gradients to Datagrid ([#4377](https://github.com/carbon-design-system/ibm-products/issues/4377)) ([3702c93](https://github.com/carbon-design-system/ibm-products/commit/3702c93bd2cba587ecea6e441dcf0fd204f7ad95))
+* Modal ai updates ([#4362](https://github.com/carbon-design-system/ibm-products/issues/4362)) ([8feb304](https://github.com/carbon-design-system/ibm-products/commit/8feb30433371c129652b85f357c3c89de915949a))
+* **useravatar:** image implementation ([#4355](https://github.com/carbon-design-system/ibm-products/issues/4355)) ([accfa2d](https://github.com/carbon-design-system/ibm-products/commit/accfa2d7736c3662c88458f2077d6e808453f4df))
+
+
+
+
+
+# [2.26.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.25.0...@carbon/ibm-products-styles@2.26.0) (2024-02-20)
+
+
+### Bug Fixes
+
+* minor changes for cross browser compatibility ([#4321](https://github.com/carbon-design-system/ibm-products/issues/4321)) ([c912366](https://github.com/carbon-design-system/ibm-products/commit/c9123663026f3855cbb52728a68859633bde943a))
+* update Carbon 11 compatible versions to latest ([#4343](https://github.com/carbon-design-system/ibm-products/issues/4343)) ([eee92d5](https://github.com/carbon-design-system/ibm-products/commit/eee92d57859056e07851607e67f5d81a00c3c57a))
+
+
+### Features
+
+*  Tearsheet ai ([#4215](https://github.com/carbon-design-system/ibm-products/issues/4215)) ([6b13f3f](https://github.com/carbon-design-system/ibm-products/commit/6b13f3f6db5481761a1e60853197576abb9c7833))
+* **BigNumbers:** new component BigNumbers ([#4174](https://github.com/carbon-design-system/ibm-products/issues/4174)) ([8053304](https://github.com/carbon-design-system/ibm-products/commit/80533047724d9a3227285110edaef9d291244d44))
+* **SidePanel:** initial reduced motion work for side panel opacity ([#4318](https://github.com/carbon-design-system/ibm-products/issues/4318)) ([378f719](https://github.com/carbon-design-system/ibm-products/commit/378f71975b7f30a4a06230b4a9cd2d73733cf0de))
+* **StringFormatter:** new component StringFormatter ([#4249](https://github.com/carbon-design-system/ibm-products/issues/4249)) ([74d67d0](https://github.com/carbon-design-system/ibm-products/commit/74d67d09f3d84e85e238eb9400d5114ba69c9518))
+* **UserAvatar:** implementation of name,size props ([#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)) ([a4e1a21](https://github.com/carbon-design-system/ibm-products/commit/a4e1a210d6de758af7845c9b667157932e902cfe))
+
+
+
+
+
+# [2.25.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.24.0...@carbon/ibm-products-styles@2.25.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* use flex-start instead of start and update `DatagridSlug` return ([#4307](https://github.com/carbon-design-system/ibm-products/issues/4307)) ([54112ea](https://github.com/carbon-design-system/ibm-products/commit/54112ea5eb119fe2fed7f62d97307d28c4367d30))
+* **UserAvatar:** improve interactions ([#4298](https://github.com/carbon-design-system/ibm-products/issues/4298)) ([d27dd07](https://github.com/carbon-design-system/ibm-products/commit/d27dd07ce98f9d060116e11e9a0e2ebc64d22a3b))
+
+
+### Features
+
+* **Datagrid:** add ai slug support for rows ([#4229](https://github.com/carbon-design-system/ibm-products/issues/4229)) ([3fd6ca3](https://github.com/carbon-design-system/ibm-products/commit/3fd6ca34c7451d72335807f74114cfe8dbf62741))
+* **FullPageError:** added support for 403 and 404 variants ([#4304](https://github.com/carbon-design-system/ibm-products/issues/4304)) ([4cd99ea](https://github.com/carbon-design-system/ibm-products/commit/4cd99ea17cd223a5fd9bbcc5a5d00bc3f96cb6d8))
+
+
+
+
+
 # [2.24.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.23.0...@carbon/ibm-products-styles@2.24.0) (2024-02-09)
 
 

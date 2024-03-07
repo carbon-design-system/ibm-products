@@ -15,10 +15,10 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-import { User, Group } from '@carbon/react/icons';
-
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
+import { User } from '@carbon/react/icons';
+import '../../global/js/utils/props-helper';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -47,9 +47,8 @@ const componentName = 'UserAvatar';
  */
 
 const defaults = {
-  renderIcon: () => <User size={32} />,
+  size: 'md',
   tooltipAlignment: 'bottom',
-  tooltipText: 'Thomas J. Watson',
 };
 
 export let UserAvatar = React.forwardRef(
@@ -58,9 +57,13 @@ export let UserAvatar = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       backgroundColor,
       className,
+      image,
+      imageDescription,
+      name,
       /* TODO: add other props for UserAvatar, with default values if needed */
-      renderIcon = defaults.renderIcon,
-      tooltipText = defaults.tooltipText,
+      renderIcon: RenderIcon,
+      size = defaults.size,
+      tooltipText,
       tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
@@ -68,27 +71,47 @@ export let UserAvatar = React.forwardRef(
     ref
   ) => {
     const carbonPrefix = usePrefix();
-    const icons = {
-      user: {
-        md: <User size={32} />,
-      },
-      group: {
-        md: <Group size={32} />,
-      },
+    const iconSize = {
+      sm: 16,
+      md: 20,
+      lg: 24,
+      xl: 32,
     };
-    const getItem = (renderIcon) => {
-      if (renderIcon === User) {
-        return icons.user['md'];
-      } else if (renderIcon === Group) {
-        return icons.group['md'];
-      } else {
-        return renderIcon;
+    const formatInitials = () => {
+      const parts = name.split(' ');
+      const firstChar = parts[0].charAt(0).toUpperCase();
+      const secondChar = parts[0].charAt(1).toUpperCase();
+      if (parts.length === 1) {
+        return firstChar + secondChar;
       }
+      const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
+      const initials = [firstChar];
+      if (lastChar) {
+        initials.push(lastChar);
+      }
+      return ''.concat(...initials);
+    };
+    const getItem = () => {
+      const iconProps = { size: iconSize[size] };
+      if (image) {
+        return (
+          <img
+            alt={imageDescription}
+            src={image}
+            className={`${blockClass}__photo ${blockClass}__photo--${size}`}
+          />
+        );
+      }
+      if (RenderIcon) {
+        return <RenderIcon {...iconProps} />;
+      }
+      if (name) {
+        return formatInitials();
+      }
+      return <User {...iconProps} />;
     };
 
-    const SetItem = getItem(renderIcon);
-
-    const renderUserAvatar = () => (
+    const Avatar = () => (
       <div
         {
           // Pass through any other property values as HTML attributes.
@@ -98,6 +121,7 @@ export let UserAvatar = React.forwardRef(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
           `${blockClass}--${backgroundColor}`,
+          `${blockClass}--${size}`,
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
             // switched classes dependant on props or state
@@ -108,24 +132,24 @@ export let UserAvatar = React.forwardRef(
         role="img"
         {...getDevtoolsProps(componentName)}
       >
-        <SetItem />
+        {getItem()}
       </div>
     );
 
-    return (
-      SetItem &&
-      (tooltipText ? (
+    if (tooltipText) {
+      return (
         <Tooltip
           align={tooltipAlignment}
           label={tooltipText}
           className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
-          <TooltipTrigger>{renderUserAvatar()}</TooltipTrigger>
+          <TooltipTrigger>
+            <Avatar />
+          </TooltipTrigger>
         </Tooltip>
-      ) : (
-        renderUserAvatar()
-      ))
-    );
+      );
+    }
+    return <Avatar />;
   }
 );
 
@@ -144,16 +168,30 @@ UserAvatar.propTypes = {
    * Provide the background color need to be set for UserAvatar.
    */
   backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
-
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
+  /**
+   * When passing the image prop, supply a full path to the image to be displayed.
+   */
+  image: PropTypes.string,
+  /**
+   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+   */
+  imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
+  /**
+   * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
+   */
+  name: PropTypes.string,
   /**
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Set the size of the avatar circle
+   */
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm']),
   /**
    * Specify how the trigger should align with the tooltip
    */

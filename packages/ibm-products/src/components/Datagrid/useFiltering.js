@@ -7,13 +7,36 @@
 
 import { useMemo } from 'react';
 import { FilterFlyout } from './Datagrid/addons/Filtering';
-import { BATCH } from './Datagrid/addons/Filtering/constants';
+import {
+  BATCH,
+  CHECKBOX,
+  DATE,
+  MULTISELECT,
+  NUMBER,
+} from './Datagrid/addons/Filtering/constants';
+
+const handleMultiFilter = (rows, id, value) => {
+  // gets all the items that are selected and returns their value
+  const selectedItems = value
+    .filter((item) => item.selected)
+    .map((item) => item.value);
+
+  // if the user removed all checkboxes then display all rows
+  if (selectedItems.length === 0) {
+    return rows;
+  }
+
+  return rows.filter((row) => {
+    const rowValue = row.values[id];
+    return selectedItems.includes(rowValue);
+  });
+};
 
 const useFiltering = (hooks) => {
   /* istanbul ignore next */
   const filterTypes = useMemo(
     () => ({
-      date: (rows, id, [startDate, endDate]) => {
+      [DATE]: (rows, id, [startDate, endDate]) => {
         return rows.filter((row) => {
           const rowValue = row.values[id];
           const startDateObj =
@@ -34,7 +57,7 @@ const useFiltering = (hooks) => {
           }
         });
       },
-      number: (rows, id, value) => {
+      [NUMBER]: (rows, id, value) => {
         if (value === '') {
           return rows;
         }
@@ -45,22 +68,8 @@ const useFiltering = (hooks) => {
           return rowValue === parsedValue;
         });
       },
-      checkbox: (rows, id, value) => {
-        // gets all the items that are selected and returns their value
-        const selectedItems = value
-          .filter((item) => item.selected)
-          .map((item) => item.value);
-
-        // if the user removed all checkboxes then display all rows
-        if (selectedItems.length === 0) {
-          return rows;
-        }
-
-        return rows.filter((row) => {
-          const rowValue = row.values[id];
-          return selectedItems.includes(rowValue);
-        });
-      },
+      [CHECKBOX]: (rows, id, value) => handleMultiFilter(rows, id, value),
+      [MULTISELECT]: (rows, id, value) => handleMultiFilter(rows, id, value),
     }),
     []
   );

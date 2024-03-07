@@ -35,75 +35,102 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders a component FullPageError', async () => {
-    render(<FullPageError {...defaultProps}> </FullPageError>);
+  it('renders a component FullPageError', () => {
+    render(<FullPageError {...defaultProps} />);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
-  it('has no accessibility violations', async () => {
-    const { container } = render(
-      <FullPageError {...defaultProps}> </FullPageError>
-    );
+  it('has no accessibility violations', () => {
+    const { container } = render(<FullPageError {...defaultProps} />);
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, async () => {
+  it('renders children', () => {
     render(<FullPageError {...defaultProps}>{children}</FullPageError>);
-    screen.getByText(children);
+    expect(screen.getByText(children)).toBeInTheDocument();
   });
 
-  it('applies className to the containing node', async () => {
-    render(
-      <FullPageError {...defaultProps} className={className}>
-        {' '}
-      </FullPageError>
-    );
+  it('applies className to the containing node', () => {
+    render(<FullPageError {...defaultProps} />);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', async () => {
-    render(
-      <FullPageError {...defaultProps} data-testid={dataTestId}>
-        {' '}
-      </FullPageError>
-    );
-    screen.getByTestId(dataTestId);
+  it('adds additional props to the containing node', () => {
+    render(<FullPageError {...defaultProps} />);
+    expect(screen.getByTestId(dataTestId)).toBeInTheDocument();
   });
 
-  it('forwards a ref to an appropriate node', async () => {
+  it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(
-      <FullPageError {...defaultProps} ref={ref}>
-        {' '}
-      </FullPageError>
-    );
+    render(<FullPageError {...defaultProps} ref={ref} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    render(
-      <FullPageError {...defaultProps} data-testid={dataTestId}>
-        {' '}
-      </FullPageError>
-    );
-
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<FullPageError {...defaultProps} />);
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });
+
   it('renders error label', () => {
     render(<FullPageError {...defaultProps} />);
-    screen.getByText('↳ ' + errorLabel);
+    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
   });
 
   it('renders description', () => {
     render(<FullPageError {...defaultProps} />);
-    screen.getByText(description);
+    expect(screen.getByText(description)).toBeInTheDocument();
   });
 
   it('renders title', () => {
     render(<FullPageError {...defaultProps} />);
-    screen.getByText(title);
+    expect(screen.getByText(title)).toBeInTheDocument();
+  });
+
+  it('renders custom error content when kind is "custom"', () => {
+    render(<FullPageError {...defaultProps} kind="custom" />);
+    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
+    expect(screen.getByText(description)).toBeInTheDocument();
+  });
+
+  it('renders 403 error content with provided description', () => {
+    render(<FullPageError {...defaultProps} kind="403" />);
+    expect(screen.getByText('Access denied')).toBeInTheDocument();
+    expect(screen.getByText(description)).toBeInTheDocument();
+  });
+
+  it('renders 404 error content with provided description', () => {
+    render(<FullPageError {...defaultProps} kind="404" />);
+    expect(screen.getByText('Page not found')).toBeInTheDocument();
+    expect(screen.getByText(description)).toBeInTheDocument();
+  });
+
+  it('renders default 403 error content when kind is "403" and no description provided', () => {
+    render(<FullPageError {...defaultProps} kind="403" description="" />);
+    expect(screen.getByText(/Access denied/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/You are not authorized to access the requested page/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Please verify that you are logged in to the hosting environment and your access permissions are correct/i
+      )
+    ).toBeInTheDocument();
+  });
+
+  it('renders default 404 error content when kind is "404" and no description provided', () => {
+    render(<FullPageError {...defaultProps} kind="404" description="" />);
+    expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/The page you requested has moved or is unavailable/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Please check the URL or search the site for the requested content/i
+      )
+    ).toBeInTheDocument();
   });
 });

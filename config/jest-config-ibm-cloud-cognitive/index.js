@@ -45,45 +45,61 @@ module.exports = {
       statements: 0,
     },
   },
-  moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
-  modulePathIgnorePatterns: ['<rootDir>/examples'],
   resolver: require.resolve('./setup/resolver.js'),
+  moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
+  moduleNameMapper: {
+    // This mapping is the result of updating to Jest 28. We currently require
+    // this as the version of uuid that gets resolved is ESM but we would like
+    // to work in CommonJS until Jest lands support for ESM in stable
+    // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
+    '^uuid$': require.resolve('uuid'),
+    // This mapping is added to resolve the alias that is set in our webpack config
+    // otherwise the webpack alias does not work in the jest environment
+    '\\.(css|scss)$': 'identity-obj-proxy',
+  },
+  modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],
-  setupFiles: [require.resolve('./setup/setupFiles')],
-  setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
-  testEnvironment: 'jsdom',
+  setupFiles: [require.resolve('./setup/setupFiles.js')],
+  setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv.js')],
   testMatch: [
-    // '<rootDir>/**/__tests__/**/*.js?(x)',
+    '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
-  testTimeout: 120000,
   transform: {
     '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(
       './transform/javascript.js'
     ),
-    '^.+\\.css$': require.resolve('./transform/css.js'),
+    '^.+\\.s?css$': require.resolve('./transform/css.js'),
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': require.resolve(
       './transform/file.js'
     ),
   },
+  testEnvironment: 'jsdom',
   testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: [
+    '/.avt/',
     '/cjs/',
     '/dist/',
     '/es/',
     '/lib/',
     '/build/',
     'e2e',
-    'templates',
+    'examples',
     '/umd/',
-    '/react-dnd/',
+    '/vendor/',
+    '/scripts/',
   ],
   transformIgnorePatterns: [
-    `/node_modules/(?!react-dnd|dnd-core|@react-dnd)`,
+    '/build/',
+    '/es/',
+    '/lib/',
+    '/umd/',
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
     'ace-node\\.js',
   ],
   watchPathIgnorePatterns: [
+    '/.avt/',
     '/cjs/',
     '/dist/',
     '/es/',
@@ -91,5 +107,11 @@ module.exports = {
     '/lib/',
     '/storybook/',
     '/results/',
+    '/scripts/',
   ],
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
+  testTimeout: 120000,
 };

@@ -46,7 +46,12 @@ export default {
       },
     },
   },
-  excludeStories: ['FilteringUsage', 'filterProps', 'getDateFormat'],
+  excludeStories: [
+    'FilteringUsage',
+    'filterProps',
+    'getDateFormat',
+    'multiSelectProps',
+  ],
 };
 
 // This is to show off the View all button in checkboxes
@@ -100,6 +105,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {
@@ -186,6 +192,28 @@ export const getDateFormat = (lang, full) => {
     .join('');
 };
 
+export const multiSelectProps = {
+  // items: ['relationship', 'complicated', 'single'],
+  items: [
+    { text: 'relationship', id: 'relationship' },
+    { text: 'complicated', id: 'complicated' },
+    { text: 'single', id: 'single' },
+  ],
+  id: 'carbon-multiselect-example',
+  label: 'Status selection',
+  titleText: 'Multiselect title',
+  itemToString: (item) => (item ? item.text : ''),
+  size: 'md',
+  type: 'default',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  open: false,
+  clearSelectionDescription: 'Total items selected: ',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+};
+
 export const filterProps = {
   variation: 'panel',
   updateMethod: 'batch',
@@ -227,15 +255,11 @@ export const filterProps = {
         {
           filterLabel: 'Status',
           filter: {
-            type: 'dropdown',
+            type: 'multiSelect',
             column: 'status',
             props: {
-              Dropdown: {
-                id: 'marital-status-dropdown',
-                ['aria-label']: 'Marital status dropdown',
-                items: ['relationship', 'complicated', 'single'],
-                label: 'Marital status',
-                titleText: 'Marital status',
+              MultiSelect: {
+                ...multiSelectProps,
               },
             },
           },

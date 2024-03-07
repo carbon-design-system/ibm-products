@@ -62,3 +62,10 @@ package-lock.json
 # Examples
 /examples/carbon-for-ibm-products/*/node_modules
 /examples/carbon-for-ibm-products/*/.yarn
+
+# Accessibility Verification Testing
+.avt/
+
+# Playwright
+.playwright/
+/packages/ibm-products/.playwright/

@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable function-no-unknown */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--status-indicator;
+$block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
+
+// Default styling
+.#{$block-class}__title {
+  @include type-style('heading-02');
+
+  margin-bottom: $spacing-02;
+}
+.#{$block-class-step}__details {
+  display: flex;
+  min-height: $spacing-07;
+  align-items: center;
+}
+.#{$block-class-step}__icon {
+  position: relative;
+  display: flex;
+  width: $spacing-06;
+}
+.#{$block-class-step}__text {
+  @include type-style('body-compact-01');
+
+  color: $text-primary;
+}
+.#{$block-class} .#{$block-class}__button {
+  align-items: center;
+  margin-top: $spacing-01;
+  margin-left: $spacing-03;
+}
+.#{$block-class} .#{$block-class}__button:not([disabled]) svg {
+  margin-left: $spacing-03;
+  fill: currentColor;
+}
+
+// Text
+.#{$block-class-step}--inactive .#{$block-class-step}__text {
+  color: $text-secondary;
+}
+.#{$block-class-step}--inactive svg {
+  fill: $icon-primary;
+}
+
+// Icons
+//
+// Override <InlineLoading's> large margins.
+.#{$block-class-step}--active .#{$block-class-step}__icon {
+  margin-right: 0;
+}
+.#{$block-class-step}--active
+  .#{c4p-settings.$carbon-prefix}--inline-loading__animation {
+  margin-right: to-rem(7px);
+}
+// /Override
+//
+.#{$block-class-step}--error svg {
+  fill: $support-error;
+}
+.#{$block-class-step}--finished svg {
+  fill: $support-success;
+}
+
+// Error message
+.#{$block-class-step}__error-message {
+  @include type-style('label-01');
+
+  margin-top: to-rem(-2px);
+  margin-bottom: to-rem(6px);
+  margin-left: $spacing-06;
+  color: $text-error;
+}

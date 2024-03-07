@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -97,6 +93,7 @@
     "haspopup",
     "homescreen",
     "inlineedit",
+    "inlinetip",
     "listbox",
     "loglevel",
     "namor",
@@ -114,15 +111,18 @@
     "rerender",
     "resizer",
     "responsivity",
+    "roledescription",
     "rowgroup",
     "rowheader",
     "rowindex",
+    "ruleset",
     "sbdocs",
     "scrollend",
     "semibold",
     "serializers",
     "setsize",
     "sidepanel",
+    "skipnav",
     "stackable",
     "stackblitz",
     "statusicon",
@@ -143,6 +143,8 @@
     "toolbarbutton",
     "treegrid",
     "treeview",
+    "testname",
+    "typeahead",
     "userprofileimage",
     "uuidv",
     "webfonts",

@@ -24,6 +24,7 @@ import {
 import { CreateTearsheetNarrow } from '.';
 import styles from './_storybook-styles.scss';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
   title: getStoryTitle(CreateTearsheetNarrow.displayName),
@@ -31,6 +32,7 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     children: { control: { disable: true } },
+    ...slugArgTypes(),
   },
   parameters: {
     styles,
@@ -57,7 +59,7 @@ const defaultStoryProps = {
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
 };
 
-const Template = (args) => {
+const Template = ({ slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
@@ -83,6 +85,7 @@ const Template = (args) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
+        slug={slug && SlugSample()}
         {...args}
       >
         <TextInput
@@ -159,7 +162,7 @@ const Template = (args) => {
   );
 };
 
-const WithValidationTemplate = (args) => {
+const WithValidationTemplate = ({ slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
@@ -190,6 +193,7 @@ const WithValidationTemplate = (args) => {
         }}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
+        slug={slug && SlugSample()}
         {...args}
       >
         <FormGroup

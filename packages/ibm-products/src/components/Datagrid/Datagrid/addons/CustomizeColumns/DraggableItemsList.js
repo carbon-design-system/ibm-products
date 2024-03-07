@@ -11,6 +11,7 @@ import { Checkbox } from '@carbon/react';
 import { isColumnVisible } from './common';
 import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
+import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
 
 import {
   DndContext,
@@ -24,7 +25,10 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
+import {
+  restrictToParentElement,
+  restrictToVerticalAxis,
+} from '@dnd-kit/modifiers';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const matchedColsById = (col1, col2) => col1 && col2 && col1.id === col2.id;
@@ -181,6 +185,7 @@ export const DraggableItemsList = ({
       onDragStart={handleDragStart}
       onDragMove={handleDragUpdate}
       sensors={sensors}
+      modifiers={[restrictToParentElement, restrictToVerticalAxis]}
     >
       <>
         <div

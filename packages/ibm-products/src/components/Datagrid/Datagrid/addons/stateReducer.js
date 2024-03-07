@@ -81,13 +81,20 @@ export const stateReducer = (newState, action) => {
   switch (action.type) {
     case TOGGLE_ALL_ROWS_SELECTED: {
       const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
+      const newSelectedRowIds = {};
       if (rows) {
         const newSelectedRowData = {};
         rows.forEach((row) => {
+          const props = row.getRowProps();
+          if (props && props.disabled) {
+            return;
+          }
+          newSelectedRowIds[getRowId(row.original, row.index)] = true;
           newSelectedRowData[getRowId(row.original, row.index)] = row.original;
         });
         return {
           ...newState,
+          selectedRowIds: newSelectedRowIds,
           selectedRowData:
             indeterminate || !isChecked ? {} : newSelectedRowData,
         };
@@ -114,7 +121,10 @@ export const stateReducer = (newState, action) => {
         const newData = { ...newState.selectedRowData };
         const dataWithRemovedRow = Object.fromEntries(
           Object.entries(newData).filter(([key]) => {
-            return parseInt(key) !== parseInt(rowData.index);
+            return (
+              parseInt(key) !==
+              parseInt(getRowId(rowData.original, rowData.index))
+            );
           })
         );
         return {

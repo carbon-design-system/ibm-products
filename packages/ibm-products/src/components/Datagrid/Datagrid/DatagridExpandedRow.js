@@ -1,12 +1,13 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { pkg } from '../../../settings';
+import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -18,8 +19,8 @@ const DatagridExpandedRow =
 
     const toggleParentHoverClass = (event, eventType) => {
       /* istanbul ignore else */
-      if (event?.target?.parentNode?.previousElementSibling) {
-        const parentNode = event.target.parentNode.previousElementSibling;
+      if (event?.target?.closest('tr').previousElementSibling) {
+        const parentNode = event?.target?.closest('tr').previousElementSibling;
         if (eventType === 'enter') {
           parentNode.classList.add(`${blockClass}__expandable-row--hover`);
         } else {
@@ -30,7 +31,9 @@ const DatagridExpandedRow =
 
     return (
       <tr
-        className={`${blockClass}__expanded-row`}
+        className={cx(`${blockClass}__expanded-row`, {
+          [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
+        })}
         onMouseEnter={(event) => toggleParentHoverClass(event, 'enter')}
         onMouseLeave={(event) => toggleParentHoverClass(event)}
       >

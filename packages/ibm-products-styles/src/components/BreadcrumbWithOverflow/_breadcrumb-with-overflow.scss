@@ -91,6 +91,5 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 }
 
 .#{$_block-class}__overflow-menu-options.#{$_block-class}__overflow-menu-options {
-  // Need to disable stylelint until dart sass namespace support is added
   z-index: utilities.z('header');
 }

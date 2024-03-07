@@ -1,0 +1,12 @@
+{
+  "label": "Decorator",
+  "package-config": {
+    "flags": {
+      "component": {
+        "Decorator": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

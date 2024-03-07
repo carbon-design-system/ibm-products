@@ -1,9 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+
 import * as stories from './Datagrid.stories';
 import toolbarScreenshot from './storybook-assets/datagrid-actions-example.png';
 
-export const DocsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
@@ -416,6 +417,30 @@ return <Datagrid datagridState={datagridState} />;
         },
       },
       {
+        description: `Batch actions can be included by providing \`batchActions: true\` and \`toolbarBatchActions: CarbonButtonProps[]\` to the \`useDatagrid\` hook. While passing in a \`DatagridBatchActions\` component will also work, it does not have the same responsive behavior built-in, thus we recommend using the \`batchActions\` and \`toolbarBatchActions\` properties when possible.`,
+        source: {
+          code: `
+export const SelectableRowWithBatchActions = () => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      onRowSelect: (row, event) => console.log(row, event),
+    },
+    useSelectRows
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+`,
+        },
+      },
+      {
         title: 'Sortable columns',
         description: `To add sortable columns to your Datagrid, simply add the \`useSortableColumns\` hook. This will allow each column header to be clickable and sort each column in either ascending or descending order.
 - Include \`useSortableColumns\` hook
@@ -431,6 +456,42 @@ const datagridState = useDatagrid(
     ascendingSortableLabelText: 'none',
     descendingSortableLabelText: 'ascending',
     defaultSortableLabelText: 'descending',
+  },
+  useSortableColumns
+);
+
+return <Datagrid datagridState={datagridState} />;
+          `,
+        },
+      },
+      {
+        description: `Columns can also be initially sorted by providing a \`sortableColumn\` object to the \`initialState\`. The structure of
+        the \`sortableColumn\` property is as follows:
+\`
+{
+  id: string, // column id
+  order: string, // ASC | DESC
+}
+\`
+
+See example below: `,
+        source: {
+          code: `
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    ascendingSortableLabelText: 'none',
+    descendingSortableLabelText: 'ascending',
+    defaultSortableLabelText: 'descending',
+    initialState: {
+      sortableColumn: {
+        id: 'firstName', // column id
+        order: 'ASC' // sorting order
+      }
+    }
   },
   useSortableColumns
 );
@@ -475,3 +536,5 @@ return <Datagrid datagridState={datagridState} />;
     ]}
   />
 );
+
+export default DocsPage;

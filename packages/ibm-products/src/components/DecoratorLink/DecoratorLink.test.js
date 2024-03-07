@@ -11,16 +11,17 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorLink } from '.';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorLink.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
+const href = 'http://www.ibm.com';
 const label = 'IP';
 const score = 5;
 const scoreTitle = '"Medium" magnitude. Score 5 out of 10';
@@ -29,8 +30,9 @@ const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
-      kind="default"
+    <DecoratorLink
+      href={href}
+      kind="link"
       value={value}
       data-testid={dataTestId}
       {...rest}
@@ -38,10 +40,15 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorLink', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
+  });
+
+  it('renders a component DecoratorLink with a link', async () => {
+    renderComponent();
+    expect(screen.getByRole('link'));
   });
 
   it('renders a label', async () => {

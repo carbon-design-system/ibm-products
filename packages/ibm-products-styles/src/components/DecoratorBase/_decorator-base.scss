@@ -1,0 +1,146 @@
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable carbon/type-token-use */
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable function-no-unknown */
+
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// DecoratorBase uses the following Carbon for IBM Products components:
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--decorator;
+$icon: #{$block-class}-icon;
+$label: #{$block-class}__label;
+$value: #{$block-class}__value;
+
+.#{$block-class}--light {
+  @include theme(themes.$g10, true);
+}
+.#{$block-class}--dark {
+  @include theme(themes.$g100, true);
+}
+
+// BASE STYLING FOR ALL DECORATORS
+.#{$block-class} {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: normal;
+  border-radius: $spacing-12;
+}
+.#{$block-class} .#{$label} {
+  @include type.type-style('label-01');
+
+  position: relative;
+  display: inline-flex;
+  height: $spacing-06;
+  align-items: normal;
+  padding: 0 $spacing-03;
+  border-width: to-rem(1px) 0 to-rem(1px) to-rem(1px);
+  border-style: solid;
+  border-color: $border-subtle-02;
+  border-radius: $spacing-12 0 0 $spacing-12;
+  background-color: $layer-01;
+  color: $text-secondary;
+  line-height: 1.8;
+}
+.#{$block-class} .#{$value} {
+  @include type.type-style('label-01');
+
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  height: $spacing-06;
+  align-items: normal;
+  padding: 0 $spacing-03;
+  border-width: to-rem(1px) to-rem(1px) to-rem(1px) 0;
+  border-style: solid;
+  border-color: $border-subtle-02;
+  border-radius: 0 $spacing-12 $spacing-12 0;
+  background-color: $layer-01;
+  color: $text-primary;
+  line-height: 1.8;
+}
+.#{$block-class} .#{$icon} {
+  margin-top: to-rem(3px);
+  margin-right: $spacing-02;
+}
+
+//
+// MODIFIER, SMALL
+//
+.#{$block-class}--sm .#{$label} {
+  height: to-rem(18px);
+  padding: 0 $spacing-02 0 $spacing-03;
+  line-height: 1.333;
+}
+.#{$block-class}--sm .#{$value} {
+  height: to-rem(18px);
+  // When "small", the divider takes up 1px of 4px of the available space: so "+1px".
+  padding: 0 $spacing-03 0 calc($spacing-02 + 1px);
+  line-height: 1.333;
+}
+
+//
+// MODIFIER, TRUNCATION
+//
+.#{$block-class}--truncate-end .#{$value} {
+  display: inline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.#{$block-class}--truncate-start .#{$value} {
+  display: inline;
+  overflow: hidden;
+  direction: rtl;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//
+// MAGNITUDE ICON COLORS AND SIZES
+//
+.#{$icon}__magnitude-unknown {
+  fill: $icon-secondary;
+}
+.#{$icon}__magnitude-benign {
+  fill: $teal-60;
+}
+.#{$icon}__magnitude-low {
+  fill: $support-warning;
+}
+.#{$icon}__magnitude-medium {
+  fill: $orange-40;
+}
+.#{$icon}__magnitude-high {
+  fill: $support-error;
+}
+.#{$icon}__magnitude-critical {
+  fill: $support-error;
+}
+.#{$block-class}-disabled svg {
+  fill: $icon-on-color-disabled;
+}
+
+// MODIFIER, SMALL ICON
+.#{$block-class} .#{$icon}--sm {
+  width: $spacing-04;
+  height: $spacing-04;
+  margin-top: to-rem(2.5px);
+}

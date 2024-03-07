@@ -6,14 +6,15 @@
  */
 
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import { Decorator } from '.';
-import mdx from './Decorator.mdx';
+import { DecoratorSingleButton } from '.';
+import mdx from './DecoratorSingleButton.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -35,8 +36,8 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(Decorator.displayName),
-  component: Decorator,
+  title: getStoryTitle(DecoratorSingleButton.displayName),
+  component: DecoratorSingleButton,
   tags: ['autodocs'],
   parameters: {
     styles,
@@ -49,6 +50,8 @@ export default {
     kind: { table: { disable: true } },
     // ...
     className: { control: { type: {} } },
+    onClick: { control: { type: {} } },
+    onContextMenu: { control: { type: {} } },
     setLabelTitle: { control: { type: {} } },
     score: {
       control: {
@@ -94,20 +97,26 @@ const Template = (args) => {
             outline: '2px dashed #999',
           }}
         >
-          <Decorator {...args} value="Very long value to show truncation" />
+          <DecoratorSingleButton
+            {...args}
+            value="Very long value to show truncation"
+          />
         </div>
       </>
     );
   }
 
-  return <Decorator {...args} />;
+  return <DecoratorSingleButton {...args} />;
 };
 
-export const decorator = prepareStory(Template, {
-  storyName: 'Decorator',
+export const decoratorSingleButton = prepareStory(Template, {
+  storyName: 'DecoratorSingleButton',
   args: {
+    disabled: false,
     hideIcon: false,
     label: 'IP',
+    onClick: (event, values) => action('onClick')(values),
+    onContextMenu: (event, values) => action('onContextMenu')(values),
     score: 5,
     scoreThresholds: [0, 4, 7, 10],
     setLabelTitle: (score, scoreThresholds, magnitude) => {

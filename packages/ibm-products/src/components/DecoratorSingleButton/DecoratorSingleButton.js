@@ -14,19 +14,23 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
-const componentName = 'Decorator';
+const componentName = 'DecoratorSingleButton';
 
 const defaults = {
+  onClick: () => {},
+  onContextMenu: () => {},
   scoreThresholds: [0, 4, 7, 10],
   theme: 'light',
 };
 
 /**
- * The Decorator groups a key/value pair as a single element. This component is not interactive.
+ * The DecoratorSingleButton groups a key/value pair to behave like a button.
  */
-export let Decorator = React.forwardRef(
+export let DecoratorSingleButton = React.forwardRef(
   (
     {
+      onClick = defaults.onClick,
+      onContextMenu = defaults.onContextMenu,
       scoreThresholds = defaults.scoreThresholds,
       theme = defaults.theme,
       ...rest
@@ -34,12 +38,10 @@ export let Decorator = React.forwardRef(
     ref
   ) => {
     const validProps = prepareProps(rest, [
-      'disabled',
+      'href',
       'kind',
-      'onClick',
       'onClickLabel',
       'onClickValue',
-      'onContextMenu',
       'onContextMenuLabel',
       'onContextMenuValue',
     ]);
@@ -48,8 +50,8 @@ export let Decorator = React.forwardRef(
       <DecoratorBase
         ref={ref}
         {...validProps}
-        kind="default"
-        {...{ scoreThresholds, theme }}
+        kind="single-button"
+        {...{ onClick, onContextMenu, scoreThresholds, theme }}
         {...getDevtoolsProps(componentName)}
       />
     );
@@ -57,20 +59,28 @@ export let Decorator = React.forwardRef(
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-Decorator = pkg.checkComponentEnabled(Decorator, componentName);
+DecoratorSingleButton = pkg.checkComponentEnabled(
+  DecoratorSingleButton,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-Decorator.displayName = componentName;
+DecoratorSingleButton.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-Decorator.propTypes = {
+DecoratorSingleButton.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * `disabled` only applies if `kind` is "single-button" or "dual-button".
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Do not show the icon, regardless of score.
@@ -81,6 +91,18 @@ Decorator.propTypes = {
    * The label for the data.
    */
   label: PropTypes.string,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onContextMenu: PropTypes.func,
 
   /**
    * Used in conjunction with `scoreThresholds`, determines the color, shape, and type of magnitude of the icon.

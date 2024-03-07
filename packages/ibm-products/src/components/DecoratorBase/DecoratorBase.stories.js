@@ -6,14 +6,15 @@
  */
 
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import { Decorator } from '.';
-import mdx from './Decorator.mdx';
+import { DecoratorBase } from '.';
+import mdx from './DecoratorBase.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -35,8 +36,8 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(Decorator.displayName),
-  component: Decorator,
+  title: getStoryTitle(DecoratorBase.displayName),
+  component: DecoratorBase,
   tags: ['autodocs'],
   parameters: {
     styles,
@@ -49,6 +50,10 @@ export default {
     kind: { table: { disable: true } },
     // ...
     className: { control: { type: {} } },
+    onClickLabel: { control: { type: {} } },
+    onClickValue: { control: { type: {} } },
+    onContextMenuLabel: { control: { type: {} } },
+    onContextMenuValue: { control: { type: {} } },
     setLabelTitle: { control: { type: {} } },
     score: {
       control: {
@@ -94,20 +99,26 @@ const Template = (args) => {
             outline: '2px dashed #999',
           }}
         >
-          <Decorator {...args} value="Very long value to show truncation" />
+          <DecoratorBase {...args} value="Very long value to show truncation" />
         </div>
       </>
     );
   }
 
-  return <Decorator {...args} />;
+  return <DecoratorBase {...args} />;
 };
 
-export const decorator = prepareStory(Template, {
-  storyName: 'Decorator',
+export const decoratorBase = prepareStory(Template, {
+  storyName: 'DecoratorBase',
   args: {
+    disabled: false,
+    kind: 'default',
     hideIcon: false,
     label: 'IP',
+    onClickLabel: (event, values) => action('onClickLabel')(values),
+    onClickValue: (event, values) => action('onClickValue')(values),
+    onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
+    onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
     score: 5,
     scoreThresholds: [0, 4, 7, 10],
     setLabelTitle: (score, scoreThresholds, magnitude) => {

@@ -11,11 +11,11 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorDualButton } from '.';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorDualButton.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -29,8 +29,8 @@ const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
-      kind="default"
+    <DecoratorDualButton
+      kind="dual-button"
       value={value}
       data-testid={dataTestId}
       {...rest}
@@ -38,10 +38,17 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorDualButton', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
+  });
+
+  it('renders a component DecoratorDualButton with two buttons', async () => {
+    renderComponent({
+      kind: 'dual-button',
+    });
+    expect(screen.getAllByRole('button').length).toBe(2);
   });
 
   it('renders a label', async () => {

@@ -11,11 +11,11 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorBase } from '.';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorBase.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -29,7 +29,7 @@ const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
+    <DecoratorBase
       kind="default"
       value={value}
       data-testid={dataTestId}
@@ -38,7 +38,7 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorBase', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
@@ -106,10 +106,11 @@ describe(componentName, () => {
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    renderComponent();
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
-      componentName
-    );
-  });
+  // DecoratorBase inherits the Devtools attribute from the other Decorator types.
+  // it.skip('adds the Devtools attribute to the containing node', async () => {
+  //   renderComponent();
+  //   expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+  //     componentName
+  //   );
+  // });
 });

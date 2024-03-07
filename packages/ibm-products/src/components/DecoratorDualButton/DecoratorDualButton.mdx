@@ -3,9 +3,9 @@ import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { Decorator } from '.';
+import { DecoratorDualButton } from '.';
 
-# Decorator
+# DecoratorDualButton
 
 ## Table of Contents
 
@@ -15,13 +15,15 @@ import { Decorator } from '.';
 
 ## Overview
 
-The Decorator groups a key/value pair as a single element. This component is not
-interactive.
+The DecoratorDualButton groups a key/value pair where the key and value are each
+buttons.
 
 ## Example usage
 
 <Canvas>
-  <Story id={getStoryId(Decorator.displayName, 'decorator')} />
+  <Story
+    id={getStoryId(DecoratorDualButton.displayName, 'decoratorDualButton')}
+  />
 </Canvas>
 
 ## Component API

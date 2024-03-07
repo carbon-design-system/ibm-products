@@ -41,18 +41,56 @@ const isValidChildren =
   };
 
 interface CreateModalProps extends React.ComponentProps<typeof ComposedModal> {
+  /**
+   * Specify an optional className to be applied to the modal root node
+   */
   className?: string;
-  children: ReactNode;
+  /**
+   * Specifies an optional handler which is called when the CreateModal
+   * is closed.
+   */
   onRequestClose?(): void;
+  /**
+   * Specifies an optional handler which is called when the CreateModal
+   * primary button is pressed.
+   */
   onRequestSubmit?(): void;
+  /**
+   * Specifies whether the CreateModal is open or not.
+   */
   open?: boolean;
+  /**
+   * The title of the CreateModal is usually the product or service name.
+   */
   title: ReactNode;
+  /**
+   * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
+   */
   subtitle?: ReactNode;
+  /**
+   * The description of the CreateModal serves to provide more information about the modal.
+   */
   description: ReactNode;
+  /**
+   * Specifies the secondary button's text in the modal.
+   */
   secondaryButtonText: string;
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
   portalTarget?: ReactNode;
+  /**
+   * Specifies the primary button's text in the modal.
+   */
   primaryButtonText: string;
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
   disableSubmit?: boolean;
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
   selectorPrimaryFocus: ReactNode;
 }
 

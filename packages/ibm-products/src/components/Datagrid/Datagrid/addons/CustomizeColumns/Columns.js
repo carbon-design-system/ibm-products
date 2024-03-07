@@ -25,6 +25,7 @@ const Columns = ({
   assistiveTextInstructionsLabel,
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
+  customizeTearsheetHeadingLabel
 }) => {
   const listId = useRef(uuidv4()); // keep id between renders
   const listRef = useRef(null);
@@ -56,7 +57,7 @@ const Columns = ({
       <ol
         className={`${blockClass}__customize-columns-column-list--focus`}
         role="listbox"
-        aria-label="customize column list"
+        aria-label={customizeTearsheetHeadingLabel}
         aria-describedby={`${blockClass}__customize-columns--instructions`}
         tabIndex={0}
       >
@@ -116,6 +117,7 @@ Columns.propTypes = {
   assistiveTextDisabledInstructionsLabel: PropTypes.string,
   assistiveTextInstructionsLabel: PropTypes.string,
   columns: PropTypes.array.isRequired,
+  customizeTearsheetHeadingLabel: PropTypes.string,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,
   getVisibleColumnsCount: PropTypes.func.isRequired,

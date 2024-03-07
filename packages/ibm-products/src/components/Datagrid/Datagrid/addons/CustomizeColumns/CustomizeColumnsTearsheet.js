@@ -145,6 +145,7 @@ const CustomizeColumnsTearsheet = ({
             setDirty();
           }}
           selectAllLabel={selectAllLabel}
+          customizeTearsheetHeadingLabel={customizeTearsheetHeadingLabel}
         />
       )}
     </TearsheetNarrow>

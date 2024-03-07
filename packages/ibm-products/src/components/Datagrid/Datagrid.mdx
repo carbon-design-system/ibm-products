@@ -36,7 +36,7 @@ import datagridActionsExample from './storybook-assets/datagrid-actions-example.
 
 ## Overview
 
-<!-- TODO: Overview. -->
+{/* <!-- TODO: Overview. --> */}
 
 The `Datagrid` component is an extension of Carbon's DataTable component. At the
 most basic level, the `Datagrid` component takes in columns and rows and renders
@@ -77,7 +77,7 @@ import {
 
 ## Basic
 
-<!-- TODO: One example per designed use case. -->
+{/* <!-- TODO: One example per designed use case. --> */}
 
 Here is a basic usage example. The following component will render the datagrid
 seen below, with pagination and some toolbar actions. One of the key pieces to
@@ -1293,6 +1293,31 @@ const datagridState = useDatagrid(
 );
 
 return <Datagrid datagridState={datagridState} />;
+```
+
+Batch actions can be included by providing \`batchActions: true\` and
+\`toolbarBatchActions: CarbonButtonProps[]\` to the \`useDatagrid\` hook. While
+passing in a \`DatagridBatchActions\` component will also work, it does not have
+the same responsive behavior built-in, thus we recommend using the
+\`batchActions\` and \`toolbarBatchActions\` properties when possible.
+
+```jsx
+export const SelectableRowWithBatchActions = () => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      onRowSelect: (row, event) => console.log(row, event),
+    },
+    useSelectRows
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
 ```
 
 ## Sortable columns

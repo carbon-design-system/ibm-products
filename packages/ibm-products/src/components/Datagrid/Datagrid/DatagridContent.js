@@ -97,7 +97,7 @@ export const DatagridContent = ({ ariaToolbarLabel, datagridState, title }) => {
             { [`${blockClass}__table-grid-active`]: gridActive },
             {
               [`${blockClass}__table-is-resizing`]:
-                typeof columnResizing.isResizingColumn === 'string',
+                typeof columnResizing?.isResizingColumn === 'string',
             },
             getTableProps()?.className
           )}

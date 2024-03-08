@@ -18,7 +18,7 @@ v2 will receive weekly releases occurring every Tuesday morning.
 ## Table of Contents
 
 - [Migrated components](#migrated-components)
-- [Deprecated components](#deprecated-components-and-their-replacement-mappings)
+- ~~[Deprecated components](#deprecated-components-and-their-replacement-mappings)~~
 
 ## Migrated components
 
@@ -440,8 +440,6 @@ Unchanged props; names and functionality have not changed.
 ---
 
 ### StatusIndicator
-
-[Info here]
 
 Unchanged props; names and functionality have not changed.
 

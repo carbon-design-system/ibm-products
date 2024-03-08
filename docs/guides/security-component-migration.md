@@ -17,34 +17,59 @@ v2 will receive weekly releases occurring every Tuesday morning.
 
 ## Table of Contents
 
-- [Migrated components](#migrated-component-changes)
+- [Migrated components](#migrated-components)
 - [Deprecated components](#deprecated-components-and-their-replacement-mappings)
 
-## Migrated component changes
+## Migrated components
 
-| Component                    | Changes                               |
-| ---------------------------- | ------------------------------------- |
-| BigNumbers (ICA)             | View changes [here](#bignumbers)      |
-| Decorator                    | View changes [here](#decorator)       |
-| DelimitedList                | View changes [here](#delimitedlist)   |
-| DescriptionList (TypeLayout) | View changes [here](#descriptionlist) |
-| FilterPanel                  | View changes [here](#filterpanel)     |
-| IconButtonBar                | View changes [here](#iconbuttonbar)   |
-| Nav                          | View changes [here](#nav)             |
-| ScrollGradient               | View changes [here](#scrollgradient)  |
-| SearchBar                    | View changes [here](#searchbar)       |
-| StatusIndicator              | View changes [here](#statusindicator) |
-| StringFormatter              | View changes [here](#stringformatter) |
-| TruncatedList                | View changes [here](#truncatedlist)   |
+| Component                         | Changes                                     |
+| --------------------------------- | ------------------------------------------- |
+| BigNumbers (ICA)                  | View changes [here](#bignumbers)            |
+| Decorator                         | View changes [here](#decorator)             |
+| DecoratorLink - _**new**_         | View changes [here](#decoratorlink)         |
+| DecoratorSingleButton - _**new**_ | View changes [here](#decoratorsinglebutton) |
+| DecoratorDualButton - _**new**_   | View changes [here](#decoratordualbutton)   |
+| DelimitedList                     | View changes [here](#delimitedlist)         |
+| DescriptionList (TypeLayout)      | View changes [here](#descriptionlist)       |
+| FilterPanel                       | View changes [here](#filterpanel)           |
+| IconButtonBar                     | View changes [here](#iconbuttonbar)         |
+| Nav                               | View changes [here](#nav)                   |
+| NavList                           | View changes [here](#navlist)               |
+| NavItem                           | View changes [here](#navitem)               |
+| ScrollGradient                    | View changes [here](#scrollgradient)        |
+| SearchBar                         | View changes [here](#searchbar)             |
+| StatusIndicator                   | View changes [here](#statusindicator)       |
+| StatusIndicatorStep (StatusStep)  | View changes [here](#statusindicatorstep)   |
+| StringFormatter                   | View changes [here](#stringformatter)       |
+| TruncatedList                     | View changes [here](#truncatedlist)         |
 
 ### BigNumbers
 
-Renamed from **ICA**.
+[Renamed from **ICA**.]
 
-| Old prop | New prop       | Change                                                                                            |
-| -------- | -------------- | ------------------------------------------------------------------------------------------------- |
-| —        | fractionDigits | Optional value to control the max/min fractional digits used when truncating the value and total. |
-| —        | loading        | Set to `true` to show the loading skeleton.                                                       |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop     |
+| :----------------- |
+| className          |
+| forceShowTotal     |
+| iconButton         |
+| label \*           |
+| locale             |
+| percentage         |
+| size               |
+| tooltipDescription |
+| total              |
+| trending           |
+| truncate           |
+| value              |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop       | Change                                                                                            |
+| -------------- | ------------------------------------------------------------------------------------------------- |
+| fractionDigits | Optional value to control the max/min fractional digits used when truncating the value and total. |
+| loading        | Set to `true` to show the loading skeleton.                                                       |
 
 **ICASkeleton** was deprecated. Use the `loading` prop above, instead.
 
@@ -52,18 +77,115 @@ Renamed from **ICA**.
 
 ### Decorator
 
-[Info here]
+**Decorator has been broken into 4 components:**
+
+- Decorator
+- DecoratorLink
+- DecoratorSingleButton
+- DecoratorDualButton
 
 Unchanged props; names and functionality have not changed.
 
-| Unchanged prop   |
-| :--------------- |
-| children         |
-| className        |
-| score            |
-| scoreDescription |
-| scoreThresholds  |
-| value \*         |
+| Unchanged prop  |
+| :-------------- |
+| className       |
+| score           |
+| scoreThresholds |
+| value \*        |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop          | New prop      |                                                                                 |
+| :---------------- | :------------ | :------------------------------------------------------------------------------ |
+| active            | theme         | Renamed.                                                                        |
+| inline            | small         | Renamed.                                                                        |
+| midLineTruncation | truncateValue | Adds options `"start"` and `"end"` to the existing `{ maxLength, front, back }` |
+| noIcon            | hideIcon      | Renamed.                                                                        |
+| onClick           | onClick       | Available only when `kind` is `"link"` or `"single-button"`                     |
+| onContextMenu     | onContextMenu | Available only when `kind` is `"link"` or `"single-button"`                     |
+| title             | valueTitle    | Will override the value's default `title` only.                                 |
+| type              | label \*      | Renamed.                                                                        |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop           |                                                                                                                    |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------- |
+| disabled           | Applies only if `kind="single-button\|dual-button"`                                                                |
+| kind               | Defines type of Decorator to display: `"default"` (default value), `"link"`, `"single-button"`, or `"dual-button"` |
+| onClickLabel       | Available only when `kind="dual-button"`                                                                           |
+| onClickValue       | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuLabel | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuValue | Available only when `kind="dual-button"`                                                                           |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop  |                                                                                                                       |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| fitValue         | Is now the default behavior.                                                                                          |
+| noBorderRadius   | The Carbon 11 design refresh no longer supports this.                                                                 |
+| _noType_         | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+| scoreDescription |                                                                                                                       |
+
+---
+
+### DecoratorLink
+
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop  |
+| :-------------- |
+| className       |
+| score           |
+| scoreThresholds |
+| value \*        |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop          | New prop      |                                                                                 |
+| :---------------- | :------------ | :------------------------------------------------------------------------------ |
+| active            | theme         | Renamed.                                                                        |
+| href              | href          | `kind="link"` now required.                                                     |
+| inline            | small         | Renamed.                                                                        |
+| midLineTruncation | truncateValue | Adds options `"start"` and `"end"` to the existing `{ maxLength, front, back }` |
+| noIcon            | hideIcon      | Renamed.                                                                        |
+| onClick           | onClick       | Available only when `kind` is `"link"` or `"single-button"`                     |
+| onContextMenu     | onContextMenu | Available only when `kind` is `"link"` or `"single-button"`                     |
+| title             | valueTitle    | Will override the value's default `title` only.                                 |
+| type              | label \*      | Renamed.                                                                        |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop           |                                                                                                                    |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------- |
+| disabled           | Applies only if `kind="single-button\|dual-button"`                                                                |
+| kind               | Defines type of Decorator to display: `"default"` (default value), `"link"`, `"single-button"`, or `"dual-button"` |
+| setLabelTitle      | [NEED DESCRIPTION]                                                                                                 |
+| onClickLabel       | Available only when `kind="dual-button"`                                                                           |
+| onClickValue       | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuLabel | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuValue | Available only when `kind="dual-button"`                                                                           |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop  |                                                                                                                       |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| fitValue         | Is now the default behavior.                                                                                          |
+| noBorderRadius   | The Carbon 11 design refresh no longer supports this.                                                                 |
+| _noType_         | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+| scoreDescription |                                                                                                                       |
+
+---
+
+### DecoratorSingleButton
+
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop  |
+| :-------------- |
+| className       |
+| score           |
+| scoreThresholds |
+| value \*        |
 
 Some props were renamed or repurposed to meet Products' `v2` specifications.
 
@@ -87,69 +209,110 @@ New props were added to the component to meet Products' `v2` specifications.
 | kind               | Defines type of Decorator to display: `"default"` (default value), `"link"`, `"single-button"`, or `"dual-button"` |
 | onClickLabel       | Available only when `kind="dual-button"`                                                                           |
 | onClickValue       | Available only when `kind="dual-button"`                                                                           |
+| setLabelTitle      | [NEED DESCRIPTION]                                                                                                 |
 | onContextMenuLabel | Available only when `kind="dual-button"`                                                                           |
 | onContextMenuValue | Available only when `kind="dual-button"`                                                                           |
 
 Deprecated props were not migrated from the old component.
 
-| Deprecated&nbsp;prop |                                                                                                                       |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| fitValue             | Is now the default behavior.                                                                                          |
-| noBorderRadius       | The Carbon 11 design refresh no longer supports this.                                                                 |
-| _noType_             | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+| Deprecated prop  |                                                                                                                       |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| fitValue         | Is now the default behavior.                                                                                          |
+| noBorderRadius   | The Carbon 11 design refresh no longer supports this.                                                                 |
+| _noType_         | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+| scoreDescription |                                                                                                                       |
 
-| Old prop          | New prop      |                                    |
-| :---------------- | :------------ | :--------------------------------- |
-| active            | theme         |                                    |
-| —                 | disabled      |                                    |
-| —                 | kind          |                                    |
-| inline            | small         |                                    |
-| midLineTruncation | truncateValue |                                    |
-| noIcon            | hideIcon      |                                    |
-| —                 | onClickLabel  |                                    |
-| title             | valueTitle    |                                    |
-| type              | label         | Renamed and is no longer required. |
-|                   |               |                                    |
-| fitValue          | —             | Deprecated                         |
-| noBorderRadius    | —             | Deprecated                         |
-| noType            | —             | Deprecated                         |
+---
+
+### DecoratorDualButton
+
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop  |
+| :-------------- |
+| className       |
+| score           |
+| scoreThresholds |
+| value \*        |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop          | New prop      |                                                                                 |
+| :---------------- | :------------ | :------------------------------------------------------------------------------ |
+| active            | theme         | Renamed.                                                                        |
+| href              | href          | `kind="link"` now required.                                                     |
+| inline            | small         | Renamed.                                                                        |
+| onClick           | onClick       | Available only when `kind` is `"link"` or `"single-button"`                     |
+| midLineTruncation | truncateValue | Adds options `"start"` and `"end"` to the existing `{ maxLength, front, back }` |
+| noIcon            | hideIcon      | Renamed.                                                                        |
+| onContextMenu     | onContextMenu | Available only when `kind` is `"link"` or `"single-button"`                     |
+| title             | valueTitle    | Will override the value's default `title` only.                                 |
+| type              | label \*      | Renamed.                                                                        |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop           |                                                                                                                    |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------- |
+| disabled           | Applies only if `kind="single-button\|dual-button"`                                                                |
+| kind               | Defines type of Decorator to display: `"default"` (default value), `"link"`, `"single-button"`, or `"dual-button"` |
+| onClickLabel       | Available only when `kind="dual-button"`                                                                           |
+| onClickValue       | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuLabel | Available only when `kind="dual-button"`                                                                           |
+| onContextMenuValue | Available only when `kind="dual-button"`                                                                           |
+| setLabelTitle      | [NEED DESCRIPTION]                                                                                                 |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop  |                                                                                                                       |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| fitValue         | Is now the default behavior.                                                                                          |
+| noBorderRadius   | The Carbon 11 design refresh no longer supports this.                                                                 |
+| _noType_         | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
+| scoreDescription |                                                                                                                       |
 
 ---
 
 ### DelimitedList
 
-Note: Append count functionality was not migrated as its implementation never
-worked consistently and didn't match the description.
+**Note:** Append count functionality was not migrated as its implementation
+never worked consistently and didn't match the description. No changes to the
+props surface of this component.
 
-| Old prop | New prop | Change    |
-| :------- | :------- | :-------- |
-| —        | —        | No change |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| className      |
+| delimiter      |
+| items          |
+| truncate       |
 
 ---
 
 ### DescriptionList
 
-[Info here]
+[Renamed from **TypeLayout**]
 
-| Old prop | New prop | Change                                             |
-| :------- | :------- | :------------------------------------------------- |
-| bordered | —        | Deprecated prop removed, use `border` boolean prop |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| border         |
+| children       |
+| className      |
+| size           |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop |                                    |
+| :-------------- | :--------------------------------- |
+| bordered        | Removed, use `border` boolean prop |
 
 ---
 
 ### FilterPanel
 
-[Info here]
-
-| Old prop | New prop | Change |
-| :------- | :------- | :----- |
-| —        | —        | —      |
-
----
-
-### IconButtonBar
-
-[Info here]
+[**Currently under development**]
 
 | Old prop | New prop | Change |
 | :------- | :------- | :----- |
@@ -159,32 +322,120 @@ worked consistently and didn't match the description.
 
 ### Nav
 
-[Info here]
+No changes
 
-| Old prop | New prop | Change |
-| :------- | :------- | :----- |
-| —        | —        | —      |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| activeHref     |
+| children       |
+| className      |
+| heading        |
+| label\*        |
+
+---
+
+### NavList
+
+No changes
+
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop       |
+| :------------------- |
+| activeHref           |
+| children             |
+| className            |
+| icon                 |
+| id                   |
+| isExpandedOnPageload |
+| navigationItemTitle  |
+| onItemClick          |
+| onListClick          |
+| tabIndex             |
+| title                |
+
+---
+
+### NavItem
+
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| activeHref     |
+| children       |
+| className      |
+| current        |
+| disabled       |
+| element        |
+| href           |
+| id             |
+| label          |
+| link           |
+| onClick        |
+| tabIndex       |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop  |                    |
+| :--------------- | :----------------- |
+| handleItemSelect | [NEED DESCRIPTION] |
 
 ---
 
 ### ScrollGradient
 
-[Info here]
+Unchanged props; names and functionality have not changed.
 
-| Old prop  | New prop | Change                                                                 |
-| :-------- | :------- | :--------------------------------------------------------------------- |
-| direction | —        | Removed. Component should manage both horizontal and vertical scrolls. |
-| color     | color    | No longer required                                                     |
+| Unchanged prop         |
+| :--------------------- |
+| children               |
+| className              |
+| getScrollElementRef    |
+| hideStartGradient      |
+| onScroll               |
+| scrollElementClassName |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop | New prop |                    |
+| :------- | :------- | :----------------- |
+| color    | color    | No longer required |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop |                                                                        |
+| :-------------- | :--------------------------------------------------------------------- |
+| direction       | Removed. Component should manage both horizontal and vertical scrolls. |
 
 ---
 
 ### SearchBar
 
-[Info here]
+No changes
 
-| Old prop | New prop | Change |
-| :------- | :------- | :----- |
-| —        | —        | —      |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop       |
+| :------------------- |
+| className            |
+| clearButtonLabelText |
+| hideScopesLabel      |
+| labelText            |
+| onChange             |
+| onSubmit             |
+| placeHolderText      |
+| scopeToString        |
+| scopes               |
+| scopesTypeLabel      |
+| selectedScopes       |
+| sortItems            |
+| submitLabel          |
+| titleText            |
+| translateWithId      |
+| value                |
 
 ---
 
@@ -192,53 +443,113 @@ worked consistently and didn't match the description.
 
 [Info here]
 
-| Old prop               | New prop   | Change             |
-| :--------------------- | :--------- | :----------------- |
-| children               | children   | \* Is now required |
-| —                      | onRetry    | New                |
-| —                      | retryLabel | New                |
-| —                      | showRetry  | New                |
-| currentIndex           | —          | Deprecated         |
-| retry: {action, label} | —          | Deprecated         |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| className      |
+| title          |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop | New prop |                    |
+| :------- | :------- | :----------------- |
+| children | children | \* Is now required |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop   |     |
+| :--------- | :-- |
+| onRetry    | New |
+| retryLabel | New |
+| showRetry  | New |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop        |         |
+| :--------------------- | :------ |
+| currentIndex           | Removed |
+| retry: {action, label} | Removed |
 
 ### StatusIndicatorStep
 
-[Renamed from 'StatusStep']
+[Renamed from **StatusStep**]
 
-| Old prop | New prop     | Change                                                                                 |
+Unchanged props; names and functionality have not changed.
+
+| Unchanged prop |
+| :------------- |
+| className      |
+| description    |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop | New prop     |                                                                                        |
 | :------- | :----------- | :------------------------------------------------------------------------------------- |
 | status   | status       | \* Is now required.<br/>**New values:**<br />"active", "error", "finished", "inactive" |
 | errorMsg | errorMessage | Renamed                                                                                |
-| label    | —            | Deprecated                                                                             |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop |         |
+| :-------------- | ------- |
+| label           | Removed |
 
 ---
 
 ### StringFormatter
 
-[Info here]
+Unchanged props; names and functionality have not changed.
 
-| Old prop         | New prop         | Change                                                                                                                                                           |
-| :--------------- | :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| toolTipDirection | toolTipDirection | **New values:** "top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right", "left", "left-top", "left-bottom", "right", "right-top", "right-bottom" |
+| Unchanged prop |
+| :------------- |
+| className      |
+| lines          |
+| truncate       |
+| value\*        |
+| width          |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop         | New prop         | Change                                                                                                                                                                                                                        |
+| :--------------- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| toolTipDirection | toolTipDirection | Adds to the existing options { "top" and "bottom" }: <br/>"top-left" <br/>"top-right" <br/>"bottom-left" <br/>"bottom-right" <br/>"left" <br/>"left-top" <br/>"left-bottom" <br/>"right" <br/>"right-top" <br/>"right-bottom" |
 
 ---
 
 ### TruncatedList
 
-[Info here]
+Unchanged props; names and functionality have not changed.
 
-| Old prop              | New prop            | Change             |
+| Unchanged prop |
+| :------------- |
+| as             |
+| className      |
+
+Some props were renamed or repurposed to meet Products' `v2` specifications.
+
+| Old prop              | New prop            |                    |
 | :-------------------- | :------------------ | :----------------- |
 | children              | children            | \* Is now required |
 | collapsedItemLimit    | collapsedItemsLimit | Renamed            |
 | expandedItemLimit     | expandedItemsLimit  | Renamed            |
 | expandButtonClassName | buttonClassName     | Renamed            |
-| —                     | onClick             | New                |
-| —                     | viewLessLabel       | New                |
-| —                     | viewMoreLabel       | New                |
-| getExpandButtonLabel  | —                   | Deprecated         |
-| truncateThreshold     | —                   | Deprecated         |
-| scrollGradientColor   | —                   | Deprecated         |
+
+New props were added to the component to meet Products' `v2` specifications.
+
+| New prop      |     |
+| :------------ | :-- |
+| onClick       | New |
+| viewLessLabel | New |
+| viewMoreLabel | New |
+
+Deprecated props were not migrated from the old component.
+
+| Deprecated prop      |         |
+| :------------------- | ------- |
+| getExpandButtonLabel | Removed |
+| truncateThreshold    | Removed |
+| scrollGradientColor  | Removed |
 
 ---
 
@@ -253,6 +564,7 @@ worked consistently and didn't match the description.
 | Header              | View replacement [here](#header)              |
 | Icon                | View replacement [here](#icon)                |
 | IconButton          | View replacement [here](#iconbutton)          |
+| IconButtonBar       | View replacement [here](#iconbuttonbar)       |
 | Panel               | View replacement [here](#panel)               |
 | PanelV2             | View replacement [here](#panelv2)             |
 | ProfileImage        | View replacement [here](#profileimage)        |
@@ -325,6 +637,16 @@ worked consistently and didn't match the description.
 ---
 
 ### IconButton
+
+[Info here]
+
+| Old prop | New prop | Change |
+| :------- | :------- | :----- |
+| —        | —        | —      |
+
+---
+
+### IconButtonBar
 
 [Info here]
 

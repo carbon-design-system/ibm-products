@@ -122,6 +122,7 @@ const parameters = {
       method: 'alphabetical',
       order: [
         'Overview',
+        ['Welcome', 'Getting started', 'Examples', '*'],
         'IBM Products',
         ['Components', 'Patterns', 'Internal', 'Novice to pro'],
         'Community',

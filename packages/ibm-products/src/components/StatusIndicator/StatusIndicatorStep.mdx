@@ -4,6 +4,7 @@ import {
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
 import { StatusIndicatorStep } from '.';
+import * as StatusIndicatorStepStories from './StatusIndicatorStep.stories';
 
 # StatusIndicatorStep
 
@@ -18,7 +19,7 @@ import { StatusIndicatorStep } from '.';
 
 <Canvas>
   <Story
-    id={getStoryId(StatusIndicatorStep.displayName, 'status-indicator-step')}
+    of={StatusIndicatorStepStories.statusIndicatorStep}
   />
 </Canvas>
 

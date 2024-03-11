@@ -4,6 +4,7 @@ import {
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
 import { DescriptionList } from '.';
+import * as DescriptionListStories from './DescriptionList.stories';
 
 # DescriptionList
 
@@ -22,7 +23,7 @@ Type layouts provide an orderly layout of terms and definitions.
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(DescriptionList.displayName, 'description-list')} />
+  <Story of={DescriptionListStories.descriptionList} />
 </Canvas>
 
 ## Component API

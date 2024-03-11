@@ -4,6 +4,7 @@ import {
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
 import { UserAvatar } from '.';
+import * as UserAvatarStories from './UserAvatar.stories';
 
 # UserAvatar
 
@@ -24,13 +25,13 @@ import { UserAvatar } from '.';
 ### Default
 
 <Canvas>
-  <Story id={getStoryId(UserAvatar.displayName, 'default')} />
+  <Story of={UserAvatarStories.Default} />
 </Canvas>
 
 ### With Image
 
 <Canvas>
-  <Story id={getStoryId(UserAvatar.displayName, 'with-image')} />
+  <Story of={UserAvatarStories.WithImage} />
 </Canvas>
 
 ## Code sample

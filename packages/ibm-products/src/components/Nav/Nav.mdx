@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Nav } from '.';
+import * as NavStories from './Nav.stories';
 
 # Nav
 
@@ -22,7 +20,7 @@ import { Nav } from '.';
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId('Nav', 'nav')} />
+  <Story of={NavStories.nav} />
 </Canvas>
 
 ## Code sample

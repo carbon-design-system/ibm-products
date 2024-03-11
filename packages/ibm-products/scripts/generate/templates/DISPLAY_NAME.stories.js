@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DISPLAY_NAME } from '.';
 import mdx from './DISPLAY_NAME.mdx';
@@ -20,7 +17,7 @@ import mdx from './DISPLAY_NAME.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(DISPLAY_NAME.displayName),
+  title: `IBM Products/Components/${DISPLAY_NAME.displayName}`,
   component: DISPLAY_NAME,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

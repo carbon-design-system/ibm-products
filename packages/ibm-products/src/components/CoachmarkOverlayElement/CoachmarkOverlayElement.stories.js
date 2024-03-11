@@ -10,7 +10,6 @@ import React from 'react';
 // import { action } from '@storybook/addon-actions';
 
 import {
-  getStoryTitle,
   getSelectedCarbonTheme,
   prepareStory,
 } from '../../global/js/utils/story-helper';
@@ -27,7 +26,7 @@ import mdx from './CoachmarkOverlayElement.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CoachmarkOverlayElement.displayName),
+  title: 'IBM Products/Novice to pro/Coachmark/CoachmarkOverlayElement',
   component: CoachmarkOverlayElement,
   tags: ['autodocs'],
   argTypes: {

@@ -10,10 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 import cx from 'classnames';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { InlineTip, InlineTipButton, InlineTipLink } from '.';
 
@@ -26,7 +23,7 @@ const InlineTipAnimation = new URL(
 import DocsPage from './InlineTip.docs-page';
 
 export default {
-  title: getStoryTitle(InlineTip.displayName),
+  title: 'IBM Products/Novice to pro/Inline tip/InlineTip',
   component: InlineTip,
   tags: ['autodocs'],
   parameters: {

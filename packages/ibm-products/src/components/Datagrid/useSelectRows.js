@@ -89,7 +89,9 @@ const SelectRow = (datagridState) => {
     getRowId,
   } = datagridState;
 
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [windowSize, setWindowSize] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : ''
+  );
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize(window.innerWidth);
@@ -121,7 +123,7 @@ const SelectRow = (datagridState) => {
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
-  const rowId = `${tableId}-${row.index}`;
+  const rowId = `${tableId}-${row.id}-${row.index}`;
   return (
     <TableSelectRow
       {...cellProps}

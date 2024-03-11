@@ -34,14 +34,9 @@ const s = [
       {
         n: 'Components',
         s: [
-          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Big numbers', s: ['c/BigNumbers'] },
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
-          { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
-          { n: 'Options tile', s: ['c/OptionsTile'] },
-          { n: 'Page header', s: ['c/PageHeader'] },
-          { n: 'Side panel', s: ['c/SidePanel'] },
-          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
+
           {
             n: 'Datagrid',
             s: [
@@ -57,7 +52,28 @@ const s = [
               'c/Datagrid/Extensions/Slug',
             ],
           },
-          { n: 'DelimitedList', s: ['c/DelimitedList'] },
+          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
+          { n: 'Decorator', s: ['c/Decorator'] },
+          { n: 'Delimited list', s: ['c/DelimitedList'] },
+          { n: 'Description list', s: ['c/DescriptionList'] },
+          { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
+          { n: 'Nav', s: ['c/Nav'] },
+          { n: 'Options tile', s: ['c/OptionsTile'] },
+          { n: 'Page header', s: ['c/PageHeader'] },
+          {
+            n: 'Search bar',
+            s: ['c/SearchBar', 'c/SearchBarScopes'],
+          },
+          { n: 'Side panel', s: ['c/SidePanel'] },
+          {
+            n: 'StatusIndicator',
+            s: ['c/StatusIndicator', 'c/StatusIndicatorStep'],
+          },
+          { n: 'String formatter', s: ['c/StringFormatter'] },
+          { n: 'Tag set', s: ['c/TagSet'] },
+          { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'Truncated list', s: ['c/TruncatedList'] },
+          { n: 'User avatar', s: ['c/UserAvatar'] },
         ],
       },
       {
@@ -65,6 +81,7 @@ const s = [
         s: [
           { n: 'Add Select', s: ['c/SingleAddSelect', 'c/MultiAddSelect'] },
           { n: 'About modal', s: ['c/AboutModal'] },
+          { n: 'Cascade', s: ['c/Cascade'] },
           {
             n: 'Create flows',
             s: [
@@ -75,6 +92,7 @@ const s = [
               'c/CreateSidePanel',
             ],
           },
+          { n: 'Drag and drop', s: ['c/DragAndDrop'] },
           {
             n: 'Edit and update',
             s: [
@@ -96,9 +114,11 @@ const s = [
               'c/NotFoundEmptyState',
               'c/NotificationsEmptyState',
               'c/UnauthorizedEmptyState',
+              'c/EmptyStateV2',
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
+          { n: 'Full-page error', s: ['c/FullPageError'] },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
@@ -112,7 +132,6 @@ const s = [
           { n: 'Toolbars', s: ['c/Toolbar'] },
           { n: 'User profile images', s: ['c/UserProfileImage'] },
           { n: 'Web terminal', s: ['c/WebTerminal'] },
-          { n: 'Cascade', s: ['c/Cascade'] },
         ],
       },
       {
@@ -128,10 +147,10 @@ const s = [
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
-          'c/TooltipTrigger',
-          'c/TearsheetShell',
           'c/SimpleHeader',
           'c/SteppedAnimatedMedia',
+          'c/TooltipTrigger',
+          'c/TearsheetShell',
         ],
       },
       {
@@ -156,8 +175,16 @@ const s = [
           },
           'c/Checklist',
           'c/Guidebanner',
-          'c/InlineTip',
-          'c/NonLinearReading',
+          'c/Inlinetip',
+          {
+            n: 'Interstitial Screen',
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
+          },
+          { n: 'Non-linear reading', s: ['c/NonLinearReading'] },
         ],
       },
     ],

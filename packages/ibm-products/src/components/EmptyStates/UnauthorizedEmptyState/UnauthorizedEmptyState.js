@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { UnauthorizedIllustration } from '../assets/UnauthorizedIllustration';
+import UnauthorizedIllustration from '../assets/UnauthorizedIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -36,6 +36,7 @@ export let UnauthorizedEmptyState = React.forwardRef(
       className,
       illustrationPosition = defaults.position,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -64,7 +65,7 @@ export let UnauthorizedEmptyState = React.forwardRef(
         <UnauthorizedIllustration
           size={size}
           theme={illustrationTheme}
-          title={title}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -107,6 +108,11 @@ UnauthorizedEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Designates the position of the illustration relative to the content

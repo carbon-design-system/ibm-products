@@ -1,0 +1,45 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--truncated-list;
+
+.#{$block-class}__list {
+  /* stylelint-disable-next-line carbon/motion-duration-use */
+  transition: height 240ms motion(exit, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}--expanded .#{$block-class}__list {
+  overflow-y: auto;
+}
+
+.#{$block-class}--expanded-all .#{$block-class}__list {
+  overflow-y: hidden;
+}
+
+.#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__button {
+  width: 100%;
+  padding: 0;
+  margin-top: $spacing-02;
+  min-block-size: auto;
+}
+.#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__button:hover {
+  background: transparent;
+}

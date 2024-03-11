@@ -1,0 +1,12 @@
+{
+  "label": "Description-List",
+  "package-config": {
+    "flags": {
+      "component": {
+        "DescriptionList": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

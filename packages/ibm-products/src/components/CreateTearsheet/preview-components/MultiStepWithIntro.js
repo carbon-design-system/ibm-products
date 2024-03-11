@@ -25,6 +25,7 @@ import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
 import { NoDataIllustration } from '../../EmptyStates/assets/NoDataIllustration';
+import { SlugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
@@ -36,6 +37,7 @@ export const MultiStepWithIntro = ({
   influencerWidth,
   label,
   nextButtonText,
+  slug,
   submitButtonText,
   title,
 }) => {
@@ -90,6 +92,7 @@ export const MultiStepWithIntro = ({
             }, simulatedDelay);
           })
         }
+        slug={slug && SlugSample()}
       >
         <CreateTearsheetStep
           title="Select a category"
@@ -108,6 +111,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="standard"
               id="tile-1"
+              tabIndex={selectedCategory === 'standard' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span
@@ -120,6 +124,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="premium"
               id="tile-2"
+              tabIndex={selectedCategory === 'premium' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span
@@ -132,6 +137,7 @@ export const MultiStepWithIntro = ({
               className={`${pkg.prefix}--tearsheet-create-multi-step--custom-tile`}
               value="plus"
               id="tile-3"
+              tabIndex={selectedCategory === 'plus' ? 0 : -1}
             >
               <NoDataIllustration size="lg" />
               <span

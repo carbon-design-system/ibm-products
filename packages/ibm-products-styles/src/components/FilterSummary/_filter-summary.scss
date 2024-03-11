@@ -17,7 +17,7 @@ $block-class: #{$pkg-prefix}--filter-summary;
   width: 100%;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   height: to-rem(48px);
-  align-items: start;
+  align-items: flex-start;
   padding: $spacing-03;
   border-top: 1px solid $border-subtle-01;
   background: $layer-01;

@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable react/prop-types */
 
 import React, { useState, useEffect, forwardRef } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
@@ -47,7 +48,14 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity, Add, Edit, } from '@carbon/react/icons';
+import {
+  Download,
+  Restart,
+  Filter,
+  Activity,
+  Add,
+  Edit,
+} from '@carbon/react/icons';
 import { carbon, pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -851,13 +859,13 @@ const ActionsColumnExample = ({
       disabled,
       shouldHideMenuItem,
       shouldDisableMenuItem,
-      icon: Edit
+      icon: Edit,
     },
     {
       id: 'vote',
       itemText: 'Vote',
       onClick: voteActionClickFn,
-      icon: Add
+      icon: Add,
     },
     {
       id: 'retire',

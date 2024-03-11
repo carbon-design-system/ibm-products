@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { NoDataIllustration } from '../assets/NoDataIllustration';
+import NoDataIllustration from '../assets/NoDataIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -36,6 +36,7 @@ export let NoDataEmptyState = React.forwardRef(
       className,
       illustrationPosition = defaults.position,
       illustrationTheme,
+      illustrationDescription,
       link,
       size = defaults.size,
       subtitle,
@@ -62,9 +63,9 @@ export let NoDataEmptyState = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <NoDataIllustration
-          title={title}
           theme={illustrationTheme}
           size={size}
+          alt={illustrationDescription || title}
         />
         <EmptyStateContent
           action={action}
@@ -104,6 +105,11 @@ NoDataEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription: PropTypes.string,
 
   /**
    * Designates the position of the illustration relative to the content

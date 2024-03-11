@@ -18,7 +18,7 @@ import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 import { prepareProps } from '../../global/js/utils/props-helper';
 
-import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
+import { NotificationsEmptyState } from '../EmptyStates';
 
 // Carbon and package components we use.
 import { Button, Link, Toggle, IconButton } from '@carbon/react';

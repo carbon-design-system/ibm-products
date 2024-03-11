@@ -22,13 +22,13 @@ import {
   ComposedModal,
   Layer,
   ModalHeader,
-  ModalBody,
   usePrefix,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import { useFocus } from '../../global/js/hooks/useFocus';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -44,7 +44,10 @@ const maxDepth = 3;
 // happens when a tearsheet opens or closes. The 'open' array contains one
 // handler per OPEN tearsheet ordered from lowest to highest in visual z-order.
 // The 'all' array contains all the handlers for open and closed tearsheets.
-const stack = { open: [], all: [] };
+// The 'sizes' array contains an array of the sizes for every stacked tearsheet.
+// This is so we can opt-out of including the stacking scale effect when there
+// are stacked tearsheets with mixed sizes (ie, using wide and narrow together)
+const stack = { open: [], all: [], sizes: [] };
 
 // these props are only applicable when size='wide'
 export const tearsheetShellWideProps = [
@@ -85,9 +88,10 @@ export const TearsheetShell = React.forwardRef(
       navigation,
       onClose,
       open,
+      portalTarget: portalTargetIn,
       selectorPrimaryFocus,
       size,
-      portalTarget: portalTargetIn,
+      slug,
       title,
       verticalPosition,
       // Collect any other property values passed in.
@@ -100,8 +104,10 @@ export const TearsheetShell = React.forwardRef(
     const renderPortalUse = usePortalTarget(portalTargetIn);
     const localRef = useRef();
     const resizer = useRef(null);
+    const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     const wide = size === 'wide';
 
@@ -140,11 +146,17 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      const element = selectorPrimaryFocus
-        ? modalRef.current.querySelector(selectorPrimaryFocus)
-        : modalRef.current;
-      setTimeout(() => element.focus(), 1);
+      firstElement?.focus();
     };
+
+    useEffect(() => {
+      if (open) {
+        // Focusing the first element
+        setTimeout(() => {
+          firstElement?.focus();
+        }, 0);
+      }
+    }, [open, firstElement]);
 
     useEffect(() => {
       const notify = () =>
@@ -158,6 +170,7 @@ export const TearsheetShell = React.forwardRef(
 
       // Register this tearsheet's stack change callback/listener.
       stack.all.push(handleStackChange);
+      stack.sizes.push(size);
 
       // If the tearsheet is mounting with open=true or open is changing from
       // false to true to open it then append its notification callback to
@@ -174,6 +187,7 @@ export const TearsheetShell = React.forwardRef(
       return function cleanup() {
         // Remove the notification callback from the all handlers array.
         stack.all.splice(stack.all.indexOf(handleStackChange), 1);
+        stack.sizes.splice(stack.sizes.indexOf(size), 1);
 
         // Remove the notification callback from the open handlers array, if
         // it's there, and notify all open tearsheets that the stacking has
@@ -184,7 +198,7 @@ export const TearsheetShell = React.forwardRef(
           notify();
         }
       };
-    }, [open]);
+    }, [open, size]);
 
     function handleFocus() {
       // If something within us is receiving focus but we are not the topmost
@@ -209,6 +223,21 @@ export const TearsheetShell = React.forwardRef(
       // Include an ActionSet if and only if one or more actions is given.
       const includeActions = actions && actions?.length > 0;
 
+      const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
+
+      const setScaleValues = () => {
+        if (!areAllSameSizeVariant()) {
+          return {
+            [`--${bc}--stacking-scale-factor-single`]: 1,
+            [`--${bc}--stacking-scale-factor-double`]: 1,
+          };
+        }
+        return {
+          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
+        };
+      };
+
       return renderPortalUse(
         <ComposedModal
           {
@@ -222,16 +251,18 @@ export const TearsheetShell = React.forwardRef(
               depth > 1 || (depth === 1 && prevDepth.current > 1),
             [`${bc}--wide`]: wide,
             [`${bc}--narrow`]: !wide,
+            [`${bc}--has-slug`]: slug,
+            [`${bc}--has-close`]: effectiveHasCloseIcon,
           })}
-          style={{
-            [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
-            [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
-          }}
+          slug={slug}
+          style={setScaleValues()}
           containerClassName={cx(`${bc}__container`, {
             [`${bc}__container--lower`]: verticalPosition === 'lower',
+            [`${bc}__container--mixed-size-stacking`]: !areAllSameSizeVariant(),
           })}
           {...{ onClose, open, selectorPrimaryFocus }}
           onFocus={handleFocus}
+          onKeyDown={keyDownListener}
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[
@@ -282,7 +313,10 @@ export const TearsheetShell = React.forwardRef(
               <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
             </ModalHeader>
           )}
-          <Wrap element={ModalBody} className={`${bc}__body`}>
+          <Wrap
+            ref={modalBodyRef}
+            className={`${carbonPrefix}--modal-content ${bc}__body`}
+          >
             <Wrap
               className={cx({
                 [`${bc}__influencer`]: true,
@@ -491,6 +525,11 @@ TearsheetShell.propTypes = {
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   */
+  slug: PropTypes.node,
 
   /**
    * The main title of the tearsheet, displayed in the header area.

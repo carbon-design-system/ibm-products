@@ -256,7 +256,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/144151347?v=4",
       "profile": "https://github.com/SeonyuK",
       "contributions": [
-        "a11y"
+        "a11y",
+        "code"
       ]
     },
     {
@@ -275,6 +276,24 @@
       "name": "Afsal K",
       "avatar_url": "https://avatars.githubusercontent.com/u/9197089?v=4",
       "profile": "http://iamafsal.in/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "devadula-nandan",
+      "name": "Nandan Devadula",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47176249?v=4",
+      "profile": "https://github.com/devadula-nandan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "anamikaanu96",
+      "name": "Anamika T S",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47971732?v=4",
+      "profile": "https://github.com/anamikaanu96",
       "contributions": [
         "code"
       ]

@@ -99,6 +99,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__header-container {
-    align-items: start;
+    align-items: flex-start;
   }
 }

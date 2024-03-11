@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2023, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
@@ -299,6 +306,24 @@ const filters = [
         label: 'Marital status',
         titleText: 'Marital status',
         // Add any other Carbon Dropdown props here
+      },
+    },
+  },
+  {
+    type: 'multiSelect',
+    column: 'status',
+    props: {
+      MultiSelect: {
+        items: [
+          { text: 'relationship', id: 'relationship' },
+          { text: 'complicated', id: 'complicated' },
+          { text: 'single', id: 'single' },
+        ],
+        id: 'carbon-multiselect-example',
+        label: 'Status selection',
+        titleText: 'Multiselect title',
+        itemToString: (item) => (item ? item.text : ''),
+        // Add any other Carbon MultiSelect props here
       },
     },
   },

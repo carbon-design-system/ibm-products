@@ -28,6 +28,7 @@ const { name } = EmptyState;
 const defaultProps = {
   title: 'Empty state title',
   subtitle: 'Empty state subtitle',
+  illustrationDescription: 'Test alt text',
 };
 
 describe(name, () => {
@@ -66,7 +67,7 @@ describe(name, () => {
 
   it('should render title by passing string', async () => {
     render(<EmptyState {...defaultProps} />);
-    screen.getByText('Empty state title');
+    screen.getAllByText('Empty state title');
   });
 
   it('should render title by passing node', async () => {
@@ -96,11 +97,7 @@ describe(name, () => {
 
   it('should render a custom illustration', async () => {
     const { container } = render(
-      <EmptyState
-        {...defaultProps}
-        illustration={CustomIllustration}
-        illustrationDescription="Test alt text"
-      />
+      <EmptyState {...defaultProps} illustration={CustomIllustration} />
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();
@@ -258,7 +255,11 @@ describe(name, () => {
   it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', async () =>
     expectError(required('illustrationDescription', 'EmptyState'), () => {
       render(
-        <EmptyState {...defaultProps} illustration={CustomIllustration} />
+        <EmptyState
+          title="Empty state title"
+          subtitle="Empty state subtitle"
+          illustration={CustomIllustration}
+        />
       );
     }));
 });

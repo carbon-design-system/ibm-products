@@ -1190,6 +1190,9 @@ hook.
 2. Add `onRowSelect` to the `useDatagrid` hook, this is a callback function
    called when on a row's selection checkbox onChange, and sends back the row
    object and the event
+3. Add `onAllRowSelect` to the `useDatagrid` hook, this is a callback function
+   called when on all rows selection checkbox onChange, and sends back all rows
+   object and the event
 
 ```jsx
 const [data] = useState(makeData(10));
@@ -1199,6 +1202,7 @@ const datagridState = useDatagrid(
     columns,
     data,
     onRowSelect: (row, event) => console.log(row, event),
+    onAllRowSelect: (rows, event) => console.log(rows, event),
   },
   useSelectRows
 );

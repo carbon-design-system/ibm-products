@@ -32,7 +32,7 @@ import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
-import { DocsPage } from './Datagrid.docs-page';
+import DocsPage from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -298,6 +298,8 @@ export const SelectableRow = () => {
       emptyStateTitle,
       emptyStateDescription,
       onRowSelect: (row, event) => console.log(row, event),
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id === '0',
     },
     useSelectRows,
     useStickyColumn
@@ -354,11 +356,17 @@ export const SortableColumns = () => {
       ascendingSortableLabelText: 'ascending',
       descendingSortableLabelText: 'descending',
       defaultSortableLabelText: 'none',
+      initialState: {
+        sortableColumn: {
+          id: 'firstName',
+          order: 'ASC',
+        },
+      },
     },
     useSortableColumns
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 export const ActionsDropdown = () => {
@@ -486,7 +494,9 @@ export const BatchActions = () => {
       DatagridActions,
       DatagridBatchActions,
       rowActions: getRowActions(),
-      onSelectAllRows: () => console.log('onSelectAll batch action callback'),
+      onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
+      onAllRowSelect: (rows, event) =>
+        console.log('onAllRowsClick called', rows, event),
       batchActionMenuButtonLabel: 'More',
     },
     useSelectRows,
@@ -494,7 +504,12 @@ export const BatchActions = () => {
     useStickyColumn
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <Datagrid
+      datagridState={{ ...datagridState }}
+      ariaToolbarLabel="batch actions toolbar"
+    />
+  );
 };
 
 export const DisableSelectRow = () => {

@@ -12,10 +12,12 @@ kube
 kubernetes
 lottie
 markdownlint
+pageview
 plex
 stackblitz
 storysource
 stylelint
+tealium
 technote
 unhover
 wcag

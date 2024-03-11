@@ -92,9 +92,11 @@ let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, async () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
-    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
-      blockClass
-    );
+    await act(async () => {
+      expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
+        blockClass
+      );
+    });
   });
 
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
@@ -115,8 +117,10 @@ const commonTests = (Ts, name, props, testActions) => {
       />
     );
 
-    await expect(container).toBeAccessible(name);
-    await expect(container).toHaveNoAxeViolations();
+    await act(async () => {
+      await expect(container).toBeAccessible(name);
+      await expect(container).toHaveNoAxeViolations();
+    });
   });
 
   it('omits main content sections when no props supplied and no close icon requested', async () => {

@@ -1,0 +1,71 @@
+name: Update example gallery # Updates examples twice a month
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 8,22 * *' # Updates will happen every 8th/22nd of the month
+
+jobs:
+  check_gallery:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: yarn
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: check-gallery-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install
+        run: yarn
+
+      - name: Check gallery
+        id: up_to_date
+        run: |
+          yarn update-gallery-config
+          if [[ `git status --porcelain` ]]; then
+            echo "::error ::The gallery is out of date, run yarn update-gallery-config"
+            echo "The following items are out of date."
+            git status --porcelain
+            exit 1
+          else
+            echo "Gallery is up-to-date"
+            exit 0
+          fi
+
+      - name: Create pull request
+        if: steps.up_to_date.outcome == 'failure'
+        id: create-pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          commit-message: 'chore: update example gallery'
+          committer: GitHub <noreply@github.com>
+          author:
+            ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: 'update-examples'
+          branch-suffix: random
+          title: 'chore: update example gallery'
+          body: |
+            This PR was automatically generated to update provided examples.
+            The goal is to keep our examples up-to-date with the latest changes from our own package.
+
+            #### What did you change?
+
+            This action ran `yarn update-gallery-config` to update examples as necessary.
+
+            #### How did you test and verify your work?
+
+            This PR should only be merged reviewing the following checks:
+            - [ ] `yarn ci-check` runs cleanly and all tests pass.
+            - [ ] Storybook runs correctly in the Netlify deploy-preview.
+              - [ ] Updated components render correctly in the examples section of Storybook.

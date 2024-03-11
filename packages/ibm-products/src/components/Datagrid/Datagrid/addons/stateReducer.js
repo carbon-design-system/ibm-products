@@ -81,13 +81,20 @@ export const stateReducer = (newState, action) => {
   switch (action.type) {
     case TOGGLE_ALL_ROWS_SELECTED: {
       const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
+      const newSelectedRowIds = {};
       if (rows) {
         const newSelectedRowData = {};
         rows.forEach((row) => {
-          newSelectedRowData[getRowId(row, row.index)] = row;
+          const props = row.getRowProps();
+          if (props && props.disabled) {
+            return;
+          }
+          newSelectedRowIds[getRowId(row.original, row.index)] = true;
+          newSelectedRowData[getRowId(row.original, row.index)] = row.original;
         });
         return {
           ...newState,
+          selectedRowIds: newSelectedRowIds,
           selectedRowData:
             indeterminate || !isChecked ? {} : newSelectedRowData,
         };
@@ -106,7 +113,7 @@ export const stateReducer = (newState, action) => {
           ...newState,
           selectedRowData: {
             ...newState.selectedRowData,
-            [getRowId(rowData, rowData.index)]: rowData,
+            [getRowId(rowData.original, rowData.index)]: rowData.original,
           },
         };
       }
@@ -114,7 +121,10 @@ export const stateReducer = (newState, action) => {
         const newData = { ...newState.selectedRowData };
         const dataWithRemovedRow = Object.fromEntries(
           Object.entries(newData).filter(([key]) => {
-            return parseInt(key) !== parseInt(rowData.index);
+            return (
+              parseInt(key) !==
+              parseInt(getRowId(rowData.original, rowData.index))
+            );
           })
         );
         return {
@@ -173,10 +183,8 @@ export const stateReducer = (newState, action) => {
       const currentColumn = {};
       currentColumn[headerId] = newState.columnResizing.columnWidths[headerId];
       const allChangedColumns = newState.columnResizing.columnWidths;
-      const { isResizing } = newState;
-      if (isResizing) {
-        onColResizeEnd?.(currentColumn, allChangedColumns);
-      }
+
+      onColResizeEnd?.(currentColumn, allChangedColumns);
       if (!isKeyEvent) {
         if (typeof isKeyEvent === 'undefined') {
           // Blur resizer input if it has focus and is not from a key event resize

@@ -211,7 +211,9 @@ export const aboutModal = prepareStory(
   {
     storyName: aboutModalStoryName,
     args: {
-      title: 0,
+      title: 2,
+      links: 0,
+      content: 0,
       additionalInfo: 0,
       ...commonArgs,
     },

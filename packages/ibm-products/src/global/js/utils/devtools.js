@@ -1,17 +1,11 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import pkg from '../package-settings';
-
-const devtoolsAttribute = 'data-carbon-devtools-id';
-
-function getDevtoolsId(componentName) {
-  return `${pkg.prefix}--${componentName}`;
-}
+import { getDevtoolsId, devtoolsAttribute } from '../package-settings';
 
 function getDevtoolsProps(componentName) {
   return {
@@ -19,4 +13,4 @@ function getDevtoolsProps(componentName) {
   };
 }
 
-export { devtoolsAttribute, getDevtoolsId, getDevtoolsProps };
+export { devtoolsAttribute, getDevtoolsProps, getDevtoolsId };

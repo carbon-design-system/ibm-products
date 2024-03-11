@@ -1,10 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
@@ -26,9 +27,8 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
-import { pkg } from '../../../../settings';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
-import { getDateFormat } from './Panel.stories';
+import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
@@ -89,6 +89,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {
@@ -149,12 +150,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     useFiltering,
     useColumnCenterAlign
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useFiltering` hook
-  pkg.feature['Datagrid.useFiltering'] = true;
-  pkg._silenceWarnings(true);
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -258,15 +253,11 @@ const filters = [
     },
   },
   {
-    type: 'dropdown',
+    type: 'multiSelect',
     column: 'status',
     props: {
-      Dropdown: {
-        id: 'marital-status-dropdown',
-        ariaLabel: 'Marital status dropdown',
-        items: ['relationship', 'complicated', 'single'],
-        label: 'Marital status',
-        titleText: 'Marital status',
+      MultiSelect: {
+        ...multiSelectProps,
       },
     },
   },
@@ -298,7 +289,6 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       filters,
       renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -328,7 +318,6 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
       filters,
       renderLabel: (key, value) => handleFilterTagLabelText(key, value),
     },
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -369,6 +358,5 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
     filterProps,
-    featureFlags: ['Datagrid.useFiltering'],
   },
 });

@@ -1,37 +1,34 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const {
-  env: { BABEL_ENV },
-} = process;
+'use strict';
 
-module.exports = () => ({
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
-        targets: {
-          browsers: ['extends browserslist-config-carbon'],
-          node: '16',
+module.exports = () => {
+  return {
+    exclude: ['node_modules/**'],
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          modules: false,
+          targets: {
+            browsers: ['extends browserslist-config-carbon'],
+          },
         },
-      },
+      ],
+      '@babel/preset-react',
+      '@babel/preset-typescript',
     ],
-    '@babel/preset-react',
-  ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties',
-    [
-      '@babel/plugin-transform-runtime',
-      {
-        regenerator: true,
-      },
+    plugins: [
+      'dev-expression',
+      '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-export-namespace-from',
+      '@babel/plugin-proposal-export-default-from',
+      '@babel/plugin-transform-react-constant-elements',
     ],
-    '@babel/plugin-proposal-private-methods',
-    '@babel/plugin-proposal-private-property-in-object',
-  ],
-});
+  };
+};

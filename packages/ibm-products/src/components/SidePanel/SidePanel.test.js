@@ -126,7 +126,7 @@ describe('SidePanel', () => {
       placement: 'right',
     });
     const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container-right-placement`
+      `.${blockClass}--right-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -136,7 +136,7 @@ describe('SidePanel', () => {
       placement: 'left',
     });
     const sidePanelOuter = container.querySelector(
-      `.${blockClass}__container-left-placement`
+      `.${blockClass}--left-placement`
     );
     expect(sidePanelOuter).toBeTruthy();
   });
@@ -429,7 +429,7 @@ describe('SidePanel', () => {
         size,
       });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
-      expect(sidePanelOuter).toHaveClass(`${blockClass}__container--${size}`);
+      expect(sidePanelOuter).toHaveClass(`${blockClass}--${size}`);
     });
   });
 

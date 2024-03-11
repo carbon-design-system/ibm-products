@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ const ButtonWrapper = ({
       {...rest}
       renderIcon={(props) => <Column size={16} {...props} />}
       iconDescription={iconTooltipLabel}
-      tooltipPosition="left"
+      tooltipPosition="bottom"
       kind="ghost"
       hasIconOnly
       test-id={`${blockClass}__customize-columns-trigger`}

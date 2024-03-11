@@ -170,8 +170,9 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (/components|patterns/i.test(kind)) {
     result.expectCodedExample = true;
-    // components and patterns have an additional level
-    // No longer true
+    // Required until components within 'Patterns' category use the
+    // new approach with setting story titles because they are nested an
+    // extra level
     if (typeof b === 'string') {
       component = b;
     } else {

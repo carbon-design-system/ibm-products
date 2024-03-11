@@ -12,10 +12,7 @@ import React from 'react';
 import { UiShell } from './preview-components/UiShell';
 import { Breadcrumbs } from './preview-components/Breadcrumbs';
 import { Link } from '@carbon/react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { FullPageError } from '.';
 import mdx from './FullPageError.mdx';
@@ -25,7 +22,7 @@ import styles from './_storybook-styles.scss';
 const storyClass = 'full-page-error-stories';
 
 export default {
-  title: getStoryTitle(FullPageError.displayName),
+  title: 'IBM Products/Patterns/Full-page error/FullPageError',
   component: FullPageError,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

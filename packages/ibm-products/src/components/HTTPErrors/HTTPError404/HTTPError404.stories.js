@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,14 +7,11 @@
 
 import React from 'react';
 import { HTTPError404 } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: getStoryTitle(HTTPError404.displayName),
+  title: 'IBM Products/Patterns/HTTP errors/HTTPError404',
   component: HTTPError404,
   tags: ['autodocs'],
   parameters: {

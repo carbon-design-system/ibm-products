@@ -65,7 +65,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   &.#{$action-set-block-class}
-    .#{$action-set-block-class}__action-button--ghost {
+    .#{$action-set-block-class}__action-button--ghost,
+  .#{$action-set-block-class}__action-button--danger--ghost {
     max-width: none;
     flex: 1 1 25%;
     padding-left: $spacing-07; /* increased padding when inline */

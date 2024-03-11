@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './_storybook-styles.scss';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import {
@@ -23,7 +20,7 @@ import {
 // import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: getStoryTitle(TearsheetShell.displayName),
+  title: 'IBM Products/Internal/TearsheetShell',
   component: TearsheetShell,
   tags: ['autodocs'],
   parameters: {

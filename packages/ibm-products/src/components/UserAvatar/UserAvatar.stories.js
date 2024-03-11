@@ -11,10 +11,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
@@ -27,7 +24,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: getStoryTitle(UserAvatar.displayName),
+  title: 'IBM Products/Components/UserAvatar',
   component: UserAvatar,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

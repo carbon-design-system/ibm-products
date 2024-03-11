@@ -15,10 +15,7 @@ import {
   useFiltering,
   useColumnCenterAlign,
 } from '../../index';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getBatchActions } from '../../Datagrid.stories';
@@ -31,7 +28,7 @@ import { makeData } from '../../utils/makeData';
 import styles from '../../_storybook-styles.scss';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Panel`,
+  title: 'IBM Products/Components/Datagrid/Panel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -11,10 +11,7 @@ import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
 import { getBatchActions } from '../../Datagrid.stories';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -31,7 +28,7 @@ import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
+  title: 'IBM Products/Components/Datagrid/Flyout',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

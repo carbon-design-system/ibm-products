@@ -20,7 +20,7 @@ import DocsPage from './TruncatedList';
 const storyClass = 'truncated-list-stories';
 
 export default {
-  title: 'IBM Products/Components/TruncatedList',
+  title: 'IBM Products/Components/Truncated list/TruncatedList',
   component: TruncatedList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

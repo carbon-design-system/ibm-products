@@ -24,7 +24,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'IBM Products/Components/UserAvatar',
+  title: 'IBM Products/Components/User avatar/UserAvatar',
   component: UserAvatar,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

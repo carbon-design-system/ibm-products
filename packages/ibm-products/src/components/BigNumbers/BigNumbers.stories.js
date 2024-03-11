@@ -34,7 +34,7 @@ const numericOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/BigNumbers',
+  title: 'IBM Products/Components/Big numbers/BigNumbers',
   component: BigNumbers,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

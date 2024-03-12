@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { DelimitedList } from '.';
+import * as DelimitedListStories from './DelimitedList.stories';
 
 # DelimitedList
 
@@ -22,7 +20,7 @@ import { DelimitedList } from '.';
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(DelimitedList.displayName, 'delimited-list')} />
+  <Story of={DelimitedListStories.delimited} />
 </Canvas>
 
 ## Code sample

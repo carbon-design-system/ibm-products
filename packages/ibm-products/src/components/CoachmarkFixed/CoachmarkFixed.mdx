@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkFixed } from '.';
+import * as CoachmarkFixedStories from './CoachmarkFixed.stories';
 
 # CoachmarkFixed
 
@@ -41,7 +39,7 @@ _(See bottom right)_
 
 <Canvas>
   <div className="CoachmarkBaseExampleUsage">
-    <Story id={getStoryId(CoachmarkFixed.displayName, 'coachmark-fixed')} />
+    <Story of={CoachmarkFixedStories.coachmarkFixed} />
   </div>
 </Canvas>
 

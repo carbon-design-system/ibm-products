@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { PageHeader } from '.';
+import * as stories from './PageHeader.stories';
 // cspell:ignore actionbar breadcrumbitems pageactions summarydetails
 
 # PageHeader
@@ -58,7 +56,7 @@ be used if only the breadcrumb, title, actions, and/or simple status are
 required.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-buttons')} />
+  <Story of={stories.withButtons} />
 </Canvas>
 
 ### Page header with background
@@ -69,7 +67,7 @@ items. The page header with a background should be used if tabs, subtitles,
 and/or more global items are required.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-tabs')} />
+  <Story of={stories.withTabs} />
 </Canvas>
 
 ### Page header with background (breadcrumb + actions toolbar included)
@@ -78,7 +76,7 @@ If the page header contains action icons, the default state includes a toolbar
 designated for the breadcrumbs and action icons.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-actions-toolbar')} />
+  <Story id={stories.withActionsToolbar} />
 </Canvas>
 
 ### Page header with background (breadcrumb + actions toolbar ONLY)
@@ -88,10 +86,7 @@ by just displaying the breadcrumb bar only.
 
 <Canvas>
   <Story
-    id={getStoryId(
-      PageHeader.displayName,
-      'with-breadcrumb-actions-toolbar-only'
-    )}
+    of={stories.withBreadcrumbActionsToolbarOnly}
   />
 </Canvas>
 
@@ -110,7 +105,7 @@ accommodate simple requirements, including page title only, or page title +
 buttons.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-title')} />
+  <Story of={stories.withTitle} />
 </Canvas>
 
 #### With breadcrumbs
@@ -119,7 +114,7 @@ This variant of the page header accounts for page title, buttons, breadcrumbs,
 and occasionally icons and metadata.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-breadcrumbs')} />
+  <Story of={stories.withBreadcrumbs} />
 </Canvas>
 
 #### With status indicator
@@ -128,7 +123,7 @@ Structured similarly to the examples above, this variant is for the inclusion of
 a page level status indicator.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-buttons')} />
+  <Story of={stories.withButtons} />
 </Canvas>
 
 ### Examples with background
@@ -139,7 +134,7 @@ Tabs are positioned underneath the page title and sit flush at the base of the
 page header background.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-tabs')} />
+  <Story of={stories.withTabs} />
 </Canvas>
 
 #### With tags
@@ -148,7 +143,7 @@ Tags are positioned underneath the page title and sit above the base of the page
 header background.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-tags')} />
+  <Story of={stories.withTags} />
 </Canvas>
 
 #### With tabs & tags
@@ -157,7 +152,7 @@ If both tabs & tags need to be present, tabs should be remain left aligned with
 the page and tags reposition over to the right side of the screen.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-tabs-and-tags')} />
+  <Story of={stories.withTabsAndTags} />
 </Canvas>
 
 #### With subtitle
@@ -167,7 +162,7 @@ with subtitles use the background to create hierarchy and to separate it from
 type placed within the page.
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-subtitle')} />
+  <Story of={stories.withSubtitle} />
 </Canvas>
 
 #### With summary details
@@ -176,7 +171,7 @@ Page content with global page hierarchy can be placed above tabs within the page
 header. **This is just an example of an allowable zone for content.**
 
 <Canvas>
-  <Story id={getStoryId(PageHeader.displayName, 'with-summary-details')} />
+  <Story of={stories.withSummaryDetails} />
 </Canvas>
 
 ## Code sample

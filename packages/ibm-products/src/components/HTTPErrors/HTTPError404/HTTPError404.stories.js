@@ -17,7 +17,14 @@ export default {
   parameters: {
     docs: {
       page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#404-error" />
+        <StoryDocsPage
+          altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#404-error"
+          blocks={[
+            {
+              story: withAllPropsSet,
+            },
+          ]}
+        />
       ),
     },
     layout: 'fullscreen',

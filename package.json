@@ -28,6 +28,8 @@
     "clean:finally:files": "rimraf coverage node_modules results",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn run-all --no-sort clean",
+    "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
+    "coverage:report": "open ./packages/ibm-products/coverage/index.html",
     "format": "prettier ./packages/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.16.0...@carbon/ibm-cloud-cognitive-core@2.17.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* Moved Search bar from patterns to components ([#4470](https://github.com/carbon-design-system/ibm-products/issues/4470)) ([8c46b0e](https://github.com/carbon-design-system/ibm-products/commit/8c46b0ed0dac279cf6d85592d47b7c3edb8797a6))
+
+
+### Features
+
+* **Nav:** new component Nav ([#4420](https://github.com/carbon-design-system/ibm-products/issues/4420)) ([2850246](https://github.com/carbon-design-system/ibm-products/commit/28502464448794e048845a846635772514ac2ef5))
+
+
+
+
+
 # [2.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.15.0...@carbon/ibm-cloud-cognitive-core@2.16.0) (2024-03-05)
 
 

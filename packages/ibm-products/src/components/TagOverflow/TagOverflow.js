@@ -6,17 +6,19 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
+import { Tag, Tooltip } from '@carbon/react';
+import { TagSet } from '../TagSet';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--tag-overflow`;
@@ -45,16 +47,111 @@ export let TagOverflow = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
-      children /* TODO: remove if not needed. */,
       className,
-      /* TODO: add other props for TagOverflow, with default values if needed */
-
+      items,
+      itemTemplate,
+      maxVisible,
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    // type of Tags elements within the component
+    const tagType = 'blue';
+    
+    const localContainerRef = useRef(null);
+    const containerRef = ref || localContainerRef;
+    const itemRefs = useRef(null);
+    const overflowRef = useRef(null);
+    // measurementOffset is the value of margin applied on each items,
+    // this value is required for calculating how many items will fit within the container
+    const measurementOffset = 4;
+    const overflowIndicatorWidth = 40;
+    
+    const [containerWidth, setContainerWidth] = useState(0);
+    const [visibleItems, setVisibleItems] = useState([]);
+    const [overflowItems, setOverflowItems] = useState([]);
+
+    const handleResize = () => {
+      setContainerWidth(containerRef.current.offsetWidth);
+    };
+
+    useResizeObserver(containerRef, handleResize);
+
+    const getMap = () => {
+      if (!itemRefs.current) {
+        itemRefs.current = new Map();
+      }
+      return itemRefs.current;
+    };
+    
+    const itemRefHandler = (id, node) => {
+      const map = getMap();
+      if (id && node) {
+        map.set(id, node.offsetWidth);
+      }
+    };
+
+    const getVisibleItems = () => {
+
+      if (!itemRefs.current) {return items;}
+
+      const map = getMap();
+      const overflowContanerWidth = (overflowRef.current.offsetWidth > overflowIndicatorWidth)? overflowRef.current.offsetWidth : overflowIndicatorWidth;
+      const maxWidth = containerWidth - overflowContanerWidth;
+      
+      let childrenWidth = 0;
+      let maxReached = false;
+
+      return items.reduce((prev, cur) => {
+        if (!maxReached) {
+          const itemWidth = map.get(cur.id) + measurementOffset;
+          const fits = (itemWidth + childrenWidth) < maxWidth;
+
+          if (fits) {
+            childrenWidth += itemWidth;
+            prev.push(cur);
+          } else {
+            maxReached = true;
+          }
+        }
+        return prev;
+      }, []);
+    };
+
+    const ItemComponent = ({templateProps}) => {
+
+      const itemRef = (node) => itemRefHandler(templateProps.id, node);
+      let className = templateProps.className ? `${blockClass}__item ${templateProps.className}` : `${blockClass}__item`;
+
+      const ItemComp = () => React.createElement(itemTemplate, {ref: itemRef, ...templateProps, className});
+      
+      return <ItemComp></ItemComp>;
+    };
+
+    ItemComponent.propTypes = {
+      templateProps: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        className: PropTypes.string
+      }).isRequired
+    };
+
+    let visibleItemsArr = getVisibleItems();
+
+    if (maxVisible && (maxVisible < visibleItemsArr.length)) {
+      visibleItemsArr = visibleItemsArr.slice(0,maxVisible);
+    }
+
+    const hiddenItems = items.slice(visibleItemsArr.length);
+    const overflowItemsArr = hiddenItems.map((item) => {
+      return({type: tagType, ...item});
+    });
+
+    useEffect(()=>{
+      setVisibleItems(visibleItemsArr);
+      setOverflowItems(overflowItemsArr)
+    },[visibleItemsArr, overflowItemsArr])
+
     return (
       <div
         {
@@ -70,11 +167,34 @@ export let TagOverflow = React.forwardRef(
             // example: [`${blockClass}__here-if-small`]: size === 'sm',
           }
         )}
-        ref={ref}
+        ref={containerRef}
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {children}
+        {visibleItems.map((item) => {
+          // render custom components 
+          if(itemTemplate) {
+            return <ItemComponent templateProps={item} key={item.id}></ItemComponent>
+          } else {
+            // if there is no template prop, then render items as Tags
+            return <div ref={(node) => itemRefHandler(item.id, node)} key={item.id}>
+                <Tooltip align="bottom" label={item.label} >
+                  <Tag className={`${blockClass}__item--tag`} type={tagType} >{item.label}</Tag>
+                </Tooltip>
+              </div>
+          }
+        })}
+        <span className={`${blockClass}__indicator`} ref={overflowRef}>
+          {!!overflowItems.length && 
+            <TagSet tags={overflowItems}
+              allTagsModalTitle="All tags"
+              containingElementRef={overflowRef}
+              allTagsModalSearchLabel="Search all tags"
+              allTagsModalSearchPlaceholderText="Search all tags"
+              showAllTagsLabel="Show all tags">
+            </TagSet>
+          }
+        </span>
       </div>
     );
   }
@@ -92,14 +212,31 @@ TagOverflow.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 TagOverflow.propTypes = {
   /**
-   * Provide the contents of the TagOverflow.
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * Component definition of the items to be rendered inside TagOverflow.
+   * If this is not passed, items will be rendered as Tag component
+   */
+  itemTemplate: PropTypes.elementType,
+
+  /**
+   * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
+   * **label**\* (required) to supply the item content,
+   * **id**\* (required) to uniquely identify the each item.
+   * if you are passing an ItemTemplate prop for rendering custom components, 
+   * then pass the props required for your custom component as the properties of item object
+   */
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+  /**
+   * maximum visible items
+   */
+  maxVisible: PropTypes.number,
 };

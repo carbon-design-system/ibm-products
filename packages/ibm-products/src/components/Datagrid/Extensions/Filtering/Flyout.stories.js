@@ -28,7 +28,7 @@ import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Flyout',
+  title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

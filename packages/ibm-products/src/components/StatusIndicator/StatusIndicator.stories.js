@@ -16,7 +16,7 @@ import mdx from './StatusIndicator.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Components/StatusIndicator',
+  title: 'IBM Products/Components/Status indicator/StatusIndicator',
   component: StatusIndicator,
   tags: ['autodocs'],
   argTypes: {

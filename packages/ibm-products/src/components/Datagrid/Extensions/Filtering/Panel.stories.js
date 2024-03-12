@@ -28,7 +28,7 @@ import { makeData } from '../../utils/makeData';
 import styles from '../../_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Panel',
+  title: 'IBM Products/Components/Datagrid/Filtering/Panel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

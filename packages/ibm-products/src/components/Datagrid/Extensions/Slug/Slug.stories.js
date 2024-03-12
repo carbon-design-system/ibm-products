@@ -18,10 +18,7 @@ import {
   usePrefix,
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -36,7 +33,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Slug`,
+  title: 'IBM Products/Components/Datagrid/Slug',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

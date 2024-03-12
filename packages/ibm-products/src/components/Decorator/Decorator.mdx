@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Decorator } from '.';
+import * as DecoratorStories from './Decorator.stories';
 
 # Decorator
 
@@ -25,7 +23,7 @@ element.
 ## Decorator example usage
 
 <Canvas withSource="none">
-  <Story id={getStoryId(Decorator.displayName, 'decorator')} />
+  <Story of={DecoratorStories.decorator} />
 </Canvas>
 
 ## Decorator code sample
@@ -37,7 +35,7 @@ element.
 ## Decorator as Link example usage
 
 <Canvas withSource="none">
-  <Story id={getStoryId(Decorator.displayName, 'as-link')} />
+  <Story of={DecoratorStories.asLink} />
 </Canvas>
 
 ## Decorator as Link code sample
@@ -76,7 +74,7 @@ adding `target="_blank"` to open in a new browser tab.
 ## Decorator as Single Button example usage
 
 <Canvas withSource="none">
-  <Story id={getStoryId(Decorator.displayName, 'as-single-button')} />
+  <Story of={DecoratorStories.asSingleButton} />
 </Canvas>
 
 ## Decorator as Single Button code sample
@@ -99,7 +97,7 @@ adding `target="_blank"` to open in a new browser tab.
 ## Decorator as Dual Button example usage
 
 <Canvas withSource="none">
-  <Story id={getStoryId(Decorator.displayName, 'as-dual-button')} />
+  <Story of={DecoratorStories.asDualButton} />
 </Canvas>
 
 ## Decorator as Dual Button code sample

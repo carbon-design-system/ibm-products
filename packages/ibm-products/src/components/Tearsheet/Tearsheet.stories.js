@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,10 +33,7 @@ import {
 } from '../ActionSet/actions.js';
 
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 import { TearsheetNarrow } from './TearsheetNarrow';
@@ -44,7 +41,7 @@ import { TearsheetNarrow } from './TearsheetNarrow';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: getStoryTitle(Tearsheet.displayName),
+  title: 'IBM Products/Components/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },

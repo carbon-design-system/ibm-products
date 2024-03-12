@@ -42,10 +42,7 @@ import cx from 'classnames';
 
 import { PageHeader } from './PageHeader';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -395,7 +392,7 @@ const fullWidthGrid = {
 };
 
 export default {
-  title: getStoryTitle(PageHeader.displayName),
+  title: 'IBM Products/Components/Page header/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
   parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },

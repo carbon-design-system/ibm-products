@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.72.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.0...@carbon/ibm-products@1.72.1) (2024-03-12)
+
+
+### Bug Fixes
+
+* **Datagrid:** add optional chain to prevent errors with disableResizing ([#4526](https://github.com/carbon-design-system/ibm-products/issues/4526)) ([4788e07](https://github.com/carbon-design-system/ibm-products/commit/4788e0780df3929cc3032f1de6187881ba96c54e))
+* **Datagrid:** align nested/expanded row borders with text content (v1) ([#4400](https://github.com/carbon-design-system/ibm-products/issues/4400)) ([2e5530a](https://github.com/carbon-design-system/ibm-products/commit/2e5530accf423ec50dca35741426ac7029b762de))
+* removes disabled rows from select all ([#4514](https://github.com/carbon-design-system/ibm-products/issues/4514)) ([316be8b](https://github.com/carbon-design-system/ibm-products/commit/316be8be2f60146bbd5effde9f95235fd4b49fd8))
+
+
+
+
+
 # [1.72.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.71.0...@carbon/ibm-products@1.72.0) (2024-03-05)
 
 

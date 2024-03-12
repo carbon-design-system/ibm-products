@@ -164,7 +164,6 @@ useDatagrid({
   columns,
   data,
   disableResizing: true,
-  resizerAriaLabel: 'Resize column',
 });
           `,
         },
@@ -414,6 +413,30 @@ const datagridState = useDatagrid(
 
 return <Datagrid datagridState={datagridState} />;
           `,
+        },
+      },
+      {
+        description: `Batch actions can be included by providing \`batchActions: true\` and \`toolbarBatchActions: CarbonButtonProps[]\` to the \`useDatagrid\` hook. While passing in a \`DatagridBatchActions\` component will also work, it does not have the same responsive behavior built-in, thus we recommend using the \`batchActions\` and \`toolbarBatchActions\` properties when possible.`,
+        source: {
+          code: `
+export const SelectableRowWithBatchActions = () => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      onRowSelect: (row, event) => console.log(row, event),
+    },
+    useSelectRows
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+`,
         },
       },
       {

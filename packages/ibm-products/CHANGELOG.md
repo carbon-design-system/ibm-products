@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.30.0...@carbon/ibm-products@2.31.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add aria label to edit in place ([#4469](https://github.com/carbon-design-system/ibm-products/issues/4469)) ([71dfa3f](https://github.com/carbon-design-system/ibm-products/commit/71dfa3f39ba0cc8461d1eec5538eb35087b124cd))
+* datagrid select all toggle rows not disabled ([#4473](https://github.com/carbon-design-system/ibm-products/issues/4473)) ([619aa38](https://github.com/carbon-design-system/ibm-products/commit/619aa3896e08af0d75c142f7b1ddbfd3b84c2291))
+* **Datagrid:** add optional chain to prevent errors with disableResizing ([#4524](https://github.com/carbon-design-system/ibm-products/issues/4524)) ([1e393fa](https://github.com/carbon-design-system/ibm-products/commit/1e393fa976831d5122f249b9b75a223180926d16))
+* **Datagrid:** column customization accesibility violation role listbox ([#4463](https://github.com/carbon-design-system/ibm-products/issues/4463)) ([21d18f4](https://github.com/carbon-design-system/ibm-products/commit/21d18f43f31a39594aa9189b827fdfa3df31c66f))
+* remove sorting in custom column tearsheet ([#4515](https://github.com/carbon-design-system/ibm-products/issues/4515)) ([cf59e7d](https://github.com/carbon-design-system/ibm-products/commit/cf59e7dec70de2f5e2a520eb10df08c613a71e97))
+* **Tearsheet:** prevent stacking visual cue with different sizes ([#4481](https://github.com/carbon-design-system/ibm-products/issues/4481)) ([ce1358a](https://github.com/carbon-design-system/ibm-products/commit/ce1358ad0493a21f742e455f5b11c3540592c78f))
+* update story for selectable row ([#4480](https://github.com/carbon-design-system/ibm-products/issues/4480)) ([c129013](https://github.com/carbon-design-system/ibm-products/commit/c1290134f8f51df7d73962da8b7209b5b075b394))
+
+
+### Features
+
+* **Nav:** new component Nav ([#4420](https://github.com/carbon-design-system/ibm-products/issues/4420)) ([2850246](https://github.com/carbon-design-system/ibm-products/commit/28502464448794e048845a846635772514ac2ef5))
+
+
+
+
+
+# [2.30.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.29.0...@carbon/ibm-products@2.30.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* about modal layout ([#4454](https://github.com/carbon-design-system/ibm-products/issues/4454)) ([c0cf58a](https://github.com/carbon-design-system/ibm-products/commit/c0cf58a1e78a4ee8f66b551d39b5705fecd4674e))
+* add missing support for shouldDisableMenuItem ([#4443](https://github.com/carbon-design-system/ibm-products/issues/4443)) ([6d10432](https://github.com/carbon-design-system/ibm-products/commit/6d10432dfb8161cab16a7397d09f99659788b3bb))
+* **Datagrid:** add safety checks for saved filters logic ([#4442](https://github.com/carbon-design-system/ibm-products/issues/4442)) ([226d258](https://github.com/carbon-design-system/ibm-products/commit/226d258d16512c01e0fd6f4fd324e3741335612e))
+* **Datagrid:** align nested/expanded row borders with text content ([#4388](https://github.com/carbon-design-system/ibm-products/issues/4388)) ([7e9fc3f](https://github.com/carbon-design-system/ibm-products/commit/7e9fc3f8e7df22078ebfafd4c6da6d9f1638a10f))
+* **Datagrid:** restrict drag to y axis and parent element ([#4450](https://github.com/carbon-design-system/ibm-products/issues/4450)) ([d4b18ee](https://github.com/carbon-design-system/ibm-products/commit/d4b18eedf920c19fdba0b230a2e30638a346a3f6))
+* **DataSpreadsheet:** Reduce redundancy in handleKeyPress [#4187](https://github.com/carbon-design-system/ibm-products/issues/4187) ([#4217](https://github.com/carbon-design-system/ibm-products/issues/4217)) ([19c9e27](https://github.com/carbon-design-system/ibm-products/commit/19c9e2782b240c336cadf1dcc80690215d1f31af))
+* update Carbon 11 compatible versions to latest ([#4455](https://github.com/carbon-design-system/ibm-products/issues/4455)) ([c6241b2](https://github.com/carbon-design-system/ibm-products/commit/c6241b26e01eecd080d25ec3e2c6ca060a258e1d))
+
+
+### Features
+
+* add drag and drop examples/explorations ([#4448](https://github.com/carbon-design-system/ibm-products/issues/4448)) ([0543115](https://github.com/carbon-design-system/ibm-products/commit/0543115e71a5c90e85407b5c1c0bf851cf41624a))
+* the frozen column doesn't follow the hover color on DataGrid [#4338](https://github.com/carbon-design-system/ibm-products/issues/4338) ([#4458](https://github.com/carbon-design-system/ibm-products/issues/4458)) ([176441c](https://github.com/carbon-design-system/ibm-products/commit/176441c38eca78cf7a29e2700a06d010e2371403))
+
+
+
+
+
 # [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.28.1...@carbon/ibm-products@2.29.0) (2024-02-27)
 
 

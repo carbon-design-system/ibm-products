@@ -146,6 +146,7 @@ $block-class-modal: #{$_block-class}-modal;
 
   .#{$block-class-overflow}__show-all-tags-link {
     margin-top: $spacing-03;
+    color: $link-inverse;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -87,12 +87,12 @@ export let TagOverflow = React.forwardRef(
     
     const itemRefHandler = (id, node) => {
       const map = getMap();
-      if (id && node) {
+      if (id && node && map.get(id) !== node.offsetWidth) {
         map.set(id, node.offsetWidth);
       }
     };
 
-    const getVisibleItems = () => {
+    const getVisibleItems = useCallback(() => {
 
       if (!itemRefs.current) {return items;}
 
@@ -117,7 +117,7 @@ export let TagOverflow = React.forwardRef(
         }
         return prev;
       }, []);
-    };
+    }, [itemRefs, overflowRef, containerWidth, items]);
 
     const ItemComponent = ({templateProps}) => {
 
@@ -136,21 +136,22 @@ export let TagOverflow = React.forwardRef(
       }).isRequired
     };
 
-    let visibleItemsArr = getVisibleItems();
-
-    if (maxVisible && (maxVisible < visibleItemsArr.length)) {
-      visibleItemsArr = visibleItemsArr.slice(0,maxVisible);
-    }
-
-    const hiddenItems = items.slice(visibleItemsArr.length);
-    const overflowItemsArr = hiddenItems.map((item) => {
-      return({type: tagType, ...item});
-    });
-
+    
     useEffect(()=>{
+      let visibleItemsArr = getVisibleItems();
+  
+      if (maxVisible && (maxVisible < visibleItemsArr.length)) {
+        visibleItemsArr = visibleItemsArr.slice(0,maxVisible);
+      }
+  
+      const hiddenItems = items.slice(visibleItemsArr.length);
+      const overflowItemsArr = hiddenItems.map((item) => {
+        return({type: tagType, ...item});
+      });
+
       setVisibleItems(visibleItemsArr);
       setOverflowItems(overflowItemsArr)
-    },[visibleItemsArr, overflowItemsArr])
+    },[containerWidth, items, maxVisible, getVisibleItems])
 
     return (
       <div

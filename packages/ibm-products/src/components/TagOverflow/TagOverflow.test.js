@@ -5,44 +5,44 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import React from 'react';
-// import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-// import { pkg } from '../../settings';
-// import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
-// import { TagOverflow } from '.';
-// import { FiveTags } from './TagOverflow.stories';
+import { TagOverflow } from '.';
+import { FiveTags } from './TagOverflow.stories';
 
-// const blockClass = `${pkg.prefix}--tag-overflow`;
-// const componentName = TagOverflow.displayName;
+const blockClass = `${pkg.prefix}--tag-overflow`;
+const componentName = TagOverflow.displayName;
 
 // values to use
-// const className = `class-${uuidv4()}`;
+const className = `class-${uuidv4()}`;
 // TODO: add test cases
-// describe(componentName, () => {
+describe(componentName, () => {
 
-  // const { ResizeObserver } = window;
+  const { ResizeObserver } = window;
 
-  // beforeEach(() => {
-  //   window.ResizeObserver = jest.fn().mockImplementation(() => ({
-  //     observe: jest.fn(),
-  //     unobserve: jest.fn(),
-  //     disconnect: jest.fn(),
-  //   }));
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
 
-  //   window.innerWidth = 500;
-  //   fireEvent(window, new Event('resize'))
-  // });
+    window.innerWidth = 500;
+    fireEvent(window, new Event('resize'))
+  });
 
-  // afterEach(() => {
-  //   window.ResizeObserver = ResizeObserver;
-  // });
+  afterEach(() => {
+    window.ResizeObserver = ResizeObserver;
+  });
 
-  // it('renders a component TagOverflow', async () => {
-  //   render(<FiveTags {...FiveTags.args}> </FiveTags>);
-  //   expect(screen.getByRole('main')).toHaveClass(blockClass);
-  // });
+  it('renders a component TagOverflow', async () => {
+    render(<FiveTags {...FiveTags.args}> </FiveTags>);
+    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  });
 
   // it('has no accessibility violations', async () => {
   //   const { container } = render(<TagOverflow> </TagOverflow>);
@@ -50,15 +50,10 @@
   //   expect(container).toHaveNoAxeViolations();
   // });
 
-  // it(`renders children`, async () => {
-  //   render(<TagOverflow>{children}</TagOverflow>);
-  //   screen.getByText(children);
-  // });
-
-  // it('applies className to the containing node', async () => {
-  //   render(<TagOverflow className={className}> </TagOverflow>);
-  //   expect(screen.getByRole('main')).toHaveClass(className);
-  // });
+  it('applies className to the containing node', async () => {
+    render(<FiveTags {...FiveTags.args} className={className}> </FiveTags>);
+    expect(screen.getByRole('main')).toHaveClass(className);
+  });
 
   // it('adds additional props to the containing node', async () => {
   //   render(<TagOverflow data-testid={dataTestId}> </TagOverflow>);
@@ -78,4 +73,4 @@
   //     componentName
   //   );
   // });
-// });
+});

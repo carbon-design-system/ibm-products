@@ -1,3 +1,5 @@
+//cspell: disable
+
 /**
  * Copyright IBM Corp. 2024, 2024
  *
@@ -8,10 +10,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import Nav from './Nav';
 import NavItem from './NavItem';
@@ -21,7 +20,7 @@ import mdx from './Nav.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(Nav.displayName),
+  title: 'IBM Products/Components/Nav',
   component: Nav,
   subcomponents: {
     NavList,

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,7 @@
 import React, { useState } from 'react';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -31,9 +28,7 @@ import { CodeSnippet } from '@carbon/react';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(
-    Datagrid.displayName
-  )}/Extensions/ColumnCustomization`,
+  title: 'IBM Products/Components/Datagrid/ColumnCustomization',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

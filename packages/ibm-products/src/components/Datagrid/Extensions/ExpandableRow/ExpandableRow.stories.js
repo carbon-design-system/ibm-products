@@ -9,10 +9,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -30,7 +27,7 @@ import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
+  title: 'IBM Products/Components/Datagrid/ExpandableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

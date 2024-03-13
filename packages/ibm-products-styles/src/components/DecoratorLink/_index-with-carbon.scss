@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// @forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use './carbon-imports';
+@use './decorator-link';

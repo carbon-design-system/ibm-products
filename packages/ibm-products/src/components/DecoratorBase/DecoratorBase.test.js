@@ -11,11 +11,12 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorBase } from '.';
+import { getMagnitude, truncate } from './utils.js';
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorBase.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -24,12 +25,13 @@ const dataTestId = uuidv4();
 const label = 'IP';
 const score = 5;
 const scoreTitle = '"Medium" magnitude. Score 5 out of 10';
+const scoreThresholds = [0, 4, 7, 10];
 const value = '192.168.0.50';
 const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
+    <DecoratorBase
       kind="default"
       value={value}
       data-testid={dataTestId}
@@ -38,7 +40,7 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorBase', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
@@ -83,6 +85,50 @@ describe(componentName, () => {
     screen.getByTitle(valueTitle);
   });
 
+  it('getMagnitude("5") returns "Unknown"', async () => {
+    expect(getMagnitude('5', scoreThresholds)).toBe('Unknown');
+  });
+
+  it('getMagnitude(-1) returns "Benign"', async () => {
+    expect(getMagnitude(-1, scoreThresholds)).toBe('Benign');
+  });
+
+  it('getMagnitude(0) returns "Benign"', async () => {
+    expect(getMagnitude(0, scoreThresholds)).toBe('Benign');
+  });
+
+  it('getMagnitude(2) returns "Low"', async () => {
+    expect(getMagnitude(2, scoreThresholds)).toBe('Low');
+  });
+
+  it('getMagnitude(5) returns "Medium"', async () => {
+    expect(getMagnitude(5, scoreThresholds)).toBe('Medium');
+  });
+
+  it('getMagnitude(8) returns "High"', async () => {
+    expect(getMagnitude(8, scoreThresholds)).toBe('High');
+  });
+
+  it('getMagnitude(10) returns "Critical"', async () => {
+    expect(getMagnitude(10, scoreThresholds)).toBe('Critical');
+  });
+
+  it('getMagnitude(11) returns "Critical"', async () => {
+    expect(getMagnitude(11, scoreThresholds)).toBe('Critical');
+  });
+
+  it(`truncate("${value}") returns "${value}"`, async () => {
+    expect(truncate(value)).toBe(value);
+  });
+
+  it(`truncate("${value}", { maxLength:5, front:3, back:2 }) returns "192…50"`, async () => {
+    expect(truncate(value, { maxLength: 5, front: 3, back: 2 })).toBe('192…50');
+  });
+
+  it(`truncate("${value}", { maxLength:100, front:5, back:5 }) returns "${value}"`, async () => {
+    expect(truncate(value, { maxLength: 100, front: 5, back: 5 })).toBe(value);
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
     expect(container).toBeAccessible(componentName);
@@ -106,10 +152,11 @@ describe(componentName, () => {
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    renderComponent();
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
-      componentName
-    );
-  });
+  // DecoratorBase inherits the Devtools attribute from the other Decorator types.
+  // it.skip('adds the Devtools attribute to the containing node', async () => {
+  //   renderComponent();
+  //   expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+  //     componentName
+  //   );
+  // });
 });

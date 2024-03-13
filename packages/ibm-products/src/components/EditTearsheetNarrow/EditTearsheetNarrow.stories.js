@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,10 +16,7 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
@@ -29,8 +26,8 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
-  title: getStoryTitle(EditTearsheetNarrow.displayName),
-  component: CreateTearsheetNarrow,
+  title: 'IBM Products/Patterns/Edit and update/EditTearsheetNarrow',
+  component: EditTearsheetNarrow,
   tags: ['autodocs'],
   parameters: {
     styles,

@@ -1,15 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
 import { carbon } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
@@ -38,7 +35,7 @@ import {
 import DocsPage from './EditFullPage.docs-page';
 
 export default {
-  title: getStoryTitle(EditFullPage.displayName),
+  title: 'IBM Products/Patterns/Edit and update/EditFullPage',
   component: EditFullPage,
   tags: ['autodocs'],
   parameters: {

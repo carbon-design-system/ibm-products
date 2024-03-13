@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 // import mdx from './EmptyState.mdx';
 
 import { EmptyState } from '.';
@@ -21,7 +18,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(EmptyState.displayName),
+  title: 'IBM Products/Patterns/Empty state/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
   parameters: {

@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DecoratorDualButton } from '.';
 import mdx from './DecoratorDualButton.mdx';
@@ -36,7 +33,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(DecoratorDualButton.displayName),
+  title: 'IBM Products/Components/Decorators/DecoratorDualButton',
   component: DecoratorDualButton,
   tags: ['autodocs'],
   parameters: {

@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DecoratorLink } from '.';
 import mdx from './DecoratorLink.mdx';
@@ -36,7 +33,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(DecoratorLink.displayName),
+  title: 'IBM Products/Components/Decorators/DecoratorLink',
   component: DecoratorLink,
   tags: ['autodocs'],
   parameters: {

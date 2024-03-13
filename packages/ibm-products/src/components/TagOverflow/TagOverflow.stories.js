@@ -162,14 +162,14 @@ const Template = (argsIn) => {
  */
 export const FiveTags = prepareStory(Template, {
   args: {
-    containerWidth: 500,
+    containerWidth: 250,
     items: fiveTags
   },
 });
 
 export const TagsWithTruncation = prepareStory(Template, {
   args: {
-    containerWidth: 500,
+    containerWidth: 300,
     items: longTags
   },
 });
@@ -183,7 +183,7 @@ export const ManyTags = prepareStory(Template, {
 
 export const UserAvatars = prepareStory(Template, {
   args: {
-    containerWidth: 500,
+    containerWidth: 250,
     items: UserAvatarArr,
     itemTemplate: UserAvatar
   },

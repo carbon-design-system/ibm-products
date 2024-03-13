@@ -14,7 +14,7 @@ import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'IBM Products/Patterns/Add select/SingleAddSelect',
+  title: 'IBM Products/Patterns/Add and select/SingleAddSelect',
   component: SingleAddSelect,
   tags: ['autodocs'],
   parameters: {

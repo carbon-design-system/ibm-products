@@ -34,9 +34,12 @@ To check for component test coverage for a given component, for example in the
 
 ```shell
 yarn test:c4p /ComponentName/ --coverage
+// or
+yarn coverage /ComponentName/
 ```
 
-This will generate a coverage report in `packages/ibm-products/coverage`.
+This will generate a coverage report in `packages/ibm-products/coverage` which
+you can easily access with `yarn coverage:report`.
 
 ## Publishing releases
 

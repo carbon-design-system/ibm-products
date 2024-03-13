@@ -79,6 +79,7 @@ jobs:
 
       - name: Update packages
         run: |
+          yarn set version latest
           yarn upgrade:automatic
           rm yarn.lock
           yarn

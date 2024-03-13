@@ -16,7 +16,7 @@ import { generateData } from './utils/generateData';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Components/DataSpreadsheet',
+  title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {

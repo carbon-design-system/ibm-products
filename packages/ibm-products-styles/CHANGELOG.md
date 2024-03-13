@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.29.0...@carbon/ibm-products-styles@2.30.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* **Tearsheet:** prevent stacking visual cue with different sizes ([#4481](https://github.com/carbon-design-system/ibm-products/issues/4481)) ([ce1358a](https://github.com/carbon-design-system/ibm-products/commit/ce1358ad0493a21f742e455f5b11c3540592c78f))
+
+
+### Features
+
+* **Nav:** new component Nav ([#4420](https://github.com/carbon-design-system/ibm-products/issues/4420)) ([2850246](https://github.com/carbon-design-system/ibm-products/commit/28502464448794e048845a846635772514ac2ef5))
+
+
+
+
+
 # [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.28.0...@carbon/ibm-products-styles@2.29.0) (2024-03-05)
 
 

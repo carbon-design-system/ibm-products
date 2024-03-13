@@ -18,7 +18,7 @@ import DocsPage from './MultiAddSelect.docs-page';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
-  title: 'IBM Products/Patterns/Add select/MultiAddSelect',
+  title: 'IBM Products/Patterns/Add and select/MultiAddSelect',
   component: MultiAddSelect,
   tags: ['autodocs'],
   parameters: {

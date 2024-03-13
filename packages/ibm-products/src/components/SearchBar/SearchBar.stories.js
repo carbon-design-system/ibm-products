@@ -16,7 +16,7 @@ import mdx from './SearchBar.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Components/SearchBar',
+  title: 'IBM Products/Components/Search bar/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {

@@ -9,24 +9,21 @@ import * as DecoratorStories from './Decorator.stories';
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
-- [Decorator example usage](#decorator-example-usage)
-- [Decorator as Link example usage](#decorator-as-link-example-usage)
-- [Decorator as Single Button example usage](#decorator-as-single-button-example-usage)
-- [Decorator as Dual Button example usage](#decorator-as-dual-button-example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
 - [Component API](#component-api)
 
 ## Overview
 
-The Decorator groups a key/value pair to look and behave like a single UI
-element.
+The Decorator groups a key/value pair as a single element. This component is not
+interactive.
 
-## Decorator example usage
+## Example usage
 
-<Canvas withSource="none">
-  <Story of={DecoratorStories.decorator} />
+<Canvas>
+  <Story of={DecoratorStories.Default} />
 </Canvas>
 
-## Decorator code sample
+## Example **setLabelTitle()**
 
 ```jsx
 <Decorator label="IP" score={5} value="192.168.0.50" />

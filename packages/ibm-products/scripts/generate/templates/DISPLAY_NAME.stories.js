@@ -17,7 +17,7 @@ import mdx from './DISPLAY_NAME.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: `IBM Products/Components/${DISPLAY_NAME.displayName}`,
+  title: `IBM Products/Components/${DISPLAY_NAME}`,
   component: DISPLAY_NAME,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

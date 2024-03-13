@@ -20,7 +20,7 @@ import mdx from './CoachmarkOverlayElements.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Novice to pro/Coachmark/CoachmarkOverlayElements',
+  title: 'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkOverlayElements',
   component: CoachmarkOverlayElements,
   tags: ['autodocs'],
   argTypes: {

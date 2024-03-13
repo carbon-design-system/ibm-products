@@ -141,11 +141,11 @@ export let TagOverflow = React.forwardRef(
       let visibleItemsArr = getVisibleItems();
   
       if (maxVisible && (maxVisible < visibleItemsArr.length)) {
-        visibleItemsArr = visibleItemsArr.slice(0,maxVisible);
+        visibleItemsArr = visibleItemsArr?.slice(0,maxVisible);
       }
   
-      const hiddenItems = items.slice(visibleItemsArr.length);
-      const overflowItemsArr = hiddenItems.map((item) => {
+      const hiddenItems = items?.slice(visibleItemsArr.length);
+      const overflowItemsArr = hiddenItems?.map((item) => {
         return({type: tagType, ...item});
       });
 
@@ -172,7 +172,7 @@ export let TagOverflow = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {visibleItems.map((item) => {
+        {visibleItems?.length && visibleItems.map((item) => {
           // render custom components 
           if(itemTemplate) {
             return <ItemComponent templateProps={item} key={item.id}></ItemComponent>
@@ -186,7 +186,7 @@ export let TagOverflow = React.forwardRef(
           }
         })}
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {!!overflowItems.length && 
+          {!!overflowItems?.length && 
             <TagSet tags={overflowItems}
               allTagsModalTitle="All tags"
               containingElementRef={overflowRef}

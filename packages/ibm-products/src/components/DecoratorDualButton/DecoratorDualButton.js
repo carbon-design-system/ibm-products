@@ -14,48 +14,52 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
-const componentName = 'Decorator';
+const componentName = 'DecoratorDualButton';
 
 /**
- * The Decorator groups a key/value pair as a single element. This component is not interactive.
+ * The DecoratorDualButton groups a key/value pair where the key and value each behave like a button.
  */
-export let Decorator = React.forwardRef((props, ref) => {
+export let DecoratorDualButton = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [
-    'disabled',
+    'href',
     'kind',
     'onClick',
-    'onClickLabel',
-    'onClickValue',
     'onContextMenu',
-    'onContextMenuLabel',
-    'onContextMenuValue',
   ]);
 
   return (
     <DecoratorBase
       ref={ref}
       {...validProps}
-      kind="default"
+      kind="dual-button"
       {...getDevtoolsProps(componentName)}
     />
   );
 });
 
 // Return a placeholder if not released and not enabled by feature flag
-Decorator = pkg.checkComponentEnabled(Decorator, componentName);
+DecoratorDualButton = pkg.checkComponentEnabled(
+  DecoratorDualButton,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-Decorator.displayName = componentName;
+DecoratorDualButton.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-Decorator.propTypes = {
+DecoratorDualButton.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * `disabled` only applies if `kind` is "single-button" or "dual-button".
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Do not show the icon, regardless of score.
@@ -66,6 +70,30 @@ Decorator.propTypes = {
    * The label for the data.
    */
   label: PropTypes.string,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onClickLabel: PropTypes.func,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onClickValue: PropTypes.func,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onContextMenuLabel: PropTypes.func,
+
+  /**
+   * Optional callback function.
+   * Returns two objects: `event` and `{ score, label, value, magnitude }`
+   */
+  onContextMenuValue: PropTypes.func,
 
   /**
    * Used in conjunction with `scoreThresholds`, determines the color, shape, and type of magnitude of the icon.

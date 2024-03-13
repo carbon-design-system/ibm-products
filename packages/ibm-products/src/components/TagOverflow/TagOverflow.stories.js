@@ -12,10 +12,7 @@ import * as CarbonIcons from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 import { UserAvatar } from '../UserAvatar';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagOverflow } from '.';
 import mdx from './TagOverflow.mdx';
@@ -116,7 +113,7 @@ const IconComponentArr = icons.map((icon, index)=> {
 });
 
 export default {
-  title: getStoryTitle(TagOverflow.displayName),
+  title: 'IBM Products/Components/Tag overflow/TagOverflow',
   component: TagOverflow,
   tags: ['autodocs'],
   parameters: {

@@ -1,9 +1,9 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import {
-  getStoryId,
-  CodesandboxLink,
+  CodesandboxLink
 } from '../../global/js/utils/story-helper';
 import { TagOverflow } from '.';
+import * as TagOverflowStories from './TagOverflow.stories';
 
 # TagOverflow
 
@@ -23,25 +23,25 @@ import { TagOverflow } from '.';
 ### Tags
 
 <Canvas>
-  <Story id={getStoryId(TagOverflow.displayName, 'many-tags')} />
+  <Story of={TagOverflowStories.ManyTags} />
 </Canvas>
 
 ### Tags with truncation
 
 <Canvas>
-  <Story id={getStoryId(TagOverflow.displayName, 'tags-with-truncation')} />
+  <Story of={TagOverflowStories.TagsWithTruncation} />
 </Canvas>
 
 ### UserAvatars
 
 <Canvas>
-  <Story id={getStoryId(TagOverflow.displayName, 'many-user-avatars')} />
+  <Story of={TagOverflowStories.ManyUserAvatars} />
 </Canvas>
 
 ### Custom components
 
 <Canvas>
-  <Story id={getStoryId(TagOverflow.displayName, 'custom-component')} />
+  <Story of={TagOverflowStories.CustomComponent} />
 </Canvas>
 
 ## Code sample

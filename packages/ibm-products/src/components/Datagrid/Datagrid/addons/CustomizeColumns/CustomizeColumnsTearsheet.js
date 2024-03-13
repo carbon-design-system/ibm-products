@@ -7,7 +7,6 @@
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';
 import { pkg } from '../../../../../settings';
@@ -35,21 +34,7 @@ const CustomizeColumnsTearsheet = ({
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [columnObjects, setColumnObjects] = useState(
-    columnDefinitions
-      // only sort the hidden column to the end when modal reopen
-      .sort((defA, defB) => {
-        const isVisibleA = isColumnVisible(defA);
-        const isVisibleB = isColumnVisible(defB);
-        if (isVisibleA && !isVisibleB) {
-          return -1;
-        }
-        if (!isVisibleA && isVisibleB) {
-          return 1;
-        }
-        return 0;
-      })
-  );
+  const [columnObjects, setColumnObjects] = useState(columnDefinitions);
 
   const [isDirty, setIsDirty] = useState(false);
 

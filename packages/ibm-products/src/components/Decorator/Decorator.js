@@ -16,45 +16,30 @@ import { pkg } from '../../settings';
 
 const componentName = 'Decorator';
 
-const defaults = {
-  scoreThresholds: [0, 4, 7, 10],
-  theme: 'light',
-};
-
 /**
  * The Decorator groups a key/value pair as a single element. This component is not interactive.
  */
-export let Decorator = React.forwardRef(
-  (
-    {
-      scoreThresholds = defaults.scoreThresholds,
-      theme = defaults.theme,
-      ...rest
-    },
-    ref
-  ) => {
-    const validProps = prepareProps(rest, [
-      'disabled',
-      'kind',
-      'onClick',
-      'onClickLabel',
-      'onClickValue',
-      'onContextMenu',
-      'onContextMenuLabel',
-      'onContextMenuValue',
-    ]);
+export let Decorator = React.forwardRef((props, ref) => {
+  const validProps = prepareProps(props, [
+    'disabled',
+    'kind',
+    'onClick',
+    'onClickLabel',
+    'onClickValue',
+    'onContextMenu',
+    'onContextMenuLabel',
+    'onContextMenuValue',
+  ]);
 
-    return (
-      <DecoratorBase
-        ref={ref}
-        {...validProps}
-        kind="default"
-        {...{ scoreThresholds, theme }}
-        {...getDevtoolsProps(componentName)}
-      />
-    );
-  }
-);
+  return (
+    <DecoratorBase
+      ref={ref}
+      {...validProps}
+      kind="default"
+      {...getDevtoolsProps(componentName)}
+    />
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 Decorator = pkg.checkComponentEnabled(Decorator, componentName);

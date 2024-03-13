@@ -16,47 +16,28 @@ import { pkg } from '../../settings';
 
 const componentName = 'DecoratorLink';
 
-const defaults = {
-  onClick: () => {},
-  onContextMenu: () => {},
-  scoreThresholds: [0, 4, 7, 10],
-  theme: 'light',
-};
-
 /**
  * The DecoratorLink groups a key/value pair to behave like a link.
  */
-export let DecoratorLink = React.forwardRef(
-  (
-    {
-      onClick = defaults.onClick,
-      onContextMenu = defaults.onContextMenu,
-      scoreThresholds = defaults.scoreThresholds,
-      theme = defaults.theme,
-      ...rest
-    },
-    ref
-  ) => {
-    const validProps = prepareProps(rest, [
-      'disabled',
-      'kind',
-      'onClickLabel',
-      'onClickValue',
-      'onContextMenuLabel',
-      'onContextMenuValue',
-    ]);
+export let DecoratorLink = React.forwardRef((props, ref) => {
+  const validProps = prepareProps(props, [
+    'disabled',
+    'kind',
+    'onClickLabel',
+    'onClickValue',
+    'onContextMenuLabel',
+    'onContextMenuValue',
+  ]);
 
-    return (
-      <DecoratorBase
-        ref={ref}
-        {...validProps}
-        kind="link"
-        {...{ onClick, onContextMenu, scoreThresholds, theme }}
-        {...getDevtoolsProps(componentName)}
-      />
-    );
-  }
-);
+  return (
+    <DecoratorBase
+      ref={ref}
+      {...validProps}
+      kind="link"
+      {...getDevtoolsProps(componentName)}
+    />
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorLink = pkg.checkComponentEnabled(DecoratorLink, componentName);

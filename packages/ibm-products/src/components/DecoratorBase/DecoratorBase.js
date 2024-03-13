@@ -19,6 +19,12 @@ const blockClass = `${pkg.prefix}--decorator`;
 const componentName = 'DecoratorBase';
 
 const defaults = {
+  onClick: () => {},
+  onClickLabel: () => {},
+  onClickValue: () => {},
+  onContextMenu: () => {},
+  onContextMenuLabel: () => {},
+  onContextMenuValue: () => {},
   scoreThresholds: [0, 4, 7, 10],
   theme: 'light',
 };
@@ -39,12 +45,12 @@ export let DecoratorBase = React.forwardRef(
       kind,
       label,
       setLabelTitle,
-      onClick,
-      onClickLabel,
-      onClickValue,
-      onContextMenu,
-      onContextMenuLabel,
-      onContextMenuValue,
+      onClick = defaults.onClick,
+      onClickLabel = defaults.onClickLabel,
+      onClickValue = defaults.onClickValue,
+      onContextMenu = defaults.onContextMenu,
+      onContextMenuLabel = defaults.onContextMenuLabel,
+      onContextMenuValue = defaults.onContextMenuValue,
       score,
       scoreThresholds = defaults.scoreThresholds,
       small,

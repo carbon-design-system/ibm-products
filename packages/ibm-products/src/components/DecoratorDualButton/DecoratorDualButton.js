@@ -16,56 +16,26 @@ import { pkg } from '../../settings';
 
 const componentName = 'DecoratorDualButton';
 
-const defaults = {
-  onClickLabel: () => {},
-  onClickValue: () => {},
-  onContextMenuLabel: () => {},
-  onContextMenuValue: () => {},
-  scoreThresholds: [0, 4, 7, 10],
-  theme: 'light',
-};
-
 /**
  * The DecoratorDualButton groups a key/value pair where the key and value each behave like a button.
  */
-export let DecoratorDualButton = React.forwardRef(
-  (
-    {
-      onClickLabel = defaults.onClickLabel,
-      onClickValue = defaults.onClickValue,
-      onContextMenuLabel = defaults.onContextMenuLabel,
-      onContextMenuValue = defaults.onContextMenuValue,
-      scoreThresholds = defaults.scoreThresholds,
-      theme = defaults.theme,
-      ...rest
-    },
-    ref
-  ) => {
-    const validProps = prepareProps(rest, [
-      'href',
-      'kind',
-      'onClick',
-      'onContextMenu',
-    ]);
+export let DecoratorDualButton = React.forwardRef((props, ref) => {
+  const validProps = prepareProps(props, [
+    'href',
+    'kind',
+    'onClick',
+    'onContextMenu',
+  ]);
 
-    return (
-      <DecoratorBase
-        ref={ref}
-        {...validProps}
-        kind="dual-button"
-        {...{
-          onClickLabel,
-          onClickValue,
-          onContextMenuLabel,
-          onContextMenuValue,
-          scoreThresholds,
-          theme,
-        }}
-        {...getDevtoolsProps(componentName)}
-      />
-    );
-  }
-);
+  return (
+    <DecoratorBase
+      ref={ref}
+      {...validProps}
+      kind="dual-button"
+      {...getDevtoolsProps(componentName)}
+    />
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorDualButton = pkg.checkComponentEnabled(

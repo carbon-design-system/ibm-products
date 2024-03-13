@@ -16,47 +16,28 @@ import { pkg } from '../../settings';
 
 const componentName = 'DecoratorSingleButton';
 
-const defaults = {
-  onClick: () => {},
-  onContextMenu: () => {},
-  scoreThresholds: [0, 4, 7, 10],
-  theme: 'light',
-};
-
 /**
  * The DecoratorSingleButton groups a key/value pair to behave like a button.
  */
-export let DecoratorSingleButton = React.forwardRef(
-  (
-    {
-      onClick = defaults.onClick,
-      onContextMenu = defaults.onContextMenu,
-      scoreThresholds = defaults.scoreThresholds,
-      theme = defaults.theme,
-      ...rest
-    },
-    ref
-  ) => {
-    const validProps = prepareProps(rest, [
-      'href',
-      'kind',
-      'onClickLabel',
-      'onClickValue',
-      'onContextMenuLabel',
-      'onContextMenuValue',
-    ]);
+export let DecoratorSingleButton = React.forwardRef((props, ref) => {
+  const validProps = prepareProps(props, [
+    'href',
+    'kind',
+    'onClickLabel',
+    'onClickValue',
+    'onContextMenuLabel',
+    'onContextMenuValue',
+  ]);
 
-    return (
-      <DecoratorBase
-        ref={ref}
-        {...validProps}
-        kind="single-button"
-        {...{ onClick, onContextMenu, scoreThresholds, theme }}
-        {...getDevtoolsProps(componentName)}
-      />
-    );
-  }
-);
+  return (
+    <DecoratorBase
+      ref={ref}
+      {...validProps}
+      kind="single-button"
+      {...getDevtoolsProps(componentName)}
+    />
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorSingleButton = pkg.checkComponentEnabled(

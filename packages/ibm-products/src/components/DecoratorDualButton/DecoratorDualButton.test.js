@@ -6,16 +6,18 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { act, fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorDualButton } from '.';
+
+const { click, contextMenu } = fireEvent;
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorDualButton.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -29,8 +31,8 @@ const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
-      kind="default"
+    <DecoratorDualButton
+      kind="dual-button"
       value={value}
       data-testid={dataTestId}
       {...rest}
@@ -38,10 +40,17 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorDualButton', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
+  });
+
+  it('renders a component DecoratorDualButton with two buttons', async () => {
+    renderComponent({
+      kind: 'dual-button',
+    });
+    expect(screen.getAllByRole('button').length).toBe(2);
   });
 
   it('renders a label', async () => {
@@ -81,6 +90,62 @@ describe(componentName, () => {
   it('renders an alternate title for the value', async () => {
     renderComponent({ valueTitle: valueTitle });
     screen.getByTitle(valueTitle);
+  });
+
+  it('label registers a click event', async () => {
+    const handleClick = jest.fn();
+
+    renderComponent({
+      kind: 'dual-button',
+      label: label,
+      onClickLabel: handleClick,
+      value: value,
+    });
+
+    await act(() => click(screen.getByRole('button', { name: label })));
+    expect(handleClick).toBeCalled();
+  });
+
+  it('label registers a context menu click event', async () => {
+    const handleContextMenu = jest.fn();
+
+    renderComponent({
+      kind: 'dual-button',
+      label: label,
+      onContextMenuLabel: handleContextMenu,
+      value: value,
+    });
+
+    await act(() => contextMenu(screen.getByRole('button', { name: label })));
+    expect(handleContextMenu).toBeCalled();
+  });
+
+  it('value registers a click event', async () => {
+    const handleClick = jest.fn();
+
+    renderComponent({
+      kind: 'dual-button',
+      label: label,
+      onClickValue: handleClick,
+      value: value,
+    });
+
+    await act(() => click(screen.getByRole('button', { name: value })));
+    expect(handleClick).toBeCalled();
+  });
+
+  it('value registers a context menu click event', async () => {
+    const handleContextMenu = jest.fn();
+
+    renderComponent({
+      kind: 'dual-button',
+      label: label,
+      onContextMenuValue: handleContextMenu,
+      value: value,
+    });
+
+    await act(() => contextMenu(screen.getByRole('button', { name: value })));
+    expect(handleContextMenu).toBeCalled();
   });
 
   it('has no accessibility violations', async () => {

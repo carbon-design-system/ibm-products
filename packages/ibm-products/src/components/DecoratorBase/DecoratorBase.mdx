@@ -3,10 +3,10 @@ import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { Decorator } from '.';
-import * as DecoratorStories from './Decorator.stories';
+import { DecoratorBase } from '.';
+import * as DecoratorBaseStories from './DecoratorBase.stories';
 
-# Decorator
+# DecoratorBase
 
 ## Table of Contents
 
@@ -17,13 +17,13 @@ import * as DecoratorStories from './Decorator.stories';
 
 ## Overview
 
-The Decorator groups a key/value pair as a single element. This component is not
-interactive.
+_**The DecoratorBase is for internal use only and is used to build the other
+Decorator types.**_
 
 ## Example usage
 
 <Canvas>
-  <Story of={DecoratorStories.Default} />
+  <Story of={DecoratorBaseStories.Default} />
 </Canvas>
 
 ## Example **setLabelTitle()**

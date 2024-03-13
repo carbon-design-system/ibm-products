@@ -6,16 +6,18 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { act, fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Decorator } from '.';
+import { DecoratorSingleButton } from '.';
+
+const { click, contextMenu } = fireEvent;
 
 const blockClass = `${pkg.prefix}--decorator`;
 const blockClassIcon = `${pkg.prefix}--decorator-icon`;
-const componentName = Decorator.displayName;
+const componentName = DecoratorSingleButton.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -29,8 +31,8 @@ const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <Decorator
-      kind="default"
+    <DecoratorSingleButton
+      kind="single-button"
       value={value}
       data-testid={dataTestId}
       {...rest}
@@ -38,10 +40,15 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component Decorator', async () => {
+  it('renders a component DecoratorSingleButton', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
+  });
+
+  it('renders a component DecoratorSingleButton as one button', async () => {
+    renderComponent({ kind: 'single-button' });
+    expect(screen.getAllByRole('button').length).toBe(1);
   });
 
   it('renders a label', async () => {
@@ -81,6 +88,30 @@ describe(componentName, () => {
   it('renders an alternate title for the value', async () => {
     renderComponent({ valueTitle: valueTitle });
     screen.getByTitle(valueTitle);
+  });
+
+  it('"single-button" registers a click event', async () => {
+    const handleClick = jest.fn();
+
+    renderComponent({
+      kind: 'single-button',
+      onClick: handleClick,
+    });
+
+    await act(() => click(screen.getByRole('button')));
+    expect(handleClick).toBeCalled();
+  });
+
+  it('"single-button" registers a context menu click event', async () => {
+    const handleContextMenu = jest.fn();
+
+    renderComponent({
+      kind: 'single-button',
+      onContextMenu: handleContextMenu,
+    });
+
+    await act(() => contextMenu(screen.getByRole('button')));
+    expect(handleContextMenu).toBeCalled();
   });
 
   it('has no accessibility violations', async () => {

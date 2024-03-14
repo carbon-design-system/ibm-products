@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { InterstitialScreenView } from '.';
 import mdx from './InterstitialScreenView.mdx';
@@ -20,7 +17,8 @@ import mdx from './InterstitialScreenView.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(InterstitialScreenView.displayName),
+  title:
+    'IBM Products/Novice to pro/Interstitial screen/InterstitialScreenView',
   component: InterstitialScreenView,
   tags: ['autodocs'],
   argTypes: {

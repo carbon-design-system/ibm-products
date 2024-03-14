@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DISPLAY_NAME } from '.';
 import mdx from './DISPLAY_NAME.mdx';

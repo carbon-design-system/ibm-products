@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DecoratorBase } from '.';
 import mdx from './DecoratorBase.mdx';
@@ -36,7 +33,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(DecoratorBase.displayName),
+  title: 'IBM Products/Internal/DecoratorBase',
   component: DecoratorBase,
   tags: ['autodocs'],
   parameters: {

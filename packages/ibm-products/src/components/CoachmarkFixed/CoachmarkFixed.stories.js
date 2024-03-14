@@ -10,7 +10,6 @@ import React from 'react';
 // import { action } from '@storybook/addon-actions';
 import { Link as CarbonLink } from '@carbon/react';
 import {
-  getStoryTitle,
   prepareStory,
   getSelectedCarbonTheme,
 } from '../../global/js/utils/story-helper';
@@ -22,7 +21,7 @@ import mdx from './CoachmarkFixed.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CoachmarkFixed.displayName),
+  title: 'IBM Products/Novice to pro/Coachmark/CoachmarkFixed',
   component: CoachmarkFixed,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { Decorator } from '.';
 import mdx from './Decorator.mdx';
@@ -35,7 +32,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(Decorator.displayName),
+  title: 'IBM Products/Components/Decorators/Decorator',
   component: Decorator,
   tags: ['autodocs'],
   parameters: {

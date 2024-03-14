@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { SidePanel } from '.';
+import * as stories from './SidePanel.stories';
 
 # Side Panel
 
@@ -24,7 +22,7 @@ within them.
 ### Default SidePanel component
 
 <Canvas>
-  <Story id={getStoryId(SidePanel.displayName, 'slide-over')} />
+  <Story of={stories.SlideOver} />
 </Canvas>
 
 ## Code sample

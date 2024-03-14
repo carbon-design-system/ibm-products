@@ -39,8 +39,10 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   const { ResizeObserver } = window;
+  let warn;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -50,6 +52,7 @@ describe(componentName, () => {
 
   afterEach(() => {
     window.ResizeObserver = ResizeObserver;
+    warn.mockRestore();
   });
 
   it('should render a filter summary component', () => {

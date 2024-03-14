@@ -35,58 +35,88 @@ let longTags = tags.slice(0, 5);
 longTags.splice(1, 1, { id: 'id-1', label: 'Business performance' });
 
 // UserProfileImage background colors
-const colors = [
-  'light-cyan',
-  'dark-cyan'
+const colors = ['light-cyan', 'dark-cyan'];
+
+// Lists of  first names and last names
+const firstNames = [
+  'Aarav',
+  'Aditi',
+  'Akshay',
+  'Amit',
+  'Ananya',
+  'Arjun',
+  'Avani',
+  'Bhavya',
+  'Chetan',
+  'Devi',
+  'Divya',
+  'Gaurav',
+  'Isha',
+  'Kiran',
+  'Manoj',
+  'Neha',
+  'Preeti',
+  'Rajesh',
+  'Riya',
+  'Shreya',
+  'Varun',
+  'Saurabh',
+  'Ajay',
+  'Sandip',
+  'Sadan',
+  'Jyoti',
+  'Sapna',
+  'Prem',
 ];
 
-// Lists of  first names and last names 
-const firstNames = [ 
-  'Aarav', 'Aditi', 'Akshay', 'Amit', 'Ananya', 
-  'Arjun', 'Avani', 'Bhavya', 'Chetan', 'Devi', 
-  'Divya', 'Gaurav', 'Isha', 'Kiran', 'Manoj', 
-  'Neha', 'Preeti', 'Rajesh', 'Riya', 'Shreya', 
-  'Varun', 'Saurabh', 'Ajay', 'Sandip', 'Sadan', 
-  'Jyoti', 'Sapna', 'Prem'
-]; 
-
-const lastNames = [ 
-  'Agarwal', 'Bansal', 'Chopra', 'Gupta', 'Jain', 
-  'Kapoor', 'Mehta', 'Patel', 'Rao', 'Sharma', 
-  'Singh', 'Trivedi', 'Verma', 'Yadav'
-]; 
+const lastNames = [
+  'Agarwal',
+  'Bansal',
+  'Chopra',
+  'Gupta',
+  'Jain',
+  'Kapoor',
+  'Mehta',
+  'Patel',
+  'Rao',
+  'Sharma',
+  'Singh',
+  'Trivedi',
+  'Verma',
+  'Yadav',
+];
 
 // method to generate random names
-const generateName = () => { 
-  const randomFirstName = 
-      firstNames[Math.floor(Math.random() * firstNames.length)]; 
-  const randomLastName = 
-      lastNames[Math.floor(Math.random() * lastNames.length)]; 
+const generateName = () => {
+  const randomFirstName =
+    firstNames[Math.floor(Math.random() * firstNames.length)];
+  const randomLastName =
+    lastNames[Math.floor(Math.random() * lastNames.length)];
   return `${randomFirstName} ${randomLastName}`;
-}; 
+};
 
 // users for UserAvatar stories
 const ManyUserAvatarArr = Array.from({ length: 20 }, (v, k) => {
   const name = generateName();
-  return ({
+  return {
     id: `id-${k}`,
     label: name,
-    backgroundColor:  colors[k % colors.length],
+    backgroundColor: colors[k % colors.length],
     name,
-    tooltipText: name
-  })
+    tooltipText: name,
+  };
 });
 
 const UserAvatarArr = ManyUserAvatarArr.slice(0, 10);
 
 // Custom component
-const IconComponent = forwardRef(({iconName, iconSize, className}, ref) => {
-  const Base = CarbonIcons[iconName]
+const IconComponent = forwardRef(({ iconName, iconSize, className }, ref) => {
+  const Base = CarbonIcons[iconName];
   return (
-    <div className={`custom-icon ${className}`} ref={ref} >
-      <Base size={iconSize} ></Base>
+    <div className={`custom-icon ${className}`} ref={ref}>
+      <Base size={iconSize}></Base>
     </div>
-  )
+  );
 });
 
 // Carbon Icon component names for custom component story
@@ -105,11 +135,11 @@ const icons = [
   'ChartWinLoss',
   'DatabaseMessaging',
   'Playlist',
-  'OrderDetails'
+  'OrderDetails',
 ];
 
-const IconComponentArr = icons.map((icon, index)=> {
-  return({id:`id-${index}`, 'label': icon, 'iconName': icon, 'iconSize': 16})
+const IconComponentArr = icons.map((icon, index) => {
+  return { id: `id-${index}`, label: icon, iconName: icon, iconSize: 16 };
 });
 
 export default {
@@ -125,7 +155,7 @@ export default {
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
-    }
+    },
   },
   decorators: [
     (story) => (
@@ -146,9 +176,7 @@ const Template = (argsIn) => {
   };
   return (
     <div style={{ width: containerWidth }}>
-      <TagOverflow
-        {...args}
-      />
+      <TagOverflow {...args} />
     </div>
   );
 };
@@ -160,21 +188,21 @@ const Template = (argsIn) => {
 export const FiveTags = prepareStory(Template, {
   args: {
     containerWidth: 250,
-    items: fiveTags
+    items: fiveTags,
   },
 });
 
 export const TagsWithTruncation = prepareStory(Template, {
   args: {
     containerWidth: 300,
-    items: longTags
+    items: longTags,
   },
 });
 
 export const ManyTags = prepareStory(Template, {
   args: {
     containerWidth: 500,
-    items: tags
+    items: tags,
   },
 });
 
@@ -182,7 +210,7 @@ export const UserAvatars = prepareStory(Template, {
   args: {
     containerWidth: 250,
     items: UserAvatarArr,
-    itemTemplate: UserAvatar
+    itemTemplate: UserAvatar,
   },
 });
 
@@ -190,7 +218,7 @@ export const ManyUserAvatars = prepareStory(Template, {
   args: {
     containerWidth: 500,
     items: ManyUserAvatarArr,
-    itemTemplate: UserAvatar
+    itemTemplate: UserAvatar,
   },
 });
 

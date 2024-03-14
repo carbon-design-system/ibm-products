@@ -22,7 +22,6 @@ const dataTestId = uuidv4();
 
 // TODO: add test cases
 describe(componentName, () => {
-
   const { ResizeObserver } = window;
 
   beforeEach(() => {
@@ -33,7 +32,7 @@ describe(componentName, () => {
     }));
 
     window.innerWidth = 500;
-    fireEvent(window, new Event('resize'))
+    fireEvent(window, new Event('resize'));
   });
 
   afterEach(() => {
@@ -41,12 +40,12 @@ describe(componentName, () => {
   });
 
   it('renders a component TagOverflow', async () => {
-    render(<TagOverflow > </TagOverflow>);
+    render(<TagOverflow> </TagOverflow>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<TagOverflow > </TagOverflow>);
+    const { container } = render(<TagOverflow> </TagOverflow>);
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });

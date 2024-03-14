@@ -46,8 +46,11 @@ const overflowAndModalStrings = {
 describe(TagSet.displayName, () => {
   const { ResizeObserver } = window;
   let mockElement;
+  let warn;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -76,6 +79,7 @@ describe(TagSet.displayName, () => {
   afterEach(() => {
     mockElement.mockRestore();
     window.ResizeObserver = ResizeObserver;
+    warn.mockRestore();
   });
 
   it('Has the same tag types as Carbon Tag', async () => {

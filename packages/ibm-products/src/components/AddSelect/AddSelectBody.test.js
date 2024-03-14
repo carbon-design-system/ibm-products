@@ -215,8 +215,10 @@ const itemWithAvatar = {
 
 describe(componentName, () => {
   const { ResizeObserver } = window;
+  let warn;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -229,6 +231,7 @@ describe(componentName, () => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+    warn.mockRestore();
   });
 
   it('renders SingleAddSelectBody', async () => {

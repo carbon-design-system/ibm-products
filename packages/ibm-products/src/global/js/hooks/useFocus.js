@@ -25,7 +25,6 @@ export const useFocus = (modalRef) => {
   const queryTabIndex = `[tabindex="0"]${notQuery}`;
   // Final query
   const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}, ${queryTabIndex}`;
-
   const modalEl = modalRef?.current;
 
   const getFocusable = useCallback(() => {

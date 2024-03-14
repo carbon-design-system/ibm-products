@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { SearchBar } from '.';
 import mdx from './SearchBar.mdx';
@@ -19,7 +16,7 @@ import mdx from './SearchBar.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(SearchBar.displayName),
+  title: 'IBM Products/Components/Search bar/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {

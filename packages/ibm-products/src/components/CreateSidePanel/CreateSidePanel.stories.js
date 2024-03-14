@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,10 +22,7 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel } from './CreateSidePanel';
 
@@ -82,7 +79,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: getStoryTitle(CreateSidePanel.displayName),
+  title: 'IBM Products/Patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {

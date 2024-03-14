@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,12 @@ import pkg from '../package-settings';
 import { getPathForComponent } from '../../../../../core/story-structure';
 import { paramCase } from 'change-case';
 
+export const checkCanaryStatus = (componentName) =>
+  !pkg.isComponentEnabled(componentName, true) &&
+  pkg.isComponentPublic(componentName, true)
+    ? true
+    : false;
+
 /**
  * A helper function to return the structured story title for a component.
  * @param {string} componentName The name of the component.
@@ -23,11 +29,7 @@ export const getStoryTitle = (componentName) => {
     getPathForComponent('c', componentName) ||
     `Carbon for IBM Products/Lost + found/${componentName}`;
 
-  // add a canary tag if the component is public but not normally enabled
-  return !pkg.isComponentEnabled(componentName, true) &&
-    pkg.isComponentPublic(componentName, true)
-    ? `${title}#canary`
-    : title;
+  return title;
 };
 
 /**
@@ -168,8 +170,15 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (/components|patterns/i.test(kind)) {
     result.expectCodedExample = true;
-    // components and patterns have an additional level
-    component = b;
+    // Required until components within 'Patterns' category use the
+    // new approach with setting story titles because they are nested an
+    // extra level
+    if (typeof b === 'string') {
+      component = b;
+    } else {
+      component = a;
+    }
+
     result.section = a;
 
     result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(

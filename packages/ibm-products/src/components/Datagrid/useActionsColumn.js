@@ -68,11 +68,17 @@ const useActionsColumn = (hooks) => {
                           onClick,
                           icon,
                           shouldHideMenuItem,
+                          shouldDisableMenuItem,
+                          disabled,
                           ...rest
                         } = preparedActionProps;
                         const hidden =
                           typeof shouldHideMenuItem === 'function' &&
                           shouldHideMenuItem(row);
+                        const isDisabledByRow =
+                          typeof shouldDisableMenuItem === 'function'
+                            ? shouldDisableMenuItem(row)
+                            : disabled;
                         if (hidden) {
                           return null;
                         }
@@ -106,6 +112,7 @@ const useActionsColumn = (hooks) => {
                                 e.stopPropagation();
                                 onClick(id, row, e);
                               }}
+                              disabled={isDisabledByRow}
                             >
                               <Icon />
                             </IconButton>

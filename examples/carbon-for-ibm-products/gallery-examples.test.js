@@ -27,6 +27,7 @@ import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example
 import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
 import { Example as DatagridExample } from './Datagrid/src/Example/Example';
+import { Example as DecoratorExample } from './Decorator/src/Example/Example';
 import { Example as DelimitedListExample } from './DelimitedList/src/Example/Example';
 import { Example as DescriptionListExample } from './DescriptionList/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
@@ -167,6 +168,12 @@ describe('All examples', () => {
 
   it('Datagrid renders', () => {
     render(<DatagridExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('Decorator renders', () => {
+    render(<DecoratorExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

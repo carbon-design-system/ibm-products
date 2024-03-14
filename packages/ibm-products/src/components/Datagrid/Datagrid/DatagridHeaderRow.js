@@ -18,6 +18,7 @@ import {
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { useInitialColumnSort } from '../useInitialColumnSort';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -100,6 +101,7 @@ const ResizeHeader = ({
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
   const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
+  useInitialColumnSort(datagridState);
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {

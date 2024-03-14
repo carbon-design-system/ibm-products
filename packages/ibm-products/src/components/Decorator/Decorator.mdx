@@ -1,0 +1,44 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { Decorator } from '.';
+import * as DecoratorStories from './Decorator.stories';
+
+# Decorator
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Overview
+
+The Decorator groups a key/value pair as a single element. This component is not
+interactive.
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```js
+setLabelTitle: (score, scoreThresholds, magnitude) => {
+  if (typeof score !== 'number') {
+    return 'Unknown score';
+  }
+  return `"${magnitude}" magnitude. Score ${score} out of ${
+    scoreThresholds[scoreThresholds.length - 1]
+  }`;
+},
+```
+
+## Component API
+
+<ArgsTable />

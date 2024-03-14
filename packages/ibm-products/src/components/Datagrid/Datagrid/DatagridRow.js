@@ -186,6 +186,8 @@ const DatagridRow = (datagridState) => {
               className={cx(`${blockClass}__cell`, {
                 [`${blockClass}__expandable-row-cell`]:
                   row.canExpand && index === 0,
+                [`${blockClass}__expandable-row-cell--is-expanded`]:
+                  row.isExpanded && index === 0,
                 [`${blockClass}__slug--cell`]:
                   associatedHeader &&
                   associatedHeader.length &&

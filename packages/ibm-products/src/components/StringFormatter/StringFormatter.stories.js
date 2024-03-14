@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { StringFormatter } from '.';
 import mdx from './StringFormatter.mdx';
@@ -20,7 +17,7 @@ import mdx from './StringFormatter.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(StringFormatter.displayName),
+  title: 'IBM Products/Components/String formatter/StringFormatter',
   component: StringFormatter,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

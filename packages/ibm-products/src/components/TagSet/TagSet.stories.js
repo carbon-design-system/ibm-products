@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,10 +9,7 @@ import React, { useRef, useState } from 'react';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
 // import mdx from './TagSet.mdx';
@@ -133,7 +130,7 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: getStoryTitle(TagSet.displayName),
+  title: 'IBM Products/Components/Tag set/TagSet',
   component: TagSet,
   tags: ['autodocs'],
   parameters: {

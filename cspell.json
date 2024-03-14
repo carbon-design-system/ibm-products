@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -95,8 +91,10 @@
     "gridcell",
     "guidebanner",
     "haspopup",
+    "headshot",
     "homescreen",
     "inlineedit",
+    "inlinetip",
     "listbox",
     "loglevel",
     "namor",
@@ -114,6 +112,7 @@
     "rerender",
     "resizer",
     "responsivity",
+    "roledescription",
     "rowgroup",
     "rowheader",
     "rowindex",
@@ -145,6 +144,8 @@
     "toolbarbutton",
     "treegrid",
     "treeview",
+    "testname",
+    "typeahead",
     "userprofileimage",
     "uuidv",
     "webfonts",

@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DelimitedList } from '.';
 
@@ -20,7 +17,7 @@ import DocsPage from './DelimitedList';
 const storyClass = 'delimited-list-stories';
 
 export default {
-  title: getStoryTitle(DelimitedList.displayName),
+  title: 'IBM Products/Components/Delimited list/DelimitedList',
   component: DelimitedList,
   tags: ['autodocs'],
   parameters: {

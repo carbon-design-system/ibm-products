@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,10 +30,7 @@ import {
 } from '@carbon/react';
 
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 // import mdx from './SidePanel.mdx';
@@ -368,7 +365,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: getStoryTitle(SidePanel.displayName),
+  title: 'IBM Products/Components/Side panel/SidePanel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

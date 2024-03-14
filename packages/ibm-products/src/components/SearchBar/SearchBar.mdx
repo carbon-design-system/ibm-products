@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { SearchBar } from '.';
+import * as SearchBarStories from './SearchBar.stories';
 
 # SearchBar
 
@@ -22,31 +20,31 @@ import { SearchBar } from '.';
 ### Default
 
 <Canvas>
-  <Story id={getStoryId(SearchBar.displayName, 'default')} />
+  <Story of={SearchBarStories.Default} />
 </Canvas>
 
 ### Initial Value
 
 <Canvas>
-  <Story id={getStoryId(SearchBar.displayName, 'initial-value')} />
+  <Story of={SearchBarStories.InitialValue} />
 </Canvas>
 
 ### Scopes
 
 <Canvas>
-  <Story id={getStoryId(SearchBar.displayName, 'scopes')} />
+  <Story of={SearchBarStories.Scopes} />
 </Canvas>
 
 ### Unsorted Scopes
 
 <Canvas>
-  <Story id={getStoryId(SearchBar.displayName, 'unsorted-scopes')} />
+  <Story of={SearchBarStories.UnsortedScopes} />
 </Canvas>
 
 ### Selected Scopes
 
 <Canvas>
-  <Story id={getStoryId(SearchBar.displayName, 'selected-scopes')} />
+  <Story of={SearchBarStories.SelectedScopes} />
 </Canvas>
 
 ## Code sample

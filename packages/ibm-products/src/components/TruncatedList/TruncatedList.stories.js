@@ -10,10 +10,7 @@ import { ListItem } from '@carbon/react';
 // TODO: import action to handle events if required.
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { TruncatedList } from '.';
 
@@ -23,7 +20,7 @@ import DocsPage from './TruncatedList';
 const storyClass = 'truncated-list-stories';
 
 export default {
-  title: getStoryTitle(TruncatedList.displayName),
+  title: 'IBM Products/Components/Truncated list/TruncatedList',
   component: TruncatedList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

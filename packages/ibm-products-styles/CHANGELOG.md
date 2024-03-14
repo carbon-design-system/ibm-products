@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.29.0...@carbon/ibm-products-styles@2.30.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* **Tearsheet:** prevent stacking visual cue with different sizes ([#4481](https://github.com/carbon-design-system/ibm-products/issues/4481)) ([ce1358a](https://github.com/carbon-design-system/ibm-products/commit/ce1358ad0493a21f742e455f5b11c3540592c78f))
+
+
+### Features
+
+* **Nav:** new component Nav ([#4420](https://github.com/carbon-design-system/ibm-products/issues/4420)) ([2850246](https://github.com/carbon-design-system/ibm-products/commit/28502464448794e048845a846635772514ac2ef5))
+
+
+
+
+
+# [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.28.0...@carbon/ibm-products-styles@2.29.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* about modal layout ([#4454](https://github.com/carbon-design-system/ibm-products/issues/4454)) ([c0cf58a](https://github.com/carbon-design-system/ibm-products/commit/c0cf58a1e78a4ee8f66b551d39b5705fecd4674e))
+* **Datagrid:** add missing borders to frozen header cells ([#4453](https://github.com/carbon-design-system/ibm-products/issues/4453)) ([72c38c8](https://github.com/carbon-design-system/ibm-products/commit/72c38c8325ebf40d28da8da3c192b5761dc5f1e2))
+* **Datagrid:** align nested/expanded row borders with text content ([#4388](https://github.com/carbon-design-system/ibm-products/issues/4388)) ([7e9fc3f](https://github.com/carbon-design-system/ibm-products/commit/7e9fc3f8e7df22078ebfafd4c6da6d9f1638a10f))
+* **TagSet:** address color contrast issue in overflow link button ([#4449](https://github.com/carbon-design-system/ibm-products/issues/4449)) ([5abfdd5](https://github.com/carbon-design-system/ibm-products/commit/5abfdd57fbc5047c62cc5e450e08021b79598f65))
+
+
+### Features
+
+* the button bar covers the last filter options for Datagrid filter panel [#4337](https://github.com/carbon-design-system/ibm-products/issues/4337) ([#4350](https://github.com/carbon-design-system/ibm-products/issues/4350)) ([c8392dc](https://github.com/carbon-design-system/ibm-products/commit/c8392dc1d1f756e6e9f2d8da3ac32ed447186d2b))
+* the frozen column doesn't follow the hover color on DataGrid [#4338](https://github.com/carbon-design-system/ibm-products/issues/4338) ([#4458](https://github.com/carbon-design-system/ibm-products/issues/4458)) ([176441c](https://github.com/carbon-design-system/ibm-products/commit/176441c38eca78cf7a29e2700a06d010e2371403))
+
+
+
+
+
+# [2.28.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.1...@carbon/ibm-products-styles@2.28.0) (2024-02-27)
+
+
+### Bug Fixes
+
+* header border issue introduced with ai slug ([#4385](https://github.com/carbon-design-system/ibm-products/issues/4385)) ([76a0f82](https://github.com/carbon-design-system/ibm-products/commit/76a0f8237a12bb043c523fe7132cf62b6757fc30))
+* side panel slug and close position ([#4426](https://github.com/carbon-design-system/ibm-products/issues/4426)) ([2d73177](https://github.com/carbon-design-system/ibm-products/commit/2d73177d30e73160e126136363863ae7cb34f8fb))
+* tearsheet overlay ([#4421](https://github.com/carbon-design-system/ibm-products/issues/4421)) ([8a93722](https://github.com/carbon-design-system/ibm-products/commit/8a937221e0744bb959dd2921428907bb43529f1d))
+
+
+### Features
+
+* **Decorator:** new component Decorator ([#4170](https://github.com/carbon-design-system/ibm-products/issues/4170)) ([9cea98a](https://github.com/carbon-design-system/ibm-products/commit/9cea98a32f2d169763c52d26bf123b20e886911c)), closes [#4348](https://github.com/carbon-design-system/ibm-products/issues/4348) [#4188](https://github.com/carbon-design-system/ibm-products/issues/4188) [#4227](https://github.com/carbon-design-system/ibm-products/issues/4227) [#4312](https://github.com/carbon-design-system/ibm-products/issues/4312)
+* **DescriptionList:** new component DescriptionList ([#4208](https://github.com/carbon-design-system/ibm-products/issues/4208)) ([0a55d40](https://github.com/carbon-design-system/ibm-products/commit/0a55d4092668355828cda5e44538e365baca9f2d))
+* new component status indicator ([#4419](https://github.com/carbon-design-system/ibm-products/issues/4419)) ([79c9794](https://github.com/carbon-design-system/ibm-products/commit/79c9794947fe6d58936fd4cf8a279f81870f8d5e))
+
+
+
+
+
 ## [2.27.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.27.0...@carbon/ibm-products-styles@2.27.1) (2024-02-21)
 
 

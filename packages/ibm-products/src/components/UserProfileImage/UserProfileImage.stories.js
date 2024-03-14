@@ -1,16 +1,13 @@
-//
-// Copyright IBM Corp. 2021, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 import { UserProfileImage } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import image from './headshot.jpg'; // cspell:disable-line
 import DocsPage from './UserProfileImage.docs-page';
 
@@ -23,7 +20,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: getStoryTitle(UserProfileImage.displayName),
+  title: 'IBM Products/Patterns/User profile images/UserProfileImage',
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {

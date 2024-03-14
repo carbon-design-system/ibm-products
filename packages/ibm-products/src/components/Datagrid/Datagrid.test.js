@@ -2095,6 +2095,18 @@ describe(componentName, () => {
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
     screen.getByRole('heading', { name: /Customize columns/ });
+    const searchInput = screen.getByPlaceholderText('Find column');
+    expect(searchInput.value).toBe(''); // empty before
+    fireEvent.change(searchInput, { target: { value: 'Visits' } });
+    expect(searchInput.value).toBe('Visits');
+    const dragItemCheckBox = screen.getByRole('checkbox', { name: 'Visits' });
+    fireEvent.click(dragItemCheckBox);
+    expect(dragItemCheckBox.checked).toEqual(false);
+    const columnSaveButton = screen.getByRole('button', { name: 'Save' });
+    fireEvent.click(columnSaveButton);
+    const rows = screen.getAllByRole('row');
+    const headerRow = rows[0];
+    expect(within(headerRow).queryByText('Visits') === null).toBe(true);
   });
 
   it('Top Alignment', async () => {

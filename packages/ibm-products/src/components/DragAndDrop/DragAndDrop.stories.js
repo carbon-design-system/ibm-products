@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import {
   horizontalListSortingStrategy,
@@ -33,7 +30,7 @@ import {
 } from '@dnd-kit/modifiers';
 
 export default {
-  title: getStoryTitle('DragAndDrop'),
+  title: 'IBM Products/Patterns/Drag and drop',
   component: () => {},
   tags: ['autodocs'],
   argTypes: {

@@ -72,6 +72,7 @@ const defaults = {
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
+    ScrollGradient: false,
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,

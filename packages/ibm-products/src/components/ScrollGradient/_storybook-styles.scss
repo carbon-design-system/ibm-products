@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/react/scss/theme' as *;
+@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+
+.sb-show-main,
+.docs-story {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: $layer-01 !important;
+}
+
+.templateContainer {
+  overflow: auto;
+  width: 300px;
+  height: 400px;
+  margin: auto;
+  resize: both;
+}
+
+.templateContainer-sm {
+  overflow: auto;
+  width: 300px;
+  height: 250px;
+  margin: auto;
+  resize: both;
+}

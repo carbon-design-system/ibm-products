@@ -1,0 +1,102 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  width: inherit;
+  height: inherit;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.#{$block-class}__content {
+  overflow: auto;
+  width: 100%;
+  height: inherit;
+}
+
+.#{$block-class}__content-children {
+  width: 100%;
+  height: 100%;
+}
+// All gradients
+.#{$block-class}__start-vertical,
+.#{$block-class}__start-horizontal,
+.#{$block-class}__end-vertical,
+.#{$block-class}__end-horizontal {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  pointer-events: none;
+}
+
+// Vertical start
+.#{$block-class}--y-scrollable .#{$block-class}__start-vertical {
+  top: 0;
+  left: 0;
+  height: $spacing-09;
+}
+// Vertical end
+.#{$block-class}--y-scrollable .#{$block-class}__end-vertical {
+  bottom: 0;
+  left: 0;
+  height: $spacing-09;
+}
+
+// Horizontal start
+.#{$block-class}--x-scrollable .#{$block-class}__start-horizontal {
+  top: 0;
+  left: 0;
+  width: $spacing-09;
+}
+
+// Horizontal end
+.#{$block-class}--x-scrollable .#{$block-class}__end-horizontal {
+  top: 0;
+  right: 0;
+  width: $spacing-09;
+}
+
+// Vertical start states
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical,
+.#{$block-class}--y-end.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical {
+  display: block;
+}
+
+// Vertical end states
+.#{$block-class}--y-initial.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical,
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical {
+  display: block;
+}
+
+// Horizontal start states
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal,
+.#{$block-class}--x-end.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal {
+  display: block;
+}
+
+// Horizontal end states
+.#{$block-class}--x-initial.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal,
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal {
+  display: block;
+}

@@ -68,6 +68,7 @@ const s = [
           { n: 'Nav', s: ['c/Nav'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
+          { n: 'Scroll gradient', s: ['c/ScrollGradient'] },
           {
             n: 'Search bar',
             s: ['c/SearchBar', 'c/SearchBarScopes'],

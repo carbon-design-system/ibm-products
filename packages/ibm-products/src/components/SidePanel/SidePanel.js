@@ -18,10 +18,9 @@ import { moderate02 } from '@carbon/motion';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 
-import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
-import { usePreviousValue } from '../../global/js/hooks';
+import { usePreviousValue, useFocus } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Button } from '@carbon/react';
@@ -94,8 +93,6 @@ export let SidePanel = React.forwardRef(
     const localRef = useRef();
     const sidePanelRef = ref || localRef;
     const overlayRef = useRef();
-    const startTrapRef = useRef();
-    const endTrapRef = useRef();
     const innerContentRef = useRef();
     const closeRef = useRef();
     const animatedScrollRef = useRef();
@@ -108,6 +105,7 @@ export let SidePanel = React.forwardRef(
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
 
     const shouldReduceMotion = useReducedMotion();
+    const { firstElement, keyDownListener } = useFocus(sidePanelRef);
 
     useEffect(() => {
       setDoAnimateTitle(animateTitle);
@@ -143,30 +141,6 @@ export let SidePanel = React.forwardRef(
       }
     }, [currentStep, sidePanelRef, size, previousState?.size, id]);
 
-    // set initial focus when side panel opens
-    useEffect(() => {
-      const initialFocus = (focusContainerElement) => {
-        const containerElement = focusContainerElement;
-        const primaryFocusElement =
-          containerElement &&
-          containerElement.querySelector(selectorPrimaryFocus);
-
-        if (primaryFocusElement) {
-          return primaryFocusElement;
-        } else {
-          return closeRef && closeRef.current;
-        }
-      };
-
-      const focusButton = (focusContainerElement) => {
-        const target = initialFocus(focusContainerElement);
-        target?.focus();
-      };
-      if (open && animationComplete) {
-        focusButton(innerContentRef.current);
-      }
-    }, [selectorPrimaryFocus, open, animationComplete]);
-
     // Add console warning if labelText is provided without a title.
     // This combination is not allowed.
     useEffect(() => {
@@ -176,6 +150,20 @@ export let SidePanel = React.forwardRef(
         );
       }
     }, [labelText, title]);
+
+    useEffect(() => {
+      if (open) {
+        setTimeout(() => {
+          const primeFocusEl = document.querySelector(selectorPrimaryFocus);
+
+          if (selectorPrimaryFocus && primeFocusEl && animationComplete) {
+            primeFocusEl.focus();
+          } else {
+            firstElement?.focus();
+          }
+        }, 0);
+      }
+    }, [animationComplete, firstElement, open, selectorPrimaryFocus]);
 
     const checkSetDoAnimateTitle = () => {
       let canDoAnimateTitle = false;
@@ -393,24 +381,6 @@ export let SidePanel = React.forwardRef(
       open,
     ]);
 
-    // adds focus trap functionality
-    /* istanbul ignore next */
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      // focus trap should only be set if the side panel is a `slideOver` type
-      if (open && innerContentRef && !slideIn) {
-        wrapFocus({
-          bodyNode: innerContentRef.current,
-          startTrapRef,
-          endTrapRef,
-          currentActiveNode,
-          oldActiveNode,
-        });
-      }
-    };
-
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
       {
@@ -601,7 +571,7 @@ export let SidePanel = React.forwardRef(
               {...rest}
               id={id}
               className={mainPanelClassNames}
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
               ref={sidePanelRef}
               role="complementary"
               aria-label={title}
@@ -612,16 +582,8 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
+              onKeyDown={keyDownListener}
             >
-              <span
-                ref={startTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}
-              >
-                Focus sentinel
-              </span>
-
               {doAnimateTitle ? (
                 <div
                   ref={animatedScrollRef}
@@ -651,15 +613,6 @@ export let SidePanel = React.forwardRef(
                 custom={shouldReduceMotion}
                 variants={actionSetVariants}
               />
-
-              <span
-                ref={endTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}
-              >
-                Focus sentinel
-              </span>
             </motion.div>
             <AnimatePresence>
               {includeOverlay && (

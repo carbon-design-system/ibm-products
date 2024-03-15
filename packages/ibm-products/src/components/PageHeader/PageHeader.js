@@ -458,6 +458,20 @@ export let PageHeader = React.forwardRef(
       title
     );
 
+    const getBreadcrumbs = () => {
+      if (breadcrumbs && breadcrumbItemForTitle) {
+        return breadcrumbs.concat(breadcrumbItemForTitle);
+      } else {
+        if (breadcrumbItemForTitle) {
+          return [breadcrumbItemForTitle];
+        } else {
+          return breadcrumbs;
+        }
+      }
+    };
+
+    const displayedBreadcrumbs = getBreadcrumbs();
+
     return (
       <>
         <div
@@ -509,20 +523,14 @@ export let PageHeader = React.forwardRef(
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs || breadcrumbItemForTitle ? (
+                      {(breadcrumbs || breadcrumbItemForTitle) && (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                          breadcrumbs={
-                            breadcrumbs && breadcrumbItemForTitle
-                              ? breadcrumbs.concat(breadcrumbItemForTitle)
-                              : breadcrumbItemForTitle
-                              ? [breadcrumbItemForTitle]
-                              : breadcrumbs // breadcrumbs may be null or undefined
-                          }
+                          breadcrumbs={displayedBreadcrumbs}
                         />
-                      ) : null}
+                      )}
                     </Column>
                     <Column
                       className={cx([

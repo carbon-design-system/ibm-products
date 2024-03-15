@@ -127,7 +127,7 @@ export let BreadcrumbWithOverflow = ({
     }
 
     const newDisplayedBreadcrumbItems = breadcrumbs.map(
-      ({ className, key, label, title, ...rest }, index) => (
+      ({ className, key, label, title, shortText, ...rest }, index) => (
         <BreadcrumbItem
           key={key}
           className={
@@ -138,7 +138,7 @@ export let BreadcrumbWithOverflow = ({
           title={index + 1 === breadcrumbs.length ? title : null}
           {...rest}
         >
-          {label}
+          {shortText || label}
         </BreadcrumbItem>
       )
     );
@@ -355,6 +355,11 @@ BreadcrumbWithOverflow.propTypes = {
        * Pass in content that will be inside of the BreadcrumbItem
        */
       label: PropTypes.node,
+
+      /**
+       * An optional title label for extra long breadcrumbs
+       */
+      shortText: PropTypes.string,
 
       /**
        * A string based alternative to the children, required only if children is not of type string.

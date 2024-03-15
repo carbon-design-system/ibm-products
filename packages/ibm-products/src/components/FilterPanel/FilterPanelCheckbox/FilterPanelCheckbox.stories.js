@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 import { FilterPanel, FilterPanelCheckbox } from '..';
@@ -22,7 +19,7 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: getStoryTitle(FilterPanelCheckbox.displayName),
+  title: 'IBM Products/Components/Filter panels/Filter Panel Checkbox',
   component: FilterPanelCheckbox,
   tags: ['autodocs'],
   argTypes: {
@@ -70,6 +67,7 @@ const Template = (args) => {
 };
 
 export const Default = prepareStory(Template, {
+  storyName: 'Filter Panel Checkbox',
   args: {
     id: uuidv4(),
     labelText: 'Checkbox label',

@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import { FilterPanel, FilterPanelLabel } from '..';
 import mdx from './FilterPanelLabel.mdx';
@@ -20,7 +17,7 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: getStoryTitle(FilterPanelLabel.displayName),
+  title: 'IBM Products/Internal/FilterPanelLabel',
   component: FilterPanelLabel,
   tags: ['autodocs'],
   parameters: {
@@ -64,6 +61,7 @@ const Template = (args) => {
 };
 
 export const Default = prepareStory(Template, {
+  storyName: 'Filter Panel Label',
   args: {
     children: 'Label',
     labelTitle: 'Alternate label `title` attribute',

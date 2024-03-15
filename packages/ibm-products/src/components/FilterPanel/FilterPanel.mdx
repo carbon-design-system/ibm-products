@@ -1,8 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { FilterPanel } from '.';
 import * as FilterPanelStories from './FilterPanel.stories';
 
@@ -20,8 +17,6 @@ The `FilterPanel` allows for an optional title, and acts as the container for
 its subcomponents.
 
 ## Example usage
-
-{/* TODO: One example per designed use case. */}
 
 <Canvas>
   <Story of={FilterPanelStories.Default} />

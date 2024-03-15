@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.0...@carbon/ibm-cloud-cognitive-core@2.17.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* **Decorator:** breakout single Decorator into many smaller Decorators ([#4542](https://github.com/carbon-design-system/ibm-products/issues/4542)) ([3f57a24](https://github.com/carbon-design-system/ibm-products/commit/3f57a24c1304d1a4be3caa33b60ae29c3123d14a))
+* update ai gradient mixin call to match 1.53 ([#4552](https://github.com/carbon-design-system/ibm-products/issues/4552)) ([332890c](https://github.com/carbon-design-system/ibm-products/commit/332890c9deceb0a38facfbf71dfadb66ca66f816))
+
+
+
+
+
+# [2.17.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.16.0...@carbon/ibm-cloud-cognitive-core@2.17.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* Moved Search bar from patterns to components ([#4470](https://github.com/carbon-design-system/ibm-products/issues/4470)) ([8c46b0e](https://github.com/carbon-design-system/ibm-products/commit/8c46b0ed0dac279cf6d85592d47b7c3edb8797a6))
+
+
+### Features
+
+* **Nav:** new component Nav ([#4420](https://github.com/carbon-design-system/ibm-products/issues/4420)) ([2850246](https://github.com/carbon-design-system/ibm-products/commit/28502464448794e048845a846635772514ac2ef5))
+
+
+
+
+
 # [2.16.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.15.0...@carbon/ibm-cloud-cognitive-core@2.16.0) (2024-03-05)
 
 

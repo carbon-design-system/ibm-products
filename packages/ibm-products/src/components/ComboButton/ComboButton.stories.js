@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,17 +9,14 @@ import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 import { ActionableNotification } from '@carbon/react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ComboButton, ComboButtonItem } from '..';
 
 // import styles from './_combo-button.scss';
 
 export default {
-  title: getStoryTitle(ComboButton.displayName),
+  title: 'IBM Products/Internal/ComboButton',
   component: ComboButton,
   tags: ['autodocs'],
   parameters: {

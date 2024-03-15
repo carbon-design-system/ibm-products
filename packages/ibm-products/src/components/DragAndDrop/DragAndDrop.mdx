@@ -1,8 +1,6 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './DragAndDrop.stories';
 
 # DescriptionList
 
@@ -28,30 +26,30 @@ of columns in the Datagrid.
 
 ### Vertical list
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'vertical-example')} />
+  <Story of={stories.verticalExample} />
 </Canvas>
 
 ### Horizontal list
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'horizontal-example')} />
+  <Story of={stories.horizontalExample} />
 </Canvas>
 
 ### Grid
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'grid-example')} />
+  <Story of={stories.gridExample} />
 </Canvas>
 
 ### Grid, restrict drag to window edge
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'grid-example-restrict-to-window')} />
+  <Story of={stories.gridExampleRestrictToWindow} />
 </Canvas>
 
 ### Grid, with large item
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'grid-example-large-item')} />
+  <Story of={stories.gridExampleLargeItem} />
 </Canvas>
 
 ### Grid, dashboard
 <Canvas>
-  <Story id={getStoryId('DragAndDrop', 'grid-dashboard')} />
+  <Story of={stories.gridDashboard} />
 </Canvas>

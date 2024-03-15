@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,17 +9,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 // import mdx from './UnauthorizedEmptyState.mdx';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: getStoryTitle(UnauthorizedEmptyState.displayName),
+  title: 'IBM Products/Patterns/Empty state/UnauthorizedEmptyState',
   component: UnauthorizedEmptyState,
   tags: ['autodocs'],
   parameters: {

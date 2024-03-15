@@ -8,10 +8,7 @@
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
@@ -19,7 +16,7 @@ import mdx from './StatusIndicator.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(StatusIndicator.displayName),
+  title: 'IBM Products/Components/Status indicator/StatusIndicator',
   component: StatusIndicator,
   tags: ['autodocs'],
   argTypes: {

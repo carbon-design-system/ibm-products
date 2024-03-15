@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { SteppedAnimatedMedia } from '.';
 
@@ -25,7 +22,7 @@ const storyClass = 'stepped-animated-media-stories';
 import DocsPage from './SteppedAnimatedMedia.docs-page';
 
 export default {
-  title: getStoryTitle(SteppedAnimatedMedia.displayName),
+  title: 'IBM Products/Internal/SteppedAnimatedMedia',
   component: SteppedAnimatedMedia,
   tags: ['autodocs'],
   parameters: {

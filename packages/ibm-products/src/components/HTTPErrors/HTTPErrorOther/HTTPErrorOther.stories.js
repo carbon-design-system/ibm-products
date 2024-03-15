@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,20 +7,24 @@
 
 import React from 'react';
 import { HTTPErrorOther } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: getStoryTitle(HTTPErrorOther.displayName),
+  title: 'IBM Products/Patterns/HTTP errors/HTTPErrorOther',
   component: HTTPErrorOther,
   tags: ['autodocs'],
   parameters: {
     docs: {
       page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#other-errors" />
+        <StoryDocsPage
+          altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#other-errors"
+          blocks={[
+            {
+              story: withAllPropsSet,
+            },
+          ]}
+        />
       ),
     },
     layout: 'fullscreen',

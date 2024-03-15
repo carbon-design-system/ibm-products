@@ -1,0 +1,44 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { DecoratorDualButton } from '.';
+import * as DecoratorDualButtonStories from './DecoratorDualButton.stories';
+
+# DecoratorDualButton
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Overview
+
+The DecoratorDualButton groups a key/value pair where the key and value are each
+buttons.
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorDualButtonStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```js
+setLabelTitle: (score, scoreThresholds, magnitude) => {
+  if (typeof score !== 'number') {
+    return 'Unknown score';
+  }
+  return `"${magnitude}" magnitude. Score ${score} out of ${
+    scoreThresholds[scoreThresholds.length - 1]
+  }`;
+},
+```
+
+## Component API
+
+<ArgsTable />

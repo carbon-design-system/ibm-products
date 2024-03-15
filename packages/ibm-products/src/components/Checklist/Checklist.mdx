@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Checklist } from '.';
+import * as CheckListStories from './Checklist.stories';
 
 # Checklist
 
@@ -31,7 +29,7 @@ explain, educate, and cultivate novice users into high-functioning power users.
 {/* TODO: One example per designed use case. */}
 
 <Canvas style={{ backgroundColor: '#f4f4f4' }}>
-  <Story id={getStoryId(Checklist.displayName, 'checklist')} />
+  <Story of={CheckListStories.checklist} />
 </Canvas>
 
 {/* ## Code sample */}

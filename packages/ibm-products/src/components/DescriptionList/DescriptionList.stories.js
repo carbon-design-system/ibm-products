@@ -1,3 +1,5 @@
+//cspell: disable
+
 /**
  * Copyright IBM Corp. 2024, 2024
  *
@@ -9,10 +11,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import {
   DescriptionList,
@@ -28,7 +27,7 @@ import mdx from './DescriptionList.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(DescriptionList.displayName),
+  title: 'IBM Products/Components/Description list/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

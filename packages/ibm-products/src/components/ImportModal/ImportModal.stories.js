@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,16 +9,13 @@ import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
 import DocsPage from './ImportModal.docs-page';
 // import mdx from './ImportModal.mdx';
 
 export default {
-  title: getStoryTitle(ImportModal.displayName),
+  title: 'IBM Products/Patterns/Import and upload/ImportModal',
   component: ImportModal,
   tags: ['autodocs'],
   parameters: {

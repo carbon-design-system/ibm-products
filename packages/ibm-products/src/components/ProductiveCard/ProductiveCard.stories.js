@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,10 +15,7 @@ import {
   unstable__Slug as Slug,
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
 // import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -44,7 +41,7 @@ const sampleSlug = (
 );
 
 export default {
-  title: getStoryTitle(ProductiveCard.displayName),
+  title: 'IBM Products/Components/Cards/ProductiveCard',
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {

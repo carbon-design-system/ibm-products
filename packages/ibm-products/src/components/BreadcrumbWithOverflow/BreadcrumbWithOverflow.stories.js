@@ -1,18 +1,15 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { BreadcrumbWithOverflow } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
@@ -23,7 +20,7 @@ const lastBreadcrumbs = [
 ];
 
 export default {
-  title: getStoryTitle(BreadcrumbWithOverflow.displayName),
+  title: 'IBM Products/Internal/BreadcrumbWithOverflow',
   component: BreadcrumbWithOverflow,
   tags: ['autodocs'],
   argTypes: {

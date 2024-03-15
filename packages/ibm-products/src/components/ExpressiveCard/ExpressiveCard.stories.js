@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,10 +17,7 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 // import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -46,7 +43,7 @@ const sampleSlug = (
 );
 
 export default {
-  title: getStoryTitle(ExpressiveCard.displayName),
+  title: 'IBM Products/Components/Cards/ExpressiveCard',
   component: ExpressiveCard,
   tags: ['autodocs'],
   parameters: {

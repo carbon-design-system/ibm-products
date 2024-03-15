@@ -6,7 +6,6 @@
  */
 import React, { useState } from 'react';
 import { carbon } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
@@ -430,14 +429,12 @@ const TemplateWithSections = ({ ...args }) => {
   );
 };
 
-export const editFullPage = prepareStory(Template, {
-  args: {
-    ...defaultFullPageProps,
-  },
-});
+export const editFullPage = Template.bind({});
+editFullPage.args = {
+  ...defaultFullPageProps,
+};
 
-export const editFullPageWithSections = prepareStory(TemplateWithSections, {
-  args: {
-    ...defaultFullPageProps,
-  },
-});
+export const editFullPageWithSections = TemplateWithSections.bind({});
+editFullPageWithSections.args = {
+  ...defaultFullPageProps,
+};

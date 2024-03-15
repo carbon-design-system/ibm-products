@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { HTTPErrorOther } from '.';
-import { prepareStory } from '../../../global/js/utils/story-helper';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
@@ -39,20 +38,19 @@ const Template = (args) => {
  * TODO: Declare one or more examples per template.
  * NOTE: Complete list of examples should match designed use cases
  */
-export const withAllPropsSet = prepareStory(Template, {
-  args: {
-    errorCodeLabel: 'Error 502',
-    title: 'Bad gateway',
-    description: 'Received an invalid response.',
-    links: [
-      {
-        text: 'Carbon Design System',
-        href: 'https://www.carbondesignsystem.com',
-      },
-      {
-        text: 'Carbon for IBM Products component library',
-        href: 'https://github.com/carbon-design-system/ibm-products',
-      },
-    ],
-  },
-});
+export const withAllPropsSet = Template.bind({});
+withAllPropsSet.args = {
+  errorCodeLabel: 'Error 502',
+  title: 'Bad gateway',
+  description: 'Received an invalid response.',
+  links: [
+    {
+      text: 'Carbon Design System',
+      href: 'https://www.carbondesignsystem.com',
+    },
+    {
+      text: 'Carbon for IBM Products component library',
+      href: 'https://github.com/carbon-design-system/ibm-products',
+    },
+  ],
+};

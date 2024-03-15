@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 import { Coachmark, CoachmarkOverlayElement, CoachmarkBeacon } from '..';
 import { CoachmarkOverlayElements } from '.';
 import mdx from './CoachmarkOverlayElements.mdx';
@@ -20,7 +17,8 @@ import mdx from './CoachmarkOverlayElements.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkOverlayElements',
+  title:
+    'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkOverlayElements',
   component: CoachmarkOverlayElements,
   tags: ['autodocs'],
   argTypes: {
@@ -64,12 +62,11 @@ const Template = (args) => {
   );
 };
 
-export const coachmarkOverlayElements = prepareStory(Template, {
-  args: {
-    closeButtonLabel: 'Done',
-    nextButtonText: 'Next',
-    previousButtonLabel: 'Back',
-    className: 'myOverlayElements',
-    media: { filePaths: [Anim1, Anim2] },
-  },
-});
+export const coachmarkOverlayElements = Template.bind({});
+coachmarkOverlayElements.args = {
+  closeButtonLabel: 'Done',
+  nextButtonText: 'Next',
+  previousButtonLabel: 'Back',
+  className: 'myOverlayElements',
+  media: { filePaths: [Anim1, Anim2] },
+};

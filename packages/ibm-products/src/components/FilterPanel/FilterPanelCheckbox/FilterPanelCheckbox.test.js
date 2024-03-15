@@ -17,13 +17,13 @@ const blockClass = `${pkg.prefix}--filter-panel-checkbox`;
 const componentName = FilterPanelCheckbox.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const id = uuidv4();
+const label = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(<FilterPanelCheckbox id={id} labelText={children} {...{ ...rest }} />);
+  render(<FilterPanelCheckbox id={id} label={label} {...{ ...rest }} />);
 
 describe(componentName, () => {
   it('renders a component FilterPanelCheckbox', async () => {

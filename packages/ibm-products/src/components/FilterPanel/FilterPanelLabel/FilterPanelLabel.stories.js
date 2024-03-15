@@ -29,7 +29,6 @@ export default {
   argTypes: {
     className: { control: { type: {} } },
     onChange: { table: { disable: true } },
-    setCountAriaLabel: { control: { type: {} } },
     count: {
       control: {
         type: 'select',
@@ -63,7 +62,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   storyName: 'Filter Panel Label',
   args: {
-    children: 'Label',
-    labelTitle: 'Alternate label `title` attribute',
+    label: 'Label',
   },
 });

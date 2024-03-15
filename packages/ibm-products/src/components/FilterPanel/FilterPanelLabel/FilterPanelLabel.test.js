@@ -17,16 +17,14 @@ const blockClass = `${pkg.prefix}--filter-panel-label`;
 const componentName = FilterPanelLabel.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const count = 5;
+const label = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <FilterPanelLabel data-testid={dataTestId} {...{ ...rest }}>
-      {children}
-    </FilterPanelLabel>
+    <FilterPanelLabel data-testid={dataTestId} label={label} {...{ ...rest }} />
   );
 
 describe(componentName, () => {
@@ -36,8 +34,10 @@ describe(componentName, () => {
   });
 
   it('renders a count', async () => {
-    renderComponent({ count: count });
-    expect(screen.getByLabelText(/5 items/)).toBeInTheDocument();
+    const { container } = renderComponent({ count: count });
+    expect(container.querySelector(`.${blockClass}__count`).textContent).toBe(
+      '5'
+    );
   });
 
   it('has no accessibility violations', async () => {

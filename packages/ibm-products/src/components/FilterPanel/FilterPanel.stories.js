@@ -19,7 +19,7 @@ import styles from './_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panels/Filter Panel',
+  title: 'IBM Products/Components/Filter panel/Filter Panel',
   component: FilterPanel,
   tags: ['autodocs'],
   parameters: {
@@ -63,7 +63,7 @@ const Template = (args) => {
       <FilterPanel {...args}>
         <FilterPanelCheckbox
           count={6}
-          labelText="Filter 1"
+          label="Filter 1"
           // "id" and "onChange" are pass-through props to Carbon's Checkbox.
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
@@ -72,7 +72,7 @@ const Template = (args) => {
         />
         <FilterPanelCheckbox
           count={10}
-          labelText="Filter 2"
+          label="Filter 2"
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
             action('FilterPanelCheckbox onChange')(checked, id, event)
@@ -80,7 +80,7 @@ const Template = (args) => {
         />
         <FilterPanelCheckbox
           count={'1,500'}
-          labelText="Really long filter name"
+          label="Filter 3: really long filter name"
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
             action('FilterPanelCheckbox onChange')(checked, id, event)

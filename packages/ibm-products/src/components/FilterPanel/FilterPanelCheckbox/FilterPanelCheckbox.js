@@ -23,23 +23,12 @@ const componentName = 'FilterPanelCheckbox';
  * Provides a checkbox, label, and count.
  */
 export let FilterPanelCheckbox = React.forwardRef(
-  (
-    { className, count, labelText, labelTitle, setCountAriaLabel, ...rest },
-    ref
-  ) => {
+  ({ className, count, label, ...rest }, ref) => {
     return (
       <Checkbox
         {...rest}
         className={cx(blockClass, className)}
-        labelText={
-          <FilterPanelLabel
-            count={count}
-            setCountAriaLabel={setCountAriaLabel}
-            labelTitle={labelTitle || labelText}
-          >
-            {labelText}
-          </FilterPanelLabel>
-        }
+        labelText={<FilterPanelLabel count={count} label={label} />}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       />
@@ -74,16 +63,5 @@ FilterPanelCheckbox.propTypes = {
   /**
    * Label to be displayed with the checkbox.
    */
-  labelText: PropTypes.string.isRequired,
-
-  /**
-   * Alternate title attribute for the label,
-   * else `labelText` will be used by default.
-   */
-  labelTitle: PropTypes.string,
-
-  /**
-   * Optional callback function to populate the count's aria label.
-   */
-  setCountAriaLabel: PropTypes.func,
+  label: PropTypes.string.isRequired,
 };

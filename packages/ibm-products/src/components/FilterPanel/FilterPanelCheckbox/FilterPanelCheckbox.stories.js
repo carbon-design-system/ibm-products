@@ -19,14 +19,13 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panels/Filter Panel Checkbox',
+  title: 'IBM Products/Components/Filter panel/Filter Panel Checkbox',
   component: FilterPanelCheckbox,
   tags: ['autodocs'],
   argTypes: {
     className: { control: { type: {} } },
     id: { table: { disable: true } },
     onChange: { table: { disable: true } },
-    setCountAriaLabel: { control: { type: {} } },
     count: {
       control: {
         type: 'select',
@@ -70,8 +69,6 @@ export const Default = prepareStory(Template, {
   storyName: 'Filter Panel Checkbox',
   args: {
     id: uuidv4(),
-    labelText: 'Checkbox label',
-    labelTitle: 'Alternate checkbox `title` attribute',
-    setCountAriaLabel: (count) => `${count} items`,
+    label: 'Checkbox label',
   },
 });

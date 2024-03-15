@@ -74,6 +74,10 @@ const s = [
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'Truncated list', s: ['c/TruncatedList'] },
           { n: 'User avatar', s: ['c/UserAvatar'] },
+          {
+            n: 'Filter panel',
+            s: ['c/FilterPanel', 'c/FilterPanelCheckbox'],
+          },
         ],
       },
       {
@@ -146,6 +150,7 @@ const s = [
           'c/Carousel',
           'c/ComboButton',
           'c/ExampleComponent',
+          'c/FilterPanelLabel',
           'c/FilterSummary',
           'c/SimpleHeader',
           'c/SteppedAnimatedMedia',

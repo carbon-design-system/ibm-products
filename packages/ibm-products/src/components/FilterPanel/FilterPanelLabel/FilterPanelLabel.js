@@ -58,5 +58,5 @@ FilterPanelLabel.propTypes = {
   /**
    * The label for the component.
    */
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };

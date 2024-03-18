@@ -316,7 +316,7 @@ EditSidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  selectorPageContent: PropTypes.string.isRequired,
 
   /**
    * Specifies which DOM element in the form should be focused.

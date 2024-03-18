@@ -9,8 +9,6 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { StringFormatter } from '.';
 import mdx from './StringFormatter.mdx';
 
@@ -54,11 +52,10 @@ const valueStr =
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const stringFormatter = prepareStory(Template, {
-  args: {
-    lines: 1,
-    truncate: true,
-    value: valueStr,
-    width: '200px',
-  },
-});
+export const stringFormatter = Template.bind({});
+stringFormatter.args = {
+  lines: 1,
+  truncate: true,
+  value: valueStr,
+  width: '200px',
+};

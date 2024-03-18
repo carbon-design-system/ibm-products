@@ -7,7 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { SimpleHeader } from './SimpleHeader';
 
 import DocsPage from './SimpleHeader.docs-page';
@@ -45,38 +44,34 @@ export default {
 // eslint-disable-next-line no-unused-vars -- args not used in this template
 const Template = (args) => <SimpleHeader {...args} />;
 
-export const simpleHeader = prepareStory(Template, {
-  args: {
-    title: 'Page title',
-    noTrailingSlash: true,
-    className: 'custom-classname',
-    breadcrumbs: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-  },
-});
+export const simpleHeader = Template.bind({});
+simpleHeader.args = {
+  title: 'Page title',
+  noTrailingSlash: true,
+  className: 'custom-classname',
+  breadcrumbs: 2,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+};
 
-export const simpleHeaderWithTitleOnly = prepareStory(Template, {
-  args: {
-    title: 'Page title',
-    className: 'custom-classname',
-  },
-});
+export const simpleHeaderWithTitleOnly = Template.bind({});
+simpleHeaderWithTitleOnly.args = {
+  title: 'Page title',
+  className: 'custom-classname',
+};
 
-export const simpleHeaderWithBreadcrumbsOnly = prepareStory(Template, {
-  args: {
-    noTrailingSlash: true,
-    className: 'custom-classname',
-    breadcrumbs: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-  },
-});
+export const simpleHeaderWithBreadcrumbsOnly = Template.bind({});
+simpleHeaderWithBreadcrumbsOnly.args = {
+  noTrailingSlash: true,
+  className: 'custom-classname',
+  breadcrumbs: 2,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+};
 
-export const simpleHeaderWithOverflowBreadcrumbs = prepareStory(Template, {
-  args: {
-    noTrailingSlash: true,
-    className: 'custom-classname',
-    breadcrumbs: 2,
-    maxVisible: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-  },
-});
+export const simpleHeaderWithOverflowBreadcrumbs = Template.bind({});
+simpleHeaderWithOverflowBreadcrumbs.args = {
+  noTrailingSlash: true,
+  className: 'custom-classname',
+  breadcrumbs: 2,
+  maxVisible: 2,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+};

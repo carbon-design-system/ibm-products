@@ -7,9 +7,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { DecoratorSingleButton } from '.';
 import mdx from './DecoratorSingleButton.mdx';
 
@@ -106,27 +103,26 @@ const Template = (args) => {
   return <DecoratorSingleButton {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'DecoratorSingleButton',
-  args: {
-    disabled: false,
-    hideIcon: false,
-    label: 'IP',
-    onClick: (event, values) => action('onClick')(values),
-    onContextMenu: (event, values) => action('onContextMenu')(values),
-    score: 5,
-    scoreThresholds: [0, 4, 7, 10],
-    setLabelTitle: (score, scoreThresholds, magnitude) => {
-      if (typeof score !== 'number') {
-        return 'Unknown score';
-      }
-      return `"${magnitude}" magnitude. Score ${score} out of ${
-        scoreThresholds[scoreThresholds.length - 1]
-      }`;
-    },
-    small: false,
-    theme: 'light',
-    value: '192.168.0.50',
-    valueTitle: '',
+export const Default = Template.bind({});
+Default.storyName = 'DecoratorSingleButton';
+Default.args = {
+  disabled: false,
+  hideIcon: false,
+  label: 'IP',
+  onClick: (event, values) => action('onClick')(values),
+  onContextMenu: (event, values) => action('onContextMenu')(values),
+  score: 5,
+  scoreThresholds: [0, 4, 7, 10],
+  setLabelTitle: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds[scoreThresholds.length - 1]
+    }`;
   },
-});
+  small: false,
+  theme: 'light',
+  value: '192.168.0.50',
+  valueTitle: '',
+};

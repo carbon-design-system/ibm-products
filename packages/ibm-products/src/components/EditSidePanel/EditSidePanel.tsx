@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -27,11 +27,111 @@ const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values for props
-const defaults = {
-  placement: 'right',
-  size: 'md',
-};
+interface EditSidePanelProps extends PropsWithChildren {
+  /**
+   * Sets the body content of the create side panel
+   */
+  children: ReactNode | ReactNode[];
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
+  disableSubmit?: boolean;
+
+  /**
+   * Specifies an optional field that provides a additional context for a form
+   */
+  formDescription?: ReactNode;
+
+  /**
+   * Specifies a required field that provides a title for a form
+   */
+  formTitle: ReactNode;
+
+  /**
+   * Unique identifier
+   */
+  id?: string;
+
+  /**
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * is closed.
+   */
+  onRequestClose?: () => void;
+
+  /**
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * primary button is pressed.
+   */
+  onRequestSubmit?: () => void;
+
+  /**
+   * Specifies whether the CreateSidePanel is open or not.
+   */
+  open?: boolean;
+
+  /**
+   * Determines if the side panel is on the right or left
+   */
+  placement?: 'left' | 'right';
+
+  /**
+   * Specifies the primary button's text in the modal.
+   */
+  primaryButtonText: string;
+
+  /**
+   * Specifies the secondary button's text in the modal.
+   */
+  secondaryButtonText: string;
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: string;
+
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  selectorPrimaryFocus: ReactNode;
+
+  /**
+   * Sets the size of the side panel
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  slideIn?: boolean;
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside?: boolean;
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
+   */
+  subtitle?: ReactNode;
+
+  /**
+   * The title of the CreateSidePanel is usually the product or service name.
+   */
+  title: ReactNode;
+}
 
 /**
  * Use with medium complexity edits if the user needs page context.
@@ -50,19 +150,19 @@ export let EditSidePanel = React.forwardRef(
       onRequestClose,
       onRequestSubmit,
       open,
-      placement = defaults.placement,
+      placement = 'right',
       primaryButtonText,
       secondaryButtonText,
       selectorPrimaryFocus,
       selectorPageContent,
-      size = defaults.size,
+      size = 'md',
       slideIn,
       subtitle,
       title,
-
+      preventCloseOnClickOutside,
       // Collect any other property values passed in.
       ...rest
-    },
+    }: EditSidePanelProps,
     ref
   ) => {
     const actions = [
@@ -70,7 +170,7 @@ export let EditSidePanel = React.forwardRef(
         label: primaryButtonText,
         onClick: (event) => {
           event.preventDefault();
-          onRequestSubmit();
+          onRequestSubmit && onRequestSubmit();
         },
         kind: 'primary',
         disabled: disableSubmit,
@@ -97,15 +197,15 @@ export let EditSidePanel = React.forwardRef(
           subtitle,
           selectorPrimaryFocus,
           id,
+          placement,
+          slideIn,
+          animateTitle: false,
+          className: cx(blockClass, className),
+          size,
+          actions,
+          preventCloseOnClickOutside,
           ...getDevtoolsProps(componentName),
         }}
-        placement={placement}
-        slideIn={slideIn}
-        animateTitle={false}
-        className={cx(blockClass, className)}
-        size={size}
-        preventCloseOnClickOutside
-        actions={actions}
       >
         {formTitle && (
           <h3
@@ -196,6 +296,11 @@ EditSidePanel.propTypes = {
    * Determines if the side panel is on the right or left
    */
   placement: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
 
   /**
    * Specifies the primary button's text in the modal.

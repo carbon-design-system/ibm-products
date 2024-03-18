@@ -11,10 +11,7 @@ import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
 import { getBatchActions } from '../../Datagrid.stories';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -28,10 +25,10 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
-import { getDateFormat } from './Panel.stories';
+import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
+  title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -89,6 +86,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Status',
       accessor: 'status',
+      filter: 'multiSelect',
     },
     // Shows the date filter example
     {
@@ -252,15 +250,11 @@ const filters = [
     },
   },
   {
-    type: 'dropdown',
+    type: 'multiSelect',
     column: 'status',
     props: {
-      Dropdown: {
-        id: 'marital-status-dropdown',
-        ariaLabel: 'Marital status dropdown',
-        items: ['relationship', 'complicated', 'single'],
-        label: 'Marital status',
-        titleText: 'Marital status',
+      MultiSelect: {
+        ...multiSelectProps,
       },
     },
   },

@@ -8,15 +8,9 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
-
 import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
@@ -30,7 +24,7 @@ import styles from './_storybook-styles.scss';
 const storyClass = 'interstitial-stories';
 
 export default {
-  title: getStoryTitle(InterstitialScreen.displayName),
+  title: 'IBM Products/Novice to pro/Interstitial screen/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs'],
   argTypes: {

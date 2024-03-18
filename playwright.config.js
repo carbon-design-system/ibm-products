@@ -16,7 +16,7 @@ const config = {
   testIgnore: [],
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-test-match
-  testMatch: /.*.test(.avt|.vrt)?.e2e\.m?js$/,
+  testMatch: /.*-test(.avt|.vrt)?.e2e\.m?js$/,
 
   // https://playwright.dev/docs/api/class-testconfig#test-config-timeout
   timeout: 10000 * 30,

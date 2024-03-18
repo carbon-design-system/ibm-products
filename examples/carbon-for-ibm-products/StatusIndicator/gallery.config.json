@@ -1,0 +1,12 @@
+{
+  "label": "Status-Indicator",
+  "package-config": {
+    "flags": {
+      "component": {
+        "StatusIndicator": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

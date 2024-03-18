@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { isColumnVisible } from './common';
 import { TearsheetNarrow } from '../../../../Tearsheet';
 import Columns from './Columns';
 import Actions from './Actions';
@@ -35,28 +34,14 @@ const CustomizeColumnsTearsheet = ({
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [columnObjects, setColumnObjects] = useState(
-    columnDefinitions
-      // only sort the hidden column to the end when modal reopen
-      .sort((defA, defB) => {
-        const isVisibleA = isColumnVisible(defA);
-        const isVisibleB = isColumnVisible(defB);
-        if (isVisibleA && !isVisibleB) {
-          return -1;
-        }
-        if (!isVisibleA && isVisibleB) {
-          return 1;
-        }
-        return 0;
-      })
-  );
-
+  const [columnObjects, setColumnObjects] = useState(columnDefinitions);
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
     setColumnObjects(columnDefinitions);
     setIsTearsheetOpen(false);
   };
+
   const onRequestSubmit = () => {
     setIsTearsheetOpen(false);
     const updatedColumns = columnObjects.map((colDef) => ({
@@ -145,6 +130,7 @@ const CustomizeColumnsTearsheet = ({
             setDirty();
           }}
           selectAllLabel={selectAllLabel}
+          customizeTearsheetHeadingLabel={customizeTearsheetHeadingLabel}
         />
       )}
     </TearsheetNarrow>

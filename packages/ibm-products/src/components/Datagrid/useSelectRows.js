@@ -123,7 +123,7 @@ const SelectRow = (datagridState) => {
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
-  const rowId = `${tableId}-${row.index}`;
+  const rowId = `${tableId}-${row.id}-${row.index}`;
   return (
     <TableSelectRow
       {...cellProps}

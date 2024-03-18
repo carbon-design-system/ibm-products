@@ -1,22 +1,19 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 import DocsPage from './RemoveModal.docs-page';
 
 export default {
-  title: getStoryTitle(RemoveModal.displayName),
+  title: 'IBM Products/Patterns/Remove/RemoveModal',
   component: RemoveModal,
   tags: ['autodocs'],
   parameters: {

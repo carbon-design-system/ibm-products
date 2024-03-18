@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { UserAvatar } from '.';
+import * as UserAvatarStories from './UserAvatar.stories';
 
 # UserAvatar
 
@@ -21,8 +19,16 @@ import { UserAvatar } from '.';
 
 {/* TODO: One example per designed use case. */}
 
+### Default
+
 <Canvas>
-  <Story id={getStoryId(UserAvatar.displayName, 'user-avatar')} />
+  <Story of={UserAvatarStories.Default} />
+</Canvas>
+
+### With Image
+
+<Canvas>
+  <Story of={UserAvatarStories.WithImage} />
 </Canvas>
 
 ## Code sample

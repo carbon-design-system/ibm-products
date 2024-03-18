@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,10 +23,7 @@ import {
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
 
@@ -79,7 +76,7 @@ const renderUIShellHeader = () => (
 const prefix = 'edit-side-panel-stories__';
 
 export default {
-  title: getStoryTitle(EditSidePanel.displayName),
+  title: 'IBM Products/Patterns/Edit and update/EditSidePanel',
   component: EditSidePanel,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

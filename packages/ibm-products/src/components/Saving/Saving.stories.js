@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,17 +7,14 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { Saving } from '.';
 // import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 
 export default {
-  title: getStoryTitle(Saving.displayName),
+  title: 'IBM Products/Patterns/Saving',
   component: Saving,
   tags: ['autodocs'],
   parameters: {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,10 +10,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { AboutModal } from '.';
 
@@ -31,7 +28,7 @@ const blockClass = `${pkg.prefix}--about-modal`;
 import DocsPage from './AboutModal.docs-page';
 
 export default {
-  title: getStoryTitle(AboutModal.displayName),
+  title: 'IBM Products/Patterns/About modal/AboutModal',
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {
@@ -211,7 +208,9 @@ export const aboutModal = prepareStory(
   {
     storyName: aboutModalStoryName,
     args: {
-      title: 0,
+      title: 2,
+      links: 0,
+      content: 0,
       additionalInfo: 0,
       ...commonArgs,
     },

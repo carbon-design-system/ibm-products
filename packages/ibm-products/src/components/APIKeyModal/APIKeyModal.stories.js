@@ -1,9 +1,9 @@
-//
-// Copyright IBM Corp. 2021, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React, { useState } from 'react';
 import {
@@ -18,17 +18,14 @@ import {
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import DocsPage from './APIKeyModal.docs-page';
 
 export default {
-  title: getStoryTitle(APIKeyModal.displayName),
+  title: 'IBM Products/Patterns/Generating an API key/APIKeyModal',
   component: APIKeyModal,
   tags: ['autodocs'],
   parameters: {

@@ -18,10 +18,7 @@ import {
   usePrefix,
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -36,13 +33,54 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Slug`,
+  title: 'IBM Products/Components/Datagrid/Slug',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
     styles,
     docs: {
-      page: () => <StoryDocsPage blocks={[]} />,
+      page: () => (
+        <StoryDocsPage
+          blocks={[
+            {
+              description:
+                "A Carbon AI slug can be used within the Datagrid for both column headers and rows. To include a column header AI slug, include a `slug` property within your column definition and include the Slug component as it's own custom component",
+              source: {
+                code: `
+{
+  Header: 'Visits',
+  accessor: 'visits',
+  slug: <ExampleSlug />,
+}
+`,
+              },
+            },
+            {
+              description: 'or used directly from the Slug component itself',
+              source: {
+                code: `
+{
+  Header: 'Visits',
+  accessor: 'visits',
+  slug: (
+    <Slug className="slug-container" autoAlign={false} align="bottom-right">
+      <SlugContent>
+        ...
+        ...
+      </SlugContent>
+    </Slug>
+  ),
+}           
+`,
+              },
+            },
+            {
+              description:
+                'To include a slug on the row level, include a `slug` property in your row data with the same structure as outlined above.',
+            },
+          ]}
+        />
+      ),
     },
     layout: 'fullscreen',
   },

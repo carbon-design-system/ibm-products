@@ -69,6 +69,7 @@
 .#{variables.$block-class}
   .#{variables.$block-class}__expandable-row--hover
   td {
+  border-top: none;
   background: $layer-hover;
 }
 
@@ -85,6 +86,13 @@
   .#{variables.$block-class}__carbon-row-expanded
   td.#{variables.$block-class}__expandable-row-cell {
   border: none;
+}
+
+.#{variables.$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{variables.$block-class}__carbon-row-expanded:hover
+  td:not(.#{variables.$block-class}__expandable-row-cell) {
+  border-bottom: 1px solid $border-subtle-02;
 }
 
 .#{variables.$block-class}

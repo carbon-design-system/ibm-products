@@ -67,12 +67,14 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    Nav: false,
     BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
-
     StringFormatter: false,
+    StatusIndicator: false,
+    StatusIndicatorStep: false,
 
     /* new component flags here - comment used by generate CLI */
 
@@ -84,8 +86,14 @@ const defaults = {
     CoachmarkOverlayElement: false,
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
+    Decorator: false,
+    DecoratorLink: false,
+    DecoratorSingleButton: false,
+    DecoratorDualButton: false,
+    DescriptionList: false,
     SearchBar: false,
     UserAvatar: false,
+
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:

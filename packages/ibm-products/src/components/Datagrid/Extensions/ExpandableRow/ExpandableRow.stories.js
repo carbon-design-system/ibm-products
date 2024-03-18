@@ -9,15 +9,13 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
   useExpandedRow,
   useSelectRows,
+  useStickyColumn,
 } from '../../index';
 import { getBatchActions } from '../../Datagrid.stories';
 import styles from '../../_storybook-styles.scss';
@@ -29,7 +27,7 @@ import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
+  title: 'IBM Products/Components/Datagrid/ExpandableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -193,6 +191,7 @@ const ExpandedRows = ({ ...args }) => {
       onRowExpand: (row, event) => console.log(row, event),
       ...args.defaultGridProps,
     },
+    useStickyColumn,
     useSelectRows,
     useExpandedRow
   );

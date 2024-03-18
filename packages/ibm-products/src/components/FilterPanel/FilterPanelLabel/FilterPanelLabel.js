@@ -21,7 +21,7 @@ const componentName = 'FilterPanelLabel';
  * A container with a label and optional count.
  */
 export let FilterPanelLabel = React.forwardRef(
-  ({ className, count, label, ...rest }, ref) => {
+  ({ className, count, labelText, title, ...rest }, ref) => {
     return (
       <span
         {...rest}
@@ -29,8 +29,8 @@ export let FilterPanelLabel = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <span className={`${blockClass}__text`} title={label}>
-          {label}
+        <span className={`${blockClass}__text`} title={title}>
+          {labelText}
         </span>
 
         <span className={`${blockClass}__count`}>{count}</span>
@@ -58,5 +58,10 @@ FilterPanelLabel.propTypes = {
   /**
    * The label for the component.
    */
-  label: PropTypes.string.isRequired,
+  labelText: PropTypes.node.isRequired,
+
+  /**
+   * Optional title attribute for the label.
+   */
+  title: PropTypes.string,
 };

@@ -63,7 +63,7 @@ const Template = (args) => {
       <FilterPanel {...args}>
         <FilterPanelCheckbox
           count={6}
-          label="Filter 1"
+          labelText="Filter 1"
           // "id" and "onChange" are pass-through props to Carbon's Checkbox.
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
@@ -72,7 +72,7 @@ const Template = (args) => {
         />
         <FilterPanelCheckbox
           count={10}
-          label="Filter 2"
+          labelText="Filter 2"
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
             action('FilterPanelCheckbox onChange')(checked, id, event)
@@ -80,7 +80,7 @@ const Template = (args) => {
         />
         <FilterPanelCheckbox
           count={'1,500'}
-          label="Filter 3: really long filter name"
+          labelText="Filter 3: really long filter name"
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
             action('FilterPanelCheckbox onChange')(checked, id, event)

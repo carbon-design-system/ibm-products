@@ -43,9 +43,28 @@ export default {
       },
       options: [0, 1],
     },
+    labelText: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'Plain text',
+          1: 'Formatted text',
+        },
+      },
+      mapping: {
+        0: 'Label',
+        1: (
+          <>
+            <strong>Formatted</strong> <em>label</em>
+          </>
+        ),
+      },
+      options: [0, 1],
+    },
   },
   args: {
     count: 0,
+    labelText: 0,
   },
 };
 
@@ -62,6 +81,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   storyName: 'Filter Panel Label',
   args: {
-    label: 'Label',
+    title: '',
   },
 });

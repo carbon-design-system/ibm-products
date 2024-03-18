@@ -20,11 +20,15 @@ const componentName = FilterPanelLabel.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const count = 5;
-const label = `hello, world (${uuidv4()})`;
+const labelText = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <FilterPanelLabel data-testid={dataTestId} label={label} {...{ ...rest }} />
+    <FilterPanelLabel
+      data-testid={dataTestId}
+      labelText={labelText}
+      {...{ ...rest }}
+    />
   );
 
 describe(componentName, () => {

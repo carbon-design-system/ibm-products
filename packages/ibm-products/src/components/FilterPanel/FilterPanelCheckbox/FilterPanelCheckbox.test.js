@@ -20,10 +20,12 @@ const componentName = FilterPanelCheckbox.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const id = uuidv4();
-const label = `hello, world (${uuidv4()})`;
+const labelText = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(<FilterPanelCheckbox id={id} label={label} {...{ ...rest }} />);
+  render(
+    <FilterPanelCheckbox id={id} labelText={labelText} {...{ ...rest }} />
+  );
 
 describe(componentName, () => {
   it('renders a component FilterPanelCheckbox', async () => {

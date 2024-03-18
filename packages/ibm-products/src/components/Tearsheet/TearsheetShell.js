@@ -115,6 +115,20 @@ export const TearsheetShell = React.forwardRef(
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
 
+    // if description exceeds two lines and results ellipsis, then `title` attribute displays the whole text
+    const subtitleRef = useRef(null);
+    const [titleText, setTitleText] = useState(null);
+
+    useEffect(() => {
+      if(open){
+        if (subtitleRef?.current?.scrollHeight > subtitleRef?.current?.clientHeight) {   
+          setTitleText(subtitleRef?.current?.innerHTML);
+        } else {
+          setTitleText(null);
+        }
+      }  
+    },[subtitleRef, open]);
+
     // Keep a record of the previous value of depth.
     const prevDepth = useRef();
     useEffect(() => {
@@ -313,7 +327,7 @@ export const TearsheetShell = React.forwardRef(
                   >
                     {title}
                   </Wrap>
-                  <Wrap className={`${bc}__header-description`}>
+                  <Wrap className={`${bc}__header-description`} title={titleText && titleText} ref={subtitleRef}>
                     {description}
                   </Wrap>
                 </Wrap>

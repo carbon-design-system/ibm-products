@@ -7,14 +7,25 @@
 
 import cx from 'classnames';
 import { node, string } from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactNode, PropsWithChildren } from 'react';
 
 import { pkg } from '../../settings';
 import { blockClass } from './Toolbar';
 
+interface ToolbarGroupProps {
+  /** Provide the content of the `ToolbarGroup` */
+  children?: ReactNode;
+
+  /** Provide an optional class to be applied to the containing node */
+  className?: string;
+}
+
 /** Toolbar groups organize the commands within a toolbar into related groups. */
 export let ToolbarGroup = forwardRef(
-  ({ className, children, ...rest }, ref) => {
+  (
+    { className, children, ...rest }: PropsWithChildren<ToolbarGroupProps>,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
     return (
       <div
         {...rest}

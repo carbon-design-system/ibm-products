@@ -7,8 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { DelimitedList } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -36,35 +34,32 @@ const Template = (args) => {
   );
 };
 
-export const delimited = prepareStory(Template, {
-  args: {
-    delimiter: ', ',
-    items: [
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4',
-      'Item 5',
-      'Item 6',
-      'Item 7',
-      'Item 8',
-      'Item 9',
-      'Item 10',
-    ],
-    truncate: true,
-  },
-});
+export const delimited = Template.bind({});
+delimited.args = {
+  delimiter: ', ',
+  items: [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6',
+    'Item 7',
+    'Item 8',
+    'Item 9',
+    'Item 10',
+  ],
+  truncate: true,
+};
 
-export const notDelimited = prepareStory(Template, {
-  args: {
-    delimiter: ', ',
-    items: ['Item 1', 'Item 2', 'Item 3'],
-    truncate: true,
-  },
-});
+export const notDelimited = Template.bind({});
+notDelimited.args = {
+  delimiter: ', ',
+  items: ['Item 1', 'Item 2', 'Item 3'],
+  truncate: true,
+};
 
-export const empty = prepareStory(Template, {
-  args: {
-    items: [],
-  },
-});
+export const empty = Template.bind({});
+empty.args = {
+  items: [],
+};

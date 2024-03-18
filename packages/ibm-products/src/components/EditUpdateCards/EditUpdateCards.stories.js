@@ -7,8 +7,6 @@
 
 import React, { useState } from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { EditUpdateCards } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -265,9 +263,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const editUpdateCards = prepareStory(Template, {
-  args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#EditUpdateCards-args
-    ...defaultStoryProps,
-  },
-});
+export const editUpdateCards = Template.bind({});
+editUpdateCards.args = {
+  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#EditUpdateCards-args
+  ...defaultStoryProps,
+};

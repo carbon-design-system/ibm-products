@@ -41,9 +41,6 @@ import {
 import cx from 'classnames';
 
 import { PageHeader } from './PageHeader';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss';
@@ -665,142 +662,131 @@ const commonArgs = {
   expandHeaderIconDescription,
 };
 // Stories
-export const withTitle = prepareStory(Template, {
-  storyName: 'Simple page header with page title',
-  args: {
-    title: 2,
-    ...commonArgs,
-  },
-});
+export const withTitle = Template.bind({});
+withTitle.storyName = 'Simple page header with page title';
+withTitle.args = {
+  title: 2,
+  ...commonArgs,
+};
 
-export const withBreadcrumbs = prepareStory(Template, {
-  storyName: 'Simple page header with breadcrumb',
-  args: {
-    ...withTitle.args,
-    breadcrumbs: 2,
-    ...commonArgs,
-  },
-});
+export const withBreadcrumbs = Template.bind({});
+withBreadcrumbs.storyName = 'Simple page header with breadcrumb';
+withBreadcrumbs.args = {
+  ...withTitle.args,
+  breadcrumbs: 2,
+  ...commonArgs,
+};
 
-export const withButtons = prepareStory(Template, {
-  storyName: 'Simple page header with status and actions',
-  args: {
-    ...withBreadcrumbs.args,
-    pageActions: 2,
-    children: 1,
-    ...commonArgs,
-  },
-});
+export const withButtons = Template.bind({});
+withButtons.storyName = 'Simple page header with status and actions';
+withButtons.args = {
+  ...withBreadcrumbs.args,
+  pageActions: 2,
+  children: 1,
+  ...commonArgs,
+};
 
-export const withTabs = prepareStory(Template, {
-  storyName: 'Page header with navigation tabs',
-  args: {
-    title: 2,
-    breadcrumbs: 2,
-    pageActions: 2,
-    navigation: 1,
-    ...commonArgs,
-  },
-});
+export const withTabs = Template.bind({});
+withTabs.storyName = 'Page header with navigation tabs';
+withTabs.args = {
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  navigation: 1,
+  ...commonArgs,
+};
 
-export const withTags = prepareStory(Template, {
-  storyName: 'Page header with tags',
-  args: {
-    title: 2,
-    breadcrumbs: 2,
-    pageActions: 2,
-    tags: 1,
-    ...commonArgs,
-  },
-});
+export const withTags = Template.bind({});
+withTags.storyName = 'Page header with tags';
+withTags.args = {
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  tags: 1,
+  ...commonArgs,
+};
 
-export const withTabsAndTags = prepareStory(Template, {
-  storyName: 'Page header with tags and navigation tabs',
-  args: {
-    title: 2,
-    breadcrumbs: 2,
-    pageActions: 2,
-    navigation: 1,
-    tags: 1,
-    ...commonArgs,
-  },
-});
+export const withTabsAndTags = Template.bind({});
+withTabsAndTags.storyName = 'Page header with tags and navigation tabs';
+withTabsAndTags.args = {
+  title: 2,
+  breadcrumbs: 2,
+  pageActions: 2,
+  navigation: 1,
+  tags: 1,
+  ...commonArgs,
+};
 
-export const withSubtitle = prepareStory(Template, {
-  storyName: 'Page header with title and subtitle',
-  args: {
-    title: 2,
-    subtitle,
-    breadcrumbs: 2,
-    navigation: 1,
-    ...commonArgs,
-  },
-});
+export const withSubtitle = Template.bind({});
+withSubtitle.storyName = 'Page header with title and subtitle';
+withSubtitle.args = {
+  title: 2,
+  subtitle,
+  breadcrumbs: 2,
+  navigation: 1,
+  ...commonArgs,
+};
 
-export const withSummaryDetails = prepareStory(Template, {
-  storyName: 'Page header with summary details',
-  args: {
-    title: 2,
-    breadcrumbs: 2,
-    navigation: 1,
-    children: 2,
-    ...commonArgs,
-  },
-});
+export const withSummaryDetails = Template.bind({});
+withSummaryDetails.storyName = 'Page header with summary details';
+withSummaryDetails.args = {
+  title: 2,
+  breadcrumbs: 2,
+  navigation: 1,
+  children: 2,
+  ...commonArgs,
+};
 
-export const withActionsToolbar = prepareStory(Template, {
-  storyName: 'Page header with actions toolbar',
-  args: {
-    title: 2,
-    breadcrumbs: 2,
-    navigation: 1,
-    actionBarItems: 2,
-    ...commonArgs,
-  },
-});
+export const withActionsToolbar = Template.bind({});
+withActionsToolbar.storyName = 'Page header with actions toolbar';
+withActionsToolbar.args = {
+  title: 2,
+  breadcrumbs: 2,
+  navigation: 1,
+  actionBarItems: 2,
+  ...commonArgs,
+};
 
-export const withBreadcrumbActionsToolbarOnly = prepareStory(Template, {
-  storyName: 'Reduced page header with breadcrumb bar only',
-  args: {
-    title: 1,
-    breadcrumbs: 2,
-    actionBarItems: 2,
-    collapseTitle: true,
-    ...commonArgs,
-  },
-});
+export const withBreadcrumbActionsToolbarOnly = Template.bind({});
+withBreadcrumbActionsToolbarOnly.storyName =
+  'Reduced page header with breadcrumb bar only';
+withBreadcrumbActionsToolbarOnly.args = {
+  title: 1,
+  breadcrumbs: 2,
+  actionBarItems: 2,
+  collapseTitle: true,
+  ...commonArgs,
+};
 
-export const fullyLoaded = prepareStory(Template, {
-  storyName: 'Page header with all items, pre-collapsed',
-  args: {
-    title: 2,
-    subtitle,
-    breadcrumbs: 2,
-    pageActions: 2,
-    children: 2,
-    navigation: 1,
-    tags: 1,
-    actionBarItems: 2,
-    collapseHeader: true,
-    ...commonArgs,
-  },
-});
+export const fullyLoaded = Template.bind({});
+fullyLoaded.storyName = 'Page header with all items, pre-collapsed';
+fullyLoaded.args = {
+  title: 2,
+  subtitle,
+  breadcrumbs: 2,
+  pageActions: 2,
+  children: 2,
+  navigation: 1,
+  tags: 1,
+  actionBarItems: 2,
+  collapseHeader: true,
+  ...commonArgs,
+};
 
-export const fullyLoadedAndSome = prepareStory(Template, {
-  storyName: 'Page header with long values and many items',
-  args: {
-    title: 3,
-    subtitle: longSubtitle,
-    breadcrumbs: 3,
-    pageActions: 3,
-    children: 2,
-    navigation: 2,
-    tags: 2,
-    actionBarItems: 3,
-    hasCollapseHeaderToggle: true,
-    ...commonArgs,
-  },
-});
+export const fullyLoadedAndSome = Template.bind({});
+fullyLoadedAndSome.storyName = 'Page header with long values and many items';
+fullyLoadedAndSome.args = {
+  title: 3,
+  subtitle: longSubtitle,
+  breadcrumbs: 3,
+  pageActions: 3,
+  children: 2,
+  navigation: 2,
+  tags: 2,
+  actionBarItems: 3,
+  hasCollapseHeaderToggle: true,
+  ...commonArgs,
+};
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
@@ -853,17 +839,16 @@ const TemplateDemo = ({
   );
 };
 
-export const demo = prepareStory(TemplateDemo, {
-  storyName: 'Page header in context',
-  args: {
-    title: 5,
-    subtitle: demoSubtitle,
-    breadcrumbs: 4,
-    pageActions: 4,
-    children: 3,
-    navigation: 3,
-    tags: 3,
-    actionBarItems: 4,
-    ...commonArgs,
-  },
-});
+export const demo = TemplateDemo.bind({});
+demo.storyName = 'Page header in context';
+demo.args = {
+  title: 5,
+  subtitle: demoSubtitle,
+  breadcrumbs: 4,
+  pageActions: 4,
+  children: 3,
+  navigation: 3,
+  tags: 3,
+  actionBarItems: 4,
+  ...commonArgs,
+};

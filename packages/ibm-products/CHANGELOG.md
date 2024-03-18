@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.31.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.31.0...@carbon/ibm-products@2.31.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** adding test for customize column ([#4475](https://github.com/carbon-design-system/ibm-products/issues/4475)) ([8496875](https://github.com/carbon-design-system/ibm-products/commit/849687500568a79604c70789bbb377c6f8cf7a56))
+* **Decorator:** breakout single Decorator into many smaller Decorators ([#4542](https://github.com/carbon-design-system/ibm-products/issues/4542)) ([3f57a24](https://github.com/carbon-design-system/ibm-products/commit/3f57a24c1304d1a4be3caa33b60ae29c3123d14a))
+* **Tearsheet:** fous query to the elemnts with tabindex 0 ([#4464](https://github.com/carbon-design-system/ibm-products/issues/4464)) ([37ed5ec](https://github.com/carbon-design-system/ibm-products/commit/37ed5ec1a6e2c1d5c66cc7648f5744dbda9ded8b))
+* update ai gradient mixin call to match 1.53 ([#4552](https://github.com/carbon-design-system/ibm-products/issues/4552)) ([332890c](https://github.com/carbon-design-system/ibm-products/commit/332890c9deceb0a38facfbf71dfadb66ca66f816))
+
+
+
+
+
 # [2.31.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.30.0...@carbon/ibm-products@2.31.0) (2024-03-12)
 
 

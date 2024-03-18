@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import DocsPage from './EditTearsheet.docs-page';
@@ -38,9 +37,8 @@ const editTearsheetProps = {
   influencerWidth: 'narrow',
 };
 
-export const multiFormEditTearsheet = prepareStory(MultiFormEditTearsheet, {
-  storyName: 'Edit tearsheet',
-  args: {
-    ...editTearsheetProps,
-  },
-});
+export const multiFormEditTearsheet = MultiFormEditTearsheet.bind({});
+multiFormEditTearsheet.storyName = 'Edit tearsheet';
+multiFormEditTearsheet.args = {
+  ...editTearsheetProps,
+};

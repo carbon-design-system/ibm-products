@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { TagSet } from '.';
+import * as stories from './TagSet.stories';
 
 # TagSet
 
@@ -26,20 +24,20 @@ how many additional labels exist and what they are.
 Here it is in use with no overflow. Change max-visible to see an overflow.
 
 <Canvas>
-  <Story id={getStoryId(TagSet.displayName, 'five-tags')} />
+  <Story of={stories.FiveTags} />
 </Canvas>
 
 Here it is with more than 10 tags.
 
 <Canvas>
-  <Story id={getStoryId(TagSet.displayName, 'many-tags')} />
+  <Story of={stories.ManyTags} />
 </Canvas>
 
 Here it is with hundreds of tags. This option offers a searchable modal to
 display all tags.
 
 <Canvas>
-  <Story id={getStoryId(TagSet.displayName, 'hundreds-of-tags')} />
+  <Story of={stories.HundredsOfTags} />
 </Canvas>
 
 ## Code sample

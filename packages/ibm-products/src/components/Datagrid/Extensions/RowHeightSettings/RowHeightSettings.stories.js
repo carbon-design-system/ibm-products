@@ -9,7 +9,6 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
@@ -180,17 +179,16 @@ const basicUsageControlProps = {
   onRowSizeChange: sharedDatagridProps.onRowSizeChange,
 };
 const basicUsageStoryName = 'With default row height settings';
-export const DefaultSettingsUsageStory = prepareStory(BasicTemplateWrapper, {
-  storyName: basicUsageStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    rowSize: ARG_TYPES.rowSize,
-    rowSizes: ARG_TYPES.rowSizes,
-    onRowSizeChange: ARG_TYPES.onRowSizeChange,
-  },
-  args: {
-    ...basicUsageControlProps,
-  },
-});
+export const DefaultSettingsUsageStory = BasicTemplateWrapper.bind({});
+DefaultSettingsUsageStory.storyName = basicUsageStoryName;
+DefaultSettingsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+};
+DefaultSettingsUsageStory.args = {
+  ...basicUsageControlProps,
+};

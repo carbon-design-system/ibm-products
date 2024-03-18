@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { FilterPanel, FilterPanelCheckbox } from '.';
@@ -91,6 +90,5 @@ const Template = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Filter Panel',
-});
+export const Default = Template.bind({});
+Default.storyName = 'Filter Panel';

@@ -8,7 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../../global/js/utils/story-helper';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 import { FilterPanel, FilterPanelCheckbox } from '..';
@@ -30,13 +29,13 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'As number: 5',
-          1: 'As string: "5,000"',
+          0: 'As number: 10',
+          1: 'As string: "1,500"',
         },
       },
       mapping: {
-        0: 5,
-        1: '5,000',
+        0: 10,
+        1: '1,500',
       },
       options: [0, 1],
     },
@@ -86,10 +85,9 @@ const Template = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Filter Panel Checkbox',
-  args: {
-    id: uuidv4(),
-    title: '',
-  },
-});
+export const Default = Template.bind({});
+Default.storyName = 'Filter Panel Checkbox';
+Default.args = {
+  id: uuidv4(),
+  title: '',
+};

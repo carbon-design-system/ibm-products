@@ -7,8 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../../global/js/utils/story-helper';
-
 import { FilterPanel, FilterPanelLabel } from '..';
 import mdx from './FilterPanelLabel.mdx';
 
@@ -33,13 +31,13 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'As number: 5',
-          1: 'As string: "5,000"',
+          0: 'As number: 10',
+          1: 'As string: "1,500"',
         },
       },
       mapping: {
-        0: 5,
-        1: '5,000',
+        0: 10,
+        1: '1,500',
       },
       options: [0, 1],
     },
@@ -48,18 +46,20 @@ export default {
         type: 'select',
         labels: {
           0: 'Plain text',
-          1: 'Formatted text',
+          1: 'Very long text',
+          2: 'Formatted text',
         },
       },
       mapping: {
         0: 'Label',
-        1: (
+        1: 'Really, really long label name',
+        2: (
           <>
             <strong>Formatted</strong> <em>label</em>
           </>
         ),
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
   },
   args: {
@@ -78,9 +78,8 @@ const Template = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Filter Panel Label',
-  args: {
-    title: '',
-  },
-});
+export const Default = Template.bind({});
+Default.storyName = 'Filter Panel Label';
+Default.args = {
+  title: '',
+};

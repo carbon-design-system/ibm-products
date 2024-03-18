@@ -12,8 +12,6 @@ import React from 'react';
 import { UiShell } from './preview-components/UiShell';
 import { Breadcrumbs } from './preview-components/Breadcrumbs';
 import { Link } from '@carbon/react';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { FullPageError } from '.';
 import mdx from './FullPageError.mdx';
 
@@ -78,27 +76,24 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const fullPageError = prepareStory(Template, {
-  storyName: 'Default',
-  args: {
-    ...defaultProps,
-    title: '[Error title]',
-    errorLabel: 'Error ###',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-  },
-});
-export const fullPageError403 = prepareStory(Template, {
-  storyName: '403',
-  args: {
-    ...defaultProps,
-    kind: '403',
-  },
-});
-export const fullPageError404 = prepareStory(Template, {
-  storyName: '404',
-  args: {
-    ...defaultProps,
-    kind: '404',
-  },
-});
+export const fullPageError = Template.bind({});
+fullPageError.storyName = 'Default';
+fullPageError.args = {
+  ...defaultProps,
+  title: '[Error title]',
+  errorLabel: 'Error ###',
+  description:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+};
+export const fullPageError403 = Template.bind({});
+fullPageError403.storyName = '403';
+fullPageError403.args = {
+  ...defaultProps,
+  kind: '403',
+};
+export const fullPageError404 = Template.bind({});
+fullPageError404.storyName = '404';
+fullPageError404.args = {
+  ...defaultProps,
+  kind: '404',
+};

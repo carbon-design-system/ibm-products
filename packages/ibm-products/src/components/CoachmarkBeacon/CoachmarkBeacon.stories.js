@@ -7,10 +7,7 @@
 
 import React from 'react';
 
-import {
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
   Coachmark,
@@ -65,10 +62,9 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkBeacon = prepareStory(Template, {
-  args: {
-    className: 'myBeacon',
-    kind: 'default',
-    label: 'Show information',
-  },
-});
+export const coachmarkBeacon = Template.bind({});
+coachmarkBeacon.args = {
+  className: 'myBeacon',
+  kind: 'default',
+  label: 'Show information',
+};

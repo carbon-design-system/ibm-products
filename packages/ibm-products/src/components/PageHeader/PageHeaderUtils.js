@@ -234,8 +234,9 @@ export const utilGetBreadcrumbItemForTitle = (
       ]);
     }
 
-    if (title.shortText) {
-      breadcrumbTitle.shortText = title.shortText;
+    if (title.shortTitle) {
+      breadcrumbTitle.shortTitle = title.shortTitle;
+      breadcrumbTitle.useShortTitle = true;
     }
 
     return breadcrumbTitle;

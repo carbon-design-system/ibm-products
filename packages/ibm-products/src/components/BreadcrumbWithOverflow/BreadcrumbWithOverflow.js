@@ -102,17 +102,30 @@ export let BreadcrumbWithOverflow = ({
               )}
             />
           </BreadcrumbItem>
-          {breadcrumbs.map(({ label, key, title, id, ...rest }) => (
-            <BreadcrumbItem
-              key={key}
-              {...rest}
-              // ensure id is not duplicated
-              data-original-id={id}
-              title={title ?? label}
-            >
-              {label}
-            </BreadcrumbItem>
-          ))}
+          {breadcrumbs.map(
+            ({
+              label,
+              key,
+              title,
+              id,
+              // the short title props aren't necessary for the hidden sizing
+              // eslint-disable-next-line no-unused-vars
+              useShortTitle,
+              // eslint-disable-next-line no-unused-vars
+              shortTitle,
+              ...rest
+            }) => (
+              <BreadcrumbItem
+                key={key}
+                {...rest}
+                // ensure id is not duplicated
+                data-original-id={id}
+                title={title ?? label}
+              >
+                {label}
+              </BreadcrumbItem>
+            )
+          )}
         </Breadcrumb>
       </div>
     );
@@ -127,7 +140,10 @@ export let BreadcrumbWithOverflow = ({
     }
 
     const newDisplayedBreadcrumbItems = breadcrumbs.map(
-      ({ className, key, label, title, shortText, ...rest }, index) => (
+      (
+        { className, key, label, shortTitle, title, useShortTitle, ...rest },
+        index
+      ) => (
         <BreadcrumbItem
           key={key}
           className={
@@ -138,7 +154,7 @@ export let BreadcrumbWithOverflow = ({
           title={index + 1 === breadcrumbs.length ? title : null}
           {...rest}
         >
-          {shortText || label}
+          {useShortTitle && shortTitle ? shortTitle : label}
         </BreadcrumbItem>
       )
     );
@@ -357,16 +373,21 @@ BreadcrumbWithOverflow.propTypes = {
       label: PropTypes.node,
 
       /**
-       * An optional title label for extra long breadcrumbs
+       * An optional title label for extra long breadcrumbs. see useShortTitle for additional usage information
        */
-      shortText: PropTypes.string,
+      shortTitle: PropTypes.string,
 
       /**
-       * A string based alternative to the children, required only if children is not of type string.
+       * A string based alternative to the children, required only if children is not of type string
        */
       title: PropTypes.string.isRequired.if(
         ({ label }) => typeof label !== 'string'
       ),
+
+      /**
+       * Enable when the shortened title should be used. useShortTitle should be automatically enabled for items set in utilGetBreadcrumbItemForTitle via PageHeader
+       */
+      useShortTitle: PropTypes.bool,
     })
   ),
   /**

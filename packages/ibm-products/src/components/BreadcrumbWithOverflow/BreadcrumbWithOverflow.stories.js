@@ -14,9 +14,8 @@ import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
 const lastBreadcrumbs = [
-  'A short title',
   'A slightly longer length title',
-  'Breadcrumb 5 is a longer breadcrumb it could go on for much longer than expected',
+  'Toggle the useShortTitle prop control below to toggle between the optional short and default long title',
 ];
 
 export default {
@@ -91,6 +90,8 @@ const Template = (argsIn) => {
     containerWidth,
     lastBreadcrumb,
     lastBreadcrumbIsCurrent,
+    useShortTitle,
+    shortTitle,
     ...args
   } = {
     ...argsIn,
@@ -104,6 +105,8 @@ const Template = (argsIn) => {
     isCurrentPage: isCurrentPage,
     label: lastBreadcrumb, // wrapping this with a span causes error - "Cannot convert a symbol value to a string" - perhaps ? https://github.com/storybookjs/storybook/issues/11554
     title: lastBreadcrumb,
+    useShortTitle,
+    shortTitle,
   });
 
   return (
@@ -119,5 +122,16 @@ export const Default = prepareStory(Template, {
     containerWidth: 500,
     overflowAriaLabel: 'Open and close additional breadcrumb item list.',
     lastBreadcrumb: lastBreadcrumbs[0],
+  },
+});
+
+export const longTitleWithShortName = prepareStory(Template, {
+  args: {
+    breadcrumbs: breadcrumbItems,
+    containerWidth: 500,
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+    lastBreadcrumb: lastBreadcrumbs[1],
+    useShortTitle: false,
+    shortTitle: 'See, shorter',
   },
 });

@@ -1067,6 +1067,7 @@ PageHeader.propTypes = {
    * - String
    * - Object containing
    *    - text: title string
+   *    - shortTitle: alternative title for exceptionally long titles
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
    *    - onChange: function to process the live value (React change === HTML Input)
@@ -1083,6 +1084,7 @@ PageHeader.propTypes = {
     PropTypes.shape({
       // Update docgen if changed
       text: PropTypes.string.isRequired,
+      shortTitle: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
 

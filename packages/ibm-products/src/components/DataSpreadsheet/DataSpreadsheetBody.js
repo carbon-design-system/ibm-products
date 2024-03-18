@@ -267,24 +267,44 @@ export const DataSpreadsheetBody = forwardRef(
     //selectionAreas will be set when ever a selection area is made.
     useEffect(() => {
       removeDuplicateSelections();
-    }, [selectionAreas,removeDuplicateSelections]);
+    }, [selectionAreas, removeDuplicateSelections]);
 
-    //this method will check for any dupplicate selection area and remove.
+    //this method will check for any duplicate selection area and remove.
     //same selections are those have the same height, width, top, left styles. These inline styles are being set in createCellSelection util.
     const removeDuplicateSelections = useCallback(() => {
-      let uniqueAttrArray = [];
+      let uniqueAttrArray = [],
+        removedSelectionAreaMatcherArr = [];
       ref.current
         .querySelectorAll(`.${blockClass}__selection-area--element`)
         .forEach((selectorEl) => {
           let { top, left, height, width } = selectorEl.style;
-          let uniqueAttrstr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
-          if (uniqueAttrArray.indexOf(uniqueAttrstr) == -1) {
-            uniqueAttrArray.push(uniqueAttrstr);
+          let uniqueAttrStr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
+          if (uniqueAttrArray.indexOf(uniqueAttrStr) == -1) {
+            uniqueAttrArray.push(uniqueAttrStr);
           } else {
-            selectorEl.remove(); // this is identified as duplicate selwction and hence removing.
+            selectorEl.remove(); // this is identified as duplicate selection and hence removing.
+            removedSelectionAreaMatcherArr.push(
+              selectorEl.getAttribute('data-matcher-id')
+            );
           }
         });
-    }, [ref]);
+
+      //clean the duplicate selectionAreaData and selectionArea
+      if (removedSelectionAreaMatcherArr.length) {
+        setSelectionAreas((prev) => {
+          const prevValues = deepCloneObject(prev);
+          return prevValues.filter(
+            (item) => !removedSelectionAreaMatcherArr.includes(item.matcher)
+          );
+        });
+        setSelectionAreaData((prev) => {
+          const prevValues = deepCloneObject(prev);
+          return prevValues.filter(
+            (item) => !removedSelectionAreaMatcherArr.includes(item.selectionId)
+          );
+        });
+      }
+    }, [ref, setSelectionAreas, setSelectionAreaData]);
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight

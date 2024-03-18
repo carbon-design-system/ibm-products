@@ -6,10 +6,9 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -27,11 +26,112 @@ const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values for props
-const defaults = {
-  placement: 'right',
-  size: 'md',
-};
+type Size = 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+type Placement = 'left' | 'right';
+
+// The types and DocGen commentary for the component props,
+// in alphabetical order (for consistency).
+// See https://www.npmjs.com/package/prop-types#usage.
+interface EditSidePanelProps {
+  /**
+   * Sets the body content of the create side panel
+   */
+  children: ReactNode | ReactNode[];
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
+  disableSubmit?: boolean;
+
+  /**
+   * Specifies an optional field that provides a additional context for a form
+   */
+  formDescription?: ReactNode;
+
+  /**
+   * Specifies a required field that provides a title for a form
+   */
+  formTitle: ReactNode;
+
+  /**
+   * Unique identifier
+   */
+  id?: string;
+
+  /**
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * is closed.
+   */
+  onRequestClose?: () => void;
+
+  /**
+   * Specifies an optional handler which is called when the CreateSidePanel
+   * primary button is pressed.
+   */
+  onRequestSubmit?: () => void;
+
+  /**
+   * Specifies whether the CreateSidePanel is open or not.
+   */
+  open?: boolean;
+
+  /**
+   * Determines if the side panel is on the right or left
+   */
+  placement?: Placement;
+
+  /**
+   * Specifies the primary button's text in the modal.
+   */
+  primaryButtonText: string;
+
+  /**
+   * Specifies the secondary button's text in the modal.
+   */
+  secondaryButtonText: string;
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent?: string;
+
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  selectorPrimaryFocus: ReactNode;
+
+  /**
+   * Sets the size of the side panel
+   */
+  size?: Size;
+
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  slideIn?: boolean;
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
+   */
+  subtitle?: ReactNode;
+
+  /**
+   * The title of the CreateSidePanel is usually the product or service name.
+   */
+  title: ReactNode;
+}
 
 /**
  * Use with medium complexity edits if the user needs page context.
@@ -50,20 +150,20 @@ export let EditSidePanel = React.forwardRef(
       onRequestClose,
       onRequestSubmit,
       open,
-      placement = defaults.placement,
+      placement = 'right',
       primaryButtonText,
       secondaryButtonText,
       selectorPrimaryFocus,
       selectorPageContent,
-      size = defaults.size,
+      size = 'md',
       slideIn,
       subtitle,
       title,
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: PropsWithChildren<EditSidePanelProps>,
+    ref: React.Ref<HTMLDivElement>
   ) => {
     const actions = [
       {
@@ -136,110 +236,3 @@ EditSidePanel = pkg.checkComponentEnabled(EditSidePanel, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 EditSidePanel.displayName = componentName;
-
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
-EditSidePanel.propTypes = {
-  /**
-   * Sets the body content of the create side panel
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
-   * Returning `true` prevents the primary button from being clicked until required fields are completed.
-   */
-  disableSubmit: PropTypes.bool,
-
-  /**
-   * Specifies an optional field that provides a additional context for a form
-   */
-  formDescription: PropTypes.node,
-
-  /**
-   * Specifies a required field that provides a title for a form
-   */
-  formTitle: PropTypes.node.isRequired,
-
-  /**
-   * Unique identifier
-   */
-  id: PropTypes.string,
-
-  /**
-   * Specifies an optional handler which is called when the CreateSidePanel
-   * is closed.
-   */
-  onRequestClose: PropTypes.func,
-
-  /**
-   * Specifies an optional handler which is called when the CreateSidePanel
-   * primary button is pressed.
-   */
-  onRequestSubmit: PropTypes.func,
-
-  /**
-   * Specifies whether the CreateSidePanel is open or not.
-   */
-  open: PropTypes.bool,
-
-  /**
-   * Determines if the side panel is on the right or left
-   */
-  placement: PropTypes.oneOf(['left', 'right']),
-
-  /**
-   * Specifies the primary button's text in the modal.
-   */
-  primaryButtonText: PropTypes.string.isRequired,
-
-  /**
-   * Specifies the secondary button's text in the modal.
-   */
-  secondaryButtonText: PropTypes.string.isRequired,
-
-  /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
-
-  /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  selectorPrimaryFocus: PropTypes.node.isRequired,
-
-  /**
-   * Sets the size of the side panel
-   */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
-
-  /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  slideIn: PropTypes.bool,
-
-  /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
-   */
-  slug: PropTypes.node,
-
-  /**
-   * The subtitle of the CreateSidePanel is optional and serves to provide more information about the modal.
-   */
-  subtitle: PropTypes.node,
-
-  /**
-   * The title of the CreateSidePanel is usually the product or service name.
-   */
-  title: PropTypes.node.isRequired,
-};

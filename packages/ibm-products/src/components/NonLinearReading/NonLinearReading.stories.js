@@ -7,8 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { NonLinearReading } from '.';
 import DocsPage from './NonLinearReading.docs-page';
 
@@ -45,7 +43,7 @@ export default {
 
 // TODO: Bug? Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
-const TemplateSingleLevel = (args) => {
+export const SingleLevel = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       XDR Connect’s correlation
@@ -71,7 +69,7 @@ const TemplateSingleLevel = (args) => {
 
 // Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
-const TemplateMultipleLevel = (args) => {
+export const MultipleLevel = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       Findings are created by the alerts{' '}
@@ -122,7 +120,7 @@ const TemplateMultipleLevel = (args) => {
 
 // Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
-const TemplateWithGradientBackground = (args) => {
+export const WithGradientBackground = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       <div className="gradient-bg">
@@ -148,11 +146,3 @@ const TemplateWithGradientBackground = (args) => {
     </div>
   );
 };
-
-export const singleLevel = prepareStory(TemplateSingleLevel);
-
-export const multipleLevel = prepareStory(TemplateMultipleLevel);
-
-export const withGradientBackground = prepareStory(
-  TemplateWithGradientBackground
-);

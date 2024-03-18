@@ -8,7 +8,6 @@
 import React from 'react';
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
-import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { BigNumbers } from '.';
 import { BigNumbersSize } from './constants';
@@ -154,26 +153,24 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const bigNumbers = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const bigNumbers = Template.bind({});
+bigNumbers.args = {
+  ...defaultProps,
+};
 
-export const withEditButton = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    tooltipDescription: 'Tooltip description',
-    iconButton: (
-      <Button
-        renderIcon={Edit}
-        iconDescription="Icon Description"
-        kind="ghost"
-        size={'sm'}
-        hasIconOnly
-        onClick={() => console.log('clicked icon')}
-        tooltipPosition="bottom"
-      />
-    ),
-  },
-});
+export const withEditButton = Template.bind({});
+withEditButton.args = {
+  ...defaultProps,
+  tooltipDescription: 'Tooltip description',
+  iconButton: (
+    <Button
+      renderIcon={Edit}
+      iconDescription="Icon Description"
+      kind="ghost"
+      size={'sm'}
+      hasIconOnly
+      onClick={() => console.log('clicked icon')}
+      tooltipPosition="bottom"
+    />
+  ),
+};

@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { BreadcrumbWithOverflow } from '.';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
@@ -113,11 +112,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    breadcrumbs: breadcrumbItems,
-    containerWidth: 500,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
-    lastBreadcrumb: lastBreadcrumbs[0],
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  breadcrumbs: breadcrumbItems,
+  containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+  lastBreadcrumb: lastBreadcrumbs[0],
+};

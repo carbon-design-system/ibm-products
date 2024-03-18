@@ -10,7 +10,6 @@ import { action } from '@storybook/addon-actions';
 
 import { Dropdown, FormGroup } from '@carbon/react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { OptionsTile } from '.';
@@ -144,19 +143,17 @@ const TemplateStatic = ({ enabled, ...rest }) => {
   );
 };
 
-export const optionsTile = prepareStory(Template, {
-  args: {
-    title: 'Language',
-    summary: 'English | Locale: English',
-    invalidText: 'Your system does not support this configuration',
-    warnText: 'A restart is required to apply these settings',
-    lockedText: 'This option is managed by your administrator',
-  },
-});
+export const optionsTile = Template.bind({});
+optionsTile.args = {
+  title: 'Language',
+  summary: 'English | Locale: English',
+  invalidText: 'Your system does not support this configuration',
+  warnText: 'A restart is required to apply these settings',
+  lockedText: 'This option is managed by your administrator',
+};
 
-export const staticOptionsTile = prepareStory(TemplateStatic, {
-  args: {
-    title: 'Hardware acceleration',
-    enabled: true,
-  },
-});
+export const staticOptionsTile = TemplateStatic.bind({});
+staticOptionsTile.args = {
+  title: 'Hardware acceleration',
+  enabled: true,
+};

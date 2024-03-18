@@ -7,7 +7,6 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { Saving } from '.';
 // import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
@@ -100,18 +99,16 @@ const ManualTemplate = (opts) => {
   );
 };
 
-export const Auto = prepareStory(AutoTemplate, {
-  args: {
-    ...defaultProps,
-    type: 'auto',
-  },
-});
+export const Auto = AutoTemplate.bind({});
+Auto.args = {
+  ...defaultProps,
+  type: 'auto',
+};
 
-export const Manual = prepareStory(ManualTemplate, {
-  args: {
-    ...defaultProps,
-    type: 'manual',
-    failText: 'Failed to save. Try again?',
-    secondaryButtonText: 'Cancel',
-  },
-});
+export const Manual = ManualTemplate.bind({});
+Manual.args = {
+  ...defaultProps,
+  type: 'manual',
+  failText: 'Failed to save. Try again?',
+  secondaryButtonText: 'Cancel',
+};

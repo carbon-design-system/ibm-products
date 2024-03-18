@@ -23,8 +23,6 @@ import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 // import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
@@ -162,19 +160,17 @@ const EmptyNotifications = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    onDoNotDisturbChange: action('Toggled to do not disturb'),
-    onViewAllClick: action('Clicked view all button'),
-    onSettingsClick: action('Clicked settings gear'),
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Clicked settings gear'),
+};
 
-export const EmptyState = prepareStory(EmptyNotifications, {
-  args: {
-    data: [],
-    onDoNotDisturbChange: action('Toggled to do not disturb'),
-    onViewAllClick: action('Clicked view all button'),
-    onSettingsClick: action('Clicked settings gear'),
-  },
-});
+export const EmptyState = EmptyNotifications.bind({});
+EmptyState.args = {
+  data: [],
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Clicked settings gear'),
+};

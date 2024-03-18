@@ -36,7 +36,7 @@ export default {
         labels: {
           0: 'No title',
           1: 'Plain text',
-          2: 'Formatted text',
+          2: 'Using markup',
         },
       },
       mapping: {

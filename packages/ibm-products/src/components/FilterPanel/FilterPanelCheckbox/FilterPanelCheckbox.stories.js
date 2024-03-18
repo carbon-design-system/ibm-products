@@ -45,7 +45,7 @@ export default {
         labels: {
           0: 'Plain text',
           1: 'Very long text',
-          2: 'Formatted text',
+          2: 'Using markup',
         },
       },
       mapping: {

@@ -11,6 +11,7 @@ import { init } from './test-common';
 
 import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example';
 import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
+import { Example as BigNumbersExample } from './BigNumbers/src/Example/Example';
 import { Example as CascadeExample } from './Cascade/src/Example/Example';
 import { Example as CoachmarkExample } from './Coachmark/src/Example/Example';
 import { Example as CoachmarkBeaconExample } from './CoachmarkBeacon/src/Example/Example';
@@ -46,6 +47,7 @@ import { Example as SavingExample } from './Saving/src/Example/Example';
 import { Example as SearchBarExample } from './SearchBar/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
+import { Example as StringFormatterExample } from './StringFormatter/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
 import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
@@ -67,6 +69,12 @@ describe('All examples', () => {
 
   it('AboutModal renders', () => {
     render(<AboutModalExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('BigNumbers renders', () => {
+    render(<BigNumbersExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -277,6 +285,12 @@ describe('All examples', () => {
 
   it('StatusIcon renders', () => {
     render(<StatusIconExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('StringFormatter renders', () => {
+    render(<StringFormatterExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

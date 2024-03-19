@@ -16,8 +16,6 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
@@ -274,25 +272,22 @@ const WithValidationTemplate = ({ slug, ...args }) => {
 };
 
 const editTearsheetNarrowStoryName = 'Default';
-export const editTearsheetNarrow = prepareStory(Template, {
-  storyName: editTearsheetNarrowStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const editTearsheetNarrow = Template.bind({});
+editTearsheetNarrow.storyName = editTearsheetNarrowStoryName;
+editTearsheetNarrow.args = {
+  ...defaultStoryProps,
+};
 
 const withValidationStoryName = 'With Form Validation';
-export const withValidation = prepareStory(WithValidationTemplate, {
-  storyName: withValidationStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withValidation = WithValidationTemplate.bind({});
+withValidation.storyName = withValidationStoryName;
+withValidation.args = {
+  ...defaultStoryProps,
+};
 
 const withMultipleFormsStoryName = 'With Multiple Forms';
-export const withMultipleForms = prepareStory(WithValidationTemplate, {
-  storyName: withMultipleFormsStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withMultipleForms = WithValidationTemplate.bind({});
+withMultipleForms.storyName = withMultipleFormsStoryName;
+withMultipleForms.args = {
+  ...defaultStoryProps,
+};

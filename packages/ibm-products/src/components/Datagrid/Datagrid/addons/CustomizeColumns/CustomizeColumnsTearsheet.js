@@ -79,9 +79,12 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
-    setVisibleColumnsCount(getVisibleColumnsCount());
-    setTotalColumns(columnObjects.length);
-  }, [getVisibleColumnsCount, columnObjects.length]);
+    const notFilterableCount = columnObjects.filter((col) => !col.canFilter);
+    setVisibleColumnsCount(
+      getVisibleColumnsCount() - notFilterableCount.length
+    );
+    setTotalColumns(columnObjects.length - notFilterableCount.length);
+  }, [getVisibleColumnsCount, columnObjects]);
 
   return (
     <TearsheetNarrow

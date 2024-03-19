@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { FilterSummary } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -44,56 +43,53 @@ const Template = (args) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const Default = prepareStory(Template, {
-  args: {
-    clearFiltersText: 'Clear filters',
-    filters: [
-      { key: 'name', value: 'Thor' },
-      { key: 'location', value: 'Asgard' },
-      //cspell: disable
-      { key: 'weapon', value: 'Mjölnir' },
-      //cspell: enable
-    ],
-    containerWidth: 500,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  clearFiltersText: 'Clear filters',
+  filters: [
+    { key: 'name', value: 'Thor' },
+    { key: 'location', value: 'Asgard' },
+    //cspell: disable
+    { key: 'weapon', value: 'Mjölnir' },
+    //cspell: enable
+  ],
+  containerWidth: 500,
+};
 
 // eslint-disable-next-line react/prop-types
-export const WithManyTags = prepareStory(Template, {
-  args: {
-    clearFiltersText: 'Clear filters',
-    filters: [
-      //cspell: disable
-      { key: 'project', value: 'Goldmember' },
-      //cspell: enable
-      { key: 'owner', value: 'Austin Powers' },
-      { key: 'middle name', value: 'Danger' },
-      { key: 'spy', value: true },
-      { key: 'title', value: 'International man of mystery' },
-    ],
-    containerWidth: 500,
-  },
-});
+export const WithManyTags = Template.bind({});
+WithManyTags.args = {
+  clearFiltersText: 'Clear filters',
+  filters: [
+    //cspell: disable
+    { key: 'project', value: 'Goldmember' },
+    //cspell: enable
+    { key: 'owner', value: 'Austin Powers' },
+    { key: 'middle name', value: 'Danger' },
+    { key: 'spy', value: true },
+    { key: 'title', value: 'International man of mystery' },
+  ],
+  containerWidth: 500,
+};
 
-export const WithCustomLabel = prepareStory(Template, {
-  args: {
-    clearFiltersText: 'Clear filters',
-    renderLabel: (key, value) => {
-      // Here in this function you can control how you want the label to be displayed, you can supply your own Sentence or Title case function
-      return `${key.toUpperCase()}: ${String(value).toUpperCase()}`;
-    },
-    filters: [
-      //cspell: disable
-      { key: 'project', value: 'Goldmember' },
-      //cspell: enable
-      { key: 'owner', value: 'Austin Powers' },
-      { key: 'middle name', value: 'Danger' },
-      { key: 'spy', value: true },
-      { key: 'title', value: 'International man of mystery' },
-    ],
-    containerWidth: 500,
+export const WithCustomLabel = Template.bind({});
+WithCustomLabel.args = {
+  clearFiltersText: 'Clear filters',
+  renderLabel: (key, value) => {
+    // Here in this function you can control how you want the label to be displayed, you can supply your own Sentence or Title case function
+    return `${key.toUpperCase()}: ${String(value).toUpperCase()}`;
   },
-});
+  filters: [
+    //cspell: disable
+    { key: 'project', value: 'Goldmember' },
+    //cspell: enable
+    { key: 'owner', value: 'Austin Powers' },
+    { key: 'middle name', value: 'Danger' },
+    { key: 'spy', value: true },
+    { key: 'title', value: 'International man of mystery' },
+  ],
+  containerWidth: 500,
+};
 
 const TemplateWithClose = (args) => {
   const [filters, setFilters] = useState(
@@ -122,18 +118,17 @@ const TemplateWithClose = (args) => {
   );
 };
 // eslint-disable-next-line react/prop-types
-export const WithFilterClose = prepareStory(TemplateWithClose, {
-  args: {
-    clearFiltersText: 'Clear filters',
-    filters: [
-      //cspell: disable
-      { key: 'project', value: 'Goldmember' },
-      //cspell: enable
-      { key: 'owner', value: 'Austin Powers' },
-      { key: 'middle name', value: 'Danger' },
-      { key: 'spy', value: true },
-      { key: 'title', value: 'International man of mystery' },
-    ],
-    containerWidth: 500,
-  },
-});
+export const WithFilterClose = TemplateWithClose.bind({});
+WithFilterClose.args = {
+  clearFiltersText: 'Clear filters',
+  filters: [
+    //cspell: disable
+    { key: 'project', value: 'Goldmember' },
+    //cspell: enable
+    { key: 'owner', value: 'Austin Powers' },
+    { key: 'middle name', value: 'Danger' },
+    { key: 'spy', value: true },
+    { key: 'title', value: 'International man of mystery' },
+  ],
+  containerWidth: 500,
+};

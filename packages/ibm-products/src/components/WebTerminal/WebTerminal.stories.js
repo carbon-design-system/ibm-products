@@ -12,7 +12,6 @@ import React from 'react';
 import { Code, Copy } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { Navigation } from './preview-components';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
 import { documentationLinks } from './preview-components/documentationLinks';
@@ -59,29 +58,26 @@ const Template = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    documentationLinks,
-    actions,
-    closeIconDescription: 'Close terminal',
-    documentationLinksIconDescription: 'Show documentation links',
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  documentationLinks,
+  actions,
+  closeIconDescription: 'Close terminal',
+  documentationLinksIconDescription: 'Show documentation links',
+};
 
-export const WithDocumentationLinks = prepareStory(Template, {
-  args: {
-    documentationLinks,
-    closeIconDescription: 'Close terminal',
-    documentationLinksIconDescription: 'Show documentation links',
-  },
-});
+export const WithDocumentationLinks = Template.bind({});
+WithDocumentationLinks.args = {
+  documentationLinks,
+  closeIconDescription: 'Close terminal',
+  documentationLinksIconDescription: 'Show documentation links',
+};
 
-export const WithActions = prepareStory(Template, {
-  args: {
-    actions,
-    closeIconDescription: 'Close terminal',
-  },
-});
+export const WithActions = Template.bind({});
+WithActions.args = {
+  actions,
+  closeIconDescription: 'Close terminal',
+};
 
 export default {
   title: 'IBM Products/Patterns/Web terminal/WebTerminal',

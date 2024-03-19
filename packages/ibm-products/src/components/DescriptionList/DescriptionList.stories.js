@@ -11,8 +11,6 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import {
   DescriptionList,
   DescriptionListBody,
@@ -96,9 +94,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const descriptionList = prepareStory(Template, {
-  args: {
-    border: false,
-    size: DescriptionListSize.Medium,
-  },
-});
+export const descriptionList = Template.bind({});
+descriptionList.args = {
+  border: false,
+  size: DescriptionListSize.Medium,
+};

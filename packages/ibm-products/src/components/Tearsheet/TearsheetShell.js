@@ -23,6 +23,7 @@ import {
   Layer,
   ModalHeader,
   usePrefix,
+  Tooltip,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -116,18 +117,23 @@ export const TearsheetShell = React.forwardRef(
     const [position, setPosition] = useState(0);
 
     // if description exceeds two lines and results ellipsis, then `title` attribute displays the whole text
-    const subtitleRef = useRef(null);
-    const [titleText, setTitleText] = useState(null);
+    const tooltipTriggerRef = useRef(null);
+    const [tooltipText, setTooltipText] = useState(null);
 
     useEffect(() => {
-      if(open){
-        if (subtitleRef?.current?.scrollHeight > subtitleRef?.current?.clientHeight) {   
-          setTitleText(subtitleRef?.current?.innerHTML);
+      if (open) {
+        if (
+          tooltipTriggerRef?.current?.scrollHeight >
+          tooltipTriggerRef?.current?.clientHeight
+        ) {
+          setTooltipText(tooltipTriggerRef?.current?.innerHTML);
         } else {
-          setTitleText(null);
+          setTooltipText(null);
         }
-      }  
-    },[subtitleRef, open]);
+      }
+    }, [tooltipTriggerRef, open]);
+
+    console.log(tooltipText);
 
     // Keep a record of the previous value of depth.
     const prevDepth = useRef();
@@ -327,9 +333,27 @@ export const TearsheetShell = React.forwardRef(
                   >
                     {title}
                   </Wrap>
-                  <Wrap className={`${bc}__header-description`} title={titleText && titleText} ref={subtitleRef}>
-                    {description}
-                  </Wrap>
+                  {tooltipText ? (
+                    <Tooltip
+                      label={tooltipText}
+                      align="bottom"
+                      defaultOpen={false}
+                    >
+                      <Wrap
+                        className={`${bc}__header-description sb-tooltip-trigger`}
+                        ref={tooltipTriggerRef}
+                      >
+                        {description}
+                      </Wrap>
+                    </Tooltip>
+                  ) : (
+                    <Wrap
+                      className={`${bc}__header-description`}
+                      ref={tooltipTriggerRef}
+                    >
+                      {description}
+                    </Wrap>
+                  )}
                 </Wrap>
                 <Wrap className={`${bc}__header-actions`}>{headerActions}</Wrap>
               </Wrap>

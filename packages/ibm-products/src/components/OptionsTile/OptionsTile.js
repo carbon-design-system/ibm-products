@@ -61,26 +61,26 @@ export let OptionsTile = React.forwardRef(
     };
 
     const getIcon = () => {
+      if (locked) {
+        return Locked;
+      }
       if (invalid) {
         return WarningFilled;
       }
       if (warn) {
         return WarningAltFilled;
       }
-      if (locked) {
-        return Locked;
-      }
     };
 
     const getText = () => {
+      if (locked) {
+        return lockedText;
+      }
       if (invalid) {
         return invalidText;
       }
       if (warn) {
         return warnText;
-      }
-      if (locked) {
-        return lockedText;
       }
       return summary;
     };
@@ -196,8 +196,7 @@ OptionsTile.propTypes = {
    */
   lockedText: PropTypes.string,
   /**
-   * Provide a function which will be called each time the user
-   * interacts with the toggle.
+   * Callback function for the built Carbon toggle element.
    */
   onToggle: PropTypes.func,
   /**

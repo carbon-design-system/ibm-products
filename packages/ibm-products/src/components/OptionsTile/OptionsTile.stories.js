@@ -98,8 +98,7 @@ const Template = (args) => {
   );
 };
 
-export const optionsTile = Template.bind({});
-optionsTile.args = {
+const defaultProps = {
   className: 'optional-class',
   defaultOpen: false,
   defaultToggled: false,
@@ -117,13 +116,16 @@ optionsTile.args = {
   warnText: 'A restart is required to apply these settings',
 };
 
+export const optionsTile = Template.bind({});
+optionsTile.args = { ...defaultProps };
+
 const StaticTemplate = (args) => {
   return <OptionsTile {...args} />;
 };
 
 export const staticOptionsTile = StaticTemplate.bind({});
 staticOptionsTile.args = {
-  title: 'Hardware acceleration',
-  toggle: true,
+  ...defaultProps,
   defaultToggled: true,
+  toggle: true,
 };

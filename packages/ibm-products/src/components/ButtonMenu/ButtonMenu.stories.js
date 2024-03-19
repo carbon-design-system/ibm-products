@@ -8,8 +8,6 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { ActionableNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
@@ -84,7 +82,5 @@ const Template = (args) => {
   );
 };
 
-export const buttonMenu = prepareStory(Template, {
-  storyName: 'Button menu',
-  args: {},
-});
+export const buttonMenu = Template.bind({});
+buttonMenu.storyName = 'Button menu';

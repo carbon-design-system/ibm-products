@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { StatusIndicatorStep } from '.';
 import mdx from './StatusIndicatorStep.mdx';
 
@@ -42,11 +39,10 @@ const Template = (args) => {
   );
 };
 
-export const statusIndicatorStep = prepareStory(Template, {
-  storyName: 'StatusIndicatorStep',
-  args: {
-    description: 'Descriptive text',
-    errorMessage: 'Error message.',
-    status: 'inactive',
-  },
-});
+export const statusIndicatorStep = Template.bind({});
+statusIndicatorStep.storyName = 'StatusIndicatorStep';
+statusIndicatorStep.args = {
+  description: 'Descriptive text',
+  errorMessage: 'Error message.',
+  status: 'inactive',
+};

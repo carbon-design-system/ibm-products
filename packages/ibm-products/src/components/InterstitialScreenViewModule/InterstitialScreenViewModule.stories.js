@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { InterstitialScreenViewModule } from '.';
 import mdx from './InterstitialScreenViewModule.mdx';
 
@@ -61,11 +58,10 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const interstitialScreenViewModule = prepareStory(Template, {
-  args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreenViewModule-args
-    className: 'MyInterstitialScreenViewModule',
-    title: 'Example title',
-    description: 'This is an example of a description',
-  },
-});
+export const interstitialScreenViewModule = Template.bind({});
+interstitialScreenViewModule.args = {
+  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreenViewModule-args
+  className: 'MyInterstitialScreenViewModule',
+  title: 'Example title',
+  description: 'This is an example of a description',
+};

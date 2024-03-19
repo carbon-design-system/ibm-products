@@ -8,7 +8,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './_storybook-styles.scss';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import {
@@ -128,18 +127,16 @@ const Template = ({ influencer, open: _open, slug, ...args }, context) => {
 };
 
 // Stories
-export const AllAttributesSet = prepareStory(Template, {
-  args: {
-    closeIconDescription,
-    height: 'normal',
-    // onClose: () => false,
-    open: true,
-    size: 'narrow',
-  },
-});
+export const AllAttributesSet = Template.bind({});
+AllAttributesSet.args = {
+  closeIconDescription,
+  height: 'normal',
+  // onClose: () => false,
+  open: true,
+  size: 'narrow',
+};
 
-export const NoAttributesSet = prepareStory(Template, {
-  args: {
-    size: 'wide',
-  },
-});
+export const NoAttributesSet = Template.bind({});
+NoAttributesSet.args = {
+  size: 'wide',
+};

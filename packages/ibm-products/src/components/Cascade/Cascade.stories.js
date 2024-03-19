@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { Cascade } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
@@ -61,12 +60,10 @@ const GridTemplate = (args) => {
   );
 };
 
-export const WithoutGrid = prepareStory(DefaultTemplate, {
-  args: {},
-});
+export const WithoutGrid = DefaultTemplate.bind({});
+WithoutGrid.args = {};
 
-export const WithGrid = prepareStory(GridTemplate, {
-  args: {
-    grid: true,
-  },
-});
+export const WithGrid = GridTemplate.bind({});
+WithGrid.args = {
+  grid: true,
+};

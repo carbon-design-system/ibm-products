@@ -10,8 +10,6 @@ import { Button } from '@carbon/react';
 
 import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
 
@@ -272,151 +270,139 @@ const defaultPropsImage = {
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-export const interstitialScreenModalWithImage = prepareStory(TemplateModal, {
-  storyName: 'Modal',
-  args: {
-    ...defaultPropsImage,
-    hideProgressIndicator: true,
-    interstitialAriaLabel: 'Interstitial Screen',
-    children: (
+export const interstitialScreenModalWithImage = TemplateModal.bind({});
+interstitialScreenModalWithImage.storyName = 'Modal';
+interstitialScreenModalWithImage.args = {
+  ...defaultPropsImage,
+  hideProgressIndicator: true,
+  interstitialAriaLabel: 'Interstitial Screen',
+  children: (
+    <InterstitialScreenView stepTitle="Step 1">
+      <InterstitialScreenViewModule
+        size="sm"
+        title="Use case-specific heading"
+        description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+      />
+    </InterstitialScreenView>
+  ),
+};
+
+export const interstitialScreenModalMultiplesHeader =
+  TemplateModalMultipleChildren.bind({});
+interstitialScreenModalMultiplesHeader.storyName = 'Modal with multiple steps';
+interstitialScreenModalMultiplesHeader.args = {
+  ...defaultPropsImage,
+  hideProgressIndicator: false,
+  headerTitle: 'Use case-specific title',
+  interstitialAriaLabel: 'Interstitial Screen',
+  children: (
+    <>
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
-          size="sm"
+          size="md"
           title="Use case-specific heading"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
-    ),
-  },
-});
+      <InterstitialScreenView stepTitle="Step 2">
+        <InterstitialScreenViewModule
+          size="md"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+      <InterstitialScreenView stepTitle="Step 3">
+        <InterstitialScreenViewModule
+          size="md"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+    </>
+  ),
+};
 
-export const interstitialScreenModalMultiplesHeader = prepareStory(
-  TemplateModalMultipleChildren,
-  {
-    storyName: 'Modal with multiple steps',
-    args: {
-      ...defaultPropsImage,
-      hideProgressIndicator: false,
-      headerTitle: 'Use case-specific title',
-      interstitialAriaLabel: 'Interstitial Screen',
-      children: (
-        <>
-          <InterstitialScreenView stepTitle="Step 1">
-            <InterstitialScreenViewModule
-              size="md"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 2">
-            <InterstitialScreenViewModule
-              size="md"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 3">
-            <InterstitialScreenViewModule
-              size="md"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-        </>
-      ),
-    },
-  }
-);
+export const interstitialScreenFullScreenImage = TemplateFullScreen.bind({});
+interstitialScreenFullScreenImage.storyName = 'Full screen';
+interstitialScreenFullScreenImage.args = {
+  ...defaultPropsImage,
+  hideProgressIndicator: true,
+  children: (
+    <InterstitialScreenView stepTitle="Step 1">
+      <InterstitialScreenViewModule
+        className="GenericView"
+        title="Use case-specific heading"
+        description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+      />
+    </InterstitialScreenView>
+  ),
+};
 
-export const interstitialScreenFullScreenImage = prepareStory(
-  TemplateFullScreen,
-  {
-    storyName: 'Full screen',
-    args: {
-      ...defaultPropsImage,
-      hideProgressIndicator: true,
-      children: (
-        <InterstitialScreenView stepTitle="Step 1">
-          <InterstitialScreenViewModule
-            className="GenericView"
-            title="Use case-specific heading"
-            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+export const interstitialScreenFullScreenHeaderWithImage =
+  TemplateFullScreenMultiples.bind({});
+interstitialScreenFullScreenHeaderWithImage.storyName =
+  'Full screen with multiple steps';
+interstitialScreenFullScreenHeaderWithImage.args = {
+  ...defaultPropsImage,
+  headerTitle: 'Use case-specific title',
+  headerClassName: 'MyInterstitialHeader',
+  hideProgressIndicator: false,
+  children: (
+    <>
+      <InterstitialScreenView stepTitle="Step 1">
+        <InterstitialScreenViewModule
+          className="GenericView"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+      <InterstitialScreenView stepTitle="Step 2">
+        <InterstitialScreenViewModule
+          className="GenericView"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+      <InterstitialScreenView stepTitle="Step 3">
+        <InterstitialScreenViewModule
+          className="GenericView"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+    </>
+  ),
+};
+
+export const interstitialScreenFullScreenNoMediaWithCards =
+  TemplateFullScreenMultipleCardGrids.bind({});
+interstitialScreenFullScreenNoMediaWithCards.storyName =
+  'Full screen with custom layout';
+interstitialScreenFullScreenNoMediaWithCards.args = {
+  ...defaultProps,
+  headerTitle: 'Use case-specific title',
+  headerClassName: 'MyInterstitialHeader',
+  hideProgressIndicator: false,
+  children: (
+    <>
+      <InterstitialScreenView stepTitle="Step 1">
+        <div className="CustomLayout">
+          <GenerateExampleObjects
+            total={8}
+            startValue={1}
+            copyPrefix="Custom Element"
           />
-        </InterstitialScreenView>
-      ),
-    },
-  }
-);
-
-export const interstitialScreenFullScreenHeaderWithImage = prepareStory(
-  TemplateFullScreenMultiples,
-  {
-    storyName: 'Full screen with multiple steps',
-    args: {
-      ...defaultPropsImage,
-      headerTitle: 'Use case-specific title',
-      headerClassName: 'MyInterstitialHeader',
-      hideProgressIndicator: false,
-      children: (
-        <>
-          <InterstitialScreenView stepTitle="Step 1">
-            <InterstitialScreenViewModule
-              className="GenericView"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 2">
-            <InterstitialScreenViewModule
-              className="GenericView"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 3">
-            <InterstitialScreenViewModule
-              className="GenericView"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-        </>
-      ),
-    },
-  }
-);
-
-export const interstitialScreenFullScreenNoMediaWithCards = prepareStory(
-  TemplateFullScreenMultipleCardGrids,
-  {
-    storyName: 'Full screen with custom layout',
-    args: {
-      ...defaultProps,
-      headerTitle: 'Use case-specific title',
-      headerClassName: 'MyInterstitialHeader',
-      hideProgressIndicator: false,
-      children: (
-        <>
-          <InterstitialScreenView stepTitle="Step 1">
-            <div className="CustomLayout">
-              <GenerateExampleObjects
-                total={8}
-                startValue={1}
-                copyPrefix="Custom Element"
-              />
-            </div>
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 2">
-            <div className="CustomLayout">
-              <GenerateExampleObjects
-                total={8}
-                startValue={9}
-                copyPrefix="Custom Element"
-              />
-            </div>
-          </InterstitialScreenView>
-        </>
-      ),
-    },
-  }
-);
+        </div>
+      </InterstitialScreenView>
+      <InterstitialScreenView stepTitle="Step 2">
+        <div className="CustomLayout">
+          <GenerateExampleObjects
+            total={8}
+            startValue={9}
+            copyPrefix="Custom Element"
+          />
+        </div>
+      </InterstitialScreenView>
+    </>
+  ),
+};

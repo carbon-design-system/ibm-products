@@ -22,8 +22,6 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { CreateSidePanel } from './CreateSidePanel';
 
 import styles from './_storybook-styles.scss';
@@ -422,23 +420,20 @@ const TemplateWithMultipleForms = ({ slug, ...args }) => {
   );
 };
 
-export const Default = prepareStory(DefaultTemplate, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};
 
-export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};
 
-export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const WithMultipleForms = TemplateWithMultipleForms.bind({});
+WithMultipleForms.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};

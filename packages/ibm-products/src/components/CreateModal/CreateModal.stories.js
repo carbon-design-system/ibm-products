@@ -21,7 +21,6 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -236,22 +235,20 @@ TemplateWithFormValidation.propTypes = {
   ...CreateModal.propTypes,
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Create Modal',
-  args: {
-    story: Default,
-    children: 1,
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.storyName = 'Create Modal';
+Default.args = {
+  story: Default,
+  children: 1,
+  ...defaultProps,
+};
 
-export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
-  storyName: 'Create Modal with form validation',
-  args: {
-    story: WithFormValidation,
-    children: {
-      control: false,
-    },
-    ...defaultProps,
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.storyName = 'Create Modal with form validation';
+WithFormValidation.args = {
+  story: WithFormValidation,
+  children: {
+    control: false,
   },
-});
+  ...defaultProps,
+};

@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import { prepareStory } from '../../global/js/utils/story-helper';
 // import mdx from './EmptyState.mdx';
 
 import { EmptyState } from '.';
@@ -55,64 +54,58 @@ const Template = (args) => {
   return <EmptyState {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...emptyStateCommonProps,
+};
 
-export const WithCustomIllustration = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-    illustration: CustomIllustration,
-    illustrationDescription: 'Test alt text',
-  },
-});
+export const WithCustomIllustration = Template.bind({});
+WithCustomIllustration.args = {
+  ...emptyStateCommonProps,
+  illustration: CustomIllustration,
+  illustrationDescription: 'Test alt text',
+};
 
-export const withAction = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-    action: {
-      text: 'Create new',
-      onClick: action('Clicked empty state action button'),
-    },
+export const withAction = Template.bind({});
+withAction.args = {
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
   },
-});
+};
 
-export const withActionIconButton = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-    action: {
-      text: 'Create new',
-      onClick: action('Clicked empty state action button'),
-      renderIcon: (props) => <Add size={20} {...props} />,
-      iconDescription: 'Add icon',
-    },
+export const withActionIconButton = Template.bind({});
+withActionIconButton.args = {
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: (props) => <Add size={20} {...props} />,
+    iconDescription: 'Add icon',
   },
-});
+};
 
-export const withLink = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-    link: {
-      text: 'View documentation',
-      href: 'https://www.carbondesignsystem.com',
-    },
+export const withLink = Template.bind({});
+withLink.args = {
+  ...emptyStateCommonProps,
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
   },
-});
+};
 
-export const withActionAndLink = prepareStory(Template, {
-  args: {
-    ...emptyStateCommonProps,
-    action: {
-      text: 'Create new',
-      onClick: action('Clicked empty state action button'),
-      renderIcon: (props) => <Add size={20} {...props} />,
-      iconDescription: 'Add icon',
-    },
-    link: {
-      text: 'View documentation',
-      href: 'https://www.carbondesignsystem.com',
-    },
+export const withActionAndLink = Template.bind({});
+withActionAndLink.args = {
+  ...emptyStateCommonProps,
+  action: {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: (props) => <Add size={20} {...props} />,
+    iconDescription: 'Add icon',
   },
-});
+  link: {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  },
+};

@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { Decorator } from '.';
 import mdx from './Decorator.mdx';
 
@@ -100,24 +97,23 @@ const Template = (args) => {
   return <Decorator {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Decorator',
-  args: {
-    hideIcon: false,
-    label: 'IP',
-    score: 5,
-    scoreThresholds: [0, 4, 7, 10],
-    setLabelTitle: (score, scoreThresholds, magnitude) => {
-      if (typeof score !== 'number') {
-        return 'Unknown score';
-      }
-      return `"${magnitude}" magnitude. Score ${score} out of ${
-        scoreThresholds[scoreThresholds.length - 1]
-      }`;
-    },
-    small: false,
-    theme: 'light',
-    value: '192.168.0.50',
-    valueTitle: '',
+export const Default = Template.bind({});
+Default.storyName = 'Decorator';
+Default.args = {
+  hideIcon: false,
+  label: 'IP',
+  score: 5,
+  scoreThresholds: [0, 4, 7, 10],
+  setLabelTitle: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds[scoreThresholds.length - 1]
+    }`;
   },
-});
+  small: false,
+  theme: 'light',
+  value: '192.168.0.50',
+  valueTitle: '',
+};

@@ -8,10 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import { Checklist } from '.';
 import styles from './_storybook-styles.scss';
@@ -90,84 +87,82 @@ const Template = (args) => {
   );
 };
 
-export const checklist = prepareStory(Template, {
-  args: {
-    onClickViewAll: () => {
-      action('view all')();
-    },
-    onToggle: (isOpen) => {
-      action(`toggle ${isOpen ? 'open' : 'closed'}`)();
-    },
-    chartValue: 0.15,
-    chartLabel: '15% complete',
-    taskLists: taskLists,
-    title: 'Checklist header',
-    viewAllLabel: `View all (10)`,
+export const checklist = Template.bind({});
+checklist.args = {
+  onClickViewAll: () => {
+    action('view all')();
   },
-});
+  onToggle: (isOpen) => {
+    action(`toggle ${isOpen ? 'open' : 'closed'}`)();
+  },
+  chartValue: 0.15,
+  chartLabel: '15% complete',
+  taskLists: taskLists,
+  title: 'Checklist header',
+  viewAllLabel: `View all (10)`,
+};
 
-export const taskStates = prepareStory(Template, {
-  storyName: 'Task states',
-  args: {
-    taskLists: [
-      {
-        title: 'Unchecked state',
-        tasks: [
-          {
-            kind: 'unchecked',
-            label: 'Task name',
-            onClick: action('task'),
-          },
-          {
-            kind: 'unchecked',
-            label: 'Task name',
-          },
-        ],
-      },
-      {
-        title: 'Indeterminate state',
-        tasks: [
-          {
-            kind: 'indeterminate',
-            label: 'Task name',
-            onClick: action('task'),
-          },
-          { kind: 'indeterminate', label: 'Task name' },
-        ],
-      },
-      {
-        title: 'Checked state',
-        tasks: [
-          {
-            kind: 'checked',
-            label: 'Task name',
-            onClick: action('task'),
-          },
-          { kind: 'checked', label: 'Task name' },
-        ],
-      },
-      {
-        title: 'Disabled state',
-        tasks: [
-          { kind: 'disabled', label: 'Task name' },
-          {
-            kind: 'disabled',
-            label: 'Task name',
-            onClick: action('task'),
-          },
-        ],
-      },
-      {
-        title: 'Error state',
-        tasks: [
-          { kind: 'error', label: 'Task name' },
-          {
-            kind: 'error',
-            label: 'Task name',
-            onClick: action('task'),
-          },
-        ],
-      },
-    ],
-  },
-});
+export const taskStates = Template.bind({});
+taskStates.storyName = 'Task states';
+taskStates.args = {
+  taskLists: [
+    {
+      title: 'Unchecked state',
+      tasks: [
+        {
+          kind: 'unchecked',
+          label: 'Task name',
+          onClick: action('task'),
+        },
+        {
+          kind: 'unchecked',
+          label: 'Task name',
+        },
+      ],
+    },
+    {
+      title: 'Indeterminate state',
+      tasks: [
+        {
+          kind: 'indeterminate',
+          label: 'Task name',
+          onClick: action('task'),
+        },
+        { kind: 'indeterminate', label: 'Task name' },
+      ],
+    },
+    {
+      title: 'Checked state',
+      tasks: [
+        {
+          kind: 'checked',
+          label: 'Task name',
+          onClick: action('task'),
+        },
+        { kind: 'checked', label: 'Task name' },
+      ],
+    },
+    {
+      title: 'Disabled state',
+      tasks: [
+        { kind: 'disabled', label: 'Task name' },
+        {
+          kind: 'disabled',
+          label: 'Task name',
+          onClick: action('task'),
+        },
+      ],
+    },
+    {
+      title: 'Error state',
+      tasks: [
+        { kind: 'error', label: 'Task name' },
+        {
+          kind: 'error',
+          label: 'Task name',
+          onClick: action('task'),
+        },
+      ],
+    },
+  ],
+};

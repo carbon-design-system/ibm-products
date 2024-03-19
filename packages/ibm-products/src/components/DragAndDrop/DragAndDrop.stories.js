@@ -6,9 +6,6 @@
  */
 
 import React from 'react';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import {
   horizontalListSortingStrategy,
   verticalListSortingStrategy,
@@ -44,22 +41,20 @@ export default {
   },
 };
 
-export const verticalExample = prepareStory(Sortable, {
-  storyName: 'Vertical list',
-  args: {
-    modifiers: [restrictToParentElement, restrictToVerticalAxis],
-    strategy: verticalListSortingStrategy,
-  },
-});
+export const verticalExample = Sortable.bind({});
+verticalExample.storyName = 'Vertical list';
+verticalExample.args = {
+  modifiers: [restrictToParentElement, restrictToVerticalAxis],
+  strategy: verticalListSortingStrategy,
+};
 
-export const horizontalExample = prepareStory(Sortable, {
-  storyName: 'Horizontal list',
-  args: {
-    type: 'horizontal',
-    modifiers: [restrictToParentElement, restrictToHorizontalAxis],
-    strategy: horizontalListSortingStrategy,
-  },
-});
+export const horizontalExample = Sortable.bind({});
+horizontalExample.storyName = 'Horizontal list';
+horizontalExample.args = {
+  type: 'horizontal',
+  modifiers: [restrictToParentElement, restrictToHorizontalAxis],
+  strategy: horizontalListSortingStrategy,
+};
 
 const gridGapValue = 12;
 const defaultGridItemSize = 140;
@@ -75,72 +70,68 @@ const gridProps = {
   }),
 };
 
-export const gridExample = prepareStory(Sortable, {
-  storyName: 'Grid',
-  args: {
-    ...gridProps,
-  },
-});
+export const gridExample = Sortable.bind({});
+gridExample.storyName = 'Grid';
+gridExample.args = {
+  ...gridProps,
+};
 
-export const gridExampleRestrictToWindow = prepareStory(Sortable, {
-  storyName: 'Grid, restrict drag to window edges',
-  args: {
-    ...gridProps,
-    modifiers: [restrictToWindowEdges],
-  },
-});
+export const gridExampleRestrictToWindow = Sortable.bind({});
+gridExampleRestrictToWindow.storyName = 'Grid, restrict drag to window edges';
+gridExampleRestrictToWindow.args = {
+  ...gridProps,
+  modifiers: [restrictToWindowEdges],
+};
 
-export const gridExampleLargeItem = prepareStory(Sortable, {
-  storyName: 'Grid, large item',
-  args: {
-    ...gridProps,
-    itemCount: 20,
-    includeUnderlay: false,
-    modifiers: [restrictToWindowEdges],
-    wrapperStyle: ({ index }) => {
-      if (index === 1) {
-        return {
-          height: defaultGridItemSize * 2 + gridGapValue,
-          width: defaultGridItemSize * 2 + gridGapValue,
-          gridRowStart: 'span 2',
-          gridColumnStart: 'span 2',
-        };
-      }
-
+export const gridExampleLargeItem = Sortable.bind({});
+gridExampleLargeItem.storyName = 'Grid, large item';
+gridExampleLargeItem.args = {
+  ...gridProps,
+  itemCount: 20,
+  includeUnderlay: false,
+  modifiers: [restrictToWindowEdges],
+  wrapperStyle: ({ index }) => {
+    if (index === 1) {
       return {
-        width: defaultGridItemSize,
-        height: defaultGridItemSize,
+        height: defaultGridItemSize * 2 + gridGapValue,
+        width: defaultGridItemSize * 2 + gridGapValue,
+        gridRowStart: 'span 2',
+        gridColumnStart: 'span 2',
       };
-    },
-  },
-});
+    }
 
-export const gridDashboard = prepareStory(Sortable, {
-  storyName: 'Grid, dashboard layout',
-  args: {
-    ...gridProps,
-    itemCount: 3,
-    includeUnderlay: false,
-    Container: (props) => <GridContainer {...props} columns={4} />,
-    modifiers: [restrictToWindowEdges],
-    wrapperStyle: ({ index }) => {
-      if (index === 1) {
-        return {
-          height: defaultGridItemSize * 2 + gridGapValue,
-          width: defaultGridItemSize * 4 + gridGapValue,
-          gridRowStart: 'span 4',
-          gridColumnStart: 'span 4',
-        };
-      }
-
-      if (index === 2 || index === 3) {
-        return {
-          height: defaultGridItemSize,
-          width: defaultGridItemSize * 2,
-          gridRowStart: 'span 2',
-          gridColumnStart: 'span 2',
-        };
-      }
-    },
+    return {
+      width: defaultGridItemSize,
+      height: defaultGridItemSize,
+    };
   },
-});
+};
+
+export const gridDashboard = Sortable.bind({});
+gridDashboard.storyName = 'Grid, dashboard layout';
+gridDashboard.args = {
+  ...gridProps,
+  itemCount: 3,
+  includeUnderlay: false,
+  Container: (props) => <GridContainer {...props} columns={4} />,
+  modifiers: [restrictToWindowEdges],
+  wrapperStyle: ({ index }) => {
+    if (index === 1) {
+      return {
+        height: defaultGridItemSize * 2 + gridGapValue,
+        width: defaultGridItemSize * 4 + gridGapValue,
+        gridRowStart: 'span 4',
+        gridColumnStart: 'span 4',
+      };
+    }
+
+    if (index === 2 || index === 3) {
+      return {
+        height: defaultGridItemSize,
+        width: defaultGridItemSize * 2,
+        gridRowStart: 'span 2',
+        gridColumnStart: 'span 2',
+      };
+    }
+  },
+};

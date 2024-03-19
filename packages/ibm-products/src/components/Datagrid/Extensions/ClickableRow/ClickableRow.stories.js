@@ -9,7 +9,6 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -277,16 +276,15 @@ const clickableRowControlProps = {
   gridDescription: sharedDatagridProps.gridDescription,
 };
 const clickableRowItemStoryName = 'With clickable row item';
-export const ClickableRowItemStory = prepareStory(BasicTemplateWrapper, {
-  storyName: clickableRowItemStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-  },
-  args: {
-    ...clickableRowControlProps,
-  },
-});
+export const ClickableRowItemStory = BasicTemplateWrapper.bind({});
+ClickableRowItemStory.storyName = clickableRowItemStoryName;
+ClickableRowItemStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+};
+ClickableRowItemStory.args = {
+  ...clickableRowControlProps,
+};
 
 const DataTableSidePanelContent = (selectedRowValues) => {
   const { rowData } = selectedRowValues;
@@ -401,13 +399,12 @@ const ClickableRowWithPanelWrapper = ({ ...args }) => {
 };
 
 const clickableRowStoryName = 'Clickable row with side panel';
-export const ClickableRowStory = prepareStory(ClickableRowWithPanelWrapper, {
-  storyName: clickableRowStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-  },
-  args: {
-    ...clickableRowControlProps,
-  },
-});
+export const ClickableRowStory = ClickableRowWithPanelWrapper.bind({});
+ClickableRowStory.storyName = clickableRowStoryName;
+ClickableRowStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+};
+ClickableRowStory.args = {
+  ...clickableRowControlProps,
+};

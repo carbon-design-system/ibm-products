@@ -8,7 +8,6 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
 // import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
@@ -139,40 +138,37 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
   );
 };
 
-export const Standard = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    validExtensions: 0,
-    preformattedExtensions: 0,
-    invalidInputText: 'File must have valid extension .pdf',
-    body: '',
-    preformattedExtensionsLabel: 'Choose an export format',
-    storyInitiallyOpen: true,
-  },
-});
+export const Standard = Template.bind({});
+Standard.args = {
+  ...defaultProps,
+  validExtensions: 0,
+  preformattedExtensions: 0,
+  invalidInputText: 'File must have valid extension .pdf',
+  body: '',
+  preformattedExtensionsLabel: 'Choose an export format',
+  storyInitiallyOpen: true,
+};
 
-export const WithExtensionValidation = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    validExtensions: 1,
-    preformattedExtensions: 0,
-    filename: '',
-    invalidInputText: 'File must have valid extension .pdf',
-    body: 'File must be exported in a PDF format.',
-    preformattedExtensionsLabel: 'Choose an export format',
-    storyInitiallyOpen: true,
-  },
-});
+export const WithExtensionValidation = Template.bind({});
+WithExtensionValidation.args = {
+  ...defaultProps,
+  validExtensions: 1,
+  preformattedExtensions: 0,
+  filename: '',
+  invalidInputText: 'File must have valid extension .pdf',
+  body: 'File must be exported in a PDF format.',
+  preformattedExtensionsLabel: 'Choose an export format',
+  storyInitiallyOpen: true,
+};
 
-export const WithPreformattedExtensions = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    filename: 'test',
-    validExtensions: 0,
-    preformattedExtensions: 1,
-    invalidInputText: 'File must have valid extension .pdf',
-    body: '',
-    preformattedExtensionsLabel: 'Choose an export format',
-    storyInitiallyOpen: true,
-  },
-});
+export const WithPreformattedExtensions = Template.bind({});
+WithPreformattedExtensions.args = {
+  ...defaultProps,
+  filename: 'test',
+  validExtensions: 0,
+  preformattedExtensions: 1,
+  invalidInputText: 'File must have valid extension .pdf',
+  body: '',
+  preformattedExtensionsLabel: 'Choose an export format',
+  storyInitiallyOpen: true,
+};

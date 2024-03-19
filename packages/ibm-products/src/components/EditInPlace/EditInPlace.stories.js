@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
@@ -121,22 +120,19 @@ const Template = ({ containerWidth, ...args }) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+};
 
-export const Invalid = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    invalid: true,
-  },
-});
+export const Invalid = Template.bind({});
+Invalid.args = {
+  ...defaultProps,
+  invalid: true,
+};
 
-// export const ReadOnly = prepareStory(Template, {
-//   args: {
+// export const ReadOnly = Template.bind({});
+//   ReadOnly.args = {
 //     ...defaultProps,
 //     readOnly: true,
-//   },
-// });
+//   };

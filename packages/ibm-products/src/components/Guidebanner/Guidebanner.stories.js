@@ -8,8 +8,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import {
   Guidebanner,
   GuidebannerElement,
@@ -99,93 +97,90 @@ const Template = ({ children, ...rest }) => {
   );
 };
 
-export const collapsible = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    collapsible: true,
-    children: (
-      <React.Fragment>
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonLarge />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-      </React.Fragment>
-    ),
-  },
-});
+export const collapsible = Template.bind({});
+collapsible.args = {
+  ...defaultProps,
+  collapsible: true,
+  children: (
+    <React.Fragment>
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonLarge />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+    </React.Fragment>
+  ),
+};
 
-export const manyInsights = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    children: (
-      <React.Fragment>
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonLarge />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-      </React.Fragment>
-    ),
-  },
-});
+export const manyInsights = Template.bind({});
+manyInsights.args = {
+  ...defaultProps,
+  children: (
+    <React.Fragment>
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonLarge />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonSmall />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+    </React.Fragment>
+  ),
+};
 
-export const fewInsights = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    children: (
-      <React.Fragment>
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonLarge />}
-        />
-        <GuidebannerElement
-          title="Use-case specific heading"
-          description="Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultLink />}
-        />
-      </React.Fragment>
-    ),
-  },
-});
+export const fewInsights = Template.bind({});
+fewInsights.args = {
+  ...defaultProps,
+  children: (
+    <React.Fragment>
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultButtonLarge />}
+      />
+      <GuidebannerElement
+        title="Use-case specific heading"
+        description="Use-case specific content related to the heading that explains the concept or adds context."
+        button={<DefaultLink />}
+      />
+    </React.Fragment>
+  ),
+};

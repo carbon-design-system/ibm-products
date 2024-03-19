@@ -10,7 +10,6 @@ import React from 'react';
 import { StatusIcon } from '.';
 
 // import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
-import { prepareStory } from '../../global/js/utils/story-helper';
 import DocsPage from './StatusIcon.docs-page';
 
 export default {
@@ -68,8 +67,7 @@ const Template = (args) => {
   return <StatusIcon {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+};

@@ -7,7 +7,6 @@
 
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';
@@ -144,16 +143,14 @@ const Template = (args, context) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    items: 1,
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  items: 1,
+  ...defaultProps,
+};
 
-export const WithHierarchy = prepareStory(Template, {
-  args: {
-    items: 2,
-    ...defaultProps,
-  },
-});
+export const WithHierarchy = Template.bind({});
+WithHierarchy.args = {
+  items: 2,
+  ...defaultProps,
+};

@@ -10,7 +10,6 @@ import { action } from '@storybook/addon-actions';
 
 import { Bee, Lightning } from '@carbon/react/icons';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionBar } from './ActionBar';
@@ -61,10 +60,9 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    actions: 1,
-    containerWidth: 500,
-    overflowAriaLabel: 'Open and close additional action bar items list.',
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  actions: 1,
+  containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional action bar items list.',
+};

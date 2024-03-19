@@ -8,10 +8,7 @@
 import React from 'react';
 import { Crossroads } from '@carbon/react/icons';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark';
-import {
-  prepareStory,
-  getSelectedCarbonTheme,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 import {
   Coachmark,
   CoachmarkOverlayElement,
@@ -70,9 +67,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkButton = prepareStory(Template, {
-  args: {
-    label: 'Click Me',
-    className: 'myButton',
-  },
-});
+export const coachmarkButton = Template.bind({});
+coachmarkButton.args = {
+  label: 'Click Me',
+  className: 'myButton',
+};

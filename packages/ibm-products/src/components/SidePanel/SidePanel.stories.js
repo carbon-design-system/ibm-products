@@ -30,7 +30,6 @@ import {
 } from '@carbon/react';
 
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 // import mdx from './SidePanel.mdx';
@@ -492,110 +491,99 @@ const SlideInTemplate = ({ actions, slug, ...args }) => {
   );
 };
 
-export const SlideOver = prepareStory(SlideOverTemplate, {
-  args: {
-    includeOverlay: true,
-    actions: 0,
-    ...defaultStoryProps,
-  },
-});
+export const SlideOver = SlideOverTemplate.bind({});
+SlideOver.args = {
+  includeOverlay: true,
+  actions: 0,
+  ...defaultStoryProps,
+};
 
-export const SlideIn = prepareStory(SlideInTemplate, {
-  args: {
-    placement: 'right',
-    slideIn: true,
-    selectorPageContent: '#ibm-products-page-content',
-    actions: 0,
-    ...defaultStoryProps,
-    labelText: 'Incident management',
-  },
-});
+export const SlideIn = SlideInTemplate.bind({});
+SlideIn.args = {
+  placement: 'right',
+  slideIn: true,
+  selectorPageContent: '#ibm-products-page-content',
+  actions: 0,
+  ...defaultStoryProps,
+  labelText: 'Incident management',
+};
 
-export const WithActionToolbar = prepareStory(SlideOverTemplate, {
-  args: {
-    actionToolbarButtons: [
-      {
-        leading: true,
-        label: 'Copy',
-        icon: (props) => <Copy size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Copy'),
-        kind: 'primary',
-      },
-      {
-        label: 'Settings',
-        icon: (props) => <Settings size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Settings'),
-      },
-      {
-        label: 'Delete',
-        icon: (props) => <TrashCan size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Delete'),
-      },
-    ],
-    ...defaultStoryProps,
-  },
-});
-
-export const PanelWithSecondStep = prepareStory(StepTemplate, {
-  args: {
-    actions: 0,
-    includeOverlay: true,
-    currentStep: 1,
-    ...defaultStoryProps,
-  },
-});
-
-export const SpecifyElementToHaveInitialFocus = prepareStory(
-  SlideOverTemplate,
-  {
-    args: {
-      actions: 0,
-      selectorPrimaryFocus: '#side-panel-story-text-input-a',
-      ...defaultStoryProps,
+export const WithActionToolbar = SlideOverTemplate.bind({});
+WithActionToolbar.args = {
+  actionToolbarButtons: [
+    {
+      leading: true,
+      label: 'Copy',
+      icon: (props) => <Copy size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Copy'),
+      kind: 'primary',
     },
-  }
-);
+    {
+      label: 'Settings',
+      icon: (props) => <Settings size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Settings'),
+    },
+    {
+      label: 'Delete',
+      icon: (props) => <TrashCan size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Delete'),
+    },
+  ],
+  ...defaultStoryProps,
+};
 
-export const WithStaticTitle = prepareStory(SlideOverTemplate, {
-  args: {
-    ...defaultStoryProps,
-    actions: 0,
-    animateTitle: false,
-    includeOverlay: true,
-  },
-});
+export const PanelWithSecondStep = StepTemplate.bind({});
+PanelWithSecondStep.args = {
+  actions: 0,
+  includeOverlay: true,
+  currentStep: 1,
+  ...defaultStoryProps,
+};
 
-export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
-  args: {
-    ...defaultStoryProps,
-    actions: 0,
-    animateTitle: false,
-    includeOverlay: true,
-    actionToolbarButtons: [
-      {
-        label: 'Copy',
-        icon: (props) => <Copy size={16} {...props} />,
-        onClick: action('Action toolbar button clicked: Copy'),
-      },
-      {
-        label: 'Settings',
-        icon: (props) => <Settings size={16} {...props} />,
-        onClick: action('Action toolbar button clicked: Settings'),
-      },
-      {
-        label: 'Delete',
-        icon: (props) => <TrashCan size={16} {...props} />,
-        onClick: action('Action toolbar button clicked: Delete'),
-      },
-    ],
-  },
-});
+export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
+SpecifyElementToHaveInitialFocus.args = {
+  actions: 0,
+  selectorPrimaryFocus: '#side-panel-story-text-input-a',
+  ...defaultStoryProps,
+};
 
-export const WithoutTitle = prepareStory(SlideOverTemplate, {
-  args: {
-    ...defaultStoryProps,
-    actions: 0,
-    title: null,
-    includeOverlay: true,
-  },
-});
+export const WithStaticTitle = SlideOverTemplate.bind({});
+WithStaticTitle.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+};
+
+export const WithStaticTitleAndActionToolbar = SlideOverTemplate.bind({});
+WithStaticTitleAndActionToolbar.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+  actionToolbarButtons: [
+    {
+      label: 'Copy',
+      icon: (props) => <Copy size={16} {...props} />,
+      onClick: action('Action toolbar button clicked: Copy'),
+    },
+    {
+      label: 'Settings',
+      icon: (props) => <Settings size={16} {...props} />,
+      onClick: action('Action toolbar button clicked: Settings'),
+    },
+    {
+      label: 'Delete',
+      icon: (props) => <TrashCan size={16} {...props} />,
+      onClick: action('Action toolbar button clicked: Delete'),
+    },
+  ],
+};
+
+export const WithoutTitle = SlideOverTemplate.bind({});
+WithoutTitle.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  title: null,
+  includeOverlay: true,
+};

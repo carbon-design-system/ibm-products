@@ -9,7 +9,6 @@
 import React, { useState } from 'react';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -234,22 +233,20 @@ const columnCustomizationControlProps = {
   customizeColumnsProps: sharedDatagridProps.customizeColumnsProps,
 };
 const columnCustomizationStoryName = 'With column customization';
-export const ColumnCustomizationUsageStory = prepareStory(
-  ColumnCustomizationWrapper,
-  {
-    storyName: columnCustomizationStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
-    },
-    args: {
-      ...columnCustomizationControlProps,
-      featureFlags: ['Datagrid.useCustomizeColumns'],
-    },
-  }
+export const ColumnCustomizationUsageStory = ColumnCustomizationWrapper.bind(
+  {}
 );
+ColumnCustomizationUsageStory.storyName = columnCustomizationStoryName;
+ColumnCustomizationUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
+};
+ColumnCustomizationUsageStory.args = {
+  ...columnCustomizationControlProps,
+  featureFlags: ['Datagrid.useCustomizeColumns'],
+};
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
   const stickyHeaders = defaultHeader.slice(1, 15);
@@ -343,19 +340,17 @@ const ColumnCustomizationWithFixedWrapper = ({ ...args }) => {
 
 const columnCustomizationFixedStoryName =
   'With column customization and frozen columns';
-export const ColumnCustomizationWithFixedColumnStory = prepareStory(
-  ColumnCustomizationWithFixedWrapper,
-  {
-    storyName: columnCustomizationFixedStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
-    },
-    args: {
-      ...columnCustomizationControlProps,
-      featureFlags: ['Datagrid.useCustomizeColumns'],
-    },
-  }
-);
+export const ColumnCustomizationWithFixedColumnStory =
+  ColumnCustomizationWithFixedWrapper.bind({});
+ColumnCustomizationWithFixedColumnStory.storyName =
+  columnCustomizationFixedStoryName;
+ColumnCustomizationWithFixedColumnStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
+};
+ColumnCustomizationWithFixedColumnStory.args = {
+  ...columnCustomizationControlProps,
+  featureFlags: ['Datagrid.useCustomizeColumns'],
+};

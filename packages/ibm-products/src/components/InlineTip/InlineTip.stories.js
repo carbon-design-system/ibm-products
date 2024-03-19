@@ -10,8 +10,6 @@ import { action } from '@storybook/addon-actions';
 
 import cx from 'classnames';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { InlineTip, InlineTipButton, InlineTipLink } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -136,16 +134,14 @@ const Template = (args) => {
   );
 };
 
-export const inlineTip = prepareStory(Template, {
-  args: {
-    narrow: false,
-    ...defaultProps,
-  },
-});
+export const inlineTip = Template.bind({});
+inlineTip.args = {
+  narrow: false,
+  ...defaultProps,
+};
 
-export const inlineTipNarrow = prepareStory(Template, {
-  args: {
-    narrow: true,
-    ...defaultProps,
-  },
-});
+export const inlineTipNarrow = Template.bind({});
+inlineTipNarrow.args = {
+  narrow: true,
+  ...defaultProps,
+};

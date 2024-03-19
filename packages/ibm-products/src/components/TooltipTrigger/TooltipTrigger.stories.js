@@ -7,8 +7,6 @@
 import React from 'react';
 import { Monster } from '@carbon/react/icons';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { TooltipTrigger } from '.';
 // import { pkg } from '../../settings';
 // import DocsPage from './TooltipTrigger.docs-page';
@@ -28,14 +26,12 @@ const Template = (args) => {
   return <TooltipTrigger {...args} />;
 };
 
-export const Icon = prepareStory(Template, {
-  args: {
-    children: <Monster size={16} />,
-  },
-});
+export const Icon = Template.bind({});
+Icon.args = {
+  children: <Monster size={16} />,
+};
 
-export const Text = prepareStory(Template, {
-  args: {
-    children: 'Text',
-  },
-});
+export const Text = Template.bind({});
+Text.args = {
+  children: 'Text',
+};

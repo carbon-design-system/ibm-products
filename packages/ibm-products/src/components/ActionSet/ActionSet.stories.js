@@ -10,7 +10,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionSet } from '.';
@@ -65,6 +64,5 @@ const Template = ({ actions, size = 'md', containerWidth, ...args }) => {
   );
 };
 
-export const actionSet = prepareStory(Template, {
-  args: { actions: 3, containerWidth: 300 },
-});
+export const actionSet = Template.bind({});
+actionSet.args = { actions: 3, containerWidth: 300 };

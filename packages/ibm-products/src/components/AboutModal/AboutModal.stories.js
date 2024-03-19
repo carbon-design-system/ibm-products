@@ -10,8 +10,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { AboutModal } from '.';
 
 import { Button, Link } from '@carbon/react';
@@ -203,31 +201,27 @@ const commonArgs = {
 };
 
 const aboutModalStoryName = 'About modal';
-export const aboutModal = prepareStory(
-  Template.bind({}, aboutModalStoryName, true),
-  {
-    storyName: aboutModalStoryName,
-    args: {
-      title: 2,
-      links: 0,
-      content: 0,
-      additionalInfo: 0,
-      ...commonArgs,
-    },
-  }
-);
+export const aboutModal = Template.bind({}, aboutModalStoryName, true);
+aboutModal.storyName = aboutModalStoryName;
+aboutModal.args = {
+  title: 2,
+  links: 0,
+  content: 0,
+  additionalInfo: 0,
+  ...commonArgs,
+};
 
 const fullyLoadedStoryName = 'About modal with all props set';
-export const fullyLoaded = prepareStory(
-  Template.bind({}, fullyLoadedStoryName, false),
-  {
-    storyName: fullyLoadedStoryName,
-    args: {
-      title: 2,
-      links: 3,
-      content: 2,
-      additionalInfo: 1,
-      ...commonArgs,
-    },
-  }
+export const aboutModalWithAllPropsSet = Template.bind(
+  {},
+  fullyLoadedStoryName,
+  false
 );
+aboutModalWithAllPropsSet.storyName = fullyLoadedStoryName;
+aboutModalWithAllPropsSet.args = {
+  title: 2,
+  links: 3,
+  content: 2,
+  additionalInfo: 1,
+  ...commonArgs,
+};

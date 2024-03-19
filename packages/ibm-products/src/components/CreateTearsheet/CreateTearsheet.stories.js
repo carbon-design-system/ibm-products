@@ -6,7 +6,6 @@
  */
 
 import { slugArgTypes } from '../../global/js/story-parts/slug';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import DocsPage from './CreateTearsheet.docs-page';
@@ -47,23 +46,20 @@ const createTearsheetProps = {
   firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
-export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
-  storyName: 'Create tearsheet',
-  args: {
-    ...createTearsheetProps,
-  },
-});
+export const multiStepTearsheet = MultiStepTearsheet.bind({});
+multiStepTearsheet.storyName = 'Create tearsheet';
+multiStepTearsheet.args = {
+  ...createTearsheetProps,
+};
 
-export const withIntroStep = prepareStory(MultiStepWithIntro, {
-  storyName: 'Create tearsheet with intro step',
-  args: {
-    ...createTearsheetProps,
-  },
-});
+export const withIntroStep = MultiStepWithIntro.bind({});
+withIntroStep.storyName = 'Create tearsheet with intro step';
+withIntroStep.args = {
+  ...createTearsheetProps,
+};
 
-export const withErrorState = prepareStory(MultiStepWithStepInErrorState, {
-  storyName: 'Create tearsheet with step in error state',
-  args: {
-    ...createTearsheetProps,
-  },
-});
+export const withErrorState = MultiStepWithStepInErrorState.bind({});
+withErrorState.storyName = 'Create tearsheet with step in error state';
+withErrorState.args = {
+  ...createTearsheetProps,
+};

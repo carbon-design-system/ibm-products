@@ -7,9 +7,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { DecoratorBase } from '.';
 import mdx from './DecoratorBase.mdx';
 
@@ -105,30 +102,29 @@ const Template = (args) => {
   return <DecoratorBase {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'DecoratorBase',
-  args: {
-    disabled: false,
-    kind: 'default',
-    hideIcon: false,
-    label: 'IP',
-    onClickLabel: (event, values) => action('onClickLabel')(values),
-    onClickValue: (event, values) => action('onClickValue')(values),
-    onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
-    onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
-    score: 5,
-    scoreThresholds: [0, 4, 7, 10],
-    setLabelTitle: (score, scoreThresholds, magnitude) => {
-      if (typeof score !== 'number') {
-        return 'Unknown score';
-      }
-      return `"${magnitude}" magnitude. Score ${score} out of ${
-        scoreThresholds[scoreThresholds.length - 1]
-      }`;
-    },
-    small: false,
-    theme: 'light',
-    value: '192.168.0.50',
-    valueTitle: '',
+export const Default = Template.bind({});
+Default.storyName = 'DecoratorBase';
+Default.args = {
+  disabled: false,
+  kind: 'default',
+  hideIcon: false,
+  label: 'IP',
+  onClickLabel: (event, values) => action('onClickLabel')(values),
+  onClickValue: (event, values) => action('onClickValue')(values),
+  onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
+  onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
+  score: 5,
+  scoreThresholds: [0, 4, 7, 10],
+  setLabelTitle: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds[scoreThresholds.length - 1]
+    }`;
   },
-});
+  small: false,
+  theme: 'light',
+  value: '192.168.0.50',
+  valueTitle: '',
+};

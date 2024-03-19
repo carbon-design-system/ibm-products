@@ -27,7 +27,7 @@ const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-interface EditSidePanelProps extends PropsWithChildren {
+interface EditSidePanelBaseProps extends PropsWithChildren {
   /**
    * Sets the body content of the create side panel
    */
@@ -92,12 +92,6 @@ interface EditSidePanelProps extends PropsWithChildren {
   secondaryButtonText: string;
 
   /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  selectorPageContent: string;
-
-  /**
    * Specifies which DOM element in the form should be focused.
    */
   selectorPrimaryFocus: ReactNode;
@@ -106,11 +100,6 @@ interface EditSidePanelProps extends PropsWithChildren {
    * Sets the size of the side panel
    */
   size?: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
-
-  /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  slideIn?: boolean;
 
   /**
    * Prevent closing on click outside of the panel
@@ -132,6 +121,33 @@ interface EditSidePanelProps extends PropsWithChildren {
    */
   title: ReactNode;
 }
+
+interface EditSidePanelSlideInProps {
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  slideIn: true;
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: string;
+}
+
+interface EditSidePanelSlideOutProps {
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  slideIn: false;
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent: never;
+}
+
+type EditSidePanelProps = EditSidePanelBaseProps &
+  (EditSidePanelSlideInProps | EditSidePanelSlideOutProps);
 
 /**
  * Use with medium complexity edits if the user needs page context.
@@ -237,6 +253,16 @@ EditSidePanel = pkg.checkComponentEnabled(EditSidePanel, componentName);
 // is used in preference to relying on function.name.
 EditSidePanel.displayName = componentName;
 
+const EditSidePanelSlideInPropTypes = {
+  slideIn: PropTypes.bool.isRequired,
+  selectorPageContent: PropTypes.string.isRequired,
+};
+
+const EditSidePanelSlideOutPropTypes = {
+  slideIn: PropTypes.bool.isRequired,
+  selectorPageContent: PropTypes.oneOf([null, undefined]).isRequired,
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -313,12 +339,6 @@ EditSidePanel.propTypes = {
   secondaryButtonText: PropTypes.string.isRequired,
 
   /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
-   */
-  selectorPageContent: PropTypes.string.isRequired,
-
-  /**
    * Specifies which DOM element in the form should be focused.
    */
   selectorPrimaryFocus: PropTypes.node.isRequired,
@@ -328,10 +348,23 @@ EditSidePanel.propTypes = {
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
 
-  /**
-   * Specifies which DOM element in the form should be focused.
-   */
-  slideIn: PropTypes.bool,
+  // /**
+  //  * Specifies which DOM element in the form should be focused.
+  //  */
+  // slideIn: PropTypes.bool,
+
+  //   /**
+  //  * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+  //  * This prop is required when using the `slideIn` variant of the side panel.
+  //  */
+  //   selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
+  ...(props) => {
+    if (props.slideIn) {
+      return EditSidePanelSlideInPropTypes;
+    } else {
+      return EditSidePanelSlideOutPropTypes;
+    }
+  },
 
   /**
    *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component

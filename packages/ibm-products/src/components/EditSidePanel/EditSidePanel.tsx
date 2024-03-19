@@ -139,6 +139,12 @@ interface EditSidePanelSlideOutProps {
    * Specifies which DOM element in the form should be focused.
    */
   slideIn: false;
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent?: never;
 }
 
 type EditSidePanelProps = EditSidePanelBaseProps &

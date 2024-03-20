@@ -108,6 +108,8 @@ export let DataSpreadsheet = React.forwardRef(
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
     const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
+    const [isActiveHeaderCellChanged, setIsActiveHeaderCellChanged] =
+      useState(null);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
     const previousState = usePreviousValue({
@@ -222,6 +224,7 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.column === 'header'
         ) {
           setActiveCellContent(null);
+          setIsActiveHeaderCellChanged((prev) => !prev);
         }
       }
     }, [
@@ -289,6 +292,7 @@ export let DataSpreadsheet = React.forwardRef(
       containerHasFocus,
       createActiveCell,
       activeCellContent,
+      isActiveHeaderCellChanged,
     });
 
     const handleInitialArrowPress = useCallback(() => {

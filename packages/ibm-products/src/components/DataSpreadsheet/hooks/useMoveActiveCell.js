@@ -14,22 +14,13 @@ export const useMoveActiveCell = ({
   containerHasFocus,
   createActiveCell,
   activeCellContent,
+  isActiveHeaderCellChanged,
 }) => {
   //new active cell is created when the activeCellContent changes or navigate through headers
   // Otherwise new active cell will display the old value in a glance
   useEffect(() => {
     performCreateActiveCell();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCellContent, performCreateActiveCell]);
-  useEffect(() => {
-    if (
-      activeCellCoordinates?.column == 'header' ||
-      activeCellCoordinates?.row == 'header'
-    ) {
-      performCreateActiveCell();
-    }
-  }, [activeCellCoordinates, performCreateActiveCell]);
+  }, [activeCellContent, performCreateActiveCell, isActiveHeaderCellChanged]);
 
   const performCreateActiveCell = useCallback(() => {
     const activeCellPlacementElement = spreadsheetRef?.current.querySelector(

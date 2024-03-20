@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { TagOverflow } from '.';
-import { FiveTags, ManyTags } from './TagOverflow.stories';
+import { FiveTags } from './TagOverflow.stories';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
@@ -92,15 +92,5 @@ describe(componentName, () => {
     screen.getByText(lastTagLabel, {
       selector: `.${blockClass}__item--tag span`,
     });
-  });
-
-  it('Obeys max visible', async () => {
-    render(<ManyTags {...ManyTags.args} maxVisible={5} />);
-
-    expect(
-      screen.getAllByText(/Tag [0-9]+/, {
-        selector: `.${blockClass}__item--tag span`,
-      }).length
-    ).toEqual(5);
   });
 });

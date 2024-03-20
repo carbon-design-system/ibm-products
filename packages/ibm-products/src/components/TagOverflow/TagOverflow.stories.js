@@ -12,7 +12,6 @@ import * as CarbonIcons from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 import { UserAvatar } from '../UserAvatar';
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagOverflow } from '.';
 import mdx from './TagOverflow.mdx';
@@ -185,47 +184,41 @@ const Template = (argsIn) => {
  * Declaration of stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const FiveTags = prepareStory(Template, {
-  args: {
-    containerWidth: 250,
-    items: fiveTags,
-  },
-});
+export const FiveTags = Template.bind({});
+FiveTags.args = {
+  containerWidth: 250,
+  items: fiveTags,
+};
 
-export const TagsWithTruncation = prepareStory(Template, {
-  args: {
-    containerWidth: 300,
-    items: longTags,
-  },
-});
+export const TagsWithTruncation = Template.bind({});
+TagsWithTruncation.args = {
+  containerWidth: 300,
+  items: longTags,
+};
 
-export const ManyTags = prepareStory(Template, {
-  args: {
-    containerWidth: 500,
-    items: tags,
-  },
-});
+export const ManyTags = Template.bind({});
+ManyTags.args = {
+  containerWidth: 500,
+  items: tags,
+};
 
-export const UserAvatars = prepareStory(Template, {
-  args: {
-    containerWidth: 250,
-    items: UserAvatarArr,
-    itemTemplate: UserAvatar,
-  },
-});
+export const UserAvatars = Template.bind({});
+UserAvatars.args = {
+  containerWidth: 250,
+  items: UserAvatarArr,
+  itemTemplate: UserAvatar,
+};
 
-export const ManyUserAvatars = prepareStory(Template, {
-  args: {
-    containerWidth: 500,
-    items: ManyUserAvatarArr,
-    itemTemplate: UserAvatar,
-  },
-});
+export const ManyUserAvatars = Template.bind({});
+ManyUserAvatars.args = {
+  containerWidth: 500,
+  items: ManyUserAvatarArr,
+  itemTemplate: UserAvatar,
+};
 
-export const CustomComponent = prepareStory(Template, {
-  args: {
-    containerWidth: 500,
-    items: IconComponentArr,
-    itemTemplate: IconComponent,
-  },
-});
+export const CustomComponent = Template.bind({});
+CustomComponent.args = {
+  containerWidth: 500,
+  items: IconComponentArr,
+  itemTemplate: IconComponent,
+};

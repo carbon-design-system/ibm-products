@@ -155,7 +155,7 @@ export let TagOverflow = React.forwardRef(
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: tagType, ...item };
+        return { type: tagType, label: item.label };
       });
 
       setVisibleItems(visibleItemsArr);
@@ -181,7 +181,7 @@ export let TagOverflow = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {visibleItems?.length &&
+        {!!visibleItems?.length &&
           visibleItems.map((item) => {
             // render custom components
             if (itemTemplate) {

@@ -98,7 +98,6 @@ RowSizeRadioGroup.defaultProps = {
 };
 
 RowSizeRadioGroup.propTypes = {
-  datagridName: PropTypes.string,
   legendText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   rowSizeLabels: PropTypes.object,

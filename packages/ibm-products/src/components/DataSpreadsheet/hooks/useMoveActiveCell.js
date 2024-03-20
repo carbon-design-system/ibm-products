@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 // Moves the placement of the active cell
 export const useMoveActiveCell = ({
@@ -15,9 +15,23 @@ export const useMoveActiveCell = ({
   createActiveCell,
   activeCellContent,
 }) => {
-  //new active cell is created when the activeCellContent changes.
-  // Otherwise new active cell will display the old value ina glance
+  //new active cell is created when the activeCellContent changes or navigate through headers
+  // Otherwise new active cell will display the old value in a glance
   useEffect(() => {
+    performCreateActiveCell();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCellContent, performCreateActiveCell]);
+  useEffect(() => {
+    if (
+      activeCellCoordinates?.column == 'header' ||
+      activeCellCoordinates?.row == 'header'
+    ) {
+      performCreateActiveCell();
+    }
+  }, [activeCellCoordinates, performCreateActiveCell]);
+
+  const performCreateActiveCell = useCallback(() => {
     const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
       `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
     );
@@ -35,6 +49,10 @@ export const useMoveActiveCell = ({
         addToHeader: shouldPlaceActiveCellInHeader,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCellContent]);
+  }, [
+    spreadsheetRef,
+    activeCellCoordinates,
+    containerHasFocus,
+    createActiveCell,
+  ]);
 };

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,6 @@ const RowSizeRadioGroup = forwardRef(
     {
       rowSizes,
       selectedOption,
-      datagridName,
       onChange,
       legendText,
       rowSizeLabels = {
@@ -28,6 +27,7 @@ const RowSizeRadioGroup = forwardRef(
         sm: 'Small',
         xs: 'Extra small',
       },
+      tableId,
     },
     ref
   ) => {
@@ -55,9 +55,7 @@ const RowSizeRadioGroup = forwardRef(
                   key={option.value}
                   labelText={labelText}
                   value={option.value}
-                  id={`${datagridName || 'datagrid'}--row-density--${
-                    option.value
-                  }`}
+                  id={`${tableId || 'datagrid'}--row-density--${option.value}`}
                 />
               );
             })}
@@ -106,6 +104,7 @@ RowSizeRadioGroup.propTypes = {
   rowSizeLabels: PropTypes.object,
   rowSizes: PropTypes.array.isRequired,
   selectedOption: PropTypes.string.isRequired,
+  tableId: PropTypes.string.isRequired,
 };
 
 export default RowSizeRadioGroup;

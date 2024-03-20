@@ -24,8 +24,11 @@ const tagWidth = 60;
 
 describe(componentName, () => {
   const { ResizeObserver } = window;
+  let warn;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -38,6 +41,7 @@ describe(componentName, () => {
 
   afterEach(() => {
     window.ResizeObserver = ResizeObserver;
+    warn.mockRestore();
   });
 
   it('renders a component TagOverflow', async () => {
@@ -93,4 +97,26 @@ describe(componentName, () => {
       selector: `.${blockClass}__item--tag span`,
     });
   });
+
+  it('Obeys max visible', async () => {
+    render(<FiveTags {...FiveTags.args} maxVisible={3} />);
+
+    expect(
+      screen.getAllByText(/Tag [0-9]+/, {
+        selector: `.${blockClass}__item--tag span`,
+      }).length
+    ).toEqual(3);
+  });
+
+  // The below test case is faliing due to ResizeObserver mock
+  // it('Renders only the overflow when very little space', async () => {
+  //   window.innerWidth = tagWidth / 2;
+  //   render(<FiveTags {...FiveTags.args} />);
+
+  //   const visible = screen.queryAllByText(/Tag [1-5]+/, {
+  //     selector: `.${blockClass}__item--tag span`,
+  //   });
+
+  //   expect(visible.length).toEqual(0);
+  // });
 });

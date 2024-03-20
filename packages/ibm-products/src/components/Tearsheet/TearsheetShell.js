@@ -133,8 +133,6 @@ export const TearsheetShell = React.forwardRef(
       }
     }, [tooltipTriggerRef, open]);
 
-    console.log(tooltipText);
-
     // Keep a record of the previous value of depth.
     const prevDepth = useRef();
     useEffect(() => {

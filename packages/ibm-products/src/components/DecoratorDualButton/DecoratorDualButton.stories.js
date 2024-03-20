@@ -7,12 +7,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { DecoratorDualButton } from '.';
 import mdx from './DecoratorDualButton.mdx';
 
@@ -36,7 +30,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: getStoryTitle(DecoratorDualButton.displayName),
+  title: 'IBM Products/Components/Decorators/DecoratorDualButton',
   component: DecoratorDualButton,
   tags: ['autodocs'],
   parameters: {
@@ -111,29 +105,28 @@ const Template = (args) => {
   return <DecoratorDualButton {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'DecoratorDualButton',
-  args: {
-    disabled: false,
-    hideIcon: false,
-    label: 'IP',
-    onClickLabel: (event, values) => action('onClickLabel')(values),
-    onClickValue: (event, values) => action('onClickValue')(values),
-    onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
-    onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
-    score: 5,
-    scoreThresholds: [0, 4, 7, 10],
-    setLabelTitle: (score, scoreThresholds, magnitude) => {
-      if (typeof score !== 'number') {
-        return 'Unknown score';
-      }
-      return `"${magnitude}" magnitude. Score ${score} out of ${
-        scoreThresholds[scoreThresholds.length - 1]
-      }`;
-    },
-    small: false,
-    theme: 'light',
-    value: '192.168.0.50',
-    valueTitle: '',
+export const Default = Template.bind({});
+Default.storyName = 'DecoratorDualButton';
+Default.args = {
+  disabled: false,
+  hideIcon: false,
+  label: 'IP',
+  onClickLabel: (event, values) => action('onClickLabel')(values),
+  onClickValue: (event, values) => action('onClickValue')(values),
+  onContextMenuLabel: (event, values) => action('onContextMenuLabel')(values),
+  onContextMenuValue: (event, values) => action('onContextMenuValue')(values),
+  score: 5,
+  scoreThresholds: [0, 4, 7, 10],
+  setLabelTitle: (score, scoreThresholds, magnitude) => {
+    if (typeof score !== 'number') {
+      return 'Unknown score';
+    }
+    return `"${magnitude}" magnitude. Score ${score} out of ${
+      scoreThresholds[scoreThresholds.length - 1]
+    }`;
   },
-});
+  small: false,
+  theme: 'light',
+  value: '192.168.0.50',
+  valueTitle: '',
+};

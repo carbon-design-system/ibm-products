@@ -7,9 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
-import { getPathForComponent } from '../../../../../core/story-structure';
 import { paramCase } from 'change-case';
 
 export const checkCanaryStatus = (componentName) =>
@@ -17,55 +15,6 @@ export const checkCanaryStatus = (componentName) =>
   pkg.isComponentPublic(componentName, true)
     ? true
     : false;
-
-/**
- * A helper function to return the structured story title for a component.
- * @param {string} componentName The name of the component.
- * @returns The structured story title.
- */
-export const getStoryTitle = (componentName) => {
-  const title =
-    // if the component isn't in the master structure, put it in a lost+found section
-    getPathForComponent('c', componentName) ||
-    `Carbon for IBM Products/Lost + found/${componentName}`;
-
-  return title;
-};
-
-/**
- * A helper function to return the slug (structured path name reduced to lower
- * case text and hyphens) which identifies individual story instances.
- * @param {string} componentName The name of the component.
- * @param {string} scenario The scenario name, also as a slug.
- * @returns The story id.
- */
-export const getStoryId = (componentName, scenario, subdirectory) => {
-  if (subdirectory) {
-    return `${sanitize(getStoryTitle(componentName))}-${sanitize(
-      subdirectory
-    )}--${scenario}`;
-  }
-  return `${sanitize(getStoryTitle(componentName))}--${scenario}`;
-};
-
-/**
- * A helper function to prepare storybook stories for export. This function
- * binds the template, adds the supplied fields, and also inserts a sequence
- * number so that stories can then be sorted into declared order reliably.
- * @param template the story template render function
- * @param options an object containing fields to be added to the bound
- * template, such as `args`, `storyName`, etc.
- * @returns A bound template with the option fields applied.
- */
-let sequence = 0;
-const bindTarget = {};
-export const prepareStory = (template, options) => {
-  const result = Object.assign(template.bind(bindTarget), options);
-  result.parameters ??= {};
-  result.parameters.ccsSettings ??= {};
-  result.parameters.ccsSettings.sequence = sequence++;
-  return result;
-};
 
 /**
  * A helper component that returns a codesandbox link to an example codesandbox for the component.

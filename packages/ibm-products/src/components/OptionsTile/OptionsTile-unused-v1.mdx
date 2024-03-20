@@ -1,6 +1,6 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
 import { OptionsTile } from '.';
+import * as stories from './OptionsTile.stories';
 
 # OptionsTile
 
@@ -26,7 +26,7 @@ set of features with ease.
 ## Example usage
 
 <Canvas>
-  <Story id={getStoryId(OptionsTile.displayName, 'options-tile')} />
+  <Story of={stories.optionsTile} />
 </Canvas>
 
 ## Component API

@@ -9,7 +9,6 @@ import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
 import DocsPage from './ImportModal.docs-page';
 // import mdx from './ImportModal.mdx';
@@ -87,9 +86,8 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = prepareStory(TemplateWithState, {
-  args: {
-    accept: 0,
-    ...defaultProps,
-  },
-});
+export const Standard = TemplateWithState.bind({});
+Standard.args = {
+  accept: 0,
+  ...defaultProps,
+};

@@ -22,9 +22,6 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { EditSidePanel } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -218,26 +215,25 @@ const Template = ({ slug, ...args }) => {
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
 
-export const editSidePanel = prepareStory(Template, {
-  args: {
-    actionToolbarButtons: [
-      {
-        label: 'Copy platform id',
-        icon: (props) => <Copy size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Copy'),
-      },
-      {
-        label: 'Settings',
-        icon: (props) => <Settings size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Settings'),
-      },
-      {
-        label: 'Delete',
-        icon: (props) => <TrashCan size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Delete'),
-      },
-    ],
-    includeOverlay: true,
-    ...defaultStoryProps,
-  },
-});
+export const editSidePanel = Template.bind({});
+editSidePanel.args = {
+  actionToolbarButtons: [
+    {
+      label: 'Copy platform id',
+      icon: (props) => <Copy size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Copy'),
+    },
+    {
+      label: 'Settings',
+      icon: (props) => <Settings size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Settings'),
+    },
+    {
+      label: 'Delete',
+      icon: (props) => <TrashCan size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Delete'),
+    },
+  ],
+  includeOverlay: true,
+  ...defaultStoryProps,
+};

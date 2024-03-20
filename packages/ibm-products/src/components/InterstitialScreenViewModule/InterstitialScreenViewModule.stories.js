@@ -6,21 +6,14 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { InterstitialScreenViewModule } from '.';
 import mdx from './InterstitialScreenViewModule.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(InterstitialScreenViewModule.displayName),
+  title:
+    'IBM Products/Novice to pro/Interstitial screen/InterstitialScreenViewModule',
   component: InterstitialScreenViewModule,
   tags: ['autodocs'],
   argTypes: {
@@ -65,11 +58,10 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const interstitialScreenViewModule = prepareStory(Template, {
-  args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreenViewModule-args
-    className: 'MyInterstitialScreenViewModule',
-    title: 'Example title',
-    description: 'This is an example of a description',
-  },
-});
+export const interstitialScreenViewModule = Template.bind({});
+interstitialScreenViewModule.args = {
+  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreenViewModule-args
+  className: 'MyInterstitialScreenViewModule',
+  title: 'Example title',
+  description: 'This is an example of a description',
+};

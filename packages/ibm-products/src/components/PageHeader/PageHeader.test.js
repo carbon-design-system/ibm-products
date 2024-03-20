@@ -200,11 +200,13 @@ describe('PageHeader', () => {
   const { ResizeObserver, scrollTo } = window;
   let mockElement;
   const mocks = [];
+  let warn;
 
   window.innerWidth = 2000;
   window.innerHeight = 1080;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     mockElement = mockHTMLElement({
       offsetWidth: {
         get: function () {
@@ -247,6 +249,7 @@ describe('PageHeader', () => {
     mockElement.mockRestore();
     window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
+    warn.mockRestore();
   });
 
   it('renders an empty header when no props are set', async () => {

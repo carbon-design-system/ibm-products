@@ -7,8 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { Carousel } from '.';
 import styles from './_storybook-styles.scss';
 import DocsPage from './Carousel.docs-page';
@@ -29,13 +27,12 @@ const Template = (args) => {
   return <Carousel {...args} />;
 };
 
-export const carousel = prepareStory(Template, {
-  args: {
-    children: (
-      <>
-        Carousel is a <em>Novice to Pro</em> internal component and is not
-        intended for general use.
-      </>
-    ),
-  },
-});
+export const carousel = Template.bind({});
+carousel.args = {
+  children: (
+    <>
+      Carousel is a <em>Novice to Pro</em> internal component and is not
+      intended for general use.
+    </>
+  ),
+};

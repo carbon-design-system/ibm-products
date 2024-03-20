@@ -8,9 +8,6 @@
 import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 import { ActionableNotification } from '@carbon/react';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { ComboButton, ComboButtonItem } from '..';
 
 // import styles from './_combo-button.scss';
@@ -55,4 +52,4 @@ const Template = (args) => (
   </>
 );
 
-export const Default = prepareStory(Template, {});
+export const Default = Template.bind({});

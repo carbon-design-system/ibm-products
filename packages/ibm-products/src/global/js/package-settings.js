@@ -75,6 +75,7 @@ const defaults = {
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,
+    ActionBar: false,
 
     /* new component flags here - comment used by generate CLI */
 

@@ -1,19 +1,28 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 
 const componentName = 'CreateTearsheetDivider';
 const blockClass = `${pkg.prefix}--tearsheet-create__section--divider`;
+
+interface CreateTearsheetDividerProps {
+  /** Specifies an optional className to be added to the tearsheet divider */
+  className?: string;
+}
+
 export let CreateTearsheetDivider = forwardRef(
-  ({ className, ...rest }, ref) => {
+  (
+    { className, ...rest }: PropsWithChildren<CreateTearsheetDividerProps>,
+    ref: React.Ref<HTMLDivElement>
+  ) => {
     return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
   }
 );
@@ -26,7 +35,7 @@ CreateTearsheetDivider = pkg.checkComponentEnabled(
 
 CreateTearsheetDivider.propTypes = {
   /**
-   * Sets an optional className to be added to the tearsheet step
+   * Sets an optional className to be added to the tearsheet divider
    */
   className: PropTypes.string,
 };

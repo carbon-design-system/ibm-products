@@ -108,8 +108,6 @@ export let DataSpreadsheet = React.forwardRef(
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
     const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
-    const [isActiveHeaderCellChanged, setIsActiveHeaderCellChanged] =
-      useState(null);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
     const previousState = usePreviousValue({
@@ -224,7 +222,6 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.column === 'header'
         ) {
           setActiveCellContent(null);
-          setIsActiveHeaderCellChanged((prev) => !prev);
         }
       }
     }, [
@@ -246,7 +243,6 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellValue = activeCellFullData
           ? Object.values(activeCellFullData.row.values)[coords?.column]
           : null;
-        //commenting below code as currently we are listening to the change of activeContent
         //instead of activeCoordinates and so prev cords would have been updated to current one.
         // Only create an active cell if the activeCellCoordinates have changed
         // if (
@@ -292,7 +288,6 @@ export let DataSpreadsheet = React.forwardRef(
       containerHasFocus,
       createActiveCell,
       activeCellContent,
-      isActiveHeaderCellChanged,
     });
 
     const handleInitialArrowPress = useCallback(() => {

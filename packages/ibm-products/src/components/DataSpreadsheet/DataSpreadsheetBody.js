@@ -70,6 +70,7 @@ export const DataSpreadsheetBody = forwardRef(
   ) => {
     const [validStartingPoint, setValidStartingPoint] = useState(false);
     const contentScrollRef = useRef();
+
     const previousState = usePreviousValue({
       selectionAreaData,
       clickAndHoldActive,
@@ -264,6 +265,47 @@ export const DataSpreadsheetBody = forwardRef(
       setSelectionAreas,
       visibleColumns,
     ]);
+    //selectionAreas will be set when ever a selection area is made.
+    useEffect(() => {
+      removeDuplicateSelections();
+    }, [selectionAreas, removeDuplicateSelections]);
+
+    //this method will check for any duplicate selection area and remove.
+    //same selections are those have the same height, width, top, left styles. These inline styles are being set in createCellSelection util.
+    const removeDuplicateSelections = useCallback(() => {
+      let uniqueAttrArray = [],
+        removedSelectionAreaMatcherArr = [];
+      ref.current
+        .querySelectorAll(`.${blockClass}__selection-area--element`)
+        .forEach((selectorEl) => {
+          let { top, left, height, width } = selectorEl.style;
+          let uniqueAttrStr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
+          if (uniqueAttrArray.indexOf(uniqueAttrStr) == -1) {
+            uniqueAttrArray.push(uniqueAttrStr);
+          } else {
+            selectorEl.remove(); // this is identified as duplicate selection and hence removing.
+            removedSelectionAreaMatcherArr.push(
+              selectorEl.getAttribute('data-matcher-id')
+            );
+          }
+        });
+
+      //clean the duplicate selectionAreaData and selectionArea
+      if (removedSelectionAreaMatcherArr.length) {
+        setSelectionAreas((prev) => {
+          const prevValues = deepCloneObject(prev);
+          return prevValues.filter(
+            (item) => !removedSelectionAreaMatcherArr.includes(item.matcher)
+          );
+        });
+        setSelectionAreaData((prev) => {
+          const prevValues = deepCloneObject(prev);
+          return prevValues.filter(
+            (item) => !removedSelectionAreaMatcherArr.includes(item.selectionId)
+          );
+        });
+      }
+    }, [ref, setSelectionAreas, setSelectionAreaData]);
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight
@@ -377,6 +419,7 @@ export const DataSpreadsheetBody = forwardRef(
               row: cell.row.index,
               column: columnIndex,
             };
+
             setSelectionAreas((prev) => {
               const selectionAreaClone = deepCloneObject(prev);
               const indexOfItemToUpdate = selectionAreaClone.findIndex(

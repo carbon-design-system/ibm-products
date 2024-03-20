@@ -370,7 +370,7 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open) {
         setTimeout(() => {
-          const primeFocusEl = document.querySelector(selectorPrimaryFocus);
+          const primeFocusEl = document?.querySelector(selectorPrimaryFocus);
 
           if (selectorPrimaryFocus && primeFocusEl) {
             primeFocusEl.focus();

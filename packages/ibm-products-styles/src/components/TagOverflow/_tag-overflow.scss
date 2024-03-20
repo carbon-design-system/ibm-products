@@ -23,7 +23,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
 
 .#{$block-class} {
   display: flex;
+  overflow: hidden;
   width: 100%;
+  min-width: $spacing-12;
   align-items: center;
   white-space: nowrap;
 }

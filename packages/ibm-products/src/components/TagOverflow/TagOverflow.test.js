@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { TagOverflow } from '.';
+import { FiveTags, ManyTags } from './TagOverflow.stories';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
@@ -19,8 +20,8 @@ const componentName = TagOverflow.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const tagWidth = 60;
 
-// TODO: add test cases
 describe(componentName, () => {
   const { ResizeObserver } = window;
 
@@ -72,5 +73,34 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('Renders all as visible tags when space available', async () => {
+    const tagCount = FiveTags.args.items.length;
+    window.innerWidth = tagWidth * tagCount + 40;
+
+    render(<FiveTags {...FiveTags.args} />);
+
+    const firstTagLabel = FiveTags.args.items[0].label;
+    const lastTagLabel = FiveTags.args.items[tagCount - 1].label;
+
+    // first and last should be visible
+    screen.getByText(firstTagLabel, {
+      selector: `.${blockClass}__item--tag span`,
+    });
+
+    screen.getByText(lastTagLabel, {
+      selector: `.${blockClass}__item--tag span`,
+    });
+  });
+
+  it('Obeys max visible', async () => {
+    render(<ManyTags {...ManyTags.args} maxVisible={5} />);
+
+    expect(
+      screen.getAllByText(/Tag [0-9]+/, {
+        selector: `.${blockClass}__item--tag span`,
+      }).length
+    ).toEqual(5);
   });
 });

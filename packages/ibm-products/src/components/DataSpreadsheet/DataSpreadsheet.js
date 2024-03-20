@@ -243,33 +243,31 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellValue = activeCellFullData
           ? Object.values(activeCellFullData.row.values)[coords?.column]
           : null;
-        const prevCoords = previousState?.activeCellCoordinates;
+        //commenting below code as currently we are listening to the change of activeContent
+        //instead of activeCoordinates and so prev cords would have been updated to current one.
+
         // Only create an active cell if the activeCellCoordinates have changed
-        if (
-          prevCoords?.row !== coords?.row ||
-          prevCoords?.column !== coords?.column
-        ) {
-          createActiveCellFn({
-            placementElement,
-            coords,
-            addToHeader,
-            contextRef: spreadsheetRef,
-            blockClass,
-            onActiveCellChange,
-            activeCellValue,
-            activeCellRef,
-            cellEditorRef,
-            defaultColumn,
-          });
-        }
+
+        //  if (
+        //     prevCoords?.row !== coords?.row ||
+        //     prevCoords?.column !== coords?.column
+        //   ) {
+
+        createActiveCellFn({
+          placementElement,
+          coords,
+          addToHeader,
+          contextRef: spreadsheetRef,
+          blockClass,
+          onActiveCellChange,
+          activeCellValue,
+          activeCellRef,
+          cellEditorRef,
+          defaultColumn,
+        });
+        //  }
       },
-      [
-        spreadsheetRef,
-        rows,
-        onActiveCellChange,
-        previousState?.activeCellCoordinates,
-        defaultColumn,
-      ]
+      [spreadsheetRef, rows, onActiveCellChange, defaultColumn]
     );
 
     useResetSpreadsheetFocus({
@@ -293,6 +291,7 @@ export let DataSpreadsheet = React.forwardRef(
       activeCellCoordinates,
       containerHasFocus,
       createActiveCell,
+      activeCellContent,
     });
 
     const handleInitialArrowPress = useCallback(() => {
@@ -859,6 +858,7 @@ export let DataSpreadsheet = React.forwardRef(
 
           {/* BODY */}
           <DataSpreadsheetBody
+            activeCellRef={activeCellRef}
             activeCellCoordinates={activeCellCoordinates}
             ref={spreadsheetRef}
             clickAndHoldActive={clickAndHoldActive}

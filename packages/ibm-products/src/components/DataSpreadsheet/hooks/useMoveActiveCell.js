@@ -13,7 +13,10 @@ export const useMoveActiveCell = ({
   activeCellCoordinates,
   containerHasFocus,
   createActiveCell,
+  activeCellContent,
 }) => {
+  //new active cell is created when the activeCellContent changes.
+  // Otherwise new active cell will display the old value ina glance
   useEffect(() => {
     const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
       `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
@@ -32,10 +35,6 @@ export const useMoveActiveCell = ({
         addToHeader: shouldPlaceActiveCellInHeader,
       });
     }
-  }, [
-    activeCellCoordinates,
-    spreadsheetRef,
-    createActiveCell,
-    containerHasFocus,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeCellContent]);
 };

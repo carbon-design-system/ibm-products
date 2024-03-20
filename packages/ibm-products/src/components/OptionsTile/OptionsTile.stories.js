@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { action } from '@storybook/addon-actions';
+import React, { useState } from 'react';
 import { Dropdown, FormGroup } from '@carbon/react';
 import { OptionsTile } from '.';
 // import mdx from './OptionsTile.mdx';
@@ -23,6 +22,7 @@ export default {
 };
 
 const Template = (args) => {
+  const { expandable, ...props } = args;
   // spell-checker:disable
   const languages = [
     { label: 'English', id: 'en' },
@@ -65,65 +65,75 @@ const Template = (args) => {
     { label: 'Turkish', id: 'tr' },
   ];
 
+  const [open, setOpen] = useState(false);
+  const [toggled, setToggled] = useState(false);
+
+  const openHandler = (open) => {
+    setOpen(open);
+  };
+
   const toggleHandler = (toggled) => {
-    action('onToggle', toggled);
+    setToggled(toggled);
   };
 
   return (
-    <OptionsTile {...args} onToggle={toggleHandler}>
-      <FormGroup>
-        <p>
-          User interface defines the language the application is displayed in.
-          Locale sets the regional display formats for information like time,
-          date, currency and decimal delimiters.
-        </p>
-        <Dropdown
-          id="language"
-          titleText="User interface"
-          label="User interface"
-          items={languages}
-          initialSelectedItem={languages[0]}
-          invalidText="Non-latin languages are not supported by system"
-          warnText="A language change requires a restart of the application"
-        />
-        <Dropdown
-          id="locale"
-          titleText="Locale"
-          label="Locale"
-          items={locales}
-          initialSelectedItem={locales[0]}
-        />
-      </FormGroup>
+    <OptionsTile
+      {...props}
+      open={open}
+      onChange={openHandler}
+      toggled={toggled}
+      onToggle={toggleHandler}
+    >
+      {expandable && (
+        <FormGroup>
+          <p>
+            User interface defines the language the application is displayed in.
+            Locale sets the regional display formats for information like time,
+            date, currency and decimal delimiters.
+          </p>
+          <Dropdown
+            id="language"
+            titleText="User interface"
+            label="User interface"
+            items={languages}
+            initialSelectedItem={languages[0]}
+            invalidText="Non-latin languages are not supported by system"
+            warnText="A language change requires a restart of the application"
+          />
+          <Dropdown
+            id="locale"
+            titleText="Locale"
+            label="Locale"
+            items={locales}
+            initialSelectedItem={locales[0]}
+          />
+        </FormGroup>
+      )}
     </OptionsTile>
   );
 };
 
 const defaultProps = {
   className: 'optional-class',
-  defaultOpen: false,
-  defaultToggled: false,
   id: 'optional-id',
   invalid: false,
   invalidText: 'Your system does not support this configuration',
   locked: false,
   lockedText: 'This option is managed by your administrator',
-  onToggle: () => {},
   size: 'xl',
   summary: 'English | Locale: English',
   title: 'Language',
-  toggle: false,
   warn: false,
   warnText: 'A restart is required to apply these settings',
 };
 
 export const optionsTile = Template.bind({});
-optionsTile.args = { ...defaultProps };
-
-const StaticTemplate = (args) => {
-  return <OptionsTile {...args} />;
+optionsTile.args = {
+  ...defaultProps,
+  expandable: true,
 };
 
-export const staticOptionsTile = StaticTemplate.bind({});
+export const staticOptionsTile = Template.bind({});
 staticOptionsTile.args = {
   ...defaultProps,
   defaultToggled: true,

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -18,6 +18,8 @@ import {
   WarningFilled,
 } from '@carbon/react/icons';
 // import * as carbonMotion from '@carbon/motion';
+
+import { useControllableState } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
@@ -34,31 +36,33 @@ export let OptionsTile = React.forwardRef(
       invalidText,
       locked,
       lockedText,
+      onChange,
       onToggle,
+      open: openProp,
       size = 'xl',
       summary,
       title,
       toggle,
+      toggled: toggledProp,
       warn,
       warnText,
       ...rest
     },
     ref
   ) => {
-    const [toggled, setToggled] = useState(false);
+    const [toggled, setToggled] = useControllableState({
+      controlled: toggledProp,
+      default: defaultToggled,
+      name: componentName,
+      state: 'toggled',
+    });
 
-    useEffect(() => {
-      if (defaultToggled) {
-        setToggled(true);
-      }
-    }, [defaultToggled]);
-
-    const handleToggle = (toggled) => {
-      setToggled(toggled);
-      if (onToggle) {
-        onToggle(toggled);
-      }
-    };
+    const [open, setOpen] = useControllableState({
+      controlled: openProp,
+      default: defaultOpen,
+      name: componentName,
+      state: 'open',
+    });
 
     const getIcon = () => {
       if (locked) {
@@ -108,6 +112,22 @@ export let OptionsTile = React.forwardRef(
       );
     };
 
+    const handleToggle = () => {
+      setToggled(!toggled);
+
+      if (onToggle) {
+        onToggle(!toggled);
+      }
+    };
+
+    const handleChange = () => {
+      setOpen(!open);
+
+      if (onChange) {
+        onChange(!open);
+      }
+    };
+
     return (
       <div
         {...rest}
@@ -130,7 +150,7 @@ export let OptionsTile = React.forwardRef(
           </div>
         )}
         {children ? (
-          <details open={defaultOpen}>
+          <details open={open} onToggle={handleChange}>
             <summary className={`${blockClass}__header`}>
               <ChevronDown size={16} className={`${blockClass}__chevron`} />
               {renderTitle()}
@@ -195,10 +215,12 @@ OptionsTile.propTypes = {
    * Provide a text explaining why the OptionsTile is in locked state.
    */
   lockedText: PropTypes.string,
+  onChange: PropTypes.func,
   /**
    * Callback function for the built Carbon toggle element.
    */
   onToggle: PropTypes.func,
+  open: PropTypes.bool,
   /**
    * Define the size of the OptionsTile.
    */
@@ -215,6 +237,7 @@ OptionsTile.propTypes = {
    * Designates if the toggle is displayed
    */
   toggle: PropTypes.bool,
+  toggled: PropTypes.bool,
   /**
    * Whether the OptionsTile is in warning validation state.
    */

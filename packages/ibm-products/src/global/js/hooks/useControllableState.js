@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import pconsole from '../utils/pconsole';
 
 /**
@@ -19,61 +19,38 @@ import pconsole from '../utils/pconsole';
  * uncontrolled, or vice-versa.
  *
  * @param {object} config
- * @param {string} config.name - the name of the custom component
- * @param {any} config.defaultValue - the default value used for the state. This will be
- * the fallback value used if `value` is not defined.
- * @param {Function} config.onChange - an optional function that is called when
- * the value of the state changes. This is useful for communicating to parents of
- * controlled components that the value is requesting to be changed.
- * @param {any} config.value - a controlled value. Omitting this means that the state is
- * uncontrolled
+ * @param {string} config.name - component name
+ * @param {any} config.default - the default value used for the state. This will be the fallback value used if `value` is not defined.
+ * @param {Function} config.controlled - the controlled value
+ * @param {any} config.state - name of the state variable
  * @returns {[any, Function]}
  */
 export function useControllableState({
-  defaultValue,
-  name = 'custom',
-  onChange,
-  value,
+  controlled,
+  default: defaultProp,
+  name,
+  state = 'value',
 }) {
-  const [state, internalSetState] = useState(value ?? defaultValue);
-  const controlled = useRef(null);
-
-  if (controlled.current === null) {
-    controlled.current = value !== undefined;
-  }
-
-  function setState(stateOrUpdater) {
-    const value =
-      typeof stateOrUpdater === 'function'
-        ? stateOrUpdater(state)
-        : stateOrUpdater;
-
-    if (controlled.current === false) {
-      internalSetState(value);
-    }
-
-    if (onChange) {
-      onChange(value);
-    }
-  }
+  const { current: isControlled } = useRef(controlled !== undefined);
+  const [valueState, setValue] = useState(defaultProp);
+  const value = isControlled ? controlled : valueState;
 
   useEffect(() => {
-    const controlledValue = value !== undefined;
-    // Uncontrolled -> Controlled
-    // If the component prop is uncontrolled, the prop value should be undefined
-    if (controlled.current === false && controlledValue) {
+    if (isControlled !== (controlled !== undefined)) {
       pconsole.warn(
         `A component is changing an uncontrolled %s component to be controlled.
-          This is likely caused by the value changing to a defined value
-          from undefined. Decide between using a controlled or uncontrolled
-          value for the lifetime of the component.
-          More info: https://reactjs.org/link/controlled-components`
+        This is likely caused by the value changing to a defined value
+        from undefined. Decide between using a controlled or uncontrolled
+        value for the lifetime of the component.
+        More info: https://reactjs.org/link/controlled-components`
       );
     }
+  }, [state, name, controlled, isControlled]);
 
-    // Controlled -> Uncontrolled
-    // If the component prop is controlled, the prop value should be defined
-    if (controlled.current === true && !controlledValue) {
+  const { current: defaultValue } = useRef(defaultProp);
+
+  useEffect(() => {
+    if (!isControlled && defaultValue !== defaultProp) {
       pconsole.warn(
         `A component is changing a controlled %s component to be uncontrolled.
         'This is likely caused by the value changing to an undefined value
@@ -82,11 +59,16 @@ export function useControllableState({
         'More info: https://reactjs.org/link/controlled-components`
       );
     }
-  }, [name, value]);
+  }, [defaultProp, defaultValue, isControlled]);
 
-  if (controlled.current === true) {
-    return [value, setState];
-  }
+  const setUncontrolledValue = useCallback(
+    (newValue) => {
+      if (!isControlled) {
+        setValue(newValue);
+      }
+    },
+    [isControlled]
+  );
 
-  return [state, setState];
+  return [value, setUncontrolledValue];
 }

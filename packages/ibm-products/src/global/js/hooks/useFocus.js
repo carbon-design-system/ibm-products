@@ -30,7 +30,13 @@ export const useFocus = (modalRef) => {
 
   const getFocusable = useCallback(() => {
     // Selecting all focusable elements based on the above conditions
-    const focusableElements = modalEl?.querySelectorAll(`${query}`);
+    let focusableElements = modalEl?.querySelectorAll(`${query}`);
+    if (focusableElements?.length) {
+      focusableElements = Array.prototype.filter.call(
+        focusableElements,
+        (el) => window?.getComputedStyle(el)?.display !== 'none'
+      );
+    }
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;

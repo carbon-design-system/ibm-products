@@ -445,6 +445,8 @@ describe('SidePanel', () => {
     fireEvent.animationStart(outerElement);
     fireEvent.animationEnd(outerElement);
     const inputElement = container.querySelector(`#test-input`);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     expect(inputElement).toHaveFocus();
   });
 
@@ -458,6 +460,8 @@ describe('SidePanel', () => {
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     expect(closeIconButton).toHaveFocus();
   });
 

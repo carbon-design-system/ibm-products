@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Link as CarbonLink } from '@carbon/react';
-import {
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
@@ -151,15 +148,14 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkStack = prepareStory(Template, {
-  args: {
-    className: 'myCoachmarkStack',
-    closeButtonLabel: 'Close',
-    description: 'This is an example of a description',
-    title: 'Example title',
-    navLinkLabels: ['Example 1', 'Example 2', 'Example 3'],
-    onClose: () => console.log('CLOSE'),
-    tagline: 'Why are there two types of severity scores?',
-    portalTarget: '#root:not([hidden="true"]) .preview-position-fix',
-  },
-});
+export const coachmarkStack = Template.bind({});
+coachmarkStack.args = {
+  className: 'myCoachmarkStack',
+  closeButtonLabel: 'Close',
+  description: 'This is an example of a description',
+  title: 'Example title',
+  navLinkLabels: ['Example 1', 'Example 2', 'Example 3'],
+  onClose: () => console.log('CLOSE'),
+  tagline: 'Why are there two types of severity scores?',
+  portalTarget: '#root:not([hidden="true"]) .preview-position-fix',
+};

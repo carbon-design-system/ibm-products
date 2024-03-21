@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.31.1...@carbon/ibm-products@2.32.0) (2024-03-19)
+
+
+### Bug Fixes
+
+* filterable column counts ([#4573](https://github.com/carbon-design-system/ibm-products/issues/4573)) ([db82cc7](https://github.com/carbon-design-system/ibm-products/commit/db82cc7d783d50cf2e5067e41d1a89a5ad95364d))
+* removed redundant role from Link ([#4568](https://github.com/carbon-design-system/ibm-products/issues/4568)) ([8d531e7](https://github.com/carbon-design-system/ibm-products/commit/8d531e728ddc45b798844bc1da77d6d2daaf291b))
+
+
+### Features
+
+* remove prepareStory ([#4561](https://github.com/carbon-design-system/ibm-products/issues/4561)) ([f74626f](https://github.com/carbon-design-system/ibm-products/commit/f74626fe813f18fbcf8203111b9ae2e131176b07))
+
+
+
+
+
 ## [2.31.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.31.0...@carbon/ibm-products@2.31.1) (2024-03-14)
 
 

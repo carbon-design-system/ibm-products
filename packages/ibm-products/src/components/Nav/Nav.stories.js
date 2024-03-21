@@ -9,9 +9,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import Nav from './Nav';
 import NavItem from './NavItem';
 import NavList from './NavList';
@@ -79,12 +76,11 @@ const Template = (args) => {
   );
 };
 
-export const nav = prepareStory(Template, {
-  storyName: 'Default',
-  args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Nav-args
-    label: 'Navigation',
-    heading: 'Nav example',
-    activeHref: '#',
-  },
-});
+export const nav = Template.bind({});
+nav.storyName = 'Default';
+nav.args = {
+  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Nav-args
+  label: 'Navigation',
+  heading: 'Nav example',
+  activeHref: '#',
+};

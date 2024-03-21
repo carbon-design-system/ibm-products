@@ -1,8 +1,5 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Decorator } from '.';
 import * as DecoratorStories from './Decorator.stories';
 
@@ -28,15 +25,8 @@ interactive.
 
 ## Example **setLabelTitle()**
 
-```js
-setLabelTitle: (score, scoreThresholds, magnitude) => {
-  if (typeof score !== 'number') {
-    return 'Unknown score';
-  }
-  return `"${magnitude}" magnitude. Score ${score} out of ${
-    scoreThresholds[scoreThresholds.length - 1]
-  }`;
-},
+```jsx
+<Decorator label="IP" score={5} value="192.168.0.50" />
 ```
 
 ## Component API

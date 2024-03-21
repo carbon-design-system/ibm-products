@@ -9,7 +9,6 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
@@ -63,11 +62,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    buttons,
-    buttonSetOverflowLabel,
-    containerWidth: 600,
-    rightAlign: false,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  buttons,
+  buttonSetOverflowLabel,
+  containerWidth: 600,
+  rightAlign: false,
+};

@@ -7,7 +7,6 @@
 
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
 import { Button } from '@carbon/react';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
@@ -261,50 +260,46 @@ const Template = (args, context) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    items: 1,
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  items: 1,
+  ...defaultProps,
+};
 
-export const WithHierarchy = prepareStory(Template, {
-  args: {
-    items: 2,
-    ...defaultProps,
-    globalFilters: [
-      {
-        id: 'fileType',
-        label: 'File type',
-      },
-      {
-        id: 'size',
-        label: 'Size',
-      },
-      {
-        id: 'tag',
-        label: 'Tag',
-      },
-    ],
-    globalFiltersIconDescription: 'Filter',
-    globalFiltersLabel: 'Filters',
-    globalFiltersPlaceholderText: 'Choose an option',
-    globalFiltersPrimaryButtonText: 'Apply',
-    globalFiltersSecondaryButtonText: 'Reset',
-    globalSortBy: ['title'],
-  },
-});
+export const WithHierarchy = Template.bind({});
+WithHierarchy.args = {
+  items: 2,
+  ...defaultProps,
+  globalFilters: [
+    {
+      id: 'fileType',
+      label: 'File type',
+    },
+    {
+      id: 'size',
+      label: 'Size',
+    },
+    {
+      id: 'tag',
+      label: 'Tag',
+    },
+  ],
+  globalFiltersIconDescription: 'Filter',
+  globalFiltersLabel: 'Filters',
+  globalFiltersPlaceholderText: 'Choose an option',
+  globalFiltersPrimaryButtonText: 'Apply',
+  globalFiltersSecondaryButtonText: 'Reset',
+  globalSortBy: ['title'],
+};
 
-export const WithModifiers = prepareStory(Template, {
-  args: {
-    items: 3,
-    ...defaultProps,
-  },
-});
+export const WithModifiers = Template.bind({});
+WithModifiers.args = {
+  items: 3,
+  ...defaultProps,
+};
 
-export const WithAvatars = prepareStory(Template, {
-  args: {
-    items: 4,
-    ...defaultProps,
-  },
-});
+export const WithAvatars = Template.bind({});
+WithAvatars.args = {
+  items: 4,
+  ...defaultProps,
+};

@@ -7,8 +7,6 @@
 
 import React from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { SteppedAnimatedMedia } from '.';
 
 import {
@@ -54,10 +52,9 @@ const Template = (args) => {
   );
 };
 
-export const steppedAnimatedMedia = prepareStory(Template, {
-  args: {
-    className: `${storyClass}__stepped-animated-media`,
-    filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
-    playStep: 0,
-  },
-});
+export const steppedAnimatedMedia = Template.bind({});
+steppedAnimatedMedia.args = {
+  className: `${storyClass}__stepped-animated-media`,
+  filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
+  playStep: 0,
+};

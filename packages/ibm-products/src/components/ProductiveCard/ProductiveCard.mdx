@@ -1,11 +1,9 @@
-<!-- `position:fixed` cause rendering issues, so do not render the modal -->
+{/* <!-- `position:fixed` cause rendering issues, so do not render the modal --> */}
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { ProductiveCard } from '.';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './ProductiveCard.stories';
 
 # ProductiveCard
 
@@ -19,7 +17,7 @@ match. For information on each implementation please refer to the
 [usage guidelines](https://pages.github.ibm.com/cdai-design/pal/components/card/overview).
 
 <Canvas>
-  <Story id={getStoryId(ProductiveCard.displayName, 'default')} />
+  <Story of={stories.Default} />
 </Canvas>
 
 ## Code sample

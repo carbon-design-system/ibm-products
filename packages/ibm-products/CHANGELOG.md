@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.72.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.1...@carbon/ibm-products@1.72.2) (2024-03-19)
+
+
+### Bug Fixes
+
+* remove sorting in custom column tearsheet ([#4549](https://github.com/carbon-design-system/ibm-products/issues/4549)) ([5db19f2](https://github.com/carbon-design-system/ibm-products/commit/5db19f293ead6ffd99cb902b02f4ddde7f1aac9b))
+
+
+
+
+
 ## [1.72.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.0...@carbon/ibm-products@1.72.1) (2024-03-12)
 
 

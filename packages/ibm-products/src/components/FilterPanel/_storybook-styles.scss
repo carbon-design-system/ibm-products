@@ -11,6 +11,7 @@
 @use '../../../../ibm-products-styles/src/global/styles/project-settings' as
   c4p-settings;
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
+$carbon: #{c4p-settings.$carbon-prefix}--filter-panel;
 
 .filter-panel-stories__viewport {
   width: 16rem;
@@ -20,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
 // How and where to override the OverflowMenu's default
 // "auto-width" size calculation.
 // 14rem is the size of this FilterPanel's demo width.
-.#{c4p-settings.$carbon-prefix}--overflow-menu-options {
+.#{$carbon}--overflow-menu-options {
   inline-size: 14rem !important;
 }
-.#{c4p-settings.$carbon-prefix}--overflow-menu-options__option,
-.#{c4p-settings.$carbon-prefix}--overflow-menu-options__btn {
+.#{$carbon}--overflow-menu-options__option,
+.#{$carbon}--overflow-menu-options__btn {
   width: 100% !important;
   max-inline-size: none !important;
 }

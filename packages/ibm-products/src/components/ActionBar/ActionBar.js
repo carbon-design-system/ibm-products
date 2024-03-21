@@ -25,6 +25,11 @@ import { ActionBarOverflowItems } from './ActionBarOverflowItems';
 const blockClass = `${pkg.prefix}--action-bar`;
 const componentName = 'ActionBar';
 
+// Default values for props
+const defaults = {
+  actions: Object.freeze([]),
+};
+
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
@@ -35,7 +40,7 @@ export let ActionBar = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
 
-      actions,
+      actions = defaults.actions,
       className,
       maxVisible,
       menuOptionsClass,

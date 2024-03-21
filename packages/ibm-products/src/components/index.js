@@ -115,3 +115,8 @@ export { Nav } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { StatusIndicator } from './StatusIndicator';
+export {
+  FilterPanel,
+  FilterPanelCheckbox,
+  FilterPanelLabel,
+} from './FilterPanel';

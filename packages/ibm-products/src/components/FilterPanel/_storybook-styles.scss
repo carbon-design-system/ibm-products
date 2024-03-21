@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-token-use */
+
+@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+
+// TODO: add any additional styles used by FilterPanel.stories.js
+.filter-panel-stories__viewport {
+  // outline: 1px dashed #9cf; // TODO: DELETE ME
+  width: 16rem;
+  padding: 1rem;
+}

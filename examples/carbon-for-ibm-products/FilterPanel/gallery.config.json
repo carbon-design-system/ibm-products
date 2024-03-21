@@ -1,0 +1,12 @@
+{
+  "label": "Filter-Panel",
+  "package-config": {
+    "flags": {
+      "component": {
+        "FilterPanel": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

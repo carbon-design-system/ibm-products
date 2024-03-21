@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox-with-overflow;
+$carbon: #{c4p-settings.$carbon-prefix};
+
+// BUG FIX: hide small (unrelated?) rectangle that appears when showing
+// the OverflowMenu, but doesn't seem to belong or serve a function.
+html
+  .#{$carbon}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+    .#{$carbon}--breadcrumb-menu-options
+  )::after {
+  inline-size: 0;
+}
+
+.#{$block-class} {
+  position: relative;
+}
+.#{$block-class}--open,
+.#{$block-class}:hover,
+.#{$block-class}:focus-within {
+  background-color: $field;
+}
+
+// Position the menu button via its wrapper, not the button itself.
+.#{$block-class} .#{$carbon}--overflow-menu__wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+// Size the menu button.
+.#{$block-class} .#{$block-class}__overflow-button {
+  width: to-rem(23px);
+  height: to-rem(23px);
+  background-color: $field;
+  block-size: to-rem(23px);
+  min-block-size: to-rem(23px);
+}
+
+// OverflowMenu <li>
+.#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__option {
+  height: $spacing-06;
+}
+// OverflowMenu <button>
+.#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__btn {
+  max-width: none;
+  justify-content: flex-end;
+}

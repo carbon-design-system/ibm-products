@@ -18,6 +18,7 @@ const componentName = FilterPanelCheckbox.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
+const count = 5;
 const dataTestId = uuidv4();
 const id = uuidv4();
 const labelText = `hello, world (${uuidv4()})`;
@@ -42,6 +43,14 @@ describe(componentName, () => {
     expect(container.querySelector(`.${blockClass}`)).toBeInTheDocument();
     // Test checkbox exists.
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
+
+  it('renders a count', async () => {
+    const filterPanelLabelClass = `${pkg.prefix}--filter-panel-label`;
+    const { container } = renderComponent({ count: count });
+    expect(
+      container.querySelector(`.${filterPanelLabelClass}__count`).textContent
+    ).toBe('5');
   });
 
   it('has no accessibility violations', async () => {

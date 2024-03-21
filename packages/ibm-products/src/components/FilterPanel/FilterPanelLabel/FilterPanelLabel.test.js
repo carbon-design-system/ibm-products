@@ -18,8 +18,8 @@ const componentName = FilterPanelLabel.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
 const count = 5;
+const dataTestId = uuidv4();
 const labelText = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>

@@ -6,12 +6,25 @@
 //
 
 /* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable declaration-no-important */
 
-@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings' as
+  c4p-settings;
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
 
-// TODO: add any additional styles used by FilterPanel.stories.js
 .filter-panel-stories__viewport {
-  // outline: 1px dashed #9cf; // TODO: DELETE ME
   width: 16rem;
   padding: 1rem;
+}
+
+// How and where to override the OverflowMenu's default
+// "auto-width" size calculation.
+// 14rem is the size of this FilterPanel's demo width.
+.#{c4p-settings.$carbon-prefix}--overflow-menu-options {
+  inline-size: 14rem !important;
+}
+.#{c4p-settings.$carbon-prefix}--overflow-menu-options__option,
+.#{c4p-settings.$carbon-prefix}--overflow-menu-options__btn {
+  width: 100% !important;
+  max-inline-size: none !important;
 }

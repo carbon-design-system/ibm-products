@@ -121,15 +121,6 @@ FilterPanelCheckboxWithOverflow.displayName = componentName;
 
 FilterPanelCheckboxWithOverflow.propTypes = {
   /**
-   * IMPORTANT NOTE
-   *
-   * This component's props and `ref` refer to the Carbon Checkbox,
-   * just like FilterPanelCheckbox.
-   *
-   * Use overflowMenuProps to specify properties for the OverflowMenu.
-   */
-
-  /**
    * Children containing `OverflowMenuItems`.
    */
   children: PropTypes.node.isRequired,

@@ -75,6 +75,7 @@ const defaults = {
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,
+    ActionBar: false,
     FilterPanel: false,
     FilterPanelCheckbox: false,
     FilterPanelLabel: false,

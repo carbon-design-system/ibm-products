@@ -74,162 +74,162 @@ export let StatusIcon = forwardRef<ReactSVGElement | null ,StatusIconProps>(
      iconDescription,
       ...rest 
     }: StatusIconProps,
-     ref
+     ref 
      ) => {
     const forwardedRef = ref as Ref<ReactSVGElement>;
   
     const icons = {
-      fatal: {
-        sm: forwardRef((props, ref) => (
+      fatal: { 
+        sm: forwardRef((props,  _ref) => (
           <Misuse size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <Misuse size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <Misuse size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <Misuse size={32} ref={forwardedRef} {...props} />
         )),
       },
       critical: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <ErrorFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <ErrorFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <ErrorFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <ErrorFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       'major-warning': {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <WarningAltInvertedFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <WarningAltInvertedFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <WarningAltInvertedFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <WarningAltInvertedFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       'minor-warning': {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <WarningAltFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <WarningAltFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <WarningAltFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <WarningAltFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       undefined: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <UndefinedFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <UndefinedFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <UndefinedFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <UndefinedFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       unknown: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <UnknownFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <UnknownFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <UnknownFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <UnknownFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       normal: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <CheckmarkFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <CheckmarkFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <CheckmarkFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <CheckmarkFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       info: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <InformationSquareFilled size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <InformationSquareFilled size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <InformationSquareFilled size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <InformationSquareFilled size={32} ref={forwardedRef} {...props} />
         )),
       },
       'in-progress': {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <InProgress size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <InProgress size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <InProgress size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <InProgress size={32} ref={forwardedRef} {...props} />
         )),
       },
       running: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <CheckmarkOutline size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <CheckmarkOutline size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <CheckmarkOutline size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <CheckmarkOutline size={32} ref={forwardedRef} {...props} />
         )),
       },
       pending: {
-        sm: forwardRef((props, ref) => (
+        sm: forwardRef((props, _ref) => (
           <Pending size={16} ref={forwardedRef} {...props} />
         )),
-        md: forwardRef((props, ref) => (
+        md: forwardRef((props, _ref) => (
           <Pending size={20} ref={forwardedRef} {...props} />
         )),
-        lg: forwardRef((props, ref) => (
+        lg: forwardRef((props, _ref) => (
           <Pending size={24} ref={forwardedRef} {...props} />
         )),
-        xl: forwardRef((props, ref) => (
+        xl: forwardRef((props, _ref) => (
           <Pending size={32} ref={forwardedRef} {...props} />
         )),
       },

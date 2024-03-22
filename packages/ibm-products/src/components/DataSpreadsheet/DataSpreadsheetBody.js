@@ -37,6 +37,7 @@ const blockClass = `${pkg.prefix}--data-spreadsheet`;
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      activeCellRef,
       columns,
       activeCellCoordinates,
       defaultColumn,
@@ -368,6 +369,7 @@ export const DataSpreadsheetBody = forwardRef(
               setSelectionAreas(selectionAreaClone);
             }
           } else {
+            activeCellRef.current.style.display = 'none';
             setActiveCellInsideSelectionArea(false);
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
@@ -392,6 +394,7 @@ export const DataSpreadsheetBody = forwardRef(
         ref,
         setSelectionAreaData,
         setActiveCellInsideSelectionArea,
+        activeCellRef,
       ]
     );
 
@@ -641,6 +644,10 @@ DataSpreadsheetBody.propTypes = {
     column: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
 
+  /**
+   *This is the ref of the button input, which is the active cell element
+   */
+  activeCellRef: PropTypes.object,
   /**
    * Is the user clicking and holding in the data spreadsheet body
    */

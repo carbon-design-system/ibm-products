@@ -76,6 +76,10 @@ const defaults = {
     StatusIndicator: false,
     StatusIndicatorStep: false,
     TagOverflow: false,
+    ActionBar: false,
+    FilterPanel: false,
+    FilterPanelCheckbox: false,
+    FilterPanelLabel: false,
 
     /* new component flags here - comment used by generate CLI */
 

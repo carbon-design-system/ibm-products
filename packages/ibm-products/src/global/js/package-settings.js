@@ -95,6 +95,9 @@ const defaults = {
     DecoratorSingleButton: false,
     DecoratorDualButton: false,
     DescriptionList: false,
+    DescriptionListBody: false,
+    DescriptionListCell: false,
+    DescriptionListRow: false,
     SearchBar: false,
     UserAvatar: false,
 

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, PropsWithChildren } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -18,14 +18,19 @@ interface CreateTearsheetDividerProps {
   className?: string;
 }
 
-export let CreateTearsheetDivider = forwardRef(
-  (
-    { className, ...rest }: PropsWithChildren<CreateTearsheetDividerProps>,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
-  }
-);
+export let CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
+  forwardRef(
+    (
+      {
+        className,
+        // Collect any other property values passed in
+        ...rest
+      },
+      ref: ForwardedRef<HTMLSpanElement>
+    ) => {
+      return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
+    }
+  );
 
 // Return a placeholder if not released and not enabled by feature flag
 CreateTearsheetDivider = pkg.checkComponentEnabled(

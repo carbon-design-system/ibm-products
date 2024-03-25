@@ -26,39 +26,45 @@ import { pkg } from '../../settings';
 const { checkComponentEnabled, prefix } = pkg;
 const blockClass = `${prefix}--toolbar`;
 
-const ToolbarContext = createContext();
-
 interface ToolbarProps {
   /** Provide the content of the `ToolbarGroup` */
-  children?: ReactNode;
+  children: ReactNode;
 
   /** Provide an optional class to be applied to the containing node */
   className?: string;
 
   /** Determines whether the `Toolbar` is rendered vertically */
-  vertical: boolean;
+  vertical?: boolean;
 }
+
+interface ToolbarContextType {
+  vertical?: boolean;
+}
+
+const ToolbarContext = createContext<ToolbarContextType>({ vertical: false });
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
 let Toolbar = forwardRef(
   (
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
-    r: React.Ref<HTMLDivElement>
+    r: React.Ref<any>
   ) => {
     const focusableElements = useRef();
 
     const getFocusableElements = useCallback(
-      () => focusableElements.current,
+      (): any => focusableElements.current,
       [focusableElements]
     );
 
-    const _ref = useRef();
+    const _ref = useRef<any>();
     const ref = r || _ref;
 
     const [focus, setFocus] = useState();
 
     useEffect(() => {
-      focusableElements.current = _getFocusableElements(ref.current);
+      focusableElements.current = _getFocusableElements(
+        ref?.['current']
+      ) as any;
 
       typeof focus !== 'undefined' &&
         getFocusableElements().forEach((element, index) => {

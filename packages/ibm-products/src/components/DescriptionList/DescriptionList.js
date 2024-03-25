@@ -15,19 +15,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { DescriptionListSize } from './constants';
 // Carbon and package components we use.
-import {
-  StructuredListBody,
-  StructuredListCell,
-  StructuredListRow,
-  StructuredListWrapper,
-} from '@carbon/react';
+import { StructuredListWrapper } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--description-list`;
 const componentName = 'DescriptionList';
-const componentNameBody = 'DescriptionListBody';
-const componentNameRow = 'DescriptionListRow';
-const componentNameCell = 'DescriptionListCell';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -49,7 +41,7 @@ const defaults = {
 /**
  * Type layouts provide an orderly layout of terms and definitions.
  */
-let DescriptionList = React.forwardRef(
+export let DescriptionList = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -95,76 +87,16 @@ DescriptionList = pkg.checkComponentEnabled(DescriptionList, componentName);
 // is used in preference to relying on function.name.
 DescriptionList.displayName = componentName;
 
-const propTypes = {
-  /** Provide the contents of the node */
-  children: PropTypes.node,
-
-  /** Provide an optional class to be applied to the containing node */
-  className: PropTypes.string,
-};
-
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 DescriptionList.propTypes = {
-  ...propTypes,
-
   /** Specify if the type layout has a border */
   border: PropTypes.bool,
-
+  /** Provide the contents of the node */
+  children: PropTypes.node,
+  /** Provide an optional class to be applied to the containing node */
+  className: PropTypes.string,
   /** Specify the size of the type layout, from a list of available sizes */
   size: PropTypes.oneOf(Object.values(DescriptionListSize)),
-};
-
-let DescriptionListBody = ({ children, className, ...rest }) => (
-  <StructuredListBody
-    className={cx(`${blockClass}__body`, className)}
-    {...rest}
-  >
-    {children}
-  </StructuredListBody>
-);
-
-DescriptionListBody.propTypes = {
-  ...propTypes,
-};
-DescriptionListBody.displayName = componentNameBody;
-
-let DescriptionListRow = ({ children, className, ...other }) => (
-  <StructuredListRow
-    className={cx(`${blockClass}__row`, className)}
-    role="row"
-    {...other}
-  >
-    {children}
-  </StructuredListRow>
-);
-
-DescriptionListRow.propTypes = {
-  ...propTypes,
-};
-
-DescriptionListRow.displayName = componentNameRow;
-
-let DescriptionListCell = ({ children, className, ...rest }) => (
-  <StructuredListCell
-    className={cx(`${blockClass}__cell`, className)}
-    tabIndex="-1"
-    {...rest}
-  >
-    {children}
-  </StructuredListCell>
-);
-
-DescriptionListCell.propTypes = {
-  ...propTypes,
-};
-
-DescriptionListCell.displayName = componentNameCell;
-
-export {
-  DescriptionList,
-  DescriptionListBody,
-  DescriptionListRow,
-  DescriptionListCell,
 };

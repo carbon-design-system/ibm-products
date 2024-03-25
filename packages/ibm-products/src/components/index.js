@@ -108,13 +108,19 @@ export { Decorator } from './Decorator';
 export { DecoratorLink } from './DecoratorLink';
 export { DecoratorSingleButton } from './DecoratorSingleButton';
 export { DecoratorDualButton } from './DecoratorDualButton';
-export { DescriptionList } from './DescriptionList';
+export {
+  DescriptionList,
+  DescriptionListBody,
+  DescriptionListCell,
+  DescriptionListRow,
+} from './DescriptionList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
 export { Nav } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { StatusIndicator } from './StatusIndicator';
+export { ActionBar } from './ActionBar';
 export {
   FilterPanel,
   FilterPanelCheckbox,

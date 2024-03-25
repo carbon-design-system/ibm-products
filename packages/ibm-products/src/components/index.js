@@ -119,5 +119,6 @@ export { ActionBar } from './ActionBar';
 export {
   FilterPanel,
   FilterPanelCheckbox,
+  FilterPanelCheckboxWithOverflow,
   FilterPanelLabel,
 } from './FilterPanel';

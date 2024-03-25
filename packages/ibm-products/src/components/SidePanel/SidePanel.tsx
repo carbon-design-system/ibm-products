@@ -177,6 +177,16 @@ interface SidePanelProps {
 // `any` is a work around until ActionSet is migrated to TS
 const MotionActionSet = motion<any>(ActionSet);
 
+// Default values for props
+const defaults = {
+  animateTitle: true,
+  closeIconDescription: 'Close',
+  currentStep: 0,
+  navigationBackIconDescription: 'Back',
+  placement: 'right',
+  size: 'md',
+};
+
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
@@ -187,25 +197,25 @@ export let SidePanel = React.forwardRef(
 
       actionToolbarButtons,
       actions,
-      animateTitle = true,
+      animateTitle = defaults.animateTitle,
       children,
       className,
-      closeIconDescription = 'Close',
+      closeIconDescription = defaults.closeIconDescription,
       condensedActions,
-      currentStep = 0,
+      currentStep = defaults.currentStep,
       id = blockClass,
       includeOverlay,
       labelText,
-      navigationBackIconDescription = 'Back',
+      navigationBackIconDescription = defaults.navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
       onUnmount,
       open,
-      placement = 'right',
+      placement = defaults.placement as SidePanelProps['placement'],
       preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
-      size = 'md',
+      size = defaults.size as SidePanelProps['size'],
       slideIn,
       slug,
       subtitle,
@@ -230,7 +240,6 @@ export let SidePanel = React.forwardRef(
     const labelTextRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
     const previousState = usePreviousValue({ size, open });
-    // console.log(previousState);
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)

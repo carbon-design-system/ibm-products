@@ -41,7 +41,7 @@ interface ToolbarContextType {
   vertical?: boolean;
 }
 
-const ToolbarContext = createContext<ToolbarContextType>({ vertical: false });
+const ToolbarContext = createContext<ToolbarContextType>({});
 
 /** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
 let Toolbar = forwardRef(

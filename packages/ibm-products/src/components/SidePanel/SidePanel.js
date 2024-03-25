@@ -95,7 +95,7 @@ export let SidePanel = React.forwardRef(
     const overlayRef = useRef();
     const innerContentRef = useRef();
     const closeRef = useRef();
-    const animatedScrollRef = useRef();
+    // const animatedScrollRef = useRef();
     const headerRef = useRef();
     const titleRef = useRef();
     const labelTextRef = useRef();
@@ -111,14 +111,92 @@ export let SidePanel = React.forwardRef(
       setDoAnimateTitle(animateTitle);
     }, [animateTitle]);
 
+    const memoizeScrollTop = () => {
+      let prevValue;
+
+      return (newValue, callback) => {
+        const oldValue = prevValue;
+        prevValue = newValue;
+
+        return callback(oldValue, newValue);
+      };
+    };
+
+    const memoizedScrollTopFunction = memoizeScrollTop();
+
+    const setSubtitleMarginTop = useCallback(
+      (preValue, newValue) => {
+        const subtitleEl = subtitleRef?.current;
+        const height = subtitleEl?.clientHeight;
+        const innerContentHeight = innerContentRef.current.clientHeight;
+        const innerContentScrollTop = innerContentRef.current.scrollTop;
+        const computedMarginTop = Number(
+          window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0] ||
+            null
+        );
+
+        if (preValue < newValue) {
+          const margin = 0 - newValue;
+
+          if (margin > -height) {
+            subtitleEl?.style?.setProperty('margin-top', `${margin}px`);
+          }
+
+          if (
+            animationComplete &&
+            computedMarginTop > -height &&
+            innerContentHeight < innerContentScrollTop
+          ) {
+            subtitleEl?.style?.setProperty('margin-top', `${-height}px`);
+          }
+        } else {
+          const margin = -newValue + 1;
+
+          if (newValue <= height) {
+            subtitleEl?.style?.setProperty('margin-top', `${margin}px`);
+          }
+        }
+      },
+      [animationComplete]
+    );
+
+    const [labelTextHeight, setLabelTextHeight] = useState();
+
+    useEffect(() => {
+      if (open && animateTitle && labelTextRef?.current) {
+        setLabelTextHeight(Number(labelTextRef?.current?.clientHeight || null));
+      }
+    }, [animateTitle, labelTextRef, open]);
+
     const handleScroll = useCallback(() => {
-      const scrollTop = animatedScrollRef.current.scrollTop;
+      const scrollTop = innerContentRef.current.scrollTop;
 
       sidePanelRef.current.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
         Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
       );
-    }, [scrollAnimationDistance, sidePanelRef]);
+
+      if (labelTextRef?.current) {
+        const buffer =
+          Math.min(scrollTop, scrollAnimationDistance) /
+          scrollAnimationDistance;
+        const calculatedHeight = labelTextHeight - buffer * labelTextHeight;
+        console.log(calculatedHeight);
+
+        labelTextRef?.current?.style?.setProperty(
+          'height',
+          `${calculatedHeight}px`
+        );
+      }
+
+      memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
+    }, [
+      sidePanelRef,
+      scrollAnimationDistance,
+      memoizedScrollTopFunction,
+      setSubtitleMarginTop,
+      labelTextHeight,
+    ]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -128,8 +206,7 @@ export let SidePanel = React.forwardRef(
     // scroll panel to top going between steps
     useEffect(() => {
       if (sidePanelRef && sidePanelRef.current) {
-        const scrollableSection =
-          animatedScrollRef.current ?? innerContentRef.current;
+        const scrollableSection = innerContentRef.current;
 
         scrollableSection.scrollTop = 0;
         // The size of the panel has changed while it is still opened
@@ -183,12 +260,12 @@ export let SidePanel = React.forwardRef(
           scrollAnimationDistance
         );
 
-        let scrollEl = animatedScrollRef.current;
+        let scrollEl = innerContentRef.current;
 
-        if (!scrollEl && animateTitle && !doAnimateTitle) {
-          // may be switching back based on resize
-          scrollEl = innerContentRef.current;
-        }
+        // if (!scrollEl && animateTitle && !doAnimateTitle) {
+        // may be switching back based on resize
+        // scrollEl = innerContentRef.current;
+        // }
 
         if (scrollEl) {
           const innerComputed = window?.getComputedStyle(
@@ -207,15 +284,15 @@ export let SidePanel = React.forwardRef(
       }
       if (doAnimateTitle !== canDoAnimateTitle) {
         // will need updating on resize
-        setDoAnimateTitle(canDoAnimateTitle);
+        // setDoAnimateTitle(canDoAnimateTitle);
       }
     };
 
     useEffect(() => {
-      if (doAnimateTitle && animatedScrollRef.current) {
+      if (doAnimateTitle && innerContentRef.current) {
         // only add scroll if the doAnimateTitle is already true
         // should come back through if false and canDoAnimateTitle is true
-        animatedScrollRef.current.addEventListener('scroll', handleScroll);
+        innerContentRef.current.addEventListener('scroll', handleScroll);
       }
 
       if (!doAnimateTitle && sidePanelRef.current) {
@@ -224,7 +301,14 @@ export let SidePanel = React.forwardRef(
           0
         );
       }
-    }, [animatedScrollRef, doAnimateTitle, handleScroll, sidePanelRef]);
+    }, [
+      // animatedScrollRef,
+      doAnimateTitle,
+      handleScroll,
+      sidePanelRef,
+      innerContentRef,
+      open,
+    ]);
 
     /* istanbul ignore next */
     const handleResize = () => {
@@ -256,7 +340,7 @@ export let SidePanel = React.forwardRef(
       size,
       reducedMotion.matches,
       id,
-      animatedScrollRef.current,
+      // animatedScrollRef.current,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -551,9 +635,10 @@ export let SidePanel = React.forwardRef(
       return (
         <div
           ref={innerContentRef}
-          className={cx(`${blockClass}__inner-content`, {
-            [`${blockClass}--scrolls`]: !doAnimateTitle,
-          })}
+          className={cx(
+            `${blockClass}__inner-content`,
+            `${blockClass}--scrolls`
+          )}
         >
           {children}
         </div>
@@ -584,17 +669,19 @@ export let SidePanel = React.forwardRef(
               onKeyDown={keyDownListener}
             >
               {doAnimateTitle ? (
-                <div
-                  ref={animatedScrollRef}
-                  className={`${blockClass}__animated-scroll-wrapper ${blockClass}--scrolls`}
-                >
+                // <div
+                //   ref={animatedScrollRef}
+                //   className={`${blockClass}__animated-scroll-wrapper`}
+                // >
+                <>
                   {/* header */}
                   {renderHeader()}
 
                   {/* main */}
                   {renderMain()}
-                </div>
+                </>
               ) : (
+                // </div>
                 <>
                   {/* header */}
                   {renderHeader()}

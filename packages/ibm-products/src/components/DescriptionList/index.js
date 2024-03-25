@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export {
-  DescriptionList,
-  DescriptionListBody,
-  DescriptionListRow,
-  DescriptionListCell,
-} from './DescriptionList';
+export { DescriptionList } from './DescriptionList';
+export { DescriptionListBody } from './DescriptionListBody';
+export { DescriptionListCell } from './DescriptionListCell';
+export { DescriptionListRow } from './DescriptionListRow';

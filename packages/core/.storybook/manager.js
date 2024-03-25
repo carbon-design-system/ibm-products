@@ -11,8 +11,39 @@ import { create } from '@storybook/theming/create';
 import React from 'react';
 
 import packageInfo from '../../ibm-products/package.json';
+import { checkCanaryStatus } from '../../ibm-products/src/global/js/utils/story-helper';
 
 const { description, version } = packageInfo;
+
+const renderComponentLabel = (label, dark, type = 'Canary') => {
+  return (
+    <div
+      style={{
+        flex: '1 0 auto',
+        display: 'flex',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+      }}
+    >
+      {label}
+      <div
+        style={{
+          background: dark ? '#555555' : '#e0e0e0',
+          /* stylelint-disable-next-line carbon/type-token-use */
+          fontSize: '11px',
+          border: '.1px solid transparent',
+          /* stylelint-disable-next-line carbon/layout-token-use */
+          padding: '0 .5rem',
+          /* stylelint-disable-next-line carbon/layout-token-use */
+          margin: '0 .5em',
+          borderRadius: '8px',
+        }}
+      >
+        {type}
+      </div>
+    </div>
+  );
+};
 
 addons.setConfig({
   theme: create({
@@ -21,74 +52,17 @@ addons.setConfig({
 
   sidebar: {
     renderLabel: (item) => {
-      const parts = item.name.split('#');
+      const isUnstable = !!(
+        item.type === 'component' && checkCanaryStatus(item.name)
+      );
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      switch (parts[1]) {
-        // if the name has #canary then render a 'Canary' tag on the right
-        case 'canary':
-          return (
-            <div
-              style={{
-                flex: '1 0 auto',
-                display: 'flex',
-                alignItems: 'stretch',
-                justifyContent: 'space-between',
-              }}
-            >
-              {parts[0]}
-              <div
-                style={{
-                  background: dark ? '#555555' : '#e0e0e0',
-                  /* stylelint-disable-next-line carbon/type-token-use */
-                  fontSize: '11px',
-                  border: '.1px solid transparent',
-                  /* stylelint-disable-next-line carbon/layout-token-use */
-                  padding: '0 .5rem',
-                  /* stylelint-disable-next-line carbon/layout-token-use */
-                  margin: '0 .5em',
-                  borderRadius: '8px',
-                }}
-              >
-                Canary
-              </div>
-            </div>
-          );
-
-        // if the name has #legacy then render a 'Legacy' tag on the right
-        case 'legacy':
-          return (
-            <div
-              style={{
-                flex: '1 0 auto',
-                display: 'flex',
-                alignItems: 'stretch',
-                justifyContent: 'space-between',
-              }}
-            >
-              {parts[0]}
-              <div
-                style={{
-                  background: dark ? '#3a3a3a' : '#eeeeee',
-                  /* stylelint-disable-next-line carbon/type-token-use */
-                  fontSize: '11px',
-                  border: '.1px solid transparent',
-                  /* stylelint-disable-next-line carbon/layout-token-use */
-                  padding: '0 .5rem',
-                  /* stylelint-disable-next-line carbon/layout-token-use */
-                  margin: '0 .5em',
-                  borderRadius: '8px',
-                }}
-              >
-                Legacy
-              </div>
-            </div>
-          );
-
-        // if the name doesn't have a recognized # label, just render the name
-        default:
-          return parts[0];
+      if (isUnstable) {
+        // Canary tag is applied if `item.name` (`displayName` of the component) is confirmed
+        // to be canary/not yet released via the checkCanaryStatus utility
+        return renderComponentLabel(item.name, dark);
       }
+
+      return item.name;
     },
   },
 });

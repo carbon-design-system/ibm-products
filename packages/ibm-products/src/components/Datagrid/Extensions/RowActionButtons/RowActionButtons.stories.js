@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,6 @@
 import React, { useState } from 'react';
 import { Add, Edit, TrashCan, Checkmark } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -28,7 +24,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowActionButtons`,
+  title: 'IBM Products/Components/Datagrid/RowActionButtons',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -176,21 +172,19 @@ const rowActionButtonsProps = {
   rowActions: sharedDatagridProps.rowActions,
 };
 const basicUsageStoryName = 'With row action buttons';
-export const RowActionButtonsUsageStory = prepareStory(
-  RowActionButtonTemplateWrapper,
-  {
-    storyName: basicUsageStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowActions: ARG_TYPES.rowActions,
-    },
-    args: {
-      ...rowActionButtonsProps,
-    },
-  }
+export const RowActionButtonsUsageStory = RowActionButtonTemplateWrapper.bind(
+  {}
 );
+RowActionButtonsUsageStory.storyName = basicUsageStoryName;
+RowActionButtonsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowActions: ARG_TYPES.rowActions,
+};
+RowActionButtonsUsageStory.args = {
+  ...rowActionButtonsProps,
+};
 
 const RowActionButtonsOverflow = ({ ...args }) => {
   const columns = React.useMemo(
@@ -260,21 +254,18 @@ const manyRowActionButtonsProps = {
 };
 
 const manyRowActionButtonsStoryName = 'With many row action buttons';
-export const ManyRowActionButtonsUsageStory = prepareStory(
-  RowActionButtonOverflowTemplateWrapper,
-  {
-    storyName: manyRowActionButtonsStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowActions: ARG_TYPES.rowActions,
-    },
-    args: {
-      ...manyRowActionButtonsProps,
-    },
-  }
-);
+export const ManyRowActionButtonsUsageStory =
+  RowActionButtonOverflowTemplateWrapper.bind({});
+ManyRowActionButtonsUsageStory.storyName = manyRowActionButtonsStoryName;
+ManyRowActionButtonsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowActions: ARG_TYPES.rowActions,
+};
+ManyRowActionButtonsUsageStory.args = {
+  ...manyRowActionButtonsProps,
+};
 
 const RowActionButtonsBatchActions = ({ ...args }) => {
   const columns = React.useMemo(
@@ -358,19 +349,17 @@ const rowActionButtonsBatchActionsProps = {
 };
 const rowActionButtonsBatchActionsStoryName =
   'With row action buttons and batch actions';
-export const RowActionButtonsBatchActionsUsageStory = prepareStory(
-  RowActionButtonBatchTemplateWrapper,
-  {
-    storyName: rowActionButtonsBatchActionsStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowActions: ARG_TYPES.rowActions,
-      batchActions: ARG_TYPES.batchActions,
-    },
-    args: {
-      ...rowActionButtonsBatchActionsProps,
-    },
-  }
-);
+export const RowActionButtonsBatchActionsUsageStory =
+  RowActionButtonBatchTemplateWrapper.bind({});
+RowActionButtonsBatchActionsUsageStory.storyName =
+  rowActionButtonsBatchActionsStoryName;
+RowActionButtonsBatchActionsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowActions: ARG_TYPES.rowActions,
+  batchActions: ARG_TYPES.batchActions,
+};
+RowActionButtonsBatchActionsUsageStory.args = {
+  ...rowActionButtonsBatchActionsProps,
+};

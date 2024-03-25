@@ -21,7 +21,6 @@ const componentName = Decorator.displayName;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const href = 'http://www.ibm.com';
 const label = 'IP';
 const score = 5;
 const scoreTitle = '"Medium" magnitude. Score 5 out of 10';
@@ -29,30 +28,20 @@ const value = '192.168.0.50';
 const valueTitle = 'IP address is 192.168.0.50';
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(<Decorator value={value} data-testid={dataTestId} {...rest} />);
+  render(
+    <Decorator
+      kind="default"
+      value={value}
+      data-testid={dataTestId}
+      {...rest}
+    />
+  );
 
 describe(componentName, () => {
-  it('renders a component Decorator (default, non-interactive)', async () => {
+  it('renders a component Decorator', async () => {
     const { container } = renderComponent();
     const decorator = container.querySelector(`[data-testid="${dataTestId}"]`);
     expect(decorator);
-  });
-
-  it('renders a component Decorator as a link', async () => {
-    renderComponent({ href: href, kind: 'link' });
-    expect(screen.getByRole('link'));
-  });
-
-  it('renders a component Decorator as one button', async () => {
-    renderComponent({ kind: 'single-button' });
-    expect(screen.getAllByRole('button').length).toBe(1);
-  });
-
-  it('renders a component Decorator with two buttons', async () => {
-    renderComponent({
-      kind: 'dual-button',
-    });
-    expect(screen.getAllByRole('button').length).toBe(2);
   });
 
   it('renders a label', async () => {

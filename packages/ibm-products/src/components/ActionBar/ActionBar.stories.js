@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,10 +10,6 @@ import { action } from '@storybook/addon-actions';
 
 import { Bee, Lightning } from '@carbon/react/icons';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionBar } from './ActionBar';
@@ -33,7 +29,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: getStoryTitle(ActionBar.displayName),
+  title: 'IBM Products/Components/ActionBar',
   component: ActionBar,
   tags: ['autodocs'],
   argTypes: {
@@ -64,10 +60,9 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    actions: 1,
-    containerWidth: 500,
-    overflowAriaLabel: 'Open and close additional action bar items list.',
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  actions: 1,
+  containerWidth: 500,
+  overflowAriaLabel: 'Open and close additional action bar items list.',
+};

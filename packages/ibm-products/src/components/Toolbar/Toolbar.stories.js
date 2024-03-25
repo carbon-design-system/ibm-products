@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,13 +35,11 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 
-import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import DocsPage from './Toolbar.docs-page';
 
 export default {
-  title: getStoryTitle(Toolbar.displayName),
+  title: 'IBM Products/Patterns/Toolbars/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {

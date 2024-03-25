@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,18 +23,13 @@ import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 // import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 
 export default {
-  title: getStoryTitle(NotificationsPanel.displayName),
+  title: 'IBM Products/Patterns/Notifications/NotificationsPanel',
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {
@@ -165,19 +160,17 @@ const EmptyNotifications = (args) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    onDoNotDisturbChange: action('Toggled to do not disturb'),
-    onViewAllClick: action('Clicked view all button'),
-    onSettingsClick: action('Clicked settings gear'),
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Clicked settings gear'),
+};
 
-export const EmptyState = prepareStory(EmptyNotifications, {
-  args: {
-    data: [],
-    onDoNotDisturbChange: action('Toggled to do not disturb'),
-    onViewAllClick: action('Clicked view all button'),
-    onSettingsClick: action('Clicked settings gear'),
-  },
-});
+export const EmptyState = EmptyNotifications.bind({});
+EmptyState.args = {
+  data: [],
+  onDoNotDisturbChange: action('Toggled to do not disturb'),
+  onViewAllClick: action('Clicked view all button'),
+  onSettingsClick: action('Clicked settings gear'),
+};

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.2...@carbon/ibm-products-community@0.4.3) (2024-03-14)
+
+
+### Bug Fixes
+
+* update ai gradient mixin call to match 1.53 ([#4552](https://github.com/carbon-design-system/ibm-products/issues/4552)) ([332890c](https://github.com/carbon-design-system/ibm-products/commit/332890c9deceb0a38facfbf71dfadb66ca66f816))
+
+
+
+
+
+## [0.4.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.1...@carbon/ibm-products-community@0.4.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* about modal layout ([#4454](https://github.com/carbon-design-system/ibm-products/issues/4454)) ([c0cf58a](https://github.com/carbon-design-system/ibm-products/commit/c0cf58a1e78a4ee8f66b551d39b5705fecd4674e))
+* add repository config to community package json ([#4444](https://github.com/carbon-design-system/ibm-products/issues/4444)) ([5a99bd9](https://github.com/carbon-design-system/ibm-products/commit/5a99bd994c91da197e17f564d917a6e1249d827f))
+* update Carbon 11 compatible versions to latest ([#4455](https://github.com/carbon-design-system/ibm-products/issues/4455)) ([c6241b2](https://github.com/carbon-design-system/ibm-products/commit/c6241b26e01eecd080d25ec3e2c6ca060a258e1d))
+
+
+
+
+
 ## [0.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.0...@carbon/ibm-products-community@0.4.1) (2024-02-27)
 
 

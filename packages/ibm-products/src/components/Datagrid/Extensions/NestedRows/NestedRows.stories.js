@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,6 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -26,7 +22,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
+  title: 'IBM Products/Components/Datagrid/NestedRows',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -216,26 +212,23 @@ const SingleLevelNestedRowsWrapper = ({ ...args }) => {
 };
 
 const singleNestedRowsStoryName = 'With single-level nested rows';
-export const SingleLevelNestedRowsUsageStory = prepareStory(
-  SingleLevelNestedRowsWrapper,
-  {
-    storyName: singleNestedRowsStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...nestedRowsControlProps,
-      featureFlags: ['Datagrid.useNestedRows'],
-    },
-  }
-);
+export const SingleLevelNestedRowsUsageStory =
+  SingleLevelNestedRowsWrapper.bind({});
+SingleLevelNestedRowsUsageStory.storyName = singleNestedRowsStoryName;
+SingleLevelNestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SingleLevelNestedRowsUsageStory.args = {
+  ...nestedRowsControlProps,
+  featureFlags: ['Datagrid.useNestedRows'],
+};
 
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -258,22 +251,21 @@ const BasicTemplateWrapper = ({ ...args }) => {
 };
 
 const nestedRowsStoryName = 'With nested rows';
-export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
-  storyName: nestedRowsStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    rowSize: ARG_TYPES.rowSize,
-    rowSizes: ARG_TYPES.rowSizes,
-    onRowSizeChange: ARG_TYPES.onRowSizeChange,
-    expanderButtonTitleExpanded: 'Collapse row',
-    expanderButtonTitleCollapsed: 'Expand row',
-  },
-  args: {
-    ...nestedRowsControlProps,
-  },
-});
+export const NestedRowsUsageStory = BasicTemplateWrapper.bind({});
+NestedRowsUsageStory.storyName = nestedRowsStoryName;
+NestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+NestedRowsUsageStory.args = {
+  ...nestedRowsControlProps,
+};
 
 const SelectableNestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -297,46 +289,42 @@ const SelectableNestedRowTemplateWrapper = ({ ...args }) => {
 };
 
 const selectableNestedRowsStoryName = 'With selectable nested rows';
-export const SelectableNestedRowsUsageStory = prepareStory(
-  SelectableNestedRowTemplateWrapper,
-  {
-    storyName: selectableNestedRowsStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...nestedRowsControlProps,
-    },
-  }
-);
+export const SelectableNestedRowsUsageStory =
+  SelectableNestedRowTemplateWrapper.bind({});
+SelectableNestedRowsUsageStory.storyName = selectableNestedRowsStoryName;
+SelectableNestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SelectableNestedRowsUsageStory.args = {
+  ...nestedRowsControlProps,
+};
 
 const nestedRowsInitialStateStoryName = 'With initially expanded nested rows';
-export const NestedRowsInitialUsageStory = prepareStory(BasicTemplateWrapper, {
-  storyName: nestedRowsInitialStateStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    rowSize: ARG_TYPES.rowSize,
-    rowSizes: ARG_TYPES.rowSizes,
-    onRowSizeChange: ARG_TYPES.onRowSizeChange,
-    expanderButtonTitleExpanded: 'Collapse row',
-    expanderButtonTitleCollapsed: 'Expand row',
-  },
-  args: {
-    ...nestedRowsControlProps,
-    initialState: {
-      expandedRowIds: {
-        1: true,
-        3: true,
-      },
+export const NestedRowsInitialUsageStory = BasicTemplateWrapper.bind({});
+NestedRowsInitialUsageStory.storyName = nestedRowsInitialStateStoryName;
+NestedRowsInitialUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+NestedRowsInitialUsageStory.args = {
+  ...nestedRowsControlProps,
+  initialState: {
+    expandedRowIds: {
+      1: true,
+      3: true,
     },
   },
-});
+};

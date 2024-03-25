@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,10 +15,6 @@ import {
   unstable__Slug as Slug,
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
 // import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -44,7 +40,7 @@ const sampleSlug = (
 );
 
 export default {
-  title: getStoryTitle(ProductiveCard.displayName),
+  title: 'IBM Products/Components/Cards/ProductiveCard',
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {
@@ -139,98 +135,88 @@ const Template = (opts) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+};
 
-export const WithCaption = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    description: 'caption',
-  },
-});
+export const WithCaption = Template.bind({});
+WithCaption.args = {
+  ...defaultProps,
+  description: 'caption',
+};
 
-export const WithLabel = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    label: 'Label',
-  },
-});
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  ...defaultProps,
+  label: 'Label',
+};
 
-export const LabelOnly = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    title: '',
-    label: 'Label',
-    actionsPlacement: 'bottom',
-    primaryButtonText: 'Ghost button',
-  },
-});
+export const LabelOnly = Template.bind({});
+LabelOnly.args = {
+  ...defaultProps,
+  title: '',
+  label: 'Label',
+  actionsPlacement: 'bottom',
+  primaryButtonText: 'Ghost button',
+};
 
-export const WithOverflow = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    overflowAriaLabel: 'Overflow menu',
-    overflowActions: [
-      {
-        id: '1',
-        itemText: 'Edit',
-        onClick: action('on click'),
-        onKeyDown: action('on keydown'),
-      },
-      {
-        id: '2',
-        itemText: 'Delete',
-        onClick: action('on click'),
-        onKeyDown: action('on keydown'),
-      },
-    ],
-  },
-});
+export const WithOverflow = Template.bind({});
+WithOverflow.args = {
+  ...defaultProps,
+  overflowAriaLabel: 'Overflow menu',
+  overflowActions: [
+    {
+      id: '1',
+      itemText: 'Edit',
+      onClick: action('on click'),
+      onKeyDown: action('on keydown'),
+    },
+    {
+      id: '2',
+      itemText: 'Delete',
+      onClick: action('on click'),
+      onKeyDown: action('on keydown'),
+    },
+  ],
+};
 
-export const SupplementalBottomBar = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonText: 'Ghost button',
-  },
-});
+export const SupplementalBottomBar = Template.bind({});
+SupplementalBottomBar.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+};
 
-export const ComplexBottomBar = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonText: 'Ghost button',
-    actionsPlacement: 'bottom',
-    title: '',
-    label: 'label',
-  },
-});
+export const ComplexBottomBar = Template.bind({});
+ComplexBottomBar.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+  actionsPlacement: 'bottom',
+  title: '',
+  label: 'label',
+};
 
-export const Clickable = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    onClick: action('on click'),
-    onKeyDown: action('on keydown'),
-    primaryButtonText: 'Ghost button',
-    actionIcons: [],
-  },
-});
+export const Clickable = Template.bind({});
+Clickable.args = {
+  ...defaultProps,
+  onClick: action('on click'),
+  onKeyDown: action('on keydown'),
+  primaryButtonText: 'Ghost button',
+  actionIcons: [],
+};
 
-export const WithButtonHref = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonText: 'Ghost button',
-    primaryButtonHref: '#',
-  },
-});
+export const WithButtonHref = Template.bind({});
+WithButtonHref.args = {
+  ...defaultProps,
+  primaryButtonText: 'Ghost button',
+  primaryButtonHref: '#',
+};
 
-export const WithActionGhostButton = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonPlacement: 'top',
-    primaryButtonText: 'Ghost button',
-    primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
-    primaryButtonDisabled: true,
-  },
-});
+export const WithActionGhostButton = Template.bind({});
+WithActionGhostButton.args = {
+  ...defaultProps,
+  primaryButtonPlacement: 'top',
+  primaryButtonText: 'Ghost button',
+  primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
+  primaryButtonDisabled: true,
+};

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,11 +22,6 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { CreateSidePanel } from './CreateSidePanel';
 
 import styles from './_storybook-styles.scss';
@@ -82,7 +77,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: getStoryTitle(CreateSidePanel.displayName),
+  title: 'IBM Products/Patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {
@@ -425,23 +420,20 @@ const TemplateWithMultipleForms = ({ slug, ...args }) => {
   );
 };
 
-export const Default = prepareStory(DefaultTemplate, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};
 
-export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};
 
-export const WithMultipleForms = prepareStory(TemplateWithMultipleForms, {
-  args: {
-    selectorPageContent: '#ibm-products-page-content',
-    ...defaultStoryProps,
-  },
-});
+export const WithMultipleForms = TemplateWithMultipleForms.bind({});
+WithMultipleForms.args = {
+  selectorPageContent: '#ibm-products-page-content',
+  ...defaultStoryProps,
+};

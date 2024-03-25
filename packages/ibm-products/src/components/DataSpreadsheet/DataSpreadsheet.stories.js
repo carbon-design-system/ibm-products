@@ -1,17 +1,11 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useMemo, useState } from 'react';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
 // import mdx from './DataSpreadsheet.mdx';
@@ -19,7 +13,7 @@ import { generateData } from './utils/generateData';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(DataSpreadsheet.displayName),
+  title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {
@@ -168,37 +162,33 @@ const WithManyColumns = ({ ...args }) => {
   );
 };
 
-export const dataSpreadsheet = prepareStory(Template, {
-  storyName: 'Basic spreadsheet',
-  args: {
-    selectAllAriaLabel: 'Select all',
-    spreadsheetAriaLabel: 'Example data spreadsheet',
-  },
-});
+export const dataSpreadsheet = Template.bind({});
+dataSpreadsheet.storyName = 'Basic spreadsheet';
+dataSpreadsheet.args = {
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+};
 
-export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
-  storyName: 'Large dataset',
-  args: {
-    cellSize: 'lg',
-    selectAllAriaLabel: 'Select all',
-    spreadsheetAriaLabel: 'Example data spreadsheet',
-  },
-});
+export const largeDatasetSpreadsheet = LargeTemplate.bind({});
+largeDatasetSpreadsheet.storyName = 'Large dataset';
+largeDatasetSpreadsheet.args = {
+  cellSize: 'lg',
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+};
 
-export const emptyWithCells = prepareStory(EmptyWithCellsTemplate, {
-  storyName: 'Empty with cells',
-  args: {
-    defaultEmptyRowCount: 24,
-    selectAllAriaLabel: 'Select all',
-    spreadsheetAriaLabel: 'Example data spreadsheet',
-  },
-});
+export const emptyWithCells = EmptyWithCellsTemplate.bind({});
+emptyWithCells.storyName = 'Empty with cells';
+emptyWithCells.args = {
+  defaultEmptyRowCount: 24,
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+};
 
-export const withManyColumns = prepareStory(WithManyColumns, {
-  storyName: 'With many columns',
-  args: {
-    selectAllAriaLabel: 'Select all',
-    spreadsheetAriaLabel: 'Example data spreadsheet',
-    totalVisibleColumns: 5,
-  },
-});
+export const withManyColumns = WithManyColumns.bind({});
+withManyColumns.storyName = 'With many columns';
+withManyColumns.args = {
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+  totalVisibleColumns: 5,
+};

@@ -131,12 +131,21 @@ $motion-duration: $duration-moderate-02;
       max-height $motion-duration motion(entrance, expressive);
   }
 
-  &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
-  &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
+  &.#{$block-class}--stacked-1-of-2
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ),
+  &.#{$block-class}--stacked-2-of-3
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
     max-height: calc(100% - #{$spacing-09} + #{$spacing-05});
   }
 
-  &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
+  &.#{$block-class}--stacked-1-of-3
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
     max-height: calc(100% - #{$spacing-09} + (2 * #{$spacing-05}));
   }
 
@@ -144,12 +153,21 @@ $motion-duration: $duration-moderate-02;
     max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
   }
 
-  &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container--lower,
-  &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container--lower {
+  &.#{$block-class}--stacked-1-of-2
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ),
+  &.#{$block-class}--stacked-2-of-3
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
     max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05});
   }
 
-  &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container--lower {
+  &.#{$block-class}--stacked-1-of-3
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
     max-height: calc(
       100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
     );
@@ -333,7 +351,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--has-slug .#{$block-class}__content {
-    @include utilities.callout-gradient('default', 0);
+    @include utilities.ai-popover-gradient('default', 0);
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
   }

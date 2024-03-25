@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,17 +21,13 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 
 import styles from './_storybook-styles.scss';
 import DocsPage from './CreateModal.docs-page';
 
 export default {
-  title: getStoryTitle(CreateModal.displayName),
+  title: 'IBM Products/Patterns/Create flows/CreateModal',
   component: CreateModal,
   tags: ['autodocs'],
   parameters: {
@@ -239,22 +235,20 @@ TemplateWithFormValidation.propTypes = {
   ...CreateModal.propTypes,
 };
 
-export const Default = prepareStory(Template, {
-  storyName: 'Create Modal',
-  args: {
-    story: Default,
-    children: 1,
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.storyName = 'Create Modal';
+Default.args = {
+  story: Default,
+  children: 1,
+  ...defaultProps,
+};
 
-export const WithFormValidation = prepareStory(TemplateWithFormValidation, {
-  storyName: 'Create Modal with form validation',
-  args: {
-    story: WithFormValidation,
-    children: {
-      control: false,
-    },
-    ...defaultProps,
+export const WithFormValidation = TemplateWithFormValidation.bind({});
+WithFormValidation.storyName = 'Create Modal with form validation';
+WithFormValidation.args = {
+  story: WithFormValidation,
+  children: {
+    control: false,
   },
-});
+  ...defaultProps,
+};

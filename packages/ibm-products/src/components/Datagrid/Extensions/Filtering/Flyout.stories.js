@@ -12,10 +12,6 @@ import { Tooltip } from '@carbon/react';
 import { getBatchActions } from '../../Datagrid.stories';
 import { action } from '@storybook/addon-actions';
 import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
-import {
   Datagrid,
   useDatagrid,
   useFiltering,
@@ -31,7 +27,7 @@ import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { getDateFormat, multiSelectProps } from './Panel.stories';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
+  title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -263,63 +259,61 @@ const filters = [
   },
 ];
 
-export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout with batch update',
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    filterProps: ARG_TYPES.filterProps,
+export const FlyoutBatch = FilteringTemplateWrapper.bind({});
+FlyoutBatch.storyName = 'Filter flyout with batch update';
+FlyoutBatch.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  filterProps: ARG_TYPES.filterProps,
+};
+FlyoutBatch.args = {
+  gridTitle: 'Data table title',
+  gridDescription: 'Additional information if needed',
+  useDenseHeader: false,
+  emptyStateTitle: 'No filters match',
+  emptyStateDescription:
+    'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  filterProps: {
+    variation: 'flyout',
+    updateMethod: 'batch',
+    primaryActionLabel: 'Apply',
+    secondaryActionLabel: 'Cancel',
+    flyoutIconDescription: 'Open filters',
+    onFlyoutOpen: action('onFlyoutOpen'),
+    onFlyoutClose: action('onFlyoutClose'),
+    filters,
+    renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   },
-  args: {
-    gridTitle: 'Data table title',
-    gridDescription: 'Additional information if needed',
-    useDenseHeader: false,
-    emptyStateTitle: 'No filters match',
-    emptyStateDescription:
-      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'flyout',
-      updateMethod: 'batch',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      onFlyoutOpen: action('onFlyoutOpen'),
-      onFlyoutClose: action('onFlyoutClose'),
-      filters,
-      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
-    },
-  },
-});
+};
 
-export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout with instant update',
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    filterProps: ARG_TYPES.filterProps,
+export const FlyoutInstant = FilteringTemplateWrapper.bind({});
+FlyoutInstant.storyName = 'Filter flyout with instant update';
+FlyoutInstant.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  filterProps: ARG_TYPES.filterProps,
+};
+FlyoutInstant.args = {
+  gridTitle: 'Data table title',
+  gridDescription: 'Additional information if needed',
+  useDenseHeader: false,
+  emptyStateTitle: 'No filters match',
+  emptyStateDescription:
+    'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  filterProps: {
+    variation: 'flyout',
+    updateMethod: 'instant',
+    primaryActionLabel: 'Apply',
+    secondaryActionLabel: 'Cancel',
+    flyoutIconDescription: 'Open filters',
+    onFlyoutOpen: action('onFlyoutOpen'),
+    onFlyoutClose: action('onFlyoutClose'),
+    filters,
+    renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   },
-  args: {
-    gridTitle: 'Data table title',
-    gridDescription: 'Additional information if needed',
-    useDenseHeader: false,
-    emptyStateTitle: 'No filters match',
-    emptyStateDescription:
-      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps: {
-      variation: 'flyout',
-      updateMethod: 'instant',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      onFlyoutOpen: action('onFlyoutOpen'),
-      onFlyoutClose: action('onFlyoutClose'),
-      filters,
-      renderLabel: (key, value) => handleFilterTagLabelText(key, value),
-    },
-  },
-});
+};
 
 export const filterProps = {
   variation: 'flyout',
@@ -333,30 +327,29 @@ export const filterProps = {
   renderLabel: (key, value) => handleFilterTagLabelText(key, value),
 };
 
-export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout with initial filters',
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    filterProps: ARG_TYPES.filterProps,
+export const FlyoutWithInitialFilters = FilteringTemplateWrapper.bind({});
+FlyoutWithInitialFilters.storyName = 'Filter flyout with initial filters';
+FlyoutWithInitialFilters.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  filterProps: ARG_TYPES.filterProps,
+};
+FlyoutWithInitialFilters.args = {
+  initialState: {
+    filters: [
+      {
+        id: 'role',
+        type: 'radio',
+        value: 'developer',
+      },
+    ],
   },
-  args: {
-    initialState: {
-      filters: [
-        {
-          id: 'role',
-          type: 'radio',
-          value: 'developer',
-        },
-      ],
-    },
-    gridTitle: 'Data table title',
-    gridDescription: 'Additional information if needed',
-    useDenseHeader: false,
-    emptyStateTitle: 'No filters match',
-    emptyStateDescription:
-      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-    filterProps,
-  },
-});
+  gridTitle: 'Data table title',
+  gridDescription: 'Additional information if needed',
+  useDenseHeader: false,
+  emptyStateTitle: 'No filters match',
+  emptyStateDescription:
+    'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+  filterProps,
+};

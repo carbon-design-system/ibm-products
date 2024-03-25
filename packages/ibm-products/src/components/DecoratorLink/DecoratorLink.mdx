@@ -1,0 +1,43 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { DecoratorLink } from '.';
+import * as DecoratorLinkStories from './DecoratorLink.stories';
+
+# DecoratorLink
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Overview
+
+The DecoratorLink groups a key/value pair to look and behave like a single link.
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorLinkStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```js
+setLabelTitle: (score, scoreThresholds, magnitude) => {
+  if (typeof score !== 'number') {
+    return 'Unknown score';
+  }
+  return `"${magnitude}" magnitude. Score ${score} out of ${
+    scoreThresholds[scoreThresholds.length - 1]
+  }`;
+},
+```
+
+## Component API
+
+<ArgsTable />

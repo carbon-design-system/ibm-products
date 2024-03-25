@@ -1,6 +1,6 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import { getStoryId } from '../../global/js/utils/story-helper';
 import { ButtonMenu } from '.';
+import * as ButtonMenuStories from './ButtonMenu.stories';
 
 # ButtonMenu
 
@@ -12,14 +12,14 @@ import { ButtonMenu } from '.';
 
 ## Overview
 
-<!-- TODO: Overview. -->
+{/* <!-- TODO: Overview. --> */}
 
 ## Example usage
 
-<!-- TODO: One example per designed use case. -->
+{/* <!-- TODO: One example per designed use case. --> */}
 
 <Canvas>
-  <Story id={getStoryId(ButtonMenu.displayName, 'button-menu')} />
+  <Story of={ButtonMenuStories.buttonMenu} />
 </Canvas>
 
 ## Component API

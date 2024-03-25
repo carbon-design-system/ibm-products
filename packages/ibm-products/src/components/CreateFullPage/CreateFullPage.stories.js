@@ -1,14 +1,10 @@
 /**
- * Copyright IBM Corp. 2021, 2023
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { usePrefix } from '@carbon/react';
 import { CreateFullPage } from '.';
@@ -45,7 +41,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: getStoryTitle(CreateFullPage.displayName),
+  title: 'IBM Products/Patterns/Create flows/CreateFullPage',
   component: CreateFullPage,
   tags: ['autodocs'],
   parameters: {
@@ -532,39 +528,32 @@ const TemplateWithError = ({ ...args }) => {
   );
 };
 
-export const createFullPage = prepareStory(Template, {
-  args: {
-    ...defaultFullPageProps,
-  },
-});
+export const createFullPage = Template.bind({});
+createFullPage.args = {
+  ...defaultFullPageProps,
+};
 
-export const createFullPageWithSections = prepareStory(TemplateWithSections, {
-  args: {
-    ...defaultFullPageProps,
-  },
-});
+export const createFullPageWithSections = TemplateWithSections.bind({});
+createFullPageWithSections.args = {
+  ...defaultFullPageProps,
+};
 
-export const createFullPageWithHeader = prepareStory(Template, {
-  args: {
-    ...defaultFullPageProps,
-    title: 'Page title',
-    breadcrumbsOverflowAriaLabel:
-      'Open and close additional breadcrumb item list.',
-    breadcrumbs: [
-      { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
-      { key: '1', label: 'Breadcrumb 2', href: '/' },
-      { key: '2', label: 'Breadcrumb 3', href: '/' },
-      { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
-    ],
-    maxVisibleBreadcrumbs: 3,
-  },
-});
+export const createFullPageWithHeader = Template.bind({});
+createFullPageWithHeader.args = {
+  ...defaultFullPageProps,
+  title: 'Page title',
+  breadcrumbsOverflowAriaLabel:
+    'Open and close additional breadcrumb item list.',
+  breadcrumbs: [
+    { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
+    { key: '1', label: 'Breadcrumb 2', href: '/' },
+    { key: '2', label: 'Breadcrumb 3', href: '/' },
+    { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
+  ],
+  maxVisibleBreadcrumbs: 3,
+};
 
-export const createFullPageWithStepInErrorState = prepareStory(
-  TemplateWithError,
-  {
-    args: {
-      ...defaultFullPageProps,
-    },
-  }
-);
+export const createFullPageWithStepInErrorState = TemplateWithError.bind({});
+createFullPageWithStepInErrorState.args = {
+  ...defaultFullPageProps,
+};

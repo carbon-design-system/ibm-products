@@ -10,10 +10,6 @@ import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
-import {
   Datagrid,
   useDatagrid,
   useExpandedRow,
@@ -30,7 +26,7 @@ import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
+  title: 'IBM Products/Components/Datagrid/ExpandableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -215,16 +211,15 @@ const expandableRowControlProps = {
     sharedDatagridProps.expanderButtonTitleCollapsed,
 };
 const expandableRowStoryName = 'With expandable row';
-export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
-  storyName: expandableRowStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    expandedContentHeight: ARG_TYPES.expandedContentHeight,
-    expanderButtonTitleExpanded: ARG_TYPES.expanderButtonTitleExpanded,
-    expanderButtonTitleCollapsed: ARG_TYPES.expanderButtonTitleCollapsed,
-  },
-  args: {
-    ...expandableRowControlProps,
-  },
-});
+export const ExpandableRowStory = BasicTemplateWrapper.bind({});
+ExpandableRowStory.storyName = expandableRowStoryName;
+ExpandableRowStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  expandedContentHeight: ARG_TYPES.expandedContentHeight,
+  expanderButtonTitleExpanded: ARG_TYPES.expanderButtonTitleExpanded,
+  expanderButtonTitleCollapsed: ARG_TYPES.expanderButtonTitleCollapsed,
+};
+ExpandableRowStory.args = {
+  ...expandableRowControlProps,
+};

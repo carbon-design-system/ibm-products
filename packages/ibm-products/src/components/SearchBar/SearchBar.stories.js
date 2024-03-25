@@ -8,18 +8,13 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { SearchBar } from '.';
 import mdx from './SearchBar.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(SearchBar.displayName),
+  title: 'IBM Products/Components/Search bar/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {
@@ -75,44 +70,39 @@ const ScopesTemplate = ({ ...args }) => {
   return <SearchBar {...args} />;
 };
 
-export const Default = prepareStory(DefaultTemplate, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const Default = DefaultTemplate.bind({});
+Default.args = {
+  ...defaultProps,
+};
 
-export const InitialValue = prepareStory(DefaultTemplate, {
-  args: {
-    ...defaultProps,
-    value: 'Initial value',
-  },
-});
+export const InitialValue = DefaultTemplate.bind({});
+InitialValue.args = {
+  ...defaultProps,
+  value: 'Initial value',
+};
 
-export const Scopes = prepareStory(ScopesTemplate, {
-  args: {
-    ...defaultProps,
-    scopes,
-    scopesTypeLabel: 'Scopes',
-    scopeToString: (item) => (item ? item.text : ''),
-  },
-});
+export const Scopes = ScopesTemplate.bind({});
+Scopes.args = {
+  ...defaultProps,
+  scopes,
+  scopesTypeLabel: 'Scopes',
+  scopeToString: (item) => (item ? item.text : ''),
+};
 
-export const UnsortedScopes = prepareStory(ScopesTemplate, {
-  args: {
-    ...defaultProps,
-    scopes,
-    scopesTypeLabel: 'Scopes',
-    sortItems: (items) => items,
-    scopeToString: (item) => (item ? item.text : ''),
-  },
-});
+export const UnsortedScopes = ScopesTemplate.bind({});
+UnsortedScopes.args = {
+  ...defaultProps,
+  scopes,
+  scopesTypeLabel: 'Scopes',
+  sortItems: (items) => items,
+  scopeToString: (item) => (item ? item.text : ''),
+};
 
-export const SelectedScopes = prepareStory(DefaultTemplate, {
-  args: {
-    ...defaultProps,
-    scopes,
-    scopesTypeLabel: 'Scopes',
-    selectedScopes: [scopes[0]],
-    scopeToString: (item) => (item ? item.text : ''),
-  },
-});
+export const SelectedScopes = DefaultTemplate.bind({});
+SelectedScopes.args = {
+  ...defaultProps,
+  scopes,
+  scopesTypeLabel: 'Scopes',
+  selectedScopes: [scopes[0]],
+  scopeToString: (item) => (item ? item.text : ''),
+};

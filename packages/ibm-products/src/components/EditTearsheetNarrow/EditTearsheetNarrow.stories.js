@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,11 +16,6 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
@@ -29,8 +24,8 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
-  title: getStoryTitle(EditTearsheetNarrow.displayName),
-  component: CreateTearsheetNarrow,
+  title: 'IBM Products/Patterns/Edit and update/EditTearsheetNarrow',
+  component: EditTearsheetNarrow,
   tags: ['autodocs'],
   parameters: {
     styles,
@@ -277,25 +272,22 @@ const WithValidationTemplate = ({ slug, ...args }) => {
 };
 
 const editTearsheetNarrowStoryName = 'Default';
-export const editTearsheetNarrow = prepareStory(Template, {
-  storyName: editTearsheetNarrowStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const editTearsheetNarrow = Template.bind({});
+editTearsheetNarrow.storyName = editTearsheetNarrowStoryName;
+editTearsheetNarrow.args = {
+  ...defaultStoryProps,
+};
 
 const withValidationStoryName = 'With Form Validation';
-export const withValidation = prepareStory(WithValidationTemplate, {
-  storyName: withValidationStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withValidation = WithValidationTemplate.bind({});
+withValidation.storyName = withValidationStoryName;
+withValidation.args = {
+  ...defaultStoryProps,
+};
 
 const withMultipleFormsStoryName = 'With Multiple Forms';
-export const withMultipleForms = prepareStory(WithValidationTemplate, {
-  storyName: withMultipleFormsStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withMultipleForms = WithValidationTemplate.bind({});
+withMultipleForms.storyName = withMultipleFormsStoryName;
+withMultipleForms.args = {
+  ...defaultStoryProps,
+};

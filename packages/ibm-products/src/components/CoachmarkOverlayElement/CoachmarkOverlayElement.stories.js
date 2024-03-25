@@ -9,11 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
   Coachmark,
@@ -27,7 +23,8 @@ import mdx from './CoachmarkOverlayElement.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CoachmarkOverlayElement.displayName),
+  title:
+    'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkOverlayElement',
   component: CoachmarkOverlayElement,
   tags: ['autodocs'],
   argTypes: {
@@ -79,9 +76,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkOverlayElement = prepareStory(Template, {
-  args: {
-    closeButtonLabel: 'Done',
-    className: 'myOverlayElement',
-  },
-});
+export const coachmarkOverlayElement = Template.bind({});
+coachmarkOverlayElement.args = {
+  closeButtonLabel: 'Done',
+  className: 'myOverlayElement',
+};

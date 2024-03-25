@@ -1,16 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 
 import { SteppedAnimatedMedia } from '.';
 
@@ -25,7 +20,7 @@ const storyClass = 'stepped-animated-media-stories';
 import DocsPage from './SteppedAnimatedMedia.docs-page';
 
 export default {
-  title: getStoryTitle(SteppedAnimatedMedia.displayName),
+  title: 'IBM Products/Internal/SteppedAnimatedMedia',
   component: SteppedAnimatedMedia,
   tags: ['autodocs'],
   parameters: {
@@ -57,10 +52,9 @@ const Template = (args) => {
   );
 };
 
-export const steppedAnimatedMedia = prepareStory(Template, {
-  args: {
-    className: `${storyClass}__stepped-animated-media`,
-    filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
-    playStep: 0,
-  },
-});
+export const steppedAnimatedMedia = Template.bind({});
+steppedAnimatedMedia.args = {
+  className: `${storyClass}__stepped-animated-media`,
+  filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
+  playStep: 0,
+};

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -19,6 +19,7 @@ import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { User } from '@carbon/react/icons';
 import '../../global/js/utils/props-helper';
+import { useTheme } from '@carbon/react';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -70,6 +71,10 @@ export let UserAvatar = React.forwardRef(
     },
     ref
   ) => {
+    const theme = useTheme();
+    useEffect(() => {
+      console.log(theme);
+    }, [theme]);
     const carbonPrefix = usePrefix();
     const iconSize = {
       sm: 16,
@@ -167,7 +172,20 @@ UserAvatar.propTypes = {
   /**
    * Provide the background color need to be set for UserAvatar.
    */
-  backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
+  backgroundColor: PropTypes.oneOf([
+    'order-1-cyan',
+    'order-2-gray',
+    'order-3-green',
+    'order-4-magenta',
+    'order-5-purple',
+    'order-6-teal',
+    'order-7-cyan',
+    'order-8-gray',
+    'order-9-green',
+    'order-10-magenta',
+    'order-11-purple',
+    'order-12-teal',
+  ]),
   /**
    * Provide an optional class to be applied to the containing node.
    */

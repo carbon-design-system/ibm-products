@@ -27,10 +27,10 @@ const renderComponent = ({ ...rest } = {}) =>
 describe(componentName, () => {
   it('should return a circle with background color', async () => {
     renderComponent({
-      backgroundColor: 'light-cyan',
+      backgroundColor: 'order-1-cyan',
     });
     const element = screen.getByRole('img');
-    const hasBackgroundColor = element.className.includes('light-cyan');
+    const hasBackgroundColor = element.className.includes('order-1-cyan');
     expect(hasBackgroundColor).toBeTruthy();
   });
 

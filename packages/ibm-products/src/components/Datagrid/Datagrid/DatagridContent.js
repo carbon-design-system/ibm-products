@@ -112,6 +112,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
                 keysPressedList,
                 state: inlineEditState,
                 usingMac,
+                ref: multiKeyTrackingRef,
               }))
           }
           onFocus={

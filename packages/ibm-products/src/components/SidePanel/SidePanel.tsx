@@ -51,6 +51,14 @@ interface SidePanelProps {
    */
   actionToolbarButtons?: ButtonProps[];
 
+  /**
+   * The primary actions to be shown in the side panel. Each action is
+   * specified as an object that will render expressive Buttons. Any Button
+   * props can be passed in and any other fields in the object will be
+   * passed through to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
   actions?: ButtonProps[];
 
   /**

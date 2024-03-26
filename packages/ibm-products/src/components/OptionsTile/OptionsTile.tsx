@@ -68,13 +68,13 @@ interface OptionsTileProps {
    * Provide a function which will be called each time the user
    * toggles the open state of the OptionsTile.
    */
-  onChange?: (value: any) => void;
+  onChange?: (value: boolean) => void;
 
   /**
    * Provide a function which will be called each time the user
    * interacts with the toggle.
    */
-  onToggle: (value: any) => void;
+  onToggle: (value: boolean) => void;
 
   /**
    * Whether the OptionsTile is in open state.
@@ -112,6 +112,11 @@ interface OptionsTileProps {
   warnText?: string;
 }
 
+// Default values for props
+const defaults = {
+  size: 'lg' as const,
+};
+
 export let OptionsTile = React.forwardRef(
   (
     {
@@ -125,7 +130,7 @@ export let OptionsTile = React.forwardRef(
       onChange,
       onToggle,
       open,
-      size = 'lg',
+      size = defaults.size,
       summary,
       title,
       titleId: userDefinedTitleId,
@@ -141,7 +146,7 @@ export let OptionsTile = React.forwardRef(
     const [isOpen, setIsOpen] = useControllableState({
       defaultValue: open || null,
       name: 'OptionsTile',
-      onChange: (value: any) => onChange?.(value),
+      onChange: (value: boolean) => onChange?.(value),
       value: open,
     });
 

@@ -45,7 +45,7 @@ import { ButtonProps } from '@carbon/react';
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
 
-interface SidePanelProps {
+type SidePanelBaseProps = {
   /**
    * Sets the action toolbar buttons
    */
@@ -179,7 +179,34 @@ interface SidePanelProps {
    * Sets the title text
    */
   title?: string;
-}
+};
+
+type SidePanelSlideInProps =
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn?: false;
+      /**
+       * Specify a CSS selector that matches the DOM element that should
+       * be focused when the side panel opens.
+       */
+      selectorPrimaryFocus?: string;
+    }
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn: true;
+      /**
+       * Specify a CSS selector that matches the DOM element that should
+       * be focused when the side panel opens. Required when for slide in
+       * panels
+       */
+      selectorPrimaryFocus: string;
+    };
+
+type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
 // `any` is a work around until ActionSet is migrated to TS
 const MotionActionSet = motion<any>(ActionSet);
@@ -961,6 +988,7 @@ SidePanel.propTypes = {
    * Specify a CSS selector that matches the DOM element that should
    * be focused when the side panel opens
    */
+  /**@ts-ignore*/
   selectorPrimaryFocus: PropTypes.string,
 
   /**
@@ -972,6 +1000,7 @@ SidePanel.propTypes = {
   /**
    * Determines if this panel slides in
    */
+  /**@ts-ignore*/
   slideIn: PropTypes.bool,
 
   /**

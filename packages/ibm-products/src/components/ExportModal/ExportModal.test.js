@@ -97,6 +97,27 @@ describe(componentName, () => {
     expect(onRequestSubmit).not.toBeCalled();
   });
 
+  it('does not submit with empty spaces as text input', () => {
+    const { click, type } = userEvent;
+    const { fn } = jest;
+    const onRequestSubmit = fn();
+    const props = {
+      ...defaultProps,
+      onRequestSubmit,
+    };
+
+    const { container } = render(<ExportModal {...props} />);
+    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+    const submitBtn = container.querySelector(
+      `.${carbon.prefix}--btn--primary`
+    );
+
+    type(textInput, '    ');
+    expect(submitBtn).toBeDisabled();
+    click(submitBtn);
+    expect(onRequestSubmit).not.toBeCalled();
+  });
+
   it('does not submit with invalid extension', () => {
     const { change, blur } = fireEvent;
     const { click } = userEvent;
@@ -166,6 +187,22 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
+  });
+
+  it('passes additional input properties to the text input', () => {
+    const { type } = userEvent;
+    const props = {
+      ...defaultProps,
+      inputProps: {
+        maxLength: 5,
+      },
+    };
+
+    const { container } = render(<ExportModal {...props} />);
+    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+
+    type(textInput, 'i-should-not-be-able-to-type-more-than-5-characters');
+    expect(textInput).toHaveAttribute('value', 'i-sho');
   });
 
   it('has no accessibility violations', async () => {

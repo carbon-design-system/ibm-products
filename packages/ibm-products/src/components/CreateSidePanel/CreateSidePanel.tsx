@@ -78,8 +78,8 @@ interface CreateSidePanelProps {
    */
   secondaryButtonText: string;
   /**
-   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
-   * This prop is required when using the `slideIn` variant of the side panel.
+   * This is the selector to the element that contains all of the page content that will shrink when the panel is a slide in.
+   * This prop is required since create flows use the `slideIn` variant of the side panel.
    */
   selectorPageContent: string;
   /**

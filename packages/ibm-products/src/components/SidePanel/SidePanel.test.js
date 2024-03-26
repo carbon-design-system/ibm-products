@@ -285,9 +285,9 @@ describe('SidePanel', () => {
         },
       ],
     });
-    const sidePanelAction = screen.getByText(/Primary button/i);
+    const actionsContainer = screen.getByRole('presentation');
     expect(
-      sidePanelAction.parentElement.classList.contains(
+      actionsContainer.classList.contains(
         `${blockClass}__actions-container--condensed`
       )
     ).toBeTruthy();

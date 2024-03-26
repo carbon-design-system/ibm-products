@@ -607,6 +607,7 @@ export let SidePanel = React.forwardRef(
               {/* footer */}
               <MotionActionSet
                 actions={actions}
+                autoStack
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
                 custom={shouldReduceMotion}

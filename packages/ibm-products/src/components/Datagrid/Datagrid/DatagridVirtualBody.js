@@ -84,6 +84,7 @@ const DatagridVirtualBody = (datagridState) => {
       </div>
       <TableBody
         {...getTableBodyProps({ role: undefined })}
+        aria-live={null}
         onScroll={syncScroll}
       >
         <VariableSizeList

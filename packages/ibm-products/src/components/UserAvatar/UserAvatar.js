@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';

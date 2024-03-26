@@ -78,6 +78,7 @@ const defaults = {
     ActionBar: false,
     FilterPanel: false,
     FilterPanelCheckbox: false,
+    FilterPanelCheckboxWithOverflow: false,
     FilterPanelLabel: false,
 
     /* new component flags here - comment used by generate CLI */
@@ -95,6 +96,9 @@ const defaults = {
     DecoratorSingleButton: false,
     DecoratorDualButton: false,
     DescriptionList: false,
+    DescriptionListBody: false,
+    DescriptionListCell: false,
+    DescriptionListRow: false,
     SearchBar: false,
     UserAvatar: false,
 

@@ -47,7 +47,7 @@ describe(componentName, () => {
 
   it('renders a count', async () => {
     const filterPanelLabelClass = `${pkg.prefix}--filter-panel-label`;
-    const { container } = renderComponent({ count: count });
+    const { container } = renderComponent({ count });
     expect(
       container.querySelector(`.${filterPanelLabelClass}__count`).textContent
     ).toBe('5');
@@ -60,7 +60,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = renderComponent({ className: className });
+    const { container } = renderComponent({ className });
     expect(container.querySelector(`.${blockClass}`)).toHaveClass(className);
   });
 
@@ -71,7 +71,7 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref: ref });
+    renderComponent({ ref });
     expect(ref.current).toBeInTheDocument();
   });
 

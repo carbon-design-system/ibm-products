@@ -98,7 +98,7 @@ export let FilterPanelCheckboxWithOverflow = React.forwardRef(
 
         {showMenuButton && (
           <OverflowMenu
-            open={overflowMenuProps?.open ? true : false}
+            open={overflowMenuProps?.open}
             className={cx(
               `${blockClass}__overflow-button`,
               overflowMenuProps?.menuClass

@@ -21,15 +21,6 @@
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox-with-overflow;
 $carbon: #{c4p-settings.$carbon-prefix};
 
-// BUG FIX: hide small (unrelated?) rectangle that appears when showing
-// the OverflowMenu, but doesn't seem to belong or serve a function.
-html
-  .#{$carbon}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
-    .#{$carbon}--breadcrumb-menu-options
-  )::after {
-  inline-size: 0;
-}
-
 .#{$block-class} {
   position: relative;
 }
@@ -47,11 +38,9 @@ html
 }
 // Size the menu button.
 .#{$block-class} .#{$block-class}__overflow-button {
-  width: to-rem(23px);
-  height: to-rem(23px);
-  background-color: $field;
-  block-size: to-rem(23px);
-  min-block-size: to-rem(23px);
+  width: $spacing-06;
+  block-size: $spacing-06;
+  min-block-size: $spacing-06;
 }
 
 // OverflowMenu <li>
@@ -62,4 +51,11 @@ html
 .#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__btn {
   max-width: none;
   justify-content: flex-end;
+}
+// SIZE FIX: This element is being used to "erase" the drop shadow
+// created by the menu items overtop the menu button.
+.#{$block-class}__overflow-options.#{$carbon}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+    .#{$carbon}--breadcrumb-menu-options
+  )::after {
+  inline-size: $spacing-06;
 }

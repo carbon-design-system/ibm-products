@@ -39,19 +39,12 @@ import {
 
 import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
-import {
-  handleMultipleKeys,
-  includesResourceKey,
-  includesShift,
-} from './utils/handleMultipleKeys';
+
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
-import { handleActiveCellInSelectionEnter } from './utils/handleActiveCellInSelectionEnter';
-import { handleActiveCellInSelectionTab } from './utils/handleActiveCellInSelectionTab';
-import { handleCellDeletion } from './utils/handleCellDeletion';
-// cspell:words rowcount colcount
+import { handleKeyPress } from './utils/commonEventHandlers';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -444,119 +437,34 @@ export let DataSpreadsheet = React.forwardRef(
       ]
     );
 
-    const handleKeyPress = useCallback(
+    const handleKeyPressEvent = useCallback(
       (event) => {
-        const { key } = event;
-        // Command keys need to be returned as there is default browser behavior with these keys
-        // Needs to be returned in editing mode
-        if (checkForReturnCondition(key)) {
-          return;
-        }
-
-        // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
-        if (
-          ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
-        ) {
-          if (
-            selectionAreas?.length &&
-            keysPressedList.length < 2 &&
-            !includesShift(keysPressedList)
-          ) {
-            setSelectionAreas([]);
-            setSelectionAreaData([]);
-            removeCellSelections({ spreadsheetRef });
-          }
-        }
-        if (keysPressedList?.length > 1) {
-          handleMultipleKeys({
-            activeCellCoordinates,
-            event,
-            keysPressedList,
-            selectionAreas,
-            currentMatcher,
-            rows,
-            setSelectionAreas,
-            columns,
-            updateActiveCellCoordinates,
-            spreadsheetRef,
-            removeCellSelections,
-            blockClass,
-            setCurrentMatcher,
-            usingMac,
-          });
-        }
-
-        // Allow arrow key navigation if there are less than two activeKeys OR
-        // if one of the activeCellCoordinates is in a header position
-        // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
-
-        if (
-          (keysPressedList.length < 2 && !includesShift(keysPressedList)) ||
-          activeCellCoordinates.row === 'header' ||
-          activeCellCoordinates.column === 'header'
-        ) {
-          switch (key) {
-            case 'Backspace':
-            case 'Delete': {
-              const deleteParams = {
-                selectionAreas,
-                currentMatcher,
-                rows,
-                setActiveCellContent,
-                updateData,
-                activeCellCoordinates,
-              };
-              handleCellDeletion(deleteParams);
-              break;
-            }
-            // Enter
-            case 'Enter': {
-              handleActiveCellInSelectionEnter({
-                activeCellInsideSelectionArea,
-                activeCellCoordinates,
-                activeCellRef,
-                selectionAreas,
-                updateActiveCellCoordinates,
-              });
-              break;
-            }
-            // HOME
-            case 'Home':
-            case 'End': {
-              event.preventDefault();
-              if (includesResourceKey(keysPressedList, usingMac)) {
-                return;
-              }
-              handleHomeEndKey({ type: key });
-              break;
-            }
-            // Tab
-            case 'Tab': {
-              if (activeCellInsideSelectionArea) {
-                event.preventDefault();
-                return handleActiveCellInSelectionTab({
-                  activeCellInsideSelectionArea,
-                  activeCellCoordinates,
-                  activeCellRef,
-                  selectionAreas,
-                  updateActiveCellCoordinates,
-                });
-              }
-              setSelectionAreas([]);
-              removeActiveCell();
-              removeCellEditor();
-              setContainerHasFocus(false);
-              setActiveCellCoordinates(null);
-              break;
-            }
-            case 'ArrowLeft':
-            case 'ArrowUp':
-            case 'ArrowRight':
-            case 'ArrowDown': {
-              handleArrowKeyPress(key);
-            }
-          }
-        }
+        handleKeyPress(
+          event,
+          activeCellInsideSelectionArea,
+          updateActiveCellCoordinates,
+          activeCellCoordinates,
+          removeActiveCell,
+          columns,
+          rows,
+          spreadsheetRef,
+          currentMatcher,
+          removeCellEditor,
+          selectionAreas,
+          handleHomeEndKey,
+          keysPressedList,
+          usingMac,
+          updateData,
+          checkForReturnCondition,
+          handleArrowKeyPress,
+          setSelectionAreas,
+          setSelectionAreaData,
+          setCurrentMatcher,
+          activeCellRef,
+          setActiveCellCoordinates,
+          setContainerHasFocus,
+          setActiveCellContent
+        );
       },
       [
         activeCellInsideSelectionArea,
@@ -785,7 +693,7 @@ export let DataSpreadsheet = React.forwardRef(
       selectionAreas,
       handleActiveCellMouseEnterCallback,
     ]);
-
+    // cspell:words rowcount colcount
     return (
       <div
         {...rest}
@@ -806,7 +714,7 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         aria-label={spreadsheetAriaLabel}
-        onKeyDown={handleKeyPress}
+        onKeyDown={handleKeyPressEvent}
         onFocus={() => setContainerHasFocus(true)}
       >
         <div ref={multiKeyTrackingRef}>

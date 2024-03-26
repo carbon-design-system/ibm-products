@@ -14,7 +14,8 @@
   "files": [
     "es",
     "lib",
-    "scss"
+    "scss",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -32,7 +33,8 @@
     "clean": "rimraf es lib scss",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "peerDependencies": {
     "@carbon/grid": "^10.43.2",
@@ -45,6 +47,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.13",
+    "@ibm/telemetry-js": "^1.3.0",
     "focus-trap-react": "^10.0.2",
     "pluralize": "^8.0.0",
     "react-select": "^5.7.0",

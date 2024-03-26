@@ -19,7 +19,6 @@ import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { User } from '@carbon/react/icons';
 import '../../global/js/utils/props-helper';
-import { useTheme } from '@carbon/react';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -71,10 +70,6 @@ export let UserAvatar = React.forwardRef(
     },
     ref
   ) => {
-    const theme = useTheme();
-    useEffect(() => {
-      console.log(theme);
-    }, [theme]);
     const carbonPrefix = usePrefix();
     const iconSize = {
       sm: 16,

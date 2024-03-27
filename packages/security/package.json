@@ -15,7 +15,8 @@
     "css",
     "es",
     "lib",
-    "scss"
+    "scss",
+    "telemetry.yml"
   ],
   "keywords": [
     "carbon",
@@ -41,6 +42,7 @@
     "clean": "rimraf css es lib scss",
     "clean:ibm-security": "rimraf ibm-security",
     "clean:src": "rimraf src",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "sync": "run-s clean:src sync:* clean:ibm-security",
     "sync:clone": "git clone git@github.com:carbon-design-system/ibm-security.git --depth 1",
     "sync:copy": "yarn dlx copyfiles 'ibm-security/src/**/*' . -u 1",
@@ -62,6 +64,7 @@
     "@carbon/motion": "10.29.2",
     "@carbon/themes": "10.55.3",
     "@carbon/type": "10.45.3",
+    "@ibm/telemetry-js": "^1.3.0",
     "carbon-components": "10.58.13",
     "carbon-components-react": "7.59.20",
     "carbon-icons": "7.0.7",

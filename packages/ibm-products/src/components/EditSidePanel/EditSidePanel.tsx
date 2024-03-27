@@ -74,7 +74,7 @@ interface EditSidePanelBaseProps extends PropsWithChildren {
   /**
    * Specifies whether the CreateSidePanel is open or not.
    */
-  open?: boolean;
+  open: boolean;
 
   /**
    * Determines if the side panel is on the right or left
@@ -94,7 +94,7 @@ interface EditSidePanelBaseProps extends PropsWithChildren {
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: ReactNode;
+  selectorPrimaryFocus?: string;
 
   /**
    * Sets the size of the side panel
@@ -119,7 +119,7 @@ interface EditSidePanelBaseProps extends PropsWithChildren {
   /**
    * The title of the CreateSidePanel is usually the product or service name.
    */
-  title: ReactNode;
+  title?: string;
 }
 
 interface EditSidePanelSlideInProps {
@@ -317,7 +317,7 @@ EditSidePanel.propTypes = {
   /**
    * Specifies whether the CreateSidePanel is open or not.
    */
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
 
   /**
    * Determines if the side panel is on the right or left
@@ -342,7 +342,7 @@ EditSidePanel.propTypes = {
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: PropTypes.node.isRequired,
+  selectorPrimaryFocus: PropTypes.string,
 
   /**
    * Sets the size of the side panel
@@ -380,5 +380,6 @@ EditSidePanel.propTypes = {
   /**
    * The title of the CreateSidePanel is usually the product or service name.
    */
-  title: PropTypes.node.isRequired,
+  /**@ts-ignore*/
+  title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
 };

@@ -8,8 +8,9 @@
 // ProductiveCard uses the following IBM Products components:
 // Card
 @use '../Card/card' as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -31,7 +32,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   .#{$block-class}__footer {
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid theme.$border-subtle-01;
+    border-top: 1px solid $border-subtle-01;
   }
 
   .#{$block-class}__footer-no-button {
@@ -60,7 +61,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
       left: 0;
       width: 0.05rem;
       height: $spacing-06;
-      background-color: theme.$layer-hover-01;
+      background-color: $layer-hover-01;
       content: '';
       opacity: 1;
     }
@@ -100,5 +101,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
   .#{$block-class}__header-container {
     align-items: flex-start;
+  }
+}
+
+.#{$block-class}-stacked__clickable {
+  padding: 0;
+  .#{$block-class}__stackedTile {
+    cursor: pointer;
+  }
+  .#{$block-class}__stackedTile:hover {
+    background-color: $layer-hover;
   }
 }

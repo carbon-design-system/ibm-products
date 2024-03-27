@@ -25,7 +25,7 @@ const Columns = ({
   assistiveTextInstructionsLabel,
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
-  customizeTearsheetHeadingLabel
+  customizeTearsheetHeadingLabel,
 }) => {
   const listId = useRef(uuidv4()); // keep id between renders
   const listRef = useRef(null);

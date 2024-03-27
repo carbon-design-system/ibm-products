@@ -10,18 +10,22 @@ import { action } from '@storybook/addon-actions';
 
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
-import { FilterPanel, FilterPanelCheckbox } from '..';
-import mdx from './FilterPanelCheckbox.mdx';
+import { OverflowMenuItem } from '@carbon/react';
+import { FilterPanel } from '..';
+import { FilterPanelCheckboxWithOverflow } from '.';
+import mdx from './FilterPanelCheckboxWithOverflow.mdx';
 
 import styles from '../_storybook-styles.scss';
 
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panel/Filter Panel Checkbox',
-  component: FilterPanelCheckbox,
+  title:
+    'IBM Products/Components/Filter panel/Filter Panel Checkbox with Overflow',
+  component: FilterPanelCheckboxWithOverflow,
   tags: ['autodocs'],
   argTypes: {
+    children: { control: { type: {} } },
     className: { control: { type: {} } },
     id: { table: { disable: true } },
     onChange: { table: { disable: true } },
@@ -76,18 +80,47 @@ const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       <FilterPanel>
-        <FilterPanelCheckbox {...args} />
+        <FilterPanelCheckboxWithOverflow {...args}>
+          <OverflowMenuItem
+            itemText="Option 1"
+            onClick={(event) => {
+              action('onClick Option 1')(event);
+            }}
+          />
+          <OverflowMenuItem
+            itemText="Option 2, preselected"
+            onClick={(event) => {
+              action('onClick Option 2')(event);
+            }}
+            data-storybook-example-primary-focus
+          />
+          <OverflowMenuItem
+            itemText="Option 3"
+            onClick={(event) => {
+              action('onClick Option 3')(event);
+            }}
+          />
+          <OverflowMenuItem
+            itemText="Option 4"
+            onClick={(event) => {
+              action('onClick Option 4')(event);
+            }}
+          />
+        </FilterPanelCheckboxWithOverflow>
       </FilterPanel>
     </div>
   );
 };
 
 export const Default = Template.bind({});
-Default.storyName = 'Filter Panel Checkbox';
+Default.storyName = 'Filter Panel Checkbox with Overflow';
 Default.args = {
   id: uuidv4(),
   // Pass-through prop: Carbon's Checkbox onChange handler.
   onChange: (event, { checked, id }) =>
     action('onChange Checkbox')(checked, id, event),
+  overflowMenuProps: {
+    selectorPrimaryFocus: '[data-storybook-example-primary-focus]',
+  },
   title: '',
 };

@@ -37,18 +37,18 @@ describe(componentName, () => {
   });
 
   it(`renders children`, async () => {
-    renderComponent({ children: children });
+    renderComponent({ children });
     expect(screen.getByText(children)).toBeInTheDocument();
   });
 
   it('applies className to the containing node', async () => {
-    renderComponent({ className: className });
+    renderComponent({ className });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ className: className, ref: ref });
+    renderComponent({ className, ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 });

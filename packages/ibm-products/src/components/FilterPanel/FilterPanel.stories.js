@@ -7,10 +7,15 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { OverflowMenuItem } from '@carbon/react';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { FilterPanel, FilterPanelCheckbox } from '.';
+import {
+  FilterPanel,
+  FilterPanelCheckbox,
+  FilterPanelCheckboxWithOverflow,
+} from '.';
 import mdx from './FilterPanel.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -62,29 +67,71 @@ const Template = (args) => {
       <FilterPanel {...args}>
         <FilterPanelCheckbox
           count={6}
-          labelText="Filter 1"
+          labelText="Label"
           // "id" and "onChange" are pass-through props to Carbon's Checkbox.
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
-            action('FilterPanelCheckbox onChange')(checked, id, event)
-          }
-        />
-        <FilterPanelCheckbox
-          count={10}
-          labelText="Filter 2"
-          id={uuidv4()}
-          onChange={(event, { checked, id }) =>
-            action('FilterPanelCheckbox onChange')(checked, id, event)
+            action('onChange Checkbox')(checked, id, event)
           }
         />
         <FilterPanelCheckbox
           count={'1,500'}
-          labelText="Filter 3: really long filter name"
+          labelText={
+            <>
+              <strong>Formatted</strong> <em>label</em>
+            </>
+          }
           id={uuidv4()}
           onChange={(event, { checked, id }) =>
-            action('FilterPanelCheckbox onChange')(checked, id, event)
+            action('onChange Checkbox')(checked, id, event)
           }
         />
+        <FilterPanelCheckbox
+          count={10}
+          labelText="Really, really long label name"
+          id={uuidv4()}
+          onChange={(event, { checked, id }) =>
+            action('onChange Checkbox')(checked, id, event)
+          }
+        />
+        <FilterPanelCheckboxWithOverflow
+          {...args}
+          count={6}
+          id={uuidv4()}
+          labelText="With menu"
+          onChange={(event, { checked, id }) =>
+            action('onChange Checkbox')(checked, id, event)
+          }
+          overflowMenuProps={{
+            selectorPrimaryFocus: '[data-storybook-example-primary-focus]',
+          }}
+        >
+          <OverflowMenuItem
+            itemText="Option 1"
+            onClick={(event) => {
+              action('onClick Option 1')(event);
+            }}
+          />
+          <OverflowMenuItem
+            itemText="Option 2, preselected"
+            onClick={(event) => {
+              action('onClick Option 2')(event);
+            }}
+            data-storybook-example-primary-focus
+          />
+          <OverflowMenuItem
+            itemText="Option 3"
+            onClick={(event) => {
+              action('onClick Option 3')(event);
+            }}
+          />
+          <OverflowMenuItem
+            itemText="Option 4"
+            onClick={(event) => {
+              action('onClick Option 4')(event);
+            }}
+          />
+        </FilterPanelCheckboxWithOverflow>
       </FilterPanel>
     </div>
   );

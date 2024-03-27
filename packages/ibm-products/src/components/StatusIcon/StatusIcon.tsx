@@ -4,7 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { PropsWithChildren, ReactSVGElement, forwardRef, Ref} from 'react';
+import React, {
+  PropsWithChildren,
+  ReactSVGElement,
+  forwardRef,
+  Ref,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -39,48 +44,51 @@ users to quickly assess and identify status and respond accordingly.
  */
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Theme = 'light'| 'dark';
-type Kind = 'fatal'| 'critical' | 'major-warning' |'minor-warning' |'undefined' |'unknown'
-| 'normal' | 'info' | 'in-progress' | 'running'| 'pending';
-interface StatusIconProps extends PropsWithChildren
-{
-   /**
+type Theme = 'light' | 'dark';
+type Kind =
+  | 'fatal'
+  | 'critical'
+  | 'major-warning'
+  | 'minor-warning'
+  | 'undefined'
+  | 'unknown'
+  | 'normal'
+  | 'info'
+  | 'in-progress'
+  | 'running'
+  | 'pending';
+interface StatusIconProps extends PropsWithChildren {
+  /**
    * Provide an optional class to be applied to the modal root node.
    */
-  className ?: string;
+  className?: string;
   /**
    * A required prop that provides a title element and tooltip for the icon for accessibility purposes
    */
-  iconDescription : string;
+  iconDescription: string;
   /**
    * A required prop that displays the respective icon associated with the status
    */
-  kind : Kind;
+  kind: Kind;
   /**
    * A required prop that displays the size of the icon associate with the status
    */
-  size : Size;
-   /**
+  size: Size;
+  /**
    * A required prop that displays the theme of the icon associated with the status
    */
-  theme : Theme;
+  theme: Theme;
 }
-export let StatusIcon = forwardRef<ReactSVGElement | null ,StatusIconProps>(
-  ({ 
-     kind,
-     theme, 
-     size, 
-     className,
-     iconDescription,
-      ...rest 
-    }: StatusIconProps,
-     ref 
-     ) => {
+export let StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
+  (
+    { kind, theme, size, className, iconDescription, ...rest }: StatusIconProps,
+    ref
+  ) => {
     const forwardedRef = ref as Ref<ReactSVGElement>;
-  
+
     const icons = {
-      fatal: { 
-        sm: forwardRef((props,  _ref) => (
+      fatal: {
+        sm: forwardRef((props, _ref) => (
           <Misuse size={16} ref={forwardedRef} {...props} />
         )),
         md: forwardRef((props, _ref) => (
@@ -247,7 +255,7 @@ export let StatusIcon = forwardRef<ReactSVGElement | null ,StatusIconProps>(
           {...rest}
           {...{
             className: classNames,
-            ref
+            ref,
           }}
           {...getDevtoolsProps(componentName)}
         >
@@ -296,4 +304,3 @@ StatusIcon.propTypes = {
    */
   theme: PropTypes.oneOf<Theme>(['light', 'dark']).isRequired,
 };
-

@@ -51,6 +51,7 @@ export let TagOverflow = React.forwardRef(
       items,
       itemTemplate,
       maxVisible,
+      multiline,
       // Collect any other property values passed in.
       ...rest
     },
@@ -97,6 +98,11 @@ export let TagOverflow = React.forwardRef(
         return items;
       }
 
+      if (multiline) {
+        const visibleItems = maxVisible ? items?.slice(0, maxVisible) : items;
+        return visibleItems;
+      }
+
       const map = getMap();
       const overflowContanerWidth =
         overflowRef.current.offsetWidth > overflowIndicatorWidth
@@ -121,7 +127,7 @@ export let TagOverflow = React.forwardRef(
         }
         return prev;
       }, []);
-    }, [itemRefs, overflowRef, containerWidth, items]);
+    }, [itemRefs, overflowRef, containerWidth, items, multiline, maxVisible]);
 
     const ItemComponent = ({ templateProps }) => {
       const itemRef = (node) => itemRefHandler(templateProps.id, node);
@@ -174,7 +180,7 @@ export let TagOverflow = React.forwardRef(
           // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
           {
             // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
+            [`${blockClass}--multiline`]: multiline,
           }
         )}
         ref={containerRef}
@@ -263,4 +269,8 @@ TagOverflow.propTypes = {
    * maximum visible items
    */
   maxVisible: PropTypes.number,
+  /**
+   * display items in multiple lines
+   */
+  multiline: PropTypes.bool,
 };

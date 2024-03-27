@@ -5,7 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, forwardRef, useEffect, ReactNode } from 'react';
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useEffect,
+  ReactNode,
+} from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -24,88 +30,88 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'RemoveModal';
-interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> 
-{
-   /**
+interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
+  /**
    * The content to be displayed in the body of the modal
    */
-  body : string;
+  body: string;
   /**
    * Optional classname
    */
-  className ?: string;
-   /**
+  className?: string;
+  /**
    * Provide a description for "close" icon that can be read by screen readers
    */
-  iconDescription : string;
-    /**
+  iconDescription: string;
+  /**
    * Message showed when user input fails validation
    */
-  inputInvalidText ?: string;
-   /**
+  inputInvalidText?: string;
+  /**
    * Label for text box
    */
-  inputLabelText ?: ReactNode;
+  inputLabelText?: ReactNode;
   /**
    * Placeholder for text box
    */
-  inputPlaceholderText ?: string;
-   /**
+  inputPlaceholderText?: string;
+  /**
    * Specify the modal label texts
    */
-  label ?: string;
+  label?: string;
   /**
    * Callback function that runs when user closes the modal
    */
-  onClose ?: () => void;
-    /**
+  onClose?: () => void;
+  /**
    * Callback function that runs when user submits the modal
    */
-  onRequestSubmit ?: ()=> void;
-   /**
+  onRequestSubmit?: () => void;
+  /**
    * Specify whether the Modal is currently open
    */
-  open : boolean;
-   /**
+  open: boolean;
+  /**
    * The DOM node the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget ?: ReactNode;
+  portalTarget?: ReactNode;
   /**
    * Prevent closing on click outside of modal
    */
-  preventCloseOnClickOutside ?: boolean;
-   /**
+  preventCloseOnClickOutside?: boolean;
+  /**
    * Specify whether the primary button should be disabled. This value will override textConfirmation
    */
-  primaryButtonDisabled ?: boolean;
-   /**
+  primaryButtonDisabled?: boolean;
+  /**
    * Specify the text for the primary button
    */
-  primaryButtonText ?: string;
+  primaryButtonText?: string;
   /**
    * The name of the resource being acted upon
    */
-  resourceName : string;
+  resourceName: string;
   /**
    * Specify the text for the secondary button
    */
-  secondaryButtonText ?: string;
-   /**
+  secondaryButtonText?: string;
+  /**
    * Specify whether or not to show the text confirmation input
    */
-  textConfirmation ?: boolean;
-   /**
+  textConfirmation?: boolean;
+  /**
    * The text displayed at the top of the modal
    */
-  title : string;
-
+  title: string;
 }
 /**
 The `RemoveModal` covers what is known as high impact and medium impact deleting.
 Enabling `textConfirmation` enables what would be considered the high impact state of the modal.
 For additional information on differentiating between delete / remove and low / medium / high impact please refer to the usage guidelines.
  */
-interface PrevType { open : boolean}
+interface PrevType {
+  open: boolean;
+}
 export let RemoveModal = forwardRef(
   (
     {
@@ -131,7 +137,7 @@ export let RemoveModal = forwardRef(
     }: React.PropsWithChildren<RemoveModalProps>,
     ref
   ) => {
-    const previousState = usePreviousValue ({ open }) as PrevType | undefined;
+    const previousState = usePreviousValue({ open }) as PrevType | undefined;
     const [userInput, setUserInput] = useState('');
     const idRef = useRef(uuidv4());
     const renderPortalUse = usePortalTarget(portalTargetIn);
@@ -154,7 +160,7 @@ export let RemoveModal = forwardRef(
     // the value of the input will still remain: we only want to empty the input value
     // when open actually changes to false.
     useEffect(() => {
-            if (!open && previousState?.open) {
+      if (!open && previousState?.open) {
         setUserInput('');
       }
     }, [open, previousState?.open]);

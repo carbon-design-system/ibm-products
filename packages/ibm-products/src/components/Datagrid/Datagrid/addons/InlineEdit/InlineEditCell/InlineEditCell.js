@@ -166,6 +166,9 @@ export const InlineEditCell = ({
       if (type === 'number') {
         numberInputRef.current.focus();
       }
+      if (type === 'selection') {
+        dropdownRef?.current?.focus();
+      }
     }
   }, [inEditMode, type]);
 

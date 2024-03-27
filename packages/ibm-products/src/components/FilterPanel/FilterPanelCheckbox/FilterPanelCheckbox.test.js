@@ -18,6 +18,7 @@ const componentName = FilterPanelCheckbox.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
+const count = 5;
 const dataTestId = uuidv4();
 const id = uuidv4();
 const labelText = `hello, world (${uuidv4()})`;
@@ -44,6 +45,14 @@ describe(componentName, () => {
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
   });
 
+  it('renders a count', async () => {
+    const filterPanelLabelClass = `${pkg.prefix}--filter-panel-label`;
+    const { container } = renderComponent({ count });
+    expect(
+      container.querySelector(`.${filterPanelLabelClass}__count`).textContent
+    ).toBe('5');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
     expect(container).toBeAccessible(componentName);
@@ -51,7 +60,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = renderComponent({ className: className });
+    const { container } = renderComponent({ className });
     expect(container.querySelector(`.${blockClass}`)).toHaveClass(className);
   });
 
@@ -62,7 +71,7 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref: ref });
+    renderComponent({ ref });
     expect(ref.current).toBeInTheDocument();
   });
 

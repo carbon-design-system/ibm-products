@@ -23,11 +23,12 @@ const componentName = 'FilterPanelCheckbox';
  * Provides a checkbox, label, and count.
  */
 export let FilterPanelCheckbox = React.forwardRef(
-  ({ className, count, labelText, title, ...rest }, ref) => {
+  ({ className, count, id, labelText, title, ...rest }, ref) => {
     return (
       <Checkbox
         {...rest}
         className={cx(blockClass, className)}
+        id={id}
         labelText={
           <FilterPanelLabel count={count} labelText={labelText} title={title} />
         }

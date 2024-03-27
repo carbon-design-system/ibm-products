@@ -7,4 +7,5 @@
 
 export { FilterPanel } from './FilterPanel';
 export { FilterPanelCheckbox } from './FilterPanelCheckbox/FilterPanelCheckbox';
+export { FilterPanelCheckboxWithOverflow } from './FilterPanelCheckboxWithOverflow/FilterPanelCheckboxWithOverflow';
 export { FilterPanelLabel } from './FilterPanelLabel/FilterPanelLabel';

@@ -653,7 +653,7 @@ import should be modified from:
 
 <!-- URL Reference links -->
 
-<!-- DEPRECATED LINKS (0-100) -->
+<!-- DEPRECATED LINKS (1-99) -->
 
 [1]:
   https://carbon-for-ibm-products.netlify.app/?path=/docs/ibm-products-components-cards-productivecard--docs
@@ -704,7 +704,7 @@ import should be modified from:
   https://github.com/carbon-design-system/carbon/blob/main/docs/migration/v11.md#changes-to-size
   'Icon usage (@carbon/react)'
 
-<!-- CARBON 10 -> CARBON 11 MIGRATION GUIDE LINKS (100-200) -->
+<!-- CARBON 10 -> CARBON 11 MIGRATION GUIDE LINKS (100-199) -->
 
 [100]:
   https://github.com/carbon-design-system/carbon/blob/main/docs/migration/v11.md#accordionitem

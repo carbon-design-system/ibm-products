@@ -72,6 +72,7 @@ describe(componentName, () => {
   //   expect(ref.current).toHaveClass(blockClass);
   // });
 
+  // Currently failing, looking into a fix.
   // it('adds the Devtools attribute to the containing node', async () => {
   //   const { debug } = renderComponent({ ['data-testid']: dataTestId });
   //   debug();

@@ -11,16 +11,26 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox;
 $label: #{c4p-settings.$pkg-prefix}--filter-panel-label;
+$carbon: #{c4p-settings.$carbon-prefix};
 
-// Set Carbon's Checkbox label to 100% the width of its container.
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--checkbox-label,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--checkbox-label-text {
+.#{$block-class} .#{$carbon}--checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class} .#{$carbon}--checkbox-label,
+.#{$block-class} .#{$carbon}--checkbox-label-text {
+  // Set Carbon's Checkbox label to 100% the width of its container.
   width: 100%;
+  // Match height to overflow button.
+  height: $spacing-06;
 }
 
 .#{$block-class} .#{$label}__text {

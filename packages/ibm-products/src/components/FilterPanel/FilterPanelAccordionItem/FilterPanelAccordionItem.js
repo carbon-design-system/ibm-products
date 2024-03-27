@@ -84,10 +84,7 @@ FilterPanelAccordionItem.propTypes = {
   /**
    * Props specific to the internal `AccordionItem`.
    */
-  accordionItemProps: PropTypes.shape({
-    // collapseLabel: PropTypes.string,
-    // expandLabel: PropTypes.string,
-  }),
+  accordionItemProps: PropTypes.shape({}),
 
   /**
    * Provide the contents of the FilterPanelAccordionItem.

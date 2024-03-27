@@ -79,7 +79,7 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.storyName = 'Filter Panel Label';
+Default.storyName = 'Default';
 Default.args = {
   title: '',
 };

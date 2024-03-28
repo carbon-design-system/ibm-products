@@ -1,0 +1,52 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { TagOverflow } from '.';
+import * as TagOverflowStories from './TagOverflow.stories';
+
+# TagOverflow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+{/* TODO: Overview. */}
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+### Tags
+
+<Canvas>
+  <Story of={TagOverflowStories.ManyTags} />
+</Canvas>
+
+### Tags with truncation
+
+<Canvas>
+  <Story of={TagOverflowStories.TagsWithTruncation} />
+</Canvas>
+
+### UserAvatars
+
+<Canvas>
+  <Story of={TagOverflowStories.ManyUserAvatars} />
+</Canvas>
+
+### Custom components
+
+<Canvas>
+  <Story of={TagOverflowStories.CustomComponent} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="TagOverflow" />
+
+## Component API
+
+<ArgsTable />

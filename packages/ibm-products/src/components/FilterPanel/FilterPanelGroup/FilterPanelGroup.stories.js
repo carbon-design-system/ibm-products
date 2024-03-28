@@ -31,15 +31,17 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'As number: 10',
-          1: 'As string: "1,500"',
+          0: 'No value',
+          1: 'As number: 10',
+          2: 'As string: "1,500"',
         },
       },
       mapping: {
-        0: 10,
-        1: '1,500',
+        0: undefined,
+        1: 10,
+        2: '1,500',
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
     labelText: {
       control: {
@@ -64,7 +66,7 @@ export default {
     },
   },
   args: {
-    count: 0,
+    count: 1,
     labelText: 0,
   },
 };

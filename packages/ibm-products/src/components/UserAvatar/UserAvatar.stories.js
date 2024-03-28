@@ -100,10 +100,6 @@ const Template = (args) => {
   );
 
   useEffect(() => {
-    console.log('Theme value:', themeValue);
-  }, [themeValue]);
-
-  useEffect(() => {
     const observer = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
         if (

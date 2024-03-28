@@ -188,10 +188,10 @@ type SidePanelSlideInProps =
        */
       slideIn?: false;
       /**
-       * Specify a CSS selector that matches the DOM element that should
-       * be focused when the side panel opens.
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel.
        */
-      selectorPrimaryFocus?: string;
+      selectorPageContent?: string;
     }
   | {
       /**
@@ -199,11 +199,10 @@ type SidePanelSlideInProps =
        */
       slideIn: true;
       /**
-       * Specify a CSS selector that matches the DOM element that should
-       * be focused when the side panel opens. Required when for slide in
-       * panels
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel. Required for slideIn panels.
        */
-      selectorPrimaryFocus: string;
+      selectorPageContent: string;
     };
 
 type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;

@@ -1,0 +1,12 @@
+{
+  "label": "Tag-Overflow",
+  "package-config": {
+    "flags": {
+      "component": {
+        "TagOverflow": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

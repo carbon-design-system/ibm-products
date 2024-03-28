@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode, PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -29,13 +29,108 @@ import {
 
 import { portalType } from './TearsheetShell';
 
+interface Action {
+  kind: 'ghost' | 'danger--ghost' | 'secondary' | 'danger' | 'primary';
+  label: string;
+  loading?: boolean;
+  onClick?: () => void;
+}
+interface TearsheetNarrowProps {
+  /**
+   * The navigation actions to be shown as buttons in the action area at the
+   * bottom of the tearsheet. Each action is specified as an object with
+   * optional fields: 'label' to supply the button label, 'kind' to select the
+   * button kind (must be 'primary', 'secondary' or 'ghost'), 'loading' to
+   * display a loading indicator, and 'onClick' to receive notifications when
+   * the button is clicked. Additional fields in the object will be passed to
+   * the Button component, and these can include 'disabled', 'ref', 'className',
+   * and any other Button props. Any other fields in the object will be passed
+   * through to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions?: (Action | (() => 'lg'))[];
+
+  /**
+   * The aria-label for the tearsheet, which is optional.
+   * if it is not passed, the title will be used as the aria-label.
+   */
+  ariaLabel?: string;
+
+  /**
+   * An optional class or classes to be added to the outermost element.
+   */
+  className?: string;
+
+  /**
+   * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
+   */
+  closeIconDescription?: string;
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+
+  /**
+   * Enable a close icon ('x') in the header area of the tearsheet. By default,
+   * a tearsheet does not display a close icon, but one should be enabled if
+   * the tearsheet is read-only or has no navigation actions (sometimes called
+   * a "passive tearsheet").
+   */
+  hasCloseIcon?: boolean;
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onClose?: () => boolean | void;
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open?: boolean;
+
+  /**
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: HTMLElement | null;
+
+  /**
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title?: ReactNode;
+
+  /**
+   * **Deprecated**
+   *
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position (the default) provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition?: 'normal' | 'lower';
+}
+
 const componentName = 'TearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 // Default values for props
 const defaults = {
-  verticalPosition: 'lower',
+  verticalPosition: 'lower' as const,
 };
 
 /**
@@ -46,8 +141,15 @@ const defaults = {
  * A narrow tearsheet comprises 3 zones: a heading area including a title, the
  * main content area, and a set of action buttons.
  */
-export let TearsheetNarrow = React.forwardRef(
-  ({ verticalPosition = defaults.verticalPosition, ...rest }, ref) => (
+
+export let TearsheetNarrow: React.FC<TearsheetNarrowProps> = React.forwardRef(
+  (
+    {
+      verticalPosition = defaults.verticalPosition,
+      ...rest
+    }: PropsWithChildren<TearsheetNarrowProps>,
+    ref
+  ) => (
     <TearsheetShell
       {...{
         ...getDevtoolsProps(componentName),
@@ -100,9 +202,8 @@ TearsheetNarrow.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  /** @ts-ignore */
   actions: allPropTypes([
-    /** @ts-ignore */
+    /**@ts-ignore */
     ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -139,7 +240,7 @@ TearsheetNarrow.propTypes = {
    * **Note:** This prop is only required if a close icon is shown, i.e. if
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  /** @ts-ignore */
+  /**@ts-ignore */
   closeIconDescription: PropTypes.string.isRequired.if(
     ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
   ),
@@ -179,6 +280,7 @@ TearsheetNarrow.propTypes = {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
+  /**@ts-ignore */
   portalTarget: portalType,
 
   /**

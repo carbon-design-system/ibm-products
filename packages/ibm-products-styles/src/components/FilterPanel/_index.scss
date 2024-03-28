@@ -6,6 +6,9 @@
 //
 
 @use './filter-panel';
+@use './filter-panel-accordion';
+@use './filter-panel-accordion-item';
 @use './filter-panel-checkbox';
 @use './filter-panel-checkbox-with-overflow';
+@use './filter-panel-group';
 @use './filter-panel-label';

@@ -85,8 +85,10 @@ export let TruncatedList = React.forwardRef(
         let listHeight = 0;
 
         for (let index = 0; index < numItemsToShow; index++) {
-          const height = window?.getComputedStyle(items[index])?.height || 16;
-          listHeight += parseInt(height);
+          if (items[index]) {
+            const height = window?.getComputedStyle(items[index])?.height || 16;
+            listHeight += parseInt(height);
+          }
         }
 
         setListHeight(listHeight);

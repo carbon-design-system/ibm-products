@@ -1,9 +1,9 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
 import { CodesandboxLink } from '../../../global/js/utils/story-helper';
-import { FilterPanelLabel } from '.';
-import * as FilterPanelLabelStories from './FilterPanelLabel.stories';
+import { FilterPanelGroup } from '.';
+import * as FilterPanelGroupStories from './FilterPanelGroup.stories';
 
-# FilterPanelLabel
+# FilterPanelGroup
 
 ## Table of Contents
 
@@ -13,10 +13,11 @@ import * as FilterPanelLabelStories from './FilterPanelLabel.stories';
 
 ## Overview
 
-`FilterPanelLabel` is for internal use only by the `FilterPanel`.
+The `FilterPanelGroup` is a container for visually grouping content with a label
+and optional count.
 
 <Canvas>
-  <Story of={FilterPanelLabelStories.Default} />
+  <Story of={FilterPanelGroupStories.Default} />
 </Canvas>
 
 ## Component API

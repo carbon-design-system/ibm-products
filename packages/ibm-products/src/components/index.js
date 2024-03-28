@@ -123,7 +123,10 @@ export { StatusIndicator } from './StatusIndicator';
 export { ActionBar } from './ActionBar';
 export {
   FilterPanel,
+  FilterPanelAccordion,
+  FilterPanelAccordionItem,
   FilterPanelCheckbox,
   FilterPanelCheckboxWithOverflow,
+  FilterPanelGroup,
   FilterPanelLabel,
 } from './FilterPanel';

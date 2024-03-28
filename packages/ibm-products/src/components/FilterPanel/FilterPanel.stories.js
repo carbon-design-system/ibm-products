@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { OverflowMenuItem } from '@carbon/react';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -18,6 +19,7 @@ import {
   FilterPanelCheckbox,
   FilterPanelCheckboxWithOverflow,
   FilterPanelGroup,
+  FilterPanelSearch,
 } from '.';
 import mdx from './FilterPanel.mdx';
 
@@ -64,10 +66,60 @@ export default {
   },
 };
 
+const demoItems = [
+  'Checkbox',
+  <>
+    <strong>Formatted</strong> <em>checkbox</em>
+  </>,
+  'Really, really long checkbox name',
+  'Checkbox with menu 1',
+  'Checkbox with menu 2',
+  'Checkbox 1',
+  'Checkbox 2',
+  'Checkbox 3',
+  'Checkbox 4',
+  'Checkbox 5',
+  'Checkbox 6',
+  'Checkbox 7',
+  'Checkbox 8',
+  'Checkbox 9',
+  'Checkbox 10',
+  'Checkbox 11',
+  'Checkbox 12',
+];
+
 const Template = (args) => {
+  const [searchValue, setSearchValue] = useState('');
+  let demoSearchResults;
+
+  const filteredItems = demoItems.filter((item) => {
+    const t = getNodeTextContent(item).toLowerCase();
+    const s = searchValue.toLowerCase();
+    return t.indexOf(s) > -1;
+  });
+
+  if (searchValue.length === 0) {
+    demoSearchResults = null;
+  } else if (searchValue.length > 0 && filteredItems.length === 0) {
+    demoSearchResults = <p>No search results.</p>;
+  } else {
+    demoSearchResults = filteredItems.map((item, index) => {
+      return <FilterPanelCheckbox key={index} labelText={item} id={uuidv4()} />;
+    });
+  }
+
   return (
     <div className={`${storyClass}__viewport`}>
       <FilterPanel {...args}>
+        <FilterPanelSearch
+          labelText="Search"
+          onChange={(event) => {
+            action('onChange "' + event.target.value + '"')(event);
+            setSearchValue(event.target.value);
+          }}
+        >
+          {demoSearchResults}
+        </FilterPanelSearch>
         <FilterPanelGroup labelText="Group">
           <FilterPanelCheckbox
             count={6}

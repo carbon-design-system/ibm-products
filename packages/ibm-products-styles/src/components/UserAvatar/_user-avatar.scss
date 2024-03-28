@@ -75,13 +75,46 @@ $sizes: (
   background-color: $color;
 }
 
-.#{$block-class}--light-cyan {
-  @include setBgColor($cyan-50);
+@mixin setLightBg($order, $color) {
+  .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
+  .#{$carbon-prefix}--white .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
 }
 
-.#{$block-class}--dark-cyan {
-  @include setBgColor($cyan-60);
+@mixin setDarkBg($order, $color) {
+  .#{$carbon-prefix}--g90 .#{$block-class}--#{$order},
+  .#{$carbon-prefix}--g100 .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
 }
+
+@include setLightBg(order-1-cyan, $cyan-60);
+@include setLightBg(order-2-gray, $gray-60);
+@include setLightBg(order-3-green, $green-60);
+@include setLightBg(order-4-magenta, $magenta-60);
+@include setLightBg(order-5-purple, $purple-60);
+@include setLightBg(order-6-teal, $teal-60);
+@include setLightBg(order-7-cyan, $cyan-80);
+@include setLightBg(order-8-gray, $gray-80);
+@include setLightBg(order-9-green, $green-80);
+@include setLightBg(order-10-magenta, $magenta-80);
+@include setLightBg(order-11-purple, $purple-80);
+@include setLightBg(order-12-teal, $teal-80);
+
+@include setDarkBg(order-1-cyan, $cyan-50);
+@include setDarkBg(order-2-gray, $gray-50);
+@include setDarkBg(order-3-green, $green-50);
+@include setDarkBg(order-4-magenta, $magenta-50);
+@include setDarkBg(order-5-purple, $purple-50);
+@include setDarkBg(order-6-teal, $teal-50);
+@include setDarkBg(order-7-cyan, $cyan-30);
+@include setDarkBg(order-8-gray, $gray-30);
+@include setDarkBg(order-9-green, $green-30);
+@include setDarkBg(order-10-magenta, $magenta-30);
+@include setDarkBg(order-11-purple, $purple-30);
+@include setDarkBg(order-12-teal, $teal-30);
+
 .#{$block-class}--xl {
   @include size('xl');
   @include type.type-style('heading-04');

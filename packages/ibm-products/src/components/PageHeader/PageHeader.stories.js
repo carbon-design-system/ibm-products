@@ -338,6 +338,7 @@ const title = {
   },
   'Long title with icon': {
     text: 'A very long page title which will almost certainly have to be truncated at some point',
+    shortTitle: 'A shortened title for nav',
     loading: false,
     icon: (props) => <Bee size={24} {...props} />,
   },

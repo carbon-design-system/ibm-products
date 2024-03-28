@@ -234,6 +234,11 @@ export const utilGetBreadcrumbItemForTitle = (
       ]);
     }
 
+    if (title.shortTitle) {
+      breadcrumbTitle.shortTitle = title.shortTitle;
+      breadcrumbTitle.useShortTitle = true;
+    }
+
     return breadcrumbTitle;
   }
 };

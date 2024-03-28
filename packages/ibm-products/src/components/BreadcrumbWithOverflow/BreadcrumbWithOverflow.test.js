@@ -275,4 +275,27 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
     screen.getByTestId(dataTestId);
   });
+
+  it('renders a short title', async () => {
+    render(
+      <TestBreadcrumbWithOverflow
+        data-testid={dataTestId}
+        width={1200}
+        maxVisible={0}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={[
+          {
+            href: '/#',
+            id: '1',
+            key: '1',
+            label: 'label',
+            onClick: () => {},
+            useShortTitle: true,
+            shortTitle: 'short title',
+          },
+        ]}
+      />
+    );
+    expect(screen.getByText('short title'));
+  });
 });

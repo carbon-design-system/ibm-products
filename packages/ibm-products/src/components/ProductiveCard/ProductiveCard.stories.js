@@ -18,6 +18,9 @@ import {
 import { ProductiveCard } from '.';
 // import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
+import { UserAvatar } from '../UserAvatar';
+import { pkg } from '../../settings';
+const blockClass = `${pkg.prefix}--card`;
 
 const sampleSlug = (
   <Slug className="slug-container" size="xs">
@@ -203,6 +206,93 @@ Clickable.args = {
   onKeyDown: action('on keydown'),
   primaryButtonText: 'Ghost button',
   actionIcons: [],
+};
+
+const stackedCardTiles = [
+  {
+    title: 'Title of the row item 1',
+    users: ['MMax König', 'Joe Watson'],
+  },
+  {
+    title: 'Title of the row item 2',
+    users: ['Burak Karaso', 'Alicia Bertrand'],
+  },
+  {
+    title: 'Title of the row item 3',
+    users: ['Rania Lauwers', 'Jasmin Fischer'],
+  },
+];
+
+const StackedTiles = (opts) => {
+  const { onClick, onKeyDown } = opts;
+  const today = new Date();
+  const weekday = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+  return (
+    <>
+      {stackedCardTiles.map((tile, idx) => (
+        <div
+          key={idx}
+          tabIndex="0"
+          role="button"
+          onClick={onClick}
+          onKeyDown={onKeyDown}
+          className={`${blockClass}__stackedTile`}
+        >
+          <div className={`${blockClass}__colLeft`}>
+            <h4>{tile.title}</h4>
+            <div className={`${blockClass}__userRows`}>
+              {tile.users.map((user, index) => (
+                <UserAvatar
+                  name={user}
+                  key={index}
+                  backgroundColor="light-cyan"
+                  size="lg"
+                  tooltipText={user}
+                />
+              ))}
+            </div>
+          </div>
+          <div className={`${blockClass}__colRight`}>
+            <p>{weekday[today.getDay()]}</p>
+            <p>{formatAMPM(today)}</p>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
+export const StackedBody = Template.bind({});
+StackedBody.args = {
+  columnSizeSm: 4,
+  columnSizeMd: 8,
+  columnSizeLg: 8,
+  title: 'Card Title',
+  stackedBody: true,
+  children: (
+    <StackedTiles
+      onClick={action('on click')}
+      onKeyDown={action('on Keydown')}
+    />
+  ),
 };
 
 export const WithButtonHref = Template.bind({});

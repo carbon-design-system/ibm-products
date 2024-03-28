@@ -5,8 +5,36 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing';
+
+$block-class: #{c4p-settings.$pkg-prefix};
+
 // make the root full width to get a better idea of how the cards
 // look in a real grid situation
 #root {
   width: 100%;
+}
+
+.#{$block-class}--card__stackedTile {
+  padding: spacing.$spacing-05;
+  border-top: 1px $border-subtle-03 solid;
+
+  @media (min-width: 672px) {
+    display: flex;
+  }
+
+  .#{$block-class}--card__userRows {
+    display: flex;
+    padding-top: spacing.$spacing-05;
+  }
+
+  .#{$block-class}--user-avatar {
+    margin-right: spacing.$spacing-05;
+  }
+  .#{$block-class}--card__colLeft {
+    padding-right: spacing.$spacing-09;
+  }
 }

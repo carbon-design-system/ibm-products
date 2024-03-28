@@ -69,6 +69,7 @@ export let Card = forwardRef(
       secondaryButtonPlacement = defaults.secondaryButtonPlacement,
       secondaryButtonText,
       slug,
+      stackedBody,
       title,
       titleSize = defaults.titleSize,
 
@@ -180,7 +181,7 @@ export let Card = forwardRef(
           },
           className
         ),
-        ...(clickable && clickableProps),
+        ...(clickable || (stackedBody && clickableProps)),
       };
 
       return cardProps;
@@ -193,7 +194,7 @@ export let Card = forwardRef(
         className: cx(`${blockClass}__header-body-container`, {
           [`${blockClass}__clickable`]: clickable,
         }),
-        ...(clickable && clickableProps),
+        ...(clickable || (stackedBody && clickableProps)),
       };
 
       return headerBodyProps;
@@ -222,6 +223,7 @@ export let Card = forwardRef(
       slug,
       title,
       titleSize,
+      stackedBody,
     });
 
     const getBodyProps = () => {
@@ -229,6 +231,7 @@ export let Card = forwardRef(
       const bodyProps = {
         className: cx(`${blockClass}__body`, {
           [`${blockClass}__clickable`]: clickable,
+          [`${blockClass}-stacked__clickable`]: stackedBody,
         }),
         ...(clickable && clickableProps),
       };
@@ -268,7 +271,11 @@ export let Card = forwardRef(
         <div className={`${blockClass}__content-container`}>
           <div {...getHeaderBodyProps()}>
             <CardHeader {...getHeaderProps()} />
-            <div {...getBodyProps()}>{children}</div>
+            {stackedBody ? (
+              <div {...getBodyProps()}>{children}</div>
+            ) : (
+              <div {...getBodyProps()}>{children}</div>
+            )}
           </div>
           {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>
@@ -337,7 +344,7 @@ Card.propTypes = {
    * Clickable tiles only accept a boolean value of true and display a hollow slug.
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-
+  stackedBody: PropTypes.bool,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

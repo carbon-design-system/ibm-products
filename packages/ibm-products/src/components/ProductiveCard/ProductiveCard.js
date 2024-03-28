@@ -154,6 +154,11 @@ ProductiveCard.propTypes = {
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   /**
+   * Enable multiple stacked clickable body tiles.
+   *  *** Only applies for `Productive` card type.
+   */
+  stackedBody: PropTypes.bool,
+  /**
    * Title that's displayed at the top of the card
    */
   title: PropTypes.oneOfType([

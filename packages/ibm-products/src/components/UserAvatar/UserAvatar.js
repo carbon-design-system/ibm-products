@@ -130,6 +130,7 @@ export let UserAvatar = React.forwardRef(
         )}
         ref={ref}
         role="img"
+        aria-hidden="true"
         {...getDevtoolsProps(componentName)}
       >
         {getItem()}

@@ -132,7 +132,7 @@ export let ScrollGradient = React.forwardRef(
         {!hideStartGradient && (
           <>
             <div
-              className={cx(`${blockClass}__start-vertical`)}
+              className={`${blockClass}__start-vertical`}
               style={{
                 right: gradientRight,
                 backgroundImage: `linear-gradient(0deg, transparent, ${color} 90%)`,
@@ -141,7 +141,7 @@ export let ScrollGradient = React.forwardRef(
               aria-hidden
             />
             <div
-              className={cx(`${blockClass}__start-horizontal`)}
+              className={`${blockClass}__start-horizontal`}
               style={{
                 backgroundImage: `linear-gradient(-90deg, transparent, ${color} 90%)`,
                 bottom: gradientBottom,
@@ -152,7 +152,7 @@ export let ScrollGradient = React.forwardRef(
           </>
         )}
         <div
-          className={cx(`${blockClass}__end-vertical`)}
+          className={`${blockClass}__end-vertical`}
           style={{
             right: gradientRight,
             bottom: gradientBottom,
@@ -162,7 +162,7 @@ export let ScrollGradient = React.forwardRef(
           aria-hidden
         />
         <div
-          className={cx(`${blockClass}__end-horizontal`)}
+          className={`${blockClass}__end-horizontal`}
           style={{
             right: gradientRight,
             bottom: gradientBottom,

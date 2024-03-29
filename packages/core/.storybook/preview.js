@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,6 @@ import React, { useEffect } from 'react';
 import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
-import { getSectionSequence } from '../story-structure';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
@@ -118,19 +117,15 @@ const parameters = {
   layout: 'centered',
   options: {
     showPanel: true,
-    storySort: (a, b) => {
-      const aPosition = getSectionSequence(a[1].kind);
-      const bPosition = getSectionSequence(b[1].kind);
-
-      return aPosition !== bPosition
-        ? // if stories have different positions in the structure, sort by that
-          aPosition - bPosition
-        : a[1].kind === b[1].kind
-        ? // if they have the same kind, use their sequence numbers
-          (a[1]?.parameters?.ccsSettings?.sequence || 0) -
-          (b[1]?.parameters?.ccsSettings?.sequence || 0)
-        : // they must both be unrecognized: fall back to sorting by id (slug)
-          a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
+    storySort: {
+      method: 'alphabetical',
+      order: [
+        'Overview',
+        ['Welcome', 'Getting started', 'Examples', '*'],
+        'IBM Products',
+        ['Components', 'Patterns', 'Internal', 'Novice to pro'],
+        'Community',
+      ],
     },
   },
 

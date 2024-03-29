@@ -9,10 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 //import { gray } from '@carbon/colors';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ScrollGradient } from '.';
 import mdx from './ScrollGradient.mdx';
@@ -20,7 +17,7 @@ import mdx from './ScrollGradient.mdx';
 import styles from './_storybook-styles.scss';
 
 const storyCopy =
-  'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet rerum aliquid perferendis, nulla nam ad excepturi, iure earum dolorum ipsa quae cum voluptatibus nemo quis debitis, aperiam repudiandae dolore deleniti.';
+  'Use case specific content to display in the ScrollGradient component. Use case specific content to display in the ScrollGradient component. Use case specific content to display in the ScrollGradient component. ';
 
 const storyChildren = (
   <div style={{ padding: 16 }}>
@@ -34,7 +31,7 @@ const storyChildren = (
 );
 
 export default {
-  title: getStoryTitle(ScrollGradient.displayName),
+  title: 'IBM Products/Components/Scroll gradient/ScrollGradient',
   component: ScrollGradient,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

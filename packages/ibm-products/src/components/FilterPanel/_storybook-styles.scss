@@ -17,15 +17,3 @@ $carbon: #{c4p-settings.$carbon-prefix}--filter-panel;
   width: 16rem;
   padding: 1rem;
 }
-
-// How and where to override the OverflowMenu's default
-// "auto-width" size calculation.
-// 14rem is the size of this FilterPanel's demo width.
-.#{$carbon}--overflow-menu-options {
-  inline-size: 14rem !important;
-}
-.#{$carbon}--overflow-menu-options__option,
-.#{$carbon}--overflow-menu-options__btn {
-  width: 100% !important;
-  max-inline-size: none !important;
-}

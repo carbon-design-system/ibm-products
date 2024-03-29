@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { InterstitialScreenViewModule } from '.';
+import * as stories from './InterstitialScreenViewModule.stories';
 
 # InterstitialScreenViewModule
 
@@ -28,12 +26,7 @@ explain, educate, and cultivate novice users into high-functioning power users.
 ## Example usage
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      InterstitialScreenViewModule.displayName,
-      'interstitial-screen-view-module'
-    )}
-  />
+  <Story of={stories.interstitialScreenViewModule} />
 </Canvas>
 
 ## Code sample

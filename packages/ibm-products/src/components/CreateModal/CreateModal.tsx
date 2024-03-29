@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Carbon and package components we use.
 import {
@@ -40,6 +40,60 @@ const isValidChildren =
     return;
   };
 
+interface CreateModalProps extends React.ComponentProps<typeof ComposedModal> {
+  /**
+   * Specify an optional className to be applied to the modal root node
+   */
+  className?: string;
+  /**
+   * Specifies an optional handler which is called when the CreateModal
+   * is closed.
+   */
+  onRequestClose?(): void;
+  /**
+   * Specifies an optional handler which is called when the CreateModal
+   * primary button is pressed.
+   */
+  onRequestSubmit?(): void;
+  /**
+   * Specifies whether the CreateModal is open or not.
+   */
+  open?: boolean;
+  /**
+   * The title of the CreateModal is usually the product or service name.
+   */
+  title: ReactNode;
+  /**
+   * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
+   */
+  subtitle?: ReactNode;
+  /**
+   * The description of the CreateModal serves to provide more information about the modal.
+   */
+  description: ReactNode;
+  /**
+   * Specifies the secondary button's text in the modal.
+   */
+  secondaryButtonText: string;
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: ReactNode;
+  /**
+   * Specifies the primary button's text in the modal.
+   */
+  primaryButtonText: string;
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
+  disableSubmit?: boolean;
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  selectorPrimaryFocus: ReactNode;
+}
+
 /**
  * The `CreateModal` component provides a way for a user to quickly generate a new
 resource. It is triggered by a user’s action, appears on top of the main page
@@ -67,7 +121,7 @@ export let CreateModal = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: PropsWithChildren<CreateModalProps>,
     ref
   ) => {
     const renderPortalUse = usePortalTarget(portalTargetIn);
@@ -123,6 +177,7 @@ CreateModal.propTypes = {
   /**
    * Children refers to all form items within a form inside of the modal's body.
    */
+  /**@ts-ignore*/
   children: isValidChildren(),
   /**
    * Specify an optional className to be applied to the modal root node

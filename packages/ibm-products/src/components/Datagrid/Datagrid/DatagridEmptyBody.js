@@ -43,7 +43,8 @@ const DatagridEmptyBody = (datagridState) => {
 
   return (
     <TableBody
-      {...getTableBodyProps()}
+      {...getTableBodyProps({ role: undefined })}
+      aria-live={null}
       className={`${blockClass}__empty-state-body`}
     >
       <TableRow>

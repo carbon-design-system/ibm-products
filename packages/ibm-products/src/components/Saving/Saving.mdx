@@ -1,11 +1,9 @@
-<!-- `position:fixed` cause rendering issues, so do not render the modal -->
+{/* <!-- `position:fixed` cause rendering issues, so do not render the modal --> */}
 
 import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 import { Saving } from '.';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './Saving.stories';
 
 # Saving
 
@@ -14,13 +12,13 @@ import {
 ## Manual type
 
 <Canvas>
-  <Story id={getStoryId(Saving.displayName, 'manual')} />
+  <Story of={stories.Auto} />
 </Canvas>
 
 ## Auto type
 
 <Canvas>
-  <Story id={getStoryId(Saving.displayName, 'auto')} />
+  <Story of={stories.Manual} />
 </Canvas>
 
 ## Code sample

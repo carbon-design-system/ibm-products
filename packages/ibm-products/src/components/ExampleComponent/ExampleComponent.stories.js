@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,12 +7,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { ExampleComponent } from '.';
 import { pkg } from '../../settings';
 // import DocsPage from './ExampleComponent.docs-page';
@@ -20,7 +14,7 @@ import { pkg } from '../../settings';
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(ExampleComponent.displayName),
+  title: 'IBM Products/Internal/ExampleComponent',
   component: ExampleComponent,
   tags: ['autodocs'],
   argTypes: {
@@ -54,33 +48,29 @@ const Template = ({ featureFlags, ...args }) => {
   );
 };
 
-export const exampleComponent = prepareStory(Template, {
-  args: {},
-});
+export const exampleComponent = Template.bind({});
+exampleComponent.args = {};
 
-export const borderedSet = prepareStory(Template, {
-  args: {
-    ...exampleComponent.args,
-    borderColor: '#141414',
-    borderType: 'box',
-  },
-});
+export const borderedSet = Template.bind({});
+borderedSet.args = {
+  ...exampleComponent.args,
+  borderColor: '#141414',
+  borderType: 'box',
+};
 
-export const featureFlagSecondaryIconFalse = prepareStory(Template, {
-  args: {
-    ...exampleComponent.args,
-    secondaryIcon: Add,
-    featureFlags: { ['ExampleComponent.secondaryIcon']: false },
-  },
-});
+export const featureFlagSecondaryIconFalse = Template.bind({});
+featureFlagSecondaryIconFalse.args = {
+  ...exampleComponent.args,
+  secondaryIcon: Add,
+  featureFlags: { ['ExampleComponent.secondaryIcon']: false },
+};
 
-export const featureFlagSecondaryIconTrue = prepareStory(Template, {
-  args: {
-    ...exampleComponent.args,
-    secondaryIcon: Add,
-    featureFlags: { ['ExampleComponent.secondaryIcon']: true },
-  },
-});
+export const featureFlagSecondaryIconTrue = Template.bind({});
+featureFlagSecondaryIconTrue.args = {
+  ...exampleComponent.args,
+  secondaryIcon: Add,
+  featureFlags: { ['ExampleComponent.secondaryIcon']: true },
+};
 
 const HookedTemplate = ({ featureFlags, ...args }) => {
   if (featureFlags) {
@@ -103,10 +93,12 @@ const HookedTemplate = ({ featureFlags, ...args }) => {
   );
 };
 
-export const exampleHookDisabledComponent = prepareStory(HookedTemplate, {
-  args: { featureFlags: { ['ExampleComponent.useExample']: false } },
-});
+export const exampleHookDisabledComponent = HookedTemplate.bind({});
+exampleHookDisabledComponent.args = {
+  featureFlags: { ['ExampleComponent.useExample']: false },
+};
 
-export const exampleHookEnabledComponent = prepareStory(HookedTemplate, {
-  args: { featureFlags: { ['ExampleComponent.useExample']: true } },
-});
+export const exampleHookEnabledComponent = HookedTemplate.bind({});
+exampleHookEnabledComponent.args = {
+  featureFlags: { ['ExampleComponent.useExample']: true },
+};

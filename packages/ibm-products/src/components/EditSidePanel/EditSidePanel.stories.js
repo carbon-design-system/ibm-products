@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,12 +22,6 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { EditSidePanel } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -79,7 +73,7 @@ const renderUIShellHeader = () => (
 const prefix = 'edit-side-panel-stories__';
 
 export default {
-  title: getStoryTitle(EditSidePanel.displayName),
+  title: 'IBM Products/Patterns/Edit and update/EditSidePanel',
   component: EditSidePanel,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -221,26 +215,25 @@ const Template = ({ slug, ...args }) => {
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
 
-export const editSidePanel = prepareStory(Template, {
-  args: {
-    actionToolbarButtons: [
-      {
-        label: 'Copy platform id',
-        icon: (props) => <Copy size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Copy'),
-      },
-      {
-        label: 'Settings',
-        icon: (props) => <Settings size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Settings'),
-      },
-      {
-        label: 'Delete',
-        icon: (props) => <TrashCan size={16} {...props} />,
-        onClick: action('Toolbar button clicked: Delete'),
-      },
-    ],
-    includeOverlay: true,
-    ...defaultStoryProps,
-  },
-});
+export const editSidePanel = Template.bind({});
+editSidePanel.args = {
+  actionToolbarButtons: [
+    {
+      label: 'Copy platform id',
+      icon: (props) => <Copy size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Copy'),
+    },
+    {
+      label: 'Settings',
+      icon: (props) => <Settings size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Settings'),
+    },
+    {
+      label: 'Delete',
+      icon: (props) => <TrashCan size={16} {...props} />,
+      onClick: action('Toolbar button clicked: Delete'),
+    },
+  ],
+  includeOverlay: true,
+  ...defaultStoryProps,
+};

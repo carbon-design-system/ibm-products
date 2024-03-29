@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,17 +7,13 @@
 
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
 export default {
-  title: getStoryTitle(SingleAddSelect.displayName),
+  title: 'IBM Products/Patterns/Add and select/SingleAddSelect',
   component: SingleAddSelect,
   tags: ['autodocs'],
   parameters: {
@@ -147,16 +143,14 @@ const Template = (args, context) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    items: 1,
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  items: 1,
+  ...defaultProps,
+};
 
-export const WithHierarchy = prepareStory(Template, {
-  args: {
-    items: 2,
-    ...defaultProps,
-  },
-});
+export const WithHierarchy = Template.bind({});
+WithHierarchy.args = {
+  items: 2,
+  ...defaultProps,
+};

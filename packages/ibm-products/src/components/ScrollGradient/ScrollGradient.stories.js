@@ -6,11 +6,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
-//import { gray } from '@carbon/colors';
-import { prepareStory } from '../../global/js/utils/story-helper';
-
 import { ScrollGradient } from '.';
 import mdx from './ScrollGradient.mdx';
 
@@ -69,14 +64,12 @@ const TemplateBothAxis = (args) => {
   );
 };
 
-export const scrollGradientVertical = prepareStory(Template, {
-  args: {
-    children: storyChildren,
-  },
-});
+export const scrollGradientVertical = Template.bind({});
+scrollGradientVertical.args = {
+  children: storyChildren,
+};
 
-export const scrollGradientXAndYAxis = prepareStory(TemplateBothAxis, {
-  args: {
-    children: <div style={{ width: '1500px' }}>{storyChildren}</div>,
-  },
-});
+export const scrollGradientXAndYAxis = TemplateBothAxis.bind({});
+scrollGradientXAndYAxis.args = {
+  children: <div style={{ width: '1500px' }}>{storyChildren}</div>,
+};

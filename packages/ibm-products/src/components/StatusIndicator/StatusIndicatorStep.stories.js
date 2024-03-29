@@ -6,19 +6,13 @@
  */
 
 import React from 'react';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { StatusIndicatorStep } from '.';
 import mdx from './StatusIndicatorStep.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(StatusIndicatorStep.displayName),
+  title: 'IBM Products/Components/Status indicator/StatusIndicatorStep',
   component: StatusIndicatorStep,
   tags: ['autodocs'],
   argTypes: {
@@ -45,11 +39,10 @@ const Template = (args) => {
   );
 };
 
-export const statusIndicatorStep = prepareStory(Template, {
-  storyName: 'StatusIndicatorStep',
-  args: {
-    description: 'Descriptive text',
-    errorMessage: 'Error message.',
-    status: 'inactive',
-  },
-});
+export const statusIndicatorStep = Template.bind({});
+statusIndicatorStep.storyName = 'StatusIndicatorStep';
+statusIndicatorStep.args = {
+  description: 'Descriptive text',
+  errorMessage: 'Error message.',
+  status: 'inactive',
+};

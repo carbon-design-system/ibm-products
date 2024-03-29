@@ -10,24 +10,20 @@
 import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { UserAvatar } from '.';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
 import { Add, Group, User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
+import { Theme } from '@carbon/react';
+import { useEffect, useState } from 'react';
 
 const defaultArgs = {
-  backgroundColor: 'light-cyan',
+  backgroundColor: 'order-1-cyan',
 };
 
 export default {
-  title: getStoryTitle(UserAvatar.displayName),
+  title: 'IBM Products/Components/User avatar/UserAvatar',
   component: UserAvatar,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -39,7 +35,20 @@ export default {
       control: {
         type: 'select',
       },
-      options: ['light-cyan', 'dark-cyan'],
+      options: [
+        'order-1-cyan',
+        'order-2-gray',
+        'order-3-green',
+        'order-4-magenta',
+        'order-5-purple',
+        'order-6-teal',
+        'order-7-cyan',
+        'order-8-gray',
+        'order-9-green',
+        'order-10-magenta',
+        'order-11-purple',
+        'order-12-teal',
+      ],
     },
     renderIcon: {
       control: {
@@ -86,35 +95,56 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const [themeValue, setThemeValue] = useState(
+    document.body.getAttribute('storybook-carbon-theme')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'storybook-carbon-theme'
+        ) {
+          setThemeValue(document.body.getAttribute('storybook-carbon-theme'));
+        }
+      }
+    });
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['storybook-carbon-theme'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <UserAvatar
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
+    <Theme theme={themeValue}>
+      <UserAvatar
+        // TODO: handle events with action or local handler.
+        // onTodo={action('onTodo log action')}
+        {...args}
+      />
+    </Theme>
   );
 };
-
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const Default = prepareStory(Template, {
-  storyName: 'Default',
-  args: {
-    ...defaultArgs,
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
-    name: 'thomas j. watson',
-    tooltipText: 'Thomas J. Watson',
-    renderIcon: 'No icon',
-  },
-});
+export const Default = Template.bind({});
+Default.storyName = 'Default';
+Default.args = {
+  ...defaultArgs,
+  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
+  name: 'thomas j. watson',
+  tooltipText: 'Thomas J. Watson',
+  renderIcon: 'No icon',
+};
 
-export const WithImage = prepareStory(Template, {
-  storyName: 'WithImage',
-  args: {
-    ...defaultArgs,
-    image: headshot,
-    imageDescription: 'image here',
-  },
-});
+export const WithImage = Template.bind({});
+WithImage.storyName = 'WithImage';
+WithImage.args = {
+  ...defaultArgs,
+  image: headshot,
+  imageDescription: 'image here',
+};

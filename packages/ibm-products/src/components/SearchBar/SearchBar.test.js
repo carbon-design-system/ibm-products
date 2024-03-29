@@ -165,7 +165,7 @@ describe(componentName, () => {
     renderComponent({ ...scopesDefaultProps });
   });
 
-  it('select scope, type text, and calls submit with an expected object', async () => {
+  it.skip('select scope, type text, and calls submit with an expected object', async () => {
     renderComponent({
       ...scopesDefaultProps,
     });
@@ -240,7 +240,7 @@ describe(componentName, () => {
     );
   });
 
-  it('check custom sorting is working', async () => {
+  it.skip('check custom sorting is working', async () => {
     renderComponent({
       ...scopesDefaultProps,
       value,

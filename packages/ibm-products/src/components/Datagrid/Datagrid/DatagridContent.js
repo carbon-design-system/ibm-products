@@ -95,7 +95,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
             { [`${blockClass}__table-grid-active`]: gridActive },
             {
               [`${blockClass}__table-is-resizing`]:
-                typeof columnResizing.isResizingColumn === 'string',
+                typeof columnResizing?.isResizingColumn === 'string',
             },
             getTableProps()?.className
           )}
@@ -112,6 +112,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
                 keysPressedList,
                 state: inlineEditState,
                 usingMac,
+                ref: multiKeyTrackingRef,
               }))
           }
           onFocus={

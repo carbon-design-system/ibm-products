@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { makeData } from './utils/makeData';
-import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
 import { TableBatchAction, TableBatchActions } from '@carbon/react';
@@ -35,7 +34,7 @@ import { Wrapper } from './utils/Wrapper';
 import DocsPage from './Datagrid.docs-page';
 
 export default {
-  title: getStoryTitle(Datagrid.displayName),
+  title: 'IBM Products/Components/Datagrid',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

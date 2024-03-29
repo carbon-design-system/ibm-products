@@ -9,11 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Link as CarbonLink } from '@carbon/react';
-import {
-  getStoryTitle,
-  prepareStory,
-  getSelectedCarbonTheme,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkFixed } from '.';
@@ -22,7 +18,7 @@ import mdx from './CoachmarkFixed.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CoachmarkFixed.displayName),
+  title: 'IBM Products/Novice to pro/Coachmark/CoachmarkFixed',
   component: CoachmarkFixed,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -82,11 +78,10 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkFixed = prepareStory(Template, {
-  args: {
-    tagline: 'Why are there two types of severity scores?',
-    onClose: () => console.log('CLOSE'),
-    portalTarget: '#root:not([hidden="true"])',
-    className: 'myCoachmarkFixed',
-  },
-});
+export const coachmarkFixed = Template.bind({});
+coachmarkFixed.args = {
+  tagline: 'Why are there two types of severity scores?',
+  onClose: () => console.log('CLOSE'),
+  portalTarget: '#root:not([hidden="true"])',
+  className: 'myCoachmarkFixed',
+};

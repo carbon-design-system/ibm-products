@@ -19,10 +19,6 @@ import {
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
-import {
   Datagrid,
   useDatagrid,
   useExpandedRow,
@@ -36,13 +32,54 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Slug`,
+  title: 'IBM Products/Components/Datagrid/Slug',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
     styles,
     docs: {
-      page: () => <StoryDocsPage blocks={[]} />,
+      page: () => (
+        <StoryDocsPage
+          blocks={[
+            {
+              description:
+                "A Carbon AI slug can be used within the Datagrid for both column headers and rows. To include a column header AI slug, include a `slug` property within your column definition and include the Slug component as it's own custom component",
+              source: {
+                code: `
+{
+  Header: 'Visits',
+  accessor: 'visits',
+  slug: <ExampleSlug />,
+}
+`,
+              },
+            },
+            {
+              description: 'or used directly from the Slug component itself',
+              source: {
+                code: `
+{
+  Header: 'Visits',
+  accessor: 'visits',
+  slug: (
+    <Slug className="slug-container" autoAlign={false} align="bottom-right">
+      <SlugContent>
+        ...
+        ...
+      </SlugContent>
+    </Slug>
+  ),
+}
+`,
+              },
+            },
+            {
+              description:
+                'To include a slug on the row level, include a `slug` property in your row data with the same structure as outlined above.',
+            },
+          ]}
+        />
+      ),
     },
     layout: 'fullscreen',
   },
@@ -274,114 +311,99 @@ const GridWithSlugColumnHeaderWrapper = ({
 };
 
 const slugColumnHeaderStoryName = 'Column slug';
-export const SlugColumnHeaderStory = prepareStory(
-  GridWithSlugColumnHeaderWrapper,
-  {
-    storyName: slugColumnHeaderStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...controlProps,
-    },
-  }
-);
+export const SlugColumnHeaderStory = GridWithSlugColumnHeaderWrapper.bind({});
+SlugColumnHeaderStory.storyName = slugColumnHeaderStoryName;
+SlugColumnHeaderStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SlugColumnHeaderStory.args = {
+  ...controlProps,
+};
 
 const slugSortableColumnHeaderStoryName = 'Column slug sort';
-export const SlugSortableColumnHeaderStory = prepareStory(
-  GridWithSlugColumnHeaderWrapper,
-  {
-    storyName: slugSortableColumnHeaderStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...controlProps,
-      withSorting: true,
-    },
-  }
-);
+export const SlugSortableColumnHeaderStory =
+  GridWithSlugColumnHeaderWrapper.bind({});
+SlugSortableColumnHeaderStory.storyName = slugSortableColumnHeaderStoryName;
+SlugSortableColumnHeaderStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SlugSortableColumnHeaderStory.args = {
+  ...controlProps,
+  withSorting: true,
+};
 
 const slugRowStoryName = 'Row slug';
-export const SlugRowStory = prepareStory(GridWithSlugColumnHeaderWrapper, {
-  storyName: slugRowStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    rowSize: ARG_TYPES.rowSize,
-    rowSizes: ARG_TYPES.rowSizes,
-    onRowSizeChange: ARG_TYPES.onRowSizeChange,
-    expanderButtonTitleExpanded: 'Collapse row',
-    expanderButtonTitleCollapsed: 'Expand row',
-  },
-  args: {
-    ...controlProps,
-    rowSlug: true,
-    rowSlugAlign: 'right',
-  },
-});
+export const SlugRowStory = GridWithSlugColumnHeaderWrapper.bind({});
+SlugRowStory.storyName = slugRowStoryName;
+SlugRowStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SlugRowStory.args = {
+  ...controlProps,
+  rowSlug: true,
+  rowSlugAlign: 'right',
+};
 
 const slugRowSelectionStoryName = 'Row slug with selection';
-export const SlugRowSelectionStory = prepareStory(
-  GridWithSlugColumnHeaderWrapper,
-  {
-    storyName: slugRowSelectionStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...controlProps,
-      rowSlug: true,
-      rowSlugAlign: 'right',
-      withSelect: true,
-    },
-  }
-);
+export const SlugRowSelectionStory = GridWithSlugColumnHeaderWrapper.bind({});
+SlugRowSelectionStory.storyName = slugRowSelectionStoryName;
+SlugRowSelectionStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SlugRowSelectionStory.args = {
+  ...controlProps,
+  rowSlug: true,
+  rowSlugAlign: 'right',
+  withSelect: true,
+};
 
 const slugRowSelectionAndExpandStoryName =
   'Row slug with selection and expansion';
-export const SlugRowSelectionAndExpandStory = prepareStory(
-  GridWithSlugColumnHeaderWrapper,
-  {
-    storyName: slugRowSelectionAndExpandStoryName,
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      rowSize: ARG_TYPES.rowSize,
-      rowSizes: ARG_TYPES.rowSizes,
-      onRowSizeChange: ARG_TYPES.onRowSizeChange,
-      expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row',
-    },
-    args: {
-      ...controlProps,
-      rowSlug: true,
-      rowSlugAlign: 'right',
-      withSelect: true,
-      withExpansion: true,
-    },
-  }
-);
+export const SlugRowSelectionAndExpandStory =
+  GridWithSlugColumnHeaderWrapper.bind({});
+SlugRowSelectionAndExpandStory.storyName = slugRowSelectionAndExpandStoryName;
+SlugRowSelectionAndExpandStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  rowSize: ARG_TYPES.rowSize,
+  rowSizes: ARG_TYPES.rowSizes,
+  onRowSizeChange: ARG_TYPES.onRowSizeChange,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
+};
+SlugRowSelectionAndExpandStory.args = {
+  ...controlProps,
+  rowSlug: true,
+  rowSlugAlign: 'right',
+  withSelect: true,
+  withExpansion: true,
+};

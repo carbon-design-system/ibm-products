@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,6 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -30,7 +26,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/EditableCell`,
+  title: 'IBM Products/Components/Datagrid/EditableCell',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -177,32 +173,27 @@ const inlineEditUsageControlProps = {
   useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
 
-export const EditableCellUsageStory = prepareStory(
-  EditableCellTemplateWrapper,
-  {
-    storyName: 'Using useEditableCell hook',
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-    },
-    args: {
-      ...inlineEditUsageControlProps,
-      featureFlags: ['Datagrid.useEditableCell'],
-    },
-  }
-);
+export const EditableCellUsageStory = EditableCellTemplateWrapper.bind({});
+EditableCellUsageStory.storyName = 'Using useEditableCell hook';
+EditableCellUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+};
+EditableCellUsageStory.args = {
+  ...inlineEditUsageControlProps,
+  featureFlags: ['Datagrid.useEditableCell'],
+};
 
 const basicUsageStoryName = 'Using deprecated useInlineEdit hook';
-export const InlineEditUsageStory = prepareStory(InlineEditTemplateWrapper, {
-  storyName: basicUsageStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-  },
-  args: {
-    ...inlineEditUsageControlProps,
-    featureFlags: ['Datagrid.useInlineEdit'],
-  },
-});
+export const InlineEditUsageStory = InlineEditTemplateWrapper.bind({});
+InlineEditUsageStory.storyName = basicUsageStoryName;
+InlineEditUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+};
+InlineEditUsageStory.args = {
+  ...inlineEditUsageControlProps,
+  featureFlags: ['Datagrid.useInlineEdit'],
+};

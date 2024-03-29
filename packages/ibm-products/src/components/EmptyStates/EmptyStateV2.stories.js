@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,15 +9,11 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { EmptyStateV2 } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: getStoryTitle(EmptyStateV2.displayName),
+  title: 'IBM Products/Patterns/Empty state/EmptyStateV2',
   component: EmptyStateV2,
   tags: ['autodocs'],
   parameters: {
@@ -68,50 +64,44 @@ const defaultLinkProps = {
 
 const Template = (args) => <EmptyStateV2 {...args} />;
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+};
 
-export const WithCustomIllustration = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    illustration: CustomIllustration,
-  },
-});
+export const WithCustomIllustration = Template.bind({});
+WithCustomIllustration.args = {
+  ...defaultProps,
+  illustration: CustomIllustration,
+};
 
-export const withAction = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    action: { ...defaultActionProps },
-  },
-});
+export const withAction = Template.bind({});
+withAction.args = {
+  ...defaultProps,
+  action: { ...defaultActionProps },
+};
 
-export const withActionIconButton = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    action: {
-      ...defaultActionProps,
-      ...defaultIconProps,
-    },
+export const withActionIconButton = Template.bind({});
+withActionIconButton.args = {
+  ...defaultProps,
+  action: {
+    ...defaultActionProps,
+    ...defaultIconProps,
   },
-});
+};
 
-export const withLink = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    link: { ...defaultLinkProps },
-  },
-});
+export const withLink = Template.bind({});
+withLink.args = {
+  ...defaultProps,
+  link: { ...defaultLinkProps },
+};
 
-export const withActionAndLink = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    action: {
-      ...defaultActionProps,
-      ...defaultIconProps,
-    },
-    link: { ...defaultLinkProps },
+export const withActionAndLink = Template.bind({});
+withActionAndLink.args = {
+  ...defaultProps,
+  action: {
+    ...defaultActionProps,
+    ...defaultIconProps,
   },
-});
+  link: { ...defaultLinkProps },
+};

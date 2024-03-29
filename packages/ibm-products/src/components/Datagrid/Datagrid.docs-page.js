@@ -164,7 +164,6 @@ useDatagrid({
   columns,
   data,
   disableResizing: true,
-  resizerAriaLabel: 'Resize column',
 });
           `,
         },

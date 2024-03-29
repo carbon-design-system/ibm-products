@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,10 +9,6 @@ import React, { useRef, useState } from 'react';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
 // import mdx from './TagSet.mdx';
@@ -133,7 +129,7 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: getStoryTitle(TagSet.displayName),
+  title: 'IBM Products/Components/Tag set/TagSet',
   component: TagSet,
   tags: ['autodocs'],
   parameters: {
@@ -179,37 +175,33 @@ const Template = (argsIn) => {
   );
 };
 
-export const FiveTags = prepareStory(Template, {
-  args: {
-    tags: tags,
-    containerWidth: 500,
-  },
-});
+export const FiveTags = Template.bind({});
+FiveTags.args = {
+  tags: tags,
+  containerWidth: 500,
+};
 
-export const ManyTags = prepareStory(Template, {
-  args: {
-    tags: manyTags,
-    containerWidth: 500,
-    ...overflowAndModalStrings,
-  },
-});
+export const ManyTags = Template.bind({});
+ManyTags.args = {
+  tags: manyTags,
+  containerWidth: 500,
+  ...overflowAndModalStrings,
+};
 
-export const MultilineTags = prepareStory(Template, {
-  args: {
-    tags: manyTags,
-    containerWidth: 500,
-    multiline: true,
-    ...overflowAndModalStrings,
-  },
-});
+export const MultilineTags = Template.bind({});
+MultilineTags.args = {
+  tags: manyTags,
+  containerWidth: 500,
+  multiline: true,
+  ...overflowAndModalStrings,
+};
 
-export const HundredsOfTags = prepareStory(Template, {
-  args: {
-    tags: hundredsOfTags,
-    containerWidth: 500,
-    ...overflowAndModalStrings,
-  },
-});
+export const HundredsOfTags = Template.bind({});
+HundredsOfTags.args = {
+  tags: hundredsOfTags,
+  containerWidth: 500,
+  ...overflowAndModalStrings,
+};
 
 const TemplateWithClose = (argsIn) => {
   const { containerWidth, allTagsModalTargetCustomDomNode, tags, ...args } = {
@@ -241,19 +233,17 @@ const TemplateWithClose = (argsIn) => {
   );
 };
 
-export const WithClose = prepareStory(TemplateWithClose, {
-  args: {
-    tags: manyTags,
-    containerWidth: 500,
-    ...overflowAndModalStrings,
-  },
-});
+export const WithClose = TemplateWithClose.bind({});
+WithClose.args = {
+  tags: manyTags,
+  containerWidth: 500,
+  ...overflowAndModalStrings,
+};
 
-export const WithCloseAndOverflowTags = prepareStory(TemplateWithClose, {
-  args: {
-    tags: manyTags,
-    containerWidth: 500,
-    overflowType: 'tag',
-    ...overflowAndModalStrings,
-  },
-});
+export const WithCloseAndOverflowTags = TemplateWithClose.bind({});
+WithCloseAndOverflowTags.args = {
+  tags: manyTags,
+  containerWidth: 500,
+  overflowType: 'tag',
+  ...overflowAndModalStrings,
+};

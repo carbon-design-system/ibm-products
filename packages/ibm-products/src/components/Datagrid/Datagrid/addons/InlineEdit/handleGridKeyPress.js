@@ -18,6 +18,7 @@ export const handleGridKeyPress = ({
   instance,
   keysPressedList,
   usingMac,
+  ref,
 }) => {
   const { key } = event;
   const { gridActive, activeCellId, editId } = state;
@@ -55,13 +56,10 @@ export const handleGridKeyPress = ({
 
   // Checks if the dropdown menu is open
   const dropdownIsActive = () => {
-    const focusedElementRole = document.activeElement.getAttribute('role');
-    if (
-      focusedElementRole === 'listbox' &&
-      document.activeElement.classList.contains(
-        `${carbon.prefix}--list-box__menu`
-      )
-    ) {
+    const selectedDropdown = ref?.current.querySelector(`
+      #${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"] button[role='combobox']
+    `);
+    if (selectedDropdown) {
       // Prevents arrow keys from scrolling any other content when dropdown menu is open
       event.preventDefault();
       return true;

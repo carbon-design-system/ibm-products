@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,18 +16,13 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { CreateTearsheetNarrow } from '.';
 import styles from './_storybook-styles.scss';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
-  title: getStoryTitle(CreateTearsheetNarrow.displayName),
+  title: 'IBM Products/Patterns/Create flows/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
   argTypes: {
@@ -286,25 +281,22 @@ const WithValidationTemplate = ({ slug, ...args }) => {
 };
 
 const createTearsheetNarrowStoryName = 'Default';
-export const createTearsheetNarrow = prepareStory(Template, {
-  storyName: createTearsheetNarrowStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const createTearsheetNarrow = Template.bind({});
+createTearsheetNarrow.storyName = createTearsheetNarrowStoryName;
+createTearsheetNarrow.args = {
+  ...defaultStoryProps,
+};
 
 const withValidationStoryName = 'With Form Validation';
-export const withValidation = prepareStory(WithValidationTemplate, {
-  storyName: withValidationStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withValidation = WithValidationTemplate.bind({});
+withValidation.storyName = withValidationStoryName;
+withValidation.args = {
+  ...defaultStoryProps,
+};
 
 const withMultipleFormsStoryName = 'With Multiple Forms';
-export const withMultipleForms = prepareStory(WithValidationTemplate, {
-  storyName: withMultipleFormsStoryName,
-  args: {
-    ...defaultStoryProps,
-  },
-});
+export const withMultipleForms = WithValidationTemplate.bind({});
+withMultipleForms.storyName = withMultipleFormsStoryName;
+withMultipleForms.args = {
+  ...defaultStoryProps,
+};

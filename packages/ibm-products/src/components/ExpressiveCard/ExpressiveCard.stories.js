@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,10 +17,6 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 // import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
@@ -46,7 +42,7 @@ const sampleSlug = (
 );
 
 export default {
-  title: getStoryTitle(ExpressiveCard.displayName),
+  title: 'IBM Products/Components/Cards/ExpressiveCard',
   component: ExpressiveCard,
   tags: ['autodocs'],
   parameters: {
@@ -160,92 +156,82 @@ const MediaTemplate = (opts) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    mediaRatio: null,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultProps,
+  mediaRatio: null,
+};
 
-export const LabelOnly = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    title: '',
-    mediaRatio: null,
-  },
-});
+export const LabelOnly = Template.bind({});
+LabelOnly.args = {
+  ...defaultProps,
+  title: '',
+  mediaRatio: null,
+};
 
-export const WithCaption = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    caption: 'Description or long caption',
-    label: '',
-    mediaRatio: null,
-  },
-});
+export const WithCaption = Template.bind({});
+WithCaption.args = {
+  ...defaultProps,
+  caption: 'Description or long caption',
+  label: '',
+  mediaRatio: null,
+};
 
-export const WithMedia = prepareStory(MediaTemplate, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const WithMedia = MediaTemplate.bind({});
+WithMedia.args = {
+  ...defaultProps,
+};
 
-export const WithActionIconHref = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    actionIcons: [
-      {
-        id: '1',
-        icon: (props) => <ArrowRight size={24} {...props} />,
-        href: '#',
-        iconDescription: 'Next',
-      },
-    ],
-    primaryButtonText: '',
-    mediaRatio: null,
-  },
-});
+export const WithActionIconHref = Template.bind({});
+WithActionIconHref.args = {
+  ...defaultProps,
+  actionIcons: [
+    {
+      id: '1',
+      icon: (props) => <ArrowRight size={24} {...props} />,
+      href: '#',
+      iconDescription: 'Next',
+    },
+  ],
+  primaryButtonText: '',
+  mediaRatio: null,
+};
 
-export const WithPictogram = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    pictogram: (props) => <Cloud size={32} {...props} />,
-    mediaRatio: null,
-  },
-});
+export const WithPictogram = Template.bind({});
+WithPictogram.args = {
+  ...defaultProps,
+  pictogram: (props) => <Cloud size={32} {...props} />,
+  mediaRatio: null,
+};
 
-export const WithSecondaryAction = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    secondaryButtonText: 'Secondary',
-    secondaryButtonKind: 'ghost',
-    mediaRatio: null,
-  },
-});
+export const WithSecondaryAction = Template.bind({});
+WithSecondaryAction.args = {
+  ...defaultProps,
+  secondaryButtonText: 'Secondary',
+  secondaryButtonKind: 'ghost',
+  mediaRatio: null,
+};
 
-export const Clickable = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    onClick: action('on click'),
-    onKeyDown: action('on keydown'),
-    primaryButtonText: '',
-    mediaRatio: null,
-  },
-});
+export const Clickable = Template.bind({});
+Clickable.args = {
+  ...defaultProps,
+  onClick: action('on click'),
+  onKeyDown: action('on keydown'),
+  primaryButtonText: '',
+  mediaRatio: null,
+};
 
-export const WithButtonHref = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonHref: '#',
-    secondaryButtonHref: '#',
-    secondaryButtonText: 'Secondary',
-    secondaryButtonKind: 'ghost',
-  },
-});
+export const WithButtonHref = Template.bind({});
+WithButtonHref.args = {
+  ...defaultProps,
+  primaryButtonHref: '#',
+  secondaryButtonHref: '#',
+  secondaryButtonText: 'Secondary',
+  secondaryButtonKind: 'ghost',
+};
 
-export const WithButtonIcon = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    primaryButtonIcon: (props) => <Add size={16} {...props} />,
-  },
-});
+export const WithButtonIcon = Template.bind({});
+WithButtonIcon.args = {
+  ...defaultProps,
+  primaryButtonIcon: (props) => <Add size={16} {...props} />,
+};

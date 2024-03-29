@@ -1,18 +1,14 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2020, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
@@ -20,7 +16,7 @@ import styles from './_storybook-styles.scss';
 // Carbon and package components we use.
 
 export default {
-  title: getStoryTitle(ButtonSetWithOverflow.displayName),
+  title: 'IBM Products/Internal/ButtonSetWithOverflow',
   component: ButtonSetWithOverflow,
   tags: ['autodocs'],
   argTypes: {
@@ -66,11 +62,10 @@ const Template = (argsIn) => {
   );
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    buttons,
-    buttonSetOverflowLabel,
-    containerWidth: 600,
-    rightAlign: false,
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  buttons,
+  buttonSetOverflowLabel,
+  containerWidth: 600,
+  rightAlign: false,
+};

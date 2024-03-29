@@ -6,25 +6,27 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
-import uuidv4 from '../../../global/js/utils/uuidv4';
-
-import { FilterPanel, FilterPanelCheckbox } from '..';
-import mdx from './FilterPanelCheckbox.mdx';
+import { FilterPanel, FilterPanelGroup } from '..';
+import mdx from './FilterPanelGroup.mdx';
 
 import styles from '../_storybook-styles.scss';
 
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panel/FilterPanelCheckbox',
-  component: FilterPanelCheckbox,
+  title: 'IBM Products/Components/Filter panel/FilterPanelGroup',
+  component: FilterPanelGroup,
   tags: ['autodocs'],
+  parameters: {
+    styles,
+    docs: {
+      page: mdx,
+    },
+  },
   argTypes: {
+    children: { table: { disable: true } },
     className: { control: { type: {} } },
-    id: { table: { disable: true } },
-    onChange: { table: { disable: true } },
     count: {
       control: {
         type: 'select',
@@ -51,11 +53,12 @@ export default {
         },
       },
       mapping: {
-        0: 'Checkbox',
-        1: 'Really, really long checkbox name',
+        0: 'Group name',
+        1: 'Really, really, really long group name',
         2: (
           <>
-            <strong>Formatted</strong> <em>checkbox</em>
+            Formatted <em>group</em>{' '}
+            <span style={{ fontWeight: 'normal' }}>label</span>
           </>
         ),
       },
@@ -66,19 +69,16 @@ export default {
     count: 1,
     labelText: 0,
   },
-  parameters: {
-    styles,
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 const Template = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       <FilterPanel>
-        <FilterPanelCheckbox {...args} />
+        <FilterPanelGroup {...args}>
+          {/* `children` are required. */}
+          &nbsp;
+        </FilterPanelGroup>
       </FilterPanel>
     </div>
   );
@@ -87,9 +87,5 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.storyName = 'Default';
 Default.args = {
-  id: uuidv4(),
-  // Pass-through prop: Carbon's Checkbox onChange handler.
-  onChange: (event, { checked, id }) =>
-    action('onChange Checkbox (event, { checked, id })')(event, checked, id),
   title: '',
 };

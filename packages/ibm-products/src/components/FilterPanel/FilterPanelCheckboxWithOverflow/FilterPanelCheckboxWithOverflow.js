@@ -72,7 +72,6 @@ export let FilterPanelCheckboxWithOverflow = React.forwardRef(
         onBlur={({ relatedTarget }) => setHideButton(relatedTarget)}
         onFocus={() => setShowMenuButton(true)}
         /**
-         * onMouseDown > preventDefault solves an issue.
          * Desired behavior: onMouseEnter shows the menu, even when the user mouse-presses and -releases the checkbox/label.
          * Issue: onMouseDown > checkbox/label triggers an onBlur event and hides the menu button.
          *   Releasing the mouse button then shows the button again.

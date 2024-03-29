@@ -12,38 +12,50 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+import { FilterPanelLabel } from '../FilterPanelLabel';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--filter-panel-label`;
-const componentName = 'FilterPanelLabel';
+const blockClass = `${pkg.prefix}--filter-panel-group`;
+const componentName = 'FilterPanelGroup';
 
 /**
  * A container with a label and optional count.
  */
-export let FilterPanelLabel = React.forwardRef(
-  ({ className, count, labelText, title, ...rest }, ref) => {
+export let FilterPanelGroup = React.forwardRef(
+  ({ children, className, count, labelText, title, ...rest }, ref) => {
     return (
-      <span
+      <div
         {...rest}
         className={cx(blockClass, className)}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <span className={`${blockClass}__text`} title={title}>
-          {labelText}
-        </span>
-        {count && <span className={`${blockClass}__count`}>{count}</span>}{' '}
-      </span>
+        {labelText && (
+          <h2 className={`${blockClass}__title`}>
+            <FilterPanelLabel
+              count={count}
+              labelText={labelText}
+              title={title}
+            />
+          </h2>
+        )}
+        <div className={`${blockClass}__content`}>{children}</div>
+      </div>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-FilterPanelLabel = pkg.checkComponentEnabled(FilterPanelLabel, componentName);
+FilterPanelGroup = pkg.checkComponentEnabled(FilterPanelGroup, componentName);
 
-FilterPanelLabel.displayName = componentName;
+FilterPanelGroup.displayName = componentName;
 
-FilterPanelLabel.propTypes = {
+FilterPanelGroup.propTypes = {
+  /**
+   * Provide the contents of the FilterPanelGroup.
+   */
+  children: PropTypes.node.isRequired,
+
   /**
    * Optional class to be applied to the containing node.
    */

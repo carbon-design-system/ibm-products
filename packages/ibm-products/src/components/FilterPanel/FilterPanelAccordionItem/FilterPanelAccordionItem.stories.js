@@ -22,7 +22,7 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter Panel/FilterPanelAccordionItem',
+  title: 'IBM Products/Components/Filter panel/FilterPanelAccordionItem',
   component: FilterPanelAccordionItem,
   tags: ['autodocs'],
   parameters: {

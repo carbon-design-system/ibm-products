@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.32.0...@carbon/ibm-products@2.33.0) (2024-03-26)
+
+
+### Bug Fixes
+
+* **Datagrid:** address duplicate id issue in `RowSizeRadioGroup` ([#4588](https://github.com/carbon-design-system/ibm-products/issues/4588)) ([ed378a3](https://github.com/carbon-design-system/ibm-products/commit/ed378a339191eec19ad9ab687c86dbb7234be349))
+* **Dataspreadsheet:** Duplication selection issue [#4241](https://github.com/carbon-design-system/ibm-products/issues/4241) ([#4333](https://github.com/carbon-design-system/ibm-products/issues/4333)) ([8f2b275](https://github.com/carbon-design-system/ibm-products/commit/8f2b275fe9d50b864b6423c2ccae42cd6d3e6940))
+* **Dataspreadsheet:** glitchy behaviour issue 4551 ([#4586](https://github.com/carbon-design-system/ibm-products/issues/4586)) ([075530d](https://github.com/carbon-design-system/ibm-products/commit/075530d09dce79d6726f47bc5a939e8f49afcd7f)), closes [#4551](https://github.com/carbon-design-system/ibm-products/issues/4551)
+* exporting description list child components ([#4599](https://github.com/carbon-design-system/ibm-products/issues/4599)) ([b0e84bf](https://github.com/carbon-design-system/ibm-products/commit/b0e84bf93fd745ebca5e958e4f5e9e1b79800014))
+* **sidepanel:** resolve focus trap issue ([#4559](https://github.com/carbon-design-system/ibm-products/issues/4559)) ([17b1f46](https://github.com/carbon-design-system/ibm-products/commit/17b1f468d2e1e387b4eef54eb29740c03d8d4a6f))
+* **tearsheet:** change side effect dependency ([#4585](https://github.com/carbon-design-system/ibm-products/issues/4585)) ([db8a287](https://github.com/carbon-design-system/ibm-products/commit/db8a28756e8ce8df232dd357c9e710c37143eeb6))
+
+
+### Features
+
+* **FilterPanel:** new component with label and checkbox ([#4563](https://github.com/carbon-design-system/ibm-products/issues/4563)) ([5412e39](https://github.com/carbon-design-system/ibm-products/commit/5412e398c70680f0ea7bf26c807e8ed0a49d0440))
+
+
+
+
+
+# [2.32.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.31.1...@carbon/ibm-products@2.32.0) (2024-03-19)
+
+
+### Bug Fixes
+
+* filterable column counts ([#4573](https://github.com/carbon-design-system/ibm-products/issues/4573)) ([db82cc7](https://github.com/carbon-design-system/ibm-products/commit/db82cc7d783d50cf2e5067e41d1a89a5ad95364d))
+* removed redundant role from Link ([#4568](https://github.com/carbon-design-system/ibm-products/issues/4568)) ([8d531e7](https://github.com/carbon-design-system/ibm-products/commit/8d531e728ddc45b798844bc1da77d6d2daaf291b))
+
+
+### Features
+
+* remove prepareStory ([#4561](https://github.com/carbon-design-system/ibm-products/issues/4561)) ([f74626f](https://github.com/carbon-design-system/ibm-products/commit/f74626fe813f18fbcf8203111b9ae2e131176b07))
+
+
+
+
+
 ## [2.31.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.31.0...@carbon/ibm-products@2.31.1) (2024-03-14)
 
 

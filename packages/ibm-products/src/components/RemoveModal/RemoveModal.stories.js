@@ -8,7 +8,6 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 import DocsPage from './RemoveModal.docs-page';
 
@@ -60,30 +59,27 @@ const Template = ({ open: initOpen, ...args }, context) => {
   );
 };
 
-export const Standard = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-    title: 'Confirm removal',
-    primaryButtonText: 'Remove',
-    label: `Remove ${resourceName}`,
-  },
-});
+export const Standard = Template.bind({});
+Standard.args = {
+  ...defaultProps,
+  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+  title: 'Confirm removal',
+  primaryButtonText: 'Remove',
+  label: `Remove ${resourceName}`,
+};
 
-export const RemovePattern = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
-    title: 'Confirm removal',
-    primaryButtonText: 'Remove',
-    label: `Remove ${resourceName}`,
-    open: true,
-  },
-});
+export const RemovePattern = Template.bind({});
+RemovePattern.args = {
+  ...defaultProps,
+  body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
+  title: 'Confirm removal',
+  primaryButtonText: 'Remove',
+  label: `Remove ${resourceName}`,
+  open: true,
+};
 
-export const DeletePattern = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    textConfirmation: true,
-  },
-});
+export const DeletePattern = Template.bind({});
+DeletePattern.args = {
+  ...defaultProps,
+  textConfirmation: true,
+};

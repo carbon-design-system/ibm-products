@@ -18,11 +18,18 @@ import { pkg } from '../../../settings';
 const blockClass = `${pkg.prefix}--filter-panel-search`;
 const componentName = 'FilterPanelSearch';
 
+const defaults = {
+  searchProps: {},
+};
+
 /**
- * An input field and container to show results.
+ * An input field and container to show search results.
  */
 export let FilterPanelSearch = React.forwardRef(
-  ({ children, className, labelText, ...rest }, ref) => {
+  (
+    { children, className, searchProps = defaults.searchProps, ...rest },
+    ref
+  ) => {
     const [resultsVisible, setResultsVisible] = useState(false);
     let timer;
 
@@ -48,18 +55,15 @@ export let FilterPanelSearch = React.forwardRef(
 
     return (
       <div
-        className={`${blockClass}__container`}
+        {...rest}
+        className={cx(blockClass, `${blockClass}__container`, className)}
         onBlur={hideResults}
         onFocus={showResults}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
       >
-        <Search
-          {...rest}
-          className={cx(`${blockClass}__input`, className)}
-          labelText={labelText}
-          ref={ref}
-          {...getDevtoolsProps(componentName)}
-        />
-        {resultsVisible && children?.length > 0 && (
+        <Search className={`${blockClass}__input`} {...searchProps} />
+        {resultsVisible && !!children && (
           <div className={`${blockClass}__results`}>{children}</div>
         )}
       </div>
@@ -84,7 +88,10 @@ FilterPanelSearch.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The label text for the Search icon.
+   * Props specific to the internal `Search` component.
    */
-  labelText: PropTypes.node.isRequired,
+  searchProps: PropTypes.shape({
+    /** The label text for the Search icon. */
+    labelText: PropTypes.string.isRequired,
+  }).isRequired,
 };

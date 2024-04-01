@@ -98,8 +98,7 @@ const getDemoSearchResults = (data, searchValue) => {
 
   if (searchValue.length > 0 && filteredData.length === 0) {
     demoSearchResults = <p>No search results found.</p>;
-  } else {
-    // searchValue.length > 0 && filteredItems.length > 0
+  } else if (searchValue.length > 0 && filteredData.length > 0) {
     demoSearchResults = filteredData.map((item, index) => {
       return (
         <FilterPanelCheckbox
@@ -123,14 +122,15 @@ const Template = (args) => {
     <div className={`${storyClass}__viewport`}>
       <FilterPanel {...args}>
         <FilterPanelSearch
-          labelText="Search"
-          placeHolder="Search"
-          onChange={(event) => {
-            action('onChange "' + event.target.value + '"')(event);
-            setSearchValue(event.target.value);
-          }}
-          onClear={() => {
-            action()('onClear');
+          searchProps={{
+            labelText: 'Search',
+            onChange: (event) => {
+              action('onChange "' + event.target.value + '"')(event);
+              setSearchValue(event.target.value);
+            },
+            onClear: () => {
+              action()('onClear');
+            },
           }}
         >
           {demoSearchResults}

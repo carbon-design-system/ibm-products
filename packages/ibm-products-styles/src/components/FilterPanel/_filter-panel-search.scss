@@ -19,7 +19,7 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-search;
 
-.#{$block-class}__container {
+.#{$block-class} {
   position: relative;
   margin-bottom: $spacing-05;
 }

@@ -36,11 +36,15 @@ const Template = (args) => {
     <div className={`${storyClass}__viewport`}>
       <FilterPanelSearch
         {...args}
-        onChange={(event) => {
-          action('onChange "' + event.target.value + '"')(event);
-        }}
-        onClear={() => {
-          action()('onClear');
+        searchProps={{
+          labelText: 'Search',
+          placeholder: 'Search',
+          onChange: (event) => {
+            action('onChange "' + event.target.value + '"')(event);
+          },
+          onClear: () => {
+            action()('onClear');
+          },
         }}
       />
     </div>
@@ -49,7 +53,4 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.storyName = 'Default';
-Default.args = {
-  labelText: 'Search',
-  placeholder: 'Search',
-};
+Default.args = {};

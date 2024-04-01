@@ -1,16 +1,12 @@
-//
-// Copyright IBM Corp. 2021, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
 import { UserProfileImage } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import image from './headshot.jpg'; // cspell:disable-line
 import DocsPage from './UserProfileImage.docs-page';
 
@@ -23,7 +19,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: getStoryTitle(UserProfileImage.displayName),
+  title: 'IBM Products/Patterns/User profile images/UserProfileImage',
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {
@@ -79,42 +75,37 @@ const Template = (args) => {
   return <UserProfileImage {...args} />;
 };
 
-export const Default = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    kind: 'user',
-    tooltipText: 'Thomas Watson',
-  },
-});
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultArgs,
+  kind: 'user',
+  tooltipText: 'Thomas Watson',
+};
 
-export const WithGroupIcon = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    kind: 'group',
-  },
-});
+export const WithGroupIcon = Template.bind({});
+WithGroupIcon.args = {
+  ...defaultArgs,
+  kind: 'group',
+};
 
-export const WithInitials = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    initials: 'thomas j. watson',
-    tooltipText: 'Thomas Watson',
-  },
-});
+export const WithInitials = Template.bind({});
+WithInitials.args = {
+  ...defaultArgs,
+  initials: 'thomas j. watson',
+  tooltipText: 'Thomas Watson',
+};
 
-export const WithImage = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    image,
-    imageDescription: 'image here',
-  },
-});
+export const WithImage = Template.bind({});
+WithImage.args = {
+  ...defaultArgs,
+  image,
+  imageDescription: 'image here',
+};
 
-export const WithImageAndTooltip = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    image,
-    imageDescription: 'image here',
-    tooltipText: 'Display Name',
-  },
-});
+export const WithImageAndTooltip = Template.bind({});
+WithImageAndTooltip.args = {
+  ...defaultArgs,
+  image,
+  imageDescription: 'image here',
+  tooltipText: 'Display Name',
+};

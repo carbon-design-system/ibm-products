@@ -22,14 +22,21 @@ export const useFocus = (modalRef) => {
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
   const queryLink = `[href]${notQuery}`;
+  const queryTabIndex = `[tabindex="0"]${notQuery}`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}`;
+  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea}, ${queryTabIndex}`;
 
   const modalEl = modalRef?.current;
 
   const getFocusable = useCallback(() => {
     // Selecting all focusable elements based on the above conditions
-    const focusableElements = modalEl?.querySelectorAll(`${query}`);
+    let focusableElements = modalEl?.querySelectorAll(`${query}`);
+    if (focusableElements?.length) {
+      focusableElements = Array.prototype.filter.call(
+        focusableElements,
+        (el) => window?.getComputedStyle(el)?.display !== 'none'
+      );
+    }
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;

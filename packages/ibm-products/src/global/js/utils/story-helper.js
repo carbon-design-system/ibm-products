@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,63 +7,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
-import { getPathForComponent } from '../../../../../core/story-structure';
 import { paramCase } from 'change-case';
 
-/**
- * A helper function to return the structured story title for a component.
- * @param {string} componentName The name of the component.
- * @returns The structured story title.
- */
-export const getStoryTitle = (componentName) => {
-  const title =
-    // if the component isn't in the master structure, put it in a lost+found section
-    getPathForComponent('c', componentName) ||
-    `Carbon for IBM Products/Lost + found/${componentName}`;
-
-  // add a canary tag if the component is public but not normally enabled
-  return !pkg.isComponentEnabled(componentName, true) &&
-    pkg.isComponentPublic(componentName, true)
-    ? `${title}#canary`
-    : title;
-};
-
-/**
- * A helper function to return the slug (structured path name reduced to lower
- * case text and hyphens) which identifies individual story instances.
- * @param {string} componentName The name of the component.
- * @param {string} scenario The scenario name, also as a slug.
- * @returns The story id.
- */
-export const getStoryId = (componentName, scenario, subdirectory) => {
-  if (subdirectory) {
-    return `${sanitize(getStoryTitle(componentName))}-${sanitize(
-      subdirectory
-    )}--${scenario}`;
-  }
-  return `${sanitize(getStoryTitle(componentName))}--${scenario}`;
-};
-
-/**
- * A helper function to prepare storybook stories for export. This function
- * binds the template, adds the supplied fields, and also inserts a sequence
- * number so that stories can then be sorted into declared order reliably.
- * @param template the story template render function
- * @param options an object containing fields to be added to the bound
- * template, such as `args`, `storyName`, etc.
- * @returns A bound template with the option fields applied.
- */
-let sequence = 0;
-const bindTarget = {};
-export const prepareStory = (template, options) => {
-  const result = Object.assign(template.bind(bindTarget), options);
-  result.parameters ??= {};
-  result.parameters.ccsSettings ??= {};
-  result.parameters.ccsSettings.sequence = sequence++;
-  return result;
-};
+export const checkCanaryStatus = (componentName) =>
+  !pkg.isComponentEnabled(componentName, true) &&
+  pkg.isComponentPublic(componentName, true)
+    ? true
+    : false;
 
 /**
  * A helper component that returns a codesandbox link to an example codesandbox for the component.
@@ -168,8 +119,15 @@ export const storyDocsPageInfo = (csfFile) => {
 
   if (/components|patterns/i.test(kind)) {
     result.expectCodedExample = true;
-    // components and patterns have an additional level
-    component = b;
+    // Required until components within 'Patterns' category use the
+    // new approach with setting story titles because they are nested an
+    // extra level
+    if (typeof b === 'string') {
+      component = b;
+    } else {
+      component = a;
+    }
+
     result.section = a;
 
     result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(

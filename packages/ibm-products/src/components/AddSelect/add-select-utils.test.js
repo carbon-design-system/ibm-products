@@ -13,6 +13,16 @@ import {
 } from './add-select-utils';
 
 describe('add select utils', () => {
+  let warn;
+
+  beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+  });
+
+  afterEach(() => {
+    warn.mockRestore();
+  });
+
   it('normalizes data', async () => {
     const data = {
       entries: [

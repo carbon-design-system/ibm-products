@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,10 +10,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionSet } from '.';
@@ -24,7 +20,7 @@ import styles from './_storybook-styles.scss';
 const blockClass = `${pkg.prefix}--action-set`;
 
 export default {
-  title: getStoryTitle(ActionSet.displayName),
+  title: 'IBM Products/Internal/ActionSet',
   component: ActionSet,
   tags: ['autodocs'],
   parameters: {
@@ -68,6 +64,5 @@ const Template = ({ actions, size = 'md', containerWidth, ...args }) => {
   );
 };
 
-export const actionSet = prepareStory(Template, {
-  args: { actions: 3, containerWidth: 300 },
-});
+export const actionSet = Template.bind({});
+actionSet.args = { actions: 3, containerWidth: 300 };

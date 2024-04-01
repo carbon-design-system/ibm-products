@@ -7,19 +7,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
-
 import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(StatusIndicator.displayName),
+  title: 'IBM Products/Components/Status indicator/StatusIndicator',
   component: StatusIndicator,
   tags: ['autodocs'],
   argTypes: {
@@ -337,44 +331,39 @@ const TemplateFailAsync = (args) => {
   );
 };
 
-export const statusIndicator = prepareStory(Template, {
-  storyName: 'StatusIndicator',
-  args: {
-    onRetry: (event) => {
-      action('onRetry')(event);
-    },
-    retryLabel: 'Retry',
-    showRetry: true,
-    title: 'List of states available',
+export const statusIndicator = Template.bind({});
+statusIndicator.storyName = 'StatusIndicator';
+statusIndicator.args = {
+  onRetry: (event) => {
+    action('onRetry')(event);
   },
-});
+  retryLabel: 'Retry',
+  showRetry: true,
+  title: 'List of states available',
+};
 
-export const success = prepareStory(TemplateSuccess, {
-  args: {
-    title: 'Success, synchronous',
-  },
-});
+export const success = TemplateSuccess.bind({});
+success.args = {
+  title: 'Success, synchronous',
+};
 
-export const fail = prepareStory(TemplateFail, {
-  args: {
-    onRetry: (event) => {
-      action('onRetry')(event);
-    },
-    title: 'Fail, synchronous',
+export const fail = TemplateFail.bind({});
+TemplateFail.args = {
+  onRetry: (event) => {
+    action('onRetry')(event);
   },
-});
+  title: 'Fail, synchronous',
+};
 
-export const successAsync = prepareStory(TemplateSuccessAsync, {
-  args: {
-    title: 'Success, asynchronous',
-  },
-});
+export const successAsync = TemplateSuccessAsync.bind({});
+successAsync.args = {
+  title: 'Success, asynchronous',
+};
 
-export const failAsync = prepareStory(TemplateFailAsync, {
-  args: {
-    onRetry: (event) => {
-      action('onRetry')(event);
-    },
-    title: 'Fail, asynchronous',
+export const failAsync = TemplateFailAsync.bind({});
+failAsync.args = {
+  onRetry: (event) => {
+    action('onRetry')(event);
   },
-});
+  title: 'Fail, asynchronous',
+};

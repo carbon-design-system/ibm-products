@@ -1,10 +1,12 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { Datagrid } from '.';
 import datagridActionsExample from './storybook-assets/datagrid-actions-example.png';
+import * as stories from './Datagrid.stories';
+import * as ExpandedStories from './Extensions/ExpandableRow/ExpandableRow.stories';
+import * as ClickableRowStories from './Extensions/ClickableRow/ClickableRow.stories';
+import * as EditableCellStories from './Extensions/EditableCell/EditableCell.stories';
+import * as FlyoutStories from './Extensions/Filtering/Flyout.stories';
 
 # Datagrid
 
@@ -36,7 +38,7 @@ import datagridActionsExample from './storybook-assets/datagrid-actions-example.
 
 ## Overview
 
-<!-- TODO: Overview. -->
+{/* <!-- TODO: Overview. --> */}
 
 The `Datagrid` component is an extension of Carbon's DataTable component. At the
 most basic level, the `Datagrid` component takes in columns and rows and renders
@@ -78,7 +80,7 @@ import {
 
 ## Basic
 
-<!-- TODO: One example per designed use case. -->
+{/* <!-- TODO: One example per designed use case. --> */}
 
 Here is a basic usage example. The following component will render the datagrid
 seen below, with pagination and some toolbar actions. One of the key pieces to
@@ -118,7 +120,7 @@ const App = () => {
 ```
 
 <Canvas>
-  <Story id={getStoryId(Datagrid.displayName, 'basic-usage')} />
+  <Story of={stories.BasicUsage} />
 </Canvas>
 
 ### Column structure
@@ -209,7 +211,7 @@ const App = () => {
 ```
 
 <Canvas>
-  <Story id={getStoryId(Datagrid.displayName, 'empty-state')} />
+  <Story of={stories.EmptyState} />
 </Canvas>
 
 ## Expandable rows
@@ -239,13 +241,7 @@ const App = () => {
 ```
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      Datagrid.displayName,
-      'expandable-row-story',
-      '/Extensions/ExpandableRow'
-    )}
-  />
+  <Story of={ExpandedStories.ExpandableRowStory} />
 </Canvas>
 
 ## Column alignment
@@ -305,13 +301,7 @@ const App = () => {
 ```
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      Datagrid.displayName,
-      'column-alignment-story',
-      '/Extensions/ColumnAlignment'
-    )}
-  />
+  <Story of={ClickableRowStories.ClickableRowItemStory} />
 </Canvas>
 
 ## Inline editing
@@ -441,13 +431,7 @@ const App = () => {
 ```
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      Datagrid.displayName,
-      'editable-cell-usage-story',
-      '/Extensions/EditableCell'
-    )}
-  />
+  <Story of={EditableCellStories.EditableCellUsageStory} />
 </Canvas>
 
 At this time, it is possible to still use the deprecated `useInlineEdit` hook
@@ -832,13 +816,7 @@ filterProps: {
 ```
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      Datagrid.displayName,
-      'flyout-batch',
-      '/Extensions/Filtering/Flyout'
-    )}
-  />
+  <Story of={FlyoutStories.FlyoutBatch} />
 </Canvas>
 
 ## Auto size column to fit content

@@ -275,9 +275,11 @@ unclear.
     });
     ```
 - The tests should aim to achieve 100% coverage (use
-  `yarn test ComponentName --coverage`). Specific pieces of code that cannot
-  practically be reached can be marked with `istanbul ignore` tags, but these
-  should be used sparingly and only where appropriate.
+  `yarn test:c4p ComponentName --coverage or yarn coverage ComponentName`). You
+  can easily access the coverage report using `yarn coverage:report`. Specific
+  pieces of code that cannot practically be reached can be marked with
+  `istanbul ignore` tags, but these should be used sparingly and only where
+  appropriate.
 - Test cases should not emit warnings, errors or log messages. If the test needs
   to include something that causes a console log, use the appropriate Jest
   mechanisms for catching this.

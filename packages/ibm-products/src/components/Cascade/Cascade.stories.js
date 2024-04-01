@@ -1,22 +1,18 @@
-//
-// Copyright IBM Corp. 2021, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React from 'react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { Cascade } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
 import DocsPage from './Cascade.docs-page';
 
 export default {
-  title: getStoryTitle(Cascade.displayName),
+  title: 'IBM Products/Patterns/Cascade',
   component: Cascade,
   tags: ['autodocs'],
   parameters: {
@@ -64,12 +60,10 @@ const GridTemplate = (args) => {
   );
 };
 
-export const WithoutGrid = prepareStory(DefaultTemplate, {
-  args: {},
-});
+export const WithoutGrid = DefaultTemplate.bind({});
+WithoutGrid.args = {};
 
-export const WithGrid = prepareStory(GridTemplate, {
-  args: {
-    grid: true,
-  },
-});
+export const WithGrid = GridTemplate.bind({});
+WithGrid.args = {
+  grid: true,
+};

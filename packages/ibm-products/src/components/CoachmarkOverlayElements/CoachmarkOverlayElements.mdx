@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkOverlayElements } from '.';
+import * as CoachmarkOverlayElementsStories from './CoachmarkOverlayElements.stories';
 
 # CoachmarkOverlayElements
 
@@ -43,12 +41,7 @@ CoachmarkStack components.
 
 <Canvas className="coachmarkExample" withSource="none">
   <div className="CoachmarkBaseExampleUsage">
-    <Story
-      id={getStoryId(
-        CoachmarkOverlayElements.displayName,
-        'coachmark-overlay-elements'
-      )}
-    />
+    <Story of={CoachmarkOverlayElementsStories.coachmarkOverlayElements} />
   </div>
 </Canvas>
 

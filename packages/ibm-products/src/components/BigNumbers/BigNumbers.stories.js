@@ -6,14 +6,8 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 
 import { BigNumbers } from '.';
 import { BigNumbersSize } from './constants';
@@ -39,7 +33,7 @@ const numericOptions = {
 };
 
 export default {
-  title: getStoryTitle(BigNumbers.displayName),
+  title: 'IBM Products/Components/Big numbers/BigNumbers',
   component: BigNumbers,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -159,26 +153,24 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const bigNumbers = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
+export const bigNumbers = Template.bind({});
+bigNumbers.args = {
+  ...defaultProps,
+};
 
-export const withEditButton = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    tooltipDescription: 'Tooltip description',
-    iconButton: (
-      <Button
-        renderIcon={Edit}
-        iconDescription="Icon Description"
-        kind="ghost"
-        size={'sm'}
-        hasIconOnly
-        onClick={() => console.log('clicked icon')}
-        tooltipPosition="bottom"
-      />
-    ),
-  },
-});
+export const withEditButton = Template.bind({});
+withEditButton.args = {
+  ...defaultProps,
+  tooltipDescription: 'Tooltip description',
+  iconButton: (
+    <Button
+      renderIcon={Edit}
+      iconDescription="Icon Description"
+      kind="ghost"
+      size={'sm'}
+      hasIconOnly
+      onClick={() => console.log('clicked icon')}
+      tooltipPosition="bottom"
+    />
+  ),
+};

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,6 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -34,7 +30,7 @@ import { SidePanel } from '../../../SidePanel';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
+  title: 'IBM Products/Components/Datagrid/ClickableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -280,16 +276,15 @@ const clickableRowControlProps = {
   gridDescription: sharedDatagridProps.gridDescription,
 };
 const clickableRowItemStoryName = 'With clickable row item';
-export const ClickableRowItemStory = prepareStory(BasicTemplateWrapper, {
-  storyName: clickableRowItemStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-  },
-  args: {
-    ...clickableRowControlProps,
-  },
-});
+export const ClickableRowItemStory = BasicTemplateWrapper.bind({});
+ClickableRowItemStory.storyName = clickableRowItemStoryName;
+ClickableRowItemStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+};
+ClickableRowItemStory.args = {
+  ...clickableRowControlProps,
+};
 
 const DataTableSidePanelContent = (selectedRowValues) => {
   const { rowData } = selectedRowValues;
@@ -404,13 +399,12 @@ const ClickableRowWithPanelWrapper = ({ ...args }) => {
 };
 
 const clickableRowStoryName = 'Clickable row with side panel';
-export const ClickableRowStory = prepareStory(ClickableRowWithPanelWrapper, {
-  storyName: clickableRowStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-  },
-  args: {
-    ...clickableRowControlProps,
-  },
-});
+export const ClickableRowStory = ClickableRowWithPanelWrapper.bind({});
+ClickableRowStory.storyName = clickableRowStoryName;
+ClickableRowStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+};
+ClickableRowStory.args = {
+  ...clickableRowControlProps,
+};

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,11 +8,6 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
 import { ActionableNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
@@ -23,7 +18,7 @@ import { ButtonMenu, ButtonMenuItem } from '.';
 import { Add } from '@carbon/react/icons';
 
 export default {
-  title: getStoryTitle(ButtonMenu.displayName),
+  title: 'IBM Products/Internal/ButtonMenu',
   component: ButtonMenu,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -87,7 +82,5 @@ const Template = (args) => {
   );
 };
 
-export const buttonMenu = prepareStory(Template, {
-  storyName: 'Button menu',
-  args: {},
-});
+export const buttonMenu = Template.bind({});
+buttonMenu.storyName = 'Button menu';

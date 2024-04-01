@@ -1,9 +1,7 @@
 import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { TruncatedList } from '.';
+import * as stories from './TruncatedList.stories';
 
 # TruncatedList
 
@@ -22,7 +20,7 @@ import { TruncatedList } from '.';
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(TruncatedList.displayName, 'truncated-list')} />
+  <Story of={stories.truncatedList} />
 </Canvas>
 
 ## Code sample

@@ -181,7 +181,7 @@ describe(componentName, () => {
 
     expect(screen.getByRole('heading').id).toBe(titleId);
     expect(screen.getByRole('switch').getAttribute('aria-labelledby')).toBe(
-      `${titleId}-toggle`
+      `${titleId}`
     );
   });
 

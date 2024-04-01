@@ -16,7 +16,8 @@ const DatagridSimpleBody = (datagridState) => {
   const { getTableBodyProps, rows, prepareRow } = datagridState;
   return (
     <TableBody
-      {...getTableBodyProps()}
+      {...getTableBodyProps({ role: undefined })}
+      aria-live={null}
       className={cx(
         `${blockClass}__simple-body`,
         getTableBodyProps().className

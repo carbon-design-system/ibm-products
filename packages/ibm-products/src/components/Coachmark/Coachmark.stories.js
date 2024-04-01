@@ -9,11 +9,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Crossroads } from '@carbon/react/icons';
-import {
-  getStoryTitle,
-  getSelectedCarbonTheme,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 
 import {
   Coachmark,
@@ -30,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(Coachmark.displayName),
+  title: 'IBM Products/Novice to pro/Coachmark',
   component: Coachmark,
   tags: ['autodocs'],
   argTypes: {
@@ -108,31 +104,29 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const tooltip = prepareStory(Template, {
-  args: {
-    theme: 'dark',
-    align: 'bottom',
-    positionTune: { x: 0, y: 0 },
-    target: (
-      <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
-    ),
-  },
-});
+export const tooltip = Template.bind({});
+tooltip.args = {
+  theme: 'dark',
+  align: 'bottom',
+  positionTune: { x: 0, y: 0 },
+  target: (
+    <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
+  ),
+};
 
-export const floating = prepareStory(Template, {
-  args: {
-    theme: 'dark',
-    align: 'bottom',
-    overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
-    target: (
-      <CoachmarkButton
-        kind="tertiary"
-        size="md"
-        label="Show information"
-        renderIcon={Crossroads}
-      >
-        Click Me
-      </CoachmarkButton>
-    ),
-  },
-});
+export const floating = Template.bind({});
+floating.args = {
+  theme: 'dark',
+  align: 'bottom',
+  overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
+  target: (
+    <CoachmarkButton
+      kind="tertiary"
+      size="md"
+      label="Show information"
+      renderIcon={Crossroads}
+    >
+      Click Me
+    </CoachmarkButton>
+  ),
+};

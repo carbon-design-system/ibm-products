@@ -6,15 +6,9 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import { Crossroads } from '@carbon/react/icons';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark';
-import {
-  getStoryTitle,
-  prepareStory,
-  getSelectedCarbonTheme,
-} from '../../global/js/utils/story-helper';
+import { getSelectedCarbonTheme } from '../../global/js/utils/story-helper';
 import {
   Coachmark,
   CoachmarkOverlayElement,
@@ -26,7 +20,8 @@ import mdx from './CoachmarkButton.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CoachmarkButton.displayName),
+  title:
+    'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkButton',
   component: CoachmarkButton,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -72,9 +67,8 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const coachmarkButton = prepareStory(Template, {
-  args: {
-    label: 'Click Me',
-    className: 'myButton',
-  },
-});
+export const coachmarkButton = Template.bind({});
+coachmarkButton.args = {
+  label: 'Click Me',
+  className: 'myButton',
+};

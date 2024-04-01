@@ -372,13 +372,7 @@ export let SidePanel = React.forwardRef(
       }
 
       memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
-    }, [
-      labelTextHeight,
-      memoizedScrollTopFunction,
-      panelRefValue?.style,
-      scrollAnimationDistance,
-      setSubtitleMarginTop,
-    ]);
+    }, [labelTextHeight, memoizedScrollTopFunction, panelRefValue?.style, scrollAnimationDistance, setSubtitleMarginTop]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia

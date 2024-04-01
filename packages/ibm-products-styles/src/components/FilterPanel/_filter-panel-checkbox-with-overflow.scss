@@ -12,10 +12,10 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox-with-overflow;
@@ -39,6 +39,7 @@ $carbon: #{c4p-settings.$carbon-prefix};
 // Size the menu button.
 .#{$block-class} .#{$block-class}__overflow-button {
   width: $spacing-06;
+  background-color: $layer;
   block-size: $spacing-06;
   min-block-size: $spacing-06;
 }

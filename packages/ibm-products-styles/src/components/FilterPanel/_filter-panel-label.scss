@@ -37,11 +37,3 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-label;
   margin-left: $spacing-04;
   color: $text-secondary;
 }
-
-// Surround the value with parentheses.
-.#{$block-class}__count::before {
-  content: '(';
-}
-.#{$block-class}__count::after {
-  content: ')';
-}

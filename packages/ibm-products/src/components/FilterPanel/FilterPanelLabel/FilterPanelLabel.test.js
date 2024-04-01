@@ -51,9 +51,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    // renderComponent({ className });
-    const { debug } = renderComponent({ className });
-    debug();
+    renderComponent({ className });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 

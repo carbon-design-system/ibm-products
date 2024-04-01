@@ -129,7 +129,7 @@ let FilterSummary = React.forwardRef(
           [`${blockClass}__expanded`]: multiline,
         })}
       >
-        <AnimatePresence mode="wait" exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {!multiline && renderTagSet('single')}
           {multiline && renderTagSet('multiline')}
         </AnimatePresence>

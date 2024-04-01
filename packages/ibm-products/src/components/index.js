@@ -119,6 +119,7 @@ export { SearchBar } from './SearchBar';
 export { Nav } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
+export { ScrollGradient } from './ScrollGradient';
 export { StatusIndicator } from './StatusIndicator';
 export { ActionBar } from './ActionBar';
 export {

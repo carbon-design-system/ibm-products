@@ -50,7 +50,6 @@ html .#{$block-class} .#{$carbon}--accordion__content {
 // Override Filter Panel Label
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--filter-panel-label__text {
   @include type.type-style('body-01');
-  // @include type.font-weight('semibold');
 }
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--filter-panel-label__count {
   @include type.type-style('label-01');

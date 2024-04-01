@@ -130,6 +130,7 @@ export let UserAvatar = React.forwardRef(
         )}
         ref={ref}
         role="img"
+        aria-hidden="true"
         {...getDevtoolsProps(componentName)}
       >
         {getItem()}
@@ -167,7 +168,20 @@ UserAvatar.propTypes = {
   /**
    * Provide the background color need to be set for UserAvatar.
    */
-  backgroundColor: PropTypes.oneOf(['light-cyan', 'dark-cyan']),
+  backgroundColor: PropTypes.oneOf([
+    'order-1-cyan',
+    'order-2-gray',
+    'order-3-green',
+    'order-4-magenta',
+    'order-5-purple',
+    'order-6-teal',
+    'order-7-cyan',
+    'order-8-gray',
+    'order-9-green',
+    'order-10-magenta',
+    'order-11-purple',
+    'order-12-teal',
+  ]),
   /**
    * Provide an optional class to be applied to the containing node.
    */

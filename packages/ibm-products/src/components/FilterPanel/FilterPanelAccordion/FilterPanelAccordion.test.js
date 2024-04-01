@@ -53,7 +53,7 @@ describe(componentName, () => {
     renderComponent({ count });
     expect(
       screen.getByText(/5/, {
-        selector: `.${blockClass} .c4p--filter-panel-group__title .c4p--filter-panel-label__count`,
+        selector: `.${blockClass} .${pkg.prefix}--filter-panel-group__title .${pkg.prefix}--filter-panel-label__count`,
       })
     );
   });

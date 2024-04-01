@@ -22,7 +22,7 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter Panel/FilterPanelAccordionItem',
+  title: 'IBM Products/Components/Filter panel/FilterPanelAccordionItem',
   component: FilterPanelAccordionItem,
   tags: ['autodocs'],
   parameters: {
@@ -39,15 +39,17 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'As number: 12',
-          1: 'As string: "1,500"',
+          0: 'No value',
+          1: 'As number: 12',
+          2: 'As string: "1,500"',
         },
       },
       mapping: {
-        0: 12,
-        1: '1,500',
+        0: undefined,
+        1: 12,
+        2: '1,500',
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
     labelText: {
       control: {
@@ -72,7 +74,7 @@ export default {
     truncatedListProps: { control: { type: {} } },
   },
   args: {
-    count: 0,
+    count: 1,
     labelText: 0,
   },
 };

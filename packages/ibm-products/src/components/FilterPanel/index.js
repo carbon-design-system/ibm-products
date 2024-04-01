@@ -6,5 +6,9 @@
  */
 
 export { FilterPanel } from './FilterPanel';
+export { FilterPanelAccordion } from './FilterPanelAccordion/FilterPanelAccordion';
+export { FilterPanelAccordionItem } from './FilterPanelAccordionItem/FilterPanelAccordionItem';
 export { FilterPanelCheckbox } from './FilterPanelCheckbox/FilterPanelCheckbox';
+export { FilterPanelCheckboxWithOverflow } from './FilterPanelCheckboxWithOverflow/FilterPanelCheckboxWithOverflow';
+export { FilterPanelGroup } from './FilterPanelGroup/FilterPanelGroup';
 export { FilterPanelLabel } from './FilterPanelLabel/FilterPanelLabel';

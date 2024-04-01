@@ -6,12 +6,14 @@
 //
 
 /* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable declaration-no-important */
 
-@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings' as
+  c4p-settings;
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
+$carbon: #{c4p-settings.$carbon-prefix}--filter-panel;
 
-// TODO: add any additional styles used by FilterPanel.stories.js
 .filter-panel-stories__viewport {
-  // outline: 1px dashed #9cf; // TODO: DELETE ME
   width: 16rem;
   padding: 1rem;
 }

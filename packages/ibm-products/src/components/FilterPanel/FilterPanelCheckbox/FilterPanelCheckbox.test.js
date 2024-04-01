@@ -18,6 +18,7 @@ const componentName = FilterPanelCheckbox.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
+const count = 5;
 const dataTestId = uuidv4();
 const id = uuidv4();
 const labelText = `hello, world (${uuidv4()})`;
@@ -34,14 +35,22 @@ describe(componentName, () => {
     // NOTE
     // FilterPanelCheckbox returns the Carbon Checkbox directly.
     // Carbon Checkbox renders and applies props as:
-    //   <div className prop only>
-    //     <checkbox all other props />
+    //   <div className-prop-only>
+    //     <checkbox all-other-props />
     //   </div>
 
     // Test wrapper div exists.
     expect(container.querySelector(`.${blockClass}`)).toBeInTheDocument();
     // Test checkbox exists.
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
+
+  it('renders a count', async () => {
+    const filterPanelLabelClass = `${pkg.prefix}--filter-panel-label`;
+    const { container } = renderComponent({ count });
+    expect(
+      container.querySelector(`.${filterPanelLabelClass}__count`).textContent
+    ).toBe('5');
   });
 
   it('has no accessibility violations', async () => {
@@ -51,7 +60,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = renderComponent({ className: className });
+    const { container } = renderComponent({ className });
     expect(container.querySelector(`.${blockClass}`)).toHaveClass(className);
   });
 
@@ -62,7 +71,7 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref: ref });
+    renderComponent({ ref });
     expect(ref.current).toBeInTheDocument();
   });
 

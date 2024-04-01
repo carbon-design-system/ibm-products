@@ -303,8 +303,7 @@ export let SidePanel = React.forwardRef(
         const innerContentHeight = innerContentRef?.current?.clientHeight;
         const innerContentScrollTop = innerContentRef?.current?.scrollTop;
         const computedMarginTop = Number(
-          window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0] ||
-            null
+          window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0]
         );
 
         console.log(computedMarginTop);

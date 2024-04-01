@@ -18,8 +18,8 @@ const componentName = FilterPanelLabel.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
 const count = 5;
+const dataTestId = uuidv4();
 const labelText = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
@@ -38,7 +38,7 @@ describe(componentName, () => {
   });
 
   it('renders a count', async () => {
-    const { container } = renderComponent({ count: count });
+    const { container } = renderComponent({ count });
     expect(container.querySelector(`.${blockClass}__count`).textContent).toBe(
       '5'
     );
@@ -51,13 +51,13 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    renderComponent({ className: className });
+    renderComponent({ className });
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ className: className, ref: ref });
+    renderComponent({ className, ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 

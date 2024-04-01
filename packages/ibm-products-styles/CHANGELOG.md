@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.30.1...@carbon/ibm-products-styles@2.31.0) (2024-03-26)
+
+
+### Features
+
+* **FilterPanel:** new component with label and checkbox ([#4563](https://github.com/carbon-design-system/ibm-products/issues/4563)) ([5412e39](https://github.com/carbon-design-system/ibm-products/commit/5412e398c70680f0ea7bf26c807e8ed0a49d0440))
+
+
+
+
+
 ## [2.30.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.30.0...@carbon/ibm-products-styles@2.30.1) (2024-03-14)
 
 

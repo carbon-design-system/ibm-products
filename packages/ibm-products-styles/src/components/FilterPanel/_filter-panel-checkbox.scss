@@ -20,16 +20,28 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox;
 $label: #{c4p-settings.$pkg-prefix}--filter-panel-label;
 $carbon: #{c4p-settings.$carbon-prefix};
 
-.#{$block-class} .#{$carbon}--checkbox-label {
-  display: flex;
-  align-items: center;
+// UNDO Carbon's concept that a Checkbox is always a list item (":last-of-type").
+// This also allows the TruncatedList to calculate the correct height for expanding/collapsing the list.
+.#{$block-class}.#{$carbon}--form-item.#{$carbon}--checkbox-wrapper,
+.#{$block-class}.#{$carbon}--form-item.#{$carbon}--checkbox-wrapper:last-of-type {
+  margin-block-end: 0;
+}
+
+// Surround a checkbox's count with parentheses.
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--filter-panel-label__count::before {
+  content: '(';
+}
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--filter-panel-label__count::after {
+  content: ')';
 }
 
 .#{$block-class} .#{$carbon}--checkbox-label,
 .#{$block-class} .#{$carbon}--checkbox-label-text {
-  // Set Carbon's Checkbox label to 100% the width of its container.
+  // Set Carbon's Checkbox label to 100% the width of the filter panel.
   width: 100%;
-  // Match height to overflow button.
+  // Match height to the "checkbox with overflow" button.
   height: $spacing-06;
 }
 

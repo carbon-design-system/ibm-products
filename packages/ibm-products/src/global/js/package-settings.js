@@ -72,13 +72,17 @@ const defaults = {
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
+    ScrollGradient: false,
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,
     ActionBar: false,
     FilterPanel: false,
+    FilterPanelAccordion: false,
+    FilterPanelAccordionItem: false,
     FilterPanelCheckbox: false,
     FilterPanelCheckboxWithOverflow: false,
+    FilterPanelGroup: false,
     FilterPanelLabel: false,
 
     /* new component flags here - comment used by generate CLI */

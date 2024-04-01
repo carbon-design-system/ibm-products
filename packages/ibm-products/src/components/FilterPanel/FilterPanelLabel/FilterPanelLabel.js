@@ -32,8 +32,7 @@ export let FilterPanelLabel = React.forwardRef(
         <span className={`${blockClass}__text`} title={title}>
           {labelText}
         </span>
-
-        <span className={`${blockClass}__count`}>{count}</span>
+        {count && <span className={`${blockClass}__count`}>{count}</span>}{' '}
       </span>
     );
   }

@@ -35,8 +35,8 @@ describe(componentName, () => {
     // NOTE
     // FilterPanelCheckbox returns the Carbon Checkbox directly.
     // Carbon Checkbox renders and applies props as:
-    //   <div className prop only>
-    //     <checkbox all other props />
+    //   <div className-prop-only>
+    //     <checkbox all-other-props />
     //   </div>
 
     // Test wrapper div exists.

@@ -26,8 +26,8 @@ export let FilterPanelSearch = React.forwardRef(
     const [resultsVisible, setResultsVisible] = useState(false);
     let timer;
 
-    // Hide results with a delay, giving enough time
-    // for any "show" to trigger earlier.
+    // Hide results with a delay.
+    // Gives enough time for "show" to trigger earlier.
     const hideResults = () => {
       clearTimeout(timer);
       timer = setTimeout(() => {
@@ -59,7 +59,7 @@ export let FilterPanelSearch = React.forwardRef(
           ref={ref}
           {...getDevtoolsProps(componentName)}
         />
-        {resultsVisible && children && (
+        {resultsVisible && children?.length > 0 && (
           <div className={`${blockClass}__results`}>{children}</div>
         )}
       </div>

@@ -66,56 +66,71 @@ export default {
   },
 };
 
-const demoItems = [
-  'Checkbox',
-  <>
-    <strong>Formatted</strong> <em>checkbox</em>
-  </>,
-  'Really, really long checkbox name',
-  'Checkbox with menu 1',
-  'Checkbox with menu 2',
-  'Checkbox 1',
-  'Checkbox 2',
-  'Checkbox 3',
-  'Checkbox 4',
-  'Checkbox 5',
-  'Checkbox 6',
-  'Checkbox 7',
-  'Checkbox 8',
-  'Checkbox 9',
-  'Checkbox 10',
-  'Checkbox 11',
-  'Checkbox 12',
+const demoData = [
+  { label: 'Checkbox', count: 6 },
+  {
+    label: (
+      <>
+        <strong>Formatted</strong> <em>checkbox</em>
+      </>
+    ),
+    count: '1,500',
+  },
+  { label: 'Really, really long checkbox name', count: 10 },
+  { label: 'Checkbox with menu 1', count: 6 },
+  { label: 'Checkbox with menu 2', count: 6 },
+  { label: 'Checkbox 1', count: 10 },
+  { label: 'Checkbox 2', count: 10 },
+  { label: 'Checkbox 3', count: 15 },
 ];
+
+const getDemoSearchResults = (data, searchValue) => {
+  let demoSearchResults;
+  let filteredData = [];
+
+  if (searchValue.length > 0) {
+    filteredData = data.filter((item) => {
+      const t = getNodeTextContent(item.label).toLowerCase();
+      const s = searchValue.toLowerCase();
+      return t.indexOf(s) > -1;
+    });
+  }
+
+  if (searchValue.length > 0 && filteredData.length === 0) {
+    demoSearchResults = <p>No search results found.</p>;
+  } else {
+    // searchValue.length > 0 && filteredItems.length > 0
+    demoSearchResults = filteredData.map((item, index) => {
+      return (
+        <FilterPanelCheckbox
+          key={index}
+          labelText={item.label}
+          count={item.count}
+          id={uuidv4()}
+        />
+      );
+    });
+  }
+
+  return demoSearchResults;
+};
 
 const Template = (args) => {
   const [searchValue, setSearchValue] = useState('');
-  let demoSearchResults;
-
-  const filteredItems = demoItems.filter((item) => {
-    const t = getNodeTextContent(item).toLowerCase();
-    const s = searchValue.toLowerCase();
-    return t.indexOf(s) > -1;
-  });
-
-  if (searchValue.length === 0) {
-    demoSearchResults = null;
-  } else if (searchValue.length > 0 && filteredItems.length === 0) {
-    demoSearchResults = <p>No search results.</p>;
-  } else {
-    demoSearchResults = filteredItems.map((item, index) => {
-      return <FilterPanelCheckbox key={index} labelText={item} id={uuidv4()} />;
-    });
-  }
+  const demoSearchResults = getDemoSearchResults(demoData, searchValue);
 
   return (
     <div className={`${storyClass}__viewport`}>
       <FilterPanel {...args}>
         <FilterPanelSearch
           labelText="Search"
+          placeHolder="Search"
           onChange={(event) => {
             action('onChange "' + event.target.value + '"')(event);
             setSearchValue(event.target.value);
+          }}
+          onClear={() => {
+            action()('onClear');
           }}
         >
           {demoSearchResults}
@@ -229,7 +244,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={10}
               labelText="Checkbox 1"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(
@@ -242,7 +256,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={10}
               labelText="Checkbox 2"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(
@@ -255,7 +268,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={15}
               labelText="Checkbox 3"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(

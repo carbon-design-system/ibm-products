@@ -50,7 +50,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor|^change-case$)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
@@ -69,7 +69,7 @@
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-ibm-cloud-cognitive": "^0.14.40",
     "chalk": "^4.1.2",
-    "change-case": "5.4.3",
+    "change-case": "4.1.2",
     "classnames": "^2.5.1",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",

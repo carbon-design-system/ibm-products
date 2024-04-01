@@ -10897,7 +10897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"doiuse@npm:^6.0.1, doiuse@npm:^6.0.2":
+"doiuse@npm:^6.0.1":
   version: 6.0.2
   resolution: "doiuse@npm:6.0.2"
   dependencies:
@@ -16496,13 +16496,6 @@ __metadata:
   version: 4.5.0
   resolution: "lodash.omit@npm:4.5.0"
   checksum: 10/f5c67cd1df11f1275662060febb629a4d4e7b547c4bea66454508b5e6096162c2af882aab1ff8cb5dcf2b328f22252416de6ca9c1334588f6310edfac525e511
-  languageName: node
-  linkType: hard
-
-"lodash.pick@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.pick@npm:4.4.0"
-  checksum: 10/5a76778aa1c245ce081d19c5a625a44cdf4853f421c8789ec962cb5d73dd21be7cf11ae3bc2123ff5f432326ed0176d674d22ca6e0e8f9eaba5b74b00f632c12
   languageName: node
   linkType: hard
 
@@ -22866,7 +22859,7 @@ __metadata:
     stylelint-config-idiomatic-order: "npm:^9.0.0"
     stylelint-config-standard: "npm:^34.0.0"
     stylelint-config-standard-scss: "npm:^10.0.0"
-    stylelint-no-unsupported-browser-features: "npm:^7.0.1"
+    stylelint-no-unsupported-browser-features: "npm:^7.0.0"
     stylelint-plugin-carbon-tokens: "npm:^2.3.1"
     stylelint-use-logical: "npm:^2.1.2"
   peerDependencies:
@@ -23024,19 +23017,6 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0||^15.0.0
   checksum: 10/cb6ba284988a0c5fcc49b8ed66f164a95ef34e3ddc6302baf4b6bd37ea8b3421ce781fe13455beb31f2a12279c0f0c62a5c3ec2c6324c53a2a1ee643962e6976
-  languageName: node
-  linkType: hard
-
-"stylelint-no-unsupported-browser-features@npm:^7.0.1":
-  version: 7.1.0
-  resolution: "stylelint-no-unsupported-browser-features@npm:7.1.0"
-  dependencies:
-    doiuse: "npm:^6.0.2"
-    lodash.pick: "npm:^4.4.0"
-    postcss: "npm:^8.4.32"
-  peerDependencies:
-    stylelint: ^16.0.2
-  checksum: 10/7f966a62f2d8062a6dead320394648489310674f66a93955acbc8744e943eb9a44fe79f81c5481573529a68c4905ae399b1ad5fd6b9c9c2301ddcba0f39c18ec
   languageName: node
   linkType: hard
 

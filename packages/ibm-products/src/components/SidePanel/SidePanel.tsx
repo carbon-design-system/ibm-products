@@ -208,7 +208,7 @@ type SidePanelSlideInProps =
 type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
 // `any` is a work around until ActionSet is migrated to TS
-const MotionActionSet = motion<any>(ActionSet);
+const MotionActionSet = motion(ActionSet);
 
 // Default values for props
 const defaults = {
@@ -807,7 +807,7 @@ export let SidePanel = React.forwardRef(
 
               {/* footer */}
               <MotionActionSet
-                actions={actions}
+                actions={actions ?? []}
                 className={primaryActionContainerClassNames}
                 size={size === 'xs' ? 'sm' : size}
                 custom={shouldReduceMotion}

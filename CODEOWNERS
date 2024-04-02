@@ -1,5 +1,8 @@
-* @carbon-design-system/ibm-cloud-cognitive-development
+# Default
+* @carbon-design-system/carbon-for-ibm-products-development
 
-# Carbon for IBM Products > Security package
-# cspell:disable-next-line
-/packages/security/ @jlongshore   @paul-balchin-ibm
+# Security package
+/packages/security/ @jlongshore @paul-balchin-ibm
+
+# Admins and team should be notified of changes to CI/CD workflows
+/.github/workflows @elycheea @matthewgallo @kennylam @carbon-design-system/carbon-for-ibm-products-development

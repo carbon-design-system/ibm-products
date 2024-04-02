@@ -14,6 +14,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { UserAvatar } from '.';
 import { User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
+import { Theme } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--user-avatar`;
 const componentName = UserAvatar.displayName;
@@ -26,11 +27,34 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('should return a circle with background color', async () => {
-    renderComponent({
-      backgroundColor: 'light-cyan',
-    });
-    const element = screen.getByRole('img');
-    const hasBackgroundColor = element.className.includes('light-cyan');
+    render(
+      <Theme theme={'g10'}>
+        <UserAvatar
+          backgroundColor="order-1-cyan"
+          data-testid={dataTestId}
+        ></UserAvatar>
+      </Theme>
+    );
+    const themeDiv = document.getElementsByClassName('cds--g10')[0];
+    expect(themeDiv).toBeTruthy();
+    const element = screen.getByTestId(dataTestId);
+    const hasBackgroundColor = element.className.includes('order-1-cyan');
+    expect(hasBackgroundColor).toBeTruthy();
+  });
+
+  it('should return a circle with background color', async () => {
+    render(
+      <Theme theme={'g100'}>
+        <UserAvatar
+          backgroundColor="order-2-gray"
+          data-testid={dataTestId}
+        ></UserAvatar>
+      </Theme>
+    );
+    const themeDiv = document.getElementsByClassName('cds--g100')[0];
+    expect(themeDiv).toBeTruthy();
+    const element = screen.getByTestId(dataTestId);
+    const hasBackgroundColor = element.className.includes('order-2-gray');
     expect(hasBackgroundColor).toBeTruthy();
   });
 
@@ -50,8 +74,9 @@ describe(componentName, () => {
     const customClass = 'test';
     renderComponent({
       className: customClass,
+      'data-testid': dataTestId,
     });
-    const element = screen.getByRole('img');
+    const element = screen.getByTestId(dataTestId);
     expect(element).toHaveClass(customClass);
   });
 
@@ -74,8 +99,8 @@ describe(componentName, () => {
   });
 
   it('should return appropriately size circle based on size prop', async () => {
-    renderComponent({ size: 'md' });
-    const element = screen.getByRole('img');
+    renderComponent({ size: 'md', 'data-testid': dataTestId });
+    const element = screen.getByTestId(dataTestId);
     const hasSizeClass = element.className.includes('md');
     expect(hasSizeClass).toBeTruthy();
   });
@@ -91,15 +116,15 @@ describe(componentName, () => {
   });
 
   it('should render a tooltip if the tooltipText is supplied', async () => {
-    renderComponent({ tooltipText: 'Display name' });
-    const element = screen.getByRole('img');
+    renderComponent({ tooltipText: 'Display name', 'data-testid': dataTestId });
+    const element = screen.getByTestId(dataTestId);
     const tooltipElement = element.closest(`span.${carbon.prefix}--tooltip`);
     expect(tooltipElement).toBeTruthy();
   });
 
   it('should not render a tooltip if the tooltipText is not supplied', async () => {
-    renderComponent({ tooltipText: '' });
-    const element = screen.getByRole('img');
+    renderComponent({ tooltipText: '', 'data-testid': dataTestId });
+    const element = screen.getByTestId(dataTestId);
     const tooltipElement = element.closest(`span.${carbon.prefix}--tooltip`);
     expect(tooltipElement).not.toBeTruthy();
   });

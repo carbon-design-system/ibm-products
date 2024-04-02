@@ -7,6 +7,7 @@
 
 import React, { forwardRef } from 'react';
 import * as CarbonIcons from '@carbon/icons-react';
+import { Theme } from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { UserAvatar } from '../UserAvatar';
@@ -31,8 +32,21 @@ const fiveTags = tags.slice(0, 5);
 let longTags = tags.slice(0, 5);
 longTags.splice(1, 1, { id: 'id-1', label: 'Business performance' });
 
-// UserProfileImage background colors
-const colors = ['light-cyan', 'dark-cyan'];
+// UserAvatar background colors
+const colors = [
+  'order-1-cyan',
+  'order-2-gray',
+  'order-3-green',
+  'order-4-magenta',
+  'order-5-purple',
+  'order-6-teal',
+  'order-7-cyan',
+  'order-8-gray',
+  'order-9-green',
+  'order-10-magenta',
+  'order-11-purple',
+  'order-12-teal',
+];
 
 // Lists of  first names and last names
 //cspell: disable
@@ -163,7 +177,9 @@ export default {
           {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <DisplayBox>{story()}</DisplayBox>
+        <Theme theme="g10">
+          <DisplayBox>{story()}</DisplayBox>
+        </Theme>
       </>
     ),
   ],

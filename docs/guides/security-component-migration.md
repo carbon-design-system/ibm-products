@@ -200,27 +200,22 @@ v2 will receive weekly releases occurring every Tuesday morning.
 
 Unchanged props; names and functionality have not changed.
 
-| Unchanged prop     |
-| :----------------- |
-| className          |
-| forceShowTotal     |
-| iconButton         |
-| label \*           |
-| locale             |
-| percentage         |
-| size               |
-| tooltipDescription |
-| total              |
-| trending           |
-| truncate           |
-| value              |
-
-New props were added to the component to meet Products' `v2` specifications.
-
-| New prop       | Change                                                                                            |
-| -------------- | ------------------------------------------------------------------------------------------------- |
-| fractionDigits | Optional value to control the max/min fractional digits used when truncating the value and total. |
-| loading        | Set to `true` to show the loading skeleton.                                                       |
+| Old prop           | New prop ↓         | Change                                                                                                 |
+| :----------------- | :----------------- | :----------------------------------------------------------------------------------------------------- |
+| className          | className          | No change.                                                                                             |
+| forceShowTotal     | forceShowTotal     | No change.                                                                                             |
+| —                  | fractionDigits     | New. Optional value to control the max/min fractional digits used when truncating the value and total. |
+| iconButton         | iconButton         | No change.                                                                                             |
+| label              | label              | Is now required.                                                                                       |
+| —                  | loading            | New. Set to `true` to show the loading skeleton.                                                       |
+| locale             | locale             | No change.                                                                                             |
+| percentage         | percentage         | No change.                                                                                             |
+| size               | size               | No change.                                                                                             |
+| tooltipDescription | tooltipDescription | No change.                                                                                             |
+| total              | total              | No change.                                                                                             |
+| trending           | trending           | No change.                                                                                             |
+| truncate           | truncate           | No change.                                                                                             |
+| value              | value              | No change.                                                                                             |
 
 **ICASkeleton** was deprecated. Use the `loading` prop above, instead.
 
@@ -235,69 +230,28 @@ The Decorator has been broken out into 4 distinct "types":
 - DecoratorSingleButton - renders a single button.
 - DecoratorDualButton - the label and value are rendered as independent buttons.
 
-#### All Decorator types
-
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop  |                                                                                                             |
-| :-------------- | ----------------------------------------------------------------------------------------------------------- |
-| className       | Optional class to be applied to the containing node.                                                        |
-| score           | Used in conjunction with `scoreThresholds`, determines the color, shape, and type of magnitude of the icon. |
-| scoreThresholds | Used in conjunction with `scoreThresholds`, determines the color, shape, and type of magnitude of the icon. |
-| value \*        | The value of the data.                                                                                      |
-
-Some props were renamed and/or repurposed to meet Products' `v2` specifications.
-
-| Old prop          | New prop      |                                                                                                                     |
-| :---------------- | :------------ | :------------------------------------------------------------------------------------------------------------------ |
-| active            | theme         | Renamed, repurposed. Determines the theme of the component.                                                         |
-| inline            | small         | Renamed. Styled smaller to better fit inline with text.                                                             |
-| midLineTruncation | truncateValue | Renamed, repurposed. In addition to the existing `{ maxLength, front, back }`, added options `"start"` and `"end"`. |
-| noIcon            | hideIcon      | Renamed. Do not show the icon, regardless of score.                                                                 |
-| scoreDescription  | setLabelTitle | Repurposed. Optional callback function for building a more detailed descriptive text. Returns more information.     |
-| title             | valueTitle    | Renamed. Will override the value's default `title` only.                                                            |
-| type              | label         | Renamed. The label for the data.                                                                                    |
-
-New props were added for specific functional requirements.
-
-| New prop           |                                                                      |
-| :----------------- | :------------------------------------------------------------------- |
-| disabled           | Applies only to `DecoratorSingleButton` and `DecoratorDualButton`.   |
-| href               | Applies only to `DecoratorLink`.                                     |
-| onClick            | Optional callback function, applies only to `DecoratorSingleButton`. |
-| onContextMenu      | Optional callback function, applies only to `DecoratorSingleButton`. |
-| onClickValue       | Optional callback function, applies only to `DecoratorDualButton`.   |
-| onContextMenu      | Optional callback function, applies only to `DecoratorDualButton`.   |
-| onContextMenuLabel | Optional callback function, applies only to `DecoratorDualButton`.   |
-| onContextMenuValue | Optional callback function, applies only to `DecoratorDualButton`.   |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop |                                                                                                                       |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| fitValue        | This is now the Decorator's default layout behavior.                                                                  |
-| noBorderRadius  | The Carbon 11 design refresh no longer supports square corners.                                                       |
-| _noType_        | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
-
 ---
 
-### Decorator
+#### Decorator
 
 The default `Decorator` offers no interactive features.
 
-| Prop            |
-| :-------------- |
-| className       |
-| hideIcon        |
-| label           |
-| score           |
-| scoreThresholds |
-| setLabelTitle   |
-| small           |
-| theme           |
-| truncateValue   |
-| value \*        |
-| valueTitle      |
+| Old prop          | New prop ↓      | Change                                                                                                                |
+| :---------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| className         | className       | No change.                                                                                                            |
+| noIcon            | hideIcon        | Renamed.                                                                                                              |
+| type              | label           | Renamed.                                                                                                              |
+| score             | score           | No change.                                                                                                            |
+| scoreThresholds   | scoreThresholds | No change.                                                                                                            |
+| scoreDescription  | setLabelTitle   | Repurposed. Optional callback function for building a more detailed descriptive text. Returns more information.       |
+| inline            | small           | Renamed.                                                                                                              |
+| active            | theme           | Renamed, repurposed. Determines the theme of the component.                                                           |
+| midLineTruncation | truncateValue   | Renamed, repurposed. In addition to the existing `{ maxLength, front, back }`, added options `"start"` and `"end"`.   |
+| value             | value           | No change.                                                                                                            |
+| title             | valueTitle      | Renamed. Will override the value's default `title` only.                                                              |
+| ~fitValue~        | —               | This is now the Decorator's default layout behavior.                                                                  |
+| ~noBorderRadius~  | —               | The Carbon 11 design refresh no longer supports square corners.                                                       |
+| ~_noType_~        | —               | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
 
 ---
 
@@ -305,22 +259,25 @@ The default `Decorator` offers no interactive features.
 
 The `DecoratorLink` renders an anchor tag.
 
-| Prop            |
-| :-------------- |
-| className       |
-| hideIcon        |
-| href \*         |
-| label           |
-| onClick         |
-| onContextMenu   |
-| score           |
-| scoreThresholds |
-| setLabelTitle   |
-| small           |
-| theme           |
-| truncateValue   |
-| value \*        |
-| valueTitle      |
+| Old prop          | New prop ↓      | Change                                                                                                                |
+| :---------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| className         | className       | No change.                                                                                                            |
+| noIcon            | hideIcon        | Renamed.                                                                                                              |
+| —                 | href            | New, required.                                                                                                        |
+| type              | label           | Renamed.                                                                                                              |
+| —                 | onClick         | New.                                                                                                                  |
+| —                 | onContextMenu   | New.                                                                                                                  |
+| score             | score           | No change.                                                                                                            |
+| scoreThresholds   | scoreThresholds | No change.                                                                                                            |
+| scoreDescription  | setLabelTitle   | Repurposed. Optional callback function for building a more detailed descriptive text. Returns more information.       |
+| inline            | small           | Renamed.                                                                                                              |
+| active            | theme           | Renamed, repurposed. Determines the theme of the component.                                                           |
+| midLineTruncation | truncateValue   | Renamed, repurposed. In addition to the existing `{ maxLength, front, back }`, added options `"start"` and `"end"`.   |
+| value             | value           | No change.                                                                                                            |
+| title             | valueTitle      | Renamed. Will override the value's default `title` only.                                                              |
+| ~fitValue~        | —               | This is now the Decorator's default layout behavior.                                                                  |
+| ~noBorderRadius~  | —               | The Carbon 11 design refresh no longer supports square corners.                                                       |
+| ~_noType_~        | —               | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
 
 ---
 
@@ -328,22 +285,25 @@ The `DecoratorLink` renders an anchor tag.
 
 The `DecoratorSingleButton` renders a single button.
 
-| Prop            |
-| :-------------- |
-| className       |
-| disabled        |
-| hideIcon        |
-| label           |
-| onClick         |
-| onContextMenu   |
-| score           |
-| scoreThresholds |
-| setLabelTitle   |
-| small           |
-| theme           |
-| truncateValue   |
-| value \*        |
-| valueTitle      |
+| Old prop          | New prop ↓      | Change                                                                                                                |
+| :---------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| className         | className       | No change.                                                                                                            |
+| —                 | disabled        | New.                                                                                                                  |
+| noIcon            | hideIcon        | Renamed.                                                                                                              |
+| type              | label           | Renamed.                                                                                                              |
+| —                 | onClick         | New.                                                                                                                  |
+| —                 | onContextMenu   | New.                                                                                                                  |
+| score             | score           | No change.                                                                                                            |
+| scoreThresholds   | scoreThresholds | No change.                                                                                                            |
+| scoreDescription  | setLabelTitle   | Repurposed. Optional callback function for building a more detailed descriptive text. Returns more information.       |
+| inline            | small           | Renamed.                                                                                                              |
+| active            | theme           | Renamed, repurposed. Determines the theme of the component.                                                           |
+| midLineTruncation | truncateValue   | Renamed, repurposed. In addition to the existing `{ maxLength, front, back }`, added options `"start"` and `"end"`.   |
+| value             | value           | No change.                                                                                                            |
+| title             | valueTitle      | Renamed. Will override the value's default `title` only.                                                              |
+| ~fitValue~        | —               | This is now the Decorator's default layout behavior.                                                                  |
+| ~noBorderRadius~  | —               | The Carbon 11 design refresh no longer supports square corners.                                                       |
+| ~_noType_~        | —               | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
 
 ---
 
@@ -351,24 +311,27 @@ The `DecoratorSingleButton` renders a single button.
 
 The `DecoratorDualButton` renders the label and value as independent buttons.
 
-| Prop               |
-| :----------------- |
-| className          |
-| disabled           |
-| hideIcon           |
-| label              |
-| onClickLabel       |
-| onClickValue       |
-| onContextMenuLabel |
-| onContextMenuValue |
-| score              |
-| scoreThresholds    |
-| setLabelTitle      |
-| small              |
-| theme              |
-| truncateValue      |
-| value \*           |
-| valueTitle         |
+| Old prop          | New prop ↓         | Change                                                                                                                |
+| :---------------- | :----------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| className         | className          | No change.                                                                                                            |
+| —                 | disabled           | New.                                                                                                                  |
+| noIcon            | hideIcon           | Renamed.                                                                                                              |
+| type              | label              | Renamed.                                                                                                              |
+| —                 | onClickLabel       | New.                                                                                                                  |
+| —                 | onClickValue       | New.                                                                                                                  |
+| —                 | onContextMenuLabel | New.                                                                                                                  |
+| —                 | onContextMenuValue | New.                                                                                                                  |
+| score             | score              | No change.                                                                                                            |
+| scoreThresholds   | scoreThresholds    | No change.                                                                                                            |
+| scoreDescription  | setLabelTitle      | Repurposed. Optional callback function for building a more detailed descriptive text. Returns more information.       |
+| inline            | small              | Renamed.                                                                                                              |
+| active            | theme              | Renamed, repurposed. Determines the theme of the component.                                                           |
+| midLineTruncation | truncateValue      | Renamed, repurposed. In addition to the existing `{ maxLength, front, back }`, added options `"start"` and `"end"`.   |
+| value             | value              | No change.                                                                                                            |
+| title             | valueTitle         | Renamed. Will override the value's default `title` only.                                                              |
+| ~fitValue~        | —                  | This is now the Decorator's default layout behavior.                                                                  |
+| ~noBorderRadius~  | —                  | The Carbon 11 design refresh no longer supports square corners.                                                       |
+| ~_noType_~        | —                  | _(NOTE: This feature was omitted in the original migration's design refresh, but is under review to be re-instated.)_ |
 
 ---
 
@@ -376,7 +339,9 @@ The `DecoratorDualButton` renders the label and value as independent buttons.
 
 **Note:** Append count functionality was not migrated as its implementation
 never worked consistently and didn't match the description. No changes to the
-props surface of this component.
+props surface of this component. See
+[PR 4069](https://github.com/carbon-design-system/ibm-products/pull/4069) for
+more details.
 
 Unchanged props; names and functionality have not changed.
 
@@ -395,82 +360,77 @@ Unchanged props; names and functionality have not changed.
 
 Unchanged props; names and functionality have not changed.
 
-| Unchanged prop |
-| :------------- |
-| border         |
-| children       |
-| className      |
-| size           |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop |                                        |
-| :-------------- | :------------------------------------- |
-| bordered        | **Removed**, use `border` boolean prop |
+| Old prop   | New prop ↓ | Change                     |
+| :--------- | :--------- | :------------------------- |
+| border     | border     | No change.                 |
+| children   | children   | No change.                 |
+| className  | className  | No change.                 |
+| size       | size       | No change.                 |
+| `bordered` | —          | **Removed**, use `border`. |
 
 ---
 
 ### FilterPanel
 
-| Old prop   | New prop  | Change               |
-| :--------- | :-------- | :------------------- |
-| children   | children  | No change            |
-| className  | className | No change            |
-| title      | title     | No change            |
-| filterData | —         | Deprecated in **v1** |
+| Old prop     | New prop ↓ | Change                              |
+| :----------- | :--------- | :---------------------------------- |
+| children     | children   | No change.                          |
+| className    | className  | No change.                          |
+| title        | title      | No change.                          |
+| ~filterData~ | —          | Was labeled "deprecated" in **v1**. |
 
 ### FilterPanelAccordion
 
-| Old prop  | New prop       | Change                                                       |
-| :-------- | :------------- | :----------------------------------------------------------- |
-| —         | accordionProps | New object {} specific to Carbon's Accordion component props |
-| children  | children       | No change                                                    |
-| className | className      | No change                                                    |
-| count     | count          | No change                                                    |
-| heading   | labelText      | Renamed                                                      |
-| title     | title          | No change                                                    |
+| Old prop  | New prop ↓     | Change                                                            |
+| :-------- | :------------- | :---------------------------------------------------------------- |
+| —         | accordionProps | New object `{}` specific to internal `Accordion` component props. |
+| children  | children       | No change.                                                        |
+| className | className      | No change.                                                        |
+| count     | count          | No change.                                                        |
+| heading   | labelText      | Renamed.                                                          |
+| title     | title          | No change.                                                        |
 
 ### FilterPanelAccordionItem
 
-| Old prop            | New prop           | Change                                                           |
-| :------------------ | :----------------- | :--------------------------------------------------------------- |
-| —                   | accordionItemProps | New object {} specific to Carbon's AccordionItem component props |
-| children            | children           | No change                                                        |
-| className           | className          | No change                                                        |
-| count               | count              | No change                                                        |
-| heading             | labelText          | Renamed                                                          |
-| title               | title              | No change                                                        |
-| —                   | truncatedListProps | New object {} specific to TruncatedList component props          |
-| collapseLabel       | —                  | Removed. Use truncatedListProps{collapsedItemsLimit} instead     |
-| expandLabel         | —                  | Removed. Use truncatedListProps{expandedItemsLimit} instead      |
-| scrollGradientColor | —                  | Scroll gradients are deprecated in Carbon 11.                    |
+| Old prop              | New prop ↓         | Change                                                                |
+| :-------------------- | :----------------- | :-------------------------------------------------------------------- |
+| —                     | accordionItemProps | New object `{}` specific to internal `AccordionItem` component props. |
+| children              | children           | No change.                                                            |
+| className             | className          | No change.                                                            |
+| count                 | count              | No change.                                                            |
+| heading               | labelText          | Renamed.                                                              |
+| title                 | title              | No change.                                                            |
+| —                     | truncatedListProps | New object `{}` specific to internal `TruncatedList` component props. |
+| ~collapseLabel~       | —                  | Removed. Use `truncatedListProps{collapsedItemsLimit}` instead.       |
+| ~expandLabel~         | —                  | Removed. Use `truncatedListProps{expandedItemsLimit}` instead.        |
+| ~scrollGradientColor~ | —                  | Scroll gradients are deprecated in Carbon 11.                         |
 
 ### FilterPanelCheckbox
 
-| Old prop   | New prop  | Change                           |
-| :--------- | :-------- | :------------------------------- |
-| className  | className | No change                        |
-| count      | count     | No change                        |
-| —          | id        | New, required by Carbon Checkbox |
-| —          | labelText | New, required by Carbon Checkbox |
-| title      | title     | No change                        |
-| countLabel | —         | Removed. Replaced by labelText   |
+| Old prop     | New prop ↓ | Change                              |
+| :----------- | :--------- | :---------------------------------- |
+| className    | className  | No change.                          |
+| count        | count      | No change.                          |
+| —            | id         | New, required by Carbon `Checkbox`. |
+| —            | labelText  | New, required by Carbon `Checkbox`. |
+| title        | title      | No change.                          |
+| ~countLabel~ | —          | Removed. Replaced by labelText.     |
 
 ### FilterPanelCheckboxWithOverflow
 
-| Old prop              | New prop          | Change                                                       |
-| :-------------------- | :---------------- | :----------------------------------------------------------- |
-| children              | children          | No change                                                    |
-| className             | className         | No change                                                    |
-| (count)               | count             | Made explicit\*                                              |
-| (id)                  | id                | Made explicit\*                                              |
-| (labelText)           | labelText         | Made explicit\*                                              |
-| (onChange)            | onChange          | Made explicit\*                                              |
-| —                     | overflowMenuProps | New object {} specific to OverflowMenu's component props\*\* |
-| (title)               | title             | Made explicit\*                                              |
-| open                  | —                 | Removed. Use overflowMenuProps{open} instead                 |
-| overflowMenuAriaLabel | —                 | Removed. Use overflowMenuProps{['aria-label']} instead       |
-| selectorPrimaryFocus  | —                 | Removed. Use overflowMenuProps{selectorPrimaryFocus} instead |
+| Old prop                | New prop ↓        | Change                                                                     |
+| :---------------------- | :---------------- | :------------------------------------------------------------------------- |
+| children                | children          | No change.                                                                 |
+| className               | className         | No change.                                                                 |
+| (count)                 | count             | Made explicit.\*                                                           |
+| (id)                    | id                | Made explicit.\*                                                           |
+| (labelText)             | labelText         | Made explicit.\*                                                           |
+| (onChange)              | onChange          | Made explicit.\*                                                           |
+| —                       | overflowMenuProps | New object `{}` specific to internal `OverflowMenu's` component props.\*\* |
+| (title)                 | title             | Made explicit.\*                                                           |
+| ~open~                  | —                 | Removed. Use `overflowMenuProps{open}` instead.                            |
+| ~overflowMenuAriaLabel~ | —                 | Removed. Use `overflowMenuProps{['aria-label']}` instead.                  |
+| ~selectorPrimaryFocus~  | —                 | Removed. Use `overflowMenuProps{selectorPrimaryFocus}` instead.            |
 
 \* These props were "assumed" in the v1 component and have been explicitly
 declared in v2.
@@ -482,36 +442,36 @@ be assigned specifically to the internal OverflowMenu component.
 
 ### FilterPanelGroup
 
-| Old prop       | New prop  | Change    |
-| :------------- | :-------- | :-------- |
-| children       | children  | No change |
-| className      | className | No change |
-| count          | count     | No change |
-| heading        | labelText | Renamed   |
-| title          | title     | No change |
-| countLabel     | —         | Removed   |
-| titleClassName | —         | Removed   |
+| Old prop         | New prop ↓ | Change     |
+| :--------------- | :--------- | :--------- |
+| children         | children   | No change. |
+| className        | className  | No change. |
+| count            | count      | No change. |
+| heading          | labelText  | Renamed.   |
+| title            | title      | No change. |
+| ~countLabel~     | —          | Removed.   |
+| ~titleClassName~ | —          | Removed.   |
 
 ### FilterPanelLabel
 
-| Old prop       | New prop  | Change                                                                                             |
-| :------------- | :-------- | :------------------------------------------------------------------------------------------------- |
-| className      | className | No change                                                                                          |
-| count          | count     | No change                                                                                          |
-| —              | labelText | New                                                                                                |
-| title          | title     | No change                                                                                          |
-| children       | —         | Replaced by labelText                                                                              |
-| countClassName | —         | Removed. Developer can use top-level className and inheritance to target specific elements via CSS |
-| countLabel     | —         | Removed. Replaced by labelText                                                                     |
+| Old prop         | New prop ↓ | Change                                                                                              |
+| :--------------- | :--------- | :-------------------------------------------------------------------------------------------------- |
+| className        | className  | No change.                                                                                          |
+| count            | count      | No change.                                                                                          |
+| —                | labelText  | New.                                                                                                |
+| title            | title      | No change.                                                                                          |
+| ~children~       | —          | Replaced by `labelText`.                                                                            |
+| ~countClassName~ | —          | Removed. Developer can use top-level className and inheritance to target specific elements via CSS. |
+| ~countLabel~     | —          | Removed. Replaced by `labelText`.                                                                   |
 
 ### FilterPanelSearch
 
-| Old prop  | New prop    | Change                                                    |
-| :-------- | :---------- | :-------------------------------------------------------- |
-| children  | children    | No change                                                 |
-| className | className   | No change                                                 |
-| —         | searchProps | New object {} specific to Carbon's Search component props |
-| labelText | —           | Removed. Use searchProps{labelText} instead               |
+| Old prop    | New prop ↓  | Change                                                        |
+| :---------- | :---------- | :------------------------------------------------------------ |
+| children    | children    | No change                                                     |
+| className   | className   | No change                                                     |
+| —           | searchProps | New object `{}` specific to internal `Search` component props |
+| ~labelText~ | —           | Removed. Use `searchProps{labelText}` instead                 |
 
 ---
 
@@ -584,26 +544,16 @@ Deprecated props were not migrated from the old component.
 
 Unchanged props; names and functionality have not changed.
 
-| Unchanged prop         |
-| :--------------------- |
-| children               |
-| className              |
-| getScrollElementRef    |
-| hideStartGradient      |
-| onScroll               |
-| scrollElementClassName |
-
-Some props were renamed or repurposed to meet Products' `v2` specifications.
-
-| Old prop | New prop |                    |
-| :------- | :------- | :----------------- |
-| color    | color    | No longer required |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop |                                                                            |
-| :-------------- | :------------------------------------------------------------------------- |
-| direction       | **Removed**. Component should manage both horizontal and vertical scrolls. |
+| Old prop               | New prop ↓             | Change                                                                     |
+| :--------------------- | :--------------------- | :------------------------------------------------------------------------- |
+| children               | children               | No change.                                                                 |
+| className              | className              | No change.                                                                 |
+| getScrollElementRef    | getScrollElementRef    | No change.                                                                 |
+| hideStartGradient      | hideStartGradient      | No change.                                                                 |
+| onScroll               | onScroll               | No change.                                                                 |
+| scrollElementClassName | scrollElementClassName | No change.                                                                 |
+| ~color~                | —                      | No longer required.                                                        |
+| ~direction~            | —                      | **Removed**. Component should manage both horizontal and vertical scrolls. |
 
 ---
 
@@ -636,113 +586,60 @@ Unchanged props; names and functionality have not changed.
 
 ### StatusIndicator
 
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop |
-| :------------- |
-| className      |
-| title          |
-
-Some props were renamed or repurposed to meet Products' `v2` specifications.
-
-| Old prop | New prop |                    |
-| :------- | :------- | :----------------- |
-| children | children | \* Is now required |
-
-New props were added to the component to meet Products' `v2` specifications.
-
-| New prop   |     |
-| :--------- | :-- |
-| onRetry    | New |
-| retryLabel | New |
-| showRetry  | New |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop        |             |
-| :--------------------- | :---------- |
-| currentIndex           | **Removed** |
-| retry: {action, label} | **Removed** |
+| Old prop                 | New prop ↓ | Change           |
+| :----------------------- | :--------- | :--------------- |
+| children                 | children   | Is now required. |
+| className                | className  | No change.       |
+| —                        | onRetry    | New.             |
+| —                        | retryLabel | New.             |
+| —                        | showRetry  | New.             |
+| title                    | title      | No change.       |
+| ~currentIndex~           | —          | **Removed**.     |
+| ~retry: {action, label}~ | —          | **Removed**.     |
 
 ### StatusIndicatorStep
 
 [Renamed from **StatusStep**]
 
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop |
-| :------------- |
-| className      |
-| description    |
-
-Some props were renamed or repurposed to meet Products' `v2` specifications.
-
-| Old prop | New prop     |                                                                                        |
-| :------- | :----------- | :------------------------------------------------------------------------------------- |
-| status   | status       | \* Is now required.<br/>**New values:**<br />"active", "error", "finished", "inactive" |
-| errorMsg | errorMessage | Renamed                                                                                |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop |             |
-| :-------------- | ----------- |
-| label           | **Removed** |
+| Old prop    | New prop ↓   | Change                                                                               |
+| :---------- | :----------- | :----------------------------------------------------------------------------------- |
+| className   | className    | No change.                                                                           |
+| description | description  | No change.                                                                           |
+| errorMsg    | errorMessage | Renamed.                                                                             |
+| status      | status       | Is now required.<br/>**New values:**<br />"active", "error", "finished", "inactive". |
+| ~label~     | —            | **Removed**                                                                          |
 
 ---
 
 ### StringFormatter
 
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop |
-| :------------- |
-| className      |
-| lines          |
-| truncate       |
-| value\*        |
-| width          |
-
-Some props were renamed or repurposed to meet Products' `v2` specifications.
-
-| Old prop         | New prop         | Change                                                                                                                                                                                                                        |
+| Old prop         | New prop ↓       | Change                                                                                                                                                                                                                        |
 | :--------------- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| className        | className        | No change.                                                                                                                                                                                                                    |
+| lines            | lines            | No change.                                                                                                                                                                                                                    |
 | toolTipDirection | toolTipDirection | Adds to the existing options { "top" and "bottom" }: <br/>"top-left" <br/>"top-right" <br/>"bottom-left" <br/>"bottom-right" <br/>"left" <br/>"left-top" <br/>"left-bottom" <br/>"right" <br/>"right-top" <br/>"right-bottom" |
+| truncate         | truncate         | No change.                                                                                                                                                                                                                    |
+| value            | value            | No change.                                                                                                                                                                                                                    |
+| width            | width            | No change.                                                                                                                                                                                                                    |
 
 ---
 
 ### TruncatedList
 
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop |
-| :------------- |
-| as             |
-| className      |
-
-Some props were renamed or repurposed to meet Products' `v2` specifications.
-
-| Old prop              | New prop            |                    |
-| :-------------------- | :------------------ | :----------------- |
-| children              | children            | \* Is now required |
-| collapsedItemLimit    | collapsedItemsLimit | Renamed            |
-| expandedItemLimit     | expandedItemsLimit  | Renamed            |
-| expandButtonClassName | buttonClassName     | Renamed            |
-
-New props were added to the component to meet Products' `v2` specifications.
-
-| New prop      |     |
-| :------------ | :-- |
-| onClick       | New |
-| viewLessLabel | New |
-| viewMoreLabel | New |
-
-Deprecated props were not migrated from the old component.
-
-| Deprecated prop      |             |
-| :------------------- | ----------- |
-| getExpandButtonLabel | **Removed** |
-| truncateThreshold    | **Removed** |
-| scrollGradientColor  | **Removed** |
+| Old prop               | New prop ↓          | Change           |
+| :--------------------- | :------------------ | :--------------- |
+| as                     | as                  | No change.       |
+| expandButtonClassName  | buttonClassName     | Renamed.         |
+| className              | className           | No change.       |
+| children               | children            | Is now required. |
+| collapsedItemLimit     | collapsedItemsLimit | Renamed.         |
+| expandedItemLimit      | expandedItemsLimit  | Renamed.         |
+| —                      | onClick             | New.             |
+| —                      | viewLessLabel       | New.             |
+| —                      | viewMoreLabel       | New.             |
+| ~getExpandButtonLabel~ | —                   | **Removed**.     |
+| ~scrollGradientColor~  | —                   | **Removed**.     |
+| ~truncateThreshold~    | —                   | **Removed**.     |
 
 ---
 

@@ -162,7 +162,7 @@ FilterPanelCheckboxWithOverflow.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Props specific to the internal `OverflowMenu`.
+   * Props specific to the internal `OverflowMenu` component.
    */
   overflowMenuProps: PropTypes.shape({
     ['aria-label']: PropTypes.string,

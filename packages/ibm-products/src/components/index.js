@@ -130,4 +130,5 @@ export {
   FilterPanelCheckboxWithOverflow,
   FilterPanelGroup,
   FilterPanelLabel,
+  FilterPanelSearch,
 } from './FilterPanel';

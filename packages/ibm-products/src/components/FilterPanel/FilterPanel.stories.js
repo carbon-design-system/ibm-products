@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { OverflowMenuItem } from '@carbon/react';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -18,6 +19,7 @@ import {
   FilterPanelCheckbox,
   FilterPanelCheckboxWithOverflow,
   FilterPanelGroup,
+  FilterPanelSearch,
 } from '.';
 import mdx from './FilterPanel.mdx';
 
@@ -64,10 +66,75 @@ export default {
   },
 };
 
+const demoData = [
+  { label: 'Checkbox', count: 6 },
+  {
+    label: (
+      <>
+        <strong>Formatted</strong> <em>checkbox</em>
+      </>
+    ),
+    count: '1,500',
+  },
+  { label: 'Really, really long checkbox name', count: 10 },
+  { label: 'Checkbox with menu 1', count: 6 },
+  { label: 'Checkbox with menu 2', count: 6 },
+  { label: 'Checkbox 1', count: 10 },
+  { label: 'Checkbox 2', count: 10 },
+  { label: 'Checkbox 3', count: 15 },
+];
+
+const getDemoSearchResults = (data, searchValue) => {
+  let demoSearchResults;
+  let filteredData = [];
+
+  if (searchValue.length > 0) {
+    filteredData = data.filter((item) => {
+      const t = getNodeTextContent(item.label).toLowerCase();
+      const s = searchValue.toLowerCase();
+      return t.indexOf(s) > -1;
+    });
+  }
+
+  if (searchValue.length > 0 && filteredData.length === 0) {
+    demoSearchResults = <p>No search results found.</p>;
+  } else if (searchValue.length > 0 && filteredData.length > 0) {
+    demoSearchResults = filteredData.map((item, index) => {
+      return (
+        <FilterPanelCheckbox
+          key={index}
+          labelText={item.label}
+          count={item.count}
+          id={uuidv4()}
+        />
+      );
+    });
+  }
+
+  return demoSearchResults;
+};
+
 const Template = (args) => {
+  const [searchValue, setSearchValue] = useState('');
+  const demoSearchResults = getDemoSearchResults(demoData, searchValue);
+
   return (
     <div className={`${storyClass}__viewport`}>
       <FilterPanel {...args}>
+        <FilterPanelSearch
+          searchProps={{
+            labelText: 'Search',
+            onChange: (event) => {
+              action('onChange "' + event.target.value + '"')(event);
+              setSearchValue(event.target.value);
+            },
+            onClear: () => {
+              action()('onClear');
+            },
+          }}
+        >
+          {demoSearchResults}
+        </FilterPanelSearch>
         <FilterPanelGroup labelText="Group">
           <FilterPanelCheckbox
             count={6}
@@ -177,7 +244,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={10}
               labelText="Checkbox 1"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(
@@ -190,7 +256,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={10}
               labelText="Checkbox 2"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(
@@ -203,7 +268,6 @@ const Template = (args) => {
             <FilterPanelCheckbox
               count={15}
               labelText="Checkbox 3"
-              // "id" and "onChange" are pass-through props to Carbon's Checkbox.
               id={uuidv4()}
               onChange={(event, { checked, id }) =>
                 action('onChange Checkbox (event, { checked, id })')(

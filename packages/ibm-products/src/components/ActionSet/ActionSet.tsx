@@ -92,7 +92,8 @@ const defaults = {
 
 interface ActionSetProps {
   /**
-   * The action buttons to show. Each action is specified as an
+   * The action buttons to show. Each action is specified as an object
+   * representation of a Carbon button.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */

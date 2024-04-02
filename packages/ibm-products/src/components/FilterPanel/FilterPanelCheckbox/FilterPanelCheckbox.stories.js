@@ -18,7 +18,7 @@ import styles from '../_storybook-styles.scss';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panel/Filter Panel Checkbox',
+  title: 'IBM Products/Components/Filter panel/FilterPanelCheckbox',
   component: FilterPanelCheckbox,
   tags: ['autodocs'],
   argTypes: {
@@ -29,15 +29,17 @@ export default {
       control: {
         type: 'select',
         labels: {
-          0: 'As number: 10',
-          1: 'As string: "1,500"',
+          0: 'No value',
+          1: 'As number: 10',
+          2: 'As string: "1,500"',
         },
       },
       mapping: {
-        0: 10,
-        1: '1,500',
+        0: undefined,
+        1: 10,
+        2: '1,500',
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
     labelText: {
       control: {
@@ -49,11 +51,11 @@ export default {
         },
       },
       mapping: {
-        0: 'Label',
-        1: 'Really, really long label name',
+        0: 'Checkbox',
+        1: 'Really, really long checkbox name',
         2: (
           <>
-            <strong>Formatted</strong> <em>label</em>
+            <strong>Formatted</strong> <em>checkbox</em>
           </>
         ),
       },
@@ -61,7 +63,7 @@ export default {
     },
   },
   args: {
-    count: 0,
+    count: 1,
     labelText: 0,
   },
   parameters: {
@@ -83,11 +85,11 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.storyName = 'Filter Panel Checkbox';
+Default.storyName = 'Default';
 Default.args = {
   id: uuidv4(),
   // Pass-through prop: Carbon's Checkbox onChange handler.
   onChange: (event, { checked, id }) =>
-    action('onChange Checkbox')(checked, id, event),
+    action('onChange Checkbox (event, { checked, id })')(event, checked, id),
   title: '',
 };

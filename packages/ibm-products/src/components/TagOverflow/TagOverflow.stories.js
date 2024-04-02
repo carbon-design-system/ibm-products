@@ -6,14 +6,14 @@
  */
 
 import React, { forwardRef } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import * as CarbonIcons from '@carbon/icons-react';
+import { Theme } from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { UserAvatar } from '../UserAvatar';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagOverflow } from '.';
+import { TYPES } from './constants';
 import mdx from './TagOverflow.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -30,13 +30,31 @@ const tags = Array.from({ length: 20 }, (v, k) => ({
 
 const fiveTags = tags.slice(0, 5);
 
-let longTags = tags.slice(0, 5);
-longTags.splice(1, 1, { id: 'id-1', label: 'Business performance' });
+let longTagsArr = [...fiveTags];
+longTagsArr.splice(1, 1, { id: 'id-1', label: 'Business performance' });
+const tagTypes = Object.keys(TYPES);
+const longTags = longTagsArr.map((item, i) => {
+  return { ...item, tagType: tagTypes[i % tagTypes.length] };
+});
 
-// UserProfileImage background colors
-const colors = ['light-cyan', 'dark-cyan'];
+// UserAvatar background colors
+const colors = [
+  'order-1-cyan',
+  'order-2-gray',
+  'order-3-green',
+  'order-4-magenta',
+  'order-5-purple',
+  'order-6-teal',
+  'order-7-cyan',
+  'order-8-gray',
+  'order-9-green',
+  'order-10-magenta',
+  'order-11-purple',
+  'order-12-teal',
+];
 
 // Lists of  first names and last names
+//cspell: disable
 const firstNames = [
   'Aarav',
   'Aditi',
@@ -84,8 +102,9 @@ const lastNames = [
   'Verma',
   'Yadav',
 ];
+//cspell: enable
 
-// method to generate random names
+// Method to generate random names
 const generateName = () => {
   const randomFirstName =
     firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -94,7 +113,7 @@ const generateName = () => {
   return `${randomFirstName} ${randomLastName}`;
 };
 
-// users for UserAvatar stories
+// Users for UserAvatar stories
 const ManyUserAvatarArr = Array.from({ length: 20 }, (v, k) => {
   const name = generateName();
   return {
@@ -163,7 +182,9 @@ export default {
           {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <DisplayBox>{story()}</DisplayBox>
+        <Theme theme="g10">
+          <DisplayBox>{story()}</DisplayBox>
+        </Theme>
       </>
     ),
   ],
@@ -180,10 +201,7 @@ const Template = (argsIn) => {
   );
 };
 
-/**
- * Declaration of stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
+// Declaration of stories
 export const FiveTags = Template.bind({});
 FiveTags.args = {
   containerWidth: 250,
@@ -213,19 +231,19 @@ export const UserAvatars = Template.bind({});
 UserAvatars.args = {
   containerWidth: 250,
   items: UserAvatarArr,
-  itemTemplate: UserAvatar,
+  tagComponent: UserAvatar,
 };
 
 export const ManyUserAvatars = Template.bind({});
 ManyUserAvatars.args = {
   containerWidth: 500,
   items: ManyUserAvatarArr,
-  itemTemplate: UserAvatar,
+  tagComponent: UserAvatar,
 };
 
 export const CustomComponent = Template.bind({});
 CustomComponent.args = {
   containerWidth: 500,
   items: IconComponentArr,
-  itemTemplate: IconComponent,
+  tagComponent: IconComponent,
 };

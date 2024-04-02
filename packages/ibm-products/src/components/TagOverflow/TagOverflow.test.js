@@ -17,7 +17,7 @@ import { FiveTags } from './TagOverflow.stories';
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
 
-// values to use
+// Values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const tagWidth = 60;
@@ -108,7 +108,7 @@ describe(componentName, () => {
     ).toEqual(3);
   });
 
-  // The below test case is faliing due to ResizeObserver mock
+  // The below test case is failing due to ResizeObserver mock
   // it('Renders only the overflow when very little space', async () => {
   //   window.innerWidth = tagWidth / 2;
   //   render(<FiveTags {...FiveTags.args} />);

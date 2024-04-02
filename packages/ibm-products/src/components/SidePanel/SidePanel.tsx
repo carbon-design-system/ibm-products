@@ -279,22 +279,26 @@ export let SidePanel = React.forwardRef(
 
     const shouldReduceMotion = useReducedMotion();
 
+    // Title animation on scroll related state
+    const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
+    const [prevScrollTop, setPrevScrollTop] = useState<number | undefined>(0);
+
     useEffect(() => {
       setDoAnimateTitle(animateTitle);
     }, [animateTitle]);
 
-    const memoizeScrollTop = () => {
-      let prevValue;
+    // const memoizeScrollTop = () => {
+    //   let prevValue;
 
-      return (newValue, callback) => {
-        const oldValue = prevValue;
-        prevValue = newValue;
+    //   return (newValue, callback) => {
+    //     const oldValue = prevValue;
+    //     prevValue = newValue;
 
-        return callback(oldValue, newValue);
-      };
-    };
+    //     return callback(oldValue, newValue);
+    //   };
+    // };
 
-    const memoizedScrollTopFunction = memoizeScrollTop();
+    // const memoizedScrollTopFunction = memoizeScrollTop();
 
     const setSubtitleMarginTop = useCallback(
       (preValue, newValue) => {
@@ -305,8 +309,6 @@ export let SidePanel = React.forwardRef(
         const computedMarginTop = Number(
           window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0]
         );
-
-        console.log(computedMarginTop);
 
         if (preValue < newValue) {
           const margin = 0 - newValue;
@@ -337,8 +339,6 @@ export let SidePanel = React.forwardRef(
       [animationComplete]
     );
 
-    const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
-
     useEffect(() => {
       if (open && animateTitle && labelTextRef?.current) {
         setLabelTextHeight(Number(labelTextRef?.current?.clientHeight || null));
@@ -347,6 +347,7 @@ export let SidePanel = React.forwardRef(
 
     const handleScroll = useCallback(() => {
       const scrollTop = innerContentRef?.current?.scrollTop;
+      setPrevScrollTop(scrollTop);
 
       panelRefValue?.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
@@ -356,7 +357,6 @@ export let SidePanel = React.forwardRef(
         ).toString()
       );
 
-      console.log(scrollTop);
       if (labelTextRef?.current) {
         const buffer =
           (scrollTop &&
@@ -371,8 +371,15 @@ export let SidePanel = React.forwardRef(
         );
       }
 
-      memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
-    }, [labelTextHeight, memoizedScrollTopFunction, panelRefValue?.style, scrollAnimationDistance, setSubtitleMarginTop]);
+      // memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
+      setSubtitleMarginTop(prevScrollTop, scrollTop);
+    }, [
+      labelTextHeight,
+      panelRefValue?.style,
+      prevScrollTop,
+      scrollAnimationDistance,
+      setSubtitleMarginTop,
+    ]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia

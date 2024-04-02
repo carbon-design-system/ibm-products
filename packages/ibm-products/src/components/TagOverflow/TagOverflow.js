@@ -104,27 +104,13 @@ export let TagOverflow = React.forwardRef(
       }, []);
     }, [itemRefs, overflowRef, containerWidth, items]);
 
-    const ItemComponent = ({ templateProps }) => {
-      const itemRef = (node) => itemRefHandler(templateProps.id, node);
-      let className = templateProps.className
-        ? `${blockClass}__item ${templateProps.className}`
-        : `${blockClass}__item`;
-
-      const ItemComp = () =>
-        React.createElement(tagComponent, {
-          ref: itemRef,
-          ...templateProps,
-          className,
-        });
-
-      return <ItemComp></ItemComp>;
-    };
-
-    ItemComponent.propTypes = {
-      templateProps: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        className: PropTypes.string,
-      }).isRequired,
+    const getCustomComponent = (item) => {
+      const { className, id, ...other } = item;
+      return React.createElement(tagComponent, {
+        ...other,
+        className: cx(`${blockClass}__item`, className),
+        ref: (node) => itemRefHandler(id, node),
+      });
     };
 
     useEffect(() => {
@@ -158,12 +144,7 @@ export let TagOverflow = React.forwardRef(
           visibleItems.map((item) => {
             // Render custom components
             if (tagComponent) {
-              return (
-                <ItemComponent
-                  templateProps={item}
-                  key={item.id}
-                ></ItemComponent>
-              );
+              return getCustomComponent(item);
             } else {
               // If there is no template prop, then render items as Tags
               return (
@@ -219,12 +200,6 @@ TagOverflow.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Component definition of the items to be rendered inside TagOverflow.
-   * If this is not passed, items will be rendered as Tag component
-   */
-  tagComponent: PropTypes.elementType,
-
-  /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the item content,
    * **id**\* (required) to uniquely identify the each item.
@@ -239,8 +214,14 @@ TagOverflow.propTypes = {
       tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
+
   /**
    * maximum visible items
    */
   maxVisible: PropTypes.number,
+  /**
+   * Component definition of the items to be rendered inside TagOverflow.
+   * If this is not passed, items will be rendered as Tag component
+   */
+  tagComponent: PropTypes.elementType,
 };

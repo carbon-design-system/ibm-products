@@ -8,7 +8,7 @@
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/spacing' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix};
 
@@ -19,22 +19,22 @@ $block-class: #{c4p-settings.$pkg-prefix};
 }
 
 .#{$block-class}--card__stackedTile {
-  padding: spacing.$spacing-05;
+  padding: $spacing-05;
   border-top: 1px $border-subtle-03 solid;
-
+  // stylelint-disable-next-line
   @media (min-width: 672px) {
     display: flex;
   }
 
   .#{$block-class}--card__userRows {
     display: flex;
-    padding-top: spacing.$spacing-05;
+    padding-top: $spacing-05;
   }
 
   .#{$block-class}--user-avatar {
-    margin-right: spacing.$spacing-05;
+    margin-right: $spacing-05;
   }
   .#{$block-class}--card__colLeft {
-    padding-right: spacing.$spacing-09;
+    padding-right: $spacing-09;
   }
 }

@@ -219,6 +219,7 @@ describe(componentName, () => {
     await act(() =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );
+    console.log(container.querySelector(`.${blockClass}__clickable`));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} clickZone="two" />);
     await act(() =>

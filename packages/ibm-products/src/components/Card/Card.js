@@ -181,7 +181,7 @@ export let Card = forwardRef(
           },
           className
         ),
-        ...(clickable || (stackedBody && clickableProps)),
+        ...(clickable && clickableProps),
       };
 
       return cardProps;

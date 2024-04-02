@@ -108,7 +108,7 @@ describe(componentName, () => {
     ).toEqual(3);
   });
 
-  // The below test case is faliing due to ResizeObserver mock
+  // The below test case is failing due to ResizeObserver mock
   // it('Renders only the overflow when very little space', async () => {
   //   window.innerWidth = tagWidth / 2;
   //   render(<FiveTags {...FiveTags.args} />);

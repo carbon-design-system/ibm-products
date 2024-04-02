@@ -37,6 +37,7 @@ longTags.splice(1, 1, { id: 'id-1', label: 'Business performance' });
 const colors = ['light-cyan', 'dark-cyan'];
 
 // Lists of  first names and last names
+//cspell: disable
 const firstNames = [
   'Aarav',
   'Aditi',
@@ -84,6 +85,7 @@ const lastNames = [
   'Verma',
   'Yadav',
 ];
+//cspell: enable
 
 // method to generate random names
 const generateName = () => {

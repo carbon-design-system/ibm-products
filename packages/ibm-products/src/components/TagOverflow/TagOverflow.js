@@ -5,40 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-// Carbon and package components we use.
 import { Tag, Tooltip } from '@carbon/react';
 import { TagSet } from '../TagSet';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
-
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
-// Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
 
 /**
  * TODO: A description of the component.
@@ -46,7 +25,6 @@ const componentName = 'TagOverflow';
 export let TagOverflow = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
       className,
       items,
       itemTemplate,
@@ -63,8 +41,8 @@ export let TagOverflow = React.forwardRef(
     const containerRef = ref || localContainerRef;
     const itemRefs = useRef(null);
     const overflowRef = useRef(null);
-    // measurementOffset is the value of margin applied on each items,
-    // this value is required for calculating how many items will fit within the container
+    // measurementOffset is the value of margin applied on each items
+    // This value is required for calculating how many items will fit within the container
     const measurementOffset = 4;
     const overflowIndicatorWidth = 40;
 
@@ -168,22 +146,14 @@ export let TagOverflow = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
+        className={cx(blockClass, className)}
         ref={containerRef}
         role="main"
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems.length > 0 &&
           visibleItems.map((item) => {
-            // render custom components
+            // Render custom components
             if (itemTemplate) {
               return (
                 <ItemComponent
@@ -192,7 +162,7 @@ export let TagOverflow = React.forwardRef(
                 ></ItemComponent>
               );
             } else {
-              // if there is no template prop, then render items as Tags
+              // If there is no template prop, then render items as Tags
               return (
                 <div
                   ref={(node) => itemRefHandler(item.id, node)}

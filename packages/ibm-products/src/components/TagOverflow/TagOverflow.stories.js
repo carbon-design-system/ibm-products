@@ -6,8 +6,6 @@
  */
 
 import React, { forwardRef } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import * as CarbonIcons from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
@@ -87,7 +85,7 @@ const lastNames = [
 ];
 //cspell: enable
 
-// method to generate random names
+// Method to generate random names
 const generateName = () => {
   const randomFirstName =
     firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -96,7 +94,7 @@ const generateName = () => {
   return `${randomFirstName} ${randomLastName}`;
 };
 
-// users for UserAvatar stories
+// Users for UserAvatar stories
 const ManyUserAvatarArr = Array.from({ length: 20 }, (v, k) => {
   const name = generateName();
   return {
@@ -182,10 +180,7 @@ const Template = (argsIn) => {
   );
 };
 
-/**
- * Declaration of stories, generally one per design scenario.
- * NB no need for a 'Playground' because all stories have all controls anyway.
- */
+// Declaration of stories
 export const FiveTags = Template.bind({});
 FiveTags.args = {
   containerWidth: 250,

@@ -17,7 +17,7 @@ import { FiveTags } from './TagOverflow.stories';
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
 
-// values to use
+// Values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const tagWidth = 60;

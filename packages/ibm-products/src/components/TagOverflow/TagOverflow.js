@@ -98,11 +98,11 @@ export let TagOverflow = React.forwardRef(
       }
 
       const map = getMap();
-      const overflowContanerWidth =
+      const overflowContainerWidth =
         overflowRef.current.offsetWidth > overflowIndicatorWidth
           ? overflowRef.current.offsetWidth
           : overflowIndicatorWidth;
-      const maxWidth = containerWidth - overflowContanerWidth;
+      const maxWidth = containerWidth - overflowContainerWidth;
 
       let childrenWidth = 0;
       let maxReached = false;
@@ -181,7 +181,7 @@ export let TagOverflow = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {!!visibleItems?.length &&
+        {visibleItems.length > 0 &&
           visibleItems.map((item) => {
             // render custom components
             if (itemTemplate) {
@@ -208,7 +208,7 @@ export let TagOverflow = React.forwardRef(
             }
           })}
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {!!overflowItems?.length && (
+          {overflowItems.length > 0 && (
             <TagSet
               tags={overflowItems}
               allTagsModalTitle="All tags"
@@ -216,7 +216,7 @@ export let TagOverflow = React.forwardRef(
               allTagsModalSearchLabel="Search all tags"
               allTagsModalSearchPlaceholderText="Search all tags"
               showAllTagsLabel="Show all tags"
-            ></TagSet>
+            />
           )}
         </span>
       </div>

@@ -279,14 +279,13 @@ export let EditInPlace = forwardRef<any, EditInplaceProps>(
               `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
-            value={value as any}
+            value={value}
             onChange={onChangeHandler}
             ref={inputRef}
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
             aria-label={labelText}
             aria-invalid={invalid}
-            {...rest}
           />
           <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
             &hellip;

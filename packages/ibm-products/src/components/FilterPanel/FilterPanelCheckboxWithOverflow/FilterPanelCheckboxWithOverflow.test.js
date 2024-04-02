@@ -110,16 +110,17 @@ describe(componentName, () => {
   it('adds the Devtools attribute to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
 
-    // THIS TEST FAILS
-    // This component includes two other components.
-    // Those components also include their own dataTestId's.
-    // This test only finds one dataTestId, and always the wrong one.
-    // getAllByTestId(dataTestId).length (notice "All") returns a length of 1,
-    //   even though there are three dataTestId's being rendered.
-
+    // THE TEMPLATE TEST FAILS
     // expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
     //   componentName
     // );
+
+    // This component includes two other components.
+    // Those components also include their own dataTestId's.
+    // This test only finds one dataTestId, and always the wrong one.
+
+    // test → (notice "get ALL by...") → screen.getAllByTestId(dataTestId).length → 1,
+    //   even though there are three dataTestId's being rendered.
 
     // THIS TEST PASSES
     expect(screen.getByTestId(dataTestId)).toBeInTheDocument();

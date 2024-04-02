@@ -71,7 +71,11 @@
   .#{$block-class}__carbon-nested-row:not(
     .#{$block-class}__carbon-row-expandable
   )
-  td.#{$block-class}__cell:nth-of-type(2) {
+  td.#{$block-class}__cell:nth-of-type(2),
+.#{c4p-settings.$carbon-prefix}--data-table
+  .#{$block-class}__carbon-nested-row
+  td.#{$block-class}__cell:nth-of-type(2)
+  + td {
   position: relative;
 }
 

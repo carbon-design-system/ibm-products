@@ -72,7 +72,7 @@ FilterPanelAccordion.displayName = componentName;
 
 FilterPanelAccordion.propTypes = {
   /**
-   * Props specific to the internal `Accordion`.
+   * Props specific to the internal `Accordion` component.
    */
   accordionProps: PropTypes.shape({}),
 

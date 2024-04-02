@@ -708,7 +708,9 @@ export let SidePanel = React.forwardRef(
                 ({
                   label,
                   kind,
+                  hasIconOnly = false,
                   icon,
+                  renderIcon,
                   tooltipPosition,
                   tooltipAlignment,
                   leading,
@@ -722,11 +724,15 @@ export let SidePanel = React.forwardRef(
                     key={label}
                     kind={kind || 'ghost'}
                     size="sm"
-                    renderIcon={icon}
+                    renderIcon={renderIcon || icon}
                     iconDescription={label}
-                    tooltipPosition={tooltipPosition || 'bottom'}
-                    tooltipAlignment={tooltipAlignment || 'start'}
-                    hasIconOnly={!leading}
+                    tooltipPosition={
+                      hasIconOnly ? tooltipPosition || 'bottom' : null
+                    }
+                    tooltipAlignment={
+                      hasIconOnly ? tooltipAlignment || 'start' : null
+                    }
+                    hasIconOnly={hasIconOnly || !leading}
                     disabled={disabled}
                     className={cx([
                       `${blockClass}__action-toolbar-button`,

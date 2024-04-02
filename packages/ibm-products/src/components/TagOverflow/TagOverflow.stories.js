@@ -13,6 +13,7 @@ import { pkg } from '../../settings';
 import { UserAvatar } from '../UserAvatar';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagOverflow } from '.';
+import { TYPES } from './constants';
 import mdx from './TagOverflow.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -29,8 +30,12 @@ const tags = Array.from({ length: 20 }, (v, k) => ({
 
 const fiveTags = tags.slice(0, 5);
 
-let longTags = tags.slice(0, 5);
-longTags.splice(1, 1, { id: 'id-1', label: 'Business performance' });
+let longTagsArr = [...fiveTags];
+longTagsArr.splice(1, 1, { id: 'id-1', label: 'Business performance' });
+const tagTypes = Object.keys(TYPES);
+const longTags = longTagsArr.map((item, i) => {
+  return { ...item, tagType: tagTypes[i % tagTypes.length] };
+});
 
 // UserAvatar background colors
 const colors = [

@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 
 import { Tag, Tooltip } from '@carbon/react';
 import { TagSet } from '../TagSet';
+import { TYPES, defaultTagType } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
@@ -34,9 +35,6 @@ export let TagOverflow = React.forwardRef(
     },
     ref
   ) => {
-    // type of Tags elements within the component
-    const tagType = 'blue';
-
     const localContainerRef = useRef(null);
     const containerRef = ref || localContainerRef;
     const itemRefs = useRef(null);
@@ -133,7 +131,7 @@ export let TagOverflow = React.forwardRef(
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: tagType, label: item.label };
+        return { type: item.tagType || defaultTagType, label: item.label };
       });
 
       setVisibleItems(visibleItemsArr);
@@ -169,7 +167,10 @@ export let TagOverflow = React.forwardRef(
                   key={item.id}
                 >
                   <Tooltip align="bottom" label={item.label}>
-                    <Tag className={`${blockClass}__item--tag`} type={tagType}>
+                    <Tag
+                      className={`${blockClass}__item--tag`}
+                      type={item.tagType || defaultTagType}
+                    >
                       {item.label}
                     </Tag>
                   </Tooltip>
@@ -201,6 +202,8 @@ TagOverflow = pkg.checkComponentEnabled(TagOverflow, componentName);
 // is used in preference to relying on function.name.
 TagOverflow.displayName = componentName;
 
+const tagTypes = Object.keys(TYPES);
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -220,6 +223,7 @@ TagOverflow.propTypes = {
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the item content,
    * **id**\* (required) to uniquely identify the each item.
+   * **tagType** the type value to be passed to the Carbon Tag component
    * if you are passing an ItemTemplate prop for rendering custom components,
    * then pass the props required for your custom component as the properties of item object
    */
@@ -227,6 +231,7 @@ TagOverflow.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
+      tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
   /**

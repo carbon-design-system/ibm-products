@@ -224,19 +224,19 @@ export const UserAvatars = Template.bind({});
 UserAvatars.args = {
   containerWidth: 250,
   items: UserAvatarArr,
-  itemTemplate: UserAvatar,
+  tagComponent: UserAvatar,
 };
 
 export const ManyUserAvatars = Template.bind({});
 ManyUserAvatars.args = {
   containerWidth: 500,
   items: ManyUserAvatarArr,
-  itemTemplate: UserAvatar,
+  tagComponent: UserAvatar,
 };
 
 export const CustomComponent = Template.bind({});
 CustomComponent.args = {
   containerWidth: 500,
   items: IconComponentArr,
-  itemTemplate: IconComponent,
+  tagComponent: IconComponent,
 };

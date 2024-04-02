@@ -33,7 +33,7 @@ export let TagOverflow = React.forwardRef(
     {
       className,
       items = defaults.items,
-      itemTemplate,
+      tagComponent,
       maxVisible,
       // Collect any other property values passed in.
       ...rest
@@ -111,7 +111,7 @@ export let TagOverflow = React.forwardRef(
         : `${blockClass}__item`;
 
       const ItemComp = () =>
-        React.createElement(itemTemplate, {
+        React.createElement(tagComponent, {
           ref: itemRef,
           ...templateProps,
           className,
@@ -157,7 +157,7 @@ export let TagOverflow = React.forwardRef(
         {visibleItems.length > 0 &&
           visibleItems.map((item) => {
             // Render custom components
-            if (itemTemplate) {
+            if (tagComponent) {
               return (
                 <ItemComponent
                   templateProps={item}
@@ -222,14 +222,14 @@ TagOverflow.propTypes = {
    * Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */
-  itemTemplate: PropTypes.elementType,
+  tagComponent: PropTypes.elementType,
 
   /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the item content,
    * **id**\* (required) to uniquely identify the each item.
    * **tagType** the type value to be passed to the Carbon Tag component
-   * if you are passing an ItemTemplate prop for rendering custom components,
+   * if you are passing an tagComponent prop for rendering custom components,
    * then pass the props required for your custom component as the properties of item object
    */
   items: PropTypes.arrayOf(

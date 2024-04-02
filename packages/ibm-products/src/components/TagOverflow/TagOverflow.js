@@ -20,6 +20,11 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 
+// Default values for props
+const defaults = {
+  items: [],
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -27,7 +32,7 @@ export let TagOverflow = React.forwardRef(
   (
     {
       className,
-      items,
+      items = defaults.items,
       itemTemplate,
       maxVisible,
       // Collect any other property values passed in.

@@ -19,24 +19,27 @@ import { px } from '@carbon/layout';
 
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { usePreviousValue } from '../../global/js/hooks';
 
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
-import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 
 import { useSpreadsheetMouseUp } from './hooks';
-import { checkForHoldingKey } from './utils/checkForHoldingKey';
+import {
+  handleBodyCellClick,
+  handleBodyCellHover,
+  handleRowHeaderClick,
+} from './utils/commonEventHandlers';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      activeCellRef,
       columns,
       activeCellCoordinates,
       defaultColumn,
@@ -309,75 +312,28 @@ export const DataSpreadsheetBody = forwardRef(
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight
-    const handleBodyCellClick = useCallback(
+
+    const handleBodyCellClickEvent = useCallback(
       (cell, columnIndex) => {
         return (event) => {
-          event.preventDefault();
-          const closestBodyCell = event.target.closest(
-            `.${blockClass}__body--td`
+          handleBodyCellClick(
+            cell,
+            columnIndex,
+            event,
+            currentMatcher,
+            activeCellCoordinates,
+            selectionAreas,
+            setActiveCellCoordinates,
+            setSelectionAreas,
+            setContainerHasFocus,
+            setClickAndHoldActive,
+            setCurrentMatcher,
+            ref,
+            setSelectionAreaData,
+            setActiveCellInsideSelectionArea,
+            activeCellRef,
+            setValidStartingPoint
           );
-          const isValidSelectionAreaStart = closestBodyCell.classList.contains(
-            `${blockClass}__body--td`
-          );
-          setValidStartingPoint(isValidSelectionAreaStart);
-          const isHoldingCommandKey = checkForHoldingKey(event, 'cmd');
-          const isHoldingShiftKey = checkForHoldingKey(event, 'shiftKey');
-          setContainerHasFocus(true);
-          const activeCoordinates = {
-            row: cell.row.index,
-            column: columnIndex,
-          };
-          const tempMatcher = uuidv4();
-          setClickAndHoldActive(true);
-
-          // prevent multiple selections unless cmd key is held
-          // meaning that selectionAreas should only have one item by default
-          if (isHoldingCommandKey) {
-            const activeCellElement = ref.current.querySelector(
-              `.${blockClass}__active-cell--highlight`
-            );
-            activeCellElement.setAttribute('data-selection-id', tempMatcher);
-            setActiveCellInsideSelectionArea(true);
-            setActiveCellCoordinates(activeCoordinates);
-            setCurrentMatcher(tempMatcher);
-            setSelectionAreas((prev) => [
-              ...prev,
-              { point1: activeCoordinates, matcher: tempMatcher },
-            ]);
-          } else if (isHoldingShiftKey) {
-            setContainerHasFocus(true);
-            const selectionAreaClone = deepCloneObject(selectionAreas);
-            const indexOfItemToUpdate = selectionAreaClone.findIndex(
-              (item) => item.matcher === currentMatcher
-            );
-
-            if (indexOfItemToUpdate === -1) {
-              // There is always a selectionArea with a point1 object that updates
-              // whenever the activeCellCoordinates update, we should always be able
-              // to find an index, but if we do not for some reason we should return
-              // at this point.
-              return;
-            } else {
-              // Update the selectionArea that was found, do not update currentMatcher
-              selectionAreaClone[indexOfItemToUpdate].point1 =
-                activeCellCoordinates;
-              selectionAreaClone[indexOfItemToUpdate].point2 =
-                activeCoordinates;
-              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-              selectionAreaClone[indexOfItemToUpdate].matcher = currentMatcher;
-              setSelectionAreas(selectionAreaClone);
-            }
-          } else {
-            setActiveCellInsideSelectionArea(false);
-            setActiveCellCoordinates(activeCoordinates);
-            // remove all previous cell selections
-            removeCellSelections({ spreadsheetRef: ref });
-            setSelectionAreas([
-              { point1: activeCoordinates, matcher: tempMatcher },
-            ]);
-            setCurrentMatcher(tempMatcher);
-            setSelectionAreaData([]);
-          }
         };
       },
       [
@@ -392,6 +348,7 @@ export const DataSpreadsheetBody = forwardRef(
         ref,
         setSelectionAreaData,
         setActiveCellInsideSelectionArea,
+        activeCellRef,
       ]
     );
 
@@ -411,60 +368,36 @@ export const DataSpreadsheetBody = forwardRef(
       };
     });
 
-    const handleBodyCellHover = useCallback(
+    const handleBodyCellHoverEvent = useCallback(
       (cell, columnIndex) => {
         return () => {
-          if (clickAndHoldActive) {
-            const cellCoordinates = {
-              row: cell.row.index,
-              column: columnIndex,
-            };
-
-            setSelectionAreas((prev) => {
-              const selectionAreaClone = deepCloneObject(prev);
-              const indexOfItemToUpdate = selectionAreaClone.findIndex(
-                (item) => item.matcher === currentMatcher
-              );
-              // No items in the array match up with the currentMatcher value
-              if (indexOfItemToUpdate === -1) {
-                return prev;
-              }
-              // Do not update state if you're still hovering on the same cell
-              if (
-                selectionAreaClone[indexOfItemToUpdate].point2?.row ===
-                  cellCoordinates.row &&
-                selectionAreaClone[indexOfItemToUpdate].point2?.column ===
-                  cellCoordinates.column
-              ) {
-                return prev;
-              }
-              selectionAreaClone[indexOfItemToUpdate].point2 = cellCoordinates;
-              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-              return selectionAreaClone;
-            });
-          }
+          handleBodyCellHover(
+            cell,
+            columnIndex,
+            clickAndHoldActive,
+            currentMatcher,
+            setSelectionAreas
+          );
         };
       },
       [clickAndHoldActive, currentMatcher, setSelectionAreas]
     );
 
-    const handleRowHeaderClick = useCallback(
+    const handleRowHeaderClickEvent = useCallback(
       (index) => {
         return (event) => {
-          const isHoldingCommandKey = checkForHoldingKey(event, 'cmd');
-          handleHeaderCellSelection({
-            type: 'row',
+          handleRowHeaderClick(
+            index,
+            event,
+            columns,
+            ref,
+            setSelectionAreas,
+            setCurrentMatcher,
+            setActiveCellCoordinates,
             activeCellCoordinates,
             rows,
-            columns,
-            setActiveCellCoordinates,
-            setCurrentMatcher,
-            setSelectionAreas,
-            spreadsheetRef: ref,
-            index,
-            setSelectionAreaData,
-            isHoldingCommandKey,
-          });
+            setSelectionAreaData
+          );
         };
       },
       [
@@ -527,7 +460,7 @@ export const DataSpreadsheetBody = forwardRef(
                   data-row-index={index}
                   data-column-index="header"
                   type="button"
-                  onClick={handleRowHeaderClick(index)}
+                  onClick={handleRowHeaderClickEvent(index)}
                   className={cx(
                     `${blockClass}__td`,
                     `${blockClass}__td-th`,
@@ -575,8 +508,8 @@ export const DataSpreadsheetBody = forwardRef(
                       `${blockClass}__body--td`,
                       `${blockClass}--interactive-cell-element`
                     )}
-                    onMouseDown={handleBodyCellClick(cell, index)}
-                    onMouseOver={handleBodyCellHover(cell, index)}
+                    onMouseDown={handleBodyCellClickEvent(cell, index)}
+                    onMouseOver={handleBodyCellHoverEvent(cell, index)}
                     onFocus={() => {}}
                     type="button"
                   >
@@ -593,9 +526,9 @@ export const DataSpreadsheetBody = forwardRef(
         rows,
         activeCellCoordinates?.row,
         selectionAreas,
-        handleRowHeaderClick,
-        handleBodyCellClick,
-        handleBodyCellHover,
+        handleRowHeaderClickEvent,
+        handleBodyCellClickEvent,
+        handleBodyCellHoverEvent,
         defaultColumn,
         columns,
       ]
@@ -641,6 +574,10 @@ DataSpreadsheetBody.propTypes = {
     column: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
 
+  /**
+   *This is the ref of the button input, which is the active cell element
+   */
+  activeCellRef: PropTypes.object,
   /**
    * Is the user clicking and holding in the data spreadsheet body
    */

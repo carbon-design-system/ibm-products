@@ -1,23 +1,18 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, ReactNode } from 'react';
 
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 import { useControllableState } from '../../global/js/hooks';
-
-// Carbon and package components we use.
 import { Layer, Toggle } from '@carbon/react';
 import {
   ChevronDown,
@@ -26,27 +21,105 @@ import {
   WarningFilled,
 } from '@carbon/react/icons';
 import * as carbonMotion from '@carbon/motion';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+interface OptionsTileProps {
+  /**
+   * Provide content to render as expandable OptionsTile. If no children
+   * are present, the OptionsTile will render as its variant.
+   */
+  children?: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Whether the toggle is enabled or disabled. If nothing is passed,
+   * no toggle will be rendered.
+   */
+  enabled?: boolean;
+
+  /**
+   * Whether the OptionsTile is in invalid validation state.
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide a text explaining why the OptionsTile is in invalid state.
+   */
+  invalidText?: string;
+
+  /**
+   * Whether the OptionsTile is in locked validation state.
+   */
+  locked?: boolean;
+
+  /**
+   * Provide a text explaining why the OptionsTile is in locked state.
+   */
+  lockedText?: string;
+
+  /**
+   * Provide a function which will be called each time the user
+   * toggles the open state of the OptionsTile.
+   */
+  onChange?: (value: boolean) => void;
+
+  /**
+   * Provide a function which will be called each time the user
+   * interacts with the toggle.
+   */
+  onToggle: (value: boolean) => void;
+
+  /**
+   * Whether the OptionsTile is in open state.
+   */
+  open?: boolean;
+
+  /**
+   * Define the size of the OptionsTile.
+   */
+  size: 'lg' | 'xl';
+
+  /**
+   * Optionally provide a text summarizing the current state of the content.
+   */
+  summary?: string;
+
+  /**
+   * Provide the title for this OptionsTile.
+   */
+  title: string;
+
+  /**
+   * Optionally provide an id which should be used for the title.
+   */
+  titleId?: string;
+
+  /**
+   * Whether the OptionsTile is in warning validation state.
+   */
+  warn?: boolean;
+
+  /**
+   * Provide a text explaining why the OptionsTile is in warning state.
+   */
+  warnText?: string;
+}
 
 // Default values for props
 const defaults = {
-  onChange: () => {},
-  size: 'xl',
+  size: 'lg' as const,
 };
 
-/**
- * TODO: A description of the component.
- */
 export let OptionsTile = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
       children,
       className,
       enabled,
@@ -54,7 +127,7 @@ export let OptionsTile = React.forwardRef(
       invalidText,
       locked,
       lockedText,
-      onChange = defaults.onChange,
+      onChange,
       onToggle,
       open,
       size = defaults.size,
@@ -63,23 +136,22 @@ export let OptionsTile = React.forwardRef(
       titleId: userDefinedTitleId,
       warn,
       warnText,
-
-      // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: OptionsTileProps,
+    ref: React.Ref<HTMLDivElement>
   ) => {
     const [prevIsOpen, setPrevIsOpen] = useState(open);
     const [closing, setClosing] = useState(false);
 
     const [isOpen, setIsOpen] = useControllableState({
-      value: open,
       defaultValue: open || null,
-      onChange: (value) => onChange(value),
+      name: 'OptionsTile',
+      onChange: (value: boolean) => onChange?.(value),
+      value: open,
     });
 
-    const detailsRef = useRef(null);
-    const contentRef = useRef(null);
+    const detailsRef = useRef<HTMLDetailsElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const id = uuidv4();
     const titleId = userDefinedTitleId ?? `${id}-title`;
@@ -183,7 +255,7 @@ export let OptionsTile = React.forwardRef(
       }
     }
 
-    function toggle(e) {
+    function toggle(e: { preventDefault: () => void }) {
       e.preventDefault();
 
       if (isOpen) {
@@ -194,7 +266,7 @@ export let OptionsTile = React.forwardRef(
     }
 
     function renderTitle() {
-      let Icon = null;
+      let Icon: CarbonIconType | null = null;
       let text = summary;
       const summaryClasses = [`${blockClass}__summary`];
 
@@ -239,19 +311,10 @@ export let OptionsTile = React.forwardRef(
 
     return (
       <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}--${size}`,
-          {
-            // switched classes dependant on props or state
-            [`${blockClass}--closing`]: closing,
-          }
-        )}
+        {...rest}
+        className={cx(blockClass, className, `${blockClass}--${size}`, {
+          [`${blockClass}--closing`]: closing,
+        })}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
@@ -361,6 +424,7 @@ OptionsTile.propTypes = {
    * Provide a function which will be called each time the user
    * interacts with the toggle.
    */
+  /**@ts-ignore*/
   onToggle: PropTypes.func,
 
   /**
@@ -371,6 +435,7 @@ OptionsTile.propTypes = {
   /**
    * Define the size of the OptionsTile.
    */
+  /**@ts-ignore*/
   size: PropTypes.oneOf(['lg', 'xl']),
 
   /**

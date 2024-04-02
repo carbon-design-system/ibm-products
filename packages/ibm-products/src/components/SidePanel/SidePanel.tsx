@@ -6,7 +6,15 @@
  */
 
 // Import portions of React that are needed.
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  ReactNode,
+  ForwardedRef,
+  MutableRefObject,
+} from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 // Other standard imports.
@@ -18,10 +26,9 @@ import { moderate02 } from '@carbon/motion';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 
-import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
-import { usePreviousValue } from '../../global/js/hooks';
+import { useFocus, usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Button } from '@carbon/react';
@@ -33,11 +40,175 @@ import {
   actionSetVariants,
 } from './motion/variants';
 import pconsole from '../../global/js/utils/pconsole';
+import { ButtonProps } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+type SidePanelBaseProps = {
+  /**
+   * Sets the action toolbar buttons
+   */
+  actionToolbarButtons?: ButtonProps[];
+
+  /**
+   * The primary actions to be shown in the side panel. Each action is
+   * specified as an object that will render expressive Buttons. Any Button
+   * props can be passed in and any other fields in the object will be
+   * passed through to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions?: ButtonProps[];
+
+  /**
+   * Determines if the title will animate on scroll
+   */
+  animateTitle?: boolean;
+
+  /**
+   * Sets the body content of the side panel
+   */
+  children: ReactNode;
+
+  /**
+   * Sets an optional className to be added to the side panel outermost element
+   */
+  className?: string;
+
+  /**
+   * Sets the close button icon description
+   */
+  closeIconDescription?: string;
+
+  /**
+   * Determines whether the side panel should render the condensed version (affects action buttons primarily)
+   */
+  condensedActions?: boolean;
+
+  /**
+   * Sets the current step of the side panel
+   */
+  currentStep?: number;
+
+  /**
+   * Unique identifier
+   */
+  id?: string;
+
+  /**
+   * Determines whether the side panel should render with an overlay
+   */
+  includeOverlay?: boolean;
+
+  /**
+   * Sets the label text which will display above the title text
+   */
+  labelText?: string;
+
+  /**
+   * Sets the icon description for the navigation back icon button
+   */
+  navigationBackIconDescription?: string;
+
+  /**
+   * Changes the current side panel page to the previous page
+   */
+  onNavigationBack?(): void;
+
+  /**
+   * Specify a handler for closing the side panel.
+   * This handler closes the modal, e.g. changing `open` prop.
+   */
+  onRequestClose?(): void;
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount?(): void;
+
+  /**
+   * Determines whether the side panel should render or not
+   */
+  open: boolean;
+
+  /**
+   * Determines if the side panel is on the right or left
+   */
+  placement?: 'left' | 'right';
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside?: boolean;
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent?: string;
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should
+   * be focused when the side panel opens
+   */
+  selectorPrimaryFocus?: string;
+
+  /**
+   * Sets the size of the side panel
+   */
+  size: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+
+  /**
+   * Determines if this panel slides in
+   */
+  slideIn?: boolean;
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * Sets the subtitle text
+   */
+  subtitle?: ReactNode;
+
+  /**
+   * Sets the title text
+   */
+  title?: string;
+};
+
+type SidePanelSlideInProps =
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn?: false;
+      /**
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel.
+       */
+      selectorPageContent?: string;
+    }
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn: true;
+      /**
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel. Required for slideIn panels.
+       */
+      selectorPageContent: string;
+    };
+
+type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
+
+// `any` is a work around until ActionSet is migrated to TS
+const MotionActionSet = motion<any>(ActionSet);
 
 // Default values for props
 const defaults = {
@@ -48,8 +219,6 @@ const defaults = {
   placement: 'right',
   size: 'md',
 };
-
-const MotionActionSet = motion(ActionSet);
 
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
@@ -75,11 +244,11 @@ export let SidePanel = React.forwardRef(
       onRequestClose,
       onUnmount,
       open,
-      placement = defaults.placement,
+      placement = defaults.placement as SidePanelProps['placement'],
       preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
-      size = defaults.size,
+      size = defaults.size as SidePanelProps['size'],
       slideIn,
       slug,
       subtitle,
@@ -87,25 +256,26 @@ export let SidePanel = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: SidePanelProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [animationComplete, setAnimationComplete] = useState(false);
-    const localRef = useRef();
+    const localRef = useRef<HTMLDivElement>(null);
     const sidePanelRef = ref || localRef;
-    const overlayRef = useRef();
-    const startTrapRef = useRef();
-    const endTrapRef = useRef();
-    const innerContentRef = useRef();
-    const closeRef = useRef();
-    const animatedScrollRef = useRef();
-    const headerRef = useRef();
-    const titleRef = useRef();
-    const labelTextRef = useRef();
-    const subtitleRef = useRef();
+    const overlayRef = useRef<HTMLDivElement>(null);
+    const innerContentRef = useRef<HTMLDivElement>(null);
+    const closeRef = useRef<HTMLButtonElement>(null);
+    const animatedScrollRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLDivElement>(null);
+    const labelTextRef = useRef<HTMLParagraphElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
     const previousState = usePreviousValue({ size, open });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+    const { firstElement, keyDownListener } = useFocus(sidePanelRef);
+    const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
+      .current;
 
     const shouldReduceMotion = useReducedMotion();
 
@@ -114,13 +284,16 @@ export let SidePanel = React.forwardRef(
     }, [animateTitle]);
 
     const handleScroll = useCallback(() => {
-      const scrollTop = animatedScrollRef.current.scrollTop;
+      const scrollTop = animatedScrollRef?.current?.scrollTop;
 
-      sidePanelRef.current.style.setProperty(
+      panelRefValue?.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
-        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
+        (
+          Math.min(Number(scrollTop), scrollAnimationDistance) /
+          scrollAnimationDistance
+        ).toString()
       );
-    }, [scrollAnimationDistance, sidePanelRef]);
+    }, [scrollAnimationDistance, panelRefValue]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -129,43 +302,25 @@ export let SidePanel = React.forwardRef(
 
     // scroll panel to top going between steps
     useEffect(() => {
-      if (sidePanelRef && sidePanelRef.current) {
+      if (sidePanelRef && panelRefValue) {
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
 
-        scrollableSection.scrollTop = 0;
+        if (scrollableSection) {
+          scrollableSection.scrollTop = 0;
+        }
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header
         // height css custom property
-        if (previousState?.size !== size) {
+        if (
+          previousState &&
+          previousState['size'] !== size &&
+          scrollableSection
+        ) {
           scrollableSection.scrollTop = 0;
         }
       }
-    }, [currentStep, sidePanelRef, size, previousState?.size, id]);
-
-    // set initial focus when side panel opens
-    useEffect(() => {
-      const initialFocus = (focusContainerElement) => {
-        const containerElement = focusContainerElement;
-        const primaryFocusElement =
-          containerElement &&
-          containerElement.querySelector(selectorPrimaryFocus);
-
-        if (primaryFocusElement) {
-          return primaryFocusElement;
-        } else {
-          return closeRef && closeRef.current;
-        }
-      };
-
-      const focusButton = (focusContainerElement) => {
-        const target = initialFocus(focusContainerElement);
-        target?.focus();
-      };
-      if (open && animationComplete) {
-        focusButton(innerContentRef.current);
-      }
-    }, [selectorPrimaryFocus, open, animationComplete]);
+    }, [currentStep, sidePanelRef, size, previousState, id, panelRefValue]);
 
     // Add console warning if labelText is provided without a title.
     // This combination is not allowed.
@@ -180,7 +335,7 @@ export let SidePanel = React.forwardRef(
     const checkSetDoAnimateTitle = () => {
       let canDoAnimateTitle = false;
       if (
-        sidePanelRef?.current &&
+        panelRefValue &&
         open &&
         animateTitle &&
         animationComplete &&
@@ -204,9 +359,9 @@ export let SidePanel = React.forwardRef(
         setScrollAnimationDistance(scrollAnimationDistance);
 
         // used to calculate the header moves
-        sidePanelRef.current.style.setProperty(
+        panelRefValue?.style.setProperty(
           `--${blockClass}--scroll-animation-distance`,
-          scrollAnimationDistance
+          scrollAnimationDistance.toString()
         );
 
         let scrollEl = animatedScrollRef.current;
@@ -218,7 +373,7 @@ export let SidePanel = React.forwardRef(
 
         if (scrollEl) {
           const innerComputed = window?.getComputedStyle(
-            innerContentRef.current
+            innerContentRef.current as HTMLDivElement
           );
           const innerPaddingHeight = innerComputed
             ? parseFloat(innerComputed?.paddingTop) +
@@ -244,13 +399,22 @@ export let SidePanel = React.forwardRef(
         animatedScrollRef.current.addEventListener('scroll', handleScroll);
       }
 
-      if (!doAnimateTitle && sidePanelRef.current) {
-        sidePanelRef.current.style.setProperty(
+      if (
+        !doAnimateTitle &&
+        (sidePanelRef as MutableRefObject<HTMLDivElement>).current
+      ) {
+        panelRefValue?.style.setProperty(
           `--${blockClass}--scroll-animation-progress`,
-          0
+          '0'
         );
       }
-    }, [animatedScrollRef, doAnimateTitle, handleScroll, sidePanelRef]);
+    }, [
+      animatedScrollRef,
+      doAnimateTitle,
+      handleScroll,
+      sidePanelRef,
+      panelRefValue,
+    ]);
 
     /* istanbul ignore next */
     const handleResize = () => {
@@ -260,7 +424,7 @@ export let SidePanel = React.forwardRef(
     // Calculate scroll distances
     useEffect(() => {
       if (
-        sidePanelRef?.current &&
+        panelRefValue &&
         open &&
         animateTitle &&
         animationComplete &&
@@ -289,7 +453,7 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       const handleOutsideClick = (event) => {
         if (
-          sidePanelRef.current &&
+          panelRefValue &&
           overlayRef.current &&
           overlayRef.current.contains(event.target) &&
           onRequestClose
@@ -318,6 +482,7 @@ export let SidePanel = React.forwardRef(
       preventCloseOnClickOutside,
       onUnmount,
       sidePanelRef,
+      panelRefValue,
     ]);
 
     // initializes the side panel to close
@@ -344,25 +509,34 @@ export let SidePanel = React.forwardRef(
     // used to reset margins of the slide in panel when closed/closing
     useEffect(() => {
       if (!open && slideIn) {
-        const pageContentElement = document.querySelector(selectorPageContent);
+        const pageContentElement = selectorPageContent
+          ? (document.querySelector(selectorPageContent) as HTMLElement)
+          : null;
         if (placement && placement === 'right' && pageContentElement) {
-          pageContentElement.style.marginInlineEnd = 0;
+          pageContentElement.style.marginInlineEnd = '0';
         } else if (pageContentElement) {
-          pageContentElement.style.marginInlineStart = 0;
+          pageContentElement.style.marginInlineStart = '0';
         }
       }
     }, [open, placement, selectorPageContent, slideIn]);
 
     useEffect(() => {
-      if (!open && previousState?.open && reducedMotion.matches) {
+      if (
+        !open &&
+        previousState &&
+        previousState['open'] &&
+        reducedMotion.matches
+      ) {
         onUnmount?.();
       }
-    }, [open, onUnmount, reducedMotion.matches, previousState?.open]);
+    }, [open, onUnmount, reducedMotion.matches, previousState]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
       if (open && slideIn) {
-        const pageContentElement = document.querySelector(selectorPageContent);
+        const pageContentElement = selectorPageContent
+          ? (document.querySelector(selectorPageContent) as HTMLElement)
+          : null;
         if (pageContentElement) {
           pageContentElement.style.inlineSize = 'auto';
         } else {
@@ -371,16 +545,16 @@ export let SidePanel = React.forwardRef(
           );
         }
         if (placement && placement === 'right' && pageContentElement) {
-          pageContentElement.style.marginInlineEnd = 0;
+          pageContentElement.style.marginInlineEnd = '0';
           pageContentElement.style.transition = !reducedMotion.matches
             ? `margin-inline-end ${moderate02}`
-            : null;
+            : '';
           pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
-          pageContentElement.style.marginInlineStart = 0;
+          pageContentElement.style.marginInlineStart = '0';
           pageContentElement.style.transition = !reducedMotion.matches
             ? `margin-inline-start ${moderate02}`
-            : null;
+            : '';
           pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
         }
       }
@@ -393,23 +567,20 @@ export let SidePanel = React.forwardRef(
       open,
     ]);
 
-    // adds focus trap functionality
-    /* istanbul ignore next */
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      // focus trap should only be set if the side panel is a `slideOver` type
-      if (open && innerContentRef && !slideIn) {
-        wrapFocus({
-          bodyNode: innerContentRef.current,
-          startTrapRef,
-          endTrapRef,
-          currentActiveNode,
-          oldActiveNode,
-        });
+    useEffect(() => {
+      if (open) {
+        setTimeout(() => {
+          if (selectorPrimaryFocus) {
+            const primeFocusEl = document?.querySelector(selectorPrimaryFocus);
+            if (primeFocusEl) {
+              (primeFocusEl as HTMLElement)?.focus();
+            }
+          } else {
+            firstElement?.focus();
+          }
+        }, 0);
       }
-    };
+    }, [animationComplete, firstElement, open, selectorPrimaryFocus]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
@@ -462,11 +633,11 @@ export let SidePanel = React.forwardRef(
     );
 
     const renderHeader = () => {
-      let slugCloseSize =
+      const slugCloseSize =
         actions && actions.length && /l/.test(size) ? 'md' : 'sm';
       let normalizedSlug;
-      if (slug && slug?.type?.displayName === 'Slug') {
-        normalizedSlug = React.cloneElement(slug, {
+      if (slug && slug['type']?.displayName === 'Slug') {
+        normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
           // slug size is sm unless actions and size > md
           size: slugCloseSize,
         });
@@ -601,27 +772,18 @@ export let SidePanel = React.forwardRef(
               {...rest}
               id={id}
               className={mainPanelClassNames}
-              onBlur={handleBlur}
               ref={sidePanelRef}
               role="complementary"
               aria-label={title}
               onAnimationComplete={onAnimationEnd}
-              onAnimationStart={(event) => onAnimationStart(event)}
+              onAnimationStart={onAnimationStart}
               variants={panelVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
+              onKeyDown={keyDownListener}
             >
-              <span
-                ref={startTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}
-              >
-                Focus sentinel
-              </span>
-
               {doAnimateTitle ? (
                 <div
                   ref={animatedScrollRef}
@@ -651,15 +813,6 @@ export let SidePanel = React.forwardRef(
                 custom={shouldReduceMotion}
                 variants={actionSetVariants}
               />
-
-              <span
-                ref={endTrapRef}
-                tabIndex="0"
-                role="link"
-                className={`${blockClass}__visually-hidden`}
-              >
-                Focus sentinel
-              </span>
             </motion.div>
             <AnimatePresence>
               {includeOverlay && (
@@ -716,6 +869,7 @@ SidePanel.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
+    /**@ts-ignore*/
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -826,22 +980,26 @@ SidePanel.propTypes = {
    * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
    * This prop is required when using the `slideIn` variant of the side panel.
    */
+  /**@ts-ignore*/
   selectorPageContent: PropTypes.string.isRequired.if(({ slideIn }) => slideIn),
 
   /**
    * Specify a CSS selector that matches the DOM element that should
    * be focused when the side panel opens
    */
+  /**@ts-ignore*/
   selectorPrimaryFocus: PropTypes.string,
 
   /**
    * Sets the size of the side panel
    */
+  /**@ts-ignore*/
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
 
   /**
    * Determines if this panel slides in
    */
+  /**@ts-ignore*/
   slideIn: PropTypes.bool,
 
   /**
@@ -857,6 +1015,7 @@ SidePanel.propTypes = {
   /**
    * Sets the title text
    */
+  /**@ts-ignore*/
   title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
 };
 

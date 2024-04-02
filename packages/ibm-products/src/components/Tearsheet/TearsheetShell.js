@@ -156,7 +156,16 @@ export const TearsheetShell = React.forwardRef(
           firstElement?.focus();
         }, 0);
       }
-    }, [open, firstElement]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
+    useEffect(() => {
+      if (open && position !== depth) {
+        setTimeout(() => {
+          firstElement?.focus();
+        }, 0);
+      }
+    }, [position, depth, firstElement, open]);
 
     useEffect(() => {
       const notify = () =>

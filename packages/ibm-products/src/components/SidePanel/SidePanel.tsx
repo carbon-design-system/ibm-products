@@ -726,13 +726,11 @@ export let SidePanel = React.forwardRef(
                     size="sm"
                     renderIcon={renderIcon || icon}
                     iconDescription={label}
-                    tooltipPosition={
-                      hasIconOnly ? tooltipPosition || 'bottom' : null
-                    }
-                    tooltipAlignment={
-                      hasIconOnly ? tooltipAlignment || 'start' : null
-                    }
-                    hasIconOnly={hasIconOnly || !leading}
+                    {...(hasIconOnly && {
+                      tooltipPosition: tooltipPosition || 'bottom',
+                      tooltipAlignment: tooltipAlignment || 'start',
+                    })}
+                    hasIconOnly={hasIconOnly}
                     disabled={disabled}
                     className={cx([
                       `${blockClass}__action-toolbar-button`,

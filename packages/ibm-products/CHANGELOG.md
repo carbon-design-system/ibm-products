@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.34.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.33.0...@carbon/ibm-products@2.34.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* **Datagrid:** address keyboard support with selectable/dropdown editable cells ([#4580](https://github.com/carbon-design-system/ibm-products/issues/4580)) ([06e4244](https://github.com/carbon-design-system/ibm-products/commit/06e42447f8d95e032e5e973f41e2c62ba9b64b53))
+* **Dataspreadsheet:** refractor larger event handlers to seperate util ([#4598](https://github.com/carbon-design-system/ibm-products/issues/4598)) ([b72827a](https://github.com/carbon-design-system/ibm-products/commit/b72827adf963a433ab4d5b05dae9f2fad90233a0))
+* **SidePanel:** replace incorrect prop in conditional prop types ([#4630](https://github.com/carbon-design-system/ibm-products/issues/4630)) ([129d74a](https://github.com/carbon-design-system/ibm-products/commit/129d74aab25a366c81b6f4e9e5f9e9270dca00d6))
+
+
+### Features
+
+* **FilterPanel:** added accordion and group ([#4620](https://github.com/carbon-design-system/ibm-products/issues/4620)) ([ade8310](https://github.com/carbon-design-system/ibm-products/commit/ade8310e1d834a7e00fa82f55d02367e28ae71bb))
+* **FilterPanel:** added checkbox with overflow ([#4594](https://github.com/carbon-design-system/ibm-products/issues/4594)) ([c08c303](https://github.com/carbon-design-system/ibm-products/commit/c08c3035180ef7381380db82f9f1ec47e403fa9b))
+* **ScrollGradient:** new component ScrollGradient ([#4446](https://github.com/carbon-design-system/ibm-products/issues/4446)) ([75e1622](https://github.com/carbon-design-system/ibm-products/commit/75e162243e5e00d9d923d592118d6692fcae9423))
+* **useravatar:** color tokens implementation ([#4608](https://github.com/carbon-design-system/ibm-products/issues/4608)) ([de8604b](https://github.com/carbon-design-system/ibm-products/commit/de8604b532a392e9e5093d2135913b4a712e8da0))
+* **useravatar:** test cases ([#4637](https://github.com/carbon-design-system/ibm-products/issues/4637)) ([a172ce5](https://github.com/carbon-design-system/ibm-products/commit/a172ce57f7f53a4c4dedb11bc144971968c62b41))
+
+
+
+
+
 # [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.32.0...@carbon/ibm-products@2.33.0) (2024-03-26)
 
 

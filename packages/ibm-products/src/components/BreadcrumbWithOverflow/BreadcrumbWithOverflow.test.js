@@ -290,7 +290,6 @@ describe(BreadcrumbWithOverflow.displayName, () => {
             key: '1',
             label: 'label',
             onClick: () => {},
-            useShortTitle: true,
             shortTitle: 'short title',
           },
         ]}

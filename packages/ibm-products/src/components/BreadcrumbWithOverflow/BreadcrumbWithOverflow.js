@@ -108,9 +108,7 @@ export let BreadcrumbWithOverflow = ({
               key,
               title,
               id,
-              // the short title props aren't necessary for the hidden sizing
-              // eslint-disable-next-line no-unused-vars
-              useShortTitle,
+              // short title isn't necessary for the hidden sizing
               // eslint-disable-next-line no-unused-vars
               shortTitle,
               ...rest
@@ -140,10 +138,7 @@ export let BreadcrumbWithOverflow = ({
     }
 
     const newDisplayedBreadcrumbItems = breadcrumbs.map(
-      (
-        { className, key, label, shortTitle, title, useShortTitle, ...rest },
-        index
-      ) => (
+      ({ className, key, label, shortTitle, title, ...rest }, index) => (
         <BreadcrumbItem
           key={key}
           className={
@@ -154,7 +149,7 @@ export let BreadcrumbWithOverflow = ({
           title={index + 1 === breadcrumbs.length ? title : null}
           {...rest}
         >
-          {useShortTitle && shortTitle ? shortTitle : label}
+          {shortTitle || label}
         </BreadcrumbItem>
       )
     );
@@ -373,7 +368,7 @@ BreadcrumbWithOverflow.propTypes = {
       label: PropTypes.node,
 
       /**
-       * An optional title label for extra long breadcrumbs. see useShortTitle for additional usage information
+       * An optional title label for extra long breadcrumb
        */
       shortTitle: PropTypes.string,
 
@@ -383,11 +378,6 @@ BreadcrumbWithOverflow.propTypes = {
       title: PropTypes.string.isRequired.if(
         ({ label }) => typeof label !== 'string'
       ),
-
-      /**
-       * Enable when the shortened title should be used. useShortTitle should be automatically enabled for items set in utilGetBreadcrumbItemForTitle via PageHeader
-       */
-      useShortTitle: PropTypes.bool,
     })
   ),
   /**

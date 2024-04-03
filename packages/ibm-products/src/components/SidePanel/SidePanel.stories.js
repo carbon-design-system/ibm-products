@@ -86,34 +86,6 @@ const rowData = [
     id: 'h',
     value: 'Cell text h',
   },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
-  {
-    id: 'h',
-    value: 'Cell text h',
-  },
 ];
 
 const actions_1 = [

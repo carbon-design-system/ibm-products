@@ -301,42 +301,65 @@ export let SidePanel = React.forwardRef(
     // const memoizedScrollTopFunction = memoizeScrollTop();
 
     const setSubtitleMarginTop = useCallback(
-      (preValue, newValue) => {
-        const subtitleEl = subtitleRef?.current;
-        const height = subtitleEl?.clientHeight;
-        const innerContentHeight = innerContentRef?.current?.clientHeight;
-        const innerContentScrollTop = innerContentRef?.current?.scrollTop;
-        const computedMarginTop = Number(
-          window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0]
-        );
+      (preValue, newValue, progress) => {
+        const scrollProgressPercentage = progress * 100;
 
-        if (preValue < newValue) {
-          const margin = 0 - newValue;
+        if (subtitleRef?.current) {
+          const subtitleEl = subtitleRef?.current;
+          const height = subtitleEl?.clientHeight;
+          const calculatedMargin = height / (100 / scrollProgressPercentage);
+          // const innerContentHeight = innerContentRef?.current?.clientHeight;
+          // const innerContentScrollTop = innerContentRef?.current?.scrollTop;
+          // const computedMarginTop = Number(
+          //   window?.getComputedStyle(subtitleEl)?.marginTop?.split('px')?.[0]
+          // );
 
-          if (height && margin > -height) {
+          if (preValue < newValue) {
+            const margin = calculatedMargin * -1;
+
+            // if (height && margin > -height) {
             subtitleEl?.style?.setProperty('margin-top', `${margin}px`);
-          }
+            // }
 
-          if (
-            animationComplete &&
-            computedMarginTop &&
-            height &&
-            innerContentHeight &&
-            innerContentScrollTop &&
-            computedMarginTop > -height &&
-            innerContentHeight < innerContentScrollTop
-          ) {
-            subtitleEl?.style?.setProperty('margin-top', `${-height}px`);
-          }
-        } else {
-          const margin = -newValue + 1;
+            // if (
+            //   animationComplete &&
+            //   computedMarginTop &&
+            //   height &&
+            //   innerContentHeight &&
+            //   innerContentScrollTop &&
+            //   computedMarginTop > -height &&
+            //   innerContentHeight < innerContentScrollTop
+            // ) {
+            //   subtitleEl?.style?.setProperty('margin-top', `${-height}px`);
+            // }
+          } else {
+            // const margin = -height - calculatedMargin;
+            // console.log(-calculatedMargin)
+            // const margin = -newValue + 1;
 
-          if (height && newValue <= height) {
-            subtitleEl?.style?.setProperty('margin-top', `${margin}px`);
+            // if (height && newValue <= height) {
+            subtitleEl?.style?.setProperty(
+              'margin-top',
+              `${-calculatedMargin}px`
+            );
+            // }
+          }
+        }
+
+        if (labelTextRef?.current) {
+          if (preValue < newValue) {
+            const height =
+              labelTextHeight -
+              labelTextHeight / (100 / scrollProgressPercentage);
+
+              // console.log(height)
+            // labelTextRef?.current?.style?.setProperty('height', `${Math.trunc(height)}px`);
+          } else {
+            // console.log('up');
           }
         }
       },
-      [animationComplete]
+      [labelTextHeight]
     );
 
     useEffect(() => {
@@ -347,34 +370,36 @@ export let SidePanel = React.forwardRef(
 
     const handleScroll = useCallback(() => {
       const scrollTop = innerContentRef?.current?.scrollTop;
+      const animationProgress =
+        Math.min(Number(scrollTop), scrollAnimationDistance) /
+        scrollAnimationDistance;
+
       setPrevScrollTop(scrollTop);
 
       panelRefValue?.style.setProperty(
         `--${blockClass}--scroll-animation-progress`,
-        (
-          Math.min(Number(scrollTop), scrollAnimationDistance) /
-          scrollAnimationDistance
-        ).toString()
+        animationProgress.toString()
       );
 
-      if (labelTextRef?.current) {
-        const buffer =
-          (scrollTop &&
-            Math.min(scrollTop, scrollAnimationDistance) /
-              scrollAnimationDistance) ||
-          0;
-        const calculatedHeight = labelTextHeight - buffer * labelTextHeight;
+      // if (labelTextRef?.current) {
+      //   // console.log(labelTextHeight)
+      //   console.log(labelTextHeight / (100 / (animationProgress * 100)))
+      //   // const buffer =
+      //   //   Math.min(Number(scrollTop), scrollAnimationDistance) /
+      //   //   scrollAnimationDistance;
+      //   // const calculatedHeight =
+      //   //   labelTextHeight - animationProgress * labelTextHeight;
+      //   // console.log();
 
-        labelTextRef?.current?.style?.setProperty(
-          'height',
-          `${calculatedHeight}px`
-        );
-      }
+      //   // labelTextRef?.current?.style?.setProperty(
+      //   //   'height',
+      //   //   `${calculatedHeight}px`
+      //   // );
+      // }
 
       // memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
-      setSubtitleMarginTop(prevScrollTop, scrollTop);
+      setSubtitleMarginTop(prevScrollTop, scrollTop, animationProgress);
     }, [
-      labelTextHeight,
       panelRefValue?.style,
       prevScrollTop,
       scrollAnimationDistance,

@@ -12,9 +12,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
-@use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -34,7 +32,7 @@ html .#{$block-class} .#{$carbon}--accordion__wrapper {
   padding-block: 0;
 }
 html .#{$block-class} .#{$carbon}--accordion__heading {
-  min-block-size: 2rem;
+  min-block-size: $spacing-07;
   padding-inline-end: 0;
 }
 html .#{$block-class} .#{$carbon}--accordion__title {

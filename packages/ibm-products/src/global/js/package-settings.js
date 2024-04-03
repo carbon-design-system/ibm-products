@@ -85,6 +85,7 @@ const defaults = {
     FilterPanelCheckboxWithOverflow: false,
     FilterPanelGroup: false,
     FilterPanelLabel: false,
+    FilterPanelSearch: false,
 
     /* new component flags here - comment used by generate CLI */
 

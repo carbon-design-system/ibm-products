@@ -298,7 +298,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__inner-content--no-animated-title {
-    padding-top: 1rem;
+    padding-top: $spacing-05;
   }
 
   .#{$block-class}__header:has(.#{$block-class}__action-toolbar)

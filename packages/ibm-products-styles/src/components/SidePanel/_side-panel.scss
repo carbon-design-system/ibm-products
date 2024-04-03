@@ -175,11 +175,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       margin-bottom: 0;
     }
 
-    // &.#{$block-class}__header--on-detail-step
-    //   .#{$block-class}__collapsed-title-text {
-    //   // top: $spacing-05;
-    // }
-
     &.#{$block-class}__header--on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md
       ~ .#{$block-class}__collapsed-title-text {
@@ -256,7 +251,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     text-overflow: ellipsis;
     white-space: nowrap;
-    // margin-top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
   }
 
   .#{$block-class}__collapsed-title-text {

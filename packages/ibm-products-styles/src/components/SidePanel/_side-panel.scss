@@ -303,6 +303,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: 0;
   }
 
+  .#{$block-class}__inner-content--no-animated-title {
+    padding-top: 1rem;
+  }
+
   .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
     + .#{$block-class}__inner-content,
   .#{$block-class}__header--has-action-toolbar

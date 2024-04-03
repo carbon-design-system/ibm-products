@@ -347,15 +347,21 @@ export let SidePanel = React.forwardRef(
         }
 
         if (labelTextRef?.current) {
-          if (preValue < newValue) {
-            const height =
-              labelTextHeight -
-              labelTextHeight / (100 / scrollProgressPercentage);
+          const calculatedMargin =
+            labelTextHeight / (100 / scrollProgressPercentage);
 
-              // console.log(height)
-            // labelTextRef?.current?.style?.setProperty('height', `${Math.trunc(height)}px`);
+          if (preValue < newValue) {
+            const margin = calculatedMargin * -1;
+
+            labelTextRef?.current?.style?.setProperty(
+              'margin-top',
+              `${margin}px`
+            );
           } else {
-            // console.log('up');
+            labelTextRef?.current?.style?.setProperty(
+              'margin-top',
+              `${-calculatedMargin}px`
+            );
           }
         }
       },
@@ -364,6 +370,7 @@ export let SidePanel = React.forwardRef(
 
     useEffect(() => {
       if (open && animateTitle && labelTextRef?.current) {
+        console.log('update');
         setLabelTextHeight(Number(labelTextRef?.current?.clientHeight || null));
       }
     }, [animateTitle, labelTextRef, open]);
@@ -712,7 +719,7 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}--slide-in`]: slideIn,
         [`${blockClass}--has-slug`]: slug,
         [`${blockClass}--condensed-actions`]: condensedActions,
-        [`${blockClass}--animated-title`]: doAnimateTitle,
+        // [`${blockClass}--animated-title`]: doAnimateTitle,
         [`${blockClass}--has-overlay`]: includeOverlay,
       },
     ]);
@@ -866,7 +873,12 @@ export let SidePanel = React.forwardRef(
           ref={innerContentRef}
           className={cx(
             `${blockClass}__inner-content`,
-            `${blockClass}--scrolls`
+            `${blockClass}--scrolls`,
+            `${
+              !doAnimateTitle
+                ? `${blockClass}__inner-content--no-animated-title`
+                : ''
+            }`
           )}
         >
           {children}
@@ -897,28 +909,13 @@ export let SidePanel = React.forwardRef(
               custom={{ placement, shouldReduceMotion }}
               onKeyDown={keyDownListener}
             >
-              {doAnimateTitle ? (
-                // <div
-                //   ref={animatedScrollRef}
-                //   className={`${blockClass}__animated-scroll-wrapper`}
-                // >
-                <>
-                  {/* header */}
-                  {renderHeader()}
+              <>
+                {/* header */}
+                {renderHeader()}
 
-                  {/* main */}
-                  {renderMain()}
-                </>
-              ) : (
-                // </div>
-                <>
-                  {/* header */}
-                  {renderHeader()}
-
-                  {/* main */}
-                  {renderMain()}
-                </>
-              )}
+                {/* main */}
+                {renderMain()}
+              </>
 
               {/* footer */}
               <MotionActionSet

@@ -175,10 +175,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       margin-bottom: 0;
     }
 
-    &.#{$block-class}__header--on-detail-step
-      .#{$block-class}__collapsed-title-text {
-      top: $spacing-05;
-    }
+    // &.#{$block-class}__header--on-detail-step
+    //   .#{$block-class}__collapsed-title-text {
+    //   // top: $spacing-05;
+    // }
 
     &.#{$block-class}__header--on-detail-step
       .#{$block-class}__navigation-back-button.#{c4p-settings.$carbon-prefix}--btn--md

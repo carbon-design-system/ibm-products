@@ -284,8 +284,13 @@ export let SidePanel = React.forwardRef(
     const [prevScrollTop, setPrevScrollTop] = useState<number | undefined>(0);
 
     useEffect(() => {
-      setDoAnimateTitle(animateTitle);
-    }, [animateTitle]);
+      if (open && !titleRef?.current) {
+        console.log('no animate');
+        setDoAnimateTitle(false);
+      } else {
+        setDoAnimateTitle(animateTitle);
+      }
+    }, [animateTitle, open]);
 
     // const memoizeScrollTop = () => {
     //   let prevValue;
@@ -300,7 +305,7 @@ export let SidePanel = React.forwardRef(
 
     // const memoizedScrollTopFunction = memoizeScrollTop();
 
-    const setSubtitleMarginTop = useCallback(
+    const setTitleItemsStyleProps = useCallback(
       (preValue, newValue, progress) => {
         const scrollProgressPercentage = progress * 100;
 
@@ -377,6 +382,7 @@ export let SidePanel = React.forwardRef(
 
     const handleScroll = useCallback(() => {
       const scrollTop = innerContentRef?.current?.scrollTop;
+
       const animationProgress =
         Math.min(Number(scrollTop), scrollAnimationDistance) /
         scrollAnimationDistance;
@@ -405,12 +411,14 @@ export let SidePanel = React.forwardRef(
       // }
 
       // memoizedScrollTopFunction(scrollTop, setSubtitleMarginTop);
-      setSubtitleMarginTop(prevScrollTop, scrollTop, animationProgress);
+      if (scrollAnimationDistance !== -1) {
+        setTitleItemsStyleProps(prevScrollTop, scrollTop, animationProgress);
+      }
     }, [
       panelRefValue?.style,
       prevScrollTop,
       scrollAnimationDistance,
-      setSubtitleMarginTop,
+      setTitleItemsStyleProps,
     ]);
 
     const reducedMotion =
@@ -485,7 +493,7 @@ export let SidePanel = React.forwardRef(
         const scrollEl = innerContentRef.current;
 
         // if (!scrollEl && animateTitle && !doAnimateTitle) {
-        // may be switching back based on resize
+        // // may be switching back based on resize
         // scrollEl = innerContentRef.current;
         // }
 
@@ -504,17 +512,21 @@ export let SidePanel = React.forwardRef(
               scrollAnimationDistance + innerPaddingHeight;
         }
       }
+
+      console.log(canDoAnimateTitle);
       if (doAnimateTitle !== canDoAnimateTitle) {
-        // will need updating on resize
-        // setDoAnimateTitle(canDoAnimateTitle);
+        //   // will need updating on resize
+        setDoAnimateTitle(canDoAnimateTitle);
       }
     };
 
     useEffect(() => {
-      if (doAnimateTitle && innerContentRef.current) {
+      const innerContentElement = innerContentRef?.current;
+
+      if (doAnimateTitle && innerContentElement) {
         // only add scroll if the doAnimateTitle is already true
         // should come back through if false and canDoAnimateTitle is true
-        innerContentRef.current.addEventListener('scroll', handleScroll);
+        innerContentElement.addEventListener('scroll', handleScroll);
       }
 
       if (
@@ -526,6 +538,10 @@ export let SidePanel = React.forwardRef(
           '0'
         );
       }
+
+      return () => {
+        innerContentElement?.removeEventListener('scroll', handleScroll);
+      };
     }, [
       doAnimateTitle,
       handleScroll,
@@ -536,9 +552,9 @@ export let SidePanel = React.forwardRef(
     ]);
 
     /* istanbul ignore next */
-    const handleResize = () => {
-      checkSetDoAnimateTitle();
-    };
+    // const handleResize = () => {
+    //   checkSetDoAnimateTitle();
+    // };
 
     // Calculate scroll distances
     useEffect(() => {
@@ -886,7 +902,7 @@ export let SidePanel = React.forwardRef(
       );
     };
 
-    useResizeObserver(sidePanelRef, handleResize, [open]);
+    // useResizeObserver(sidePanelRef, handleResize, [open]);
 
     return (
       <AnimatePresence>

@@ -12,3 +12,4 @@ export { FilterPanelCheckbox } from './FilterPanelCheckbox/FilterPanelCheckbox';
 export { FilterPanelCheckboxWithOverflow } from './FilterPanelCheckboxWithOverflow/FilterPanelCheckboxWithOverflow';
 export { FilterPanelGroup } from './FilterPanelGroup/FilterPanelGroup';
 export { FilterPanelLabel } from './FilterPanelLabel/FilterPanelLabel';
+export { FilterPanelSearch } from './FilterPanelSearch/FilterPanelSearch';

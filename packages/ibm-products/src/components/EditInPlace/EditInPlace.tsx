@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, forwardRef, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useRef,
+  PropsWithChildren,
+} from 'react';
 import { IconButton } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -27,7 +33,100 @@ const defaults = {
   size: 'sm',
 };
 
-export let EditInPlace = forwardRef(
+type Size = 'sm' | 'md' | 'lg';
+type AlignPropType =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'right';
+type Shape = {
+  cancel: AlignPropType;
+  edit: AlignPropType;
+  save: AlignPropType;
+};
+
+interface EditInplaceProps extends PropsWithChildren {
+  /**
+   * label for cancel button
+   */
+  cancelLabel: string;
+  /**
+   * By default the edit icon is shown on hover only.
+   */
+  editAlwaysVisible?: boolean;
+  /**
+   * label for edit button
+   */
+  editLabel: string;
+  /**
+   * Specify a custom id for the input
+   */
+  id: string;
+  /**
+   * inheritTypography - causes the text entry field to inherit typography settings
+   * assigned to the container. This is useful when editing titles for instance.
+   *
+   * NOTE: The size property limits the vertical size of the input element.
+   * Inherited font's should be selected to fit within the size selected.
+   */
+  inheritTypography?: boolean;
+  /**
+   * determines if the input is invalid
+   */
+  invalid?: boolean;
+  /**
+   * text that is displayed if the input is invalid
+   */
+  invalidText?: string;
+  /**
+   * Provide the text that will be read by a screen reader when visiting this control
+   */
+  labelText: string;
+  /**
+   * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
+   */
+  onCancel: (value: string) => void;
+  /**
+   * handler that is called when the input is updated
+   */
+  onChange: (value: string) => void;
+  /**
+   * handler that is called when the save button is pressed or when the user removes focus from the input if it has a new value
+   */
+  onSave: () => void;
+  /**
+   * determines if the input is in readOnly mode
+   */
+  // readOnly: PropTypes.bool,
+  /**
+   * label for the edit button that displays when in read only mode
+   */
+  // readOnlyLabel: PropTypes.string,
+  /**
+   * label for save button
+   */
+  saveLabel: string;
+  /**
+   * vertical size of control
+   */
+  size?: Size;
+  /**
+   * tooltipAlignment from the standard tooltip. Default center.
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
+   */
+  tooltipAlignment?: AlignPropType | Shape;
+  /**
+   * current value of the input
+   */
+  value: string;
+}
+
+export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
   (
     {
       cancelLabel,
@@ -36,7 +135,7 @@ export let EditInPlace = forwardRef(
       id,
       inheritTypography,
       invalid,
-      invalidLabel: deprecated_invalidLabel,
+      invalidLabel: deprecated_invalidLabel = ' ',
       invalidText,
       labelText,
       onCancel,
@@ -45,22 +144,26 @@ export let EditInPlace = forwardRef(
       // readOnly,
       // readOnlyLabel,
       saveLabel,
-      size = defaults.size,
+      size = 'sm',
       tooltipAlignment,
       value,
       ...rest
-    },
+    }: EditInplaceProps & { invalidLabel?: string },
     ref
   ) => {
     const [focused, setFocused] = useState(false);
-    const [initialValue, setInitialValue] = useState('');
+    const [initialValue, setInitialValue] = useState<string>('');
     const [dirtyInput, setDirtyInput] = useState(false);
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
-    const tipAlignments = ['edit', 'save', 'cancel'].reduce((acc, tips) => {
+    const tipAlignments: { [key: string]: string } = [
+      'edit',
+      'save',
+      'cancel',
+    ].reduce((acc, tips) => {
       acc[tips] =
         (tipAlignIsObject ? tooltipAlignment[tips] : tooltipAlignment) ??
         defaults.tooltipAlignment;
@@ -91,7 +194,7 @@ export let EditInPlace = forwardRef(
       // }
 
       if (!isTargetingChild(e)) {
-        inputRef.current.focus();
+        inputRef.current?.focus();
         setFocused(true);
       }
     };
@@ -139,11 +242,11 @@ export let EditInPlace = forwardRef(
       escaping.current = true;
       switch (e.key) {
         case 'Escape':
-          inputRef.current.blur();
+          inputRef.current?.blur();
           escapeHandler();
           break;
         case 'Enter':
-          inputRef.current.blur();
+          inputRef.current?.blur();
           returnHandler();
           break;
         default:
@@ -284,7 +387,6 @@ EditInPlace.propTypes = {
    */
   editAlwaysVisible: PropTypes.bool,
   /**
-  /**
    * label for edit button
    */
   editLabel: PropTypes.string.isRequired,
@@ -307,6 +409,7 @@ EditInPlace.propTypes = {
   /**
    * text that is displayed if the input is invalid
    */
+  /**@ts-ignore*/
   invalidText: PropTypes.string,
   /**
    * Provide the text that will be read by a screen reader when visiting this control
@@ -345,6 +448,7 @@ EditInPlace.propTypes = {
    *
    * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
    */
+  /**@ts-ignore*/
   tooltipAlignment: PropTypes.oneOfType([
     alignPropType,
     PropTypes.shape({

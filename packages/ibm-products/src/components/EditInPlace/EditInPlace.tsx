@@ -59,9 +59,8 @@ interface EditInplaceProps extends PropsWithChildren {
    */
   editAlwaysVisible?: boolean;
   /**
-   /**
-    * label for edit button
-    */
+   * label for edit button
+   */
   editLabel: string;
   /**
    * Specify a custom id for the input
@@ -127,7 +126,7 @@ interface EditInplaceProps extends PropsWithChildren {
   value: string;
 }
 
-export let EditInPlace = forwardRef<any, EditInplaceProps>(
+export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
   (
     {
       cancelLabel,
@@ -387,7 +386,6 @@ EditInPlace.propTypes = {
    * By default the edit icon is shown on hover only.
    */
   editAlwaysVisible: PropTypes.bool,
-  /**
   /**
    * label for edit button
    */

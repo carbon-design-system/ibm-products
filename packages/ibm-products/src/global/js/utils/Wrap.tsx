@@ -6,7 +6,12 @@
  */
 
 // Import portions of React that are needed.
-import React, { ComponentType, ForwardedRef, PropsWithChildren, ReactHTML } from 'react';
+import React, {
+  ComponentType,
+  ForwardedRef,
+  PropsWithChildren,
+  ReactHTML,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -25,11 +30,6 @@ const isEmpty = (children) => {
   return result;
 };
 
-// Default values for props
-const defaults = {
-  element: 'div',
-};
-
 interface WrapProps extends PropsWithChildren {
   /**
    * Specify whether the wrapper element should render even if there are no
@@ -37,7 +37,7 @@ interface WrapProps extends PropsWithChildren {
    * are some conditions in which the wrapper element is still required. Note
    * that this prop takes precedence over neverRender if both are set to true.
    */
-  alwaysRender?: boolean;
+  alwaysRender?: boolean | null;
 
   /**
    * The element name or component to use as a wrapper for the content.
@@ -66,7 +66,7 @@ interface WrapProps extends PropsWithChildren {
  * the ref.current will be set to the wrapper element if it renders, and will
  * remain undefined if it does not render.
  */
-export const Wrap: React.FC<PropsWithChildren<WrapProps>> = React.forwardRef(
+export const Wrap = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -79,7 +79,7 @@ export const Wrap: React.FC<PropsWithChildren<WrapProps>> = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: WrapProps,
     ref: ForwardedRef<HTMLElement>
   ) =>
     (neverRender || isEmpty(children)) && !alwaysRender ? null : (

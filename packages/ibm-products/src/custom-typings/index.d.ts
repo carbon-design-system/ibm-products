@@ -192,5 +192,6 @@ declare module '@carbon/react' {
     UIShell,
     UnorderedList,
     TagTypeName,
+    usePrefix
   } from '@carbon/react';
 }

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ComponentType, ForwardedRef, PropsWithChildren, ReactHTML } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -30,6 +30,32 @@ const defaults = {
   element: 'div',
 };
 
+interface WrapProps extends PropsWithChildren {
+  /**
+   * Specify whether the wrapper element should render even if there are no
+   * children or the children are themselves empty wrappers. Useful if there
+   * are some conditions in which the wrapper element is still required. Note
+   * that this prop takes precedence over neverRender if both are set to true.
+   */
+  alwaysRender?: boolean;
+
+  /**
+   * The element name or component to use as a wrapper for the content.
+   */
+  element?: keyof ReactHTML | ComponentType;
+
+  /**
+   * Specify whether nothing should be rendered even if there are children
+   * in the content. Useful if there are some circumstances in which the
+   * component should not render at all. Note that if alwaysRender is also
+   * set to true then it will take precedence and the wrapper element and
+   * content will be rendered.
+   */
+  neverRender?: boolean;
+
+  className?: string;
+}
+
 /**
  * A simple conditional wrapper that encloses its children in a <div> (or other
  * element if specified), passing any supplied attributes to the <div> (or other
@@ -40,23 +66,24 @@ const defaults = {
  * the ref.current will be set to the wrapper element if it renders, and will
  * remain undefined if it does not render.
  */
-export const Wrap = React.forwardRef(
+export const Wrap: React.FC<PropsWithChildren<WrapProps>> = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
 
       alwaysRender,
       children,
-      element: Wrapper = defaults.element,
+      element: Wrapper = 'div',
       neverRender,
+      className,
 
       // Collect any other property values passed in.
       ...rest
     },
-    ref
+    ref: ForwardedRef<HTMLElement>
   ) =>
     (neverRender || isEmpty(children)) && !alwaysRender ? null : (
-      <Wrapper {...rest} ref={ref}>
+      <Wrapper className={className} {...rest} ref={ref}>
         {children}
       </Wrapper>
     )
@@ -79,6 +106,8 @@ Wrap.propTypes = {
    * components that decide not to render, nothing will be rendered in the DOM.
    */
   children: PropTypes.node,
+
+  className: PropTypes.string,
 
   /**
    * The element name or component to use as a wrapper for the content.

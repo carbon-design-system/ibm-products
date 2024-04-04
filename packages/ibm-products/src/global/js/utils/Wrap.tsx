@@ -7,10 +7,10 @@
 
 // Import portions of React that are needed.
 import React, {
-  ComponentType,
+  ElementType,
   ForwardedRef,
   PropsWithChildren,
-  ReactHTML,
+  ReactNode,
 } from 'react';
 
 // Other standard imports.
@@ -42,7 +42,7 @@ interface WrapProps extends PropsWithChildren {
   /**
    * The element name or component to use as a wrapper for the content.
    */
-  element?: keyof ReactHTML | ComponentType;
+  element?: (() => ReactNode) | string | ElementType;
 
   /**
    * Specify whether nothing should be rendered even if there are children

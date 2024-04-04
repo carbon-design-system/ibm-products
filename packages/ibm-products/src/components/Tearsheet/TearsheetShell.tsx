@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -164,7 +164,20 @@ type closeIconDescriptionTypes = {
 // The 'sizes' array contains an array of the sizes for every stacked tearsheet.
 // This is so we can opt-out of including the stacking scale effect when there
 // are stacked tearsheets with mixed sizes (ie, using wide and narrow together)
-const stack = { open: [], all: [], sizes: [] };
+type stackTypes = {
+  open: Array<{
+    (a: number, b: number): void;
+    checkFocus?: () => void;
+    claimFocus?: () => void;
+  }>;
+  all: Array<{
+    (a: number, b: number): void;
+    checkFocus?: () => void;
+    claimFocus?: () => void;
+  }>;
+  sizes: Array<string>;
+};
+const stack: stackTypes = { open: [], all: [], sizes: [] };
 
 // these props are only applicable when size='wide'
 export const tearsheetShellWideProps = [
@@ -246,7 +259,7 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback that will be called whenever the stacking order changes.
     // position is 1-based with 0 indicating closed.
-    function handleStackChange(newDepth, newPosition) {
+    function handleStackChange(newDepth: number, newPosition: number) {
       setDepth(newDepth);
       setPosition(newPosition);
     }
@@ -293,7 +306,7 @@ export const TearsheetShell = React.forwardRef(
             Math.min(stack.open.length, maxDepth),
             stack.open.indexOf(handler) + 1
           );
-          handler.checkFocus();
+          handler.checkFocus?.();
         });
 
       // Register this tearsheet's stack change callback/listener.
@@ -332,7 +345,7 @@ export const TearsheetShell = React.forwardRef(
       // If something within us is receiving focus but we are not the topmost
       // stacked tearsheet, transfer focus to the topmost tearsheet instead
       if (position < depth) {
-        stack.open[stack.open.length - 1].claimFocus();
+        stack.open[stack.open.length - 1].claimFocus?.();
       }
     }
 

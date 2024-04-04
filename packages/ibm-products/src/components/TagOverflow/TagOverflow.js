@@ -14,7 +14,7 @@ import { pkg } from '../../settings';
 
 import { Tag, Tooltip } from '@carbon/react';
 import { TagSet } from '../TagSet';
-import { TYPES, defaultTagType } from './constants';
+import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
@@ -122,7 +122,7 @@ export let TagOverflow = React.forwardRef(
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: item.tagType || defaultTagType, label: item.label };
+        return { type: item.tagType, label: item.label };
       });
 
       setVisibleItems(visibleItemsArr);
@@ -155,7 +155,7 @@ export let TagOverflow = React.forwardRef(
                   <Tooltip align="bottom" label={item.label}>
                     <Tag
                       className={`${blockClass}__item--tag`}
-                      type={item.tagType || defaultTagType}
+                      type={item.tagType}
                     >
                       {item.label}
                     </Tag>

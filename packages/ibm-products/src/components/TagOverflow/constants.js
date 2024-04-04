@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Copied from carbon-components-react/src/components/Tag/Tag.js
+// Copied from @carbon/react/es/components/Tag/Tag.js
 export const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -20,6 +20,3 @@ export const TYPES = {
   'high-contrast': 'High-Contrast',
   outline: 'Outline',
 };
-
-// Default value for the type prop of Tag elements within the component
-export const defaultTagType = 'blue';

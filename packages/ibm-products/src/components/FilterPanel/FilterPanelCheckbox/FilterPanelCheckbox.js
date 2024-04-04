@@ -21,6 +21,11 @@ const componentName = 'FilterPanelCheckbox';
 
 /**
  * Provides a checkbox, label, and count.
+ *
+ * This component is returning Carbon's Checkbox.
+ *
+ * All of Carbon Checkbox's props are directly available
+ * through "...rest", including id, onClick, etc.
  */
 export let FilterPanelCheckbox = React.forwardRef(
   ({ className, count, id, labelText, title, ...rest }, ref) => {
@@ -48,15 +53,6 @@ FilterPanelCheckbox = pkg.checkComponentEnabled(
 FilterPanelCheckbox.displayName = componentName;
 
 FilterPanelCheckbox.propTypes = {
-  /**
-   * IMPORTANT NOTE
-   *
-   * This component is returning Carbon's Checkbox.
-   *
-   * All of Carbon Checkbox's props are directly available
-   * through "...rest", including id, onClick, etc.
-   */
-
   /**
    * Optional class to be applied to the containing node.
    */

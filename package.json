@@ -36,6 +36,7 @@
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss'",
     "prepare": "husky install",
+    "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",

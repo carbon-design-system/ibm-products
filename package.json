@@ -198,7 +198,7 @@
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
-      "npx stylelint"
+      "npx stylelint --allow-empty-input"
     ],
     "!(examples/**/*).md": [
       "npx prettier --cache --write",

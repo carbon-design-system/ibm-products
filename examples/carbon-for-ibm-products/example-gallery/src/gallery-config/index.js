@@ -33,18 +33,21 @@ import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
+import imageFilterPanel from './FilterPanel--thumbnail.png';
 import imageFullPageError from './FullPageError--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
 import imageInterstitialScreenView from './InterstitialScreenView--thumbnail.png';
 import imageInterstitialScreenViewModule from './InterstitialScreenViewModule--thumbnail.png';
+import imageNav from './Nav--thumbnail.png';
 import imageNotificationsPanel from './NotificationsPanel--thumbnail.png';
 import imageOptionsTile from './OptionsTile--thumbnail.png';
 import imagePageHeader from './PageHeader--thumbnail.png';
 import imageProductiveCard from './ProductiveCard--thumbnail.png';
 import imageRemoveModal from './RemoveModal--thumbnail.png';
 import imageSaving from './Saving--thumbnail.png';
+import imageScrollGradient from './ScrollGradient--thumbnail.png';
 import imageSearchBar from './SearchBar--thumbnail.png';
 import imageSidePanel from './SidePanel--thumbnail.png';
 import imageStatusIcon from './StatusIcon--thumbnail.png';
@@ -182,6 +185,11 @@ const config = [
     thumbnail: `url(${imageExpressiveCard}`,
   },
   {
+    label: 'Filter-Panel',
+    directory: 'FilterPanel',
+    thumbnail: `url(${imageFilterPanel}`,
+  },
+  {
     label: 'Full-Page-Error',
     directory: 'FullPageError',
     thumbnail: `url(${imageFullPageError}`,
@@ -211,6 +219,7 @@ const config = [
     directory: 'InterstitialScreenViewModule',
     thumbnail: `url(${imageInterstitialScreenViewModule}`,
   },
+  { label: 'Nav', directory: 'Nav', thumbnail: `url(${imageNav}` },
   {
     label: 'Notifications Panel',
     directory: 'NotificationsPanel',
@@ -237,6 +246,11 @@ const config = [
     thumbnail: `url(${imageRemoveModal}`,
   },
   { label: 'Saving', directory: 'Saving', thumbnail: `url(${imageSaving}` },
+  {
+    label: 'Scroll-Gradient',
+    directory: 'ScrollGradient',
+    thumbnail: `url(${imageScrollGradient}`,
+  },
   {
     label: 'Search-Bar',
     directory: 'SearchBar',

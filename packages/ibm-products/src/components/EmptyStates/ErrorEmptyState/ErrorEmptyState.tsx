@@ -20,6 +20,7 @@ import { EmptyStateContent } from '../EmptyStateContent';
 import ErrorIllustration from '../assets/ErrorIllustration';
 import { defaults } from '../EmptyState';
 import { ButtonProps } from '@carbon/react';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
@@ -31,7 +32,7 @@ interface ErrorEmptyStateProps {
    */
   action?: {
     kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: (() => ReactNode) | object;
+    renderIcon?: CarbonIconType;
     onClick?: ButtonProps['onClick'];
     text?: string;
   };

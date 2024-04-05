@@ -80,7 +80,7 @@ describe(componentName, () => {
     // render/expand content
     await act(() => click(button));
     expect(screen.queryByText(definition)).toBeInTheDocument();
-    // "unrender"/collapse content
+    // "un-render"/collapse content
     await act(() => click(button));
     expect(screen.queryByText(definition)).not.toBeInTheDocument();
   });

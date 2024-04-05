@@ -27,6 +27,7 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const childDataTestId = `child-element-${uuidv4()}`;
 
+// cSpell:dictionaries lorem-ipsum
 const childrenContent = (
   <DescriptionListBody data-testid={childDataTestId}>
     <DescriptionListRow>

@@ -105,7 +105,7 @@ interface TearsheetNarrowProps {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget?: HTMLElement | null;
+  portalTarget?: ReactNode;
 
   /**
    * The main title of the tearsheet, displayed in the header area.

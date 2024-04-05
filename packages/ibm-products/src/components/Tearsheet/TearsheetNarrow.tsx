@@ -18,7 +18,7 @@ import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, ButtonProps } from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 
 import {
@@ -29,13 +29,12 @@ import {
 
 import { portalType } from './TearsheetShell';
 
-interface Action {
-  kind: 'ghost' | 'danger--ghost' | 'secondary' | 'danger' | 'primary';
-  label: string;
-  loading?: boolean;
-  onClick?: () => void;
-}
-interface TearsheetNarrowProps {
+type closeIconDescriptionTypes = {
+  hasCloseIcon: true;
+  closeIconDescription: string;
+};
+
+interface TearsheetNarrowProps extends PropsWithChildren {
   /**
    * The navigation actions to be shown as buttons in the action area at the
    * bottom of the tearsheet. Each action is specified as an object with
@@ -49,7 +48,7 @@ interface TearsheetNarrowProps {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: (Action | (() => 'lg'))[];
+  actions?: ButtonProps[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -68,7 +67,7 @@ interface TearsheetNarrowProps {
    * **Note:** This prop is only required if a close icon is shown, i.e. if
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription?: string;
+  closeIconDescription?: closeIconDescriptionTypes;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -142,12 +141,12 @@ const defaults = {
  * main content area, and a set of action buttons.
  */
 
-export let TearsheetNarrow: React.FC<TearsheetNarrowProps> = React.forwardRef(
+export let TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
       ...rest
-    }: PropsWithChildren<TearsheetNarrowProps>,
+    }: TearsheetNarrowProps,
     ref
   ) => (
     <TearsheetShell
@@ -256,6 +255,7 @@ TearsheetNarrow.propTypes = {
    * the tearsheet is read-only or has no navigation actions (sometimes called
    * a "passive tearsheet").
    */
+  /**@ts-ignore*/
   hasCloseIcon: PropTypes.bool,
 
   /**

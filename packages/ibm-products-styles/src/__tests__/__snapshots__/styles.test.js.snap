@@ -3878,7 +3878,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--data-table td.c4p--datagrid__expandable-row-cell + td,
-.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2) {
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2),
+.cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__cell:nth-of-type(2) + td {
   position: relative;
 }
 
@@ -9012,6 +9013,10 @@ button.c4p--add-select__global-filter-toggle--open {
   z-index: 7999;
 }
 
+.c4p--card__productive {
+  display: flex;
+  flex-direction: column;
+}
 .c4p--card__productive .c4p--card__title {
   font-size: var(--cds-heading-compact-02-font-size, 1rem);
   font-weight: var(--cds-heading-compact-02-font-weight, 600);
@@ -9086,6 +9091,14 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--card__productive .c4p--card__header-container {
   align-items: flex-start;
+}
+.c4p--card__productive .c4p--card__content-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.c4p--card__productive .c4p--card__header-body-container {
+  flex: 1;
 }
 
 .c4p--remove-modal .cds--modal-footer .cds--btn {

@@ -51,7 +51,7 @@ interface UserProfileImageProps {
   /**
    * Provide a custom icon to use if you need to use an icon other than the included ones
    */
-  icon?: () => React.ReactNode | null;
+  icon?: () => CarbonIconType | null;
 
   /**
    * When passing the image prop, supply a full path to the image to be displayed.

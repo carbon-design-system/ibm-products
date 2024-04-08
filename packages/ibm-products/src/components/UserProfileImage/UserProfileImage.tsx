@@ -11,6 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
@@ -32,10 +33,82 @@ const componentName = 'UserProfileImage';
 const defaults = {
   tooltipAlignment: 'bottom',
 };
+
+type Size = 'xl' | 'lg' | 'md';
+type Theme = 'light' | 'dark';
+interface UserProfileImageProps {
+  /**
+   * The background color passed should match one of the background colors in the library documentation:
+   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   */
+  backgroundColor?: string;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Provide a custom icon to use if you need to use an icon other than the included ones
+   */
+  icon?: () => React.ReactNode | null;
+
+  /**
+   * When passing the image prop, supply a full path to the image to be displayed.
+   */
+  image?: string;
+
+  /**
+   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+   */
+  imageDescription: string;
+
+  /**
+   * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
+   */
+  initials?: string;
+
+  /**
+   * When passing the kind prop, use either "user" or "group". The values match up to the Carbon Library icons.
+   */
+  kind?: 'user' | 'group';
+
+  /**
+   * Set the size of the avatar circle
+   */
+  size: 'xl' | 'lg' | 'md';
+
+  /**
+   * Set theme in which the component will be rendered
+   */
+  theme: 'light' | 'dark';
+
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  tooltipAlignment?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'right';
+
+  /**
+   * Pass in the display name to have it shown on hover
+   */
+  tooltipText?: string;
+}
+
 /**
  * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
  */
-export let UserProfileImage = React.forwardRef(
+export let UserProfileImage = React.forwardRef<
+  HTMLDivElement,
+  UserProfileImageProps
+>(
   (
     {
       backgroundColor,
@@ -69,17 +142,18 @@ export let UserProfileImage = React.forwardRef(
     };
 
     const formatInitials = () => {
-      if (initials.length === 2) {
+      if (initials && initials.length === 2) {
         return initials;
       }
-      // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
-      // both return JW.
-      return initials
-        .match(/(^\S\S?|\b\S)?/g)
-        .join('')
-        .match(/(^\S|\S$)?/g)
-        .join('')
-        .toUpperCase();
+
+      return (
+        (initials || '')
+          .match(/(^\S\S?|\b\S)?/g)
+          ?.join('')
+          .match(/(^\S|\S$)?/g)
+          ?.join('')
+          .toUpperCase() || ''
+      );
     };
 
     const getFillItem = () => {
@@ -138,7 +212,7 @@ export let UserProfileImage = React.forwardRef(
         ])}
         {...getDevtoolsProps(componentName)}
       >
-        <FillItem />
+        {FillItem && <FillItem />}
       </div>
     );
     return (
@@ -149,6 +223,7 @@ export let UserProfileImage = React.forwardRef(
           label={tooltipText}
           className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
+          {/**@ts-ignore */}
           <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
         </Tooltip>
       ) : (
@@ -201,6 +276,7 @@ UserProfileImage.propTypes = {
   /**
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
+  /**@ts-ignore */
   imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
 
   /**
@@ -216,12 +292,12 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xl', 'lg', 'md']).isRequired,
+  size: PropTypes.oneOf<Size>(['xl', 'lg', 'md']).isRequired,
 
   /**
    * Set theme in which the component will be rendered
    */
-  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+  theme: PropTypes.oneOf<Theme>(['light', 'dark']).isRequired,
 
   /**
    * Specify how the trigger should align with the tooltip

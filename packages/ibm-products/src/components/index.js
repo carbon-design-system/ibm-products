@@ -121,6 +121,7 @@ export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { ScrollGradient } from './ScrollGradient';
 export { StatusIndicator } from './StatusIndicator';
+export { TagOverflow } from './TagOverflow';
 export { ActionBar } from './ActionBar';
 export {
   FilterPanel,
@@ -130,4 +131,5 @@ export {
   FilterPanelCheckboxWithOverflow,
   FilterPanelGroup,
   FilterPanelLabel,
+  FilterPanelSearch,
 } from './FilterPanel';

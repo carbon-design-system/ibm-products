@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -70,7 +74,8 @@
     "buildhome",
     "callout",
     "checkmark",
-    "Coachmark",
+    "coachmark",
+    "coachmarks",
     "codemods",
     "codesandbox",
     "colindex",
@@ -80,10 +85,12 @@
     "dasharray",
     "data-testid",
     "datagrid",
-    "Datagrid",
     "disttag",
     "disttags",
+    "dragbar",
     "draggable",
+    "draghandle",
+    "dragmode",
     "editinplace",
     "editsidepanel",
     "emptystate",
@@ -124,6 +131,7 @@
     "setsize",
     "sidepanel",
     "skipnav",
+    "spacebar",
     "stackable",
     "stackblitz",
     "statusicon",
@@ -137,6 +145,7 @@
     "tearsheet",
     "tearsheets",
     "techdocs",
+    "testname",
     "textbox",
     "timeframe",
     "toggletip",
@@ -144,11 +153,9 @@
     "toolbarbutton",
     "treegrid",
     "treeview",
-    "testname",
     "typeahead",
     "userprofileimage",
     "uuidv",
-    "webfonts",
-    "Coachmark"
+    "webfonts"
   ]
 }

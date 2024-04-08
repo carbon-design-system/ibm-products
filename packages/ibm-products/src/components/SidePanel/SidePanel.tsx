@@ -280,7 +280,6 @@ export let SidePanel = React.forwardRef(
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
-    const [prevScrollTop, setPrevScrollTop] = useState<number | undefined>(0);
 
     useEffect(() => {
       if (open && !titleRef?.current) {
@@ -290,44 +289,26 @@ export let SidePanel = React.forwardRef(
       }
     }, [animateTitle, open]);
 
-    const setTitleItemsStyleProps = useCallback(
-      (preValue, newValue, progress) => {
-        const scrollProgressPercentage = progress * 100;
-
+    const titleItemsStyles = useCallback(
+      (progress) => {
         if (subtitleRef?.current) {
           const subtitleEl = subtitleRef?.current;
           const height = subtitleEl?.clientHeight;
-          const calculatedMargin = height / (100 / scrollProgressPercentage);
+          const calculatedMargin = height * progress;
 
-          if (preValue < newValue) {
-            const margin = calculatedMargin * -1;
-
-            subtitleEl?.style?.setProperty('margin-top', `${margin}px`);
-          } else {
-            subtitleEl?.style?.setProperty(
-              'margin-top',
-              `${-calculatedMargin}px`
-            );
-          }
+          subtitleEl?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
         }
 
         if (labelTextRef?.current) {
-          const calculatedMargin =
-            labelTextHeight / (100 / scrollProgressPercentage);
+          const calculatedMargin = labelTextHeight * progress;
 
-          if (preValue < newValue) {
-            const margin = calculatedMargin * -1;
-
-            labelTextRef?.current?.style?.setProperty(
-              'margin-top',
-              `${margin}px`
-            );
-          } else {
-            labelTextRef?.current?.style?.setProperty(
-              'margin-top',
-              `${-calculatedMargin}px`
-            );
-          }
+          labelTextRef?.current?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
         }
       },
       [labelTextHeight]
@@ -347,21 +328,18 @@ export let SidePanel = React.forwardRef(
           Math.min(Number(scrollTop), scrollAnimationDistance) /
           scrollAnimationDistance;
 
-        setPrevScrollTop(scrollTop);
-
         panelRefValue?.style.setProperty(
           `--${blockClass}--scroll-animation-progress`,
           animationProgress.toString()
         );
 
-        setTitleItemsStyleProps(prevScrollTop, scrollTop, animationProgress);
+        titleItemsStyles(animationProgress);
       }
     }, [
       doAnimateTitle,
       panelRefValue?.style,
-      prevScrollTop,
       scrollAnimationDistance,
-      setTitleItemsStyleProps,
+      titleItemsStyles,
     ]);
 
     const reducedMotion =

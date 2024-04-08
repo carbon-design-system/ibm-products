@@ -22,6 +22,7 @@ const dataTestId = uuidv4();
 const childDataTestId = `child-element-${uuidv4()}`;
 
 const contentBlockClass = `${blockClass}__content`;
+// cSpell:dictionaries lorem-ipsum
 const storyCopy = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet rerum aliquid perferendis, nulla nam ad excepturi, iure earum dolorum ipsa quae cum voluptatibus nemo quis debitis, aperiam repudiandae dolore deleniti.`;
 
 const childrenContent = (

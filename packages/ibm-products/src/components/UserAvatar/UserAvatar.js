@@ -49,13 +49,14 @@ const componentName = 'UserAvatar';
 const defaults = {
   size: 'md',
   tooltipAlignment: 'bottom',
+  backgroundColor: 'order-1-cyan',
 };
 
 export let UserAvatar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      backgroundColor,
+      backgroundColor = defaults.backgroundColor,
       className,
       image,
       imageDescription,

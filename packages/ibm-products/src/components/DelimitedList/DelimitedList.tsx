@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -23,12 +23,30 @@ const defaults = {
   items: [],
   truncate: true,
 };
+interface DelimitedListProps extends PropsWithChildren {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * The character(s) used to separate the items.
+   */
+  delimiter?: string;
+  /**
+   * Array of items to be listed.
+   */
+  items?: any[];
+  /**
+   * Toggle the component's ability to truncate or not.
+   */
+  truncate?: boolean;
+}
 
 /**
  * `DelimitedList` converts an array of items into a single line of
  * comma-separated values.
  */
-export let DelimitedList = React.forwardRef(
+export let DelimitedList = React.forwardRef<HTMLDivElement, DelimitedListProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -39,7 +57,7 @@ export let DelimitedList = React.forwardRef(
       truncate = defaults.truncate,
       // Collect any other property values passed in.
       ...rest
-    },
+    }: DelimitedListProps,
     ref
   ) => {
     return (

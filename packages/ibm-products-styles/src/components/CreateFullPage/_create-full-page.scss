@@ -21,8 +21,15 @@
 $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 
-.#{$block-class} .#{$block-class} {
+.#{$block-class}.#{$block-class} {
+  display: grid;
+  height: 100%;
   color: $text-primary;
+  grid-template-rows: minmax(auto, 100%);
+
+  &:has(.#{$block-class}__header) {
+    grid-template-rows: auto minmax(auto, 100%);
+  }
 }
 
 .#{$block-class}
@@ -31,14 +38,6 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding-top: $spacing-06;
   margin-right: 0;
   margin-left: 0;
-}
-
-.#{$block-class}__header {
-  position: sticky;
-  z-index: 9;
-  top: 0;
-  right: 0;
-  left: 0;
 }
 
 .#{$block-class} .#{$step-block-class}__step--hidden-step {
@@ -75,7 +74,8 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 
 .#{$block-class}__influencer-and-body-container {
   display: flex;
-  height: 100vh;
+  overflow: hidden;
+  max-height: 100%;
   padding: 0;
   margin: 0;
 }

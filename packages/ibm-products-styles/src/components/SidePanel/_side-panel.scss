@@ -122,9 +122,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     z-index: 4;
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
+    min-height: $spacing-08;
     padding: $spacing-05;
     padding-bottom: 0;
     background-color: $layer-01;
+
+    &.#{$block-class}__header--has-title {
+      min-height: auto;
+    }
 
     &:has(.#{$block-class}__subtitle-text),
     &.#{$block-class}__header--has-subtitle {
@@ -168,11 +173,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     &.#{$block-class}__header--reduced-motion.#{$block-class}__header--no-title-animation {
       border-bottom: 0;
       margin-bottom: 0;
-    }
-
-    &.#{$block-class}__header--on-detail-step
-      .#{$block-class}__collapsed-title-text {
-      top: $spacing-05;
     }
 
     &.#{$block-class}__header--on-detail-step
@@ -297,6 +297,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: 0;
   }
 
+  .#{$block-class}__inner-content--no-animated-title {
+    padding-top: $spacing-05;
+  }
+
   .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
     + .#{$block-class}__inner-content,
   .#{$block-class}__header--has-action-toolbar
@@ -309,10 +313,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
-  }
-
-  .#{$block-class}__inner-content.#{$block-class}--scrolls {
-    padding-top: $spacing-05;
   }
 
   .#{$block-class}__action-toolbar {

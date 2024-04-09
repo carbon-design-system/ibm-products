@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.7](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.14.6...@carbon/ibm-security@2.14.7) (2024-04-09)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
 ## [2.14.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.14.5...@carbon/ibm-security@2.14.6) (2024-03-05)
 
 

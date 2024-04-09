@@ -3878,7 +3878,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--data-table td.c4p--datagrid__expandable-row-cell + td,
-.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2) {
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2),
+.cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__cell:nth-of-type(2) + td {
   position: relative;
 }
 

@@ -6,7 +6,7 @@
  */
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { usePrefix } from '@carbon/react';
+import { usePrefix, Link } from '@carbon/react';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
@@ -108,9 +108,16 @@ const Template = ({ ...args }) => {
           title="Partition"
           subtitle="One or more partitions make up a topic. A partition is an ordered list
         of messages."
-          description="Partitions are distributed across the brokers in order to increase the
-        scalability of your topic. You can also use them to distribute
-        messages across the members of a consumer group."
+          description={
+            <>
+              <span>
+                Partitions are distributed across the brokers in order to
+                increase the scalability of your topic. You can also use them to
+                distribute messages across the members of a consumer group.
+              </span>
+              &nbsp;<Link href="#">Learn more.</Link>
+            </>
+          }
           onNext={() => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {

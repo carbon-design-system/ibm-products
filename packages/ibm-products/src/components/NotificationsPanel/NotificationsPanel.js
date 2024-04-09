@@ -391,7 +391,7 @@ export let NotificationsPanel = React.forwardRef(
         className={cx(blockClass, className, `${blockClass}__container`)}
         style={{
           animation: !reducedMotion.matches
-            ? `${open ? 'fade-in 250ms' : 'fade-out 250ms'}`
+            ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
             : null,
         }}
         onAnimationEnd={onAnimationEnd}

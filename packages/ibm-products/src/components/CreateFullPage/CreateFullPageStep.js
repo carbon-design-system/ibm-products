@@ -97,16 +97,17 @@ export let CreateFullPageStep = forwardRef(
     const span = { span: 50 }; // Half.
 
     const renderDescription = () => {
-      const ColumnAsType = (props) => (
-        <Column {...props} className={`${blockClass}-description`} {...span} />
-      );
-
       if (description) {
+        const common = {
+          children: description,
+          className: `${blockClass}-description`,
+          ...span,
+        };
+
         if (typeof description === 'string') {
-          return <ColumnAsType as="p">{description}</ColumnAsType>;
-        }
-        if (isValidElement(description)) {
-          return <ColumnAsType as="div">{description}</ColumnAsType>;
+          return <Column {...common} as="p" />;
+        } else if (isValidElement(description)) {
+          return <Column {...common} as="div" />;
         }
       }
       return null;

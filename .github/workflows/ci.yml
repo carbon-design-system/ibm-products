@@ -72,6 +72,8 @@ jobs:
         run: yarn
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p
+      - name: CI snapshot tests for c4p
+        run: yarn ci-check:test:c4p:snapshot
   test-community:
     runs-on: ubuntu-latest
     steps:

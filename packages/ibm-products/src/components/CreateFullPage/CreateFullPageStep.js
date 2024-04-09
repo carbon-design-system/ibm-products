@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  isValidElement,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -90,6 +96,23 @@ export let CreateFullPageStep = forwardRef(
 
     const span = { span: 50 }; // Half.
 
+    const renderDescription = () => {
+      if (description) {
+        const common = {
+          children: description,
+          className: `${blockClass}-description`,
+          ...span,
+        };
+
+        if (typeof description === 'string') {
+          return <Column {...common} as="p" />;
+        } else if (isValidElement(description)) {
+          return <Column {...common} as="div" />;
+        }
+      }
+      return null;
+    };
+
     return stepsContext ? (
       <section
         {
@@ -117,15 +140,7 @@ export let CreateFullPageStep = forwardRef(
                 </Column>
               )}
 
-              {description && (
-                <Column
-                  className={`${blockClass}-description`}
-                  as="p"
-                  {...span}
-                >
-                  {description}
-                </Column>
-              )}
+              {renderDescription()}
             </Grid>
           </Column>
         </Grid>
@@ -169,7 +184,7 @@ CreateFullPageStep.propTypes = {
   /**
    * Sets an optional description on the progress step component
    */
-  description: PropTypes.string,
+  description: PropTypes.node,
 
   /**
    * This will conditionally disable the submit button in the multi step CreateFullPage

@@ -27,8 +27,7 @@ const { checkComponentEnabled, prefix } = pkg;
 const blockClass = `${prefix}--toolbar`;
 
 interface ToolbarProps {
-  /** Provide the content of the `ToolbarGroup` */
-  children: ReactNode;
+  
 
   /** Provide an optional class to be applied to the containing node */
   className?: string;
@@ -47,36 +46,37 @@ const ToolbarContext = createContext<ToolbarContextType>({});
 let Toolbar = forwardRef(
   (
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
-    r: React.Ref<any>
+    r: React.Ref<HTMLDivElement>
   ) => {
-    const focusableElements = useRef();
+    const focusableElements = useRef<HTMLElement[]>();
 
     const getFocusableElements = useCallback(
-      (): any => focusableElements.current,
+      (): HTMLElement[] => focusableElements.current,
       [focusableElements]
     );
 
-    const _ref = useRef<any>();
-    const ref = r || _ref;
 
-    const [focus, setFocus] = useState();
+    const localRef = useRef<HTMLDivElement>();
+    const ref = r || localRef;
+
+    const [focus, setFocus] = useState(-1);
 
     useEffect(() => {
       focusableElements.current = _getFocusableElements(
         ref?.['current']
-      ) as any;
+      ) as HTMLElement[];
 
-      typeof focus !== 'undefined' &&
+       focus !== -1 &&
         getFocusableElements().forEach((element, index) => {
           element[index !== focus ? 'setAttribute' : 'removeAttribute'](
             'tabindex',
-            -1
+            '-1'
           );
         });
     });
 
     useEffect(() => {
-      typeof focus !== 'undefined' && getFocusableElements()[focus].focus();
+       focus !== -1 && getFocusableElements()[focus].focus();
     }, [focus, getFocusableElements]);
 
     const [arrowNext, arrowPrevious] = !vertical

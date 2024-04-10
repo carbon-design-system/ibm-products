@@ -18,6 +18,7 @@ preload
 progressbar
 rsquo
 searchbox
+setlabeltitle
 srcset
 svg
 tabindex

@@ -1908,13 +1908,13 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
-.c4p--create-full-page.c4p--create-full-page {
+.c4p--create-full-page {
   display: grid;
   height: 100%;
   color: var(--cds-text-primary, #161616);
   grid-template-rows: minmax(auto, 100%);
 }
-.c4p--create-full-page.c4p--create-full-page:has(.c4p--create-full-page__header) {
+.c4p--create-full-page:has(.c4p--create-full-page__header) {
   grid-template-rows: auto minmax(auto, 100%);
 }
 

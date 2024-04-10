@@ -21,7 +21,7 @@
 $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 
-.#{$block-class}.#{$block-class} {
+.#{$block-class} {
   display: grid;
   height: 100%;
   color: $text-primary;

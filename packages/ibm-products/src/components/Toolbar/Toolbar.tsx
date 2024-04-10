@@ -10,7 +10,6 @@ import { bool, node, string } from 'prop-types';
 
 import React, {
   PropsWithChildren,
-  ReactNode,
   createContext,
   forwardRef,
   useCallback,
@@ -48,15 +47,15 @@ let Toolbar = forwardRef(
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
     r: React.Ref<HTMLDivElement>
   ) => {
-    const focusableElements = useRef<HTMLElement[]>();
+    const focusableElements = useRef<HTMLElement[]  | undefined>();
 
     const getFocusableElements = useCallback(
-      (): HTMLElement[] => focusableElements.current,
+      (): HTMLElement[]|undefined => focusableElements.current,
       [focusableElements]
     );
 
 
-    const localRef = useRef<HTMLDivElement>();
+    const localRef = useRef<HTMLDivElement>(null);
     const ref = r || localRef;
 
     const [focus, setFocus] = useState(-1);
@@ -67,7 +66,7 @@ let Toolbar = forwardRef(
       ) as HTMLElement[];
 
        focus !== -1 &&
-        getFocusableElements().forEach((element, index) => {
+        getFocusableElements()?.forEach((element, index) => {
           element[index !== focus ? 'setAttribute' : 'removeAttribute'](
             'tabindex',
             '-1'
@@ -76,27 +75,27 @@ let Toolbar = forwardRef(
     });
 
     useEffect(() => {
-       focus !== -1 && getFocusableElements()[focus].focus();
+       focus !== -1 && getFocusableElements()?.[focus].focus();
     }, [focus, getFocusableElements]);
 
     const [arrowNext, arrowPrevious] = !vertical
       ? ['ArrowRight', 'ArrowLeft']
       : ['ArrowDown', 'ArrowUp'];
 
-    function onArrowDown(increment) {
+    function onArrowDown(increment:number) {
       const nextFocus = focus + increment;
 
-      getFocusableElements()[nextFocus] && setFocus(nextFocus);
+      getFocusableElements()?.[nextFocus] && setFocus(nextFocus);
     }
 
     function onFocus({ target }) {
       const elements = getFocusableElements();
 
-      elements.includes(target) && setFocus(elements.indexOf(target));
+      elements?.includes(target) && setFocus(elements.indexOf(target));
     }
 
     function onKeyDown({ key, target }) {
-      if (getFocusableElements().includes(target)) {
+      if (getFocusableElements()?.includes(target)) {
         switch (key) {
           case arrowNext:
             onArrowDown(1);
@@ -112,7 +111,7 @@ let Toolbar = forwardRef(
     return (
       <div
         {...rest}
-        ref={ref}
+       ref={ref}
         className={cx(blockClass, className, {
           [`${blockClass}--vertical`]: vertical,
         })}

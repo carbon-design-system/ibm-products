@@ -20,7 +20,6 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -279,21 +278,69 @@ export let SidePanel = React.forwardRef(
 
     const shouldReduceMotion = useReducedMotion();
 
+    // Title animation on scroll related state
+    const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
+
     useEffect(() => {
-      setDoAnimateTitle(animateTitle);
-    }, [animateTitle]);
+      if (open && !titleRef?.current) {
+        setDoAnimateTitle(false);
+      } else {
+        setDoAnimateTitle(animateTitle);
+      }
+    }, [animateTitle, open]);
+
+    const titleItemsStyles = useCallback(
+      (progress) => {
+        if (subtitleRef?.current) {
+          const subtitleEl = subtitleRef?.current;
+          const height = subtitleEl?.clientHeight;
+          const calculatedMargin = height * progress;
+
+          subtitleEl?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
+        }
+
+        if (labelTextRef?.current) {
+          const calculatedMargin = labelTextHeight * progress;
+
+          labelTextRef?.current?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
+        }
+      },
+      [labelTextHeight]
+    );
+
+    useEffect(() => {
+      if (open && animateTitle && labelTextRef?.current) {
+        setLabelTextHeight(Number(labelTextRef?.current?.clientHeight || null));
+      }
+    }, [animateTitle, labelTextRef, open]);
 
     const handleScroll = useCallback(() => {
-      const scrollTop = animatedScrollRef?.current?.scrollTop;
+      if (doAnimateTitle && innerContentRef?.current) {
+        const scrollTop = innerContentRef?.current?.scrollTop;
 
-      panelRefValue?.style.setProperty(
-        `--${blockClass}--scroll-animation-progress`,
-        (
+        const animationProgress =
           Math.min(Number(scrollTop), scrollAnimationDistance) /
-          scrollAnimationDistance
-        ).toString()
-      );
-    }, [scrollAnimationDistance, panelRefValue]);
+          scrollAnimationDistance;
+
+        panelRefValue?.style.setProperty(
+          `--${blockClass}--scroll-animation-progress`,
+          animationProgress.toString()
+        );
+
+        titleItemsStyles(animationProgress);
+      }
+    }, [
+      doAnimateTitle,
+      panelRefValue?.style,
+      scrollAnimationDistance,
+      titleItemsStyles,
+    ]);
 
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
@@ -364,12 +411,7 @@ export let SidePanel = React.forwardRef(
           scrollAnimationDistance.toString()
         );
 
-        let scrollEl = animatedScrollRef.current;
-
-        if (!scrollEl && animateTitle && !doAnimateTitle) {
-          // may be switching back based on resize
-          scrollEl = innerContentRef.current;
-        }
+        const scrollEl = innerContentRef.current;
 
         if (scrollEl) {
           const innerComputed = window?.getComputedStyle(
@@ -386,6 +428,7 @@ export let SidePanel = React.forwardRef(
               scrollAnimationDistance + innerPaddingHeight;
         }
       }
+
       if (doAnimateTitle !== canDoAnimateTitle) {
         // will need updating on resize
         setDoAnimateTitle(canDoAnimateTitle);
@@ -393,12 +436,6 @@ export let SidePanel = React.forwardRef(
     };
 
     useEffect(() => {
-      if (doAnimateTitle && animatedScrollRef.current) {
-        // only add scroll if the doAnimateTitle is already true
-        // should come back through if false and canDoAnimateTitle is true
-        animatedScrollRef.current.addEventListener('scroll', handleScroll);
-      }
-
       if (
         !doAnimateTitle &&
         (sidePanelRef as MutableRefObject<HTMLDivElement>).current
@@ -409,17 +446,13 @@ export let SidePanel = React.forwardRef(
         );
       }
     }, [
-      animatedScrollRef,
       doAnimateTitle,
       handleScroll,
       sidePanelRef,
-      panelRefValue,
+      innerContentRef,
+      open,
+      panelRefValue?.style,
     ]);
-
-    /* istanbul ignore next */
-    const handleResize = () => {
-      checkSetDoAnimateTitle();
-    };
 
     // Calculate scroll distances
     useEffect(() => {
@@ -446,7 +479,6 @@ export let SidePanel = React.forwardRef(
       size,
       reducedMotion.matches,
       id,
-      animatedScrollRef.current,
     ]);
 
     // click outside functionality if `includeOverlay` prop is set
@@ -600,7 +632,6 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}--slide-in`]: slideIn,
         [`${blockClass}--has-slug`]: slug,
         [`${blockClass}--condensed-actions`]: condensedActions,
-        [`${blockClass}--animated-title`]: doAnimateTitle,
         [`${blockClass}--has-overlay`]: includeOverlay,
       },
     ]);
@@ -752,16 +783,21 @@ export let SidePanel = React.forwardRef(
       return (
         <div
           ref={innerContentRef}
-          className={cx(`${blockClass}__inner-content`, {
-            [`${blockClass}--scrolls`]: !doAnimateTitle,
-          })}
+          onScroll={handleScroll}
+          className={cx(
+            `${blockClass}__inner-content`,
+            `${blockClass}--scrolls`,
+            `${
+              !doAnimateTitle
+                ? `${blockClass}__inner-content--no-animated-title`
+                : ''
+            }`
+          )}
         >
           {children}
         </div>
       );
     };
-
-    useResizeObserver(sidePanelRef, handleResize, [open]);
 
     return (
       <AnimatePresence>
@@ -784,26 +820,13 @@ export let SidePanel = React.forwardRef(
               custom={{ placement, shouldReduceMotion }}
               onKeyDown={keyDownListener}
             >
-              {doAnimateTitle ? (
-                <div
-                  ref={animatedScrollRef}
-                  className={`${blockClass}__animated-scroll-wrapper ${blockClass}--scrolls`}
-                >
-                  {/* header */}
-                  {renderHeader()}
+              <>
+                {/* header */}
+                {renderHeader()}
 
-                  {/* main */}
-                  {renderMain()}
-                </div>
-              ) : (
-                <>
-                  {/* header */}
-                  {renderHeader()}
-
-                  {/* main */}
-                  {renderMain()}
-                </>
-              )}
+                {/* main */}
+                {renderMain()}
+              </>
 
               {/* footer */}
               <MotionActionSet

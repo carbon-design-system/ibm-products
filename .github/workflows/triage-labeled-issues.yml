@@ -21,3 +21,11 @@ jobs:
       field_option: '🗺 Migration'
       project_number: '65'
     secrets: inherit
+  move-a11y-issues:
+    if: ${{contains(github.event.label.name, format('type{0} ally ♿', ':'))}}
+    uses: ./.github/workflows/move-issue-to-project-and-set-fields.yml
+    with:
+      field: 'Area'
+      field_option: '♿️ Accessibility'
+      project_number: '65'
+    secrets: inherit

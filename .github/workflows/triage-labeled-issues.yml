@@ -1,0 +1,23 @@
+name: Triages labeled issues by adding them to a specific project field
+
+on:
+  issues:
+    types: [ labeled ]
+
+jobs:
+  move-ts-issues:
+    if: ${{contains(github.event.label.name, format('area{0} typescript', ':'))}}
+    uses: ./.github/workflows/move-issue-to-project-and-set-fields.yml
+    with:
+      field: 'Area'
+      field_option: '🟦 Typescript'
+      project_number: '65'
+    secrets: inherit
+  move-migration-issues:
+    if: ${{contains(github.event.label.name, format('area{0} migration ➡️', ':'))}}
+    uses: ./.github/workflows/move-issue-to-project-and-set-fields.yml
+    with:
+      field: 'Area'
+      field_option: '🗺 Migration'
+      project_number: '65'
+    secrets: inherit

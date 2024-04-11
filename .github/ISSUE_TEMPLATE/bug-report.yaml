@@ -55,8 +55,10 @@ body:
   - type: input
     id: version
     attributes:
-      label: @carbon/ibm-products (or @carbon/ibm-cloud-cognitive) version
-      description: 'What version of the @carbon/ibm-products (or @carbon/ibm-cloud-cognitive) package are you using?'
+      label: '@carbon/ibm-products (or @carbon/ibm-cloud-cognitive) version'
+      description:
+        'What version of the @carbon/ibm-products (or
+        @carbon/ibm-cloud-cognitive) package are you using?'
       placeholder: e.g. v1.72.3
     validations:
       required: true
@@ -90,9 +92,12 @@ body:
     attributes:
       label: CodeSandbox example
       description:
-        'Our [Carbon for IBM Products Storybook](https://carbon-for-ibm-products.netlify.app/)
-        documentation includes links to codesandboxes for each
-        component. For example the SidePanel codesandbox [here](https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/SidePanel). Use those to help re-create the issue.'
+        'Our [Carbon for IBM Products
+        Storybook](https://carbon-for-ibm-products.netlify.app/) documentation
+        includes links to codesandboxes for each component. For example the
+        SidePanel codesandbox
+        [here](https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/SidePanel).
+        Use those to help re-create the issue.'
     validations:
       required: true
   - type: textarea

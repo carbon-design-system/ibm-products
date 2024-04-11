@@ -22,7 +22,7 @@ jobs:
       project_number: '65'
     secrets: inherit
   move-a11y-issues:
-    if: ${{contains(github.event.label.name, format('type{0} ally ♿', ':'))}}
+    if: ${{contains(github.event.label.name, format('type{0} a11y ♿', ':'))}}
     uses: ./.github/workflows/move-issue-to-project-and-set-fields.yml
     with:
       field: 'Area'

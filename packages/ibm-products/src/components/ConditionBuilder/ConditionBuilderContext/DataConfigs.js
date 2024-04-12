@@ -1,4 +1,4 @@
-import { tranlationsObject } from "./Translations";
+import { tranlationsObject } from './Translations';
 export const statementConfig = [
   {
     label: 'if',
@@ -86,14 +86,14 @@ export const operatorConfig = [
 
 function formatDate(date) {
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
-const tranlationsObjectCurrent=tranlationsObject['en'];
-export const translatewithId=(key)=>{
-  return tranlationsObjectCurrent[key]??key;
-}
+const tranlationsObjectCurrent = tranlationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
+export const translatewithId = (key) => {
+  return tranlationsObjectCurrent[key] ?? key;
+};
 
 export const valueRenderers = {
   text: (val) => val,
@@ -102,12 +102,12 @@ export const valueRenderers = {
     return Array.isArray(value) ? value.join(', ') : value;
   },
   date: (value) => {
-    if(Array.isArray(value) && value.length>1){
-      let start= value?.[0]?formatDate(new Date(value[0])):'';
-      let end = value?.[1]?formatDate(new Date(value[1])):'';
+    if (Array.isArray(value) && value.length > 1) {
+      let start = value?.[0] ? formatDate(new Date(value[0])) : '';
+      let end = value?.[1] ? formatDate(new Date(value[1])) : '';
       return `${start} To ${end}`;
-    }else{
-      return (value && new Date(value))?formatDate(new Date(value)):value;
+    } else {
+      return value && new Date(value) ? formatDate(new Date(value)) : value;
     }
   },
 };

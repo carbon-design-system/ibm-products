@@ -20,16 +20,21 @@ const componentName = ConditionBuilder.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const defaultProps = {
+  inputConfig: {},
+  popOverSearchThreshold: 4,
+  startConditionLabel: 'Add Condition',
+};
 
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
-    render(<ConditionBuilder inputConfig={{}}> </ConditionBuilder>);
+    render(<ConditionBuilder {...defaultProps}> </ConditionBuilder>);
     expect(screen.getByRole('main')).toHaveClass(cx(blockClass));
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <ConditionBuilder inputConfig={{}}> </ConditionBuilder>
+      <ConditionBuilder {...defaultProps}> </ConditionBuilder>
     );
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
@@ -42,7 +47,7 @@ describe(componentName, () => {
 
   it('applies className to the containing node', async () => {
     render(
-      <ConditionBuilder className={className} inputConfig={{}}>
+      <ConditionBuilder className={className} {...defaultProps}>
         {' '}
       </ConditionBuilder>
     );
@@ -51,7 +56,7 @@ describe(componentName, () => {
 
   it('adds additional props to the containing node', async () => {
     render(
-      <ConditionBuilder data-testid={dataTestId} inputConfig={{}}>
+      <ConditionBuilder data-testid={dataTestId} {...defaultProps}>
         {' '}
       </ConditionBuilder>
     );
@@ -61,7 +66,7 @@ describe(componentName, () => {
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(
-      <ConditionBuilder ref={ref} inputConfig={{}}>
+      <ConditionBuilder ref={ref} {...defaultProps}>
         {' '}
       </ConditionBuilder>
     );
@@ -70,7 +75,7 @@ describe(componentName, () => {
 
   it('adds the Devtools attribute to the containing node', async () => {
     render(
-      <ConditionBuilder data-testid={dataTestId} inputConfig={{}}>
+      <ConditionBuilder data-testid={dataTestId} {...defaultProps}>
         {' '}
       </ConditionBuilder>
     );

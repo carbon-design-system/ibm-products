@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { pkg } from '../../../settings';
+import PropTypes from 'prop-types';
 import { Button } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
 import {
@@ -9,7 +10,7 @@ import {
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
-function ConditionBuilderContent({startConditionLabel}) {
+function ConditionBuilderContent({ startConditionLabel }) {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionbuilderActive, setIsConditionbuilderActive] =
     useState(true);
@@ -17,19 +18,18 @@ function ConditionBuilderContent({startConditionLabel}) {
 
   useEffect(() => {
     if (rootState?.groups?.length) {
-        setIsConditionbuilderActive(false);
-        if (
-          rootState.groups[0].conditions.length == 1 &&
-          rootState.groups[0].conditions[0].property == undefined
-        ) {
-          // when the add condition clicked to start the condition building, we by default open the popover of the first property
-          setTimeout(() => {
+      setIsConditionbuilderActive(false);
+      if (
+        rootState.groups[0].conditions.length == 1 &&
+        rootState.groups[0].conditions[0].property == undefined
+      ) {
+        // when the add condition clicked to start the condition building, we by default open the popover of the first property
+        setTimeout(() => {
           conditionBuilderRef.current.querySelector('.propertyField').click();
-          }, 0);
-        }
-      
+        }, 0);
+      }
     } else {
-        setIsConditionbuilderActive(true);
+      setIsConditionbuilderActive(true);
     }
   }, [rootState]);
 
@@ -41,7 +41,10 @@ function ConditionBuilderContent({startConditionLabel}) {
   };
 
   return (
-    <div ref={conditionBuilderRef} className={`${blockClass}__content-container`}>
+    <div
+      ref={conditionBuilderRef}
+      className={`${blockClass}__content-container`}
+    >
       {isConditionbuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}
@@ -82,3 +85,10 @@ function ConditionBuilderContent({startConditionLabel}) {
 }
 
 export default ConditionBuilderContent;
+
+ConditionBuilderContent.propTypes = {
+  /**
+   * Provide a label to the button that starts condition builder
+   */
+  startConditionLabel: PropTypes.string.isRequired,
+};

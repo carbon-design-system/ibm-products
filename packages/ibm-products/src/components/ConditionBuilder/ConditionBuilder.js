@@ -65,7 +65,10 @@ export let ConditionBuilder = React.forwardRef(
     ref
   ) => {
     return (
-      <ConditionBuilderProvider inputConfig={inputConfig} popOverSearchThreshold={popOverSearchThreshold} >
+      <ConditionBuilderProvider
+        inputConfig={inputConfig}
+        popOverSearchThreshold={popOverSearchThreshold}
+      >
         <div
           {
             // Pass through any other property values as HTML attributes.
@@ -85,8 +88,9 @@ export let ConditionBuilder = React.forwardRef(
           {...getDevtoolsProps(componentName)}
         >
           <VStack>
-            
-            <ConditionBuilderContent startConditionLabel={startConditionLabel} />
+            <ConditionBuilderContent
+              startConditionLabel={startConditionLabel}
+            />
           </VStack>
         </div>
       </ConditionBuilderProvider>
@@ -114,16 +118,6 @@ ConditionBuilder.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-   /**
-   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
-   */
-   popOverSearchThreshold: PropTypes.number.isRequired,
-
-   /**
-   * Provide a label to the button that starts condition builder
-   */
-   startConditionLabel: PropTypes.string.isRequired,
-
   /**
    * This is a mandatory prop that defines the input to the condition builder.
    
@@ -148,6 +142,16 @@ ConditionBuilder.propTypes = {
       })
     ),
   }).isRequired,
+
+  /**
+   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   */
+  popOverSearchThreshold: PropTypes.number.isRequired,
+
+  /**
+   * Provide a label to the button that starts condition builder
+   */
+  startConditionLabel: PropTypes.string.isRequired,
 
   /* TODO: add types and DocGen for all props. */
 };

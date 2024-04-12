@@ -1,8 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-
-
 export const emptyState = {
   groups: [
     {
@@ -37,7 +35,14 @@ export const ConditionBuilderProvider = (props) => {
   });
 
   return (
-    <ConditionBuilderContext.Provider value={{ rootState, setRootState,inputConfig:props.inputConfig,popOverSearchThreshold:props.popOverSearchThreshold }}>
+    <ConditionBuilderContext.Provider
+      value={{
+        rootState,
+        setRootState,
+        inputConfig: props.inputConfig,
+        popOverSearchThreshold: props.popOverSearchThreshold,
+      }}
+    >
       {
         // eslint-disable-next-line react/prop-types
         props.children
@@ -77,6 +82,6 @@ ConditionBuilderProvider.propTypes = {
     ),
   }).isRequired,
 
-      popOverSearchThreshold: PropTypes.number.isRequired,
+  popOverSearchThreshold: PropTypes.number.isRequired,
   /* TODO: add types and DocGen for all props. */
 };

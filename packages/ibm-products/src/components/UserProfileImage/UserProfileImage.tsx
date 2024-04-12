@@ -194,7 +194,7 @@ export let UserProfileImage = React.forwardRef<
       return colors[Math.floor(Math.random() * colors.length)];
     };
 
-    const FillItem = getFillItem();
+    const FillItem = getFillItem() as React.ComponentType<any>;
 
     const renderUserProfileImage = () => (
       <div
@@ -212,7 +212,7 @@ export let UserProfileImage = React.forwardRef<
         ])}
         {...getDevtoolsProps(componentName)}
       >
-        {FillItem && <FillItem />}
+        <FillItem />
       </div>
     );
     return (

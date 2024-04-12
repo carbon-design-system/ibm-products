@@ -145,10 +145,9 @@ export let UserProfileImage = React.forwardRef<
       if (initials && initials.length === 2) {
         return initials;
       }
-
+      // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
+      // both return JW.
       return (
-        // RegEx takes in the display name and returns the first and last initials. Thomas Watson and Thomas J. Watson
-        // both return JW.
         (initials || '')
           .match(/(^\S\S?|\b\S)?/g)
           ?.join('')

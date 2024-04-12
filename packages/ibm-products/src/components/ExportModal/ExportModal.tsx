@@ -5,7 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, forwardRef, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useEffect,
+  ReactNode,
+} from 'react';
 import {
   Button,
   ComposedModal,
@@ -37,6 +43,111 @@ const defaults = {
   validExtensions: Object.freeze([]),
 };
 
+type InputType = 'text' | 'password';
+
+type PreformattedExtensions = {
+  extension?: string;
+  description?: string;
+};
+interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
+  /**
+   * Body content for the modal
+   */
+  body?: string;
+  /**
+   * Optional class name
+   */
+  className?: string;
+  /**
+   * specify if an error occurred
+   */
+  error?: boolean;
+  /**
+   * messaging to display in the event of an error
+   */
+  errorMessage?: string;
+  /**
+   * name of the file being exported
+   */
+  filename: string;
+  /**
+   * label text that's displayed when hovering over visibility toggler to hide key
+   */
+  hidePasswordLabel?: string;
+  /**
+   * label for the text input
+   */
+  inputLabel?: string;
+  /**
+   * specify the type of text input
+   */
+  inputType: InputType;
+  /**
+   * text for an invalid input
+   */
+  invalidInputText?: string;
+  /**
+   * specify if the modal is in a loading state
+   */
+  loading?: boolean;
+  /**
+   * message to display during the loading state
+   */
+  loadingMessage?: string;
+  /**
+   * Specify a handler for closing modal
+   */
+  onClose?: () => void;
+  /**
+   * Specify a handler for "submitting" modal. Returns the file name
+   */
+  onRequestSubmit?: (value?: string) => void;
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open?: boolean;
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: ReactNode;
+  /**
+   * Array of extensions to display as radio buttons
+   */
+  preformattedExtensions: readonly PreformattedExtensions[];
+  /**
+   * Label for the preformatted label form group
+   */
+  preformattedExtensionsLabel?: string;
+  /**
+   * Specify the text for the primary button
+   */
+  primaryButtonText: string;
+  /**
+   * Specify the text for the secondary button
+   */
+  secondaryButtonText: string;
+  /**
+   * label text that's displayed when hovering over visibility toggler to show key
+   */
+  showPasswordLabel?: string;
+  /**
+   * messaging to display if the export was successful
+   */
+  successMessage?: string;
+  /**
+   * specify if the export was successful
+   */
+  successful?: boolean;
+  /**
+   * The text displayed at the top of the modal
+   */
+  title: string;
+  /**
+   * array of valid extensions the file can have
+   */
+  validExtensions: readonly any[];
+}
+
 /**
  * Modal dialog version of the export pattern
  */
@@ -52,7 +163,7 @@ export let ExportModal = forwardRef(
       filename,
       hidePasswordLabel,
       inputLabel,
-      inputType = defaults.inputType,
+      inputType = 'text',
       invalidInputText,
       loading,
       loadingMessage,
@@ -72,7 +183,7 @@ export let ExportModal = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: React.PropsWithChildren<RemoveModalProps>,
     ref
   ) => {
     const [name, setName] = useState('');
@@ -83,7 +194,13 @@ export let ExportModal = forwardRef(
 
     useEffect(() => {
       setName(filename);
-      setExtension(preformattedExtensions?.[0]?.extension);
+      if (
+        preformattedExtensions &&
+        preformattedExtensions.length > 0 &&
+        preformattedExtensions[0]?.extension
+      ) {
+        setExtension(preformattedExtensions?.[0]?.extension);
+      }
     }, [filename, preformattedExtensions, open]);
 
     const onNameChangeHandler = (evt) => {
@@ -102,7 +219,7 @@ export let ExportModal = forwardRef(
       const returnName = extension
         ? `${filename}.${extension.toLocaleLowerCase()}`
         : name;
-      onRequestSubmit(returnName);
+      onRequestSubmit && onRequestSubmit(returnName);
     };
 
     const hasInvalidExtension = () => {
@@ -242,6 +359,7 @@ ExportModal.propTypes = {
   /**
    * Body content for the modal
    */
+  /**@ts-ignore*/
   body: PropTypes.string,
   /**
    * Optional class name
@@ -270,6 +388,7 @@ ExportModal.propTypes = {
   /**
    * specify the type of text input
    */
+  /**@ts-ignore */
   inputType: PropTypes.oneOf(['text', 'password']),
   /**
    * text for an invalid input
@@ -302,6 +421,7 @@ ExportModal.propTypes = {
   /**
    * Array of extensions to display as radio buttons
    */
+  /**@ts-ignore */
   preformattedExtensions: PropTypes.arrayOf(
     PropTypes.shape({
       extension: PropTypes.string,
@@ -339,6 +459,7 @@ ExportModal.propTypes = {
   /**
    * array of valid extensions the file can have
    */
+  /**@ts-ignore */
   validExtensions: PropTypes.array,
 };
 

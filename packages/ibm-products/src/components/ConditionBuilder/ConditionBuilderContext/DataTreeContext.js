@@ -1,111 +1,8 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-//sentene variant
-export const sampleDataStructure_sentence = {
-  groups: [
-    {
-      groupSeperateOperator: 'and', // 'or'|'and'|'null',
-      groupOperator: 'and', //'and|or',
-      statement: 'if', // 'if|exclude if',
-      conditions: [
-        {
-          property: 'region',
-          operator: 'is',
-          value: 'IL',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
-        },
-      ],
-    },
-  ],
-};
 
-export const sampleDataStructure_tree = {
-  groups: [
-    {
-      groupSeperateOperator: 'and', // 'or'|'and'|'null',
-      groupOperator: 'and', //'and|or',
-      statement: 'if', // 'if|exclude if',
-      conditions: [
-        {
-          property: 'region',
-          operator: 'is',
-          value: 'IL',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
-        },
-        //group object repeats
-        {
-          groupSeperateOperator: 'and', // 'or'|'and'|'null',
-          groupOperator: 'and', //'and|or',
-          statement: 'if', // 'if|exclude if',
-          conditions: [
-            {
-              property: 'region',
-              operator: 'is',
-              value: 'IL',
-            },
-            {
-              property: 'delivery',
-              operator: 'is',
-              value: 'processing',
-            },
-            {
-              property: 'delivery',
-              operator: 'is',
-              value: 'processing',
-            },
-            {
-              property: 'delivery',
-              operator: 'is',
-              value: 'processing',
-            },
-            //group object repeats
-            {
-              groupSeperateOperator: 'and', // 'or'|'and'|'null',
-              groupOperator: 'and', //'and|or',
-              statement: 'if', // 'if|exclude if',
-              conditions: [
-                {
-                  property: 'region',
-                  operator: 'is',
-                  value: 'IL',
-                },
-                {
-                  property: 'delivery',
-                  operator: 'is',
-                  value: 'processing',
-                },
-                //group object repeats
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+
+
 export const emptyState = {
   groups: [
     {
@@ -140,9 +37,7 @@ export const ConditionBuilderProvider = (props) => {
   });
 
   return (
-    <ConditionBuilderContext.Provider
-      value={{ rootState, setRootState, inputConfig: props.inputConfig }}
-    >
+    <ConditionBuilderContext.Provider value={{ rootState, setRootState,inputConfig:props.inputConfig,popOverSearchThreshold:props.popOverSearchThreshold }}>
       {
         // eslint-disable-next-line react/prop-types
         props.children
@@ -182,5 +77,6 @@ ConditionBuilderProvider.propTypes = {
     ),
   }).isRequired,
 
+      popOverSearchThreshold: PropTypes.number.isRequired,
   /* TODO: add types and DocGen for all props. */
 };

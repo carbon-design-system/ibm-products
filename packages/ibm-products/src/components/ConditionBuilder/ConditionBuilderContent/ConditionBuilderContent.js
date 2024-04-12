@@ -9,26 +9,27 @@ import {
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
-function ConditionBuilderContent() {
+function ConditionBuilderContent({startConditionLabel}) {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionbuilderActive, setIsConditionbuilderActive] =
     useState(true);
   const conditionBuilderRef = useRef();
 
   useEffect(() => {
-    if (!rootState?.groups || rootState?.groups.length == 0) {
-      setIsConditionbuilderActive(true);
-    } else {
-      setIsConditionbuilderActive(false);
-      if (
-        rootState.groups[0].conditions.length == 1 &&
-        rootState.groups[0].conditions[0].property == undefined
-      ) {
-        // when the add condition clicked to start the condition building, we by default open the popover of the first property
-        setTimeout(() => {
+    if (rootState?.groups?.length) {
+        setIsConditionbuilderActive(false);
+        if (
+          rootState.groups[0].conditions.length == 1 &&
+          rootState.groups[0].conditions[0].property == undefined
+        ) {
+          // when the add condition clicked to start the condition building, we by default open the popover of the first property
+          setTimeout(() => {
           conditionBuilderRef.current.querySelector('.propertyField').click();
-        }, 0);
-      }
+          }, 0);
+        }
+      
+    } else {
+        setIsConditionbuilderActive(true);
     }
   }, [rootState]);
 
@@ -40,17 +41,17 @@ function ConditionBuilderContent() {
   };
 
   return (
-    <div ref={conditionBuilderRef}>
+    <div ref={conditionBuilderRef} className={`${blockClass}__content-container`}>
       {isConditionbuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}
           renderIcon={(props) => <Add size={16} {...props} />}
-          iconDescription={'Add Condition'}
+          iconDescription={startConditionLabel}
           kind="ghost"
           size="sm"
-          onClick={() => onStartConditionbuilder()}
+          onClick={onStartConditionbuilder}
         >
-          Add Condition
+          {startConditionLabel}
         </Button>
       )}
 

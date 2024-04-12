@@ -13,6 +13,7 @@ import { ConditionBuilder } from '.';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss';
+import { inputData } from './assets/sampleInput';
 
 export default {
   title: `IBM Products/Components/ConditionBuilder`,
@@ -39,6 +40,9 @@ const Template = (args) => {
       // TODO: handle events with action or local handler.
       // onTodo={action('onTodo log action')}
       {...args}
+      inputConfig={inputData}
+      startConditionLabel={'Add Condition'}
+      popOverSearchThreshold={4}
     />
   );
 };

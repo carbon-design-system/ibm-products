@@ -18,7 +18,6 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
-import { inputData } from './sampleInput';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/DataTreeContext';
 
 // Carbon and package components we use.
@@ -55,7 +54,9 @@ export let ConditionBuilder = React.forwardRef(
 
       // children /* TODO: remove if not needed. */,
       className,
-      inputConfig = inputData,
+      inputConfig,
+      startConditionLabel,
+      popOverSearchThreshold,
       /* TODO: add other props for ConditionBuilder, with default values if needed */
 
       // Collect any other property values passed in.
@@ -64,7 +65,7 @@ export let ConditionBuilder = React.forwardRef(
     ref
   ) => {
     return (
-      <ConditionBuilderProvider inputConfig={inputConfig}>
+      <ConditionBuilderProvider inputConfig={inputConfig} popOverSearchThreshold={popOverSearchThreshold} >
         <div
           {
             // Pass through any other property values as HTML attributes.
@@ -84,7 +85,8 @@ export let ConditionBuilder = React.forwardRef(
           {...getDevtoolsProps(componentName)}
         >
           <VStack>
-            <ConditionBuilderContent />
+            
+            <ConditionBuilderContent startConditionLabel={startConditionLabel} />
           </VStack>
         </div>
       </ConditionBuilderProvider>
@@ -112,6 +114,15 @@ ConditionBuilder.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+   /**
+   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   */
+   popOverSearchThreshold: PropTypes.number.isRequired,
+
+   /**
+   * Provide a label to the button that starts condition builder
+   */
+   startConditionLabel: PropTypes.string.isRequired,
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.

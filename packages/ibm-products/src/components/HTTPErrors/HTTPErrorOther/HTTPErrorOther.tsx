@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, Ref } from 'react';
 
 // Other standard imports.
 import cx from 'classnames';
@@ -21,13 +21,54 @@ import { pkg } from '../../../settings';
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrorOther';
 
+interface HTTPErrorOtherProps extends PropsWithChildren {
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+  /**
+   * String that will provide the description for the HTTP error code
+   */
+  description: string;
+  /**
+   * String that will describe the error that occurred
+   */
+  errorCodeLabel: string;
+  /**
+   * Links that will display for extra context when receiving particular errors
+   */
+  links: Array<{
+    /**
+     * The text to display for the link
+     */
+    text: string;
+    /**
+     * The link's destination
+     */
+    href: string;
+  }>;
+  /**
+   * This will be for the main title of the HTTP error component
+   */
+  title: string;
+}
 /**
  * HTTP errors are used in an attempt to access something that isn’t available or
 the user doesn’t have permission for. This HTTPError component is generic so you
 can use it when you receive an error code that isn't provided.
  */
 export let HTTPErrorOther = React.forwardRef(
-  ({ className, description, errorCodeLabel, links, title, ...rest }, ref) => {
+  (
+    {
+      className,
+      description,
+      errorCodeLabel,
+      links,
+      title,
+      ...rest
+    }: HTTPErrorOtherProps,
+    ref: Ref<HTMLDivElement>
+  ) => {
     return (
       <div
         {...rest}
@@ -68,6 +109,7 @@ HTTPErrorOther.propTypes = {
   /**
    * Links that will display for extra context when receiving particular errors
    */
+  /**@ts-ignore */
   links: arrayOf(
     shape({
       /**

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.31.0...@carbon/ibm-products-styles@2.32.0) (2024-04-02)
+
+
+### Features
+
+* **FilterPanel:** added accordion and group ([#4620](https://github.com/carbon-design-system/ibm-products/issues/4620)) ([ade8310](https://github.com/carbon-design-system/ibm-products/commit/ade8310e1d834a7e00fa82f55d02367e28ae71bb))
+* **FilterPanel:** added checkbox with overflow ([#4594](https://github.com/carbon-design-system/ibm-products/issues/4594)) ([c08c303](https://github.com/carbon-design-system/ibm-products/commit/c08c3035180ef7381380db82f9f1ec47e403fa9b))
+* **ScrollGradient:** new component ScrollGradient ([#4446](https://github.com/carbon-design-system/ibm-products/issues/4446)) ([75e1622](https://github.com/carbon-design-system/ibm-products/commit/75e162243e5e00d9d923d592118d6692fcae9423))
+* **useravatar:** color tokens implementation ([#4608](https://github.com/carbon-design-system/ibm-products/issues/4608)) ([de8604b](https://github.com/carbon-design-system/ibm-products/commit/de8604b532a392e9e5093d2135913b4a712e8da0))
+
+
+
+
+
+# [2.31.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.30.1...@carbon/ibm-products-styles@2.31.0) (2024-03-26)
+
+
+### Features
+
+* **FilterPanel:** new component with label and checkbox ([#4563](https://github.com/carbon-design-system/ibm-products/issues/4563)) ([5412e39](https://github.com/carbon-design-system/ibm-products/commit/5412e398c70680f0ea7bf26c807e8ed0a49d0440))
+
+
+
+
+
 ## [2.30.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.30.0...@carbon/ibm-products-styles@2.30.1) (2024-03-14)
 
 

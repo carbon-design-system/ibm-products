@@ -2372,10 +2372,14 @@ p.c4p--about-modal__copyright-text:first-child {
   z-index: 4;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: calc(-1px * var(--c4p--side-panel--scroll-animation-distance));
+  min-height: 2.5rem;
   padding: 1rem;
   padding-bottom: 0;
   background-color: var(--cds-layer-01, #f4f4f4);
   /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--side-panel .c4p--side-panel__header.c4p--side-panel__header--has-title {
+  min-height: auto;
 }
 .c4p--side-panel .c4p--side-panel__header:has(.c4p--side-panel__subtitle-text), .c4p--side-panel .c4p--side-panel__header.c4p--side-panel__header--has-subtitle {
   --c4p--side-panel--title-padding-bottom: 0.5rem;
@@ -2412,9 +2416,6 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel .c4p--side-panel__header.c4p--side-panel__header--reduced-motion.c4p--side-panel__header--no-title-animation {
   border-bottom: 0;
   margin-bottom: 0;
-}
-.c4p--side-panel .c4p--side-panel__header.c4p--side-panel__header--on-detail-step .c4p--side-panel__collapsed-title-text {
-  top: 1rem;
 }
 .c4p--side-panel .c4p--side-panel__header.c4p--side-panel__header--on-detail-step .c4p--side-panel__navigation-back-button.cds--btn--md ~ .c4p--side-panel__collapsed-title-text {
   top: 1.5rem;
@@ -2519,6 +2520,9 @@ p.c4p--about-modal__copyright-text:first-child {
   padding: 1rem;
   padding-top: 0;
 }
+.c4p--side-panel .c4p--side-panel__inner-content--no-animated-title {
+  padding-top: 1rem;
+}
 .c4p--side-panel .c4p--side-panel__header:has(.c4p--side-panel__action-toolbar) + .c4p--side-panel__inner-content,
 .c4p--side-panel .c4p--side-panel__header--has-action-toolbar + .c4p--side-panel__inner-content {
   padding-top: 0.5rem;
@@ -2526,9 +2530,6 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel.c4p--side-panel--has-slug .c4p--side-panel--scrolls {
   background: linear-gradient(to top, var(--cds-layer, var(--cds-background, #ffffff)) 0%, var(--cds-ai-aura-start, rgba(69, 137, 255, 0.1)) 0%, var(--cds-ai-aura-end, rgba(255, 255, 255, 0)) 50%) padding-box, linear-gradient(to top, var(--cds-layer, var(--cds-background, #ffffff)), var(--cds-layer, var(--cds-background, #ffffff))) padding-box, linear-gradient(to bottom, var(--cds-ai-border-start, #78a9ff), var(--cds-ai-border-end, #d0e2ff)) border-box, linear-gradient(to top, var(--cds-layer, var(--cds-background, #ffffff)), var(--cds-layer, var(--cds-background, #ffffff))) border-box;
   box-shadow: inset 0 -80px 70px -65px var(--cds-ai-inner-shadow, rgba(69, 137, 255, 0.2)), 0 4px 10px 2px var(--cds-ai-drop-shadow, rgba(15, 98, 254, 0.32));
-}
-.c4p--side-panel .c4p--side-panel__inner-content.c4p--side-panel--scrolls {
-  padding-top: 1rem;
 }
 .c4p--side-panel .c4p--side-panel__action-toolbar {
   position: sticky;
@@ -3878,7 +3879,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--data-table td.c4p--datagrid__expandable-row-cell + td,
-.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2) {
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2),
+.cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__cell:nth-of-type(2) + td {
   position: relative;
 }
 
@@ -9012,6 +9014,10 @@ button.c4p--add-select__global-filter-toggle--open {
   z-index: 7999;
 }
 
+.c4p--card__productive {
+  display: flex;
+  flex-direction: column;
+}
 .c4p--card__productive .c4p--card__title {
   font-size: var(--cds-heading-compact-02-font-size, 1rem);
   font-weight: var(--cds-heading-compact-02-font-weight, 600);
@@ -9086,6 +9092,14 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--card__productive .c4p--card__header-container {
   align-items: flex-start;
+}
+.c4p--card__productive .c4p--card__content-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.c4p--card__productive .c4p--card__header-body-container {
+  flex: 1;
 }
 
 .c4p--remove-modal .cds--modal-footer .cds--btn {

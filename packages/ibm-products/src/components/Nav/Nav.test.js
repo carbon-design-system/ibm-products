@@ -113,7 +113,7 @@ describe(componentName, () => {
       render(
         <Nav className={className} heading={navLabel} label={navLabel}>
           <NavList
-            isExpandedOnPageload={true}
+            isExpandedOnPageLoad
             data-testid={dataTestId}
             title="Nav list 1"
           >

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -14,7 +14,8 @@
   "files": [
     "dist/**/*",
     "README.md",
-    "*.js"
+    "*.js",
+    "telemetry.yml"
   ],
   "keywords": [
     "addon",
@@ -34,6 +35,7 @@
     "clean": "rimraf dist",
     "build": "run-s clean build:js",
     "build:js": "babel src --out-dir dist -s",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
     "prepare": "npm run build",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
@@ -43,6 +45,7 @@
     "vue": "*"
   },
   "dependencies": {
+    "@ibm/telemetry-js": "^1.3.0",
     "@storybook/addons": "^7.6.10",
     "@storybook/api": "^7.6.10",
     "@storybook/client-api": "^7.6.10",

@@ -55,6 +55,10 @@ module.exports = {
   // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
   webpackFinal: async (configuration, { configType }) =>
     merge(configuration, {
+      optimization: {
+        removeAvailableModules: true,
+        removeEmptyChunks: true,
+      },
       cache: {
         type: 'filesystem',
         allowCollectingMemory: true,

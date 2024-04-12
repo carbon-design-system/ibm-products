@@ -30,19 +30,20 @@
     "clean:packages": "yarn run-all --no-sort clean",
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
-    "format": "prettier ./packages/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
+    "format": "prettier ./packages/**/*.{js,jsx,tsx,md,mdx,scss} --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss'",
     "prepare": "husky install",
+    "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
     "test:community": "lerna run --stream --scope @carbon/ibm-products-community test --",
-    "spellcheck": "cspell '**' -e './examples' --gitignore",
+    "spellcheck": "cspell '**' -e './examples' --gitignore --quiet",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
@@ -184,6 +185,7 @@
           "perf",
           "refactor",
           "revert",
+          "style",
           "test"
         ]
       ]
@@ -197,7 +199,7 @@
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
-      "npx stylelint"
+      "npx stylelint --allow-empty-input"
     ],
     "!(examples/**/*).md": [
       "npx prettier --cache --write",

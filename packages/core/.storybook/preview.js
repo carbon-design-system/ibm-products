@@ -50,7 +50,7 @@ const decorators = [
     JSON.stringify(args.featureFlags);
 
     return (
-      <div className="preview-position-fix">
+      <div className="preview-position-fix story-wrapper">
         <Style styles={index}>
           {args.featureFlags ? (
             <ActionableNotification

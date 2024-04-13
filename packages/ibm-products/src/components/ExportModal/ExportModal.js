@@ -119,7 +119,10 @@ export let ExportModal = forwardRef(
     const blockClass = `${pkg.prefix}--export-modal`;
     const internalId = useRef(uuidv4());
     const primaryButtonDisabled =
-      loading || !name?.trim() || inputProps?.invalid || hasInvalidExtension();
+      inputProps?.invalid ||
+      loading ||
+      (inputType === 'text' ? !name?.trim() : !name) ||
+      hasInvalidExtension();
     const submitted = loading || error || successful;
 
     const commonInputProps = {

@@ -1,0 +1,97 @@
+name: Add issue to project and set field and field option given a specific label
+on:
+  workflow_call:
+    inputs:
+      field:
+        default: ''
+        type: string
+        required: true
+      field_option:
+        default: ''
+        type: string
+        required: true
+      project_number:
+        default: ''
+        type: string
+        required: true
+
+jobs:
+  move_to_project_field:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get project data
+        env:
+          GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+        run: |
+          gh api graphql -f query='
+          query($org: String!, $number: Int!) {
+            organization(login: $org){
+              projectV2(number: $number) {
+                id
+                fields(first:20) {
+                  nodes {
+                    ... on ProjectV2Field {
+                      id
+                      name
+                    }
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      name
+                      options {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }' -f org=${{ github.repository_owner }} -F number=${{ inputs.project_number }} > project_data.json
+
+          echo 'Field and field option are: "${{ inputs.field }}: ${{ inputs.field_option }}"'
+          echo 'PROJECT_ID='$(jq '.data.organization.projectV2.id' project_data.json) >> $GITHUB_ENV
+          echo 'FIELD_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name=="${{ inputs.field }}") | .id' project_data.json) >> $GITHUB_ENV
+          echo 'FIELD_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name=="${{ inputs.field }}") | .options[] | select(.name=="${{ inputs.field_option }}") |.id' project_data.json) >> $GITHUB_ENV
+
+      - name: Add issue to project
+        env:
+          GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+          ISSUE_ID: ${{ github.event.issue.node_id }}
+        # Uses [GitHub CLI](https://cli.github.com/manual/) and the API to add the issue that triggered this workflow to the project. The `jq` flag parses the response to get the ID of the created item.
+        run: |
+          item_id="$( gh api graphql -f query='
+            mutation($project:ID!, $issue:ID!) {
+              addProjectV2ItemById(input: {projectId: $project, contentId: $issue}) {
+                item {
+                  id
+                }
+              }
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID --jq '.data.addProjectV2ItemById.item.id')"
+
+            echo 'ITEM_ID='$item_id >> $GITHUB_ENV
+
+      - name: Set field value
+        env:
+          GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+        # Sets the value of the `field` to the specified `field_option`.
+        run: |
+          gh api graphql -f query='
+            mutation (
+              $project: ID!
+              $item: ID!
+              $field_id: ID!
+              $field_option: String!
+            ) {
+              set_field: updateProjectV2ItemFieldValue(input: {
+                projectId: $project
+                itemId: $item
+                fieldId: $field_id
+                value: {
+                  singleSelectOptionId: $field_option
+                  }
+              }) {
+                projectV2Item {
+                  id
+                  }
+              }
+            }' -f project=$PROJECT_ID -f item=$ITEM_ID -f field_id=$FIELD_ID -f field_option=${{ env.FIELD_OPTION_ID }} --silent

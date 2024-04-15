@@ -179,6 +179,7 @@ export let PageHeader = React.forwardRef(
     const handleCollapseToggle = () => {
       utilSetCollapsed(
         !fullyCollapsed,
+        headerRef,
         metrics.headerOffset,
         metrics.headerTopValue
       );
@@ -440,13 +441,20 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       if (collapseHeader === true) {
+        console.log(metrics.headerOffset, metrics.headerTopValue);
         utilSetCollapsed(
           collapseHeader,
+          headerRef,
           metrics.headerOffset,
           metrics.headerTopValue
         );
       }
-    }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
+    }, [
+      collapseHeader,
+      metrics.headerOffset,
+      metrics.headerTopValue,
+      headerRef,
+    ]);
 
     useResizeObserver(sizingContainerRef, handleResizeActionBarColumn);
     useResizeObserver(headerRef, handleResize);

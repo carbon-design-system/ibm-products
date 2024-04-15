@@ -97,7 +97,8 @@ body:
         includes links to codesandboxes for each component. For example the
         SidePanel codesandbox
         [here](https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/SidePanel).
-        Use those to help re-create the issue.'
+        Use those to help re-create the issue or include a link to the
+        issue in Storybook.'
     validations:
       required: true
   - type: textarea

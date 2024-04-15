@@ -441,7 +441,6 @@ export let PageHeader = React.forwardRef(
 
     useEffect(() => {
       if (collapseHeader === true) {
-        console.log(metrics.headerOffset, metrics.headerTopValue);
         utilSetCollapsed(
           collapseHeader,
           headerRef,

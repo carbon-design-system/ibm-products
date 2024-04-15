@@ -90,7 +90,7 @@ body:
   - type: input
     id: example-url
     attributes:
-      label: CodeSandbox example
+      label: CodeSandbox or Stackblitz example
       description:
         'Our [Carbon for IBM Products
         Storybook](https://carbon-for-ibm-products.netlify.app/) documentation

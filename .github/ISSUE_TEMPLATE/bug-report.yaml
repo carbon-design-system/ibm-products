@@ -83,8 +83,8 @@ body:
   - type: input
     id: application
     attributes:
-      label: Application/website
-      description: 'What application/website do you work on?'
+      label: Product/offering
+      description: 'What product/offering do you work on?'
     validations:
       required: true
   - type: input

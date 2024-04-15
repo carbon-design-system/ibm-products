@@ -37,7 +37,7 @@
     "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
     "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss' 'scripts/**/*.scss' 'examples/**/src/*.scss'",
     "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
-    "prepare": "husky install",
+    "postinstall": "husky",
     "run-all": "nx run-many --target=build --all --exclude=@carbon/ibm-cloud-cognitive-core",
     "test": "run-p -s 'test:*'",
     "test:cdai": "lerna run --stream --scope @carbon/ibm-cloud-cognitive-cdai test --",

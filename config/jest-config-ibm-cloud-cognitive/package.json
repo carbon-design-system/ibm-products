@@ -22,28 +22,28 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^16.14.12"
+    "npm-check-updates": "^16.14.18"
   },
   "peerDependencies": {
     "jest": "^29.7.0"
   },
   "dependencies": {
-    "@babel/core": "^7.23.9",
+    "@babel/core": "^7.24.4",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-export-default-from": "^7.17.12",
+    "@babel/plugin-proposal-export-default-from": "^7.24.1",
     "@babel/plugin-proposal-export-namespace-from": "^7.17.12",
-    "@babel/plugin-transform-runtime": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "@testing-library/jest-dom": "^6.3.0",
-    "accessibility-checker": "^3.1.65",
-    "axe-core": "^4.8.3",
+    "@babel/plugin-transform-runtime": "^7.24.3",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
+    "@testing-library/jest-dom": "^6.4.2",
+    "accessibility-checker": "^3.1.68",
+    "axe-core": "^4.9.0",
     "babel-jest": "^29.7.0",
     "babel-preset-ibm-cloud-cognitive": "^0.14.40",
     "chalk": "^4.1.2",
     "identity-obj-proxy": "^3.0.0",
     "jest-circus": "^29.7.0",
-    "jest-watch-typeahead": "^2.0.0",
-    "sass": "^1.51.0"
+    "jest-watch-typeahead": "^2.2.2",
+    "sass": "^1.75.0"
   }
 }

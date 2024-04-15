@@ -2,7 +2,7 @@ name: Bug report 🐛
 description:
   Something isn't working as expected? Here is the right place to report.
 title: '[YOUR TITLE]: Brief description'
-labels: 'type: bug'
+labels: ['type: bug', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:
@@ -20,7 +20,7 @@ body:
       description: Which package(s) are you using?
       multiple: true
       options:
-        - 'Carbon for IBM Products (or Carbon for IBM Cloud & Cognitive)'
+        - 'Carbon for IBM Products'
         - 'Legacy/CDAI'
         - 'Legacy/Security'
     validations:
@@ -55,9 +55,10 @@ body:
   - type: input
     id: version
     attributes:
-      label: '@carbon/ibm-products (or @carbon/ibm-cloud-cognitive) version'
+      label:
+        '@carbon/ibm-products (previously @carbon/ibm-cloud-cognitive) version'
       description:
-        'What version of the @carbon/ibm-products (or
+        'What version of the @carbon/ibm-products (previously
         @carbon/ibm-cloud-cognitive) package are you using?'
       placeholder: e.g. v1.72.3
     validations:
@@ -97,8 +98,8 @@ body:
         includes links to codesandboxes for each component. For example the
         SidePanel codesandbox
         [here](https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/SidePanel).
-        Use those to help re-create the issue or include a link to the
-        issue in Storybook.'
+        Use those to help re-create the issue or include a link to the issue in
+        Storybook.'
     validations:
       required: true
   - type: textarea
@@ -123,5 +124,5 @@ body:
           required: true
         - label:
             I checked the [current
-            issues](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues)
+            issues](https://github.com/carbon-design-system/ibm-products/issues)
             for duplicate issues

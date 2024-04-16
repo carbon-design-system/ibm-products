@@ -8,6 +8,8 @@
 const { merge } = require('webpack-merge');
 const { dirname, join, resolve } = require('path');
 
+const maxAssetSize = 1024 * 1024;
+
 module.exports = {
   staticDirs: ['../public'],
   addons: [
@@ -58,6 +60,14 @@ module.exports = {
       optimization: {
         removeAvailableModules: true,
         removeEmptyChunks: true,
+        splitChunks: {
+          chunks: 'all',
+          minSize: 30 * 1024,
+          maxSize: maxAssetSize,
+        },
+      },
+      performance: {
+        maxAssetSize: maxAssetSize,
       },
       cache: {
         type: 'filesystem',

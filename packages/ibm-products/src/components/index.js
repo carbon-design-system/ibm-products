@@ -77,6 +77,7 @@ export {
   useFiltering,
   getAutoSizedColumnWidth,
   useFilterContext,
+  useEditableCell,
 } from './Datagrid';
 export { EditTearsheet, EditTearsheetForm } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
@@ -121,6 +122,7 @@ export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { ScrollGradient } from './ScrollGradient';
 export { StatusIndicator } from './StatusIndicator';
+export { TagOverflow } from './TagOverflow';
 export { ActionBar } from './ActionBar';
 export {
   FilterPanel,
@@ -132,3 +134,4 @@ export {
   FilterPanelLabel,
   FilterPanelSearch,
 } from './FilterPanel';
+export { ConditionBuilder } from './ConditionBuilder';

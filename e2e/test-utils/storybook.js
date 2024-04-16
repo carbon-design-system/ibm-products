@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const { expect } = require('@playwright/test');
+
 async function visitStory(page, options) {
   const { component, story, id, globals, args } = options;
   let url = getStoryUrl({
@@ -32,6 +34,7 @@ async function visitStory(page, options) {
   }
 
   await page.goto(url);
+  await expect(page).toContainAStory(options);
 }
 
 function getStoryUrl({ component, story, id }) {

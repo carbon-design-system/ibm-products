@@ -78,7 +78,7 @@ export let CoachmarkFixed = React.forwardRef(
 
     const handleTransitionEnd = (e) => {
       console.log(
-        'Hererrrrrreee at transition end... ',
+        'Here at transition end... ',
         e.propertyName === 'transform' && !fixedIsVisible
       );
       if (e.propertyName === 'transform' && !fixedIsVisible) {

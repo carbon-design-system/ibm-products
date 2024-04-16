@@ -53,7 +53,7 @@ const Template = (args) => {
             Nav item 1-2
           </NavItem>
         </NavList>
-        <NavList title="Nav list 2 expanded on page load" isExpandedOnPageload>
+        <NavList title="Nav list 2 expanded on page load" isExpandedOnPageLoad>
           <NavItem key="navitem_2-1" href="#navitem_2-1">
             Nav item 2-1 - Lorem ipsum dolor sit amet, consectetur adipiscing
             elit, sed do eiusmod tempor incididunt ut labore et dolore magna

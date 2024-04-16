@@ -7,6 +7,9 @@
 
 const { merge } = require('webpack-merge');
 const { dirname, join, resolve } = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const maxAssetSize = 1024 * 1024;
 
 module.exports = {
   staticDirs: ['../public'],
@@ -55,6 +58,27 @@ module.exports = {
   // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
   webpackFinal: async (configuration, { configType }) =>
     merge(configuration, {
+      optimization: {
+        removeAvailableModules: true,
+        removeEmptyChunks: true,
+        splitChunks: {
+          chunks: 'all',
+          minSize: 30 * 1024,
+          maxSize: maxAssetSize,
+        },
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            minify: TerserPlugin.esbuildMinify,
+            terserOptions: {
+              minify: true,
+            },
+          }),
+        ],
+      },
+      performance: {
+        maxAssetSize: maxAssetSize,
+      },
       cache: {
         type: 'filesystem',
         allowCollectingMemory: true,

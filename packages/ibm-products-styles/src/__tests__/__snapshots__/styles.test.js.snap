@@ -1908,22 +1908,20 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
-.c4p--create-full-page .c4p--create-full-page {
+.c4p--create-full-page {
+  display: grid;
+  height: 100%;
   color: var(--cds-text-primary, #161616);
+  grid-template-rows: minmax(auto, 100%);
+}
+.c4p--create-full-page:has(.c4p--create-full-page__header) {
+  grid-template-rows: auto minmax(auto, 100%);
 }
 
 .c4p--create-full-page .c4p--create-full-page__content .cds--grid {
   padding-top: 1.5rem;
   margin-right: 0;
   margin-left: 0;
-}
-
-.c4p--create-full-page__header {
-  position: sticky;
-  z-index: 9;
-  top: 0;
-  right: 0;
-  left: 0;
 }
 
 .c4p--create-full-page .c4p--create-full-page__step__step--hidden-step {
@@ -1964,7 +1962,8 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .c4p--create-full-page__influencer-and-body-container {
   display: flex;
-  height: 100vh;
+  overflow: hidden;
+  max-height: 100%;
   padding: 0;
   margin: 0;
 }

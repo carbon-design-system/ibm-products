@@ -1,0 +1,12 @@
+{
+  "label": "Condition-Builder",
+  "package-config": {
+    "flags": {
+      "component": {
+        "ConditionBuilder": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

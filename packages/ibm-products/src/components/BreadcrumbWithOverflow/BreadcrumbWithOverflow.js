@@ -45,6 +45,7 @@ export let BreadcrumbWithOverflow = ({
   maxVisible,
   noTrailingSlash,
   overflowAriaLabel,
+  overflowTooltipAlign,
   ...other
 }) => {
   const carbonPrefix = usePrefix();
@@ -60,6 +61,7 @@ export let BreadcrumbWithOverflow = ({
     return (
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
+          align={overflowTooltipAlign}
           aria-label={overflowAriaLabel}
           iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
           renderIcon={(props) => (
@@ -382,6 +384,10 @@ BreadcrumbWithOverflow.propTypes = {
   overflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbs }) => breadcrumbs.length > 1
   ),
+  /**
+   * overflowTooltipAlign: align tooltip position
+   */
+  overflowTooltipAlign: Tooltip.propTypes.align
 };
 
 BreadcrumbWithOverflow.displayName = componentName;

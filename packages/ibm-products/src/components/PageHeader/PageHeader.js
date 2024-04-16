@@ -521,6 +521,7 @@ export let PageHeader = React.forwardRef(
                               ? [breadcrumbItemForTitle]
                               : breadcrumbs // breadcrumbs may be null or undefined
                           }
+                          overflowTooltipAlign="right"
                         />
                       ) : null}
                     </Column>

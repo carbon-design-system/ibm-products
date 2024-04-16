@@ -6,7 +6,15 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import { Close, Crossroads, Idea } from '@carbon/react/icons';
@@ -36,7 +44,89 @@ const defaults = {
   withLeftGutter: false,
   onClick: () => {},
   onClose: () => {},
+  title: 'Use case-specific heading',
 };
+
+type MediaType = {
+  render?: () => ReactNode;
+  filePaths?: string[];
+};
+
+interface InlineTipProps {
+  /**
+   * Optional "call to action" ghost button or link that can appear
+   * directly below the content. This component comes with pre-styled
+   * elements available to use: `InlineTipLink` and `InlineTipButton`.
+   */
+  action?: ReactNode;
+  /**
+   * Provide the contents of the InlineTip.
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * The label for the collapse button.
+   * This button is not visible if `media` is specified.
+   */
+  collapseButtonLabel?: string;
+  /**
+   * If set to `true`, it will truncate the body text to
+   * one line and expose an expand/collapse button toggle.
+   *
+   * This feature is disabled if `media` is specified.
+   */
+  collapsible?: boolean;
+  /**
+   * The label for the expand button.
+   * This button is not visible if `media` is specified.
+   */
+  expandButtonLabel?: string;
+  /**
+   * The object describing an image in one of two shapes.
+   * - If a single media element is required, use `{render}`.
+   * - If a stepped animation is required, use `{filePaths}`.
+   *
+   * Enabling `media` disables the `collapsible` feature.
+   */
+  media: MediaType;
+  /**
+   * Set to `true` to arrange the information in a format
+   * that is easier to read in a limited space.
+   */
+  narrow?: boolean;
+  /**
+   * Function to call when the tertiary button is clicked.
+   */
+  onClick?: () => void;
+  /**
+   * Function to call when the InlineTip is closed via the "X" button.
+   */
+  onClose?: () => void;
+  /**
+   * Defining the label will show a the tertiary button with the crossroads icon.
+   * You will still need to define the `onClose` method to trigger a callback.
+   */
+  tertiaryButtonLabel?: string;
+  /**
+   * The title of the InlineTip.
+   */
+  title: string;
+  /**
+   * If true, insert 1 rem of "space" on the left of the component.
+   * This will allow the component's content to line up with other
+   * content on the page under special circumstances.
+   *
+   * This will only be applied when `narrow` is false.
+   */
+  withLeftGutter?: boolean;
+}
 
 /**
  * Inline tips are messages embedded within other components that
@@ -61,8 +151,8 @@ export let InlineTip = React.forwardRef(
       title = defaults.title,
       withLeftGutter = defaults.withLeftGutter,
       ...rest
-    },
-    ref
+    }: PropsWithChildren<InlineTipProps>,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [isCollapsed, setIsCollapsed] = useState(collapsible);
     const labelId = useRef(uuidv4()).current;
@@ -221,6 +311,7 @@ InlineTip.propTypes = {
    *
    * Enabling `media` disables the `collapsible` feature.
    */
+  /**@ts-ignore*/
   media: PropTypes.oneOfType([
     PropTypes.shape({
       render: PropTypes.func,

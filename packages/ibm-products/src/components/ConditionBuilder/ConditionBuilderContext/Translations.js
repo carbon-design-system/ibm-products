@@ -1,4 +1,4 @@
-export const tranlationsObject = {
+export const translationsObject = {
   en: {
     if: 'if',
     'excl-if': 'excl.if',

@@ -1,13 +1,19 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
-import lottie from 'lottie-web';
+import React, {
+  ForwardedRef,
+  useEffect,
+  useRef,
+  useState,
+  MutableRefObject,
+} from 'react';
+import lottie, { type AnimationItem } from 'lottie-web';
 import clamp from 'lodash/clamp';
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -27,6 +33,21 @@ const defaults = {
   playStep: 0,
 };
 
+interface SteppedAnimatedMediaProps {
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * The file path(s) to json formatted Lottie animation files.
+   */
+  filePaths: string[] | undefined;
+  /**
+   * Which animation step from the filePaths array to play.
+   */
+  playStep?: number;
+}
+
 /**
  * The SteppedAnimatedMedia is a Novice to Pro internal component and is not intended for general use.
  */
@@ -38,13 +59,15 @@ export const SteppedAnimatedMedia = React.forwardRef(
       playStep = defaults.playStep,
       filePaths,
       ...rest
-    },
-    ref
+    }: SteppedAnimatedMediaProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const [jsonData, setJsonData] = useState([]);
-    const animRef = useRef();
-    const backupRef = useRef();
+    const [jsonData, setJsonData] = useState<object[]>([]);
+    const animRef = useRef<AnimationItem>();
+    const backupRef = useRef<HTMLDivElement>(null);
     const localRef = ref ?? backupRef;
+    const localRefValue = (localRef as MutableRefObject<HTMLDivElement>)
+      .current;
     // load animation source
     useEffect(() => {
       const isJsonFile = (filePath) => filePath.includes('.json');
@@ -64,10 +87,10 @@ export const SteppedAnimatedMedia = React.forwardRef(
       const prefersReducedMotion = window?.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
         : true;
-      if (localRef.current) {
+      if (localRefValue) {
         animRef.current?.destroy();
         animRef.current = lottie.loadAnimation({
-          container: localRef.current,
+          container: localRefValue,
           renderer: 'svg',
           animationData: jsonData[clamp(playStep, 0, jsonData.length - 1)],
           loop: false,
@@ -82,7 +105,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
       }
 
       return () => animRef.current?.destroy();
-    }, [jsonData, localRef, playStep]);
+    }, [jsonData, localRefValue, playStep]);
 
     if (!jsonData) {
       return null;
@@ -110,6 +133,7 @@ SteppedAnimatedMedia.propTypes = {
   /**
    * The file path(s) to json formatted Lottie animation files.
    */
+  /**@ts-ignore*/
   filePaths: PropTypes.arrayOf(PropTypes.string).isRequired,
   /**
    * Which animation step from the filePaths array to play.

@@ -38,8 +38,6 @@ body:
     attributes:
       label: Design link
       description: Provide link to design of example of existing component
-    validations:
-      required: true
   - type: textarea
     id: materials
     attributes:

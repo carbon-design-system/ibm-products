@@ -134,3 +134,4 @@ export {
   FilterPanelLabel,
   FilterPanelSearch,
 } from './FilterPanel';
+export { ConditionBuilder } from './ConditionBuilder';

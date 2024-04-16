@@ -43,6 +43,9 @@ const defaultStoryProps = {
     <>
       This is some text that would talk about how you could{' '}
       <strong>investigate</strong> incident management within this side panel.
+      <strong>investigate</strong> incident management within this side panel.
+      <strong>investigate</strong> incident management within this side panel.
+      <strong>investigate</strong> incident management within this side panel.
     </>
   ),
   id: 'storybook-sidepanel',

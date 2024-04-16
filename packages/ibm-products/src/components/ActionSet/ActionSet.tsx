@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ComponentProps, PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -16,11 +16,16 @@ import { allPropTypes } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button, ButtonSet, InlineLoading } from '@carbon/react';
+import { ButtonProps } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+export const ButtonSizes = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+
+export type ButtonSize = (typeof ButtonSizes)[number];
+
+type ActionSetButtonProps = ComponentProps<typeof Button>;
 
 const ActionSetButton = React.forwardRef(
   (
@@ -34,7 +39,7 @@ const ActionSetButton = React.forwardRef(
       isExpressive = true,
       // Collect any other property values passed in.
       ...rest
-    },
+    }: PropsWithChildren<ActionSetButtonProps>,
     ref
   ) => (
     <Button
@@ -85,6 +90,34 @@ const defaults = {
   size: 'md',
 };
 
+interface ActionSetProps {
+  /**
+   * The action buttons to show. Each action is specified as an object
+   * representation of a Carbon button.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions: ButtonProps[];
+
+  /**
+   * The size of buttons to use for the actions. The allowed values are
+   * those for the size prop of carbon Button. If this prop is specified, all
+   * the buttons will be set to this size, overriding any 'size' values (if any)
+   * supplied in the actions array (if any).
+   */
+  buttonSize?: ButtonSize;
+  /**
+   * An optional class or classes to be added to the outermost element.
+   */
+  className?: string;
+
+  /**
+   * The size of the action set. Different button arrangements are used at
+   * different sizes, to make best use of the available space.
+   */
+  size?: ButtonSize;
+}
+
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
  * of prop values and applying some layout rules. When the size is 'sm'
@@ -97,7 +130,7 @@ const defaults = {
  * it appears at the left side. If there is a primary button it appears at the
  * right.
  */
-export const ActionSet = React.forwardRef(
+export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -105,11 +138,11 @@ export const ActionSet = React.forwardRef(
       actions,
       buttonSize,
       className,
-      size = defaults.size,
+      size = defaults.size as ButtonSize,
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: ActionSetProps,
     ref
   ) => {
     const buttons = (actions && actions.slice?.(0)) || [];
@@ -185,12 +218,13 @@ ActionSet.displayName = componentName;
  * @returns null if the actions meet the requirements, or an Error object with
  * an explanatory message.
  */
+/**@ts-ignore*/
 ActionSet.validateActions =
   (sizeFn) => (props, propName, componentName, location, propFullName) => {
     const name = propFullName || propName;
     const prop = props[name];
     const actions = prop && prop?.length;
-    const problems = [];
+    const problems = [] as string[];
 
     if (actions > 0) {
       // eslint-disable-next-line react/prop-types
@@ -264,6 +298,7 @@ ActionSet.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
+    /**@ts-ignore*/
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({

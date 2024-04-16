@@ -69,7 +69,7 @@ module.exports = {
         minimizer: [
           new TerserPlugin({
             minify: TerserPlugin.esbuildMinify,
-            sourceMap: useStyleSourceMap,
+            sourceMap: 'source-map',
             terserOptions: {
               minify: true,
             },

@@ -7,6 +7,7 @@
 
 const { merge } = require('webpack-merge');
 const { dirname, join, resolve } = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const maxAssetSize = 1024 * 1024;
 
@@ -65,6 +66,15 @@ module.exports = {
           minSize: 30 * 1024,
           maxSize: maxAssetSize,
         },
+        minimizer: [
+          new TerserPlugin({
+            minify: TerserPlugin.esbuildMinify,
+            sourceMap: useStyleSourceMap,
+            terserOptions: {
+              minify: true,
+            },
+          }),
+        ],
       },
       performance: {
         maxAssetSize: maxAssetSize,

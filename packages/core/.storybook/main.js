@@ -66,10 +66,10 @@ module.exports = {
           minSize: 30 * 1024,
           maxSize: maxAssetSize,
         },
+        minimize: true,
         minimizer: [
           new TerserPlugin({
             minify: TerserPlugin.esbuildMinify,
-            // sourceMap: 'source-map',
             terserOptions: {
               minify: true,
             },

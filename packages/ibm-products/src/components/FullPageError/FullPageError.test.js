@@ -21,14 +21,14 @@ const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const errorLabel = uuidv4();
+const label = uuidv4();
 const description = uuidv4();
 const ref = React.createRef();
 const title = uuidv4();
 const defaultProps = {
   title,
   className,
-  errorLabel,
+  label,
   description,
   ref,
   'data-testid': dataTestId,
@@ -76,7 +76,7 @@ describe(componentName, () => {
 
   it('renders error label', () => {
     render(<FullPageError {...defaultProps} />);
-    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
+    expect(screen.getByText('↳ ' + label)).toBeInTheDocument();
   });
 
   it('renders description', () => {
@@ -92,7 +92,7 @@ describe(componentName, () => {
   it('renders custom error content when kind is "custom"', () => {
     render(<FullPageError {...defaultProps} kind="custom" />);
     expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
+    expect(screen.getByText('↳ ' + label)).toBeInTheDocument();
     expect(screen.getByText(description)).toBeInTheDocument();
   });
 

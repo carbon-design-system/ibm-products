@@ -196,7 +196,7 @@
     "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
-      "npx cspell"
+      "npx cspell --no-must-find-files"
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
@@ -204,7 +204,7 @@
     ],
     "!(examples/**/*).md": [
       "npx prettier --cache --write",
-      "npx cspell"
+      "npx cspell --no-must-find-files"
     ]
   },
   "dependencies": {

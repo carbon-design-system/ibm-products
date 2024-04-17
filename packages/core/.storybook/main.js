@@ -6,18 +6,34 @@
  */
 
 const { merge } = require('webpack-merge');
-const { dirname, join, resolve } = require('path');
+const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const glob = require('fast-glob');
 
 const maxAssetSize = 1024 * 1024;
+
+const storyGlobs = [
+  '../../ibm-products/src/**/*.stories.*',
+  '../../ibm-products-community/src/**/*.stories.*',
+  '../src/**/*.stories.*',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+];
+
+const stories = glob.sync(storyGlobs, {
+  ignore: [
+    '../../**!(node_modules)/**!(node_modules)/*.mdx',
+    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
+  ],
+  cwd: __dirname,
+});
 
 module.exports = {
   staticDirs: ['../public'],
   addons: [
-    getAbsolutePath('@storybook/addon-actions'),
-    getAbsolutePath('@storybook/addon-docs'),
-    getAbsolutePath('@storybook/addon-controls'),
-    getAbsolutePath('@storybook/addon-links'),
+    '@storybook/addon-actions',
+    '@storybook/addon-docs',
+    '@storybook/addon-controls',
+    '@storybook/addon-links',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -26,17 +42,14 @@ module.exports = {
         },
       },
     },
-    getAbsolutePath('@storybook/addon-viewport'),
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
+    '@storybook/addon-viewport',
+    '@storybook/addon-mdx-gfm',
     '@carbon/storybook-addon-theme/preset.js',
   ],
 
   framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
-    options: {
-      //   fastRefresh: true,
-      //   strictMode: true,
-    },
+    name: '@storybook/react-webpack5',
+    options: {},
   },
 
   features: {
@@ -44,12 +57,7 @@ module.exports = {
     storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
   },
 
-  stories: [
-    '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
-    '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
-    '../+(docs|src)/**/*+(-story|.stories).*',
-    '../../../examples/**/*+(-story|.stories).*',
-  ],
+  stories,
 
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
@@ -129,7 +137,3 @@ module.exports = {
       },
     }),
 };
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}

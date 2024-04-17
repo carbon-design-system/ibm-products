@@ -9,7 +9,6 @@ const { merge } = require('webpack-merge');
 const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('fast-glob');
-import {} from '../../../examples/carbon-for-ibm-products/example-gallery/src';
 
 const maxAssetSize = 1024 * 1024;
 

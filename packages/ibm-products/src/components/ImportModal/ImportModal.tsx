@@ -1,11 +1,11 @@
-//
-// Copyright IBM Corp. 2021, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2021, 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, ReactNode } from 'react';
 import { Add } from '@carbon/react/icons';
 import {
   ComposedModal,
@@ -33,7 +33,136 @@ const defaults = {
   accept: Object.freeze([]),
 };
 
-export let ImportModal = forwardRef(
+type FileType = {
+  fetchError?: undefined | boolean;
+  fileData?: File;
+  fileSize?: number;
+  iconDescription?: string;
+  invalidFileType?: boolean;
+  name: string;
+  status?: string;
+  uuid?: string;
+  invalid?: boolean;
+  errorBody?: string;
+  errorSubject?: string;
+};
+
+interface ImportModalProps {
+  /**
+   * Specifies the file types that are valid for importing
+   */
+  accept?: string[];
+  /**
+   * Optional class name
+   */
+  className?: string;
+  /**
+   * The default message shown for an import error
+   */
+  defaultErrorBody: string;
+  /**
+   * The default header that is displayed to show an error message
+   */
+  defaultErrorHeader: string;
+  /**
+   * Content that is displayed inside the modal
+   */
+  description?: string;
+  /**
+   * Optional error body to display specifically for a fetch error
+   */
+  fetchErrorBody?: string;
+  /**
+   * Optional error header to display specifically for a fetch error
+   */
+  fetchErrorHeader?: string;
+  /**
+   * Header for the drag and drop box
+   */
+  fileDropHeader?: string;
+  /**
+   * Label for the drag and drop box
+   */
+  fileDropLabel?: string;
+  /**
+   * Label that appears when a file is uploaded to show number of files (1 / 1)
+   */
+  fileUploadLabel?: string;
+  /**
+   * Button icon for import by url button
+   */
+  inputButtonIcon?: boolean;
+  /**
+   * Button text for import by url button
+   */
+  inputButtonText: string;
+  /**
+   * ID for text input
+   */
+  inputId?: string;
+  /**
+   * Header to display above import by url
+   */
+  inputLabel?: string;
+  /**
+   * Placeholder for text input
+   */
+  inputPlaceholder?: string;
+  /**
+   * Optional error message to display specifically for a invalid file type error
+   */
+  invalidFileTypeErrorBody?: string;
+  /**
+   * Optional error header to display specifically for a invalid file type error
+   */
+  invalidFileTypeErrorHeader?: string;
+  /**
+   * Description for delete file icon
+   */
+  invalidIconDescription?: string;
+  /**
+   * File size limit in bytes
+   */
+  maxFileSize?: number;
+  /**
+   * Optional error message to display specifically for a max file size error
+   */
+  maxFileSizeErrorBody?: string;
+  /**
+   * Optional error header to display specifically for a max file size error
+   */
+  maxFileSizeErrorHeader?: string;
+  /**
+   * Specify a handler for closing modal
+   */
+  onClose?(): void;
+  /**
+   * Specify a handler for "submitting" modal. Access the imported file via `file => {}`
+   */
+  onRequestSubmit(files: FileType[]): void;
+  /**
+   * Specify whether the Modal is currently open
+   */
+  open: boolean;
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: ReactNode;
+  /**
+   * Specify the text for the primary button
+   */
+  primaryButtonText: string;
+  /**
+   * Specify the text for the secondary button
+   */
+  secondaryButtonText: string;
+  /**
+   * The text displayed at the top of the modal
+   */
+  title: string;
+}
+
+export let ImportModal: React.FC<ImportModalProps> = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -73,7 +202,7 @@ export let ImportModal = forwardRef(
     ref
   ) => {
     const carbonPrefix = usePrefix();
-    const [files, setFiles] = useState([]);
+    const [files, setFiles] = useState<Array<FileType>>([]);
     const [importUrl, setImportUrl] = useState('');
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
@@ -103,7 +232,7 @@ export let ImportModal = forwardRef(
           invalidFileType: file.invalidFileType,
           fileData: file,
           fetchError: file.fetchError,
-        };
+        } as FileType;
         if (newFile.fetchError) {
           newFile.errorBody = fetchErrorBody || defaultErrorBody;
           newFile.errorSubject = fetchErrorHeader || defaultErrorHeader;
@@ -113,7 +242,7 @@ export let ImportModal = forwardRef(
           newFile.errorSubject =
             invalidFileTypeErrorHeader || defaultErrorHeader;
           newFile.invalid = true;
-        } else if (maxFileSize && newFile.fileSize > maxFileSize) {
+        } else if (maxFileSize && (newFile?.fileSize ?? 0) > maxFileSize) {
           newFile.errorBody = maxFileSizeErrorBody || defaultErrorBody;
           newFile.errorSubject = maxFileSizeErrorHeader || defaultErrorHeader;
           newFile.invalid = true;
@@ -138,10 +267,12 @@ export let ImportModal = forwardRef(
       try {
         const response = await fetch(importUrl);
         if (!response.ok || response.status !== 200) {
-          throw new Error(response.status);
+          throw new Error(`${response.status}`);
         }
         const blob = await response.blob();
-        const fetchedFile = new File([blob], fileName, { type: blob.type });
+        const fetchedFile: FileType = new File([blob], fileName, {
+          type: blob.type,
+        });
         fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
         fetchedFile.uuid = pendingFile.uuid;
         updateFiles([fetchedFile]);
@@ -160,7 +291,7 @@ export let ImportModal = forwardRef(
     };
 
     const onRemoveFile = (uuid) => {
-      const updatedFiles = files.filter((f) => f.uuid !== uuid);
+      const updatedFiles = files.filter((f: FileType) => f.uuid !== uuid);
       setFiles(updatedFiles);
     };
 
@@ -181,7 +312,7 @@ export let ImportModal = forwardRef(
     };
 
     const numberOfFiles = files.length;
-    const numberOfValidFiles = files.filter((f) => !f.invalid).length;
+    const numberOfValidFiles = files.filter((f: FileType) => !f.invalid).length;
     const hasFiles = numberOfFiles > 0;
     const primaryButtonDisabled = !hasFiles || !(numberOfValidFiles > 0);
     const importButtonDisabled = !importUrl || hasFiles;
@@ -244,7 +375,7 @@ export let ImportModal = forwardRef(
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
             )}
-            {files.map((file) => (
+            {files.map((file: FileType) => (
               <FileUploaderItem
                 key={file.uuid}
                 onDelete={() => onRemoveFile(file.uuid)}

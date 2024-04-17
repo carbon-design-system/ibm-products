@@ -8,7 +8,6 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/react';
 @use '@carbon/react/scss/theme' as *;
 
 // Define all component styles in a mixin which is then exported using

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -25,6 +25,92 @@ const componentName = 'CreateTearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+type VerticalPosition = 'normal' | 'lower';
+interface CreateTearsheetNarrowProps extends PropsWithChildren {
+  /**
+   * Provide the contents of the CreateTearsheetNarrow.
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+
+  /**
+   * Specifies a boolean for disabling or enabling the primary button. This is important for form validation
+   * Returning `true` prevents the primary button from being clicked until required fields are completed.
+   */
+  disableSubmit?: boolean;
+
+  /**
+   * Specifies an optional field that provides a additional context for a form
+   */
+  formDescription?: ReactNode;
+
+  /**
+   * Specifies a field that provides a title for a form
+   */
+  formTitle?: ReactNode;
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onRequestClose?: () => void;
+
+  /**
+   * Specifies an optional handler which is called when the CreateTearsheetNarrow
+   * primary button is pressed.
+   */
+  onRequestSubmit?: () => void;
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open?: boolean;
+
+  /**
+   * Specifies the primary button's text in the CreateTearsheetNarrow.
+   */
+  primaryButtonText: string;
+
+  /**
+   * Specifies the secondary button's text in the CreateTearsheetNarrow.
+   */
+  secondaryButtonText: string;
+
+  /**
+   * Specifies which DOM element in the form should be focused.
+   */
+  selectorPrimaryFocus?: ReactNode;
+
+  /**
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title?: ReactNode;
+
+  /**
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position (the default) is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition?: VerticalPosition;
+}
 /**
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling.
  * Use when the form fields can be broken down into sections using section headers.
@@ -48,7 +134,7 @@ export let CreateTearsheetNarrow = React.forwardRef(
       title,
       verticalPosition,
       ...rest
-    },
+    }: CreateTearsheetNarrowProps,
     ref
   ) => {
     const actions = [
@@ -72,7 +158,7 @@ export let CreateTearsheetNarrow = React.forwardRef(
       <TearsheetNarrow
         {
           // Pass through any other property values as HTML attributes.
-          ...rest
+          ...(rest as any)
         }
         title={title}
         description={description}

@@ -65,3 +65,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
   .#{$block-class}__step-description.#{$story-class}__step-description {
   padding-left: 0;
 }
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  height: calc(100% - #{$spacing-09});
+  margin-top: $spacing-09;
+}

@@ -21,7 +21,7 @@ const defaults = {
   className: '',
   children: null,
   id: '',
-  isExpandedOnPageload: false,
+  isExpandedOnPageLoad: false,
   onItemClick: () => {},
   onListClick: () => {},
   tabIndex: 0,
@@ -38,7 +38,7 @@ export let NavList = React.forwardRef(
       className = defaults.className,
       icon = defaults.icon,
       id = defaults.id,
-      isExpandedOnPageload = defaults.isExpandedOnPageload,
+      isExpandedOnPageLoad = defaults.isExpandedOnPageLoad,
       navigationItemTitle = defaults.navigationItemTitle,
       onItemClick = defaults.onItemClick,
       onListClick = defaults.onListClick,
@@ -47,7 +47,7 @@ export let NavList = React.forwardRef(
     },
     ref
   ) => {
-    const [open, setOpen] = useState(isExpandedOnPageload);
+    const [open, setOpen] = useState(isExpandedOnPageLoad);
 
     useEffect(() => {
       const hrefs = React.Children.toArray(children)
@@ -57,7 +57,7 @@ export let NavList = React.forwardRef(
         )
         .map(({ props: childProps }) => childProps.href);
 
-      setOpen(hrefs.includes(activeHref) || isExpandedOnPageload);
+      setOpen(hrefs.includes(activeHref) || isExpandedOnPageLoad);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -89,7 +89,7 @@ export let NavList = React.forwardRef(
     // Expose external function calls to the parent component
     useImperativeHandle(ref, () => ({
       close,
-      isExpandedOnPageload,
+      isExpandedOnPageLoad,
     }));
 
     const newChildren = React.Children.map(children, (child, index) => (
@@ -157,7 +157,7 @@ NavList.propTypes = {
   id: string,
 
   /** @type {boolean} State of a list. */
-  isExpandedOnPageload: bool,
+  isExpandedOnPageLoad: bool,
 
   /** @type {boolean} Title of nav. */
   navigationItemTitle: string,

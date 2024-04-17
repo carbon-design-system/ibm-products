@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.17.3",
+  "version": "2.17.4",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "run-s build:carbon build:storybook",
     "build:carbon": "sass --style=expanded --load-path ../ibm-products/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
-    "build:storybook": "storybook build",
+    "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=4096\" && storybook build",
     "clean": "yarn dlx rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
     "start:storybook": "storybook dev ./public -p 3000",
@@ -31,7 +31,7 @@
     "@babel/core": "^7.23.9",
     "@babel/preset-typescript": "^7.21.5",
     "@carbon/grid": "^11.22.0",
-    "@carbon/ibm-products-styles": "^2.32.0",
+    "@carbon/ibm-products-styles": "^2.33.0",
     "@carbon/layout": "^11.21.0",
     "@carbon/motion": "^11.17.0",
     "@carbon/react": "^1.53.0",
@@ -69,6 +69,7 @@
     "sass-loader": "^14.0.0",
     "storybook": "^7.6.10",
     "style-loader": "^3.3.4",
+    "terser-webpack-plugin": "^5.3.10",
     "typescript": "^5.3.3",
     "webpack": "^5.90.0",
     "webpack-merge": "^5.10.0"

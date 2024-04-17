@@ -76,6 +76,7 @@ const defaults = {
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,
+    TagOverflow: false,
     ActionBar: false,
     FilterPanel: false,
     FilterPanelAccordion: false,
@@ -84,6 +85,9 @@ const defaults = {
     FilterPanelCheckboxWithOverflow: false,
     FilterPanelGroup: false,
     FilterPanelLabel: false,
+    FilterPanelSearch: false,
+
+    ConditionBuilder: false,
 
     /* new component flags here - comment used by generate CLI */
 

@@ -76,6 +76,7 @@ $sizes: (
 }
 
 @mixin setLightBg($order, $color) {
+  :root .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
   .#{$carbon-prefix}--white .#{$block-class}--#{$order} {
     @include setBgColor($color);

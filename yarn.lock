@@ -1987,6 +1987,7 @@ __metadata:
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     css-loader: "npm:^6.9.1"
     dotenv-webpack: "npm:8.0.1"
+    fast-glob: "npm:^3.2.7"
     lottie-web: "npm:^5.12.2"
     npm-check-updates: "npm:^16.14.12"
     npm-run-all: "npm:^4.1.5"
@@ -12399,7 +12400,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1, fast-glob@npm:^3.3.2":
   version: 3.3.2
   resolution: "fast-glob@npm:3.3.2"
   dependencies:

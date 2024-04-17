@@ -56,8 +56,7 @@ module.exports = {
   },
 
   features: {
-    // setting storyStoryV7 to false allows the storybook to build
-    storyStoreV7: true, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
+    storyStoreV7: true,
   },
 
   stories,

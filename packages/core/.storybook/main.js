@@ -9,6 +9,7 @@ const { merge } = require('webpack-merge');
 const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('fast-glob');
+import {} from '../../../examples/carbon-for-ibm-products/example-gallery/src';
 
 const maxAssetSize = 1024 * 1024;
 
@@ -16,13 +17,13 @@ const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
   '../src/**/*.stories.*',
-  // '../../../examples/carbon-for-ibm-products/example-gallery/src/*.stories.*',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
 ];
 
 const stories = glob.sync(storyGlobs, {
   ignore: [
     '../../**!(node_modules)/**!(node_modules)/*.mdx',
-    '../../**!(node_modules)/**!(node_modules)/*.stories.@(js|jsx|ts|tsx)',
+    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
   ],
   cwd: __dirname,
 });

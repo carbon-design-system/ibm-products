@@ -1,4 +1,4 @@
-import { tranlationsObject } from './Translations';
+import { translationsObject } from './Translations';
 export const statementConfig = [
   {
     label: 'if',
@@ -90,9 +90,9 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
-const tranlationsObjectCurrent = tranlationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
-export const translatewithId = (key) => {
-  return tranlationsObjectCurrent[key] ?? key;
+const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
+export const translateWithId = (key) => {
+  return translationsObjectCurrent[key] ?? key;
 };
 
 export const valueRenderers = {

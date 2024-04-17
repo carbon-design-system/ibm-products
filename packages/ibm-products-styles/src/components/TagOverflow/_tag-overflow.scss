@@ -29,6 +29,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
   white-space: nowrap;
 }
 
+.#{$block-class}--multiline {
+  flex-wrap: wrap;
+}
+
 .#{$block-class}__item {
   margin: $spacing-01;
 }

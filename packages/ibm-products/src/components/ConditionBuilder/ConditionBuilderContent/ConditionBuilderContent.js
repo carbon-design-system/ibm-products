@@ -12,13 +12,13 @@ const blockClass = `${pkg.prefix}--condition-builder`;
 
 function ConditionBuilderContent({ startConditionLabel }) {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
-  const [isConditionbuilderActive, setIsConditionbuilderActive] =
+  const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(true);
   const conditionBuilderRef = useRef();
 
   useEffect(() => {
     if (rootState?.groups?.length) {
-      setIsConditionbuilderActive(false);
+      setIsConditionBuilderActive(false);
       if (
         rootState.groups[0].conditions.length == 1 &&
         rootState.groups[0].conditions[0].property == undefined
@@ -29,15 +29,15 @@ function ConditionBuilderContent({ startConditionLabel }) {
         }, 0);
       }
     } else {
-      setIsConditionbuilderActive(true);
+      setIsConditionBuilderActive(true);
     }
   }, [rootState]);
 
-  const onStartConditionbuilder = () => {
-    //when add conditon button is clicked.
-    setIsConditionbuilderActive(false);
+  const onStartConditionBuilder = () => {
+    //when add condition button is clicked.
+    setIsConditionBuilderActive(false);
     setRootState(emptyState); //here we can set an empty skeleton object for an empty condition builder,
-    //or we can even prepopulate some existing builder and continue editing
+    //or we can even pre-populate some existing builder and continue editing
   };
 
   return (
@@ -45,14 +45,14 @@ function ConditionBuilderContent({ startConditionLabel }) {
       ref={conditionBuilderRef}
       className={`${blockClass}__content-container`}
     >
-      {isConditionbuilderActive && (
+      {isConditionBuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}
           renderIcon={(props) => <Add size={16} {...props} />}
           iconDescription={startConditionLabel}
           kind="ghost"
           size="sm"
-          onClick={onStartConditionbuilder}
+          onClick={onStartConditionBuilder}
         >
           {startConditionLabel}
         </Button>

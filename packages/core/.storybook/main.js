@@ -15,7 +15,7 @@ const maxAssetSize = 1024 * 1024;
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
-  // '../+(docs|src)/**/*.stories.*',
+  '../src/**/*.stories.*',
   // '../../../examples/carbon-for-ibm-products/example-gallery/src/*.stories.*',
 ];
 

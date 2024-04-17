@@ -233,10 +233,6 @@ const sampleSlug = (
         <hr />
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
-        <p className="bold">Foundation model</p>
-        <p className="bold">Foundation model</p>
-        <p className="bold">Foundation model</p>
-        <p className="bold">Foundation model</p>
       </div>
     </SlugContent>
   </Slug>

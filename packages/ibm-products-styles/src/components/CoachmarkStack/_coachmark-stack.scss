@@ -43,7 +43,7 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
   &--is-mounted {
     bottom: 0;
     /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
-    transition: transform $duration-moderate-02 motion(exit, productive);
+    transition: $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;
     }
@@ -60,7 +60,8 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
     bottom: 0;
     overflow: hidden;
     pointer-events: none;
-    transform: perspective(carbon--mini-units(18))
+    /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+    transform: perspective(to-rem(144px))
       translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
     transform-origin: top center;
     visibility: visible;

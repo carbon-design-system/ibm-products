@@ -6,7 +6,7 @@
  */
 
 const { merge } = require('webpack-merge');
-const { dirname, join, resolve } = require('path');
+const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('fast-glob');
 
@@ -15,8 +15,8 @@ const maxAssetSize = 1024 * 1024;
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
-  '../+(docs|src)/**/*.stories.*',
-  '../../../examples/carbon-for-ibm-products/example-gallery/src/*.stories.*',
+  // '../+(docs|src)/**/*.stories.*',
+  // '../../../examples/carbon-for-ibm-products/example-gallery/src/*.stories.*',
 ];
 
 const stories = glob.sync(storyGlobs, {

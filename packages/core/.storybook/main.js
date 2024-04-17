@@ -9,6 +9,7 @@ const { merge } = require('webpack-merge');
 const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('fast-glob');
+import remarkGfm from 'remark-gfm';
 
 const maxAssetSize = 1024 * 1024;
 
@@ -31,20 +32,22 @@ module.exports = {
   staticDirs: ['../public'],
   addons: [
     '@storybook/addon-actions',
-    '@storybook/addon-docs',
     '@storybook/addon-controls',
     '@storybook/addon-links',
-    {
-      name: '@storybook/addon-storysource',
-      options: {
-        rule: {
-          test: /(-story|.stories).js$/,
-        },
-      },
-    },
+    '@storybook/addon-storysource',
     '@storybook/addon-viewport',
     '@storybook/addon-mdx-gfm',
     '@carbon/storybook-addon-theme/preset.js',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
   ],
 
   framework: {
@@ -54,7 +57,7 @@ module.exports = {
 
   features: {
     // setting storyStoryV7 to false allows the storybook to build
-    storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
+    storyStoreV7: true, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
   },
 
   stories,
@@ -86,10 +89,6 @@ module.exports = {
       },
       performance: {
         maxAssetSize: maxAssetSize,
-      },
-      cache: {
-        type: 'filesystem',
-        allowCollectingMemory: true,
       },
       module: {
         rules: [

@@ -45,10 +45,12 @@ module.exports = {
   },
 
   stories: [
-    '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
-    '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
-    '../+(docs|src)/**/*+(-story|.stories).*',
-    '../../../examples/**/*+(-story|.stories).*',
+    '../../**!(node_modules)/**!(node_modules)/*.mdx',
+    '../../**!(node_modules)/**!(node_modules)/*.stories.@(js|jsx|ts|tsx)',
+    // '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
+    // '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
+    // '../+(docs|src)/**/*+(-story|.stories).*',
+    // '../../../examples/**/*+(-story|.stories).*',
   ],
 
   typescript: {

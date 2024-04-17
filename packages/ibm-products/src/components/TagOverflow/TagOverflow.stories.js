@@ -220,6 +220,13 @@ ManyTags.args = {
   items: tags,
 };
 
+export const MultilineTags = Template.bind({});
+MultilineTags.args = {
+  containerWidth: 500,
+  items: tags,
+  multiline: true,
+};
+
 export const UserAvatars = Template.bind({});
 UserAvatars.args = {
   containerWidth: 250,

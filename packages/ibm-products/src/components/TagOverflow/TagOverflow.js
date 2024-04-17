@@ -10,19 +10,30 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 import { Tag, Tooltip } from '@carbon/react';
-import { TagSet } from '../TagSet';
 import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { TagOverflowPopover } from './TagOverflowPopover';
+import { TagOverflowModal } from './TagOverflowModal';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 
+const allTagsModalSearchThreshold = 10;
+
+// TODO: support props align, measurementOffset, onOverflowTagChange, containingElementRef
+
 // Default values for props
 const defaults = {
   items: [],
+  // align: 'start',
+  // measurementOffset: 0,
+  overflowAlign: 'bottom',
+  overflowType: 'default',
+  // onOverflowTagChange: () => {},
 };
 
 /**
@@ -31,11 +42,24 @@ const defaults = {
 export let TagOverflow = React.forwardRef(
   (
     {
+      // align = defaults.align,
+      allTagsModalTarget,
       className,
       items = defaults.items,
-      tagComponent,
       maxVisible,
       multiline,
+      overflowAlign = defaults.overflowAlign,
+      overflowClassName,
+      overflowType = defaults.overflowType,
+      allTagsModalTitle,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
+      showAllTagsLabel,
+      tagComponent,
+      // containingElementRef,
+      // measurementOffset = defaults.measurementOffset,
+      // onOverflowTagChange = defaults.onOverflowTagChange,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -45,14 +69,24 @@ export let TagOverflow = React.forwardRef(
     const containerRef = ref || localContainerRef;
     const itemRefs = useRef(null);
     const overflowRef = useRef(null);
-    // measurementOffset is the value of margin applied on each items
+    // itemOffset is the value of margin applied on each items
     // This value is required for calculating how many items will fit within the container
-    const measurementOffset = 4;
+    const itemOffset = 4;
     const overflowIndicatorWidth = 40;
 
     const [containerWidth, setContainerWidth] = useState(0);
     const [visibleItems, setVisibleItems] = useState([]);
     const [overflowItems, setOverflowItems] = useState([]);
+    const [showAllModalOpen, setShowAllModalOpen] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
+
+    const handleShowAllClick = () => {
+      setShowAllModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+      setShowAllModalOpen(false);
+    };
 
     const handleResize = () => {
       setContainerWidth(containerRef.current.offsetWidth);
@@ -96,7 +130,7 @@ export let TagOverflow = React.forwardRef(
 
       return items.reduce((prev, cur) => {
         if (!maxReached) {
-          const itemWidth = map.get(cur.id) + measurementOffset;
+          const itemWidth = map.get(cur.id) + itemOffset;
           const fits = itemWidth + childrenWidth < maxWidth;
 
           if (fits) {
@@ -172,16 +206,33 @@ export let TagOverflow = React.forwardRef(
               );
             }
           })}
+
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
           {overflowItems.length > 0 && (
-            <TagSet
-              tags={overflowItems}
-              allTagsModalTitle="All tags"
-              containingElementRef={overflowRef}
-              allTagsModalSearchLabel="Search all tags"
-              allTagsModalSearchPlaceholderText="Search all tags"
-              showAllTagsLabel="Show all tags"
-            />
+            <>
+              <TagOverflowPopover
+                allTagsModalSearchThreshold={allTagsModalSearchThreshold}
+                className={overflowClassName}
+                onShowAllClick={handleShowAllClick}
+                overflowTags={overflowItems}
+                overflowAlign={overflowAlign}
+                overflowType={overflowType}
+                showAllTagsLabel={showAllTagsLabel}
+                key="displayed-tag-overflow"
+                ref={overflowRef}
+                popoverOpen={popoverOpen}
+                setPopoverOpen={setPopoverOpen}
+              />
+              <TagOverflowModal
+                allTags={items}
+                open={showAllModalOpen}
+                title={allTagsModalTitle}
+                onClose={handleModalClose}
+                searchLabel={allTagsModalSearchLabel}
+                searchPlaceholder={allTagsModalSearchPlaceholderText}
+                portalTarget={allTagsModalTarget}
+              />
+            </>
           )}
         </span>
       </div>
@@ -198,15 +249,51 @@ TagOverflow.displayName = componentName;
 
 const tagTypes = Object.keys(TYPES);
 
+/**
+ * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
+ * @returns null if no problems
+ */
+export const string_required_if_more_than_10_tags = isRequiredIf(
+  PropTypes.string,
+  ({ items }) => items && items.length > allTagsModalSearchThreshold
+);
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 TagOverflow.propTypes = {
   /**
+   * align the Tags displayed by the TagSet. Default start.
+   */
+  // align: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * label text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+
+  /**
+   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  /**
+   * portal target for the all tags modal
+   */
+  allTagsModalTarget: PropTypes.node,
+  /**
+   * title for the show all modal. **Note: Required if more than 10 tags**
+   */
+  allTagsModalTitle: string_required_if_more_than_10_tags,
+
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
+  /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  // containingElementRef: PropTypes.object,
   /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the item content,
@@ -222,15 +309,54 @@ TagOverflow.propTypes = {
       tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
-
   /**
    * maximum visible items
    */
   maxVisible: PropTypes.number,
   /**
+   * Specify offset amount for measure available space, only used when `containingElementSelector`
+   * is also provided
+   */
+  // measurementOffset: PropTypes.number,
+  /**
    * display items in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * Handler to get overflow tags
+   */
+  // onOverflowTagChange: PropTypes.func,
+  /**
+   * overflowAlign from the standard tooltip. Default center.
+   */
+  overflowAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'left-bottom',
+    'left-top',
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+  /**
+   * overflowClassName for the tooltip popup
+   */
+  overflowClassName: PropTypes.string,
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
+  /**
+   * label for the overflow show all tags link.
+   *
+   * **Note:** Required if more than 10 tags
+   */
+  showAllTagsLabel: string_required_if_more_than_10_tags,
   /** Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */

@@ -160,6 +160,13 @@ const IconComponentArr = icons.map((icon, index) => {
   return { id: `id-${index}`, label: icon, iconName: icon, iconSize: 16 };
 });
 
+const overflowAndModalStrings = {
+  allTagsModalTitle: 'All tags',
+  allTagsModalSearchLabel: 'Search all tags',
+  allTagsModalSearchPlaceholderText: 'Search all tags',
+  showAllTagsLabel: 'View all tags',
+};
+
 export default {
   title: 'IBM Products/Components/Tag overflow/TagOverflow',
   component: TagOverflow,
@@ -218,6 +225,7 @@ export const ManyTags = Template.bind({});
 ManyTags.args = {
   containerWidth: 500,
   items: tags,
+  ...overflowAndModalStrings,
 };
 
 export const MultilineTags = Template.bind({});
@@ -225,6 +233,7 @@ MultilineTags.args = {
   containerWidth: 500,
   items: tags,
   multiline: true,
+  ...overflowAndModalStrings,
 };
 
 export const UserAvatars = Template.bind({});
@@ -239,6 +248,7 @@ ManyUserAvatars.args = {
   containerWidth: 500,
   items: ManyUserAvatarArr,
   tagComponent: UserAvatar,
+  ...overflowAndModalStrings,
 };
 
 export const CustomComponent = Template.bind({});
@@ -246,4 +256,5 @@ CustomComponent.args = {
   containerWidth: 500,
   items: IconComponentArr,
   tagComponent: IconComponent,
+  ...overflowAndModalStrings,
 };

@@ -92,6 +92,7 @@ const CustomizeColumnsTearsheet = ({
       open={isOpen}
       title={`${customizeTearsheetHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
       description={instructionsLabel}
+      useToolTip
       actions={[
         {
           kind: 'secondary',
@@ -155,6 +156,7 @@ CustomizeColumnsTearsheet.propTypes = {
   secondaryButtonTextLabel: PropTypes.string,
   selectAllLabel: PropTypes.string,
   setIsTearsheetOpen: PropTypes.func.isRequired,
+  useTooltip: PropTypes.bool,
 };
 
 export default CustomizeColumnsTearsheet;

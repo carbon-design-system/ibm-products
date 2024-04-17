@@ -121,6 +121,11 @@ interface TearsheetNarrowProps extends PropsWithChildren {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition?: 'normal' | 'lower';
+
+   /**
+   * Optional: Specifies whether the tearsheet description show tooltip.
+   */
+   useToolTip?: boolean,
 }
 
 const componentName = 'TearsheetNarrow';
@@ -144,7 +149,7 @@ const defaults = {
 export let TearsheetNarrow = React.forwardRef(
   (
     {
-      verticalPosition = defaults.verticalPosition,
+      verticalPosition = defaults.verticalPosition, useToolTip,
       ...rest
     }: TearsheetNarrowProps,
     ref
@@ -156,6 +161,7 @@ export let TearsheetNarrow = React.forwardRef(
         verticalPosition,
         ref,
         size: 'narrow',
+        useToolTip,
       }}
     />
   )

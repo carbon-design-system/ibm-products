@@ -94,6 +94,7 @@ export const TearsheetShell = React.forwardRef(
       size,
       slug,
       title,
+      useToolTip,
       verticalPosition,
       // Collect any other property values passed in.
       ...rest
@@ -115,23 +116,6 @@ export const TearsheetShell = React.forwardRef(
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
-
-    // if description exceeds two lines and results ellipsis, then `title` attribute displays the whole text
-    const tooltipTriggerRef = useRef(null);
-    const [tooltipText, setTooltipText] = useState(null);
-
-    useEffect(() => {
-      if (open) {
-        if (
-          tooltipTriggerRef?.current?.scrollHeight >
-          tooltipTriggerRef?.current?.clientHeight
-        ) {
-          setTooltipText(tooltipTriggerRef?.current?.innerHTML);
-        } else {
-          setTooltipText(null);
-        }
-      }
-    }, [tooltipTriggerRef, open]);
 
     // Keep a record of the previous value of depth.
     const prevDepth = useRef();
@@ -331,24 +315,20 @@ export const TearsheetShell = React.forwardRef(
                   >
                     {title}
                   </Wrap>
-                  {tooltipText ? (
+                  {useToolTip ? (
                     <Tooltip
-                      label={tooltipText}
+                      label={description}
                       align="bottom"
                       defaultOpen={false}
                     >
                       <Wrap
                         className={`${bc}__header-description sb-tooltip-trigger`}
-                        ref={tooltipTriggerRef}
                       >
                         {description}
                       </Wrap>
                     </Tooltip>
                   ) : (
-                    <Wrap
-                      className={`${bc}__header-description`}
-                      ref={tooltipTriggerRef}
-                    >
+                    <Wrap className={`${bc}__header-description`}>
                       {description}
                     </Wrap>
                   )}

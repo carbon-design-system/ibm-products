@@ -16,7 +16,7 @@ const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
   '../+(docs|src)/**/*.stories.*',
-  '../../../examples/**/*.stories.*',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/*.stories.*',
 ];
 
 const stories = glob.sync(storyGlobs, {
@@ -26,6 +26,7 @@ const stories = glob.sync(storyGlobs, {
   ],
   cwd: __dirname,
 });
+console.log(stories);
 
 module.exports = {
   staticDirs: ['../public'],

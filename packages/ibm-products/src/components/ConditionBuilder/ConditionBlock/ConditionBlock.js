@@ -48,6 +48,7 @@ function ConditionBlock(props) {
       aria-posinset={aria.posinset}
       aria-setsize={aria.setsize}
     >
+      {/* this code draws the connector conditions between each condition block */}
       {conjunction && (
         <ConditionConnector
           className={`${blockClass}__gyap ${blockClass}__gyap-bottom`}
@@ -57,6 +58,7 @@ function ConditionBlock(props) {
         />
       )}
 
+    {/* this code draws the starting statement for each group */}
       {isStatement && (
         <div
           className={`${blockClass}__gyap-bottom ${blockClass}__gyap`}
@@ -68,7 +70,7 @@ function ConditionBlock(props) {
             title={'Condition'}
             className={`${blockClass}__statement-button`}
           >
-            here goes the content of the popoover
+            popOver content
             {/* <ConditionBuilderItemOption
               conditionState={{
                 value: group.statement,
@@ -85,11 +87,12 @@ function ConditionBlock(props) {
       )}
 
       <div
-        className={cx(`${blockClass}__condtionWrapper`, {
+        className={cx(`${blockClass}__conditionWrapper`, {
           [`${blockClass}__condition-builder-condition__deletion-preview`]:
             showDeletionPreview,
         })}
       >
+        {/* this is the property section */}
         <ConditionBuilderItem
           label={label}
           isOpen={state.open}
@@ -97,7 +100,7 @@ function ConditionBlock(props) {
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field propertyField`}
         >
-          here goes the content of the popoover
+          popOver content
           {/* <ConditionBuilderItemOption
             conditionState={{
               value: property,
@@ -115,13 +118,14 @@ function ConditionBlock(props) {
             config={{ options: inputConfig.properties }}
           /> */}
         </ConditionBuilderItem>
+         {/* this is the operator section */}
         {property && (
           <ConditionBuilderItem
             label={operator}
             title={'Operator'}
             className={'operatorField'}
           >
-            here goes the content of the popoover
+            popOver content
             {/* <ConditionBuilderItemOption
               config={{
                 options: operatorConfig.filter(
@@ -144,6 +148,7 @@ function ConditionBlock(props) {
             /> */}
           </ConditionBuilderItem>
         )}
+         {/* this is the value section */}
         {property && operator && (
           <ConditionBuilderItem
             label={value}
@@ -153,7 +158,7 @@ function ConditionBlock(props) {
             className={'valueField'}
             showToolTip={true}
           >
-            here goes the content of the popoover
+            popOver content
             {/* <ItemComponent
               conditionState={{
                 property,
@@ -171,6 +176,7 @@ function ConditionBlock(props) {
             /> */}
           </ConditionBuilderItem>
         )}
+         {/* this is the remove section(close button) */}
         <span role="gridcell">
           <ConditionBuilderButton
             role="gridcell"

@@ -13,7 +13,7 @@ const blockClass = `${pkg.prefix}--condition-builder`;
  * @returns
  */
 const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
-  //This method indentifies whether the codition is the last one , so that add button can be shown
+  //This method identify whether the condition is the last one , so that add button can be shown
   const isLastCondition = (conditionIndex, conditionArr) => {
     return conditionIndex + 1 >= conditionArr.length;
   };
@@ -23,13 +23,13 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
       className={` ${blockClass}__condition-builder__group eachGroup`}
       role={aria.level === 1 ? 'rowgroup' : undefined}
     >
-      <div className={`${blockClass}__condtion-wrapper`}>
+      <div className={`${blockClass}__condition-wrapper`}>
         {/* condition loop starts here */}
 
         {state?.conditions?.map(
           (eachCondition, conditionIndex, conditionArr) => (
             <>
-              {/* This condition is for tree model where thre will be subgroups inside each group */}
+              {/* This condition is for tree variant where there will be subgroups inside each group */}
               {eachCondition.conditions && (
                 <ConditionBuilderGroup
                   aria={{
@@ -62,7 +62,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                   }}
                 />
               )}
-              {/* rendering each condtion block */}
+              {/* rendering each condition block */}
               {!eachCondition.conditions && (
                 <>
                   <ConditionBlock

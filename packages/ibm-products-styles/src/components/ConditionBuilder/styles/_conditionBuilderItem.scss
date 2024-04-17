@@ -118,7 +118,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   background-color: $layer-hover;
 }
 .#{$block-class}__condition-builder__group.hoveredConnector
-  .#{$block-class}__condtion-wrapper
+  .#{$block-class}__condition-wrapper
   > .conditionBlockWrapper
   .#{$block-class}__connector-button {
   background-color: $layer-hover;
@@ -148,7 +148,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   padding-right: $spacing-03;
   padding-left: $spacing-03;
 }
-.#{$block-class}__condtionWrapper {
+.#{$block-class}__conditionWrapper {
   display: flex;
 }
 

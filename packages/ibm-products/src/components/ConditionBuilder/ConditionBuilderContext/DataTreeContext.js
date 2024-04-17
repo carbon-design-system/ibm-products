@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const emptyState = {
   groups: [
     {
-      groupSeparateOperator: null,
+      groupSeperateOperator: null,
       groupOperator: 'and',
       statement: 'if',
       conditions: [{ property: undefined, operator: '', value: '' }],

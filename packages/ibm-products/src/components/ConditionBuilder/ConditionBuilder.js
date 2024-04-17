@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { VStack } from '@carbon/react';
 
@@ -64,6 +64,9 @@ export let ConditionBuilder = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const conditionBuilderRef = ref || localRef;
+
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -83,13 +86,14 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
-          ref={ref}
+          ref={conditionBuilderRef}
           role="main"
           {...getDevtoolsProps(componentName)}
         >
           <VStack>
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
+              conditionBuilderRef={conditionBuilderRef}
             />
           </VStack>
         </div>

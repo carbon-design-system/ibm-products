@@ -1,4 +1,4 @@
-import { translationsObject } from './Translations';
+import { translationsObject } from './translations';
 export const statementConfig = [
   {
     label: 'if',

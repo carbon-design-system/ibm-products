@@ -264,7 +264,8 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
 
-      if (modalIsOpen && initialStep) {
+      /**@ts-ignore */
+      if (open && initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
           initialStep
@@ -290,7 +291,8 @@ export let CreateFullPage = React.forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
-      modalIsOpen,
+      /**@ts-ignore */
+      open,
       setCurrentStep,
       stepData,
       /**@ts-ignore */

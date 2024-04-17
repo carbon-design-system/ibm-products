@@ -56,7 +56,7 @@ const scopes = [
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
-  placeHolderText: 'Search...',
+  placeholderText: 'Search...',
   submitLabel: 'Search',
   onChange: (newVal) => action('onChange')(newVal),
   onSubmit: (newVal) => action('onSubmit')(newVal),

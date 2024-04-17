@@ -46,7 +46,7 @@ export let SearchBar = React.forwardRef(
       labelText,
       onChange = defaults.onChange,
       onSubmit = defaults.onSubmit,
-      placeHolderText,
+      placeholderText,
       scopes = defaults.scopes,
       scopesTypeLabel,
       scopeToString,
@@ -116,6 +116,15 @@ export let SearchBar = React.forwardRef(
       onChange(eventObject);
     };
 
+    const multiSelectProps = {
+      label: scopesTypeLabel,
+      initialSelectedItems: selectedScopes,
+      items: scopes,
+      itemToString: scopeToString,
+      translateWithId,
+      ...rest
+    }
+
     return (
       <form
         {...rest}
@@ -128,16 +137,11 @@ export let SearchBar = React.forwardRef(
       >
         {scopes?.length ? (
           <MultiSelect
+            {...multiSelectProps}
             id={`${blockClass}__multi-select`}
             name="search-scopes"
             className={`${blockClass}__scopes`}
-            label={scopesTypeLabel}
             onChange={handleSearchScopeChange}
-            initialSelectedItems={selectedScopes}
-            items={scopes}
-            itemToString={scopeToString}
-            translateWithId={translateWithId}
-            sortItems={sortItems}
             size="lg"
           />
         ) : null}
@@ -147,7 +151,7 @@ export let SearchBar = React.forwardRef(
           labelText={labelText || ''}
           name="search-input"
           onChange={handleInputChange}
-          placeholder={placeHolderText}
+          placeholder={placeholderText}
           value={text}
           size="lg"
         />
@@ -187,6 +191,15 @@ const conditionalScopePropValidator = (
   return PropTypes.string(props, propName, componentName, ...rest);
 };
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   *
+   * Provide accessible label text for the scopes MultiSelect.
+   */
+  titleText: PropTypes.string,
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -212,7 +225,7 @@ SearchBar.propTypes = {
   onSubmit: PropTypes.func,
 
   /** @type {string} Placeholder text to be displayed in the search input. */
-  placeHolderText: PropTypes.string.isRequired,
+  placeholderText: PropTypes.string.isRequired,
 
   /** @type {Function} Function to get the text for each scope to display in dropdown. */
   scopeToString: PropTypes.func,
@@ -241,14 +254,11 @@ SearchBar.propTypes = {
   /** @type {string} The label text for the search submit button. */
   submitLabel: PropTypes.string.isRequired,
 
-  /**
-   * Provide accessible label text for the scopes MultiSelect.
-   */
-  titleText: PropTypes.string,
-
   /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
   translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
 
   /** @type {string} Search query value. */
   value: PropTypes.string,
+
+  ...deprecatedProps,
 };

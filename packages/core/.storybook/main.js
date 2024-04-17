@@ -15,6 +15,8 @@ const maxAssetSize = 1024 * 1024;
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
+  '../+(docs|src)/**/*.stories.*',
+  '../../../examples/**/*.stories.*',
 ];
 
 const stories = glob.sync(storyGlobs, {
@@ -54,15 +56,6 @@ module.exports = {
     // setting storyStoryV7 to false allows the storybook to build
     storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
   },
-
-  // stories: [
-  //   '../../**!(node_modules)/**!(node_modules)/*.mdx',
-  //   '../../**!(node_modules)/**!(node_modules)/*.stories.@(js|jsx|ts|tsx)',
-  //   // '../../ibm-products/src/**/*.stories.*',
-  //   '../../ibm-products-community/src/**/*.stories.*',
-  //   // '../+(docs|src)/**/*+(-story|.stories).*',
-  //   // '../../../examples/**/*+(-story|.stories).*',
-  // ],
 
   stories,
 

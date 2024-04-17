@@ -26,7 +26,6 @@ const stories = glob.sync(storyGlobs, {
   ],
   cwd: __dirname,
 });
-console.log(stories);
 
 module.exports = {
   staticDirs: ['../public'],

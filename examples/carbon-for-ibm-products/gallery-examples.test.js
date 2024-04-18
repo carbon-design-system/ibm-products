@@ -34,23 +34,27 @@ import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
+import { Example as FilterPanelExample } from './FilterPanel/src/Example/Example';
 import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
 import { Example as InterstitialScreenViewExample } from './InterstitialScreenView/src/Example/Example';
 import { Example as InterstitialScreenViewModuleExample } from './InterstitialScreenViewModule/src/Example/Example';
+import { Example as NavExample } from './Nav/src/Example/Example';
 import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
 import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
 import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
 import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/Example';
 import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example';
 import { Example as SavingExample } from './Saving/src/Example/Example';
+import { Example as ScrollGradientExample } from './ScrollGradient/src/Example/Example';
 import { Example as SearchBarExample } from './SearchBar/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as StatusIndicatorExample } from './StatusIndicator/src/Example/Example';
 import { Example as StringFormatterExample } from './StringFormatter/src/Example/Example';
+import { Example as TagOverflowExample } from './TagOverflow/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
 import { Example as TruncatedListExample } from './TruncatedList/src/Example/Example';
@@ -214,6 +218,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('FilterPanel renders', () => {
+    render(<FilterPanelExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('FullPageError renders', () => {
     render(<FullPageErrorExample />);
     // expect no errors int the console
@@ -246,6 +256,12 @@ describe('All examples', () => {
 
   it('InterstitialScreenViewModule renders', () => {
     render(<InterstitialScreenViewModuleExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('Nav renders', () => {
+    render(<NavExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
@@ -286,6 +302,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('ScrollGradient renders', () => {
+    render(<ScrollGradientExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('SearchBar renders', () => {
     render(<SearchBarExample />);
     // expect no errors int the console
@@ -312,6 +334,12 @@ describe('All examples', () => {
 
   it('StringFormatter renders', () => {
     render(<StringFormatterExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('TagOverflow renders', () => {
+    render(<TagOverflowExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -297,6 +297,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "szinta",
+      "name": "Sinta Augustine",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53395955?v=4",
+      "profile": "https://github.com/szinta",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

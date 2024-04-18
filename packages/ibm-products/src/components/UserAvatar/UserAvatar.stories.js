@@ -18,10 +18,6 @@ import headshot from './_story-assets/headshot.jpg';
 import { Theme } from '@carbon/react';
 import { useEffect, useState } from 'react';
 
-const defaultArgs = {
-  backgroundColor: 'order-1-cyan',
-};
-
 export default {
   title: 'IBM Products/Components/User avatar/UserAvatar',
   component: UserAvatar,
@@ -134,7 +130,6 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.storyName = 'Default';
 Default.args = {
-  ...defaultArgs,
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
   name: 'thomas j. watson',
   tooltipText: 'Thomas J. Watson',
@@ -144,7 +139,6 @@ Default.args = {
 export const WithImage = Template.bind({});
 WithImage.storyName = 'WithImage';
 WithImage.args = {
-  ...defaultArgs,
   image: headshot,
   imageDescription: 'image here',
 };

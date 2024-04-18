@@ -36,7 +36,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
   background: $purple-70;
   background-image: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
   color: $white-0 !important;
-  grid-template-columns: [ctacol] auto [closebtncol] $spacing-08;
+  grid-template-columns: [cta-col] auto [close-btn-col] $spacing-08;
   opacity: 1;
   // stylelint-disable-next-line carbon/motion-duration-use
   transition: opacity $duration-moderate-02 motion(exit, productive) 300ms;
@@ -86,7 +86,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
     border: none;
     background: transparent;
     color: $white-0 !important;
-    grid-template-columns: [iconcol] $spacing-07 [bodycol] auto;
+    grid-template-columns: [icon-col] $spacing-07 [body-col] auto;
     text-align: left;
     @include type.type-style('body-short-01');
 

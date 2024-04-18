@@ -101,7 +101,7 @@ export let Nav = React.forwardRef(
      */
     const handleListClick = (id) => {
       Object.keys(navigationLists.current).forEach((key) => {
-        if (key !== id && !navigationLists.current[key].isExpandedOnPageload) {
+        if (key !== id && !navigationLists.current[key].isExpandedOnPageLoad) {
           navigationLists.current[key].close();
         }
       });

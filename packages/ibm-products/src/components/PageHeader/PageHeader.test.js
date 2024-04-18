@@ -197,7 +197,7 @@ const testPropsUserDefined = {
 };
 
 describe('PageHeader', () => {
-  const { ResizeObserver, scrollTo } = window;
+  const { ResizeObserver } = window;
   let mockElement;
   const mocks = [];
   let warn;
@@ -224,7 +224,6 @@ describe('PageHeader', () => {
       id: 'uuidv4',
       mock: uuidv4.mockImplementation(() => 'test-id'),
     });
-    window.scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation();
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -247,7 +246,6 @@ describe('PageHeader', () => {
       mock.mock.mockRestore();
     });
     mockElement.mockRestore();
-    window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
     warn.mockRestore();
   });
@@ -374,27 +372,32 @@ describe('PageHeader', () => {
 
   it('collapse button works', async () => {
     const dataTestId = uuidv4();
+    // wrap PageHeader with something that looks scrollable
     render(
-      <PageHeader
-        {...testProps}
-        hasCollapseHeaderToggle={true}
-        data-testid={dataTestId}
-      >
-        {children}
-      </PageHeader>
+      <div data-testid={dataTestId} style={{ overflow: 'auto' }}>
+        <PageHeader {...testProps} hasCollapseHeaderToggle={true}>
+          {children}
+        </PageHeader>
+      </div>
     );
 
     const collapseButton = screen.getByRole('button', {
       name: testProps.collapseHeaderIconDescription,
     });
 
-    expect(window.scrollTo).not.toHaveBeenCalled();
+    const scrollableEl = screen.getByTestId(dataTestId);
+    scrollableEl.scrollTo = () => {};
+    scrollableEl.scrollTo = jest
+      .spyOn(scrollableEl, 'scrollTo')
+      .mockImplementation();
+
+    expect(scrollableEl.scrollTo).not.toHaveBeenCalled();
     await act(() => userEvent.click(collapseButton));
     // Determine how to test this (jest dom does not do scroll events)
     // screen.getByLabelText(testProps.expandHeaderIconDescription);
-    expect(window.scrollTo).toHaveBeenCalled();
+    expect(scrollableEl.scrollTo).toHaveBeenCalled();
     await act(() => userEvent.click(collapseButton));
-    expect(window.scrollTo).toHaveBeenCalledTimes(2);
+    expect(scrollableEl.scrollTo).toHaveBeenCalledTimes(2);
   });
 
   it('PageHeader space for collapse button without navigation', async () => {
@@ -434,13 +437,33 @@ describe('PageHeader', () => {
 
   it('collapseHeader prop test', async () => {
     const dataTestId = uuidv4();
-    render(
-      <PageHeader {...testProps} collapseHeader={true} data-testid={dataTestId}>
-        {children}
-      </PageHeader>
+    // wrap PageHeader with something that looks scrollable
+    const { rerender } = render(
+      <div data-testid={dataTestId} style={{ overflow: 'auto' }}>
+        <PageHeader {...testProps} collapseHeader={false}>
+          {children}
+        </PageHeader>
+      </div>
     );
 
-    expect(window.scrollTo).toHaveBeenCalled();
+    const scrollableEl = screen.getByTestId(dataTestId);
+    scrollableEl.scrollTo = () => {};
+    scrollableEl.scrollTo = jest
+      .spyOn(scrollableEl, 'scrollTo')
+      .mockImplementation();
+
+    // Can't test without first adding scrollTo
+    expect(scrollableEl.scrollTo).not.toHaveBeenCalled();
+
+    rerender(
+      <div data-testid={dataTestId} style={{ overflow: 'auto' }}>
+        <PageHeader {...testProps} collapseHeader={true}>
+          {children}
+        </PageHeader>
+      </div>
+    );
+
+    expect(scrollableEl.scrollTo).toHaveBeenCalled();
   });
 
   it('Navigation row renders when Navigation but no tags', async () => {

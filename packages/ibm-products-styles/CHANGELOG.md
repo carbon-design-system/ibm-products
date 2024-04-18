@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.32.0...@carbon/ibm-products-styles@2.33.0) (2024-04-16)
+
+
+### Bug Fixes
+
+* **Datagrid:** style update to address relative position issue ([#4656](https://github.com/carbon-design-system/ibm-products/issues/4656)) ([b67871e](https://github.com/carbon-design-system/ibm-products/commit/b67871ef3486a6c28b51acfab1985fddc74c2c02))
+* full page story with global header ([#4794](https://github.com/carbon-design-system/ibm-products/issues/4794)) ([af77a38](https://github.com/carbon-design-system/ibm-products/commit/af77a387747cbf3aeef25d3bfb6b85325185413e))
+* productive card flex fix ([#4762](https://github.com/carbon-design-system/ibm-products/issues/4762)) ([7284183](https://github.com/carbon-design-system/ibm-products/commit/72841839c8b775ae70a51bf96d00f4d9de55e41d))
+* **sidePanel:** Close scrollbar overlap 3975 ([#4680](https://github.com/carbon-design-system/ibm-products/issues/4680)) ([8ef8d7b](https://github.com/carbon-design-system/ibm-products/commit/8ef8d7b98ceebc1a9934d98a5e5891c65163fedf))
+* spellcheck fixes and quiet flag ([#4805](https://github.com/carbon-design-system/ibm-products/issues/4805)) ([f29ea25](https://github.com/carbon-design-system/ibm-products/commit/f29ea25e33268b3784b504580e1e2b3e6f407b8d))
+* **tearsheet:** cover few scenarios of 400% zoom issue ([#4895](https://github.com/carbon-design-system/ibm-products/issues/4895)) ([e9a8b03](https://github.com/carbon-design-system/ibm-products/commit/e9a8b0307a9c9d8d5d8bab648fb409bd81321607))
+
+
+### Features
+
+* **ConditionBuilder:** First PR with generated files and basic configs, components ([#4801](https://github.com/carbon-design-system/ibm-products/issues/4801)) ([78fcba2](https://github.com/carbon-design-system/ibm-products/commit/78fcba2b99e1dc3958f1424ba33de3bded971083))
+* **FilterPanel:** added search and filter panel updates ([#4659](https://github.com/carbon-design-system/ibm-products/issues/4659)) ([8400717](https://github.com/carbon-design-system/ibm-products/commit/840071772774c85ac953c46964ce9307f5e98df7))
+* full page step description as node to match tearsheet ([#4788](https://github.com/carbon-design-system/ibm-products/issues/4788)) ([b8c1fc2](https://github.com/carbon-design-system/ibm-products/commit/b8c1fc22770934bd189e06c44e08a270c362db7d))
+* **TagOverflow:** multiline support ([#4618](https://github.com/carbon-design-system/ibm-products/issues/4618)) ([cf8cd1f](https://github.com/carbon-design-system/ibm-products/commit/cf8cd1fedccd069b68325e599f966ecfe009ea1d))
+* **TagOverflow:** new component TagOverflow ([#4535](https://github.com/carbon-design-system/ibm-products/issues/4535)) ([f9d6c57](https://github.com/carbon-design-system/ibm-products/commit/f9d6c57a35f0f6f422716f7143ea8e0b88d00f32))
+* **useravatar:** add default color ([#4679](https://github.com/carbon-design-system/ibm-products/issues/4679)) ([cb9f814](https://github.com/carbon-design-system/ibm-products/commit/cb9f814f2016e22ce1078b9792c95634768dcced))
+
+
+
+
+
+# [2.32.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.31.0...@carbon/ibm-products-styles@2.32.0) (2024-04-02)
+
+
+### Features
+
+* **FilterPanel:** added accordion and group ([#4620](https://github.com/carbon-design-system/ibm-products/issues/4620)) ([ade8310](https://github.com/carbon-design-system/ibm-products/commit/ade8310e1d834a7e00fa82f55d02367e28ae71bb))
+* **FilterPanel:** added checkbox with overflow ([#4594](https://github.com/carbon-design-system/ibm-products/issues/4594)) ([c08c303](https://github.com/carbon-design-system/ibm-products/commit/c08c3035180ef7381380db82f9f1ec47e403fa9b))
+* **ScrollGradient:** new component ScrollGradient ([#4446](https://github.com/carbon-design-system/ibm-products/issues/4446)) ([75e1622](https://github.com/carbon-design-system/ibm-products/commit/75e162243e5e00d9d923d592118d6692fcae9423))
+* **useravatar:** color tokens implementation ([#4608](https://github.com/carbon-design-system/ibm-products/issues/4608)) ([de8604b](https://github.com/carbon-design-system/ibm-products/commit/de8604b532a392e9e5093d2135913b4a712e8da0))
+
+
+
+
+
 # [2.31.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.30.1...@carbon/ibm-products-styles@2.31.0) (2024-03-26)
 
 

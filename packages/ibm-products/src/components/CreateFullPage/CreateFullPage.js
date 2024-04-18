@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, createContext, useRef } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -103,9 +103,6 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState(null);
-    const [headerHeight, setHeaderHeight] = useState(0);
-
-    const headerRef = useRef(null);
 
     useEffect(() => {
       const firstItem =
@@ -125,14 +122,6 @@ export let CreateFullPage = React.forwardRef(
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
       }
     }, [stepData, firstIncludedStep, lastIncludedStep, initialStep]);
-
-    useEffect(() => {
-      let headerHeight = 0;
-      if (title || breadcrumbs?.length > 0) {
-        headerHeight = headerRef.current.getBoundingClientRect().height;
-      }
-      setHeaderHeight(headerHeight);
-    }, [title, breadcrumbs]);
 
     useCreateComponentFocus({
       previousState,
@@ -185,7 +174,7 @@ export let CreateFullPage = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         {(title || breadcrumbs?.length > 0) && (
-          <div className={`${blockClass}__header`} ref={headerRef}>
+          <div className={`${blockClass}__header`}>
             <SimpleHeader
               title={title}
               breadcrumbs={breadcrumbs}
@@ -195,12 +184,7 @@ export let CreateFullPage = React.forwardRef(
             />
           </div>
         )}
-        <div
-          className={`${blockClass}__influencer-and-body-container`}
-          style={{
-            height: `calc(100vh - ${headerHeight}px)`,
-          }}
-        >
+        <div className={`${blockClass}__influencer-and-body-container`}>
           <div className={`${blockClass}__influencer`}>
             <CreateInfluencer
               stepData={stepData}

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.3...@carbon/ibm-cloud-cognitive-core@2.17.4) (2024-04-16)
+
+
+### Bug Fixes
+
+* use same node options as v1 for storybook build script ([#4902](https://github.com/carbon-design-system/ibm-products/issues/4902)) ([16354a1](https://github.com/carbon-design-system/ibm-products/commit/16354a12d0265a9dfa7f71269440f138e83662f8))
+
+
+### Performance Improvements
+
+* include code-splitting to reduce storybook builds and `terser-webpack-plugin` configuration ([#4909](https://github.com/carbon-design-system/ibm-products/issues/4909)) ([d151cf8](https://github.com/carbon-design-system/ibm-products/commit/d151cf8041b71e68aa9121d8bf657031b47f4493))
+
+
+
+
+
+## [2.17.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.2...@carbon/ibm-cloud-cognitive-core@2.17.3) (2024-04-02)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 ## [2.17.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.1...@carbon/ibm-cloud-cognitive-core@2.17.2) (2024-03-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

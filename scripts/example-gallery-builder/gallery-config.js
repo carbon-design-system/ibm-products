@@ -50,7 +50,7 @@ const getExampleDirectoriesConfig = (
   galleryConfigDir,
   directories
 ) => {
-  // examines peer directories and checks/updates for if has a thumbnail.pngopen .
+  // examines peer directories and checks/updates for if has a thumbnail.png open .
   const newConfig = [];
   // add the config for each dir
   directories.forEach((dir) => {

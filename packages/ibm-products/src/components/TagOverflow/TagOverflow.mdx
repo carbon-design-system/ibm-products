@@ -1,0 +1,66 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { TagOverflow } from '.';
+import * as TagOverflowStories from './TagOverflow.stories';
+
+# TagOverflow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Coded example](#coded-example)
+- [Component API](#component-api)
+
+## Overview
+
+A tag overflow is the use of an interactive tag with the addition of a toggletip
+to show additional content.
+
+The need to show additional items related to an object will occur in small
+spaces in the UI. A tag overflow count can be used with a group of tags when
+there is not enough space to show all tags related to an object. Clicking on the
+tag overflow presents a toggletip that lists up to 10 additional tags. If there
+are more than 10 additional tags, the toggletip also includes a link to view all
+tags. When the user clicks on this link, a modal opens with a list of all the
+tags associated with the object.
+
+## Example usage
+
+### Tags
+
+<Canvas>
+  <Story of={TagOverflowStories.ManyTags} />
+</Canvas>
+
+### Tags with truncation
+
+<Canvas>
+  <Story of={TagOverflowStories.TagsWithTruncation} />
+</Canvas>
+
+### Multiline tags
+
+<Canvas>
+  <Story of={TagOverflowStories.MultilineTags} />
+</Canvas>
+
+### UserAvatars
+
+<Canvas>
+  <Story of={TagOverflowStories.ManyUserAvatars} />
+</Canvas>
+
+### Custom components
+
+<Canvas>
+  <Story of={TagOverflowStories.CustomComponent} />
+</Canvas>
+
+## Coded example
+
+<CodesandboxLink exampleDirectory="TagOverflow" />
+
+## Component API
+
+<ArgsTable />

@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.34.0...@carbon/ibm-products@2.35.0) (2024-04-16)
+
+
+### Bug Fixes
+
+* add datagrid stateReducer row prop check ([#4763](https://github.com/carbon-design-system/ibm-products/issues/4763)) ([6bef7ce](https://github.com/carbon-design-system/ibm-products/commit/6bef7ce210afe667a270345a05fad0fa0529ec6f))
+* collapseHeader button and prop ([#4899](https://github.com/carbon-design-system/ibm-products/issues/4899)) ([fea8824](https://github.com/carbon-design-system/ibm-products/commit/fea88243d6f866e83a52b0a381363f43e856a889))
+* **Datagrid:** export editable cell hook ([#4791](https://github.com/carbon-design-system/ibm-products/issues/4791)) ([eaed703](https://github.com/carbon-design-system/ibm-products/commit/eaed7032e9179b9f502df9fa4facafb212e7f64d))
+* full page story with global header ([#4794](https://github.com/carbon-design-system/ibm-products/issues/4794)) ([af77a38](https://github.com/carbon-design-system/ibm-products/commit/af77a387747cbf3aeef25d3bfb6b85325185413e))
+* **NotificationsPanel:** fixed glitchy animation after closing the panel ([#4771](https://github.com/carbon-design-system/ibm-products/issues/4771)) ([d711b78](https://github.com/carbon-design-system/ibm-products/commit/d711b78c10b9fe4a1cb8a7616f67f7f97e3c041b))
+* **sidePanel:** Close scrollbar overlap 3975 ([#4680](https://github.com/carbon-design-system/ibm-products/issues/4680)) ([8ef8d7b](https://github.com/carbon-design-system/ibm-products/commit/8ef8d7b98ceebc1a9934d98a5e5891c65163fedf))
+* spellcheck fixes and quiet flag ([#4805](https://github.com/carbon-design-system/ibm-products/issues/4805)) ([f29ea25](https://github.com/carbon-design-system/ibm-products/commit/f29ea25e33268b3784b504580e1e2b3e6f407b8d))
+* spells ([#4912](https://github.com/carbon-design-system/ibm-products/issues/4912)) ([3f1bb6f](https://github.com/carbon-design-system/ibm-products/commit/3f1bb6f88b3c44e1aae099e3f7fa2b2c67d49b0a))
+
+
+### Features
+
+* **ConditionBuilder:** First PR with generated files and basic configs, components ([#4801](https://github.com/carbon-design-system/ibm-products/issues/4801)) ([78fcba2](https://github.com/carbon-design-system/ibm-products/commit/78fcba2b99e1dc3958f1424ba33de3bded971083))
+* **FilterPanel:** added search and filter panel updates ([#4659](https://github.com/carbon-design-system/ibm-products/issues/4659)) ([8400717](https://github.com/carbon-design-system/ibm-products/commit/840071772774c85ac953c46964ce9307f5e98df7))
+* full page step description as node to match tearsheet ([#4788](https://github.com/carbon-design-system/ibm-products/issues/4788)) ([b8c1fc2](https://github.com/carbon-design-system/ibm-products/commit/b8c1fc22770934bd189e06c44e08a270c362db7d))
+* **NoDataEmptyState:** convert to .tsx ([#4901](https://github.com/carbon-design-system/ibm-products/issues/4901)) ([a345950](https://github.com/carbon-design-system/ibm-products/commit/a34595081b2d9f772dad48c9bea7ba96ca2f145c))
+* **TagOverflow:** multiline support ([#4618](https://github.com/carbon-design-system/ibm-products/issues/4618)) ([cf8cd1f](https://github.com/carbon-design-system/ibm-products/commit/cf8cd1fedccd069b68325e599f966ecfe009ea1d))
+* **TagOverflow:** new component TagOverflow ([#4535](https://github.com/carbon-design-system/ibm-products/issues/4535)) ([f9d6c57](https://github.com/carbon-design-system/ibm-products/commit/f9d6c57a35f0f6f422716f7143ea8e0b88d00f32))
+* **useravatar:** add default color ([#4679](https://github.com/carbon-design-system/ibm-products/issues/4679)) ([cb9f814](https://github.com/carbon-design-system/ibm-products/commit/cb9f814f2016e22ce1078b9792c95634768dcced))
+
+
+
+
+
+# [2.34.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.33.0...@carbon/ibm-products@2.34.0) (2024-04-02)
+
+
+### Bug Fixes
+
+* **Datagrid:** address keyboard support with selectable/dropdown editable cells ([#4580](https://github.com/carbon-design-system/ibm-products/issues/4580)) ([06e4244](https://github.com/carbon-design-system/ibm-products/commit/06e42447f8d95e032e5e973f41e2c62ba9b64b53))
+* **Dataspreadsheet:** refractor larger event handlers to seperate util ([#4598](https://github.com/carbon-design-system/ibm-products/issues/4598)) ([b72827a](https://github.com/carbon-design-system/ibm-products/commit/b72827adf963a433ab4d5b05dae9f2fad90233a0))
+* **SidePanel:** replace incorrect prop in conditional prop types ([#4630](https://github.com/carbon-design-system/ibm-products/issues/4630)) ([129d74a](https://github.com/carbon-design-system/ibm-products/commit/129d74aab25a366c81b6f4e9e5f9e9270dca00d6))
+
+
+### Features
+
+* **FilterPanel:** added accordion and group ([#4620](https://github.com/carbon-design-system/ibm-products/issues/4620)) ([ade8310](https://github.com/carbon-design-system/ibm-products/commit/ade8310e1d834a7e00fa82f55d02367e28ae71bb))
+* **FilterPanel:** added checkbox with overflow ([#4594](https://github.com/carbon-design-system/ibm-products/issues/4594)) ([c08c303](https://github.com/carbon-design-system/ibm-products/commit/c08c3035180ef7381380db82f9f1ec47e403fa9b))
+* **ScrollGradient:** new component ScrollGradient ([#4446](https://github.com/carbon-design-system/ibm-products/issues/4446)) ([75e1622](https://github.com/carbon-design-system/ibm-products/commit/75e162243e5e00d9d923d592118d6692fcae9423))
+* **useravatar:** color tokens implementation ([#4608](https://github.com/carbon-design-system/ibm-products/issues/4608)) ([de8604b](https://github.com/carbon-design-system/ibm-products/commit/de8604b532a392e9e5093d2135913b4a712e8da0))
+* **useravatar:** test cases ([#4637](https://github.com/carbon-design-system/ibm-products/issues/4637)) ([a172ce5](https://github.com/carbon-design-system/ibm-products/commit/a172ce57f7f53a4c4dedb11bc144971968c62b41))
+
+
+
+
+
 # [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.32.0...@carbon/ibm-products@2.33.0) (2024-03-26)
 
 

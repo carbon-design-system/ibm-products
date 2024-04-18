@@ -82,7 +82,7 @@ FilterPanelAccordionItem.displayName = componentName;
 
 FilterPanelAccordionItem.propTypes = {
   /**
-   * Props specific to the internal `AccordionItem`.
+   * Props specific to the internal `AccordionItem` component.
    */
   accordionItemProps: PropTypes.shape({}),
 
@@ -112,7 +112,7 @@ FilterPanelAccordionItem.propTypes = {
   title: PropTypes.string,
 
   /**
-   * Props specific to the internal `TruncatedList`.
+   * Props specific to the internal `TruncatedList` component.
    */
   truncatedListProps: PropTypes.shape({}),
 };

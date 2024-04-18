@@ -16,7 +16,7 @@ import styles from './_storybook-styles.scss';
 import { inputData } from './assets/sampleInput';
 
 export default {
-  title: `IBM Products/Components/ConditionBuilder`,
+  title: 'IBM Products/Components/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

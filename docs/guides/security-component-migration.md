@@ -559,28 +559,24 @@ Unchanged props; names and functionality have not changed.
 
 ### SearchBar
 
-No changes
-
-Unchanged props; names and functionality have not changed.
-
-| Unchanged prop       |
-| :------------------- |
-| className            |
-| clearButtonLabelText |
-| hideScopesLabel      |
-| labelText            |
-| onChange             |
-| onSubmit             |
-| placeHolderText      |
-| scopeToString        |
-| scopes               |
-| scopesTypeLabel      |
-| selectedScopes       |
-| sortItems            |
-| submitLabel          |
-| titleText            |
-| translateWithId      |
-| value                |
+| Old prop             | New prop ↓           | Change                                 |
+| :------------------- | :------------------- | :------------------------------------- |
+| className            | className            | No change.                             |
+| clearButtonLabelText | clearButtonLabelText | No change.                             |
+| hideScopesLabel      | hideScopesLabel      | No change.                             |
+| labelText            | labelText            | No change.                             |
+| onChange             | onChange             | No change.                             |
+| onSubmit             | onSubmit             | No change.                             |
+| placeHolderText      | placeholderText      | **Changed case**                       |
+| scopeToString        | scopeToString        | No change.                             |
+| scopes               | scopes               | No change.                             |
+| scopesTypeLabel      | scopesTypeLabel      | No change.                             |
+| selectedScopes       | selectedScopes       | No change.                             |
+| sortItems            | sortItems            | No change.                             |
+| submitLabel          | submitLabel          | No change.                             |
+| titleText            | titleText            | **Deprecated** - Not used in component |
+| translateWithId      | translateWithId      | No change.                             |
+| value                | value                | No change.                             |
 
 ---
 

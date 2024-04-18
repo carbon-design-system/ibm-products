@@ -89,6 +89,7 @@ module.exports = {
     '/umd/',
     '/vendor/',
     '/scripts/',
+    'test-helper.js',
   ],
   transformIgnorePatterns: [
     '/build/',

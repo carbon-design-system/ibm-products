@@ -50,6 +50,16 @@ module.exports = {
     },
   ],
 
+  core: {
+    builder: {
+      name: 'webpack5',
+      options: {
+        lazyCompilation: true,
+        fsCache: true,
+      },
+    },
+  },
+
   framework: {
     name: '@storybook/react-webpack5',
     options: {},

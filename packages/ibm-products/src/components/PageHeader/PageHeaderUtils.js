@@ -188,13 +188,23 @@ export const utilCheckUpdateVerticalSpace = (
 };
 
 // Trigger a window scroll, if necessary, to set the collapsed state.
-export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
+export const utilSetCollapsed = (
+  collapse,
+  headerRef,
+  headerOffset,
+  headerTopValue
+) => {
   /* don't know how to test resize */
   /* istanbul ignore else */
+  let scrollableTarget = scrollableAncestor(headerRef.current);
+
   if (collapse) {
-    window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
+    scrollableTarget.scrollTo({
+      top: headerOffset - headerTopValue,
+      behavior: 'smooth',
+    });
   } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollableTarget.scrollTo({ top: 0, behavior: 'smooth' });
   }
 };
 

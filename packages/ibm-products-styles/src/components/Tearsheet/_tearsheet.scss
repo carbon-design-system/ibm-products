@@ -317,6 +317,16 @@ $motion-duration: $duration-moderate-02;
     }
   }
 
+  @include breakpoint-down(md) {
+    .#{$block-class}__container {
+      max-height: 100%;
+    }
+
+    .#{$block-class}__influencer {
+      flex-basis: auto;
+    }
+  }
+
   .#{$block-class}__influencer--wide {
     flex-basis: 321px; // influencer width 320px plus 1px border
   }

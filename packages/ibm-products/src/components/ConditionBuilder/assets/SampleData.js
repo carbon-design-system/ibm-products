@@ -1,7 +1,7 @@
 export const sampleDataStructure_tree = {
   groups: [
     {
-      groupSeperateOperator: 'and', // 'or'|'and'|'null',
+      groupSeparateOperator: 'and', // 'or'|'and'|'null',
       groupOperator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       conditions: [
@@ -27,7 +27,7 @@ export const sampleDataStructure_tree = {
         },
         //group object repeats
         {
-          groupSeperateOperator: 'and', // 'or'|'and'|'null',
+          groupSeparateOperator: 'and', // 'or'|'and'|'null',
           groupOperator: 'and', //'and|or',
           statement: 'if', // 'if|exclude if',
           conditions: [
@@ -53,7 +53,7 @@ export const sampleDataStructure_tree = {
             },
             //group object repeats
             {
-              groupSeperateOperator: 'and', // 'or'|'and'|'null',
+              groupSeparateOperator: 'and', // 'or'|'and'|'null',
               groupOperator: 'and', //'and|or',
               statement: 'if', // 'if|exclude if',
               conditions: [
@@ -80,7 +80,7 @@ export const sampleDataStructure_tree = {
 export const sampleDataStructure_sentence = {
   groups: [
     {
-      groupSeperateOperator: 'and', // 'or'|'and'|'null',
+      groupSeparateOperator: 'and', // 'or'|'and'|'null',
       groupOperator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       conditions: [

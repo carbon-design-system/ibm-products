@@ -121,8 +121,8 @@ Default.args = {
   lastBreadcrumb: lastBreadcrumbs[0],
 };
 
-export const LongTitleWithShortName = Template.bind({});
-LongTitleWithShortName.args = {
+export const LongTitleWithIconAndShortTitle = Template.bind({});
+LongTitleWithIconAndShortTitle.args = {
   breadcrumbs: breadcrumbItems,
   containerWidth: 500,
   overflowAriaLabel: 'Open and close additional breadcrumb item list.',

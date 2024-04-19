@@ -1,10 +1,8 @@
 import React from 'react';
 import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
-import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
 /**
  *
@@ -78,7 +76,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                     state={eachCondition}
                     group={state}
                     conditionIndex={conditionIndex}
-                    className={`${blockClass}__gyap ${blockClass}__gyap-bottom`}
+                    className={`${blockClass}__gap ${blockClass}__gap-bottom`}
                     onChange={(updatedConditions) => {
                       onChange({
                         ...state,
@@ -107,10 +105,10 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                         groupOperator: op,
                       });
                     }}
-                    onStatementChange={(stmnt) => {
+                    onStatementChange={(updatedStatement) => {
                       onChange({
                         ...state,
-                        statement: stmnt,
+                        statement: updatedStatement,
                       });
                     }}
                   ></ConditionBlock>
@@ -134,7 +132,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                       }}
                       className={
                         !isLastCondition(conditionIndex, conditionArr)
-                          ? `${blockClass}__gyap ${blockClass}__gyap-bottom`
+                          ? `${blockClass}__gap ${blockClass}__gap-bottom`
                           : ''
                       }
                     />

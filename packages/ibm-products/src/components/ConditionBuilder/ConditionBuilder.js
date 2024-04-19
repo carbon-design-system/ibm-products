@@ -15,16 +15,15 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/DataTreeContext';
+import { blockClass } from './ConditionBuilderContext/DataConfigs';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = 'ConditionBuilder';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.

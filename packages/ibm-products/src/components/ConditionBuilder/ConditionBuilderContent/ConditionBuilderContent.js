@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../../settings';
 import ConditionBuilderGroup from '../ConditionBuilderGroup/ConditionBuilderGroup';
 import { Button } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
@@ -14,10 +13,9 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/DataTreeContext';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
-const blockClass = `${pkg.prefix}--condition-builder`;
-
-function ConditionBuilderContent({ startConditionLabel, conditionBuilderRef }) {
+const ConditionBuilderContent=({ startConditionLabel, conditionBuilderRef })=> {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(true);

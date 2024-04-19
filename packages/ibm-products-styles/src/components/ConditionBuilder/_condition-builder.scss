@@ -36,10 +36,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: flex;
   flex-flow: row wrap;
 }
-.#{$block-class}__gyap {
+.#{$block-class}__gap {
   margin-right: $spacing-01;
 }
-.#{$block-class}__gyap-bottom {
+.#{$block-class}__gap-bottom {
   margin-bottom: $spacing-01;
 }
 .#{$block-class}__condition-block {

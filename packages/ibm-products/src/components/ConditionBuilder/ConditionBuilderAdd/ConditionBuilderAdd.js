@@ -1,13 +1,13 @@
 import React from 'react';
 import { AddAlt } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
-import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
-import { translateWithId } from '../ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  translateWithId,
+} from '../ConditionBuilderContext/DataConfigs';
 
-const blockClass = `${pkg.prefix}--condition-builder`;
-
-function ConditionBuilderAdd({ className, onClick }) {
+const ConditionBuilderAdd=({ className, onClick })=> {
   return (
     <div className={className}>
       <ConditionBuilderButton

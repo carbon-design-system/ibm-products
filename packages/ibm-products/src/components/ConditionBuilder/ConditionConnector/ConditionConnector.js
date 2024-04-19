@@ -1,11 +1,9 @@
 import React, { useCallback } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
+import { blockClass, translateWithId } from '../ConditionBuilderContext/DataConfigs';
 
-const blockClass = `${pkg.prefix}--condition-builder`;
-
-function ConditionConnector({ operator, className }) {
+const ConditionConnector=({ operator, className })=> {
   const handleConnectorHover = useCallback((e, isHover) => {
     let parentGroup = e.currentTarget.closest('.eachGroup');
     if (isHover) {
@@ -18,7 +16,7 @@ function ConditionConnector({ operator, className }) {
     <div className={className}>
       <ConditionBuilderItem
         label={operator}
-        title={'Connector'}
+        title={translateWithId('connector')}
         onMouseEnter={(e) => {
           handleConnectorHover(e, true);
         }}

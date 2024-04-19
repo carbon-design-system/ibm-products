@@ -59,7 +59,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__condition-builder-item-option
-  > ul[aria-multiselectable='true']
+  > ul[aria-multiSelectable='true']
   .#{$block-class}__condition-builder-item-option__option-label {
   justify-content: center;
 }

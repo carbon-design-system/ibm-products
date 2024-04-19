@@ -2,16 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../../settings';
 import { Add } from '@carbon/react/icons';
 
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import {
+  blockClass,
   translateWithId,
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
 
 export const ConditionBuilderItem = ({
   children,

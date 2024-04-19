@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -9,13 +8,13 @@ import ConditionConnector from '../ConditionConnector/ConditionConnector';
 
 import { ConditionBuilderContext } from '../ConditionBuilderContext/DataTreeContext';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
+import { blockClass, translateWithId } from '../ConditionBuilderContext/DataConfigs';
 
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
-const blockClass = `${pkg.prefix}--condition-builder`;
 
-function ConditionBlock(props) {
+const ConditionBlock=(props)=> {
   let { property, value, operator } = props.state;
   let {
     onRemove,
@@ -40,7 +39,7 @@ function ConditionBlock(props) {
   return (
     <div
       className={cx(
-        `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gyap`
+        `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap`
       )}
       role="row"
       tabIndex={-1}
@@ -51,23 +50,23 @@ function ConditionBlock(props) {
       {/* this code draws the connector conditions between each condition block */}
       {conjunction && (
         <ConditionConnector
-          className={`${blockClass}__gyap ${blockClass}__gyap-bottom`}
+          className={`${blockClass}__gap ${blockClass}__gap-bottom`}
           role="gridcell"
           operator={conjunction}
           onChange={(op) => onConnectorOperatorChange(op)}
         />
       )}
 
-    {/* this code draws the starting statement for each group */}
+      {/* this code draws the starting statement for each group */}
       {isStatement && (
         <div
-          className={`${blockClass}__gyap-bottom ${blockClass}__gyap`}
+          className={`${blockClass}__gap-bottom ${blockClass}__gap`}
           role="gridcell"
         >
           <ConditionBuilderItem
             open={false}
             label={group.statement}
-            title={'Condition'}
+            title={translateWithId('condition')}
             className={`${blockClass}__statement-button`}
           >
             popOver content
@@ -96,7 +95,7 @@ function ConditionBlock(props) {
         <ConditionBuilderItem
           label={label}
           isOpen={state.open}
-          title="Property"
+          title={translateWithId('property')}
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field propertyField`}
         >
@@ -118,11 +117,11 @@ function ConditionBlock(props) {
             config={{ options: inputConfig.properties }}
           /> */}
         </ConditionBuilderItem>
-         {/* this is the operator section */}
+        {/* this is the operator section */}
         {property && (
           <ConditionBuilderItem
             label={operator}
-            title={'Operator'}
+            title={translateWithId('operator')}
             className={'operatorField'}
           >
             popOver content
@@ -148,7 +147,7 @@ function ConditionBlock(props) {
             /> */}
           </ConditionBuilderItem>
         )}
-         {/* this is the value section */}
+        {/* this is the value section */}
         {property && operator && (
           <ConditionBuilderItem
             label={value}
@@ -176,12 +175,12 @@ function ConditionBlock(props) {
             /> */}
           </ConditionBuilderItem>
         )}
-         {/* this is the remove section(close button) */}
+        {/* this is the remove section(close button) */}
         <span role="gridcell">
           <ConditionBuilderButton
             role="gridcell"
             hideLabel
-            label={'Remove Condition'}
+            label={translateWithId('remove-condition')}
             onClick={onRemove}
             onMouseEnter={() => {
               setShowDeletionPreview(true);

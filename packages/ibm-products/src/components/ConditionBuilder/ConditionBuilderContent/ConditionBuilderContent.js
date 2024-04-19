@@ -24,7 +24,10 @@ import {
 
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
-function ConditionBuilderContent({ startConditionLabel, conditionBuilderRef }) {
+const ConditionBuilderContent = ({
+  startConditionLabel,
+  conditionBuilderRef,
+}) => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(true);
@@ -133,7 +136,7 @@ function ConditionBuilderContent({ startConditionLabel, conditionBuilderRef }) {
         ))}
     </div>
   );
-}
+};
 
 export default ConditionBuilderContent;
 

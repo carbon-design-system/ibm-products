@@ -3,42 +3,45 @@ import cx from 'classnames';
 
 import PropTypes from 'prop-types';
 import { Tooltip } from '@carbon/react';
+import { pkg } from '../../../settings';
 
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+const blockClass = `${pkg.prefix}--condition-builder`;
 
 export const ConditionBuilderButton = ({
   className,
   label,
-  hideLabel = false,
-  tooltipAlign = 'top',
+  hideLabel,
+  tooltipAlign,
   renderIcon: Icon,
   onClick,
   showToolTip,
   role,
   ...rest
 }) => {
-  const button = (
-    <button
-      {...rest}
-      role={!hideLabel ? role : undefined}
-      // role={'gridcell'}
-      tabIndex={-1}
-      className={cx([
-        className,
-        `${blockClass}__condition-builder-button`,
-        { [`${blockClass}__text-ellipsis`]: showToolTip && !hideLabel },
-      ])}
-      type="button"
-      onClick={(e) => {
-        if (onClick) {
-          onClick(e);
-        }
-      }}
-    >
-      {Icon && <Icon />}
-      {!hideLabel && label}
-    </button>
-  );
+  const Button = () => {
+    return (
+      <button
+        {...rest}
+        role={!hideLabel ? role : undefined}
+        // role={'gridcell'}
+        tabIndex={-1}
+        className={cx([
+          className,
+          `${blockClass}__condition-builder-button`,
+          { [`${blockClass}__text-ellipsis`]: showToolTip && !hideLabel },
+        ])}
+        type="button"
+        onClick={(e) => {
+          if (onClick) {
+            onClick(e);
+          }
+        }}
+      >
+        {Icon && <Icon />}
+        {!hideLabel && label}
+      </button>
+    );
+  };
 
   return hideLabel || showToolTip ? (
     <Tooltip
@@ -46,12 +49,13 @@ export const ConditionBuilderButton = ({
       align={tooltipAlign}
       className={`${blockClass}__con-tooltip`}
     >
-      {button}
+      {Button()}
     </Tooltip>
   ) : (
-    button
+    <>{Button()}</>
   );
 };
+
 ConditionBuilderButton.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.

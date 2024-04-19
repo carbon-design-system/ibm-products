@@ -77,7 +77,7 @@ export const ConditionBuilderItemOption = ({
       <ul
         //  aria-label={conditionState.property?.label ?? 'Property'}
         role="listbox"
-        data-multiSelect={multiSelectable}
+        data-multi-select={multiSelectable}
       >
         {filteredItems?.map((option) => {
           let isSelected = selection.includes(option.id);

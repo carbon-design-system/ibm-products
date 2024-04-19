@@ -7,7 +7,7 @@ import {
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 
-function ConditionBuilderAdd({ className, onClick }) {
+const ConditionBuilderAdd = ({ className, onClick }) => {
   return (
     <div className={className} role="gridcell">
       <ConditionBuilderButton
@@ -20,7 +20,7 @@ function ConditionBuilderAdd({ className, onClick }) {
       />
     </div>
   );
-}
+};
 
 export default ConditionBuilderAdd;
 

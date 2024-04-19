@@ -6,50 +6,70 @@
  */
 
 const { merge } = require('webpack-merge');
-const { dirname, join, resolve } = require('path');
+const { resolve } = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const glob = require('fast-glob');
+import remarkGfm from 'remark-gfm';
 
 const maxAssetSize = 1024 * 1024;
+
+const storyGlobs = [
+  '../../ibm-products/src/**/*.stories.*',
+  '../../ibm-products-community/src/**/*.stories.*',
+  '../src/**/*.stories.*',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+];
+
+const stories = glob.sync(storyGlobs, {
+  ignore: [
+    '../../**!(node_modules)/**!(node_modules)/*.mdx',
+    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
+  ],
+  cwd: __dirname,
+});
 
 module.exports = {
   staticDirs: ['../public'],
   addons: [
-    getAbsolutePath('@storybook/addon-actions'),
-    getAbsolutePath('@storybook/addon-docs'),
-    getAbsolutePath('@storybook/addon-controls'),
-    getAbsolutePath('@storybook/addon-links'),
+    '@storybook/addon-actions',
+    '@storybook/addon-controls',
+    '@storybook/addon-links',
+    '@storybook/addon-storysource',
+    '@storybook/addon-viewport',
+    '@storybook/addon-mdx-gfm',
+    '@carbon/storybook-addon-theme/preset.js',
     {
-      name: '@storybook/addon-storysource',
+      name: '@storybook/addon-docs',
       options: {
-        rule: {
-          test: /(-story|.stories).js$/,
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
         },
       },
     },
-    getAbsolutePath('@storybook/addon-viewport'),
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
-    '@carbon/storybook-addon-theme/preset.js',
   ],
 
-  framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
-    options: {
-      //   fastRefresh: true,
-      //   strictMode: true,
+  core: {
+    builder: {
+      name: 'webpack5',
+      options: {
+        lazyCompilation: true,
+        fsCache: true,
+      },
     },
   },
 
-  features: {
-    // setting storyStoryV7 to false allows the storybook to build
-    storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
 
-  stories: [
-    '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
-    '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
-    '../+(docs|src)/**/*+(-story|.stories).*',
-    '../../../examples/**/*+(-story|.stories).*',
-  ],
+  features: {
+    storyStoreV7: true,
+  },
+
+  stories,
 
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
@@ -78,10 +98,6 @@ module.exports = {
       },
       performance: {
         maxAssetSize: maxAssetSize,
-      },
-      cache: {
-        type: 'filesystem',
-        allowCollectingMemory: true,
       },
       module: {
         rules: [
@@ -129,7 +145,3 @@ module.exports = {
       },
     }),
 };
-
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, 'package.json')));
-}

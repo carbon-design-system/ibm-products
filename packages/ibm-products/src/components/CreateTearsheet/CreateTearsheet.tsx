@@ -291,6 +291,7 @@ export let CreateTearsheet = forwardRef(
           slug,
           title,
           verticalPosition,
+          closeIconDescription: '',
         }}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>

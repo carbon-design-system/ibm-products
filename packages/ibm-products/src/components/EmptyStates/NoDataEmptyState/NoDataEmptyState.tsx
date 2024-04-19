@@ -6,12 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Link } from '@carbon/react';
+import { Button, Link, ButtonProps } from '@carbon/react';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
@@ -24,10 +25,71 @@ import { defaults } from '../EmptyState';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NoDataEmptyState';
 
+interface NoDataEmptyStateProps {
+  /**
+   * Empty state action button
+   */
+  action?: {
+    kind?: 'primary' | 'secondary' | 'tertiary';
+    renderIcon?: CarbonIconType;
+    onClick?: ButtonProps['onClick'];
+    text?: string;
+  };
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * The alt text for empty state svg images. If not provided, title will be used.
+   */
+  illustrationDescription?: string;
+
+  /**
+   * Designates the position of the illustration relative to the content
+   */
+  illustrationPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
+   * Empty state illustration theme variations.
+   * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
+   * based on your app's current theme value. Example:
+   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
+   */
+  illustrationTheme?: 'light' | 'dark';
+
+  /**
+   * Empty state link object
+   */
+  link?: {
+    text?: string | ReactNode;
+    href?: string;
+  };
+
+  /**
+   * Empty state size
+   */
+  size?: 'lg' | 'sm';
+
+  /**
+   * Empty state subtitle
+   */
+  subtitle?: string | React.ReactNode;
+
+  /**
+   * Empty state title
+   */
+  title: string | React.ReactNode;
+}
+
 /**
  * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
  */
-export let NoDataEmptyState = React.forwardRef(
+export let NoDataEmptyState = React.forwardRef<
+  HTMLDivElement,
+  NoDataEmptyStateProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -72,7 +134,7 @@ export let NoDataEmptyState = React.forwardRef(
           link={link}
           size={size}
           subtitle={subtitle}
-          title={title}
+          title={title || ''}
         />
       </div>
     );

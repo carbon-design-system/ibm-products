@@ -64,7 +64,7 @@ export const handleKeyDown = (e, conditionBuilderRef) => {
           if (
             e.target.closest('[role="gridcell"]')?.querySelector('button')
               ?.dataset.name == 'valueField' &&
-            e.target.closest('ul').dataset.multiSelect == 'false'
+            e.target.closest('ul')?.dataset.multiSelect == 'false'
           ) {
             e.target
               .closest('[role="row"]')
@@ -123,7 +123,7 @@ export const handleKeyDown = (e, conditionBuilderRef) => {
     }
   }
   const navigateToNextRowCell = (e, currentRowIndex, rows) => {
-    if (rows[currentRowIndex].childElementCount == 1) {
+    if (rows[currentRowIndex]?.childElementCount == 1) {
       if (e.key == 'ArrowUp') {
         rows[currentRowIndex - 1]?.focus();
       }

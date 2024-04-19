@@ -36,6 +36,7 @@ export const ConditionBuilderButton = ({
         }}
       >
         {Icon && <Icon />}
+        {/* here goes the logic to show multiSelected items as first,second, +n */}
         {!hideLabel && label}
       </button>
     );

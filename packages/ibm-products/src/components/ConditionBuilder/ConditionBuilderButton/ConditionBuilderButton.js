@@ -3,9 +3,7 @@ import cx from 'classnames';
 
 import PropTypes from 'prop-types';
 import { Tooltip } from '@carbon/react';
-import { pkg } from '../../../settings';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
 export const ConditionBuilderButton = ({
   className,

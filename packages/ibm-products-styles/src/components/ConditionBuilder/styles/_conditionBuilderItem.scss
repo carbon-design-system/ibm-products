@@ -52,7 +52,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__condition-builder-item-option__option-label {
   display: flex;
   overflow: hidden;
-  height: inherit;
   align-items: center;
   column-gap: $spacing-03;
   text-overflow: ellipsis;

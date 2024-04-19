@@ -40,6 +40,7 @@ export const ConditionBuilderButton = ({
       </button>
     );
   };
+
   return hideLabel || showToolTip ? (
     <Tooltip
       label={label}
@@ -49,9 +50,10 @@ export const ConditionBuilderButton = ({
       {Button()}
     </Tooltip>
   ) : (
-    <Button />
+    <>{Button()}</>
   );
 };
+
 ConditionBuilderButton.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
@@ -72,7 +74,6 @@ ConditionBuilderButton.propTypes = {
   onClick: PropTypes.func,
   /**
    * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
    */
   renderIcon: PropTypes.func,
   /**

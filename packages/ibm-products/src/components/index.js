@@ -126,3 +126,4 @@ export {
   FilterPanelCheckbox,
   FilterPanelLabel,
 } from './FilterPanel';
+export { ConditionBuilder } from './ConditionBuilder';

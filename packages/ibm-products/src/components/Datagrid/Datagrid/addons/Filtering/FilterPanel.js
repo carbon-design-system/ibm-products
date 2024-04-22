@@ -13,6 +13,7 @@ import {
   innerContainerVariants,
   panelVariants,
 } from './motion/variants';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   useFilters,
   useShouldDisableButtons,
@@ -24,7 +25,6 @@ import { Close } from '@carbon/react/icons';
 import { FilterContext } from './FilterProvider';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion, useReducedMotion } from 'framer-motion';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
 
@@ -117,7 +117,11 @@ const FilterPanel = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     // From the user
-    onApply();
+    onApply({
+      filtersState,
+      filtersObjectArray,
+      lastAppliedFilters,
+    });
     // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 

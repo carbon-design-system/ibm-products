@@ -84,7 +84,7 @@ export const TagOverflowModal = ({
         ...rest
       }
       containerClassName={`${blockClass}__container`}
-      className={cx(className, `${blockClass}`)}
+      className={cx(className, blockClass)}
       size="sm"
       {...{ open, onClose }}
     >

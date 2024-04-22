@@ -72,7 +72,7 @@ export const TagOverflowPopover = React.forwardRef(
           ...rest
         }
         aria-hidden={overflowTags.length === 0}
-        className={cx(`${blockClass}`, {
+        className={cx(blockClass, {
           [`${blockClass}--hidden`]: overflowTags.length === 0,
         })}
         ref={ref || localRef}

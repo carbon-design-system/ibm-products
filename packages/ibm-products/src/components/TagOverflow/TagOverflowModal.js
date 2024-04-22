@@ -104,8 +104,8 @@ export const TagOverflowModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {filteredModalTags.map(({ label, ...other }, index) => (
-          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+        {filteredModalTags.map(({ label, id, ...other }) => (
+          <Tag {...other} filter={false} key={id}>
             {label}
           </Tag>
         ))}

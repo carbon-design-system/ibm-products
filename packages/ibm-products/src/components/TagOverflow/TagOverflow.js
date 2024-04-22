@@ -162,7 +162,7 @@ export let TagOverflow = React.forwardRef(
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: item.tagType, label: item.label };
+        return { type: item.tagType, label: item.label, id: item.id };
       });
 
       setVisibleItems(visibleItemsArr);
@@ -218,7 +218,7 @@ export let TagOverflow = React.forwardRef(
                 overflowAlign={overflowAlign}
                 overflowType={overflowType}
                 showAllTagsLabel={showAllTagsLabel}
-                key="displayed-tag-overflow"
+                key="tag-overflow-popover"
                 ref={overflowRef}
                 popoverOpen={popoverOpen}
                 setPopoverOpen={setPopoverOpen}

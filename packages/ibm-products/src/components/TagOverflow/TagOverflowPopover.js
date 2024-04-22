@@ -28,7 +28,6 @@ export const TagOverflowPopover = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
       className,
       onShowAllClick,
@@ -101,7 +100,7 @@ export const TagOverflowPopover = React.forwardRef(
                       ? index < allTagsModalSearchThreshold
                       : index <= allTagsModalSearchThreshold
                   )
-                  .map((tag, index) => {
+                  .map((tag) => {
                     const tagProps = {};
                     if (overflowType === 'tag') {
                       tagProps.type = 'high-contrast';
@@ -117,7 +116,7 @@ export const TagOverflowPopover = React.forwardRef(
                           [`${blockClass}__tag-item--tag`]:
                             overflowType === 'tag',
                         })}
-                        key={index}
+                        key={tag.id}
                       >
                         {tag.label}
                         {/* {React.cloneElement(tag, tagProps)} */}

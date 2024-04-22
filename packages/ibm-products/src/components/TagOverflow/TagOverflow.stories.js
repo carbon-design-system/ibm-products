@@ -209,8 +209,8 @@ const Template = (argsIn) => {
 };
 
 // Declaration of stories
-export const FiveTags = Template.bind({});
-FiveTags.args = {
+export const TagsWithOverflowCount = Template.bind({});
+TagsWithOverflowCount.args = {
   containerWidth: 250,
   items: fiveTags,
 };
@@ -221,8 +221,8 @@ TagsWithTruncation.args = {
   items: longTags,
 };
 
-export const ManyTags = Template.bind({});
-ManyTags.args = {
+export const TagsWithOverflowModal = Template.bind({});
+TagsWithOverflowModal.args = {
   containerWidth: 500,
   items: tags,
   ...overflowAndModalStrings,
@@ -236,24 +236,24 @@ MultilineTags.args = {
   ...overflowAndModalStrings,
 };
 
-export const UserAvatars = Template.bind({});
-UserAvatars.args = {
+export const UserAvatarsWithOverflowCount = Template.bind({});
+UserAvatarsWithOverflowCount.args = {
   containerWidth: 250,
   items: UserAvatarArr,
   tagComponent: UserAvatar,
 };
 
-export const ManyUserAvatars = Template.bind({});
-ManyUserAvatars.args = {
-  containerWidth: 500,
+export const UserAvatarsWithOverflowModal = Template.bind({});
+UserAvatarsWithOverflowModal.args = {
+  containerWidth: 300,
   items: ManyUserAvatarArr,
   tagComponent: UserAvatar,
   ...overflowAndModalStrings,
 };
 
-export const CustomComponent = Template.bind({});
-CustomComponent.args = {
-  containerWidth: 500,
+export const CustomComponentsWithOverflowModal = Template.bind({});
+CustomComponentsWithOverflowModal.args = {
+  containerWidth: 200,
   items: IconComponentArr,
   tagComponent: IconComponent,
   ...overflowAndModalStrings,

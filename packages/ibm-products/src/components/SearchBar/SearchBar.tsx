@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,10 +33,71 @@ const defaults = {
   hideScopesLabel: true,
 };
 
-/**
- * Search bar with input field and search button
- */
-export let SearchBar = React.forwardRef(
+type Scopes = string[] | object[];
+
+interface SearchBarProps extends PropsWithChildren {
+  /** @type {string} Optional additional class name. */
+  className?: string;
+
+  /** @type {string} The label text for the search text input. */
+  clearButtonLabelText: string;
+
+  /**
+   * Whether or not the scopes MultiSelect label is visually hidden.
+   */
+  hideScopesLabel?: boolean;
+
+  /** @type {string} The label text for the search text input. */
+  labelText?: string;
+
+  /** @type {Function} Function handler for when the user changes their query search. */
+  onChange?: (event: any) => void;
+
+  /** @type {Function} Function handler for when the user submits a search. */
+  onSubmit?: (event: any) => void;
+
+  /** @type {string} Placeholder text to be displayed in the search input. */
+  placeHolderText: string;
+
+  /** @type {Function} Function to get the text for each scope to display in dropdown. */
+  scopeToString?: () => void;
+
+  /** @type {Array<any>} Array of allowed search scopes. */
+  scopes?: Scopes;
+
+  /** @type {string} The name text for the search scope type. */
+
+  // eslint-disable-next-line react/require-default-props
+  scopesTypeLabel?: typeof conditionalScopePropValidator;
+
+  /** @type {Array<any> Array of initially selected search scopes. */
+  selectedScopes?: Scopes;
+
+  /**
+   * Optional custom sorting algorithm for an array of scope items.
+   * By default, scope items are sorted in ascending alphabetical order,
+   * with "selected" items moved to the start of the scope items array.
+   */
+  sortItems?: () => void; // eslint-disable-line react/require-default-props
+
+  /** @type {string} The label text for the search submit button. */
+  submitLabel: string;
+
+  /**
+   * Provide accessible label text for the scopes MultiSelect.
+   */
+  titleText?: string;
+
+  /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
+  translateWithId?: () => void; // eslint-disable-line react/require-default-props
+
+  /** @type {string} Search query value. */
+  value?: string;
+  /**
+   * Search bar with input field and search button
+   */
+}
+export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -47,18 +108,17 @@ export let SearchBar = React.forwardRef(
       onChange = defaults.onChange,
       onSubmit = defaults.onSubmit,
       placeHolderText,
-      scopes = defaults.scopes,
+      scopes = [],
       scopesTypeLabel,
       scopeToString,
-      selectedScopes = defaults.selectedScopes,
+      selectedScopes = [],
       sortItems,
       submitLabel,
       translateWithId,
       value,
-
       // Collect any other property values passed in.
       ...rest
-    },
+    }: SearchBarProps,
     ref
   ) => {
     const [text, setText] = useState(value || '');
@@ -76,10 +136,11 @@ export let SearchBar = React.forwardRef(
      * Handler for form submit that calls onSubmit prop.
      * @param {Event} event Submit event generated.
      */
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
       event.preventDefault();
-      const eventObject = { value: text };
-
+      const eventObject: { value: string; selectedScopes?: Scopes } = {
+        value: text,
+      };
       if (scopes.length > 0) {
         eventObject.selectedScopes = _selectedScopes;
       }
@@ -91,7 +152,11 @@ export let SearchBar = React.forwardRef(
      * Handler for when scope selection changes that calls onChangeProp.
      * @param {{selectedItems: Array<any>}} {selectedItems} Object containing array of selected items.
      */
-    const handleSearchScopeChange = ({ selectedItems }) => {
+    const handleSearchScopeChange = ({
+      selectedItems,
+    }: {
+      selectedItems: Scopes;
+    }) => {
       setSelectedScopes(selectedItems);
 
       onChange({
@@ -104,10 +169,9 @@ export let SearchBar = React.forwardRef(
      * Handler for search input changes that calls onChange prop.
      * @param {KeyboardEvent} event Event object from input change.
      */
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: any) => {
       const { value } = event.target;
-      const eventObject = { value };
-
+      const eventObject: { value: string; selectedScopes?: Scopes } = { value };
       if (scopes.length > 0) {
         eventObject.selectedScopes = selectedScopes;
       }
@@ -183,7 +247,7 @@ const conditionalScopePropValidator = (
       `Required \`${propName}\` when \`scopes\` prop type is supplied to \`${componentName}\`. Validation failed.`
     );
   }
-
+  /**@ts-ignore */
   return PropTypes.string(props, propName, componentName, ...rest);
 };
 
@@ -218,6 +282,7 @@ SearchBar.propTypes = {
   scopeToString: PropTypes.func,
 
   /** @type {Array<any>} Array of allowed search scopes. */
+  /**@ts-ignore */
   scopes: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   ),
@@ -227,6 +292,7 @@ SearchBar.propTypes = {
   scopesTypeLabel: conditionalScopePropValidator,
 
   /** @type {Array<any> Array of initially selected search scopes. */
+  /**@ts-ignore */
   selectedScopes: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   ),

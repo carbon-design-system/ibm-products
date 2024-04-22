@@ -37,7 +37,7 @@ interface HTTPErrorOtherProps extends PropsWithChildren {
   /**
    * Links that will display for extra context when receiving particular errors
    */
-  links: Array<{
+  links?: Array<{
     /**
      * The text to display for the link
      */

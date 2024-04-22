@@ -1,12 +1,15 @@
 import React, { useCallback } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
-import { connectorConfig } from '../ConditionBuilderContext/DataConfigs';
+import {
+  connectorConfig,
+  translateWithId,
+} from '../ConditionBuilderContext/DataConfigs';
 import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
+import { focusThisField } from '../utils/genericMethods';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
-
 function ConditionConnector({ operator, className, onChange, ...rest }) {
   const handleConnectorHover = useCallback((e, isHover) => {
     let parentGroup = e.currentTarget.closest('.eachGroup');
@@ -20,7 +23,8 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
     <div className={className} {...rest}>
       <ConditionBuilderItem
         label={operator}
-        title={'Connector'}
+        title={translateWithId('connector')}
+        data-name="connectorField"
         onMouseEnter={(e) => {
           handleConnectorHover(e, true);
         }}
@@ -41,8 +45,12 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
           }}
           conditionState={{
             value: operator,
+            label: translateWithId('connector'),
           }}
-          onChange={(op) => onChange(op)}
+          onChange={(op, e) => {
+            onChange(op);
+            focusThisField(e);
+          }}
         />
       </ConditionBuilderItem>
     </div>

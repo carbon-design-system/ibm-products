@@ -18,11 +18,8 @@ const ConditionGroupBuilder = ({ state, aria, onRemove, onChange }) => {
   };
 
   return (
-    <div
-      className={` ${blockClass}__condition-builder__group eachGroup`}
-      role={aria.level === 1 ? 'rowgroup' : undefined}
-    >
-      <div className={`${blockClass}__condition-wrapper`}>
+    <div className={` ${blockClass}__condition-builder__group eachGroup`}>
+      <div className={`${blockClass}__condition-wrapper`} role="grid">
         {/* condition loop starts here */}
 
         {state?.conditions?.map(

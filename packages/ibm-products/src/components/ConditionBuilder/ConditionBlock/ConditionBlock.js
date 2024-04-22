@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {
   operatorConfig,
   statementConfig,
+  translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
 import cx from 'classnames';
@@ -29,11 +30,10 @@ function ConditionBlock(props) {
     onConnectorOperatorChange,
     isStatement,
     group,
-    aria,
     onStatementChange,
   } = props;
   const { inputConfig } = useContext(ConditionBuilderContext);
-
+  console.log(JSON.stringify(state));
   //Below possible input types expected for value field.
   const itemComponents = {
     option: ConditionBuilderItemOption,
@@ -61,7 +61,6 @@ function ConditionBlock(props) {
       (eachProperty) =>
         eachProperty.label?.toUpperCase() == property?.toUpperCase()
     )[0] ?? {};
-
   const ItemComponent = property ? itemComponents[type] : null;
 
   return (
@@ -69,31 +68,30 @@ function ConditionBlock(props) {
       className={cx(
         `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom`
       )}
+      role="row"
       tabIndex={-1}
-      aria-level={aria.level}
-      aria-posinset={aria.posinset}
-      aria-setsize={aria.setsize}
     >
       {conjunction && (
         <ConditionConnector
           className={`${blockClass}__gap`}
-          role="row"
           operator={conjunction}
           onChange={(op) => onConnectorOperatorChange(op)}
         />
       )}
 
       {isStatement && (
-        <div className={` ${blockClass}__gap`} role="row">
+        <div className={` ${blockClass}__gap`}>
           <ConditionBuilderItem
             open={false}
             label={group.statement}
-            title={'Condition'}
+            title={translateWithId('condition')}
+            data-name="connectorField"
             className={`${blockClass}__statement-button`}
           >
             <ConditionBuilderItemOption
               conditionState={{
                 value: group.statement,
+                label: translateWithId('condition'),
               }}
               onChange={(v, e) => {
                 onValueSelect(e, 'propertyField');
@@ -111,12 +109,11 @@ function ConditionBlock(props) {
           [`${blockClass}__condition-builder-condition__deletion-preview`]:
             showDeletionPreview,
         })}
-        role="row"
       >
         <ConditionBuilderItem
           label={label}
           isOpen={state.open}
-          title="Property"
+          title={translateWithId('property')}
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field`}
           data-name="propertyField"
@@ -124,6 +121,7 @@ function ConditionBlock(props) {
           <ConditionBuilderItemOption
             conditionState={{
               value: property,
+              label: translateWithId('property'),
             }}
             onChange={(v, e) => {
               onValueSelect(e, 'operatorField');
@@ -141,7 +139,7 @@ function ConditionBlock(props) {
         {property && (
           <ConditionBuilderItem
             label={operator}
-            title={'Operator'}
+            title={translateWithId('operator')}
             data-name="operatorField"
           >
             <ConditionBuilderItemOption
@@ -152,6 +150,7 @@ function ConditionBlock(props) {
               }}
               conditionState={{
                 value: operator,
+                label: translateWithId('operator'),
               }}
               onChange={(v, e) => {
                 onValueSelect(e, 'valueField');
@@ -170,7 +169,7 @@ function ConditionBlock(props) {
           <ConditionBuilderItem
             label={value}
             type={type}
-            title={property}
+            title={label}
             isOpen={state.open}
             showToolTip={true}
             data-name="valueField"

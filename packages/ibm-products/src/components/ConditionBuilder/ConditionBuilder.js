@@ -18,7 +18,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
-import { handleKeyDown } from './handleKeyboardEvents/handleKeyboardEvents';
+import { handleKeyDown } from './utils/handleKeyboardEvents';
 import { pkg } from '../../settings';
 import { blockClass } from './ConditionBuilderContext/DataConfigs';
 
@@ -88,7 +88,6 @@ export let ConditionBuilder = React.forwardRef(
             }
           )}
           ref={conditionBuilderRef}
-          role="main"
           {...getDevtoolsProps(componentName)}
         >
           <VStack onKeyDown={(e) => handleKeyDown(e, conditionBuilderRef)}>

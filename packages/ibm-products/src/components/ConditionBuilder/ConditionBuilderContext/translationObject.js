@@ -17,5 +17,10 @@ export const translationsObject = {
     after: 'is after',
     between: 'is between',
     'add-condition': 'Add Condition',
+    'remove-condition': 'Remove Condition',
+    condition: 'Condition',
+    property: 'Property',
+    operator: 'Operator',
+    connector: 'Connector',
   },
 };

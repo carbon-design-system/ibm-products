@@ -9,12 +9,16 @@ import {
 
 const ConditionBuilderAdd = ({ className, onClick }) => {
   return (
-    <div className={className} role="gridcell">
+    <div
+      className={`${className} ${blockClass}__add-button-wrapper`}
+      role="gridcell"
+    >
       <ConditionBuilderButton
         renderIcon={AddAlt}
         onClick={onClick}
         className={`${blockClass}__add-button`}
         hideLabel
+        data-name="addButton"
         label={translateWithId('add-condition')}
         role="gridcell"
       />

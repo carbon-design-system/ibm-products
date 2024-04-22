@@ -1,32 +1,12 @@
-import { pkg } from '../../../settings';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import {
+  focusThisField,
+  focusThisItem,
+  traverseClockVise,
+  traverseReverse,
+} from './genericMethods';
 
 export const handleKeyDown = (e, conditionBuilderRef) => {
-  const blockClass = `${pkg.prefix}--condition-builder`;
-  const focusThisItem = (currentElement) => {
-    setTimeout(() => {
-      document.activeElement.setAttribute('tabindex', '-1');
-      currentElement.setAttribute('tabindex', '0');
-      currentElement?.focus();
-    }, 0);
-  };
-  const traverseClockVise = (eachElem, index, allElements) => {
-    if (eachElem == document.activeElement) {
-      if (index !== allElements.length - 1) {
-        focusThisItem(allElements[index + 1]);
-      } else {
-        focusThisItem(allElements[0]);
-      }
-    }
-  };
-  const traverseReverse = (eachElem, index, allElements) => {
-    if (eachElem == document.activeElement) {
-      if (index !== 0) {
-        focusThisItem(allElements[index - 1]);
-      } else {
-        focusThisItem(allElements[allElements.length - 1]);
-      }
-    }
-  };
   const handleKeyPressForPopover = (e, parentContainer) => {
     const key = e.key;
     switch (key) {
@@ -75,8 +55,7 @@ export const handleKeyDown = (e, conditionBuilderRef) => {
         break;
       case 'Escape':
         //focus the corresponding field in which the popover is triggered
-        e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
-        e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
+        focusThisField(e);
         break;
       default:
         break;
@@ -123,93 +102,104 @@ export const handleKeyDown = (e, conditionBuilderRef) => {
     }
   }
   const navigateToNextRowCell = (e, currentRowIndex, rows) => {
-    if (rows[currentRowIndex]?.childElementCount == 1) {
-      if (e.key == 'ArrowUp') {
-        rows[currentRowIndex - 1]?.focus();
-      }
-      if (e.key == 'ArrowDown') {
-        rows[currentRowIndex + 1]?.focus();
-      }
+    //when the focussed element is a cell of the row which has only 1 cell (connector or statement) , focus the next row
 
-      //focus next row
-    } else {
-      let nextRowIndex = currentRowIndex;
-      if (e.key == 'ArrowUp') {
-        nextRowIndex =
-          currentRowIndex == 1 ? currentRowIndex : currentRowIndex - 2;
-      }
-      if (e.key == 'ArrowDown') {
-        nextRowIndex =
-          currentRowIndex == rows.length - 1
-            ? rows.length - 1
-            : currentRowIndex + 2;
-      }
-      let nextRow = rows[nextRowIndex];
-      let itemName = e.target.dataset.name;
-      nextRow?.querySelector(`[data-name="${itemName}"]`)?.focus();
+    let nextRowIndex = currentRowIndex;
+    if (e.key == 'ArrowUp') {
+      nextRowIndex =
+        currentRowIndex == 0 ? currentRowIndex : currentRowIndex - 1;
     }
+    if (e.key == 'ArrowDown') {
+      nextRowIndex =
+        currentRowIndex == rows.length - 1
+          ? rows.length - 1
+          : currentRowIndex + 1;
+    }
+    let nextRow = rows[nextRowIndex];
+    let itemName = e.target.dataset.name;
+    nextRow?.querySelector(`[data-name="${itemName}"]`)?.focus();
+    // }
   };
 
-  function getCells(row) {
-    return Array.from(
-      row.querySelectorAll(
-        '[role="gridcell"] button, [role="gridcell"][tabindex]'
-      )
-    );
-  }
-  function enterRow(e) {
-    const rowCells = getCells(e.target);
-
-    if (rowCells.length > 1) {
-      rowCells[0].setAttribute('tabindex', '0');
-      rowCells[0].focus();
-    } else if (rowCells.length === 1) {
-      const rows = getRows();
-      const currentRow = getRowIndex(e.target);
-      const nextRow = rows[currentRow + 1];
-
-      if (nextRow) {
-        rows[currentRow].setAttribute('tabindex', '-1');
-        nextRow.setAttribute('tabindex', '0');
-        nextRow.focus();
-      }
-    }
-  }
   const handleKeyPressForMainContent = (e) => {
     switch (e.key) {
       case 'ArrowRight':
         if (e.target.getAttribute('role') == 'row') {
           //when current focus is on a row, then we need to focus the first cell of that row
-          enterRow(e);
+          let allItems = Array.from(
+            e.target
+              .closest('[role="row"]')
+              ?.querySelectorAll('[role="gridcell"] button')
+          );
+          allItems[0]?.focus();
         } else {
-          //traverse though all cells in cyclic manner
-          conditionBuilderRef?.current
-            .querySelectorAll('[role="gridcell"] button')
-            .forEach((eachElem, index, allElements) => {
-              traverseClockVise(eachElem, index, allElements);
-            });
+          let wrapper = e.target.closest(
+            `[role="row"],.${blockClass}__add-button-wrapper`
+          );
+          if (wrapper.role == 'row') {
+            //when the current focussed cell is inside a row (not add condition button)
+            //finding the next cell to be focussed
+            //next cell = current cell index + 1
+
+            let allItems = Array.from(
+              e.target
+                .closest('[role="row"]')
+                ?.querySelectorAll('[role="gridcell"] button')
+            );
+            let currentItemIndex = allItems.indexOf(e.target);
+            if (currentItemIndex < allItems.length - 1) {
+              focusThisItem(allItems[currentItemIndex + 1]);
+            } else if (
+              //if currently last cell of that row is focussed, now find and focus the next row
+              e.target.closest('[role="row"]') &&
+              e.target.closest('[role="row"]').nextSibling
+            ) {
+              if (e.target.closest('[role="row"]').nextSibling.role == 'row') {
+                e.target.closest('[role="row"]').nextSibling.focus();
+              } else {
+                //when the next sibling is not row( for add condition button)
+                e.target
+                  .closest('[role="row"]')
+                  .nextSibling.querySelector('[role="gridcell"] button')
+                  ?.focus();
+              }
+            }
+          }
         }
 
         break;
       case 'ArrowLeft':
         if (e.target.getAttribute('role') == 'row') {
-          //when current focus is on a row, then we need to focus the first cell of that row
-          //focus previous row last cell
-          const rows = getRows();
-
-          const currentRowIndex = getRowIndex(e.target);
-          const prevRowIndex =
-            currentRowIndex > 0 ? currentRowIndex - 1 : currentRowIndex;
-          const prevCells = rows[prevRowIndex].querySelectorAll(
-            '[role="gridcell"] button'
+          //when a row is currently focussed and press on arrow left, this will focus the last cell in that row
+          let allItems = Array.from(
+            e.target
+              .closest('[role="row"]')
+              .querySelectorAll('[role="gridcell"] button')
           );
-          prevCells[prevCells.length - 1]?.focus();
+          allItems[allItems.length - 1].focus();
         } else {
-          conditionBuilderRef?.current
-            .querySelectorAll('[role="gridcell"] button')
-            .forEach((eachElem, index, allElements) => {
-              traverseReverse(eachElem, index, allElements);
-            });
+          //when ny cell is focussed, arrow left will select the previous cell.
+          //if current focussed cell is add button it does not have a parent row
+          //if add button or first cell of any row is focussed, arrow left will focus the previous row.
+          let wrapper = e.target.closest(
+            `[role="row"],.${blockClass}__add-button-wrapper`
+          );
+          if (wrapper.role == 'row') {
+            let allItems = Array.from(
+              e.target
+                .closest('[role="row"]')
+                ?.querySelectorAll('[role="gridcell"] button')
+            );
+            let currentItemIndex = allItems.indexOf(e.target);
+            if (currentItemIndex > 0) {
+              focusThisItem(allItems[currentItemIndex - 1]);
+            } else {
+              //focus prev row
+              wrapper.previousSibling?.focus();
+            }
+          } else {
+            wrapper.previousSibling?.focus();
+          }
         }
 
         break;

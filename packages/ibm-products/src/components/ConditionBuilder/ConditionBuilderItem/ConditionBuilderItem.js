@@ -74,9 +74,9 @@ export const ConditionBuilderItem = ({
         role="dialog"
       >
         <Layer>
-          <div className={`${blockClass}__condition-builder-item__title`}>
+          <h1 className={`${blockClass}__condition-builder-item__title`}>
             {title}
-          </div>
+          </h1>
           <div ref={contentRef}>{open && children}</div>
         </Layer>
       </PopoverContent>

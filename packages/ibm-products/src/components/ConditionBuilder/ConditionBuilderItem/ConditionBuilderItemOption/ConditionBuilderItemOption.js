@@ -24,7 +24,6 @@ export const ConditionBuilderItemOption = ({
     : conditionState.value !== undefined
     ? [conditionState.value]
     : [];
-
   const handleSelectAll = (e) => {
     if (e.currentTarget.dataset.selectedAll == 'false') {
       onChange(undefined);
@@ -75,7 +74,13 @@ export const ConditionBuilderItemOption = ({
       )}
 
       <ul
-        //  aria-label={conditionState.property?.label ?? 'Property'}
+        aria-label={
+          conditionState.label
+            ? conditionState.label
+            : conditionState.property
+            ? conditionState.property
+            : 'Property'
+        }
         role="listbox"
         data-multi-select={multiSelectable}
       >
@@ -103,6 +108,8 @@ export const ConditionBuilderItemOption = ({
                   }
                 } else {
                   onChange(option.id, e, true);
+                  // e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
+                  // e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
                 }
               }}
             >

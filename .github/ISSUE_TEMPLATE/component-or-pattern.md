@@ -1,5 +1,5 @@
 ---
-name: New component or pattern 💡
+name: (C4IBM Products team only) New component or pattern 💡
 about: Create a new component or pattern
 ---
 

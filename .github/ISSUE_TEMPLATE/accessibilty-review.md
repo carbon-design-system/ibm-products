@@ -1,5 +1,5 @@
 ---
-name: Accessibility review ♿️
+name: (C4IBM Products team only) Accessibility review ♿️
 about: Review process before release of a new component or pattern as stable
 ---
 

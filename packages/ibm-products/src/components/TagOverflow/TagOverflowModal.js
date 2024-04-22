@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -45,11 +45,10 @@ export const TagOverflowModal = ({
   // Collect any other property values passed in.
   ...rest
 }) => {
-  const [filteredModalTags, setFilteredModalTags] = useState([]);
   const [search, setSearch] = useState('');
   const renderPortalUse = usePortalTarget(portalTargetIn);
 
-  useEffect(() => {
+  const getFilteredItems = () => {
     let newFilteredModalTags = [];
     if (open) {
       if (search === '') {
@@ -71,11 +70,11 @@ export const TagOverflowModal = ({
         });
       }
     }
-    setFilteredModalTags(newFilteredModalTags);
-  }, [allTags, open, search]);
+    return newFilteredModalTags;
+  };
 
-  const handleSearch = (ev) => {
-    setSearch(ev.target.value || '');
+  const handleSearch = (evt) => {
+    setSearch(evt.target.value || '');
   };
 
   return renderPortalUse(
@@ -104,7 +103,7 @@ export const TagOverflowModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {filteredModalTags.map(({ label, id, ...other }) => (
+        {getFilteredItems().map(({ label, id, ...other }) => (
           <Tag {...other} filter={false} key={id}>
             {label}
           </Tag>

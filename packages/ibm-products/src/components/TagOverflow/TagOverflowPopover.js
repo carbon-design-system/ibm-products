@@ -51,9 +51,9 @@ export const TagOverflowPopover = React.forwardRef(
       }
     });
 
-    const handleShowAllTagsClick = (ev) => {
-      ev.stopPropagation();
-      ev.preventDefault();
+    const handleShowAllTagsClick = (evt) => {
+      evt.stopPropagation();
+      evt.preventDefault();
       setPopoverOpen(false);
       onShowAllClick();
     };

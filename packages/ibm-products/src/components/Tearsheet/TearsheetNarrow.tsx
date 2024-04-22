@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode, PropsWithChildren } from 'react';
+import React, { ReactNode, PropsWithChildren, ForwardedRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -25,16 +25,12 @@ import {
   tearsheetHasCloseIcon,
   TearsheetShell,
   tearsheetShellWideProps as blocked,
+  CloseIconDescriptionTypes,
 } from './TearsheetShell';
 
 import { portalType } from './TearsheetShell';
 
-type closeIconDescriptionTypes = {
-  hasCloseIcon: true;
-  closeIconDescription: string;
-};
-
-interface TearsheetNarrowProps extends PropsWithChildren {
+interface TearsheetNarrowBaseProps extends PropsWithChildren {
   /**
    * The navigation actions to be shown as buttons in the action area at the
    * bottom of the tearsheet. Each action is specified as an object with
@@ -67,7 +63,7 @@ interface TearsheetNarrowProps extends PropsWithChildren {
    * **Note:** This prop is only required if a close icon is shown, i.e. if
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
-  closeIconDescription?: closeIconDescriptionTypes;
+  closeIconDescription?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -123,6 +119,9 @@ interface TearsheetNarrowProps extends PropsWithChildren {
   verticalPosition?: 'normal' | 'lower';
 }
 
+type TearsheetNarrowProps = TearsheetNarrowBaseProps &
+  CloseIconDescriptionTypes;
+
 const componentName = 'TearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -147,7 +146,7 @@ export let TearsheetNarrow = React.forwardRef(
       verticalPosition = defaults.verticalPosition,
       ...rest
     }: TearsheetNarrowProps,
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => (
     <TearsheetShell
       {...{

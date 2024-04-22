@@ -46,7 +46,7 @@ const componentName = 'TearsheetShell';
 const maxDepth = 3;
 
 interface TearsheetShellProps extends PropsWithChildren {
-  actions: ButtonProps[];
+  actions?: ButtonProps[];
 
   ariaLabel?: string;
 
@@ -148,10 +148,15 @@ interface TearsheetShellProps extends PropsWithChildren {
   verticalPosition?: 'normal' | 'lower';
 }
 
-type closeIconDescriptionTypes = {
-  hasCloseIcon: true;
-  closeIconDescription: string;
-};
+export type CloseIconDescriptionTypes =
+  | {
+      hasCloseIcon?: false;
+      closeIconDescription?: string;
+    }
+  | {
+      hasCloseIcon: true;
+      closeIconDescription: string;
+    };
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -226,7 +231,7 @@ export const TearsheetShell = React.forwardRef(
       verticalPosition,
       // Collect any other property values passed in.
       ...rest
-    }: TearsheetShellProps & closeIconDescriptionTypes,
+    }: TearsheetShellProps & CloseIconDescriptionTypes,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();

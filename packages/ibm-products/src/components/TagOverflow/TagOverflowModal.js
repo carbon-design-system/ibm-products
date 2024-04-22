@@ -86,6 +86,7 @@ export const TagOverflowModal = ({
       containerClassName={`${blockClass}__container`}
       className={cx(className, blockClass)}
       size="sm"
+      aria-label="Search all"
       {...{ open, onClose }}
     >
       <ModalHeader

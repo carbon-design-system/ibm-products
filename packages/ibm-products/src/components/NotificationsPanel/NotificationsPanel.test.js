@@ -46,6 +46,15 @@ const renderNotifications = ({ ...rest } = {}) =>
   );
 
 describe('Notifications', () => {
+  beforeEach(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: true,
+      })),
+    });
+  });
+
   it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;
     const { container, rerender } = renderNotifications({

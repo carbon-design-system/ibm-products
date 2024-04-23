@@ -15,8 +15,6 @@ import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss';
 import { Add, Group, User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
-import { Theme } from '@carbon/react';
-import { useEffect, useState } from 'react';
 
 export default {
   title: 'IBM Products/Components/User avatar/UserAvatar',
@@ -91,36 +89,12 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const [themeValue, setThemeValue] = useState(
-    document.body.getAttribute('storybook-carbon-theme')
-  );
-
-  useEffect(() => {
-    const observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'storybook-carbon-theme'
-        ) {
-          setThemeValue(document.body.getAttribute('storybook-carbon-theme'));
-        }
-      }
-    });
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ['storybook-carbon-theme'],
-    });
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <Theme theme={themeValue}>
-      <UserAvatar
-        // TODO: handle events with action or local handler.
-        // onTodo={action('onTodo log action')}
-        {...args}
-      />
-    </Theme>
+    <UserAvatar
+      // TODO: handle events with action or local handler.
+      // onTodo={action('onTodo log action')}
+      {...args}
+    />
   );
 };
 /**

@@ -5,24 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Filter } from '@carbon/react/icons';
+import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
 import { IconButton, usePrefix } from '@carbon/react';
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { breakpoints, px } from '@carbon/layout';
 import {
   useClickOutside,
   useWindowResize,
 } from '../../../../../global/js/hooks';
-import { pkg } from '../../../../../settings';
-import { ActionSet } from '../../../../ActionSet';
-import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
 import {
-  useSubscribeToEventEmitter,
   useFilters,
   useShouldDisableButtons,
+  useSubscribeToEventEmitter,
 } from './hooks';
-import { px, breakpoints } from '@carbon/layout';
+
+import { ActionSet } from '../../../../ActionSet';
+import { Filter } from '@carbon/react/icons';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -156,7 +157,11 @@ const FilterFlyout = ({
     setAllFilters(filtersObjectArray);
     closeFlyout();
     // From the user
-    onApply();
+    onApply({
+      filtersState,
+      filtersObjectArray,
+      lastAppliedFilters,
+    });
     // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 

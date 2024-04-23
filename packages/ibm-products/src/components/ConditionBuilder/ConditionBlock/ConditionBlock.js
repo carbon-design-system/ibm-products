@@ -64,7 +64,7 @@ const ConditionBlock=(props)=> {
           role="gridcell"
         >
           <ConditionBuilderItem
-            open={false}
+            //open={false}
             label={group.statement}
             title={translateWithId('condition')}
             className={`${blockClass}__statement-button`}
@@ -94,7 +94,7 @@ const ConditionBlock=(props)=> {
         {/* this is the property section */}
         <ConditionBuilderItem
           label={label}
-          isOpen={state.open}
+          popoverState={state.popoverState}
           title={translateWithId('property')}
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field propertyField`}
@@ -111,7 +111,7 @@ const ConditionBlock=(props)=> {
                 property: v,
                 operator: undefined,
                 value: '',
-                open: '',
+                popoverState: '',
               });
             }}
             config={{ options: inputConfig.properties }}
@@ -141,7 +141,7 @@ const ConditionBlock=(props)=> {
                   ...state,
                   operator: v,
                   value: undefined,
-                  open: '',
+                  popoverState: '',
                 });
               }}
             /> */}
@@ -153,7 +153,7 @@ const ConditionBlock=(props)=> {
             label={value}
             type={type}
             title={property}
-            isOpen={state.open}
+            popoverState={state.popoverState}
             className={'valueField'}
             showToolTip={true}
           >

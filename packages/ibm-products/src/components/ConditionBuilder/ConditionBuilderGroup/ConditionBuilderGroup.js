@@ -15,7 +15,55 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
   const isLastCondition = (conditionIndex, conditionArr) => {
     return conditionIndex + 1 >= conditionArr.length;
   };
+  const onRemoveHandler = (conditionIndex, e) => {
+    if (state.conditions.length > 1) {
+      onChange({
+        ...state,
+        conditions: state.conditions.filter(
+          (condition, cIndex) => conditionIndex !== cIndex
+        ),
+      });
+    } else {
+      onRemove();
+    }
 
+    handleFocusOnClose(e);
+  };
+
+  const onChangeHandler = (updatedConditions, conditionIndex) => {
+    onChange({
+      ...state,
+      conditions: state.conditions.map((condition, cIndex) =>
+        conditionIndex === cIndex ? updatedConditions : condition
+      ),
+    });
+  };
+
+  const addConditionHandler = (conditionIndex) => {
+    onChange({
+      ...state,
+      conditions: [
+        ...state.conditions.slice(0, conditionIndex + 1),
+        {
+          property: undefined,
+          operator: '',
+          value: '',
+          popoverState: 'open',
+        },
+        ...state.conditions.slice(conditionIndex + 1),
+      ],
+    });
+  };
+
+  const handleFocusOnClose = (e) => {
+    let previousClose = e.currentTarget
+      ?.closest('[role="row"]')
+      ?.previousSibling?.querySelector('[data-name="closeCondition"]');
+
+    if (previousClose) {
+      previousClose.focus();
+    }
+  };
   return (
     <div
       className={` ${blockClass}__condition-builder__group eachGroup`}
@@ -37,26 +85,10 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                   }}
                   state={eachCondition}
                   onChange={(updatedConditions) => {
-                    onChange({
-                      ...state,
-                      conditions: state.conditions.map((condition, cIndex) =>
-                        conditionIndex === cIndex
-                          ? updatedConditions
-                          : condition
-                      ),
-                    });
+                    onChangeHandler(updatedConditions, conditionIndex);
                   }}
-                  onRemove={() => {
-                    if (state.conditions.length > 1) {
-                      onChange({
-                        ...state,
-                        conditions: state.conditions.filter(
-                          (condition, cIndex) => conditionIndex !== cIndex
-                        ),
-                      });
-                    } else {
-                      onRemove();
-                    }
+                  onRemove={(e) => {
+                    onRemoveHandler(conditionIndex, e);
                   }}
                 />
               )}
@@ -78,26 +110,10 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                     conditionIndex={conditionIndex}
                     className={`${blockClass}__gap ${blockClass}__gap-bottom`}
                     onChange={(updatedConditions) => {
-                      onChange({
-                        ...state,
-                        conditions: state.conditions.map((condition, cIndex) =>
-                          conditionIndex === cIndex
-                            ? updatedConditions
-                            : condition
-                        ),
-                      });
+                      onChangeHandler(updatedConditions, conditionIndex);
                     }}
-                    onRemove={() => {
-                      if (state.conditions.length > 1) {
-                        onChange({
-                          ...state,
-                          conditions: state.conditions.filter(
-                            (c, cIndex) => conditionIndex !== cIndex
-                          ),
-                        });
-                      } else {
-                        onRemove();
-                      }
+                    onRemove={(e) => {
+                      onRemoveHandler(conditionIndex, e);
                     }}
                     onConnectorOperatorChange={(op) => {
                       onChange({
@@ -111,25 +127,13 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                         statement: updatedStatement,
                       });
                     }}
-                  ></ConditionBlock>
+                  />
                   {/* for last condition shows add button */}
                   {isLastCondition(conditionIndex, conditionArr) && (
                     <ConditionBuilderAdd
-                      onClick={() => {
-                        onChange({
-                          ...state,
-                          conditions: [
-                            ...state.conditions.slice(0, conditionIndex + 1),
-                            {
-                              property: undefined,
-                              operator: '',
-                              value: '',
-                              open: 'open',
-                            },
-                            ...state.conditions.slice(conditionIndex + 1),
-                          ],
-                        });
-                      }}
+                    onClick={() => {
+                      addConditionHandler(conditionIndex);
+                    }}
                       className={
                         !isLastCondition(conditionIndex, conditionArr)
                           ? `${blockClass}__gap ${blockClass}__gap-bottom`

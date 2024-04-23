@@ -11,10 +11,66 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
  * All the inner components of group are called from here.
  * @returns
  */
-const ConditionGroupBuilder = ({ state, aria, onRemove, onChange }) => {
+const ConditionGroupBuilder = ({
+  state,
+  aria,
+  onRemove,
+  onChange,
+  conditionBuilderRef,
+}) => {
   //This method identify whether the condition is the last one , so that add button can be shown
   const isLastCondition = (conditionIndex, conditionArr) => {
     return conditionIndex + 1 >= conditionArr.length;
+  };
+
+  const onRemoveHandler = (conditionIndex, e) => {
+    if (state.conditions.length > 1) {
+      onChange({
+        ...state,
+        conditions: state.conditions.filter(
+          (condition, cIndex) => conditionIndex !== cIndex
+        ),
+      });
+    } else {
+      onRemove();
+    }
+
+    handleFocusOnClose(e);
+  };
+
+  const onChangeHandler = (updatedConditions, conditionIndex) => {
+    onChange({
+      ...state,
+      conditions: state.conditions.map((condition, cIndex) =>
+        conditionIndex === cIndex ? updatedConditions : condition
+      ),
+    });
+  };
+
+  const addConditionHandler = (conditionIndex) => {
+    onChange({
+      ...state,
+      conditions: [
+        ...state.conditions.slice(0, conditionIndex + 1),
+        {
+          property: undefined,
+          operator: '',
+          value: '',
+          popoverState: 'open',
+        },
+        ...state.conditions.slice(conditionIndex + 1),
+      ],
+    });
+  };
+
+  const handleFocusOnClose = (e) => {
+    let previousClose = e.currentTarget
+      ?.closest('[role="row"]')
+      ?.previousSibling?.querySelector('[data-name="closeCondition"]');
+
+    if (previousClose) {
+      previousClose.focus();
+    }
   };
 
   return (
@@ -35,27 +91,12 @@ const ConditionGroupBuilder = ({ state, aria, onRemove, onChange }) => {
                   }}
                   state={eachCondition}
                   onChange={(updatedConditions) => {
-                    onChange({
-                      ...state,
-                      conditions: state.conditions.map((condition, cIndex) =>
-                        conditionIndex === cIndex
-                          ? updatedConditions
-                          : condition
-                      ),
-                    });
+                    onChangeHandler(updatedConditions, conditionIndex);
                   }}
-                  onRemove={() => {
-                    if (state.conditions.length > 1) {
-                      onChange({
-                        ...state,
-                        conditions: state.conditions.filter(
-                          (condition, cIndex) => conditionIndex !== cIndex
-                        ),
-                      });
-                    } else {
-                      onRemove();
-                    }
+                  onRemove={(e) => {
+                    onRemoveHandler(conditionIndex, e);
                   }}
+                  conditionBuilderRef={conditionBuilderRef}
                 />
               )}
               {/* rendering each condition block */}
@@ -76,26 +117,10 @@ const ConditionGroupBuilder = ({ state, aria, onRemove, onChange }) => {
                     conditionIndex={conditionIndex}
                     className={`${blockClass}__gap ${blockClass}__gap-bottom`}
                     onChange={(updatedConditions) => {
-                      onChange({
-                        ...state,
-                        conditions: state.conditions.map((condition, cIndex) =>
-                          conditionIndex === cIndex
-                            ? updatedConditions
-                            : condition
-                        ),
-                      });
+                      onChangeHandler(updatedConditions, conditionIndex);
                     }}
-                    onRemove={() => {
-                      if (state.conditions.length > 1) {
-                        onChange({
-                          ...state,
-                          conditions: state.conditions.filter(
-                            (c, cIndex) => conditionIndex !== cIndex
-                          ),
-                        });
-                      } else {
-                        onRemove();
-                      }
+                    onRemove={(e) => {
+                      onRemoveHandler(conditionIndex, e);
                     }}
                     onConnectorOperatorChange={(op) => {
                       onChange({
@@ -109,24 +134,12 @@ const ConditionGroupBuilder = ({ state, aria, onRemove, onChange }) => {
                         statement: updatedStatement,
                       });
                     }}
-                  ></ConditionBlock>
+                  />
                   {/* for last condition shows add button */}
                   {isLastCondition(conditionIndex, conditionArr) && (
                     <ConditionBuilderAdd
                       onClick={() => {
-                        onChange({
-                          ...state,
-                          conditions: [
-                            ...state.conditions.slice(0, conditionIndex + 1),
-                            {
-                              property: undefined,
-                              operator: '',
-                              value: '',
-                              open: 'open',
-                            },
-                            ...state.conditions.slice(conditionIndex + 1),
-                          ],
-                        });
+                        addConditionHandler(conditionIndex);
                       }}
                       className={
                         !isLastCondition(conditionIndex, conditionArr)
@@ -153,10 +166,14 @@ ConditionGroupBuilder.propTypes = {
   aria: PropTypes.object,
 
   /**
+   * ref of condition builder
+   */
+  conditionBuilderRef: PropTypes.object,
+
+  /**
    * callback to update the current condition of the state tree
    */
   onChange: PropTypes.func,
-
   /**
    * call back to remove the particular group from the state tree
    */

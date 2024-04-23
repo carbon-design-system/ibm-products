@@ -6,26 +6,59 @@ export const focusThisField = (e) => {
 };
 export const focusThisItem = (currentElement) => {
   setTimeout(() => {
-    document.activeElement.setAttribute('tabindex', '-1');
-    currentElement.setAttribute('tabindex', '0');
+    //document.activeElement.setAttribute('tabindex', '-1');
+    // currentElement.setAttribute('tabindex', '0');
     currentElement?.focus();
   }, 0);
 };
-export const traverseClockVise = (eachElem, index, allElements) => {
+export const traverseClockVise = (
+  eachElem,
+  index,
+  allElements,
+  rotate,
+  trapFocus
+) => {
   if (eachElem == document.activeElement) {
     if (index !== allElements.length - 1) {
       focusThisItem(allElements[index + 1]);
     } else {
-      focusThisItem(allElements[0]);
+      focusThisItem(allElements[rotate ? 0 : allElements.length - 1]);
     }
+  } else if (
+    Array.from(allElements).indexOf(document.activeElement) == -1 &&
+    trapFocus
+  ) {
+    focusThisItem(allElements[0]);
   }
 };
-export const traverseReverse = (eachElem, index, allElements) => {
+export const traverseReverse = (
+  eachElem,
+  index,
+  allElements,
+  rotate,
+  trapFocus
+) => {
   if (eachElem == document.activeElement) {
     if (index !== 0) {
       focusThisItem(allElements[index - 1]);
     } else {
-      focusThisItem(allElements[allElements.length - 1]);
+      focusThisItem(allElements[rotate ? allElements.length - 1 : 0]);
     }
+  } else if (
+    Array.from(allElements).indexOf(document.activeElement) == -1 &&
+    trapFocus
+  ) {
+    focusThisItem(allElements[allElements.length - 1]);
   }
+};
+
+//Next relevant field is identified and click is triggered to open the popOver.
+export const onValueSelect = (e, nextFieldType) => {
+  let currentTarget = e.currentTarget;
+  setTimeout(() => {
+    currentTarget
+      .closest('.conditionBlockWrapper')
+      ?.querySelector(`[data-name="${nextFieldType}"]`)
+      .click();
+  }, 0);
 };

@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { Button } from '@carbon/react';
@@ -31,7 +25,6 @@ const ConditionBuilderContent = ({
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(true);
-  const conditionBuilderContentRef = useRef();
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -42,7 +35,7 @@ const ConditionBuilderContent = ({
       ) {
         // when the add condition clicked to start the condition building, we by default open the popover of the first property
         setTimeout(() => {
-          conditionBuilderContentRef.current
+          conditionBuilderRef.current
             .querySelector('[data-name="propertyField"]')
             .click();
         }, 0);
@@ -50,13 +43,14 @@ const ConditionBuilderContent = ({
     } else {
       setIsConditionBuilderActive(true);
     }
-  }, [rootState]);
+  }, [rootState, conditionBuilderRef]);
 
   useEffect(() => {
     if (isConditionBuilderActive == false) {
       if (conditionBuilderRef.current) {
-        const initial =
-          conditionBuilderRef.current.querySelector('[role="row"]');
+        const initial = conditionBuilderRef.current.querySelector(
+          '[role="gridcell"] button'
+        );
 
         if (initial) {
           initial.setAttribute('tabindex', '0');
@@ -90,7 +84,7 @@ const ConditionBuilderContent = ({
 
   return (
     <div
-      ref={conditionBuilderContentRef}
+      ref={conditionBuilderRef}
       className={`${blockClass}__content-container`}
       tabIndex={-1}
     >
@@ -132,6 +126,7 @@ const ConditionBuilderContent = ({
                 ),
               });
             }}
+            conditionBuilderRef={conditionBuilderRef}
           />
         ))}
     </div>

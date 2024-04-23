@@ -16,6 +16,7 @@ import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import { onValueSelect } from '../utils/genericMethods';
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
@@ -44,17 +45,6 @@ function ConditionBlock(props) {
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
-  //Next relevant field is identified and click is triggered to open the popOver.
-  const onValueSelect = (e, nextFieldType) => {
-    let currentTarget = e.currentTarget;
-    setTimeout(() => {
-      currentTarget
-        .closest('.conditionBlockWrapper')
-        .querySelector(`[data-name="${nextFieldType}"]`)
-        .click();
-    }, 10);
-  };
-
   //filtering the current property to access its properties and config options
   const { icon, type, config, label } =
     inputConfig.properties?.filter(
@@ -82,7 +72,7 @@ function ConditionBlock(props) {
       {isStatement && (
         <div className={` ${blockClass}__gap`}>
           <ConditionBuilderItem
-            open={false}
+            //   open={false}
             label={group.statement}
             title={translateWithId('condition')}
             data-name="connectorField"
@@ -112,7 +102,7 @@ function ConditionBlock(props) {
       >
         <ConditionBuilderItem
           label={label}
-          isOpen={state.open}
+          popoverState={state.popoverState}
           title={translateWithId('property')}
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field`}
@@ -130,7 +120,7 @@ function ConditionBlock(props) {
                 property: v,
                 operator: undefined,
                 value: '',
-                open: '',
+                popoverState: '',
               });
             }}
             config={{ options: inputConfig.properties }}
@@ -159,7 +149,7 @@ function ConditionBlock(props) {
                   ...state,
                   operator: v,
                   value: undefined,
-                  open: '',
+                  popoverState: '',
                 });
               }}
             />
@@ -170,7 +160,8 @@ function ConditionBlock(props) {
             label={value}
             type={type}
             title={label}
-            isOpen={state.open}
+            popoverState={state.popoverState}
+            isClose={state.close}
             showToolTip={true}
             data-name="valueField"
           >
@@ -180,11 +171,11 @@ function ConditionBlock(props) {
                 operator,
                 value,
               }}
-              onChange={(v, e, isClose) => {
+              onChange={(v, e, popoverState) => {
                 onChange({
                   ...state,
                   value: v,
-                  open: isClose ? 'close' : '',
+                  popoverState: popoverState ?? '',
                 });
               }}
               config={config}

@@ -107,7 +107,7 @@ export const ConditionBuilderItemOption = ({
                     onChange([...selection, option.id], e);
                   }
                 } else {
-                  onChange(option.id, e, true);
+                  onChange(option.id, e, 'close');
                   // e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
                   // e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
                 }
@@ -122,6 +122,7 @@ export const ConditionBuilderItemOption = ({
                       checked={isSelected}
                       className={`${blockClass}__condition-builder-item-option__option-label`}
                       labelText={option.label}
+                      tabIndex="-1"
                     />
                     {Icon && <Icon />}
                   </>

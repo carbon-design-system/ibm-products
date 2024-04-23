@@ -20,7 +20,7 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onChange={(value) => {
+          onClose={(value) => {
             onChange(value);
           }}
           value={conditionState.value}
@@ -38,7 +38,7 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onChange={(value) => {
+          onClose={(value) => {
             onChange(value);
           }}
           value={conditionState.value}

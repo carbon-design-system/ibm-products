@@ -16,7 +16,7 @@ export const ConditionBuilderItem = ({
   label,
   renderIcon,
   title,
-  isOpen,
+  popoverState,
   type,
   showToolTip,
   ...rest
@@ -28,12 +28,14 @@ export const ConditionBuilderItem = ({
   const propertyId = type ? valueRenderers[type](label) : label;
   let propertyLabel = translateWithId(propertyId);
   useEffect(() => {
-    if (isOpen) {
+    if (popoverState) {
       setTimeout(() => {
-        setOpen(isOpen == 'open' ? true : isOpen == 'close' ? false : null);
+        setOpen(
+          popoverState == 'open' ? true : popoverState == 'close' ? false : null
+        );
       }, 0);
     }
-  }, [isOpen, children]);
+  }, [popoverState, propertyLabel]);
 
   useEffect(() => {
     if (open && contentRef.current) {
@@ -94,14 +96,14 @@ ConditionBuilderItem.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * boolean to keep open/close popover
-   */
-  isOpen: PropTypes.bool,
-
-  /**
    * text to be displayed in the field
    */
   label: PropTypes.string,
+
+  /**
+   * boolean to keep open/close popover
+   */
+  popoverState: PropTypes.string,
 
   /**
    * Optional prop to allow overriding the icon rendering.

@@ -77,12 +77,12 @@ interface NotificationsEmptyStateProps {
   /**
    * Empty state subtitle
    */
-  subtitle: string | ReactNode;
+  subtitle: ReactNode;
 
   /**
    * Empty state title
    */
-  title: string | ReactNode;
+  title: ReactNode;
 }
 
 /**

@@ -36,7 +36,24 @@ const defaults = {
 
 type Size = 'xl' | 'lg' | 'md';
 type Theme = 'light' | 'dark';
-interface UserProfileImageProps {
+
+type imageProps =
+  | {
+      /**
+       * When passing the image prop, supply a full path to the image to be displayed.
+       */
+      image: string;
+      /**
+       * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+       */
+      imageDescription: string;
+    }
+  | {
+      image?: never;
+      imageDescription?: never;
+    };
+
+type UserProfileImageBaseProps = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
    * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
@@ -52,16 +69,6 @@ interface UserProfileImageProps {
    * Provide a custom icon to use if you need to use an icon other than the included ones
    */
   icon?: () => CarbonIconType | null;
-
-  /**
-   * When passing the image prop, supply a full path to the image to be displayed.
-   */
-  image?: string;
-
-  /**
-   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
-   */
-  imageDescription: string;
 
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.
@@ -100,7 +107,9 @@ interface UserProfileImageProps {
    * Pass in the display name to have it shown on hover
    */
   tooltipText?: string;
-}
+};
+
+type UserProfileImageProps = UserProfileImageBaseProps & imageProps;
 
 /**
  * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
@@ -272,6 +281,7 @@ UserProfileImage.propTypes = {
   /**
    * When passing the image prop, supply a full path to the image to be displayed.
    */
+  /**@ts-ignore */
   image: PropTypes.string,
 
   /**

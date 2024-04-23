@@ -48,14 +48,13 @@ interface Action {
 
 interface WebTerminalProps extends PropsWithChildren {
   /**
-   * An array of actions to be displayed in the web terminal header bar
-   */
-  actions?: readonly Action[];
-
-  /**
    * Provide your own terminal component as children to show up in the web terminal
    */
   children: ReactNode | ReactNode[];
+  /**
+   * An array of actions to be displayed in the web terminal header bar
+   */
+  actions?: readonly Action[];
 
   /**
    * Custom classname for additional styling of the web terminal

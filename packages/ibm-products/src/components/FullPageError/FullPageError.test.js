@@ -21,14 +21,14 @@ const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
-const errorLabel = uuidv4();
+const label = uuidv4();
 const description = uuidv4();
 const ref = React.createRef();
 const title = uuidv4();
 const defaultProps = {
   title,
   className,
-  errorLabel,
+  label,
   description,
   ref,
   'data-testid': dataTestId,
@@ -76,7 +76,7 @@ describe(componentName, () => {
 
   it('renders error label', () => {
     render(<FullPageError {...defaultProps} />);
-    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
+    expect(screen.getByText('↳ ' + label)).toBeInTheDocument();
   });
 
   it('renders description', () => {
@@ -88,49 +88,25 @@ describe(componentName, () => {
     render(<FullPageError {...defaultProps} />);
     expect(screen.getByText(title)).toBeInTheDocument();
   });
-
-  it('renders custom error content when kind is "custom"', () => {
-    render(<FullPageError {...defaultProps} kind="custom" />);
-    expect(screen.getByText(title)).toBeInTheDocument();
-    expect(screen.getByText('↳ ' + errorLabel)).toBeInTheDocument();
-    expect(screen.getByText(description)).toBeInTheDocument();
+  it('renders custom svg illustration if kind is custom', async () => {
+    const { container } = render(
+      <FullPageError {...defaultProps} kind="custom" />
+    );
+    const svgElement = container.querySelector(`.${blockClass}__svg`);
+    expect(svgElement).toHaveClass(`${blockClass}__custom`);
   });
-
-  it('renders 403 error content with provided description', () => {
-    render(<FullPageError {...defaultProps} kind="403" />);
-    expect(screen.getByText('Access denied')).toBeInTheDocument();
-    expect(screen.getByText(description)).toBeInTheDocument();
+  it('renders 404 svg illustration if kind is 404', async () => {
+    const { container } = render(
+      <FullPageError {...defaultProps} kind="404" />
+    );
+    const svgElement = container.querySelector(`.${blockClass}__svg`);
+    expect(svgElement).toHaveClass(`${blockClass}__404`);
   });
-
-  it('renders 404 error content with provided description', () => {
-    render(<FullPageError {...defaultProps} kind="404" />);
-    expect(screen.getByText('Page not found')).toBeInTheDocument();
-    expect(screen.getByText(description)).toBeInTheDocument();
-  });
-
-  it('renders default 403 error content when kind is "403" and no description provided', () => {
-    render(<FullPageError {...defaultProps} kind="403" description="" />);
-    expect(screen.getByText(/Access denied/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/You are not authorized to access the requested page/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Please verify that you are logged in to the hosting environment and your access permissions are correct/i
-      )
-    ).toBeInTheDocument();
-  });
-
-  it('renders default 404 error content when kind is "404" and no description provided', () => {
-    render(<FullPageError {...defaultProps} kind="404" description="" />);
-    expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(/The page you requested has moved or is unavailable/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Please check the URL or search the site for the requested content/i
-      )
-    ).toBeInTheDocument();
+  it('renders 403 svg illustration if kind is 403', async () => {
+    const { container } = render(
+      <FullPageError {...defaultProps} kind="403" />
+    );
+    const svgElement = container.querySelector(`.${blockClass}__svg`);
+    expect(svgElement).toHaveClass(`${blockClass}__403`);
   });
 });

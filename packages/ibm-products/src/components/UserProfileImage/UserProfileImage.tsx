@@ -22,6 +22,7 @@ import { User, Group } from '@carbon/react/icons';
 
 import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
+import { IconButton } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -93,15 +94,7 @@ type UserProfileImageBaseProps = {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  tooltipAlignment?:
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'left'
-    | 'right';
+  tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
 
   /**
    * Pass in the display name to have it shown on hover

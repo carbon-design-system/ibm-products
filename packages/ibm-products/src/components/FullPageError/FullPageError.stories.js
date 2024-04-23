@@ -81,7 +81,7 @@ fullPageError.storyName = 'Default';
 fullPageError.args = {
   ...defaultProps,
   title: '[Error title]',
-  errorLabel: 'Error ###',
+  label: 'Error ###',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
 };
@@ -89,11 +89,19 @@ export const fullPageError403 = Template.bind({});
 fullPageError403.storyName = '403';
 fullPageError403.args = {
   ...defaultProps,
+  title: 'Access denied',
+  label: 'Error 403',
+  description:
+    'You are not authorized to access the requested page. Please verify that you are logged in to the hosting environment and your access permissions are correct.',
   kind: '403',
 };
 export const fullPageError404 = Template.bind({});
 fullPageError404.storyName = '404';
 fullPageError404.args = {
   ...defaultProps,
+  title: 'Page not found',
+  label: 'Error 404',
+  description:
+    'The page you requested has moved or is unavailable, or the specified URL is not valid. Please check the URL or search the site for the requested content.',
   kind: '404',
 };

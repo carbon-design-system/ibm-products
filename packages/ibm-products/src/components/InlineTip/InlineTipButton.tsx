@@ -38,7 +38,7 @@ interface InlineTipButtonProps {
 export let InlineTipButton = React.forwardRef(
   (
     { children, className, ...rest }: PropsWithChildren<InlineTipButtonProps>,
-    ref: ForwardedRef<HTMLDivElement>
+    ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
       <Button

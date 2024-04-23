@@ -31,7 +31,16 @@ $block-class-modal: #{$block-class}-modal;
   width: 100%;
   min-width: $spacing-12;
   align-items: center;
+  justify-content: flex-start;
   white-space: nowrap;
+}
+
+.#{$block-class}--align-end {
+  justify-content: flex-end;
+}
+
+.#{$block-class}--align-center {
+  justify-content: center;
 }
 
 .#{$block-class}--multiline {

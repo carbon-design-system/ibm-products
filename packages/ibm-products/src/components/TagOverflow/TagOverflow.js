@@ -29,7 +29,7 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   items: [],
-  // align: 'start',
+  align: 'start',
   // measurementOffset: 0,
   overflowAlign: 'bottom',
   overflowType: 'default',
@@ -42,10 +42,11 @@ const defaults = {
 export let TagOverflow = React.forwardRef(
   (
     {
-      // align = defaults.align,
+      items = defaults.items,
+      tagComponent,
+      align = defaults.align,
       allTagsModalTarget,
       className,
-      items = defaults.items,
       maxVisible,
       multiline,
       overflowAlign = defaults.overflowAlign,
@@ -55,7 +56,6 @@ export let TagOverflow = React.forwardRef(
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
-      tagComponent,
       // containingElementRef,
       // measurementOffset = defaults.measurementOffset,
       // onOverflowTagChange = defaults.onOverflowTagChange,
@@ -120,7 +120,7 @@ export let TagOverflow = React.forwardRef(
 
       const map = getMap();
       const overflowContainerWidth =
-        overflowRef.current.offsetWidth > overflowIndicatorWidth
+        overflowRef.current?.offsetWidth > overflowIndicatorWidth
           ? overflowRef.current.offsetWidth
           : overflowIndicatorWidth;
       const maxWidth = containerWidth - overflowContainerWidth;
@@ -175,7 +175,7 @@ export let TagOverflow = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className, {
+        className={cx(blockClass, className, `${blockClass}--align-${align}`, {
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
@@ -265,13 +265,11 @@ TagOverflow.propTypes = {
   /**
    * align the Tags displayed by the TagSet. Default start.
    */
-  // align: PropTypes.oneOf(['start', 'center', 'end']),
-
+  align: PropTypes.oneOf(['start', 'center', 'end']),
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */
   allTagsModalSearchLabel: string_required_if_more_than_10_tags,
-
   /**
    * placeholder text for the show all search. **Note: Required if more than 10 tags**
    */
@@ -280,26 +278,23 @@ TagOverflow.propTypes = {
    * portal target for the all tags modal
    */
   allTagsModalTarget: PropTypes.node,
+
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
-
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
   /**
-   * Optional ref for custom resize container to measure available space
-   * Default will measure the available space of the TagSet container itself.
-   */
-  // containingElementRef: PropTypes.object,
-  /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
-   * **label**\* (required) to supply the item content,
-   * **id**\* (required) to uniquely identify the each item.
-   * **tagType** the type value to be passed to the Carbon Tag component
-   * if you are passing an tagComponent prop for rendering custom components,
+   * **label**\* (required) to supply the content,
+   * **id**\* (required) to uniquely identify each item.
+   * **tagType** the type value to be passed to the Carbon Tag component.
+   * Refer https://react.carbondesignsystem.com/?path=/docs/components-tag--default to see the possible values for tagType
+   *
+   * If you want to render a custom component, pass it as tagComponent prop and
    * then pass the props required for your custom component as the properties of item object
    */
   items: PropTypes.arrayOf(
@@ -309,6 +304,12 @@ TagOverflow.propTypes = {
       tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
+
+  /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  // containingElementRef: PropTypes.object,
   /**
    * maximum visible items
    */

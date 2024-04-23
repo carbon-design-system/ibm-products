@@ -26,7 +26,7 @@ interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */
-  actionIcons?: ActionIcon;
+  actionIcons?: ActionIcon[];
   /**
    * Content that shows in the body of the card
    */

@@ -101,6 +101,7 @@ export const translateWithId = (key) => {
 
 export const valueRenderers = {
   text: (val) => val,
+  time: (val) => val,
   number: (val) => val,
   option: (value) => {
     return Array.isArray(value) ? value.join(', ') : value;

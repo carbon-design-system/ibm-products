@@ -7,7 +7,14 @@ export const emptyState = {
       groupSeparateOperator: null,
       groupOperator: 'and',
       statement: 'if',
-      conditions: [{ property: undefined, operator: '', value: '' }],
+      conditions: [
+        {
+          property: undefined,
+          operator: '',
+          value: '',
+          popoverToOpen: 'propertyField',
+        },
+      ],
     },
   ],
 };

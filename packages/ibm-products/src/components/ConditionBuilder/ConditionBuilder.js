@@ -143,6 +143,10 @@ ConditionBuilder.propTypes = {
             })
           ),
           includeSearch: PropTypes.bool,
+          min: PropTypes.number,
+          step: PropTypes.number,
+          unit: PropTypes.string,
+          timeZones: PropTypes.arrayOf(PropTypes.string),
         }),
       })
     ),

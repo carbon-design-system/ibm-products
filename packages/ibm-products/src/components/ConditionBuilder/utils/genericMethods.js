@@ -51,14 +51,3 @@ export const traverseReverse = (
     focusThisItem(allElements[allElements.length - 1]);
   }
 };
-
-//Next relevant field is identified and click is triggered to open the popOver.
-export const onValueSelect = (e, nextFieldType) => {
-  let currentTarget = e.currentTarget;
-  setTimeout(() => {
-    currentTarget
-      .closest('.conditionBlockWrapper')
-      ?.querySelector(`[data-name="${nextFieldType}"]`)
-      .click();
-  }, 0);
-};

@@ -29,17 +29,6 @@ const ConditionBuilderContent = ({
   useEffect(() => {
     if (rootState?.groups?.length) {
       setIsConditionBuilderActive(false);
-      if (
-        rootState.groups[0].conditions.length == 1 &&
-        rootState.groups[0].conditions[0].property == undefined
-      ) {
-        // when the add condition clicked to start the condition building, we by default open the popover of the first property
-        setTimeout(() => {
-          conditionBuilderRef.current
-            .querySelector('[data-name="propertyField"]')
-            .click();
-        }, 0);
-      }
     } else {
       setIsConditionBuilderActive(true);
     }
@@ -83,11 +72,7 @@ const ConditionBuilderContent = ({
   );
 
   return (
-    <div
-      ref={conditionBuilderRef}
-      className={`${blockClass}__content-container`}
-      tabIndex={-1}
-    >
+    <div className={`${blockClass}__content-container`} tabIndex={-1}>
       {isConditionBuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}

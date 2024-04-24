@@ -16,28 +16,57 @@ export const ConditionBuilderItem = ({
   label,
   renderIcon,
   title,
-  popoverState,
   type,
   showToolTip,
+  state,
   ...rest
 }) => {
   const contentRef = useRef(null);
-
+  const [propertyLabel, setPropertyLabel] = useState(label);
   const [open, setOpen] = useState(false);
 
-  const propertyId = type ? valueRenderers[type](label) : label;
-  let propertyLabel = translateWithId(propertyId);
   useEffect(() => {
-    if (popoverState) {
-      setTimeout(() => {
-        setOpen(
-          popoverState == 'open' ? true : popoverState == 'close' ? false : null
-        );
-      }, 0);
-    }
-  }, [popoverState, propertyLabel]);
+    const propertyId =
+      rest['data-name'] == 'valueField' && type
+        ? valueRenderers[type](label)
+        : label;
+    setPropertyLabel(translateWithId(propertyId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [label]);
 
   useEffect(() => {
+    /**
+     * rest['data-name'] holds the current field name
+     * popoverToOpen hold the next popover to be opened if required
+     */
+    if (state) {
+      let currentField = rest['data-name'];
+      //if any condition is changed, state prop is triggered
+      if (state.popoverToOpen && currentField !== state.popoverToOpen) {
+        // close the previous popover
+        setOpen(false);
+      } else if (
+        currentField == 'valueField' &&
+        type == 'option' &&
+        state.operator !== 'one-of'
+      ) {
+        //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
+        setOpen(false);
+      }
+      if (state.popoverToOpen == currentField) {
+        //current popover need to be opened
+        setOpen(true);
+      }
+    } else {
+      // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
+      //close popOver when statement is changed.
+      setOpen(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, label]);
+
+  useEffect(() => {
+    //this will focus the first input field in the popover
     if (open && contentRef.current) {
       const firstFocusableElement =
         contentRef.current.querySelector('input, button,li');
@@ -101,11 +130,6 @@ ConditionBuilderItem.propTypes = {
   label: PropTypes.string,
 
   /**
-   * boolean to keep open/close popover
-   */
-  popoverState: PropTypes.string,
-
-  /**
    * Optional prop to allow overriding the icon rendering.
    */
   renderIcon: PropTypes.func,
@@ -114,6 +138,11 @@ ConditionBuilderItem.propTypes = {
    * show tool tip
    */
   showToolTip: PropTypes.bool,
+
+  /**
+   * current condition state object
+   */
+  state: PropTypes.object,
 
   /**
    * title of the popover

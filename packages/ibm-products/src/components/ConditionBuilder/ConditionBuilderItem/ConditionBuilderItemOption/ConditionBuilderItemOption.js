@@ -107,9 +107,7 @@ export const ConditionBuilderItemOption = ({
                     onChange([...selection, option.id], e);
                   }
                 } else {
-                  onChange(option.id, e, 'close');
-                  // e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
-                  // e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
+                  onChange(option.id, e);
                 }
               }}
             >

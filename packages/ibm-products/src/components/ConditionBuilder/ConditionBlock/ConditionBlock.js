@@ -16,7 +16,8 @@ import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { onValueSelect } from '../utils/genericMethods';
+import { focusThisField } from '../utils/genericMethods';
+import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
@@ -41,6 +42,7 @@ function ConditionBlock(props) {
     text: ConditionBuilderItemText,
     number: ConditionBuilderItemNumber,
     date: ConditionBuilderItemDate,
+    time: ConditionBuilderItemTime,
   };
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
@@ -84,8 +86,7 @@ function ConditionBlock(props) {
                 label: translateWithId('condition'),
               }}
               onChange={(v, e) => {
-                onValueSelect(e, 'propertyField');
-
+                focusThisField(e);
                 onStatementChange(v);
               }}
               config={{ options: statementConfig }}
@@ -102,25 +103,25 @@ function ConditionBlock(props) {
       >
         <ConditionBuilderItem
           label={label}
-          popoverState={state.popoverState}
           title={translateWithId('property')}
           renderIcon={icon ?? null}
           className={`${blockClass}__property-field`}
           data-name="propertyField"
+          state={state}
+          type={type}
         >
           <ConditionBuilderItemOption
             conditionState={{
               value: property,
               label: translateWithId('property'),
             }}
-            onChange={(v, e) => {
-              onValueSelect(e, 'operatorField');
+            onChange={(v) => {
               onChange({
                 ...state,
                 property: v,
                 operator: undefined,
                 value: '',
-                popoverState: '',
+                popoverToOpen: 'operatorField',
               });
             }}
             config={{ options: inputConfig.properties }}
@@ -131,6 +132,8 @@ function ConditionBlock(props) {
             label={operator}
             title={translateWithId('operator')}
             data-name="operatorField"
+            state={state}
+            type={type}
           >
             <ConditionBuilderItemOption
               config={{
@@ -142,14 +145,12 @@ function ConditionBlock(props) {
                 value: operator,
                 label: translateWithId('operator'),
               }}
-              onChange={(v, e) => {
-                onValueSelect(e, 'valueField');
-
+              onChange={(v) => {
                 onChange({
                   ...state,
                   operator: v,
                   value: undefined,
-                  popoverState: '',
+                  popoverToOpen: 'valueField',
                 });
               }}
             />
@@ -160,10 +161,9 @@ function ConditionBlock(props) {
             label={value}
             type={type}
             title={label}
-            popoverState={state.popoverState}
-            isClose={state.close}
             showToolTip={true}
             data-name="valueField"
+            state={state}
           >
             <ItemComponent
               conditionState={{
@@ -171,11 +171,11 @@ function ConditionBlock(props) {
                 operator,
                 value,
               }}
-              onChange={(v, e, popoverState) => {
+              onChange={(v) => {
                 onChange({
                   ...state,
                   value: v,
-                  popoverState: popoverState ?? '',
+                  popoverToOpen: '',
                 });
               }}
               config={config}

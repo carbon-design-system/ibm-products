@@ -175,6 +175,15 @@ export const inputData = {
       config: {},
     },
     {
+      id: 'time',
+      label: 'Time',
+      icon: Calendar,
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+    {
       id: 'delivery',
       label: 'Delivery',
       icon: DeliveryTruck,

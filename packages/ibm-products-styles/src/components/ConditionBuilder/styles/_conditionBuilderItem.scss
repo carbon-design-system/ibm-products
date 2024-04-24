@@ -92,7 +92,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__condition-builder-item-date,
 .#{$block-class}__condition-builder-item-text,
-.#{$block-class}__condition-builder-item-number {
+.#{$block-class}__condition-builder-item-number,
+#{$block-class}__condition-builder-item-time {
   padding-block-end: $spacing-05;
   padding-inline: $spacing-05;
 }

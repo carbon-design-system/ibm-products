@@ -31,11 +31,10 @@ const ConditionGroupBuilder = ({
           (condition, cIndex) => conditionIndex !== cIndex
         ),
       });
+      handleFocusOnClose(e);
     } else {
       onRemove();
     }
-
-    handleFocusOnClose(e);
   };
 
   const onChangeHandler = (updatedConditions, conditionIndex) => {
@@ -56,7 +55,7 @@ const ConditionGroupBuilder = ({
           property: undefined,
           operator: '',
           value: '',
-          popoverState: 'open',
+          popoverToOpen: 'propertyField',
         },
         ...state.conditions.slice(conditionIndex + 1),
       ],
@@ -75,7 +74,11 @@ const ConditionGroupBuilder = ({
 
   return (
     <div className={` ${blockClass}__condition-builder__group eachGroup`}>
-      <div className={`${blockClass}__condition-wrapper`} role="grid">
+      <div
+        className={`${blockClass}__condition-wrapper`}
+        role="grid"
+        aria-label="condition builder wrapper"
+      >
         {/* condition loop starts here */}
 
         {state?.conditions?.map(

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,10 +33,27 @@ const componentName = 'InterstitialScreenViewModule';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
+interface InterstitialScreenViewModuleProps extends PropsWithChildren {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * The description of this component.
+   */
+  description: string;
+  /**
+   * The title of this component.
+   */
+  title: string;
+}
 /**
  * View module to help in building interstitial screen views.
  */
-export let InterstitialScreenViewModule = React.forwardRef(
+export let InterstitialScreenViewModule = React.forwardRef<
+  HTMLElement,
+  InterstitialScreenViewModuleProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -46,7 +63,7 @@ export let InterstitialScreenViewModule = React.forwardRef(
       description,
       // Collect any other property values passed in.
       ...rest
-    },
+    }: InterstitialScreenViewModuleProps,
     ref
   ) => {
     return (

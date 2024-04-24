@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -15,36 +14,28 @@ import {
 } from '../ConditionBuilderContext/DataTreeContext';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
-const ConditionBuilderContent=({ startConditionLabel, conditionBuilderRef })=> {
+const ConditionBuilderContent = ({
+  startConditionLabel,
+  conditionBuilderRef,
+}) => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(true);
-  const conditionBuilderContentRef = useRef();
-
   useEffect(() => {
     if (rootState?.groups?.length) {
       setIsConditionBuilderActive(false);
-      if (
-        rootState.groups[0].conditions.length == 1 &&
-        rootState.groups[0].conditions[0].property == undefined
-      ) {
-        // when the add condition clicked to start the condition building, we by default open the popover of the first property
-        setTimeout(() => {
-          conditionBuilderContentRef.current
-            .querySelector('.propertyField')
-            .click();
-        }, 0);
-      }
     } else {
       setIsConditionBuilderActive(true);
     }
-  }, [rootState]);
+  }, [rootState, conditionBuilderRef]);
 
   useEffect(() => {
     if (isConditionBuilderActive == false) {
       if (conditionBuilderRef.current) {
-        const initial =
-          conditionBuilderRef.current.querySelector('[role="row"]');
+        const initial = conditionBuilderRef.current.querySelector(
+          '[role="gridcell"] button'
+        );
+
         if (initial) {
           initial.setAttribute('tabindex', '0');
         }
@@ -70,11 +61,7 @@ const ConditionBuilderContent=({ startConditionLabel, conditionBuilderRef })=> {
     [setRootState, rootState]
   );
   return (
-    <div
-      ref={conditionBuilderContentRef}
-      className={`${blockClass}__content-container`}
-      tabIndex={-1}
-    >
+    <div className={`${blockClass}__content-container`} tabIndex={-1}>
       {isConditionBuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}
@@ -113,11 +100,12 @@ const ConditionBuilderContent=({ startConditionLabel, conditionBuilderRef })=> {
                 ),
               });
             }}
+            conditionBuilderRef={conditionBuilderRef}
           />
         ))}
     </div>
   );
-}
+};
 
 export default ConditionBuilderContent;
 

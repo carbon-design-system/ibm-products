@@ -17,25 +17,45 @@ export const ConditionBuilderItem = ({
   label,
   renderIcon,
   title,
-  popoverState,
   type,
+  showToolTip,
+  state,
   ...rest
 }) => {
   const contentRef = useRef(null);
-
+  const [propertyLabel, setPropertyLabel] = useState(label);
   const [open, setOpen] = useState(false);
 
-  const propertyId = type ? valueRenderers[type](label) : label;
-  let propertyLabel = translateWithId(propertyId);
   useEffect(() => {
-    if (popoverState) {
-      setTimeout(() => {
-        setOpen(
-          popoverState == 'open' ? true : popoverState == 'close' ? false : null
-        );
-      }, 0);
+    const propertyId =
+      rest['data-name'] == 'valueField' && type
+        ? valueRenderers[type](label)
+        : label;
+    setPropertyLabel(translateWithId(propertyId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [label]);
+  
+  useEffect(() => {
+    if (state) {
+      let currentField=rest['data-name'];
+      //if any condition is changed, state prop is triggered
+      if (state.popoverToOpen && currentField !== state.popoverToOpen) {
+        setOpen(false);
+      } else if (
+        currentField == 'valueField' &&
+        type == 'option' &&
+        state.operator !== 'one-of'
+      ) {
+        setOpen(false);
+      }
+      if (state.popoverToOpen == currentField) {
+        setOpen(true);
+      }
+    } else {
+      setOpen(false);
     }
-  }, [popoverState, propertyLabel]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, label]);
 
   useEffect(() => {
     if (open && contentRef.current) {
@@ -67,7 +87,8 @@ export const ConditionBuilderItem = ({
         aria-haspopup
         aria-expanded={open}
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : ''}
-        showToolTip={rest.showToolTip}
+        showToolTip={showToolTip}
+        {...rest}
       />
 
       <PopoverContent
@@ -106,7 +127,6 @@ ConditionBuilderItem.propTypes = {
   /**
    * popover default state
    */
-    popoverState: PropTypes.string,
 
   /**
   popoverState: PropTypes.string,
@@ -115,11 +135,21 @@ ConditionBuilderItem.propTypes = {
   renderIcon: PropTypes.func,
 
   /**
+   * show tool tip
+   */
+  showToolTip: PropTypes.bool,
+
+  /**
+   * current condition state object
+   */
+  state: PropTypes.object,
+
+  /**
+  showToolTip: PropTypes.bool,
    * title of the popover
    */
   title: PropTypes.string,
-
-    /**
+  /**
    * input type
    */
   type: PropTypes.string,

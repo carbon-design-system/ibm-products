@@ -10,7 +10,7 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
  * All the inner components of group are called from here.
  * @returns
  */
-const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
+const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilderRef }) => {
   //This method identify whether the condition is the last one , so that add button can be shown
   const isLastCondition = (conditionIndex, conditionArr) => {
     return conditionIndex + 1 >= conditionArr.length;
@@ -23,11 +23,12 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
           (condition, cIndex) => conditionIndex !== cIndex
         ),
       });
+      handleFocusOnClose(e);
     } else {
       onRemove();
     }
 
-    handleFocusOnClose(e);
+    
   };
 
   const onChangeHandler = (updatedConditions, conditionIndex) => {
@@ -48,7 +49,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
           property: undefined,
           operator: '',
           value: '',
-          popoverState: 'open',
+          popoverToOpen:'propertyField'
         },
         ...state.conditions.slice(conditionIndex + 1),
       ],
@@ -65,11 +66,8 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
     }
   };
   return (
-    <div
-      className={` ${blockClass}__condition-builder__group eachGroup`}
-      role={aria.level === 1 ? 'rowgroup' : undefined}
-    >
-      <div className={`${blockClass}__condition-wrapper`}>
+    <div className={` ${blockClass}__condition-builder__group eachGroup`}>
+      <div className={`${blockClass}__condition-wrapper`} role="grid" aria-label='condition builder wrapper'>
         {/* condition loop starts here */}
 
         {state?.conditions?.map(
@@ -90,6 +88,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange }) => {
                   onRemove={(e) => {
                     onRemoveHandler(conditionIndex, e);
                   }}
+                  conditionBuilderRef={conditionBuilderRef}
                 />
               )}
               {/* rendering each condition block */}
@@ -159,15 +158,20 @@ ConditionBuilderGroup.propTypes = {
   aria: PropTypes.object,
 
   /**
+   * ref of condition builder
+   */
+   conditionBuilderRef: PropTypes.object,
+
+  /**
+  
    * callback to update the current condition of the state tree
    */
   onChange: PropTypes.func,
-
   /**
    * call back to remove the particular group from the state tree
    */
   onRemove: PropTypes.func,
-  /**
+   /**
    * state defines the current group
    */
   state: PropTypes.object,

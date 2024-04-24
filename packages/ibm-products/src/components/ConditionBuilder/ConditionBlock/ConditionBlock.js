@@ -138,7 +138,8 @@ function ConditionBlock(props) {
             <ConditionBuilderItemOption
               config={{
                 options: operatorConfig.filter(
-                  (operator) => operator.type == type || operator.type == 'all'
+                  (operator) =>
+                    operator.type.indexOf(type) != -1 || operator.type == 'all'
                 ),
               }}
               conditionState={{

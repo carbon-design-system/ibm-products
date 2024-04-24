@@ -72,12 +72,12 @@ export const operatorConfig = [
   {
     label: 'is before',
     id: 'before',
-    type: 'date',
+    type: 'date,time',
   },
   {
     label: 'is after',
     id: 'after',
-    type: 'date',
+    type: 'date,time',
   },
   {
     label: 'is between',

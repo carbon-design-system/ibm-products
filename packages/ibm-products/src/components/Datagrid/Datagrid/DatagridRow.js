@@ -167,6 +167,7 @@ const DatagridRow = (datagridState) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars
           const { children, role, ...restProps } = cellProps;
+          const columnClassname = cell?.column?.className;
           const content = children || (
             <>
               {!row.isSkeleton && cell.render('Cell')}
@@ -183,16 +184,20 @@ const DatagridRow = (datagridState) => {
           );
           return (
             <TableCell
-              className={cx(`${blockClass}__cell`, {
-                [`${blockClass}__expandable-row-cell`]:
-                  row.canExpand && index === 0,
-                [`${blockClass}__expandable-row-cell--is-expanded`]:
-                  row.isExpanded && index === 0,
-                [`${blockClass}__slug--cell`]:
-                  associatedHeader &&
-                  associatedHeader.length &&
-                  isValidElement(associatedHeader[0]?.slug),
-              })}
+              className={cx(
+                `${blockClass}__cell`,
+                {
+                  [`${blockClass}__expandable-row-cell`]:
+                    row.canExpand && index === 0,
+                  [`${blockClass}__expandable-row-cell--is-expanded`]:
+                    row.isExpanded && index === 0,
+                  [`${blockClass}__slug--cell`]:
+                    associatedHeader &&
+                    associatedHeader.length &&
+                    isValidElement(associatedHeader[0]?.slug),
+                },
+                columnClassname
+              )}
               {...restProps}
               key={cell.column.id}
               title={title}

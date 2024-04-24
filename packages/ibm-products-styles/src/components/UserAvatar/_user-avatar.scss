@@ -65,7 +65,6 @@ $sizes: (
 }
 
 @mixin photo-styling {
-  position: fixed;
   border-radius: 100%;
   object-fit: fill;
 }
@@ -78,14 +77,18 @@ $sizes: (
 @mixin setLightBg($order, $color) {
   :root .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
-  .#{$carbon-prefix}--white .#{$block-class}--#{$order} {
+  .#{$carbon-prefix}--white .#{$block-class}--#{$order},
+  [storybook-carbon-theme='g10'] .#{$block-class}--#{$order},
+  [storybook-carbon-theme='white'] .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }
 
 @mixin setDarkBg($order, $color) {
   .#{$carbon-prefix}--g90 .#{$block-class}--#{$order},
-  .#{$carbon-prefix}--g100 .#{$block-class}--#{$order} {
+  .#{$carbon-prefix}--g100 .#{$block-class}--#{$order},
+  [storybook-carbon-theme='g90'] .#{$block-class}--#{$order},
+  [storybook-carbon-theme='g100'] .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }

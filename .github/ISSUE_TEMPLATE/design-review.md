@@ -1,5 +1,5 @@
 ---
-name: Design review 🎨
+name: (C4IBM Products team only) Design review 🎨
 about: Designer-led review process before release of a new component or pattern
 ---
 

@@ -24,16 +24,16 @@ const componentName = 'TagOverflow';
 
 const allTagsModalSearchThreshold = 10;
 
-// TODO: support props align, measurementOffset, onOverflowTagChange, containingElementRef
+// TODO: support prop overflowType
 
 // Default values for props
 const defaults = {
   items: [],
   align: 'start',
-  // measurementOffset: 0,
+  measurementOffset: 0,
   overflowAlign: 'bottom',
   overflowType: 'default',
-  // onOverflowTagChange: () => {},
+  onOverflowTagChange: () => {},
 };
 
 /**
@@ -45,20 +45,20 @@ export let TagOverflow = React.forwardRef(
       items = defaults.items,
       tagComponent,
       align = defaults.align,
+      showAllTagsLabel,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
+      allTagsModalTitle,
       className,
+      containingElementRef,
+      measurementOffset = defaults.measurementOffset,
       maxVisible,
       multiline,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
       overflowType = defaults.overflowType,
-      allTagsModalTitle,
-      allTagsModalSearchLabel,
-      allTagsModalSearchPlaceholderText,
-      showAllTagsLabel,
-      // containingElementRef,
-      // measurementOffset = defaults.measurementOffset,
-      // onOverflowTagChange = defaults.onOverflowTagChange,
+      onOverflowTagChange = defaults.onOverflowTagChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -80,6 +80,11 @@ export let TagOverflow = React.forwardRef(
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
     const [popoverOpen, setPopoverOpen] = useState(false);
 
+    const resizeElm =
+      containingElementRef && containingElementRef.current
+        ? containingElementRef
+        : containerRef;
+
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
@@ -89,10 +94,10 @@ export let TagOverflow = React.forwardRef(
     };
 
     const handleResize = () => {
-      setContainerWidth(containerRef.current.offsetWidth);
+      setContainerWidth(resizeElm.current.offsetWidth);
     };
 
-    useResizeObserver(containerRef, handleResize);
+    useResizeObserver(resizeElm, handleResize);
 
     const getMap = () => {
       if (!itemRefs.current) {
@@ -119,11 +124,18 @@ export let TagOverflow = React.forwardRef(
       }
 
       const map = getMap();
+      const optionalContainingElement = containingElementRef?.current;
+      const measurementOffsetValue =
+        typeof measurementOffset === 'number' ? measurementOffset : 0;
+      let spaceAvailable = optionalContainingElement
+        ? optionalContainingElement.offsetWidth - measurementOffsetValue
+        : containerWidth;
+
       const overflowContainerWidth =
         overflowRef.current?.offsetWidth > overflowIndicatorWidth
           ? overflowRef.current.offsetWidth
           : overflowIndicatorWidth;
-      const maxWidth = containerWidth - overflowContainerWidth;
+      const maxWidth = spaceAvailable - overflowContainerWidth;
 
       let childrenWidth = 0;
       let maxReached = false;
@@ -142,7 +154,16 @@ export let TagOverflow = React.forwardRef(
         }
         return prev;
       }, []);
-    }, [itemRefs, overflowRef, containerWidth, items, multiline, maxVisible]);
+    }, [
+      itemRefs,
+      overflowRef,
+      containerWidth,
+      items,
+      multiline,
+      maxVisible,
+      containingElementRef,
+      measurementOffset,
+    ]);
 
     const getCustomComponent = (item) => {
       const { className, id, ...other } = item;
@@ -167,7 +188,14 @@ export let TagOverflow = React.forwardRef(
 
       setVisibleItems(visibleItemsArr);
       setOverflowItems(overflowItemsArr);
-    }, [containerWidth, items, maxVisible, getVisibleItems]);
+      onOverflowTagChange?.(overflowItemsArr);
+    }, [
+      containerWidth,
+      items,
+      maxVisible,
+      getVisibleItems,
+      onOverflowTagChange,
+    ]);
 
     return (
       <div
@@ -278,7 +306,6 @@ TagOverflow.propTypes = {
    * portal target for the all tags modal
    */
   allTagsModalTarget: PropTypes.node,
-
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
@@ -287,6 +314,12 @@ TagOverflow.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  containingElementRef: PropTypes.object,
+
   /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the content,
@@ -304,12 +337,6 @@ TagOverflow.propTypes = {
       tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
-
-  /**
-   * Optional ref for custom resize container to measure available space
-   * Default will measure the available space of the TagSet container itself.
-   */
-  // containingElementRef: PropTypes.object,
   /**
    * maximum visible items
    */
@@ -318,7 +345,7 @@ TagOverflow.propTypes = {
    * Specify offset amount for measure available space, only used when `containingElementSelector`
    * is also provided
    */
-  // measurementOffset: PropTypes.number,
+  measurementOffset: PropTypes.number,
   /**
    * display items in multiple lines
    */
@@ -326,7 +353,7 @@ TagOverflow.propTypes = {
   /**
    * Handler to get overflow tags
    */
-  // onOverflowTagChange: PropTypes.func,
+  onOverflowTagChange: PropTypes.func,
   /**
    * overflowAlign from the standard tooltip. Default center.
    */

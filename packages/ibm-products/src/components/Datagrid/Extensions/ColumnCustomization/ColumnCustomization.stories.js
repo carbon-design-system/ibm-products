@@ -16,6 +16,7 @@ import {
   useColumnOrder,
   useStickyColumn,
   useActionsColumn,
+  useSortableColumns,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DocsPage } from './ColumnCustomization.docs-page';
@@ -51,7 +52,6 @@ const defaultHeader = [
     Header: 'Row Index',
     accessor: (row, i) => i,
     id: 'rowIndex', // id is required when accessor is a function.
-    sticky: 'left',
   },
   {
     Header: 'First Name',
@@ -249,7 +249,7 @@ ColumnCustomizationUsageStory.args = {
 };
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
-  const stickyHeaders = defaultHeader.slice(1, 15);
+  const stickyHeaders = defaultHeader.slice(2, 15);
 
   const columns = React.useMemo(
     () => [
@@ -258,6 +258,11 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
         accessor: (row, i) => i,
         sticky: 'left',
         id: 'rowIndex', // id is required when accessor is a function.
+      },
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        disabled: true,
       },
       ...stickyHeaders,
       {
@@ -277,11 +282,19 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
       className: `c4p--datagrid__hidden--columns`,
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
+
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
         hiddenColumns: ['age'],
         columnOrder: [],
+        sortableColumn: {
+          id: 'rowIndex',
+          order: 'ASC',
+        },
       },
       DatagridActions,
       DatagridPagination,
@@ -312,7 +325,8 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
     useCustomizeColumns,
     useColumnOrder,
     useStickyColumn,
-    useActionsColumn
+    useActionsColumn,
+    useSortableColumns
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test
@@ -340,17 +354,17 @@ const ColumnCustomizationWithFixedWrapper = ({ ...args }) => {
 
 const columnCustomizationFixedStoryName =
   'With column customization and frozen columns';
-export const ColumnCustomizationWithFixedColumnStory =
+export const ColumnCustomizationWithFixedColumnAndDisabledStory =
   ColumnCustomizationWithFixedWrapper.bind({});
-ColumnCustomizationWithFixedColumnStory.storyName =
+ColumnCustomizationWithFixedColumnAndDisabledStory.storyName =
   columnCustomizationFixedStoryName;
-ColumnCustomizationWithFixedColumnStory.argTypes = {
+ColumnCustomizationWithFixedColumnAndDisabledStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
 };
-ColumnCustomizationWithFixedColumnStory.args = {
+ColumnCustomizationWithFixedColumnAndDisabledStory.args = {
   ...columnCustomizationControlProps,
   featureFlags: ['Datagrid.useCustomizeColumns'],
 };

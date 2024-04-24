@@ -6,7 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, createContext } from 'react';
+import React, {
+  useEffect,
+  useState,
+  createContext,
+  ReactNode,
+  ForwardedRef,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -52,6 +58,149 @@ export const StepsContext = createContext(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
+interface HeaderBreadcrumbs {
+  /** breadcrumb item key */
+  key: string;
+  /** breadcrumb item label */
+  label: string;
+  /** breadcrumb item link */
+  href?: string;
+  /** breadcrumb item title tooltip */
+  title?: string;
+  /** Provide if this breadcrumb item represents the current page */
+  isCurrentPage?: boolean;
+}
+
+type CreateFullPageBreadcrumbsProps =
+  | {
+      /** The header breadcrumbs */
+      breadcrumbs?: null | undefined;
+
+      /**
+       * Label for open/close overflow button used for breadcrumb items that do not fit
+       */
+      breadcrumbsOverflowAriaLabel?: never;
+    }
+  | {
+      /** The header breadcrumbs */
+      breadcrumbs: HeaderBreadcrumbs;
+
+      /**
+       * Label for open/close overflow button used for breadcrumb items that do not fit
+       */
+      breadcrumbsOverflowAriaLabel: string;
+    };
+
+type CreateFullPageBaseProps = {
+  /**
+   * The back button text
+   */
+  backButtonText?: string;
+
+  /**
+   * The cancel button text
+   */
+  cancelButtonText: string;
+
+  /**
+   * The main content of the full page
+   */
+  children?: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement?: string;
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep?: number;
+
+  /**	Maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1) */
+  maxVisibleBreadcrumbs?: number;
+
+  /**
+   * The primary 'danger' button text in the modal
+   */
+  modalDangerButtonText: string;
+
+  /**
+   * The description located below the title in the modal
+   */
+  modalDescription?: string;
+
+  /**
+   * The secondary button text in the modal
+   */
+  modalSecondaryButtonText: string;
+
+  /**
+   * The title located in the header of the modal
+   */
+  modalTitle: string;
+
+  /**
+   * The next button text
+   */
+  nextButtonText: string;
+
+  /**
+   * A prop to omit the trailing slash for the breadcrumbs
+   */
+  noTrailingSlash?: boolean;
+
+  /**
+   * An optional handler that is called when the user closes the full page (by
+   * clicking the secondary button, located in the modal, which triggers after
+   * clicking the ghost button in the modal
+   */
+  onClose?: () => void;
+
+  /**
+   * Specify a handler for submitting the multi step full page (final step).
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the create button.
+   */
+  onRequestSubmit: () => void;
+
+  /**
+   * A secondary title of the full page, displayed in the influencer area
+   */
+  secondaryTitle?: string;
+
+  /**
+   * @ignore
+   * The aria label to be used for the UI Shell SideNav Carbon component
+   */
+  sideNavAriaLabel?: string;
+
+  /**
+   * The submit button text
+   */
+  submitButtonText: string;
+
+  /**
+   * The main title of the full page, displayed in the header area
+   */
+  title?: string;
+};
+
+type CreateFullPageProps = CreateFullPageBaseProps &
+  CreateFullPageBreadcrumbsProps;
+
+interface Step {
+  introStep?: boolean;
+  secondaryLabel?: string;
+  shouldIncludeStep?: boolean;
+  title?: string;
+}
 /**
  * Use with creations that must be completed in order for a service to be usable.
  *
@@ -88,8 +237,8 @@ export let CreateFullPage = React.forwardRef(
       title,
       secondaryTitle,
       ...rest
-    },
-    ref
+    }: CreateFullPageProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [createFullPageActions, setCreateFullPageActions] = useState([]);
     const [shouldViewAll, setShouldViewAll] = useState(false);
@@ -100,9 +249,9 @@ export let CreateFullPage = React.forwardRef(
     const [isDisabled, setIsDisabled] = useState(false);
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
-    const [stepData, setStepData] = useState([]);
+    const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
-    const [lastIncludedStep, setLastIncludedStep] = useState(null);
+    const [lastIncludedStep, setLastIncludedStep] = useState<number>();
 
     useEffect(() => {
       const firstItem =
@@ -114,6 +263,8 @@ export let CreateFullPage = React.forwardRef(
       if (lastItem !== lastIncludedStep) {
         setLastIncludedStep(lastItem);
       }
+
+      /**@ts-ignore */
       if (open && initialStep) {
         const numberOfHiddenSteps = getNumberOfHiddenSteps(
           stepData,
@@ -121,7 +272,13 @@ export let CreateFullPage = React.forwardRef(
         );
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep]);
+    }, [
+      stepData,
+      firstIncludedStep,
+      lastIncludedStep,
+      initialStep,
+      modalIsOpen,
+    ]);
 
     useCreateComponentFocus({
       previousState,
@@ -134,9 +291,11 @@ export let CreateFullPage = React.forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
+      /**@ts-ignore */
       open,
       setCurrentStep,
       stepData,
+      /**@ts-ignore */
       initialStep,
       totalSteps: stepData?.length,
       componentName,
@@ -149,6 +308,7 @@ export let CreateFullPage = React.forwardRef(
       isSubmitDisabled: isDisabled,
       setCurrentStep,
       setIsSubmitting,
+      /**@ts-ignore */
       setShouldViewAll,
       onClose,
       onRequestSubmit,
@@ -173,16 +333,15 @@ export let CreateFullPage = React.forwardRef(
         className={cx(blockClass, className)}
         {...getDevtoolsProps(componentName)}
       >
-        {(title || breadcrumbs?.length > 0) && (
-          <div className={`${blockClass}__header`}>
-            <SimpleHeader
-              title={title}
-              breadcrumbs={breadcrumbs}
-              noTrailingSlash={noTrailingSlash}
-              overflowAriaLabel={breadcrumbsOverflowAriaLabel}
-              maxVisible={maxVisibleBreadcrumbs}
-            />
-          </div>
+        {(title || breadcrumbs) && (
+          <SimpleHeader
+            title={title}
+            breadcrumbs={breadcrumbs}
+            noTrailingSlash={noTrailingSlash}
+            overflowAriaLabel={breadcrumbsOverflowAriaLabel}
+            maxVisible={maxVisibleBreadcrumbs}
+            className={`${blockClass}__header`}
+          />
         )}
         <div className={`${blockClass}__influencer-and-body-container`}>
           <div className={`${blockClass}__influencer`}>
@@ -197,14 +356,16 @@ export let CreateFullPage = React.forwardRef(
               <div className={`${blockClass}__content`}>
                 <Form className={`${blockClass}__form`} aria-label={title}>
                   <StepsContext.Provider
-                    value={{
-                      currentStep,
-                      setIsDisabled,
-                      setOnNext: (fn) => setOnNext(() => fn),
-                      setOnMount: (fn) => setOnMount(() => fn),
-                      setStepData,
-                      stepData,
-                    }}
+                    value={
+                      {
+                        currentStep,
+                        setIsDisabled,
+                        setOnNext: (fn) => setOnNext(() => fn),
+                        setOnMount: (fn) => setOnMount(() => fn),
+                        setStepData,
+                        stepData,
+                      } as any
+                    }
                   >
                     {React.Children.map(children, (child, index) => (
                       <StepNumberContext.Provider value={index + 1}>
@@ -274,6 +435,7 @@ CreateFullPage.propTypes = {
   backButtonText: PropTypes.string.isRequired,
 
   /** The header breadcrumbs */
+  /**@ts-ignore */
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({
       /** breadcrumb item key */

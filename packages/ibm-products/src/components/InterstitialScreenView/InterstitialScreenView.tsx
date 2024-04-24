@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -21,10 +21,29 @@ import { pkg /*, carbon */ } from '../../settings';
 const blockClass = `${pkg.prefix}--interstitial-screen-view`;
 const componentName = 'InterstitialScreenView';
 
+interface InterstitialScreenViewProps extends PropsWithChildren {
+  /**
+   * Provide the contents of the InterstitialScreenView.
+   */
+  children?: ReactNode;
+
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+
+  /**
+   * The label to pass to the ProgressStep component.
+   */
+  stepTitle: string;
+}
 /**
  * A Novice to Pro component intended to be used as the child elements of the InterstitialScreen component.
  */
-export let InterstitialScreenView = React.forwardRef(
+export let InterstitialScreenView = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenViewProps
+>(
   (
     {
       children,

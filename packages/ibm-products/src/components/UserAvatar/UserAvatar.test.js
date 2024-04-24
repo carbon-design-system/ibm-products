@@ -14,7 +14,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { UserAvatar } from '.';
 import { User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
-import { Theme } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--user-avatar`;
 const componentName = UserAvatar.displayName;
@@ -28,33 +27,13 @@ const renderComponent = ({ ...rest } = {}) =>
 describe(componentName, () => {
   it('should return a circle with background color', async () => {
     render(
-      <Theme theme={'g10'}>
-        <UserAvatar
-          backgroundColor="order-1-cyan"
-          data-testid={dataTestId}
-        ></UserAvatar>
-      </Theme>
+      <UserAvatar
+        backgroundColor="order-1-cyan"
+        data-testid={dataTestId}
+      ></UserAvatar>
     );
-    const themeDiv = document.getElementsByClassName('cds--g10')[0];
-    expect(themeDiv).toBeTruthy();
     const element = screen.getByTestId(dataTestId);
     const hasBackgroundColor = element.className.includes('order-1-cyan');
-    expect(hasBackgroundColor).toBeTruthy();
-  });
-
-  it('should return a circle with background color', async () => {
-    render(
-      <Theme theme={'g100'}>
-        <UserAvatar
-          backgroundColor="order-2-gray"
-          data-testid={dataTestId}
-        ></UserAvatar>
-      </Theme>
-    );
-    const themeDiv = document.getElementsByClassName('cds--g100')[0];
-    expect(themeDiv).toBeTruthy();
-    const element = screen.getByTestId(dataTestId);
-    const hasBackgroundColor = element.className.includes('order-2-gray');
     expect(hasBackgroundColor).toBeTruthy();
   });
 

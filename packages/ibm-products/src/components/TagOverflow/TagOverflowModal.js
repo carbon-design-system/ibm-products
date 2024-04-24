@@ -24,6 +24,12 @@ import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 const componentName = 'TagOverflowModal';
 const blockClass = `${pkg.prefix}--tag-overflow-modal`;
 
+// Default values for props
+const defaults = {
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
+};
+
 export const TagOverflowModal = ({
   // The component props, in alphabetical order (for consistency).
 
@@ -33,7 +39,7 @@ export const TagOverflowModal = ({
   onClose,
   open,
   portalTarget: portalTargetIn,
-  searchLabel,
+  searchLabel = defaults.searchLabel,
   searchPlaceholder,
 
   // Collect any other property values passed in.

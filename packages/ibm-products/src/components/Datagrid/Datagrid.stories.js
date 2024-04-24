@@ -62,6 +62,7 @@ const getColumns = (rows) => {
       sticky: 'left',
       id: 'rowIndex', // id is required when accessor is a function.
       width: getAutoSizedColumnWidth(rows, 'rowIndex', 'Row Index'),
+      className: 'test-column',
     },
     {
       Header: 'First Name',

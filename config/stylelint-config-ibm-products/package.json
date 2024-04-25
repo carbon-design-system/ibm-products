@@ -15,15 +15,15 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon$)/'"
   },
   "peerDependencies": {
-    "stylelint": "^15.11.0"
+    "stylelint": "*"
   },
   "devDependencies": {
     "stylelint-config-carbon": "^1.17.1",
-    "stylelint-config-idiomatic-order": "^9.0.0",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-standard-scss": "^10.0.0",
-    "stylelint-no-unsupported-browser-features": "^7.0.0",
-    "stylelint-plugin-carbon-tokens": "^2.3.1",
-    "stylelint-use-logical": "^2.1.0"
+    "stylelint-config-idiomatic-order": "^10.0.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.1",
+    "stylelint-plugin-carbon-tokens": "^3.0.0-rc.0",
+    "stylelint-use-logical": "^2.1.2"
   }
 }

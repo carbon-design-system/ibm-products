@@ -8,15 +8,8 @@
  */
 
 import React, { useState } from 'react';
-import { Edit, TrashCan, FolderOpen, View, Folders } from '@carbon/react/icons';
-import {
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
-  unstable__SlugActions as SlugActions,
-  IconButton,
-  Button,
-  usePrefix,
-} from '@carbon/react';
+import { Edit, TrashCan } from '@carbon/react/icons';
+import { usePrefix } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import {
   Datagrid,
@@ -30,6 +23,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
+import { ExampleSlug } from '../../utils/ExampleSlug';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Slug',
@@ -92,37 +86,6 @@ export default {
   },
   excludeStories: ['ExampleSlug'],
 };
-
-export const ExampleSlug = ({ align = 'bottom-right', ...rest }) => (
-  <Slug className="slug-container" autoAlign={false} align={align} {...rest}>
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-      <SlugActions>
-        <IconButton kind="ghost" label="View">
-          <View />
-        </IconButton>
-        <IconButton kind="ghost" label="Open Folder">
-          <FolderOpen />
-        </IconButton>
-        <IconButton kind="ghost" label="Folders">
-          <Folders />
-        </IconButton>
-        <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
-);
 
 const getDefaultHeader = (rowSlug, align) => [
   {

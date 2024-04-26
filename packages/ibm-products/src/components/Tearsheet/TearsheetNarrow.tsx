@@ -58,14 +58,6 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
   className?: string;
 
   /**
-   * The accessibility title for the close icon (if shown).
-   *
-   * **Note:** This prop is only required if a close icon is shown, i.e. if
-   * there are a no navigation actions and/or hasCloseIcon is true.
-   */
-  closeIconDescription?: string;
-
-  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;

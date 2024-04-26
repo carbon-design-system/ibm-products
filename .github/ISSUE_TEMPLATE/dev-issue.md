@@ -1,5 +1,5 @@
 ---
-name: 'Dev issue 🔧'
+name: '(C4IBM Products team only) Dev issue 🔧'
 about: General dev work. E.g. testing, fixes, enhancements etc.
 title: ''
 labels: ''

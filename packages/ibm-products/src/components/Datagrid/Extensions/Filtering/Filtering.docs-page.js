@@ -410,6 +410,29 @@ filterProps: {
           `,
         },
       },
+      {
+        subTitle: `onApply method`,
+        source: {
+          language: 'jsx',
+          code: `
+/*
+  This method is called when the user applies filters, if you want to do something after filters
+  are applied here we pass in the filtersState. Inside the filtersState you can find the state of
+  the filters in the ui, and you can find the array of appliedFilters.
+*/
+
+const datagridState = useDatagrid({
+    columns,
+    data,
+    filterProps: {
+      onApply: (filtersState) => console.log(filtersState),
+    }
+  });
+
+  return <Datagrid datagridState={datagridState} />;
+          `,
+        },
+      },
     ]}
   />
 );

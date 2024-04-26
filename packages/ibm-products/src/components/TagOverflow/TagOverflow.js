@@ -35,6 +35,7 @@ export let TagOverflow = React.forwardRef(
       items = defaults.items,
       tagComponent,
       maxVisible,
+      multiline,
       // Collect any other property values passed in.
       ...rest
     },
@@ -78,6 +79,11 @@ export let TagOverflow = React.forwardRef(
         return items;
       }
 
+      if (multiline) {
+        const visibleItems = maxVisible ? items?.slice(0, maxVisible) : items;
+        return visibleItems;
+      }
+
       const map = getMap();
       const overflowContainerWidth =
         overflowRef.current.offsetWidth > overflowIndicatorWidth
@@ -102,7 +108,7 @@ export let TagOverflow = React.forwardRef(
         }
         return prev;
       }, []);
-    }, [itemRefs, overflowRef, containerWidth, items]);
+    }, [itemRefs, overflowRef, containerWidth, items, multiline, maxVisible]);
 
     const getCustomComponent = (item) => {
       const { className, id, ...other } = item;
@@ -135,7 +141,9 @@ export let TagOverflow = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className)}
+        className={cx(blockClass, className, {
+          [`${blockClass}--multiline`]: multiline,
+        })}
         ref={containerRef}
         role="main"
         {...getDevtoolsProps(componentName)}
@@ -220,7 +228,10 @@ TagOverflow.propTypes = {
    */
   maxVisible: PropTypes.number,
   /**
-   * Component definition of the items to be rendered inside TagOverflow.
+   * display items in multiple lines
+   */
+  multiline: PropTypes.bool,
+  /** Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */
   tagComponent: PropTypes.elementType,

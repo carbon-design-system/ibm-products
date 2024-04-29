@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { PropsWithChildren, ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -20,7 +20,7 @@ const blockClass = `${pkg.prefix}--non-linear-reading`;
 const componentName = 'NonLinearReading';
 
 type Theme = 'light' | 'dark';
-interface NonLinearReadingProps extends PropsWithChildren {
+interface NonLinearReadingProps {
   /**
    * The keyword of the component appears as a pill.
    */

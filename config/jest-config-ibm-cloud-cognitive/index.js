@@ -98,6 +98,7 @@ module.exports = {
     '/umd/',
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
     'ace-node\\.js',
+    'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
   ],
   watchPathIgnorePatterns: [
     '/.avt/',

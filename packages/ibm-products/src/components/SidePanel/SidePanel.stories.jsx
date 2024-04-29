@@ -522,11 +522,13 @@ WithActionToolbar.args = {
       label: 'Settings',
       icon: (props) => <Settings size={16} {...props} />,
       onClick: action('Toolbar button clicked: Settings'),
+      hasIconOnly: true,
     },
     {
       label: 'Delete',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('Toolbar button clicked: Delete'),
+      hasIconOnly: true,
     },
   ],
   ...defaultStoryProps,

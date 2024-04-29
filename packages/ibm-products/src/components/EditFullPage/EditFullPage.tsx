@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { PropsWithChildren, ReactNode, ForwardedRef } from 'react';
+import React, { ReactNode, ForwardedRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -63,7 +63,7 @@ export let EditFullPage = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: PropsWithChildren<EditFullPageProps>,
+    }: EditFullPageProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (

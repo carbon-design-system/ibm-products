@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,7 +33,7 @@ const componentName = 'InterstitialScreenViewModule';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-interface InterstitialScreenViewModuleProps extends PropsWithChildren {
+interface InterstitialScreenViewModuleProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

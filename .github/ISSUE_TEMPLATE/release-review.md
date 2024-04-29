@@ -1,5 +1,5 @@
 ---
-name: Release review 🐦
+name: (C4IBM Products team only) Release review 🐦
 about: Review process before release of a new component or pattern from Canary
 ---
 

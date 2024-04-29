@@ -183,7 +183,6 @@ export let EditUpdateCards = React.forwardRef(
       secondaryButtonPlacement: 'top',
       secondaryButtonText: secondaryButtonText,
     };
-    /**@ts-ignore */
     return (
       <div
         {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -13,6 +13,18 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
+interface CarouselItemProps {
+  /**
+   * Provide the contents of the CarouselItem.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -24,7 +36,7 @@ const componentName = 'CarouselItem';
 /**
  * TODO: A description of the component.
  */
-const CarouselItem = React.forwardRef(
+const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>(
   ({ children, className, ...rest }, ref) => {
     return (
       <div

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -19,12 +19,35 @@ import { pkg /*, carbon */ } from '../../settings';
 const blockClass = `${pkg.prefix}--coachmark-overlay-element`;
 const componentName = 'CoachmarkOverlayElement';
 
+interface CoachmarkOverlayElementProps {
+  /**
+   * An optional button can be rendered below the description.
+   * This can be a link, button, Coachmark button, etc.
+   */
+  button?: ReactNode;
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * The description of the Coachmark.
+   */
+  description: ReactNode;
+  /**
+   * The title of the Coachmark.
+   */
+  title: string;
+}
+
 /**
  * Component to be displayed within a CoachmarkOverlayElements container.
  * Can be used 1 to N number, to display content in a Coachmark's overlay
  * in a carousel fashion.
  */
-export let CoachmarkOverlayElement = React.forwardRef(
+export let CoachmarkOverlayElement = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkOverlayElementProps
+>(
   (
     {
       button,

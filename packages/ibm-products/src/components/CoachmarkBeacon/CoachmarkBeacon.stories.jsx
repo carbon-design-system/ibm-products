@@ -19,6 +19,7 @@ import {
 import mdx from './CoachmarkBeacon.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { BEACON_KIND } from '../Coachmark/utils/enums';
 
 export default {
   title:
@@ -65,6 +66,6 @@ const Template = (args) => {
 export const coachmarkBeacon = Template.bind({});
 coachmarkBeacon.args = {
   className: 'myBeacon',
-  kind: 'default',
+  kind: BEACON_KIND.DEFAULT,
   label: 'Show information',
 };

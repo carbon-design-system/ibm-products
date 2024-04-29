@@ -1,37 +1,54 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-overlay-element`;
-const componentName = 'CoachmarkOverlayElement';
+// Carbon and package components we use.
+/* TODO: @import(s) of carbon components and other package components. */
 
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--interstitial-screen-view`;
+const componentName = 'InterstitialScreenView';
+
+interface InterstitialScreenViewProps extends PropsWithChildren {
+  /**
+   * Provide the contents of the InterstitialScreenView.
+   */
+  children?: ReactNode;
+
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+
+  /**
+   * The label to pass to the ProgressStep component.
+   */
+  stepTitle: string;
+}
 /**
- * Component to be displayed within a CoachmarkOverlayElements container.
- * Can be used 1 to N number, to display content in a Coachmark's overlay
- * in a carousel fashion.
+ * A Novice to Pro component intended to be used as the child elements of the InterstitialScreen component.
  */
-export let CoachmarkOverlayElement = React.forwardRef(
+export let InterstitialScreenView = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenViewProps
+>(
   (
     {
-      button,
+      children,
       className,
-      description,
-      title,
-
+      stepTitle,
       // Collect any other property values passed in.
       ...rest
     },
@@ -39,6 +56,8 @@ export let CoachmarkOverlayElement = React.forwardRef(
   ) => {
     return (
       <div
+        role="complementary"
+        aria-label={stepTitle}
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -53,50 +72,40 @@ export let CoachmarkOverlayElement = React.forwardRef(
           }
         )}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
-        <div className={`${blockClass}__content`}>
-          {title && <h2 className={`${blockClass}__title`}>{title}</h2>}
-          {description && (
-            <p className={`${blockClass}__body`}>{description}</p>
-          )}
-        </div>
-        {button && <div className={`${blockClass}__button`}>{button}</div>}
+        {children}
       </div>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkOverlayElement = pkg.checkComponentEnabled(
-  CoachmarkOverlayElement,
+InterstitialScreenView = pkg.checkComponentEnabled(
+  InterstitialScreenView,
   componentName
 );
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-CoachmarkOverlayElement.displayName = componentName;
+InterstitialScreenView.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-CoachmarkOverlayElement.propTypes = {
+InterstitialScreenView.propTypes = {
   /**
-   * An optional button can be rendered below the description.
-   * This can be a link, button, Coachmark button, etc.
+   * Provide the contents of the InterstitialScreenView.
    */
-  button: PropTypes.node,
+  children: PropTypes.node,
+
   /**
    * Optional class name for this component.
    */
   className: PropTypes.string,
+
   /**
-   * The description of the Coachmark.
+   * The label to pass to the ProgressStep component.
    */
-  description: PropTypes.node.isRequired,
-  /**
-   * The title of the Coachmark.
-   */
-  title: PropTypes.string.isRequired,
+  stepTitle: PropTypes.string.isRequired,
 };

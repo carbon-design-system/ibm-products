@@ -46,7 +46,7 @@ type ActionIcon = {
   href?: string;
 };
 
-interface EditUpdateCards {
+interface EditUpdateCardsProps {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
@@ -166,7 +166,7 @@ export let EditUpdateCards = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: EditUpdateCards,
+    }: EditUpdateCardsProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     // const [editCardMode, setEditCardMode] = useState(editMode);

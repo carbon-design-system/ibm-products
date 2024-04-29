@@ -181,10 +181,11 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
     };
 
     const multiSelectProps = {
-      label: scopesTypeLabel,
       initialSelectedItems: selectedScopes,
       items: scopes,
       itemToString: scopeToString,
+      label: scopesTypeLabel,
+      sortItems,
       translateWithId,
     }
 

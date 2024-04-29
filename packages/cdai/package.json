@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.13",
-    "@ibm/telemetry-js": "^1.3.0",
+    "@ibm/telemetry-js": "^1.5.0",
     "focus-trap-react": "^10.0.2",
     "pluralize": "^8.0.0",
     "react-select": "^5.7.0",

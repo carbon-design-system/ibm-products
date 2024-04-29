@@ -48,6 +48,7 @@ export const ConditionBuilderProvider = (props) => {
         setRootState,
         inputConfig: props.inputConfig,
         popOverSearchThreshold: props.popOverSearchThreshold,
+        getOptions: props.getOptions,
       }}
     >
       {
@@ -63,6 +64,17 @@ ConditionBuilderProvider.propTypes = {
    * Provide the contents of the ConditionBuilder.
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * This is an optional callback function that will be triggered when options array is not passed in the inputConfig against a property. 
+   * This can be a asynchronous function that need  to  return a promise, so it will allow to fetch options from API call.
+   * options has to be in valid format
+   * [{
+          label: 'label',
+          id: 'id',
+        },...] 
+   */
+  getOptions: PropTypes.func,
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
@@ -88,7 +100,6 @@ ConditionBuilderProvider.propTypes = {
       })
     ),
   }).isRequired,
-
   /**
    * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
    */

@@ -58,6 +58,9 @@ export let ConditionBuilder = React.forwardRef(
       inputConfig,
       startConditionLabel,
       popOverSearchThreshold,
+      getOptions,
+      initialState,
+      getConditionState,
       /* TODO: add other props for ConditionBuilder, with default values if needed */
 
       // Collect any other property values passed in.
@@ -72,6 +75,7 @@ export let ConditionBuilder = React.forwardRef(
       <ConditionBuilderProvider
         inputConfig={inputConfig}
         popOverSearchThreshold={popOverSearchThreshold}
+        getOptions={getOptions}
       >
         <div
           {
@@ -94,6 +98,8 @@ export let ConditionBuilder = React.forwardRef(
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
               conditionBuilderRef={conditionBuilderRef}
+              getConditionState={getConditionState}
+              initialState={initialState}
             />
           </VStack>
         </div>
@@ -122,6 +128,41 @@ ConditionBuilder.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * This is a callback function that returns the updated state
+   */
+  getConditionState: PropTypes.func.isRequired,
+
+  /**
+   * This is an optional callback function that will be triggered when options array is not passed in the inputConfig against a property. 
+   * This can be a asynchronous function that need  to  return a promise, so it will allow to fetch options from API call.
+   * options has to be in valid format
+   * [{
+          label: 'label',
+          id: 'id',
+        },...] 
+   */
+  getOptions: PropTypes.func,
+
+  /**
+   * Optional prop if the condition building need to start from a predefined initial state
+   */
+  initialState: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupSeparateOperator: PropTypes.string,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
+        conditions: PropTypes.arrayOf(
+          PropTypes.shape({
+            property: PropTypes.string,
+            operator: PropTypes.string,
+            value: PropTypes.string,
+          })
+        ),
+      })
+    ),
+  }),
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
@@ -143,10 +184,6 @@ ConditionBuilder.propTypes = {
             })
           ),
           includeSearch: PropTypes.bool,
-          min: PropTypes.number,
-          step: PropTypes.number,
-          unit: PropTypes.string,
-          timeZones: PropTypes.arrayOf(PropTypes.string),
         }),
       })
     ),
@@ -161,6 +198,4 @@ ConditionBuilder.propTypes = {
    * Provide a label to the button that starts condition builder
    */
   startConditionLabel: PropTypes.string.isRequired,
-
-  /* TODO: add types and DocGen for all props. */
 };

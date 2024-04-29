@@ -21,6 +21,8 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 const ConditionBuilderContent = ({
   startConditionLabel,
   conditionBuilderRef,
+  getConditionState,
+  initialState,
 }) => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
@@ -32,6 +34,8 @@ const ConditionBuilderContent = ({
     } else {
       setIsConditionBuilderActive(true);
     }
+    getConditionState(rootState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState, conditionBuilderRef]);
 
   useEffect(() => {
@@ -51,7 +55,7 @@ const ConditionBuilderContent = ({
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(false);
-    setRootState(emptyState); //here we can set an empty skeleton object for an empty condition builder,
+    setRootState(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
     //or we can even pre-populate some existing builder and continue editing
   };
 
@@ -126,6 +130,28 @@ ConditionBuilderContent.propTypes = {
    */
   conditionBuilderRef: PropTypes.object,
 
+  /**
+   * This is a callback function that returns the updated state
+   */
+  getConditionState: PropTypes.func.isRequired,
+  /**
+   * Optional prop if the condition building need to start from a predefined initial state
+   */ initialState: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupSeparateOperator: PropTypes.string,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
+        conditions: PropTypes.arrayOf(
+          PropTypes.shape({
+            property: PropTypes.string,
+            operator: PropTypes.string,
+            value: PropTypes.string,
+          })
+        ),
+      })
+    ),
+  }),
   /**
    * Provide a label to the button that starts condition builder
    */

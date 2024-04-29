@@ -41,7 +41,6 @@ export const inputData = {
             id: 'Europe',
           },
         ],
-        //options: ['Africa', 'Antarctica', 'Asia', 'Australia', 'Europe', 'North America', 'South America'],
       },
     },
     {
@@ -69,6 +68,11 @@ export const inputData = {
           {
             label: 'Andorra',
             id: 'AN',
+            icon: Wikis,
+          },
+          {
+            label: 'India',
+            id: 'India',
             icon: Wikis,
           },
         ],
@@ -245,6 +249,132 @@ export const inputData = {
       icon: Cube,
       type: 'text',
       config: {},
+    },
+  ],
+};
+
+export const inputDataDynamicOptions = {
+  properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      icon: Earth,
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      icon: Flag,
+      type: 'option',
+      config: {
+        includeSearch: true,
+      },
+    },
+    {
+      id: 'color',
+      label: 'Color',
+      icon: ColorPalette,
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'id',
+      label: 'ID',
+      icon: Hashtag,
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'price',
+      label: 'Price',
+      icon: Currency,
+      type: 'number',
+      config: {
+        min: 0,
+        step: 1,
+        unit: 'Dollars',
+      },
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      icon: Calendar,
+      type: 'date',
+      config: {},
+    },
+    {
+      id: 'time',
+      label: 'Time',
+      icon: Calendar,
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+
+    {
+      id: 'product',
+      label: 'Product',
+      icon: Cube,
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      icon: DeliveryTruck,
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Processing',
+            id: 'Processing',
+          },
+          {
+            label: 'Preparing for dispatch',
+            id: 'Preparing for dispatch',
+          },
+          {
+            label: 'Dispatched',
+            id: 'Dispatched',
+          },
+          {
+            label: 'In delivery',
+            id: 'In delivery',
+          },
+          {
+            label: 'Delivered',
+            id: 'Delivered',
+          },
+        ],
+      },
+    },
+    {
+      id: 'season',
+      label: 'Season',
+      icon: Tree,
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Winter',
+            id: 'Winter',
+          },
+          {
+            label: 'Spring',
+            id: 'Spring',
+          },
+          {
+            label: 'Summer',
+            id: 'Summer',
+          },
+          {
+            label: 'Fall',
+            id: 'Fall',
+          },
+        ],
+      },
     },
   ],
 };

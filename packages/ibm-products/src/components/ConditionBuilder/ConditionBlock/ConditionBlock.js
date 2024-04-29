@@ -35,7 +35,6 @@ function ConditionBlock(props) {
     onStatementChange,
   } = props;
   const { inputConfig } = useContext(ConditionBuilderContext);
-  console.log(JSON.stringify(state));
   //Below possible input types expected for value field.
   const itemComponents = {
     option: ConditionBuilderItemOption,
@@ -48,19 +47,29 @@ function ConditionBlock(props) {
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
   //filtering the current property to access its properties and config options
-  const { icon, type, config, label } =
-    inputConfig.properties?.filter(
-      (eachProperty) =>
-        eachProperty.label?.toUpperCase() == property?.toUpperCase()
-    )[0] ?? {};
+  const getCurrentConfig = (property) => {
+    return (
+      inputConfig.properties?.filter(
+        (eachProperty) =>
+          eachProperty.label?.toUpperCase() == property?.toUpperCase()
+      )[0] ?? {}
+    );
+  };
+
+  const { icon, type, config, label } = getCurrentConfig(property);
   const ItemComponent = property ? itemComponents[type] : null;
 
   return (
     <div
       className={cx(
-        `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom`
+        `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom`,
+        {
+          [`${blockClass}__condition-builder-condition__deletion-preview`]:
+            showDeletionPreview,
+        }
       )}
       role="row"
+      aria-label={translateWithId('condition_row')}
       tabIndex={-1}
     >
       {conjunction && (
@@ -72,141 +81,133 @@ function ConditionBlock(props) {
       )}
 
       {isStatement && (
-        <div className={` ${blockClass}__gap`}>
-          <ConditionBuilderItem
-            //   open={false}
-            label={group.statement}
-            title={translateWithId('condition')}
-            data-name="connectorField"
-            className={`${blockClass}__statement-button`}
-          >
-            <ConditionBuilderItemOption
-              conditionState={{
-                value: group.statement,
-                label: translateWithId('condition'),
-              }}
-              onChange={(v, e) => {
-                focusThisField(e);
-                onStatementChange(v);
-              }}
-              config={{ options: statementConfig }}
-            ></ConditionBuilderItemOption>
-          </ConditionBuilderItem>
-        </div>
+        <ConditionBuilderItem
+          //   open={false}
+          label={group.statement}
+          title={translateWithId('condition')}
+          data-name="connectorField"
+          popOverClassName={`${blockClass}__gap`}
+          className={`${blockClass}__statement-button`}
+        >
+          <ConditionBuilderItemOption
+            conditionState={{
+              value: group.statement,
+              label: translateWithId('condition'),
+            }}
+            onChange={(v, e) => {
+              focusThisField(e);
+              onStatementChange(v);
+            }}
+            config={{ options: statementConfig }}
+          ></ConditionBuilderItemOption>
+        </ConditionBuilderItem>
       )}
 
-      <div
-        className={cx(`${blockClass}__conditionWrapper`, {
-          [`${blockClass}__condition-builder-condition__deletion-preview`]:
-            showDeletionPreview,
-        })}
+      <ConditionBuilderItem
+        label={label}
+        title={translateWithId('property')}
+        renderIcon={icon ?? null}
+        className={`${blockClass}__property-field`}
+        data-name="propertyField"
+        state={state}
+        type={type}
       >
+        <ConditionBuilderItemOption
+          conditionState={{
+            value: property,
+            label: translateWithId('property'),
+          }}
+          onChange={(v) => {
+            onChange({
+              ...state,
+              property: v,
+              operator: undefined,
+              value: '',
+              popoverToOpen: 'operatorField',
+            });
+          }}
+          config={{ options: inputConfig.properties }}
+        />
+      </ConditionBuilderItem>
+      {property && (
         <ConditionBuilderItem
-          label={label}
-          title={translateWithId('property')}
-          renderIcon={icon ?? null}
-          className={`${blockClass}__property-field`}
-          data-name="propertyField"
+          label={operator}
+          title={translateWithId('operator')}
+          data-name="operatorField"
           state={state}
           type={type}
         >
           <ConditionBuilderItemOption
+            config={{
+              options: operatorConfig.filter(
+                (operator) =>
+                  operator.type.indexOf(type) != -1 || operator.type == 'all'
+              ),
+            }}
             conditionState={{
-              value: property,
-              label: translateWithId('property'),
+              value: operator,
+              label: translateWithId('operator'),
             }}
             onChange={(v) => {
               onChange({
                 ...state,
-                property: v,
-                operator: undefined,
-                value: '',
-                popoverToOpen: 'operatorField',
+                operator: v,
+                value: undefined,
+                popoverToOpen: 'valueField',
               });
             }}
-            config={{ options: inputConfig.properties }}
           />
         </ConditionBuilderItem>
-        {property && (
-          <ConditionBuilderItem
-            label={operator}
-            title={translateWithId('operator')}
-            data-name="operatorField"
-            state={state}
-            type={type}
-          >
-            <ConditionBuilderItemOption
-              config={{
-                options: operatorConfig.filter(
-                  (operator) =>
-                    operator.type.indexOf(type) != -1 || operator.type == 'all'
-                ),
-              }}
-              conditionState={{
-                value: operator,
-                label: translateWithId('operator'),
-              }}
-              onChange={(v) => {
-                onChange({
-                  ...state,
-                  operator: v,
-                  value: undefined,
-                  popoverToOpen: 'valueField',
-                });
-              }}
-            />
-          </ConditionBuilderItem>
-        )}
-        {property && operator && (
-          <ConditionBuilderItem
-            label={value}
-            type={type}
-            title={label}
-            showToolTip={true}
-            data-name="valueField"
-            state={state}
-          >
-            <ItemComponent
-              conditionState={{
-                property,
-                operator,
-                value,
-              }}
-              onChange={(v) => {
-                onChange({
-                  ...state,
-                  value: v,
-                  popoverToOpen: '',
-                });
-              }}
-              config={config}
-            />
-          </ConditionBuilderItem>
-        )}
-        <span role="gridcell">
-          <ConditionBuilderButton
-            role="gridcell"
-            hideLabel
-            label={'Remove Condition'}
-            onClick={onRemove}
-            onMouseEnter={() => {
-              setShowDeletionPreview(true);
+      )}
+      {property && operator && (
+        <ConditionBuilderItem
+          label={value}
+          type={type}
+          title={label}
+          showToolTip={true}
+          data-name="valueField"
+          state={state}
+          config={config}
+        >
+          <ItemComponent
+            conditionState={{
+              property,
+              operator,
+              value,
             }}
-            onMouseLeave={() => {
-              setShowDeletionPreview(false);
+            onChange={(v) => {
+              onChange({
+                ...state,
+                value: v,
+                popoverToOpen: '',
+              });
             }}
-            onFocus={() => {
-              setShowDeletionPreview(true);
-            }}
-            onBlur={() => {
-              setShowDeletionPreview(false);
-            }}
-            renderIcon={Close}
-            className={`${blockClass}__close-condition`}
-            data-name="closeCondition"
+            config={config}
           />
-        </span>
-      </div>
+        </ConditionBuilderItem>
+      )}
+      <span role="gridcell" aria-label={translateWithId('remove_condition')}>
+        <ConditionBuilderButton
+          hideLabel
+          label={translateWithId('remove_condition')}
+          onClick={onRemove}
+          onMouseEnter={() => {
+            setShowDeletionPreview(true);
+          }}
+          onMouseLeave={() => {
+            setShowDeletionPreview(false);
+          }}
+          onFocus={() => {
+            setShowDeletionPreview(true);
+          }}
+          onBlur={() => {
+            setShowDeletionPreview(false);
+          }}
+          renderIcon={Close}
+          className={`${blockClass}__close-condition`}
+          data-name="closeCondition"
+        />
+      </span>
     </div>
   );
 }

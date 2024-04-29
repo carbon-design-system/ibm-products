@@ -19,6 +19,8 @@ export const ConditionBuilderItem = ({
   type,
   showToolTip,
   state,
+  popOverClassName,
+  config,
   ...rest
 }) => {
   const contentRef = useRef(null);
@@ -28,7 +30,7 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     const propertyId =
       rest['data-name'] == 'valueField' && type
-        ? valueRenderers[type](label)
+        ? valueRenderers[type](label, config)
         : label;
     setPropertyLabel(translateWithId(propertyId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,6 +83,7 @@ export const ConditionBuilderItem = ({
       open={open}
       isTabTip
       role="gridcell"
+      className={popOverClassName}
       onRequestClose={() => {
         setOpen(false);
       }}
@@ -91,7 +94,6 @@ export const ConditionBuilderItem = ({
         onClick={() => {
           setOpen(!open);
         }}
-        role="gridcell"
         className={className}
         aria-haspopup
         aria-expanded={open}
@@ -103,6 +105,7 @@ export const ConditionBuilderItem = ({
       <PopoverContent
         className={`${blockClass}__condition-builder-item__content`}
         role="dialog"
+        aria-label={`${title}`}
       >
         <Layer>
           <h1 className={`${blockClass}__condition-builder-item__title`}>
@@ -125,9 +128,20 @@ ConditionBuilderItem.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * this is the config object again the current property from inputConfig
+   */
+
+  config: PropTypes.object,
+
+  /**
    * text to be displayed in the field
    */
   label: PropTypes.string,
+
+  /**
+   * class name for popover
+   */
+  popOverClassName: PropTypes.string,
 
   /**
    * Optional prop to allow overriding the icon rendering.

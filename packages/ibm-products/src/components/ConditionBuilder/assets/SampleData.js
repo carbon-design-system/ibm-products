@@ -85,19 +85,19 @@ export const sampleDataStructure_sentence = {
       statement: 'if', // 'if|exclude if',
       conditions: [
         {
+          property: 'continent',
+          operator: 'is',
+          value: 'Asia',
+        },
+        {
           property: 'region',
           operator: 'is',
-          value: 'IL',
+          value: 'India',
         },
         {
-          property: 'delivery',
+          property: 'price',
           operator: 'is',
-          value: 'processing',
-        },
-        {
-          property: 'delivery',
-          operator: 'is',
-          value: 'processing',
+          value: '20',
         },
       ],
     },

@@ -27,9 +27,7 @@ export const ConditionBuilderItemNumber = ({
         step={config.step}
         allowEmpty
         onChange={(e, { value }) => {
-          let returnVal =
-            config.unit && value ? `${value} ${config.unit}` : value;
-          onChange(returnVal);
+          onChange(value + '');
         }}
       />
     </div>

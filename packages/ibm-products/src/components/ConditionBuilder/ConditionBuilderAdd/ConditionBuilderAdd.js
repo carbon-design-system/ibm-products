@@ -11,7 +11,8 @@ const ConditionBuilderAdd = ({ className, onClick }) => {
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
-      role="gridcell"
+      role="row"
+      aria-label={translateWithId('add_condition_row')}
     >
       <ConditionBuilderButton
         renderIcon={AddAlt}
@@ -20,7 +21,10 @@ const ConditionBuilderAdd = ({ className, onClick }) => {
         hideLabel
         data-name="addButton"
         label={translateWithId('add-condition')}
-        role="gridcell"
+        wrapperProps={{
+          role: 'gridcell',
+          'aria-label': translateWithId('add-condition'),
+        }}
       />
     </div>
   );

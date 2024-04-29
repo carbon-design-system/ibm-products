@@ -3,7 +3,10 @@ import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import PropTypes from 'prop-types';
 
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  translateWithId,
+} from '../ConditionBuilderContext/DataConfigs';
 
 /**
  *
@@ -77,7 +80,7 @@ const ConditionGroupBuilder = ({
       <div
         className={`${blockClass}__condition-wrapper`}
         role="grid"
-        aria-label="condition builder wrapper"
+        aria-label={translateWithId('condition_builder_group')}
       >
         {/* condition loop starts here */}
 

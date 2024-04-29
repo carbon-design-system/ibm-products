@@ -19,8 +19,6 @@ export const ConditionBuilderButton = ({
     return (
       <button
         {...rest}
-        // role={!hideLabel ? role : undefined}
-        // role={'gridcell'}
         tabIndex={-1}
         className={cx([
           className,
@@ -46,6 +44,7 @@ export const ConditionBuilderButton = ({
       label={label}
       align={tooltipAlign}
       className={`${blockClass}__con-tooltip`}
+      {...rest.wrapperProps}
     >
       {Button()}
     </Tooltip>

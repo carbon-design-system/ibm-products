@@ -20,13 +20,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__condition-builder-condition__deletion-preview
-  .#{$block-class}__condition-builder-button {
+  .#{$block-class}__condition-builder-button:not(
+    .#{$block-class}__statement-button,
+    .#{$block-class}__connector-button
+  ) {
   background-color: $tag-background-red;
   color: $tag-color-red;
 }
-
 .#{$block-class}__condition-builder-condition__deletion-preview
-  .#{$block-class}__condition-builder-button:hover {
+  .#{$block-class}__condition-builder-button:not(
+    .#{$block-class}__statement-button,
+    .#{$block-class}__connector-button
+  ):hover {
   background-color: $tag-hover-red;
 }
 

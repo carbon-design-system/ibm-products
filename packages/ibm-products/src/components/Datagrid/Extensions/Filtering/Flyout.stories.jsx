@@ -7,24 +7,16 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from 'react';
-import { Tooltip } from '@carbon/react';
-import { getBatchActions } from '../../Datagrid.stories';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  Datagrid,
-  useDatagrid,
-  useFiltering,
-  useColumnCenterAlign,
-} from '../../index';
+import { Datagrid } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
 import { DocsPage } from './Filtering.docs-page';
-import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { DatagridActions } from '../../utils/DatagridActions';
-import { StatusIcon } from '../../../StatusIcon';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
-import { getDateFormat, multiSelectProps } from './Panel.stories';
+import { multiSelectProps } from './Panel.stories';
+import { FilteringUsage } from '../../utils/FilteringUsage';
+import { getDateFormat } from '../../utils/getDateFormat';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
@@ -43,111 +35,6 @@ export default {
     },
   },
   excludeStories: ['FilteringUsage', 'filterProps'],
-};
-
-export const FilteringUsage = ({ defaultGridProps }) => {
-  const {
-    gridDescription,
-    gridTitle,
-    useDenseHeader,
-    filterProps,
-    emptyStateTitle,
-    emptyStateDescription,
-    initialState,
-  } = defaultGridProps;
-
-  const headers = [
-    {
-      Header: 'Row Index',
-      accessor: (row, i) => i,
-      sticky: 'left',
-      id: 'rowIndex', // id is required when accessor is a function.
-    },
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName',
-    },
-    {
-      Header: 'Age',
-      accessor: 'age',
-      width: 50,
-    },
-    {
-      Header: 'Visits',
-      accessor: 'visits',
-      filter: 'number',
-      width: 60,
-    },
-    {
-      Header: 'Status',
-      accessor: 'status',
-      filter: 'multiSelect',
-    },
-    // Shows the date filter example
-    {
-      Header: 'Joined',
-      accessor: 'joined',
-      filter: 'date',
-      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Password strength',
-      accessor: 'passwordStrength',
-      filter: 'checkbox',
-      centerAlignedColumn: true,
-      width: 160,
-      Cell: ({ cell: { value } }) => {
-        const iconProps = {
-          size: 'sm',
-          theme: 'light',
-          kind: value,
-          iconDescription: value,
-        };
-
-        return (
-          <Tooltip label={iconProps.iconDescription}>
-            <button type="button" className="sb--tooltip-trigger">
-              <StatusIcon {...iconProps} />
-            </button>
-          </Tooltip>
-        );
-      },
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Role',
-      accessor: 'role',
-    },
-  ];
-
-  const columns = React.useMemo(() => headers, []);
-  const [data] = useState(makeData(20));
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState,
-      DatagridActions,
-      batchActions: true,
-      toolbarBatchActions: getBatchActions(),
-      filterProps,
-      gridTitle,
-      gridDescription,
-      useDenseHeader,
-      emptyStateTitle,
-      emptyStateDescription,
-    },
-    useFiltering,
-    useColumnCenterAlign
-  );
-
-  return <Datagrid datagridState={datagridState} />;
 };
 
 const FilteringTemplateWrapper = ({ ...args }) => {
@@ -313,18 +200,6 @@ FlyoutInstant.args = {
     filters,
     renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   },
-};
-
-export const filterProps = {
-  variation: 'flyout',
-  updateMethod: 'instant',
-  primaryActionLabel: 'Apply',
-  secondaryActionLabel: 'Cancel',
-  flyoutIconDescription: 'Open filters',
-  onFlyoutOpen: action('onFlyoutOpen'),
-  onFlyoutClose: action('onFlyoutClose'),
-  filters,
-  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
 };
 
 export const FlyoutWithInitialFilters = FilteringTemplateWrapper.bind({});

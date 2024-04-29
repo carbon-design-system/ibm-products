@@ -8,22 +8,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
-import { Tooltip } from '@carbon/react';
-import {
-  Datagrid,
-  useDatagrid,
-  useFiltering,
-  useColumnCenterAlign,
-} from '../../index';
+import { Datagrid } from '../../index';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { getBatchActions } from '../../Datagrid.stories';
-import { DatagridActions } from '../../utils/DatagridActions';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { DocsPage } from './Filtering.docs-page';
-import { StatusIcon } from '../../../StatusIcon';
 import { action } from '@storybook/addon-actions';
-import { makeData } from '../../utils/makeData';
 import styles from '../../_storybook-styles.scss?inline';
+import { FilteringUsage } from '../../utils/FilteringUsage';
+import { getDateFormat } from '../../utils/getDateFormat';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Panel',
@@ -41,12 +33,7 @@ export default {
       },
     },
   },
-  excludeStories: [
-    'FilteringUsage',
-    'filterProps',
-    'getDateFormat',
-    'multiSelectProps',
-  ],
+  excludeStories: ['filterProps', 'getDateFormat', 'multiSelectProps'],
 };
 
 // This is to show off the View all button in checkboxes
@@ -59,132 +46,8 @@ const dummyCheckboxes = Array(25)
     disabled: true,
   }));
 
-export const FilteringUsage = ({ defaultGridProps }) => {
-  const {
-    gridDescription,
-    gridTitle,
-    useDenseHeader,
-    filterProps,
-    emptyStateTitle,
-    emptyStateDescription,
-    initialState,
-    data: initialData,
-  } = defaultGridProps;
-
-  const headers = [
-    {
-      Header: 'Row Index',
-      accessor: (row, i) => i,
-      sticky: 'left',
-      id: 'rowIndex', // id is required when accessor is a function.
-    },
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName',
-    },
-    {
-      Header: 'Age',
-      accessor: 'age',
-      width: 50,
-    },
-    {
-      Header: 'Visits',
-      accessor: 'visits',
-      filter: 'number',
-      width: 60,
-    },
-    {
-      Header: 'Status',
-      accessor: 'status',
-      filter: 'multiSelect',
-    },
-    // Shows the date filter example
-    {
-      Header: 'Joined',
-      accessor: 'joined',
-      filter: 'date',
-      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Password strength',
-      accessor: 'passwordStrength',
-      filter: 'checkbox',
-      width: 160,
-      centerAlignedColumn: true,
-      Cell: ({ cell: { value } }) => {
-        const iconProps = {
-          size: 'sm',
-          theme: 'light',
-          kind: value,
-          iconDescription: value,
-        };
-        return (
-          <Tooltip label={iconProps.iconDescription}>
-            <button type="button" className="sb--tooltip-trigger">
-              <StatusIcon {...iconProps} />
-            </button>
-          </Tooltip>
-        );
-      },
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Role',
-      accessor: 'role',
-    },
-  ];
-
-  const columns = React.useMemo(() => headers, []);
-  const [data] = useState(initialData ?? makeData(20));
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState,
-      DatagridActions,
-      batchActions: true,
-      toolbarBatchActions: getBatchActions(),
-      filterProps,
-      gridTitle,
-      gridDescription,
-      useDenseHeader,
-      emptyStateTitle,
-      emptyStateDescription,
-    },
-    useFiltering,
-    useColumnCenterAlign
-  );
-
-  return <Datagrid datagridState={datagridState} />;
-};
-
 const FilteringTemplateWrapper = ({ ...args }) => {
   return <FilteringUsage defaultGridProps={{ ...args }} />;
-};
-
-// Example usage of mapping locale to flatpickr date format or placeholder value (m/d/Y or mm/dd/yyyy)
-export const getDateFormat = (lang, full) => {
-  const formatObj = new Intl.DateTimeFormat(lang).formatToParts(new Date());
-  return formatObj
-    .map(({ type, value }) => {
-      switch (type) {
-        case 'day':
-          return full ? 'dd' : 'd';
-        case 'month':
-          return full ? 'mm' : 'm';
-        case 'year':
-          return full ? 'yyyy' : 'Y';
-        default:
-          return value;
-      }
-    })
-    .join('');
 };
 
 export const multiSelectProps = {

@@ -16,7 +16,7 @@ import {
   useSelectRows,
   useStickyColumn,
 } from '../../index';
-import { getBatchActions } from '../../Datagrid.stories';
+import { getBatchActions } from '../../utils/getBatchActions';
 import styles from '../../_storybook-styles.scss?inline';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';

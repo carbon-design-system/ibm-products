@@ -32,6 +32,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import DocsPage from './Datagrid.docs-page';
+import { getBatchActions } from './utils/getBatchActions';
 
 export default {
   title: 'IBM Products/Components/Datagrid',
@@ -417,38 +418,6 @@ const DatagridBatchActions = (datagridState) => {
       </TableBatchAction>
     </TableBatchActions>
   );
-};
-
-export const getBatchActions = () => {
-  return [
-    {
-      label: 'Duplicate',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Add',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Publish to catalog',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Download',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Delete',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-      hasDivider: true,
-      kind: 'danger',
-    },
-  ];
 };
 
 export const BatchActions = () => {

@@ -70,7 +70,7 @@ interface EditUpdateCardsProps {
   /**
    * Edit mode
    */
-  editMode: boolean;
+  editMode?: boolean;
   /**
    * Optional label for the top of the card
    */
@@ -126,7 +126,7 @@ interface EditUpdateCardsProps {
   /**
    * Title that's displayed at the top of the card
    */
-  title: string;
+  title?: string;
   /**
    * Determines title size
    */
@@ -267,7 +267,7 @@ EditUpdateCards.propTypes = {
   /**
    * Edit mode
    */
-  editMode: PropTypes.bool.isRequired,
+  editMode: PropTypes.bool,
   /**
    * Optional label for the top of the card
    */
@@ -325,7 +325,7 @@ EditUpdateCards.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   /**
    * Determines title size
    */

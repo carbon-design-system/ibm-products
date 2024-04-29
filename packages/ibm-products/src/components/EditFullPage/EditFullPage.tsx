@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode, ForwardedRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,6 +33,16 @@ const componentName = 'EditFullPage';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
+interface EditFullPageProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Provide the contents of the EditFullPage.
+   */
+  children: ReactNode;
+}
 // Default values for props
 // const defaults = {
 //   /* TODO: add defaults for relevant props if needed */
@@ -47,14 +57,14 @@ export let EditFullPage = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
 
-      children /* TODO: remove if not needed. */,
       className,
+      children /* TODO: remove if not needed. */,
       /* TODO: add other props for EditFullPage, with default values if needed */
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: EditFullPageProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <div

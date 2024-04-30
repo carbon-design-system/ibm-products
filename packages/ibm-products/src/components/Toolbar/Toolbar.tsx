@@ -26,8 +26,6 @@ const { checkComponentEnabled, prefix } = pkg;
 const blockClass = `${prefix}--toolbar`;
 
 interface ToolbarProps {
-  
-
   /** Provide an optional class to be applied to the containing node */
   className?: string;
 
@@ -47,13 +45,12 @@ let Toolbar = forwardRef(
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
     r: React.Ref<HTMLDivElement>
   ) => {
-    const focusableElements = useRef<HTMLElement[]  | undefined>();
+    const focusableElements = useRef<HTMLElement[] | undefined>();
 
     const getFocusableElements = useCallback(
-      (): HTMLElement[]|undefined => focusableElements.current,
+      (): HTMLElement[] | undefined => focusableElements.current,
       [focusableElements]
     );
-
 
     const localRef = useRef<HTMLDivElement>(null);
     const ref = r || localRef;
@@ -65,7 +62,7 @@ let Toolbar = forwardRef(
         ref?.['current']
       ) as HTMLElement[];
 
-       focus !== -1 &&
+      focus !== -1 &&
         getFocusableElements()?.forEach((element, index) => {
           element[index !== focus ? 'setAttribute' : 'removeAttribute'](
             'tabindex',
@@ -75,14 +72,14 @@ let Toolbar = forwardRef(
     });
 
     useEffect(() => {
-       focus !== -1 && getFocusableElements()?.[focus].focus();
+      focus !== -1 && getFocusableElements()?.[focus].focus();
     }, [focus, getFocusableElements]);
 
     const [arrowNext, arrowPrevious] = !vertical
       ? ['ArrowRight', 'ArrowLeft']
       : ['ArrowDown', 'ArrowUp'];
 
-    function onArrowDown(increment:number) {
+    function onArrowDown(increment: number) {
       const nextFocus = focus + increment;
 
       getFocusableElements()?.[nextFocus] && setFocus(nextFocus);
@@ -111,7 +108,7 @@ let Toolbar = forwardRef(
     return (
       <div
         {...rest}
-       ref={ref}
+        ref={ref}
         className={cx(blockClass, className, {
           [`${blockClass}--vertical`]: vertical,
         })}

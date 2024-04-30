@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -19,19 +19,45 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--non-linear-reading`;
 const componentName = 'NonLinearReading';
 
-// Default values for props
-const defaults = {
-  theme: 'light',
-};
+type Theme = 'light' | 'dark';
+interface NonLinearReadingProps {
+  /**
+   * The keyword of the component appears as a pill.
+   */
+  children: ReactNode;
 
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * The content that appears when the keyword is toggled open.
+   */
+  definition: ReactNode;
+
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: Theme;
+}
 /**
  * Use non-linear reading when space is limited to share a
  * brief, at-a-glance, summary of a concept that may require
  * more explanation for some users.
  */
-export let NonLinearReading = React.forwardRef(
+export let NonLinearReading = React.forwardRef<
+  HTMLSpanElement,
+  NonLinearReadingProps
+>(
   (
-    { children, className, definition, theme = defaults.theme, ...rest },
+    {
+      children,
+      className,
+      definition,
+      theme = 'light',
+      ...rest
+    }: NonLinearReadingProps,
     ref
   ) => {
     const [isOpen, setOpen] = useState(false);
@@ -79,6 +105,7 @@ NonLinearReading.propTypes = {
   /**
    * The keyword of the component appears as a pill.
    */
+
   children: PropTypes.node.isRequired,
 
   /**

@@ -11,7 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useCoachmark } from '../Coachmark';
+import { BEACON_KIND, useCoachmark } from '../Coachmark';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
@@ -24,51 +24,69 @@ const defaults = {
   kind: 'default',
 };
 
+interface CoachmarkBeaconProps {
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * What style of beacon.
+   * BEACON_KIND is an exported enum from the Coachmark and can be used for this value.
+   * @see {@link BEACON_KIND}
+   */
+  kind?: BEACON_KIND;
+  /**
+   * The aria label.
+   */
+  label: string;
+}
+
 /**
  * Use beacon for the target prop of a Coachmark component.
  */
-export let CoachmarkBeacon = React.forwardRef(
-  ({ label, className, kind = defaults.kind, ...rest }, ref) => {
-    const coachmark = useCoachmark();
-    if (!coachmark) {
-      return (
-        <div>
-          CoachmarkBeacon is to be use exclusively within the target prop of
-          Coachmark
-        </div>
-      );
-    }
-    const overlayPositionStyle = {
-      top: coachmark.positionTune?.y ?? 0,
-      left: coachmark.positionTune?.x ?? 0,
-    };
+export let CoachmarkBeacon = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkBeaconProps
+>(({ label, className, kind = defaults.kind, ...rest }, ref) => {
+  const coachmark = useCoachmark();
+  if (!coachmark) {
     return (
-      <span
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(blockClass, `${blockClass}-${kind}`, className)}
-        ref={ref}
-        style={overlayPositionStyle}
-        {...getDevtoolsProps(componentName)}
-        role="tooltip"
-      >
-        <button
-          tabIndex={0}
-          type="button"
-          {...coachmark.buttonProps}
-          aria-label={label}
-          className={`${blockClass}__target`}
-        >
-          <svg className={`${blockClass}__center`} alt="">
-            <circle r={1} cx={38} cy={38} />
-          </svg>
-        </button>
-      </span>
+      <div>
+        CoachmarkBeacon is to be use exclusively within the target prop of
+        Coachmark
+      </div>
     );
   }
-);
+  const overlayPositionStyle = {
+    top: coachmark.positionTune?.y ?? 0,
+    left: coachmark.positionTune?.x ?? 0,
+  };
+  return (
+    <span
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(blockClass, `${blockClass}-${kind}`, className)}
+      ref={ref}
+      style={overlayPositionStyle}
+      {...getDevtoolsProps(componentName)}
+      role="tooltip"
+    >
+      <button
+        tabIndex={0}
+        type="button"
+        {...coachmark.buttonProps}
+        aria-label={label}
+        className={`${blockClass}__target`}
+      >
+        <svg className={`${blockClass}__center`}>
+          <circle r={1} cx={38} cy={38} />
+        </svg>
+      </button>
+    </span>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkBeacon = pkg.checkComponentEnabled(CoachmarkBeacon, componentName);
@@ -90,7 +108,7 @@ CoachmarkBeacon.propTypes = {
    * BEACON_KIND is an exported enum from the Coachmark and can be used for this value.
    * @see {@link BEACON_KIND}
    */
-  kind: PropTypes.oneOf(['default']),
+  kind: PropTypes.oneOf(['default' as BEACON_KIND.DEFAULT]),
   /**
    * The aria label.
    */

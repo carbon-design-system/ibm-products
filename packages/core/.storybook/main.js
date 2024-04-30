@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const glob = require('fast-glob');
-const path = require('path');
+import glob from 'fast-glob';
+import { dirname, join, resolve } from 'path';
 import remarkGfm from 'remark-gfm';
 
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
   '../../ibm-products-community/src/**/*.stories.*',
   '../src/**/*.stories.*',
+  '../src/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
 ];
 
@@ -24,15 +25,15 @@ const stories = glob.sync(storyGlobs, {
   cwd: __dirname,
 });
 
-module.exports = {
+export default {
   staticDirs: ['../public'],
+
   addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
-    '@storybook/addon-storysource',
-    '@storybook/addon-viewport',
-    '@storybook/addon-mdx-gfm',
+    getAbsolutePath('@storybook/addon-actions'),
+    getAbsolutePath('@storybook/addon-controls'),
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-storysource'),
+    getAbsolutePath('@storybook/addon-viewport'),
     {
       name: '@storybook/addon-docs',
       options: {
@@ -55,17 +56,21 @@ module.exports = {
       },
     },
   ],
-  core: {
-    builder: '@storybook/builder-vite',
+
+  framework: {
+    name: getAbsolutePath('@storybook/react-vite'),
+    options: {},
   },
-  framework: '@storybook/react-vite',
-  features: {
-    storyStoreV7: true,
-  },
+
+  // features: {
+  //   storyStoreV7: true,
+  // },
   stories,
+
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
+
   async viteFinal(config, { configType }) {
     // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');
@@ -85,7 +90,7 @@ module.exports = {
       },
       resolve: {
         alias: {
-          ALIAS_STORY_STYLE_CONFIG: path.resolve(
+          ALIAS_STORY_STYLE_CONFIG: resolve(
             configType === 'DEVELOPMENT'
               ? '../ibm-products-styles/src/config-dev.scss'
               : '../ibm-products-styles/src/config.scss'
@@ -94,4 +99,12 @@ module.exports = {
       },
     });
   },
+
+  docs: {
+    autodocs: 'tag',
+  },
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

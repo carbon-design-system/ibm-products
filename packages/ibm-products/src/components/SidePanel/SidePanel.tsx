@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   MutableRefObject,
+  RefObject,
 } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
@@ -108,7 +109,7 @@ type SidePanelBaseProps = {
   /**
    * Provide a ref to return focus to once the side panel is closed.
    */
-  launcherButtonRef?: MutableRefObject<HTMLElement>;
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Sets the icon description for the navigation back icon button
@@ -984,7 +985,8 @@ SidePanel.propTypes = {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef: PropTypes.any,
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.node,
 
   /**
    * Sets the icon description for the navigation back icon button

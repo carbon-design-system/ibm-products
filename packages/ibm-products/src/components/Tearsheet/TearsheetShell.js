@@ -518,7 +518,7 @@ TearsheetShell.propTypes = {
   label: PropTypes.node,
 
   /**
-   * Provide a ref to return focus to once the modal is closed.
+   * Provide a ref to return focus to once the tearsheet is closed.
    */
   launcherButtonRef: PropTypes.node,
 

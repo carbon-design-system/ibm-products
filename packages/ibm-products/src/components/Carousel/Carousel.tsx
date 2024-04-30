@@ -6,6 +6,7 @@
  */
 
 import React, {
+  ReactNode,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -17,6 +18,41 @@ import { CarouselItem } from './CarouselItem';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+
+interface CarouselProps {
+  /**
+   * Provide the contents of the Carousel.
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Disables the ability of the Carousel to scroll
+   * use a keyboard's left and right arrow keys.
+   */
+  disableArrowScroll?: boolean;
+  /**
+   * Enables the edges of the component to have faded styling.
+   *
+   * Pass a single string (`$color`) to specify the same color for left and right.
+   *
+   * Or pass an object (`{ left: $color1, right: $color2 }`) to specify different colors.
+   */
+  fadedEdgeColor?: string | { left: string; right: string };
+  /**
+   * An optional callback function that returns `true`
+   * when the carousel has enough content to be scrollable,
+   * and `false` when there is not enough content.
+   */
+  onChangeIsScrollable?: (isScrollable: boolean) => void;
+  /**
+   * An optional callback function that returns the scroll position as
+   * a value between 0 and 1.
+   */
+  onScroll?: (scrollPercent: number) => void;
+}
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--carousel`;
@@ -45,7 +81,7 @@ const defaults = {
  * 2. From the right-aligned position, when scrolling left,
  *      the left-most item should again be left-aligned.
  */
-const Carousel = React.forwardRef(
+const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
   (
     {
       children,
@@ -58,33 +94,39 @@ const Carousel = React.forwardRef(
     },
     ref
   ) => {
-    const carouselRef = useRef();
-    const scrollRef = useRef();
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
     // Array of refs used to reference this component's children DOM elements
     const childElementsRef = useRef(
       Array(React.Children.count(children)).fill(useRef(null))
     );
-    const leftFadedEdgeColor = fadedEdgeColor?.left || fadedEdgeColor;
-    const rightFadedEdgeColor = fadedEdgeColor?.right || fadedEdgeColor;
+    const leftFadedEdgeColor =
+      typeof fadedEdgeColor === 'object'
+        ? fadedEdgeColor?.left
+        : fadedEdgeColor;
+    const rightFadedEdgeColor =
+      typeof fadedEdgeColor === 'object'
+        ? fadedEdgeColor?.right
+        : fadedEdgeColor;
 
     // Trigger callbacks to report state of the carousel
     const handleOnScroll = useCallback(() => {
+      if (!scrollRef.current) {
+        return;
+      }
+
       // viewport's width
-      const clientWidth = scrollRef.current.clientWidth;
+      const clientWidth = scrollRef.current?.clientWidth;
       // scroll position
-      const scrollLeft = parseInt(scrollRef.current.scrollLeft, 10);
+      const scrollLeft = parseInt(`${scrollRef.current?.scrollLeft}`, 10);
       // scrollable width
-      const scrollWidth = scrollRef.current.scrollWidth;
+      const scrollWidth = scrollRef.current?.scrollWidth;
 
       // The maximum scrollLeft achievable is the scrollable width - the viewport width.
       const scrollLeftMax = scrollWidth - clientWidth;
       // if isNaN(scrollLeft / scrollLeftMax), then set to zero
       const scrollPercent =
         parseFloat((scrollLeft / scrollLeftMax).toFixed(2)) || 0;
-
-      if (!scrollRef.current) {
-        return;
-      }
 
       // Callback 1: Does the carousel have enough content to enable scrolling?
       onChangeIsScrollable(scrollWidth > clientWidth);
@@ -109,7 +151,7 @@ const Carousel = React.forwardRef(
 
     // Get all elements that are visible in the container.
     const getElementsInView = useCallback(() => {
-      const containerRect = scrollRef.current.getBoundingClientRect();
+      const containerRect = scrollRef?.current?.getBoundingClientRect();
       const inViewElements = childElementsRef.current.filter((el) =>
         getElementInView(containerRect, el.getBoundingClientRect())
       );
@@ -119,7 +161,7 @@ const Carousel = React.forwardRef(
     // Return container's and children's rect data
     const getContainerAndChildRectData = useCallback(() => {
       // Get the rect of the container
-      const containerRect = scrollRef.current.getBoundingClientRect();
+      const containerRect = scrollRef?.current?.getBoundingClientRect();
       // Get all child elements that are in view of the container, and return their bounding rects.
       const elementRectsInView = getElementsInView().map((el) =>
         el.getBoundingClientRect()
@@ -136,14 +178,21 @@ const Carousel = React.forwardRef(
     }, [getElementsInView]);
 
     const handleScrollNext = useCallback(() => {
+      if (!scrollRef.current) {
+        return;
+      }
       const { containerRect, visibleWidth } = getContainerAndChildRectData();
       // Set the scrollValue to the visibleWidth, but if the visibleWidth value is 0, set it to the container's width
-      const scrollValue = visibleWidth > 0 ? visibleWidth : containerRect.width;
+      const scrollValue =
+        visibleWidth > 0 ? visibleWidth : containerRect?.width;
       // Increment the scrollLeft of the container
       scrollRef.current.scrollLeft += scrollValue;
     }, [getContainerAndChildRectData]);
 
     const handleScrollPrev = useCallback(() => {
+      if (!scrollRef.current) {
+        return;
+      }
       const { containerRect, elementRectsInView, visibleWidth } =
         getContainerAndChildRectData();
       // Set the scrollValue to the visibleWidth minus the first child's left value,
@@ -151,13 +200,16 @@ const Carousel = React.forwardRef(
       const scrollValue =
         visibleWidth > 0
           ? visibleWidth - elementRectsInView[0].left
-          : containerRect.width + containerRect.left;
+          : (containerRect?.width ?? 0) + (containerRect?.left ?? 0);
 
       // Decrement the scrollLeft of the container
       scrollRef.current.scrollLeft -= scrollValue;
     }, [getContainerAndChildRectData]);
 
     const handleScrollReset = useCallback(() => {
+      if (!scrollRef.current) {
+        return;
+      }
       // This doesn't trigger "scrollend"...
       scrollRef.current.scrollLeft = 0;
       // ...so trigger a callback manually.
@@ -185,6 +237,9 @@ const Carousel = React.forwardRef(
     // On window.resize, reset carousel to zero.
     useEffect(() => {
       const handleWindowResize = () => {
+        if (!scrollRef.current) {
+          return;
+        }
         scrollRef.current.scrollLeft = 0;
         handleOnScroll();
       };
@@ -200,8 +255,8 @@ const Carousel = React.forwardRef(
       };
 
       const scrollDiv = scrollRef.current;
-      scrollDiv.addEventListener('scrollend', handleScrollend);
-      return () => scrollDiv.removeEventListener('scrollend', handleScrollend);
+      scrollDiv?.addEventListener('scrollend', handleScrollend);
+      return () => scrollDiv?.removeEventListener('scrollend', handleScrollend);
     }, [handleOnScroll]);
 
     // Disable wheel scrolling
@@ -220,9 +275,7 @@ const Carousel = React.forwardRef(
           passive: false,
         });
         return () => {
-          scrollDiv.removeEventListener('wheel', handleWheel, {
-            passive: false,
-          });
+          scrollDiv.removeEventListener('wheel', handleWheel);
         };
       }
     }, []);
@@ -251,7 +304,7 @@ const Carousel = React.forwardRef(
 
     // Enable external function calls
     useImperativeHandle(
-      ref,
+      ref as React.RefObject<void>,
       () => ({
         scrollNext() {
           handleScrollNext();
@@ -346,6 +399,7 @@ Carousel.propTypes = {
    *
    * Or pass an object (`{ left: $color1, right: $color2 }`) to specify different colors.
    */
+  /**@ts-ignore*/
   fadedEdgeColor: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({ left: PropTypes.string, right: PropTypes.string }),

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.34.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.33.0...@carbon/ibm-products-styles@2.34.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#4890](https://github.com/carbon-design-system/ibm-products/issues/4890)) ([d3234ce](https://github.com/carbon-design-system/ibm-products/commit/d3234ceda60feb704b11d5f7c7270b430a11a499)), closes [#4654](https://github.com/carbon-design-system/ibm-products/issues/4654)
+* **useravatar:** fix scroll issue ([#4950](https://github.com/carbon-design-system/ibm-products/issues/4950)) ([bb47921](https://github.com/carbon-design-system/ibm-products/commit/bb479218862b14196f8ba99d6486772bfd9f1d20))
+
+
+### Features
+
+* fix sortable header transparent issue [#4954](https://github.com/carbon-design-system/ibm-products/issues/4954) ([#4955](https://github.com/carbon-design-system/ibm-products/issues/4955)) ([1760bc6](https://github.com/carbon-design-system/ibm-products/commit/1760bc6c42fb44388b2330aa06a916a87e6a54f4))
+* instrument current packages with js scope ([#5012](https://github.com/carbon-design-system/ibm-products/issues/5012)) ([59074fe](https://github.com/carbon-design-system/ibm-products/commit/59074fe8ae93d3854565ba3c92f20065f3f2867e))
+
+
+
+
+
 # [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.32.0...@carbon/ibm-products-styles@2.33.0) (2024-04-16)
 
 

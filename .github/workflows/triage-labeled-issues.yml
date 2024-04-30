@@ -12,7 +12,8 @@ jobs:
       field: 'Area'
       field_option: '🟦 Typescript'
       project_number: '65'
-    secrets: inherit
+    secrets:
+      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
   move-migration-issues:
     if: ${{contains(github.event.label.name, format('area{0} migration ➡️', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
@@ -20,7 +21,8 @@ jobs:
       field: 'Area'
       field_option: '🗺 Migration'
       project_number: '65'
-    secrets: inherit
+    secrets:
+      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
   move-a11y-issues:
     if: ${{contains(github.event.label.name, format('type{0} a11y ♿', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
@@ -28,4 +30,5 @@ jobs:
       field: 'Area'
       field_option: '♿️ Accessibility'
       project_number: '65'
-    secrets: inherit
+    secrets:
+      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}

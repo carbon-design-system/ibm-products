@@ -668,6 +668,7 @@ TearsheetShell.propTypes = {
   /**
    * Provide a ref to return focus to once the tearsheet is closed.
    */
+  /**@ts-ignore */
   launcherButtonRef: PropTypes.node,
 
   /**

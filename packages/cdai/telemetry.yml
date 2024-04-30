@@ -287,3 +287,5 @@ collect:
         - medium
   npm:
     dependencies: null
+  js:
+    tokens: null

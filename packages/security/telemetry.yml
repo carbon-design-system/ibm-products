@@ -304,3 +304,6 @@ collect:
         - top
   npm:
     dependencies: null
+  js:
+    functions: {}
+    tokens: null

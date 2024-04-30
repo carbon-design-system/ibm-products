@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -23,11 +23,28 @@ const componentName = 'InlineTipLink';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+interface InlineTipLinkProps extends PropsWithChildren {
+  /**
+   * Provide the contents of the InlineTipLink.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /* TODO: add types and DocGen for all props. */
+}
+
 /**
  * This is a standard Carbon link, styled specifically for use inside InlineTip.
  */
 export let InlineTipLink = React.forwardRef(
-  ({ children, className, ...rest }, ref) => {
+  (
+    { children, className, ...rest }: InlineTipLinkProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     return (
       <Link
         {...rest}

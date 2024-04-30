@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode, PropsWithChildren, ForwardedRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -22,11 +22,24 @@ const componentName = 'InlineTipButton';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+interface InlineTipButtonProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Provide the contents of the InlineTip.
+   */
+  children: ReactNode;
+}
 /**
  * This is a standard Carbon button, styled specifically for use inside InlineTip.
  */
 export let InlineTipButton = React.forwardRef(
-  ({ children, className, ...rest }, ref) => {
+  (
+    { children, className, ...rest }: PropsWithChildren<InlineTipButtonProps>,
+    ref: ForwardedRef<HTMLButtonElement>
+  ) => {
     return (
       <Button
         {...rest}

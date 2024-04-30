@@ -300,21 +300,21 @@ interstitialScreenModalMultiplesHeader.args = {
       <InterstitialScreenView stepTitle="Step 1">
         <InterstitialScreenViewModule
           size="md"
-          title="Use case-specific heading"
+          title="Use case-specific heading 1"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
       <InterstitialScreenView stepTitle="Step 2">
         <InterstitialScreenViewModule
           size="md"
-          title="Use case-specific heading"
+          title="Use case-specific heading 2"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
       <InterstitialScreenView stepTitle="Step 3">
         <InterstitialScreenViewModule
           size="md"
-          title="Use case-specific heading"
+          title="Use case-specific heading 3"
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>

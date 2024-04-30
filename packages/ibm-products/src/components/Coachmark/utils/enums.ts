@@ -3,9 +3,9 @@
 /**
  * Reserved for future expansion, i.e. "RING".
  */
-export const BEACON_KIND = {
-  DEFAULT: 'default',
-};
+export enum BEACON_KIND {
+  DEFAULT = 'default',
+}
 
 /**
  * Describes the style and behavior of a Coachmark.

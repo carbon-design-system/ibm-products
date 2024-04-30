@@ -6,7 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React, { Children, useEffect, useRef, useState } from 'react';
+import React, {
+  Children,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -31,12 +38,50 @@ const defaults = {
   viewMoreLabel: (value) => `View more (${value})`,
 };
 
+interface TruncatedListProps extends PropsWithChildren {
+  as?: React.ElementType | string;
+  /**
+   * Optional class name for expand/collapse button.
+   */
+  buttonClassName?: string;
+  /**
+   * The contents of the TruncatedList.
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Number of items to render and display when the list is truncated and collapsed.
+   * Scrolling is not enabled when collapsed. The smallest number is 1.
+   */
+  collapsedItemsLimit?: number;
+  /**
+   * Maximum number of items to show when the list is expanded. All
+   * items are rendered when the list is expanded. Scrolling is enabled
+   * if there are more items to display than this number.
+   */
+  expandedItemsLimit?: number;
+  /**
+   * Optional callback reports the collapsed state of the list.
+   */
+  onClick?: (value: any) => void;
+  /**
+   * Text label for when the list is expanded.
+   */
+  viewLessLabel?: string;
+  /**
+   * Callback function for building the label when the list is collapsed.
+   */
+  viewMoreLabel?: (value: any) => void;
+}
 /**
  * The `TruncatedList` allows consumers to control how many items are
  * revealed to the user while giving the user the ability to expand
  * and see the entire list.
  */
-export let TruncatedList = React.forwardRef(
+export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
   (
     {
       children,
@@ -50,7 +95,7 @@ export let TruncatedList = React.forwardRef(
       viewMoreLabel = defaults.viewMoreLabel,
       // Collect any other property values passed in.
       ...rest
-    },
+    }: TruncatedListProps,
     ref
   ) => {
     const childrenArray = Children.toArray(children);
@@ -64,7 +109,7 @@ export let TruncatedList = React.forwardRef(
     // guesstimate the initial height to reduce animation distance.
     //   (difference of the guessed height to rendered height - a few pixels)
     const [listHeight, setListHeight] = useState(minItems * 16);
-    const listRef = useRef();
+    const listRef = useRef<HTMLElement>();
 
     const handleToggle = () => {
       setIsCollapsed((prev) => !prev);
@@ -81,12 +126,14 @@ export let TruncatedList = React.forwardRef(
     useEffect(() => {
       if (listRef && childrenArray.length > 0) {
         const numItemsToShow = isCollapsed ? minItems : maxItems;
-        const items = listRef.current.childNodes;
+        const items = listRef.current?.childNodes;
         let listHeight = 0;
 
         for (let index = 0; index < numItemsToShow; index++) {
-          if (items[index]) {
-            const height = window?.getComputedStyle(items[index])?.height || 16;
+          if (items && items[index]) {
+            const itemElement = items[index] as HTMLElement;
+            const height =
+              window?.getComputedStyle(itemElement)?.height || '16';
             listHeight += parseInt(height);
           }
         }

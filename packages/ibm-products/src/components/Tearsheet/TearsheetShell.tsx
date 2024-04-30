@@ -1,12 +1,21 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  PropsWithChildren,
+  ReactNode,
+  ForwardedRef,
+  MutableRefObject,
+  RefObject,
+} from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Other standard imports.
@@ -23,6 +32,7 @@ import {
   Layer,
   ModalHeader,
   usePrefix,
+  type ButtonProps,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -37,6 +47,124 @@ const componentName = 'TearsheetShell';
 
 const maxDepth = 3;
 
+interface TearsheetShellProps extends PropsWithChildren {
+  actions?: ButtonProps[];
+
+  ariaLabel?: string;
+
+  /**
+   * An optional class or classes to be added to the outermost element.
+   */
+  className?: string;
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+
+  /**
+   * Enable a close icon ('x') in the header area of the tearsheet. By default,
+   * (when this prop is omitted, or undefined or null) a tearsheet does not
+   * display a close icon if there are navigation actions ("transactional
+   * tearsheet") and displays one if there are no navigation actions ("passive
+   * tearsheet"), and that behavior can be overridden if required by setting
+   * this prop to either true or false.
+   */
+  hasCloseIcon?: boolean;
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions?: ReactNode;
+
+  /**
+   * The content for the influencer section of the tearsheet, displayed
+   * alongside the main content. This is typically a menu, or filter, or
+   * progress indicator, or similar. NB the influencer is only applicable for
+   * wide tearsheets.
+   */
+  influencer?: ReactNode;
+
+  /**
+   * The position of the influencer section, 'left' or 'right'.
+   */
+  influencerPosition?: 'left' | 'right';
+
+  /**
+   * The width of the influencer: 'narrow' (the default) is 256px, and 'wide'
+   * is 320px.
+   */
+  influencerWidth?: 'narrow' | 'wide';
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
+
+  /**
+   * Navigation content, such as a set of tabs, to be displayed at the bottom
+   * of the header area of the tearsheet. NB the navigation is only applicable
+   * for wide tearsheets.
+   */
+  navigation?: ReactNode;
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onClose?: () => void;
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open?: boolean;
+
+  /**
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget?: ReactNode;
+
+  selectorPrimaryFocus?: string;
+
+  /**
+   * Specifies the width of the tearsheet, 'narrow' or 'wide'.
+   */
+  size: 'narrow' | 'wide';
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title?: ReactNode;
+
+  verticalPosition?: 'normal' | 'lower';
+}
+
+export type CloseIconDescriptionTypes =
+  | {
+      hasCloseIcon?: false;
+      closeIconDescription?: string;
+    }
+  | {
+      hasCloseIcon: true;
+      closeIconDescription: string;
+    };
+
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 // Global data structure to communicate the state of tearsheet stacking
@@ -48,7 +176,20 @@ const maxDepth = 3;
 // The 'sizes' array contains an array of the sizes for every stacked tearsheet.
 // This is so we can opt-out of including the stacking scale effect when there
 // are stacked tearsheets with mixed sizes (ie, using wide and narrow together)
-const stack = { open: [], all: [], sizes: [] };
+type stackTypes = {
+  open: Array<{
+    (a: number, b: number): void;
+    checkFocus?: () => void;
+    claimFocus?: () => void;
+  }>;
+  all: Array<{
+    (a: number, b: number): void;
+    checkFocus?: () => void;
+    claimFocus?: () => void;
+  }>;
+  sizes: Array<string>;
+};
+const stack: stackTypes = { open: [], all: [], sizes: [] };
 
 // these props are only applicable when size='wide'
 export const tearsheetShellWideProps = [
@@ -98,8 +239,8 @@ export const TearsheetShell = React.forwardRef(
       launcherButtonRef,
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: TearsheetShellProps & CloseIconDescriptionTypes,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
     const bcModalHeader = `${carbonPrefix}--modal-header`;
@@ -111,6 +252,8 @@ export const TearsheetShell = React.forwardRef(
     const { width } = useResizeObserver(resizer);
     const { firstElement, keyDownListener } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
+    const modalRefValue = (modalRef as MutableRefObject<HTMLDivElement>)
+      .current;
 
     const wide = size === 'wide';
 
@@ -119,7 +262,7 @@ export const TearsheetShell = React.forwardRef(
     const [position, setPosition] = useState(0);
 
     // Keep a record of the previous value of depth.
-    const prevDepth = useRef();
+    const prevDepth = useRef<number>();
     useEffect(() => {
       prevDepth.current = depth;
     });
@@ -130,7 +273,7 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback that will be called whenever the stacking order changes.
     // position is 1-based with 0 indicating closed.
-    function handleStackChange(newDepth, newPosition) {
+    function handleStackChange(newDepth: number, newPosition: number) {
       setDepth(newDepth);
       setPosition(newPosition);
     }
@@ -140,8 +283,8 @@ export const TearsheetShell = React.forwardRef(
       if (
         open &&
         position === depth &&
-        modalRef.current &&
-        !modalRef.current.contains(document.activeElement)
+        modalRefValue &&
+        !modalRefValue.contains(document.activeElement)
       ) {
         handleStackChange.claimFocus();
       }
@@ -185,7 +328,7 @@ export const TearsheetShell = React.forwardRef(
             Math.min(stack.open.length, maxDepth),
             stack.open.indexOf(handler) + 1
           );
-          handler.checkFocus();
+          handler.checkFocus?.();
         });
 
       // Register this tearsheet's stack change callback/listener.
@@ -224,7 +367,7 @@ export const TearsheetShell = React.forwardRef(
       // If something within us is receiving focus but we are not the topmost
       // stacked tearsheet, transfer focus to the topmost tearsheet instead
       if (position < depth) {
-        stack.open[stack.open.length - 1].claimFocus();
+        stack.open[stack.open.length - 1].claimFocus?.();
       }
     }
 
@@ -268,7 +411,7 @@ export const TearsheetShell = React.forwardRef(
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
-              depth > 1 || (depth === 1 && prevDepth.current > 1),
+              depth > 1 || (depth === 1 && (prevDepth?.current ?? 0) > 1),
             [`${bc}--wide`]: wide,
             [`${bc}--narrow`]: !wide,
             [`${bc}--has-slug`]: slug,
@@ -350,7 +493,9 @@ export const TearsheetShell = React.forwardRef(
               <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                 <Wrap
                   className={`${bc}__content`}
-                  alwaysRender={influencer && influencerPosition === 'right'}
+                  alwaysRender={
+                    !!(influencer && influencerPosition === 'right')
+                  }
                 >
                   {children}
                 </Wrap>
@@ -368,7 +513,7 @@ export const TearsheetShell = React.forwardRef(
                 <Wrap className={`${bc}__button-container`}>
                   <ActionSet
                     actions={actions}
-                    buttonSize={wide ? '2xl' : null}
+                    buttonSize={wide ? '2xl' : undefined}
                     className={`${bc}__buttons`}
                     size={wide ? '2xl' : 'lg'}
                     aria-hidden={!open}
@@ -429,6 +574,7 @@ TearsheetShell.propTypes = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
+  /**@ts-ignore*/
   actions: PropTypes.arrayOf(
     // NB we don't include the validator here, as the component wrapping this
     // one should ensure appropriate validation is done.
@@ -464,6 +610,7 @@ TearsheetShell.propTypes = {
    * **Note:** This prop is only required if a close icon is shown, i.e. if
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
+  /**@ts-ignore*/
   closeIconDescription: PropTypes.string.isRequired.if(
     ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
   ),
@@ -481,6 +628,7 @@ TearsheetShell.propTypes = {
    * tearsheet"), and that behavior can be overridden if required by setting
    * this prop to either true or false.
    */
+  /**@ts-ignore*/
   hasCloseIcon: PropTypes.bool,
 
   /**
@@ -544,11 +692,13 @@ TearsheetShell.propTypes = {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
+  /**@ts-ignore*/
   portalTarget: portalType,
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
+  /**@ts-ignore*/
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
 
   /**

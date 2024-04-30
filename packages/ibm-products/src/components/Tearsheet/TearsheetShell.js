@@ -29,6 +29,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useFocus } from '../../global/js/hooks/useFocus';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -94,6 +95,7 @@ export const TearsheetShell = React.forwardRef(
       slug,
       title,
       verticalPosition,
+      launcherButtonRef,
       // Collect any other property values passed in.
       ...rest
     },
@@ -108,6 +110,7 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
     const { firstElement, keyDownListener } = useFocus(modalRef);
+    const prevOpen = usePreviousValue(open);
 
     const wide = size === 'wide';
 
@@ -158,6 +161,14 @@ export const TearsheetShell = React.forwardRef(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);
+
+    useEffect(() => {
+      if (prevOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef.current.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, prevOpen]);
 
     useEffect(() => {
       if (open && position !== depth) {
@@ -505,6 +516,11 @@ TearsheetShell.propTypes = {
    * to page of a multi-page task).
    */
   label: PropTypes.node,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  launcherButtonRef: PropTypes.node,
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom

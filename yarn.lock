@@ -1731,7 +1731,6 @@ __metadata:
     "@storybook/addon-docs": "npm:^8.0.9"
     "@storybook/addon-essentials": "npm:^8.0.9"
     "@storybook/addon-links": "npm:^8.0.9"
-    "@storybook/addon-mdx-gfm": "npm:^8.0.9"
     "@storybook/addon-storysource": "npm:^8.0.9"
     "@storybook/addon-viewport": "npm:^8.0.9"
     "@storybook/components": "npm:^8.0.9"
@@ -5354,17 +5353,6 @@ __metadata:
     react:
       optional: true
   checksum: dece0807fb3488fa4722ac4c66d5c0892f771e8c1c56627eb2f5787518780127132d64e3b03a3946f495eaaee823e1707f39b11f88ef3fb6c8dec4e8e77acf94
-  languageName: node
-  linkType: hard
-
-"@storybook/addon-mdx-gfm@npm:^8.0.9":
-  version: 8.0.9
-  resolution: "@storybook/addon-mdx-gfm@npm:8.0.9"
-  dependencies:
-    "@storybook/node-logger": "npm:8.0.9"
-    remark-gfm: "npm:^4.0.0"
-    ts-dedent: "npm:^2.0.0"
-  checksum: fa481569bcd96ae1b97688b653303a713771cdbf4dae4b3e2e4da4c0c9ed2edc31b92303c12bf94c70085403b7d94c1f5f48f4738cd15ce184267e628c205036
   languageName: node
   linkType: hard
 

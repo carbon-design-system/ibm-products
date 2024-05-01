@@ -14,6 +14,10 @@ import {
   OverflowMenuItem,
   Layer,
 } from '@carbon/react';
+import {
+  CheckmarkOutline,
+  Incomplete,
+} from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';
@@ -41,10 +45,14 @@ export let Card = forwardRef(
       // The component props, in alphabetical order (for consistency).
       actionIcons = defaults.actionIcons,
       actionsPlacement = defaults.actionsPlacement,
+      metaData = defaults.actionIcons,
       children,
       className,
       clickZone = defaults.clickZone,
       description,
+      disabled,
+      footerActionIcon,
+      getStarted,
       label,
       media,
       mediaPosition = defaults.mediaPosition,
@@ -69,6 +77,8 @@ export let Card = forwardRef(
       secondaryButtonPlacement = defaults.secondaryButtonPlacement,
       secondaryButtonText,
       slug,
+      status,
+      step,
       title,
       titleSize = defaults.titleSize,
 
@@ -77,6 +87,7 @@ export let Card = forwardRef(
     },
     ref
   ) => {
+    getStarted ? actionIcons = metaData : '';
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
       actionIcons.length > 0 ||
@@ -118,6 +129,14 @@ export let Card = forwardRef(
 
       const icons = actionIcons.map(
         ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
+          if(getStarted){
+            return (
+                <span key={id} className={`${blockClass}__icon`}>
+                  <Icon  aria-label={iconDescription} />
+                   {iconDescription}
+                </span>
+            )
+          }
           if (productive) {
             return (
               <Button
@@ -173,6 +192,8 @@ export let Card = forwardRef(
         className: cx(
           blockClass,
           {
+            [`${blockClass}__disabled`]: disabled,
+            [`${blockClass}__get-started`]: getStarted,
             [`${blockClass}__productive`]: productive,
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
@@ -211,7 +232,7 @@ export let Card = forwardRef(
       primaryButtonText,
       primaryButtonDisabled,
       description,
-      hasActions: hasActions,
+      hasActions: hasActions && actionsPlacement === 'top',
       inClickableCard: hasClickEvent,
       label,
       secondaryButtonDisabled,
@@ -239,6 +260,8 @@ export let Card = forwardRef(
     const getFooterProps = () => ({
       actions: actionsPlacement === 'bottom' ? getActions() : '',
       actionsPlacement,
+      disabled,
+      footerActionIcon,
       hasActions: hasFooterActions,
       hasButton: hasFooterButton,
       onPrimaryButtonClick,
@@ -259,16 +282,34 @@ export let Card = forwardRef(
     });
     return (
       <div {...getCardProps()}>
-        {media && <div className={`${blockClass}__media`}>{media}</div>}
+        {!getStarted && media && <div className={`${blockClass}__media`}>{media}</div>}
         {Pictogram && (
           <div className={`${blockClass}__pictogram`}>
             <Pictogram />
           </div>
         )}
+        {getStarted && step && (
+          <div className={`${blockClass}__step`}>
+            {step}
+          </div>
+        )}
+        {getStarted && status && (
+          <div className={`${blockClass}__status`}>
+          {status === 'incomplete' ? <Incomplete/> : ''}
+          {status === 'complete' ? <CheckmarkOutline/> : ''}
+        </div>
+        ) }
         <div className={`${blockClass}__content-container`}>
           <div {...getHeaderBodyProps()}>
+            <div>
             <CardHeader {...getHeaderProps()} />
             <div {...getBodyProps()}>{children}</div>
+            </div>
+            {getStarted && media &&
+             <div className={`${blockClass}__media`} >
+              {media}
+              </div>
+              }
           </div>
           {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>
@@ -297,6 +338,9 @@ Card.propTypes = {
     PropTypes.object,
     PropTypes.node,
   ]),
+  disabled: PropTypes.bool,
+  footerActionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  getStarted: PropTypes.bool,
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -304,6 +348,13 @@ Card.propTypes = {
   ]),
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
+  metaData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      iconDescription: PropTypes.string,
+    })
+  ),
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   onPrimaryButtonClick: PropTypes.func,
@@ -338,6 +389,8 @@ Card.propTypes = {
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
+  status: PropTypes.oneOf(['none', 'complete', 'incomplete']),
+  step: PropTypes.number,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

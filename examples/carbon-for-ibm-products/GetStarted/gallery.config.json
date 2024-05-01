@@ -1,0 +1,12 @@
+{
+  "label": "Get-Started",
+  "package-config": {
+    "flags": {
+      "component": {
+        "GetStarted": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

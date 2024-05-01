@@ -11,6 +11,7 @@ import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardFooter';
+import { Error } from '@carbon/react/icons';
 
 const defaults = {
   actions: Object.freeze([]),
@@ -21,6 +22,8 @@ const defaults = {
 
 export let CardFooter = ({
   actions = defaults.actions,
+  disabled,
+  footerActionIcon: FooterActionIcon,
   hasActions,
   hasButton,
   onPrimaryButtonClick,
@@ -72,12 +75,19 @@ export let CardFooter = ({
         </Button>
       )}
       {hasActions && <div className={`${blockClass}__actions`}>{actions}</div>}
+      {FooterActionIcon &&
+       <div className={`${blockClass}__action-icon`}>
+        {disabled ? <Error size={16}></Error> : 
+        <FooterActionIcon></FooterActionIcon>}
+      </div>}
     </div>
   );
 };
 
 CardFooter.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
+  disabled: PropTypes.bool,
+  footerActionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   hasActions: PropTypes.bool,
   hasButton: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,

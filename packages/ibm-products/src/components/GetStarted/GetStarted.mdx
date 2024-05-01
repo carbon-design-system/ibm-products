@@ -1,0 +1,52 @@
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { GetStarted } from '.';
+import * as stories from './GetStarted.stories';
+
+# GetStarted
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+<Canvas>
+  <Story of={stories.Default} />
+</Canvas>
+
+## Example usage
+
+### with Pictogram
+
+<Canvas>
+  <Story of={stories.withPictogram} />
+</Canvas>
+
+### with Step
+
+<Canvas>
+  <Story of={stories.withStep} />
+</Canvas>
+
+### with Media and Pictogram
+
+<Canvas>
+  <Story of={stories.withMediaAndPictogram} />
+</Canvas>
+
+### with Media and Step
+
+<Canvas>
+  <Story of={stories.withMediaAndStep} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="GetStarted" />
+
+## Component API
+
+<ArgsTable />

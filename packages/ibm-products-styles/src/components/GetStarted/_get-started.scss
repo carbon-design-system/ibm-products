@@ -57,6 +57,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   padding-right: $spacing-09;
 }
 
+.#{$block-class}__get-started .#{$block-class}__media {
+  align-content: center;
+}
+
 .#{$block-class}__get-started
   .#{$block-class}__pictogram
   ~ .#{$block-class}__content-container {

@@ -35,11 +35,11 @@ other users.
 This project consists of a number of component library packages published on
 npm:
 
-| Package name                                                                                                          | Description                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-products`](./packages/ibm-products)                                                                     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
-| [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration                       |
-| [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                                      |
+| Package name                                                                                                     | Description                                                                                                       |
+| ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [`@carbon/ibm-products`](./packages/ibm-products)                                                                | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration                       |
+| [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                                      |
 
 Also the following additional utility packages are published on npm:
 

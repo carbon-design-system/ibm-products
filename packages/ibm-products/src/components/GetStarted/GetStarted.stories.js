@@ -12,15 +12,18 @@ import mdx from './GetStarted.mdx';
 
 import styles from './_storybook-styles.scss';
 import { action } from '@storybook/addon-actions';
-import { ArrowRight, Crossroads, Time, SkillLevelBasic } from '@carbon/react/icons';
-import { AspectRatio } from '@carbon/react';
 import {
-  usePrefix,
-} from '@carbon/react';
+  ArrowRight,
+  Crossroads,
+  Time,
+  SkillLevelBasic,
+} from '@carbon/react/icons';
+import { AspectRatio } from '@carbon/react';
+import { usePrefix } from '@carbon/react';
 
 const defaultProps = {
-  label: "Prepare your data",
-  title: "Generate synthetic Tabular data",
+  label: 'Prepare your data',
+  title: 'Generate synthetic Tabular data',
   metaData: [
     {
       id: '1',
@@ -35,7 +38,7 @@ const defaultProps = {
   ],
   footerActionIcon: (props) => <ArrowRight size={16} {...props}></ArrowRight>,
   onClick: action('on click'),
-  status: 'incomplete'
+  status: 'incomplete',
 };
 
 export default {
@@ -59,9 +62,7 @@ export default {
 };
 
 const Template = (opts) => {
-
-  const { children, ...args } =
-    opts;
+  const { children, ...args } = opts;
   return (
     <GetStarted
       label="Prepare your data"
@@ -94,12 +95,12 @@ export const withMediaAndPictogram = Template.bind({});
 withMediaAndPictogram.args = {
   ...defaultProps,
   pictogram: (props) => <Crossroads size={32} {...props} />,
-  media: <AspectRatio ratio={"1x1"}>{"1x1"}</AspectRatio>,
+  media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
 };
 
 export const withMediaAndStep = Template.bind({});
 withMediaAndStep.args = {
   ...defaultProps,
   step: 3,
-  media: <AspectRatio ratio={"1x1"}>{"1x1"}</AspectRatio>,
+  media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
 };

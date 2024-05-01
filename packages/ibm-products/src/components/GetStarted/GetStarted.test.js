@@ -18,7 +18,7 @@ const dataTestId = uuidv4();
 
 const defaultProps = {
   onClick: () => {},
-}
+};
 
 describe(componentName, () => {
   it('renders ', async () => {
@@ -32,23 +32,39 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<GetStarted className="test-class" {...defaultProps}> </GetStarted>);
+    const { container } = render(
+      <GetStarted className="test-class" {...defaultProps}>
+        {' '}
+      </GetStarted>
+    );
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<GetStarted data-testid={dataTestId} {...defaultProps}> </GetStarted>);
+    render(
+      <GetStarted data-testid={dataTestId} {...defaultProps}>
+        {' '}
+      </GetStarted>
+    );
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<GetStarted ref={ref} {...defaultProps}> </GetStarted>);
+    render(
+      <GetStarted ref={ref} {...defaultProps}>
+        {' '}
+      </GetStarted>
+    );
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<GetStarted data-testid={dataTestId} {...defaultProps}> </GetStarted>);
+    render(
+      <GetStarted data-testid={dataTestId} {...defaultProps}>
+        {' '}
+      </GetStarted>
+    );
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

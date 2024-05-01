@@ -1,3 +1,4 @@
+/* stylelint-disable carbon/layout-token-use */
 //
 // Copyright IBM Corp. 2024, 2024
 //
@@ -9,98 +10,101 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/react/scss/motion' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__get-started {
+  border-width: 1px;
+  border-style: solid;
   background: linear-gradient(to bottom, $purple-80 40%, $purple-70);
+  border-image: linear-gradient(to bottom, $purple-60, $purple-50) 1;
   color: $text-on-color;
+}
 
-  border: 1px solid;
-  border-image: linear-gradient(to bottom, $purple-60, $purple-50) 1; 
+.#{$block-class}__get-started:hover {
+  background: linear-gradient($purple-70-hover, $purple-70-hover);
+}
 
+.#{$block-class}__get-started:focus {
+  border: 2px solid $focus;
+  outline: 1px solid $focus-inset;
+  outline-offset: -3px;
+}
 
-  &:hover {
-    background: linear-gradient($purple-70-hover, $purple-70-hover);
+.#{$block-class}__step {
+  @include type.type-style('heading-05');
+
+  padding-top: $spacing-05;
+  padding-left: $spacing-05;
+}
+
+.#{$block-class}__status {
+  position: absolute;
+  z-index: 2;
+  top: $spacing-05;
+  right: $spacing-05;
+}
+
+.#{$block-class}__get-started .#{$block-class}__header-body-container {
+  display: flex;
+}
+
+.#{$block-class}__get-started .#{$block-class}__header {
+  padding-right: $spacing-09;
+}
+
+.#{$block-class}__get-started
+  .#{$block-class}__pictogram
+  ~ .#{$block-class}__content-container {
+  .#{$block-class}__media {
+    /* stylelint-disable-next-line function-no-unknown */
+    margin-top: to-rem(-50px);
+    margin-bottom: -$spacing-09;
   }
+}
 
-  &:focus {
-    border: 2px solid $focus;
-    outline: 1px solid $focus-inset;
-    outline-offset: -3px;
+.#{$block-class}__get-started
+  .#{$block-class}__step
+  ~ .#{$block-class}__content-container {
+  .#{$block-class}__media {
+    /* stylelint-disable-next-line function-no-unknown */
+    margin-top: to-rem(-56px);
+    margin-bottom: -$spacing-09;
   }
+}
 
-  .#{$block-class}__step {
-    @include type.type-style('heading-05');
+.#{$block-class}__get-started .#{$block-class}__actions {
+  padding: $spacing-05;
+  gap: $spacing-04;
 
-    padding-top: $spacing-05;
-    padding-left: $spacing-05;
-  }
-  
-  .#{$block-class}__status {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 2;
-  }
-
-  .#{$block-class}__header-body-container {
+  .#{$block-class}__icon {
     display: flex;
+    padding: 0;
+    margin-right: 0;
   }
 
-  .#{$block-class}__header {
-    padding-right: $spacing-09;
+  .#{$block-class}__icon svg {
+    margin-right: $spacing-02;
   }
 
-  .#{$block-class}__pictogram  ~ .#{$block-class}__content-container {
-    .#{$block-class}__media {
-        margin-top: -50px;
-        margin-bottom: -$spacing-09
-      }
-  }
-
-  .#{$block-class}__step ~ .#{$block-class}__content-container {
-    .#{$block-class}__media {
-        margin-top: -56px;
-        margin-bottom: -$spacing-09
-      }
-  }
-  
-
-  .#{$block-class}__actions {
-    gap: $spacing-04;
-    padding: $spacing-05;
-
-    .#{$block-class}__icon{
-      display: flex;
-      margin-right: 0;
-      padding: 0;
-
-      svg {
-        margin-right: $spacing-02;
-      }
-
-      &:hover {
-        background: none;
-      }
-    }
-
+  .#{$block-class}__icon:hover {
+    background: none;
   }
 
   .#{$block-class}__footer {
-    border: none;
-    justify-content: space-between;
-    z-index: 1;
     position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    border: none;
 
     .#{$block-class}__action-icon {
       display: flex;
-      padding-right: 1rem;
       align-self: center;
+      padding-right: $spacing-05;
     }
   }
 }
@@ -108,8 +112,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 .#{$block-class}__disabled:focus,
 .#{$block-class}__disabled:hover,
 .#{$block-class}__disabled {
-  background: $layer-02;
   border: 1px solid $border-disabled;
+  background: $layer-02;
   color: $text-disabled;
   cursor: default;
 }

@@ -14,8 +14,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 // aspect ratio box styling
 .card-story .#{c4p-settings.$carbon-prefix}--aspect-ratio {
   display: flex;
+  width: 200px;
   align-items: center;
   justify-content: center;
   background: $layer-active-01;
-  width: 200px;
 }

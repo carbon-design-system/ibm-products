@@ -14,10 +14,7 @@ import {
   OverflowMenuItem,
   Layer,
 } from '@carbon/react';
-import {
-  CheckmarkOutline,
-  Incomplete,
-} from '@carbon/react/icons';
+import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';
@@ -87,7 +84,7 @@ export let Card = forwardRef(
     },
     ref
   ) => {
-    getStarted ? actionIcons = metaData : '';
+    getStarted ? (actionIcons = metaData) : '';
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
       actionIcons.length > 0 ||
@@ -129,13 +126,13 @@ export let Card = forwardRef(
 
       const icons = actionIcons.map(
         ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
-          if(getStarted){
+          if (getStarted) {
             return (
-                <span key={id} className={`${blockClass}__icon`}>
-                  <Icon  aria-label={iconDescription} />
-                   {iconDescription}
-                </span>
-            )
+              <span key={id} className={`${blockClass}__icon`}>
+                <Icon aria-label={iconDescription} />
+                {iconDescription}
+              </span>
+            );
           }
           if (productive) {
             return (
@@ -282,34 +279,32 @@ export let Card = forwardRef(
     });
     return (
       <div {...getCardProps()}>
-        {!getStarted && media && <div className={`${blockClass}__media`}>{media}</div>}
+        {!getStarted && media && (
+          <div className={`${blockClass}__media`}>{media}</div>
+        )}
         {Pictogram && (
           <div className={`${blockClass}__pictogram`}>
             <Pictogram />
           </div>
         )}
         {getStarted && step && (
-          <div className={`${blockClass}__step`}>
-            {step}
-          </div>
+          <div className={`${blockClass}__step`}>{step}</div>
         )}
         {getStarted && status && (
           <div className={`${blockClass}__status`}>
-          {status === 'incomplete' ? <Incomplete/> : ''}
-          {status === 'complete' ? <CheckmarkOutline/> : ''}
-        </div>
-        ) }
+            {status === 'incomplete' ? <Incomplete /> : ''}
+            {status === 'complete' ? <CheckmarkOutline /> : ''}
+          </div>
+        )}
         <div className={`${blockClass}__content-container`}>
           <div {...getHeaderBodyProps()}>
             <div>
-            <CardHeader {...getHeaderProps()} />
-            <div {...getBodyProps()}>{children}</div>
+              <CardHeader {...getHeaderProps()} />
+              <div {...getBodyProps()}>{children}</div>
             </div>
-            {getStarted && media &&
-             <div className={`${blockClass}__media`} >
-              {media}
-              </div>
-              }
+            {getStarted && media && (
+              <div className={`${blockClass}__media`}>{media}</div>
+            )}
           </div>
           {hasBottomBar && <CardFooter {...getFooterProps()} />}
         </div>

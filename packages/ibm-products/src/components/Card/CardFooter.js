@@ -75,11 +75,15 @@ export let CardFooter = ({
         </Button>
       )}
       {hasActions && <div className={`${blockClass}__actions`}>{actions}</div>}
-      {FooterActionIcon &&
-       <div className={`${blockClass}__action-icon`}>
-        {disabled ? <Error size={16}></Error> : 
-        <FooterActionIcon></FooterActionIcon>}
-      </div>}
+      {FooterActionIcon && (
+        <div className={`${blockClass}__action-icon`}>
+          {disabled ? (
+            <Error size={16}></Error>
+          ) : (
+            <FooterActionIcon></FooterActionIcon>
+          )}
+        </div>
+      )}
     </div>
   );
 };

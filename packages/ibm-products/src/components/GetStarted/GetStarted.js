@@ -18,23 +18,11 @@ const componentName = 'GetStarted';
 /**
  * GetStarted a card with icon, number, and media variants
  */
-export let GetStarted = React.forwardRef(
-  (
-    {
-      ...rest
-    },
-    ref
-  ) => {
-    return (
-      <Card 
-        getStarted
-        ref={ref} 
-        {...rest}
-        {...getDevtoolsProps(componentName)}
-        />
-    );
-  }
-);
+export let GetStarted = React.forwardRef(({ ...rest }, ref) => {
+  return (
+    <Card getStarted ref={ref} {...rest} {...getDevtoolsProps(componentName)} />
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 GetStarted = pkg.checkComponentEnabled(GetStarted, componentName);
@@ -42,7 +30,6 @@ GetStarted = pkg.checkComponentEnabled(GetStarted, componentName);
 GetStarted.displayName = componentName;
 
 GetStarted.propTypes = {
-  
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -103,10 +90,10 @@ GetStarted.propTypes = {
    */
   step: PropTypes.number,
 
-   /**
+  /**
    * Title that's displayed at the top of the card
    */
-   title: PropTypes.oneOfType([
+  title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.node,

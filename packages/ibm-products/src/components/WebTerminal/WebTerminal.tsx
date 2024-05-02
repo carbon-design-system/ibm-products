@@ -6,7 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React, { useMemo, useState, useEffect } from 'react';
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  PropsWithChildren,
+  ForwardedRef,
+  ReactNode,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,6 +40,48 @@ const defaults = {
   isInitiallyOpen: false,
 };
 
+interface Action {
+  renderIcon: () => void;
+  onClick: () => void;
+  iconDescription: string;
+}
+
+interface WebTerminalProps extends PropsWithChildren {
+  /**
+   * Provide your own terminal component as children to show up in the web terminal
+   */
+  children: ReactNode | ReactNode[];
+  /**
+   * An array of actions to be displayed in the web terminal header bar
+   */
+  actions?: readonly Action[];
+
+  /**
+   * Custom classname for additional styling of the web terminal
+   */
+  className?: string;
+
+  /**
+   * Icon description for the close button
+   */
+  closeIconDescription: string;
+
+  /**
+   * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
+   */
+  documentationLinks?: readonly OverflowMenuItem[];
+
+  /**
+   * Description for the documentation link overflow menu tooltip
+   */
+  documentationLinksIconDescription?: string;
+
+  /**
+   * Optionally pass if the web terminal should be open by default
+   */
+  isInitiallyOpen?: boolean;
+}
+
 /**
  * The `WebTerminal` is prompted by the user and is persistent until dismissed. The purpose of a web terminal is to provide users with the ability to type commands manually instead of using the GUI.
  */
@@ -51,8 +100,8 @@ export let WebTerminal = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: WebTerminalProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
@@ -123,7 +172,7 @@ export let WebTerminal = React.forwardRef(
           },
         ])}
         style={{
-          animation: !prefersReducedMotion && webTerminalAnimationName,
+          animation: !prefersReducedMotion ? webTerminalAnimationName : '',
         }}
         onAnimationEnd={onAnimationEnd}
       >
@@ -185,6 +234,7 @@ WebTerminal.propTypes = {
   /**
    * An array of actions to be displayed in the web terminal header bar
    */
+  /**@ts-ignore */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       renderIcon: PropTypes.func.isRequired,

@@ -300,7 +300,13 @@ export let InterstitialScreen = React.forwardRef(
                   <div className={cx(`${blockClass}--content`)}>
                     {isMultiStep ? (
                       <div className={`${blockClass}__carousel`}>
-                        <Carousel disableArrowScroll ref={scrollRef}>
+                        <Carousel
+                          disableArrowScroll
+                          ref={scrollRef}
+                          onScroll={(scrollPercent) => {
+                            scrollPercent === 0 && setProgStep(0);
+                          }}
+                        >
                           {children}
                         </Carousel>
                       </div>
@@ -336,7 +342,13 @@ export let InterstitialScreen = React.forwardRef(
             <div className={cx(`${blockClass}--content`)}>
               {isMultiStep ? (
                 <div className={`${blockClass}__carousel`}>
-                  <Carousel disableArrowScroll ref={scrollRef}>
+                  <Carousel
+                    disableArrowScroll
+                    ref={scrollRef}
+                    onScroll={(scrollPercent) => {
+                      scrollPercent === 0 && setProgStep(0);
+                    }}
+                  >
                     {children}
                   </Carousel>
                 </div>

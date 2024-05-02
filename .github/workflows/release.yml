@@ -38,17 +38,21 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
-
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate telemetry config
           file
-        run:
-          yarn ibmtelemetry-config --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-          --endpoint
-          https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
-          --files ./src/components/**/*.(tsx|js|jsx)
+        run: |
+          cd packages/ibm-products
+          yarn ibmtelemetry-config --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)
+
+      # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
+      - name: Add js scope to telemetry config
+        run: |
+          echo "  js:\n    functions:\t{}\n    tokens:\tnull" >> telemetry.yml
+          cd ../..
+
+      - name: Continuous integration check (includes build)
+        run: yarn ci-check
 
       # Dry run - `yarn lerna publish --dist-tag next --no-verify-access --create-release github --yes --no-push --no-git-tag-version`
       - name: Publish

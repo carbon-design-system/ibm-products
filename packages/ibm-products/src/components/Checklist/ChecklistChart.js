@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Copyright IBM Corp. 2023, 2023
  *
@@ -22,6 +23,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import clamp from 'lodash/clamp';
+import { Themes } from './Checklist.types';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -43,18 +45,20 @@ const componentName = 'ChecklistChart';
 
 // Default values for props
 const defaults = {
-  theme: 'light',
+  theme: Themes.light,
 };
 
 /**
  * TODO: A description of the component.
  */
 export let ChecklistChart = React.forwardRef(
+  /**
+   * @param {{className?: string, value: number, theme?: import('./Checklist.types').Theme}} props type description
+   */
   ({ className, value, theme = defaults.theme, ...rest }, ref) => {
     const numDegrees = clamp(value * 360, 0, 360);
-    const circleColor = theme === 'light' ? '#e0e0e0' : '#525252'; // $ui-03 (-ish)
-    const progressColor = theme === 'light' ? '#a56eff' : '#a56eff'; // $purple-50
-
+    const circleColor = theme === Themes.light ? '#e0e0e0' : '#525252'; // $ui-03 (-ish)
+    const progressColor = theme === Themes.light ? '#a56eff' : '#a56eff'; // $purple-50
     return (
       <div
         {...rest}
@@ -89,7 +93,7 @@ ChecklistChart.propTypes = {
   /**
    * Determines the theme of the component.
    */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  theme: PropTypes.oneOf([Themes.light, Themes.dark]),
   /**
    * Number between 0 and 1.
    */

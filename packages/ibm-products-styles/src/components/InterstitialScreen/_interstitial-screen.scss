@@ -17,13 +17,8 @@
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/styles/scss/type';
 
-// Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
-// or
-// TODO: @use '@carbon/react/scss/grid';
-
 // InterstitialScreen uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by InterstitialScreen
+@use '../Carousel/carousel';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen;

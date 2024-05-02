@@ -86,7 +86,7 @@ interface EditUpdateCardsProps {
   /**
    * Preview mode children
    */
-  previewChildren: ReactNode;
+  previewChildren?: ReactNode;
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */

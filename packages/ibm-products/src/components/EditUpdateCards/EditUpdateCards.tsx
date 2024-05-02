@@ -66,7 +66,7 @@ interface EditUpdateCardsProps {
   /**
    * Edit mode children
    */
-  editChildren: ReactNode;
+  editChildren?: ReactNode;
   /**
    * Edit mode
    */

@@ -2,7 +2,10 @@ import React from 'react';
 import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import PropTypes from 'prop-types';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  translateWithId,
+} from '../ConditionBuilderContext/DataConfigs';
 
 /**
  *
@@ -10,7 +13,13 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
  * All the inner components of group are called from here.
  * @returns
  */
-const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilderRef }) => {
+const ConditionGroupBuilder = ({
+  state,
+  aria,
+  onRemove,
+  onChange,
+  conditionBuilderRef,
+}) => {
   //This method identify whether the condition is the last one , so that add button can be shown
   const isLastCondition = (conditionIndex, conditionArr) => {
     return conditionIndex + 1 >= conditionArr.length;
@@ -27,8 +36,6 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
     } else {
       onRemove();
     }
-
-    
   };
 
   const onChangeHandler = (updatedConditions, conditionIndex) => {
@@ -49,7 +56,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
           property: undefined,
           operator: '',
           value: '',
-          popoverToOpen:'propertyField'
+          popoverToOpen: 'propertyField',
         },
         ...state.conditions.slice(conditionIndex + 1),
       ],
@@ -67,7 +74,11 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
   };
   return (
     <div className={` ${blockClass}__condition-builder__group eachGroup`}>
-      <div className={`${blockClass}__condition-wrapper`} role="grid" aria-label='condition builder wrapper'>
+      <div
+        className={`${blockClass}__condition-wrapper`}
+        role="grid"
+        aria-label={translateWithId('condition_builder_group')}
+      >
         {/* condition loop starts here */}
 
         {state?.conditions?.map(
@@ -75,7 +86,7 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
             <>
               {/* This condition is for tree variant where there will be subgroups inside each group */}
               {eachCondition.conditions && (
-                <ConditionBuilderGroup
+                <ConditionGroupBuilder
                   aria={{
                     level: aria.level + 1,
                     posinset: conditionIndex + 1,
@@ -130,9 +141,9 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
                   {/* for last condition shows add button */}
                   {isLastCondition(conditionIndex, conditionArr) && (
                     <ConditionBuilderAdd
-                    onClick={() => {
-                      addConditionHandler(conditionIndex);
-                    }}
+                      onClick={() => {
+                        addConditionHandler(conditionIndex);
+                      }}
                       className={
                         !isLastCondition(conditionIndex, conditionArr)
                           ? `${blockClass}__gap ${blockClass}__gap-bottom`
@@ -150,8 +161,8 @@ const ConditionBuilderGroup = ({ state, aria, onRemove, onChange,conditionBuilde
   );
 };
 
-export default ConditionBuilderGroup;
-ConditionBuilderGroup.propTypes = {
+export default ConditionGroupBuilder;
+ConditionGroupBuilder.propTypes = {
   /**
    * object contains the aria attributes
    */
@@ -160,7 +171,7 @@ ConditionBuilderGroup.propTypes = {
   /**
    * ref of condition builder
    */
-   conditionBuilderRef: PropTypes.object,
+  conditionBuilderRef: PropTypes.object,
 
   /**
   
@@ -171,7 +182,7 @@ ConditionBuilderGroup.propTypes = {
    * call back to remove the particular group from the state tree
    */
   onRemove: PropTypes.func,
-   /**
+  /**
    * state defines the current group
    */
   state: PropTypes.object,

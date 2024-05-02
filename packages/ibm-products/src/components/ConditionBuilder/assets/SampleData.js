@@ -95,9 +95,9 @@ export const sampleDataStructure_sentence = {
           value: 'processing',
         },
         {
-          property: 'delivery',
+          property: 'Price',
           operator: 'is',
-          value: 'processing',
+          value: '3',
         },
       ],
     },

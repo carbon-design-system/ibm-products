@@ -13,14 +13,12 @@ export const ConditionBuilderButton = ({
   renderIcon: Icon,
   onClick,
   showToolTip,
-  role,
   ...rest
 }) => {
   const Button = () => {
     return (
       <button
         {...rest}
-        role={!hideLabel ? role : undefined}
         // role={'gridcell'}
         tabIndex={-1}
         className={cx([
@@ -46,6 +44,7 @@ export const ConditionBuilderButton = ({
       label={label}
       align={tooltipAlign}
       className={`${blockClass}__con-tooltip`}
+      {...rest.wrapperProps}
     >
       {Button()}
     </Tooltip>
@@ -77,9 +76,7 @@ ConditionBuilderButton.propTypes = {
    */
   renderIcon: PropTypes.func,
   /**
-   *optional string defines the role of the button
    */
-  role: PropTypes.string,
   /**
    *decides if  tooltip to be shown
    */

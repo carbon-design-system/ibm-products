@@ -3,13 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Add } from '@carbon/react/icons';
-
-import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import {
   blockClass,
   translateWithId,
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
+import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 
 export const ConditionBuilderItem = ({
   children,
@@ -20,6 +19,8 @@ export const ConditionBuilderItem = ({
   type,
   showToolTip,
   state,
+  popOverClassName,
+  config,
   ...rest
 }) => {
   const contentRef = useRef(null);
@@ -29,35 +30,45 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     const propertyId =
       rest['data-name'] == 'valueField' && type
-        ? valueRenderers[type](label)
+        ? valueRenderers[type](label, config)
         : label;
     setPropertyLabel(translateWithId(propertyId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [label]);
-  
+
   useEffect(() => {
+    /**
+     * rest['data-name'] holds the current field name
+     * popoverToOpen hold the next popover to be opened if required
+     */
     if (state) {
-      let currentField=rest['data-name'];
+      let currentField = rest['data-name'];
       //if any condition is changed, state prop is triggered
       if (state.popoverToOpen && currentField !== state.popoverToOpen) {
+        // close the previous popover
         setOpen(false);
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
         state.operator !== 'one-of'
       ) {
+        //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
       }
       if (state.popoverToOpen == currentField) {
+        //current popover need to be opened
         setOpen(true);
       }
     } else {
+      // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
+      //close popOver when statement is changed.
       setOpen(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, label]);
 
   useEffect(() => {
+    //this will focus the first input field in the popover
     if (open && contentRef.current) {
       const firstFocusableElement =
         contentRef.current.querySelector('input, button,li');
@@ -72,6 +83,7 @@ export const ConditionBuilderItem = ({
       open={open}
       isTabTip
       role="gridcell"
+      className={popOverClassName}
       onRequestClose={() => {
         setOpen(false);
       }}
@@ -82,7 +94,6 @@ export const ConditionBuilderItem = ({
         onClick={() => {
           setOpen(!open);
         }}
-        role="gridcell"
         className={className}
         aria-haspopup
         aria-expanded={open}
@@ -94,6 +105,7 @@ export const ConditionBuilderItem = ({
       <PopoverContent
         className={`${blockClass}__condition-builder-item__content`}
         role="dialog"
+        aria-label={`${title}`}
       >
         <Layer>
           <h1 className={`${blockClass}__condition-builder-item__title`}>
@@ -116,8 +128,10 @@ ConditionBuilderItem.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * boolean to keep open/close popover
+   * this is the config object again the current property from inputConfig
    */
+
+  config: PropTypes.object,
 
   /**
    * text to be displayed in the field
@@ -125,11 +139,11 @@ ConditionBuilderItem.propTypes = {
   label: PropTypes.string,
 
   /**
-   * popover default state
+   * class name for popover
    */
+  popOverClassName: PropTypes.string,
 
   /**
-  popoverState: PropTypes.string,
    * Optional prop to allow overriding the icon rendering.
    */
   renderIcon: PropTypes.func,
@@ -145,10 +159,10 @@ ConditionBuilderItem.propTypes = {
   state: PropTypes.object,
 
   /**
-  showToolTip: PropTypes.bool,
    * title of the popover
    */
   title: PropTypes.string,
+
   /**
    * input type
    */

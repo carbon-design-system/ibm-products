@@ -7,7 +7,14 @@ export const emptyState = {
       groupSeparateOperator: null,
       groupOperator: 'and',
       statement: 'if',
-      conditions: [{ property: undefined, operator: '', value: '',popoverToOpen:'propertyField' }],
+      conditions: [
+        {
+          property: undefined,
+          operator: '',
+          value: '',
+          popoverToOpen: 'propertyField',
+        },
+      ],
     },
   ],
 };
@@ -41,6 +48,8 @@ export const ConditionBuilderProvider = (props) => {
         setRootState,
         inputConfig: props.inputConfig,
         popOverSearchThreshold: props.popOverSearchThreshold,
+        getOptions: props.getOptions,
+        variant: props.variant,
       }}
     >
       {
@@ -56,6 +65,17 @@ ConditionBuilderProvider.propTypes = {
    * Provide the contents of the ConditionBuilder.
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * This is an optional callback function that will be triggered when options array is not passed in the inputConfig against a property. 
+   * This can be a asynchronous function that need  to  return a promise, so it will allow to fetch options from API call.
+   * options has to be in valid format
+   * [{
+          label: 'label',
+          id: 'id',
+        },...] 
+   */
+  getOptions: PropTypes.func,
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
@@ -81,7 +101,13 @@ ConditionBuilderProvider.propTypes = {
       })
     ),
   }).isRequired,
-
+  /**
+   * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
+   */
   popOverSearchThreshold: PropTypes.number.isRequired,
-  /* TODO: add types and DocGen for all props. */
+
+  /**
+   * Provide the condition builder variant: sentence/ tree
+   */
+  variant: PropTypes.string.isRequired,
 };

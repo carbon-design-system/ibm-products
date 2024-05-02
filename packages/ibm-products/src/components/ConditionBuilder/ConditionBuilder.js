@@ -17,9 +17,9 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
-import { ConditionBuilderProvider } from './ConditionBuilderContext/DataTreeContext';
-import { blockClass } from './ConditionBuilderContext/DataConfigs';
+import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
+import { blockClass } from './ConditionBuilderContext/DataConfigs';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -56,6 +56,10 @@ export let ConditionBuilder = React.forwardRef(
       inputConfig,
       startConditionLabel,
       popOverSearchThreshold,
+      getOptions,
+      initialState,
+      getConditionState,
+      variant,
       /* TODO: add other props for ConditionBuilder, with default values if needed */
 
       // Collect any other property values passed in.
@@ -70,6 +74,8 @@ export let ConditionBuilder = React.forwardRef(
       <ConditionBuilderProvider
         inputConfig={inputConfig}
         popOverSearchThreshold={popOverSearchThreshold}
+        getOptions={getOptions}
+        variant={variant}
       >
         <div
           {
@@ -86,13 +92,14 @@ export let ConditionBuilder = React.forwardRef(
             }
           )}
           ref={conditionBuilderRef}
-          role="main"
           {...getDevtoolsProps(componentName)}
         >
-          <VStack>
+          <VStack className={`${blockClass}__${variant}`}>
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
               conditionBuilderRef={conditionBuilderRef}
+              getConditionState={getConditionState}
+              initialState={initialState}
             />
           </VStack>
         </div>
@@ -121,6 +128,24 @@ ConditionBuilder.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  getConditionState: PropTypes.func.isRequired,
+  getOptions: PropTypes.func,
+  initialState: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupSeparateOperator: PropTypes.string,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
+        conditions: PropTypes.arrayOf(
+          PropTypes.shape({
+            property: PropTypes.string,
+            operator: PropTypes.string,
+            value: PropTypes.string,
+          })
+        ),
+      })
+    ),
+  }),
   /**
    * This is a mandatory prop that defines the input to the condition builder.
    
@@ -157,4 +182,8 @@ ConditionBuilder.propTypes = {
   startConditionLabel: PropTypes.string.isRequired,
 
   /* TODO: add types and DocGen for all props. */
+  /**
+   * Provide the condition builder variant: sentence/ tree
+   */
+  variant: PropTypes.string.isRequired,
 };

@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - main_v1
+      - v1
   merge_group:
     types: [checks_requested]
 

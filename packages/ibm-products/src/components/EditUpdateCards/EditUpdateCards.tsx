@@ -50,7 +50,7 @@ interface EditUpdateCardsProps {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
-  actionIcons: Array<ActionIcon>;
+  actionIcons?: Array<ActionIcon>;
   /**
    * Determines if the action icons are on the top or bottom of the card
    */

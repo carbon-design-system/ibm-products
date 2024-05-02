@@ -223,11 +223,12 @@ export const DraggableItemsList = ({
                   : firstWord + `<strong>${res[1]}</strong>` + res[2]
                 : colHeaderTitle;
             const isFrozenColumn = !!colDef.sticky;
+            const isDisabled = colDef.disabled;
             const listContents = (
               <>
                 <Checkbox
                   checked={isColumnVisible(colDef)}
-                  disabled={isFrozenColumn}
+                  disabled={isDisabled || isFrozenColumn}
                   onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colHeaderTitle}

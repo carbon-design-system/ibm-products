@@ -19,6 +19,7 @@ import { timeAgo } from './utils';
 import { prepareProps } from '../../global/js/utils/props-helper';
 
 import { NotificationsEmptyState } from '../EmptyStates';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 // Carbon and package components we use.
 import { Button, Link, Toggle, IconButton } from '@carbon/react';
@@ -117,10 +118,7 @@ export let NotificationsPanel = React.forwardRef(
     const [allNotifications, setAllNotifications] = useState([]);
     const previousState = usePreviousValue({ open });
 
-    const reducedMotion =
-      window && window.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
+    const reducedMotion = usePrefersReducedMotion();
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -144,10 +142,10 @@ export let NotificationsPanel = React.forwardRef(
     };
 
     useEffect(() => {
-      if (!open && previousState?.open && reducedMotion.matches) {
+      if (!open && previousState?.open && reducedMotion) {
         setRender(false);
       }
-    }, [open, reducedMotion.matches, previousState?.open]);
+    }, [open, previousState?.open, reducedMotion]);
 
     const sortChronologically = (arr) => {
       if (!arr || (arr && !arr.length)) {
@@ -390,7 +388,7 @@ export let NotificationsPanel = React.forwardRef(
         id={blockClass}
         className={cx(blockClass, className, `${blockClass}__container`)}
         style={{
-          animation: !reducedMotion.matches
+          animation: !reducedMotion
             ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
             : null,
         }}

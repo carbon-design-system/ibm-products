@@ -343,7 +343,7 @@ export let SidePanel = React.forwardRef(
     ]);
 
     const reducedMotion =
-      typeof window !== 'undefined' && window?.matchMedia
+      typeof document !== 'undefined' && window?.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
@@ -739,7 +739,9 @@ export let SidePanel = React.forwardRef(
                 ({
                   label,
                   kind,
+                  hasIconOnly = false,
                   icon,
+                  renderIcon,
                   tooltipPosition,
                   tooltipAlignment,
                   leading,
@@ -753,11 +755,13 @@ export let SidePanel = React.forwardRef(
                     key={label}
                     kind={kind || 'ghost'}
                     size="sm"
-                    renderIcon={icon}
+                    renderIcon={renderIcon || icon}
                     iconDescription={label}
-                    tooltipPosition={tooltipPosition || 'bottom'}
-                    tooltipAlignment={tooltipAlignment || 'start'}
-                    hasIconOnly={!leading}
+                    {...(hasIconOnly && {
+                      tooltipPosition: tooltipPosition || 'bottom',
+                      tooltipAlignment: tooltipAlignment || 'start',
+                    })}
+                    hasIconOnly={hasIconOnly}
                     disabled={disabled}
                     className={cx([
                       `${blockClass}__action-toolbar-button`,

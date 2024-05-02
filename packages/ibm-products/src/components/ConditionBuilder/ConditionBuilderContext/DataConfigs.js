@@ -1,4 +1,6 @@
-import { translationsObject } from './Translations';
+import { pkg } from '../../../settings';
+import { translationsObject } from './translationObject';
+
 export const statementConfig = [
   {
     label: 'if',
@@ -83,8 +85,10 @@ export const operatorConfig = [
     type: 'date',
   },
 ];
+// The block part of our conventional BEM class names (blockClass__E--M).
+export const blockClass=`${pkg.prefix}--condition-builder`;
 
-function formatDate(date) {
+const formatDate=(date)=> {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();

@@ -301,11 +301,17 @@ describe(name, () => {
   });
 
   it('should reduce motion', async () => {
-    let prefersReducedMotion = false;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        matches: prefersReducedMotion,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
       })),
     });
 
@@ -326,12 +332,17 @@ describe(name, () => {
     );
     expect(screen.getByTestId(dataTestId).hasAttribute('style')).toBeTruthy();
 
-    // Check if reduce motion works
-    prefersReducedMotion = true;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        matches: prefersReducedMotion,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: true,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
       })),
     });
 

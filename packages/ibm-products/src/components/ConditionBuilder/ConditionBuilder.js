@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { VStack } from '@carbon/react';
 
@@ -15,16 +15,15 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/DataTreeContext';
+import { blockClass } from './ConditionBuilderContext/DataConfigs';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = 'ConditionBuilder';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -64,6 +63,9 @@ export let ConditionBuilder = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const conditionBuilderRef = ref || localRef;
+
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -83,13 +85,14 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
-          ref={ref}
+          ref={conditionBuilderRef}
           role="main"
           {...getDevtoolsProps(componentName)}
         >
           <VStack>
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
+              conditionBuilderRef={conditionBuilderRef}
             />
           </VStack>
         </div>

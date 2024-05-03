@@ -72,12 +72,12 @@ export const operatorConfig = [
   {
     label: 'is before',
     id: 'before',
-    type: 'date',
+    type: 'date,time',
   },
   {
     label: 'is after',
     id: 'after',
-    type: 'date',
+    type: 'date,time',
   },
   {
     label: 'is between',
@@ -86,14 +86,14 @@ export const operatorConfig = [
   },
 ];
 // The block part of our conventional BEM class names (blockClass__E--M).
-export const blockClass=`${pkg.prefix}--condition-builder`;
+export const blockClass = `${pkg.prefix}--condition-builder`;
 
-const formatDate=(date)=> {
+const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
-}
+};
 const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
 export const translateWithId = (key) => {
   return translationsObjectCurrent[key] ?? key;
@@ -101,7 +101,10 @@ export const translateWithId = (key) => {
 
 export const valueRenderers = {
   text: (val) => val,
-  number: (val) => val,
+  time: (val) => val,
+  number: (val, config) => {
+    return config.unit && val ? `${val} ${config.unit}` : val;
+  },
   option: (value) => {
     return Array.isArray(value) ? value.join(', ') : value;
   },

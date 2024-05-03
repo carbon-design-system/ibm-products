@@ -13,14 +13,12 @@ export const ConditionBuilderButton = ({
   renderIcon: Icon,
   onClick,
   showToolTip,
-  role,
   ...rest
 }) => {
   const Button = () => {
     return (
       <button
         {...rest}
-        role={!hideLabel ? role : undefined}
         // role={'gridcell'}
         tabIndex={-1}
         className={cx([
@@ -29,11 +27,7 @@ export const ConditionBuilderButton = ({
           { [`${blockClass}__text-ellipsis`]: showToolTip && !hideLabel },
         ])}
         type="button"
-        onClick={(e) => {
-          if (onClick) {
-            onClick(e);
-          }
-        }}
+        onClick={onClick}
       >
         {Icon && <Icon />}
         {!hideLabel && label}
@@ -46,6 +40,7 @@ export const ConditionBuilderButton = ({
       label={label}
       align={tooltipAlign}
       className={`${blockClass}__con-tooltip`}
+      {...rest.wrapperProps}
     >
       {Button()}
     </Tooltip>
@@ -75,11 +70,9 @@ ConditionBuilderButton.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering.
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
-   *optional string defines the role of the button
    */
-  role: PropTypes.string,
   /**
    *decides if  tooltip to be shown
    */

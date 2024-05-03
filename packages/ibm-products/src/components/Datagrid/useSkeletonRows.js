@@ -7,12 +7,16 @@
 
 const useSkeletons = (hooks) => {
   const useInstance = (instance) => {
-    const { isFetching, rows } = instance;
+    const { isFetching, rows, skeletonRows } = instance;
+
+    if (isFetching && skeletonRows === 0) {
+      throw new Error('skeletonRows cannot be set to 0, if isFetching is true');
+    }
     const skeletonRow = (id) => ({ isSkeleton: true, values: 'skeleton', id });
-    const numRows = typeof isFetching === 'number' ? isFetching : 3;
+
     const rowsWithSkeletons = [
       ...rows,
-      ...Array.from({ length: numRows }, (_, index) =>
+      ...Array.from({ length: skeletonRows || 3 }, (_, index) =>
         skeletonRow(`skeleton-row-${index + 1}`)
       ),
     ];

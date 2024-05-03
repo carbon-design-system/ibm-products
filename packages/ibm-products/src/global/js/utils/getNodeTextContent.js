@@ -16,7 +16,7 @@
  *          <li>Item 3</li>
  *        </ul>
  *        --> "Item 1Item 2Item 3"
- * @param {Node} node A React node
+ * @param {ReactNode} node A React node
  * @returns {string}
  */
 export const getNodeTextContent = (node) => {

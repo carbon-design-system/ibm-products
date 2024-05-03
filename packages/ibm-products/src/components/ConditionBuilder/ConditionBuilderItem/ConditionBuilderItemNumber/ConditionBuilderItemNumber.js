@@ -12,11 +12,15 @@ export const ConditionBuilderItemNumber = ({
   config,
   onChange,
 }) => {
+  const onChangeHandler = (e, { value }) => {
+    onChange(value + '');
+  };
   return (
     <div className={`${blockClass}__condition-builder-item-number`}>
       <NumberInput
-        label={conditionState.property?.label}
+        label={conditionState.property}
         hideLabel
+        id={conditionState.property?.replace(/\s/g, '')}
         value={
           conditionState.value
             ? conditionState.value.split(' ')[0]
@@ -26,9 +30,7 @@ export const ConditionBuilderItemNumber = ({
         max={config.max}
         step={config.step}
         allowEmpty
-        onChange={(e, { value }) => {
-          onChange(value + '');
-        }}
+        onChange={onChangeHandler}
       />
     </div>
   );

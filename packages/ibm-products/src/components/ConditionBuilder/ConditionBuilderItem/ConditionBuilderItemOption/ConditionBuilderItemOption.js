@@ -2,8 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { Search, Button } from '@carbon/react';
 
-import { Checkmark } from '@carbon/react/icons';
-import { Checkbox, SelectSkeleton } from '@carbon/react';
+import {
+  Checkmark,
+  Checkbox,
+  CheckboxCheckedFilled,
+} from '@carbon/react/icons';
+import { SelectSkeleton } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
@@ -30,13 +34,6 @@ export const ConditionBuilderItemOption = ({
     : conditionState.value !== undefined
     ? [conditionState.value]
     : [];
-  const handleSelectAll = (e) => {
-    if (e.currentTarget.dataset.selectedAll == 'false') {
-      onChange(undefined);
-    } else {
-      onChange(allOptions.map((op) => op.id));
-    }
-  };
 
   useEffect(() => {
     if (!allOptions && getOptions) {
@@ -57,6 +54,32 @@ export const ConditionBuilderItemOption = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleSelectAll = (e) => {
+    if (e.currentTarget.dataset.selectedAll == 'false') {
+      onChange(undefined);
+    } else {
+      onChange(allOptions.map((op) => op.id));
+    }
+  };
+  const onSearchChangeHandler = (e) => {
+    const { value } = e.target;
+    let _filteredItems = allOptions.filter((opt) =>
+      opt.label.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredItems(_filteredItems);
+  };
+  const onClickHandler = (e, option, isSelected) => {
+    if (multiSelectable) {
+      if (isSelected) {
+        let items = selection.filter((v) => v !== option.id);
+        onChange(items.length > 0 ? items : undefined, e);
+      } else {
+        onChange([...selection, option.id], e);
+      }
+    } else {
+      onChange(option.id, e);
+    }
+  };
   return (
     <>
       {allOptions && (
@@ -68,16 +91,9 @@ export const ConditionBuilderItemOption = ({
             >
               <Search
                 size="sm"
-                labelText={'test'}
-                closeButtonLabelText={true}
-                onChange={(e) => {
-                  const { value } = e.target;
-
-                  let _filteredItems = allOptions.filter((opt) =>
-                    opt.label.toLowerCase().includes(value.toLowerCase())
-                  );
-                  setFilteredItems(_filteredItems);
-                }}
+                labelText={translateWithId('clear_search')}
+                closeButtonLabelText={translateWithId('clear_search')}
+                onChange={onSearchChangeHandler}
               />
             </div>
           )}
@@ -128,31 +144,31 @@ export const ConditionBuilderItemOption = ({
                   onKeyUp={() => {
                     return false;
                   }}
-                  onClick={(e) => {
-                    if (multiSelectable) {
-                      if (isSelected) {
-                        let items = selection.filter((v) => v !== option.id);
-                        onChange(items.length > 0 ? items : undefined, e);
-                      } else {
-                        onChange([...selection, option.id], e);
-                      }
-                    } else {
-                      onChange(option.id, e);
-                    }
-                  }}
+                  onClick={(e) => onClickHandler(e, option, isSelected)}
                 >
                   <div
                     className={`${blockClass}__condition-builder-item-option__option-content`}
                   >
                     {multiSelectable ? (
                       <>
-                        <Checkbox
-                          checked={isSelected}
+                        <span className={`${blockClass}__option-check-box`}>
+                          {isSelected ? (
+                            <CheckboxCheckedFilled />
+                          ) : (
+                            <Checkbox />
+                          )}
+                        </span>
+
+                        <span
                           className={`${blockClass}__condition-builder-item-option__option-label`}
-                          labelText={option.label}
-                          tabIndex="-1"
-                        />
-                        {Icon && <Icon />}
+                        >
+                          {option.label}
+                        </span>
+                        {Icon && (
+                          <span className={`${blockClass}__option-icon`}>
+                            <Icon />
+                          </span>
+                        )}
                       </>
                     ) : (
                       <>

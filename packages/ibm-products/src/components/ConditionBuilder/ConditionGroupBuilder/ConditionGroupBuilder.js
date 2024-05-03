@@ -77,7 +77,7 @@ const ConditionGroupBuilder = ({
         {/* condition loop starts here */}
 
         {state?.conditions?.map((eachCondition, conditionIndex) => (
-          <>
+          <div key={conditionIndex}>
             {/* This condition is for tree variant where there will be subgroups inside each group */}
             {eachCondition.conditions && (
               <ConditionGroupBuilder
@@ -94,11 +94,13 @@ const ConditionGroupBuilder = ({
                   onRemoveHandler(conditionIndex, e);
                 }}
                 conditionBuilderRef={conditionBuilderRef}
+                key={conditionIndex}
               />
             )}
             {/* rendering each condition block */}
             {!eachCondition.conditions && (
               <ConditionBlock
+                key={conditionIndex}
                 conjunction={
                   conditionIndex > 0 ? state.groupOperator : undefined
                 }
@@ -133,7 +135,7 @@ const ConditionGroupBuilder = ({
                 }}
               />
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

@@ -184,3 +184,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__groupOperatorConnector {
   margin-bottom: $spacing-02;
 }
+.#{$block-class}__option-check-box {
+  display: flex;
+  margin-right: $spacing-03;
+}
+.#{$block-class}__option-icon {
+  align-self: center;
+  margin-left: auto;
+}

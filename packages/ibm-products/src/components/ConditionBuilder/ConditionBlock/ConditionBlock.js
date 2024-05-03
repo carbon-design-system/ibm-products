@@ -16,7 +16,7 @@ import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { focusThisField } from '../utils/genericMethods';
+import { focusThisField } from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 /**
@@ -67,6 +67,48 @@ const ConditionBlock = (props) => {
 
   const { icon, type, config, label } = getCurrentConfig(property);
   const ItemComponent = property ? itemComponents[type] : null;
+  const onStatementChangeHandler = (v, e) => {
+    focusThisField(e);
+    onStatementChange(v);
+  };
+  const onConnectorOperatorChangeHandler = (op) => {
+    onConnectorOperatorChange(op);
+  };
+  const onPropertyChangeHandler = (newProperty) => {
+    onChange({
+      ...state,
+      property: newProperty,
+      operator: undefined,
+      value: '',
+      popoverToOpen: 'operatorField',
+    });
+  };
+  const onOperatorChangeHandler = (newOperator) => {
+    onChange({
+      ...state,
+      operator: newOperator,
+      value: undefined,
+      popoverToOpen: 'valueField',
+    });
+  };
+  const onValueChangeHandler = (newValue) => {
+    onChange({
+      ...state,
+      value: newValue,
+      popoverToOpen: '',
+    });
+  };
+  const handleShowDeletionPreview = () => {
+    setShowDeletionPreview(true);
+  };
+  const handleHideDeletionPreview = () => {
+    setShowDeletionPreview(false);
+  };
+  const getOperators = () => {
+    return operatorConfig.filter(
+      (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
+    );
+  };
   return (
     <div
       className={cx(
@@ -76,6 +118,7 @@ const ConditionBlock = (props) => {
             showDeletionPreview,
         }
       )}
+      key={conditionIndex}
       role="row"
       aria-label={translateWithId('condition_row')}
       tabIndex={-1}
@@ -94,10 +137,7 @@ const ConditionBlock = (props) => {
               value: group.statement,
               label: translateWithId('condition'),
             }}
-            onChange={(v, e) => {
-              focusThisField(e);
-              onStatementChange(v);
-            }}
+            onChange={onStatementChangeHandler}
             config={{ options: statementConfig }}
           ></ConditionBuilderItemOption>
         </ConditionBuilderItem>
@@ -107,7 +147,7 @@ const ConditionBlock = (props) => {
         <ConditionConnector
           className={`${blockClass}__gap`}
           operator={conjunction}
-          onChange={(op) => onConnectorOperatorChange(op)}
+          onChange={onConnectorOperatorChangeHandler}
         />
       )}
 
@@ -125,15 +165,7 @@ const ConditionBlock = (props) => {
             value: property,
             label: translateWithId('property'),
           }}
-          onChange={(v) => {
-            onChange({
-              ...state,
-              property: v,
-              operator: undefined,
-              value: '',
-              popoverToOpen: 'operatorField',
-            });
-          }}
+          onChange={onPropertyChangeHandler}
           config={{ options: inputConfig.properties }}
         />
       </ConditionBuilderItem>
@@ -147,23 +179,13 @@ const ConditionBlock = (props) => {
         >
           <ConditionBuilderItemOption
             config={{
-              options: operatorConfig.filter(
-                (operator) =>
-                  operator.type.indexOf(type) != -1 || operator.type == 'all'
-              ),
+              options: getOperators(),
             }}
             conditionState={{
               value: operator,
               label: translateWithId('operator'),
             }}
-            onChange={(v) => {
-              onChange({
-                ...state,
-                operator: v,
-                value: undefined,
-                popoverToOpen: 'valueField',
-              });
-            }}
+            onChange={onOperatorChangeHandler}
           />
         </ConditionBuilderItem>
       )}
@@ -183,13 +205,7 @@ const ConditionBlock = (props) => {
               operator,
               value,
             }}
-            onChange={(v) => {
-              onChange({
-                ...state,
-                value: v,
-                popoverToOpen: '',
-              });
-            }}
+            onChange={onValueChangeHandler}
             config={config}
           />
         </ConditionBuilderItem>
@@ -199,18 +215,10 @@ const ConditionBlock = (props) => {
           hideLabel
           label={translateWithId('remove_condition')}
           onClick={onRemove}
-          onMouseEnter={() => {
-            setShowDeletionPreview(true);
-          }}
-          onMouseLeave={() => {
-            setShowDeletionPreview(false);
-          }}
-          onFocus={() => {
-            setShowDeletionPreview(true);
-          }}
-          onBlur={() => {
-            setShowDeletionPreview(false);
-          }}
+          onMouseEnter={handleShowDeletionPreview}
+          onMouseLeave={handleHideDeletionPreview}
+          onFocus={handleShowDeletionPreview}
+          onBlur={handleHideDeletionPreview}
           renderIcon={Close}
           className={`${blockClass}__close-condition`}
           data-name="closeCondition"

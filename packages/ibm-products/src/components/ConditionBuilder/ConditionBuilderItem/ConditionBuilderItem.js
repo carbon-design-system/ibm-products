@@ -97,7 +97,7 @@ export const ConditionBuilderItem = ({
         className={className}
         aria-haspopup
         aria-expanded={open}
-        renderIcon={renderIcon ? renderIcon : label == undefined ? Add : ''}
+        renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
         {...rest}
       />
@@ -136,7 +136,7 @@ ConditionBuilderItem.propTypes = {
   /**
    * text to be displayed in the field
    */
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 
   /**
    * class name for popover
@@ -146,7 +146,7 @@ ConditionBuilderItem.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering.
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * show tool tip

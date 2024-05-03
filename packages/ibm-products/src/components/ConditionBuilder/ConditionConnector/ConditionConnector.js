@@ -7,36 +7,39 @@ import {
 } from '../ConditionBuilderContext/DataConfigs';
 import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
-import { focusThisField } from '../utils/genericMethods';
+import { focusThisField } from '../utils/util';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 function ConditionConnector({ operator, className, onChange, ...rest }) {
-  const handleConnectorHover = useCallback((e, isHover) => {
-    let parentGroup = e.currentTarget.closest('.eachGroup');
+  const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {
       parentGroup.classList.add('hoveredConnector');
     } else {
       parentGroup.classList.remove('hoveredConnector');
     }
   }, []);
+  const activeConnectorHandler = (e) => {
+    let parentGroup = e.currentTarget.closest('.eachGroup');
+    handleConnectorHover(parentGroup, true);
+  };
+  const inActiveConnectorHandler = (e) => {
+    let parentGroup = e.currentTarget.closest('.eachGroup');
+    handleConnectorHover(parentGroup, false);
+  };
+  const onChangeHandler = (op, e) => {
+    onChange(op);
+    focusThisField(e);
+  };
   return (
     // <div className={className} {...rest}>
     <ConditionBuilderItem
       label={operator}
       title={translateWithId('connector')}
       data-name="connectorField"
-      onMouseEnter={(e) => {
-        handleConnectorHover(e, true);
-      }}
-      onMouseLeave={(e) => {
-        handleConnectorHover(e, false);
-      }}
-      onFocus={(e) => {
-        handleConnectorHover(e, true);
-      }}
-      onBlur={(e) => {
-        handleConnectorHover(e, false);
-      }}
+      onMouseEnter={activeConnectorHandler}
+      onMouseLeave={inActiveConnectorHandler}
+      onFocus={activeConnectorHandler}
+      onBlur={inActiveConnectorHandler}
       {...rest}
       popOverClassName={className}
       className={`${blockClass}__connector-button `}
@@ -49,10 +52,7 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
           value: operator,
           label: translateWithId('connector'),
         }}
-        onChange={(op, e) => {
-          onChange(op);
-          focusThisField(e);
-        }}
+        onChange={onChangeHandler}
       />
     </ConditionBuilderItem>
     // </div>

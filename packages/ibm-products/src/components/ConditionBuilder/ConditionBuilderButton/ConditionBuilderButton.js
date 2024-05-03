@@ -27,11 +27,7 @@ export const ConditionBuilderButton = ({
           { [`${blockClass}__text-ellipsis`]: showToolTip && !hideLabel },
         ])}
         type="button"
-        onClick={(e) => {
-          if (onClick) {
-            onClick(e);
-          }
-        }}
+        onClick={onClick}
       >
         {Icon && <Icon />}
         {!hideLabel && label}
@@ -74,7 +70,7 @@ ConditionBuilderButton.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering.
    */
-  renderIcon: PropTypes.func,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    */
   /**

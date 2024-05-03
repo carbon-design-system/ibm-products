@@ -9,9 +9,10 @@ export const ConditionBuilderItemText = ({ conditionState, onChange }) => {
   return (
     <div className={`${blockClass}__condition-builder-item-text`}>
       <TextInput
-        labelText={conditionState.property?.label}
+        labelText={conditionState.property}
         hideLabel
-        value={conditionState.value}
+        value={conditionState.value ?? ''}
+        id={conditionState.property?.replace(/\s/g, '')}
         onChange={(e) => {
           onChange(e.target.value);
         }}

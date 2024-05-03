@@ -4,6 +4,7 @@ import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
+import { translateWithId } from '../../ConditionBuilderContext/DataConfigs';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
@@ -20,15 +21,13 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onClose={(value) => {
-            onChange(value);
-          }}
+          onClose={onChange}
           value={conditionState.value}
         >
           <DatePickerInput
             id="datePicker"
             placeholder="dd/mm/yyyy"
-            labelText={conditionState.property?.label}
+            labelText={conditionState.property}
           />
         </DatePicker>
       )}
@@ -38,20 +37,18 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onClose={(value) => {
-            onChange(value);
-          }}
+          onClose={onChange}
           value={conditionState.value}
         >
           <DatePickerInput
             id="datePickerStart"
             placeholder="dd/mm/yyyy"
-            labelText={`Start`}
+            labelText={translateWithId('start')}
           />
           <DatePickerInput
             id="datePickerEnd"
             placeholder="dd/mm/yyyy"
-            labelText={`End`}
+            labelText={translateWithId('end')}
           />
         </DatePicker>
       )}

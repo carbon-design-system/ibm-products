@@ -62,6 +62,19 @@ const ConditionBuilderContent = ({
     },
     [setRootState, rootState]
   );
+
+  const onChangeHandler = (updatedGroup, groupIndex) => {
+    /**
+     * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
+     * This gets the updated group as argument.
+     */
+    setRootState({
+      ...rootState,
+      groups: rootState.groups.map((group, gIndex) =>
+        groupIndex === gIndex ? updatedGroup : group
+      ),
+    });
+  };
   return (
     <div className={`${blockClass}__content-container`} tabIndex={-1}>
       {isConditionBuilderActive && (
@@ -91,16 +104,7 @@ const ConditionBuilderContent = ({
               onRemove(groupIndex);
             }}
             onChange={(updatedGroup) => {
-              //     /**
-              //      * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
-              //      * This gets the updated group as argument.
-              //      */
-              setRootState({
-                ...rootState,
-                groups: rootState.groups.map((group, gIndex) =>
-                  groupIndex === gIndex ? updatedGroup : group
-                ),
-              });
+              onChangeHandler(updatedGroup, groupIndex);
             }}
             conditionBuilderRef={conditionBuilderRef}
           />

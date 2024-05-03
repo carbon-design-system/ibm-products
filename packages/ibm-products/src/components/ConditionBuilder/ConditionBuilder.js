@@ -156,14 +156,14 @@ ConditionBuilder.propTypes = {
       PropTypes.shape({
         id: PropTypes.string,
         label: PropTypes.string,
-        icon: PropTypes.func,
-        type: PropTypes.oneOf(['text', 'number', 'date', 'option']),
+        icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+        type: PropTypes.oneOf(['text', 'number', 'date', 'option', 'time']),
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
               id: PropTypes.string,
               label: PropTypes.string,
-              icon: PropTypes.func,
+              icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
             })
           ),
           includeSearch: PropTypes.bool,

@@ -41,15 +41,18 @@ jobs:
       - name:
           Run @ibm/telemetry-js-config-generator to regenerate telemetry config
           file
+        working-directory: ./packages/ibm-products
         run: |
-          cd packages/ibm-products
-          yarn ibmtelemetry-config --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)
+          yarn telemetry-config
 
       # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
       - name: Add js scope to telemetry config
+        working-directory: ./packages/ibm-products
         run: |
-          echo "  js:\n    functions:\t{}\n    tokens:\tnull" >> telemetry.yml
-          cd ../..
+          echo "js:\n    functions:\t{}\n    tokens:\tnull" >> telemetry.yml
+          git add telemetry.yml
+          git commit -m "chore(telemetry): update telemetry config"
+          git push origin
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check

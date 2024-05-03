@@ -49,7 +49,9 @@ jobs:
       - name: Add js scope to telemetry config
         working-directory: ./packages/ibm-products
         run: |
-          echo "js:\n    functions:\t{}\n    tokens:\tnull" >> telemetry.yml
+          echo "  js:
+              functions: {}
+              tokens: null" >> telemetry.yml
           git add telemetry.yml
           git commit -m "chore(telemetry): update telemetry config"
           git push origin

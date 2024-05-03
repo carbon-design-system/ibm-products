@@ -91,6 +91,7 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
+          role="main"
           ref={conditionBuilderRef}
           {...getDevtoolsProps(componentName)}
         >

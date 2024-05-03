@@ -18,6 +18,7 @@ import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuild
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { focusThisField } from '../utils/genericMethods';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
+import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
@@ -33,6 +34,8 @@ const ConditionBlock = (props) => {
     isStatement,
     group,
     onStatementChange,
+    addConditionHandler,
+    conditionIndex,
   } = props;
   const { inputConfig } = useContext(ConditionBuilderContext);
   const itemComponents = {
@@ -52,6 +55,13 @@ const ConditionBlock = (props) => {
         (eachProperty) =>
           eachProperty.label?.toUpperCase() == property?.toUpperCase()
       )[0] ?? {}
+    );
+  };
+  const isLastCondition = (conditionIndex, conditionArr) => {
+    return (
+      conditionIndex + 1 >= conditionArr.length ||
+      (conditionArr.length - 1 != conditionIndex &&
+        conditionArr[conditionIndex + 1].conditions)
     );
   };
 
@@ -206,6 +216,16 @@ const ConditionBlock = (props) => {
           data-name="closeCondition"
         />
       </span>
+
+      {isLastCondition(conditionIndex, group.conditions) && (
+        <ConditionBuilderAdd
+          onClick={() => {
+            addConditionHandler(conditionIndex);
+          }}
+          //addConditionSubGroupHandler={()=>{addConditionSubGroupHandler(conditionIndex)}}
+          className={`${blockClass}__gap ${blockClass}__gap-left`}
+        />
+      )}
     </div>
   );
 };
@@ -214,13 +234,22 @@ export default ConditionBlock;
 
 ConditionBlock.propTypes = {
   /**
+   * callback to add a new condition
+   */
+  addConditionHandler: PropTypes.func,
+  /**
    * object hold aria attributes
    */
   aria: PropTypes.object,
   /**
+   * index of the current condition
+   */
+  conditionIndex: PropTypes.number,
+  /**
    * string that decides to show the condition connector
    */
   conjunction: PropTypes.string,
+
   /**
    * object that hold the current group object where is condition is part of
    */
@@ -229,7 +258,6 @@ ConditionBlock.propTypes = {
    *  boolean that decides to show the statement(if/ excl.if)
    */
   isStatement: PropTypes.bool,
-
   /**
    * callback to update the current condition of the state tree
    */
@@ -246,6 +274,7 @@ ConditionBlock.propTypes = {
    * callback to handle the statement(if/ excl.if) change
    */
   onStatementChange: PropTypes.func,
+
   /**
    * object that hold the current condition
    */

@@ -24,7 +24,10 @@ const ConditionBuilderContent = ({
     } else {
       setIsConditionBuilderActive(true);
     }
-    getConditionState(rootState);
+    if (getConditionState) {
+      getConditionState(rootState);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState, conditionBuilderRef]);
 

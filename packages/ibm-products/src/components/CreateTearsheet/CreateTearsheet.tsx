@@ -11,11 +11,15 @@ import React, {
   useRef,
   createContext,
   useEffect,
+  ReactNode,
+  ForwardedRef,
+  PropsWithChildren,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Form } from '@carbon/react';
-import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { pkg } from '../../settings';
@@ -36,17 +40,126 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 // This is a general context for the steps container
 // containing information about the state of the container
 // and providing some callback methods for steps to use
-export const StepsContext = createContext(null);
+
+export interface StepsContextType {
+  currentStep: number;
+  setIsDisabled: Dispatch<SetStateAction<boolean>>;
+  setOnPrevious: (fn: any) => void;
+  setOnNext: (fn: any) => void;
+  setOnMount: (fn: any) => void;
+  setStepData: Dispatch<SetStateAction<Step[]>>;
+  stepData: Step[];
+}
+export const StepsContext = createContext<StepsContextType | null>(null);
 
 // This is a context supplied separately to each step in the container
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-// Default values for props
-const defaults = {
-  verticalPosition: 'normal',
-  influencerWidth: 'narrow',
-};
+interface CreateTearsheetProps extends PropsWithChildren {
+  /**
+   * The back button text
+   */
+  backButtonText: string;
+
+  /**
+   * The cancel button text
+   */
+  cancelButtonText: string;
+
+  /**
+   * The main content of the tearsheet
+   */
+  // children?: ReactNode;
+
+  /**
+   * An optional class or classes to be added to the outermost element.
+   */
+  className?: string;
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+
+  /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement?: string;
+
+  /**
+   * Used to set the size of the influencer
+   */
+  influencerWidth?: 'narrow' | 'wide';
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep?: number;
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label?: ReactNode;
+
+  /**
+   * The next button text
+   */
+  nextButtonText: string;
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onClose?: () => void;
+
+  /**
+   * Specify a handler for submitting the multi step tearsheet (final step).
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the create button.
+   */
+  onRequestSubmit: () => void;
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open?: boolean;
+
+  /**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * The submit button text
+   */
+  submitButtonText: string;
+
+  /**
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title?: ReactNode;
+
+  /**
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position (the default) is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition?: 'normal' | 'lower';
+}
+
+interface Step {
+  introStep?: boolean;
+  secondaryLabel?: string;
+  shouldIncludeStep?: boolean;
+  title?: string;
+}
 
 export let CreateTearsheet = forwardRef(
   (
@@ -58,7 +171,7 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       description,
-      influencerWidth = defaults.influencerWidth,
+      influencerWidth = 'narrow',
       initialStep,
       label,
       nextButtonText,
@@ -69,28 +182,28 @@ export let CreateTearsheet = forwardRef(
       slug,
       submitButtonText,
       title,
-      verticalPosition = defaults.verticalPosition,
+      verticalPosition = 'normal',
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: CreateTearsheetProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [createTearsheetActions, setCreateTearsheetActions] = useState([]);
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [loadingPrevious, setLoadingPrevious] = useState(false);
+    const [loadingPrevious, setLoadingPrevious] = useState<boolean>(false);
     const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
-    const [stepData, setStepData] = useState([]);
+    const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
-    const [lastIncludedStep, setLastIncludedStep] = useState(null);
+    const [lastIncludedStep, setLastIncludedStep] = useState<number>();
 
     const previousState = usePreviousValue({ currentStep, open });
-    const contentRef = useRef();
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       const firstItem =
@@ -124,9 +237,11 @@ export let CreateTearsheet = forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
+      /**@ts-ignore */
       open,
       setCurrentStep,
       stepData,
+      /**@ts-ignore */
       initialStep,
       totalSteps: stepData?.length,
       componentName,
@@ -141,6 +256,7 @@ export let CreateTearsheet = forwardRef(
       setCurrentStep,
       setIsSubmitting,
       setShouldViewAll,
+      /**@ts-ignore */
       setLoadingPrevious,
       loadingPrevious,
       onClose,
@@ -157,51 +273,30 @@ export let CreateTearsheet = forwardRef(
       setCreateComponentActions: setCreateTearsheetActions,
     });
 
-    // adds focus trap functionality
-    /* istanbul ignore next */
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      const visibleStepInnerContent = document.querySelector(
-        `.${pkg.prefix}--tearsheet__body`
-      );
-      if (open && visibleStepInnerContent) {
-        wrapFocus({
-          bodyNode: visibleStepInnerContent,
-          currentActiveNode,
-          oldActiveNode,
-        });
-      }
-    };
-
     return (
       <TearsheetShell
-        {...rest}
         {...getDevtoolsProps(componentName)}
-        actions={createTearsheetActions}
-        className={cx(blockClass, className)}
-        description={description}
-        hasCloseIcon={false}
-        influencer={
-          <CreateInfluencer currentStep={currentStep} stepData={stepData} />
-        }
-        influencerPosition="left"
-        influencerWidth={influencerWidth}
-        label={label}
-        onClose={onClose}
-        open={open}
-        size="wide"
-        slug={slug}
-        title={title}
-        verticalPosition={verticalPosition}
-        ref={ref}
+        {...rest}
+        {...{
+          ref,
+          actions: createTearsheetActions,
+          className: cx(blockClass, className),
+          description,
+          influencer: (
+            <CreateInfluencer currentStep={currentStep} stepData={stepData} />
+          ),
+          influencerWidth,
+          label,
+          onClose,
+          open,
+          size: 'wide',
+          slug,
+          title,
+          verticalPosition,
+          closeIconDescription: '',
+        }}
       >
-        <div
-          className={`${blockClass}__content`}
-          onBlur={handleBlur}
-          ref={contentRef}
-        >
+        <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>
             <StepsContext.Provider
               value={{

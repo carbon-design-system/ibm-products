@@ -15,6 +15,7 @@
   },
   "scripts": {
     "audit": "node scripts/audit.js '--environment production' moderate",
+    "avt": "yarn playwright test --project chromium --grep @avt",
     "build": "run-s -s 'build:*' storybook:build:storybook",
     "build:packages": "yarn run-all --include-dependencies build",
     "ci-check": "run-s -s 'ci-check:*' storybook:build",

@@ -65,7 +65,7 @@ const useParentDimensions = (hooks) => {
     };
 
     Object.assign(instance, {
-      tableHeight,
+      tableHeight: tableHeight || instance.tableHeight,
       rootRef,
       headRef,
       innerListRef,

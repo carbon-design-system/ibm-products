@@ -181,7 +181,7 @@ export let CreateTearsheetStep = forwardRef(
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      if (stepNumber === stepsContext?.['currentStep']) {
+      if (stepNumber === stepsContext?.currentStep) {
         stepsContext.setIsDisabled(disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
@@ -210,9 +210,9 @@ export let CreateTearsheetStep = forwardRef(
         }
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
-            stepNumber !== stepsContext?.['currentStep'],
+            stepNumber !== stepsContext?.currentStep,
           [`${blockClass}__step--visible-step`]:
-            stepNumber === stepsContext?.['currentStep'],
+            stepNumber === stepsContext?.currentStep,
         })}
         ref={ref}
       >

@@ -11,6 +11,7 @@ import React, {
   useEffect,
   useState,
   isValidElement,
+  PropsWithChildren,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -28,6 +29,91 @@ const defaults = {
   hasFieldset: true,
   includeStep: true,
 };
+
+interface CreateTearsheetStepProps extends PropsWithChildren {
+  /**
+   * Content that shows in the tearsheet step
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Sets an optional className to be added to the tearsheet step
+   */
+  className?: string;
+
+  /**
+   * Sets an optional description on the step component
+   */
+  description?: React.ReactNode;
+
+  /**
+   * This will conditionally disable the submit button in the multi step Tearsheet
+   */
+  disableSubmit?: boolean;
+
+  /**
+   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * Otherwise, use CSS to hide/remove this label text.
+   */
+  fieldsetLegendText: string;
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   * and is defaulted to true.
+   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   */
+  hasFieldset?: boolean;
+
+  /**
+   * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
+   * steps. If this value is `true` then the step will be included in the list of visible steps, as well as being included in the ProgressIndicator step list
+   */
+  includeStep?: boolean;
+
+  /**
+   * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
+   */
+  introStep?: boolean;
+
+  /**
+   * This optional prop will indicate an error icon on the progress indicator step item
+   */
+  invalid?: boolean;
+
+  /**
+   * Optional function to be called on initial mount of a step.
+   * For example, this can be used to fetch data that is required on a particular step.
+   */
+  onMount?: () => void;
+
+  /**
+   * Optional function to be called when you move to the next step.
+   * For example, this can be used to validate input fields before proceeding to the next step.
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the next button.
+   */
+  onNext?: () => Promise<void>;
+
+  /**
+   * Optional function to be called when you move to the previous step.
+   */
+  onPrevious?: () => void;
+
+  /**
+   * Sets the optional secondary label on the progress step component
+   */
+  secondaryLabel?: string;
+
+  /**
+   * Sets an optional subtitle on the step component
+   */
+  subtitle?: string;
+
+  /**
+   * Sets the title text for a tearsheet step
+   */
+  title: React.ReactNode;
+}
 
 export let CreateTearsheetStep = forwardRef(
   (
@@ -52,36 +138,37 @@ export let CreateTearsheetStep = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: CreateTearsheetStepProps,
     ref
   ) => {
-    const stepsContext = useContext(StepsContext);
+    const stepsContext = useContext(StepsContext) as any;
     const stepNumber = useContext(StepNumberContext);
-    const [shouldIncludeStep, setShouldIncludeStep] = useState();
+    const [shouldIncludeStep, setShouldIncludeStep] =
+      useState<boolean>(includeStep);
     const previousState = usePreviousValue({
-      currentStep: stepsContext?.currentStep,
+      currentStep: stepsContext?.['currentStep'],
     });
 
     useRetrieveStepData({
       stepsContext,
       stepNumber,
-      introStep,
+      introStep: !!introStep,
       shouldIncludeStep,
-      secondaryLabel,
-      title,
-      invalid,
+      secondaryLabel: secondaryLabel || '',
+      title: title || '',
+      invalid: !!invalid,
     });
 
     // This useEffect reports back the onMount value so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
-        stepNumber === stepsContext?.currentStep &&
-        previousState?.currentStep !== stepsContext?.currentStep
+        stepNumber === stepsContext?.['currentStep'] &&
+        previousState?.['currentStep'] !== stepsContext?.['currentStep']
       ) {
         stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
+    }, [onMount, stepsContext, stepNumber, previousState?.['currentStep']]);
 
     // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {
@@ -91,7 +178,7 @@ export let CreateTearsheetStep = forwardRef(
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
-      if (stepNumber === stepsContext?.currentStep) {
+      if (stepNumber === stepsContext?.['currentStep']) {
         stepsContext.setIsDisabled(disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
@@ -120,9 +207,9 @@ export let CreateTearsheetStep = forwardRef(
         }
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
-            stepNumber !== stepsContext?.currentStep,
+            stepNumber !== stepsContext?.['currentStep'],
           [`${blockClass}__step--visible-step`]:
-            stepNumber === stepsContext?.currentStep,
+            stepNumber === stepsContext?.['currentStep'],
         })}
         ref={ref}
       >
@@ -189,6 +276,7 @@ CreateTearsheetStep.propTypes = {
    * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    * Otherwise, use CSS to hide/remove this label text.
    */
+  /**@ts-ignore*/
   fieldsetLegendText: PropTypes.string.isRequired.if(
     ({ hasFieldset }) => !!hasFieldset
   ),

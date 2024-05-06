@@ -126,14 +126,17 @@ FullPageError.propTypes = {
    * This is optional for 403 and 404 kinds, and passing this would override their default descriptions.
    */
   description: PropTypes.string.isRequired,
-  /**
-   * String that will describe the error that occurred
-   */
-  label: PropTypes.string.isRequired,
+
   /**
    * The kind of error page to be displayed, default is custom
    */
   kind: PropTypes.oneOf(['custom', '403', '404']),
+
+  /**
+   * String that will describe the error that occurred
+   */
+  label: PropTypes.string.isRequired,
+
   /**
    * This will be for the main title of the FullPageError component
    */

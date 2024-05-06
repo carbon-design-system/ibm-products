@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.35.0...@carbon/ibm-products@2.36.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** includeStep fix on first step ([#4942](https://github.com/carbon-design-system/ibm-products/issues/4942)) ([4bc336d](https://github.com/carbon-design-system/ibm-products/commit/4bc336d7917833417a8bf3db635b5b964370d856))
+* **FullPageError:** alphabetize prop types ([#4995](https://github.com/carbon-design-system/ibm-products/issues/4995)) ([cf16c92](https://github.com/carbon-design-system/ibm-products/commit/cf16c92d3a51921a8d66d628c14b3fd01da3e530))
+* support provided classname for TableCell [#4965](https://github.com/carbon-design-system/ibm-products/issues/4965) ([#4967](https://github.com/carbon-design-system/ibm-products/issues/4967)) ([f32129f](https://github.com/carbon-design-system/ibm-products/commit/f32129f4c9f75cf782ba28c205f5226f412c8dbb))
+* update to Carbon 11 compatible versions to latest ([#4890](https://github.com/carbon-design-system/ibm-products/issues/4890)) ([d3234ce](https://github.com/carbon-design-system/ibm-products/commit/d3234ceda60feb704b11d5f7c7270b430a11a499)), closes [#4654](https://github.com/carbon-design-system/ibm-products/issues/4654)
+* **useravatar:** fix scroll issue ([#4950](https://github.com/carbon-design-system/ibm-products/issues/4950)) ([bb47921](https://github.com/carbon-design-system/ibm-products/commit/bb479218862b14196f8ba99d6486772bfd9f1d20))
+
+
+### Features
+
+* **Carousel:** convert to .tsx ([#4964](https://github.com/carbon-design-system/ibm-products/issues/4964)) ([b41fe64](https://github.com/carbon-design-system/ibm-products/commit/b41fe640843fb169a223c9fe0afd8754fae4f209))
+* **CoachmarkBeacon:** convert to .tsx ([#4974](https://github.com/carbon-design-system/ibm-products/issues/4974)) ([3b4e0fa](https://github.com/carbon-design-system/ibm-products/commit/3b4e0fa7593382128900e68051863dbc949a319b))
+* **CoachmarkOverlayElements:** convert to .tsx ([#4973](https://github.com/carbon-design-system/ibm-products/issues/4973)) ([79f261b](https://github.com/carbon-design-system/ibm-products/commit/79f261bfed85f3bebbd4efd0326077b46feb54df))
+* column customization should allow only disable column [#4956](https://github.com/carbon-design-system/ibm-products/issues/4956) ([#4957](https://github.com/carbon-design-system/ibm-products/issues/4957)) ([ce0df52](https://github.com/carbon-design-system/ibm-products/commit/ce0df5209fea5fd9f272d25a121b49f7a51412df))
+* **Datagrid:** passes state to onApply ([#4933](https://github.com/carbon-design-system/ibm-products/issues/4933)) ([9a77b1a](https://github.com/carbon-design-system/ibm-products/commit/9a77b1a42e3ddfd5a5cdaefa7e0ccb9fafd3b61f))
+* instrument current packages with js scope ([#5012](https://github.com/carbon-design-system/ibm-products/issues/5012)) ([59074fe](https://github.com/carbon-design-system/ibm-products/commit/59074fe8ae93d3854565ba3c92f20065f3f2867e))
+* **NoTagsEmptyState:** convert to .tsx ([#4945](https://github.com/carbon-design-system/ibm-products/issues/4945)) ([db4c851](https://github.com/carbon-design-system/ibm-products/commit/db4c8511c28367b77879f834a1c4c3c6c684b587))
+
+
+
+
+
 # [2.35.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.34.0...@carbon/ibm-products@2.35.0) (2024-04-16)
 
 

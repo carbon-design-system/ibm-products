@@ -978,11 +978,11 @@ PageHeader.propTypes = {
   /**
    * The PageHeader is hosted in a Carbon grid, this value is passed through to the Carbon grid narrow prop
    */
-  narrowGrid: PropTypes.bool
+  narrowGrid: PropTypes.bool,
   /**
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
-   */,
+   */
   navigation: PropTypes.element,
   // Supports Tabs
   /**

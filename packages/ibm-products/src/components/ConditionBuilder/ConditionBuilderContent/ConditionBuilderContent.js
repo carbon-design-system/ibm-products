@@ -1,22 +1,19 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ConditionBuilderGroup from '../ConditionBuilderGroup/ConditionBuilderGroup';
 import { Button } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
+import ConditionGroupBuilder from '../ConditionGroupBuilder/ConditionGroupBuilder';
 import {
   ConditionBuilderContext,
   emptyState,
-} from '../ConditionBuilderContext/DataTreeContext';
+} from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 
 const ConditionBuilderContent = ({
   startConditionLabel,
   conditionBuilderRef,
+  getConditionState,
+  initialState,
 }) => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
@@ -27,6 +24,11 @@ const ConditionBuilderContent = ({
     } else {
       setIsConditionBuilderActive(true);
     }
+    if (getConditionState) {
+      getConditionState(rootState);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState, conditionBuilderRef]);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const ConditionBuilderContent = ({
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(false);
-    setRootState(emptyState); //here we can set an empty skeleton object for an empty condition builder,
+    setRootState(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
     //or we can even pre-populate some existing builder and continue editing
   };
 
@@ -60,6 +62,19 @@ const ConditionBuilderContent = ({
     },
     [setRootState, rootState]
   );
+
+  const onChangeHandler = (updatedGroup, groupIndex) => {
+    /**
+     * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
+     * This gets the updated group as argument.
+     */
+    setRootState({
+      ...rootState,
+      groups: rootState.groups.map((group, gIndex) =>
+        groupIndex === gIndex ? updatedGroup : group
+      ),
+    });
+  };
   return (
     <div className={`${blockClass}__content-container`} tabIndex={-1}>
       {isConditionBuilderActive && (
@@ -77,7 +92,7 @@ const ConditionBuilderContent = ({
 
       {rootState &&
         rootState?.groups?.map((eachGroup, groupIndex) => (
-          <ConditionBuilderGroup
+          <ConditionGroupBuilder
             key={groupIndex}
             aria={{
               level: 1,
@@ -89,16 +104,7 @@ const ConditionBuilderContent = ({
               onRemove(groupIndex);
             }}
             onChange={(updatedGroup) => {
-              //     /**
-              //      * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
-              //      * This gets the updated group as argument.
-              //      */
-              setRootState({
-                ...rootState,
-                groups: rootState.groups.map((group, gIndex) =>
-                  groupIndex === gIndex ? updatedGroup : group
-                ),
-              });
+              onChangeHandler(updatedGroup, groupIndex);
             }}
             conditionBuilderRef={conditionBuilderRef}
           />
@@ -115,7 +121,29 @@ ConditionBuilderContent.propTypes = {
    */
   conditionBuilderRef: PropTypes.object,
   /**
-   * Provide a label to the button that starts condition builder
+   * This is a callback function that returns the updated state
+   */
+  getConditionState: PropTypes.func.isRequired,
+  /**
+   * Optional prop if the condition building need to start from a predefined initial state
+   */
+  initialState: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupSeparateOperator: PropTypes.string,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
+        conditions: PropTypes.arrayOf(
+          PropTypes.shape({
+            property: PropTypes.string,
+            operator: PropTypes.string,
+            value: PropTypes.string,
+          })
+        ),
+      })
+    ),
+  }),
+  /* Provide a label to the button that starts condition builder
    */
   startConditionLabel: PropTypes.string.isRequired,
 };

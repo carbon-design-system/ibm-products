@@ -1,7 +1,8 @@
 @use '@carbon/react/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/type';
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/utilities' as *;
+@use '@carbon/react/scss/utilities';
 @use '@carbon/react/scss/motion' as *;
 @use '@carbon/react/scss/utilities/focus-outline';
 @use '@carbon/styles/scss/components/tag';
@@ -91,7 +92,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__condition-builder-item-date,
 .#{$block-class}__condition-builder-item-text,
-.#{$block-class}__condition-builder-item-number {
+.#{$block-class}__condition-builder-item-number,
+#{$block-class}__condition-builder-item-time {
   padding-block-end: $spacing-05;
   padding-inline: $spacing-05;
 }
@@ -101,7 +103,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__condition-builder-button {
-  @include button-reset();
+  @include utilities.button-reset();
 
   display: inline-flex;
   height: $spacing-07;
@@ -110,7 +112,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   color: inherit;
   column-gap: $spacing-02;
   cursor: pointer;
-  padding-inline: $spacing-02;
+  padding-inline: $spacing-03;
   white-space: nowrap;
 }
 .#{$block-class}__condition-builder-button:hover {
@@ -136,7 +138,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   padding-inline: $spacing-03;
 }
 .#{$block-class}__property-field {
-  @include type-style('heading-01');
+  @include type.type-style('heading-01');
 
   padding-left: $spacing-03;
 }
@@ -153,9 +155,40 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
 .#{$block-class}__multiselectSelectionStatusContainer {
   display: flex;
+  align-items: center;
   padding-inline: $spacing-05;
+  .#{$block-class}__selectAll-button {
+    margin-left: auto;
+  }
 }
 
 .#{$block-class}__condition-builder-item-option__option:focus {
   @include focus-outline.focus-outline('outline');
+}
+// .#{$block-class}__tree {
+//   .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
+//     flex-basis: 100%;
+//   }
+//   .#{$block-class}__groupConnector {
+//     background-color: $layer;
+//   }
+//   .#{$block-class}__condition-wrapper
+//     > :nth-child(1)
+//     .#{$block-class}__condition-builder-button,
+//   .#{$block-class}__condition-wrapper
+//     > :nth-child(2)
+//     .#{$block-class}__condition-builder-button {
+//     box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
+//   }
+// }
+.#{$block-class}__groupOperatorConnector {
+  margin-bottom: $spacing-02;
+}
+.#{$block-class}__option-check-box {
+  display: flex;
+  margin-right: $spacing-03;
+}
+.#{$block-class}__option-icon {
+  align-self: center;
+  margin-left: auto;
 }

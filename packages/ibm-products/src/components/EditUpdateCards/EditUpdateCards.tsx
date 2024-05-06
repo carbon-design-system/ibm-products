@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ForwardedRef, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,6 +15,8 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { ProductiveCard } from '../ProductiveCard';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+
 // import { children } from 'cheerio/lib/api/traversing';
 
 // Carbon and package components we use.
@@ -35,6 +37,102 @@ const componentName = 'EditUpdateCards';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
+type ActionIcon = {
+  id: string;
+  icon: CarbonIconType;
+  onKeyDown?(): void;
+  onClick?(): void;
+  iconDescription: string;
+  href?: string;
+};
+
+interface EditUpdateCardsProps {
+  /**
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   */
+  actionIcons?: Array<ActionIcon>;
+  /**
+   * Determines if the action icons are on the top or bottom of the card
+   */
+  actionsPlacement?: 'top' | 'bottom';
+  /**
+   * Optional label for the top of the card.
+   */
+  className?: string;
+  /**
+   * Optional header description
+   */
+  description?: string;
+  /**
+   * Edit mode children
+   */
+  editChildren?: ReactNode;
+  /**
+   * Edit mode
+   */
+  editMode?: boolean;
+  /**
+   * Optional label for the top of the card
+   */
+  label?: string;
+  /**
+   * Function that's called from the primary button or action icon
+   */
+  onPrimaryButtonClick?(): void;
+  /**
+   * Function that's called from the secondary button or action icon
+   */
+  onSecondaryButtonClick?(): void;
+  /**
+   * Preview mode children
+   */
+  previewChildren?: ReactNode;
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  primaryButtonIcon?: CarbonIconType;
+  /**
+   * Establishes the kind of button displayed for the primary button
+   */
+  primaryButtonKind?: 'primary' | 'ghost';
+  /**
+   * Determines if the primary button is on the top or bottom of the card
+   */
+  primaryButtonPlacement?: 'top' | 'bottom';
+  /**
+   * The text that's displayed in the primary button
+   */
+  primaryButtonText?: string;
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  secondaryButtonHref?: string;
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  secondaryButtonIcon?: CarbonIconType;
+  /**
+   * Establishes the kind of button displayed for the secondary button
+   */
+  secondaryButtonKind?: 'secondary' | 'ghost';
+  /**
+   * Determines if the secondary button is on the top or bottom of the card
+   */
+  secondaryButtonPlacement?: 'top' | 'bottom';
+  /**
+   * The text that's displayed in the secondary button
+   */
+  secondaryButtonText?: string;
+  /**
+   * Title that's displayed at the top of the card
+   */
+  title?: string;
+  /**
+   * Determines title size
+   */
+  titleSize?: 'default' | 'large';
+  /* TODO: add types and DocGen for all props. */
+}
 // Default values for props
 // const defaults = {
 //   /* TODO: add defaults for relevant props if needed */
@@ -68,8 +166,8 @@ export let EditUpdateCards = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: EditUpdateCardsProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     // const [editCardMode, setEditCardMode] = useState(editMode);
 
@@ -85,7 +183,6 @@ export let EditUpdateCards = React.forwardRef(
       secondaryButtonPlacement: 'top',
       secondaryButtonText: secondaryButtonText,
     };
-
     return (
       <div
         {
@@ -106,6 +203,7 @@ export let EditUpdateCards = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
+        {/* @ts-ignore  */}
         <ProductiveCard
           actionIcons={actionIcons}
           actionsPlacement={actionsPlacement}
@@ -138,6 +236,7 @@ EditUpdateCards.propTypes = {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
+  /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -187,6 +286,7 @@ EditUpdateCards.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
+  /**@ts-ignore */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Establishes the kind of button displayed for the primary button
@@ -207,6 +307,7 @@ EditUpdateCards.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
+  /**@ts-ignore */
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Establishes the kind of button displayed for the secondary button

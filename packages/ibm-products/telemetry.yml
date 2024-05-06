@@ -788,3 +788,6 @@ collect:
         - 'light-magenta'
         - 'light-purple'
         - 'light-teal'
+  js:
+    functions: {}
+    tokens: null

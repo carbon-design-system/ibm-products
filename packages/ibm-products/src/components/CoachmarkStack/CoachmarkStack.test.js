@@ -6,13 +6,12 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
-import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--coachmark-stack`;
 const overlayBlockClass = `${pkg.prefix}--coachmark-overlay--stack`;

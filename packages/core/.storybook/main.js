@@ -5,13 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { merge } = require('webpack-merge');
-const { resolve } = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('fast-glob');
+const path = require('path');
 import remarkGfm from 'remark-gfm';
-
-const maxAssetSize = 1024 * 1024;
 
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
@@ -37,7 +33,6 @@ module.exports = {
     '@storybook/addon-storysource',
     '@storybook/addon-viewport',
     '@storybook/addon-mdx-gfm',
-    '@carbon/storybook-addon-theme/preset.js',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -48,100 +43,55 @@ module.exports = {
         },
       },
     },
-  ],
-
-  core: {
-    builder: {
-      name: 'webpack5',
+    {
+      name: '@storybook/addon-essentials',
       options: {
-        lazyCompilation: true,
-        fsCache: true,
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
       },
     },
+  ],
+  core: {
+    builder: '@storybook/builder-vite',
   },
-
-  framework: {
-    name: '@storybook/react-webpack5',
-    options: {},
-  },
-
+  framework: '@storybook/react-vite',
   features: {
     storyStoreV7: true,
   },
-
   stories,
-
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
+  async viteFinal(config, { configType }) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
 
-  // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
-  webpackFinal: async (configuration, { configType }) =>
-    merge(configuration, {
-      optimization: {
-        removeAvailableModules: true,
-        removeEmptyChunks: true,
-        splitChunks: {
-          chunks: 'all',
-          minSize: 30 * 1024,
-          maxSize: maxAssetSize,
+    return mergeConfig(config, {
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
+          },
         },
-        minimize: true,
-        minimizer: [
-          new TerserPlugin({
-            minify: TerserPlugin.esbuildMinify,
-            terserOptions: {
-              minify: true,
-            },
-          }),
-        ],
-      },
-      performance: {
-        maxAssetSize: maxAssetSize,
-      },
-      module: {
-        rules: [
-          {
-            test: /\.stories\.js$/,
-            loader: 'babel-loader',
-            options: require('babel-preset-ibm-cloud-cognitive')(),
-          },
-          {
-            test: /\.scss$/,
-            use: [
-              {
-                loader: 'style-loader',
-                options: {
-                  // https://webpack.js.org/loaders/style-loader/#lazystyletag
-                  injectType: 'lazyStyleTag',
-                },
-              },
-              'css-loader',
-              {
-                loader: 'sass-loader',
-                options: {
-                  sassOptions: {
-                    includePaths: [
-                      resolve(__dirname, '..', 'node_modules'),
-                      resolve(__dirname, '..', '..', '..', 'node_modules'),
-                    ],
-                  },
-                  warnRuleAsWarning: true,
-                  sourceMap: true,
-                },
-              },
-            ],
-          },
-        ],
       },
       resolve: {
         alias: {
-          ALIAS_STORY_STYLE_CONFIG$: resolve(
+          ALIAS_STORY_STYLE_CONFIG: path.resolve(
             configType === 'DEVELOPMENT'
               ? '../ibm-products-styles/src/config-dev.scss'
               : '../ibm-products-styles/src/config.scss'
           ),
         },
       },
-    }),
+    });
+  },
 };

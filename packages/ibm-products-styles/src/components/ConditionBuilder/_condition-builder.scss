@@ -42,6 +42,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__gap-bottom {
   margin-bottom: $spacing-01;
 }
+.#{$block-class}__gap-left {
+  margin-left: $spacing-01;
+}
 .#{$block-class}__condition-block {
   display: flex;
   flex-direction: row;

@@ -11,7 +11,7 @@ import { spacing10, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
-import { FlexGrid, Column, Row, Button, Tag } from '@carbon/react';
+import { FlexGrid, Column, Row, Button, Tag, Tooltip } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
@@ -44,6 +44,7 @@ import { PageHeaderTitle } from './PageHeaderTitle';
 const defaults = {
   fullWidthGrid: false,
   narrowGrid: false,
+  breadcrumbOverflowTooltipAlign: 'right',
 };
 
 export let PageHeader = React.forwardRef(
@@ -880,6 +881,10 @@ PageHeader.propTypes = {
     ({ breadcrumbs }) => breadcrumbs && breadcrumbs.length > 0
   ),
   /**
+   * align breadcrumb overflow tooltip
+   */
+  breadcrumbOverflowTooltipAlign: Tooltip.propTypes.align,
+  /**
    * Specifies the breadcrumb components to be shown in the breadcrumb area of
    * the page header. Each item is specified as an object with optional fields
    * 'label' to supply the breadcrumb label, 'href' to supply the link location,
@@ -984,7 +989,8 @@ PageHeader.propTypes = {
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
    */
-  navigation: PropTypes.element, // Supports Tabs
+  navigation: PropTypes.element,
+  // Supports Tabs
   /**
    * Specifies the primary page actions which are placed at the same level in the page as the title.
    *
@@ -1067,6 +1073,7 @@ PageHeader.propTypes = {
       type: PropTypes.oneOf(tagTypes),
     })
   ),
+
   /**
    * An optional page title supplied as a string or object with the following attributes: text, icon, loading
    *
@@ -1113,6 +1120,7 @@ PageHeader.propTypes = {
       asText: PropTypes.string.isRequired,
     }),
   ]),
+
   /**
    * Specifies if the PageHeader should appear without a background color, and defaults to the preferred `false` (a background color is shown).
    * Note that when `true` some parts of the header still gain a background if and when they stick to the top of the PageHeader on scroll.

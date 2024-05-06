@@ -114,6 +114,9 @@ interface CreateTearsheetStepProps extends PropsWithChildren {
    */
   title: React.ReactNode;
 }
+interface PreviousState {
+  currentStep: number | undefined; // Adjust the type as necessary
+}
 
 export let CreateTearsheetStep = forwardRef(
   (
@@ -146,8 +149,8 @@ export let CreateTearsheetStep = forwardRef(
     const [shouldIncludeStep, setShouldIncludeStep] =
       useState<boolean>(includeStep);
     const previousState = usePreviousValue({
-      currentStep: stepsContext?.['currentStep'],
-    });
+      currentStep: stepsContext?.currentStep,
+    }) as unknown as PreviousState;
 
     useRetrieveStepData({
       stepsContext,
@@ -168,7 +171,7 @@ export let CreateTearsheetStep = forwardRef(
       ) {
         stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, stepsContext, stepNumber, previousState?.['currentStep']]);
+    }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
 
     // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {

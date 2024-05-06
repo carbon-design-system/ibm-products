@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Datagrid } from '../../index';
@@ -17,6 +15,7 @@ import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { multiSelectProps } from './Panel.stories';
 import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';
+import { filterProps } from './Panel.stories';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
@@ -34,7 +33,6 @@ export default {
       },
     },
   },
-  excludeStories: ['FilteringUsage', 'filterProps'],
 };
 
 const FilteringTemplateWrapper = ({ ...args }) => {

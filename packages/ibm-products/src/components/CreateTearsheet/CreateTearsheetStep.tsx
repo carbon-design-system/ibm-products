@@ -166,8 +166,8 @@ export let CreateTearsheetStep = forwardRef(
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
-        stepNumber === stepsContext?.['currentStep'] &&
-        previousState?.['currentStep'] !== stepsContext?.['currentStep']
+        stepNumber === stepsContext?.currentStep &&
+        previousState?.currentStep !== stepsContext?.currentStep
       ) {
         stepsContext?.setOnMount(onMount);
       }

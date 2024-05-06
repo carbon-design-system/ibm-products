@@ -115,7 +115,7 @@ interface CreateTearsheetStepProps extends PropsWithChildren {
   title: React.ReactNode;
 }
 interface PreviousState {
-  currentStep: number | undefined; // Adjust the type as necessary
+  currentStep: number | undefined;
 }
 
 export let CreateTearsheetStep = forwardRef(

@@ -53,7 +53,7 @@ export default {
           primary: 'Replace',
           danger: 'Delete',
           secondary: 'Back',
-          secondary2: 'Keep Both',
+          secondary2: 'Skip',
           dangerGhost: 'Abort',
           ghost: 'Cancel',
         },
@@ -192,11 +192,13 @@ const sampleSlug = (
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, slug, ...args }) => {
+  console.log(actions);
   const [open, setOpen] = useState(false);
 
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
+      console.log(JSON.stringify(actions));
       if (action.label === 'Cancel') {
         const previousClick = action.onClick;
         return {
@@ -400,7 +402,7 @@ tearsheet.args = {
   description,
   onClose: action('onClose called'),
   title,
-  actions: 7,
+  actions: 9,
   selectorPrimaryFocus: '#tss-ft1',
 };
 

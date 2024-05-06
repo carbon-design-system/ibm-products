@@ -8,6 +8,9 @@
 // Import portions of React that are needed.
 import React, {
   Children,
+  PropsWithChildren,
+  ReactNode,
+  isValidElement,
   useCallback,
   useEffect,
   useRef,
@@ -72,13 +75,114 @@ const defaults = {
   startButtonLabel: 'Get started',
 };
 
+type Media = {
+  breakpoints?: {
+    xlg?: number;
+    lg?: number;
+  };
+} & (
+  | {
+      render?: () => ReactNode;
+      filePaths?: never;
+    }
+  | {
+      render?: never;
+      filePaths?: string[];
+    }
+);
+interface InterstitialScreenProps extends PropsWithChildren {
+  /**
+   * Provide the contents of the InterstitialScreen.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * The domain this app belongs to, e.g. "IBM Cloud Pak".
+   */
+  domainName?: string;
+  /**
+   * Provide an optional class to be applied to the <header> element >.
+   */
+  headerClassName?: string;
+  /**
+   * Provide an optional class to be applied to the <header> element >.
+   */
+  headerTitle?: string;
+  /**
+   * Optional parameter to hide the progress indicator when multiple steps are used.
+   */
+  hideProgressIndicator?: boolean;
+
+  /**
+   * The aria label applied to the Interstitial Screen component
+   */
+  interstitialAriaLabel?: string;
+  /**
+   * Specifies whether the component is shown as a full-screen
+   * experience, else it is shown as a modal by default.
+   */
+  isFullScreen?: boolean;
+  /**
+   * Specifies whether the component is currently open.
+   */
+  isOpen?: boolean;
+  /**
+   * The object describing an image in one of two shapes.
+   *
+   * If a single media element is required, use `{render}`.
+   *
+   * If a stepped animation is required, use `{filePaths}`.
+   *
+   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
+   * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
+   * @see {@link MEDIA_PROP_TYPE}.
+   */
+  media?: Media;
+  /**
+   * The label for the Next button.
+   */
+  nextButtonLabel?: string;
+  /**
+   * Function to call when the close button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * The label for the Previous button.
+   */
+  previousButtonLabel?: string;
+  /**
+   * The name of this app, e.g. "QRadar".
+   */
+  productName?: string;
+
+  /**
+   * The label for the skip button.
+   */
+  skipButtonLabel?: string;
+  /**
+   * The label for the start button.
+   */
+  startButtonLabel?: string;
+}
 /**
  * InterstitialScreen can be a full page or an overlay, and are
  * shown on the first time a user accesses a new experience
  * (e.g. upon first login or first time opening a page where a
  * newly purchased capability is presented).
  */
-export let InterstitialScreen = React.forwardRef(
+export let InterstitialScreen = React.forwardRef<
+  HTMLDivElement,
+  InterstitialScreenProps
+>(
   (
     {
       children,
@@ -101,20 +205,20 @@ export let InterstitialScreen = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: InterstitialScreenProps,
     ref
   ) => {
     const backupRef = useRef();
     const _forwardedRef = ref || backupRef;
-    const scrollRef = useRef();
-    const startButtonRef = useRef();
-    const nextButtonRef = useRef();
-    const [isVisibleClass, setIsVisibleClass] = useState(null);
+    const scrollRef = useRef<any>();
+    const startButtonRef = useRef<HTMLElement>();
+    const nextButtonRef = useRef<HTMLElement>();
+    const [isVisibleClass, setIsVisibleClass] = useState<string | null>(null);
     const [progStep, setProgStep] = useState(0);
     const childArray = Children.toArray(children);
     const isMultiStep = childArray.length > 1;
     const mediaIsDefined = media?.render || media?.filePaths;
-    const bodyScrollRef = useRef();
+    const bodyScrollRef = useRef<HTMLDivElement>(null);
     const mediaBreakpoints = {
       xlg: media?.breakpoints?.xlg || 0,
       lg: media?.breakpoints?.lg || 0,
@@ -141,7 +245,7 @@ export let InterstitialScreen = React.forwardRef(
     }, [onClose]);
 
     const scrollBodyToTop = () => {
-      bodyScrollRef.current.scroll({
+      bodyScrollRef.current?.scroll({
         top: 0,
         behavior: 'smooth',
       });
@@ -221,10 +325,12 @@ export let InterstitialScreen = React.forwardRef(
             {!hideProgressIndicator && (
               <div className={`${blockClass}--progress`}>
                 <ProgressIndicator vertical={false} currentIndex={progStep}>
-                  {childArray.map((child, idx) => {
-                    return (
-                      <ProgressStep key={idx} label={child.props.stepTitle} />
-                    );
+                  {childArray.map((child: ReactNode, idx) => {
+                    if (isValidElement(child)) {
+                      return (
+                        <ProgressStep key={idx} label={child.props.stepTitle} />
+                      );
+                    }
                   })}
                 </ProgressIndicator>
               </div>
@@ -268,10 +374,15 @@ export let InterstitialScreen = React.forwardRef(
               {!hideProgressIndicator && (
                 <div className={`${blockClass}--progress`}>
                   <ProgressIndicator vertical={false} currentIndex={progStep}>
-                    {childArray.map((child, idx) => {
-                      return (
-                        <ProgressStep key={idx} label={child.props.stepTitle} />
-                      );
+                    {childArray.map((child: ReactNode, idx) => {
+                      if (isValidElement(child)) {
+                        return (
+                          <ProgressStep
+                            key={idx}
+                            label={child.props.stepTitle}
+                          />
+                        );
+                      }
                     })}
                   </ProgressIndicator>
                 </div>
@@ -503,6 +614,7 @@ InterstitialScreen.propTypes = {
    * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
    * @see {@link MEDIA_PROP_TYPE}.
    */
+  /**@ts-ignore */
   media: PropTypes.oneOfType([
     PropTypes.shape({
       render: PropTypes.func,

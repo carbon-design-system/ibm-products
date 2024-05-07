@@ -252,7 +252,7 @@ DatagridContent.propTypes = {
       PropTypes.func,
     ]),
     isFetching: PropTypes.bool,
-    skeletonRows: PropTypes.number,
+    skeletonRowCount: PropTypes.number,
     fullHeightDatagrid: PropTypes.bool,
     filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,

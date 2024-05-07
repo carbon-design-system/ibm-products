@@ -75,7 +75,7 @@ export let Card = forwardRef(
       secondaryButtonText,
       slug,
       status,
-      step,
+      sequence,
       title,
       titleSize = defaults.titleSize,
 
@@ -287,8 +287,8 @@ export let Card = forwardRef(
             <Pictogram />
           </div>
         )}
-        {getStarted && step && (
-          <div className={`${blockClass}__step`}>{step}</div>
+        {getStarted && sequence && (
+          <div className={`${blockClass}__sequence`}>{sequence}</div>
         )}
         {getStarted && status && (
           <div className={`${blockClass}__status`}>
@@ -377,6 +377,7 @@ Card.propTypes = {
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
+  sequence: PropTypes.number,
 
   /**
    * **Experimental:** For all cases a `Slug` component can be provided.
@@ -385,7 +386,6 @@ Card.propTypes = {
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
   status: PropTypes.oneOf(['none', 'complete', 'incomplete']),
-  step: PropTypes.number,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

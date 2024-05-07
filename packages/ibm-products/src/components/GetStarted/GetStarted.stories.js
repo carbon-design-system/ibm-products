@@ -77,6 +77,7 @@ const Template = (opts) => {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
+  pictogram: (props) => <Crossroads size={32} {...props} />,
 };
 
 export const withPictogram = Template.bind({});
@@ -85,10 +86,10 @@ withPictogram.args = {
   pictogram: (props) => <Crossroads size={32} {...props} />,
 };
 
-export const withStep = Template.bind({});
-withStep.args = {
+export const withSequence = Template.bind({});
+withSequence.args = {
   ...defaultProps,
-  step: 3,
+  sequence: 3,
 };
 
 export const withMediaAndPictogram = Template.bind({});
@@ -98,9 +99,9 @@ withMediaAndPictogram.args = {
   media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
 };
 
-export const withMediaAndStep = Template.bind({});
-withMediaAndStep.args = {
+export const withMediaAndSequence = Template.bind({});
+withMediaAndSequence.args = {
   ...defaultProps,
-  step: 3,
+  sequence: 3,
   media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
 };

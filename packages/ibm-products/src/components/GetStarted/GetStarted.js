@@ -81,14 +81,14 @@ GetStarted.propTypes = {
   pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Provides number for card for tasks in a sequential order
+   */
+  sequence: PropTypes.number,
+
+  /**
    * Provides the status that's displayed at the top of the card
    */
   status: PropTypes.oneOf(['none', 'complete', 'incomplete']),
-
-  /**
-   * Provides step for card for tasks in a sequential order
-   */
-  step: PropTypes.number,
 
   /**
    * Title that's displayed at the top of the card

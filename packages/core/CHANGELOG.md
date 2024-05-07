@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.17.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.5...@carbon/ibm-cloud-cognitive-core@2.17.6) (2024-05-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [2.17.5](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.4...@carbon/ibm-cloud-cognitive-core@2.17.5) (2024-04-30)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#4890](https://github.com/carbon-design-system/ibm-products/issues/4890)) ([d3234ce](https://github.com/carbon-design-system/ibm-products/commit/d3234ceda60feb704b11d5f7c7270b430a11a499)), closes [#4654](https://github.com/carbon-design-system/ibm-products/issues/4654)
+
+
+### Performance Improvements
+
+* use lazyComp and fsCache to increase sb start times ([#4943](https://github.com/carbon-design-system/ibm-products/issues/4943)) ([f6bd2b0](https://github.com/carbon-design-system/ibm-products/commit/f6bd2b0b8bde0c9ed15a6502892d9b9f045e9657))
+
+
+
+
+
 ## [2.17.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.3...@carbon/ibm-cloud-cognitive-core@2.17.4) (2024-04-16)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.73.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.3...@carbon/ibm-products@1.73.0) (2024-05-07)
+
+
+### Features
+
+* instrument v1 packages with JS scope ([#5013](https://github.com/carbon-design-system/ibm-products/issues/5013)) ([284c711](https://github.com/carbon-design-system/ibm-products/commit/284c711c961ef4f7956eb4ef808897638fdb9d73))
+
+
+
+
+
 ## [1.72.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.2...@carbon/ibm-products@1.72.3) (2024-04-09)
 
 

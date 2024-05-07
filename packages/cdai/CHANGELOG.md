@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.13...@carbon/ibm-cloud-cognitive-cdai@1.25.0) (2024-05-07)
+
+
+### Features
+
+* instrument v1 packages with JS scope ([#5013](https://github.com/carbon-design-system/ibm-products/issues/5013)) ([284c711](https://github.com/carbon-design-system/ibm-products/commit/284c711c961ef4f7956eb4ef808897638fdb9d73))
+
+
+
+
+
 ## [1.24.13](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.12...@carbon/ibm-cloud-cognitive-cdai@1.24.13) (2024-04-09)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

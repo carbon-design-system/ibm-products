@@ -29,11 +29,33 @@ const defaults = {
   theme: 'light',
 };
 
+interface CoachmarkHeaderProps {
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * Function to call when the close button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton?: boolean;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+}
+
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Novice to Pro components.
  */
-export let CoachmarkHeader = React.forwardRef(
+export let CoachmarkHeader = React.forwardRef<
+  HTMLElement,
+  CoachmarkHeaderProps
+>(
   (
     {
       closeIconDescription = defaults.closeIconDescription,

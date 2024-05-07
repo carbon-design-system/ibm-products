@@ -10,7 +10,7 @@ import React from 'react';
 import { GetStarted } from '.';
 import mdx from './GetStarted.mdx';
 
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 import { action } from '@storybook/addon-actions';
 import {
   ArrowRight,

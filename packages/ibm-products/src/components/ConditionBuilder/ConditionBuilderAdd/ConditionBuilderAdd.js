@@ -7,7 +7,7 @@ import {
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 
-const ConditionBuilderAdd=({ className, onClick })=> {
+const ConditionBuilderAdd = ({ className, onClick }) => {
   return (
     <div className={className}>
       <ConditionBuilderButton
@@ -20,7 +20,7 @@ const ConditionBuilderAdd=({ className, onClick })=> {
       />
     </div>
   );
-}
+};
 
 export default ConditionBuilderAdd;
 

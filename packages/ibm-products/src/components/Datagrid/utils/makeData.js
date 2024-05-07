@@ -8,7 +8,7 @@
 import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
-import { ExampleSlug } from '../Extensions/Slug/Slug.stories';
+import { ExampleSlug } from './ExampleSlug';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
   const roundedMin = Math.ceil(min);

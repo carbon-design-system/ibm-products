@@ -32,7 +32,7 @@ const SimpleHeader = ({
   breadcrumbs,
   className,
   title,
-  noTrailingSlash,
+  noTrailingSlash = true,
   maxVisible,
   overflowAriaLabel,
   ...rest
@@ -101,10 +101,6 @@ SimpleHeader.propTypes = {
 
   /** Header title */
   title: PropTypes.string,
-};
-
-SimpleHeader.defaultProps = {
-  noTrailingSlash: true,
 };
 
 export { SimpleHeader };

@@ -27,11 +27,33 @@ const defaults = {
   theme: 'light',
 };
 
+interface CoachmarkTaglineProps {
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * Function to call when the close button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+  /**
+   * The title of the tagline.
+   */
+  title: string;
+}
+
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Novice to Pro components.
  */
-export let CoachmarkTagline = React.forwardRef(
+export let CoachmarkTagline = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkTaglineProps
+>(
   (
     {
       closeIconDescription = defaults.closeIconDescription,

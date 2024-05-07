@@ -6,6 +6,104 @@
  */
 
 import { handleFilterTagLabelText } from './handleFilterTagLabelText';
+import { action } from '@storybook/addon-actions';
+import { getDateFormat } from './getDateFormat';
+
+const filters = [
+  {
+    type: 'date',
+    column: 'joined',
+    props: {
+      DatePicker: {
+        datePickerType: 'range',
+        locale: navigator?.language || 'en',
+        dateFormat: getDateFormat(navigator?.language || 'en'),
+      },
+      DatePickerInput: {
+        start: {
+          id: 'date-picker-input-id-start',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
+          labelText: 'Joined start date',
+        },
+        end: {
+          id: 'date-picker-input-id-end',
+          placeholder: getDateFormat(navigator?.language || 'en', true),
+          labelText: 'Joined end date',
+        },
+      },
+    },
+  },
+  {
+    type: 'number',
+    column: 'visits',
+    props: {
+      NumberInput: {
+        min: 0,
+        id: 'visits-number-input',
+        invalidText: 'A valid value is required',
+        label: 'Visits',
+        placeholder: 'Type a number amount of visits',
+      },
+    },
+  },
+  {
+    type: 'checkbox',
+    column: 'passwordStrength',
+    props: {
+      FormGroup: {
+        legendText: 'Password strength',
+      },
+      Checkbox: [
+        {
+          id: 'normal',
+          labelText: 'Normal',
+          value: 'normal',
+        },
+        {
+          id: 'minor-warning',
+          labelText: 'Minor warning',
+          value: 'minor-warning',
+        },
+        {
+          id: 'critical',
+          labelText: 'Critical',
+          value: 'critical',
+        },
+      ],
+    },
+  },
+  {
+    type: 'radio',
+    column: 'role',
+    props: {
+      FormGroup: {
+        legendText: 'Role',
+      },
+      RadioButtonGroup: {
+        orientation: 'vertical',
+        legend: 'Role legend',
+        name: 'role-radio-button-group',
+      },
+      RadioButton: [
+        {
+          id: 'developer',
+          labelText: 'Developer',
+          value: 'developer',
+        },
+        {
+          id: 'designer',
+          labelText: 'Designer',
+          value: 'designer',
+        },
+        {
+          id: 'researcher',
+          labelText: 'Researcher',
+          value: 'researcher',
+        },
+      ],
+    },
+  },
+];
 
 export const generateDummyCheckboxes = Array(25)
   .fill(null)
@@ -15,6 +113,18 @@ export const generateDummyCheckboxes = Array(25)
     value: 'dummy-checkbox',
     disabled: true,
   }));
+
+export const flyoutFilterProps = {
+  variation: 'flyout',
+  updateMethod: 'instant',
+  primaryActionLabel: 'Apply',
+  secondaryActionLabel: 'Cancel',
+  flyoutIconDescription: 'Open filters',
+  onFlyoutOpen: action('onFlyoutOpen'),
+  onFlyoutClose: action('onFlyoutClose'),
+  filters,
+  renderLabel: (key, value) => handleFilterTagLabelText(key, value),
+};
 
 export const filterProps = ({
   includeManyCheckboxes = false,

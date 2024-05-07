@@ -32,6 +32,9 @@
 @use '@carbon/styles/scss/type' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
+// Guidebanner uses the following Carbon for IBM Products components:
+@use '../Carousel/carousel';
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--guidebanner;
 

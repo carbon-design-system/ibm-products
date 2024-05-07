@@ -1856,6 +1856,7 @@ __metadata:
     "@dnd-kit/sortable": "npm:^8.0.0"
     "@dnd-kit/utilities": "npm:^3.2.2"
     "@ibm/telemetry-js": "npm:^1.5.0"
+    "@ibm/telemetry-js-config-generator": "npm:^1.0.3"
     "@rollup/plugin-babel": "npm:^6.0.0"
     "@rollup/plugin-commonjs": "npm:^25.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
@@ -3367,7 +3368,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.4.0, @ibm/telemetry-js@npm:^1.5.0":
+"@ibm/telemetry-js-config-generator@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@ibm/telemetry-js-config-generator@npm:1.0.3"
+  dependencies:
+    commander: "npm:^11.1.0"
+    tmp-promise: "npm:^3.0.3"
+    yaml: "npm:^2.3.4"
+  bin:
+    ibmtelemetry-config: dist/generate-config-file.js
+  checksum: 287cf922848c65d086826ec343c94883831e1186686bb809de5f5b39b05c79235255ef9b2f36c72fdd9b9781e4550a3244bb0d0416d9ee07c318042a9a5da901
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@ibm/telemetry-js@npm:1.2.1"
+  bin:
+    ibmtelemetry: dist/collect.js
+  checksum: 672a116f050f89160015c370f49ce1b7478f21d2686252df3456d62f41a4c4f170ed345a6454c1de3005e03397492ed3aee8d98cf7b5cf27d13b054306dcc21b
+  languageName: node
+  linkType: hard
+
+"@ibm/telemetry-js@npm:^1.4.0, @ibm/telemetry-js@npm:^1.5.0":
   version: 1.5.0
   resolution: "@ibm/telemetry-js@npm:1.5.0"
   bin:
@@ -9536,7 +9559,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:11.1.0":
+"commander@npm:11.1.0, commander@npm:^11.1.0":
   version: 11.1.0
   resolution: "commander@npm:11.1.0"
   checksum: 66bd2d8a0547f6cb1d34022efb25f348e433b0e04ad76a65279b1b09da108f59a4d3001ca539c60a7a46ea38bcf399fc17d91adad76a8cf43845d8dcbaf5cda1
@@ -23447,6 +23470,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tmp-promise@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "tmp-promise@npm:3.0.3"
+  dependencies:
+    tmp: "npm:^0.2.0"
+  checksum: 0ca65b4f233b1d2b01e17a7a62961d32923e4b27383a370bf4d8d52f1062d79c3250e6b6b706ec390e73c9c58c13dc130b3855eedc89c86c7d90beb28b8382e5
+  languageName: node
+  linkType: hard
+
 "tmp@npm:^0.0.33":
   version: 0.0.33
   resolution: "tmp@npm:0.0.33"
@@ -25145,6 +25177,15 @@ __metadata:
   version: 2.3.4
   resolution: "yaml@npm:2.3.4"
   checksum: f8207ce43065a22268a2806ea6a0fa3974c6fde92b4b2fa0082357e487bc333e85dc518910007e7ac001b532c7c84bd3eccb6c7757e94182b564028b0008f44b
+  languageName: node
+  linkType: hard
+
+"yaml@npm:^2.3.4":
+  version: 2.4.2
+  resolution: "yaml@npm:2.4.2"
+  bin:
+    yaml: bin.mjs
+  checksum: 6eafbcd68dead734035f6f72af21bd820c29214caf7d8e40c595671a3c908535cef8092b9660a1c055c5833aa148aa640e0c5fa4adb5af2dacd6d28296ccd81c
   languageName: node
   linkType: hard
 

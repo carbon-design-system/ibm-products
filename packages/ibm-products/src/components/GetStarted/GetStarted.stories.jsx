@@ -52,9 +52,7 @@ export default {
   decorators: [
     (Story) => {
       const carbonPrefix = usePrefix();
-      return (
-        <div className={`${carbonPrefix}--grid card-story`}>{Story()}</div>
-      );
+      return <div className={`${carbonPrefix}--grid`}>{Story()}</div>;
     },
   ],
 };

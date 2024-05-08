@@ -14,7 +14,7 @@ import { BigNumbersSize } from './constants';
 
 import mdx from './BigNumbers.mdx';
 
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 
 const numericOptions = {
   '-123': -123,

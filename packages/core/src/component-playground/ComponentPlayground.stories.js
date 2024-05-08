@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 
 import App from './ComponentPlayground';
 

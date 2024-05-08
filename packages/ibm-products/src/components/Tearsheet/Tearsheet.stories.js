@@ -33,7 +33,7 @@ import {
 } from '../ActionSet/actions.js';
 
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 import { TearsheetNarrow } from './TearsheetNarrow';
 
 // import mdx from './Tearsheet.mdx';
@@ -53,7 +53,7 @@ export default {
           primary: 'Replace',
           danger: 'Delete',
           secondary: 'Back',
-          secondary2: 'Skip',
+          secondary2: 'Keep Both',
           dangerGhost: 'Abort',
           ghost: 'Cancel',
         },
@@ -192,13 +192,11 @@ const sampleSlug = (
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, slug, ...args }) => {
-  console.log(actions);
   const [open, setOpen] = useState(false);
 
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
-      console.log(JSON.stringify(actions));
       if (action.label === 'Cancel') {
         const previousClick = action.onClick;
         return {
@@ -402,7 +400,7 @@ tearsheet.args = {
   description,
   onClose: action('onClose called'),
   title,
-  actions: 9,
+  actions: 7,
   selectorPrimaryFocus: '#tss-ft1',
 };
 

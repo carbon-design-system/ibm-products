@@ -10,7 +10,6 @@ import React from 'react';
 import { GetStarted } from '.';
 import mdx from './GetStarted.mdx';
 
-import styles from './_storybook-styles.scss?inline';
 import { action } from '@storybook/addon-actions';
 import {
   ArrowRight,
@@ -18,7 +17,6 @@ import {
   Time,
   SkillLevelBasic,
 } from '@carbon/react/icons';
-import { Grid, Column, Row, AspectRatio } from '@carbon/react';
 import { usePrefix } from '@carbon/react';
 import abstractImage from './_story-assets/abstract-image.svg';
 
@@ -47,7 +45,6 @@ export default {
   component: GetStarted,
   tags: ['autodocs'],
   parameters: {
-    styles,
     docs: {
       page: mdx,
     },

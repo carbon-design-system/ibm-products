@@ -19,6 +19,9 @@ test.describe('CreateTearsheetNarrow @avt', () => {
         carbonTheme: 'white',
       },
     });
+
+    await page.getByText('Open CreateTearsheetNarrow').click();
+
     await expect(page).toHaveNoACViolations(
       'CreateTearsheetNarrow @avt-default-state'
     );

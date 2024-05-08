@@ -5,7 +5,14 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  ReactNode,
+  PropsWithChildren,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -14,6 +21,7 @@ import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
 import { Tag } from '@carbon/react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { TagBaseProps } from '@carbon/type';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
@@ -33,19 +41,122 @@ const defaults = {
   onOverflowTagChange: () => {},
 };
 
-export let TagSet = React.forwardRef(
+type Align = 'start' | 'center' | 'end';
+type OverflowAlign =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right'
+  | 'right-bottom'
+  | 'right-top';
+type OverflowType = 'default' | 'tag';
+
+// interface TagType extends TagBaseProps
+// {
+//   label: string;
+//   // we duplicate this prop to improve the DocGen
+//   type?: typeof tagTypes[number];
+// }
+
+type TagType = {
+  label: string;
+  type?: (typeof tagTypes)[number];
+} & TagBaseProps;
+interface TagSetProps extends PropsWithChildren {
+  /**
+   * align the Tags displayed by the TagSet. Default start.
+   */
+  align?: Align;
+  /**
+   * label text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchLabel?: string;
+  /**
+   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchPlaceholderText?: string;
+  /**
+   * portal target for the all tags modal
+   */
+  allTagsModalTarget?: ReactNode;
+  /**
+   * title for the show all modal. **Note: Required if more than 10 tags**
+   */
+  allTagsModalTitle?: string;
+  /**
+   * className
+   */
+  className?: string;
+  /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  containingElementRef?: React.RefObject<HTMLElement>;
+  /**
+   * maximum visible tags
+   */
+  maxVisible?: number;
+  /**
+   * Specify offset amount for measure available space, only used when `containingElementSelector`
+   * is also provided
+   */
+  measurementOffset?: number;
+  /**
+   * display tags in multiple lines
+   */
+  multiline?: boolean;
+  /**
+   * Handler to get overflow tags
+   */
+  onOverflowTagChange?: (value: any) => void;
+  /**
+   * overflowAlign from the standard tooltip. Default center.
+   */
+  overflowAlign?: OverflowAlign;
+  /**
+   * overflowClassName for the tooltip popup
+   */
+  overflowClassName?: string;
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType?: OverflowType;
+  /**
+   * label for the overflow show all tags link.
+   *
+   * **Note:** Required if more than 10 tags
+   */
+  showAllTagsLabel: string;
+  /**
+   * The tags to be shown in the TagSet. Each tag is specified as an object
+   * with properties: **label**\* (required) to supply the tag content, and
+   * other properties will be passed to the Carbon Tag component, such as
+   * **type**, **disabled**, **ref**, **className** , and any other Tag props.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
+   */
+  tags?: TagType[];
+}
+
+export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
 
-      align = defaults.align,
+      align = 'start',
       allTagsModalTarget,
       className,
       maxVisible,
       multiline,
-      overflowAlign = defaults.overflowAlign,
+      overflowAlign = 'bottom',
       overflowClassName,
-      overflowType = defaults.overflowType,
+      overflowType = 'default',
       allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
@@ -57,19 +168,19 @@ export let TagSet = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: TagSetProps,
+    ref: React.Ref<HTMLDivElement>
   ) => {
-    const [displayCount, setDisplayCount] = useState(3);
-    const [displayedTags, setDisplayedTags] = useState([]);
-    const [hiddenSizingTags, setHiddenSizingTags] = useState([]);
+    const [displayCount, setDisplayCount] = useState<any>(3);
+    const [displayedTags, setDisplayedTags] = useState<JSX.Element[]>([]);
+    const [hiddenSizingTags, setHiddenSizingTags] = useState<JSX.Element[]>([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
-    const localTagSetRef = useRef(null);
+    const localTagSetRef = useRef<HTMLDivElement>(null);
     const tagSetRef = ref || localTagSetRef;
-    const sizingContainerRef = useRef();
+    const sizingContainerRef = useRef<HTMLDivElement>(null);
     const displayedArea = useRef(null);
-    const [sizingTags, setSizingTags] = useState([]);
-    const overflowTag = useRef(null);
+    const [sizingTags, setSizingTags] = useState<HTMLDivElement[]>([]);
+    const overflowTag = useRef<HTMLDivElement>(null);
 
     const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -78,7 +189,7 @@ export let TagSet = React.forwardRef(
     };
 
     useEffect(() => {
-      const newSizingTags = [];
+      const newSizingTags: HTMLDivElement[] = [];
       // create sizing tags
       setHiddenSizingTags(
         tags && tags.length > 0
@@ -87,7 +198,9 @@ export let TagSet = React.forwardRef(
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
-                  ref={(el) => (newSizingTags[index] = el)}
+                  ref={(el) => {
+                    if (el != null) {newSizingTags[index] = el;}
+                  }}
                 >
                   <Tag
                     {...other} // ensure id is not duplicated
@@ -185,9 +298,9 @@ export let TagSet = React.forwardRef(
           typeof measurementOffset === 'number' ? measurementOffset : 0;
         let spaceAvailable = optionalContainingElement
           ? optionalContainingElement.offsetWidth - measurementOffsetValue
-          : tagSetRef.current.offsetWidth;
+          : tagSetRef?.['current'].offsetWidth;
 
-        for (let i in sizingTags) {
+        for (const i in sizingTags) {
           const tagWidth = sizingTags[i]?.offsetWidth || 0;
 
           if (spaceAvailable >= tagWidth) {
@@ -198,7 +311,7 @@ export let TagSet = React.forwardRef(
           }
         }
 
-        if (willFit < sizingTags.length) {
+        if (willFit < sizingTags.length && overflowTag.current) {
           while (
             willFit > 0 &&
             spaceAvailable < overflowTag.current.offsetWidth
@@ -327,7 +440,7 @@ const TYPES = {
 };
 const tagTypes = Object.keys(TYPES);
 
-TagSet.types = tagTypes;
+TagSet['types'] = tagTypes;
 
 TagSet.propTypes = {
   /**
@@ -358,6 +471,7 @@ TagSet.propTypes = {
    * Optional ref for custom resize container to measure available space
    * Default will measure the available space of the TagSet container itself.
    */
+  /**@ts-ignore */
   containingElementRef: PropTypes.object,
   /**
    * maximum visible tags

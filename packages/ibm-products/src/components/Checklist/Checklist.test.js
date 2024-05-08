@@ -20,6 +20,7 @@ const componentName = Checklist.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const list1itemCallbackFn = jest.fn();
 const taskLists = [
   {
     title: 'List 1 title',
@@ -27,7 +28,7 @@ const taskLists = [
       {
         kind: 'checked',
         label: 'Checked task with callback',
-        onClick: () => {},
+        onClick: list1itemCallbackFn,
       },
       {
         kind: 'checked',
@@ -161,5 +162,15 @@ describe(componentName, () => {
     const viewAllButton = screen.getByText(viewAllLabel).closest('button');
     await click(viewAllButton);
     expect(onClickViewAllFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call list item onClick handler', async () => {
+    const { click } = userEvent;
+    renderComponent();
+    const taskItemWithCallback = screen
+      .getByText('Checked task with callback')
+      .closest('button');
+    await click(taskItemWithCallback);
+    expect(list1itemCallbackFn).toHaveBeenCalledTimes(1);
   });
 });

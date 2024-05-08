@@ -30,8 +30,13 @@ const defaults = {
   searchLabel: '',
 };
 
+interface TagType {
+  label: string;
+}
+type AllTags = TagType[] & Omit<React.ComponentProps<Tag>, 'filter'>[];
+
 interface TagSetModalProps {
-  allTags?: Omit<React.ComponentProps<Tag>, 'filter'>[];
+  allTags?: AllTags;
   className?: string;
   onClose?: () => void;
   open?: boolean;
@@ -55,13 +60,11 @@ export const TagSetModal = ({
   // Collect any other property values passed in.
   ...rest
 }: TagSetModalProps) => {
-  const [filteredModalTags, setFilteredModalTags] = useState<
-    Omit<React.ComponentProps<Tag>, 'filter'>[]
-  >([]);
+  const [filteredModalTags, setFilteredModalTags] = useState<AllTags>([]);
   const [search, setSearch] = useState('');
   const renderPortalUse = usePortalTarget(portalTargetIn);
   useEffect(() => {
-    let newFilteredModalTags: Omit<React.ComponentProps<Tag>, 'filter'>[] = [];
+    let newFilteredModalTags: AllTags = [];
     if (open) {
       if (search === '' && allTags) {
         newFilteredModalTags = allTags?.slice(0);

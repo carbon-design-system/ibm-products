@@ -11,7 +11,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/layout/scss/convert' as *;
@@ -37,7 +37,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__sequence {
-    @include type.type-style('heading-05');
+    @include type-style('heading-05');
 
     padding-top: $spacing-05;
     padding-left: $spacing-05;
@@ -91,9 +91,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     }
   }
 
+  //meta-data
   .#{$block-class}__actions {
     padding: $spacing-05;
     gap: $spacing-04;
+    @include type-style('label-01');
 
     .#{$block-class}__icon {
       display: flex;

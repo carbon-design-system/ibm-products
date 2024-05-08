@@ -18,8 +18,9 @@ import {
   Time,
   SkillLevelBasic,
 } from '@carbon/react/icons';
-import { AspectRatio } from '@carbon/react';
+import { Grid, Column, Row, AspectRatio } from '@carbon/react';
 import { usePrefix } from '@carbon/react';
+import abstractImage from './_story-assets/abstract-image.svg';
 
 const defaultProps = {
   label: 'Prepare your data',
@@ -96,12 +97,12 @@ export const withMediaAndPictogram = Template.bind({});
 withMediaAndPictogram.args = {
   ...defaultProps,
   pictogram: (props) => <Crossroads size={32} {...props} />,
-  media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
+  media: <img src={abstractImage} alt="abstract Image" />,
 };
 
 export const withMediaAndSequence = Template.bind({});
 withMediaAndSequence.args = {
   ...defaultProps,
   sequence: 3,
-  media: <AspectRatio ratio={'1x1'}>{'1x1'}</AspectRatio>,
+  media: <img src={abstractImage} alt="abstract Image" />,
 };

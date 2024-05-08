@@ -35,12 +35,15 @@ const ConditionGroupBuilder = ({
     }
   };
 
-  const onChangeHandler = (updatedCondition, conditionId) => {
+  const onChangeHandler = (updatedCondition, conditionIndex) => {
+    const updatedConditions = [
+      ...group.conditions.slice(0, conditionIndex),
+      updatedCondition,
+      ...group.conditions.slice(conditionIndex + 1),
+    ];
     onChange({
       ...group,
-      conditions: group.conditions.map((condition) =>
-        condition.id == conditionId ? updatedCondition : condition
-      ),
+      conditions: updatedConditions,
     });
   };
 
@@ -53,26 +56,14 @@ const ConditionGroupBuilder = ({
       id: uuidv4(),
     };
 
-    let currentConditions = JSON.parse(JSON.stringify(group.conditions));
-    currentConditions.splice(conditionIndex + 1, 0, newCondition);
     onChange({
       ...group,
-      conditions: currentConditions,
+      conditions: [
+        ...group.conditions.slice(0, conditionIndex + 1),
+        newCondition,
+        ...group.conditions.slice(conditionIndex + 1),
+      ],
     });
-    // onChange({
-    //   ...group,
-    //   conditions: [
-    //     ...group.conditions.slice(0, conditionIndex + 1),
-    //     {
-    //       property: undefined,
-    //       operator: '',
-    //       value: '',
-    //       popoverToOpen: 'propertyField',
-    //       id:uuidv4()
-    //     },
-    //     ...group.conditions.slice(conditionIndex + 1),
-    //   ],
-    // });
   };
 
   const isLastCondition = (conditionIndex, conditionArr) => {
@@ -114,7 +105,7 @@ const ConditionGroupBuilder = ({
                 }}
                 group={eachCondition}
                 onChange={(updatedCondition) => {
-                  onChangeHandler(updatedCondition, eachCondition.id);
+                  onChangeHandler(updatedCondition, conditionIndex);
                 }}
                 onRemove={(e) => {
                   onRemoveHandler(eachCondition.id, e);
@@ -139,7 +130,7 @@ const ConditionGroupBuilder = ({
                 conditionIndex={conditionIndex}
                 className={`${blockClass}__gap ${blockClass}__gap-bottom`}
                 onChange={(updatedConditions) => {
-                  onChangeHandler(updatedConditions, eachCondition.id);
+                  onChangeHandler(updatedConditions, conditionIndex);
                 }}
                 addConditionHandler={addConditionHandler}
                 onRemove={(e) => {

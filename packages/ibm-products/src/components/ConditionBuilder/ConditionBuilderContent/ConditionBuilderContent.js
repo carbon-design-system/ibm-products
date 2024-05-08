@@ -48,16 +48,19 @@ const ConditionBuilderContent = ({
     [setRootState, rootState]
   );
 
-  const onChangeHandler = (updatedGroup, groupId) => {
+  const onChangeHandler = (updatedGroup, groupIndex) => {
     /**
      * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
      * This gets the updated group as argument.
      */
+    const groups = [
+      ...rootState.groups.slice(0, groupIndex),
+      updatedGroup,
+      ...rootState.groups.slice(groupIndex + 1),
+    ];
     setRootState({
       ...rootState,
-      groups: rootState.groups.map((group) =>
-        groupId === group.id ? updatedGroup : group
-      ),
+      groups,
     });
   };
   return (
@@ -90,7 +93,7 @@ const ConditionBuilderContent = ({
               onRemove(eachGroup.id);
             }}
             onChange={(updatedGroup) => {
-              onChangeHandler(updatedGroup, eachGroup.id);
+              onChangeHandler(updatedGroup, groupIndex);
             }}
             conditionBuilderRef={conditionBuilderRef}
           />

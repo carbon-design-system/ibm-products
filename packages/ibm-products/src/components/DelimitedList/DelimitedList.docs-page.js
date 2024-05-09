@@ -3,7 +3,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 import * as stories from './DelimitedList.stories';
 
-const DocsPage = () => (
+export const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
@@ -18,5 +18,3 @@ const DocsPage = () => (
     ]}
   />
 );
-
-export default DocsPage;

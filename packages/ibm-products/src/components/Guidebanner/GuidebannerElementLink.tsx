@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Link } from '@carbon/react';
@@ -17,10 +17,25 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element-link`;
 const componentName = 'GuidebannerElementLink';
 
+interface GuidebannerElementLinkProps {
+  /**
+   * Provide the contents of the GuidebannerElementLink.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
+
 /**
  * A link styled specifically for the GuidebannerElement.
  */
-export let GuidebannerElementLink = ({ children, className, ...rest }) => {
+export let GuidebannerElementLink = React.forwardRef<
+  Link,
+  GuidebannerElementLinkProps
+>(({ children, className, ...rest }: GuidebannerElementLinkProps) => {
   return (
     <Link
       {...rest}
@@ -33,7 +48,7 @@ export let GuidebannerElementLink = ({ children, className, ...rest }) => {
       {children}
     </Link>
   );
-};
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 GuidebannerElementLink = pkg.checkComponentEnabled(

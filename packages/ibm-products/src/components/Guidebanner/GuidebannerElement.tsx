@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -16,17 +16,34 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element`;
 const componentName = 'GuidebannerElement';
 
+interface GuidebannerElementProps {
+  /**
+   * An optional button can be rendered below the description.
+   * This can be a link, button, Coachmark button, etc.
+   */
+  button: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * The description of the element.
+   */
+  description: string | ReactNode;
+  /**
+   * The title of the element.
+   */
+  title?: string;
+}
+
 /**
  * The GuidebannerElement is a required child component of the Guidebanner,
  * and acts as a container for a CarouselItem.
  */
-export let GuidebannerElement = ({
-  button,
-  className,
-  description,
-  title,
-  ...rest
-}) => {
+export let GuidebannerElement = React.forwardRef<
+  HTMLDivElement,
+  GuidebannerElementProps
+>(({ button, className, description, title, ...rest }) => {
   return (
     <div
       {...rest}
@@ -38,7 +55,7 @@ export let GuidebannerElement = ({
       {button && <div className={`${blockClass}-buttons`}>{button}</div>}
     </div>
   );
-};
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 GuidebannerElement = pkg.checkComponentEnabled(

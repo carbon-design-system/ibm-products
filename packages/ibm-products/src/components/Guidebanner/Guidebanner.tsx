@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { blue90, purple70 } from '@carbon/colors';
@@ -19,6 +19,62 @@ import { pkg } from '../../settings';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = 'Guidebanner';
+
+interface GuidebannerProps {
+  /**
+   * Provide the contents of the Guidebanner.
+   * One or more GuidebannerElement components are required.
+   *
+   * TODO: Re-apply custom prop validation?
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * Text label for the Collapse button.
+   */
+  collapseButtonLabel?: string;
+  /**
+   * When true, the Guidebanner will initialize in a collapsed state,
+   * showing the title and the Expand button.
+   *
+   * When expanded, it will show the GuidebannerElement child components and the Collapse button.
+   */
+  collapsible?: boolean;
+  /**
+   * Text label for the Expand button.
+   */
+  expandButtonLabel?: string;
+  /**
+   * Tooltip text and aria label for the Next button icon.
+   */
+  nextIconDescription?: string;
+  /**
+   * If defined, a Close button will render in the top-right corner and a
+   * callback function will be triggered when button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * Tooltip text and aria label for the Back button icon.
+   */
+  previousIconDescription?: string;
+  /**
+   * Title text.
+   */
+  title: string;
+  /**
+   * If true, insert 1 rem of "space" on the left of the component.
+   * This will allow the component's content to line up with other
+   * content on the page under special circumstances.
+   */
+  withLeftGutter?: boolean;
+}
 
 const defaults = {
   collapsible: false,
@@ -35,7 +91,7 @@ const defaults = {
  * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
  */
-export let Guidebanner = React.forwardRef(
+export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
   (
     {
       children,
@@ -54,8 +110,8 @@ export let Guidebanner = React.forwardRef(
     },
     ref
   ) => {
-    const scrollRef = useRef();
-    const toggleRef = useRef();
+    const scrollRef = useRef<any>(null);
+    const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button } from '@carbon/react';
@@ -18,15 +18,31 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element-button`;
 const componentName = 'GuidebannerElementButton';
 
+interface GuidebannerElementButtonProps {
+  /**
+   * Provide the contents of the GuidebannerElementLink.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * If type is "primary", then return a tertiary button with the "crossroads" icon,
+   * else return a ghost button.
+   */
+  type?: string;
+}
+
 /**
  * One of two buttons styled specifically for the GuidebannerElement.
  */
-export let GuidebannerElementButton = ({
-  children,
-  className,
-  type,
-  ...rest
-}) => {
+export let GuidebannerElementButton = React.forwardRef<
+  Button,
+  GuidebannerElementButtonProps
+>(({ children, className, type, ...rest }: GuidebannerElementButtonProps) => {
   if (type === 'primary') {
     return (
       <Button
@@ -56,7 +72,7 @@ export let GuidebannerElementButton = ({
       {children}
     </Button>
   );
-};
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 GuidebannerElementButton = pkg.checkComponentEnabled(

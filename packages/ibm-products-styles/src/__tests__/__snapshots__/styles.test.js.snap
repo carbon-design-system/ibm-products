@@ -2708,7 +2708,7 @@ p.c4p--about-modal__copyright-text:first-child {
   z-index: 9001;
   align-items: flex-end;
   color: var(--cds-text-primary, #161616);
-  transition: visibility 0s linear 240ms;
+  transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
   --c4p--tearsheet--stacking-scale-factor-single: 0.95;
   --c4p--tearsheet--stacking-scale-factor-double: 0.9;
 }
@@ -3988,6 +3988,11 @@ p.c4p--about-modal__copyright-text:first-child {
   margin: 0 calc(-1 * 1rem);
 }
 
+.c4p--datagrid__sortableColumn:hover,
+.c4p--datagrid__sortableColumn:focus-within,
+.c4p--datagrid__sortableColumn.c4p--datagrid__isSorted {
+  background-color: var(--cds-layer-selected-hover-01, #d1d1d1);
+}
 .c4p--datagrid__sortableColumn:hover .cds--table-header-label .c4p--datagrid__sortable-icon,
 .c4p--datagrid__sortableColumn:focus-within .cds--table-header-label .c4p--datagrid__sortable-icon,
 .c4p--datagrid__sortableColumn.c4p--datagrid__isSorted .cds--table-header-label .c4p--datagrid__sortable-icon {

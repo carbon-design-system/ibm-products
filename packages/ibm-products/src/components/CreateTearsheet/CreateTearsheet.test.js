@@ -480,11 +480,8 @@ describe(CreateTearsheet.displayName, () => {
     }));
 
   it('should render an invalid create tearsheet', async () =>
-    expectMultipleWarn(
-      [
-        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
-        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
-      ],
+    expectWarn(
+      `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       () => {
         renderInvalidCreateTearsheet(defaultProps);
       }

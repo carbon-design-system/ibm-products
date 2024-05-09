@@ -5,9 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, ReactNode, useState, useRef, createContext, PropsWithChildren } from 'react';
+import React, {
+  forwardRef,
+  ReactNode,
+  useState,
+  useRef,
+  createContext,
+  PropsWithChildren,
+  ForwardedRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+// @ts-ignore
 import { Form, SideNav, SideNavItems, SideNavMenuItem } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -80,7 +89,7 @@ interface EditTearsheetProps extends PropsWithChildren {
    * an influencer nav item.
    * Returns the index of the selected form.
    */
-  onFormChange?: ( formIndex: number ) => number;
+  onFormChange?: (formIndex: number) => number;
 
   /**
    * Specify a handler for submitting the tearsheet.
@@ -141,8 +150,8 @@ export let EditTearsheet = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    } : EditTearsheetProps,
-    ref 
+    }: EditTearsheetProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const actions = [
       {
@@ -158,7 +167,7 @@ export let EditTearsheet = forwardRef(
         kind: 'ghost',
       },
     ];
-    
+
     const [currentForm, setCurrentForm] = useState(0);
     const [formTitles, setFormTitles] = useState([]);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -206,7 +215,7 @@ export let EditTearsheet = forwardRef(
           children,
           className: cx(blockClass, className),
           description,
-          influencerPosition: "left",
+          influencerPosition: 'left',
           influencerWidth,
           label,
           onClose,
@@ -217,16 +226,18 @@ export let EditTearsheet = forwardRef(
           ...rest,
           hasCloseIcon: false,
           influencer: defaultInfluencer(),
-          ref
+          ref,
         }}
       >
         <div className={`${blockClass}__content`} ref={contentRef} role="main">
           <Form>
             <FormContext.Provider
-              value={{
-                currentForm,
-                setFormTitles,
-              }}
+              value={
+                {
+                  currentForm,
+                  setFormTitles,
+                } as any
+              }
             >
               {React.Children.map(children, (child, index) => (
                 <FormNumberContext.Provider value={index}>

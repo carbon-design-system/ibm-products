@@ -8,11 +8,7 @@
 
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
-import {
-  expectWarn,
-  expectWarnAsync,
-  expectMultipleWarn,
-} from '../../global/js/utils/test-helper';
+import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';

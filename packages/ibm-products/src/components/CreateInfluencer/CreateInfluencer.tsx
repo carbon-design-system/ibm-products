@@ -17,6 +17,14 @@ import { pkg } from '../../settings';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencer';
+
+interface Step {
+  introStep?: boolean;
+  secondaryLabel?: string;
+  shouldIncludeStep?: boolean;
+  title?: string;
+}
+
 interface CreateInfluencerProps {
   /**
    * Provide an optional class to be applied to the containing node.
@@ -29,7 +37,7 @@ interface CreateInfluencerProps {
   /**
    * Provide the Set Data.
    */
-  stepData: any[];
+  stepData: Step[];
   /**
    * Title.
    */

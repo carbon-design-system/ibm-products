@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ProgressIndicator, ProgressStep } from '@carbon/react';
@@ -17,8 +17,30 @@ import { pkg } from '../../settings';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencer';
-
-export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
+interface CreateInfluencerProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Provide the current step number.
+   */
+  currentStep: number;
+  /**
+   * Provide the Set Data.
+   */
+  stepData: any[];
+  /**
+   * Title.
+   */
+  title: string;
+}
+export const CreateInfluencer = ({
+  className,
+  currentStep,
+  stepData,
+  title,
+}: PropsWithChildren<CreateInfluencerProps>) => {
   const getNumberOfDynamicStepsBeforeCurrentStep = (array, key) => {
     const dynamicSteps = [];
     array.forEach((item, index) => {

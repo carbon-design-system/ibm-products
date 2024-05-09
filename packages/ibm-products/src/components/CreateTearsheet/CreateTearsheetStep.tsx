@@ -30,7 +30,37 @@ const defaults = {
   includeStep: true,
 };
 
-interface CreateTearsheetStepProps extends PropsWithChildren {
+type FieldsetProps =
+  | {
+      /**
+       * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+       * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+       * Otherwise, use CSS to hide/remove this label text.
+       */
+      fieldsetLegendText: string;
+      /**
+       * This optional prop will render your form content inside of a fieldset html element
+       * and is defaulted to true.
+       * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+       */
+      hasFieldset?: true;
+    }
+  | {
+      /**
+       * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+       * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+       * Otherwise, use CSS to hide/remove this label text.
+       */
+      fieldsetLegendText?: never;
+      /**
+       * This optional prop will render your form content inside of a fieldset html element
+       * and is defaulted to true.
+       * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+       */
+      hasFieldset?: false;
+    };
+
+interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   /**
    * Content that shows in the tearsheet step
    */
@@ -50,20 +80,6 @@ interface CreateTearsheetStepProps extends PropsWithChildren {
    * This will conditionally disable the submit button in the multi step Tearsheet
    */
   disableSubmit?: boolean;
-
-  /**
-   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-   * Otherwise, use CSS to hide/remove this label text.
-   */
-  fieldsetLegendText: string;
-
-  /**
-   * This optional prop will render your form content inside of a fieldset html element
-   * and is defaulted to true.
-   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-   */
-  hasFieldset?: boolean;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -114,9 +130,10 @@ interface CreateTearsheetStepProps extends PropsWithChildren {
    */
   title: React.ReactNode;
 }
-interface PreviousState {
+interface PreviousStateProps {
   currentStep: number | undefined;
 }
+type CreateTearsheetStepProps = CreateTearsheetStepBaseProps & FieldsetProps;
 
 export let CreateTearsheetStep = forwardRef(
   (
@@ -144,13 +161,13 @@ export let CreateTearsheetStep = forwardRef(
     }: CreateTearsheetStepProps,
     ref
   ) => {
-    const stepsContext = useContext(StepsContext) as any;
+    const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] =
       useState<boolean>(includeStep);
     const previousState = usePreviousValue({
       currentStep: stepsContext?.currentStep,
-    }) as unknown as PreviousState;
+    }) as PreviousStateProps | undefined;
 
     useRetrieveStepData({
       stepsContext,
@@ -158,7 +175,7 @@ export let CreateTearsheetStep = forwardRef(
       introStep: !!introStep,
       shouldIncludeStep,
       secondaryLabel: secondaryLabel || '',
-      title: title || '',
+      title,
       invalid: !!invalid,
     });
 
@@ -182,7 +199,7 @@ export let CreateTearsheetStep = forwardRef(
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
       if (stepNumber === stepsContext?.currentStep) {
-        stepsContext.setIsDisabled(disableSubmit);
+        stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
       }
@@ -289,6 +306,7 @@ CreateTearsheetStep.propTypes = {
    * and is defaulted to true.
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
    */
+  /**@ts-ignore*/
   hasFieldset: PropTypes.bool,
 
   /**

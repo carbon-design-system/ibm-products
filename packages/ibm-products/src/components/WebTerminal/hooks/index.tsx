@@ -11,15 +11,13 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../../settings';
 
 export interface WebTerminalContextType {
-  open: boolean;
-  openWebTerminal: () => void;
-  closeWebTerminal: () => void;
-  toggleWebTerminal: () => void;
+  open?: boolean;
+  openWebTerminal?: () => void;
+  closeWebTerminal?: () => void;
+  toggleWebTerminal?: () => void;
 }
 
-export const WebTerminalContext = createContext<WebTerminalContextType | null>(
-  null
-);
+export const WebTerminalContext = createContext<WebTerminalContextType>({});
 
 const componentName = 'WebTerminalProvider';
 

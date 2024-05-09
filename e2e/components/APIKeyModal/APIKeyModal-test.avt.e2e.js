@@ -19,6 +19,9 @@ test.describe('APIKeyModal @avt', () => {
         carbonTheme: 'white',
       },
     });
+
+    await page.getByRole('button', { name: 'Generate API key' }).click();
+
     await expect(page).toHaveNoACViolations('APIKeyModal @avt-default-state');
   });
 });

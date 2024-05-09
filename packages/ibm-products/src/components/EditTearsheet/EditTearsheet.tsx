@@ -33,7 +33,6 @@ const defaults = {
   sideNavAriaLabel: 'Side navigation' as const,
 };
 
-
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 interface EditTearsheetProps extends PropsWithChildren {
@@ -145,6 +144,21 @@ export let EditTearsheet = forwardRef(
     } : EditTearsheetProps,
     ref 
   ) => {
+    const actions = [
+      {
+        key: 'edit-action-button-submit',
+        label: submitButtonText,
+        onClick: onRequestSubmit,
+        kind: 'primary',
+      },
+      {
+        key: 'edit-action-button-cancel',
+        label: cancelButtonText,
+        onClick: onClose,
+        kind: 'ghost',
+      },
+    ];
+    
     const [currentForm, setCurrentForm] = useState(0);
     const [formTitles, setFormTitles] = useState([]);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -183,28 +197,12 @@ export let EditTearsheet = forwardRef(
       );
     }
 
-    const actions= [
-      {
-        key: 'edit-action-button-submit',
-        label: submitButtonText,
-        onClick: onRequestSubmit,
-        kind: 'primary',
-      },
-      {
-        key: 'edit-action-button-cancel',
-        label: cancelButtonText,
-        onClick: onClose,
-        kind: 'ghost',
-      },
-    ];
-
     return (
       <TearsheetShell
         {...{
           ...getDevtoolsProps(componentName),
           ...prepareProps(rest),
           actions,
-          cancelButtonText,
           children,
           className: cx(blockClass, className),
           description,
@@ -214,12 +212,8 @@ export let EditTearsheet = forwardRef(
           onClose,
           open,
           size: 'wide',
-          submitButtonText,
           title,
           verticalPosition,
-          onRequestSubmit,
-          onFormChange,
-          sideNavAriaLabel,
           ...rest,
           hasCloseIcon: false,
           influencer: defaultInfluencer(),

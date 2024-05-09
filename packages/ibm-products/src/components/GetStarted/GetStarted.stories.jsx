@@ -21,18 +21,18 @@ import { usePrefix } from '@carbon/react';
 import abstractImage from './_story-assets/abstract-image.svg';
 
 const defaultProps = {
-  label: 'Prepare your data',
-  title: 'Generate synthetic Tabular data',
+  label: 'Label',
+  title: 'Title',
   metaData: [
     {
       id: '1',
       icon: (props) => <Time size={16} {...props} />,
-      iconDescription: 'Duration',
+      iconDescription: '2 mins',
     },
     {
       id: '2',
       icon: (props) => <SkillLevelBasic size={16} {...props} />,
-      iconDescription: 'Level',
+      iconDescription: 'Beginner',
     },
   ],
   footerActionIcon: (props) => <ArrowRight size={16} {...props}></ArrowRight>,

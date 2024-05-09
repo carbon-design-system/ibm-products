@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -38,6 +38,18 @@ const componentName = 'EditTearsheetNarrow';
 //   /* TODO: add defaults for relevant props if needed */
 // };
 
+interface EditTearsheetNarrowProps {
+  /**
+   * Provide the contents of the EditTearsheetNarrow.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
+
 /**
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling. See usage guidance for further information.
  */
@@ -52,7 +64,7 @@ export let EditTearsheetNarrow = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: EditTearsheetNarrowProps,
     ref
   ) => {
     return (

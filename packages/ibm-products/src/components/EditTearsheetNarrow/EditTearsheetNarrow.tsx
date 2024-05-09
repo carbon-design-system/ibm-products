@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ForwardedRef, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -65,7 +65,7 @@ export let EditTearsheetNarrow = React.forwardRef(
       // Collect any other property values passed in.
       ...rest
     }: EditTearsheetNarrowProps,
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <div

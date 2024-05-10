@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelect } from '../AddSelect';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -14,28 +14,107 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 
 const componentName = 'SingleAddSelect';
 
+type EntryType = {
+  id: string;
+  title: string;
+  value: string;
+  children?: object;
+};
+
+interface SingleAddSelectProps {
+  /**
+   * optional class name
+   */
+  className?: string;
+  /**
+   * text description that appears under the title
+   */
+  description?: string;
+  /**
+   * label for global search input
+   */
+  globalSearchLabel?: string;
+  /**
+   * placeholder for global search input
+   */
+  globalSearchPlaceholder?: string;
+  /**
+   * object that contains the item data. for more information reference the
+   * "Structuring items" section in the docs tab
+   */
+  items?: {
+    entries: EntryType[];
+  };
+  /**
+   * label that display above the list of items
+   */
+  itemsLabel?: string;
+  /**
+   * text to display when no results are found from the global search
+   */
+  noResultsDescription?: string;
+  /**
+   * title to display when no results are found from the global search
+   */
+  noResultsTitle?: string;
+  /**
+   * function to call when the close button clicked
+   */
+  onClose?: () => void;
+  /**
+   * text for close button
+   */
+  onCloseButtonText?: string;
+  /**
+   * function to call when the submit button is clicked. returns a selection
+   */
+  onSubmit?: () => void;
+  /**
+   * text for the submit button
+   */
+  onSubmitButtonText?: string;
+  /**
+   * specifies if the component is open or not
+   */
+  open?: boolean;
+  /**
+   * text that displays when displaying filtered items
+   */
+  searchResultsLabel?: string;
+  /**
+   * header text
+   */
+  title?: string;
+}
+
 /**
  * Used to add or select one or more items from larger lists or hierarchies.
  */
-export let SingleAddSelect = forwardRef((props, ref) => {
-  // remove multi add select specific props
-  const validProps = prepareProps(props, [
-    'columnInputPlaceholder',
-    'globalFilters',
-    'globalFiltersIconDescription',
-    'globalFiltersPlaceholderText',
-    'globalFiltersPrimaryButtonText',
-    'globalFiltersSecondaryButtonText',
-    'influencerTitle',
-    'multi',
-    'noSelectionDescription',
-    'noSelectionTitle',
-    'removeIconDescription',
-  ]);
-  return (
-    <AddSelect {...validProps} ref={ref} {...getDevtoolsProps(componentName)} />
-  );
-});
+export let SingleAddSelect = forwardRef(
+  (props: SingleAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => {
+    // remove multi add select specific props
+    const validProps = prepareProps(props, [
+      'columnInputPlaceholder',
+      'globalFilters',
+      'globalFiltersIconDescription',
+      'globalFiltersPlaceholderText',
+      'globalFiltersPrimaryButtonText',
+      'globalFiltersSecondaryButtonText',
+      'influencerTitle',
+      'multi',
+      'noSelectionDescription',
+      'noSelectionTitle',
+      'removeIconDescription',
+    ]);
+    return (
+      <AddSelect
+        {...validProps}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      />
+    );
+  }
+);
 
 SingleAddSelect = pkg.checkComponentEnabled(SingleAddSelect, componentName);
 
@@ -43,6 +122,7 @@ SingleAddSelect.propTypes = {
   /**
    * optional class name
    */
+  /**@ts-ignore */
   className: PropTypes.string,
   /**
    * text description that appears under the title
@@ -60,6 +140,7 @@ SingleAddSelect.propTypes = {
    * object that contains the item data. for more information reference the
    * "Structuring items" section in the docs tab
    */
+  /**@ts-ignore */
   items: PropTypes.shape({
     entries: PropTypes.arrayOf(
       PropTypes.shape({

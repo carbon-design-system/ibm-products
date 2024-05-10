@@ -178,7 +178,9 @@ const getOptions = async ({ property }) => {
 const requiredProps = {
   startConditionLabel: 'Add Condition',
   popOverSearchThreshold: 4,
-  getConditionState: () => {},
+  getConditionState: (rootState) => {
+    console.log(rootState);
+  },
   variant: 'sentence',
 };
 /**

@@ -205,7 +205,7 @@
       "npx prettier --cache --write",
       "npx stylelint --allow-empty-input"
     ],
-    "!(examples/**/*).{md}": [
+    "!(examples/**/*).md": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files"
     ]

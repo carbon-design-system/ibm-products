@@ -19,6 +19,8 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
+
+    await page.getByLabel('Notifications').click();
     await expect(page).toHaveNoACViolations(
       'NotificationsPanel @avt-default-state'
     );

@@ -19,7 +19,7 @@ type Theme = 'light' | 'dark';
 type Modifier = {
   id?: string;
   label?: string;
-  options?: Array<any>;
+  options?: string[];
 };
 type Avatar = {
   alt?: string;
@@ -37,7 +37,7 @@ type Entry = {
   title: string;
   value: string;
   avatar?: Avatar;
-  children?: object;
+  children?: ReactNode;
   icon?: () => void;
   meta?: Meta[] | ReactNode;
   subtitle?: string;
@@ -45,8 +45,8 @@ type Entry = {
 type ItemType = {
   entries: Entry[];
   modifiers?: Modifier;
-  sortBy?: Array<any>;
-  filterBy?: Array<any>;
+  sortBy?: string[];
+  filterBy?: string[];
 };
 
 export interface AddSelectProps {

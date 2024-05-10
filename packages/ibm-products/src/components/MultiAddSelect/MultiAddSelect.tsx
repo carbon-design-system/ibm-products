@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelect } from '../AddSelect';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -21,7 +21,7 @@ type Filter = {
 
 type Modifier = {
   label?: string;
-  options?: Array<any>;
+  options?: string[];
 };
 
 interface Entry {
@@ -31,7 +31,7 @@ interface Entry {
     src?: string;
     theme?: 'light' | 'dark';
   };
-  children?: object;
+  children?: ReactNode;
   icon?: () => void;
   id: string;
   subtitle?: string;
@@ -44,8 +44,8 @@ type Theme = 'light' | 'dark';
 type ItemType = {
   entries?: Entry[];
   modifiers: Modifier;
-  sortBy: Array<any>;
-  filterBy: Array<any>;
+  sortBy: string[];
+  filterBy: string[];
 };
 
 interface MultiAddSelectProps {
@@ -155,16 +155,14 @@ interface MultiAddSelectProps {
  * Used to add or select multiple or more items from larger lists or hierarchies.
  */
 export let MultiAddSelect = forwardRef(
-  (props: MultiAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => {
-    return (
-      <AddSelect
-        {...(props as AddSelectProps)}
-        multi
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      />
-    );
-  }
+  (props: MultiAddSelectProps, ref: ForwardedRef<HTMLDivElement>) => (
+    <AddSelect
+      {...(props as AddSelectProps)}
+      multi
+      ref={ref}
+      {...getDevtoolsProps(componentName)}
+    />
+  )
 );
 
 MultiAddSelect = pkg.checkComponentEnabled(MultiAddSelect, componentName);

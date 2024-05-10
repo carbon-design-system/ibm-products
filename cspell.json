@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -77,6 +81,7 @@
     "colindex",
     "columnheader",
     "combobox",
+    "combobutton",
     "createmodal",
     "csstools",
     "dasharray",
@@ -92,6 +97,7 @@
     "editinplace",
     "editsidepanel",
     "emptystate",
+    "erroremptystate",
     "expressivecard",
     "fullpageerror",
     "gridcell",
@@ -105,6 +111,8 @@
     "listbox",
     "loglevel",
     "namor",
+    "nodataemptystate",
+    "nonlinearreading",
     "noreply",
     "overridable",
     "overscroll",

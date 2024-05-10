@@ -34,7 +34,7 @@
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
     "format": "run-p -s 'format:*'",
-    "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,md,mdx,scss} --write --ignore-unknown",
+    "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,md,scss} --write --ignore-unknown",
     "format:e2e": "prettier ./e2e/**/*.js --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
@@ -205,7 +205,7 @@
       "npx prettier --cache --write",
       "npx stylelint --allow-empty-input"
     ],
-    "!(examples/**/*).{md,mdx}": [
+    "!(examples/**/*).{md}": [
       "npx prettier --cache --write",
       "npx cspell --no-must-find-files"
     ]

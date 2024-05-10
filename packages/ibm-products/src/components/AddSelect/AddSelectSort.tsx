@@ -14,14 +14,27 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select-sort`;
 const componentName = 'AddSelectSort';
 
-export let AddSelectSort = ({
+type SortOption = {
+  id?: string;
+  direction?: string;
+  attribute?: string;
+  itemText?: object;
+};
+export interface AddSelectSortProps {
+  setSortAttribute?: (attribute) => void;
+  setSortDirection?: (direction) => void;
+  sortBy?: Array<string>;
+  sortByLabel?: string;
+}
+
+export const AddSelectSort = ({
   setSortAttribute,
   setSortDirection,
   sortBy,
   sortByLabel,
-}) => {
-  const sortByOpts = sortBy
-    ? sortBy.reduce((acc, cur) => {
+}: AddSelectSortProps) => {
+  const sortByOpts: SortOption[] = sortBy
+    ? sortBy?.reduce((acc: SortOption[], cur: string) => {
         const opts = [
           {
             id: `${cur}-asc`,
@@ -51,9 +64,9 @@ export let AddSelectSort = ({
     : [];
 
   // handlers
-  const sortHandler = ({ direction, attribute }) => {
-    setSortAttribute(attribute);
-    setSortDirection(direction);
+  const sortHandler = ({ direction, attribute }: SortOption) => {
+    setSortAttribute?.(attribute);
+    setSortDirection?.(direction);
   };
 
   return (
@@ -66,14 +79,16 @@ export let AddSelectSort = ({
           aria-label={sortByLabel}
           iconDescription={sortByLabel}
         >
-          {sortByOpts.map((opt) => (
-            <OverflowMenuItem
-              className={`${blockClass}_overflow-item`}
-              key={opt.id}
-              itemText={opt.itemText}
-              onClick={() => sortHandler(opt)}
-            />
-          ))}
+          {sortByOpts.map((opt) => {
+            return (
+              <OverflowMenuItem
+                className={`${blockClass}_overflow-item`}
+                key={opt?.id}
+                itemText={opt?.itemText}
+                onClick={() => sortHandler(opt)}
+              />
+            );
+          })}
         </OverflowMenu>
       )}
     </div>

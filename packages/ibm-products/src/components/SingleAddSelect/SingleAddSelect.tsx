@@ -11,6 +11,7 @@ import { AddSelect } from '../AddSelect';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { AddSelectProps } from '../AddSelect/AddSelect';
 
 const componentName = 'SingleAddSelect';
 
@@ -105,7 +106,8 @@ export let SingleAddSelect = forwardRef(
       'noSelectionDescription',
       'noSelectionTitle',
       'removeIconDescription',
-    ]);
+    ]) as AddSelectProps;
+
     return (
       <AddSelect
         {...validProps}

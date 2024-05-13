@@ -11,6 +11,10 @@ import React, {
   useEffect,
   forwardRef,
   useState,
+  MutableRefObject,
+  Dispatch,
+  SetStateAction,
+  ForwardedRef,
 } from 'react';
 import PropTypes from 'prop-types';
 import { FixedSizeList } from 'react-window';
@@ -35,6 +39,180 @@ import {
 } from './utils/commonEventHandlers';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
+
+interface ActiveCellCoordinates {
+  row?: number | string;
+  column?: number | string;
+}
+
+interface Column {
+  rowHeight?: number;
+  rowHeaderWidth?: number;
+  width?: number;
+  Header?: string;
+  accessor?: string | (() => void);
+  Cell?: () => void;
+}
+
+interface DataSpreadsheetBodyProps {
+  /**
+   * Object containing the active cell coordinates
+   */
+  activeCellCoordinates?: ActiveCellCoordinates;
+
+  /**
+   *This is the ref of the button input, which is the active cell element
+   */
+  activeCellRef?: MutableRefObject<HTMLElement | undefined>;
+  /**
+   * Is the user clicking and holding in the data spreadsheet body
+   */
+  clickAndHoldActive?: boolean;
+
+  /**
+   * All of the spreadsheet columns
+   */
+  columns?: readonly Column[];
+
+  /**
+   * This represents the id of the current cell selection area
+   */
+  currentMatcher?: string;
+
+  /**
+   * Default spreadsheet sizing values
+   */
+  defaultColumn?: Column;
+
+  /**
+   * Sets the number of empty rows to be created when there is no data provided
+   */
+  defaultEmptyRowCount?: number;
+
+  /**
+   * Function to set table body prop values
+   */
+  getTableBodyProps?: () => { data };
+
+  /**
+   * Headers provided from useTable hook
+   */
+  headerGroups?: any[];
+
+  /**
+   * The spreadsheet id
+   */
+  id?: number | string;
+
+  /**
+   * The event handler that is called when the active cell changes
+   */
+  onActiveCellChange?: () => void;
+
+  /**
+   * The event handler that is called to set the rows for the empty spreadsheet
+   */
+  onDataUpdate?: ({ ...args }) => void;
+
+  /**
+   * The event handler that is called when the selection areas change
+   */
+  onSelectionAreaChange?: ({ ...args }) => void;
+
+  /**
+   * Prepare row function from react-table
+   */
+  prepareRow?: (...args) => void;
+
+  /**
+   * All of the spreadsheet row data
+   */
+  rows?: any[];
+
+  /**
+   * The scrollbar width
+   */
+  scrollBarSize?: number;
+
+  /**
+   * Array of selection area data
+   */
+  selectionAreaData?: object[];
+
+  /**
+   * Array of selection areas
+   */
+  selectionAreas?: any[];
+
+  /**
+   * Setter fn for activeCellCoordinates state value
+   */
+  setActiveCellCoordinates?: Dispatch<
+    SetStateAction<ActiveCellCoordinates | undefined>
+  >;
+
+  /**
+   * Setter fn for active cell inside of selection area
+   */
+  setActiveCellInsideSelectionArea?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * Setter fn for clickAndHold state value
+   */
+  setClickAndHoldActive?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * Setter fn for column ordering, provided from react-table
+   */
+  setColumnOrder?: () => void;
+
+  /**
+   * Setter fn for containerHasFocus state value
+   */
+  setContainerHasFocus?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * Setter fn for currentMatcher state value
+   */
+  setCurrentMatcher?: Dispatch<SetStateAction<string>>;
+
+  /**
+   * Setter fn for header cell hold active value
+   */
+  setHeaderCellHoldActive?: Dispatch<SetStateAction<boolean>>;
+
+  /**
+   * Setter fn for selectionAreaData state value
+   */
+  setSelectionAreaData?: Dispatch<SetStateAction<object[]>>;
+
+  /**
+   * Setter fn for selectionAreas state value
+   */
+  setSelectionAreas?: Dispatch<SetStateAction<object[]>>;
+
+  /**
+   * The total columns width
+   */
+  totalColumnsWidth?: number;
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns?: number;
+
+  /**
+   * Prop from react-table used to reorder columns
+   */
+  visibleColumns?: [];
+}
+
+type PrevState = {
+  selectionAreaData?: object[];
+  clickAndHoldActive?: boolean;
+  rowHeight?: number;
+};
 
 export const DataSpreadsheetBody = forwardRef(
   (
@@ -68,35 +246,37 @@ export const DataSpreadsheetBody = forwardRef(
       setHeaderCellHoldActive,
       setColumnOrder,
       visibleColumns,
-    },
-    ref
+    }: DataSpreadsheetBodyProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [validStartingPoint, setValidStartingPoint] = useState(false);
-    const contentScrollRef = useRef();
+    const contentScrollRef: MutableRefObject<HTMLDivElement | undefined> =
+      useRef();
 
-    const previousState = usePreviousValue({
-      selectionAreaData,
-      clickAndHoldActive,
-      rowHeight: defaultColumn.rowHeight,
-    });
+    const previousState: PrevState =
+      usePreviousValue({
+        selectionAreaData,
+        clickAndHoldActive,
+        rowHeight: defaultColumn?.rowHeight,
+      }) || {};
 
     // Set custom css property containing the spreadsheet total width
     useEffect(() => {
-      ref?.current.style.setProperty(
+      (ref as MutableRefObject<HTMLDivElement>)?.current?.style.setProperty(
         `--${blockClass}--total-width`,
-        px(totalColumnsWidth + scrollBarSize)
+        px((totalColumnsWidth || 0) + (scrollBarSize || 0))
       );
     }, [ref, scrollBarSize, totalColumnsWidth]);
 
     // Call the `onSelectionAreaChange` handler to send selection area data
     // back to the consumer
     useEffect(() => {
-      if (selectionAreaData.length) {
+      if (selectionAreaData?.length) {
         if (
           (!clickAndHoldActive && previousState?.clickAndHoldActive) ||
           previousState?.selectionAreaData?.length !== selectionAreaData?.length
         ) {
-          onSelectionAreaChange(selectionAreaData);
+          onSelectionAreaChange?.(selectionAreaData);
         }
       }
     }, [
@@ -112,7 +292,7 @@ export const DataSpreadsheetBody = forwardRef(
       if (selectionAreas && selectionAreas.length) {
         selectionAreas.map((area) => {
           // Setup selection area data that will be sent back to consumer via onSelectionAreaChange prop
-          if (area.areaCreated) {
+          if (area?.areaCreated) {
             const rowStart = Math.min(area.point1.row, area.point2.row);
             const rowEnd = Math.max(area.point1.row, area.point2.row);
             const columnStart = Math.min(
@@ -137,7 +317,7 @@ export const DataSpreadsheetBody = forwardRef(
               }),
               selectionId: area.matcher,
             };
-            setSelectionAreaData((prev) => {
+            setSelectionAreaData?.((prev) => {
               const prevValues = deepCloneObject(prev);
               const newAreaData = prevValues.filter(
                 (item) => item.selectionId !== area.matcher
@@ -178,7 +358,7 @@ export const DataSpreadsheetBody = forwardRef(
       columnStart,
       columnEnd,
     }) => {
-      const cellContainer = [];
+      const cellContainer: unknown[] = [];
       for (let rowIndex = rowStart; rowIndex <= rowEnd; rowIndex++) {
         for (
           let columnIndex = columnStart;
@@ -216,28 +396,31 @@ export const DataSpreadsheetBody = forwardRef(
     // cell also gets updated with the new size and new top placement
     // value. All of the cell selections will be updated as well
     useEffect(() => {
-      const listContainer = spreadsheetBodyRef?.current;
-      const activeCellButton = listContainer.querySelector(
-        `.${blockClass}__active-cell--highlight`
-      );
+      const activeCellButton = (
+        spreadsheetBodyRef as MutableRefObject<any>
+      )?.current.querySelector(`.${blockClass}__active-cell--highlight`);
       if (
         activeCellButton &&
-        defaultColumn.rowHeight !== previousState.rowHeight
+        defaultColumn?.rowHeight !== previousState.rowHeight
       ) {
         activeCellButton.style.height = `${defaultColumn?.rowHeight}px`;
         if (activeCellCoordinates) {
-          const activeTargetElement = ref.current.querySelector(
+          const activeTargetElement = (
+            ref as MutableRefObject<HTMLElement>
+          ).current.querySelector(
             `[data-row-index="${activeCellCoordinates.row}"][data-column-index="${activeCellCoordinates.column}"]`
           );
-          const listContainer = ref.current.querySelector(
-            `.${blockClass}__list--container`
-          );
+          const listContainer = (
+            ref as MutableRefObject<HTMLElement>
+          ).current.querySelector(`.${blockClass}__list--container`);
           const newActiveCellTopPosition =
+            activeTargetElement &&
+            listContainer &&
             activeTargetElement.getBoundingClientRect().top -
-            listContainer.getBoundingClientRect().top;
+              listContainer.getBoundingClientRect().top;
           activeCellButton.style.top = px(newActiveCellTopPosition);
-          removeCellSelections({ spreadsheetRef: ref });
-          selectionAreas.map((area) => {
+          removeCellSelections({ matcher: undefined, spreadsheetRef: ref });
+          selectionAreas?.map((area) => {
             if (
               !area.areaCreated &&
               area.point1 &&
@@ -272,32 +455,33 @@ export const DataSpreadsheetBody = forwardRef(
     //this method will check for any duplicate selection area and remove.
     //same selections are those have the same height, width, top, left styles. These inline styles are being set in createCellSelection util.
     const removeDuplicateSelections = useCallback(() => {
-      let uniqueAttrArray = [],
-        removedSelectionAreaMatcherArr = [];
-      ref.current
+      const uniqueAttrArray: string[] = [],
+        removedSelectionAreaMatcherArr: string[] = [];
+      (ref as MutableRefObject<HTMLElement>)?.current
         .querySelectorAll(`.${blockClass}__selection-area--element`)
         .forEach((selectorEl) => {
-          let { top, left, height, width } = selectorEl.style;
-          let uniqueAttrStr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
+          const { top, left, height, width } = (selectorEl as HTMLElement)
+            .style;
+          const uniqueAttrStr = `${top}${left}${height}${width}`; // eg: 20px30px70px90px
           if (uniqueAttrArray.indexOf(uniqueAttrStr) == -1) {
             uniqueAttrArray.push(uniqueAttrStr);
           } else {
             selectorEl.remove(); // this is identified as duplicate selection and hence removing.
             removedSelectionAreaMatcherArr.push(
-              selectorEl.getAttribute('data-matcher-id')
+              selectorEl.getAttribute('data-matcher-id') as string
             );
           }
         });
 
       //clean the duplicate selectionAreaData and selectionArea
       if (removedSelectionAreaMatcherArr.length) {
-        setSelectionAreas((prev) => {
+        setSelectionAreas?.((prev) => {
           const prevValues = deepCloneObject(prev);
           return prevValues.filter(
             (item) => !removedSelectionAreaMatcherArr.includes(item.matcher)
           );
         });
-        setSelectionAreaData((prev) => {
+        setSelectionAreaData?.((prev) => {
           const prevValues = deepCloneObject(prev);
           return prevValues.filter(
             (item) => !removedSelectionAreaMatcherArr.includes(item.selectionId)
@@ -354,18 +538,25 @@ export const DataSpreadsheetBody = forwardRef(
     );
 
     const handleBodyScroll = () => {
-      const headerRowElement = ref.current.querySelector(`
-        .${blockClass}__header--container .${blockClass}__tr`);
-      headerRowElement.scrollLeft = contentScrollRef.current.scrollLeft;
+      const headerRowElement =
+        (ref as MutableRefObject<HTMLElement>).current.querySelector(`
+        .${blockClass}__header--container .${blockClass}__tr`) ||
+        new HTMLElement();
+      headerRowElement.scrollLeft = (
+        contentScrollRef as MutableRefObject<HTMLElement>
+      )?.current?.scrollLeft;
     };
 
     useEffect(() => {
-      contentScrollRef.current.addEventListener('scroll', (event) =>
-        handleBodyScroll(event)
-      );
+      (
+        contentScrollRef as MutableRefObject<HTMLElement>
+      )?.current.addEventListener('scroll', () => handleBodyScroll());
       const contentScrollElementRef = contentScrollRef.current;
       return () => {
-        contentScrollElementRef.removeEventListener('scroll', handleBodyScroll);
+        (contentScrollElementRef as HTMLElement)?.removeEventListener(
+          'scroll',
+          handleBodyScroll
+        );
       };
     });
 
@@ -418,15 +609,15 @@ export const DataSpreadsheetBody = forwardRef(
     useEffect(() => {
       if (!rows?.length) {
         const buildEmptyRows = () => {
-          const emptyRowData = [];
+          const emptyRowData: object[] = [];
           [...Array(defaultEmptyRowCount)].map(() => {
             const emptyCell = {};
-            headerGroups[0]?.headers.map((header) => {
+            headerGroups?.[0]?.headers?.map((header) => {
               emptyCell[header.id] = null;
             });
             emptyRowData.push(emptyCell);
           });
-          onDataUpdate(emptyRowData);
+          onDataUpdate?.(emptyRowData);
         };
         buildEmptyRows();
       }
@@ -439,12 +630,12 @@ export const DataSpreadsheetBody = forwardRef(
     // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
-        const row = rows[index];
+        const row = rows?.[index];
         if (rows && rows.length) {
-          prepareRow(row);
+          prepareRow?.(row);
           return (
             <div
-              {...row.getRowProps({ style })}
+              {...row?.getRowProps?.({ style })}
               className={cx(`${blockClass}__tr`)}
               data-row-index={index}
               aria-rowindex={index + 1}
@@ -538,9 +729,9 @@ export const DataSpreadsheetBody = forwardRef(
     const spreadsheetBodyRef = useRef();
     return (
       <div
-        ref={spreadsheetBodyRef}
+        ref={spreadsheetBodyRef as MutableRefObject<any>}
         className={cx(`${blockClass}__body--container`)}
-        {...getTableBodyProps()}
+        {...getTableBodyProps?.()}
       >
         <FixedSizeList
           className={cx(
@@ -548,7 +739,7 @@ export const DataSpreadsheetBody = forwardRef(
             `${blockClass}__list--container--${id}`
           )}
           height={400}
-          itemCount={rows.length || defaultEmptyRowCount}
+          itemCount={rows?.length || defaultEmptyRowCount}
           itemSize={defaultColumn?.rowHeight}
           width={getSpreadsheetWidth({
             scrollBarSizeValue: scrollBarSize,
@@ -556,7 +747,7 @@ export const DataSpreadsheetBody = forwardRef(
             defaultColumn,
             totalColumnsWidth,
             visibleColumns,
-          })}
+          } as any)}
           outerRef={contentScrollRef}
         >
           {rows?.length ? RenderRow : RenderEmptyRows}
@@ -570,6 +761,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Object containing the active cell coordinates
    */
+  /**@ts-ignore */
   activeCellCoordinates: PropTypes.shape({
     row: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     column: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -578,6 +770,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    *This is the ref of the button input, which is the active cell element
    */
+  /**@ts-ignore */
   activeCellRef: PropTypes.object,
   /**
    * Is the user clicking and holding in the data spreadsheet body
@@ -597,6 +790,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Default spreadsheet sizing values
    */
+  /**@ts-ignore */
   defaultColumn: PropTypes.shape({
     rowHeight: PropTypes.number,
     rowHeaderWidth: PropTypes.number,
@@ -722,5 +916,6 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Prop from react-table used to reorder columns
    */
+  /**@ts-ignore */
   visibleColumns: PropTypes.array,
 };

@@ -1,5 +1,8 @@
-# Default
-* @carbon-design-system/carbon-for-ibm-products-development
+# These owners will be the default owners for everything in the
+# repo. Unless a later match takes precedence, this team will
+# be requested for review when someone opens a pull request.
+
+* @carbon-design-system/carbon-for-ibm-products-reviewers
 
 # Security package
 /packages/security/ @jlongshore @paul-balchin-ibm

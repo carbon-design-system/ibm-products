@@ -32,11 +32,46 @@ const defaults = {
   theme: 'light',
 };
 
+interface CoachmarkDragbarProps {
+  /**
+   * Handler to manage keyboard interactions with the dragbar.
+   */
+  a11yKeyboardHandler: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * Function to call when the close button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * Function to call when the user clicks and drags the Coachmark.
+   * For internal use only by the parent CoachmarkOverlay.
+   */
+  onDrag?: (movementX: number, movementY: number) => void;
+  /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton?: boolean;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+  /**
+   * Additional props passed to the component.
+   */
+  [key: string]: any;
+}
+
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Novice to Pro components.
  */
-export let CoachmarkDragbar = React.forwardRef(
+export let CoachmarkDragbar = React.forwardRef<
+  HTMLElement,
+  CoachmarkDragbarProps
+>(
   (
     {
       a11yKeyboardHandler,
@@ -96,6 +131,8 @@ export let CoachmarkDragbar = React.forwardRef(
           className={`${overlayBlockClass}__handle`}
           onMouseDown={handleDragStart}
           onKeyDown={a11yKeyboardHandler}
+          // TODO: i18n
+          title="Drag Handle"
         >
           <Draggable size="16" />
         </button>

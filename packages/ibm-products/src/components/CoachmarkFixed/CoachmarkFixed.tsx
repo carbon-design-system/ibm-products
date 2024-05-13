@@ -6,7 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  ReactNode,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -29,6 +35,40 @@ const blockClass = `${coachmarkClass}-fixed`;
 const overlayBlockClass = `${coachmarkClass}-overlay`;
 const componentName = 'CoachmarkFixed';
 
+interface CoachmarkFixedProps {
+  /**
+   * CoachmarkFixed should use a single CoachmarkOverlayElements component as a child.
+   */
+  children: ReactNode;
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * Function to call when the Coachmark closes.
+   */
+  onClose?: () => void;
+  /**
+   * By default, the Coachmark will be appended to the end of `document.body`.
+   * The Coachmark will remain persistent as the user navigates the app until
+   * the user closes the Coachmark.
+   *
+   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
+   * element or other component by specifying a CSS selector. The Coachmark will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the Coachmark will disappear.
+   */
+  portalTarget?: string;
+  /**
+   * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
+   */
+  tagline: string;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+}
+
 const defaults = {
   onClose: () => {},
   theme: 'light',
@@ -41,7 +81,10 @@ const defaults = {
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the a coachmark overlay to be displayed by interacting with the tagline.
  */
-export let CoachmarkFixed = React.forwardRef(
+export let CoachmarkFixed = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkFixedProps
+>(
   (
     {
       children,
@@ -55,7 +98,7 @@ export let CoachmarkFixed = React.forwardRef(
     },
     ref
   ) => {
-    const overlayRef = useRef();
+    const overlayRef = useRef<HTMLDivElement>(null);
     const portalNode = portalTarget
       ? document.querySelector(portalTarget) ?? document.querySelector('body')
       : document.querySelector('body');
@@ -186,7 +229,8 @@ export let CoachmarkFixed = React.forwardRef(
               >
                 {children}
               </CoachmarkOverlay>,
-              portalNode
+              // Default to `document.body` when `portalNode` is `null`
+              portalNode || document.body
             )}
         </div>
       </CoachmarkContext.Provider>

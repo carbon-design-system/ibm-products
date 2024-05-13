@@ -11,7 +11,7 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('Guidebanner @avt', () => {
-  test('@avt-default-state', async ({ page }) => {
+  test('@avt-collapsible-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Guidebanner',
       id: 'ibm-products-novice-to-pro-guidebanner--collapsible',
@@ -19,6 +19,8 @@ test.describe('Guidebanner @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Guidebanner @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'Guidebanner @avt-collapsible-state'
+    );
   });
 });

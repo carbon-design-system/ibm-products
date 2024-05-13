@@ -167,9 +167,7 @@ export let AboutModal = React.forwardRef(
           label={title}
           labelClassName={`${blockClass}__title`}
         />
-        <ModalBody
-          className={`${blockClass}__body`}
-        >
+        <ModalBody className={`${blockClass}__body`}>
           <div
             className={`${blockClass}__body-content`}
             ref={contentRef}

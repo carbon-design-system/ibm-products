@@ -13,7 +13,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { ForwardedRef, useEffect, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -98,10 +104,6 @@ interface ChecklistProps {
    */
   open?: boolean;
   /**
-   * Whether or not to show the open/close toggle.
-   */
-  showToggle?: boolean;
-  /**
    * The task list can be broken down into sub-lists.
    *
    * Each sub-list can include an optional `title`.
@@ -120,7 +122,7 @@ interface ChecklistProps {
   /**
    * The title of the component.
    */
-  title?: string;
+  title?: ReactNode;
   /**
    * The label for the toggle's tooltip.
    */

@@ -24,11 +24,11 @@ import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
  */
 
 const ConditionBlock = (props) => {
-  let { property, value, operator } = props.state;
-  let {
+  const { property, value, operator } = props.condition;
+  const {
     onRemove,
     onChange,
-    state,
+    condition,
     conjunction,
     onConnectorOperatorChange,
     isStatement,
@@ -36,6 +36,7 @@ const ConditionBlock = (props) => {
     onStatementChange,
     addConditionHandler,
     conditionIndex,
+    isLastCondition,
   } = props;
   const { inputConfig } = useContext(ConditionBuilderContext);
   const itemComponents = {
@@ -52,16 +53,8 @@ const ConditionBlock = (props) => {
   const getCurrentConfig = (property) => {
     return (
       inputConfig.properties?.filter(
-        (eachProperty) =>
-          eachProperty.label?.toUpperCase() == property?.toUpperCase()
+        (eachProperty) => eachProperty.id == property
       )[0] ?? {}
-    );
-  };
-  const isLastCondition = (conditionIndex, conditionArr) => {
-    return (
-      conditionIndex + 1 >= conditionArr.length ||
-      (conditionArr.length - 1 != conditionIndex &&
-        conditionArr[conditionIndex + 1].conditions)
     );
   };
 
@@ -74,9 +67,10 @@ const ConditionBlock = (props) => {
   const onConnectorOperatorChangeHandler = (op) => {
     onConnectorOperatorChange(op);
   };
+
   const onPropertyChangeHandler = (newProperty) => {
     onChange({
-      ...state,
+      ...condition,
       property: newProperty,
       operator: undefined,
       value: '',
@@ -85,7 +79,7 @@ const ConditionBlock = (props) => {
   };
   const onOperatorChangeHandler = (newOperator) => {
     onChange({
-      ...state,
+      ...condition,
       operator: newOperator,
       value: undefined,
       popoverToOpen: 'valueField',
@@ -93,7 +87,7 @@ const ConditionBlock = (props) => {
   };
   const onValueChangeHandler = (newValue) => {
     onChange({
-      ...state,
+      ...condition,
       value: newValue,
       popoverToOpen: '',
     });
@@ -131,6 +125,7 @@ const ConditionBlock = (props) => {
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
+          tabIndex={0}
         >
           <ConditionBuilderItemOption
             conditionState={{
@@ -139,7 +134,7 @@ const ConditionBlock = (props) => {
             }}
             onChange={onStatementChangeHandler}
             config={{ options: statementConfig }}
-          ></ConditionBuilderItemOption>
+          />
         </ConditionBuilderItem>
       )}
 
@@ -157,7 +152,7 @@ const ConditionBlock = (props) => {
         renderIcon={icon ?? null}
         className={`${blockClass}__property-field`}
         data-name="propertyField"
-        state={state}
+        condition={condition}
         type={type}
       >
         <ConditionBuilderItemOption
@@ -174,7 +169,7 @@ const ConditionBlock = (props) => {
           label={operator}
           title={translateWithId('operator')}
           data-name="operatorField"
-          state={state}
+          condition={condition}
           type={type}
         >
           <ConditionBuilderItemOption
@@ -196,7 +191,7 @@ const ConditionBlock = (props) => {
           title={label}
           showToolTip={true}
           data-name="valueField"
-          state={state}
+          condition={condition}
           config={config}
         >
           <ItemComponent
@@ -250,18 +245,26 @@ ConditionBlock.propTypes = {
    */
   aria: PropTypes.object,
   /**
+   * object that hold the current condition
+   */
+  condition: PropTypes.object,
+  /**
    * index of the current condition
    */
   conditionIndex: PropTypes.number,
+
   /**
    * string that decides to show the condition connector
    */
   conjunction: PropTypes.string,
-
   /**
    * object that hold the current group object where is condition is part of
    */
   group: PropTypes.object,
+  /**
+   * callback to add a new condition
+   */
+  isLastCondition: PropTypes.func,
   /**
    *  boolean that decides to show the statement(if/ excl.if)
    */
@@ -274,17 +277,14 @@ ConditionBlock.propTypes = {
    * callback to handle the connector(and/or) change
    */
   onConnectorOperatorChange: PropTypes.func,
+
   /**
    * callback for Remove a condition
    */
   onRemove: PropTypes.func,
+
   /**
    * callback to handle the statement(if/ excl.if) change
    */
   onStatementChange: PropTypes.func,
-
-  /**
-   * object that hold the current condition
-   */
-  state: PropTypes.object,
 };

@@ -21,6 +21,7 @@ collect:
         - alt
         - apiKey
         - appliedModifiers
+        - aria
         - ariaLabel
         - ariaToolbarLabel
         - assistiveText
@@ -43,6 +44,9 @@ collect:
         - collapsible
         - columnInputPlaceholder
         - columns
+        - conditionBuilderRef
+        - conditionState
+        - config
         - count
         - currentMatcher
         - currentStep
@@ -69,6 +73,8 @@ collect:
         - firstFocusElement
         - formDescription
         - formTitle
+        - getConditionState
+        - getOptions
         - globalFilters
         - globalFiltersIconDescription
         - globalFiltersLabel
@@ -102,6 +108,7 @@ collect:
         - influencerPosition
         - influencerTitle
         - influencerWidth
+        - initialState
         - initialStep
         - inputConfig
         - inputLabel
@@ -159,6 +166,7 @@ collect:
         - onMount
         - onNext
         - onPrimaryButtonClick
+        - onRemove
         - onRequestClose
         - onRequestSubmit
         - onScroll
@@ -229,6 +237,7 @@ collect:
         - setSelectionAreas
         - showAllTagsLabel
         - showCloseButton
+        - showToolTip
         - sideNavAriaLabel
         - size
         - slideIn
@@ -236,6 +245,7 @@ collect:
         - small
         - sortByLabel
         - startConditionLabel
+        - state
         - status
         - style
         - submitButtonText
@@ -257,6 +267,7 @@ collect:
         - useDragOverlay
         - value
         - valueTitle
+        - variant
         - verticalPosition
         - viewAllLabel
         - viewLessLabel
@@ -358,6 +369,8 @@ collect:
         - tooltipDescription
         - total
         - trending
+        # BreadcrumbWithOverflow
+        - overflowTooltipAlign
         # ButtonMenu
         - menuAriaLabel
         # ButtonSetWithOverflow
@@ -384,8 +397,8 @@ collect:
         - chartValue
         - checklistAriaLabel
         - checklistToggleAriaLabel
+        - enableToggle
         - onClickViewAll
-        - showToggle
         - taskLists
         - toggleLabel
         - toggleLabelAlign
@@ -410,6 +423,21 @@ collect:
         - setColumnStatus
         # ComboButton
         - overflowMenu
+        # ConditionBlock
+        - addConditionHandler
+        - conditionIndex
+        - conjunction
+        - group
+        - isStatement
+        - onConnectorOperatorChange
+        - onStatementChange
+        # ConditionBuilderButton
+        - hideLabel
+        - tooltipAlign
+        # ConditionBuilderItem
+        - popOverClassName
+        # ConditionConnector
+        - operator
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -549,7 +577,6 @@ collect:
         - labelIcon
         # InlineEditCell
         - cell
-        - config
         # InlineTip
         - narrow
         - tertiaryButtonLabel
@@ -634,6 +661,7 @@ collect:
         - actionBarMenuOptionsClass
         - actionBarOverflowAriaLabel
         - breadcrumbOverflowAriaLabel
+        - breadcrumbOverflowTooltipAlign
         - collapseHeader
         - collapseHeaderIconDescription
         - collapseTitle
@@ -840,8 +868,8 @@ collect:
         - '"floating"'
         - '"stacked"'
         - '"tooltip"'
-        - '403'
-        - '404'
+        - "403"
+        - "404"
         - checked
         - critical
         - custom

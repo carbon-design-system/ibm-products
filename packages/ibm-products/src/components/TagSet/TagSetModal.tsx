@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -30,6 +30,21 @@ const defaults = {
   searchLabel: '',
 };
 
+interface TagType {
+  label: string;
+}
+type AllTags = TagType[] & Omit<React.ComponentProps<Tag>, 'filter'>[];
+
+interface TagSetModalProps {
+  allTags?: AllTags;
+  className?: string;
+  onClose?: () => void;
+  open?: boolean;
+  portalTarget?: ReactNode;
+  searchLabel?: string;
+  searchPlaceholder?: string;
+  title?: string;
+}
 export const TagSetModal = ({
   // The component props, in alphabetical order (for consistency).
 
@@ -44,20 +59,19 @@ export const TagSetModal = ({
 
   // Collect any other property values passed in.
   ...rest
-}) => {
-  const [filteredModalTags, setFilteredModalTags] = useState([]);
+}: TagSetModalProps) => {
+  const [filteredModalTags, setFilteredModalTags] = useState<AllTags>([]);
   const [search, setSearch] = useState('');
   const renderPortalUse = usePortalTarget(portalTargetIn);
-
   useEffect(() => {
-    let newFilteredModalTags = [];
+    let newFilteredModalTags: AllTags = [];
     if (open) {
-      if (search === '') {
-        newFilteredModalTags = allTags.slice(0);
+      if (search === '' && allTags) {
+        newFilteredModalTags = allTags?.slice(0);
       } else {
         const lCaseSearch = search.toLocaleLowerCase();
 
-        allTags.forEach((tag) => {
+        allTags?.forEach((tag) => {
           const dataSearch = tag['data-search']
             ?.toLocaleLowerCase()
             ?.indexOf(lCaseSearch);

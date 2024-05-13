@@ -24,8 +24,6 @@ interface GuidebannerProps {
   /**
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
-   *
-   * TODO: Re-apply custom prop validation?
    */
   children: ReactNode;
   /**
@@ -257,9 +255,10 @@ Guidebanner.propTypes = {
     }
     React.Children.forEach(prop, (child) => {
       if (child.type.displayName !== 'GuidebannerElement') {
-        // If not GuidebannerElement, then show:
-        // React component name(child.type?.name) or
-        // HTML element name(child.type).
+        // If child element is not `GuidebannerElement`, then show:
+        // Carbon Products component's `displayName` (child.type.displayName) or
+        // React component's `name` (child.type.name) or
+        // HTML element's tag name (child.type).
         error = new Error(
           `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${
             child.type?.displayName || child.type?.name || child.type

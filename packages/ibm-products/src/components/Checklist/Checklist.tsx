@@ -138,7 +138,7 @@ const defaults = {
   onClickViewAll: () => {},
   onToggle: () => {},
   open: true,
-  showToggle: true,
+  enableToggle: true,
   taskLists: [],
   theme: Themes.light,
   toggleLabel: 'Toggle',
@@ -162,7 +162,7 @@ export let Checklist = React.forwardRef(
       onClickViewAll = defaults.onClickViewAll,
       onToggle = defaults.onToggle,
       open = defaults.open,
-      showToggle = defaults.showToggle,
+      enableToggle = defaults.enableToggle,
       taskLists = defaults.taskLists,
       theme = defaults.theme,
       title,
@@ -240,7 +240,7 @@ export let Checklist = React.forwardRef(
               )}
             </div>
 
-            {showToggle && (
+            {enableToggle && (
               <IconButton
                 align={toggleLabelAlign}
                 aria-controls={listContainerId}
@@ -370,6 +370,10 @@ Checklist.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Whether or not to show the open/close toggle.
+   */
+  enableToggle: PropTypes.bool,
+  /**
    * Callback for the "View all" button. See also `viewAllLabel`.
    */
   onClickViewAll: PropTypes.func,
@@ -382,10 +386,6 @@ Checklist.propTypes = {
    * This can be set during initialization, or changed after being rendered.
    */
   open: PropTypes.bool,
-  /**
-   * Whether or not to show the open/close toggle.
-   */
-  showToggle: PropTypes.bool,
   /**
    * The task list can be broken down into sub-lists.
    *
@@ -423,7 +423,7 @@ Checklist.propTypes = {
   /**
    * The title of the component.
    */
-  title: PropTypes.string,
+  title: PropTypes.node,
   /**
    * The label for the toggle's tooltip.
    */

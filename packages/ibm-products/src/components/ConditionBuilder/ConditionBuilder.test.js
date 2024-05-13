@@ -22,8 +22,10 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const defaultProps = {
   inputConfig: {},
-  popOverSearchThreshold: 4,
   startConditionLabel: 'Add Condition',
+  popOverSearchThreshold: 4,
+  getConditionState: () => {},
+  variant: 'sentence',
 };
 
 describe(componentName, () => {

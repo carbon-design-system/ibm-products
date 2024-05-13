@@ -6,50 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/**
- * TODO: Breakdown titles, icons, clickable items into sub-components
- * See
- *   ModifiedTabs (ModifiedTabLabelNew, ModifiedTabLabelWithClose)
- *   PageHeader (PageHeaderTitle, PageHeaderUtils)
- */
-
-// Import portions of React that are needed.
 import React from 'react';
-
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import clamp from 'lodash/clamp';
+import { purple50, gray20, gray70 } from '@carbon/colors';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import clamp from 'lodash/clamp';
 import { Themes } from './Checklist.types';
 
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
-
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--checklist__chart`;
 const componentName = 'ChecklistChart';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
-// Default values for props
 const defaults = {
   theme: Themes.light,
 };
 
 /**
- * TODO: A description of the component.
+ * Custom chart component used within Checklist PLG component
  */
 export let ChecklistChart = React.forwardRef(
   /**
@@ -57,8 +32,9 @@ export let ChecklistChart = React.forwardRef(
    */
   ({ className, value, theme = defaults.theme, ...rest }, ref) => {
     const numDegrees = clamp(value * 360, 0, 360);
-    const circleColor = theme === Themes.light ? '#e0e0e0' : '#525252'; // $ui-03 (-ish)
-    const progressColor = theme === Themes.light ? '#a56eff' : '#a56eff'; // $purple-50
+    const circleColor = theme === Themes.light ? gray20 : gray70; // $ui-03 (-ish)
+    const progressColor = purple50;
+
     return (
       <div
         {...rest}
@@ -75,12 +51,7 @@ export let ChecklistChart = React.forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-// ChecklistChart = pkg.checkComponentEnabled(ChecklistChart, componentName);
-
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
-// ChecklistChart.displayName = componentName;
+ChecklistChart.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

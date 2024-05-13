@@ -39,14 +39,6 @@ interface EditTearsheetFormBaseProps {
   description?: string;
 
   /**
-   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's form content.
-   * Otherwise, use CSS to hide/remove this label text.
-   */
-
-  fieldsetLegendText: string;
-
-  /**
    * This optional prop will render your form content inside of a fieldset html element
    * and is defaulted to true.
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's form content.

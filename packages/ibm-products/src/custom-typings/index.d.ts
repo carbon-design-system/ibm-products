@@ -195,3 +195,5 @@ declare module '@carbon/react' {
     usePrefix,
   } from '@carbon/react';
 }
+
+declare module '@carbon/colors';

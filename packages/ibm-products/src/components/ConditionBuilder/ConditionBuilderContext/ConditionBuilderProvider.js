@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const emptyState = {
   groups: [
@@ -7,12 +8,14 @@ export const emptyState = {
       groupSeparateOperator: null,
       groupOperator: 'and',
       statement: 'if',
+      id: uuidv4(),
       conditions: [
         {
           property: undefined,
           operator: '',
           value: '',
           popoverToOpen: 'propertyField',
+          id: uuidv4(),
         },
       ],
     },

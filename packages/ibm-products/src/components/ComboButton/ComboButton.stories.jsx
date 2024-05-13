@@ -9,7 +9,6 @@ import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 import { StaticNotification } from '@carbon/react';
 import { ComboButton, ComboButtonItem } from '..';
-import { StaticNotification } from '@carbon/react';
 
 // import styles from './_combo-button.scss';
 

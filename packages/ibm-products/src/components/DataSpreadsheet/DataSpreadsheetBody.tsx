@@ -37,6 +37,7 @@ import {
   handleBodyCellHover,
   handleRowHeaderClick,
 } from './utils/commonEventHandlers';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -633,9 +634,11 @@ export const DataSpreadsheetBody = forwardRef(
         const row = rows?.[index];
         if (rows && rows.length) {
           prepareRow?.(row);
+          const rowProps = prepareProps(row.getRowProps({ style }), 'key');
           return (
             <div
-              {...row?.getRowProps?.({ style })}
+              key={{ ...row.getRowProps().key }}
+              {...rowProps}
               className={cx(`${blockClass}__tr`)}
               data-row-index={index}
               aria-rowindex={index + 1}
@@ -678,37 +681,40 @@ export const DataSpreadsheetBody = forwardRef(
                 </button>
               </div>
               {/* CELL BUTTONS */}
-              {row.cells.map((cell, index) => (
-                <div
-                  key={`cell_${index}`}
-                  aria-colindex={index + 1}
-                  {...cell.getCellProps()}
-                  role="gridcell"
-                  style={{
-                    ...cell.getCellProps().style,
-                    display: 'grid',
-                    minWidth: cell?.column?.width || defaultColumn?.width,
-                  }}
-                >
-                  <button
-                    id={`${blockClass}__cell--${cell.row.index}--${index}`}
-                    tabIndex={-1}
-                    data-row-index={cell.row.index}
-                    data-column-index={index}
-                    className={cx(
-                      `${blockClass}__td`,
-                      `${blockClass}__body--td`,
-                      `${blockClass}--interactive-cell-element`
-                    )}
-                    onMouseDown={handleBodyCellClickEvent(cell, index)}
-                    onMouseOver={handleBodyCellHoverEvent(cell, index)}
-                    onFocus={() => {}}
-                    type="button"
+              {row.cells.map((cell, index) => {
+                const cellProps = prepareProps(cell.getCellProps(), 'key');
+                return (
+                  <div
+                    key={`cell_${index}`}
+                    aria-colindex={index + 1}
+                    {...cellProps}
+                    role="gridcell"
+                    style={{
+                      ...cell.getCellProps().style,
+                      display: 'grid',
+                      minWidth: cell?.column?.width || defaultColumn?.width,
+                    }}
                   >
-                    {cell.render('Cell')}
-                  </button>
-                </div>
-              ))}
+                    <button
+                      id={`${blockClass}__cell--${cell.row.index}--${index}`}
+                      tabIndex={-1}
+                      data-row-index={cell.row.index}
+                      data-column-index={index}
+                      className={cx(
+                        `${blockClass}__td`,
+                        `${blockClass}__body--td`,
+                        `${blockClass}--interactive-cell-element`
+                      )}
+                      onMouseDown={handleBodyCellClickEvent(cell, index)}
+                      onMouseOver={handleBodyCellHoverEvent(cell, index)}
+                      onFocus={() => {}}
+                      type="button"
+                    >
+                      {cell.render('Cell')}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           );
         }

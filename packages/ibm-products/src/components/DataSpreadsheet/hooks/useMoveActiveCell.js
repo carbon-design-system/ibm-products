@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,14 @@ export const useMoveActiveCell = ({
   activeCellContent,
   isActiveHeaderCellChanged,
 }) => {
-  const performCreateActiveCell = useCallback(() => {
+  let performCreateActiveCell;
+  //new active cell is created when the activeCellContent changes or navigate through headers
+  // Otherwise new active cell will display the old value in a glance
+  useEffect(() => {
+    performCreateActiveCell();
+  }, [activeCellContent, performCreateActiveCell, isActiveHeaderCellChanged]);
+
+  performCreateActiveCell = useCallback(() => {
     const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
       `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
     );

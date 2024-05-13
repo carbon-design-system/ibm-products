@@ -282,6 +282,7 @@ const ChildrenContent = () => {
           {notesValue.length}/100
         </span>
         <TextArea
+          id="side-panel-textarea"
           className={`${prefix}text-area`}
           labelText="Notes"
           value={notesValue}

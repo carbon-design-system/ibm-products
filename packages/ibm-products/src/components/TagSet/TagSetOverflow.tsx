@@ -5,7 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, PropsWithChildren, useRef } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -57,7 +62,7 @@ interface TagSetOverflowProps {
   /** @type {Array<any>}
    * tags shown in overflow
    */
-  overflowTags: Record<string, any>[];
+  overflowTags: ReactNode[];
   /**
    * Type of rendering displayed inside of the tag overflow component
    */
@@ -69,7 +74,7 @@ interface TagSetOverflowProps {
   /**
    * Setter function for the popoverOpen state value
    */
-  setPopoverOpen?: ((value: any) => void) | undefined;
+  setPopoverOpen?: ((value: boolean) => void) | undefined;
   /**
    * label for the overflow show all tags link
    */
@@ -154,7 +159,8 @@ export const TagSetOverflow = React.forwardRef(
                       : index <= allTagsModalSearchThreshold
                   )
                   .map((tag, index) => {
-                    const tagProps: any = {};
+                    type TagProps = { type?: string; filter?: boolean };
+                    const tagProps: TagProps = {};
                     if (overflowType === 'tag') {
                       tagProps.type = 'high-contrast';
                     }

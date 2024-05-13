@@ -66,7 +66,7 @@ type OverflowType = 'default' | 'tag';
 
 type TagType = {
   label: string;
-  type?: (typeof tagTypes)[number];
+  type?: keyof typeof tagTypes;
 } & TagBaseProps;
 interface TagSetProps extends PropsWithChildren {
   /**
@@ -114,7 +114,7 @@ interface TagSetProps extends PropsWithChildren {
   /**
    * Handler to get overflow tags
    */
-  onOverflowTagChange?: (value: any) => void;
+  onOverflowTagChange?: (value: ReactNode) => void;
   /**
    * overflowAlign from the standard tooltip. Default center.
    */
@@ -171,7 +171,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     }: TagSetProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
-    const [displayCount, setDisplayCount] = useState<any>(3);
+    const [displayCount, setDisplayCount] = useState<number>(3);
     const [displayedTags, setDisplayedTags] = useState<JSX.Element[]>([]);
     const [hiddenSizingTags, setHiddenSizingTags] = useState<JSX.Element[]>([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState(false);
@@ -199,7 +199,9 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
                   key={index}
                   className={`${blockClass}__sizing-tag`}
                   ref={(el) => {
-                    if (el != null) {newSizingTags[index] = el;}
+                    if (el != null) {
+                      newSizingTags[index] = el;
+                    }
                   }}
                 >
                   <Tag
@@ -286,7 +288,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     const checkFullyVisibleTags = useCallback(() => {
       if (multiline) {
-        return setDisplayCount(maxVisible);
+        return setDisplayCount(maxVisible || 3);
       }
 
       // how many will fit?

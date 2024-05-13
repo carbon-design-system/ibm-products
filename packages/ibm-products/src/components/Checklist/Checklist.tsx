@@ -81,6 +81,10 @@ interface ChecklistProps {
    */
   className?: string;
   /**
+   * Whether or not to show the open/close toggle.
+   */
+  enableToggle?: boolean;
+  /**
    * Callback for the "View all" button. See also `viewAllLabel`.
    */
   onClickViewAll?(): void;

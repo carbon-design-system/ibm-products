@@ -6,6 +6,8 @@
  */
 
 import React, {
+  ForwardedRef,
+  ReactNode,
   forwardRef,
   isValidElement,
   useContext,
@@ -27,6 +29,90 @@ const blockClass = `${pkg.prefix}--create-full-page__step`;
 const defaults = {
   includeStep: true,
 };
+
+interface CreateFullPageStepBaseProps {
+  /**
+   * Content that shows in the CreateFullPage step
+   */
+  children?: ReactNode;
+
+  /**
+   * Sets an optional className to be added to the CreateFullPage step
+   */
+  className?: string;
+
+  /**
+   * Sets an optional description on the progress step component
+   */
+  description?: ReactNode;
+
+  /**
+   * This will conditionally disable the submit button in the multi step CreateFullPage
+   */
+  disableSubmit: boolean;
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   */
+  hasFieldset: boolean;
+
+  /**
+   * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
+   * steps. If this value is `true` then the step will be included in the list of visible steps, as well as being included in the ProgressIndicator step list
+   */
+  includeStep?: boolean;
+
+  /**
+   * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
+   */
+  introStep?: boolean;
+
+  /**
+   * This optional prop will indicate an error icon on the progress indicator step item
+   */
+  invalid?: boolean;
+
+  /**
+   * Optional function to be called on initial mount of a step.
+   * For example, this can be used to fetch data that is required on a particular step.
+   */
+  onMount?: () => void;
+
+  /**
+   * Optional function to be called on a step change.
+   * For example, this can be used to validate input fields before proceeding to the next step.
+   * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the next button.
+   */
+  onNext?: () => void | Promise<any>;
+
+  /**
+   * Sets the optional secondary label on the progress step component
+   */
+  secondaryLabel?: string;
+
+  /**
+   * Sets an optional subtitle on the progress step component
+   */
+  subtitle?: string;
+
+  /**
+   * Sets the title text for a create full page step
+   */
+  title: ReactNode;
+}
+
+type CreateFullPageStepFieldsetProps =
+  | {
+      hasFieldset: true;
+      fieldsetLegendText: string;
+    }
+  | {
+      hasFieldset?: false;
+      fieldsetLegendText: string;
+    };
+
+type CreateFullPageStepProps = CreateFullPageStepBaseProps &
+  CreateFullPageStepFieldsetProps;
 
 export let CreateFullPageStep = forwardRef(
   (
@@ -50,15 +136,15 @@ export let CreateFullPageStep = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: CreateFullPageStepProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const stepsContext = useContext(StepsContext);
+    const stepsContext = useContext(StepsContext) as any;
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] = useState();
     const previousState = usePreviousValue({
       currentStep: stepsContext?.currentStep,
-    });
+    }) as any;
 
     useRetrieveStepData({
       invalid,
@@ -68,7 +154,7 @@ export let CreateFullPageStep = forwardRef(
       shouldIncludeStep,
       secondaryLabel,
       title,
-    });
+    } as any);
 
     // This useEffect reports back the onMount value so that they can be used
     // in the appropriate custom hooks.
@@ -82,7 +168,7 @@ export let CreateFullPageStep = forwardRef(
     }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
 
     useEffect(() => {
-      setShouldIncludeStep(includeStep);
+      setShouldIncludeStep(includeStep as any);
     }, [includeStep, stepsContext, title]);
 
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
@@ -189,11 +275,13 @@ CreateFullPageStep.propTypes = {
   /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
+  /**@ts-ignore */
   disableSubmit: PropTypes.bool,
 
   /**
    * This is the legend text that appears above a fieldset html element for accessibility purposes. It is required when the optional `hasFieldset` prop is provided to a FullPageStep.
    */
+  /**@ts-ignore */
   fieldsetLegendText: PropTypes.string.isRequired.if(
     ({ hasFieldset }) => hasFieldset === true
   ),
@@ -201,6 +289,7 @@ CreateFullPageStep.propTypes = {
   /**
    * This optional prop will render your form content inside of a fieldset html element
    */
+  /**@ts-ignore */
   hasFieldset: PropTypes.bool,
 
   /**

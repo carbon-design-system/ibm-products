@@ -6,7 +6,14 @@
  */
 
 // Import portions of React that are needed.
-import React, { Children, ReactNode, useEffect, useRef, useState } from 'react';
+import React, {
+  Children,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -23,6 +30,7 @@ import pconsole from '../../global/js/utils/pconsole';
 import { Carousel } from '../Carousel';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
+import { CarouselProps } from '../Carousel/Carousel';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
@@ -107,7 +115,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     ref
   ) => {
     const buttonFocusRef = useRef<ButtonProps>();
-    const scrollRef = useRef();
+    const scrollRef = useRef<CarouselProps>();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
@@ -201,7 +209,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
           <>
             <Carousel
               disableArrowScroll
-              ref={scrollRef}
+              ref={scrollRef as RefObject<HTMLDivElement>}
               onScroll={(scrollPercent) => {
                 setScrollPosition(scrollPercent);
               }}
@@ -224,7 +232,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                       progStepFloor,
                       progStepCeil
                     );
-                    scrollRef.current.scrollToView(targetStep);
+                    scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
                   }}
                 >
@@ -244,7 +252,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                       progStepFloor,
                       progStepCeil
                     );
-                    scrollRef.current.scrollToView(targetStep);
+                    scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
                   }}
                 >

@@ -263,6 +263,7 @@ export let NotificationsPanel = React.forwardRef(
           aria-label={notification.title}
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
+          name={notification.link.text}
           type="button"
           role="button"
           tabIndex={0}

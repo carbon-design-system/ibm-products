@@ -172,7 +172,7 @@ const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
+    defaultValue: 'g10',
     toolbar: {
       icon: 'paintbrush',
       items: ['white', 'g10', 'g90', 'g100'],

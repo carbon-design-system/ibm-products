@@ -38,6 +38,24 @@ jobs:
       - name: Install
         run: yarn
 
+      - name:
+          Run @ibm/telemetry-js-config-generator to regenerate telemetry config
+          file
+        working-directory: ./packages/ibm-products
+        run: |
+          yarn telemetry-config
+
+      # This can be removed once @ibm/telemetry-js-config-generator has params to set the js scope
+      - name: Add js scope to telemetry config
+        working-directory: ./packages/ibm-products
+        run: |
+          echo "  js:
+              functions: {}
+              tokens: null" >> telemetry.yml
+          git add telemetry.yml
+          git commit -m "chore(telemetry): update telemetry config"
+          git push origin
+
       - name: Continuous integration check (includes build)
         run: yarn ci-check
 

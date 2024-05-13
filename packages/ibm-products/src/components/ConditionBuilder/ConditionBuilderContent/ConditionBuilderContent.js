@@ -17,12 +17,12 @@ const ConditionBuilderContent = ({
 }) => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
-    useState(true);
+    useState(false);
   useEffect(() => {
     if (rootState?.groups?.length) {
-      setIsConditionBuilderActive(false);
-    } else {
       setIsConditionBuilderActive(true);
+    } else {
+      setIsConditionBuilderActive(false);
     }
     if (getConditionState) {
       getConditionState(rootState);
@@ -31,33 +31,18 @@ const ConditionBuilderContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState, conditionBuilderRef]);
 
-  useEffect(() => {
-    if (isConditionBuilderActive == false) {
-      if (conditionBuilderRef.current) {
-        const initial = conditionBuilderRef.current.querySelector(
-          '[role="gridcell"] button'
-        );
-
-        if (initial) {
-          initial.setAttribute('tabindex', '0');
-        }
-      }
-    }
-  }, [isConditionBuilderActive, conditionBuilderRef]);
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
-    setIsConditionBuilderActive(false);
+    setIsConditionBuilderActive(true);
     setRootState(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
     //or we can even pre-populate some existing builder and continue editing
   };
 
   const onRemove = useCallback(
-    (groupIndex) => {
+    (groupId) => {
       setRootState({
         ...rootState,
-        groups: rootState.groups.filter(
-          (group, gIndex) => groupIndex !== gIndex
-        ),
+        groups: rootState.groups.filter((group) => groupId !== group.id),
       });
     },
     [setRootState, rootState]
@@ -68,16 +53,19 @@ const ConditionBuilderContent = ({
      * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
      * This gets the updated group as argument.
      */
+    const groups = [
+      ...rootState.groups.slice(0, groupIndex),
+      updatedGroup,
+      ...rootState.groups.slice(groupIndex + 1),
+    ];
     setRootState({
       ...rootState,
-      groups: rootState.groups.map((group, gIndex) =>
-        groupIndex === gIndex ? updatedGroup : group
-      ),
+      groups,
     });
   };
   return (
     <div className={`${blockClass}__content-container`} tabIndex={-1}>
-      {isConditionBuilderActive && (
+      {!isConditionBuilderActive && (
         <Button
           className={`${blockClass}__condition-builder`}
           renderIcon={(props) => <Add size={16} {...props} />}
@@ -93,15 +81,16 @@ const ConditionBuilderContent = ({
       {rootState &&
         rootState?.groups?.map((eachGroup, groupIndex) => (
           <ConditionGroupBuilder
+            className={`${blockClass}__condition-builder__group`}
             key={groupIndex}
             aria={{
               level: 1,
               posinset: groupIndex * 2 + 1,
               setsize: rootState.groups.length * 2,
             }}
-            state={eachGroup}
+            group={eachGroup}
             onRemove={() => {
-              onRemove(groupIndex);
+              onRemove(eachGroup.id);
             }}
             onChange={(updatedGroup) => {
               onChangeHandler(updatedGroup, groupIndex);

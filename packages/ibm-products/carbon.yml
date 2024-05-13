@@ -127,6 +127,21 @@ assets:
         url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-cascade-cascade
     tags:
       - content-block
+  checklist:
+    name: Checklist
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/onboarding/checklist/usage/
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/cascade.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-novice-to-pro-checklist--checklist
+    tags:
+      - content-block
   combo-button:
     name: Combo button
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/button-guidance/menu-and-combo-buttons

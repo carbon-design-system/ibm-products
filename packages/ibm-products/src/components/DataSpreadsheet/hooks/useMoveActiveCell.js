@@ -16,12 +16,6 @@ export const useMoveActiveCell = ({
   activeCellContent,
   isActiveHeaderCellChanged,
 }) => {
-  //new active cell is created when the activeCellContent changes or navigate through headers
-  // Otherwise new active cell will display the old value in a glance
-  useEffect(() => {
-    performCreateActiveCell();
-  }, [activeCellContent, performCreateActiveCell, isActiveHeaderCellChanged]);
-
   const performCreateActiveCell = useCallback(() => {
     const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
       `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
@@ -46,4 +40,10 @@ export const useMoveActiveCell = ({
     containerHasFocus,
     createActiveCell,
   ]);
+
+  //new active cell is created when the activeCellContent changes or navigate through headers
+  // Otherwise new active cell will display the old value in a glance
+  useEffect(() => {
+    performCreateActiveCell();
+  }, [activeCellContent, performCreateActiveCell, isActiveHeaderCellChanged]);
 };

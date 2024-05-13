@@ -7,8 +7,9 @@
 
 import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
-import { ActionableNotification } from '@carbon/react';
+import { StaticNotification } from '@carbon/react';
 import { ComboButton, ComboButtonItem } from '..';
+import { StaticNotification } from '@carbon/react';
 
 // import styles from './_combo-button.scss';
 
@@ -24,7 +25,7 @@ export default {
 // eslint-disable-next-line no-unused-vars -- args not used in this template
 const Template = (args) => (
   <>
-    <ActionableNotification
+    <StaticNotification
       title="Deprecation notice"
       subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s ComboButton."
       inline
@@ -38,6 +39,8 @@ const Template = (args) => (
           'https://react.carbondesignsystem.com/?path=/docs/components-combobutton--overview'
         );
       }}
+      titleId="storybook--deprecation-warning-notification"
+      aria-describedby="storybook--deprecation-warning-notification"
       style={{ marginBottom: '1rem' }}
     />
     <ComboButton>

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -18,7 +18,16 @@ import { useWebTerminal } from './hooks';
 const componentName = 'WebTerminalContentWrapper';
 const blockClass = `${pkg.prefix}--web-terminal-content-wrapper`;
 
-export let WebTerminalContentWrapper = React.forwardRef(
+interface WebTerminalContentWrapperProps {
+  /**
+   * Pass in content as children.
+   */
+  children: ReactNode | ReactNode[];
+}
+export let WebTerminalContentWrapper = React.forwardRef<
+  HTMLDivElement,
+  WebTerminalContentWrapperProps
+>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -26,7 +35,7 @@ export let WebTerminalContentWrapper = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: WebTerminalContentWrapperProps,
     ref
   ) => {
     const { open } = useWebTerminal();

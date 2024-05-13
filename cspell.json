@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -82,6 +78,7 @@
     "colindex",
     "columnheader",
     "combobox",
+    "createmodal",
     "csstools",
     "dasharray",
     "data-testid",
@@ -97,11 +94,13 @@
     "editsidepanel",
     "emptystate",
     "expressivecard",
+    "fullpageerror",
     "gridcell",
     "guidebanner",
     "haspopup",
     "headshot",
     "homescreen",
+    "httperrorother",
     "inlineedit",
     "inlinetip",
     "listbox",
@@ -143,6 +142,7 @@
     "svgid",
     "tabbable",
     "tablist",
+    "tagoverflow",
     "tagset",
     "tearsheet",
     "tearsheets",

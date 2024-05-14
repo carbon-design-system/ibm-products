@@ -932,11 +932,11 @@ export let DataSpreadsheet = React.forwardRef(
               cellEditorRulerRef.current.textContent = event.target.value;
             }}
             ref={cellEditorRef}
-            // aria-labelledby={
-            //   activeCellCoordinates
-            //     ? `${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`
-            //     : null
-            // }
+            aria-labelledby={
+              activeCellCoordinates
+                ? `${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`
+                : ''
+            }
             className={cx(
               `${blockClass}__cell-editor`,
               `${blockClass}--interactive-cell-element`,

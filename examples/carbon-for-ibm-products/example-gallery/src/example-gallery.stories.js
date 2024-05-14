@@ -9,7 +9,7 @@ import React from 'react';
 
 import App from './App.jsx';
 
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 
 export default {
   title: 'Overview/Examples',

@@ -55,7 +55,9 @@ $motion-duration: $duration-moderate-02;
     align-items: flex-end;
     color: $text-primary;
     // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear $motion-duration;
+    transition: visibility 0s linear $motion-duration,
+      background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
     --#{$block-class}--stacking-scale-factor-single: 0.95;
     --#{$block-class}--stacking-scale-factor-double: 0.9;
   }

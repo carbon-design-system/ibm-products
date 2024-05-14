@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -252,6 +252,7 @@ DatagridContent.propTypes = {
       PropTypes.func,
     ]),
     isFetching: PropTypes.bool,
+    skeletonRowCount: PropTypes.number,
     fullHeightDatagrid: PropTypes.bool,
     filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.36.0...@carbon/ibm-products@2.37.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* added a scroll callback which sets prog step back to 0 on resize ([#5015](https://github.com/carbon-design-system/ibm-products/issues/5015)) ([63becd7](https://github.com/carbon-design-system/ibm-products/commit/63becd77bb414046d62f26ff56a98d5925756f5a))
+* check for document for matchmedia ([#4968](https://github.com/carbon-design-system/ibm-products/issues/4968)) ([c735e14](https://github.com/carbon-design-system/ibm-products/commit/c735e1474af1b3afbab0006e5ef30e5f8bcfeb25))
+* import shared filterProps data for flyout example ([#5087](https://github.com/carbon-design-system/ibm-products/issues/5087)) ([7a5de0d](https://github.com/carbon-design-system/ibm-products/commit/7a5de0d1cb0368c6abb25ed0bf44703286906106))
+* PageHeader breadcrumb tooltip displays underneath Carbon UI shell header ([#4907](https://github.com/carbon-design-system/ibm-products/issues/4907)) ([a6666e1](https://github.com/carbon-design-system/ibm-products/commit/a6666e1f84fb8460a6dceefd4f6f5f16a561aeea))
+
+
+### Features
+
+* **ConditionBuilder:** implementation of  main content blocks ([#4928](https://github.com/carbon-design-system/ibm-products/issues/4928)) ([6a6202d](https://github.com/carbon-design-system/ibm-products/commit/6a6202d428f870158ec1d92fe95f8814070e8a37))
+* **conditionBuilder:** popover content, stories, issue fixes ([#5058](https://github.com/carbon-design-system/ibm-products/issues/5058)) ([24ac4fa](https://github.com/carbon-design-system/ibm-products/commit/24ac4fa6574c1c40fca68e24d29f0030ef452603))
+
+
+
+
+
 # [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.35.0...@carbon/ibm-products@2.36.0) (2024-04-30)
 
 

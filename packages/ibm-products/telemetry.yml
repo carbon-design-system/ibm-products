@@ -397,8 +397,8 @@ collect:
         - chartValue
         - checklistAriaLabel
         - checklistToggleAriaLabel
+        - enableToggle
         - onClickViewAll
-        - showToggle
         - taskLists
         - toggleLabel
         - toggleLabelAlign

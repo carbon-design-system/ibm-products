@@ -24,7 +24,7 @@ const value = 'carbon';
 
 const defaultProps = {
   clearButtonLabelText: 'Clear',
-  placeHolderText: 'Search...',
+  placeholderText: 'Search...',
   submitLabel: 'Search',
   onChange: mockOnChange,
   onSubmit: mockOnSubmit,
@@ -64,7 +64,7 @@ describe(componentName, () => {
 
     expect(searchBox).toBeInTheDocument();
     expect(searchBox.value).toBe('');
-    expect(searchBox.placeholder).toBe(defaultProps.placeHolderText);
+    expect(searchBox.placeholder).toBe(defaultProps.placeholderText);
     expect(submitButton).toHaveTextContent(defaultProps.submitLabel);
     expect(submitButton).toBeInTheDocument();
     expect(submitButton).toBeDisabled();

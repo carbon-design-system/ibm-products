@@ -6,7 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { forwardRef, useRef, useState, useEffect } from 'react';
+import React, {
+  forwardRef,
+  useRef,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -32,11 +38,49 @@ const defaults = {
   theme: 'light',
 };
 
+interface CoachmarkOverlayProps {
+  /**
+   * The CoachmarkOverlayElements child components.
+   * Validation is handled in the parent Coachmark component.
+   */
+  children: ReactNode;
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * The visibility of CoachmarkOverlay is
+   * managed in the parent Coachmark component.
+   */
+  fixedIsVisible: boolean;
+  /**
+   * What kind or style of Coachmark to render.
+   */
+  kind?: COACHMARK_OVERLAY_KIND;
+  /**
+   * Function to call when the Coachmark closes.
+   */
+  onClose: () => void;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+  /**
+   * Additional props passed to the component.
+   */
+  [key: string]: any;
+}
+
+type StyledTune = {
+  left?: number;
+  top?: number;
+};
+
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Novice to Pro components.
  */
-export let CoachmarkOverlay = forwardRef(
+export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
   (
     {
       children,
@@ -51,7 +95,7 @@ export let CoachmarkOverlay = forwardRef(
   ) => {
     const { winHeight, winWidth } = useWindowDimensions();
     const [a11yDragMode, setA11yDragMode] = useState(false);
-    const overlayRef = useRef();
+    const overlayRef = useRef<HTMLDivElement>(null);
     const coachmark = useCoachmark();
     const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
@@ -82,25 +126,25 @@ export let CoachmarkOverlay = forwardRef(
       }
     };
 
-    let styledTune = {};
+    const styledTune: StyledTune = {};
 
     if (isBeacon || isDraggable) {
       if (coachmark.targetRect) {
-        styledTune = {
-          left: coachmark.targetRect.x + window.scrollX,
-          top: coachmark.targetRect.y + window.scrollY,
-        };
+        styledTune.left = coachmark.targetRect.x + window.scrollX;
+        styledTune.top = coachmark.targetRect.y + window.scrollY;
       }
-
-      if (isBeacon) {
-        // Compensate for radius of beacon
-        styledTune.left += 16;
-        styledTune.top += 16;
-      } else if (isDraggable) {
-        // Compensate for width and height of target element
-        const offsetTune = getOffsetTune(coachmark, kind);
-        styledTune.left += offsetTune.left;
-        styledTune.top += offsetTune.top;
+      if (styledTune.left && styledTune.top) {
+        if (isBeacon) {
+          // Compensate for radius of beacon
+          styledTune.left += 16;
+          styledTune.top += 16;
+        }
+        if (isDraggable) {
+          // Compensate for width and height of target element
+          const offsetTune = getOffsetTune(coachmark, kind);
+          styledTune.left += offsetTune.left;
+          styledTune.top += offsetTune.top;
+        }
       }
     }
 
@@ -125,6 +169,9 @@ export let CoachmarkOverlay = forwardRef(
 
     function handleDrag(movementX, movementY) {
       const overlay = overlayRef.current;
+      if (!overlay) {
+        return;
+      }
       const { x, y } = overlay.getBoundingClientRect();
 
       const { targetX, targetY } = handleDragBounds(
@@ -170,9 +217,11 @@ export let CoachmarkOverlay = forwardRef(
           <CoachmarkHeader onClose={onClose} />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>
-          {React.Children.map(children, (child) =>
-            React.cloneElement(child, { isVisible })
-          )}
+          {React.Children.map(children, (child) => {
+            return React.cloneElement(child as React.ReactElement<any>, {
+              isVisible,
+            });
+          })}
         </div>
         {isBeacon && <span className={`${blockClass}__caret`} />}
       </div>

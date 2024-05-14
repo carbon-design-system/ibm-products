@@ -20,7 +20,15 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
+    const notificationPanelElement = page.locator(
+      `#dev-prefix--c4p--notifications-panel`
+    );
     await page.getByLabel('Notifications').click();
+    await notificationPanelElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
     await expect(page).toHaveNoACViolations(
       'NotificationsPanel @avt-default-state'
     );

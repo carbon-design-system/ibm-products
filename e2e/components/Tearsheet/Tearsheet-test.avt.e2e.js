@@ -21,7 +21,6 @@ test.describe('Tearsheet @avt', () => {
       },
     });
 
-    // const tearsheetElement = page.locator;
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
     await page.getByText('Open Tearsheet').click();
     await modalElement.evaluate((element) =>

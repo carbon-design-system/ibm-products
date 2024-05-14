@@ -49,7 +49,7 @@ interface CreateFullPageStepBaseProps {
   /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
-  disableSubmit: boolean;
+  disableSubmit?: boolean;
 
   /**
    * This optional prop will render your form content inside of a fieldset html element

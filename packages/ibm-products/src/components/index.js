@@ -135,3 +135,9 @@ export {
   FilterPanelSearch,
 } from './FilterPanel';
 export { ConditionBuilder } from './ConditionBuilder';
+
+export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './FeatureFlags';

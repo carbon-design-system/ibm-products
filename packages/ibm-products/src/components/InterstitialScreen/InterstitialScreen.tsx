@@ -405,7 +405,7 @@ export let InterstitialScreen = React.forwardRef<
         <div
           className={cx(`${blockClass}--body`)}
           ref={bodyScrollRef}
-          tabIndex="0"
+          tabIndex={0}
         >
           {mediaIsDefined ? (
             <FlexGrid fullWidth className={cx(`${blockClass}--body-grid`)}>

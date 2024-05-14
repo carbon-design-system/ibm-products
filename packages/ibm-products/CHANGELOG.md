@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.37.0...@carbon/ibm-products@2.38.0) (2024-05-14)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** initialize functions before calling them ([#5099](https://github.com/carbon-design-system/ibm-products/issues/5099)) ([72ff25d](https://github.com/carbon-design-system/ibm-products/commit/72ff25d32bc1a3235a246a50f7a9405c672f47a5))
+
+
+### Features
+
+* **Checklist:** release as stable ([#5139](https://github.com/carbon-design-system/ibm-products/issues/5139)) ([73729b5](https://github.com/carbon-design-system/ibm-products/commit/73729b593e02f7f6fbcfa32175c41e0608912909))
+* **Coachmark:** convert to .tsx ([#5097](https://github.com/carbon-design-system/ibm-products/issues/5097)) ([2c4d66f](https://github.com/carbon-design-system/ibm-products/commit/2c4d66f81b6f118ce45ac29fc0d397f14162129f))
+* **CoachmarkFixed:** convert to .tsx ([#5140](https://github.com/carbon-design-system/ibm-products/issues/5140)) ([1dff0cb](https://github.com/carbon-design-system/ibm-products/commit/1dff0cb771465e7316a92f73936a9377716ff7ee))
+* **conditionBuilder:** issue fixes and review changes ([#5085](https://github.com/carbon-design-system/ibm-products/issues/5085)) ([9b425b0](https://github.com/carbon-design-system/ibm-products/commit/9b425b03ef74791cbcc2cc534f4740218586db1f))
+* **datagrid:** added feature to control number of skeleton rows ([#4802](https://github.com/carbon-design-system/ibm-products/issues/4802)) ([1962a72](https://github.com/carbon-design-system/ibm-products/commit/1962a72d16f522a279c99032886073d1a58cbb50))
+* **telemetry:** add telemetry config generator step to the release process ([#5081](https://github.com/carbon-design-system/ibm-products/issues/5081)) ([9529594](https://github.com/carbon-design-system/ibm-products/commit/9529594eaa3763f4500113288014899ad39b6aea))
+* update to storybook 8 ([#5019](https://github.com/carbon-design-system/ibm-products/issues/5019)) ([af22157](https://github.com/carbon-design-system/ibm-products/commit/af2215707b60e4abcbab434f63fd9bd45a947526))
+
+
+
+
+
+# [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.36.0...@carbon/ibm-products@2.37.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* added a scroll callback which sets prog step back to 0 on resize ([#5015](https://github.com/carbon-design-system/ibm-products/issues/5015)) ([63becd7](https://github.com/carbon-design-system/ibm-products/commit/63becd77bb414046d62f26ff56a98d5925756f5a))
+* check for document for matchmedia ([#4968](https://github.com/carbon-design-system/ibm-products/issues/4968)) ([c735e14](https://github.com/carbon-design-system/ibm-products/commit/c735e1474af1b3afbab0006e5ef30e5f8bcfeb25))
+* import shared filterProps data for flyout example ([#5087](https://github.com/carbon-design-system/ibm-products/issues/5087)) ([7a5de0d](https://github.com/carbon-design-system/ibm-products/commit/7a5de0d1cb0368c6abb25ed0bf44703286906106))
+* PageHeader breadcrumb tooltip displays underneath Carbon UI shell header ([#4907](https://github.com/carbon-design-system/ibm-products/issues/4907)) ([a6666e1](https://github.com/carbon-design-system/ibm-products/commit/a6666e1f84fb8460a6dceefd4f6f5f16a561aeea))
+
+
+### Features
+
+* **ConditionBuilder:** implementation of  main content blocks ([#4928](https://github.com/carbon-design-system/ibm-products/issues/4928)) ([6a6202d](https://github.com/carbon-design-system/ibm-products/commit/6a6202d428f870158ec1d92fe95f8814070e8a37))
+* **conditionBuilder:** popover content, stories, issue fixes ([#5058](https://github.com/carbon-design-system/ibm-products/issues/5058)) ([24ac4fa](https://github.com/carbon-design-system/ibm-products/commit/24ac4fa6574c1c40fca68e24d29f0030ef452603))
+
+
+
+
+
 # [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.35.0...@carbon/ibm-products@2.36.0) (2024-04-30)
 
 

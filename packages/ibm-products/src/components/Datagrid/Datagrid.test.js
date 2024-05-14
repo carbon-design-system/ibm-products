@@ -60,21 +60,16 @@ import { carbon, pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-// import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
-
 import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
-import { FilteringUsage } from './Extensions/Filtering/Panel.stories';
-import {
-  FilteringUsage as FlyoutUsage,
-  filterProps as flyoutProps,
-} from './Extensions/Filtering/Flyout.stories';
+import { FilteringUsage } from './utils/FilteringUsage';
 
 import {
   generateDummyCheckboxes,
   filterProps as testFilterProps,
+  flyoutFilterProps as flyoutProps,
 } from './utils/filterPropsForTesting';
 
 const { click, hover, unhover } = userEvent.setup({
@@ -2470,7 +2465,7 @@ describe(componentName, () => {
     delete updatedFilterProps.onFlyoutOpen;
     delete updatedFilterProps.onFlyoutClose;
     const { container } = render(
-      <FlyoutUsage
+      <FilteringUsage
         defaultGridProps={{
           ...sharedFilterGridProps,
           filterProps: updatedFilterProps,
@@ -2505,7 +2500,7 @@ describe(componentName, () => {
 
   it('should render initial filters in flyout', async () => {
     render(
-      <FlyoutUsage
+      <FilteringUsage
         defaultGridProps={{
           ...sharedFilterGridProps,
           filterProps: flyoutProps,

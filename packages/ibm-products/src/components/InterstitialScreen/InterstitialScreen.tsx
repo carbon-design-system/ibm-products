@@ -398,8 +398,15 @@ export let InterstitialScreen = React.forwardRef<
     };
 
     const renderBody = () => {
+      {
+        /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+      }
       return (
-        <div className={cx(`${blockClass}--body`)} ref={bodyScrollRef}>
+        <div
+          className={cx(`${blockClass}--body`)}
+          ref={bodyScrollRef}
+          tabIndex="0"
+        >
           {mediaIsDefined ? (
             <FlexGrid fullWidth className={cx(`${blockClass}--body-grid`)}>
               <Row className={cx(`${blockClass}--body-row`)}>

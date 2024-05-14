@@ -8,7 +8,7 @@
 import React, { useMemo, useState } from 'react';
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
-// import mdx from './DataSpreadsheet.mdx';
+import mdx from './DataSpreadsheet.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
@@ -26,11 +26,9 @@ export default {
   },
   parameters: {
     styles,
-    /*
-docs: {
+    docs: {
       page: mdx,
     },
-*/
   },
 };
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.35.0...@carbon/ibm-products-styles@2.36.0) (2024-05-14)
+
+
+### Features
+
+* **Checklist:** release as stable ([#5139](https://github.com/carbon-design-system/ibm-products/issues/5139)) ([73729b5](https://github.com/carbon-design-system/ibm-products/commit/73729b593e02f7f6fbcfa32175c41e0608912909))
+
+
+
+
+
 # [2.35.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.34.0...@carbon/ibm-products-styles@2.35.0) (2024-05-07)
 
 

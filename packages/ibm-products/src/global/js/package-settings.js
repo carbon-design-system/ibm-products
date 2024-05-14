@@ -14,6 +14,7 @@ const defaults = {
     AboutModal: true,
     APIKeyModal: true,
     Cascade: true,
+    Checklist: true,
     CreateModal: true,
     CreateFullPage: true,
     CreateFullPageStep: true,
@@ -113,7 +114,6 @@ const defaults = {
     /* new component flags here - comment used by generate CLI */
 
     // Novice to pro components not yet reviewed and released:
-    Checklist: false,
     EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,

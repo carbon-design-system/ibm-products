@@ -21,6 +21,7 @@ collect:
         - alt
         - apiKey
         - appliedModifiers
+        - aria
         - ariaLabel
         - ariaToolbarLabel
         - assistiveText
@@ -43,6 +44,10 @@ collect:
         - collapsible
         - columnInputPlaceholder
         - columns
+        - condition
+        - conditionBuilderRef
+        - conditionState
+        - config
         - count
         - currentMatcher
         - currentStep
@@ -69,6 +74,8 @@ collect:
         - firstFocusElement
         - formDescription
         - formTitle
+        - getConditionState
+        - getOptions
         - globalFilters
         - globalFiltersIconDescription
         - globalFiltersLabel
@@ -80,6 +87,7 @@ collect:
         - globalSortBy
         - grid
         - gridGap
+        - group
         - hasActions
         - hasCloseIcon
         - hasFieldset
@@ -102,6 +110,7 @@ collect:
         - influencerPosition
         - influencerTitle
         - influencerWidth
+        - initialState
         - initialStep
         - inputConfig
         - inputLabel
@@ -159,6 +168,7 @@ collect:
         - onMount
         - onNext
         - onPrimaryButtonClick
+        - onRemove
         - onRequestClose
         - onRequestSubmit
         - onScroll
@@ -229,6 +239,7 @@ collect:
         - setSelectionAreas
         - showAllTagsLabel
         - showCloseButton
+        - showToolTip
         - sideNavAriaLabel
         - size
         - slideIn
@@ -257,6 +268,7 @@ collect:
         - useDragOverlay
         - value
         - valueTitle
+        - variant
         - verticalPosition
         - viewAllLabel
         - viewLessLabel
@@ -358,6 +370,8 @@ collect:
         - tooltipDescription
         - total
         - trending
+        # BreadcrumbWithOverflow
+        - overflowTooltipAlign
         # ButtonMenu
         - menuAriaLabel
         # ButtonSetWithOverflow
@@ -384,8 +398,8 @@ collect:
         - chartValue
         - checklistAriaLabel
         - checklistToggleAriaLabel
+        - enableToggle
         - onClickViewAll
-        - showToggle
         - taskLists
         - toggleLabel
         - toggleLabelAlign
@@ -410,6 +424,21 @@ collect:
         - setColumnStatus
         # ComboButton
         - overflowMenu
+        # ConditionBlock
+        - addConditionHandler
+        - conditionIndex
+        - conjunction
+        - isLastCondition
+        - isStatement
+        - onConnectorOperatorChange
+        - onStatementChange
+        # ConditionBuilderButton
+        - hideLabel
+        - tooltipAlign
+        # ConditionBuilderItem
+        - popOverClassName
+        # ConditionConnector
+        - operator
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -549,7 +578,6 @@ collect:
         - labelIcon
         # InlineEditCell
         - cell
-        - config
         # InlineTip
         - narrow
         - tertiaryButtonLabel
@@ -634,6 +662,7 @@ collect:
         - actionBarMenuOptionsClass
         - actionBarOverflowAriaLabel
         - breadcrumbOverflowAriaLabel
+        - breadcrumbOverflowTooltipAlign
         - collapseHeader
         - collapseHeaderIconDescription
         - collapseTitle
@@ -682,7 +711,7 @@ collect:
         # SearchBar
         - clearButtonLabelText
         - hideScopesLabel
-        - placeHolderText
+        - placeholderText
         - scopes
         - scopesTypeLabel
         - scopeToString
@@ -836,12 +865,8 @@ collect:
         - narrow
         - wide
         # General - kind
-        - '"fixed"'
-        - '"floating"'
-        - '"stacked"'
-        - '"tooltip"'
-        - '403'
-        - '404'
+        - "403"
+        - "404"
         - checked
         - critical
         - custom

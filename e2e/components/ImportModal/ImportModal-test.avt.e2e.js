@@ -12,7 +12,7 @@ import { visitStory } from '../../test-utils/storybook';
 import { carbon } from '../../../packages/ibm-products/src/settings';
 
 test.describe('ImportModal @avt', () => {
-  test.only('@avt-default-state', async ({ page }) => {
+  test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'ImportModal',
       id: 'ibm-products-patterns-import-and-upload-importmodal--standard',

@@ -27,7 +27,6 @@ const Template = () => {
 
 const FeatureComponent = () => {
   const enableFeature = useFeatureFlag('enable-example-flag');
-  console.log({ enableFeature });
   return enableFeature ? (
     <div>I am a feature flagged component that has been enabled.</div>
   ) : null;

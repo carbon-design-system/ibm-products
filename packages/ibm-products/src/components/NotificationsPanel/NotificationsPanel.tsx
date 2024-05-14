@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -173,12 +173,12 @@ interface NotificationsPanelProps {
   /**
    * Function that will dismiss a single notification
    */
-  onDismissSingleNotification?: () => void;
+  onDismissSingleNotification?: (prop) => void;
 
   /**
    * Optional: function that returns the current selected value of the disable notification toggle
    */
-  onDoNotDisturbChange?: () => void;
+  onDoNotDisturbChange?: (prop) => void;
 
   /**
    * Event handler for the View all button
@@ -303,7 +303,7 @@ export let NotificationsPanel = React.forwardRef(
     }: NotificationsPanelProps,
     ref
   ) => {
-    const notificationPanelRef = useRef();
+    const notificationPanelRef = useRef(null);
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const previousState = usePreviousValue({ open }) as
@@ -587,7 +587,10 @@ export let NotificationsPanel = React.forwardRef(
             : undefined,
         }}
         onAnimationEnd={onAnimationEnd}
-        ref={ref || notificationPanelRef}
+        ref={
+          (ref as MutableRefObject<HTMLDivElement | null>) ||
+          notificationPanelRef
+        }
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__header-container`}>

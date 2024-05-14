@@ -11,91 +11,102 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Close, Idea } from '@carbon/react/icons';
+import { Close } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
-import { useCoachmark } from './utils/context';
+
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-tagline`;
-const componentName = 'CoachmarkTagline';
+const blockClass = `${pkg.prefix}--coachmark-header`;
+const overlayBlockClass = `${pkg.prefix}--coachmark-overlay`;
+const componentName = 'CoachmarkHeader';
 
 const defaults = {
   closeIconDescription: 'Close',
   onClose: () => {},
+  showCloseButton: true,
   theme: 'light',
 };
+
+interface CoachmarkHeaderProps {
+  /**
+   * Tooltip text and aria label for the Close button icon.
+   */
+  closeIconDescription?: string;
+  /**
+   * Function to call when the close button is clicked.
+   */
+  onClose?: () => void;
+  /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton?: boolean;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+}
 
 /**
  * DO NOT USE. This component is for the exclusive use
  * of other Novice to Pro components.
  */
-export let CoachmarkTagline = React.forwardRef(
+export let CoachmarkHeader = React.forwardRef<
+  HTMLElement,
+  CoachmarkHeaderProps
+>(
   (
     {
       closeIconDescription = defaults.closeIconDescription,
       onClose = defaults.onClose,
+      showCloseButton = defaults.showCloseButton,
       theme = defaults.theme,
-      title,
+      // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const coachmark = useCoachmark();
-
     return (
-      <div
+      <header
         {
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(
-          blockClass,
-          `${blockClass}__${theme}`,
-          coachmark.isOpen && `${blockClass}--is-open`
-        )}
+        className={cx(blockClass, `${blockClass}__${theme}`)}
         ref={ref}
+        // role="main"
         {...getDevtoolsProps(componentName)}
       >
-        <button
-          // {...rest}
-          className={`${blockClass}__cta`}
-          type="button"
-          {...coachmark.buttonProps}
-        >
-          <div className={`${blockClass}__idea`}>
-            <Idea size={16} />
+        {showCloseButton && (
+          <div className={`${overlayBlockClass}--close-btn-container`}>
+            <Button
+              kind="ghost"
+              size="sm"
+              renderIcon={Close}
+              iconDescription={closeIconDescription}
+              hasIconOnly
+              className={`${overlayBlockClass}--close-btn`}
+              onClick={onClose}
+            />
           </div>
-          <div>{title}</div>
-        </button>
-        <div className={`${blockClass}--close-btn-container`}>
-          <Button
-            kind="ghost"
-            size="sm"
-            renderIcon={Close}
-            iconDescription={closeIconDescription}
-            hasIconOnly
-            className={`${blockClass}--close-btn`}
-            onClick={onClose}
-          />
-        </div>
-      </div>
+        )}
+      </header>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkTagline = pkg.checkComponentEnabled(CoachmarkTagline, componentName);
+CoachmarkHeader = pkg.checkComponentEnabled(CoachmarkHeader, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-CoachmarkTagline.displayName = componentName;
+CoachmarkHeader.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-CoachmarkTagline.propTypes = {
+CoachmarkHeader.propTypes = {
   /**
    * Tooltip text and aria label for the Close button icon.
    */
@@ -105,11 +116,11 @@ CoachmarkTagline.propTypes = {
    */
   onClose: PropTypes.func,
   /**
+   * Show/hide the "X" close button.
+   */
+  showCloseButton: PropTypes.bool,
+  /**
    * Determines the theme of the component.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
-  /**
-   * The title of the tagline.
-   */
-  title: PropTypes.string.isRequired,
 };

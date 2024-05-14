@@ -5,14 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
+/**@ts-ignore */
 import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
-
 import { pkg } from '../../settings';
 
 const componentName = 'TagSetOverflow';
@@ -21,8 +26,60 @@ const blockClass = `${pkg.prefix}--tag-set-overflow`;
 // Default values for props
 const defaults = {
   allTagsModalSearchThreshold: 10,
-  overflowAlign: 'bottom',
 };
+
+type OverflowAlign =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'left-bottom'
+  | 'left-top'
+  | 'right'
+  | 'right-bottom'
+  | 'right-top';
+type OverflowType = 'default' | 'tag';
+interface TagSetOverflowProps {
+  /**
+   * count of overflowTags over which a modal is offered
+   */
+  allTagsModalSearchThreshold?: number;
+  /**
+   * className
+   */
+  className?: string;
+  /**
+   * function to execute on clicking show all
+   */
+  onShowAllClick: () => void;
+  /**
+   * overflowAlign from the standard tooltip
+   */
+  overflowAlign?: OverflowAlign;
+  /** @type {Array<any>}
+   * tags shown in overflow
+   */
+  overflowTags: ReactNode[];
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType?: OverflowType;
+  /**
+   * Open state of the popover
+   */
+  popoverOpen?: boolean;
+  /**
+   * Setter function for the popoverOpen state value
+   */
+  setPopoverOpen?: ((value: boolean) => void) | undefined;
+  /**
+   * label for the overflow show all tags link
+   */
+  showAllTagsLabel?: string;
+}
 
 export const TagSetOverflow = React.forwardRef(
   (
@@ -32,7 +89,7 @@ export const TagSetOverflow = React.forwardRef(
       allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
       className,
       onShowAllClick,
-      overflowAlign = defaults.overflowAlign,
+      overflowAlign = 'bottom',
       overflowTags,
       overflowType,
       showAllTagsLabel,
@@ -40,29 +97,29 @@ export const TagSetOverflow = React.forwardRef(
       setPopoverOpen,
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: PropsWithChildren<TagSetOverflowProps>,
+    ref: ForwardedRef<HTMLSpanElement>
   ) => {
-    const localRef = useRef();
+    const localRef = useRef<HTMLSpanElement>(null);
     const overflowTagContent = useRef(null);
 
     useClickOutside(ref || localRef, () => {
       if (popoverOpen) {
-        setPopoverOpen(false);
+        setPopoverOpen?.(false);
       }
     });
 
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
-      setPopoverOpen(false);
+      setPopoverOpen?.(false);
       onShowAllClick();
     };
 
     const handleEscKeyPress = (event) => {
       const { key } = event;
       if (key === 'Escape') {
-        setPopoverOpen(false);
+        setPopoverOpen?.(false);
       }
     };
 
@@ -87,7 +144,7 @@ export const TagSetOverflow = React.forwardRef(
           open={popoverOpen}
         >
           <Tag
-            onClick={() => setPopoverOpen(!popoverOpen)}
+            onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__popover-trigger`)}
           >
             +{overflowTags.length}
@@ -102,26 +159,29 @@ export const TagSetOverflow = React.forwardRef(
                       : index <= allTagsModalSearchThreshold
                   )
                   .map((tag, index) => {
-                    const tagProps = {};
+                    type TagProps = { type?: string; filter?: boolean };
+                    const tagProps: TagProps = {};
                     if (overflowType === 'tag') {
                       tagProps.type = 'high-contrast';
                     }
                     if (overflowType === 'default') {
                       tagProps.filter = false;
                     }
-                    return (
-                      <li
-                        className={cx(`${blockClass}__tag-item`, {
-                          [`${blockClass}__tag-item--default`]:
-                            overflowType === 'default',
-                          [`${blockClass}__tag-item--tag`]:
-                            overflowType === 'tag',
-                        })}
-                        key={index}
-                      >
-                        {React.cloneElement(tag, tagProps)}
-                      </li>
-                    );
+                    if (React.isValidElement(tag)) {
+                      return (
+                        <li
+                          className={cx(`${blockClass}__tag-item`, {
+                            [`${blockClass}__tag-item--default`]:
+                              overflowType === 'default',
+                            [`${blockClass}__tag-item--tag`]:
+                              overflowType === 'tag',
+                          })}
+                          key={index}
+                        >
+                          {React.cloneElement(tag, tagProps)}
+                        </li>
+                      );
+                    }
                   })}
               </ul>
               {overflowTags.length > allTagsModalSearchThreshold && (
@@ -177,6 +237,7 @@ TagSetOverflow.propTypes = {
   /**
    * tags shown in overflow
    */
+  /**@ts-ignore */
   overflowTags: PropTypes.arrayOf(PropTypes.object).isRequired,
   /**
    * Type of rendering displayed inside of the tag overflow component

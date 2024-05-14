@@ -131,7 +131,7 @@ export let WebTerminal = React.forwardRef(
     */
     useEffect(() => {
       if (isInitiallyOpen) {
-        openWebTerminal();
+        openWebTerminal?.();
       }
     }, []); // eslint-disable-line
 
@@ -152,7 +152,7 @@ export let WebTerminal = React.forwardRef(
       if (prefersReducedMotion) {
         setRender(false);
       }
-      closeWebTerminal();
+      closeWebTerminal?.();
     };
 
     return shouldRender ? (

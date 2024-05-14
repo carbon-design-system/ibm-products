@@ -7,13 +7,15 @@
 
 import React, {
   forwardRef,
+  MutableRefObject,
+  ReactNode,
   useEffect,
   useRef,
   useState,
   useCallback,
 } from 'react';
 import cx from 'classnames';
-import PropTypes, { Component } from 'prop-types';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
 import { CoachmarkContext } from './utils/context';
@@ -34,13 +36,84 @@ const defaults = {
   theme: 'light',
 };
 
+interface CoachmarkProps {
+  /**
+   * Where to render the Coachmark relative to its target.
+   * Applies only to Floating and Tooltip Coachmarks.
+   * @see COACHMARK_ALIGNMENT
+   */
+  align?:
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'left-top'
+    | 'left-bottom'
+    | 'right'
+    | 'right-top'
+    | 'right-bottom'
+    | 'top'
+    | 'top-left'
+    | 'top-right';
+
+  /**
+   * Coachmark should use a single CoachmarkOverlayElements component as a child.
+   * @see CoachmarkOverlayElements
+   */
+  children: ReactNode;
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+
+  /**
+   * Function to call when the Coachmark closes.
+   */
+  onClose?: () => void;
+  /**
+   * Optional class name for the Coachmark Overlay component.
+   */
+  overlayClassName?: string;
+
+  /**
+   * What kind or style of Coachmark to render.
+   */
+  overlayKind?: 'tooltip' | 'floating' | 'stacked';
+
+  overlayRef?: MutableRefObject<HTMLElement | null>;
+
+  /**
+   * By default, the Coachmark will be appended to the end of `document.body`.
+   * The Coachmark will remain persistent as the user navigates the app until
+   * the user closes the Coachmark.
+   *
+   * Alternatively, the app developer can tightly couple the Coachmark to a DOM
+   * element or other component by specifying a CSS selector. The Coachmark will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the Coachmark will disappear.
+   */
+  portalTarget?: string;
+  /**
+   * Fine tune the position of the target in pixels. Applies only to Beacons.
+   */
+  positionTune?: { x: number; y: number } | object;
+  /**
+   * The optional button or beacon that the user will click to show the Coachmark.
+   */
+  target: React.ReactNode;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+}
+
 /**
  * Coachmarks are used to call out specific functionality or concepts
  * within the UI that may not be intuitive but are important for the
  * user to gain understanding of the product's main value and discover new use cases.
  */
 
-export let Coachmark = forwardRef(
+export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   (
     {
       align = defaults.align,
@@ -172,7 +245,7 @@ export let Coachmark = forwardRef(
       <CoachmarkContext.Provider value={contextValue}>
         <div
           className={cx(blockClass, `${blockClass}__${theme}`, className)}
-          ref={_coachmarkRef}
+          ref={_coachmarkRef as MutableRefObject<HTMLDivElement | null>}
           {
             // Pass through any other property values as HTML attributes.
             ...rest
@@ -183,7 +256,7 @@ export let Coachmark = forwardRef(
           {isOpen &&
             createPortal(
               <CoachmarkOverlay
-                ref={_overlayRef}
+                ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
                 fixedIsVisible={false}
                 kind={overlayKind}
                 onClose={handleClose}
@@ -195,7 +268,8 @@ export let Coachmark = forwardRef(
               >
                 {children}
               </CoachmarkOverlay>,
-              portalNode
+              // Default to `document.body` when `portalNode` is `null`
+              portalNode || document.body
             )}
         </div>
       </CoachmarkContext.Provider>
@@ -258,12 +332,11 @@ Coachmark.propTypes = {
    */
   overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
 
-  overlayRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Component) }),
-  ]),
+  overlayRef: PropTypes.shape({
+    current: PropTypes.instanceOf(
+      HTMLElement
+    ) as PropTypes.Validator<HTMLElement | null>,
+  }),
 
   /**
    * By default, the Coachmark will be appended to the end of `document.body`.

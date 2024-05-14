@@ -76,6 +76,7 @@ const defaultProps = {
   generateSuccessTitle: 'API key successfully created',
   editSuccessTitle: 'API key successfully saved',
   loadingText: 'Generating...',
+  modalLabel: 'Generate API key',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
@@ -401,7 +402,6 @@ export const CustomGenerate = MultiStepTemplate.bind({});
 CustomGenerate.args = {
   ...defaultProps,
   generateButtonText: 'Generate',
-  modalLabel: 'Generate API key',
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
   downloadFileName: 'apikey',
@@ -461,7 +461,6 @@ export const CustomEdit = MultiStepTemplate.bind({});
 CustomEdit.args = {
   ...defaultProps,
   generateButtonText: 'Generate',
-  modalLabel: 'Generate API key',
   nextStepButtonText: 'Next',
   previousStepButtonText: 'Previous',
   downloadFileName: 'apikey',

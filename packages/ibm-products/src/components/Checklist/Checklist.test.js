@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { act } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -19,6 +20,7 @@ const componentName = Checklist.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const list1itemCallbackFn = jest.fn();
 const taskLists = [
   {
     title: 'List 1 title',
@@ -26,7 +28,7 @@ const taskLists = [
       {
         kind: 'checked',
         label: 'Checked task with callback',
-        onClick: () => {},
+        onClick: list1itemCallbackFn,
       },
       {
         kind: 'checked',
@@ -96,9 +98,24 @@ describe(componentName, () => {
     screen.getByText(chartLabel);
   });
 
-  it('renders a toggle', () => {
-    renderComponent({ showToggle: true, title });
-    expect(screen.getByLabelText('Checklist toggle')).toBeDefined();
+  it('renders a toggle', async () => {
+    const { click } = userEvent;
+    const onToggleFn = jest.fn();
+    const checklistToggleAriaLabel = 'My checklist toggle';
+    renderComponent({
+      enableToggle: true,
+      title,
+      onToggle: onToggleFn,
+      checklistToggleAriaLabel,
+    });
+
+    expect(screen.getByLabelText(checklistToggleAriaLabel)).toBeDefined();
+    const enableToggleButton = screen.getByLabelText(checklistToggleAriaLabel);
+    await act(() => click(enableToggleButton));
+    // onToggle is called initially because the component defaults to being open which
+    // causes onToggle to be called. Then we click it again in this test, causing
+    // onToggle to be called 2 times
+    expect(onToggleFn).toHaveBeenCalledTimes(2);
   });
 
   it('renders a "view all" button', () => {
@@ -134,5 +151,26 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('should click the view all button', async () => {
+    const { click } = userEvent;
+    const viewAllLabel = 'View all';
+    const onClickViewAllFn = jest.fn();
+    renderComponent({ onClickViewAll: onClickViewAllFn, viewAllLabel });
+
+    const viewAllButton = screen.getByText(viewAllLabel).closest('button');
+    await click(viewAllButton);
+    expect(onClickViewAllFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call list item onClick handler', async () => {
+    const { click } = userEvent;
+    renderComponent();
+    const taskItemWithCallback = screen
+      .getByText('Checked task with callback')
+      .closest('button');
+    await click(taskItemWithCallback);
+    expect(list1itemCallbackFn).toHaveBeenCalledTimes(1);
   });
 });

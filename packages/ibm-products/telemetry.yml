@@ -44,6 +44,7 @@ collect:
         - collapsible
         - columnInputPlaceholder
         - columns
+        - condition
         - conditionBuilderRef
         - conditionState
         - config
@@ -86,6 +87,7 @@ collect:
         - globalSortBy
         - grid
         - gridGap
+        - group
         - hasActions
         - hasCloseIcon
         - hasFieldset
@@ -245,7 +247,6 @@ collect:
         - small
         - sortByLabel
         - startConditionLabel
-        - state
         - status
         - style
         - submitButtonText
@@ -427,7 +428,7 @@ collect:
         - addConditionHandler
         - conditionIndex
         - conjunction
-        - group
+        - isLastCondition
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
@@ -710,7 +711,7 @@ collect:
         # SearchBar
         - clearButtonLabelText
         - hideScopesLabel
-        - placeHolderText
+        - placeholderText
         - scopes
         - scopesTypeLabel
         - scopeToString
@@ -864,10 +865,6 @@ collect:
         - narrow
         - wide
         # General - kind
-        - '"fixed"'
-        - '"floating"'
-        - '"stacked"'
-        - '"tooltip"'
         - "403"
         - "404"
         - checked

@@ -18,7 +18,6 @@ export const ConditionBuilderButton = ({
   const Button = () => {
     return (
       <button
-        {...rest}
         // role={'gridcell'}
         tabIndex={-1}
         className={cx([
@@ -28,6 +27,7 @@ export const ConditionBuilderButton = ({
         ])}
         type="button"
         onClick={onClick}
+        {...rest}
       >
         {Icon && <Icon />}
         {!hideLabel && label}

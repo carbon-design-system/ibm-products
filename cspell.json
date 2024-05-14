@@ -61,6 +61,7 @@
     "cdai",
     "security",
     "package.json",
+    "*.avt.e2e.js",
     "*.snap",
     "*.log",
     "CHANGELOG.md"

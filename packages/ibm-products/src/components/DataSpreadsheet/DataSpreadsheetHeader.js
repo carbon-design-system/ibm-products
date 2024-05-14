@@ -18,6 +18,7 @@ import { selectAllCells } from './utils/selectAllCells';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 import { useSpreadsheetMouseMove } from './hooks';
 import { checkForHoldingKey } from './utils/checkForHoldingKey';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -152,115 +153,123 @@ export const DataSpreadsheetHeader = forwardRef(
 
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
-        {headerGroups.map((headerGroup, index) => (
-          <div
-            key={`header_${index}`}
-            {...headerGroup.getHeaderGroupProps()}
-            style={{
-              ...headerGroup.getHeaderGroupProps().style,
-              width: getSpreadsheetWidth({
-                type: 'header',
-                headerGroup,
-                scrollBarSizeValue,
-                totalVisibleColumns,
-                defaultColumn,
-                visibleColumns,
-              }),
-              overflow: 'hidden',
-            }}
-            className={`${blockClass}__tr`}
-          >
-            {/* SELECT ALL BUTTON */}
+        {headerGroups.map((headerGroup, index) => {
+          const headerProps = prepareProps(
+            headerGroup.getHeaderGroupProps(),
+            'key'
+          );
+          return (
             <div
-              role="columnheader"
-              className={`${blockClass}__select-all-cell-container`}
+              key={`header_${index}`}
+              {...headerProps}
               style={{
-                width: defaultColumn?.rowHeaderWidth,
-                height: defaultColumn?.rowHeight,
+                ...headerGroup.getHeaderGroupProps().style,
+                width: getSpreadsheetWidth({
+                  type: 'header',
+                  headerGroup,
+                  scrollBarSizeValue,
+                  totalVisibleColumns,
+                  defaultColumn,
+                  visibleColumns,
+                }),
+                overflow: 'hidden',
               }}
+              className={`${blockClass}__tr`}
             >
-              <button
-                id={`${blockClass}__cell--header--header`}
-                data-row-index="header"
-                data-column-index="header"
-                type="button"
-                tabIndex={-1}
-                aria-label={selectAllAriaLabel}
-                onClick={handleSelectAllClick}
-                className={cx(
-                  `${blockClass}__th`,
-                  `${blockClass}--interactive-cell-element`,
-                  `${blockClass}__th--select-all`,
-                  {
-                    [`${blockClass}__th--active-header`]:
-                      activeCellCoordinates?.column === 'header' &&
-                      activeCellCoordinates?.row === 'header',
-                  }
-                )}
+              {/* SELECT ALL BUTTON */}
+              <div
+                role="columnheader"
+                className={`${blockClass}__select-all-cell-container`}
+                style={{
+                  width: defaultColumn?.rowHeaderWidth,
+                  height: defaultColumn?.rowHeight,
+                }}
               >
-                &nbsp;
-              </button>
-            </div>
-            {/* COLUMN HEADER BUTTONS */}
-            {headerGroup.headers.map((column, index) => {
-              const selectedHeader = checkSelectedHeaderCell(
-                index,
-                selectionAreas,
-                'column',
-                rows
-              );
-              return (
-                <div
-                  key={`column_${index}`}
-                  role="columnheader"
-                  className={`${blockClass}__columnheader`}
-                  {...column.getHeaderProps()}
+                <button
+                  id={`${blockClass}__cell--header--header`}
+                  data-row-index="header"
+                  data-column-index="header"
+                  type="button"
+                  tabIndex={-1}
+                  aria-label={selectAllAriaLabel}
+                  onClick={handleSelectAllClick}
+                  className={cx(
+                    `${blockClass}__th`,
+                    `${blockClass}--interactive-cell-element`,
+                    `${blockClass}__th--select-all`,
+                    {
+                      [`${blockClass}__th--active-header`]:
+                        activeCellCoordinates?.column === 'header' &&
+                        activeCellCoordinates?.row === 'header',
+                    }
+                  )}
                 >
-                  <button
-                    id={`${blockClass}__cell--header--${index}`}
-                    data-row-index="header"
-                    data-column-index={index}
-                    tabIndex={-1}
-                    onMouseDown={
-                      selectedHeader ? handleHeaderMouseDown(index) : null
-                    }
-                    onMouseUp={
-                      selectedHeader
-                        ? () => setSelectedHeaderReorderActive(false)
-                        : null
-                    }
-                    onClick={
-                      !selectedHeader ? handleColumnHeaderClick(index) : null
-                    }
-                    style={{
-                      height: defaultColumn?.rowHeight,
-                      width: column?.width || defaultColumn?.width,
-                    }}
-                    className={cx(
-                      `${blockClass}__th`,
-                      `${blockClass}--interactive-cell-element`,
-                      {
-                        [`${blockClass}__th--active-header`]:
-                          activeCellCoordinates?.column === index ||
-                          checkActiveHeaderCell(
-                            index,
-                            selectionAreas,
-                            'column'
-                          ),
-                        [`${blockClass}__th--selected-header`]: selectedHeader,
-                        [`${blockClass}__th--selected-header-reorder-active`]:
-                          selectedHeaderReorderActive,
-                      }
-                    )}
-                    type="button"
+                  &nbsp;
+                </button>
+              </div>
+              {/* COLUMN HEADER BUTTONS */}
+              {headerGroup.headers.map((column, index) => {
+                const colProps = prepareProps(column.getHeaderProps(), 'key');
+                const selectedHeader = checkSelectedHeaderCell(
+                  index,
+                  selectionAreas,
+                  'column',
+                  rows
+                );
+                return (
+                  <div
+                    key={`column_${index}`}
+                    role="columnheader"
+                    className={`${blockClass}__columnheader`}
+                    {...colProps}
                   >
-                    {column.render('Header')}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        ))}
+                    <button
+                      id={`${blockClass}__cell--header--${index}`}
+                      data-row-index="header"
+                      data-column-index={index}
+                      tabIndex={-1}
+                      onMouseDown={
+                        selectedHeader ? handleHeaderMouseDown(index) : null
+                      }
+                      onMouseUp={
+                        selectedHeader
+                          ? () => setSelectedHeaderReorderActive(false)
+                          : null
+                      }
+                      onClick={
+                        !selectedHeader ? handleColumnHeaderClick(index) : null
+                      }
+                      style={{
+                        height: defaultColumn?.rowHeight,
+                        width: column?.width || defaultColumn?.width,
+                      }}
+                      className={cx(
+                        `${blockClass}__th`,
+                        `${blockClass}--interactive-cell-element`,
+                        {
+                          [`${blockClass}__th--active-header`]:
+                            activeCellCoordinates?.column === index ||
+                            checkActiveHeaderCell(
+                              index,
+                              selectionAreas,
+                              'column'
+                            ),
+                          [`${blockClass}__th--selected-header`]:
+                            selectedHeader,
+                          [`${blockClass}__th--selected-header-reorder-active`]:
+                            selectedHeaderReorderActive,
+                        }
+                      )}
+                      type="button"
+                    >
+                      {column.render('Header')}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     );
   }

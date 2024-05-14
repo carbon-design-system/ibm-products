@@ -11,16 +11,16 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
 test.describe('InterstitialScreen @avt', () => {
-  test('@avt-default-state', async ({ page }) => {
+  test('@avt-full-screen-state', async ({ page }) => {
     await visitStory(page, {
       component: 'InterstitialScreen',
-      id: 'ibm-products-patterns-about-modal-aboutmodal--about-modal',
+      id: 'ibm-products-novice-to-pro-interstitial-screen-interstitialscreen--interstitial-screen-full-screen-image',
       globals: {
         carbonTheme: 'white',
       },
     });
     await expect(page).toHaveNoACViolations(
-      'InterstitialScreen @avt-default-state'
+      'InterstitialScreen @avt-full-screen-state'
     );
   });
 });

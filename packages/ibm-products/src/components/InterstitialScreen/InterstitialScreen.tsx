@@ -352,6 +352,7 @@ export let InterstitialScreen = React.forwardRef<
             variantClass,
             isVisibleClass
           )}
+          role="main"
           aria-label={interstitialAriaLabel}
           ref={ref}
           {...getDevtoolsProps(componentName)}

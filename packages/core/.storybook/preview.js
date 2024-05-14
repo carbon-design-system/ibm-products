@@ -8,6 +8,7 @@
 import React, { useEffect } from 'react';
 import { StaticNotification, UnorderedList, ListItem } from '@carbon/react';
 import { white, g10, g90, g100 } from '@carbon/themes';
+import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
 

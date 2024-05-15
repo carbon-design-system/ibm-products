@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  ForwardedRef,
+  MutableRefObject,
+  SetStateAction,
+  forwardRef,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { px } from '@carbon/layout';
@@ -21,6 +29,136 @@ import { checkForHoldingKey } from './utils/checkForHoldingKey';
 import { prepareProps } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
+
+interface ActiveCellCoordinates {
+  row?: number | string;
+  column?: number | string;
+}
+
+interface Column {
+  rowHeight?: number;
+  rowHeaderWidth?: number;
+  width?: number;
+  Header?: string;
+  accessor?: string | (() => void);
+  Cell?: () => void;
+}
+
+type Point = {
+  column?: number;
+};
+
+type ItemType = {
+  matcher?: string;
+  point1?: Point;
+  point2?: Point;
+};
+
+type Size = 'xs' | 'sm' | 'md' | 'lg';
+
+interface DataSpreadsheetHeaderProps {
+  /**
+   * Object containing the active cell coordinates
+   */
+  activeCellCoordinates?: ActiveCellCoordinates;
+
+  /**
+   * Specifies the cell height
+   */
+  cellSize?: Size;
+
+  /**
+   * All of the spreadsheet columns
+   */
+  columns?: readonly Column[];
+
+  /**
+   * uuid that corresponds to the current selection area
+   */
+  currentMatcher?: string;
+
+  /**
+   * Default spreadsheet sizing values
+   */
+  defaultColumn?: Column;
+
+  /**
+   * Whether or not a click/hold is active on a header cell
+   */
+  headerCellHoldActive?: boolean;
+
+  /**
+   * Headers provided from useTable hook
+   */
+  headerGroups?: any[];
+
+  /**
+   * All of the spreadsheet row data
+   */
+  rows?: object[];
+
+  /**
+   * The scrollbar width
+   */
+  scrollBarSize?: number;
+
+  /**
+   * The aria label applied to the Select all button
+   */
+  selectAllAriaLabel: string;
+
+  /**
+   * All of the cell selection area items
+   */
+  selectionAreas?: ItemType[];
+
+  /**
+   * Setter fn for activeCellCoordinates value
+   */
+  setActiveCellCoordinates?: Dispatch<
+    SetStateAction<ActiveCellCoordinates | undefined>
+  >;
+
+  /**
+   * Setter fn for currentMatcher value
+   */
+  setCurrentMatcher?: Dispatch<SetStateAction<string>>;
+
+  /**
+   * Setter fn for header cell hold active value
+   */
+  setHeaderCellHoldActive?: (arg: boolean) => void;
+
+  /**
+   * Setter fn for selectionAreaData state value
+   */
+  setSelectionAreaData?: Dispatch<SetStateAction<any>>;
+
+  /**
+   * Setter fn for selectionAreas value
+   */
+  setSelectionAreas?: Dispatch<SetStateAction<object[]>>;
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns?: number;
+
+  /**
+   * Function used to update the active cell coordinates
+   */
+  updateActiveCellCoordinates?: (arg) => void;
+
+  /**
+   * Array of visible columns provided by react-table useTable hook
+   */
+  visibleColumns?: [];
+}
+
+type PrevState = {
+  cellSize?: Size;
+};
 
 export const DataSpreadsheetHeader = forwardRef(
   (
@@ -44,19 +182,23 @@ export const DataSpreadsheetHeader = forwardRef(
       headerCellHoldActive,
       selectAllAriaLabel,
       visibleColumns,
-    },
-    ref
+    }: DataSpreadsheetHeaderProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const [scrollBarSizeValue, setScrollBarSizeValue] = useState(0);
+    const [scrollBarSizeValue, setScrollBarSizeValue] = useState<
+      number | undefined
+    >(0);
     const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
       useState(false);
-    const previousState = usePreviousValue({ cellSize });
+    const previousState: PrevState = usePreviousValue({ cellSize }) || {};
     useEffect(() => {
       if (previousState?.cellSize !== cellSize) {
-        const scrollContainer = ref?.current?.querySelector(
-          `.${blockClass}__list--container`
-        );
+        const scrollContainer = (
+          ref as MutableRefObject<HTMLElement>
+        )?.current?.querySelector(`.${blockClass}__list--container`);
         const hasScrollBar =
+          scrollContainer?.scrollHeight &&
+          scrollContainer?.clientHeight &&
           scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
         const scrollBarValue = hasScrollBar ? 0 : scrollBarSize;
         setScrollBarSizeValue(scrollBarValue);
@@ -72,15 +214,16 @@ export const DataSpreadsheetHeader = forwardRef(
           activeCellCoordinates,
           rows,
           columns,
+          currentMatcher,
           setActiveCellCoordinates,
           setCurrentMatcher,
           setSelectionAreas,
           spreadsheetRef: ref,
           index,
+          isKeyboard: undefined,
           setSelectionAreaData,
           isHoldingCommandKey,
           isHoldingShiftKey,
-          currentMatcher,
         });
       };
     };
@@ -104,48 +247,54 @@ export const DataSpreadsheetHeader = forwardRef(
           return;
         }
         setSelectedHeaderReorderActive(true);
-        const selectionAreaToClone = selectionAreas.filter(
+        const selectionAreaToClone = selectionAreas?.filter(
           (item) => item?.matcher === currentMatcher
         );
-        const selectionAreaElement = ref.current.querySelector(
-          `[data-matcher-id="${selectionAreaToClone[0]?.matcher}"]`
+        const selectionAreaElement = (
+          ref as MutableRefObject<HTMLDivElement>
+        ).current.querySelector(
+          `[data-matcher-id="${selectionAreaToClone?.[0]?.matcher}"]`
         );
         const clickXPosition = event.clientX;
         const headerButtonCoords = event.target.getBoundingClientRect();
         const headerIndex = event.target.getAttribute('data-column-index');
         const offsetXValue = clickXPosition - headerButtonCoords.left;
         const lowestColumnIndexFromSelectionArea = Math.min(
-          selectionAreaToClone[0].point1.column,
-          selectionAreaToClone[0].point2.column
+          selectionAreaToClone?.[0]?.point1?.column || 0,
+          selectionAreaToClone?.[0]?.point2?.column || 0
         );
         const selectionAreaCoords =
-          selectionAreaElement.getBoundingClientRect();
+          selectionAreaElement?.getBoundingClientRect() || new DOMRect();
         const updatedOffsetDifference =
           lowestColumnIndexFromSelectionArea < parseInt(headerIndex)
             ? offsetXValue +
-              (headerButtonCoords.left - selectionAreaCoords.left)
+              (headerButtonCoords.left - selectionAreaCoords?.left)
             : offsetXValue;
-        const bodyContainer = document.querySelector(
+        const bodyContainer = document?.querySelector(
           `.${blockClass}__list--container`
-        ).firstElementChild;
-        const selectionAreaClonedElement = selectionAreaElement.cloneNode();
-        const reorderIndicatorLine = selectionAreaElement.cloneNode();
-        reorderIndicatorLine.className = `${blockClass}__reorder-indicator-line`;
-        reorderIndicatorLine.style.width = px(2);
+        )?.firstElementChild;
+        const selectionAreaClonedElement =
+          selectionAreaElement?.cloneNode() as HTMLElement;
+        const reorderIndicatorLine =
+          selectionAreaElement?.cloneNode() as HTMLElement;
+        if (reorderIndicatorLine) {
+          reorderIndicatorLine.className = `${blockClass}__reorder-indicator-line`;
+          reorderIndicatorLine.style.width = px(2);
+        }
         selectionAreaClonedElement.classList.add(
           `${blockClass}__selection-area--element-cloned`
         );
         selectionAreaClonedElement.setAttribute(
           'data-clone-offset-x',
-          updatedOffsetDifference
+          `${updatedOffsetDifference}`
         );
         selectionAreaClonedElement.setAttribute(
           'data-column-index-original',
           index
         );
-        bodyContainer.appendChild(selectionAreaClonedElement);
-        bodyContainer.appendChild(reorderIndicatorLine);
-        setHeaderCellHoldActive(true);
+        bodyContainer?.appendChild(selectionAreaClonedElement);
+        bodyContainer?.appendChild(reorderIndicatorLine);
+        setHeaderCellHoldActive?.(true);
       };
     };
 
@@ -153,7 +302,7 @@ export const DataSpreadsheetHeader = forwardRef(
 
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
-        {headerGroups.map((headerGroup, index) => {
+        {headerGroups?.map((headerGroup, index) => {
           const headerProps = prepareProps(
             headerGroup.getHeaderGroupProps(),
             'key'
@@ -170,6 +319,7 @@ export const DataSpreadsheetHeader = forwardRef(
                   scrollBarSizeValue,
                   totalVisibleColumns,
                   defaultColumn,
+                  totalColumnsWidth: undefined,
                   visibleColumns,
                 }),
                 overflow: 'hidden',
@@ -229,15 +379,19 @@ export const DataSpreadsheetHeader = forwardRef(
                       data-column-index={index}
                       tabIndex={-1}
                       onMouseDown={
-                        selectedHeader ? handleHeaderMouseDown(index) : null
+                        selectedHeader
+                          ? handleHeaderMouseDown(index)
+                          : undefined
                       }
                       onMouseUp={
                         selectedHeader
                           ? () => setSelectedHeaderReorderActive(false)
-                          : null
+                          : undefined
                       }
                       onClick={
-                        !selectedHeader ? handleColumnHeaderClick(index) : null
+                        !selectedHeader
+                          ? handleColumnHeaderClick(index)
+                          : undefined
                       }
                       style={{
                         height: defaultColumn?.rowHeight,
@@ -279,6 +433,7 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * Object containing the active cell coordinates
    */
+  /**@ts-ignore */
   activeCellCoordinates: PropTypes.shape({
     row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -302,6 +457,7 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * Default spreadsheet sizing values
    */
+  /**@ts-ignore */
   defaultColumn: PropTypes.shape({
     rowHeight: PropTypes.number,
     rowHeaderWidth: PropTypes.number,
@@ -321,6 +477,7 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * All of the spreadsheet row data
    */
+  /**@ts-ignore */
   rows: PropTypes.arrayOf(PropTypes.object),
 
   /**
@@ -336,6 +493,7 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * All of the cell selection area items
    */
+  /**@ts-ignore */
   selectionAreas: PropTypes.arrayOf(PropTypes.object),
 
   /**
@@ -377,5 +535,6 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * Array of visible columns provided by react-table useTable hook
    */
+  /**@ts-ignore */
   visibleColumns: PropTypes.array,
 };

@@ -1,5 +1,3 @@
-// cspell:words createtearsheet
-
 /**
  * Copyright IBM Corp. 2024, 2024
  *
@@ -11,6 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { carbon } from '../../../packages/ibm-products/src/settings';
 
 test.describe('CreateTearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -21,6 +20,14 @@ test.describe('CreateTearsheet @avt', () => {
         carbonTheme: 'white',
       },
     });
+    await page.getByRole('button', { name: 'Open CreateTearsheet' }).click();
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    await expect(modalElement).toBeVisible();
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
     await expect(page).toHaveNoACViolations(
       'CreateTearsheet @avt-default-state'
     );

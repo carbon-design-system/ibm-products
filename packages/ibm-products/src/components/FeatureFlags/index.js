@@ -112,10 +112,7 @@ function useChangedValue(value, compare, callback) {
  * @returns {boolean}
  */
 function useFeatureFlag(flag) {
-  console.log(flag);
   const scope = useContext(FeatureFlagContext);
-  // console.log(scope.enabled(flag));
-  console.log(scope);
   return scope.enabled(flag);
 }
 

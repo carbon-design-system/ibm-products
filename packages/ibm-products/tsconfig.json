@@ -4,5 +4,5 @@
     // TODO: Turn back on once stricter typings for internal utilities are complete
     "noImplicitAny": false,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "../core/**/*"]
 }

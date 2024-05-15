@@ -28,6 +28,7 @@ import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
+import { useFeatureFlag } from '../../FeatureFlags';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
@@ -35,7 +36,7 @@ const gcClass = `${blockClass}__grid-container`;
 export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
-  const { activeCellId, gridActive, editId } = inlineEditState;
+  const { activeCellId, gridActive, editId, featureFlags } = inlineEditState;
   const {
     getTableProps,
     getFilterFlyoutProps,
@@ -65,6 +66,33 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   const contentRows = (DatagridPagination && page) || rows;
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
+
+  const enableEditableCell = useFeatureFlag('Datagrid.useEditableCell');
+  const enableInlineEdit = useFeatureFlag('Datagrid.useInlineEdit');
+  const enableCustomizeCols = useFeatureFlag('Datagrid.useCustomizeColumns');
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_FEATURE_FLAGS',
+      payload: {
+        'Datagrid.useEditableCell': enableEditableCell,
+        'Datagrid.useInlineEdit': enableInlineEdit,
+        'Datagrid.useCustomizeColumns': enableCustomizeCols,
+      },
+    });
+  }, [dispatch, enableEditableCell, enableCustomizeCols, enableInlineEdit]);
+
+  useEffect(() => {
+    if (
+      featureFlags &&
+      (featureFlags?.['Datagrid.useEditableCell'] ||
+        featureFlags?.['Datagrid.useInlineEdit'])
+    ) {
+      console.error(
+        `Datagrid useEditableCell/useInlineEdit extension has not been enabled via feature flag.`
+      );
+    }
+  }, [featureFlags]);
 
   useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {

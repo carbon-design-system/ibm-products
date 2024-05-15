@@ -6,11 +6,17 @@
  */
 import React from 'react';
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
+import mdx from './FeatureFlags.mdx';
 
 export default {
   title: 'IBM Products/Components/FeatureFlags',
   component: FeatureFlags,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const Template = () => {

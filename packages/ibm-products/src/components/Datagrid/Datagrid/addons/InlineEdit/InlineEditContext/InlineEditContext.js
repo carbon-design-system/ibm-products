@@ -69,6 +69,12 @@ const inlineEditReducer = (state, action) => {
       }
       break;
     }
+    case 'SET_FEATURE_FLAGS': {
+      return {
+        ...state,
+        featureFlags: action.payload ?? {},
+      };
+    }
     default:
       return state;
   }

@@ -62,7 +62,7 @@ GetStarted.propTypes = {
   /**
    * Icons that are displayed on the card showing the time and skill needed
    */
-  metaData: PropTypes.arrayOf(
+  metadata: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

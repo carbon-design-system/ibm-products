@@ -42,7 +42,7 @@ export let Card = forwardRef(
       // The component props, in alphabetical order (for consistency).
       actionIcons = defaults.actionIcons,
       actionsPlacement = defaults.actionsPlacement,
-      metaData = defaults.actionIcons,
+      metadata = defaults.actionIcons,
       children,
       className,
       clickZone = defaults.clickZone,
@@ -84,7 +84,7 @@ export let Card = forwardRef(
     },
     ref
   ) => {
-    getStarted ? (actionIcons = metaData) : '';
+    getStarted ? (actionIcons = metadata) : '';
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
       actionIcons.length > 0 ||
@@ -343,7 +343,7 @@ Card.propTypes = {
   ]),
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
-  metaData: PropTypes.arrayOf(
+  metadata: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 import { GetStarted } from '.';
 import mdx from './GetStarted.mdx';
 
@@ -23,7 +21,7 @@ import abstractImage from './_story-assets/abstract-image.svg';
 const defaultProps = {
   label: 'Label',
   title: 'Title',
-  metaData: [
+  metadata: [
     {
       id: '1',
       icon: (props) => <Time size={16} {...props} />,
@@ -72,12 +70,6 @@ const Template = (opts) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  ...defaultProps,
-  pictogram: (props) => <Crossroads size={32} {...props} />,
-};
-
-export const withPictogram = Template.bind({});
-withPictogram.args = {
   ...defaultProps,
   pictogram: (props) => <Crossroads size={32} {...props} />,
 };

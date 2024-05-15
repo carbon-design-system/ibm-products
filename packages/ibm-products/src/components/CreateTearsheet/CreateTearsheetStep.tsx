@@ -30,34 +30,11 @@ const defaults = {
   includeStep: true,
 };
 
-type FieldsetProps =
+type fieldsetLegendTextProps =
+  | { hasFieldset?: true; fieldsetLegendText: string }
   | {
-      /**
-       * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-       * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-       * Otherwise, use CSS to hide/remove this label text.
-       */
-      fieldsetLegendText: string;
-      /**
-       * This optional prop will render your form content inside of a fieldset html element
-       * and is defaulted to true.
-       * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-       */
-      hasFieldset?: true;
-    }
-  | {
-      /**
-       * This is the required legend text that appears above a fieldset html element for accessibility purposes.
-       * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-       * Otherwise, use CSS to hide/remove this label text.
-       */
-      fieldsetLegendText?: never;
-      /**
-       * This optional prop will render your form content inside of a fieldset html element
-       * and is defaulted to true.
-       * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
-       */
       hasFieldset?: false;
+      fieldsetLegendText?: never;
     };
 
 interface CreateTearsheetStepBaseProps extends PropsWithChildren {
@@ -80,6 +57,20 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
    * This will conditionally disable the submit button in the multi step Tearsheet
    */
   disableSubmit?: boolean;
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   * and is defaulted to true.
+   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   */
+  hasFieldset?: boolean;
+
+  /**
+   * This is the required legend text that appears above a fieldset html element for accessibility purposes.
+   * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's step content.
+   * Otherwise, use CSS to hide/remove this label text.
+   */
+  fieldsetLegendText?: string;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -133,7 +124,8 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
 interface PreviousStateProps {
   currentStep: number | undefined;
 }
-type CreateTearsheetStepProps = CreateTearsheetStepBaseProps & FieldsetProps;
+type CreateTearsheetStepProps = CreateTearsheetStepBaseProps &
+  fieldsetLegendTextProps;
 
 export let CreateTearsheetStep = forwardRef(
   (

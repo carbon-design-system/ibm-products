@@ -6,14 +6,25 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
+
+body {
+  @include type.reset();
+}
 
 .welcome__container--outer {
+  position: fixed;
+  top: 0;
+  left: 0;
   overflow: hidden;
   width: 100%;
   height: 100vh;
+  padding: $spacing-09;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$purple-10;
 }

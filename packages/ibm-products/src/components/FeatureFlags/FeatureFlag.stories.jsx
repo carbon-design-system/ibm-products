@@ -20,7 +20,11 @@ export default {
   },
   decorators: [
     (Story) => (
-      <WithFeatureFlags>
+      <WithFeatureFlags
+        flags={{
+          'enable-example-flag': true,
+        }}
+      >
         <Story />
       </WithFeatureFlags>
     ),

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  ForwardedRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -29,6 +35,7 @@ import { ChevronUp } from '@carbon/react/icons';
 
 import { ChecklistIcon } from './ChecklistIcon';
 import { ChecklistChart } from './ChecklistChart';
+import { Kinds, Kind, Theme, Themes } from './Checklist.types';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--checklist`;
@@ -45,6 +52,91 @@ const componentName = 'Checklist';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
+type Task = {
+  kind: Kind;
+  label: string;
+  onClick?(task?: Task): void;
+};
+
+type TaskList = {
+  title?: string;
+  tasks: Array<Task>;
+};
+
+interface ChecklistProps {
+  /**
+   * Define both `chartLabel` and `chartValue` to show the chart and its label together.
+   */
+  chartLabel?: string;
+  /**
+   * A number between 0 and 1.
+   *
+   * Define both `chartLabel` and `chartValue` to show the chart and its label together.
+   */
+  chartValue?: number;
+  /**
+   * Aria-label for the Checklist component.
+   */
+  checklistAriaLabel?: string;
+  /**
+   * Aria-label for the Checklist's toggle component.
+   */
+  checklistToggleAriaLabel?: string;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Whether or not to show the open/close toggle.
+   */
+  enableToggle?: boolean;
+  /**
+   * Callback for the "View all" button. See also `viewAllLabel`.
+   */
+  onClickViewAll?(): void;
+  /**
+   * Optional callback for when the list is opened/closed.
+   */
+  onToggle?(isOpen?: boolean): void;
+  /**
+   * Specifies whether the component is opened or closed.
+   * This can be set during initialization, or changed after being rendered.
+   */
+  open?: boolean;
+  /**
+   * The task list can be broken down into sub-lists.
+   *
+   * Each sub-list can include an optional `title`.
+   *
+   * Each task must specify the appropriate icon (`kind`) and `label`.
+   *
+   * If any task has an `onClick` callback function defined,
+   * then the `label` will be rendered as a button,
+   * else the `label` will be rendered as plain text.
+   */
+  taskLists: Array<TaskList>;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: Theme;
+  /**
+   * The title of the component.
+   */
+  title?: ReactNode;
+  /**
+   * The label for the toggle's tooltip.
+   */
+  toggleLabel?: string;
+  /**
+   * The alignment of the toggle's tooltip.
+   */
+  toggleLabelAlign?: React.ComponentProps<typeof IconButton>['align'];
+  /**
+   * If defined, will show and enable the "View all (#)" button at the bottom of the list.
+   */
+  viewAllLabel?: string;
+}
+
 // Default values for props
 const defaults = {
   checklistAriaLabel: 'Checklist',
@@ -54,7 +146,7 @@ const defaults = {
   open: true,
   enableToggle: true,
   taskLists: [],
-  theme: 'light',
+  theme: Themes.light,
   toggleLabel: 'Toggle',
   toggleLabelAlign: 'top',
 };
@@ -84,8 +176,8 @@ export let Checklist = React.forwardRef(
       toggleLabelAlign = defaults.toggleLabelAlign,
       viewAllLabel,
       ...rest
-    },
-    ref
+    }: ChecklistProps,
+    ref: ForwardedRef<HTMLElement>
   ) => {
     const [isOpen, setIsOpen] = useState(open);
     const listContainerId = useRef(uuidv4()).current;
@@ -196,7 +288,7 @@ export let Checklist = React.forwardRef(
                             className={`${blockClass}__list-item`}
                             key={`${item.label}-${index}`}
                           >
-                            <ChecklistIcon kind={item.kind} />
+                            <ChecklistIcon kind={item.kind} theme={theme} />
 
                             {typeof item.onClick === 'function' ? (
                               <Button
@@ -205,7 +297,7 @@ export let Checklist = React.forwardRef(
                                     item.kind === 'error',
                                 })}
                                 onClick={() => {
-                                  item.onClick(item);
+                                  item.onClick?.(item);
                                 }}
                                 size="sm"
                                 title={item.label}
@@ -311,17 +403,18 @@ Checklist.propTypes = {
    * then the `label` will be rendered as a button,
    * else the `label` will be rendered as plain text.
    */
+  /**@ts-ignore */
   taskLists: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
       tasks: PropTypes.arrayOf(
         PropTypes.shape({
           kind: PropTypes.oneOf([
-            'unchecked',
-            'indeterminate',
-            'checked',
-            'disabled',
-            'error',
+            Kinds.unchecked,
+            Kinds.indeterminate,
+            Kinds.checked,
+            Kinds.disabled,
+            Kinds.error,
           ]).isRequired,
           label: PropTypes.string.isRequired,
           onClick: PropTypes.func,
@@ -332,7 +425,7 @@ Checklist.propTypes = {
   /**
    * Determines the theme of the component.
    */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  theme: PropTypes.oneOf([Themes.light, Themes.dark]),
   /**
    * The title of the component.
    */

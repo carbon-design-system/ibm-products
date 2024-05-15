@@ -177,7 +177,6 @@ EditableCellUsageStory.argTypes = {
 };
 EditableCellUsageStory.args = {
   ...inlineEditUsageControlProps,
-  featureFlags: ['Datagrid.useEditableCell'],
 };
 
 const basicUsageStoryName = 'Using deprecated useInlineEdit hook';
@@ -190,5 +189,4 @@ InlineEditUsageStory.argTypes = {
 };
 InlineEditUsageStory.args = {
   ...inlineEditUsageControlProps,
-  featureFlags: ['Datagrid.useInlineEdit'],
 };

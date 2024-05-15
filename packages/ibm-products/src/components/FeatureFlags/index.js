@@ -5,11 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  FeatureFlags as GlobalFeatureFlags,
-  createScope,
-} from '@carbon/feature-flags';
-import PropTypes from 'prop-types';
 import React, {
   createContext,
   useContext,
@@ -17,6 +12,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import PropTypes from 'prop-types';
+import {
+  FeatureFlags as GlobalFeatureFlags,
+  createScope,
+} from '@carbon/feature-flags';
+
+console.log(GlobalFeatureFlags);
 
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable

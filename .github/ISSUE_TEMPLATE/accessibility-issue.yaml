@@ -1,7 +1,7 @@
 name: Accessibility Issue ♿
 description: Report an accessibility or usability issue.
 title: '[a11y]: '
-labels: 'type: a11y ♿'
+labels: ['type: a11y ♿', 'status: needs triage 🕵️‍♀️']
 body:
   - type: markdown
     attributes:

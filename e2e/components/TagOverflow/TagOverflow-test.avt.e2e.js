@@ -19,6 +19,7 @@ test.describe('TagOverflow @avt', () => {
         carbonTheme: 'white',
       },
     });
+    await page.getByText('+2').click();
     await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
   });
 });

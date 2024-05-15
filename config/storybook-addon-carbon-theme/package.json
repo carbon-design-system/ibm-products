@@ -45,23 +45,23 @@
     "vue": "*"
   },
   "dependencies": {
-    "@ibm/telemetry-js": "^1.5.0",
-    "@storybook/addons": "^7.6.10",
-    "@storybook/api": "^7.6.10",
-    "@storybook/client-api": "^7.6.10",
-    "@storybook/client-logger": "^7.6.10",
-    "@storybook/components": "^7.6.10",
-    "@storybook/core-events": "^7.6.10",
-    "@storybook/theming": "^7.6.10",
-    "core-js": "^3.35.1",
+    "@ibm/telemetry-js": "^1.5.1",
+    "@storybook/addons": "^7.6.17",
+    "@storybook/api": "^7.6.17",
+    "@storybook/client-api": "^7.6.17",
+    "@storybook/client-logger": "^8.1.0",
+    "@storybook/components": "^8.1.0",
+    "@storybook/core-events": "^8.1.0",
+    "@storybook/theming": "^8.1.0",
+    "core-js": "^3.37.1",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.23.9",
-    "@babel/preset-react": "^7.23.3",
-    "npm-check-updates": "^16.14.12",
+    "@babel/cli": "^7.24.5",
+    "@babel/core": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
+    "npm-check-updates": "^16.14.20",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.7"
   }
 }

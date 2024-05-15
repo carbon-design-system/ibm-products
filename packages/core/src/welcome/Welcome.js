@@ -11,6 +11,7 @@ import { Link, Tag } from '@carbon/react';
 import { ArrowRight, Pause, Play } from '@carbon/react/icons';
 import lottie from 'lottie-web';
 import WelcomeLottie from './welcome-lottie.json';
+import './_storybook-styles.scss';
 
 const Welcome = () => {
   const animationRef = useRef(null);

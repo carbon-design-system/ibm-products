@@ -10,19 +10,30 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 import { Tag, Tooltip } from '@carbon/react';
-import { TagSet } from '../TagSet';
 import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { TagOverflowPopover } from './TagOverflowPopover';
+import { TagOverflowModal } from './TagOverflowModal';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 
+const allTagsModalSearchThreshold = 10;
+
+// TODO: support prop overflowType
+
 // Default values for props
 const defaults = {
   items: [],
+  align: 'start',
+  measurementOffset: 0,
+  overflowAlign: 'bottom',
+  overflowType: 'default',
+  onOverflowTagChange: () => {},
 };
 
 /**
@@ -31,11 +42,24 @@ const defaults = {
 export let TagOverflow = React.forwardRef(
   (
     {
-      className,
       items = defaults.items,
       tagComponent,
+      align = defaults.align,
+      showAllTagsLabel,
+      allTagsModalSearchLabel,
+      allTagsModalSearchPlaceholderText,
+      allTagsModalTarget,
+      allTagsModalTitle,
+      className,
+      containingElementRef,
+      measurementOffset = defaults.measurementOffset,
       maxVisible,
       multiline,
+      overflowAlign = defaults.overflowAlign,
+      overflowClassName,
+      overflowType = defaults.overflowType,
+      onOverflowTagChange = defaults.onOverflowTagChange,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -45,20 +69,35 @@ export let TagOverflow = React.forwardRef(
     const containerRef = ref || localContainerRef;
     const itemRefs = useRef(null);
     const overflowRef = useRef(null);
-    // measurementOffset is the value of margin applied on each items
+    // itemOffset is the value of margin applied on each items
     // This value is required for calculating how many items will fit within the container
-    const measurementOffset = 4;
+    const itemOffset = 4;
     const overflowIndicatorWidth = 40;
 
     const [containerWidth, setContainerWidth] = useState(0);
     const [visibleItems, setVisibleItems] = useState([]);
     const [overflowItems, setOverflowItems] = useState([]);
+    const [showAllModalOpen, setShowAllModalOpen] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
 
-    const handleResize = () => {
-      setContainerWidth(containerRef.current.offsetWidth);
+    const resizeElm =
+      containingElementRef && containingElementRef.current
+        ? containingElementRef
+        : containerRef;
+
+    const handleShowAllClick = () => {
+      setShowAllModalOpen(true);
     };
 
-    useResizeObserver(containerRef, handleResize);
+    const handleModalClose = () => {
+      setShowAllModalOpen(false);
+    };
+
+    const handleResize = () => {
+      setContainerWidth(resizeElm.current.offsetWidth);
+    };
+
+    useResizeObserver(resizeElm, handleResize);
 
     const getMap = () => {
       if (!itemRefs.current) {
@@ -85,18 +124,25 @@ export let TagOverflow = React.forwardRef(
       }
 
       const map = getMap();
+      const optionalContainingElement = containingElementRef?.current;
+      const measurementOffsetValue =
+        typeof measurementOffset === 'number' ? measurementOffset : 0;
+      let spaceAvailable = optionalContainingElement
+        ? optionalContainingElement.offsetWidth - measurementOffsetValue
+        : containerWidth;
+
       const overflowContainerWidth =
-        overflowRef.current.offsetWidth > overflowIndicatorWidth
+        overflowRef.current?.offsetWidth > overflowIndicatorWidth
           ? overflowRef.current.offsetWidth
           : overflowIndicatorWidth;
-      const maxWidth = containerWidth - overflowContainerWidth;
+      const maxWidth = spaceAvailable - overflowContainerWidth;
 
       let childrenWidth = 0;
       let maxReached = false;
 
       return items.reduce((prev, cur) => {
         if (!maxReached) {
-          const itemWidth = map.get(cur.id) + measurementOffset;
+          const itemWidth = map.get(cur.id) + itemOffset;
           const fits = itemWidth + childrenWidth < maxWidth;
 
           if (fits) {
@@ -108,7 +154,16 @@ export let TagOverflow = React.forwardRef(
         }
         return prev;
       }, []);
-    }, [itemRefs, overflowRef, containerWidth, items, multiline, maxVisible]);
+    }, [
+      itemRefs,
+      overflowRef,
+      containerWidth,
+      items,
+      multiline,
+      maxVisible,
+      containingElementRef,
+      measurementOffset,
+    ]);
 
     const getCustomComponent = (item) => {
       const { className, id, ...other } = item;
@@ -128,12 +183,19 @@ export let TagOverflow = React.forwardRef(
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: item.tagType, label: item.label };
+        return { type: item.tagType, label: item.label, id: item.id };
       });
 
       setVisibleItems(visibleItemsArr);
       setOverflowItems(overflowItemsArr);
-    }, [containerWidth, items, maxVisible, getVisibleItems]);
+      onOverflowTagChange?.(overflowItemsArr);
+    }, [
+      containerWidth,
+      items,
+      maxVisible,
+      getVisibleItems,
+      onOverflowTagChange,
+    ]);
 
     return (
       <div
@@ -141,7 +203,7 @@ export let TagOverflow = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className, {
+        className={cx(blockClass, className, `${blockClass}--align-${align}`, {
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
@@ -172,16 +234,33 @@ export let TagOverflow = React.forwardRef(
               );
             }
           })}
+
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
           {overflowItems.length > 0 && (
-            <TagSet
-              tags={overflowItems}
-              allTagsModalTitle="All tags"
-              containingElementRef={overflowRef}
-              allTagsModalSearchLabel="Search all tags"
-              allTagsModalSearchPlaceholderText="Search all tags"
-              showAllTagsLabel="Show all tags"
-            />
+            <>
+              <TagOverflowPopover
+                allTagsModalSearchThreshold={allTagsModalSearchThreshold}
+                className={overflowClassName}
+                onShowAllClick={handleShowAllClick}
+                overflowTags={overflowItems}
+                overflowAlign={overflowAlign}
+                overflowType={overflowType}
+                showAllTagsLabel={showAllTagsLabel}
+                key="tag-overflow-popover"
+                ref={overflowRef}
+                popoverOpen={popoverOpen}
+                setPopoverOpen={setPopoverOpen}
+              />
+              <TagOverflowModal
+                allTags={items}
+                open={showAllModalOpen}
+                title={allTagsModalTitle}
+                onClose={handleModalClose}
+                searchLabel={allTagsModalSearchLabel}
+                searchPlaceholder={allTagsModalSearchPlaceholderText}
+                portalTarget={allTagsModalTarget}
+              />
+            </>
           )}
         </span>
       </div>
@@ -198,21 +277,57 @@ TagOverflow.displayName = componentName;
 
 const tagTypes = Object.keys(TYPES);
 
+/**
+ * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
+ * @returns null if no problems
+ */
+export const string_required_if_more_than_10_tags = isRequiredIf(
+  PropTypes.string,
+  ({ items }) => items && items.length > allTagsModalSearchThreshold
+);
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 TagOverflow.propTypes = {
   /**
+   * align the Tags displayed by the TagSet. Default start.
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * label text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+  /**
+   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   */
+  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  /**
+   * portal target for the all tags modal
+   */
+  allTagsModalTarget: PropTypes.node,
+  /**
+   * title for the show all modal. **Note: Required if more than 10 tags**
+   */
+  allTagsModalTitle: string_required_if_more_than_10_tags,
+  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * Optional ref for custom resize container to measure available space
+   * Default will measure the available space of the TagSet container itself.
+   */
+  containingElementRef: PropTypes.object,
 
   /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
-   * **label**\* (required) to supply the item content,
-   * **id**\* (required) to uniquely identify the each item.
-   * **tagType** the type value to be passed to the Carbon Tag component
-   * if you are passing an tagComponent prop for rendering custom components,
+   * **label**\* (required) to supply the content,
+   * **id**\* (required) to uniquely identify each item.
+   * **tagType** the type value to be passed to the Carbon Tag component.
+   * Refer https://react.carbondesignsystem.com/?path=/docs/components-tag--default to see the possible values for tagType
+   *
+   * If you want to render a custom component, pass it as tagComponent prop and
    * then pass the props required for your custom component as the properties of item object
    */
   items: PropTypes.arrayOf(
@@ -222,15 +337,54 @@ TagOverflow.propTypes = {
       tagType: PropTypes.oneOf(tagTypes),
     }).isRequired
   ),
-
   /**
    * maximum visible items
    */
   maxVisible: PropTypes.number,
   /**
+   * Specify offset amount for measure available space, only used when `containingElementSelector`
+   * is also provided
+   */
+  measurementOffset: PropTypes.number,
+  /**
    * display items in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * Handler to get overflow tags
+   */
+  onOverflowTagChange: PropTypes.func,
+  /**
+   * overflowAlign from the standard tooltip. Default center.
+   */
+  overflowAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'left-bottom',
+    'left-top',
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+  /**
+   * overflowClassName for the tooltip popup
+   */
+  overflowClassName: PropTypes.string,
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
+  /**
+   * label for the overflow show all tags link.
+   *
+   * **Note:** Required if more than 10 tags
+   */
+  showAllTagsLabel: string_required_if_more_than_10_tags,
   /** Component definition of the items to be rendered inside TagOverflow.
    * If this is not passed, items will be rendered as Tag component
    */

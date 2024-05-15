@@ -64,8 +64,26 @@ export default {
   component: Checklist,
   tags: ['autodocs'],
   argTypes: {
+    taskLists: {
+      table: {
+        type: {
+          detail: `[{
+            title: string,
+            tasks: [{
+              kind: 'unchecked' | 'indeterminate' | 'checked' | 'disabled' | 'error',
+              label: string,
+              onClick: func,
+            }]
+          }]`,
+        },
+      },
+    },
     theme: {
       control: { type: null },
+      table: {
+        defaultValue: { summary: 'light' },
+        type: { summary: "'light' | 'dark'" },
+      },
     },
   },
   parameters: {

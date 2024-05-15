@@ -351,11 +351,8 @@ export const AddSelectBody = forwardRef(
             </div>
             {showSort && (
               <AddSelectSort
-                // items={itemsToDisplay}
                 setSortAttribute={setSortAttribute}
                 setSortDirection={setSortDirection}
-                // sortAttribute={sortAttribute}
-                // sortDirection={sortDirection}
                 sortBy={globalSortBy}
               />
             )}

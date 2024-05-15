@@ -60,7 +60,7 @@ interface DataSpreadsheetHeaderProps {
   /**
    * Object containing the active cell coordinates
    */
-  activeCellCoordinates?: ActiveCellCoordinates;
+  activeCellCoordinates?: ActiveCellCoordinates | null;
 
   /**
    * Specifies the cell height
@@ -116,7 +116,7 @@ interface DataSpreadsheetHeaderProps {
    * Setter fn for activeCellCoordinates value
    */
   setActiveCellCoordinates?: Dispatch<
-    SetStateAction<ActiveCellCoordinates | undefined>
+    SetStateAction<ActiveCellCoordinates | null>
   >;
 
   /**
@@ -132,7 +132,7 @@ interface DataSpreadsheetHeaderProps {
   /**
    * Setter fn for selectionAreaData state value
    */
-  setSelectionAreaData?: Dispatch<SetStateAction<any>>;
+  setSelectionAreaData?: Dispatch<SetStateAction<object[]>>;
 
   /**
    * Setter fn for selectionAreas value

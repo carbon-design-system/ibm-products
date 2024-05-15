@@ -59,7 +59,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Object containing the active cell coordinates
    */
-  activeCellCoordinates?: ActiveCellCoordinates;
+  activeCellCoordinates?: ActiveCellCoordinates | null;
 
   /**
    *This is the ref of the button input, which is the active cell element
@@ -149,7 +149,7 @@ interface DataSpreadsheetBodyProps {
    * Setter fn for activeCellCoordinates state value
    */
   setActiveCellCoordinates?: Dispatch<
-    SetStateAction<ActiveCellCoordinates | undefined>
+    SetStateAction<ActiveCellCoordinates | null>
   >;
 
   /**

@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { TagOverflow } from '.';
+import { fiveTags } from './utils';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
@@ -21,27 +22,8 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const tagWidth = 60;
 
-const tagLabel = (index) => `Tag ${index + 1}`;
-const tags = Array.from({ length: 20 }, (v, k) => ({
-  label: tagLabel(k),
-  id: `id-${k}`,
-}));
-
-const fiveTags = tags.slice(0, 5);
-
 const tagOverflowProps = {
   items: fiveTags,
-};
-
-const FiveTags = (argsIn) => {
-  const { containerWidth, ...args } = {
-    ...argsIn,
-  };
-  return (
-    <div style={{ width: containerWidth }}>
-      <TagOverflow {...args} />
-    </div>
-  );
 };
 
 describe(componentName, () => {
@@ -103,10 +85,9 @@ describe(componentName, () => {
 
   it('Renders all as visible tags when space available', async () => {
     const tagCount = tagOverflowProps.items.length;
-
     window.innerWidth = tagWidth * tagCount + 40;
 
-    render(<FiveTags {...tagOverflowProps} />);
+    render(<TagOverflow {...tagOverflowProps} />);
 
     const firstTagLabel = tagOverflowProps.items[0].label;
     const lastTagLabel = tagOverflowProps.items[tagCount - 1].label;
@@ -122,7 +103,7 @@ describe(componentName, () => {
   });
 
   it('Obeys max visible', async () => {
-    render(<FiveTags {...tagOverflowProps} maxVisible={3} />);
+    render(<TagOverflow {...tagOverflowProps} maxVisible={3} />);
 
     expect(
       screen.getAllByText(/Tag [0-9]+/, {
@@ -134,7 +115,7 @@ describe(componentName, () => {
   // The below test case is failing due to ResizeObserver mock
   // it('Renders only the overflow when very little space', async () => {
   //   window.innerWidth = tagWidth / 2;
-  //   render(<FiveTags {...tagOverflowProps} />);
+  //   render(<TagOverflow {...tagOverflowProps} />);
 
   //   const visible = screen.queryAllByText(/Tag [1-5]+/, {
   //     selector: `.${blockClass}__item--tag span`,

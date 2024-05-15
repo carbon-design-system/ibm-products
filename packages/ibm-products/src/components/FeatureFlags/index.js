@@ -18,8 +18,6 @@ import {
   createScope,
 } from '@carbon/feature-flags';
 
-console.log(GlobalFeatureFlags);
-
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree

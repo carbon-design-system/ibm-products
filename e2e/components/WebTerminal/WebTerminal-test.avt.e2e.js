@@ -9,19 +9,22 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('WebTerminal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'WebTerminal',
-      id: 'ibm-products-patterns-web-terminal-webterminal--default', // cspell:disable-line
+      id: 'ibm-products-patterns-web-terminal-webterminal--default',
       globals: {
         carbonTheme: 'white',
       },
     });
 
     await page.getByLabel('Web terminal').click();
-    const modalElement = page.locator(`.dev-prefix--c4p--web-terminal`);
+    const modalElement = page.locator(
+      `.dev-prefix--${pkg.prefix}--web-terminal`
+    );
     await modalElement.evaluate((element) =>
       Promise.all(
         element.getAnimations().map((animation) => animation.finished)

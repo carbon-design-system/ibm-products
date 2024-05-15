@@ -176,7 +176,7 @@ export let WebTerminal = React.forwardRef(
         }}
         onAnimationEnd={onAnimationEnd}
       >
-        <header className={`${blockClass}__bar`}>
+        <header aria-label="Web terminal bar" className={`${blockClass}__bar`}>
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu

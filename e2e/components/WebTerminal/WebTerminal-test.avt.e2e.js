@@ -19,6 +19,14 @@ test.describe('WebTerminal @avt', () => {
         carbonTheme: 'white',
       },
     });
+
+    await page.getByLabel('Web terminal').click();
+    const modalElement = page.locator(`.dev-prefix--c4p--web-terminal`);
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
     await expect(page).toHaveNoACViolations('WebTerminal @avt-default-state');
   });
 });

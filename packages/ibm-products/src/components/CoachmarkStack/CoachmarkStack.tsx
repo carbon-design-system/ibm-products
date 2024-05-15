@@ -82,7 +82,7 @@ interface CoachmarkStackProps {
   /**
    * Function to call when the CoachmarkStack closes.
    */
-  onClose: () => void;
+  onClose?: () => void;
   /**
    * Where in the DOM to render the stack.
    * The default is `document.body`.
@@ -390,7 +390,7 @@ CoachmarkStack.propTypes = {
   /**
    * Function to call when the CoachmarkStack closes.
    */
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 
   /**
    * Where in the DOM to render the stack.

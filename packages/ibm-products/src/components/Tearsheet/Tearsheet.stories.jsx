@@ -132,7 +132,7 @@ const mainContent = (
   <div className="tearsheet-stories__dummy-content-block">
     <Form>
       <p>Main content</p>
-      <FormGroup legendText="">
+      <FormGroup legendId="tearsheet-form-group" legendText="FormGroup Legend">
         <TextInput
           id="tss-ft1"
           labelText="Enter an important value here"

@@ -10,19 +10,17 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('NotificationsPanel @avt', () => {
+test.describe('InterstitialScreenViewModule @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'NotificationsPanel',
-      id: 'ibm-products-patterns-notifications-notificationspanel--default',
+      component: 'InterstitialScreenViewModule',
+      id: 'ibm-products-novice-to-pro-interstitial-screen-interstitialscreenviewmodule--interstitial-screen-view-module',
       globals: {
         carbonTheme: 'white',
       },
     });
-
-    await page.getByLabel('Notifications').click();
     await expect(page).toHaveNoACViolations(
-      'NotificationsPanel @avt-default-state'
+      'InterstitialScreenViewModule @avt-default-state'
     );
   });
 });

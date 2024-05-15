@@ -18,7 +18,7 @@ export const ConditionBuilderItem = ({
   title,
   type,
   showToolTip,
-  state,
+  condition,
   popOverClassName,
   config,
   ...rest
@@ -41,21 +41,21 @@ export const ConditionBuilderItem = ({
      * rest['data-name'] holds the current field name
      * popoverToOpen hold the next popover to be opened if required
      */
-    if (state) {
+    if (condition) {
       let currentField = rest['data-name'];
       //if any condition is changed, state prop is triggered
-      if (state.popoverToOpen && currentField !== state.popoverToOpen) {
+      if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
         setOpen(false);
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        state.operator !== 'one-of'
+        condition.operator !== 'one-of'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
       }
-      if (state.popoverToOpen == currentField) {
+      if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
         setOpen(true);
       }
@@ -65,7 +65,7 @@ export const ConditionBuilderItem = ({
       setOpen(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state, label]);
+  }, [condition, label]);
 
   useEffect(() => {
     //this will focus the first input field in the popover
@@ -128,6 +128,11 @@ ConditionBuilderItem.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * current condition state object
+   */
+  condition: PropTypes.object,
+
+  /**
    * this is the config object again the current property from inputConfig
    */
 
@@ -152,11 +157,6 @@ ConditionBuilderItem.propTypes = {
    * show tool tip
    */
   showToolTip: PropTypes.bool,
-
-  /**
-   * current condition state object
-   */
-  state: PropTypes.object,
 
   /**
    * title of the popover

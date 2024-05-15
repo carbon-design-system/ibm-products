@@ -1,5 +1,6 @@
+// @ts-check
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +31,7 @@ import {
   Incomplete,
   Warning,
 } from '@carbon/react/icons';
+import { Kinds, Themes } from './Checklist.types';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--checklist__icon`;
@@ -48,13 +50,16 @@ const componentName = 'ChecklistIcon';
 
 // Default values for props
 const defaults = {
-  theme: 'light',
+  theme: Themes.light,
 };
 
 /**
  * TODO: A description of the component.
  */
 export let ChecklistIcon = React.forwardRef(
+  /**
+   * @param {{className?: string, kind?: import('./Checklist.types').Kind, theme?: import('./Checklist.types').Theme}} props type description
+   */
   ({ className, kind, theme = defaults.theme, ...rest }, ref) => {
     let Icon;
 
@@ -112,14 +117,14 @@ ChecklistIcon.propTypes = {
    * The icon to be displayed.
    */
   kind: PropTypes.oneOf([
-    'unchecked',
-    'indeterminate',
-    'checked',
-    'disabled',
-    'error',
+    Kinds.unchecked,
+    Kinds.indeterminate,
+    Kinds.checked,
+    Kinds.disabled,
+    Kinds.error,
   ]),
   /**
    * Determines the theme of the component.
    */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  theme: PropTypes.oneOf([Themes.light, Themes.dark]),
 };

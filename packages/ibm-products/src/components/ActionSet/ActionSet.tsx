@@ -12,7 +12,7 @@ import React, { ComponentProps, PropsWithChildren } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { allPropTypes } from '../../global/js/utils/props-helper';
+import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Button, ButtonSet, InlineLoading } from '@carbon/react';
@@ -191,13 +191,16 @@ export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
         role="presentation"
         stacked={stacking}
       >
-        {buttons.map((action, index) => (
-          <ActionSetButton
-            key={action.key || index}
-            {...action}
-            size={buttonSize}
-          />
-        ))}
+        {buttons.map((action, index) => {
+          const actionProps = prepareProps(action, ['key']);
+          return (
+            <ActionSetButton
+              key={action.key || index}
+              {...actionProps}
+              size={buttonSize}
+            />
+          );
+        })}
       </ButtonSet>
     );
   }

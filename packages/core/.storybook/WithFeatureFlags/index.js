@@ -30,8 +30,6 @@ export const WithFeatureFlags = ({ flags, children }) => {
     }
   }, []);
 
-  console.log(flags);
-
   return (
     <FeatureFlags flags={flags ? updatedFlags : allFlagsEnabled}>
       <Annotation

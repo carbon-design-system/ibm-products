@@ -7,6 +7,7 @@
 import React from 'react';
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import mdx from './FeatureFlags.mdx';
+import { WithFeatureFlags } from '../../../../core/.storybook/WithFeatureFlags';
 
 export default {
   title: 'IBM Products/Components/FeatureFlags',
@@ -17,25 +18,22 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => (
+      <WithFeatureFlags>
+        <Story />
+      </WithFeatureFlags>
+    ),
+  ],
 };
 
 const Template = () => {
+  const enableExampleFlag = useFeatureFlag('enable-example-flag');
   return (
-    <FeatureFlags
-      flags={{
-        'enable-example-flag': true,
-      }}
-    >
-      <FeatureComponent />
-    </FeatureFlags>
+    enableExampleFlag && (
+      <div>I am a feature flagged component that has been enabled.</div>
+    )
   );
-};
-
-const FeatureComponent = () => {
-  const enableFeature = useFeatureFlag('enable-example-flag');
-  return enableFeature ? (
-    <div>I am a feature flagged component that has been enabled.</div>
-  ) : null;
 };
 
 export const exampleFeatureFlag = Template.bind({});

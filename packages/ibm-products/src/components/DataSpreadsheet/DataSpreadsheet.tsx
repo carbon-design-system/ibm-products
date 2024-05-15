@@ -55,7 +55,6 @@ const componentName = 'DataSpreadsheet';
 
 // Default values for props
 const defaults = {
-  cellSize: 'sm',
   columns: Object.freeze([]),
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,

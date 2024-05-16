@@ -81,6 +81,7 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
+      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign,
 
       // Collect any other property values passed in.
       ...rest
@@ -537,6 +538,7 @@ export let PageHeader = React.forwardRef(
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={displayedBreadcrumbs}
+                          overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
                         />
                       )}
                     </Column>

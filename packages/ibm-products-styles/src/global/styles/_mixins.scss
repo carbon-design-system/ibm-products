@@ -13,10 +13,10 @@
 
 @mixin measuring-container() {
   position: absolute;
-  top: -100vh; // off screen
-  left: -100vw; // off screen
   overflow: hidden;
-  max-width: 100vw; // NOTE: resize only detected if < 100vw
+  inset-block-start: -100vh; // off screen
+  inset-inline-start: -100vw; // off screen
+  max-inline-size: 100vw; // NOTE: resize only detected if < 100vw
   pointer-events: none;
   visibility: hidden;
 }

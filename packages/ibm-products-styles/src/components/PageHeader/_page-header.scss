@@ -77,11 +77,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   --to-color-shadow: #{$to-color-shadow};
 
   position: absolute;
-  top: 0;
-  left: 0;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
 
   // This transitions the background-color between from-color and to-color
   $duration: 1000ms;
@@ -108,9 +108,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     /* dropped  1 below Carbon header so as not to overlay the side panel */
     z-index: $z-index-header-minus;
     /* stylelint-disable-next-line carbon/layout-token-use */
-    top: var(--#{$block-class}--header-top);
+    inset-block-start: var(--#{$block-class}--header-top);
     display: inline-block; /* cause top/bottom margin to reserve space */
-    width: 100%;
+    inline-size: 100%;
     background-color: $background;
     color: $text-primary;
 
@@ -135,18 +135,18 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}--width--xl {
-    padding-right: $spacing-07;
-    padding-left: $spacing-07;
+    padding-inline: $spacing-07;
+    padding-inline-start: $spacing-07;
   }
 
   .#{$block-class}__breadcrumb-row {
     position: sticky;
     z-index: $raised-z-index;
-    top: var(--#{$block-class}--breadcrumb-top); //2
+    inset-block-start: var(--#{$block-class}--breadcrumb-top); //2
     min-height: $spacing-08;
 
     + .#{$block-class}__last-row-buffer--active {
-      height: $spacing-02;
+      block-size: $spacing-02;
     }
   }
 
@@ -159,24 +159,24 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-row--container {
     display: flex;
-    min-width: 100%;
+    min-inline-size: 100%;
     flex-wrap: nowrap;
   }
 
   .#{$block-class}__has-page-actions-without-action-bar {
     // NOTE: the extra spacing accounts for carbon margins
-    min-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
-    max-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
+    min-inline-size: calc(0.6 * (100% + 2 * #{$spacing-05}));
+    max-inline-size: calc(0.6 * (100% + 2 * #{$spacing-05}));
   }
 
   .#{$block-class}__has-page-actions-without-action-bar
     .#{$block-class}__has-page-actions-without-action-bar {
-    min-width: 100%;
+    min-inline-size: 100%;
   }
 
   .#{$block-class}__breadcrumb-row--has-action-bar
     .#{$block-class}__breadcrumb-row--container {
-    min-width: calc(
+    min-inline-size: calc(
       100% +
         (
           var(--#{$block-class}--width-px) -
@@ -186,11 +186,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
   .#{$block-class}__breadcrumb-row::after {
     position: absolute;
-    bottom: 0;
-    left: 50%;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
     display: block;
-    width: 50vw;
-    height: 1px;
+    inline-size: 50vw;
+    block-size: 1px;
     /* creates a full width box shadow without causing scroll */
     box-shadow: 0 1px 0 0 $layer-accent-01, 0 1px 0 0 $layer-accent-01;
     content: '';
@@ -210,7 +210,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__breadcrumb-container {
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$block-class}__action-bar-column {
@@ -220,11 +220,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     .#{$block-class}__action-bar-column {
     // back button displayed only
-    max-width: $right-section-alt-width;
+    max-inline-size: $right-section-alt-width;
     flex: 0 1 $right-section-alt-width;
 
     @include breakpoint(md) {
-      max-width: $right-section-std-width;
+      max-inline-size: $right-section-std-width;
       flex: 1 0 $right-section-std-width;
     }
   }
@@ -247,8 +247,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
     position: relative;
     display: inline-block;
-    width: 100%;
-    max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+    inline-size: 100%;
+    max-inline-size: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
     flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
     opacity: 0;
     transition: opacity $duration-moderate-02 motion('entrance', 'productive');
@@ -264,7 +264,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-column {
     overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
-    max-width: 100%;
+    max-inline-size: 100%;
     flex: 0 0 100%;
 
     @include breakpoint(md) {
@@ -275,11 +275,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
     .#{$block-class}__breadcrumb-column {
     // back button displayed only
-    max-width: $left-section-alt-width;
+    max-inline-size: $left-section-alt-width;
     flex: 0 1 $left-section-alt-width;
 
     @include breakpoint(md) {
-      max-width: $left-section-std-width;
+      max-inline-size: $left-section-std-width;
       flex: 0 1 $left-section-std-width;
     }
   }
@@ -287,7 +287,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__breadcrumb-row
     .#{$block-class}__breadcrumb-column {
     // the width of the breadcrumb column is adjusted elsewhere to compensate
-    max-width: 100%;
+    max-inline-size: 100%;
     flex: 0 1 100%;
   }
 
@@ -302,28 +302,28 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__action-bar-column--influenced-by-collapse-button {
-    padding-right: $spacing-08;
+    padding-inline: $spacing-08;
   }
 
   .#{$block-class}__breadcrumb {
     @include type.type-style('label-01');
 
-    padding-top: $spacing-04;
+    padding-block-start: $spacing-04;
   }
 
   .#{$block-class}--breadcrumb.#{$breadcrumb-block-class}__with-items {
-    padding-top: 0;
+    padding-block-start: 0;
     @include breakpoint(md) {
-      padding-top: $spacing-04;
+      padding-block-start: $spacing-04;
     }
   }
 
   .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item {
-    margin-right: $spacing-02;
+    margin-inline-end: $spacing-02;
   }
 
   .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
-    margin-left: $spacing-02;
+    margin-inline-start: $spacing-02;
   }
 
   .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item,
@@ -350,11 +350,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__action-bar {
-    width: 100%;
-    max-width: var(--#{$block-class}--max-action-bar-width-px);
+    inline-size: 100%;
+    max-inline-size: var(--#{$block-class}--max-action-bar-width-px);
     flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
-    padding-top: $spacing-04;
-    margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+    padding-block-start: $spacing-04;
+    margin-block-start: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
     vertical-align: top;
     white-space: nowrap;
   }
@@ -362,7 +362,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__title-row {
     --title-row-margin-top: #{$spacing-01}; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
 
-    margin-bottom: 0;
+    margin-block-end: 0;
     transform: translateY(
       $spacing-01
     ); // position adjusted for editable title focus outline
@@ -372,43 +372,43 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     &.#{$block-class}__title-row--under-action-bar {
-      margin-top: $spacing-05;
+      margin-block-start: $spacing-05;
       transform: translateY(0); // Not needed under action bar
     }
 
     + .#{$block-class}__last-row-buffer--active {
-      height: $spacing-07;
+      block-size: $spacing-07;
     }
 
     &.#{$block-class}__title-row--spacing-below-03 {
-      margin-bottom: $spacing-03;
+      margin-block-end: $spacing-03;
     }
 
     &.#{$block-class}__title-row--spacing-below-05 {
       + .#{$block-class}__last-row-buffer--active {
-        height: $spacing-05;
+        block-size: $spacing-05;
       }
     }
 
     &.#{$block-class}__title-row--spacing-below-06 {
-      margin-bottom: $spacing-06;
+      margin-block-end: $spacing-06;
     }
 
     &.#{$block-class}__title-row--no-breadcrumb-row {
-      margin-top: $spacing-07;
+      margin-block-start: $spacing-07;
     }
   }
 
   &.#{$block-class}--has-navigation
     .#{$block-class}__title-row
     + .#{$block-class}__last-row-buffer--active {
-    height: calc(#{$spacing-06});
+    block-size: calc(#{$spacing-06});
   }
 
   &.#{$block-class}--has-navigation-tags-only
     .#{$block-class}__title-row
     + .#{$block-class}__last-row-buffer--active {
-    height: calc(#{$spacing-05});
+    block-size: calc(#{$spacing-05});
   }
 
   .#{$block-class}__title-row--sticky {
@@ -418,7 +418,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     + .#{$block-class}__title-row--sticky {
     // stylelint-disable-next-line carbon/layout-token-use
-    top: calc(
+    inset-block-start: calc(
       var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
     );
   }
@@ -428,7 +428,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     flex: 0 0 100%;
 
     @include breakpoint-up('md') {
-      max-width: $left-section-std-width;
+      max-inline-size: $left-section-std-width;
       flex: 1 0 $left-section-std-width;
     }
   }
@@ -446,12 +446,12 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     display: flex;
     overflow: visible;
     // move to match non-editable version position
-    margin-top: calc(-1 * #{$spacing-01});
-    margin-left: calc(-1 * #{$spacing-05});
+    margin-block-start: calc(-1 * #{$spacing-01});
+    margin-inline-start: calc(-1 * #{$spacing-05});
   }
 
   .#{$block-class}__title-skeleton {
-    height: $spacing-07;
+    block-size: $spacing-07;
   }
 
   .#{$block-class}__title--fades {
@@ -459,7 +459,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__title-icon {
-    margin-right: $spacing-04;
+    margin-inline-end: $spacing-04;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(-2px); // positional tweak requested by design review
 
@@ -468,24 +468,24 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__page-actions {
     flex: 0 0 100%;
-    margin-top: $spacing-05;
+    margin-block-start: $spacing-05;
     white-space: nowrap;
 
     @include breakpoint-up('md') {
-      max-width: $right-section-std-width;
+      max-inline-size: $right-section-std-width;
       flex: 0 1 $right-section-std-width;
-      margin-top: 0;
+      margin-block-start: 0;
     }
   }
 
   .#{$block-class}__page-actions
     .#{$carbon-prefix}--btn-set
     .#{$carbon-prefix}--btn {
-    width: initial;
+    inline-size: initial;
   }
 
   .#{$block-class}__action-bar-column .#{$block-class}__page-actions {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .#{$block-class}__page-actions-container {
@@ -512,8 +512,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     position: relative; // ensure appears over ::before
     display: flex;
     overflow: hidden;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     justify-content: flex-end;
   }
 
@@ -525,18 +525,18 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__subtitle-row {
     display: -webkit-box;
     overflow: hidden;
-    max-width: 100%;
-    margin-top: $spacing-03;
+    max-inline-size: 100%;
+    margin-block-start: $spacing-03;
 
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 
     @include breakpoint-up('md') {
-      max-width: $left-section-std-width;
+      max-inline-size: $left-section-std-width;
     }
 
     + .#{$block-class}__last-row-buffer--active {
-      height: $spacing-05;
+      block-size: $spacing-05;
     }
   }
 
@@ -547,15 +547,15 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__available-row {
     @include type.type-style('body-01');
 
-    margin-top: $spacing-03;
+    margin-block-start: $spacing-03;
 
     + .#{$block-class}__last-row-buffer--active {
-      height: $spacing-05;
+      block-size: $spacing-05;
     }
   }
 
   .#{$block-class}__title-row + .#{$block-class}__available-row {
-    margin-top: $spacing-05;
+    margin-block-start: $spacing-05;
   }
 
   .#{$block-class}__available-row * {
@@ -565,11 +565,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__navigation-row {
     flex-wrap: wrap-reverse;
-    margin-top: 0;
+    margin-block-start: 0;
 
     .#{$carbon-prefix}--content-switcher {
       box-sizing: content-box;
-      padding-bottom: $spacing-05;
+      padding-block-end: $spacing-05;
     }
   }
 
@@ -578,37 +578,37 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__navigation-tabs {
-    margin-left: calc(-1 * #{$spacing-05});
+    margin-inline-start: calc(-1 * #{$spacing-05});
   }
 
   .#{$block-class}__navigation-row--has-tags .#{$block-class}__navigation-tabs {
-    max-width: $left-section-alt-width;
+    max-inline-size: $left-section-alt-width;
     flex: 0 1 $left-section-alt-width;
   }
 
   .#{$block-class}__navigation-tags {
     display: flex;
-    max-width: $right-section-alt-width;
+    max-inline-size: $right-section-alt-width;
     flex: 1 0 $right-section-alt-width;
     align-items: center;
     justify-content: flex-end;
-    padding-top: $spacing-02;
+    padding-block-start: $spacing-02;
     // allow space for expand/collapse if we have a background
-    padding-right: $spacing-07;
-    padding-bottom: $spacing-02;
+    padding-inline: $spacing-07;
+    padding-block-end: $spacing-02;
     text-align: right;
     white-space: nowrap;
 
     @include breakpoint(md) {
-      padding-right: $spacing-05;
+      padding-inline: $spacing-05;
     }
   }
 
   .#{$block-class}__navigation-tags--tags-only {
     justify-content: flex-start;
-    padding-top: 0;
-    padding-bottom: $spacing-04;
-    margin-left: calc(-1 * #{$spacing-02});
+    padding-block-start: 0;
+    padding-block-end: $spacing-04;
+    margin-inline-start: calc(-1 * #{$spacing-02});
     text-align: initial;
   }
 
@@ -619,8 +619,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   .#{$block-class}__collapse-expand-toggle {
     position: absolute;
     z-index: $raised-z-index + 1;
-    right: 0;
-    bottom: 0;
+    inset-inline-end: 0;
+    inset-block-end: 0;
   }
 
   .#{$block-class}__collapse-expand-toggle .#{$carbon-prefix}--btn__icon {
@@ -642,7 +642,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   // stylelint-disable-next-line
   position: var(--#{$block-class}--tagset-tooltip-position) !important;
   // stylelint-disable-next-line
-  top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+  inset-block-start: var(--#{$block-class}--tagset-tooltip-offset) !important;
 }
 
 .#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {

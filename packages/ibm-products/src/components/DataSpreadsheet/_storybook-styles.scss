@@ -13,5 +13,5 @@ div[data-story-title*='#{$story-anchor}']
   > div:first-child
   > div:first-child {
   overflow: auto;
-  width: 100%;
+  inline-size: 100%;
 }

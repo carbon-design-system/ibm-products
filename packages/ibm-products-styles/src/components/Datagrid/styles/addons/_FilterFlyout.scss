@@ -25,11 +25,11 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout {
   position: absolute;
-  top: $spacing-09;
-  right: 0;
+  inset-block-start: $spacing-09;
+  inset-inline-end: 0;
   display: none;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(642px);
+  inline-size: to-rem(642px);
   background-color: $layer-02;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   box-shadow: 0 1px to-rem(8px) 0 rgba(0, 0, 0, 0.25);
@@ -59,13 +59,13 @@ $action-set-height: to-rem(64px);
 .#{variables.$block-class}-filter-flyout__inner-container::before {
   position: absolute;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  top: to-rem(-7px);
-  right: 1px;
+  inset-block-start: to-rem(-7px);
+  inset-inline-end: 1px;
   display: block;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(46px);
+  inline-size: to-rem(46px);
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  height: to-rem(15px);
+  block-size: to-rem(15px);
   background-color: $layer-02;
   content: '';
 }
@@ -74,7 +74,7 @@ $action-set-height: to-rem(64px);
   display: block;
   @include type-style('heading-compact-01');
 
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }
 
 .#{variables.$block-class}-filter-flyout__filters {
@@ -87,8 +87,8 @@ $action-set-height: to-rem(64px);
 // Carbon overrides
 .#{variables.$block-class}-filter-flyout__trigger.#{c4p-settings.$carbon-prefix}--btn {
   display: flex;
-  width: 3rem;
-  height: 3rem;
+  inline-size: 3rem;
+  block-size: 3rem;
   justify-content: center;
 }
 
@@ -101,7 +101,7 @@ $action-set-height: to-rem(64px);
 
 .#{variables.$block-class}-filter-flyout
   .#{c4p-settings.$carbon-prefix}--fieldset {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{variables.$block-class}-filter-flyout__stacked {

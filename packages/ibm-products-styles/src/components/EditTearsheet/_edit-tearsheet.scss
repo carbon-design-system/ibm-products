@@ -69,22 +69,20 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 }
 
 .#{$block-class} .#{$block-class}__content {
-  height: 100%;
-  padding-top: $spacing-06;
-  padding-bottom: $spacing-06;
+  block-size: 100%;
   overflow-x: hidden;
+  padding-block: $spacing-06;
 }
 
 .#{$block-class}
   .#{$block-class}__content
   .#{c4p-settings.$carbon-prefix}--css-grid {
-  padding-right: $spacing-03;
-  padding-left: $spacing-03;
-  margin-left: 0;
+  margin-inline-start: 0;
+  padding-inline: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__form--heading {
-  padding-bottom: $spacing-06;
+  padding-block-end: $spacing-06;
 }
 
 .#{$block-class}
@@ -95,9 +93,9 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
   position: initial;
-  width: 100%;
-  max-width: 100%;
   background-color: transparent;
+  inline-size: 100%;
+  max-inline-size: 100%;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav__link:hover {
@@ -110,27 +108,27 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 
 .#{$block-class} .#{$block-class}__form--title,
 .#{$block-class} .#{$block-class}__section--title {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{$block-class} .#{$block-class}__section--subtitle,
 .#{$block-class} .#{$block-class}__form--subtitle {
   @include type.type-style('heading-compact-01');
 
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__section--description,
 .#{$block-class} .#{$block-class}__form--description {
   @include type.type-style('body-01');
 
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{$block-class} .#{$block-class}__form--fieldset > * {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }

@@ -1,4 +1,4 @@
-name: Label issues
+name: Add triage labe to opened/reopened issues
 on:
   issues:
     types:

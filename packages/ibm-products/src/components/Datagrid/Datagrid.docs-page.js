@@ -293,11 +293,15 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    onVirtualScroll: data => console.log(data),
   },
   useInfiniteScroll
 );
           `,
         },
+      },
+      {
+        description: `onVirtualData is an optional scroll callback that returns data about which rows are currently visible.`,
       },
       {
         title: 'Detect row hover',

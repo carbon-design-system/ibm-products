@@ -41,6 +41,7 @@ const DatagridVirtualBody = (datagridState) => {
     handleResize,
     gridRef,
     tableId,
+    onVirtualScroll,
   } = datagridState;
 
   /* istanbul ignore next */
@@ -86,6 +87,8 @@ const DatagridVirtualBody = (datagridState) => {
     };
   });
 
+  console.log(onVirtualScroll);
+
   return (
     <>
       <div
@@ -105,6 +108,7 @@ const DatagridVirtualBody = (datagridState) => {
           }
           estimatedItemSize={rowHeight}
           onScroll={onScroll}
+          onItemsRendered={(e) => onVirtualScroll?.(e)}
           innerRef={innerListRef}
           outerRef={testRef}
           ref={listRef}

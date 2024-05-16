@@ -74,13 +74,13 @@ interface Link {
 }
 
 interface Data {
-  id: string | number;
-  type: 'error' | 'warning' | 'success' | 'informational';
-  timestamp: Date;
-  title: string;
-  description: string;
+  id?: string | number;
+  type?: 'error' | 'warning' | 'success' | 'informational';
+  timestamp?: Date;
+  title?: string;
+  description?: string;
   link?: Link;
-  unread: boolean;
+  unread?: boolean;
   onNotificationClick?: () => void;
 }
 
@@ -360,7 +360,7 @@ export let NotificationsPanel = React.forwardRef(
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) => item.timestamp.getTime() >= yesterdayDate.getTime()
+        (item) => (item.timestamp as Date).getTime() >= yesterdayDate.getTime()
       );
     withinLastDayNotifications = sortChronologically(
       withinLastDayNotifications
@@ -370,15 +370,16 @@ export let NotificationsPanel = React.forwardRef(
       allNotifications.length &&
       allNotifications.filter(
         (item) =>
-          item.timestamp.getTime() < yesterdayDate.getTime() &&
-          item.timestamp.getTime() >= dayBeforeYesterdayDate.getTime()
+          (item.timestamp as Date).getTime() < yesterdayDate.getTime() &&
+          (item.timestamp as Date).getTime() >= dayBeforeYesterdayDate.getTime()
       );
     previousDayNotifications = sortChronologically(previousDayNotifications);
     let previousNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) => item.timestamp.getTime() < dayBeforeYesterdayDate.getTime()
+        (item) =>
+          (item.timestamp as Date).getTime() < dayBeforeYesterdayDate.getTime()
       );
     previousNotifications = sortChronologically(previousNotifications);
 

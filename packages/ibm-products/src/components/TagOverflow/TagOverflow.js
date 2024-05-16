@@ -197,6 +197,16 @@ export let TagOverflow = React.forwardRef(
       onOverflowTagChange,
     ]);
 
+    const handleTagOnClose = useCallback(
+      (onClose, index) => {
+        onClose?.();
+        if (index <= visibleItems.length - 1) {
+          setPopoverOpen(false);
+        }
+      },
+      [visibleItems]
+    );
+
     return (
       <div
         {
@@ -211,23 +221,23 @@ export let TagOverflow = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems.length > 0 &&
-          visibleItems.map((item) => {
+          visibleItems.map((item, index) => {
             // Render custom components
             if (tagComponent) {
               return getCustomComponent(item);
             } else {
+              const { id, label, tagType, onClose, ...other } = item;
               // If there is no template prop, then render items as Tags
               return (
-                <div
-                  ref={(node) => itemRefHandler(item.id, node)}
-                  key={item.id}
-                >
-                  <Tooltip align="bottom" label={item.label}>
+                <div ref={(node) => itemRefHandler(id, node)} key={id}>
+                  <Tooltip align="bottom" label={label}>
                     <Tag
+                      {...other}
                       className={`${blockClass}__item--tag`}
-                      type={item.tagType}
+                      type={tagType}
+                      onClose={() => handleTagOnClose(onClose, index)}
                     >
-                      {item.label}
+                      {label}
                     </Tag>
                   </Tooltip>
                 </div>

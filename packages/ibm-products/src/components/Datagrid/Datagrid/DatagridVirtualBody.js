@@ -87,8 +87,6 @@ const DatagridVirtualBody = (datagridState) => {
     };
   });
 
-  console.log(onVirtualScroll);
-
   return (
     <>
       <div

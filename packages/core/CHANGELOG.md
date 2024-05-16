@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.6...@carbon/ibm-cloud-cognitive-core@2.18.0) (2024-05-14)
+
+
+### Bug Fixes
+
+* **storybook:** revert default theme to g10 ([#5093](https://github.com/carbon-design-system/ibm-products/issues/5093)) ([0263808](https://github.com/carbon-design-system/ibm-products/commit/02638084f098bb61abf4ff486b304042d1d3c9e9))
+
+
+### Features
+
+* update to storybook 8 ([#5019](https://github.com/carbon-design-system/ibm-products/issues/5019)) ([af22157](https://github.com/carbon-design-system/ibm-products/commit/af2215707b60e4abcbab434f63fd9bd45a947526))
+
+
+
+
+
 ## [2.17.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.17.5...@carbon/ibm-cloud-cognitive-core@2.17.6) (2024-05-07)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

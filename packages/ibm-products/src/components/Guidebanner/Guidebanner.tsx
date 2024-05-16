@@ -121,7 +121,6 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
     return (
       <div
         {...rest}
-        aria-expanded={!isCollapsed}
         className={cx(
           blockClass,
           className,
@@ -161,6 +160,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
               className={`${blockClass}__toggle-button`}
               onClick={handleClickToggle}
               ref={toggleRef}
+              aria-expanded={!isCollapsed}
             >
               {isCollapsed ? expandButtonLabel : collapseButtonLabel}
             </Button>

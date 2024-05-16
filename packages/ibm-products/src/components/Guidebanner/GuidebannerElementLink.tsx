@@ -35,12 +35,13 @@ interface GuidebannerElementLinkProps {
 export let GuidebannerElementLink = React.forwardRef<
   Link,
   GuidebannerElementLinkProps
->(({ children, className, ...rest }: GuidebannerElementLinkProps) => {
+>(({ children, className, ...rest }: GuidebannerElementLinkProps, ref) => {
   return (
     <Link
       {...rest}
       className={cx(blockClass, className)}
       kind="ghost"
+      ref={ref}
       role="link"
       size="md"
       {...getDevtoolsProps(componentName)}

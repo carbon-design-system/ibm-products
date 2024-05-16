@@ -42,15 +42,34 @@ interface GuidebannerElementButtonProps {
 export let GuidebannerElementButton = React.forwardRef<
   Button,
   GuidebannerElementButtonProps
->(({ children, className, type, ...rest }: GuidebannerElementButtonProps) => {
-  if (type === 'primary') {
+>(
+  (
+    { children, className, type, ...rest }: GuidebannerElementButtonProps,
+    ref
+  ) => {
+    if (type === 'primary') {
+      return (
+        <Button
+          {...rest}
+          className={cx(blockClass, className)}
+          iconDescription={'Crossroads'}
+          kind="tertiary"
+          ref={ref}
+          renderIcon={() => <Crossroads size={16} />}
+          role="button"
+          size="md"
+          {...getDevtoolsProps(componentName)}
+        >
+          {children}
+        </Button>
+      );
+    }
+
     return (
       <Button
         {...rest}
         className={cx(blockClass, className)}
-        iconDescription={'Crossroads'}
-        kind="tertiary"
-        renderIcon={() => <Crossroads size={16} />}
+        kind="ghost"
         role="button"
         size="md"
         {...getDevtoolsProps(componentName)}
@@ -59,20 +78,7 @@ export let GuidebannerElementButton = React.forwardRef<
       </Button>
     );
   }
-
-  return (
-    <Button
-      {...rest}
-      className={cx(blockClass, className)}
-      kind="ghost"
-      role="button"
-      size="md"
-      {...getDevtoolsProps(componentName)}
-    >
-      {children}
-    </Button>
-  );
-});
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 GuidebannerElementButton = pkg.checkComponentEnabled(

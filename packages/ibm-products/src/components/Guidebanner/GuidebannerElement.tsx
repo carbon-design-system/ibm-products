@@ -43,11 +43,12 @@ interface GuidebannerElementProps {
 export let GuidebannerElement = React.forwardRef<
   HTMLDivElement,
   GuidebannerElementProps
->(({ button, className, description, title, ...rest }) => {
+>(({ button, className, description, title, ...rest }, ref) => {
   return (
     <div
       {...rest}
       className={cx(blockClass, className)}
+      ref={ref}
       {...getDevtoolsProps(componentName)}
     >
       {title && <h2 className={`${blockClass}-title`}>{title}</h2>}

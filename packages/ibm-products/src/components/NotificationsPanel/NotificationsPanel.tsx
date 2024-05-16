@@ -303,7 +303,7 @@ export let NotificationsPanel = React.forwardRef(
     }: NotificationsPanelProps,
     ref
   ) => {
-    const notificationPanelRef = useRef(null);
+    const notificationPanelRef = useRef();
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const previousState = usePreviousValue({ open }) as
@@ -388,7 +388,7 @@ export let NotificationsPanel = React.forwardRef(
         allNotifications.length &&
         allNotifications.filter((item) => item.id === id)[0];
       const trimLength = 88;
-      const description = notification ? notification.description : '';
+      const description = notification?.['description'];
       const descriptionClassName = cx([
         `${blockClass}__notification-description`,
         {
@@ -455,8 +455,6 @@ export let NotificationsPanel = React.forwardRef(
           aria-label={notification.title}
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
-          /**@ts-ignore*/
-          type="button"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}

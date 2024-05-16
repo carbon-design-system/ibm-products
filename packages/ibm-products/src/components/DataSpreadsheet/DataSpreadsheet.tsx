@@ -48,6 +48,13 @@ import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleKeyPress } from './utils/commonEventHandlers';
+import {
+  ActiveCellCoordinates,
+  Column,
+  PrevStateType,
+  Size,
+  Theme,
+} from './types';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -63,14 +70,6 @@ const defaults = {
   onSelectionAreaChange: Object.freeze(() => {}),
   theme: 'light',
 };
-
-interface Column {
-  Header?: string;
-  accessor?: string | (() => void);
-  Cell?: () => void; // optional cell formatter
-}
-
-type Size = 'xs' | 'sm' | 'md' | 'lg';
 
 interface DataSpreadsheetProps {
   /**
@@ -131,7 +130,7 @@ interface DataSpreadsheetProps {
   /**
    * The theme the DataSpreadsheet should use (only used to render active cell/selection area colors on dark theme)
    */
-  theme?: 'light' | 'dark';
+  theme?: Theme;
 
   /**
    * The total number of columns to be initially visible, additional columns will be rendered and
@@ -141,16 +140,6 @@ interface DataSpreadsheetProps {
 
   /* TODO: add types and DocGen for all props. */
 }
-
-type ActiveCellCoordinates = {
-  column?: string | number;
-  row?: string | number;
-};
-
-type PrevStateType = {
-  activeCellCoordinates?: ActiveCellCoordinates;
-  isEditing?: boolean;
-};
 
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.

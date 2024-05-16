@@ -38,22 +38,9 @@ import {
   handleRowHeaderClick,
 } from './utils/commonEventHandlers';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { ActiveCellCoordinates, Column, PrevState } from './types';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
-
-interface ActiveCellCoordinates {
-  row?: number | string;
-  column?: number | string;
-}
-
-interface Column {
-  rowHeight?: number;
-  rowHeaderWidth?: number;
-  width?: number;
-  Header?: string;
-  accessor?: string | (() => void);
-  Cell?: () => void;
-}
 
 interface DataSpreadsheetBodyProps {
   /**
@@ -208,12 +195,6 @@ interface DataSpreadsheetBodyProps {
    */
   visibleColumns?: [];
 }
-
-type PrevState = {
-  selectionAreaData?: object[];
-  clickAndHoldActive?: boolean;
-  rowHeight?: number;
-};
 
 export const DataSpreadsheetBody = forwardRef(
   (

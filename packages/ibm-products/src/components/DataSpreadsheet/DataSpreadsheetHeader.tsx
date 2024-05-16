@@ -27,34 +27,9 @@ import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 import { useSpreadsheetMouseMove } from './hooks';
 import { checkForHoldingKey } from './utils/checkForHoldingKey';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { ActiveCellCoordinates, Column, ItemType, Size } from './types';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
-
-interface ActiveCellCoordinates {
-  row?: number | string;
-  column?: number | string;
-}
-
-interface Column {
-  rowHeight?: number;
-  rowHeaderWidth?: number;
-  width?: number;
-  Header?: string;
-  accessor?: string | (() => void);
-  Cell?: () => void;
-}
-
-type Point = {
-  column?: number;
-};
-
-type ItemType = {
-  matcher?: string;
-  point1?: Point;
-  point2?: Point;
-};
-
-type Size = 'xs' | 'sm' | 'md' | 'lg';
 
 interface DataSpreadsheetHeaderProps {
   /**

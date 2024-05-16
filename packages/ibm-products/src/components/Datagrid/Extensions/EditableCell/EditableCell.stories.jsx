@@ -21,7 +21,7 @@ import { DocsPage } from './EditableCell.docs-page';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
-import { FeatureFlags } from '../../../FeatureFlags';
+import { WithFeatureFlags } from '../../../../../../core/.storybook/WithFeatureFlags';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
@@ -109,7 +109,7 @@ const EditableCellUsage = ({ ...args }) => {
   );
 
   return (
-    <FeatureFlags
+    <WithFeatureFlags
       flags={{
         'Datagrid.useEditableCell': true,
       }}
@@ -122,7 +122,7 @@ const EditableCellUsage = ({ ...args }) => {
         <code className={storybookBlockClass}>{'age'}</code>
         <code className={storybookBlockClass}>{'visits'}</code>
       </p>
-    </FeatureFlags>
+    </WithFeatureFlags>
   );
 };
 
@@ -145,7 +145,7 @@ const InlineEditUsage = ({ ...args }) => {
   );
 
   return (
-    <div>
+    <WithFeatureFlags>
       <Datagrid datagridState={datagridState} />
       <p>
         The following inline edit columns incorporate validation:
@@ -154,7 +154,7 @@ const InlineEditUsage = ({ ...args }) => {
         <code className={storybookBlockClass}>{'age'}</code>
         <code className={storybookBlockClass}>{'visits'}</code>
       </p>
-    </div>
+    </WithFeatureFlags>
   );
 };
 

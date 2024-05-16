@@ -1,4 +1,4 @@
-name: Add triage labe to opened/reopened issues
+name: Add triage label to opened/reopened issues
 on:
   issues:
     types:

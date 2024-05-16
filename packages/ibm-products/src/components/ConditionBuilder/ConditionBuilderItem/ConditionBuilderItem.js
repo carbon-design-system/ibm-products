@@ -70,8 +70,7 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     //this will focus the first input field in the popover
     if (open && contentRef.current) {
-      const firstFocusableElement =
-        contentRef.current.querySelector('input, button,li');
+      const firstFocusableElement = contentRef.current.querySelector('input');
       if (firstFocusableElement) {
         firstFocusableElement.focus();
       }

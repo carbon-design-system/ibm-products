@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { Search, Button } from '@carbon/react';
 
@@ -34,6 +34,7 @@ export const ConditionBuilderItemOption = ({
     : conditionState.value !== undefined
     ? [conditionState.value]
     : [];
+  const contentRef = useRef();
 
   useEffect(() => {
     if (!allOptions && getOptions) {
@@ -53,6 +54,20 @@ export const ConditionBuilderItemOption = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    //this will focus the first input field in the popover
+
+    if (contentRef.current) {
+      const firstFocusableElement =
+        contentRef.current?.querySelector('input, button,li');
+
+      if (firstFocusableElement) {
+        firstFocusableElement.focus();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allOptions]);
 
   const handleSelectAll = (e) => {
     if (e.currentTarget.dataset.selectedAll == 'false') {
@@ -83,7 +98,10 @@ export const ConditionBuilderItemOption = ({
   return (
     <>
       {allOptions && (
-        <div className={`${blockClass}__condition-builder-item-option`}>
+        <div
+          className={`${blockClass}__condition-builder-item-option`}
+          ref={contentRef}
+        >
           {(config.includeSearch ||
             allOptions.length > popOverSearchThreshold) && (
             <div

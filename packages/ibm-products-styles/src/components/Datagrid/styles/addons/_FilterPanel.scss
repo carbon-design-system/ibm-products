@@ -14,27 +14,28 @@
 
 .#{$block-class}-filter-panel__container {
   position: relative;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(320px);
-  height: clamp(var(--filter-panel-min-height), 100%, 100vh);
-  border-top: 1px $layer-accent-01 solid;
   background-color: $layer-01;
+  block-size: clamp(var(--filter-panel-min-height), 100%, 100vh);
+  border-block-start: 1px $layer-accent-01 solid;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(320px);
 }
 
 .#{$block-class}-filter-panel--open {
-  border-right: 1px $layer-accent-01 solid;
+  border-inline-end: 1px $layer-accent-01 solid;
 }
 
 .#{$block-class}-filter-panel__container::before {
   position: absolute;
-  top: -1px; // stylelint-disable-line
-  left: 0;
   display: block;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(47px); // size of filter panel button
-  height: 1px;
   background-color: $layer-01;
+  block-size: 1px;
   content: '';
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  // size of filter panel button
+  inline-size: to-rem(47px);
+  inset-block-start: -1px;
+  inset-inline-start: 0;
 }
 
 .#{$block-class}-filter-panel__inner-container {
@@ -48,23 +49,23 @@
 // Adds extra space to the last category so the scroll shows everything visible when you reach the bottom
 .#{$block-class}-filter-panel__inner-container
   .#{$block-class}-filter-panel__category:last-of-type {
-  padding-bottom: $spacing-11;
+  padding-block-end: $spacing-11;
 }
 
 .#{$block-class}-filter-panel {
   position: sticky;
-  top: 0;
+  inset-block-start: 0;
 }
 
 .#{$block-class}-filter-panel__heading {
   display: flex;
   justify-content: space-between;
-  padding-left: $spacing-05;
-  border-bottom: 1px solid transparent;
+  border-block-end: 1px solid transparent;
+  padding-inline-start: $spacing-05;
 }
 
 .#{$block-class}-filter-panel__heading--with-divider {
-  border-bottom: 1px solid $layer-accent-01;
+  border-block-end: 1px solid $layer-accent-01;
 }
 
 .#{$block-class}-filter-panel__title {
@@ -79,27 +80,28 @@
 .#{$block-class}-filter-panel__category-title {
   @include type-style('heading-compact-01');
 
-  margin-bottom: $spacing-05;
   color: $text-secondary;
+  margin-block-end: $spacing-05;
 }
 
 .#{$block-class}-filter-panel__category {
-  padding-bottom: $spacing-06;
+  padding-block-end: $spacing-06;
 }
 
 // This selects all filter elements inside of categories and give them 16px margin bottom
 .#{$block-class}-filter-panel__category
   > *:not(.c4p--datagrid-filter-panel__category-title, .bx--accordion) {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{$block-class}-filter-panel__action-set {
   position: sticky;
-  z-index: 1; // To layer action set on top of content behind when sticky
-  bottom: 0;
+  // To layer action set on top of content behind when sticky
+  z-index: 1;
+  inset-block-end: 0;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  height: to-rem(64px);
-  margin-top: auto;
+  block-size: to-rem(64px);
+  margin-block-start: auto;
 }
 
 // Overrides
@@ -115,26 +117,26 @@
 
 .#{$block-class}-filter-panel__container
   .#{c4p-settings.$carbon-prefix}--accordion__content {
-  padding-right: 0;
-  padding-left: 0;
+  padding-inline: 0;
+  padding-inline-start: 0;
 }
 
 // Makes sure every child (filter) inside the accordion content has space in between
 .#{$block-class}-filter-panel__container
   .#{c4p-settings.$carbon-prefix}--accordion__content
   > *:not(:last-child) {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{c4p-settings.$carbon-prefix}--btn.c4p--datagrid-filter-panel-open-button {
   display: flex;
-  width: 3rem;
-  height: 3rem;
   justify-content: center;
-  border-right: 1px solid $layer-accent-01;
-  border-bottom: none;
+  block-size: 3rem;
+  border-block-end: none;
+  border-inline-end: 1px solid $layer-accent-01;
+  inline-size: 3rem;
 }
 
 .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}-filter-panel__view-all-button {
-  margin-left: -$spacing-05;
+  margin-inline-start: -$spacing-05;
 }

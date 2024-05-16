@@ -24,9 +24,9 @@
 
 .#{variables.$block-class}__customize-columns-tearsheet--actions
   input[role='searchbox'] {
-  height: $spacing-09;
-  padding-left: $spacing-09;
-  border-bottom: 1px solid $background-active;
+  block-size: $spacing-09;
+  border-block-end: 1px solid $background-active;
+  padding-inline-start: $spacing-09;
 }
 
 .#{c4p-settings.$carbon-prefix}--form-item.#{c4p-settings.$carbon-prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
@@ -40,16 +40,17 @@
   .#{variables.$block-class}__customize-columns-checkbox-visible-label {
   // Disabling linter only to match the spacing that Carbon uses for the Checkbox label
   /* stylelint-disable-next-line */
-  padding-left: convert.to-rem(6px);
+  padding-inline-start: convert.to-rem(6px);
 }
 
 .#{variables.$block-class}__customize-columns-column-list
   .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{variables.$block-class}__customize-columns-column-list {
-  position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+  // needed for the react-dnd, otherwise the drag preview will not work correctly
+  position: relative;
   overflow: auto;
 }
 
@@ -61,12 +62,12 @@
 .#{variables.$block-class}__customize-columns-select-all--selected {
   position: sticky;
   z-index: 1;
-  top: 0;
   display: flex;
-  height: $spacing-09;
-  padding-left: $spacing-08;
-  border-bottom: 1px solid $layer-active;
   background-color: $layer;
+  block-size: $spacing-09;
+  border-block-end: 1px solid $layer-active;
+  inset-block-start: 0;
+  padding-inline-start: $spacing-08;
 
   .#{c4p-settings.$carbon-prefix}--checkbox-label-text {
     @include font-family.font-weight('semibold');

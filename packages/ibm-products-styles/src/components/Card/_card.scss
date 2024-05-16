@@ -16,11 +16,13 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} {
+  position: relative;
   background-color: $layer-01;
   color: $text-primary;
 }
 
 .#{$block-class}__clickable {
+  position: relative;
   cursor: pointer;
   // stylelint-disable-next-line carbon/motion-easing-use
   transition: background-color $duration-fast-02;
@@ -47,25 +49,26 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__media-left .#{$block-class}__footer {
   align-self: flex-end;
-  margin-top: auto;
+  margin-block-start: auto;
 }
 
 .#{$block-class}__media > * {
   display: block;
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 .#{$block-class}__header {
   padding: $spacing-05;
-  padding-right: 0; // makes for consistent slug position across productive and expressive
+  // makes for consistent slug position across productive and expressive
+  padding-inline-end: 0;
 }
 
 .#{$block-class}__header-label-only {
-  padding-bottom: $spacing-03;
+  padding-block-end: $spacing-03;
 }
 
 .#{$block-class}__header-label-only .#{$block-class}__label {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{$block-class}__header-container {
@@ -78,20 +81,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 .#{$block-class}__label {
   @include type-style('label-01');
 
-  margin-bottom: $spacing-01;
+  margin-block-end: $spacing-01;
 }
 
 .#{$block-class}__description {
   @include type-style('label-01');
 
-  margin-top: $spacing-01;
+  margin-block-start: $spacing-01;
 }
 
 .#{$block-class}__body {
   @include type-style('body-compact-01');
 
   padding: $spacing-05;
-  padding-top: 0;
+  padding-block-start: 0;
 }
 
 .#{$block-class}__footer {
@@ -124,17 +127,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__pictogram {
-  padding-top: $spacing-05;
-  padding-left: $spacing-05;
+  padding-block-start: $spacing-05;
+  padding-inline-start: $spacing-05;
 }
 
 .#{$block-class}__header-container--has-actions {
-  padding-right: $spacing-03;
-}
-
-// +++ adjustments for slug
-.#{$block-class} {
-  position: relative;
+  padding-inline-end: $spacing-03;
 }
 
 .#{$block-class}__media + .#{$block-class}__content-container {
@@ -144,25 +142,21 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
   position: absolute;
-  top: $spacing-05;
-  right: $spacing-05;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
 }
 
 .#{$block-class}__header-container--has-slug {
-  width: 100%;
-  padding-right: $spacing-07;
+  inline-size: 100%;
+  padding-inline-end: $spacing-07;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions {
-  padding-right: $spacing-08;
+  padding-inline-end: $spacing-08;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label {
-  padding-right: $spacing-09;
-}
-
-.#{$block-class}__clickable {
-  position: relative;
+  padding-inline-end: $spacing-09;
 }
 
 .#{$block-class}__clickable .#{c4p-settings.$carbon-prefix}--slug,

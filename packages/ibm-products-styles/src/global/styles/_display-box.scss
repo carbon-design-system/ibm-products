@@ -21,28 +21,30 @@ $indicator-height: $spacing-04;
 .#{$block-class} {
   position: relative;
   display: inline-block;
-  padding-top: $spacing-05; // space for the indicators
-  margin-top: $spacing-09; // provides space in docs
   color: $text-helper;
+  // provides space in docs
+  margin-block-start: $spacing-09;
+  // space for the indicators
+  padding-block-start: $spacing-05;
 }
 
 .#{$block-class}__indicator {
   position: absolute;
-  top: 0;
-  width: 100%;
-  border-bottom: 1px solid $text-helper;
+  border-block-end: 1px solid $text-helper;
+  inline-size: 100%;
+  inset-block-start: 0;
   white-space: nowrap;
   @include type-style('helper-text-01');
 }
 
 .#{$block-class}__message {
   position: absolute;
-  bottom: $spacing-02;
+  inset-block-end: $spacing-02;
 }
 
 .sb-main-centered .#{$block-class}__message {
-  left: 50%;
-  min-width: 100vh;
+  inset-inline-start: 50%;
+  min-inline-size: 100vh;
   text-align: center;
   transform: translateX(-50%);
 }
@@ -50,18 +52,18 @@ $indicator-height: $spacing-04;
 .#{$block-class}__indicator--left,
 .#{$block-class}__indicator--right {
   position: absolute;
-  bottom: calc(-1 * $indicator-height);
-  width: 0;
-  height: 0;
-  border-top: $indicator-height solid $text-helper;
-  border-right: $indicator-width solid transparent;
-  border-left: $indicator-width solid transparent;
+  block-size: 0;
+  border-block-start: $indicator-height solid $text-helper;
+  border-inline-end: $indicator-width solid transparent;
+  border-inline-start: $indicator-width solid transparent;
+  inline-size: 0;
+  inset-block-end: calc(-1 * $indicator-height);
 }
 
 .#{$block-class}__indicator--left {
-  left: calc(-1 * $indicator-width);
+  inset-inline-start: calc(-1 * $indicator-width);
 }
 
 .#{$block-class}__indicator--right {
-  right: calc(-1 * $indicator-width);
+  inset-inline-end: calc(-1 * $indicator-width);
 }

@@ -23,17 +23,17 @@
 }
 
 .storyCardExample {
-  width: 20%;
-  height: 350px;
   flex-grow: 1;
   padding: $spacing-06;
   border: 1px solid $border-inverse;
   background-color: $layer-accent-01;
+  block-size: 350px;
+  inline-size: 20%;
 }
 
 .GenericView {
   /* stylelint-disable-next-line declaration-no-important */
-  margin-top: $spacing-12 !important;
+  margin-block-start: $spacing-12 !important;
 }
 
 .NoImageExampleModal {
@@ -41,12 +41,12 @@
     100% / 16
   ); // stylelint-disable-line carbon/layout-token-use
 
-  width: calc(
+  inline-size: calc(
     $one-grid-column * 16
   ); // stylelint-disable-line carbon/layout-token-use
 
   @media (min-width: 672px) {
-    width: calc(
+    inline-size: calc(
       $one-grid-column * 12
     ); // stylelint-disable-line carbon/layout-token-use
   }
@@ -57,16 +57,16 @@
     100% / 16
   ); // stylelint-disable-line carbon/layout-token-use
 
-  width: calc(
+  inline-size: calc(
     $one-grid-column * 16
   ); // stylelint-disable-line carbon/layout-token-use
   @media (min-width: 672px) {
-    width: calc(
+    inline-size: calc(
       $one-grid-column * 12
     ); // stylelint-disable-line carbon/layout-token-use
   }
   @media (min-width: 1056px) {
-    width: calc(
+    inline-size: calc(
       $one-grid-column * 8
     ); // stylelint-disable-line carbon/layout-token-use
   }

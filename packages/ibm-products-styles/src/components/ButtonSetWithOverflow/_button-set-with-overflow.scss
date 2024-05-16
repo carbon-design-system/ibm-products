@@ -17,18 +17,19 @@ $_block-class: #{c4p-settings.$pkg-prefix}--button-set-with-overflow;
 @include block-wrap($_block-class) {
   &.#{$_block-class} {
     display: flex;
-    width: 100%;
+    inline-size: 100%;
   }
 
   .#{$_block-class}__space {
     position: relative;
     display: block;
-    width: 100%;
+    inline-size: 100%;
     white-space: nowrap;
   }
 
   .#{$_block-class}__button-container {
-    display: inline-flex; // needed to register a width
+    // needed to register a width
+    display: inline-flex;
   }
 
   .#{$_block-class}__button-container--hidden {

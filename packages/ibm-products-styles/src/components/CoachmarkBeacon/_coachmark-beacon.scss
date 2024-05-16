@@ -39,14 +39,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
       // the blue dot
       &::after {
         position: absolute;
-        top: calc($spacing-01 + $spacing-03);
-        left: calc($spacing-01 + $spacing-03);
-        width: $spacing-04;
-        height: $spacing-04;
         border-radius: 50%;
         /* stylelint-disable-next-line carbon/theme-token-use */
         background-color: $blue-50;
+        block-size: $spacing-04;
         content: '';
+        inline-size: $spacing-04;
+        inset-block-start: calc($spacing-01 + $spacing-03);
+        inset-inline-start: calc($spacing-01 + $spacing-03);
       }
 
       &:focus {
@@ -54,13 +54,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
 
         &::before {
           position: absolute;
-          top: 7px;
-          left: 7px;
           display: block;
-          width: 18px;
-          height: 18px;
           border-radius: 100%;
+          block-size: 18px;
           content: '';
+          inline-size: 18px;
+          inset-block-start: 7px;
+          inset-inline-start: 7px;
           /* stylelint-disable-next-line carbon/theme-token-use */
           outline: $spacing-01 $focus solid;
         }
@@ -70,15 +70,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
   .#{$block-class}__target {
     // the hit area
     position: absolute;
-    top: calc(-1 * $spacing-05);
-    left: calc(-1 * $spacing-05);
-    width: $spacing-07;
-    height: $spacing-07;
     padding: 0;
     border: none;
     border-radius: 50%;
     background-color: transparent;
+    block-size: $spacing-07;
     cursor: pointer;
+    inline-size: $spacing-07;
+    inset-block-start: calc(-1 * $spacing-05);
+    inset-inline-start: calc(-1 * $spacing-05);
 
     &[aria-expanded='true'] {
       circle {
@@ -90,10 +90,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
   &__center {
     position: absolute;
     z-index: 6900;
-    top: calc(($spacing-06 - $spacing-01) * -1);
-    left: calc(($spacing-06 - $spacing-01) * -1);
-    width: $spacing-11;
-    height: $spacing-11;
+    block-size: $spacing-11;
+    inline-size: $spacing-11;
+    inset-block-start: calc(($spacing-06 - $spacing-01) * -1);
+    inset-inline-start: calc(($spacing-06 - $spacing-01) * -1);
     pointer-events: none;
 
     circle {

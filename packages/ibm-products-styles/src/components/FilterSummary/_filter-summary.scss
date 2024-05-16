@@ -14,32 +14,32 @@ $block-class: #{$pkg-prefix}--filter-summary;
 
 .#{$block-class} {
   display: flex;
-  width: 100%;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  height: to-rem(48px);
   align-items: flex-start;
   padding: $spacing-03;
-  border-top: 1px solid $border-subtle-01;
   background: $layer-01;
+  inline-size: 100%;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  block-size: to-rem(48px);
+  border-block-start: 1px solid $border-subtle-01;
   &.#{$block-class}__expanded {
-    height: fit-content;
+    block-size: fit-content;
   }
 }
 
 .#{$block-class}
   .#{$pkg-prefix}--tag-set.#{$pkg-prefix}--tag-set.#{$block-class}__clear-button-inline {
-  width: auto;
+  inline-size: auto;
 }
 
 .#{$block-class}__view-all--wrapper {
   position: absolute;
-  top: $spacing-03;
-  right: 0;
+  inset-block-start: $spacing-03;
+  inset-inline-end: 0;
 }
 
 .#{$block-class}__expanded
   .#{$block-class}__clear-all-button.#{$carbon-prefix}--btn {
-  margin-right: $spacing-07;
+  margin-inline-end: $spacing-07;
 }
 
 .#{$block-class}__view-all--wrapper

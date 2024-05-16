@@ -22,20 +22,21 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
   .#{$_block-class}__space {
     position: relative;
     display: block;
-    width: 100%;
+    inline-size: 100%;
     white-space: nowrap;
   }
 
   .#{$_block-class}__breadcrumb-container.#{$_block-class}__breadcrumb-container-with-items {
-    display: inline-flex; // needed to register a width
-    width: 100%;
+    // needed to register a width
+    display: inline-flex;
+    inline-size: 100%;
   }
 
   .#{$_block-class}__breadcrumb-container
     .#{c4p-settings.$carbon-prefix}--breadcrumb {
-    width: 100%;
     flex-wrap: nowrap;
     align-items: flex-start;
+    inline-size: 100%;
   }
 
   .#{$_block-class}__breadcrumb-container--hidden {
@@ -48,8 +49,8 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
   }
 
   .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn {
-    min-height: revert;
     padding: 0;
+    min-block-size: revert;
   }
 
   .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn--ghost:hover {
@@ -68,16 +69,19 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     }
 
     .#{$_block-class}__displayed-breadcrumb:last-child {
-      max-width: calc(100% - $spacing-07); // allow room for breadcrumb back
+      // allow room for breadcrumb back
+      max-inline-size: calc(100% - $spacing-07);
     }
   }
 
   .#{c4p-settings.$carbon-prefix}--breadcrumb-item:last-child {
-    display: inline-flex; // flex instead of block due to spacing
+    // flex instead of block due to spacing
+    display: inline-flex;
   }
 
   .#{$_block-class}__displayed-breadcrumb:last-child {
-    display: inline-flex; // flex instead of block due to spacing
+    // flex instead of block due to spacing
+    display: inline-flex;
     overflow: hidden;
   }
 
@@ -85,7 +89,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     .#{c4p-settings.$carbon-prefix}--link {
     display: inline-block;
     overflow: hidden;
-    width: 100%;
+    inline-size: 100%;
     text-overflow: ellipsis;
   }
 }

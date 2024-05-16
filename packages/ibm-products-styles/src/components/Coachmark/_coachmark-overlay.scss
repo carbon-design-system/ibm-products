@@ -33,22 +33,23 @@ $draghandle-btn-class: #{$block-class}__handle;
 .#{$block-class} {
   position: absolute;
   z-index: 5901;
-  width: 18rem;
   border-radius: $spacing-01;
   background-color: $background-inverse;
   color: $text-inverse;
-  $caret-height: calc(
-    $spacing-03 - $spacing-01
-  ); // from the "peak" of the pyramid to its "base"
-  $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
-  $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
+  inline-size: 18rem;
 
   visibility: hidden;
+  // from the "peak" of the pyramid to its "base"
+  $caret-height: calc($spacing-03 - $spacing-01);
+  // use "center" for left-right calculations, and "height" for top-bottom calculations
+  $caret-center: $caret-height;
+  // see also ./utils/constants.js > distanceOffset
+  $distance-offset: $spacing-06;
 
   &--fixed {
     position: fixed;
-    right: $spacing-05;
-    bottom: 0;
+    inset-block-end: 0;
+    inset-inline-end: $spacing-05;
     transform: translateY(100%);
 
     transition: transform $duration-moderate-02 motion(exit, productive);
@@ -73,12 +74,12 @@ $draghandle-btn-class: #{$block-class}__handle;
     // background-color: this property is set in _coachmark-overlay-theme.scss
     position: absolute;
     z-index: 5902;
-    width: 0;
-    height: 0;
+    block-size: 0;
+    border-block-end: solid $caret-center $background-inverse;
     // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
-    border-right: $caret-center solid transparent;
-    border-bottom: solid $caret-center $background-inverse;
-    border-left: $caret-center solid transparent;
+    border-inline-end: $caret-center solid transparent;
+    border-inline-start: $caret-center solid transparent;
+    inline-size: 0;
   }
 
   // OVERLAY AND CARET POSITIONING
@@ -89,14 +90,14 @@ $draghandle-btn-class: #{$block-class}__handle;
     transform: translate(-50%, $translate-y);
 
     .#{$block-class}__caret {
-      left: calc(50% - $caret-center);
+      inset-inline-start: calc(50% - $caret-center);
       transform: rotate(180deg);
     }
 
     &-left {
       transform: translate(calc(-1 * $distance-offset), $translate-y);
       .#{$block-class}__caret {
-        left: $horizontal-push;
+        inset-inline-start: $horizontal-push;
         transform: rotate(180deg);
       }
     }
@@ -104,7 +105,7 @@ $draghandle-btn-class: #{$block-class}__handle;
     &-right {
       transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
       .#{$block-class}__caret {
-        right: $horizontal-push;
+        inset-inline-end: $horizontal-push;
         transform: rotate(180deg);
       }
     }
@@ -117,15 +118,15 @@ $draghandle-btn-class: #{$block-class}__handle;
 
     transform: translate(-50%, $translate-y);
     .#{$block-class}__caret {
-      top: $top;
-      left: calc(50% - $caret-center);
+      inset-block-start: $top;
+      inset-inline-start: calc(50% - $caret-center);
     }
 
     &-left {
       transform: translate(calc(-1 * $distance-offset), $translate-y);
       .#{$block-class}__caret {
-        top: $top;
-        left: $horizontal-push;
+        inset-block-start: $top;
+        inset-inline-start: $horizontal-push;
       }
     }
 
@@ -133,8 +134,8 @@ $draghandle-btn-class: #{$block-class}__handle;
       transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
 
       .#{$block-class}__caret {
-        top: $top;
-        right: $horizontal-push;
+        inset-block-start: $top;
+        inset-inline-end: $horizontal-push;
       }
     }
   }
@@ -146,16 +147,16 @@ $draghandle-btn-class: #{$block-class}__handle;
 
     transform: translate($translate-x, -50%);
     .#{$block-class}__caret {
-      top: calc(50% - ($caret-height * 0.5));
-      right: $right;
+      inset-block-start: calc(50% - ($caret-height * 0.5));
+      inset-inline-end: $right;
       transform: rotate(90deg);
     }
 
     &-top {
       transform: translate($translate-x, calc(-1 * $distance-offset));
       .#{$block-class}__caret {
-        top: $vertical-push;
-        right: $right;
+        inset-block-start: $vertical-push;
+        inset-inline-end: $right;
         transform: rotate(90deg);
       }
     }
@@ -163,8 +164,8 @@ $draghandle-btn-class: #{$block-class}__handle;
     &-bottom {
       transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
       .#{$block-class}__caret {
-        right: $right;
-        bottom: $vertical-push;
+        inset-block-end: $vertical-push;
+        inset-inline-end: $right;
         transform: rotate(90deg);
       }
     }
@@ -177,16 +178,16 @@ $draghandle-btn-class: #{$block-class}__handle;
 
     transform: translate($translate-x, -50%);
     .#{$block-class}__caret {
-      top: calc(50% - ($caret-height * 0.5));
-      left: $left;
+      inset-block-start: calc(50% - ($caret-height * 0.5));
+      inset-inline-start: $left;
       transform: rotate(-90deg);
     }
 
     &-top {
       transform: translate($translate-x, calc(-1 * $distance-offset));
       .#{$block-class}__caret {
-        top: $vertical-push;
-        left: $left;
+        inset-block-start: $vertical-push;
+        inset-inline-start: $left;
         transform: rotate(-90deg);
       }
     }
@@ -194,8 +195,8 @@ $draghandle-btn-class: #{$block-class}__handle;
     &-bottom {
       transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
       .#{$block-class}__caret {
-        bottom: $vertical-push;
-        left: $left;
+        inset-block-end: $vertical-push;
+        inset-inline-start: $left;
         transform: rotate(-90deg);
       }
     }
@@ -203,8 +204,9 @@ $draghandle-btn-class: #{$block-class}__handle;
 
   // ANIMATED MEDIA
   &__element-stepped-media {
-    height: calc($spacing-07 + $spacing-12); // 32 + 96 = 128
-    margin-bottom: $spacing-05;
+    // 32 + 96 = 128
+    block-size: calc($spacing-07 + $spacing-12);
+    margin-block-end: $spacing-05;
   }
 
   // BODY
@@ -220,11 +222,11 @@ $draghandle-btn-class: #{$block-class}__handle;
     // CAROUSEL ELEMENTS
     #{$block-class}-element {
       display: block;
-      max-width: 100%;
       flex: 0 0 100%;
+      max-inline-size: 100%;
 
       #{$block-class}-element__content {
-        padding-bottom: $spacing-05;
+        padding-block-end: $spacing-05;
       }
 
       #{$block-class}-element__title > div {
@@ -246,15 +248,15 @@ $draghandle-btn-class: #{$block-class}__handle;
     padding: $spacing-02 0 0 $spacing-03;
     border: 0;
     background-color: transparent;
-    text-align: left;
+    text-align: start;
 
     &::before {
       position: absolute;
-      top: $spacing-01;
-      left: $spacing-01;
-      width: calc($spacing-06 + $spacing-01);
-      height: calc($spacing-06 + $spacing-01);
+      block-size: calc($spacing-06 + $spacing-01);
       content: '';
+      inline-size: calc($spacing-06 + $spacing-01);
+      inset-block-start: $spacing-01;
+      inset-inline-start: $spacing-01;
     }
 
     &:hover {
@@ -273,15 +275,15 @@ $draghandle-btn-class: #{$block-class}__handle;
   }
 
   &--close-btn-container {
-    width: $spacing-07;
-    height: $spacing-07;
-    margin-left: auto !important;
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    margin-inline-start: auto !important;
   }
 
   &--close-btn {
-    width: $spacing-07;
-    height: $spacing-07;
-    margin-left: auto !important;
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    margin-inline-start: auto !important;
 
     svg > path {
       margin: 0;

@@ -12,7 +12,8 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as *;
 
-$web-terminal-width: 40rem; // 640px
+// 640px
+$web-terminal-width: 40rem;
 $block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes web-terminal-entrance {
@@ -51,22 +52,21 @@ $block-class: #{$pkg-prefix}--web-terminal;
   @include theme($g90);
 
   position: fixed;
-  top: $spacing-09;
-  right: 0;
-  width: 100%;
-  max-width: $web-terminal-width;
-  height: calc(100vh - #{$spacing-09});
-  border-left: 1px solid $gray-90;
+  block-size: calc(100vh - #{$spacing-09});
+  border-inline-start: 1px solid $gray-90;
   color: $text-primary;
-  /* stylelint-disable-next-line  */
+  inline-size: 100%;
+  inset-block-start: $spacing-09;
+  inset-inline-end: 0;
+  max-inline-size: $web-terminal-width;
 }
 
 .#{$block-class}__bar {
   display: flex;
-  height: 3rem;
   align-items: center;
   justify-content: space-between;
   background-color: $background;
+  block-size: 3rem;
 }
 
 .#{$block-class}__actions {
@@ -84,15 +84,15 @@ $block-class: #{$pkg-prefix}--web-terminal;
 
 // Terminal body styles
 .#{$block-class}__body {
-  height: calc(100vh - #{$spacing-09});
+  block-size: calc(100vh - #{$spacing-09});
 }
 
 // Terminal wrapper styles
 .#{$block-class}-content-wrapper {
-  width: 100vw;
-  height: 100%;
+  block-size: 100%;
+  inline-size: 100vw;
 }
 
 .#{$block-class}-content-wrapper--open {
-  width: calc(100vw - #{$web-terminal-width});
+  inline-size: calc(100vw - #{$web-terminal-width});
 }

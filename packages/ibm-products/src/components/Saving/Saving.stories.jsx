@@ -70,6 +70,7 @@ const AutoTemplate = (opts) => {
   return (
     <div>
       <TextArea
+        id="save-auto-textarea"
         onChange={onChangeHandler}
         value={text}
         labelText="Enter in the thing you wanted saved"

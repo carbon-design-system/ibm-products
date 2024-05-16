@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,16 +10,17 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('TagOverflow @avt', () => {
+test.describe('InterstitialScreenView @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'TagOverflow',
-      id: 'ibm-products-components-tag-overflow-tagoverflow--tags-with-overflow-count',
+      component: 'InterstitialScreenView',
+      id: 'ibm-products-novice-to-pro-interstitial-screen-interstitialscreenview--interstitial-screen-view',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('+2').click();
-    await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'InterstitialScreenView @avt-default-state'
+    );
   });
 });

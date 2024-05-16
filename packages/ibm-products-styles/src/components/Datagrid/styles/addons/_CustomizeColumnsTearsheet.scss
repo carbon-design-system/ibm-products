@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/type/scss/font-family';
-@use '@carbon/layout' as *;
 @use '@carbon/layout/scss/convert';
 
 @use '../../../../global/styles/project-settings' as c4p-settings;

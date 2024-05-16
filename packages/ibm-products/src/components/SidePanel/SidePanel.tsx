@@ -986,7 +986,7 @@ SidePanel.propTypes = {
    * Provide a ref to return focus to once the modal is closed.
    */
   /**@ts-ignore */
-  launcherButtonRef: PropTypes.node,
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Sets the icon description for the navigation back icon button

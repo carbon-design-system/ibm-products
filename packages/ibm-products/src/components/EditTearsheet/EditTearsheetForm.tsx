@@ -22,6 +22,11 @@ const defaults = {
   hasFieldset: true,
 };
 
+type FormContextType = {
+  currentForm: number;
+  setFormTitle: () => void;
+};
+
 interface EditTearsheetFormBaseProps {
   /**
    * Content that shows in the tearsheet form
@@ -48,7 +53,7 @@ interface EditTearsheetFormBaseProps {
   /**
    * Sets an optional subtitle on the form component
    */
-  subtitle: string;
+  subtitle?: string;
 
   /**
    * Sets the title text for a tearsheet form
@@ -87,7 +92,7 @@ export let EditTearsheetForm = forwardRef(
     }: EditTearsheetFormProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const formContext = useContext(FormContext) as any;
+    const formContext = useContext<FormContextType>(FormContext);
     const formNumber = useContext(FormNumberContext);
     useRetrieveFormTitles({ formContext, formNumber, title });
 

@@ -48,13 +48,7 @@ import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleKeyPress } from './utils/commonEventHandlers';
-import {
-  ActiveCellCoordinates,
-  Column,
-  PrevStateType,
-  Size,
-  Theme,
-} from './types';
+import { ActiveCellCoordinates, Column, PrevState, Size, Theme } from './types';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -185,7 +179,7 @@ export let DataSpreadsheet = React.forwardRef(
       useState<boolean>(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
-    const previousState: PrevStateType =
+    const previousState: PrevState =
       usePreviousValue({
         activeCellCoordinates,
         isEditing,

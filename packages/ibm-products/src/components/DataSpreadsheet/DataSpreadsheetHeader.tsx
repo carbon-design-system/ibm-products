@@ -27,7 +27,13 @@ import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 import { useSpreadsheetMouseMove } from './hooks';
 import { checkForHoldingKey } from './utils/checkForHoldingKey';
 import { prepareProps } from '../../global/js/utils/props-helper';
-import { ActiveCellCoordinates, Column, ItemType, Size } from './types';
+import {
+  ActiveCellCoordinates,
+  Column,
+  ItemType,
+  PrevState,
+  Size,
+} from './types';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -130,10 +136,6 @@ interface DataSpreadsheetHeaderProps {
    */
   visibleColumns?: [];
 }
-
-type PrevState = {
-  cellSize?: Size;
-};
 
 export const DataSpreadsheetHeader = forwardRef(
   (

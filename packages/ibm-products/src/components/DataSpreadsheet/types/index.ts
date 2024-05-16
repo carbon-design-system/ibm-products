@@ -1,3 +1,5 @@
+export type Size = 'xs' | 'sm' | 'md' | 'lg';
+export type Theme = 'light' | 'dark';
 export interface Column {
   Header?: string;
   accessor?: string | (() => void);
@@ -18,6 +20,7 @@ export interface PrevState {
   selectionAreaData?: object[];
   clickAndHoldActive?: boolean;
   rowHeight?: number;
+  cellSize?: Size;
 }
 
 export interface Point {
@@ -29,6 +32,3 @@ export interface ItemType {
   point1?: Point;
   point2?: Point;
 }
-
-export type Size = 'xs' | 'sm' | 'md' | 'lg';
-export type Theme = 'light' | 'dark';

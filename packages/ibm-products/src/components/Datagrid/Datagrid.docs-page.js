@@ -301,7 +301,17 @@ const datagridState = useDatagrid(
         },
       },
       {
-        description: `onVirtualData is an optional scroll callback that returns data about which rows are currently visible.`,
+        description: `onVirtualData is an optional scroll callback that returns data about which rows are currently visible. The structure of the data returned from this callback can be seen below:`,
+        source: {
+          code: `
+{
+  overscanStartIndex: number,
+  overscanStopIndex: number,
+  visibleStartIndex: number,
+  visibleStopIndex: number
+}
+          `,
+        },
       },
       {
         title: 'Detect row hover',

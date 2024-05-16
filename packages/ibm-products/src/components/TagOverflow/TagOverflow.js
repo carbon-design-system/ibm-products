@@ -182,8 +182,8 @@ export let TagOverflow = React.forwardRef(
       }
 
       const hiddenItems = items?.slice(visibleItemsArr.length);
-      const overflowItemsArr = hiddenItems?.map((item) => {
-        return { type: item.tagType, label: item.label, id: item.id };
+      const overflowItemsArr = hiddenItems?.map(({ tagType, ...other }) => {
+        return { type: tagType, ...other };
       });
 
       setVisibleItems(visibleItemsArr);

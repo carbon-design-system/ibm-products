@@ -102,29 +102,35 @@ export const TagOverflowPopover = React.forwardRef(
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
-                {getOverflowPopoverItems().map((tag) => {
-                  const tagProps = {};
-                  if (overflowType === 'tag') {
-                    tagProps.type = 'high-contrast';
+                {getOverflowPopoverItems().map(
+                  ({ tagType, onClose, ...other }) => {
+                    const tagProps = { type: tagType, ...other };
+                    if (overflowType === 'tag') {
+                      tagProps.type = 'high-contrast';
+                    } else {
+                      tagProps.filter = false;
+                    }
+                    return (
+                      <li
+                        className={cx(`${blockClass}__tag-item`, {
+                          [`${blockClass}__tag-item--default`]:
+                            overflowType === 'default',
+                          [`${blockClass}__tag-item--tag`]:
+                            overflowType === 'tag',
+                        })}
+                        key={tagProps.id}
+                      >
+                        {overflowType === 'tag' ? (
+                          <Tag {...tagProps} onClose={() => onClose?.()}>
+                            {tagProps.label}
+                          </Tag>
+                        ) : (
+                          tagProps.label
+                        )}
+                      </li>
+                    );
                   }
-                  if (overflowType === 'default') {
-                    tagProps.filter = false;
-                  }
-                  return (
-                    <li
-                      className={cx(`${blockClass}__tag-item`, {
-                        [`${blockClass}__tag-item--default`]:
-                          overflowType === 'default',
-                        [`${blockClass}__tag-item--tag`]:
-                          overflowType === 'tag',
-                      })}
-                      key={tag.id}
-                    >
-                      {tag.label}
-                      {/* {React.cloneElement(tag, tagProps)} */}
-                    </li>
-                  );
-                })}
+                )}
               </ul>
               {overflowTags.length > allTagsModalSearchThreshold && (
                 <Link

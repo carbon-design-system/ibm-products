@@ -10,16 +10,15 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('TagOverflow @avt', () => {
+test.describe('DelimitedList @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'TagOverflow',
-      id: 'ibm-products-components-tag-overflow-tagoverflow--tags-with-overflow-count',
+      component: 'DelimitedList',
+      id: 'ibm-products-components-delimited-list-delimitedlist--delimited',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('+2').click();
-    await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
+    await expect(page).toHaveNoACViolations('DelimitedList @avt-default-state');
   });
 });

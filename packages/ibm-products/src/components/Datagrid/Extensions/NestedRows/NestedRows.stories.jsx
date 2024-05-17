@@ -232,7 +232,7 @@ SingleLevelNestedRowsUsageStory.args = {
 
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(5, 5, 2, 2));
+  const [data] = useState(makeData(10, 5, 2, 2));
   const datagridState = useDatagrid(
     {
       columns,

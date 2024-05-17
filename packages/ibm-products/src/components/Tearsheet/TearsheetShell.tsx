@@ -294,7 +294,7 @@ export const TearsheetShell = React.forwardRef(
 
     useEffect(() => {
       if (open) {
-        // Focusing the first element
+        // Focusing the first element or selectorPrimaryFocus element
         setTimeout(() => {
           if (selectorPrimaryFocus) {
             return specifiedElement?.focus();

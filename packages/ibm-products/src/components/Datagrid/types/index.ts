@@ -8,6 +8,7 @@ import {
   DatePickerProps,
   DatePickerInputProps,
 } from '@carbon/type';
+import { MutableRefObject, ReactNode } from 'react';
 
 export type Filter =
   | ({
@@ -16,7 +17,7 @@ export type Filter =
       type: 'date';
       props: {
         DatePicker?: DatePickerProps;
-        DatePickerInput: DatePickerInputProps;
+        DatePickerInput?: DatePickerInputProps;
       };
     })
   | {
@@ -53,7 +54,13 @@ export interface ReactTableFiltersState {
   value: string;
 }
 
-export interface FilterProps {
+interface Section {
+  categoryTitle?: string;
+  filters?: Filter[];
+}
+
+export interface FilterFlyoutProps {
+  data?: any;
   filters?: Filter[];
   flyoutIconDescription?: string;
   onFlyoutClose?: () => void;
@@ -65,16 +72,55 @@ export interface FilterProps {
   secondaryActionLabel?: string;
   updateMethod?: string;
   variation?: string;
+  panelTitle?: string;
+  sections?: Section[];
+  // TODO: Change any
+  autoHideFilters: any;
+}
+
+export interface Column {
+  Header?: string;
+  accessor?: () => void;
+  sticky: 'left' | 'right';
+  id?: string;
+  width?: string;
+  className?: string;
+}
+
+export interface TableProps {
+  className?: string;
+  role?: string;
+  style?: CSSStyleDeclaration;
 }
 
 export interface DataGridState {
   withVirtualScroll?: boolean;
-  DatagridPagination?: () => void;
+  DatagridPagination?: ReactNode | (() => void);
   isFetching?: boolean;
   tableId?: string;
-  filterProps?: FilterProps;
+  filterProps?: FilterFlyoutProps;
   className?: string;
-  columns?: any;
+  columns?: Column[];
+  getTableProps?: () => TableProps;
+  getFilterFlyoutProps?: () => FilterFlyoutProps;
+  DatagridActions?: ReactNode | (() => void);
+  CustomizeColumnsTearsheet?: ReactNode | (() => void);
+  skeletonRowCount?: number;
+  fullHeightDatagrid?: boolean;
+  variableRowHeight?: boolean;
+  useDenseHeader?: boolean;
+  withInlineEdit?: boolean;
+  verticalAlign?: string;
+  gridTitle?: ReactNode;
+  gridDescription?: ReactNode;
+  totalColumnsWidth?: number;
+  gridRef?: MutableRefObject<HTMLDivElement>;
+  setAllFilters?: () => void;
+  getAllFilters?: () => void;
+  // TODO: Change any
+  page?: any;
+  state?: any;
+  rows?: any;
   data?: any;
   onColResizeEnd?: any;
   initialState?: any;
@@ -85,10 +131,8 @@ export interface DataGridState {
   useControlledState?: any;
   plugins?: any;
   getHooks?: any;
-  state?: any;
   dispatch?: any;
   allColumns?: any;
-  rows?: any;
   initialRows?: any;
   flatRows?: any;
   rowsById?: any;
@@ -97,7 +141,6 @@ export interface DataGridState {
   flatHeaders?: any;
   visibleColumns?: any;
   totalColumnsMinWidth?: any;
-  totalColumnsWidth?: any;
   totalColumnsMaxWidth?: any;
   allColumnsHidden?: any;
   toggleHideColumn?: any;
@@ -116,7 +159,6 @@ export interface DataGridState {
   filteredFlatRows?: any;
   filteredRowsById?: any;
   setFilter?: any;
-  setAllFilters?: any;
   preGlobalFilteredRows?: any;
   preGlobalFilteredFlatRows?: any;
   preGlobalFilteredRowsById?: any;
@@ -140,7 +182,6 @@ export interface DataGridState {
   getToggleAllRowsExpandedProps?: any;
   pageOptions?: any;
   pageCount?: any;
-  page?: any;
   canPreviousPage?: any;
   canNextPage?: any;
   gotoPage?: any;
@@ -157,6 +198,5 @@ export interface DataGridState {
   toggleAllPageRowsSelected?: any;
   footerGroups?: any;
   prepareRow?: any;
-  getTableProps?: any;
   getTableBodyProps?: any;
 }

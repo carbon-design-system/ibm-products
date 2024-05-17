@@ -6,7 +6,7 @@
  */
 
 import { FilterContext, FilterPanel } from './addons/Filtering';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { ForwardedRef, useContext, useEffect, useRef } from 'react';
 import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
@@ -28,11 +28,22 @@ import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
 
-export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
+interface DatagridContentProps {
+  ariaToolbarLabel?: string;
+  datagridState: DataGridState;
+  title?: string;
+}
+
+export const DatagridContent = ({
+  datagridState,
+  title,
+  ariaToolbarLabel,
+}: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
@@ -63,8 +74,8 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   const { columnResizing } = state;
 
   const contentRows = (DatagridPagination && page) || rows;
-  const gridAreaRef = useRef();
-  const multiKeyTrackingRef = useRef();
+  const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
 
   useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {
@@ -86,7 +97,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
     return (
       <>
         <Table
-          {...getTableProps()}
+          {...getTableProps?.()}
           className={cx(
             withVirtualScroll ? '' : `${blockClass}__table-simple`,
             `${blockClass}__vertical-align-${verticalAlign}`,
@@ -97,7 +108,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
               [`${blockClass}__table-is-resizing`]:
                 typeof columnResizing?.isResizingColumn === 'string',
             },
-            getTableProps()?.className
+            getTableProps?.().className
           )}
           role={withInlineEdit ? 'grid' : undefined}
           tabIndex={withInlineEdit ? 0 : -1}
@@ -139,16 +150,18 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
     if (!withInlineEdit) {
       return;
     }
-    const gridElement = document.querySelector(`#${tableId}`);
+    const gridElement: HTMLElement | null = document.querySelector(
+      `#${tableId}`
+    );
     const tableHeader = gridElement?.querySelector(
       `.${carbon.prefix}--data-table-header`
     );
-    gridElement.style.setProperty(
+    gridElement?.style?.setProperty(
       `--${blockClass}--grid-width`,
-      px(totalColumnsWidth + 32)
+      px((totalColumnsWidth || 0) + 32)
     );
     if (gridActive) {
-      gridElement.style.setProperty(
+      gridElement?.style.setProperty(
         `--${blockClass}--grid-header-height`,
         px(tableHeader?.clientHeight || 0)
       );
@@ -165,7 +178,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
-        renderLabel={filterProps.renderLabel}
+        renderLabel={filterProps?.renderLabel}
         overflowType="tag"
       />
     );
@@ -204,7 +217,7 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
         >
           {filterProps?.variation === 'panel' && (
             <FilterPanel
-              {...getFilterFlyoutProps()}
+              {...getFilterFlyoutProps?.()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}
               autoHideFilters={filterProps.autoHideFilters}

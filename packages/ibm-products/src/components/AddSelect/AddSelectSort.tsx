@@ -10,16 +10,11 @@ import PropTypes from 'prop-types';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/react/icons';
 import { pkg } from '../../settings';
+import { SortOption } from './types';
 
 const blockClass = `${pkg.prefix}--add-select-sort`;
 const componentName = 'AddSelectSort';
 
-type SortOption = {
-  id?: string;
-  direction?: string;
-  attribute?: string;
-  itemText?: object;
-};
 export interface AddSelectSortProps {
   setSortAttribute?: (attribute) => void;
   setSortDirection?: (direction) => void;

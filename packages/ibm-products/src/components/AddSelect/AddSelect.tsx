@@ -9,45 +9,8 @@ import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelectBody } from './AddSelectBody';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
+import { Filter, Item, Theme } from './types';
 const componentName = 'AddSelect';
-
-type Filter = {
-  id?: string;
-  label?: string;
-};
-type Theme = 'light' | 'dark';
-type Modifier = {
-  id?: string;
-  label?: string;
-  options?: string[];
-};
-type Avatar = {
-  alt?: string;
-  icon?: () => void;
-  src?: string;
-  theme?: Theme;
-};
-type Meta = {
-  id?: string;
-  title?: string;
-  value?: string;
-};
-type Entry = {
-  id: string;
-  title: string;
-  value: string;
-  avatar?: Avatar;
-  children?: ReactNode;
-  icon?: () => void;
-  meta?: Meta[] | ReactNode;
-  subtitle?: string;
-};
-type ItemType = {
-  entries: Entry[];
-  modifiers?: Modifier;
-  sortBy?: string[];
-  filterBy?: string[];
-};
 
 export interface AddSelectProps {
   className?: string;
@@ -67,7 +30,7 @@ export interface AddSelectProps {
   globalSortBy?: Array<any>;
   illustrationTheme?: Theme;
   influencerTitle?: string;
-  items: ItemType;
+  items: Item;
   itemsLabel: string;
   metaIconDescription?: string;
   metaPanelTitle?: string;

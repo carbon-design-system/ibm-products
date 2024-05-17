@@ -22,43 +22,10 @@ import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';
 import usePath from './hooks/usePath';
 import { pkg } from '../../settings';
+import { Item, Theme } from './types';
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
-
-type Theme = 'light' | 'dark';
-type Modifier = {
-  id?: string;
-  label?: string;
-  options?: string[];
-};
-type Avatar = {
-  alt?: string;
-  icon?: () => void;
-  src?: string;
-  theme?: Theme;
-};
-type Meta = {
-  id?: string;
-  title?: string;
-  value?: string;
-};
-type Entry = {
-  id: string;
-  title: string;
-  value: string;
-  avatar?: Avatar;
-  children?: ReactNode;
-  subtitle?: string;
-  icon?: () => void | object;
-  meta?: Meta[] | ReactNode;
-};
-type ItemType = {
-  modifiers?: Modifier;
-  sortBy?: string[];
-  filterBy?: string[];
-  entries?: Entry[];
-};
 
 export interface AddSelectBodyProps {
   className?: string;
@@ -79,7 +46,7 @@ export interface AddSelectBodyProps {
   globalSortBy?: Array<any>;
   illustrationTheme?: Theme;
   influencerTitle?: string;
-  items?: ItemType;
+  items?: Item;
   itemsLabel?: string;
   metaIconDescription?: string;
   metaPanelTitle?: string;

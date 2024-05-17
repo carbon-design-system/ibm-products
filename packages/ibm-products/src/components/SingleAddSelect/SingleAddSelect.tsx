@@ -12,15 +12,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { AddSelectProps } from '../AddSelect/AddSelect';
+import { Entry } from '../AddSelect/types';
 
 const componentName = 'SingleAddSelect';
-
-type EntryType = {
-  id: string;
-  title: string;
-  value: string;
-  children?: object;
-};
 
 interface SingleAddSelectProps {
   /**
@@ -44,7 +38,7 @@ interface SingleAddSelectProps {
    * "Structuring items" section in the docs tab
    */
   items?: {
-    entries: EntryType[];
+    entries: Entry[];
   };
   /**
    * label that display above the list of items

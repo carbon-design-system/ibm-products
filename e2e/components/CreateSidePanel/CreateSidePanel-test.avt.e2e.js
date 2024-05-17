@@ -21,13 +21,9 @@ test.describe('CreateSidePanel @avt', () => {
     });
 
     await page.getByText('Open side panel').click();
-    const modalElement = page.locator(`.dev-prefix--c4p--side-panel`);
-    await expect(modalElement).toBeVisible();
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
+    await page
+      .locator(`.dev-prefix--c4p--side-panel`)
+      .screenshot({ animations: 'disabled' });
     await expect(page).toHaveNoACViolations(
       'CreateSidePanel @avt-default-state'
     );

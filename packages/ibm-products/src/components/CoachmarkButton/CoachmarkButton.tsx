@@ -19,6 +19,17 @@ import { useCoachmark } from '../Coachmark';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
+interface CoachmarkButtonProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * The aria label.
+   */
+  label: string;
+}
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-button`;
 const componentName = 'CoachmarkButton';
@@ -42,43 +53,44 @@ const componentName = 'CoachmarkButton';
 /**
  * Use CoachmarkButton for the target prop of a Coachmark component.
  */
-export let CoachmarkButton = React.forwardRef(
-  ({ className, label, ...rest }, ref) => {
-    const coachmark = useCoachmark();
-    if (!coachmark) {
-      return (
-        <div>
-          CoachmarkButton is to be use exclusively within the target prop of
-          Coachmark
-        </div>
-      );
-    }
+export let CoachmarkButton = React.forwardRef<
+  HTMLButtonElement,
+  CoachmarkButtonProps
+>(({ className, label, ...rest }, ref) => {
+  const coachmark = useCoachmark();
+  if (!coachmark) {
     return (
-      <Button
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
-        ref={ref}
-        role="button"
-        aria-label={label}
-        {...getDevtoolsProps(componentName)}
-        {...coachmark.buttonProps}
-      >
-        {label}
-      </Button>
+      <div>
+        CoachmarkButton is to be use exclusively within the target prop of
+        Coachmark
+      </div>
     );
   }
-);
+  return (
+    <Button
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
+      className={cx(
+        blockClass, // Apply the block class to the main HTML element
+        className, // Apply any supplied class names to the main HTML element.
+        // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
+        {
+          // switched classes dependant on props or state
+          // example: [`${blockClass}__here-if-small`]: size === 'sm',
+        }
+      )}
+      ref={ref}
+      role="button"
+      aria-label={label}
+      {...getDevtoolsProps(componentName)}
+      {...coachmark.buttonProps}
+    >
+      {label}
+    </Button>
+  );
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 CoachmarkButton = pkg.checkComponentEnabled(CoachmarkButton, componentName);

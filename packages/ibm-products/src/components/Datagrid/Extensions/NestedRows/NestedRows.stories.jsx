@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { Button } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
@@ -232,7 +233,7 @@ SingleLevelNestedRowsUsageStory.args = {
 
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
+  const [data, setData] = useState(makeData(5, 5, 2, 2));
   const datagridState = useDatagrid(
     {
       columns,
@@ -243,7 +244,19 @@ const NestedRows = ({ ...args }) => {
     useNestedRows
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          const firstRowCopy = data[0];
+          setData([...data, { ...firstRowCopy, defaultExpanded: true }]);
+        }}
+      >
+        Add row
+      </Button>
+      <Datagrid datagridState={{ ...datagridState }} />
+    </div>
+  );
 };
 
 const BasicTemplateWrapper = ({ ...args }) => {

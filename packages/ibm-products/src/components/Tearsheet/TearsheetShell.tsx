@@ -669,7 +669,7 @@ TearsheetShell.propTypes = {
    * Provide a ref to return focus to once the tearsheet is closed.
    */
   /**@ts-ignore */
-  launcherButtonRef: PropTypes.node,
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom

@@ -62,6 +62,7 @@ const title = uuidv4();
 const dataTestId = uuidv4();
 const ref = React.createRef();
 const onMountFn = jest.fn();
+const ariaLabel = 'test-aria-label';
 const defaultProps = {
   title,
   submitButtonText,
@@ -71,6 +72,7 @@ const defaultProps = {
   ref,
   onClose: onCloseFn,
   open: true,
+  ariaLabel,
 };
 
 const renderCreateTearsheet = ({
@@ -192,7 +194,7 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('renders the CreateTearsheet component', async () => {
-    const { container } = renderCreateTearsheet({
+    renderCreateTearsheet({
       ...defaultProps,
       'data-testid': dataTestId,
     });
@@ -203,18 +205,20 @@ describe(CreateTearsheet.displayName, () => {
     );
 
     screen.getAllByText(title);
-    expect(
-      container.querySelector(`.${createTearsheetBlockClass}`)
-    ).toBeTruthy();
+    const tearsheetElement = screen.getByRole('dialog', {
+      name: ariaLabel,
+    }).parentElement;
+    expect(tearsheetElement).toHaveClass(createTearsheetBlockClass);
     expect(ref.current).not.toBeNull();
   });
 
   it('should render the tearsheet on the specified initialStep prop provided', async () => {
-    const { container } = renderCreateTearsheet({
+    renderCreateTearsheet({
       ...defaultProps,
       initialStep: 2,
     });
-    const createTearsheetSteps = container.querySelector(
+    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
     expect(
@@ -228,13 +232,16 @@ describe(CreateTearsheet.displayName, () => {
     expectWarn(
       `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
       () => {
-        const { container } = renderCreateTearsheet({
+        renderCreateTearsheet({
           ...defaultProps,
           // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
           initialStep: 0,
         });
-        const createTearsheetSteps = container.querySelector(
+        const tearsheetElement = screen.getByRole('dialog', {
+          name: ariaLabel,
+        });
+        const createTearsheetSteps = tearsheetElement.querySelector(
           `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
         ).children;
         expect(
@@ -248,11 +255,12 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
-    const { container } = renderCreateTearsheet(defaultProps);
+    renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     await act(() => click(nextButtonElement));
-    const createTearsheetSteps = container.querySelector(
+    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
     expect(
@@ -283,10 +291,11 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('calls the onPrevious function prop as expected', async () => {
-    const { container } = renderCreateTearsheet(defaultProps);
+    renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const backButtonElement = screen.getByText(backButtonText);
-    const createTearsheetSteps = container.querySelector(
+    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
     click(nextButtonElement);
@@ -301,14 +310,15 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
-    const { container, rerender } = renderCreateTearsheet(defaultProps);
+    const { rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     await act(() => click(nextButtonElement));
-    const tearsheetChildren = container.querySelector(
+    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
     ).children;
     expect(
@@ -447,7 +457,7 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('should click the back button and add a custom next button label on a single step', async () => {
-    const { container } = renderCreateTearsheet({
+    renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -458,7 +468,8 @@ describe(CreateTearsheet.displayName, () => {
     const backButtonElement = screen.getByText(backButtonText);
     await act(() => click(backButtonElement));
     expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
-    const tearsheetChildren = container.querySelector(
+    const tearsheetElement = screen.getByRole('dialog', { name: ariaLabel });
+    const tearsheetChildren = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;
     expect(

@@ -113,6 +113,7 @@ function useChangedValue(value, compare, callback) {
  */
 function useFeatureFlag(flag) {
   const scope = useContext(FeatureFlagContext);
+  // console.log(scope);
   return scope.enabled(flag);
 }
 

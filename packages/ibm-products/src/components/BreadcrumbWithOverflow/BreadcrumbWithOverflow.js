@@ -387,7 +387,7 @@ BreadcrumbWithOverflow.propTypes = {
   /**
    * overflowTooltipAlign: align tooltip position
    */
-  overflowTooltipAlign: Tooltip.propTypes.align
+  overflowTooltipAlign: Tooltip.propTypes.align,
 };
 
 BreadcrumbWithOverflow.displayName = componentName;

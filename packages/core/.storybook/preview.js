@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { ActionableNotification, UnorderedList, ListItem } from '@carbon/react';
+import { StaticNotification, UnorderedList, ListItem } from '@carbon/react';
 import { white, g10, g90, g100 } from '@carbon/themes';
 
 import { pkg } from '../../ibm-products/src/settings';
@@ -50,7 +50,7 @@ const decorators = [
       <div className="preview-position-fix story-wrapper">
         <Style styles={index}>
           {args.featureFlags ? (
-            <ActionableNotification
+            <StaticNotification
               className="preview__notification--feature-flag"
               kind="warning"
               inline
@@ -58,6 +58,8 @@ const decorators = [
               actionButtonLabel="Learn more"
               statusIconDescription="describes the close button"
               title="This story uses the following feature flags to enable or disable some functionality."
+              titleId="storybook--feature-flag-warning-notification"
+              aria-describedby="storybook--feature-flag-warning-notification"
               onActionButtonClick={() => {
                 window.open(
                   'https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
@@ -71,7 +73,7 @@ const decorators = [
                   </ListItem>
                 ))}
               </UnorderedList>
-            </ActionableNotification>
+            </StaticNotification>
           ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
@@ -172,7 +174,7 @@ const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
+    defaultValue: 'g10',
     toolbar: {
       icon: 'paintbrush',
       items: ['white', 'g10', 'g90', 'g100'],

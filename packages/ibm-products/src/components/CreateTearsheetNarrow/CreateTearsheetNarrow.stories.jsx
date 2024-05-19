@@ -135,7 +135,6 @@ const Template = ({ slug, ...args }) => {
           />
           <Dropdown
             id="create-tearsheet-narrow-dropdown-options-c"
-            aria-label="Dropdown"
             initialSelectedItem="Day(s)"
             items={items}
             label="Options"
@@ -257,7 +256,6 @@ const WithValidationTemplate = ({ slug, ...args }) => {
             />
             <Dropdown
               id="create-tearsheet-narrow-dropdown-options-c"
-              aria-label="Dropdown"
               initialSelectedItem="Day(s)"
               items={items}
               label="Options"

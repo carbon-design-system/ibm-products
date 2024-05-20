@@ -17,7 +17,7 @@ const DatagridExpandedRow =
     const { row } = datagridState;
     const { expandedContentHeight } = row;
 
-    const toggleParentHoverClass = (event, eventType) => {
+    const toggleParentHoverClass = (event, eventType = '') => {
       /* istanbul ignore else */
       if (event?.target?.closest('tr').previousElementSibling) {
         const parentNode = event?.target?.closest('tr').previousElementSibling;

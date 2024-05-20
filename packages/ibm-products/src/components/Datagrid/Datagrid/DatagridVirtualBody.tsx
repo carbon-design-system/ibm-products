@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
@@ -61,28 +61,34 @@ const DatagridVirtualBody = (datagridState) => {
   }
 
   const visibleRows = (DatagridPagination && page) || rows;
-  const testRef = useRef();
+  const testRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   // Sync the scrollLeft position of the virtual body to the table header
   useEffect(() => {
     function handleScroll(event) {
       const virtualBody = event.target;
-      document.querySelector(
+      const headWrapEl = document?.querySelector(
         `#${tableId} .${blockClass}__head-wrap`
-      ).scrollLeft = virtualBody.scrollLeft;
-      const spacerColumn = document.querySelector(
+      );
+      if (headWrapEl) {
+        headWrapEl.scrollLeft = virtualBody?.scrollLeft;
+      }
+      const spacerColumn: HTMLDivElement | null = document.querySelector(
         `#${tableId} .${blockClass}__head-wrap thead th:last-child`
       );
-      spacerColumn.style.width = px(
-        32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
-      ); // scrollbar width to header column to fix header alignment
+
+      if (spacerColumn) {
+        spacerColumn.style.width = px(
+          32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
+        ); // scrollbar width to header column to fix header alignment
+      }
     }
 
-    const testRefValue = testRef.current;
-    testRefValue.addEventListener('scroll', handleScroll);
+    const testRefValue = testRef?.current;
+    testRefValue?.addEventListener('scroll', handleScroll);
 
     return () => {
-      testRefValue.removeEventListener('scroll', handleScroll);
+      testRefValue?.removeEventListener('scroll', handleScroll);
     };
   });
 

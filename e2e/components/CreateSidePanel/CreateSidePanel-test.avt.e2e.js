@@ -23,7 +23,7 @@ test.describe('CreateSidePanel @avt', () => {
 
     await page.getByText('Open side panel').click();
     await page
-      .locator(`#dev-prefix--${pkg.prefix}--side-panel`)
+      .locator(`#${pkg.prefix}--side-panel`)
       .screenshot({ animations: 'disabled' });
     await expect(page).toHaveNoACViolations(
       'CreateSidePanel @avt-default-state'

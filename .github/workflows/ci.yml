@@ -134,11 +134,11 @@ jobs:
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Set env vars
-        uses: ./.github/actions/set-dotenv
-        with:
-          env-file: packages/core/.env
-        env:
-          VITE_AVT: true
+        working-directory: ./packages/core
+        run: |
+          touch .env
+          echo VITE_AVT=true > .env
+          cat .env
       - name: Build project
         run: yarn build
       - name: Run storybook

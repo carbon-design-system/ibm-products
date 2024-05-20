@@ -31,7 +31,7 @@ const ConditionGroupBuilder = ({
       });
       handleFocusOnClose(e);
     } else {
-      onRemove();
+      onRemove(e);
     }
   };
 
@@ -76,7 +76,7 @@ const ConditionGroupBuilder = ({
 
   const handleFocusOnClose = (e) => {
     let previousClose = e.currentTarget
-      ?.closest('[role="row"]')
+      ?.closest('[role="row"]')?.parentElement
       ?.previousSibling?.querySelector('[data-name="closeCondition"]');
 
     if (previousClose) {

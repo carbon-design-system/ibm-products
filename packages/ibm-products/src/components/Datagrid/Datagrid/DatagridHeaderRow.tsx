@@ -22,8 +22,12 @@ import { useInitialColumnSort } from '../useInitialColumnSort';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
+interface PropsType {
+  title?: string;
+}
+
 const getAccessibilityProps = (header) => {
-  const props = {};
+  const props: PropsType = {};
   const title = getNodeTextContent(header.Header);
   if (title) {
     props.title = title;
@@ -47,8 +51,7 @@ const ResizeHeader = ({
   resizerAriaLabel,
   isFetching,
 }) => {
-  // eslint-disable-next-line no-unused-vars
-  const { role, ...headerProps } = resizerProps;
+  const { ...headerProps } = resizerProps;
   const mouseDownHandler = (evt) => {
     handleOnMouseDownResize(evt, resizerProps);
   };
@@ -106,42 +109,49 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
     const { tableId } = datagridState;
-    const gridElement = document.querySelector(`#${tableId}`);
-    const tableElement = gridElement.querySelector('table');
-    const headerRowElement = document.querySelector(
+    const gridElement: HTMLDivElement | null = document.querySelector(
+      `#${tableId}`
+    );
+    const tableElement = gridElement?.querySelector('table');
+    const headerRowElement: HTMLDivElement | null = document.querySelector(
       `#${tableId} .${blockClass}__head`
     );
-    const hasHorizontalScrollbar =
-      tableElement.scrollWidth > tableElement.clientWidth;
-    const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
-    const tableToolbar = gridElement.querySelector(
-      `.${blockClass}__table-toolbar`
-    );
+    let scrollBuffer = 2;
+    if (tableElement) {
+      const hasHorizontalScrollbar =
+        tableElement?.scrollWidth > tableElement?.clientWidth;
+
+      if (hasHorizontalScrollbar) {
+        scrollBuffer = 18;
+      }
+    }
+    const tableToolbar: HTMLDivElement | null =
+      gridElement?.querySelector(`.${blockClass}__table-toolbar`) || null;
     const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
     const setCustomValues = ({ rowHeight, gridHeight }) => {
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--row-height`,
         px(rowHeight)
       );
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--grid-height`,
         px(gridHeight - scrollBuffer - tableToolbarHeight)
       );
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--header-height`,
         px(headerRowElement.offsetHeight)
       );
     };
     setCustomValues({
-      gridHeight: gridElement.offsetHeight,
-      rowHeight: headerRowElement.clientHeight,
+      gridHeight: gridElement?.offsetHeight,
+      rowHeight: headerRowElement?.clientHeight,
     });
   }, [datagridState.rowSize, datagridState.tableId, datagridState]);
 
   const [incrementAmount] = useState(2);
 
   const handleOnMouseDownResize = (event, resizeProps) => {
-    const { onMouseDown } = { ...resizeProps };
+    const { onMouseDown = () => {} } = { ...resizeProps };
     // When event.button is 2, that is a right click
     // and we do not want to resize
     if (event.button === 2 || event.ctrlKey) {
@@ -151,12 +161,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     onMouseDown?.(event);
   };
 
-  const {
-    className: headerGroupClassName,
-    // eslint-disable-next-line no-unused-vars
-    role,
-    ...headerGroupProps
-  } = headerGroup.getHeaderGroupProps();
+  const { className: headerGroupClassName, ...headerGroupProps } =
+    headerGroup.getHeaderGroupProps();
 
   const renderSlug = (slug) => {
     if (isTableSortable) {
@@ -187,12 +193,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { columnResizing } = state;
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
-          const {
-            // eslint-disable-next-line no-unused-vars
-            role,
-            className: headerClassName,
-            ...headerProps
-          } = header.getHeaderProps();
+          const { className: headerClassName, ...headerProps } =
+            header.getHeaderProps();
           const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader

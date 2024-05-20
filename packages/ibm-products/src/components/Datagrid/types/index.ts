@@ -8,7 +8,7 @@ import {
   DatePickerProps,
   DatePickerInputProps,
 } from '@carbon/type';
-import { MutableRefObject, ReactNode } from 'react';
+import { JSXElementConstructor, MutableRefObject, ReactNode } from 'react';
 
 export type Filter =
   | ({
@@ -95,7 +95,7 @@ export interface TableProps {
 
 export interface DataGridState {
   withVirtualScroll?: boolean;
-  DatagridPagination?: ReactNode | (() => void);
+  DatagridPagination?: JSXElementConstructor<any>;
   isFetching?: boolean;
   tableId?: string;
   filterProps?: FilterFlyoutProps;
@@ -104,7 +104,7 @@ export interface DataGridState {
   getTableProps?: () => TableProps;
   getFilterFlyoutProps?: () => FilterFlyoutProps;
   DatagridActions?: ReactNode | (() => void);
-  CustomizeColumnsTearsheet?: ReactNode | (() => void);
+  CustomizeColumnsTearsheet?: JSXElementConstructor<any>;
   skeletonRowCount?: number;
   fullHeightDatagrid?: boolean;
   variableRowHeight?: boolean;
@@ -115,7 +115,7 @@ export interface DataGridState {
   gridDescription?: ReactNode;
   totalColumnsWidth?: number;
   gridRef?: MutableRefObject<HTMLDivElement>;
-  setAllFilters?: () => void;
+  setAllFilters?: (...args) => void;
   getAllFilters?: () => void;
   // TODO: Change any
   page?: any;

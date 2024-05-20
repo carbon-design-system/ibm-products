@@ -17,7 +17,10 @@
   "sideEffects": [
     "**/global/js/utils/props-helper.js",
     "**/*.css",
-    "**/*.scss"
+    "**/*.scss",
+    "es/feature-flags.js",
+    "lib/feature-flags.js",
+    "src/feature-flags.js"
   ],
   "files": [
     "css",

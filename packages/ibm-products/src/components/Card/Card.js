@@ -84,12 +84,13 @@ export let Card = forwardRef(
     },
     ref
   ) => {
-    getStarted ? (actionIcons = metadata) : '';
+    const getIcons = () => (getStarted ? metadata : actionIcons);
     const blockClass = `${pkg.prefix}--card`;
     const hasActions =
-      actionIcons.length > 0 ||
+      getIcons().length > 0 ||
       overflowActions.length > 0 ||
       (!!primaryButtonText && primaryButtonPlacement === 'top');
+    const hasHeaderActions = hasActions && actionsPlacement === 'top';
     const hasFooterActions = hasActions && actionsPlacement === 'bottom';
     const hasFooterButton =
       !!secondaryButtonText ||
@@ -124,7 +125,7 @@ export let Card = forwardRef(
         );
       }
 
-      const icons = actionIcons.map(
+      const icons = getIcons().map(
         ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
           if (getStarted) {
             return (
@@ -220,7 +221,7 @@ export let Card = forwardRef(
     const getHeaderProps = () => ({
       actions: actionsPlacement === 'top' ? getActions() : '',
       noActionIcons:
-        actionIcons.length > 0 && actionsPlacement === 'top' ? false : true,
+        getIcons().length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
       onPrimaryButtonClick,
       onSecondaryButtonClick,
@@ -229,7 +230,7 @@ export let Card = forwardRef(
       primaryButtonText,
       primaryButtonDisabled,
       description,
-      hasActions: hasActions && actionsPlacement === 'top',
+      hasActions: hasHeaderActions,
       inClickableCard: hasClickEvent,
       label,
       secondaryButtonDisabled,
@@ -292,13 +293,13 @@ export let Card = forwardRef(
         )}
         {getStarted && status && (
           <div className={`${blockClass}__status`}>
-            {status === 'incomplete' ? <Incomplete /> : ''}
-            {status === 'complete' ? <CheckmarkOutline /> : ''}
+            {status === 'incomplete' && <Incomplete />}
+            {status === 'complete' && <CheckmarkOutline />}
           </div>
         )}
         <div className={`${blockClass}__content-container`}>
           <div {...getHeaderBodyProps()}>
-            <div>
+            <div className={`${blockClass}__header-container`}>
               <CardHeader {...getHeaderProps()} />
               <div {...getBodyProps()}>{children}</div>
             </div>
@@ -385,7 +386,7 @@ Card.propTypes = {
    */
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
-  status: PropTypes.oneOf(['none', 'complete', 'incomplete']),
+  status: PropTypes.oneOf(['complete', 'incomplete']),
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

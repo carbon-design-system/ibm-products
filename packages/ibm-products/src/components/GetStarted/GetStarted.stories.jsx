@@ -35,7 +35,6 @@ const defaultProps = {
   ],
   footerActionIcon: (props) => <ArrowRight size={16} {...props}></ArrowRight>,
   onClick: action('on click'),
-  status: 'incomplete',
 };
 
 export default {
@@ -92,4 +91,11 @@ withMediaAndSequence.args = {
   ...defaultProps,
   sequence: 3,
   media: <img src={abstractImage} alt="abstract Image" />,
+};
+
+export const withDisabled = Template.bind({});
+withDisabled.args = {
+  ...defaultProps,
+  sequence: 3,
+  disabled: true,
 };

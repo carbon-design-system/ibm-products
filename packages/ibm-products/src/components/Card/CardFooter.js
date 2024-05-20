@@ -77,11 +77,7 @@ export let CardFooter = ({
       {hasActions && <div className={`${blockClass}__actions`}>{actions}</div>}
       {FooterActionIcon && (
         <div className={`${blockClass}__action-icon`}>
-          {disabled ? (
-            <Error size={16}></Error>
-          ) : (
-            <FooterActionIcon></FooterActionIcon>
-          )}
+          {disabled ? <Error size={16} /> : <FooterActionIcon />}
         </div>
       )}
     </div>

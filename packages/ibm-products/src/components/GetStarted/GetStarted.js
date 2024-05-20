@@ -88,7 +88,7 @@ GetStarted.propTypes = {
   /**
    * Provides the status that's displayed at the top of the card
    */
-  status: PropTypes.oneOf(['none', 'complete', 'incomplete']),
+  status: PropTypes.oneOf(['complete', 'incomplete']),
 
   /**
    * Title that's displayed at the top of the card

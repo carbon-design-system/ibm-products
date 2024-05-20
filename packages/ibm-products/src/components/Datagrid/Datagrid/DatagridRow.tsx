@@ -126,8 +126,7 @@ const DatagridRow = (datagridState) => {
     return {};
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const { role, className, ...rowProps } = row.getRowProps();
+  const { className, ...rowProps } = row.getRowProps();
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
@@ -166,7 +165,7 @@ const DatagridRow = (datagridState) => {
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars
-          const { children, role, ...restProps } = cellProps;
+          const { children, ...restProps } = cellProps;
           const columnClassname = cell?.column?.className;
           const content = children || (
             <>

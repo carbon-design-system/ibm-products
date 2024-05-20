@@ -11,11 +11,32 @@ import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
 import { pkg } from '../../../settings';
+import { Column } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SELECT_ALL_PAGE_ROWS = 'pageRows';
 const SELECT_ALL_ROWS = 'allRows';
+
+interface Labels {
+  allPageRows?: object;
+  allRows?: object;
+}
+interface SelectAllWithToggleProps {
+  allPageRowsLabel?: string | object;
+  allRowsLabel?: string | object;
+  columns?: Column[];
+  getToggleAllPageRowsSelectedProps: () => any;
+  getToggleAllRowsSelectedProps: () => any;
+  isAllRowsSelected: boolean;
+  isFetching?: boolean;
+  selectAllToggle?: {
+    onSelectAllRows?: (args) => void;
+    labels?: Labels;
+  };
+  tableId: string;
+  withStickyColumn?: boolean;
+}
 
 const SelectAllWithToggle = ({
   tableId,
@@ -28,7 +49,7 @@ const SelectAllWithToggle = ({
   allRowsLabel = 'Select all',
   columns,
   withStickyColumn,
-}) => {
+}: SelectAllWithToggleProps) => {
   const { onSelectAllRows, labels } = selectAllToggle || {};
   const [selectAllMode, setSelectAllMode] = useState(SELECT_ALL_PAGE_ROWS);
   useEffect(() => {
@@ -47,7 +68,7 @@ const SelectAllWithToggle = ({
   }, []);
 
   if (labels) {
-    allPageRowsLabel = labels.allPageRows || allPageRowsLabel;
+    allPageRowsLabel = labels?.allPageRows || allPageRowsLabel;
     allRowsLabel = labels.allRows || allRowsLabel;
   }
   const getProps =
@@ -57,7 +78,7 @@ const SelectAllWithToggle = ({
   const { onChange, ...selectProps } = getProps();
   const disabled = isFetching || selectProps.disabled;
   const isFirstColumnStickyLeft =
-    columns[0]?.sticky === 'left' && withStickyColumn;
+    columns?.[0]?.sticky === 'left' && withStickyColumn;
   return (
     <th
       scope="col"
@@ -92,7 +113,7 @@ const SelectAllWithToggle = ({
           onClick={() => {
             setSelectAllMode(SELECT_ALL_PAGE_ROWS);
             // deselect all rows first
-            getToggleAllRowsSelectedProps().onChange({
+            getToggleAllRowsSelectedProps()?.onChange({
               target: { checked: false },
             });
             // select all row on current page

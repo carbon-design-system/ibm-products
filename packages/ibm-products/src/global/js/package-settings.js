@@ -90,7 +90,7 @@ const defaults = {
 
     ConditionBuilder: false,
 
-    GetStarted: false,
+    GetStartedCard: false,
 
     /* new component flags here - comment used by generate CLI */
 

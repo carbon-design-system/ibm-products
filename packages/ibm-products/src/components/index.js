@@ -135,4 +135,4 @@ export {
   FilterPanelSearch,
 } from './FilterPanel';
 export { ConditionBuilder } from './ConditionBuilder';
-export { GetStarted } from './GetStarted';
+export { GetStartedCard } from './GetStartedCard';

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { GetStarted } from '.';
-import mdx from './GetStarted.mdx';
+import { GetStartedCard } from '.';
+import mdx from './GetStartedCard.mdx';
 
 import { action } from '@storybook/addon-actions';
 import {
@@ -38,8 +38,8 @@ const defaultProps = {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/GetStarted',
-  component: GetStarted,
+  title: 'IBM Products/Components/Cards/GetStartedCard',
+  component: GetStartedCard,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -57,13 +57,13 @@ export default {
 const Template = (opts) => {
   const { children, ...args } = opts;
   return (
-    <GetStarted
+    <GetStartedCard
       label="Prepare your data"
       title="Generate synthetic Tabular data"
       {...args}
     >
       {children}
-    </GetStarted>
+    </GetStartedCard>
   );
 };
 

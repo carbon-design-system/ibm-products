@@ -13,23 +13,23 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 import { Card } from '../Card';
-const componentName = 'GetStarted';
+const componentName = 'GetStartedCard';
 
 /**
- * GetStarted a card with icon, number, and media variants
+ * GetStartedCard a card with icon, number, and media variants
  */
-export let GetStarted = React.forwardRef(({ ...rest }, ref) => {
+export let GetStartedCard = React.forwardRef(({ ...rest }, ref) => {
   return (
     <Card getStarted ref={ref} {...rest} {...getDevtoolsProps(componentName)} />
   );
 });
 
 // Return a placeholder if not released and not enabled by feature flag
-GetStarted = pkg.checkComponentEnabled(GetStarted, componentName);
+GetStartedCard = pkg.checkComponentEnabled(GetStartedCard, componentName);
 
-GetStarted.displayName = componentName;
+GetStartedCard.displayName = componentName;
 
-GetStarted.propTypes = {
+GetStartedCard.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
    */

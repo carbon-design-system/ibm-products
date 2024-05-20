@@ -1,9 +1,9 @@
 {
-  "label": "Get-Started",
+  "label": "Get-Started-Card",
   "package-config": {
     "flags": {
       "component": {
-        "GetStarted": true
+        "GetStartedCard": true
       }
     }
   },

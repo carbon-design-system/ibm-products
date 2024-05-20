@@ -8,7 +8,7 @@ import React from 'react';
 // from the @carbon/ibm-products component library.
 // ----------------------------------------------------
 
-import { GetStarted } from '@carbon/ibm-products';
+import { GetStartedCard } from '@carbon/ibm-products';
 import { ArrowRight, Time, SkillLevelBasic } from '@carbon/react/icons';
 
 import './_example.scss';
@@ -39,7 +39,7 @@ export const Example = () => {
     <FlexGrid>
       <Row>
         <Column sm={4} md={8} lg={4}>
-          <GetStarted {...defaultProps} />
+          <GetStartedCard {...defaultProps} />
         </Column>
       </Row>
     </FlexGrid>

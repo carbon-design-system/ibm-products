@@ -10,16 +10,18 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('GetStarted @avt', () => {
+test.describe('GetStartedCard @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'GetStarted',
+      component: 'GetStartedCard',
       // cspell:disable-next-line
-      id: 'ibm-products-components-cards-getstarted--default',
+      id: 'ibm-products-components-cards-getstartedcard--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('GetStarted @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'GetStartedCard @avt-default-state'
+    );
   });
 });

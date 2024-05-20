@@ -10,9 +10,9 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { GetStarted } from '.';
+import { GetStartedCard } from '.';
 
-const componentName = GetStarted.displayName;
+const componentName = GetStartedCard.displayName;
 
 const dataTestId = uuidv4();
 
@@ -22,29 +22,31 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('renders ', async () => {
-    render(<GetStarted {...defaultProps}> </GetStarted>);
+    render(<GetStartedCard {...defaultProps}> </GetStartedCard>);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<GetStarted {...defaultProps}> </GetStarted>);
+    const { container } = render(
+      <GetStartedCard {...defaultProps}> </GetStartedCard>
+    );
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
     const { container } = render(
-      <GetStarted className="test-class" {...defaultProps}>
+      <GetStartedCard className="test-class" {...defaultProps}>
         {' '}
-      </GetStarted>
+      </GetStartedCard>
     );
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   it('adds additional props to the containing node', async () => {
     render(
-      <GetStarted data-testid={dataTestId} {...defaultProps}>
+      <GetStartedCard data-testid={dataTestId} {...defaultProps}>
         {' '}
-      </GetStarted>
+      </GetStartedCard>
     );
     screen.getByTestId(dataTestId);
   });
@@ -52,18 +54,18 @@ describe(componentName, () => {
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(
-      <GetStarted ref={ref} {...defaultProps}>
+      <GetStartedCard ref={ref} {...defaultProps}>
         {' '}
-      </GetStarted>
+      </GetStartedCard>
     );
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
     render(
-      <GetStarted data-testid={dataTestId} {...defaultProps}>
+      <GetStartedCard data-testid={dataTestId} {...defaultProps}>
         {' '}
-      </GetStarted>
+      </GetStartedCard>
     );
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

@@ -7,7 +7,7 @@
 
 export const checkForHoldingKey = (event, key) => {
   // possible key inputs: altKey,ctrlKey,metaKey,shiftKey
-  if (key == 'cmd') {
+  if (key === 'cmd') {
     return event.metaKey || event.ctrlKey;
   } else {
     return event[key];

@@ -62,9 +62,7 @@ export const ConditionBuilderItemOption = ({
       const firstFocusableElement =
         contentRef.current?.querySelector('input, button,li');
 
-      if (firstFocusableElement) {
-        firstFocusableElement.focus();
-      }
+      firstFocusableElement?.focus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allOptions]);

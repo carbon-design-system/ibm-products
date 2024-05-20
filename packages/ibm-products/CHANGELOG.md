@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.38.0...@carbon/ibm-products@2.39.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **sidepanel:** resolve border bottom always showing ([#5143](https://github.com/carbon-design-system/ibm-products/issues/5143)) ([59b580a](https://github.com/carbon-design-system/ibm-products/commit/59b580aa8f911ec48955484be9781762dae9c3ce))
+
+
+### Features
+
+* **CoachmarkButton:** convert to .tsx ([#5241](https://github.com/carbon-design-system/ibm-products/issues/5241)) ([6b33291](https://github.com/carbon-design-system/ibm-products/commit/6b33291385afb9fa776ba72e7fd7e5dcba716015))
+* **CoachmarkOverlayElements:** convert to .tsx ([#5163](https://github.com/carbon-design-system/ibm-products/issues/5163)) ([2bd1af9](https://github.com/carbon-design-system/ibm-products/commit/2bd1af990c2d82f0a042d4e3d826801c3e1718ce))
+* **get-started:** new component ([#5054](https://github.com/carbon-design-system/ibm-products/issues/5054)) ([5d7208f](https://github.com/carbon-design-system/ibm-products/commit/5d7208fd9ed28994cf46361f629d16c349ba4b27))
+* **tagoverflow:** remove TagOverflow dependency on TagSet ([#4929](https://github.com/carbon-design-system/ibm-products/issues/4929)) ([7b1bcdc](https://github.com/carbon-design-system/ibm-products/commit/7b1bcdc1dacd49602e26cc3f0e069750ce6f7af5))
+
+
+
+
+
 # [2.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.37.0...@carbon/ibm-products@2.38.0) (2024-05-14)
 
 

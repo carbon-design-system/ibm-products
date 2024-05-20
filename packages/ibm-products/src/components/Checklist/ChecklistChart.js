@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Copyright IBM Corp. 2023, 2024
  *
@@ -13,21 +14,25 @@ import { purple50, gray20, gray70 } from '@carbon/colors';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import { Themes } from './Checklist.types';
 
 const blockClass = `${pkg.prefix}--checklist__chart`;
 const componentName = 'ChecklistChart';
 
 const defaults = {
-  theme: 'light',
+  theme: Themes.light,
 };
 
 /**
  * Custom chart component used within Checklist PLG component
  */
 export let ChecklistChart = React.forwardRef(
+  /**
+   * @param {{className?: string, value: number, theme?: import('./Checklist.types').Theme}} props type description
+   */
   ({ className, value, theme = defaults.theme, ...rest }, ref) => {
     const numDegrees = clamp(value * 360, 0, 360);
-    const circleColor = theme === 'light' ? gray20 : gray70; // $ui-03 (-ish)
+    const circleColor = theme === Themes.light ? gray20 : gray70; // $ui-03 (-ish)
     const progressColor = purple50;
 
     return (
@@ -59,7 +64,7 @@ ChecklistChart.propTypes = {
   /**
    * Determines the theme of the component.
    */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  theme: PropTypes.oneOf([Themes.light, Themes.dark]),
   /**
    * Number between 0 and 1.
    */

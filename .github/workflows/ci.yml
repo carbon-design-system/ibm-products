@@ -145,6 +145,12 @@ jobs:
         with:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
+      - name: Set env vars
+        uses: ./.github/actions/set-dotenv
+        with:
+          env-file: packages/core/.env
+        env:
+          VITE_AVT: true
       - name: Run AVT
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |

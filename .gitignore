@@ -11,6 +11,7 @@ umd
 css
 results
 storybook-static
+.env
 
 # Config files
 .npmrc

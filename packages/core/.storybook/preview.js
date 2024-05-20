@@ -25,7 +25,8 @@ const Style = ({ children, styles }) => (
   </>
 );
 
-const isDev = CONFIG_TYPE === 'DEVELOPMENT';
+const isDev =
+  CONFIG_TYPE === 'DEVELOPMENT' || import.meta.env.VITE_AVT === 'true';
 if (isDev) {
   // use a prefix in all development storybook
   pkg.prefix = `dev-prefix--${pkg.prefix}`;

@@ -35,6 +35,7 @@ const MockWebTerminal = React.forwardRef(
       <WebTerminal
         isInitiallyOpen
         closeIconDescription="Close terminal"
+        webTerminalAriaLabel="Web terminal header"
         ref={ref}
         {...props}
       >
@@ -254,6 +255,7 @@ describe(name, () => {
           isInitiallyOpen={isInitiallyOpen}
           data-testid={dataTestId}
           closeIconDescription="Close terminal"
+          webTerminalAriaLabel="Web terminal header"
         >
           Body content
         </WebTerminal>
@@ -280,6 +282,7 @@ describe(name, () => {
           isInitiallyOpen={isInitiallyOpen}
           data-testid={dataTestId}
           closeIconDescription="Close terminal"
+          webTerminalAriaLabel="Web terminal header"
         >
           Body content
         </WebTerminal>

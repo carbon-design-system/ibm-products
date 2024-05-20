@@ -8,7 +8,7 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { ActionableNotification } from '@carbon/react';
+import { StaticNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -38,7 +38,7 @@ docs: {
 const Template = (args) => {
   return (
     <>
-      <ActionableNotification
+      <StaticNotification
         title="Deprecation notice"
         subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s MenuButton."
         inline
@@ -52,6 +52,8 @@ const Template = (args) => {
             'https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview'
           );
         }}
+        titleId="storybook--deprecation-warning-notification"
+        aria-describedby="storybook--deprecation-warning-notification"
         style={{ marginBottom: '1rem' }}
       />
       <ButtonMenu

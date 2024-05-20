@@ -10,6 +10,8 @@ import {
 } from '@carbon/type';
 import { JSXElementConstructor, MutableRefObject, ReactNode } from 'react';
 
+type Size = 'xs' | 'sm' | 'md' | 'lg';
+
 export type Filter =
   | ({
       column?: string;
@@ -103,7 +105,7 @@ export interface DataGridState {
   columns?: Column[];
   getTableProps?: () => TableProps;
   getFilterFlyoutProps?: () => FilterFlyoutProps;
-  DatagridActions?: ReactNode | (() => void);
+  DatagridActions?: JSXElementConstructor<any>;
   CustomizeColumnsTearsheet?: JSXElementConstructor<any>;
   skeletonRowCount?: number;
   fullHeightDatagrid?: boolean;
@@ -117,6 +119,9 @@ export interface DataGridState {
   gridRef?: MutableRefObject<HTMLDivElement>;
   setAllFilters?: (...args) => void;
   getAllFilters?: () => void;
+  DatagridBatchActions?: (args) => ReactNode;
+  batchActions?: boolean;
+  rowSize?: Size;
   // TODO: Change any
   page?: any;
   state?: any;
@@ -149,7 +154,6 @@ export interface DataGridState {
   getToggleHideAllColumnsProps?: any;
   HeaderRow?: any;
   resetResizing?: any;
-  rowSize?: any;
   rowSizeDropdownProps?: any;
   RowSizeDropdown?: any;
   preFilteredRows?: any;

@@ -52,7 +52,7 @@ const SelectAll = (datagridState) => {
         className={cx(`${blockClass}__head-hidden-select-all`, {
           [`${blockClass}__select-all-sticky-left`]:
             /* istanbul ignore next */
-            isFirstColumnStickyLeft && windowSize > 671,
+            isFirstColumnStickyLeft && Number(windowSize) > 671,
         })}
       />
     );
@@ -70,6 +70,7 @@ const SelectAll = (datagridState) => {
         rows,
         getRowId,
         indeterminate: true,
+        isChecked: undefined,
       });
       toggleAllRowsSelected(false);
       onAllRowSelect?.(rows, event);
@@ -83,6 +84,7 @@ const SelectAll = (datagridState) => {
       rows,
       getRowId,
       isChecked: event.target.checked,
+      indeterminate,
     });
     onAllRowSelect?.(rows, event);
     return onChange?.(event);
@@ -96,7 +98,7 @@ const SelectAll = (datagridState) => {
         {
           [`${blockClass}__checkbox-cell-sticky-left`]:
             /* istanbul ignore next */
-            isFirstColumnStickyLeft && windowSize > 671,
+            isFirstColumnStickyLeft && Number(windowSize) > 671,
         }
       )}
     >

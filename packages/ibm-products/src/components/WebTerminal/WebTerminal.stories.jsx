@@ -43,7 +43,7 @@ const Template = (args) => {
       </WebTerminalContentWrapper>
 
       <WebTerminal {...args}>
-        <div role="contentinfo" className="example-terminal">
+        <div className="example-terminal">
           <p>Connection successful.</p>
           <p>
             DISCLAIMER: This is not a real terminal, you would pass your own
@@ -64,6 +64,7 @@ Default.args = {
   actions,
   closeIconDescription: 'Close terminal',
   documentationLinksIconDescription: 'Show documentation links',
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export const WithDocumentationLinks = Template.bind({});
@@ -71,12 +72,14 @@ WithDocumentationLinks.args = {
   documentationLinks,
   closeIconDescription: 'Close terminal',
   documentationLinksIconDescription: 'Show documentation links',
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export const WithActions = Template.bind({});
 WithActions.args = {
   actions,
   closeIconDescription: 'Close terminal',
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export default {

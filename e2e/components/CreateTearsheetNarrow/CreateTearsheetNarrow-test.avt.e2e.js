@@ -9,6 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { carbon } from '../../../packages/ibm-products/src/settings';
 
 test.describe('CreateTearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -21,7 +22,13 @@ test.describe('CreateTearsheetNarrow @avt', () => {
     });
 
     await page.getByText('Open CreateTearsheetNarrow').click();
-
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    await expect(modalElement).toBeVisible();
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
     await expect(page).toHaveNoACViolations(
       'CreateTearsheetNarrow @avt-default-state'
     );

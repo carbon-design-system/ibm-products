@@ -1,4 +1,4 @@
-name: Minor release
+name: Patch release
 run-name:
   ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
 
@@ -11,8 +11,8 @@ on:
         type: choice
         default: first minor rc
         options:
-          - full minor release
-          - first minor rc
+          - full patch release
+          - first patch rc
           - subsequent rc
       dry-run:
         required: true

@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.36.0...@carbon/ibm-products-styles@2.37.0) (2024-05-21)
+
+
+### Features
+
+* **get-started:** new component ([#5054](https://github.com/carbon-design-system/ibm-products/issues/5054)) ([5d7208f](https://github.com/carbon-design-system/ibm-products/commit/5d7208fd9ed28994cf46361f629d16c349ba4b27))
+* **tagoverflow:** remove TagOverflow dependency on TagSet ([#4929](https://github.com/carbon-design-system/ibm-products/issues/4929)) ([7b1bcdc](https://github.com/carbon-design-system/ibm-products/commit/7b1bcdc1dacd49602e26cc3f0e069750ce6f7af5))
+
+
+
+
+
+# [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.35.0...@carbon/ibm-products-styles@2.36.0) (2024-05-14)
+
+
+### Features
+
+* **Checklist:** release as stable ([#5139](https://github.com/carbon-design-system/ibm-products/issues/5139)) ([73729b5](https://github.com/carbon-design-system/ibm-products/commit/73729b593e02f7f6fbcfa32175c41e0608912909))
+
+
+
+
+
+# [2.35.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.34.0...@carbon/ibm-products-styles@2.35.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* added a scroll callback which sets prog step back to 0 on resize ([#5015](https://github.com/carbon-design-system/ibm-products/issues/5015)) ([63becd7](https://github.com/carbon-design-system/ibm-products/commit/63becd77bb414046d62f26ff56a98d5925756f5a))
+* added use statement to pull in base styles for carousel ([#5068](https://github.com/carbon-design-system/ibm-products/issues/5068)) ([5ec8526](https://github.com/carbon-design-system/ibm-products/commit/5ec852623a0c6d5ea1c062f71f1d4fd534dd88b9))
+* **tearsheet:** exit animation missing code reverted ([#5057](https://github.com/carbon-design-system/ibm-products/issues/5057)) ([f004423](https://github.com/carbon-design-system/ibm-products/commit/f004423308581a96c3bc104c8d4496099fa2c8c0))
+
+
+### Features
+
+* **ConditionBuilder:** implementation of  main content blocks ([#4928](https://github.com/carbon-design-system/ibm-products/issues/4928)) ([6a6202d](https://github.com/carbon-design-system/ibm-products/commit/6a6202d428f870158ec1d92fe95f8814070e8a37))
+* **conditionBuilder:** popover content, stories, issue fixes ([#5058](https://github.com/carbon-design-system/ibm-products/issues/5058)) ([24ac4fa](https://github.com/carbon-design-system/ibm-products/commit/24ac4fa6574c1c40fca68e24d29f0030ef452603))
+
+
+
+
+
+# [2.34.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.33.0...@carbon/ibm-products-styles@2.34.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#4890](https://github.com/carbon-design-system/ibm-products/issues/4890)) ([d3234ce](https://github.com/carbon-design-system/ibm-products/commit/d3234ceda60feb704b11d5f7c7270b430a11a499)), closes [#4654](https://github.com/carbon-design-system/ibm-products/issues/4654)
+* **useravatar:** fix scroll issue ([#4950](https://github.com/carbon-design-system/ibm-products/issues/4950)) ([bb47921](https://github.com/carbon-design-system/ibm-products/commit/bb479218862b14196f8ba99d6486772bfd9f1d20))
+
+
+### Features
+
+* fix sortable header transparent issue [#4954](https://github.com/carbon-design-system/ibm-products/issues/4954) ([#4955](https://github.com/carbon-design-system/ibm-products/issues/4955)) ([1760bc6](https://github.com/carbon-design-system/ibm-products/commit/1760bc6c42fb44388b2330aa06a916a87e6a54f4))
+* instrument current packages with js scope ([#5012](https://github.com/carbon-design-system/ibm-products/issues/5012)) ([59074fe](https://github.com/carbon-design-system/ibm-products/commit/59074fe8ae93d3854565ba3c92f20065f3f2867e))
+
+
+
+
+
 # [2.33.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.32.0...@carbon/ibm-products-styles@2.33.0) (2024-04-16)
 
 

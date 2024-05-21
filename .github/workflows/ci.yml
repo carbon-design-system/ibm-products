@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - main_v1
+      - v1
   merge_group:
     types: [checks_requested]
 
@@ -92,6 +92,8 @@ jobs:
         run: yarn
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p
+      - name: CI snapshot tests for c4p
+        run: yarn ci-check:test:c4p:snapshot
   test-community:
     runs-on: ubuntu-latest
     steps:

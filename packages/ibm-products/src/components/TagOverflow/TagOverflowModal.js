@@ -38,6 +38,7 @@ export const TagOverflowModal = ({
   title,
   onClose,
   open,
+  overflowType,
   portalTarget: portalTargetIn,
   searchLabel = defaults.searchLabel,
   searchPlaceholder,
@@ -104,11 +105,16 @@ export const TagOverflowModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {getFilteredItems().map(({ label, id, ...other }) => (
-          <Tag {...other} key={id}>
-            {label}
-          </Tag>
-        ))}
+        {getFilteredItems().map(({ label, id, filter, ...other }) => {
+          if (overflowType !== 'tag') {
+            filter = false;
+          }
+          return (
+            <Tag {...other} key={id} filter={filter}>
+              {label}
+            </Tag>
+          );
+        })}
       </ModalBody>
       <div className={`${blockClass}__fade`} />
     </ComposedModal>
@@ -125,6 +131,7 @@ TagOverflowModal.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
+  overflowType: PropTypes.oneOf(['default', 'tag']),
   portalTarget: PropTypes.node,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,

@@ -24,8 +24,6 @@ const componentName = 'TagOverflow';
 
 const allTagsModalSearchThreshold = 10;
 
-// TODO: support prop overflowType
-
 // Default values for props
 const defaults = {
   items: [],
@@ -266,6 +264,7 @@ export let TagOverflow = React.forwardRef(
                 open={showAllModalOpen}
                 title={allTagsModalTitle}
                 onClose={handleModalClose}
+                overflowType={overflowType}
                 searchLabel={allTagsModalSearchLabel}
                 searchPlaceholder={allTagsModalSearchPlaceholderText}
                 portalTarget={allTagsModalTarget}

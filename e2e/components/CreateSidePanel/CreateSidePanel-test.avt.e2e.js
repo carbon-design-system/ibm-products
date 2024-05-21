@@ -11,24 +11,22 @@ import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 import { pkg } from '../../../packages/ibm-products/src/settings';
 
-test.describe('OptionsTile @avt', () => {
+test.describe('CreateSidePanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'OptionsTile',
-      id: 'ibm-products-components-options-tile-optionstile--options-tile',
+      component: 'CreateSidePanel',
+      id: 'ibm-products-patterns-create-flows-createsidepanel--default',
       globals: {
         carbonTheme: 'white',
       },
     });
 
-    const blockClass = `${pkg.prefix}--options-tile`;
-
-    await page.getByRole('heading', { name: 'Language' }).click();
-
+    await page.getByText('Open side panel').click();
     await page
-      .locator(`.${blockClass}__content`)
+      .locator(`#${pkg.prefix}--side-panel`)
       .screenshot({ animations: 'disabled' });
-
-    await expect(page).toHaveNoACViolations('OptionsTile @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'CreateSidePanel @avt-default-state'
+    );
   });
 });

@@ -22,7 +22,7 @@ test.describe('NotificationsPanel @avt', () => {
     });
 
     const notificationPanelElement = page.locator(
-      `#dev-prefix--${pkg.prefix}--notifications-panel`
+      `#${pkg.prefix}--notifications-panel`
     );
     await page.getByLabel('Notifications').click();
     await notificationPanelElement.evaluate((element) =>

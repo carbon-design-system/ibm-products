@@ -10,16 +10,17 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('TagOverflow @avt', () => {
+test.describe('NoTagsEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'TagOverflow',
-      id: 'ibm-products-components-tag-overflow-tagoverflow--tags-with-overflow-count',
+      component: 'NoTagsEmptyState',
+      id: 'ibm-products-patterns-empty-state-notagsemptystate--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('+2').click();
-    await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
+    await expect(page).toHaveNoACViolations(
+      'NoTagsEmptyState @avt-default-state'
+    );
   });
 });

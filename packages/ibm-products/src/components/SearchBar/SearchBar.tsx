@@ -187,7 +187,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
       label: scopesTypeLabel,
       sortItems,
       translateWithId,
-    }
+    };
 
     return (
       <form

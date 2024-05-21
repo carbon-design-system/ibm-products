@@ -10,16 +10,20 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
-test.describe('TagOverflow @avt', () => {
+test.describe('CreateTearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'TagOverflow',
-      id: 'ibm-products-components-tag-overflow-tagoverflow--tags-with-overflow-count',
+      component: 'CreateTearsheetNarrow',
+      id: 'ibm-products-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('+2').click();
-    await expect(page).toHaveNoACViolations('TagOverflow @avt-default-state');
+
+    await page.getByText('Open CreateTearsheetNarrow').click();
+
+    await expect(page).toHaveNoACViolations(
+      'CreateTearsheetNarrow @avt-default-state'
+    );
   });
 });

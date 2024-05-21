@@ -38,6 +38,7 @@ const defaults = {
   documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
   isInitiallyOpen: false,
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 interface Action {
@@ -84,7 +85,7 @@ interface WebTerminalProps extends PropsWithChildren {
   /**
    * Specifies aria label for Web terminal
    */
-  webTerminalAriaLabel: string;
+  webTerminalAriaLabel?: string;
 }
 
 /**
@@ -102,7 +103,7 @@ export let WebTerminal = React.forwardRef(
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
       isInitiallyOpen = defaults.isInitiallyOpen,
-      webTerminalAriaLabel,
+      webTerminalAriaLabel = defaults.webTerminalAriaLabel,
       // Collect any other property values passed in.
       ...rest
     }: WebTerminalProps,
@@ -291,5 +292,5 @@ WebTerminal.propTypes = {
   /**
    * Specifies aria label for Web terminal
    */
-  webTerminalAriaLabel: PropTypes.string.isRequired,
+  webTerminalAriaLabel: PropTypes.string,
 };

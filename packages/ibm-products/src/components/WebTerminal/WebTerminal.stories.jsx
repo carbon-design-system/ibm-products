@@ -64,7 +64,6 @@ Default.args = {
   actions,
   closeIconDescription: 'Close terminal',
   documentationLinksIconDescription: 'Show documentation links',
-  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export const WithDocumentationLinks = Template.bind({});
@@ -72,14 +71,12 @@ WithDocumentationLinks.args = {
   documentationLinks,
   closeIconDescription: 'Close terminal',
   documentationLinksIconDescription: 'Show documentation links',
-  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export const WithActions = Template.bind({});
 WithActions.args = {
   actions,
   closeIconDescription: 'Close terminal',
-  webTerminalAriaLabel: 'Web terminal header',
 };
 
 export default {

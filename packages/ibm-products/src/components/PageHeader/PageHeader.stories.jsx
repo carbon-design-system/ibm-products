@@ -336,8 +336,9 @@ const title = {
     loading: false,
     icon: (props) => <Bee size={24} {...props} />,
   },
-  'Long title with icon': {
-    text: 'A very long page title which will almost certainly have to be truncated at some point',
+  'Long title with icon and shortTitle': {
+    text: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
+    shortTitle: 'Short title',
     loading: false,
     icon: (props) => <Bee size={24} {...props} />,
   },

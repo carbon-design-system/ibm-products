@@ -17,7 +17,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
  * @param {{}} offsetTopMeasuringRef
- * @param {{}} navigation
+ * @param {object} navigation
  * @param {boolean} enableBreadcrumbScroll
  * @param {boolean} hasActionBar
  * @param {boolean} widthIsNarrow

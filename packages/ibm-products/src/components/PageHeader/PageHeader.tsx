@@ -481,9 +481,9 @@ export let PageHeader = React.forwardRef(
       return utilCheckUpdateVerticalSpace(
         headerRef,
         offsetTopMeasuringRef,
-        navigation as any,
+        navigation,
         enableBreadcrumbScroll,
-        hasActionBar as boolean,
+        hasActionBar || false,
         widthIsNarrow,
         setMetrics as () => void
       );

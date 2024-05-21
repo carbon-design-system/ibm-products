@@ -228,7 +228,7 @@ export let TagOverflow = React.forwardRef(
               // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
-                  <Tooltip align="bottom" label={label}>
+                  <Tooltip align={overflowAlign} label={label}>
                     <Tag
                       {...other}
                       className={`${blockClass}__item--tag`}

@@ -14,6 +14,7 @@
 @use '@carbon/react/scss/motion' as *;
 @use '@carbon/react/scss/colors' as *;
 @use '@carbon/react/scss/theme' as *;
+@use '@carbon/layout/scss/convert';
 @use '@carbon/styles/scss/components/button/tokens' as *;
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -61,7 +62,7 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
     overflow: hidden;
     pointer-events: none;
     /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
-    transform: perspective(to-rem(144px))
+    transform: perspective(convert.to-rem(144px))
       translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
     transform-origin: top center;
     visibility: visible;

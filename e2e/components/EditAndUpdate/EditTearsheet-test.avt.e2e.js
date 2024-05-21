@@ -24,7 +24,7 @@ test.describe('EditTearsheet @avt', () => {
     await page.getByText('Open EditTearsheet').click();
 
     await page
-      .locator(`.dev-prefix--${pkg.prefix}--tearsheet`)
+      .locator(`.${pkg.prefix}--tearsheet`)
       .screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations('EditTearsheet @avt-default-state');

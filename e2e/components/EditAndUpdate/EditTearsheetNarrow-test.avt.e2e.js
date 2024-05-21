@@ -24,7 +24,7 @@ test.describe('EditTearsheetNarrow @avt', () => {
     await page.getByText('Open EditTearsheetNarrow').click();
 
     await page
-      .locator(`.dev-prefix--${pkg.prefix}--tearsheet`)
+      .locator(`.${pkg.prefix}--tearsheet`)
       .screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations(

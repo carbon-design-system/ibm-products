@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { VStack } from '@carbon/react';
 
@@ -15,16 +15,15 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
-import { ConditionBuilderProvider } from './ConditionBuilderContext/DataTreeContext';
+import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
+import { pkg } from '../../settings';
+import { blockClass } from './ConditionBuilderContext/DataConfigs';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = 'ConditionBuilder';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -57,6 +56,10 @@ export let ConditionBuilder = React.forwardRef(
       inputConfig,
       startConditionLabel,
       popOverSearchThreshold,
+      getOptions,
+      initialState,
+      getConditionState,
+      variant,
       /* TODO: add other props for ConditionBuilder, with default values if needed */
 
       // Collect any other property values passed in.
@@ -64,10 +67,15 @@ export let ConditionBuilder = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const conditionBuilderRef = ref || localRef;
+
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
         popOverSearchThreshold={popOverSearchThreshold}
+        getOptions={getOptions}
+        variant={variant}
       >
         <div
           {
@@ -83,13 +91,16 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
-          ref={ref}
           role="main"
+          ref={conditionBuilderRef}
           {...getDevtoolsProps(componentName)}
         >
-          <VStack>
+          <VStack className={`${blockClass}__${variant}`}>
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
+              conditionBuilderRef={conditionBuilderRef}
+              getConditionState={getConditionState}
+              initialState={initialState}
             />
           </VStack>
         </div>
@@ -118,6 +129,24 @@ ConditionBuilder.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  getConditionState: PropTypes.func.isRequired,
+  getOptions: PropTypes.func,
+  initialState: PropTypes.shape({
+    groups: PropTypes.arrayOf(
+      PropTypes.shape({
+        groupSeparateOperator: PropTypes.string,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
+        conditions: PropTypes.arrayOf(
+          PropTypes.shape({
+            property: PropTypes.string,
+            operator: PropTypes.string,
+            value: PropTypes.string,
+          })
+        ),
+      })
+    ),
+  }),
   /**
    * This is a mandatory prop that defines the input to the condition builder.
    
@@ -127,14 +156,14 @@ ConditionBuilder.propTypes = {
       PropTypes.shape({
         id: PropTypes.string,
         label: PropTypes.string,
-        icon: PropTypes.func,
-        type: PropTypes.oneOf(['text', 'number', 'date', 'option']),
+        icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+        type: PropTypes.oneOf(['text', 'number', 'date', 'option', 'time']),
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
               id: PropTypes.string,
               label: PropTypes.string,
-              icon: PropTypes.func,
+              icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
             })
           ),
           includeSearch: PropTypes.bool,
@@ -154,4 +183,8 @@ ConditionBuilder.propTypes = {
   startConditionLabel: PropTypes.string.isRequired,
 
   /* TODO: add types and DocGen for all props. */
+  /**
+   * Provide the condition builder variant: sentence/ tree
+   */
+  variant: PropTypes.string.isRequired,
 };

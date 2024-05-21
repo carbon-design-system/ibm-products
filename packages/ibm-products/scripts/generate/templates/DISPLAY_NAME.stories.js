@@ -12,7 +12,7 @@ import React from 'react';
 import { DISPLAY_NAME } from '.';
 import mdx from './DISPLAY_NAME.mdx';
 
-import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss?inline';
 
 export default {
   title: `IBM Products/Components/${DISPLAY_NAME}`,

@@ -29,26 +29,26 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `AccordionItem`                    | [Carbon v11 Migration guide][100]                                                                                 | `@carbon/react`        | Low    |
 | `AccordionSkeleton`                | The deprecated prop `uid` is no longer needed and has been removed                                                | `@carbon/react`        | Low    |
 | `ActionableNotification`           | [Carbon v11 Migration guide][101]                                                                                 | `@carbon/react`        | Low    |
-| `BigNumbers` (ICA)                 | View changes [here](#bignumbers)                                                                                  | `@carbon/ibm-products` | Low    |
+| `BigNumbers`                       | Renamed from `ICA`. <br/> View changes [here](#bignumbers)                                                        | `@carbon/ibm-products` | Low    |
 | `Breadcrumb`                       | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `BreadcrumbItem`                   | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `BreadcrumbSkeleton`               | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `Button`                           | [Carbon v11 Migration guide][102]                                                                                 | `@carbon/react`        | Low    |
 | `ButtonSkeleton`                   | [Carbon v11 Migration guide][103]                                                                                 | `@carbon/react`        | Low    |
-| `Card`                             | **Deprecated** [View replacement][1]                                                                              | `@carbon/ibm-products` | Medium |
+| `Card`                             | **Deprecated:** [View replacement][1]                                                                             | `@carbon/ibm-products` | Medium |
 | `CardSkeleton`                     | **Removed**                                                                                                       | —                      | High   |
 | `Checkbox`                         | [Carbon v11 Migration guide][104]                                                                                 | `@carbon/react`        | Medium |
 | `ClickableTile`                    | [Carbon v11 Migration guide][105]                                                                                 | `@carbon/react`        | Low    |
 | `CodeSnippet`                      | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `Column`                           | [Carbon v11 Migration guide][106]                                                                                 | `@carbon/react`        | Medium |
 | `ComboBox`                         | The `className` prop is now applied to the outermost element of `ComboBox`                                        | `@carbon/react`        | Low    |
-| `ComboButton`                      | Deprecated - Promoted to Carbon v11. [View component][107]                                                        | `@carbon/react`        | High   |
+| `ComboButton`                      | **Deprecated:** Promoted to Carbon v11. [View component][107]                                                     | `@carbon/react`        | High   |
 | `ComposedModal`                    | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `ContentSwitcher`                  | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `ControlledPasswordInput`          | The `size` prop has been updated to match `PasswordInput`                                                         | `@carbon/react`        | Low    |
 | `CopyButton`                       | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `DataDecorator`                    | **Deprecated:** [View replacement][2]                                                                             | `@carbon/ibm-products` | Medium |
-| `DataTable`                        | No code changes. Scss changes can be found [here][108]                                                            | `@carbon/react`        | Low    |
+| `DataTable`                        | No code changes. SCSS changes can be found [here][108]                                                            | `@carbon/react`        | Low    |
 | `DataTablePagination`              | **Deprecated:** [View replacement][3]                                                                             | `@carbon/react`        | High   |
 | `DatePicker`                       | [Carbon v11 Migration guide][109]                                                                                 | `@carbon/react`        | Low    |
 | `DatePickerInput`                  | [Carbon v11 Migration guide][110]                                                                                 | `@carbon/react`        | Low    |
@@ -62,7 +62,7 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `DropdownSkeleton`                 | The deprecated prop `inline` has been removed                                                                     | `@carbon/react`        | Low    |
 | `ErrorPage`                        | **Deprecated:** [View replacement][4]                                                                             | `@carbon/ibm-products` | High   |
 | `ExpandableTile`                   | [Carbon v11 Migration guide][112]                                                                                 | `@carbon/react`        | Low    |
-| `ExternalLink`                     | **Deprecated** [View replacement][5]                                                                              | `@carbon/react`        | Medium |
+| `ExternalLink`                     | **Deprecated:** [View replacement][5]                                                                             | `@carbon/react`        | Medium |
 | `FileUploader`                     | [Carbon v11 Migration guide][113]                                                                                 | `@carbon/react`        | Low    |
 | `FileUploaderButton`               | [Carbon v11 Migration guide][114]                                                                                 | `@carbon/react`        | Low    |
 | `FileUploaderItem`                 | The size prop has been updated to: `PropTypes.oneOf(['sm', 'md', 'lg'])`                                          | `@carbon/react`        | Low    |
@@ -84,8 +84,8 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `Header`                           | **Deprecated:** [View replacement][6]                                                                             | `@carbon/ibm-products` | Medium |
 | `HeaderMenu`                       | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `HeaderNavigation`                 | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
-| `ICA`                              | **Renamed** - See [Big Numbers](#bignumbers)                                                                      | `@carbon/ibm-products` | Low    |
-| `Icon`                             | **Removed** [View replacement][16]                                                                                | `@carbon/react`        | Medium |
+| `ICA`                              | **Renamed:** See [Big Numbers](#bignumbers)                                                                       | `@carbon/ibm-products` | Low    |
+| `Icon`                             | **Removed:** [View replacement][16]                                                                               | `@carbon/react`        | Medium |
 | `IconButton`                       | **Deprecated:** [View replacement][7]                                                                             | `@carbon/react`        | High   |
 | `IconButtonBar`                    | **Deprecated:** [View replacement][8]                                                                             | `@carbon/ibm-products` | High   |
 | `InlineLoading`                    | The deprecated success prop has been deprecated. Please use status="finished" instead                             | `@carbon/react`        | Low    |
@@ -117,7 +117,7 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `PanelV2`                          | **Deprecated:** [View replacement][10]                                                                            | `@carbon/ibm-products` | Medium |
 | `PasswordInput`                    | The `size` prop has been updated to: `PropTypes.oneOf(['sm', 'md', 'lg'])`                                        | `@carbon/react`        | Low    |
 | `Pill`                             | **Deprecated:** [View replacement][2]                                                                             | `@carbon/ibm-products` | Medium |
-| `Portal`                           | **Removed** use React's Portal                                                                                    | —                      | High   |
+| `Portal`                           | **Removed:** use React's Portal                                                                                   | —                      | High   |
 | `ProfileImage`                     | **Deprecated:** [View replacement][11]                                                                            | `@carbon/ibm-products` | Medium |
 | `ProgressIndicator`                | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `RadioButton`                      | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
@@ -137,11 +137,11 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `SkeletonPlaceholder`              | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `SkeletonText`                     | No changes                                                                                                        | `@carbon/react`        | Low    |
 | `Slider`                           | [Carbon v11 Migration guide][127]                                                                                 | `@carbon/react`        | Low    |
-| `StackedNotification`              | **Removed** Proposing as a variant to Carbon notifications                                                        | —                      | High   |
+| `StackedNotification`              | **Removed:** Proposing as a variant to Carbon notifications                                                       | —                      | High   |
 | `StatusIcon`                       | **Deprecated:** [View replacement][12]                                                                            | `@carbon/ibm-products` | Medium |
 | `StatusIndicator`                  | View changes [here](#statusindicator)                                                                             | `@carbon/ibm-products` | Medium |
 | `StatusIndicatorStep` (StatusStep) | View changes [here](#statusindicatorstep)                                                                         | `@carbon/ibm-products` | Low    |
-| `StatusStep`                       | **Renamed** See [StatusIndicatorStep](#statusindicatorstep)                                                       | —                      | —      |
+| `StatusStep`                       | **Renamed:** See [StatusIndicatorStep](#statusindicatorstep)                                                      | —                      | —      |
 | `StringFormatter`                  | View changes [here](#stringformatter)                                                                             | `@carbon/ibm-products` | Medium |
 | `StructuredListBody`               | Vertical margin for form items and fieldsets is no longer included by default, use `<Stack>` for vertical spacing | `@carbon/react`        | Low    |
 | `StructuredListCell`               | No changes                                                                                                        | `@carbon/react`        | Low    |
@@ -169,13 +169,13 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `TileAboveTheFoldContent`          | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `TileBelowTheFoldContent`          | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `TileGroup`                        | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
-| `TimeIndicator`                    | **Removed** Too minimal to maintain                                                                               | —                      | Medium |
+| `TimeIndicator`                    | **Removed:** Too minimal to maintain                                                                              | —                      | Medium |
 | `TimePicker`                       | [Carbon v11 Migration guide][134]                                                                                 | `@carbon/react`        | Low    |
 | `TimePickerSelect`                 | [Carbon v11 Migration guide][135]                                                                                 | `@carbon/react`        | Low    |
 | `ToastNotification`                | [Carbon v11 Migration guide][117]                                                                                 | `@carbon/react`        | Medium |
 | `Toggle`                           | [Carbon v11 Migration guide][136]                                                                                 | `@carbon/react`        | Low    |
 | `ToggleSkeleton`                   | **Removed**                                                                                                       | —                      | —      |
-| `ToggleSmall`                      | **Removed** Please use `<Toggle size="sm">` instead. [Carbon v11 Migration guide][136]                            | `@carbon/react`        | Low    |
+| `ToggleSmall`                      | **Removed:** Please use `<Toggle size="sm">` instead. [Carbon v11 Migration guide][136]                           | `@carbon/react`        | Low    |
 | `ToggleSmallSkeleton`              | **Removed**                                                                                                       | —                      | Medium |
 | `Toolbar`                          | **Deprecated:** [View replacement][6]                                                                             | `@carbon/react`        | Medium |
 | `ToolbarDivider`                   | **Removed**                                                                                                       | —                      | High   |
@@ -188,7 +188,7 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `TooltipIcon`                      | [Carbon v11 Migration guide][137]                                                                                 | `@carbon/react`        | Medium |
 | `TrendingCard`                     | **Deprecated:** [View replacement][1]                                                                             | `@carbon/ibm-products` | Medium |
 | `TruncatedList`                    | View changes [here](#truncatedlist)                                                                               | `@carbon/ibm-products` | Medium |
-| `TypeLayout`                       | **Renamed** See [DescriptionList](#descriptionlist)                                                               | —                      | —      |
+| `TypeLayout`                       | **Renamed:** See [DescriptionList](#descriptionlist)                                                              | —                      | —      |
 | `UnorderedList`                    | No changes                                                                                                        | `@carbon/ibm-products` | Low    |
 | `Wizard`                           | **Deprecated:** [View replacement][14]                                                                            | `@carbon/ibm-products` | Medium |
 

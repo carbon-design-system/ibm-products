@@ -301,7 +301,7 @@ const datagridState = useDatagrid(
         },
       },
       {
-        description: `onVirtualData is an optional scroll callback that returns data about which rows are currently visible. The structure of the data returned from this callback can be seen below:`,
+        description: `onVirtualScroll is an optional scroll callback that returns data about which rows are currently visible. The structure of the data returned from this callback can be seen below:`,
         source: {
           code: `
 {

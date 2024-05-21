@@ -133,12 +133,6 @@ jobs:
         run: yarn
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Set env vars
-        working-directory: ./packages/core
-        run: |
-          touch .env
-          echo VITE_AVT=true > .env
-          cat .env
       - name: Build project
         run: yarn build
       - name: Run storybook

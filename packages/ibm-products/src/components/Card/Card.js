@@ -299,7 +299,7 @@ export let Card = forwardRef(
         )}
         <div className={`${blockClass}__content-container`}>
           <div {...getHeaderBodyProps()}>
-            <div className={`${blockClass}__header-container`}>
+            <div className={`${blockClass}__header-wrapper`}>
               <CardHeader {...getHeaderProps()} />
               <div {...getBodyProps()}>{children}</div>
             </div>

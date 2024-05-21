@@ -908,9 +908,10 @@ export let PageHeader = React.forwardRef(
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
                             breadcrumbs && breadcrumbItemForTitle
-                              ? breadcrumbs.concat(
-                                  breadcrumbItemForTitle as any
-                                )
+                              ? breadcrumbs.concat({
+                                  ...breadcrumbItemForTitle,
+                                  key: '',
+                                })
                               : breadcrumbItemForTitle
                               ? [breadcrumbItemForTitle]
                               : breadcrumbs // breadcrumbs may be null or undefined

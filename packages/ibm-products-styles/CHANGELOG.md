@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.36.0...@carbon/ibm-products-styles@2.37.0) (2024-05-21)
+
+
+### Features
+
+* **get-started:** new component ([#5054](https://github.com/carbon-design-system/ibm-products/issues/5054)) ([5d7208f](https://github.com/carbon-design-system/ibm-products/commit/5d7208fd9ed28994cf46361f629d16c349ba4b27))
+* **tagoverflow:** remove TagOverflow dependency on TagSet ([#4929](https://github.com/carbon-design-system/ibm-products/issues/4929)) ([7b1bcdc](https://github.com/carbon-design-system/ibm-products/commit/7b1bcdc1dacd49602e26cc3f0e069750ce6f7af5))
+
+
+
+
+
 # [2.36.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.35.0...@carbon/ibm-products-styles@2.36.0) (2024-05-14)
 
 

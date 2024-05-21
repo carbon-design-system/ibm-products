@@ -1,0 +1,46 @@
+import { Story, Controls, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { GetStartedCard } from '.';
+import * as stories from './GetStartedCard.stories';
+
+# GetStartedCard
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+<Canvas>
+  <Story of={stories.Default} />
+</Canvas>
+
+## Example usage
+
+### with Sequence
+
+<Canvas>
+  <Story of={stories.withSequence} />
+</Canvas>
+
+### with Media and Pictogram
+
+<Canvas>
+  <Story of={stories.withMediaAndPictogram} />
+</Canvas>
+
+### with Media and Sequence
+
+<Canvas>
+  <Story of={stories.withMediaAndSequence} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="GetStartedCard" />
+
+## Component API
+
+<Controls />

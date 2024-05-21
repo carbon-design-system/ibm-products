@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -61,6 +57,7 @@
     "cdai",
     "security",
     "package.json",
+    "*.avt.e2e.js",
     "*.snap",
     "*.log",
     "CHANGELOG.md"
@@ -93,6 +90,7 @@
     "disttags",
     "dragbar",
     "draggable",
+    "interstitialscreenviewmodule",
     "draghandle",
     "dragmode",
     "editinplace",
@@ -107,7 +105,10 @@
     "haspopup",
     "headshot",
     "homescreen",
+    "httperror",
     "httperrorother",
+    "interstitialscreenview",
+    "importmodal",
     "inlineedit",
     "inlinetip",
     "listbox",
@@ -117,6 +118,7 @@
     "nonlinearreading",
     "noreply",
     "overridable",
+    "overscan",
     "overscroll",
     "pconsole",
     "posinset",
@@ -125,6 +127,7 @@
     "premajor",
     "productivecard",
     "readme",
+    "removemodal",
     "renderable",
     "rerender",
     "resizer",

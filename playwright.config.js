@@ -7,6 +7,7 @@
 
 const { devices, expect } = require('@playwright/test');
 const path = require('path');
+const { pkg } =  require('./packages/ibm-products/src/settings');
 
 const config = {
   // https://playwright.dev/docs/api/class-testconfig#test-config-test-dir
@@ -66,6 +67,12 @@ const config = {
     ],
   ],
 };
+
+const isDev = !!process.env.AVT;
+if (isDev) {
+  // use a custom prefix in avt environment
+  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+}
 
 let aChecker;
 

@@ -148,7 +148,7 @@ jobs:
       - name: Run AVT
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
-          AVT=true yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results

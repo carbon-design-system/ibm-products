@@ -9,26 +9,19 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { pkg } from '../../../packages/ibm-products/src/settings';
 
-test.describe('CreateTearsheetNarrow @avt', () => {
+test.describe('GetStartedCard @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'CreateTearsheetNarrow',
-      id: 'ibm-products-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
+      component: 'GetStartedCard',
+      // cspell:disable-next-line
+      id: 'ibm-products-components-cards-getstartedcard--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-
-    await page.getByText('Open CreateTearsheetNarrow').click();
-
-    await page
-      .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
-      .screenshot({ animations: 'disabled' });
-
     await expect(page).toHaveNoACViolations(
-      'CreateTearsheetNarrow @avt-default-state'
+      'GetStartedCard @avt-default-state'
     );
   });
 });

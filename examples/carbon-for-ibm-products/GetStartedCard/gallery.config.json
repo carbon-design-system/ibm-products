@@ -1,0 +1,12 @@
+{
+  "label": "Get-Started-Card",
+  "package-config": {
+    "flags": {
+      "component": {
+        "GetStartedCard": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

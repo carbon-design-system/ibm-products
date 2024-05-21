@@ -157,7 +157,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the size of the side panel
    */
-  size: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
   /**
    * Determines if this panel slides in

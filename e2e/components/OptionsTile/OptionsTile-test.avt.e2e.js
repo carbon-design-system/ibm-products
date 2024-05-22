@@ -26,7 +26,7 @@ test.describe('OptionsTile @avt', () => {
     await page.getByRole('heading', { name: 'Language' }).click();
 
     await page
-      .locator(`.dev-prefix--${blockClass}__content`)
+      .locator(`.${blockClass}__content`)
       .screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations('OptionsTile @avt-default-state');

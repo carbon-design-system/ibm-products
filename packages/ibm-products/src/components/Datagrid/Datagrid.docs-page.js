@@ -293,9 +293,23 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    onVirtualScroll: data => console.log(data),
   },
   useInfiniteScroll
 );
+          `,
+        },
+      },
+      {
+        description: `onVirtualScroll is an optional scroll callback that returns data about which rows are currently visible. The structure of the data returned from this callback can be seen below:`,
+        source: {
+          code: `
+{
+  overscanStartIndex: number,
+  overscanStopIndex: number,
+  visibleStartIndex: number,
+  visibleStopIndex: number
+}
           `,
         },
       },

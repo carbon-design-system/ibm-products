@@ -17,7 +17,7 @@ import { useEffect } from 'react';
  * @param {boolean} useResetCreateComponent.invalid
  * @param {boolean} useResetCreateComponent.shouldIncludeStep
  * @param {string} useResetCreateComponent.secondaryLabel
- * @param {string} useResetCreateComponent.title
+ * @param {React.ReactNode} useResetCreateComponent.title
  */
 export const useRetrieveStepData = ({
   stepsContext,

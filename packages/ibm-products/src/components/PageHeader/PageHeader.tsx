@@ -850,6 +850,20 @@ export let PageHeader = React.forwardRef(
       title
     );
 
+    const getBreadcrumbs = () => {
+      if (breadcrumbs && breadcrumbItemForTitle) {
+        return breadcrumbs.concat(breadcrumbItemForTitle as Breadcrumb);
+      } else {
+        if (breadcrumbItemForTitle) {
+          return [breadcrumbItemForTitle];
+        } else {
+          return breadcrumbs;
+        }
+      }
+    };
+
+    const displayedBreadcrumbs = getBreadcrumbs();
+
     return (
       <>
         <div
@@ -901,25 +915,16 @@ export let PageHeader = React.forwardRef(
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs || breadcrumbItemForTitle ? (
+                      {(breadcrumbs || breadcrumbItemForTitle) && (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
-                          breadcrumbs={
-                            breadcrumbs && breadcrumbItemForTitle
-                              ? breadcrumbs.concat({
-                                  ...breadcrumbItemForTitle,
-                                  key: '',
-                                })
-                              : breadcrumbItemForTitle
-                              ? [breadcrumbItemForTitle]
-                              : breadcrumbs // breadcrumbs may be null or undefined
-                          }
+                          breadcrumbs={displayedBreadcrumbs}
                           overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
                           maxVisible={undefined}
                         />
-                      ) : null}
+                      )}
                     </Column>
                     <Column
                       className={cx([
@@ -1479,6 +1484,7 @@ PageHeader.propTypes = {
    * - String
    * - Object containing
    *    - text: title string
+   *    - shortTitle: alternative title for exceptionally long titles
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
    *    - onChange: function to process the live value (React change === HTML Input)
@@ -1496,6 +1502,7 @@ PageHeader.propTypes = {
     PropTypes.shape({
       // Update docgen if changed
       text: PropTypes.string.isRequired,
+      shortTitle: PropTypes.string,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
 

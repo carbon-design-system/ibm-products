@@ -23,7 +23,7 @@ test.describe('WebTerminal @avt', () => {
 
     await page.getByLabel('Web terminal').click();
     const modalElement = page.locator(
-      `.dev-prefix--${pkg.prefix}--web-terminal`
+      `.${pkg.prefix}--web-terminal`
     );
     await modalElement.evaluate((element) =>
       Promise.all(

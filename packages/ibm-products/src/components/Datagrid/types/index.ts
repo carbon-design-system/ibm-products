@@ -1,13 +1,10 @@
-import {
-  MultiSelectSortingProps,
-  FormGroupProps,
-  RadioButtonProps,
-  RadioButtonGroupProps,
-  CheckboxProps,
-  NumberInputProps,
-  DatePickerProps,
-  DatePickerInputProps,
-} from '@carbon/type';
+import { MultiSelectProps } from '@carbon/react';
+import { FormGroupProps } from '@carbon/react/lib/components/FormGroup/FormGroup';
+import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/RadioButton';
+import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonGroup/RadioButtonGroup';
+import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
+import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
+
 import { JSXElementConstructor, MutableRefObject, ReactNode } from 'react';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
@@ -18,8 +15,10 @@ export type Filter =
     } & {
       type: 'date';
       props: {
-        DatePicker?: DatePickerProps;
-        DatePickerInput?: DatePickerInputProps;
+        // DatePickerProps
+        DatePicker?: any;
+        // DatePickerInputProps
+        DatePickerInput?: any;
       };
     })
   | {
@@ -46,7 +45,7 @@ export type Filter =
   | {
       type: 'multiSelect';
       props: {
-        MultiSelect?: MultiSelectSortingProps;
+        MultiSelect?: MultiSelectProps;
       };
     };
 

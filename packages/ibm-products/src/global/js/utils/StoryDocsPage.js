@@ -17,6 +17,7 @@ import {
   Stories,
   AnchorMdx,
   useOf,
+  Markdown,
 } from '@storybook/blocks';
 import { paramCase } from 'change-case';
 
@@ -40,7 +41,7 @@ export const CustomBlocks = ({ blocks }) => {
         {block.subTitle && <h4>{block.subTitle}</h4>}
         {block.image}
         {block.description && typeof block.description === 'string' ? (
-          <Description>{block.description}</Description>
+          <Markdown>{block.description}</Markdown>
         ) : (
           block.description
         )}

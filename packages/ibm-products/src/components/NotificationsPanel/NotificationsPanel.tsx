@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -68,6 +68,196 @@ const defaults = {
   yesterdayLabel: 'Yesterday',
 };
 
+interface Link {
+  url: string;
+  text: string;
+}
+
+interface Data {
+  id?: string | number;
+  type?: 'error' | 'warning' | 'success' | 'informational';
+  timestamp?: Date;
+  title?: string;
+  description?: string;
+  link?: Link;
+  unread?: boolean;
+  onNotificationClick?: () => void;
+}
+
+interface NotificationsPanelProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Array of data for Notifications component to render
+   */
+  data: Data[];
+
+  /**
+   * Sets the `days ago` label text
+   */
+  daysAgoText?: (value: number) => string;
+
+  /**
+   * Label for Dismiss all button
+   */
+  dismissAllLabel?: string;
+
+  /**
+   * Label for Dismiss single notification icon button
+   */
+  dismissSingleNotificationIconDescription?: string;
+
+  /**
+   * Optional: Determines if the `Do not disturb` toggle is on or off when the component is rendered
+   */
+  doNotDisturbDefaultToggled?: boolean;
+
+  /**
+   * Optional: Label for Do not disturb toggle
+   */
+  doNotDisturbLabel?: string;
+
+  /**
+   * Sets the empty state label text when there are no notifications
+   */
+  emptyStateLabel?: string;
+
+  /**
+   * Sets the `hour ago` label text
+   */
+  hourAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `hours ago` label text
+   */
+  hoursAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `minute ago` label text
+   */
+  minuteAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `minutes ago` label text
+   */
+  minutesAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `month ago` label text
+   */
+  monthAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `months ago` label text
+   */
+  monthsAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `now` label text
+   */
+  nowText?: string;
+
+  /**
+   * Sets the notifications panel open state
+   */
+  onClickOutside: () => void;
+
+  /**
+   * Function that will dismiss all notifications
+   */
+  onDismissAllNotifications?: () => void;
+
+  /**
+   * Function that will dismiss a single notification
+   */
+  onDismissSingleNotification?: (prop) => void;
+
+  /**
+   * Optional: function that returns the current selected value of the disable notification toggle
+   */
+  onDoNotDisturbChange?: (prop) => void;
+
+  /**
+   * Event handler for the View all button
+   */
+  onSettingsClick?: () => void;
+
+  /**
+   * Event handler for the View all button
+   */
+  onViewAllClick?: () => void;
+
+  /**
+   * Determines whether the notifications panel should render or not
+   */
+  open: boolean;
+
+  /**
+   * Sets the previous label text
+   */
+  previousLabel?: string;
+
+  /**
+   * Sets the `read less` label text
+   */
+  readLessLabel?: string;
+
+  /**
+   * Sets the `read more` label text
+   */
+  readMoreLabel?: string;
+
+  /**
+   * Sets the `seconds ago` label text
+   */
+  secondsAgoText?: (value: number) => string;
+
+  /**
+   * Sets the settings icon description text
+   */
+  settingsIconDescription?: string;
+
+  /**
+   * Sets the title for the Notifications panel
+   */
+  title?: string;
+
+  /**
+   * Sets the today label text
+   */
+  todayLabel?: string;
+
+  /**
+   * Sets the View all button text
+   */
+  viewAllLabel?: (value: number) => string;
+
+  /**
+   * Sets the `year ago` label text
+   */
+  yearAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `years ago` label text
+   */
+  yearsAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `Yesterday at` label text
+   */
+  yesterdayAtText?: (value: number) => string;
+
+  /**
+   * Sets the yesterday label text
+   */
+  yesterdayLabel?: string;
+}
+interface PreviousStateProps {
+  open: boolean;
+}
 export let NotificationsPanel = React.forwardRef(
   (
     {
@@ -110,13 +300,15 @@ export let NotificationsPanel = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
+    }: NotificationsPanelProps,
     ref
   ) => {
     const notificationPanelRef = useRef();
     const [shouldRender, setRender] = useState(open);
-    const [allNotifications, setAllNotifications] = useState([]);
-    const previousState = usePreviousValue({ open });
+    const [allNotifications, setAllNotifications] = useState<Data[]>([]);
+    const previousState = usePreviousValue({ open }) as
+      | PreviousStateProps
+      | undefined;
 
     const reducedMotion = usePrefersReducedMotion();
 
@@ -168,7 +360,7 @@ export let NotificationsPanel = React.forwardRef(
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) => item.timestamp.getTime() >= yesterdayDate.getTime()
+        (item) => (item.timestamp as Date).getTime() >= yesterdayDate.getTime()
       );
     withinLastDayNotifications = sortChronologically(
       withinLastDayNotifications
@@ -178,15 +370,16 @@ export let NotificationsPanel = React.forwardRef(
       allNotifications.length &&
       allNotifications.filter(
         (item) =>
-          item.timestamp.getTime() < yesterdayDate.getTime() &&
-          item.timestamp.getTime() >= dayBeforeYesterdayDate.getTime()
+          (item.timestamp as Date).getTime() < yesterdayDate.getTime() &&
+          (item.timestamp as Date).getTime() >= dayBeforeYesterdayDate.getTime()
       );
     previousDayNotifications = sortChronologically(previousDayNotifications);
     let previousNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) => item.timestamp.getTime() < dayBeforeYesterdayDate.getTime()
+        (item) =>
+          (item.timestamp as Date).getTime() < dayBeforeYesterdayDate.getTime()
       );
     previousNotifications = sortChronologically(previousNotifications);
 
@@ -196,22 +389,22 @@ export let NotificationsPanel = React.forwardRef(
         allNotifications.length &&
         allNotifications.filter((item) => item.id === id)[0];
       const trimLength = 88;
-      const description = notification.description;
+      const description = notification?.['description'];
       const descriptionClassName = cx([
         `${blockClass}__notification-description`,
         {
           [`${blockClass}__notification-long-description`]:
-            notification.showAll,
+            notification?.['showAll'],
           [`${blockClass}__notification-short-description`]:
-            !notification.showAll,
+            !notification?.['showAll'],
         },
       ]);
       const showMoreButtonClassName = cx([
         {
           [`${blockClass}__notification-read-less-button`]:
-            notification.showAll,
+            notification?.['showAll'],
           [`${blockClass}__notification-read-more-button`]:
-            !notification.showAll,
+            !notification?.['showAll'],
         },
       ]);
       return (
@@ -223,15 +416,15 @@ export let NotificationsPanel = React.forwardRef(
               size="sm"
               renderIcon={(props) => <ChevronDown size={16} {...props} />}
               iconDescription={
-                notification.showAll ? readLessLabel : readMoreLabel
+                notification?.['showAll'] ? readLessLabel : readMoreLabel
               }
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
                 const newData = allNotifications.map((item) => {
-                  if (item.id === notification.id) {
+                  if (item.id === notification?.['id']) {
                     return Object.assign({}, item, {
-                      showAll: !item.showAll,
+                      showAll: !item?.['showAll'],
                     });
                   }
                   return item;
@@ -240,7 +433,7 @@ export let NotificationsPanel = React.forwardRef(
               }}
               className={showMoreButtonClassName}
             >
-              {notification.showAll ? readLessLabel : readMoreLabel}
+              {notification?.['showAll'] ? readLessLabel : readMoreLabel}
             </Button>
           )}
         </div>
@@ -260,15 +453,14 @@ export let NotificationsPanel = React.forwardRef(
       ]);
       return (
         <div
-          aria-label={notification.title}
           key={`${notification.timestamp}-${notification.title}-${index}`}
           className={notificationClassName}
-          type="button"
           role="button"
           tabIndex={0}
           onClick={() => notification.onNotificationClick(notification)}
           onKeyDown={(event) => {
             if (
+              event.target instanceof HTMLElement &&
               event.target.classList.contains(
                 `${blockClass}__dismiss-single-button`
               )
@@ -390,10 +582,13 @@ export let NotificationsPanel = React.forwardRef(
         style={{
           animation: !reducedMotion
             ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
-            : null,
+            : undefined,
         }}
         onAnimationEnd={onAnimationEnd}
-        ref={ref || notificationPanelRef}
+        ref={
+          (ref as MutableRefObject<HTMLDivElement | null>) ||
+          notificationPanelRef
+        }
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__header-container`}>
@@ -510,6 +705,7 @@ NotificationsPanel.propTypes = {
   /**
    * Array of data for Notifications component to render
    */
+  /**@ts-ignore*/
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

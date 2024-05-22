@@ -18,7 +18,7 @@ const useNestedRows = (hooks) => {
     useEffect(() => {
       const { rows } = instance;
       const defaultExpandedRows = rows.filter(
-        (row) => row.original.defaultExpanded
+        (row) => row?.original?.defaultExpanded
       );
       if (defaultExpandedRows?.length) {
         defaultExpandedRows.map((defaultExpandedRow) => {

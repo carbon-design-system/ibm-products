@@ -41,10 +41,8 @@ import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 type Media =
   | {
       render?: () => ReactNode;
-      filePaths?: never;
     }
   | {
-      render?: never;
       filePaths?: string[];
     };
 interface CoachmarkStackProps {

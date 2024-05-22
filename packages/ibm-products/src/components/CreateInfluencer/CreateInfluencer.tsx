@@ -92,7 +92,7 @@ export const CreateInfluencer = ({
                 <ProgressStep
                   label={step.title}
                   key={stepIndex}
-                  secondaryLabel={step.secondaryLabel}
+                  secondaryLabel={step.secondaryLabel || undefined}
                   invalid={(step as any).invalid}
                 />
               );

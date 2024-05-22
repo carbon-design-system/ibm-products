@@ -250,8 +250,11 @@ export const TearsheetShell = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
-    const { firstElement, keyDownListener } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
+    const { firstElement, keyDownListener, specifiedElement } = useFocus(
+      modalRef,
+      selectorPrimaryFocus
+    );
     const modalRefValue = (modalRef as MutableRefObject<HTMLDivElement>)
       .current;
 
@@ -292,13 +295,19 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
+      if (selectorPrimaryFocus) {
+        return specifiedElement?.focus();
+      }
       firstElement?.focus();
     };
 
     useEffect(() => {
       if (open) {
-        // Focusing the first element
+        // Focusing the first element or selectorPrimaryFocus element
         setTimeout(() => {
+          if (selectorPrimaryFocus) {
+            return specifiedElement?.focus();
+          }
           firstElement?.focus();
         }, 0);
       }

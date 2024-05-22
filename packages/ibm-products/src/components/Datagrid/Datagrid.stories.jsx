@@ -261,6 +261,7 @@ export const WithVirtualizedData = () => {
     {
       columns,
       data,
+      onVirtualScroll: (e) => console.log(e),
     },
     useInfiniteScroll
   );

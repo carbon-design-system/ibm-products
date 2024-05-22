@@ -5,23 +5,28 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { CarbonIconType } from '@carbon/react/icons';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 const componentName = 'ProductiveCard';
 
 type ActionIcon = {
-  id: string;
-  icon: CarbonIconType;
+  id?: string;
+  icon?: CarbonIconType;
   onKeyDown?(): void;
   onClick?(): void;
-  iconDescription: string;
+  iconDescription?: string;
   href?: string;
 };
 type overflowAction = {
@@ -30,6 +35,8 @@ type overflowAction = {
   onClick?: () => void;
   onKeydown?: () => void;
 };
+type PlacementType = 'top' | 'bottom';
+type ClickZoneType = 'one' | 'two' | 'three';
 interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
@@ -39,7 +46,7 @@ interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Determines if the action icons are on the top or bottom of the card
    */
-  actionsPlacement?: 'top' | 'bottom';
+  actionsPlacement?: PlacementType;
   /**
    * Content that shows in the body of the card
    */
@@ -49,10 +56,12 @@ interface ProductiveCardProps extends PropsWithChildren {
    */
   className?: string;
 
+  children: ReactNode;
+
   /**
    * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
    */
-  clickZone?: 'one' | 'two' | 'three';
+  clickZone?: ClickZoneType;
   /**
    * Optional header description
    */
@@ -89,11 +98,11 @@ interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
-  primaryButtonIcon?: () => void | object;
+  primaryButtonIcon?: CarbonIconType;
   /**
    * Determines if the primary button is on the top or bottom of the card
    */
-  primaryButtonPlacement?: 'top' | 'bottom';
+  primaryButtonPlacement?: PlacementType;
   /**
    * The text that's displayed in the primary button
    */
@@ -105,11 +114,11 @@ interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
-  secondaryButtonIcon?: () => void | object;
+  secondaryButtonIcon?: CarbonIconType;
   /**
    * Determines if the secondary button is on the top or bottom of the card
    */
-  secondaryButtonPlacement?: 'top' | 'bottom';
+  secondaryButtonPlacement?: PlacementType;
   /**
    * The text that's displayed in the secondary button
    */
@@ -134,7 +143,7 @@ interface ProductiveCardProps extends PropsWithChildren {
 export let ProductiveCard = forwardRef(
   (
     { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
-    ref: React.Ref<HTMLDivElement>
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const validProps = prepareProps(rest, [
       'media',

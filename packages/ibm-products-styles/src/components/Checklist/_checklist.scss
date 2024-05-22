@@ -82,8 +82,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // So, we have to refer to it via it's "tooltip" wrapper element. :/
 .#{$block-class}__header .#{c4p-settings.$carbon-prefix}--tooltip {
   block-size: 2rem;
-  margin-block: calc(-1 * $spacing-03);
-  margin-inline-start: auto;
+  margin-block-start: calc(-1 * $spacing-03);
+  margin-inline: auto calc(-1 * $spacing-03);
 }
 
 .#{$block-class}__chevron {

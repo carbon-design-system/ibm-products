@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef, useState } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
@@ -22,11 +22,54 @@ import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';
 import usePath from './hooks/usePath';
 import { pkg } from '../../settings';
+import { Item, Theme } from './types';
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
 
-export let AddSelectBody = forwardRef(
+export interface AddSelectBodyProps {
+  className?: string;
+  clearFiltersText?: string;
+  closeIconDescription?: string;
+  columnInputPlaceholder?: string;
+  defaultModifiers?: Array<any>;
+  description?: string;
+  filterByLabel?: string;
+  globalFilterOpts?: Array<any>;
+  globalFiltersIconDescription?: string;
+  globalFiltersLabel?: string;
+  globalFiltersPlaceholderText?: string;
+  globalFiltersPrimaryButtonText?: string;
+  globalFiltersSecondaryButtonText?: string;
+  globalSearchLabel: string;
+  globalSearchPlaceholder?: string;
+  globalSortBy?: Array<any>;
+  illustrationTheme?: Theme;
+  influencerTitle?: string;
+  items?: Item;
+  itemsLabel?: string;
+  metaIconDescription?: string;
+  metaPanelTitle?: string;
+  multi?: boolean;
+  navIconDescription?: string;
+  noResultsDescription?: string;
+  noResultsTitle?: string;
+  noSelectionDescription?: string;
+  noSelectionTitle?: string;
+  normalizedItems?: object;
+  onClose?: () => void;
+  onCloseButtonText?: string;
+  onSubmit?: (selection) => void;
+  onSubmitButtonText?: string;
+  open?: boolean;
+  portalTarget?: ReactNode;
+  searchResultsTitle?: string;
+  sortByLabel?: string;
+  title?: string;
+  useNormalizedItems?: boolean;
+}
+
+export const AddSelectBody = forwardRef(
   (
     {
       className,
@@ -69,8 +112,8 @@ export let AddSelectBody = forwardRef(
       title,
       useNormalizedItems,
       ...rest
-    },
-    ref
+    }: AddSelectBodyProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     // hooks
     const [singleSelection, setSingleSelection] = useState('');
@@ -99,7 +142,7 @@ export let AddSelectBody = forwardRef(
 
     const onCloseHandler = () => {
       resetState();
-      onClose();
+      onClose?.();
     };
 
     const tearsheetClassnames = cx(className, blockClass, {
@@ -120,15 +163,15 @@ export let AddSelectBody = forwardRef(
     };
 
     const submitHandler = () => {
-      if (multi && appliedModifiers.length > 0) {
+      if (multi && appliedModifiers && appliedModifiers?.length > 0) {
         const selections = multiSelection.map((item) => {
           return appliedModifiers.find((mod) => mod.id === item);
         });
-        onSubmit(selections);
-      } else if (multi && appliedModifiers.length === 0) {
-        onSubmit(multiSelection);
+        onSubmit?.(selections);
+      } else if (multi && appliedModifiers?.length === 0) {
+        onSubmit?.(multiSelection);
       } else {
-        onSubmit(singleSelection);
+        onSubmit?.(singleSelection);
       }
       onCloseHandler();
     };
@@ -217,9 +260,9 @@ export let AddSelectBody = forwardRef(
       displayMetalPanel,
       illustrationTheme,
       influencerTitle,
-      items: useNormalizedItems ? normalizedItems : items.entries,
+      items: useNormalizedItems ? normalizedItems : items?.entries,
       metaPanelTitle,
-      modifiers: items.modifiers,
+      modifiers: items?.modifiers,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
@@ -275,11 +318,8 @@ export let AddSelectBody = forwardRef(
             </div>
             {showSort && (
               <AddSelectSort
-                items={itemsToDisplay}
                 setSortAttribute={setSortAttribute}
                 setSortDirection={setSortDirection}
-                sortAttribute={sortAttribute}
-                sortDirection={sortDirection}
                 sortBy={globalSortBy}
               />
             )}
@@ -302,7 +342,7 @@ export let AddSelectBody = forwardRef(
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
-                modifiers={items.modifiers}
+                modifiers={items?.modifiers}
                 appliedModifiers={appliedModifiers}
                 setAppliedModifiers={setAppliedModifiers}
                 setParentSelected={parentSelectionHandler}
@@ -358,6 +398,7 @@ AddSelectBody.propTypes = {
   globalSortBy: PropTypes.array,
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
+  /**@ts-ignore */
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
       id: PropTypes.string,

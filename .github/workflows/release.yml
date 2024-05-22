@@ -52,9 +52,13 @@ jobs:
           echo "  js:
               functions: {}
               tokens: null" >> telemetry.yml
-          git add telemetry.yml
-          git commit -m "chore(telemetry): update telemetry config"
-          git push origin
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Mirror is clean, exiting..."
+          else
+            git add telemetry.yml
+            git commit -m "chore(telemetry): update telemetry config"
+            git push origin
+          fi
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check

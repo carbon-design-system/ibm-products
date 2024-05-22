@@ -20,7 +20,8 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__dummy-content {
-  position: relative; // used to raise the stacking context and check it still goes under the page header
+  // used to raise the stacking context and check it still goes under the page header
+  position: relative;
   background-color: $background;
   color: $text-primary;
   margin-block-start: $spacing-05;

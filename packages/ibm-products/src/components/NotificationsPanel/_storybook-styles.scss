@@ -12,7 +12,8 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 
 .#{$storybook-block-class}--full-height {
   block-size: 100vh;
-  max-block-size: var(--doc-story-height); // set in core if needed;
+  // set in core if needed;
+  max-block-size: var(--doc-story-height);
 }
 
 .#{$storybook-block-class}__add {

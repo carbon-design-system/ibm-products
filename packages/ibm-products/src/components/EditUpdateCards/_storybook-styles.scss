@@ -23,9 +23,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
   textarea,
   input,
   select {
-    inline-size: 100%;
-    block-size: auto;
     padding: 0;
+    block-size: auto;
+    inline-size: 100%;
     // stylelint-disable-next-line
     font-size: type-scale(3);
     letter-spacing: 0;

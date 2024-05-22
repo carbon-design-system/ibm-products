@@ -20,8 +20,9 @@
 // the component can expand, and it looks weird when expanding vertically
 // from the middle of the page instead of "dropping down" from above.
 // Margin provides spacing from the edge of the viewport.
+// 64px
 .non-linear-reading-stories__viewport {
-  margin: $spacing-10; // 64px
+  margin: $spacing-10;
 }
 
 .gradient-bg {

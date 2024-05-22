@@ -78,14 +78,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   .#{$block-class}__pictogram ~ .#{$block-class}__content-container {
     .#{$block-class}__media {
       /* stylelint-disable-next-line function-no-unknown */
-      margin-block: to-rem(-50px) -$spacing-09;
+      margin-block: to-rem(-50px) (-$spacing-09);
     }
   }
 
   .#{$block-class}__sequence ~ .#{$block-class}__content-container {
     .#{$block-class}__media {
       /* stylelint-disable-next-line function-no-unknown */
-      margin-block: to-rem(-56px) -$spacing-09;
+      margin-block: to-rem(-56px) (-$spacing-09);
     }
   }
 

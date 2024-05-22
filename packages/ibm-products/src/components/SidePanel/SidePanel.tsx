@@ -1021,7 +1021,7 @@ SidePanel.propTypes = {
    * Sets the size of the side panel
    */
   /**@ts-ignore*/
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Determines if this panel slides in

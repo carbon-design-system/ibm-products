@@ -326,7 +326,6 @@ NestedRowsInitialUsageStory.args = {
   initialState: {
     expandedRowIds: {
       'testing-user-provided-id__1': true,
-      // 1: true,
       3: true,
     },
   },

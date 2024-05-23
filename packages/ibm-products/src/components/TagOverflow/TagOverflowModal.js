@@ -50,28 +50,12 @@ export const TagOverflowModal = ({
   const renderPortalUse = usePortalTarget(portalTargetIn);
 
   const getFilteredItems = () => {
-    let newFilteredModalTags = [];
-    if (open) {
-      if (search === '') {
-        newFilteredModalTags = allTags.slice(0);
-      } else {
-        const lCaseSearch = search.toLocaleLowerCase();
-
-        allTags.forEach((tag) => {
-          const dataSearch = tag['data-search']
-            ?.toLocaleLowerCase()
-            ?.indexOf(lCaseSearch);
-          const labelSearch = tag.label
-            ?.toLocaleLowerCase()
-            ?.indexOf(lCaseSearch);
-
-          if (dataSearch > -1 || labelSearch > -1) {
-            newFilteredModalTags.push(tag);
-          }
-        });
-      }
+    if (open && search) {
+      return allTags.filter((tag) =>
+        tag.label?.toLocaleLowerCase()?.includes(search.toLocaleLowerCase())
+      );
     }
-    return newFilteredModalTags;
+    return allTags;
   };
 
   const handleSearch = (evt) => {
@@ -106,11 +90,9 @@ export const TagOverflowModal = ({
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
         {getFilteredItems().map(({ label, id, filter, ...other }) => {
-          if (overflowType !== 'tag') {
-            filter = false;
-          }
+          const isFilterable = overflowType === 'tag' ? filter : false;
           return (
-            <Tag {...other} key={id} filter={filter}>
+            <Tag {...other} key={id} filter={isFilterable}>
               {label}
             </Tag>
           );

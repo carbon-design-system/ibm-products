@@ -103,13 +103,12 @@ export const TagOverflowPopover = React.forwardRef(
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
                 {getOverflowPopoverItems().map(
-                  ({ tagType, onClose, ...other }) => {
-                    const tagProps = { type: tagType, ...other };
-                    if (overflowType === 'tag') {
-                      tagProps.type = 'high-contrast';
-                    } else {
-                      tagProps.filter = false;
-                    }
+                  ({ label, id, tagType, filter, onClose, ...other }) => {
+                    const typeValue =
+                      overflowType === 'tag' ? 'high-contrast' : tagType;
+                    const isFilterable =
+                      overflowType === 'tag' ? filter : false;
+
                     return (
                       <li
                         className={cx(`${blockClass}__tag-item`, {
@@ -118,14 +117,19 @@ export const TagOverflowPopover = React.forwardRef(
                           [`${blockClass}__tag-item--tag`]:
                             overflowType === 'tag',
                         })}
-                        key={tagProps.id}
+                        key={id}
                       >
                         {overflowType === 'tag' ? (
-                          <Tag {...tagProps} onClose={() => onClose?.()}>
-                            {tagProps.label}
+                          <Tag
+                            {...other}
+                            onClose={() => onClose?.()}
+                            type={typeValue}
+                            filter={isFilterable}
+                          >
+                            {label}
                           </Tag>
                         ) : (
-                          tagProps.label
+                          label
                         )}
                       </li>
                     );

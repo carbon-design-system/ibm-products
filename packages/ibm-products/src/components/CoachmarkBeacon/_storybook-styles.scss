@@ -10,10 +10,10 @@
 .CoachmarkBaseExampleUsage {
   position: relative;
   display: inline-block;
-  max-height: 100%;
   box-sizing: border-box;
   /* stylelint-disable-next-line carbon/layout-token-use */
   padding: 1rem;
-  margin-left: 50%;
+  margin-inline-start: 50%;
+  max-block-size: 100%;
   transform: translateX(-50%);
 }

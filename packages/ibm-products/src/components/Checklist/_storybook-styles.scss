@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 
 .checklist-stories__viewport {
-  min-width: calc(2 * $spacing-13); // 320px
-  max-width: calc(2 * $spacing-13);
+  // 320px
+  max-inline-size: calc(2 * $spacing-13);
+  min-inline-size: calc(2 * $spacing-13);
 }

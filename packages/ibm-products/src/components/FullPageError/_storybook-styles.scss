@@ -16,10 +16,10 @@ $story-class: 'full-page-error-stories';
 
 .#{$story-class}__breadcrumb-container {
   position: sticky;
-  top: 0;
   padding: $spacing-04 $spacing-09;
   background: $layer-01;
   border-block-end: 1px solid $border-subtle-03;
+  inset-block-start: 0;
 
   @include breakpoint-down(md) {
     padding: $spacing-04 $spacing-03;
@@ -33,19 +33,19 @@ $story-class: 'full-page-error-stories';
   }
 }
 .#{$story-class}__offset {
-  height: calc(100% - #{$spacing-09});
-  margin-top: $spacing-09;
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
   overflow-y: auto;
 }
 
 .#{$story-class}__viewport {
   overflow: hidden;
-  height: 100vh;
+  block-size: 100vh;
 }
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
-  max-height: 60vh;
   background-color: $background;
   box-shadow: 0 0 4px 1px $layer-accent-01;
   color: $text-primary;
+  max-block-size: 60vh;
 }

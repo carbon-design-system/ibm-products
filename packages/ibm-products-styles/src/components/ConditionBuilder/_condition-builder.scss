@@ -37,13 +37,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   flex-flow: row wrap;
 }
 .#{$block-class}__gap {
-  margin-right: $spacing-01;
+  margin-inline-end: $spacing-01;
 }
 .#{$block-class}__gap-bottom {
-  margin-bottom: $spacing-01;
+  margin-block-end: $spacing-01;
 }
 .#{$block-class}__gap-left {
-  margin-left: $spacing-01;
+  margin-inline-start: $spacing-01;
 }
 .#{$block-class}__condition-block {
   display: flex;

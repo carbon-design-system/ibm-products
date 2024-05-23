@@ -13,12 +13,12 @@
 .#{variables.$block-class}__grid-container {
   th.#{variables.$block-class}__select-all-toggle-on,
   td.#{variables.$block-class}__select-all-toggle-on {
-    /* stylelint-disable-next-line declaration-no-important */
-    width: 4.5rem !important;
-    /* stylelint-disable-next-line declaration-no-important */
-    min-width: initial !important;
     box-sizing: border-box;
     flex: 0 0 auto;
+    /* stylelint-disable-next-line declaration-no-important */
+    inline-size: 4.5rem !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    min-inline-size: initial !important;
   }
 }
 
@@ -29,9 +29,9 @@ th.#{variables.$block-class}__select-all-toggle-on {
 }
 
 th.#{variables.$block-class}__select-all-toggle-on.button {
-  margin-left: $spacing-01;
+  margin-inline-start: $spacing-01;
 }
 
 .#{variables.$block-class}__select-all-toggle-overflow.#{c4p-settings.$carbon-prefix}--overflow-menu-options--sm.#{c4p-settings.$carbon-prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-  width: $spacing-13;
+  inline-size: $spacing-13;
 }

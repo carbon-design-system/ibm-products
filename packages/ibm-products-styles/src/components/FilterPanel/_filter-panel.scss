@@ -26,6 +26,5 @@ $carbon: #{c4p-settings.$carbon-prefix};
 .#{$block-class}__title {
   @include type.type-style('body-compact-01');
 
-  margin-top: $spacing-04;
-  margin-bottom: $spacing-04;
+  margin-block: $spacing-04;
 }

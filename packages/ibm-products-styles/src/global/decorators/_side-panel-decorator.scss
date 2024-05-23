@@ -8,8 +8,8 @@
 @mixin side-panel-decorator($prefix) {
   .#{$prefix}container {
     display: flex;
-    height: 100vh;
     flex-direction: column;
+    block-size: 100vh;
   }
 
   .#{$prefix}content {
@@ -18,8 +18,8 @@
 
   .#{$prefix}toggle {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
     transform: translate(-50%, -50%);
   }
 }

@@ -18,13 +18,13 @@
 $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .sb-show-main.sb-main-centered {
-  height: 100vh;
+  block-size: 100vh;
 }
 
 .sb-show-main.sb-main-centered #storybook-root {
-  width: 100%;
-  height: 100vh;
   padding: $spacing-07;
+  block-size: 100vh;
+  inline-size: 100%;
 }
 
 #storybook-root
@@ -33,10 +33,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .carbon-nested-table {
-  border-bottom: 1px solid $border-subtle-01;
+  border-block-end: 1px solid $border-subtle-01;
 
   .#{$block-class}__virtual-scrollbar > div > div:last-child td {
-    border-bottom: none;
+    border-block-end: none;
   }
 }
 
@@ -46,23 +46,22 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 /* only for storybook purpose. */
 .#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container {
-  top: 0;
-  height: 100%;
+  block-size: 100%;
+  inset-block-start: 0;
 }
 
 .page-content-wrapper.side-panel-open {
   .#{$block-class} {
-    padding-right: $spacing-05;
+    padding-inline-end: $spacing-05;
   }
 }
 
 .#{$block-class}__side-panel-sections {
-  padding-bottom: $spacing-06;
+  padding-block-end: $spacing-06;
 }
 
 .#{$block-class}__side-panel-link {
-  padding-top: $spacing-01;
-  padding-bottom: $spacing-06;
+  padding-block: $spacing-01 $spacing-06;
 }
 
 .#{$block-class}__side-panel-section-inner {
@@ -79,13 +78,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 .#{$block-class}__side-panel-value {
   @include type.type-style('body-compact-01');
 
-  padding-left: $spacing-03;
+  padding-inline-start: $spacing-03;
 }
 
 .#{$block-class}__side-panel-section-header {
   @include type.type-style('heading-compact-01');
 
-  padding-bottom: $spacing-02;
+  padding-block-end: $spacing-02;
 }
 
 .#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container.#{c4p-settings.$pkg-prefix}--side-panel__container-right-placement {
@@ -95,7 +94,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .#{c4p-settings.$pkg-prefix}--side-panel__container
   .#{c4p-settings.$pkg-prefix}--side-panel__inner-content {
-  height: 100%;
+  block-size: 100%;
 }
 
 .#{$block-class}-story__custom-cell-wrapper.#{c4p-settings.$carbon-prefix}--link {
@@ -106,12 +105,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .#{$block-class}-story__hidden-column-id-snippet {
-  padding-top: $spacing-07;
+  padding-block-start: $spacing-07;
 }
 
 .#{$block-class}__mobile-toolbar-modal
   .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
-  margin-bottom: $spacing-07;
+  margin-block-end: $spacing-07;
 }
 
 .storybook-#{$block-class}__validation-code-snippet {
@@ -122,15 +121,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   padding: 0 $spacing-03;
   border: 2px solid transparent;
   border-radius: $spacing-02;
-  margin-right: $spacing-03;
   background-color: $field-01;
+  margin-inline-end: $spacing-03;
 }
 
 .#{c4p-settings.$carbon-prefix}--body--with-modal-open {
   .#{$block-class}__mobile-toolbar-modal.#{c4p-settings.$carbon-prefix}--modal {
-    top: -$spacing-07;
-    left: -$spacing-07;
-    width: 100vw;
+    inline-size: 100vw;
+    inset-block-start: -$spacing-07;
+    inset-inline-start: -$spacing-07;
   }
 }
 
@@ -140,7 +139,7 @@ div[data-story-title*='#{$story-anchor}']
   > div:first-child
   > div:first-child {
   overflow: auto;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .sb--tooltip-trigger {

@@ -39,16 +39,15 @@ $value: #{$block-class}__value;
 // BASE STYLING FOR ALL DECORATORS
 .#{$block-class} {
   display: inline-flex;
-  max-width: 100%;
   align-items: normal;
   border-radius: $spacing-12;
+  max-inline-size: 100%;
 }
 .#{$block-class} .#{$label} {
   @include type.type-style('label-01');
 
   position: relative;
   display: inline-flex;
-  height: $spacing-06;
   align-items: normal;
   padding: 0 $spacing-03;
   border-width: to-rem(1px) 0 to-rem(1px) to-rem(1px);
@@ -56,6 +55,7 @@ $value: #{$block-class}__value;
   border-color: $border-subtle-02;
   border-radius: $spacing-12 0 0 $spacing-12;
   background-color: $layer-01;
+  block-size: $spacing-06;
   color: $text-secondary;
   line-height: 1.8;
 }
@@ -65,7 +65,6 @@ $value: #{$block-class}__value;
   position: relative;
   display: inline-flex;
   overflow: hidden;
-  height: $spacing-06;
   align-items: normal;
   padding: 0 $spacing-03;
   border-width: to-rem(1px) to-rem(1px) to-rem(1px) 0;
@@ -73,26 +72,27 @@ $value: #{$block-class}__value;
   border-color: $border-subtle-02;
   border-radius: 0 $spacing-12 $spacing-12 0;
   background-color: $layer-01;
+  block-size: $spacing-06;
   color: $text-primary;
   line-height: 1.8;
 }
 .#{$block-class} .#{$icon} {
-  margin-top: to-rem(3px);
-  margin-right: $spacing-02;
+  margin-block-start: to-rem(3px);
+  margin-inline-end: $spacing-02;
 }
 
 //
 // MODIFIER, SMALL
 //
 .#{$block-class}--sm .#{$label} {
-  height: to-rem(18px);
   padding: 0 $spacing-02 0 $spacing-03;
+  block-size: to-rem(18px);
   line-height: 1.333;
 }
 .#{$block-class}--sm .#{$value} {
-  height: to-rem(18px);
   // When "small", the divider takes up 1px of 4px of the available space: so "+1px".
   padding: 0 $spacing-03 0 calc($spacing-02 + 1px);
+  block-size: to-rem(18px);
   line-height: 1.333;
 }
 
@@ -140,7 +140,7 @@ $value: #{$block-class}__value;
 
 // MODIFIER, SMALL ICON
 .#{$block-class} .#{$icon}--sm {
-  width: $spacing-04;
-  height: $spacing-04;
-  margin-top: to-rem(2.5px);
+  block-size: $spacing-04;
+  inline-size: $spacing-04;
+  margin-block-start: to-rem(2.5px);
 }

@@ -18,7 +18,7 @@
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 .#{c4p-settings.$carbon-prefix}--number {
-  min-width: 100%;
+  min-inline-size: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--number__control-btn::before {
@@ -30,21 +30,21 @@
 }
 
 .#{c4p-settings.$carbon-prefix}--date-picker {
-  min-width: 100%;
+  min-inline-size: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--date-picker-container {
-  min-width: 100%;
+  min-inline-size: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
   .#{c4p-settings.$carbon-prefix}--date-picker__input {
-  min-width: 100%;
+  min-inline-size: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--list-box__menu-icon {
   /* stylelint-disable-next-line carbon/layout-token-use */
-  top: spacing.$spacing-03;
+  inset-block-start: spacing.$spacing-03;
 }
 
 .example-wrapper {

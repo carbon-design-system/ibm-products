@@ -18,7 +18,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--saving;
 }
 
 .#{$block-class}__error-icon {
-  margin-right: $spacing-05;
+  margin-inline-end: $spacing-05;
 }
 
 .#{$block-class}__error-icon svg {

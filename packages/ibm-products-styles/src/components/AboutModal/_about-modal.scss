@@ -26,8 +26,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class} .#{$block-class}__header {
   padding: 0 20% 0 $spacing-05;
-  margin-bottom: 0;
   grid-row: auto;
+  margin-block-end: 0;
 }
 
 .#{$block-class} .#{$block-class}__title {
@@ -40,27 +40,27 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   @include type.type-style('body-compact-02');
 
   overflow: hidden auto;
-  min-height: $spacing-10;
   grid-row: auto;
+  min-block-size: $spacing-10;
   padding-block-start: 0;
   padding-inline: $spacing-05 20%;
 
   &:not(.#{c4p-settings.$carbon-prefix}--modal-scroll-content) {
-    margin-bottom: $spacing-06;
+    margin-block-end: $spacing-06;
     padding-block-end: 0;
   }
 }
 
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  bottom: #{$spacing-06};
   background-image: linear-gradient(to bottom, #00000000, $layer-01);
+  inset-block-end: #{$spacing-06};
 }
 
 .#{$block-class} .#{$block-class}__links-container {
   @include type.type-style('body-compact-01');
 
-  margin-top: $spacing-06;
+  margin-block-start: $spacing-06;
 }
 
 .#{$block-class} .#{$block-class}__version {
@@ -68,32 +68,32 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__links-container a + a {
-  padding-left: $spacing-03;
-  border-left: 1px solid $border-strong-01;
-  margin-left: $spacing-03;
+  border-inline-start: 1px solid $border-strong-01;
+  margin-inline-start: $spacing-03;
+  padding-inline-start: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__content,
 .#{$block-class} .#{$block-class}__copyright-text {
   @include type.type-style('label-01');
 
-  margin-top: $spacing-06;
-  margin-bottom: 0;
   color: $text-secondary;
+
+  margin-block: $spacing-06 0;
 }
 
 .#{$block-class} .#{$block-class}__copyright-text {
-  margin-top: $spacing-05;
+  margin-block-start: $spacing-05;
 }
 
 p.c4p--about-modal__content:first-child,
 p.c4p--about-modal__copyright-text:first-child {
-  margin-top: $spacing-07;
+  margin-block-start: $spacing-07;
 }
 
 .#{$block-class} .#{$block-class}__footer {
   display: block;
-  height: auto;
   padding: $spacing-05;
   background-color: $layer-02;
+  block-size: auto;
 }

@@ -18,11 +18,11 @@ $preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form;
 .#{$preview-block-class}__description {
   @include type.type-style('body-compact-01');
 
-  padding-bottom: $spacing-04;
+  padding-block-end: $spacing-04;
 }
 
 p.#{$preview-block-class}__description:last-of-type {
-  padding-bottom: $spacing-07;
+  padding-block-end: $spacing-07;
 }
 
 .#{$preview-block-class}__heading {
@@ -32,7 +32,7 @@ p.#{$preview-block-class}__description:last-of-type {
 .#{$preview-block-class}
   .#{c4p-settings.$pkg-prefix}--tearsheet__content
   .#{c4p-settings.$carbon-prefix}--form-item {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{c4p-settings.$carbon-prefix}--tile-group div {
@@ -41,19 +41,19 @@ p.#{$preview-block-class}__description:last-of-type {
 }
 
 .#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile {
-  width: 280px;
-  height: 240px;
-  margin-right: $spacing-05;
+  block-size: 240px;
+  inline-size: 280px;
+  margin-inline-end: $spacing-05;
 }
 
 .#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile
   .#{c4p-settings.$pkg-prefix}--empty-state__illustration.#{c4p-settings.$pkg-prefix}--empty-state__illustration--lg {
-  min-width: 120px;
-  height: 120px;
+  block-size: 120px;
+  min-inline-size: 120px;
 }
 
 .#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile-label {
   position: absolute;
-  bottom: $spacing-05;
-  left: $spacing-05;
+  inset-block-end: $spacing-05;
+  inset-inline-start: $spacing-05;
 }

@@ -20,24 +20,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-footer
   .#{c4p-settings.$carbon-prefix}--btn {
-  max-width: none;
+  max-inline-size: none;
 }
 
 .#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
   .#{c4p-settings.$carbon-prefix}--modal-content {
-  padding-right: $spacing-05;
+  padding-inline-end: $spacing-05;
 }
 
 .#{c4p-settings.$carbon-prefix}--file
   .#{c4p-settings.$carbon-prefix}--file-container,
 .#{c4p-settings.$carbon-prefix}--file
   ~ .#{c4p-settings.$carbon-prefix}--file-container {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 .#{c4p-settings.$carbon-prefix}--modal-container--sm
   .#{c4p-settings.$carbon-prefix}--modal-header {
-  padding-right: calc(20% - #{$spacing-05});
+  padding-inline-end: calc(20% - #{$spacing-05});
 }
 
 .#{$block-class}__input-group {
@@ -45,37 +45,36 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 }
 
 .#{$block-class}__import-button.#{c4p-settings.$carbon-prefix}--btn {
-  margin-left: $spacing-03;
+  margin-inline-start: $spacing-03;
 }
 
 .#{$block-class}__file-container {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .#{$block-class} .#{$block-class}__file-drop-header,
 .#{$block-class} .#{$block-class}__label {
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
   @include type.type-style('heading-compact-01');
 }
 
 .#{$block-class}__helper-text {
-  margin-top: $spacing-06;
-  margin-bottom: $spacing-03;
+  margin-block: $spacing-06 $spacing-03;
   @include type.type-style('helper-text-01');
 }
 
 .#{$block-class}__body {
-  padding-right: calc(20% - #{$spacing-05});
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
+  padding-inline-end: calc(20% - #{$spacing-05});
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--file__selected-file {
-  max-width: none;
   background: $layer-02;
+  max-inline-size: none;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--file {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input:disabled {

@@ -30,7 +30,7 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
   font-family: 'IBM Plex Mono', monospace;
 
   p {
-    padding-bottom: $spacing-07;
+    padding-block-end: $spacing-07;
     font-size: 14px;
   }
 }

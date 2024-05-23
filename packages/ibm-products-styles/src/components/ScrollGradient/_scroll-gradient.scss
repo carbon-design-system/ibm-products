@@ -16,20 +16,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
 .#{$block-class} {
   position: relative;
   display: flex;
-  width: inherit;
-  height: inherit;
   align-items: stretch;
   justify-content: stretch;
+  block-size: inherit;
+  inline-size: inherit;
 }
 .#{$block-class}__content {
   overflow: auto;
-  width: 100%;
-  height: inherit;
+  block-size: inherit;
+  inline-size: 100%;
 }
 
 .#{$block-class}__content-children {
-  width: 100%;
-  height: 100%;
+  block-size: 100%;
+  inline-size: 100%;
 }
 // All gradients
 .#{$block-class}__start-vertical,
@@ -44,29 +44,29 @@ $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
 
 // Vertical start
 .#{$block-class}--y-scrollable .#{$block-class}__start-vertical {
-  top: 0;
-  left: 0;
-  height: $spacing-09;
+  block-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
 }
 // Vertical end
 .#{$block-class}--y-scrollable .#{$block-class}__end-vertical {
-  bottom: 0;
-  left: 0;
-  height: $spacing-09;
+  block-size: $spacing-09;
+  inset-block-end: 0;
+  inset-inline-start: 0;
 }
 
 // Horizontal start
 .#{$block-class}--x-scrollable .#{$block-class}__start-horizontal {
-  top: 0;
-  left: 0;
-  width: $spacing-09;
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
 }
 
 // Horizontal end
 .#{$block-class}--x-scrollable .#{$block-class}__end-horizontal {
-  top: 0;
-  right: 0;
-  width: $spacing-09;
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-end: 0;
 }
 
 // Vertical start states

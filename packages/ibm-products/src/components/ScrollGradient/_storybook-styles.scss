@@ -15,16 +15,16 @@
 
 .templateContainer {
   overflow: auto;
-  width: 300px;
-  height: 400px;
   margin: auto;
+  block-size: 400px;
+  inline-size: 300px;
   resize: both;
 }
 
 .templateContainer-sm {
   overflow: auto;
-  width: 300px;
-  height: 250px;
   margin: auto;
+  block-size: 250px;
+  inline-size: 300px;
   resize: both;
 }

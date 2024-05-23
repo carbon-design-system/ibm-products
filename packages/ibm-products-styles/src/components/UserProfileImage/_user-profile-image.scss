@@ -26,8 +26,9 @@ $sizes: (
 @mixin size($size) {
   $_size: map-get($sizes, $size);
 
-  width: $_size;
-  height: $_size;
+  block-size: $_size;
+
+  inline-size: $_size;
 }
 
 $base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
@@ -87,9 +88,9 @@ $theme-keys: map-keys($themes);
 }
 
 .#{$block-class}__tooltip.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
-  min-height: auto;
   padding: 0;
   border-radius: 50%;
+  min-block-size: auto;
 }
 
 .#{$carbon-prefix}--btn--ghost.#{$block-class}__tooltip:focus {
@@ -103,8 +104,8 @@ $theme-keys: map-keys($themes);
 }
 
 .#{$block-class}__photo {
-  width: 100%;
   border-radius: 100%;
+  inline-size: 100%;
 }
 
 .#{$block-class}__photo--xl {

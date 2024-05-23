@@ -9,10 +9,10 @@
 @use '../../../../ibm-products-styles/src/global/styles/display-box' as *;
 
 #root {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .preview-position-fix {
-  max-width: 700px;
   margin: 0 auto;
+  max-inline-size: 700px;
 }

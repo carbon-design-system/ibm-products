@@ -33,18 +33,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--carousel;
 .#{$block-class}__elements-container--scroll-max {
   position: absolute;
   z-index: 1;
-  top: 0;
-  bottom: 0;
-  width: $spacing-07;
+  inline-size: $spacing-07;
+  inset-block: 0;
   pointer-events: none;
 }
 
 .#{$block-class}__elements-container--scrolled {
-  left: 0;
+  inset-inline-start: 0;
 }
 
 .#{$block-class}__elements-container--scroll-max {
-  right: 0;
+  inset-inline-end: 0;
 }
 
 .#{$block-class}__elements {

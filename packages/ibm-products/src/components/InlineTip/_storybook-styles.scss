@@ -10,12 +10,12 @@
 @use '../../../../ibm-products-styles/src/global/styles/project-settings';
 
 .storybook--inline-tip-wide {
-  max-width: 784px;
   // Allow enough space above the component to show the "X" tooltip.
-  margin-top: $spacing-07;
+  margin-block-start: $spacing-07;
+  max-inline-size: 784px;
 }
 
 .storybook--inline-tip-narrow {
-  max-width: 348px;
-  margin-top: $spacing-07;
+  margin-block-start: $spacing-07;
+  max-inline-size: 348px;
 }

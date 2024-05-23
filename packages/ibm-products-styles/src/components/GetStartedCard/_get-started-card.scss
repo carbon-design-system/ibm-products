@@ -39,15 +39,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   .#{$block-class}__sequence {
     @include type-style('heading-05');
 
-    padding-top: $spacing-05;
-    padding-left: $spacing-05;
+    padding-block-start: $spacing-05;
+    padding-inline-start: $spacing-05;
   }
 
   .#{$block-class}__status {
     position: absolute;
     z-index: 2;
-    top: $spacing-05;
-    right: $spacing-05;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
   }
 
   .#{$block-class}__header-body-container {
@@ -55,10 +55,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__header {
-    padding-right: $spacing-09;
+    padding-inline-end: $spacing-09;
 
     @include breakpoint-down(lg) {
-      padding-bottom: 0;
+      padding-block-end: 0;
     }
   }
 
@@ -78,16 +78,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   .#{$block-class}__pictogram ~ .#{$block-class}__content-container {
     .#{$block-class}__media {
       /* stylelint-disable-next-line function-no-unknown */
-      margin-top: to-rem(-50px);
-      margin-bottom: -$spacing-09;
+      margin-block: to-rem(-50px) (-$spacing-09);
     }
   }
 
   .#{$block-class}__sequence ~ .#{$block-class}__content-container {
     .#{$block-class}__media {
       /* stylelint-disable-next-line function-no-unknown */
-      margin-top: to-rem(-56px);
-      margin-bottom: -$spacing-09;
+      margin-block: to-rem(-56px) (-$spacing-09);
     }
   }
 
@@ -100,11 +98,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     .#{$block-class}__icon {
       display: flex;
       padding: 0;
-      margin-right: 0;
+      margin-inline-end: 0;
     }
 
     .#{$block-class}__icon svg {
-      margin-right: $spacing-02;
+      margin-inline-end: $spacing-02;
     }
 
     .#{$block-class}__icon:hover {
@@ -121,7 +119,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     .#{$block-class}__action-icon {
       display: flex;
       align-self: center;
-      padding-right: $spacing-05;
+      padding-inline-end: $spacing-05;
     }
   }
 }

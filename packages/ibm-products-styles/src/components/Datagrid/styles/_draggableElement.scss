@@ -14,7 +14,7 @@
 .#{variables.$block-class}__draggable-handleStyle {
   display: flex;
   align-items: center;
-  margin-right: $spacing-03;
+  margin-inline-end: $spacing-03;
 }
 
 .#{variables.$block-class}__draggable-handleStyle.disabled {
@@ -27,24 +27,26 @@
 
 .#{variables.$block-class}__draggable-underlay {
   position: absolute;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .#{variables.$block-class}__draggable-underlay-item {
-  // must match draggable item size
-  width: 100%;
-  height: $spacing-09;
   border: 2px dashed $focus;
   /* stylelint-disable-next-line carbon/theme-token-use */
-  background-color: colors.$blue-10; // not good in dark mode
+  // not good in dark mode
+  background-color: colors.$blue-10;
+  block-size: $spacing-09;
+  // must match draggable item size
+  inline-size: 100%;
 }
 
 .#{variables.$block-class}__draggable-handleHolder {
-  position: relative; // above underlay
+  // above underlay
+  position: relative;
   display: flex;
-  height: $spacing-09;
-  border-bottom: 1px solid $layer-active;
   background-color: $layer;
+  block-size: $spacing-09;
+  border-block-end: 1px solid $layer-active;
   cursor: grab;
 }
 
@@ -62,7 +64,8 @@
 }
 
 .#{variables.$block-class}__draggable-handleHolder--dragging {
-  z-index: 2; // raise above other items in draggable list
+  // raise above other items in draggable list
+  z-index: 2;
   background-color: $highlight;
   color: $text-primary;
   outline: none;
@@ -79,11 +82,12 @@
 
 .#{variables.$block-class}__draggable-handleHolder-droppable {
   display: flex;
-  width: 100%;
   align-items: center;
-  padding-left: $spacing-05;
+  inline-size: 100%;
   /* stylelint-disable-next-line carbon/type-token-use */
-  line-height: 1; // center align text within row
+  // center align text within row
+  line-height: 1;
+  padding-inline-start: $spacing-05;
   transition-property: opacity;
 }
 
@@ -104,11 +108,11 @@
   // hide the assistive text. can not use display: none which will also hide from ARIA
   position: absolute;
   overflow: hidden;
-  width: 0;
-  height: 0;
   padding: 0;
   border: 0;
+  block-size: 0;
   clip: rect(0 0 0 0);
+  inline-size: 0;
   text-transform: none;
   white-space: nowrap;
 }

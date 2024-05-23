@@ -24,16 +24,14 @@
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-group;
 
 .#{$block-class} {
-  padding-top: $spacing-04;
-  border-top: to-rem(1px) solid $border-subtle;
-  margin-top: $spacing-04;
-  margin-bottom: $spacing-04;
+  border-block-start: to-rem(1px) solid $border-subtle;
+  margin-block: $spacing-04;
+  padding-block-start: $spacing-04;
 }
 
 .#{$block-class}__title {
   @include type.type-style('label-01');
   @include type.font-weight('semibold');
 
-  margin-top: 0;
-  margin-bottom: $spacing-04;
+  margin-block: 0 $spacing-04;
 }

@@ -12,26 +12,26 @@
 $block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}__story-container {
-  width: 96vw;
-  min-height: 3rem;
+  inline-size: 96vw;
+  min-block-size: 3rem;
 }
 
 .#{$block-class}__story-container--xlg {
-  width: 75vw;
+  inline-size: 75vw;
 }
 
 .#{$block-class}__story-container--lg {
-  width: 60vw;
+  inline-size: 60vw;
 }
 
 .#{$block-class}__story-container--md {
-  width: 45vw;
+  inline-size: 45vw;
 }
 
 .#{$block-class}__story-container--sm {
-  width: 30vw;
+  inline-size: 30vw;
 }
 
 .#{$block-class}__story-container--xs {
-  width: 25vw;
+  inline-size: 25vw;
 }

@@ -41,30 +41,29 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 }
 
 .#{$block-class}:not(:first-of-type) {
-  padding-top: $spacing-05;
+  padding-block-start: $spacing-05;
 }
 
 .#{$block-class}:not(:last-of-type) {
-  padding-bottom: $spacing-05;
+  padding-block-end: $spacing-05;
 }
 
 .#{$block-class}:last-of-type {
-  padding-bottom: $spacing-07;
+  padding-block-end: $spacing-07;
 }
 
 .#{$block-class} + .#{$block-class} > .#{$nav__heading} {
-  padding-top: $spacing-02;
+  padding-block-start: $spacing-02;
 }
 
 .#{$block-class}::before {
   position: absolute;
-  right: $spacing-07;
-  bottom: 0;
-  left: $spacing-07;
   display: inline-block;
-  width: auto;
+  inline-size: auto;
+  inset-block-end: 0;
+  inset-inline: $spacing-07;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  border-bottom: to-rem(1px) solid $layer-02;
+  border-block-end: to-rem(1px) solid $layer-02;
   content: '';
 }
 
@@ -73,13 +72,12 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 }
 
 .#{$block-class}__wrapper {
-  padding-left: initial;
-  margin-top: initial;
-  margin-bottom: initial;
   list-style: none;
+  margin-block: initial;
+  padding-inline-start: initial;
 
   @include rtl {
-    padding-right: initial;
+    padding-inline: initial;
   }
 }
 
@@ -87,9 +85,8 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   @include type.type-style('caption-01');
 
   padding: $spacing-04 $spacing-08;
-  margin-top: initial;
-  margin-bottom: initial;
   color: $text-secondary;
+  margin-block: initial;
 }
 
 // Navigation lists.
@@ -98,8 +95,8 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
   display: flex;
   flex-direction: column;
-  margin-bottom: $spacing-01;
   list-style: none;
+  margin-block-end: $spacing-01;
 }
 
 .#{$nav-list-block-class}:focus {
@@ -112,33 +109,33 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 }
 
 .#{$nav-list-block-class}__icon {
-  margin-top: $spacing-01;
-  margin-left: auto;
+  margin-block-start: $spacing-01;
+  margin-inline-start: auto;
   transform: $nav__icon__position rotate(0deg);
   transition-duration: $duration-moderate-02;
   transition-property: transform;
   transition-timing-function: $standard-easing;
   @include rtl {
-    right: $spacing-02;
+    inset-inline-end: $spacing-02;
     transform: $nav__icon__position rotate(180deg);
   }
 }
 
 .#{$nav-list-block-class}--nested {
   overflow: hidden;
-  max-height: 0;
-  padding-left: 0;
-  margin-bottom: 0;
+  margin-block-end: 0;
+  max-block-size: 0;
   opacity: 0;
+  padding-inline-start: 0;
   transition-duration: $duration-moderate-02;
   $transition-property: (max-height, opacity);
   @include rtl {
-    padding-right: 0;
-    padding-left: initial;
+    padding-inline: 0;
+    padding-inline-start: initial;
   }
 
   > .#{$nav-item-block-class}:last-of-type {
-    margin-bottom: $spacing-03;
+    margin-block-end: $spacing-03;
   }
 }
 
@@ -147,7 +144,7 @@ $nav__icon__position: translate3d(-50%, 0, 0);
   @include type.type-style('body-short-01');
 
   position: relative;
-  margin-bottom: $spacing-01;
+  margin-block-end: $spacing-01;
 }
 
 // Content including text and sometimes a product icon.
@@ -157,14 +154,14 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
 .#{$nav-item-block-class}::before {
   position: absolute;
-  top: 0;
-  left: 0;
   display: inline-block;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  width: to-rem(4px);
-  height: 100%;
   background-color: transparent;
+  block-size: 100%;
   content: '';
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(4px);
+  inset-block-start: 0;
+  inset-inline-start: 0;
   transform: translate3d(-100%, 0, 0);
   transition-property: transform;
 }
@@ -195,11 +192,11 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
 // Expanded navigation list.
 .#{$nav-item-block-class}--expanded {
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 
   > .#{$nav-list-block-class}--nested {
     /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-    max-height: to-rem(320px);
+    max-block-size: to-rem(320px);
     opacity: 1;
     transition-timing-function: $ease-in;
   }
@@ -235,9 +232,8 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 
 .#{$nav-item-block-class}__img {
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  height: to-rem(20px);
-  margin-right: $spacing-04;
-  margin-left: -$spacing-07;
+  block-size: to-rem(20px);
+  margin-inline: -$spacing-07 $spacing-04;
 }
 
 //nav-item__link--external__icon
@@ -246,8 +242,8 @@ $nav__icon__position: translate3d(-50%, 0, 0);
 .#{$nav-item-block-class}__link--external__icon {
   flex-shrink: 0;
   align-self: center;
-  margin-left: $spacing-02;
   fill: $text-primary;
+  margin-inline-start: $spacing-02;
   opacity: 0;
 }
 

@@ -21,6 +21,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__media-left .#{$block-class}__media {
-  width: 100%;
-  max-width: 300px;
+  inline-size: 100%;
+  max-inline-size: 300px;
 }

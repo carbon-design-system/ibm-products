@@ -10,11 +10,10 @@
 $block-class: #{project-settings.$pkg-prefix}--datagrid;
 .#{$block-class}__center-align-header,
 .#{$block-class}__center-align-header .#{$block-class}--table-sort {
-  width: 100%;
+  inline-size: 100%;
   text-align: center;
 }
 
 .#{$block-class}__center-align-cell-renderer {
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline: auto;
 }

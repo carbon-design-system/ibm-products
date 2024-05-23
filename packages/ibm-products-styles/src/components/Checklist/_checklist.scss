@@ -27,30 +27,30 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 .#{$block-class}__header {
   display: flex;
   padding: $spacing-05;
-  border-bottom: 1px solid $border-subtle-01;
   background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
   gap: $spacing-03;
 }
 
 .#{$block-class}__chart {
   // outer donut
   position: relative;
-  width: $spacing-08;
-  min-width: $spacing-08;
-  height: $spacing-08;
   align-self: center;
+  block-size: $spacing-08;
+  inline-size: $spacing-08;
+  min-inline-size: $spacing-08;
 }
 
 .#{$block-class}__chart::after {
   // inner donut
   position: absolute;
-  top: $spacing-02;
-  left: $spacing-02;
-  width: $spacing-07;
-  height: $spacing-07;
   border-radius: 50%;
   background-color: $layer-01;
+  block-size: $spacing-07;
   content: '';
+  inline-size: $spacing-07;
+  inset-block-start: $spacing-02;
+  inset-inline-start: $spacing-02;
 }
 
 // Align __title and __chart-label vertically centered in the header.
@@ -73,7 +73,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__title + .#{$block-class}__chart-label {
-  margin-top: $spacing-01;
+  margin-block-start: $spacing-01;
 }
 
 // TOGGLE
@@ -81,10 +81,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // which do not accept any class names passed via the <IconButton>.
 // So, we have to refer to it via it's "tooltip" wrapper element. :/
 .#{$block-class}__header .#{c4p-settings.$carbon-prefix}--tooltip {
-  height: 2rem;
-  margin-top: calc(-1 * $spacing-03);
-  margin-right: calc(-1 * $spacing-03);
-  margin-left: auto;
+  block-size: 2rem;
+  margin-block-start: calc(-1 * $spacing-03);
+  margin-inline: auto calc(-1 * $spacing-03);
 }
 
 .#{$block-class}__chevron {
@@ -108,8 +107,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 .#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary {
   @include type-style('body-short-01');
 
-  max-width: none;
-  min-height: auto;
   // override bx--btn to allow two-line ellipsis
   /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   flex-shrink: unset;
@@ -117,6 +114,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   border: none;
   background-color: transparent;
   color: $link-primary;
+  max-inline-size: none;
+  min-block-size: auto;
 }
 // The CSS for the Carbon button's label is incompatible with two-line ellipsis,
 // but a div inside a Carbon button works.
@@ -142,8 +141,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__content-inner {
-  height: 100%;
   background-color: $layer-01;
+  block-size: 100%;
   transform: translate(0, 0);
   transition: all $duration-fast-02 motion(standard, productive);
 
@@ -154,32 +153,32 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__closed .#{$block-class}__content-inner {
-  height: 0;
+  block-size: 0;
   transform: translate(0, -100%);
 }
 
 .#{$block-class}__list-group {
   padding: $spacing-05;
-  border-top: 1px solid $border-subtle-01;
+  border-block-start: 1px solid $border-subtle-01;
 }
 .#{$block-class}__list-group:first-of-type {
-  border-top: none;
+  border-block-start: none;
 }
 
 .#{$block-class}__list-title {
   @include type-style('body-short-01');
   @include ellipsis-2-lines();
 
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 .#{$block-class}__list-item {
   display: flex;
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 .#{$block-class}__list-item:last-child {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 .#{$block-class}__icon {
@@ -214,5 +213,5 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   @include ellipsis-2-lines();
 
   padding: $spacing-03 $spacing-05;
-  border-top: 1px solid $border-subtle-01;
+  border-block-start: 1px solid $border-subtle-01;
 }

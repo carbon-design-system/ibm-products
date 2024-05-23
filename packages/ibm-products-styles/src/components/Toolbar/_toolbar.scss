@@ -22,9 +22,9 @@ $toolbar-dimensions: $spacing-08;
   }
 
   display: flex;
-  min-width: $toolbar-dimensions;
-  min-height: $toolbar-dimensions;
   background-color: $layer-01;
+  min-block-size: $toolbar-dimensions;
+  min-inline-size: $toolbar-dimensions;
 }
 
 .#{$block-class}--vertical,
@@ -33,23 +33,23 @@ $toolbar-dimensions: $spacing-08;
 }
 
 .#{$block-class}--vertical {
-  max-width: $toolbar-dimensions;
+  max-inline-size: $toolbar-dimensions;
 }
 
 .#{$block-class}__group {
   display: flex;
-  border-right: $border;
-  border-bottom: $border;
+  border-block-end: $border;
+  border-inline-end: $border;
 }
 
 .#{$block-class}--vertical > .#{$block-class}__group,
 .#{$block-class}__group:last-of-type {
-  border-right-width: 0;
+  border-inline-end-width: 0;
 }
 
 .#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
 .#{$block-class} .#{$carbon-prefix}--dropdown {
-  border-bottom-width: 0;
+  border-block-end-width: 0;
 }
 
 .#{$block-class}__button--caret {
@@ -62,14 +62,14 @@ $toolbar-dimensions: $spacing-08;
   $position: $spacing-01;
 
   position: absolute;
-  right: $position;
-  bottom: $position;
-  width: $caret-dimensions;
-  height: $caret-dimensions;
   background: linear-gradient(
     to right bottom,
     transparent 50%,
     $icon-primary 50%
   );
+  block-size: $caret-dimensions;
   content: '';
+  inline-size: $caret-dimensions;
+  inset-block-end: $position;
+  inset-inline-end: $position;
 }

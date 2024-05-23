@@ -22,20 +22,19 @@
 $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
 
 .#{$block-class} {
-  height: inherit;
+  block-size: inherit;
 }
 .#{$block-class}__container {
-  height: 100%;
   margin: 0 $spacing-06;
+  block-size: 100%;
 
   @include breakpoint-down(md) {
     margin: 0 $spacing-03;
   }
 }
 .#{$block-class}__grid {
-  height: 100%;
-  padding-top: $spacing-07;
-  padding-bottom: $spacing-07;
+  block-size: 100%;
+  padding-block: $spacing-07;
 }
 .#{$block-class}__column {
   padding: 0;
@@ -46,8 +45,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
 
 .#{$block-class}__svg-container {
   display: flex;
-  height: 100%;
   padding: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
+  block-size: 100%;
   @include breakpoint(md) {
     padding: auto $spacing-03 $spacing-11 $spacing-03;
   }
@@ -63,18 +62,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
   color: $text-error;
 }
 .#{$block-class}__title {
-  margin-bottom: $spacing-09;
+  margin-block-end: $spacing-09;
 }
 
 .#{$block-class}__description {
   @include type-style('body-02');
 
-  margin-bottom: $spacing-07;
+  margin-block-end: $spacing-07;
 }
 
 // safari rendering fix
 .#{$block-class}__svg-container svg.#{$block-class}__svg {
-  width: 100%;
+  inline-size: 100%;
 }
 
 // svg theme styles

@@ -19,7 +19,7 @@
 $block-class: #{c4p-settings.$pkg-prefix}--button-menu;
 
 .#{$block-class} {
-  min-width: 160px;
+  min-inline-size: 160px;
   &.#{$block-class}__wrapper--primary,
   &.#{$block-class}__wrapper--primary.#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
     background-color: $button-primary;
@@ -48,10 +48,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--button-menu;
     @include type.type-style('body-compact-01');
 
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-05;
+    inline-size: 100%;
   }
 }
 

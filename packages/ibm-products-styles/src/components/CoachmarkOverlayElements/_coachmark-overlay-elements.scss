@@ -28,8 +28,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-elements;
 .#{$block-class} {
   &__element-stepped-media {
     /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
-    height: to-rem(128px);
-    margin-bottom: $spacing-05;
+    block-size: to-rem(128px);
+    margin-block-end: $spacing-05;
   }
 
   &__footer {
@@ -40,8 +40,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-elements;
   }
 
   &--controls-progress {
-    margin-right: auto;
     justify-self: flex-start;
+    margin-inline-end: auto;
     @include type.type-style('helper-text-01');
   }
 }

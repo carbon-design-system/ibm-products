@@ -31,8 +31,8 @@ $one-grid-column: calc(100% / 16);
 
   .#{$carousel} {
     display: flex;
-    min-height: 100%;
     flex-direction: column;
+    min-block-size: 100%;
 
     &__elements-container {
       display: flex;
@@ -47,9 +47,8 @@ $one-grid-column: calc(100% / 16);
 
   position: fixed;
   z-index: 6001;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
 
   #{$block}--auto-height-container {
     flex: 1;
@@ -64,12 +63,12 @@ $one-grid-column: calc(100% / 16);
   }
 
   &--body-grid {
-    height: 100%;
     padding: 0 !important;
+    block-size: 100%;
   }
 
   &--body-row {
-    height: 100%;
+    block-size: 100%;
   }
 
   &--progress {
@@ -77,7 +76,7 @@ $one-grid-column: calc(100% / 16);
   }
 
   &__carousel {
-    height: 100%;
+    block-size: 100%;
     .#{$carousel-item} {
       flex: 0 0 100% !important;
       scroll-snap-align: start;
@@ -85,10 +84,11 @@ $one-grid-column: calc(100% / 16);
   }
 
   &--container {
-    min-width: 47rem;
-    max-width: 82rem;
-    margin: calc($spacing-10 * 2) auto; // stylelint-disable-line carbon/layout-token-use
+    // stylelint-disable-line carbon/layout-token-use
+    margin: calc($spacing-10 * 2) auto;
     background-color: $background;
+    max-inline-size: 82rem;
+    min-inline-size: 47rem;
   }
 
   &--media-container {
@@ -96,18 +96,18 @@ $one-grid-column: calc(100% / 16);
   }
 
   &--media {
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
 
-    margin-right: calc($spacing-08 * -1);
+    margin-inline-end: calc($spacing-08 * -1);
     @include breakpoint-down(xlg) {
-      margin-right: calc($spacing-07 * -1);
+      margin-inline-end: calc($spacing-07 * -1);
     }
   }
 
   &--stepped-animated-media {
     overflow: hidden;
-    height: 100%;
+    block-size: 100%;
   }
 
   &--internal-body {
@@ -118,12 +118,12 @@ $one-grid-column: calc(100% / 16);
   // HEADER
   &--internal-header {
     position: relative;
-    min-height: $spacing-09;
-    margin-bottom: 0 !important;
     background-color: $background;
+    margin-block-end: 0 !important;
+    min-block-size: $spacing-09;
 
     &:empty {
-      min-height: 0;
+      min-block-size: 0;
     }
 
     h2 {
@@ -137,43 +137,43 @@ $one-grid-column: calc(100% / 16);
     }
 
     &--has-title {
-      border-bottom: 1px solid $border-subtle-01;
       background: $layer-01;
+      border-block-end: 1px solid $border-subtle-01;
 
       #{$block}--progress {
-        margin-top: 0;
+        margin-block-start: 0;
       }
     }
     > #{$block}--close-icon {
       position: absolute !important;
       z-index: 1;
-      top: 0;
-      right: 0;
-      width: $spacing-09;
+      inline-size: $spacing-09;
+      inset-block-start: 0;
+      inset-inline-end: 0;
     }
   }
 
   // FOOTER
   &--footer {
     display: flex;
-    width: 100%;
     flex-direction: row;
     justify-content: flex-end;
-    border-top: 1px solid $border-subtle-01;
     background: $background;
+    border-block-start: 1px solid $border-subtle-01;
+    inline-size: 100%;
 
     #{$block}--prev-btn,
     #{$block}--next-btn,
     #{$block}--start-btn {
-      width: calc($one-grid-column * 3);
-      min-width: 12.5rem;
+      inline-size: calc($one-grid-column * 3);
+      min-inline-size: 12.5rem;
       padding-block-end: $spacing-07;
     }
 
     #{$block}--skip-btn {
-      max-width: none;
       flex-grow: 1 !important;
-      padding-left: $spacing-07 !important;
+      max-inline-size: none;
+      padding-inline-start: $spacing-07 !important;
     }
   }
 
@@ -181,23 +181,23 @@ $one-grid-column: calc(100% / 16);
     display: flex;
     flex-direction: row;
     // flex: 1;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   // MODAL (settings exclusive of "FULL SCREEN")
   &--modal {
     #{$block}--content {
-      margin-top: 0;
+      margin-block-start: 0;
     }
 
     #{$block}--internal-header {
       &:has(> :nth-child(2)) {
-        min-height: initial;
+        min-block-size: initial;
       }
     }
 
     &:has(> :nth-child(1)) {
-      min-height: initial;
+      min-block-size: initial;
     }
   }
 
@@ -205,29 +205,30 @@ $one-grid-column: calc(100% / 16);
   &--full-screen {
     #{$block}--container {
       display: flex;
-      max-width: 100vw;
-      height: 100vh;
       flex-direction: column;
       padding: 0;
       margin: 0;
+      block-size: 100vh;
+      max-inline-size: 100vw;
     }
 
     // e.g. "IBM Cloud Pak | Product"
     // ..."IBM Cloud Pak"
     #{$block}--header {
       @include type.type-style('body-long-01');
-
-      height: $spacing-09;
-      padding-left: $spacing-05;
-      border-bottom: 1px solid $border-subtle-01;
       /* stylelint-disable-next-line carbon/theme-token-use */
       background-color: $gray-100;
+
+      block-size: $spacing-09;
+      border-block-end: 1px solid $border-subtle-01;
       /* stylelint-disable-next-line carbon/theme-token-use */
       color: $gray-10;
+      // overrides type style above
       /* stylelint-disable-next-line carbon/type-token-use */
-      font-weight: normal !important; // overrides type style above
+      font-weight: normal !important;
       /* stylelint-disable-next-line carbon/type-token-use */
       line-height: $spacing-09 !important;
+      padding-inline-start: $spacing-05;
 
       b {
         /* stylelint-disable-next-line carbon/type-token-use */
@@ -244,26 +245,26 @@ $one-grid-column: calc(100% / 16);
         margin: $spacing-10 $spacing-08 $spacing-04;
 
         @include breakpoint-down(xlg) {
-          margin-left: $spacing-07;
+          margin-inline-start: $spacing-07;
         }
       }
 
       &--has-title {
         #{$block}--progress {
-          margin-top: $spacing-06;
+          margin-block-start: $spacing-06;
         }
       }
 
       &:has(> :nth-child(1)) {
-        min-height: initial;
+        min-block-size: initial;
       }
     }
 
     #{$block}--footer {
       #{$block}--skip-btn {
-        padding-left: $spacing-08 !important;
+        padding-inline-start: $spacing-08 !important;
         @include breakpoint-down(xlg) {
-          padding-left: $spacing-07 !important;
+          padding-inline-start: $spacing-07 !important;
         }
       }
     }

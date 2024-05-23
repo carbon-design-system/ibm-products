@@ -14,10 +14,10 @@
 $block-class: #{$pkg-prefix}--simple-header;
 
 .#{$block-class} {
-  width: 100%;
   padding: $spacing-04 $spacing-07;
-  border-bottom: 1px solid $border-subtle-01;
   background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  inline-size: 100%;
 }
 
 .#{$block-class}__title {
@@ -26,7 +26,7 @@ $block-class: #{$pkg-prefix}--simple-header;
 
 .#{$block-class}__breadcrumbs + .#{$block-class}__title {
   // add margin top to the title if breadcrumbs exist
-  margin-top: $spacing-02;
+  margin-block-start: $spacing-02;
 }
 
 .#{$block-class}__breadcrumbs .#{$carbon-prefix}--breadcrumb-item,

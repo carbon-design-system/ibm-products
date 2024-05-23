@@ -13,11 +13,10 @@
 @mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
   &::after {
     position: absolute;
-    top: #{$top};
-    bottom: #{$bottom};
-    left: #{$left};
-    border-left: 1px solid #{$color};
+    border-inline-start: 1px solid #{$color};
     content: '';
+    inset-block: #{$top} #{$bottom};
+    inset-inline-start: #{$left};
   }
 }
 
@@ -32,10 +31,9 @@
   &::after {
     position: absolute;
     z-index: 1;
-    top: #{$top};
-    right: #{$right};
-    bottom: #{$bottom};
-    border-right: 1px solid #{$color};
+    border-inline-end: 1px solid #{$color};
     content: '';
+    inset-block: #{$top} #{$bottom};
+    inset-inline-end: #{$right};
   }
 }

@@ -12,18 +12,18 @@
 $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class} {
-  width: 80vw;
-  min-width: 16rem;
-  max-width: 48rem;
+  inline-size: 80vw;
+  max-inline-size: 48rem;
+  min-inline-size: 16rem;
 }
 
 .#{$block-class}__content p {
   @include type.type-style('body-01');
 
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }
 
 .#{$block-class}__content
   .#{c4p-settings.$carbon-prefix}--dropdown__wrapper:first-of-type {
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }

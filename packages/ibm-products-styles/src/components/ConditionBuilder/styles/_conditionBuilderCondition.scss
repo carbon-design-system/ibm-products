@@ -40,7 +40,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__text-ellipsis {
   display: block;
   overflow: hidden;
-  max-width: $spacing-13;
+  max-inline-size: $spacing-13;
   text-overflow: ellipsis;
   text-wrap: nowrap;
 }

@@ -19,19 +19,19 @@ $horizontal-drag-height: 6rem;
 
 .#{$drag-class} {
   position: relative;
-  width: 320px;
-  height: 3rem;
   padding: $spacing-03;
-  border-bottom: 1px solid $border-subtle;
   background-color: $layer;
+  block-size: 3rem;
+  border-block-end: 1px solid $border-subtle;
   cursor: grab;
+  inline-size: 320px;
   list-style-type: none;
 
   &.#{$drag-class}--horizontal {
-    width: 6rem;
-    height: $horizontal-drag-height;
-    border-right: 1px solid $border-subtle;
-    border-bottom: none;
+    block-size: $horizontal-drag-height;
+    border-block-end: none;
+    border-inline-end: 1px solid $border-subtle;
+    inline-size: 6rem;
   }
 
   &.#{$drag-class}:focus {
@@ -55,17 +55,17 @@ $horizontal-drag-height: 6rem;
 
 .#{$drag-class}__draggable-underlay {
   position: absolute;
-  top: 0;
-  width: 100%;
+  inline-size: 100%;
+  inset-block-start: 0;
 }
 
 .#{$drag-class}__draggable-underlay-item {
-  // must match draggable item size
-  width: 100%;
-  height: $spacing-09;
   border: 2px dashed $focus;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$blue-10;
+  block-size: $spacing-09;
+  // must match draggable item size
+  inline-size: 100%;
 }
 
 .#{$drag-class}__list-container {
@@ -75,9 +75,9 @@ $horizontal-drag-height: 6rem;
 .#{$drag-class}__list-container--grid,
 .#{$drag-class}__draggable-underlay--grid {
   display: grid;
-  max-width: 800px;
   grid-gap: var(--grid-gap);
   grid-template-columns: repeat(var(--col-count), 1fr);
+  max-inline-size: 800px;
 }
 
 .#{$drag-class}--type {
@@ -87,11 +87,11 @@ $horizontal-drag-height: 6rem;
 .#{$drag-class}__list-container--horizontal,
 .#{$drag-class}__draggable-underlay--horizontal {
   display: grid;
-  width: 100%;
   grid-auto-flow: column;
+  inline-size: 100%;
 }
 
 .#{$drag-class}__draggable-underlay--horizontal
   .#{$drag-class}__draggable-underlay-item {
-  height: $horizontal-drag-height;
+  block-size: $horizontal-drag-height;
 }

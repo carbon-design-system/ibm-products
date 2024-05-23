@@ -6,4 +6,5 @@
 //
 
 @use './carbon-imports';
+// stylelint-disable-next-line scss/load-no-partial-leading-underscore
 @use './_non-linear-reading';

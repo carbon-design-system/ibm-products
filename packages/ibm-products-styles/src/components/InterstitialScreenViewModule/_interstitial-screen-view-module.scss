@@ -33,7 +33,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen-view-module;
   &--heading {
     @include type.type-style('heading-05');
 
-    margin-bottom: $spacing-07;
+    margin-block-end: $spacing-07;
   }
 
   &--body {

@@ -16,21 +16,22 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__content-switcher button {
-  width: auto;
+  inline-size: auto;
 }
 
 .#{$story-class}__dummy-content {
-  position: relative; // used to raise the stacking context and check it still goes under the page header
-  padding-top: $spacing-05;
-  margin-top: $spacing-05;
+  // used to raise the stacking context and check it still goes under the page header
+  position: relative;
   background-color: $background;
   color: $text-primary;
+  margin-block-start: $spacing-05;
+  padding-block-start: $spacing-05;
 }
 
 .#{$story-class}__dummy-content-block {
-  min-height: 120vh;
   background: $layer-01;
   background-clip: content-box;
+  min-block-size: 120vh;
 }
 
 .#{$story-class}__dummy-content-text {
@@ -47,15 +48,15 @@ $story-class: 'page-header-stories';
 .#{$story-class}__app {
   position: relative;
   display: flex;
-  // min and max height needed to prevent scroll off screen (verify on in context page)
-  min-height: 100vh;
-  max-height: 100vh;
   flex-direction: column;
+  max-block-size: 100vh;
+  // min and max height needed to prevent scroll off screen (verify on in context page)
+  min-block-size: 100vh;
 }
 
 .#{$story-class}__viewport {
   overflow: hidden;
-  height: 100vh;
+  block-size: 100vh;
 }
 
 .#{$story-class}__viewport--scroll {
@@ -63,14 +64,14 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__viewport .#{$story-class}__content-container {
-  height: 100%;
+  block-size: 100%;
   overflow-y: auto;
 }
 
 .#{$story-class}__viewport
   .#{$story-class}__content-container--with-global-header {
-  height: calc(100% - #{$spacing-09});
-  margin-top: $spacing-09;
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
 }
 
 .#{$story-class}__viewport--scroll .#{$story-class}__content-container {
@@ -79,8 +80,8 @@ $story-class: 'page-header-stories';
 
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
-  max-height: 50vh;
   background-color: $background;
   box-shadow: 0 0 4px 1px $layer-accent-01;
   color: $text-primary;
+  max-block-size: 50vh;
 }

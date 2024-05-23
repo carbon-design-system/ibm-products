@@ -23,8 +23,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 @keyframes fade-in {
   0% {
     opacity: 0;
+    // the height of the notification panel
     // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(-38.5rem); // the height of the notification panel
+    transform: translateY(-38.5rem);
   }
 
   100% {
@@ -41,8 +42,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
   100% {
     opacity: 0;
+    // the height of the notification panel
     // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(-38.5rem); // the height of the notification panel
+    transform: translateY(-38.5rem);
   }
 }
 
@@ -51,24 +53,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
   position: fixed;
   z-index: 2;
-  top: $spacing-09;
-  right: 0;
   overflow: auto;
-  min-width: 20rem;
-  max-width: 22.75rem;
-  min-height: 38.5rem;
-  max-height: 38.5rem;
   background-color: $background;
   color: $text-primary;
+  inset-block-start: $spacing-09;
+  inset-inline-end: 0;
+  max-block-size: 38.5rem;
+  max-inline-size: 22.75rem;
+  min-block-size: 38.5rem;
+  min-inline-size: 20rem;
   transition: transform $duration-fast-02 motion(standard);
 
   .#{$block-class}__header-container {
     position: sticky;
     z-index: 2;
-    top: 0;
     padding: $spacing-03 $spacing-05 $spacing-05;
-    border-bottom: 1px solid $layer-02;
     background-color: $background;
+    border-block-end: 1px solid $layer-02;
+    inset-block-start: 0;
     .#{$block-class}__header-flex {
       display: flex;
       align-items: center;
@@ -93,11 +95,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
     position: sticky;
     z-index: 2;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: 4.8125rem;
     padding: $spacing-03 $spacing-05;
     background-color: $layer-01;
     color: $text-secondary;
+    // stylelint-disable-next-line carbon/layout-token-use
+    inset-block-start: 4.8125rem;
   }
   .#{$block-class}__notification:hover,
   .#{$block-class}__notification:focus {
@@ -114,31 +116,31 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   .#{$block-class}__notification {
     position: relative;
     display: flex;
-    width: 100%;
-    min-height: 6.25rem;
     align-items: flex-start;
     padding: $spacing-05;
     border: 0;
     background-color: $background;
     cursor: pointer;
-    text-align: left;
+    inline-size: 100%;
+    min-block-size: 6.25rem;
+    text-align: start;
     transition: background-color $duration-moderate-02 motion(standard);
     .#{$block-class}__notification-title {
-      margin-bottom: $spacing-02;
       color: $text-on-color;
+      margin-block-end: $spacing-02;
       @include font-weight('regular');
     }
     .#{$block-class}__notification-title.#{$block-class}__notification-title-unread {
-      margin-bottom: $spacing-02;
       color: $text-on-color;
+      margin-block-end: $spacing-02;
       @include font-weight('semibold');
     }
     .#{$block-class}__notifications-link {
       @include type.type-style('label-01');
     }
     .#{$block-class}__notification-status-icon {
-      min-width: 1rem;
-      margin-right: $spacing-03;
+      margin-inline-end: $spacing-03;
+      min-inline-size: 1rem;
       &.#{$block-class}__notification-status-icon-error {
         fill: $support-error;
       }
@@ -154,7 +156,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     }
     .#{$block-class}__notification-content {
       .#{$block-class}__notification-time-label {
-        margin-bottom: $spacing-03;
+        margin-block-end: $spacing-03;
       }
       .#{$block-class}__notification-time-label,
       .#{$block-class}__notification-description {
@@ -179,8 +181,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       .#{$block-class}__notification-read-less-button {
         @include type.type-style('label-01');
 
-        min-width: 5.5rem;
         padding: 0;
+
+        min-inline-size: 5.5rem;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
           // stylelint-disable-next-line carbon/motion-easing-use
@@ -207,14 +210,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     }
     .#{$block-class}__dismiss-single-button {
       position: absolute;
-      top: 0;
-      right: 0;
       display: flex;
-      min-width: 2rem;
       align-items: center;
       justify-content: center;
       padding: 0;
       color: $text-primary;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      min-inline-size: 2rem;
       opacity: 0;
 
       /* stylelint-disable-next-line max-nesting-depth */
@@ -228,12 +231,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   .#{$block-class}__notification-yesterday:not(:first-of-type):before,
   .#{$block-class}__notification-previous:not(:first-of-type):before {
     position: absolute;
-    top: 0;
-    width: calc(100% - (2 * #{$spacing-05}));
-    height: 1px;
     margin: 0 auto;
     background-color: $layer-02;
+    block-size: 1px;
     content: '';
+    inline-size: calc(100% - (2 * #{$spacing-05}));
+    inset-block-start: 0;
     transition: background-color $duration-moderate-02 motion(standard);
   }
   .#{$block-class}__notification-today:hover
@@ -246,45 +249,45 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   }
   .#{$block-class}__main-section-empty.#{$block-class}__main-section {
     display: flex;
-    height: 100%;
-    min-height: initial;
     align-items: center;
     justify-content: center;
-    margin-top: $spacing-13;
+    block-size: 100%;
+    margin-block-start: $spacing-13;
+    min-block-size: initial;
     .#{c4p-settings.$pkg-prefix}-subtext {
       @include type.type-style('body-compact-01');
     }
   }
   .#{$block-class}__main-section {
-    min-height: 498px;
+    min-block-size: 498px;
   }
   .#{$block-class}__bottom-actions {
     position: sticky;
     z-index: 2;
-    bottom: 0;
     display: flex;
-    height: 2.5rem;
-    min-height: 2.5rem;
     align-items: center;
-    border-top: 1px solid $layer-02;
     background-color: $background;
+    block-size: 2.5rem;
+    border-block-start: 1px solid $layer-02;
+    inset-block-end: 0;
+    min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
-      width: 100%;
-      max-width: calc(100% - 2.5rem);
-      height: 2.5rem;
-      min-height: 2.5rem;
-      border-right: 1px solid $layer-02;
+      block-size: 2.5rem;
+      border-inline-end: 1px solid $layer-02;
       color: $text-primary;
+      inline-size: 100%;
+      max-inline-size: calc(100% - 2.5rem);
+      min-block-size: 2.5rem;
     }
     .#{$block-class}__settings-button {
       display: flex;
-      min-width: 2.5rem;
-      height: 2.5rem;
-      min-height: 2.5rem;
       align-items: center;
       justify-content: center;
       padding: 0;
+      block-size: 2.5rem;
       color: $text-primary;
+      min-block-size: 2.5rem;
+      min-inline-size: 2.5rem;
     }
     .#{$block-class}__settings-button
       .#{c4p-settings.$carbon-prefix}--btn__icon {

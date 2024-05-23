@@ -46,22 +46,22 @@ $purple: #7f3ae7;
 }
 // layout: wide, with image
 .#{$block-class}__wide.#{$block-class}__has-media {
-  padding-right: $spacing-09;
+  padding-inline-end: $spacing-09;
 }
 
 .#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media {
-  padding-left: $spacing-10;
+  padding-inline-start: $spacing-10;
 }
 
 .#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media img {
   display: block;
-  height: $media-height;
+  block-size: $media-height;
 }
 
 .#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media svg {
+  block-size: $media-height !important;
   // Overrides the inline CSS of "100%".
-  width: $media-width !important;
-  height: $media-height !important;
+  inline-size: $media-width !important;
 }
 
 // layout only: narrow
@@ -71,20 +71,20 @@ $purple: #7f3ae7;
 }
 // layout: narrow, with image
 .#{$block-class}__narrow.#{$block-class}__has-media {
-  padding-top: $spacing-07;
-  padding-right: $spacing-05;
+  padding-block-start: $spacing-07;
+  padding-inline-end: $spacing-05;
 }
 
 .#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__media {
-  padding-bottom: $spacing-05;
+  padding-block-end: $spacing-05;
 
   img {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
 .#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__content {
-  padding-right: $spacing-05;
+  padding-inline-end: $spacing-05;
 }
 
 .#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__footer {
@@ -93,7 +93,7 @@ $purple: #7f3ae7;
 .#{$block-class}__narrow.#{$block-class}__has-media
   .#{$block-class}__footer
   .#{$block-class}__close-btn {
-  margin-right: calc(-1 * $spacing-05);
+  margin-inline-end: calc(-1 * $spacing-05);
 }
 
 // All links in use by this component and provided by the user must reflect the 'dark' theme.
@@ -121,23 +121,24 @@ $purple: #7f3ae7;
 .#{$block-class}__body p {
   @include type-style('body-short-01');
 
-  margin-bottom: $spacing-03;
   font-size: inherit;
   line-height: inherit;
 
+  margin-block-end: $spacing-03;
+
   &:last-of-type {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 .#{$block-class}__body .#{$block-class}__secondary-btn {
-  margin-top: $spacing-03;
+  margin-block-start: $spacing-03;
 }
 .#{$block-class}__body
   .#{$block-class}__secondary-btn
   .#{$block-class}__button {
-  margin-left: calc(-1 * $spacing-05);
   color: $blue-30;
+  margin-inline-start: calc(-1 * $spacing-05);
 
   &:active,
   &:hover {
@@ -148,7 +149,7 @@ $purple: #7f3ae7;
 
 .#{$block-class}__footer {
   display: flex;
-  padding-top: $spacing-05;
+  padding-block-start: $spacing-05;
 
   &:empty {
     display: none;
@@ -165,15 +166,15 @@ $purple: #7f3ae7;
 
 .#{$block-class}__icon-idea {
   position: absolute;
-  width: to-rem(20px);
   color: $white-0;
+  inline-size: to-rem(20px);
   inset: $spacing-05 0 0 $spacing-05;
 }
 
 .#{$block-class}__close-icon-wrapper {
   position: absolute;
-  top: 0;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
 }
 
 .#{$block-class} .#{$block-class}__close-icon {
@@ -221,10 +222,10 @@ $purple: #7f3ae7;
   // Repeating here.
   svg {
     position: absolute;
-    right: 1rem;
-    width: 1rem;
-    height: 1rem;
     flex-shrink: 0;
+    block-size: 1rem;
+    inline-size: 1rem;
+    inset-inline-end: 1rem;
   }
 }
 
@@ -233,9 +234,9 @@ $purple: #7f3ae7;
 // - insert 1 rem of more "space" on the left.
 // - move icon 1 rem more to the right.
 .#{$block-class}__wide.#{$block-class}__with-left-gutter {
-  padding-left: $spacing-10;
+  padding-inline-start: $spacing-10;
 }
 .#{$block-class}__wide.#{$block-class}__with-left-gutter
   .#{$block-class}__icon-idea {
-  left: $spacing-07;
+  inset-inline-start: $spacing-07;
 }

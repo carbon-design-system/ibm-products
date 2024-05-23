@@ -21,25 +21,25 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 
 .#{$create-side-panel-block-class}.#{$side-panel-block-class}
   .#{$create-side-panel-block-class}__content-text {
-  padding-right: calc(20% - #{$spacing-05});
+  padding-inline-end: calc(20% - #{$spacing-05});
 }
 
 .#{c4p-settings.$carbon-prefix}--form.#{$create-side-panel-block-class}__form {
-  padding-top: $spacing-05;
+  padding-block-start: $spacing-05;
 }
 
 .#{$create-side-panel-block-class}__form.#{c4p-settings.$carbon-prefix}--fieldset {
-  padding-top: $spacing-03;
+  padding-block-start: $spacing-03;
 }
 
 .#{$create-side-panel-block-class}__form > * {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{$create-side-panel-block-class}__form-title-text {
   @include type.type-style('heading-compact-02');
 
-  padding-bottom: $spacing-03;
+  padding-block-end: $spacing-03;
 }
 
 .#{$create-side-panel-block-class}__form-description-text {

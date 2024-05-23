@@ -35,20 +35,21 @@ $sizes: (
 @mixin size($size) {
   $_size: map-get($sizes, $size);
 
-  width: $_size;
-  height: $_size;
+  block-size: $_size;
+
+  inline-size: $_size;
 }
 
 .#{$block-class} {
   position: relative;
   display: flex;
-  width: 4rem;
-  height: 4rem;
   align-items: center;
   justify-content: center;
   border: 0.5px solid transparent;
   border-radius: 100%;
+  block-size: 4rem;
   color: $text-inverse;
+  inline-size: 4rem;
   outline: none;
   outline-offset: 3px;
 }

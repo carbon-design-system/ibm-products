@@ -34,6 +34,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-label;
 }
 
 .#{$block-class}__count {
-  margin-left: $spacing-04;
   color: $text-secondary;
+  margin-inline-start: $spacing-04;
 }

@@ -48,7 +48,7 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
   line-height: inherit;
 }
 
-.#{$popover-block-class} {
+.#{$block-class} .#{$popover-block-class} {
   max-width: $spacing-05;
   margin: 0 auto;
 }

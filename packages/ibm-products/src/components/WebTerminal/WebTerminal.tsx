@@ -38,6 +38,7 @@ const defaults = {
   documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
   isInitiallyOpen: false,
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 interface Action {
@@ -80,6 +81,11 @@ interface WebTerminalProps extends PropsWithChildren {
    * Optionally pass if the web terminal should be open by default
    */
   isInitiallyOpen?: boolean;
+
+  /**
+   * Specifies aria label for Web terminal
+   */
+  webTerminalAriaLabel?: string;
 }
 
 /**
@@ -97,7 +103,7 @@ export let WebTerminal = React.forwardRef(
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
       isInitiallyOpen = defaults.isInitiallyOpen,
-
+      webTerminalAriaLabel = defaults.webTerminalAriaLabel,
       // Collect any other property values passed in.
       ...rest
     }: WebTerminalProps,
@@ -176,7 +182,10 @@ export let WebTerminal = React.forwardRef(
         }}
         onAnimationEnd={onAnimationEnd}
       >
-        <header className={`${blockClass}__bar`}>
+        <header
+          aria-label={webTerminalAriaLabel}
+          className={`${blockClass}__bar`}
+        >
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
@@ -279,4 +288,9 @@ WebTerminal.propTypes = {
    * Optionally pass if the web terminal should be open by default
    */
   isInitiallyOpen: PropTypes.bool,
+
+  /**
+   * Specifies aria label for Web terminal
+   */
+  webTerminalAriaLabel: PropTypes.string,
 };

@@ -21,8 +21,15 @@ const useNestedRows = (hooks) => {
       const { expandedRowIds } = initialState;
       if (expandedRowIds) {
         Object.keys(expandedRowIds).forEach((key) => {
-          const row = rows.filter((r) => r.id.toString() === key.toString());
-          if (row.length && key.toString() === row[0].id.toString()) {
+          const row = rows.filter(
+            (r) =>
+              r.id.toString() === key.toString() ||
+              r.original?.id?.toString() === key.toString()
+          );
+          if (
+            (row.length && key.toString() === row[0].id.toString()) ||
+            (row.length && key.toString() === row[0].original?.id?.toString())
+          ) {
             row[0].toggleRowExpanded();
           }
         });

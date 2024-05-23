@@ -232,7 +232,9 @@ SingleLevelNestedRowsUsageStory.args = {
 
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
+  const [data] = useState(
+    makeData(10, 5, 2, 2, { id: 'testing-user-provided-id' })
+  );
   const datagridState = useDatagrid(
     {
       columns,
@@ -323,7 +325,8 @@ NestedRowsInitialUsageStory.args = {
   ...nestedRowsControlProps,
   initialState: {
     expandedRowIds: {
-      1: true,
+      'testing-user-provided-id__1': true,
+      // 1: true,
       3: true,
     },
   },

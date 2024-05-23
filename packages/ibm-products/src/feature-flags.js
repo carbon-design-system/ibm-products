@@ -9,9 +9,9 @@ import * as FeatureFlags from '@carbon/feature-flags';
 
 FeatureFlags.merge({
   'default-portal-target-body': true,
-  'Datagrid.useInlineEdit': false,
-  'Datagrid.useEditableCell': false,
-  'Datagrid.useCustomizeColumns': false,
+  'enable-datagrid-useInlineEdit': false,
+  'enable-datagrid-useEditableCell': false,
+  'enable-datagrid-useCustomizeColumns': false,
   'ExampleComponent.secondaryIcon': false,
   'ExampleComponent.useExample': false,
   'enable-example-flag': false,

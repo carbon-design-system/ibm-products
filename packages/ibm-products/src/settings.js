@@ -1,4 +1,3 @@
-import '../src/feature-flags';
 import { Canary } from './components/_Canary';
 
 import pkgSettings from './global/js/package-settings';

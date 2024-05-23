@@ -67,17 +67,19 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
-  const enableEditableCell = useFeatureFlag('Datagrid.useEditableCell');
-  const enableInlineEdit = useFeatureFlag('Datagrid.useInlineEdit');
-  const enableCustomizeCols = useFeatureFlag('Datagrid.useCustomizeColumns');
+  const enableEditableCell = useFeatureFlag('enable-datagrid-useEditableCell');
+  const enableInlineEdit = useFeatureFlag('enable-datagrid-useInlineEdit');
+  const enableCustomizeCols = useFeatureFlag(
+    'enable-datagrid-useCustomizeColumns'
+  );
 
   useEffect(() => {
     dispatch({
       type: 'SET_FEATURE_FLAGS',
       payload: {
-        'Datagrid.useEditableCell': enableEditableCell,
-        'Datagrid.useInlineEdit': enableInlineEdit,
-        'Datagrid.useCustomizeColumns': enableCustomizeCols,
+        'enable-datagrid-useEditableCell': enableEditableCell,
+        'enable-datagrid-useInlineEdit': enableInlineEdit,
+        'enable-datagrid-useCustomizeColumns': enableCustomizeCols,
       },
     });
   }, [dispatch, enableEditableCell, enableCustomizeCols, enableInlineEdit]);
@@ -85,8 +87,8 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
   useEffect(() => {
     if (
       featureFlags &&
-      (featureFlags?.['Datagrid.useEditableCell'] ||
-        featureFlags?.['Datagrid.useInlineEdit'])
+      (featureFlags?.['enable-datagrid-useEditableCell'] ||
+        featureFlags?.['enable-datagrid-useInlineEdit'])
     ) {
       console.error(
         `Datagrid useEditableCell/useInlineEdit extension has not been enabled via feature flag.`

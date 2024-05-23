@@ -208,7 +208,7 @@ const ColumnCustomizationUsage = ({ ...args }) => {
   return (
     <WithFeatureFlags
       flags={{
-        'Datagrid.useCustomizeColumns': true,
+        'enable-datagrid-useCustomizeColumns': true,
       }}
     >
       <Datagrid datagridState={datagridState} />
@@ -245,7 +245,6 @@ ColumnCustomizationUsageStory.argTypes = {
 };
 ColumnCustomizationUsageStory.args = {
   ...columnCustomizationControlProps,
-  featureFlags: ['Datagrid.useCustomizeColumns'],
 };
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
@@ -332,7 +331,7 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
   return (
     <WithFeatureFlags
       flags={{
-        'Datagrid.useCustomizeColumns': true,
+        'enable-datagrid-useCustomizeColumns': true,
       }}
     >
       <Datagrid datagridState={datagridState} />
@@ -364,5 +363,4 @@ ColumnCustomizationWithFixedColumnAndDisabledStory.argTypes = {
 };
 ColumnCustomizationWithFixedColumnAndDisabledStory.args = {
   ...columnCustomizationControlProps,
-  featureFlags: ['Datagrid.useCustomizeColumns'],
 };

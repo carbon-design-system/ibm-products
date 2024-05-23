@@ -22,7 +22,10 @@ const TearsheetWrapper = ({ instance }) => {
   const { featureFlags } = state || {};
 
   useEffect(() => {
-    if (featureFlags && !featureFlags?.['Datagrid.useCustomizeColumns']) {
+    if (
+      featureFlags &&
+      !featureFlags?.['enable-datagrid-useCustomizeColumns']
+    ) {
       console.error(
         `Datagrid useCustomizeColumns extension has not been enabled via feature flag.`
       );

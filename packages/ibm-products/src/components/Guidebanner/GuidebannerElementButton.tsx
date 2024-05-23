@@ -30,11 +30,20 @@ interface GuidebannerElementButtonProps {
   className?: string;
 
   /**
+   * Provide a description for the icon.
+   */
+  iconDescription?: string;
+
+  /**
    * If type is "primary", then return a tertiary button with the "crossroads" icon,
    * else return a ghost button.
    */
   type?: string;
 }
+
+const defaults = {
+  iconDescription: 'Crossroads',
+};
 
 /**
  * One of two buttons styled specifically for the GuidebannerElement.
@@ -44,7 +53,13 @@ export let GuidebannerElementButton = React.forwardRef<
   GuidebannerElementButtonProps
 >(
   (
-    { children, className, type, ...rest }: GuidebannerElementButtonProps,
+    {
+      children,
+      className,
+      iconDescription = defaults.iconDescription,
+      type,
+      ...rest
+    }: GuidebannerElementButtonProps,
     ref
   ) => {
     if (type === 'primary') {
@@ -52,7 +67,7 @@ export let GuidebannerElementButton = React.forwardRef<
         <Button
           {...rest}
           className={cx(blockClass, className)}
-          iconDescription={'Crossroads'}
+          iconDescription={iconDescription}
           kind="tertiary"
           ref={ref}
           renderIcon={() => <Crossroads size={16} />}

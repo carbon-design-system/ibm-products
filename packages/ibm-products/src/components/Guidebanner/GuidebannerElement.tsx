@@ -29,7 +29,7 @@ interface GuidebannerElementProps {
   /**
    * The description of the element.
    */
-  description: string | ReactNode;
+  description: ReactNode;
   /**
    * The title of the element.
    */

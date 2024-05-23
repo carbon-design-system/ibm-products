@@ -15,8 +15,8 @@ import index from './index.scss?inline';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
-// pkg._silenceWarnings(true);
-// pkg.setAllComponents(true);
+pkg._silenceWarnings(true);
+pkg.setAllComponents(true);
 
 const Style = ({ children, styles }) => (
   <>

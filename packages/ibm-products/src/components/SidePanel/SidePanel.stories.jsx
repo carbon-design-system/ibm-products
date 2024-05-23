@@ -492,6 +492,40 @@ const SlideInTemplate = ({ actions, slug, ...args }) => {
   );
 };
 
+const ReturnFocusToOpenButtonTemplate = ({
+  minimalContent,
+  actions,
+  slug,
+  ...args
+}) => {
+  const [open, setOpen] = useState(false);
+  const testRef = useRef();
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        actions={actionSets[actions]}
+        ref={testRef}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        {!minimalContent && <ChildrenContent />}
+      </SidePanel>
+    </>
+  );
+};
+
 export const SlideOver = SlideOverTemplate.bind({});
 SlideOver.args = {
   includeOverlay: true,
@@ -547,6 +581,11 @@ export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
 SpecifyElementToHaveInitialFocus.args = {
   actions: 0,
   selectorPrimaryFocus: '#side-panel-story-text-input-a',
+  ...defaultStoryProps,
+};
+
+export const ReturnFocusToOpenButton = ReturnFocusToOpenButtonTemplate.bind({});
+ReturnFocusToOpenButton.args = {
   ...defaultStoryProps,
 };
 

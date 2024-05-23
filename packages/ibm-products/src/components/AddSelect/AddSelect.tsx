@@ -5,41 +5,95 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelectBody } from './AddSelectBody';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
+import { Filter, Item, Theme } from './types';
 const componentName = 'AddSelect';
 
-export let AddSelect = forwardRef(({ items, globalFilters, ...props }, ref) => {
-  const useNormalizedItems = !!items.entries.find((item) => item.children);
-  const normalizedItems = useNormalizedItems ? normalize(items) : null;
-  const globalFilterOpts =
-    props.multi && globalFilters?.length
-      ? getGlobalFilterValues(globalFilters, normalizedItems)
-      : null;
-  const defaultModifiers =
-    props.multi && items.modifiers
-      ? items.entries.map((item) => {
-          const modifierAttribute = items.modifiers.id;
-          return {
-            id: item.id,
-            [modifierAttribute]: item[modifierAttribute],
-          };
-        })
-      : [];
-  return (
-    <AddSelectBody
-      {...props}
-      ref={ref}
-      items={items}
-      normalizedItems={normalizedItems}
-      useNormalizedItems={useNormalizedItems}
-      globalFilterOpts={globalFilterOpts}
-      defaultModifiers={defaultModifiers}
-    />
-  );
-});
+export interface AddSelectProps {
+  className?: string;
+  clearFiltersText?: string;
+  closeIconDescription?: string;
+  columnInputPlaceholder?: string;
+  description: string;
+  filterByLabel?: string;
+  globalFilters?: Filter[];
+  globalFiltersIconDescription?: string;
+  globalFiltersLabel?: string;
+  globalFiltersPlaceholderText?: string;
+  globalFiltersPrimaryButtonText?: string;
+  globalFiltersSecondaryButtonText?: string;
+  globalSearchLabel: string;
+  globalSearchPlaceholder?: string;
+  globalSortBy?: Array<any>;
+  illustrationTheme?: Theme;
+  influencerTitle?: string;
+  items: Item;
+  itemsLabel: string;
+  metaIconDescription?: string;
+  metaPanelTitle?: string;
+  multi: boolean;
+  navIconDescription?: string;
+  noResultsDescription: string;
+  noResultsTitle: string;
+  noSelectionDescription?: string;
+  noSelectionTitle?: string;
+  onClose: () => void;
+  onCloseButtonText: string;
+  onSubmit: () => void;
+  onSubmitButtonText: string;
+  open: boolean;
+  /**
+   * portal target for the all tags modal
+   */
+  portalTarget?: ReactNode;
+  searchResultsTitle?: string;
+  sortByLabel?: string;
+  title: string;
+}
+
+export const AddSelect = forwardRef(
+  (
+    { items, globalFilters, ...props }: AddSelectProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
+    const useNormalizedItems = !!items.entries.find((item) => item.children);
+    const normalizedItems = useNormalizedItems ? normalize(items) : null;
+    const globalFilterOpts =
+      props.multi && globalFilters?.length
+        ? getGlobalFilterValues(globalFilters, normalizedItems)
+        : null;
+    const defaultModifiers =
+      props.multi && items.modifiers
+        ? items.entries.map((item) => {
+            const modifierAttribute = items?.modifiers?.id;
+            const modifier = {
+              id: item.id,
+            };
+
+            return {
+              ...modifier,
+              ...(modifierAttribute && {
+                [modifierAttribute]: item[modifierAttribute],
+              }),
+            };
+          })
+        : [];
+    return (
+      <AddSelectBody
+        {...props}
+        ref={ref}
+        items={items}
+        normalizedItems={normalizedItems}
+        useNormalizedItems={useNormalizedItems}
+        globalFilterOpts={globalFilterOpts}
+        defaultModifiers={defaultModifiers}
+      />
+    );
+  }
+);
 
 AddSelect.propTypes = {
   className: PropTypes.string,
@@ -48,6 +102,7 @@ AddSelect.propTypes = {
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string.isRequired,
   filterByLabel: PropTypes.string,
+  /**@ts-ignore */
   globalFilters: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -64,6 +119,7 @@ AddSelect.propTypes = {
   globalSortBy: PropTypes.array,
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
+  /**@ts-ignore */
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
       id: PropTypes.string,

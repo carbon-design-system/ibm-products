@@ -8,11 +8,7 @@
 
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
-import {
-  expectWarn,
-  expectWarnAsync,
-  expectMultipleWarn,
-} from '../../global/js/utils/test-helper';
+import { expectWarn, expectWarnAsync } from '../../global/js/utils/test-helper';
 import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -491,11 +487,8 @@ describe(CreateTearsheet.displayName, () => {
     }));
 
   it('should render an invalid create tearsheet', async () =>
-    expectMultipleWarn(
-      [
-        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
-        `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
-      ],
+    expectWarn(
+      `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       () => {
         renderInvalidCreateTearsheet(defaultProps);
       }

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ProgressIndicator, ProgressStep } from '@carbon/react';
@@ -18,9 +18,39 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencer';
 
-export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
+interface Step {
+  introStep?: boolean;
+  secondaryLabel?: string;
+  shouldIncludeStep?: boolean;
+  title?: ReactNode;
+}
+interface CreateInfluencerProps {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * Provide the current step number.
+   */
+  currentStep: number;
+  /**
+   * Provide the Set Data.
+   */
+  stepData: Step[];
+  /**
+   * Title.
+   */
+  title?: string | undefined;
+}
+
+export const CreateInfluencer = ({
+  className,
+  currentStep,
+  stepData,
+  title,
+}: PropsWithChildren<CreateInfluencerProps>) => {
   const getNumberOfDynamicStepsBeforeCurrentStep = (array, key) => {
-    const dynamicSteps = [];
+    const dynamicSteps: any[] = [];
     array.forEach((item, index) => {
       if (array[index]?.[key] === false && index <= currentStep - 1) {
         dynamicSteps.push(item);
@@ -62,8 +92,8 @@ export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
                 <ProgressStep
                   label={step.title}
                   key={stepIndex}
-                  secondaryLabel={step.secondaryLabel}
-                  invalid={step.invalid}
+                  secondaryLabel={step.secondaryLabel || undefined}
+                  invalid={(step as any).invalid}
                 />
               );
             })}

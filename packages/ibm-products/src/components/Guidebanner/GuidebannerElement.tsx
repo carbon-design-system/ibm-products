@@ -21,7 +21,7 @@ interface GuidebannerElementProps {
    * An optional button can be rendered below the description.
    * This can be a link, button, Coachmark button, etc.
    */
-  button: ReactNode;
+  button?: ReactNode;
   /**
    * Provide an optional class to be applied to the containing node.
    */

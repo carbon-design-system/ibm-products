@@ -321,6 +321,11 @@ Tearsheet.propTypes = {
   label: PropTypes.node,
 
   /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef: PropTypes.any,
+
+  /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom
    * of the header area of the tearsheet.
    */

@@ -291,7 +291,7 @@ export let DataSpreadsheet = React.forwardRef(
                   activeCellCoordinates?.column
                 ]
               : null;
-          setActiveCellContent(activeCellFullData.render('Cell'));
+          setActiveCellContent(activeCellFullData?.render('Cell') ?? null);
         }
         if (
           (activeCellCoordinates && activeCellCoordinates?.row === 'header') ||

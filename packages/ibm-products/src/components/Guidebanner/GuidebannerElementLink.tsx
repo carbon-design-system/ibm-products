@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Link } from '@carbon/react';
@@ -17,15 +17,31 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element-link`;
 const componentName = 'GuidebannerElementLink';
 
+interface GuidebannerElementLinkProps {
+  /**
+   * Provide the contents of the GuidebannerElementLink.
+   */
+  children: ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
+
 /**
  * A link styled specifically for the GuidebannerElement.
  */
-export let GuidebannerElementLink = ({ children, className, ...rest }) => {
+export let GuidebannerElementLink = React.forwardRef<
+  Link,
+  GuidebannerElementLinkProps
+>(({ children, className, ...rest }: GuidebannerElementLinkProps, ref) => {
   return (
     <Link
       {...rest}
       className={cx(blockClass, className)}
       kind="ghost"
+      ref={ref}
       role="link"
       size="md"
       {...getDevtoolsProps(componentName)}
@@ -33,7 +49,7 @@ export let GuidebannerElementLink = ({ children, className, ...rest }) => {
       {children}
     </Link>
   );
-};
+});
 
 // Return a placeholder if not released and not enabled by feature flag
 GuidebannerElementLink = pkg.checkComponentEnabled(

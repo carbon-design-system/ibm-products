@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -103,6 +99,7 @@
     "erroremptystate",
     "exportmodal",
     "expressivecard",
+    "fieldsets",
     "fullpageerror",
     "gridcell",
     "guidebanner",
@@ -114,6 +111,7 @@
     "interstitialscreenview",
     "importmodal",
     "inlineedit",
+    "noninteractive",
     "inlinetip",
     "listbox",
     "loglevel",
@@ -122,7 +120,9 @@
     "nonlinearreading",
     "noreply",
     "overridable",
+    "overscan",
     "overscroll",
+    "pageload",
     "pconsole",
     "posinset",
     "Prefs",

@@ -9,26 +9,18 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { pkg } from '../../../packages/ibm-products/src/settings';
 
-test.describe('CreateTearsheetNarrow @avt', () => {
+test.describe('DataSpreadsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'CreateTearsheetNarrow',
-      id: 'ibm-products-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
+      component: 'DataSpreadsheet',
+      id: 'ibm-products-components-data-spreadsheet-dataspreadsheet--data-spreadsheet',
       globals: {
         carbonTheme: 'white',
       },
     });
-
-    await page.getByText('Open CreateTearsheetNarrow').click();
-
-    await page
-      .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
-      .screenshot({ animations: 'disabled' });
-
     await expect(page).toHaveNoACViolations(
-      'CreateTearsheetNarrow @avt-default-state'
+      'DataSpreadsheet @avt-default-state'
     );
   });
 });

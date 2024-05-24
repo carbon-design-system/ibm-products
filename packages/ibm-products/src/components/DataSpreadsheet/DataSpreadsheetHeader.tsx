@@ -178,6 +178,12 @@ export const DataSpreadsheetHeader = forwardRef(
           scrollContainer?.clientHeight &&
           scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
         const scrollBarValue = hasScrollBar ? 0 : scrollBarSize;
+
+        // fix for a11y violation element_scrollable_tabbable
+        if (!scrollContainer?.getAttribute('tabIndex')) {
+          scrollContainer?.setAttribute('tabIndex', '0');
+        }
+
         setScrollBarSizeValue(scrollBarValue);
       }
     }, [cellSize, ref, scrollBarSize, previousState?.cellSize]);

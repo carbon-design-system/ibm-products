@@ -9,26 +9,18 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { pkg } from '../../../packages/ibm-products/src/settings';
 
-test.describe('CreateTearsheetNarrow @avt', () => {
+test.describe('NotificationsEmptyState @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
-      component: 'CreateTearsheetNarrow',
-      id: 'ibm-products-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
+      component: 'NotificationsEmptyState',
+      id: 'ibm-products-patterns-empty-state-notificationsemptystate--default',
       globals: {
         carbonTheme: 'white',
       },
     });
-
-    await page.getByText('Open CreateTearsheetNarrow').click();
-
-    await page
-      .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
-      .screenshot({ animations: 'disabled' });
-
     await expect(page).toHaveNoACViolations(
-      'CreateTearsheetNarrow @avt-default-state'
+      'NotificationsEmptyState @avt-default-state'
     );
   });
 });

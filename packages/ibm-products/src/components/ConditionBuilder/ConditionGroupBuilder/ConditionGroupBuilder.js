@@ -21,7 +21,7 @@ const ConditionGroupBuilder = ({
   conditionBuilderRef,
   className,
 }) => {
-  const onRemoveHandler = (conditionId, e) => {
+  const onRemoveHandler = (conditionId, evt) => {
     if (group.conditions.length > 1) {
       onChange({
         ...group,
@@ -29,9 +29,9 @@ const ConditionGroupBuilder = ({
           (condition) => conditionId !== condition.id
         ),
       });
-      handleFocusOnClose(e);
+      handleFocusOnClose(evt);
     } else {
-      onRemove(e);
+      onRemove(evt);
     }
   };
 
@@ -74,10 +74,12 @@ const ConditionGroupBuilder = ({
     );
   };
 
-  const handleFocusOnClose = (e) => {
-    let previousClose = e.currentTarget
-      ?.closest('[role="row"]')?.parentElement
-      ?.previousSibling?.querySelector('[data-name="closeCondition"]');
+  const handleFocusOnClose = (evt) => {
+    let previousClose = evt.currentTarget
+      ?.closest('[role="row"]')
+      ?.parentElement?.previousSibling?.querySelector(
+        '[data-name="closeCondition"]'
+      );
 
     if (previousClose) {
       previousClose.focus();
@@ -97,7 +99,7 @@ const ConditionGroupBuilder = ({
             {/* This condition is for tree variant where there will be subgroups inside each group */}
             {eachCondition.conditions && (
               <ConditionGroupBuilder
-                className={`${blockClass}__condition-builder__group`}
+                className={`${blockClass}__group`}
                 aria={{
                   level: aria.level + 1,
                   posinset: conditionIndex + 1,
@@ -107,8 +109,8 @@ const ConditionGroupBuilder = ({
                 onChange={(updatedCondition) => {
                   onChangeHandler(updatedCondition, conditionIndex);
                 }}
-                onRemove={(e) => {
-                  onRemoveHandler(eachCondition.id, e);
+                onRemove={(evt) => {
+                  onRemoveHandler(eachCondition.id, evt);
                 }}
                 conditionBuilderRef={conditionBuilderRef}
               />
@@ -133,8 +135,8 @@ const ConditionGroupBuilder = ({
                   onChangeHandler(updatedConditions, conditionIndex);
                 }}
                 addConditionHandler={addConditionHandler}
-                onRemove={(e) => {
-                  onRemoveHandler(eachCondition.id, e);
+                onRemove={(evt) => {
+                  onRemoveHandler(eachCondition.id, evt);
                 }}
                 onConnectorOperatorChange={(op) => {
                   onChange({

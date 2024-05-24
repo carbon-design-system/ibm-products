@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const checkForHoldingKey = (event, key) => {
+export const checkForHoldingKey = (evt, key) => {
   // possible key inputs: altKey,ctrlKey,metaKey,shiftKey
   if (key === 'cmd') {
-    return event.metaKey || event.ctrlKey;
-  } else {
-    return event[key];
+    return evt.metaKey || evt.ctrlKey;
   }
+  return evt[key];
 };

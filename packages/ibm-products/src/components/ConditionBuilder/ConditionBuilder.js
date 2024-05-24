@@ -71,6 +71,10 @@ export let ConditionBuilder = React.forwardRef(
     const localRef = useRef();
     const conditionBuilderRef = ref || localRef;
 
+    const handleKeyDownHandler = (evt) => {
+      handleKeyDown(evt, conditionBuilderRef);
+    };
+
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -98,7 +102,7 @@ export let ConditionBuilder = React.forwardRef(
         >
           <VStack
             className={`${blockClass}__${variant}`}
-            onKeyDown={(e) => handleKeyDown(e, conditionBuilderRef)}
+            onKeyDown={handleKeyDownHandler}
           >
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}

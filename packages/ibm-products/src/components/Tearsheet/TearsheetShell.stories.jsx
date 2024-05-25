@@ -141,7 +141,7 @@ const ReturnFocusTemplate = (
   return (
     <div ref={ref}>
       <Button ref={buttonRef} onClick={() => setOpen(true)}>
-        {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
+        {`${beenOpen ? 'Reopen' : 'Open'} the ${context.component.displayName}`}
       </Button>{' '}
       <TearsheetShell
         className={className}

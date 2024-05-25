@@ -128,6 +128,43 @@ const Template = ({ influencer, open: _open, slug, ...args }, context) => {
   );
 };
 
+const ReturnFocusTemplate = (
+  { influencer, open: _open, slug, ...args },
+  context
+) => {
+  const ref = useRef();
+  const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
+  const [beenOpen, setBeenOpen] = useState(false);
+  useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
+  const buttonRef = useRef();
+
+  return (
+    <div ref={ref}>
+      <Button ref={buttonRef} onClick={() => setOpen(true)}>
+        {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
+      </Button>{' '}
+      <TearsheetShell
+        className={className}
+        {...args}
+        influencer={
+          influencer && (
+            <div className="tearsheet-stories__dummy-content-block">
+              Influencer
+            </div>
+          )
+        }
+        open={open}
+        onClose={() => setOpen(false)}
+        slug={slug && sampleSlug}
+        title={'Tearsheet title'}
+        launcherButtonRef={buttonRef}
+      >
+        {dummyContent}
+      </TearsheetShell>
+    </div>
+  );
+};
+
 // Stories
 export const AllAttributesSet = Template.bind({});
 AllAttributesSet.args = {
@@ -140,6 +177,11 @@ AllAttributesSet.args = {
 
 export const NoAttributesSet = Template.bind({});
 NoAttributesSet.args = {
+  size: 'wide',
+};
+
+export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});
+ReturnFocusToOpenButton.args = {
   size: 'wide',
 };
 

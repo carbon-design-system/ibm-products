@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   MutableRefObject,
+  RefObject,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -38,6 +39,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useFocus } from '../../global/js/hooks/useFocus';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -103,6 +105,11 @@ interface TearsheetShellProps extends PropsWithChildren {
    * to page of a multi-page task).
    */
   label?: ReactNode;
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom
@@ -241,6 +248,7 @@ export const TearsheetShell = React.forwardRef(
       slug,
       title,
       verticalPosition,
+      launcherButtonRef,
       // Collect any other property values passed in.
       ...rest
     }: TearsheetShellProps & CloseIconDescriptionTypes,
@@ -254,6 +262,7 @@ export const TearsheetShell = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = ref || localRef;
     const { width } = useResizeObserver(resizer);
+    const prevOpen = usePreviousValue(open);
     const { firstElement, keyDownListener, specifiedElement } = useFocus(
       modalRef,
       selectorPrimaryFocus
@@ -316,6 +325,14 @@ export const TearsheetShell = React.forwardRef(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);
+
+    useEffect(() => {
+      if (prevOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef.current.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, prevOpen]);
 
     useEffect(() => {
       if (open && position !== depth) {
@@ -669,6 +686,12 @@ TearsheetShell.propTypes = {
    * to page of a multi-page task).
    */
   label: PropTypes.node,
+
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom

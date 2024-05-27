@@ -121,6 +121,7 @@ Datagrid.propTypes = {
   /**
    * The data grid state, much of it being supplied by the useDatagrid hook
    */
+  /**@ts-ignore */
   datagridState: PropTypes.object.isRequired,
   /**
    * Table title

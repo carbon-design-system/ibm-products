@@ -57,9 +57,12 @@ const DatagridVirtualBody = (datagridState) => {
   }, [handleResize]);
 
   const rowHeight = (rowSize && rowSizeMap[rowSize]) || defaultRowHeight;
-  if (listRef && listRef.current) {
-    listRef.current.resetAfterIndex(0);
-  }
+
+  useEffect(() => {
+    if (listRef && listRef.current) {
+      listRef.current.resetAfterIndex(0);
+    }
+  }, [listRef]);
 
   const visibleRows = (DatagridPagination && page) || rows;
   const testRef: MutableRefObject<HTMLDivElement | null> = useRef(null);

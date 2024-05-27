@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
 import { pkg } from '../../../settings';
-import { Column } from '../types';
+import { DatagridColumn } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -25,7 +25,7 @@ interface Labels {
 interface SelectAllWithToggleProps {
   allPageRowsLabel?: string | object;
   allRowsLabel?: string | object;
-  columns?: Column[];
+  columns?: DatagridColumn[];
   getToggleAllPageRowsSelectedProps: () => any;
   getToggleAllRowsSelectedProps: () => any;
   isAllRowsSelected: boolean;

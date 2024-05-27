@@ -7,6 +7,7 @@ import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/Numbe
 
 import { JSXElementConstructor, MutableRefObject, ReactNode } from 'react';
 import {
+  ColumnInstance,
   Filters,
   TableCommonProps,
   TableInstance,
@@ -84,6 +85,11 @@ export interface FilterFlyoutProps {
   panelTitle?: string;
   sections?: Section[];
   autoHideFilters: boolean;
+}
+
+export interface DatagridColumn extends ColumnInstance<any> {
+  sticky: 'left' | 'right';
+  className?: string;
 }
 
 export interface TableProps {

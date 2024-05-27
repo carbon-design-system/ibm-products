@@ -65,7 +65,7 @@ const DatagridEmptyBody = (datagridState) => {
               )}
             </>
           ) : (
-            <EmptyState />
+            <EmptyState {...(emptyStateProps as any)} />
           )}
         </TableCell>
       </TableRow>

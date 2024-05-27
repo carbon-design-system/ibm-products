@@ -172,10 +172,11 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   };
 
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
-
+  const { key, ...rowProps } = headerGroupProps;
   return (
     <TableRow
-      {...headerGroupProps}
+      key={key}
+      {...rowProps}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
       ref={headRef}
     >

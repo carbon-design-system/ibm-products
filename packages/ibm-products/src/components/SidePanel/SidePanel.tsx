@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   MutableRefObject,
+  RefObject,
 } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
@@ -104,6 +105,11 @@ type SidePanelBaseProps = {
    * Sets the label text which will display above the title text
    */
   labelText?: string;
+
+  /**
+   * Provide a ref to return focus to once the side panel is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Sets the icon description for the navigation back icon button
@@ -252,6 +258,7 @@ export let SidePanel = React.forwardRef(
       slug,
       subtitle,
       title,
+      launcherButtonRef,
 
       // Collect any other property values passed in.
       ...rest
@@ -275,6 +282,7 @@ export let SidePanel = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
       .current;
+    const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = useReducedMotion();
 
@@ -378,6 +386,14 @@ export let SidePanel = React.forwardRef(
         );
       }
     }, [labelText, title]);
+
+    useEffect(() => {
+      if (previousOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, previousOpen]);
 
     const checkSetDoAnimateTitle = () => {
       let canDoAnimateTitle = false;
@@ -965,6 +981,12 @@ SidePanel.propTypes = {
    * Sets the label text which will display above the title text
    */
   labelText: PropTypes.string,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Sets the icon description for the navigation back icon button

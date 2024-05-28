@@ -5,18 +5,48 @@ import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonG
 import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 
-import { JSXElementConstructor, MutableRefObject, ReactNode } from 'react';
 import {
+  CSSProperties,
+  JSXElementConstructor,
+  MutableRefObject,
+  ReactNode,
+  TouchEventHandler,
+} from 'react';
+import {
+  Cell,
   ColumnInstance,
+  FilterValue,
   Filters,
+  HeaderGroup,
+  Row,
   TableCommonProps,
+  TableDispatch,
   TableInstance,
+  TableToggleAllRowsSelectedProps,
+  UseExpandedRowProps,
   UseFiltersInstanceProps,
   UsePaginationInstanceProps,
+  UseResizeColumnsColumnProps,
   UseResizeColumnsState,
+  UseRowSelectInstanceProps,
+  UseRowSelectRowProps,
+  UseRowSelectState,
+  UseSortByColumnProps,
+  UseTableHooks,
 } from 'react-table';
+import { CarbonIconType } from '@carbon/react/icons';
+import { type ButtonProps } from '@carbon/react';
+import { TableBatchActionsProps } from '@carbon/react/lib/components/DataTable/TableBatchActions';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
+
+export interface ResizerProps {
+  draggable?: boolean;
+  onMouseDown?: (evt: any) => void;
+  onTouchStart?: TouchEventHandler<HTMLElement>;
+  role?: string;
+  style?: CSSProperties;
+}
 
 export type DataGridFilter =
   | ({
@@ -64,6 +94,11 @@ export interface ReactTableFiltersState {
   value: string;
 }
 
+interface Labels {
+  allPageRows?: object;
+  allRows?: object;
+}
+
 interface Section {
   categoryTitle?: string;
   filters?: DataGridFilter[];
@@ -87,10 +122,47 @@ export interface FilterFlyoutProps {
   autoHideFilters: boolean;
 }
 
-export interface DatagridColumn extends ColumnInstance<any> {
-  sticky: 'left' | 'right';
+export interface DataGridToggleAllRowsProps
+  extends TableToggleAllRowsSelectedProps {
+  disabled?: boolean;
+}
+
+export interface DatagridTableHooks<T extends object = any>
+  extends UseTableHooks<T> {}
+
+export interface DatagridColumn<T extends object = any>
+  extends ColumnInstance<T> {
+  sticky?: 'left' | 'right';
   className?: string;
 }
+
+export interface DataGridCell<T extends object = any>
+  extends Omit<Cell<T>, 'column'> {
+  column: DatagridColumn<any>;
+}
+
+export interface DatagridRow<T extends object = any>
+  extends Omit<Row<T>, 'cells'>,
+    UseExpandedRowProps<T>,
+    UseRowSelectRowProps<T> {
+  expandedContentHeight?: number;
+  RowRenderer?: (state?: DataGridState) => ReactNode;
+  RowExpansionRenderer?: (state?: DataGridState) => void;
+  cells: Array<DataGridCell>;
+  isSkeleton?: boolean;
+}
+
+export interface DataGridHeader<T extends object = any>
+  extends ColumnInstance,
+    UseResizeColumnsColumnProps<T>,
+    UseSortByColumnProps<T> {
+  isAction?: boolean;
+  slug?: any;
+}
+
+export interface DataGridHeaderGroup<T extends object = any>
+  extends HeaderGroup<T>,
+    UseResizeColumnsColumnProps<T> {}
 
 export interface TableProps {
   className?: string;
@@ -98,15 +170,22 @@ export interface TableProps {
   style?: CSSStyleDeclaration;
 }
 
-interface DataGridTableState extends UseResizeColumnsState<any> {
+interface DataGridTableState
+  extends UseResizeColumnsState<any>,
+    UseRowSelectState<any> {
   filters: Filters<DataGridFilter>;
 }
 
-export interface DataGridState
+export interface DataGridTableInstance<T extends object = any>
+  extends TableInstance<T> {}
+
+export interface DataGridState<T extends object = any>
   extends TableCommonProps,
-    UsePaginationInstanceProps<any>,
-    Omit<TableInstance<any>, 'state'>,
-    UseFiltersInstanceProps<any> {
+    UsePaginationInstanceProps<T>,
+    Omit<TableInstance<T>, 'state' | 'headers' | 'rows' | 'columns'>,
+    Omit<UseFiltersInstanceProps<T>, 'rows'>,
+    UseRowSelectInstanceProps<T>,
+    Pick<UseRowSelectInstanceProps<T>, 'toggleAllRowsSelected'> {
   withVirtualScroll?: boolean;
   DatagridPagination?: JSXElementConstructor<any>;
   isFetching?: boolean;
@@ -126,5 +205,76 @@ export interface DataGridState
   gridRef?: MutableRefObject<HTMLDivElement>;
   DatagridBatchActions?: (args) => ReactNode;
   batchActions?: boolean;
+  row: DatagridRow;
+  rows: Array<DatagridRow<any>>;
+  columns: Array<DatagridColumn>;
+  key?: any;
   rowSize?: Size;
+  headers?: Array<DataGridHeader<T>>;
+  headRef?: MutableRefObject<HTMLDivElement>;
+  HeaderRow?: (
+    state?: object,
+    ref?: MutableRefObject<HTMLDivElement>,
+    group?: HeaderGroup<any>
+  ) => ReactNode;
+  withStickyColumn?: boolean;
+  emptyStateTitle?: string | ReactNode;
+  emptyStateDescription?: string;
+  emptyStateSize?: 'lg' | 'sm';
+  emptyStateType?: string;
+  illustrationTheme?: 'light' | 'dark';
+  emptyStateAction: {
+    kind?: 'primary' | 'secondary' | 'tertiary';
+    renderIcon?: CarbonIconType;
+    onClick?: ButtonProps['onClick'];
+    text?: string;
+  };
+  emptyStateLink?: {
+    text?: string | ReactNode;
+    href?: string;
+  };
+  isTableSortable?: boolean;
+  resizerAriaLabel?: string;
+  onColResizeEnd?: () => void;
+  withNestedRows?: boolean;
+  withExpandedRows?: boolean;
+  withMouseHover?: boolean;
+  setMouseOverRowIndex?: (arg: any) => void;
+  hideSelectAll?: boolean;
+  radio?: boolean;
+  onAllRowSelect: (rows: DatagridRow[], evt: any) => void;
+  selectAllToggle?: {
+    onSelectAllRows?: (args) => void;
+    labels?: Labels;
+  };
+  allPageRowsLabel?: string | object;
+  allRowsLabel: string | object;
+  onSelectAllRows?: (val?: boolean) => void;
+  toolbarBatchActions?: ButtonProps[];
+  setGlobalFilter?: (filterValue: FilterValue) => void;
+  batchActionMenuButtonLabel?: string;
+  translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];
+  onScroll?: (evt?: any) => void;
+  innerListRef?: MutableRefObject<HTMLDivElement>;
+  tableHeight?: number;
+  virtualHeight?: number;
+  listRef?: MutableRefObject<any>;
+  handleResize?: () => void;
+  onVirtualScroll?: (evt?: boolean) => void;
+}
+
+// DatagridHeaderRow related types
+export interface ResizeHeaderProps {
+  resizerProps?: ResizerProps;
+  header: DataGridHeader;
+  originalCol?: DatagridColumn;
+  handleOnMouseDownResize?: (evt?: any, props?: ResizerProps) => void;
+  columnWidths?: any[];
+  datagridState: DataGridState;
+  incrementAmount: number;
+  minWidth?: number;
+  dispatch?: TableDispatch<any>;
+  onColResizeEnd?: () => void;
+  resizerAriaLabel?: string;
+  isFetching?: boolean;
 }

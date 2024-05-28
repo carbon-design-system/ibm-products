@@ -26,7 +26,11 @@ interface DatagridToolbarProps {
   ariaToolbarLabel?: string;
 }
 
-const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
+const DatagridBatchActionsToolbar = (
+  datagridState: DataGridState,
+  width,
+  ref
+) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
@@ -88,7 +92,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     const minWidthBeforeOverflowIcon = 380;
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
-    if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
+    if (
+      toolbarBatchActions &&
+      toolbarBatchActions?.length <= 3 &&
+      !displayAllInMenu
+    ) {
       return;
     }
 
@@ -138,7 +146,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       indeterminate: undefined,
     });
     toggleAllRowsSelected(false);
-    setGlobalFilter(null);
+    setGlobalFilter?.(null);
   };
 
   const onSelectAllHandler = () => {

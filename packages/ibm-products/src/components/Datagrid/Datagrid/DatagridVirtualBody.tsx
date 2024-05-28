@@ -12,6 +12,7 @@ import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 import { px } from '@carbon/layout';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
+import { DataGridState, DatagridRow } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -25,7 +26,7 @@ const rowSizeMap = {
 
 const defaultRowHeight = rowSizeMap.lg;
 
-const DatagridVirtualBody = (datagridState) => {
+const DatagridVirtualBody = (datagridState: DataGridState) => {
   const {
     getTableBodyProps,
     rows,
@@ -47,13 +48,15 @@ const DatagridVirtualBody = (datagridState) => {
   /* istanbul ignore next */
   const handleVirtualGridResize = () => {
     const gridRefElement = gridRef?.current;
-    gridRefElement.style.width = gridRefElement?.clientWidth;
+    if (gridRefElement) {
+      gridRefElement.style.width = gridRefElement?.clientWidth?.toString();
+    }
   };
 
   useResizeObserver(gridRef, handleVirtualGridResize);
 
   useEffect(() => {
-    handleResize();
+    handleResize?.();
   }, [handleResize]);
 
   const rowHeight = (rowSize && rowSizeMap[rowSize]) || defaultRowHeight;
@@ -64,7 +67,7 @@ const DatagridVirtualBody = (datagridState) => {
     }
   }, [listRef]);
 
-  const visibleRows = (DatagridPagination && page) || rows;
+  const visibleRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const testRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   // Sync the scrollLeft position of the virtual body to the table header
@@ -100,7 +103,7 @@ const DatagridVirtualBody = (datagridState) => {
     <>
       <div
         className={`${blockClass}__head-wrap`}
-        style={{ width: gridRef.current?.clientWidth, overflow: 'hidden' }}
+        style={{ width: gridRef?.current?.clientWidth, overflow: 'hidden' }}
       >
         <DatagridHead {...datagridState} />
       </div>
@@ -109,7 +112,7 @@ const DatagridVirtualBody = (datagridState) => {
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}
           itemSize={(index) =>
-            visibleRows[index].isExpanded
+            visibleRows[index]?.isExpanded
               ? (visibleRows[index].expandedContentHeight || 0) + rowHeight
               : rowHeight
           }
@@ -120,7 +123,7 @@ const DatagridVirtualBody = (datagridState) => {
           outerRef={testRef}
           ref={listRef}
           className={`${blockClass}__virtual-scrollbar`}
-          style={{ width: gridRef.current?.clientWidth }}
+          style={{ width: gridRef?.current?.clientWidth }}
         >
           {({ index, style }) => {
             const row = visibleRows[index];
@@ -132,7 +135,7 @@ const DatagridVirtualBody = (datagridState) => {
                   ...style,
                 }}
               >
-                {row.RowRenderer({ ...datagridState, row, key })}
+                {row?.RowRenderer?.({ ...datagridState, row, key })}
               </div>
             );
           }}

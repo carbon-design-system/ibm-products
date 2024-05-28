@@ -11,32 +11,12 @@ import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
 import { pkg } from '../../../settings';
-import { DatagridColumn } from '../types';
+import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SELECT_ALL_PAGE_ROWS = 'pageRows';
 const SELECT_ALL_ROWS = 'allRows';
-
-interface Labels {
-  allPageRows?: object;
-  allRows?: object;
-}
-interface SelectAllWithToggleProps {
-  allPageRowsLabel?: string | object;
-  allRowsLabel?: string | object;
-  columns?: DatagridColumn[];
-  getToggleAllPageRowsSelectedProps: () => any;
-  getToggleAllRowsSelectedProps: () => any;
-  isAllRowsSelected: boolean;
-  isFetching?: boolean;
-  selectAllToggle?: {
-    onSelectAllRows?: (args) => void;
-    labels?: Labels;
-  };
-  tableId: string;
-  withStickyColumn?: boolean;
-}
 
 const SelectAllWithToggle = ({
   tableId,
@@ -49,7 +29,7 @@ const SelectAllWithToggle = ({
   allRowsLabel = 'Select all',
   columns,
   withStickyColumn,
-}: SelectAllWithToggleProps) => {
+}: DataGridState) => {
   const { onSelectAllRows, labels } = selectAllToggle || {};
   const [selectAllMode, setSelectAllMode] = useState(SELECT_ALL_PAGE_ROWS);
   useEffect(() => {
@@ -75,7 +55,7 @@ const SelectAllWithToggle = ({
     selectAllMode === SELECT_ALL_PAGE_ROWS
       ? getToggleAllPageRowsSelectedProps
       : getToggleAllRowsSelectedProps;
-  const { onChange, ...selectProps } = getProps();
+  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
   const disabled = isFetching || selectProps.disabled;
   const isFirstColumnStickyLeft =
     columns?.[0]?.sticky === 'left' && withStickyColumn;
@@ -92,7 +72,7 @@ const SelectAllWithToggle = ({
           {...selectProps}
           name={`${tableId}-select-all-checkbox-name`}
           onClick={(e) => {
-            onChange(e);
+            onChange?.(e);
           }}
           disabled={disabled}
           id={`${tableId}-select-all-checkbox-id`}
@@ -113,11 +93,11 @@ const SelectAllWithToggle = ({
           onClick={() => {
             setSelectAllMode(SELECT_ALL_PAGE_ROWS);
             // deselect all rows first
-            getToggleAllRowsSelectedProps()?.onChange({
+            (getToggleAllRowsSelectedProps as any)?.()?.onChange({
               target: { checked: false },
             });
             // select all row on current page
-            getToggleAllPageRowsSelectedProps().onChange({
+            (getToggleAllPageRowsSelectedProps as any)().onChange({
               target: { checked: true },
             });
           }}
@@ -128,7 +108,7 @@ const SelectAllWithToggle = ({
           disabled={disabled}
           onClick={() => {
             setSelectAllMode(SELECT_ALL_ROWS);
-            getToggleAllRowsSelectedProps().onChange({
+            (getToggleAllRowsSelectedProps as any)().onChange({
               target: { checked: true },
             });
           }}

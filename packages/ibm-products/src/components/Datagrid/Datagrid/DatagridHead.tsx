@@ -7,14 +7,16 @@
 
 import React from 'react';
 import { TableHead } from '@carbon/react';
+import { DataGridState } from '../types';
 
-const DatagridHead = (datagridState) => {
+const DatagridHead = (datagridState: DataGridState) => {
   const { headerGroups = [], headRef, HeaderRow } = datagridState;
+
   return (
     <TableHead>
       {headerGroups.map((headerGroup) =>
         // doesn't support header grouping.
-        HeaderRow(datagridState, headRef, headerGroup)
+        HeaderRow?.(datagridState, headRef, headerGroup)
       )}
     </TableHead>
   );

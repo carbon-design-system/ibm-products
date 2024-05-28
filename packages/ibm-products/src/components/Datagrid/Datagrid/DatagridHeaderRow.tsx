@@ -6,7 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, isValidElement } from 'react';
+import React, {
+  useState,
+  useEffect,
+  isValidElement,
+  MutableRefObject,
+} from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
@@ -19,6 +24,14 @@ import {
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 import { DatagridSlug } from './addons/Slug/DatagridSlug';
 import { useInitialColumnSort } from '../useInitialColumnSort';
+import {
+  DataGridHeader,
+  DataGridHeaderGroup,
+  DataGridState,
+  DataGridTableInstance,
+  DatagridTableHooks,
+  ResizeHeaderProps,
+} from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -26,7 +39,7 @@ interface PropsType {
   title?: string;
 }
 
-const getAccessibilityProps = (header) => {
+const getAccessibilityProps = (header: DataGridHeader) => {
   const props: PropsType = {};
   const title = getNodeTextContent(header.Header);
   if (title) {
@@ -50,26 +63,29 @@ const ResizeHeader = ({
   onColResizeEnd,
   resizerAriaLabel,
   isFetching,
-}) => {
+}: ResizeHeaderProps) => {
   const { ...headerProps } = resizerProps;
   const mouseDownHandler = (evt) => {
-    handleOnMouseDownResize(evt, resizerProps);
+    handleOnMouseDownResize?.(evt, resizerProps);
   };
   const mouseUpHandler = () => {
-    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header?.id, true);
   };
   const keyDownHandler = (evt) => {
     const { key } = evt;
     if (key === 'ArrowLeft' || key === 'ArrowRight') {
-      const originalColMinWidth = originalCol.minWidth || 90;
+      const originalColMinWidth = originalCol?.minWidth || 90;
       const currentColumnWidth =
-        columnWidths[header.id] ||
-        (datagridState.isTableSortable &&
-        originalCol.width < originalColMinWidth
+        (header?.id && columnWidths?.[header?.id]) ||
+        (datagridState?.isTableSortable &&
+        Number(originalCol?.width) < originalColMinWidth
           ? originalColMinWidth
-          : originalCol.width);
+          : originalCol?.width);
       if (key === 'ArrowLeft') {
-        if (currentColumnWidth - incrementAmount > Math.max(minWidth, 50)) {
+        if (
+          currentColumnWidth - incrementAmount >
+          Math.max(Number(minWidth), 50)
+        ) {
           const newWidth = currentColumnWidth - incrementAmount;
           handleColumnResizingEvent(dispatch, header, newWidth, true);
         }
@@ -81,7 +97,7 @@ const ResizeHeader = ({
     }
   };
   const keyUpHandler = () => {
-    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header?.id, true);
   };
   return (
     <>
@@ -93,7 +109,7 @@ const ResizeHeader = ({
         onKeyUp={keyUpHandler}
         className={`${blockClass}__col-resizer-range`}
         type="range"
-        defaultValue={originalCol.width}
+        defaultValue={originalCol?.width}
         aria-label={resizerAriaLabel || 'Resize column'}
         disabled={isFetching}
       />
@@ -102,7 +118,11 @@ const ResizeHeader = ({
   );
 };
 
-const HeaderRow = (datagridState, headRef, headerGroup) => {
+const HeaderRow = (
+  datagridState: DataGridState,
+  headRef: MutableRefObject<HTMLDivElement>,
+  headerGroup: DataGridHeaderGroup
+) => {
   const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
   useInitialColumnSort(datagridState);
   // Used to measure the height of the table and uses that value
@@ -181,9 +201,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
       ref={headRef}
     >
       {foundAIRow ? <th scope="col" aria-hidden="false" /> : null}
-      {datagridState.headers
-        .filter(({ isVisible }) => isVisible)
-        .map((header, index) => {
+      {datagridState?.headers
+        ?.filter(({ isVisible }) => isVisible)
+        ?.map((header, index) => {
           if (header.id === selectionColumnId) {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
@@ -202,13 +222,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               {...headerProps}
               className={cx(headerClassName, {
                 [`${blockClass}__resizableColumn`]: resizerProps,
-                [`${blockClass}__isResizing`]: header.isResizing,
+                [`${blockClass}__isResizing`]: header?.isResizing,
                 [`${blockClass}__sortableColumn`]:
                   datagridState.isTableSortable && header.id !== 'spacer',
-                [`${blockClass}__isSorted`]: header.isSorted,
-                [`${blockClass}__header-actions-column`]: header.isAction,
+                [`${blockClass}__isSorted`]: header?.isSorted,
+                [`${blockClass}__header-actions-column`]: header?.isAction,
                 [`${blockClass}__with-slug`]:
-                  header.slug && React.isValidElement(header.slug),
+                  header.slug && React.isValidElement(header?.slug),
               })}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
@@ -241,8 +261,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   );
 };
 
-const useHeaderRow = (hooks) => {
-  const useInstance = (instance) => {
+const useHeaderRow = (hooks: DatagridTableHooks) => {
+  const useInstance = (instance: DataGridTableInstance) => {
     Object.assign(instance, { HeaderRow });
   };
   hooks.useInstance.push(useInstance);

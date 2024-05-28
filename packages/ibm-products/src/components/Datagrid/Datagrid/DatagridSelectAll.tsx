@@ -10,10 +10,11 @@ import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { handleSelectAllRowData } from './addons/stateReducer';
+import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const SelectAll = (datagridState) => {
+const SelectAll = (datagridState: DataGridState) => {
   const [windowSize, setWindowSize] = useState(
     typeof window !== 'undefined' ? window.innerWidth : ''
   );
@@ -60,7 +61,7 @@ const SelectAll = (datagridState) => {
   const getProps = DatagridPagination
     ? getToggleAllPageRowsSelectedProps
     : getToggleAllRowsSelectedProps;
-  const { onChange, ...selectProps } = getProps();
+  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
   const { indeterminate } = selectProps;
 
   const handleSelectAllChange = (event) => {
@@ -77,7 +78,7 @@ const SelectAll = (datagridState) => {
 
       return onChange?.({
         target: { checked: false },
-      });
+      } as any);
     }
     handleSelectAllRowData({
       dispatch,
@@ -106,7 +107,7 @@ const SelectAll = (datagridState) => {
         {...selectProps}
         name={`${tableId}-select-all-checkbox-name`}
         onSelect={handleSelectAllChange}
-        disabled={isFetching || selectProps.disabled}
+        disabled={isFetching || selectProps?.disabled}
         id={`${tableId}-select-all-checkbox-id`}
       />
     </div>

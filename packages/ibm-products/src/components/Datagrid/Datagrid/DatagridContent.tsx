@@ -28,7 +28,7 @@ import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
-import { DataGridState } from '../types';
+import { DataGridState, DatagridRow } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
@@ -73,7 +73,7 @@ export const DatagridContent = ({
   } = datagridState;
   const { columnResizing } = state;
 
-  const contentRows = (DatagridPagination && page) || rows;
+  const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
   const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
 

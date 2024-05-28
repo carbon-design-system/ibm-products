@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.40.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.39.0...@carbon/ibm-products@2.40.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* adds short text option for pageheader ([#4562](https://github.com/carbon-design-system/ibm-products/issues/4562)) ([705f403](https://github.com/carbon-design-system/ibm-products/commit/705f403f8bbdcc93ab2dcb0e06bb3b5cd7d359b3))
+* **CreateInfluencer:** removed empty p tag render, if secondaryLabel='' ([#5279](https://github.com/carbon-design-system/ibm-products/issues/5279)) ([4594428](https://github.com/carbon-design-system/ibm-products/commit/4594428b2484a7dd6202f4bc2872b32f8a302d1b))
+* **DataSpreadsheet:** added null check ([#5305](https://github.com/carbon-design-system/ibm-products/issues/5305)) ([a05bc39](https://github.com/carbon-design-system/ibm-products/commit/a05bc390d6b216fb36f688729e82f60df4fdd930))
+* **ExpressiveCard:** use CarbonIconType for pictogram ([#5229](https://github.com/carbon-design-system/ibm-products/issues/5229)) ([a87d6e0](https://github.com/carbon-design-system/ibm-products/commit/a87d6e013e72102da4dc5d84d83c97e7d18d9e53))
+* remove previously used class name ([#5283](https://github.com/carbon-design-system/ibm-products/issues/5283)) ([5fafcf2](https://github.com/carbon-design-system/ibm-products/commit/5fafcf24824bf3a38426e069db6e36533ac39c51))
+* Return focus to launcher button ([#5017](https://github.com/carbon-design-system/ibm-products/issues/5017)) ([659126a](https://github.com/carbon-design-system/ibm-products/commit/659126acfcc13cd7fa384581f0a25e4b2a4d648f))
+* **SidePanel:** add missing size xl ([#5274](https://github.com/carbon-design-system/ibm-products/issues/5274)) ([da5172b](https://github.com/carbon-design-system/ibm-products/commit/da5172b4cf792ebf63ecea2c986f0dbcccb2b612))
+* **storybook:** use markdown comp to render custom docs ([#5303](https://github.com/carbon-design-system/ibm-products/issues/5303)) ([57e1896](https://github.com/carbon-design-system/ibm-products/commit/57e189667ec8fa859d444022ac0563430c74029b))
+* **Tearsheet:** properly focus specified element with new hook ([#5264](https://github.com/carbon-design-system/ibm-products/issues/5264)) ([1dc2407](https://github.com/carbon-design-system/ibm-products/commit/1dc240759e4ec3446465b13adb4787fa56442ecb))
+
+
+### Features
+
+* **Datagrid:** add `onVirtualScroll` property to send back data around currently visible rows in virtualized Datagrids ([#5255](https://github.com/carbon-design-system/ibm-products/issues/5255)) ([9821899](https://github.com/carbon-design-system/ibm-products/commit/9821899948712e59e178423f190fe44c5e5ee78e))
+* **Guidebanner:** convert to .tsx ([#5321](https://github.com/carbon-design-system/ibm-products/issues/5321)) ([bd1ace3](https://github.com/carbon-design-system/ibm-products/commit/bd1ace30a9739c4a06e7e10619eb7ec24d77b169))
+
+
+
+
+
 # [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.38.0...@carbon/ibm-products@2.39.0) (2024-05-21)
 
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.37.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.37.0...@carbon/ibm-products-styles@2.37.1) (2024-05-28)
+
+
+### Bug Fixes
+
+* coachmark stack not showing stack ([#4941](https://github.com/carbon-design-system/ibm-products/issues/4941)) ([7cdc365](https://github.com/carbon-design-system/ibm-products/commit/7cdc36519ff2c6672c50a4d5c86b9c3c3f6f0f04))
+* **SidePanel:** add missing size xl ([#5274](https://github.com/carbon-design-system/ibm-products/issues/5274)) ([da5172b](https://github.com/carbon-design-system/ibm-products/commit/da5172b4cf792ebf63ecea2c986f0dbcccb2b612))
+* **StringFormatter:** scope popover to string formatter block class ([#5316](https://github.com/carbon-design-system/ibm-products/issues/5316)) ([cbb273b](https://github.com/carbon-design-system/ibm-products/commit/cbb273bd73834d4a88a5502269a99afddc177713))
+
+
+
+
+
 # [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.36.0...@carbon/ibm-products-styles@2.37.0) (2024-05-21)
 
 

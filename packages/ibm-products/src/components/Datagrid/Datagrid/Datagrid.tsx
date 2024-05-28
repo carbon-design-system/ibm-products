@@ -15,7 +15,7 @@ import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
 import { FilterProvider } from './addons/Filtering/FilterProvider';
-import { DataGridState } from '../types';
+import { DataGridState, DatagridRow } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -61,8 +61,8 @@ export let Datagrid = React.forwardRef(
       state: { filters },
     } = datagridState;
 
-    const rows =
-      (DatagridPagination && datagridState.page) || datagridState.rows;
+    const rows = ((DatagridPagination && datagridState.page) ||
+      datagridState.rows) as DatagridRow[];
 
     const props = {
       title,

@@ -11,7 +11,7 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
-// import pconsole from '../../../global/js/utils/pconsole';
+import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
 import { FilterProvider } from './addons/Filtering/FilterProvider';
@@ -44,12 +44,12 @@ export let Datagrid = React.forwardRef(
     { datagridState, title, ariaToolbarLabel, ...rest }: DatagridProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    // if (!datagridState) {
-    //   pconsole.warn(
-    //     'Datagrid was not passed datagridState which is required to render this component.'
-    //   );
-    //   return;
-    // }
+    if (!datagridState) {
+      pconsole.warn(
+        'Datagrid was not passed datagridState which is required to render this component.'
+      );
+      return;
+    }
 
     const {
       withVirtualScroll,

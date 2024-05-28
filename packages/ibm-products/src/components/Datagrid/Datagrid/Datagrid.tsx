@@ -93,7 +93,8 @@ export let Datagrid = React.forwardRef(
               <div
                 className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
               >
-                <DatagridContent {...props} />
+                {/* <DatagridContent {...props} /> */}
+                <div>Hmm</div>
               </div>
             ) : (
               <DatagridContent {...props} />

@@ -132,6 +132,7 @@ collect:
         - kind
         - label
         - labelText
+        - launcherButtonRef
         - legendText
         - link
         - links
@@ -795,6 +796,7 @@ collect:
         - documentationLinks
         - documentationLinksIconDescription
         - isInitiallyOpen
+        - webTerminalAriaLabel
         # React
         - key
         - ref

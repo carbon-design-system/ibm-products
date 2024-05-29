@@ -193,7 +193,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             ...headerProps
           } = header.getHeaderProps();
 
-          console.log('header props', headerProps);
           const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader

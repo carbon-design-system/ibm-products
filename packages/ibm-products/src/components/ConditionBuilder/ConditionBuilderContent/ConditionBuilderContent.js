@@ -67,7 +67,7 @@ const ConditionBuilderContent = ({
     <div className={`${blockClass}__content-container`} tabIndex={-1}>
       {!isConditionBuilderActive && (
         <Button
-          className={`${blockClass}__condition-builder`}
+          className={`${blockClass}__add-condition-button`}
           renderIcon={(props) => <Add size={16} {...props} />}
           iconDescription={startConditionLabel}
           kind="ghost"
@@ -81,7 +81,7 @@ const ConditionBuilderContent = ({
       {rootState &&
         rootState?.groups?.map((eachGroup, groupIndex) => (
           <ConditionGroupBuilder
-            className={`${blockClass}__condition-builder__group`}
+            className={`${blockClass}__group`}
             key={groupIndex}
             aria={{
               level: 1,

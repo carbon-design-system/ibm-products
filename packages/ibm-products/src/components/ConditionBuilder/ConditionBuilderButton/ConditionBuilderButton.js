@@ -22,7 +22,7 @@ export const ConditionBuilderButton = ({
         tabIndex={-1}
         className={cx([
           className,
-          `${blockClass}__condition-builder-button`,
+          `${blockClass}__button`,
           { [`${blockClass}__text-ellipsis`]: showToolTip && !hideLabel },
         ])}
         type="button"

@@ -7,6 +7,7 @@
 
 import React, {
   ForwardedRef,
+  PropsWithChildren,
   ReactNode,
   forwardRef,
   isValidElement,
@@ -27,15 +28,10 @@ const blockClass = `${pkg.prefix}--create-full-page__step`;
 
 // Default values for props
 const defaults = {
-  includeStep: true,
+  includeStep: true as boolean,
 };
 
-interface CreateFullPageStepBaseProps {
-  /**
-   * Content that shows in the CreateFullPage step
-   */
-  children?: ReactNode;
-
+interface CreateFullPageStepBaseProps extends PropsWithChildren {
   /**
    * Sets an optional className to be added to the CreateFullPage step
    */
@@ -103,11 +99,11 @@ interface CreateFullPageStepBaseProps {
 
 type CreateFullPageStepFieldsetProps =
   | {
-      hasFieldset: true;
-      fieldsetLegendText: string;
+      hasFieldset: false;
+      fieldsetLegendText?: string;
     }
   | {
-      hasFieldset?: false;
+      hasFieldset?: true;
       fieldsetLegendText: string;
     };
 
@@ -139,12 +135,12 @@ export let CreateFullPageStep = forwardRef(
     }: CreateFullPageStepProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const stepsContext = useContext(StepsContext) as any;
+    const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
-    const [shouldIncludeStep, setShouldIncludeStep] = useState();
+    const [shouldIncludeStep, setShouldIncludeStep] = useState<boolean>();
     const previousState = usePreviousValue({
       currentStep: stepsContext?.currentStep,
-    }) as any;
+    });
 
     useRetrieveStepData({
       invalid,
@@ -154,7 +150,7 @@ export let CreateFullPageStep = forwardRef(
       shouldIncludeStep,
       secondaryLabel,
       title,
-    } as any);
+    });
 
     // This useEffect reports back the onMount value so that they can be used
     // in the appropriate custom hooks.
@@ -168,14 +164,14 @@ export let CreateFullPageStep = forwardRef(
     }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
 
     useEffect(() => {
-      setShouldIncludeStep(includeStep as any);
+      setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
       if (stepNumber === stepsContext?.currentStep) {
-        stepsContext.setIsDisabled(disableSubmit);
+        stepsContext.setIsDisabled(disableSubmit as boolean);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
       }
     }, [stepsContext, stepNumber, disableSubmit, onNext]);

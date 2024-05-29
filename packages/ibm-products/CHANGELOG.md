@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.38.0...@carbon/ibm-products@2.39.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **sidepanel:** resolve border bottom always showing ([#5143](https://github.com/carbon-design-system/ibm-products/issues/5143)) ([59b580a](https://github.com/carbon-design-system/ibm-products/commit/59b580aa8f911ec48955484be9781762dae9c3ce))
+
+
+### Features
+
+* **CoachmarkButton:** convert to .tsx ([#5241](https://github.com/carbon-design-system/ibm-products/issues/5241)) ([6b33291](https://github.com/carbon-design-system/ibm-products/commit/6b33291385afb9fa776ba72e7fd7e5dcba716015))
+* **CoachmarkOverlayElements:** convert to .tsx ([#5163](https://github.com/carbon-design-system/ibm-products/issues/5163)) ([2bd1af9](https://github.com/carbon-design-system/ibm-products/commit/2bd1af990c2d82f0a042d4e3d826801c3e1718ce))
+* **get-started:** new component ([#5054](https://github.com/carbon-design-system/ibm-products/issues/5054)) ([5d7208f](https://github.com/carbon-design-system/ibm-products/commit/5d7208fd9ed28994cf46361f629d16c349ba4b27))
+* **tagoverflow:** remove TagOverflow dependency on TagSet ([#4929](https://github.com/carbon-design-system/ibm-products/issues/4929)) ([7b1bcdc](https://github.com/carbon-design-system/ibm-products/commit/7b1bcdc1dacd49602e26cc3f0e069750ce6f7af5))
+
+
+
+
+
+# [2.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.37.0...@carbon/ibm-products@2.38.0) (2024-05-14)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** initialize functions before calling them ([#5099](https://github.com/carbon-design-system/ibm-products/issues/5099)) ([72ff25d](https://github.com/carbon-design-system/ibm-products/commit/72ff25d32bc1a3235a246a50f7a9405c672f47a5))
+
+
+### Features
+
+* **Checklist:** release as stable ([#5139](https://github.com/carbon-design-system/ibm-products/issues/5139)) ([73729b5](https://github.com/carbon-design-system/ibm-products/commit/73729b593e02f7f6fbcfa32175c41e0608912909))
+* **Coachmark:** convert to .tsx ([#5097](https://github.com/carbon-design-system/ibm-products/issues/5097)) ([2c4d66f](https://github.com/carbon-design-system/ibm-products/commit/2c4d66f81b6f118ce45ac29fc0d397f14162129f))
+* **CoachmarkFixed:** convert to .tsx ([#5140](https://github.com/carbon-design-system/ibm-products/issues/5140)) ([1dff0cb](https://github.com/carbon-design-system/ibm-products/commit/1dff0cb771465e7316a92f73936a9377716ff7ee))
+* **conditionBuilder:** issue fixes and review changes ([#5085](https://github.com/carbon-design-system/ibm-products/issues/5085)) ([9b425b0](https://github.com/carbon-design-system/ibm-products/commit/9b425b03ef74791cbcc2cc534f4740218586db1f))
+* **datagrid:** added feature to control number of skeleton rows ([#4802](https://github.com/carbon-design-system/ibm-products/issues/4802)) ([1962a72](https://github.com/carbon-design-system/ibm-products/commit/1962a72d16f522a279c99032886073d1a58cbb50))
+* **telemetry:** add telemetry config generator step to the release process ([#5081](https://github.com/carbon-design-system/ibm-products/issues/5081)) ([9529594](https://github.com/carbon-design-system/ibm-products/commit/9529594eaa3763f4500113288014899ad39b6aea))
+* update to storybook 8 ([#5019](https://github.com/carbon-design-system/ibm-products/issues/5019)) ([af22157](https://github.com/carbon-design-system/ibm-products/commit/af2215707b60e4abcbab434f63fd9bd45a947526))
+
+
+
+
+
 # [2.37.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.36.0...@carbon/ibm-products@2.37.0) (2024-05-07)
 
 

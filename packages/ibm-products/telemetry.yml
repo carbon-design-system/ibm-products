@@ -17,6 +17,8 @@ collect:
         - align
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
+        - allTagsModalSearchThreshold
+        - allTagsModalTarget
         - allTagsModalTitle
         - alt
         - apiKey
@@ -44,9 +46,11 @@ collect:
         - collapsible
         - columnInputPlaceholder
         - columns
+        - condition
         - conditionBuilderRef
         - conditionState
         - config
+        - containingElementRef
         - count
         - currentMatcher
         - currentStep
@@ -71,6 +75,7 @@ collect:
         - filterString
         - findColumnPlaceholderLabel
         - firstFocusElement
+        - footerActionIcon
         - formDescription
         - formTitle
         - getConditionState
@@ -86,6 +91,7 @@ collect:
         - globalSortBy
         - grid
         - gridGap
+        - group
         - hasActions
         - hasCloseIcon
         - hasFieldset
@@ -131,9 +137,11 @@ collect:
         - links
         - loading
         - maxVisible
+        - measurementOffset
         - media
         - mediaPosition
         - menuOptionsClass
+        - metadata
         - metaIconDescription
         - metaPanelTitle
         - modifiers
@@ -165,6 +173,7 @@ collect:
         - onDataUpdate
         - onMount
         - onNext
+        - onOverflowTagChange
         - onPrimaryButtonClick
         - onRemove
         - onRequestClose
@@ -173,6 +182,7 @@ collect:
         - onSecondaryButtonClick
         - onSelectColumn
         - onSelectionAreaChange
+        - onShowAllClick
         - onSubmit
         - onSubmitButtonText
         - onToggle
@@ -182,12 +192,15 @@ collect:
         - overflowActions
         - overflowAlign
         - overflowAriaLabel
+        - overflowClassName
+        - overflowTags
         - overflowType
         - parentId
         - path
         - pictogram
         - placeholder
         - placement
+        - popoverOpen
         - popOverSearchThreshold
         - portalTarget
         - preventCloseOnClickOutside
@@ -224,6 +237,7 @@ collect:
         - selectionAreas
         - selectorPageContent
         - selectorPrimaryFocus
+        - sequence
         - setActiveCellCoordinates
         - setAllFilters
         - setColumnsObject
@@ -233,6 +247,7 @@ collect:
         - setIsTearsheetOpen
         - setLabelTitle
         - setMultiSelection
+        - setPopoverOpen
         - setSelectionAreaData
         - setSelectionAreas
         - showAllTagsLabel
@@ -245,7 +260,6 @@ collect:
         - small
         - sortByLabel
         - startConditionLabel
-        - state
         - status
         - style
         - submitButtonText
@@ -382,6 +396,7 @@ collect:
         # Canary
         - componentName
         # Card
+        - getStarted
         - onKeyDown
         # CardFooter
         - hasButton
@@ -397,8 +412,8 @@ collect:
         - chartValue
         - checklistAriaLabel
         - checklistToggleAriaLabel
+        - enableToggle
         - onClickViewAll
-        - showToggle
         - taskLists
         - toggleLabel
         - toggleLabelAlign
@@ -427,7 +442,7 @@ collect:
         - addConditionHandler
         - conditionIndex
         - conjunction
-        - group
+        - isLastCondition
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
@@ -710,7 +725,7 @@ collect:
         # SearchBar
         - clearButtonLabelText
         - hideScopesLabel
-        - placeHolderText
+        - placeholderText
         - scopes
         - scopesTypeLabel
         - scopeToString
@@ -758,18 +773,6 @@ collect:
         - width
         # TagOverflow
         - tagComponent
-        # TagSet
-        - allTagsModalTarget
-        - containingElementRef
-        - measurementOffset
-        - onOverflowTagChange
-        - overflowClassName
-        # TagSetOverflow
-        - allTagsModalSearchThreshold
-        - onShowAllClick
-        - overflowTags
-        - popoverOpen
-        - setPopoverOpen
         # TearsheetShell
         - headerActions
         # Toolbar
@@ -864,25 +867,23 @@ collect:
         - narrow
         - wide
         # General - kind
-        - '"fixed"'
-        - '"floating"'
-        - '"stacked"'
-        - '"tooltip"'
         - "403"
         - "404"
-        - checked
         - critical
         - custom
         - default
-        - disabled
         - dual-button
         - error
         - fatal
         - ghost
         - group
         - in-progress
-        - indeterminate
         - info
+        - Kinds.checked
+        - Kinds.disabled
+        - Kinds.error
+        - Kinds.indeterminate
+        - Kinds.unchecked
         - link
         - major-warning
         - minor-warning
@@ -897,7 +898,6 @@ collect:
         - single-button
         - tertiary
         - unauthorized
-        - unchecked
         - undefined
         - unknown
         - user
@@ -952,16 +952,20 @@ collect:
         - xs
         # General - status
         - active
+        - complete
         - default
         - error
         - fail
         - finished
         - in-progress
         - inactive
+        - incomplete
         - success
         # General - theme
         - dark
         - light
+        - Themes.dark
+        - Themes.light
         # General - titleSize
         - default
         - large

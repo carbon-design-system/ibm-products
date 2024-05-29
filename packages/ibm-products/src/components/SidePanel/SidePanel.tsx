@@ -678,7 +678,7 @@ export let SidePanel = React.forwardRef(
         <div
           className={cx(`${blockClass}__header`, {
             [`${blockClass}__header--on-detail-step`]: currentStep > 0,
-            [`${blockClass}__header--no-title-animation`]: !doAnimateTitle,
+            [`${blockClass}__header--no-title-animation`]: !animateTitle,
             [`${blockClass}__header--reduced-motion`]: reducedMotion.matches,
             [`${blockClass}__header--has-title`]: title,
           })}

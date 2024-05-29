@@ -42,7 +42,7 @@
     "jest-config-ibm-cloud-cognitive": "^1.1.7",
     "jest-environment-jsdom": "^29.6.2",
     "rimraf": "^5.0.1",
-    "sass": "^1.64.2"
+    "sass": "^1.77.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.10"

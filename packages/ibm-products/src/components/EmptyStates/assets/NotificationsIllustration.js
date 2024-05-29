@@ -33,7 +33,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration--${size}`,
       ])}
       role="img"
-      alt="Illustration of an empty notification state"
+      aria-label="Illustration of an empty notification state"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

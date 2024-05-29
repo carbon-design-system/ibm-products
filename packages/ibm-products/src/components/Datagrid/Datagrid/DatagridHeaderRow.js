@@ -190,14 +190,15 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const {
             // eslint-disable-next-line no-unused-vars
             role,
-            className: headerClassName,
             ...headerProps
           } = header.getHeaderProps();
+
+          console.log('header props', headerProps);
           const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader
               {...headerProps}
-              className={cx(headerClassName, {
+              className={cx(header.className, {
                 [`${blockClass}__resizableColumn`]: resizerProps,
                 [`${blockClass}__isResizing`]: header.isResizing,
                 [`${blockClass}__sortableColumn`]:

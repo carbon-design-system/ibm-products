@@ -20,8 +20,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   outline-offset: 0;
 }
 
-.#{$block-class}__condition-builder-condition__deletion-preview
-  .#{$block-class}__condition-builder-button:not(
+.#{$block-class}__condition__deletion-preview
+  .#{$block-class}__button:not(
     .#{$block-class}__statement-button,
     .#{$block-class}__connector-button
   ) {
@@ -29,8 +29,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   color: $tag-color-red;
 }
 
-.#{$block-class}__condition-builder-condition__deletion-preview
-  .#{$block-class}__condition-builder-button:not(
+.#{$block-class}__condition__deletion-preview
+  .#{$block-class}__button:not(
     .#{$block-class}__statement-button,
     .#{$block-class}__connector-button
   ):hover {

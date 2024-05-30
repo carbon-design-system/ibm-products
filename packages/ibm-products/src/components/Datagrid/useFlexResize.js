@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 /**
  * Copyright IBM Corp. 2020, 2023
  *
@@ -6,6 +7,7 @@
  */
 
 const useFlexResize = (hooks) => {
+  return;
   const spacer = {
     id: 'spacer',
     width: 0,

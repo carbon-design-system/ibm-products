@@ -2562,6 +2562,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: sticky !important;
   z-index: 1;
   left: 0;
+  border-right: 1px solid var(--cds-active-light-ui, #c6c6c6);
 }
 
 .c4p--datagrid__left-sticky-column-cell.c4p--datagrid__left-sticky-column-cell--with-extra-select-column,

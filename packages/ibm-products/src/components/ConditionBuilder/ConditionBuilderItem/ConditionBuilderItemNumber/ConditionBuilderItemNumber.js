@@ -16,7 +16,7 @@ export const ConditionBuilderItemNumber = ({
     onChange(value + '');
   };
   return (
-    <div className={`${blockClass}__condition-builder-item-number`}>
+    <div className={`${blockClass}__item-number`}>
       <NumberInput
         label={conditionState.property}
         hideLabel

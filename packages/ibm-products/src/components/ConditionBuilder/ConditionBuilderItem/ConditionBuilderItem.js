@@ -70,8 +70,7 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     //this will focus the first input field in the popover
     if (open && contentRef.current) {
-      const firstFocusableElement =
-        contentRef.current.querySelector('input, button,li');
+      const firstFocusableElement = contentRef.current.querySelector('input');
       if (firstFocusableElement) {
         firstFocusableElement.focus();
       }
@@ -103,14 +102,12 @@ export const ConditionBuilderItem = ({
       />
 
       <PopoverContent
-        className={`${blockClass}__condition-builder-item__content`}
+        className={`${blockClass}__item__content`}
         role="dialog"
         aria-label={`${title}`}
       >
         <Layer>
-          <h1 className={`${blockClass}__condition-builder-item__title`}>
-            {title}
-          </h1>
+          <h1 className={`${blockClass}__item__title`}>{title}</h1>
           <div ref={contentRef}>{open && children}</div>
         </Layer>
       </PopoverContent>

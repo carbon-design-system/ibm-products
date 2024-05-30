@@ -361,9 +361,6 @@ export let SidePanel = React.forwardRef(
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
 
-        if (scrollableSection) {
-          scrollableSection.scrollTop = 0;
-        }
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header
         // height css custom property

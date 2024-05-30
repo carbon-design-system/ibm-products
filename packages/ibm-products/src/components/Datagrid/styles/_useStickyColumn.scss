@@ -37,6 +37,7 @@
   position: sticky !important;
   z-index: 1;
   left: 0;
+  border-right: 1px solid $active-light-ui;
 }
 
 .#{$block-class}__left-sticky-column-cell.#{$block-class}__left-sticky-column-cell--with-extra-select-column,

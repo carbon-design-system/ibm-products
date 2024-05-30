@@ -60,8 +60,8 @@ const ConditionBlock = (props) => {
 
   const { icon, type, config, label } = getCurrentConfig(property);
   const ItemComponent = property ? itemComponents[type] : null;
-  const onStatementChangeHandler = (v, e) => {
-    focusThisField(e);
+  const onStatementChangeHandler = (v, evt) => {
+    focusThisField(evt);
     onStatementChange(v);
   };
   const onConnectorOperatorChangeHandler = (op) => {
@@ -108,8 +108,7 @@ const ConditionBlock = (props) => {
       className={cx(
         `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom`,
         {
-          [`${blockClass}__condition-builder-condition__deletion-preview`]:
-            showDeletionPreview,
+          [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         }
       )}
       key={conditionIndex}

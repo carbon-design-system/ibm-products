@@ -7,14 +7,14 @@ import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 
 export const ConditionBuilderItemText = ({ conditionState, onChange }) => {
   return (
-    <div className={`${blockClass}__condition-builder-item-text`}>
+    <div className={`${blockClass}__item-text`}>
       <TextInput
         labelText={conditionState.property}
         hideLabel
         value={conditionState.value ?? ''}
         id={conditionState.property?.replace(/\s/g, '')}
-        onChange={(e) => {
-          onChange(e.target.value);
+        onChange={(evt) => {
+          onChange(evt.target.value);
         }}
       />
     </div>

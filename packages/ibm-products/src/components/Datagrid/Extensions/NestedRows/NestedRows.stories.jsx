@@ -57,7 +57,7 @@ return <Datagrid datagridState={datagridState} />;
         />
       ),
     },
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     featureFlags: {

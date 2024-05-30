@@ -652,6 +652,7 @@ export let NotificationsPanel = React.forwardRef(
             <NotificationsEmptyState
               illustrationTheme="dark"
               title=""
+              illustrationDescription={emptyStateLabel}
               subtitle={emptyStateLabel}
             />
           )}

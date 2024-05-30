@@ -250,9 +250,9 @@ const Template = (args) => {
           primaryButtonText={editMode && !loading ? 'Save' : null}
           secondaryButtonIcon={null}
           secondaryButtonText={editMode && !loading ? 'Cancel' : null}
-          id={`${
-            editMode ? pkg.prefix + '--edit-update-cards--edit' : ''
-          }`} /*Used id for overriding the SVG(icon) path fill*/
+          id={
+            editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
+          } /*Used id for overriding the SVG(icon) path fill*/
         />
       </Column>
     </Grid>

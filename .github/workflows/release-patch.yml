@@ -1,0 +1,29 @@
+name: Patch release
+run-name:
+  ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        required: true
+        description: 'Specify the type of release'
+        type: choice
+        default: first minor rc
+        options:
+          - full patch release
+          - first patch rc
+          - subsequent rc
+      dry-run:
+        required: true
+        description: 'Run dry run?'
+        type: boolean
+        default: true
+
+jobs:
+  Release:
+    uses: ./.github/workflows/release-base.yml
+    with:
+      type: ${{ inputs.type }}
+      dry-run: ${{ inputs.dry-run }}
+    secrets: inherit

@@ -49,6 +49,8 @@ import {
 } from './PageHeaderUtils';
 import { PageHeaderTitle } from './PageHeaderTitle';
 
+pkg.component.ActionBar = true;
+
 // Default values for props
 const defaults = {
   fullWidthGrid: false,

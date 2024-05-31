@@ -394,7 +394,8 @@
   background: transparent;
 }
 
-.#{$block-class}__empty-state .#{$block-class}__table-simple td {
+.#{$block-class}__empty-state .#{$block-class}__table-simple td,
+.#{$block-class}__empty-state .#{$block-class}__table-virtual-scroll td {
   padding: $spacing-11;
 }
 

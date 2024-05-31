@@ -88,7 +88,9 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
         <Table
           {...getTableProps()}
           className={cx(
-            withVirtualScroll ? '' : `${blockClass}__table-simple`,
+            withVirtualScroll
+              ? `${blockClass}__table-virtual-scroll`
+              : `${blockClass}__table-simple`,
             `${blockClass}__vertical-align-${verticalAlign}`,
             { [`${blockClass}__variable-row-height`]: variableRowHeight },
             { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
@@ -120,7 +122,10 @@ export const DatagridContent = ({ datagridState, title, ariaToolbarLabel }) => {
           }
           title={title}
         >
-          {!withVirtualScroll && <DatagridHead {...datagridState} />}
+          {(!withVirtualScroll ||
+            (withVirtualScroll && !isFetching && !contentRows.length)) && (
+            <DatagridHead {...datagridState} />
+          )}
           <DatagridBody {...datagridState} rows={contentRows} />
         </Table>
         {filterProps?.variation === 'panel' && renderPagination()}

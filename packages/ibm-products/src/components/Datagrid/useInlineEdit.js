@@ -66,6 +66,8 @@ const useInlineEdit = (hooks, usingEditableCell) => {
               renderInlineEditComponent(inlineEditType)}
             {inlineEditType === 'selection' &&
               renderInlineEditComponent(inlineEditType)}
+            {inlineEditType === 'checkbox' &&
+              renderInlineEditComponent(inlineEditType)}
             {inlineEditType === 'date' &&
               renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}

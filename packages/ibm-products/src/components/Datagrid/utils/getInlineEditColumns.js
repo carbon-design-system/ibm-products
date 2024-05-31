@@ -90,6 +90,18 @@ export const getInlineEditColumns = () => {
       },
     },
     {
+      Header: 'is Active',
+      accessor: 'isActive',
+      inlineEdit: {
+        type: 'checkbox',
+        inputProps: {
+          onChange: (newDateObj, cell) => {
+            console.log(newDateObj, cell);
+          },
+        },
+      },
+    },
+    {
       Header: 'Active since',
       accessor: 'activeSince',
       inlineEdit: {

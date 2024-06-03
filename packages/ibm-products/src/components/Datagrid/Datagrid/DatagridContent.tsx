@@ -9,12 +9,9 @@ import {
   FilterContext,
   //  FilterPanel
 } from './addons/Filtering';
-import React, { useContext, ForwardedRef, useRef } from 'react'; // { , useEffect,  }
+import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 // import { Table, TableContainer } from '@carbon/react';
-import {
-  // carbon,
-  pkg,
-} from '../../../settings';
+import { carbon, pkg } from '../../../settings';
 
 // import {
 //   CLEAR_FILTERS,
@@ -29,7 +26,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import cx from 'classnames'
 // import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
-// import { px } from '@carbon/layout';
+import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 // import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
@@ -193,28 +190,28 @@ DatagridContentProps) => {
   });
   console.log(keysPressedList, usingMac);
 
-  // // Provides a width for the region outline for useInlineEdit
-  // useEffect(() => {
-  //   if (!withInlineEdit) {
-  //     return;
-  //   }
-  //   const gridElement: HTMLElement | null = document.querySelector(
-  //     `#${tableId}`
-  //   );
-  //   const tableHeader = gridElement?.querySelector(
-  //     `.${carbon.prefix}--data-table-header`
-  //   );
-  //   gridElement?.style?.setProperty(
-  //     `--${blockClass}--grid-width`,
-  //     px((totalColumnsWidth || 0) + 32)
-  //   );
-  //   if (gridActive) {
-  //     gridElement?.style.setProperty(
-  //       `--${blockClass}--grid-header-height`,
-  //       px(tableHeader?.clientHeight || 0)
-  //     );
-  //   }
-  // }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+  // Provides a width for the region outline for useInlineEdit
+  useEffect(() => {
+    if (!withInlineEdit) {
+      return;
+    }
+    const gridElement: HTMLElement | null = document.querySelector(
+      `#${tableId}`
+    );
+    const tableHeader = gridElement?.querySelector(
+      `.${carbon.prefix}--data-table-header`
+    );
+    gridElement?.style?.setProperty(
+      `--${blockClass}--grid-width`,
+      px((totalColumnsWidth || 0) + 32)
+    );
+    if (gridActive) {
+      gridElement?.style.setProperty(
+        `--${blockClass}--grid-header-height`,
+        px(tableHeader?.clientHeight || 0)
+      );
+    }
+  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
   // useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
   //   clearSingleFilter(id, setAllFilters, state)

@@ -5,30 +5,24 @@
 //  * LICENSE file in the root directory of this source tree.
 //  */
 
-import {
-  FilterContext,
-  //  FilterPanel
-} from './addons/Filtering';
+import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
-import {
-  //  Table,
-  TableContainer,
-} from '@carbon/react';
+import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
 import {
   CLEAR_FILTERS,
   CLEAR_SINGLE_FILTER,
 } from './addons/Filtering/constants';
-// import DatagridBody from './DatagridBody';
-// import DatagridHead from './DatagridHead';
+import DatagridBody from './DatagridBody';
+import DatagridHead from './DatagridHead';
 import DatagridToolbar from './DatagridToolbar';
 import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
-// import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
-// import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
+import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
+import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
@@ -42,28 +36,17 @@ const gcClass = `${blockClass}__grid-container`;
 interface DatagridContentProps {
   ariaToolbarLabel?: string;
   datagridState: DataGridState;
-  //   title?: string;
+  title?: string;
 }
 
 export const DatagridContent = ({
   datagridState,
   ariaToolbarLabel,
-}: // ,
-//   // title,
-DatagridContentProps) => {
+  title,
+}: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
-  console.log(
-    inlineEditState,
-    dispatch,
-    filterTags,
-    EventEmitter,
-    panelOpen,
-    activeCellId,
-    gridActive,
-    editId
-  );
   const {
     getTableProps,
     getFilterFlyoutProps,
@@ -73,7 +56,7 @@ DatagridContentProps) => {
     CustomizeColumnsTearsheet,
     filterProps,
     fullHeightDatagrid,
-    // verticalAlign = 'center',
+    verticalAlign = 'center',
     variableRowHeight,
     gridTitle,
     gridDescription,
@@ -88,33 +71,8 @@ DatagridContentProps) => {
     page,
     rows,
   } = datagridState;
-  console.log(
-    getTableProps,
-    getFilterFlyoutProps,
-    withVirtualScroll,
-    DatagridPagination,
-    isFetching,
-    CustomizeColumnsTearsheet,
-    filterProps,
-    fullHeightDatagrid,
-    // verticalAlign = 'center',
-    variableRowHeight,
-    gridTitle,
-    gridDescription,
-    useDenseHeader,
-    withInlineEdit,
-    tableId,
-    DatagridActions,
-    totalColumnsWidth,
-    gridRef,
-    setAllFilters,
-    state,
-    page,
-    rows
-  );
 
   const { columnResizing } = state;
-  console.log(columnResizing);
 
   const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
@@ -137,55 +95,55 @@ DatagridContentProps) => {
     dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
   });
 
-  // const renderTable = () => {
-  //   return (
-  //     <>
-  //       <Table
-  //         {...getTableProps?.()}
-  //         className={cx(
-  //           withVirtualScroll
-  //             ? `${blockClass}__table-virtual-scroll`
-  //             : `${blockClass}__table-simple`,
-  //           `${blockClass}__vertical-align-${verticalAlign}`,
-  //           { [`${blockClass}__variable-row-height`]: variableRowHeight },
-  //           { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
-  //           { [`${blockClass}__table-grid-active`]: gridActive },
-  //           {
-  //             [`${blockClass}__table-is-resizing`]:
-  //               typeof columnResizing?.isResizingColumn === 'string',
-  //           },
-  //           getTableProps?.().className
-  //         )}
-  //         role={withInlineEdit ? 'grid' : undefined}
-  //         tabIndex={withInlineEdit ? 0 : -1}
-  //         onKeyDown={
-  //           withInlineEdit &&
-  //           ((event) =>
-  //             handleGridKeyPress({
-  //               event,
-  //               dispatch,
-  //               instance: datagridState,
-  //               keysPressedList,
-  //               state: inlineEditState,
-  //               usingMac,
-  //               ref: multiKeyTrackingRef,
-  //             }))
-  //         }
-  //         onFocus={
-  //           withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
-  //         }
-  //         title={title}
-  //       >
-  //         {(!withVirtualScroll ||
-  //           (withVirtualScroll && !isFetching && !contentRows.length)) && (
-  //           <DatagridHead {...datagridState} />
-  //         )}
-  //         <DatagridBody {...datagridState} rows={contentRows} />
-  //       </Table>
-  //       {filterProps?.variation === 'panel' && renderPagination()}
-  //     </>
-  //   );
-  // };
+  const renderTable = () => {
+    return (
+      <>
+        <Table
+          {...getTableProps?.()}
+          className={cx(
+            withVirtualScroll
+              ? `${blockClass}__table-virtual-scroll`
+              : `${blockClass}__table-simple`,
+            `${blockClass}__vertical-align-${verticalAlign}`,
+            { [`${blockClass}__variable-row-height`]: variableRowHeight },
+            { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
+            { [`${blockClass}__table-grid-active`]: gridActive },
+            {
+              [`${blockClass}__table-is-resizing`]:
+                typeof columnResizing?.isResizingColumn === 'string',
+            },
+            getTableProps?.().className
+          )}
+          role={withInlineEdit ? 'grid' : undefined}
+          tabIndex={withInlineEdit ? 0 : -1}
+          onKeyDown={
+            withInlineEdit &&
+            ((event) =>
+              handleGridKeyPress({
+                event,
+                dispatch,
+                instance: datagridState,
+                keysPressedList,
+                state: inlineEditState,
+                usingMac,
+                ref: multiKeyTrackingRef,
+              }))
+          }
+          onFocus={
+            withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
+          }
+          title={title}
+        >
+          {(!withVirtualScroll ||
+            (withVirtualScroll && !isFetching && !contentRows.length)) && (
+            <DatagridHead {...datagridState} />
+          )}
+          <DatagridBody {...datagridState} rows={contentRows} />
+        </Table>
+        {filterProps?.variation === 'panel' && renderPagination()}
+      </>
+    );
+  };
 
   const { keysPressedList, usingMac } = useMultipleKeyTracking({
     ref: withInlineEdit ? multiKeyTrackingRef : null,
@@ -238,8 +196,6 @@ DatagridContentProps) => {
     }
   };
 
-  console.log(renderFilterSummary, renderPagination);
-
   return (
     <>
       <TableContainer
@@ -260,7 +216,7 @@ DatagridContentProps) => {
           {...datagridState}
           ariaToolbarLabel={ariaToolbarLabel}
         />
-        {/* <div
+        <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,
           })}
@@ -290,49 +246,49 @@ DatagridContentProps) => {
               renderTable()
             )}
           </div>
-        </div> */}
+        </div>
       </TableContainer>
-      {/* {filterProps?.variation !== 'panel' && renderPagination()}
+      {filterProps?.variation !== 'panel' && renderPagination()}
       {CustomizeColumnsTearsheet && (
         <CustomizeColumnsTearsheet instance={datagridState} />
-      )} */}
+      )}
     </>
   );
 };
 
-// DatagridContent.propTypes = {
-//   ariaToolbarLabel: PropTypes.string,
-//   datagridState: PropTypes.shape({
-//     getTableProps: PropTypes.func,
-//     getFilterFlyoutProps: PropTypes.func,
-//     withVirtualScroll: PropTypes.bool,
-//     DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-//     DatagridPagination: PropTypes.oneOfType([
-//       PropTypes.element,
-//       PropTypes.func,
-//     ]),
-//     CustomizeColumnsTearsheet: PropTypes.oneOfType([
-//       PropTypes.element,
-//       PropTypes.func,
-//     ]),
-//     isFetching: PropTypes.bool,
-//     skeletonRowCount: PropTypes.number,
-//     fullHeightDatagrid: PropTypes.bool,
-//     filterProps: PropTypes.object,
-//     variableRowHeight: PropTypes.bool,
-//     useDenseHeader: PropTypes.bool,
-//     withInlineEdit: PropTypes.bool,
-//     verticalAlign: PropTypes.string,
-//     gridTitle: PropTypes.node,
-//     gridDescription: PropTypes.node,
-//     page: PropTypes.arrayOf(PropTypes.object),
-//     rows: PropTypes.arrayOf(PropTypes.object),
-//     tableId: PropTypes.string,
-//     totalColumnsWidth: PropTypes.number,
-//     gridRef: PropTypes.object,
-//     setAllFilters: PropTypes.func,
-//     getFilterProps: PropTypes.func,
-//     state: PropTypes.object,
-//   }),
-//   title: PropTypes.string,
-// };
+DatagridContent.propTypes = {
+  ariaToolbarLabel: PropTypes.string,
+  datagridState: PropTypes.shape({
+    getTableProps: PropTypes.func,
+    getFilterFlyoutProps: PropTypes.func,
+    withVirtualScroll: PropTypes.bool,
+    DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    DatagridPagination: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
+    CustomizeColumnsTearsheet: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
+    isFetching: PropTypes.bool,
+    skeletonRowCount: PropTypes.number,
+    fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
+    variableRowHeight: PropTypes.bool,
+    useDenseHeader: PropTypes.bool,
+    withInlineEdit: PropTypes.bool,
+    verticalAlign: PropTypes.string,
+    gridTitle: PropTypes.node,
+    gridDescription: PropTypes.node,
+    page: PropTypes.arrayOf(PropTypes.object),
+    rows: PropTypes.arrayOf(PropTypes.object),
+    tableId: PropTypes.string,
+    totalColumnsWidth: PropTypes.number,
+    gridRef: PropTypes.object,
+    setAllFilters: PropTypes.func,
+    getFilterProps: PropTypes.func,
+    state: PropTypes.object,
+  }),
+  title: PropTypes.string,
+};

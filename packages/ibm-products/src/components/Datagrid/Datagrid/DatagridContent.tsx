@@ -112,7 +112,8 @@ DatagridContentProps) => {
     rows
   );
 
-  // const { columnResizing } = state;
+  const { columnResizing } = state;
+  console.log(columnResizing);
 
   // const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   // const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);

@@ -12,27 +12,27 @@ import React, {
   //  useState
 } from 'react';
 import PropTypes from 'prop-types';
-// import {
-//   TableToolbar,
-//   //   TableBatchActions,
-//   //   TableBatchAction,
-//   //   MenuButton,
-//   //   MenuItem,
-// } from '@carbon/react/lib';
-// import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
-// import {
-//   pkg,
-//   // carbon
-// } from '../../../settings';
-// import cx from 'classnames';
+import {
+  TableToolbar,
+  //   //   TableBatchActions,
+  //   //   TableBatchAction,
+  //   //   MenuButton,
+  //   //   MenuItem,
+} from '@carbon/react/lib';
+import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
+import {
+  pkg,
+  // carbon
+} from '../../../settings';
+import cx from 'classnames';
 // import { handleSelectAllRowData } from './addons/stateReducer';
-// import { DataGridState } from '../types';
+import { DataGridState } from '../types';
 
-// const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
+const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
-// interface DatagridToolbarProps {
-//   ariaToolbarLabel?: string;
-// }
+interface DatagridToolbarProps {
+  ariaToolbarLabel?: string;
+}
 
 // const DatagridBatchActionsToolbar = (
 //   datagridState: DataGridState,
@@ -208,40 +208,36 @@ import PropTypes from 'prop-types';
 //   // );
 // };
 
-const DatagridToolbar = () =>
-  //   {
-  //   ariaToolbarLabel,
-  //   ...datagridState
-  // }: DatagridToolbarProps & DataGridState
-  {
-    const ref = useRef(null);
-    // const { width } = useResizeObserver(ref);
-    // const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
-    // datagridState;
-    console.log(ref);
-    // const getRowHeight = rowSize || 'lg';
+const DatagridToolbar = ({
+  ariaToolbarLabel,
+  ...datagridState
+}: DatagridToolbarProps & DataGridState) => {
+  const ref = useRef(null);
+  const { width } = useResizeObserver(ref);
+  const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
+    datagridState;
+  console.log(ref, DatagridBatchActions, width);
+  const getRowHeight = rowSize || 'lg';
 
-    return <div>hello</div>;
-
-    // return batchActions && DatagridActions ? (
-    //   <div
-    //     ref={ref}
-    //     className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
-    //   >
-    //     <TableToolbar aria-label={ariaToolbarLabel}>
-    //       {<DatagridActions {...datagridState} />}
-    //       {DatagridBatchActionsToolbar?.(datagridState, width, ref)}
-    //     </TableToolbar>
-    //   </div>
-    // ) : DatagridActions ? (
-    //   <div className={blockClass}>
-    //     <TableToolbar aria-label={ariaToolbarLabel}>
-    //       {<DatagridActions {...datagridState} />}
-    //       {DatagridBatchActions?.(datagridState)}
-    //     </TableToolbar>
-    //   </div>
-    // ) : null;
-  };
+  return batchActions && DatagridActions ? (
+    <div
+      ref={ref}
+      className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
+    >
+      <TableToolbar aria-label={ariaToolbarLabel}>
+        {<DatagridActions {...datagridState} />}
+        {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
+      </TableToolbar>
+    </div>
+  ) : DatagridActions ? (
+    <div className={blockClass}>
+      <TableToolbar aria-label={ariaToolbarLabel}>
+        {<DatagridActions {...datagridState} />}
+        {/* {DatagridBatchActions?.(datagridState)} */}
+      </TableToolbar>
+    </div>
+  ) : null;
+};
 
 DatagridToolbar.propTypes = {
   ariaToolbarLabel: PropTypes.string,

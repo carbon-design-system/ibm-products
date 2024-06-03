@@ -43,36 +43,21 @@ const DatagridBatchActionsToolbar = (
   // const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   // const [initialListWidth, setInitialListWidth] = useState(null);
   // const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
-  const {
-    onSelectAllRows,
-    state: { selectedRowIds },
-    toggleAllRowsSelected,
-    toolbarBatchActions,
-    setGlobalFilter,
-    rows,
-    dispatch,
-    getRowId,
-    batchActionMenuButtonLabel,
-    translateWithIdBatchActions,
-  } = datagridState;
-  const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
+  // const {
+  //   onSelectAllRows,
+  //   state: { selectedRowIds },
+  //   toggleAllRowsSelected,
+  //   toolbarBatchActions,
+  //   setGlobalFilter,
+  //   rows,
+  //   dispatch,
+  //   getRowId,
+  //   batchActionMenuButtonLabel,
+  //   translateWithIdBatchActions,
+  // } = datagridState;
+  // const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   // const selectedKeys = Object.keys(selectedRowIds || {});
   // const totalSelected = selectedKeys.length;
-
-  console.log(
-    onSelectAllRows,
-    selectedRowIds,
-    toggleAllRowsSelected,
-    toolbarBatchActions,
-    setGlobalFilter,
-    rows,
-    dispatch,
-    getRowId,
-    batchActionMenuButtonLabel,
-    translateWithIdBatchActions,
-    // displayAllInMenu,
-    batchActionMenuButtonLabelText
-  );
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside

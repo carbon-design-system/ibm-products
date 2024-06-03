@@ -41,11 +41,7 @@ export interface DatagridProps {
  */
 export let Datagrid = React.forwardRef(
   (
-    {
-      datagridState,
-      // title, ariaToolbarLabel,
-      ...rest
-    }: DatagridProps,
+    { datagridState, title, ariaToolbarLabel, ...rest }: DatagridProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     if (!datagridState) {
@@ -68,11 +64,11 @@ export let Datagrid = React.forwardRef(
     const rows = ((DatagridPagination && datagridState.page) ||
       datagridState.rows) as DatagridRow[];
 
-    // const props = {
-    //   title,
-    //   datagridState,
-    //   ariaToolbarLabel,
-    // };
+    const props = {
+      title,
+      datagridState,
+      ariaToolbarLabel,
+    };
 
     return (
       <FilterProvider filters={state?.filters} filterProps={filterProps}>
@@ -97,10 +93,10 @@ export let Datagrid = React.forwardRef(
               <div
                 className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
               >
-                <DatagridContent />
+                <DatagridContent {...props} />
               </div>
             ) : (
-              <DatagridContent />
+              <DatagridContent {...props} />
             )}
           </div>
         </InlineEditProvider>

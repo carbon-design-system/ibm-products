@@ -13,7 +13,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
-// import { DatagridContent } from './DatagridContent';
+import { DatagridContent } from './DatagridContent';
 import { FilterProvider } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
 
@@ -41,11 +41,7 @@ export interface DatagridProps {
  */
 export let Datagrid = React.forwardRef(
   (
-    {
-      datagridState,
-      // title, ariaToolbarLabel,
-      ...rest
-    }: DatagridProps,
+    { datagridState, title, ariaToolbarLabel, ...rest }: DatagridProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     if (!datagridState) {
@@ -68,11 +64,11 @@ export let Datagrid = React.forwardRef(
     const rows = ((DatagridPagination && datagridState.page) ||
       datagridState.rows) as DatagridRow[];
 
-    // const props = {
-    //   title,
-    //   datagridState,
-    //   ariaToolbarLabel,
-    // };
+    const props = {
+      title,
+      datagridState,
+      ariaToolbarLabel,
+    };
 
     return (
       <FilterProvider filters={state?.filters} filterProps={filterProps}>
@@ -94,13 +90,13 @@ export let Datagrid = React.forwardRef(
             {...getDevtoolsProps(componentName)}
           >
             Hello
-            {/* {filterProps?.variation === 'panel' ? (
-              <div
-                className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
-              >
-                <DatagridContent {...props} />
-              </div>
-            ) : (
+            {/* {filterProps?.variation === 'panel' ? ( */}
+            <div
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
+            >
+              <DatagridContent {...props} />
+            </div>
+            {/* ) : (
               <DatagridContent {...props} />
             )} */}
           </div>

@@ -13,14 +13,14 @@ import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 // import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
-// import {
-//   CLEAR_FILTERS,
-//   CLEAR_SINGLE_FILTER,
-// } from './addons/Filtering/constants';
+import {
+  CLEAR_FILTERS,
+  CLEAR_SINGLE_FILTER,
+} from './addons/Filtering/constants';
 // import DatagridBody from './DatagridBody';
 // import DatagridHead from './DatagridHead';
 // import DatagridToolbar from './DatagridToolbar';
-// import { FilterSummary } from '../../FilterSummary';
+import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import PropTypes from 'prop-types';
 // import cx from 'classnames'
@@ -29,8 +29,8 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-// import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
-// import { clearSingleFilter } from './addons/Filtering/FilterProvider';
+import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
+import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -213,26 +213,28 @@ DatagridContentProps) => {
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
-  // useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
-  //   clearSingleFilter(id, setAllFilters, state)
-  // );
+  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+    clearSingleFilter(id, setAllFilters, state)
+  );
 
-  // const renderFilterSummary = () =>
-  //   state.filters.length > 0 && (
-  //     <FilterSummary
-  //       className={`${blockClass}__filter-summary`}
-  //       filters={filterTags}
-  //       clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
-  //       renderLabel={filterProps?.renderLabel}
-  //       overflowType="tag"
-  //     />
-  //   );
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary
+        className={`${blockClass}__filter-summary`}
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        renderLabel={filterProps?.renderLabel}
+        overflowType="tag"
+      />
+    );
 
-  // const renderPagination = () => {
-  //   if (contentRows?.length > 0 && !isFetching && DatagridPagination) {
-  //     return <DatagridPagination {...datagridState} />;
-  //   }
-  // };
+  const renderPagination = () => {
+    if (contentRows?.length > 0 && !isFetching && DatagridPagination) {
+      return <DatagridPagination {...datagridState} />;
+    }
+  };
+
+  console.log(renderFilterSummary, renderPagination);
 
   return (
     <>

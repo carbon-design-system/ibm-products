@@ -222,13 +222,13 @@ const DatagridToolbar = ({
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
-  console.log(DatagridBatchActions, DatagridBatchActionsToolbar);
-  const getRowHeight = rowSize || 'lg';
+  console.log(DatagridBatchActions, DatagridBatchActionsToolbar, rowSize);
+  // const getRowHeight = rowSize || 'lg';
 
   return batchActions && DatagridActions ? (
     <div
       ref={ref}
-      className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
+      // className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
       {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
       {/* {<DatagridActions {...datagridState} />} */}

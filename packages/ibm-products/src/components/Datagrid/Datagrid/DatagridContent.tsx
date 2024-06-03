@@ -31,7 +31,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 // import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
-// import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
+import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 // import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 // import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
@@ -186,11 +186,12 @@ DatagridContentProps) => {
   //   );
   // };
 
-  // const { keysPressedList, usingMac } = useMultipleKeyTracking({
-  //   ref: withInlineEdit ? multiKeyTrackingRef : null,
-  //   containerHasFocus: gridActive,
-  //   isEditing: !!editId,
-  // });
+  const { keysPressedList, usingMac } = useMultipleKeyTracking({
+    ref: withInlineEdit ? multiKeyTrackingRef : null,
+    containerHasFocus: gridActive,
+    isEditing: !!editId,
+  });
+  console.log(keysPressedList, usingMac);
 
   // // Provides a width for the region outline for useInlineEdit
   // useEffect(() => {

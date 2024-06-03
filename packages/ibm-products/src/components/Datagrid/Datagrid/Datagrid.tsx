@@ -15,7 +15,10 @@ import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
 import { FilterProvider } from './addons/Filtering/FilterProvider';
-import { DataGridState, DatagridRow } from '../types';
+import {
+  // DataGridState,
+  DatagridRow,
+} from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -29,7 +32,7 @@ export interface DatagridProps {
   /**
    * The data grid state, much of it being supplied by the useDatagrid hook
    */
-  datagridState: DataGridState;
+  datagridState: any;
   /**
    * Table title
    */

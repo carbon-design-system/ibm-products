@@ -22,7 +22,7 @@ import {
 } from './addons/Filtering/constants';
 // import DatagridBody from './DatagridBody';
 // import DatagridHead from './DatagridHead';
-import DatagridToolbar from './DatagridToolbar';
+// import DatagridToolbar from './DatagridToolbar';
 import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import PropTypes from 'prop-types';
@@ -47,8 +47,8 @@ interface DatagridContentProps {
 
 export const DatagridContent = ({
   datagridState,
-  ariaToolbarLabel,
-}: //   // title,
+}: // ariaToolbarLabel,
+//   // title,
 DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
@@ -255,10 +255,10 @@ DatagridContentProps) => {
         title={gridTitle}
         description={gridDescription}
       >
-        <DatagridToolbar
+        {/* <DatagridToolbar
           {...datagridState}
           ariaToolbarLabel={ariaToolbarLabel}
-        />
+        /> */}
         {/* <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,

@@ -13,13 +13,13 @@ import React, {
   // }
 } from 'react';
 import PropTypes from 'prop-types';
-// import {
-//   TableToolbar,
-//   //   //   TableBatchActions,
-//   //   //   TableBatchAction,
-//   //   //   MenuButton,
-//   //   //   MenuItem,
-// } from '@carbon/react/lib';
+import {
+  TableToolbar,
+  //   //   //   TableBatchActions,
+  //   //   //   TableBatchAction,
+  //   //   //   MenuButton,
+  //   //   //   MenuItem,
+} from '@carbon/react/lib';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import {
   pkg,
@@ -224,17 +224,19 @@ const DatagridToolbar = ({
       ref={ref}
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
-      {/* <TableToolbar aria-label={ariaToolbarLabel}>
-        {<DatagridActions {...datagridState} />}
-        {DatagridBatchActionsToolbar?.(datagridState, width, ref)}
-      </TableToolbar> */}
+      <TableToolbar aria-label={ariaToolbarLabel}>
+        <div>hello 1</div>
+        {/* {<DatagridActions {...datagridState} />} */}
+        {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
+      </TableToolbar>
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
-      {/* <TableToolbar aria-label={ariaToolbarLabel}>
-        {<DatagridActions {...datagridState} />}
-        {DatagridBatchActions?.(datagridState)}
-      </TableToolbar> */}
+      <TableToolbar aria-label={ariaToolbarLabel}>
+        <div>hello 2</div>
+        {/* {<DatagridActions {...datagridState} />} */}
+        {/* {DatagridBatchActions?.(datagridState)} */}
+      </TableToolbar>
     </div>
   ) : null;
 };

@@ -5,7 +5,10 @@
 //  * LICENSE file in the root directory of this source tree.
 //  */
 
-// import { FilterContext, FilterPanel } from './addons/Filtering';
+import {
+  FilterContext,
+  //  FilterPanel
+} from './addons/Filtering';
 import React, { useContext } from 'react'; // { ForwardedRef, useEffect, useRef }
 // import { Table, TableContainer } from '@carbon/react';
 // import { carbon, pkg } from '../../../settings';
@@ -20,7 +23,7 @@ import React, { useContext } from 'react'; // { ForwardedRef, useEffect, useRef 
 // import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import PropTypes from 'prop-types';
-// import cx from 'classnames';
+// import cx from 'classnames'
 // import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 // import { px } from '@carbon/layout';
@@ -28,182 +31,204 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 // import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 // import { clearSingleFilter } from './addons/Filtering/FilterProvider';
-// import {
-//   DataGridState,
-//   // DatagridRow
-// } from '../types';
+import {
+  DataGridState,
+  // DatagridRow
+} from '../types';
 
 // const blockClass = `${pkg.prefix}--datagrid`;
 // const gcClass = `${blockClass}__grid-container`;
 
-// interface DatagridContentProps {
-//   //   ariaToolbarLabel?: string;
-//   datagridState: DataGridState;
-//   //   title?: string;
-// }
+interface DatagridContentProps {
+  //   ariaToolbarLabel?: string;
+  datagridState: DataGridState;
+  //   title?: string;
+}
 
-export const DatagridContent = () =>
-  // {
-  // datagridState,
-  // }: //   // title,
-  //   // ariaToolbarLabel,
-  // DatagridContentProps
-  {
-    const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
-    console.log(inlineEditState, dispatch);
-    // const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
-    // const { activeCellId, gridActive, editId } = inlineEditState;
-    // const {
-    //   getTableProps,
-    //   getFilterFlyoutProps,
-    //   withVirtualScroll,
-    //   DatagridPagination,
-    //   isFetching,
-    //   CustomizeColumnsTearsheet,
-    //   filterProps,
-    //   fullHeightDatagrid,
-    //   // verticalAlign = 'center',
-    //   variableRowHeight,
-    //   gridTitle,
-    //   gridDescription,
-    //   useDenseHeader,
-    //   withInlineEdit,
-    //   tableId,
-    //   DatagridActions,
-    //   totalColumnsWidth,
-    //   gridRef,
-    //   setAllFilters,
-    //   state,
-    //   page,
-    //   rows,
-    // } = datagridState;
+export const DatagridContent = ({
+  datagridState,
+}: //   // title,
+// ariaToolbarLabel,
+DatagridContentProps) => {
+  const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
+  const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
+  console.log(inlineEditState, dispatch, filterTags, EventEmitter, panelOpen);
+  // const { activeCellId, gridActive, editId } = inlineEditState;
+  const {
+    getTableProps,
+    getFilterFlyoutProps,
+    withVirtualScroll,
+    DatagridPagination,
+    isFetching,
+    CustomizeColumnsTearsheet,
+    filterProps,
+    fullHeightDatagrid,
+    // verticalAlign = 'center',
+    variableRowHeight,
+    gridTitle,
+    gridDescription,
+    useDenseHeader,
+    withInlineEdit,
+    tableId,
+    DatagridActions,
+    totalColumnsWidth,
+    gridRef,
+    setAllFilters,
+    state,
+    page,
+    rows,
+  } = datagridState;
+  console.log(
+    getTableProps,
+    getFilterFlyoutProps,
+    withVirtualScroll,
+    DatagridPagination,
+    isFetching,
+    CustomizeColumnsTearsheet,
+    filterProps,
+    fullHeightDatagrid,
+    // verticalAlign = 'center',
+    variableRowHeight,
+    gridTitle,
+    gridDescription,
+    useDenseHeader,
+    withInlineEdit,
+    tableId,
+    DatagridActions,
+    totalColumnsWidth,
+    gridRef,
+    setAllFilters,
+    state,
+    page,
+    rows
+  );
 
-    // const { columnResizing } = state;
+  // const { columnResizing } = state;
 
-    // const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
-    // const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
-    // const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  // const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
+  // const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  // const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
 
-    // useClickOutside(gridAreaRef, (target) => {
-    //   if (!withInlineEdit) {
-    //     return;
-    //   }
-    //   // We return from here if we find a parent element with the selector below
-    //   // because that element was initially part of the grid area but was removed
-    //   // and swapped out with an input, i.e. text, number, selection, or date picker
-    //   if (
-    //     target.closest(`.${blockClass}__inline-edit-button`) ||
-    //     target.closest(`.${blockClass}__inline-edit--select`)
-    //   ) {
-    //     return;
-    //   }
-    //   dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
-    // });
+  // useClickOutside(gridAreaRef, (target) => {
+  //   if (!withInlineEdit) {
+  //     return;
+  //   }
+  //   // We return from here if we find a parent element with the selector below
+  //   // because that element was initially part of the grid area but was removed
+  //   // and swapped out with an input, i.e. text, number, selection, or date picker
+  //   if (
+  //     target.closest(`.${blockClass}__inline-edit-button`) ||
+  //     target.closest(`.${blockClass}__inline-edit--select`)
+  //   ) {
+  //     return;
+  //   }
+  //   dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+  // });
 
-    // const renderTable = () => {
-    //   return (
-    //     <>
-    //       <Table
-    //         {...getTableProps?.()}
-    //         className={cx(
-    //           withVirtualScroll
-    //             ? `${blockClass}__table-virtual-scroll`
-    //             : `${blockClass}__table-simple`,
-    //           `${blockClass}__vertical-align-${verticalAlign}`,
-    //           { [`${blockClass}__variable-row-height`]: variableRowHeight },
-    //           { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
-    //           { [`${blockClass}__table-grid-active`]: gridActive },
-    //           {
-    //             [`${blockClass}__table-is-resizing`]:
-    //               typeof columnResizing?.isResizingColumn === 'string',
-    //           },
-    //           getTableProps?.().className
-    //         )}
-    //         role={withInlineEdit ? 'grid' : undefined}
-    //         tabIndex={withInlineEdit ? 0 : -1}
-    //         onKeyDown={
-    //           withInlineEdit &&
-    //           ((event) =>
-    //             handleGridKeyPress({
-    //               event,
-    //               dispatch,
-    //               instance: datagridState,
-    //               keysPressedList,
-    //               state: inlineEditState,
-    //               usingMac,
-    //               ref: multiKeyTrackingRef,
-    //             }))
-    //         }
-    //         onFocus={
-    //           withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
-    //         }
-    //         title={title}
-    //       >
-    //         {(!withVirtualScroll ||
-    //           (withVirtualScroll && !isFetching && !contentRows.length)) && (
-    //           <DatagridHead {...datagridState} />
-    //         )}
-    //         <DatagridBody {...datagridState} rows={contentRows} />
-    //       </Table>
-    //       {filterProps?.variation === 'panel' && renderPagination()}
-    //     </>
-    //   );
-    // };
+  // const renderTable = () => {
+  //   return (
+  //     <>
+  //       <Table
+  //         {...getTableProps?.()}
+  //         className={cx(
+  //           withVirtualScroll
+  //             ? `${blockClass}__table-virtual-scroll`
+  //             : `${blockClass}__table-simple`,
+  //           `${blockClass}__vertical-align-${verticalAlign}`,
+  //           { [`${blockClass}__variable-row-height`]: variableRowHeight },
+  //           { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
+  //           { [`${blockClass}__table-grid-active`]: gridActive },
+  //           {
+  //             [`${blockClass}__table-is-resizing`]:
+  //               typeof columnResizing?.isResizingColumn === 'string',
+  //           },
+  //           getTableProps?.().className
+  //         )}
+  //         role={withInlineEdit ? 'grid' : undefined}
+  //         tabIndex={withInlineEdit ? 0 : -1}
+  //         onKeyDown={
+  //           withInlineEdit &&
+  //           ((event) =>
+  //             handleGridKeyPress({
+  //               event,
+  //               dispatch,
+  //               instance: datagridState,
+  //               keysPressedList,
+  //               state: inlineEditState,
+  //               usingMac,
+  //               ref: multiKeyTrackingRef,
+  //             }))
+  //         }
+  //         onFocus={
+  //           withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
+  //         }
+  //         title={title}
+  //       >
+  //         {(!withVirtualScroll ||
+  //           (withVirtualScroll && !isFetching && !contentRows.length)) && (
+  //           <DatagridHead {...datagridState} />
+  //         )}
+  //         <DatagridBody {...datagridState} rows={contentRows} />
+  //       </Table>
+  //       {filterProps?.variation === 'panel' && renderPagination()}
+  //     </>
+  //   );
+  // };
 
-    // const { keysPressedList, usingMac } = useMultipleKeyTracking({
-    //   ref: withInlineEdit ? multiKeyTrackingRef : null,
-    //   containerHasFocus: gridActive,
-    //   isEditing: !!editId,
-    // });
+  // const { keysPressedList, usingMac } = useMultipleKeyTracking({
+  //   ref: withInlineEdit ? multiKeyTrackingRef : null,
+  //   containerHasFocus: gridActive,
+  //   isEditing: !!editId,
+  // });
 
-    // // Provides a width for the region outline for useInlineEdit
-    // useEffect(() => {
-    //   if (!withInlineEdit) {
-    //     return;
-    //   }
-    //   const gridElement: HTMLElement | null = document.querySelector(
-    //     `#${tableId}`
-    //   );
-    //   const tableHeader = gridElement?.querySelector(
-    //     `.${carbon.prefix}--data-table-header`
-    //   );
-    //   gridElement?.style?.setProperty(
-    //     `--${blockClass}--grid-width`,
-    //     px((totalColumnsWidth || 0) + 32)
-    //   );
-    //   if (gridActive) {
-    //     gridElement?.style.setProperty(
-    //       `--${blockClass}--grid-header-height`,
-    //       px(tableHeader?.clientHeight || 0)
-    //     );
-    //   }
-    // }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+  // // Provides a width for the region outline for useInlineEdit
+  // useEffect(() => {
+  //   if (!withInlineEdit) {
+  //     return;
+  //   }
+  //   const gridElement: HTMLElement | null = document.querySelector(
+  //     `#${tableId}`
+  //   );
+  //   const tableHeader = gridElement?.querySelector(
+  //     `.${carbon.prefix}--data-table-header`
+  //   );
+  //   gridElement?.style?.setProperty(
+  //     `--${blockClass}--grid-width`,
+  //     px((totalColumnsWidth || 0) + 32)
+  //   );
+  //   if (gridActive) {
+  //     gridElement?.style.setProperty(
+  //       `--${blockClass}--grid-header-height`,
+  //       px(tableHeader?.clientHeight || 0)
+  //     );
+  //   }
+  // }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
-    // useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
-    //   clearSingleFilter(id, setAllFilters, state)
-    // );
+  // useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+  //   clearSingleFilter(id, setAllFilters, state)
+  // );
 
-    // const renderFilterSummary = () =>
-    //   state.filters.length > 0 && (
-    //     <FilterSummary
-    //       className={`${blockClass}__filter-summary`}
-    //       filters={filterTags}
-    //       clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
-    //       renderLabel={filterProps?.renderLabel}
-    //       overflowType="tag"
-    //     />
-    //   );
+  // const renderFilterSummary = () =>
+  //   state.filters.length > 0 && (
+  //     <FilterSummary
+  //       className={`${blockClass}__filter-summary`}
+  //       filters={filterTags}
+  //       clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+  //       renderLabel={filterProps?.renderLabel}
+  //       overflowType="tag"
+  //     />
+  //   );
 
-    // const renderPagination = () => {
-    //   if (contentRows?.length > 0 && !isFetching && DatagridPagination) {
-    //     return <DatagridPagination {...datagridState} />;
-    //   }
-    // };
+  // const renderPagination = () => {
+  //   if (contentRows?.length > 0 && !isFetching && DatagridPagination) {
+  //     return <DatagridPagination {...datagridState} />;
+  //   }
+  // };
 
-    return (
-      <>
-        hello!
-        {/* <TableContainer
+  return (
+    <>
+      hello!
+      {/* <TableContainer
         className={cx(`${gcClass}`, {
           [`${gcClass}-active`]: gridActive,
           [`${gcClass}-active--without-toolbar`]:
@@ -253,13 +278,13 @@ export const DatagridContent = () =>
           </div>
         </div>
       </TableContainer> */}
-        {/* {filterProps?.variation !== 'panel' && renderPagination()}
+      {/* {filterProps?.variation !== 'panel' && renderPagination()}
       {CustomizeColumnsTearsheet && (
         <CustomizeColumnsTearsheet instance={datagridState} />
       )} */}
-      </>
-    );
-  };
+    </>
+  );
+};
 
 // DatagridContent.propTypes = {
 //   ariaToolbarLabel: PropTypes.string,

@@ -728,6 +728,8 @@ export let SidePanel = React.forwardRef(
               aria-label={closeIconDescription}
               kind="ghost"
               size={slugCloseSize}
+              hasIconOnly
+              tooltipPosition="left"
               renderIcon={(props) => <Close size={20} {...props} />}
               iconDescription={closeIconDescription}
               className={`${blockClass}__close-button`}

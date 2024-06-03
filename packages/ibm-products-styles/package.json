@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-styles",
   "description": "Carbon for IBM Products styles",
-  "version": "2.37.0",
+  "version": "2.37.1",
   "license": "Apache-2.0",
   "installConfig": {
     "hoistingLimits": "none"

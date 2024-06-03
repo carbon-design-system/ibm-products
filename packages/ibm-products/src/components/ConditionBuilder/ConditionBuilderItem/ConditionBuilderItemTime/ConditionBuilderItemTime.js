@@ -17,17 +17,17 @@ export const ConditionBuilderItemTime = ({ onChange, config }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeValue, dayZoneValue, timeZoneValue]);
 
-  const setTimeZone = (e) => {
-    setTimeZoneValue(e.target.value);
+  const setTimeZone = (evt) => {
+    setTimeZoneValue(evt.target.value);
   };
-  const setDayZone = (e) => {
-    setDayZoneValue(e.target.value);
+  const setDayZone = (evt) => {
+    setDayZoneValue(evt.target.value);
   };
-  const setTime = (e) => {
-    setTimeValue(e.target.value);
+  const setTime = (evt) => {
+    setTimeValue(evt.target.value);
   };
   return (
-    <div className={`${blockClass}__condition-builder-item-time`}>
+    <div className={`${blockClass}__item-time`}>
       <TimePicker id="time-picker" labelText="Select a time" onChange={setTime}>
         <TimePickerSelect id="time-picker-day-zone" onChange={setDayZone}>
           <SelectItem value="AM" text="AM" />

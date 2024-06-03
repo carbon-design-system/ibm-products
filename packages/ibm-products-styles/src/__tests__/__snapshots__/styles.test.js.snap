@@ -3636,7 +3636,8 @@ p.c4p--about-modal__copyright-text:first-child {
   background: transparent;
 }
 
-.c4p--datagrid__empty-state .c4p--datagrid__table-simple td {
+.c4p--datagrid__empty-state .c4p--datagrid__table-simple td,
+.c4p--datagrid__empty-state .c4p--datagrid__table-virtual-scroll td {
   padding: 5rem;
 }
 

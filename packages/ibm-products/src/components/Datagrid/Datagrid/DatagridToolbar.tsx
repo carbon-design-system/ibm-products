@@ -22,9 +22,9 @@ import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
-interface DatagridToolbarProps {
-  ariaToolbarLabel?: string;
-}
+// interface DatagridToolbarProps {
+//   ariaToolbarLabel?: string;
+// }
 
 const DatagridBatchActionsToolbar = (
   datagridState: DataGridState,
@@ -214,37 +214,40 @@ const DatagridBatchActionsToolbar = (
   );
 };
 
-const DatagridToolbar = ({
-  ariaToolbarLabel,
-  ...datagridState
-}: DatagridToolbarProps & DataGridState) => {
-  const ref = useRef(null);
-  const { width } = useResizeObserver(ref);
-  const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
-    datagridState;
-  console.log(DatagridBatchActions, DatagridBatchActionsToolbar, rowSize);
-  // const getRowHeight = rowSize || 'lg';
+const DatagridToolbar = () =>
+  // {
+  // ariaToolbarLabel,
+  // ...datagridState
+  // }: DatagridToolbarProps & DataGridState
+  {
+    const ref = useRef(null);
+    const { width } = useResizeObserver(ref);
+    // const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
+    //   datagridState;
+    console.log(DatagridBatchActionsToolbar, width);
+    // const getRowHeight = rowSize || 'lg';
 
-  return batchActions && DatagridActions ? (
-    <div
-      ref={ref}
-      // className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
-    >
-      {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
-      {/* {<DatagridActions {...datagridState} />} */}
-      {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
-      hello - {width} - {ariaToolbarLabel}
-      {/* </TableToolbar> */}
-    </div>
-  ) : DatagridActions ? (
-    <div className={blockClass}>
-      {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
-      {/* {<DatagridActions {...datagridState} />} */}
-      {/* {DatagridBatchActions?.(datagridState)} */}
-      hello - 2{/* </TableToolbar> */}
-    </div>
-  ) : null;
-};
+    return <div>hello!</div>;
+    // return batchActions && DatagridActions ? (
+    //   <div
+    //     ref={ref}
+    //     // className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
+    //   >
+    //     {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
+    //     {/* {<DatagridActions {...datagridState} />} */}
+    //     {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
+    //     hello - {width} - {ariaToolbarLabel}
+    //     {/* </TableToolbar> */}
+    //   </div>
+    // ) : DatagridActions ? (
+    //   <div className={blockClass}>
+    //     {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
+    //     {/* {<DatagridActions {...datagridState} />} */}
+    //     {/* {DatagridBatchActions?.(datagridState)} */}
+    //     hello - 2{/* </TableToolbar> */}
+    //   </div>
+    // ) : null;
+  };
 
 DatagridToolbar.propTypes = {
   ariaToolbarLabel: PropTypes.string,

@@ -14,7 +14,7 @@ import {
   MenuButton,
   MenuItem,
 } from '@carbon/react/lib';
-import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
+// import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { handleSelectAllRowData } from './addons/stateReducer';
@@ -221,10 +221,10 @@ const DatagridToolbar = () =>
   // }: DatagridToolbarProps & DataGridState
   {
     const ref = useRef(null);
-    const { width } = useResizeObserver(ref);
+    // const { width } = useResizeObserver(ref);
     // const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     //   datagridState;
-    console.log(DatagridBatchActionsToolbar, width);
+    console.log(DatagridBatchActionsToolbar, ref);
     // const getRowHeight = rowSize || 'lg';
 
     return <div>hello!</div>;

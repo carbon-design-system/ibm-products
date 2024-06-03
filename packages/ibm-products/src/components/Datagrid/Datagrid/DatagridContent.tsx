@@ -22,10 +22,10 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
-import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
+// import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
-import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
+// import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
@@ -46,7 +46,11 @@ export const DatagridContent = ({
 }: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
-  const { activeCellId, gridActive, editId } = inlineEditState;
+  const {
+    activeCellId,
+    gridActive,
+    //  editId
+  } = inlineEditState;
   const {
     getTableProps,
     getFilterFlyoutProps,
@@ -114,20 +118,20 @@ export const DatagridContent = ({
           )}
           role={withInlineEdit ? 'grid' : undefined}
           tabIndex={withInlineEdit ? 0 : -1}
-          onKeyDown={
-            /* istanbul ignore next */
-            withInlineEdit &&
-            ((event) =>
-              handleGridKeyPress({
-                event,
-                dispatch,
-                instance: datagridState,
-                keysPressedList,
-                state: inlineEditState,
-                usingMac,
-                ref: multiKeyTrackingRef,
-              }))
-          }
+          // onKeyDown={
+          //   /* istanbul ignore next */
+          //   withInlineEdit &&
+          //   ((event) =>
+          //     handleGridKeyPress({
+          //       event,
+          //       dispatch,
+          //       instance: datagridState,
+          //       keysPressedList,
+          //       state: inlineEditState,
+          //       usingMac,
+          //       ref: multiKeyTrackingRef,
+          //     }))
+          // }
           onFocus={
             withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
           }
@@ -144,11 +148,11 @@ export const DatagridContent = ({
     );
   };
 
-  const { keysPressedList, usingMac } = useMultipleKeyTracking({
-    ref: withInlineEdit ? multiKeyTrackingRef : null,
-    containerHasFocus: gridActive,
-    isEditing: !!editId,
-  });
+  // const { keysPressedList, usingMac } = useMultipleKeyTracking({
+  //   ref: withInlineEdit ? multiKeyTrackingRef : null,
+  //   containerHasFocus: gridActive,
+  //   isEditing: !!editId,
+  // });
 
   // Provides a width for the region outline for useInlineEdit
   useEffect(() => {

@@ -89,15 +89,15 @@ export let Datagrid = React.forwardRef(
             )}
             {...getDevtoolsProps(componentName)}
           >
-            {/* {filterProps?.variation === 'panel' ? ( */}
-            {/* <div
-              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
-            >
+            {filterProps?.variation === 'panel' ? (
+              <div
+                className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
+              >
+                <DatagridContent {...props} />
+              </div>
+            ) : (
               <DatagridContent {...props} />
-            </div> */}
-            {/* ) : ( */}
-            <DatagridContent {...props} />
-            {/* )} */}
+            )}
           </div>
         </InlineEditProvider>
       </FilterProvider>

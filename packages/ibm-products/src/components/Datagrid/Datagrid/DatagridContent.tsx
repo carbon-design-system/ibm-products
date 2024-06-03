@@ -7,21 +7,24 @@
 
 import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { ForwardedRef, useContext, useEffect, useRef } from 'react';
-import { Table, TableContainer } from '@carbon/react';
+import {
+  // Table,
+  TableContainer,
+} from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
 import {
   CLEAR_FILTERS,
   CLEAR_SINGLE_FILTER,
 } from './addons/Filtering/constants';
-import DatagridBody from './DatagridBody';
-import DatagridHead from './DatagridHead';
+// import DatagridBody from './DatagridBody';
+// import DatagridHead from './DatagridHead';
 import DatagridToolbar from './DatagridToolbar';
 import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
+// import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
@@ -41,7 +44,7 @@ interface DatagridContentProps {
 
 export const DatagridContent = ({
   datagridState,
-  title,
+  // title,
   ariaToolbarLabel,
 }: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
@@ -49,10 +52,10 @@ export const DatagridContent = ({
   const {
     activeCellId,
     gridActive,
-    //  editId
+    // editId
   } = inlineEditState;
   const {
-    getTableProps,
+    // getTableProps,
     getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
@@ -60,8 +63,8 @@ export const DatagridContent = ({
     CustomizeColumnsTearsheet,
     filterProps,
     fullHeightDatagrid,
-    verticalAlign = 'center',
-    variableRowHeight,
+    // verticalAlign = 'center',
+    // variableRowHeight,
     gridTitle,
     gridDescription,
     useDenseHeader,
@@ -75,7 +78,7 @@ export const DatagridContent = ({
     page,
     rows,
   } = datagridState;
-  const { columnResizing } = state;
+  // const { columnResizing } = state;
 
   const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
@@ -100,7 +103,8 @@ export const DatagridContent = ({
   const renderTable = () => {
     return (
       <>
-        <Table
+        Hi
+        {/* <Table
           {...getTableProps?.()}
           className={cx(
             withVirtualScroll
@@ -118,20 +122,19 @@ export const DatagridContent = ({
           )}
           role={withInlineEdit ? 'grid' : undefined}
           tabIndex={withInlineEdit ? 0 : -1}
-          // onKeyDown={
-          //   /* istanbul ignore next */
-          //   withInlineEdit &&
-          //   ((event) =>
-          //     handleGridKeyPress({
-          //       event,
-          //       dispatch,
-          //       instance: datagridState,
-          //       keysPressedList,
-          //       state: inlineEditState,
-          //       usingMac,
-          //       ref: multiKeyTrackingRef,
-          //     }))
-          // }
+          onKeyDown={
+            withInlineEdit &&
+            ((event) =>
+              handleGridKeyPress({
+                event,
+                dispatch,
+                instance: datagridState,
+                keysPressedList,
+                state: inlineEditState,
+                usingMac,
+                ref: multiKeyTrackingRef,
+              }))
+          }
           onFocus={
             withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
           }
@@ -142,7 +145,7 @@ export const DatagridContent = ({
             <DatagridHead {...datagridState} />
           )}
           <DatagridBody {...datagridState} rows={contentRows} />
-        </Table>
+        </Table> */}
         {filterProps?.variation === 'panel' && renderPagination()}
       </>
     );

@@ -277,7 +277,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   }
 );
 
-export const overlayRefType =
+const overlayRefType =
   typeof HTMLElement === 'undefined'
     ? PropTypes.object
     : PropTypes.instanceOf(HTMLElement);

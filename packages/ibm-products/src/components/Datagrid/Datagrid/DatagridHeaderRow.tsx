@@ -214,13 +214,13 @@ const HeaderRow = (
           const { columnResizing } = state;
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
-          const { className: headerClassName, ...headerProps } =
-            header.getHeaderProps();
+          const { ...headerProps } = header.getHeaderProps();
+
           const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader
               {...headerProps}
-              className={cx(headerClassName, {
+              className={cx(header?.className, {
                 [`${blockClass}__resizableColumn`]: resizerProps,
                 [`${blockClass}__isResizing`]: header?.isResizing,
                 [`${blockClass}__sortableColumn`]:

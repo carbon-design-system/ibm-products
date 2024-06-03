@@ -15,7 +15,7 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
     conditionState.operator == 'between' ? 'range' : 'single';
 
   return (
-    <div className={`${blockClass}__condition-builder-item-date `}>
+    <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
         <DatePicker
           ref={DatePickerInputRef}

@@ -156,6 +156,7 @@ export interface DataGridHeader<T extends object = any>
   extends ColumnInstance,
     UseResizeColumnsColumnProps<T>,
     UseSortByColumnProps<T> {
+  className(className: any, arg1: { [x: string]: any }): unknown;
   isAction?: boolean;
   slug?: any;
 }

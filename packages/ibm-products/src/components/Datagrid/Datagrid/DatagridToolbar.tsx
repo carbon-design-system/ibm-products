@@ -8,7 +8,7 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  TableToolbar,
+  // TableToolbar,
   TableBatchActions,
   TableBatchAction,
   MenuButton,
@@ -230,19 +230,18 @@ const DatagridToolbar = ({
       ref={ref}
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
-      <TableToolbar aria-label={ariaToolbarLabel}>
-        {/* {<DatagridActions {...datagridState} />} */}
-        {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
-        hello - {width}
-      </TableToolbar>
+      {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
+      {/* {<DatagridActions {...datagridState} />} */}
+      {/* {DatagridBatchActionsToolbar?.(datagridState, width, ref)} */}
+      hello - {width} - {ariaToolbarLabel}
+      {/* </TableToolbar> */}
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
-      <TableToolbar aria-label={ariaToolbarLabel}>
-        {/* {<DatagridActions {...datagridState} />} */}
-        {/* {DatagridBatchActions?.(datagridState)} */}
-        hello - 2
-      </TableToolbar>
+      {/* <TableToolbar aria-label={ariaToolbarLabel}> */}
+      {/* {<DatagridActions {...datagridState} />} */}
+      {/* {DatagridBatchActions?.(datagridState)} */}
+      hello - 2{/* </TableToolbar> */}
     </div>
   ) : null;
 };

@@ -52,8 +52,17 @@ export const DatagridContent = ({
 DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
-  console.log(inlineEditState, dispatch, filterTags, EventEmitter, panelOpen);
-  // const { activeCellId, gridActive, editId } = inlineEditState;
+  const { activeCellId, gridActive, editId } = inlineEditState;
+  console.log(
+    inlineEditState,
+    dispatch,
+    filterTags,
+    EventEmitter,
+    panelOpen,
+    activeCellId,
+    gridActive,
+    editId
+  );
   const {
     getTableProps,
     getFilterFlyoutProps,

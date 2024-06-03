@@ -10,7 +10,10 @@ import {
   //  FilterPanel
 } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
-// import { Table, TableContainer } from '@carbon/react';
+import {
+  //  Table,
+  TableContainer,
+} from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
 import {
@@ -19,11 +22,11 @@ import {
 } from './addons/Filtering/constants';
 // import DatagridBody from './DatagridBody';
 // import DatagridHead from './DatagridHead';
-// import DatagridToolbar from './DatagridToolbar';
+import DatagridToolbar from './DatagridToolbar';
 import { FilterSummary } from '../../FilterSummary';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import PropTypes from 'prop-types';
-// import cx from 'classnames'
+import cx from 'classnames';
 // import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { px } from '@carbon/layout';
@@ -34,18 +37,18 @@ import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-// const gcClass = `${blockClass}__grid-container`;
+const gcClass = `${blockClass}__grid-container`;
 
 interface DatagridContentProps {
-  //   ariaToolbarLabel?: string;
+  ariaToolbarLabel?: string;
   datagridState: DataGridState;
   //   title?: string;
 }
 
 export const DatagridContent = ({
   datagridState,
+  ariaToolbarLabel,
 }: //   // title,
-// ariaToolbarLabel,
 DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
@@ -238,8 +241,7 @@ DatagridContentProps) => {
 
   return (
     <>
-      hello!
-      {/* <TableContainer
+      <TableContainer
         className={cx(`${gcClass}`, {
           [`${gcClass}-active`]: gridActive,
           [`${gcClass}-active--without-toolbar`]:
@@ -257,7 +259,7 @@ DatagridContentProps) => {
           {...datagridState}
           ariaToolbarLabel={ariaToolbarLabel}
         />
-        <div
+        {/* <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: panelOpen,
           })}
@@ -287,8 +289,8 @@ DatagridContentProps) => {
               renderTable()
             )}
           </div>
-        </div>
-      </TableContainer> */}
+        </div> */}
+      </TableContainer>
       {/* {filterProps?.variation !== 'panel' && renderPagination()}
       {CustomizeColumnsTearsheet && (
         <CustomizeColumnsTearsheet instance={datagridState} />

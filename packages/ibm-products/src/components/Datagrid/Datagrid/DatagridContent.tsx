@@ -11,7 +11,10 @@ import {
 } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef } from 'react'; // { , useEffect,  }
 // import { Table, TableContainer } from '@carbon/react';
-// import { carbon, pkg } from '../../../settings';
+import {
+  // carbon,
+  pkg,
+} from '../../../settings';
 
 // import {
 //   CLEAR_FILTERS,
@@ -27,13 +30,13 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 // import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 // import { px } from '@carbon/layout';
-// import { useClickOutside } from '../../../global/js/hooks';
+import { useClickOutside } from '../../../global/js/hooks';
 // import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 // import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 // import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
 
-// const blockClass = `${pkg.prefix}--datagrid`;
+const blockClass = `${pkg.prefix}--datagrid`;
 // const gcClass = `${blockClass}__grid-container`;
 
 interface DatagridContentProps {
@@ -117,21 +120,21 @@ DatagridContentProps) => {
   const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
   console.log(contentRows, gridAreaRef, multiKeyTrackingRef);
 
-  // useClickOutside(gridAreaRef, (target) => {
-  //   if (!withInlineEdit) {
-  //     return;
-  //   }
-  //   // We return from here if we find a parent element with the selector below
-  //   // because that element was initially part of the grid area but was removed
-  //   // and swapped out with an input, i.e. text, number, selection, or date picker
-  //   if (
-  //     target.closest(`.${blockClass}__inline-edit-button`) ||
-  //     target.closest(`.${blockClass}__inline-edit--select`)
-  //   ) {
-  //     return;
-  //   }
-  //   dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
-  // });
+  useClickOutside(gridAreaRef, (target) => {
+    if (!withInlineEdit) {
+      return;
+    }
+    // We return from here if we find a parent element with the selector below
+    // because that element was initially part of the grid area but was removed
+    // and swapped out with an input, i.e. text, number, selection, or date picker
+    if (
+      target.closest(`.${blockClass}__inline-edit-button`) ||
+      target.closest(`.${blockClass}__inline-edit--select`)
+    ) {
+      return;
+    }
+    dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+  });
 
   // const renderTable = () => {
   //   return (

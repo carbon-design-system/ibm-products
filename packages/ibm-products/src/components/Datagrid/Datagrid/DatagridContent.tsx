@@ -9,7 +9,7 @@ import {
   FilterContext,
   //  FilterPanel
 } from './addons/Filtering';
-import React, { useContext } from 'react'; // { ForwardedRef, useEffect, useRef }
+import React, { useContext, ForwardedRef, useRef } from 'react'; // { , useEffect,  }
 // import { Table, TableContainer } from '@carbon/react';
 // import { carbon, pkg } from '../../../settings';
 
@@ -31,10 +31,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 // import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 // import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 // import { clearSingleFilter } from './addons/Filtering/FilterProvider';
-import {
-  DataGridState,
-  // DatagridRow
-} from '../types';
+import { DataGridState, DatagridRow } from '../types';
 
 // const blockClass = `${pkg.prefix}--datagrid`;
 // const gcClass = `${blockClass}__grid-container`;
@@ -115,9 +112,10 @@ DatagridContentProps) => {
   const { columnResizing } = state;
   console.log(columnResizing);
 
-  // const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
-  // const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
-  // const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
+  const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
+  console.log(contentRows, gridAreaRef, multiKeyTrackingRef);
 
   // useClickOutside(gridAreaRef, (target) => {
   //   if (!withInlineEdit) {

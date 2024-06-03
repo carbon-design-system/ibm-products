@@ -77,7 +77,6 @@ export const DatagridContent = ({
   const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
   const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
-  console.log(contentRows, gridAreaRef, multiKeyTrackingRef);
 
   useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {
@@ -150,7 +149,6 @@ export const DatagridContent = ({
     containerHasFocus: gridActive,
     isEditing: !!editId,
   });
-  console.log(keysPressedList, usingMac);
 
   // Provides a width for the region outline for useInlineEdit
   useEffect(() => {

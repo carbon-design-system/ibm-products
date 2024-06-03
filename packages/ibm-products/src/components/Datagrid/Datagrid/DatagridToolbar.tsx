@@ -209,7 +209,6 @@ const DatagridToolbar = ({
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
-  console.log(ref, DatagridBatchActions, width, ariaToolbarLabel);
   const getRowHeight = rowSize || 'lg';
   return batchActions && DatagridActions ? (
     <div

@@ -58,7 +58,7 @@ export let Datagrid = React.forwardRef(
       tableId,
       filterProps,
       className,
-      state,
+      // state,
     } = datagridState;
 
     const rows = ((DatagridPagination && datagridState.page) ||
@@ -71,7 +71,7 @@ export let Datagrid = React.forwardRef(
     };
 
     return (
-      <FilterProvider filters={state?.filters} filterProps={filterProps}>
+      <FilterProvider filters={[]} filterProps={undefined}>
         <InlineEditProvider>
           <div
             {...rest}

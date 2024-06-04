@@ -37,8 +37,9 @@ const SelectAllWithToggle = ({
     }
   }, [isAllRowsSelected, selectAllMode, onSelectAllRows]);
 
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [windowSize, setWindowSize] = useState();
   useLayoutEffect(() => {
+    setWindowSize(window.innerWidth);
     function updateSize() {
       setWindowSize(window.innerWidth);
     }

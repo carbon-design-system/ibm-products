@@ -245,7 +245,7 @@ export let CreateFullPage = React.forwardRef(
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const previousState = usePreviousValue({ currentStep, open });
+    const previousState = usePreviousValue({ currentStep });
     const [isDisabled, setIsDisabled] = useState(false);
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
@@ -291,8 +291,7 @@ export let CreateFullPage = React.forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
-      /**@ts-ignore */
-      open,
+      open: true,
       setCurrentStep,
       stepData,
       /**@ts-ignore */

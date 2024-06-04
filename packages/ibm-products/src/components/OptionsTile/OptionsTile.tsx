@@ -22,6 +22,7 @@ import {
 } from '@carbon/react/icons';
 import * as carbonMotion from '@carbon/motion';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { useReducedMotion } from 'framer-motion';
 
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
@@ -161,11 +162,7 @@ export let OptionsTile = React.forwardRef(
     const isInvalid = invalid;
     const isWarn = !isInvalid && warn;
     const isLocked = !isInvalid && !isWarn && locked;
-
-    const reducedMotion =
-      window && window.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
+    const shouldReduceMotion = useReducedMotion();
 
     if (open !== prevIsOpen) {
       if (isOpen && !open) {
@@ -177,7 +174,7 @@ export let OptionsTile = React.forwardRef(
     }
 
     function expand() {
-      if (detailsRef.current && contentRef.current && !reducedMotion.matches) {
+      if (detailsRef.current && contentRef.current && !shouldReduceMotion) {
         setIsOpen(true);
 
         detailsRef.current.open = true;
@@ -214,7 +211,7 @@ export let OptionsTile = React.forwardRef(
     }
 
     function collapse() {
-      if (contentRef.current && !reducedMotion.matches) {
+      if (contentRef.current && !shouldReduceMotion) {
         setClosing(true);
 
         const { paddingTop, paddingBottom, height } = getComputedStyle(

@@ -14,10 +14,9 @@ import { handleSelectAllRowData } from './addons/stateReducer';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SelectAll = (datagridState) => {
-  const [windowSize, setWindowSize] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : ''
-  );
+  const [windowSize, setWindowSize] = useState();
   useLayoutEffect(() => {
+    setWindowSize(window.innerWidth);
     /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);

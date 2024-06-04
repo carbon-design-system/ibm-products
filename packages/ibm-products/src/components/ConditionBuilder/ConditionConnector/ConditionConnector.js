@@ -18,17 +18,17 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
       parentGroup.classList.remove('hoveredConnector');
     }
   }, []);
-  const activeConnectorHandler = (e) => {
-    let parentGroup = e.currentTarget.closest('.eachGroup');
+  const activeConnectorHandler = (evt) => {
+    let parentGroup = evt.currentTarget.closest('.eachGroup');
     handleConnectorHover(parentGroup, true);
   };
-  const inActiveConnectorHandler = (e) => {
-    let parentGroup = e.currentTarget.closest('.eachGroup');
+  const inActiveConnectorHandler = (evt) => {
+    let parentGroup = evt.currentTarget.closest('.eachGroup');
     handleConnectorHover(parentGroup, false);
   };
-  const onChangeHandler = (op, e) => {
+  const onChangeHandler = (op, evt) => {
     onChange(op);
-    focusThisField(e);
+    focusThisField(evt);
   };
   return (
     // <div className={className} {...rest}>

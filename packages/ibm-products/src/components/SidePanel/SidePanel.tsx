@@ -14,6 +14,7 @@ import React, {
   ReactNode,
   ForwardedRef,
   MutableRefObject,
+  RefObject,
 } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
@@ -106,6 +107,11 @@ type SidePanelBaseProps = {
   labelText?: string;
 
   /**
+   * Provide a ref to return focus to once the side panel is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
+
+  /**
    * Sets the icon description for the navigation back icon button
    */
   navigationBackIconDescription?: string;
@@ -157,7 +163,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the size of the side panel
    */
-  size: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
   /**
    * Determines if this panel slides in
@@ -252,6 +258,7 @@ export let SidePanel = React.forwardRef(
       slug,
       subtitle,
       title,
+      launcherButtonRef,
 
       // Collect any other property values passed in.
       ...rest
@@ -275,6 +282,7 @@ export let SidePanel = React.forwardRef(
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
       .current;
+    const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = useReducedMotion();
 
@@ -378,6 +386,14 @@ export let SidePanel = React.forwardRef(
         );
       }
     }, [labelText, title]);
+
+    useEffect(() => {
+      if (previousOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, previousOpen]);
 
     const checkSetDoAnimateTitle = () => {
       let canDoAnimateTitle = false;
@@ -678,7 +694,7 @@ export let SidePanel = React.forwardRef(
         <div
           className={cx(`${blockClass}__header`, {
             [`${blockClass}__header--on-detail-step`]: currentStep > 0,
-            [`${blockClass}__header--no-title-animation`]: !doAnimateTitle,
+            [`${blockClass}__header--no-title-animation`]: !animateTitle,
             [`${blockClass}__header--reduced-motion`]: reducedMotion.matches,
             [`${blockClass}__header--has-title`]: title,
           })}
@@ -967,6 +983,12 @@ SidePanel.propTypes = {
   labelText: PropTypes.string,
 
   /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
+
+  /**
    * Sets the icon description for the navigation back icon button
    */
   navigationBackIconDescription: PropTypes.string,
@@ -1021,7 +1043,7 @@ SidePanel.propTypes = {
    * Sets the size of the side panel
    */
   /**@ts-ignore*/
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Determines if this panel slides in

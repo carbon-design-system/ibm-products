@@ -132,7 +132,7 @@ const mainContent = (
   <div className="tearsheet-stories__dummy-content-block">
     <Form>
       <p>Main content</p>
-      <FormGroup legendText="">
+      <FormGroup legendId="tearsheet-form-group" legendText="FormGroup Legend">
         <TextInput
           id="tss-ft1"
           labelText="Enter an important value here"
@@ -223,6 +223,50 @@ const Template = ({ actions, slug, ...args }) => {
           open={open}
           onClose={() => setOpen(false)}
           slug={slug && sampleSlug}
+        >
+          {mainContent}
+        </Tearsheet>
+      </div>
+    </>
+  );
+};
+
+const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef();
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef();
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <Button ref={buttonRef} onClick={() => setOpen(true)}>
+        Open Tearsheet
+      </Button>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          slug={slug && sampleSlug}
+          launcherButtonRef={buttonRef}
         >
           {mainContent}
         </Tearsheet>
@@ -424,6 +468,15 @@ withInfluencer.args = {
   influencer,
   influencerPosition: 'left',
   influencerWidth: 'narrow',
+  onClose: action('onClose called'),
+  title,
+  actions: 7,
+};
+
+export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});
+ReturnFocusToOpenButton.args = {
+  closeIconDescription,
+  description,
   onClose: action('onClose called'),
   title,
   actions: 7,

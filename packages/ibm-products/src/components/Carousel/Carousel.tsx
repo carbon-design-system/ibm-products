@@ -19,7 +19,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-interface CarouselProps {
+export interface CarouselProps {
   /**
    * Provide the contents of the Carousel.
    */
@@ -52,6 +52,10 @@ interface CarouselProps {
    * a value between 0 and 1.
    */
   onScroll?: (scrollPercent: number) => void;
+  /**
+   * Additional props passed to the component.
+   */
+  [key: string]: any;
 }
 
 // The block part of our conventional BEM class names (blockClass__E--M).

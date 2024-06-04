@@ -1,7 +1,7 @@
-export const focusThisField = (e) => {
+export const focusThisField = (evt) => {
   setTimeout(() => {
-    e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
-    e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
+    evt.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
+    evt.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
   }, 0);
 };
 export const focusThisItem = (currentElement) => {

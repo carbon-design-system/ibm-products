@@ -25,6 +25,7 @@ const useInlineEdit = (hooks, usingEditableCell) => {
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
+    const isDisabled = cell.column?.isDisabled;
 
     const renderInlineEditComponent = (type) => (
       <InlineEditCell
@@ -32,6 +33,7 @@ const useInlineEdit = (hooks, usingEditableCell) => {
         tabIndex={-1}
         value={cell.value}
         cell={cell}
+        isDisabled={isDisabled}
         instance={instance}
         type={type}
       />
@@ -76,7 +78,7 @@ const useInlineEdit = (hooks, usingEditableCell) => {
                 value={cell.value}
                 cell={cell}
                 instance={instance}
-                disabled
+                disabledCell={isDisabled}
                 nonEditCell
                 type="text"
               />

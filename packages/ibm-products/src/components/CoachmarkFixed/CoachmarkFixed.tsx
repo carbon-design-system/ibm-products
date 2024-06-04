@@ -12,6 +12,7 @@ import React, {
   useState,
   useCallback,
   ReactNode,
+  TransitionEvent,
 } from 'react';
 
 // Other standard imports.
@@ -117,7 +118,6 @@ export let CoachmarkFixed = React.forwardRef<
     }, [portalTarget]);
 
     const handleClose = useCallback(() => {
-      console.log('HANDLING CLOSE HERE...');
       if (shouldReduceMotion) {
         setIsOpen(false);
       } else {
@@ -125,11 +125,7 @@ export let CoachmarkFixed = React.forwardRef<
       }
     }, [shouldReduceMotion]);
 
-    const handleTransitionEnd = (e) => {
-      console.log(
-        'Here at transition end... ',
-        e.propertyName === 'transform' && !fixedIsVisible
-      );
+    const handleTransitionEnd = (e: TransitionEvent) => {
       if (e.propertyName === 'transform' && !fixedIsVisible) {
         setIsOpen(false);
         onClose();

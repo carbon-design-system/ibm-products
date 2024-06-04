@@ -83,7 +83,6 @@ export let CoachmarkStack = React.forwardRef(
           document?.querySelector('body')
         : document?.querySelector('body');
     }, [portalTarget]);
-    console.log(portalNode);
 
     const stackHomeRef = useRef();
     const stackedCoachmarkRefs = useRef([]);

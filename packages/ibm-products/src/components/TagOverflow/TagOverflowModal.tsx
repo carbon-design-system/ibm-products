@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -30,6 +30,22 @@ const defaults = {
   searchLabel: '',
 };
 
+interface TagType {
+  label: string;
+}
+type AllTags = (TagType & Omit<React.ComponentProps<Tag>, 'filter'>)[];
+interface TagOverflowModalProps {
+  allTags?: AllTags;
+  className?: string;
+  onClose?: () => void;
+  open?: boolean;
+  overflowType?: 'default' | 'tag';
+  portalTarget?: ReactNode;
+  searchLabel?: string;
+  searchPlaceholder?: string;
+  title?: string;
+}
+
 export const TagOverflowModal = ({
   // The component props, in alphabetical order (for consistency).
 
@@ -45,17 +61,17 @@ export const TagOverflowModal = ({
 
   // Collect any other property values passed in.
   ...rest
-}) => {
+}: TagOverflowModalProps) => {
   const [search, setSearch] = useState('');
   const renderPortalUse = usePortalTarget(portalTargetIn);
 
-  const getFilteredItems = () => {
-    if (open && search) {
+  const getFilteredItems = (): AllTags => {
+    if (open && search && allTags) {
       return allTags.filter((tag) =>
         tag.label?.toLocaleLowerCase()?.includes(search.toLocaleLowerCase())
       );
     }
-    return allTags;
+    return allTags || [];
   };
 
   const handleSearch = (evt) => {

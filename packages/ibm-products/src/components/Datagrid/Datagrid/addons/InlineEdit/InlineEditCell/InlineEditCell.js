@@ -33,6 +33,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 export const InlineEditCell = ({
   cell,
   config,
+  disabledCell = false,
   instance,
   placeholder = '',
   tabIndex,
@@ -349,6 +350,10 @@ export const InlineEditCell = ({
     }
   };
 
+  const renderRegularCell = () => {
+    return <span {...inputProps} id={cellId}></span>;
+  };
+
   const renderDateCell = () => {
     const datePickerPreparedProps = prepareProps(config.inputProps, [
       'datePickerInputProps',
@@ -499,7 +504,7 @@ export const InlineEditCell = ({
       data-cell-id={cellId}
       data-column-index={columnIndex}
       data-row-index={cell.row.index}
-      data-disabled={nonEditCell}
+      data-disabled={disabledCell}
       data-inline-type={type}
       onClick={!nonEditCell ? handleInlineCellClick : addActiveState}
       onKeyDown={!nonEditCell ? handleKeyDown : null}
@@ -508,9 +513,12 @@ export const InlineEditCell = ({
         [`${blockClass}__inline-edit--outer-cell-button--lg`]: !rowSize,
         [`${blockClass}__inline-edit--outer-cell-button--invalid`]:
           config?.validator?.(cellValue),
+        [`${blockClass}__static--outer-cell`]: !disabledCell,
       })}
     >
-      {!inEditMode && type !== 'checkbox' && (
+
+      {!nonEditCell && !disabledCell && renderRegularCell()}
+      {((!inEditMode && type !== 'checkbox') || disabledCell) && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
           renderIcon={setRenderIcon()}
@@ -521,6 +529,7 @@ export const InlineEditCell = ({
               ? buildDate(value)
               : value
           }
+          disabledCell={disabledCell}
           labelIcon={value?.icon || null}
           placeholder={placeholder}
           tabIndex={tabIndex}
@@ -545,6 +554,7 @@ export const InlineEditCell = ({
 InlineEditCell.propTypes = {
   cell: PropTypes.object,
   config: PropTypes.object,
+  disabledCell: PropTypes.bool,
   instance: PropTypes.shape({
     columns: PropTypes.arrayOf(PropTypes.object),
     onDataUpdate: PropTypes.func,

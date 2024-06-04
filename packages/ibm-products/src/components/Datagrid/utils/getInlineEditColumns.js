@@ -38,6 +38,11 @@ export const getInlineEditColumns = () => {
       id: 'rowIndex', // id is required when accessor is a function.
     },
     {
+      Header: 'Disabled column',
+      accessor: 'disabledColumn',
+      isDisabled: true,
+    },
+    {
       Header: 'First Name',
       accessor: 'firstName',
       inlineEdit: {

@@ -80,6 +80,7 @@ $row-heights: (
   align-items: center;
 }
 
+
 .#{variables.$block-class}__inline-edit--outer-cell-checkbox-focus
   .cds--checkbox-label::before {
   outline: $spacing-01 solid $focus;
@@ -91,6 +92,12 @@ $row-heights: (
   height: -webkit-fill-available;
   justify-content: center;
   padding-inline: $spacing-05;
+}
+
+.#{variables.$block-class}__static--outer-cell {
+  display: flex;
+  height: -webkit-fill-available;
+  align-items: center;
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button {

@@ -106,11 +106,31 @@ export const InlineEditCell = ({
     if (activeCellId !== cellId || !editId) {
       setInEditMode(false);
     }
+
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
+      const splitData = cellId.split('-');
+      const columnIndex = parseInt(splitData[1]);
+      const rowIndex = parseInt(splitData[3]);
+
+      instance.cellEditing = {
+        cellId,
+        columnIndex,
+        rowIndex,
+        curCellValue: cellValue,
+      };
+
       setInEditMode(true);
       saveCellData(cellValue);
     }
-  }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
+  }, [
+    activeCellId,
+    cellId,
+    nonEditCell,
+    editId,
+    cellValue,
+    saveCellData,
+    instance,
+  ]);
 
   const openDropdown = (type) => {
     // *****
@@ -534,6 +554,7 @@ InlineEditCell.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.object),
     rowSize: PropTypes.string,
     tableId: PropTypes.string,
+    cellEditing: PropTypes.object,
   }),
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,

@@ -350,11 +350,6 @@ export let SidePanel = React.forwardRef(
       titleItemsStyles,
     ]);
 
-    const reducedMotion =
-      typeof document !== 'undefined' && window?.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
-
     // scroll panel to top going between steps
     useEffect(() => {
       if (sidePanelRef && panelRefValue) {
@@ -405,7 +400,7 @@ export let SidePanel = React.forwardRef(
         titleRef?.current &&
         title &&
         title.length &&
-        !reducedMotion.matches
+        !shouldReduceMotion
       ) {
         const titleEl = titleRef.current;
         const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
@@ -480,7 +475,7 @@ export let SidePanel = React.forwardRef(
         titleRef?.current &&
         title &&
         title.length &&
-        !reducedMotion.matches
+        !shouldReduceMotion
       ) {
         checkSetDoAnimateTitle();
       }
@@ -493,7 +488,7 @@ export let SidePanel = React.forwardRef(
       handleScroll,
       title,
       size,
-      reducedMotion.matches,
+      shouldReduceMotion,
       id,
     ]);
 
@@ -544,10 +539,10 @@ export let SidePanel = React.forwardRef(
     // Set the internal state `animationComplete` to true if
     // prefers reduced motion is true
     useEffect(() => {
-      if (reducedMotion.matches) {
+      if (shouldReduceMotion) {
         setAnimationComplete(true);
       }
-    }, [reducedMotion.matches]);
+    }, [shouldReduceMotion]);
 
     // initializes the side panel to open
     const onAnimationStart = () => {
@@ -573,11 +568,11 @@ export let SidePanel = React.forwardRef(
         !open &&
         previousState &&
         previousState['open'] &&
-        reducedMotion.matches
+        shouldReduceMotion
       ) {
         onUnmount?.();
       }
-    }, [open, onUnmount, reducedMotion.matches, previousState]);
+    }, [open, onUnmount, shouldReduceMotion, previousState]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
@@ -594,13 +589,13 @@ export let SidePanel = React.forwardRef(
         }
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginInlineEnd = '0';
-          pageContentElement.style.transition = !reducedMotion.matches
+          pageContentElement.style.transition = !shouldReduceMotion
             ? `margin-inline-end ${moderate02}`
             : '';
           pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginInlineStart = '0';
-          pageContentElement.style.transition = !reducedMotion.matches
+          pageContentElement.style.transition = !shouldReduceMotion
             ? `margin-inline-start ${moderate02}`
             : '';
           pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
@@ -611,7 +606,7 @@ export let SidePanel = React.forwardRef(
       selectorPageContent,
       placement,
       size,
-      reducedMotion.matches,
+      shouldReduceMotion,
       open,
     ]);
 
@@ -667,7 +662,7 @@ export let SidePanel = React.forwardRef(
           {title}
         </h2>
 
-        {doAnimateTitle && !reducedMotion.matches && (
+        {doAnimateTitle && !shouldReduceMotion && (
           <h2
             className={`${blockClass}__collapsed-title-text`}
             title={title}
@@ -695,7 +690,7 @@ export let SidePanel = React.forwardRef(
           className={cx(`${blockClass}__header`, {
             [`${blockClass}__header--on-detail-step`]: currentStep > 0,
             [`${blockClass}__header--no-title-animation`]: !animateTitle,
-            [`${blockClass}__header--reduced-motion`]: reducedMotion.matches,
+            [`${blockClass}__header--reduced-motion`]: shouldReduceMotion,
             [`${blockClass}__header--has-title`]: title,
           })}
           ref={headerRef}

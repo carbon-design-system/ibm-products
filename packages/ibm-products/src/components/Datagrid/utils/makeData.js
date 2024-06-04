@@ -138,7 +138,7 @@ const newPerson = (index, config) => {
         : initialChartTypeIndex === 1
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
-    isActive: false,
+    key: false,
     activeSince:
       activeChance > 0.66
         ? activeSinceDate

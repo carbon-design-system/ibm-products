@@ -90,8 +90,8 @@ export const getInlineEditColumns = () => {
       },
     },
     {
-      Header: 'is Active',
-      accessor: 'isActive',
+      Header: 'Key',
+      accessor: 'key',
       inlineEdit: {
         type: 'checkbox',
         inputProps: {

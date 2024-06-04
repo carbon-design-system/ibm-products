@@ -450,6 +450,7 @@ export const InlineEditCell = ({
       <Checkbox
         labelText={cellLabel || 'Checkbox'}
         {...inputProps}
+        className={cx(`${blockClass}__inline-edit--outer-cell-checkbox`)}
         id={cellId}
         hideLabel
         checked={cellValue}

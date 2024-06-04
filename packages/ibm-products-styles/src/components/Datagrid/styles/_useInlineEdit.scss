@@ -80,6 +80,13 @@ $row-heights: (
   align-items: center;
 }
 
+.#{variables.$block-class}__inline-edit--outer-cell-checkbox {
+  display: flex;
+  height: -webkit-fill-available;
+  justify-content: center;
+  padding-inline: $spacing-05;
+}
+
 .#{variables.$block-class}__inline-edit--outer-cell-button {
   width: 100%;
   height: calc(100% + 2px); // account for borders

@@ -197,3 +197,4 @@ declare module '@carbon/react' {
 }
 
 declare module '@carbon/colors';
+declare module '@carbon/feature-flags';

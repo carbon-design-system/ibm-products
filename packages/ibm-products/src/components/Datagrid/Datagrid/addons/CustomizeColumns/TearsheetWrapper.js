@@ -1,12 +1,13 @@
-/* Copyright IBM Corp. 2022, 2023
+/* Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CustomizeColumnsTearsheet from './CustomizeColumnsTearsheet';
+import { InlineEditContext } from '../InlineEdit/InlineEditContext';
 
 const TearsheetWrapper = ({ instance }) => {
   const {
@@ -16,6 +17,21 @@ const TearsheetWrapper = ({ instance }) => {
     labels,
     ...rest
   } = instance.customizeColumnsProps;
+
+  const { state } = useContext(InlineEditContext);
+  const { featureFlags } = state || {};
+
+  useEffect(() => {
+    if (
+      featureFlags &&
+      !featureFlags?.['enable-datagrid-useCustomizeColumns']
+    ) {
+      console.error(
+        `Datagrid useCustomizeColumns extension has not been enabled via feature flag.`
+      );
+    }
+  }, [featureFlags]);
+
   return (
     <CustomizeColumnsTearsheet
       {...rest}

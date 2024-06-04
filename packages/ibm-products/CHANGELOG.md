@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.41.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.40.0...@carbon/ibm-products@2.41.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **datagrid:** pass classname from header props directly ([#5366](https://github.com/carbon-design-system/ibm-products/issues/5366)) ([51125a1](https://github.com/carbon-design-system/ibm-products/commit/51125a1f94bbfb83266c50033ca3ee9b695e7888))
+* **Datagrid:** show column headers for empty infinite scroll ([#5254](https://github.com/carbon-design-system/ibm-products/issues/5254)) ([45bfa9e](https://github.com/carbon-design-system/ibm-products/commit/45bfa9e017eda8129c04b540173036cbdcca67eb))
+* **notification-panel:** remove role on decorative image ([#5372](https://github.com/carbon-design-system/ibm-products/issues/5372)) ([3e32727](https://github.com/carbon-design-system/ibm-products/commit/3e32727d6ef3b585eb8c0967d211dd7042c12e31))
+* **PageHeader:** enable canary `ActionBar` inside of `PageHeader` ([#5332](https://github.com/carbon-design-system/ibm-products/issues/5332)) ([662bbe2](https://github.com/carbon-design-system/ibm-products/commit/662bbe2c380b65e1540aadc514ecf9bb289b813d))
+
+
+### Features
+
+* **conditionBuilder:** keyboard accessibility for sentence variant ([#5248](https://github.com/carbon-design-system/ibm-products/issues/5248)) ([497c216](https://github.com/carbon-design-system/ibm-products/commit/497c2169e5dae4e69462f93b4ef386a865941051))
+* **TagOverflow:** overflow tooltip variants ([#5249](https://github.com/carbon-design-system/ibm-products/issues/5249)) ([022f8ff](https://github.com/carbon-design-system/ibm-products/commit/022f8ff7dea05167351add931a33c68149cfb53c))
+
+
+
+
+
 # [2.40.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.39.0...@carbon/ibm-products@2.40.0) (2024-05-28)
 
 

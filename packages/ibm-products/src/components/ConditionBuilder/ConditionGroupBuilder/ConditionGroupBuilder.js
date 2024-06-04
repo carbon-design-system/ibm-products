@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import PropTypes from 'prop-types';
+
+import cx from 'classnames';
+
 import {
   blockClass,
+  statementConfig,
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
+import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
+import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+import { focusThisField } from '../utils/util';
+import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import uuidv4 from '../../../global/js/utils/uuidv4';
+import ConditionPreview from '../ConditionPreview/ConditionPreview';
 
 /**
  *
@@ -13,6 +23,7 @@ import uuidv4 from '../../../global/js/utils/uuidv4';
  * All the inner components of group are called from here.
  * @returns
  */
+
 const ConditionGroupBuilder = ({
   group,
   aria,
@@ -21,6 +32,10 @@ const ConditionGroupBuilder = ({
   conditionBuilderRef,
   className,
 }) => {
+  const { variant } = useContext(ConditionBuilderContext);
+  const [showConditionPreview, setShowConditionPreview] = useState(-1);
+  const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
+    useState(-1);
   const onRemoveHandler = (conditionId, evt) => {
     if (group.conditions.length > 1) {
       onChange({
@@ -66,6 +81,38 @@ const ConditionGroupBuilder = ({
     });
   };
 
+  const handleFocusOnClose = (e) => {
+    let previousClose = e.currentTarget
+      ?.closest('[role="row"]')
+      ?.previousSibling?.querySelector('[data-name="closeCondition"]');
+
+    if (previousClose) {
+      previousClose.focus();
+    }
+  };
+
+  const addConditionSubGroupHandler = (conditionIndex) => {
+    onChange({
+      ...group,
+      conditions: [
+        ...group.conditions.slice(0, conditionIndex + 1),
+        {
+          groupSeparateOperator: null,
+          groupOperator: 'and',
+          statement: 'if',
+          conditions: [
+            {
+              property: undefined,
+              operator: '',
+              value: '',
+              popoverToOpen: 'propertyField',
+            },
+          ],
+        },
+        ...group.conditions.slice(conditionIndex + 1),
+      ],
+    });
+  };
   const isLastCondition = (conditionIndex, conditionArr) => {
     return (
       conditionIndex + 1 >= conditionArr.length ||
@@ -74,89 +121,255 @@ const ConditionGroupBuilder = ({
     );
   };
 
-  const handleFocusOnClose = (evt) => {
-    let previousClose = evt.currentTarget
-      ?.closest('[role="row"]')
-      ?.parentElement?.previousSibling?.querySelector(
-        '[data-name="closeCondition"]'
-      );
-
-    if (previousClose) {
-      previousClose.focus();
-    }
+  const showConditionSubGroupPreviewHandler = (conditionIndex) => {
+    setShowConditionSubGroupPreview(conditionIndex);
   };
-  return (
-    <div className={`${className}  eachGroup`}>
+  const hideConditionSubGroupPreviewHandler = () => {
+    setShowConditionSubGroupPreview(-1);
+  };
+  const showConditionPreviewHandler = (conditionIndex) => {
+    setShowConditionPreview(conditionIndex);
+  };
+  const hideConditionPreviewHandler = () => {
+    setShowConditionPreview(-1);
+  };
+  const onStatementChangeHandler = (updatedStatement) => {
+    onChange({
+      ...group,
+      statement: updatedStatement,
+    });
+  };
+
+  const onConnectorOperatorChange = (op) => {
+    onChange({
+      ...group,
+      groupOperator: op,
+    });
+  };
+
+  const getSentenceVariant = () => {
+    return (
+      <div className={`${className}  eachGroup`}>
+        <div
+          className={`${blockClass}__condition-wrapper`}
+          role="grid"
+          aria-label={translateWithId('condition_builder_group')}
+        >
+          {/* condition loop starts here */}
+
+          {group?.conditions?.map((eachCondition, conditionIndex) => (
+            <div
+              key={eachCondition.id}
+              className={`${blockClass}__group-wrapper`}
+            >
+              {/* This condition is for tree variant where there will be subgroups inside each group */}
+              {eachCondition.conditions && (
+                <ConditionGroupBuilder
+                  className={`${blockClass}__group`}
+                  aria={{
+                    level: aria.level + 1,
+                    posinset: conditionIndex + 1,
+                    setsize: group.conditions.length,
+                  }}
+                  group={eachCondition}
+                  onChange={(updatedCondition) => {
+                    onChangeHandler(updatedCondition, conditionIndex);
+                  }}
+                  onRemove={(e) => {
+                    onRemoveHandler(eachCondition.id, e);
+                  }}
+                  conditionBuilderRef={conditionBuilderRef}
+                />
+              )}
+              {/* rendering each condition block */}
+              {!eachCondition.conditions && (
+                <ConditionBlock
+                  conjunction={
+                    conditionIndex > 0 ? group.groupOperator : undefined
+                  }
+                  aria={{
+                    level: aria.level + 1,
+                    posinset: conditionIndex + 1,
+                    setsize: group.conditions.length,
+                  }}
+                  isStatement={conditionIndex == 0}
+                  condition={eachCondition}
+                  group={group}
+                  conditionIndex={conditionIndex}
+                  onChange={(updatedConditions) => {
+                    onChangeHandler(updatedConditions, conditionIndex);
+                  }}
+                  addConditionHandler={addConditionHandler}
+                  onRemove={(e) => {
+                    onRemoveHandler(eachCondition.id, e);
+                  }}
+                  onConnectorOperatorChange={onConnectorOperatorChange}
+                  onStatementChange={onStatementChangeHandler}
+                  isLastCondition={isLastCondition}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const getTreeVariant = () => {
+    return (
       <div
-        className={`${blockClass}__condition-wrapper`}
-        role="grid"
-        aria-label={translateWithId('condition_builder_group')}
+        className={`${className} ${blockClass}__condition-wrapper`}
+        role={aria.level === 1 ? 'rowgroup' : undefined}
+        aria-label={
+          aria.level == 1
+            ? translateWithId('condition_builder_group')
+            : undefined
+        }
       >
         {/* condition loop starts here */}
+        {
+          <div
+            tabIndex={0}
+            role="row"
+            aria-level={aria.level}
+            aria-posinset={aria.posinset}
+            aria-setsize={aria.setsize}
+          >
+            <ConditionBuilderItem
+              //   open={false}
+              label={group.statement}
+              title={translateWithId('condition')}
+              data-name="connectorField"
+              popOverClassName={`${blockClass}__gap`}
+              className={`${blockClass}__statement-button`}
+            >
+              <ConditionBuilderItemOption
+                conditionState={{
+                  value: group.statement,
+                  label: translateWithId('condition'),
+                }}
+                onChange={(v, evt) => {
+                  focusThisField(evt);
+                  onStatementChangeHandler(v);
+                }}
+                config={{ options: statementConfig }}
+              ></ConditionBuilderItemOption>
+            </ConditionBuilderItem>
+          </div>
+        }
 
         {group?.conditions?.map((eachCondition, conditionIndex) => (
           <div key={eachCondition.id}>
-            {/* This condition is for tree variant where there will be subgroups inside each group */}
-            {eachCondition.conditions && (
-              <ConditionGroupBuilder
-                className={`${blockClass}__group`}
-                aria={{
-                  level: aria.level + 1,
-                  posinset: conditionIndex + 1,
-                  setsize: group.conditions.length,
-                }}
-                group={eachCondition}
-                onChange={(updatedCondition) => {
-                  onChangeHandler(updatedCondition, conditionIndex);
-                }}
-                onRemove={(evt) => {
-                  onRemoveHandler(eachCondition.id, evt);
-                }}
-                conditionBuilderRef={conditionBuilderRef}
-              />
+            <div>
+              {/* This condition is for tree model where there will be subgroups inside each group */}
+              {eachCondition.conditions && (
+                <div
+                  className={cx(
+                    `${blockClass}__condition-block conditionBlockWrapper subgroup  ${blockClass}__gap`,
+
+                    {
+                      [`${blockClass}__gap-bottom`]:
+                        group.conditions.length < conditionIndex + 1,
+                    }
+                  )}
+                >
+                  {/* <> */}
+
+                  <ConditionConnector
+                    className={`${blockClass}__gap ${blockClass}__groupConnector`}
+                    operator={group.groupOperator}
+                    aria-hidden
+                  />
+
+                  <ConditionGroupBuilder
+                    aria={{
+                      level: aria.level + 1,
+                      posinset: conditionIndex + 1,
+                      setsize: group.conditions.length,
+                    }}
+                    className={`${blockClass}__group`}
+                    group={eachCondition}
+                    onChange={(updatedConditions) => {
+                      onChangeHandler(updatedConditions, conditionIndex);
+                    }}
+                    onRemove={(e) => {
+                      onRemoveHandler(eachCondition.id, e);
+                    }}
+                    conditionBuilderRef={conditionBuilderRef}
+                  />
+                </div>
+              )}
+              {/* rendering each condition block */}
+              {!eachCondition.conditions && (
+                <>
+                  <ConditionBlock
+                    conjunction={
+                      conditionIndex > 0 ? group.groupOperator : undefined
+                    }
+                    aria={{
+                      level: aria.level + 1,
+                      posinset: conditionIndex + 1,
+                      setsize: group.conditions.length,
+                    }}
+                    isStatement={false}
+                    condition={eachCondition}
+                    group={group}
+                    conditionIndex={conditionIndex}
+                    addConditionHandler={addConditionHandler}
+                    addConditionSubGroupHandler={addConditionSubGroupHandler}
+                    onChange={(updatedConditions) => {
+                      onChangeHandler(updatedConditions, conditionIndex);
+                    }}
+                    onRemove={(e) => {
+                      onRemoveHandler(eachCondition.id, e);
+                    }}
+                    onConnectorOperatorChange={onConnectorOperatorChange}
+                    onStatementChange={onStatementChangeHandler}
+                    showConditionSubGroupPreviewHandler={() => {
+                      showConditionSubGroupPreviewHandler(conditionIndex);
+                    }}
+                    hideConditionSubGroupPreviewHandler={
+                      hideConditionSubGroupPreviewHandler
+                    }
+                    showConditionPreviewHandler={() => {
+                      showConditionPreviewHandler(conditionIndex);
+                    }}
+                    hideConditionPreviewHandler={hideConditionPreviewHandler}
+                    isLastCondition={isLastCondition}
+                  />
+
+                  {/* for last condition shows add button */}
+                  {/* {isLastCondition(conditionIndex, conditionArr) && (
+                    <ConditionBuilderAdd
+                      onClick={() => {
+                        addConditionHandler(conditionIndex);
+                      }}
+                      className={
+                        !isLastCondition(conditionIndex, conditionArr)
+                          ? `${blockClass}__gap ${blockClass}__gap-bottom`
+                          : ''
+                      }
+                    />
+                  )} */}
+                </>
+              )}
+            </div>
+            {showConditionSubGroupPreview == conditionIndex && (
+              <ConditionPreview previewType="subGroup" />
             )}
-            {/* rendering each condition block */}
-            {!eachCondition.conditions && (
-              <ConditionBlock
-                conjunction={
-                  conditionIndex > 0 ? group.groupOperator : undefined
-                }
-                aria={{
-                  level: aria.level + 1,
-                  posinset: conditionIndex + 1,
-                  setsize: group.conditions.length,
-                }}
-                isStatement={conditionIndex == 0}
-                condition={eachCondition}
-                group={group}
-                conditionIndex={conditionIndex}
-                className={`${blockClass}__gap ${blockClass}__gap-bottom`}
-                onChange={(updatedConditions) => {
-                  onChangeHandler(updatedConditions, conditionIndex);
-                }}
-                addConditionHandler={addConditionHandler}
-                onRemove={(evt) => {
-                  onRemoveHandler(eachCondition.id, evt);
-                }}
-                onConnectorOperatorChange={(op) => {
-                  onChange({
-                    ...group,
-                    groupOperator: op,
-                  });
-                }}
-                onStatementChange={(updatedStatement) => {
-                  onChange({
-                    ...group,
-                    statement: updatedStatement,
-                  });
-                }}
-                isLastCondition={isLastCondition}
-              />
+            {showConditionPreview == conditionIndex && (
+              <ConditionPreview previewType="condition" />
             )}
           </div>
         ))}
       </div>
-    </div>
+    );
+  };
+  return (
+    <>
+      {variant == 'tree' && getTreeVariant()}
+      {variant == 'sentence' && getSentenceVariant()}
+    </>
   );
 };
 
@@ -168,20 +381,20 @@ ConditionGroupBuilder.propTypes = {
   aria: PropTypes.object,
 
   /**
-   * Provide an  class to be applied to the containing node.
+   * state defines the current group
+   */
+  /**
+   * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
 
   /**
+  className: PropTypes.string,
    * ref of condition builder
    */
   conditionBuilderRef: PropTypes.object,
-  /**
-   * group defines the current group
-   */
   group: PropTypes.object,
   /**
-  
    * callback to update the current condition of the state tree
    */
   onChange: PropTypes.func,

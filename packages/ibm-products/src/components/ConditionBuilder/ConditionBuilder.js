@@ -71,8 +71,8 @@ export let ConditionBuilder = React.forwardRef(
     const localRef = useRef();
     const conditionBuilderRef = ref || localRef;
 
-    const handleKeyDownHandler = (evt) => {
-      handleKeyDown(evt, conditionBuilderRef);
+    const handleKeyDownHandler = (e) => {
+      handleKeyDown(e, conditionBuilderRef, variant);
     };
 
     return (

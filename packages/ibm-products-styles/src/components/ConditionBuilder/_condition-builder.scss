@@ -27,7 +27,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 // .#{$block-class} {
 //   // TODO: Styles.
 // }
-
+.#{$block-class} {
+  padding: $spacing-06;
+}
 .#{$block-class}__condition-builder__group {
   display: flex;
 }
@@ -47,5 +49,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__condition-block {
   display: flex;
+  width: max-content;
   flex-direction: row;
+}
+.#{$block-class}__content-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: $spacing-02;
+}
+.#{$block-class}__heading {
+  margin-top: $spacing-03;
+  margin-bottom: $spacing-03;
+}
+.#{$block-class}__tree
+  .#{$block-class}__actions-container
+  .#{$block-class}__condition-wrapper {
+  flex-direction: column;
+}
+.#{$block-class}__group-separator {
+  margin-top: $spacing-02;
 }

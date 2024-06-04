@@ -80,7 +80,6 @@ $row-heights: (
   align-items: center;
 }
 
-
 .#{variables.$block-class}__inline-edit--outer-cell-checkbox-focus
   .cds--checkbox-label::before {
   outline: $spacing-01 solid $focus;

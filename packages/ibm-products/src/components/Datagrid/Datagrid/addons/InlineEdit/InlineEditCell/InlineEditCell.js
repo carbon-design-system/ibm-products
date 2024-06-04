@@ -227,6 +227,19 @@ export const InlineEditCell = ({
   const handleKeyDown = (event) => {
     const { key } = event;
     switch (key) {
+      case 'ArrowRight':
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'ArrowDown':
+        if (inEditMode && event.target.type === 'checkbox') {
+          const newCellId = getNewCellId(key);
+          saveCellData(cellValue);
+          setInitialValue(cellValue);
+          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          setInEditMode(false);
+          sendFocusBackToGrid();
+        }
+        break;
       // Save cell contents to data
       case 'Tab':
       case 'Enter': {
@@ -516,9 +529,11 @@ export const InlineEditCell = ({
         [`${blockClass}__static--outer-cell`]: !disabledCell,
       })}
     >
-
-      {!nonEditCell && !disabledCell && renderRegularCell()}
-      {((!inEditMode && type !== 'checkbox') || disabledCell) && (
+      {!nonEditCell &&
+        !disabledCell &&
+        type !== 'checkbox' &&
+        renderRegularCell()}
+      {(!inEditMode || disabledCell) && type !== 'checkbox' && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
           renderIcon={setRenderIcon()}

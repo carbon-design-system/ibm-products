@@ -17,6 +17,8 @@ collect:
         - align
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
+        - allTagsModalSearchThreshold
+        - allTagsModalTarget
         - allTagsModalTitle
         - alt
         - apiKey
@@ -48,6 +50,7 @@ collect:
         - conditionBuilderRef
         - conditionState
         - config
+        - containingElementRef
         - count
         - currentMatcher
         - currentStep
@@ -72,6 +75,7 @@ collect:
         - filterString
         - findColumnPlaceholderLabel
         - firstFocusElement
+        - footerActionIcon
         - formDescription
         - formTitle
         - getConditionState
@@ -128,14 +132,17 @@ collect:
         - kind
         - label
         - labelText
+        - launcherButtonRef
         - legendText
         - link
         - links
         - loading
         - maxVisible
+        - measurementOffset
         - media
         - mediaPosition
         - menuOptionsClass
+        - metadata
         - metaIconDescription
         - metaPanelTitle
         - modifiers
@@ -167,6 +174,7 @@ collect:
         - onDataUpdate
         - onMount
         - onNext
+        - onOverflowTagChange
         - onPrimaryButtonClick
         - onRemove
         - onRequestClose
@@ -175,6 +183,7 @@ collect:
         - onSecondaryButtonClick
         - onSelectColumn
         - onSelectionAreaChange
+        - onShowAllClick
         - onSubmit
         - onSubmitButtonText
         - onToggle
@@ -184,12 +193,15 @@ collect:
         - overflowActions
         - overflowAlign
         - overflowAriaLabel
+        - overflowClassName
+        - overflowTags
         - overflowType
         - parentId
         - path
         - pictogram
         - placeholder
         - placement
+        - popoverOpen
         - popOverSearchThreshold
         - portalTarget
         - preventCloseOnClickOutside
@@ -226,6 +238,7 @@ collect:
         - selectionAreas
         - selectorPageContent
         - selectorPrimaryFocus
+        - sequence
         - setActiveCellCoordinates
         - setAllFilters
         - setColumnsObject
@@ -235,6 +248,7 @@ collect:
         - setIsTearsheetOpen
         - setLabelTitle
         - setMultiSelection
+        - setPopoverOpen
         - setSelectionAreaData
         - setSelectionAreas
         - showAllTagsLabel
@@ -383,6 +397,7 @@ collect:
         # Canary
         - componentName
         # Card
+        - getStarted
         - onKeyDown
         # CardFooter
         - hasButton
@@ -759,18 +774,6 @@ collect:
         - width
         # TagOverflow
         - tagComponent
-        # TagSet
-        - allTagsModalTarget
-        - containingElementRef
-        - measurementOffset
-        - onOverflowTagChange
-        - overflowClassName
-        # TagSetOverflow
-        - allTagsModalSearchThreshold
-        - onShowAllClick
-        - overflowTags
-        - popoverOpen
-        - setPopoverOpen
         # TearsheetShell
         - headerActions
         # Toolbar
@@ -793,6 +796,7 @@ collect:
         - documentationLinks
         - documentationLinksIconDescription
         - isInitiallyOpen
+        - webTerminalAriaLabel
         # React
         - key
         - ref
@@ -867,19 +871,21 @@ collect:
         # General - kind
         - "403"
         - "404"
-        - checked
         - critical
         - custom
         - default
-        - disabled
         - dual-button
         - error
         - fatal
         - ghost
         - group
         - in-progress
-        - indeterminate
         - info
+        - Kinds.checked
+        - Kinds.disabled
+        - Kinds.error
+        - Kinds.indeterminate
+        - Kinds.unchecked
         - link
         - major-warning
         - minor-warning
@@ -894,7 +900,6 @@ collect:
         - single-button
         - tertiary
         - unauthorized
-        - unchecked
         - undefined
         - unknown
         - user
@@ -949,16 +954,20 @@ collect:
         - xs
         # General - status
         - active
+        - complete
         - default
         - error
         - fail
         - finished
         - in-progress
         - inactive
+        - incomplete
         - success
         # General - theme
         - dark
         - light
+        - Themes.dark
+        - Themes.light
         # General - titleSize
         - default
         - large

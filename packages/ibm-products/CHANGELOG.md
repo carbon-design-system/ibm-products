@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.41.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.40.0...@carbon/ibm-products@2.41.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **datagrid:** pass classname from header props directly ([#5366](https://github.com/carbon-design-system/ibm-products/issues/5366)) ([51125a1](https://github.com/carbon-design-system/ibm-products/commit/51125a1f94bbfb83266c50033ca3ee9b695e7888))
+* **Datagrid:** show column headers for empty infinite scroll ([#5254](https://github.com/carbon-design-system/ibm-products/issues/5254)) ([45bfa9e](https://github.com/carbon-design-system/ibm-products/commit/45bfa9e017eda8129c04b540173036cbdcca67eb))
+* **notification-panel:** remove role on decorative image ([#5372](https://github.com/carbon-design-system/ibm-products/issues/5372)) ([3e32727](https://github.com/carbon-design-system/ibm-products/commit/3e32727d6ef3b585eb8c0967d211dd7042c12e31))
+* **PageHeader:** enable canary `ActionBar` inside of `PageHeader` ([#5332](https://github.com/carbon-design-system/ibm-products/issues/5332)) ([662bbe2](https://github.com/carbon-design-system/ibm-products/commit/662bbe2c380b65e1540aadc514ecf9bb289b813d))
+
+
+### Features
+
+* **conditionBuilder:** keyboard accessibility for sentence variant ([#5248](https://github.com/carbon-design-system/ibm-products/issues/5248)) ([497c216](https://github.com/carbon-design-system/ibm-products/commit/497c2169e5dae4e69462f93b4ef386a865941051))
+* **TagOverflow:** overflow tooltip variants ([#5249](https://github.com/carbon-design-system/ibm-products/issues/5249)) ([022f8ff](https://github.com/carbon-design-system/ibm-products/commit/022f8ff7dea05167351add931a33c68149cfb53c))
+
+
+
+
+
+# [2.40.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.39.0...@carbon/ibm-products@2.40.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* adds short text option for pageheader ([#4562](https://github.com/carbon-design-system/ibm-products/issues/4562)) ([705f403](https://github.com/carbon-design-system/ibm-products/commit/705f403f8bbdcc93ab2dcb0e06bb3b5cd7d359b3))
+* **CreateInfluencer:** removed empty p tag render, if secondaryLabel='' ([#5279](https://github.com/carbon-design-system/ibm-products/issues/5279)) ([4594428](https://github.com/carbon-design-system/ibm-products/commit/4594428b2484a7dd6202f4bc2872b32f8a302d1b))
+* **DataSpreadsheet:** added null check ([#5305](https://github.com/carbon-design-system/ibm-products/issues/5305)) ([a05bc39](https://github.com/carbon-design-system/ibm-products/commit/a05bc390d6b216fb36f688729e82f60df4fdd930))
+* **ExpressiveCard:** use CarbonIconType for pictogram ([#5229](https://github.com/carbon-design-system/ibm-products/issues/5229)) ([a87d6e0](https://github.com/carbon-design-system/ibm-products/commit/a87d6e013e72102da4dc5d84d83c97e7d18d9e53))
+* remove previously used class name ([#5283](https://github.com/carbon-design-system/ibm-products/issues/5283)) ([5fafcf2](https://github.com/carbon-design-system/ibm-products/commit/5fafcf24824bf3a38426e069db6e36533ac39c51))
+* Return focus to launcher button ([#5017](https://github.com/carbon-design-system/ibm-products/issues/5017)) ([659126a](https://github.com/carbon-design-system/ibm-products/commit/659126acfcc13cd7fa384581f0a25e4b2a4d648f))
+* **SidePanel:** add missing size xl ([#5274](https://github.com/carbon-design-system/ibm-products/issues/5274)) ([da5172b](https://github.com/carbon-design-system/ibm-products/commit/da5172b4cf792ebf63ecea2c986f0dbcccb2b612))
+* **storybook:** use markdown comp to render custom docs ([#5303](https://github.com/carbon-design-system/ibm-products/issues/5303)) ([57e1896](https://github.com/carbon-design-system/ibm-products/commit/57e189667ec8fa859d444022ac0563430c74029b))
+* **Tearsheet:** properly focus specified element with new hook ([#5264](https://github.com/carbon-design-system/ibm-products/issues/5264)) ([1dc2407](https://github.com/carbon-design-system/ibm-products/commit/1dc240759e4ec3446465b13adb4787fa56442ecb))
+
+
+### Features
+
+* **Datagrid:** add `onVirtualScroll` property to send back data around currently visible rows in virtualized Datagrids ([#5255](https://github.com/carbon-design-system/ibm-products/issues/5255)) ([9821899](https://github.com/carbon-design-system/ibm-products/commit/9821899948712e59e178423f190fe44c5e5ee78e))
+* **Guidebanner:** convert to .tsx ([#5321](https://github.com/carbon-design-system/ibm-products/issues/5321)) ([bd1ace3](https://github.com/carbon-design-system/ibm-products/commit/bd1ace30a9739c4a06e7e10619eb7ec24d77b169))
+
+
+
+
+
+# [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.38.0...@carbon/ibm-products@2.39.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **sidepanel:** resolve border bottom always showing ([#5143](https://github.com/carbon-design-system/ibm-products/issues/5143)) ([59b580a](https://github.com/carbon-design-system/ibm-products/commit/59b580aa8f911ec48955484be9781762dae9c3ce))
+
+
+### Features
+
+* **CoachmarkButton:** convert to .tsx ([#5241](https://github.com/carbon-design-system/ibm-products/issues/5241)) ([6b33291](https://github.com/carbon-design-system/ibm-products/commit/6b33291385afb9fa776ba72e7fd7e5dcba716015))
+* **CoachmarkOverlayElements:** convert to .tsx ([#5163](https://github.com/carbon-design-system/ibm-products/issues/5163)) ([2bd1af9](https://github.com/carbon-design-system/ibm-products/commit/2bd1af990c2d82f0a042d4e3d826801c3e1718ce))
+* **get-started:** new component ([#5054](https://github.com/carbon-design-system/ibm-products/issues/5054)) ([5d7208f](https://github.com/carbon-design-system/ibm-products/commit/5d7208fd9ed28994cf46361f629d16c349ba4b27))
+* **tagoverflow:** remove TagOverflow dependency on TagSet ([#4929](https://github.com/carbon-design-system/ibm-products/issues/4929)) ([7b1bcdc](https://github.com/carbon-design-system/ibm-products/commit/7b1bcdc1dacd49602e26cc3f0e069750ce6f7af5))
+
+
+
+
+
 # [2.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.37.0...@carbon/ibm-products@2.38.0) (2024-05-14)
 
 

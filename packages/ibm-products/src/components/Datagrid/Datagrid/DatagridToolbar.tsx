@@ -8,11 +8,8 @@
 import React, { useRef, MutableRefObject, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  /**@ts-ignore */
   TableToolbar,
-  /**@ts-ignore */
   TableBatchActions,
-  /**@ts-ignore */
   TableBatchAction,
   MenuButton,
   MenuItem,
@@ -216,14 +213,14 @@ const DatagridToolbar = ({
       className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
       <TableToolbar aria-label={ariaToolbarLabel}>
-        {<DatagridActions {...datagridState} />}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActionsToolbar?.(datagridState, width, ref)}
       </TableToolbar>
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
       <TableToolbar aria-label={ariaToolbarLabel}>
-        {<DatagridActions {...datagridState} />}
+        {DatagridActions && <DatagridActions {...datagridState} />}
         {DatagridBatchActions?.(datagridState)}
       </TableToolbar>
     </div>

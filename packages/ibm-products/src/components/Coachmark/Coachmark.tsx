@@ -277,6 +277,11 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   }
 );
 
+const overlayRefType =
+  typeof HTMLElement === 'undefined'
+    ? PropTypes.object
+    : PropTypes.instanceOf(HTMLElement);
+
 // Return a placeholder if not released and not enabled by feature flag
 Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);
 
@@ -333,9 +338,7 @@ Coachmark.propTypes = {
   overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
 
   overlayRef: PropTypes.shape({
-    current: PropTypes.instanceOf(
-      HTMLElement
-    ) as PropTypes.Validator<HTMLElement | null>,
+    current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
   }),
 
   /**

@@ -9,7 +9,6 @@ import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
-
 import {
   CLEAR_FILTERS,
   CLEAR_SINGLE_FILTER,
@@ -29,6 +28,7 @@ import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 import { DataGridState, DatagridRow } from '../types';
+import { useFeatureFlag } from '../../FeatureFlags';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const gcClass = `${blockClass}__grid-container`;
@@ -46,7 +46,7 @@ export const DatagridContent = ({
 }: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
-  const { activeCellId, gridActive, editId } = inlineEditState;
+  const { activeCellId, gridActive, editId, featureFlags } = inlineEditState;
   const {
     getTableProps,
     getFilterFlyoutProps,
@@ -77,6 +77,35 @@ export const DatagridContent = ({
   const contentRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const gridAreaRef: ForwardedRef<HTMLDivElement> = useRef(null);
   const multiKeyTrackingRef: ForwardedRef<HTMLDivElement> = useRef(null);
+
+  const enableEditableCell = useFeatureFlag('enable-datagrid-useEditableCell');
+  const enableInlineEdit = useFeatureFlag('enable-datagrid-useInlineEdit');
+  const enableCustomizeCols = useFeatureFlag(
+    'enable-datagrid-useCustomizeColumns'
+  );
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_FEATURE_FLAGS',
+      payload: {
+        'enable-datagrid-useEditableCell': enableEditableCell,
+        'enable-datagrid-useInlineEdit': enableInlineEdit,
+        'enable-datagrid-useCustomizeColumns': enableCustomizeCols,
+      },
+    });
+  }, [dispatch, enableEditableCell, enableCustomizeCols, enableInlineEdit]);
+
+  useEffect(() => {
+    if (
+      featureFlags &&
+      (featureFlags?.['enable-datagrid-useEditableCell'] ||
+        featureFlags?.['enable-datagrid-useInlineEdit'])
+    ) {
+      console.error(
+        `Datagrid useEditableCell/useInlineEdit extension has not been enabled via feature flag.`
+      );
+    }
+  }, [featureFlags]);
 
   useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.73.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.73.0...@carbon/ibm-products@1.73.1) (2024-06-04)
+
+
+### Bug Fixes
+
+* **Datagrid:** v1 added border right with the correct token ([#5367](https://github.com/carbon-design-system/ibm-products/issues/5367)) ([5829ffb](https://github.com/carbon-design-system/ibm-products/commit/5829ffb3ed975059bee1233caa4e7205460954f5))
+* update branch name ([927cc01](https://github.com/carbon-design-system/ibm-products/commit/927cc01254a60a393f06e003f4663258f6bb018b))
+
+
+
+
+
 # [1.73.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.72.3...@carbon/ibm-products@1.73.0) (2024-05-07)
 
 

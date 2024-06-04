@@ -42,7 +42,8 @@ export const InlineEditCell = ({
 }) => {
   const columnId = cell.column.id;
   const columnIndex = instance.columns.findIndex((col) => col.id === columnId);
-  const cellId = `column-${columnIndex}-row-${cell.row.index}`;
+  const rowIndex = cell.row.index;
+  const cellId = `column-${columnIndex}-row-${rowIndex}`;
 
   const { state, dispatch } = useContext(InlineEditContext);
   const [inEditMode, setInEditMode] = useState(false);
@@ -61,6 +62,15 @@ export const InlineEditCell = ({
 
   const { rowSize, onDataUpdate } = instance;
   let saveCellData;
+
+  if (inEditMode) {
+    instance.cellEditing = {
+      cellId,
+      columnIndex,
+      rowIndex,
+      curCellValue: cellValue,
+    };
+  }
 
   useEffect(() => {
     setInitialValue(value);
@@ -108,29 +118,10 @@ export const InlineEditCell = ({
     }
 
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
-      const splitData = cellId.split('-');
-      const columnIndex = parseInt(splitData[1]);
-      const rowIndex = parseInt(splitData[3]);
-
-      instance.cellEditing = {
-        cellId,
-        columnIndex,
-        rowIndex,
-        curCellValue: cellValue,
-      };
-
       setInEditMode(true);
       saveCellData(cellValue);
     }
-  }, [
-    activeCellId,
-    cellId,
-    nonEditCell,
-    editId,
-    cellValue,
-    saveCellData,
-    instance,
-  ]);
+  }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
   const openDropdown = (type) => {
     // *****

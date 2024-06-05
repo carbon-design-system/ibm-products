@@ -36,7 +36,7 @@ export const useFocusRowExpander = ({
       const rowExpander = activeRow[0].querySelector(
         `.${blockClass}__row-expander`
       );
-      rowExpander.focus();
+      rowExpander?.focus();
     }
   }, [
     instance?.tableId,

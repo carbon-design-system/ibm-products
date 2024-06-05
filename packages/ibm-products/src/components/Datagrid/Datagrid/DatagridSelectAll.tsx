@@ -104,15 +104,11 @@ const SelectAll = (datagridState: DataGridState) => {
       )}
     >
       <TableSelectAll
-        {...{
-          ...selectProps,
-          checked: selectProps.checked || false,
-        }}
+        {...selectProps}
         name={`${tableId}-select-all-checkbox-name`}
         onSelect={handleSelectAllChange}
         disabled={isFetching || selectProps?.disabled}
         id={`${tableId}-select-all-checkbox-id`}
-        ariaLabel="Table Select All"
       />
     </div>
   );

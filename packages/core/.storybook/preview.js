@@ -6,8 +6,8 @@
  */
 
 import React, { useEffect } from 'react';
-import { StaticNotification, UnorderedList, ListItem } from '@carbon/react';
 import { white, g10, g90, g100 } from '@carbon/themes';
+import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
 
@@ -49,32 +49,6 @@ const decorators = [
     return (
       <div className="preview-position-fix story-wrapper">
         <Style styles={index}>
-          {args.featureFlags ? (
-            <StaticNotification
-              className="preview__notification--feature-flag"
-              kind="warning"
-              inline
-              lowContrast
-              actionButtonLabel="Learn more"
-              statusIconDescription="describes the close button"
-              title="This story uses the following feature flags to enable or disable some functionality."
-              titleId="storybook--feature-flag-warning-notification"
-              aria-describedby="storybook--feature-flag-warning-notification"
-              onActionButtonClick={() => {
-                window.open(
-                  'https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
-                );
-              }}
-            >
-              <UnorderedList>
-                {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey}>
-                    {flagKey}: {`${args.featureFlags[flagKey]}`}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </StaticNotification>
-          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>

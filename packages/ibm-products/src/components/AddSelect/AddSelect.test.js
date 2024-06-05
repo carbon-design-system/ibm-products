@@ -169,10 +169,9 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(
-      <AddSelect {...defaultProps} className="test-class" />
-    );
-    expect(container.firstChild).toHaveClass('test-class');
+    render(<AddSelect {...defaultProps} className="test-class" />);
+    const tearsheetElement = screen.getByRole('dialog');
+    expect(tearsheetElement.parentElement).toHaveClass('test-class');
   });
 
   it('adds additional properties to the containing node', async () => {

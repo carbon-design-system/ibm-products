@@ -142,25 +142,26 @@ export const DatagridContent = ({
             },
             getTableProps?.().className
           )}
-          role={withInlineEdit ? 'grid' : undefined}
-          tabIndex={withInlineEdit ? 0 : -1}
-          onKeyDown={
-            withInlineEdit &&
-            ((event) =>
-              handleGridKeyPress({
-                event,
-                dispatch,
-                instance: datagridState,
-                keysPressedList,
-                state: inlineEditState,
-                usingMac,
-                ref: multiKeyTrackingRef,
-              }))
-          }
-          onFocus={
-            withInlineEdit && (() => handleGridFocus(inlineEditState, dispatch))
-          }
-          title={title}
+          {...{
+            role: withInlineEdit ? 'grid' : undefined,
+            tabIndex: withInlineEdit ? 0 : -1,
+            onKeyDown:
+              withInlineEdit &&
+              ((event) =>
+                handleGridKeyPress({
+                  event,
+                  dispatch,
+                  instance: datagridState,
+                  keysPressedList,
+                  state: inlineEditState,
+                  usingMac,
+                  ref: multiKeyTrackingRef,
+                })),
+            onFocus:
+              withInlineEdit &&
+              (() => handleGridFocus(inlineEditState, dispatch)),
+            title,
+          }}
         >
           {(!withVirtualScroll ||
             (withVirtualScroll && !isFetching && !contentRows.length)) && (

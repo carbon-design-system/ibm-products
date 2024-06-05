@@ -16,7 +16,7 @@ import React, {
   MutableRefObject,
   RefObject,
 } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -41,6 +41,7 @@ import {
 } from './motion/variants';
 import pconsole from '../../global/js/utils/pconsole';
 import { ButtonProps } from '@carbon/react';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -284,7 +285,7 @@ export let SidePanel = React.forwardRef(
       .current;
     const previousOpen = usePreviousValue(open);
 
-    const shouldReduceMotion = useReducedMotion();
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);

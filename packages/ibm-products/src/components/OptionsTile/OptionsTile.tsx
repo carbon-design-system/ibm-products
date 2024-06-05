@@ -22,7 +22,7 @@ import {
 } from '@carbon/react/icons';
 import * as carbonMotion from '@carbon/motion';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
-import { useReducedMotion } from 'framer-motion';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
@@ -162,7 +162,7 @@ export let OptionsTile = React.forwardRef(
     const isInvalid = invalid;
     const isWarn = !isInvalid && warn;
     const isLocked = !isInvalid && !isWarn && locked;
-    const shouldReduceMotion = useReducedMotion();
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     if (open !== prevIsOpen) {
       if (isOpen && !open) {

@@ -141,7 +141,6 @@ const ConditionBuilderContent = ({
             <div key={eachGroup.id} className={`${blockClass}__group-wrapper`}>
               <ConditionGroupBuilder
                 className={`${blockClass}__group`}
-                key={groupIndex}
                 aria={{
                   level: 1,
                   posinset: groupIndex * 2 + 1,

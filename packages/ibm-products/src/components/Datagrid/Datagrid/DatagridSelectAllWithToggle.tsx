@@ -71,12 +71,12 @@ const SelectAllWithToggle = ({
         <Checkbox
           {...selectProps}
           name={`${tableId}-select-all-checkbox-name`}
-          onClick={(e) => {
+          onClick={(e: any) => {
             onChange?.(e);
           }}
           disabled={disabled}
           id={`${tableId}-select-all-checkbox-id`}
-          labelText={allRowsLabel}
+          labelText={allRowsLabel as string}
           hideLabel
         />
       </span>
@@ -87,7 +87,7 @@ const SelectAllWithToggle = ({
         menuOptionsClass={`${blockClass}__select-all-toggle-overflow`}
       >
         <OverflowMenuItem
-          itemText={allPageRowsLabel}
+          itemText={allPageRowsLabel as string}
           requireTitle
           disabled={disabled}
           onClick={() => {
@@ -103,7 +103,7 @@ const SelectAllWithToggle = ({
           }}
         />
         <OverflowMenuItem
-          itemText={allRowsLabel}
+          itemText={allRowsLabel as string}
           requireTitle
           disabled={disabled}
           onClick={() => {

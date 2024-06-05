@@ -1,4 +1,4 @@
-import { MultiSelectProps } from '@carbon/react';
+import { MultiSelectProps } from '@carbon/react/lib/components/MultiSelect/MultiSelect';
 import { FormGroupProps } from '@carbon/react/lib/components/FormGroup/FormGroup';
 import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/RadioButton';
 import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonGroup/RadioButtonGroup';
@@ -84,7 +84,7 @@ export type DataGridFilter =
   | {
       type: 'multiSelect';
       props: {
-        MultiSelect?: MultiSelectProps;
+        MultiSelect?: MultiSelectProps<any>;
       };
     };
 
@@ -227,7 +227,7 @@ export interface DataGridState<T extends object = any>
   emptyStateAction: {
     kind?: 'primary' | 'secondary' | 'tertiary';
     renderIcon?: CarbonIconType;
-    onClick?: ButtonProps['onClick'];
+    onClick?: ButtonProps<any>['onClick'];
     text?: string;
   };
   emptyStateLink?: {
@@ -251,7 +251,7 @@ export interface DataGridState<T extends object = any>
   allPageRowsLabel?: string | object;
   allRowsLabel: string | object;
   onSelectAllRows?: (val?: boolean) => void;
-  toolbarBatchActions?: ButtonProps[];
+  toolbarBatchActions?: ButtonProps<any>[];
   setGlobalFilter?: (filterValue: FilterValue) => void;
   batchActionMenuButtonLabel?: string;
   translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];

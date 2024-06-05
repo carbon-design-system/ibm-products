@@ -198,7 +198,9 @@ const HeaderRow = (
       key={key}
       {...rowProps}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
-      ref={headRef}
+      {...{
+        ref: headRef,
+      }}
     >
       {foundAIRow ? <th scope="col" aria-hidden="false" /> : null}
       {datagridState?.headers

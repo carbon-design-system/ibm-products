@@ -17,6 +17,10 @@ const useInlineEdit = (hooks) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
     const isDisabled = cell.column?.isDisabled;
+    const staticCell =
+      typeof cell.value === 'object' &&
+      cell.column.id === cell.value?.columnId &&
+      cell.value?.isStaticCell;
 
     const renderInlineEditComponent = (type) => (
       <InlineEditCell
@@ -46,15 +50,31 @@ const useInlineEdit = (hooks) => {
         role: 'gridcell',
         children: (
           <>
-            {inlineEditType === 'text' &&
+            {!staticCell &&
+              inlineEditType === 'text' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'number' &&
+            {!staticCell &&
+              inlineEditType === 'number' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'selection' &&
+            {!staticCell &&
+              inlineEditType === 'selection' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'date' &&
+            {!staticCell &&
+              inlineEditType === 'date' &&
               renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
+            {staticCell && (
+              <InlineEditCell
+                config={columnInlineEditConfig}
+                tabIndex={-1}
+                value={cell.value?.value}
+                cell={cell}
+                instance={instance}
+                nonEditCell
+                type="text"
+              />
+            )}
+            {/* {!inlineEditType && ( */}
             {!inlineEditType && (
               <InlineEditCell
                 config={columnInlineEditConfig}

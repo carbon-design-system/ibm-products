@@ -92,7 +92,9 @@ const sharedDatagridProps = {
 };
 
 const EditableCellUsage = ({ ...args }) => {
-  const [data, setData] = useState(makeData(10));
+  const [data, setData] = useState(
+    makeData(10, { includeNonEditableCell: true, column: 'lastName' })
+  );
   const columns = React.useMemo(() => getInlineEditColumns(), []);
 
   const datagridState = useDatagrid(

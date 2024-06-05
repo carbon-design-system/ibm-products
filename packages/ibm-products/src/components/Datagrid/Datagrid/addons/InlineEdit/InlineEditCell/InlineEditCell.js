@@ -472,6 +472,24 @@ export const InlineEditCell = ({
     );
   };
 
+  const getLabel = () => {
+    const checkStaticCell = (val) => {
+      if (typeof val === 'object' && val?.isStaticCell) {
+        return val?.value;
+      }
+    };
+    switch (type) {
+      case 'selection':
+        checkStaticCell(value);
+        return value?.text ?? value;
+      case 'date':
+        checkStaticCell(value);
+        return buildDate(value);
+      default:
+        return checkStaticCell(value) ?? value;
+    }
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -496,13 +514,14 @@ export const InlineEditCell = ({
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
           renderIcon={setRenderIcon()}
-          label={
-            type === 'selection'
-              ? value?.text ?? value
-              : type === 'date'
-              ? buildDate(value)
-              : value
-          }
+          label={getLabel()}
+          // label={
+          //   type === 'selection'
+          //     ? value?.text ?? value
+          //     : type === 'date'
+          //     ? buildDate(value)
+          //     : value
+          // }
           disabledCell={disabledCell}
           labelIcon={value?.icon || null}
           placeholder={placeholder}

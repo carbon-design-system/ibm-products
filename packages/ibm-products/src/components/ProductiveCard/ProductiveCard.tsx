@@ -5,23 +5,146 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef } from 'react';
+import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '../Card';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 const componentName = 'ProductiveCard';
 
-// Default values for props
-const defaults = {
-  actionsPlacement: 'top',
+type ActionIcon = {
+  id?: string;
+  icon?: CarbonIconType;
+  onKeyDown?(): void;
+  onClick?(): void;
+  iconDescription?: string;
+  href?: string;
 };
+type overflowAction = {
+  id?: string;
+  itemText?: string;
+  onClick?: () => void;
+  onKeydown?: () => void;
+};
+type PlacementType = 'top' | 'bottom';
+type ClickZoneType = 'one' | 'two' | 'three';
+interface ProductiveCardProps extends PropsWithChildren {
+  /**
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
+   */
+  actionIcons?: ActionIcon[];
+
+  /**
+   * Determines if the action icons are on the top or bottom of the card
+   */
+  actionsPlacement?: PlacementType;
+  /**
+   * Content that shows in the body of the card
+   */
+  // children: PropTypes.node,
+  /**
+   * Optional user provided class
+   */
+  className?: string;
+
+  children: ReactNode;
+
+  /**
+   * Designates which zones of the card are clickable. Refer to design documentation for implementation guidelines
+   */
+  clickZone?: ClickZoneType;
+  /**
+   * Optional header description
+   */
+  description?: string | object | ReactNode;
+  /**
+   * Optional label for the top of the card
+   */
+  label?: string | object | ReactNode;
+
+  /**
+   * Provides the callback for a clickable card
+   */
+  onClick?: () => void;
+  /**
+   * Function that's called from the primary button or action icon
+   */
+  onPrimaryButtonClick?: () => void;
+  /**
+   * Function that's called from the secondary button
+   */
+  onSecondaryButtonClick?: () => void;
+  /**
+   * Use an overflow menu instead of action icons. Refer to design documentation for implementation guidelines
+   */
+  overflowActions?: overflowAction[];
+  /**
+   * Aria label prop required for OverflowMenu
+   */
+  overflowAriaLabel?: string;
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  primaryButtonHref?: string;
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  primaryButtonIcon?: CarbonIconType;
+  /**
+   * Determines if the primary button is on the top or bottom of the card
+   */
+  primaryButtonPlacement?: PlacementType;
+  /**
+   * The text that's displayed in the primary button
+   */
+  primaryButtonText?: string;
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  secondaryButtonHref?: string;
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  secondaryButtonIcon?: CarbonIconType;
+  /**
+   * Determines if the secondary button is on the top or bottom of the card
+   */
+  secondaryButtonPlacement?: PlacementType;
+  /**
+   * The text that's displayed in the secondary button
+   */
+  secondaryButtonText?: string;
+  /**
+   * **Experimental:** For all cases a `Slug` component can be provided.
+   * Clickable tiles only accept a boolean value of true and display a hollow slug.
+   */
+  slug?: ReactNode | boolean;
+
+  /**
+   * Title that's displayed at the top of the card
+   */
+  title?: string | object | ReactNode;
+
+  /**
+   * Determines title size
+   */
+  titleSize?: 'default' | 'large';
+}
 
 export let ProductiveCard = forwardRef(
-  ({ actionsPlacement = defaults.actionsPlacement, ...rest }, ref) => {
+  (
+    { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     const validProps = prepareProps(rest, [
       'media',
       'mediaPosition',
@@ -32,8 +155,7 @@ export let ProductiveCard = forwardRef(
     ]);
     return (
       <Card
-        {...{ ...validProps, actionsPlacement, ref }}
-        productive
+        {...{ ...validProps, actionsPlacement, ref, productive: true }}
         {...getDevtoolsProps(componentName)}
       />
     );
@@ -47,6 +169,7 @@ ProductiveCard.propTypes = {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
+  /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -104,6 +227,7 @@ ProductiveCard.propTypes = {
   /**
    * Use an overflow menu instead of action icons. Refer to design documentation for implementation guidelines
    */
+  /**@ts-ignore */
   overflowActions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -123,6 +247,7 @@ ProductiveCard.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
+  /**@ts-ignore */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Determines if the primary button is on the top or bottom of the card
@@ -131,6 +256,7 @@ ProductiveCard.propTypes = {
   /**
    * The text that's displayed in the primary button
    */
+  /**@ts-ignore */
   primaryButtonText: PropTypes.node,
   /**
    * Optionally specify an href for your Button to become an <a> element
@@ -139,6 +265,7 @@ ProductiveCard.propTypes = {
   /**
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
+  /**@ts-ignore */
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Determines if the secondary button is on the top or bottom of the card
@@ -147,6 +274,7 @@ ProductiveCard.propTypes = {
   /**
    * The text that's displayed in the secondary button
    */
+  /**@ts-ignore */
   secondaryButtonText: PropTypes.node,
   /**
    * **Experimental:** For all cases a `Slug` component can be provided.
@@ -161,6 +289,7 @@ ProductiveCard.propTypes = {
     PropTypes.object,
     PropTypes.node,
   ]),
+
   /**
    * Determines title size
    */

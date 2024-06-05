@@ -80,6 +80,12 @@ $row-heights: (
   align-items: center;
 }
 
+.#{variables.$block-class}__static--outer-cell {
+  display: flex;
+  height: -webkit-fill-available;
+  align-items: center;
+}
+
 .#{variables.$block-class}__inline-edit--outer-cell-button {
   width: 100%;
   height: calc(100% + 2px); // account for borders

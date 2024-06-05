@@ -9,7 +9,6 @@ import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
-
 import {
   CLEAR_FILTERS,
   CLEAR_SINGLE_FILTER,

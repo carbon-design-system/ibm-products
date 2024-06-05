@@ -21,6 +21,7 @@ import { DocsPage } from './EditableCell.docs-page';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
+import { WithFeatureFlags } from '../../../../../../core/.storybook/WithFeatureFlags';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
@@ -93,9 +94,6 @@ const sharedDatagridProps = {
 const EditableCellUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
-  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
-  pkg.feature['Datagrid.useInlineEdit'] = true;
-  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -107,13 +105,12 @@ const EditableCellUsage = ({ ...args }) => {
     useEditableCell
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  pkg.feature['Datagrid.useEditableCell'] = true;
-  pkg._silenceWarnings(true);
-
   return (
-    <div>
+    <WithFeatureFlags
+      flags={{
+        'enable-datagrid-useEditableCell': true,
+      }}
+    >
       <Datagrid datagridState={datagridState} />
       <p>
         The following inline edit columns incorporate validation:
@@ -122,7 +119,7 @@ const EditableCellUsage = ({ ...args }) => {
         <code className={storybookBlockClass}>{'age'}</code>
         <code className={storybookBlockClass}>{'visits'}</code>
       </p>
-    </div>
+    </WithFeatureFlags>
   );
 };
 
@@ -133,11 +130,6 @@ const EditableCellTemplateWrapper = ({ ...args }) => {
 const InlineEditUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
-
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  pkg.feature['Datagrid.useInlineEdit'] = true;
-  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -150,7 +142,7 @@ const InlineEditUsage = ({ ...args }) => {
   );
 
   return (
-    <div>
+    <WithFeatureFlags>
       <Datagrid datagridState={datagridState} />
       <p>
         The following inline edit columns incorporate validation:
@@ -159,7 +151,7 @@ const InlineEditUsage = ({ ...args }) => {
         <code className={storybookBlockClass}>{'age'}</code>
         <code className={storybookBlockClass}>{'visits'}</code>
       </p>
-    </div>
+    </WithFeatureFlags>
   );
 };
 
@@ -182,7 +174,6 @@ EditableCellUsageStory.argTypes = {
 };
 EditableCellUsageStory.args = {
   ...inlineEditUsageControlProps,
-  featureFlags: ['Datagrid.useEditableCell'],
 };
 
 const basicUsageStoryName = 'Using deprecated useInlineEdit hook';
@@ -195,5 +186,4 @@ InlineEditUsageStory.argTypes = {
 };
 InlineEditUsageStory.args = {
   ...inlineEditUsageControlProps,
-  featureFlags: ['Datagrid.useInlineEdit'],
 };

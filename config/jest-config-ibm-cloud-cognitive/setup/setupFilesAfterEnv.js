@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import chalk from 'chalk';
 import util from 'util';
 
 import * as matchers from './matchers';
+import '../../../packages/ibm-products/src/feature-flags';
 
 // `expect` can be extended using custom matchers as per https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
 expect.extend(matchers);

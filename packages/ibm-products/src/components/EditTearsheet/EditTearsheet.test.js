@@ -38,6 +38,7 @@ const onCloseFn = jest.fn();
 const onCloseReturnsTrue = jest.fn(() => true);
 const onRequestSubmitFn = jest.fn();
 const ref = React.createRef();
+const ariaLabel = 'test-aria-label';
 
 const defaultProps = {
   title: 'Edit topic',
@@ -51,6 +52,7 @@ const defaultProps = {
   onRequestSubmit: onRequestSubmitFn,
   open: true,
   ref,
+  ariaLabel,
 };
 
 const renderEditTearsheet = ({ ...rest } = {}) =>
@@ -131,10 +133,14 @@ describe(componentName, () => {
   });
 
   it('renders the EditTearsheet component', async () => {
-    const { container } = renderEditTearsheet({
+    renderEditTearsheet({
       ...defaultProps,
     });
-    expect(container.querySelector(`.${editTearsheetBlockClass}`)).toBeTruthy();
+    const tearsheetElement = screen.getByRole('dialog', {
+      name: ariaLabel,
+    }).parentElement;
+    expect(tearsheetElement).toBeTruthy();
+    expect(tearsheetElement).toHaveClass(editTearsheetBlockClass);
     expect(ref.current).not.toBeNull();
   });
 
@@ -209,10 +215,13 @@ describe(componentName, () => {
   });
 
   it('renders the influencer with a nav item that matches the form title', async () => {
-    const { container } = renderEditTearsheet({ ...defaultProps });
+    renderEditTearsheet({ ...defaultProps });
 
+    const tearsheetElement = screen.getByRole('dialog', {
+      name: ariaLabel,
+    }).parentElement;
     expect(
-      container.querySelector(`.${carbon.prefix}--side-nav__link-text`)
+      tearsheetElement.querySelector(`.${carbon.prefix}--side-nav__link-text`)
     ).toHaveTextContent(form1Title);
     expect(
       screen.getByRole('heading', { name: form1Title })
@@ -221,11 +230,14 @@ describe(componentName, () => {
 
   it('should call the provided callback function when the form is changed', async () => {
     const onFormChange = jest.fn();
-    const { container } = renderEditTearsheet({
+    renderEditTearsheet({
       ...defaultProps,
       onFormChange,
     });
-    const form2NavLink = container.querySelectorAll(
+    const tearsheetElement = screen.getByRole('dialog', {
+      name: ariaLabel,
+    }).parentElement;
+    const form2NavLink = tearsheetElement.querySelectorAll(
       `.${carbon.prefix}--side-nav__link-text`
     )[2];
 

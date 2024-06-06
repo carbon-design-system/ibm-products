@@ -46,6 +46,8 @@ const globalFilters = [
   },
 ];
 
+const title = 'Select category';
+
 const singleProps = {
   className: 'placeholder-class',
   description: 'select a category lorem ipsum',
@@ -60,7 +62,7 @@ const singleProps = {
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'submit selections',
   searchResultsTitle: 'Search results',
-  title: 'Select category',
+  title,
   onClose: () => {},
 };
 
@@ -235,8 +237,10 @@ describe(componentName, () => {
   });
 
   it('renders SingleAddSelectBody', async () => {
-    const { container } = render(<AddSelectBody {...singleHierarchyProps} />);
-    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
+    render(<AddSelectBody {...singleHierarchyProps} open />);
+    const tearsheetElement = screen.getByRole('dialog').parentElement;
+    expect(tearsheetElement).toHaveClass(`${blockClass}__single`);
+    expect(tearsheetElement).toBeVisible();
   });
 
   it('returns the selected values on submit', async () => {

@@ -320,7 +320,7 @@ FilterPanel.propTypes = {
   searchLabelText: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,
-  setAllFilters: PropTypes.func.isRequired,
+  setAllFilters: PropTypes.func,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),

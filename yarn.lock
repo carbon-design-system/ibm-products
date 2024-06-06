@@ -1846,6 +1846,7 @@ __metadata:
     "@rollup/plugin-commonjs": "npm:^25.0.0"
     "@rollup/plugin-node-resolve": "npm:^15.0.0"
     "@rollup/plugin-typescript": "npm:^11.0.0"
+    "@types/react-table": "npm:^7.7.20"
     babel-plugin-dev-expression: "npm:^0.2.3"
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     chalk: "npm:^4.1.2"
@@ -6827,6 +6828,15 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 6ff53f5a7b7fba952a68e114d3b542ebdc1e87a794234785ebab0bcd9bde7fb4885f21ebaf93d26dc0a1b5b93287f42cad68b78ae04dddf6b20da7aceff0beaf
+  languageName: node
+  linkType: hard
+
+"@types/react-table@npm:^7.7.20":
+  version: 7.7.20
+  resolution: "@types/react-table@npm:7.7.20"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: adf86958dd5b2e044d23fc7896f758b5ec59987891b41e9b02d935d666e999a518b0bdd8ba5bd60d644f20147de0ec3cf5f6a12b75516f1fad43fb3b4fd8361f
   languageName: node
   linkType: hard
 

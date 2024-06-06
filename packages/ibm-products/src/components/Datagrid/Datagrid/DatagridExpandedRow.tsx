@@ -5,19 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { isValidElement } from 'react';
+import React, { JSXElementConstructor, isValidElement } from 'react';
 import { pkg } from '../../../settings';
 import cx from 'classnames';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 // eslint-disable-next-line react/prop-types
 const DatagridExpandedRow =
-  (ExpandedRowContentComponent) => (datagridState) => {
+  (ExpandedRowContentComponent: JSXElementConstructor<any>) =>
+  (datagridState: DataGridState) => {
     const { row } = datagridState;
     const { expandedContentHeight } = row;
 
-    const toggleParentHoverClass = (event, eventType) => {
+    const toggleParentHoverClass = (event, eventType = '') => {
       /* istanbul ignore else */
       if (event?.target?.closest('tr').previousElementSibling) {
         const parentNode = event?.target?.closest('tr').previousElementSibling;
@@ -28,6 +30,8 @@ const DatagridExpandedRow =
         }
       }
     };
+
+    const { key, ..._state } = datagridState;
 
     return (
       <tr
@@ -44,7 +48,7 @@ const DatagridExpandedRow =
               height: expandedContentHeight && expandedContentHeight,
             }}
           >
-            <ExpandedRowContentComponent {...datagridState} />
+            <ExpandedRowContentComponent key={key} {..._state} />
           </div>
         </td>
       </tr>

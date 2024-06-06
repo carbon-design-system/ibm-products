@@ -173,6 +173,19 @@ const MyInlineEditDatagrid = () => {
         },
         story: InlineEditUsageStory,
       },
+      {
+        title: 'Opt out of editing at cell level',
+        description: `In some cases you may want to disable editing per cell. This is possible by providing the following structure for the cell value within your row data:`,
+        source: {
+          code: `
+{
+  value: '\u2014', // Value displayed for static cell
+  isStaticCell: true,
+  columnId: 'lastName',
+}
+          `,
+        },
+      },
     ]}
   />
 );

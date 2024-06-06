@@ -14,7 +14,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { CreateTearsheetNarrow } from '.';
 
-const blockClass = `${pkg.prefix}--create-tearsheet-narrow`;
 const componentName = CreateTearsheetNarrow.displayName;
 
 // values to use
@@ -96,9 +95,9 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = renderComponent();
-    const outerElement = container.querySelector(`.${blockClass}`);
-    expect(outerElement).toHaveClass(defaultProps.className);
+    renderComponent();
+    const tearsheetElement = screen.getByRole('dialog').parentElement;
+    expect(tearsheetElement).toHaveClass(defaultProps.className);
   });
 
   it('adds additional props to the containing node', async () => {

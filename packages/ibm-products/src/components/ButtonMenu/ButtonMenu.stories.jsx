@@ -8,7 +8,6 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { StaticNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -16,6 +15,7 @@ import { ButtonMenu, ButtonMenuItem } from '.';
 // import styles from './_storybook-styles.scss?inline';
 
 import { Add } from '@carbon/react/icons';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'IBM Products/Internal/ButtonMenu',
@@ -37,25 +37,19 @@ docs: {
 
 const Template = (args) => {
   return (
-    <>
-      <StaticNotification
-        title="Deprecation notice"
-        subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s MenuButton."
-        inline
-        kind="warning"
-        lowContrast
-        hideCloseButton
-        actionButtonLabel="See MenuButton"
-        statusIconDescription="deprecation notification"
-        onActionButtonClick={() => {
-          window.open(
-            'https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview'
-          );
-        }}
-        titleId="storybook--deprecation-warning-notification"
-        aria-describedby="storybook--deprecation-warning-notification"
-        style={{ marginBottom: '1rem' }}
-      />
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version. Please migrate to Carbon's{' '}
+          <a href="https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview">
+            MenuButton
+          </a>
+          .
+        </div>
+      }
+    >
       <ButtonMenu
         label="Primary button"
         menuAriaLabel="Primary button"
@@ -80,7 +74,7 @@ const Template = (args) => {
           hasDivider
         />
       </ButtonMenu>
-    </>
+    </Annotation>
   );
 };
 

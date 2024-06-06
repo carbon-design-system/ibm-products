@@ -1684,16 +1684,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-
-"@carbon/feature-flags@npm:^0.20.0":
-  version: 0.20.0
-  resolution: "@carbon/feature-flags@npm:0.20.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 490b336aa1fbd95191afce31e563e76dcfec53189703371aaf0728ae43070f43fc8149327edf1edaa7c9c942c6bd6adc9581c230217c7694b795282edf6eb1d4
-  languageName: node
-  linkType: hard
-
 "@carbon/grid@npm:^11.23.0":
   version: 11.23.0
   resolution: "@carbon/grid@npm:11.23.0"

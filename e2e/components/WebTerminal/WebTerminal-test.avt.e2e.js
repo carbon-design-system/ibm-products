@@ -22,9 +22,7 @@ test.describe('WebTerminal @avt', () => {
     });
 
     await page.getByLabel('Web terminal').click();
-    const modalElement = page.locator(
-      `.${pkg.prefix}--web-terminal`
-    );
+    const modalElement = page.locator(`.${pkg.prefix}--web-terminal`);
     await modalElement.evaluate((element) =>
       Promise.all(
         element.getAnimations().map((animation) => animation.finished)

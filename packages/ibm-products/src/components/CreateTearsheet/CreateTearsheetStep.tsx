@@ -12,6 +12,9 @@ import React, {
   useState,
   isValidElement,
   PropsWithChildren,
+  useRef,
+  MutableRefObject,
+  RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -162,6 +165,9 @@ export let CreateTearsheetStep = forwardRef(
     }: CreateTearsheetStepProps,
     ref
   ) => {
+    const localRef = useRef<HTMLDivElement>(null);
+    const stepRef = ref || localRef;
+    const stepRefValue = (stepRef as MutableRefObject<HTMLDivElement>).current;
     const stepsContext = useContext(StepsContext);
     const stepNumber = useContext(StepNumberContext);
     const [shouldIncludeStep, setShouldIncludeStep] =
@@ -196,15 +202,48 @@ export let CreateTearsheetStep = forwardRef(
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
+    const setFocusChildrenTabIndex = (
+      childInputs: NodeListOf<Element>,
+      value: number
+    ) => {
+      if (childInputs?.length) {
+        childInputs.forEach((child) => {
+          (child as HTMLElement).tabIndex = value;
+        });
+      }
+    };
+
     // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
+      const focusElementQuery = `button, input, select, textarea, a`;
+      if (stepNumber !== stepsContext?.currentStep) {
+        // Specify tab-index -1 for focusable elements not contained
+        // in the current step so that the useFocus hook can exclude
+        // from the focus trap
+        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
+        setFocusChildrenTabIndex(childInputs, -1);
+      }
       if (stepNumber === stepsContext?.currentStep) {
+        // Specify tab-index 0 for current step focusable elements
+        // for the useFocus hook to know which elements to include
+        // in focus trap
+        const childInputs = stepRefValue?.querySelectorAll(focusElementQuery);
+        setFocusChildrenTabIndex(childInputs, 0);
+
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
       }
-    }, [stepsContext, stepNumber, disableSubmit, onNext, onPrevious]);
+    }, [
+      stepsContext,
+      stepNumber,
+      disableSubmit,
+      onNext,
+      onPrevious,
+      stepRef,
+      stepRefValue,
+    ]);
 
     const renderDescription = () => {
       if (description) {
@@ -221,42 +260,43 @@ export let CreateTearsheetStep = forwardRef(
     };
 
     return stepsContext ? (
-      <Grid
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(blockClass, className, {
-          [`${blockClass}__step--hidden-step`]:
-            stepNumber !== stepsContext?.currentStep,
-          [`${blockClass}__step--visible-step`]:
-            stepNumber === stepsContext?.currentStep,
-        })}
-        ref={ref}
-      >
-        <Column xlg={12} lg={12} md={8} sm={4}>
-          <h4 className={`${blockClass}--title`}>{title}</h4>
+      <div ref={stepRef as RefObject<HTMLDivElement>}>
+        <Grid
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(blockClass, className, {
+            [`${blockClass}__step--hidden-step`]:
+              stepNumber !== stepsContext?.currentStep,
+            [`${blockClass}__step--visible-step`]:
+              stepNumber === stepsContext?.currentStep,
+          })}
+        >
+          <Column xlg={12} lg={12} md={8} sm={4}>
+            <h4 className={`${blockClass}--title`}>{title}</h4>
 
-          {subtitle && (
-            <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
-          )}
+            {subtitle && (
+              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+            )}
 
-          {renderDescription()}
-        </Column>
+            {renderDescription()}
+          </Column>
 
-        <Column span={100}>
-          {hasFieldset ? (
-            <FormGroup
-              legendText={fieldsetLegendText}
-              className={`${blockClass}--fieldset`}
-            >
-              {children}
-            </FormGroup>
-          ) : (
-            children
-          )}
-        </Column>
-      </Grid>
+          <Column span={100}>
+            {hasFieldset ? (
+              <FormGroup
+                legendText={fieldsetLegendText}
+                className={`${blockClass}--fieldset`}
+              >
+                {children}
+              </FormGroup>
+            ) : (
+              children
+            )}
+          </Column>
+        </Grid>
+      </div>
     ) : (
       pconsole.warn(
         `You have tried using a ${componentName} component outside of a CreateTearsheet. This is not allowed. ${componentName}s should always be children of the CreateTearsheet`

@@ -98,7 +98,7 @@ const newPerson = (index, config) => {
     lastName:
       index === 1 && config?.includeNonEditableCell && config?.column
         ? {
-            value: namor.generate({ words: 1, numbers: 0 }),
+            value: '\u2014',
             isStaticCell: true,
             columnId: config?.column,
           }

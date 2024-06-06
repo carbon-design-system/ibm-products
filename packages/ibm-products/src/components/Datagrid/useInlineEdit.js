@@ -74,7 +74,6 @@ const useInlineEdit = (hooks) => {
                 type="text"
               />
             )}
-            {/* {!inlineEditType && ( */}
             {!inlineEditType && (
               <InlineEditCell
                 config={columnInlineEditConfig}

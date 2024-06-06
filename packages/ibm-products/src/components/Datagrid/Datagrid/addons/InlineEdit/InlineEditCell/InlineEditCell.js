@@ -515,13 +515,6 @@ export const InlineEditCell = ({
           isActiveCell={cellId === activeCellId}
           renderIcon={setRenderIcon()}
           label={getLabel()}
-          // label={
-          //   type === 'selection'
-          //     ? value?.text ?? value
-          //     : type === 'date'
-          //     ? buildDate(value)
-          //     : value
-          // }
           disabledCell={disabledCell}
           labelIcon={value?.icon || null}
           placeholder={placeholder}

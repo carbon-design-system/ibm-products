@@ -60,15 +60,6 @@ const useNestedRows = (hooks) => {
       // reduce the "first cell"s width to compensate added (left) margin
       const isFirstCell =
         instance.columns.findIndex((c) => c.id === cell.column.id) === 0;
-      // if (
-      //   isFirstCell &&
-      //   cell.row.depth > 0 &&
-      //   parseInt(props.style.width, 10) <= 100
-      // ) {
-      //   console.log(
-      //     -32 * cell.row.depth - 18 + parseInt(props.style.width, 10) - 50
-      //   );
-      // }
       return [
         props,
         {
@@ -76,7 +67,7 @@ const useNestedRows = (hooks) => {
             marginRight:
               isFirstCell &&
               cell.row.depth > 0 &&
-              parseInt(props.style.width, 10) <= 100
+              parseInt(props.style.width, 10) <= 32 * cell.row.depth + 18 + 50
                 ? `${
                     -32 * cell.row.depth -
                     18 +

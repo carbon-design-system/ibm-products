@@ -61,7 +61,7 @@ interface CoachmarkStackHomeProps {
    *
    * @see {@link MEDIA_PROP_TYPE}.
    */
-  media: Media;
+  media?: Media;
 
   /**
    * The labels used to link to the stackable Coachmarks.

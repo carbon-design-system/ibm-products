@@ -35,7 +35,9 @@ const CustomizeColumnsTearsheet = ({
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnObjects] = useState(
-    columnDefinitions.filter((col) => col.id !== 'spacer')
+    columnDefinitions.filter(
+      (col) => col.id !== 'spacer' && col.id !== 'actions'
+    )
   );
   const [isDirty, setIsDirty] = useState(false);
 
@@ -61,6 +63,7 @@ const CustomizeColumnsTearsheet = ({
       ) {
         return { ...definition, isVisible: value };
       }
+      console.log('64', definition);
       return definition;
     });
 
@@ -82,6 +85,7 @@ const CustomizeColumnsTearsheet = ({
 
   useEffect(() => {
     const notFilterableCount = columnObjects.filter((col) => !col.canFilter);
+    console.log('86', columnObjects);
     setVisibleColumnsCount(
       getVisibleColumnsCount() - notFilterableCount.length
     );

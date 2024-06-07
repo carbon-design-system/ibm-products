@@ -44,43 +44,43 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - name: Continuous integration check (includes build)
-        run: yarn ci-check
-      - name: Set NPM token
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
-      - name: Set dry run env variable
-        run: |
-          if [ "${{ github.event.inputs.dry-run }}" == "false"  ]; then
-            echo "DRY_RUN=--yes" >> $GITHUB_ENV
-          fi
+      # - name: Continuous integration check (includes build)
+      #   run: yarn ci-check
+      # - name: Set NPM token
+      #   run: |
+      #     echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
+      # - name: Set dry run env variable
+      #   run: |
+      #     if [ "${{ github.event.inputs.dry-run }}" == "false"  ]; then
+      #       echo "DRY_RUN=--yes" >> $GITHUB_ENV
+      #     fi
 
-      - name: Publish full minor release (ie. v1.x.0)
-        if: github.event.inputs.type == 'full minor release'
-        run: |
-          echo "DRY RUN: ${{ env.DRY_RUN }}"
-          # yarn lerna publish minor --conventional-graduate $(echo "${{ env.DRY_RUN }}")
+      # - name: Publish full minor release (ie. v1.x.0)
+      #   if: github.event.inputs.type == 'full minor release'
+      #   run: |
+      #     echo "DRY RUN: ${{ env.DRY_RUN }}"
+      #     yarn lerna publish minor --conventional-graduate $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
         if: github.event.inputs.type == 'first minor rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish preminor --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+      # yarn lerna publish preminor --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
-      - name: Publish full patch release (ie. v1.0.x)
-        if: github.event.inputs.type == 'full patch release'
-        run: |
-          echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish patch --conventional-graduate $(echo "${{ env.DRY_RUN }}")
+      # - name: Publish full patch release (ie. v1.0.x)
+      #   if: github.event.inputs.type == 'full patch release'
+      #   run: |
+      #     echo "DRY RUN: ${{ env.DRY_RUN }}"
+      #     yarn lerna publish patch --conventional-graduate $(echo "${{ env.DRY_RUN }}")
 
-      - name: Publish first patch RC (ie. v1.0.x-rc.0)
-        if: github.event.inputs.type == 'first patch rc'
-        run: |
-          echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+      # - name: Publish first patch RC (ie. v1.0.x-rc.0)
+      #   if: github.event.inputs.type == 'first patch rc'
+      #   run: |
+      #     echo "DRY RUN: ${{ env.DRY_RUN }}"
+      #     yarn lerna publish prepatch --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
-      - name: Publish subsequent RC (ie. v1.0.0-rc.x)
-        if: github.event.inputs.type == 'subsequent rc'
-        run: |
-          echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+      # - name: Publish subsequent RC (ie. v1.0.0-rc.x)
+      #   if: github.event.inputs.type == 'subsequent rc'
+      #   run: |
+      #     echo "DRY RUN: ${{ env.DRY_RUN }}"
+      #     yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")

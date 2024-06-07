@@ -123,7 +123,7 @@ export let CoachmarkStackHome = forwardRef<
     },
     ref
   ) => {
-    const buttonFocusRef = useRef<ButtonProps>();
+    const buttonFocusRef = useRef<ButtonProps<any>>();
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
     useEffect(() => {
       setTimeout(() => {

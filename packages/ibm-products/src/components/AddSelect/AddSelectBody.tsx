@@ -8,7 +8,7 @@
 import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Tag, TextInput } from '@carbon/react';
+import { Tag } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NotFoundEmptyState } from '../EmptyStates';
 import { AddSelectSidebar } from './AddSelectSidebar';

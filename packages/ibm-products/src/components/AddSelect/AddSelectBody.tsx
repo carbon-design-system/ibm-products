@@ -8,7 +8,7 @@
 import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Tag } from '@carbon/react';
+import { Tag, TextInput } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NotFoundEmptyState } from '../EmptyStates';
 import { AddSelectSidebar } from './AddSelectSidebar';
@@ -28,6 +28,7 @@ const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
 
 export interface AddSelectBodyProps {
+  additionalInfo?: ReactNode;
   className?: string;
   clearFiltersText?: string;
   closeIconDescription?: string;
@@ -72,6 +73,7 @@ export interface AddSelectBodyProps {
 export const AddSelectBody = forwardRef(
   (
     {
+      additionalInfo,
       className,
       clearFiltersText,
       closeIconDescription,
@@ -275,6 +277,12 @@ export const AddSelectBody = forwardRef(
     // main content
     const body = (
       <>
+        {additionalInfo && (
+          <div className={`${blockClass}__additional-info`}>
+            {additionalInfo}
+          </div>
+        )}
+
         <div id="add-select" className={`${blockClass}__header`}>
           <AddSelectFilter
             inputLabel={globalSearchLabel}

@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelect } from '../AddSelect';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -17,6 +17,11 @@ import { Entry } from '../AddSelect/types';
 const componentName = 'SingleAddSelect';
 
 interface SingleAddSelectProps {
+  /**
+   * option to display additional component (ex. TextInput)
+   * in the beginning of the body section
+   */
+  additionalInfo?: ReactNode;
   /**
    * optional class name
    */
@@ -115,6 +120,11 @@ export let SingleAddSelect = forwardRef(
 SingleAddSelect = pkg.checkComponentEnabled(SingleAddSelect, componentName);
 
 SingleAddSelect.propTypes = {
+  /**
+   * option to display additional component (ex. TextInput)
+   * in the beginning of the body section
+   */
+  additionalInfo: PropTypes.node,
   /**
    * optional class name
    */

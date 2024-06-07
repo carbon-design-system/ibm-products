@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { SingleAddSelect } from '.';
-import { Button } from '@carbon/react';
+import { Button, TextInput } from '@carbon/react';
 import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
@@ -23,6 +23,26 @@ export default {
     },
   },
   argTypes: {
+    additionalInfo: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no additional info',
+          1: 'Text Input',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: null,
+        1: (
+          <TextInput
+            id="text-input-1"
+            type="text"
+            labelText="Text input label"
+          />
+        ),
+      },
+    },
     items: {
       control: {
         type: 'select',
@@ -154,3 +174,11 @@ WithHierarchy.args = {
   items: 2,
   ...defaultProps,
 };
+
+export const WithTextInput = Template.bind({});
+WithTextInput.args = {
+  items: 1,
+  additionalInfo: 1,
+  ...defaultProps,
+};
+

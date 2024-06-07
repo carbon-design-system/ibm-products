@@ -13,6 +13,7 @@ import { Filter, Item, Theme } from './types';
 const componentName = 'AddSelect';
 
 export interface AddSelectProps {
+  additionalInfo?: ReactNode;
   className?: string;
   clearFiltersText?: string;
   closeIconDescription?: string;
@@ -96,6 +97,7 @@ export const AddSelect = forwardRef(
 );
 
 AddSelect.propTypes = {
+  additionalInfo: PropTypes.node,
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
   closeIconDescription: PropTypes.string.isRequired,

@@ -7,6 +7,7 @@
 
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
+import { TextInput } from '@carbon/react';
 import { AddSelectBody } from './AddSelectBody';
 import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
@@ -214,6 +215,10 @@ const itemWithAvatar = {
     },
   ],
 };
+
+const additionalTextInput = (
+  <TextInput id="text-input-1" type="text" labelText="Text input label" />
+);
 
 describe(componentName, () => {
   const { ResizeObserver } = window;
@@ -462,5 +467,18 @@ describe(componentName, () => {
     const globalSearch = screen.getByPlaceholderText('Find business terms');
     fireEvent.change(globalSearch, { target: { value: 'florida' } });
     fireEvent.change(globalSearch, { target: { value: '' } });
+  });
+
+  it('handle additional component', async () => {
+    const newProps = {
+      ...multiProps,
+      additionalInfo: additionalTextInput,
+    };
+    render(<AddSelectBody {...newProps} />);
+    const addInfo = document.querySelectorAll(
+      `.${blockClass}__additional-info`
+    )[0];
+    expect(addInfo);
+    fireEvent.click(addInfo);
   });
 });

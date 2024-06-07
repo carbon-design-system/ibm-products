@@ -2553,6 +2553,11 @@ p.c4p--about-modal__copyright-text:first-child {
   width: 40rem;
   max-width: 100%;
 }
+.c4p--side-panel.c4p--side-panel--xl {
+  /* any value is single value list */
+  width: 65rem;
+  max-width: 100%;
+}
 .c4p--side-panel.c4p--side-panel--2xl {
   /* any value is single value list */
   width: 40rem;
@@ -4270,7 +4275,7 @@ p.c4p--about-modal__copyright-text:first-child {
   right: 0;
   display: flex;
   align-items: center;
-  border-left: 1px solid var(--cds-layer-active-02, #c6c6c6);
+  border-left: 1px solid var(--cds-border-subtle);
 }
 
 .c4p--datagrid__right-sticky-column-header {
@@ -4285,7 +4290,7 @@ p.c4p--about-modal__copyright-text:first-child {
   left: 0;
   display: flex;
   align-items: center;
-  border-right: 1px solid var(--cds-layer-active-02, #c6c6c6);
+  border-right: 1px solid var(--cds-border-subtle);
 }
 
 .c4p--datagrid__left-sticky-column-header {
@@ -4293,11 +4298,11 @@ p.c4p--about-modal__copyright-text:first-child {
   position: sticky !important;
   z-index: 1;
   left: 0;
-  border-right: 1px solid var(--cds-layer-active-02, #c6c6c6);
+  border-right: 1px solid var(--cds-border-subtle);
 }
 
 .c4p--datagrid__right-sticky-column-header {
-  border-left: 1px solid var(--cds-layer-active-02, #c6c6c6);
+  border-left: 1px solid var(--cds-border-subtle);
 }
 
 .c4p--datagrid__left-sticky-column-cell.c4p--datagrid__left-sticky-column-cell--with-extra-select-column,
@@ -4988,6 +4993,12 @@ th.c4p--datagrid__select-all-toggle-on.button {
 
 .c4p--datagrid .c4p--inline-edit__after-input-elements {
   display: flex;
+  align-items: center;
+}
+
+.c4p--datagrid__static--outer-cell {
+  display: flex;
+  height: -webkit-fill-available;
   align-items: center;
 }
 
@@ -5943,10 +5954,14 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background: var(--cds-layer-02, #ffffff);
 }
 
+.c4p--add-select__additional-info {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
 .c4p--add-select__header {
   padding: 1rem;
   padding-bottom: 0;
-  border-top: 1px solid var(--cds-layer-accent-01, #e0e0e0);
 }
 
 .c4p--add-select__body {

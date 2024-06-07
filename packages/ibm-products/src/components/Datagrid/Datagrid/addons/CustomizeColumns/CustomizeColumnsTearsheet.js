@@ -34,7 +34,9 @@ const CustomizeColumnsTearsheet = ({
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [columnObjects, setColumnObjects] = useState(columnDefinitions);
+  const [columnObjects, setColumnObjects] = useState(
+    columnDefinitions.filter((col) => col.id !== 'spacer')
+  );
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {

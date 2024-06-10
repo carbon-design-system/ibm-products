@@ -45,7 +45,7 @@ type ActionIcon = {
   iconDescription: string;
   href?: string;
 };
-
+type PlacementType = 'top' | 'bottom';
 interface EditUpdateCardsProps {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
@@ -54,7 +54,7 @@ interface EditUpdateCardsProps {
   /**
    * Determines if the action icons are on the top or bottom of the card
    */
-  actionsPlacement?: 'top' | 'bottom';
+  actionsPlacement?: PlacementType;
   /**
    * Optional label for the top of the card.
    */
@@ -98,7 +98,7 @@ interface EditUpdateCardsProps {
   /**
    * Determines if the primary button is on the top or bottom of the card
    */
-  primaryButtonPlacement?: 'top' | 'bottom';
+  primaryButtonPlacement?: PlacementType;
   /**
    * The text that's displayed in the primary button
    */
@@ -118,7 +118,7 @@ interface EditUpdateCardsProps {
   /**
    * Determines if the secondary button is on the top or bottom of the card
    */
-  secondaryButtonPlacement?: 'top' | 'bottom';
+  secondaryButtonPlacement?: PlacementType;
   /**
    * The text that's displayed in the secondary button
    */
@@ -176,11 +176,11 @@ export let EditUpdateCards = React.forwardRef(
       onSecondaryButtonClick: onSecondaryButtonClick,
       primaryButtonIcon: primaryButtonIcon,
       primaryButtonKind: 'ghost',
-      primaryButtonPlacement: 'top',
+      primaryButtonPlacement: 'top' as PlacementType,
       primaryButtonText: primaryButtonText,
       secondaryButtonIcon: secondaryButtonIcon,
       secondaryButtonKind: 'ghost',
-      secondaryButtonPlacement: 'top',
+      secondaryButtonPlacement: 'top' as PlacementType,
       secondaryButtonText: secondaryButtonText,
     };
     return (
@@ -203,7 +203,6 @@ export let EditUpdateCards = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {/* @ts-ignore  */}
         <ProductiveCard
           actionIcons={actionIcons}
           actionsPlacement={actionsPlacement}

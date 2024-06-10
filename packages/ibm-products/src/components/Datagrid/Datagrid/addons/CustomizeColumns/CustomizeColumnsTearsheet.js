@@ -42,7 +42,11 @@ const CustomizeColumnsTearsheet = ({
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
-    setColumnObjects(columnDefinitions);
+    setColumnObjects(
+      columnDefinitions.filter(
+        (col) => col.id !== 'spacer' && col.id !== 'actions'
+      )
+    );
     setIsTearsheetOpen(false);
   };
 
@@ -58,12 +62,13 @@ const CustomizeColumnsTearsheet = ({
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
       if (
-        (Array.isArray(col) && col.indexOf(definition) != -1) ||
+        (definition.disabled !== true &&
+          Array.isArray(col) &&
+          col.indexOf(definition) != -1) ||
         definition.id === col.id
       ) {
         return { ...definition, isVisible: value };
       }
-      console.log('64', definition);
       return definition;
     });
 
@@ -85,7 +90,7 @@ const CustomizeColumnsTearsheet = ({
 
   useEffect(() => {
     const notFilterableCount = columnObjects.filter((col) => !col.canFilter);
-    console.log('86', columnObjects);
+    // console.log('86', columnObjects);
     setVisibleColumnsCount(
       getVisibleColumnsCount() - notFilterableCount.length
     );

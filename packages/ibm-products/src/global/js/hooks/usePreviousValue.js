@@ -8,8 +8,9 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Returns the previous state values included in the param
- * @param {object} value
+ * Returns the previous state value included in the param
+ * @param {object} value - The current value of any type.
+ * @returns {T | undefined} - The previous value of the same type, or undefined if there is none
  */
 export const usePreviousValue = (value) => {
   const ref = useRef();

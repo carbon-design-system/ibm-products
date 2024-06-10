@@ -124,9 +124,12 @@ const SelectRow = (datagridState) => {
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
   const rowId = `${tableId}-${row.id}-${row.index}`;
+  const { key, _cellProps } = cellProps;
+
   return (
     <TableSelectRow
-      {...cellProps}
+      key={key}
+      {..._cellProps}
       {...selectProps}
       radio={radio}
       onSelect={onSelectHandler}

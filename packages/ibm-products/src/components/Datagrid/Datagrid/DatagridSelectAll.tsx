@@ -10,10 +10,11 @@ import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { handleSelectAllRowData } from './addons/stateReducer';
+import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const SelectAll = (datagridState) => {
+const SelectAll = (datagridState: DataGridState) => {
   const [windowSize, setWindowSize] = useState(
     typeof window !== 'undefined' ? window.innerWidth : ''
   );
@@ -52,7 +53,7 @@ const SelectAll = (datagridState) => {
         className={cx(`${blockClass}__head-hidden-select-all`, {
           [`${blockClass}__select-all-sticky-left`]:
             /* istanbul ignore next */
-            isFirstColumnStickyLeft && windowSize > 671,
+            isFirstColumnStickyLeft && Number(windowSize) > 671,
         })}
       />
     );
@@ -60,7 +61,7 @@ const SelectAll = (datagridState) => {
   const getProps = DatagridPagination
     ? getToggleAllPageRowsSelectedProps
     : getToggleAllRowsSelectedProps;
-  const { onChange, ...selectProps } = getProps();
+  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
   const { indeterminate } = selectProps;
 
   const handleSelectAllChange = (event) => {
@@ -70,19 +71,21 @@ const SelectAll = (datagridState) => {
         rows,
         getRowId,
         indeterminate: true,
+        isChecked: undefined,
       });
       toggleAllRowsSelected(false);
       onAllRowSelect?.(rows, event);
 
       return onChange?.({
         target: { checked: false },
-      });
+      } as any);
     }
     handleSelectAllRowData({
       dispatch,
       rows,
       getRowId,
       isChecked: event.target.checked,
+      indeterminate,
     });
     onAllRowSelect?.(rows, event);
     return onChange?.(event);
@@ -96,7 +99,7 @@ const SelectAll = (datagridState) => {
         {
           [`${blockClass}__checkbox-cell-sticky-left`]:
             /* istanbul ignore next */
-            isFirstColumnStickyLeft && windowSize > 671,
+            isFirstColumnStickyLeft && Number(windowSize) > 671,
         }
       )}
     >
@@ -104,7 +107,7 @@ const SelectAll = (datagridState) => {
         {...selectProps}
         name={`${tableId}-select-all-checkbox-name`}
         onSelect={handleSelectAllChange}
-        disabled={isFetching || selectProps.disabled}
+        disabled={isFetching || selectProps?.disabled}
         id={`${tableId}-select-all-checkbox-id`}
       />
     </div>

@@ -15,7 +15,6 @@ import { Annotation } from '../Annotation';
 
 export const WithFeatureFlags = ({ flags, children }) => {
   const [updatedFlags, setUpdatedFlags] = useState();
-  const [tempKey, setTempKey] = useState(0);
   const allFlagsEnabled = Object.fromEntries(
     Array.from(FeatureFlagScope.flags.keys()).map((k) => [k, true])
   );
@@ -28,12 +27,11 @@ export const WithFeatureFlags = ({ flags, children }) => {
         FeatureFlagScope.flags.set(key, value);
       }
       setUpdatedFlags(FeatureFlagScope.flags);
-      setTempKey((prev) => prev + 1);
     }
   }, [flags]);
 
   return (
-    <FeatureFlags flags={flags ? updatedFlags : allFlagsEnabled} key={tempKey}>
+    <FeatureFlags flags={flags ? updatedFlags : allFlagsEnabled}>
       <Annotation
         type="feature-flags"
         text={

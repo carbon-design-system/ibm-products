@@ -14,10 +14,11 @@ import {
   NotFoundEmptyState,
   EmptyState,
 } from '../../EmptyStates';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const DatagridEmptyBody = (datagridState) => {
+const DatagridEmptyBody = (datagridState: DataGridState) => {
   const {
     getTableBodyProps,
     headers,
@@ -44,12 +45,12 @@ const DatagridEmptyBody = (datagridState) => {
   return (
     <TableBody
       {...getTableBodyProps({ role: undefined })}
-      aria-live={null}
+      aria-live="off"
       className={`${blockClass}__empty-state-body`}
     >
       <TableRow>
         <TableCell
-          colSpan={headers.length}
+          colSpan={headers?.length}
           className={`${blockClass}__empty-state-cell`}
         >
           {validEmptyStates.includes(emptyStateType) ? (
@@ -65,7 +66,7 @@ const DatagridEmptyBody = (datagridState) => {
               )}
             </>
           ) : (
-            <EmptyState {...emptyStateProps} />
+            <EmptyState {...(emptyStateProps as any)} />
           )}
         </TableCell>
       </TableRow>

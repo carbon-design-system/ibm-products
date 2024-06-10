@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
 import { pkg } from '../../../settings';
+import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -28,7 +29,7 @@ const SelectAllWithToggle = ({
   allRowsLabel = 'Select all',
   columns,
   withStickyColumn,
-}) => {
+}: DataGridState) => {
   const { onSelectAllRows, labels } = selectAllToggle || {};
   const [selectAllMode, setSelectAllMode] = useState(SELECT_ALL_PAGE_ROWS);
   useEffect(() => {
@@ -47,17 +48,17 @@ const SelectAllWithToggle = ({
   }, []);
 
   if (labels) {
-    allPageRowsLabel = labels.allPageRows || allPageRowsLabel;
+    allPageRowsLabel = labels?.allPageRows || allPageRowsLabel;
     allRowsLabel = labels.allRows || allRowsLabel;
   }
   const getProps =
     selectAllMode === SELECT_ALL_PAGE_ROWS
       ? getToggleAllPageRowsSelectedProps
       : getToggleAllRowsSelectedProps;
-  const { onChange, ...selectProps } = getProps();
+  const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
   const disabled = isFetching || selectProps.disabled;
   const isFirstColumnStickyLeft =
-    columns[0]?.sticky === 'left' && withStickyColumn;
+    columns?.[0]?.sticky === 'left' && withStickyColumn;
   return (
     <th
       scope="col"
@@ -70,12 +71,12 @@ const SelectAllWithToggle = ({
         <Checkbox
           {...selectProps}
           name={`${tableId}-select-all-checkbox-name`}
-          onClick={(e) => {
-            onChange(e);
+          onClick={(e: any) => {
+            onChange?.(e);
           }}
           disabled={disabled}
           id={`${tableId}-select-all-checkbox-id`}
-          labelText={allRowsLabel}
+          labelText={allRowsLabel as string}
           hideLabel
         />
       </span>
@@ -86,28 +87,28 @@ const SelectAllWithToggle = ({
         menuOptionsClass={`${blockClass}__select-all-toggle-overflow`}
       >
         <OverflowMenuItem
-          itemText={allPageRowsLabel}
+          itemText={allPageRowsLabel as string}
           requireTitle
           disabled={disabled}
           onClick={() => {
             setSelectAllMode(SELECT_ALL_PAGE_ROWS);
             // deselect all rows first
-            getToggleAllRowsSelectedProps().onChange({
+            (getToggleAllRowsSelectedProps as any)?.()?.onChange({
               target: { checked: false },
             });
             // select all row on current page
-            getToggleAllPageRowsSelectedProps().onChange({
+            (getToggleAllPageRowsSelectedProps as any)().onChange({
               target: { checked: true },
             });
           }}
         />
         <OverflowMenuItem
-          itemText={allRowsLabel}
+          itemText={allRowsLabel as string}
           requireTitle
           disabled={disabled}
           onClick={() => {
             setSelectAllMode(SELECT_ALL_ROWS);
-            getToggleAllRowsSelectedProps().onChange({
+            (getToggleAllRowsSelectedProps as any)().onChange({
               target: { checked: true },
             });
           }}

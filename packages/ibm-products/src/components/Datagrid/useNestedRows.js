@@ -58,7 +58,7 @@ const useNestedRows = (hooks) => {
     ];
     const getIndentation = (depth) => 32 * depth + 16;
     const getCellProps = (props, { cell, instance }) => {
-      // we add a -ve margin right only if the cell is resized below minimum width i.e 50px, else we set the width based on indentation at different levels
+      // we add a dynamic -ve margin right only if the cell is resized below minimum width i.e 50px, else we set the width based on indentation at different levels
       const isFirstCell =
         instance.columns.findIndex((c) => c.id === cell.column.id) === 0;
       return [

@@ -1,3 +1,4 @@
+# This is the base release workflow dispatched by the `release-minor` or `release-patch` workflows
 name: Release base
 run-name:
   ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
@@ -49,6 +50,8 @@ jobs:
       - name: Set NPM token
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }}" >> .npmrc
+
+      # Set the dry run environment variable to be used later in the Lerna publish command
       - name: Set dry run env variable
         run: |
           if [ "${{ github.event.inputs.dry-run }}" == "false"  ]; then
@@ -59,7 +62,7 @@ jobs:
         if: github.event.inputs.type == 'full minor release'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          # yarn lerna publish minor --conventional-graduate $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish minor --conventional-graduate $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
         if: github.event.inputs.type == 'first minor rc'
@@ -84,3 +87,12 @@ jobs:
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
           yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+
+      # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
+      # Pass in the release branch name to the storybook deployment job so it build off the release branch
+      - name: Dispatch production storybook deployment workflow
+        if: ${{ (github.event.inputs.type  == 'full minor release') || (github.event.inputs.type  == 'full patch release') }}
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: deploy-latest-storybook
+          client-payload: '{"branch": "${{ github.ref_name }}"}'

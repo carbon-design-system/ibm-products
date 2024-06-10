@@ -1,0 +1,52 @@
+# Deploy staging storybook environment from release branch to Github Pages
+name: Deploy staging storybook
+
+# Gets triggered every time a change is pushed to the `release/v2*` branch
+on:
+  push:
+    branches: [release/v2*]
+
+jobs:
+  deploy-staging-storybook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+        with:
+          fetch-depth: '0'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build storybook
+        run: yarn storybook:build
+
+      # move storybook-static files to temp folder before checking out to `gh-pages` branch
+      - name: Move storybook to build folder
+        run: |
+          mkdir -p builds
+          mv packages/core/storybook-static/* builds
+
+      # remove old files and push storybook-static files to staging folder
+      - name: Deploy production environment to Github Pages
+        run: |
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name $GITHUB_ACTOR
+
+          git fetch origin gh-pages
+          git checkout -b gh-pages origin/gh-pages
+          git update-ref -d refs/remotes/origin/gh-pages
+          git pull origin gh-pages
+
+          rm -rf staging
+          mkdir -p staging
+          mv builds/* staging
+
+          git add staging
+          git commit -m "chore(deploy): deploy staging storybook to GitHub Pages"
+          git push origin gh-pages --force

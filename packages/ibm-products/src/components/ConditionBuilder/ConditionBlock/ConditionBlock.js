@@ -125,7 +125,7 @@ const ConditionBlock = (props) => {
   return (
     <div
       className={cx(
-        `${blockClass}__condition-block conditionBlockWrapper  `,
+        `${blockClass}__condition-block`,
         {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         },

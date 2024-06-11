@@ -82,7 +82,7 @@ const ConditionGroupBuilder = ({
   };
 
   const handleFocusOnClose = (e) => {
-    let previousClose = e.currentTarget
+    const previousClose = e.currentTarget
       ?.closest('[role="row"]')
       ?.previousSibling?.querySelector('[data-name="closeCondition"]');
 
@@ -164,52 +164,30 @@ const ConditionGroupBuilder = ({
               key={eachCondition.id}
               className={`${blockClass}__group-wrapper`}
             >
-              {/* This condition is for tree variant where there will be subgroups inside each group */}
-              {eachCondition.conditions && (
-                <ConditionGroupBuilder
-                  className={`${blockClass}__group`}
-                  aria={{
-                    level: aria.level + 1,
-                    posinset: conditionIndex + 1,
-                    setsize: group.conditions.length,
-                  }}
-                  group={eachCondition}
-                  onChange={(updatedCondition) => {
-                    onChangeHandler(updatedCondition, conditionIndex);
-                  }}
-                  onRemove={(e) => {
-                    onRemoveHandler(eachCondition.id, e);
-                  }}
-                  conditionBuilderRef={conditionBuilderRef}
-                />
-              )}
-              {/* rendering each condition block */}
-              {!eachCondition.conditions && (
-                <ConditionBlock
-                  conjunction={
-                    conditionIndex > 0 ? group.groupOperator : undefined
-                  }
-                  aria={{
-                    level: aria.level + 1,
-                    posinset: conditionIndex + 1,
-                    setsize: group.conditions.length,
-                  }}
-                  isStatement={conditionIndex == 0}
-                  condition={eachCondition}
-                  group={group}
-                  conditionIndex={conditionIndex}
-                  onChange={(updatedConditions) => {
-                    onChangeHandler(updatedConditions, conditionIndex);
-                  }}
-                  addConditionHandler={addConditionHandler}
-                  onRemove={(e) => {
-                    onRemoveHandler(eachCondition.id, e);
-                  }}
-                  onConnectorOperatorChange={onConnectorOperatorChange}
-                  onStatementChange={onStatementChangeHandler}
-                  isLastCondition={isLastCondition}
-                />
-              )}
+              <ConditionBlock
+                conjunction={
+                  conditionIndex > 0 ? group.groupOperator : undefined
+                }
+                aria={{
+                  level: aria.level + 1,
+                  posinset: conditionIndex + 1,
+                  setsize: group.conditions.length,
+                }}
+                isStatement={conditionIndex == 0}
+                condition={eachCondition}
+                group={group}
+                conditionIndex={conditionIndex}
+                onChange={(updatedConditions) => {
+                  onChangeHandler(updatedConditions, conditionIndex);
+                }}
+                addConditionHandler={addConditionHandler}
+                onRemove={(e) => {
+                  onRemoveHandler(eachCondition.id, e);
+                }}
+                onConnectorOperatorChange={onConnectorOperatorChange}
+                onStatementChange={onStatementChangeHandler}
+                isLastCondition={isLastCondition}
+              />
             </div>
           ))}
         </div>
@@ -262,10 +240,10 @@ const ConditionGroupBuilder = ({
         {group?.conditions?.map((eachCondition, conditionIndex) => (
           <Fragment key={eachCondition.id}>
             {/* This condition is for tree model where there will be subgroups inside each group */}
-            {eachCondition.conditions && (
+            {eachCondition.conditions ? (
               <div
                 className={cx(
-                  `${blockClass}__condition-block conditionBlockWrapper subgroup  ${blockClass}__gap`,
+                  `${blockClass}__condition-block subgroup  ${blockClass}__gap`,
 
                   {
                     [`${blockClass}__gap-bottom`]:
@@ -273,8 +251,6 @@ const ConditionGroupBuilder = ({
                   }
                 )}
               >
-                {/* <> */}
-
                 <ConditionConnector
                   className={`${blockClass}__gap ${blockClass}__groupConnector`}
                   operator={group.groupOperator}
@@ -298,9 +274,7 @@ const ConditionGroupBuilder = ({
                   conditionBuilderRef={conditionBuilderRef}
                 />
               </div>
-            )}
-            {/* rendering each condition block */}
-            {!eachCondition.conditions && (
+            ) : (
               <ConditionBlock
                 conjunction={
                   conditionIndex > 0 ? group.groupOperator : undefined
@@ -337,6 +311,7 @@ const ConditionGroupBuilder = ({
                 isLastCondition={isLastCondition}
               />
             )}
+
             {conditionIndex == showConditionSubGroupPreview && (
               <ConditionPreview previewType="subGroup" />
             )}

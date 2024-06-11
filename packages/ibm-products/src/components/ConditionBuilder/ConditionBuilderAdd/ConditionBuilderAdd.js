@@ -39,6 +39,19 @@ const ConditionBuilderAdd = ({
         }
       : {};
   };
+  const previewHandlersForSubgroup = () => ({
+    onMouseEnter: showConditionSubGroupPreviewHandler,
+    onMouseLeave: hideConditionSubGroupPreviewHandler,
+    onFocus: showConditionSubGroupPreviewHandler,
+    onBlur: hideConditionSubGroupPreviewHandler,
+  });
+
+  const wrapperProps = enableSubGroup
+    ? {
+        role: 'gridcell',
+        'aria-label': translateWithId('add-condition'),
+      }
+    : {};
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
@@ -59,14 +72,7 @@ const ConditionBuilderAdd = ({
         hideLabel
         data-name="addButton"
         label={buttonLabel ?? translateWithId('add-condition')}
-        wrapperProps={
-          enableSubGroup
-            ? {
-                role: 'gridcell',
-                'aria-label': translateWithId('add-condition'),
-              }
-            : {}
-        }
+        wrapperProps={wrapperProps}
       />
       {isAddSubgroup && enableSubGroup && (
         <ConditionBuilderButton
@@ -75,18 +81,8 @@ const ConditionBuilderAdd = ({
           className={`${blockClass}__add-condition-group ${blockClass}__gap-left`}
           hideLabel
           label={translateWithId('add-condition')}
-          wrapperProps={
-            enableSubGroup
-              ? {
-                  role: 'gridcell',
-                  'aria-label': translateWithId('add-condition'),
-                }
-              : {}
-          }
-          onMouseEnter={showConditionSubGroupPreviewHandler}
-          onMouseLeave={hideConditionSubGroupPreviewHandler}
-          onFocus={showConditionSubGroupPreviewHandler}
-          onBlur={hideConditionSubGroupPreviewHandler}
+          wrapperProps={wrapperProps}
+          {...previewHandlersForSubgroup()}
         />
       )}
     </div>

@@ -10,15 +10,9 @@ const ConditionPreview = ({ previewType }) => {
   const getConditionSection = () => {
     return (
       <div>
-        <ConditionBuilderItem
-          label={translateWithId('property')}
-        ></ConditionBuilderItem>
-        <ConditionBuilderItem
-          label={translateWithId('operator')}
-        ></ConditionBuilderItem>
-        <ConditionBuilderItem
-          label={translateWithId('value')}
-        ></ConditionBuilderItem>
+        <ConditionBuilderItem label={translateWithId('property')} />
+        <ConditionBuilderItem label={translateWithId('operator')} />
+        <ConditionBuilderItem label={translateWithId('value')} />
       </div>
     );
   };
@@ -32,7 +26,7 @@ const ConditionPreview = ({ previewType }) => {
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
               label={translateWithId('and')}
-            ></ConditionBuilderItem>
+            />
           </div>
           <div
             aria-hidden
@@ -42,7 +36,7 @@ const ConditionPreview = ({ previewType }) => {
               <ConditionBuilderItem
                 className={`${blockClass}__statement-button`}
                 label={translateWithId('if')}
-              ></ConditionBuilderItem>
+              />
             </div>
             {getConditionSection()}
           </div>
@@ -51,21 +45,19 @@ const ConditionPreview = ({ previewType }) => {
 
       {previewType == 'subGroup' && (
         <div className={`${blockClass}__group-preview`}>
-          <div
-            className={`${blockClass}__condition-block conditionBlockWrapper  ${blockClass}__gap`}
-          >
+          <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={'and'}
+              label={translateWithId('and')}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
-            ></ConditionBuilderItem>
+            />
 
             <div
               className={`${blockClass}__group ${blockClass}__condition-wrapper`}
             >
               <ConditionConnector
                 className={`${blockClass}__gap ${blockClass}__groupConnector`}
-                operator={'if'}
+                operator={translateWithId('if')}
               />
               {getConditionSection()}
             </div>
@@ -74,14 +66,12 @@ const ConditionPreview = ({ previewType }) => {
       )}
       {previewType == 'condition' && (
         <div className={`${blockClass}__group-preview`}>
-          <div
-            className={`${blockClass}__condition-block conditionBlockWrapper  ${blockClass}__gap`}
-          >
+          <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={'and'}
+              label={translateWithId('and')}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
-            ></ConditionBuilderItem>
+            />
             {getConditionSection()}
           </div>
         </div>

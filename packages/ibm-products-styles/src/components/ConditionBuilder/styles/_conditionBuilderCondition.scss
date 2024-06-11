@@ -16,11 +16,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: inline-flex;
 }
 
-// [role='row']:focus {
-//   @include focus-outline.focus-outline('outline');
-
-//   outline-offset: 0;
-// }
 .#{$block-class} [role='row'] {
   position: relative;
   outline: none;
@@ -62,7 +57,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__connector-disabled {
   display: flex;
-  min-width: 4rem;
+  min-width: $spacing-10;
   align-items: center;
   background-color: $layer;
   color: $text-helper;

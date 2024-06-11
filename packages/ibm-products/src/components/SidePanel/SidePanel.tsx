@@ -276,7 +276,7 @@ export let SidePanel = React.forwardRef(
     const titleRef = useRef<HTMLDivElement>(null);
     const labelTextRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const previousState = usePreviousValue({ size, open });
+    const previousState = usePreviousValue({ size, open, currentStep });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
@@ -360,6 +360,14 @@ export let SidePanel = React.forwardRef(
       if (sidePanelRef && panelRefValue) {
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
+
+        if (
+          previousState &&
+          previousState['currentStep'] !== currentStep &&
+          scrollableSection
+        ) {
+          scrollableSection.scrollTop = 0;
+        }
 
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header

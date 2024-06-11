@@ -234,7 +234,7 @@ const HeaderRow = (
                   [`${blockClass}__with-slug`]:
                     header.slug && React.isValidElement(header?.slug),
                 },
-                header.getHeaderProps().className
+                headerProps.className
               )}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}

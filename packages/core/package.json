@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@carbon/grid": "^11.23.0",
-    "@carbon/ibm-products-styles": "^2.38.0",
+    "@carbon/ibm-products-styles": "^2.38.1",
     "@carbon/layout": "^11.22.0",
     "@carbon/motion": "^11.18.0",
     "@carbon/react": "~1.55.0",

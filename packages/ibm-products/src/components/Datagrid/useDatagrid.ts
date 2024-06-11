@@ -16,6 +16,7 @@ import {
   useGlobalFilter,
   useFilters,
   usePagination,
+  TableInstance,
 } from 'react-table';
 import uniqueId from 'lodash/uniqueId';
 import useSkeletonRows from './useSkeletonRows';
@@ -27,7 +28,7 @@ import useFlexResize from './useFlexResize';
 import useFloatingScroll from './useFloatingScroll';
 import { stateReducer } from './Datagrid/addons/stateReducer';
 
-const useDatagrid = (params, ...plugins) => {
+const useDatagrid = (params, ...plugins): TableInstance => {
   const defaultPlugins = [
     useFlexLayout,
     useHeaderRow,
@@ -45,7 +46,7 @@ const useDatagrid = (params, ...plugins) => {
   // Disable resizing
   if (params.disableResizing) {
     const resizeIndex = defaultPlugins.findIndex(
-      (p) => p.pluginName === 'useResizeColumns'
+      (p) => p?.['pluginName'] === 'useResizeColumns'
     );
     defaultPlugins.splice(resizeIndex, 1);
   }
@@ -69,6 +70,7 @@ const useDatagrid = (params, ...plugins) => {
     ...defaultEndPlugins,
     ...clientEndPlugins
   );
+
   return tableState;
 };
 

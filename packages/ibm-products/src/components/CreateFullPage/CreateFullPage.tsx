@@ -45,6 +45,7 @@ import {
   SimpleHeader,
   overflowAriaLabel_required_if_breadcrumbs_exist,
 } from '../SimpleHeader/SimpleHeader';
+import { StepsContextType } from '../CreateTearsheet/CreateTearsheet';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -52,7 +53,7 @@ const componentName = 'CreateFullPage';
 // This is a general context for the steps container
 // containing information about the state of the container
 // and providing some callback methods for steps to use
-export const StepsContext = createContext(null);
+export const StepsContext = createContext<StepsContextType | null>(null);
 
 // This is a context supplied separately to each step in the container
 // to let it know what number it is in the sequence of steps

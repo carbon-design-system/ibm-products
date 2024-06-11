@@ -70,7 +70,7 @@ const defaults = {
 };
 
 /**
- * The Carousel acts as a scaffold for other Novice to Pro content.
+ * The Carousel acts as a scaffold for other Onboarding content.
  *
  * This component is not intended for general use.
  *

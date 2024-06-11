@@ -9,12 +9,14 @@ import { useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import useParentDimensions from './useParentDimensions';
 import useResizeTable from './useResizeTable';
+import { DataGridState } from './types';
+import { Hooks, TableInstance } from 'react-table';
 
-const useInfiniteScroll = (hooks) => {
+const useInfiniteScroll = (hooks: Hooks) => {
   useParentDimensions(hooks);
   useResizeTable(hooks);
 
-  const useInstance = (instance) => {
+  const useInstance = (instance: TableInstance) => {
     const {
       isFetching,
       tableHeight,
@@ -22,7 +24,7 @@ const useInfiniteScroll = (hooks) => {
       fetchMoreData,
       tableId,
       loadMoreThreshold,
-    } = instance;
+    } = instance as DataGridState;
     let tableElement;
     if (typeof document !== 'undefined') {
       tableElement = document.querySelector(`#${tableId}`);

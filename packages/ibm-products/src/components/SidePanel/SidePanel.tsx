@@ -31,7 +31,7 @@ import { SIDE_PANEL_SIZES } from './constants';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, IconButton } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
 import {
@@ -724,16 +724,22 @@ export let SidePanel = React.forwardRef(
           {/* slug and close */}
           <div className={`${blockClass}__slug-and-close`}>
             {normalizedSlug}
-            <Button
-              aria-label={closeIconDescription}
-              kind="ghost"
-              size={slugCloseSize}
-              renderIcon={(props) => <Close size={20} {...props} />}
-              iconDescription={closeIconDescription}
+            <IconButton
               className={`${blockClass}__close-button`}
+              label={closeIconDescription}
               onClick={onRequestClose}
+              title={closeIconDescription}
+              aria-label={closeIconDescription}
               ref={closeRef}
-            />
+              align="left"
+            >
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${blockClass}--btn__icon`}
+              />
+            </IconButton>
           </div>
           {/* subtitle */}
           {subtitle && (

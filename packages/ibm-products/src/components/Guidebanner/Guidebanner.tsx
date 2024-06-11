@@ -15,6 +15,7 @@ import { Button, IconButton } from '@carbon/react';
 import { Carousel } from '../Carousel';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--guidebanner`;
@@ -117,11 +118,12 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
     const handleClickToggle = () => {
       setIsCollapsed((prevState) => !prevState);
     };
+    const carouselContentId = `${uuidv4()}--carousel-content-id`;
 
     return (
       <div
         {...rest}
-        aria-expanded={!isCollapsed}
+        aria-owns={!isCollapsed ? carouselContentId : undefined}
         className={cx(
           blockClass,
           className,
@@ -135,6 +137,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
         <Idea size={20} className={`${blockClass}__icon-idea`} />
         <div className={`${blockClass}__title`}>{title}</div>
         <Carousel
+          id={carouselContentId}
           className={`${blockClass}__carousel`}
           // These colors are to match the Carousel's faded edges
           // against the Guidebanner's gradient background.
@@ -161,6 +164,8 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
               className={`${blockClass}__toggle-button`}
               onClick={handleClickToggle}
               ref={toggleRef}
+              aria-controls={!isCollapsed ? carouselContentId : undefined}
+              aria-expanded={!isCollapsed}
             >
               {isCollapsed ? expandButtonLabel : collapseButtonLabel}
             </Button>

@@ -9,21 +9,27 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import useNestedRowExpander from './useNestedRowExpander';
 import { useEffect } from 'react';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState, DatagridRow } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useNestedRows = (hooks) => {
+const useNestedRows = (hooks: Hooks) => {
   useNestedRowExpander(hooks);
-  const useInstance = (instance) => {
+  const useInstance = (instance: TableInstance) => {
     // This useEffect will expand rows if they exist in the initialState obj
     useEffect(() => {
       const { rows, initialState } = instance;
-      const { expandedRowIds } = initialState;
+      const { expandedRowIds } = initialState as DataGridState;
+
       if (expandedRowIds) {
         Object.keys(expandedRowIds).forEach((key) => {
-          const row = rows.filter((r) => r.id.toString() === key.toString());
-          if (row.length && key.toString() === row[0].id.toString()) {
-            row[0].toggleRowExpanded();
+          const row = rows.filter(
+            (r) => r.id.toString() === key.toString()
+          ) as DatagridRow[];
+
+          if (row?.length && key.toString() === row[0].id.toString()) {
+            row[0]?.toggleRowExpanded();
           }
         });
       }

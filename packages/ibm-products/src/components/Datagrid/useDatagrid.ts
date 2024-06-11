@@ -24,7 +24,6 @@ import useDefaultStringRenderer from './useDefaultStringRenderer';
 import useRowRenderer from './useRowRenderer';
 import useRowSize from './useRowSize';
 import useHeaderRow from './Datagrid/DatagridHeaderRow';
-import useFlexResize from './useFlexResize';
 import useFloatingScroll from './useFloatingScroll';
 import { stateReducer } from './Datagrid/addons/stateReducer';
 
@@ -50,12 +49,7 @@ const useDatagrid = (params, ...plugins): TableInstance => {
     );
     defaultPlugins.splice(resizeIndex, 1);
   }
-  const defaultEndPlugins = [
-    usePagination,
-    useRowSelect,
-    useFlexResize,
-    useFloatingScroll,
-  ];
+  const defaultEndPlugins = [usePagination, useRowSelect, useFloatingScroll];
   const clientEndPlugins = params.endPlugins || [];
 
   const defaultColumn = {

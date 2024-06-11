@@ -1,13 +1,12 @@
 /* eslint-disable no-unreachable */
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 const useFlexResize = (hooks) => {
-  return;
   const spacer = {
     id: 'spacer',
     width: 0,

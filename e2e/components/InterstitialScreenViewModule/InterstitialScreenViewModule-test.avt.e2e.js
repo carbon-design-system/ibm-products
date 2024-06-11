@@ -14,7 +14,7 @@ test.describe('InterstitialScreenViewModule @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'InterstitialScreenViewModule',
-      id: 'ibm-products-novice-to-pro-interstitial-screen-interstitialscreenviewmodule--interstitial-screen-view-module',
+      id: 'ibm-products-onboarding-interstitial-screen-interstitialscreenviewmodule--interstitial-screen-view-module',
       globals: {
         carbonTheme: 'white',
       },

@@ -14,9 +14,9 @@ const blockClass = `${pkg.prefix}--datagrid`;
 export const InlineEditButton = ({
   label,
   renderIcon: Icon,
-  disabled,
   labelIcon: LabelIcon,
   placeholder,
+  disabledCell,
   nonEditCell,
   isActiveCell,
   columnConfig,
@@ -25,8 +25,7 @@ export const InlineEditButton = ({
   return (
     <div
       className={cx(`${blockClass}__inline-edit-button`, {
-        [`${blockClass}__inline-edit-button--disabled`]:
-          disabled || nonEditCell,
+        [`${blockClass}__inline-edit-button--disabled`]: disabledCell,
         [`${blockClass}__inline-edit-button--with-label-icon`]: LabelIcon,
         [`${blockClass}__inline-edit-button--non-edit`]: nonEditCell,
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
@@ -34,8 +33,8 @@ export const InlineEditButton = ({
           type === 'date' || type === 'selection',
       })}
       tabIndex={isActiveCell ? 0 : -1}
-      data-disabled={disabled || nonEditCell}
-      aria-disabled={disabled || nonEditCell}
+      data-disabled={disabledCell}
+      aria-disabled={disabledCell}
       role="button"
       title={label}
     >
@@ -68,7 +67,7 @@ export const InlineEditButton = ({
 
 InlineEditButton.propTypes = {
   columnConfig: PropTypes.object,
-  disabled: PropTypes.bool,
+  disabledCell: PropTypes.bool,
   isActiveCell: PropTypes.bool,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   labelIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

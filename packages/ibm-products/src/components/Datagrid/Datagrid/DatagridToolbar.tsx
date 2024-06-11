@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, MutableRefObject, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   TableToolbar,
@@ -18,10 +18,19 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { handleSelectAllRowData } from './addons/stateReducer';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
-const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
+interface DatagridToolbarProps {
+  ariaToolbarLabel?: string;
+}
+
+const DatagridBatchActionsToolbar = (
+  datagridState: DataGridState,
+  width: number,
+  ref: MutableRefObject<any>
+) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
@@ -46,7 +55,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   // the ButtonMenu
   useEffect(() => {
     if (totalSelected === 1 && !receivedInitialWidth) {
-      const batchActionListWidth = ref.current.querySelector(
+      const batchActionListWidth = ref?.current?.querySelector(
         `.${carbon.prefix}--action-list`
       ).offsetWidth;
       setInitialListWidth(batchActionListWidth);
@@ -55,7 +64,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   }, [totalSelected, receivedInitialWidth, ref]);
 
   useEffect(() => {
-    const summaryWidth = ref.current.querySelector(
+    const summaryWidth = ref?.current.querySelector(
       `.${carbon.prefix}--batch-summary`
     ).offsetWidth;
     if (width < summaryWidth + initialListWidth + 32) {
@@ -83,7 +92,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     const minWidthBeforeOverflowIcon = 380;
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
-    if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
+    if (
+      toolbarBatchActions &&
+      toolbarBatchActions?.length <= 3 &&
+      !displayAllInMenu
+    ) {
       return;
     }
 
@@ -105,6 +118,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
           },
         ])}
         tabIndex={totalSelected > 0 ? 0 : -1}
+        menuAlignment="bottom"
       >
         {toolbarBatchActions?.map((batchAction, index) => {
           const hidden = index < 2 && !displayAllInMenu;
@@ -129,9 +143,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       rows: [],
       getRowId,
       isChecked: false,
+      indeterminate: undefined,
     });
     toggleAllRowsSelected(false);
-    setGlobalFilter(null);
+    setGlobalFilter?.(null);
   };
 
   const onSelectAllHandler = () => {
@@ -141,6 +156,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       dispatch,
       rows,
       getRowId,
+      indeterminate: undefined,
+      isChecked: undefined,
     });
   };
 
@@ -181,14 +198,15 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   );
 };
 
-const DatagridToolbar = ({ ariaToolbarLabel, ...datagridState }) => {
+const DatagridToolbar = ({
+  ariaToolbarLabel,
+  ...datagridState
+}: DatagridToolbarProps & DataGridState) => {
   const ref = useRef(null);
   const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
-
   const getRowHeight = rowSize || 'lg';
-
   return batchActions && DatagridActions ? (
     <div
       ref={ref}
@@ -196,15 +214,14 @@ const DatagridToolbar = ({ ariaToolbarLabel, ...datagridState }) => {
     >
       <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
-        {DatagridBatchActionsToolbar &&
-          DatagridBatchActionsToolbar(datagridState, width, ref)}
+        {DatagridBatchActionsToolbar?.(datagridState, width, ref)}
       </TableToolbar>
     </div>
   ) : DatagridActions ? (
     <div className={blockClass}>
       <TableToolbar aria-label={ariaToolbarLabel}>
         {DatagridActions && <DatagridActions {...datagridState} />}
-        {DatagridBatchActions && DatagridBatchActions(datagridState)}
+        {DatagridBatchActions?.(datagridState)}
       </TableToolbar>
     </div>
   ) : null;

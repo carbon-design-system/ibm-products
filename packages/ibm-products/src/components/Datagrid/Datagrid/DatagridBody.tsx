@@ -10,8 +10,9 @@ import DatagridEmptyBody from './DatagridEmptyBody';
 import DatagridVirtualBody from './DatagridVirtualBody';
 import DatagridSimpleBody from './DatagridSimpleBody';
 import DatagridRefBody from './DatagridRefBody';
+import { DataGridState } from '../types';
 
-const DatagridBody = (datagridState) => {
+const DatagridBody = (datagridState: DataGridState) => {
   const {
     isFetching,
     rows = [],

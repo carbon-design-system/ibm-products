@@ -12,6 +12,7 @@ import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
 import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -24,7 +25,7 @@ const rowHeights = {
 };
 
 // eslint-disable-next-line react/prop-types
-const DatagridRow = (datagridState) => {
+const DatagridRow = (datagridState: DataGridState) => {
   const {
     row,
     rows,
@@ -55,7 +56,9 @@ const DatagridRow = (datagridState) => {
       return;
     }
     const subRowCount = getVisibleNestedRowCount(row);
-    const totalNestedRowIndicatorHeight = px(subRowCount * rowHeights[rowSize]);
+    const totalNestedRowIndicatorHeight = px(
+      subRowCount * rowHeights[Number(rowSize)]
+    );
     const hoverRow = event.target.closest(
       `.${blockClass}__carbon-row-expanded`
     );
@@ -97,7 +100,7 @@ const DatagridRow = (datagridState) => {
 
   const handleMouseLeave = (event) => {
     if (withMouseHover) {
-      setMouseOverRowIndex(null);
+      setMouseOverRowIndex?.(null);
     }
     const hoverRow = event.target.closest(
       `.${blockClass}__carbon-row-expanded`
@@ -126,8 +129,7 @@ const DatagridRow = (datagridState) => {
     return {};
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const { role, className, ...rowProps } = row.getRowProps();
+  const { className, ...rowProps } = row.getRowProps();
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
@@ -166,7 +168,7 @@ const DatagridRow = (datagridState) => {
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars
-          const { children, role, ...restProps } = cellProps;
+          const { children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
           const content = children || (
             <>
@@ -179,7 +181,7 @@ const DatagridRow = (datagridState) => {
             return cell.render('Cell', { key: cell.column.id });
           }
           const title = content?.props?.children[0]?.props?.value;
-          const associatedHeader = headers.filter(
+          const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
           return (
@@ -207,7 +209,7 @@ const DatagridRow = (datagridState) => {
           );
         })}
       </TableRow>
-      {renderExpandedRow()}
+      {renderExpandedRow?.() || undefined}
     </React.Fragment>
   );
 };

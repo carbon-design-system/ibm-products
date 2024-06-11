@@ -262,6 +262,8 @@ export interface DataGridState<T extends object = any>
   listRef?: MutableRefObject<any>;
   handleResize?: () => void;
   onVirtualScroll?: (evt?: boolean) => void;
+  fetchMoreData?: () => void;
+  loadMoreThreshold?: number;
 }
 
 // DatagridHeaderRow related types

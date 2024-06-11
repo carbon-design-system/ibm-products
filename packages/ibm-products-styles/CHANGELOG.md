@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.38.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.38.0...@carbon/ibm-products-styles@2.38.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* **Datagrid:** add disable cell support ([#5385](https://github.com/carbon-design-system/ibm-products/issues/5385)) ([106c0c4](https://github.com/carbon-design-system/ibm-products/commit/106c0c49331d3b54a0395020b1d0b8277ad1046e))
+
+
+
+
+
 # [2.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.37.1...@carbon/ibm-products-styles@2.38.0) (2024-06-04)
 
 

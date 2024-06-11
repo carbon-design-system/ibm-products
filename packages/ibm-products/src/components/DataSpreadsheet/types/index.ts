@@ -1,9 +1,7 @@
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
 export type Theme = 'light' | 'dark';
-export interface Column {
-  Header?: string;
-  accessor?: string | (() => void);
-  Cell?: () => void; // optional cell formatter
+
+export interface SpreadsheetColumn {
   rowHeight?: number;
   rowHeaderWidth?: number;
   width?: number;

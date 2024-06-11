@@ -12,6 +12,8 @@ import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -21,9 +23,9 @@ const ordering = {
   NONE: 'NONE',
 };
 
-export const getNewSortOrder = (sortOrder) => {
+export const getNewSortOrder = (sortOrder?: boolean | string) => {
   const order = {
-    newSortDesc: undefined,
+    newSortDesc: false,
     newOrder: ordering.NONE,
   };
   if (sortOrder === false || sortOrder === ordering.DESC) {
@@ -71,7 +73,7 @@ const getAriaPressedValue = (col) => {
   return 'false';
 };
 
-const useSortableColumns = (hooks) => {
+const useSortableColumns = (hooks: Hooks) => {
   const sortableVisibleColumns = (visibleColumns, { instance }) => {
     const {
       onSort,
@@ -171,8 +173,8 @@ const useSortableColumns = (hooks) => {
       : [...sortableColumns];
   };
 
-  const sortInstanceProps = (instance) => {
-    const { onSort } = instance;
+  const sortInstanceProps = (instance: TableInstance) => {
+    const { onSort } = instance as DataGridState;
     Object.assign(instance, { manualSortBy: !!onSort, isTableSortable: true });
   };
 

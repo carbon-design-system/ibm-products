@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.42.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.41.0...@carbon/ibm-products@2.42.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* **Coachmark:** ssr issues with `instanceOf(HTMLElement)` ([#5391](https://github.com/carbon-design-system/ibm-products/issues/5391)) ([d9fdd12](https://github.com/carbon-design-system/ibm-products/commit/d9fdd1266dc54a6ddef55c652443e5d9c6789cf9))
+* **CreateTearsheet:** add focus trap behavior ([#5329](https://github.com/carbon-design-system/ibm-products/issues/5329)) ([3205383](https://github.com/carbon-design-system/ibm-products/commit/3205383613e470499593babf597f0a5a6b7b621d))
+* **Datagrid:** add disable cell support ([#5385](https://github.com/carbon-design-system/ibm-products/issues/5385)) ([106c0c4](https://github.com/carbon-design-system/ibm-products/commit/106c0c49331d3b54a0395020b1d0b8277ad1046e))
+* **Datagrid:** add optional chain for focus row expander hook ([#5363](https://github.com/carbon-design-system/ibm-products/issues/5363)) ([b54cbad](https://github.com/carbon-design-system/ibm-products/commit/b54cbad876d63df0c280bcd0a843eee7199bf3f7))
+* **GuideBanner:** address avt failure ([#5421](https://github.com/carbon-design-system/ibm-products/issues/5421)) ([3b244e6](https://github.com/carbon-design-system/ibm-products/commit/3b244e6e25880b04f15bfad0b81299b07725bd4f))
+* **WebTerminal:** fixes exit animation glitchy behaviour ([#5424](https://github.com/carbon-design-system/ibm-products/issues/5424)) ([d9bc09b](https://github.com/carbon-design-system/ibm-products/commit/d9bc09b974c0c2183b00c2584dda25bf3ec224fe))
+
+
+### Features
+
+* **FeatureFlags:** add new mechanism for feature flagging using `@carbon/feature-flags` ([#5204](https://github.com/carbon-design-system/ibm-products/issues/5204)) ([51226bf](https://github.com/carbon-design-system/ibm-products/commit/51226bf58e4a0593e41cfcb37192784b8a6291c6))
+
+
+
+
+
 # [2.41.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.40.0...@carbon/ibm-products@2.41.0) (2024-06-04)
 
 

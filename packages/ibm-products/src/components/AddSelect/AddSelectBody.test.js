@@ -216,7 +216,7 @@ const itemWithAvatar = {
   ],
 };
 
-const additionalTextInput = (
+const supplementalHeaderTextInput = (
   <TextInput id="text-input-1" type="text" labelText="Text input label" />
 );
 
@@ -469,16 +469,16 @@ describe(componentName, () => {
     fireEvent.change(globalSearch, { target: { value: '' } });
   });
 
-  it('handle additional component', async () => {
+  it('handle supplemental header', async () => {
     const newProps = {
       ...multiProps,
-      additionalInfo: additionalTextInput,
+      supplementalHeader: supplementalHeaderTextInput,
     };
     render(<AddSelectBody {...newProps} />);
-    const addInfo = document.querySelectorAll(
-      `.${blockClass}__additional-info`
+    const suppHeader = document.querySelectorAll(
+      `.${blockClass}__supplemental-header`
     )[0];
-    expect(addInfo);
-    fireEvent.click(addInfo);
+    expect(suppHeader);
+    fireEvent.click(suppHeader);
   });
 });

@@ -23,11 +23,11 @@ export default {
     },
   },
   argTypes: {
-    additionalInfo: {
+    supplementalHeader: {
       control: {
         type: 'select',
         labels: {
-          0: 'no additional info',
+          0: 'no supplemental header',
           1: 'Text Input',
         },
       },
@@ -166,6 +166,7 @@ const Template = (args, context) => {
 export const Default = Template.bind({});
 Default.args = {
   items: 1,
+  supplementalHeader: 0,
   ...defaultProps,
 };
 
@@ -175,10 +176,10 @@ WithHierarchy.args = {
   ...defaultProps,
 };
 
-export const WithTextInput = Template.bind({});
-WithTextInput.args = {
+export const WithSupplementalHeader = Template.bind({});
+WithSupplementalHeader.args = {
   items: 1,
-  additionalInfo: 1,
+  supplementalHeader: 1,
   ...defaultProps,
 };
 

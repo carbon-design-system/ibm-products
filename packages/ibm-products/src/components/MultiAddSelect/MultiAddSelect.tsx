@@ -50,10 +50,10 @@ type ItemType = {
 
 interface MultiAddSelectProps {
   /**
-   * option to display additional component (ex. TextInput)
+   * option to display supplemental component (ex. TextInput)
    * in the beginning of the body section
    */
-  additionalInfo?: ReactNode;
+  supplementalHeader?: ReactNode;
   /**
    * optional class name
    */
@@ -174,10 +174,10 @@ MultiAddSelect = pkg.checkComponentEnabled(MultiAddSelect, componentName);
 
 MultiAddSelect.propTypes = {
   /**
-   * option to display additional component (ex. TextInput)
+   * option to display supplemental component (ex. TextInput)
    * in the beginning of the body section
    */
-  additionalInfo: PropTypes.node,
+  supplementalHeader: PropTypes.node,
   /**
    * optional class name
    */

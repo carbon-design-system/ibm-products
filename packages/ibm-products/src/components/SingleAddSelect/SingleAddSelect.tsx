@@ -18,10 +18,10 @@ const componentName = 'SingleAddSelect';
 
 interface SingleAddSelectProps {
   /**
-   * option to display additional component (ex. TextInput)
+   * option to display supplemental component (ex. TextInput)
    * in the beginning of the body section
    */
-  additionalInfo?: ReactNode;
+  supplementalHeader?: ReactNode;
   /**
    * optional class name
    */
@@ -121,10 +121,10 @@ SingleAddSelect = pkg.checkComponentEnabled(SingleAddSelect, componentName);
 
 SingleAddSelect.propTypes = {
   /**
-   * option to display additional component (ex. TextInput)
+   * option to display supplemental component (ex. TextInput)
    * in the beginning of the body section
    */
-  additionalInfo: PropTypes.node,
+  supplementalHeader: PropTypes.node,
   /**
    * optional class name
    */

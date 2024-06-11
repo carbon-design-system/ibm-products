@@ -14,7 +14,7 @@ test.describe('Guidebanner @avt', () => {
   test('@avt-collapsible-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Guidebanner',
-      id: 'ibm-products-novice-to-pro-guidebanner--collapsible',
+      id: 'ibm-products-onboarding-guidebanner--collapsible',
       globals: {
         carbonTheme: 'white',
       },

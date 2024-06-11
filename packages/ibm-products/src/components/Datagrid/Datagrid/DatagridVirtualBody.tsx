@@ -107,7 +107,10 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
       >
         <DatagridHead {...datagridState} />
       </div>
-      <TableBody {...getTableBodyProps({ role: undefined })} aria-live={null}>
+      <TableBody
+        {...getTableBodyProps({ role: undefined })}
+        aria-live={undefined}
+      >
         <VariableSizeList
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}

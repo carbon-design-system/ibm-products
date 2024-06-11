@@ -87,7 +87,6 @@ const CustomizeColumnsTearsheet = ({
     const actionCount = columnObjects.filter(
       (col) => col.id === 'actions'
     ).length;
-    // console.log('86', columnObjects);
     setVisibleColumnsCount(
       getVisibleColumnsCount() - notFilterableCount - actionCount
     );

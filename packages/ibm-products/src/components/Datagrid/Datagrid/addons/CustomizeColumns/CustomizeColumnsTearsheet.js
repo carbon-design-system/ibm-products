@@ -34,19 +34,11 @@ const CustomizeColumnsTearsheet = ({
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [columnObjects, setColumnObjects] = useState(
-    columnDefinitions.filter(
-      (col) => col.id !== 'spacer' && col.id !== 'actions'
-    )
-  );
+  const [columnObjects, setColumnObjects] = useState(columnDefinitions);
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
-    setColumnObjects(
-      columnDefinitions.filter(
-        (col) => col.id !== 'spacer' && col.id !== 'actions'
-      )
-    );
+    setColumnObjects(columnDefinitions);
     setIsTearsheetOpen(false);
   };
 
@@ -62,10 +54,10 @@ const CustomizeColumnsTearsheet = ({
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
       if (
-        (definition.disabled !== true &&
-          Array.isArray(col) &&
-          col.indexOf(definition) != -1) ||
-        definition.id === col.id
+        ((Array.isArray(col) && col.indexOf(definition) != -1) ||
+          definition.id === col.id) &&
+        definition.canFilter &&
+        !definition.disabled
       ) {
         return { ...definition, isVisible: value };
       }
@@ -89,12 +81,17 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
-    const notFilterableCount = columnObjects.filter((col) => !col.canFilter);
+    const notFilterableCount = columnObjects.filter(
+      (col) => !col.canFilter
+    ).length;
+    const actionCount = columnObjects.filter(
+      (col) => col.id === 'actions'
+    ).length;
     // console.log('86', columnObjects);
     setVisibleColumnsCount(
-      getVisibleColumnsCount() - notFilterableCount.length
+      getVisibleColumnsCount() - notFilterableCount - actionCount
     );
-    setTotalColumns(columnObjects.length - notFilterableCount.length);
+    setTotalColumns(columnObjects.length - notFilterableCount - actionCount);
   }, [getVisibleColumnsCount, columnObjects]);
 
   return (

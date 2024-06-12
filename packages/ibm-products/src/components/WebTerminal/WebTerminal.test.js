@@ -363,7 +363,6 @@ describe(name, () => {
     expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
       true
     );
-    console.log(screen.getByTestId(dataTestId));
     expect(screen.getByTestId(dataTestId).getAttribute('style')).toBeNull();
   });
 });

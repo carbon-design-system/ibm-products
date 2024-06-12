@@ -53,7 +53,7 @@ interface EditTearsheetProps extends PropsWithChildren {
   /**
    * The main content of the tearsheet
    */
-  children: ReactNode;
+  children?: ReactNode;
 
   /**
    * An optional class or classes to be added to the outermost element.
@@ -63,7 +63,7 @@ interface EditTearsheetProps extends PropsWithChildren {
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
-  description: ReactNode;
+  description?: ReactNode;
 
   /**
    * Used to set the size of the influencer
@@ -75,7 +75,7 @@ interface EditTearsheetProps extends PropsWithChildren {
    * to maintain context for the tearsheet (e.g. as the title changes from page
    * to page of a multi-page task).
    */
-  label: ReactNode;
+  label?: ReactNode;
 
   /**
    * An optional handler that is called when the user closes the tearsheet (by
@@ -114,7 +114,7 @@ interface EditTearsheetProps extends PropsWithChildren {
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
-  title: ReactNode;
+  title?: ReactNode;
 
   /**
    * The position of the top of tearsheet in the viewport. The 'normal'

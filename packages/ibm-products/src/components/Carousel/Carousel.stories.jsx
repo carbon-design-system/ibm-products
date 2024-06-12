@@ -31,8 +31,8 @@ export const carousel = Template.bind({});
 carousel.args = {
   children: (
     <>
-      Carousel is a <em>Novice to Pro</em> internal component and is not
-      intended for general use.
+      Carousel is an <em>Onboarding</em> internal component and is not intended
+      for general use.
     </>
   ),
 };

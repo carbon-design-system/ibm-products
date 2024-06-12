@@ -28,7 +28,12 @@ const Style = ({ children, styles }) => (
 const isDev = CONFIG_TYPE === 'DEVELOPMENT';
 if (isDev) {
   // use a prefix in all development storybook
-  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  if (!pkg.originalPrefix) {
+    pkg.originalPrefix = pkg.prefix;
+  }
+  if (pkg.prefix !== `dev-prefix--${pkg.originalPrefix}`) {
+    pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  }
 }
 
 const decorators = [

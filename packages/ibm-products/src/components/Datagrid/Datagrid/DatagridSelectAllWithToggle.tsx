@@ -38,7 +38,7 @@ const SelectAllWithToggle = ({
     }
   }, [isAllRowsSelected, selectAllMode, onSelectAllRows]);
 
-  const [windowSize, setWindowSize] = useState();
+  const [windowSize, setWindowSize] = useState<number>();
   useLayoutEffect(() => {
     setWindowSize(window.innerWidth);
     function updateSize() {
@@ -65,7 +65,7 @@ const SelectAllWithToggle = ({
       scope="col"
       className={cx(`${blockClass}__select-all-toggle-on`, {
         [`${blockClass}__select-all-sticky-left`]:
-          isFirstColumnStickyLeft && windowSize > 671,
+          isFirstColumnStickyLeft && (windowSize ?? 0) > 671,
       })}
     >
       <span>

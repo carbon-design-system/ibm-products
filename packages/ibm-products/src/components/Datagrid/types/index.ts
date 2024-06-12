@@ -264,6 +264,7 @@ export interface DataGridState<T extends object = any>
   onVirtualScroll?: (evt?: boolean) => void;
   fetchMoreData?: () => void;
   loadMoreThreshold?: number;
+  onSort?: boolean;
 }
 
 // DatagridHeaderRow related types

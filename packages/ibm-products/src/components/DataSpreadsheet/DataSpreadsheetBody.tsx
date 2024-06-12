@@ -131,7 +131,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Array of selection area data
    */
-  selectionAreaData?: object[];
+  selectionAreaData?: any[];
 
   /**
    * Array of selection areas
@@ -263,9 +263,19 @@ export const DataSpreadsheetBody = forwardRef(
     // back to the consumer
     useEffect(() => {
       if (selectionAreaData?.length) {
+        let selectionChanged = false;
+        if (
+          previousState?.selectionAreaData?.length !==
+            selectionAreaData?.length ||
+          selectionAreaData?.[0]?.cells.length !==
+            previousState?.selectionAreaData?.[0]?.cells.length
+        ) {
+          selectionChanged = true;
+        }
+
         if (
           (!clickAndHoldActive && previousState?.clickAndHoldActive) ||
-          previousState?.selectionAreaData?.length !== selectionAreaData?.length
+          selectionChanged
         ) {
           onSelectionAreaChange?.(selectionAreaData);
         }

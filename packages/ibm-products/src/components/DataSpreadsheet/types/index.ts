@@ -15,7 +15,7 @@ export interface ActiveCellCoordinates {
 export interface PrevState {
   activeCellCoordinates?: ActiveCellCoordinates;
   isEditing?: boolean;
-  selectionAreaData?: object[];
+  selectionAreaData?: any[];
   clickAndHoldActive?: boolean;
   rowHeight?: number;
   cellSize?: Size;

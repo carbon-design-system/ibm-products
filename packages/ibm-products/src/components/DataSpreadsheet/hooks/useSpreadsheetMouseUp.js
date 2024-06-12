@@ -30,8 +30,15 @@ export const useSpreadsheetMouseUp = ({
 }) => {
   useEffect(() => {
     const handleMouseUp = (event) => {
+      let isHoldingColumn = false;
+      if (
+        selectionAreas?.[0]?.header &&
+        selectionAreas[0].header.type === 'column'
+      ) {
+        isHoldingColumn = true;
+      }
       // Remove the cloned selection area on mouse up
-      if (!validStartingPoint) {
+      if (!validStartingPoint && isHoldingColumn) {
         setHeaderCellHoldActive(false);
         const selectionAreaCloneElement = ref.current.querySelector(
           `.${blockClass}__selection-area--element-cloned`
@@ -175,7 +182,7 @@ export const useSpreadsheetMouseUp = ({
       }
       // Mouse up was on a spreadsheet body cell which is a valid
       // start/end point for creating a selection area
-      if (validStartingPoint) {
+      if (validStartingPoint || event.type === 'mouseup') {
         setClickAndHoldActive(false);
         setValidStartingPoint(false);
         const cellButton = event.target.closest(`.${blockClass}__body--td`);

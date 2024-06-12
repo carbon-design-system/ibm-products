@@ -43,7 +43,8 @@ export const InlineEditCell = ({
 }) => {
   const columnId = cell.column.id;
   const columnIndex = instance.columns.findIndex((col) => col.id === columnId);
-  const cellId = `column-${columnIndex}-row-${cell.row.index}`;
+  const rowIndex = cell.row.index;
+  const cellId = `column-${columnIndex}-row-${rowIndex}`;
 
   const { state, dispatch } = useContext(InlineEditContext);
   const [inEditMode, setInEditMode] = useState(false);
@@ -63,6 +64,15 @@ export const InlineEditCell = ({
 
   const { rowSize, onDataUpdate } = instance;
   let saveCellData;
+
+  if (inEditMode) {
+    instance.cellEditing = {
+      cellId,
+      columnIndex,
+      rowIndex,
+      curCellValue: cellValue,
+    };
+  }
 
   useEffect(() => {
     setInitialValue(value);
@@ -108,6 +118,7 @@ export const InlineEditCell = ({
     if (activeCellId !== cellId || !editId) {
       setInEditMode(false);
     }
+
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
       setInEditMode(true);
       saveCellData(cellValue);
@@ -583,6 +594,7 @@ InlineEditCell.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.object),
     rowSize: PropTypes.string,
     tableId: PropTypes.string,
+    cellEditing: PropTypes.object,
   }),
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,

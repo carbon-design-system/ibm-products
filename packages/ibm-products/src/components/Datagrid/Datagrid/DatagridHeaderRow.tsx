@@ -222,16 +222,20 @@ const HeaderRow = (
           return (
             <TableHeader
               {...headerProps}
-              className={cx(header?.className, {
-                [`${blockClass}__resizableColumn`]: resizerProps,
-                [`${blockClass}__isResizing`]: header?.isResizing,
-                [`${blockClass}__sortableColumn`]:
-                  datagridState.isTableSortable && header.id !== 'spacer',
-                [`${blockClass}__isSorted`]: header?.isSorted,
-                [`${blockClass}__header-actions-column`]: header?.isAction,
-                [`${blockClass}__with-slug`]:
-                  header.slug && React.isValidElement(header?.slug),
-              })}
+              className={cx(
+                header?.className,
+                {
+                  [`${blockClass}__resizableColumn`]: resizerProps,
+                  [`${blockClass}__isResizing`]: header?.isResizing,
+                  [`${blockClass}__sortableColumn`]:
+                    datagridState.isTableSortable && header.id !== 'spacer',
+                  [`${blockClass}__isSorted`]: header?.isSorted,
+                  [`${blockClass}__header-actions-column`]: header?.isAction,
+                  [`${blockClass}__with-slug`]:
+                    header.slug && React.isValidElement(header?.slug),
+                },
+                headerProps.className
+              )}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}

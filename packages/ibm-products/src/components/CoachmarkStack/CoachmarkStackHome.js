@@ -27,7 +27,7 @@ const componentName = 'CoachmarkStackHome';
 
 /**
  * DO NOT USE. This component is for the exclusive use
- * of other Novice to Pro components.
+ * of other Onboarding components.
  */
 export let CoachmarkStackHome = forwardRef(
   (
@@ -58,7 +58,7 @@ export let CoachmarkStackHome = forwardRef(
 
     if (!navLinkLabels) {
       return pconsole.warn(
-        `${componentName} is a Novice to Pro internal component and is not intended for general use.`
+        `${componentName} is an Onboarding internal component and is not intended for general use.`
       );
     }
 

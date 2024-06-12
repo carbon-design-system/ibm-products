@@ -120,7 +120,7 @@ const parameters = {
         'Overview',
         ['Welcome', 'Getting started', 'Examples', '*'],
         'IBM Products',
-        ['Components', 'Patterns', 'Internal', 'Novice to pro'],
+        ['Components', 'Patterns', 'Internal', 'Onboarding'],
         'Community',
       ],
     },

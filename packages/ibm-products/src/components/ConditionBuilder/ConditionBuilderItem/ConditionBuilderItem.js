@@ -91,7 +91,7 @@ export const ConditionBuilderItem = ({
         label={propertyLabel ?? translateWithId('add-condition')}
         hideLabel={!label ? true : false}
         onClick={() => {
-          setOpen(!open);
+          children ? setOpen(!open) : null;
         }}
         className={className}
         aria-haspopup

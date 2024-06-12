@@ -525,7 +525,7 @@ export const InlineEditCell = ({
         [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]: rowSize,
         [`${blockClass}__inline-edit--outer-cell-button--lg`]: !rowSize,
         [`${blockClass}__inline-edit--outer-cell-button--invalid`]:
-          config?.validator?.(cellValue),
+          inEditMode && config?.validator?.(cellValue),
         [`${blockClass}__static--outer-cell`]: !disabledCell,
       })}
     >

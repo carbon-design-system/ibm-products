@@ -56,7 +56,7 @@ const useNestedRows = (hooks) => {
         },
       },
     ];
-    const getIndentation = (depth) => 32 * depth + 16;
+    const getIndentation = (depth) => 32 * depth + 16; // row indentation padding
     const getCellProps = (props, { cell, instance }) => {
       // we add a dynamic -ve margin right only if the cell is resized below minimum width i.e 50px, else we set the width based on indentation at different levels
       const isFirstCell =
@@ -69,7 +69,7 @@ const useNestedRows = (hooks) => {
               isFirstCell &&
               cell.row.depth > 0 &&
               parseInt(props.style.width, 10) <=
-                getIndentation(cell.row.depth) + 50
+                getIndentation(cell.row.depth) + 50 // indentation padding + expander cell or empty cell width
                 ? `${
                     parseInt(props.style.width, 10) -
                     (getIndentation(cell.row.depth) + 50)

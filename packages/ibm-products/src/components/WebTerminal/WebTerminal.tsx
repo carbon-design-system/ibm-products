@@ -27,7 +27,7 @@ import { moderate02 } from '@carbon/motion';
 import { useWebTerminal } from './hooks';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { useReducedMotion } from 'framer-motion';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -113,7 +113,7 @@ export let WebTerminal = React.forwardRef(
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
     const [shouldRender, setRender] = useState(open);
-    const shouldReduceMotion = useReducedMotion();
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     const webTerminalAnimationName = `${
       open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'

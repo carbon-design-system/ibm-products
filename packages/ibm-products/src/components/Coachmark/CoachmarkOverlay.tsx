@@ -78,7 +78,7 @@ type StyledTune = {
 
 /**
  * DO NOT USE. This component is for the exclusive use
- * of other Novice to Pro components.
+ * of other Onboarding components.
  */
 export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
   (

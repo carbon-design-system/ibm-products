@@ -265,6 +265,7 @@ export interface DataGridState<T extends object = any>
   fetchMoreData?: () => void;
   loadMoreThreshold?: number;
   expandedRowIds?: object;
+  onSort?: boolean;
 }
 
 // DatagridHeaderRow related types

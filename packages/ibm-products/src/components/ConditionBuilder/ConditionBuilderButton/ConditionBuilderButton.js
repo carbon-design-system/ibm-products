@@ -13,7 +13,11 @@ export const ConditionBuilderButton = ({
   renderIcon: Icon,
   onClick,
   showToolTip,
-  ...rest
+  wrapperProps,
+  onBlur,
+  onFocus,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   const Button = () => {
     return (
@@ -27,10 +31,13 @@ export const ConditionBuilderButton = ({
         ])}
         type="button"
         onClick={onClick}
-        {...rest}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
         {Icon && <Icon />}
-        {!hideLabel && label}
+        {!hideLabel && <span>{label}</span>}
       </button>
     );
   };
@@ -40,7 +47,7 @@ export const ConditionBuilderButton = ({
       label={label}
       align={tooltipAlign}
       className={`${blockClass}__con-tooltip`}
-      {...rest.wrapperProps}
+      {...wrapperProps}
     >
       {Button()}
     </Tooltip>
@@ -64,9 +71,17 @@ ConditionBuilderButton.propTypes = {
    */
   label: PropTypes.string,
   /**
+   * mouse events callbacks
+   */
+  onBlur: PropTypes.func,
+  /**
    * callback triggered on click of add button
    */
   onClick: PropTypes.func,
+  onFocus: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+
   /**
    * Optional prop to allow overriding the icon rendering.
    */
@@ -81,4 +96,8 @@ ConditionBuilderButton.propTypes = {
    * tooltip position
    */
   tooltipAlign: PropTypes.string,
+  /**
+   * optional props for tree grid to add role and aria-label to wrapper span
+   */
+  wrapperProps: PropTypes.object,
 };

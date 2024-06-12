@@ -243,6 +243,13 @@ export const InlineEditCell = ({
       // Save cell contents to data
       case 'Tab':
       case 'Enter': {
+        if (type === 'checkbox') {
+          // Since checkbox doesn't need to click into it to enter `inEditMode` we don't need to check for it
+          const newCellId = getNewCellId(key);
+          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          setInEditMode(false);
+          sendFocusBackToGrid();
+        }
         if (inEditMode) {
           // Dropdown saves are handled in the Dropdown's/DatePicker's onChange prop
           if (type === 'selection' || type === 'date') {

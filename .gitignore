@@ -60,8 +60,11 @@ package-lock.json
 .history
 
 # Examples
-/examples/carbon-for-ibm-products/*/node_modules
-/examples/carbon-for-ibm-products/*/.yarn
+/examples/**/node_modules
+/examples/**/.yarn
+/examples/**/yarn.lock
+/scripts/**/example-gallery-builder/.yarn
+/scripts/**/example-gallery-builder/yarn.lock
 
 # Accessibility Verification Testing
 .avt/

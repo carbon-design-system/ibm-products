@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './feature-flags';
+
 export { pkg } from './settings';
 export { usePrefix } from './global/js/hooks';
 export * from './components';

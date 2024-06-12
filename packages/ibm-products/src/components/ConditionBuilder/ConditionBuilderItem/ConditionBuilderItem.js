@@ -24,15 +24,23 @@ export const ConditionBuilderItem = ({
   ...rest
 }) => {
   const contentRef = useRef(null);
-  const [propertyLabel, setPropertyLabel] = useState(label);
+  const [propertyLabel, setPropertyLabel] = useState();
   const [open, setOpen] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(false);
 
   useEffect(() => {
-    const propertyId =
-      rest['data-name'] == 'valueField' && type
-        ? valueRenderers[type](label, config)
-        : label;
-    setPropertyLabel(translateWithId(propertyId));
+    if (label == 'INVALID') {
+      setPropertyLabel(translateWithId('invalid'));
+      setIsInvalid(true);
+    } else {
+      setIsInvalid(false);
+      const propertyId =
+        rest['data-name'] == 'valueField' && type
+          ? valueRenderers[type](label, config)
+          : label;
+      setPropertyLabel(translateWithId(propertyId));
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [label]);
 
@@ -50,7 +58,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'one-of'
+        condition.operator !== 'one_of'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
@@ -88,7 +96,7 @@ export const ConditionBuilderItem = ({
       }}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? translateWithId('add-condition')}
+        label={propertyLabel ?? translateWithId('add_condition')}
         hideLabel={!label ? true : false}
         onClick={() => {
           children ? setOpen(!open) : null;
@@ -98,6 +106,7 @@ export const ConditionBuilderItem = ({
         aria-expanded={open}
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
+        isInvalid={isInvalid}
         {...rest}
       />
 

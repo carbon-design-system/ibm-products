@@ -2,10 +2,11 @@ import React from 'react';
 
 import { NumberInput } from '@carbon/react';
 
-import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
+import {
+  blockClass,
+  translateWithId,
+} from '../../ConditionBuilderContext/DataConfigs';
 
 export const ConditionBuilderItemNumber = ({
   conditionState,
@@ -13,7 +14,17 @@ export const ConditionBuilderItemNumber = ({
   onChange,
 }) => {
   const onChangeHandler = (e, { value }) => {
-    onChange(value + '');
+    if (checkIfValid(value)) {
+      onChange(value + '');
+    } else {
+      onChange('INVALID');
+    }
+  };
+  const checkIfValid = (value) => {
+    if (value > config.max || value < config.min) {
+      return false;
+    }
+    return true;
   };
   return (
     <div className={`${blockClass}__item-number`}>
@@ -21,14 +32,10 @@ export const ConditionBuilderItemNumber = ({
         label={conditionState.property}
         hideLabel
         id={conditionState.property?.replace(/\s/g, '')}
-        value={
-          conditionState.value
-            ? conditionState.value.split(' ')[0]
-            : conditionState.value
-        }
         min={config.min}
         max={config.max}
         step={config.step}
+        invalidText={translateWithId('text_invalid_number')}
         allowEmpty
         onChange={onChangeHandler}
       />

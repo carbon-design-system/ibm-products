@@ -8,7 +8,7 @@ export const statementConfig = [
   },
   {
     label: 'excl.if',
-    id: 'excl.if',
+    id: 'excl_if',
   },
 ];
 
@@ -22,7 +22,13 @@ export const connectorConfig = [
     id: 'or',
   },
 ];
-//op types : option, text, number, date,
+export const actionConfig = [
+  {
+    label: 'then',
+    id: 'then',
+  },
+];
+
 export const operatorConfig = [
   {
     label: 'is',
@@ -36,7 +42,7 @@ export const operatorConfig = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater-equal',
+    id: 'greater_equal',
     type: 'number',
   },
   {
@@ -46,17 +52,17 @@ export const operatorConfig = [
   },
   {
     label: 'is lower than or equal to',
-    id: 'lower-equal',
+    id: 'lower_equal',
     type: 'number',
   },
   {
     label: 'starts with',
-    id: 'starts-with',
+    id: 'starts_with',
     type: 'text',
   },
   {
     label: 'ends with',
-    id: 'ends-with',
+    id: 'ends_with',
     type: 'text',
   },
   {
@@ -66,7 +72,7 @@ export const operatorConfig = [
   },
   {
     label: 'is one of',
-    id: 'one-of',
+    id: 'one_of',
     type: 'option',
   },
   {
@@ -106,7 +112,16 @@ export const valueRenderers = {
     return config.unit && val ? `${val} ${config.unit}` : val;
   },
   option: (value) => {
-    return Array.isArray(value) ? value.join(', ') : value;
+    if (value && typeof value == 'string') {
+      return value;
+    } else if (value) {
+      let selectedValues = value && Array.isArray(value) ? value : [value];
+      return selectedValues.map((option) => option.label).join(', ');
+    } else {
+      return value;
+    }
+
+    //return value&&currentConfig?.options ? currentConfig.options.filter(option=>selectedValues.includes(option.id)).map(opt=>opt.label).join(', '):value;
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
@@ -117,4 +132,5 @@ export const valueRenderers = {
       return value && new Date(value) ? formatDate(new Date(value)) : value;
     }
   },
+  custom: (value) => value,
 };

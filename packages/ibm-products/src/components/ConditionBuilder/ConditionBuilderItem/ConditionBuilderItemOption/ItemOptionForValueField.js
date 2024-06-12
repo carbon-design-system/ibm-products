@@ -16,16 +16,17 @@ import {
   translateWithId,
 } from '../../ConditionBuilderContext/DataConfigs';
 
-export const ConditionBuilderItemOption = ({
+export const ItemOptionForValueField = ({
   conditionState = {},
   config = {},
   onChange,
 }) => {
-  const multiSelectable = conditionState.operator === 'one-of';
+  const multiSelectable = conditionState.operator === 'one_of';
 
-  const { popOverSearchThreshold, getOptions } = useContext(
+  const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
   );
+  const contentRef = useRef();
 
   const [allOptions, setAllOptions] = useState(config.options);
   const [filteredItems, setFilteredItems] = useState(config.options);
@@ -34,12 +35,30 @@ export const ConditionBuilderItemOption = ({
     : conditionState.value !== undefined
     ? [conditionState.value]
     : [];
-  const contentRef = useRef();
 
   useEffect(() => {
+    // if(rest['data-name'] == 'valueField'){
+    //   const fetchData = async () => {
+    //     const response = await config.options(conditionState);
+    //     if (
+    //       response?.length > 0 &&
+    //       Object.keys(response[0]).includes('label') &&
+    //       Object.keys(response[0]).includes('id')
+    //     ) {
+    //       setAllOptions(response);
+    //       setFilteredItems(response);
+    //     }
+    //   };
+
+    //   fetchData(); // Call the async method
+    // }else{
+    //   setAllOptions(config.options);
+    //       setFilteredItems(config.options);
+    // }
+
     if (!allOptions && getOptions) {
       const fetchData = async () => {
-        const response = await getOptions(conditionState);
+        const response = await getOptions(rootState, conditionState);
         if (
           response?.length > 0 &&
           Object.keys(response[0]).includes('label') &&
@@ -60,18 +79,19 @@ export const ConditionBuilderItemOption = ({
 
     if (contentRef.current) {
       const firstFocusableElement =
-        contentRef.current?.querySelector('input, button,li');
+        contentRef.current.querySelector('input, button,li');
 
-      firstFocusableElement?.focus();
+      if (firstFocusableElement) {
+        firstFocusableElement.focus();
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allOptions]);
 
   const handleSelectAll = (evt) => {
     if (evt.currentTarget.dataset.selectedAll == 'false') {
       onChange(undefined);
     } else {
-      onChange(allOptions.map((op) => op.id));
+      onChange(allOptions);
     }
   };
   const onSearchChangeHandler = (evt) => {
@@ -81,24 +101,24 @@ export const ConditionBuilderItemOption = ({
     );
     setFilteredItems(_filteredItems);
   };
+
   const onClickHandler = (evt, option, isSelected) => {
     if (multiSelectable) {
       if (isSelected) {
-        let items = selection.filter((v) => v !== option.id);
+        let items = selection.filter((v) => v.id !== option.id);
         onChange(items.length > 0 ? items : undefined, evt);
       } else {
-        onChange([...selection, option.id], evt);
+        onChange([...selection, option], evt);
       }
     } else {
-      onChange(option.id, evt);
+      onChange(option, evt);
     }
   };
   return (
     <>
       {allOptions && (
         <div className={`${blockClass}__item-option`} ref={contentRef}>
-          {(config.includeSearch ||
-            allOptions.length > popOverSearchThreshold) && (
+          {allOptions.length > popOverSearchThreshold && (
             <div className={`${blockClass}__item-option__search`}>
               <Search
                 size="sm"
@@ -142,7 +162,9 @@ export const ConditionBuilderItemOption = ({
             data-multi-select={multiSelectable}
           >
             {filteredItems?.map((option) => {
-              let isSelected = selection.includes(option.id);
+              let isSelected = selection
+                .map((option) => option.id)
+                .includes(option.id);
               let Icon = option.icon;
 
               return (
@@ -204,7 +226,7 @@ export const ConditionBuilderItemOption = ({
   );
 };
 
-ConditionBuilderItemOption.propTypes = {
+ItemOptionForValueField.propTypes = {
   /**
    * current condition object
    */

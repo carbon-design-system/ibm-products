@@ -104,7 +104,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
   padding: $spacing-03 $spacing-04;
   border-left: to-rem(1.25px) solid $text-primary;
   margin: $spacing-02 0;
-  // Novice to pro does not always use Carbon defaults/tokens
+  // Onboarding does not always use Carbon defaults/tokens
   // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   animation: fade 600ms;
 

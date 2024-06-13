@@ -1,0 +1,23 @@
+name: automerge
+
+on:
+  push:
+    branches: [release/*]
+
+concurrency:
+  group: automerge-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  automerge:
+    if: github.repository == 'carbon-design-system/ibm-products'
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge to main
+        uses: devmasx/merge-branch@1.4.0
+        with:
+          type: now
+          target_branch: 'main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

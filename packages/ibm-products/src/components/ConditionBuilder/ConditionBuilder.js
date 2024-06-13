@@ -20,6 +20,7 @@ import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderC
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
 import { blockClass } from './ConditionBuilderContext/DataConfigs';
+import { handleKeyDown } from './utils/handleKeyboardEvents';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -70,6 +71,10 @@ export let ConditionBuilder = React.forwardRef(
     const localRef = useRef();
     const conditionBuilderRef = ref || localRef;
 
+    const handleKeyDownHandler = (evt) => {
+      handleKeyDown(evt, conditionBuilderRef, variant);
+    };
+
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -95,7 +100,10 @@ export let ConditionBuilder = React.forwardRef(
           ref={conditionBuilderRef}
           {...getDevtoolsProps(componentName)}
         >
-          <VStack className={`${blockClass}__${variant}`}>
+          <VStack
+            className={`${blockClass}__${variant}`}
+            onKeyDown={handleKeyDownHandler}
+          >
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
               conditionBuilderRef={conditionBuilderRef}

@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.18.3...@carbon/ibm-cloud-cognitive-core@2.19.0) (2024-06-11)
+
+
+### Bug Fixes
+
+* **FeatureFlags:** remove forced rerender, causing focus issues ([#5411](https://github.com/carbon-design-system/ibm-products/issues/5411)) ([596cbc0](https://github.com/carbon-design-system/ibm-products/commit/596cbc0ea8e39a3895dccfbc72aea71cf35269bb))
+
+
+### Features
+
+* **FeatureFlags:** add new mechanism for feature flagging using `@carbon/feature-flags` ([#5204](https://github.com/carbon-design-system/ibm-products/issues/5204)) ([51226bf](https://github.com/carbon-design-system/ibm-products/commit/51226bf58e4a0593e41cfcb37192784b8a6291c6))
+
+
+
+
+
+## [2.18.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.18.2...@carbon/ibm-cloud-cognitive-core@2.18.3) (2024-06-04)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [2.18.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.18.1...@carbon/ibm-cloud-cognitive-core@2.18.2) (2024-05-28)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 ## [2.18.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.18.0...@carbon/ibm-cloud-cognitive-core@2.18.1) (2024-05-21)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

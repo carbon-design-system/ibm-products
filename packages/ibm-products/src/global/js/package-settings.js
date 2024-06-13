@@ -94,7 +94,7 @@ const defaults = {
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
+    // Onboarding components not yet reviewed and released:
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,
@@ -115,7 +115,7 @@ const defaults = {
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
+    // Onboarding components not yet reviewed and released:
     EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,

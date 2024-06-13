@@ -15,7 +15,7 @@ import styles from './_storybook-styles.scss?inline';
 const storyClass = 'non-linear-reading-stories';
 
 export default {
-  title: 'IBM Products/Novice to pro/Non-linear reading/NonLinearReading',
+  title: 'IBM Products/Onboarding/Non-linear reading/NonLinearReading',
   component: NonLinearReading,
   tags: ['autodocs'],
   parameters: {

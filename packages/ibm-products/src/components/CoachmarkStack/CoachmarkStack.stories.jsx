@@ -19,7 +19,7 @@ import mdx from './CoachmarkStack.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Novice to pro/Coachmark/CoachmarkStack',
+  title: 'IBM Products/Onboarding/Coachmark/CoachmarkStack',
   component: CoachmarkStack,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

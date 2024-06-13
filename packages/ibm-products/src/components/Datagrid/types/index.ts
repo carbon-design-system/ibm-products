@@ -270,6 +270,7 @@ export interface DataGridState<T extends object = any>
   fetchMoreData?: () => void;
   loadMoreThreshold?: number;
   expandedRowIds?: object;
+  onRowClick?: (row, event) => void;
   onSort?: boolean;
   column?: DatagridColumn;
 }

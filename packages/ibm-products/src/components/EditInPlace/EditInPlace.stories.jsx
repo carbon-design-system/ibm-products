@@ -69,6 +69,7 @@ export default {
 const actionSave = action('save');
 const actionChange = action('change');
 const actionCancel = action('cancel');
+const actionBlur = action('blur');
 
 const defaultProps = {
   cancelLabel: 'Cancel',
@@ -81,6 +82,7 @@ const defaultProps = {
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
+  onBlur: () => {},
   // readOnly: false,
   // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
@@ -120,6 +122,52 @@ const Template = ({ containerWidth, ...args }) => {
   );
 };
 
+const TemplateBlur = ({ containerWidth, ...args }) => {
+  const [value, setValue] = useState(defaultProps.value);
+
+  const onChange = (val) => {
+    setValue(val);
+    actionChange(val);
+  };
+
+  const onSave = () => {
+    console.log('saved!', value);
+    actionSave(value);
+  };
+
+  const onCancel = (initialVal) => {
+    setValue(initialVal);
+    actionCancel(initialVal);
+  };
+
+  const onBlur = (initialVal) => {
+    const shouldSaveValue = false;
+    if (shouldSaveValue) {
+      actionSave(value);
+    } else {
+      setValue(initialVal);
+      actionCancel(initialVal);
+    }
+    actionBlur(initialVal);
+    console.log(initialVal);
+  };
+
+  const props = {
+    ...args,
+    value,
+    onChange,
+    onSave,
+    onCancel,
+    onBlur,
+  };
+
+  return (
+    <div style={{ width: containerWidth }}>
+      <EditInPlace {...props} className="edit-in-place-example" />
+    </div>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
@@ -129,6 +177,11 @@ export const Invalid = Template.bind({});
 Invalid.args = {
   ...defaultProps,
   invalid: true,
+};
+
+export const CustomBlurFunction = TemplateBlur.bind({});
+CustomBlurFunction.args = {
+  ...defaultProps,
 };
 
 // export const ReadOnly = Template.bind({});

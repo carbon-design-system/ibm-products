@@ -119,6 +119,7 @@ export const useSpreadsheetMouseUp = ({
                 ...newIndexArray
               );
             }
+            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
             return selectionAreaClone;
           });
           // Only reorder columns if the new index is _not_ part of the
@@ -187,7 +188,6 @@ export const useSpreadsheetMouseUp = ({
             `${blockClass}__selection-area--element`
           );
           setSelectedHeaderReorderActive(false);
-          setSelectionAreas([]);
         }
       }
       // Mouse up was on a spreadsheet body cell which is a valid

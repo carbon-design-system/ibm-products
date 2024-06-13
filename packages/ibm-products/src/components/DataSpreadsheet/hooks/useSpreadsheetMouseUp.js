@@ -14,6 +14,8 @@ import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 export const useSpreadsheetMouseUp = ({
   currentMatcher,
   setSelectionAreas,
+  selectedHeaderReorderActive,
+  setSelectedHeaderReorderActive,
   setClickAndHoldActive,
   setValidStartingPoint,
   validStartingPoint,
@@ -40,6 +42,9 @@ export const useSpreadsheetMouseUp = ({
       // Remove the cloned selection area on mouse up
       if (!validStartingPoint && isHoldingColumn) {
         setHeaderCellHoldActive(false);
+        const selectionAreaElement = ref.current.querySelector(
+          `.${blockClass}__selection-area--element`
+        );
         const selectionAreaCloneElement = ref.current.querySelector(
           `.${blockClass}__selection-area--element-cloned`
         );
@@ -178,6 +183,11 @@ export const useSpreadsheetMouseUp = ({
           );
           indicatorLineElement?.remove();
           selectionAreaCloneElement?.remove();
+          selectionAreaElement?.classList?.remove(
+            `${blockClass}__selection-area--element`
+          );
+          setSelectedHeaderReorderActive(false);
+          setSelectionAreas([]);
         }
       }
       // Mouse up was on a spreadsheet body cell which is a valid
@@ -218,6 +228,8 @@ export const useSpreadsheetMouseUp = ({
     setClickAndHoldActive,
     setValidStartingPoint,
     validStartingPoint,
+    selectedHeaderReorderActive,
+    setSelectedHeaderReorderActive,
     ref,
     setHeaderCellHoldActive,
     setColumnOrder,

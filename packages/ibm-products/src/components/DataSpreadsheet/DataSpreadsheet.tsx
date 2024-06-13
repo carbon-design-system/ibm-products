@@ -182,6 +182,9 @@ export let DataSpreadsheet = React.forwardRef(
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
     const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
+    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
+      useState(false);
+
     const [isActiveHeaderCellChanged, setIsActiveHeaderCellChanged] =
       useState<boolean>(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
@@ -829,6 +832,8 @@ export let DataSpreadsheet = React.forwardRef(
             columns={columns}
             currentMatcher={currentMatcher}
             defaultColumn={defaultColumn}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             headerGroups={headerGroups}
             rows={rows}
             scrollBarSize={scrollBarSize}
@@ -855,6 +860,8 @@ export let DataSpreadsheet = React.forwardRef(
             currentMatcher={currentMatcher}
             setCurrentMatcher={setCurrentMatcher}
             setContainerHasFocus={setContainerHasFocus}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             selectionAreas={selectionAreas}
             setSelectionAreas={setSelectionAreas}
             headerGroups={headerGroups}

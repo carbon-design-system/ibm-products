@@ -134,6 +134,16 @@ interface DataSpreadsheetBodyProps {
   selectionAreaData?: any[];
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive?: boolean;
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive?: Dispatch<SetStateAction<boolean>>;
+
+  /**
    * Array of selection areas
    */
   selectionAreas?: any[];
@@ -223,6 +233,8 @@ export const DataSpreadsheetBody = forwardRef(
       selectionAreaData,
       setSelectionAreaData,
       setActiveCellCoordinates,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       selectionAreas,
       setContainerHasFocus,
       setSelectionAreas,
@@ -381,6 +393,8 @@ export const DataSpreadsheetBody = forwardRef(
       setClickAndHoldActive,
       setSelectionAreas,
       setValidStartingPoint,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       validStartingPoint,
       ref,
       setHeaderCellHoldActive,
@@ -861,6 +875,11 @@ DataSpreadsheetBody.propTypes = {
   scrollBarSize: PropTypes.number,
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive: PropTypes.bool,
+
+  /**
    * Array of selection area data
    */
   selectionAreaData: PropTypes.array,
@@ -904,6 +923,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for header cell hold active value
    */
   setHeaderCellHoldActive: PropTypes.func,
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

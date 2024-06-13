@@ -12,13 +12,15 @@ import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
 import { pkg, carbon } from '../../settings';
 import { handleToggleRowSelected } from './Datagrid/addons/stateReducer';
+import { ColumnInstance, Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const checkboxClass = `${pkg.prefix}--datagrid__checkbox-cell`;
 
-const useSelectRows = (hooks) => {
+const useSelectRows = (hooks: Hooks) => {
   useHighlightSelection(hooks);
-  const useInstance = (instance) => {
+  const useInstance = (instance: TableInstance) => {
     const { rows } = instance;
     const rowsWithSelect = rows.map((row) => ({ ...row, isSelectable: true }));
     Object.assign(instance, { rows: rowsWithSelect });
@@ -46,11 +48,11 @@ const useSelectRows = (hooks) => {
         : []),
       {
         id: selectionColumnId,
-        Header: (gridState) => <SelectAll {...gridState} />,
+        Header: (gridState: DataGridState<any>) => <SelectAll {...gridState} />,
         Cell: (gridState) => <SelectRow {...gridState} />,
       },
       ...newColOrder,
-    ];
+    ] as ColumnInstance[];
   });
 };
 
@@ -115,6 +117,7 @@ const SelectRow = (datagridState) => {
       rowData: row,
       isChecked: event.target.checked,
       getRowId,
+      selectAll: null,
     });
   };
 
@@ -124,9 +127,12 @@ const SelectRow = (datagridState) => {
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
   const rowId = `${tableId}-${row.id}-${row.index}`;
+  const { key, _cellProps } = cellProps;
+
   return (
     <TableSelectRow
-      {...cellProps}
+      key={key}
+      {..._cellProps}
       {...selectProps}
       radio={radio}
       onSelect={onSelectHandler}
@@ -137,7 +143,7 @@ const SelectRow = (datagridState) => {
         cellProps.className,
         {
           [`${checkboxClass}-sticky-left`]:
-            isFirstColumnStickyLeft && windowSize > 671,
+            isFirstColumnStickyLeft && Number(windowSize) > 671,
         },
       ])}
       ariaLabel={title}

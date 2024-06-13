@@ -38,7 +38,13 @@ import {
   handleRowHeaderClick,
 } from './utils/commonEventHandlers';
 import { prepareProps } from '../../global/js/utils/props-helper';
-import { ActiveCellCoordinates, Column, PrevState } from './types';
+import { ActiveCellCoordinates, PrevState, SpreadsheetColumn } from './types';
+import {
+  Column,
+  IdType,
+  TableBodyPropGetter,
+  TableBodyProps,
+} from 'react-table';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -60,7 +66,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * All of the spreadsheet columns
    */
-  columns?: readonly Column[];
+  columns?: readonly Column<object>[];
 
   /**
    * This represents the id of the current cell selection area
@@ -70,7 +76,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Default spreadsheet sizing values
    */
-  defaultColumn?: Column;
+  defaultColumn?: SpreadsheetColumn;
 
   /**
    * Sets the number of empty rows to be created when there is no data provided
@@ -80,7 +86,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Function to set table body prop values
    */
-  getTableBodyProps?: () => { data };
+  getTableBodyProps: (propGetter?: TableBodyPropGetter<any>) => TableBodyProps;
 
   /**
    * Headers provided from useTable hook
@@ -152,7 +158,11 @@ interface DataSpreadsheetBodyProps {
   /**
    * Setter fn for column ordering, provided from react-table
    */
-  setColumnOrder?: () => void;
+  setColumnOrder?: (
+    updater:
+      | ((columnOrder: Array<IdType<any>>) => Array<IdType<any>>)
+      | Array<IdType<any>>
+  ) => void;
 
   /**
    * Setter fn for containerHasFocus state value
@@ -193,7 +203,7 @@ interface DataSpreadsheetBodyProps {
   /**
    * Prop from react-table used to reorder columns
    */
-  visibleColumns?: [];
+  visibleColumns?: Column<object>[];
 }
 
 export const DataSpreadsheetBody = forwardRef(
@@ -797,6 +807,7 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Function to set table body prop values
    */
+  /**@ts-ignore */
   getTableBodyProps: PropTypes.func,
 
   /**

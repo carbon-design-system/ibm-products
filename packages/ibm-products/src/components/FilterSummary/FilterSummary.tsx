@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { ForwardedRef, MutableRefObject, useRef, useState } from 'react';
 import { Button, IconButton } from '@carbon/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from '@carbon/react/icons';
@@ -21,19 +21,37 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
-let FilterSummary = React.forwardRef(
+export interface Filter {
+  key: string;
+  value: string;
+}
+interface FilterSummaryProps {
+  className?: string;
+  clearButtonInline?: boolean;
+  clearFilters: () => void;
+  clearFiltersText?: string;
+  filters: Filter[];
+  overflowType?: 'default' | 'tag';
+  renderLabel?: (key, value) => void;
+}
+
+type PrevState = {
+  multiline?: boolean;
+};
+
+const FilterSummary = React.forwardRef(
   (
     {
       className = '',
       clearFiltersText = 'Clear filters',
       clearFilters,
       filters,
-      renderLabel = null,
+      renderLabel,
       overflowType = 'default',
       clearButtonInline = true,
       ...rest
-    },
-    ref
+    }: FilterSummaryProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const filterSummaryId = `${blockClass}__${uuidv4()}`;
     const tagFilters = filters.map(({ key, value, ...rest }) => {
@@ -44,13 +62,19 @@ let FilterSummary = React.forwardRef(
       };
     });
 
-    const filterSummaryClearButton = useRef();
-    const viewAllButtonRef = useRef();
-    const filterSummaryRef = useRef();
+    const filterSummaryClearButton: MutableRefObject<HTMLDivElement | null> =
+      useRef(null);
+    const viewAllButtonRef: MutableRefObject<HTMLDivElement | null> =
+      useRef(null);
+    const filterSummaryRef: MutableRefObject<HTMLDivElement | null> =
+      useRef(null);
     const localRef = filterSummaryRef || ref;
     const [overflowCount, setOverflowCount] = useState(0);
     const [multiline, setMultiline] = useState(false);
-    const previousState = usePreviousValue({ multiline });
+    const previousState: PrevState =
+      usePreviousValue({
+        multiline,
+      }) || {};
 
     const handleViewAll = () => {
       if (overflowCount === 0) {
@@ -67,7 +91,7 @@ let FilterSummary = React.forwardRef(
         ? 48
         : 0;
     const measurementOffset =
-      filterSummaryClearButton?.current?.offsetWidth + viewAllWidth;
+      (filterSummaryClearButton?.current?.offsetWidth || 0) + viewAllWidth;
 
     const renderTagSet = (type) => (
       <motion.div
@@ -101,8 +125,8 @@ let FilterSummary = React.forwardRef(
           })}
           containingElementRef={localRef}
           measurementOffset={measurementOffset}
-          onOverflowTagChange={(overflowTags) =>
-            setOverflowCount(overflowTags.length)
+          onOverflowTagChange={(overflowTags: any) =>
+            setOverflowCount(overflowTags?.length)
           }
           multiline={multiline}
         />
@@ -111,7 +135,11 @@ let FilterSummary = React.forwardRef(
 
     useWindowResize(() => {
       const handleFilterSummaryResize = () => {
-        if (multiline && localRef?.current?.offsetHeight <= 50) {
+        if (
+          multiline &&
+          localRef?.current?.offsetHeight &&
+          localRef?.current?.offsetHeight <= 50
+        ) {
           setMultiline(false);
         }
       };
@@ -129,7 +157,7 @@ let FilterSummary = React.forwardRef(
           [`${blockClass}__expanded`]: multiline,
         })}
       >
-        <AnimatePresence mode="wait" exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter>
           {!multiline && renderTagSet('single')}
           {multiline && renderTagSet('multiline')}
         </AnimatePresence>
@@ -174,6 +202,7 @@ FilterSummary.propTypes = {
   clearButtonInline: PropTypes.bool,
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
+  /**@ts-ignore */
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
   overflowType: PropTypes.oneOf(['default', 'tag']),
   renderLabel: PropTypes.func,

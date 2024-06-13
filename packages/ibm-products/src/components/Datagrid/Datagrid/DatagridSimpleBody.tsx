@@ -9,15 +9,16 @@ import React from 'react';
 import { TableBody } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
+import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const DatagridSimpleBody = (datagridState) => {
+const DatagridSimpleBody = (datagridState: DataGridState) => {
   const { getTableBodyProps, rows, prepareRow } = datagridState;
   return (
     <TableBody
       {...getTableBodyProps({ role: undefined })}
-      aria-live={null}
+      aria-live={undefined}
       className={cx(
         `${blockClass}__simple-body`,
         getTableBodyProps().className
@@ -26,7 +27,7 @@ const DatagridSimpleBody = (datagridState) => {
       {rows.map((row) => {
         prepareRow(row);
         const { key } = row.getRowProps();
-        return row.RowRenderer({ ...datagridState, row, key });
+        return row?.RowRenderer?.({ ...datagridState, row, key });
       })}
     </TableBody>
   );

@@ -118,7 +118,7 @@ const updateExample = (name, config) => {
 
     const example_node_modules = join(rootPath, examplePath, 'node_modules');
     if (fs.existsSync(example_node_modules)) {
-      fs.fmSync(example_node_modules, { recursive: true, force: true });
+      fs.rmSync(example_node_modules, { recursive: true, force: true });
     }
 
     sync(resolve(rootPath, examplePath, '**/*')).forEach((file) => {

@@ -6,7 +6,7 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { Draggable as DraggableIcon, Locked } from '@carbon/react/icons';
 import cx from 'classnames';
@@ -16,6 +16,16 @@ import { useSortable } from '@dnd-kit/sortable';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
+interface DraggableElementProps extends PropsWithChildren {
+  ariaLabel: string;
+  children: ReactNode;
+  classList?: string;
+  disabled?: boolean;
+  id: string;
+  isSticky?: boolean;
+  selected?: boolean;
+}
+
 const DraggableElement = ({
   id,
   children,
@@ -24,7 +34,7 @@ const DraggableElement = ({
   ariaLabel,
   isSticky,
   selected,
-}) => {
+}: DraggableElementProps) => {
   const {
     attributes,
     isDragging,
@@ -54,7 +64,7 @@ const DraggableElement = ({
   );
 
   const style = {
-    transform: !disabled ? CSS.Transform.toString(transform) : {},
+    transform: !disabled ? CSS.Transform.toString(transform) : undefined,
     transition,
   };
 
@@ -70,7 +80,6 @@ const DraggableElement = ({
       style={style}
       {...attributes}
       {...listeners}
-      disabled={disabled}
       aria-selected={selected}
       role="option"
     >

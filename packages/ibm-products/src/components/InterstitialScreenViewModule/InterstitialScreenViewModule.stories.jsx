@@ -13,7 +13,7 @@ import styles from './_storybook-styles.scss?inline';
 
 export default {
   title:
-    'IBM Products/Novice to pro/Interstitial screen/InterstitialScreenViewModule',
+    'IBM Products/Onboarding/Interstitial screen/InterstitialScreenViewModule',
   component: InterstitialScreenViewModule,
   tags: ['autodocs'],
   argTypes: {

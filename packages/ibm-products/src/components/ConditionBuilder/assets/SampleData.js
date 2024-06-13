@@ -1,6 +1,7 @@
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const sampleDataStructure_tree = {
+  operator: 'or',
   groups: [
     {
       groupSeparateOperator: 'and', // 'or'|'and'|'null',
@@ -92,6 +93,32 @@ export const sampleDataStructure_tree = {
               ],
             },
           ],
+        },
+      ],
+    },
+    {
+      groupSeparateOperator: 'and', // 'or'|'and'|'null',
+      groupOperator: 'and', //'and|or',
+      statement: 'if', // 'if|exclude if',
+      id: uuidv4(),
+      conditions: [
+        {
+          property: 'continent',
+          operator: 'is',
+          value: 'Asia',
+          id: uuidv4(),
+        },
+        {
+          property: 'region',
+          operator: 'is',
+          value: 'India',
+          id: uuidv4(),
+        },
+        {
+          property: 'price',
+          operator: 'is',
+          value: '20',
+          id: uuidv4(),
         },
       ],
     },

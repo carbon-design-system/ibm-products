@@ -6,7 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, isValidElement } from 'react';
+import React, {
+  useState,
+  useEffect,
+  isValidElement,
+  MutableRefObject,
+} from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
@@ -19,11 +24,23 @@ import {
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 import { DatagridSlug } from './addons/Slug/DatagridSlug';
 import { useInitialColumnSort } from '../useInitialColumnSort';
+import {
+  DataGridHeader,
+  DataGridHeaderGroup,
+  DataGridState,
+  DataGridTableInstance,
+  DatagridTableHooks,
+  ResizeHeaderProps,
+} from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const getAccessibilityProps = (header) => {
-  const props = {};
+interface PropsType {
+  title?: string;
+}
+
+const getAccessibilityProps = (header: DataGridHeader) => {
+  const props: PropsType = {};
   const title = getNodeTextContent(header.Header);
   if (title) {
     props.title = title;
@@ -46,27 +63,29 @@ const ResizeHeader = ({
   onColResizeEnd,
   resizerAriaLabel,
   isFetching,
-}) => {
-  // eslint-disable-next-line no-unused-vars
-  const { role, ...headerProps } = resizerProps;
+}: ResizeHeaderProps) => {
+  const { ...headerProps } = resizerProps;
   const mouseDownHandler = (evt) => {
-    handleOnMouseDownResize(evt, resizerProps);
+    handleOnMouseDownResize?.(evt, resizerProps);
   };
   const mouseUpHandler = () => {
-    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header?.id, true);
   };
   const keyDownHandler = (evt) => {
     const { key } = evt;
     if (key === 'ArrowLeft' || key === 'ArrowRight') {
-      const originalColMinWidth = originalCol.minWidth || 90;
+      const originalColMinWidth = originalCol?.minWidth || 90;
       const currentColumnWidth =
-        columnWidths[header.id] ||
-        (datagridState.isTableSortable &&
-        originalCol.width < originalColMinWidth
+        (header?.id && columnWidths?.[header?.id]) ||
+        (datagridState?.isTableSortable &&
+        Number(originalCol?.width) < originalColMinWidth
           ? originalColMinWidth
-          : originalCol.width);
+          : originalCol?.width);
       if (key === 'ArrowLeft') {
-        if (currentColumnWidth - incrementAmount > Math.max(minWidth, 50)) {
+        if (
+          currentColumnWidth - incrementAmount >
+          Math.max(Number(minWidth), 50)
+        ) {
           const newWidth = currentColumnWidth - incrementAmount;
           handleColumnResizingEvent(dispatch, header, newWidth, true);
         }
@@ -78,7 +97,7 @@ const ResizeHeader = ({
     }
   };
   const keyUpHandler = () => {
-    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header.id, true);
+    handleColumnResizeEndEvent(dispatch, onColResizeEnd, header?.id, true);
   };
   return (
     <>
@@ -90,7 +109,7 @@ const ResizeHeader = ({
         onKeyUp={keyUpHandler}
         className={`${blockClass}__col-resizer-range`}
         type="range"
-        defaultValue={originalCol.width}
+        defaultValue={originalCol?.width}
         aria-label={resizerAriaLabel || 'Resize column'}
         disabled={isFetching}
       />
@@ -99,49 +118,60 @@ const ResizeHeader = ({
   );
 };
 
-const HeaderRow = (datagridState, headRef, headerGroup) => {
+const HeaderRow = (
+  datagridState: DataGridState,
+  headRef: MutableRefObject<HTMLDivElement>,
+  headerGroup: DataGridHeaderGroup
+) => {
   const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
   useInitialColumnSort(datagridState);
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
   useEffect(() => {
     const { tableId } = datagridState;
-    const gridElement = document.querySelector(`#${tableId}`);
-    const tableElement = gridElement.querySelector('table');
-    const headerRowElement = document.querySelector(
+    const gridElement: HTMLDivElement | null = document.querySelector(
+      `#${tableId}`
+    );
+    const tableElement = gridElement?.querySelector('table');
+    const headerRowElement: HTMLDivElement | null = document.querySelector(
       `#${tableId} .${blockClass}__head`
     );
-    const hasHorizontalScrollbar =
-      tableElement.scrollWidth > tableElement.clientWidth;
-    const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
-    const tableToolbar = gridElement.querySelector(
-      `.${blockClass}__table-toolbar`
-    );
+    let scrollBuffer = 2;
+    if (tableElement) {
+      const hasHorizontalScrollbar =
+        tableElement?.scrollWidth > tableElement?.clientWidth;
+
+      if (hasHorizontalScrollbar) {
+        scrollBuffer = 18;
+      }
+    }
+    const tableToolbar: HTMLDivElement | null =
+      gridElement?.querySelector(`.${blockClass}__table-toolbar`) || null;
     const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
     const setCustomValues = ({ rowHeight, gridHeight }) => {
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--row-height`,
         px(rowHeight)
       );
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--grid-height`,
         px(gridHeight - scrollBuffer - tableToolbarHeight)
       );
-      headerRowElement.style.setProperty(
+      headerRowElement?.style.setProperty(
         `--${blockClass}--header-height`,
         px(headerRowElement.offsetHeight)
       );
     };
     setCustomValues({
-      gridHeight: gridElement.offsetHeight,
-      rowHeight: headerRowElement.clientHeight,
+      gridHeight: gridElement?.offsetHeight,
+      rowHeight: headerRowElement?.clientHeight,
     });
   }, [datagridState.rowSize, datagridState.tableId, datagridState]);
 
   const [incrementAmount] = useState(2);
 
   const handleOnMouseDownResize = (event, resizeProps) => {
-    const { onMouseDown } = { ...resizeProps };
+    const { onMouseDown = () => {} } = { ...resizeProps };
     // When event.button is 2, that is a right click
     // and we do not want to resize
     if (event.button === 2 || event.ctrlKey) {
@@ -151,12 +181,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     onMouseDown?.(event);
   };
 
-  const {
-    className: headerGroupClassName,
-    // eslint-disable-next-line no-unused-vars
-    role,
-    ...headerGroupProps
-  } = headerGroup.getHeaderGroupProps();
+  const { className: headerGroupClassName, ...headerGroupProps } =
+    headerGroup.getHeaderGroupProps();
 
   const renderSlug = (slug) => {
     if (isTableSortable) {
@@ -166,17 +192,20 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   };
 
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
-
+  const { key, ...rowProps } = headerGroupProps;
   return (
     <TableRow
-      {...headerGroupProps}
+      key={key}
+      {...rowProps}
       className={cx(`${blockClass}__head`, headerGroupClassName)}
-      ref={headRef}
+      {...{
+        ref: headRef,
+      }}
     >
       {foundAIRow ? <th scope="col" aria-hidden="false" /> : null}
-      {datagridState.headers
-        .filter(({ isVisible }) => isVisible)
-        .map((header, index) => {
+      {datagridState?.headers
+        ?.filter(({ isVisible }) => isVisible)
+        ?.map((header, index) => {
           if (header.id === selectionColumnId) {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
@@ -187,26 +216,26 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           const { columnResizing } = state;
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
-          const {
-            // eslint-disable-next-line no-unused-vars
-            role,
-            ...headerProps
-          } = header.getHeaderProps();
+          const { ...headerProps } = header.getHeaderProps();
 
           const resizerProps = header?.getResizerProps?.();
           return (
             <TableHeader
               {...headerProps}
-              className={cx(header.className, {
-                [`${blockClass}__resizableColumn`]: resizerProps,
-                [`${blockClass}__isResizing`]: header.isResizing,
-                [`${blockClass}__sortableColumn`]:
-                  datagridState.isTableSortable && header.id !== 'spacer',
-                [`${blockClass}__isSorted`]: header.isSorted,
-                [`${blockClass}__header-actions-column`]: header.isAction,
-                [`${blockClass}__with-slug`]:
-                  header.slug && React.isValidElement(header.slug),
-              })}
+              className={cx(
+                header?.className,
+                {
+                  [`${blockClass}__resizableColumn`]: resizerProps,
+                  [`${blockClass}__isResizing`]: header?.isResizing,
+                  [`${blockClass}__sortableColumn`]:
+                    datagridState.isTableSortable && header.id !== 'spacer',
+                  [`${blockClass}__isSorted`]: header?.isSorted,
+                  [`${blockClass}__header-actions-column`]: header?.isAction,
+                  [`${blockClass}__with-slug`]:
+                    header.slug && React.isValidElement(header?.slug),
+                },
+                headerProps.className
+              )}
               key={header.id}
               aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
@@ -238,8 +267,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   );
 };
 
-const useHeaderRow = (hooks) => {
-  const useInstance = (instance) => {
+const useHeaderRow = (hooks: DatagridTableHooks) => {
+  const useInstance = (instance: DataGridTableInstance) => {
     Object.assign(instance, { HeaderRow });
   };
   hooks.useInstance.push(useInstance);

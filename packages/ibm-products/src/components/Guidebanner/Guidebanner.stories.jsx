@@ -21,7 +21,7 @@ import { DocsPage } from './Guidebanner.docs-page';
 const storyClass = 'guidebanner-stories';
 
 export default {
-  title: 'IBM Products/Novice to pro/Guidebanner',
+  title: 'IBM Products/Onboarding/Guidebanner',
   component: Guidebanner,
   tags: ['autodocs'],
   parameters: {

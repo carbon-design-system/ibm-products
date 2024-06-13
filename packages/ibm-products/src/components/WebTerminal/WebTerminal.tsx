@@ -118,7 +118,7 @@ export let WebTerminal = React.forwardRef(
         : { matches: true };
 
     const webTerminalAnimationName = `${
-      open ? 'web-terminal-entrance' : 'web-terminal-exit'
+      open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'
     } ${moderate02}`;
 
     const showDocumentationLinks = useMemo(

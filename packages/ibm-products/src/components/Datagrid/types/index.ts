@@ -14,10 +14,12 @@ import {
 } from 'react';
 import {
   Cell,
+  Column,
   ColumnInstance,
   FilterValue,
   Filters,
   HeaderGroup,
+  Meta,
   Row,
   TableCommonProps,
   TableDispatch,
@@ -32,6 +34,7 @@ import {
   UseRowSelectRowProps,
   UseRowSelectState,
   UseSortByColumnProps,
+  UseSortByOptions,
   UseTableHooks,
 } from 'react-table';
 import { CarbonIconType } from '@carbon/react/icons';
@@ -131,9 +134,11 @@ export interface DatagridTableHooks<T extends object = any>
   extends UseTableHooks<T> {}
 
 export interface DatagridColumn<T extends object = any>
-  extends ColumnInstance<T> {
+  extends ColumnInstance<T>,
+    UseSortByOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  rightAlignedColumn?: boolean;
 }
 
 export interface DataGridCell<T extends object = any>
@@ -266,6 +271,7 @@ export interface DataGridState<T extends object = any>
   loadMoreThreshold?: number;
   expandedRowIds?: object;
   onSort?: boolean;
+  column?: DatagridColumn;
 }
 
 // DatagridHeaderRow related types
@@ -283,3 +289,10 @@ export interface ResizeHeaderProps {
   resizerAriaLabel?: string;
   isFetching?: boolean;
 }
+
+export type RightAlignColumnsType = (
+  allColumns: Array<ColumnInstance<any>>,
+  meta: Meta<any>
+) => Array<Column<any>>;
+
+export type NodeFuncType = (props) => ReactNode;

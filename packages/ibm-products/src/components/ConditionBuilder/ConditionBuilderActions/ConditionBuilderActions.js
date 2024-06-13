@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Close, WarningAltFilled } from '@carbon/react/icons';
+import { Close } from '@carbon/react/icons';
 import { Section, Heading } from '@carbon/react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import {
@@ -12,13 +12,13 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
-import { focusThisField } from '../utils/util';
+import { checkDuplicateAction, focusThisField } from '../utils/util';
 
 const ConditionBuilderActions = ({ actions, className }) => {
   const { actionState, setActionState } = useContext(ConditionBuilderContext);
 
   const addActionHandler = () => {
-    let action = {
+    const action = {
       id: uuidv4(),
       label: undefined,
       popoverToOpen: 'actionField',
@@ -26,12 +26,11 @@ const ConditionBuilderActions = ({ actions, className }) => {
     setActionState([...actionState, action]);
   };
 
-  const onchangeHandler = (evt, selectedId, actionIndex) => {
-    let currentAction = actions.filter((action) => action.id == selectedId);
+  const onchangeHandler = (evt, selectedId, actionIndex, currentActionId) => {
+    const currentAction = actions.filter((action) => action.id == selectedId);
     let updatedActions = [];
-
-    if (checkDuplicateAction(selectedId)) {
-      let duplicateAction = { id: uuidv4(), label: 'Invalid', invalid: true };
+    if (checkDuplicateAction(actionState, selectedId, currentActionId)) {
+      let duplicateAction = { id: uuidv4(), label: 'DUPLICATE', invalid: true };
       updatedActions = [
         ...actionState.slice(0, actionIndex),
         duplicateAction,
@@ -47,15 +46,6 @@ const ConditionBuilderActions = ({ actions, className }) => {
     setActionState(updatedActions);
 
     focusThisField(evt);
-  };
-
-  const checkDuplicateAction = (selectedId) => {
-    if (
-      actionState.map((eachAction) => eachAction.id)?.indexOf(selectedId) !== -1
-    ) {
-      return true;
-    }
-    return false;
   };
 
   const onRemove = (selectedId) => {
@@ -88,15 +78,13 @@ const ConditionBuilderActions = ({ actions, className }) => {
               popOverClassName={`${blockClass}__gap`}
               condition={action}
               data-name="actionField"
-              className={``}
-              renderIcon={action.invalid ? WarningAltFilled : null}
             >
               <ItemOption
                 conditionState={{
                   value: action.label,
                 }}
                 onChange={(selectedId, evt) =>
-                  onchangeHandler(evt, selectedId, index)
+                  onchangeHandler(evt, selectedId, index, action.id)
                 }
                 config={{ options: actions }}
               />

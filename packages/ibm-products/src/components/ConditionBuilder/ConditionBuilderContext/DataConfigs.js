@@ -115,7 +115,7 @@ export const valueRenderers = {
     if (value && typeof value == 'string') {
       return value;
     } else if (value) {
-      let selectedValues = value && Array.isArray(value) ? value : [value];
+      const selectedValues = value && Array.isArray(value) ? value : [value];
       return selectedValues.map((option) => option.label).join(', ');
     } else {
       return value;
@@ -125,8 +125,8 @@ export const valueRenderers = {
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
-      let start = value?.[0] ? formatDate(new Date(value[0])) : '';
-      let end = value?.[1] ? formatDate(new Date(value[1])) : '';
+      const start = value?.[0] ? formatDate(new Date(value[0])) : '';
+      const end = value?.[1] ? formatDate(new Date(value[1])) : '';
       return `${start} To ${end}`;
     } else {
       return value && new Date(value) ? formatDate(new Date(value)) : value;

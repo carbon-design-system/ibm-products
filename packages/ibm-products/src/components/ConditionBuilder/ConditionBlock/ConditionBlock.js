@@ -48,14 +48,6 @@ const ConditionBlock = (props) => {
     isLastCondition,
   } = props;
   const { inputConfig, variant } = useContext(ConditionBuilderContext);
-  //Below possible input types expected for value field.
-  const itemComponents = {
-    text: ConditionBuilderItemText,
-    number: ConditionBuilderItemNumber,
-    date: ConditionBuilderItemDate,
-    time: ConditionBuilderItemTime,
-    option: ItemOptionForValueField,
-  };
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
@@ -69,12 +61,17 @@ const ConditionBlock = (props) => {
   };
 
   const { icon, type, config, label } = getCurrentConfig(property);
-  let ItemComponent = null;
-  if (type == 'custom') {
-    ItemComponent = config.component;
-  } else {
-    ItemComponent = property ? itemComponents[type] : null;
-  }
+
+  //Below possible input types expected for value field.
+  const itemComponents = {
+    text: ConditionBuilderItemText,
+    number: ConditionBuilderItemNumber,
+    date: ConditionBuilderItemDate,
+    time: ConditionBuilderItemTime,
+    option: ItemOptionForValueField,
+    custom: config?.component,
+  };
+  const ItemComponent = property ? itemComponents[type] : null;
 
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt);

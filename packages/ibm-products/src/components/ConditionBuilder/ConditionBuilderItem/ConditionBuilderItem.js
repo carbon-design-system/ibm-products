@@ -30,7 +30,10 @@ export const ConditionBuilderItem = ({
 
   useEffect(() => {
     if (label == 'INVALID') {
-      setPropertyLabel(translateWithId('invalid'));
+      setPropertyLabel(translateWithId('invalid_text'));
+      setIsInvalid(true);
+    } else if (label == 'DUPLICATE') {
+      setPropertyLabel(translateWithId('duplicate_text'));
       setIsInvalid(true);
     } else {
       setIsInvalid(false);

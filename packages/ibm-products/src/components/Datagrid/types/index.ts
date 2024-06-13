@@ -98,6 +98,18 @@ interface Labels {
   allPageRows?: object;
   allRows?: object;
 }
+interface ColumnLabels {
+  findColumnPlaceholderLabel?: string;
+  resetToDefaultLabel?: string;
+  customizeTearsheetHeadingLabel?: string;
+  primaryButtonTextLabel?: string;
+  secondaryButtonTextLabel?: string;
+  instructionsLabel?: string;
+  iconTooltipLabel?: string;
+  assistiveTextInstructionsLabel?: string;
+  assistiveTextDisabledInstructionsLabel?: string;
+  selectAllLabel?: string;
+}
 
 interface Section {
   categoryTitle?: string;
@@ -266,6 +278,10 @@ export interface DataGridState<T extends object = any>
   loadMoreThreshold?: number;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  customizeColumnsProps?: {
+    onSaveColumnPrefs?: (args) => void;
+    labels?: ColumnLabels;
+  };
 }
 
 // DatagridHeaderRow related types

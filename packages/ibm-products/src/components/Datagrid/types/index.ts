@@ -291,9 +291,10 @@ export interface ResizeHeaderProps {
   isFetching?: boolean;
 }
 
-export type RightAlignColumnsType = (
-  allColumns: Array<ColumnInstance<any>>,
-  meta: Meta<any>
-) => Array<Column<any>>;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type RightAlignColumnsType<T extends object = {}> = (
+  allColumns: Array<ColumnInstance<T>>,
+  meta: Meta<T>
+) => Array<Column<T>>;
 
 export type NodeFuncType = (props) => ReactNode;

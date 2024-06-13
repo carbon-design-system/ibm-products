@@ -90,7 +90,7 @@ interface EditInplaceProps extends PropsWithChildren {
   /**
    * handler to add custom onBlur event
    */
-  onBlur: (value: string) => void;
+  onBlur?: (value: string) => void;
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
@@ -429,7 +429,7 @@ EditInPlace.propTypes = {
   /**
    * handler to add custom onBlur event
    */
-  onBlur: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */

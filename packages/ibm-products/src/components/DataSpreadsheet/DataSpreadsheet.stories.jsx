@@ -11,6 +11,7 @@ import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
   title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
@@ -96,6 +97,29 @@ const Template = ({ ...args }) => {
   );
 };
 
+const LargeTemplateWithOptionalComponent = ({ ...args }) => {
+  const [data, setData] = useState(() => generateData({ rows: 100000 }));
+  const columns = useMemo(() => columnData, []);
+
+  const buildComponent = (index) => (
+    <OverflowMenu style={{ width: '28px' }}>
+      <OverflowMenuItem itemText={`Test item ${index}`} />
+    </OverflowMenu>
+  );
+
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      rowNumberingComponentPosition="Left"
+      rowNumberingComponent={buildComponent}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
 const LargeTemplate = ({ ...args }) => {
   const [data, setData] = useState(() => generateData({ rows: 1000 }));
   const columns = useMemo(() => columnData, []);
@@ -170,6 +194,16 @@ dataSpreadsheet.args = {
 export const largeDatasetSpreadsheet = LargeTemplate.bind({});
 largeDatasetSpreadsheet.storyName = 'Large dataset';
 largeDatasetSpreadsheet.args = {
+  cellSize: 'lg',
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+};
+
+export const largeDatasetSpreadsheetComponentAttached =
+  LargeTemplateWithOptionalComponent.bind({});
+largeDatasetSpreadsheetComponentAttached.storyName =
+  'Large dataset with optional component';
+largeDatasetSpreadsheetComponentAttached.args = {
   cellSize: 'lg',
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',

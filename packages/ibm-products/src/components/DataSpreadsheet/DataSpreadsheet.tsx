@@ -99,6 +99,11 @@ interface DataSpreadsheetProps {
   defaultEmptyRowCount?: number;
 
   /**
+   * Check if has custom component
+   */
+  hasCustomComponent?: boolean;
+
+  /**
    * The spreadsheet id
    */
   id?: number | string;
@@ -118,6 +123,14 @@ interface DataSpreadsheetProps {
    */
   onSelectionAreaChange?: () => void;
 
+  /**
+   * Position of the custom row numbering component
+   */
+  rowNumberingComponentPosition?: string;
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponent?: (index: number) => any[];
   /**
    * The aria label applied to the Select all button
    */
@@ -158,6 +171,8 @@ export let DataSpreadsheet = React.forwardRef(
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
+      rowNumberingComponent,
+      rowNumberingComponentPosition,
       selectAllAriaLabel,
       spreadsheetAriaLabel,
       theme,
@@ -196,13 +211,17 @@ export let DataSpreadsheet = React.forwardRef(
     const [activeCellContent, setActiveCellContent] = useState<any>();
     const activeCellRef = useRef<HTMLDivElement | HTMLButtonElement>();
     const cellEditorRulerRef = useRef<HTMLPreElement>();
+
+    const hasCustomComponent = typeof rowNumberingComponent === 'function';
+    const maxNumRowsCount = data.length.toString().length;
+
     const defaultColumn = useMemo(
       () => ({
         width: 150,
-        rowHeaderWidth: 64,
+        rowHeaderWidth: hasCustomComponent ? 40 + maxNumRowsCount * 8.56 : 64,
         rowHeight: cellSizeValue,
       }),
-      [cellSizeValue]
+      [cellSizeValue, hasCustomComponent, maxNumRowsCount]
     );
     const { keysPressedList, usingMac } = useMultipleKeyTracking({
       ref: multiKeyTrackingRef,
@@ -860,7 +879,10 @@ export let DataSpreadsheet = React.forwardRef(
             headerGroups={headerGroups}
             defaultColumn={defaultColumn}
             getTableBodyProps={getTableBodyProps}
+            hasCustomComponent={hasCustomComponent}
             onDataUpdate={onDataUpdate}
+            rowNumberingComponentPosition={rowNumberingComponentPosition}
+            rowNumberingComponent={rowNumberingComponent}
             onActiveCellChange={onActiveCellChange}
             onSelectionAreaChange={onSelectionAreaChange}
             prepareRow={prepareRow}
@@ -992,6 +1014,11 @@ DataSpreadsheet.propTypes = {
   defaultEmptyRowCount: PropTypes.number,
 
   /**
+   * Check if spreadsheet is using custom component
+   */
+  hasCustomComponent: PropTypes.bool,
+
+  /**
    * The spreadsheet id
    */
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -1011,6 +1038,15 @@ DataSpreadsheet.propTypes = {
    */
   onSelectionAreaChange: PropTypes.func,
 
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponent: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponentPosition: PropTypes.string,
   /**
    * The aria label applied to the Select all button
    */

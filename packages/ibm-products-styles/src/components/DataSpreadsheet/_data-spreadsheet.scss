@@ -200,6 +200,13 @@ $header-cell-background: $layer-accent-01;
       outline: 0;
     }
   }
+
+  .#{$block-class}__td-th.#{$block-class}__td_custom {
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
   .#{$block-class}__selection-area--element {
     position: absolute;
     z-index: 2;

@@ -104,6 +104,21 @@ interface DataSpreadsheetBodyProps {
   onActiveCellChange?: () => void;
 
   /**
+   * Check if user is using custom component
+   */
+  hasCustomComponent?: boolean;
+
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponent?: (index: number) => any[];
+
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponentPosition?: string;
+
+  /**
    * The event handler that is called to set the rows for the empty spreadsheet
    */
   onDataUpdate?: ({ ...args }) => void;
@@ -218,6 +233,9 @@ export const DataSpreadsheetBody = forwardRef(
       headerGroups,
       id,
       onDataUpdate,
+      rowNumberingComponent,
+      rowNumberingComponentPosition,
+      hasCustomComponent,
       prepareRow,
       rows,
       selectionAreaData,
@@ -341,6 +359,7 @@ export const DataSpreadsheetBody = forwardRef(
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
       visibleColumns,
+      hasCustomComponent,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -447,6 +466,7 @@ export const DataSpreadsheetBody = forwardRef(
       setActiveCellInsideSelectionArea,
       setSelectionAreas,
       visibleColumns,
+      hasCustomComponent,
     ]);
 
     //this method will check for any duplicate selection area and remove.
@@ -628,6 +648,10 @@ export const DataSpreadsheetBody = forwardRef(
         const row = rows?.[index];
         if (rows && rows.length) {
           prepareRow?.(row);
+          let uniqueRowNumberingComponent: any[] | undefined = undefined;
+          if (typeof rowNumberingComponent === 'function') {
+            uniqueRowNumberingComponent = rowNumberingComponent(index);
+          }
           const rowProps = prepareProps(row.getRowProps({ style }), 'key');
           return (
             <div
@@ -655,10 +679,15 @@ export const DataSpreadsheetBody = forwardRef(
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,
                     {
+                      [`${blockClass}__td_custom`]: hasCustomComponent
+                        ? true
+                        : false,
                       [`${blockClass}__td-th--active-header`]:
-                        activeCellCoordinates?.row === index ||
-                        checkActiveHeaderCell(index, selectionAreas, 'row'),
+                        !hasCustomComponent &&
+                        (activeCellCoordinates?.row === index ||
+                          checkActiveHeaderCell(index, selectionAreas, 'row')),
                       [`${blockClass}__td-th--selected-header`]:
+                        !hasCustomComponent &&
                         checkSelectedHeaderCell(
                           index,
                           selectionAreas,
@@ -669,9 +698,15 @@ export const DataSpreadsheetBody = forwardRef(
                   )}
                   style={{
                     width: defaultColumn?.rowHeaderWidth,
+                    flexDirection: hasCustomComponent
+                      ? rowNumberingComponentPosition === 'Left'
+                        ? 'row-reverse'
+                        : row
+                      : undefined,
                   }}
                 >
                   {index + 1}
+                  {hasCustomComponent && uniqueRowNumberingComponent}
                 </button>
               </div>
               {/* CELL BUTTONS */}
@@ -715,7 +750,10 @@ export const DataSpreadsheetBody = forwardRef(
       },
       [
         prepareRow,
+        rowNumberingComponent,
+        rowNumberingComponentPosition,
         rows,
+        hasCustomComponent,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClickEvent,
@@ -811,6 +849,11 @@ DataSpreadsheetBody.propTypes = {
   getTableBodyProps: PropTypes.func,
 
   /**
+   * Check if spreadsheet is using custom component
+   */
+  hasCustomComponent: PropTypes.bool,
+
+  /**
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
@@ -839,6 +882,16 @@ DataSpreadsheetBody.propTypes = {
    * Prepare row function from react-table
    */
   prepareRow: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponent: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  rowNumberingComponentPosition: PropTypes.string,
 
   /**
    * All of the spreadsheet row data

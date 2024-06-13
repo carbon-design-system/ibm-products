@@ -15,6 +15,24 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const useNestedRows = (hooks) => {
   useNestedRowExpander(hooks);
   const useInstance = (instance) => {
+    useEffect(() => {
+      const { rows } = instance;
+      const defaultExpandedRows = rows.filter(
+        (row) => row?.original?.defaultExpanded
+      );
+      if (defaultExpandedRows?.length) {
+        defaultExpandedRows.map((defaultExpandedRow) => {
+          if (
+            !defaultExpandedRow.isExpanded &&
+            !defaultExpandedRow.hasExpanded
+          ) {
+            defaultExpandedRow?.toggleRowExpanded?.();
+            defaultExpandedRow.hasExpanded = true;
+            return;
+          }
+        });
+      }
+    }, [instance, instance.rows]);
     // This useEffect will expand rows if they exist in the initialState obj
     useEffect(() => {
       const { rows, initialState } = instance;
@@ -56,19 +74,30 @@ const useNestedRows = (hooks) => {
         },
       },
     ];
+    const getIndentation = (depth) => 32 * depth + 16; // row indentation padding
     const getCellProps = (props, { cell, instance }) => {
-      // reduce the "first cell"s width to compensate added (left) margin
+      // we add a dynamic -ve margin right only if the cell is resized below minimum width i.e 50px, else we set the width based on indentation at different levels
       const isFirstCell =
         instance.columns.findIndex((c) => c.id === cell.column.id) === 0;
       return [
         props,
         {
           style: {
-            marginRight: `${
+            marginRight:
+              isFirstCell &&
+              cell.row.depth > 0 &&
+              parseInt(props.style.width, 10) <=
+                getIndentation(cell.row.depth) + 50 // indentation padding + expander cell or empty cell width
+                ? `${
+                    parseInt(props.style.width, 10) -
+                    (getIndentation(cell.row.depth) + 50)
+                  }px`
+                : '',
+            width:
               isFirstCell && cell.row.depth > 0
-                ? `${-32 * cell.row.depth - 18}px`
-                : ''
-            }`,
+                ? parseInt(props.style.width, 10) -
+                  getIndentation(cell.row.depth)
+                : props.style.width,
           },
         },
       ];

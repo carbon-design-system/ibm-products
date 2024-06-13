@@ -51,3 +51,11 @@ export const traverseReverse = (
     focusThisItem(allElements[allElements.length - 1]);
   }
 };
+
+export const checkForHoldingKey = (evt, key) => {
+  // possible key inputs: altKey,ctrlKey,metaKey,shiftKey
+  if (key === 'cmd') {
+    return evt.metaKey || evt.ctrlKey;
+  }
+  return evt[key];
+};

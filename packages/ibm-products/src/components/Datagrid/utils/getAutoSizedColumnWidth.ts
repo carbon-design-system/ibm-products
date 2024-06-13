@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/**
- * Calculates the auto sized width of a column
- * @param {Array<object>} rows - The datagrid rows
- * @param {string} accessor - The accessor for the column
- * @param {string} headerText - The header text for the column
- */
+import { Row } from 'react-table';
 
-export const getAutoSizedColumnWidth = (rows, accessor, headerText) => {
+export const getAutoSizedColumnWidth = (
+  rows: Array<Row<object>>,
+  accessor: string,
+  headerText: string
+): number => {
   const maxWidth = 400;
   const minWidth = 58;
   const letterSpacing = 10;

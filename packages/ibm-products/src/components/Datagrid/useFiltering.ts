@@ -14,6 +14,8 @@ import {
   MULTISELECT,
   NUMBER,
 } from './Datagrid/addons/Filtering/constants';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const handleMultiFilter = (rows, id, value) => {
   // gets all the items that are selected and returns their value
@@ -32,7 +34,7 @@ const handleMultiFilter = (rows, id, value) => {
   });
 };
 
-const useFiltering = (hooks) => {
+const useFiltering = (hooks: Hooks) => {
   /* istanbul ignore next */
   const filterTypes = useMemo(
     () => ({
@@ -74,9 +76,9 @@ const useFiltering = (hooks) => {
     []
   );
 
-  hooks.useInstance.push((instance) => {
+  hooks.useInstance.push((instance: TableInstance) => {
     const { filterProps, setAllFilters, setFilter, headers, data, state } =
-      instance;
+      instance as DataGridState;
 
     const defaultProps = {
       variation: 'flyout',
@@ -95,7 +97,10 @@ const useFiltering = (hooks) => {
     });
 
     Object.assign(instance, {
-      filterProps: { ...defaultProps, ...instance.filterProps },
+      filterProps: {
+        ...defaultProps,
+        ...(instance as DataGridState)?.filterProps,
+      },
       filterTypes,
       getFilterFlyoutProps,
       FilterFlyout,

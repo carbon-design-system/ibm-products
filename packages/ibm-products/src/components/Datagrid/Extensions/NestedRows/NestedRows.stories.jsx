@@ -200,6 +200,7 @@ const SingleLevelNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
@@ -277,6 +278,7 @@ const SelectableNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows,
     useSelectRows

@@ -32,7 +32,6 @@ const useNestedRowExpander = (hooks) => {
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
-        console.log(row.original);
         const expanderButtonProps = {
           ...row.getToggleRowExpandedProps(),
           onClick: (event) => {
@@ -49,18 +48,15 @@ const useNestedRowExpander = (hooks) => {
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
-        console.log(row);
         return (
-          row.original.subRows &&
-          !!row.original.subRows.length && (
+          row.canExpand && (
             <button
               type="button"
               aria-label={expanderTitle}
               className={cx(
                 `${blockClass}__row-expander`,
                 `${carbon.prefix}--btn`,
-                `${carbon.prefix}--btn--ghost`,
-                `am-i-here`
+                `${carbon.prefix}--btn--ghost`
               )}
               {...expanderButtonProps}
               title={expanderTitle}

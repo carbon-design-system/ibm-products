@@ -239,6 +239,7 @@ const NestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );

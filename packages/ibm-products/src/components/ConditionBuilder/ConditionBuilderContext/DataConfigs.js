@@ -108,9 +108,7 @@ export const translateWithId = (key) => {
 export const valueRenderers = {
   text: (val) => val,
   time: (val) => val,
-  number: (val, config) => {
-    return config.unit && val ? `${val} ${config.unit}` : val;
-  },
+  number: (val) => val,
   option: (value) => {
     if (value && typeof value !== 'string') {
       const selectedValues = Array.isArray(value) ? value : [value];

@@ -15,7 +15,7 @@ export const ConditionBuilderItemNumber = ({
 }) => {
   const onChangeHandler = (e, { value }) => {
     if (checkIfValid(value)) {
-      onChange(value + '');
+      onChange(`${value} ${config.unit ?? ''}`);
     } else {
       onChange('INVALID');
     }
@@ -26,11 +26,15 @@ export const ConditionBuilderItemNumber = ({
     }
     return true;
   };
+  const getDefaultValue = () => {
+    return conditionState.value?.split(' ')?.[0];
+  };
   return (
     <div className={`${blockClass}__item-number`}>
       <NumberInput
         label={conditionState.property}
         hideLabel
+        defaultValue={getDefaultValue()}
         id={conditionState.property?.replace(/\s/g, '')}
         min={config.min}
         max={config.max}

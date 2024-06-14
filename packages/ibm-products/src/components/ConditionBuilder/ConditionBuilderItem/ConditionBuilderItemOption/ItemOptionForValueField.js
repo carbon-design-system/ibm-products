@@ -114,115 +114,109 @@ export const ItemOptionForValueField = ({
       onChange(option, evt);
     }
   };
+
+  const getAriaLabel = () => {
+    return conditionState.label
+      ? conditionState.label
+      : conditionState.property
+      ? conditionState.property
+      : translateWithId('property');
+  };
+  if (!allOptions) {
+    return <SelectSkeleton />;
+  }
   return (
-    <>
-      {allOptions && (
-        <div className={`${blockClass}__item-option`} ref={contentRef}>
-          {allOptions.length > popOverSearchThreshold && (
-            <div className={`${blockClass}__item-option__search`}>
-              <Search
-                size="sm"
-                labelText={translateWithId('clear_search')}
-                closeButtonLabelText={translateWithId('clear_search')}
-                onChange={onSearchChangeHandler}
-              />
-            </div>
-          )}
-
-          {multiSelectable && (
-            <div
-              className={`${blockClass}__multiselectSelectionStatusContainer`}
-            >
-              <h4>
-                <label>
-                  {selection.length}/{allOptions.length} Selected
-                </label>
-              </h4>
-              <Button
-                kind={'ghost'}
-                size={'sm'}
-                data-selected-all={`${selection.length == 0 ? true : false}`}
-                onClick={handleSelectAll}
-                className={`${blockClass}__selectAll-button`}
-              >
-                {selection.length == 0 ? 'Select all' : 'Deselect all'}
-              </Button>
-            </div>
-          )}
-
-          <ul
-            aria-label={
-              conditionState.label
-                ? conditionState.label
-                : conditionState.property
-                ? conditionState.property
-                : translateWithId('property')
-            }
-            role="listbox"
-            data-multi-select={multiSelectable}
-          >
-            {filteredItems?.map((option) => {
-              let isSelected = selection
-                .map((option) => option.id)
-                .includes(option.id);
-              let Icon = option.icon;
-
-              return (
-                <li
-                  tabIndex={0}
-                  key={option.id}
-                  role="option"
-                  aria-selected={isSelected}
-                  className={`${blockClass}__item-option__option`}
-                  onKeyUp={() => {
-                    return false;
-                  }}
-                  onClick={(evt) => onClickHandler(evt, option, isSelected)}
-                >
-                  <div className={`${blockClass}__item-option__option-content`}>
-                    {multiSelectable ? (
-                      <>
-                        <span className={`${blockClass}__option-check-box`}>
-                          {isSelected ? (
-                            <CheckboxCheckedFilled />
-                          ) : (
-                            <Checkbox />
-                          )}
-                        </span>
-
-                        <span
-                          className={`${blockClass}__item-option__option-label`}
-                        >
-                          {option.label}
-                        </span>
-                        {Icon && (
-                          <span className={`${blockClass}__option-icon`}>
-                            <Icon />
-                          </span>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        <span
-                          className={`${blockClass}__item-option__option-label`}
-                        >
-                          {Icon && <Icon />}
-                          {option.label}
-                        </span>
-                        {isSelected && (
-                          <Checkmark className={`${blockClass}__checkmark`} />
-                        )}
-                      </>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+    <div className={`${blockClass}__item-option`} ref={contentRef}>
+      {allOptions.length > popOverSearchThreshold && (
+        <div className={`${blockClass}__item-option__search`}>
+          <Search
+            size="sm"
+            labelText={translateWithId('clear_search')}
+            closeButtonLabelText={translateWithId('clear_search')}
+            onChange={onSearchChangeHandler}
+          />
         </div>
       )}
-      {!allOptions && <SelectSkeleton />}
-    </>
+
+      {multiSelectable && (
+        <div className={`${blockClass}__multiselectSelectionStatusContainer`}>
+          <h4>
+            <label>
+              {selection.length}/{allOptions.length} Selected
+            </label>
+          </h4>
+          <Button
+            kind={'ghost'}
+            size={'sm'}
+            data-selected-all={`${selection.length == 0 ? true : false}`}
+            onClick={handleSelectAll}
+            className={`${blockClass}__selectAll-button`}
+          >
+            {selection.length == 0 ? 'Select all' : 'Deselect all'}
+          </Button>
+        </div>
+      )}
+
+      <ul
+        aria-label={getAriaLabel()}
+        role="listbox"
+        data-multi-select={multiSelectable}
+      >
+        {filteredItems?.map((option) => {
+          const isSelected = selection
+            .map((option) => option.id)
+            .includes(option.id);
+          const Icon = option.icon;
+
+          return (
+            <li
+              tabIndex={0}
+              key={option.id}
+              role="option"
+              aria-selected={isSelected}
+              className={`${blockClass}__item-option__option`}
+              onKeyUp={() => {
+                return false;
+              }}
+              onClick={(evt) => onClickHandler(evt, option, isSelected)}
+            >
+              <div className={`${blockClass}__item-option__option-content`}>
+                {multiSelectable ? (
+                  <>
+                    <span className={`${blockClass}__option-check-box`}>
+                      {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
+                    </span>
+
+                    <span
+                      className={`${blockClass}__item-option__option-label`}
+                    >
+                      {option.label}
+                    </span>
+                    {Icon && (
+                      <span className={`${blockClass}__option-icon`}>
+                        <Icon />
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <span
+                      className={`${blockClass}__item-option__option-label`}
+                    >
+                      {Icon && <Icon />}
+                      {option.label}
+                    </span>
+                    {isSelected && (
+                      <Checkmark className={`${blockClass}__checkmark`} />
+                    )}
+                  </>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

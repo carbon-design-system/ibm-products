@@ -112,16 +112,12 @@ export const valueRenderers = {
     return config.unit && val ? `${val} ${config.unit}` : val;
   },
   option: (value) => {
-    if (value && typeof value == 'string') {
-      return value;
-    } else if (value) {
-      const selectedValues = value && Array.isArray(value) ? value : [value];
+    if (value && typeof value !== 'string') {
+      const selectedValues = Array.isArray(value) ? value : [value];
       return selectedValues.map((option) => option.label).join(', ');
-    } else {
-      return value;
     }
 
-    //return value&&currentConfig?.options ? currentConfig.options.filter(option=>selectedValues.includes(option.id)).map(opt=>opt.label).join(', '):value;
+    return value;
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {

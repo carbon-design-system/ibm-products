@@ -24,28 +24,25 @@ export const ConditionBuilderItem = ({
   ...rest
 }) => {
   const contentRef = useRef(null);
-  const [propertyLabel, setPropertyLabel] = useState();
   const [open, setOpen] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(false);
 
-  useEffect(() => {
-    if (label == 'INVALID') {
-      setPropertyLabel(translateWithId('invalid_text'));
-      setIsInvalid(true);
-    } else if (label == 'DUPLICATE') {
-      setPropertyLabel(translateWithId('duplicate_text'));
-      setIsInvalid(true);
-    } else {
-      setIsInvalid(false);
-      const propertyId =
-        rest['data-name'] == 'valueField' && type
-          ? valueRenderers[type](label, config)
-          : label;
-      setPropertyLabel(translateWithId(propertyId));
+  const getPropertyDetails = () => {
+    if (label === 'INVALID') {
+      return {
+        propertyLabel: translateWithId('invalid_text'),
+        isInvalid: true,
+      };
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [label]);
+    const propertyId =
+      rest['data-name'] == 'valueField' && type
+        ? valueRenderers[type](label, config)
+        : label;
+    return {
+      isInvalid: false,
+      propertyLabel: translateWithId(propertyId),
+    };
+  };
+  const { propertyLabel, isInvalid } = getPropertyDetails();
 
   useEffect(() => {
     /**
@@ -150,7 +147,11 @@ ConditionBuilderItem.propTypes = {
   /**
    * text to be displayed in the field
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 
   /**
    * class name for popover

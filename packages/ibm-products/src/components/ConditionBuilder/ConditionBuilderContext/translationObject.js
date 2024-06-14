@@ -34,7 +34,7 @@ export const translationsObject = {
     then: 'then',
     remove_action: 'Remove Action',
     add_action: 'Add action',
-    invalid: 'Incomplete',
+    invalid_text: 'Incomplete',
     text_invalid_number: 'Invalid number, must be 0 or greater',
   },
 };

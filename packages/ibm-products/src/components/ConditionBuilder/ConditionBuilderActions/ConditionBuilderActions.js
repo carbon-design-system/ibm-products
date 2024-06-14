@@ -26,24 +26,24 @@ const ConditionBuilderActions = ({ actions, className }) => {
     setActionState([...actionState, action]);
   };
 
-  const onchangeHandler = (evt, selectedId, actionIndex, currentActionId) => {
-    const currentAction = actions.filter((action) => action.id == selectedId);
-    let updatedActions = [];
-    if (checkDuplicateAction(actionState, selectedId, currentActionId)) {
-      let duplicateAction = { id: uuidv4(), label: 'DUPLICATE', invalid: true };
-      updatedActions = [
-        ...actionState.slice(0, actionIndex),
-        duplicateAction,
-        ...actionState.slice(actionIndex + 1),
-      ];
-    } else {
-      updatedActions = [
-        ...actionState.slice(0, actionIndex),
-        ...currentAction,
-        ...actionState.slice(actionIndex + 1),
-      ];
-    }
-    setActionState(updatedActions);
+  const onchangeHandler = (evt, selectedId, actionIndex, currentAction) => {
+    const action = actions.find((action) => action.id === selectedId); //fetch the selected action from the input action array
+
+    //if the action is duplicate, that action is added with a new id, else the same action is used.
+    // same actions can be added multiple times
+    const newAction = checkDuplicateAction(
+      actionState,
+      selectedId,
+      currentAction.id
+    )
+      ? { ...action, id: uuidv4() }
+      : action;
+
+    setActionState([
+      ...actionState.slice(0, actionIndex),
+      newAction,
+      ...actionState.slice(actionIndex + 1),
+    ]);
 
     focusThisField(evt);
   };
@@ -68,7 +68,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
               label={
-                index == 0 ? translateWithId('then') : translateWithId('and')
+                index === 0 ? translateWithId('then') : translateWithId('and')
               }
             />
 
@@ -84,7 +84,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
                   value: action.label,
                 }}
                 onChange={(selectedId, evt) =>
-                  onchangeHandler(evt, selectedId, index, action.id)
+                  onchangeHandler(evt, selectedId, index, action)
                 }
                 config={{ options: actions }}
               />
@@ -103,11 +103,9 @@ const ConditionBuilderActions = ({ actions, className }) => {
                 data-name="closeCondition"
               />
             </span>
-            {actionState.length == index + 1 && (
+            {actionState.length === index + 1 && (
               <ConditionBuilderAdd
-                onClick={() => {
-                  addActionHandler();
-                }}
+                onClick={addActionHandler}
                 className={`${blockClass}__gap ${blockClass}__gap-left`}
                 buttonLabel={translateWithId('add_action')}
               />
@@ -115,11 +113,9 @@ const ConditionBuilderActions = ({ actions, className }) => {
           </div>
         ))}
 
-        {actionState.length == 0 && (
+        {actionState.length === 0 && (
           <ConditionBuilderAdd
-            onClick={() => {
-              addActionHandler();
-            }}
+            onClick={addActionHandler}
             className={`${blockClass}__gap ${blockClass}__gap-left`}
             buttonLabel={translateWithId('add_action')}
           />

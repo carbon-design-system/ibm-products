@@ -43,61 +43,61 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
     setFilteredItems(_filteredItems);
   };
 
+  const getAriaLabel = () => {
+    return conditionState.label
+      ? conditionState.label
+      : conditionState.property
+      ? conditionState.property
+      : translateWithId('property');
+  };
+
+  if (!allOptions) {
+    return;
+  }
   return (
-    allOptions && (
-      <div className={`${blockClass}__item-option`} ref={contentRef}>
-        {allOptions.length > popOverSearchThreshold && (
-          <div className={`${blockClass}__item-option__search`}>
-            <Search
-              size="sm"
-              labelText={translateWithId('clear_search')}
-              closeButtonLabelText={translateWithId('clear_search')}
-              onChange={onSearchChangeHandler}
-            />
-          </div>
-        )}
+    <div className={`${blockClass}__item-option`} ref={contentRef}>
+      {allOptions.length > popOverSearchThreshold && (
+        <div className={`${blockClass}__item-option__search`}>
+          <Search
+            size="sm"
+            labelText={translateWithId('clear_search')}
+            closeButtonLabelText={translateWithId('clear_search')}
+            onChange={onSearchChangeHandler}
+          />
+        </div>
+      )}
 
-        <ul
-          aria-label={
-            conditionState.label
-              ? conditionState.label
-              : conditionState.property
-              ? conditionState.property
-              : translateWithId('property')
-          }
-          role="listbox"
-        >
-          {filteredItems?.map((option) => {
-            let isSelected = selection?.includes(option.id);
-            let Icon = option.icon;
+      <ul aria-label={getAriaLabel()} role="listbox">
+        {filteredItems?.map((option) => {
+          const isSelected = selection?.includes(option.id);
+          const Icon = option.icon;
 
-            return (
-              <li
-                tabIndex={0}
-                key={option.id}
-                role="option"
-                aria-selected={isSelected}
-                className={`${blockClass}__item-option__option`}
-                onKeyUp={() => {
-                  return false;
-                }}
-                onClick={(evt) => onClickHandler(evt, option, isSelected)}
-              >
-                <div className={`${blockClass}__item-option__option-content`}>
-                  <span className={`${blockClass}__item-option__option-label`}>
-                    {Icon && <Icon />}
-                    {option.label}
-                  </span>
-                  {isSelected && (
-                    <Checkmark className={`${blockClass}__checkmark`} />
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    )
+          return (
+            <li
+              tabIndex={0}
+              key={option.id}
+              role="option"
+              aria-selected={isSelected}
+              className={`${blockClass}__item-option__option`}
+              onKeyUp={() => {
+                return false;
+              }}
+              onClick={(evt) => onClickHandler(evt, option, isSelected)}
+            >
+              <div className={`${blockClass}__item-option__option-content`}>
+                <span className={`${blockClass}__item-option__option-label`}>
+                  {Icon && <Icon />}
+                  {option.label}
+                </span>
+                {isSelected && (
+                  <Checkmark className={`${blockClass}__checkmark`} />
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

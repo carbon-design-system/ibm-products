@@ -115,10 +115,12 @@ export let ScrollGradient = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
+        {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
           onScroll={scrollHandler}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
+          tabIndex={0}
         >
           <div
             ref={contentChildrenContainer}

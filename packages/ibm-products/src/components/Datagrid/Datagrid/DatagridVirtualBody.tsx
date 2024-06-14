@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@ import { VariableSizeList } from 'react-window';
 import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
-import { px } from '@carbon/layout';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { DataGridState, DatagridRow } from '../types';
 
@@ -79,15 +78,6 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
       );
       if (headWrapEl) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
-      }
-      const spacerColumn: HTMLDivElement | null = document.querySelector(
-        `#${tableId} .${blockClass}__head-wrap thead th:last-child`
-      );
-
-      if (spacerColumn) {
-        spacerColumn.style.width = px(
-          32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
-        ); // scrollbar width to header column to fix header alignment
       }
     }
 

@@ -149,7 +149,6 @@ const TemplateBlur = ({ containerWidth, ...args }) => {
       actionCancel(initialVal);
     }
     actionBlur(initialVal);
-    console.log(initialVal);
   };
 
   const props = {

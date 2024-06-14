@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.19.0...@carbon/ibm-cloud-cognitive-core@2.19.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* issue on rerender ([#5384](https://github.com/carbon-design-system/ibm-products/issues/5384)) ([a1abc10](https://github.com/carbon-design-system/ibm-products/commit/a1abc10bacb87b272b7f909d32ab717b5edcc322))
+* **novice-to-pro:** change to onboarding and added getStartedCard ([#5422](https://github.com/carbon-design-system/ibm-products/issues/5422)) ([7442150](https://github.com/carbon-design-system/ibm-products/commit/7442150e758ba89967e09233bc45c944bdb8c37f))
+
+
+
+
+
 # [2.19.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.18.3...@carbon/ibm-cloud-cognitive-core@2.19.0) (2024-06-11)
 
 

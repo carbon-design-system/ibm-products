@@ -266,7 +266,7 @@ export interface DataGridState<T extends object = any>
   loadMoreThreshold?: number;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
-  expandedContentHeight?: boolean;
+  expandedContentHeight?: number;
   onRowExpand?: (
     row: DatagridRow,
     event: React.MouseEvent<HTMLElement>

@@ -14,7 +14,7 @@ test.describe('Checklist @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Checklist',
-      id: 'ibm-products-novice-to-pro-checklist--checklist',
+      id: 'ibm-products-onboarding-checklist--checklist',
       globals: {
         carbonTheme: 'white',
       },

@@ -60,7 +60,7 @@ const taskLists = [
 ];
 
 export default {
-  title: 'IBM Products/Novice to pro/Checklist',
+  title: 'IBM Products/Onboarding/Checklist',
   component: Checklist,
   tags: ['autodocs'],
   argTypes: {

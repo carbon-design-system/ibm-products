@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.7...jest-config-ibm-cloud-cognitive@1.2.0) (2024-06-11)
+
+
+### Features
+
+* **FeatureFlags:** add new mechanism for feature flagging using `@carbon/feature-flags` ([#5204](https://github.com/carbon-design-system/ibm-products/issues/5204)) ([51226bf](https://github.com/carbon-design-system/ibm-products/commit/51226bf58e4a0593e41cfcb37192784b8a6291c6))
+
+
+
+
+
 ## [1.1.7](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.6...jest-config-ibm-cloud-cognitive@1.1.7) (2024-05-07)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

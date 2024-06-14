@@ -281,7 +281,10 @@ export interface DataGridState<T extends object = any>
   customizeColumnsProps?: {
     onSaveColumnPrefs?: (args) => void;
     labels?: ColumnLabels;
+    isTearsheetOpen?: boolean;
+    setIsTearsheetOpen?: (args: boolean) => void;
   };
+  CustomizeColumnsButton?: (args: any) => ReactNode;
 }
 
 // DatagridHeaderRow related types

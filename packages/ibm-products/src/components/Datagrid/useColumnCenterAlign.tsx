@@ -8,23 +8,31 @@
 import React from 'react';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { Hooks } from 'react-table';
+import { DataGridHeader, DataGridState, DatagridColumn } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useColumnCenterAlign = (hooks) => {
-  const centerAlignRenderer = (tableProps, column) => (
+const useColumnCenterAlign = (hooks: Hooks) => {
+  const centerAlignRenderer = (
+    tableProps: DataGridState,
+    column: DatagridColumn
+  ) => (
     <div
       className={cx(`${blockClass}__center-align-cell-renderer`, {
         sortDisabled:
           !tableProps.isTableSortable ||
-          tableProps.column.disableSortBy === true,
+          (tableProps.column && tableProps.column.disableSortBy === true),
       })}
     >
-      {column.Cell(tableProps)}
+      {column.Cell && column.Cell(tableProps)}
     </div>
   );
 
-  const centerAlignHeader = (headerProp, column) => (
+  const centerAlignHeader = (
+    headerProp: DataGridHeader,
+    column: DatagridColumn
+  ) => (
     <div className={`${blockClass}__center-align-header`}>
       {typeof column.Header === 'function'
         ? column.Header(headerProp)
@@ -32,7 +40,7 @@ const useColumnCenterAlign = (hooks) => {
     </div>
   );
 
-  const centerAlignedColumns = (columns) => {
+  const centerAlignedColumns = (columns: DatagridColumn[]) => {
     const columnsWithDefaultCells = columns.map((column) => ({
       ...column,
       Cell: column.centerAlignedColumn

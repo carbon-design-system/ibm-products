@@ -134,6 +134,10 @@ export interface DatagridColumn<T extends object = any>
   extends ColumnInstance<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  disableSortBy?: boolean;
+  centerAlignedColumn?: boolean;
+  Cell?: (props: any) => ReactNode;
+  Header?: (props: any) => ReactNode | any;
 }
 
 export interface DataGridCell<T extends object = any>
@@ -266,6 +270,7 @@ export interface DataGridState<T extends object = any>
   loadMoreThreshold?: number;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  column?: DatagridColumn;
 }
 
 // DatagridHeaderRow related types

@@ -342,9 +342,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     align-items: center;
     justify-content: center;
     padding: 0;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    background-color: unset;
     color: $text-primary;
+    min-block-size: 0;
 
-    .#{c4p-settings.$carbon-prefix}--btn__icon {
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover {
+      background-color: $background-hover;
+    }
+    .#{$block-class}--btn__icon {
       margin: 0;
     }
   }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const emptyState = {
+  operator: 'or',
   groups: [
     {
       groupSeparateOperator: null,

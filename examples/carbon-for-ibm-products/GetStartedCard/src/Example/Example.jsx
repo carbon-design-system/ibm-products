@@ -32,7 +32,7 @@ export const Example = () => {
     footerActionIcon: () => <ArrowRight size={16}></ArrowRight>,
     onClick: () => {},
     step: 3,
-    status: 'incomplete'
+    status: 'incomplete',
   };
 
   return (

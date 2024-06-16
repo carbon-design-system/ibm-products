@@ -221,6 +221,9 @@ export let OptionsTile = React.forwardRef(
           contentRef.current
         );
 
+        const animationDuration = Number(
+          carbonMotion.moderate01.replace('ms', '')
+        );
         const animation = contentRef.current.animate(
           [
             {
@@ -237,7 +240,7 @@ export let OptionsTile = React.forwardRef(
             },
           ],
           {
-            duration: Number(carbonMotion.moderate01.replace('ms', '')),
+            duration: animationDuration,
             easing: carbonMotion.easings.entrance.productive,
           }
         );
@@ -247,7 +250,14 @@ export let OptionsTile = React.forwardRef(
           setClosing(false);
         };
 
-        animation.onfinish = callback;
+        //This is to fix the flicking issue while collapsing.
+        //root cause : after the animation is finished , isOpen is still true until onFinish callback is triggered.For that minute duration , collapsed content will again show.
+        // To avoid this , isOpen is set to false after the 90% of animation duration.
+        setTimeout(() => {
+          callback();
+        }, animationDuration * 0.9);
+
+        // animation.onfinish = callback;
         animation.oncancel = callback;
       } else {
         // in case the ref is not set or the user prefers reduced motion, skip the animation

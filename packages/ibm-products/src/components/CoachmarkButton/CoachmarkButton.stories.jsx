@@ -20,8 +20,7 @@ import mdx from './CoachmarkButton.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title:
-    'IBM Products/Novice to pro/Coachmark/Coachmark elements/CoachmarkButton',
+  title: 'IBM Products/Onboarding/Coachmark/Coachmark elements/CoachmarkButton',
   component: CoachmarkButton,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

@@ -15,8 +15,7 @@ import mdx from './InterstitialScreenView.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title:
-    'IBM Products/Novice to pro/Interstitial screen/InterstitialScreenView',
+  title: 'IBM Products/Onboarding/Interstitial screen/InterstitialScreenView',
   component: InterstitialScreenView,
   tags: ['autodocs'],
   argTypes: {

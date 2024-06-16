@@ -11,18 +11,20 @@ import { selectionColumnId } from './common-column-ids';
 import SelectAllWithToggle from './Datagrid/DatagridSelectAllWithToggle';
 import { pkg } from '../../settings';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid__select-all`;
 
-const useSelectAllToggle = (hooks) => {
+const useSelectAllToggle = (hooks: Hooks) => {
   useSelectAllWithToggleComponent(hooks);
   useAddClassNameToSelectRow(hooks);
 };
 
-const useSelectAllWithToggleComponent = (hooks) => {
-  const useInstance = (instance) => {
-    const { headers, DatagridPagination } = instance;
-    const headersWithSelectAllToggle = headers.map((header) => {
+const useSelectAllWithToggleComponent = (hooks: Hooks) => {
+  const useInstance = (instance: TableInstance) => {
+    const { headers, DatagridPagination } = instance as DataGridState;
+    const headersWithSelectAllToggle = headers?.map((header) => {
       if (header.id === selectionColumnId && DatagridPagination) {
         Object.assign(header, {
           Header,
@@ -35,7 +37,7 @@ const useSelectAllWithToggleComponent = (hooks) => {
   hooks.useInstance.push(useInstance);
 };
 
-const useAddClassNameToSelectRow = (hooks) => {
+const useAddClassNameToSelectRow = (hooks: Hooks) => {
   const [windowSize, setWindowSize] = useState(0);
 
   useIsomorphicEffect(() => {
@@ -49,7 +51,8 @@ const useAddClassNameToSelectRow = (hooks) => {
 
   hooks.getCellProps.push((props, data) => {
     const { column } = data.cell;
-    const { DatagridPagination, columns, withStickyColumn } = data.instance;
+    const { DatagridPagination, columns, withStickyColumn } =
+      data.instance as DataGridState;
     const isFirstColumnStickyLeft =
       columns[0]?.sticky === 'left' && withStickyColumn;
     if (column.id === selectionColumnId && DatagridPagination) {
@@ -67,7 +70,7 @@ const useAddClassNameToSelectRow = (hooks) => {
   });
 };
 
-const Header = (gridState) => {
+const Header = (gridState: DataGridState) => {
   const {
     tableId,
     isFetching,
@@ -87,7 +90,7 @@ const Header = (gridState) => {
     isAllRowsSelected,
     withStickyColumn,
     columns,
-  };
+  } as DataGridState;
   return <SelectAllWithToggle {...props} />;
 };
 

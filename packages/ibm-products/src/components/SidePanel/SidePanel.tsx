@@ -49,7 +49,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the action toolbar buttons
    */
-  actionToolbarButtons?: ButtonProps[];
+  actionToolbarButtons?: ButtonProps<any>[];
 
   /**
    * The primary actions to be shown in the side panel. Each action is
@@ -59,7 +59,7 @@ type SidePanelBaseProps = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps[];
+  actions?: ButtonProps<any>[];
 
   /**
    * Determines if the title will animate on scroll
@@ -276,7 +276,7 @@ export let SidePanel = React.forwardRef(
     const titleRef = useRef<HTMLDivElement>(null);
     const labelTextRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const previousState = usePreviousValue({ size, open });
+    const previousState = usePreviousValue({ size, open, currentStep });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
@@ -361,9 +361,14 @@ export let SidePanel = React.forwardRef(
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
 
-        if (scrollableSection) {
+        if (
+          previousState &&
+          previousState['currentStep'] !== currentStep &&
+          scrollableSection
+        ) {
           scrollableSection.scrollTop = 0;
         }
+
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header
         // height css custom property
@@ -623,12 +628,12 @@ export let SidePanel = React.forwardRef(
             if (primeFocusEl) {
               (primeFocusEl as HTMLElement)?.focus();
             }
-          } else {
+          } else if (!slideIn) {
             firstElement?.focus();
           }
         }, 0);
       }
-    }, [animationComplete, firstElement, open, selectorPrimaryFocus]);
+    }, [animationComplete, firstElement, open, selectorPrimaryFocus, slideIn]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
@@ -844,7 +849,7 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
-              onKeyDown={keyDownListener}
+              onKeyDown={slideIn ? undefined : keyDownListener}
             >
               <>
                 {/* header */}
@@ -889,6 +894,7 @@ SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
    */
+  /**@ts-ignore */
   actionToolbarButtons: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -922,6 +928,7 @@ SidePanel.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -935,6 +942,7 @@ SidePanel.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore */
         onClick: Button.propTypes.onClick,
       })
     ),

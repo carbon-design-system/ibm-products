@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.38.1...@carbon/ibm-products-styles@2.39.0) (2024-06-13)
+
+
+### Bug Fixes
+
+* **Datagrid:** sticky header column ([#5461](https://github.com/carbon-design-system/ibm-products/issues/5461)) ([3b33561](https://github.com/carbon-design-system/ibm-products/commit/3b33561d5df828ea99b250d2f610752134828bf2))
+* **novice-to-pro:** change to onboarding and added getStartedCard ([#5422](https://github.com/carbon-design-system/ibm-products/issues/5422)) ([7442150](https://github.com/carbon-design-system/ibm-products/commit/7442150e758ba89967e09233bc45c944bdb8c37f))
+
+
+### Features
+
+* **conditionBuilder:** tree variant initial implmentation ([#5397](https://github.com/carbon-design-system/ibm-products/issues/5397)) ([553f2c7](https://github.com/carbon-design-system/ibm-products/commit/553f2c7e1c6848e853abd71d493b3bca77968252))
+* **SidePanel:** adding tooltip ([#5390](https://github.com/carbon-design-system/ibm-products/issues/5390)) ([254149c](https://github.com/carbon-design-system/ibm-products/commit/254149c106786ec59a59572b3fc2602fa63637f6))
+
+
+
+
+
 ## [2.38.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.38.0...@carbon/ibm-products-styles@2.38.1) (2024-06-11)
 
 

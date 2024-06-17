@@ -106,17 +106,17 @@ interface DataSpreadsheetBodyProps {
   /**
    * Check if user is using custom component
    */
-  hasCustomComponent?: boolean;
+  hasCustomRowHeader?: boolean;
 
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponent?: (index: number) => any[];
+  renderRowHeader?: (index: number) => any[];
 
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponentPosition?: string;
+  renderRowHeaderDirection?: string;
 
   /**
    * The event handler that is called to set the rows for the empty spreadsheet
@@ -233,9 +233,9 @@ export const DataSpreadsheetBody = forwardRef(
       headerGroups,
       id,
       onDataUpdate,
-      rowNumberingComponent,
-      rowNumberingComponentPosition,
-      hasCustomComponent,
+      renderRowHeader,
+      renderRowHeaderDirection,
+      hasCustomRowHeader,
       prepareRow,
       rows,
       selectionAreaData,
@@ -359,7 +359,7 @@ export const DataSpreadsheetBody = forwardRef(
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
       visibleColumns,
-      hasCustomComponent,
+      hasCustomRowHeader,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -466,7 +466,7 @@ export const DataSpreadsheetBody = forwardRef(
       setActiveCellInsideSelectionArea,
       setSelectionAreas,
       visibleColumns,
-      hasCustomComponent,
+      hasCustomRowHeader,
     ]);
 
     //this method will check for any duplicate selection area and remove.
@@ -648,9 +648,9 @@ export const DataSpreadsheetBody = forwardRef(
         const row = rows?.[index];
         if (rows && rows.length) {
           prepareRow?.(row);
-          let uniqueRowNumberingComponent: any[] | undefined = undefined;
-          if (typeof rowNumberingComponent === 'function') {
-            uniqueRowNumberingComponent = rowNumberingComponent(index);
+          let uniqueRowHeaderComponent: any[] | undefined = undefined;
+          if (typeof renderRowHeader === 'function') {
+            uniqueRowHeaderComponent = renderRowHeader(index);
           }
           const rowProps = prepareProps(row.getRowProps({ style }), 'key');
           return (
@@ -679,15 +679,15 @@ export const DataSpreadsheetBody = forwardRef(
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,
                     {
-                      [`${blockClass}__td_custom`]: hasCustomComponent
+                      [`${blockClass}__td_custom`]: hasCustomRowHeader
                         ? true
                         : false,
                       [`${blockClass}__td-th--active-header`]:
-                        !hasCustomComponent &&
+                        !hasCustomRowHeader &&
                         (activeCellCoordinates?.row === index ||
                           checkActiveHeaderCell(index, selectionAreas, 'row')),
                       [`${blockClass}__td-th--selected-header`]:
-                        !hasCustomComponent &&
+                        !hasCustomRowHeader &&
                         checkSelectedHeaderCell(
                           index,
                           selectionAreas,
@@ -698,15 +698,15 @@ export const DataSpreadsheetBody = forwardRef(
                   )}
                   style={{
                     width: defaultColumn?.rowHeaderWidth,
-                    flexDirection: hasCustomComponent
-                      ? rowNumberingComponentPosition === 'Left'
+                    flexDirection: hasCustomRowHeader
+                      ? renderRowHeaderDirection === 'Left'
                         ? 'row-reverse'
                         : row
                       : undefined,
                   }}
                 >
                   {index + 1}
-                  {hasCustomComponent && uniqueRowNumberingComponent}
+                  {hasCustomRowHeader && uniqueRowHeaderComponent}
                 </button>
               </div>
               {/* CELL BUTTONS */}
@@ -750,10 +750,10 @@ export const DataSpreadsheetBody = forwardRef(
       },
       [
         prepareRow,
-        rowNumberingComponent,
-        rowNumberingComponentPosition,
+        renderRowHeader,
+        renderRowHeaderDirection,
         rows,
-        hasCustomComponent,
+        hasCustomRowHeader,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClickEvent,
@@ -849,9 +849,9 @@ DataSpreadsheetBody.propTypes = {
   getTableBodyProps: PropTypes.func,
 
   /**
-   * Check if spreadsheet is using custom component
+   * Check if spreadsheet is using custom row header component attached
    */
-  hasCustomComponent: PropTypes.bool,
+  hasCustomRowHeader: PropTypes.bool,
 
   /**
    * Headers provided from useTable hook
@@ -886,12 +886,12 @@ DataSpreadsheetBody.propTypes = {
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponent: PropTypes.func,
+  renderRowHeader: PropTypes.func,
 
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponentPosition: PropTypes.string,
+  renderRowHeaderDirection: PropTypes.string,
 
   /**
    * All of the spreadsheet row data

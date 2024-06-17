@@ -99,9 +99,9 @@ interface DataSpreadsheetProps {
   defaultEmptyRowCount?: number;
 
   /**
-   * Check if has custom component
+   * Check if has custom row header component attached
    */
-  hasCustomComponent?: boolean;
+  hasCustomRowHeader?: boolean;
 
   /**
    * The spreadsheet id
@@ -126,11 +126,13 @@ interface DataSpreadsheetProps {
   /**
    * Position of the custom row numbering component
    */
-  rowNumberingComponentPosition?: string;
+  renderRowHeaderDirection?: string;
+
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponent?: (index: number) => any[];
+  renderRowHeader?: (index: number) => any[];
+
   /**
    * The aria label applied to the Select all button
    */
@@ -171,8 +173,8 @@ export let DataSpreadsheet = React.forwardRef(
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
-      rowNumberingComponent,
-      rowNumberingComponentPosition,
+      renderRowHeader,
+      renderRowHeaderDirection,
       selectAllAriaLabel,
       spreadsheetAriaLabel,
       theme,
@@ -212,16 +214,16 @@ export let DataSpreadsheet = React.forwardRef(
     const activeCellRef = useRef<HTMLDivElement | HTMLButtonElement>();
     const cellEditorRulerRef = useRef<HTMLPreElement>();
 
-    const hasCustomComponent = typeof rowNumberingComponent === 'function';
+    const hasCustomRowHeader = typeof renderRowHeader === 'function';
     const maxNumRowsCount = data.length.toString().length;
 
     const defaultColumn = useMemo(
       () => ({
         width: 150,
-        rowHeaderWidth: hasCustomComponent ? 40 + maxNumRowsCount * 8.56 : 64,
+        rowHeaderWidth: hasCustomRowHeader ? 40 + maxNumRowsCount * 8.56 : 64,
         rowHeight: cellSizeValue,
       }),
-      [cellSizeValue, hasCustomComponent, maxNumRowsCount]
+      [cellSizeValue, hasCustomRowHeader, maxNumRowsCount]
     );
     const { keysPressedList, usingMac } = useMultipleKeyTracking({
       ref: multiKeyTrackingRef,
@@ -879,10 +881,10 @@ export let DataSpreadsheet = React.forwardRef(
             headerGroups={headerGroups}
             defaultColumn={defaultColumn}
             getTableBodyProps={getTableBodyProps}
-            hasCustomComponent={hasCustomComponent}
+            hasCustomRowHeader={hasCustomRowHeader}
             onDataUpdate={onDataUpdate}
-            rowNumberingComponentPosition={rowNumberingComponentPosition}
-            rowNumberingComponent={rowNumberingComponent}
+            renderRowHeaderDirection={renderRowHeaderDirection}
+            renderRowHeader={renderRowHeader}
             onActiveCellChange={onActiveCellChange}
             onSelectionAreaChange={onSelectionAreaChange}
             prepareRow={prepareRow}
@@ -1014,9 +1016,9 @@ DataSpreadsheet.propTypes = {
   defaultEmptyRowCount: PropTypes.number,
 
   /**
-   * Check if spreadsheet is using custom component
+   * Check if spreadsheet is using custom row header component attached
    */
-  hasCustomComponent: PropTypes.bool,
+  hasCustomRowHeader: PropTypes.bool,
 
   /**
    * The spreadsheet id
@@ -1041,12 +1043,12 @@ DataSpreadsheet.propTypes = {
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponent: PropTypes.func,
+  renderRowHeader: PropTypes.func,
 
   /**
    * Component next to numbering rows
    */
-  rowNumberingComponentPosition: PropTypes.string,
+  renderRowHeaderDirection: PropTypes.string,
   /**
    * The aria label applied to the Select all button
    */

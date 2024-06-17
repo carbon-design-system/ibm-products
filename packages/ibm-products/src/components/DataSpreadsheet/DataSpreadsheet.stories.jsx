@@ -97,7 +97,7 @@ const Template = ({ ...args }) => {
   );
 };
 
-const LargeTemplateWithOptionalComponent = ({ ...args }) => {
+const largeDatasetSpreadsheetCustomRowHeaders = ({ ...args }) => {
   const [data, setData] = useState(() => generateData({ rows: 100000 }));
   const columns = useMemo(() => columnData, []);
 
@@ -112,8 +112,8 @@ const LargeTemplateWithOptionalComponent = ({ ...args }) => {
       columns={columns}
       data={data}
       onDataUpdate={setData}
-      rowNumberingComponentPosition="Left"
-      rowNumberingComponent={buildComponent}
+      renderRowHeaderDirection="Left"
+      renderRowHeader={buildComponent}
       id="spreadsheet--id"
       {...args}
     />
@@ -199,11 +199,11 @@ largeDatasetSpreadsheet.args = {
   spreadsheetAriaLabel: 'Example data spreadsheet',
 };
 
-export const largeDatasetSpreadsheetComponentAttached =
-  LargeTemplateWithOptionalComponent.bind({});
-largeDatasetSpreadsheetComponentAttached.storyName =
+export const largeDatasetSpreadsheetCustom =
+  largeDatasetSpreadsheetCustomRowHeaders.bind({});
+largeDatasetSpreadsheetCustom.storyName =
   'Large dataset with optional component';
-largeDatasetSpreadsheetComponentAttached.args = {
+largeDatasetSpreadsheetCustom.args = {
   cellSize: 'lg',
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',

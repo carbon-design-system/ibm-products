@@ -165,7 +165,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const escaping = useRef(false);
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
-    const tipAlignments: { [key: string]: any } = [
+    const tipAlignments: { [key: string]: AlignPropType } = [
       'edit',
       'save',
       'cancel',

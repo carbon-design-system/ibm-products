@@ -14,6 +14,7 @@ collect:
         - actionsPlacement
         - activeCellCoordinates
         - activeHref
+        - addConditionSubGroupHandler
         - align
         - allPageRowsLabel
         - allRowsLabel
@@ -122,6 +123,8 @@ collect:
         - HeaderRow
         - headers
         - headRef
+        - hideConditionPreviewHandler
+        - hideConditionSubGroupPreviewHandler
         - hideIcon
         - hideSelectAll
         - href
@@ -213,12 +216,14 @@ collect:
         - onRemove
         - onRequestClose
         - onRequestSubmit
+        - onRowClick
         - onScroll
         - onSecondaryButtonClick
         - onSelectAllRows
         - onSelectColumn
         - onSelectionAreaChange
         - onShowAllClick
+        - onSort
         - onSubmit
         - onSubmitButtonText
         - onToggle
@@ -296,6 +301,8 @@ collect:
         - setSelectionAreas
         - showAllTagsLabel
         - showCloseButton
+        - showConditionPreviewHandler
+        - showConditionSubGroupPreviewHandler
         - showToolTip
         - sideNavAriaLabel
         - size
@@ -504,13 +511,25 @@ collect:
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
+        # ConditionBuilderAdd
+        - buttonLabel
+        - enableSubGroup
         # ConditionBuilderButton
         - hideLabel
+        - onBlur
+        - onFocus
+        - onMouseEnter
+        - onMouseLeave
         - tooltipAlign
+        - wrapperProps
+        # ConditionBuilderContent
+        - getActionsState
         # ConditionBuilderItem
         - popOverClassName
         # ConditionConnector
         - operator
+        # ConditionPreview
+        - previewType
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -1078,6 +1097,10 @@ collect:
         - floating
         - stacked
         - tooltip
+        # ConditionPreview - previewType
+        - condition
+        - newGroup
+        - subGroup
         # DecoratorIcon - magnitude
         - benign
         - critical

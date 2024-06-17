@@ -35,9 +35,9 @@ export const moveColumnIndicatorLine = ({
     `.${blockClass}__list--container`
   );
 
-  let scrollSpeed = 10; // Scrolling speed
-  let leftEdgeThreshold = 120; // Distance from the left edge to start scrolling
-  let rightEdgeThreshold = 100; // Distance from the right edge to start scrolling
+  const scrollSpeed = 10; // Scrolling speed
+  const leftEdgeThreshold = 120; // Distance from the left edge to start scrolling
+  const rightEdgeThreshold = 100; // Distance from the right edge to start scrolling
 
   const { clientX } = event;
   const { left, right } = listContainer.getBoundingClientRect();

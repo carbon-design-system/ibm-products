@@ -17,7 +17,7 @@ export interface AddSelectProps {
   clearFiltersText?: string;
   closeIconDescription?: string;
   columnInputPlaceholder?: string;
-  description: string;
+  description?: string;
   filterByLabel?: string;
   globalFilters?: Filter[];
   globalFiltersIconDescription?: string;
@@ -31,19 +31,19 @@ export interface AddSelectProps {
   illustrationTheme?: Theme;
   influencerTitle?: string;
   items: Item;
-  itemsLabel: string;
+  itemsLabel?: string;
   metaIconDescription?: string;
   metaPanelTitle?: string;
-  multi: boolean;
+  multi?: boolean;
   navIconDescription?: string;
   noResultsDescription: string;
   noResultsTitle: string;
   noSelectionDescription?: string;
   noSelectionTitle?: string;
-  onClose: () => void;
-  onCloseButtonText: string;
-  onSubmit: () => void;
-  onSubmitButtonText: string;
+  onClose?: () => void;
+  onCloseButtonText?: string;
+  onSubmit?: () => void;
+  onSubmitButtonText?: string;
   open: boolean;
   /**
    * portal target for the all tags modal
@@ -51,7 +51,7 @@ export interface AddSelectProps {
   portalTarget?: ReactNode;
   searchResultsTitle?: string;
   sortByLabel?: string;
-  title: string;
+  title?: string;
 }
 
 export const AddSelect = forwardRef(
@@ -128,9 +128,9 @@ export const AddSelect = forwardRef(
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
-  closeIconDescription: PropTypes.string.isRequired,
+  closeIconDescription: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   filterByLabel: PropTypes.string,
   /**@ts-ignore */
   globalFilters: PropTypes.arrayOf(
@@ -184,20 +184,20 @@ AddSelect.propTypes = {
         value: PropTypes.string.isRequired,
       })
     ).isRequired,
-  }).isRequired,
-  itemsLabel: PropTypes.string.isRequired,
+  }),
+  itemsLabel: PropTypes.string,
   metaIconDescription: PropTypes.string,
   metaPanelTitle: PropTypes.string,
-  multi: PropTypes.bool.isRequired,
+  multi: PropTypes.bool,
   navIconDescription: PropTypes.string,
   noResultsDescription: PropTypes.string.isRequired,
   noResultsTitle: PropTypes.string.isRequired,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  onCloseButtonText: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onSubmitButtonText: PropTypes.string.isRequired,
+  onClose: PropTypes.func,
+  onCloseButtonText: PropTypes.string,
+  onSubmit: PropTypes.func,
+  onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool.isRequired,
   /**
    * portal target for the all tags modal
@@ -205,7 +205,7 @@ AddSelect.propTypes = {
   portalTarget: PropTypes.node,
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 AddSelect.displayName = componentName;

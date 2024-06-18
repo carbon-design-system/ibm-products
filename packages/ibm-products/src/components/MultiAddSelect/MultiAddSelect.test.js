@@ -16,6 +16,7 @@ const defaultProps = {
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
+  open: true,
 };
 
 describe(componentName, () => {

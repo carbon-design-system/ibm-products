@@ -126,7 +126,7 @@ interface DataSpreadsheetProps {
   /**
    * Position of the custom row numbering component
    */
-  renderRowHeaderDirection?: string;
+  renderRowHeaderDirection?: 'left' | 'right';
 
   /**
    * Component next to numbering rows
@@ -1048,7 +1048,7 @@ DataSpreadsheet.propTypes = {
   /**
    * Component next to numbering rows
    */
-  renderRowHeaderDirection: PropTypes.string,
+  renderRowHeaderDirection: PropTypes.oneOf(['left', 'right']),
   /**
    * The aria label applied to the Select all button
    */

@@ -648,10 +648,6 @@ export const DataSpreadsheetBody = forwardRef(
         const row = rows?.[index];
         if (rows && rows.length) {
           prepareRow?.(row);
-          let uniqueRowHeaderComponent: any[] | undefined = undefined;
-          if (typeof renderRowHeader === 'function') {
-            uniqueRowHeaderComponent = renderRowHeader(index);
-          }
           const rowProps = prepareProps(row.getRowProps({ style }), 'key');
           return (
             <div
@@ -706,7 +702,9 @@ export const DataSpreadsheetBody = forwardRef(
                   }}
                 >
                   {index + 1}
-                  {hasCustomRowHeader && uniqueRowHeaderComponent}
+                  {hasCustomRowHeader &&
+                    typeof renderRowHeader === 'function' &&
+                    renderRowHeader(index)}
                 </button>
               </div>
               {/* CELL BUTTONS */}

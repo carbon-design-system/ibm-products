@@ -1682,6 +1682,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/feature-flags@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "@carbon/feature-flags@npm:0.19.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.2.1"
+  checksum: 10/a7724e969d7a6cd0ce1ebfaeb81eae610a15089040df1ee4c2cc0888e2ffc257d80535a9a78bc6e8d4537ea4a77cff9ae846781ae83d6183450ec1bb9ca8fbea
+  languageName: node
+  linkType: hard
+
 "@carbon/feature-flags@npm:^0.20.0":
   version: 0.20.0
   resolution: "@carbon/feature-flags@npm:0.20.0"
@@ -1730,7 +1739,7 @@ __metadata:
     "@carbon/ibm-products-styles": "npm:^2.39.0"
     "@carbon/layout": "npm:^11.21.0"
     "@carbon/motion": "npm:^11.17.0"
-    "@carbon/react": "npm:^1.55.0"
+    "@carbon/react": "npm:1.55.0"
     "@carbon/themes": "npm:^11.34.0"
     "@carbon/type": "npm:^11.26.0"
     "@storybook/addon-actions": "npm:^8.1.9"
@@ -1783,7 +1792,7 @@ __metadata:
     "@carbon/grid": ^11.22.0
     "@carbon/layout": ^11.21.0
     "@carbon/motion": ^11.17.0
-    "@carbon/react": ^1.55.0
+    "@carbon/react": 1.55.0
     "@carbon/themes": ^11.34.0
     "@carbon/type": ^11.26.0
     react: ^18.2.0
@@ -1876,7 +1885,7 @@ __metadata:
     "@carbon/grid": ^11.22.0
     "@carbon/layout": ^11.21.0
     "@carbon/motion": ^11.17.0
-    "@carbon/react": ^1.55.0
+    "@carbon/react": 1.55.0
     "@carbon/themes": ^11.34.0
     "@carbon/type": ^11.26.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -1893,7 +1902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.43.0":
+"@carbon/icons-react@npm:^11.39.0":
   version: 11.43.0
   resolution: "@carbon/icons-react@npm:11.43.0"
   dependencies:
@@ -1924,17 +1933,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.55.0":
-  version: 1.59.0
-  resolution: "@carbon/react@npm:1.59.0"
+"@carbon/react@npm:1.55.0":
+  version: 1.55.0
+  resolution: "@carbon/react@npm:1.55.0"
   dependencies:
     "@babel/runtime": "npm:^7.18.3"
-    "@carbon/feature-flags": "npm:^0.20.0"
-    "@carbon/icons-react": "npm:^11.43.0"
-    "@carbon/layout": "npm:^11.22.0"
-    "@carbon/styles": "npm:^1.59.0"
+    "@carbon/feature-flags": "npm:^0.19.0"
+    "@carbon/icons-react": "npm:^11.39.0"
+    "@carbon/layout": "npm:^11.21.0"
+    "@carbon/styles": "npm:^1.55.0"
     "@floating-ui/react": "npm:^0.26.0"
-    "@ibm/telemetry-js": "npm:^1.5.0"
+    "@ibm/telemetry-js": "npm:^1.2.1"
     classnames: "npm:2.5.1"
     copy-to-clipboard: "npm:^3.3.1"
     downshift: "npm:8.5.0"
@@ -1955,7 +1964,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 10/65ccef05750724e56c2ef0c8521ae649321b97f9b12c809bf2b8f214935a245673b2da06cbcdf1426ccb6880c2b8ff19907d07c2f9e90f9da54687a2e3d1ce3a
+  checksum: 10/bc8437213c39a63d117c3adda633300d6fc5c8834e0e32dee7426a83fd9e9047331b76c1179f237b9cc911e063da045f9d2067c1474671d0e89c4e9f8f4c5417
   languageName: node
   linkType: hard
 
@@ -1985,7 +1994,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.59.0":
+"@carbon/styles@npm:^1.55.0":
   version: 1.59.0
   resolution: "@carbon/styles@npm:1.59.0"
   dependencies:
@@ -3362,7 +3371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.5.2":
+"@ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.5.2":
   version: 1.5.2
   resolution: "@ibm/telemetry-js@npm:1.5.2"
   bin:

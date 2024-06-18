@@ -155,6 +155,7 @@ export interface DatagridRow<T extends object = any>
   RowExpansionRenderer?: (state?: DataGridState) => void;
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
+  hasExpanded?: boolean;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -273,6 +274,12 @@ export interface DataGridState<T extends object = any>
   onRowClick?: (row, event) => void;
   onSort?: boolean;
   column?: DatagridColumn;
+  expandedContentHeight?: number;
+  onRowExpand?: (
+    row: DatagridRow,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
+  ExpandedRowContentComponent?: JSXElementConstructor<any>;
 }
 
 // DatagridHeaderRow related types

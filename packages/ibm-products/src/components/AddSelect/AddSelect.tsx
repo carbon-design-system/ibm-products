@@ -77,6 +77,7 @@ export const AddSelect = forwardRef(
     }: AddSelectProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    console.log({ multi });
     const useNormalizedItems = !!items.entries.find((item) => item.children);
     const normalizedItems = useNormalizedItems ? normalize(items) : null;
     const globalFilterOpts =
@@ -103,11 +104,15 @@ export const AddSelect = forwardRef(
       <AddSelectBody
         {...props}
         ref={ref}
+        closeIconDescription={closeIconDescription}
+        description={description}
         items={items}
-        normalizedItems={normalizedItems}
+        itemsLabel={itemsLabel}
         useNormalizedItems={useNormalizedItems}
         globalFilterOpts={globalFilterOpts}
         defaultModifiers={defaultModifiers}
+        multi={multi}
+        normalizedItems={normalizedItems}
         noResultsDescription={noResultsDescription}
         noResultsTitle={noResultsTitle}
         onClose={onClose}
@@ -116,9 +121,6 @@ export const AddSelect = forwardRef(
         onSubmitButtonText={onSubmitButtonText}
         open={open}
         title={title}
-        closeIconDescription={closeIconDescription}
-        description={description}
-        itemsLabel={itemsLabel}
       />
     );
   }

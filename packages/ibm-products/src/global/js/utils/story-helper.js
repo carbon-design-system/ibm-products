@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import pkg from '../package-settings';
-import { paramCase } from 'change-case';
+import { kebabCase } from 'change-case';
 
 export const checkCanaryStatus = (componentName) =>
   !pkg.isComponentEnabled(componentName, true) &&
@@ -72,7 +72,7 @@ export const palUsageHref = (csfFile) => {
   const [_pkg, kind, section] = title.split('/');
 
   if (/components|patterns/i.test(kind) && name) {
-    return `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+    return `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${kebabCase(
       section
     )}/usage`;
   }
@@ -130,7 +130,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
     result.section = a;
 
-    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${kebabCase(
       result.section
     )}/usage`;
   } else {

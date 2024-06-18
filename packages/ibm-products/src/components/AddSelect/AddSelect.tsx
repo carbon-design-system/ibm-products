@@ -77,7 +77,6 @@ export const AddSelect = forwardRef(
     }: AddSelectProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    console.log({ multi });
     const useNormalizedItems = !!items.entries.find((item) => item.children);
     const normalizedItems = useNormalizedItems ? normalize(items) : null;
     const globalFilterOpts =

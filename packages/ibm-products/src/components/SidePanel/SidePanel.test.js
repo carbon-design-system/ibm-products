@@ -6,7 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen, act } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
@@ -460,9 +466,9 @@ describe('SidePanel', () => {
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    expect(closeIconButton).toHaveFocus();
+    await waitFor(() => {
+      expect(closeIconButton).toHaveFocus();
+    });
   });
 
   it('should render slide in panel from left', async () => {
@@ -512,7 +518,8 @@ describe('SidePanel', () => {
 
     rerender(<DummyComponent open={false} />);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    expect(launchButtonEl).toHaveFocus();
+    await waitFor(() => {
+      expect(launchButtonEl).toHaveFocus();
+    });
   });
 });

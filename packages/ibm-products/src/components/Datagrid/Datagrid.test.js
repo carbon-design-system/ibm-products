@@ -939,7 +939,7 @@ describe(componentName, () => {
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('th').length
-    ).toEqual(16);
+    ).toEqual(15);
     expect(
       screen
         .getByRole('table')
@@ -1163,14 +1163,14 @@ describe(componentName, () => {
   });
 
   it('Initial Load', async () => {
-    render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
+    render(<InitialLoad data-testid={dataTestId} />);
     expect(
       screen
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('th').length
-    ).toEqual(16);
+    ).toEqual(15);
   });
 
   it('Infinite Scroll', async () => {

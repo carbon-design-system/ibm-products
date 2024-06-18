@@ -8,16 +8,18 @@
 import { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
 import useRowExpander from './useRowExpander';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState, DatagridRow } from './types';
 
-const useExpandedRow = (hooks) => {
+const useExpandedRow = (hooks: Hooks) => {
   useRowExpander(hooks);
-  const useInstance = (instance) => {
+  const useInstance = (instance: TableInstance) => {
     const {
       rows,
       expandedContentHeight,
       ExpandedRowContentComponent,
       onRowExpand,
-    } = instance;
+    } = instance as DataGridState;
     const [expandedRowsHeight, setExpandedRowsHeight] = useState({});
     const setExpandedRowHeight = (rowIndex, height) =>
       setExpandedRowsHeight({ ...expandedRowsHeight, [rowIndex]: height });
@@ -26,8 +28,11 @@ const useExpandedRow = (hooks) => {
       canExpand: row.original && !row.original.notExpandable,
       expandedContentHeight:
         expandedRowsHeight[row.index] || expandedContentHeight,
-      RowExpansionRenderer: DatagridExpandedRow(ExpandedRowContentComponent),
-      onClick: (row, event) => onRowExpand?.(row, event),
+      RowExpansionRenderer:
+        ExpandedRowContentComponent &&
+        DatagridExpandedRow(ExpandedRowContentComponent),
+      onClick: (row: DatagridRow, event: React.MouseEvent<HTMLElement>) =>
+        onRowExpand?.(row, event),
     }));
     Object.assign(instance, {
       rows: rowsWithExpand,

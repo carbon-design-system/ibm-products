@@ -277,8 +277,15 @@ export interface DataGridState<T extends object = any>
   onVirtualScroll?: (evt?: boolean) => void;
   fetchMoreData?: () => void;
   loadMoreThreshold?: number;
+  expandedRowIds?: object;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  expandedContentHeight?: number;
+  onRowExpand?: (
+    row: DatagridRow,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
+  ExpandedRowContentComponent?: JSXElementConstructor<any>;
 }
 
 // DatagridHeaderRow related types

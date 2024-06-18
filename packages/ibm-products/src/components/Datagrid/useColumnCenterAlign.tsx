@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,12 @@ import React from 'react';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import { Hooks } from 'react-table';
-import { DataGridHeader, DataGridState, DatagridColumn } from './types';
+import {
+  DataGridHeader,
+  DataGridState,
+  DatagridColumn,
+  VisibleColumns,
+} from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -44,16 +49,16 @@ const useColumnCenterAlign = (hooks: Hooks) => {
     const columnsWithDefaultCells = columns.map((column) => ({
       ...column,
       Cell: column.centerAlignedColumn
-        ? (tableProp) => centerAlignRenderer(tableProp, column)
+        ? (tableProp: DataGridState) => centerAlignRenderer(tableProp, column)
         : column.Cell,
       Header: column.centerAlignedColumn
-        ? (headerProp) => centerAlignHeader(headerProp, column)
+        ? (headerProp: DataGridHeader) => centerAlignHeader(headerProp, column)
         : column.Header,
     }));
     return [...columnsWithDefaultCells];
   };
 
-  hooks.visibleColumns.push(centerAlignedColumns);
+  hooks.visibleColumns.push(centerAlignedColumns as VisibleColumns);
 };
 
 export default useColumnCenterAlign;

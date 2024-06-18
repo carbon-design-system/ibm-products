@@ -14,10 +14,12 @@ import {
 } from 'react';
 import {
   Cell,
+  Column,
   ColumnInstance,
   FilterValue,
   Filters,
   HeaderGroup,
+  Meta,
   Row,
   TableCommonProps,
   TableDispatch,
@@ -295,3 +297,9 @@ export interface ResizeHeaderProps {
   resizerAriaLabel?: string;
   isFetching?: boolean;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type VisibleColumns<T extends object = {}> = (
+  allColumns: Array<ColumnInstance<T>>,
+  meta: Meta<T>
+) => Array<Column<T>>;

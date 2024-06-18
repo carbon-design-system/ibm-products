@@ -1,4 +1,5 @@
-name: Patch release
+# Publish patch releases, both rc (release candidates) and full releases
+name: Release - patch
 run-name:
   ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
 
@@ -10,11 +11,15 @@ on:
         description: 'Specify the type of release'
         type: choice
         default: first minor rc
+        # Full patch release (ie. v2.0.0 -> v2.0.1)
+        # First patch RC (ie. v2.0.0 -> v2.0.1-rc.0)
+        # Subsequent RC (ie v2.0.1-rc.0 -> v2.0.1-rc.1)
         options:
           - full patch release
           - first patch rc
           - subsequent rc
       dry-run:
+        # Check dry run to test run lerna and confirm package version bumps
         required: true
         description: 'Run dry run?'
         type: boolean
@@ -22,6 +27,7 @@ on:
 
 jobs:
   Release:
+    # trigger the input data to the `release-base` workflow and trigger it
     uses: ./.github/workflows/release-base.yml
     with:
       type: ${{ inputs.type }}

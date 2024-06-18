@@ -38,7 +38,7 @@ interface InterstitialScreenViewProps extends PropsWithChildren {
   stepTitle: string;
 }
 /**
- * A Novice to Pro component intended to be used as the child elements of the InterstitialScreen component.
+ * An Onboarding component intended to be used as the child elements of the InterstitialScreen component.
  */
 export let InterstitialScreenView = React.forwardRef<
   HTMLDivElement,

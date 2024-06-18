@@ -68,6 +68,11 @@ $block-class-modal: #{$block-class}-modal;
   max-width: $spacing-09;
 }
 
+.#{c4p-settings.$carbon-prefix}--popover
+  .#{c4p-settings.$carbon-prefix}--popover-content {
+  white-space: normal;
+}
+
 .#{$block-class-overflow} {
   display: inline-block;
   vertical-align: bottom;
@@ -139,8 +144,6 @@ $block-class-modal: #{$block-class}-modal;
     margin: 0;
     background-color: inherit;
     color: inherit;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .#{$block-class-overflow}__tag

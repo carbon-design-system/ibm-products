@@ -54,8 +54,10 @@ const CustomizeColumnsTearsheet = ({
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
       if (
-        (Array.isArray(col) && col.indexOf(definition) != -1) ||
-        definition.id === col.id
+        ((Array.isArray(col) && col.indexOf(definition) != -1) ||
+          definition.id === col.id) &&
+        definition.canFilter &&
+        !definition.disabled
       ) {
         return { ...definition, isVisible: value };
       }
@@ -79,11 +81,16 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
-    const notFilterableCount = columnObjects.filter((col) => !col.canFilter);
+    const notFilterableCount = columnObjects.filter(
+      (col) => !col.canFilter
+    ).length;
+    const actionCount = columnObjects.filter(
+      (col) => col.id === 'actions'
+    ).length;
     setVisibleColumnsCount(
-      getVisibleColumnsCount() - notFilterableCount.length
+      getVisibleColumnsCount() - notFilterableCount - actionCount
     );
-    setTotalColumns(columnObjects.length - notFilterableCount.length);
+    setTotalColumns(columnObjects.length - notFilterableCount - actionCount);
   }, [getVisibleColumnsCount, columnObjects]);
 
   return (

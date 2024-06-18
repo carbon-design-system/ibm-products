@@ -5,43 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
-import { StaticNotification } from '@carbon/react';
+import { CloudApp } from '@carbon/react/icons';
 import { ComboButton, ComboButtonItem } from '..';
-
-// import styles from './_combo-button.scss';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'IBM Products/Internal/ComboButton',
   component: ComboButton,
   tags: ['autodocs'],
-  parameters: {
-    // styles
-  },
 };
 
-// eslint-disable-next-line no-unused-vars -- args not used in this template
-const Template = (args) => (
-  <>
-    <StaticNotification
-      title="Deprecation notice"
-      subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s ComboButton."
-      inline
-      kind="warning"
-      lowContrast
-      hideCloseButton
-      actionButtonLabel="See ComboButton"
-      statusIconDescription="deprecation notification"
-      onActionButtonClick={() => {
-        window.open(
-          'https://react.carbondesignsystem.com/?path=/docs/components-combobutton--overview'
-        );
-      }}
-      titleId="storybook--deprecation-warning-notification"
-      aria-describedby="storybook--deprecation-warning-notification"
-      style={{ marginBottom: '1rem' }}
-    />
+const Template = () => (
+  <Annotation
+    type="deprecation-notice"
+    text={
+      <div>
+        This component is deprecated and will be removed in the next major
+        version. Please migrate to Carbon's{' '}
+        <a href="https://react.carbondesignsystem.com/?path=/docs/components-combobutton--overview">
+          ComboButton
+        </a>
+        .
+      </div>
+    }
+  >
     <ComboButton>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem
@@ -51,7 +39,7 @@ const Template = (args) => (
       </ComboButtonItem>
       <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
     </ComboButton>
-  </>
+  </Annotation>
 );
 
 export const Default = Template.bind({});

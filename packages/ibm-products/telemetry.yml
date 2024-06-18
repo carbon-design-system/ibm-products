@@ -14,7 +14,10 @@ collect:
         - actionsPlacement
         - activeCellCoordinates
         - activeHref
+        - addConditionSubGroupHandler
         - align
+        - allPageRowsLabel
+        - allRowsLabel
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
         - allTagsModalSearchThreshold
@@ -31,6 +34,8 @@ collect:
         - assistiveTextInstructionsLabel
         - backButtonText
         - backgroundColor
+        - batchActionMenuButtonLabel
+        - batchActions
         - body
         - breadcrumbs
         - button
@@ -54,23 +59,36 @@ collect:
         - count
         - currentMatcher
         - currentStep
+        - CustomizeColumnsTearsheet
         - customizeTearsheetHeadingLabel
         - data
+        - DatagridActions
+        - DatagridBatchActions
+        - DatagridPagination
         - datagridState
         - defaultColumn
         - defaultEmptyRowCount
         - description
         - disabled
+        - disabledCell
         - disableSubmit
         - displayMetalPanel
         - draggableClass
         - element
+        - emptyStateAction
+        - emptyStateDescription
+        - emptyStateLink
+        - emptyStateSize
+        - emptyStateTitle
+        - emptyStateType
         - error
         - errorCodeLabel
         - errorMessage
         - expandButtonLabel
+        - fetchMoreData
         - fieldsetLegendText
         - filterByLabel
+        - filterProps
         - filters
         - filterString
         - findColumnPlaceholderLabel
@@ -78,7 +96,9 @@ collect:
         - footerActionIcon
         - formDescription
         - formTitle
+        - fullHeightDatagrid
         - getConditionState
+        - getFilterFlyoutProps
         - getOptions
         - globalFilters
         - globalFiltersIconDescription
@@ -90,13 +110,23 @@ collect:
         - globalSearchPlaceholder
         - globalSortBy
         - grid
+        - gridDescription
         - gridGap
+        - gridRef
+        - gridTitle
         - group
+        - handleResize
         - hasActions
         - hasCloseIcon
         - hasFieldset
         - headerGroups
+        - HeaderRow
+        - headers
+        - headRef
+        - hideConditionPreviewHandler
+        - hideConditionSubGroupPreviewHandler
         - hideIcon
+        - hideSelectAll
         - href
         - icon
         - iconDescription
@@ -116,6 +146,7 @@ collect:
         - influencerWidth
         - initialState
         - initialStep
+        - innerListRef
         - inputConfig
         - inputLabel
         - inputPlaceholder
@@ -126,16 +157,21 @@ collect:
         - invalidText
         - isFetching
         - isOpen
+        - isTableSortable
         - item
         - items
         - itemsLabel
+        - key
         - kind
         - label
         - labelText
+        - launcherButtonRef
         - legendText
         - link
         - links
+        - listRef
         - loading
+        - loadMoreThreshold
         - maxVisible
         - measurementOffset
         - media
@@ -159,6 +195,7 @@ collect:
         - noSelectionTitle
         - noTrailingSlash
         - onActiveCellChange
+        - onAllRowSelect
         - onApply
         - onCancel
         - onChange
@@ -167,6 +204,7 @@ collect:
         - onClickValue
         - onClose
         - onCloseButtonText
+        - onColResizeEnd
         - onContextMenu
         - onContextMenuLabel
         - onContextMenuValue
@@ -178,14 +216,18 @@ collect:
         - onRemove
         - onRequestClose
         - onRequestSubmit
+        - onRowClick
         - onScroll
         - onSecondaryButtonClick
+        - onSelectAllRows
         - onSelectColumn
         - onSelectionAreaChange
         - onShowAllClick
+        - onSort
         - onSubmit
         - onSubmitButtonText
         - onToggle
+        - onVirtualScroll
         - onWidthChange
         - open
         - originalColumnDefinitions
@@ -213,11 +255,15 @@ collect:
         - primaryButtonPlacement
         - primaryButtonText
         - productive
+        - radio
         - reactTableFiltersState
         - renderIcon
         - resetToDefaultLabel
+        - resizerAriaLabel
         - rightAlign
+        - row
         - rows
+        - rowSize
         - score
         - scoreThresholds
         - scrollBarSize
@@ -232,6 +278,7 @@ collect:
         - secondaryLabel
         - selectAllAriaLabel
         - selectAllLabel
+        - selectAllToggle
         - selected
         - selectedOption
         - selectionAreas
@@ -243,15 +290,19 @@ collect:
         - setColumnsObject
         - setCurrentMatcher
         - setDisplayMetaPanel
+        - setGlobalFilter
         - setHeaderCellHoldActive
         - setIsTearsheetOpen
         - setLabelTitle
+        - setMouseOverRowIndex
         - setMultiSelection
         - setPopoverOpen
         - setSelectionAreaData
         - setSelectionAreas
         - showAllTagsLabel
         - showCloseButton
+        - showConditionPreviewHandler
+        - showConditionSubGroupPreviewHandler
         - showToolTip
         - sideNavAriaLabel
         - size
@@ -260,33 +311,47 @@ collect:
         - small
         - sortByLabel
         - startConditionLabel
+        - state
         - status
         - style
         - submitButtonText
         - subtitle
         - tabIndex
+        - tableHeight
         - tableId
         - tagline
         - tags
         - theme
         - title
         - titleSize
+        - toolbarBatchActions
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
+        - translateWithIdBatchActions
         - truncate
         - truncateValue
         - type
         - updateMethod
+        - useDenseHeader
         - useDragOverlay
         - value
         - valueTitle
+        - variableRowHeight
         - variant
+        - verticalAlign
         - verticalPosition
         - viewAllLabel
         - viewLessLabel
+        - virtualHeight
         - visibleColumns
+        - withExpandedRows
+        - withInlineEdit
         - withLeftGutter
+        - withMouseHover
+        - withNestedRows
+        - withStickyColumn
+        - withVirtualScroll
         - wrapperStyle
         # AboutModal
         - additionalInfo
@@ -446,13 +511,25 @@ collect:
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
+        # ConditionBuilderAdd
+        - buttonLabel
+        - enableSubGroup
         # ConditionBuilderButton
         - hideLabel
+        - onBlur
+        - onFocus
+        - onMouseEnter
+        - onMouseLeave
         - tooltipAlign
+        - wrapperProps
+        # ConditionBuilderContent
+        - getActionsState
         # ConditionBuilderItem
         - popOverClassName
         # ConditionConnector
         - operator
+        # ConditionPreview
+        - previewType
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
         - maxVisibleBreadcrumbs
@@ -537,6 +614,8 @@ collect:
         - successful
         - successMessage
         - validExtensions
+        # FeatureFlags
+        - flags
         # FilterFlyout
         - flyoutIconDescription
         - onFlyoutClose
@@ -559,8 +638,6 @@ collect:
         - overflowMenuProps
         # FilterPanelSearch
         - searchProps
-        # FilterProvider
-        - filterProps
         # FilterSummary
         - clearButtonInline
         - clearFilters
@@ -735,13 +812,9 @@ collect:
         - titleText
         - translateWithId
         # SelectAllWithToggle
-        - allPageRowsLabel
-        - allRowsLabel
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
         - isAllRowsSelected
-        - selectAllToggle
-        - withStickyColumn
         # SidePanel
         - actionToolbarButtons
         - animateTitle
@@ -795,6 +868,7 @@ collect:
         - documentationLinks
         - documentationLinksIconDescription
         - isInitiallyOpen
+        - webTerminalAriaLabel
         # React
         - key
         - ref
@@ -852,6 +926,9 @@ collect:
         - one
         - three
         - two
+        # General - emptyStateSize
+        - lg
+        - sm
         # General - illustrationPosition
         - bottom
         - left
@@ -929,6 +1006,11 @@ collect:
         # General - primaryButtonPlacement
         - bottom
         - top
+        # General - rowSize
+        - lg
+        - md
+        - sm
+        - xs
         # General - secondaryButtonKind
         - ghost
         - secondary
@@ -1015,6 +1097,10 @@ collect:
         - floating
         - stacked
         - tooltip
+        # ConditionPreview - previewType
+        - condition
+        - newGroup
+        - subGroup
         # DecoratorIcon - magnitude
         - benign
         - critical

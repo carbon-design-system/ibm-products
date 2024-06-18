@@ -32,7 +32,6 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration-notification`,
         `${blockClass}__illustration--${size}`,
       ])}
-      role="img"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

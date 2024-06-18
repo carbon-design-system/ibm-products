@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import { Hooks } from 'react-table';
@@ -30,7 +30,7 @@ const useColumnCenterAlign = (hooks: Hooks) => {
           (tableProps.column && tableProps.column.disableSortBy === true),
       })}
     >
-      {column.Cell && column.Cell(tableProps)}
+      {(column.Cell as (props: any) => ReactNode)(tableProps)}
     </div>
   );
 
@@ -40,7 +40,7 @@ const useColumnCenterAlign = (hooks: Hooks) => {
   ) => (
     <div className={`${blockClass}__center-align-header`}>
       {typeof column.Header === 'function'
-        ? column.Header(headerProp)
+        ? (column.Header as (props: any) => ReactNode)(headerProp)
         : column.Header}
     </div>
   );

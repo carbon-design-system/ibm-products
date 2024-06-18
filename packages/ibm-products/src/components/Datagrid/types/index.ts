@@ -138,8 +138,6 @@ export interface DatagridColumn<T extends object = any>
   className?: string;
   disableSortBy?: boolean;
   centerAlignedColumn?: boolean;
-  Cell?: (props: any) => ReactNode;
-  Header?: (props: any) => ReactNode | any;
 }
 
 export interface DataGridCell<T extends object = any>

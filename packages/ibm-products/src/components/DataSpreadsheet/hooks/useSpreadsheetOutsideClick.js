@@ -11,6 +11,7 @@ import { removeCellSelections } from '../utils/removeCellSelections';
 
 // Click outside useEffect for spreadsheet
 export const useSpreadsheetOutsideClick = ({
+  isBlurSpreadsheet,
   spreadsheetRef,
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   setActiveCellCoordinates,
@@ -33,18 +34,19 @@ export const useSpreadsheetOutsideClick = ({
       ) {
         return;
       }
+      isBlurSpreadsheet.current = true;
       setActiveCellCoordinates(null);
       setSelectionAreas([]);
       removeActiveCell();
       removeCellSelections({ spreadsheetRef });
       setContainerHasFocus(false);
-      removeCellEditor();
     };
     document.addEventListener('click', handleOutsideClick);
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
   }, [
+    isBlurSpreadsheet,
     spreadsheetRef,
     removeActiveCell,
     blockClass,

@@ -9,10 +9,12 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useInlineEdit = (hooks) => {
+const useInlineEdit = (hooks: Hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
@@ -24,7 +26,7 @@ const useInlineEdit = (hooks) => {
         tabIndex={-1}
         value={cell.value}
         cell={cell}
-        isDisabled={isDisabled}
+        disabledCell={isDisabled}
         instance={instance}
         type={type}
       />
@@ -75,8 +77,8 @@ const useInlineEdit = (hooks) => {
     ];
   };
   hooks.getCellProps.push(addInlineEdit);
-  hooks.useInstance.push((instance) => {
-    Object.assign(instance, {
+  hooks.useInstance.push((instance: TableInstance) => {
+    Object.assign(instance as DataGridState, {
       withInlineEdit: true,
     });
   });

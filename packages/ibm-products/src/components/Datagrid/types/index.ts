@@ -14,10 +14,12 @@ import {
 } from 'react';
 import {
   Cell,
+  Column,
   ColumnInstance,
   FilterValue,
   Filters,
   HeaderGroup,
+  Meta,
   Row,
   TableCommonProps,
   TableDispatch,
@@ -134,6 +136,8 @@ export interface DatagridColumn<T extends object = any>
   extends ColumnInstance<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  disableSortBy?: boolean;
+  centerAlignedColumn?: boolean;
 }
 
 export interface DataGridCell<T extends object = any>
@@ -264,8 +268,16 @@ export interface DataGridState<T extends object = any>
   onVirtualScroll?: (evt?: boolean) => void;
   fetchMoreData?: () => void;
   loadMoreThreshold?: number;
+  expandedRowIds?: object;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  column?: DatagridColumn;
+  expandedContentHeight?: number;
+  onRowExpand?: (
+    row: DatagridRow,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
+  ExpandedRowContentComponent?: JSXElementConstructor<any>;
 }
 
 // DatagridHeaderRow related types
@@ -283,3 +295,9 @@ export interface ResizeHeaderProps {
   resizerAriaLabel?: string;
   isFetching?: boolean;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type VisibleColumns<T extends object = {}> = (
+  allColumns: Array<ColumnInstance<T>>,
+  meta: Meta<T>
+) => Array<Column<T>>;

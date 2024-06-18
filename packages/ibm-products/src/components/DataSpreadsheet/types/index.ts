@@ -13,6 +13,7 @@ export interface ActiveCellCoordinates {
 }
 
 export interface PrevState {
+  cellEditorValue?: string;
   activeCellCoordinates?: ActiveCellCoordinates;
   isEditing?: boolean;
   selectionAreaData?: any[];

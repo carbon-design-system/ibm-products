@@ -7,6 +7,7 @@ import {
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         description: `The \`Datagrid\` supports inline editing when used with the \`useEditableCell\` hook (previously named \`useInlineEdit\` in v1) and columns are provided the required configuration. The four data types supported are strings, numbers, dates, and
@@ -14,7 +15,7 @@ export const DocsPage = () => (
       },
       {
         description: `Below are example column configurations for the supported inline edit data types:
-        
+
 Default/string:
         `,
         source: {

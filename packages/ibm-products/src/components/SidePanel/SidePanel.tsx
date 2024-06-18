@@ -31,7 +31,7 @@ import { SIDE_PANEL_SIZES } from './constants';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, IconButton } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
 import {
@@ -49,7 +49,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the action toolbar buttons
    */
-  actionToolbarButtons?: ButtonProps[];
+  actionToolbarButtons?: ButtonProps<any>[];
 
   /**
    * The primary actions to be shown in the side panel. Each action is
@@ -59,7 +59,7 @@ type SidePanelBaseProps = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps[];
+  actions?: ButtonProps<any>[];
 
   /**
    * Determines if the title will animate on scroll
@@ -276,7 +276,7 @@ export let SidePanel = React.forwardRef(
     const titleRef = useRef<HTMLDivElement>(null);
     const labelTextRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const previousState = usePreviousValue({ size, open });
+    const previousState = usePreviousValue({ size, open, currentStep });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
@@ -361,9 +361,14 @@ export let SidePanel = React.forwardRef(
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
 
-        if (scrollableSection) {
+        if (
+          previousState &&
+          previousState['currentStep'] !== currentStep &&
+          scrollableSection
+        ) {
           scrollableSection.scrollTop = 0;
         }
+
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header
         // height css custom property
@@ -623,12 +628,12 @@ export let SidePanel = React.forwardRef(
             if (primeFocusEl) {
               (primeFocusEl as HTMLElement)?.focus();
             }
-          } else {
+          } else if (!slideIn) {
             firstElement?.focus();
           }
         }, 0);
       }
-    }, [animationComplete, firstElement, open, selectorPrimaryFocus]);
+    }, [animationComplete, firstElement, open, selectorPrimaryFocus, slideIn]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
@@ -724,16 +729,22 @@ export let SidePanel = React.forwardRef(
           {/* slug and close */}
           <div className={`${blockClass}__slug-and-close`}>
             {normalizedSlug}
-            <Button
-              aria-label={closeIconDescription}
-              kind="ghost"
-              size={slugCloseSize}
-              renderIcon={(props) => <Close size={20} {...props} />}
-              iconDescription={closeIconDescription}
+            <IconButton
               className={`${blockClass}__close-button`}
+              label={closeIconDescription}
               onClick={onRequestClose}
+              title={closeIconDescription}
+              aria-label={closeIconDescription}
               ref={closeRef}
-            />
+              align="left"
+            >
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${blockClass}--btn__icon`}
+              />
+            </IconButton>
           </div>
           {/* subtitle */}
           {subtitle && (
@@ -838,7 +849,7 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
-              onKeyDown={keyDownListener}
+              onKeyDown={slideIn ? undefined : keyDownListener}
             >
               <>
                 {/* header */}
@@ -883,6 +894,7 @@ SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
    */
+  /**@ts-ignore */
   actionToolbarButtons: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -916,6 +928,7 @@ SidePanel.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -929,6 +942,7 @@ SidePanel.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore */
         onClick: Button.propTypes.onClick,
       })
     ),

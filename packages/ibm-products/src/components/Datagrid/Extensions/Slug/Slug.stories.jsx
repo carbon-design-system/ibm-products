@@ -34,6 +34,7 @@ export default {
     docs: {
       page: () => (
         <StoryDocsPage
+          omitCodedExample
           blocks={[
             {
               description:

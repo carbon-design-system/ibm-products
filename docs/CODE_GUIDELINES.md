@@ -139,14 +139,6 @@ unclear.
     - `.propTypes = {};` using the PropTypes to specify property types, shapes,
       and required properties, and including DocGen comments to describe the
       properties for a user.
-    - `.defaultProps = {};` providing default values for properties that need
-      them. Required props should NOT be given default values. Any property that
-      is not required but which the component needs to make an assumed value for
-      should be given a suitable default. Properties that can be left unset do
-      NOT need default values if the component simply tests for and copes with
-      the value being `undefined`. This includes any property that will be
-      passed directly to a nested component or HTML element in the JSX, because
-      React treats `undefined` as not setting the property/attribute.
 
 - Ensure all code is neatly formatted (use `yarn format` and/or a prettier
   plugin for an editor to follow the prettier rules set up in the project), and

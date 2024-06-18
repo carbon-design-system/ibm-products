@@ -56,17 +56,35 @@ export interface AddSelectProps {
 
 export const AddSelect = forwardRef(
   (
-    { items, globalFilters, ...props }: AddSelectProps,
+    {
+      globalFilters,
+      closeIconDescription = '',
+      description = '',
+      itemsLabel = '',
+      items = {
+        entries: [],
+      },
+      multi = false,
+      noResultsDescription = '',
+      noResultsTitle = '',
+      onClose = () => {},
+      onCloseButtonText = '',
+      onSubmit = () => {},
+      onSubmitButtonText = '',
+      open = false,
+      title = '',
+      ...props
+    }: AddSelectProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const useNormalizedItems = !!items.entries.find((item) => item.children);
     const normalizedItems = useNormalizedItems ? normalize(items) : null;
     const globalFilterOpts =
-      props.multi && globalFilters?.length
+      multi && globalFilters?.length
         ? getGlobalFilterValues(globalFilters, normalizedItems)
         : null;
     const defaultModifiers =
-      props.multi && items.modifiers
+      multi && items.modifiers
         ? items.entries.map((item) => {
             const modifierAttribute = items?.modifiers?.id;
             const modifier = {
@@ -90,6 +108,17 @@ export const AddSelect = forwardRef(
         useNormalizedItems={useNormalizedItems}
         globalFilterOpts={globalFilterOpts}
         defaultModifiers={defaultModifiers}
+        noResultsDescription={noResultsDescription}
+        noResultsTitle={noResultsTitle}
+        onClose={onClose}
+        onCloseButtonText={onCloseButtonText}
+        onSubmit={onSubmit}
+        onSubmitButtonText={onSubmitButtonText}
+        open={open}
+        title={title}
+        closeIconDescription={closeIconDescription}
+        description={description}
+        itemsLabel={itemsLabel}
       />
     );
   }
@@ -176,24 +205,6 @@ AddSelect.propTypes = {
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
-};
-
-AddSelect.defaultProps = {
-  closeIconDescription: '',
-  description: '',
-  itemsLabel: '',
-  items: {
-    entries: [],
-  },
-  multi: false,
-  noResultsDescription: '',
-  noResultsTitle: '',
-  onClose: () => {},
-  onCloseButtonText: '',
-  onSubmit: () => {},
-  onSubmitButtonText: '',
-  open: false,
-  title: '',
 };
 
 AddSelect.displayName = componentName;

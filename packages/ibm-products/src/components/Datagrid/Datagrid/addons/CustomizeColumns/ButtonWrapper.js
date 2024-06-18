@@ -14,7 +14,7 @@ import { pkg } from '../../../../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const ButtonWrapper = ({
-  onClick,
+  onClick = () => {},
   setIsTearsheetOpen,
   isTearsheetOpen,
   iconTooltipLabel = 'Customize columns',
@@ -37,10 +37,6 @@ const ButtonWrapper = ({
       }}
     />
   );
-};
-
-ButtonWrapper.defaultProps = {
-  onClick: () => {},
 };
 
 ButtonWrapper.propTypes = {

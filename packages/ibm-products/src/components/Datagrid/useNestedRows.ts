@@ -14,14 +14,6 @@ import { DataGridState, DatagridRow } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-type originalRowType = {
-  id?: string | number;
-};
-
-interface RowType extends DatagridRow {
-  original: originalRowType;
-}
-
 const useNestedRows = (hooks: Hooks) => {
   useNestedRowExpander(hooks);
   const useInstance = (instance: TableInstance) => {
@@ -33,10 +25,10 @@ const useNestedRows = (hooks: Hooks) => {
       if (expandedRowIds) {
         Object.keys(expandedRowIds).forEach((key) => {
           const row = rows.filter(
-            (r) =>
+            (r: any) =>
               r.id.toString() === key.toString() ||
               r.original?.id?.toString() === key.toString()
-          ) as RowType[];
+          ) as DatagridRow[];
 
           if (
             (row.length && key.toString() === row[0].id.toString()) ||

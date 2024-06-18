@@ -316,7 +316,9 @@ const commonTests = (Ts, name, props, testActions) => {
       await act(() => userEvent.click(closeButton));
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
 
-      rerender(<DummyComponent open={false} />);
+      await act(() => {
+        rerender(<DummyComponent open={false} />);
+      });
 
       await new Promise((resolve) => setTimeout(resolve, 0));
       expect(launchButtonEl).toHaveFocus();

@@ -126,7 +126,8 @@ DecoratorSingleButton.propTypes = {
   small: PropTypes.bool,
 
   /**
-   * Determines the theme of the component.
+   * Override the default theme of the component.
+   * Useful if you want "invert" the component's theme.
    */
   theme: PropTypes.oneOf(['light', 'dark']),
 

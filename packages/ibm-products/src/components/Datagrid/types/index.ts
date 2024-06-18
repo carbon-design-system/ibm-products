@@ -7,6 +7,8 @@ import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/Numbe
 
 import React, {
   CSSProperties,
+  ComponentType,
+  FunctionComponent,
   JSXElementConstructor,
   MutableRefObject,
   ReactNode,
@@ -183,7 +185,7 @@ export interface DataGridTableInstance<T extends object = any>
 export interface RowAction {
   id?: string;
   itemText?: string;
-  icon?: JSXElementConstructor<any>;
+  icon?: ComponentType | FunctionComponent;
   align?: React.ComponentProps<typeof IconButton>['align'];
   shouldHideMenuItem?: (...args) => void;
   shouldDisableMenuItem?: (...args) => void;

@@ -14,6 +14,8 @@ import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 export const useSpreadsheetMouseUp = ({
   currentMatcher,
   setSelectionAreas,
+  selectedHeaderReorderActive,
+  setSelectedHeaderReorderActive,
   setClickAndHoldActive,
   setValidStartingPoint,
   validStartingPoint,
@@ -30,9 +32,19 @@ export const useSpreadsheetMouseUp = ({
 }) => {
   useEffect(() => {
     const handleMouseUp = (event) => {
+      let isHoldingColumn = false;
+      if (
+        selectionAreas?.[0]?.header &&
+        selectionAreas[0].header.type === 'column'
+      ) {
+        isHoldingColumn = true;
+      }
       // Remove the cloned selection area on mouse up
-      if (!validStartingPoint) {
+      if (!validStartingPoint && isHoldingColumn) {
         setHeaderCellHoldActive(false);
+        const selectionAreaElement = ref.current.querySelector(
+          `.${blockClass}__selection-area--element`
+        );
         const selectionAreaCloneElement = ref.current.querySelector(
           `.${blockClass}__selection-area--element-cloned`
         );
@@ -107,6 +119,7 @@ export const useSpreadsheetMouseUp = ({
                 ...newIndexArray
               );
             }
+            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
             return selectionAreaClone;
           });
           // Only reorder columns if the new index is _not_ part of the
@@ -171,11 +184,15 @@ export const useSpreadsheetMouseUp = ({
           );
           indicatorLineElement?.remove();
           selectionAreaCloneElement?.remove();
+          selectionAreaElement?.classList?.remove(
+            `${blockClass}__selection-area--element`
+          );
+          setSelectedHeaderReorderActive(false);
         }
       }
       // Mouse up was on a spreadsheet body cell which is a valid
       // start/end point for creating a selection area
-      if (validStartingPoint) {
+      if (validStartingPoint || event.type === 'mouseup') {
         setClickAndHoldActive(false);
         setValidStartingPoint(false);
         const cellButton = event.target.closest(`.${blockClass}__body--td`);
@@ -211,6 +228,8 @@ export const useSpreadsheetMouseUp = ({
     setClickAndHoldActive,
     setValidStartingPoint,
     validStartingPoint,
+    selectedHeaderReorderActive,
+    setSelectedHeaderReorderActive,
     ref,
     setHeaderCellHoldActive,
     setColumnOrder,

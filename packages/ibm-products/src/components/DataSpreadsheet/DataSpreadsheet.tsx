@@ -937,9 +937,11 @@ export let DataSpreadsheet = React.forwardRef(
               updateData,
             })}
             onChange={(event) => {
-              setCellEditorValue(event.target.value);
-              if (cellEditorRulerRef?.current) {
-                cellEditorRulerRef.current.textContent = event.target.value;
+              if (previousState.isEditing) {
+                setCellEditorValue(event.target.value);
+                if (cellEditorRulerRef?.current) {
+                  cellEditorRulerRef.current.textContent = event.target.value;
+                }
               }
             }}
             ref={cellEditorRef as LegacyRef<HTMLTextAreaElement>}

@@ -19,7 +19,7 @@ import {
   useOf,
   Markdown,
 } from '@storybook/blocks';
-import { paramCase } from 'change-case';
+import { kebabCase } from 'change-case';
 
 import {
   codeSandboxHref,
@@ -37,7 +37,7 @@ export const CustomBlocks = ({ blocks }) => {
     }
     return (
       <div key={`block-index--${index}`}>
-        {block.title && <h3 id={paramCase(block.title)}>{block.title}</h3>}
+        {block.title && <h3 id={kebabCase(block.title)}>{block.title}</h3>}
         {block.subTitle && <h4>{block.subTitle}</h4>}
         {block.image}
         {block.description && typeof block.description === 'string' ? (
@@ -147,13 +147,13 @@ export const StoryDocsPage = ({
         {['Overview', 'Coded examples', 'Example usage', 'Component API'].map(
           (item) => (
             <li key={item}>
-              <AnchorMdx href={`#${paramCase(item)}`}>{item}</AnchorMdx>
+              <AnchorMdx href={`#${kebabCase(item)}`}>{item}</AnchorMdx>
               {processedBlocks && item === 'Example usage' ? (
                 <ul>
                   {processedBlocks.map((block) => {
                     return block?.title ? (
                       <li key={block.title}>
-                        <AnchorMdx href={`#${paramCase(block.title)}`}>
+                        <AnchorMdx href={`#${kebabCase(block.title)}`}>
                           {block.title}
                         </AnchorMdx>
                       </li>

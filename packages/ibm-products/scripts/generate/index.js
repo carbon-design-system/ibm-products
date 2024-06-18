@@ -9,7 +9,7 @@ const fs = require('fs');
 const { green } = require('chalk');
 const { outputFileSync, readFileSync } = require('fs-extra');
 const { sync } = require('glob');
-const { camelCase, paramCase, pascalCase, headerCase } = require('change-case');
+const { camelCase, kebabCase, pascalCase, headerCase } = require('change-case');
 const { join, relative, resolve } = require('path');
 
 // https://www.npmjs.com/package/yargs#usage
@@ -22,7 +22,7 @@ const substitutions = {
   DISPLAY_NAME: pascalCase(name),
   FULL_YEAR: new Date().getFullYear(),
   CAMEL_NAME: camelCase(name),
-  STYLE_NAME: paramCase(name),
+  STYLE_NAME: kebabCase(name),
   TITLE_NAME: headerCase(name),
 };
 

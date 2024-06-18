@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.43.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.43.0...@carbon/ibm-products@2.43.1) (2024-06-18)
+
+
+### Bug Fixes
+
+* add validator when leaving cell ([#5483](https://github.com/carbon-design-system/ibm-products/issues/5483)) ([59b7621](https://github.com/carbon-design-system/ibm-products/commit/59b76216c649caf03f803118c9957d1e3a844f35))
+* import feature flags to prevent them from being tree shaked away ([#5516](https://github.com/carbon-design-system/ibm-products/issues/5516)) ([578f1cf](https://github.com/carbon-design-system/ibm-products/commit/578f1cfbc3b7815edb102dc1fd1f2740b32ce0d6))
+* **OptionTile:** animation flicker when collapsing options tile ([#5458](https://github.com/carbon-design-system/ibm-products/issues/5458)) ([0be8378](https://github.com/carbon-design-system/ibm-products/commit/0be8378ceeec3aa2c9af5495dbb8f9fa636bc237))
+
+
+
+
+
 # [2.43.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.42.0...@carbon/ibm-products@2.43.0) (2024-06-13)
 
 

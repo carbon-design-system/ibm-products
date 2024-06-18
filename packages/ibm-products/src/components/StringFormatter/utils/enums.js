@@ -3,6 +3,8 @@ export const StringFormatterAlignment = {
   TOP_LEFT: 'top-left',
   TOP_RIGHT: 'top-right',
   BOTTOM: 'bottom',
+  BOTTOM_START: 'bottom-start',
+  BOTTOM_END: 'bottom-end',
   BOTTOM_LEFT: 'bottom-left',
   BOTTOM_RIGHT: 'bottom-right',
   LEFT: 'left',

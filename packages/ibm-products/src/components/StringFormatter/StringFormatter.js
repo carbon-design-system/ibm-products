@@ -21,7 +21,7 @@ const componentName = 'StringFormatter';
 
 const defaults = {
   lines: 1,
-  tooltipDirection: StringFormatterAlignment.BOTTOM_LEFT,
+  tooltipDirection: StringFormatterAlignment.BOTTOM_START,
   truncate: false,
   width: null,
 };

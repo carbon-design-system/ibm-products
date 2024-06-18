@@ -147,9 +147,13 @@ export const InlineEditCell = ({
       previousState?.activeCellId === cellId &&
       activeCellId !== cellId
     ) {
-      setInitialValue(cellValue);
+      const { validator } = config || {};
+      const isInvalid = validator?.(cellValue);
+      if (!isInvalid) {
+        setInitialValue(cellValue);
+      }
     }
-  }, [previousState, cellId, cellValue, activeCellId]);
+  }, [previousState, cellId, cellValue, activeCellId, config]);
 
   const handleInlineCellClick = () => {
     if (!inEditMode) {

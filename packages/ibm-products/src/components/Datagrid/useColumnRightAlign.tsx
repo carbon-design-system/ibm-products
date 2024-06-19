@@ -13,7 +13,7 @@ import {
   DataGridState,
   DatagridColumn,
   NodeFuncType,
-  RightAlignColumnsType,
+  VisibleColumns,
 } from './types';
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -56,7 +56,7 @@ const useColumnRightAlign = (hooks: Hooks) => {
     }));
     return [...columnsWithDefaultCells];
   };
-  hooks.visibleColumns.push(rightAlignedColumns as RightAlignColumnsType);
+  hooks.visibleColumns.push(rightAlignedColumns as VisibleColumns);
 };
 
 export default useColumnRightAlign;

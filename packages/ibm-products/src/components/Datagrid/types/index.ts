@@ -301,7 +301,7 @@ export interface ResizeHeaderProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type RightAlignColumnsType<T extends object = {}> = (
+export type VisibleColumns<T extends object = {}> = (
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>
 ) => Array<Column<T>>;

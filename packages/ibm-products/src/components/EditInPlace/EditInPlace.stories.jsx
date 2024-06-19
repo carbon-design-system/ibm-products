@@ -98,7 +98,6 @@ const Template = ({ containerWidth, ...args }) => {
   };
 
   const onSave = () => {
-    console.log('saved!', value);
     actionSave(value);
   };
 
@@ -131,7 +130,6 @@ const TemplateBlur = ({ containerWidth, ...args }) => {
   };
 
   const onSave = () => {
-    console.log('saved!', value);
     actionSave(value);
   };
 

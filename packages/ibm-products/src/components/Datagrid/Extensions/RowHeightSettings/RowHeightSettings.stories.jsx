@@ -16,6 +16,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: 'IBM Products/Components/Datagrid/RowHeightSettings',
@@ -23,6 +24,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    docs: {
+      page: () => <StoryDocsPage omitCodedExample />,
+    },
     layout: 'fullscreen',
     // docs: { page: mdx },
   },

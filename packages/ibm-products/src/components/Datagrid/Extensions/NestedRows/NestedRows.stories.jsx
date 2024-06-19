@@ -30,6 +30,7 @@ export default {
     docs: {
       page: () => (
         <StoryDocsPage
+          omitCodedExample
           blocks={[
             {
               title: 'Nested rows',
@@ -57,7 +58,7 @@ return <Datagrid datagridState={datagridState} />;
         />
       ),
     },
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     featureFlags: {
@@ -200,6 +201,7 @@ const SingleLevelNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
@@ -239,6 +241,7 @@ const NestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
@@ -276,6 +279,7 @@ const SelectableNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows,
     useSelectRows

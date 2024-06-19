@@ -30,20 +30,53 @@ export const moveColumnIndicatorLine = ({
   const selectionAreaOrigin = ref.current.querySelector(
     `[data-matcher-id="${matcherId}"]`
   );
+
+  const listContainer = ref.current.querySelector(
+    `.${blockClass}__list--container`
+  );
+
+  const scrollSpeed = 10; // Scrolling speed
+  const leftEdgeThreshold = 120; // Distance from the left edge to start scrolling
+  const rightEdgeThreshold = 100; // Distance from the right edge to start scrolling
+
+  const { clientX } = event;
+  const { left, right } = listContainer.getBoundingClientRect();
+
+  // Is near left side of viewport
+  if (clientX < leftEdgeThreshold) {
+    window.scrollBy(-scrollSpeed, 0);
+  }
+
+  // Is near right side of viewport
+  if (clientX > window.innerWidth - rightEdgeThreshold) {
+    window.scrollBy(scrollSpeed, 0);
+  }
+
+  // Is near left edge of table
+  if (clientX > left && clientX < left + leftEdgeThreshold) {
+    listContainer.scrollBy(-scrollSpeed, 0);
+  }
+
+  // Is near right edge of table
+  if (clientX < right && clientX > right - rightEdgeThreshold) {
+    listContainer.scrollBy(scrollSpeed, 0);
+  }
+
   if (Number(newColumnIndex) > Number(originalColumnIndex)) {
-    indicatorLineElement.style.left = px(
+    const leftPosition =
       closestCellCoords.left -
-        spreadsheetCoords.left +
-        closestCell.offsetWidth -
-        2 +
-        leftScrollAmount
-    );
+      spreadsheetCoords.left +
+      closestCell.offsetWidth -
+      2 +
+      leftScrollAmount;
+    indicatorLineElement.style.left = px(leftPosition);
   }
   if (Number(newColumnIndex) < Number(originalColumnIndex)) {
-    indicatorLineElement.style.left = px(
-      closestCellCoords.left - spreadsheetCoords.left + leftScrollAmount
-    );
+    const leftPosition =
+      closestCellCoords.left - spreadsheetCoords.left + leftScrollAmount;
+    indicatorLineElement.style.left = px(leftPosition);
   }
+
   if (Number(newColumnIndex) === Number(originalColumnIndex)) {
     indicatorLineElement.style.left = selectionAreaOrigin.style.left;
   }

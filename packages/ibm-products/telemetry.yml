@@ -85,6 +85,9 @@ collect:
         - errorCodeLabel
         - errorMessage
         - expandButtonLabel
+        - expandedContentHeight
+        - ExpandedRowContentComponent
+        - expandedRowIds
         - fetchMoreData
         - fieldsetLegendText
         - filterByLabel
@@ -217,6 +220,7 @@ collect:
         - onRequestClose
         - onRequestSubmit
         - onRowClick
+        - onRowExpand
         - onScroll
         - onSecondaryButtonClick
         - onSelectAllRows

@@ -24,7 +24,6 @@ import {
   TableCommonProps,
   TableDispatch,
   TableInstance,
-  TableRowProps,
   TableState,
   TableToggleAllRowsSelectedProps,
   UseExpandedRowProps,
@@ -314,7 +313,6 @@ export interface ResizeHeaderProps {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type VisibleColumns<T extends object = {}> = (
-  props: Partial<TableRowProps>,
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>
 ) => Array<Column<T>>;

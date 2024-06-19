@@ -139,6 +139,8 @@ export interface DatagridColumn<T extends object = any>
   sticky?: 'left' | 'right';
   className?: string;
   rightAlignedColumn?: boolean;
+  disableSortBy?: boolean;
+  centerAlignedColumn?: boolean;
 }
 
 export interface DataGridCell<T extends object = any>

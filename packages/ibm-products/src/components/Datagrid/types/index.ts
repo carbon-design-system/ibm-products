@@ -36,6 +36,7 @@ import {
   UseRowSelectRowProps,
   UseRowSelectState,
   UseSortByColumnProps,
+  UseSortByOptions,
   UseTableHooks,
 } from 'react-table';
 import { CarbonIconType } from '@carbon/react/icons';
@@ -135,9 +136,11 @@ export interface DatagridTableHooks<T extends object = any>
   extends UseTableHooks<T> {}
 
 export interface DatagridColumn<T extends object = any>
-  extends ColumnInstance<T> {
+  extends ColumnInstance<T>,
+    UseSortByOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  rightAlignedColumn?: boolean;
   disableSortBy?: boolean;
   centerAlignedColumn?: boolean;
 }
@@ -156,6 +159,7 @@ export interface DatagridRow<T extends object = any>
   RowExpansionRenderer?: (state?: DataGridState) => void;
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
+  hasExpanded?: boolean;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -314,3 +318,5 @@ export type VisibleColumns<T extends object = {}> = (
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>
 ) => Array<Column<T>>;
+
+export type NodeFuncType = (props) => ReactNode;

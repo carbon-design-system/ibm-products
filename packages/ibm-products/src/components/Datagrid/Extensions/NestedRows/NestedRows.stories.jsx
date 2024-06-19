@@ -30,6 +30,7 @@ export default {
     docs: {
       page: () => (
         <StoryDocsPage
+          omitCodedExample
           blocks={[
             {
               title: 'Nested rows',

@@ -3,6 +3,7 @@ import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         title: 'Actions column',

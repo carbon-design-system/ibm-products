@@ -17,6 +17,24 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const useNestedRows = (hooks: Hooks) => {
   useNestedRowExpander(hooks);
   const useInstance = (instance: TableInstance) => {
+    useEffect(() => {
+      const { rows } = instance as DataGridState;
+      const defaultExpandedRows = rows.filter(
+        (row) => row?.original?.defaultExpanded
+      );
+      if (defaultExpandedRows?.length) {
+        defaultExpandedRows.map((defaultExpandedRow) => {
+          if (
+            !defaultExpandedRow?.isExpanded &&
+            !defaultExpandedRow?.hasExpanded
+          ) {
+            defaultExpandedRow?.toggleRowExpanded?.();
+            defaultExpandedRow.hasExpanded = true;
+            return;
+          }
+        });
+      }
+    }, [instance, instance.rows]);
     // This useEffect will expand rows if they exist in the initialState obj
     useEffect(() => {
       const { rows, initialState } = instance;

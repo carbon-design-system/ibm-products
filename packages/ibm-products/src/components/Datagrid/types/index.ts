@@ -14,10 +14,12 @@ import {
 } from 'react';
 import {
   Cell,
+  Column,
   ColumnInstance,
   FilterValue,
   Filters,
   HeaderGroup,
+  Meta,
   Row,
   TableCommonProps,
   TableDispatch,
@@ -32,6 +34,7 @@ import {
   UseRowSelectRowProps,
   UseRowSelectState,
   UseSortByColumnProps,
+  UseSortByOptions,
   UseTableHooks,
 } from 'react-table';
 import { CarbonIconType } from '@carbon/react/icons';
@@ -131,9 +134,13 @@ export interface DatagridTableHooks<T extends object = any>
   extends UseTableHooks<T> {}
 
 export interface DatagridColumn<T extends object = any>
-  extends ColumnInstance<T> {
+  extends ColumnInstance<T>,
+    UseSortByOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  rightAlignedColumn?: boolean;
+  disableSortBy?: boolean;
+  centerAlignedColumn?: boolean;
 }
 
 export interface DataGridCell<T extends object = any>
@@ -150,6 +157,7 @@ export interface DatagridRow<T extends object = any>
   RowExpansionRenderer?: (state?: DataGridState) => void;
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
+  hasExpanded?: boolean;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -267,6 +275,13 @@ export interface DataGridState<T extends object = any>
   expandedRowIds?: object;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  column?: DatagridColumn;
+  expandedContentHeight?: number;
+  onRowExpand?: (
+    row: DatagridRow,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
+  ExpandedRowContentComponent?: JSXElementConstructor<any>;
 }
 
 // DatagridHeaderRow related types
@@ -284,3 +299,11 @@ export interface ResizeHeaderProps {
   resizerAriaLabel?: string;
   isFetching?: boolean;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type VisibleColumns<T extends object = {}> = (
+  allColumns: Array<ColumnInstance<T>>,
+  meta: Meta<T>
+) => Array<Column<T>>;
+
+export type NodeFuncType = (props) => ReactNode;

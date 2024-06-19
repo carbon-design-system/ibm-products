@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.43.0",
+  "version": "2.43.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,9 +18,7 @@
     "**/global/js/utils/props-helper.js",
     "**/*.css",
     "**/*.scss",
-    "es/feature-flags.js",
-    "lib/feature-flags.js",
-    "src/feature-flags.js"
+    "**/feature-flags.js"
   ],
   "files": [
     "css",
@@ -90,7 +88,7 @@
     "rimraf": "^5.0.5",
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^3.0.0",
-    "sass": "^1.70.0",
+    "sass": "^1.77.2",
     "typescript-config-carbon": "^0.2.1",
     "yargs": "^17.7.2"
   },

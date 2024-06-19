@@ -107,7 +107,8 @@
   "resolutions": {
     "cheerio": "1.0.0-rc.10",
     "braces": "^3.0.3",
-    "micromatch": "4.0.6"
+    "micromatch": "4.0.6",
+    "ws": "^8.17.1"
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",

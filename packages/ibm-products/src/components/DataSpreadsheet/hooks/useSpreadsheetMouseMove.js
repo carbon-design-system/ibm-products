@@ -51,13 +51,15 @@ export const useSpreadsheetMouseMove = ({
         xPositionRelativeToSpreadsheet - offsetXValue,
         defaultColumn?.rowHeaderWidth
       );
-      // Moves the position of the cloned selection area to follow mouse, and
-      // add the amount horizontally scrolled
-      clonedSelectionElement.style.left = px(
+      const leftPosition =
         totalSpreadsheetScrollingWidth - clonedSelectionWidth >= clonePlacement
           ? clonePlacement + scrollAmount
-          : totalSpreadsheetScrollingWidth - clonedSelectionWidth
-      );
+          : totalSpreadsheetScrollingWidth - clonedSelectionWidth;
+      // Moves the position of the cloned selection area to follow mouse, and
+      // add the amount horizontally scrolled
+      if (leftPosition < spreadsheetCoords.right - 40) {
+        clonedSelectionElement.style.left = px(leftPosition);
+      }
     };
     if (headerCellHoldActive) {
       ref.current.addEventListener('mousemove', handleMouseMove);

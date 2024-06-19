@@ -9,7 +9,7 @@ import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
 
-export const useFocus = (modalRef) => {
+export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const carbonPrefix = usePrefix();
   const tearsheetBaseClass = `${pkg.prefix}--tearsheet`;
   // Querying focusable element in the modal
@@ -40,13 +40,17 @@ export const useFocus = (modalRef) => {
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;
+    const specifiedElement = selectorPrimaryFocus
+      ? modalEl?.querySelector(selectorPrimaryFocus)
+      : null;
 
     return {
       first,
       last,
       all,
+      specifiedElement,
     };
-  }, [modalEl, query]);
+  }, [modalEl, query, selectorPrimaryFocus]);
 
   useEffect(() => {
     getFocusable();
@@ -83,6 +87,7 @@ export const useFocus = (modalRef) => {
     firstElement: getFocusable().first,
     lastElement: getFocusable().last,
     allElements: getFocusable().all,
+    specifiedElement: getFocusable().specified,
     keyDownListener: handleKeyDown,
     getFocusable: getFocusable,
   };

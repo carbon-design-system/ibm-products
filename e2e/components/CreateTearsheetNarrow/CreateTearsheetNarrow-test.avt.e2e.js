@@ -9,6 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('CreateTearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -21,6 +22,10 @@ test.describe('CreateTearsheetNarrow @avt', () => {
     });
 
     await page.getByText('Open CreateTearsheetNarrow').click();
+
+    await page
+      .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
+      .screenshot({ animations: 'disabled' });
 
     await expect(page).toHaveNoACViolations(
       'CreateTearsheetNarrow @avt-default-state'

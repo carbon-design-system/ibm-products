@@ -1,7 +1,7 @@
-export const focusThisField = (e) => {
+export const focusThisField = (evt) => {
   setTimeout(() => {
-    e.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
-    e.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
+    evt.target.closest('[role="gridcell"]')?.querySelector('button')?.click();
+    evt.target.closest('[role="gridcell"]')?.querySelector('button')?.focus();
   }, 0);
 };
 export const focusThisItem = (currentElement) => {
@@ -50,4 +50,12 @@ export const traverseReverse = (
   ) {
     focusThisItem(allElements[allElements.length - 1]);
   }
+};
+
+export const checkForHoldingKey = (evt, key) => {
+  // possible key inputs: altKey,ctrlKey,metaKey,shiftKey
+  if (key === 'cmd') {
+    return evt.metaKey || evt.ctrlKey;
+  }
+  return evt[key];
 };

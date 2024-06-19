@@ -139,7 +139,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-novice-to-pro-checklist--checklist
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-onboarding-checklist--checklist
     tags:
       - content-block
   combo-button:

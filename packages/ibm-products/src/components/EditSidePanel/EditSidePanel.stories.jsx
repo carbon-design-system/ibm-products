@@ -61,7 +61,7 @@ const defaultStoryProps = {
 const renderUIShellHeader = () => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="IBM Cloud Pak">
+      <Header>
         <HeaderName href="/" prefix="IBM">
           Cloud Pak
         </HeaderName>
@@ -189,16 +189,16 @@ const Template = ({ slug, ...args }) => {
           />
           <Dropdown
             id="create-side-panel-dropdown-options-a"
-            aria-label="Dropdown"
             items={items}
             initialSelectedItem="Day(s)"
             label="Options"
+            titleText="Options"
             className={`${prefix}form-item`}
           />
         </div>
         <NumberInput
           iconDescription="Choose a number"
-          id="3"
+          id="5"
           className={`${prefix}form-item`}
           label="Minimum in-sync replicas"
           min={0}

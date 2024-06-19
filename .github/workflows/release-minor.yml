@@ -1,0 +1,35 @@
+# Publish minor releases, both rc (release candidates) and full releases
+name: Release - minor
+run-name:
+  ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        required: true
+        description: 'Specify the type of release'
+        type: choice
+        default: first minor rc
+        # Full minor release (ie. v2.0.0 -> v2.1.0)
+        # First minor RC (ie. v2.0.0 -> v2.1.0-rc.0)
+        # Subsequent RC (ie v2.1.0-rc.0 -> v2.1.0-rc.1)
+        options:
+          - full minor release
+          - first minor rc
+          - subsequent rc
+      dry-run:
+        # Check dry run to test run lerna and confirm package version bumps
+        required: true
+        description: 'Run dry run?'
+        type: boolean
+        default: true
+
+jobs:
+  Release:
+    # trigger the input data to the `release-base` workflow and trigger it
+    uses: ./.github/workflows/release-base.yml
+    with:
+      type: ${{ inputs.type }}
+      dry-run: ${{ inputs.dry-run }}
+    secrets: inherit

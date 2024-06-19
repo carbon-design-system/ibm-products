@@ -29,11 +29,12 @@ import { checkForHoldingKey } from './utils/checkForHoldingKey';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import {
   ActiveCellCoordinates,
-  Column,
   ItemType,
   PrevState,
   Size,
+  SpreadsheetColumn,
 } from './types';
+import { Column } from 'react-table';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -61,7 +62,7 @@ interface DataSpreadsheetHeaderProps {
   /**
    * Default spreadsheet sizing values
    */
-  defaultColumn?: Column;
+  defaultColumn?: SpreadsheetColumn;
 
   /**
    * Whether or not a click/hold is active on a header cell
@@ -101,6 +102,16 @@ interface DataSpreadsheetHeaderProps {
   >;
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive?: boolean;
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive?: Dispatch<SetStateAction<boolean>>;
+
+  /**
    * Setter fn for currentMatcher value
    */
   setCurrentMatcher?: Dispatch<SetStateAction<string>>;
@@ -134,7 +145,7 @@ interface DataSpreadsheetHeaderProps {
   /**
    * Array of visible columns provided by react-table useTable hook
    */
-  visibleColumns?: [];
+  visibleColumns?: Column<object>[];
 }
 
 export const DataSpreadsheetHeader = forwardRef(
@@ -148,6 +159,8 @@ export const DataSpreadsheetHeader = forwardRef(
       headerGroups,
       scrollBarSize,
       selectionAreas,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       setActiveCellCoordinates,
       setCurrentMatcher,
       setSelectionAreas,
@@ -165,8 +178,6 @@ export const DataSpreadsheetHeader = forwardRef(
     const [scrollBarSizeValue, setScrollBarSizeValue] = useState<
       number | undefined
     >(0);
-    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
-      useState(false);
     const previousState: PrevState = usePreviousValue({ cellSize }) || {};
     useEffect(() => {
       if (previousState?.cellSize !== cellSize) {
@@ -178,6 +189,12 @@ export const DataSpreadsheetHeader = forwardRef(
           scrollContainer?.clientHeight &&
           scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
         const scrollBarValue = hasScrollBar ? 0 : scrollBarSize;
+
+        // fix for a11y violation element_scrollable_tabbable
+        if (!scrollContainer?.getAttribute('tabIndex')) {
+          scrollContainer?.setAttribute('tabIndex', '0');
+        }
+
         setScrollBarSizeValue(scrollBarValue);
       }
     }, [cellSize, ref, scrollBarSize, previousState?.cellSize]);
@@ -223,7 +240,6 @@ export const DataSpreadsheetHeader = forwardRef(
           // Remove columns, need to call handleHeaderCellSelection
           return;
         }
-        setSelectedHeaderReorderActive(true);
         const selectionAreaToClone = selectionAreas?.filter(
           (item) => item?.matcher === currentMatcher
         );
@@ -232,6 +248,15 @@ export const DataSpreadsheetHeader = forwardRef(
         ).current.querySelector(
           `[data-matcher-id="${selectionAreaToClone?.[0]?.matcher}"]`
         );
+        if (selectionAreaElement) {
+          selectionAreaElement.classList.add(
+            `${blockClass}__selection-area--element`
+          );
+        }
+        if (typeof setSelectedHeaderReorderActive === 'function') {
+          setSelectedHeaderReorderActive(true);
+        }
+
         const clickXPosition = event.clientX;
         const headerButtonCoords = event.target.getBoundingClientRect();
         const headerIndex = event.target.getAttribute('data-column-index');
@@ -361,7 +386,8 @@ export const DataSpreadsheetHeader = forwardRef(
                           : undefined
                       }
                       onMouseUp={
-                        selectedHeader
+                        selectedHeader &&
+                        typeof setSelectedHeaderReorderActive === 'function'
                           ? () => setSelectedHeaderReorderActive(false)
                           : undefined
                       }
@@ -468,6 +494,11 @@ DataSpreadsheetHeader.propTypes = {
   selectAllAriaLabel: PropTypes.string.isRequired,
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive: PropTypes.bool,
+
+  /**
    * All of the cell selection area items
    */
   /**@ts-ignore */
@@ -487,6 +518,11 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for header cell hold active value
    */
   setHeaderCellHoldActive: PropTypes.func,
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

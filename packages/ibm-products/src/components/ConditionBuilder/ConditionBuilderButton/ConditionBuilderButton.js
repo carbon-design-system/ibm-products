@@ -54,7 +54,7 @@ export const ConditionBuilderButton = ({
     <Tooltip
       label={label}
       align={tooltipAlign}
-      className={`${wrapperClassName ?? ''}`}
+      className={`${wrapperClassName}`}
       {...wrapperProps}
     >
       {Button()}

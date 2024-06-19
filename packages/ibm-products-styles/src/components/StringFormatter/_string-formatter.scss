@@ -79,7 +79,7 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 .#{$block-class}
   .#{$popover-block-class}--top-right
   .#{$popover-block-class}-caret {
-  /* stylelint-disable-next-line declaration-no-important */
+  /* stylelint-disable-next-line */
   inset-block-start: -1px !important;
 }
 
@@ -92,6 +92,6 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 .#{$block-class}
   .#{$popover-block-class}--bottom-right
   .#{$popover-block-class}-caret {
-  /* stylelint-disable-next-line declaration-no-important */
+  /* stylelint-disable-next-line */
   inset-block-end: -1px !important;
 }

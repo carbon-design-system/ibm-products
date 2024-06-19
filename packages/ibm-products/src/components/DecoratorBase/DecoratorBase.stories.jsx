@@ -57,6 +57,18 @@ export default {
       mapping: Object.values(scoreOptions),
       options: Object.values(scoreOptions).map((_k, i) => i),
     },
+    theme: {
+      control: {
+        type: 'select',
+        labels: ['use default', 'light', 'dark'],
+      },
+      mapping: {
+        0: null,
+        1: 'light',
+        2: 'dark',
+      },
+      options: [0, 1, 2],
+    },
     truncateValue: {
       control: {
         type: 'select',
@@ -77,6 +89,7 @@ export default {
     },
   },
   args: {
+    theme: 0,
     truncateValue: 0,
   },
 };
@@ -124,7 +137,6 @@ Default.args = {
     }`;
   },
   small: false,
-  theme: 'light',
   value: '192.168.0.50',
   valueTitle: '',
 };

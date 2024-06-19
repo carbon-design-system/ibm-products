@@ -24,6 +24,8 @@ import {
   TableCommonProps,
   TableDispatch,
   TableInstance,
+  TableRowProps,
+  TableState,
   TableToggleAllRowsSelectedProps,
   UseExpandedRowProps,
   UseFiltersInstanceProps,
@@ -186,7 +188,17 @@ interface DataGridTableState
 }
 
 export interface DataGridTableInstance<T extends object = any>
-  extends TableInstance<T> {}
+  extends Omit<TableInstance<T>, 'state'>,
+    Partial<UsePaginationInstanceProps<any>> {
+  shouldDisableSelectRow?: (...args) => void;
+  state?: Partial<TableState & UseRowSelectState<any>>;
+  disableSelectAll?: boolean;
+  disableSelectRowsProps?: {
+    labels?: {
+      toggleAllRowsLabel?: boolean;
+    };
+  };
+}
 
 export interface DataGridState<T extends object = any>
   extends TableCommonProps,
@@ -302,6 +314,7 @@ export interface ResizeHeaderProps {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type VisibleColumns<T extends object = {}> = (
+  props: Partial<TableRowProps>,
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>
 ) => Array<Column<T>>;

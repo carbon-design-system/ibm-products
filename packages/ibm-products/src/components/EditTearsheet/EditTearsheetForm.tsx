@@ -9,7 +9,11 @@ import React, { ForwardedRef, ReactNode, forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Grid } from '@carbon/react';
-import { FormContext, FormNumberContext } from './EditTearsheet';
+import {
+  FormContext,
+  FormContextType,
+  FormNumberContext,
+} from './EditTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { useRetrieveFormTitles } from '../../global/js/hooks/useRetrieveFormTitles';
@@ -20,11 +24,6 @@ const blockClass = `${pkg.prefix}--tearsheet-edit__form`;
 // Default values for props
 const defaults = {
   hasFieldset: true,
-};
-
-type FormContextType = {
-  currentForm: number;
-  setFormTitle: () => void;
 };
 
 interface EditTearsheetFormBaseProps {
@@ -92,7 +91,7 @@ export let EditTearsheetForm = forwardRef(
     }: EditTearsheetFormProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const formContext = useContext<FormContextType>(FormContext);
+    const formContext = useContext<FormContextType | null>(FormContext);
     const formNumber = useContext(FormNumberContext);
     useRetrieveFormTitles({ formContext, formNumber, title });
 

@@ -605,19 +605,23 @@ WithStaticTitleAndActionToolbar.args = {
   includeOverlay: true,
   actionToolbarButtons: [
     {
+      leading: true,
       label: 'Copy',
       icon: (props) => <Copy size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Copy'),
+      kind: 'primary',
     },
     {
       label: 'Settings',
       icon: (props) => <Settings size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Settings'),
+      hasIconOnly: true,
     },
     {
       label: 'Delete',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Delete'),
+      hasIconOnly: true,
     },
   ],
 };

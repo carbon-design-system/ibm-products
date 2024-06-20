@@ -74,6 +74,7 @@ declare module '@carbon/react' {
     Heading,
     IconButton,
     IconTab,
+    IconSkeleton,
     IdPrefix,
     InlineLoading,
     InlineNotification,

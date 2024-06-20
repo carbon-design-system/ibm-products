@@ -5,8 +5,10 @@ import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonG
 import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 
-import {
+import React, {
   CSSProperties,
+  ComponentType,
+  FunctionComponent,
   JSXElementConstructor,
   MutableRefObject,
   ReactNode,
@@ -39,7 +41,7 @@ import {
   UseTableHooks,
 } from 'react-table';
 import { CarbonIconType } from '@carbon/react/icons';
-import { type ButtonProps } from '@carbon/react';
+import { IconButton, type ButtonProps } from '@carbon/react';
 import { TableBatchActionsProps } from '@carbon/react/lib/components/DataTable/TableBatchActions';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
@@ -199,6 +201,16 @@ export interface DataGridTableInstance<T extends object = any>
   };
 }
 
+export interface RowAction {
+  id?: string;
+  itemText?: string;
+  icon?: ComponentType | FunctionComponent;
+  align?: React.ComponentProps<typeof IconButton>['align'];
+  shouldHideMenuItem?: (...args) => void;
+  shouldDisableMenuItem?: (...args) => void;
+  disabled?: boolean;
+  onClick?: (...args) => void;
+}
 export interface DataGridState<T extends object = any>
   extends TableCommonProps,
     UsePaginationInstanceProps<T>,
@@ -227,6 +239,7 @@ export interface DataGridState<T extends object = any>
   batchActions?: boolean;
   row: DatagridRow;
   rows: Array<DatagridRow<any>>;
+  rowActions?: RowAction[];
   columns: Array<DatagridColumn>;
   key?: any;
   rowSize?: Size;

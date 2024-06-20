@@ -16,8 +16,14 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const contentRef = useRef();
 
   const allOptions = config.options;
-  const [filteredItems, setFilteredItems] = useState(config.options);
+  const [searchValue, setSearchValue] = useState('');
+
   const selection = conditionState.value;
+
+  const filteredItems = allOptions?.filter((opt) =>
+    opt.label.toLowerCase().includes(searchValue)
+  );
+
   useEffect(() => {
     //this will focus the first input field in the popover
 
@@ -37,10 +43,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
 
   const onSearchChangeHandler = (evt) => {
     const { value } = evt.target;
-    let _filteredItems = allOptions.filter((opt) =>
-      opt.label.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredItems(_filteredItems);
+    setSearchValue(value);
   };
 
   const getAriaLabel = () => {
@@ -69,7 +72,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
 
       <ul aria-label={getAriaLabel()} role="listbox">
         {filteredItems?.map((option) => {
-          const isSelected = selection?.includes(option.id);
+          const isSelected = selection === option.id;
           const Icon = option.icon;
 
           return (

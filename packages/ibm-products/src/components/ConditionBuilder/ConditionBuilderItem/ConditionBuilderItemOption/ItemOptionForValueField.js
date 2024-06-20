@@ -29,7 +29,12 @@ export const ItemOptionForValueField = ({
   const contentRef = useRef();
 
   const [allOptions, setAllOptions] = useState(config.options);
-  const [filteredItems, setFilteredItems] = useState(config.options);
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredItems = allOptions?.filter((opt) =>
+    opt.label.toLowerCase().includes(searchValue)
+  );
+
   const selection = Array.isArray(conditionState.value)
     ? conditionState.value
     : conditionState.value !== undefined
@@ -65,7 +70,6 @@ export const ItemOptionForValueField = ({
           Object.keys(response[0]).includes('id')
         ) {
           setAllOptions(response);
-          setFilteredItems(response);
         }
       };
 
@@ -96,10 +100,7 @@ export const ItemOptionForValueField = ({
   };
   const onSearchChangeHandler = (evt) => {
     const { value } = evt.target;
-    let _filteredItems = allOptions.filter((opt) =>
-      opt.label.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredItems(_filteredItems);
+    setSearchValue(value);
   };
 
   const onClickHandler = (evt, option, isSelected) => {

@@ -8,7 +8,7 @@ export const statementConfig = [
   },
   {
     label: 'excl.if',
-    id: 'excl.if',
+    id: 'excl_if',
   },
 ];
 
@@ -22,7 +22,13 @@ export const connectorConfig = [
     id: 'or',
   },
 ];
-//op types : option, text, number, date,
+export const actionConfig = [
+  {
+    label: 'then',
+    id: 'then',
+  },
+];
+
 export const operatorConfig = [
   {
     label: 'is',
@@ -36,7 +42,7 @@ export const operatorConfig = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater-equal',
+    id: 'greater_equal',
     type: 'number',
   },
   {
@@ -46,17 +52,17 @@ export const operatorConfig = [
   },
   {
     label: 'is lower than or equal to',
-    id: 'lower-equal',
+    id: 'lower_equal',
     type: 'number',
   },
   {
     label: 'starts with',
-    id: 'starts-with',
+    id: 'starts_with',
     type: 'text',
   },
   {
     label: 'ends with',
-    id: 'ends-with',
+    id: 'ends_with',
     type: 'text',
   },
   {
@@ -66,7 +72,7 @@ export const operatorConfig = [
   },
   {
     label: 'is one of',
-    id: 'one-of',
+    id: 'one_of',
     type: 'option',
   },
   {
@@ -102,19 +108,23 @@ export const translateWithId = (key) => {
 export const valueRenderers = {
   text: (val) => val,
   time: (val) => val,
-  number: (val, config) => {
-    return config.unit && val ? `${val} ${config.unit}` : val;
-  },
+  number: (val) => val,
   option: (value) => {
-    return Array.isArray(value) ? value.join(', ') : value;
+    if (value && typeof value !== 'string') {
+      const selectedValues = Array.isArray(value) ? value : [value];
+      return selectedValues.map((option) => option.label).join(', ');
+    }
+
+    return value;
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
-      let start = value?.[0] ? formatDate(new Date(value[0])) : '';
-      let end = value?.[1] ? formatDate(new Date(value[1])) : '';
+      const start = value?.[0] ? formatDate(new Date(value[0])) : '';
+      const end = value?.[1] ? formatDate(new Date(value[1])) : '';
       return `${start} To ${end}`;
     } else {
       return value && new Date(value) ? formatDate(new Date(value)) : value;
     }
   },
+  custom: (value) => value,
 };

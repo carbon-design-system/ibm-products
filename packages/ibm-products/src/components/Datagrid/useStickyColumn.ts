@@ -5,10 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, useLayoutEffect, useState } from 'react';
+import {
+  useEffect,
+  useRef,
+  useLayoutEffect,
+  useState,
+  MutableRefObject,
+} from 'react';
 import debounce from 'lodash/debounce';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import {
+  CellPropGetter,
+  HeaderPropGetter,
+  Hooks,
+  TableBodyPropGetter,
+  TableInstance,
+} from 'react-table';
+import {
+  DataGridState,
+  DataGridTableProps,
+  DatagridColumn,
+  DataGridData,
+} from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -16,13 +35,13 @@ const styleClassPrefix = `${blockClass}__right-sticky-column`;
 const leftStickyStyleClassPrefix = `${blockClass}__left-sticky-column`;
 const OFFSET_SCROLL_CLASS = `${styleClassPrefix}-offset-scroll`;
 
-const useStickyColumn = (hooks) => {
-  const tableBodyRef = useRef();
-  const stickyHeaderCellRef = useRef();
-  const [windowSize, setWindowSize] = useState(null);
+const useStickyColumn = (hooks: Hooks) => {
+  const tableBodyRef = useRef<HTMLElement>();
+  const stickyHeaderCellRef = useRef<HTMLElement>();
+  const [windowSize, setWindowSize] = useState<number | undefined>();
 
   useEffect(() => {
-    setWindowSize(window.innerWidth);
+    setWindowSize(window?.innerWidth);
   }, []);
 
   useLayoutEffect(() => {
@@ -35,11 +54,20 @@ const useStickyColumn = (hooks) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  hooks.getCellProps.push(changeProps.bind(null, 'cell', null, windowSize));
-  hooks.getHeaderProps.push(
-    changeProps.bind(null, 'header', stickyHeaderCellRef, windowSize)
+  hooks.getCellProps.push(
+    changeProps.bind(null, 'cell', null, windowSize) as CellPropGetter<any>
   );
-  hooks.getTableBodyProps.push(addTableBodyProps.bind(null, tableBodyRef));
+  hooks.getHeaderProps.push(
+    changeProps.bind(
+      null,
+      'header',
+      stickyHeaderCellRef,
+      windowSize
+    ) as HeaderPropGetter<any>
+  );
+  hooks.getTableBodyProps.push(
+    addTableBodyProps.bind(null, tableBodyRef) as TableBodyPropGetter<any>
+  );
   hooks.getHeaderGroupProps.push((props) => [
     props,
     {
@@ -49,13 +77,13 @@ const useStickyColumn = (hooks) => {
       },
     },
   ]);
-  const useEventListener = (instance) => {
+  const useEventListener = (instance: TableInstance & DataGridState) => {
     useEffect(() => {
       const tableBodyElement = tableBodyRef.current;
-      const headerCellElement = stickyHeaderCellRef.current;
+      const headerCellElement = stickyHeaderCellRef?.current;
       /* istanbul ignore next */
       if (hasVertScroll(tableBodyElement) && headerCellElement) {
-        headerCellElement.classList.add(OFFSET_SCROLL_CLASS);
+        headerCellElement?.classList?.add(OFFSET_SCROLL_CLASS);
       }
       const boundListener = debounce(
         onBodyResize.bind(null, tableBodyElement, headerCellElement),
@@ -80,7 +108,7 @@ const useStickyColumn = (hooks) => {
       };
       toggleStickyShadow(tableBodyElement, headerCellElement);
       if (tableBodyElement) {
-        tableBodyElement.addEventListener('scroll', listener);
+        tableBodyElement?.addEventListener('scroll', listener);
       }
       return () => {
         if (tableBodyElement) {
@@ -96,14 +124,14 @@ const useStickyColumn = (hooks) => {
       onBodyResize(tableBodyElement, headerCellElement);
     }, [instance.rows, headerCellElement, tableBodyElement]);
   };
-  hooks.useInstance.push(useEventListener);
+  hooks.useInstance.push(useEventListener as (instance: TableInstance) => void);
   hooks.useInstance.push(useCheckScroll);
   hooks.useInstance.push((instance) => {
     Object.assign(instance, {
       withStickyColumn: true,
     });
   });
-  hooks.useInstance.push((instance) => {
+  hooks.useInstance.push((instance: TableInstance) => {
     // sticky column is defined by consumer
     // it will always comes after the spacer which is defined by useFlexResize
     // swap them here to use the spacer to push
@@ -111,15 +139,19 @@ const useStickyColumn = (hooks) => {
     // columns defined
     const newColumns = instance.visibleColumns;
     let spacerIdx = newColumns.findIndex((col) => col.id === 'spacer');
-    let stickyIdx = newColumns.findIndex((col) => col.sticky === 'right');
+    let stickyIdx = newColumns.findIndex(
+      (col) => (col as DatagridColumn).sticky === 'right'
+    );
     if (spacerIdx >= 0 && stickyIdx >= 0 && stickyIdx < spacerIdx) {
       const temp = newColumns[spacerIdx];
       newColumns[spacerIdx] = newColumns[stickyIdx];
       newColumns[stickyIdx] = temp;
     }
-    const newHeaders = instance.headers;
+    const newHeaders = instance.headers as DatagridColumn[];
     spacerIdx = newHeaders.findIndex((col) => col.id === 'spacer');
-    stickyIdx = newHeaders.findIndex((col) => col.sticky === 'right');
+    stickyIdx = newHeaders.findIndex(
+      (col) => (col as DatagridColumn).sticky === 'right'
+    );
 
     if (spacerIdx >= 0 && stickyIdx >= 0 && stickyIdx < spacerIdx) {
       const temp = newHeaders[spacerIdx];
@@ -132,16 +164,25 @@ const useStickyColumn = (hooks) => {
   });
 };
 
-const addTableBodyProps = (tableBodyRef, props) => [
+const addTableBodyProps = (
+  tableBodyRef: HTMLElement | MutableRefObject<HTMLElement | undefined>,
+  props: DataGridTableProps
+) => [
   props,
   {
     ref: tableBodyRef,
   },
 ];
 
-const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
-  const column = data.column || data.cell.column;
-  if (column.sticky === 'right') {
+const changeProps = (
+  elementName: string,
+  headerCellRef: HTMLElement | MutableRefObject<HTMLElement | undefined> | null,
+  windowSize: number | undefined,
+  props: DataGridTableProps,
+  data: DataGridData
+) => {
+  const column = data.column || data.cell?.column;
+  if (column?.sticky === 'right') {
     return [
       props,
       {
@@ -156,15 +197,15 @@ const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
       },
     ];
   }
-  if (column.sticky === 'left') {
+  if (column?.sticky === 'left') {
     return [
       props,
       {
         className: cx({
           [`${leftStickyStyleClassPrefix}-${elementName}`]:
-            true && windowSize > 671,
+            true && windowSize && windowSize > 671,
           [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
-            data?.instance?.withSelectRows && windowSize > 671,
+            data?.instance?.withSelectRows && windowSize && windowSize > 671,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,
@@ -175,7 +216,10 @@ const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
   return [props];
 };
 
-const onBodyResize = (tableBodyEle, headerCellEle) => {
+const onBodyResize = (
+  tableBodyEle: HTMLElement | undefined,
+  headerCellEle: HTMLElement | undefined
+) => {
   if (headerCellEle) {
     /* istanbul ignore next */
     if (hasVertScroll(tableBodyEle)) {
@@ -187,7 +231,10 @@ const onBodyResize = (tableBodyEle, headerCellEle) => {
   }
 };
 
-const toggleStickyShadow = (tableBodyEle, headerCellEle) => {
+const toggleStickyShadow = (
+  tableBodyEle: HTMLElement | undefined,
+  headerCellEle: HTMLElement | undefined
+) => {
   /* istanbul ignore next */
   if (tableBodyEle && headerCellEle) {
     const isScrolledToRight =
@@ -202,7 +249,7 @@ const toggleStickyShadow = (tableBodyEle, headerCellEle) => {
     }
   }
 };
-const hasVertScroll = (element) => {
+const hasVertScroll = (element: HTMLElement | undefined) => {
   /* istanbul ignore next */
   if (!element) {
     return false;

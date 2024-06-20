@@ -1,6 +1,10 @@
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { checkForHoldingKey } from './checkForHoldingKey';
-import { focusThisField, traverseClockVise, traverseReverse } from './util';
+import {
+  checkForHoldingKey,
+  focusThisField,
+  traverseClockVise,
+  traverseReverse,
+} from './util';
 
 export const handleKeyDown = (evt, conditionBuilderRef) => {
   const activeElement = document.activeElement;

@@ -32,7 +32,7 @@ export const ItemOptionForValueField = ({
   const [searchValue, setSearchValue] = useState('');
 
   const filteredItems = allOptions?.filter((opt) =>
-    opt.label.toLowerCase().includes(searchValue)
+    opt.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const selection = Array.isArray(conditionState.value)

@@ -21,7 +21,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const selection = conditionState.value;
 
   const filteredItems = allOptions?.filter((opt) =>
-    opt.label.toLowerCase().includes(searchValue)
+    opt.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   useEffect(() => {

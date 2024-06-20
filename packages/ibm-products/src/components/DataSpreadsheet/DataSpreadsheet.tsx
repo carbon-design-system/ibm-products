@@ -182,6 +182,9 @@ export let DataSpreadsheet = React.forwardRef(
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
     const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
+    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
+      useState(false);
+    const isBlurSpreadsheet = useRef(false);
     const [isActiveHeaderCellChanged, setIsActiveHeaderCellChanged] =
       useState<boolean>(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
@@ -190,6 +193,7 @@ export let DataSpreadsheet = React.forwardRef(
       usePreviousValue({
         activeCellCoordinates,
         isEditing,
+        cellEditorValue,
       }) || {};
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef<HTMLTextAreaElement>();
@@ -299,7 +303,11 @@ export let DataSpreadsheet = React.forwardRef(
                   activeCellCoordinates?.column
                 ]
               : null;
-          setActiveCellContent(activeCellFullData?.render('Cell') ?? null);
+          if (activeCellFullData) {
+            setActiveCellContent(activeCellFullData.render('Cell'));
+          } else {
+            setActiveCellContent(null);
+          }
         }
         if (
           (activeCellCoordinates && activeCellCoordinates?.row === 'header') ||
@@ -309,9 +317,21 @@ export let DataSpreadsheet = React.forwardRef(
           setIsActiveHeaderCellChanged((prev) => !prev);
         }
       }
+      // For when we edit and focus out of data spreadsheet
+      if (
+        isEditing &&
+        previousState.activeCellCoordinates &&
+        isBlurSpreadsheet.current
+      ) {
+        setActiveCellContent(previousState.cellEditorValue);
+        isBlurSpreadsheet.current = false;
+        removeCellEditor();
+      }
     }, [
+      isBlurSpreadsheet,
       activeCellCoordinates,
       previousState?.activeCellCoordinates,
+      previousState?.cellEditorValue,
       updateData,
       rows,
       isEditing,
@@ -352,6 +372,7 @@ export let DataSpreadsheet = React.forwardRef(
     });
 
     useSpreadsheetOutsideClick({
+      isBlurSpreadsheet,
       spreadsheetRef,
       setActiveCellCoordinates,
       setSelectionAreas,
@@ -829,6 +850,8 @@ export let DataSpreadsheet = React.forwardRef(
             columns={columns}
             currentMatcher={currentMatcher}
             defaultColumn={defaultColumn}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             headerGroups={headerGroups}
             rows={rows}
             scrollBarSize={scrollBarSize}
@@ -855,6 +878,8 @@ export let DataSpreadsheet = React.forwardRef(
             currentMatcher={currentMatcher}
             setCurrentMatcher={setCurrentMatcher}
             setContainerHasFocus={setContainerHasFocus}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             selectionAreas={selectionAreas}
             setSelectionAreas={setSelectionAreas}
             headerGroups={headerGroups}
@@ -916,9 +941,11 @@ export let DataSpreadsheet = React.forwardRef(
               updateData,
             })}
             onChange={(event) => {
-              setCellEditorValue(event.target.value);
-              if (cellEditorRulerRef?.current) {
-                cellEditorRulerRef.current.textContent = event.target.value;
+              if (previousState.isEditing) {
+                setCellEditorValue(event.target.value);
+                if (cellEditorRulerRef?.current) {
+                  cellEditorRulerRef.current.textContent = event.target.value;
+                }
               }
             }}
             ref={cellEditorRef as LegacyRef<HTMLTextAreaElement>}

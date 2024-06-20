@@ -1,18 +1,13 @@
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
- * (c) Copyright IBM Corp. 2020
+ * (c) Copyright IBM Corp. 2020, 2024
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
 import { Hooks, Row, RowPropGetter, TableRowProps } from 'react-table';
-import { DataGridTableInstance, DatagridRow } from './types';
-
-interface PropGetterMeta {
-  instance?: DataGridTableInstance;
-  row?: Partial<Row<any> & DatagridRow<any>>;
-}
+import { DatagridRow, PropGetterMeta } from './types';
 
 const useDisableSelectRows = (hooks: Hooks) => {
   updateSelectAll(hooks);
@@ -37,7 +32,7 @@ const updateSelectAll = (hooks: Hooks) => {
     props: Partial<TableRowProps>,
     { instance }: PropGetterMeta
   ) => {
-    const selectableRows =
+    const selectableRows: Row<any>[] =
       instance?.rows?.filter(
         (row) =>
           !(
@@ -45,7 +40,7 @@ const updateSelectAll = (hooks: Hooks) => {
             instance.shouldDisableSelectRow(row)
           )
       ) || [];
-    const isAllRowsSelected =
+    const isAllRowsSelected: boolean =
       selectableRows?.length > 0 &&
       selectableRows.every(({ id }) => instance?.state?.selectedRowIds?.[id]);
     return [

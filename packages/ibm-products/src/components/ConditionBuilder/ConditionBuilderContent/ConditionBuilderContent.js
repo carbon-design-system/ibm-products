@@ -18,19 +18,17 @@ import ConditionPreview from '../ConditionPreview/ConditionPreview';
 import { Heading } from '@carbon/react';
 import { Section } from '@carbon/react';
 import GroupConnector from '../ConditionBuilderConnector/GroupConnector';
+import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
 
 const ConditionBuilderContent = ({
   startConditionLabel,
   conditionBuilderRef,
   getConditionState,
-  //getActionsState,
+  getActionsState,
   initialState,
-  // actions,
+  actions,
 }) => {
-  // const { rootState, setRootState, variant, actionState } = useContext(
-  //   ConditionBuilderContext
-  // );
-  const { rootState, setRootState, variant } = useContext(
+  const { rootState, setRootState, variant, actionState } = useContext(
     ConditionBuilderContext
   );
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
@@ -52,10 +50,10 @@ const ConditionBuilderContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState]);
 
-  // useEffect(() => {
-  //   getActionsState?.(actionState);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [actionState]);
+  useEffect(() => {
+    getActionsState?.(actionState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actionState]);
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(true);
@@ -91,7 +89,6 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const newGroup = {
-      groupSeparateOperator: 'and', // 'or'|'and'|'null',
       groupOperator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       id: uuidv4(),
@@ -114,7 +111,7 @@ const ConditionBuilderContent = ({
     <>
       {!isConditionBuilderActive && (
         <Button
-          className={`${blockClass}__add-condition-button`}
+          className={`${blockClass}__add_condition-button`}
           renderIcon={(props) => <Add size={16} {...props} />}
           iconDescription={startConditionLabel}
           kind="ghost"
@@ -125,7 +122,6 @@ const ConditionBuilderContent = ({
         </Button>
       )}
       {isConditionBuilderActive && (
-        // <h5 >Condition</h5>
         <Section className={`${blockClass}__heading`} level={4}>
           <Heading>Condition</Heading>
         </Section>
@@ -176,12 +172,12 @@ const ConditionBuilderContent = ({
                     onMouseLeave={() => {
                       setShowConditionGroupPreview(false);
                     }}
-                    className={`${blockClass}__add-condition-group `}
+                    className={`${blockClass}__add_condition_group `}
                     hideLabel
-                    label={translateWithId('add-condition-sub-group')}
+                    label={translateWithId('add_condition_group')}
                     wrapperProps={{
                       role: 'gridcell',
-                      'aria-label': translateWithId('add-condition-sub-group'),
+                      'aria-label': translateWithId('add_condition_group'),
                     }}
                   />
                 }
@@ -193,12 +189,12 @@ const ConditionBuilderContent = ({
           </>
         )}
       </div>
-      {/* {isConditionBuilderActive && actions && (
+      {isConditionBuilderActive && actions && (
         <ConditionBuilderActions
           actions={actions}
           className={`${blockClass}__actions-container`}
         />
-      )} */}
+      )}
     </>
   );
 };
@@ -211,8 +207,8 @@ ConditionBuilderContent.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      label: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
     })
   ),
   /**
@@ -233,18 +229,33 @@ ConditionBuilderContent.propTypes = {
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
-        groupSeparateOperator: PropTypes.string,
-        groupOperator: PropTypes.string,
-        statement: PropTypes.string,
+        groupOperator: PropTypes.string.isRequired,
+        statement: PropTypes.string.isRequired,
         conditions: PropTypes.arrayOf(
-          PropTypes.shape({
-            property: PropTypes.string,
-            operator: PropTypes.string,
-            value: PropTypes.string,
-          })
+          PropTypes.oneOfType([
+            PropTypes.shape({
+              property: PropTypes.string.isRequired,
+              operator: PropTypes.string.isRequired,
+              value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.arrayOf(
+                  PropTypes.shape({
+                    id: PropTypes.string,
+                    label: PropTypes.string,
+                  })
+                ),
+                PropTypes.shape({
+                  id: PropTypes.string,
+                  label: PropTypes.string,
+                }),
+              ]),
+            }),
+            PropTypes.object,
+          ])
         ),
       })
     ),
+    operator: PropTypes.string,
   }),
   /* Provide a label to the button that starts condition builder
    */

@@ -71,7 +71,11 @@ export let Datagrid = React.forwardRef(
     };
 
     return (
-      <FilterProvider filters={state?.filters} filterProps={filterProps}>
+      <FilterProvider
+        filters={state?.filters}
+        filterProps={filterProps}
+        tableId={tableId}
+      >
         <InlineEditProvider>
           <div
             {...rest}

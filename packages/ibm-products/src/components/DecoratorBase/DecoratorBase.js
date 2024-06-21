@@ -26,7 +26,6 @@ const defaults = {
   onContextMenuLabel: () => {},
   onContextMenuValue: () => {},
   scoreThresholds: [0, 4, 7, 10],
-  theme: 'light',
 };
 
 /**
@@ -54,7 +53,7 @@ export let DecoratorBase = React.forwardRef(
       score,
       scoreThresholds = defaults.scoreThresholds,
       small,
-      theme = defaults.theme,
+      theme,
       truncateValue,
       value,
       valueTitle,
@@ -69,7 +68,8 @@ export let DecoratorBase = React.forwardRef(
     const _value = truncate(value, truncateValue);
 
     // These class names apply to all types of DecoratorBase.
-    const classNames = cx(blockClass, className, `${blockClass}--${theme}`, {
+    const classNames = cx(blockClass, className, {
+      [`${blockClass}--${theme}`]: theme,
       [`${blockClass}--sm`]: small,
       [`${blockClass}--truncate-end`]: truncateValue === 'end',
       [`${blockClass}--truncate-start`]: truncateValue === 'start',

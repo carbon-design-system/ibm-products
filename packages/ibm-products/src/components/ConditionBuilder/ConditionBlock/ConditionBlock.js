@@ -7,7 +7,7 @@ import {
   statementConfig,
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
-import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderItemNumber } from '../ConditionBuilderItem/ConditionBuilderItemNumber/ConditionBuilderItemNumber';
@@ -19,6 +19,9 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
+import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
+import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
+
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
@@ -45,14 +48,6 @@ const ConditionBlock = (props) => {
     isLastCondition,
   } = props;
   const { inputConfig, variant } = useContext(ConditionBuilderContext);
-  //Below possible input types expected for value field.
-  const itemComponents = {
-    option: ConditionBuilderItemOption,
-    text: ConditionBuilderItemText,
-    number: ConditionBuilderItemNumber,
-    date: ConditionBuilderItemDate,
-    time: ConditionBuilderItemTime,
-  };
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
@@ -66,12 +61,17 @@ const ConditionBlock = (props) => {
   };
 
   const { icon, type, config, label } = getCurrentConfig(property);
-  let ItemComponent;
-  //   if (type == 'custom') {
-  //     ItemComponent = config.component;
-  //   } else {
-  ItemComponent = property ? itemComponents[type] : null;
-  //}
+
+  //Below possible input types expected for value field.
+  const itemComponents = {
+    text: ConditionBuilderItemText,
+    number: ConditionBuilderItemNumber,
+    date: ConditionBuilderItemDate,
+    time: ConditionBuilderItemTime,
+    option: ItemOptionForValueField,
+    custom: config?.component,
+  };
+  const ItemComponent = property ? itemComponents[type] : null;
 
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt);
@@ -96,10 +96,11 @@ const ConditionBlock = (props) => {
     });
   };
   const onValueChangeHandler = (newValue) => {
+    const currentCondition = { ...condition };
+    delete currentCondition.popoverToOpen;
     onChange({
-      ...condition,
+      ...currentCondition,
       value: newValue,
-      popoverToOpen: '',
     });
   };
   const handleShowDeletionPreview = () => {
@@ -109,6 +110,9 @@ const ConditionBlock = (props) => {
     setShowDeletionPreview(false);
   };
   const getOperators = () => {
+    if (config?.operators) {
+      return config.operators;
+    }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
     );
@@ -162,7 +166,7 @@ const ConditionBlock = (props) => {
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
         >
-          <ConditionBuilderItemOption
+          <ItemOption
             conditionState={{
               value: group.statement,
               label: translateWithId('condition'),
@@ -184,7 +188,7 @@ const ConditionBlock = (props) => {
         condition={condition}
         type={type}
       >
-        <ConditionBuilderItemOption
+        <ItemOption
           conditionState={{
             value: property,
             label: translateWithId('property'),
@@ -201,7 +205,7 @@ const ConditionBlock = (props) => {
           condition={condition}
           type={type}
         >
-          <ConditionBuilderItemOption
+          <ItemOption
             config={{
               options: getOperators(),
             }}

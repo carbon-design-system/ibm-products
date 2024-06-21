@@ -211,7 +211,6 @@ const HeaderRow = (
       {datagridState?.headers
         ?.filter(({ isVisible }) => isVisible)
         ?.map((header, index) => {
-          console.log(header.isVisible, index);
           if (header.id === selectionColumnId) {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
@@ -229,9 +228,7 @@ const HeaderRow = (
           if (withActionsColumn && headerStyle) {
             headerStyle.flex =
               index === visibleColumns.length - 2 ? '1 1 0' : '0 0 auto';
-            console.log(visibleColumns.length - 1, index);
           }
-          console.log(headerStyle);
           return (
             <TableHeader
               {...headerProps}

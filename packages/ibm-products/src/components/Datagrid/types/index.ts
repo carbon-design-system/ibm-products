@@ -160,7 +160,6 @@ export interface DatagridRow<T extends object = any>
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
   hasExpanded?: boolean;
-  index: number;
 }
 
 export interface DataGridHeader<T extends object = any>

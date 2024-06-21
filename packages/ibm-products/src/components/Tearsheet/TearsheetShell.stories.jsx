@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
@@ -14,6 +15,7 @@ import {
   Button,
   unstable__Slug as Slug,
   unstable__SlugContent as SlugContent,
+  TextInput,
 } from '@carbon/react';
 
 // import mdx from './TearsheetShell.mdx';
@@ -103,8 +105,8 @@ const Template = ({ influencer, open: _open, slug, ...args }, context) => {
   return (
     <div ref={ref}>
       <Button onClick={() => setOpen(true)}>
-        {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
-      </Button>{' '}
+        {`${beenOpen ? 'Reopen' : 'Open'} the ${context.component.displayName}`}
+      </Button>
       <TearsheetShell
         className={className}
         {...args}
@@ -139,7 +141,7 @@ const ReturnFocusTemplate = (
   return (
     <div ref={ref}>
       <Button ref={buttonRef} onClick={() => setOpen(true)}>
-        {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
+        {`${beenOpen ? 'Reopen' : 'Open'} the ${context.component.displayName}`}
       </Button>{' '}
       <TearsheetShell
         className={className}
@@ -179,6 +181,75 @@ NoAttributesSet.args = {
 };
 
 export const ReturnFocusToOpenButton = ReturnFocusTemplate.bind({});
-NoAttributesSet.args = {
+ReturnFocusToOpenButton.args = {
   size: 'wide',
+};
+
+function FloatingMenu({ open, className, styleTransform }) {
+  return (
+    open &&
+    createPortal(
+      <div
+        className={className}
+        style={{
+          position: 'absolute',
+          top: '25%',
+          left: '50%',
+          transform: styleTransform,
+          border: 'solid 1px',
+          zIndex: '9999',
+          backgroundColor: 'white',
+        }}
+      >
+        <TextInput
+          type="text"
+          style={{ margin: '1rem' }}
+          labelText={`This is a floating DOM element with classname "${className}" added outside of the tearsheet DOM element`}
+          placeholder="Focus and enter something"
+        ></TextInput>
+      </div>,
+      document.body
+    )
+  );
+}
+
+export const FocusOnFloatingMenu = ({ open: _open, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>
+        {`Open the ${context.component.displayName}`}
+      </Button>
+      <TearsheetShell
+        {...args}
+        open={open}
+        onClose={() => setOpen(false)}
+        hasCloseIcon
+        className={className}
+        size="wide"
+        actions={[
+          {
+            kind: 'primary',
+            label: 'Primary',
+          },
+        ]}
+      >
+        {dummyContent}
+        <FloatingMenu
+          open={open}
+          className="floating-menu"
+          styleTransform="translate(-50%)"
+        />
+        <FloatingMenu
+          open={open}
+          className="another-floating-menu"
+          styleTransform="translate(-50%, 100%)"
+        />
+      </TearsheetShell>
+    </>
+  );
+};
+FocusOnFloatingMenu.args = {
+  selectorsFloatingMenus: ['.floating-menu'],
+  open: true,
 };

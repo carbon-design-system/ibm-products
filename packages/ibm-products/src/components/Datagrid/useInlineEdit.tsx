@@ -9,14 +9,20 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState } from './types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useInlineEdit = (hooks) => {
+const useInlineEdit = (hooks: Hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
     const isDisabled = cell.column?.isDisabled;
+    const staticCell =
+      typeof cell.value === 'object' &&
+      cell.column.id === cell.value?.columnId &&
+      cell.value?.isStaticCell;
 
     const renderInlineEditComponent = (type) => (
       <InlineEditCell
@@ -24,7 +30,7 @@ const useInlineEdit = (hooks) => {
         tabIndex={-1}
         value={cell.value}
         cell={cell}
-        isDisabled={isDisabled}
+        disabledCell={isDisabled}
         instance={instance}
         type={type}
       />
@@ -46,15 +52,30 @@ const useInlineEdit = (hooks) => {
         role: 'gridcell',
         children: (
           <>
-            {inlineEditType === 'text' &&
+            {!staticCell &&
+              inlineEditType === 'text' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'number' &&
+            {!staticCell &&
+              inlineEditType === 'number' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'selection' &&
+            {!staticCell &&
+              inlineEditType === 'selection' &&
               renderInlineEditComponent(inlineEditType)}
-            {inlineEditType === 'date' &&
+            {!staticCell &&
+              inlineEditType === 'date' &&
               renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
+            {staticCell && (
+              <InlineEditCell
+                config={columnInlineEditConfig}
+                tabIndex={-1}
+                value={cell.value?.value}
+                cell={cell}
+                instance={instance}
+                nonEditCell
+                type="text"
+              />
+            )}
             {!inlineEditType && (
               <InlineEditCell
                 config={columnInlineEditConfig}
@@ -73,8 +94,8 @@ const useInlineEdit = (hooks) => {
     ];
   };
   hooks.getCellProps.push(addInlineEdit);
-  hooks.useInstance.push((instance) => {
-    Object.assign(instance, {
+  hooks.useInstance.push((instance: TableInstance) => {
+    Object.assign(instance as DataGridState, {
       withInlineEdit: true,
     });
   });

@@ -10,6 +10,7 @@ import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         title: 'Customizing columns',
@@ -29,8 +30,6 @@ export const DocsPage = () => (
   - \`options.customizeColumnsProps.onSaveColumnPrefs\`
     - type: \`Function(Columns: Array<{ColumnId: String, isVisible: Boolean}>) => void\`
     - Callback function when 'Save' button clicked on the narrow tearsheet. It allows consumer to preserve the updated column preference. This output can also be used to compute the \`hiddenColumns\` and \`columnOrder\`
-  - Reset to default (optional)
-    - There is a reset to default button on the modal. It will use the \`options.columns\` as the default. If there are columns should be hidden by default, denote them with property: \`isVisible: false\` (undefined will be treated as \`true\`).
         `,
         source: {
           code: `

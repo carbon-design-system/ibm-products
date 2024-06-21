@@ -17,6 +17,24 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const useNestedRows = (hooks: Hooks) => {
   useNestedRowExpander(hooks);
   const useInstance = (instance: TableInstance) => {
+    useEffect(() => {
+      const { rows } = instance as DataGridState;
+      const defaultExpandedRows = rows.filter(
+        (row) => row?.original?.defaultExpanded
+      );
+      if (defaultExpandedRows?.length) {
+        defaultExpandedRows.map((defaultExpandedRow) => {
+          if (
+            !defaultExpandedRow?.isExpanded &&
+            !defaultExpandedRow?.hasExpanded
+          ) {
+            defaultExpandedRow?.toggleRowExpanded?.();
+            defaultExpandedRow.hasExpanded = true;
+            return;
+          }
+        });
+      }
+    }, [instance, instance.rows]);
     // This useEffect will expand rows if they exist in the initialState obj
     useEffect(() => {
       const { rows, initialState } = instance;
@@ -25,11 +43,16 @@ const useNestedRows = (hooks: Hooks) => {
       if (expandedRowIds) {
         Object.keys(expandedRowIds).forEach((key) => {
           const row = rows.filter(
-            (r) => r.id.toString() === key.toString()
+            (r: any) =>
+              r.id.toString() === key.toString() ||
+              r.original?.id?.toString() === key.toString()
           ) as DatagridRow[];
 
-          if (row?.length && key.toString() === row[0].id.toString()) {
-            row[0]?.toggleRowExpanded();
+          if (
+            (row.length && key.toString() === row[0].id.toString()) ||
+            (row.length && key.toString() === row[0].original?.id?.toString())
+          ) {
+            row[0].toggleRowExpanded();
           }
         });
       }

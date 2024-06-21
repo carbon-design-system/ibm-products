@@ -1735,6 +1735,7 @@ __metadata:
     "@carbon/react": "npm:^1.55.0"
     "@carbon/themes": "npm:^11.34.0"
     "@carbon/type": "npm:^11.26.0"
+    "@storybook/addon-a11y": "npm:^8.1.10"
     "@storybook/addon-actions": "npm:^8.0.9"
     "@storybook/addon-controls": "npm:^8.0.9"
     "@storybook/addon-docs": "npm:^8.0.9"
@@ -1760,7 +1761,7 @@ __metadata:
     regenerator-runtime: "npm:^0.14.1"
     remark-gfm: "npm:^4.0.0"
     rimraf: "npm:^5.0.5"
-    sass: "npm:^1.70.0"
+    sass: "npm:^1.77.2"
     storybook: "npm:^8.0.9"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.2.10"
@@ -1780,7 +1781,7 @@ __metadata:
     jest-config-ibm-cloud-cognitive: "npm:^1.2.0"
     jest-environment-jsdom: "npm:^29.6.2"
     rimraf: "npm:^5.0.1"
-    sass: "npm:^1.64.2"
+    sass: "npm:^1.77.2"
   peerDependencies:
     "@carbon/grid": ^11.22.0
     "@carbon/layout": ^11.21.0
@@ -1808,7 +1809,7 @@ __metadata:
     npm-check-updates: "npm:^16.14.12"
     npm-run-all: "npm:^4.1.5"
     rimraf: "npm:^5.0.5"
-    sass: "npm:^1.70.0"
+    sass: "npm:^1.77.2"
     yargs: "npm:^17.7.2"
   peerDependencies:
     "@carbon/grid": ^11.22.0
@@ -1871,7 +1872,7 @@ __metadata:
     rimraf: "npm:^5.0.5"
     rollup: "npm:^2.79.1"
     rollup-plugin-strip-banner: "npm:^3.0.0"
-    sass: "npm:^1.70.0"
+    sass: "npm:^1.77.2"
     typescript-config-carbon: "npm:^0.2.1"
     yargs: "npm:^17.7.2"
   peerDependencies:
@@ -2724,37 +2725,37 @@ __metadata:
   linkType: hard
 
 "@csstools/css-parser-algorithms@npm:^2.3.1":
-  version: 2.6.1
-  resolution: "@csstools/css-parser-algorithms@npm:2.6.1"
+  version: 2.6.3
+  resolution: "@csstools/css-parser-algorithms@npm:2.6.3"
   peerDependencies:
-    "@csstools/css-tokenizer": ^2.2.4
-  checksum: 4ad4778525a92240c87ba063f3415216b36b81c45bbfcf69a4c82aab140e8943c269ef353ad6ac31de0950b776d972feb622df76b66180b402cba50951d0d58c
+    "@csstools/css-tokenizer": ^2.3.1
+  checksum: b893e284ebcccf37d7928be31be94fb0d6725defc544b39892d5e59ed5950b413366491817539b0add08deb9fc258c57588053d4436f84b7bd3b43bfeee67bb1
   languageName: node
   linkType: hard
 
 "@csstools/css-tokenizer@npm:^2.2.0":
-  version: 2.2.4
-  resolution: "@csstools/css-tokenizer@npm:2.2.4"
-  checksum: 13cc71a8ebc3ff81c49a459e57e1a94031969b70ce0e582bc949fa4f2d97900c07319866b080c57020896e4f5bee0968cc14f7bf41e7f105eb1c04a6c7bc33c4
+  version: 2.3.1
+  resolution: "@csstools/css-tokenizer@npm:2.3.1"
+  checksum: 25c8643151667bfc2ce653174786d9f97fea93aa38d48432937bc634d8478dfa03e5e6ad18d3fff3d6fa245e9f6578f87ca07d9fd764a274702e4bb8dd34dede
   languageName: node
   linkType: hard
 
 "@csstools/media-query-list-parser@npm:^2.1.4":
-  version: 2.1.9
-  resolution: "@csstools/media-query-list-parser@npm:2.1.9"
+  version: 2.1.11
+  resolution: "@csstools/media-query-list-parser@npm:2.1.11"
   peerDependencies:
-    "@csstools/css-parser-algorithms": ^2.6.1
-    "@csstools/css-tokenizer": ^2.2.4
-  checksum: 320b5916189b4899ec1186e4802483bcd28943d06af88d158f0f8289b04f57914fc6ff6a3fa9cd5b6a612b955a10f43e31d8de7ba74a7f9092c0a5dfced57102
+    "@csstools/css-parser-algorithms": ^2.6.3
+    "@csstools/css-tokenizer": ^2.3.1
+  checksum: 23ede5583c6f1f51ec45b9293fcaf1ecac0f69c7ea750bfe2245926a66a6ae8f7dea8b3604fc4a5b8be4a25c1bccf519a357bf926d486a7ff479e89685011ff4
   languageName: node
   linkType: hard
 
 "@csstools/selector-specificity@npm:^3.0.0":
-  version: 3.0.3
-  resolution: "@csstools/selector-specificity@npm:3.0.3"
+  version: 3.1.1
+  resolution: "@csstools/selector-specificity@npm:3.1.1"
   peerDependencies:
     postcss-selector-parser: ^6.0.13
-  checksum: 287f17aefe2f22a39cb1c01d45d9e2c4c8c7cf11d9af67c44fe14fa2ed2e11178406661d1b6b023c8a447cdb08933ac134352a0c1452d409af4e7db2570684f3
+  checksum: 3786a6afea97b08ad739ee8f4004f7e0a9e25049cee13af809dbda6462090744012a54bd9275a44712791e8f103f85d21641f14e81799f9dab946b0459a5e1ef
   languageName: node
   linkType: hard
 
@@ -5279,6 +5280,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-a11y@npm:^8.1.10":
+  version: 8.1.10
+  resolution: "@storybook/addon-a11y@npm:8.1.10"
+  dependencies:
+    "@storybook/addon-highlight": "npm:8.1.10"
+    axe-core: "npm:^4.2.0"
+  checksum: aed1951efcee114469d953f712c9c6f2975e0cdf183c481cebe64e07006646b74d7b7049f23782f2367575d8d4714de7d6de84b2fcef72344a26aacfa80c4e02
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:8.0.9, @storybook/addon-actions@npm:^8.0.9":
   version: 8.0.9
   resolution: "@storybook/addon-actions@npm:8.0.9"
@@ -5371,6 +5382,15 @@ __metadata:
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   checksum: c98c78d96fc4fa916dac427ebaf2786a4c54fb4d4f61c3a7c0297688a74eb3c923771c81b580f969a22596503c1f169b9bc26a1265925a8e9851a1d5af6463e4
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-highlight@npm:8.1.10":
+  version: 8.1.10
+  resolution: "@storybook/addon-highlight@npm:8.1.10"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+  checksum: af52f49fc79f468ea82e92a45900f9b5197a959ff466e25bdc8e69eede127ab267855262168f5df04264fe2600ea8b4984a5245d29facb8c011642038b0b089c
   languageName: node
   linkType: hard
 
@@ -8138,6 +8158,13 @@ __metadata:
   version: 4.7.0
   resolution: "axe-core@npm:4.7.0"
   checksum: 615c0f7722c3c9fcf353dbd70b00e2ceae234d4c17cbc839dd85c01d16797c4e4da45f8d27c6118e9e6b033fb06efd196106e13651a1b2f3a10e0f11c7b2f660
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:^4.2.0":
+  version: 4.9.1
+  resolution: "axe-core@npm:4.9.1"
+  checksum: 9d4944f6d3289428e1c6b41a80516f6558a960889f59c3c00f0fb88b955eda81edf9ca377c2cbc2a775f4003596d2aeaa35acca5aad3e1fc6b3d1e26e82b02cc
   languageName: node
   linkType: hard
 
@@ -14896,7 +14923,7 @@ __metadata:
     jest-circus: "npm:^29.7.0"
     jest-watch-typeahead: "npm:^2.0.0"
     npm-check-updates: "npm:^16.14.12"
-    sass: "npm:^1.51.0"
+    sass: "npm:^1.77.2"
   peerDependencies:
     jest: ^29.7.0
   languageName: unknown
@@ -21023,16 +21050,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.51.0, sass@npm:^1.64.2, sass@npm:^1.70.0":
-  version: 1.75.0
-  resolution: "sass@npm:1.75.0"
+"sass@npm:^1.77.2":
+  version: 1.77.2
+  resolution: "sass@npm:1.77.2"
   dependencies:
     chokidar: "npm:>=3.0.0 <4.0.0"
     immutable: "npm:^4.0.0"
     source-map-js: "npm:>=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 9f2d1b5adfe0b008e7062ef2f42fd9b26672e39e36ef3d234166636a4082d1f66c01804070e4e07b50ec872cdd9485ccf10fae8f87b3c00b9de6400c6e73efe8
+  checksum: 4df71f1a01cd59613e7a25bfcec96ddf06e3546c238ba3238b96c6ac0dcf34b9ce238b4de7b39656f6cb0a5e7acccde19f53b521ae4abcdcbe600e0de9c97644
   languageName: node
   linkType: hard
 
@@ -22305,9 +22332,10 @@ __metadata:
   linkType: hard
 
 "stylelint-plugin-carbon-tokens@npm:^2.3.1":
-  version: 2.4.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.4.0"
+  version: 2.8.0
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.8.0"
   dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
     lodash: "npm:^4.17.21"
     postcss: "npm:^8.4.16"
     postcss-scss: "npm:^4.0.4"
@@ -22318,7 +22346,7 @@ __metadata:
     "@carbon/motion": ">=10 <= 11"
     "@carbon/themes": ">=10 <= 11"
     "@carbon/type": ">=10 <= 11"
-  checksum: 4d96b91ae388f301473932116c8f22477c2142d383cf10ada7f2663700cf374c4ae46355e9eb438f9c88e11018dbc88193f1f397dd2b52083e9a79a8cbe96347
+  checksum: 1201c75c77ea028fdd7b0b2220871249fce08fb12d54cd4a20887773a696fc197332798c07c6f8f17c8120c61f11144f7c757d34af3cf5e81f19829631a51799
   languageName: node
   linkType: hard
 
@@ -24216,24 +24244,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.5.0":
-  version: 8.5.0
-  resolution: "ws@npm:8.5.0"
-  peerDependencies:
-    bufferutil: ^4.0.1
-    utf-8-validate: ^5.0.2
-  peerDependenciesMeta:
-    bufferutil:
-      optional: true
-    utf-8-validate:
-      optional: true
-  checksum: f0ee700970a0bf925b1ec213ca3691e84fb8b435a91461fe3caf52f58c6cec57c99ed5890fbf6978824c932641932019aafc55d864cad38ac32577496efd5d3a
-  languageName: node
-  linkType: hard
-
-"ws@npm:^8.11.0, ws@npm:^8.2.3":
-  version: 8.17.0
-  resolution: "ws@npm:8.17.0"
+"ws@npm:^8.17.1":
+  version: 8.17.1
+  resolution: "ws@npm:8.17.1"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ">=5.0.2"
@@ -24242,7 +24255,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 5e1dcb0ae70c6e2f158f5b446e0a72a2cd335b07aba73ee1872e9bae1285382286a10e53ed479db21bdd690a5dfd05641a768611ebb236253c62fefa43ef58b4
+  checksum: 4264ae92c0b3e59c7e309001e93079b26937aab181835fb7af79f906b22cd33b6196d96556dafb4e985742dd401e99139572242e9847661fdbc96556b9e6902d
   languageName: node
   linkType: hard
 

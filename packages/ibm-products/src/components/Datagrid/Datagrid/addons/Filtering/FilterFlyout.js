@@ -221,7 +221,11 @@ const FilterFlyout = ({
     cancel();
   });
 
-  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+  // tableId is passed in from the event emitter from the FilterSummary component
+  // in  DatagridContent
+  useSubscribeToEventEmitter(CLEAR_FILTERS, (tableId) => {
+    reset(tableId);
+  });
 
   useEffect(
     function reflectLastAppliedFiltersWhenReactTableUpdates() {

@@ -98,6 +98,7 @@ $header-cell-background: $layer-accent-01;
     position: sticky;
     z-index: 4;
     left: 0;
+    background-color: $background;
   }
   .#{$block-class}__td-th.#{$block-class}__td {
     @include font-family.font-weight('semibold');

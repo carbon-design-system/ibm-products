@@ -189,9 +189,13 @@ const DatagridRow = (datagridState: DataGridState) => {
           const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
-          if (withActionsColumn && style) {
-            style.flex =
-              index === visibleColumns.length - 2 ? '1 1 0' : '0 0 auto';
+          const lastVisibleIndex = withActionsColumn ? 2 : 1;
+          const lastVisibleFlexStyle =
+            index === visibleColumns.length - lastVisibleIndex
+              ? '1 1 0'
+              : '0 0 auto';
+          if (style) {
+            style.flex = lastVisibleFlexStyle;
           }
           return (
             <TableCell

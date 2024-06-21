@@ -225,9 +225,13 @@ const HeaderRow = (
 
           const resizerProps = header?.getResizerProps?.();
           const headerStyle = headerProps?.style;
-          if (withActionsColumn && headerStyle) {
-            headerStyle.flex =
-              index === visibleColumns.length - 2 ? '1 1 0' : '0 0 auto';
+          const lastVisibleIndex = withActionsColumn ? 2 : 1;
+          const lastVisibleFlexStyle =
+            index === visibleColumns.length - lastVisibleIndex
+              ? '1 1 0'
+              : '0 0 auto';
+          if (headerStyle) {
+            headerStyle.flex = lastVisibleFlexStyle;
           }
           return (
             <TableHeader

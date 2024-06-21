@@ -17,6 +17,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   useSortableColumns,
+  getAutoSizedColumnWidth,
 } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
 import { DocsPage } from './ColumnCustomization.docs-page';
@@ -249,7 +250,7 @@ ColumnCustomizationUsageStory.args = {
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
   const stickyHeaders = defaultHeader.slice(2, 15);
-
+  const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(
     () => [
       {
@@ -258,23 +259,24 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
         sticky: 'left',
         id: 'rowIndex', // id is required when accessor is a function.
       },
+      ...stickyHeaders,
       {
         Header: 'First Name',
         accessor: 'firstName',
         disabled: true,
+        width: getAutoSizedColumnWidth(data, 'firstName', 'First Name'),
       },
-      ...stickyHeaders,
+
       {
         Header: '',
         accessor: 'actions',
         sticky: 'right',
-        width: 48,
+        width: getAutoSizedColumnWidth(data, 'actions', ''),
         isAction: true,
       },
     ],
-    []
+    [data]
   );
-  const [data] = useState(makeData(10));
 
   const datagridState = useDatagrid(
     {
@@ -316,7 +318,9 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
           icon: TrashCan,
           isDelete: true,
           hasDivider: true,
-          onClick: action('Clicked row action: delete'),
+          onClick: (actionId, row, event) => {
+            setData(data.filter((rowData) => rowData.id !== row.original.id));
+          },
         },
       ],
       ...args.defaultGridProps,

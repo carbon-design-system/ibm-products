@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
   blockClass,
@@ -7,6 +8,11 @@ import {
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 const ConditionPreview = ({ previewType }) => {
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
   const getConditionSection = () => {
     return (
       <div>
@@ -16,12 +22,16 @@ const ConditionPreview = ({ previewType }) => {
       </div>
     );
   };
+
   return (
     <>
       {previewType == 'newGroup' && (
         <>
           <div
-            className={`${blockClass}__group__row ${blockClass}__group-preview  `}
+            className={cx([
+              `${blockClass}__group__row ${blockClass}__group-preview `,
+              { [`${blockClass}__group-preview-animate`]: animate },
+            ])}
           >
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
@@ -30,7 +40,10 @@ const ConditionPreview = ({ previewType }) => {
           </div>
           <div
             aria-hidden
-            className={`${blockClass}__group ${blockClass}__condition-wrapper ${blockClass}__group-preview ${blockClass}__group-wrapper`}
+            className={cx([
+              `${blockClass}__group ${blockClass}__condition-wrapper ${blockClass}__group-preview ${blockClass}__group-wrapper `,
+              { [`${blockClass}__group-preview-animate`]: animate },
+            ])}
           >
             <div className={`${blockClass}__gap`}>
               <ConditionBuilderItem
@@ -44,7 +57,12 @@ const ConditionPreview = ({ previewType }) => {
       )}
 
       {previewType == 'subGroup' && (
-        <div className={`${blockClass}__group-preview`}>
+        <div
+          className={cx([
+            `${blockClass}__group__row ${blockClass}__group-preview `,
+            { [`${blockClass}__group-preview-animate`]: animate },
+          ])}
+        >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
               label={translateWithId('and')}
@@ -65,7 +83,12 @@ const ConditionPreview = ({ previewType }) => {
         </div>
       )}
       {previewType == 'condition' && (
-        <div className={`${blockClass}__group-preview`}>
+        <div
+          className={cx([
+            `${blockClass}__group__row ${blockClass}__group-preview `,
+            { [`${blockClass}__group-preview-animate`]: animate },
+          ])}
+        >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
               label={translateWithId('and')}

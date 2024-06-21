@@ -142,9 +142,17 @@ interface TearsheetProps extends PropsWithChildren {
   portalTarget: ReactNode;
 
   /**
-   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
   selectorPrimaryFocus?: string;
+
+  /**
+   * Specify the CSS selectors that match the floating menus.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-composedmodal--overview#focus-management
+   */
+  selectorsFloatingMenus?: string[];
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -350,9 +358,18 @@ Tearsheet.propTypes = {
   portalTarget: portalType,
 
   /**
-   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
   selectorPrimaryFocus: PropTypes.string,
+
+  /**
+   * Specify the CSS selectors that match the floating menus.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-composedmodal--overview#focus-management
+   */
+  /**@ts-ignore*/
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * The main title of the tearsheet, displayed in the header area.

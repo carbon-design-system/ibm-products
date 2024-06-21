@@ -212,7 +212,7 @@ export const DatagridContent = ({
       <FilterSummary
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS, tableId)}
         renderLabel={filterProps?.renderLabel}
         overflowType="tag"
       />

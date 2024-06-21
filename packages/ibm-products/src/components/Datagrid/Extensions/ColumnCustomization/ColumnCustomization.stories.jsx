@@ -259,14 +259,13 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
         sticky: 'left',
         id: 'rowIndex', // id is required when accessor is a function.
       },
-      ...stickyHeaders,
       {
         Header: 'First Name',
         accessor: 'firstName',
         disabled: true,
         width: getAutoSizedColumnWidth(data, 'firstName', 'First Name'),
       },
-
+      ...stickyHeaders,
       {
         Header: '',
         accessor: 'actions',

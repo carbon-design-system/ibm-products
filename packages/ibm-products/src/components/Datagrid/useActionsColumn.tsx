@@ -15,16 +15,17 @@ import {
 } from '@carbon/react';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { Hooks, TableInstance } from 'react-table';
+import { DataGridState, RowAction } from './types';
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useActionsColumn = (hooks) => {
-  const useAttachActionsOnInstance = (instance) => {
+const useActionsColumn = (hooks: Hooks) => {
+  const useAttachActionsOnInstance = (instance: TableInstance) => {
     const {
       rowActions,
       isFetching,
       state: { selectedRowIds },
-    } = instance;
-
+    } = instance as DataGridState;
     const getDisabledState = (rowIndex) => {
       const selectedRowIndexes = Object.keys(selectedRowIds).map((n) =>
         Number(n)
@@ -58,9 +59,10 @@ const useActionsColumn = (hooks) => {
                       style={{ display: 'flex' }}
                     >
                       {rowActions.map((action, index) => {
-                        const preparedActionProps = prepareProps(action, [
-                          'isDelete',
-                        ]);
+                        const preparedActionProps: RowAction = prepareProps(
+                          action,
+                          ['isDelete']
+                        );
                         const {
                           align,
                           id,
@@ -110,11 +112,11 @@ const useActionsColumn = (hooks) => {
                                   return;
                                 }
                                 e.stopPropagation();
-                                onClick(id, row, e);
+                                onClick?.(id, row, e);
                               }}
                               disabled={isDisabledByRow}
                             >
-                              <Icon />
+                              {Icon && <Icon />}
                             </IconButton>
                           </div>
                         );
@@ -159,7 +161,7 @@ const useActionsColumn = (hooks) => {
                               disabled={isDisabledByRow}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onClick(id, row, e);
+                                onClick?.(id, row, e);
                               }}
                               key={id}
                             />

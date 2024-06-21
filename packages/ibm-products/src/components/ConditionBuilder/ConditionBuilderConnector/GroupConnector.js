@@ -5,7 +5,7 @@ import {
   connectorConfig,
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
-import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 
@@ -26,7 +26,7 @@ const GroupConnector = () => {
         popOverClassName={`${blockClass}__gap`}
         className={`${blockClass}__statement-button`}
       >
-        <ConditionBuilderItemOption
+        <ItemOption
           conditionState={{
             value: rootState.operator,
             label: translateWithId('condition'),

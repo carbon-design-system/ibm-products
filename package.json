@@ -62,7 +62,7 @@
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh",
-    "visual-snapshot": "cd packages/core && yarn percy storybook:start storybook-static"
+    "visual-snapshot": "cd packages/core && yarn percy storybook storybook-static"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

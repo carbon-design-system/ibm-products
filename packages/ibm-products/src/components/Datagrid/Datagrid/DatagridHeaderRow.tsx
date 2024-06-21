@@ -123,7 +123,8 @@ const HeaderRow = (
   headRef: MutableRefObject<HTMLDivElement>,
   headerGroup: DataGridHeaderGroup
 ) => {
-  const { resizerAriaLabel, isTableSortable, rows, isFetching } = datagridState;
+  const { resizerAriaLabel, isTableSortable, rows, isFetching, headers } =
+    datagridState;
   useInitialColumnSort(datagridState);
   // Used to measure the height of the table and uses that value
   // to display a vertical line to indicate the column you are resizing
@@ -193,6 +194,10 @@ const HeaderRow = (
 
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
   const { key, ...rowProps } = headerGroupProps;
+  const withActionsColumn = headers
+    ? !!headers.filter((header) => header.isAction).length
+    : false;
+
   return (
     <TableRow
       key={key}
@@ -206,6 +211,7 @@ const HeaderRow = (
       {datagridState?.headers
         ?.filter(({ isVisible }) => isVisible)
         ?.map((header, index) => {
+          console.log(header.isVisible, index);
           if (header.id === selectionColumnId) {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
@@ -219,6 +225,13 @@ const HeaderRow = (
           const { ...headerProps } = header.getHeaderProps();
 
           const resizerProps = header?.getResizerProps?.();
+          const headerStyle = headerProps?.style;
+          if (withActionsColumn && headerStyle) {
+            headerStyle.flex =
+              index === visibleColumns.length - 2 ? '1 1 0' : '0 0 auto';
+            console.log(visibleColumns.length - 1, index);
+          }
+          console.log(headerStyle);
           return (
             <TableHeader
               {...headerProps}

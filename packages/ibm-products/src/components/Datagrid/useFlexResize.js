@@ -15,11 +15,15 @@ const useFlexResize = (hooks) => {
       lastCol.isFlexCol = true;
       return [...columns];
     }
+    const visibleCols = columns.filter((col) => console.log(col.isVisible));
+    const visibleIdx = columns.findIndex((col) => col.isVisible);
+    console.log(visibleCols, columns, visibleIdx, actionsIdx);
     const cols = [...columns];
     const actions = cols.splice(actionsIdx, 1)[0];
     cols.splice(columns.length, 0, actions);
     // the last non-action action column should flex remaining space
     const lastCol = columns.at(-2);
+    // console.log(lastCol);
     lastCol.isFlexCol = true;
     return cols;
   });

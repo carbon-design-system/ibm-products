@@ -73,46 +73,46 @@ const defaultHeader = [
     accessor: 'visits',
     width: 60,
   },
-  {
-    Header: 'Someone 1',
-    accessor: 'someone1',
-  },
-  {
-    Header: 'Someone 2',
-    accessor: 'someone2',
-  },
-  {
-    Header: 'Someone 3',
-    accessor: 'someone3',
-  },
-  {
-    Header: 'Someone 4',
-    accessor: 'someone4',
-  },
-  {
-    Header: 'Someone 5',
-    accessor: 'someone5',
-  },
-  {
-    Header: 'Someone 6',
-    accessor: 'someone6',
-  },
-  {
-    Header: 'Someone 7',
-    accessor: 'someone7',
-  },
-  {
-    Header: 'Someone 8',
-    accessor: 'someone8',
-  },
-  {
-    Header: 'Someone 9',
-    accessor: 'someone9',
-  },
-  {
-    Header: 'Someone 10',
-    accessor: 'someone10',
-  },
+  // {
+  //   Header: 'Someone 1',
+  //   accessor: 'someone1',
+  // },
+  // {
+  //   Header: 'Someone 2',
+  //   accessor: 'someone2',
+  // },
+  // {
+  //   Header: 'Someone 3',
+  //   accessor: 'someone3',
+  // },
+  // {
+  //   Header: 'Someone 4',
+  //   accessor: 'someone4',
+  // },
+  // {
+  //   Header: 'Someone 5',
+  //   accessor: 'someone5',
+  // },
+  // {
+  //   Header: 'Someone 6',
+  //   accessor: 'someone6',
+  // },
+  // {
+  //   Header: 'Someone 7',
+  //   accessor: 'someone7',
+  // },
+  // {
+  //   Header: 'Someone 8',
+  //   accessor: 'someone8',
+  // },
+  // {
+  //   Header: 'Someone 9',
+  //   accessor: 'someone9',
+  // },
+  // {
+  //   Header: 'Someone 10',
+  //   accessor: 'someone10',
+  // },
 ];
 
 const sharedDatagridProps = {

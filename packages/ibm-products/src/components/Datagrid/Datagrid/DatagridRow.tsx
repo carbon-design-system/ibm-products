@@ -38,6 +38,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     withMouseHover,
     setMouseOverRowIndex,
     headers,
+    visibleColumns,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -139,6 +140,10 @@ const DatagridRow = (datagridState: DataGridState) => {
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
   });
 
+  const withActionsColumn = headers
+    ? !!headers.filter((header) => header.isAction).length
+    : false;
+
   return (
     <React.Fragment key={key}>
       <TableRow
@@ -168,7 +173,7 @@ const DatagridRow = (datagridState: DataGridState) => {
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps();
           // eslint-disable-next-line no-unused-vars
-          const { children, ...restProps } = cellProps as any;
+          const { style, children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
           const content = children || (
             <>
@@ -184,6 +189,10 @@ const DatagridRow = (datagridState: DataGridState) => {
           const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
+          if (withActionsColumn && style) {
+            style.flex =
+              index === visibleColumns.length - 2 ? '1 1 0' : '0 0 auto';
+          }
           return (
             <TableCell
               className={cx(
@@ -201,6 +210,7 @@ const DatagridRow = (datagridState: DataGridState) => {
                 columnClassname
               )}
               {...restProps}
+              style={style}
               key={cell.column.id}
               title={title}
             >

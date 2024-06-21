@@ -102,7 +102,14 @@ const largeDatasetSpreadsheetCustomRowHeaders = ({ ...args }) => {
   const columns = useMemo(() => columnData, []);
 
   const buildComponent = (index) => (
-    <OverflowMenu style={{ width: '28px' }}>
+    <OverflowMenu
+      style={{
+        width: '32px',
+        height: '32px',
+        minWidth: '32px',
+        minHeight: '32px',
+      }}
+    >
       <OverflowMenuItem itemText={`Test item ${index}`} />
     </OverflowMenu>
   );

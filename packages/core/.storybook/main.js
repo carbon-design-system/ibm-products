@@ -55,6 +55,8 @@ export default {
         viewport: true,
       },
     },
+    // https://www.npmjs.com/package/storybook-addon-accessibility-checker
+    getAbsolutePath('@storybook/addon-a11y'),
   ],
 
   framework: {

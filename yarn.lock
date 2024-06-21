@@ -1736,7 +1736,6 @@ __metadata:
     "@carbon/themes": "npm:^11.34.0"
     "@carbon/type": "npm:^11.26.0"
     "@percy/cli": "npm:^1.28.8"
-    "@percy/playwright": "npm:^1.0.5"
     "@percy/storybook": "npm:^6.0.0"
     "@storybook/addon-a11y": "npm:^8.1.10"
     "@storybook/addon-actions": "npm:^8.0.9"
@@ -4554,15 +4553,6 @@ __metadata:
   version: 1.28.8
   resolution: "@percy/logger@npm:1.28.8"
   checksum: 81ac2f4325c9242a66426579520884e85f6472c0859914e46b761bbcc1daa963d727c81be00906231e6a6aae333c64f8b65a97b46812f191e829c39e6e84967d
-  languageName: node
-  linkType: hard
-
-"@percy/playwright@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@percy/playwright@npm:1.0.5"
-  peerDependencies:
-    playwright-core: ">=1"
-  checksum: bef7fe484b8fd7168cfadda7d066f1785d53e5554d1f0d7d82a12eb5de5bf47c464c5cb5b2b473db7096044e5eb08c7124c72fa103767c4d1c915f9cfb825d15
   languageName: node
   linkType: hard
 

@@ -3,8 +3,7 @@ name: CI # Run CI Checks
 on:
   pull_request:
     branches:
-      - main
-      - v1
+      - feat/percy-integration
   merge_group:
     types: [checks_requested]
 
@@ -165,4 +164,31 @@ jobs:
     steps:
       - name: Check AVT Runner job status
         if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1
+
+  vrt-runner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build
+      - name: Run Percy Storybook
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+        run: yarn visual-snapshot
+
+  vrt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: vrt-runner
+    steps:
+      - name: Check VRT Runner job status
+        if: ${{ needs.vrt-runner.result != 'success' }}
         run: exit 1

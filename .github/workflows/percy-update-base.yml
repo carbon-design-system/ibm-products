@@ -1,0 +1,40 @@
+name: percy-update-base
+
+on:
+  push:
+    branches: [ main, release/v2*, feat/* ]
+
+concurrency:
+  group: percy-update-base-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-components:
+    if: github.repository == 'carbon-design-system/carbon-for-ibm-dotcom'
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: ['20.x']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
+      - name: Build
+        run: yarn lerna run --stream --ignore @carbon/ibmdotcom-react build
+      - name: Set env vars
+        uses: ./.github/actions/set-dotenv
+        with:
+          env-file: packages/web-components/.env
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+      - name: Run percy storybook
+        run: yarn build-storybook && yarn visual-snapshot
+        working-directory: packages/web-components
+

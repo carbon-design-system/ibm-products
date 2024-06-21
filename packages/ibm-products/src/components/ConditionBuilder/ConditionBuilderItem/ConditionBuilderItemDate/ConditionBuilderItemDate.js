@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
@@ -10,18 +10,28 @@ const blockClass = `${pkg.prefix}--condition-builder`;
 
 export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
   const DatePickerInputRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
   const [start_text, end_text] = useTranslations(['start_text', 'end_text']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
+  const onCloseHandler = (evt) => {
+    setIsOpen(false);
+    onChange(evt);
+  };
+  const onOpenHandler = () => {
+    setIsOpen(true);
+  };
+
   return (
-    <div className={`${blockClass}__item-date `}>
+    <div className={`${blockClass}__item-date `} data-open={isOpen}>
       {datePickerType == 'single' && (
         <DatePicker
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onClose={onChange}
+          onOpen={onOpenHandler}
+          onClose={onCloseHandler}
           value={conditionState.value}
         >
           <DatePickerInput
@@ -37,7 +47,8 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onClose={onChange}
+          onOpen={onOpenHandler}
+          onClose={onCloseHandler}
           value={conditionState.value}
         >
           <DatePickerInput

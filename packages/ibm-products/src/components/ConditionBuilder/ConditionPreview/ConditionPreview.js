@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  blockClass,
-  translateWithId,
-} from '../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
-const ConditionPreview = ({ previewType }) => {
+import { useTranslations } from '../utils/useTranslations';
+import { Bee } from '@carbon/react/icons';
+const ConditionPreview = ({ previewType, group }) => {
   const [animate, setAnimate] = useState(false);
+  const [property_text, operator_text, value_text, if_text] = useTranslations([
+    'value_text',
+    'operator_text',
+    'property_text',
+    'if_text',
+  ]);
+
   useEffect(() => {
     setAnimate(true);
   }, []);
-
   const getConditionSection = () => {
     return (
-      <div>
-        <ConditionBuilderItem label={translateWithId('property')} />
-        <ConditionBuilderItem label={translateWithId('operator')} />
-        <ConditionBuilderItem label={translateWithId('value')} />
+      <div className={`${blockClass}__preview-condition`}>
+        <ConditionBuilderItem label={property_text} renderIcon={Bee} />
+        <ConditionBuilderItem label={operator_text} />
+        <ConditionBuilderItem label={value_text} />
       </div>
     );
   };
@@ -35,7 +40,7 @@ const ConditionPreview = ({ previewType }) => {
           >
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
-              label={translateWithId('and')}
+              label={group.groupOperator}
             />
           </div>
           <div
@@ -48,7 +53,7 @@ const ConditionPreview = ({ previewType }) => {
             <div className={`${blockClass}__gap`}>
               <ConditionBuilderItem
                 className={`${blockClass}__statement-button`}
-                label={translateWithId('if')}
+                label={if_text}
               />
             </div>
             {getConditionSection()}
@@ -65,7 +70,7 @@ const ConditionPreview = ({ previewType }) => {
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={translateWithId('and')}
+              label={group.groupOperator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />
@@ -75,7 +80,7 @@ const ConditionPreview = ({ previewType }) => {
             >
               <ConditionConnector
                 className={`${blockClass}__gap ${blockClass}__groupConnector`}
-                operator={translateWithId('if')}
+                operator={if_text}
               />
               {getConditionSection()}
             </div>
@@ -91,7 +96,7 @@ const ConditionPreview = ({ previewType }) => {
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={translateWithId('and')}
+              label={group.groupOperator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />
@@ -106,6 +111,10 @@ const ConditionPreview = ({ previewType }) => {
 export default ConditionPreview;
 
 ConditionPreview.propTypes = {
+  /**
+   * current conditional group
+   */
+  group: PropTypes.object,
   /**
    * type of review to be displayed
    */

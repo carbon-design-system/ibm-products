@@ -216,6 +216,13 @@ export const inputData = {
       config: {},
     },
     {
+      id: 'id_long',
+      label: 'Id Long',
+      icon: Hashtag,
+      type: 'textarea',
+      config: {},
+    },
+    {
       id: 'price',
       label: 'Price',
       icon: Currency,

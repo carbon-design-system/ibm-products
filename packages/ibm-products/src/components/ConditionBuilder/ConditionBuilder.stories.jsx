@@ -18,6 +18,8 @@ import {
   sampleDataStructure_sentence,
   sampleDataStructure_tree,
 } from './assets/SampleData';
+import uuidv4 from '../../global/js/utils/uuidv4';
+
 export default {
   title: 'IBM Products/Components/ConditionBuilder',
   component: ConditionBuilder,
@@ -155,7 +157,7 @@ const getColors = () => {
   ];
 };
 
-const getOptions = async ({ property }) => {
+const getOptions = async (conditionState, { property }) => {
   switch (property) {
     case 'continent':
       return new Promise((resolve) => {
@@ -182,9 +184,18 @@ const getOptions = async ({ property }) => {
 const requiredProps = {
   startConditionLabel: 'Add Condition',
   popOverSearchThreshold: 4,
-  getConditionState: (rootState) => {},
+  getConditionState: (rootState) => {
+    console.log(rootState);
+  },
 };
 
+const actions = [
+  {
+    id: uuidv4(),
+    label: 'Add item to cart',
+  },
+  { id: uuidv4(), label: 'Proceed item to checkout' },
+];
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
@@ -224,6 +235,15 @@ conditionBuilderWithInitialState.args = {
   variant: 'sentence',
 };
 
+export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
+conditionBuilderWithActions.storyName = 'With Actions';
+conditionBuilderWithActions.args = {
+  inputConfig: inputData,
+  variant: 'sentence',
+  actions: actions,
+  getActionsState: (actionState) => {},
+};
+
 export const conditionBuilderTree = ConditionBuilderTemplate.bind({});
 conditionBuilderTree.storyName = 'Condition Builder(Tree)';
 conditionBuilderTree.args = {
@@ -237,4 +257,15 @@ conditionBuilderWithInitialStateTree.args = {
   initialState: sampleDataStructure_tree,
   inputConfig: inputData,
   variant: 'tree',
+};
+
+export const conditionBuilderWithActionsTree = ConditionBuilderTemplate.bind(
+  {}
+);
+conditionBuilderWithActionsTree.storyName = 'With Actions(Tree)';
+conditionBuilderWithActionsTree.args = {
+  inputConfig: inputData,
+  variant: 'tree',
+  actions: actions,
+  getActionsState: (actionState) => {},
 };

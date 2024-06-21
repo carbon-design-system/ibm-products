@@ -95,7 +95,14 @@ const newPerson = (index, config) => {
   return {
     disabledColumn: namor.generate({ words: 1, numbers: 0 }),
     firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
+    lastName:
+      index === 1 && config?.includeNonEditableCell && config?.column
+        ? {
+            value: '\u2014',
+            isStaticCell: true,
+            columnId: config?.column,
+          }
+        : namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),

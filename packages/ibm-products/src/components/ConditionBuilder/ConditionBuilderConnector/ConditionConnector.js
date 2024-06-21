@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import {
   blockClass,
   connectorConfig,
@@ -50,7 +50,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
       popOverClassName={className}
       className={`${blockClass}__connector-button `}
     >
-      <ConditionBuilderItemOption
+      <ItemOption
         config={{
           options: connectorConfig,
         }}

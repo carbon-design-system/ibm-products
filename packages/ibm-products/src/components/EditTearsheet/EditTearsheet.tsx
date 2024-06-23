@@ -153,11 +153,23 @@ export let EditTearsheet = forwardRef(
     }: EditTearsheetProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleOnRequestSubmit = async () => {
+      setIsSubmitting(true);
+      try {
+        await onRequestSubmit();
+      } catch (error) {
+        console.warn(`${componentName} submit error: ${error}`);
+      }
+      setIsSubmitting(false);
+    };
     const actions = [
       {
         key: 'edit-action-button-submit',
         label: submitButtonText,
-        onClick: onRequestSubmit,
+        onClick: () => handleOnRequestSubmit(),
+        loading: isSubmitting,
         kind: 'primary',
       },
       {

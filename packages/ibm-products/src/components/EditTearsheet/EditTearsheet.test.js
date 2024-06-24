@@ -215,7 +215,6 @@ describe(componentName, () => {
     render(
       <EditTearsheet
         {...{ ...defaultProps }}
-        onClose={onCloseReturnsTrue}
         onRequestSubmit={onRequestSubmitLong}
         open
       />
@@ -224,6 +223,7 @@ describe(componentName, () => {
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
     const submitButton = screen.getByText('Save');
+    expect(submitButton.disabled).toEqual(false);
 
     await act(() => click(submitButton));
     expect(submitButton.disabled).toBeTruthy();

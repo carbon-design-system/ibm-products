@@ -159,6 +159,7 @@ const newPerson = (index, config) => {
       (index === 1 || index === 3 || index === 4) && (
         <ExampleSlug align={config?.slugAlign} />
       ),
+    id: config?.id && `${config?.id}__${index}`,
   };
 };
 

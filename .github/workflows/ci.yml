@@ -181,9 +181,9 @@ jobs:
         run: yarn build
       - name: Run Percy Storybook
         working-directory: packages/core
-        env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
-        run: yarn percy storybook:start storybook-static
+        run: |
+          echo 'PERCY_TOKEN=${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}' >> .env
+          yarn percy storybook:start storybook-static
 
   vrt:
     if: ${{ always() }}

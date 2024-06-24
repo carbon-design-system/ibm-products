@@ -1,0 +1,1 @@
+function t(){const n=e=>typeof crypto<"u"?crypto.getRandomValues(new Uint8Array(1))[0]&15>>e/4:Math.random()*16>>e/4;return("10000000-1000-4000-8000"+-1e11).replace(/[018]/g,e=>(e^n(e)).toString(16))}export{t as u};

@@ -1,0 +1,1 @@
+const e=".tearsheet-stories__dummy-content-block{padding:1.5rem 2rem}.tearsheet-stories__narrow-content-block{padding:1rem}.tearsheet-stories__tabs{margin-left:-1rem}.tearsheet-stories__tabs .cds--tab-content{display:none}";export{e as s};

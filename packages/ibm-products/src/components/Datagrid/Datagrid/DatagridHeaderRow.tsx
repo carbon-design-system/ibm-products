@@ -35,16 +35,10 @@ import {
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-interface PropsType {
-  title?: string;
-}
-
 const getAccessibilityProps = (header: DataGridHeader) => {
-  const props: PropsType = {};
-  const title = getNodeTextContent(header.Header);
-  if (title) {
-    props.title = title;
-  } else {
+  const props = {};
+  const content = getNodeTextContent(header.Header);
+  if (!content) {
     props['aria-hidden'] = true;
   }
   return props;

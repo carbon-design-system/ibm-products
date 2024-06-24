@@ -59,7 +59,6 @@ const useNestedRowExpander = (hooks) => {
                 `${carbon.prefix}--btn--ghost`
               )}
               {...expanderButtonProps}
-              title={expanderTitle}
             >
               <ChevronRight
                 className={cx(`${blockClass}__expander-icon`, {

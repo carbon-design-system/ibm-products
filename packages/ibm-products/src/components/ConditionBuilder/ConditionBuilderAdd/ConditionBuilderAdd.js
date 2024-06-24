@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import PropTypes from 'prop-types';
@@ -74,14 +75,19 @@ const ConditionBuilderAdd = ({
         label={buttonLabel ?? translateWithId('add-condition')}
         wrapperProps={wrapperProps}
       />
-      {isAddSubgroup && enableSubGroup && (
+      {enableSubGroup && (
         <ConditionBuilderButton
           renderIcon={TextNewLine}
           onClick={addConditionSubGroupHandler}
-          className={`${blockClass}__add-condition-group ${blockClass}__gap-left`}
+          className={cx(
+            `${blockClass}__add_condition_group ${blockClass}__gap-left`
+          )}
           hideLabel
           label={translateWithId('add-condition')}
           wrapperProps={wrapperProps}
+          wrapperClassName={cx(`${blockClass}__add_condition_group-wrapper`, {
+            [`${blockClass}__add_condition_group-wrapper--show`]: isAddSubgroup,
+          })}
           {...previewHandlersForSubgroup()}
         />
       )}

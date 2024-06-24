@@ -162,7 +162,6 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -206,7 +205,6 @@ const sharedDatagridProps = {
 };
 
 const controlProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowSize: sharedDatagridProps.rowSize,
@@ -278,7 +276,6 @@ const slugColumnHeaderStoryName = 'Column slug';
 export const SlugColumnHeaderStory = GridWithSlugColumnHeaderWrapper.bind({});
 SlugColumnHeaderStory.storyName = slugColumnHeaderStoryName;
 SlugColumnHeaderStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -296,7 +293,6 @@ export const SlugSortableColumnHeaderStory =
   GridWithSlugColumnHeaderWrapper.bind({});
 SlugSortableColumnHeaderStory.storyName = slugSortableColumnHeaderStoryName;
 SlugSortableColumnHeaderStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -314,7 +310,6 @@ const slugRowStoryName = 'Row slug';
 export const SlugRowStory = GridWithSlugColumnHeaderWrapper.bind({});
 SlugRowStory.storyName = slugRowStoryName;
 SlugRowStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -333,7 +328,6 @@ const slugRowSelectionStoryName = 'Row slug with selection';
 export const SlugRowSelectionStory = GridWithSlugColumnHeaderWrapper.bind({});
 SlugRowSelectionStory.storyName = slugRowSelectionStoryName;
 SlugRowSelectionStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -355,7 +349,6 @@ export const SlugRowSelectionAndExpandStory =
   GridWithSlugColumnHeaderWrapper.bind({});
 SlugRowSelectionAndExpandStory.storyName = slugRowSelectionAndExpandStoryName;
 SlugRowSelectionAndExpandStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,

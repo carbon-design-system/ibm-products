@@ -147,13 +147,11 @@ const filters = [
 export const FlyoutBatch = FilteringTemplateWrapper.bind({});
 FlyoutBatch.storyName = 'Filter flyout with batch update';
 FlyoutBatch.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 FlyoutBatch.args = {
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -175,13 +173,11 @@ FlyoutBatch.args = {
 export const FlyoutInstant = FilteringTemplateWrapper.bind({});
 FlyoutInstant.storyName = 'Filter flyout with instant update';
 FlyoutInstant.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 FlyoutInstant.args = {
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -203,7 +199,6 @@ FlyoutInstant.args = {
 export const FlyoutWithInitialFilters = FilteringTemplateWrapper.bind({});
 FlyoutWithInitialFilters.storyName = 'Filter flyout with initial filters';
 FlyoutWithInitialFilters.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
@@ -218,7 +213,6 @@ FlyoutWithInitialFilters.args = {
       },
     ],
   },
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',

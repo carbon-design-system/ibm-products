@@ -58,7 +58,6 @@ export const DatagridContent = ({
     fullHeightDatagrid,
     verticalAlign = 'center',
     variableRowHeight,
-    gridTitle,
     gridDescription,
     useDenseHeader,
     withInlineEdit,
@@ -237,7 +236,6 @@ export const DatagridContent = ({
           [`${blockClass}__with-pagination`]: DatagridPagination,
           [`${blockClass}__dense-header`]: useDenseHeader,
         })}
-        title={gridTitle}
         description={gridDescription}
       >
         <DatagridToolbar
@@ -307,7 +305,6 @@ DatagridContent.propTypes = {
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
     verticalAlign: PropTypes.string,
-    gridTitle: PropTypes.node,
     gridDescription: PropTypes.node,
     page: PropTypes.arrayOf(PropTypes.object),
     rows: PropTypes.arrayOf(PropTypes.object),

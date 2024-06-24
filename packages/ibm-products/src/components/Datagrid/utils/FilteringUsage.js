@@ -22,7 +22,6 @@ import { getBatchActions } from './getBatchActions';
 export const FilteringUsage = ({ defaultGridProps }) => {
   const {
     gridDescription,
-    gridTitle,
     useDenseHeader,
     filterProps,
     emptyStateTitle,
@@ -112,7 +111,6 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
       filterProps,
-      gridTitle,
       gridDescription,
       useDenseHeader,
       emptyStateTitle,

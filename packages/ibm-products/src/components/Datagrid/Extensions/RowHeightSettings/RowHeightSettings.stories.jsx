@@ -103,7 +103,6 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -175,7 +174,6 @@ const BasicTemplateWrapper = ({ ...args }) => {
 };
 
 const basicUsageControlProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowSize: sharedDatagridProps.rowSize,
@@ -186,7 +184,6 @@ const basicUsageStoryName = 'With default row height settings';
 export const DefaultSettingsUsageStory = BasicTemplateWrapper.bind({});
 DefaultSettingsUsageStory.storyName = basicUsageStoryName;
 DefaultSettingsUsageStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,

@@ -83,7 +83,6 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -166,7 +165,6 @@ const RowActionButtonTemplateWrapper = ({ ...args }) => {
 };
 
 const rowActionButtonsProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowActions: sharedDatagridProps.rowActions,
@@ -177,7 +175,6 @@ export const RowActionButtonsUsageStory = RowActionButtonTemplateWrapper.bind(
 );
 RowActionButtonsUsageStory.storyName = basicUsageStoryName;
 RowActionButtonsUsageStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowActions: ARG_TYPES.rowActions,
@@ -226,7 +223,6 @@ const RowActionButtonOverflowTemplateWrapper = ({ ...args }) => {
 };
 
 const manyRowActionButtonsProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowActions: [
@@ -258,7 +254,6 @@ export const ManyRowActionButtonsUsageStory =
   RowActionButtonOverflowTemplateWrapper.bind({});
 ManyRowActionButtonsUsageStory.storyName = manyRowActionButtonsStoryName;
 ManyRowActionButtonsUsageStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowActions: ARG_TYPES.rowActions,
@@ -340,7 +335,6 @@ const RowActionButtonBatchTemplateWrapper = ({ ...args }) => {
 };
 
 const rowActionButtonsBatchActionsProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowActions: sharedDatagridProps.rowActions,
@@ -354,7 +348,6 @@ export const RowActionButtonsBatchActionsUsageStory =
 RowActionButtonsBatchActionsUsageStory.storyName =
   rowActionButtonsBatchActionsStoryName;
 RowActionButtonsBatchActionsUsageStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowActions: ARG_TYPES.rowActions,

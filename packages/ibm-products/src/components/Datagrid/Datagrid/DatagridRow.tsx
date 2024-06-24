@@ -185,7 +185,6 @@ const DatagridRow = (datagridState: DataGridState) => {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
           }
-          const title = content?.props?.children[0]?.props?.value;
           const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
@@ -216,7 +215,6 @@ const DatagridRow = (datagridState: DataGridState) => {
               {...restProps}
               style={style}
               key={cell.column.id}
-              title={title}
             >
               {content}
             </TableCell>

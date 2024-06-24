@@ -114,7 +114,6 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -203,7 +202,6 @@ const BasicTemplateWrapper = ({ ...args }) => {
 };
 
 const expandableRowControlProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   expandedContentHeight: sharedDatagridProps.expandedContentHeight,
   expanderButtonTitleExpanded: sharedDatagridProps.expanderButtonTitleExpanded,
@@ -214,7 +212,6 @@ const expandableRowStoryName = 'With expandable row';
 export const ExpandableRowStory = BasicTemplateWrapper.bind({});
 ExpandableRowStory.storyName = expandableRowStoryName;
 ExpandableRowStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   expandedContentHeight: ARG_TYPES.expandedContentHeight,
   expanderButtonTitleExpanded: ARG_TYPES.expanderButtonTitleExpanded,

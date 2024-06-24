@@ -119,7 +119,6 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
-  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -227,7 +226,6 @@ const ColumnCustomizationWrapper = ({ ...args }) => {
 };
 
 const columnCustomizationControlProps = {
-  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   customizeColumnsProps: sharedDatagridProps.customizeColumnsProps,
@@ -238,7 +236,6 @@ export const ColumnCustomizationUsageStory = ColumnCustomizationWrapper.bind(
 );
 ColumnCustomizationUsageStory.storyName = columnCustomizationStoryName;
 ColumnCustomizationUsageStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
@@ -356,7 +353,6 @@ export const ColumnCustomizationWithFixedColumnAndDisabledStory =
 ColumnCustomizationWithFixedColumnAndDisabledStory.storyName =
   columnCustomizationFixedStoryName;
 ColumnCustomizationWithFixedColumnAndDisabledStory.argTypes = {
-  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   customizeColumnsProps: ARG_TYPES.customizeColumnsProps,

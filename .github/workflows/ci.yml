@@ -152,7 +152,7 @@ jobs:
         working-directory: packages/core
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
-          run: yarn percy storybook http://localhost:3000
+        run: yarn percy storybook http://localhost:3000
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results

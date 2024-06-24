@@ -155,7 +155,7 @@ const filteringReducer = (state, action) => {
   }
 };
 
-export const FilterProvider = ({ children, filters, filterProps }) => {
+export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
@@ -172,6 +172,7 @@ export const FilterProvider = ({ children, filters, filterProps }) => {
     setPanelOpen,
     state,
     dispatch,
+    tableId,
   };
 
   return (
@@ -186,4 +187,5 @@ FilterProvider.propTypes = {
   ]).isRequired,
   filterProps: PropTypes.object,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableId: PropTypes.string,
 };

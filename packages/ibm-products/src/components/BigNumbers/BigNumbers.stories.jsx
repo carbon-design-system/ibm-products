@@ -126,7 +126,7 @@ export default {
 
 const defaultProps = {
   label: 'Label',
-  value: 12345.678,
+  value: 54321.678,
   total: 678901.2456,
   percentage: false,
   size: BigNumbersSize.Default,

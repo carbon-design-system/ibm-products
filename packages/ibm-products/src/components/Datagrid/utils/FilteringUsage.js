@@ -9,7 +9,7 @@
 import React, { useState } from 'react';
 import { Tooltip } from '@carbon/react';
 import { StatusIcon } from '../../StatusIcon';
-import { makeData } from './makeData';
+import { gridData } from '../Datagrid.stories/data/grid-data';
 import {
   Datagrid,
   useDatagrid,
@@ -67,7 +67,9 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       Header: 'Joined',
       accessor: 'joined',
       filter: 'date',
-      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+      Cell: ({ cell: { value } }) => (
+        <span>{new Date(value).toLocaleDateString()}</span>
+      ),
     },
     // Shows the checkbox filter example
     {
@@ -101,7 +103,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const columns = React.useMemo(() => headers, []);
-  const [data] = useState(initialData ?? makeData(20));
+  const [data] = useState(initialData ?? gridData.slice(0, 20));
 
   const datagridState = useDatagrid(
     {

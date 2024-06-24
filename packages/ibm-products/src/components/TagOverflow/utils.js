@@ -5,13 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { forwardRef } from 'react';
-
 import * as CarbonIcons from '@carbon/icons-react';
-
 import { TYPES } from './constants';
 
 const tagLabel = (index) => `Tag ${index + 1}`;
-
 export const tags = Array.from({ length: 20 }, (v, k) => ({
   label: tagLabel(k),
   id: `id-${k}`,
@@ -94,18 +91,9 @@ const lastNames = [
 ];
 //cspell: enable
 
-// Method to generate random names
-const generateName = () => {
-  const randomFirstName =
-    firstNames[Math.floor(Math.random() * firstNames.length)];
-  const randomLastName =
-    lastNames[Math.floor(Math.random() * lastNames.length)];
-  return `${randomFirstName} ${randomLastName}`;
-};
-
 // Users for UserAvatar stories
 export const ManyUserAvatarArr = Array.from({ length: 20 }, (v, k) => {
-  const name = generateName();
+  const name = `${firstNames[k]} ${lastNames[k]}`;
   return {
     id: `id-${k}`,
     label: name,

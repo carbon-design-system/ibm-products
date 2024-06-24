@@ -20,7 +20,7 @@ import styles from '../../_storybook-styles.scss?inline';
 import { DocsPage } from './RowActionButtons.docs-page';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
-import { makeData } from '../../utils/makeData';
+import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
@@ -139,7 +139,7 @@ const RowActionButtons = ({ ...args }) => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
@@ -199,7 +199,7 @@ const RowActionButtonsOverflow = ({ ...args }) => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
@@ -280,7 +280,7 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(

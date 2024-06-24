@@ -773,6 +773,12 @@ fullyLoaded.args = {
   ...commonArgs,
 };
 
+fullyLoaded.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const fullyLoadedAndSome = Template.bind({});
 fullyLoadedAndSome.storyName = 'Page header with long values and many items';
 fullyLoadedAndSome.args = {

@@ -176,13 +176,14 @@ jobs:
         with:
           node-version: '20.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn
       - name: Build project
         run: yarn build
       - name: Run Percy Storybook
+        working-directory: packages/core
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
-        run: yarn visual-snapshot
+        run: yarn percy storybook:start storybook-static
 
   vrt:
     if: ${{ always() }}

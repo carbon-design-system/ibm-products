@@ -73,6 +73,12 @@ export let HTTPError404 = React.forwardRef<HTMLDivElement, HTTPError404Props>(
   }
 );
 
+/**@ts-ignore*/
+HTTPError404.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with FullPageError`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 HTTPError404 = pkg.checkComponentEnabled(HTTPError404, componentName);
 

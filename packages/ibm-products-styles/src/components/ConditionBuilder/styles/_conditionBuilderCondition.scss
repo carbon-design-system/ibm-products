@@ -1,6 +1,6 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/motion';
+@use '@carbon/react/scss/motion' as *;
 @use '@carbon/styles/scss/components/tag' as *;
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '../../../global/styles/project-settings' as c4p-settings;
@@ -52,8 +52,16 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   text-wrap: nowrap;
 }
 .#{$block-class}__group-preview {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
+}
+.#{$block-class}__group-preview-animate {
+  height: auto;
   opacity: 0.5;
   pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
 }
 .#{$block-class}__connector-disabled {
   display: flex;

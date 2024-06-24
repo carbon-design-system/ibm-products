@@ -221,6 +221,7 @@ export interface DataGridState<T extends object = any>
   useDenseHeader?: boolean;
   withInlineEdit?: boolean;
   verticalAlign?: string;
+  gridTitle?: ReactNode;
   gridDescription?: ReactNode;
   gridRef?: MutableRefObject<HTMLDivElement>;
   DatagridBatchActions?: (args) => ReactNode;

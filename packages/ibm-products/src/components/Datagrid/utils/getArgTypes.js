@@ -6,6 +6,13 @@
  */
 
 export const ARG_TYPES = {
+  gridTitle: {
+    name: 'gridTitle',
+    control: 'text',
+    description:
+      'This sets the title text for the Datagrid component. _This value is set/passed inside of the `datagridState` object._',
+    type: { name: 'string', required: false },
+  },
   gridDescription: {
     name: 'gridDescription',
     control: 'text',

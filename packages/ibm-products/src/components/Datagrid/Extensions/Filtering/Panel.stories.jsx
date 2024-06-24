@@ -223,11 +223,13 @@ export const filterProps = {
 export const PanelBatch = FilteringTemplateWrapper.bind({});
 PanelBatch.storyName = 'Filter panel with batch update';
 PanelBatch.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelBatch.args = {
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -239,11 +241,13 @@ PanelBatch.args = {
 export const PanelInstant = FilteringTemplateWrapper.bind({});
 PanelInstant.storyName = 'Filter panel with instant update';
 PanelInstant.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelInstant.args = {
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -398,6 +402,7 @@ PanelInstant.args = {
 export const PanelWithInitialFilters = FilteringTemplateWrapper.bind({});
 PanelWithInitialFilters.storyName = 'Filter panel with initial filters';
 PanelWithInitialFilters.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
@@ -436,6 +441,7 @@ PanelWithInitialFilters.args = {
       },
     ],
   },
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -590,11 +596,13 @@ PanelWithInitialFilters.args = {
 export const PanelOnlyAccordions = FilteringTemplateWrapper.bind({});
 PanelOnlyAccordions.storyName = 'Filter panel only accordions';
 PanelOnlyAccordions.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelOnlyAccordions.args = {
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -750,11 +758,13 @@ PanelOnlyAccordions.args = {
 export const PanelNoAccordions = FilteringTemplateWrapper.bind({});
 PanelNoAccordions.storyName = 'Filter panel no accordions';
 PanelNoAccordions.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelNoAccordions.args = {
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',
@@ -910,12 +920,14 @@ PanelNoAccordions.args = {
 export const PanelNoData = FilteringTemplateWrapper.bind({});
 PanelNoData.storyName = 'Filter panel no data (disabled)';
 PanelNoData.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelNoData.args = {
   data: [],
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No data',
@@ -1070,11 +1082,13 @@ PanelNoData.args = {
 export const PanelManyCheckboxes = FilteringTemplateWrapper.bind({});
 PanelManyCheckboxes.storyName = 'Filter panel with many checkboxes';
 PanelManyCheckboxes.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   filterProps: ARG_TYPES.filterProps,
 };
 PanelManyCheckboxes.args = {
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   emptyStateTitle: 'No filters match',

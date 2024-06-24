@@ -36,6 +36,7 @@ export const InlineEditButton = ({
       data-disabled={disabledCell}
       aria-disabled={disabledCell}
       role="button"
+      title={label}
     >
       {LabelIcon && (
         <div className={`${blockClass}__label-icon`}>

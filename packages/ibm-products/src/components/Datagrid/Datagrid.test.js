@@ -2333,6 +2333,7 @@ describe(componentName, () => {
   });
 
   const sharedFilterGridProps = {
+    gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
     emptyStateTitle: 'No filters match',

@@ -168,6 +168,7 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -272,12 +273,14 @@ const BasicTemplateWrapper = ({ ...args }) => {
 };
 
 const clickableRowControlProps = {
+  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
 };
 const clickableRowItemStoryName = 'With clickable row item';
 export const ClickableRowItemStory = BasicTemplateWrapper.bind({});
 ClickableRowItemStory.storyName = clickableRowItemStoryName;
 ClickableRowItemStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
 };
 ClickableRowItemStory.args = {
@@ -400,6 +403,7 @@ const clickableRowStoryName = 'Clickable row with side panel';
 export const ClickableRowStory = ClickableRowWithPanelWrapper.bind({});
 ClickableRowStory.storyName = clickableRowStoryName;
 ClickableRowStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
 };
 ClickableRowStory.args = {

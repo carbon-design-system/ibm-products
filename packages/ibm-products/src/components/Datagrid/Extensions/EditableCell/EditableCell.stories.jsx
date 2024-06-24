@@ -49,6 +49,7 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -173,6 +174,7 @@ const InlineEditTemplateWrapper = ({ ...args }) => {
 };
 
 const inlineEditUsageControlProps = {
+  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
@@ -180,6 +182,7 @@ const inlineEditUsageControlProps = {
 export const EditableCellUsageStory = EditableCellTemplateWrapper.bind({});
 EditableCellUsageStory.storyName = 'Using useEditableCell hook';
 EditableCellUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
 };
@@ -191,6 +194,7 @@ const basicUsageStoryName = 'Using deprecated useInlineEdit hook';
 export const InlineEditUsageStory = InlineEditTemplateWrapper.bind({});
 InlineEditUsageStory.storyName = basicUsageStoryName;
 InlineEditUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
 };

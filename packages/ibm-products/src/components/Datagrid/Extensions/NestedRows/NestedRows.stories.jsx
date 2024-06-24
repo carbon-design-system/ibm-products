@@ -140,6 +140,7 @@ const sharedDatagridProps = {
   emptyStateTitle: 'Empty state title',
   emptyStateDescription: 'Description text explaining why table is empty',
   emptyStateSize: 'lg',
+  gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
   useDenseHeader: false,
   rowSize: 'lg',
@@ -183,6 +184,7 @@ const sharedDatagridProps = {
 };
 
 const nestedRowsControlProps = {
+  gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
   rowSize: sharedDatagridProps.rowSize,
@@ -216,6 +218,7 @@ export const SingleLevelNestedRowsUsageStory =
   SingleLevelNestedRowsWrapper.bind({});
 SingleLevelNestedRowsUsageStory.storyName = singleNestedRowsStoryName;
 SingleLevelNestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -256,6 +259,7 @@ const nestedRowsStoryName = 'With nested rows';
 export const NestedRowsUsageStory = BasicTemplateWrapper.bind({});
 NestedRowsUsageStory.storyName = nestedRowsStoryName;
 NestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -295,6 +299,7 @@ export const SelectableNestedRowsUsageStory =
   SelectableNestedRowTemplateWrapper.bind({});
 SelectableNestedRowsUsageStory.storyName = selectableNestedRowsStoryName;
 SelectableNestedRowsUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,
@@ -311,6 +316,7 @@ const nestedRowsInitialStateStoryName = 'With initially expanded nested rows';
 export const NestedRowsInitialUsageStory = BasicTemplateWrapper.bind({});
 NestedRowsInitialUsageStory.storyName = nestedRowsInitialStateStoryName;
 NestedRowsInitialUsageStory.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
   rowSize: ARG_TYPES.rowSize,

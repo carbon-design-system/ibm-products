@@ -31,7 +31,7 @@ $close-btn-class: #{$block-class}--close-btn;
 $draghandle-btn-class: #{$block-class}__handle;
 
 .#{$block-class} {
-  position: absolute;
+  // position: absolute;
   z-index: 5901;
   width: 18rem;
   border-radius: $spacing-01;
@@ -82,124 +82,124 @@ $draghandle-btn-class: #{$block-class}__handle;
   }
 
   // OVERLAY AND CARET POSITIONING
-  &--top {
-    $horizontal-push: calc($distance-offset - $caret-center);
-    $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
+  // &--top {
+  //   $horizontal-push: calc($distance-offset - $caret-center);
+  //   $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
 
-    transform: translate(-50%, $translate-y);
+  //   transform: translate(-50%, $translate-y);
 
-    .#{$block-class}__caret {
-      left: calc(50% - $caret-center);
-      transform: rotate(180deg);
-    }
+  //   .#{$block-class}__caret {
+  //     left: calc(50% - $caret-center);
+  //     transform: rotate(180deg);
+  //   }
 
-    &-left {
-      transform: translate(calc(-1 * $distance-offset), $translate-y);
-      .#{$block-class}__caret {
-        left: $horizontal-push;
-        transform: rotate(180deg);
-      }
-    }
+  //   &-left {
+  //     transform: translate(calc(-1 * $distance-offset), $translate-y);
+  //     .#{$block-class}__caret {
+  //       left: $horizontal-push;
+  //       transform: rotate(180deg);
+  //     }
+  //   }
 
-    &-right {
-      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
-      .#{$block-class}__caret {
-        right: $horizontal-push;
-        transform: rotate(180deg);
-      }
-    }
-  }
+  //   &-right {
+  //     transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+  //     .#{$block-class}__caret {
+  //       right: $horizontal-push;
+  //       transform: rotate(180deg);
+  //     }
+  //   }
+  // }
 
-  &--bottom {
-    $horizontal-push: calc($distance-offset - $caret-center);
-    $top: calc(-1 * $caret-height);
-    $translate-y: calc($distance-offset + $caret-height);
+  // &--bottom {
+  //   $horizontal-push: calc($distance-offset - $caret-center);
+  //   $top: calc(-1 * $caret-height);
+  //   $translate-y: calc($distance-offset + $caret-height);
 
-    transform: translate(-50%, $translate-y);
-    .#{$block-class}__caret {
-      top: $top;
-      left: calc(50% - $caret-center);
-    }
+  //   transform: translate(-50%, $translate-y);
+  //   .#{$block-class}__caret {
+  //     top: $top;
+  //     left: calc(50% - $caret-center);
+  //   }
 
-    &-left {
-      transform: translate(calc(-1 * $distance-offset), $translate-y);
-      .#{$block-class}__caret {
-        top: $top;
-        left: $horizontal-push;
-      }
-    }
+  //   &-left {
+  //     transform: translate(calc(-1 * $distance-offset), $translate-y);
+  //     .#{$block-class}__caret {
+  //       top: $top;
+  //       left: $horizontal-push;
+  //     }
+  //   }
 
-    &-right {
-      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+  //   &-right {
+  //     transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
 
-      .#{$block-class}__caret {
-        top: $top;
-        right: $horizontal-push;
-      }
-    }
-  }
+  //     .#{$block-class}__caret {
+  //       top: $top;
+  //       right: $horizontal-push;
+  //     }
+  //   }
+  // }
 
-  &--left {
-    $right: calc(-1 * $caret-center * 1.5);
-    $translate-x: calc(-1 * (100% + $distance-offset + $caret-center));
-    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+  // &--left {
+  //   $right: calc(-1 * $caret-center * 1.5);
+  //   $translate-x: calc(-1 * (100% + $distance-offset + $caret-center));
+  //   $vertical-push: calc($distance-offset - ($caret-height * 0.5));
 
-    transform: translate($translate-x, -50%);
-    .#{$block-class}__caret {
-      top: calc(50% - ($caret-height * 0.5));
-      right: $right;
-      transform: rotate(90deg);
-    }
+  //   transform: translate($translate-x, -50%);
+  //   .#{$block-class}__caret {
+  //     top: calc(50% - ($caret-height * 0.5));
+  //     right: $right;
+  //     transform: rotate(90deg);
+  //   }
 
-    &-top {
-      transform: translate($translate-x, calc(-1 * $distance-offset));
-      .#{$block-class}__caret {
-        top: $vertical-push;
-        right: $right;
-        transform: rotate(90deg);
-      }
-    }
+  //   &-top {
+  //     transform: translate($translate-x, calc(-1 * $distance-offset));
+  //     .#{$block-class}__caret {
+  //       top: $vertical-push;
+  //       right: $right;
+  //       transform: rotate(90deg);
+  //     }
+  //   }
 
-    &-bottom {
-      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
-      .#{$block-class}__caret {
-        right: $right;
-        bottom: $vertical-push;
-        transform: rotate(90deg);
-      }
-    }
-  }
+  //   &-bottom {
+  //     transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+  //     .#{$block-class}__caret {
+  //       right: $right;
+  //       bottom: $vertical-push;
+  //       transform: rotate(90deg);
+  //     }
+  //   }
+  // }
 
-  &--right {
-    $left: calc(-1 * $caret-center * 1.5);
-    $translate-x: calc($distance-offset + $caret-center);
-    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+  // &--right {
+  //   $left: calc(-1 * $caret-center * 1.5);
+  //   $translate-x: calc($distance-offset + $caret-center);
+  //   $vertical-push: calc($distance-offset - ($caret-height * 0.5));
 
-    transform: translate($translate-x, -50%);
-    .#{$block-class}__caret {
-      top: calc(50% - ($caret-height * 0.5));
-      left: $left;
-      transform: rotate(-90deg);
-    }
+  //   transform: translate($translate-x, -50%);
+  //   .#{$block-class}__caret {
+  //     top: calc(50% - ($caret-height * 0.5));
+  //     left: $left;
+  //     transform: rotate(-90deg);
+  //   }
 
-    &-top {
-      transform: translate($translate-x, calc(-1 * $distance-offset));
-      .#{$block-class}__caret {
-        top: $vertical-push;
-        left: $left;
-        transform: rotate(-90deg);
-      }
-    }
+  //   &-top {
+  //     transform: translate($translate-x, calc(-1 * $distance-offset));
+  //     .#{$block-class}__caret {
+  //       top: $vertical-push;
+  //       left: $left;
+  //       transform: rotate(-90deg);
+  //     }
+  //   }
 
-    &-bottom {
-      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
-      .#{$block-class}__caret {
-        bottom: $vertical-push;
-        left: $left;
-        transform: rotate(-90deg);
-      }
-    }
-  }
+  //   &-bottom {
+  //     transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+  //     .#{$block-class}__caret {
+  //       bottom: $vertical-push;
+  //       left: $left;
+  //       transform: rotate(-90deg);
+  //     }
+  //   }
+  // }
 
   // ANIMATED MEDIA
   &__element-stepped-media {

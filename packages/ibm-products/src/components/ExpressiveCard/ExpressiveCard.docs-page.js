@@ -41,7 +41,7 @@ const DocsPage = () => (
         description:
           'A Carbon AI slug can be used within the ExpressiveCard using the Slug property.',
         source: {
-          language: 'js',
+          language: 'html',
           code: `
       <ExpressiveCard
   label="Label"
@@ -65,7 +65,7 @@ const DocsPage = () => (
         description:
           'Clickable tiles only accept a boolean value of true for the Slug property and display a hollow slug.',
         source: {
-          language: 'js',
+          language: 'html',
           code: `
       <ExpressiveCard
   label="Label"

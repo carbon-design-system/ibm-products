@@ -41,7 +41,7 @@ const DocsPage = () => (
         description:
           'A Carbon AI slug can be used within the ProductiveCard using the Slug property.',
         source: {
-          language: 'jsx',
+          language: 'html',
           code: `
           <ProductiveCard
   onClick={() => {}}
@@ -73,25 +73,25 @@ const DocsPage = () => (
         description:
           'Clickable tiles only accept a boolean value of true for the Slug property and display a hollow slug.',
         source: {
-          language: 'jsx',
+          language: 'html',
           code: `
           <ProductiveCard
-          onClick={() => {}}
-          onKeyDown={() => {}}
-          primaryButtonText="Ghost button"
-          slug={true}
-          title="Title"
-        >
-          <React.Fragment key=".0">
-            <div className="graph" />
-            <p>
-              Productive content text
-            </p>
-            <p>
-              Productive content text
-            </p>
-          </React.Fragment>
-        </ProductiveCard>
+  onClick={() => {}}
+  onKeyDown={() => {}}
+  primaryButtonText="Ghost button"
+  slug={true}
+  title="Title"
+>
+  <React.Fragment key=".0">
+    <div className="graph" />
+    <p>
+      Productive content text
+    </p>
+    <p>
+      Productive content text
+    </p>
+  </React.Fragment>
+</ProductiveCard>
           `,
         },
       },

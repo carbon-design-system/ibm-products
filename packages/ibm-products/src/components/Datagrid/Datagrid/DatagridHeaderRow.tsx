@@ -107,7 +107,10 @@ const ResizeHeader = ({
         aria-label={resizerAriaLabel || 'Resize column'}
         disabled={isFetching}
       />
-      <span className={`${blockClass}__col-resize-indicator`} />
+      <span
+        role="separator"
+        className={`${blockClass}__col-resize-indicator`}
+      />
     </>
   );
 };
@@ -217,7 +220,7 @@ const HeaderRow = (
           const originalCol = visibleColumns[index];
           const { ...headerProps } = header.getHeaderProps({ role: undefined });
 
-          const resizerProps = header?.getResizerProps?.();
+          const resizerProps = header?.getResizerProps?.({ role: undefined });
           const headerStyle = headerProps?.style;
           const lastVisibleIndex = withActionsColumn ? 2 : 1;
           const lastVisibleFlexStyle =

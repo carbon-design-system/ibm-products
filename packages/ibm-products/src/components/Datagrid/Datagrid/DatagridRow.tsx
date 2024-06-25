@@ -130,7 +130,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     return {};
   };
 
-  const { className, ...rowProps } = row.getRowProps();
+  const { className, ...rowProps } = row.getRowProps({ role: undefined });
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
@@ -156,7 +156,6 @@ const DatagridRow = (datagridState: DataGridState) => {
         onBlur={focusRemover}
         onKeyUp={handleOnKeyUp}
         {...setAdditionalRowProps()}
-        role={undefined}
       >
         {foundAIRow ? (
           row?.original?.slug ? (
@@ -172,7 +171,7 @@ const DatagridRow = (datagridState: DataGridState) => {
           )
         ) : null}
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps();
+          const cellProps = cell.getCellProps({ role: undefined });
           // eslint-disable-next-line no-unused-vars
           const { style, children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
@@ -216,7 +215,6 @@ const DatagridRow = (datagridState: DataGridState) => {
               {...restProps}
               style={style}
               key={cell.column.id}
-              role={undefined}
             >
               {content}
             </TableCell>

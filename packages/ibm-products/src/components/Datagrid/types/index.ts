@@ -5,8 +5,10 @@ import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonG
 import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 
-import {
+import React, {
   CSSProperties,
+  ComponentType,
+  FunctionComponent,
   JSXElementConstructor,
   MutableRefObject,
   ReactNode,
@@ -14,10 +16,12 @@ import {
 } from 'react';
 import {
   Cell,
+  Column,
   ColumnInstance,
   FilterValue,
   Filters,
   HeaderGroup,
+  Meta,
   Row,
   TableCommonProps,
   TableDispatch,
@@ -32,10 +36,11 @@ import {
   UseRowSelectRowProps,
   UseRowSelectState,
   UseSortByColumnProps,
+  UseSortByOptions,
   UseTableHooks,
 } from 'react-table';
 import { CarbonIconType } from '@carbon/react/icons';
-import { type ButtonProps } from '@carbon/react';
+import { IconButton, type ButtonProps } from '@carbon/react';
 import { TableBatchActionsProps } from '@carbon/react/lib/components/DataTable/TableBatchActions';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
@@ -131,9 +136,13 @@ export interface DatagridTableHooks<T extends object = any>
   extends UseTableHooks<T> {}
 
 export interface DatagridColumn<T extends object = any>
-  extends ColumnInstance<T> {
+  extends ColumnInstance<T>,
+    UseSortByOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
+  rightAlignedColumn?: boolean;
+  disableSortBy?: boolean;
+  centerAlignedColumn?: boolean;
 }
 
 export interface DataGridCell<T extends object = any>
@@ -150,6 +159,7 @@ export interface DatagridRow<T extends object = any>
   RowExpansionRenderer?: (state?: DataGridState) => void;
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
+  hasExpanded?: boolean;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -180,6 +190,16 @@ interface DataGridTableState
 export interface DataGridTableInstance<T extends object = any>
   extends TableInstance<T> {}
 
+export interface RowAction {
+  id?: string;
+  itemText?: string;
+  icon?: ComponentType | FunctionComponent;
+  align?: React.ComponentProps<typeof IconButton>['align'];
+  shouldHideMenuItem?: (...args) => void;
+  shouldDisableMenuItem?: (...args) => void;
+  disabled?: boolean;
+  onClick?: (...args) => void;
+}
 export interface DataGridState<T extends object = any>
   extends TableCommonProps,
     UsePaginationInstanceProps<T>,
@@ -208,6 +228,7 @@ export interface DataGridState<T extends object = any>
   batchActions?: boolean;
   row: DatagridRow;
   rows: Array<DatagridRow<any>>;
+  rowActions?: RowAction[];
   columns: Array<DatagridColumn>;
   key?: any;
   rowSize?: Size;
@@ -262,6 +283,18 @@ export interface DataGridState<T extends object = any>
   listRef?: MutableRefObject<any>;
   handleResize?: () => void;
   onVirtualScroll?: (evt?: boolean) => void;
+  fetchMoreData?: () => void;
+  loadMoreThreshold?: number;
+  expandedRowIds?: object;
+  onRowClick?: (row, event) => void;
+  onSort?: boolean;
+  column?: DatagridColumn;
+  expandedContentHeight?: number;
+  onRowExpand?: (
+    row: DatagridRow,
+    event: React.MouseEvent<HTMLElement>
+  ) => void;
+  ExpandedRowContentComponent?: JSXElementConstructor<any>;
 }
 
 // DatagridHeaderRow related types
@@ -279,3 +312,11 @@ export interface ResizeHeaderProps {
   resizerAriaLabel?: string;
   isFetching?: boolean;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type VisibleColumns<T extends object = {}> = (
+  allColumns: Array<ColumnInstance<T>>,
+  meta: Meta<T>
+) => Array<Column<T>>;
+
+export type NodeFuncType = (props) => ReactNode;

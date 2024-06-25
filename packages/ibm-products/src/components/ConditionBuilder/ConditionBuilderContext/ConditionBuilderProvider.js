@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const emptyState = {
+  operator: 'or',
   groups: [
     {
-      groupSeparateOperator: null,
       groupOperator: 'and',
       statement: 'if',
       id: uuidv4(),
@@ -43,12 +43,15 @@ export const ConditionBuilderProvider = (props) => {
   const [rootState, setRootState] = useState({
     groups: [],
   });
+  const [actionState, setActionState] = useState([]);
 
   return (
     <ConditionBuilderContext.Provider
       value={{
         rootState,
         setRootState,
+        actionState,
+        setActionState,
         inputConfig: props.inputConfig,
         popOverSearchThreshold: props.popOverSearchThreshold,
         getOptions: props.getOptions,
@@ -90,7 +93,14 @@ ConditionBuilderProvider.propTypes = {
         id: PropTypes.string,
         label: PropTypes.string,
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-        type: PropTypes.oneOf(['text', 'number', 'date', 'option', 'time']),
+        type: PropTypes.oneOf([
+          'text',
+          'number',
+          'date',
+          'option',
+          'time',
+          'custom',
+        ]),
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({

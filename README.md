@@ -151,6 +151,7 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://github.com/anamikaanu96"><img src="https://avatars.githubusercontent.com/u/47971732?v=4?s=100" width="100px;" alt="Anamika T S"/><br /><sub><b>Anamika T S</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=anamikaanu96" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/szinta"><img src="https://avatars.githubusercontent.com/u/53395955?v=4?s=100" width="100px;" alt="Sinta Augustine"/><br /><sub><b>Sinta Augustine</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=szinta" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/AustinGitHub"><img src="https://avatars.githubusercontent.com/u/10100397?v=4?s=100" width="100px;" alt="Austin"/><br /><sub><b>Austin</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=AustinGitHub" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

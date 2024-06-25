@@ -60,7 +60,9 @@ export let ConditionBuilder = React.forwardRef(
       getOptions,
       initialState,
       getConditionState,
+      getActionsState,
       variant,
+      actions,
       /* TODO: add other props for ConditionBuilder, with default values if needed */
 
       // Collect any other property values passed in.
@@ -72,7 +74,7 @@ export let ConditionBuilder = React.forwardRef(
     const conditionBuilderRef = ref || localRef;
 
     const handleKeyDownHandler = (evt) => {
-      handleKeyDown(evt, conditionBuilderRef);
+      handleKeyDown(evt, conditionBuilderRef, variant);
     };
 
     return (
@@ -108,7 +110,9 @@ export let ConditionBuilder = React.forwardRef(
               startConditionLabel={startConditionLabel}
               conditionBuilderRef={conditionBuilderRef}
               getConditionState={getConditionState}
+              getActionsState={getActionsState}
               initialState={initialState}
+              actions={actions}
             />
           </VStack>
         </div>
@@ -129,32 +133,83 @@ ConditionBuilder.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 ConditionBuilder.propTypes = {
   /**
-   * Provide the contents of the ConditionBuilder.
+   * optional array of actions
    */
-  //children: PropTypes.node.isRequired,
-
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string | PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * This is a callback that gives back the updated action state
+   */
+  getActionsState: PropTypes.func,
+  /**
+   * This is a callback that gives back updated condition state
+   */
   getConditionState: PropTypes.func.isRequired,
+  /**
+   * This is a callback that get triggered when  you want to dynamically fetch options.
+   *  Component call this when the option array is not passed against a property with type as option in the input config.
+   * This is an asynchronous callback that can return a promise , and you need to resolve the promise with options array in the valid format.
+   * You will receive the root condition state and current condition as the 2 arguments.
+   * eg: const getOptions = async (conditionState,condition) => {
+  switch (condition.property) {
+    case 'continent':
+      return new Promise((resolve) => {
+        const continents=[{
+      label: 'Africa',
+      id: 'Africa',
+    },...]
+          resolve(continents);
+      });
+      default:
+      return [];
+  }
+};
+   */
   getOptions: PropTypes.func,
+  /**
+   * Optional prop if you want to pass a saved condition state.
+   *  This object should respect the structure of condition state that is available in getConditionState callback
+   */
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
-        groupSeparateOperator: PropTypes.string,
-        groupOperator: PropTypes.string,
-        statement: PropTypes.string,
+        groupOperator: PropTypes.string.isRequired,
+        statement: PropTypes.string.isRequired,
         conditions: PropTypes.arrayOf(
-          PropTypes.shape({
-            property: PropTypes.string,
-            operator: PropTypes.string,
-            value: PropTypes.string,
-          })
+          PropTypes.oneOfType([
+            PropTypes.shape({
+              property: PropTypes.string.isRequired,
+              operator: PropTypes.string.isRequired,
+              value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.arrayOf(
+                  PropTypes.shape({
+                    id: PropTypes.string,
+                    label: PropTypes.string,
+                  })
+                ),
+                PropTypes.shape({
+                  id: PropTypes.string,
+                  label: PropTypes.string,
+                }),
+              ]),
+            }),
+            PropTypes.object,
+          ])
         ),
       })
     ),
+    operator: PropTypes.string,
   }),
+
   /**
    * This is a mandatory prop that defines the input to the condition builder.
    
@@ -162,19 +217,32 @@ ConditionBuilder.propTypes = {
   inputConfig: PropTypes.shape({
     properties: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
+        id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-        type: PropTypes.oneOf(['text', 'number', 'date', 'option', 'time']),
+        type: PropTypes.oneOf([
+          'text',
+          'number',
+          'date',
+          'option',
+          'time',
+          'custom',
+        ]).isRequired,
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
-              id: PropTypes.string,
-              label: PropTypes.string,
+              id: PropTypes.string.isRequired,
+              label: PropTypes.string.isRequired,
               icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
             })
           ),
-          includeSearch: PropTypes.bool,
+          component: PropTypes.func,
+          operators: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string.isRequired,
+              label: PropTypes.string.isRequired,
+            })
+          ),
         }),
       })
     ),
@@ -189,7 +257,6 @@ ConditionBuilder.propTypes = {
    * Provide a label to the button that starts condition builder
    */
   startConditionLabel: PropTypes.string.isRequired,
-
   /* TODO: add types and DocGen for all props. */
   /**
    * Provide the condition builder variant: sentence/ tree

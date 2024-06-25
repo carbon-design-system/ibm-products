@@ -104,6 +104,21 @@ interface DataSpreadsheetBodyProps {
   onActiveCellChange?: () => void;
 
   /**
+   * Check if user is using custom component
+   */
+  hasCustomRowHeader?: boolean;
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeader?: (index: number) => any[];
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeaderDirection?: string;
+
+  /**
    * The event handler that is called to set the rows for the empty spreadsheet
    */
   onDataUpdate?: ({ ...args }) => void;
@@ -131,7 +146,17 @@ interface DataSpreadsheetBodyProps {
   /**
    * Array of selection area data
    */
-  selectionAreaData?: object[];
+  selectionAreaData?: any[];
+
+  /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive?: boolean;
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive?: Dispatch<SetStateAction<boolean>>;
 
   /**
    * Array of selection areas
@@ -218,11 +243,16 @@ export const DataSpreadsheetBody = forwardRef(
       headerGroups,
       id,
       onDataUpdate,
+      renderRowHeader,
+      renderRowHeaderDirection,
+      hasCustomRowHeader,
       prepareRow,
       rows,
       selectionAreaData,
       setSelectionAreaData,
       setActiveCellCoordinates,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       selectionAreas,
       setContainerHasFocus,
       setSelectionAreas,
@@ -263,9 +293,19 @@ export const DataSpreadsheetBody = forwardRef(
     // back to the consumer
     useEffect(() => {
       if (selectionAreaData?.length) {
+        let selectionChanged = false;
+        if (
+          previousState?.selectionAreaData?.length !==
+            selectionAreaData?.length ||
+          selectionAreaData?.[0]?.cells.length !==
+            previousState?.selectionAreaData?.[0]?.cells.length
+        ) {
+          selectionChanged = true;
+        }
+
         if (
           (!clickAndHoldActive && previousState?.clickAndHoldActive) ||
-          previousState?.selectionAreaData?.length !== selectionAreaData?.length
+          selectionChanged
         ) {
           onSelectionAreaChange?.(selectionAreaData);
         }
@@ -341,6 +381,7 @@ export const DataSpreadsheetBody = forwardRef(
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
       visibleColumns,
+      hasCustomRowHeader,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -371,6 +412,8 @@ export const DataSpreadsheetBody = forwardRef(
       setClickAndHoldActive,
       setSelectionAreas,
       setValidStartingPoint,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       validStartingPoint,
       ref,
       setHeaderCellHoldActive,
@@ -447,6 +490,7 @@ export const DataSpreadsheetBody = forwardRef(
       setActiveCellInsideSelectionArea,
       setSelectionAreas,
       visibleColumns,
+      hasCustomRowHeader,
     ]);
 
     //this method will check for any duplicate selection area and remove.
@@ -655,10 +699,15 @@ export const DataSpreadsheetBody = forwardRef(
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,
                     {
+                      [`${blockClass}__td_custom`]: hasCustomRowHeader
+                        ? true
+                        : false,
                       [`${blockClass}__td-th--active-header`]:
-                        activeCellCoordinates?.row === index ||
-                        checkActiveHeaderCell(index, selectionAreas, 'row'),
+                        !hasCustomRowHeader &&
+                        (activeCellCoordinates?.row === index ||
+                          checkActiveHeaderCell(index, selectionAreas, 'row')),
                       [`${blockClass}__td-th--selected-header`]:
+                        !hasCustomRowHeader &&
                         checkSelectedHeaderCell(
                           index,
                           selectionAreas,
@@ -669,9 +718,17 @@ export const DataSpreadsheetBody = forwardRef(
                   )}
                   style={{
                     width: defaultColumn?.rowHeaderWidth,
+                    flexDirection: hasCustomRowHeader
+                      ? renderRowHeaderDirection === 'Left'
+                        ? 'row-reverse'
+                        : row
+                      : undefined,
                   }}
                 >
                   {index + 1}
+                  {hasCustomRowHeader &&
+                    typeof renderRowHeader === 'function' &&
+                    renderRowHeader(index)}
                 </button>
               </div>
               {/* CELL BUTTONS */}
@@ -715,7 +772,10 @@ export const DataSpreadsheetBody = forwardRef(
       },
       [
         prepareRow,
+        renderRowHeader,
+        renderRowHeaderDirection,
         rows,
+        hasCustomRowHeader,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClickEvent,
@@ -811,6 +871,11 @@ DataSpreadsheetBody.propTypes = {
   getTableBodyProps: PropTypes.func,
 
   /**
+   * Check if spreadsheet is using custom row header component attached
+   */
+  hasCustomRowHeader: PropTypes.bool,
+
+  /**
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
@@ -841,6 +906,16 @@ DataSpreadsheetBody.propTypes = {
   prepareRow: PropTypes.func,
 
   /**
+   * Component next to numbering rows
+   */
+  renderRowHeader: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeaderDirection: PropTypes.string,
+
+  /**
    * All of the spreadsheet row data
    */
   rows: PropTypes.arrayOf(PropTypes.object),
@@ -849,6 +924,11 @@ DataSpreadsheetBody.propTypes = {
    * The scrollbar width
    */
   scrollBarSize: PropTypes.number,
+
+  /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive: PropTypes.bool,
 
   /**
    * Array of selection area data
@@ -894,6 +974,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for header cell hold active value
    */
   setHeaderCellHoldActive: PropTypes.func,
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

@@ -4,7 +4,7 @@
 //  * This source code is licensed under the Apache-2.0 license found in the
 //  * LICENSE file in the root directory of this source tree.
 //  */
-
+import '../../../feature-flags';
 import { FilterContext, FilterPanel } from './addons/Filtering';
 import React, { useContext, ForwardedRef, useRef, useEffect } from 'react';
 import { Table, TableContainer } from '@carbon/react';
@@ -212,7 +212,7 @@ export const DatagridContent = ({
       <FilterSummary
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS, tableId)}
         renderLabel={filterProps?.renderLabel}
         overflowType="tag"
       />

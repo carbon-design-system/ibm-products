@@ -24,17 +24,25 @@ export const ConditionBuilderItem = ({
   ...rest
 }) => {
   const contentRef = useRef(null);
-  const [propertyLabel, setPropertyLabel] = useState(label);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
+  const getPropertyDetails = () => {
+    if (label === 'INVALID') {
+      return {
+        propertyLabel: translateWithId('invalid_text'),
+        isInvalid: true,
+      };
+    }
     const propertyId =
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
         : label;
-    setPropertyLabel(translateWithId(propertyId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [label]);
+    return {
+      isInvalid: false,
+      propertyLabel: translateWithId(propertyId),
+    };
+  };
+  const { propertyLabel, isInvalid } = getPropertyDetails();
 
   useEffect(() => {
     /**
@@ -50,7 +58,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'one-of'
+        condition.operator !== 'one_of'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
@@ -88,16 +96,17 @@ export const ConditionBuilderItem = ({
       }}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? translateWithId('add-condition')}
+        label={propertyLabel ?? translateWithId('add_condition')}
         hideLabel={!label ? true : false}
         onClick={() => {
-          setOpen(!open);
+          children ? setOpen(!open) : null;
         }}
         className={className}
         aria-haspopup
         aria-expanded={open}
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
+        isInvalid={isInvalid}
         {...rest}
       />
 
@@ -138,7 +147,11 @@ ConditionBuilderItem.propTypes = {
   /**
    * text to be displayed in the field
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 
   /**
    * class name for popover

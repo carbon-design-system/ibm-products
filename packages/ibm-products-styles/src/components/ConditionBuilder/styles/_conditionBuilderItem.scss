@@ -1,3 +1,5 @@
+@use 'sass:list';
+@use 'sass:string';
 @use '@carbon/react/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
@@ -8,10 +10,11 @@
 @use '@carbon/styles/scss/components/tag';
 
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/react/scss/colors' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
-.#{$block-class}__content-container * {
+.#{$block-class}__condition-wrapper * {
   @include type-style('body-01');
 }
 
@@ -120,7 +123,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__condition-builder__group.hoveredConnector
   .#{$block-class}__condition-wrapper
-  > .conditionBlockWrapper
+  > .#{$block-class}__condition-block
   .#{$block-class}__connector-button {
   background-color: $layer-hover;
 }
@@ -149,9 +152,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   padding-right: $spacing-03;
   padding-left: $spacing-03;
 }
-.#{$block-class}__conditionWrapper {
-  display: flex;
-}
 
 .#{$block-class}__multiselectSelectionStatusContainer {
   display: flex;
@@ -165,22 +165,64 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__item-option__option:focus {
   @include focus-outline.focus-outline('outline');
 }
-// .#{$block-class}__tree {
-//   .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
-//     flex-basis: 100%;
-//   }
-//   .#{$block-class}__groupConnector {
-//     background-color: $layer;
-//   }
-//   .#{$block-class}__condition-wrapper
-//     > :nth-child(1)
-//     .#{$block-class}__button,
-//   .#{$block-class}__condition-wrapper
-//     > :nth-child(2)
-//     .#{$block-class}__button {
-//     box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
-//   }
-// }
+//need to revamp to a simpler logic
+$colors: (
+  ($purple-70, $purple-60, $purple-50, $purple-40, $purple-30, $purple-20),
+  ($cyan-70, $cyan-60, $cyan-50, $cyan-40, $cyan-30, $cyan-20),
+  ($teal-70, $teal-60, $teal-50, $teal-40, $teal-30, $teal-20),
+  (
+    $magenta-70,
+    $magenta-60,
+    $magenta-50,
+    $magenta-40,
+    $magenta-30,
+    $magenta-20
+  ),
+  ($red-70, $red-60, $red-50, $red-40, $red-30, $red-20),
+  ($orange-70, $orange-60, $orange-50, $orange-40, $orange-30, $orange-20),
+  ($yellow-70, $yellow-60, $yellow-50, $yellow-40, $yellow-30, $yellow-20),
+  ($green-70, $green-60, $green-50, $green-40, $green-30, $green-20)
+);
+
+@for $i from 1 through list.length($colors) {
+  $selector: (
+    string.unquote(
+      '.#{$block-class}__content-container > .#{$block-class}__group-wrapper:nth-of-type(#{list.length($colors)}n+#{$i})'
+    )
+  );
+  $group-colors: list.nth($colors, $i);
+  @each $color in $group-colors {
+    #{$selector} {
+      /* stylelint-disable-next-line carbon/theme-token-use */
+      --#{$block-class}__condition-wrapper-color: #{$color};
+    }
+
+    $selector: list.append(
+      $selector,
+      string.unquote('.#{$block-class}__group')
+    );
+  }
+}
+
+.#{$block-class}__tree {
+  .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
+    flex-basis: 100%;
+  }
+  .#{$block-class}__groupConnector {
+    background-color: $layer;
+  }
+  .#{$block-class}__condition-wrapper > :nth-child(1) .#{$block-class}__button,
+  .#{$block-class}__condition-wrapper
+    > :nth-child(2)
+    .#{$block-class}__button:not(
+      .#{$block-class}__add-button,
+      .#{$block-class}__add_condition_group
+    ) {
+    /* stylelint-disable-next-line carbon/theme-token-use */
+    box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
+  }
+}
+
 .#{$block-class}__groupOperatorConnector {
   margin-bottom: $spacing-02;
 }
@@ -191,4 +233,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__option-icon {
   align-self: center;
   margin-left: auto;
+}
+.#{$block-class}__add_condition_group-wrapper {
+  z-index: -1;
+  margin-left: -50%;
+  opacity: 0;
+  pointer-events: none;
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+  transition: all linear $duration-fast-02;
+}
+.#{$block-class}__add_condition_group-wrapper--show {
+  z-index: 0;
+  margin-left: 0;
+  opacity: 1;
+  pointer-events: all;
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+  transition: all linear $duration-fast-02;
+}
+.#{$block-class}__invalid-input {
+  display: flex;
+  color: $support-warning;
 }

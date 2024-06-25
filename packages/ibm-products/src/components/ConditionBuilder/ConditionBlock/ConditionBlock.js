@@ -7,9 +7,9 @@ import {
   statementConfig,
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
-import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+
 import cx from 'classnames';
-import ConditionConnector from '../ConditionConnector/ConditionConnector';
+import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderItemNumber } from '../ConditionBuilderItem/ConditionBuilderItemNumber/ConditionBuilderItemNumber';
 import { ConditionBuilderItemText } from '../ConditionBuilderItem/ConditionBuilderItemText/ConditionBuilderItemText';
 import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuilderItemDate/ConditionBuilderItemDate';
@@ -19,6 +19,9 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
+import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
+import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
+
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
@@ -34,18 +37,17 @@ const ConditionBlock = (props) => {
     isStatement,
     group,
     onStatementChange,
-    addConditionHandler,
     conditionIndex,
+    addConditionHandler,
+    addConditionSubGroupHandler,
+    aria,
+    hideConditionSubGroupPreviewHandler,
+    showConditionSubGroupPreviewHandler,
+    hideConditionPreviewHandler,
+    showConditionPreviewHandler,
     isLastCondition,
   } = props;
-  const { inputConfig } = useContext(ConditionBuilderContext);
-  const itemComponents = {
-    option: ConditionBuilderItemOption,
-    text: ConditionBuilderItemText,
-    number: ConditionBuilderItemNumber,
-    date: ConditionBuilderItemDate,
-    time: ConditionBuilderItemTime,
-  };
+  const { inputConfig, variant } = useContext(ConditionBuilderContext);
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
@@ -59,13 +61,21 @@ const ConditionBlock = (props) => {
   };
 
   const { icon, type, config, label } = getCurrentConfig(property);
+
+  //Below possible input types expected for value field.
+  const itemComponents = {
+    text: ConditionBuilderItemText,
+    number: ConditionBuilderItemNumber,
+    date: ConditionBuilderItemDate,
+    time: ConditionBuilderItemTime,
+    option: ItemOptionForValueField,
+    custom: config?.component,
+  };
   const ItemComponent = property ? itemComponents[type] : null;
+
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt);
     onStatementChange(v);
-  };
-  const onConnectorOperatorChangeHandler = (op) => {
-    onConnectorOperatorChange(op);
   };
 
   const onPropertyChangeHandler = (newProperty) => {
@@ -86,10 +96,11 @@ const ConditionBlock = (props) => {
     });
   };
   const onValueChangeHandler = (newValue) => {
+    const currentCondition = { ...condition };
+    delete currentCondition.popoverToOpen;
     onChange({
-      ...condition,
+      ...currentCondition,
       value: newValue,
-      popoverToOpen: '',
     });
   };
   const handleShowDeletionPreview = () => {
@@ -99,34 +110,63 @@ const ConditionBlock = (props) => {
     setShowDeletionPreview(false);
   };
   const getOperators = () => {
+    if (config?.operators) {
+      return config.operators;
+    }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
     );
   };
+  const getAriaAttributes = () => {
+    return variant == 'tree'
+      ? {
+          'aria-level': aria.level,
+          'aria-posinset': aria.posinset,
+          'aria-setsize': aria.setsize,
+        }
+      : {};
+  };
   return (
     <div
       className={cx(
-        `${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom`,
+        `${blockClass}__condition-block`,
         {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
+        },
+        {
+          [`${blockClass}__gap-bottom`]:
+            variant == 'tree' &&
+            !(conditionIndex + 1 >= group.conditions.length),
+        },
+        {
+          [`${blockClass}__gap ${blockClass}__gap-bottom`]:
+            variant == 'sentence',
         }
       )}
-      key={conditionIndex}
       role="row"
       aria-label={translateWithId('condition_row')}
       tabIndex={-1}
+      {...getAriaAttributes()}
     >
+      {conjunction ? (
+        <ConditionConnector
+          className={`${blockClass}__gap`}
+          operator={conjunction}
+          onChange={(op) => onConnectorOperatorChange(op)}
+        />
+      ) : (
+        <div role="gridcell" />
+      )}
+
       {isStatement && (
         <ConditionBuilderItem
-          //   open={false}
           label={group.statement}
           title={translateWithId('condition')}
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
-          tabIndex={0}
         >
-          <ConditionBuilderItemOption
+          <ItemOption
             conditionState={{
               value: group.statement,
               label: translateWithId('condition'),
@@ -137,13 +177,7 @@ const ConditionBlock = (props) => {
         </ConditionBuilderItem>
       )}
 
-      {conjunction && (
-        <ConditionConnector
-          className={`${blockClass}__gap`}
-          operator={conjunction}
-          onChange={onConnectorOperatorChangeHandler}
-        />
-      )}
+      {/* <div className={`${blockClass}__block`}> */}
 
       <ConditionBuilderItem
         label={label}
@@ -154,7 +188,7 @@ const ConditionBlock = (props) => {
         condition={condition}
         type={type}
       >
-        <ConditionBuilderItemOption
+        <ItemOption
           conditionState={{
             value: property,
             label: translateWithId('property'),
@@ -171,7 +205,7 @@ const ConditionBlock = (props) => {
           condition={condition}
           type={type}
         >
-          <ConditionBuilderItemOption
+          <ItemOption
             config={{
               options: getOperators(),
             }}
@@ -201,6 +235,7 @@ const ConditionBlock = (props) => {
             }}
             onChange={onValueChangeHandler}
             config={config}
+            data-name="valueField"
           />
         </ConditionBuilderItem>
       )}
@@ -218,13 +253,24 @@ const ConditionBlock = (props) => {
           data-name="closeCondition"
         />
       </span>
-
+      {/* </div> */}
       {isLastCondition(conditionIndex, group.conditions) && (
         <ConditionBuilderAdd
           onClick={() => {
             addConditionHandler(conditionIndex);
           }}
-          //addConditionSubGroupHandler={()=>{addConditionSubGroupHandler(conditionIndex)}}
+          addConditionSubGroupHandler={() => {
+            addConditionSubGroupHandler(conditionIndex);
+          }}
+          showConditionSubGroupPreviewHandler={
+            showConditionSubGroupPreviewHandler
+          }
+          hideConditionSubGroupPreviewHandler={
+            hideConditionSubGroupPreviewHandler
+          }
+          enableSubGroup={variant == 'tree'}
+          showConditionPreviewHandler={showConditionPreviewHandler}
+          hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}
         />
       )}
@@ -240,29 +286,34 @@ ConditionBlock.propTypes = {
    */
   addConditionHandler: PropTypes.func,
   /**
+   * callback to add a new condition subgroup
+   */
+  addConditionSubGroupHandler: PropTypes.func,
+  /**
    * object hold aria attributes
    */
   aria: PropTypes.object,
-  /**
-   * object that hold the current condition
-   */
-  condition: PropTypes.object,
-  /**
-   * index of the current condition
-   */
-  conditionIndex: PropTypes.number,
 
+  condition: PropTypes.object,
+  conditionIndex: PropTypes.number,
   /**
    * string that decides to show the condition connector
    */
   conjunction: PropTypes.string,
+
   /**
    * object that hold the current group object where is condition is part of
    */
   group: PropTypes.object,
   /**
-   * callback to add a new condition
+   * handler for hiding sub group preview
    */
+  hideConditionPreviewHandler: PropTypes.func,
+  /**
+   * handler for hiding sub group preview
+   */
+  hideConditionSubGroupPreviewHandler: PropTypes.func,
+
   isLastCondition: PropTypes.func,
   /**
    *  boolean that decides to show the statement(if/ excl.if)
@@ -276,7 +327,6 @@ ConditionBlock.propTypes = {
    * callback to handle the connector(and/or) change
    */
   onConnectorOperatorChange: PropTypes.func,
-
   /**
    * callback for Remove a condition
    */
@@ -286,4 +336,16 @@ ConditionBlock.propTypes = {
    * callback to handle the statement(if/ excl.if) change
    */
   onStatementChange: PropTypes.func,
+  /**
+   * handler for showing add condition preview
+   */
+  showConditionPreviewHandler: PropTypes.func,
+  /**
+   * handler for showing sub group preview
+   */
+  showConditionSubGroupPreviewHandler: PropTypes.func,
+  /**
+   * object that hold the current condition
+   */
+  state: PropTypes.object,
 };

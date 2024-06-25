@@ -30,6 +30,7 @@ export default {
     docs: {
       page: () => (
         <StoryDocsPage
+          omitCodedExample
           blocks={[
             {
               title: 'Nested rows',
@@ -57,7 +58,7 @@ return <Datagrid datagridState={datagridState} />;
         />
       ),
     },
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     featureFlags: {
@@ -200,6 +201,7 @@ const SingleLevelNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
@@ -232,13 +234,16 @@ SingleLevelNestedRowsUsageStory.args = {
 
 const NestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
+  const [data] = useState(
+    makeData(10, 5, 2, 2, { id: 'testing-user-provided-id' })
+  );
   const datagridState = useDatagrid(
     {
       columns,
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
@@ -276,6 +281,7 @@ const SelectableNestedRows = ({ ...args }) => {
       data,
       DatagridActions,
       ...args.defaultGridProps,
+      getSubRows: (row) => row.subRows,
     },
     useNestedRows,
     useSelectRows
@@ -323,7 +329,7 @@ NestedRowsInitialUsageStory.args = {
   ...nestedRowsControlProps,
   initialState: {
     expandedRowIds: {
-      1: true,
+      'testing-user-provided-id__1': true,
       3: true,
     },
   },

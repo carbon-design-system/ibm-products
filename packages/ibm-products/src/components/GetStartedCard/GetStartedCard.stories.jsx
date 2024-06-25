@@ -38,7 +38,7 @@ const defaultProps = {
 };
 
 export default {
-  title: 'IBM Products/Components/Cards/GetStartedCard',
+  title: 'IBM Products/Onboarding/GetStartedCard',
   component: GetStartedCard,
   tags: ['autodocs'],
   parameters: {

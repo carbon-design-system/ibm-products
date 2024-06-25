@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Hooks, TableInstance } from 'react-table';
 import { pkg, carbon } from '../../settings';
+import { DataGridState } from './types';
 
-const useOnRowClick = (hooks) => {
-  const useInstance = (rowInstance) => {
-    const { onRowClick } = rowInstance;
+const useOnRowClick = (hooks: Hooks) => {
+  const useInstance = (rowInstance: TableInstance) => {
+    const { onRowClick } = rowInstance as DataGridState;
     const getRowProps = (props, datagridState) => {
       const { isFetching, row, instance } = datagridState;
       const { id, toggleRowSelected } = row;

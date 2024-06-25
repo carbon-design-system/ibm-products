@@ -13,11 +13,11 @@ import { useEffect } from 'react';
  * @param {object} useResetCreateComponent
  * @param {object} useResetCreateComponent.stepsContext
  * @param {number} useResetCreateComponent.stepNumber
- * @param {boolean} useResetCreateComponent.introStep
- * @param {boolean} useResetCreateComponent.invalid
- * @param {boolean} useResetCreateComponent.shouldIncludeStep
- * @param {string} useResetCreateComponent.secondaryLabel
- * @param {React.ReactNode} useResetCreateComponent.title
+ * @param {boolean | undefined} useResetCreateComponent.introStep
+ * @param {boolean | undefined} useResetCreateComponent.invalid
+ * @param {boolean | undefined} useResetCreateComponent.shouldIncludeStep
+ * @param {string | undefined } useResetCreateComponent.secondaryLabel
+ * @param {string | React.ReactNode} useResetCreateComponent.title
  */
 export const useRetrieveStepData = ({
   stepsContext,

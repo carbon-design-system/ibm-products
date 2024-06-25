@@ -102,6 +102,16 @@ interface DataSpreadsheetHeaderProps {
   >;
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive?: boolean;
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive?: Dispatch<SetStateAction<boolean>>;
+
+  /**
    * Setter fn for currentMatcher value
    */
   setCurrentMatcher?: Dispatch<SetStateAction<string>>;
@@ -149,6 +159,8 @@ export const DataSpreadsheetHeader = forwardRef(
       headerGroups,
       scrollBarSize,
       selectionAreas,
+      selectedHeaderReorderActive,
+      setSelectedHeaderReorderActive,
       setActiveCellCoordinates,
       setCurrentMatcher,
       setSelectionAreas,
@@ -166,8 +178,6 @@ export const DataSpreadsheetHeader = forwardRef(
     const [scrollBarSizeValue, setScrollBarSizeValue] = useState<
       number | undefined
     >(0);
-    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
-      useState(false);
     const previousState: PrevState = usePreviousValue({ cellSize }) || {};
     useEffect(() => {
       if (previousState?.cellSize !== cellSize) {
@@ -230,7 +240,6 @@ export const DataSpreadsheetHeader = forwardRef(
           // Remove columns, need to call handleHeaderCellSelection
           return;
         }
-        setSelectedHeaderReorderActive(true);
         const selectionAreaToClone = selectionAreas?.filter(
           (item) => item?.matcher === currentMatcher
         );
@@ -239,6 +248,15 @@ export const DataSpreadsheetHeader = forwardRef(
         ).current.querySelector(
           `[data-matcher-id="${selectionAreaToClone?.[0]?.matcher}"]`
         );
+        if (selectionAreaElement) {
+          selectionAreaElement.classList.add(
+            `${blockClass}__selection-area--element`
+          );
+        }
+        if (typeof setSelectedHeaderReorderActive === 'function') {
+          setSelectedHeaderReorderActive(true);
+        }
+
         const clickXPosition = event.clientX;
         const headerButtonCoords = event.target.getBoundingClientRect();
         const headerIndex = event.target.getAttribute('data-column-index');
@@ -324,6 +342,9 @@ export const DataSpreadsheetHeader = forwardRef(
                   data-row-index="header"
                   data-column-index="header"
                   type="button"
+                  style={{
+                    width: defaultColumn?.rowHeaderWidth,
+                  }}
                   tabIndex={-1}
                   aria-label={selectAllAriaLabel}
                   onClick={handleSelectAllClick}
@@ -368,7 +389,8 @@ export const DataSpreadsheetHeader = forwardRef(
                           : undefined
                       }
                       onMouseUp={
-                        selectedHeader
+                        selectedHeader &&
+                        typeof setSelectedHeaderReorderActive === 'function'
                           ? () => setSelectedHeaderReorderActive(false)
                           : undefined
                       }
@@ -475,6 +497,11 @@ DataSpreadsheetHeader.propTypes = {
   selectAllAriaLabel: PropTypes.string.isRequired,
 
   /**
+   * Header reordering is active
+   */
+  selectedHeaderReorderActive: PropTypes.bool,
+
+  /**
    * All of the cell selection area items
    */
   /**@ts-ignore */
@@ -494,6 +521,11 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for header cell hold active value
    */
   setHeaderCellHoldActive: PropTypes.func,
+
+  /**
+   * Set header reordering active or not
+   */
+  setSelectedHeaderReorderActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

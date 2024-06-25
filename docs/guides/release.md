@@ -16,8 +16,8 @@
 ## Overview
 
 The team follows a time-based release model where we deliver a stable `minor`
-update every two weeks. The full schedule for releases is available [here](need
-to fill out link here!).
+update every two weeks. The full schedule for releases is available
+[here](https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases).
 
 We also publish prereleases before every `minor` release. This prerelease
 happens several days before the stable release. This offers an integration
@@ -60,7 +60,7 @@ checkpoints:
 
 ### Prerelease
 
-The prerelease occurs on the last Monday of a sprint. During this stage, the
+The prerelease occurs on the first Monday of a sprint. During this stage, the
 release team will need to do the following:
 
 - [ ] Initiate code freeze by creating a release branch from `main`
@@ -103,9 +103,9 @@ from the release branch for further testing. To publish subsequent prereleases,
 
 ### Stable release
 
-A stable release occurs on the last Wednesday and finishes later in the day.
-This should occur after the prerelease has been tested and validated. During
-this stage, the release team will do the following:
+A stable release occurs on the last Wednesday of the sprint and finishes later
+in the day. This should occur after the prerelease has been tested and
+validated. During this stage, the release team will do the following:
 
 - [ ] Run the
       [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)

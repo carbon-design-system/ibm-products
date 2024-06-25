@@ -1,16 +1,17 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { ConditionBuilderItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ConditionBuilderItemOption';
+import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import {
+  blockClass,
   connectorConfig,
   translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
-import { pkg } from '../../../settings';
 import PropTypes from 'prop-types';
 import { focusThisField } from '../utils/util';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 
-const blockClass = `${pkg.prefix}--condition-builder`;
-function ConditionConnector({ operator, className, onChange, ...rest }) {
+const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
+  const { variant } = useContext(ConditionBuilderContext);
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {
       parentGroup.classList.add('hoveredConnector');
@@ -30,8 +31,13 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
     onChange(op);
     focusThisField(evt);
   };
-  return (
+  return variant == 'tree' ? (
+    <span className={`${className} ${blockClass}__connector-disabled`}>
+      {operator}
+    </span>
+  ) : (
     // <div className={className} {...rest}>
+
     <ConditionBuilderItem
       label={operator}
       title={translateWithId('connector')}
@@ -44,7 +50,7 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
       popOverClassName={className}
       className={`${blockClass}__connector-button `}
     >
-      <ConditionBuilderItemOption
+      <ItemOption
         config={{
           options: connectorConfig,
         }}
@@ -55,9 +61,10 @@ function ConditionConnector({ operator, className, onChange, ...rest }) {
         onChange={onChangeHandler}
       />
     </ConditionBuilderItem>
+
     // </div>
   );
-}
+};
 
 export default ConditionConnector;
 ConditionConnector.propTypes = {

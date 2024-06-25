@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Wikis } from '@carbon/react/icons';
@@ -14,17 +14,23 @@ import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
-import { sampleDataStructure_sentence } from './assets/SampleData';
+import {
+  sampleDataStructure_sentence,
+  sampleDataStructure_tree,
+} from './assets/SampleData';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 export default {
   title: 'IBM Products/Components/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
+
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },
   // },
   parameters: {
+    layout: 'fullscreen',
     styles,
     docs: {
       page: mdx,
@@ -151,7 +157,7 @@ const getColors = () => {
   ];
 };
 
-const getOptions = async ({ property }) => {
+const getOptions = async (conditionState, { property }) => {
   switch (property) {
     case 'continent':
       return new Promise((resolve) => {
@@ -181,75 +187,85 @@ const requiredProps = {
   getConditionState: (rootState) => {
     console.log(rootState);
   },
-  variant: 'sentence',
 };
+
+const actions = [
+  {
+    id: uuidv4(),
+    label: 'Add item to cart',
+  },
+  { id: uuidv4(), label: 'Proceed item to checkout' },
+];
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 
-const Template = (args) => {
+const ConditionBuilderTemplate = (args) => {
   const ref = useRef();
-  return (
-    <ConditionBuilder
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-      ref={ref}
-      inputConfig={inputData}
-      {...requiredProps}
-    />
-  );
-};
-
-const WithDynamicOptions = ({ ...args }) => {
-  const ref = useRef();
-  return (
-    <ConditionBuilder
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-      ref={ref}
-      inputConfig={inputDataDynamicOptions}
-      {...requiredProps}
-      getOptions={getOptions}
-    />
-  );
-};
-
-const WithInitialState = ({ ...args }) => {
-  const ref = useRef();
-  return (
-    <ConditionBuilder
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-      ref={ref}
-      inputConfig={inputData}
-      initialState={sampleDataStructure_sentence}
-      {...requiredProps}
-      getOptions={getOptions}
-    />
-  );
+  const [open, setOpen] = useState(false);
+  return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
 };
 
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const conditionBuilder = Template.bind({});
+export const conditionBuilder = ConditionBuilderTemplate.bind({});
+conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
-  // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#ConditionBuilder-args
-  children: 'hello, world',
+  inputConfig: inputData,
+  variant: 'sentence',
 };
 
-export const conditionBuilderDynamicOptions = WithDynamicOptions.bind({});
+export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});
 conditionBuilderDynamicOptions.storyName = 'With dynamic options';
 conditionBuilderDynamicOptions.args = {
-  children: 'hello, world',
+  inputConfig: inputDataDynamicOptions,
+  getOptions: getOptions,
+  variant: 'sentence',
 };
 
-export const conditionBuilderWithInitialState = WithInitialState.bind({});
+export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
+  {}
+);
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  children: 'hello, world',
+  initialState: sampleDataStructure_sentence,
+  inputConfig: inputData,
+  variant: 'sentence',
+};
+
+export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
+conditionBuilderWithActions.storyName = 'With Actions';
+conditionBuilderWithActions.args = {
+  inputConfig: inputData,
+  variant: 'sentence',
+  actions: actions,
+  getActionsState: (actionState) => {},
+};
+
+export const conditionBuilderTree = ConditionBuilderTemplate.bind({});
+conditionBuilderTree.storyName = 'Condition Builder(Tree)';
+conditionBuilderTree.args = {
+  inputConfig: inputData,
+  variant: 'tree',
+};
+export const conditionBuilderWithInitialStateTree =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithInitialStateTree.storyName = 'With initial state(Tree)';
+conditionBuilderWithInitialStateTree.args = {
+  initialState: sampleDataStructure_tree,
+  inputConfig: inputData,
+  variant: 'tree',
+};
+
+export const conditionBuilderWithActionsTree = ConditionBuilderTemplate.bind(
+  {}
+);
+conditionBuilderWithActionsTree.storyName = 'With Actions(Tree)';
+conditionBuilderWithActionsTree.args = {
+  inputConfig: inputData,
+  variant: 'tree',
+  actions: actions,
+  getActionsState: (actionState) => {},
 };

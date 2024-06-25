@@ -1,10 +1,12 @@
+@use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/motion';
+@use '@carbon/react/scss/motion' as *;
 @use '@carbon/styles/scss/components/tag' as *;
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/react/scss/utilities';
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
@@ -14,12 +16,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   display: inline-flex;
 }
 
-[role='row']:focus {
+.#{$block-class} [role='row'] {
+  position: relative;
+  outline: none;
+}
+.#{$block-class} [role='row']:focus::after {
   @include focus-outline.focus-outline('outline');
 
-  outline-offset: 0;
+  position: absolute;
+  content: '';
+  inset: 0;
 }
-
 .#{$block-class}__condition__deletion-preview
   .#{$block-class}__button:not(
     .#{$block-class}__statement-button,
@@ -43,4 +50,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   max-width: $spacing-13;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+}
+.#{$block-class}__group-preview {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
+}
+.#{$block-class}__group-preview-animate {
+  height: auto;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
+}
+.#{$block-class}__connector-disabled {
+  display: flex;
+  min-width: $spacing-10;
+  align-items: center;
+  background-color: $layer;
+  color: $text-helper;
+  padding-inline: $spacing-03;
 }

@@ -74,6 +74,7 @@ declare module '@carbon/react' {
     Heading,
     IconButton,
     IconTab,
+    IconSkeleton,
     IdPrefix,
     InlineLoading,
     InlineNotification,
@@ -200,4 +201,5 @@ declare module '@carbon/react' {
 }
 
 declare module '@carbon/colors';
+declare module '@carbon/motion';
 declare module '@carbon/feature-flags';

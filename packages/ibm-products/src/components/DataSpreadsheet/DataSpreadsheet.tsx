@@ -99,6 +99,11 @@ interface DataSpreadsheetProps {
   defaultEmptyRowCount?: number;
 
   /**
+   * Check if has custom row header component attached
+   */
+  hasCustomRowHeader?: boolean;
+
+  /**
    * The spreadsheet id
    */
   id?: number | string;
@@ -117,6 +122,16 @@ interface DataSpreadsheetProps {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange?: () => void;
+
+  /**
+   * Position of the custom row numbering component
+   */
+  renderRowHeaderDirection?: 'left' | 'right';
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeader?: (index: number) => any[];
 
   /**
    * The aria label applied to the Select all button
@@ -158,6 +173,8 @@ export let DataSpreadsheet = React.forwardRef(
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
+      renderRowHeader,
+      renderRowHeaderDirection,
       selectAllAriaLabel,
       spreadsheetAriaLabel,
       theme,
@@ -182,6 +199,9 @@ export let DataSpreadsheet = React.forwardRef(
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
     const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
+    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
+      useState(false);
+    const isBlurSpreadsheet = useRef(false);
     const [isActiveHeaderCellChanged, setIsActiveHeaderCellChanged] =
       useState<boolean>(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
@@ -190,19 +210,24 @@ export let DataSpreadsheet = React.forwardRef(
       usePreviousValue({
         activeCellCoordinates,
         isEditing,
+        cellEditorValue,
       }) || {};
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef<HTMLTextAreaElement>();
     const [activeCellContent, setActiveCellContent] = useState<any>();
     const activeCellRef = useRef<HTMLDivElement | HTMLButtonElement>();
     const cellEditorRulerRef = useRef<HTMLPreElement>();
+
+    const hasCustomRowHeader = typeof renderRowHeader === 'function';
+    const maxNumRowsCount = data.length.toString().length;
+
     const defaultColumn = useMemo(
       () => ({
         width: 150,
-        rowHeaderWidth: 64,
+        rowHeaderWidth: hasCustomRowHeader ? 40 + maxNumRowsCount * 8.56 : 64,
         rowHeight: cellSizeValue,
       }),
-      [cellSizeValue]
+      [cellSizeValue, hasCustomRowHeader, maxNumRowsCount]
     );
     const { keysPressedList, usingMac } = useMultipleKeyTracking({
       ref: multiKeyTrackingRef,
@@ -299,7 +324,11 @@ export let DataSpreadsheet = React.forwardRef(
                   activeCellCoordinates?.column
                 ]
               : null;
-          setActiveCellContent(activeCellFullData?.render('Cell') ?? null);
+          if (activeCellFullData) {
+            setActiveCellContent(activeCellFullData.render('Cell'));
+          } else {
+            setActiveCellContent(null);
+          }
         }
         if (
           (activeCellCoordinates && activeCellCoordinates?.row === 'header') ||
@@ -309,9 +338,21 @@ export let DataSpreadsheet = React.forwardRef(
           setIsActiveHeaderCellChanged((prev) => !prev);
         }
       }
+      // For when we edit and focus out of data spreadsheet
+      if (
+        isEditing &&
+        previousState.activeCellCoordinates &&
+        isBlurSpreadsheet.current
+      ) {
+        setActiveCellContent(previousState.cellEditorValue);
+        isBlurSpreadsheet.current = false;
+        removeCellEditor();
+      }
     }, [
+      isBlurSpreadsheet,
       activeCellCoordinates,
       previousState?.activeCellCoordinates,
+      previousState?.cellEditorValue,
       updateData,
       rows,
       isEditing,
@@ -352,6 +393,7 @@ export let DataSpreadsheet = React.forwardRef(
     });
 
     useSpreadsheetOutsideClick({
+      isBlurSpreadsheet,
       spreadsheetRef,
       setActiveCellCoordinates,
       setSelectionAreas,
@@ -829,6 +871,8 @@ export let DataSpreadsheet = React.forwardRef(
             columns={columns}
             currentMatcher={currentMatcher}
             defaultColumn={defaultColumn}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             headerGroups={headerGroups}
             rows={rows}
             scrollBarSize={scrollBarSize}
@@ -855,12 +899,17 @@ export let DataSpreadsheet = React.forwardRef(
             currentMatcher={currentMatcher}
             setCurrentMatcher={setCurrentMatcher}
             setContainerHasFocus={setContainerHasFocus}
+            selectedHeaderReorderActive={selectedHeaderReorderActive}
+            setSelectedHeaderReorderActive={setSelectedHeaderReorderActive}
             selectionAreas={selectionAreas}
             setSelectionAreas={setSelectionAreas}
             headerGroups={headerGroups}
             defaultColumn={defaultColumn}
             getTableBodyProps={getTableBodyProps}
+            hasCustomRowHeader={hasCustomRowHeader}
             onDataUpdate={onDataUpdate}
+            renderRowHeaderDirection={renderRowHeaderDirection}
+            renderRowHeader={renderRowHeader}
             onActiveCellChange={onActiveCellChange}
             onSelectionAreaChange={onSelectionAreaChange}
             prepareRow={prepareRow}
@@ -916,9 +965,11 @@ export let DataSpreadsheet = React.forwardRef(
               updateData,
             })}
             onChange={(event) => {
-              setCellEditorValue(event.target.value);
-              if (cellEditorRulerRef?.current) {
-                cellEditorRulerRef.current.textContent = event.target.value;
+              if (previousState.isEditing) {
+                setCellEditorValue(event.target.value);
+                if (cellEditorRulerRef?.current) {
+                  cellEditorRulerRef.current.textContent = event.target.value;
+                }
               }
             }}
             ref={cellEditorRef as LegacyRef<HTMLTextAreaElement>}
@@ -992,6 +1043,11 @@ DataSpreadsheet.propTypes = {
   defaultEmptyRowCount: PropTypes.number,
 
   /**
+   * Check if spreadsheet is using custom row header component attached
+   */
+  hasCustomRowHeader: PropTypes.bool,
+
+  /**
    * The spreadsheet id
    */
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -1011,6 +1067,15 @@ DataSpreadsheet.propTypes = {
    */
   onSelectionAreaChange: PropTypes.func,
 
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeader: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeaderDirection: PropTypes.oneOf(['left', 'right']),
   /**
    * The aria label applied to the Select all button
    */

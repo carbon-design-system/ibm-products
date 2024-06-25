@@ -11,7 +11,7 @@ import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
   title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
@@ -191,6 +191,65 @@ const WithManyColumns = ({ ...args }) => {
   );
 };
 
+const WithDifferentOptions = ({ ...args }) => {
+  const [data, setData] = useState(() =>
+    generateData({ rows: 24, extraColumns: true })
+  );
+  const columnDataClone = useMemo(
+    () => [
+      ...columnData,
+      {
+        Header: 'Owner name',
+        accessor: 'ownerName',
+      },
+      {
+        Header: 'Weight',
+        accessor: 'weight',
+      },
+    ],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
+  const [columnDisabled, setColumnDisabled] = useState(false);
+  const [readOnlyTable, setReadOnlyTable] = useState(false);
+
+  return (
+    <span style={{ display: 'flex', gap: '20px' }}>
+      <DataSpreadsheet
+        columns={columns}
+        data={data}
+        onDataUpdate={setData}
+        disableColumnSwapping={columnDisabled}
+        readOnlyTable={readOnlyTable}
+        id="spreadsheet--id"
+        {...args}
+      />
+      <span>
+        {/* Disable column swapping */}
+        <span style={{ display: 'flex', alignItems: 'center' }}>
+          <Checkbox
+            checked={columnDisabled}
+            id="disableColumnSwapping"
+            labelText=""
+            onChange={(event, { checked, id }) => setColumnDisabled(checked)}
+          />
+          <span>Disable column swapping</span>
+        </span>
+        {/* Read-only Spreadsheet */}
+        <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <Checkbox
+            checked={readOnlyTable}
+            id="readOnlySpreadsheet"
+            labelText=""
+            onChange={(event, { checked, id }) => setReadOnlyTable(checked)}
+          />
+          <span>Read-only spreadsheet</span>
+        </span>
+      </span>
+    </span>
+  );
+};
+
 export const dataSpreadsheet = Template.bind({});
 dataSpreadsheet.storyName = 'Basic spreadsheet';
 dataSpreadsheet.args = {
@@ -227,6 +286,14 @@ emptyWithCells.args = {
 export const withManyColumns = WithManyColumns.bind({});
 withManyColumns.storyName = 'With many columns';
 withManyColumns.args = {
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+  totalVisibleColumns: 5,
+};
+
+export const withDifferentOptions = WithDifferentOptions.bind({});
+withDifferentOptions.storyName = 'With different options';
+withDifferentOptions.args = {
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',
   totalVisibleColumns: 5,

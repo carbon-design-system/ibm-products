@@ -275,6 +275,9 @@ $header-cell-background: $layer-accent-01;
     width: $spacing-01;
     background-color: $background-brand;
   }
+  .#{$block-class}__th--active-header-disabledSwapping {
+    cursor: pointer;
+  }
   .#{$block-class}__th--active-header,
   .#{$block-class}__td-th--active-header.#{$block-class}__td {
     background-color: $background-selected-hover;

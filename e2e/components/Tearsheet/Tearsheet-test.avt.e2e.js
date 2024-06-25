@@ -47,7 +47,7 @@ test.describe('Tearsheet @avt', () => {
 
     await page.keyboard.press('Tab');
     await expect(openButton).toBeFocused();
-    await openButton.click();
+    await page.keyboard.press('Enter');
     await modalElement.evaluate((element) =>
       Promise.all(
         element.getAnimations().map((animation) => animation.finished)
@@ -73,7 +73,7 @@ test.describe('Tearsheet @avt', () => {
 
     const cancelButton = page.getByText('Cancel');
     await expect(cancelButton).toBeFocused();
-    await cancelButton.click();
+    await page.keyboard.press('Enter');
     await expect(openButton).toBeFocused();
   });
 });

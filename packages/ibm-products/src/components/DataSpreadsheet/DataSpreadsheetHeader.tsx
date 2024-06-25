@@ -342,6 +342,9 @@ export const DataSpreadsheetHeader = forwardRef(
                   data-row-index="header"
                   data-column-index="header"
                   type="button"
+                  style={{
+                    width: defaultColumn?.rowHeaderWidth,
+                  }}
                   tabIndex={-1}
                   aria-label={selectAllAriaLabel}
                   onClick={handleSelectAllClick}

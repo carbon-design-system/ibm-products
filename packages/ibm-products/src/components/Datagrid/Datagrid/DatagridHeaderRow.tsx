@@ -177,7 +177,7 @@ const HeaderRow = (
   };
 
   const { className: headerGroupClassName, ...headerGroupProps } =
-    headerGroup.getHeaderGroupProps();
+    headerGroup.getHeaderGroupProps({ role: undefined });
 
   const renderSlug = (slug) => {
     if (isTableSortable) {
@@ -215,7 +215,7 @@ const HeaderRow = (
           const { columnResizing } = state;
           const { columnWidths } = columnResizing || {};
           const originalCol = visibleColumns[index];
-          const { ...headerProps } = header.getHeaderProps();
+          const { ...headerProps } = header.getHeaderProps({ role: undefined });
 
           const resizerProps = header?.getResizerProps?.();
           const headerStyle = headerProps?.style;

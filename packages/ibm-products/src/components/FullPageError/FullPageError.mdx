@@ -23,7 +23,30 @@ level.
 
 ## Example usage
 
-{/* TODO: One example per designed use case. */}
+```jsx
+import { FullPageError } from "@carbon/ibm-products";
+import { Link } from "@carbon/react";
+
+export const Example = () => (
+  <FullPageError
+    kind="custom"
+    children={
+      <>
+        <Link href={"/"}>– Forwarding Link 1</Link>
+        <br />
+        <Link href={"/"}>– Forwarding Link 1</Link>
+      </>
+    }
+    title="[Error title]"
+    label="Error ###"
+    // cSpell:dictionaries lorem-ipsum
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+  />
+);
+
+export default Example;
+
+```
 
 ### Default
 
@@ -53,9 +76,9 @@ broken links.
   <Story of={stories.fullPageError404} />
 </Canvas>
 
-## Code sample
+{/* ## Code sample */}
 
-<CodesandboxLink exampleDirectory="FullPageError" />
+{/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
 
 ## Component API
 

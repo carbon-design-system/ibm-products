@@ -12415,7 +12415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:126.0.4":
+"chromedriver@npm:*":
   version: 126.0.4
   resolution: "chromedriver@npm:126.0.4"
   dependencies:

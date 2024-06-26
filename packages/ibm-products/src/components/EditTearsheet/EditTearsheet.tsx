@@ -26,10 +26,15 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'EditTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-edit`;
 
+export type FormContextType = {
+  currentForm: number;
+  setFormTitle: () => void;
+};
+
 // This is a general context for the forms container
 // containing information about the state of the container
 // and providing some callback methods for forms to use
-export const FormContext = createContext(null);
+export const FormContext = createContext<FormContextType | null>(null);
 
 // This is a context supplied separately to each form in the container
 // to let it know what number it is in the sequence of forms

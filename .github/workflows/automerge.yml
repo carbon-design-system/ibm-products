@@ -2,7 +2,7 @@ name: automerge
 
 on:
   push:
-    branches: [release/*]
+    branches: [automerge-test]
 
 concurrency:
   group: automerge-${{ github.ref }}
@@ -18,6 +18,6 @@ jobs:
         uses: devmasx/merge-branch@1.4.0
         with:
           type: now
-          target_branch: 'main'
+          target_branch: 'dummy-branch'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

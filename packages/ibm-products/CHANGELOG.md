@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.44.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.44.0-rc.0...@carbon/ibm-products@2.44.0-rc.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* **DataGrid:** add checkbox support ([#5380](https://github.com/carbon-design-system/ibm-products/issues/5380)) ([b1761a0](https://github.com/carbon-design-system/ibm-products/commit/b1761a0fd713a3682dd812cebe98f4503ef70f04))
+* export step component ([#5580](https://github.com/carbon-design-system/ibm-products/issues/5580)) ([9715628](https://github.com/carbon-design-system/ibm-products/commit/97156281c7fc1d54f5bd34ebcefedc5f2b616de4))
+* include avt report in release workflow ([#5582](https://github.com/carbon-design-system/ibm-products/issues/5582)) ([a8c8fd9](https://github.com/carbon-design-system/ibm-products/commit/a8c8fd94aa02156b2e53e3ecd4fecaa4cf6d13f9))
+* **remove-modal:** primary button danger description ([#5545](https://github.com/carbon-design-system/ibm-products/issues/5545)) ([85716f9](https://github.com/carbon-design-system/ibm-products/commit/85716f9639feeb3608f66e39066760b3d94833de))
+* **ToolBar:** tooltip positioning fix ([#5572](https://github.com/carbon-design-system/ibm-products/issues/5572)) ([3b3daa5](https://github.com/carbon-design-system/ibm-products/commit/3b3daa54d73f1c6be010a404580d17619c3145ce))
+
+
+### Features
+
+* **dataspreadsheet:** optional custom component to row header ([#5500](https://github.com/carbon-design-system/ibm-products/issues/5500)) ([ee749e4](https://github.com/carbon-design-system/ibm-products/commit/ee749e4485e15c30b850b9dfc3a12927d23885b0))
+
+
+
+
+
 # [2.44.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.43.1...@carbon/ibm-products@2.44.0-rc.0) (2024-06-24)
 
 

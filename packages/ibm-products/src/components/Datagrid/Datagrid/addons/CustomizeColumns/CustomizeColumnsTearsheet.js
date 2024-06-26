@@ -52,19 +52,44 @@ const CustomizeColumnsTearsheet = ({
   };
 
   const onCheckboxCheck = (col, value) => {
+    // Update the visibility of columns based on a single column or an array of columns
     const changedDefinitions = columnObjects.map((definition) => {
-      if (
-        ((Array.isArray(col) && col.indexOf(definition) != -1) ||
-          definition.id === col.id) &&
-        definition.canFilter &&
-        !definition.disabled
-      ) {
-        return { ...definition, isVisible: value };
+      // If select all is clicked
+      if (Array.isArray(col)) {
+        return col.includes(definition) &&
+          definition.canFilter &&
+          !definition.disabled
+          ? { ...definition, isVisible: value }
+          : definition;
       }
-      return definition;
+      // If a single checkbox is clicked which is written below as a default return
+      return col.id === definition.id
+        ? { ...definition, isVisible: value }
+        : definition;
     });
 
-    setColumnObjects(changedDefinitions);
+    // Count the number of visible columns excluding certain IDs after 1st mutation
+    const selectedColumnsCount = changedDefinitions.filter(
+      (definition) =>
+        definition.isVisible &&
+        !['datagridSelection', 'actions'].includes(definition.id)
+    ).length;
+
+    // Ensure special columns are visible if any other columns are visible
+    const finalDefinitions = changedDefinitions.map((definition) => {
+      // If at least 1 column is visible after mutation, we add selection column and actions column (coming from various extensions)
+      if (selectedColumnsCount > 0) {
+        return ['datagridSelection', 'actions'].includes(definition.id)
+          ? { ...definition, isVisible: true }
+          : definition;
+      }
+      // Else we remove selection column and actions column
+      return ['datagridSelection', 'actions'].includes(definition.id)
+        ? { ...definition, isVisible: false }
+        : definition;
+    });
+
+    setColumnObjects(finalDefinitions);
     setDirty();
   };
 
@@ -81,16 +106,23 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
-    const notFilterableCount = columnObjects.filter(
-      (col) => !col.canFilter
-    ).length;
+    console.log(getVisibleColumnsCount());
+
     const actionCount = columnObjects.filter(
       (col) => col.id === 'actions'
     ).length;
+    const datagridSelectionCount = columnObjects.filter(
+      (col) => col.id === 'datagridSelection'
+    ).length;
     setVisibleColumnsCount(
-      getVisibleColumnsCount() - notFilterableCount - actionCount
+      getVisibleColumnsCount() - actionCount - datagridSelectionCount < 0
+        ? 0
+        : getVisibleColumnsCount() - actionCount - datagridSelectionCount
     );
-    setTotalColumns(columnObjects.length - notFilterableCount - actionCount);
+
+    setTotalColumns(
+      columnObjects.length - actionCount - datagridSelectionCount
+    );
   }, [getVisibleColumnsCount, columnObjects]);
 
   return (

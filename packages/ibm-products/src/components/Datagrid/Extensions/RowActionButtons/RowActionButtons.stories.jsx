@@ -15,6 +15,10 @@ import {
   useStickyColumn,
   useActionsColumn,
   useSelectRows,
+  useCustomizeColumns,
+  useSortableColumns,
+  useColumnOrder,
+  useFiltering,
 } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
 import { DocsPage } from './RowActionButtons.docs-page';
@@ -149,13 +153,19 @@ const RowActionButtons = ({ ...args }) => {
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
+        // globalFilter: '',
       },
       DatagridActions,
       DatagridPagination,
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useStickyColumn,
-    useActionsColumn
+    useActionsColumn,
+    useCustomizeColumns,
+    useColumnOrder,
+    useFiltering,
+    useSortableColumns
   );
 
   return <Datagrid datagridState={datagridState} />;
@@ -291,13 +301,18 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
       },
+      globalFilter: '',
       DatagridActions,
       DatagridPagination,
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useStickyColumn,
     useActionsColumn,
-    useSelectRows
+    useCustomizeColumns,
+    useColumnOrder,
+    useFiltering,
+    useSortableColumns
   );
 
   return <Datagrid datagridState={datagridState} />;

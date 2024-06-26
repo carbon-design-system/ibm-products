@@ -13,6 +13,10 @@ jobs:
     if: github.repository == 'carbon-design-system/ibm-products'
     runs-on: ubuntu-20.04
     steps:
+      - name: Set github account configs
+        run: |
+          git config --global user.email "carbon@us.ibm.com"
+          git config --global user.name "carbon-bot"
       - uses: actions/checkout@v4
       - name: Merge to main
         uses: devmasx/merge-branch@1.4.0

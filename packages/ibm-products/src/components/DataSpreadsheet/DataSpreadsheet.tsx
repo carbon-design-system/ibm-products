@@ -129,7 +129,7 @@ interface DataSpreadsheetProps {
   onSelectionAreaChange?: () => void;
 
   /**
-   * Read-only spreadsheet
+   * Read-only table
    */
   readOnlyTable?: boolean;
 
@@ -1089,6 +1089,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange: PropTypes.func,
+
+  /**
+   * Read-only table
+   */
+  readOnlyTable: PropTypes.bool,
 
   /**
    * Component next to numbering rows

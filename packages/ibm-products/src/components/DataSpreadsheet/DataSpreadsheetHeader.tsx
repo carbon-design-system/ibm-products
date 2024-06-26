@@ -80,7 +80,7 @@ interface DataSpreadsheetHeaderProps {
   headerGroups?: any[];
 
   /**
-   * Read-only spreadsheet
+   * Read-only table
    */
   readOnlyTable?: boolean;
 
@@ -504,7 +504,7 @@ DataSpreadsheetHeader.propTypes = {
   headerGroups: PropTypes.arrayOf(PropTypes.object),
 
   /**
-   * Read-only spreadsheet
+   * Read-only table
    */
   readOnlyTable: PropTypes.bool,
 

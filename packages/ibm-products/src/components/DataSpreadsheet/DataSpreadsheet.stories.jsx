@@ -210,43 +210,15 @@ const WithDifferentOptions = ({ ...args }) => {
     []
   );
   const columns = useMemo(() => columnDataClone, [columnDataClone]);
-  const [columnDisabled, setColumnDisabled] = useState(false);
-  const [readOnlyTable, setReadOnlyTable] = useState(false);
 
   return (
-    <span style={{ display: 'flex', gap: '20px' }}>
-      <DataSpreadsheet
-        columns={columns}
-        data={data}
-        onDataUpdate={setData}
-        disableColumnSwapping={columnDisabled}
-        readOnlyTable={readOnlyTable}
-        id="spreadsheet--id"
-        {...args}
-      />
-      <span>
-        {/* Disable column swapping */}
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          <Checkbox
-            checked={columnDisabled}
-            id="disableColumnSwapping"
-            labelText=""
-            onChange={(event, { checked, id }) => setColumnDisabled(checked)}
-          />
-          <span>Disable column swapping</span>
-        </span>
-        {/* Read-only Spreadsheet */}
-        <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <Checkbox
-            checked={readOnlyTable}
-            id="readOnlySpreadsheet"
-            labelText=""
-            onChange={(event, { checked, id }) => setReadOnlyTable(checked)}
-          />
-          <span>Read-only spreadsheet</span>
-        </span>
-      </span>
-    </span>
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
   );
 };
 
@@ -294,6 +266,8 @@ withManyColumns.args = {
 export const withDifferentOptions = WithDifferentOptions.bind({});
 withDifferentOptions.storyName = 'With different options';
 withDifferentOptions.args = {
+  readOnlyTable: false,
+  disableColumnSwapping: false,
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',
   totalVisibleColumns: 5,

@@ -1,10 +1,11 @@
 # Deploy staging storybook environment from release branch to Github Pages
 name: Deploy staging storybook
 
-# Gets triggered every time a change is pushed to the `release/v2*` branch
+# Gets triggered every time a '@carbon/ibm-products@2.*' github tag is published
 on:
   push:
-    branches: [release/v2*]
+    tags:
+      - '@carbon/ibm-products@2.*'
 
 jobs:
   deploy-staging-storybook:

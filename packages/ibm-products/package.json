@@ -26,7 +26,8 @@
     "lib",
     "scss",
     "flags.js",
-    "telemetry.yml"
+    "telemetry.yml",
+    ".playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json"
   ],
   "keywords": [
     "carbon",

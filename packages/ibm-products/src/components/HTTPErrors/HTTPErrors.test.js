@@ -45,6 +45,9 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('has no accessibility violations', async () => {
     const { container } = render(
       <main>

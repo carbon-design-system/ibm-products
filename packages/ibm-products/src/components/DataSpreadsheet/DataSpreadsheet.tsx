@@ -641,12 +641,9 @@ export let DataSpreadsheet = React.forwardRef(
             ]
           : null;
 
-      let activeCellValue;
-      if (activeCellFullData && activeCellCoordinates?.column) {
-        activeCellValue = activeCellFullData
-          ? activeCellFullData.row.cells?.[activeCellCoordinates?.column]?.value
-          : null;
-      }
+      const activeCellValue =
+        activeCellFullData?.row?.cells?.[Number(activeCellCoordinates?.column)]
+          ?.value;
 
       setCellEditorValue(activeCellValue || '');
       if (cellEditorRulerRef?.current) {

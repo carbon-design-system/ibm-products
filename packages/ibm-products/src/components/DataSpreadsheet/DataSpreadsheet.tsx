@@ -89,6 +89,11 @@ interface DataSpreadsheetProps {
   columns?: readonly Column<object>[];
 
   /**
+   * Disable column swapping, default false
+   */
+  disableColumnSwapping?: boolean;
+
+  /**
    * The spreadsheet data that will be rendered in the body of the spreadsheet component
    */
   data?: readonly object[];
@@ -122,6 +127,11 @@ interface DataSpreadsheetProps {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange?: () => void;
+
+  /**
+   * Read-only table
+   */
+  readOnlyTable?: boolean;
 
   /**
    * Position of the custom row numbering component
@@ -175,6 +185,8 @@ export let DataSpreadsheet = React.forwardRef(
       onSelectionAreaChange = defaults.onSelectionAreaChange,
       renderRowHeader,
       renderRowHeaderDirection,
+      disableColumnSwapping = false,
+      readOnlyTable = false,
       selectAllAriaLabel,
       spreadsheetAriaLabel,
       theme,
@@ -593,7 +605,8 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellRef,
           setActiveCellCoordinates,
           setContainerHasFocus,
-          setActiveCellContent
+          setActiveCellContent,
+          readOnlyTable
         );
       },
       [
@@ -613,6 +626,7 @@ export let DataSpreadsheet = React.forwardRef(
         updateData,
         checkForReturnCondition,
         handleArrowKeyPress,
+        readOnlyTable,
       ]
     );
 
@@ -706,7 +720,7 @@ export let DataSpreadsheet = React.forwardRef(
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
-      if (key === 'Enter' && !activeCellInsideSelectionArea) {
+      if (key === 'Enter' && !activeCellInsideSelectionArea && !readOnlyTable) {
         if (
           activeCellCoordinates?.column !== 'header' &&
           activeCellCoordinates?.row !== 'header'
@@ -775,8 +789,10 @@ export let DataSpreadsheet = React.forwardRef(
     };
 
     // Go into edit mode if double click is detected on activeCellRef
-    const handleActiveCellDoubleClick = () => {
-      startEditMode();
+    const handleActiveCellDoubleClick = (readOnlyTable: boolean) => {
+      if (!readOnlyTable) {
+        startEditMode();
+      }
     };
 
     useSpreadsheetEdit({
@@ -881,6 +897,8 @@ export let DataSpreadsheet = React.forwardRef(
             setSelectionAreas={setSelectionAreas}
             setCurrentMatcher={setCurrentMatcher}
             setSelectionAreaData={setSelectionAreaData}
+            disableColumnSwapping={disableColumnSwapping}
+            readOnlyTable={readOnlyTable}
             totalVisibleColumns={totalVisibleColumns}
             updateActiveCellCoordinates={updateActiveCellCoordinates}
             setHeaderCellHoldActive={setHeaderCellHoldActive}
@@ -933,7 +951,7 @@ export let DataSpreadsheet = React.forwardRef(
             onMouseUp={handleActiveCellMouseUp}
             onClick={handleActiveCellClick}
             onKeyDown={handleActiveCellKeyDown}
-            onDoubleClick={handleActiveCellDoubleClick}
+            onDoubleClick={() => handleActiveCellDoubleClick(readOnlyTable)}
             onMouseEnter={handleActiveCellMouseEnter}
             ref={activeCellRef as LegacyRef<HTMLButtonElement>}
             className={cx(
@@ -1043,6 +1061,11 @@ DataSpreadsheet.propTypes = {
   defaultEmptyRowCount: PropTypes.number,
 
   /**
+   * Disable column swapping, default false
+   */
+  disableColumnSwapping: PropTypes.bool,
+
+  /**
    * Check if spreadsheet is using custom row header component attached
    */
   hasCustomRowHeader: PropTypes.bool,
@@ -1066,6 +1089,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange: PropTypes.func,
+
+  /**
+   * Read-only table
+   */
+  readOnlyTable: PropTypes.bool,
 
   /**
    * Component next to numbering rows

@@ -106,8 +106,6 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
-    console.log(getVisibleColumnsCount());
-
     const actionCount = columnObjects.filter(
       (col) => col.id === 'actions'
     ).length;

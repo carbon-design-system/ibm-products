@@ -1,5 +1,5 @@
 import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
-import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { CodesandboxLink, stackblitzHref } from '../../global/js/utils/story-helper';
 import { FullPageError } from '.';
 import * as stories from './FullPageError.stories';
 
@@ -12,6 +12,7 @@ import * as stories from './FullPageError.stories';
 - [Overview](#overview)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
+  - [Migrating from HTTP errors](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md#carbon-for-ibm-products-v2-migration-guide)
 
 ## Overview
 
@@ -76,9 +77,10 @@ broken links.
   <Story of={stories.fullPageError404} />
 </Canvas>
 
-{/* ## Code sample */}
+## Code sample
 
 {/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
+<a href={stackblitzHref("FullPageError")}>Stackblitz example</a>
 
 ## Component API
 

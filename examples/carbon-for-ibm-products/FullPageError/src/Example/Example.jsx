@@ -8,11 +8,8 @@ import React from 'react';
 // from the @carbon/ibm-products component library.
 // ----------------------------------------------------
 import { FullPageError } from '@carbon/ibm-products';
-// import { pkg } from '@carbon/ibm-products';
 import { Link } from '@carbon/react';
 import './_example.scss';
-
-// pkg.component.FullPageError = true;
 export const Example = () => (
   <FullPageError
     kind="custom"

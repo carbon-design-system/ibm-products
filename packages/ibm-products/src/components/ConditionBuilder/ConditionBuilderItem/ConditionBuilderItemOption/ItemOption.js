@@ -12,7 +12,7 @@ import { useTranslations } from '../../utils/useTranslations';
 export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef();
-  const [property_text, clear_search] = useTranslations([
+  const [propertyText, clearSearchText] = useTranslations([
     'property_text',
     'clear_search',
   ]);
@@ -52,7 +52,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
       ? conditionState.label
       : conditionState.property
       ? conditionState.property
-      : property_text;
+      : propertyText;
   };
 
   if (!allOptions) {
@@ -64,8 +64,8 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={clear_search}
-            closeButtonLabelText={clear_search}
+            labelText={clearSearchText}
+            closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
           />
         </div>

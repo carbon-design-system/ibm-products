@@ -26,7 +26,7 @@ export const ConditionBuilderItem = ({
   const contentRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [invalid_text, add_condition, label_text] = useTranslations([
+  const [invalidText, addConditionText, labelText] = useTranslations([
     'invalid_text',
     'add_condition',
     label,
@@ -35,14 +35,14 @@ export const ConditionBuilderItem = ({
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
-        propertyLabel: invalid_text,
+        propertyLabel: invalidText,
         isInvalid: true,
       };
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
-        : label_text;
+        : labelText;
     return {
       isInvalid: false,
       propertyLabel: propertyId,
@@ -103,7 +103,7 @@ export const ConditionBuilderItem = ({
       }}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? add_condition}
+        label={propertyLabel ?? addConditionText}
         hideLabel={!label ? true : false}
         onClick={() => {
           children ? setOpen(!open) : null;
@@ -118,18 +118,20 @@ export const ConditionBuilderItem = ({
         {...rest}
       />
 
-      <PopoverContent
-        className={`${blockClass}__item__content`}
-        role="dialog"
-        aria-label={`${title}`}
-      >
-        <Layer>
-          <h1 className={`${blockClass}__item__title`}>{title}</h1>
-          <div ref={contentRef} className={`${blockClass}__popover-content`}>
-            {open && children}
-          </div>
-        </Layer>
-      </PopoverContent>
+      {open && (
+        <PopoverContent
+          className={`${blockClass}__item__content`}
+          role="dialog"
+          aria-label={`${title}`}
+        >
+          <Layer>
+            <h1 className={`${blockClass}__item__title`}>{title}</h1>
+            <div ref={contentRef} className={`${blockClass}__popover-content`}>
+              {children}
+            </div>
+          </Layer>
+        </PopoverContent>
+      )}
     </Popover>
   );
 };

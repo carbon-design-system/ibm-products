@@ -19,11 +19,8 @@ const ConditionBuilderAdd = ({
   tabIndex,
 }) => {
   const [isAddSubgroup, setIsAddSubgroup] = useState(false);
-  const [add_condition, add_condition_row, add_subgroup] = useTranslations([
-    'add_condition',
-    'add_condition_row',
-    'add_subgroup',
-  ]);
+  const [addConditionText, addConditionRowText, addSubgroupText] =
+    useTranslations(['add_condition', 'add_condition_row', 'add_subgroup']);
   const showAddSubGroup = () => {
     setIsAddSubgroup(true);
   };
@@ -54,14 +51,14 @@ const ConditionBuilderAdd = ({
   const wrapperProps = enableSubGroup
     ? {
         role: 'gridcell',
-        'aria-label': add_subgroup,
+        // 'aria-label': addSubgroupText,
       }
     : {};
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
       role={!enableSubGroup ? 'gridcell' : 'none'}
-      aria-label={!enableSubGroup ? add_condition_row : undefined}
+      aria-label={!enableSubGroup ? addConditionRowText : undefined}
       onMouseEnter={showAddSubGroup}
       onMouseLeave={hideAddSubGroup}
       onFocus={showAddSubGroup}
@@ -71,11 +68,11 @@ const ConditionBuilderAdd = ({
         renderIcon={AddAlt}
         onClick={onClickHandler}
         {...previewHandlers()}
+        wrapperProps={wrapperProps}
         className={`${blockClass}__add-button`}
         hideLabel
         data-name="addButton"
-        label={buttonLabel ?? add_condition}
-        wrapperProps={wrapperProps}
+        label={buttonLabel ?? addConditionText}
         tabIndex={tabIndex}
       />
       {enableSubGroup && (
@@ -86,7 +83,7 @@ const ConditionBuilderAdd = ({
             `${blockClass}__add_condition_group ${blockClass}__gap-left`
           )}
           hideLabel
-          label={add_subgroup}
+          label={addSubgroupText}
           wrapperProps={wrapperProps}
           wrapperClassName={cx(`${blockClass}__add_condition_group-wrapper`, {
             [`${blockClass}__add_condition_group-wrapper--show`]: isAddSubgroup,

@@ -22,7 +22,6 @@ export const ConditionBuilderButton = ({
   isInvalid,
   wrapperClassName,
   tabIndex,
-  condition,
   ...rest
 }) => {
   const Button = () => {
@@ -47,7 +46,6 @@ export const ConditionBuilderButton = ({
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         data-name={dataName}
-        id={condition?.id}
       >
         {Icon && <Icon />}
         {!hideLabel && <span>{label}</span>}
@@ -76,10 +74,6 @@ ConditionBuilderButton.propTypes = {
    */
   className: PropTypes.string,
 
-  /**
-   * current condition
-   */
-  condition: PropTypes.object,
   /**
    * decides if label and tooltip to be hidden
    */

@@ -31,7 +31,7 @@ const ConditionGroupBuilder = ({
   conditionBuilderRef,
   className,
 }) => {
-  const [condition_builder_group, condition_text] = useTranslations([
+  const [conditionBuilderGroupText, conditionText] = useTranslations([
     'condition_builder_group',
     'condition_text',
   ]);
@@ -151,7 +151,7 @@ const ConditionGroupBuilder = ({
         <div
           className={`${blockClass}__condition-wrapper`}
           role="grid"
-          aria-label={condition_builder_group}
+          aria-label={conditionBuilderGroupText}
         >
           {/* condition loop starts here */}
 
@@ -196,7 +196,7 @@ const ConditionGroupBuilder = ({
       <div
         className={`${className} ${blockClass}__condition-wrapper`}
         role={aria.level === 1 ? 'rowgroup' : undefined}
-        aria-label={aria.level == 1 ? condition_builder_group : undefined}
+        aria-label={aria.level == 1 ? conditionBuilderGroupText : undefined}
         ref={conditionBuilderContentRef}
       >
         {/* condition loop starts here */}
@@ -210,7 +210,7 @@ const ConditionGroupBuilder = ({
           >
             <ConditionBuilderItem
               label={group.statement}
-              title={condition_text}
+              title={conditionText}
               data-name="connectorField"
               popOverClassName={`${blockClass}__gap`}
               className={`${blockClass}__statement-button`}
@@ -218,7 +218,7 @@ const ConditionGroupBuilder = ({
               <ItemOption
                 conditionState={{
                   value: group.statement,
-                  label: condition_text,
+                  label: conditionText,
                 }}
                 onChange={(v, evt) => {
                   focusThisField(evt);

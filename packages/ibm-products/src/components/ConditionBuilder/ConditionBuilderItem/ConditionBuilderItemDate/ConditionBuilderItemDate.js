@@ -10,7 +10,7 @@ const blockClass = `${pkg.prefix}--condition-builder`;
 
 export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
   const DatePickerInputRef = useRef();
-  const [start_text, end_text] = useTranslations(['start_text', 'end_text']);
+  const [startText, endText] = useTranslations(['start_text', 'end_text']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
@@ -43,12 +43,12 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           <DatePickerInput
             id="datePickerStart"
             placeholder="dd/mm/yyyy"
-            labelText={start_text}
+            labelText={startText}
           />
           <DatePickerInput
             id="datePickerEnd"
             placeholder="dd/mm/yyyy"
-            labelText={end_text}
+            labelText={endText}
           />
         </DatePicker>
       )}

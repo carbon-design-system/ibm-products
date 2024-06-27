@@ -12,11 +12,13 @@ import { translationsObject } from '../ConditionBuilderContext/translationObject
 export const useTranslations = (translationKeys) => {
   const { translateWithId } = useContext(ConditionBuilderContext);
 
-  return translationKeys.map((translationKey) =>
-    translateWithId?.(translationKey)
-      ? translateWithId(translationKey)
-      : translationsObject[translationKey]
-      ? translationsObject[translationKey]
-      : translationKey
-  );
+  return translationKeys.map((translationKey) => {
+    if (translateWithId?.(translationKey)) {
+      return translateWithId(translationKey);
+    } else if (translationsObject[translationKey]) {
+      return translationsObject[translationKey];
+    } else {
+      return translationKey;
+    }
+  });
 };

@@ -10,7 +10,7 @@ import { useTranslations } from '../utils/useTranslations';
 
 const GroupConnector = () => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
-  const [condition_text] = useTranslations(['condition_text']);
+  const [conditionText] = useTranslations(['condition_text']);
 
   const onStatementChangeHandler = (updatedStatement) => {
     setRootState({
@@ -28,7 +28,7 @@ const GroupConnector = () => {
     >
       <ConditionBuilderItem
         label={rootState.operator}
-        title={condition_text}
+        title={conditionText}
         data-name="connectorField"
         popOverClassName={`${blockClass}__gap`}
         className={`${blockClass}__statement-button`}
@@ -36,7 +36,7 @@ const GroupConnector = () => {
         <ItemOption
           conditionState={{
             value: rootState.operator,
-            label: condition_text,
+            label: conditionText,
           }}
           onChange={onStatementChangeHandler}
           config={{ options: connectorConfig }}

@@ -8,7 +8,7 @@ import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
 const ConditionPreview = ({ previewType, group }) => {
   const [animate, setAnimate] = useState(false);
-  const [property_text, operator_text, value_text, if_text] = useTranslations([
+  const [propertyText, operatorText, valueText, ifText] = useTranslations([
     'value_text',
     'operator_text',
     'property_text',
@@ -21,9 +21,9 @@ const ConditionPreview = ({ previewType, group }) => {
   const getConditionSection = () => {
     return (
       <div className={`${blockClass}__preview-condition`}>
-        <ConditionBuilderItem label={property_text} renderIcon={Bee} />
-        <ConditionBuilderItem label={operator_text} />
-        <ConditionBuilderItem label={value_text} />
+        <ConditionBuilderItem label={propertyText} renderIcon={Bee} />
+        <ConditionBuilderItem label={operatorText} />
+        <ConditionBuilderItem label={valueText} />
       </div>
     );
   };
@@ -53,7 +53,7 @@ const ConditionPreview = ({ previewType, group }) => {
             <div className={`${blockClass}__gap`}>
               <ConditionBuilderItem
                 className={`${blockClass}__statement-button`}
-                label={if_text}
+                label={ifText}
               />
             </div>
             {getConditionSection()}
@@ -80,7 +80,7 @@ const ConditionPreview = ({ previewType, group }) => {
             >
               <ConditionConnector
                 className={`${blockClass}__gap ${blockClass}__groupConnector`}
-                operator={if_text}
+                operator={ifText}
               />
               {getConditionSection()}
             </div>

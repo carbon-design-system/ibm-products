@@ -51,11 +51,11 @@ const ConditionBlock = (props) => {
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
   const [
-    condition_row_text,
-    condition_text,
-    property_text,
-    operator_text,
-    remove_condition,
+    conditionRowText,
+    conditionText,
+    propertyText,
+    operatorText,
+    removeConditionText,
   ] = useTranslations([
     'condition_row',
     'condition_text',
@@ -158,7 +158,7 @@ const ConditionBlock = (props) => {
         }
       )}
       role="row"
-      aria-label={condition_row_text}
+      aria-label={conditionRowText}
       tabIndex={-1}
       {...getAriaAttributes()}
     >
@@ -175,7 +175,7 @@ const ConditionBlock = (props) => {
       {isStatement && (
         <ConditionBuilderItem
           label={group.statement}
-          title={condition_text}
+          title={conditionText}
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
@@ -183,7 +183,7 @@ const ConditionBlock = (props) => {
           <ItemOption
             conditionState={{
               value: group.statement,
-              label: condition_text,
+              label: conditionText,
             }}
             onChange={onStatementChangeHandler}
             config={{ options: statementConfig }}
@@ -195,7 +195,7 @@ const ConditionBlock = (props) => {
 
       <ConditionBuilderItem
         label={label}
-        title={property_text}
+        title={propertyText}
         renderIcon={icon ?? null}
         className={`${blockClass}__property-field`}
         data-name="propertyField"
@@ -205,7 +205,7 @@ const ConditionBlock = (props) => {
         <ItemOption
           conditionState={{
             value: property,
-            label: property_text,
+            label: propertyText,
           }}
           onChange={onPropertyChangeHandler}
           config={{ options: inputConfig.properties }}
@@ -214,7 +214,7 @@ const ConditionBlock = (props) => {
       {property && (
         <ConditionBuilderItem
           label={operator}
-          title={operator_text}
+          title={operatorText}
           data-name="operatorField"
           condition={condition}
           type={type}
@@ -225,7 +225,7 @@ const ConditionBlock = (props) => {
             }}
             conditionState={{
               value: operator,
-              label: operator_text,
+              label: operatorText,
             }}
             onChange={onOperatorChangeHandler}
           />
@@ -254,10 +254,10 @@ const ConditionBlock = (props) => {
           />
         </ConditionBuilderItem>
       )}
-      <span role="gridcell" aria-label={remove_condition}>
+      <span role="gridcell" aria-label={removeConditionText}>
         <ConditionBuilderButton
           hideLabel
-          label={remove_condition}
+          label={removeConditionText}
           onClick={onRemove}
           onMouseEnter={handleShowDeletionPreview}
           onMouseLeave={handleHideDeletionPreview}

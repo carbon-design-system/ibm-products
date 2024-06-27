@@ -15,13 +15,14 @@ import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilde
 const ConditionBuilderActions = ({ actions, className }) => {
   const { actionState, setActionState } = useContext(ConditionBuilderContext);
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
-  const [actions_text, then, and, remove_action, add_action] = useTranslations([
-    'actions_text',
-    'then',
-    'and',
-    'remove_action',
-    'add_action',
-  ]);
+  const [actionsText, thenText, andText, removeActionText, addActionText] =
+    useTranslations([
+      'actions_text',
+      'then',
+      'and',
+      'remove_action',
+      'add_action',
+    ]);
 
   const addActionHandler = () => {
     const action = {
@@ -56,7 +57,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
   return (
     <div className={className}>
       <Section className={`${blockClass}__heading`} level={4}>
-        <Heading>{actions_text}</Heading>
+        <Heading>{actionsText}</Heading>
       </Section>
       <div className={`${blockClass}__condition-wrapper`} role="grid">
         {actionState?.map((action, index) => (
@@ -75,15 +76,15 @@ const ConditionBuilderActions = ({ actions, className }) => {
               className={`${blockClass}__statement-button`}
               tabIndex={0}
               popOverClassName={`${blockClass}__gap`}
-              label={index === 0 ? then : and}
+              label={index === 0 ? thenText : andText}
             />
 
             <ConditionBuilderItem
               label={action.label}
-              title={actions_text}
+              title={actionsText}
               condition={action}
               data-name="valueField"
-              type={'option'}
+              type="option"
             >
               <ItemOptionForValueField
                 conditionState={{
@@ -93,10 +94,10 @@ const ConditionBuilderActions = ({ actions, className }) => {
                 config={{ options: actions }}
               />
             </ConditionBuilderItem>
-            <span role="gridcell" aria-label={remove_action}>
+            <span role="gridcell" aria-label={removeActionText}>
               <ConditionBuilderButton
                 hideLabel
-                label={remove_action}
+                label={removeActionText}
                 onClick={() => onRemove(action.id)}
                 onMouseEnter={() => handleShowDeletionPreview(index)}
                 onMouseLeave={handleHideDeletionPreview}
@@ -111,7 +112,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
               <ConditionBuilderAdd
                 onClick={addActionHandler}
                 className={`${blockClass}__gap ${blockClass}__gap-left`}
-                buttonLabel={add_action}
+                buttonLabel={addActionText}
               />
             )}
           </div>
@@ -121,7 +122,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
           <ConditionBuilderAdd
             onClick={addActionHandler}
             className={`${blockClass}__gap ${blockClass}__gap-left`}
-            buttonLabel={add_action}
+            buttonLabel={addActionText}
             tabIndex={0}
           />
         )}

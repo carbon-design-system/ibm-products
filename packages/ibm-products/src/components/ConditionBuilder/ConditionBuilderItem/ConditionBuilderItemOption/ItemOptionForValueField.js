@@ -24,7 +24,7 @@ export const ItemOptionForValueField = ({
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
   );
-  const [property_text, clear_search] = useTranslations([
+  const [propertyText, clearSearchText] = useTranslations([
     'property_text',
     'clear_search',
   ]);
@@ -123,7 +123,7 @@ export const ItemOptionForValueField = ({
       ? conditionState.label
       : conditionState.property
       ? conditionState.property
-      : property_text;
+      : propertyText;
   };
   if (!allOptions) {
     return <SelectSkeleton />;
@@ -134,8 +134,8 @@ export const ItemOptionForValueField = ({
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={clear_search}
-            closeButtonLabelText={clear_search}
+            labelText={clearSearchText}
+            closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
           />
         </div>

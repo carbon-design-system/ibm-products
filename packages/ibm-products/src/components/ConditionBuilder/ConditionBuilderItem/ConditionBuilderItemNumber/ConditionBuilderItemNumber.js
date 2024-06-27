@@ -11,7 +11,7 @@ export const ConditionBuilderItemNumber = ({
   config,
   onChange,
 }) => {
-  const [invalid_number_warn__text] = useTranslations([
+  const [invalidNumberWarnText] = useTranslations([
     'invalid_number_warn__text',
   ]);
   const onChangeHandler = (e, { value }) => {
@@ -37,7 +37,7 @@ export const ConditionBuilderItemNumber = ({
         hideLabel
         defaultValue={getDefaultValue()}
         id={conditionState.property?.replace(/\s/g, '')}
-        invalidText={invalid_number_warn__text}
+        invalidText={invalidNumberWarnText}
         allowEmpty
         onChange={onChangeHandler}
         {...config}

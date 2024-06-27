@@ -33,7 +33,7 @@ const ConditionBuilderContent = ({
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
 
-  const [add_condition_group] = useTranslations(['add_condition_group']);
+  const [addConditionGroupText] = useTranslations(['add_condition_group']);
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -174,10 +174,10 @@ const ConditionBuilderContent = ({
                     }}
                     className={`${blockClass}__add_condition_group `}
                     hideLabel
-                    label={add_condition_group}
+                    label={addConditionGroupText}
                     wrapperProps={{
                       role: 'gridcell',
-                      'aria-label': add_condition_group,
+                      'aria-label': addConditionGroupText,
                     }}
                   />
                 }

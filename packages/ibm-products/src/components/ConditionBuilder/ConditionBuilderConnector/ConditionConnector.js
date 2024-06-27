@@ -12,7 +12,7 @@ import { useTranslations } from '../utils/useTranslations';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   const { variant } = useContext(ConditionBuilderContext);
-  const [connector_text] = useTranslations(['connector_text']);
+  const [connectorText] = useTranslations(['connector_text']);
 
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {
@@ -42,7 +42,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
 
     <ConditionBuilderItem
       label={operator}
-      title={connector_text}
+      title={connectorText}
       data-name="connectorField"
       onMouseEnter={activeConnectorHandler}
       onMouseLeave={inActiveConnectorHandler}
@@ -58,7 +58,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
         }}
         conditionState={{
           value: operator,
-          label: connector_text,
+          label: connectorText,
         }}
         onChange={onChangeHandler}
       />

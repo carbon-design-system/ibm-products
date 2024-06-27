@@ -36,7 +36,6 @@ export const InlineEditButton = ({
       data-disabled={disabledCell}
       aria-disabled={disabledCell}
       role="button"
-      title={label}
     >
       {LabelIcon && (
         <div className={`${blockClass}__label-icon`}>
@@ -74,6 +73,6 @@ InlineEditButton.propTypes = {
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
+  type: PropTypes.oneOf(['text', 'number', 'selection', 'date', 'checkbox']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

@@ -61,6 +61,8 @@ const useInlineEdit = (hooks: Hooks) => {
             {!staticCell &&
               inlineEditType === 'selection' &&
               renderInlineEditComponent(inlineEditType)}
+            {inlineEditType === 'checkbox' &&
+              renderInlineEditComponent(inlineEditType)}
             {!staticCell &&
               inlineEditType === 'date' &&
               renderInlineEditComponent(inlineEditType)}

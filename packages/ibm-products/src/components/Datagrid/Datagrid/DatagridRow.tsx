@@ -130,7 +130,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     return {};
   };
 
-  const { className, ...rowProps } = row.getRowProps();
+  const { className, ...rowProps } = row.getRowProps({ role: undefined });
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
@@ -171,7 +171,7 @@ const DatagridRow = (datagridState: DataGridState) => {
           )
         ) : null}
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps();
+          const cellProps = cell.getCellProps({ role: undefined });
           // eslint-disable-next-line no-unused-vars
           const { style, children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
@@ -185,7 +185,6 @@ const DatagridRow = (datagridState: DataGridState) => {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
           }
-          const title = content?.props?.children[0]?.props?.value;
           const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
@@ -216,7 +215,6 @@ const DatagridRow = (datagridState: DataGridState) => {
               {...restProps}
               style={style}
               key={cell.column.id}
-              title={title}
             >
               {content}
             </TableCell>

@@ -20,7 +20,6 @@ export interface PrevState {
   clickAndHoldActive?: boolean;
   selectedHeaderReorderActive?: boolean;
   rowHeight?: number;
-  columns?: object;
   cellSize?: Size;
 }
 

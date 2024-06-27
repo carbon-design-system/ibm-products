@@ -33,7 +33,68 @@ test.describe('Tearsheet @avt', () => {
     await expect(page).toHaveNoACViolations('Tearsheet @avt-default-state');
   });
 
-  test('@avt-focus-trap-and-return', async ({ page }) => {
+  test('@avt-default-state-focus-trap', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'ibm-products-components-tearsheet--tearsheet',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    const input1 = page.locator('#tss-ft1');
+    const input2 = page.locator('#tss-ft2');
+    const cancelButton = page.getByText('Cancel');
+    const backButton = page.getByText('Back');
+    const replaceButton = page.getByText('Replace');
+
+    await page.getByText('Open Tearsheet').click();
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(modalElement).toBeInViewport();
+    await expect(input1).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(input2).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(cancelButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(backButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(replaceButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await expect(input1).toBeFocused();
+
+    await page.keyboard.press('Shift+Tab');
+    await expect(replaceButton).toBeFocused();
+
+    await page.keyboard.press('Shift+Tab');
+    await expect(backButton).toBeFocused();
+
+    await page.keyboard.press('Shift+Tab');
+    await expect(cancelButton).toBeFocused();
+
+    await page.keyboard.press('Enter');
+
+    await page
+      .locator(`.${carbon.prefix}--modal`)
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+    await expect(modalElement).not.toBeInViewport();
+  });
+
+  test('@avt-focus-return-to-launcher-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
       id: 'ibm-products-components-tearsheet--return-focus-to-open-button',
@@ -55,7 +116,7 @@ test.describe('Tearsheet @avt', () => {
     );
 
     await expect(page).toHaveNoACViolations(
-      'Tearsheet @avt-focus-trap-and-return'
+      'Tearsheet @avt-focus-return-to-launcher-button'
     );
     await expect(page.locator('#tss-ft1')).toBeFocused();
 

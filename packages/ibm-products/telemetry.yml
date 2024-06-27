@@ -123,6 +123,7 @@ collect:
         - handleResize
         - hasActions
         - hasCloseIcon
+        - hasCustomRowHeader
         - hasFieldset
         - headerGroups
         - HeaderRow
@@ -264,6 +265,8 @@ collect:
         - radio
         - reactTableFiltersState
         - renderIcon
+        - renderRowHeader
+        - renderRowHeaderDirection
         - resetToDefaultLabel
         - resizerAriaLabel
         - rightAlign
@@ -784,6 +787,7 @@ collect:
         - inputInvalidText
         - inputLabelText
         - inputPlaceholderText
+        - primaryDangerDescription
         - resourceName
         - textConfirmation
         # RowSizeDropdown
@@ -1015,6 +1019,9 @@ collect:
         # General - primaryButtonPlacement
         - bottom
         - top
+        # General - renderRowHeaderDirection
+        - left
+        - right
         # General - rowSize
         - lg
         - md

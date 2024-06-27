@@ -9,7 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { carbon } from '../../../packages/ibm-products/src/settings';
+import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe.configure({ mode: 'parallel' });
 
@@ -171,5 +171,66 @@ test.describe('Tearsheet @avt', () => {
     await expect(cancelButton).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(openButton).toBeFocused();
+  });
+
+  test('@avt-stacking', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'ibm-products-components-tearsheet--stacked',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    const bc = `${pkg.prefix}--tearsheet`;
+    const ts1 = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    const stackInput1 = page.locator('#stacked-input-1');
+    const stackInput2 = page.locator('#stacked-input-2');
+    const stackInput3 = page.locator('#stacked-input-3');
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await ts1.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(stackInput1).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    const ts2 = page.locator(
+      `[class*="${bc}--stacked-${1}-of-${2}"].is-visible`
+    );
+    await ts2.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(ts2).toBeInViewport();
+    await expect(stackInput2).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    const ts3 = page.locator(
+      `[class*="${bc}--stacked-${3}-of-${3}"].is-visible`
+    );
+    await ts3.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(ts3).toBeInViewport();
+    await expect(stackInput3).toBeFocused();
+    await expect(page).toHaveNoACViolations('Tearsheet @avt-stacking');
   });
 });

@@ -33,6 +33,41 @@ test.describe('Tearsheet @avt', () => {
     await expect(page).toHaveNoACViolations('Tearsheet @avt-default-state');
   });
 
+  test('@avt-open-and-close', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'ibm-products-components-tearsheet--tearsheet',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(modalElement).toBeInViewport();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await page
+      .locator(`.${carbon.prefix}--modal`)
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+    await expect(modalElement).not.toBeInViewport();
+  });
+
   test('@avt-default-state-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',

@@ -232,7 +232,7 @@ const dragDropCallback = ({ ...args }) => {
   );
 
   const onColumnDragDrop = (tableData) => {
-    console.log(tableData);
+    // Dev can debug here
   };
 
   const columnDataClone = useMemo(

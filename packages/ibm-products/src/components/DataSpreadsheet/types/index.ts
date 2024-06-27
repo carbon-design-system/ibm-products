@@ -18,7 +18,9 @@ export interface PrevState {
   isEditing?: boolean;
   selectionAreaData?: any[];
   clickAndHoldActive?: boolean;
+  selectedHeaderReorderActive?: boolean;
   rowHeight?: number;
+  columns?: object;
   cellSize?: Size;
 }
 

@@ -29,7 +29,7 @@ jobs:
       contents: write
     timeout-minutes: 60
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+      GITHUB_TOKEN: ${{ secrets.MERGE_ACTION }}
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
@@ -38,8 +38,8 @@ jobs:
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git config user.name $GITHUB_ACTOR
+          git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
+          git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

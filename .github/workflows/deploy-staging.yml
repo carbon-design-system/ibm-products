@@ -1,11 +1,10 @@
 # Deploy staging storybook environment from release branch to Github Pages
 name: Deploy staging storybook
 
-# Gets triggered every time a '@carbon/ibm-products@2.*' github tag is published
+# Gets triggered every time a change is pushed to the `release/v2*` branch
 on:
   push:
-    tags:
-      - '@carbon/ibm-products@2.*'
+    branches: [release/v2*]
 
 jobs:
   deploy-staging-storybook:
@@ -24,8 +23,8 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - name: Build storybook
-        run: yarn storybook:build
+      - name: Build packages and storybook
+        run: yarn build
 
       # Deploy to staging Github Pages using `gh-pages` package
       - name: Deploy

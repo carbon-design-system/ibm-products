@@ -198,25 +198,10 @@ const actions = [
 
 const translateWithId = (key) => {
   const translationsObject = {
-    if: 'if',
-    excl_if: 'excl.if',
-    and: 'and',
-    or: 'or',
-    is: 'is',
-    greater: 'is greater than',
-    greater_equal: 'is greater than or equal to',
-    lower: 'is lower than',
-    lower_equal: 'is lower than or equal to',
-    starts_with: 'starts with',
-    ends_with: 'ends with',
-    contains: 'contains',
-    one_of: 'is one of',
-    before: 'is before',
-    after: 'is after',
-    between: 'is between',
-    add_condition: 'Add condition',
-    add_condition_group: 'Add condition group',
-    add_subgroup: 'Add subgroup',
+    ifText: 'if',
+    addConditionText: 'Add condition',
+    addConditionGroupText: 'Add condition group',
+    addSubgroupText: 'Add subgroup',
   };
 
   return translationsObject[key];

@@ -60,7 +60,7 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `DelimitedList`                    | View changes [here](#delimitedlist)                                                                               | `@carbon/ibm-products` | Low    |
 | `Dropdown`                         | [Carbon v11 Migration guide][111]                                                                                 | `@carbon/react`        | Low    |
 | `DropdownSkeleton`                 | The deprecated prop `inline` has been removed                                                                     | `@carbon/react`        | Low    |
-| `ErrorPage`                        | **Deprecated:** [View replacement][4]                                                                             | `@carbon/ibm-products` | High   |
+| `ErrorPage`                        | **Deprecated:** [View replacement][9]                                                                             | `@carbon/ibm-products` | Low    |
 | `ExpandableTile`                   | [Carbon v11 Migration guide][112]                                                                                 | `@carbon/react`        | Low    |
 | `ExternalLink`                     | **Deprecated:** [View replacement][5]                                                                             | `@carbon/react`        | Medium |
 | `FileUploader`                     | [Carbon v11 Migration guide][113]                                                                                 | `@carbon/react`        | Low    |
@@ -84,6 +84,9 @@ v2 will receive weekly releases occurring every Tuesday morning.
 | `Header`                           | **Deprecated:** [View replacement][6]                                                                             | `@carbon/ibm-products` | Medium |
 | `HeaderMenu`                       | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
 | `HeaderNavigation`                 | Updated from a class to functional component                                                                      | `@carbon/react`        | Low    |
+| `HTTPError403`                     | **Deprecated:** [View replacement][9]                                                                             | `@carbon/ibm-products` | Low    |
+| `HTTPError404`                     | **Deprecated:** [View replacement][9]                                                                             | `@carbon/ibm-products` | Low    |
+| `HTTPErrorOther`                   | **Deprecated:** [View replacement][9]                                                                             | `@carbon/ibm-products` | Low    |
 | `ICA`                              | **Renamed:** See [Big Numbers](#bignumbers)                                                                       | `@carbon/ibm-products` | Low    |
 | `Icon`                             | **Removed:** [View replacement][16]                                                                               | `@carbon/react`        | Medium |
 | `IconButton`                       | **Deprecated:** [View replacement][7]                                                                             | `@carbon/react`        | High   |

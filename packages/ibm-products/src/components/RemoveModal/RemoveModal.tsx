@@ -87,6 +87,12 @@ interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
    * Specify the text for the primary button
    */
   primaryButtonText?: string;
+
+  /**
+   * Specify the danger description on the primary button
+   */
+  primaryDangerDescription?: string;
+
   /**
    * The name of the resource being acted upon
    */
@@ -129,6 +135,7 @@ export let RemoveModal = forwardRef(
       preventCloseOnClickOutside,
       primaryButtonDisabled,
       primaryButtonText,
+      primaryDangerDescription,
       resourceName,
       secondaryButtonText,
       textConfirmation,
@@ -211,6 +218,7 @@ export let RemoveModal = forwardRef(
           <Button
             type="submit"
             kind="danger"
+            dangerDescription={primaryDangerDescription}
             onClick={onRequestSubmit}
             disabled={primaryButtonStatus}
           >
@@ -282,6 +290,12 @@ RemoveModal.propTypes = {
    * Specify the text for the primary button
    */
   primaryButtonText: PropTypes.string,
+
+  /**
+   * Specify the danger description on the primary button
+   */
+  primaryDangerDescription: PropTypes.string,
+
   /**
    * The name of the resource being acted upon
    */

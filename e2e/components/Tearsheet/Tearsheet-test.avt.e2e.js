@@ -13,6 +13,8 @@ import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe.configure({ mode: 'parallel' });
 
+const bc = `${pkg.prefix}--tearsheet`;
+
 test.describe('Tearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
@@ -182,7 +184,6 @@ test.describe('Tearsheet @avt', () => {
       },
     });
 
-    const bc = `${pkg.prefix}--tearsheet`;
     const ts1 = page.locator(`.${carbon.prefix}--modal.is-visible`);
     const stackInput1 = page.locator('#stacked-input-1');
     const stackInput2 = page.locator('#stacked-input-2');
@@ -275,5 +276,86 @@ test.describe('Tearsheet @avt', () => {
     for (const ts of tearsheets) {
       await expect(ts).toHaveAttribute('aria-hidden', 'true');
     }
+  });
+
+  test('@avt-stacking-different-sizes', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'ibm-products-components-tearsheet--stacked-mixed-sizes',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    const wideTs = page.locator(`[class*="${bc}--wide"]`);
+    const openButton = page.getByText('Toggle tearsheet 1');
+
+    await page.keyboard.press('Tab');
+    await expect(openButton).toBeFocused();
+    await page.keyboard.press('Enter');
+    await wideTs.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(wideTs).toBeInViewport();
+    await expect(page).toHaveNoACViolations(
+      'Tearsheet @avt-stacking-different-sizes'
+    );
+
+    const stackedInput1 = page.locator('#stacked-input-1');
+    await expect(stackedInput1).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+
+    await expect(page.getByText('Open tearsheet 2')).toBeFocused();
+
+    await page.keyboard.press('Enter');
+
+    const narrowTs = page.locator(`[class*="${bc}--narrow"]`);
+
+    await narrowTs.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(narrowTs).toBeInViewport();
+    await expect(page).toHaveNoACViolations(
+      'Tearsheet @avt-stacking-different-sizes'
+    );
+
+    const stackedInput2 = page.locator('#stacked-input-2');
+
+    await expect(stackedInput2).toBeFocused();
+
+    await page.keyboard.press('Tab');
+
+    await expect(
+      page.getByLabel('Tearsheet 2').getByRole('button', { name: 'Cancel' })
+    ).toBeFocused();
+
+    await page.keyboard.press('Enter');
+
+    await expect(stackedInput1).toBeFocused();
+
+    await page.keyboard.press('Tab');
+
+    await expect(
+      page.getByLabel('Tearsheet 1').getByRole('button', { name: 'Cancel' })
+    ).toBeFocused();
+
+    await page.keyboard.press('Enter');
+
+    await wideTs.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+
+    await expect(wideTs).toHaveAttribute('aria-hidden', 'true');
+    await expect(narrowTs).toHaveAttribute('aria-hidden', 'true');
   });
 });

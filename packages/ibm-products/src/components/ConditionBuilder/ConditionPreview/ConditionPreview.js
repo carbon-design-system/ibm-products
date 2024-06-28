@@ -9,10 +9,10 @@ import { Bee } from '@carbon/react/icons';
 const ConditionPreview = ({ previewType, group }) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
-    'value_text',
-    'operator_text',
-    'property_text',
-    'if_text',
+    'valueText',
+    'operatorText',
+    'propertyText',
+    'ifText',
   ]);
 
   useEffect(() => {

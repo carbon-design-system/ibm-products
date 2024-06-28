@@ -57,11 +57,11 @@ const ConditionBlock = (props) => {
     operatorText,
     removeConditionText,
   ] = useTranslations([
-    'condition_row',
-    'condition_text',
-    'property_text',
-    'operator_text',
-    'remove_condition',
+    'conditionRowText',
+    'conditionText',
+    'propertyText',
+    'operatorText',
+    'removeConditionText',
   ]);
 
   //filtering the current property to access its properties and config options

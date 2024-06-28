@@ -33,7 +33,7 @@ const ConditionBuilderContent = ({
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
 
-  const [addConditionGroupText] = useTranslations(['add_condition_group']);
+  const [addConditionGroupText] = useTranslations(['addConditionGroupText']);
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -111,7 +111,7 @@ const ConditionBuilderContent = ({
     <>
       {!isConditionBuilderActive && (
         <Button
-          className={`${blockClass}__add_condition-button`}
+          className={`${blockClass}__addConditionText-button`}
           renderIcon={(props) => <Add size={16} {...props} />}
           iconDescription={startConditionLabel}
           kind="ghost"
@@ -172,7 +172,7 @@ const ConditionBuilderContent = ({
                     onMouseLeave={() => {
                       setShowConditionGroupPreview(false);
                     }}
-                    className={`${blockClass}__add_condition_group `}
+                    className={`${blockClass}__addConditionGroupText `}
                     hideLabel
                     label={addConditionGroupText}
                     wrapperProps={{

@@ -11,9 +11,7 @@ export const ConditionBuilderItemNumber = ({
   config,
   onChange,
 }) => {
-  const [invalidNumberWarnText] = useTranslations([
-    'invalid_number_warn__text',
-  ]);
+  const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
     if (checkIfValid(value)) {
       onChange(`${value} ${config.unit ?? ''}`);

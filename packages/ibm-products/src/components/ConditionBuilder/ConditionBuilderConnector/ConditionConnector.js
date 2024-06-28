@@ -12,7 +12,7 @@ import { useTranslations } from '../utils/useTranslations';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   const { variant } = useContext(ConditionBuilderContext);
-  const [connectorText] = useTranslations(['connector_text']);
+  const [connectorText] = useTranslations(['connectorText']);
 
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {

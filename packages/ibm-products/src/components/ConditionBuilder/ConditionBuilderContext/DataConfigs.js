@@ -43,7 +43,7 @@ export const operatorConfig = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater_equal',
+    id: 'greaterEqual',
     type: 'number',
   },
   {
@@ -53,17 +53,17 @@ export const operatorConfig = [
   },
   {
     label: 'is lower than or equal to',
-    id: 'lower_equal',
+    id: 'lowerEqual',
     type: 'number',
   },
   {
     label: 'starts with',
-    id: 'starts_with',
+    id: 'startsWith',
     type: 'text,textarea',
   },
   {
     label: 'ends with',
-    id: 'ends_with',
+    id: 'endsWith',
     type: 'text,textarea',
   },
   {
@@ -73,7 +73,7 @@ export const operatorConfig = [
   },
   {
     label: 'is one of',
-    id: 'one_of',
+    id: 'oneOf',
     type: 'option',
   },
   {

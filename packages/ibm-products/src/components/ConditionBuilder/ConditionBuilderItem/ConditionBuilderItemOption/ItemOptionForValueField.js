@@ -19,14 +19,14 @@ export const ItemOptionForValueField = ({
   config = {},
   onChange,
 }) => {
-  const multiSelectable = conditionState.operator === 'one_of';
+  const multiSelectable = conditionState.operator === 'oneOf';
 
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
   );
   const [propertyText, clearSearchText] = useTranslations([
-    'property_text',
-    'clear_search',
+    'propertyText',
+    'clearSearchText',
   ]);
   const contentRef = useRef();
 

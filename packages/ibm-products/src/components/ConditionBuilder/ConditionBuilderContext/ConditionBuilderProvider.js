@@ -131,7 +131,7 @@ ConditionBuilderProvider.propTypes = {
   /**
    * Optional prop if you want to pass translation to the texts used . Otherwise this will the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
-   * The message key will be one of [   "if_text",   "excl_if",   "and",   "or",   "is",   "greater",   "greater_equal",   "lower",   "lower_equal",   "starts_with",   "ends_with",   "contains",   "one_of",   "before",   "after",   "between",   "add_condition",   "add_condition_group",   "add_subgroup",   "condition_text",   "property_text",   "operator_text",   "value_text",   "connector_text",   "condition_row",   "remove_condition",   "add_condition_row",   "start_text",   "end_text",   "clear_search",   "actions_text",   "then",   "remove_action",   "add_action",   "invalid_text",   "invalid_number_warn__text"
+   * The message key will be one of [   "ifText",   "addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",   "invalidNumberWarnText"
 ]
    */
   translateWithId: PropTypes.func,

@@ -10,7 +10,7 @@ import { useTranslations } from '../utils/useTranslations';
 
 const GroupConnector = () => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
-  const [conditionText] = useTranslations(['condition_text']);
+  const [conditionText] = useTranslations(['conditionText']);
 
   const onStatementChangeHandler = (updatedStatement) => {
     setRootState({

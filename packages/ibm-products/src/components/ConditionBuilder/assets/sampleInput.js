@@ -63,7 +63,7 @@ const customOperators = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater_equal',
+    id: 'greaterEqual',
   },
 ];
 

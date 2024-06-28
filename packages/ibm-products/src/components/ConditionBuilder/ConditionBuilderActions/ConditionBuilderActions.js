@@ -17,11 +17,11 @@ const ConditionBuilderActions = ({ actions, className }) => {
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
   const [actionsText, thenText, andText, removeActionText, addActionText] =
     useTranslations([
-      'actions_text',
+      'actionsText',
       'then',
       'and',
-      'remove_action',
-      'add_action',
+      'removeActionText',
+      'addActionText',
     ]);
 
   const addActionHandler = () => {

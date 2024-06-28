@@ -27,11 +27,10 @@ export const ConditionBuilderItem = ({
   const [open, setOpen] = useState(false);
 
   const [invalidText, addConditionText, labelText] = useTranslations([
-    'invalid_text',
-    'add_condition',
+    'invalidText',
+    'addConditionText',
     label,
   ]);
-
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
@@ -64,7 +63,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'one_of'
+        condition.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
@@ -122,7 +121,7 @@ export const ConditionBuilderItem = ({
         <PopoverContent
           className={`${blockClass}__item__content`}
           role="dialog"
-          aria-label={`${title}`}
+          aria-label={title}
         >
           <Layer>
             <h1 className={`${blockClass}__item__title`}>{title}</h1>

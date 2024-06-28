@@ -13,8 +13,8 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef();
   const [propertyText, clearSearchText] = useTranslations([
-    'property_text',
-    'clear_search',
+    'propertyText',
+    'clearSearchText',
   ]);
   const allOptions = config.options;
   const [searchValue, setSearchValue] = useState('');

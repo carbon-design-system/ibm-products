@@ -33,7 +33,7 @@ const ConditionGroupBuilder = ({
 }) => {
   const [conditionBuilderGroupText, conditionText] = useTranslations([
     'condition_builder_group',
-    'condition_text',
+    'conditionText',
   ]);
   const { variant } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);

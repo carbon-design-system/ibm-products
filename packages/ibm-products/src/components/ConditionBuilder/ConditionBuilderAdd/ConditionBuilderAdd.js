@@ -20,7 +20,11 @@ const ConditionBuilderAdd = ({
 }) => {
   const [isAddSubgroup, setIsAddSubgroup] = useState(false);
   const [addConditionText, addConditionRowText, addSubgroupText] =
-    useTranslations(['add_condition', 'add_condition_row', 'add_subgroup']);
+    useTranslations([
+      'addConditionText',
+      'addConditionRowText',
+      'addSubgroupText',
+    ]);
   const showAddSubGroup = () => {
     setIsAddSubgroup(true);
   };

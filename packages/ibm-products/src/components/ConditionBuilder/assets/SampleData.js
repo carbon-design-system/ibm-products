@@ -130,7 +130,7 @@ export const sampleDataStructure_sentence = {
       conditions: [
         {
           property: 'region',
-          operator: 'one_of',
+          operator: 'oneOf',
           value: [
             {
               label: 'Africa',

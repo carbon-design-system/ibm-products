@@ -232,5 +232,48 @@ test.describe('Tearsheet @avt', () => {
     await expect(ts3).toBeInViewport();
     await expect(stackInput3).toBeFocused();
     await expect(page).toHaveNoACViolations('Tearsheet @avt-stacking');
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await page
+      .locator(`[class*="${bc}--stacked-${3}-of-${3}"]`)
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+    await expect(ts2).toBeInViewport();
+    await expect(stackInput2).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await page
+      .locator(`[class*="${bc}--stacked-${2}-of-${2}"]`)
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+    await expect(ts1).toBeInViewport();
+    await expect(stackInput1).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Enter');
+
+    await page
+      .locator(`.${carbon.prefix}--modal`)
+      .first()
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+
+    const tearsheets = await page.locator(`.${carbon.prefix}--modal`).all();
+    for (const ts of tearsheets) {
+      await expect(ts).toHaveAttribute('aria-hidden', 'true');
+    }
   });
 });

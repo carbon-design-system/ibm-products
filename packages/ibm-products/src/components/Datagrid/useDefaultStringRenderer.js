@@ -30,7 +30,6 @@ const useDefaultStringRenderer = (hooks) => {
           [`${blockClass}__defaultStringRenderer--slug`]:
             slug && React.isValidElement(slug),
         })}
-        title={typeof header === 'string' ? header : ''}
         key={typeof header === 'string' ? header : ''}
       >
         {header}

@@ -50,6 +50,11 @@ interface DataSpreadsheetHeaderProps {
   cellSize?: Size;
 
   /**
+   * Disable column swapping, default false
+   */
+  disableColumnSwapping?: boolean;
+
+  /**
    * All of the spreadsheet columns
    */
   columns?: readonly Column[];
@@ -73,6 +78,11 @@ interface DataSpreadsheetHeaderProps {
    * Headers provided from useTable hook
    */
   headerGroups?: any[];
+
+  /**
+   * Read-only table
+   */
+  readOnlyTable?: boolean;
 
   /**
    * All of the spreadsheet row data
@@ -164,6 +174,8 @@ export const DataSpreadsheetHeader = forwardRef(
       setActiveCellCoordinates,
       setCurrentMatcher,
       setSelectionAreas,
+      readOnlyTable,
+      disableColumnSwapping,
       setSelectionAreaData,
       rows,
       totalVisibleColumns,
@@ -342,6 +354,9 @@ export const DataSpreadsheetHeader = forwardRef(
                   data-row-index="header"
                   data-column-index="header"
                   type="button"
+                  style={{
+                    width: defaultColumn?.rowHeaderWidth,
+                  }}
                   tabIndex={-1}
                   aria-label={selectAllAriaLabel}
                   onClick={handleSelectAllClick}
@@ -381,12 +396,16 @@ export const DataSpreadsheetHeader = forwardRef(
                       data-column-index={index}
                       tabIndex={-1}
                       onMouseDown={
-                        selectedHeader
+                        selectedHeader &&
+                        !readOnlyTable &&
+                        !disableColumnSwapping
                           ? handleHeaderMouseDown(index)
                           : undefined
                       }
                       onMouseUp={
                         selectedHeader &&
+                        !readOnlyTable &&
+                        !disableColumnSwapping &&
                         typeof setSelectedHeaderReorderActive === 'function'
                           ? () => setSelectedHeaderReorderActive(false)
                           : undefined
@@ -411,6 +430,8 @@ export const DataSpreadsheetHeader = forwardRef(
                               selectionAreas,
                               'column'
                             ),
+                          [`${blockClass}__th--active-header-disabledSwapping`]:
+                            disableColumnSwapping || readOnlyTable,
                           [`${blockClass}__th--selected-header`]:
                             selectedHeader,
                           [`${blockClass}__th--selected-header-reorder-active`]:
@@ -468,6 +489,11 @@ DataSpreadsheetHeader.propTypes = {
   }),
 
   /**
+   * Disable column swapping, default false
+   */
+  disableColumnSwapping: PropTypes.bool,
+
+  /**
    * Whether or not a click/hold is active on a header cell
    */
   headerCellHoldActive: PropTypes.bool,
@@ -476,6 +502,11 @@ DataSpreadsheetHeader.propTypes = {
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
+
+  /**
+   * Read-only table
+   */
+  readOnlyTable: PropTypes.bool,
 
   /**
    * All of the spreadsheet row data

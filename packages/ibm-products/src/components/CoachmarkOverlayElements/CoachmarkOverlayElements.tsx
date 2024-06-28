@@ -114,7 +114,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     },
     ref
   ) => {
-    const buttonFocusRef = useRef<ButtonProps>();
+    const buttonFocusRef = useRef<ButtonProps<any>>();
     const scrollRef = useRef<CarouselProps>();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(0);
@@ -123,7 +123,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
         setTimeout(() => {
-          buttonFocusRef.current.focus();
+          buttonFocusRef.current?.focus();
         }, 1000);
       }
       _setCurrentProgStep(value);

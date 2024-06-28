@@ -86,6 +86,11 @@ interface EditInplaceProps extends PropsWithChildren {
    * Provide the text that will be read by a screen reader when visiting this control
    */
   labelText: string;
+
+  /**
+   * handler to add custom onBlur event
+   */
+  onBlur?: (value: string) => void;
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
@@ -141,6 +146,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onCancel,
       onChange,
       onSave,
+      onBlur,
       // readOnly,
       // readOnlyLabel,
       saveLabel,
@@ -159,7 +165,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const escaping = useRef(false);
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
-    const tipAlignments: { [key: string]: string } = [
+    const tipAlignments: { [key: string]: AlignPropType } = [
       'edit',
       'save',
       'cancel',
@@ -212,17 +218,22 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onCancel(initialValue);
     };
 
-    const onBlurHandler = (e) => {
-      // if (readOnly || escaping.current) {
-      if (escaping.current) {
-        return;
-      }
-
-      if (!isTargetingChild(e)) {
-        if (canSave) {
-          onSaveHandler();
-        } else {
-          onCancelHandler();
+    const onBlurHandler = (e: any) => {
+      // Use custom function provided if passed through
+      if (typeof onBlur === 'function' && !isTargetingChild(e)) {
+        onBlur(initialValue);
+        setFocused(false);
+      } else {
+        // Use Default behavior if no custom function provided
+        if (escaping.current) {
+          return;
+        }
+        if (!isTargetingChild(e)) {
+          if (canSave) {
+            onSaveHandler();
+          } else {
+            onCancelHandler();
+          }
         }
       }
     };
@@ -416,9 +427,14 @@ EditInPlace.propTypes = {
    */
   labelText: PropTypes.string.isRequired,
   /**
+   * handler to add custom onBlur event
+   */
+  onBlur: PropTypes.func,
+  /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
   onCancel: PropTypes.func.isRequired,
+
   /**
    * handler that is called when the input is updated
    */

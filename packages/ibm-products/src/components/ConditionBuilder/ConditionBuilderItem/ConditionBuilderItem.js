@@ -9,6 +9,7 @@ import {
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
+import { usePrefix } from '@carbon/react';
 
 export const ConditionBuilderItem = ({
   children,
@@ -26,6 +27,7 @@ export const ConditionBuilderItem = ({
   const contentRef = useRef(null);
   const [open, setOpen] = useState(false);
 
+  const carbonPrefix = usePrefix();
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
@@ -85,6 +87,18 @@ export const ConditionBuilderItem = ({
     }
   }, [contentRef, open]);
 
+  const eligibleToClose = () => {
+    if (
+      event?.target?.closest?.(`.${carbonPrefix}--date-picker__calendar`) ||
+      Array.from(event?.target?.classList)?.includes(
+        `.${carbonPrefix}--date-picker__calendar`
+      )
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <Popover
       open={open}
@@ -92,7 +106,9 @@ export const ConditionBuilderItem = ({
       role="gridcell"
       className={popOverClassName}
       onRequestClose={() => {
-        setOpen(false);
+        if (eligibleToClose()) {
+          setOpen(false);
+        }
       }}
     >
       <ConditionBuilderButton

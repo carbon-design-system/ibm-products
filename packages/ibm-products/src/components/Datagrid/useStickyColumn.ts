@@ -203,7 +203,7 @@ const changeProps = (
       {
         className: cx({
           [`${leftStickyStyleClassPrefix}-${elementName}`]:
-            true && windowSize && windowSize > 671,
+            windowSize && windowSize > 671,
           [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
             data?.instance?.withSelectRows && windowSize && windowSize > 671,
         }),

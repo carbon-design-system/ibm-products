@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.0.8...@carbon/storybook-addon-theme@2.1.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* **sidePanel:** Close scrollbar overlap 3975 ([#4680](https://github.com/carbon-design-system/ibm-products/issues/4680)) ([8ef8d7b](https://github.com/carbon-design-system/ibm-products/commit/8ef8d7b98ceebc1a9934d98a5e5891c65163fedf))
+
+
+### Features
+
+* instrument current packages with js scope ([#5012](https://github.com/carbon-design-system/ibm-products/issues/5012)) ([59074fe](https://github.com/carbon-design-system/ibm-products/commit/59074fe8ae93d3854565ba3c92f20065f3f2867e))
+
+
+
+
+
+## [2.0.8](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.0.7...@carbon/storybook-addon-theme@2.0.8) (2024-04-02)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
 ## [2.0.7](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.0.6...@carbon/storybook-addon-theme@2.0.7) (2024-02-09)
 
 **Note:** Version bump only for package @carbon/storybook-addon-theme

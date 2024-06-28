@@ -20,7 +20,7 @@
 // TODO: @use '@carbon/react/scss/grid';
 
 // CoachmarkOverlayElements uses the following Carbon for IBM Products components:
-// TODO: @use(s) of IBM Products component styles used by CoachmarkOverlayElements
+@use '../Carousel/carousel';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-elements;

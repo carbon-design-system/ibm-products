@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -90,6 +90,10 @@
 .#{variables.$block-class}__draggable-handleHolder-droppable.#{variables.$block-class}__draggable-handleHolder-droppable--origin {
   opacity: 0.5;
   transition: opacity $duration-moderate-01 motion(entrance, productive);
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .#{variables.$block-class}__draggable-handleHolder--sticky {

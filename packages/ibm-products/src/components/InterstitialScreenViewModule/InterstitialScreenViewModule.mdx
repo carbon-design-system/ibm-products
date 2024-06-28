@@ -1,16 +1,14 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { InterstitialScreenViewModule } from '.';
+import * as stories from './InterstitialScreenViewModule.stories';
 
 # InterstitialScreenViewModule
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [About Novice to pro](#about-novice-to-pro)
+- [About Onboarding](#about-onboarding)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
 
@@ -19,21 +17,16 @@ import { InterstitialScreenViewModule } from '.';
 InterstitialScreenViewModule is an optional view module to jump start
 development and is designed to be used as a child of InterstitialScreenView.
 
-## About Novice to pro
+## About Onboarding
 
-[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+[Onboarding](https://pages.github.ibm.com/security/security-design/teams-across-security/onboarding/overview/)
 is a continuous learning methodology and framework that aims to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users.
 
 ## Example usage
 
 <Canvas>
-  <Story
-    id={getStoryId(
-      InterstitialScreenViewModule.displayName,
-      'interstitial-screen-view-module'
-    )}
-  />
+  <Story of={stories.interstitialScreenViewModule} />
 </Canvas>
 
 ## Code sample
@@ -48,4 +41,4 @@ explain, educate, and cultivate novice users into high-functioning power users.
 
 ## Component API
 
-<ArgsTable />
+<Controls />

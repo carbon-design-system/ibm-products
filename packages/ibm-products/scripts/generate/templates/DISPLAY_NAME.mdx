@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { DISPLAY_NAME } from '.';
+import * as stories from './DISPLAY_NAME.stories';
 
 # DISPLAY_NAME
 
@@ -22,7 +20,7 @@ import { DISPLAY_NAME } from '.';
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(DISPLAY_NAME.displayName, 'STYLE_NAME')} />
+  <Story of={stories.CAMEL_NAME} />
 </Canvas>
 
 ## Code sample
@@ -31,4 +29,4 @@ import { DISPLAY_NAME } from '.';
 
 ## Component API
 
-<ArgsTable />
+<Controls />

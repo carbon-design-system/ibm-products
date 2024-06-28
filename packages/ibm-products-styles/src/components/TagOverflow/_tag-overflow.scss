@@ -1,0 +1,215 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/react/scss/grid';
+
+// TagOverflow uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by TagOverflow
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
+$block-class-overflow: #{$block-class}-popover;
+$block-class-modal: #{$block-class}-modal;
+
+.#{$block-class} {
+  display: flex;
+  width: 100%;
+  min-width: $spacing-12;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+.#{$block-class}--align-end {
+  justify-content: flex-end;
+}
+
+.#{$block-class}--align-center {
+  justify-content: center;
+}
+
+.#{$block-class}--multiline {
+  flex-wrap: wrap;
+}
+
+.#{$block-class}__item {
+  margin: $spacing-01;
+}
+
+.#{$block-class}__item--tag {
+  border: none;
+}
+
+.#{$block-class}__item--tag span {
+  display: inline-block;
+  overflow: hidden;
+  max-width: $spacing-12;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}__indicator {
+  display: inline-block;
+  max-width: $spacing-09;
+}
+
+.#{c4p-settings.$carbon-prefix}--popover
+  .#{c4p-settings.$carbon-prefix}--popover-content {
+  white-space: normal;
+}
+
+.#{$block-class-overflow} {
+  display: inline-block;
+  vertical-align: bottom;
+  .#{c4p-settings.$carbon-prefix}--tag.#{c4p-settings.$carbon-prefix}--tag--interactive {
+    border: 0;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--popover
+    .#{c4p-settings.$carbon-prefix}--popover-content {
+    padding: $spacing-05;
+  }
+}
+
+.#{$block-class-overflow}--hidden {
+  overflow: hidden;
+  max-width: 0;
+  visibility: hidden;
+}
+
+@include mixins.block-wrap('#{$block-class-overflow}__el') {
+  &.#{$block-class-overflow}__el {
+    // removes the min width in Carbon
+    min-width: initial;
+    text-align: left;
+  }
+
+  .#{$block-class-overflow}__trigger {
+    font-family: inherit;
+  }
+
+  .#{$block-class-overflow}__show-all-tags-link.#{c4p-settings.$carbon-prefix}--link:visited {
+    display: inline-block;
+    margin: $spacing-03 0 $spacing-02; // to match the tags
+    color: $link-inverse;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--link:active,
+  .#{c4p-settings.$carbon-prefix}--link:active:visited,
+  .#{c4p-settings.$carbon-prefix}--link:active:visited:hover {
+    color: $text-inverse;
+  }
+
+  .#{$block-class-overflow}__tag-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class-overflow}__show-all-tags-link {
+    margin-top: $spacing-03;
+    color: $link-inverse;
+  }
+
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
+    .#{c4p-settings.$carbon-prefix}--tag {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
+    .#{c4p-settings.$carbon-prefix}--tag {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    overflow: hidden;
+    min-width: initial;
+    min-height: initial;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    background-color: inherit;
+    color: inherit;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{c4p-settings.$carbon-prefix}--tag__close-icon {
+    // undo override by .#{c4p-settings.$carbon-prefix}--tooltip button
+    padding: 0;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{c4p-settings.$carbon-prefix}--tag--high-contrast {
+    background-color: $background;
+    color: $text-primary;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{c4p-settings.$carbon-prefix}--tag__close-icon:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{c4p-settings.$carbon-prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 $spacing-01 $focus;
+  }
+}
+
+@include mixins.block-wrap('#{$block-class-modal}') {
+  &.#{$block-class-modal} {
+    // not to be overridden by use in tag set
+    text-align: initial;
+    white-space: initial;
+  }
+
+  .#{$block-class-modal}__container {
+    @include breakpoint(md) {
+      height: 90%;
+      max-height: 450px;
+    }
+  }
+
+  .#{$block-class-modal}__search {
+    margin-top: $spacing-05;
+    margin-bottom: 0;
+  }
+
+  &.#{$block-class-modal} .#{$block-class-modal}__fade {
+    position: relative;
+    margin-right: $spacing-05;
+    margin-left: $spacing-05;
+  }
+
+  .#{$block-class-modal}__body {
+    padding-bottom: $spacing-06;
+  }
+
+  .#{$block-class-modal}__header {
+    padding-right: 0;
+    margin-right: $spacing-05;
+  }
+
+  &.#{$block-class-modal} .#{$block-class-modal}__fade::after {
+    position: absolute;
+    top: calc(-1 * #{$spacing-11});
+    left: 0;
+    width: 100%;
+    height: $spacing-07;
+    background: linear-gradient(to bottom, transparent, $layer-01);
+    content: '';
+  }
+}

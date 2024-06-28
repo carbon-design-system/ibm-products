@@ -1,0 +1,35 @@
+# Deploy staging storybook environment from release branch to Github Pages
+name: Deploy staging storybook
+
+# Gets triggered every time a change is pushed to the `release/v2*` branch
+on:
+  push:
+    branches: [release/v2*]
+
+jobs:
+  deploy-staging-storybook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+        with:
+          fetch-depth: '0'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install
+      - name: Build packages and storybook
+        run: yarn build
+
+      # Deploy to staging Github Pages using `gh-pages` package
+      - name: Deploy
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d packages/core/storybook-static -u "github-actions-bot <support+actions@github.com>" --dest staging --message "chore(deploy): deploy to gh-pages staging"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

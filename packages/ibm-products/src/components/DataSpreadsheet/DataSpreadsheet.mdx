@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { DataSpreadsheet } from '.';
+import * as stories from './DataSpreadsheet.stories';
 
 # DataSpreadsheet
 
@@ -15,20 +13,20 @@ import { DataSpreadsheet } from '.';
 
 ## Overview
 
-<!-- TODO: Overview. -->
+{/* <!-- TODO: Overview. --> */}
 
 ## Example usage
 
-<!-- TODO: One example per designed use case. -->
+{/* <!-- TODO: One example per designed use case. --> */}
 
 <Canvas>
-  <Story id={getStoryId(DataSpreadsheet.displayName, 'data-spreadsheet')} />
+  <Story of={stories.dataSpreadsheet} />
 </Canvas>
 
 ## Code sample
 
-<!-- <CodesandboxLink exampleDirectory="DataSpreadsheet" /> -->
+{/* <!-- <CodesandboxLink exampleDirectory="DataSpreadsheet" /> --> */}
 
 ## Component API
 
-<ArgsTable />
+<Controls />

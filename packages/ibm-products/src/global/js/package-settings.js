@@ -14,6 +14,7 @@ const defaults = {
     AboutModal: true,
     APIKeyModal: true,
     Cascade: true,
+    Checklist: true,
     CreateModal: true,
     CreateFullPage: true,
     CreateFullPageStep: true,
@@ -67,17 +68,33 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
+    Nav: false,
     BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
     FullPageError: false,
+    ScrollGradient: false,
     StringFormatter: false,
     StatusIndicator: false,
     StatusIndicatorStep: false,
+    TagOverflow: false,
+    ActionBar: false,
+    FilterPanel: false,
+    FilterPanelAccordion: false,
+    FilterPanelAccordionItem: false,
+    FilterPanelCheckbox: false,
+    FilterPanelCheckboxWithOverflow: false,
+    FilterPanelGroup: false,
+    FilterPanelLabel: false,
+    FilterPanelSearch: false,
+
+    ConditionBuilder: false,
+
+    GetStartedCard: false,
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
+    // Onboarding components not yet reviewed and released:
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,
@@ -86,14 +103,19 @@ const defaults = {
     CoachmarkOverlayElements: false,
     CoachmarkStack: false,
     Decorator: false,
+    DecoratorLink: false,
+    DecoratorSingleButton: false,
+    DecoratorDualButton: false,
     DescriptionList: false,
+    DescriptionListBody: false,
+    DescriptionListCell: false,
+    DescriptionListRow: false,
     SearchBar: false,
     UserAvatar: false,
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
-    Checklist: false,
+    // Onboarding components not yet reviewed and released:
     EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,

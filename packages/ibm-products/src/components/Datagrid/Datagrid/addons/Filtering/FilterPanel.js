@@ -13,6 +13,7 @@ import {
   innerContainerVariants,
   panelVariants,
 } from './motion/variants';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   useFilters,
   useShouldDisableButtons,
@@ -24,7 +25,6 @@ import { Close } from '@carbon/react/icons';
 import { FilterContext } from './FilterProvider';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { motion, useReducedMotion } from 'framer-motion';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
 
@@ -117,7 +117,11 @@ const FilterPanel = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     // From the user
-    onApply();
+    onApply({
+      filtersState,
+      filtersObjectArray,
+      lastAppliedFilters,
+    });
     // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 
@@ -188,7 +192,11 @@ const FilterPanel = ({
     [filterPanelMinHeight]
   );
 
-  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+  // tableId is passed in from the event emitter from the FilterSummary component
+  // in  DatagridContent
+  useSubscribeToEventEmitter(CLEAR_FILTERS, (tableId) => {
+    reset(tableId);
+  });
 
   const getScrollableContainerHeight = () => {
     const filterHeadingHeight =
@@ -316,7 +324,7 @@ FilterPanel.propTypes = {
   searchLabelText: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,
-  setAllFilters: PropTypes.func.isRequired,
+  setAllFilters: PropTypes.func,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),

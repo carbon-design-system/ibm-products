@@ -67,7 +67,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
         */
-        const valueIndex = filterValues.findIndex((val) => val.id === value);
+        const valueIndex = filterValues.findIndex((val) => val.value === value);
         filterValues[valueIndex].selected = false;
         const updatedFilterObject = {
           ...f,
@@ -155,7 +155,7 @@ const filteringReducer = (state, action) => {
   }
 };
 
-export const FilterProvider = ({ children, filters, filterProps }) => {
+export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
@@ -172,6 +172,7 @@ export const FilterProvider = ({ children, filters, filterProps }) => {
     setPanelOpen,
     state,
     dispatch,
+    tableId,
   };
 
   return (
@@ -186,4 +187,5 @@ FilterProvider.propTypes = {
   ]).isRequired,
   filterProps: PropTypes.object,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableId: PropTypes.string,
 };

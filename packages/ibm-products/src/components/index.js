@@ -1,9 +1,11 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+import '../feature-flags';
 
 export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
@@ -77,6 +79,7 @@ export {
   useFiltering,
   getAutoSizedColumnWidth,
   useFilterContext,
+  useEditableCell,
 } from './Datagrid';
 export { EditTearsheet, EditTearsheetForm } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
@@ -105,9 +108,39 @@ export { InterstitialScreenView } from './InterstitialScreenView';
 export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
 export { DelimitedList } from './DelimitedList';
 export { Decorator } from './Decorator';
-export { DescriptionList } from './DescriptionList';
+export { DecoratorLink } from './DecoratorLink';
+export { DecoratorSingleButton } from './DecoratorSingleButton';
+export { DecoratorDualButton } from './DecoratorDualButton';
+export {
+  DescriptionList,
+  DescriptionListBody,
+  DescriptionListCell,
+  DescriptionListRow,
+} from './DescriptionList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
+export { Nav } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
-export { StatusIndicator } from './StatusIndicator';
+export { ScrollGradient } from './ScrollGradient';
+export { StatusIndicator, StatusIndicatorStep } from './StatusIndicator';
+export { TagOverflow } from './TagOverflow';
+export { ActionBar } from './ActionBar';
+export {
+  FilterPanel,
+  FilterPanelAccordion,
+  FilterPanelAccordionItem,
+  FilterPanelCheckbox,
+  FilterPanelCheckboxWithOverflow,
+  FilterPanelGroup,
+  FilterPanelLabel,
+  FilterPanelSearch,
+} from './FilterPanel';
+export { ConditionBuilder } from './ConditionBuilder';
+export { GetStartedCard } from './GetStartedCard';
+
+export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './FeatureFlags';

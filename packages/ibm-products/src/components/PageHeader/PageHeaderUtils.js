@@ -17,7 +17,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
  * @param {{}} offsetTopMeasuringRef
- * @param {{}} navigation
+ * @param {object} navigation
  * @param {boolean} enableBreadcrumbScroll
  * @param {boolean} hasActionBar
  * @param {boolean} widthIsNarrow
@@ -188,13 +188,23 @@ export const utilCheckUpdateVerticalSpace = (
 };
 
 // Trigger a window scroll, if necessary, to set the collapsed state.
-export const utilSetCollapsed = (collapse, headerOffset, headerTopValue) => {
+export const utilSetCollapsed = (
+  collapse,
+  headerRef,
+  headerOffset,
+  headerTopValue
+) => {
   /* don't know how to test resize */
   /* istanbul ignore else */
+  let scrollableTarget = scrollableAncestor(headerRef.current);
+
   if (collapse) {
-    window.scrollTo({ top: headerOffset - headerTopValue, behavior: 'smooth' });
+    scrollableTarget.scrollTo({
+      top: headerOffset - headerTopValue,
+      behavior: 'smooth',
+    });
   } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollableTarget.scrollTo({ top: 0, behavior: 'smooth' });
   }
 };
 
@@ -232,6 +242,10 @@ export const utilGetBreadcrumbItemForTitle = (
           [`${blockClass}__breadcrumb-title--pre-collapsed`]: collapseTitle,
         },
       ]);
+    }
+
+    if (title.shortTitle) {
+      breadcrumbTitle.shortTitle = title.shortTitle;
     }
 
     return breadcrumbTitle;

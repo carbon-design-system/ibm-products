@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { StatusIndicator } from '.';
+import * as StatusIndicatorStories from './StatusIndicator.stories';
 
 # StatusIndicator
 
@@ -17,9 +15,9 @@ import { StatusIndicator } from '.';
 {/* TODO: One example per designed use case. */}
 
 <Canvas>
-  <Story id={getStoryId(StatusIndicator.displayName, 'status-indicator')} />
+  <Story of={StatusIndicatorStories.statusIndicator} />
 </Canvas>
 
 ## Component API
 
-<ArgsTable />
+<Controls />

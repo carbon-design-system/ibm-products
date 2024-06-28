@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink, stackblitzHref } from '../../global/js/utils/story-helper';
 import { FullPageError } from '.';
+import * as stories from './FullPageError.stories';
 
 # FullPageError
 
@@ -14,6 +12,7 @@ import { FullPageError } from '.';
 - [Overview](#overview)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
+  - [Migrating from HTTP errors](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md#carbon-for-ibm-products-v2-migration-guide)
 
 ## Overview
 
@@ -25,7 +24,30 @@ level.
 
 ## Example usage
 
-{/* TODO: One example per designed use case. */}
+```jsx
+import { FullPageError } from "@carbon/ibm-products";
+import { Link } from "@carbon/react";
+
+export const Example = () => (
+  <FullPageError
+    kind="custom"
+    children={
+      <>
+        <Link href={"/"}>– Forwarding Link 1</Link>
+        <br />
+        <Link href={"/"}>– Forwarding Link 1</Link>
+      </>
+    }
+    title="[Error title]"
+    label="Error ###"
+    // cSpell:dictionaries lorem-ipsum
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+  />
+);
+
+export default Example;
+
+```
 
 ### Default
 
@@ -33,7 +55,7 @@ The default error page can be used for full-page errors that are not 403 or 404
 errors, and not caused by server connectivity issues.
 
 <Canvas>
-  <Story id={getStoryId(FullPageError.displayName, 'full-page-error')} />
+  <Story of={stories.fullPageError} />
 </Canvas>
 
 ### 403 variant
@@ -42,7 +64,7 @@ Display an Access Denied (403) error message when the user lacks permission to
 access the page or data, or when login is required.
 
 <Canvas>
-  <Story id={getStoryId(FullPageError.displayName, 'full-page-error-403')} />
+  <Story of={stories.fullPageError403} />
 </Canvas>
 
 ### 404 variant
@@ -52,13 +74,14 @@ located on the server, typically due to outdated bookmarks, mistyped URLs, or
 broken links.
 
 <Canvas>
-  <Story id={getStoryId(FullPageError.displayName, 'full-page-error-404')} />
+  <Story of={stories.fullPageError404} />
 </Canvas>
 
 ## Code sample
 
 {/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
+<a href={stackblitzHref("FullPageError")}>Stackblitz example</a>
 
 ## Component API
 
-<ArgsTable />
+<Controls />

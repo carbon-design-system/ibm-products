@@ -45,6 +45,7 @@ export let BreadcrumbWithOverflow = ({
   maxVisible,
   noTrailingSlash,
   overflowAriaLabel,
+  overflowTooltipAlign,
   ...other
 }) => {
   const carbonPrefix = usePrefix();
@@ -60,6 +61,7 @@ export let BreadcrumbWithOverflow = ({
     return (
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
+          align={overflowTooltipAlign}
           aria-label={overflowAriaLabel}
           iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
           renderIcon={(props) => (
@@ -102,17 +104,28 @@ export let BreadcrumbWithOverflow = ({
               )}
             />
           </BreadcrumbItem>
-          {breadcrumbs.map(({ label, key, title, id, ...rest }) => (
-            <BreadcrumbItem
-              key={key}
-              {...rest}
-              // ensure id is not duplicated
-              data-original-id={id}
-              title={title ?? label}
-            >
-              {label}
-            </BreadcrumbItem>
-          ))}
+          {breadcrumbs.map(
+            ({
+              label,
+              key,
+              title,
+              id,
+              // short title isn't necessary for the hidden sizing
+              // eslint-disable-next-line no-unused-vars
+              shortTitle,
+              ...rest
+            }) => (
+              <BreadcrumbItem
+                key={key}
+                {...rest}
+                // ensure id is not duplicated
+                data-original-id={id}
+                title={title ?? label}
+              >
+                {label}
+              </BreadcrumbItem>
+            )
+          )}
         </Breadcrumb>
       </div>
     );
@@ -127,7 +140,7 @@ export let BreadcrumbWithOverflow = ({
     }
 
     const newDisplayedBreadcrumbItems = breadcrumbs.map(
-      ({ className, key, label, title, ...rest }, index) => (
+      ({ className, key, label, shortTitle, title, ...rest }, index) => (
         <BreadcrumbItem
           key={key}
           className={
@@ -138,7 +151,7 @@ export let BreadcrumbWithOverflow = ({
           title={index + 1 === breadcrumbs.length ? title : null}
           {...rest}
         >
-          {label}
+          {shortTitle || label}
         </BreadcrumbItem>
       )
     );
@@ -357,7 +370,12 @@ BreadcrumbWithOverflow.propTypes = {
       label: PropTypes.node,
 
       /**
-       * A string based alternative to the children, required only if children is not of type string.
+       * An optional title label for extra long breadcrumb
+       */
+      shortTitle: PropTypes.string,
+
+      /**
+       * A string based alternative to the children, required only if children is not of type string
        */
       title: PropTypes.string.isRequired.if(
         ({ label }) => typeof label !== 'string'
@@ -382,6 +400,10 @@ BreadcrumbWithOverflow.propTypes = {
   overflowAriaLabel: PropTypes.string.isRequired.if(
     ({ breadcrumbs }) => breadcrumbs.length > 1
   ),
+  /**
+   * overflowTooltipAlign: align tooltip position
+   */
+  overflowTooltipAlign: Tooltip.propTypes.align,
 };
 
 BreadcrumbWithOverflow.displayName = componentName;

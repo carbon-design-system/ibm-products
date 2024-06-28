@@ -1,16 +1,14 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkStack } from '.';
+import * as CoachmarkStackStories from './CoachmarkStack.stories';
 
 # CoachmarkStack
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [About Novice to pro](#about-novice-to-pro)
+- [About Onboarding](#about-onboarding)
 - [Note on theming](#note-on-theming)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
@@ -28,9 +26,9 @@ When dismissed, the stacked layer exits by sliding back down, revealing the main
 layer. When the main layer is dismissed, it slides down off the page. Only one
 layer can be stacked on the main layer.
 
-## About Novice to pro
+## About Onboarding
 
-[Novice to pro](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/novice-to-pro/overview)
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview)
 is a continuous learning methodology and framework that aims to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users.
 
@@ -46,10 +44,10 @@ _(See bottom right)_
 
 <Canvas>
   <div className="CoachmarkBaseExampleUsage">
-    <Story id={getStoryId(CoachmarkStack.displayName, 'coachmark-stack')} />
+    <Story of={CoachmarkStackStories.coachmarkStack} />
   </div>
 </Canvas>
 
 ## Component API
 
-<ArgsTable />
+<Controls />

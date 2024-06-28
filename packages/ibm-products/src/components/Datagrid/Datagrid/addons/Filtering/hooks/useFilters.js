@@ -54,7 +54,11 @@ const useFilters = ({
   autoHideFilters,
   isFetching,
 }) => {
-  const { state, dispatch: localDispatch } = useContext(FilterContext);
+  const {
+    state,
+    dispatch: localDispatch,
+    tableId: contextTableId,
+  } = useContext(FilterContext);
   const { savedFilters } = state;
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -96,30 +100,37 @@ const useFilters = ({
     );
   }, [setAllFilters]);
 
-  const reset = useCallback(() => {
-    // When we reset we want the "initialFilters" to be an empty array
-    const resetFiltersArray = [];
+  const reset = useCallback(
+    (tableId) => {
+      // only reset filters if tableid of the datagrid that triggered "clear filters"
+      // matches the table id stored in its context instance
+      if (tableId === contextTableId) {
+        // When we reset we want the "initialFilters" to be an empty array
+        const resetFiltersArray = [];
 
-    // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(
-      filters,
-      variation,
-      resetFiltersArray
-    );
-    const initialFiltersObjectArray = [];
+        // Get the initial values for the filters
+        const initialFiltersState = getInitialStateFromFilters(
+          filters,
+          variation,
+          resetFiltersArray
+        );
+        const initialFiltersObjectArray = [];
 
-    // Set the state to the initial values
-    setFiltersState(initialFiltersState);
-    setFiltersObjectArray(initialFiltersObjectArray);
-    setAllFilters([]);
+        // Set the state to the initial values
+        setFiltersState(initialFiltersState);
+        setFiltersObjectArray(initialFiltersObjectArray);
+        setAllFilters([]);
 
-    // Update their respective refs so everything is in sync
-    prevFiltersRef.current = JSON.stringify(initialFiltersState);
-    prevFiltersObjectArrayRef.current = JSON.stringify(
-      initialFiltersObjectArray
-    );
-    lastAppliedFilters.current = JSON.stringify([]);
-  }, [filters, setAllFilters, variation]);
+        // Update their respective refs so everything is in sync
+        prevFiltersRef.current = JSON.stringify(initialFiltersState);
+        prevFiltersObjectArrayRef.current = JSON.stringify(
+          initialFiltersObjectArray
+        );
+        lastAppliedFilters.current = JSON.stringify([]);
+      }
+    },
+    [filters, setAllFilters, variation, contextTableId]
+  );
 
   const applyFilters = ({ column, value, type }) => {
     // If no end date is selected return because we need the end date to do computations

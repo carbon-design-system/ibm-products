@@ -18,6 +18,7 @@ export const handleGridKeyPress = ({
   instance,
   keysPressedList,
   usingMac,
+  ref,
 }) => {
   const { key } = event;
   const { gridActive, activeCellId, editId } = state;
@@ -55,13 +56,10 @@ export const handleGridKeyPress = ({
 
   // Checks if the dropdown menu is open
   const dropdownIsActive = () => {
-    const focusedElementRole = document.activeElement.getAttribute('role');
-    if (
-      focusedElementRole === 'listbox' &&
-      document.activeElement.classList.contains(
-        `${carbon.prefix}--list-box__menu`
-      )
-    ) {
+    const selectedDropdown = ref?.current.querySelector(`
+      #${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"] button[role='combobox']
+    `);
+    if (selectedDropdown) {
       // Prevents arrow keys from scrolling any other content when dropdown menu is open
       event.preventDefault();
       return true;
@@ -85,7 +83,8 @@ export const handleGridKeyPress = ({
 
   // Stop grid key listener when in edit mode
   const isEditing =
-    (document.activeElement.id === activeCellId &&
+    (focusedCell.getAttribute('data-inline-type') !== 'checkbox' &&
+      document.activeElement.id === activeCellId &&
       document.activeElement.id === editId) ||
     dropdownIsActive() ||
     datePickerIsActive();
@@ -108,6 +107,9 @@ export const handleGridKeyPress = ({
   }
   const isDisabledCell =
     focusedCell.getAttribute('data-disabled') === 'false' ? false : true;
+  const isEditableCell = !event.target.classList.contains(
+    `${blockClass}__inline-edit-button--non-edit`
+  );
   const sharedUpdateParams = {
     oldId: activeCellId,
     instance,
@@ -214,7 +216,7 @@ export const handleGridKeyPress = ({
       case 'F2':
       case 'Enter': {
         // Disabled cells are not allowed to go into edit mode
-        if (isDisabledCell) {
+        if (isDisabledCell || !isEditableCell) {
           return;
         }
         // Only go into edit mode if there is no editId, meaning that we're not already in edit mode
@@ -225,6 +227,13 @@ export const handleGridKeyPress = ({
             setTimeout(() => {
               const dropdownTrigger = focusedCell.querySelector('button');
               dropdownTrigger?.click();
+            }, 1);
+          }
+          if (focusedType === 'checkbox') {
+            setTimeout(() => {
+              const checkboxTrigger = focusedCell.querySelector('input');
+              checkboxTrigger?.click();
+              checkboxTrigger?.focus();
             }, 1);
           }
           if (focusedType === 'date') {

@@ -46,6 +46,8 @@ const globalFilters = [
   },
 ];
 
+const title = 'Select category';
+
 const singleProps = {
   className: 'placeholder-class',
   description: 'select a category lorem ipsum',
@@ -60,7 +62,7 @@ const singleProps = {
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'submit selections',
   searchResultsTitle: 'Search results',
-  title: 'Select category',
+  title,
   onClose: () => {},
 };
 
@@ -215,8 +217,10 @@ const itemWithAvatar = {
 
 describe(componentName, () => {
   const { ResizeObserver } = window;
+  let warn;
 
   beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -229,11 +233,14 @@ describe(componentName, () => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+    warn.mockRestore();
   });
 
   it('renders SingleAddSelectBody', async () => {
-    const { container } = render(<AddSelectBody {...singleHierarchyProps} />);
-    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
+    render(<AddSelectBody {...singleHierarchyProps} open />);
+    const tearsheetElement = screen.getByRole('dialog').parentElement;
+    expect(tearsheetElement).toHaveClass(`${blockClass}__single`);
+    expect(tearsheetElement).toBeVisible();
   });
 
   it('returns the selected values on submit', async () => {

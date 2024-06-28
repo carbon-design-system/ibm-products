@@ -6,12 +6,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen, act } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React from 'react';
-import { TextInput } from '@carbon/react';
+import { Button, TextInput } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
@@ -445,6 +451,8 @@ describe('SidePanel', () => {
     fireEvent.animationStart(outerElement);
     fireEvent.animationEnd(outerElement);
     const inputElement = container.querySelector(`#test-input`);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
     expect(inputElement).toHaveFocus();
   });
 
@@ -458,7 +466,9 @@ describe('SidePanel', () => {
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
-    expect(closeIconButton).toHaveFocus();
+    await waitFor(() => {
+      expect(closeIconButton).toHaveFocus();
+    });
   });
 
   it('should render slide in panel from left', async () => {
@@ -470,5 +480,46 @@ describe('SidePanel', () => {
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginInlineStart).toBe('0');
+  });
+
+  it('should return focus back to launcher button', async () => {
+    const mockCloseFn = jest.fn();
+
+    const DummyComponent = ({ open }) => {
+      const buttonRef = React.useRef();
+
+      return (
+        <div>
+          <Button ref={buttonRef}>Open</Button>
+          <SlideIn
+            animateTitle={false}
+            placement="right"
+            open={open}
+            actionToolbarButtons={[]}
+            launcherButtonRef={buttonRef}
+            onRequestClose={mockCloseFn}
+          />
+        </div>
+      );
+    };
+
+    const { container, getByText, rerender } = render(
+      <DummyComponent open={true} />
+    );
+
+    const launchButtonEl = getByText('Open');
+    expect(launchButtonEl).toBeInTheDocument();
+
+    const closeIconButton = container.querySelector(
+      `.${blockClass}__close-button`
+    );
+    await act(() => userEvent.click(closeIconButton));
+    expect(mockCloseFn).toHaveBeenCalledTimes(1);
+
+    rerender(<DummyComponent open={false} />);
+
+    await waitFor(() => {
+      expect(launchButtonEl).toHaveFocus();
+    });
   });
 });

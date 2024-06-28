@@ -38,6 +38,11 @@ export const getInlineEditColumns = () => {
       id: 'rowIndex', // id is required when accessor is a function.
     },
     {
+      Header: 'Disabled column',
+      accessor: 'disabledColumn',
+      isDisabled: true,
+    },
+    {
       Header: 'First Name',
       accessor: 'firstName',
       inlineEdit: {
@@ -87,6 +92,18 @@ export const getInlineEditColumns = () => {
         inputProps: {
           invalidText: 'Invalid number, must be 10 or greater',
         }, // These props are passed to the Carbon component used for inline editing
+      },
+    },
+    {
+      Header: 'Key',
+      accessor: 'key',
+      inlineEdit: {
+        type: 'checkbox',
+        inputProps: {
+          onChange: (newDateObj, cell) => {
+            console.log(newDateObj, cell);
+          },
+        },
       },
     },
     {

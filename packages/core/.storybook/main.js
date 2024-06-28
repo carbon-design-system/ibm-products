@@ -5,105 +5,102 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { merge } = require('webpack-merge');
-const { dirname, join, resolve } = require('path');
+import glob from 'fast-glob';
+import { dirname, join, resolve } from 'path';
+import remarkGfm from 'remark-gfm';
 
-module.exports = {
+const storyGlobs = [
+  '../../ibm-products/src/**/*.stories.*',
+  '../../ibm-products-community/src/**/*.stories.*',
+  '../src/**/*.stories.*',
+  '../src/**/*.mdx',
+  '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',
+];
+
+const stories = glob.sync(storyGlobs, {
+  ignore: [
+    '../../**!(node_modules)/**!(node_modules)/*.mdx',
+    '../../**!(node_modules)/**!(node_modules)/*.stories.*',
+  ],
+  cwd: __dirname,
+});
+
+export default {
   staticDirs: ['../public'],
+
   addons: [
     getAbsolutePath('@storybook/addon-actions'),
-    getAbsolutePath('@storybook/addon-docs'),
     getAbsolutePath('@storybook/addon-controls'),
     getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-storysource'),
+    getAbsolutePath('@storybook/addon-viewport'),
     {
-      name: '@storybook/addon-storysource',
+      name: '@storybook/addon-docs',
       options: {
-        rule: {
-          test: /(-story|.stories).js$/,
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
         },
       },
     },
-    getAbsolutePath('@storybook/addon-viewport'),
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
-    '@carbon/storybook-addon-theme/preset.js',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
+    // https://www.npmjs.com/package/storybook-addon-accessibility-checker
+    getAbsolutePath('@storybook/addon-a11y'),
   ],
 
   framework: {
-    name: getAbsolutePath('@storybook/react-webpack5'),
-    options: {
-      //   fastRefresh: true,
-      //   strictMode: true,
-    },
+    name: getAbsolutePath('@storybook/react-vite'),
   },
 
-  features: {
-    // setting storyStoryV7 to false allows the storybook to build
-    storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
-  },
-
-  stories: [
-    '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
-    '../../ibm-products-community/+(docs|src)/**/*+(-story|.stories).*',
-    '../+(docs|src)/**/*+(-story|.stories).*',
-    '../../../examples/**/*+(-story|.stories).*',
-  ],
+  stories,
 
   typescript: {
     reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
   },
 
-  // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
-  webpackFinal: async (configuration, { configType }) =>
-    merge(configuration, {
-      cache: {
-        type: 'filesystem',
-        allowCollectingMemory: true,
+  async viteFinal(config, { configType }) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
+
+    return mergeConfig(config, {
+      esbuild: {
+        include: /\.[jt]sx?$/,
+        exclude: [],
+        loader: 'tsx',
       },
-      module: {
-        rules: [
-          {
-            test: /\.stories\.js$/,
-            loader: 'babel-loader',
-            options: require('babel-preset-ibm-cloud-cognitive')(),
+      optimizeDeps: {
+        esbuildOptions: {
+          loader: {
+            '.js': 'jsx',
           },
-          {
-            test: /\.scss$/,
-            use: [
-              {
-                loader: 'style-loader',
-                options: {
-                  // https://webpack.js.org/loaders/style-loader/#lazystyletag
-                  injectType: 'lazyStyleTag',
-                },
-              },
-              'css-loader',
-              {
-                loader: 'sass-loader',
-                options: {
-                  sassOptions: {
-                    includePaths: [
-                      resolve(__dirname, '..', 'node_modules'),
-                      resolve(__dirname, '..', '..', '..', 'node_modules'),
-                    ],
-                  },
-                  warnRuleAsWarning: true,
-                  sourceMap: true,
-                },
-              },
-            ],
-          },
-        ],
+        },
       },
       resolve: {
         alias: {
-          ALIAS_STORY_STYLE_CONFIG$: resolve(
+          ALIAS_STORY_STYLE_CONFIG: resolve(
             configType === 'DEVELOPMENT'
               ? '../ibm-products-styles/src/config-dev.scss'
               : '../ibm-products-styles/src/config.scss'
           ),
         },
       },
-    }),
+    });
+  },
+
+  docs: {
+    autodocs: 'tag',
+  },
 };
 
 function getAbsolutePath(value) {

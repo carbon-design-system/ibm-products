@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { BigNumbers } from '.';
+import * as BigNumbersStories from './BigNumbers.stories';
 
 # BigNumbers
 
@@ -32,13 +30,13 @@ of a button as well as tool tip functionality. The default locale is English
 ### Big numbers
 
 <Canvas>
-  <Story id={getStoryId(BigNumbers.displayName, 'big-numbers')} />
+  <Story of={BigNumbersStories.bigNumbers} />
 </Canvas>
 
 ### Big numbers with edit button
 
 <Canvas>
-  <Story id={getStoryId(BigNumbers.displayName, 'with-edit-button')} />
+  <Story of={BigNumbersStories.withEditButton} />
 </Canvas>
 
 ## Code sample
@@ -47,4 +45,4 @@ of a button as well as tool tip functionality. The default locale is English
 
 ## Component API
 
-<ArgsTable />
+<Controls />

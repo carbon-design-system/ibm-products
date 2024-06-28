@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkButton } from '.';
+import * as CoachmarkButtonStories from './CoachmarkButton.stories';
 
 # CoachmarkButton
 
@@ -26,7 +24,7 @@ variant.
 
 <Canvas>
   <div className="CoachmarkBaseExampleUsage">
-    <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
+    <Story of={CoachmarkButtonStories.coachmarkButton} />
   </div>
 </Canvas>
 
@@ -52,4 +50,4 @@ variant.
 
 ## Component API
 
-<ArgsTable />
+<Controls />

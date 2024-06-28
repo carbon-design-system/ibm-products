@@ -1,16 +1,14 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkOverlayElement } from '.';
+import * as CoachmarkOverlayElementStories from './CoachmarkOverlayElement.stories';
 
 # CoachmarkOverlayElement
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [About Novice to pro](#about-novice-to-pro)
+- [About Onboarding](#about-onboarding)
 - [Note on theming](#note-on-theming)
 - [Example usage](#example-usage)
 - [Code Sample](#code-sample)
@@ -26,9 +24,9 @@ CoachmarkOverlayElements. When more than one CoachmarkOverlayElement components
 are used in a CoachmarkOverlayElements, the components are displayed in a
 paginated fashion within a carousel.
 
-## About Novice to pro
+## About Onboarding
 
-[Novice to pro](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/novice-to-pro/overview/)
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
 is a continuous learning methodology and framework that aims to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users.
 
@@ -42,12 +40,7 @@ Coachmark/CoachmarkFixed/CoachmarkStack components.
 
 <Canvas className="coachmarkExample" withSource="none">
   <div className="CoachmarkBaseExampleUsage">
-    <Story
-      id={getStoryId(
-        CoachmarkOverlayElement.displayName,
-        'coachmark-overlay-element'
-      )}
-    />
+    <Story of={CoachmarkOverlayElementStories.coachmarkOverlayElement} />
   </div>
 </Canvas>
 
@@ -80,4 +73,4 @@ Coachmark/CoachmarkFixed/CoachmarkStack components.
 
 ## Component API
 
-<ArgsTable />
+<Controls />

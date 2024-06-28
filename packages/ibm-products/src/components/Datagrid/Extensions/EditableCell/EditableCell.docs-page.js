@@ -7,6 +7,7 @@ import {
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         description: `The \`Datagrid\` supports inline editing when used with the \`useEditableCell\` hook (previously named \`useInlineEdit\` in v1) and columns are provided the required configuration. The four data types supported are strings, numbers, dates, and
@@ -14,7 +15,7 @@ export const DocsPage = () => (
       },
       {
         description: `Below are example column configurations for the supported inline edit data types:
-        
+
 Default/string:
         `,
         source: {
@@ -172,6 +173,19 @@ const MyInlineEditDatagrid = () => {
           `,
         },
         story: InlineEditUsageStory,
+      },
+      {
+        title: 'Opt out of editing at cell level',
+        description: `In some cases you may want to disable editing per cell. This is possible by providing the following structure for the cell value within your row data:`,
+        source: {
+          code: `
+{
+  value: '\u2014', // Value displayed for static cell
+  isStaticCell: true,
+  columnId: 'lastName',
+}
+          `,
+        },
       },
     ]}
   />

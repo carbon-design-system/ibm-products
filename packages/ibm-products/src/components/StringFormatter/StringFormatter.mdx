@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { StringFormatter } from '.';
+import * as StringFormatterStories from './StringFormatter.stories';
 
 # StringFormatter
 
@@ -21,7 +19,7 @@ hover or focus with the entirety of the provided copy.
 ## Example usage
 
 <Canvas>
-  <Story id={getStoryId(StringFormatter.displayName, 'string-formatter')} />
+  <Story of={StringFormatterStories.stringFormatter} />
 </Canvas>
 
 ## Code sample
@@ -39,4 +37,4 @@ hover or focus with the entirety of the provided copy.
 
 ## Component API
 
-<ArgsTable />
+<Controls />

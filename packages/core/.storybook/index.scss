@@ -1,9 +1,17 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+// We need to specify the $font-path first otherwise the config
+// is specified by components forwarded from index-without-carbon.scss
+// and can't be changed again. This will result in plex 404s when
+// running storybook.
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
 
 // Load the C&CS styles first, excluding Carbon styles. We will then load full
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
@@ -13,13 +21,11 @@
 @use '../../ibm-products-styles/src/index-without-carbon.scss';
 
 // Load all Carbon styles now
-@use '../css/carbon';
-// @import '../../security/src/index';
-// @import 'docs';
 @use '@carbon/styles' as styles;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/config';
+
+@use './Annotation/annotation';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
@@ -30,7 +36,7 @@ body {
   --doc-story-height: initial;
 }
 
-[storybook-carbon-theme] {
+[data-carbon-theme] {
   @include styles.theme(styles.$white);
 
   /* make sure background and color are set if theme in use */
@@ -38,30 +44,22 @@ body {
   color: $text-primary;
 }
 
-[storybook-carbon-theme='g10'],
+[data-carbon-theme='g10'],
 .sb--use-carbon-theme-g10 {
   @include styles.theme(styles.$g10);
 }
 
-[storybook-carbon-theme='g90'],
+[data-carbon-theme='g90'],
 .sb--use-carbon-theme-g90 {
   @include styles.theme(styles.$g90);
 }
 
-[storybook-carbon-theme='debug'],
-[storybook-carbon-theme='g100'],
+[data-carbon-theme='debug'],
+[data-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }
 
-[storybook-carbon-theme='debug'] body {
+[data-carbon-theme='debug'] body {
   color: initial;
-}
-
-.preview__notification--feature-flag {
-  margin: $spacing-05 0;
-}
-
-.preview__notification--feature-flag .#{config.$prefix}--list--unordered {
-  margin-top: $spacing-04;
 }

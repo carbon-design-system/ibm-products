@@ -1,16 +1,14 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { CoachmarkFixed } from '.';
+import * as CoachmarkFixedStories from './CoachmarkFixed.stories';
 
 # CoachmarkFixed
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [About Novice to pro](#about-novice-to-pro)
+- [About Onboarding](#about-onboarding)
 - [Note on theming](#note-on-theming)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
@@ -23,9 +21,9 @@ loads. It starts in a minimized state, to cover as little of the UI as possible;
 when shown in tests as expanded by default, users immediately closed it without
 reading, to get it out of the way. When dismissed, it slides down off the page.
 
-## About Novice to pro
+## About Onboarding
 
-[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+[Onboarding](https://pages.github.ibm.com/security/security-design/teams-across-security/onboarding/overview/)
 is a continuous learning methodology and framework that aims to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users.
 
@@ -41,10 +39,10 @@ _(See bottom right)_
 
 <Canvas>
   <div className="CoachmarkBaseExampleUsage">
-    <Story id={getStoryId(CoachmarkFixed.displayName, 'coachmark-fixed')} />
+    <Story of={CoachmarkFixedStories.coachmarkFixed} />
   </div>
 </Canvas>
 
 ## Component API
 
-<ArgsTable />
+<Controls />

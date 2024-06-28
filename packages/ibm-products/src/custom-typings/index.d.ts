@@ -74,6 +74,7 @@ declare module '@carbon/react' {
     Heading,
     IconButton,
     IconTab,
+    IconSkeleton,
     IdPrefix,
     InlineLoading,
     InlineNotification,
@@ -147,6 +148,8 @@ declare module '@carbon/react' {
     TabPanels,
     Table,
     Table,
+    TableBatchAction,
+    TableBatchActions,
     TableBody,
     TableBody,
     TableCell,
@@ -164,6 +167,7 @@ declare module '@carbon/react' {
     TableSelectAll,
     TableSelectAllProps,
     TableSelectRow,
+    TableToolbar,
     TableToolbarSearch,
     Tabs,
     Tabs,
@@ -192,5 +196,10 @@ declare module '@carbon/react' {
     UIShell,
     UnorderedList,
     TagTypeName,
+    usePrefix,
   } from '@carbon/react';
 }
+
+declare module '@carbon/colors';
+declare module '@carbon/motion';
+declare module '@carbon/feature-flags';

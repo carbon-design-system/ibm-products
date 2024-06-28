@@ -10,6 +10,7 @@ import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         title: 'Filtering',
@@ -309,6 +310,24 @@ const filters = [
       },
     },
   },
+  {
+    type: 'multiSelect',
+    column: 'status',
+    props: {
+      MultiSelect: {
+        items: [
+          { text: 'relationship', id: 'relationship' },
+          { text: 'complicated', id: 'complicated' },
+          { text: 'single', id: 'single' },
+        ],
+        id: 'carbon-multiselect-example',
+        label: 'Status selection',
+        titleText: 'Multiselect title',
+        itemToString: (item) => (item ? item.text : ''),
+        // Add any other Carbon MultiSelect props here
+      },
+    },
+  },
 ];
           `,
         },
@@ -389,6 +408,29 @@ filterProps: {
   /** Applies custom formatting to filter tags */
   renderLabel: Function
 }
+          `,
+        },
+      },
+      {
+        subTitle: `onApply method`,
+        source: {
+          language: 'jsx',
+          code: `
+/*
+  This method is called when the user applies filters, if you want to do something after filters
+  are applied here we pass in the filtersState. Inside the filtersState you can find the state of
+  the filters in the ui, and you can find the array of appliedFilters.
+*/
+
+const datagridState = useDatagrid({
+    columns,
+    data,
+    filterProps: {
+      onApply: (filtersState) => console.log(filtersState),
+    }
+  });
+
+  return <Datagrid datagridState={datagridState} />;
           `,
         },
       },

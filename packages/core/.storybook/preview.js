@@ -1,88 +1,64 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// cspell:words unuse
-
-import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
-import {
-  PARAM_KEY as CARBON_THEME_PARAM_KEY,
-  CARBON_THEMES,
-} from '@carbon/storybook-addon-theme/constants';
-
-import { ActionableNotification, UnorderedList, ListItem } from '@carbon/react';
 import React, { useEffect } from 'react';
+import { white, g10, g90, g100 } from '@carbon/themes';
+import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
 
-import index from './index.scss';
-import { getSectionSequence } from '../story-structure';
+import index from './index.scss?inline';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
 pkg.setAllComponents(true);
 
-const Style = ({ children, styles }) => {
-  const { unuse, use } = styles;
+const Style = ({ children, styles }) => (
+  <>
+    <style>{styles}</style>
+    {children}
+  </>
+);
 
-  useEffect(() => {
-    use();
-
-    return () => unuse();
-  }, []);
-
-  return children;
-};
-
-const isDev = CONFIG_TYPE === 'DEVELOPMENT'; //  process.env?.NODE_ENV === 'development';
+const isDev = CONFIG_TYPE === 'DEVELOPMENT';
 if (isDev) {
   // use a prefix in all development storybook
-  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  if (!pkg.originalPrefix) {
+    pkg.originalPrefix = pkg.prefix;
+  }
+  if (pkg.prefix !== `dev-prefix--${pkg.originalPrefix}`) {
+    pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  }
 }
 
 const decorators = [
-  (storyFn, { args, parameters: { styles } }) => {
+  (storyFn, context) => {
+    const {
+      args,
+      globals,
+      parameters: { styles },
+    } = context;
+    const { theme } = globals;
     const story = storyFn();
-
     JSON.stringify(args.featureFlags);
 
+    useEffect(() => {
+      document.documentElement.setAttribute('data-carbon-theme', theme);
+    }, [theme]);
+
     return (
-      <div className="preview-position-fix">
+      <div className="preview-position-fix story-wrapper">
         <Style styles={index}>
-          {args.featureFlags ? (
-            <ActionableNotification
-              className="preview__notification--feature-flag"
-              kind="warning"
-              inline
-              lowContrast
-              actionButtonLabel="Learn more"
-              statusIconDescription="describes the close button"
-              title="This story uses the following feature flags to enable or disable some functionality."
-              onActionButtonClick={() => {
-                window.open(
-                  'https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
-                );
-              }}
-            >
-              <UnorderedList>
-                {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey}>
-                    {flagKey}: {`${args.featureFlags[flagKey]}`}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </ActionableNotification>
-          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>
     );
   },
-  withCarbonTheme,
 ];
 
 const makeViewport = (name, width, shadow) => ({
@@ -114,23 +90,44 @@ const carbonViewports = {
 };
 
 const parameters = {
+  backgrounds: {
+    // https://storybook.js.org/docs/react/essentials/backgrounds#grid
+    grid: {
+      cellSize: 8,
+      opacity: 0.5,
+    },
+    values: [
+      {
+        name: 'white',
+        value: white.background,
+      },
+      {
+        name: 'g10',
+        value: g10.background,
+      },
+      {
+        name: 'g90',
+        value: g90.background,
+      },
+      {
+        name: 'g100',
+        value: g100.background,
+      },
+    ],
+  },
   controls: { expanded: true, hideNoControlsWarning: true },
   layout: 'centered',
   options: {
     showPanel: true,
-    storySort: (a, b) => {
-      const aPosition = getSectionSequence(a[1].kind);
-      const bPosition = getSectionSequence(b[1].kind);
-
-      return aPosition !== bPosition
-        ? // if stories have different positions in the structure, sort by that
-          aPosition - bPosition
-        : a[1].kind === b[1].kind
-        ? // if they have the same kind, use their sequence numbers
-          (a[1]?.parameters?.ccsSettings?.sequence || 0) -
-          (b[1]?.parameters?.ccsSettings?.sequence || 0)
-        : // they must both be unrecognized: fall back to sorting by id (slug)
-          a[1].id.localeCompare(b[1].id, undefined, { numeric: true });
+    storySort: {
+      method: 'alphabetical',
+      order: [
+        'Overview',
+        ['Welcome', 'Getting started', 'Examples', '*'],
+        'IBM Products',
+        ['Components', 'Patterns', 'Internal', 'Onboarding'],
+        'Community',
+      ],
     },
   },
 
@@ -152,8 +149,16 @@ const argTypes = {
   },
 };
 
-const globals = {
-  [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
+const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Set the global theme for displaying components',
+    defaultValue: 'g10',
+    toolbar: {
+      icon: 'paintbrush',
+      items: ['white', 'g10', 'g90', 'g100'],
+    },
+  },
 };
 
-export default { argTypes, decorators, globals, parameters };
+export default { argTypes, decorators, parameters, globalTypes };

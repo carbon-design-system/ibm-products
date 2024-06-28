@@ -1,9 +1,7 @@
-import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
+import { Story, Controls, Canvas } from '@storybook/addon-docs';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
 import { NotificationsPanel } from '.';
+import * as stories from './NotificationsPanel.stories';
 
 # NotificationsPanel
 
@@ -21,7 +19,7 @@ and interact with them all in one place.
 See notification bell in global header above for interaction.
 
 <Canvas>
-  <Story id={getStoryId(NotificationsPanel.displayName, 'default')} />
+  <Story of={stories.Default} />
 </Canvas>
 
 ## Code sample
@@ -30,4 +28,4 @@ See notification bell in global header above for interaction.
 
 ## Component API
 
-<ArgsTable />
+<Controls />

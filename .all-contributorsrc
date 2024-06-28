@@ -297,6 +297,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "szinta",
+      "name": "Sinta Augustine",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53395955?v=4",
+      "profile": "https://github.com/szinta",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "AustinGitHub",
+      "name": "Austin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10100397?v=4",
+      "profile": "https://github.com/AustinGitHub",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

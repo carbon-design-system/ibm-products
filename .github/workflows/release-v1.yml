@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
-          ref: 'main_v1'
+          ref: 'v1'
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
@@ -68,7 +68,7 @@ jobs:
           'this.name="@carbon/ibm-cloud-cognitive"'
 
       - name: Update telemetry.yml project ID for legacy publish
-        run: sed -i '' -e s/495342db-5046-4ecf-85ea-9ffceb6f8cdf/9255f6e1-1b25-4ef4-8913-062ef88935c9/ packages/ibm-products/telemetry.yml
+        run: sed -i -e s/495342db-5046-4ecf-85ea-9ffceb6f8cdf/9255f6e1-1b25-4ef4-8913-062ef88935c9/ packages/ibm-products/telemetry.yml
 
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename

@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.6...@carbon/ibm-products-community@0.5.0-rc.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* upgrade sass and remove `--` prefix from function names ([#5371](https://github.com/carbon-design-system/ibm-products/issues/5371)) ([91f282e](https://github.com/carbon-design-system/ibm-products/commit/91f282e56eec038f7efda4dd15c08d708c46cb58))
+
+
+
+
+
+## [0.4.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.5...@carbon/ibm-products-community@0.4.6) (2024-06-11)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+## [0.4.5](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.4...@carbon/ibm-products-community@0.4.5) (2024-05-07)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+## [0.4.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.3...@carbon/ibm-products-community@0.4.4) (2024-04-30)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#4890](https://github.com/carbon-design-system/ibm-products/issues/4890)) ([d3234ce](https://github.com/carbon-design-system/ibm-products/commit/d3234ceda60feb704b11d5f7c7270b430a11a499)), closes [#4654](https://github.com/carbon-design-system/ibm-products/issues/4654)
+
+
+
+
+
+## [0.4.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.2...@carbon/ibm-products-community@0.4.3) (2024-03-14)
+
+
+### Bug Fixes
+
+* update ai gradient mixin call to match 1.53 ([#4552](https://github.com/carbon-design-system/ibm-products/issues/4552)) ([332890c](https://github.com/carbon-design-system/ibm-products/commit/332890c9deceb0a38facfbf71dfadb66ca66f816))
+
+
+
+
+
 ## [0.4.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.4.1...@carbon/ibm-products-community@0.4.2) (2024-03-05)
 
 

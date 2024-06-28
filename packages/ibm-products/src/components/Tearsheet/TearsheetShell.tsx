@@ -561,6 +561,7 @@ TearsheetShell.displayName = componentName;
 export const portalType =
   typeof Element === 'undefined'
     ? PropTypes.object
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
     : PropTypes.instanceOf(Element);
 
 export const deprecatedProps = {

@@ -1,14 +1,15 @@
 import { pkg } from '../../../settings';
-import { translationsObject } from './translationObject';
 
 export const statementConfig = [
   {
     label: 'if',
     id: 'if',
+    connector: 'and',
   },
   {
     label: 'excl.if',
     id: 'excl_if',
+    connector: 'or',
   },
 ];
 
@@ -58,17 +59,17 @@ export const operatorConfig = [
   {
     label: 'starts with',
     id: 'starts_with',
-    type: 'text',
+    type: 'text,textarea',
   },
   {
     label: 'ends with',
     id: 'ends_with',
-    type: 'text',
+    type: 'text,textarea',
   },
   {
     label: 'contains',
     id: 'contains',
-    type: 'text',
+    type: 'text,textarea',
   },
   {
     label: 'is one of',
@@ -100,13 +101,11 @@ const formatDate = (date) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
-export const translateWithId = (key) => {
-  return translationsObjectCurrent[key] ?? key;
-};
+//const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
 
 export const valueRenderers = {
   text: (val) => val,
+  textarea: (val) => val,
   time: (val) => val,
   number: (val) => val,
   option: (value) => {

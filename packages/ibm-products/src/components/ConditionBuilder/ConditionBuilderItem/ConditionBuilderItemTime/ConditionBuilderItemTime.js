@@ -27,7 +27,7 @@ export const ConditionBuilderItemTime = ({ onChange, config }) => {
     setTimeValue(evt.target.value);
   };
   return (
-    <div className={`${blockClass}__item-time`}>
+    <div className={`${blockClass}__item-time`} data-open="true">
       <TimePicker id="time-picker" labelText="Select a time" onChange={setTime}>
         <TimePickerSelect id="time-picker-day-zone" onChange={setDayZone}>
           <SelectItem value="AM" text="AM" />

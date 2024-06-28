@@ -96,7 +96,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__item-date,
 .#{$block-class}__item-text,
 .#{$block-class}__item-number,
-#{$block-class}__item-time {
+.#{$block-class}__item-time {
   padding-block-end: $spacing-05;
   padding-inline: $spacing-05;
 }
@@ -236,6 +236,7 @@ $colors: (
 }
 .#{$block-class}__add_condition_group-wrapper {
   z-index: -1;
+  width: 0;
   margin-left: -50%;
   opacity: 0;
   pointer-events: none;
@@ -244,6 +245,7 @@ $colors: (
 }
 .#{$block-class}__add_condition_group-wrapper--show {
   z-index: 0;
+  width: auto;
   margin-left: 0;
   opacity: 1;
   pointer-events: all;

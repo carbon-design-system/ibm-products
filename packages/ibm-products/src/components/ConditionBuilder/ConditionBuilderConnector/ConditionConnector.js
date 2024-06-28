@@ -4,14 +4,16 @@ import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/I
 import {
   blockClass,
   connectorConfig,
-  translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 import PropTypes from 'prop-types';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
+import { useTranslations } from '../utils/useTranslations';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   const { variant } = useContext(ConditionBuilderContext);
+  const [connector_text] = useTranslations(['connector_text']);
+
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {
       parentGroup.classList.add('hoveredConnector');
@@ -40,7 +42,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
 
     <ConditionBuilderItem
       label={operator}
-      title={translateWithId('connector')}
+      title={connector_text}
       data-name="connectorField"
       onMouseEnter={activeConnectorHandler}
       onMouseLeave={inActiveConnectorHandler}
@@ -56,7 +58,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
         }}
         conditionState={{
           value: operator,
-          label: translateWithId('connector'),
+          label: connector_text,
         }}
         onChange={onChangeHandler}
       />

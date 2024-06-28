@@ -61,11 +61,9 @@ export let ConditionBuilder = React.forwardRef(
       initialState,
       getConditionState,
       getActionsState,
-      variant,
+      variant = 'sentence',
       actions,
-      /* TODO: add other props for ConditionBuilder, with default values if needed */
-
-      // Collect any other property values passed in.
+      translateWithId,
       ...rest
     },
     ref
@@ -83,6 +81,7 @@ export let ConditionBuilder = React.forwardRef(
         popOverSearchThreshold={popOverSearchThreshold}
         getOptions={getOptions}
         variant={variant}
+        translateWithId={translateWithId}
       >
         <div
           {
@@ -222,6 +221,7 @@ ConditionBuilder.propTypes = {
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
         type: PropTypes.oneOf([
           'text',
+          'textarea',
           'number',
           'date',
           'option',
@@ -257,9 +257,16 @@ ConditionBuilder.propTypes = {
    * Provide a label to the button that starts condition builder
    */
   startConditionLabel: PropTypes.string.isRequired,
+  /**
+   * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
+   * This callback function will receive the message id and you need to return the corresponding text for that id.
+   * The message id will be one of [   "if_text",   "excl_if",   "and",   "or",   "is",   "greater",   "greater_equal",   "lower",   "lower_equal",   "starts_with",   "ends_with",   "contains",   "one_of",   "before",   "after",   "between",   "add_condition",   "add_condition_group",   "add_subgroup",   "condition_text",   "property_text",   "operator_text",   "value_text",   "connector_text",   "condition_row",   "remove_condition",   "add_condition_row",   "start_text",   "end_text",   "clear_search",   "actions_text",   "then",   "remove_action",   "add_action",   "invalid_text",   "invalid_number_warn__text"]
+]
+   */
+  translateWithId: PropTypes.func,
   /* TODO: add types and DocGen for all props. */
   /**
    * Provide the condition builder variant: sentence/ tree
    */
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['tree', 'sentence']),
 };

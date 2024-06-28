@@ -152,7 +152,7 @@ export const sampleDataStructure_sentence = {
         {
           property: 'price',
           operator: 'is',
-          value: '3',
+          value: '3 Dollars',
           id: uuidv4(),
         },
       ],

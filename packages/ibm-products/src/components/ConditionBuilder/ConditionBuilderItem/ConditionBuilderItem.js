@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { Add } from '@carbon/react/icons';
 import {
   blockClass,
-  translateWithId,
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
+import { useTranslations } from '../utils/useTranslations';
 
 export const ConditionBuilderItem = ({
   children,
@@ -26,20 +26,26 @@ export const ConditionBuilderItem = ({
   const contentRef = useRef(null);
   const [open, setOpen] = useState(false);
 
+  const [invalid_text, add_condition, label_text] = useTranslations([
+    'invalid_text',
+    'add_condition',
+    label,
+  ]);
+
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
-        propertyLabel: translateWithId('invalid_text'),
+        propertyLabel: invalid_text,
         isInvalid: true,
       };
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
-        : label;
+        : label_text;
     return {
       isInvalid: false,
-      propertyLabel: translateWithId(propertyId),
+      propertyLabel: propertyId,
     };
   };
   const { propertyLabel, isInvalid } = getPropertyDetails();
@@ -50,7 +56,7 @@ export const ConditionBuilderItem = ({
      * popoverToOpen hold the next popover to be opened if required
      */
     if (condition) {
-      let currentField = rest['data-name'];
+      const currentField = rest['data-name'];
       //if any condition is changed, state prop is triggered
       if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
@@ -78,7 +84,8 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     //this will focus the first input field in the popover
     if (open && contentRef.current) {
-      const firstFocusableElement = contentRef.current.querySelector('input');
+      const firstFocusableElement =
+        contentRef.current.querySelector('input,textarea');
       if (firstFocusableElement) {
         firstFocusableElement.focus();
       }
@@ -96,7 +103,7 @@ export const ConditionBuilderItem = ({
       }}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? translateWithId('add_condition')}
+        label={propertyLabel ?? add_condition}
         hideLabel={!label ? true : false}
         onClick={() => {
           children ? setOpen(!open) : null;
@@ -107,6 +114,7 @@ export const ConditionBuilderItem = ({
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
         isInvalid={isInvalid}
+        condition={condition}
         {...rest}
       />
 
@@ -117,7 +125,9 @@ export const ConditionBuilderItem = ({
       >
         <Layer>
           <h1 className={`${blockClass}__item__title`}>{title}</h1>
-          <div ref={contentRef}>{open && children}</div>
+          <div ref={contentRef} className={`${blockClass}__popover-content`}>
+            {open && children}
+          </div>
         </Layer>
       </PopoverContent>
     </Popover>

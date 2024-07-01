@@ -164,5 +164,7 @@ jobs:
     needs: avt-runner
     steps:
       - name: Check AVT Runner job status
-        if: ${{ needs.avt-runner.result != 'success' }}
-        run: exit 1
+        run: |
+          if [[ "${{ needs.avt-runner.result }}" != "success" ]]; then
+            exit 1
+          fi

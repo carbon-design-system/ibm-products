@@ -103,7 +103,7 @@ export const ConditionBuilderItem = ({
 
   const closePopover = () => setOpen(false);
   const openPopOver = () => setOpen(true);
-  const togglePopover = () => setOpen((prev) => !prev);
+  const togglePopover = () => setOpen(!open);
 
   return (
     <Popover

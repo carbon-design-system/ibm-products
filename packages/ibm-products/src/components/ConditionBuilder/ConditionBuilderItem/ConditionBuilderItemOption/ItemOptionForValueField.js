@@ -11,21 +11,23 @@ import { SelectSkeleton } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  translateWithId,
-} from '../../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 export const ItemOptionForValueField = ({
   conditionState = {},
   config = {},
   onChange,
 }) => {
-  const multiSelectable = conditionState.operator === 'one_of';
+  const multiSelectable = conditionState.operator === 'oneOf';
 
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
   );
+  const [propertyText, clearSearchText] = useTranslations([
+    'propertyText',
+    'clearSearchText',
+  ]);
   const contentRef = useRef();
 
   const [allOptions, setAllOptions] = useState(config.options);
@@ -121,7 +123,7 @@ export const ItemOptionForValueField = ({
       ? conditionState.label
       : conditionState.property
       ? conditionState.property
-      : translateWithId('property');
+      : propertyText;
   };
   if (!allOptions) {
     return <SelectSkeleton />;
@@ -132,8 +134,8 @@ export const ItemOptionForValueField = ({
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={translateWithId('clear_search')}
-            closeButtonLabelText={translateWithId('clear_search')}
+            labelText={clearSearchText}
+            closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
           />
         </div>

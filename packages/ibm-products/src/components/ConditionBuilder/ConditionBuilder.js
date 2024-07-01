@@ -61,11 +61,9 @@ export let ConditionBuilder = React.forwardRef(
       initialState,
       getConditionState,
       getActionsState,
-      variant,
+      variant = 'sentence',
       actions,
-      /* TODO: add other props for ConditionBuilder, with default values if needed */
-
-      // Collect any other property values passed in.
+      translateWithId,
       ...rest
     },
     ref
@@ -83,6 +81,7 @@ export let ConditionBuilder = React.forwardRef(
         popOverSearchThreshold={popOverSearchThreshold}
         getOptions={getOptions}
         variant={variant}
+        translateWithId={translateWithId}
       >
         <div
           {
@@ -222,6 +221,7 @@ ConditionBuilder.propTypes = {
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
         type: PropTypes.oneOf([
           'text',
+          'textarea',
           'number',
           'date',
           'option',
@@ -257,9 +257,16 @@ ConditionBuilder.propTypes = {
    * Provide a label to the button that starts condition builder
    */
   startConditionLabel: PropTypes.string.isRequired,
+  /**
+   * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
+   * This callback function will receive the message id and you need to return the corresponding text for that id.
+   * The message id will be one of [   "ifText","addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",   "invalidNumberWarnText"]
+]
+   */
+  translateWithId: PropTypes.func,
   /* TODO: add types and DocGen for all props. */
   /**
    * Provide the condition builder variant: sentence/ tree
    */
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(['tree', 'sentence']),
 };

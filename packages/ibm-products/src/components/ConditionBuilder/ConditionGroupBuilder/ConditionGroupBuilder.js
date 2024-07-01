@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
 import ConditionBlock from '../ConditionBlock/ConditionBlock';
 import PropTypes from 'prop-types';
 
@@ -7,16 +7,15 @@ import cx from 'classnames';
 import {
   blockClass,
   statementConfig,
-  translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-
 import { focusThisField } from '../utils/util';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
+import { useTranslations } from '../utils/useTranslations';
 /**
  *
  *  state - this is the current group that is being rendered . This can be a inner group or outer group
@@ -32,10 +31,15 @@ const ConditionGroupBuilder = ({
   conditionBuilderRef,
   className,
 }) => {
+  const [conditionBuilderGroupText, conditionText] = useTranslations([
+    'condition_builder_group',
+    'conditionText',
+  ]);
   const { variant } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
+  const conditionBuilderContentRef = useRef();
   const onRemoveHandler = (conditionId, evt) => {
     if (group.conditions.length > 1) {
       onChange({
@@ -44,7 +48,6 @@ const ConditionGroupBuilder = ({
           (condition) => conditionId !== condition.id
         ),
       });
-      handleFocusOnClose(evt);
     } else {
       onRemove(evt);
     }
@@ -79,16 +82,6 @@ const ConditionGroupBuilder = ({
         ...group.conditions.slice(conditionIndex + 1),
       ],
     });
-  };
-
-  const handleFocusOnClose = (e) => {
-    const previousClose = e.currentTarget
-      ?.closest('[role="row"]')
-      ?.previousSibling?.querySelector('[data-name="closeCondition"]');
-
-    if (previousClose) {
-      previousClose.focus();
-    }
   };
 
   const addConditionSubGroupHandler = (conditionIndex) => {
@@ -135,8 +128,12 @@ const ConditionGroupBuilder = ({
     setShowConditionPreview(-1);
   };
   const onStatementChangeHandler = (updatedStatement) => {
+    const groupOperator = statementConfig.find(
+      (statement) => statement.id == updatedStatement
+    )?.connector;
     onChange({
       ...group,
+      groupOperator: groupOperator,
       statement: updatedStatement,
     });
   };
@@ -154,7 +151,7 @@ const ConditionGroupBuilder = ({
         <div
           className={`${blockClass}__condition-wrapper`}
           role="grid"
-          aria-label={translateWithId('condition_builder_group')}
+          aria-label={conditionBuilderGroupText}
         >
           {/* condition loop starts here */}
 
@@ -181,7 +178,7 @@ const ConditionGroupBuilder = ({
                 }}
                 addConditionHandler={addConditionHandler}
                 onRemove={(e) => {
-                  onRemoveHandler(eachCondition.id, e);
+                  onRemoveHandler(eachCondition.id, e, conditionIndex);
                 }}
                 onConnectorOperatorChange={onConnectorOperatorChange}
                 onStatementChange={onStatementChangeHandler}
@@ -199,11 +196,8 @@ const ConditionGroupBuilder = ({
       <div
         className={`${className} ${blockClass}__condition-wrapper`}
         role={aria.level === 1 ? 'rowgroup' : undefined}
-        aria-label={
-          aria.level == 1
-            ? translateWithId('condition_builder_group')
-            : undefined
-        }
+        aria-label={aria.level == 1 ? conditionBuilderGroupText : undefined}
+        ref={conditionBuilderContentRef}
       >
         {/* condition loop starts here */}
         {
@@ -216,7 +210,7 @@ const ConditionGroupBuilder = ({
           >
             <ConditionBuilderItem
               label={group.statement}
-              title={translateWithId('condition')}
+              title={conditionText}
               data-name="connectorField"
               popOverClassName={`${blockClass}__gap`}
               className={`${blockClass}__statement-button`}
@@ -224,14 +218,14 @@ const ConditionGroupBuilder = ({
               <ItemOption
                 conditionState={{
                   value: group.statement,
-                  label: translateWithId('condition'),
+                  label: conditionText,
                 }}
                 onChange={(v, evt) => {
                   focusThisField(evt);
                   onStatementChangeHandler(v);
                 }}
                 config={{ options: statementConfig }}
-              ></ItemOption>
+              />
             </ConditionBuilderItem>
           </div>
         }
@@ -314,10 +308,10 @@ const ConditionGroupBuilder = ({
             )}
 
             {conditionIndex == showConditionSubGroupPreview && (
-              <ConditionPreview previewType="subGroup" />
+              <ConditionPreview previewType="subGroup" group={group} />
             )}
             {conditionIndex == showConditionPreview && (
-              <ConditionPreview previewType="condition" />
+              <ConditionPreview previewType="condition" group={group} />
             )}
           </Fragment>
         ))}

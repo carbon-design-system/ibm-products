@@ -36,7 +36,7 @@ const Template = (args) => {
         <div>
           This component is deprecated and will be removed in the next major
           version. Please migrate to{' '}
-          <a href="http://localhost:3000/?path=/docs/ibm-products-patterns-full-page-error-fullpageerror--docs">
+          <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error-fullpageerror--docs">
             FullPageError
           </a>
           .

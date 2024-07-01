@@ -4,13 +4,13 @@ import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
-import { translateWithId } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
 export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
   const DatePickerInputRef = useRef();
-
+  const [startText, endText] = useTranslations(['startText', 'endText']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
@@ -43,12 +43,12 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           <DatePickerInput
             id="datePickerStart"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('start')}
+            labelText={startText}
           />
           <DatePickerInput
             id="datePickerEnd"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('end')}
+            labelText={endText}
           />
         </DatePicker>
       )}

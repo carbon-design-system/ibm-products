@@ -49,6 +49,7 @@ import {
 } from './PageHeaderUtils';
 import { PageHeaderTitle } from './PageHeaderTitle';
 
+pkg._silenceWarnings(true);
 pkg.component.ActionBar = true;
 
 // Default values for props

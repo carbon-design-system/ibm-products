@@ -67,7 +67,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
         */
-        const valueIndex = filterValues.findIndex((val) => val.id === value);
+        const valueIndex = filterValues.findIndex((val) => val.value === value);
         filterValues[valueIndex].selected = false;
         const updatedFilterObject = {
           ...f,

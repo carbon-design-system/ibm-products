@@ -2,29 +2,17 @@ import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import {
   checkForHoldingKey,
   focusThisField,
-  focusThisItem,
   traverseClockVise,
   traverseReverse,
 } from './util';
 
-export const handleKeyDown = (evt, conditionBuilderRef, variant) => {
+export const handleKeyDown = (evt, conditionBuilderRef) => {
   const activeElement = document.activeElement;
-  if (excludeKeyPress(evt)) {
-    return;
-  }
   if (activeElement.closest(`[role="dialog"]`)) {
     handleKeyPressForPopover(evt, activeElement.closest(`[role="dialog"]`));
   } else {
-    handleKeyPressForMainContent(evt, conditionBuilderRef, variant);
+    handleKeyPressForMainContent(evt, conditionBuilderRef);
   }
-};
-
-const excludeKeyPress = (evt) => {
-  return (
-    !['Escape'].includes(evt.key) &&
-    (evt.target.closest(`.${blockClass}__item-date`)?.length ||
-      evt.target.closest(`.${blockClass}__item-time`)?.length)
-  );
 };
 
 const handleKeyPressForPopover = (evt, parentContainer) => {
@@ -86,8 +74,8 @@ const handleKeyPressForPopover = (evt, parentContainer) => {
       if (isMultiSelect !== 'true') {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, else trigger click
-          focusThisField(evt);
           document.activeElement?.click();
+          focusThisField(evt);
         }
       }
 
@@ -101,76 +89,9 @@ const handleKeyPressForPopover = (evt, parentContainer) => {
   }
 };
 
-const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
-  switch (evt.key) {
-    case 'ArrowRight':
-      if (variant == 'tree') {
-        let allItems = Array.from(
-          evt.target
-            .closest('[role="row"]')
-            ?.querySelectorAll('[role="gridcell"] button')
-        );
-        if (evt.target.getAttribute('role') == 'row') {
-          //when current focus is on a row, then we need to enter inside and focus the first cell of that row
-
-          allItems[0]?.focus();
-        } else {
-          //finding the next cell to be focussed
-          //next cell = current cell index + 1
-
-          let currentItemIndex = allItems.indexOf(evt.target);
-          if (currentItemIndex < allItems.length - 1) {
-            focusThisItem(allItems[currentItemIndex + 1]);
-          }
-        }
-      } else {
-        handleCellNavigation(evt, conditionBuilderRef);
-      }
-      break;
-    case 'ArrowLeft':
-      if (variant == 'tree') {
-        if (evt.target.getAttribute('role') !== 'row') {
-          //when ny cell is focussed, arrow left will select the previous cell.
-          //if current focussed cell is add button it does not have a parent row
-
-          let allItems = Array.from(
-            evt.target
-              .closest('[role="row"]')
-              ?.querySelectorAll('[role="gridcell"] button')
-          );
-
-          let currentItemIndex = allItems.indexOf(evt.target);
-          if (currentItemIndex > 0) {
-            focusThisItem(allItems[currentItemIndex - 1]);
-          } else {
-            //focus the row
-            let wrapper = evt.target.closest(`[role="row"]`);
-            wrapper.focus();
-          }
-        }
-      } else {
-        handleCellNavigation(evt, conditionBuilderRef);
-      }
-
-      break;
-
-    case 'ArrowUp':
-    case 'ArrowDown':
-      if (variant == 'tree') {
-        handleRowNavigationTree(evt, conditionBuilderRef, variant);
-      } else {
-        handleRowNavigation(evt, conditionBuilderRef, variant);
-      }
-
-      break;
-
-    default:
-      break;
-  }
-};
 const getRows = (conditionBuilderRef) => {
   return Array.from(
-    conditionBuilderRef.current?.querySelectorAll('[role="row"]')
+    conditionBuilderRef.current.querySelectorAll('[role="row"]')
   );
 };
 
@@ -178,44 +99,15 @@ const getRowIndex = (element, conditionBuilderRef) => {
   const rows = getRows(conditionBuilderRef);
   return rows.findIndex((row) => row.contains(element));
 };
-const handleRowNavigation = (evt, conditionBuilderRef, variant) => {
+const handleRowNavigation = (evt, conditionBuilderRef) => {
   const rows = getRows(conditionBuilderRef);
 
   const currentRowIndex = getRowIndex(evt.target, conditionBuilderRef);
 
-  navigateToNextRowCell(evt, currentRowIndex, rows, variant);
+  navigateToNextRowCell(evt, currentRowIndex, rows);
 };
-function handleRowNavigationTree(evt, conditionBuilderRef, variant) {
-  const rows = getRows(conditionBuilderRef);
-
-  const currentRowIndex = getRowIndex(evt.target, conditionBuilderRef);
-
-  let nextRowIndex = currentRowIndex;
-
-  if (evt.target.getAttribute('role') == 'row') {
-    if (evt.key === 'ArrowDown') {
-      nextRowIndex += 1;
-    } else if (evt.key === 'ArrowUp') {
-      nextRowIndex -= 1;
-    }
-
-    if (nextRowIndex < 0) {
-      nextRowIndex = 0;
-    } else if (nextRowIndex >= rows.length) {
-      nextRowIndex = rows.length - 1;
-    }
-
-    if (nextRowIndex !== currentRowIndex) {
-      rows[currentRowIndex].setAttribute('tabindex', '-1');
-      rows[nextRowIndex].setAttribute('tabindex', '0');
-      rows[nextRowIndex].focus();
-    }
-  } else {
-    navigateToNextRowCell(evt, currentRowIndex, rows, variant);
-  }
-}
-const navigateToNextRowCell = (evt, currentRowIndex, rows, variant) => {
-  //when the current focussed element is a cell of any row, arrow up/down will focus the next row same cell.
+const navigateToNextRowCell = (evt, currentRowIndex, rows) => {
+  //when the focussed element is a cell of the row which has only 1 cell (connector or statement) , focus the next row
 
   let nextRowIndex = currentRowIndex;
   if (evt.key === 'ArrowUp') {
@@ -230,21 +122,32 @@ const navigateToNextRowCell = (evt, currentRowIndex, rows, variant) => {
 
   const nextRow = rows[nextRowIndex];
   const itemName = evt.target.dataset.name;
-  if (nextRow?.querySelector(`[data-name="${itemName}"]`)) {
-    nextRow?.querySelector(`[data-name="${itemName}"]`)?.focus();
-  } else if (variant === 'tree') {
-    //when the next row is a if statement , then that row is focused. From any cell of last row of an group , arrow down select the next row (if)
-    nextRow?.focus();
-  }
+  nextRow?.querySelector(`[data-name="${itemName}"]`)?.focus();
 };
-const handleCellNavigation = (evt, conditionBuilderRef) => {
-  conditionBuilderRef.current
-    .querySelectorAll(`[role="gridcell"] button`)
-    .forEach((eachElem, index, allElements) => {
-      if (evt.key === 'ArrowRight') {
-        traverseClockVise(eachElem, index, allElements);
-      } else {
-        traverseReverse(eachElem, index, allElements);
-      }
-    });
+
+const handleKeyPressForMainContent = (evt, conditionBuilderRef) => {
+  switch (evt.key) {
+    case 'ArrowRight':
+    case 'ArrowLeft':
+      conditionBuilderRef.current
+        .querySelectorAll(`[role="gridcell"] button`)
+        .forEach((eachElem, index, allElements) => {
+          if (evt.key === 'ArrowRight') {
+            traverseClockVise(eachElem, index, allElements);
+          } else {
+            traverseReverse(eachElem, index, allElements);
+          }
+        });
+
+      break;
+
+    case 'ArrowUp':
+    case 'ArrowDown':
+      handleRowNavigation(evt, conditionBuilderRef);
+
+      break;
+
+    default:
+      break;
+  }
 };

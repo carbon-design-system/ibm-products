@@ -24,7 +24,7 @@ export const ConditionBuilderItemDate = ({
     );
   };
   return (
-    <div className={`${blockClass}__item-date `} data-open={'true'}>
+    <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
         <DatePicker
           ref={DatePickerInputRef}

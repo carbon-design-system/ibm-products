@@ -69,23 +69,23 @@ export const ConditionBuilderItem = ({
       //if any condition is changed, state prop is triggered
       if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
-        setOpen(false);
+        closePopover();
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
         condition.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
-        setOpen(false);
+        closePopover();
       }
       if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
-        setOpen(true);
+        openPopOver();
       }
     } else {
       // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
       //close popOver when statement is changed.
-      setOpen(false);
+      closePopover();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [condition, label]);
@@ -101,6 +101,10 @@ export const ConditionBuilderItem = ({
     }
   }, [contentRef, open]);
 
+  const closePopover = () => setOpen(false);
+  const openPopOver = () => setOpen(true);
+  const togglePopover = () => setOpen(!open);
+
   return (
     <Popover
       open={open}
@@ -108,16 +112,12 @@ export const ConditionBuilderItem = ({
       role="gridcell"
       className={popOverClassName}
       ref={popoverRef}
-      onRequestClose={() => {
-        setOpen(false);
-      }}
+      onRequestClose={closePopover}
     >
       <ConditionBuilderButton
         label={propertyLabel ?? addConditionText}
         hideLabel={!label ? true : false}
-        onClick={() => {
-          setOpen(!open);
-        }}
+        onClick={togglePopover}
         className={className}
         aria-haspopup
         aria-expanded={open}

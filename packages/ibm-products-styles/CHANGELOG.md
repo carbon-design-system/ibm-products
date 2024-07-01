@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.40.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.40.0-rc.0...@carbon/ibm-products-styles@2.40.0-rc.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* **DataGrid:** add checkbox support ([#5380](https://github.com/carbon-design-system/ibm-products/issues/5380)) ([b1761a0](https://github.com/carbon-design-system/ibm-products/commit/b1761a0fd713a3682dd812cebe98f4503ef70f04))
+
+
+### Features
+
+* **dataspreadsheet:** optional custom component to row header ([#5500](https://github.com/carbon-design-system/ibm-products/issues/5500)) ([ee749e4](https://github.com/carbon-design-system/ibm-products/commit/ee749e4485e15c30b850b9dfc3a12927d23885b0))
+
+
+
+
+
+# [2.40.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.39.0...@carbon/ibm-products-styles@2.40.0-rc.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* **dataspreadsheet:** drag drop when we have overflow ([#5506](https://github.com/carbon-design-system/ibm-products/issues/5506)) ([8a0d1a4](https://github.com/carbon-design-system/ibm-products/commit/8a0d1a48aca63b9f5111c7c10abf0e385151a1ad))
+* upgrade sass and remove `--` prefix from function names ([#5371](https://github.com/carbon-design-system/ibm-products/issues/5371)) ([91f282e](https://github.com/carbon-design-system/ibm-products/commit/91f282e56eec038f7efda4dd15c08d708c46cb58))
+
+
+### Features
+
+* **ConditionBuilder:** action section,custom input and fixes ([#5474](https://github.com/carbon-design-system/ibm-products/issues/5474)) ([bd909f7](https://github.com/carbon-design-system/ibm-products/commit/bd909f77c703d93bfc82eadf96c088b4e10ab5df))
+
+
+
+
+
 # [2.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.38.1...@carbon/ibm-products-styles@2.39.0) (2024-06-13)
 
 

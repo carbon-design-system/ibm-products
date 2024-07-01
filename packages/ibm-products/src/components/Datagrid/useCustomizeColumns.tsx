@@ -10,11 +10,13 @@ import {
   CustomizeColumnsTearsheetWrapper,
   ToggleButtonWrapper,
 } from './Datagrid/addons/CustomizeColumns';
+import { DataGridState } from './types';
+import { Hooks, TableInstance } from 'react-table';
 
-const useCustomizeColumns = (hooks) => {
+const useCustomizeColumns = (hooks: Hooks) => {
   const [isTearsheetOpen, setIsTearsheetOpen] = React.useState(false);
-  hooks.useInstance.push((instance) => {
-    const { customizeColumnsProps } = instance;
+  hooks.useInstance.push((instance: TableInstance) => {
+    const { customizeColumnsProps } = instance as DataGridState;
     const { labels } = customizeColumnsProps || {};
     Object.assign(instance, {
       customizeColumnsProps: {

@@ -146,6 +146,7 @@ const newPerson = (index, config) => {
         : initialChartTypeIndex === 1
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
+    key: false,
     activeSince:
       activeChance > 0.66
         ? activeSinceDate
@@ -159,6 +160,7 @@ const newPerson = (index, config) => {
       (index === 1 || index === 3 || index === 4) && (
         <ExampleSlug align={config?.slugAlign} />
       ),
+    id: config?.id && `${config?.id}__${index}`,
   };
 };
 

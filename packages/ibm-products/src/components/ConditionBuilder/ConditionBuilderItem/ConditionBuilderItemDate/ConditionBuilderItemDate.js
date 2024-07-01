@@ -4,25 +4,30 @@ import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
-import { translateWithId } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
-export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
+export const ConditionBuilderItemDate = ({
+  conditionState,
+  onChange,
+  parentRef,
+}) => {
   const DatePickerInputRef = useRef();
-
+  const [startText, endText] = useTranslations(['startText', 'endText']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
   return (
-    <div className={`${blockClass}__item-date `}>
+    <div className={`${blockClass}__item-date `} data-open={'true'}>
       {datePickerType == 'single' && (
         <DatePicker
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onClose={onChange}
           value={conditionState.value}
+          onClose={onChange}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePicker"
@@ -43,12 +48,12 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           <DatePickerInput
             id="datePickerStart"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('start')}
+            labelText={startText}
           />
           <DatePickerInput
             id="datePickerEnd"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('end')}
+            labelText={endText}
           />
         </DatePicker>
       )}
@@ -65,4 +70,9 @@ ConditionBuilderItemDate.propTypes = {
    * callback to update state oin date change
    */
   onChange: PropTypes.func,
+
+  /**
+   * reference to the popover node
+   */
+  parentRef: PropTypes.object,
 };

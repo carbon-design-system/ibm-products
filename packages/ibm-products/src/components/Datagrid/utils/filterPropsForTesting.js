@@ -1,3 +1,4 @@
+/* eslint-disable ssr-friendly/no-dom-globals-in-module-scope */
 /**
  * Copyright IBM Corp. 2024, 2024
  *

@@ -45,6 +45,22 @@ const MockWebTerminal = React.forwardRef(
 );
 
 describe(name, () => {
+  beforeEach(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+  });
+
   it('Renders the component `WebTerminal` if flag is enabled', async () => {
     const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
@@ -301,20 +317,6 @@ describe(name, () => {
   });
 
   it('should reduce motion', async () => {
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-
     const dataTestId = uuidv4();
 
     const { rerender } = render(
@@ -330,7 +332,9 @@ describe(name, () => {
     expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
       false
     );
-    expect(screen.getByTestId(dataTestId).hasAttribute('style')).toBeTruthy();
+    expect(
+      screen.getByTestId(dataTestId).hasAttribute('style')
+    ).not.toBeTruthy();
 
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
@@ -359,6 +363,6 @@ describe(name, () => {
     expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
       true
     );
-    expect(screen.getByTestId(dataTestId).getAttribute('style')).toBe('');
+    expect(screen.getByTestId(dataTestId).getAttribute('style')).toBeNull();
   });
 });

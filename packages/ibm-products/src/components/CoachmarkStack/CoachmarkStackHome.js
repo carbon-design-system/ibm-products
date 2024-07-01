@@ -16,6 +16,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
 import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -56,85 +57,97 @@ export let CoachmarkStackHome = forwardRef(
       }, 100);
     }, [isOpen]);
 
+    const portalNode = useRef();
+
+    useIsomorphicEffect(() => {
+      portalNode.current = portalTarget
+        ? document?.querySelector(portalTarget) ??
+          document?.querySelector('body')
+        : document?.querySelector('body');
+    }, [portalTarget]);
+
     if (!navLinkLabels) {
       return pconsole.warn(
         `${componentName} is an Onboarding internal component and is not intended for general use.`
       );
     }
 
-    const portalNode = portalTarget
-      ? document.querySelector(portalTarget) ?? document.querySelector('body')
-      : document.querySelector('body');
-    return createPortal(
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(blockClass, className)}
-        ref={ref}
-        role="main"
-        {...getDevtoolsProps(componentName)}
-      >
-        <CoachmarkHeader
-          onClose={() => {
-            setLinkFocusIndex(0);
-            onClose();
-          }}
-        />
-        <div className={`${overlayClass}__body`}>
-          <div className={`${overlayClass}-element`}>
-            {!media && (
-              <Idea size={20} className={`${blockClass}__icon-idea`} />
-            )}
+    return portalNode?.current
+      ? createPortal(
+          <div
+            {
+              // Pass through any other property values as HTML attributes.
+              ...rest
+            }
+            className={cx(blockClass, className)}
+            ref={ref}
+            role="main"
+            {...getDevtoolsProps(componentName)}
+          >
+            <CoachmarkHeader
+              onClose={() => {
+                setLinkFocusIndex(0);
+                onClose();
+              }}
+            />
+            <div className={`${overlayClass}__body`}>
+              <div className={`${overlayClass}-element`}>
+                {!media && (
+                  <Idea size={20} className={`${blockClass}__icon-idea`} />
+                )}
 
-            {media &&
-              (media.render ? (
-                media.render()
-              ) : (
-                <SteppedAnimatedMedia
-                  className={`${overlayClass}__element-stepped-media`}
-                  filePaths={media.filePaths}
-                  playStep={0}
-                />
-              ))}
+                {media &&
+                  (media.render ? (
+                    media.render()
+                  ) : (
+                    <SteppedAnimatedMedia
+                      className={`${overlayClass}__element-stepped-media`}
+                      filePaths={media.filePaths}
+                      playStep={0}
+                    />
+                  ))}
 
-            <div className={`${overlayClass}-element__content`}>
-              {title && (
-                <h2 className={`${overlayClass}-element__title`}>{title}</h2>
-              )}
-              {description && (
-                <p className={`${overlayClass}-element__body`}>{description}</p>
-              )}
-            </div>
+                <div className={`${overlayClass}-element__content`}>
+                  {title && (
+                    <h2 className={`${overlayClass}-element__title`}>
+                      {title}
+                    </h2>
+                  )}
+                  {description && (
+                    <p className={`${overlayClass}-element__body`}>
+                      {description}
+                    </p>
+                  )}
+                </div>
 
-            <ul className={`${blockClass}__nav-links`}>
-              {navLinkLabels.map((label, index) => {
-                if (index === linkFocusIndex) {
-                  return renderNavLink(index, label, buttonFocusRef);
-                } else {
-                  return renderNavLink(index, label);
-                }
-              })}
-            </ul>
-            {closeButtonLabel && (
-              <div className={`${overlayClass}__footer`}>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    setLinkFocusIndex(0);
-                    onClose();
-                  }}
-                >
-                  {closeButtonLabel}
-                </Button>
+                <ul className={`${blockClass}__nav-links`}>
+                  {navLinkLabels.map((label, index) => {
+                    if (index === linkFocusIndex) {
+                      return renderNavLink(index, label, buttonFocusRef);
+                    } else {
+                      return renderNavLink(index, label);
+                    }
+                  })}
+                </ul>
+                {closeButtonLabel && (
+                  <div className={`${overlayClass}__footer`}>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setLinkFocusIndex(0);
+                        onClose();
+                      }}
+                    >
+                      {closeButtonLabel}
+                    </Button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
-      </div>,
-      portalNode
-    );
+            </div>
+          </div>,
+          portalNode?.current
+        )
+      : null;
 
     function renderNavLink(index, label, ref = null) {
       return (

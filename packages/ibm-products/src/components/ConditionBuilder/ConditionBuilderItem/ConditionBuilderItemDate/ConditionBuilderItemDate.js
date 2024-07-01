@@ -18,6 +18,11 @@ export const ConditionBuilderItemDate = ({
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
+  const onCloseHandler = (selectedDate) => {
+    onChange(
+      selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID_DATE'
+    );
+  };
   return (
     <div className={`${blockClass}__item-date `} data-open={'true'}>
       {datePickerType == 'single' && (
@@ -26,7 +31,7 @@ export const ConditionBuilderItemDate = ({
           dateFormat="d/m/Y"
           datePickerType="single"
           value={conditionState.value}
-          onClose={onChange}
+          onClose={onCloseHandler}
           appendTo={parentRef?.current}
         >
           <DatePickerInput
@@ -42,7 +47,7 @@ export const ConditionBuilderItemDate = ({
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onClose={onChange}
+          onClose={onCloseHandler}
           value={conditionState.value}
         >
           <DatePickerInput

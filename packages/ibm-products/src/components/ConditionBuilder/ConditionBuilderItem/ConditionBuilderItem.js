@@ -28,15 +28,22 @@ export const ConditionBuilderItem = ({
   const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [invalidText, addConditionText, labelText] = useTranslations([
-    'invalidText',
-    'addConditionText',
-    label,
-  ]);
+  const [invalidText, addConditionText, labelText, invalidDateText] =
+    useTranslations([
+      'invalidText',
+      'addConditionText',
+      label,
+      'invalidDateText',
+    ]);
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
         propertyLabel: invalidText,
+        isInvalid: true,
+      };
+    } else if (label === 'INVALID_DATE') {
+      return {
+        propertyLabel: invalidDateText,
         isInvalid: true,
       };
     }
@@ -44,6 +51,7 @@ export const ConditionBuilderItem = ({
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
         : labelText;
+
     return {
       isInvalid: false,
       propertyLabel: propertyId,

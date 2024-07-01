@@ -130,7 +130,7 @@ export const valueRenderers = {
     } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
       return formatDate(new Date(value[0]));
     } else {
-      return 'invalidDateText';
+      return value;
     }
   },
   custom: (value) => value,

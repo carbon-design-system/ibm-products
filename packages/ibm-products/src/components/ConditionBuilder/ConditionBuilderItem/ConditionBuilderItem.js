@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { Add } from '@carbon/react/icons';
 import {
   blockClass,
-  translateWithId,
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
+import { useTranslations } from '../utils/useTranslations';
 
 export const ConditionBuilderItem = ({
   children,
@@ -26,20 +26,25 @@ export const ConditionBuilderItem = ({
   const contentRef = useRef(null);
   const [open, setOpen] = useState(false);
 
+  const [invalidText, addConditionText, labelText] = useTranslations([
+    'invalidText',
+    'addConditionText',
+    label,
+  ]);
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
-        propertyLabel: translateWithId('invalid_text'),
+        propertyLabel: invalidText,
         isInvalid: true,
       };
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
-        : label;
+        : labelText;
     return {
       isInvalid: false,
-      propertyLabel: translateWithId(propertyId),
+      propertyLabel: propertyId,
     };
   };
   const { propertyLabel, isInvalid } = getPropertyDetails();
@@ -50,7 +55,7 @@ export const ConditionBuilderItem = ({
      * popoverToOpen hold the next popover to be opened if required
      */
     if (condition) {
-      let currentField = rest['data-name'];
+      const currentField = rest['data-name'];
       //if any condition is changed, state prop is triggered
       if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
@@ -58,7 +63,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'one_of'
+        condition.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         setOpen(false);
@@ -78,7 +83,8 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     //this will focus the first input field in the popover
     if (open && contentRef.current) {
-      const firstFocusableElement = contentRef.current.querySelector('input');
+      const firstFocusableElement =
+        contentRef.current.querySelector('input,textarea');
       if (firstFocusableElement) {
         firstFocusableElement.focus();
       }
@@ -96,7 +102,7 @@ export const ConditionBuilderItem = ({
       }}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? translateWithId('add_condition')}
+        label={propertyLabel ?? addConditionText}
         hideLabel={!label ? true : false}
         onClick={() => {
           children ? setOpen(!open) : null;
@@ -107,19 +113,24 @@ export const ConditionBuilderItem = ({
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
         isInvalid={isInvalid}
+        condition={condition}
         {...rest}
       />
 
-      <PopoverContent
-        className={`${blockClass}__item__content`}
-        role="dialog"
-        aria-label={`${title}`}
-      >
-        <Layer>
-          <h1 className={`${blockClass}__item__title`}>{title}</h1>
-          <div ref={contentRef}>{open && children}</div>
-        </Layer>
-      </PopoverContent>
+      {open && (
+        <PopoverContent
+          className={`${blockClass}__item__content`}
+          role="dialog"
+          aria-label={title}
+        >
+          <Layer>
+            <h1 className={`${blockClass}__item__title`}>{title}</h1>
+            <div ref={contentRef} className={`${blockClass}__popover-content`}>
+              {children}
+            </div>
+          </Layer>
+        </PopoverContent>
+      )}
     </Popover>
   );
 };

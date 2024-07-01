@@ -337,10 +337,20 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (open && position !== depth) {
         setTimeout(() => {
+          if (selectorPrimaryFocus) {
+            return specifiedElement?.focus();
+          }
           firstElement?.focus();
         }, 0);
       }
-    }, [position, depth, firstElement, open]);
+    }, [
+      position,
+      depth,
+      firstElement,
+      open,
+      specifiedElement,
+      selectorPrimaryFocus,
+    ]);
 
     useEffect(() => {
       const notify = () =>
@@ -561,8 +571,8 @@ TearsheetShell.displayName = componentName;
 export const portalType =
   typeof Element === 'undefined'
     ? PropTypes.object
-    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
-    : PropTypes.instanceOf(Element);
+    : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
+      PropTypes.instanceOf(Element);
 
 export const deprecatedProps = {
   /**

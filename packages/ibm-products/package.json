@@ -111,12 +111,12 @@
     "react-window": "^1.8.10"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.22.0",
-    "@carbon/layout": "^11.21.0",
-    "@carbon/motion": "^11.17.0",
-    "@carbon/react": "^1.55.0",
-    "@carbon/themes": "^11.34.0",
-    "@carbon/type": "^11.26.0",
+    "@carbon/grid": "^11.24.1",
+    "@carbon/layout": "^11.23.1",
+    "@carbon/motion": "^11.19.1",
+    "@carbon/react": "^1.60.3",
+    "@carbon/themes": "^11.37.1",
+    "@carbon/type": "^11.28.1",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
   }

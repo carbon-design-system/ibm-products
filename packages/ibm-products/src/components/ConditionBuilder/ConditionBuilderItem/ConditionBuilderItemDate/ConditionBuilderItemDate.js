@@ -49,6 +49,7 @@ export const ConditionBuilderItemDate = ({
           datePickerType={datePickerType}
           onClose={onCloseHandler}
           value={conditionState.value}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePickerStart"

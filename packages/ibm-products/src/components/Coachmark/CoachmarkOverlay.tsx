@@ -99,7 +99,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const coachmark = useCoachmark();
     const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
-    const isVisible = className && className.includes('is-visible');
+    const isVisible = className?.includes('is-visible');
 
     const handleKeyPress = (event) => {
       const { shiftKey, key } = event;
@@ -130,8 +130,8 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
 
     if (isBeacon || isDraggable) {
       if (coachmark.targetRect) {
-        // styledTune.left = coachmark.targetRect.x + window.scrollX;
-        // styledTune.top = coachmark.targetRect.y + window.scrollY;
+        styledTune.left = coachmark.targetRect.x + window.scrollX;
+        styledTune.top = coachmark.targetRect.y + window.scrollY;
       }
       if (styledTune.left && styledTune.top) {
         if (isBeacon) {
@@ -194,6 +194,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           blockClass,
           `${blockClass}--${kind}`,
           `${blockClass}__${theme}`,
+          (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
           a11yDragMode && `${blockClass}--is-dragmode`,
           className

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
@@ -40,25 +40,42 @@ const Anim1 = new URL('./assets/anim1.json', import.meta.url).pathname;
 const Anim2 = new URL('./assets/anim2.json', import.meta.url).pathname;
 
 const Template = (args) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    console.log(ref);
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
   const theme = getSelectedCarbonTheme();
   return (
-    <Coachmark
-      align={'bottom'}
-      positionTune={{ x: 0, y: 0 }}
-      target={<CoachmarkBeacon label="Show information" kind={'default'} />}
-      theme={theme}
-    >
-      <CoachmarkOverlayElements {...args}>
-        <CoachmarkOverlayElement
-          title="Example 1"
-          description="This is an example description."
-        />
-        <CoachmarkOverlayElement
-          title="Example 2"
-          description="This is another example description."
-        />
-      </CoachmarkOverlayElements>
-    </Coachmark>
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}
+        ref={ref}
+      >
+        <Coachmark
+          align={'bottom'}
+          positionTune={{ x: 0, y: 0 }}
+          target={<CoachmarkBeacon label="Show information" kind={'default'} />}
+          theme={theme}
+        >
+          <CoachmarkOverlayElements {...args}>
+            <CoachmarkOverlayElement
+              title="Example 1"
+              description="This is an example description."
+            />
+            <CoachmarkOverlayElement
+              title="Example 2"
+              description="This is another example description."
+            />
+          </CoachmarkOverlayElements>
+        </Coachmark>
+      </div>
+    </div>
   );
 };
 

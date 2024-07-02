@@ -31,11 +31,24 @@ $close-btn-class: #{$block-class}--close-btn;
 $draghandle-btn-class: #{$block-class}__handle;
 
 .#{$block-class} {
+  position: absolute;
+  z-index: 5901;
   width: 18rem;
   border-radius: $spacing-01;
   background-color: $background-inverse;
   color: $text-inverse;
+  $caret-height: calc(
+    $spacing-03 - $spacing-01
+  ); // from the "peak" of the pyramid to its "base"
+  $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
+  $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
+
   visibility: hidden;
+
+  &--tooltip {
+    position: initial;
+    transform: none !important;
+  }
 
   &--fixed {
     position: fixed;
@@ -58,6 +71,139 @@ $draghandle-btn-class: #{$block-class}__handle;
   &--is-visible {
     transform: translateY(0);
     visibility: visible;
+  }
+
+  // CARET STYLING
+  &__caret {
+    // background-color: this property is set in _coachmark-overlay-theme.scss
+    position: absolute;
+    z-index: 5902;
+    width: 0;
+    height: 0;
+    // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
+    border-right: $caret-center solid transparent;
+    border-bottom: solid $caret-center $background-inverse;
+    border-left: $caret-center solid transparent;
+  }
+
+  // OVERLAY AND CARET POSITIONING
+  &--top {
+    $horizontal-push: calc($distance-offset - $caret-center);
+    $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
+
+    transform: translate(-50%, $translate-y);
+
+    .#{$block-class}__caret {
+      left: calc(50% - $caret-center);
+      transform: rotate(180deg);
+    }
+
+    &-left {
+      transform: translate(calc(-1 * $distance-offset), $translate-y);
+      .#{$block-class}__caret {
+        left: $horizontal-push;
+        transform: rotate(180deg);
+      }
+    }
+
+    &-right {
+      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+      .#{$block-class}__caret {
+        right: $horizontal-push;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &--bottom {
+    $horizontal-push: calc($distance-offset - $caret-center);
+    $top: calc(-1 * $caret-height);
+    $translate-y: calc($distance-offset + $caret-height);
+
+    transform: translate(-50%, $translate-y);
+    .#{$block-class}__caret {
+      top: $top;
+      left: calc(50% - $caret-center);
+    }
+
+    &-left {
+      transform: translate(calc(-1 * $distance-offset), $translate-y);
+      .#{$block-class}__caret {
+        top: $top;
+        left: $horizontal-push;
+      }
+    }
+
+    &-right {
+      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+
+      .#{$block-class}__caret {
+        top: $top;
+        right: $horizontal-push;
+      }
+    }
+  }
+
+  &--left {
+    $right: calc(-1 * $caret-center * 1.5);
+    $translate-x: calc(-1 * (100% + $distance-offset + $caret-center));
+    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+    transform: translate($translate-x, -50%);
+    .#{$block-class}__caret {
+      top: calc(50% - ($caret-height * 0.5));
+      right: $right;
+      transform: rotate(90deg);
+    }
+
+    &-top {
+      transform: translate($translate-x, calc(-1 * $distance-offset));
+      .#{$block-class}__caret {
+        top: $vertical-push;
+        right: $right;
+        transform: rotate(90deg);
+      }
+    }
+
+    &-bottom {
+      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+      .#{$block-class}__caret {
+        right: $right;
+        bottom: $vertical-push;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &--right {
+    $left: calc(-1 * $caret-center * 1.5);
+    $translate-x: calc($distance-offset + $caret-center);
+    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+    transform: translate($translate-x, -50%);
+    .#{$block-class}__caret {
+      top: calc(50% - ($caret-height * 0.5));
+      left: $left;
+      transform: rotate(-90deg);
+    }
+
+    &-top {
+      transform: translate($translate-x, calc(-1 * $distance-offset));
+      .#{$block-class}__caret {
+        top: $vertical-push;
+        left: $left;
+        transform: rotate(-90deg);
+      }
+    }
+
+    &-bottom {
+      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+      .#{$block-class}__caret {
+        bottom: $vertical-push;
+        left: $left;
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   // ANIMATED MEDIA

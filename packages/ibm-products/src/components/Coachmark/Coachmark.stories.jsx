@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Crossroads } from '@carbon/react/icons';
@@ -87,16 +87,32 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
   const theme = getSelectedCarbonTheme();
   return (
-    <Coachmark {...args} theme={theme}>
-      <CoachmarkOverlayElements closeButtonLabel="Done">
-        <CoachmarkOverlayElement
-          title="Hello World"
-          description="this is a description test"
-        />
-      </CoachmarkOverlayElements>
-    </Coachmark>
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+        }}
+        ref={ref}
+      >
+        <Coachmark {...args} theme={theme}>
+          <CoachmarkOverlayElements closeButtonLabel="Done">
+            <CoachmarkOverlayElement
+              title="Hello World"
+              description="this is a description test"
+            />
+          </CoachmarkOverlayElements>
+        </Coachmark>
+      </div>
+    </div>
   );
 };
 

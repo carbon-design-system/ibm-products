@@ -99,6 +99,11 @@ interface DataSpreadsheetBodyProps {
   id?: number | string;
 
   /**
+   * Set current columns after drag drop
+   */
+  setCurrentColumns?: Dispatch<SetStateAction<object[]>>;
+
+  /**
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange?: () => void;
@@ -241,6 +246,7 @@ export const DataSpreadsheetBody = forwardRef(
       defaultEmptyRowCount,
       getTableBodyProps,
       headerGroups,
+      setCurrentColumns,
       id,
       onDataUpdate,
       renderRowHeader,
@@ -660,7 +666,17 @@ export const DataSpreadsheetBody = forwardRef(
         };
         buildEmptyRows();
       }
-    }, [rows, headerGroups, defaultEmptyRowCount, onDataUpdate]);
+      if (headerGroups?.[0] && typeof setCurrentColumns === 'function') {
+        const headers = headerGroups[0].headers;
+        setCurrentColumns(headers);
+      }
+    }, [
+      rows,
+      headerGroups,
+      defaultEmptyRowCount,
+      onDataUpdate,
+      setCurrentColumns,
+    ]);
 
     const RenderEmptyRows = () => {
       return <div />;
@@ -964,6 +980,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for containerHasFocus state value
    */
   setContainerHasFocus: PropTypes.func,
+
+  /**
+   * Set current columns after drag drop
+   */
+  setCurrentColumns: PropTypes.func,
 
   /**
    * Setter fn for currentMatcher state value

@@ -48,7 +48,7 @@ interface SearchBarProps extends PropsWithChildren {
   hideScopesLabel?: boolean;
 
   /** @type {string} The label text for the search text input. */
-  labelText?: string;
+  labelText: string;
 
   /** @type {Function} Function handler for when the user changes their query search. */
   onChange?: (event: any) => void;
@@ -212,7 +212,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
         <Search
           className={`${blockClass}__input`}
           closeButtonLabelText={clearButtonLabelText}
-          labelText={labelText || ''}
+          labelText={labelText}
           name="search-input"
           onChange={handleInputChange}
           placeholder={placeholderText}

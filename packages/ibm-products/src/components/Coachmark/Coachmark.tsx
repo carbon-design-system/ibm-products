@@ -24,6 +24,7 @@ import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
+/**@ts-ignore */
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 

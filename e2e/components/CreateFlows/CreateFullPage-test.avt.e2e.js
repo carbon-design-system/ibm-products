@@ -48,6 +48,8 @@ test.describe('CreateFullPage @avt', () => {
       await expect(isBackDisabled).toBe(true);
       await expect(isNextDisabled).toBe(true);
     } else {
+      await inputElement.fill('test');
+      await expect(inputElement).toHaveValue('test');
       await expect(isBackDisabled).toBe(false);
       await expect(isNextDisabled).toBe(false);
     }

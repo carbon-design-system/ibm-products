@@ -62,5 +62,7 @@ test.describe('CreateFullPage @avt', () => {
     );
     await expect(isNextDisabledNow).toBe(false);
     await expect(isBackDisabledNow).toBe(true);
+    const dataInvalidNow = await inputElement.getAttribute('data-invalid');
+    await expect(dataInvalidNow).toBe(null);
   });
 });

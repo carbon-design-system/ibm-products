@@ -27,6 +27,7 @@ import { moderate02 } from '@carbon/motion';
 import { useWebTerminal } from './hooks';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -112,10 +113,7 @@ export let WebTerminal = React.forwardRef(
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
     const [shouldRender, setRender] = useState(open);
-    const { matches: prefersReducedMotion } =
-      window && window.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     const webTerminalAnimationName = `${
       open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'
@@ -155,7 +153,7 @@ export let WebTerminal = React.forwardRef(
         If the user prefers reduced motion, we have to manually set render to false
         because onAnimationEnd will never be called.
       */
-      if (prefersReducedMotion) {
+      if (shouldReduceMotion) {
         setRender(false);
       }
       closeWebTerminal?.();
@@ -178,7 +176,7 @@ export let WebTerminal = React.forwardRef(
           },
         ])}
         style={{
-          animation: !prefersReducedMotion ? webTerminalAnimationName : '',
+          animation: !shouldReduceMotion ? webTerminalAnimationName : '',
         }}
         onAnimationEnd={onAnimationEnd}
       >

@@ -103,6 +103,18 @@ interface Labels {
   allPageRows?: object;
   allRows?: object;
 }
+interface ColumnLabels {
+  findColumnPlaceholderLabel?: string;
+  resetToDefaultLabel?: string;
+  customizeTearsheetHeadingLabel?: string;
+  primaryButtonTextLabel?: string;
+  secondaryButtonTextLabel?: string;
+  instructionsLabel?: string;
+  iconTooltipLabel?: string;
+  assistiveTextInstructionsLabel?: string;
+  assistiveTextDisabledInstructionsLabel?: string;
+  selectAllLabel?: string;
+}
 
 interface Section {
   categoryTitle?: string;
@@ -288,6 +300,13 @@ export interface DataGridState<T extends object = any>
   expandedRowIds?: object;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  customizeColumnsProps?: {
+    onSaveColumnPrefs?: (args) => void;
+    labels?: ColumnLabels;
+    isTearsheetOpen?: boolean;
+    setIsTearsheetOpen?: (args: boolean) => void;
+  };
+  CustomizeColumnsButton?: (args: any) => ReactNode;
   column?: DatagridColumn;
   expandedContentHeight?: number;
   onRowExpand?: (

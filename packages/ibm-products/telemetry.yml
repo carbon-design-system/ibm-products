@@ -49,6 +49,7 @@ collect:
         - closeIconDescription
         - collapseButtonLabel
         - collapsible
+        - column
         - columnInputPlaceholder
         - columns
         - condition
@@ -100,6 +101,7 @@ collect:
         - formDescription
         - formTitle
         - fullHeightDatagrid
+        - getActionsState
         - getConditionState
         - getFilterFlyoutProps
         - getOptions
@@ -121,6 +123,7 @@ collect:
         - handleResize
         - hasActions
         - hasCloseIcon
+        - hasCustomRowHeader
         - hasFieldset
         - headerGroups
         - HeaderRow
@@ -262,10 +265,13 @@ collect:
         - radio
         - reactTableFiltersState
         - renderIcon
+        - renderRowHeader
+        - renderRowHeaderDirection
         - resetToDefaultLabel
         - resizerAriaLabel
         - rightAlign
         - row
+        - rowActions
         - rows
         - rowSize
         - score
@@ -284,6 +290,7 @@ collect:
         - selectAllLabel
         - selectAllToggle
         - selected
+        - selectedHeaderReorderActive
         - selectedOption
         - selectionAreas
         - selectorPageContent
@@ -302,6 +309,7 @@ collect:
         - setMouseOverRowIndex
         - setMultiSelection
         - setPopoverOpen
+        - setSelectedHeaderReorderActive
         - setSelectionAreaData
         - setSelectionAreas
         - showAllTagsLabel
@@ -521,14 +529,14 @@ collect:
         - enableSubGroup
         # ConditionBuilderButton
         - hideLabel
+        - isInvalid
         - onBlur
         - onFocus
         - onMouseEnter
         - onMouseLeave
         - tooltipAlign
+        - wrapperClassName
         - wrapperProps
-        # ConditionBuilderContent
-        - getActionsState
         # ConditionBuilderItem
         - popOverClassName
         # ConditionConnector
@@ -749,7 +757,6 @@ collect:
         - warnText
         # OverflowCheckboxes
         - applyFilters
-        - column
         - components
         - filtersState
         - setFiltersState
@@ -780,6 +787,7 @@ collect:
         - inputInvalidText
         - inputLabelText
         - inputPlaceholderText
+        - primaryDangerDescription
         - resourceName
         - textConfirmation
         # RowSizeDropdown
@@ -1011,6 +1019,9 @@ collect:
         # General - primaryButtonPlacement
         - bottom
         - top
+        # General - renderRowHeaderDirection
+        - left
+        - right
         # General - rowSize
         - lg
         - md

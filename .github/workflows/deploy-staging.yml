@@ -23,8 +23,8 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - name: Build storybook
-        run: yarn storybook:build
+      - name: Build packages and storybook
+        run: yarn build
 
       # Deploy to staging Github Pages using `gh-pages` package
       - name: Deploy

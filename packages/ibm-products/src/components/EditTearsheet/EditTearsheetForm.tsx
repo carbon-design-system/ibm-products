@@ -5,11 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Grid } from '@carbon/react';
-import { FormContext, FormNumberContext } from './EditTearsheet';
+import {
+  FormContext,
+  FormContextType,
+  FormNumberContext,
+} from './EditTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { useRetrieveFormTitles } from '../../global/js/hooks/useRetrieveFormTitles';
@@ -21,6 +25,53 @@ const blockClass = `${pkg.prefix}--tearsheet-edit__form`;
 const defaults = {
   hasFieldset: true,
 };
+
+interface EditTearsheetFormBaseProps {
+  /**
+   * Content that shows in the tearsheet form
+   */
+  children?: ReactNode;
+
+  /**
+   * Sets an optional className to be added to the tearsheet form
+   */
+  className?: string;
+
+  /**
+   * Sets an optional description on the form component
+   */
+  description?: string;
+
+  /**
+   * This optional prop will render your form content inside of a fieldset html element
+   * and is defaulted to true.
+   * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's form content.
+   */
+  hasFieldset?: boolean;
+
+  /**
+   * Sets an optional subtitle on the form component
+   */
+  subtitle?: string;
+
+  /**
+   * Sets the title text for a tearsheet form
+   */
+  title: ReactNode;
+}
+
+type EditTearsheetFormFieldsetTypes =
+  | {
+      hasFieldset?: false;
+      fieldsetLegendText: string;
+    }
+  | {
+      hasFieldset: true;
+      fieldsetLegendText: string;
+    };
+
+type EditTearsheetFormProps = EditTearsheetFormBaseProps &
+  EditTearsheetFormFieldsetTypes;
 
 export let EditTearsheetForm = forwardRef(
   (
@@ -37,10 +88,10 @@ export let EditTearsheetForm = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: EditTearsheetFormProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const formContext = useContext(FormContext);
+    const formContext = useContext<FormContextType | null>(FormContext);
     const formNumber = useContext(FormNumberContext);
     useRetrieveFormTitles({ formContext, formNumber, title });
 
@@ -114,6 +165,7 @@ EditTearsheetForm.propTypes = {
    * You can set the `hasFieldset` prop to false if you have multiple fieldset elements or want to control the children of your Full Page's form content.
    * Otherwise, use CSS to hide/remove this label text.
    */
+  /**@ts-ignore */
   fieldsetLegendText: PropTypes.string.isRequired.if(
     ({ hasFieldset }) => !!hasFieldset
   ),
@@ -123,11 +175,13 @@ EditTearsheetForm.propTypes = {
    * and is defaulted to true.
    * You can set this prop to `false` if you have multiple fieldset elements or want to control the children of your Full Page's form content.
    */
+  /**@ts-ignore*/
   hasFieldset: PropTypes.bool,
 
   /**
    * Sets an optional subtitle on the form component
    */
+  /**@ts-ignore*/
   subtitle: PropTypes.string,
 
   /**

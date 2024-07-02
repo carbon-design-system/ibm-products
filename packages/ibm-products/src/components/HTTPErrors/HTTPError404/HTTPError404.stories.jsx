@@ -8,12 +8,17 @@
 import React from 'react';
 import { HTTPError404 } from '.';
 import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
+import { Annotation } from '../../../../../core/.storybook/Annotation';
+import styles from '../_storybook-styles.scss?inline';
+
+const storyClass = 'http-error-stories';
 
 export default {
   title: 'IBM Products/Patterns/HTTP errors/HTTPError404',
   component: HTTPError404,
   tags: ['autodocs'],
   parameters: {
+    styles,
     docs: {
       page: () => (
         <StoryDocsPage
@@ -31,7 +36,25 @@ export default {
 };
 
 const Template = (args) => {
-  return <HTTPError404 {...args} />;
+  return (
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version. Please migrate to{' '}
+          <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error-fullpageerror--docs">
+            FullPageError
+          </a>
+          .
+        </div>
+      }
+    >
+      <div className={`${storyClass}__viewport`}>
+        <HTTPError404 {...args} />
+      </div>
+    </Annotation>
+  );
 };
 
 /**

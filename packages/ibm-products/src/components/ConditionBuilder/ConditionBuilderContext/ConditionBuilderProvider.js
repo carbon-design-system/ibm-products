@@ -56,6 +56,7 @@ export const ConditionBuilderProvider = (props) => {
         popOverSearchThreshold: props.popOverSearchThreshold,
         getOptions: props.getOptions,
         variant: props.variant,
+        translateWithId: props.translateWithId,
       }}
     >
       {
@@ -90,26 +91,34 @@ ConditionBuilderProvider.propTypes = {
   inputConfig: PropTypes.shape({
     properties: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
+        id: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
         type: PropTypes.oneOf([
           'text',
+          'textarea',
           'number',
           'date',
           'option',
           'time',
           'custom',
-        ]),
+        ]).isRequired,
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
-              id: PropTypes.string,
-              label: PropTypes.string,
+              id: PropTypes.string.isRequired,
+              label: PropTypes.string.isRequired,
               icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
             })
           ),
-          includeSearch: PropTypes.bool,
+          component: PropTypes.func,
+          operators: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string.isRequired,
+              label: PropTypes.string.isRequired,
+            })
+          ),
+          long: PropTypes.bool,
         }),
       })
     ),
@@ -119,6 +128,13 @@ ConditionBuilderProvider.propTypes = {
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
 
+  /**
+   * Optional prop if you want to pass translation to the texts used . Otherwise this will the defined defaults.
+   * This callback function will receive the message id and you need to return the corresponding text for that id.
+   * The message key will be one of [   "ifText",   "addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",   "invalidNumberWarnText"
+]
+   */
+  translateWithId: PropTypes.func,
   /**
    * Provide the condition builder variant: sentence/ tree
    */

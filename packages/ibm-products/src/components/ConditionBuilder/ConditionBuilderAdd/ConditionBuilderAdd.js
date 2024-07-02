@@ -3,10 +3,8 @@ import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import PropTypes from 'prop-types';
-import {
-  blockClass,
-  translateWithId,
-} from '../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../utils/useTranslations';
 
 const ConditionBuilderAdd = ({
   className,
@@ -18,8 +16,15 @@ const ConditionBuilderAdd = ({
   hideConditionPreviewHandler,
   enableSubGroup,
   buttonLabel,
+  tabIndex,
 }) => {
   const [isAddSubgroup, setIsAddSubgroup] = useState(false);
+  const [addConditionText, addConditionRowText, addSubgroupText] =
+    useTranslations([
+      'addConditionText',
+      'addConditionRowText',
+      'addSubgroupText',
+    ]);
   const showAddSubGroup = () => {
     setIsAddSubgroup(true);
   };
@@ -50,16 +55,14 @@ const ConditionBuilderAdd = ({
   const wrapperProps = enableSubGroup
     ? {
         role: 'gridcell',
-        'aria-label': translateWithId('add-condition'),
+        // 'aria-label': addSubgroupText,
       }
     : {};
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
       role={!enableSubGroup ? 'gridcell' : 'none'}
-      aria-label={
-        !enableSubGroup ? translateWithId('add_condition_row') : undefined
-      }
+      aria-label={!enableSubGroup ? addConditionRowText : undefined}
       onMouseEnter={showAddSubGroup}
       onMouseLeave={hideAddSubGroup}
       onFocus={showAddSubGroup}
@@ -69,11 +72,12 @@ const ConditionBuilderAdd = ({
         renderIcon={AddAlt}
         onClick={onClickHandler}
         {...previewHandlers()}
+        wrapperProps={wrapperProps}
         className={`${blockClass}__add-button`}
         hideLabel
         data-name="addButton"
-        label={buttonLabel ?? translateWithId('add-condition')}
-        wrapperProps={wrapperProps}
+        label={buttonLabel ?? addConditionText}
+        tabIndex={tabIndex}
       />
       {enableSubGroup && (
         <ConditionBuilderButton
@@ -83,7 +87,7 @@ const ConditionBuilderAdd = ({
             `${blockClass}__add_condition_group ${blockClass}__gap-left`
           )}
           hideLabel
-          label={translateWithId('add-condition')}
+          label={addSubgroupText}
           wrapperProps={wrapperProps}
           wrapperClassName={cx(`${blockClass}__add_condition_group-wrapper`, {
             [`${blockClass}__add_condition_group-wrapper--show`]: isAddSubgroup,
@@ -133,4 +137,8 @@ ConditionBuilderAdd.propTypes = {
   /**
    * handler for hiding sub group preview
    */
+  /**
+   * Tab index
+   */
+  tabIndex: PropTypes.number,
 };

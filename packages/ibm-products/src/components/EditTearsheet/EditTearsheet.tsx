@@ -92,7 +92,8 @@ interface EditTearsheetProps extends PropsWithChildren {
   onFormChange?: (formIndex: number) => number;
 
   /**
-   * Specify a handler for submitting the tearsheet.
+   * Specify a handler for submitting the tearsheet. Throughout its execution
+   * the submit button will be disabled and include a loading indicator.
    */
   onRequestSubmit: () => void;
 

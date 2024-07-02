@@ -63,7 +63,7 @@ const customOperators = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater_equal',
+    id: 'greaterEqual',
   },
 ];
 
@@ -213,6 +213,13 @@ export const inputData = {
       label: 'ID',
       icon: Hashtag,
       type: 'text',
+      config: {},
+    },
+    {
+      id: 'id_long',
+      label: 'Id Long',
+      icon: Hashtag,
+      type: 'textarea',
       config: {},
     },
     {

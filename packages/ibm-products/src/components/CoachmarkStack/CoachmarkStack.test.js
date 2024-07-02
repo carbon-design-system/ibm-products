@@ -12,6 +12,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
+import userEvent from '@testing-library/user-event';
 
 const blockClass = `${pkg.prefix}--coachmark-stack`;
 const overlayBlockClass = `${pkg.prefix}--coachmark-overlay--stack`;
@@ -77,7 +78,7 @@ describe(componentName, () => {
     });
   });
 
-  it(`adds additional props to the containing node and renders children`, () => {
+  it(`adds additional props to the containing node and renders children`, async () => {
     renderCoachmarkStack({
       title: 'Coachmark Stack',
       description: 'Coachmark Stack Description',
@@ -86,6 +87,8 @@ describe(componentName, () => {
       'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
+    const stackButton = screen.getByRole('button', { name: 'Test Tagline' });
+    await act(() => userEvent.click(stackButton));
     screen.getByTestId(childDataTestId);
   });
 

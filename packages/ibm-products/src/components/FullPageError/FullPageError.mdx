@@ -1,5 +1,5 @@
 import { Story, Controls, Source, Canvas } from '@storybook/addon-docs';
-import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { CodesandboxLink, stackblitzHref } from '../../global/js/utils/story-helper';
 import { FullPageError } from '.';
 import * as stories from './FullPageError.stories';
 
@@ -12,6 +12,7 @@ import * as stories from './FullPageError.stories';
 - [Overview](#overview)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
+  - [Migrating from HTTP errors](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md#carbon-for-ibm-products-v2-migration-guide)
 
 ## Overview
 
@@ -23,7 +24,30 @@ level.
 
 ## Example usage
 
-{/* TODO: One example per designed use case. */}
+```jsx
+import { FullPageError } from "@carbon/ibm-products";
+import { Link } from "@carbon/react";
+
+export const Example = () => (
+  <FullPageError
+    kind="custom"
+    children={
+      <>
+        <Link href={"/"}>– Forwarding Link 1</Link>
+        <br />
+        <Link href={"/"}>– Forwarding Link 1</Link>
+      </>
+    }
+    title="[Error title]"
+    label="Error ###"
+    // cSpell:dictionaries lorem-ipsum
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+  />
+);
+
+export default Example;
+
+```
 
 ### Default
 
@@ -56,6 +80,7 @@ broken links.
 ## Code sample
 
 {/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
+<a href={stackblitzHref("FullPageError")}>Stackblitz example</a>
 
 ## Component API
 

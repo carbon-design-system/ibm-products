@@ -24,6 +24,7 @@ import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
 const overlayBlockClass = `${blockClass}-overlay`;
@@ -135,9 +136,6 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   ) => {
     const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
-    const portalNode = portalTarget
-      ? document.querySelector(portalTarget) ?? document.querySelector('body')
-      : document.querySelector('body');
     const [isOpen, setIsOpen] = useState(isStacked);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
@@ -146,6 +144,15 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     const backupRef = useRef();
     const _coachmarkRef = ref || backupRef;
     const _overlayRef = overlayRef || overlayBackupRef;
+
+    const portalNode = useRef<Element | DocumentFragment | null>(null);
+
+    useIsomorphicEffect(() => {
+      portalNode.current = portalTarget
+        ? document?.querySelector(portalTarget) ??
+          document?.querySelector('body')
+        : document?.querySelector('body');
+    }, [portalTarget]);
 
     const closeOverlay = () => {
       setIsOpen(false);
@@ -254,6 +261,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         >
           {target}
           {isOpen &&
+            portalNode?.current &&
             createPortal(
               <CoachmarkOverlay
                 ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
@@ -269,7 +277,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
                 {children}
               </CoachmarkOverlay>,
               // Default to `document.body` when `portalNode` is `null`
-              portalNode || document.body
+              portalNode?.current
             )}
         </div>
       </CoachmarkContext.Provider>
@@ -280,7 +288,8 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
 const overlayRefType =
   typeof HTMLElement === 'undefined'
     ? PropTypes.object
-    : PropTypes.instanceOf(HTMLElement);
+    : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
+      PropTypes.instanceOf(HTMLElement);
 
 // Return a placeholder if not released and not enabled by feature flag
 Coachmark = pkg.checkComponentEnabled(Coachmark, componentName);

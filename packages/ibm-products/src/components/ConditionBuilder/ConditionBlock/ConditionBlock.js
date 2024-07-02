@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import {
   operatorConfig,
   statementConfig,
-  translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
-
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderItemNumber } from '../ConditionBuilderItem/ConditionBuilderItemNumber/ConditionBuilderItemNumber';
@@ -21,6 +19,7 @@ import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuild
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
+import { useTranslations } from '../utils/useTranslations';
 
 /**
  * This component build each block of condition consisting of property, operator value and close button.
@@ -51,6 +50,20 @@ const ConditionBlock = (props) => {
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
+  const [
+    conditionRowText,
+    conditionText,
+    propertyText,
+    operatorText,
+    removeConditionText,
+  ] = useTranslations([
+    'conditionRowText',
+    'conditionText',
+    'propertyText',
+    'operatorText',
+    'removeConditionText',
+  ]);
+
   //filtering the current property to access its properties and config options
   const getCurrentConfig = (property) => {
     return (
@@ -70,6 +83,7 @@ const ConditionBlock = (props) => {
     time: ConditionBuilderItemTime,
     option: ItemOptionForValueField,
     custom: config?.component,
+    textarea: ConditionBuilderItemText,
   };
   const ItemComponent = property ? itemComponents[type] : null;
 
@@ -144,7 +158,7 @@ const ConditionBlock = (props) => {
         }
       )}
       role="row"
-      aria-label={translateWithId('condition_row')}
+      aria-label={conditionRowText}
       tabIndex={-1}
       {...getAriaAttributes()}
     >
@@ -161,7 +175,7 @@ const ConditionBlock = (props) => {
       {isStatement && (
         <ConditionBuilderItem
           label={group.statement}
-          title={translateWithId('condition')}
+          title={conditionText}
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
@@ -169,7 +183,7 @@ const ConditionBlock = (props) => {
           <ItemOption
             conditionState={{
               value: group.statement,
-              label: translateWithId('condition'),
+              label: conditionText,
             }}
             onChange={onStatementChangeHandler}
             config={{ options: statementConfig }}
@@ -181,7 +195,7 @@ const ConditionBlock = (props) => {
 
       <ConditionBuilderItem
         label={label}
-        title={translateWithId('property')}
+        title={propertyText}
         renderIcon={icon ?? null}
         className={`${blockClass}__property-field`}
         data-name="propertyField"
@@ -191,7 +205,7 @@ const ConditionBlock = (props) => {
         <ItemOption
           conditionState={{
             value: property,
-            label: translateWithId('property'),
+            label: propertyText,
           }}
           onChange={onPropertyChangeHandler}
           config={{ options: inputConfig.properties }}
@@ -200,7 +214,7 @@ const ConditionBlock = (props) => {
       {property && (
         <ConditionBuilderItem
           label={operator}
-          title={translateWithId('operator')}
+          title={operatorText}
           data-name="operatorField"
           condition={condition}
           type={type}
@@ -211,7 +225,7 @@ const ConditionBlock = (props) => {
             }}
             conditionState={{
               value: operator,
-              label: translateWithId('operator'),
+              label: operatorText,
             }}
             onChange={onOperatorChangeHandler}
           />
@@ -235,14 +249,15 @@ const ConditionBlock = (props) => {
             }}
             onChange={onValueChangeHandler}
             config={config}
+            type={type}
             data-name="valueField"
           />
         </ConditionBuilderItem>
       )}
-      <span role="gridcell" aria-label={translateWithId('remove_condition')}>
+      <span role="gridcell" aria-label={removeConditionText}>
         <ConditionBuilderButton
           hideLabel
-          label={translateWithId('remove_condition')}
+          label={removeConditionText}
           onClick={onRemove}
           onMouseEnter={handleShowDeletionPreview}
           onMouseLeave={handleHideDeletionPreview}

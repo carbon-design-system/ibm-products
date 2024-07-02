@@ -42,16 +42,25 @@ test.describe('CreateFullPage @avt', () => {
     const dataInvalid = await inputElement.getAttribute('data-invalid');
     const nextButtonElement = page.locator('button:has-text("Next")');
     const backButtonElement = page.locator('button:has-text("Back")');
-    const isNextDisabled = await nextButtonElement.isDisabled();
-    const isBackDisabled = await backButtonElement.isDisabled();
-    if (dataInvalid === 'true') {
-      await expect(isBackDisabled).toBe(true);
-      await expect(isNextDisabled).toBe(true);
-    } else {
-      await inputElement.fill('test');
-      await expect(inputElement).toHaveValue('test');
-      await expect(isBackDisabled).toBe(false);
-      await expect(isNextDisabled).toBe(false);
-    }
+    const isNextDisabled = await nextButtonElement.evaluate((button) =>
+      button.hasAttribute('disabled')
+    );
+    const isBackDisabled = await backButtonElement.evaluate((button) =>
+      button.hasAttribute('disabled')
+    );
+    await expect(dataInvalid).toBe('true');
+    await expect(isBackDisabled).toBe(true);
+    await expect(isNextDisabled).toBe(true);
+    await inputElement.click();
+    await inputElement.fill('test');
+    await expect(inputElement).toHaveValue('test');
+    const isNextDisabledNow = await nextButtonElement.evaluate((button) =>
+      button.hasAttribute('disabled')
+    );
+    const isBackDisabledNow = await backButtonElement.evaluate((button) =>
+      button.hasAttribute('disabled')
+    );
+    await expect(isNextDisabledNow).toBe(false);
+    await expect(isBackDisabledNow).toBe(true);
   });
 });

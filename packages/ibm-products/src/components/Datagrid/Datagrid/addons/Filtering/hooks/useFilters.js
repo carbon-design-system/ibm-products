@@ -40,6 +40,8 @@ import React, {
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
+import uuidv4 from '../../../../../../global/js/utils/uuidv4';
+
 import { FilterContext } from '../FilterProvider';
 import { handleCheckboxChange } from '../handleCheckboxChange';
 
@@ -430,12 +432,17 @@ const useFilters = ({
         break;
       }
     }
-
-    if (isPanel) {
-      return <Layer key={column}>{filter}</Layer>;
+    if (type === MULTISELECT) {
+      if (isPanel) {
+        return <Layer key={uuidv4()}>{filter}</Layer>;
+      }
+      return <React.Fragment key={uuidv4()}>{filter}</React.Fragment>;
+    } else {
+      if (isPanel) {
+        return <Layer key={column}>{filter}</Layer>;
+      }
+      return <React.Fragment key={column}>{filter}</React.Fragment>;
     }
-
-    return <React.Fragment key={column}>{filter}</React.Fragment>;
   };
 
   /** This useEffect will properly handle the previous filters when the panel closes

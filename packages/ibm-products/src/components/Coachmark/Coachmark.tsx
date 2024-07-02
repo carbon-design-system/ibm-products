@@ -270,6 +270,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
             <>
               {target}
               {isOpen &&
+                portalNode?.current &&
                 createPortal(
                   <CoachmarkOverlay
                     ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
@@ -285,7 +286,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
                     {children}
                   </CoachmarkOverlay>,
                   // Default to `document.body` when `portalNode` is `null`
-                  portalNode || document.body
+                  portalNode?.current
                 )}
             </>
           ) : (

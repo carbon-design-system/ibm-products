@@ -93,26 +93,32 @@ const Template = (args) => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
   const theme = getSelectedCarbonTheme();
-  return (
-    <div style={{ width: '5000px', height: '5000px' }}>
+  const content = (
+    <Coachmark {...args} theme={theme}>
+      <CoachmarkOverlayElements closeButtonLabel="Done">
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="this is a description test"
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
+  );
+
+  return args.overlayKind !== 'floating' ? (
+    <div style={{ width: '4000px', height: '2000px' }}>
       <div
         style={{
           position: 'absolute',
-          top: '2500px',
-          left: '2500px',
+          top: '1000px',
+          left: '2000px',
         }}
         ref={ref}
       >
-        <Coachmark {...args} theme={theme}>
-          <CoachmarkOverlayElements closeButtonLabel="Done">
-            <CoachmarkOverlayElement
-              title="Hello World"
-              description="this is a description test"
-            />
-          </CoachmarkOverlayElements>
-        </Coachmark>
+        {content}
       </div>
     </div>
+  ) : (
+    content
   );
 };
 

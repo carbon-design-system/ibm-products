@@ -56,6 +56,10 @@ interface CoachmarkProps {
     | 'top'
     | 'top-left'
     | 'top-right';
+  /**
+   * Auto aligns the coachmark based on screen boundaries
+   * Applies only to Tooltip Coachmarks.
+   */
   autoAlign?: boolean;
   /**
    * Coachmark should use a single CoachmarkOverlayElements component as a child.
@@ -341,6 +345,10 @@ Coachmark.propTypes = {
     'top-left',
     'top-right',
   ]),
+  /**
+   * Auto aligns the coachmark based on screen boundaries
+   * Applies only to Tooltip Coachmarks.
+   */
   autoAlign: PropTypes.bool,
 
   /**

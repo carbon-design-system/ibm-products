@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
@@ -54,38 +54,21 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    console.log(ref);
-    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
-  });
   const theme = getSelectedCarbonTheme();
   return (
-    <div style={{ width: '5000px', height: '5000px' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: '2500px',
-          left: '2500px',
-        }}
-        ref={ref}
-      >
-        <Coachmark
-          align={'bottom'}
-          positionTune={{ x: 0, y: 0 }}
-          target={<CoachmarkBeacon label="Show information" kind={'default'} />}
-          theme={theme}
-        >
-          <CoachmarkOverlayElements {...args}>
-            <CoachmarkOverlayElement
-              title={'Hello World'}
-              description={'this is a description test'}
-            />
-          </CoachmarkOverlayElements>
-        </Coachmark>
-      </div>
-    </div>
+    <Coachmark
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={<CoachmarkBeacon label="Show information" kind={'default'} />}
+      theme={theme}
+    >
+      <CoachmarkOverlayElements {...args}>
+        <CoachmarkOverlayElement
+          title={'Hello World'}
+          description={'this is a description test'}
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
   );
 };
 

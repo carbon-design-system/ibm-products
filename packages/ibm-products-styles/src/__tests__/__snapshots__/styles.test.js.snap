@@ -2282,6 +2282,10 @@ p.c4p--about-modal__copyright-text:first-child {
   border-top: 1px solid var(--cds-layer-accent-01, #e0e0e0);
 }
 
+.c4p--create-full-page__header button:first-of-type {
+  background: none;
+}
+
 /* One or two values
   * - width (first value)
   * - min-width (optional second value)
@@ -5002,6 +5006,18 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--datagrid .c4p--inline-edit__after-input-elements {
   display: flex;
   align-items: center;
+}
+
+.c4p--datagrid__inline-edit--outer-cell-checkbox-focus .cds--checkbox-label::before {
+  outline: 0.125rem solid var(--cds-focus, #0f62fe);
+  outline-offset: 1px;
+}
+
+.c4p--datagrid__inline-edit--outer-cell-checkbox {
+  display: flex;
+  height: -webkit-fill-available;
+  justify-content: center;
+  padding-inline: 1rem;
 }
 
 .c4p--datagrid__static--outer-cell {

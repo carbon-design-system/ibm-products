@@ -8656,7 +8656,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--tag-set-modal.c4p--tag-set-modal .c4p--tag-set-modal__fade::after {
   position: absolute;
-  top: calc(-1 * 5rem);
+  top: calc(-1 * 2rem);
   left: 0;
   width: 100%;
   height: 2rem;

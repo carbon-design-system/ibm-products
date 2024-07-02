@@ -68,7 +68,9 @@ export const MultiFormEditTearsheet = ({
     action('onClose')();
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    //emulate submit processing time
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setOpen(false);
     action('onSubmit')();
   };

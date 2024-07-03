@@ -17,6 +17,7 @@ import { DefinitionTooltip } from '@carbon/react';
 import {
   StringFormatterAlignment,
   deprecated_StringFormatterAlignment,
+  propMappingFunction,
 } from './utils/enums';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 
@@ -95,10 +96,11 @@ StringFormatter.validateAlignment = () => (props, propName, componentName) => {
     deprecated_StringFormatterAlignment
   );
   if (deprecatedAlignValues.includes(prop)) {
+    const mappedNewProp = propMappingFunction(prop);
     console.warn(
-      `"${prop}" is a deprecated value for the "${name}" prop on "${componentName}" component. Use one of ${Object.values(
+      `"${prop}" is a deprecated value for the "${propName}" prop on the "${componentName}" component. Use "${mappedNewProp}" instead. Allowable values are: ${Object.values(
         StringFormatterAlignment
-      ).join(', ')}`
+      ).join(', ')}.`
     );
   }
 };

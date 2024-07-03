@@ -27,3 +27,25 @@ export const StringFormatterAlignment = {
   RIGHT_END: 'right-end',
   RIGHT_START: 'right-start',
 };
+
+export const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    [deprecated_StringFormatterAlignment.TOP_LEFT]:
+      StringFormatterAlignment.TOP_START,
+    [deprecated_StringFormatterAlignment.TOP_RIGHT]:
+      StringFormatterAlignment.TOP_END,
+    [deprecated_StringFormatterAlignment.BOTTOM_LEFT]:
+      StringFormatterAlignment.BOTTOM_START,
+    [deprecated_StringFormatterAlignment.BOTTOM_RIGHT]:
+      StringFormatterAlignment.BOTTOM_END,
+    [deprecated_StringFormatterAlignment.LEFT_BOTTOM]:
+      StringFormatterAlignment.LEFT_END,
+    [deprecated_StringFormatterAlignment.LEFT_TOP]:
+      StringFormatterAlignment.LEFT_START,
+    [deprecated_StringFormatterAlignment.RIGHT_BOTTOM]:
+      StringFormatterAlignment.RIGHT_END,
+    [deprecated_StringFormatterAlignment.RIGHT_START]:
+      StringFormatterAlignment.RIGHT_START,
+  };
+  return mapping[deprecatedValue];
+};

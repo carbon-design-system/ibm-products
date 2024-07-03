@@ -160,8 +160,15 @@ FlyoutBatch.args = {
   emptyStateDescription:
     'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
   filterProps: {
-    variation: 'panel',
-    sections: [],
+    variation: 'flyout',
+    updateMethod: 'batch',
+    primaryActionLabel: 'Apply',
+    secondaryActionLabel: 'Cancel',
+    flyoutIconDescription: 'Open filters',
+    onFlyoutOpen: action('onFlyoutOpen'),
+    onFlyoutClose: action('onFlyoutClose'),
+    filters,
+    renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   },
 };
 

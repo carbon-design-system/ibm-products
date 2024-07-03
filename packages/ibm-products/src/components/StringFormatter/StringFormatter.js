@@ -14,14 +14,18 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 import { DefinitionTooltip } from '@carbon/react';
-import { StringFormatterAlignment } from './utils/enums';
+import {
+  StringFormatterAlignment,
+  deprecated_StringFormatterAlignment,
+} from './utils/enums';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = 'StringFormatter';
 
 const defaults = {
   lines: 1,
-  tooltipDirection: StringFormatterAlignment.BOTTOM_LEFT,
+  tooltipDirection: StringFormatterAlignment.BOTTOM_START,
   truncate: false,
   width: null,
 };
@@ -85,6 +89,20 @@ StringFormatter = pkg.checkComponentEnabled(StringFormatter, componentName);
 
 StringFormatter.displayName = componentName;
 
+StringFormatter.validateAlignment = () => (props, propName, componentName) => {
+  const prop = props[propName];
+  const deprecatedAlignValues = Object.values(
+    deprecated_StringFormatterAlignment
+  );
+  if (deprecatedAlignValues.includes(prop)) {
+    console.warn(
+      `"${prop}" is a deprecated value for the "${name}" prop on "${componentName}" component. Use one of ${Object.values(
+        StringFormatterAlignment
+      ).join(', ')}`
+    );
+  }
+};
+
 StringFormatter.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node.
@@ -93,7 +111,14 @@ StringFormatter.propTypes = {
   /** Number of lines to clamp value. */
   lines: PropTypes.number,
   /** Specify the direction of the tooltip. Can be either top or bottom. */
-  tooltipDirection: PropTypes.oneOf(Object.values(StringFormatterAlignment)),
+  // tooltipDirection: PropTypes.oneOf(Object.values(StringFormatterAlignment)),
+  tooltipDirection: allPropTypes([
+    StringFormatter.validateAlignment(),
+    PropTypes.oneOf(
+      Object.values(deprecated_StringFormatterAlignment),
+      Object.values(StringFormatterAlignment)
+    ),
+  ]),
   /** Whether or not the value should be truncated. */
   truncate: PropTypes.bool,
   /** Value to format. */

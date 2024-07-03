@@ -21,20 +21,29 @@ export const ConditionBuilderItem = ({
   condition,
   popOverClassName,
   config,
+  renderChildren,
   ...rest
 }) => {
   const contentRef = useRef(null);
+  const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [invalidText, addConditionText, labelText] = useTranslations([
-    'invalidText',
-    'addConditionText',
-    label,
-  ]);
+  const [invalidText, addConditionText, labelText, invalidDateText] =
+    useTranslations([
+      'invalidText',
+      'addConditionText',
+      label,
+      'invalidDateText',
+    ]);
   const getPropertyDetails = () => {
     if (label === 'INVALID') {
       return {
         propertyLabel: invalidText,
+        isInvalid: true,
+      };
+    } else if (label === 'INVALID_DATE') {
+      return {
+        propertyLabel: invalidDateText,
         isInvalid: true,
       };
     }
@@ -42,6 +51,7 @@ export const ConditionBuilderItem = ({
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
         : labelText;
+
     return {
       isInvalid: false,
       propertyLabel: propertyId,
@@ -59,23 +69,23 @@ export const ConditionBuilderItem = ({
       //if any condition is changed, state prop is triggered
       if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
-        setOpen(false);
+        closePopover();
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
         condition.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
-        setOpen(false);
+        closePopover();
       }
       if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
-        setOpen(true);
+        openPopOver();
       }
     } else {
       // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
       //close popOver when statement is changed.
-      setOpen(false);
+      closePopover();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [condition, label]);
@@ -91,22 +101,23 @@ export const ConditionBuilderItem = ({
     }
   }, [contentRef, open]);
 
+  const closePopover = () => setOpen(false);
+  const openPopOver = () => setOpen(true);
+  const togglePopover = () => setOpen(!open);
+
   return (
     <Popover
       open={open}
       isTabTip
       role="gridcell"
       className={popOverClassName}
-      onRequestClose={() => {
-        setOpen(false);
-      }}
+      ref={popoverRef}
+      onRequestClose={closePopover}
     >
       <ConditionBuilderButton
         label={propertyLabel ?? addConditionText}
         hideLabel={!label ? true : false}
-        onClick={() => {
-          children ? setOpen(!open) : null;
-        }}
+        onClick={togglePopover}
         className={className}
         aria-haspopup
         aria-expanded={open}
@@ -126,7 +137,7 @@ export const ConditionBuilderItem = ({
           <Layer>
             <h1 className={`${blockClass}__item__title`}>{title}</h1>
             <div ref={contentRef} className={`${blockClass}__popover-content`}>
-              {children}
+              {renderChildren ? renderChildren(popoverRef) : children}
             </div>
           </Layer>
         </PopoverContent>
@@ -168,6 +179,11 @@ ConditionBuilderItem.propTypes = {
    * class name for popover
    */
   popOverClassName: PropTypes.string,
+
+  /**
+   * callback prop that returns the jsx for children
+   */
+  renderChildren: PropTypes.func,
 
   /**
    * Optional prop to allow overriding the icon rendering.

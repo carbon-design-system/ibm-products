@@ -34,5 +34,6 @@ export const translationsObject = {
   removeActionText: 'Remove Action',
   addActionText: 'Add action',
   invalidText: 'Incomplete',
+  invalidDateText: 'Invalid Date',
   invalidNumberWarnText: 'Invalid number, must be 0 or greater',
 };

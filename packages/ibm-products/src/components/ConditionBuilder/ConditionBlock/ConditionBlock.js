@@ -140,6 +140,22 @@ const ConditionBlock = (props) => {
         }
       : {};
   };
+
+  const renderChildren = (popoverRef) => {
+    return (
+      <ItemComponent
+        conditionState={{
+          property,
+          operator,
+          value,
+        }}
+        onChange={onValueChangeHandler}
+        config={config}
+        data-name="valueField"
+        parentRef={popoverRef}
+      />
+    );
+  };
   return (
     <div
       className={cx(
@@ -159,7 +175,6 @@ const ConditionBlock = (props) => {
       )}
       role="row"
       aria-label={conditionRowText}
-      tabIndex={-1}
       {...getAriaAttributes()}
     >
       {conjunction ? (
@@ -240,19 +255,8 @@ const ConditionBlock = (props) => {
           data-name="valueField"
           condition={condition}
           config={config}
-        >
-          <ItemComponent
-            conditionState={{
-              property,
-              operator,
-              value,
-            }}
-            onChange={onValueChangeHandler}
-            config={config}
-            type={type}
-            data-name="valueField"
-          />
-        </ConditionBuilderItem>
+          renderChildren={renderChildren}
+        />
       )}
       <span role="gridcell" aria-label={removeConditionText}>
         <ConditionBuilderButton

@@ -111,7 +111,6 @@ StringFormatter.propTypes = {
   /** Number of lines to clamp value. */
   lines: PropTypes.number,
   /** Specify the direction of the tooltip. Can be either top or bottom. */
-  // tooltipDirection: PropTypes.oneOf(Object.values(StringFormatterAlignment)),
   tooltipDirection: allPropTypes([
     StringFormatter.validateAlignment(),
     PropTypes.oneOf(

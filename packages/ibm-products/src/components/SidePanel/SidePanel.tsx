@@ -704,7 +704,6 @@ export let SidePanel = React.forwardRef(
           {/* back button */}
           {currentStep > 0 && (
             <Button
-              aria-label={navigationBackIconDescription}
               kind="ghost"
               size={slugCloseSize}
               disabled={false}

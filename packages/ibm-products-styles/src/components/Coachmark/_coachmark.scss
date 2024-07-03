@@ -8,6 +8,7 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
+@use '@carbon/styles/scss/config';
 
 @use './coachmark-dragbar';
 @use './coachmark-header';
@@ -23,8 +24,16 @@
 // TODO: @use(s) of IBM Products component styles used by Coachmark
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-//$block-class: #{c4p-settings.$pkg-prefix}--coachmark;
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark;
 
 // .#{$block-class} {
 //   // TODO: Styles.
 // }
+
+.#{$block-class} > .#{config.$prefix}--popover-container {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  transform: translate(-50%, 50%);
+}

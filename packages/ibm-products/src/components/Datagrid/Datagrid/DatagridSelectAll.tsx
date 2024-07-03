@@ -15,10 +15,9 @@ import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SelectAll = (datagridState: DataGridState) => {
-  const [windowSize, setWindowSize] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : ''
-  );
+  const [windowSize, setWindowSize] = useState<number>();
   useLayoutEffect(() => {
+    setWindowSize(window.innerWidth);
     /* istanbul ignore next */
     function updateSize() {
       setWindowSize(window.innerWidth);

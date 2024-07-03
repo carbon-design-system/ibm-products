@@ -7,18 +7,15 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  translateWithId,
-} from '../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
-//import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
 import { Heading } from '@carbon/react';
 import { Section } from '@carbon/react';
 import GroupConnector from '../ConditionBuilderConnector/GroupConnector';
 import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
+import { useTranslations } from '../utils/useTranslations';
 
 const ConditionBuilderContent = ({
   startConditionLabel,
@@ -35,6 +32,8 @@ const ConditionBuilderContent = ({
     useState(false);
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
+
+  const [addConditionGroupText] = useTranslations(['addConditionGroupText']);
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -107,11 +106,12 @@ const ConditionBuilderContent = ({
       groups: [...rootState.groups, newGroup],
     });
   };
+
   return (
     <>
       {!isConditionBuilderActive && (
         <Button
-          className={`${blockClass}__add_condition-button`}
+          className={`${blockClass}__addConditionText-button`}
           renderIcon={(props) => <Add size={16} {...props} />}
           iconDescription={startConditionLabel}
           kind="ghost"
@@ -172,19 +172,22 @@ const ConditionBuilderContent = ({
                     onMouseLeave={() => {
                       setShowConditionGroupPreview(false);
                     }}
-                    className={`${blockClass}__add_condition_group `}
+                    className={`${blockClass}__addConditionGroupText `}
                     hideLabel
-                    label={translateWithId('add_condition_group')}
+                    label={addConditionGroupText}
                     wrapperProps={{
                       role: 'gridcell',
-                      'aria-label': translateWithId('add_condition_group'),
+                      'aria-label': addConditionGroupText,
                     }}
                   />
                 }
               </div>
             )}
             {showConditionGroupPreview && (
-              <ConditionPreview previewType="newGroup" />
+              <ConditionPreview
+                previewType="newGroup"
+                group={{ groupOperator: rootState.operator }}
+              />
             )}
           </>
         )}
@@ -193,6 +196,8 @@ const ConditionBuilderContent = ({
         <ConditionBuilderActions
           actions={actions}
           className={`${blockClass}__actions-container`}
+          variant={variant}
+          conditionBuilderRef={conditionBuilderRef}
         />
       )}
     </>

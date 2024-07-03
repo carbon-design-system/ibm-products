@@ -19,7 +19,6 @@ import {
   sampleDataStructure_tree,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
 export default {
   title: 'IBM Products/Components/ConditionBuilder',
   component: ConditionBuilder,
@@ -196,13 +195,23 @@ const actions = [
   },
   { id: uuidv4(), label: 'Proceed item to checkout' },
 ];
+
+const translateWithId = (key) => {
+  const translationsObject = {
+    ifText: 'if',
+    addConditionText: 'Add condition',
+    addConditionGroupText: 'Add condition group',
+    addSubgroupText: 'Add subgroup',
+  };
+
+  return translationsObject[key];
+};
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 
 const ConditionBuilderTemplate = (args) => {
   const ref = useRef();
-  const [open, setOpen] = useState(false);
   return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
 };
 
@@ -233,6 +242,7 @@ conditionBuilderWithInitialState.args = {
   initialState: sampleDataStructure_sentence,
   inputConfig: inputData,
   variant: 'sentence',
+  translateWithId: translateWithId,
 };
 
 export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
@@ -241,7 +251,9 @@ conditionBuilderWithActions.args = {
   inputConfig: inputData,
   variant: 'sentence',
   actions: actions,
-  getActionsState: (actionState) => {},
+  getActionsState: (actionState) => {
+    console.log('action state', actionState);
+  },
 };
 
 export const conditionBuilderTree = ConditionBuilderTemplate.bind({});

@@ -1,0 +1,1 @@
+var e={viewport:"reset",viewportRotated:!1};const t=Object.freeze(Object.defineProperty({__proto__:null,globals:e},Symbol.toStringTag,{value:"Module"})),o=Object.freeze(Object.defineProperty({__proto__:null,globals:e},Symbol.toStringTag,{value:"Module"}));export{o as a,t as p};

@@ -1,0 +1,1 @@
+import{g as v}from"./_commonjsHelpers-BosuxZz1.js";import{t as s}from"./toNumber-DNhxxDfe.js";function c(t,a,i){return t===t&&(i!==void 0&&(t=t<=i?t:i),a!==void 0&&(t=t>=a?t:a)),t}var o=c,d=o,f=s;function m(t,a,i){return i===void 0&&(i=a,a=void 0),i!==void 0&&(i=f(i),i=i===i?i:0),a!==void 0&&(a=f(a),a=a===a?a:0),d(f(t),a,i)}var C=m;const x=v(C);export{x as c};

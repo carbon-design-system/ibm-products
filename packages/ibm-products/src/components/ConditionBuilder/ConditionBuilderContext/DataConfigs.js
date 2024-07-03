@@ -118,11 +118,19 @@ export const valueRenderers = {
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
-      const start = value?.[0] ? formatDate(new Date(value[0])) : '';
-      const end = value?.[1] ? formatDate(new Date(value[1])) : '';
+      const start =
+        value?.[0] && !isNaN(new Date(value[0]))
+          ? formatDate(new Date(value[0]))
+          : '';
+      const end =
+        value?.[1] && !isNaN(new Date(value[1]))
+          ? formatDate(new Date(value[1]))
+          : '';
       return `${start} To ${end}`;
+    } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
+      return formatDate(new Date(value[0]));
     } else {
-      return value && new Date(value) ? formatDate(new Date(value)) : value;
+      return value;
     }
   },
   custom: (value) => value,

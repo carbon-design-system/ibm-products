@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -50,13 +50,19 @@ export const NavItem = ({
   // Collect any other property values passed in.
   ...rest
 }) => {
+  const [hrefHasDifferentHost, setHrefHasDifferentHost] = useState(false);
+  useEffect(() => {
+    if (href.indexOf(window.location.host) === -1) {
+      setHrefHasDifferentHost(true);
+    }
+  }, [href]);
+
   const internalId = useRef(uuidv4());
   const instanceId = `${blockClass}__${internalId.current}`;
   const navItemId = id || instanceId;
 
   const isAbsoluteLink = new RegExp('^([a-z]+://|//)', 'i');
-  const externalLink =
-    isAbsoluteLink.test(href) && href.indexOf(window.location.host) === -1;
+  const externalLink = isAbsoluteLink.test(href) && hrefHasDifferentHost;
   const linkClassName = `${blockClass}__link`;
 
   const handleDisabled = (action, defaultValue = null) => {

@@ -130,7 +130,7 @@ export const sampleDataStructure_sentence = {
       conditions: [
         {
           property: 'region',
-          operator: 'one_of',
+          operator: 'oneOf',
           value: [
             {
               label: 'Africa',
@@ -152,7 +152,7 @@ export const sampleDataStructure_sentence = {
         {
           property: 'price',
           operator: 'is',
-          value: '3',
+          value: '3 Dollars',
           id: uuidv4(),
         },
       ],

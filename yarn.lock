@@ -11751,6 +11751,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-ssr-friendly@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "eslint-plugin-ssr-friendly@npm:1.3.0"
+  dependencies:
+    globals: "npm:^13.8.0"
+  peerDependencies:
+    eslint: ">=0.8.0"
+  checksum: d93b87fa3e4a816931374edb69da030a54a9673f2ed3bd33110ed0c51b689ffc9d817964dc1b86467b4bbd8ff0bf15d13b43e57d71878d7b818b52eb14074aaf
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-storybook@npm:^0.6.0":
   version: 0.6.15
   resolution: "eslint-plugin-storybook@npm:0.6.15"
@@ -13176,7 +13187,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^13.19.0, globals@npm:^13.20.0":
+"globals@npm:^13.19.0, globals@npm:^13.20.0, globals@npm:^13.8.0":
   version: 13.24.0
   resolution: "globals@npm:13.24.0"
   dependencies:
@@ -13760,6 +13771,7 @@ __metadata:
     cspell: "npm:^8.3.2"
     eslint: "npm:^8.56.0"
     eslint-config-carbon: "npm:^2.20.0"
+    eslint-plugin-ssr-friendly: "npm:^1.3.0"
     gitignore-to-glob: "npm:^0.3.0"
     globby: "npm:^14.0.0"
     husky: "npm:^9.0.5"

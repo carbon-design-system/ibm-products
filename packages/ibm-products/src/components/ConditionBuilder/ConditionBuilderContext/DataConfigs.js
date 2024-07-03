@@ -1,14 +1,15 @@
 import { pkg } from '../../../settings';
-import { translationsObject } from './translationObject';
 
 export const statementConfig = [
   {
     label: 'if',
     id: 'if',
+    connector: 'and',
   },
   {
     label: 'excl.if',
     id: 'excl_if',
+    connector: 'or',
   },
 ];
 
@@ -42,7 +43,7 @@ export const operatorConfig = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater_equal',
+    id: 'greaterEqual',
     type: 'number',
   },
   {
@@ -52,27 +53,27 @@ export const operatorConfig = [
   },
   {
     label: 'is lower than or equal to',
-    id: 'lower_equal',
+    id: 'lowerEqual',
     type: 'number',
   },
   {
     label: 'starts with',
-    id: 'starts_with',
-    type: 'text',
+    id: 'startsWith',
+    type: 'text,textarea',
   },
   {
     label: 'ends with',
-    id: 'ends_with',
-    type: 'text',
+    id: 'endsWith',
+    type: 'text,textarea',
   },
   {
     label: 'contains',
     id: 'contains',
-    type: 'text',
+    type: 'text,textarea',
   },
   {
     label: 'is one of',
-    id: 'one_of',
+    id: 'oneOf',
     type: 'option',
   },
   {
@@ -100,13 +101,11 @@ const formatDate = (date) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
-export const translateWithId = (key) => {
-  return translationsObjectCurrent[key] ?? key;
-};
+//const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
 
 export const valueRenderers = {
   text: (val) => val,
+  textarea: (val) => val,
   time: (val) => val,
   number: (val) => val,
   option: (value) => {
@@ -119,11 +118,19 @@ export const valueRenderers = {
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
-      const start = value?.[0] ? formatDate(new Date(value[0])) : '';
-      const end = value?.[1] ? formatDate(new Date(value[1])) : '';
+      const start =
+        value?.[0] && !isNaN(new Date(value[0]))
+          ? formatDate(new Date(value[0]))
+          : '';
+      const end =
+        value?.[1] && !isNaN(new Date(value[1]))
+          ? formatDate(new Date(value[1]))
+          : '';
       return `${start} To ${end}`;
+    } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
+      return formatDate(new Date(value[0]));
     } else {
-      return value && new Date(value) ? formatDate(new Date(value)) : value;
+      return value;
     }
   },
   custom: (value) => value,

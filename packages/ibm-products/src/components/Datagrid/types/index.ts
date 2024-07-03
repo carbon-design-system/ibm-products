@@ -32,6 +32,7 @@ import {
   UseFiltersInstanceProps,
   UsePaginationInstanceProps,
   UseResizeColumnsColumnProps,
+  UseResizeColumnsOptions,
   UseResizeColumnsState,
   UseRowSelectInstanceProps,
   UseRowSelectRowProps,
@@ -150,7 +151,9 @@ export interface DatagridTableHooks<T extends object = any>
 
 export interface DatagridColumn<T extends object = any>
   extends ColumnInstance<T>,
-    UseSortByOptions<T> {
+    UseSortByOptions<T>,
+    Partial<UseResizeColumnsColumnProps<T>>,
+    UseResizeColumnsOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
   rightAlignedColumn?: boolean;
@@ -188,11 +191,7 @@ export interface DataGridHeaderGroup<T extends object = any>
   extends HeaderGroup<T>,
     UseResizeColumnsColumnProps<T> {}
 
-export interface TableProps {
-  className?: string;
-  role?: string;
-  style?: CSSStyleDeclaration;
-}
+export interface DataGridTableProps extends TableCommonProps {}
 
 interface DataGridTableState
   extends UseResizeColumnsState<any>,
@@ -211,6 +210,7 @@ export interface DataGridTableInstance<T extends object = any>
       toggleAllRowsLabel?: string;
     };
   };
+  withSelectRows?: boolean;
 }
 
 export interface RowAction {
@@ -325,6 +325,12 @@ export interface DataGridState<T extends object = any>
     event: React.MouseEvent<HTMLElement>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
+}
+
+export interface DataGridData {
+  instance?: DataGridTableInstance;
+  column?: DatagridColumn;
+  cell?: DataGridCell;
 }
 
 // DatagridHeaderRow related types

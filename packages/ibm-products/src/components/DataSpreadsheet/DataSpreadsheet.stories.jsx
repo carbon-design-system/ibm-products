@@ -21,8 +21,8 @@ export default {
     onActiveCellChange: {
       action: 'active cell change',
     },
-    afterColumnDragged: {
-      action: 'afterColumnDragged',
+    onColDrag: {
+      action: 'on column drag',
     },
     onSelectionAreaChange: {
       action: 'selection area change',
@@ -256,7 +256,7 @@ const dragDropCallback = ({ ...args }) => {
       columns={columns}
       data={data}
       onDataUpdate={setData}
-      afterColumnDragged={onColumnDragDrop}
+      onColDrag={onColumnDragDrop}
       id="spreadsheet--id"
       {...args}
     />

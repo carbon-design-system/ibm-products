@@ -67,7 +67,7 @@ const defaults = {
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
   onDataUpdate: Object.freeze(() => {}),
-  afterColumnDragged: Object.freeze(() => {}),
+  onColDrag: Object.freeze(() => {}),
   onActiveCellChange: Object.freeze(() => {}),
   onSelectionAreaChange: Object.freeze(() => {}),
   theme: 'light',
@@ -122,7 +122,7 @@ interface DataSpreadsheetProps {
   /**
    * Callback for columns after being dragged
    */
-  afterColumnDragged?: ({ ...args }) => void;
+  onColDrag?: ({ ...args }) => void;
 
   /**
    * The setter fn for the data prop
@@ -186,7 +186,7 @@ export let DataSpreadsheet = React.forwardRef(
       data = defaults.data,
       defaultEmptyRowCount = defaults.defaultEmptyRowCount,
       onDataUpdate = defaults.onDataUpdate,
-      afterColumnDragged = defaults.afterColumnDragged,
+      onColDrag = defaults.onColDrag,
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
@@ -320,7 +320,7 @@ export let DataSpreadsheet = React.forwardRef(
         JSON.stringify(currentHeaders) !== JSON.stringify(pastHeaders)
       ) {
         // Return back data
-        afterColumnDragged({
+        onColDrag({
           headers: currentHeaders,
           data: activeCellContent.props.data,
         });
@@ -331,7 +331,7 @@ export let DataSpreadsheet = React.forwardRef(
       headerCellHoldActive,
       columns,
       activeCellContent,
-      afterColumnDragged,
+      onColDrag,
     ]);
 
     // Removes the active cell element
@@ -1078,11 +1078,6 @@ DataSpreadsheet.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 DataSpreadsheet.propTypes = {
   /**
-   * Callback for when columns are dropped after dragged
-   */
-  afterColumnDragged: PropTypes.func,
-
-  /**
    * Specifies the cell height
    */
   cellSize: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
@@ -1134,6 +1129,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * Callback for when columns are dropped after dragged
+   */
+  onColDrag: PropTypes.func,
 
   /**
    * The setter fn for the data prop

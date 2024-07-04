@@ -104,23 +104,28 @@ const handleKeyPressForPopover = (evt, parentContainer) => {
 const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
   switch (evt.key) {
     case 'ArrowRight':
+      evt.preventDefault();
       if (variant == 'tree') {
-        let allItems = Array.from(
+        let allCellsInRow = Array.from(
           evt.target
             .closest('[role="row"]')
             ?.querySelectorAll('[role="gridcell"] button')
         );
         if (evt.target.getAttribute('role') == 'row') {
           //when current focus is on a row, then we need to enter inside and focus the first cell of that row
-
-          allItems[0]?.focus();
+          if (allCellsInRow.length === 1) {
+            handleRowNavigationTree(evt, conditionBuilderRef, variant);
+            //focus next row
+          } else {
+            allCellsInRow[0]?.focus();
+          }
         } else {
           //finding the next cell to be focussed
           //next cell = current cell index + 1
 
-          let currentItemIndex = allItems.indexOf(evt.target);
-          if (currentItemIndex < allItems.length - 1) {
-            focusThisItem(allItems[currentItemIndex + 1]);
+          let currentItemIndex = allCellsInRow.indexOf(evt.target);
+          if (currentItemIndex < allCellsInRow.length - 1) {
+            focusThisItem(allCellsInRow[currentItemIndex + 1]);
           }
         }
       } else {
@@ -128,6 +133,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
       }
       break;
     case 'ArrowLeft':
+      evt.preventDefault();
       if (variant == 'tree') {
         if (evt.target.getAttribute('role') !== 'row') {
           //when any cell is focussed, arrow left will select the previous cell or current row
@@ -155,6 +161,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
 
     case 'ArrowUp':
     case 'ArrowDown':
+      evt.preventDefault();
       if (variant == 'tree') {
         handleRowNavigationTree(evt, conditionBuilderRef, variant);
       } else {
@@ -189,8 +196,8 @@ function handleRowNavigationTree(evt, conditionBuilderRef, variant) {
   const currentRowIndex = getRowIndex(evt.target, conditionBuilderRef);
   let nextRowIndex = currentRowIndex;
 
-  if (evt.target.getAttribute('role') === 'row') {
-    if (evt.key === 'ArrowDown') {
+  if (evt.target.getAttribute('role') == 'row') {
+    if (['ArrowDown', 'ArrowRight'].includes(evt.key)) {
       nextRowIndex += 1;
     } else if (evt.key === 'ArrowUp') {
       nextRowIndex -= 1;

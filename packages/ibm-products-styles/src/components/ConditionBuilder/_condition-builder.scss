@@ -49,7 +49,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__condition-block {
   display: flex;
-  width: max-content;
+  width: fit-content;
   flex-direction: row;
 }
 .#{$block-class}__content-container {

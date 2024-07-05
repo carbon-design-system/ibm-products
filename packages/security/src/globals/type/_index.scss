@@ -90,7 +90,6 @@ $type-style-deprecation-map: (
       @include carbon--font-family($name: sans);
 
       &-italic {
-        // stylelint-disable-next-line carbon/type-token-use
         font-style: italic;
       }
 

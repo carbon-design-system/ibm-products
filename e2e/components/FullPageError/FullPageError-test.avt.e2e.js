@@ -14,7 +14,7 @@ test.describe('FullPageError @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FullPageError',
-      id: 'experimental-patterns-full-page-error-fullpageerror--full-page-error',
+      id: 'ibm-products-patterns-full-page-error-fullpageerror--full-page-error',
       globals: {
         carbonTheme: 'white',
       },

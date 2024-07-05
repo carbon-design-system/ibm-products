@@ -627,7 +627,7 @@ const Template = ({
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <div className={`${storyClass}__content-container`}>
+      <div className={`${storyClass}__content-container`} tabIndex={0}>
         <PageHeader
           {...props}
           title={

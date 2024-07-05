@@ -8,12 +8,21 @@ import { useTranslations } from '../../utils/useTranslations';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
-export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
+export const ConditionBuilderItemDate = ({
+  conditionState,
+  onChange,
+  parentRef,
+}) => {
   const DatePickerInputRef = useRef();
   const [startText, endText] = useTranslations(['startText', 'endText']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
+  const onCloseHandler = (selectedDate) => {
+    onChange(
+      selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID_DATE'
+    );
+  };
   return (
     <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
@@ -21,8 +30,9 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onClose={onChange}
           value={conditionState.value}
+          onClose={onCloseHandler}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePicker"
@@ -37,8 +47,9 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onClose={onChange}
+          onClose={onCloseHandler}
           value={conditionState.value}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePickerStart"
@@ -65,4 +76,9 @@ ConditionBuilderItemDate.propTypes = {
    * callback to update state oin date change
    */
   onChange: PropTypes.func,
+
+  /**
+   * reference to the popover node
+   */
+  parentRef: PropTypes.object,
 };

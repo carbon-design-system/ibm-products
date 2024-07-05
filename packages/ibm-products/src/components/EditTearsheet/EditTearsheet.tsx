@@ -97,7 +97,8 @@ interface EditTearsheetProps extends PropsWithChildren {
   onFormChange?: (formIndex: number) => number;
 
   /**
-   * Specify a handler for submitting the tearsheet.
+   * Specify a handler for submitting the tearsheet. Throughout its execution
+   * the submit button will be disabled and include a loading indicator.
    */
   onRequestSubmit: () => void;
 
@@ -158,11 +159,23 @@ export let EditTearsheet = forwardRef(
     }: EditTearsheetProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleOnRequestSubmit = async () => {
+      setIsSubmitting(true);
+      try {
+        await onRequestSubmit();
+      } catch (error) {
+        console.warn(`${componentName} submit error: ${error}`);
+      }
+      setIsSubmitting(false);
+    };
     const actions = [
       {
         key: 'edit-action-button-submit',
         label: submitButtonText,
-        onClick: onRequestSubmit,
+        onClick: () => handleOnRequestSubmit(),
+        loading: isSubmitting,
         kind: 'primary',
       },
       {

@@ -163,18 +163,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   overflow: hidden;
 }
 
-.#{$block-class}:not(.#{$block-class}--closing)
-  > details[open]
-  .#{$block-class}__summary,
+.#{$block-class}__summary.#{$block-class}__summary--open:not(
+    .#{$block-class}__summary--closing
+  ),
 .#{$block-class}__summary--hidden {
   height: 0;
   margin-top: 0;
   opacity: 0;
 }
 
-.#{$block-class}:not(.#{$block-class}--closing)
-  > details[open]
-  .#{$block-class}__chevron {
+.#{$block-class}__chevron.#{$block-class}__chevron--open:not(
+    .#{$block-class}__chevron--closing
+  ) {
   transform: rotate(180deg);
 }
 

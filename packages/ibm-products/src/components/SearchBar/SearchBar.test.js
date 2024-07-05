@@ -26,6 +26,7 @@ const defaultProps = {
   clearButtonLabelText: 'Clear',
   placeholderText: 'Search...',
   submitLabel: 'Search',
+  labelText: 'Search label',
   onChange: mockOnChange,
   onSubmit: mockOnSubmit,
 };

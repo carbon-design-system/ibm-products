@@ -14,7 +14,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
+  title: 'Experimental/Components/Data spreadsheet/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {

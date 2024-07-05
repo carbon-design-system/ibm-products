@@ -30,7 +30,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditUpdateCards',
+  title: 'Experimental/Patterns/Edit and update/EditUpdateCards',
   component: EditUpdateCards,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

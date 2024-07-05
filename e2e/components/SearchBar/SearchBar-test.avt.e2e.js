@@ -14,7 +14,7 @@ test.describe('SearchBar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SearchBar',
-      id: 'ibm-products-components-search-bar-searchbar--default',
+      id: 'experimental-components-search-bar-searchbar--default',
       globals: {
         carbonTheme: 'white',
       },

@@ -1,8 +1,9 @@
 # Deploy staging storybook environment from release branch to Github Pages
 name: Deploy staging storybook
 
-# Gets triggered every time a change is pushed to the `release/v2*` branch
+# Gets triggered every time a change is pushed to the `release/v2*` branch or can be manually triggered
 on:
+  workflow_dispatch:
   push:
     branches: [release/v2*]
 

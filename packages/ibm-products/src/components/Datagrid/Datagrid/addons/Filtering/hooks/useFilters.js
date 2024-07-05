@@ -40,10 +40,9 @@ import React, {
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
-import uuidv4 from '../../../../../../global/js/utils/uuidv4';
-
 import { FilterContext } from '../FilterProvider';
 import { handleCheckboxChange } from '../handleCheckboxChange';
+import uuidv4 from '../../../../../../global/js/utils/uuidv4';
 
 const useFilters = ({
   updateMethod,
@@ -73,6 +72,7 @@ const useFilters = ({
   );
 
   const previousState = usePreviousValue({ panelOpen });
+  const filteredItemsRef = useRef();
 
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
@@ -378,10 +378,21 @@ const useFilters = ({
             return null;
           })
           .filter(Boolean);
+        let isKeyRequired = false;
+        if (!compareFilterItems(filteredItems)) {
+          filteredItemsRef.current = [...filteredItems];
+          isKeyRequired = true;
+        }
+        const getKey = () => {
+          return isKeyRequired ? { key: uuidv4() } : column;
+        };
+
         filter = (
           <MultiSelect
             {...components.MultiSelect}
             selectedItems={filteredItems}
+            key={getKey()}
+            //{previousState.filteredItems !== filteredItems ?}
             onChange={({ selectedItems }) => {
               const allOptions = filtersState[column].value;
               // Find selected items from list of options
@@ -399,6 +410,7 @@ const useFilters = ({
                   return null;
                 })
                 .filter(Boolean);
+              filteredItemsRef.current = [...foundItems];
 
               // Change selected state for those items that have been selected
               allOptions.map((a) => (a.selected = false));
@@ -432,17 +444,26 @@ const useFilters = ({
         break;
       }
     }
-    if (type === MULTISELECT) {
-      if (isPanel) {
-        return <Layer key={uuidv4()}>{filter}</Layer>;
-      }
-      return <React.Fragment key={uuidv4()}>{filter}</React.Fragment>;
-    } else {
-      if (isPanel) {
-        return <Layer key={column}>{filter}</Layer>;
-      }
-      return <React.Fragment key={column}>{filter}</React.Fragment>;
+
+    if (isPanel) {
+      return <Layer key={column}>{filter}</Layer>;
     }
+
+    return <React.Fragment key={column}>{filter}</React.Fragment>;
+  };
+
+  const compareFilterItems = (filteredItems) => {
+    const filteredItemsId = filteredItems.map((item) => item.id) ?? [];
+    const previousFilteredItemsId =
+      filteredItemsRef?.current?.map((item) => item.id) ?? [];
+    const set1 = new Set(filteredItemsId);
+    const set2 = new Set(previousFilteredItemsId);
+    // Check if the sets have the same size (same number of unique elements)
+    if (set1.size !== set2.size) {
+      return false;
+    }
+    // Check if all elements in set1 are also present in set2 (using spread syntax)
+    return [...set1].every((element) => set2.has(element));
   };
 
   /** This useEffect will properly handle the previous filters when the panel closes

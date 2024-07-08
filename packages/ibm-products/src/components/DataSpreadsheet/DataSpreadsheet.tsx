@@ -209,6 +209,7 @@ export let DataSpreadsheet = React.forwardRef(
     const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
     const [currentColumns, setCurrentColumns] = useState<object>(columns);
+    const [pastColumns, setPastColumns] = useState<object[]>([]);
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] =
       useState<ActiveCellCoordinates | null>(null);
@@ -296,7 +297,6 @@ export let DataSpreadsheet = React.forwardRef(
 
     useEffect(() => {
       const currentHeaders: Array<any> = [];
-      const pastHeaders: Array<any> = [];
       if (Object.keys(currentColumns).length > 0) {
         Object.keys(currentColumns).forEach((itemIndex) => {
           if (currentColumns[itemIndex].Header) {
@@ -304,22 +304,30 @@ export let DataSpreadsheet = React.forwardRef(
           }
         });
       }
-      if (Object.keys(columns).length > 0) {
-        Object.keys(columns).forEach((itemIndex) => {
-          if (columns[itemIndex].Header) {
-            pastHeaders.push(columns[itemIndex].Header);
-          }
-        });
+
+      if (previousState.selectedHeaderReorderActive) {
+        setPastColumns(currentHeaders);
       }
 
       if (
         !previousState.selectedHeaderReorderActive &&
         !headerCellHoldActive &&
         currentHeaders.length > 0 &&
-        pastHeaders.length > 0 &&
-        JSON.stringify(currentHeaders) !== JSON.stringify(pastHeaders)
+        pastColumns.length > 0 &&
+        JSON.stringify(currentHeaders) !== JSON.stringify(pastColumns)
       ) {
         // Return back data
+        onColDrag({
+          headers: currentHeaders,
+          data: activeCellContent.props.data,
+        });
+      } else if (
+        !previousState.selectedHeaderReorderActive &&
+        !headerCellHoldActive &&
+        pastColumns.length > 0 &&
+        JSON.stringify(pastColumns) !== JSON.stringify(currentHeaders)
+      ) {
+        setPastColumns(currentHeaders);
         onColDrag({
           headers: currentHeaders,
           data: activeCellContent.props.data,
@@ -332,6 +340,7 @@ export let DataSpreadsheet = React.forwardRef(
       columns,
       activeCellContent,
       onColDrag,
+      pastColumns,
     ]);
 
     // Removes the active cell element

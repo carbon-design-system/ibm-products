@@ -11,7 +11,7 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import { useTranslations } from '../utils/useTranslations';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
-  const { variant } = useContext(ConditionBuilderContext);
+  const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
   const [connectorText] = useTranslations(['connectorText']);
 
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
@@ -31,10 +31,10 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   };
   const onChangeHandler = (op, evt) => {
     onChange(op);
-    focusThisField(evt);
+    focusThisField(evt, conditionBuilderRef);
   };
   return variant == 'tree' ? (
-    <span className={`${className} ${blockClass}__connector-disabled`}>
+    <span className={`${className} ${blockClass}__connector--disabled`}>
       {operator}
     </span>
   ) : (

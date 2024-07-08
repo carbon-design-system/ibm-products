@@ -60,6 +60,8 @@ collect:
         - count
         - currentMatcher
         - currentStep
+        - CustomizeColumnsButton
+        - customizeColumnsProps
         - CustomizeColumnsTearsheet
         - customizeTearsheetHeadingLabel
         - data
@@ -70,6 +72,7 @@ collect:
         - defaultColumn
         - defaultEmptyRowCount
         - description
+        - disableColumnSwapping
         - disabled
         - disabledCell
         - disableSubmit
@@ -203,6 +206,7 @@ collect:
         - onActiveCellChange
         - onAllRowSelect
         - onApply
+        - onBlur
         - onCancel
         - onChange
         - onClick
@@ -264,6 +268,7 @@ collect:
         - productive
         - radio
         - reactTableFiltersState
+        - readOnlyTable
         - renderIcon
         - renderRowHeader
         - renderRowHeaderDirection
@@ -341,6 +346,7 @@ collect:
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
+        - translateWithId
         - translateWithIdBatchActions
         - truncate
         - truncateValue
@@ -530,7 +536,6 @@ collect:
         # ConditionBuilderButton
         - hideLabel
         - isInvalid
-        - onBlur
         - onFocus
         - onMouseEnter
         - onMouseLeave
@@ -539,6 +544,9 @@ collect:
         - wrapperProps
         # ConditionBuilderItem
         - popOverClassName
+        - renderChildren
+        # ConditionBuilderItemDate
+        - parentRef
         # ConditionConnector
         - operator
         # ConditionPreview
@@ -823,7 +831,6 @@ collect:
         - sortItems
         - submitLabel
         - titleText
-        - translateWithId
         # SelectAllWithToggle
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
@@ -1091,6 +1098,9 @@ collect:
         # General - updateMethod
         - batch
         - instant
+        # General - variant
+        - sentence
+        - tree
         # General - verticalPosition
         - lower
         - normal

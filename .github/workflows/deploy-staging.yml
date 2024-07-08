@@ -4,6 +4,7 @@ name: Deploy staging storybook
 # Gets triggered every time a change is pushed to the `release/v2*` branch or can be manually triggered
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     branches: [release/v2*]
 

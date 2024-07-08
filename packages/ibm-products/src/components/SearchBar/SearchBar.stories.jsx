@@ -58,6 +58,7 @@ const defaultProps = {
   clearButtonLabelText: 'Clear',
   placeholderText: 'Search...',
   submitLabel: 'Search',
+  labelText: 'Label text',
   onChange: (newVal) => action('onChange')(newVal),
   onSubmit: (newVal) => action('onSubmit')(newVal),
 };

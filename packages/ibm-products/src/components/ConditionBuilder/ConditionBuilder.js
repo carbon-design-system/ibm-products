@@ -136,7 +136,7 @@ ConditionBuilder.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string | PropTypes.number]).isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       label: PropTypes.string.isRequired,
     })
   ),

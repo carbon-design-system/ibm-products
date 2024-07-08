@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.45.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.45.0-rc.0...@carbon/ibm-products@2.45.0-rc.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* address issue with active cell value ([#5619](https://github.com/carbon-design-system/ibm-products/issues/5619)) ([90960b5](https://github.com/carbon-design-system/ibm-products/commit/90960b5ed6ce6692e50e8e2c9d6f47dab1f625c0))
+
+
+
+
+
 # [2.45.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.44.0...@carbon/ibm-products@2.45.0-rc.0) (2024-07-08)
 
 

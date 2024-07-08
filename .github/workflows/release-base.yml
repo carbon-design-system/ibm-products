@@ -29,7 +29,7 @@ jobs:
       contents: write
     timeout-minutes: 60
     env:
-      GITHUB_TOKEN: ${{ secrets.MERGE_ACTION }}
+      GH_TOKEN: ${{ secrets.MERGE_ACTION }}
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
@@ -88,31 +88,31 @@ jobs:
         if: github.event.inputs.type == 'full minor release'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish minor --no-verify-access --create-release github $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish minor --create-release github $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
         if: github.event.inputs.type == 'first minor rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish preminor --no-verify-access --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish preminor --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish full patch release (ie. v1.0.x)
         if: github.event.inputs.type == 'full patch release'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish patch --no-verify-access --create-release github $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish patch --create-release github $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first patch RC (ie. v1.0.x-rc.0)
         if: github.event.inputs.type == 'first patch rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish prepatch --no-verify-access --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish prepatch --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish subsequent RC (ie. v1.0.0-rc.x)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish --no-verify-access --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

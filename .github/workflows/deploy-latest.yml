@@ -4,8 +4,8 @@ name: Deploy production storybook
 # This workflow is triggered from the `release-base` workflow when a full release
 # has been successfully completed
 on:
-  repository_dispatch:
-    types: [deploy-latest-storybook]
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   deploy-latest-storybook:

@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-///fds fdsa
-
 // Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
 

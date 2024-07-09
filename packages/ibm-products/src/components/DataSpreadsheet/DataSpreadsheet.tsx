@@ -311,27 +311,23 @@ export let DataSpreadsheet = React.forwardRef(
 
       if (
         !previousState.selectedHeaderReorderActive &&
-        !headerCellHoldActive &&
-        currentHeaders.length > 0 &&
         pastColumns.length > 0 &&
+        !headerCellHoldActive &&
         JSON.stringify(currentHeaders) !== JSON.stringify(pastColumns)
       ) {
-        // Return back data
-        onColDrag({
-          headers: currentHeaders,
-          data: activeCellContent.props.data,
-        });
-      } else if (
-        !previousState.selectedHeaderReorderActive &&
-        !headerCellHoldActive &&
-        pastColumns.length > 0 &&
-        JSON.stringify(pastColumns) !== JSON.stringify(currentHeaders)
-      ) {
-        setPastColumns(currentHeaders);
-        onColDrag({
-          headers: currentHeaders,
-          data: activeCellContent.props.data,
-        });
+        if (currentHeaders.length > 0) {
+          // Return back data
+          onColDrag({
+            headers: currentHeaders,
+            data: activeCellContent.props.data,
+          });
+        } else {
+          setPastColumns(currentHeaders);
+          onColDrag({
+            headers: currentHeaders,
+            data: activeCellContent.props.data,
+          });
+        }
       }
     }, [
       previousState?.selectedHeaderReorderActive,

@@ -9,17 +9,17 @@ jobs:
       issues: write
       pull-requests: write
     if: ${{contains(github.event_name, 'pull_request_review')}}
-    # First save github.context (from the unprivileged workflow) and then pass it through to the privileged action
+    # First save github.event (from the unprivileged workflow) and then pass it through to the privileged action
     # where we have access to repo secrets
     steps:
-      - name: Store GitHub context in a workflow artifact
-        id: github_context_step
+      - name: Store GitHub event in a workflow artifact
+        id: github_event_step
         env:
           JSON: ${{ toJSON(github.event) }}
         run: |
           mkdir -p ./pr_data
           echo $JSON > ./pr_data/github.json
-      - name: Upload context data
+      - name: Upload event data
         id: upload_artifact
         uses: actions/upload-artifact@v3
         with:

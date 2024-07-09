@@ -378,13 +378,12 @@ const useFilters = ({
             return null;
           })
           .filter(Boolean);
-        let isKeyRequired = false;
-        if (!compareFilterItems(filteredItems)) {
+        const isEqual = compareFilterItems(filteredItems);
+        if (!isEqual) {
           filteredItemsRef.current = [...filteredItems];
-          isKeyRequired = true;
         }
         const getKey = () => {
-          return isKeyRequired ? { key: uuidv4() } : column;
+          return isEqual ? { key: uuidv4() } : column;
         };
 
         filter = (

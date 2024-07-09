@@ -38,7 +38,7 @@
     "format:e2e": "prettier ./e2e/**/*.js --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
-    "lint:license": "scripts/check-license.cjs",
+    "lint:license": "scripts/check-license.cjs -a",
     "lint:license:staged": "scripts/check-license.cjs -w",
     "lint:js": "eslint packages --fix",
     "lint:styles": "stylelint '**/*.scss'",
@@ -211,7 +211,8 @@
     "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
-      "npx cspell --no-must-find-files"
+      "npx cspell --no-must-find-files",
+      "yarn lint:license:staged"
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
@@ -219,7 +220,8 @@
     ],
     "!(examples/**/*).md": [
       "npx prettier --cache --write",
-      "npx cspell --no-must-find-files"
+      "npx cspell --no-must-find-files",
+      "yarn lint:license:staged"
     ]
   },
   "dependencies": {

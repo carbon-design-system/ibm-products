@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const notes = `
   # Customizing columns
   Customizing columns allows user to reorder and hide certain columns of the datagrid. Consuming component can use the provided callback to save/update according to their persistent strategy.

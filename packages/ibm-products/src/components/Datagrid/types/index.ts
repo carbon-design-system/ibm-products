@@ -33,6 +33,7 @@ import {
   TableCommonProps,
   TableDispatch,
   TableInstance,
+  TableState,
   TableToggleAllRowsSelectedProps,
   UseExpandedRowProps,
   UseFiltersInstanceProps,
@@ -206,7 +207,16 @@ interface DataGridTableState
 }
 
 export interface DataGridTableInstance<T extends object = any>
-  extends TableInstance<T> {
+  extends Omit<TableInstance<T>, 'state'>,
+    Partial<UsePaginationInstanceProps<any>> {
+  shouldDisableSelectRow?: (...args) => void | boolean;
+  state?: Partial<TableState & UseRowSelectState<any>>;
+  disableSelectAll?: boolean;
+  disableSelectRowsProps?: {
+    labels?: {
+      toggleAllRowsLabel?: string;
+    };
+  };
   withSelectRows?: boolean;
 }
 
@@ -353,3 +363,8 @@ export type VisibleColumns<T extends object = {}> = (
 ) => Array<Column<T>>;
 
 export type NodeFuncType = (props) => ReactNode;
+
+export interface PropGetterMeta {
+  instance?: DataGridTableInstance;
+  row?: Partial<Row<any> & DatagridRow<any>>;
+}

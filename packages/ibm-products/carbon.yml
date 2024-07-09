@@ -317,6 +317,22 @@ assets:
     tags:
       - content-block
       - contextual-navigation
+  full-page-error:
+    name: Full page error
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/full-page-errors/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error
+    tags:
+      - system-feedback
+      - content-block
+      - contextual-navigation
   http-error:
     name: HTTP error
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage

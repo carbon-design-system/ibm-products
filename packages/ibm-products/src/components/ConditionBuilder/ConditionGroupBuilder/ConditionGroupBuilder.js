@@ -47,8 +47,11 @@ const ConditionGroupBuilder = ({
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
   const conditionBuilderContentRef = useRef();
-  const onRemoveHandler = (conditionId, evt) => {
+  const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group.conditions.length > 1) {
+      variant == 'tree'
+        ? handleFocusOnCloseTree(evt)
+        : handleFocusOnClose(evt, conditionIndex);
       onChange({
         ...group,
         conditions: group.conditions.filter(
@@ -89,6 +92,65 @@ const ConditionGroupBuilder = ({
         ...group.conditions.slice(conditionIndex + 1),
       ],
     });
+  };
+
+  const handleFocusOnClose = (e, conditionIndex) => {
+    //get all close buttons.
+    //if the last condition is closing, focus the second last one.
+    //or focus the next one.
+    const currentGroupCloseButtons = e.currentTarget
+      .closest(`.${blockClass}__group`)
+      ?.querySelectorAll('[data-name="closeCondition"]');
+    if (conditionIndex == currentGroupCloseButtons.length - 1) {
+      currentGroupCloseButtons[conditionIndex - 1]?.focus();
+    } else {
+      currentGroupCloseButtons[conditionIndex + 1]?.focus();
+    }
+  };
+  const handleFocusOnCloseTree = (evt) => {
+    //getting the current aria-level and aria-posinset.
+    const currentLevel = evt.currentTarget
+      ?.closest('[role="row"]')
+      ?.getAttribute('aria-level');
+    const currentPos = evt.currentTarget
+      ?.closest('[role="row"]')
+      ?.getAttribute('aria-posinset');
+
+    //finding the next and previous items in same level
+    const nextElement = conditionBuilderContentRef.current?.querySelector(
+      `[aria-level="${currentLevel}"][aria-posinset="${
+        Number(currentPos) + 1
+      }"]`
+    );
+    const prevElement = conditionBuilderContentRef.current?.querySelector(
+      `[aria-level="${currentLevel}"][aria-posinset="${
+        Number(currentPos) - 1
+      }"]`
+    );
+    //checking if next level is a valid condition. If then, focus the close button inside that condition
+    //Otherwise , check the previous item is a valid condition
+
+    if (nextElement?.classList.contains(`${blockClass}__condition-block`)) {
+      nextElement?.querySelector('[data-name="closeCondition"]')?.focus();
+    } else if (
+      prevElement?.classList.contains(`${blockClass}__condition-block`)
+    ) {
+      prevElement?.querySelector('[data-name="closeCondition"]')?.focus();
+    }
+    //If there are no valid condition in this group, focus next or previous row
+    else {
+      const prevRows = conditionBuilderContentRef.current?.querySelectorAll(
+        `[aria-level="${Number(currentLevel) - 1}"][role="row"]`
+      );
+      const nextRow = conditionBuilderContentRef.current?.querySelector(
+        `[aria-level="${Number(currentLevel) + 1}"][role="row"]`
+      );
+      if (nextRow) {
+        nextRow?.focus();
+      } else if (prevRows?.length > 1) {
+        prevRows[prevRows.length - 2]?.focus();
+      }
+    }
   };
 
   const addConditionSubGroupHandler = (conditionIndex) => {

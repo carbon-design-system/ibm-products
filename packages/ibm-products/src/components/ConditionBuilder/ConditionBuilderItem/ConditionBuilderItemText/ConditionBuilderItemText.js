@@ -56,5 +56,5 @@ ConditionBuilderItemText.propTypes = {
   /**
    * current input type
    */
-  type: PropTypes.object,
+  type: PropTypes.string,
 };

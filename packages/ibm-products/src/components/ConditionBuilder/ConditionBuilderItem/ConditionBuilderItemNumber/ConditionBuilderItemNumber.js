@@ -20,7 +20,7 @@ export const ConditionBuilderItemNumber = ({
 }) => {
   const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
-    if (checkIfValid(value)) {
+    if (!isNaN(value) && checkIfValid(value)) {
       onChange(`${value} ${config.unit ?? ''}`);
     } else {
       onChange('INVALID');
@@ -40,12 +40,12 @@ export const ConditionBuilderItemNumber = ({
       <NumberInput
         label={conditionState.property}
         hideLabel
-        defaultValue={getDefaultValue()}
         id={conditionState.property?.replace(/\s/g, '')}
         invalidText={invalidNumberWarnText}
         allowEmpty
         onChange={onChangeHandler}
         {...config}
+        defaultValue={getDefaultValue()}
       />
     </div>
   );

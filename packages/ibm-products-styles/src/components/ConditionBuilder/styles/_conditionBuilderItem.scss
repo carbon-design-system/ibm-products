@@ -223,7 +223,7 @@ $colors: (
     > :nth-child(2)
     .#{$block-class}__button:not(
       .#{$block-class}__add-button,
-      .#{$block-class}__add_condition_group
+      .#{$block-class}__add-condition-sub-group
     ) {
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
@@ -241,7 +241,7 @@ $colors: (
   align-self: center;
   margin-left: auto;
 }
-.#{$block-class}__add_condition_group-wrapper {
+.#{$block-class}__add-condition-sub-group-wrapper {
   z-index: -1;
   width: 0;
   margin-left: -50%;
@@ -250,7 +250,7 @@ $colors: (
   // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   transition: all linear $duration-fast-02;
 }
-.#{$block-class}__add_condition_group-wrapper--show {
+.#{$block-class}__add-condition-sub-group-wrapper--show {
   z-index: 0;
   width: auto;
   margin-left: 0;
@@ -261,5 +261,7 @@ $colors: (
 }
 .#{$block-class}__invalid-input {
   display: flex;
+}
+.#{$block-class}__invalid-input > svg {
   color: $support-warning;
 }

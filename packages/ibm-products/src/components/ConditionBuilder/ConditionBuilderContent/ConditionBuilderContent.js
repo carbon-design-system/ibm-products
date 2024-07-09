@@ -41,6 +41,13 @@ const ConditionBuilderContent = ({
     useState(false);
 
   const [addConditionGroupText] = useTranslations(['addConditionGroupText']);
+  const showConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(true);
+  };
+
+  const hideConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(false);
+  };
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -173,13 +180,11 @@ const ConditionBuilderContent = ({
                   <ConditionBuilderButton
                     renderIcon={TextNewLine}
                     onClick={addConditionGroupHandler}
-                    onMouseEnter={() => {
-                      setShowConditionGroupPreview(true);
-                    }}
-                    onMouseLeave={() => {
-                      setShowConditionGroupPreview(false);
-                    }}
-                    className={`${blockClass}__addConditionGroupText `}
+                    onMouseEnter={showConditionGroupPreviewHandler}
+                    onMouseLeave={hideConditionGroupPreviewHandler}
+                    onFocus={showConditionGroupPreviewHandler}
+                    onBlur={hideConditionGroupPreviewHandler}
+                    className={`${blockClass}__add-condition-group `}
                     hideLabel
                     label={addConditionGroupText}
                     wrapperProps={{

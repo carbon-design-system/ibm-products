@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0...@carbon/ibm-cloud-cognitive-core@2.21.0-rc.0) (2024-07-08)
+
+
+### Features
+
+* **eslint-ssr-plugin:** adds `eslint-plugin-ssr-friendly` so we can catch ssr issues/bugs during development ([#5409](https://github.com/carbon-design-system/ibm-products/issues/5409)) ([0517cdb](https://github.com/carbon-design-system/ibm-products/commit/0517cdbdd4e177bfb4a5cc7dea2c535aead0633d))
+
+
+
+
+
+# [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.2...@carbon/ibm-cloud-cognitive-core@2.20.0) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.20.0-rc.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.1...@carbon/ibm-cloud-cognitive-core@2.20.0-rc.2) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
 # [2.20.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.20.0-rc.1) (2024-06-26)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

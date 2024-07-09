@@ -1,0 +1,51 @@
+import{o as ie,p as m,j as s}from"./settings-BiUEFdm2.js";import{useMDXComponents as U}from"./index-DlpNa54Y.js";import"./chunk-HLWAVYOI-CsZ1lTTC.js";import{e as oe,i as ne,C as re}from"./index-CDYzkStP.js";import{r as N,R as o}from"./index-BwDkhjyp.js";import{P as e}from"./index-Dk74W0Oi.js";import{u as T,c as h,_ as L,d as j}from"./deprecate-D9ms-jbM.js";import{g as $}from"./devtools-BPcQvzXy.js";import{i as ae,a as le}from"./events-Bq7WR1mU.js";import{T as A}from"./Text-_TFgs5hl.js";import{e as ce,f as de}from"./bucket-12-CGi_8ya0.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-CJvxHwuA.js";import"./index-BONylQH5.js";import"./iframe-j3s5A4v9.js";import"../sb-preview/runtime.js";import"./react-18-Dd3bHtks.js";import"./extends-CCbyfPlC.js";import"./index-C2eUe6cH.js";import"./index-BjQFKvNH.js";import"./isSymbol-BZYRlrjc.js";import"./index-DrFu-skq.js";function pe(i,t){const r=N.useRef(t);N.useEffect(()=>{r.current=t}),ae&&ie(window,"click",n=>{i.current&&!i.current.contains(n.target)&&r.current(n)})}var M,z,I;const J=o.createContext(null),Q=o.createContext(null);function Y(i){const{children:t,selection:r,className:n,["aria-label"]:d="Structured list section",ariaLabel:a,isCondensed:l,isFlush:f,...D}=i,p=T(),x=h(`${p}--structured-list`,{[`${p}--structured-list--selection`]:r,[`${p}--structured-list--condensed`]:l,[`${p}--structured-list--flush`]:f&&!r},n),[g,b]=o.useState(null);return o.createElement(J.Provider,{value:g},o.createElement(Q.Provider,{value:b},o.createElement("div",L({role:"table",className:x},D,{"aria-label":a||d}),t)))}Y.propTypes={"aria-label":e.string,ariaLabel:j(e.string),children:e.node,className:e.string,isCondensed:e.bool,isFlush:e.bool,selection:e.bool};e.node,e.string;function Z(i){const{children:t,className:r,...n}=i,d=T(),a=h(`${d}--structured-list-tbody`,r);return o.createElement("div",L({className:a,role:"rowgroup"},n),t)}Z.propTypes={children:e.node,className:e.string,head:e.bool,onKeyDown:e.func};const ue=o.createContext(null);function ee(i){const{onKeyDown:t,children:r,className:n,head:d,onClick:a,selection:l,...f}=i,[D,p]=N.useState(!1),x=le("grid-input"),g=o.useContext(J),b=o.useContext(Q),w=T(),te={id:x},B=h(`${w}--structured-list-row`,{[`${w}--structured-list-row--header-row`]:d,[`${w}--structured-list-row--focused-within`]:D&&!l||D&&l&&(g===x||g===null),[`${w}--structured-list-row--selected`]:g===x},n),O=N.useRef(null);return pe(O,()=>{p(!1)}),d?o.createElement("div",L({role:"row"},f,{className:B}),l&&(M||(M=o.createElement(R,{head:!0}))),r):o.createElement("div",L({},f,{role:"row",className:B,ref:O,onClick:se=>{b==null||b(x),a&&a(se),l&&p(!0)},onFocus:()=>{p(!0)},onBlur:()=>{p(!1)},onKeyDown:t}),o.createElement(ue.Provider,{value:te},l&&o.createElement(R,null,g===x?z||(z=o.createElement(ce,null)):I||(I=o.createElement(de,null))),r))}ee.propTypes={children:e.node,className:e.string,head:e.bool,label:j(e.bool),onClick:e.func,onKeyDown:e.func,selection:e.bool};e.string,j(e.bool),e.string,e.string,e.func,e.string,j(e.oneOfType([e.string,e.number]).isRequired);function R(i){const{children:t,className:r,head:n,noWrap:d,...a}=i,l=T(),f=h({[`${l}--structured-list-th`]:n,[`${l}--structured-list-td`]:!n,[`${l}--structured-list-content--nowrap`]:d},r);return n?o.createElement(A,L({className:f,role:"columnheader"},a),t):o.createElement(A,L({as:"div",className:f,role:"cell"},a),t)}R.propTypes={children:e.node,className:e.string,head:e.bool,noWrap:e.bool};const E={XSmall:"xs",Small:"sm",Medium:"md",Large:"lg"},_=`${m.prefix}--description-list`,k="DescriptionList",F={border:!1,size:E.Medium};let v=o.forwardRef(({border:i=F.border,children:t,className:r,size:n=F.size,...d},a)=>s.jsx("div",{...d,className:h(_,{[`${_}--bordered`]:i,[`${_}--${n}`]:n},r),ref:a,...$(k),children:s.jsx(Y,{role:"table",selection:!1,children:t})}));v=m.checkComponentEnabled(v,k);v.displayName=k;v.propTypes={border:e.bool,children:e.node,className:e.string,size:e.oneOf(Object.values(E))};v.__docgenInfo={description:"Type layouts provide an orderly layout of terms and definitions.",methods:[],displayName:"DescriptionList",props:{border:{defaultValue:{value:"false",computed:!1},description:"Specify if the type layout has a border",type:{name:"bool"},required:!1},size:{defaultValue:{value:"'md'",computed:!1},description:"Specify the size of the type layout, from a list of available sizes",type:{name:"enum",value:[{value:'"xs"',computed:!1},{value:'"sm"',computed:!1},{value:'"md"',computed:!1},{value:'"lg"',computed:!1}]},required:!1},children:{description:"Provide the contents of the node",type:{name:"node"},required:!1},className:{description:"Provide an optional class to be applied to the containing node",type:{name:"string"},required:!1}}};const me=`${m.prefix}--description-list__body`,P="DescriptionListBody";let C=o.forwardRef(({children:i,className:t,...r},n)=>s.jsx(Z,{className:h(me,t),ref:n,...$(P),...r,children:i}));C.propTypes={children:e.node,className:e.string};C=m.checkComponentEnabled(C,P);C.displayName=P;C.__docgenInfo={description:"",methods:[],displayName:"DescriptionListBody",props:{children:{description:"Provide the contents of the node",type:{name:"node"},required:!1},className:{description:"Provide an optional class to be applied to the containing node",type:{name:"string"},required:!1}}};const he=`${m.prefix}--description-list__cell`,S="DescriptionListCell";let c=o.forwardRef(({children:i,className:t,...r},n)=>s.jsx(R,{className:h(he,t),ref:n,...$(S),...r,children:i}));c.propTypes={children:e.node,className:e.string};c=m.checkComponentEnabled(c,S);c.displayName=S;c.__docgenInfo={description:"",methods:[],displayName:"DescriptionListCell",props:{children:{description:"Provide the contents of the node",type:{name:"node"},required:!1},className:{description:"Provide an optional class to be applied to the containing node",type:{name:"string"},required:!1}}};const fe=`${m.prefix}--description-list__row`,q="DescriptionListRow";let u=o.forwardRef(({children:i,className:t,...r},n)=>s.jsx(ee,{className:h(fe,t),ref:n,...$(q),...r,children:i}));u.propTypes={children:e.node,className:e.string};u=m.checkComponentEnabled(u,q);u.displayName=q;u.__docgenInfo={description:"",methods:[],displayName:"DescriptionListRow",props:{children:{description:"Provide the contents of the node",type:{name:"node"},required:!1},className:{description:"Provide an optional class to be applied to the containing node",type:{name:"string"},required:!1}}};function W(i){const t={a:"a",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...U(),...i.components};return s.jsxs(s.Fragment,{children:[s.jsx(t.h1,{id:"descriptionlist",children:"DescriptionList"}),`
+`,s.jsx(t.h2,{id:"table-of-contents",children:"Table of Contents"}),`
+`,s.jsxs(t.ul,{children:[`
+`,s.jsx(t.li,{children:s.jsx(t.a,{href:"#overview",children:"Overview"})}),`
+`,s.jsx(t.li,{children:s.jsx(t.a,{href:"#example-usage",children:"Example usage"})}),`
+`,s.jsx(t.li,{children:s.jsx(t.a,{href:"#component-api",children:"Component API"})}),`
+`]}),`
+`,s.jsx(t.h2,{id:"overview",children:"Overview"}),`
+`,s.jsx(t.p,{children:"Type layouts provide an orderly layout of terms and definitions."}),`
+`,s.jsx(t.h2,{id:"example-usage",children:"Example usage"}),`
+`,`
+`,s.jsx(oe,{children:s.jsx(ne,{of:y})}),`
+`,s.jsx(t.h2,{id:"component-api",children:"Component API"}),`
+`,s.jsx(re,{})]})}function xe(i={}){const{wrapper:t}={...U(),...i.components};return t?s.jsx(t,{...i,children:s.jsx(W,{...i})}):W(i)}const ye="",Fe={title:"IBM Products/Components/Description list/DescriptionList",component:v,tags:["autodocs"],argTypes:{children:{control:{type:null}},size:{options:Object.values(E),control:{type:"radio"}}},parameters:{styles:ye,docs:{page:xe}}},ve=i=>s.jsx(v,{...i,children:s.jsxs(C,{children:[s.jsxs(u,{children:[s.jsx(c,{children:"Term 1"}),s.jsx(c,{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit."})]}),s.jsxs(u,{children:[s.jsx(c,{children:"Term 2"}),s.jsx(c,{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius lacus ex at libero. Aenean euismod viverra odio, id volutpat turpis commodo."})]}),s.jsxs(u,{children:[s.jsx(c,{children:"Term 3"}),s.jsx(c,{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius lacus ex at libero."})]})]})}),y=ve.bind({});y.args={border:!1,size:E.Medium};var X,G,K,V,H;y.parameters={...y.parameters,docs:{...(X=y.parameters)==null?void 0:X.docs,source:{originalSource:`args => {
+  return <DescriptionList
+  // TODO: handle events with action or local handler.
+  // onTodo={action('onTodo log action')}
+  {...args}>
+      <DescriptionListBody>
+        <DescriptionListRow>
+          <DescriptionListCell>Term 1</DescriptionListCell>
+
+          <DescriptionListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </DescriptionListCell>
+        </DescriptionListRow>
+
+        <DescriptionListRow>
+          <DescriptionListCell>Term 2</DescriptionListCell>
+
+          <DescriptionListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+            lacus ex at libero. Aenean euismod viverra odio, id volutpat turpis
+            commodo.
+          </DescriptionListCell>
+        </DescriptionListRow>
+
+        <DescriptionListRow>
+          <DescriptionListCell>Term 3</DescriptionListCell>
+
+          <DescriptionListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+            lacus ex at libero.
+          </DescriptionListCell>
+        </DescriptionListRow>
+      </DescriptionListBody>
+    </DescriptionList>;
+}`,...(K=(G=y.parameters)==null?void 0:G.docs)==null?void 0:K.source},description:{story:`TODO: Declare one or more stories, generally one per design scenario.
+NB no need for a 'Playground' because all stories have all controls anyway.`,...(H=(V=y.parameters)==null?void 0:V.docs)==null?void 0:H.description}}};const We=["descriptionList"];export{We as __namedExportsOrder,Fe as default,y as descriptionList};

@@ -26,14 +26,6 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--coachmark;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
-
-.#{$block-class} > .#{config.$prefix}--popover-container {
-  /* stylelint-disable-next-line declaration-no-important */
-  position: absolute !important;
-  bottom: 0;
-  left: 0;
-  transform: translate(-50%, 50%);
+.#{$block-class} {
+  position: relative;
 }

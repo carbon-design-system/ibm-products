@@ -104,7 +104,7 @@ const Template = (args) => {
     </Coachmark>
   );
 
-  return args.overlayKind !== 'floating' ? (
+  return !['fixed', 'floating', 'stacked'].includes(args.overlayKind) ? (
     <div style={{ width: '4000px', height: '2000px' }}>
       <div
         style={{

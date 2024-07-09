@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.41.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.40.0...@carbon/ibm-products-styles@2.41.0-rc.0) (2024-07-08)
+
+
+### Bug Fixes
+
+* **Datagrid:** pagination color fix ([#5641](https://github.com/carbon-design-system/ibm-products/issues/5641)) ([34c8712](https://github.com/carbon-design-system/ibm-products/commit/34c8712c78f96f4a564947c87db829202aae6073))
+* **HTTPError:** svg inline css not working strict csp ([#5585](https://github.com/carbon-design-system/ibm-products/issues/5585)) ([da5fd0a](https://github.com/carbon-design-system/ibm-products/commit/da5fd0a09a05696e4f22cf9e3241e1ad67a941b9))
+* **OptionsTile:** fix styling of summary and chevron when nesting OptionsTile ([#5612](https://github.com/carbon-design-system/ibm-products/issues/5612)) ([9927c3b](https://github.com/carbon-design-system/ibm-products/commit/9927c3b5406719cb0181487b39fdb1a17cca8302))
+* **sidepanel:** close/ai placement ([#5467](https://github.com/carbon-design-system/ibm-products/issues/5467)) ([7b6e09b](https://github.com/carbon-design-system/ibm-products/commit/7b6e09b85494415ca271ac0a6b159ea4ece93e23))
+
+
+### Features
+
+* **ConditionBuilder:** handle keyboard navigation for tree variant ([#5640](https://github.com/carbon-design-system/ibm-products/issues/5640)) ([2df7a14](https://github.com/carbon-design-system/ibm-products/commit/2df7a14288468af06ff51086047d3531832e4427))
+* **ConditionBuilder:** translation changes , text area support ([#5563](https://github.com/carbon-design-system/ibm-products/issues/5563)) ([9f02450](https://github.com/carbon-design-system/ibm-products/commit/9f0245063cc08bb494ef3dc9e2c768ab069ec5de))
+* **dataspreadsheet:** option for read only table + option for disable column swapping ([#5597](https://github.com/carbon-design-system/ibm-products/issues/5597)) ([93c82cc](https://github.com/carbon-design-system/ibm-products/commit/93c82ccc9e7609074653ac762a24a134cc4d2f73))
+
+
+
+
+
+# [2.40.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.40.0-rc.2...@carbon/ibm-products-styles@2.40.0) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
 # [2.40.0-rc.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.40.0-rc.1...@carbon/ibm-products-styles@2.40.0-rc.2) (2024-07-03)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

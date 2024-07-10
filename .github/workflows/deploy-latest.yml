@@ -5,7 +5,8 @@ name: Deploy production storybook
 # has been successfully completed
 on:
   workflow_dispatch:
-  workflow_call:
+  repository_dispatch:
+    types: [deploy-latest-storybook]
 
 jobs:
   deploy-latest-storybook:

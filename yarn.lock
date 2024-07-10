@@ -4039,7 +4039,7 @@ __metadata:
     "@carbon/grid": ^10.43.4
     "@carbon/icons-react": ^10.49.5
     carbon-components: ^10.58.15
-    carbon-components-react: ^7.59.23
+    carbon-components-react: ^7.59.24
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -4101,7 +4101,7 @@ __metadata:
     babel-loader: ^9.1.2
     babel-preset-ibm-cloud-cognitive: ^0.14.28
     carbon-components: ^10.58.15
-    carbon-components-react: ^7.59.23
+    carbon-components-react: ^7.59.24
     carbon-icons: ^7.0.7
     css-loader: ^6.7.3
     fast-sass-loader: ^2.0.1
@@ -4162,7 +4162,7 @@ __metadata:
     "@carbon/themes": ^10.55.5
     "@carbon/type": ^10.45.5
     carbon-components: ^10.58.15
-    carbon-components-react: ^7.59.23
+    carbon-components-react: ^7.59.24
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -4188,7 +4188,7 @@ __metadata:
     babel-plugin-macros: ^3.1.0
     babel-preset-ibm-cloud-cognitive: ^0.14.28
     carbon-components: 10.58.15
-    carbon-components-react: 7.59.23
+    carbon-components-react: 7.59.24
     carbon-icons: 7.0.7
     classnames: ^2.3.2
     clean-css-cli: ^5.6.2
@@ -11980,9 +11980,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@npm:7.59.23, carbon-components-react@npm:^7.59.23":
-  version: 7.59.23
-  resolution: "carbon-components-react@npm:7.59.23"
+"carbon-components-react@npm:7.59.24, carbon-components-react@npm:^7.59.24":
+  version: 7.59.24
+  resolution: "carbon-components-react@npm:7.59.24"
   dependencies:
     "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.2
@@ -12002,14 +12002,13 @@ __metadata:
     prop-types: ^15.7.2
     react-is: ^17.0.2
     use-resize-observer: ^6.0.0
-    wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
-  checksum: 99ba3e324a3f9f9978e6667c417329c775789e6733f4b67dc0c60e1eb5ed3a341a8286c0657cc95888d803ed9b6379cc51898cf34c10a107f06414f2fe7b3e9f
+  checksum: 85231868727ed7b313e639560bb1d7decfb36bd2ae585ac73317ac50bcb6149083c2fa89385d438fecf0f351775d98dadec8dda16f8ecbb81bf7b4ff482095d6
   languageName: node
   linkType: hard
 
@@ -31410,13 +31409,6 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: fdcf3cadab414e60b86c6836e7ac9de9273561a8926f57cbc28641b602a771527239ee4d47f2689ed255666f035ba0a0d72390986cc0c4e45344491adc7d0eeb
-  languageName: node
-  linkType: hard
-
-"wicg-inert@npm:^3.1.1":
-  version: 3.1.2
-  resolution: "wicg-inert@npm:3.1.2"
-  checksum: 538c5cb7f240915a4c17741c644b135040764c6d8a05853099f2f342c95ce2645e6cf7c4f729775013dbc218e0da04b3f943875eba6ed4b38ff9dd431465d391
   languageName: node
   linkType: hard
 

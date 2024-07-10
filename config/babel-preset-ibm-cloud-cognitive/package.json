@@ -31,5 +31,8 @@
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
     "browserslist-config-carbon": "^10.6.1"
+  },
+  "resolutions": {
+    "@babel/traverse": "^7.23.2"
   }
 }

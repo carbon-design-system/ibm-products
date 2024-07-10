@@ -103,6 +103,7 @@
   "resolutions": {
     "cheerio": "1.0.0-rc.10",
     "braces": "^3.0.3",
+    "ip": "^2.0.1",
     "micromatch": "4.0.6",
     "postcss": "^8.4.31",
     "semver": "7.5.2",

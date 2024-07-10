@@ -185,7 +185,7 @@ describe(componentName, () => {
     );
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
-    const closeButton = screen.getByTitle('Close');
+    const closeButton = screen.getByLabelText('Close');
     await act(() => click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
   });

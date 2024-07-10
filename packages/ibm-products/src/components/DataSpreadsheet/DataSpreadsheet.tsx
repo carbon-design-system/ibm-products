@@ -315,18 +315,12 @@ export let DataSpreadsheet = React.forwardRef(
         !headerCellHoldActive &&
         JSON.stringify(currentHeaders) !== JSON.stringify(pastColumns)
       ) {
-        if (currentHeaders.length > 0) {
-          // Return back data
-          onColDrag({
-            headers: currentHeaders,
-            data: activeCellContent.props.data,
-          });
-        } else {
-          setPastColumns(currentHeaders);
-          onColDrag({
-            headers: currentHeaders,
-            data: activeCellContent.props.data,
-          });
+        onColDrag({
+          headers: currentHeaders,
+          data: activeCellContent.props.data,
+        });
+        if (currentHeaders.length === 0) {
+          setPastColumns([]);
         }
       }
     }, [

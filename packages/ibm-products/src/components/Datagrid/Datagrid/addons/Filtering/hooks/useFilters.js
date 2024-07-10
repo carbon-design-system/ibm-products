@@ -391,7 +391,6 @@ const useFilters = ({
             {...components.MultiSelect}
             selectedItems={filteredItems}
             key={getKey()}
-            //{previousState.filteredItems !== filteredItems ?}
             onChange={({ selectedItems }) => {
               const allOptions = filtersState[column].value;
               // Find selected items from list of options

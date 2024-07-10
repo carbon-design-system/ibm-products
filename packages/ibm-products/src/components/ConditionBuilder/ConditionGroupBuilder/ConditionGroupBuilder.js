@@ -51,32 +51,30 @@ const ConditionGroupBuilder = ({
         //when we remove every plain conditions of a group without deleting  the subgroup, we need to restructure the group
         //the inner group become outer group and same level subgroups become plain conditions
 
-        let newGroup = [],
-          allConditions = [];
-        group.conditions.map((eachItem) => {
-          if (eachItem.conditions) {
-            allConditions = [...allConditions, ...eachItem.conditions];
-          } //spreading out the condition inside the subgroup
-        });
-        //we always have conditions first and then subgroups, so ordering accordingly
-        const groupedItems = allConditions.reduce((acc, item) => {
+        //spreading out the condition inside the subgroup
+        const allConditions = group.conditions.reduce((acc, item) => {
           if (item.conditions) {
-            acc['groups'] = acc['groups'] || [];
-            acc['groups'].push(item);
-          } else {
-            acc['conditions'] = acc['conditions'] || [];
-            acc['conditions'].push(item);
+            return acc.concat(item.conditions);
           }
           return acc;
-        }, {});
+        }, []);
 
-        newGroup.conditions = [
-          ...(groupedItems['conditions'] ?? []),
-          ...(groupedItems['groups'] ?? []),
-        ];
+        //we always have conditions first and then subgroups, so ordering accordingly
+        const groupedItems = {
+          groups: [],
+          conditions: [],
+        };
+        allConditions.forEach((item) => {
+          if (item.conditions) {
+            groupedItems.groups.push(item);
+          } else {
+            groupedItems.conditions.push(item);
+          }
+        });
+
         onChange({
           ...group,
-          ...newGroup,
+          conditions: [...groupedItems.conditions, ...groupedItems.groups],
         });
       } else {
         onChange({

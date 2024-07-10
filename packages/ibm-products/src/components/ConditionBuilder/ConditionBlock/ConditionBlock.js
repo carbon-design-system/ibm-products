@@ -69,9 +69,9 @@ const ConditionBlock = (props) => {
   //filtering the current property to access its properties and config options
   const getCurrentConfig = (property) => {
     return (
-      inputConfig.properties?.filter(
+      inputConfig.properties?.find(
         (eachProperty) => eachProperty.id == property
-      )[0] ?? {}
+      ) ?? {}
     );
   };
 
@@ -157,6 +157,7 @@ const ConditionBlock = (props) => {
         config={config}
         data-name="valueField"
         parentRef={popoverRef}
+        type={type}
       />
     );
   };
@@ -213,7 +214,7 @@ const ConditionBlock = (props) => {
       {/* <div className={`${blockClass}__block`}> */}
 
       <ConditionBuilderItem
-        label={label}
+        label={label ?? condition?.property}
         title={propertyText}
         renderIcon={icon ?? null}
         className={`${blockClass}__property-field`}

@@ -43,7 +43,6 @@ export const ConditionBuilderItem = ({
       (rest['data-name'] === 'propertyField' && property === 'INVALID') ||
       (rest['data-name'] === 'operatorField' && operator === 'INVALID')
     ) {
-      label = 'INVALID';
       return {
         propertyLabel: invalidText,
         isInvalid: true,

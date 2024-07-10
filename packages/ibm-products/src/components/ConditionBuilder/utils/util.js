@@ -96,8 +96,8 @@ export const checkIsValid = (item) => {
 
 export const manageTabIndexAndFocus = (currentElement, conditionBuilderRef) => {
   const contentContainer =
-    currentElement.closest(`.${blockClass}__content-container`) ??
-    currentElement.closest(`.${blockClass}__actions-container`);
+    currentElement?.closest(`.${blockClass}__content-container`) ??
+    currentElement?.closest(`.${blockClass}__actions-container`);
   contentContainer &&
     Array.from(contentContainer.querySelectorAll('[tabindex="0"]')).map(
       (element) => element?.setAttribute('tabindex', '-1')

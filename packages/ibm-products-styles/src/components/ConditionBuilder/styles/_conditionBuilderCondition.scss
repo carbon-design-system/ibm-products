@@ -74,11 +74,16 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   pointer-events: none;
   transition: all $duration-moderate-02 motion(exit, expressive);
 }
-.#{$block-class}__connector-disabled {
+.#{$block-class}__connector--disabled {
   display: flex;
   min-width: $spacing-10;
   align-items: center;
   background-color: $layer;
   color: $text-helper;
   padding-inline: $spacing-03;
+}
+.#{$block-class}__condition-wrapper
+  > .#{$block-class}__condition-block:last-child
+  > .#{$block-class}__groupConnector {
+  margin-bottom: 0;
 }

@@ -20,7 +20,7 @@ export const ConditionBuilderItemNumber = ({
 }) => {
   const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
-    if (!isNaN(value) && checkIfValid(value)) {
+    if (value !== '' && !isNaN(value) && checkIfValid(value)) {
       onChange(`${value} ${config.unit ?? ''}`);
     } else {
       onChange('INVALID');
@@ -33,7 +33,7 @@ export const ConditionBuilderItemNumber = ({
     return true;
   };
   const getDefaultValue = () => {
-    return conditionState.value?.split(' ')?.[0];
+    return conditionState.value?.split(' ')?.[0] ?? '';
   };
   return (
     <div className={`${blockClass}__item-number`}>

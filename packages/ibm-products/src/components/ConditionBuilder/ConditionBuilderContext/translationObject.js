@@ -31,6 +31,7 @@ export const translationsObject = {
   valueText: 'Value',
   connectorText: 'Connector',
   conditionRowText: 'Condition row',
+  conditionRowGroupText: 'Condition row group',
   removeConditionText: 'Remove condition',
   addConditionRowText: 'Add condition row',
   startText: 'Start',
@@ -41,6 +42,7 @@ export const translationsObject = {
   removeActionText: 'Remove Action',
   addActionText: 'Add action',
   invalidText: 'Incomplete',
-  invalidDateText: 'Invalid Date',
   invalidNumberWarnText: 'Invalid number, must be 0 or greater',
+  conditionBuilderText: 'Condition Builder',
+  actionSectionText: 'Action Section',
 };

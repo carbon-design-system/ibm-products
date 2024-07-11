@@ -64,6 +64,7 @@ export const ConditionBuilderProvider = (props) => {
         getOptions: props.getOptions,
         variant: props.variant,
         translateWithId: props.translateWithId,
+        conditionBuilderRef: props.conditionBuilderRef,
       }}
     >
       {
@@ -81,6 +82,11 @@ ConditionBuilderProvider.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
+   * ref of condition builder
+   */
+  conditionBuilderRef: PropTypes.object,
+
+  /**
    * This is an optional callback function that will be triggered when options array is not passed in the inputConfig against a property. 
    * This can be a asynchronous function that need  to  return a promise, so it will allow to fetch options from API call.
    * options has to be in valid format
@@ -90,7 +96,6 @@ ConditionBuilderProvider.propTypes = {
         },...] 
    */
   getOptions: PropTypes.func,
-
   /**
    * This is a mandatory prop that defines the input to the condition builder.
     
@@ -130,11 +135,11 @@ ConditionBuilderProvider.propTypes = {
       })
     ),
   }).isRequired,
+
   /**
    * Provide an mandatory numeric value that will be used to enable search option in the popovers with list.
    */
   popOverSearchThreshold: PropTypes.number.isRequired,
-
   /**
    * Optional prop if you want to pass translation to the texts used . Otherwise this will the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
@@ -142,6 +147,7 @@ ConditionBuilderProvider.propTypes = {
 ]
    */
   translateWithId: PropTypes.func,
+
   /**
    * Provide the condition builder variant: sentence/ tree
    */

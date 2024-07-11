@@ -21,7 +21,7 @@ import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { focusThisField } from '../utils/util';
+import { checkIsValid, focusThisField } from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
@@ -53,7 +53,9 @@ const ConditionBlock = (props) => {
     showConditionPreviewHandler,
     isLastCondition,
   } = props;
-  const { inputConfig, variant } = useContext(ConditionBuilderContext);
+  const { inputConfig, variant, conditionBuilderRef } = useContext(
+    ConditionBuilderContext
+  );
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
 
@@ -74,9 +76,9 @@ const ConditionBlock = (props) => {
   //filtering the current property to access its properties and config options
   const getCurrentConfig = (property) => {
     return (
-      inputConfig.properties?.filter(
+      inputConfig.properties?.find(
         (eachProperty) => eachProperty.id == property
-      )[0] ?? {}
+      ) ?? {}
     );
   };
 
@@ -95,7 +97,7 @@ const ConditionBlock = (props) => {
   const ItemComponent = property ? itemComponents[type] : null;
 
   const onStatementChangeHandler = (v, evt) => {
-    focusThisField(evt);
+    focusThisField(evt, conditionBuilderRef);
     onStatementChange(v);
   };
 
@@ -105,7 +107,7 @@ const ConditionBlock = (props) => {
       property: newProperty,
       operator: undefined,
       value: '',
-      popoverToOpen: 'operatorField',
+      popoverToOpen: checkIsValid(newProperty) ? 'operatorField' : '',
     });
   };
   const onOperatorChangeHandler = (newOperator) => {
@@ -113,12 +115,14 @@ const ConditionBlock = (props) => {
       ...condition,
       operator: newOperator,
       value: undefined,
-      popoverToOpen: 'valueField',
+      popoverToOpen: checkIsValid(newOperator) ? 'valueField' : '',
     });
   };
-  const onValueChangeHandler = (newValue) => {
+  const onValueChangeHandler = (newValue, evt) => {
     const currentCondition = { ...condition };
     delete currentCondition.popoverToOpen;
+    focusThisField(evt, conditionBuilderRef);
+
     onChange({
       ...currentCondition,
       value: newValue,
@@ -160,6 +164,7 @@ const ConditionBlock = (props) => {
         config={config}
         data-name="valueField"
         parentRef={popoverRef}
+        type={type}
       />
     );
   };
@@ -216,13 +221,14 @@ const ConditionBlock = (props) => {
       {/* <div className={`${blockClass}__block`}> */}
 
       <ConditionBuilderItem
-        label={label}
+        label={label ?? condition?.property}
         title={propertyText}
         renderIcon={icon ?? null}
         className={`${blockClass}__property-field`}
         data-name="propertyField"
         condition={condition}
         type={type}
+        onChange={onPropertyChangeHandler}
       >
         <ItemOption
           conditionState={{
@@ -233,13 +239,14 @@ const ConditionBlock = (props) => {
           config={{ options: inputConfig.properties }}
         />
       </ConditionBuilderItem>
-      {property && (
+      {checkIsValid(property) && (
         <ConditionBuilderItem
           label={operator}
           title={operatorText}
           data-name="operatorField"
           condition={condition}
           type={type}
+          onChange={onOperatorChangeHandler}
         >
           <ItemOption
             config={{
@@ -253,7 +260,7 @@ const ConditionBlock = (props) => {
           />
         </ConditionBuilderItem>
       )}
-      {property && operator && (
+      {checkIsValid(property) && checkIsValid(operator) && (
         <ConditionBuilderItem
           label={value}
           type={type}
@@ -262,6 +269,7 @@ const ConditionBlock = (props) => {
           data-name="valueField"
           condition={condition}
           config={config}
+          onChange={onValueChangeHandler}
           renderChildren={renderChildren}
         />
       )}

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.45.0-rc.0",
+  "version": "2.45.0-rc.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -114,8 +114,8 @@
     "@carbon/grid": "^11.22.0",
     "@carbon/layout": "^11.21.0",
     "@carbon/motion": "^11.17.0",
-    "@carbon/react": "^1.55.0",
-    "@carbon/themes": "^11.34.0",
+    "@carbon/react": "^1.60.3",
+    "@carbon/themes": "^11.37.1",
     "@carbon/type": "^11.26.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"

@@ -25,7 +25,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   @include type-style('body-01');
 }
 
-.#{$block-class}__item__content {
+.#{$block-class}__popover-content-wrapper {
   overflow: auto;
   min-width: $spacing-07 + $spacing-13;
   max-width: $spacing-13 + $spacing-13;

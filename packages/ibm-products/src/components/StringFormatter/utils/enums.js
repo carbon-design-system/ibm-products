@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const StringFormatterAlignment = {
+export const deprecated_StringFormatterAlignment = {
   TOP: 'top',
   TOP_LEFT: 'top-left',
   TOP_RIGHT: 'top-right',
@@ -18,4 +18,41 @@ export const StringFormatterAlignment = {
   RIGHT: 'right',
   RIGHT_BOTTOM: 'right-bottom',
   RIGHT_TOP: 'right-top',
+};
+
+export const StringFormatterAlignment = {
+  TOP: 'top',
+  TOP_START: 'top-start',
+  TOP_END: 'top-end',
+  BOTTOM: 'bottom',
+  BOTTOM_START: 'bottom-start',
+  BOTTOM_END: 'bottom-end',
+  LEFT: 'left',
+  LEFT_END: 'left-end',
+  LEFT_START: 'left-start',
+  RIGHT: 'right',
+  RIGHT_END: 'right-end',
+  RIGHT_START: 'right-start',
+};
+
+export const propMappingFunction = (deprecatedValue) => {
+  const mapping = {
+    [deprecated_StringFormatterAlignment.TOP_LEFT]:
+      StringFormatterAlignment.TOP_START,
+    [deprecated_StringFormatterAlignment.TOP_RIGHT]:
+      StringFormatterAlignment.TOP_END,
+    [deprecated_StringFormatterAlignment.BOTTOM_LEFT]:
+      StringFormatterAlignment.BOTTOM_START,
+    [deprecated_StringFormatterAlignment.BOTTOM_RIGHT]:
+      StringFormatterAlignment.BOTTOM_END,
+    [deprecated_StringFormatterAlignment.LEFT_BOTTOM]:
+      StringFormatterAlignment.LEFT_END,
+    [deprecated_StringFormatterAlignment.LEFT_TOP]:
+      StringFormatterAlignment.LEFT_START,
+    [deprecated_StringFormatterAlignment.RIGHT_BOTTOM]:
+      StringFormatterAlignment.RIGHT_END,
+    [deprecated_StringFormatterAlignment.RIGHT_START]:
+      StringFormatterAlignment.RIGHT_START,
+  };
+  return mapping[deprecatedValue];
 };

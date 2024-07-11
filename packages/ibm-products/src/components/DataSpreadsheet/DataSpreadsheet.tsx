@@ -67,6 +67,7 @@ const defaults = {
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
   onDataUpdate: Object.freeze(() => {}),
+  onColDrag: Object.freeze(() => {}),
   onActiveCellChange: Object.freeze(() => {}),
   onSelectionAreaChange: Object.freeze(() => {}),
   theme: 'light',
@@ -117,6 +118,11 @@ interface DataSpreadsheetProps {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange?: () => void;
+
+  /**
+   * Callback for columns after being dragged
+   */
+  onColDrag?: ({ ...args }) => void;
 
   /**
    * The setter fn for the data prop
@@ -180,6 +186,7 @@ export let DataSpreadsheet = React.forwardRef(
       data = defaults.data,
       defaultEmptyRowCount = defaults.defaultEmptyRowCount,
       onDataUpdate = defaults.onDataUpdate,
+      onColDrag = defaults.onColDrag,
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
@@ -201,6 +208,8 @@ export let DataSpreadsheet = React.forwardRef(
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
+    const [currentColumns, setCurrentColumns] = useState<object>(columns);
+    const [pastColumns, setPastColumns] = useState<object[]>([]);
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] =
       useState<ActiveCellCoordinates | null>(null);
@@ -223,6 +232,7 @@ export let DataSpreadsheet = React.forwardRef(
         activeCellCoordinates,
         isEditing,
         cellEditorValue,
+        selectedHeaderReorderActive,
       }) || {};
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef<HTMLTextAreaElement>();
@@ -284,6 +294,44 @@ export let DataSpreadsheet = React.forwardRef(
       },
       [cellEditorValue, onDataUpdate]
     );
+
+    useEffect(() => {
+      const currentHeaders: Array<any> = [];
+      if (Object.keys(currentColumns).length > 0) {
+        Object.keys(currentColumns).forEach((itemIndex) => {
+          if (currentColumns[itemIndex].Header) {
+            currentHeaders.push(currentColumns[itemIndex].Header);
+          }
+        });
+      }
+
+      if (previousState.selectedHeaderReorderActive) {
+        setPastColumns(currentHeaders);
+      }
+
+      if (
+        !previousState.selectedHeaderReorderActive &&
+        pastColumns.length > 0 &&
+        !headerCellHoldActive &&
+        JSON.stringify(currentHeaders) !== JSON.stringify(pastColumns)
+      ) {
+        onColDrag({
+          headers: currentHeaders,
+          data: activeCellContent.props.data,
+        });
+        if (currentHeaders.length === 0) {
+          setPastColumns([]);
+        }
+      }
+    }, [
+      previousState?.selectedHeaderReorderActive,
+      currentColumns,
+      headerCellHoldActive,
+      columns,
+      activeCellContent,
+      onColDrag,
+      pastColumns,
+    ]);
 
     // Removes the active cell element
     const removeActiveCell = useCallback(() => {
@@ -908,6 +956,7 @@ export let DataSpreadsheet = React.forwardRef(
           <DataSpreadsheetBody
             activeCellRef={activeCellRef}
             activeCellCoordinates={activeCellCoordinates}
+            setCurrentColumns={setCurrentColumns}
             ref={spreadsheetRef as LegacyRef<HTMLDivElement>}
             clickAndHoldActive={clickAndHoldActive}
             setClickAndHoldActive={setClickAndHoldActive}
@@ -1076,6 +1125,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * Callback for when columns are dropped after dragged
+   */
+  onColDrag: PropTypes.func,
 
   /**
    * The setter fn for the data prop

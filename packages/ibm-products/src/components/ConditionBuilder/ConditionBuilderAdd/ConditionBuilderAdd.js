@@ -59,17 +59,24 @@ const ConditionBuilderAdd = ({
     onBlur: hideConditionSubGroupPreviewHandler,
   });
 
+  const getAriaLabel = () => {
+    return buttonLabel
+      ? buttonLabel
+      : !enableSubGroup
+      ? addConditionRowText
+      : undefined;
+  };
+
   const wrapperProps = enableSubGroup
     ? {
         role: 'gridcell',
-        // 'aria-label': addSubgroupText,
       }
     : {};
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
       role={!enableSubGroup ? 'gridcell' : 'none'}
-      aria-label={!enableSubGroup ? addConditionRowText : undefined}
+      aria-label={getAriaLabel()}
       onMouseEnter={showAddSubGroup}
       onMouseLeave={hideAddSubGroup}
       onFocus={showAddSubGroup}

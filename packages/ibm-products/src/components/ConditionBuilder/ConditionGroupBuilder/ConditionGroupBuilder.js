@@ -9,7 +9,7 @@ import {
   statementConfig,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { focusThisField } from '../utils/util';
+import { focusThisField, manageTabIndexAndFocus } from '../utils/util';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import uuidv4 from '../../../global/js/utils/uuidv4';
@@ -28,14 +28,15 @@ const ConditionGroupBuilder = ({
   aria,
   onRemove,
   onChange,
-  conditionBuilderRef,
   className,
 }) => {
-  const [conditionBuilderGroupText, conditionText] = useTranslations([
-    'condition_builder_group',
-    'conditionText',
-  ]);
-  const { variant } = useContext(ConditionBuilderContext);
+  const [conditionBuilderGroupText, conditionText, conditionBuilderText] =
+    useTranslations([
+      'conditionBuilderGroupText',
+      'conditionText',
+      'conditionBuilderText',
+    ]);
+  const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
@@ -45,12 +46,44 @@ const ConditionGroupBuilder = ({
       variant == 'tree'
         ? handleFocusOnCloseTree(evt)
         : handleFocusOnClose(evt, conditionIndex);
-      onChange({
-        ...group,
-        conditions: group.conditions.filter(
-          (condition) => conditionId !== condition.id
-        ),
-      });
+
+      if (group.conditions[1].conditions) {
+        //when we remove every plain conditions of a group without deleting  the subgroup, we need to restructure the group
+        //the inner group become outer group and same level subgroups become plain conditions
+
+        //spreading out the condition inside the subgroup
+        const allConditions = group.conditions.reduce((acc, item) => {
+          if (item.conditions) {
+            return acc.concat(item.conditions);
+          }
+          return acc;
+        }, []);
+
+        //we always have conditions first and then subgroups, so ordering accordingly
+        const groupedItems = {
+          groups: [],
+          conditions: [],
+        };
+        allConditions.forEach((item) => {
+          if (item.conditions) {
+            groupedItems.groups.push(item);
+          } else {
+            groupedItems.conditions.push(item);
+          }
+        });
+
+        onChange({
+          ...group,
+          conditions: [...groupedItems.conditions, ...groupedItems.groups],
+        });
+      } else {
+        onChange({
+          ...group,
+          conditions: group.conditions.filter(
+            (condition) => conditionId !== condition.id
+          ),
+        });
+      }
     } else {
       onRemove(evt);
     }
@@ -95,9 +128,15 @@ const ConditionGroupBuilder = ({
       .closest(`.${blockClass}__group`)
       ?.querySelectorAll('[data-name="closeCondition"]');
     if (conditionIndex == currentGroupCloseButtons.length - 1) {
-      currentGroupCloseButtons[conditionIndex - 1]?.focus();
+      manageTabIndexAndFocus(
+        currentGroupCloseButtons[conditionIndex - 1],
+        conditionBuilderRef
+      );
     } else {
-      currentGroupCloseButtons[conditionIndex + 1]?.focus();
+      manageTabIndexAndFocus(
+        currentGroupCloseButtons[conditionIndex + 1],
+        conditionBuilderRef
+      );
     }
   };
   const handleFocusOnCloseTree = (evt) => {
@@ -124,11 +163,17 @@ const ConditionGroupBuilder = ({
     //Otherwise , check the previous item is a valid condition
 
     if (nextElement?.classList.contains(`${blockClass}__condition-block`)) {
-      nextElement?.querySelector('[data-name="closeCondition"]')?.focus();
+      manageTabIndexAndFocus(
+        nextElement?.querySelector('[data-name="closeCondition"]'),
+        conditionBuilderRef
+      );
     } else if (
       prevElement?.classList.contains(`${blockClass}__condition-block`)
     ) {
-      prevElement?.querySelector('[data-name="closeCondition"]')?.focus();
+      manageTabIndexAndFocus(
+        prevElement?.querySelector('[data-name="closeCondition"]'),
+        conditionBuilderRef
+      );
     }
     //If there are no valid condition in this group, focus next or previous row
     else {
@@ -139,9 +184,13 @@ const ConditionGroupBuilder = ({
         `[aria-level="${Number(currentLevel) + 1}"][role="row"]`
       );
       if (nextRow) {
-        nextRow?.focus();
+        manageTabIndexAndFocus(nextRow, conditionBuilderRef);
       } else if (prevRows?.length > 1) {
-        prevRows[prevRows.length - 2]?.focus();
+        // prevRows[prevRows.length - 2].setAttribute('tabindex', '0');
+        manageTabIndexAndFocus(
+          prevRows[prevRows.length - 2],
+          conditionBuilderRef
+        );
       }
     }
   };
@@ -213,7 +262,7 @@ const ConditionGroupBuilder = ({
         <div
           className={`${blockClass}__condition-wrapper`}
           role="grid"
-          aria-label={conditionBuilderGroupText}
+          aria-label={conditionBuilderText}
         >
           {/* condition loop starts here */}
 
@@ -283,7 +332,7 @@ const ConditionGroupBuilder = ({
                   label: conditionText,
                 }}
                 onChange={(v, evt) => {
-                  focusThisField(evt);
+                  focusThisField(evt, conditionBuilderRef);
                   onStatementChangeHandler(v);
                 }}
                 config={{ options: statementConfig }}
@@ -307,7 +356,7 @@ const ConditionGroupBuilder = ({
                 )}
               >
                 <ConditionConnector
-                  className={`${blockClass}__gap ${blockClass}__groupConnector`}
+                  className={`${blockClass}__gap ${blockClass}__gap-bottom ${blockClass}__groupConnector`}
                   operator={group.groupOperator}
                   aria-hidden
                 />
@@ -326,7 +375,6 @@ const ConditionGroupBuilder = ({
                   onRemove={(e) => {
                     onRemoveHandler(eachCondition.id, e);
                   }}
-                  conditionBuilderRef={conditionBuilderRef}
                 />
               </div>
             ) : (
@@ -403,11 +451,6 @@ ConditionGroupBuilder.propTypes = {
    */
   className: PropTypes.string,
 
-  /**
-  className: PropTypes.string,
-   * ref of condition builder
-   */
-  conditionBuilderRef: PropTypes.object,
   group: PropTypes.object,
   /**
    * callback to update the current condition of the state tree

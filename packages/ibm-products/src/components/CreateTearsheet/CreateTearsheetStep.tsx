@@ -75,6 +75,11 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   className?: string;
 
   /**
+   * Updates the text of the custom button in the tearsheet step.
+   */
+  customButtonChangeText?: string;
+
+  /**
    * Sets an optional description on the step component
    */
   description?: React.ReactNode;
@@ -99,6 +104,21 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
    * This optional prop will indicate an error icon on the progress indicator step item
    */
   invalid?: boolean;
+
+  /**
+   * Disable custom button
+   */
+  isCustomButtonDisabled?: boolean;
+
+  /**
+   * Hide custom button
+   */
+  isCustomButtonHide?: boolean;
+
+  /**
+   * Optional function to be called when you click to custom button.
+   */
+  onCustomButtonClick?: () => void;
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -146,6 +166,7 @@ export let CreateTearsheetStep = forwardRef(
 
       children,
       className,
+      customButtonChangeText,
       description,
       disableSubmit,
       fieldsetLegendText,
@@ -153,6 +174,9 @@ export let CreateTearsheetStep = forwardRef(
       includeStep = defaults.includeStep,
       introStep,
       invalid,
+      isCustomButtonDisabled,
+      isCustomButtonHide,
+      onCustomButtonClick,
       onMount,
       onNext,
       onPrevious,
@@ -194,8 +218,17 @@ export let CreateTearsheetStep = forwardRef(
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
         stepsContext?.setOnMount(onMount);
+        stepsContext?.setOnCustomButtonClick(onCustomButtonClick);
+        stepsContext?.setOnCustomButtonChangeName(customButtonChangeText);
       }
-    }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
+    }, [
+      onMount,
+      onCustomButtonClick,
+      customButtonChangeText,
+      stepsContext,
+      stepNumber,
+      previousState?.currentStep,
+    ]);
 
     // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {
@@ -234,6 +267,8 @@ export let CreateTearsheetStep = forwardRef(
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
+        stepsContext?.setIsCustomButtonDisabled(!!isCustomButtonDisabled);
+        stepsContext?.setIsCustomButtonHide(!!isCustomButtonHide);
       }
     }, [
       stepsContext,
@@ -243,6 +278,8 @@ export let CreateTearsheetStep = forwardRef(
       onPrevious,
       stepRef,
       stepRefValue,
+      isCustomButtonDisabled,
+      isCustomButtonHide,
     ]);
 
     const renderDescription = () => {
@@ -323,6 +360,11 @@ CreateTearsheetStep.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Updates the text of the custom button in the tearsheet step.
+   */
+  customButtonChangeText: PropTypes.string,
+
+  /**
    * Sets an optional description on the step component
    */
   description: PropTypes.node,
@@ -365,6 +407,21 @@ CreateTearsheetStep.propTypes = {
    * This optional prop will indicate an error icon on the progress indicator step item
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Disable custom button
+   */
+  isCustomButtonDisabled: PropTypes.bool,
+
+  /**
+   * Hide custom button
+   */
+  isCustomButtonHide: PropTypes.bool,
+
+  /**
+   * Optional function to be called when you click to custom button.
+   */
+  onCustomButtonClick: PropTypes.func,
 
   /**
    * Optional function to be called on initial mount of a step.

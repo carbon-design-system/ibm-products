@@ -49,6 +49,8 @@ const submitButtonText = 'Submit';
 const cancelButtonText = 'Cancel';
 const backButtonText = 'Back';
 const nextButtonText = 'Next';
+const customButtonText = 'Skip';
+const customButtonChangeText = 'Skip step';
 const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
@@ -59,6 +61,7 @@ const dataTestId = uuidv4();
 const ref = React.createRef();
 const onMountFn = jest.fn();
 const ariaLabel = 'test-aria-label';
+const onCustomButtonClickFn = jest.fn();
 const defaultProps = {
   title,
   submitButtonText,
@@ -79,6 +82,10 @@ const renderCreateTearsheet = ({
   onPrevious = onPreviousStepFn,
   finalOnNextFn = finalStepOnNext,
   rejectOnSubmitNext = false,
+  isCustomButtonDisabled = false,
+  isCustomButtonHide = false,
+  customButtonChangeText = customButtonText,
+  onCustomButtonClick = onCustomButtonClickFn,
   ...rest
 }) =>
   render(
@@ -93,6 +100,10 @@ const renderCreateTearsheet = ({
         onMount={onMountFn}
         description={step1Description}
         subtitle={step1Subtitle}
+        isCustomButtonDisabled={isCustomButtonDisabled}
+        isCustomButtonHide={isCustomButtonHide}
+        customButtonChangeText={customButtonChangeText}
+        onCustomButtonClick={onCustomButtonClick}
       >
         step 1 content
         <button type="button" disabled>
@@ -473,6 +484,56 @@ describe(CreateTearsheet.displayName, () => {
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
+  });
+
+  it('should show custom button', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      customButtonText: customButtonText,
+    });
+    const customButton = screen.getByText(customButtonText);
+    expect(customButton).toBeInTheDocument();
+  });
+
+  it('should disabled custom button', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      customButtonText: customButtonText,
+      isCustomButtonDisabled: true,
+    });
+    const customButton = screen.getByText(customButtonText);
+    expect(customButton).toBeDisabled();
+  });
+
+  it('should hide custom button', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      customButtonText: customButtonText,
+      isCustomButtonHide: true,
+    });
+    const customButton = screen.queryByText(customButtonText);
+    expect(customButton).toBeNull();
+  });
+
+  it('should update custom button text', async () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      customButtonText: customButtonText,
+      customButtonChangeText: customButtonChangeText,
+    });
+
+    const customButton = screen.getByText(customButtonChangeText);
+    expect(customButton).toBeInTheDocument();
+  });
+  it('should call onCustomButtonClick', async () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      customButtonText: customButtonText,
+      onCustomButtonClick: onCustomButtonClickFn,
+    });
+    const customButton = screen.getByText(customButtonText);
+    await act(() => click(customButton));
+    await waitFor(() => expect(onCustomButtonClickFn).toHaveBeenCalled());
   });
 
   it('should create a console warning when using CreateTearsheet with only one step', async () => {

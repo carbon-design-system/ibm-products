@@ -12,6 +12,7 @@ import DocsPage from './CreateTearsheet.docs-page';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
+import { MultiStepWithCustomButton } from './preview-components/MultiStepWithCustomButton';
 
 export default {
   title: 'IBM Products/Patterns/Create flows/CreateTearsheet',
@@ -46,6 +47,8 @@ const createTearsheetProps = {
   firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
+const customButtonText = 'Skip';
+
 export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'Create tearsheet';
 multiStepTearsheet.args = {
@@ -62,4 +65,11 @@ export const withErrorState = MultiStepWithStepInErrorState.bind({});
 withErrorState.storyName = 'Create tearsheet with step in error state';
 withErrorState.args = {
   ...createTearsheetProps,
+};
+
+export const withCustomButton = MultiStepWithCustomButton.bind({});
+withCustomButton.storyName = 'Create tearsheet with custom button';
+withCustomButton.args = {
+  ...createTearsheetProps,
+  customButtonText,
 };

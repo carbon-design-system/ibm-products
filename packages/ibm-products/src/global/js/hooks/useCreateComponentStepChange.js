@@ -30,6 +30,10 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
+  customButtonText,
+  onCustomButtonClick,
+  isCustomButtonDisabled,
+  isCustomButtonHide,
 }) => {
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
@@ -120,8 +124,22 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
+    const handleCustom = () => {
+      if (typeof onCustomButtonClick === 'function') {
+        onCustomButtonClick();
+      }
+    };
     if (stepData?.length > 0) {
       const buttons = [];
+      if (customButtonText && !isCustomButtonHide) {
+        buttons.push({
+          key: 'create-action-button-custom',
+          label: customButtonText,
+          onClick: handleCustom,
+          kind: 'secondary',
+          disabled: isCustomButtonDisabled,
+        });
+      }
       if (stepData?.length > 1) {
         buttons.push({
           key: 'create-action-button-back',
@@ -151,6 +169,7 @@ export const useCreateComponentStepChange = ({
         loading: isSubmitting,
         className: `${componentBlockClass}__create-button`,
       });
+
       setCreateComponentActions(buttons);
     }
   }, [
@@ -178,5 +197,9 @@ export const useCreateComponentStepChange = ({
     onPrevious,
     setLoadingPrevious,
     loadingPrevious,
+    isCustomButtonDisabled,
+    isCustomButtonHide,
+    onCustomButtonClick,
+    customButtonText,
   ]);
 };

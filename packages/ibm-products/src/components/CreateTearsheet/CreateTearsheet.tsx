@@ -43,7 +43,11 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 
 export interface StepsContextType {
   currentStep: number;
+  setIsCustomButtonDisabled: Dispatch<SetStateAction<boolean>>;
+  setIsCustomButtonHide: Dispatch<SetStateAction<boolean>>;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
+  setOnCustomButtonClick: (fn: any) => void;
+  setOnCustomButtonChangeName: (fn: any) => void;
   setOnPrevious: (fn: any) => void;
   setOnNext: (fn: any) => void;
   setOnMount: (fn: any) => void;
@@ -76,6 +80,11 @@ interface CreateTearsheetProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
+
+  /**
+   * The custom button text
+   */
+  customButtonText?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -170,6 +179,7 @@ export let CreateTearsheet = forwardRef(
       cancelButtonText,
       children,
       className,
+      customButtonText,
       description,
       influencerWidth = 'narrow',
       initialStep,
@@ -201,6 +211,10 @@ export let CreateTearsheet = forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
+    const [onCustomButtonClick, setOnCustomButtonClick] = useState();
+    const [onCustomButtonChangeName, setOnCustomButtonChangeName] = useState();
+    const [isCustomButtonDisabled, setIsCustomButtonDisabled] = useState(false);
+    const [isCustomButtonHide, setIsCustomButtonHide] = useState(false);
 
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
@@ -270,6 +284,12 @@ export let CreateTearsheet = forwardRef(
       nextButtonText,
       isSubmitting,
       componentBlockClass: blockClass,
+      onCustomButtonClick,
+      isCustomButtonDisabled,
+      isCustomButtonHide,
+      customButtonText: onCustomButtonChangeName
+        ? onCustomButtonChangeName
+        : customButtonText,
       setCreateComponentActions: setCreateTearsheetActions,
     });
 
@@ -302,9 +322,15 @@ export let CreateTearsheet = forwardRef(
               value={{
                 currentStep,
                 setIsDisabled,
+                setIsCustomButtonDisabled,
+                setIsCustomButtonHide,
                 setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
                 setOnMount: (fn) => setOnMount(() => fn),
+                setOnCustomButtonClick: (fn) =>
+                  setOnCustomButtonClick(() => fn),
+                setOnCustomButtonChangeName: (fn) =>
+                  setOnCustomButtonChangeName(() => fn),
                 setStepData,
                 stepData,
               }}
@@ -351,6 +377,11 @@ CreateTearsheet.propTypes = {
    * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
+
+  /**
+   * The custom button text
+   */
+  customButtonText: PropTypes.string,
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.

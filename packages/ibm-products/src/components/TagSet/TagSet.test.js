@@ -192,7 +192,7 @@ describe(TagSet.displayName, () => {
 
     const modal = screen.getByRole('presentation');
     expect(modal).toHaveClass('is-visible');
-    const closeButton = screen.getByTitle('Close');
+    const closeButton = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
   });

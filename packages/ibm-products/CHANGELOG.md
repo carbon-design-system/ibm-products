@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.45.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.45.0-rc.0...@carbon/ibm-products@2.45.0-rc.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* address issue with active cell value ([#5619](https://github.com/carbon-design-system/ibm-products/issues/5619)) ([90960b5](https://github.com/carbon-design-system/ibm-products/commit/90960b5ed6ce6692e50e8e2c9d6f47dab1f625c0))
+
+
+
+
+
+# [2.45.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.44.0...@carbon/ibm-products@2.45.0-rc.0) (2024-07-08)
+
+
+### Bug Fixes
+
+* **ConditionBuilder:** can't change month or year for Date type ([#5623](https://github.com/carbon-design-system/ibm-products/issues/5623)) ([e093199](https://github.com/carbon-design-system/ibm-products/commit/e093199d509d0eb222ee9eedbdc455fae6f66aaf))
+* **EditTearsheet:** prevent submit while processing and add indication if submitting ([#5577](https://github.com/carbon-design-system/ibm-products/issues/5577)) ([83fa9e0](https://github.com/carbon-design-system/ibm-products/commit/83fa9e004853a68b7304b74344bcbc41e4e9abe7))
+* **HTTPError:** svg inline css not working strict csp ([#5585](https://github.com/carbon-design-system/ibm-products/issues/5585)) ([da5fd0a](https://github.com/carbon-design-system/ibm-products/commit/da5fd0a09a05696e4f22cf9e3241e1ad67a941b9))
+* **OptionsTile:** fix styling of summary and chevron when nesting OptionsTile ([#5612](https://github.com/carbon-design-system/ibm-products/issues/5612)) ([9927c3b](https://github.com/carbon-design-system/ibm-products/commit/9927c3b5406719cb0181487b39fdb1a17cca8302))
+* **PageHeader:** silence warnings from enabling ActionBar ([#5588](https://github.com/carbon-design-system/ibm-products/issues/5588)) ([01b4add](https://github.com/carbon-design-system/ibm-products/commit/01b4adde4e5b2389da1bee6c9fe36361986d75a4))
+* remove unnecessary title attributes from datagrid ([#5583](https://github.com/carbon-design-system/ibm-products/issues/5583)) ([f5e4ba4](https://github.com/carbon-design-system/ibm-products/commit/f5e4ba461948bb8285199597940b3edf896c4417))
+* use value to check for index ([#5595](https://github.com/carbon-design-system/ibm-products/issues/5595)) ([e18ada0](https://github.com/carbon-design-system/ibm-products/commit/e18ada09a5a25f59bd643bda407ea76cbc6af7cf))
+
+
+### Features
+
+* **ConditionBuilder:** handle keyboard navigation for tree variant ([#5640](https://github.com/carbon-design-system/ibm-products/issues/5640)) ([2df7a14](https://github.com/carbon-design-system/ibm-products/commit/2df7a14288468af06ff51086047d3531832e4427))
+* **ConditionBuilder:** translation changes , text area support ([#5563](https://github.com/carbon-design-system/ibm-products/issues/5563)) ([9f02450](https://github.com/carbon-design-system/ibm-products/commit/9f0245063cc08bb494ef3dc9e2c768ab069ec5de))
+* **dataspreadsheet:** option for read only table + option for disable column swapping ([#5597](https://github.com/carbon-design-system/ibm-products/issues/5597)) ([93c82cc](https://github.com/carbon-design-system/ibm-products/commit/93c82ccc9e7609074653ac762a24a134cc4d2f73))
+* **editInPlace:** allow to provide custom onBlur function otherwise use default behavior ([#5505](https://github.com/carbon-design-system/ibm-products/issues/5505)) ([c833d06](https://github.com/carbon-design-system/ibm-products/commit/c833d06ba30ebdb02250058c28295add4bada977))
+* **eslint-ssr-plugin:** adds `eslint-plugin-ssr-friendly` so we can catch ssr issues/bugs during development ([#5409](https://github.com/carbon-design-system/ibm-products/issues/5409)) ([0517cdb](https://github.com/carbon-design-system/ibm-products/commit/0517cdbdd4e177bfb4a5cc7dea2c535aead0633d))
+
+
+
+
+
+# [2.44.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.44.0-rc.2...@carbon/ibm-products@2.44.0) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.44.0-rc.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.44.0-rc.1...@carbon/ibm-products@2.44.0-rc.2) (2024-07-03)
 
 **Note:** Version bump only for package @carbon/ibm-products

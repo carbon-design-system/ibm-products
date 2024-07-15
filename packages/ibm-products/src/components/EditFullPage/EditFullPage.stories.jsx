@@ -138,6 +138,8 @@ const Template = ({ ...args }) => {
                   </DefinitionTooltip>
                 </div>
                 <Toggle
+                  labelText="Simulate error"
+                  hideLabel
                   id="simulated-error-toggle"
                   size="sm"
                   onToggle={(event) => setShouldReject(event)}
@@ -330,6 +332,8 @@ const TemplateWithSections = ({ ...args }) => {
                     </DefinitionTooltip>
                   </div>
                   <Toggle
+                    labelText="Simulate error"
+                    hideLabel
                     id="simulated-error-toggle"
                     size="sm"
                     onToggle={(event) => setShouldReject(event)}

@@ -58,4 +58,5 @@ stringFormatter.args = {
   truncate: true,
   value: valueStr,
   width: '200px',
+  tooltipDirection: 'bottom-left',
 };

@@ -69,3 +69,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__group-separator {
   margin-top: $spacing-02;
 }
+.#{$block-class}__add-group,
+.#{$block-class}__group-separator {
+  width: fit-content;
+}

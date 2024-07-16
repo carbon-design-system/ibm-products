@@ -28,7 +28,9 @@ const useNestedRowExpander = (hooks) => {
     activeElement: typeof document !== 'undefined' && document.activeElement,
   });
 
-  const visibleColumns = (columns) => {
+  const visibleColumns = (columns, state) => {
+    const { getAsyncSubRows } = state.instance || {};
+    console.log(getAsyncSubRows);
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
@@ -39,6 +41,9 @@ const useNestedRowExpander = (hooks) => {
             event.stopPropagation();
             row.toggleRowExpanded();
             lastExpandedRowIndex.current = row.id;
+            if (!row.isExpanded) {
+              getAsyncSubRows?.(row);
+            }
           },
         };
         const {
@@ -48,8 +53,10 @@ const useNestedRowExpander = (hooks) => {
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
+        console.log(row, row.canExpand);
         return (
-          row.canExpand && (
+          row.canExpand ||
+          (getAsyncSubRows && (
             <button
               type="button"
               aria-label={expanderTitle}
@@ -67,7 +74,7 @@ const useNestedRowExpander = (hooks) => {
                 })}
               />
             </button>
-          )
+          ))
         );
       },
       width: 48,

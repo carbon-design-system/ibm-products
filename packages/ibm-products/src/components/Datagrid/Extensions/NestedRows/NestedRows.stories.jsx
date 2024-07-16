@@ -194,13 +194,31 @@ const nestedRowsControlProps = {
 
 const SingleLevelNestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 2));
+  // const [data] = useState(makeData(10, 2));
+  const [data, setData] = useState(makeData(10));
+  // console.log(data);
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
   const datagridState = useDatagrid(
     {
       columns,
       data,
       DatagridActions,
+      autoResetExpanded: false,
+      autoResetGlobalFilter: false,
       ...args.defaultGridProps,
+      getAsyncSubRows: async (row) => {
+        console.log('from async callback', row);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const newRows = makeData(2);
+        const clonedData = [...data];
+        const rowIndexToUpdate = clonedData.findIndex(
+          (r) => r.id === row.original.id
+        );
+        clonedData[rowIndexToUpdate].subRows = newRows;
+        console.log('update data', newRows);
+        console.log(clonedData);
+        setData(clonedData);
+      },
       getSubRows: (row) => row.subRows,
     },
     useNestedRows

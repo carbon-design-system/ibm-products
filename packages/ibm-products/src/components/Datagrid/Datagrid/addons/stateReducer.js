@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import uuidv4 from '../../../../global/js/utils/uuidv4';
 import { pkg } from '../../../../settings';
 
 const COLUMN_RESIZE_START = 'columnStartResizing';
@@ -13,6 +14,7 @@ const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
 const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
 const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
+const TOGGLE_ROW_EXPANDED = 'toggleRowExpanded';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
@@ -79,6 +81,18 @@ export const handleSelectAllRowData = ({
 
 export const stateReducer = (newState, action) => {
   switch (action.type) {
+    case TOGGLE_ROW_EXPANDED: {
+      console.log(action.type);
+      const skeletonRow = (id) => ({
+        isSkeleton: true,
+        values: 'skeleton',
+        id,
+      });
+      return {
+        ...newState,
+        dynamicRowSkeleton: skeletonRow(uuidv4()),
+      };
+    }
     case TOGGLE_ALL_ROWS_SELECTED: {
       const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
       const newSelectedRowIds = {};

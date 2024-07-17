@@ -1,5 +1,0 @@
-import{j as n}from"./settings-DrdbGLhD.js";import{T as m}from"./TooltipTrigger-C_kJnEF1.js";import{b as d}from"./bucket-10-CoUF9gTV.js";import"./index-BwDkhjyp.js";import"./_commonjsHelpers-BosuxZz1.js";import"./index-CJvxHwuA.js";import"./index-Dk74W0Oi.js";import"./deprecate-D9ms-jbM.js";import"./events-Bq7WR1mU.js";import"./index-BONylQH5.js";const T="",M={title:"IBM Products/Internal/TooltipTrigger",component:m,parameters:{styles:T},tags:["autodocs"]},c=g=>n.jsx(m,{...g}),r=c.bind({});r.args={children:n.jsx(d,{size:16})};const o=c.bind({});o.args={children:"Text"};var t,e,s;r.parameters={...r.parameters,docs:{...(t=r.parameters)==null?void 0:t.docs,source:{originalSource:`args => {
-  return <TooltipTrigger {...args} />;
-}`,...(s=(e=r.parameters)==null?void 0:e.docs)==null?void 0:s.source}}};var a,i,p;o.parameters={...o.parameters,docs:{...(a=o.parameters)==null?void 0:a.docs,source:{originalSource:`args => {
-  return <TooltipTrigger {...args} />;
-}`,...(p=(i=o.parameters)==null?void 0:i.docs)==null?void 0:p.source}}};const S=["Icon","Text"];export{r as Icon,o as Text,S as __namedExportsOrder,M as default};

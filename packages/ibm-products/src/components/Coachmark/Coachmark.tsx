@@ -24,7 +24,10 @@ import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
+/**@ts-ignore */
+import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
 const overlayBlockClass = `${blockClass}-overlay`;
@@ -56,7 +59,11 @@ interface CoachmarkProps {
     | 'top'
     | 'top-left'
     | 'top-right';
-
+  /**
+   * Auto aligns the coachmark based on screen boundaries
+   * Applies only to Tooltip Coachmarks.
+   */
+  autoAlign?: boolean;
   /**
    * Coachmark should use a single CoachmarkOverlayElements component as a child.
    * @see CoachmarkOverlayElements
@@ -82,7 +89,6 @@ interface CoachmarkProps {
   overlayKind?: 'tooltip' | 'floating' | 'stacked';
 
   overlayRef?: MutableRefObject<HTMLElement | null>;
-
   /**
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until
@@ -94,10 +100,11 @@ interface CoachmarkProps {
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
   portalTarget?: string;
+
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
-  positionTune?: { x: number; y: number } | object;
+  positionTune?: { x: number; y: number };
   /**
    * The optional button or beacon that the user will click to show the Coachmark.
    */
@@ -118,14 +125,15 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   (
     {
       align = defaults.align,
+      autoAlign,
       children,
       className,
       onClose = defaults.onClose,
       overlayClassName,
       overlayKind = defaults.overlayKind,
       overlayRef,
-      portalTarget,
       positionTune,
+      portalTarget,
       target,
       theme = defaults.theme,
 
@@ -199,6 +207,10 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         setShouldResetPosition(true);
       }
     };
+    const overlayPositionStyle = {
+      top: (positionTune?.y ?? 0) - 16,
+      left: (positionTune?.x ?? 0) - 16,
+    };
 
     const contextValue = {
       buttonProps: {
@@ -216,6 +228,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       targetOffset: targetOffset,
       align: align,
       positionTune: positionTune,
+      isOpen: isOpen,
     };
     const handleResize = throttle(() => {
       closeOverlay();
@@ -259,26 +272,57 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
           }
           {...getDevtoolsProps(componentName)}
         >
-          {target}
-          {isOpen &&
-            portalNode?.current &&
-            createPortal(
-              <CoachmarkOverlay
-                ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
-                fixedIsVisible={false}
-                kind={overlayKind}
-                onClose={handleClose}
-                theme={theme}
-                className={cx(
-                  overlayClassName,
-                  `${overlayBlockClass}--is-visible`
+          {overlayKind !== 'tooltip' ? (
+            <>
+              {target}
+              {isOpen &&
+                portalNode?.current &&
+                createPortal(
+                  <CoachmarkOverlay
+                    ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
+                    fixedIsVisible={false}
+                    kind={overlayKind}
+                    onClose={handleClose}
+                    theme={theme}
+                    className={cx(
+                      overlayClassName,
+                      `${overlayBlockClass}--is-visible`
+                    )}
+                  >
+                    {children}
+                  </CoachmarkOverlay>,
+                  // Default to `document.body` when `portalNode` is `null`
+                  portalNode?.current
                 )}
-              >
-                {children}
-              </CoachmarkOverlay>,
-              // Default to `document.body` when `portalNode` is `null`
-              portalNode?.current
-            )}
+            </>
+          ) : (
+            <Popover
+              highContrast
+              caret
+              style={{ position: 'absolute', ...overlayPositionStyle }}
+              align={align as PopoverAlignment}
+              autoAlign={autoAlign}
+              open={isOpen}
+            >
+              {target}
+              <PopoverContent>
+                {isOpen && (
+                  <CoachmarkOverlay
+                    ref={_overlayRef as MutableRefObject<HTMLDivElement | null>}
+                    fixedIsVisible={false}
+                    kind={overlayKind}
+                    onClose={handleClose}
+                    theme={theme}
+                    className={cx(overlayClassName, {
+                      [`${overlayBlockClass}--is-visible`]: isOpen,
+                    })}
+                  >
+                    {children}
+                  </CoachmarkOverlay>
+                )}
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       </CoachmarkContext.Provider>
     );
@@ -321,6 +365,11 @@ Coachmark.propTypes = {
     'top-left',
     'top-right',
   ]),
+  /**
+   * Auto aligns the coachmark based on screen boundaries
+   * Applies only to Tooltip Coachmarks.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Coachmark should use a single CoachmarkOverlayElements component as a child.
@@ -349,7 +398,6 @@ Coachmark.propTypes = {
   overlayRef: PropTypes.shape({
     current: overlayRefType as PropTypes.Validator<HTMLElement | null>,
   }),
-
   /**
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until
@@ -364,6 +412,7 @@ Coachmark.propTypes = {
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */
+  // @ts-ignore
   positionTune: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,

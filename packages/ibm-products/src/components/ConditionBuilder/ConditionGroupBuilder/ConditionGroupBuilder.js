@@ -47,9 +47,14 @@ const ConditionGroupBuilder = ({
         ? handleFocusOnCloseTree(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
-      if (group.conditions[1].conditions) {
+      if (
+        group.conditions[1].conditions &&
+        group.conditions[1].id !== conditionId
+      ) {
         //when we remove every plain conditions of a group without deleting  the subgroup, we need to restructure the group
         //the inner group become outer group and same level subgroups become plain conditions
+
+        //ensure we are deleting last condition , not the subgroup
 
         //spreading out the condition inside the subgroup
         const allConditions = group.conditions.reduce((acc, item) => {
@@ -184,9 +189,20 @@ const ConditionGroupBuilder = ({
         `[aria-level="${Number(currentLevel) + 1}"][role="row"]`
       );
       if (nextRow) {
-        manageTabIndexAndFocus(nextRow, conditionBuilderRef);
+        //since there are no condition in current group, this group will move one level up
+
+        const rowIdentity = {
+          ariaLevel: Number(nextRow.ariaLevel) - 1,
+          ariaPosInSet: nextRow.ariaPosInSet,
+        };
+        setTimeout(() => {
+          const currentRowToFocus =
+            conditionBuilderContentRef.current.querySelector(
+              `[role="row"][aria-level="${rowIdentity.ariaLevel}"][aria-posinset="${rowIdentity.ariaPosInSet}"]`
+            );
+          manageTabIndexAndFocus(currentRowToFocus, conditionBuilderRef);
+        }, 0);
       } else if (prevRows?.length > 1) {
-        // prevRows[prevRows.length - 2].setAttribute('tabindex', '0');
         manageTabIndexAndFocus(
           prevRows[prevRows.length - 2],
           conditionBuilderRef

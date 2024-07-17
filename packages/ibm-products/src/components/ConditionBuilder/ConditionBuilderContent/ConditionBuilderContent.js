@@ -32,7 +32,10 @@ const ConditionBuilderContent = ({
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
 
-  const [addConditionGroupText] = useTranslations(['addConditionGroupText']);
+  const [addConditionGroupText, conditionHeadingText] = useTranslations([
+    'addConditionGroupText',
+    'conditionHeadingText',
+  ]);
   const showConditionGroupPreviewHandler = () => {
     setShowConditionGroupPreview(true);
   };
@@ -113,25 +116,26 @@ const ConditionBuilderContent = ({
     });
   };
 
+  if (!isConditionBuilderActive) {
+    return (
+      <Button
+        className={`${blockClass}__addConditionText-button`}
+        renderIcon={(props) => <Add {...props} />}
+        iconDescription={startConditionLabel}
+        kind="ghost"
+        size="sm"
+        onClick={onStartConditionBuilder}
+      >
+        {startConditionLabel}
+      </Button>
+    );
+  }
+
   return (
     <>
-      {!isConditionBuilderActive && (
-        <Button
-          className={`${blockClass}__addConditionText-button`}
-          renderIcon={(props) => <Add size={16} {...props} />}
-          iconDescription={startConditionLabel}
-          kind="ghost"
-          size="sm"
-          onClick={onStartConditionBuilder}
-        >
-          {startConditionLabel}
-        </Button>
-      )}
-      {isConditionBuilderActive && (
-        <Section className={`${blockClass}__heading`} level={4}>
-          <Heading>Condition</Heading>
-        </Section>
-      )}
+      <Section className={`${blockClass}__heading`} level={4}>
+        <Heading>{conditionHeadingText}</Heading>
+      </Section>
 
       <div
         className={`${blockClass}__content-container`}
@@ -163,44 +167,40 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {isConditionBuilderActive && (
-          <>
-            {variant == 'tree' && (
-              <div
-                role="row"
-                tabIndex={-1}
-                aria-level={1}
-                className={`${blockClass}__add-group`}
-              >
-                {
-                  <ConditionBuilderButton
-                    renderIcon={TextNewLine}
-                    onClick={addConditionGroupHandler}
-                    onMouseEnter={showConditionGroupPreviewHandler}
-                    onMouseLeave={hideConditionGroupPreviewHandler}
-                    onFocus={showConditionGroupPreviewHandler}
-                    onBlur={hideConditionGroupPreviewHandler}
-                    className={`${blockClass}__add-condition-group `}
-                    hideLabel
-                    label={addConditionGroupText}
-                    wrapperProps={{
-                      role: 'gridcell',
-                      'aria-label': addConditionGroupText,
-                    }}
-                  />
-                }
-              </div>
-            )}
-            {showConditionGroupPreview && (
-              <ConditionPreview
-                previewType="newGroup"
-                group={{ groupOperator: rootState.operator }}
+        {variant == 'tree' && (
+          <div
+            role="row"
+            tabIndex={-1}
+            aria-level={1}
+            className={`${blockClass}__add-group`}
+          >
+            {
+              <ConditionBuilderButton
+                renderIcon={TextNewLine}
+                onClick={addConditionGroupHandler}
+                onMouseEnter={showConditionGroupPreviewHandler}
+                onMouseLeave={hideConditionGroupPreviewHandler}
+                onFocus={showConditionGroupPreviewHandler}
+                onBlur={hideConditionGroupPreviewHandler}
+                className={`${blockClass}__add-condition-group `}
+                hideLabel
+                label={addConditionGroupText}
+                wrapperProps={{
+                  role: 'gridcell',
+                  'aria-label': addConditionGroupText,
+                }}
               />
-            )}
-          </>
+            }
+          </div>
+        )}
+        {showConditionGroupPreview && (
+          <ConditionPreview
+            previewType="newGroup"
+            group={{ groupOperator: rootState.operator }}
+          />
         )}
       </div>
-      {isConditionBuilderActive && actions && (
+      {actions && (
         <ConditionBuilderActions
           actions={actions}
           className={`${blockClass}__actions-container`}

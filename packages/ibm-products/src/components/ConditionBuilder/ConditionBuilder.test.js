@@ -589,4 +589,664 @@ describe(componentName, () => {
 
     expect(selectedItem);
   });
+
+  it('check translation are working as expected', async () => {
+    const translateWithId = (key) => {
+      const translationsObject = {
+        conditionHeadingText: 'Condition Heading',
+      };
+
+      return translationsObject[key];
+    };
+
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        initialState={sampleDataStructure_sentence}
+        translateWithId={translateWithId}
+      />
+    );
+    //start builder
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByText('Condition Heading'));
+  });
+
+  //test cases for tree variant
+  it('render the tree variant with  3 conditions and 1 subgroup', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={'tree'}
+        inputConfig={inputData}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    //adding condition 1
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Continent',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() => userEvent.click(screen.getByText('Africa')));
+
+    //adding condition 2
+
+    let addButton = document.querySelector(`.${blockClass}__add-button`);
+    expect(addButton);
+    await act(() => userEvent.click(addButton));
+
+    const regionOption = screen.getByRole('option', {
+      name: 'Region',
+    });
+    await act(() => userEvent.click(regionOption));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'India',
+        })
+      )
+    );
+
+    //adding a subgroup
+
+    let addSubGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-sub-group`
+    );
+    expect(addSubGroupButton);
+    await act(() => userEvent.click(addSubGroupButton));
+
+    //add third condition
+
+    const colorOption = screen.getByRole('option', {
+      name: 'Color',
+    });
+    await act(() => userEvent.click(colorOption));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'black',
+        })
+      )
+    );
+    const subGroups = screen.getAllByText('if');
+    expect(subGroups).toHaveLength(2);
+  });
+
+  it('render the tree variant with 2 groups', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={'tree'}
+        inputConfig={inputData}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+    //group 1
+    //adding condition 1
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Continent',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() => userEvent.click(screen.getByText('Africa')));
+
+    //adding condition 2
+
+    let addButton = document.querySelector(`.${blockClass}__add-button`);
+    expect(addButton);
+    await act(() => userEvent.click(addButton));
+
+    const regionOption = screen.getByRole('option', {
+      name: 'Region',
+    });
+    await act(() => userEvent.click(regionOption));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'India',
+        })
+      )
+    );
+
+    //adding a subgroup
+
+    let addSubGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-sub-group`
+    );
+    expect(addSubGroupButton);
+    await act(() => userEvent.click(addSubGroupButton));
+
+    //add third condition
+
+    const colorOption = screen.getByRole('option', {
+      name: 'Color',
+    });
+    await act(() => userEvent.click(colorOption));
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'black',
+        })
+      )
+    );
+    const subGroups = screen.getAllByText('if');
+    expect(subGroups).toHaveLength(2);
+
+    //group 2
+
+    const addGroupButton = document.querySelector(
+      `.${blockClass}__add-condition-group`
+    );
+    expect(addGroupButton);
+    await act(() => userEvent.click(addGroupButton));
+    //adding condition 1
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Continent',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Africa',
+        })
+      )
+    );
+
+    const ifStatements = screen.getAllByRole('button', { name: 'if' });
+    expect(ifStatements).toHaveLength(3);
+
+    const groupConnector = screen.getAllByRole('button', { name: 'or' });
+    expect(groupConnector).toHaveLength(1);
+  });
+
+  it('check the next/previous close button is focussed on remove condition', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        initialState={sampleDataStructure_sentence}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    let closeButtons = document.querySelectorAll(
+      `.${blockClass}__close-condition`
+    );
+    expect(closeButtons).toHaveLength(3);
+    //click first close button
+    await act(() => userEvent.click(closeButtons[0]));
+
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    expect(closeButtons).toHaveLength(2);
+
+    expect(closeButtons[0]).toHaveFocus();
+
+    //click last close button
+
+    await act(() => userEvent.click(closeButtons[1]));
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    expect(closeButtons).toHaveLength(1);
+    expect(closeButtons[0]).toHaveFocus();
+  });
+
+  it('check the next/previous close button is focussed on remove condition for tree variant', async () => {
+    const sampleDataStructure = {
+      operator: 'or',
+      groups: [
+        {
+          groupOperator: 'and', //'and|or',
+          statement: 'if', // 'if|exclude if',
+          id: uuidv4(),
+          conditions: [
+            {
+              property: 'region',
+              operator: 'is',
+              value: 'IL',
+              id: uuidv4(),
+            },
+            {
+              property: 'delivery',
+              operator: 'is',
+              value: 'processing',
+              id: uuidv4(),
+            },
+            {
+              property: 'delivery',
+              operator: 'is',
+              value: 'processing',
+              id: uuidv4(),
+            },
+            {
+              property: 'delivery',
+              operator: 'is',
+              value: 'processing',
+              id: uuidv4(),
+            },
+            {
+              groupOperator: 'and',
+              statement: 'if',
+              id: uuidv4(),
+              conditions: [
+                {
+                  property: 'region',
+                  operator: 'is',
+                  value: 'IL',
+                  id: uuidv4(),
+                },
+                {
+                  property: 'delivery',
+                  operator: 'is',
+                  value: 'processing',
+                  id: uuidv4(),
+                },
+                {
+                  property: 'delivery',
+                  operator: 'is',
+                  value: 'processing',
+                  id: uuidv4(),
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        variant="tree"
+        initialState={sampleDataStructure}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    let closeButtons = document.querySelectorAll(
+      `.${blockClass}__close-condition`
+    );
+    expect(closeButtons).toHaveLength(7);
+    //click first close button
+    await act(() => userEvent.click(closeButtons[0]));
+
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    expect(closeButtons).toHaveLength(6);
+
+    expect(closeButtons[0]).toHaveFocus();
+
+    //click 4th(first condition in first subgroup) close button
+
+    await act(() => userEvent.click(closeButtons[3]));
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    expect(closeButtons).toHaveLength(5);
+    expect(closeButtons[3]).toHaveFocus();
+
+    //close all conditions of the subgroup
+
+    await act(() => userEvent.click(closeButtons[4]));
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    await act(() => userEvent.click(closeButtons[3]));
+    closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
+    expect(closeButtons).toHaveLength(3);
+
+    //when all conditions of a subgroup is closed , it will focus the previous row
+    const row = document.querySelectorAll(
+      '[role="row"][aria-level="2"][aria-posinset="3"]'
+    );
+    expect(row).toHaveLength(1);
+    expect(row[0]).toHaveFocus();
+  });
+
+  it('check the add/remove actions ', async () => {
+    const sampleDataStructure = {
+      operator: 'or',
+      groups: [
+        {
+          groupOperator: 'and', //'and|or',
+          statement: 'if', // 'if|exclude if',
+          id: uuidv4(),
+          conditions: [
+            {
+              property: 'region',
+              operator: 'is',
+              value: 'IL',
+              id: uuidv4(),
+            },
+          ],
+        },
+      ],
+    };
+
+    const actions = [
+      {
+        id: uuidv4(),
+        label: 'Add item to cart',
+      },
+      { id: uuidv4(), label: 'Proceed item to checkout' },
+    ];
+
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        actions={actions}
+        initialState={sampleDataStructure}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    //click on add action button
+    await act(() =>
+      userEvent.click(
+        document.querySelector(
+          `.${blockClass}__actions-container .${blockClass}__add-button`
+        )
+      )
+    );
+
+    expect(
+      screen.getByRole('option', {
+        name: 'Add item to cart',
+      })
+    );
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Add item to cart',
+        })
+      )
+    );
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Add item to cart',
+      })
+    );
+
+    //add second action
+    await act(() =>
+      userEvent.click(
+        document.querySelector(
+          `.${blockClass}__actions-container .${blockClass}__add-button`
+        )
+      )
+    );
+
+    expect(
+      screen.getByRole('option', {
+        name: 'Proceed item to checkout',
+      })
+    );
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Proceed item to checkout',
+        })
+      )
+    );
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Proceed item to checkout',
+      })
+    );
+
+    //add third action
+    await act(() =>
+      userEvent.click(
+        document.querySelector(
+          `.${blockClass}__actions-container .${blockClass}__add-button`
+        )
+      )
+    );
+
+    expect(
+      screen.getByRole('option', {
+        name: 'Add item to cart',
+      })
+    );
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Add item to cart',
+        })
+      )
+    );
+
+    expect(
+      screen.getAllByRole('button', {
+        name: 'Add item to cart',
+      })
+    ).toHaveLength(2);
+
+    //removing conditions
+    let closeConditions = document.querySelectorAll(
+      `.${blockClass}__actions-container .${blockClass}__close-condition`
+    );
+    expect(closeConditions).toHaveLength(3);
+
+    await act(() => userEvent.click(closeConditions[2]));
+
+    closeConditions = document.querySelectorAll(
+      `.${blockClass}__actions-container .${blockClass}__close-condition`
+    );
+    expect(closeConditions).toHaveLength(2);
+    expect(
+      screen.getAllByRole('button', {
+        name: 'Add item to cart',
+      })
+    ).toHaveLength(1);
+    expect(
+      screen.getAllByRole('button', {
+        name: 'Proceed item to checkout',
+      })
+    ).toHaveLength(1);
+
+    await act(() => userEvent.click(closeConditions[1]));
+
+    closeConditions = document.querySelectorAll(
+      `.${blockClass}__actions-container .${blockClass}__close-condition`
+    );
+    expect(closeConditions).toHaveLength(1);
+    expect(
+      screen.getAllByRole('button', {
+        name: 'Add item to cart',
+      })
+    ).toHaveLength(1);
+    expect(
+      screen.queryByText('Proceed item to checkout')
+    ).not.toBeInTheDocument();
+  });
+
+  it(' remove all  conditions in a group keeping only subgroups', async () => {
+    const sampleDataStructure = {
+      operator: 'or',
+      groups: [
+        {
+          groupOperator: 'and',
+          statement: 'if',
+          id: '686c62a9-e33d-4e31-817b-4fd319168935',
+          conditions: [
+            {
+              property: 'region',
+              operator: 'is',
+              value: {
+                label: 'Afghanistan',
+                id: 'AF',
+                icon: {
+                  propTypes: {},
+                },
+              },
+              id: '87b6cc99-b463-45e2-ab88-44a2a2069a25',
+            },
+            {
+              groupOperator: 'and',
+              statement: 'if',
+              conditions: [
+                {
+                  property: 'region',
+                  operator: 'is',
+                  value: {
+                    label: 'Afghanistan',
+                    id: 'AF',
+                    icon: {
+                      propTypes: {},
+                    },
+                  },
+                  id: 'b1ab21df-1791-4955-a9f4-5e257b1d8ee2',
+                },
+                {
+                  groupOperator: 'and',
+                  statement: 'if',
+                  conditions: [
+                    {
+                      property: 'color',
+                      operator: 'is',
+                      value: {
+                        label: 'black',
+                        id: 'black',
+                      },
+                      id: '3dc4a2d9-c83d-4b56-8e24-d0dd0ec1e7a4',
+                    },
+                  ],
+                  id: '88fe784e-d748-4dfd-818c-63d1167bf60e',
+                },
+              ],
+              id: '09e9feb8-a4a6-485f-9ac0-5b52d1dc82e4',
+            },
+          ],
+        },
+      ],
+    };
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={'tree'}
+        inputConfig={inputData}
+        initialState={sampleDataStructure}
+      />
+    );
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(3);
+
+    await act(() =>
+      userEvent.click(document.querySelector(`.${blockClass}__close-condition`))
+    );
+
+    expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(2);
+  });
+
+  it('check the custom input type', async () => {
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputData} />);
+
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'Product',
+        })
+      )
+    );
+
+    await act(() =>
+      userEvent.click(
+        screen.getByRole('option', {
+          name: 'is greater than',
+        })
+      )
+    );
+
+    const inputText = document.querySelector('#customInput');
+    fireEvent.change(inputText, { target: { value: 'testID123' } });
+
+    const container = document.querySelector(`.${blockClass}`);
+    await act(() => userEvent.click(container));
+
+    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+
+    expect(selectedItem);
+  });
 });

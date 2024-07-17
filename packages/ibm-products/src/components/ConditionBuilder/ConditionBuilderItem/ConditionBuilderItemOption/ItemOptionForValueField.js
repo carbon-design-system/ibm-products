@@ -106,12 +106,13 @@ export const ItemOptionForValueField = ({
   };
 
   const onClickHandler = (evt, option, isSelected) => {
+    const updatedSelections = selection.filter((item) => item !== 'INVALID');
     if (multiSelectable) {
       if (isSelected) {
-        let items = selection.filter((v) => v.id !== option.id);
-        onChange(items.length > 0 ? items : undefined, evt);
+        let items = updatedSelections.filter((v) => v.id !== option.id);
+        onChange(items.length > 0 ? items : undefined);
       } else {
-        onChange([...selection, option], evt);
+        onChange([...updatedSelections, option]);
       }
     } else {
       onChange(option, evt);

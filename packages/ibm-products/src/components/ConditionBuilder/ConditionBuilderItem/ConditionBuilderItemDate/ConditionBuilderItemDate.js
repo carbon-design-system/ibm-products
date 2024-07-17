@@ -20,7 +20,7 @@ export const ConditionBuilderItemDate = ({
 
   const onCloseHandler = (selectedDate) => {
     onChange(
-      selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID_DATE'
+      selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID'
     );
   };
   return (

@@ -52,17 +52,24 @@ const ConditionBuilderAdd = ({
     onBlur: hideConditionSubGroupPreviewHandler,
   });
 
+  const getAriaLabel = () => {
+    return buttonLabel
+      ? buttonLabel
+      : !enableSubGroup
+      ? addConditionRowText
+      : undefined;
+  };
+
   const wrapperProps = enableSubGroup
     ? {
         role: 'gridcell',
-        // 'aria-label': addSubgroupText,
       }
     : {};
   return (
     <div
       className={`${className} ${blockClass}__add-button-wrapper`}
       role={!enableSubGroup ? 'gridcell' : 'none'}
-      aria-label={!enableSubGroup ? addConditionRowText : undefined}
+      aria-label={getAriaLabel()}
       onMouseEnter={showAddSubGroup}
       onMouseLeave={hideAddSubGroup}
       onFocus={showAddSubGroup}
@@ -84,14 +91,18 @@ const ConditionBuilderAdd = ({
           renderIcon={TextNewLine}
           onClick={addConditionSubGroupHandler}
           className={cx(
-            `${blockClass}__add_condition_group ${blockClass}__gap-left`
+            `${blockClass}__add-condition-sub-group ${blockClass}__gap-left`
           )}
           hideLabel
           label={addSubgroupText}
           wrapperProps={wrapperProps}
-          wrapperClassName={cx(`${blockClass}__add_condition_group-wrapper`, {
-            [`${blockClass}__add_condition_group-wrapper--show`]: isAddSubgroup,
-          })}
+          wrapperClassName={cx(
+            `${blockClass}__add-condition-sub-group-wrapper`,
+            {
+              [`${blockClass}__add-condition-sub-group-wrapper--show`]:
+                isAddSubgroup,
+            }
+          )}
           {...previewHandlersForSubgroup()}
         />
       )}

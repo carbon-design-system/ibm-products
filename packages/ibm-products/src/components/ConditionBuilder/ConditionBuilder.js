@@ -82,6 +82,7 @@ export let ConditionBuilder = React.forwardRef(
         getOptions={getOptions}
         variant={variant}
         translateWithId={translateWithId}
+        conditionBuilderRef={conditionBuilderRef}
       >
         <div
           {
@@ -107,7 +108,6 @@ export let ConditionBuilder = React.forwardRef(
           >
             <ConditionBuilderContent
               startConditionLabel={startConditionLabel}
-              conditionBuilderRef={conditionBuilderRef}
               getConditionState={getConditionState}
               getActionsState={getActionsState}
               initialState={initialState}
@@ -136,7 +136,7 @@ ConditionBuilder.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string | PropTypes.number]).isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       label: PropTypes.string.isRequired,
     })
   ),
@@ -260,7 +260,7 @@ ConditionBuilder.propTypes = {
   /**
    * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
-   * The message id will be one of [   "ifText","addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText", "invalidDateText",  "invalidNumberWarnText"]
+   * The message id will be one of [   "ifText","addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText","conditionRowGroupText","conditionBuilderText","actionSectionText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",  "invalidNumberWarnText"]
 ]
    */
   translateWithId: PropTypes.func,

@@ -19,7 +19,6 @@ import { useTranslations } from '../utils/useTranslations';
 
 const ConditionBuilderContent = ({
   startConditionLabel,
-  conditionBuilderRef,
   getConditionState,
   getActionsState,
   initialState,
@@ -34,6 +33,13 @@ const ConditionBuilderContent = ({
     useState(false);
 
   const [addConditionGroupText] = useTranslations(['addConditionGroupText']);
+  const showConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(true);
+  };
+
+  const hideConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(false);
+  };
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -149,7 +155,6 @@ const ConditionBuilderContent = ({
                 onChange={(updatedGroup) => {
                   onChangeHandler(updatedGroup, groupIndex);
                 }}
-                conditionBuilderRef={conditionBuilderRef}
               />
 
               {/* displaying the connector field between groups */}
@@ -161,18 +166,21 @@ const ConditionBuilderContent = ({
         {isConditionBuilderActive && (
           <>
             {variant == 'tree' && (
-              <div role="row" tabIndex={-1} aria-level={1}>
+              <div
+                role="row"
+                tabIndex={-1}
+                aria-level={1}
+                className={`${blockClass}__add-group`}
+              >
                 {
                   <ConditionBuilderButton
                     renderIcon={TextNewLine}
                     onClick={addConditionGroupHandler}
-                    onMouseEnter={() => {
-                      setShowConditionGroupPreview(true);
-                    }}
-                    onMouseLeave={() => {
-                      setShowConditionGroupPreview(false);
-                    }}
-                    className={`${blockClass}__addConditionGroupText `}
+                    onMouseEnter={showConditionGroupPreviewHandler}
+                    onMouseLeave={hideConditionGroupPreviewHandler}
+                    onFocus={showConditionGroupPreviewHandler}
+                    onBlur={hideConditionGroupPreviewHandler}
+                    className={`${blockClass}__add-condition-group `}
                     hideLabel
                     label={addConditionGroupText}
                     wrapperProps={{
@@ -197,7 +205,6 @@ const ConditionBuilderContent = ({
           actions={actions}
           className={`${blockClass}__actions-container`}
           variant={variant}
-          conditionBuilderRef={conditionBuilderRef}
         />
       )}
     </>
@@ -216,10 +223,6 @@ ConditionBuilderContent.propTypes = {
       label: PropTypes.string.isRequired,
     })
   ),
-  /**
-   * ref of condition builder
-   */
-  conditionBuilderRef: PropTypes.object,
   /**
    * callback functions that will provide the updated action state back.
    */

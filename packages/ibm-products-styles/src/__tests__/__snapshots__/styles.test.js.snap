@@ -5390,10 +5390,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   min-width: auto;
 }
 
-.c4p--datagrid .cds--pagination {
-  background-color: var(--cds-layer-02, #ffffff);
-}
-
 .c4p--edit-in-place {
   --c4p--edit-in-place--size: 2rem;
   display: flex;

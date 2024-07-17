@@ -2282,10 +2282,6 @@ p.c4p--about-modal__copyright-text:first-child {
   border-top: 1px solid var(--cds-layer-accent-01, #e0e0e0);
 }
 
-.c4p--create-full-page__header button:first-of-type {
-  background: none;
-}
-
 /* One or two values
   * - width (first value)
   * - min-width (optional second value)

@@ -176,10 +176,3 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__buttons {
   border-top: 1px solid $layer-accent-01;
 }
-
-.#{$block-class}__header {
-  /* stylelint-disable-next-line max-nesting-depth */
-  button:first-of-type {
-    background: none;
-  }
-}

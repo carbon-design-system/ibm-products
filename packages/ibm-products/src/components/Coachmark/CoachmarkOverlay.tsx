@@ -223,7 +223,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
             });
           })}
         </div>
-        {/* {isBeacon && <span className={`${blockClass}__caret`} />} */}
       </div>
     );
   }

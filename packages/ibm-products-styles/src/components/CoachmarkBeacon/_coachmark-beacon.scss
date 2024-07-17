@@ -69,9 +69,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
   }
   .#{$block-class}__target {
     // the hit area
-    // position: absolute;
-    // top: calc(-1 * $spacing-05);
-    // left: calc(-1 * $spacing-05);
     display: flex;
     width: $spacing-07;
     height: $spacing-07;

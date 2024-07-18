@@ -21,12 +21,15 @@ export const ConditionBuilderButton = ({
   onMouseLeave,
   isInvalid,
   wrapperClassName,
+  tabIndex,
+  ...rest
 }) => {
   const Button = () => {
+    const dataName = rest['data-name'] ?? '';
     return (
       <button
         // role={'gridcell'}
-        tabIndex={-1}
+        tabIndex={tabIndex != undefined ? tabIndex : -1}
         className={cx([
           className,
           `${blockClass}__button`,
@@ -42,6 +45,8 @@ export const ConditionBuilderButton = ({
         onFocus={onFocus}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        data-name={dataName}
+        {...rest}
       >
         {Icon && <Icon />}
         {!hideLabel && <span>{label}</span>}
@@ -91,8 +96,8 @@ ConditionBuilderButton.propTypes = {
    */
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
-  onMouseEnter: PropTypes.func,
 
+  onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -104,11 +109,15 @@ ConditionBuilderButton.propTypes = {
    *decides if  tooltip to be shown
    */
   showToolTip: PropTypes.bool,
+
+  /**
+   * Tab index
+   */
+  tabIndex: PropTypes.number,
   /**
    * tooltip position
    */
   tooltipAlign: PropTypes.string,
-
   /**
    * classname applies to the wrapper of popover
    */

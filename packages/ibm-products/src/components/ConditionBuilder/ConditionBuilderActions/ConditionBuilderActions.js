@@ -1,103 +1,119 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Close } from '@carbon/react/icons';
 import { Section, Heading } from '@carbon/react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import {
-  blockClass,
-  translateWithId,
-} from '../ConditionBuilderContext/DataConfigs';
-import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
-import { checkDuplicateAction, focusThisField } from '../utils/util';
+import { useTranslations } from '../utils/useTranslations';
+import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
 
 const ConditionBuilderActions = ({ actions, className }) => {
   const { actionState, setActionState } = useContext(ConditionBuilderContext);
+  const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
+  const [
+    actionsText,
+    thenText,
+    andText,
+    removeActionText,
+    addActionText,
+    actionSectionText,
+  ] = useTranslations([
+    'actionsText',
+    'then',
+    'and',
+    'removeActionText',
+    'addActionText',
+    'actionSectionText',
+  ]);
 
   const addActionHandler = () => {
     const action = {
       id: uuidv4(),
       label: undefined,
-      popoverToOpen: 'actionField',
+      popoverToOpen: 'valueField',
     };
     setActionState([...actionState, action]);
   };
 
-  const onchangeHandler = (evt, selectedId, actionIndex, currentAction) => {
+  const onchangeHandler = (selectedId, actionIndex) => {
     const action = actions.find((action) => action.id === selectedId); //fetch the selected action from the input action array
 
-    //if the action is duplicate, that action is added with a new id, else the same action is used.
     // same actions can be added multiple times
-    const newAction = checkDuplicateAction(
-      actionState,
-      selectedId,
-      currentAction.id
-    )
-      ? { ...action, id: uuidv4() }
-      : action;
-
+    const newAction = { ...action, id: actionState[actionIndex].id };
     setActionState([
       ...actionState.slice(0, actionIndex),
       newAction,
       ...actionState.slice(actionIndex + 1),
     ]);
-
-    focusThisField(evt);
   };
 
   const onRemove = (selectedId) => {
     setActionState(actionState.filter((action) => action.id !== selectedId));
   };
-
+  const handleShowDeletionPreview = (index) => {
+    setShowDeletionPreview(index);
+  };
+  const handleHideDeletionPreview = () => {
+    setShowDeletionPreview(-1);
+  };
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <Section className={`${blockClass}__heading`} level={4}>
-        <Heading>{translateWithId('actions')}</Heading>
+        <Heading>{actionsText}</Heading>
       </Section>
-      <div className={`${blockClass}__condition-wrapper`}>
+      <div
+        className={`${blockClass}__condition-wrapper`}
+        role="grid"
+        aria-label={actionSectionText}
+      >
         {actionState?.map((action, index) => (
           <div
             key={action.id}
-            aria-hidden
-            className={`${blockClass}__condition-block conditionBlockWrapper ${blockClass}__gap ${blockClass}__gap-bottom `}
+            role="row"
+            className={cx(
+              `${blockClass}__condition-block ${blockClass}__gap ${blockClass}__gap-bottom`,
+              {
+                [`${blockClass}__condition__deletion-preview`]:
+                  showDeletionPreview == index,
+              }
+            )}
           >
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
+              tabIndex={0}
               popOverClassName={`${blockClass}__gap`}
-              label={
-                index === 0 ? translateWithId('then') : translateWithId('and')
-              }
+              label={index === 0 ? thenText : andText}
             />
 
             <ConditionBuilderItem
               label={action.label}
-              title={translateWithId('actions')}
-              popOverClassName={`${blockClass}__gap`}
+              title={actionsText}
               condition={action}
-              data-name="actionField"
+              data-name="valueField"
+              type="option"
             >
-              <ItemOption
+              <ItemOptionForValueField
                 conditionState={{
                   value: action.label,
                 }}
-                onChange={(selectedId, evt) =>
-                  onchangeHandler(evt, selectedId, index, action)
-                }
+                onChange={(selection) => onchangeHandler(selection.id, index)}
                 config={{ options: actions }}
               />
             </ConditionBuilderItem>
-            <span role="gridcell" aria-label={translateWithId('remove_action')}>
+            <span role="gridcell" aria-label={removeActionText}>
               <ConditionBuilderButton
                 hideLabel
-                label={translateWithId('remove_action')}
+                label={removeActionText}
                 onClick={() => onRemove(action.id)}
-                //   onMouseEnter={handleShowDeletionPreview}
-                //   onMouseLeave={handleHideDeletionPreview}
-                //   onFocus={handleShowDeletionPreview}
-                //   onBlur={handleHideDeletionPreview}
+                onMouseEnter={() => handleShowDeletionPreview(index)}
+                onMouseLeave={handleHideDeletionPreview}
+                onFocus={() => handleShowDeletionPreview(index)}
+                onBlur={handleHideDeletionPreview}
                 renderIcon={Close}
                 className={`${blockClass}__close-condition`}
                 data-name="closeCondition"
@@ -107,7 +123,8 @@ const ConditionBuilderActions = ({ actions, className }) => {
               <ConditionBuilderAdd
                 onClick={addActionHandler}
                 className={`${blockClass}__gap ${blockClass}__gap-left`}
-                buttonLabel={translateWithId('add_action')}
+                buttonLabel={addActionText}
+                tabIndex={0}
               />
             )}
           </div>
@@ -117,7 +134,8 @@ const ConditionBuilderActions = ({ actions, className }) => {
           <ConditionBuilderAdd
             onClick={addActionHandler}
             className={`${blockClass}__gap ${blockClass}__gap-left`}
-            buttonLabel={translateWithId('add_action')}
+            buttonLabel={addActionText}
+            tabIndex={0}
           />
         )}
       </div>
@@ -133,8 +151,8 @@ ConditionBuilderActions.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      label: PropTypes.string,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired,
     })
   ),
   /**

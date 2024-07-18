@@ -16,6 +16,7 @@ import './_storybook-styles.scss';
 const Welcome = () => {
   const animationRef = useRef(null);
 
+  // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
   let prefersReducedMotion = window.matchMedia(
     `(prefers-reduced-motion: reduce)`
   ).matches;

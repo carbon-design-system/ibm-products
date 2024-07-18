@@ -1,22 +1,34 @@
 import React from 'react';
 
-import { TextInput } from '@carbon/react';
+import { TextArea, TextInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { checkIsValid } from '../../utils/util';
 
-export const ConditionBuilderItemText = ({ conditionState, onChange }) => {
+export const ConditionBuilderItemText = ({
+  conditionState,
+  onChange,
+  config,
+  type,
+}) => {
+  const inputProps = {
+    labelText: conditionState.property,
+    hideLabel: true,
+    value: checkIsValid(conditionState.value) ? conditionState.value : '',
+    id: conditionState.property?.replace(/\s/g, ''),
+    onChange: (evt) => {
+      onChange(evt.target.value);
+    },
+    ...config,
+  };
   return (
     <div className={`${blockClass}__item-text`}>
-      <TextInput
-        labelText={conditionState.property}
-        hideLabel
-        value={conditionState.value ?? ''}
-        id={conditionState.property?.replace(/\s/g, '')}
-        onChange={(evt) => {
-          onChange(evt.target.value);
-        }}
-      />
+      {type == 'textarea' ? (
+        <TextArea {...inputProps} />
+      ) : (
+        <TextInput {...inputProps} />
+      )}
     </div>
   );
 };
@@ -28,7 +40,15 @@ ConditionBuilderItemText.propTypes = {
   conditionState: PropTypes.object,
 
   /**
+   * config of the current property
+   */
+  config: PropTypes.object,
+  /**
    * callback to update state oin date change
    */
   onChange: PropTypes.func,
+  /**
+   * current input type
+   */
+  type: PropTypes.string,
 };

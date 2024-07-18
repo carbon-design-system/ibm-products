@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import { carbon, pkg } from '../../settings';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
@@ -185,7 +185,7 @@ describe(componentName, () => {
     );
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
-    const closeButton = screen.getByTitle('Close');
+    const closeButton = screen.getByLabelText('Close');
     await act(() => click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
@@ -206,6 +206,29 @@ describe(componentName, () => {
 
     await act(() => click(submitButton));
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('disables submit when submit button is clicked until onRequestSubmit processing completes', async () => {
+    const onRequestSubmitLong = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    };
+    render(
+      <EditTearsheet
+        {...{ ...defaultProps }}
+        onRequestSubmit={onRequestSubmitLong}
+        open
+      />
+    );
+
+    const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+    expect(editTearsheet).toHaveClass('is-visible');
+    const submitButton = screen.getByText('Save');
+    expect(submitButton.disabled).toEqual(false);
+
+    await act(() => click(submitButton));
+    expect(submitButton.disabled).toBeTruthy();
+    //wait up to a sec until state expected to change
+    await waitFor(() => expect(submitButton.disabled).toEqual(false));
   });
 
   it('applies className to the root node', async () => {

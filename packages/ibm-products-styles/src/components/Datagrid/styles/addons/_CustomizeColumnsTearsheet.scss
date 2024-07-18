@@ -5,8 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable carbon/layout-token-use
+
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
@@ -24,8 +26,8 @@
 
 .#{variables.$block-class}__customize-columns-tearsheet--actions
   input[role='searchbox'] {
-  height: $spacing-09;
-  padding-left: $spacing-09;
+  height: spacing.$spacing-09;
+  padding-left: spacing.$spacing-09;
   border-bottom: 1px solid $background-active;
 }
 
@@ -63,8 +65,8 @@
   z-index: 1;
   top: 0;
   display: flex;
-  height: $spacing-09;
-  padding-left: $spacing-08;
+  height: spacing.$spacing-09;
+  padding-left: spacing.$spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
 

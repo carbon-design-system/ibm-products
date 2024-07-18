@@ -38,7 +38,7 @@ import {
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-import { useFocus } from '../../global/js/hooks/useFocus';
+import { getSpecificElement, useFocus } from '../../global/js/hooks/useFocus';
 import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -48,7 +48,7 @@ const componentName = 'TearsheetShell';
 const maxDepth = 3;
 
 interface TearsheetShellProps extends PropsWithChildren {
-  actions?: ButtonProps[];
+  actions?: ButtonProps<any>[];
 
   ariaLabel?: string;
 
@@ -260,15 +260,14 @@ export const TearsheetShell = React.forwardRef(
     const localRef = useRef();
     const resizer = useRef(null);
     const modalBodyRef = useRef(null);
-    const modalRef = ref || localRef;
+    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
     const { firstElement, keyDownListener, specifiedElement } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
-    const modalRefValue = (modalRef as MutableRefObject<HTMLDivElement>)
-      .current;
+    const modalRefValue = modalRef.current;
 
     const wide = size === 'wide';
 
@@ -308,7 +307,10 @@ export const TearsheetShell = React.forwardRef(
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
       if (selectorPrimaryFocus) {
-        return specifiedElement?.focus();
+        return getSpecificElement(
+          modalRef?.current,
+          selectorPrimaryFocus
+        )?.focus();
       }
       firstElement?.focus();
     };
@@ -561,7 +563,8 @@ TearsheetShell.displayName = componentName;
 export const portalType =
   typeof Element === 'undefined'
     ? PropTypes.object
-    : PropTypes.instanceOf(Element);
+    : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
+      PropTypes.instanceOf(Element);
 
 export const deprecatedProps = {
   /**
@@ -601,6 +604,7 @@ TearsheetShell.propTypes = {
     // NB we don't include the validator here, as the component wrapping this
     // one should ensure appropriate validation is done.
     PropTypes.shape({
+      /**@ts-ignore*/
       ...Button.propTypes,
       kind: PropTypes.oneOf([
         'ghost',
@@ -612,6 +616,7 @@ TearsheetShell.propTypes = {
       label: PropTypes.string,
       loading: PropTypes.bool,
       // we duplicate this Button prop to improve the DocGen here
+      /**@ts-ignore*/
       onClick: Button.propTypes.onClick,
     })
   ),

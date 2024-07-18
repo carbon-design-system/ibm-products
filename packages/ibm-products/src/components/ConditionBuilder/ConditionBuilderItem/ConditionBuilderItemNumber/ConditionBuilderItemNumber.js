@@ -3,18 +3,17 @@ import React from 'react';
 import { NumberInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
-import {
-  blockClass,
-  translateWithId,
-} from '../../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 export const ConditionBuilderItemNumber = ({
   conditionState,
   config,
   onChange,
 }) => {
+  const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
-    if (checkIfValid(value)) {
+    if (value !== '' && !isNaN(value) && checkIfValid(value)) {
       onChange(`${value} ${config.unit ?? ''}`);
     } else {
       onChange('INVALID');
@@ -27,21 +26,19 @@ export const ConditionBuilderItemNumber = ({
     return true;
   };
   const getDefaultValue = () => {
-    return conditionState.value?.split(' ')?.[0];
+    return conditionState.value?.split(' ')?.[0] ?? '';
   };
   return (
     <div className={`${blockClass}__item-number`}>
       <NumberInput
         label={conditionState.property}
         hideLabel
-        defaultValue={getDefaultValue()}
         id={conditionState.property?.replace(/\s/g, '')}
-        min={config.min}
-        max={config.max}
-        step={config.step}
-        invalidText={translateWithId('text_invalid_number')}
+        invalidText={invalidNumberWarnText}
         allowEmpty
         onChange={onChangeHandler}
+        {...config}
+        defaultValue={getDefaultValue()}
       />
     </div>
   );

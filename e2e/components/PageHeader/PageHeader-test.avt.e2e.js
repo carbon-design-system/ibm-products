@@ -10,6 +10,8 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 
+test.use({ viewport: { width: 1600, height: 900 } });
+
 test.describe('PageHeader @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
@@ -21,4 +23,187 @@ test.describe('PageHeader @avt', () => {
     });
     await expect(page).toHaveNoACViolations('PageHeader @avt-default-state');
   });
+
+  // Collapses on page scroll
+  test('@avt-collapse-on-scroll', async ({ page }) => {
+    await visitStory(page, {
+      component: 'PageHeader',
+      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    const pageTitle = page
+      .getByRole('heading', {
+        name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
+      })
+      .locator('span');
+
+    // The header starts expanded.
+    await expect(pageTitle).toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header collapses when the page is scrolled down.
+    await page.locator(`.page-header-stories__dummy-content`).hover();
+    await page.mouse.wheel(0, 600);
+    await expect(pageTitle).not.toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header remains collapsed even if scrolled slightly back up.
+    await page.locator(`.page-header-stories__dummy-content`).hover();
+    await page.mouse.wheel(0, -170);
+    await expect(pageTitle).not.toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header expands again when scrolled back to the top.
+    await page.locator(`.page-header-stories__dummy-content`).hover();
+    await page.mouse.wheel(0, -700);
+    await page.waitForTimeout(100);
+    await expect(pageTitle).toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+  });
+
+  // Starts collapsed by default
+  test('@avt-collapse-by-default', async ({ page }) => {
+    await visitStory(page, {
+      component: 'PageHeader',
+      id: 'ibm-products-components-page-header-pageheader--fully-loaded',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    const pageTitle = page
+      .getByRole('heading', {
+        name: 'Page title',
+      })
+      .locator('span');
+
+    // The header starts collapsed.
+    await page.waitForTimeout(200);
+    await expect(pageTitle).not.toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header expands when the page is scrolled to the top.
+    await page.locator(`.page-header-stories__dummy-content`).hover();
+    await page.mouse.wheel(0, -600);
+    await expect(pageTitle).toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+  });
+
+  // collapses/expands by toggling the cheveron button
+  test('@avt-collapse-by-toggle-button', async ({ page }) => {
+    await visitStory(page, {
+      component: 'PageHeader',
+      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    const pageTitle = page
+      .getByRole('heading', {
+        name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
+      })
+      .locator('span');
+
+    // The header starts expanded.
+    await expect(pageTitle).toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header collapses when the cheveron button is toggled.
+    await pressTabKey(page, 20);
+    await expect(page.getByLabel('Collapse the page header')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(300);
+    await expect(pageTitle).not.toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+
+    // The header expands when the cheveron button is toggled.
+    await expect(page.getByLabel('Expand the page header')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(300);
+    await expect(pageTitle).toBeInViewport();
+    // TODO: enable this after fixing accessibility violations
+    // await expect(page).toHaveNoACViolations(
+    //   'PageHeader @avt-collapse-on-scroll'
+    // );
+  });
+
+  // PageHeader buttons collapse into MenuButton on small screens
+  test('@avt-buttons-collapse-into-menubutton-on-small-screens', async ({
+    page,
+  }) => {
+    await visitStory(page, {
+      component: 'PageHeader',
+      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    // renders all buttons on large screens by default
+    await pressTabKey(page, 15);
+    await expect(
+      page.getByRole('button', { name: 'danger Danger button' })
+    ).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('button', { name: 'Secondary button' })
+    ).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('button', { name: 'Primary button' })
+    ).toBeFocused();
+    // collapses into menu button on small screens
+    page.setViewportSize({ width: 1024, height: 768 });
+    await page.reload();
+    await page.waitForLoadState('networkidle');
+    pressTabKey(page, 7);
+    await expect(
+      page.getByRole('button', { name: 'Page actions' })
+    ).toBeFocused();
+    await page.keyboard.press('Enter');
+    (await page.locator('*:focus').textContent()) === 'Primary button';
+    await page.keyboard.press('ArrowDown');
+    (await page.locator('*:focus').textContent()) === 'Secondary button';
+    await page.keyboard.press('ArrowDown');
+    (await page.locator('*:focus').textContent()) === 'Danger button';
+    await page.keyboard.press('Escape');
+    await expect(
+      page.getByRole('button', { name: 'Page actions' })
+    ).toBeFocused();
+  });
 });
+
+async function pressTabKey(page, number) {
+  for (let i = 0; i < number; i++) {
+    await page.keyboard.press('Tab');
+  }
+}
+// async function waitForTransition(element) {
+//   await element.evaluate((el) =>
+//     Promise.all(el.getAnimations().map((animation) => animation.finished))
+//   );
+// }

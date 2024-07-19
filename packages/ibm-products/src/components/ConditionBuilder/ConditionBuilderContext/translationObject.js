@@ -45,4 +45,5 @@ export const translationsObject = {
   invalidNumberWarnText: 'Invalid number, must be 0 or greater',
   conditionBuilderText: 'Condition Builder',
   actionSectionText: 'Action Section',
+  conditionHeadingText: 'Condition',
 };

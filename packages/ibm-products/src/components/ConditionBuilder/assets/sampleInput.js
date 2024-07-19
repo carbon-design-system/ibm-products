@@ -21,47 +21,47 @@ import CustomInput from './CustomInput';
 
 //keeping this , an alternative way to give support for dynamic options.
 //instead of supplying getOptions callback, we keep option property in inputConfig always as a async method instead to array as below.
-export const inputDataForAsyncOptions = {
-  properties: [
-    {
-      id: 'continent',
-      label: 'Continent',
-      icon: Earth,
-      type: 'option',
-      config: {
-        options: async () => {
-          let returnVal = [
-            {
-              label: 'Africa',
-              id: 'Africa',
-            },
-            {
-              label: 'Antarctica',
-              id: 'Antarctica',
-            },
-            {
-              label: 'Asia',
-              id: 'Asia',
-            },
-            {
-              label: 'Australia',
-              id: 'Australia',
-            },
-            {
-              label: 'Europe',
-              id: 'Europe',
-            },
-          ];
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              resolve(returnVal);
-            }, 2000);
-          });
-        },
-      },
-    },
-  ],
-};
+// export const inputDataForAsyncOptions = {
+//   properties: [
+//     {
+//       id: 'continent',
+//       label: 'Continent',
+//       icon: Earth,
+//       type: 'option',
+//       config: {
+//         options: async () => {
+//           let returnVal = [
+//             {
+//               label: 'Africa',
+//               id: 'Africa',
+//             },
+//             {
+//               label: 'Antarctica',
+//               id: 'Antarctica',
+//             },
+//             {
+//               label: 'Asia',
+//               id: 'Asia',
+//             },
+//             {
+//               label: 'Australia',
+//               id: 'Australia',
+//             },
+//             {
+//               label: 'Europe',
+//               id: 'Europe',
+//             },
+//           ];
+//           return new Promise((resolve) => {
+//             setTimeout(() => {
+//               resolve(returnVal);
+//             }, 2000);
+//           });
+//         },
+//       },
+//     },
+//   ],
+// };
 
 const customOperators = [
   {

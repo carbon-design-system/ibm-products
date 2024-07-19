@@ -83,20 +83,6 @@ export const checkForHoldingKey = (evt, key) => {
   return evt[key];
 };
 
-export const checkDuplicateAction = (
-  actionState,
-  selectedId,
-  currentActionId
-) => {
-  if (
-    selectedId !== currentActionId &&
-    actionState.find((eachAction) => eachAction.id === selectedId)
-  ) {
-    return true;
-  }
-  return false;
-};
-
 export const checkIsValid = (item) => {
   return item && item !== 'INVALID';
 };

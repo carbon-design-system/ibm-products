@@ -171,9 +171,7 @@ test.describe('PageHeader @avt', () => {
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
-    await page
-      .locator('.dev-prefix--c4p--breadcrumb-with-overflow__overflow-menu')
-      .focus();
+    await page.getByLabel('Open and close additional').focus();
     // TODO: enable this after fixing accessibility violations
     // await expect(page).toHaveNoACViolations(
     //   'PageHeader @avt-header-buttons-move-to-menubutton-on-small-screens'
@@ -282,9 +280,7 @@ test.describe('PageHeader @avt', () => {
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
-    await page
-      .locator('.dev-prefix--c4p--breadcrumb-with-overflow__overflow-menu')
-      .focus();
+    await page.getByLabel('Open and close additional').focus();
     // TODO: enable this after fixing accessibility violations
     // await expect(page).toHaveNoACViolations(
     //   'PageHeader @avt-action-buttons-move-to-menubutton-on-small-screens'

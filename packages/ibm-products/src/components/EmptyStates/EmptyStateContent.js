@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,56 +15,12 @@ import cx from 'classnames';
 
 // Carbon and package components we use.
 import { Button, Link } from '@carbon/react';
-import { ButtonProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
 
-type EmptyStateContentProps = {
-  /**
-   * Empty state action button
-   */
-  action?: {
-    iconDescription?: string;
-    kind?: 'primary' | 'secondary' | 'tertiary';
-    renderIcon?: CarbonIconType;
-    onClick?: ButtonProps['onClick'];
-    text?: string;
-  };
-
-  /**
-   * Empty state link object
-   */
-  link?: {
-    text?: string | ReactNode;
-    href?: string;
-  };
-
-  /**
-   * Empty state size
-   */
-  size?: 'lg' | 'sm';
-
-  /**
-   * Empty state subtitle
-   */
-  subtitle?: string | ReactNode;
-
-  /**
-   * Empty state title
-   */
-  title: string | ReactNode;
-};
-
-export const EmptyStateContent = ({
-  action,
-  link,
-  size,
-  subtitle,
-  title,
-}: EmptyStateContentProps) => {
+export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
   return (
     <div className={`${blockClass}__content`}>
       <h3

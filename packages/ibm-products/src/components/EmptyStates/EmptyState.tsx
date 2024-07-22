@@ -26,15 +26,10 @@ import { EmptyStateContent } from './EmptyStateContent';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyState';
 
-enum sizes {
-  lg = 'lg',
-  sm = 'sm',
-}
-
 // Default values for props
-export const defaults: { position: string; size: sizes } = {
+export const defaults = {
   position: 'top',
-  size: sizes.lg,
+  size: 'lg',
 };
 
 interface EmptyStateProps {

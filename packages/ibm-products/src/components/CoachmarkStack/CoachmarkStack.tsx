@@ -105,6 +105,7 @@ const defaults = {
   onClose: () => {},
   // Pass through to CoachmarkStackHome
   theme: 'light',
+  portalTarget: 'body',
 };
 
 // NOTE
@@ -133,7 +134,7 @@ export let CoachmarkStack = React.forwardRef<
       description,
       media,
       navLinkLabels,
-      portalTarget,
+      portalTarget = defaults.portalTarget,
       closeButtonLabel,
       tagline,
       theme = defaults.theme,
@@ -330,7 +331,9 @@ export let CoachmarkStack = React.forwardRef<
             closeButtonLabel={closeButtonLabel}
             title={title}
           />
-          {createPortal(wrappedChildren, portalNode.current || document.body)}
+          {portalNode?.current
+            ? createPortal(wrappedChildren, portalNode?.current)
+            : null}
         </div>
       </CoachmarkContext.Provider>
     );

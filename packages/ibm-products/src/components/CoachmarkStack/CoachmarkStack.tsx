@@ -12,7 +12,6 @@ import React, {
   useRef,
   useState,
   useCallback,
-  MutableRefObject,
   ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
@@ -50,7 +49,7 @@ interface CoachmarkStackProps {
   /**
    * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
    */
-  children: React.ReactNode;
+  children: ReactNode;
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -63,7 +62,7 @@ interface CoachmarkStackProps {
   /**
    * The description of the Coachmark.
    */
-  description: React.ReactNode;
+  description: ReactNode;
   /**
    * The object describing an image in one of two shapes.
    *
@@ -308,7 +307,7 @@ export let CoachmarkStack = React.forwardRef<
           <CoachmarkTagline title={tagline} onClose={onClose} />
 
           <CoachmarkStackHome
-            ref={stackHomeRef as MutableRefObject<HTMLDivElement>}
+            ref={stackHomeRef}
             className={cx(
               `${pkg.prefix}--coachmark-overlay`,
               `${pkg.prefix}--coachmark-overlay__${theme}`,

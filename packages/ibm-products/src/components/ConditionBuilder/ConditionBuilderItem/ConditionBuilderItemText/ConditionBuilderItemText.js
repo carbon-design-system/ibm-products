@@ -4,6 +4,7 @@ import { TextArea, TextInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { checkIsValid } from '../../utils/util';
 
 export const ConditionBuilderItemText = ({
   conditionState,
@@ -14,7 +15,7 @@ export const ConditionBuilderItemText = ({
   const inputProps = {
     labelText: conditionState.property,
     hideLabel: true,
-    value: conditionState.value ?? '',
+    value: checkIsValid(conditionState.value) ? conditionState.value : '',
     id: conditionState.property?.replace(/\s/g, ''),
     onChange: (evt) => {
       onChange(evt.target.value);
@@ -49,5 +50,5 @@ ConditionBuilderItemText.propTypes = {
   /**
    * current input type
    */
-  type: PropTypes.object,
+  type: PropTypes.string,
 };

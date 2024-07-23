@@ -127,6 +127,8 @@ const parameters = {
         'IBM Products',
         ['Components', 'Patterns', 'Internal', 'Onboarding'],
         'Community',
+        'Experimental',
+        ['Components', 'Patterns', 'Onboarding'],
       ],
     },
   },

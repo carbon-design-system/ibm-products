@@ -35,7 +35,7 @@ export default {
       },
     },
   },
-  excludeStories: ['filterProps', 'getDateFormat', 'multiSelectProps'],
+  excludeStories: ['getFilterProps', 'getDateFormat', 'multiSelectProps'],
 };
 
 // This is to show off the View all button in checkboxes

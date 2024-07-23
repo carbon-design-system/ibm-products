@@ -1248,8 +1248,6 @@ const TabTemplateWrapper = ({ ...args }) => {
   const table2Uuid = uuidv4();
   const table1FilterProps = getFilterProps(table1Uuid);
   const table2FilterProps = getFilterProps(table2Uuid);
-  console.log(table1FilterProps);
-  console.log(table2FilterProps);
   return (
     <Tabs>
       <TabList aria-label="List of tabs" contained>

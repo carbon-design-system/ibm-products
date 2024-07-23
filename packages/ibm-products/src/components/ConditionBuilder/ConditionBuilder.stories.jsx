@@ -181,7 +181,7 @@ const getOptions = async (conditionState, { property }) => {
   }
 };
 const requiredProps = {
-  startConditionLabel: 'Add Condition',
+  startConditionLabel: 'Add condition',
   popOverSearchThreshold: 4,
   getConditionState: (rootState) => {
     console.log(rootState);

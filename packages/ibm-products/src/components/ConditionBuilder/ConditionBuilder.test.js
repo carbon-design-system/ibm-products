@@ -19,7 +19,7 @@ import userEvent from '@testing-library/user-event';
 import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
   sampleDataStructure_sentence,
-  // sampleDataStructure_tree,
+  sampleDataStructure_tree,
 } from './assets/SampleData';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
@@ -1248,5 +1248,387 @@ describe(componentName, () => {
     const selectedItem = screen.getByRole('button', { name: 'testID123' });
 
     expect(selectedItem);
+  });
+
+  // keyboard navigation tests
+  //for sentence variant
+  it('add and remove conditions using keyboard', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        data-testid={dataTestId}
+      />
+    );
+
+    expect(screen.getByText('Add condition'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(screen.getByText('Add condition')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    //adding first condition
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Continent',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'is',
+      })
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Africa',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByText('Continent'));
+    expect(screen.getByText('is'));
+    expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(
+      document.querySelector(`.${blockClass}__close-condition`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(document.querySelector(`.${blockClass}__add-button`)).toHaveFocus();
+
+    //adding second condition
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Tab}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Region',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+
+    expect(
+      screen.getByRole('option', {
+        name: 'is one of',
+      })
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Tab}'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Afghanistan',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard(' '));
+    await act(() => userEvent.keyboard('{Escape}'));
+
+    expect(screen.getByText('Region'));
+    expect(screen.getByText('is one of'));
+    expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
+
+    //checking arrow up/down will select next row same cell
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__close-condition`)[1]
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(
+      document.querySelectorAll(`.${blockClass}__close-condition`)[0]
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{ArrowLeft}'));
+    await act(() => userEvent.keyboard('{ArrowLeft}'));
+
+    await act(() => userEvent.keyboard('{ArrowLeft}'));
+    expect(screen.getByRole('button', { name: 'Continent' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(
+      document.querySelectorAll(`.${blockClass}__close-condition`)[0]
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(screen.getByText('Add condition')).toHaveFocus();
+  });
+
+  //for tree variant
+  it('add and remove conditions using keyboard', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={'tree'}
+        inputConfig={inputData}
+      />
+    );
+
+    //adding first condition
+    expect(screen.getByText('Add condition'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(screen.getByText('Add condition')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Continent',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'is',
+      })
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Africa',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Asia',
+      })
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByText('Continent'));
+    expect(screen.getByText('is'));
+    expect(screen.getByRole('button', { name: 'Africa' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(
+      document.querySelector(`.${blockClass}__close-condition`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(document.querySelector(`.${blockClass}__add-button`)).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(
+      document.querySelector(`.${blockClass}__add-condition-sub-group`)
+    ).toHaveFocus();
+
+    //adding second condition
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Tab}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Region',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Enter}'));
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+
+    expect(
+      screen.getByRole('option', {
+        name: 'is one of',
+      })
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(screen.getByRole('searchbox')).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{Tab}'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(
+      screen.getByRole('option', {
+        name: 'Afghanistan',
+      })
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard(' '));
+    await act(() => userEvent.keyboard('{Escape}'));
+
+    expect(screen.getByText('Region'));
+    expect(screen.getByText('is one of'));
+    expect(screen.getByRole('button', { name: 'Afghanistan' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+
+    expect(
+      document.querySelectorAll(`.${blockClass}__close-condition`)[1]
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(screen.getByRole('button', { name: 'Continent' })).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(
+      document.querySelectorAll(`.${blockClass}__close-condition`)[0]
+    ).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(screen.getByText('Add condition')).toHaveFocus();
+  });
+
+  it('row navigation using keyboard', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        variant={'tree'}
+        inputConfig={inputData}
+        initialState={sampleDataStructure_tree}
+      />
+    );
+
+    expect(screen.getByText('Add condition'));
+    await act(() => userEvent.keyboard('{Tab}'));
+    expect(screen.getByText('Add condition')).toHaveFocus();
+    await act(() => userEvent.keyboard('{Enter}'));
+    await act(() => userEvent.keyboard('{Tab}'));
+
+    expect(
+      document.querySelector(`[role="row"][aria-level="1"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="2"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="3"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="3"]`)
+    ).toHaveFocus();
+
+    //reverse row navigation
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="3"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="2"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="1"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowRight}'));
+    expect(screen.getAllByRole('button', { name: 'Region' })[0]).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowLeft}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+    ).toHaveFocus();
   });
 });

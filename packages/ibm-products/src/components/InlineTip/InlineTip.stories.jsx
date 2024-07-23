@@ -21,7 +21,7 @@ const InlineTipAnimation = new URL(
 import DocsPage from './InlineTip.docs-page';
 
 export default {
-  title: 'Experimental/OnBoarding/Inline tip/InlineTip',
+  title: 'Experimental/Onboarding/Inline tip/InlineTip',
   component: InlineTip,
   tags: ['autodocs'],
   parameters: {

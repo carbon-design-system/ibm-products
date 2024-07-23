@@ -315,10 +315,7 @@ const useFilters = ({
                 }}
               >
                 <RadioButton
-                  id={
-                    components?.DefaultRadioButton?.id ??
-                    `any__${name}--${uuidv4()}`
-                  }
+                  id={components?.DefaultRadioButton?.id ?? `any__${name}`}
                   labelText={components?.DefaultRadioButton?.labelText ?? 'Any'}
                   value={components?.DefaultRadioButton?.value ?? 'Any'}
                   {...components.DefaultRadioButton}

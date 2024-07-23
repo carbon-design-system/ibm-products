@@ -7,8 +7,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from 'react';
-import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@carbon/react';
+import React from 'react';
 import { Datagrid } from '../../index';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
@@ -17,7 +16,6 @@ import { action } from '@storybook/addon-actions';
 import styles from '../../_storybook-styles.scss?inline';
 import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';
-import uuidv4 from '../../../../global/js/utils/uuidv4';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Panel',

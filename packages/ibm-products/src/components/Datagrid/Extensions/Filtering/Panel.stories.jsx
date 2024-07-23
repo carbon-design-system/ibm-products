@@ -74,7 +74,7 @@ export const multiSelectProps = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
-export const getFilterProps = (id) => ({
+export const getFilterProps = (id = 'id') => ({
   variation: 'panel',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',

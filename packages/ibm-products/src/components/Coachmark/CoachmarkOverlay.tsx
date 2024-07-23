@@ -99,7 +99,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const coachmark = useCoachmark();
     const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
-    const isVisible = className && className.includes('is-visible');
+    const isVisible = className?.includes('is-visible');
 
     const handleKeyPress = (event) => {
       const { shiftKey, key } = event;
@@ -223,7 +223,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
             });
           })}
         </div>
-        {isBeacon && <span className={`${blockClass}__caret`} />}
       </div>
     );
   }

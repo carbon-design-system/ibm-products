@@ -15,14 +15,21 @@ import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilde
 const ConditionBuilderActions = ({ actions, className }) => {
   const { actionState, setActionState } = useContext(ConditionBuilderContext);
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
-  const [actionsText, thenText, andText, removeActionText, addActionText] =
-    useTranslations([
-      'actionsText',
-      'then',
-      'and',
-      'removeActionText',
-      'addActionText',
-    ]);
+  const [
+    actionsText,
+    thenText,
+    andText,
+    removeActionText,
+    addActionText,
+    actionSectionText,
+  ] = useTranslations([
+    'actionsText',
+    'then',
+    'and',
+    'removeActionText',
+    'addActionText',
+    'actionSectionText',
+  ]);
 
   const addActionHandler = () => {
     const action = {
@@ -59,7 +66,11 @@ const ConditionBuilderActions = ({ actions, className }) => {
       <Section className={`${blockClass}__heading`} level={4}>
         <Heading>{actionsText}</Heading>
       </Section>
-      <div className={`${blockClass}__condition-wrapper`} role="grid">
+      <div
+        className={`${blockClass}__condition-wrapper`}
+        role="grid"
+        aria-label={actionSectionText}
+      >
         {actionState?.map((action, index) => (
           <div
             key={action.id}
@@ -113,6 +124,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
                 onClick={addActionHandler}
                 className={`${blockClass}__gap ${blockClass}__gap-left`}
                 buttonLabel={addActionText}
+                tabIndex={0}
               />
             )}
           </div>

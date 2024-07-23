@@ -8,6 +8,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from 'react';
+import { Tabs, Tab, TabList, TabPanel, TabPanels } from '@carbon/react';
 import { Datagrid } from '../../index';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
@@ -16,6 +17,7 @@ import { action } from '@storybook/addon-actions';
 import styles from '../../_storybook-styles.scss?inline';
 import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';
+import uuidv4 from '../../../../global/js/utils/uuidv4';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Panel',
@@ -24,7 +26,7 @@ export default {
   parameters: {
     styles,
     docs: { page: DocsPage },
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     featureFlags: {
@@ -72,7 +74,7 @@ export const multiSelectProps = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
-export const filterProps = {
+export const getFilterProps = (id) => ({
   variation: 'panel',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',
@@ -143,17 +145,17 @@ export const filterProps = {
               },
               RadioButton: [
                 {
-                  id: 'developer',
+                  id: `developer-${id}`,
                   labelText: 'Developer',
                   value: 'developer',
                 },
                 {
-                  id: 'designer',
+                  id: `designer-${id}`,
                   labelText: 'Designer',
                   value: 'designer',
                 },
                 {
-                  id: 'researcher',
+                  id: `researcher-${id}`,
                   labelText: 'Researcher',
                   value: 'researcher',
                 },
@@ -188,17 +190,17 @@ export const filterProps = {
               },
               Checkbox: [
                 {
-                  id: 'normal',
+                  id: `normal-${id}`,
                   labelText: 'Normal',
                   value: 'normal',
                 },
                 {
-                  id: 'minor-warning',
+                  id: `minor-warning-${id}`,
                   labelText: 'Minor warning',
                   value: 'minor-warning',
                 },
                 {
-                  id: 'critical',
+                  id: `critical-${id}`,
                   labelText: 'Critical',
                   value: 'critical',
                 },
@@ -218,7 +220,7 @@ export const filterProps = {
     const endDateObj = new Date(end);
     return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
   },
-};
+});
 
 export const PanelBatch = FilteringTemplateWrapper.bind({});
 PanelBatch.storyName = 'Filter panel with batch update';
@@ -235,7 +237,7 @@ PanelBatch.args = {
   emptyStateTitle: 'No filters match',
   emptyStateDescription:
     'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-  filterProps,
+  filterProps: getFilterProps(),
 };
 
 export const PanelInstant = FilteringTemplateWrapper.bind({});
@@ -1239,4 +1241,46 @@ PanelManyCheckboxes.args = {
     panelTitle: 'Filter',
     renderLabel: (key, value) => handleFilterTagLabelText(key, value),
   },
+};
+
+const TabTemplateWrapper = ({ ...args }) => {
+  const table1Uuid = uuidv4();
+  const table2Uuid = uuidv4();
+  const table1FilterProps = getFilterProps(table1Uuid);
+  const table2FilterProps = getFilterProps(table2Uuid);
+  console.log(table1FilterProps);
+  console.log(table2FilterProps);
+  return (
+    <Tabs>
+      <TabList aria-label="List of tabs" contained>
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          <FilteringTemplateWrapper filterProps={table1FilterProps} {...args} />
+        </TabPanel>
+        <TabPanel>
+          <FilteringTemplateWrapper filterProps={table2FilterProps} {...args} />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+export const DatagridWithTabs = TabTemplateWrapper.bind({});
+DatagridWithTabs.storyName = 'Filter panel, multiple datagrid';
+DatagridWithTabs.argTypes = {
+  gridTitle: ARG_TYPES.gridTitle,
+  gridDescription: ARG_TYPES.gridDescription,
+  useDenseHeader: ARG_TYPES.useDenseHeader,
+  filterProps: ARG_TYPES.filterProps,
+};
+DatagridWithTabs.args = {
+  gridTitle: 'Data table title',
+  gridDescription: 'Additional information if needed',
+  useDenseHeader: false,
+  emptyStateTitle: 'No data',
+  emptyStateDescription: 'There is no data to show 🤠',
+  // filterProps: getFilterProps()
 };

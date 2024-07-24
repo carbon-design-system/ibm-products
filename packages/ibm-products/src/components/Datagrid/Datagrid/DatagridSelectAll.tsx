@@ -48,7 +48,7 @@ const SelectAll = (datagridState: DataGridState) => {
     columns[0]?.sticky === 'left' && withStickyColumn;
   if (hideSelectAll || radio) {
     return (
-      <div
+      <th
         className={cx(`${blockClass}__head-hidden-select-all`, {
           [`${blockClass}__select-all-sticky-left`]:
             /* istanbul ignore next */

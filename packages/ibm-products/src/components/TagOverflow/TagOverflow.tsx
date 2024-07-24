@@ -167,11 +167,11 @@ export let TagOverflow = forwardRef(
     useEffect(() => {
       let visibleItemsArr = getVisibleItems();
 
-      if (maxVisible && maxVisible < visibleItemsArr.length) {
+      if (maxVisible && maxVisible < visibleItemsArr?.length) {
         visibleItemsArr = visibleItemsArr?.slice(0, maxVisible);
       }
 
-      const hiddenItems = items?.slice(visibleItemsArr.length);
+      const hiddenItems = items?.slice(visibleItemsArr?.length);
       const overflowItemsArr = hiddenItems?.map(({ tagType, ...other }) => {
         return { type: tagType, ...other };
       });
@@ -190,7 +190,7 @@ export let TagOverflow = forwardRef(
     const handleTagOnClose = useCallback(
       (onClose, index) => {
         onClose?.();
-        if (index <= visibleItems.length - 1) {
+        if (index <= visibleItems?.length - 1) {
           setPopoverOpen(false);
         }
       },
@@ -210,7 +210,7 @@ export let TagOverflow = forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {visibleItems.length > 0 &&
+        {visibleItems?.length > 0 &&
           visibleItems.map((item, index) => {
             // Render custom components
             if (tagComponent) {
@@ -236,7 +236,7 @@ export let TagOverflow = forwardRef(
           })}
 
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {overflowItems.length > 0 && (
+          {overflowItems?.length > 0 && (
             <>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}
@@ -284,7 +284,7 @@ const tagTypes = Object.keys(TYPES);
  */
 export const string_required_if_more_than_10_tags = isRequiredIf(
   PropTypes.string,
-  ({ items }) => items && items.length > allTagsModalSearchThreshold
+  ({ items }) => items && items?.length > allTagsModalSearchThreshold
 );
 
 // The types and DocGen commentary for the component props,

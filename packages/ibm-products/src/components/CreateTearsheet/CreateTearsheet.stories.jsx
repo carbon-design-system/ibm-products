@@ -47,7 +47,7 @@ const createTearsheetProps = {
   firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
-const customButtonText = 'Skip';
+const customButtonText = 'Custom';
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'Create tearsheet';

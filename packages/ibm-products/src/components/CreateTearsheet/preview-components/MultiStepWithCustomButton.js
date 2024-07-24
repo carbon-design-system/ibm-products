@@ -78,7 +78,8 @@ export const MultiStepWithCustomButton = ({
         <CreateTearsheetStep
           title="Change custom button name"
           includeStep
-          customButtonChangeText="Skip step"
+          customButtonChangeText="Skip all steps"
+          onCustomButtonClick={clearCreateData}
         >
           This step will show you how to rename a custom button
         </CreateTearsheetStep>

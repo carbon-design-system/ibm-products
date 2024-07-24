@@ -131,15 +131,6 @@ export const useCreateComponentStepChange = ({
     };
     if (stepData?.length > 0) {
       const buttons = [];
-      if (customButtonText && !isCustomButtonHide) {
-        buttons.push({
-          key: 'create-action-button-custom',
-          label: customButtonText,
-          onClick: handleCustom,
-          kind: 'secondary',
-          disabled: isCustomButtonDisabled,
-        });
-      }
       if (stepData?.length > 1) {
         buttons.push({
           key: 'create-action-button-back',
@@ -159,6 +150,15 @@ export const useCreateComponentStepChange = ({
             : onUnmount,
         kind: 'ghost',
       });
+      if (customButtonText && !isCustomButtonHide) {
+        buttons.push({
+          key: 'create-action-button-custom',
+          label: customButtonText,
+          onClick: handleCustom,
+          kind: 'secondary',
+          disabled: isCustomButtonDisabled,
+        });
+      }
       buttons.push({
         key: 'create-action-button-submit',
         label:

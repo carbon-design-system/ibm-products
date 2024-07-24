@@ -160,11 +160,11 @@ export let TagOverflow = forwardRef(
     useEffect(() => {
       let visibleItemsArr = getVisibleItems();
 
-      if (maxVisible && maxVisible < visibleItemsArr.length) {
+      if (maxVisible && maxVisible < visibleItemsArr?.length) {
         visibleItemsArr = visibleItemsArr?.slice(0, maxVisible);
       }
 
-      const hiddenItems = items?.slice(visibleItemsArr.length);
+      const hiddenItems = items?.slice(visibleItemsArr?.length);
       const overflowItemsArr = hiddenItems?.map(({ tagType, ...other }) => {
         return { type: tagType, ...other };
       });
@@ -183,7 +183,7 @@ export let TagOverflow = forwardRef(
     const handleTagOnClose = useCallback(
       (onClose, index) => {
         onClose?.();
-        if (index <= visibleItems.length - 1) {
+        if (index <= visibleItems?.length - 1) {
           setPopoverOpen(false);
         }
       },
@@ -196,14 +196,14 @@ export let TagOverflow = forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        ref={localRef}
+        ref={ref}
         className={cx(blockClass, className, `${blockClass}--align-${align}`, {
           [`${blockClass}--multiline`]: multiline,
         })}
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {visibleItems.length > 0 &&
+        {visibleItems?.length > 0 &&
           visibleItems.map((item, index) => {
             if (tagComponent) {
               return getCustomComponent(tagComponent, item);
@@ -227,7 +227,7 @@ export let TagOverflow = forwardRef(
           })}
 
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {overflowItems.length > 0 && (
+          {overflowItems?.length > 0 && (
             <>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}

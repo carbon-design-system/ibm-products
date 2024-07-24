@@ -56,7 +56,7 @@ export const TagOverflowPopover = forwardRef(
     const getOverflowPopoverItems = () => {
       const thresh = allTagsModalSearchThreshold ?? 0;
       return overflowTags?.filter((_, index) =>
-        overflowTags.length > thresh ? index < thresh : index <= thresh
+        overflowTags?.length > thresh ? index < thresh : index <= thresh
       );
     };
 

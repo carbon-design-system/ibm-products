@@ -38,6 +38,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     withMouseHover,
     setMouseOverRowIndex,
     headers,
+    visibleColumns,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -129,7 +130,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     return {};
   };
 
-  const { className, ...rowProps } = row.getRowProps();
+  const { className, ...rowProps } = row.getRowProps({ role: undefined });
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
@@ -138,6 +139,10 @@ const DatagridRow = (datagridState: DataGridState) => {
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
   });
+
+  const withActionsColumn = headers
+    ? !!headers.filter((header) => header.isAction).length
+    : false;
 
   return (
     <React.Fragment key={key}>
@@ -166,9 +171,9 @@ const DatagridRow = (datagridState: DataGridState) => {
           )
         ) : null}
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps();
+          const cellProps = cell.getCellProps({ role: undefined });
           // eslint-disable-next-line no-unused-vars
-          const { children, ...restProps } = cellProps as any;
+          const { style, children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
           const content = children || (
             <>
@@ -180,10 +185,17 @@ const DatagridRow = (datagridState: DataGridState) => {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
           }
-          const title = content?.props?.children[0]?.props?.value;
           const associatedHeader = headers?.filter(
             (h) => h.id === cell.column.id
           );
+          const lastVisibleIndex = withActionsColumn ? 2 : 1;
+          const lastVisibleFlexStyle =
+            index === visibleColumns.length - lastVisibleIndex
+              ? '1 1 0'
+              : '0 0 auto';
+          if (style) {
+            style.flex = lastVisibleFlexStyle;
+          }
           return (
             <TableCell
               className={cx(
@@ -201,8 +213,8 @@ const DatagridRow = (datagridState: DataGridState) => {
                 columnClassname
               )}
               {...restProps}
+              style={style}
               key={cell.column.id}
-              title={title}
             >
               {content}
             </TableCell>

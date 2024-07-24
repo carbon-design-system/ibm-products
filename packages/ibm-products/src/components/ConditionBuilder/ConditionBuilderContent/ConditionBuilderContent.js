@@ -7,22 +7,18 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  translateWithId,
-} from '../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
-//import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
 import { Heading } from '@carbon/react';
 import { Section } from '@carbon/react';
 import GroupConnector from '../ConditionBuilderConnector/GroupConnector';
 import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
+import { useTranslations } from '../utils/useTranslations';
 
 const ConditionBuilderContent = ({
   startConditionLabel,
-  conditionBuilderRef,
   getConditionState,
   getActionsState,
   initialState,
@@ -35,6 +31,18 @@ const ConditionBuilderContent = ({
     useState(false);
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
+
+  const [addConditionGroupText, conditionHeadingText] = useTranslations([
+    'addConditionGroupText',
+    'conditionHeadingText',
+  ]);
+  const showConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(true);
+  };
+
+  const hideConditionGroupPreviewHandler = () => {
+    setShowConditionGroupPreview(false);
+  };
 
   useEffect(() => {
     if (rootState?.groups?.length) {
@@ -107,25 +115,27 @@ const ConditionBuilderContent = ({
       groups: [...rootState.groups, newGroup],
     });
   };
+
+  if (!isConditionBuilderActive) {
+    return (
+      <Button
+        className={`${blockClass}__addConditionText-button`}
+        renderIcon={(props) => <Add {...props} />}
+        iconDescription={startConditionLabel}
+        kind="ghost"
+        size="sm"
+        onClick={onStartConditionBuilder}
+      >
+        {startConditionLabel}
+      </Button>
+    );
+  }
+
   return (
     <>
-      {!isConditionBuilderActive && (
-        <Button
-          className={`${blockClass}__add_condition-button`}
-          renderIcon={(props) => <Add size={16} {...props} />}
-          iconDescription={startConditionLabel}
-          kind="ghost"
-          size="sm"
-          onClick={onStartConditionBuilder}
-        >
-          {startConditionLabel}
-        </Button>
-      )}
-      {isConditionBuilderActive && (
-        <Section className={`${blockClass}__heading`} level={4}>
-          <Heading>Condition</Heading>
-        </Section>
-      )}
+      <Section className={`${blockClass}__heading`} level={4}>
+        <Heading>{conditionHeadingText}</Heading>
+      </Section>
 
       <div
         className={`${blockClass}__content-container`}
@@ -149,7 +159,6 @@ const ConditionBuilderContent = ({
                 onChange={(updatedGroup) => {
                   onChangeHandler(updatedGroup, groupIndex);
                 }}
-                conditionBuilderRef={conditionBuilderRef}
               />
 
               {/* displaying the connector field between groups */}
@@ -158,41 +167,44 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {isConditionBuilderActive && (
-          <>
-            {variant == 'tree' && (
-              <div role="row" tabIndex={-1} aria-level={1}>
-                {
-                  <ConditionBuilderButton
-                    renderIcon={TextNewLine}
-                    onClick={addConditionGroupHandler}
-                    onMouseEnter={() => {
-                      setShowConditionGroupPreview(true);
-                    }}
-                    onMouseLeave={() => {
-                      setShowConditionGroupPreview(false);
-                    }}
-                    className={`${blockClass}__add_condition_group `}
-                    hideLabel
-                    label={translateWithId('add_condition_group')}
-                    wrapperProps={{
-                      role: 'gridcell',
-                      'aria-label': translateWithId('add_condition_group'),
-                    }}
-                  />
-                }
-              </div>
-            )}
-            {showConditionGroupPreview && (
-              <ConditionPreview previewType="newGroup" />
-            )}
-          </>
+        {variant == 'tree' && (
+          <div
+            role="row"
+            tabIndex={-1}
+            aria-level={1}
+            className={`${blockClass}__add-group`}
+          >
+            {
+              <ConditionBuilderButton
+                renderIcon={TextNewLine}
+                onClick={addConditionGroupHandler}
+                onMouseEnter={showConditionGroupPreviewHandler}
+                onMouseLeave={hideConditionGroupPreviewHandler}
+                onFocus={showConditionGroupPreviewHandler}
+                onBlur={hideConditionGroupPreviewHandler}
+                className={`${blockClass}__add-condition-group `}
+                hideLabel
+                label={addConditionGroupText}
+                wrapperProps={{
+                  role: 'gridcell',
+                  'aria-label': addConditionGroupText,
+                }}
+              />
+            }
+          </div>
+        )}
+        {showConditionGroupPreview && (
+          <ConditionPreview
+            previewType="newGroup"
+            group={{ groupOperator: rootState.operator }}
+          />
         )}
       </div>
-      {isConditionBuilderActive && actions && (
+      {actions && (
         <ConditionBuilderActions
           actions={actions}
           className={`${blockClass}__actions-container`}
+          variant={variant}
         />
       )}
     </>
@@ -211,10 +223,6 @@ ConditionBuilderContent.propTypes = {
       label: PropTypes.string.isRequired,
     })
   ),
-  /**
-   * ref of condition builder
-   */
-  conditionBuilderRef: PropTypes.object,
   /**
    * callback functions that will provide the updated action state back.
    */

@@ -6,15 +6,16 @@ import { Checkmark } from '@carbon/react/icons';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  translateWithId,
-} from '../../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef();
-
+  const [propertyText, clearSearchText] = useTranslations([
+    'propertyText',
+    'clearSearchText',
+  ]);
   const allOptions = config.options;
   const [searchValue, setSearchValue] = useState('');
 
@@ -51,7 +52,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
       ? conditionState.label
       : conditionState.property
       ? conditionState.property
-      : translateWithId('property');
+      : propertyText;
   };
 
   if (!allOptions) {
@@ -63,8 +64,8 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={translateWithId('clear_search')}
-            closeButtonLabelText={translateWithId('clear_search')}
+            labelText={clearSearchText}
+            closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
           />
         </div>

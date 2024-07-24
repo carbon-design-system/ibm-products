@@ -57,10 +57,6 @@ export let CoachmarkBeacon = React.forwardRef<
       </div>
     );
   }
-  const overlayPositionStyle = {
-    top: coachmark.positionTune?.y ?? 0,
-    left: coachmark.positionTune?.x ?? 0,
-  };
   return (
     <span
       {
@@ -69,7 +65,6 @@ export let CoachmarkBeacon = React.forwardRef<
       }
       className={cx(blockClass, `${blockClass}-${kind}`, className)}
       ref={ref}
-      style={overlayPositionStyle}
       {...getDevtoolsProps(componentName)}
       role="tooltip"
     >

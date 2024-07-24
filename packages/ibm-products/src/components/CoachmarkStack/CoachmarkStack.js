@@ -35,6 +35,7 @@ import { CoachmarkStackHome } from './CoachmarkStackHome';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 import { CoachmarkContext } from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 const defaults = {
   onClose: () => {},
@@ -74,9 +75,15 @@ export let CoachmarkStack = React.forwardRef(
     },
     ref
   ) => {
-    const portalNode = portalTarget
-      ? document.querySelector(portalTarget) ?? document.querySelector('body')
-      : document.querySelector('body');
+    const portalNode = useRef();
+
+    useIsomorphicEffect(() => {
+      portalNode.current = portalTarget
+        ? document?.querySelector(portalTarget) ??
+          document?.querySelector('body')
+        : document?.querySelector('body');
+    }, [portalTarget]);
+
     const stackHomeRef = useRef();
     const stackedCoachmarkRefs = useRef([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -248,7 +255,9 @@ export let CoachmarkStack = React.forwardRef(
             closeButtonLabel={closeButtonLabel}
             title={title}
           />
-          {createPortal(wrappedChildren, portalNode)}
+          {portalNode?.current
+            ? createPortal(wrappedChildren, portalNode?.current)
+            : null}
         </div>
       </CoachmarkContext.Provider>
     );

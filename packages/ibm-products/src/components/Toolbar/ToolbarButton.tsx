@@ -41,10 +41,9 @@ export let ToolbarButton = forwardRef(
     ref
   ) => {
     const Icon = renderIcon;
-
     return (
       <IconButton
-        align={useContext(ToolbarContext)?.vertical && 'right'}
+        align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
         {...rest}
         label={iconDescription}
         ref={ref}

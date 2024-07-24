@@ -99,9 +99,29 @@ interface DataSpreadsheetBodyProps {
   id?: number | string;
 
   /**
+   * Set current columns after drag drop
+   */
+  setCurrentColumns?: Dispatch<SetStateAction<object[]>>;
+
+  /**
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange?: () => void;
+
+  /**
+   * Check if user is using custom component
+   */
+  hasCustomRowHeader?: boolean;
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeader?: (index: number) => any[];
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeaderDirection?: string;
 
   /**
    * The event handler that is called to set the rows for the empty spreadsheet
@@ -226,8 +246,12 @@ export const DataSpreadsheetBody = forwardRef(
       defaultEmptyRowCount,
       getTableBodyProps,
       headerGroups,
+      setCurrentColumns,
       id,
       onDataUpdate,
+      renderRowHeader,
+      renderRowHeaderDirection,
+      hasCustomRowHeader,
       prepareRow,
       rows,
       selectionAreaData,
@@ -363,6 +387,7 @@ export const DataSpreadsheetBody = forwardRef(
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
       visibleColumns,
+      hasCustomRowHeader,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -471,6 +496,7 @@ export const DataSpreadsheetBody = forwardRef(
       setActiveCellInsideSelectionArea,
       setSelectionAreas,
       visibleColumns,
+      hasCustomRowHeader,
     ]);
 
     //this method will check for any duplicate selection area and remove.
@@ -640,7 +666,17 @@ export const DataSpreadsheetBody = forwardRef(
         };
         buildEmptyRows();
       }
-    }, [rows, headerGroups, defaultEmptyRowCount, onDataUpdate]);
+      if (headerGroups?.[0] && typeof setCurrentColumns === 'function') {
+        const headers = headerGroups[0].headers;
+        setCurrentColumns(headers);
+      }
+    }, [
+      rows,
+      headerGroups,
+      defaultEmptyRowCount,
+      onDataUpdate,
+      setCurrentColumns,
+    ]);
 
     const RenderEmptyRows = () => {
       return <div />;
@@ -679,10 +715,15 @@ export const DataSpreadsheetBody = forwardRef(
                     `${blockClass}__td-th`,
                     `${blockClass}--interactive-cell-element`,
                     {
+                      [`${blockClass}__td_custom`]: hasCustomRowHeader
+                        ? true
+                        : false,
                       [`${blockClass}__td-th--active-header`]:
-                        activeCellCoordinates?.row === index ||
-                        checkActiveHeaderCell(index, selectionAreas, 'row'),
+                        !hasCustomRowHeader &&
+                        (activeCellCoordinates?.row === index ||
+                          checkActiveHeaderCell(index, selectionAreas, 'row')),
                       [`${blockClass}__td-th--selected-header`]:
+                        !hasCustomRowHeader &&
                         checkSelectedHeaderCell(
                           index,
                           selectionAreas,
@@ -693,9 +734,17 @@ export const DataSpreadsheetBody = forwardRef(
                   )}
                   style={{
                     width: defaultColumn?.rowHeaderWidth,
+                    flexDirection: hasCustomRowHeader
+                      ? renderRowHeaderDirection === 'Left'
+                        ? 'row-reverse'
+                        : row
+                      : undefined,
                   }}
                 >
                   {index + 1}
+                  {hasCustomRowHeader &&
+                    typeof renderRowHeader === 'function' &&
+                    renderRowHeader(index)}
                 </button>
               </div>
               {/* CELL BUTTONS */}
@@ -739,7 +788,10 @@ export const DataSpreadsheetBody = forwardRef(
       },
       [
         prepareRow,
+        renderRowHeader,
+        renderRowHeaderDirection,
         rows,
+        hasCustomRowHeader,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClickEvent,
@@ -835,6 +887,11 @@ DataSpreadsheetBody.propTypes = {
   getTableBodyProps: PropTypes.func,
 
   /**
+   * Check if spreadsheet is using custom row header component attached
+   */
+  hasCustomRowHeader: PropTypes.bool,
+
+  /**
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
@@ -863,6 +920,16 @@ DataSpreadsheetBody.propTypes = {
    * Prepare row function from react-table
    */
   prepareRow: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeader: PropTypes.func,
+
+  /**
+   * Component next to numbering rows
+   */
+  renderRowHeaderDirection: PropTypes.string,
 
   /**
    * All of the spreadsheet row data
@@ -913,6 +980,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for containerHasFocus state value
    */
   setContainerHasFocus: PropTypes.func,
+
+  /**
+   * Set current columns after drag drop
+   */
+  setCurrentColumns: PropTypes.func,
 
   /**
    * Setter fn for currentMatcher state value

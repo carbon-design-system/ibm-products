@@ -60,7 +60,6 @@ const useRowExpander = (hooks) => {
                 `${carbon.prefix}--btn--ghost`
               )}
               {...expanderButtonProps}
-              title={expanderTitle}
             >
               {row.isExpanded ? (
                 <ChevronUp className={`${blockClass}__row-expander--icon`} />

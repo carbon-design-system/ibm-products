@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.21.0...@carbon/ibm-cloud-cognitive-core@2.22.0-rc.0) (2024-07-22)
+
+
+### Bug Fixes
+
+* update carbon packages to resolve max depth multi select issue ([#5643](https://github.com/carbon-design-system/ibm-products/issues/5643)) ([dc7cbc7](https://github.com/carbon-design-system/ibm-products/commit/dc7cbc7b1261c11cc84cfe152ff72bc4dee36738))
+
+
+
+
+
+# [2.21.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.21.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.21.0) (2024-07-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.21.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0...@carbon/ibm-cloud-cognitive-core@2.21.0-rc.0) (2024-07-08)
+
+
+### Features
+
+* **eslint-ssr-plugin:** adds `eslint-plugin-ssr-friendly` so we can catch ssr issues/bugs during development ([#5409](https://github.com/carbon-design-system/ibm-products/issues/5409)) ([0517cdb](https://github.com/carbon-design-system/ibm-products/commit/0517cdbdd4e177bfb4a5cc7dea2c535aead0633d))
+
+
+
+
+
+# [2.20.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.2...@carbon/ibm-cloud-cognitive-core@2.20.0) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.20.0-rc.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.1...@carbon/ibm-cloud-cognitive-core@2.20.0-rc.2) (2024-07-03)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.20.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.20.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.20.0-rc.1) (2024-06-26)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.20.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.19.1...@carbon/ibm-cloud-cognitive-core@2.20.0-rc.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* upgrade sass and remove `--` prefix from function names ([#5371](https://github.com/carbon-design-system/ibm-products/issues/5371)) ([91f282e](https://github.com/carbon-design-system/ibm-products/commit/91f282e56eec038f7efda4dd15c08d708c46cb58))
+
+
+
+
+
 ## [2.19.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.19.0...@carbon/ibm-cloud-cognitive-core@2.19.1) (2024-06-13)
 
 

@@ -69,6 +69,12 @@ release team will need to do the following:
   - Make sure the branch name follows the `release/vx.x.x` format
     ![Screenshot of manually creating release branch from GitHub UI](https://github.com/carbon-design-system/ibm-products/assets/54281166/0920cd6f-e4cd-44e9-ad8c-a3195bbaf9ea)
 
+- [ ] Add branch protections to the release branch by going to 'Settings' in the
+      IBM Products repository > 'Branches' under 'Code and automation' side
+      panel. Change the branch name pattern from `released/v2*` to
+      `release/v2*`.
+      ![Screenshot of branch settings page](https://github.com/carbon-design-system/ibm-products/assets/54281166/45855e7f-6440-48db-856c-2cfab1e8530f)
+
 - [ ] Run the
       [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
       to generate the prerelease versions for the packages
@@ -131,7 +137,61 @@ validated. During this stage, the release team will do the following:
       [automerge workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/automerge.yml)
       handles this automatically but fails when there are merge conflicts. Check
       the workflow to ensure the changes have been merged in. If it has failed,
-      open a PR with the merge conflicts resolved.
+      you will have to manually merge the release branch into `main`. Branch
+      protections to the `main` branch may have to be turn off temporarily to do
+      so.
+- [ ] Ensure the
+      [generated release notes](https://github.com/carbon-design-system/ibm-products/releases)
+      are correct. If a full release has been published, you may have to copy
+      and bundle the notes previously posted in the release candidates.
+- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+      new version of `@carbon/ibm-products`.
+
+  - For **release candidates**, an example message:
+
+    ```
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+
+    Hi all! Release candidate v2.45.0-rc.0 of @carbon/ibm-products has been created and is ready for testing!
+
+    What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
+
+    Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.0
+    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+    ```
+
+- For **full releases**, list some of the features included in the release.
+  These can be pulled from the release changelog. An example message:
+
+  ```
+  :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+
+  Hi everyone! :wave: We are happy to announce the release of Carbon for IBM Products v2.44.0! This release comes with a bunch of new features, along with our usual bug squashing!
+
+  New features and fixes include:
+  - Optional custom component to row header in Data SpreadSheet
+  - Action section and custom input for Condition Builder
+  - Opt out ability for editable cells in DataGrid
+  - Specify additional floating menu selectors for Tearsheet Shell
+  - lots of a11y fixes!
+  - lots of dependency upgrades!
+  - and many more bug fixes! :bugsquash:
+
+  Check out the full changelog, available at:
+  https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.44.0
+  Thank you for being an active member of our community! If you see any issues, you can reach out to us here, or open an issue on our board! :github:
+
+  :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+  ```
+
+- [ ] Remove the branch protections for `release/v2.*` by changing the branch
+      name pattern to `released/v2*`
+      ![Screenshot of branch settings page with branch name pattern changed back to released](https://github.com/carbon-design-system/ibm-products/assets/54281166/690d4b71-4efa-4b70-9768-c3f4eae9ca7e)
+
+- [ ] Update the release in the
+      [Wiki release page](https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases)
 
 After a release has switched packages from `next` to `latest`, it is important
 to monitor channels on Slack and issues on GitHub in case breaking changes may

@@ -1,10 +1,12 @@
 # Deploy staging storybook environment from release branch to Github Pages
 name: Deploy staging storybook
 
-# Gets triggered every time a change is pushed to the `release/v2*` branch
+# Gets triggered every time a release candidate has been published from the `release-base` workflow
+# or can be manually triggered
 on:
-  push:
-    branches: [release/v2*]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [deploy-staging-storybook]
 
 jobs:
   deploy-staging-storybook:
@@ -14,6 +16,7 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
           fetch-depth: '0'
+          ref: ${{ github.event.client_payload.branch }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -23,8 +26,8 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - name: Build storybook
-        run: yarn storybook:build
+      - name: Build packages and storybook
+        run: yarn build
 
       # Deploy to staging Github Pages using `gh-pages` package
       - name: Deploy

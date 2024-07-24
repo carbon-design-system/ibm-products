@@ -39,6 +39,7 @@ export let TagOverflow = forwardRef(
       allTagsModalTarget,
       allTagsModalTitle,
       className,
+      containingElementRef,
       items,
       maxVisible,
       measurementOffset,
@@ -52,8 +53,8 @@ export let TagOverflow = forwardRef(
       ...rest
     } = props;
 
-    const localRef = useRef<HTMLDivElement>(null);
-    const containerRef = ref || localRef;
+    const localContainerRef = useRef<HTMLDivElement>(null);
+    const containerRef = ref || localContainerRef;
     const itemRefs = useRef<Map<string, string> | null>(null);
     const overflowRef = useRef<HTMLDivElement>(null);
     // itemOffset is the value of margin applied on each items
@@ -67,6 +68,11 @@ export let TagOverflow = forwardRef(
     const [showAllModalOpen, setShowAllModalOpen] = useState<boolean>(false);
     const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
 
+    const resizeElm =
+      containingElementRef && containingElementRef.current
+        ? containingElementRef
+        : containerRef;
+
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
@@ -76,10 +82,10 @@ export let TagOverflow = forwardRef(
     };
 
     const handleResize = () => {
-      setContainerWidth(containerRef.current.offsetWidth);
+      setContainerWidth(resizeElm.current.offsetWidth);
     };
 
-    useResizeObserver(containerRef, handleResize);
+    useResizeObserver(resizeElm, handleResize);
 
     const getMap = () => {
       if (!itemRefs.current) {
@@ -106,32 +112,31 @@ export let TagOverflow = forwardRef(
       }
 
       const map = getMap();
-
-      const container = containerRef?.current;
-      const overflow = overflowRef?.current;
-
+      const optionalContainingElement = containingElementRef?.current;
       const measurementOffsetValue =
         typeof measurementOffset === 'number' ? measurementOffset : 0;
-      const spaceAvailable = container
-        ? container.offsetWidth - measurementOffsetValue
+      const spaceAvailable = optionalContainingElement
+        ? optionalContainingElement.offsetWidth - measurementOffsetValue
         : containerWidth;
 
       const overflowContainerWidth =
-        overflow && overflow.offsetWidth > overflowIndicatorWidth
-          ? overflow.offsetWidth
+        overflowRef &&
+        overflowRef.current &&
+        overflowRef.current.offsetWidth > overflowIndicatorWidth
+          ? overflowRef.current.offsetWidth
           : overflowIndicatorWidth;
       const maxWidth = spaceAvailable - overflowContainerWidth;
 
       let childrenWidth = 0;
       let maxReached = false;
 
-      return items.reduce<Item[]>((prev, cur) => {
+      return items.reduce((prev: Item[], cur: Item) => {
         if (!maxReached) {
-          const itemWidth = map.get(cur.id) ?? 0 + itemOffset;
-          const fits = itemWidth ?? 0 + childrenWidth < maxWidth;
+          const itemWidth = (map ? Number(map.get(cur.id)) : 0) + itemOffset;
+          const fits = itemWidth + childrenWidth < maxWidth;
 
           if (fits) {
-            childrenWidth += Number(itemWidth);
+            childrenWidth += itemWidth;
             prev.push(cur);
           } else {
             maxReached = true;
@@ -140,17 +145,19 @@ export let TagOverflow = forwardRef(
         return prev;
       }, []);
     }, [
-      multiline,
-      containerRef,
-      measurementOffset,
+      itemRefs,
+      overflowRef,
       containerWidth,
       items,
+      multiline,
       maxVisible,
+      containingElementRef,
+      measurementOffset,
     ]);
 
-    const getCustomComponent = (elm: string, item: Item) => {
+    const getCustomComponent = (item: Item, tagComponent: string) => {
       const { className, id, ...other } = item;
-      return createElement(elm, {
+      return createElement(tagComponent, {
         ...other,
         className: cx(`${blockClass}__item`, className),
         ref: (node) => itemRefHandler(id, node),
@@ -160,11 +167,11 @@ export let TagOverflow = forwardRef(
     useEffect(() => {
       let visibleItemsArr = getVisibleItems();
 
-      if (maxVisible && maxVisible < visibleItemsArr?.length) {
+      if (maxVisible && maxVisible < visibleItemsArr.length) {
         visibleItemsArr = visibleItemsArr?.slice(0, maxVisible);
       }
 
-      const hiddenItems = items?.slice(visibleItemsArr?.length);
+      const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map(({ tagType, ...other }) => {
         return { type: tagType, ...other };
       });
@@ -183,7 +190,7 @@ export let TagOverflow = forwardRef(
     const handleTagOnClose = useCallback(
       (onClose, index) => {
         onClose?.();
-        if (index <= visibleItems?.length - 1) {
+        if (index <= visibleItems.length - 1) {
           setPopoverOpen(false);
         }
       },
@@ -196,19 +203,21 @@ export let TagOverflow = forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        ref={ref}
         className={cx(blockClass, className, `${blockClass}--align-${align}`, {
           [`${blockClass}--multiline`]: multiline,
         })}
+        ref={containerRef}
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {visibleItems?.length > 0 &&
+        {visibleItems.length > 0 &&
           visibleItems.map((item, index) => {
+            // Render custom components
             if (tagComponent) {
-              return getCustomComponent(tagComponent, item);
+              return getCustomComponent(item, tagComponent);
             } else {
               const { id, label, tagType, onClose, ...other } = item;
+              // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
                   <Tooltip align={overflowAlign} label={label}>
@@ -227,7 +236,7 @@ export let TagOverflow = forwardRef(
           })}
 
         <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {overflowItems?.length > 0 && (
+          {overflowItems.length > 0 && (
             <>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}

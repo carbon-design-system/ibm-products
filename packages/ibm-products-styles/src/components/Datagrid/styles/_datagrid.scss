@@ -271,6 +271,10 @@
     background-color: $layer-01;
   }
 
+  table.#{$block-class}__table-simple.#{$block-class}__fetching-no-data {
+    overflow: hidden;
+  }
+
   .#{$block-class}__head {
     display: flex;
   }
@@ -878,4 +882,27 @@
 .#{$block-class} .#{$block-class}__table-row-ai-spacer,
 .#{$block-class} .#{$block-class}__table-row-ai-enabled {
   width: $spacing-05;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  td.#{$block-class}__skeleton-body-cell {
+  display: flex;
+  height: 100%;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  td.#{$block-class}__skeleton-body-cell.#{$block-class}__last-visible-cell {
+  flex: 1 1 0;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  td.#{$block-class}__skeleton-body-cell.#{$block-class}__select-or-expander-cell {
+  width: $spacing-09;
+  padding-right: $spacing-05;
+  padding-left: $spacing-05;
 }

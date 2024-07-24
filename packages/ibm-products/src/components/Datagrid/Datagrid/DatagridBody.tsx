@@ -11,6 +11,7 @@ import DatagridVirtualBody from './DatagridVirtualBody';
 import DatagridSimpleBody from './DatagridSimpleBody';
 import DatagridRefBody from './DatagridRefBody';
 import { DataGridState } from '../types';
+import { DatagridSkeletonBody } from './DatagridSkeletonBody';
 
 const DatagridBody = (datagridState: DataGridState) => {
   const {
@@ -18,7 +19,12 @@ const DatagridBody = (datagridState: DataGridState) => {
     rows = [],
     withVirtualScroll,
     withStickyColumn,
+    initialState,
   } = datagridState;
+
+  if (isFetching && initialState?.globalFilter) {
+    return <DatagridSkeletonBody {...datagridState} />;
+  }
 
   if (!isFetching && rows.length === 0) {
     return <DatagridEmptyBody {...datagridState} />;

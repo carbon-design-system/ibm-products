@@ -140,6 +140,10 @@ export const DatagridContent = ({
               [`${blockClass}__table-is-resizing`]:
                 typeof columnResizing?.isResizingColumn === 'string',
             },
+            {
+              [`${blockClass}__fetching-no-data`]:
+                isFetching && !contentRows.length,
+            },
             getTableProps?.().className
           )}
           {...{

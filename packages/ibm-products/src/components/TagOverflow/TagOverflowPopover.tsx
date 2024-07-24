@@ -8,7 +8,6 @@
 import React, { useRef, forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-//@ts-ignore
 import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';

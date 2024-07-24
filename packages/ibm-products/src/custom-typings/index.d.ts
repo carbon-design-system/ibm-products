@@ -108,6 +108,7 @@ declare module '@carbon/react' {
     PaginationNav,
     PasswordInput,
     Popover,
+    PopoverContent,
     PrimaryButton,
     ProgressBar,
     ProgressBar,

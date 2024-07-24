@@ -339,10 +339,20 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (open && position !== depth) {
         setTimeout(() => {
+          if (selectorPrimaryFocus) {
+            return specifiedElement?.focus();
+          }
           firstElement?.focus();
         }, 0);
       }
-    }, [position, depth, firstElement, open]);
+    }, [
+      position,
+      depth,
+      firstElement,
+      open,
+      specifiedElement,
+      selectorPrimaryFocus,
+    ]);
 
     useEffect(() => {
       const notify = () =>

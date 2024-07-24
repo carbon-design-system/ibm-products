@@ -333,7 +333,6 @@ export interface DataGridState<T extends object = any>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
   skeletonRowCount?: number;
-  // initialState?: Partial<TableState<T>>
   initialState?: {
     globalFilter?: string;
   };

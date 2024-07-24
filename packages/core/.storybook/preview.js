@@ -66,9 +66,9 @@ const makeViewport = (name, width, shadow) => ({
   styles: {
     border: '1px solid #1EA7FD',
     boxShadow: `0 0 50px 20px rgb(30 167 253 / ${shadow}%)`,
-    width,
+    width: width === '100%' ? 'calc(100% - 2px)' : width,
     // when width is fixed, leave room for a horizontal scroll bar
-    height: width === '100%' ? '100%' : 'calc(100% - 12px)',
+    height: width === '100%' ? 'calc(100% - 2px)' : 'calc(100% - 12px)',
   },
 });
 const carbonViewports = {

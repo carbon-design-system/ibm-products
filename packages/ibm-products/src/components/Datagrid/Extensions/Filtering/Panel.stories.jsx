@@ -24,7 +24,7 @@ export default {
   parameters: {
     styles,
     docs: { page: DocsPage },
-    layout: 'padded',
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {

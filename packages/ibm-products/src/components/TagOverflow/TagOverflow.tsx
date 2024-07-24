@@ -82,7 +82,9 @@ export let TagOverflow = forwardRef(
     };
 
     const handleResize = () => {
-      setContainerWidth(resizeElm.current.offsetWidth);
+      if (typeof resizeElm !== 'function' && resizeElm.current) {
+        setContainerWidth(resizeElm.current.offsetWidth);
+      }
     };
 
     useResizeObserver(resizeElm, handleResize);

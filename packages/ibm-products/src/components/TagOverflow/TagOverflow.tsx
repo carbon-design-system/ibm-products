@@ -13,6 +13,8 @@ import React, {
   forwardRef,
   Ref,
   createElement,
+  RefObject,
+  ReactNode,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -24,30 +26,83 @@ import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { TagOverflowPopover } from './TagOverflowPopover';
 import { TagOverflowModal } from './TagOverflowModal';
-import { TagOverflowProps, Item } from './TagOverflow.types';
+
+export interface TagOverflowItem {
+  className?: string;
+  filter?: string;
+  id: string;
+  label: string;
+  onClose: () => void;
+  tagType?:
+    | 'red'
+    | 'magenta'
+    | 'purple'
+    | 'blue'
+    | 'cyan'
+    | 'teal'
+    | 'green'
+    | 'gray'
+    | 'cool-gray'
+    | 'warm-gray'
+    | 'high-contrast'
+    | 'outline';
+  type?: string;
+}
+
+export interface Props {
+  align?: 'start' | 'center' | 'end';
+  allTagsModalSearchLabel?: string;
+  allTagsModalSearchPlaceholderText?: string;
+  allTagsModalTarget?: ReactNode;
+  allTagsModalTitle?: string;
+  className?: string;
+  containingElementRef?: RefObject<HTMLElement>;
+  items: TagOverflowItem[];
+  maxVisible?: number;
+  measurementOffset?: number;
+  multiline?: boolean;
+  overflowAlign?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'left-bottom'
+    | 'left-top'
+    | 'right'
+    | 'right-bottom'
+    | 'right-top';
+  overflowClassName?: string;
+  overflowType?: 'default' | 'tag';
+  onOverflowTagChange?: (arr: TagOverflowItem[]) => void;
+  showAllTagsLabel?: string;
+  tagComponent?: string;
+}
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = 'TagOverflow';
 const allTagsModalSearchThreshold = 10;
 
 export let TagOverflow = forwardRef(
-  (props: TagOverflowProps, ref: Ref<HTMLDivElement>) => {
+  (props: Props, ref: Ref<HTMLDivElement>) => {
     const {
-      align,
+      align = 'start',
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
       allTagsModalTitle,
       className,
       containingElementRef,
-      items,
+      items = [],
       maxVisible,
-      measurementOffset,
+      measurementOffset = 0,
       multiline,
-      overflowAlign,
+      overflowAlign = 'bottom',
       overflowClassName,
-      overflowType,
-      onOverflowTagChange,
+      overflowType = 'default',
+      onOverflowTagChange = () => {},
       showAllTagsLabel,
       tagComponent,
       ...rest
@@ -63,8 +118,8 @@ export let TagOverflow = forwardRef(
     const overflowIndicatorWidth = 40;
 
     const [containerWidth, setContainerWidth] = useState<number>(0);
-    const [visibleItems, setVisibleItems] = useState<Item[]>([]);
-    const [overflowItems, setOverflowItems] = useState<Item[]>([]);
+    const [visibleItems, setVisibleItems] = useState<TagOverflowItem[]>([]);
+    const [overflowItems, setOverflowItems] = useState<TagOverflowItem[]>([]);
     const [showAllModalOpen, setShowAllModalOpen] = useState<boolean>(false);
     const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
 
@@ -132,7 +187,7 @@ export let TagOverflow = forwardRef(
       let childrenWidth = 0;
       let maxReached = false;
 
-      return items.reduce((prev: Item[], cur: Item) => {
+      return items.reduce((prev: TagOverflowItem[], cur: TagOverflowItem) => {
         if (!maxReached) {
           const itemWidth = (map ? Number(map.get(cur.id)) : 0) + itemOffset;
           const fits = itemWidth + childrenWidth < maxWidth;
@@ -157,7 +212,10 @@ export let TagOverflow = forwardRef(
       measurementOffset,
     ]);
 
-    const getCustomComponent = (item: Item, tagComponent: string) => {
+    const getCustomComponent = (
+      item: TagOverflowItem,
+      tagComponent: string
+    ) => {
       const { className, id, ...other } = item;
       return createElement(tagComponent, {
         ...other,
@@ -286,7 +344,7 @@ const tagTypes = Object.keys(TYPES);
  */
 export const string_required_if_more_than_10_tags = isRequiredIf(
   PropTypes.string,
-  ({ items }) => items && items?.length > allTagsModalSearchThreshold
+  ({ items }) => items?.length > allTagsModalSearchThreshold
 );
 
 // The types and DocGen commentary for the component props,

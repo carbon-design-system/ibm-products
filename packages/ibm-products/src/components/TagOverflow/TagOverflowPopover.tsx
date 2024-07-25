@@ -11,19 +11,31 @@ import cx from 'classnames';
 import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
-import { TagOverflowPopoverProps } from './TagOverflow.types';
+import { TagOverflowItem } from './TagOverflow';
+
+export interface Props {
+  allTagsModalSearchThreshold?: number;
+  className?: string;
+  onShowAllClick: () => void;
+  overflowAlign?: string;
+  overflowTags: TagOverflowItem[];
+  overflowType?: string;
+  popoverOpen?: boolean;
+  setPopoverOpen?: (x: boolean) => void;
+  showAllTagsLabel?: string;
+}
 
 const componentName = 'TagOverflowPopover';
 const blockClass = `${pkg.prefix}--tag-overflow-popover`;
 
 export const TagOverflowPopover = forwardRef(
-  (props: TagOverflowPopoverProps, ref: Ref<HTMLDivElement>) => {
+  (props: Props, ref: Ref<HTMLDivElement>) => {
     const {
       allTagsModalSearchThreshold,
       className,
-      onShowAllClick,
+      onShowAllClick = () => {},
       overflowAlign,
-      overflowTags,
+      overflowTags = [],
       overflowType,
       showAllTagsLabel,
       popoverOpen,
@@ -61,7 +73,7 @@ export const TagOverflowPopover = forwardRef(
     };
 
     const visibleItems = getOverflowPopoverItems();
-    const hasItems = visibleItems && visibleItems?.length > 0;
+    const hasItems = visibleItems?.length > 0;
 
     return (
       <span

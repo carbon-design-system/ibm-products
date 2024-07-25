@@ -46,6 +46,7 @@ export const ConditionBuilderButton = ({
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         data-name={dataName}
+        {...rest}
       >
         {Icon && <Icon />}
         {!hideLabel && <span>{label}</span>}

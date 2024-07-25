@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
@@ -9,6 +9,8 @@ import {
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { useTranslations } from '../utils/useTranslations';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
+import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
 
 export const ConditionBuilderItem = ({
   children,
@@ -22,28 +24,27 @@ export const ConditionBuilderItem = ({
   popOverClassName,
   config,
   renderChildren,
+  onChange,
   ...rest
 }) => {
-  const contentRef = useRef(null);
   const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [invalidText, addConditionText, labelText, invalidDateText] =
-    useTranslations([
-      'invalidText',
-      'addConditionText',
-      label,
-      'invalidDateText',
-    ]);
+  const [invalidText, addConditionText, labelText] = useTranslations([
+    'invalidText',
+    'addConditionText',
+    label,
+  ]);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const getPropertyDetails = () => {
-    if (label === 'INVALID') {
+    const { property, operator } = condition || {};
+    if (
+      label === 'INVALID' ||
+      (rest['data-name'] === 'propertyField' && property === 'INVALID') ||
+      (rest['data-name'] === 'operatorField' && operator === 'INVALID')
+    ) {
       return {
         propertyLabel: invalidText,
-        isInvalid: true,
-      };
-    } else if (label === 'INVALID_DATE') {
-      return {
-        propertyLabel: invalidDateText,
         isInvalid: true,
       };
     }
@@ -92,25 +93,51 @@ export const ConditionBuilderItem = ({
 
   useEffect(() => {
     //this will focus the first input field in the popover
-    if (open && contentRef.current) {
+    if (open && popoverRef.current) {
       const firstFocusableElement =
-        contentRef.current.querySelector('input,textarea');
+        popoverRef.current.querySelector('input,textarea');
       if (firstFocusableElement) {
-        firstFocusableElement.focus();
+        setTimeout(() => firstFocusableElement.focus(), 0);
       }
     }
-  }, [contentRef, open]);
+  }, [popoverRef, open]);
 
-  const closePopover = () => setOpen(false);
+  const manageInvalidSelection = () => {
+    //when the user didn't select any value , we need to show as incomplete
+    if (
+      (rest['data-name'] === 'propertyField' && !condition?.property) ||
+      (rest['data-name'] === 'operatorField' && !condition?.operator) ||
+      (rest['data-name'] === 'valueField' && !condition?.value)
+    ) {
+      onChange?.('INVALID');
+    }
+  };
+  const closePopover = () => {
+    if (open) {
+      manageInvalidSelection();
+    }
+    setOpen(false);
+  };
   const openPopOver = () => setOpen(true);
-  const togglePopover = () => setOpen(!open);
+  const togglePopover = () => {
+    if (children || renderChildren) {
+      setOpen(!open);
+    }
+  };
+
+  const handleKeyDownHandler = (evt) => {
+    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef);
+    if (evt.key === 'Escape') {
+      manageInvalidSelection();
+    }
+  };
 
   return (
     <Popover
       open={open}
       isTabTip
       role="gridcell"
-      className={popOverClassName}
+      className={`${popOverClassName} ${blockClass}__popover`}
       ref={popoverRef}
       onRequestClose={closePopover}
     >
@@ -130,13 +157,14 @@ export const ConditionBuilderItem = ({
 
       {open && (
         <PopoverContent
-          className={`${blockClass}__item__content`}
+          className={`${blockClass}__popover-content-wrapper`}
           role="dialog"
           aria-label={title}
+          onKeyDown={handleKeyDownHandler}
         >
           <Layer>
             <h1 className={`${blockClass}__item__title`}>{title}</h1>
-            <div ref={contentRef} className={`${blockClass}__popover-content`}>
+            <div className={`${blockClass}__popover-content`}>
               {renderChildren ? renderChildren(popoverRef) : children}
             </div>
           </Layer>
@@ -176,6 +204,11 @@ ConditionBuilderItem.propTypes = {
   ]),
 
   /**
+   * callback to update the current condition of the state tree
+   */
+  onChange: PropTypes.func,
+
+  /**
    * class name for popover
    */
   popOverClassName: PropTypes.string,
@@ -199,7 +232,6 @@ ConditionBuilderItem.propTypes = {
    * title of the popover
    */
   title: PropTypes.string,
-
   /**
    * input type
    */

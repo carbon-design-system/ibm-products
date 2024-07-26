@@ -33,9 +33,9 @@ export const TagOverflowPopover = forwardRef(
     const {
       allTagsModalSearchThreshold,
       className,
-      onShowAllClick = () => {},
+      onShowAllClick,
       overflowAlign,
-      overflowTags = [],
+      overflowTags,
       overflowType,
       showAllTagsLabel,
       popoverOpen,
@@ -51,14 +51,14 @@ export const TagOverflowPopover = forwardRef(
       }
     });
 
-    const handleShowAllTagsClick = (evt) => {
+    const handleShowAllTagsClick = (evt: Event) => {
       evt.stopPropagation();
       evt.preventDefault();
       setPopoverOpen?.(false);
       onShowAllClick?.();
     };
 
-    const handleEscKeyPress = (evt) => {
+    const handleEscKeyPress = (evt: KeyboardEvent) => {
       const { key } = evt;
       if (key === 'Escape') {
         setPopoverOpen?.(false);

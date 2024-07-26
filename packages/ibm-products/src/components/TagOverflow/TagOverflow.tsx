@@ -95,7 +95,7 @@ export let TagOverflow = forwardRef(
       allTagsModalTitle,
       className,
       containingElementRef,
-      items = [],
+      items,
       maxVisible,
       measurementOffset = 0,
       multiline,

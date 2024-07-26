@@ -69,7 +69,6 @@ const useNestedRowExpander = (hooks) => {
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
-        // console.log(row.id, row, row.canExpand);
         return (
           (row.canExpand || getAsyncSubRows) && (
             <button

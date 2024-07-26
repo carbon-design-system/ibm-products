@@ -194,10 +194,7 @@ const nestedRowsControlProps = {
 
 const SingleLevelNestedRows = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  // const [data] = useState(makeData(10, 2));
   const [data, setData] = useState(makeData(10));
-  // console.log(data);
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
   const datagridState = useDatagrid(
     {
       columns,
@@ -207,7 +204,6 @@ const SingleLevelNestedRows = ({ ...args }) => {
       autoResetGlobalFilter: false,
       ...args.defaultGridProps,
       getAsyncSubRows: async (row) => {
-        console.log('from async callback', row);
         // ONLY update/simulate fetch of new sub rows
         // if the current row doesn't already have any
         if (row.subRows.length) return;
@@ -234,7 +230,6 @@ const SingleLevelNestedRows = ({ ...args }) => {
     },
     useNestedRows
   );
-  // console.log(datagridState);
 
   return <Datagrid datagridState={datagridState} />;
 };

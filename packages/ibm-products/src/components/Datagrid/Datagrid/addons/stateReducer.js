@@ -13,7 +13,6 @@ const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
 const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
 const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
-// const TOGGLE_ROW_EXPANDED = 'toggleRowExpanded';
 const DYNAMIC_ROW_CHECK = 'dynamicRowCheck';
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -96,10 +95,6 @@ export const stateReducer = (newState, action) => {
     case DYNAMIC_ROW_CHECK: {
       const { status, rowId, depth, index } = action.payload;
       if (status === 'start') {
-        console.log(
-          'dynamic row check STARTED!!!!!!!!!!!!!!!!!!!!!!!!!',
-          rowId
-        );
         const skeletonRow = (id) => ({
           isSkeleton: true,
           values: 'skeleton',
@@ -112,7 +107,6 @@ export const stateReducer = (newState, action) => {
           dynamicRowSkeleton: skeletonRow(rowId),
         };
       }
-      console.log('dynamic row check COMPLETE!!!!!!!!!!!!!!!!!!!!!!!!!');
       return {
         ...newState,
         dynamicRowSkeleton: null,

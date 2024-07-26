@@ -10,7 +10,7 @@ import DatagridRow from './Datagrid/DatagridRow';
 const useRowRenderer = (hooks) => {
   const useInstance = (instance) => {
     const { rows, state } = instance;
-    console.log(rows, state.dynamicRowSkeleton);
+
     let newRows = null;
     if (state?.dynamicRowSkeleton) {
       const depthIndexArray = state?.dynamicRowSkeleton?.id
@@ -40,7 +40,6 @@ const useRowRenderer = (hooks) => {
       const rootRowIndexWithDynamicRow = rows.findIndex(
         (r) => r.id === state?.dynamicRowSkeleton?.id
       );
-      console.log(rootRowIndexWithDynamicRow);
       if (rootRowIndexWithDynamicRow > -1) {
         newRows = [
           ...rows.slice(0, rootRowIndexWithDynamicRow + 1), // + 1 because we want to add the skeleton row after the row initiating the dynamic request
@@ -50,7 +49,6 @@ const useRowRenderer = (hooks) => {
       }
     }
     newRows = newRows ?? rows;
-    console.log(newRows);
     const addRowRenderer = (row) =>
       Object.assign(row, {
         RowRenderer: DatagridRow,

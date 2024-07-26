@@ -101,6 +101,7 @@ export const stateReducer = (newState, action) => {
           id,
           depth,
           index,
+          skeletonKey: `${id}__skeleton`,
         });
         return {
           ...newState,

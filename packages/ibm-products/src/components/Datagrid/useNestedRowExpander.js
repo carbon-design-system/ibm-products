@@ -30,12 +30,18 @@ const useNestedRowExpander = (hooks) => {
   });
 
   const visibleColumns = (columns, state) => {
-    const { getAsyncSubRows, dispatch } = state.instance || {};
+    const {
+      getAsyncSubRows,
+      dispatch,
+      state: tableState,
+    } = state.instance || {};
+    const fetchingDynamicSubRows = !!tableState.dynamicRowSkeleton;
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
         const expanderButtonProps = {
           ...row.getToggleRowExpandedProps(),
+          disabled: getAsyncSubRows && fetchingDynamicSubRows,
           onClick: async (event) => {
             // Prevents `onRowClick` from being called if `useOnRowClick` is included
             event.stopPropagation();

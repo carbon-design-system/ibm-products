@@ -213,7 +213,7 @@ const SingleLevelNestedRows = ({ ...args }) => {
             // a skeleton for subRows fetching dynamic subRows
             // but won't update data with anything
             if (row.depth > 0) {
-              resolve();
+              return resolve();
             }
             const newRows = makeData(2, { id: 'test-id' });
             const clonedData = [...data];

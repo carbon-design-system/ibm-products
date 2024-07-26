@@ -311,7 +311,10 @@ const navigateToNextRowCell = (
   const nextRow = rows[nextRowIndex];
   const itemName = evt.target.dataset.name;
   if (nextRow?.querySelector(`[data-name="${itemName}"]`)) {
-    nextRow?.querySelector(`[data-name="${itemName}"]`)?.focus();
+    manageTabIndexAndFocus(
+      nextRow?.querySelector(`[data-name="${itemName}"]`),
+      conditionBuilderRef
+    );
   } else if (variant === 'tree') {
     //when the next row is a if statement , then that row is focused. From any cell of last row of an group , arrow down select the next row (if)
     manageTabIndexAndFocus(nextRow, conditionBuilderRef);

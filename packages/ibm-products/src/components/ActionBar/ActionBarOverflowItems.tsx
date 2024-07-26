@@ -6,7 +6,7 @@
 //
 
 // Import portions of React that are needed.
-import React, { useRef } from 'react';
+import React, { useRef, PropsWithChildren, ReactElement } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,18 +15,49 @@ import cx from 'classnames';
 // Carbon and package components we use.
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--action-bar-overflow-items`;
 const componentName = 'ActionBar';
 
+type OverflowItem = {
+  label: string;
+  onClick: () => void;
+  renderIcon: CarbonIconType;
+};
+
+interface ActionBarOverflowItemProps extends PropsWithChildren {
+  /**
+   * className
+   */
+  className?: string;
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass?: string;
+  /**
+   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   */
+  overflowAriaLabel?: string;
+  /**
+   * overflowItems: items to bre shown in the ActionBar overflow menu
+   */
+  overflowItems: ReactElement<OverflowItem>[];
+
+  /**
+   * Optional tab index
+   */
+  tabIndex?: number;
+}
+
 export const ActionBarOverflowItems = ({
   className,
   menuOptionsClass,
   overflowItems,
   overflowAriaLabel,
-}) => {
+}: ActionBarOverflowItemProps) => {
   const internalId = useRef(uuidv4());
   return (
     <OverflowMenu
@@ -91,4 +122,9 @@ ActionBarOverflowItems.propTypes = {
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
   overflowItems: PropTypes.arrayOf(PropTypes.element),
+
+  /**
+   * Optional tab index
+   */
+  tabIndex: PropTypes.number,
 };

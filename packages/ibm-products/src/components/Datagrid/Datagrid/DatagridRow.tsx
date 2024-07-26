@@ -39,6 +39,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     setMouseOverRowIndex,
     headers,
     visibleColumns,
+    getAsyncSubRows,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -136,6 +137,8 @@ const DatagridRow = (datagridState: DataGridState) => {
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
     [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
     [`${blockClass}__carbon-row-expandable`]: row.canExpand,
+    [`${blockClass}__carbon-row-expandable--async`]:
+      getAsyncSubRows && row.depth > 0,
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
   });

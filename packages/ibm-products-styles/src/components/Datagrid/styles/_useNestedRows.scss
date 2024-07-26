@@ -85,7 +85,7 @@
 .#{c4p-settings.$carbon-prefix}--data-table
   .#{$block-class}__carbon-nested-row:not(
     .#{$block-class}__carbon-row-expandable
-  )
+  ):not(.#{$block-class}__carbon-row-expandable--async)
   td.#{$block-class}__cell:nth-of-type(2)::before,
 .#{c4p-settings.$carbon-prefix}--data-table
   .#{$block-class}__carbon-nested-row

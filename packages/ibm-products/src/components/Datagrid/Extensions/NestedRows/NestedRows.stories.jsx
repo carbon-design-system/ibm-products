@@ -208,23 +208,35 @@ const SingleLevelNestedRows = ({ ...args }) => {
       ...args.defaultGridProps,
       getAsyncSubRows: async (row) => {
         console.log('from async callback', row);
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        const newRows = makeData(2);
-        const clonedData = [...data];
-        const rowIndexToUpdate = clonedData.findIndex(
-          (r) => r.id === row.original.id
-        );
-        clonedData[rowIndexToUpdate].subRows = newRows;
-        console.log('update data', newRows);
-        console.log(clonedData);
-        setData(clonedData);
+        // ONLY update/simulate fetch of new sub rows
+        // if the current row doesn't already have any
+        if (row.subRows.length) return;
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            // For the sake of this example, we will show
+            // a skeleton for subRows fetching dynamic subRows
+            // but won't update data with anything
+            if (row.depth > 0) {
+              resolve();
+            }
+            const newRows = makeData(2, { id: 'test-id' });
+            const clonedData = [...data];
+            const rowIndexToUpdate = clonedData.findIndex(
+              (r) => r.id === row.original.id
+            );
+            clonedData[rowIndexToUpdate].subRows = newRows;
+            setData(clonedData);
+            resolve();
+          }, 1000);
+        });
       },
       getSubRows: (row) => row.subRows,
     },
     useNestedRows
   );
+  // console.log(datagridState);
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 const SingleLevelNestedRowsWrapper = ({ ...args }) => {

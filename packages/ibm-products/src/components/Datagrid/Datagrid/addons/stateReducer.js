@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import uuidv4 from '../../../../global/js/utils/uuidv4';
 import { pkg } from '../../../../settings';
 
 const COLUMN_RESIZE_START = 'columnStartResizing';
@@ -14,7 +13,8 @@ const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
 const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
 const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
-const TOGGLE_ROW_EXPANDED = 'toggleRowExpanded';
+// const TOGGLE_ROW_EXPANDED = 'toggleRowExpanded';
+const DYNAMIC_ROW_CHECK = 'dynamicRowCheck';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
@@ -79,18 +79,43 @@ export const handleSelectAllRowData = ({
     payload: { rows, getRowId, indeterminate, isChecked },
   });
 
+export const handleDynamicRowCheck = ({
+  dispatch,
+  status,
+  rowId,
+  depth,
+  index,
+}) =>
+  dispatch({
+    type: DYNAMIC_ROW_CHECK,
+    payload: { status, rowId, depth, index },
+  });
+
 export const stateReducer = (newState, action) => {
   switch (action.type) {
-    case TOGGLE_ROW_EXPANDED: {
-      console.log(action.type);
-      const skeletonRow = (id) => ({
-        isSkeleton: true,
-        values: 'skeleton',
-        id,
-      });
+    case DYNAMIC_ROW_CHECK: {
+      const { status, rowId, depth, index } = action.payload;
+      if (status === 'start') {
+        console.log(
+          'dynamic row check STARTED!!!!!!!!!!!!!!!!!!!!!!!!!',
+          rowId
+        );
+        const skeletonRow = (id) => ({
+          isSkeleton: true,
+          values: 'skeleton',
+          id,
+          depth,
+          index,
+        });
+        return {
+          ...newState,
+          dynamicRowSkeleton: skeletonRow(rowId),
+        };
+      }
+      console.log('dynamic row check COMPLETE!!!!!!!!!!!!!!!!!!!!!!!!!');
       return {
         ...newState,
-        dynamicRowSkeleton: skeletonRow(uuidv4()),
+        dynamicRowSkeleton: null,
       };
     }
     case TOGGLE_ALL_ROWS_SELECTED: {

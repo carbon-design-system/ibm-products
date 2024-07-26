@@ -11,6 +11,7 @@ import { ChevronRight } from '@carbon/react/icons';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { useFocusRowExpander } from './useFocusRowExpander';
+import { handleDynamicRowCheck } from './Datagrid/addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -29,20 +30,35 @@ const useNestedRowExpander = (hooks) => {
   });
 
   const visibleColumns = (columns, state) => {
-    const { getAsyncSubRows } = state.instance || {};
-    console.log(getAsyncSubRows);
+    const { getAsyncSubRows, dispatch } = state.instance || {};
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
         const expanderButtonProps = {
           ...row.getToggleRowExpandedProps(),
-          onClick: (event) => {
+          onClick: async (event) => {
             // Prevents `onRowClick` from being called if `useOnRowClick` is included
             event.stopPropagation();
             row.toggleRowExpanded();
             lastExpandedRowIndex.current = row.id;
             if (!row.isExpanded) {
-              getAsyncSubRows?.(row);
+              try {
+                handleDynamicRowCheck({
+                  dispatch,
+                  status: 'start',
+                  rowId: row.id,
+                  depth: row.depth,
+                  index: row.index,
+                });
+                await getAsyncSubRows?.(row);
+                handleDynamicRowCheck({
+                  dispatch,
+                  status: 'finish',
+                  rowId: row.id,
+                });
+              } catch (error) {
+                console.log({ error });
+              }
             }
           },
         };
@@ -53,10 +69,9 @@ const useNestedRowExpander = (hooks) => {
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
-        console.log(row, row.canExpand);
+        // console.log(row.id, row, row.canExpand);
         return (
-          row.canExpand ||
-          (getAsyncSubRows && (
+          (row.canExpand || getAsyncSubRows) && (
             <button
               type="button"
               aria-label={expanderTitle}
@@ -74,7 +89,7 @@ const useNestedRowExpander = (hooks) => {
                 })}
               />
             </button>
-          ))
+          )
         );
       },
       width: 48,

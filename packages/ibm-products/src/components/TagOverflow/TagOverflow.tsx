@@ -217,6 +217,7 @@ export let TagOverflow = forwardRef(
       const { className, id, ...other } = item;
       return createElement(tagComponent, {
         ...other,
+        key: id,
         className: cx(`${blockClass}__item`, className),
         ref: (node) => itemRefHandler(id, node),
       });

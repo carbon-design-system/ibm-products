@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Link } from '@carbon/react';
@@ -17,96 +17,169 @@ import EmptyStateIllustration from './EmptyStateIllustration';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
 
+interface EmptyStateV2Props {
+  /**
+   * Empty state action button
+   */
+  action?: {
+    text?: string;
+  };
+
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Empty state illustration, specify the `src` for a provided illustration to be displayed. In the case of requiring a light and dark illustration of your own, simply pass the corresponding illustration based on the current theme of your application.
+   * For example: `illustration={appTheme === 'dark' ? darkIllustration : lightIllustration}`
+   */
+  illustration?: string;
+
+  /**
+   * The alt text for empty state svg images. If not provided , title will be used.
+   */
+  illustrationDescription?: string;
+
+  /**
+   * Designates the position of the illustration relative to the content
+   */
+  illustrationPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
+   * Empty state illustration theme variations.
+   * To ensure you use the correct themed illustrations, you can conditionally specify light or dark
+   * based on your app's current theme value. Example:
+   * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
+   */
+  illustrationTheme?: 'light' | 'dark';
+
+  /**
+   * Determines which predefined illustration will be displayed
+   */
+  kind?:
+    | 'error'
+    | 'noData'
+    | 'noTags'
+    | 'notFound'
+    | 'notifications'
+    | 'unauthorized';
+
+  /**
+   * Empty state link object
+   */
+  link?: {
+    text?: string | ReactNode;
+  };
+
+  /**
+   * Empty state size
+   */
+  size?: 'lg' | 'sm';
+
+  /**
+   * Empty state subtitle
+   */
+  subtitle?: string | ReactNode;
+
+  /**
+   * Empty state title
+   */
+  title: string | ReactNode;
+}
+
 /**
  * This is the V2 version of the `EmptyState` component. To use you must pass the `v2` prop to the V1 version of the component `EmptyState` and use the props below.
  * In order to avoid breaking changes in the future `EmptyStateV2` is not actually directly importable.
  */
 
-export let EmptyStateV2 = React.forwardRef((props, ref) => {
-  const {
-    action,
-    className,
-    illustration: customIllustration,
-    illustrationDescription,
-    illustrationPosition = 'top',
-    illustrationTheme,
-    kind,
-    link,
-    size = 'lg',
-    subtitle,
-    title,
-    ...rest
-  } = props;
+export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
+  (props, ref) => {
+    const {
+      action,
+      className,
+      illustration: customIllustration,
+      illustrationDescription,
+      illustrationPosition = 'top',
+      illustrationTheme,
+      kind,
+      link,
+      size = 'lg',
+      subtitle,
+      title,
+      ...rest
+    } = props;
 
-  const illustrationProps = {
-    size,
-    theme: illustrationTheme,
-    title: illustrationDescription,
-    kind,
-  };
+    const illustrationProps = {
+      size,
+      theme: illustrationTheme,
+      title: illustrationDescription,
+      kind,
+    };
 
-  return (
-    <div
-      {...rest}
-      className={cx([
-        blockClass,
-        className,
-        `${blockClass}-position--${illustrationPosition}`,
-        {
-          [`${blockClass}-type--${kind}`]: kind,
-        },
-      ])}
-      ref={ref}
-      {...getDevtoolsProps(componentName)}
-    >
-      {customIllustration && (
-        <img
-          src={customIllustration}
-          alt={illustrationDescription}
-          className={cx([
-            `${blockClass}__illustration`,
-            `${blockClass}__illustration--${size}`,
-          ])}
-        />
-      )}
-      {!customIllustration && kind && (
-        <EmptyStateIllustration {...illustrationProps} />
-      )}
-      <div className={`${blockClass}__content`}>
-        <h3
-          className={cx(`${blockClass}__header`, {
-            [`${blockClass}__header--small`]: size === 'sm',
-          })}
-        >
-          {title}
-        </h3>
-        {subtitle && (
-          <p
-            className={cx(`${blockClass}__subtitle`, {
-              [`${blockClass}__subtitle--small`]: size === 'sm',
+    return (
+      <div
+        {...rest}
+        className={cx([
+          blockClass,
+          className,
+          `${blockClass}-position--${illustrationPosition}`,
+          {
+            [`${blockClass}-type--${kind}`]: kind,
+          },
+        ])}
+        ref={ref}
+        {...getDevtoolsProps(componentName)}
+      >
+        {customIllustration && (
+          <img
+            src={customIllustration}
+            alt={illustrationDescription}
+            className={cx([
+              `${blockClass}__illustration`,
+              `${blockClass}__illustration--${size}`,
+            ])}
+          />
+        )}
+        {!customIllustration && kind && (
+          <EmptyStateIllustration {...illustrationProps} />
+        )}
+        <div className={`${blockClass}__content`}>
+          <h3
+            className={cx(`${blockClass}__header`, {
+              [`${blockClass}__header--small`]: size === 'sm',
             })}
           >
-            {subtitle}
-          </p>
-        )}
-        {action && (
-          <Button
-            {...action}
-            className={`${blockClass}__action-button`}
-            size="sm"
-          >
-            {action.text}
-          </Button>
-        )}
-        {link && (
-          <Link {...link} className={`${blockClass}__link`}>
-            {link.text}
-          </Link>
-        )}
+            {title}
+          </h3>
+          {subtitle && (
+            <p
+              className={cx(`${blockClass}__subtitle`, {
+                [`${blockClass}__subtitle--small`]: size === 'sm',
+              })}
+            >
+              {subtitle}
+            </p>
+          )}
+          {action && (
+            <Button
+              {...action}
+              className={`${blockClass}__action-button`}
+              size="sm"
+            >
+              {action.text}
+            </Button>
+          )}
+          {link && (
+            <Link {...link} className={`${blockClass}__link`}>
+              {link.text}
+            </Link>
+          )}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 EmptyStateV2 = pkg.checkComponentEnabled(EmptyStateV2, componentName);
@@ -115,7 +188,8 @@ EmptyStateV2.propTypes = {
   /**
    * Props for the action button. Refer to the Carbon Components button documentation for full list of props.
    */
-  action: PropTypes.PropTypes.shape({
+  /**@ts-ignore*/
+  action: PropTypes.shape({
     text: PropTypes.string,
   }),
 

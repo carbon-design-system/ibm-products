@@ -362,12 +362,6 @@ const dynamicNestedRowStoryName = 'Dynamic nested rows';
 export const DynamicNestedRowStory = DynamicNestedRowsWrapper.bind({});
 DynamicNestedRowStory.storyName = dynamicNestedRowStoryName;
 DynamicNestedRowStory.argTypes = { ...sharedArgTypes };
-NestedRowsInitialUsageStory.args = {
+DynamicNestedRowStory.args = {
   ...nestedRowsControlProps,
-  initialState: {
-    expandedRowIds: {
-      'testing-user-provided-id__1': true,
-      3: true,
-    },
-  },
 };

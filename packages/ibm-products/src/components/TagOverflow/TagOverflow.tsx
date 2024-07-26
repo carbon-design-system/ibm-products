@@ -102,7 +102,7 @@ export let TagOverflow = forwardRef(
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
-      onOverflowTagChange = () => {},
+      onOverflowTagChange,
       showAllTagsLabel,
       tagComponent,
       ...rest
@@ -202,14 +202,12 @@ export let TagOverflow = forwardRef(
         return prev;
       }, []);
     }, [
-      itemRefs,
-      overflowRef,
       containerWidth,
-      items,
-      multiline,
-      maxVisible,
       containingElementRef,
+      items,
+      maxVisible,
       measurementOffset,
+      multiline,
     ]);
 
     const getCustomComponent = (
@@ -227,11 +225,11 @@ export let TagOverflow = forwardRef(
     useEffect(() => {
       let visibleItemsArr = getVisibleItems();
 
-      if (maxVisible && maxVisible < visibleItemsArr?.length) {
+      if (maxVisible && maxVisible < visibleItemsArr.length) {
         visibleItemsArr = visibleItemsArr?.slice(0, maxVisible);
       }
 
-      const hiddenItems = items?.slice(visibleItemsArr?.length);
+      const hiddenItems = items?.slice(visibleItemsArr.length);
       const overflowItemsArr = hiddenItems?.map(({ tagType, ...other }) => {
         return { type: tagType, ...other };
       });
@@ -239,13 +237,7 @@ export let TagOverflow = forwardRef(
       setVisibleItems(visibleItemsArr);
       setOverflowItems(overflowItemsArr);
       onOverflowTagChange?.(overflowItemsArr);
-    }, [
-      containerWidth,
-      items,
-      maxVisible,
-      getVisibleItems,
-      onOverflowTagChange,
-    ]);
+    }, [getVisibleItems, items, maxVisible, onOverflowTagChange]);
 
     const handleTagOnClose = useCallback(
       (onClose, index) => {

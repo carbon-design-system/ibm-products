@@ -44,7 +44,7 @@ interface ActionBarOverflowItemProps extends PropsWithChildren {
   /**
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
-  overflowItems: ReactElement<OverflowItem>[];
+  overflowItems?: ReactElement<OverflowItem>[];
 
   /**
    * Optional tab index
@@ -72,11 +72,11 @@ export const ActionBarOverflowItems = ({
         // This uses a copy of a menu item option
         // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
         // div equivalent below is based on Carbon 10.25.0
-        const ItemIcon = item.props.renderIcon;
+        const ItemIcon = item?.props.renderIcon as React.ComponentType<any>;
         return (
           <OverflowMenuItem
             className={`${blockClass}__item`}
-            onClick={item.props.onClick}
+            onClick={item?.props.onClick}
             itemText={
               <div
                 className={`${blockClass}__item-content`}
@@ -86,12 +86,12 @@ export const ActionBarOverflowItems = ({
                   className={`${blockClass}__item-label`}
                   id={`${internalId.current}-${index}--item-label`}
                 >
-                  {item.props.label}
+                  {item?.props.label}
                 </span>
-                {typeof item.props.renderIcon === 'function' ? (
+                {typeof item?.props.renderIcon === 'function' ? (
                   <ItemIcon />
                 ) : (
-                  item.props.renderIcon
+                  item?.props.renderIcon
                 )}
               </div>
             }

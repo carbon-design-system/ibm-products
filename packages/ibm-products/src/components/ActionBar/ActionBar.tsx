@@ -43,7 +43,7 @@ interface Action extends ButtonProps {
   key: string;
   iconDescription: string;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   renderIcon: CarbonIconType;
 }
 
@@ -321,6 +321,7 @@ ActionBar.propTypes = {
         'tooltipPosition',
         'tooltipAlignment',
       ]),
+      id: PropTypes.string,
       // Additional props
       key: PropTypes.string.isRequired,
       // Redefine as form different  to Button and a key prop used by ActionBarItems

@@ -134,6 +134,10 @@ interface TagSetProps extends PropsWithChildren {
    */
   showAllTagsLabel: string;
   /**
+   * Display the view all overflow tags component, default to true.
+   */
+  showTagsOverflowPopup?: boolean;
+  /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and
    * other properties will be passed to the Carbon Tag component, such as
@@ -161,6 +165,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
+      showTagsOverflowPopup = true,
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
@@ -267,7 +272,8 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
-          popoverOpen={popoverOpen}
+          data-testid="tag-set-overflow"
+          popoverOpen={showTagsOverflowPopup && popoverOpen}
           setPopoverOpen={setPopoverOpen}
         />
       );
@@ -280,6 +286,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowClassName,
       overflowType,
       showAllTagsLabel,
+      showTagsOverflowPopup,
       tags,
       onOverflowTagChange,
       popoverOpen,
@@ -399,15 +406,17 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             {displayedTags}
           </div>
         </div>
-        <TagSetModal
-          allTags={tags}
-          open={showAllModalOpen}
-          title={allTagsModalTitle}
-          onClose={handleModalClose}
-          searchLabel={allTagsModalSearchLabel}
-          searchPlaceholder={allTagsModalSearchPlaceholderText}
-          portalTarget={allTagsModalTarget}
-        />
+        {showTagsOverflowPopup && (
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+            portalTarget={allTagsModalTarget}
+          />
+        )}
       </div>
     );
   }

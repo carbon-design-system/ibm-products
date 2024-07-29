@@ -181,7 +181,6 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    // const { container } =
     render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
@@ -195,6 +194,31 @@ describe(TagSet.displayName, () => {
     const closeButton = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
+  });
+
+  it('Tag overflow can be disabled, and clicking on the overflow does not show TagSetModal or overflow popup', async () => {
+    const visibleTags = 5;
+    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+
+    render(
+      <TagSet
+        {...overflowAndModalStrings}
+        showTagsOverflowPopup={false}
+        tags={tags}
+      />
+    );
+
+    const overflow = screen.getByText(`+${tags.length - visibleTags}`);
+    await act(() => userEvent.click(overflow));
+
+    // Ensure the overflow popup is not rendered onto the screen on clicking the overflow button
+    expect(
+      screen.getByTestId('tag-set-overflow').firstChild.className
+    ).not.toContain('cds--popover--open');
+
+    // Ensure the modal is not rendered onto the screen
+    const modal = screen.queryByRole('presentation');
+    expect(modal).not.toBeInTheDocument();
   });
 
   it('it requires strings for overflow and modal when more than ten tags supplied.', async () =>

@@ -140,6 +140,11 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
+    showTagsOverflowPopup: {
+      control: { type: 'boolean' },
+      description:
+        'Display the view all overflow tags component, default to true.',
+    },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
       description: 'Optional DOM node: Modal target defaults to document.body',
@@ -167,6 +172,7 @@ const Template = (argsIn) => {
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
+        showTagsOverflowPopup={args.showTagsOverflowPopup}
         allTagsModalTarget={
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }

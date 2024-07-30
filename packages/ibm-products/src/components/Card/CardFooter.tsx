@@ -11,7 +11,7 @@ import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardFooter';
-import { CarbonIconType, Error } from '@carbon/react/icons';
+import { Error } from '@carbon/react/icons';
 
 const defaults = {
   actions: Object.freeze([]),
@@ -23,21 +23,21 @@ const defaults = {
 interface CardFooterProps {
   actions?: ReactNode[] | ReactNode;
   disabled?: boolean;
-  footerActionIcon?: CarbonIconType;
+  footerActionIcon?: React.ElementType;
   hasActions?: boolean;
   hasButton?: boolean;
   onPrimaryButtonClick?: () => void;
   onSecondaryButtonClick?: () => void;
   primaryButtonDisabled?: boolean;
   primaryButtonHref?: string;
-  primaryButtonIcon?: CarbonIconType;
+  primaryButtonIcon?: React.ElementType;
   primaryButtonKind?: 'primary' | 'ghost';
   primaryButtonPlacement?: 'top' | 'bottom';
   primaryButtonText?: string;
   productive?: boolean;
   secondaryButtonDisabled?: boolean;
   secondaryButtonHref?: string;
-  secondaryButtonIcon?: CarbonIconType;
+  secondaryButtonIcon?: React.ElementType;
   secondaryButtonKind?: 'secondary' | 'ghost';
   secondaryButtonPlacement?: 'top' | 'bottom';
   secondaryButtonText?: string;
@@ -70,7 +70,6 @@ export const CardFooter = ({
   const footerClasses = cx(footerClass, {
     [`${footerClass}-no-button`]: !hasButton,
   });
-
   return (
     <div className={footerClasses}>
       {secondaryButtonText && secondaryButtonPlacement === 'bottom' && (

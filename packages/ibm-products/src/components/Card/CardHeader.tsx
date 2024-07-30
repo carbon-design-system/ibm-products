@@ -10,7 +10,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 import { Button, usePrefix } from '@carbon/react';
-import { CarbonIconType } from '@carbon/react/icons';
 const componentName = 'CardHeader';
 
 const defaults = {
@@ -31,12 +30,12 @@ interface CardHeaderProps {
   onPrimaryButtonClick?: () => void;
   onSecondaryButtonClick?: () => void;
   primaryButtonDisabled?: boolean;
-  primaryButtonIcon?: CarbonIconType;
+  primaryButtonIcon?: React.ElementType;
   primaryButtonPlacement?: 'top' | 'bottom';
   primaryButtonText?: string;
   secondaryButtonDisabled?: boolean;
   secondaryButtonHref?: string;
-  secondaryButtonIcon?: CarbonIconType;
+  secondaryButtonIcon?: React.ElementType;
   secondaryButtonKind?: 'secondary' | 'ghost';
   secondaryButtonPlacement?: 'top' | 'bottom';
   secondaryButtonText?: string;

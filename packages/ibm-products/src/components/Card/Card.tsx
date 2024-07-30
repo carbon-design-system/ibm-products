@@ -14,11 +14,7 @@ import {
   OverflowMenuItem,
   Layer,
 } from '@carbon/react';
-import {
-  CarbonIconType,
-  CheckmarkOutline,
-  Incomplete,
-} from '@carbon/react/icons';
+import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';
@@ -62,7 +58,7 @@ type Metadata = {
   onClick?: () => void;
   href?: string;
 };
-interface cardProp extends PropsWithChildren {
+interface CardProp extends PropsWithChildren {
   actionIcons?: readonly ActionIcon[];
   actionsPlacement?: 'top' | 'bottom';
   children?: ReactNode;
@@ -70,7 +66,7 @@ interface cardProp extends PropsWithChildren {
   clickZone?: 'one' | 'two' | 'three';
   description?: string | ReactNode;
   disabled?: boolean;
-  footerActionIcon?: CarbonIconType;
+  footerActionIcon?: React.ElementType;
   getStarted?: boolean;
   label?: string | ReactNode;
   media?: ReactNode;
@@ -85,14 +81,14 @@ interface cardProp extends PropsWithChildren {
   pictogram?: () => ReactNode;
   primaryButtonDisabled?: boolean;
   primaryButtonHref?: string;
-  primaryButtonIcon?: CarbonIconType;
+  primaryButtonIcon?: React.ElementType;
   primaryButtonKind?: 'primary' | 'ghost';
   primaryButtonPlacement?: 'top' | 'bottom';
   primaryButtonText?: string;
   productive?: boolean;
   secondaryButtonDisabled?: boolean;
   secondaryButtonHref?: string;
-  secondaryButtonIcon?: CarbonIconType;
+  secondaryButtonIcon?: React.ElementType;
   secondaryButtonKind?: 'secondary' | 'ghost';
   secondaryButtonPlacement?: 'top' | 'bottom';
   secondaryButtonText?: string;
@@ -154,7 +150,7 @@ export const Card = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: cardProp,
+    }: CardProp,
     ref: React.ForwardedRef<HTMLDivElement>
   ) => {
     const getIcons = () => (getStarted ? metadata : actionIcons);

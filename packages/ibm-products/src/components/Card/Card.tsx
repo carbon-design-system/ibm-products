@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef } from 'react';
+import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
 import cx from 'classnames';
 import {
   Button,
@@ -14,7 +14,11 @@ import {
   OverflowMenuItem,
   Layer,
 } from '@carbon/react';
-import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
+import {
+  CarbonIconType,
+  CheckmarkOutline,
+  Incomplete,
+} from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';
@@ -22,67 +26,136 @@ import { pkg } from '../../settings';
 const componentName = 'Card';
 
 // Default values for props
-const defaults = {
-  actionIcons: Object.freeze([]),
-  actionsPlacement: 'bottom',
-  clickZone: 'one',
-  mediaPosition: 'top',
-  overflowActions: Object.freeze([]),
-  primaryButtonKind: 'primary',
-  primaryButtonPlacement: 'bottom',
-  productive: false,
-  secondaryButtonKind: 'secondary',
-  secondaryButtonPlacement: 'bottom',
-  titleSize: 'default',
+// const defaults = {
+//   actionIcons: Object.freeze([]),
+//   actionsPlacement: 'bottom',
+//   clickZone: 'one',
+//   mediaPosition: 'top',
+//   overflowActions: Object.freeze([]),
+//   primaryButtonKind: 'primary',
+//   primaryButtonPlacement: 'bottom',
+//   productive: false,
+//   secondaryButtonKind: 'secondary',
+//   secondaryButtonPlacement: 'bottom',
+//   titleSize: 'default',
+// };
+
+type ActionIcon = {
+  id?: string;
+  icon?: () => ReactNode;
+  onKeydown?: () => void;
+  onClick?: () => void;
+  iconDescription?: string;
+  href?: string;
+};
+type OverflowActions = {
+  id?: string;
+  itemText?: string;
+  onClick?: () => void;
+  onKeydown?: () => void;
 };
 
-export let Card = forwardRef(
+type Metadata = {
+  id?: string;
+  icon?: () => ReactNode;
+  iconDescription?: string;
+  onClick?: () => void;
+  href?: string;
+};
+interface cardProp extends PropsWithChildren {
+  actionIcons?: readonly ActionIcon[];
+  actionsPlacement?: 'top' | 'bottom';
+  children?: ReactNode;
+  className?: string;
+  clickZone?: 'one' | 'two' | 'three';
+  description?: string | ReactNode;
+  disabled?: boolean;
+  footerActionIcon?: CarbonIconType;
+  getStarted?: boolean;
+  label?: string | ReactNode;
+  media?: ReactNode;
+  mediaPosition?: 'top' | 'left';
+  metadata?: readonly Metadata[];
+  onClick?: () => void;
+  onKeyDown?: () => void;
+  onPrimaryButtonClick?: () => void;
+  onSecondaryButtonClick?: () => void;
+  overflowActions?: readonly OverflowActions[];
+  overflowAriaLabel?: string;
+  pictogram?: () => ReactNode;
+  primaryButtonDisabled?: boolean;
+  primaryButtonHref?: string;
+  primaryButtonIcon?: CarbonIconType;
+  primaryButtonKind?: 'primary' | 'ghost';
+  primaryButtonPlacement?: 'top' | 'bottom';
+  primaryButtonText?: string;
+  productive?: boolean;
+  secondaryButtonDisabled?: boolean;
+  secondaryButtonHref?: string;
+  secondaryButtonIcon?: CarbonIconType;
+  secondaryButtonKind?: 'secondary' | 'ghost';
+  secondaryButtonPlacement?: 'top' | 'bottom';
+  secondaryButtonText?: string;
+  sequence?: number;
+
+  /**
+   * **Experimental?** For all cases a `Slug` component can be provided.
+   * Clickable tiles only accept a boolean value of true and display a hollow slug.
+   */
+  slug?: ReactNode | boolean;
+
+  status?: 'complete' | 'incomplete';
+  title?: string | ReactNode;
+  titleSize?: 'default' | 'large';
+}
+
+export const Card = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      actionIcons = defaults.actionIcons,
-      actionsPlacement = defaults.actionsPlacement,
-      metadata = defaults.actionIcons,
+      actionIcons = Object.freeze([]),
+      actionsPlacement = 'bottom',
+      metadata = Object.freeze([]),
       children,
       className,
-      clickZone = defaults.clickZone,
+      clickZone = 'one',
       description,
       disabled,
       footerActionIcon,
       getStarted,
       label,
       media,
-      mediaPosition = defaults.mediaPosition,
+      mediaPosition = 'top',
       onClick,
       onKeyDown,
       onPrimaryButtonClick,
-      overflowActions = defaults.overflowActions,
+      overflowActions = Object.freeze([]),
       overflowAriaLabel,
       onSecondaryButtonClick,
       pictogram: Pictogram,
       primaryButtonDisabled,
       primaryButtonHref,
       primaryButtonIcon,
-      primaryButtonKind = defaults.primaryButtonKind,
-      primaryButtonPlacement = defaults.primaryButtonPlacement,
+      primaryButtonKind = 'primary',
+      primaryButtonPlacement = 'bottom',
       primaryButtonText,
-      productive = defaults.productive,
+      productive = false,
       secondaryButtonDisabled,
       secondaryButtonHref,
       secondaryButtonIcon,
-      secondaryButtonKind = defaults.secondaryButtonKind,
-      secondaryButtonPlacement = defaults.secondaryButtonPlacement,
+      secondaryButtonKind = 'secondary',
+      secondaryButtonPlacement = 'bottom',
       secondaryButtonText,
       slug,
       status,
       sequence,
       title,
-      titleSize = defaults.titleSize,
+      titleSize = 'default',
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: cardProp,
+    ref: React.ForwardedRef<HTMLDivElement>
   ) => {
     const getIcons = () => (getStarted ? metadata : actionIcons);
     const blockClass = `${pkg.prefix}--card`;
@@ -101,7 +174,7 @@ export let Card = forwardRef(
       onClick,
       onKeyDown,
       role: 'button',
-      tabIndex: '0',
+      tabIndex: 0,
     };
 
     // actions can either be an overflow menu or series of icons
@@ -127,53 +200,55 @@ export let Card = forwardRef(
 
       const icons = getIcons().map(
         ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
-          if (getStarted) {
+          if (Icon) {
+            if (getStarted) {
+              return (
+                <span key={id} className={`${blockClass}__icon`}>
+                  <Icon aria-label={iconDescription} />
+                  {iconDescription}
+                </span>
+              );
+            }
+            if (productive) {
+              return (
+                <Button
+                  {...rest}
+                  key={id}
+                  renderIcon={Icon}
+                  hasIconOnly
+                  onClick={onClick}
+                  size={actionsPlacement === 'top' ? 'sm' : 'md'}
+                  iconDescription={iconDescription}
+                  kind="ghost"
+                  href={href}
+                />
+              );
+            }
+            if (href) {
+              return (
+                <a
+                  key={id}
+                  className={`${blockClass}__icon`}
+                  href={href}
+                  onClick={onClick}
+                >
+                  <Icon aria-label={iconDescription} />
+                </a>
+              );
+            }
             return (
-              <span key={id} className={`${blockClass}__icon`}>
-                <Icon aria-label={iconDescription} />
-                {iconDescription}
-              </span>
-            );
-          }
-          if (productive) {
-            return (
-              <Button
-                {...rest}
+              <IconButton
                 key={id}
-                renderIcon={Icon}
-                hasIconOnly
-                onClick={onClick}
-                size={actionsPlacement === 'top' ? 'sm' : 'md'}
-                iconDescription={iconDescription}
-                kind="ghost"
-                href={href}
-              />
-            );
-          }
-          if (href) {
-            return (
-              <a
-                key={id}
+                label={iconDescription}
                 className={`${blockClass}__icon`}
-                href={href}
                 onClick={onClick}
+                kind="ghost"
+                size="sm"
               >
                 <Icon aria-label={iconDescription} />
-              </a>
+              </IconButton>
             );
           }
-          return (
-            <IconButton
-              key={id}
-              label={iconDescription}
-              className={`${blockClass}__icon`}
-              onClick={onClick}
-              kind="ghost"
-              size="sm"
-            >
-              <Icon aria-label={iconDescription} />
-            </IconButton>
-          );
         }
       );
 
@@ -315,6 +390,7 @@ export let Card = forwardRef(
 );
 
 Card.propTypes = {
+  /**@ts-ignore */
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -329,21 +405,16 @@ Card.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
-  description: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  /**@ts-ignore */
+  description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   disabled: PropTypes.bool,
+  /**@ts-ignore */
   footerActionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   getStarted: PropTypes.bool,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
+  /**@ts-ignore */
   metadata: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -355,6 +426,7 @@ Card.propTypes = {
   onKeyDown: PropTypes.func,
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
+  /**@ts-ignore */
   overflowActions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -364,16 +436,19 @@ Card.propTypes = {
     })
   ),
   overflowAriaLabel: PropTypes.string,
+  /**@ts-ignore */
   pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonDisabled: PropTypes.bool,
   primaryButtonHref: PropTypes.string,
+  /**@ts-ignore */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
   primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
-  primaryButtonText: PropTypes.node,
+  primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,
   secondaryButtonDisabled: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,
+  /**@ts-ignore */
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
@@ -387,11 +462,7 @@ Card.propTypes = {
   slug: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
   status: PropTypes.oneOf(['complete', 'incomplete']),
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
 

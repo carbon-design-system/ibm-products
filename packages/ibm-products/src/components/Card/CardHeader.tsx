@@ -5,11 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 import { Button, usePrefix } from '@carbon/react';
+import { CarbonIconType } from '@carbon/react/icons';
 const componentName = 'CardHeader';
 
 const defaults = {
@@ -17,7 +18,39 @@ const defaults = {
   titleSize: 'default',
 };
 
-export let CardHeader = ({
+interface CardHeaderProps {
+  actions?: ReactNode[] | ReactNode;
+  description?: string | ReactNode;
+  hasActions?: boolean;
+  /**
+   * is the host card clickable
+   */
+  inClickableCard?: boolean;
+  label?: string | ReactNode;
+  noActionIcons?: boolean;
+  onPrimaryButtonClick?: () => void;
+  onSecondaryButtonClick?: () => void;
+  primaryButtonDisabled?: boolean;
+  primaryButtonIcon?: CarbonIconType;
+  primaryButtonPlacement?: 'top' | 'bottom';
+  primaryButtonText?: string;
+  secondaryButtonDisabled?: boolean;
+  secondaryButtonHref?: string;
+  secondaryButtonIcon?: CarbonIconType;
+  secondaryButtonKind?: 'secondary' | 'ghost';
+  secondaryButtonPlacement?: 'top' | 'bottom';
+  secondaryButtonText?: string;
+  /**
+   * **Experimental:** For all cases a `Slug` component can be provided.
+   * Clickable tiles only accept a boolean value of true and display a hollow slug.
+   */
+  slug?: ReactNode;
+
+  title?: string | ReactNode;
+  titleSize?: 'default' | 'large';
+}
+
+export const CardHeader = ({
   actions,
   noActionIcons,
   onPrimaryButtonClick,
@@ -37,8 +70,8 @@ export let CardHeader = ({
   secondaryButtonText,
   slug,
   title,
-  titleSize = defaults.titleSize,
-}) => {
+  titleSize = 'default',
+}: CardHeaderProps) => {
   const carbonPrefix = usePrefix();
   const blockClass = `${pkg.prefix}--card`;
   const headerClass = `${blockClass}__header`;
@@ -69,12 +102,12 @@ export let CardHeader = ({
     </svg>
   );
 
-  let normalizedSlug;
+  let normalizedSlug: React.ReactElement<any> | null = null;
   if (slug) {
     if (inClickableCard || typeof slug === 'boolean') {
       normalizedSlug = hollowSlugIcon;
     } else {
-      normalizedSlug = React.cloneElement(slug, {
+      normalizedSlug = React.cloneElement(slug as React.ReactElement<any>, {
         size:
           (label && title) || (title && titleSize === 'large') ? 'sm' : 'xs',
       });
@@ -138,7 +171,7 @@ export let CardHeader = ({
     </div>
   );
 };
-
+/**@ts-ignore */
 CardHeader.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   description: PropTypes.oneOfType([
@@ -178,5 +211,5 @@ CardHeader.propTypes = {
   ]),
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
-
+/**@ts-ignore */
 CardHeader.displayName = componentName;

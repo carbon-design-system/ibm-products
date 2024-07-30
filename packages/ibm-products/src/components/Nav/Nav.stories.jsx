@@ -17,7 +17,7 @@ import mdx from './Nav.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Components/Nav',
+  title: 'Experimental/Components/Nav',
   component: Nav,
   subcomponents: {
     NavList,

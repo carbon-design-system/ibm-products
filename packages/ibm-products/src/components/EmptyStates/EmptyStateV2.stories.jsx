@@ -13,7 +13,7 @@ import { EmptyStateV2 } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'IBM Products/Patterns/Empty state/EmptyStateV2',
+  title: 'Experimental/Patterns/Empty state/EmptyStateV2',
   component: EmptyStateV2,
   tags: ['autodocs'],
   parameters: {

@@ -20,7 +20,7 @@ import {
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
 export default {
-  title: 'IBM Products/Components/ConditionBuilder',
+  title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
 

@@ -73,7 +73,7 @@ const renderUIShellHeader = () => (
 const prefix = 'edit-side-panel-stories__';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditSidePanel',
+  title: 'Experimental/Patterns/Edit and update/EditSidePanel',
   component: EditSidePanel,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

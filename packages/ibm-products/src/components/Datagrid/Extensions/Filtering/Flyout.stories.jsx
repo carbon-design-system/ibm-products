@@ -15,7 +15,7 @@ import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
 import { multiSelectProps } from './Panel.stories';
 import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';
-import { filterProps } from './Panel.stories';
+import { getFilterProps } from './Panel.stories';
 
 export default {
   title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
@@ -224,5 +224,5 @@ FlyoutWithInitialFilters.args = {
   emptyStateTitle: 'No filters match',
   emptyStateDescription:
     'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-  filterProps,
+  filterProps: getFilterProps(),
 };

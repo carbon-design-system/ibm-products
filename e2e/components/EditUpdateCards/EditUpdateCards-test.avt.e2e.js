@@ -14,7 +14,7 @@ test.describe('EditUpdateCards @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditUpdateCards',
-      id: 'ibm-products-patterns-edit-and-update-editupdatecards--edit-update-cards',
+      id: 'experimental-patterns-edit-and-update-editupdatecards--edit-update-cards',
       globals: {
         carbonTheme: 'white',
       },

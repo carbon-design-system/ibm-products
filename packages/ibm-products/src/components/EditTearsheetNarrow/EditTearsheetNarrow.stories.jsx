@@ -24,7 +24,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditTearsheetNarrow',
+  title: 'Experimental/Patterns/Edit and update/EditTearsheetNarrow',
   component: EditTearsheetNarrow,
   tags: ['autodocs'],
   parameters: {

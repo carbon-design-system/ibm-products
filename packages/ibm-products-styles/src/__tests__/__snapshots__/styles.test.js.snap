@@ -3710,6 +3710,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid__head-hidden-select-all {
+  min-width: 3rem;
   padding-right: 3rem;
 }
 .c4p--datagrid__head-hidden-select-all.c4p--datagrid__select-all-sticky-left {

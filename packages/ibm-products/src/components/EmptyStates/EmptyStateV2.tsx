@@ -19,7 +19,7 @@ const componentName = 'EmptyStateV2';
 
 interface EmptyStateV2Props {
   /**
-   * Empty state action button
+   * Props for the action button. Refer to the Carbon Components button documentation for full list of props.
    */
   action?: {
     text?: string;
@@ -31,13 +31,12 @@ interface EmptyStateV2Props {
   className?: string;
 
   /**
-   * Empty state illustration, specify the `src` for a provided illustration to be displayed. In the case of requiring a light and dark illustration of your own, simply pass the corresponding illustration based on the current theme of your application.
-   * For example: `illustration={appTheme === 'dark' ? darkIllustration : lightIllustration}`
+   * Source for the illustration image if you choose to use your own custom image. Passing an illustration prop will supersede the kind option.
    */
   illustration?: string;
 
   /**
-   * The alt text for empty state svg images. If not provided , title will be used.
+   * The alt text for the illustration
    */
   illustrationDescription?: string;
 
@@ -66,7 +65,7 @@ interface EmptyStateV2Props {
     | 'unauthorized';
 
   /**
-   * Empty state link object
+   * Props for the link. Refer to the Carbon Components link documentation for full list of props.
    */
   link?: {
     text?: string | ReactNode;
@@ -75,15 +74,15 @@ interface EmptyStateV2Props {
   /**
    * Empty state size
    */
-  size?: 'lg' | 'sm';
+  size?: 'sm' | 'lg';
 
   /**
-   * Empty state subtitle
+   * Empty state subtext
    */
   subtitle?: string | ReactNode;
 
   /**
-   * Empty state title
+   * Empty state heading
    */
   title: string | ReactNode;
 }
@@ -189,7 +188,7 @@ EmptyStateV2.propTypes = {
    * Props for the action button. Refer to the Carbon Components button documentation for full list of props.
    */
   /**@ts-ignore*/
-  action: PropTypes.shape({
+  action: PropTypes.PropTypes.shape({
     text: PropTypes.string,
   }),
 
@@ -236,8 +235,9 @@ EmptyStateV2.propTypes = {
   /**
    * Props for the link. Refer to the Carbon Components link documentation for full list of props.
    */
+  /**@ts-ignore*/
   link: PropTypes.shape({
-    text: PropTypes.string,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   }),
 
   /**

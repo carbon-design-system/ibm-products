@@ -229,7 +229,9 @@ export const InlineEditCell = ({
     const newCellId =
       key === 'Enter'
         ? `column-${columnIndex}-row-${
-            cell.row.index < totalRows - 1 ? cell.row.index + 1 : cell.row.index
+            cell.row.index < totalRows - 1 && type === 'checkbox'
+              ? cell.row.index + 1
+              : cell.row.index
           }`
         : `column-${
             columnIndex < instance.columns.length - 1

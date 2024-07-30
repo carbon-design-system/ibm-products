@@ -200,55 +200,53 @@ export const Card = forwardRef(
 
       const icons = getIcons().map(
         ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
-          if (Icon) {
-            if (getStarted) {
-              return (
-                <span key={id} className={`${blockClass}__icon`}>
-                  <Icon aria-label={iconDescription} />
-                  {iconDescription}
-                </span>
-              );
-            }
-            if (productive) {
-              return (
-                <Button
-                  {...rest}
-                  key={id}
-                  renderIcon={Icon}
-                  hasIconOnly
-                  onClick={onClick}
-                  size={actionsPlacement === 'top' ? 'sm' : 'md'}
-                  iconDescription={iconDescription}
-                  kind="ghost"
-                  href={href}
-                />
-              );
-            }
-            if (href) {
-              return (
-                <a
-                  key={id}
-                  className={`${blockClass}__icon`}
-                  href={href}
-                  onClick={onClick}
-                >
-                  <Icon aria-label={iconDescription} />
-                </a>
-              );
-            }
+          if (getStarted) {
             return (
-              <IconButton
-                key={id}
-                label={iconDescription}
-                className={`${blockClass}__icon`}
-                onClick={onClick}
-                kind="ghost"
-                size="sm"
-              >
-                <Icon aria-label={iconDescription} />
-              </IconButton>
+              <span key={id} className={`${blockClass}__icon`}>
+                {Icon && <Icon aria-label={iconDescription} />}
+                {iconDescription}
+              </span>
             );
           }
+          if (productive) {
+            return (
+              <Button
+                {...rest}
+                key={id}
+                renderIcon={Icon}
+                hasIconOnly
+                onClick={onClick}
+                size={actionsPlacement === 'top' ? 'sm' : 'md'}
+                iconDescription={iconDescription}
+                kind="ghost"
+                href={href}
+              />
+            );
+          }
+          if (href) {
+            return (
+              <a
+                key={id}
+                className={`${blockClass}__icon`}
+                href={href}
+                onClick={onClick}
+              >
+                {Icon && <Icon aria-label={iconDescription} />}
+              </a>
+            );
+          }
+          return (
+            <IconButton
+              key={id}
+              label={iconDescription}
+              className={`${blockClass}__icon`}
+              onClick={onClick}
+              kind="ghost"
+              size="sm"
+            >
+              {Icon && <Icon aria-label={iconDescription} />}
+            </IconButton>
+          );
         }
       );
 

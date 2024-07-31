@@ -74,7 +74,7 @@ const check = async (paths, options) => {
     checkPaths = await globby(
       gitIgnorePath.reduce(
         (acc, item) => acc.concat(gitignoreToGlob(item)),
-        ['**/*.{js,ts,tsx,scss,html}','!**/*.snap.js', '!examples/**'],
+        ['**/*.{js,ts,tsx,scss,html}','!**/*.snap.js', '!examples/**', '!packages/ibm-products/scripts/generate/templates/**'],
       )
     );
   } else if (options.writeCurrentYear) {
@@ -89,7 +89,7 @@ const check = async (paths, options) => {
         gitignore: true,
         expandDirectories: {
           files: ['**/*.{js,ts,tsx,scss,html}'],
-          exclude: ['**/*.snap.js', 'examples/**'],
+          exclude: ['**/*.snap.js', 'examples/**', '!packages/ibm-products/scripts/generate/templates/**'],
         },
       }
     );

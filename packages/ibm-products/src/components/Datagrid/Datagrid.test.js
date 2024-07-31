@@ -987,7 +987,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1009,7 +1008,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1994,7 +1992,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2017,7 +2014,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]

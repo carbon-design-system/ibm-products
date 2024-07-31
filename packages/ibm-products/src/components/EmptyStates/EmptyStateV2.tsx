@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -68,7 +68,7 @@ interface EmptyStateV2Props {
    * Props for the link. Refer to the Carbon Components link documentation for full list of props.
    */
   link?: {
-    text?: string;
+    text?: string | ReactNode;
   };
 
   /**
@@ -237,7 +237,7 @@ EmptyStateV2.propTypes = {
    */
   /**@ts-ignore*/
   link: PropTypes.shape({
-    text: PropTypes.string,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   }),
 
   /**

@@ -31,7 +31,7 @@
     "storybook": "start-storybook -p 6006",
     "build": "node scripts/build.js",
     "clean": "rimraf es lib scss",
-    "test": "jest --colors",
+    "test": "jest --transformIgnorePatterns \"node_modules/(?!@sinon)/\" --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react (explicit range peer dependency)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'",
     "postinstall": "ibmtelemetry --config=telemetry.yml"

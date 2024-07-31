@@ -6,7 +6,13 @@
 //
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  PropsWithChildren,
+  Ref,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -20,6 +26,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
 import { ActionBarOverflowItems } from './ActionBarOverflowItems';
+import { ButtonProps } from '@carbon/type';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--action-bar`;
@@ -29,6 +37,59 @@ const componentName = 'ActionBar';
 const defaults = {
   actions: Object.freeze([]),
 };
+
+interface Action extends ButtonProps {
+  id?: string;
+  key: string;
+  iconDescription: string;
+  label: string;
+  onClick?: () => void;
+  renderIcon: CarbonIconType;
+}
+
+interface ActionBarProps extends PropsWithChildren {
+  /**
+   * Specifies the action bar items. Each item is specified as an object
+   * with required fields: key for array rendering, renderIcon, iconDescription and
+   * label to provide the icon to display,
+   * and optional 'onClick' to receive notifications when the button is clicked.
+   * Additional fields in the object will be passed to the
+   * Button component, and these can include 'disabled', 'ref', 'className',
+   * and any other Button props.
+   *
+   * Note that the Button props 'kind', 'size',
+   * 'tooltipPosition', 'tooltipAlignment' and 'type' are ignored, as these
+   * cannot be used for an action bar item.
+   *
+   * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions?: readonly Action[];
+  // expects action bar item as array or in fragment,
+  /**
+   * className
+   */
+  className?: string;
+  /**
+   * maxVisible : Maximum action bar items visible before going into the overflow menu
+   */
+  maxVisible?: number;
+  /**
+   * class name applied to the overflow options
+   */
+  menuOptionsClass?: string;
+  /**
+   * onItemCountChange - event reporting maxWidth
+   */
+  onWidthChange?: (sizes: { minWidth: number; maxWidth: number }) => void;
+  /**
+   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   */
+  overflowAriaLabel: string;
+  /**
+   * align tags to right of available space
+   */
+  rightAlign?: boolean;
+}
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -50,18 +111,19 @@ export let ActionBar = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: ActionBarProps,
+    ref: Ref<HTMLDivElement>
   ) => {
     const [displayCount, setDisplayCount] = useState(0);
-    const [displayedItems, setDisplayedItems] = useState([]);
-    const [hiddenSizingItems, setHiddenSizingItems] = useState([]);
+    const [displayedItems, setDisplayedItems] = useState<JSX.Element[]>([]);
+    const [hiddenSizingItems, setHiddenSizingItems] =
+      useState<JSX.Element | null>(null);
     const internalId = useRef(uuidv4());
-    const refDisplayedItems = useRef(null);
-    const sizingRef = useRef(null);
-    const sizes = useRef({});
+    const refDisplayedItems = useRef<HTMLDivElement>(null);
+    const sizingRef = useRef<HTMLDivElement>(null);
+    const sizes = useRef<{ minWidth?: number; maxWidth?: number }>({});
 
-    const backupRef = useRef();
+    const backupRef = useRef<HTMLDivElement>(null);
     const localRef = ref || backupRef;
 
     // create hidden sizing items
@@ -125,8 +187,8 @@ export let ActionBar = React.forwardRef(
     const checkFullyVisibleItems = () => {
       /* istanbul ignore if */
       if (sizingRef.current) {
-        let sizingItems = Array.from(
-          sizingRef.current.querySelectorAll(
+        const sizingItems = Array.from(
+          sizingRef.current.querySelectorAll<HTMLElement>(
             `.${blockClass}__hidden-sizing-item`
           )
         );
@@ -135,31 +197,36 @@ export let ActionBar = React.forwardRef(
         const overflowItem = sizingItems.shift();
 
         // determine how many will fit
-        let spaceAvailable = refDisplayedItems.current.offsetWidth;
+        let spaceAvailable = refDisplayedItems.current?.offsetWidth;
         let willFit = 0;
         let maxVisibleWidth = 0;
-        let fitLimit = maxVisible
+        const fitLimit = maxVisible
           ? Math.min(maxVisible, sizingItems.length)
           : sizingItems.length;
 
         // loop checking the space available
         for (let i = 0; i < fitLimit; i++) {
-          const newSpaceAvailable = spaceAvailable - sizingItems[i].offsetWidth;
+          const newSpaceAvailable =
+            spaceAvailable && spaceAvailable - sizingItems[i].offsetWidth;
 
           // update maxVisibleWidth for later use by onWidthChange
           maxVisibleWidth += sizingItems[i].offsetWidth;
 
-          if (newSpaceAvailable >= 0) {
+          if (newSpaceAvailable && newSpaceAvailable >= 0) {
             spaceAvailable = newSpaceAvailable;
             willFit += 1;
           }
         }
 
         // if not enough space for all items then make room for the overflow
-        const overflowWidth = overflowItem.offsetWidth;
+        const overflowWidth = overflowItem!.offsetWidth;
         if (willFit < sizingItems.length) {
           // Check space for overflow
-          while (willFit > 0 && spaceAvailable < overflowWidth) {
+          while (
+            willFit > 0 &&
+            spaceAvailable &&
+            spaceAvailable < overflowWidth
+          ) {
             willFit -= 1;
 
             // Highly unlikely that any action bar item is narrower than the overflow item
@@ -178,7 +245,8 @@ export let ActionBar = React.forwardRef(
           sizes.current.maxWidth = maxVisibleWidth;
           // emit onWidthChange
           onWidthChange({
-            ...sizes.current,
+            minWidth: overflowWidth,
+            maxWidth: maxVisibleWidth,
           });
         }
         if (willFit < 1) {
@@ -242,8 +310,10 @@ ActionBar.propTypes = {
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
+  /**@ts-ignore */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
+      /**@ts-ignore */
       ...prepareProps(Button.propTypes, [
         // props not desired from Button.propTypes
         'kind',
@@ -251,11 +321,13 @@ ActionBar.propTypes = {
         'tooltipPosition',
         'tooltipAlignment',
       ]),
+      id: PropTypes.string,
       // Additional props
       key: PropTypes.string.isRequired,
       // Redefine as form different  to Button and a key prop used by ActionBarItems
       iconDescription: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
+      /**@ts-ignore */
       renderIcon: Button.propTypes.renderIcon.isRequired,
       // We duplicate onClick here to improve DocGen in Storybook
       onClick: PropTypes.func,

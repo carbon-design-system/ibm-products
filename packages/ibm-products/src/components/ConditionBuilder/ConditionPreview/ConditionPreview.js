@@ -13,7 +13,7 @@ import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderIt
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
-const ConditionPreview = ({ previewType, group }) => {
+const ConditionPreview = ({ previewType, group, colorIndex }) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
     'valueText',
@@ -51,6 +51,7 @@ const ConditionPreview = ({ previewType, group }) => {
             />
           </div>
           <div
+            data-color-index={colorIndex}
             aria-hidden
             className={cx([
               `${blockClass}__group ${blockClass}__condition-wrapper ${blockClass}__group-preview ${blockClass}__group-wrapper `,
@@ -71,7 +72,7 @@ const ConditionPreview = ({ previewType, group }) => {
       {previewType == 'subGroup' && (
         <div
           className={cx([
-            `${blockClass}__group__row ${blockClass}__group-preview `,
+            `${blockClass}__group__row ${blockClass}__group-preview ${blockClass}__gap-bottom`,
             { [`${blockClass}__group-preview-animate`]: animate },
           ])}
         >
@@ -97,7 +98,7 @@ const ConditionPreview = ({ previewType, group }) => {
       {previewType == 'condition' && (
         <div
           className={cx([
-            `${blockClass}__group__row ${blockClass}__group-preview `,
+            `${blockClass}__group__row ${blockClass}__group-preview ${blockClass}__gap-bottom`,
             { [`${blockClass}__group-preview-animate`]: animate },
           ])}
         >
@@ -118,6 +119,10 @@ const ConditionPreview = ({ previewType, group }) => {
 export default ConditionPreview;
 
 ConditionPreview.propTypes = {
+  /**
+   * index of the color for next group
+   */
+  colorIndex: PropTypes.number,
   /**
    * current conditional group
    */

@@ -123,6 +123,11 @@ const ConditionBuilderContent = ({
     });
   };
 
+  const getColorIndex = () => {
+    const groupLength = rootState?.groups?.length ?? 0;
+    return groupLength % 5;
+  };
+
   if (!isConditionBuilderActive) {
     return (
       <Button
@@ -203,6 +208,7 @@ const ConditionBuilderContent = ({
         {showConditionGroupPreview && (
           <ConditionPreview
             previewType="newGroup"
+            colorIndex={getColorIndex()}
             group={{ groupOperator: rootState.operator }}
           />
         )}

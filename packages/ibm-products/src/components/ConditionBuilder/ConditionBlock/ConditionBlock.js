@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import PropTypes from 'prop-types';
@@ -52,6 +52,7 @@ const ConditionBlock = (props) => {
     hideConditionPreviewHandler,
     showConditionPreviewHandler,
     isLastCondition,
+    setShowDeletionPreviewForSubgroups,
   } = props;
   const { inputConfig, variant, conditionBuilderRef } = useContext(
     ConditionBuilderContext
@@ -96,6 +97,19 @@ const ConditionBlock = (props) => {
   };
   const ItemComponent = property ? itemComponents[type] : null;
 
+  useEffect(() => {
+    if (
+      showDeletionPreview &&
+      group?.conditions?.length > 1 &&
+      group?.conditions?.[1].conditions &&
+      group.conditions[1].id !== condition.id
+    ) {
+      setShowDeletionPreviewForSubgroups?.(true);
+    } else {
+      setShowDeletionPreviewForSubgroups?.(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showDeletionPreview]);
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt, conditionBuilderRef);
     onStatementChange(v);
@@ -118,10 +132,9 @@ const ConditionBlock = (props) => {
       popoverToOpen: checkIsValid(newOperator) ? 'valueField' : '',
     });
   };
-  const onValueChangeHandler = (newValue, evt) => {
+  const onValueChangeHandler = (newValue) => {
     const currentCondition = { ...condition };
     delete currentCondition.popoverToOpen;
-    focusThisField(evt, conditionBuilderRef);
 
     onChange({
       ...currentCondition,
@@ -370,6 +383,10 @@ ConditionBlock.propTypes = {
    * callback to handle the statement(if/ excl.if) change
    */
   onStatementChange: PropTypes.func,
+  /**
+   * method to set ShowDeletionPreviewForSubgroups
+   */
+  setShowDeletionPreviewForSubgroups: PropTypes.func,
   /**
    * handler for showing add condition preview
    */

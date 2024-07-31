@@ -47,6 +47,8 @@ const ConditionGroupBuilder = ({
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
+  const [showDeletionPreviewForSubgroups, setShowDeletionPreviewForSubgroups] =
+    useState(false);
   const conditionBuilderContentRef = useRef();
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group.conditions.length > 1) {
@@ -83,11 +85,11 @@ const ConditionGroupBuilder = ({
             groupedItems.conditions.push(item);
           }
         });
-
-        onChange({
-          ...group,
-          conditions: [...groupedItems.conditions, ...groupedItems.groups],
-        });
+        onRemove(evt);
+        // onChange({
+        //   ...group,
+        //   conditions: [...groupedItems.conditions, ...groupedItems.groups],
+        // });
       } else {
         onChange({
           ...group,
@@ -207,11 +209,16 @@ const ConditionGroupBuilder = ({
             conditionBuilderContentRef.current.querySelector(
               `[role="row"][aria-level="${rowIdentity.ariaLevel}"][aria-posinset="${rowIdentity.ariaPosInSet}"]`
             );
-          manageTabIndexAndFocus(currentRowToFocus, conditionBuilderRef);
+          manageTabIndexAndFocus(
+            currentRowToFocus?.querySelector('[data-name="closeCondition"]'),
+            conditionBuilderRef
+          );
         }, 0);
       } else if (prevRows?.length > 1) {
         manageTabIndexAndFocus(
-          prevRows[prevRows.length - 2],
+          prevRows[prevRows.length - 2]?.querySelector(
+            '[data-name="closeCondition"]'
+          ),
           conditionBuilderRef
         );
       }
@@ -375,7 +382,10 @@ const ConditionGroupBuilder = ({
                   {
                     [`${blockClass}__gap-bottom`]:
                       group.conditions.length < conditionIndex + 1,
-                  }
+                    [`${blockClass}__subgroup_deletionPreview`]:
+                      showDeletionPreviewForSubgroups,
+                  },
+                  {}
                 )}
               >
                 <ConditionConnector
@@ -436,6 +446,9 @@ const ConditionGroupBuilder = ({
                   }}
                   hideConditionPreviewHandler={hideConditionPreviewHandler}
                   isLastCondition={isLastCondition}
+                  setShowDeletionPreviewForSubgroups={
+                    setShowDeletionPreviewForSubgroups
+                  }
                 />
               </div>
             )}

@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../utils/useTranslations';
+import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
@@ -42,7 +43,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   };
   return variant == 'tree' ? (
     <span className={`${className} ${blockClass}__connector--disabled`}>
-      {operator}
+      <ConditionBuilderButton label={operator} />
     </span>
   ) : (
     // <div className={className} {...rest}>

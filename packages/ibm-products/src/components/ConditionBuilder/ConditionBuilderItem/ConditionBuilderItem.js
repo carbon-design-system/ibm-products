@@ -37,9 +37,19 @@ export const ConditionBuilderItem = ({
   const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [invalidText, addConditionText, labelText] = useTranslations([
+  const [
+    invalidText,
+    addConditionText,
+    addPropertyText,
+    addOperatorText,
+    addValueText,
+    labelText,
+  ] = useTranslations([
     'invalidText',
     'addConditionText',
+    'addPropertyText',
+    'addOperatorText',
+    'addValueText',
     label,
   ]);
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
@@ -139,6 +149,20 @@ export const ConditionBuilderItem = ({
     }
   };
 
+  const getLabel = () => {
+    if (propertyLabel) {
+      return propertyLabel;
+    } else if (rest['data-name'] === 'propertyField') {
+      return addPropertyText;
+    } else if (rest['data-name'] === 'operatorField') {
+      return addOperatorText;
+    } else if (rest['data-name'] === 'valueField') {
+      return addValueText;
+    } else {
+      return addConditionText;
+    }
+  };
+
   return (
     <Popover
       open={open}
@@ -149,7 +173,7 @@ export const ConditionBuilderItem = ({
       onRequestClose={closePopover}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? addConditionText}
+        label={getLabel()}
         hideLabel={!label ? true : false}
         onClick={togglePopover}
         className={className}

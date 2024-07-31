@@ -22,7 +22,7 @@ import styles from './_storybook-styles.scss?inline';
 import { BEACON_KIND } from '../Coachmark/utils/enums';
 
 export default {
-  title: 'IBM Products/Onboarding/Coachmark/Coachmark elements/CoachmarkBeacon',
+  title: 'Experimental/Onboarding/Coachmark/Coachmark elements/CoachmarkBeacon',
   component: CoachmarkBeacon,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

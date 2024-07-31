@@ -193,7 +193,7 @@ const FilterPanel = ({
   );
 
   // tableId is passed in from the event emitter from the FilterSummary component
-  // in  DatagridContent
+  // in DatagridContent
   useSubscribeToEventEmitter(CLEAR_FILTERS, (tableId) => {
     reset(tableId);
   });

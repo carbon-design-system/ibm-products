@@ -97,14 +97,12 @@ const ConditionBuilderAdd = ({
         <ConditionBuilderButton
           renderIcon={TextNewLine}
           onClick={addConditionSubGroupHandler}
-          className={cx(
-            `${blockClass}__add-condition-sub-group ${blockClass}__gap-left`
-          )}
+          className={cx(`${blockClass}__add-condition-sub-group`)}
           hideLabel
           label={addSubgroupText}
           wrapperProps={wrapperProps}
           wrapperClassName={cx(
-            `${blockClass}__add-condition-sub-group-wrapper`,
+            `${blockClass}__add-condition-sub-group-wrapper ${blockClass}__gap-left`,
             {
               [`${blockClass}__add-condition-sub-group-wrapper--show`]:
                 isAddSubgroup,

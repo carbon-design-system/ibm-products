@@ -17,7 +17,7 @@ import { Add, Group, User } from '@carbon/react/icons';
 import headshot from './_story-assets/headshot.jpg';
 
 export default {
-  title: 'IBM Products/Components/User avatar/UserAvatar',
+  title: 'Experimental/Components/User avatar/UserAvatar',
   component: UserAvatar,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

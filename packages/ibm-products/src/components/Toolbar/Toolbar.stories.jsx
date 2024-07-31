@@ -39,7 +39,7 @@ import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/Toolbars/Toolbar',
+  title: 'Experimental/Patterns/Toolbars/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {

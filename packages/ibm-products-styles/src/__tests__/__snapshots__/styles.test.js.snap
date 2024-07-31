@@ -1960,10 +1960,6 @@ p.c4p--about-modal__copyright-text:first-child {
   border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 
-.c4p--create-modal {
-  background-color: var(--cds-background, #ffffff);
-}
-
 .c4p--create-modal .cds--modal-close {
   display: none;
 }
@@ -3714,6 +3710,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid__head-hidden-select-all {
+  min-width: 3rem;
   padding-right: 3rem;
 }
 .c4p--datagrid__head-hidden-select-all.c4p--datagrid__select-all-sticky-left {

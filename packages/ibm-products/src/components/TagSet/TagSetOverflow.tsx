@@ -52,7 +52,7 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
-   * disable the popover component from being rendered. Defaults to false.
+   * Disable the popover component from being rendered. Defaults to false.
    */
   disablePopOver?: boolean;
   /**
@@ -141,11 +141,7 @@ export const TagSetOverflow = React.forwardRef(
           })}
           ref={ref || localRef}
         >
-          <Tag
-          // className={cx(`${blockClass}__popover-trigger`)}
-          >
-            +{overflowTags.length}
-          </Tag>
+          <Tag>+{overflowTags.length}</Tag>
         </span>
       );
     }
@@ -241,7 +237,7 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * disable the popover component from being rendered. Defaults to false.
+   * Disable the popover component from being rendered. Defaults to false.
    */
   disablePopOver: PropTypes.bool,
   /**

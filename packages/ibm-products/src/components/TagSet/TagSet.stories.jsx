@@ -142,7 +142,8 @@ export default {
     },
     disableOverflowPopup: {
       control: { type: 'boolean' },
-      description: 'Disable the overflow tags component, default to false.',
+      description:
+        'Disable the overflow tags popup component, default to false.',
     },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
@@ -250,6 +251,5 @@ WithCloseAndOverflowTags.args = {
   tags: manyTags,
   containerWidth: 500,
   overflowType: 'tag',
-  disableOverflowPopup: true,
   ...overflowAndModalStrings,
 };

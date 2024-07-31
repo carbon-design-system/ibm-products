@@ -99,7 +99,7 @@ interface TagSetProps extends PropsWithChildren {
    */
   containingElementRef?: React.RefObject<HTMLElement>;
   /**
-   * Disable the overflow tags component, default to false.
+   * Disable the overflow tags popup component, default to false.
    */
   disableOverflowPopup?: boolean;
   /**
@@ -485,7 +485,7 @@ TagSet.propTypes = {
   /**@ts-ignore */
   containingElementRef: PropTypes.object,
   /**
-   * Disable the overflow tags component, default to false.
+   * Disable the overflow tags popup component, default to false.
    */
   disableOverflowPopup: PropTypes.bool,
   /**

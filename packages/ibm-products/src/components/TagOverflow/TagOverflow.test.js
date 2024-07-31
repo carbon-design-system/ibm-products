@@ -49,34 +49,34 @@ describe(componentName, () => {
   });
 
   it('renders a component TagOverflow', async () => {
-    render(<TagOverflow> </TagOverflow>);
+    render(<TagOverflow />);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<TagOverflow> </TagOverflow>);
+    const { container } = render(<TagOverflow />);
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    render(<TagOverflow className={className}> </TagOverflow>);
+    render(<TagOverflow className={className} />);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<TagOverflow data-testid={dataTestId}> </TagOverflow>);
+    render(<TagOverflow data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<TagOverflow ref={ref}> </TagOverflow>);
+    render(<TagOverflow ref={ref} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<TagOverflow data-testid={dataTestId}> </TagOverflow>);
+    render(<TagOverflow data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

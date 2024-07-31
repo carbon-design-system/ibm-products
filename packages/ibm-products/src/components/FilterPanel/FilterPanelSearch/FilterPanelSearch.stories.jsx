@@ -16,7 +16,7 @@ import styles from '../_storybook-styles.scss?inline';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter Panel/FilterPanelSearch',
+  title: 'Experimental/Components/Filter Panel/FilterPanelSearch',
   component: FilterPanelSearch,
   tags: ['autodocs'],
   parameters: {

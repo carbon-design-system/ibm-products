@@ -479,6 +479,7 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
+  min-width: $spacing-09;
   padding-right: $spacing-09;
 
   &.#{$block-class}__select-all-sticky-left {

@@ -36,6 +36,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   background-color: $tag-background-red;
   color: $tag-color-red;
 }
+.#{$block-class}__subgroup_deletionPreview {
+  .#{$block-class}__group {
+    /* stylelint-disable max-nesting-depth */
+    button {
+      background-color: $tag-background-red;
+      color: $tag-color-red;
+    }
+  }
+}
 
 .#{$block-class}__condition__deletion-preview
   .#{$block-class}__button:not(
@@ -63,6 +72,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__group-preview-animate {
   height: auto;
+  color: $text-secondary;
   opacity: 0.5;
   pointer-events: none;
   transition: all $duration-moderate-02 motion(exit, expressive);
@@ -70,10 +80,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__connector--disabled {
   display: flex;
   min-width: $spacing-10;
-  align-items: center;
   background-color: $layer;
   color: $text-helper;
-  padding-inline: $spacing-03;
+  pointer-events: none;
 }
 .#{$block-class}__condition-wrapper
   > .#{$block-class}__condition-block:last-child

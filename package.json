@@ -76,7 +76,7 @@
     "copyfiles": "^2.4.1",
     "cspell": "^6.25.0",
     "eslint": "^8.34.0",
-    "eslint-config-carbon": "3.11.1",
+    "eslint-config-carbon": "3.12.0",
     "husky": "^8.0.3",
     "jest": "^29.4.2",
     "jest-canvas-mock": "^2.5.1",
@@ -101,7 +101,13 @@
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
-    "cheerio": "1.0.0-rc.10"
+    "cheerio": "1.0.0-rc.10",
+    "braces": "^3.0.3",
+    "ip": "^2.0.1",
+    "micromatch": "4.0.6",
+    "postcss": "^8.4.31",
+    "semver": "7.5.2",
+    "ws": "^8.17.1"
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
@@ -167,7 +173,7 @@
     "**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "2.3.1"
+    "stylelint-plugin-carbon-tokens": "2.8.0"
   },
   "packageManager": "yarn@3.4.1"
 }

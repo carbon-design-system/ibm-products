@@ -1,7 +1,6 @@
 # This is the base release workflow dispatched by the `release-minor` or `release-patch` workflows
 name: Release base
-run-name:
-  ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
+run-name: ${{ inputs.type }} - dry-run:${{ inputs.dry-run }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -50,7 +49,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run @ibm/telemetry-js-config-generator to regenerate telemetry config file
+      - name:
+          Run @ibm/telemetry-js-config-generator to regenerate telemetry config
+          file
         working-directory: ./packages/ibm-products
         run: |
           yarn telemetry-config
@@ -88,31 +89,31 @@ jobs:
         if: github.event.inputs.type == 'full minor release'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish minor --create-release github $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish minor --conventional-graduate --create-release github $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first minor RC (ie. v1.x.0-rc.0)
         if: github.event.inputs.type == 'first minor rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish preminor --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish preminor --conventional-prerelease --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish full patch release (ie. v1.0.x)
         if: github.event.inputs.type == 'full patch release'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish patch --create-release github $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish patch --conventional-graduate --create-release github $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish first patch RC (ie. v1.0.x-rc.0)
         if: github.event.inputs.type == 'first patch rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish prepatch --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish prepatch --conventional-prerelease --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       - name: Publish subsequent RC (ie. v1.0.0-rc.x)
         if: github.event.inputs.type == 'subsequent rc'
         run: |
           echo "DRY RUN: ${{ env.DRY_RUN }}"
-          yarn lerna publish --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
+          yarn lerna publish --conventional-prerelease --create-release github --preid rc --pre-dist-tag next $(echo "${{ env.DRY_RUN }}")
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
@@ -125,7 +126,9 @@ jobs:
       # After successfully publishing a full release, trigger the production storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch
       - name: Dispatch production storybook deployment workflow
-        if: ${{ (github.event.inputs.type  == 'full minor release') || (github.event.inputs.type  == 'full patch release') }}
+        if:
+          ${{ (github.event.inputs.type  == 'full minor release') ||
+          (github.event.inputs.type  == 'full patch release') }}
         uses: peter-evans/repository-dispatch@v3
         with:
           event-type: deploy-latest-storybook
@@ -137,4 +140,3 @@ jobs:
         with:
           event-type: merge-to-main
           client-payload: '{"branch": "${{ github.ref_name }}"}'
-

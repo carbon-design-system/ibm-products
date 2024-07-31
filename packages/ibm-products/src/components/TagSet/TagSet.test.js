@@ -200,21 +200,19 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    render(
+    const { queryByText } = render(
       <TagSet
         {...overflowAndModalStrings}
-        showTagsOverflowPopup={false}
+        disableOverflowPopup={true}
         tags={tags}
       />
     );
 
-    const overflow = screen.getByText(`+${tags.length - visibleTags}`);
-    await act(() => userEvent.click(overflow));
+    // Ensure the number of visible elements are rendered on the screen
+    expect(queryByText(`+${tags.length - visibleTags}`)).toBeInTheDocument();
 
-    // Ensure the overflow popup is not rendered onto the screen on clicking the overflow button
-    expect(
-      screen.getByTestId('tag-set-overflow').firstChild.className
-    ).not.toContain('cds--popover--open');
+    // Ensure the overflow popup is not rendered onto the screen
+    expect(queryByText('View all tags')).toBeNull();
 
     // Ensure the modal is not rendered onto the screen
     const modal = screen.queryByRole('presentation');

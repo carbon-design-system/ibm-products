@@ -140,10 +140,9 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
-    showTagsOverflowPopup: {
+    disableOverflowPopup: {
       control: { type: 'boolean' },
-      description:
-        'Display the view all overflow tags component, default to true.',
+      description: 'Disable the overflow tags component, default to false.',
     },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
@@ -172,7 +171,7 @@ const Template = (argsIn) => {
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
-        showTagsOverflowPopup={args.showTagsOverflowPopup}
+        disableOverflowPopup={args.disableOverflowPopup}
         allTagsModalTarget={
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }
@@ -251,5 +250,6 @@ WithCloseAndOverflowTags.args = {
   tags: manyTags,
   containerWidth: 500,
   overflowType: 'tag',
+  disableOverflowPopup: true,
   ...overflowAndModalStrings,
 };

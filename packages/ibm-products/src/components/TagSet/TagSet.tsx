@@ -99,6 +99,10 @@ interface TagSetProps extends PropsWithChildren {
    */
   containingElementRef?: React.RefObject<HTMLElement>;
   /**
+   * Disable the overflow tags component, default to false.
+   */
+  disableOverflowPopup?: boolean;
+  /**
    * maximum visible tags
    */
   maxVisible?: number;
@@ -134,10 +138,6 @@ interface TagSetProps extends PropsWithChildren {
    */
   showAllTagsLabel: string;
   /**
-   * Display the view all overflow tags component, default to true.
-   */
-  showTagsOverflowPopup?: boolean;
-  /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and
    * other properties will be passed to the Carbon Tag component, such as
@@ -165,7 +165,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
-      showTagsOverflowPopup = true,
+      disableOverflowPopup = false,
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
@@ -272,8 +272,8 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
-          data-testid="tag-set-overflow"
-          popoverOpen={showTagsOverflowPopup && popoverOpen}
+          popoverOpen={popoverOpen}
+          disablePopOver={disableOverflowPopup}
           setPopoverOpen={setPopoverOpen}
         />
       );
@@ -286,7 +286,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowClassName,
       overflowType,
       showAllTagsLabel,
-      showTagsOverflowPopup,
+      disableOverflowPopup,
       tags,
       onOverflowTagChange,
       popoverOpen,
@@ -406,7 +406,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             {displayedTags}
           </div>
         </div>
-        {showTagsOverflowPopup && (
+        {!disableOverflowPopup && (
           <TagSetModal
             allTags={tags}
             open={showAllModalOpen}
@@ -484,6 +484,10 @@ TagSet.propTypes = {
    */
   /**@ts-ignore */
   containingElementRef: PropTypes.object,
+  /**
+   * Disable the overflow tags component, default to false.
+   */
+  disableOverflowPopup: PropTypes.bool,
   /**
    * maximum visible tags
    */

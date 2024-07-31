@@ -52,6 +52,10 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
+   * disable the popover component from being rendered. Defaults to false.
+   */
+  disablePopOver?: boolean;
+  /**
    * function to execute on clicking show all
    */
   onShowAllClick: () => void;
@@ -87,6 +91,7 @@ export const TagSetOverflow = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
+      disablePopOver = false,
       className,
       onShowAllClick,
       overflowAlign = 'bottom',
@@ -122,6 +127,28 @@ export const TagSetOverflow = React.forwardRef(
         setPopoverOpen?.(false);
       }
     };
+
+    if (disablePopOver) {
+      return (
+        <span
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          aria-hidden={overflowTags.length === 0}
+          className={cx(`${blockClass}`, {
+            [`${blockClass}--hidden`]: overflowTags.length === 0,
+          })}
+          ref={ref || localRef}
+        >
+          <Tag
+          // className={cx(`${blockClass}__popover-trigger`)}
+          >
+            +{overflowTags.length}
+          </Tag>
+        </span>
+      );
+    }
 
     return (
       <span
@@ -213,6 +240,10 @@ TagSetOverflow.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * disable the popover component from being rendered. Defaults to false.
+   */
+  disablePopOver: PropTypes.bool,
   /**
    * function to execute on clicking show all
    */

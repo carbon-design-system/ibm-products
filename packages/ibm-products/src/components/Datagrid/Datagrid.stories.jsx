@@ -482,6 +482,68 @@ export const BatchActions = () => {
   );
 };
 
+export const BatchActionsDisplayOptions = () => {
+  const [data] = useState(makeData(10));
+
+  const columns = React.useMemo(
+    () => [
+      ...getColumns(data),
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        isAction: true,
+      },
+    ],
+    []
+  );
+
+  const getRowActions = () => {
+    return [
+      {
+        id: 'edit',
+        itemText: 'Edit',
+        icon: Edit,
+        onClick: action('Clicked row action: edit'),
+      },
+
+      {
+        id: 'delete',
+        itemText: 'Delete',
+        icon: TrashCan,
+        onClick: action('Clicked row action: delete'),
+      },
+    ];
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
+      toolbarBatchActionsDisplayMin: 5,
+      DatagridBatchActions,
+      rowActions: getRowActions(),
+      onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
+      onAllRowSelect: (rows, event) =>
+        console.log('onAllRowsClick called', rows, event),
+      batchActionMenuButtonLabel: 'More',
+    },
+    useSelectRows,
+    useActionsColumn,
+    useStickyColumn
+  );
+
+  return (
+    <Datagrid
+      datagridState={{ ...datagridState }}
+      ariaToolbarLabel="batch actions toolbar"
+    />
+  );
+};
+
 export const DisableSelectRow = () => {
   const [data] = useState(makeData(10));
   const columns = React.useMemo(() => getColumns(data), []);

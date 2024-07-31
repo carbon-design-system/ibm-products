@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { ExpressiveCard } from './ExpressiveCard';
+export { ExportModal } from './ExportModal';
+export type { ExportModalProps } from './ExportModal';

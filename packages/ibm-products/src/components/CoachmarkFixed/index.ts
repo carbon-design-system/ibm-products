@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { CoachmarkBeacon } from './CoachmarkBeacon';
+export { CoachmarkFixed } from './CoachmarkFixed';
+export type { CoachmarkFixedProps } from './CoachmarkFixed';

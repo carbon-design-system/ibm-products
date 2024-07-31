@@ -21,21 +21,6 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
-// Default values for props
-// const defaults = {
-//   actionIcons: Object.freeze([]),
-//   actionsPlacement: 'bottom',
-//   clickZone: 'one',
-//   mediaPosition: 'top',
-//   overflowActions: Object.freeze([]),
-//   primaryButtonKind: 'primary',
-//   primaryButtonPlacement: 'bottom',
-//   productive: false,
-//   secondaryButtonKind: 'secondary',
-//   secondaryButtonPlacement: 'bottom',
-//   titleSize: 'default',
-// };
-
 type ActionIcon = {
   id?: string;
   icon?: () => ReactNode;

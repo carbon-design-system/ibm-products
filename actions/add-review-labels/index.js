@@ -15,7 +15,6 @@ import decompress from 'decompress';
 
 async function run() {
   const { context } = github;
-  console.log(context);
   const appId = core.getInput('APP_ID', {
     required: true,
   });
@@ -39,11 +38,10 @@ async function run() {
       },
     }
   );
-  console.log('workflowArtifacts', workflowArtifacts);
+
   const matchArtifact = workflowArtifacts.artifacts.filter((artifact) => {
     return artifact.name == 'pr-data-to-process';
   })[0];
-  console.log('matchArtifact', matchArtifact);
 
   const artifactResponse = await octokit.request(
     'GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}',
@@ -58,8 +56,6 @@ async function run() {
     }
   );
 
-  console.log('artifact response: ', artifactResponse);
-
   // Decode the array buffer from the artifact to read initial review PR data from a privileged workflow
 
   // Convert ArrayBuffer to Buffer
@@ -68,17 +64,12 @@ async function run() {
   // Decompress the file
   const files = await decompress(buff);
 
-  console.log('files', files);
-  // Get the decompressed buffer
-
   // Decode the decompressed buffer
   const decodedArtifact = new util.TextDecoder().decode(files[0].data);
-  console.log('decodedArtifact', decodedArtifact);
 
   // Parse decoded buffer
   const parsedDecodedArtifact = JSON.parse(decodedArtifact);
 
-  console.log('artifactData: ', parsedDecodedArtifact);
   const { pull_request, review } = parsedDecodedArtifact;
   const { state, draft } = pull_request;
 
@@ -113,11 +104,9 @@ async function run() {
     },
   });
   const { members_url } = data;
-  console.log(data, members_url);
 
   const org_id = members_url.split('organizations/').pop().split('/team')[0];
   const team_id = members_url.split('team/').pop().split('/members')[0];
-  console.log({ org_id, team_id });
 
   const { data: teamMembers } = await octokit.request(
     'GET /organizations/{org_id}/team/{team_id}/members',
@@ -130,8 +119,6 @@ async function run() {
       },
     }
   );
-
-  console.log(teamMembers);
 
   const additionalReviewLabel = 'status: one more review 👀';
   const readyForReviewLabel = 'status: ready for review 👀';
@@ -166,12 +153,6 @@ async function run() {
     reviewers[user.login] = true;
     reviews.push(review);
   }
-
-  console.log('////////////////////////////////////////////');
-  console.log(reviewers);
-  console.log('////////////////////////////////////////////');
-  console.log(reviews);
-  console.log('////////////////////////////////////////////');
 
   const approved = reviews.filter((review) => {
     return review.state === 'APPROVED';

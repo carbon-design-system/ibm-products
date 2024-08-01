@@ -9,3 +9,4 @@ export { Guidebanner } from './Guidebanner';
 export { GuidebannerElement } from './GuidebannerElement';
 export { GuidebannerElementButton } from './GuidebannerElementButton';
 export { GuidebannerElementLink } from './GuidebannerElementLink';
+export type { GuidebannerProps } from './Guidebanner';

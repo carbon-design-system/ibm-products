@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InterstitialScreenView } from './InterstitialScreenView';
+export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
+export type { InterstitialScreenViewModuleProps } from './InterstitialScreenViewModule';

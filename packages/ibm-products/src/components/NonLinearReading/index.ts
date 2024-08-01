@@ -6,3 +6,4 @@
  */
 
 export { NonLinearReading } from './NonLinearReading';
+export type { NonLinearReadingProps } from './NonLinearReading';

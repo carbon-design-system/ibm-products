@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InterstitialScreenViewModule } from './InterstitialScreenViewModule';
+export { GetStartedCard } from './GetStartedCard';
+export type { GetStartedCardProps } from './GetStartedCard';

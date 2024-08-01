@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Tooltip } from '@carbon/react';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { WarningAltFilled } from '@carbon/react/icons';
+import { usePrefix } from '@carbon/react';
 
 export const ConditionBuilderButton = ({
   className,
@@ -24,11 +25,11 @@ export const ConditionBuilderButton = ({
   tabIndex,
   ...rest
 }) => {
+  const carbonPrefix = usePrefix();
   const Button = () => {
     const dataName = rest['data-name'] ?? '';
     return (
       <button
-        // role={'gridcell'}
         tabIndex={tabIndex != undefined ? tabIndex : -1}
         className={cx([
           className,
@@ -59,8 +60,9 @@ export const ConditionBuilderButton = ({
     <Tooltip
       label={label}
       align={tooltipAlign}
-      className={`${wrapperClassName}`}
+      className={`${wrapperClassName} ${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       {...wrapperProps}
+      leaveDelayMs={0}
     >
       {Button()}
     </Tooltip>

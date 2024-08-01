@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Other standard imports.
 import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
 // Import portions of React that are needed.
 import React, {

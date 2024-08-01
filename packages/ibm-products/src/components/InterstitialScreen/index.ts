@@ -6,3 +6,4 @@
  */
 
 export { InterstitialScreen } from './InterstitialScreen';
+export type { InterstitialScreenProps } from './InterstitialScreen';

@@ -6,3 +6,4 @@
  */
 
 export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';
+export type { SteppedAnimatedMediaProps } from './SteppedAnimatedMedia';

@@ -8,4 +8,7 @@
 export { InlineTip } from './InlineTip';
 export { InlineTipButton } from './InlineTipButton';
 export { InlineTipLink } from './InlineTipLink';
+
 export type { InlineTipProps } from './InlineTip';
+export { InlineTipButtonProps } from './InlineTipButton';
+export { InlineTipLinkProps } from './InlineTipLink';

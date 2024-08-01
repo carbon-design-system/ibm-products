@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { SearchBar } from './SearchBar';
+export { TruncatedList } from './TruncatedList';
+export type { TruncatedListProps } from './TruncatedList';

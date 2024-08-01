@@ -25,7 +25,7 @@ export const translationsObject = {
   connectorText: 'Connector',
   conditionRowText: 'Condition row',
   conditionRowGroupText: 'Condition row group',
-  removeConditionText: 'Remove condition',
+  removeConditionText: 'Delete condition',
   addConditionRowText: 'Add condition row',
   startText: 'Start',
   endText: 'End',
@@ -39,4 +39,7 @@ export const translationsObject = {
   conditionBuilderText: 'Condition Builder',
   actionSectionText: 'Action Section',
   conditionHeadingText: 'Condition',
+  addPropertyText: 'Add property',
+  addOperatorText: 'Add operator',
+  addValueText: 'Add value',
 };

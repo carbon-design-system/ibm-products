@@ -28,44 +28,97 @@ const componentName = 'UserAvatar';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
-
-// Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
-
 /**
  * TODO: A description of the component.
  */
+type BackgroundColor =
+  | 'order-1-cyan'
+  | 'order-2-gray'
+  | 'order-3-green'
+  | 'order-4-magenta'
+  | 'order-5-purple'
+  | 'order-6-teal'
+  | 'order-7-cyan'
+  | 'order-8-gray'
+  | 'order-9-green'
+  | 'order-10-magenta'
+  | 'order-11-purple'
+  | 'order-12-teal';
+type Size = 'xl' | 'lg' | 'md' | 'sm';
+type TooltipAlignment =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'right';
 
-const defaults = {
-  size: 'md',
-  tooltipAlignment: 'bottom',
-  backgroundColor: 'order-1-cyan',
+type ImageProps =
+  | {
+      /**
+       * When passing the image prop, supply a full path to the image to be displayed.
+       */
+      image: string;
+      /**
+       * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+       */
+      imageDescription: string;
+    }
+  | {
+      image?: never;
+      imageDescription?: never;
+    };
+
+type UserAvatarBaseProps = {
+  /**
+   * Provide the background color need to be set for UserAvatar.
+   */
+  backgroundColor?: BackgroundColor;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
+   */
+  name?: string;
+  /**
+   * Provide a custom icon to use if you need to use an icon other than the default one
+   */
+  renderIcon?: React.ElementType;
+  /**
+   * Set the size of the avatar circle
+   */
+  size?: Size;
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  tooltipAlignment?: TooltipAlignment;
+  /**
+   * Pass in the display name to have it shown on hover
+   */
+  tooltipText?: string;
 };
 
-export let UserAvatar = React.forwardRef(
+type UserAvatarProps = UserAvatarBaseProps & ImageProps;
+
+export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      backgroundColor = defaults.backgroundColor,
+      backgroundColor = 'order-1-cyan',
       className,
       image,
       imageDescription,
       name,
       /* TODO: add other props for UserAvatar, with default values if needed */
       renderIcon: RenderIcon,
-      size = defaults.size,
+      size = 'md',
       tooltipText,
-      tooltipAlignment = defaults.tooltipAlignment,
+      tooltipAlignment = 'bottom',
       // Collect any other property values passed in.
       ...rest
     },
@@ -79,7 +132,7 @@ export let UserAvatar = React.forwardRef(
       xl: 32,
     };
     const formatInitials = () => {
-      const parts = name.split(' ');
+      const parts = name?.split(' ') || [];
       const firstChar = parts[0].charAt(0).toUpperCase();
       const secondChar = parts[0].charAt(1).toUpperCase();
       if (parts.length === 1) {
@@ -145,6 +198,7 @@ export let UserAvatar = React.forwardRef(
           label={tooltipText}
           className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
+          {/**@ts-ignore */}
           <TooltipTrigger>
             <Avatar />
           </TooltipTrigger>
@@ -190,10 +244,12 @@ UserAvatar.propTypes = {
   /**
    * When passing the image prop, supply a full path to the image to be displayed.
    */
+  /**@ts-ignore */
   image: PropTypes.string,
   /**
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
+  /**@ts-ignore */
   imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
   /**
    * When passing the name prop, either send the initials to be used or the user's full name. The first two capital letters of the user's name will be used as the name.
@@ -202,6 +258,7 @@ UserAvatar.propTypes = {
   /**
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
+  /**@ts-ignore */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Set the size of the avatar circle

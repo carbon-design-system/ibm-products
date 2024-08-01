@@ -295,11 +295,40 @@ export let DataSpreadsheet = React.forwardRef(
       [cellEditorValue, onDataUpdate]
     );
 
+    const getHeaderKeyText = useCallback((element: any) => {
+      if (!element || typeof element !== 'object') {
+        return null;
+      }
+
+      if (element.type === 'span' && element.props.headerKey === true) {
+        return element.props.children;
+      }
+
+      if (element.props && element.props.children) {
+        if (Array.isArray(element.props.children)) {
+          for (const child of element.props.children) {
+            const result = getHeaderKeyText(child);
+            if (result) {
+              return result;
+            }
+          }
+        } else {
+          return getHeaderKeyText(element.props.children);
+        }
+      }
+
+      return null;
+    }, []);
+
     useEffect(() => {
       const currentHeaders: Array<any> = [];
       if (Object.keys(currentColumns).length > 0) {
         Object.keys(currentColumns).forEach((itemIndex) => {
-          if (currentColumns[itemIndex].Header) {
+          if (typeof currentColumns[itemIndex].Header === 'object') {
+            currentHeaders.push(
+              getHeaderKeyText(currentColumns[itemIndex].Header)
+            );
+          } else if (currentColumns[itemIndex].Header) {
             currentHeaders.push(currentColumns[itemIndex].Header);
           }
         });
@@ -327,6 +356,7 @@ export let DataSpreadsheet = React.forwardRef(
       previousState?.selectedHeaderReorderActive,
       currentColumns,
       headerCellHoldActive,
+      getHeaderKeyText,
       columns,
       activeCellContent,
       onColDrag,

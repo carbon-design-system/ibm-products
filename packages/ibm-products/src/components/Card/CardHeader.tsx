@@ -19,13 +19,13 @@ const defaults = {
 
 interface CardHeaderProps {
   actions?: ReactNode[] | ReactNode;
-  description?: string | ReactNode;
+  description?: ReactNode;
   hasActions?: boolean;
   /**
    * is the host card clickable
    */
   inClickableCard?: boolean;
-  label?: string | ReactNode;
+  label?: ReactNode;
   noActionIcons?: boolean;
   onPrimaryButtonClick?: () => void;
   onSecondaryButtonClick?: () => void;
@@ -45,7 +45,7 @@ interface CardHeaderProps {
    */
   slug?: ReactNode;
 
-  title?: string | ReactNode;
+  title?: ReactNode;
   titleSize?: 'default' | 'large';
 }
 

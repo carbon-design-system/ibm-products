@@ -49,11 +49,11 @@ interface CardProp extends PropsWithChildren {
   children?: ReactNode;
   className?: string;
   clickZone?: 'one' | 'two' | 'three';
-  description?: string | ReactNode;
+  description?: ReactNode;
   disabled?: boolean;
   footerActionIcon?: React.ElementType;
   getStarted?: boolean;
-  label?: string | ReactNode;
+  label?: ReactNode;
   media?: ReactNode;
   mediaPosition?: 'top' | 'left';
   metadata?: readonly Metadata[];
@@ -86,7 +86,7 @@ interface CardProp extends PropsWithChildren {
   slug?: ReactNode | boolean;
 
   status?: 'complete' | 'incomplete';
-  title?: string | ReactNode;
+  title?: ReactNode;
   titleSize?: 'default' | 'large';
 }
 

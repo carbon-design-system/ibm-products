@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
@@ -20,7 +20,30 @@ const defaults = {
   secondaryButtonKind: 'secondary',
 };
 
-export let CardFooter = ({
+interface CardFooterProps {
+  actions?: ReactNode[] | ReactNode;
+  disabled?: boolean;
+  footerActionIcon?: React.ElementType;
+  hasActions?: boolean;
+  hasButton?: boolean;
+  onPrimaryButtonClick?: () => void;
+  onSecondaryButtonClick?: () => void;
+  primaryButtonDisabled?: boolean;
+  primaryButtonHref?: string;
+  primaryButtonIcon?: React.ElementType;
+  primaryButtonKind?: 'primary' | 'ghost';
+  primaryButtonPlacement?: 'top' | 'bottom';
+  primaryButtonText?: string;
+  productive?: boolean;
+  secondaryButtonDisabled?: boolean;
+  secondaryButtonHref?: string;
+  secondaryButtonIcon?: React.ElementType;
+  secondaryButtonKind?: 'secondary' | 'ghost';
+  secondaryButtonPlacement?: 'top' | 'bottom';
+  secondaryButtonText?: string;
+}
+
+export const CardFooter = ({
   actions = defaults.actions,
   disabled,
   footerActionIcon: FooterActionIcon,
@@ -31,23 +54,22 @@ export let CardFooter = ({
   primaryButtonDisabled,
   primaryButtonHref,
   primaryButtonIcon,
-  primaryButtonKind = defaults.primaryButtonKind,
+  primaryButtonKind = 'primary',
   primaryButtonPlacement,
   primaryButtonText,
   productive = defaults.productive,
   secondaryButtonDisabled,
   secondaryButtonHref,
   secondaryButtonIcon,
-  secondaryButtonKind = defaults.secondaryButtonKind,
+  secondaryButtonKind = 'secondary',
   secondaryButtonPlacement,
   secondaryButtonText,
-}) => {
+}: CardFooterProps) => {
   const blockClass = `${pkg.prefix}--card`;
   const footerClass = `${pkg.prefix}--card__footer`;
   const footerClasses = cx(footerClass, {
     [`${footerClass}-no-button`]: !hasButton,
   });
-
   return (
     <div className={footerClasses}>
       {secondaryButtonText && secondaryButtonPlacement === 'bottom' && (
@@ -83,7 +105,7 @@ export let CardFooter = ({
     </div>
   );
 };
-
+/**@ts-ignore */
 CardFooter.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   disabled: PropTypes.bool,
@@ -106,5 +128,5 @@ CardFooter.propTypes = {
   secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
 };
-
+/**@ts-ignore */
 CardFooter.displayName = componentName;

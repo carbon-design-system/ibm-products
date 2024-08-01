@@ -6695,6 +6695,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-link-inverse: #0f62fe;
   --cds-link-inverse-active: #161616;
   --cds-link-inverse-hover: #0043ce;
+  --cds-link-inverse-visited: #8a3ffc;
   --cds-link-primary: #78a9ff;
   --cds-link-primary-hover: #a6c8ff;
   --cds-link-secondary: #a6c8ff;
@@ -10525,6 +10526,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-link-inverse: #0f62fe;
   --cds-link-inverse-active: #161616;
   --cds-link-inverse-hover: #0043ce;
+  --cds-link-inverse-visited: #8a3ffc;
   --cds-link-primary: #78a9ff;
   --cds-link-primary-hover: #a6c8ff;
   --cds-link-secondary: #a6c8ff;
@@ -10955,6 +10957,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-link-inverse: #0f62fe;
   --cds-link-inverse-active: #161616;
   --cds-link-inverse-hover: #0043ce;
+  --cds-link-inverse-visited: #8a3ffc;
   --cds-link-primary: #78a9ff;
   --cds-link-primary-hover: #a6c8ff;
   --cds-link-secondary: #a6c8ff;

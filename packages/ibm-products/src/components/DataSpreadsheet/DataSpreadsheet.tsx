@@ -6,6 +6,14 @@
  */
 
 import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
+import {
+  Column,
+  TableInstance,
+  UseColumnOrderInstanceProps,
+  useBlockLayout,
+  useColumnOrder,
+  useTable,
+} from 'react-table';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -17,13 +25,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  TableInstance,
-  UseColumnOrderInstanceProps,
-  useBlockLayout,
-  useColumnOrder,
-  useTable,
-} from 'react-table';
 import { useActiveElement, usePreviousValue } from '../../global/js/hooks';
 import {
   useMoveActiveCell,
@@ -35,6 +36,7 @@ import {
 
 import { DataSpreadsheetBody } from './DataSpreadsheetBody';
 import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
+// Other standard imports.
 import PropTypes from 'prop-types';
 import { createActiveCellFn } from './utils/createActiveCellFn';
 import cx from 'classnames';

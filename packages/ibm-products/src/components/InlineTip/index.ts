@@ -10,5 +10,5 @@ export { InlineTipButton } from './InlineTipButton';
 export { InlineTipLink } from './InlineTipLink';
 
 export type { InlineTipProps } from './InlineTip';
-export { InlineTipButtonProps } from './InlineTipButton';
-export { InlineTipLinkProps } from './InlineTipLink';
+export type { InlineTipButtonProps } from './InlineTipButton';
+export type { InlineTipLinkProps } from './InlineTipLink';

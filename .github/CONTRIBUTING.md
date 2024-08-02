@@ -96,6 +96,9 @@ to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
 
+All issues should be triaged by our team before a PR is reviewed to evaluate if
+the given work aligns with our design guidelines.
+
 **Note 2:** If you are submitting a new component or pattern there are some
 additional steps we’d like you to take. In brief, use the
 `New component or pattern` issue template. The new issue should be an epic.

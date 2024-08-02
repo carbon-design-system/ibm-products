@@ -97,7 +97,7 @@ const getOptions = async (conditionState, { property }) => {
       return [];
   }
 };
-
+//check
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
     render(<ConditionBuilder {...defaultProps} />);

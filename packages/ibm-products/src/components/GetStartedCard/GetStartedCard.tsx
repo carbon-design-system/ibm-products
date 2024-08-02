@@ -7,7 +7,6 @@
 
 import React, { PropsWithChildren, ReactNode } from 'react';
 
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { Card } from '../Card';
 import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

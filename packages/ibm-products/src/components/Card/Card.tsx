@@ -172,7 +172,7 @@ export const Card = forwardRef(
               direction={pos}
               flipped
               aria-label={overflowAriaLabel}
-              iconDescription={iconDescription}
+              iconDescription={iconDescription ? iconDescription : 'Options'}
             >
               {overflowActions.map(({ id, ...rest }) => (
                 <OverflowMenuItem key={id} {...rest} />

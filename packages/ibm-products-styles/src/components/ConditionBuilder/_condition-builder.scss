@@ -73,3 +73,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__group-separator {
   width: fit-content;
 }
+.#{$block-class}__tooltip {
+  word-break: break-all;
+}

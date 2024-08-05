@@ -12,10 +12,6 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-.#{c4p-settings.$pkg-prefix}--create-modal {
-  background-color: $background;
-}
-
 .#{c4p-settings.$pkg-prefix}--create-modal
   .#{c4p-settings.$carbon-prefix}--modal-close {
   display: none;

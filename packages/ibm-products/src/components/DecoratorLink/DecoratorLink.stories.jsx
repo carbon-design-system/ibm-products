@@ -30,7 +30,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/Decorators/DecoratorLink',
+  title: 'Experimental/Components/Decorators/DecoratorLink',
   component: DecoratorLink,
   tags: ['autodocs'],
   parameters: {

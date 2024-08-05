@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -25,7 +25,36 @@ import { Grid, Column } from '@carbon/react';
 const blockClass = `${pkg.prefix}--full-page-error`;
 const componentName = 'FullPageError';
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+interface FullPageErrorProps {
+  /**
+   * Provide the contents of the FullPageError.
+   */
+  children?: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * String that will provide the description for the error code. <br/>
+   * This is optional for 403 and 404 kinds, and passing this would override their default descriptions.
+   */
+  description: string;
+
+  /**
+   * The kind of error page to be displayed, default is custom
+   */
+  kind?: 'custom' | '403' | '404';
+
+  /**
+   * String that will describe the error that occurred
+   */
+  label: string;
+
+  /**
+   * This will be for the main title of the FullPageError component
+   */
+  title: string;
+}
 
 // Default values for props
 const defaults = {
@@ -36,7 +65,7 @@ const defaults = {
  * Display a full-page error when the requested page is unavailable to the user.
  * This is typically caused by issues with the requested URL or access permissions.
  */
-export let FullPageError = React.forwardRef(
+export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).

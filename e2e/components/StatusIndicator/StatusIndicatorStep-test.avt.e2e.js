@@ -14,7 +14,7 @@ test.describe('StatusIndicatorStep @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'StatusIndicatorStep',
-      id: 'ibm-products-components-status-indicator-statusindicatorstep--status-indicator-step',
+      id: 'experimental-components-status-indicator-statusindicatorstep--status-indicator-step',
       globals: {
         carbonTheme: 'white',
       },

@@ -15,26 +15,35 @@ import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
 
+interface Order {
+  newOrder: 'ASC' | 'DESC' | 'NONE';
+  newSortDesc: undefined | boolean;
+}
+
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const ordering = {
-  ASC: 'ASC',
-  DESC: 'DESC',
-  NONE: 'NONE',
-};
-
-export const getNewSortOrder = (sortOrder?: boolean | string) => {
-  const order = {
-    newSortDesc: false,
-    newOrder: ordering.NONE,
+export const getNewSortOrder = (currentOrder?: boolean | string) => {
+  const order: Order = {
+    newOrder: 'NONE',
+    newSortDesc: undefined,
   };
-  if (sortOrder === false || sortOrder === ordering.DESC) {
-    order.newOrder = ordering.DESC;
+
+  // NONE => ASC
+  if (currentOrder === undefined) {
+    order.newOrder = 'ASC';
+    order.newSortDesc = false;
+  }
+
+  // ACS => DESC
+  if (currentOrder === false || currentOrder === 'DESC') {
+    order.newOrder = 'DESC';
     order.newSortDesc = true;
   }
-  if (sortOrder === undefined || sortOrder === ordering.ASC) {
-    order.newOrder = ordering.ASC;
-    order.newSortDesc = false;
+
+  // DESC => NONE
+  if (currentOrder === true || currentOrder === 'ASC') {
+    order.newOrder = 'NONE';
+    order.newSortDesc = undefined;
   }
   return order;
 };

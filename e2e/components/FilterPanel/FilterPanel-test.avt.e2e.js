@@ -15,7 +15,7 @@ test.describe('FilterPanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FilterPanel',
-      id: 'ibm-products-components-filter-panel-filterpanel--default',
+      id: 'experimental-components-filter-panel-filterpanel--default',
       globals: {
         carbonTheme: 'white',
       },

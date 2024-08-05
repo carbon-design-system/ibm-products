@@ -286,6 +286,7 @@ $colors: (
 
 .#{$block-class}__invalid-input {
   display: flex;
+  direction: rtl;
 }
 .#{$block-class}__invalid-input > svg {
   color: $support-warning;

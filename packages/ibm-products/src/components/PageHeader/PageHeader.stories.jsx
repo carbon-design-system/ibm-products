@@ -644,32 +644,34 @@ const Template = ({
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <ContainerDivOrTabs
-        className={`${storyClass}__content-container`}
-        tabIndex={0}
-        navigation={navigation}
-      >
-        <PageHeader
-          {...props}
-          {...getNavProps(navigation)}
-          title={
-            title?.onSave
-              ? {
-                  ...title,
-                  text: titleText,
-                  onChange: handleTitleChange,
-                  onSave: handleTitleSave,
-                  onCancel: handleTitleCancel,
-                }
-              : title
-          }
+      <div className={`${storyClass}__content-container`}>
+        <ContainerDivOrTabs
+          className={`${storyClass}__content-container`}
+          tabIndex={0}
+          navigation={navigation}
         >
-          {children}
-        </PageHeader>
-        <ChildrenMaybeTabPanels navigation={navigation}>
-          {dummyPageContent}
-        </ChildrenMaybeTabPanels>
-      </ContainerDivOrTabs>
+          <PageHeader
+            {...props}
+            {...getNavProps(navigation)}
+            title={
+              title?.onSave
+                ? {
+                    ...title,
+                    text: titleText,
+                    onChange: handleTitleChange,
+                    onSave: handleTitleSave,
+                    onCancel: handleTitleCancel,
+                  }
+                : title
+            }
+          >
+            {children}
+          </PageHeader>
+          <ChildrenMaybeTabPanels navigation={navigation}>
+            {dummyPageContent}
+          </ChildrenMaybeTabPanels>
+        </ContainerDivOrTabs>
+      </div>
     </>
   );
 };

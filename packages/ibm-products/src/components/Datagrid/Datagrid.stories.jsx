@@ -393,7 +393,7 @@ export const SortableColumns = () => {
 };
 
 export const ActionsDropdown = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -449,7 +449,7 @@ const DatagridBatchActions = (datagridState) => {
 };
 
 export const BatchActions = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const columns = React.useMemo(
     () => [
@@ -516,7 +516,7 @@ BatchActions.parameters = {
 };
 
 export const DisableSelectRow = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {

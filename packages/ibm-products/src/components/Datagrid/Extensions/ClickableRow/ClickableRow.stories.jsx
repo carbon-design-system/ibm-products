@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
@@ -245,7 +246,7 @@ const getBatchActions = () => {
 
 const ClickableRow = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
@@ -348,7 +349,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
     () => [...defaultHeader.filter((item) => item.accessor !== 'doc_link')],
     []
   );
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [rowData, setRowData] = useState({});
   const datagridState = useDatagrid(

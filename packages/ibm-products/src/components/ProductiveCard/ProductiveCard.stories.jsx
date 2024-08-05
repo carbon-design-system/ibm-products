@@ -162,6 +162,7 @@ LabelOnly.args = {
 export const WithOverflow = Template.bind({});
 WithOverflow.args = {
   ...defaultProps,
+  iconDescription: 'Option',
   overflowAriaLabel: 'Overflow menu',
   overflowActions: [
     {

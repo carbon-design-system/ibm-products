@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import {
   checkForHoldingKey,
@@ -52,6 +59,7 @@ const handleKeyPressForPopover = (
   let allItems = [];
   switch (key) {
     case 'ArrowUp':
+      evt.preventDefault();
       //traverse through the popover options, search box, selectAll button
       parentContainer
         .querySelectorAll(`[role="option"]`)
@@ -65,9 +73,20 @@ const handleKeyPressForPopover = (
             conditionBuilderRef
           );
         });
+      //scroll to top when we reach a the top of the list to make search box visible
+      if (
+        Array.from(evt.target.closest('ul').querySelectorAll('li')).indexOf(
+          evt.target
+        ) === 1
+      ) {
+        parentContainer.querySelector(
+          `.${blockClass}__popover-content-wrapper`
+        ).scrollTop = 0;
+      }
 
       break;
     case 'ArrowDown':
+      evt.preventDefault();
       //traverse through the popover options, search box, selectAll button
       parentContainer
         .querySelectorAll(`[role="option"]`)
@@ -81,6 +100,7 @@ const handleKeyPressForPopover = (
             conditionBuilderRef
           );
         });
+
       break;
 
     case 'Tab':
@@ -128,7 +148,13 @@ const handleKeyPressForPopover = (
 
       break;
     case 'Enter':
-      if (isMultiSelect !== 'true') {
+      if (isMultiSelect === 'true') {
+        if (document.activeElement.type !== 'button') {
+          //for button , enter key is click which already handled by framework, for other elements trigger click
+          document.activeElement?.click();
+        }
+        evt.preventDefault();
+      } else {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, else trigger click
           focusThisField(evt, conditionBuilderRef);

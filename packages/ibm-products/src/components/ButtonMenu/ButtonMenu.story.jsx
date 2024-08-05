@@ -42,7 +42,7 @@ const Template = (args) => {
       text={
         <div>
           This component is deprecated and will be removed in the next major
-          version. Please migrate to Carbon's{' '}
+          version. Please migrate to Carbon&apos;s{' '}
           <a href="https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview">
             MenuButton
           </a>

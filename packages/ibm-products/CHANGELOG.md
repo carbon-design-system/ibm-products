@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.46.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.46.0-rc.0...@carbon/ibm-products@2.46.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.46.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.45.0...@carbon/ibm-products@2.46.0-rc.0) (2024-07-22)
+
+
+### Bug Fixes
+
+* **datagrid:** Clear all button not working as expected for multiselect  ([#5635](https://github.com/carbon-design-system/ibm-products/issues/5635)) ([e0eb6fb](https://github.com/carbon-design-system/ibm-products/commit/e0eb6fb53b1cb01482b4c428d3c3901e4ce55514))
+* **Datagrid:** incorrect count in column customisation tearsheet, and special columns losing isVisible parameter ([#5606](https://github.com/carbon-design-system/ibm-products/issues/5606)) ([e974388](https://github.com/carbon-design-system/ibm-products/commit/e974388969170c4cf6dcb28adb5f98b3dc5ccc27))
+* **Dataspreadsheet:** add callback function for after drag/drop ends ([#5621](https://github.com/carbon-design-system/ibm-products/issues/5621)) ([566a330](https://github.com/carbon-design-system/ibm-products/commit/566a33062126c93ee66c72b3d89454569e46ae9a))
+* update carbon packages to resolve max depth multi select issue ([#5643](https://github.com/carbon-design-system/ibm-products/issues/5643)) ([dc7cbc7](https://github.com/carbon-design-system/ibm-products/commit/dc7cbc7b1261c11cc84cfe152ff72bc4dee36738))
+
+
+### Features
+
+* **conditionBuilder:** accessibility and generic issue fixes ([#5647](https://github.com/carbon-design-system/ibm-products/issues/5647)) ([1b5cdaf](https://github.com/carbon-design-system/ibm-products/commit/1b5cdaf01d8c95acfed93d1c3dee03af7afa093f))
+* **ConditionBuilder:** adding test cases and issue fixes ([#5685](https://github.com/carbon-design-system/ibm-products/issues/5685)) ([9b0d58d](https://github.com/carbon-design-system/ibm-products/commit/9b0d58d318e27eb456613a6d1843edb60fba19a0))
+* **conditionBuilder:** unit test cases for keyboard navigation ([#5688](https://github.com/carbon-design-system/ibm-products/issues/5688)) ([7f4f39a](https://github.com/carbon-design-system/ibm-products/commit/7f4f39ac9a6c503781f638aaaebda24f3bac8e4d))
+* **conditionBuilder:** unit test cases for keyboard navigation ([#5691](https://github.com/carbon-design-system/ibm-products/issues/5691)) ([a49f23c](https://github.com/carbon-design-system/ibm-products/commit/a49f23c7c00291efc9febd401b2f7472a4136642))
+
+
+
+
+
 # [2.45.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.45.0-rc.1...@carbon/ibm-products@2.45.0) (2024-07-17)
 
 **Note:** Version bump only for package @carbon/ibm-products

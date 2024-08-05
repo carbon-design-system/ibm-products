@@ -974,7 +974,9 @@ describe(componentName, () => {
       '[role="row"][aria-level="2"][aria-posinset="3"]'
     );
     expect(row).toHaveLength(1);
-    expect(row[0]).toHaveFocus();
+    expect(
+      row[0].querySelector(`.${blockClass}__close-condition`)
+    ).toHaveFocus();
   });
 
   it('check the add/remove actions ', async () => {
@@ -1139,7 +1141,7 @@ describe(componentName, () => {
     ).not.toBeInTheDocument();
   });
 
-  it(' remove all  conditions in a group keeping only subgroups', async () => {
+  it(' remove all  conditions in a group will delete subgroups as well', async () => {
     const sampleDataStructure = {
       operator: 'or',
       groups: [
@@ -1216,7 +1218,7 @@ describe(componentName, () => {
       userEvent.click(document.querySelector(`.${blockClass}__close-condition`))
     );
 
-    expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(2);
+    expect(screen.getByText('Add condition'));
   });
 
   it('check the custom input type', async () => {
@@ -1499,18 +1501,11 @@ describe(componentName, () => {
     await act(() => userEvent.keyboard('{Enter}'));
 
     expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
+      document.querySelector(
+        `[role="row"][aria-level="2"][aria-posinset="1"] .${blockClass}__close-condition`
+      )
     ).toHaveFocus();
 
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(screen.getByRole('button', { name: 'Continent' })).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(
-      document.querySelectorAll(`.${blockClass}__close-condition`)[0]
-    ).toHaveFocus();
     await act(() => userEvent.keyboard('{Enter}'));
     await act(() => userEvent.keyboard('{Tab}'));
     expect(screen.getByText('Add condition')).toHaveFocus();

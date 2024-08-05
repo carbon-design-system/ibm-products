@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.7.0-rc.0...@carbon/ibm-products-community@0.7.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+# [0.7.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.6.0...@carbon/ibm-products-community@0.7.0-rc.0) (2024-07-22)
+
+
+### Bug Fixes
+
+* update carbon packages to resolve max depth multi select issue ([#5643](https://github.com/carbon-design-system/ibm-products/issues/5643)) ([dc7cbc7](https://github.com/carbon-design-system/ibm-products/commit/dc7cbc7b1261c11cc84cfe152ff72bc4dee36738))
+
+
+
+
+
 # [0.6.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.6.0-rc.0...@carbon/ibm-products-community@0.6.0) (2024-07-17)
 
 **Note:** Version bump only for package @carbon/ibm-products-community

@@ -15,7 +15,7 @@ import mdx from './StringFormatter.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Components/String formatter/StringFormatter',
+  title: 'Experimental/Components/String formatter/StringFormatter',
   component: StringFormatter,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

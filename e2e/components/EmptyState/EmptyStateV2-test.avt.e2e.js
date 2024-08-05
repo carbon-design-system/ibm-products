@@ -14,7 +14,7 @@ test.describe('EmptyStateV2 @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EmptyStateV2',
-      id: 'ibm-products-patterns-empty-state-emptystatev2--default',
+      id: 'experimental-patterns-empty-state-emptystatev2--default',
       globals: {
         carbonTheme: 'white',
       },

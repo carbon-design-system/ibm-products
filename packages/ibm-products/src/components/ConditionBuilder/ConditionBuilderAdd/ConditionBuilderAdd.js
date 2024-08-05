@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useState } from 'react';
 import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
@@ -90,14 +97,12 @@ const ConditionBuilderAdd = ({
         <ConditionBuilderButton
           renderIcon={TextNewLine}
           onClick={addConditionSubGroupHandler}
-          className={cx(
-            `${blockClass}__add-condition-sub-group ${blockClass}__gap-left`
-          )}
+          className={cx(`${blockClass}__add-condition-sub-group`)}
           hideLabel
           label={addSubgroupText}
           wrapperProps={wrapperProps}
           wrapperClassName={cx(
-            `${blockClass}__add-condition-sub-group-wrapper`,
+            `${blockClass}__add-condition-sub-group-wrapper ${blockClass}__gap-left`,
             {
               [`${blockClass}__add-condition-sub-group-wrapper--show`]:
                 isAddSubgroup,

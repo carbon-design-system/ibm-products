@@ -24,7 +24,7 @@ import styles from './_storybook-styles.scss?inline';
 
 export default {
   title:
-    'IBM Products/Onboarding/Coachmark/Coachmark elements/CoachmarkOverlayElement',
+    'Experimental/Onboarding/Coachmark/Coachmark elements/CoachmarkOverlayElement',
   component: CoachmarkOverlayElement,
   tags: ['autodocs'],
   argTypes: {

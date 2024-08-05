@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@carbon/react';
@@ -116,6 +123,11 @@ const ConditionBuilderContent = ({
     });
   };
 
+  const getColorIndex = () => {
+    const groupLength = rootState?.groups?.length ?? 0;
+    return groupLength % 5;
+  };
+
   if (!isConditionBuilderActive) {
     return (
       <Button
@@ -196,6 +208,7 @@ const ConditionBuilderContent = ({
         {showConditionGroupPreview && (
           <ConditionPreview
             previewType="newGroup"
+            colorIndex={getColorIndex()}
             group={{ groupOperator: rootState.operator }}
           />
         )}

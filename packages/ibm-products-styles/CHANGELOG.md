@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.42.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.42.0-rc.0...@carbon/ibm-products-styles@2.42.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.42.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.41.0...@carbon/ibm-products-styles@2.42.0-rc.0) (2024-07-22)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** beadcrumbs style issue ([#5599](https://github.com/carbon-design-system/ibm-products/issues/5599)) ([3a9e647](https://github.com/carbon-design-system/ibm-products/commit/3a9e647155b5300d90707a8fb7c084d50dab5787))
+* update carbon packages to resolve max depth multi select issue ([#5643](https://github.com/carbon-design-system/ibm-products/issues/5643)) ([dc7cbc7](https://github.com/carbon-design-system/ibm-products/commit/dc7cbc7b1261c11cc84cfe152ff72bc4dee36738))
+
+
+### Features
+
+* **conditionBuilder:** accessibility and generic issue fixes ([#5647](https://github.com/carbon-design-system/ibm-products/issues/5647)) ([1b5cdaf](https://github.com/carbon-design-system/ibm-products/commit/1b5cdaf01d8c95acfed93d1c3dee03af7afa093f))
+
+
+
+
+
 # [2.41.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.41.0-rc.0...@carbon/ibm-products-styles@2.41.0) (2024-07-17)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

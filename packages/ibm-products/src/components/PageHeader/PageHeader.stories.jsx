@@ -562,7 +562,9 @@ const getNavProps = (navigation) =>
 
 const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
   navigation ? (
-    <Tabs {...props}>{children}</Tabs>
+    <div className={props.className}>
+      <Tabs>{children}</Tabs>
+    </div>
   ) : (
     <div {...props}>{children}</div>
   );
@@ -644,34 +646,32 @@ const Template = ({
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <div className={`${storyClass}__content-container`}>
-        <ContainerDivOrTabs
-          className={`${storyClass}__content-container`}
-          tabIndex={0}
-          navigation={navigation}
+      <ContainerDivOrTabs
+        className={`${storyClass}__content-container`}
+        tabIndex={0}
+        navigation={navigation}
+      >
+        <PageHeader
+          {...props}
+          {...getNavProps(navigation)}
+          title={
+            title?.onSave
+              ? {
+                  ...title,
+                  text: titleText,
+                  onChange: handleTitleChange,
+                  onSave: handleTitleSave,
+                  onCancel: handleTitleCancel,
+                }
+              : title
+          }
         >
-          <PageHeader
-            {...props}
-            {...getNavProps(navigation)}
-            title={
-              title?.onSave
-                ? {
-                    ...title,
-                    text: titleText,
-                    onChange: handleTitleChange,
-                    onSave: handleTitleSave,
-                    onCancel: handleTitleCancel,
-                  }
-                : title
-            }
-          >
-            {children}
-          </PageHeader>
-          <ChildrenMaybeTabPanels navigation={navigation}>
-            {dummyPageContent}
-          </ChildrenMaybeTabPanels>
-        </ContainerDivOrTabs>
-      </div>
+          {children}
+        </PageHeader>
+        <ChildrenMaybeTabPanels navigation={navigation}>
+          {dummyPageContent}
+        </ChildrenMaybeTabPanels>
+      </ContainerDivOrTabs>
     </>
   );
 };

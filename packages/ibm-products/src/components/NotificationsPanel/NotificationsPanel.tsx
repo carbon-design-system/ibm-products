@@ -408,7 +408,7 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div role="dialog">
+        <div role="dialog" aria-label="Notifications">
           <p className={descriptionClassName}>{description}</p>
           {description.length > trimLength && (
             <Button

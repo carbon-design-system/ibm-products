@@ -243,7 +243,7 @@ const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
     <div className={`${prefix}body-content`}>
-      <h5>Section</h5>
+      <h3 className={`${prefix}body-subheading`}>Section</h3>
       <div className={`${prefix}text-inputs`}>
         <TextInput
           labelText="Input A"
@@ -289,7 +289,9 @@ const ChildrenContent = () => {
           onChange={(event) => setNotesValue(event.target.value)}
         />
       </div>
-      <h5 className={`${prefix}content-subtitle`}>Section</h5>
+      <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+        Section
+      </h3>
       {renderDataTable()}
     </div>
   );
@@ -301,7 +303,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
     <>
       {currentStep === 0 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Main view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Main view
+          </h3>
           {renderDataTable()}
           <Button
             kind="tertiary"
@@ -313,7 +317,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
       )}
       {currentStep === 1 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Detail view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Detail view
+          </h3>
           {renderDataTable()}
         </div>
       )}

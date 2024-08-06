@@ -408,7 +408,7 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div>
+        <div role="dialog">
           <p className={descriptionClassName}>{description}</p>
           {description.length > trimLength && (
             <Button

@@ -22,6 +22,15 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
+@mixin actions-animation($translateValue) {
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateX($translateValue);
+  transition: all $duration-fast-02 motion(standard, productive);
+}
+
 .#{$block-class}__condition-wrapper * {
   @include type-style('body-01');
 }
@@ -234,7 +243,10 @@ $colors: (
     .#{$block-class}__button,
   .#{$block-class}__condition-wrapper:not(.#{$block-class}__group-preview)
     > :nth-child(2)
-    .#{$block-class}__button {
+    .#{$block-class}__button:not(
+      .#{$block-class}__add-button,
+      .#{$block-class}__add-condition-sub-group
+    ) {
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
   }
@@ -251,22 +263,30 @@ $colors: (
   align-self: center;
   margin-left: auto;
 }
-.#{$block-class}__add-condition-sub-group-wrapper {
-  z-index: -1;
-  width: 0;
-  pointer-events: none;
-  transform: translateX(-100%);
-  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-  transition: transform motion(exit, productive) $duration-fast-02;
+.#{$block-class}__add-button-wrapper > :nth-child(1) {
+  @include actions-animation(-100%);
 }
-.#{$block-class}__add-condition-sub-group-wrapper--show {
+.#{$block-class}__add-button-wrapper > :nth-child(2) {
+  @include actions-animation(-200%);
+}
+
+.#{$block-class}__condition-block:focus-within:first-child
+  .#{$block-class}__add-button-wrapper
+  > span,
+.#{$block-class}__condition--interacting
+  .#{$block-class}__add-button-wrapper
+  > span {
   z-index: 0;
-  width: auto;
+  opacity: 1;
   pointer-events: all;
   transform: translateX(0);
+  /* stylelint-disable-next-line carbon/motion-easing-use */
+  transition: transform motion(exit, productive) $duration-fast-02;
 }
+
 .#{$block-class}__invalid-input {
   display: flex;
+  direction: rtl;
 }
 .#{$block-class}__invalid-input > svg {
   color: $support-warning;

@@ -42,6 +42,9 @@ $story-prefix: side-panel-stories__;
   .#{$story-prefix}content-subtitle {
     margin: $spacing-05 0 $spacing-04;
   }
+  .#{$story-prefix}body-subheading {
+    @include type.type-style('heading-02');
+  }
 }
 
 .#{$story-prefix}header {

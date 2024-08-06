@@ -38,19 +38,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   .#{$block-class}__button:not(
     .#{$block-class}__statement-button,
     .#{$block-class}__connector-button,
-    .#{$block-class}__add-button
+    .#{$block-class}__add-button,
+    .#{$block-class}__add-condition-sub-group
   ) {
   background-color: $tag-background-red;
   color: $tag-color-red;
-}
-.#{$block-class}__subgroup_deletionPreview {
-  .#{$block-class}__group {
-    /* stylelint-disable max-nesting-depth */
-    button {
-      background-color: $tag-background-red;
-      color: $tag-color-red;
-    }
-  }
 }
 
 .#{$block-class}__condition__deletion-preview

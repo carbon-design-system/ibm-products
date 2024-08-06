@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
@@ -25,19 +25,13 @@ const ConditionBuilderAdd = ({
   buttonLabel,
   tabIndex,
 }) => {
-  const [isAddSubgroup, setIsAddSubgroup] = useState(false);
   const [addConditionText, addConditionRowText, addSubgroupText] =
     useTranslations([
       'addConditionText',
       'addConditionRowText',
       'addSubgroupText',
     ]);
-  const showAddSubGroup = () => {
-    setIsAddSubgroup(true);
-  };
-  const hideAddSubGroup = () => {
-    setIsAddSubgroup(false);
-  };
+
   const onClickHandler = () => {
     hideConditionPreviewHandler?.();
     onClick();
@@ -77,10 +71,6 @@ const ConditionBuilderAdd = ({
       className={`${className} ${blockClass}__add-button-wrapper`}
       role={!enableSubGroup ? 'gridcell' : 'none'}
       aria-label={getAriaLabel()}
-      onMouseEnter={showAddSubGroup}
-      onMouseLeave={hideAddSubGroup}
-      onFocus={showAddSubGroup}
-      onBlur={hideAddSubGroup}
     >
       <ConditionBuilderButton
         renderIcon={AddAlt}
@@ -92,6 +82,7 @@ const ConditionBuilderAdd = ({
         data-name="addButton"
         label={buttonLabel ?? addConditionText}
         tabIndex={tabIndex}
+        wrapperClassName={`${blockClass}__add-condition-wrapper`}
       />
       {enableSubGroup && (
         <ConditionBuilderButton
@@ -101,13 +92,7 @@ const ConditionBuilderAdd = ({
           hideLabel
           label={addSubgroupText}
           wrapperProps={wrapperProps}
-          wrapperClassName={cx(
-            `${blockClass}__add-condition-sub-group-wrapper ${blockClass}__gap-left`,
-            {
-              [`${blockClass}__add-condition-sub-group-wrapper--show`]:
-                isAddSubgroup,
-            }
-          )}
+          wrapperClassName={`${blockClass}__add-condition-sub-group-wrapper ${blockClass}__gap-left`}
           {...previewHandlersForSubgroup()}
         />
       )}

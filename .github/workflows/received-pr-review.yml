@@ -1,0 +1,27 @@
+# Save PR review data to as artifact to process in a privileged workflow that is dispatched from this one
+name: Received PR review
+on: [pull_request_review]
+jobs:
+  pr_review_submitted:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    if: ${{contains(github.event_name, 'pull_request_review')}}
+    # First save github.event (from the unprivileged workflow) and then pass it through to the privileged action
+    # where we have access to repo secrets
+    steps:
+      - name: Store GitHub event in a workflow artifact
+        id: github_event_step
+        env:
+          JSON: ${{ toJSON(github.event) }}
+        run: |
+          mkdir -p ./pr_data
+          echo $JSON > ./pr_data/github.json
+      - name: Upload event data
+        id: upload_artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr-data-to-process
+          path: pr_data/

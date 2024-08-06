@@ -833,9 +833,13 @@ export let SidePanel = React.forwardRef(
     };
 
     const handleKeyDown = (event) => {
-      handleEscapeKey(event);
+      if (!slideIn) {
+        handleEscapeKey(event);
 
-      return slideIn ? undefined : keyDownListener;
+        return keyDownListener;
+      }
+
+      return undefined;
     };
 
     return (

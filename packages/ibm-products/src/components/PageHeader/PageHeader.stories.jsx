@@ -563,7 +563,7 @@ const getNavProps = (navigation) =>
 const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
   navigation ? (
     <div className={props.className}>
-      <Tabs>{children}</Tabs>
+      <Tabs {...props}>{children}</Tabs>
     </div>
   ) : (
     <div {...props}>{children}</div>

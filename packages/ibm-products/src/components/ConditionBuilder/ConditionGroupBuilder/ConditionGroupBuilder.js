@@ -47,8 +47,7 @@ const ConditionGroupBuilder = ({
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
-  const [showDeletionPreviewForSubgroups, setShowDeletionPreviewForSubgroups] =
-    useState(false);
+  useState(false);
   const conditionBuilderContentRef = useRef();
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group.conditions.length > 1) {
@@ -56,51 +55,47 @@ const ConditionGroupBuilder = ({
         ? handleFocusOnCloseTree(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
-      if (
-        group.conditions[1].conditions &&
-        group.conditions[1].id !== conditionId
-      ) {
-        //when we remove every plain conditions of a group without deleting  the subgroup, we need to restructure the group
-        //the inner group become outer group and same level subgroups become plain conditions
-
-        //ensure we are deleting last condition , not the subgroup
+      if (!checkGroupHaveCondition(group.conditions, conditionId)) {
+        //when we delete the last  condition of a group without deleting  the subgroup, we need to restructure the group.
+        //we will shift the group one level up. The subgroups will open up as conditions.
 
         //spreading out the condition inside the subgroup
-        const allConditions = group.conditions.reduce((acc, item) => {
-          if (item.conditions) {
-            return acc.concat(item.conditions);
+        const allConditions = group.conditions.reduce((acc, condition) => {
+          if (condition.conditions) {
+            //this is a subgroup
+            return acc.concat(condition.conditions);
           }
           return acc;
         }, []);
 
-        //we always have conditions first and then subgroups, so ordering accordingly
-        const groupedItems = {
-          groups: [],
-          conditions: [],
-        };
-        allConditions.forEach((item) => {
-          if (item.conditions) {
-            groupedItems.groups.push(item);
-          } else {
-            groupedItems.conditions.push(item);
-          }
-        });
-        onRemove(evt);
-        // onChange({
-        //   ...group,
-        //   conditions: [...groupedItems.conditions, ...groupedItems.groups],
-        // });
-      } else {
         onChange({
           ...group,
-          conditions: group.conditions.filter(
-            (condition) => conditionId !== condition.id
-          ),
+          conditions: allConditions,
+        });
+      } else {
+        const filteredConditions = group.conditions.filter(
+          (condition) => conditionId !== condition.id
+        );
+        //This is to handle a edge case.
+        //When a group has structure as 1 condition,1 subgroup, 1 condition and if we delete first condition,
+        //the group will start with a subgroup. To avoid this,opening up that subgroup.
+        if (filteredConditions?.[0].conditions) {
+          filteredConditions.splice(0, 1, ...filteredConditions[0].conditions);
+        }
+        onChange({
+          ...group,
+          conditions: filteredConditions,
         });
       }
     } else {
       onRemove(evt);
     }
+  };
+  //check to identify a group without a plain condition
+  const checkGroupHaveCondition = (conditions, conditionId) => {
+    return conditions.find((eachCondition) => {
+      return !eachCondition.conditions && eachCondition.id !== conditionId;
+    });
   };
 
   const onChangeHandler = (updatedCondition, conditionIndex) => {
@@ -382,8 +377,6 @@ const ConditionGroupBuilder = ({
                   {
                     [`${blockClass}__gap-bottom`]:
                       group.conditions.length < conditionIndex + 1,
-                    [`${blockClass}__subgroup_deletionPreview`]:
-                      showDeletionPreviewForSubgroups,
                   },
                   {}
                 )}
@@ -446,9 +439,6 @@ const ConditionGroupBuilder = ({
                   }}
                   hideConditionPreviewHandler={hideConditionPreviewHandler}
                   isLastCondition={isLastCondition}
-                  setShowDeletionPreviewForSubgroups={
-                    setShowDeletionPreviewForSubgroups
-                  }
                 />
               </div>
             )}

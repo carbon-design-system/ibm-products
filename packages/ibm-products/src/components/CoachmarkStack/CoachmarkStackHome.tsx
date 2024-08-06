@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useRef, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useRef,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -17,6 +23,74 @@ import { createPortal } from 'react-dom';
 import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { useIsomorphicEffect } from '../../global/js/hooks';
+import { ButtonProps } from '@carbon/react';
+
+type Media =
+  | {
+      render?: () => ReactNode;
+      filePaths?: never;
+    }
+  | {
+      render?: never;
+      filePaths?: string[];
+    };
+
+interface CoachmarkStackHomeProps {
+  /**
+   * Optional class name for this component.
+   */
+  className?: string;
+  /**
+   * The label for the button that will close the stack
+   */
+  closeButtonLabel?: string;
+  /**
+   * The description of the Coachmark.
+   */
+  description: React.ReactNode;
+  /**
+   * If the stack home is open.
+   */
+  isOpen: boolean;
+  /**
+   * The object describing an image in one of two shapes.
+   *
+   * If a single media element is required, use `{render}`.
+   *
+   * If a stepped animation is required, use `{filePaths}`.
+   *
+   * @see {@link MEDIA_PROP_TYPE}.
+   */
+  media?: Media;
+
+  /**
+   * The labels used to link to the stackable Coachmarks.
+   */
+  navLinkLabels: string[];
+  /**
+   * For internal use only by CoachmarkStack and CoachmarkStackHome.
+   */
+  onClickNavItem: (index: number) => void;
+  /**
+   * Function to call when the stack closes.
+   */
+  onClose: () => void;
+  /**
+   * By default, the CoachmarkStackHome will be appended to the end of `document.body`.
+   * The CoachmarkStackHome will remain persistent as the user navigates the app until
+   * the user closes the CoachmarkStackHome.
+   *
+   * Alternatively, the app developer can tightly couple the CoachmarkStackHome to a DOM
+   * element or other component by specifying a CSS selector. The CoachmarkStackHome will
+   * remain visible as long as that element remains visible or mounted. When the
+   * element is hidden or component is unmounted, the CoachmarkStackHome will disappear.
+   */
+  portalTarget?: string;
+  /**
+   * The title of the Coachmark.
+   */
+  title: string;
+}
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -30,7 +104,10 @@ const componentName = 'CoachmarkStackHome';
  * DO NOT USE. This component is for the exclusive use
  * of other Onboarding components.
  */
-export let CoachmarkStackHome = forwardRef(
+export let CoachmarkStackHome = forwardRef<
+  HTMLDivElement,
+  CoachmarkStackHomeProps
+>(
   (
     {
       className,
@@ -47,7 +124,7 @@ export let CoachmarkStackHome = forwardRef(
     },
     ref
   ) => {
-    const buttonFocusRef = useRef();
+    const buttonFocusRef = useRef<ButtonProps<any> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
     useEffect(() => {
       setTimeout(() => {
@@ -57,7 +134,7 @@ export let CoachmarkStackHome = forwardRef(
       }, 100);
     }, [isOpen]);
 
-    const portalNode = useRef();
+    const portalNode = useRef<Element | null>(null);
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
@@ -69,6 +146,28 @@ export let CoachmarkStackHome = forwardRef(
     if (!navLinkLabels) {
       return pconsole.warn(
         `${componentName} is an Onboarding internal component and is not intended for general use.`
+      );
+    }
+
+    function renderNavLink(
+      index,
+      label,
+      ref: React.RefObject<ButtonProps<any>> | null = null
+    ) {
+      return (
+        <li key={index}>
+          <Button
+            kind="ghost"
+            size="sm"
+            onClick={() => {
+              setLinkFocusIndex(index);
+              onClickNavItem(index + 1);
+            }}
+            ref={ref}
+          >
+            {label}
+          </Button>
+        </li>
       );
     }
 
@@ -124,9 +223,8 @@ export let CoachmarkStackHome = forwardRef(
                   {navLinkLabels.map((label, index) => {
                     if (index === linkFocusIndex) {
                       return renderNavLink(index, label, buttonFocusRef);
-                    } else {
-                      return renderNavLink(index, label);
                     }
+                    return renderNavLink(index, label);
                   })}
                 </ul>
                 {closeButtonLabel && (
@@ -148,24 +246,6 @@ export let CoachmarkStackHome = forwardRef(
           portalNode?.current
         )
       : null;
-
-    function renderNavLink(index, label, ref = null) {
-      return (
-        <li key={index}>
-          <Button
-            kind="ghost"
-            size="sm"
-            onClick={() => {
-              setLinkFocusIndex(index);
-              onClickNavItem(index + 1);
-            }}
-            ref={ref}
-          >
-            {label}
-          </Button>
-        </li>
-      );
-    }
   }
 );
 
@@ -215,11 +295,11 @@ CoachmarkStackHome.propTypes = {
     PropTypes.shape({
       filePaths: PropTypes.arrayOf(PropTypes.string),
     }),
-  ]),
+  ]) as PropTypes.Validator<Media>,
   /**
    * The labels used to link to the stackable Coachmarks.
    */
-  navLinkLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  navLinkLabels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   /**
    * For internal use only by CoachmarkStack and CoachmarkStackHome.
    */

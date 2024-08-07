@@ -366,10 +366,7 @@ export let NotificationsPanel = React.forwardRef(
     };
     const handleKeydown = (event) => {
       event.stopPropagation();
-      console.log('here');
-
       if (event.key === 'Escape') {
-        console.log('escape');
         setRender(false);
       }
     };

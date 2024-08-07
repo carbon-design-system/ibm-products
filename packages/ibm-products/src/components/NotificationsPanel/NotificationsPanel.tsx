@@ -408,7 +408,7 @@ export let NotificationsPanel = React.forwardRef(
         },
       ]);
       return (
-        <div role="dialog" aria-label="Notifications">
+        <div>
           <p className={descriptionClassName}>{description}</p>
           {description.length > trimLength && (
             <Button
@@ -573,6 +573,8 @@ export let NotificationsPanel = React.forwardRef(
 
     return shouldRender ? (
       <div
+        role="dialog"
+        aria-label="Notifications"
         {
           // Pass through any other property values as HTML attributes.
           ...rest

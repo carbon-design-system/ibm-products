@@ -277,10 +277,10 @@ export let OptionsTile = React.forwardRef(
       let text = summary;
       const summaryClasses = [`${blockClass}__summary`];
       if (closing) {
-        summaryClasses.push(`${blockClass}__summary--closing`)
+        summaryClasses.push(`${blockClass}__summary--closing`);
       }
       if (isOpen) {
-        summaryClasses.push(`${blockClass}__summary--open`)
+        summaryClasses.push(`${blockClass}__summary--open`);
       }
 
       if (invalid) {
@@ -354,10 +354,13 @@ export let OptionsTile = React.forwardRef(
                */
               /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
               <summary className={`${blockClass}__header`} onClick={toggle}>
-                <ChevronDown size={16} className={cx(`${blockClass}__chevron`, {
-                  [`${blockClass}__chevron--open`]: isOpen,
-                  [`${blockClass}__chevron--closing`]: closing
-                })} />
+                <ChevronDown
+                  size={16}
+                  className={cx(`${blockClass}__chevron`, {
+                    [`${blockClass}__chevron--open`]: isOpen,
+                    [`${blockClass}__chevron--closing`]: closing,
+                  })}
+                />
                 {renderTitle()}
               </summary>
             }

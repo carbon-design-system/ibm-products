@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.47.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.46.0-rc.0...@carbon/ibm-products@2.47.0-rc.0) (2024-08-05)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** breadcrumb style issue ([#5761](https://github.com/carbon-design-system/ibm-products/issues/5761)) ([f6e154f](https://github.com/carbon-design-system/ibm-products/commit/f6e154f64da8835e0b5baeb0e2cf007c26174f69))
+* datagrid hidden virtual body width ([#5798](https://github.com/carbon-design-system/ibm-products/issues/5798)) ([64ef0c3](https://github.com/carbon-design-system/ibm-products/commit/64ef0c3c8e981c5193e94d25ed4b0413fc2f1f5a))
+* datagrid sort reset ([#5795](https://github.com/carbon-design-system/ibm-products/issues/5795)) ([c246a3d](https://github.com/carbon-design-system/ibm-products/commit/c246a3d4cebb84b68cc879805e84466fd81dc1ab))
+* **Datagrid:** editable cell shifting focus to the below cell after edit ([#5744](https://github.com/carbon-design-system/ibm-products/issues/5744)) ([43d4802](https://github.com/carbon-design-system/ibm-products/commit/43d4802a4d774512900ceba3e99adb572ad890ac))
+* **Datagrid:** only remove single filter for correct table id ([#5654](https://github.com/carbon-design-system/ibm-products/issues/5654)) ([5d21bf8](https://github.com/carbon-design-system/ibm-products/commit/5d21bf822fff0fef64e06de74c59c37470ffd900))
+* **datagrid:** screen reader misreads datagrid table headers ([#5716](https://github.com/carbon-design-system/ibm-products/issues/5716)) ([137f5b1](https://github.com/carbon-design-system/ibm-products/commit/137f5b1f103140707b90e1d6f94a0e7ba2636883))
+* navigation tab usage in story ([#5692](https://github.com/carbon-design-system/ibm-products/issues/5692)) ([f4e571c](https://github.com/carbon-design-system/ibm-products/commit/f4e571cb99fe311fc2cc5bc13f72c0de33a73c7d))
+* **PageHeader:** correct conditional for non zero offsets ([#5791](https://github.com/carbon-design-system/ibm-products/issues/5791)) ([2deeb83](https://github.com/carbon-design-system/ibm-products/commit/2deeb8325e99cfa3f435b5ae6004a2cb45368082))
+* **Tearsheet:** focus specified els for stacked tearsheets ([#5631](https://github.com/carbon-design-system/ibm-products/issues/5631)) ([ef7c9b9](https://github.com/carbon-design-system/ibm-products/commit/ef7c9b9a234428770892220759a594f66b06a9d8))
+
+
+### Features
+
+* **ConditionBuilder:** design review changes ([#5762](https://github.com/carbon-design-system/ibm-products/issues/5762)) ([5c1e568](https://github.com/carbon-design-system/ibm-products/commit/5c1e5682a1d849f809f252555001adadef3c2800))
+* **GetStartedCard:** update to typescript ([#5719](https://github.com/carbon-design-system/ibm-products/issues/5719)) ([7731b3c](https://github.com/carbon-design-system/ibm-products/commit/7731b3cccc30dea90b96a6811759a75c554a0729))
+
+
+
+
+
+# [2.46.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.46.0-rc.0...@carbon/ibm-products@2.46.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.46.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.45.0...@carbon/ibm-products@2.46.0-rc.0) (2024-07-22)
 
 

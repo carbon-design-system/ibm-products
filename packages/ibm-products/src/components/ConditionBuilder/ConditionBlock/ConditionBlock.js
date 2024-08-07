@@ -1,4 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { useContext, useState } from 'react';
 import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import PropTypes from 'prop-types';
@@ -45,13 +52,13 @@ const ConditionBlock = (props) => {
     hideConditionPreviewHandler,
     showConditionPreviewHandler,
     isLastCondition,
-    setShowDeletionPreviewForSubgroups,
   } = props;
   const { inputConfig, variant, conditionBuilderRef } = useContext(
     ConditionBuilderContext
   );
 
   const [showDeletionPreview, setShowDeletionPreview] = useState(false);
+  const [showAllActions, setShowAllActions] = useState(false);
 
   const [
     conditionRowText,
@@ -90,19 +97,12 @@ const ConditionBlock = (props) => {
   };
   const ItemComponent = property ? itemComponents[type] : null;
 
-  useEffect(() => {
-    if (
-      showDeletionPreview &&
-      group?.conditions?.length > 1 &&
-      group?.conditions?.[1].conditions &&
-      group.conditions[1].id !== condition.id
-    ) {
-      setShowDeletionPreviewForSubgroups?.(true);
-    } else {
-      setShowDeletionPreviewForSubgroups?.(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showDeletionPreview]);
+  const showAllActionsHandler = () => {
+    setShowAllActions(true);
+  };
+  const hideAllActionsHandler = () => {
+    setShowAllActions(false);
+  };
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt, conditionBuilderRef);
     onStatementChange(v);
@@ -139,6 +139,12 @@ const ConditionBlock = (props) => {
   };
   const handleHideDeletionPreview = () => {
     setShowDeletionPreview(false);
+  };
+  const manageActionButtons = (conditionIndex, conditions) => {
+    if (variant === 'tree') {
+      return true;
+    }
+    return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
     if (config?.operators) {
@@ -182,18 +188,23 @@ const ConditionBlock = (props) => {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         },
         {
-          [`${blockClass}__gap-bottom`]:
-            variant == 'tree' &&
-            !(conditionIndex + 1 >= group.conditions.length),
+          [`${blockClass}__gap-bottom`]: variant == 'tree',
         },
         {
           [`${blockClass}__gap ${blockClass}__gap-bottom`]:
             variant == 'sentence',
+        },
+        {
+          [`${blockClass}__condition--interacting`]: showAllActions,
         }
       )}
       role="row"
       aria-label={conditionRowText}
       {...getAriaAttributes()}
+      tabIndex={-1}
+      onMouseEnter={showAllActionsHandler}
+      onMouseLeave={hideAllActionsHandler}
+      onBlur={hideAllActionsHandler}
     >
       {conjunction ? (
         <ConditionConnector
@@ -212,6 +223,7 @@ const ConditionBlock = (props) => {
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap`}
           className={`${blockClass}__statement-button`}
+          tabIndex={0}
         >
           <ItemOption
             conditionState={{
@@ -294,7 +306,7 @@ const ConditionBlock = (props) => {
         />
       </span>
       {/* </div> */}
-      {isLastCondition(conditionIndex, group.conditions) && (
+      {manageActionButtons(conditionIndex, group.conditions) && (
         <ConditionBuilderAdd
           onClick={() => {
             addConditionHandler(conditionIndex);
@@ -376,10 +388,6 @@ ConditionBlock.propTypes = {
    * callback to handle the statement(if/ excl.if) change
    */
   onStatementChange: PropTypes.func,
-  /**
-   * method to set ShowDeletionPreviewForSubgroups
-   */
-  setShowDeletionPreviewForSubgroups: PropTypes.func,
   /**
    * handler for showing add condition preview
    */

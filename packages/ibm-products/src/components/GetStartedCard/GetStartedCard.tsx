@@ -7,7 +7,6 @@
 
 import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -17,7 +16,7 @@ const componentName = 'GetStartedCard';
 
 type MetaData = {
   id?: string;
-  icon?: () => void | object;
+  icon?: () => ReactNode;
   iconDescription?: string;
 };
 
@@ -35,12 +34,12 @@ interface GetStartedCardProps extends PropsWithChildren {
   /**
    * Provides the action icon that's displayed at the footer of the card
    */
-  footerActionIcon: () => void | object;
+  footerActionIcon: React.ElementType;
 
   /**
    * Optional label for the top of the card
    */
-  label?: string | object | ReactNode;
+  label?: ReactNode;
 
   /**
    * Optional media content like an image to be placed in the card
@@ -50,7 +49,7 @@ interface GetStartedCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on the card showing the time and skill needed
    */
-  metadata: MetaData[];
+  metadata: readonly MetaData[];
 
   /**
    * Provides the callback for a clickable card
@@ -60,7 +59,7 @@ interface GetStartedCardProps extends PropsWithChildren {
   /**
    * Provides the icon that's displayed at the top of the card
    */
-  pictogram?: CarbonIconType;
+  pictogram?: () => ReactNode;
 
   /**
    * Provides number for card for tasks in a sequential order
@@ -75,7 +74,7 @@ interface GetStartedCardProps extends PropsWithChildren {
   /**
    * Title that's displayed at the top of the card
    */
-  title?: string | object | ReactNode;
+  title?: ReactNode;
 }
 
 /**
@@ -117,11 +116,7 @@ GetStartedCard.propTypes = {
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Optional media content like an image to be placed in the card
@@ -164,9 +159,5 @@ GetStartedCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

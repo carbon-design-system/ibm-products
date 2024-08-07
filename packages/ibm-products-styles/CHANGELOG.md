@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.43.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.42.0-rc.0...@carbon/ibm-products-styles@2.43.0-rc.0) (2024-08-05)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** breadcrumb style issue ([#5761](https://github.com/carbon-design-system/ibm-products/issues/5761)) ([f6e154f](https://github.com/carbon-design-system/ibm-products/commit/f6e154f64da8835e0b5baeb0e2cf007c26174f69))
+* **CreateModal:** unnecessary background removed ([#5741](https://github.com/carbon-design-system/ibm-products/issues/5741)) ([fcf7b57](https://github.com/carbon-design-system/ibm-products/commit/fcf7b57ef754ebbdb66eb8493d6fde6ab3099e9c))
+* **datagrid:** screen reader misreads datagrid table headers ([#5716](https://github.com/carbon-design-system/ibm-products/issues/5716)) ([137f5b1](https://github.com/carbon-design-system/ibm-products/commit/137f5b1f103140707b90e1d6f94a0e7ba2636883))
+
+
+### Features
+
+* **ConditionBuilder:** design review changes ([#5762](https://github.com/carbon-design-system/ibm-products/issues/5762)) ([5c1e568](https://github.com/carbon-design-system/ibm-products/commit/5c1e5682a1d849f809f252555001adadef3c2800))
+
+
+
+
+
+# [2.42.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.42.0-rc.0...@carbon/ibm-products-styles@2.42.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
 # [2.42.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.41.0...@carbon/ibm-products-styles@2.42.0-rc.0) (2024-07-22)
 
 

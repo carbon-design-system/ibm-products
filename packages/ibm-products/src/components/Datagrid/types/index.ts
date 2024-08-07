@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { MultiSelectProps } from '@carbon/react/lib/components/MultiSelect/MultiSelect';
 import { FormGroupProps } from '@carbon/react/lib/components/FormGroup/FormGroup';
 import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/RadioButton';

@@ -16,7 +16,7 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} {
-  background-color: $layer-01;
+  background-color: $border-interactive;
   color: $text-primary;
 }
 

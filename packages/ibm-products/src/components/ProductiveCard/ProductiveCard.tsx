@@ -138,11 +138,16 @@ interface ProductiveCardProps extends PropsWithChildren {
    * Determines title size
    */
   titleSize?: 'default' | 'large';
+
+  /**
+   * Tooltip icon description
+   */
+  iconDescription?: string;
 }
 
 export let ProductiveCard = forwardRef(
   (
-    { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
+    { actionsPlacement = 'top', iconDescription, ...rest }: ProductiveCardProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const validProps = prepareProps(rest, [
@@ -155,7 +160,13 @@ export let ProductiveCard = forwardRef(
     ]);
     return (
       <Card
-        {...{ ...validProps, actionsPlacement, ref, productive: true }}
+        {...{
+          ...validProps,
+          iconDescription,
+          actionsPlacement,
+          ref,
+          productive: true,
+        }}
         {...getDevtoolsProps(componentName)}
       />
     );
@@ -204,6 +215,10 @@ ProductiveCard.propTypes = {
     PropTypes.object,
     PropTypes.node,
   ]),
+  /**
+   * Tooltip icon description
+   */
+  iconDescription: PropTypes.string,
   /**
    * Optional label for the top of the card
    */

@@ -34,7 +34,7 @@ import {
 import DocsPage from './EditFullPage.docs-page';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditFullPage',
+  title: 'Experimental/Patterns/Edit and update/EditFullPage',
   component: EditFullPage,
   tags: ['autodocs'],
   parameters: {
@@ -138,6 +138,8 @@ const Template = ({ ...args }) => {
                   </DefinitionTooltip>
                 </div>
                 <Toggle
+                  labelText="Simulate error"
+                  hideLabel
                   id="simulated-error-toggle"
                   size="sm"
                   onToggle={(event) => setShouldReject(event)}
@@ -330,6 +332,8 @@ const TemplateWithSections = ({ ...args }) => {
                     </DefinitionTooltip>
                   </div>
                   <Toggle
+                    labelText="Simulate error"
+                    hideLabel
                     id="simulated-error-toggle"
                     size="sm"
                     onToggle={(event) => setShouldReject(event)}

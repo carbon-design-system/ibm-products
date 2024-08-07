@@ -20,7 +20,7 @@ import styles from '../_storybook-styles.scss?inline';
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'IBM Products/Components/Filter panel/FilterPanelCheckboxWithOverflow',
+  title: 'Experimental/Components/Filter panel/FilterPanelCheckboxWithOverflow',
   component: FilterPanelCheckboxWithOverflow,
   tags: ['autodocs'],
   argTypes: {

@@ -111,7 +111,7 @@ const defaultProps = {
       action on the card.
     </p>
   ),
-  primaryButtonText: 'Primary',
+  primaryButtonText: 'Button',
 };
 
 const Template = (opts) => {

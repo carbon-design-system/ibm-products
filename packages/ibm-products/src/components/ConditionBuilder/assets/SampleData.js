@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const sampleDataStructure_tree = {
@@ -130,7 +137,7 @@ export const sampleDataStructure_sentence = {
       conditions: [
         {
           property: 'region',
-          operator: 'one_of',
+          operator: 'oneOf',
           value: [
             {
               label: 'Africa',
@@ -152,7 +159,7 @@ export const sampleDataStructure_sentence = {
         {
           property: 'price',
           operator: 'is',
-          value: '3',
+          value: '3 Dollars',
           id: uuidv4(),
         },
       ],

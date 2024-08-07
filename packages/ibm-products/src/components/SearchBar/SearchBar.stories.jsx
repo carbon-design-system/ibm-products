@@ -14,7 +14,7 @@ import mdx from './SearchBar.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Components/Search bar/SearchBar',
+  title: 'Experimental/Components/Search bar/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {
@@ -58,6 +58,7 @@ const defaultProps = {
   clearButtonLabelText: 'Clear',
   placeholderText: 'Search...',
   submitLabel: 'Search',
+  labelText: 'Label text',
   onChange: (newVal) => action('onChange')(newVal),
   onSubmit: (newVal) => action('onSubmit')(newVal),
 };

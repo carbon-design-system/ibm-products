@@ -7,6 +7,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { gridData } from './Datagrid.stories/data/grid-data';
 import { makeData } from './utils/makeData';
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
@@ -92,7 +93,9 @@ const getColumns = (rows) => {
     {
       Header: 'Joined',
       accessor: 'joined',
-      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+      Cell: ({ cell: { value } }) => (
+        <span>{new Date(value).toLocaleDateString()}</span>
+      ),
     },
     {
       Header: 'Someone 1',
@@ -126,7 +129,7 @@ const getColumns = (rows) => {
 };
 
 export const BasicUsage = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(
     () => [
       ...getColumns(data),
@@ -147,7 +150,7 @@ export const BasicUsage = () => {
       console.log(currentColumn, allColumns),
   });
 
-  return <Datagrid datagridState={datagridState} title="Basic usage" />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 export const EmptyState = () => {
@@ -216,6 +219,12 @@ export const InitialLoad = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+InitialLoad.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const InfiniteScroll = () => {
   const [data, setData] = useState(makeData(0));
   const columns = React.useMemo(() => getColumns(data), []);
@@ -254,6 +263,12 @@ export const InfiniteScroll = () => {
   );
 };
 
+InfiniteScroll.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const WithVirtualizedData = () => {
   const [data] = useState(makeData(10000));
   const columns = React.useMemo(() => getColumns(data), []);
@@ -269,8 +284,14 @@ export const WithVirtualizedData = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+WithVirtualizedData.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const Pagination = () => {
-  const [data] = useState(makeData(100));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid({
     columns,
@@ -286,7 +307,7 @@ export const Pagination = () => {
 };
 
 export const SelectableRow = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const emptyStateTitle = 'Empty state title';
   const emptyStateDescription = 'Description explaining why the table is empty';
@@ -311,7 +332,7 @@ export const SelectableRow = () => {
 };
 
 export const RadioSelect = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -334,7 +355,7 @@ export const RadioSelect = () => {
 };
 
 export const HideSelectAll = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -349,7 +370,7 @@ export const HideSelectAll = () => {
 };
 
 export const SortableColumns = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -372,7 +393,7 @@ export const SortableColumns = () => {
 };
 
 export const ActionsDropdown = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -399,6 +420,12 @@ export const ActionsDropdown = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+ActionsDropdown.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 const DatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
@@ -422,7 +449,7 @@ const DatagridBatchActions = (datagridState) => {
 };
 
 export const BatchActions = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const columns = React.useMemo(
     () => [
@@ -482,8 +509,14 @@ export const BatchActions = () => {
   );
 };
 
+BatchActions.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const DisableSelectRow = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
@@ -501,8 +534,14 @@ export const DisableSelectRow = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+DisableSelectRow.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const FrozenColumns = () => {
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const columns = React.useMemo(
     () => [
@@ -574,6 +613,12 @@ export const FrozenColumns = () => {
   );
 };
 
+FrozenColumns.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
 export const Skeleton = () => {
   const [data] = useState([]);
   const columns = React.useMemo(() => [...getColumns(data)], []);
@@ -589,4 +634,10 @@ export const Skeleton = () => {
   });
 
   return <Datagrid datagridState={datagridState} />;
+};
+
+Skeleton.parameters = {
+  percy: {
+    skip: true,
+  },
 };

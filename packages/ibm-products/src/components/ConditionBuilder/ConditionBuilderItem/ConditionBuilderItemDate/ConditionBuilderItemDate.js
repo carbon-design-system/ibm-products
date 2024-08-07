@@ -1,19 +1,35 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useRef } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
-import { translateWithId } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 
-export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
+export const ConditionBuilderItemDate = ({
+  conditionState,
+  onChange,
+  parentRef,
+}) => {
   const DatePickerInputRef = useRef();
-
+  const [startText, endText] = useTranslations(['startText', 'endText']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 
+  const onCloseHandler = (selectedDate) => {
+    onChange(
+      selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID'
+    );
+  };
   return (
     <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
@@ -21,8 +37,9 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType="single"
-          onClose={onChange}
           value={conditionState.value}
+          onClose={onCloseHandler}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePicker"
@@ -37,18 +54,19 @@ export const ConditionBuilderItemDate = ({ conditionState, onChange }) => {
           ref={DatePickerInputRef}
           dateFormat="d/m/Y"
           datePickerType={datePickerType}
-          onClose={onChange}
+          onClose={onCloseHandler}
           value={conditionState.value}
+          appendTo={parentRef?.current}
         >
           <DatePickerInput
             id="datePickerStart"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('start')}
+            labelText={startText}
           />
           <DatePickerInput
             id="datePickerEnd"
             placeholder="dd/mm/yyyy"
-            labelText={translateWithId('end')}
+            labelText={endText}
           />
         </DatePicker>
       )}
@@ -65,4 +83,9 @@ ConditionBuilderItemDate.propTypes = {
    * callback to update state oin date change
    */
   onChange: PropTypes.func,
+
+  /**
+   * reference to the popover node
+   */
+  parentRef: PropTypes.object,
 };

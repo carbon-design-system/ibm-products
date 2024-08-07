@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.5.0-rc.0...jest-config-ibm-cloud-cognitive@1.5.0) (2024-07-31)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.5.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.4.0...jest-config-ibm-cloud-cognitive@1.5.0-rc.0) (2024-07-22)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.4.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.4.0-rc.0...jest-config-ibm-cloud-cognitive@1.4.0) (2024-07-17)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.4.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.3.0...jest-config-ibm-cloud-cognitive@1.4.0-rc.0) (2024-07-08)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.3.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.3.0-rc.0...jest-config-ibm-cloud-cognitive@1.3.0) (2024-07-03)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+# [1.3.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.2.0...jest-config-ibm-cloud-cognitive@1.3.0-rc.0) (2024-06-24)
+
+
+### Bug Fixes
+
+* upgrade sass and remove `--` prefix from function names ([#5371](https://github.com/carbon-design-system/ibm-products/issues/5371)) ([91f282e](https://github.com/carbon-design-system/ibm-products/commit/91f282e56eec038f7efda4dd15c08d708c46cb58))
+
+
+
+
+
 # [1.2.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.1.7...jest-config-ibm-cloud-cognitive@1.2.0) (2024-06-11)
 
 

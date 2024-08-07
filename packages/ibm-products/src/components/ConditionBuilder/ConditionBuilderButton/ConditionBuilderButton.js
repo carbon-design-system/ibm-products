@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import cx from 'classnames';
 
@@ -5,6 +12,7 @@ import PropTypes from 'prop-types';
 import { Tooltip } from '@carbon/react';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { WarningAltFilled } from '@carbon/react/icons';
+import { usePrefix } from '@carbon/react';
 
 export const ConditionBuilderButton = ({
   className,
@@ -21,12 +29,15 @@ export const ConditionBuilderButton = ({
   onMouseLeave,
   isInvalid,
   wrapperClassName,
+  tabIndex,
+  ...rest
 }) => {
+  const carbonPrefix = usePrefix();
   const Button = () => {
+    const dataName = rest['data-name'] ?? '';
     return (
       <button
-        // role={'gridcell'}
-        tabIndex={-1}
+        tabIndex={tabIndex != undefined ? tabIndex : -1}
         className={cx([
           className,
           `${blockClass}__button`,
@@ -42,6 +53,8 @@ export const ConditionBuilderButton = ({
         onFocus={onFocus}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        data-name={dataName}
+        {...rest}
       >
         {Icon && <Icon />}
         {!hideLabel && <span>{label}</span>}
@@ -54,8 +67,9 @@ export const ConditionBuilderButton = ({
     <Tooltip
       label={label}
       align={tooltipAlign}
-      className={`${wrapperClassName}`}
+      className={`${wrapperClassName} ${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       {...wrapperProps}
+      leaveDelayMs={0}
     >
       {Button()}
     </Tooltip>
@@ -91,8 +105,8 @@ ConditionBuilderButton.propTypes = {
    */
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
-  onMouseEnter: PropTypes.func,
 
+  onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -104,11 +118,15 @@ ConditionBuilderButton.propTypes = {
    *decides if  tooltip to be shown
    */
   showToolTip: PropTypes.bool,
+
+  /**
+   * Tab index
+   */
+  tabIndex: PropTypes.number,
   /**
    * tooltip position
    */
   tooltipAlign: PropTypes.string,
-
   /**
    * classname applies to the wrapper of popover
    */

@@ -14,12 +14,15 @@ import styles from './_storybook-styles.scss?inline';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Components/Data spreadsheet/DataSpreadsheet',
+  title: 'Experimental/Components/Data spreadsheet/DataSpreadsheet',
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {
     onActiveCellChange: {
       action: 'active cell change',
+    },
+    onColDrag: {
+      action: 'on column drag',
     },
     onSelectionAreaChange: {
       action: 'selection area change',
@@ -164,6 +167,7 @@ const WithManyColumns = ({ ...args }) => {
   const [data, setData] = useState(() =>
     generateData({ rows: 24, extraColumns: true })
   );
+
   const columnDataClone = useMemo(
     () => [
       ...columnData,
@@ -185,6 +189,74 @@ const WithManyColumns = ({ ...args }) => {
       columns={columns}
       data={data}
       onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
+const WithDifferentOptions = ({ ...args }) => {
+  const [data, setData] = useState(() =>
+    generateData({ rows: 24, extraColumns: true })
+  );
+  const columnDataClone = useMemo(
+    () => [
+      ...columnData,
+      {
+        Header: 'Owner name',
+        accessor: 'ownerName',
+      },
+      {
+        Header: 'Weight',
+        accessor: 'weight',
+      },
+    ],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
+
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
+const dragDropCallback = ({ ...args }) => {
+  const [data, setData] = useState(() =>
+    generateData({ rows: 24, extraColumns: true })
+  );
+
+  const onColumnDragDrop = (tableData) => {
+    // Dev can debug here
+  };
+
+  const columnDataClone = useMemo(
+    () => [
+      ...columnData,
+      {
+        Header: 'Owner name',
+        accessor: 'ownerName',
+      },
+      {
+        Header: 'Weight',
+        accessor: 'weight',
+      },
+    ],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
+
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      onColDrag={onColumnDragDrop}
       id="spreadsheet--id"
       {...args}
     />
@@ -227,6 +299,24 @@ emptyWithCells.args = {
 export const withManyColumns = WithManyColumns.bind({});
 withManyColumns.storyName = 'With many columns';
 withManyColumns.args = {
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+  totalVisibleColumns: 5,
+};
+
+export const withDifferentOptions = WithDifferentOptions.bind({});
+withDifferentOptions.storyName = 'With different options';
+withDifferentOptions.args = {
+  readOnlyTable: false,
+  disableColumnSwapping: false,
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
+  totalVisibleColumns: 5,
+};
+
+export const withDragDropCallback = dragDropCallback.bind({});
+withDragDropCallback.storyName = 'With drag drop  callback';
+withDragDropCallback.args = {
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',
   totalVisibleColumns: 5,

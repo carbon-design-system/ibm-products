@@ -15,7 +15,7 @@ test.describe('EditTearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditTearsheetNarrow',
-      id: 'ibm-products-patterns-edit-and-update-edittearsheetnarrow--edit-tearsheet-narrow',
+      id: 'experimental-patterns-edit-and-update-edittearsheetnarrow--edit-tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },

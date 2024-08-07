@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
+import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -15,14 +14,82 @@ import { pkg } from '../../settings';
 import { Card } from '../Card';
 const componentName = 'GetStartedCard';
 
+type MetaData = {
+  id?: string;
+  icon?: () => ReactNode;
+  iconDescription?: string;
+};
+
+interface GetStartedCardProps extends PropsWithChildren {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+
+  /**
+   * Optional if the card should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provides the action icon that's displayed at the footer of the card
+   */
+  footerActionIcon: React.ElementType;
+
+  /**
+   * Optional label for the top of the card
+   */
+  label?: ReactNode;
+
+  /**
+   * Optional media content like an image to be placed in the card
+   */
+  media?: ReactNode;
+
+  /**
+   * Icons that are displayed on the card showing the time and skill needed
+   */
+  metadata: readonly MetaData[];
+
+  /**
+   * Provides the callback for a clickable card
+   */
+  onClick?: () => void;
+
+  /**
+   * Provides the icon that's displayed at the top of the card
+   */
+  pictogram?: () => ReactNode;
+
+  /**
+   * Provides number for card for tasks in a sequential order
+   */
+  sequence?: number;
+
+  /**
+   * Provides the status that's displayed at the top of the card
+   */
+  status?: 'complete' | 'incomplete';
+
+  /**
+   * Title that's displayed at the top of the card
+   */
+  title?: ReactNode;
+}
+
 /**
  * GetStartedCard a card with icon, number, and media variants
  */
-export let GetStartedCard = React.forwardRef(({ ...rest }, ref) => {
-  return (
-    <Card getStarted ref={ref} {...rest} {...getDevtoolsProps(componentName)} />
-  );
-});
+export let GetStartedCard = React.forwardRef(
+  (props: GetStartedCardProps, ref: React.Ref<HTMLDivElement>) => {
+    return (
+      <Card
+        {...{ ...props, ref, getStarted: true }}
+        {...getDevtoolsProps(componentName)}
+      />
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 GetStartedCard = pkg.checkComponentEnabled(GetStartedCard, componentName);
@@ -43,16 +110,13 @@ GetStartedCard.propTypes = {
   /**
    * Provides the action icon that's displayed at the footer of the card
    */
+  /**@ts-ignore */
   footerActionIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Optional media content like an image to be placed in the card
@@ -62,6 +126,7 @@ GetStartedCard.propTypes = {
   /**
    * Icons that are displayed on the card showing the time and skill needed
    */
+  /**@ts-ignore */
   metadata: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -78,6 +143,7 @@ GetStartedCard.propTypes = {
   /**
    * Provides the icon that's displayed at the top of the card
    */
+  /**@ts-ignore */
   pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
@@ -93,9 +159,5 @@ GetStartedCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.node,
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

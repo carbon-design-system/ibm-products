@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const notes = `
 # Select all toggle
 Use this feature will allow user to toggle the select all checkbox behavior between selecting all rows **on current page** vs **across all pages**

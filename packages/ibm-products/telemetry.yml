@@ -49,16 +49,18 @@ collect:
         - closeIconDescription
         - collapseButtonLabel
         - collapsible
+        - column
         - columnInputPlaceholder
         - columns
         - condition
-        - conditionBuilderRef
         - conditionState
         - config
         - containingElementRef
         - count
         - currentMatcher
         - currentStep
+        - CustomizeColumnsButton
+        - customizeColumnsProps
         - CustomizeColumnsTearsheet
         - customizeTearsheetHeadingLabel
         - data
@@ -69,6 +71,7 @@ collect:
         - defaultColumn
         - defaultEmptyRowCount
         - description
+        - disableColumnSwapping
         - disabled
         - disabledCell
         - disableSubmit
@@ -100,6 +103,7 @@ collect:
         - formDescription
         - formTitle
         - fullHeightDatagrid
+        - getActionsState
         - getConditionState
         - getFilterFlyoutProps
         - getOptions
@@ -121,6 +125,7 @@ collect:
         - handleResize
         - hasActions
         - hasCloseIcon
+        - hasCustomRowHeader
         - hasFieldset
         - headerGroups
         - HeaderRow
@@ -200,6 +205,7 @@ collect:
         - onActiveCellChange
         - onAllRowSelect
         - onApply
+        - onBlur
         - onCancel
         - onChange
         - onClick
@@ -261,11 +267,15 @@ collect:
         - productive
         - radio
         - reactTableFiltersState
+        - readOnlyTable
         - renderIcon
+        - renderRowHeader
+        - renderRowHeaderDirection
         - resetToDefaultLabel
         - resizerAriaLabel
         - rightAlign
         - row
+        - rowActions
         - rows
         - rowSize
         - score
@@ -284,6 +294,7 @@ collect:
         - selectAllLabel
         - selectAllToggle
         - selected
+        - selectedHeaderReorderActive
         - selectedOption
         - selectionAreas
         - selectorPageContent
@@ -302,6 +313,7 @@ collect:
         - setMouseOverRowIndex
         - setMultiSelection
         - setPopoverOpen
+        - setSelectedHeaderReorderActive
         - setSelectionAreaData
         - setSelectionAreas
         - showAllTagsLabel
@@ -333,6 +345,7 @@ collect:
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
+        - translateWithId
         - translateWithIdBatchActions
         - truncate
         - truncateValue
@@ -488,6 +501,7 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - autoAlign
         - overlayClassName
         - overlayKind
         - overlayRef
@@ -516,24 +530,30 @@ collect:
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
+        - setShowDeletionPreviewForSubgroups
         # ConditionBuilderAdd
         - buttonLabel
         - enableSubGroup
         # ConditionBuilderButton
         - hideLabel
-        - onBlur
+        - isInvalid
         - onFocus
         - onMouseEnter
         - onMouseLeave
         - tooltipAlign
+        - wrapperClassName
         - wrapperProps
-        # ConditionBuilderContent
-        - getActionsState
         # ConditionBuilderItem
         - popOverClassName
+        - renderChildren
+        # ConditionBuilderItemDate
+        - parentRef
+        # ConditionBuilderProvider
+        - conditionBuilderRef
         # ConditionConnector
         - operator
         # ConditionPreview
+        - colorIndex
         - previewType
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel
@@ -553,6 +573,7 @@ collect:
         - primaryButtonTextLabel
         - secondaryButtonTextLabel
         # DataSpreadsheet
+        - onColDrag
         - spreadsheetAriaLabel
         # DataSpreadsheetBody
         - activeCellRef
@@ -564,6 +585,7 @@ collect:
         - setClickAndHoldActive
         - setColumnOrder
         - setContainerHasFocus
+        - setCurrentColumns
         - totalColumnsWidth
         # DataSpreadsheetHeader
         - headerCellHoldActive
@@ -749,7 +771,6 @@ collect:
         - warnText
         # OverflowCheckboxes
         - applyFilters
-        - column
         - components
         - filtersState
         - setFiltersState
@@ -780,6 +801,7 @@ collect:
         - inputInvalidText
         - inputLabelText
         - inputPlaceholderText
+        - primaryDangerDescription
         - resourceName
         - textConfirmation
         # RowSizeDropdown
@@ -815,7 +837,6 @@ collect:
         - sortItems
         - submitLabel
         - titleText
-        - translateWithId
         # SelectAllWithToggle
         - getToggleAllPageRowsSelectedProps
         - getToggleAllRowsSelectedProps
@@ -1011,6 +1032,9 @@ collect:
         # General - primaryButtonPlacement
         - bottom
         - top
+        # General - renderRowHeaderDirection
+        - left
+        - right
         # General - rowSize
         - lg
         - md
@@ -1080,6 +1104,9 @@ collect:
         # General - updateMethod
         - batch
         - instant
+        # General - variant
+        - sentence
+        - tree
         # General - verticalPosition
         - lower
         - normal
@@ -1124,19 +1151,6 @@ collect:
         - text
         # PageHeader - fullWidthGrid
         - xl
-        # StringFormatter - tooltipDirection
-        - '"bottom-left"'
-        - '"bottom-right"'
-        - '"bottom"'
-        - '"left-bottom"'
-        - '"left-top"'
-        - '"left"'
-        - '"right-bottom"'
-        - '"right-top"'
-        - '"right"'
-        - '"top-left"'
-        - '"top-right"'
-        - '"top"'
   npm:
     dependencies: null
   js:

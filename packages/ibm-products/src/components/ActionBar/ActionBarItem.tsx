@@ -6,7 +6,7 @@
 //
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ForwardedRef, PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,10 +15,45 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { IconButton } from '@carbon/react';
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ActionBarItem';
 const blockClass = `${pkg.prefix}--action-bar-item`;
+
+interface ActionBarItemProps extends PropsWithChildren {
+  /**
+   * Specify an optional className to be added to your Button
+   *
+   * (inherited from Carbon Button)
+   */
+  className?: string;
+  /**
+   * If specifying the `renderIcon` prop, provide a description for that icon that can
+   * be read by screen readers
+   *
+   * (inherited from Carbon Button)
+   */
+  label?: string;
+  /**
+   * Optional click handler
+   *
+   * (inherited from Carbon Button)
+   */
+  onClick?: () => void;
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   *
+   * (inherited from Carbon Button)
+   */
+  renderIcon?: CarbonIconType;
+
+  /**
+   * Optional tab index
+   */
+  tabIndex?: number;
+}
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -26,7 +61,10 @@ const blockClass = `${pkg.prefix}--action-bar-item`;
  * The ActionBarItem is used in the page header to populate the action bar
  */
 export let ActionBarItem = React.forwardRef(
-  ({ label, className, renderIcon, ...rest }, ref) => {
+  (
+    { label, className, renderIcon, ...rest }: ActionBarItemProps,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     const Icon = renderIcon;
 
     return (
@@ -37,7 +75,7 @@ export let ActionBarItem = React.forwardRef(
           className: cx(blockClass, className),
           kind: 'ghost',
           size: 'md',
-          align: 'bottom-right',
+          align: 'bottom-end',
           type: 'button',
           label,
         }}
@@ -98,5 +136,11 @@ ActionBarItem.propTypes = {
    *
    * (inherited from Carbon Button)
    */
+  /**@ts-ignore */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional tab index
+   */
+  tabIndex: PropTypes.number,
 };

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { MultiSelectProps } from '@carbon/react/lib/components/MultiSelect/MultiSelect';
 import { FormGroupProps } from '@carbon/react/lib/components/FormGroup/FormGroup';
 import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/RadioButton';
@@ -26,11 +33,13 @@ import {
   TableCommonProps,
   TableDispatch,
   TableInstance,
+  TableState,
   TableToggleAllRowsSelectedProps,
   UseExpandedRowProps,
   UseFiltersInstanceProps,
   UsePaginationInstanceProps,
   UseResizeColumnsColumnProps,
+  UseResizeColumnsOptions,
   UseResizeColumnsState,
   UseRowSelectInstanceProps,
   UseRowSelectRowProps,
@@ -103,6 +112,18 @@ interface Labels {
   allPageRows?: object;
   allRows?: object;
 }
+interface ColumnLabels {
+  findColumnPlaceholderLabel?: string;
+  resetToDefaultLabel?: string;
+  customizeTearsheetHeadingLabel?: string;
+  primaryButtonTextLabel?: string;
+  secondaryButtonTextLabel?: string;
+  instructionsLabel?: string;
+  iconTooltipLabel?: string;
+  assistiveTextInstructionsLabel?: string;
+  assistiveTextDisabledInstructionsLabel?: string;
+  selectAllLabel?: string;
+}
 
 interface Section {
   categoryTitle?: string;
@@ -137,7 +158,9 @@ export interface DatagridTableHooks<T extends object = any>
 
 export interface DatagridColumn<T extends object = any>
   extends ColumnInstance<T>,
-    UseSortByOptions<T> {
+    UseSortByOptions<T>,
+    Partial<UseResizeColumnsColumnProps<T>>,
+    UseResizeColumnsOptions<T> {
   sticky?: 'left' | 'right';
   className?: string;
   rightAlignedColumn?: boolean;
@@ -175,11 +198,7 @@ export interface DataGridHeaderGroup<T extends object = any>
   extends HeaderGroup<T>,
     UseResizeColumnsColumnProps<T> {}
 
-export interface TableProps {
-  className?: string;
-  role?: string;
-  style?: CSSStyleDeclaration;
-}
+export interface DataGridTableProps extends TableCommonProps {}
 
 interface DataGridTableState
   extends UseResizeColumnsState<any>,
@@ -188,7 +207,18 @@ interface DataGridTableState
 }
 
 export interface DataGridTableInstance<T extends object = any>
-  extends TableInstance<T> {}
+  extends Omit<TableInstance<T>, 'state'>,
+    Partial<UsePaginationInstanceProps<any>> {
+  shouldDisableSelectRow?: (...args) => void | boolean;
+  state?: Partial<TableState & UseRowSelectState<any>>;
+  disableSelectAll?: boolean;
+  disableSelectRowsProps?: {
+    labels?: {
+      toggleAllRowsLabel?: string;
+    };
+  };
+  withSelectRows?: boolean;
+}
 
 export interface RowAction {
   id?: string;
@@ -288,6 +318,13 @@ export interface DataGridState<T extends object = any>
   expandedRowIds?: object;
   onRowClick?: (row, event) => void;
   onSort?: boolean;
+  customizeColumnsProps?: {
+    onSaveColumnPrefs?: (args) => void;
+    labels?: ColumnLabels;
+    isTearsheetOpen?: boolean;
+    setIsTearsheetOpen?: (args: boolean) => void;
+  };
+  CustomizeColumnsButton?: (args: any) => ReactNode;
   column?: DatagridColumn;
   expandedContentHeight?: number;
   onRowExpand?: (
@@ -295,6 +332,12 @@ export interface DataGridState<T extends object = any>
     event: React.MouseEvent<HTMLElement>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
+}
+
+export interface DataGridData {
+  instance?: DataGridTableInstance;
+  column?: DatagridColumn;
+  cell?: DataGridCell;
 }
 
 // DatagridHeaderRow related types
@@ -320,3 +363,8 @@ export type VisibleColumns<T extends object = {}> = (
 ) => Array<Column<T>>;
 
 export type NodeFuncType = (props) => ReactNode;
+
+export interface PropGetterMeta {
+  instance?: DataGridTableInstance;
+  row?: Partial<Row<any> & DatagridRow<any>>;
+}

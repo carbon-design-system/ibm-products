@@ -1,14 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { useState, useRef, useEffect, useContext } from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Add } from '@carbon/react/icons';
 import {
   blockClass,
-  translateWithId,
   valueRenderers,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
+import { useTranslations } from '../utils/useTranslations';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
+import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
 
 export const ConditionBuilderItem = ({
   children,
@@ -21,25 +30,49 @@ export const ConditionBuilderItem = ({
   condition,
   popOverClassName,
   config,
+  renderChildren,
+  onChange,
   ...rest
 }) => {
-  const contentRef = useRef(null);
+  const popoverRef = useRef(null);
   const [open, setOpen] = useState(false);
 
+  const [
+    invalidText,
+    addConditionText,
+    addPropertyText,
+    addOperatorText,
+    addValueText,
+    labelText,
+  ] = useTranslations([
+    'invalidText',
+    'addConditionText',
+    'addPropertyText',
+    'addOperatorText',
+    'addValueText',
+    label,
+  ]);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const getPropertyDetails = () => {
-    if (label === 'INVALID') {
+    const { property, operator } = condition || {};
+    if (
+      label === 'INVALID' ||
+      (rest['data-name'] === 'propertyField' && property === 'INVALID') ||
+      (rest['data-name'] === 'operatorField' && operator === 'INVALID')
+    ) {
       return {
-        propertyLabel: translateWithId('invalid_text'),
+        propertyLabel: invalidText,
         isInvalid: true,
       };
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
         ? valueRenderers[type](label, config)
-        : label;
+        : labelText;
+
     return {
       isInvalid: false,
-      propertyLabel: translateWithId(propertyId),
+      propertyLabel: propertyId,
     };
   };
   const { propertyLabel, isInvalid } = getPropertyDetails();
@@ -50,76 +83,124 @@ export const ConditionBuilderItem = ({
      * popoverToOpen hold the next popover to be opened if required
      */
     if (condition) {
-      let currentField = rest['data-name'];
+      const currentField = rest['data-name'];
       //if any condition is changed, state prop is triggered
       if (condition.popoverToOpen && currentField !== condition.popoverToOpen) {
         // close the previous popover
-        setOpen(false);
+        closePopover();
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'one_of'
+        condition.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
-        setOpen(false);
+        closePopover();
       }
       if (condition.popoverToOpen == currentField) {
         //current popover need to be opened
-        setOpen(true);
+        openPopOver();
       }
     } else {
       // when we change any statement(if/ excl.if) which is not part of condition state, label change is triggered.
       //close popOver when statement is changed.
-      setOpen(false);
+      closePopover();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [condition, label]);
 
   useEffect(() => {
     //this will focus the first input field in the popover
-    if (open && contentRef.current) {
-      const firstFocusableElement = contentRef.current.querySelector('input');
+    if (open && popoverRef.current) {
+      const firstFocusableElement =
+        popoverRef.current.querySelector('input,textarea');
       if (firstFocusableElement) {
-        firstFocusableElement.focus();
+        setTimeout(() => firstFocusableElement.focus(), 0);
       }
     }
-  }, [contentRef, open]);
+  }, [popoverRef, open]);
+
+  const manageInvalidSelection = () => {
+    //when the user didn't select any value , we need to show as incomplete
+    if (
+      (rest['data-name'] === 'propertyField' && !condition?.property) ||
+      (rest['data-name'] === 'operatorField' && !condition?.operator) ||
+      (rest['data-name'] === 'valueField' && !condition?.value)
+    ) {
+      onChange?.('INVALID');
+    }
+  };
+  const closePopover = () => {
+    if (open) {
+      manageInvalidSelection();
+    }
+    setOpen(false);
+  };
+  const openPopOver = () => setOpen(true);
+  const togglePopover = () => {
+    if (children || renderChildren) {
+      setOpen(!open);
+    }
+  };
+
+  const handleKeyDownHandler = (evt) => {
+    handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef);
+    if (evt.key === 'Escape') {
+      manageInvalidSelection();
+    }
+  };
+
+  const getLabel = () => {
+    if (propertyLabel) {
+      return propertyLabel;
+    } else if (rest['data-name'] === 'propertyField') {
+      return addPropertyText;
+    } else if (rest['data-name'] === 'operatorField') {
+      return addOperatorText;
+    } else if (rest['data-name'] === 'valueField') {
+      return addValueText;
+    } else {
+      return addConditionText;
+    }
+  };
 
   return (
     <Popover
       open={open}
       isTabTip
       role="gridcell"
-      className={popOverClassName}
-      onRequestClose={() => {
-        setOpen(false);
-      }}
+      className={`${popOverClassName} ${blockClass}__popover`}
+      ref={popoverRef}
+      onRequestClose={closePopover}
     >
       <ConditionBuilderButton
-        label={propertyLabel ?? translateWithId('add_condition')}
+        label={getLabel()}
         hideLabel={!label ? true : false}
-        onClick={() => {
-          children ? setOpen(!open) : null;
-        }}
+        onClick={togglePopover}
         className={className}
         aria-haspopup
         aria-expanded={open}
         renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
         showToolTip={showToolTip}
         isInvalid={isInvalid}
+        condition={condition}
         {...rest}
       />
 
-      <PopoverContent
-        className={`${blockClass}__item__content`}
-        role="dialog"
-        aria-label={`${title}`}
-      >
-        <Layer>
-          <h1 className={`${blockClass}__item__title`}>{title}</h1>
-          <div ref={contentRef}>{open && children}</div>
-        </Layer>
-      </PopoverContent>
+      {open && (
+        <PopoverContent
+          className={`${blockClass}__popover-content-wrapper`}
+          role="dialog"
+          aria-label={title}
+          onKeyDown={handleKeyDownHandler}
+        >
+          <Layer>
+            <h1 className={`${blockClass}__item__title`}>{title}</h1>
+            <div className={`${blockClass}__popover-content`}>
+              {renderChildren ? renderChildren(popoverRef) : children}
+            </div>
+          </Layer>
+        </PopoverContent>
+      )}
     </Popover>
   );
 };
@@ -154,9 +235,19 @@ ConditionBuilderItem.propTypes = {
   ]),
 
   /**
+   * callback to update the current condition of the state tree
+   */
+  onChange: PropTypes.func,
+
+  /**
    * class name for popover
    */
   popOverClassName: PropTypes.string,
+
+  /**
+   * callback prop that returns the jsx for children
+   */
+  renderChildren: PropTypes.func,
 
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -172,7 +263,6 @@ ConditionBuilderItem.propTypes = {
    * title of the popover
    */
   title: PropTypes.string,
-
   /**
    * input type
    */

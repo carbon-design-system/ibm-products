@@ -15,7 +15,7 @@ test.describe('EditTearsheetForm @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditTearsheetForm',
-      id: 'ibm-products-patterns-edit-and-update-edittearsheet--multi-form-edit-tearsheet',
+      id: 'experimental-patterns-edit-and-update-edittearsheet--multi-form-edit-tearsheet',
       globals: {
         carbonTheme: 'white',
       },

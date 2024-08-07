@@ -24,13 +24,13 @@ export const overlayVariants = {
 };
 
 export const panelVariants = {
-  visible: ({ shouldReduceMotion }) => ({
+  visible: () => ({
     x: 0,
     transition: {
       duration: DURATIONS.moderate02,
       ease: EASINGS.productive.standard,
     },
-    opacity: shouldReduceMotion && 1,
+    opacity: 1,
   }),
   hidden: ({ placement, shouldReduceMotion }) => ({
     x:
@@ -41,7 +41,7 @@ export const panelVariants = {
         : shouldReduceMotion
         ? 0
         : -320,
-    opacity: shouldReduceMotion && 0,
+    opacity: shouldReduceMotion ? 0 : 1,
   }),
   exit: ({ placement, shouldReduceMotion }) => ({
     x:
@@ -56,7 +56,7 @@ export const panelVariants = {
       duration: DURATIONS.moderate01,
       ease: EASINGS.productive.exit,
     },
-    opacity: shouldReduceMotion && 0,
+    opacity: shouldReduceMotion ? 0 : 1,
   }),
 };
 

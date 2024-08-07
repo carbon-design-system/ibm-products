@@ -33,7 +33,7 @@ const numericOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/Big numbers/BigNumbers',
+  title: 'Experimental/Components/Big numbers/BigNumbers',
   component: BigNumbers,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -126,7 +126,7 @@ export default {
 
 const defaultProps = {
   label: 'Label',
-  value: 12345.678,
+  value: 54321.678,
   total: 678901.2456,
   percentage: false,
   size: BigNumbersSize.Default,

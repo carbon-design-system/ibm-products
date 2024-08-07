@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
@@ -171,7 +172,7 @@ const ExpansionRenderer = ({ row }) => {
 
 const ExpandedRows = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const datagridState = useDatagrid(
     {

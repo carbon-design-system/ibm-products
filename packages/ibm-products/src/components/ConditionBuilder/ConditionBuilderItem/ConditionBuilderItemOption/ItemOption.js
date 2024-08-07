@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import { Search } from '@carbon/react';
@@ -6,15 +13,16 @@ import { Checkmark } from '@carbon/react/icons';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  translateWithId,
-} from '../../ConditionBuilderContext/DataConfigs';
+import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef();
-
+  const [propertyText, clearSearchText] = useTranslations([
+    'propertyText',
+    'clearSearchText',
+  ]);
   const allOptions = config.options;
   const [searchValue, setSearchValue] = useState('');
 
@@ -51,7 +59,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
       ? conditionState.label
       : conditionState.property
       ? conditionState.property
-      : translateWithId('property');
+      : propertyText;
   };
 
   if (!allOptions) {
@@ -63,8 +71,8 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={translateWithId('clear_search')}
-            closeButtonLabelText={translateWithId('clear_search')}
+            labelText={clearSearchText}
+            closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
           />
         </div>

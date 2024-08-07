@@ -30,10 +30,6 @@ export interface DatagridProps {
    * The data grid state, much of it being supplied by the useDatagrid hook
    */
   datagridState: DataGridState;
-  /**
-   * Table title
-   */
-  title?: string;
 }
 
 /**
@@ -41,7 +37,7 @@ export interface DatagridProps {
  */
 export let Datagrid = React.forwardRef(
   (
-    { datagridState, title, ariaToolbarLabel, ...rest }: DatagridProps,
+    { datagridState, ariaToolbarLabel, ...rest }: DatagridProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     if (!datagridState) {
@@ -65,7 +61,6 @@ export let Datagrid = React.forwardRef(
       datagridState.rows) as DatagridRow[];
 
     const props = {
-      title,
       datagridState,
       ariaToolbarLabel,
     };
@@ -127,8 +122,4 @@ Datagrid.propTypes = {
    */
   /**@ts-ignore */
   datagridState: PropTypes.object.isRequired,
-  /**
-   * Table title
-   */
-  title: PropTypes.string,
 };

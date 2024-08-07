@@ -1,17 +1,27 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useCallback, useContext } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import {
   blockClass,
   connectorConfig,
-  translateWithId,
 } from '../ConditionBuilderContext/DataConfigs';
 import PropTypes from 'prop-types';
 import { focusThisField } from '../utils/util';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
+import { useTranslations } from '../utils/useTranslations';
+import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 
 const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
-  const { variant } = useContext(ConditionBuilderContext);
+  const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
+  const [connectorText] = useTranslations(['connectorText']);
+
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {
       parentGroup.classList.add('hoveredConnector');
@@ -29,18 +39,18 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
   };
   const onChangeHandler = (op, evt) => {
     onChange(op);
-    focusThisField(evt);
+    focusThisField(evt, conditionBuilderRef);
   };
   return variant == 'tree' ? (
-    <span className={`${className} ${blockClass}__connector-disabled`}>
-      {operator}
+    <span className={`${className} ${blockClass}__connector--disabled`}>
+      <ConditionBuilderButton label={operator} />
     </span>
   ) : (
     // <div className={className} {...rest}>
 
     <ConditionBuilderItem
       label={operator}
-      title={translateWithId('connector')}
+      title={connectorText}
       data-name="connectorField"
       onMouseEnter={activeConnectorHandler}
       onMouseLeave={inActiveConnectorHandler}
@@ -56,7 +66,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
         }}
         conditionState={{
           value: operator,
-          label: translateWithId('connector'),
+          label: connectorText,
         }}
         onChange={onChangeHandler}
       />

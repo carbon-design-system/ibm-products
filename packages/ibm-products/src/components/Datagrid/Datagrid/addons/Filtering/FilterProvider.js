@@ -55,7 +55,15 @@ const updateFilterState = (state, type, value) => {
   return removeFilterItem(state, filterTagIndex);
 };
 
-export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
+export const clearSingleFilter = (
+  { key, value, tableId },
+  setAllFilters,
+  state,
+  contextTableId
+) => {
+  if (tableId !== contextTableId) {
+    return;
+  }
   const tempState = [...state.filters];
   tempState.forEach((f, filterIndex) => {
     if (f.id === key) {
@@ -67,7 +75,7 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
           When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
           This checks if all the checkboxes are selected = false and removes it from the array
         */
-        const valueIndex = filterValues.findIndex((val) => val.id === value);
+        const valueIndex = filterValues.findIndex((val) => val.value === value);
         filterValues[valueIndex].selected = false;
         const updatedFilterObject = {
           ...f,
@@ -90,8 +98,8 @@ export const clearSingleFilter = ({ key, value }, setAllFilters, state) => {
   setAllFilters(tempState);
 };
 
-const handleSingleFilterRemoval = (key, value) => {
-  EventEmitter.dispatch(CLEAR_SINGLE_FILTER, { key, value });
+const handleSingleFilterRemoval = (key, value, tableId) => {
+  EventEmitter.dispatch(CLEAR_SINGLE_FILTER, { key, value, tableId });
 };
 
 const formatDateRange = (startDate, endDate) => {
@@ -100,13 +108,13 @@ const formatDateRange = (startDate, endDate) => {
   return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
 };
 
-const prepareFiltersForTags = (filters, renderDateLabel) => {
+const prepareFiltersForTags = (filters, renderDateLabel, tableId) => {
   const tags = [];
 
   filters.forEach(({ id, type, value }) => {
     const sharedFilterProps = {
       filter: true,
-      onClose: () => handleSingleFilterRemoval(id, value),
+      onClose: () => handleSingleFilterRemoval(id, value, tableId),
     };
 
     if (type === DROPDOWN || type === RADIO || type === NUMBER) {
@@ -131,13 +139,12 @@ const prepareFiltersForTags = (filters, renderDateLabel) => {
             key: id,
             value: option.value,
             ...sharedFilterProps,
-            onClose: () => handleSingleFilterRemoval(id, option.value),
+            onClose: () => handleSingleFilterRemoval(id, option.value, tableId),
           });
         }
       });
     }
   });
-
   return tags;
 };
 
@@ -157,7 +164,7 @@ const filteringReducer = (state, action) => {
 
 export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
   const { renderDateLabel } = filterProps || {};
-  const filterTags = prepareFiltersForTags(filters, renderDateLabel);
+  const filterTags = prepareFiltersForTags(filters, renderDateLabel, tableId);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const initialState = {

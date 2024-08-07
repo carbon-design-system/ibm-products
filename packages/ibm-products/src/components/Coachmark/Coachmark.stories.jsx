@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { Crossroads } from '@carbon/react/icons';
@@ -26,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Onboarding/Coachmark',
+  title: 'Experimental/Components/Coachmark',
   component: Coachmark,
   tags: ['autodocs'],
   argTypes: {
@@ -87,8 +87,13 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
   const theme = getSelectedCarbonTheme();
-  return (
+  const content = (
     <Coachmark {...args} theme={theme}>
       <CoachmarkOverlayElements closeButtonLabel="Done">
         <CoachmarkOverlayElement
@@ -97,6 +102,23 @@ const Template = (args) => {
         />
       </CoachmarkOverlayElements>
     </Coachmark>
+  );
+
+  return !['fixed', 'floating', 'stacked'].includes(args.overlayKind) ? (
+    <div style={{ width: '4000px', height: '2000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '1000px',
+          left: '2000px',
+        }}
+        ref={ref}
+      >
+        {content}
+      </div>
+    </div>
+  ) : (
+    content
   );
 };
 

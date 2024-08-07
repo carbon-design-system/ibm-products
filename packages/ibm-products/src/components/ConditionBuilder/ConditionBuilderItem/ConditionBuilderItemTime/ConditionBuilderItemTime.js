@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useEffect, useState } from 'react';
 
 import { TimePicker, TimePickerSelect, SelectItem } from '@carbon/react';
@@ -33,7 +40,7 @@ export const ConditionBuilderItemTime = ({ onChange, config }) => {
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
         </TimePickerSelect>
-        <TimePickerSelect id="time-picker-select-2" onChange={setTimeZone}>
+        <TimePickerSelect id="time-picker-time-zone" onChange={setTimeZone}>
           {config?.timeZones?.map((timeZone, index) => (
             <SelectItem key={index} value={timeZone} text={timeZone} />
           ))}

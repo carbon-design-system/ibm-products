@@ -78,6 +78,7 @@ interface CardProp extends PropsWithChildren {
   secondaryButtonPlacement?: 'top' | 'bottom';
   secondaryButtonText?: string;
   sequence?: number;
+  iconDescription?: string;
 
   /**
    * **Experimental?** For all cases a `Slug` component can be provided.
@@ -132,6 +133,7 @@ export const Card = forwardRef(
       sequence,
       title,
       titleSize = 'default',
+      iconDescription = 'Options',
 
       // Collect any other property values passed in.
       ...rest
@@ -170,6 +172,7 @@ export const Card = forwardRef(
               direction={pos}
               flipped
               aria-label={overflowAriaLabel}
+              iconDescription={iconDescription}
             >
               {overflowActions.map(({ id, ...rest }) => (
                 <OverflowMenuItem key={id} {...rest} />

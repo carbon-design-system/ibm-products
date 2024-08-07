@@ -194,6 +194,7 @@ FlyoutInstant.args = {
     primaryActionLabel: 'Apply',
     secondaryActionLabel: 'Cancel',
     flyoutIconDescription: 'Open filters',
+    align: 'bottom',
     onFlyoutOpen: action('onFlyoutOpen'),
     onFlyoutClose: action('onFlyoutClose'),
     filters,

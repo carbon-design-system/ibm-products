@@ -1,4 +1,3 @@
-//cspell: disable
 # Percy config
 version: 2
 snapshot:
@@ -8,9 +7,8 @@ snapshot:
   minHeight: 1024
 storybook:
   include: ['/IBM Products/']
-  # Exclude the following stories until randomized data is removed
-  exclude:
-    [
+  exclude: [
+      # Exclude the following snapshots until randomized data is removed
       '/Datagrid/ClickableRow/',
       '/Datagrid/ColumnCustomization/',
       '/Datagrid/EditableCell/',
@@ -18,6 +16,12 @@ storybook:
       '/Datagrid/NestedRows/',
       '/Datagrid/RowHeightSettings/',
       '/Datagrid/Slug/',
+      '/Datagrid: With Virtualized Data/',
       '/DataSpreadsheet/',
+      '/MultiAddSelect: With Avatars/',
       '/Tag set/TagSet: Hundreds Of Tags/',
+      # Exclude the following snapshots until transitions are completed
+      '/Datagrid/Filtering/Flyout: Filter flyout with initial filters/',
+      '/Datagrid/Filtering/Panel: Filter panel with initial filters/',
+      '/Page header/PageHeader: Page header with all items, pre-collapsed/',
     ]

@@ -202,6 +202,11 @@ const DatagridBatchActionsToolbar = (
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
+                className={
+                  !batchAction.label || batchAction.label === ''
+                    ? `${carbon.prefix}--noLabel`
+                    : ''
+                }
                 iconDescription={batchAction.label}
                 tabIndex={totalSelected > 0 ? 0 : -1}
               >

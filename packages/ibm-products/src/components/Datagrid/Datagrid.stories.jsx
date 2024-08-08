@@ -516,14 +516,22 @@ export const BatchActionsDisplayOptions = () => {
     ];
   };
 
+  const batchActions = getBatchActions();
+  // Icon only example
+  batchActions.push({
+    label: '',
+    renderIcon: (props) => <Add size={16} {...props} />,
+    onClick: action('Clicked batch action button'),
+  });
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
       batchActions: true,
-      toolbarBatchActions: getBatchActions(),
+      toolbarBatchActions: batchActions,
       DatagridActions,
-      toolbarBatchActionsDisplayMin: 5,
+      toolbarBatchActionsDisplayMin: 6,
       DatagridBatchActions,
       rowActions: getRowActions(),
       onRowSelect: (row, event) => console.log('onRowClick: ', row, event),

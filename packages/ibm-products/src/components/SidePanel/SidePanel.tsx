@@ -734,7 +734,9 @@ export let SidePanel = React.forwardRef(
               className={`${blockClass}__close-button`}
               label={closeIconDescription}
               onClick={onRequestClose}
-              onKeyDown={(event) => handleEscapeKey(event)}
+              onKeyDown={(event) =>
+                slideIn ? undefined : handleEscapeKey(event)
+              }
               title={closeIconDescription}
               aria-label={closeIconDescription}
               ref={closeRef}
@@ -835,11 +837,8 @@ export let SidePanel = React.forwardRef(
     const handleKeyDown = (event) => {
       if (!slideIn) {
         handleEscapeKey(event);
-
-        return keyDownListener(event);
+        keyDownListener(event);
       }
-
-      return undefined;
     };
 
     return (

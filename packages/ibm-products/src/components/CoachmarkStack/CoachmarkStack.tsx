@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
   useCallback,
+  ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -37,10 +38,73 @@ import { CoachmarkContext } from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
+type Media =
+  | {
+      render?: () => ReactNode;
+    }
+  | {
+      filePaths?: string[];
+    };
+interface CoachmarkStackProps {
+  /**
+   * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
+   */
+  children: ReactNode;
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+  /**
+   * The label for the button that will close the Stack
+   */
+  closeButtonLabel?: string;
+  // Pass through to CoachmarkStackHome
+  /**
+   * The description of the Coachmark.
+   */
+  description: ReactNode;
+  /**
+   * The object describing an image in one of two shapes.
+   *
+   * If a single media element is required, use `{render}`.
+   *
+   * If a stepped animation is required, use `{filePaths}`.
+   *
+   * @see {@link MEDIA_PROP_TYPE}.
+   */
+  media?: Media;
+  /**
+   * The labels used to link to the stackable Coachmarks.
+   */
+  navLinkLabels: string[];
+  /**
+   * Function to call when the CoachmarkStack closes.
+   */
+  onClose?: () => void;
+  /**
+   * Where in the DOM to render the stack.
+   * The default is `document.body`.
+   */
+  portalTarget?: string;
+  /**
+   * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
+   */
+  tagline: string;
+  /**
+   * Determines the theme of the component.
+   */
+  theme?: 'light' | 'dark';
+  /**
+   * The title of the Coachmark.
+   */
+  title: string;
+}
+
 const defaults = {
   onClose: () => {},
   // Pass through to CoachmarkStackHome
   theme: 'light',
+  portalTarget: 'body',
 };
 
 // NOTE
@@ -56,7 +120,10 @@ const defaults = {
  * user to gain understanding of the product's main value and discover new use cases.
  * This variant allows the stacking of multiple coachmark overlays to be displayed by interacting with the tagline.
  */
-export let CoachmarkStack = React.forwardRef(
+export let CoachmarkStack = React.forwardRef<
+  HTMLDivElement,
+  CoachmarkStackProps
+>(
   (
     {
       children,
@@ -75,7 +142,7 @@ export let CoachmarkStack = React.forwardRef(
     },
     ref
   ) => {
-    const portalNode = useRef();
+    const portalNode = useRef<HTMLBodyElement | null>(null);
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
@@ -84,18 +151,18 @@ export let CoachmarkStack = React.forwardRef(
         : document?.querySelector('body');
     }, [portalTarget]);
 
-    const stackHomeRef = useRef();
-    const stackedCoachmarkRefs = useRef([]);
+    const stackHomeRef = useRef<HTMLDivElement | null>(null);
+    const stackedCoachmarkRefs = useRef<HTMLDivElement[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     // selectedItemNumber -1 = parent close button was clicked, remove entire stack
     // selectedItemNumber 0 = (default) the parent is visible, all children are hidden
     // selectedItemNumber 1+ = a child is visible and stacked atop the parent
     const [selectedItemNumber, setSelectedItemNumber] = useState(0);
     // // The parent height and width values to return to after unstacked
-    const [parentHeight, setParentHeight] = useState(null);
+    const [parentHeight, setParentHeight] = useState<number>();
     // parent height = child height when stacked behind a child that is shorter
     const childArray = Children.toArray(children);
-    const mountedRef = useRef();
+    const mountedRef = useRef<boolean>();
     // same value as CSS animation speed
     const delayMs = 240;
 
@@ -176,17 +243,23 @@ export let CoachmarkStack = React.forwardRef(
       if (!parentHeight) {
         return;
       }
-      stackHomeRef.current.style.height = `${parentHeight}px`;
+      if (stackHomeRef.current) {
+        stackHomeRef.current.style.height = `${parentHeight}px`;
+      }
       if (!isOpen || targetSelectedItem < 0) {
-        stackHomeRef.current.focus();
+        if (stackHomeRef.current) {
+          stackHomeRef.current.focus();
+        }
         return;
       }
 
       const targetHomeHeight =
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
-      stackHomeRef.current.style.height = `${targetHomeHeight}px`;
-      stackedCoachmarkRefs.current[targetSelectedItem].focus();
+      if (stackHomeRef.current) {
+        stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+        stackedCoachmarkRefs.current[targetSelectedItem].focus();
+      }
     }, [selectedItemNumber, isOpen, parentHeight]);
 
     const wrappedChildren = Children.map(childArray, (child, idx) => {
@@ -196,7 +269,9 @@ export let CoachmarkStack = React.forwardRef(
       return (
         <CoachmarkOverlay
           key={idx}
-          ref={(ref) => (stackedCoachmarkRefs.current[idx] = ref)}
+          ref={(ref) =>
+            (stackedCoachmarkRefs.current[idx] = ref as HTMLDivElement)
+          }
           kind={COACHMARK_OVERLAY_KIND.STACKED}
           onClose={() => handleClose(false)}
           theme={theme}
@@ -312,12 +387,12 @@ CoachmarkStack.propTypes = {
     PropTypes.shape({
       filePaths: PropTypes.arrayOf(PropTypes.string),
     }),
-  ]),
+  ]) as PropTypes.Validator<Media>,
 
   /**
    * The labels used to link to the stackable Coachmarks.
    */
-  navLinkLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  navLinkLabels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 
   /**
    * Function to call when the CoachmarkStack closes.

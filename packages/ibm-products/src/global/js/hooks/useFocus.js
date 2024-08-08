@@ -85,8 +85,6 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     }
   };
 
-  console.log();
-
   return {
     firstElement: getFocusable().first,
     lastElement: getFocusable().last,

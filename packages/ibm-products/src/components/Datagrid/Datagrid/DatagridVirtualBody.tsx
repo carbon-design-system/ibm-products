@@ -51,7 +51,9 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
   /* istanbul ignore next */
   const handleVirtualGridResize = () => {
     const gridRefElement = gridRef?.current;
-    if (gridRefElement) {
+    // isHidden checks for an edge case where if the table is hidden by something like a Tab that the width can't be calculated to 0
+    const isHidden = gridRefElement?.offsetParent === null;
+    if (gridRefElement && !isHidden) {
       gridRefElement.style.width = gridRefElement?.clientWidth?.toString();
     }
   };

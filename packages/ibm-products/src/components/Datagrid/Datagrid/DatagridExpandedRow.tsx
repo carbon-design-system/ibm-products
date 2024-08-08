@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { JSXElementConstructor, isValidElement } from 'react';
+import React, { JSXElementConstructor, isValidElement, useRef } from 'react';
 import { pkg } from '../../../settings';
 import cx from 'classnames';
 import { DataGridState } from '../types';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -18,6 +19,8 @@ const DatagridExpandedRow =
   (datagridState: DataGridState) => {
     const { row } = datagridState;
     const { expandedContentHeight } = row;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const expRowContentRef = useRef<HTMLDivElement | null>(null);
 
     const toggleParentHoverClass = (event, eventType = '') => {
       /* istanbul ignore else */
@@ -33,6 +36,13 @@ const DatagridExpandedRow =
 
     const { key, ..._state } = datagridState;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useIsomorphicEffect(() => {
+      if (expRowContentRef.current && expRowContentRef.current.style) {
+        expRowContentRef.current.style.height = `${expandedContentHeight}px`;
+      }
+    }, [expRowContentRef, expandedContentHeight]);
+
     return (
       <tr
         className={cx(`${blockClass}__expanded-row`, {
@@ -44,9 +54,7 @@ const DatagridExpandedRow =
         <td className={`${blockClass}__expanded-row-cell-wrapper`}>
           <div
             className={`${blockClass}__expanded-row-content`}
-            style={{
-              height: expandedContentHeight && expandedContentHeight,
-            }}
+            ref={expRowContentRef}
           >
             <ExpandedRowContentComponent key={key} {..._state} />
           </div>

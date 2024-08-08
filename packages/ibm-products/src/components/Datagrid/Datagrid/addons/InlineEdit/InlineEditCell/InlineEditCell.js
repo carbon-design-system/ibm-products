@@ -26,7 +26,10 @@ import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
-import { usePreviousValue } from '../../../../../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  usePreviousValue,
+} from '../../../../../../global/js/hooks';
 import { prepareProps } from '../../../../../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -327,6 +330,15 @@ export const InlineEditCell = ({
       : null;
   };
 
+  useIsomorphicEffect(() => {
+    if (dropdownRef.current && dropdownRef.current.style) {
+      const closestElement = dropdownRef.current.closest(
+        `.dev-prefix--c4p--datagrid__inline-edit--select`
+      );
+      closestElement.style.width = `${cell.column.totalWidth}px`;
+    }
+  }, [cell.column.totalWidth, dropdownRef]);
+
   const renderSelectCell = () => {
     const { inputProps } = config || {};
     return (
@@ -336,9 +348,6 @@ export const InlineEditCell = ({
         ariaLabel={cellLabel || 'Dropdown menu options'}
         {...inputProps}
         hideLabel
-        style={{
-          width: cell.column.totalWidth,
-        }}
         className={cx(`${blockClass}__inline-edit--select`, {
           [`${blockClass}__inline-edit--select-${rowSize}`]: rowSize,
         })}
@@ -400,9 +409,16 @@ export const InlineEditCell = ({
       <DatePicker
         {...datePickerPreparedProps}
         appendTo={outerButtonElement?.current?.parentElement}
-        ref={datePickerRef}
-        style={{
-          width: cell.column.totalWidth,
+        ref={(el) => {
+          datePickerRef.current = el;
+          if (datePickerRef.current && datePickerRef.current.style) {
+            datePickerRef.current.style.width = `${cell.column.totalWidth}px`;
+            const elementId = `${blockClass}__inline-edit--date-picker--${cell.row.index}`;
+            const element = document.getElementById(elementId);
+            if (element) {
+              element.style.position = 'static';
+            }
+          }
         }}
         datePickerType="single"
         className={cx(`${blockClass}__inline-edit--date`, {
@@ -425,9 +441,6 @@ export const InlineEditCell = ({
       >
         <DatePickerInput
           {...datePickerInputProps}
-          style={{
-            position: 'static',
-          }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
           labelText={datePickerInputProps?.labelText || cellLabel || 'Set date'}
           id={`${blockClass}__inline-edit--date-picker--${cell.row.index}`}

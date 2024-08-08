@@ -2381,7 +2381,7 @@ describe(componentName, () => {
       `${blockClass}__table-container--filter-open`
     );
 
-    // // Add value to number input and apply to filter panel
+    // Add value to number input and apply to filter panel
     const visitsInput = screen.getByPlaceholderText(
       'Type a number amount of visits'
     );
@@ -2390,12 +2390,12 @@ describe(componentName, () => {
     expect(visitsInput).toHaveFocus();
     await click(applyButton);
 
-    // // Add value to radio button and apply to filter panel
+    // Add value to radio button and apply to filter panel
     const radio = screen.getByRole('radio', { name: 'Developer' });
     await click(radio);
     expect(radio.checked).toEqual(true);
 
-    // // Add value to dropdown and apply to filter panel
+    // Add value to dropdown and apply to filter panel
     const statusAccordion = screen.getByRole('button', { name: 'Status' });
     await click(statusAccordion);
     const statusDropdown = screen.getByRole('combobox', {

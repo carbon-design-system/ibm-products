@@ -75,7 +75,7 @@ export let CoachmarkBeacon = React.forwardRef<
         aria-label={label}
         className={`${blockClass}__target`}
       >
-        <svg className={`${blockClass}__center`}>
+        <svg className={`${blockClass}__center`} aria-label={label}>
           <circle r={1} cx={38} cy={38} />
         </svg>
       </button>

@@ -368,6 +368,7 @@ export const InlineEditCell = ({
           },
         }}
         ref={dropdownRef}
+        autoAlign
       />
     );
   };

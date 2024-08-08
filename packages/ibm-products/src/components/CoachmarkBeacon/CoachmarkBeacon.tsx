@@ -76,6 +76,7 @@ export let CoachmarkBeacon = React.forwardRef<
         className={`${blockClass}__target`}
       >
         <svg className={`${blockClass}__center`}>
+          <title>{label}</title>
           <circle r={1} cx={38} cy={38} />
         </svg>
       </button>

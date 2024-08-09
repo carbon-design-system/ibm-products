@@ -79,6 +79,7 @@ export const getFilterProps = (id = 'id') => ({
   secondaryActionLabel: 'Cancel',
   panelIconDescription: `Open filters`,
   closeIconDescription: 'Close panel',
+  align: 'bottom',
   sections: [
     {
       categoryTitle: 'Category title',
@@ -260,6 +261,7 @@ PanelInstant.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -454,6 +456,7 @@ PanelWithInitialFilters.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -615,6 +618,7 @@ PanelOnlyAccordions.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -777,6 +781,7 @@ PanelNoAccordions.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -939,6 +944,7 @@ PanelNoData.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -1101,6 +1107,7 @@ PanelManyCheckboxes.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',

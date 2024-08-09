@@ -72,7 +72,7 @@ export const DatagridActions = (datagridState) => {
     filterProps?.variation === 'panel' && (
       <IconButton
         kind="ghost"
-        align="bottom"
+        align={filterProps.align}
         label={filterProps.panelIconDescription}
         className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setPanelOpen((open) => !open)}

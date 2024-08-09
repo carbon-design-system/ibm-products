@@ -530,6 +530,7 @@ collect:
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
+        - setShowDeletionPreviewForSubgroups
         # ConditionBuilderAdd
         - buttonLabel
         - enableSubGroup
@@ -552,6 +553,7 @@ collect:
         # ConditionConnector
         - operator
         # ConditionPreview
+        - colorIndex
         - previewType
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel

@@ -6,3 +6,4 @@
  */
 
 export { DISPLAY_NAME } from './DISPLAY_NAME';
+export type { DISPLAY_NAMEProps } from './DISPLAY_NAME';

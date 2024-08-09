@@ -6,7 +6,7 @@
  */
 
 const fs = require('fs');
-const { green } = require('chalk');
+const { green, red } = require('chalk');
 const { outputFileSync, readFileSync } = require('fs-extra');
 const { sync } = require('glob');
 const { camelCase, paramCase, pascalCase, headerCase } = require('change-case');
@@ -18,6 +18,15 @@ const {
 } = require('yargs');
 
 const name = _[0];
+
+// If no component name is given in args throw an error
+if (!name) {
+  console.error(
+    `${red('Error:')} No component name given. e.g. yarn generate TestComponent`
+  );
+  process.exit(1);
+}
+
 const substitutions = {
   DISPLAY_NAME: pascalCase(name),
   FULL_YEAR: new Date().getFullYear(),
@@ -34,113 +43,113 @@ const compile = (template) =>
   );
 
 const templatesPath = join(__dirname, 'templates');
-if (name) {
-  sync(resolve(templatesPath, '**/*')).forEach((template) => {
-    if (fs.lstatSync(template).isDirectory()) {
-      return; // do nothing for a folder
-    }
+sync(resolve(templatesPath, '**/*')).forEach((template) => {
+  if (fs.lstatSync(template).isDirectory()) {
+    return; // do nothing for a folder
+  }
 
-    let relativePath = relative(templatesPath, template);
-    const compiledPath = compile(relativePath);
-    let path;
+  let relativePath = relative(templatesPath, template);
+  const compiledPath = compile(relativePath);
+  let path;
 
-    if (relativePath.startsWith('gallery-example')) {
-      // relativePath = relative('example-gallery', relativePath);
+  if (relativePath.startsWith('gallery-example')) {
+    // relativePath = relative('example-gallery', relativePath);
 
-      path = join(
-        '../../examples/carbon-for-ibm-products',
-        substitutions.DISPLAY_NAME,
-        compiledPath.substr('gallery-example/'.length)
-      );
-    } else {
-      path = join(
-        'src',
-        'components',
-        substitutions.DISPLAY_NAME,
-        compiledPath
-      );
-    }
-
-    const data = compile(readFileSync(template, 'utf8'));
-
-    outputFileSync(path, data);
-
-    console.log(
-      `${green('create')} ${path} (${
-        new TextEncoder().encode(data).length
-      } bytes)`
+    path = join(
+      '../../examples/carbon-for-ibm-products',
+      substitutions.DISPLAY_NAME,
+      compiledPath.substr('gallery-example/'.length)
     );
-  });
+  } else {
+    path = join('src', 'components', substitutions.DISPLAY_NAME, compiledPath);
+  }
 
-  // Update src/global/js/package-settings.js
-  const settingsPath = join('src', 'global', 'js', 'package-settings.js');
-  const settingsData = readFileSync(settingsPath, 'utf-8');
+  const data = compile(readFileSync(template, 'utf8'));
 
-  // locate place to add new components
-  const newComponentsHereRegex = /(\s+)\/\* new component flags here /;
-  const here = settingsData.match(newComponentsHereRegex);
+  outputFileSync(path, data);
 
-  // add new component
-  const newSettingsData = `${settingsData.substr(0, here.index)}${here[1]}${
-    substitutions.DISPLAY_NAME
-  }: false,${settingsData.substr(here.index)}`;
-  outputFileSync(settingsPath, newSettingsData);
+  console.log(
+    `${green('create')} ${path} (${
+      new TextEncoder().encode(data).length
+    } bytes)`
+  );
+});
 
-  // add new component export to end of src/components/index.js
-  const componentIndexPath = join('src', 'components', 'index.js');
-  const componentIndexData = readFileSync(componentIndexPath, 'utf-8');
-  outputFileSync(
-    componentIndexPath,
-    componentIndexData +
-      `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
-  );
+// Update src/global/js/package-settings.js
+const settingsPath = join('src', 'global', 'js', 'package-settings.js');
+const settingsData = readFileSync(settingsPath, 'utf-8');
 
-  // NOTE: Styles except storybook are in a separate package @carbon/ibm-products-styles
-  const stylePackagePath = '../ibm-products-styles';
-  // add new component to end of src/components/_index.scss
-  const componentSCSSIndexPath = join(
-    stylePackagePath,
-    'src',
-    'components',
-    '_index.scss'
-  );
-  const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
-  outputFileSync(
-    componentSCSSIndexPath,
-    componentSCSSIndexData + `@use './${substitutions.DISPLAY_NAME}';\n`
-  );
+// locate place to add new components
+const newComponentsHereRegex = /(\s+)\/\* new component flags here /;
+const here = settingsData.match(newComponentsHereRegex);
 
-  // add new component to end of src/components/_index-with-carbon.scss
-  const componentWithCarbonSCSSIndexPath = join(
-    stylePackagePath,
-    'src',
-    'components',
-    '_index-with-carbon.scss'
-  );
-  const componentWithCarbonSCSSIndexData = readFileSync(
-    componentWithCarbonSCSSIndexPath,
-    'utf-8'
-  );
-  outputFileSync(
-    componentWithCarbonSCSSIndexPath,
-    componentWithCarbonSCSSIndexData +
-      `@use './${substitutions.DISPLAY_NAME}/index-with-carbon' as *;\n`
-  );
+// add new component
+const newSettingsData = `${settingsData.substr(0, here.index)}${here[1]}${
+  substitutions.DISPLAY_NAME
+}: false,${settingsData.substr(here.index)}`;
+outputFileSync(settingsPath, newSettingsData);
 
-  fs.mkdirSync(
-    join(`${stylePackagePath}`, `src/components/${substitutions.DISPLAY_NAME}`)
-  );
-  // move files to correct location
-  [
-    '_carbon-imports.scss',
-    '_index.scss',
-    '_index-with-carbon.scss',
-    `_${substitutions.STYLE_NAME}.scss`,
-  ].forEach((file) => {
-    const curPath = join(
-      `src/components/${substitutions.DISPLAY_NAME}/${file}`
-    );
-    const newPath = join(stylePackagePath, curPath);
-    fs.renameSync(curPath, newPath);
-  });
-}
+// add new component export to end of src/components/index.js
+const componentIndexPath = join('src', 'components', 'index.js');
+const componentIndexData = readFileSync(componentIndexPath, 'utf-8');
+
+const componentIndexPathTS = join('src', 'components', 'index.ts');
+const componentIndexDataTS = readFileSync(componentIndexPathTS, 'utf-8');
+
+outputFileSync(
+  componentIndexPath,
+  componentIndexData +
+    `export { ${substitutions.DISPLAY_NAME} } from './${substitutions.DISPLAY_NAME}';\n`
+);
+
+outputFileSync(
+  componentIndexPathTS,
+  componentIndexDataTS + `export * from './${substitutions.DISPLAY_NAME}';\n`
+);
+
+// NOTE: Styles except storybook are in a separate package @carbon/ibm-products-styles
+const stylePackagePath = '../ibm-products-styles';
+// add new component to end of src/components/_index.scss
+const componentSCSSIndexPath = join(
+  stylePackagePath,
+  'src',
+  'components',
+  '_index.scss'
+);
+const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
+outputFileSync(
+  componentSCSSIndexPath,
+  componentSCSSIndexData + `@use './${substitutions.DISPLAY_NAME}';\n`
+);
+
+// add new component to end of src/components/_index-with-carbon.scss
+const componentWithCarbonSCSSIndexPath = join(
+  stylePackagePath,
+  'src',
+  'components',
+  '_index-with-carbon.scss'
+);
+const componentWithCarbonSCSSIndexData = readFileSync(
+  componentWithCarbonSCSSIndexPath,
+  'utf-8'
+);
+outputFileSync(
+  componentWithCarbonSCSSIndexPath,
+  componentWithCarbonSCSSIndexData +
+    `@use './${substitutions.DISPLAY_NAME}/index-with-carbon' as *;\n`
+);
+
+fs.mkdirSync(
+  join(`${stylePackagePath}`, `src/components/${substitutions.DISPLAY_NAME}`)
+);
+// move files to correct location
+[
+  '_carbon-imports.scss',
+  '_index.scss',
+  '_index-with-carbon.scss',
+  `_${substitutions.STYLE_NAME}.scss`,
+].forEach((file) => {
+  const curPath = join(`src/components/${substitutions.DISPLAY_NAME}/${file}`);
+  const newPath = join(stylePackagePath, curPath);
+  fs.renameSync(curPath, newPath);
+});

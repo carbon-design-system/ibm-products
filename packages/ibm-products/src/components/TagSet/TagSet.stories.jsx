@@ -140,6 +140,11 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
+    disableOverflowPopup: {
+      control: { type: 'boolean' },
+      description:
+        'Disable the overflow tags popup component, default to false.',
+    },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
       description: 'Optional DOM node: Modal target defaults to document.body',
@@ -167,6 +172,7 @@ const Template = (argsIn) => {
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
+        disableOverflowPopup={args.disableOverflowPopup}
         allTagsModalTarget={
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }

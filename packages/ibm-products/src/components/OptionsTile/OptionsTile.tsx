@@ -85,7 +85,7 @@ interface OptionsTileProps {
   /**
    * Define the size of the OptionsTile.
    */
-  size: 'lg' | 'xl';
+  size?: 'lg' | 'xl';
 
   /**
    * Optionally provide a text summarizing the current state of the content.

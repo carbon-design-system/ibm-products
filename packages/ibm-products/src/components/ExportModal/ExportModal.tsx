@@ -5,34 +5,34 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, {
-  useState,
-  useRef,
-  forwardRef,
-  useEffect,
-  ReactNode,
-} from 'react';
 import {
   Button,
   ComposedModal,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  TextInput,
-  RadioButton,
-  RadioButtonGroup,
   FormGroup,
   Loading,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   PasswordInput,
+  RadioButton,
+  RadioButtonGroup,
+  TextInput,
 } from '@carbon/react';
-import cx from 'classnames';
-import { ErrorFilled, CheckmarkFilled } from '@carbon/react/icons';
-import PropTypes from 'prop-types';
+import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
+import React, {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'ExportModal';
 
@@ -49,7 +49,8 @@ type PreformattedExtensions = {
   extension?: string;
   description?: string;
 };
-interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
+export interface ExportModalProps
+  extends React.ComponentProps<typeof ComposedModal> {
   /**
    * Body content for the modal
    */
@@ -183,7 +184,7 @@ export let ExportModal = forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }: React.PropsWithChildren<RemoveModalProps>,
+    }: React.PropsWithChildren<ExportModalProps>,
     ref
   ) => {
     const [name, setName] = useState('');

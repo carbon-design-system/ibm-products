@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ActionSet } from './ActionSet';
+export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
+export type { CreateTearsheetNarrowProps } from './CreateTearsheetNarrow';

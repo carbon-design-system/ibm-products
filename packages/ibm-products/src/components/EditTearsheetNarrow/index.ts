@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditFullPage } from './EditFullPage';
+export { EditTearsheetNarrow } from './EditTearsheetNarrow';
+export type { EditTearsheetNarrowProps } from './EditTearsheetNarrow';

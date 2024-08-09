@@ -28,7 +28,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = 'AboutModal';
 
-interface AboutModalProps {
+export interface AboutModalProps {
   /**
    * If you are legally required to display logos of technologies used
    * to build your product you can provide this in the additionalInfo.

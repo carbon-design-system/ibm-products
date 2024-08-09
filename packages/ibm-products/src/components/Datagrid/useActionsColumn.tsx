@@ -54,10 +54,7 @@ const useActionsColumn = (hooks: Hooks) => {
                   )}
                   {/* Icon buttons */}
                   {!isFetching && rowActions.length <= 2 && !isColumnSticky && (
-                    <div
-                      className={`${blockClass}_actions-column`}
-                      style={{ display: 'flex' }}
-                    >
+                    <div className={`${blockClass}_actions-column`}>
                       {rowActions.map((action, index) => {
                         const preparedActionProps: RowAction = prepareProps(
                           action,

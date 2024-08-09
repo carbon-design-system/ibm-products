@@ -427,85 +427,6 @@ docs: {
 const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const testRef = useRef();
-  return (
-    <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        ref={testRef}
-        slug={slug && sampleSlug}
-      >
-        {!minimalContent && <ChildrenContent />}
-      </SidePanel>
-    </>
-  );
-};
-
-// eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  return (
-    <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        currentStep={currentStep}
-        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
-        actions={actionSets[actions]}
-        slug={slug && sampleSlug}
-      >
-        <ChildrenContentWithSteps
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      </SidePanel>
-    </>
-  );
-};
-
-// eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
-        <Column lg={16} md={8} sm={4}>
-          <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        slug={slug && sampleSlug}
-      >
-        <ChildrenContent />
-      </SidePanel>
-    </>
-  );
-};
-
-const ReturnFocusToOpenButtonTemplate = ({
-  minimalContent,
-  actions,
-  slug,
-  ...args
-}) => {
-  const [open, setOpen] = useState(false);
-  const testRef = useRef();
   const buttonRef = useRef();
 
   return (
@@ -527,6 +448,72 @@ const ReturnFocusToOpenButtonTemplate = ({
         launcherButtonRef={buttonRef}
       >
         {!minimalContent && <ChildrenContent />}
+      </SidePanel>
+    </>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const StepTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        currentStep={currentStep}
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
+        actions={actionSets[actions]}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        <ChildrenContentWithSteps
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </SidePanel>
+    </>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const SlideInTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
+        <Column lg={16} md={8} sm={4}>
+          <Button
+            ref={buttonRef}
+            onClick={() => setOpen(!open)}
+            className={`${prefix}toggle`}
+          >
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
+      </Grid>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        actions={actionSets[actions]}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        <ChildrenContent />
       </SidePanel>
     </>
   );
@@ -587,11 +574,6 @@ export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
 SpecifyElementToHaveInitialFocus.args = {
   actions: 0,
   selectorPrimaryFocus: '#side-panel-story-text-input-a',
-  ...defaultStoryProps,
-};
-
-export const ReturnFocusToOpenButton = ReturnFocusToOpenButtonTemplate.bind({});
-ReturnFocusToOpenButton.args = {
   ...defaultStoryProps,
 };
 

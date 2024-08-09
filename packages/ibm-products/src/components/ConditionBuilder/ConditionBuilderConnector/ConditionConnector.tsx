@@ -18,7 +18,17 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import { useTranslations } from '../utils/useTranslations';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 
-const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
+interface ConditionConnectorProps {
+  operator: string;
+  className: string;
+  onChange?: (op: string) => void;
+}
+const ConditionConnector = ({
+  operator,
+  className,
+  onChange,
+  ...rest
+}: ConditionConnectorProps) => {
   const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
   const [connectorText] = useTranslations(['connectorText']);
 
@@ -30,15 +40,16 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
     }
   }, []);
   const activeConnectorHandler = (evt) => {
-    let parentGroup = evt.currentTarget.closest('.eachGroup');
+    const parentGroup = evt?.currentTarget.closest('.eachGroup');
     handleConnectorHover(parentGroup, true);
   };
   const inActiveConnectorHandler = (evt) => {
-    let parentGroup = evt.currentTarget.closest('.eachGroup');
+    const parentGroup = evt?.currentTarget.closest('.eachGroup');
     handleConnectorHover(parentGroup, false);
   };
+
   const onChangeHandler = (op, evt) => {
-    onChange(op);
+    onChange?.(op);
     focusThisField(evt, conditionBuilderRef);
   };
   return variant == 'tree' ? (
@@ -58,7 +69,7 @@ const ConditionConnector = ({ operator, className, onChange, ...rest }) => {
       onBlur={inActiveConnectorHandler}
       {...rest}
       popOverClassName={className}
-      className={`${blockClass}__connector-button `}
+      className={`${blockClass}__connector-button`}
     >
       <ItemOption
         config={{

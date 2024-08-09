@@ -19,21 +19,34 @@ import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuild
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
 import { Heading } from '@carbon/react';
+/**@ts-ignore */
 import { Section } from '@carbon/react';
 import GroupConnector from '../ConditionBuilderConnector/GroupConnector';
 import ConditionBuilderActions from '../ConditionBuilderActions/ConditionBuilderActions';
 import { useTranslations } from '../utils/useTranslations';
+import {
+  Action,
+  ConditionBuilderContextProps,
+  ConditionBuilderState,
+  ConditionGroup,
+} from '../ConditionBuilder.types';
 
+interface ConditionBuilderContentProps {
+  startConditionLabel: string;
+  getConditionState: (state: ConditionBuilderState) => void;
+  getActionsState?: (state: Action[]) => void;
+  initialState?: ConditionBuilderState;
+  actions?: Action[];
+}
 const ConditionBuilderContent = ({
   startConditionLabel,
   getConditionState,
   getActionsState,
   initialState,
   actions,
-}) => {
-  const { rootState, setRootState, variant, actionState } = useContext(
-    ConditionBuilderContext
-  );
+}: ConditionBuilderContentProps) => {
+  const { rootState, setRootState, variant, actionState } =
+    useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(false);
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
@@ -59,28 +72,30 @@ const ConditionBuilderContent = ({
     }
 
     if (getConditionState) {
-      getConditionState(rootState);
+      getConditionState(rootState ?? {});
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rootState]);
 
   useEffect(() => {
-    getActionsState?.(actionState);
+    getActionsState?.(actionState ?? []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actionState]);
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(true);
-    setRootState(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
+    setRootState?.(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
     //or we can even pre-populate some existing builder and continue editing
   };
 
   const onRemove = useCallback(
     (groupId) => {
-      setRootState({
+      setRootState?.({
         ...rootState,
-        groups: rootState.groups.filter((group) => groupId !== group.id),
+        groups: rootState
+          ? rootState?.groups?.filter((group) => groupId !== group?.id)
+          : [],
       });
     },
     [setRootState, rootState]
@@ -91,21 +106,23 @@ const ConditionBuilderContent = ({
      * This method is triggered from inner components. This will be called every time when any change is to be updated in the rootState.
      * This gets the updated group as argument.
      */
-    const groups = [
-      ...rootState.groups.slice(0, groupIndex),
-      updatedGroup,
-      ...rootState.groups.slice(groupIndex + 1),
-    ];
-    setRootState({
-      ...rootState,
-      groups,
-    });
+    if (rootState && rootState.groups) {
+      const groups = [
+        ...(rootState.groups ? rootState.groups.slice(0, groupIndex) : []),
+        updatedGroup,
+        ...(rootState.groups ? rootState.groups.slice(groupIndex + 1) : []),
+      ];
+      setRootState?.({
+        ...rootState,
+        groups,
+      });
+    }
   };
 
   const addConditionGroupHandler = () => {
-    const newGroup = {
-      groupOperator: 'and', //'and|or',
+    const newGroup: ConditionGroup = {
       statement: 'if', // 'if|exclude if',
+      groupOperator: 'and',
       id: uuidv4(),
       conditions: [
         {
@@ -117,9 +134,12 @@ const ConditionBuilderContent = ({
         },
       ],
     };
-    setRootState({
+    setRootState?.({
       ...rootState,
-      groups: [...rootState.groups, newGroup],
+      groups:
+        rootState && rootState.groups
+          ? [...rootState.groups, newGroup]
+          : [newGroup],
     });
   };
 
@@ -162,7 +182,8 @@ const ConditionBuilderContent = ({
                 aria={{
                   level: 1,
                   posinset: groupIndex * 2 + 1,
-                  setsize: rootState.groups.length * 2,
+                  setsize:
+                    (rootState.groups && rootState.groups.length * 2) ?? 0,
                 }}
                 group={eachGroup}
                 onRemove={() => {
@@ -174,7 +195,9 @@ const ConditionBuilderContent = ({
               />
 
               {/* displaying the connector field between groups */}
-              {groupIndex < rootState.groups.length - 1 && <GroupConnector />}
+              {rootState.groups && groupIndex < rootState.groups.length - 1 && (
+                <GroupConnector />
+              )}
             </div>
           ))}
 
@@ -209,7 +232,7 @@ const ConditionBuilderContent = ({
           <ConditionPreview
             previewType="newGroup"
             colorIndex={getColorIndex()}
-            group={{ groupOperator: rootState.operator }}
+            group={{ groupOperator: rootState?.operator, id: uuidv4() }}
           />
         )}
       </div>
@@ -217,7 +240,6 @@ const ConditionBuilderContent = ({
         <ConditionBuilderActions
           actions={actions}
           className={`${blockClass}__actions-container`}
-          variant={variant}
         />
       )}
     </>
@@ -250,13 +272,13 @@ ConditionBuilderContent.propTypes = {
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
-        groupOperator: PropTypes.string.isRequired,
-        statement: PropTypes.string.isRequired,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
         conditions: PropTypes.arrayOf(
           PropTypes.oneOfType([
             PropTypes.shape({
-              property: PropTypes.string.isRequired,
-              operator: PropTypes.string.isRequired,
+              property: PropTypes.string,
+              operator: PropTypes.string,
               value: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.arrayOf(

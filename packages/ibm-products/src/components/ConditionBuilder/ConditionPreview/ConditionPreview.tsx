@@ -13,7 +13,18 @@ import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderIt
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
-const ConditionPreview = ({ previewType, group, colorIndex }) => {
+import { ConditionGroup } from '../ConditionBuilder.types';
+
+interface ConditionPreviewProps {
+  previewType: 'newGroup' | 'subGroup' | 'condition';
+  group: ConditionGroup;
+  colorIndex?: number;
+}
+const ConditionPreview = ({
+  previewType,
+  group,
+  colorIndex,
+}: ConditionPreviewProps) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
     'valueText',

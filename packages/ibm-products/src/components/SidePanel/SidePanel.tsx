@@ -734,9 +734,7 @@ export let SidePanel = React.forwardRef(
               className={`${blockClass}__close-button`}
               label={closeIconDescription}
               onClick={onRequestClose}
-              onKeyDown={(event) =>
-                slideIn ? undefined : handleEscapeKey(event)
-              }
+              onKeyDown={slideIn ? undefined : handleEscapeKey}
               title={closeIconDescription}
               aria-label={closeIconDescription}
               ref={closeRef}

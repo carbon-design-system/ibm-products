@@ -306,13 +306,24 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      if (selectorPrimaryFocus) {
-        return getSpecificElement(
+      if (
+        selectorPrimaryFocus &&
+        getSpecificElement(modalRef?.current, selectorPrimaryFocus)
+      ) {
+        const specifiedEl = getSpecificElement(
           modalRef?.current,
           selectorPrimaryFocus
-        )?.focus();
+        );
+
+        if (
+          specifiedEl &&
+          window?.getComputedStyle(specifiedEl)?.display !== 'none'
+        ) {
+          return specifiedEl.focus();
+        }
       }
-      firstElement?.focus();
+
+      setTimeout(() => firstElement?.focus(), 0);
     };
 
     useEffect(() => {

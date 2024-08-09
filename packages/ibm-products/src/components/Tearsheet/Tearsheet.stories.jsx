@@ -140,6 +140,7 @@ const mainContent = (
             // stylelint-disable-next-line carbon/layout-token-use
             { marginBottom: '1em' }
           }
+          disabled
         />
         <TextInput
           id="tss-ft2"

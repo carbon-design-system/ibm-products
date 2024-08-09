@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,6 +8,7 @@
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { Link } from '@carbon/react';
 
 import { RemoveModal } from '.';
 
@@ -28,6 +29,19 @@ const defaultProps = {
   secondaryButtonText: 'secondary button text',
   textConfirmation: false,
   title: 'test title',
+};
+
+const bodyWithReactNodeProps = {
+  ...defaultProps,
+  body: (
+    <React.Fragment>
+      {`Before removing ${resourceName}, you can find out more information on the `}
+      <Link href={'https://www.carbondesignsystem.com'}>
+        {'Carbon Design System'}
+      </Link>
+      {' website.'}
+    </React.Fragment>
+  ),
 };
 
 describe(componentName, () => {
@@ -149,5 +163,12 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('use react component in the body to render link', async () => {
+    render(
+      <RemoveModal {...bodyWithReactNodeProps} data-testid={dataTestId} />
+    );
+    screen.getByRole('link', { name: 'Carbon Design System' });
   });
 });

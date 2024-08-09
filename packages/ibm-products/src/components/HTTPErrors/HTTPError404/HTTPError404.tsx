@@ -67,7 +67,7 @@ export let HTTPError404 = React.forwardRef<HTMLDivElement, HTTPError404Props>(
         {...getDevtoolsProps(componentName)}
       >
         <HTTPErrorContent {...{ description, errorCodeLabel, title, links }} />
-        <HTTPErrorSvg404 className={`${blockClass}__image`} />
+        <HTTPErrorSvg404 className={`${blockClass}__image`} title={title} />
       </div>
     );
   }

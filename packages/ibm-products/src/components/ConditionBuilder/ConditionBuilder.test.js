@@ -1141,7 +1141,7 @@ describe(componentName, () => {
     ).not.toBeInTheDocument();
   });
 
-  it(' remove all  conditions in a group will delete subgroups as well', async () => {
+  it('remove all  conditions in a group keeping only subgroups', async () => {
     const sampleDataStructure = {
       operator: 'or',
       groups: [
@@ -1218,7 +1218,7 @@ describe(componentName, () => {
       userEvent.click(document.querySelector(`.${blockClass}__close-condition`))
     );
 
-    expect(screen.getByText('Add condition'));
+    expect(screen.getAllByRole('button', { name: 'if' })).toHaveLength(2);
   });
 
   it('check the custom input type', async () => {

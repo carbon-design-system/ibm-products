@@ -80,9 +80,17 @@ FeatureFlags.propTypes = {
  * @param {Function} compare
  * @param {Function} callback
  */
-function useChangedValue(value, compare, callback) {
+function useChangedValue(
+  value: { [key: string]: boolean },
+  compare: (
+    prevValue: { [key: string]: boolean },
+    value: { [key: string]: boolean }
+  ) => boolean,
+  callback: (changedFlags) => void
+) {
   const initialRender = useRef(false);
-  const savedCallback = useRef(callback);
+  const savedCallback =
+    useRef<(prevValue: { [key: string]: boolean }) => void>(callback);
   const [prevValue, setPrevValue] = useState(value);
 
   if (!compare(prevValue, value)) {
@@ -106,21 +114,15 @@ function useChangedValue(value, compare, callback) {
 }
 
 /**
- * Access whether a given flag is enabled or disabled in a given
- * FeatureFlagContext
- *
- * @returns {boolean}
+ * Access whether a given flag is enabled or disabled in a given FeatureFlagContext
  */
-function useFeatureFlag(flag) {
+function useFeatureFlag(flag: string): boolean {
   const scope = useContext(FeatureFlagContext);
-  // console.log(scope);
   return scope.enabled(flag);
 }
 
 /**
  * Access all feature flag information for the given FeatureFlagContext
- *
- * @returns {FeatureFlagScope}
  */
 function useFeatureFlags() {
   return useContext(FeatureFlagContext);
@@ -131,11 +133,8 @@ function useFeatureFlags() {
  * comparison since the objects we are comparing are objects with boolean flags
  * from the flags prop in the `FeatureFlags` component
  *
- * @param {object} a
- * @param {object} b
- * @returns {boolean}
  */
-function isEqual(a, b) {
+function isEqual(a: object, b: object): boolean {
   if (a === b) {
     return true;
   }

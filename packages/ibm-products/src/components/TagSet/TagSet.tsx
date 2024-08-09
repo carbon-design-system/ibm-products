@@ -6,26 +6,24 @@
 //
 
 import React, {
-  useState,
+  PropsWithChildren,
+  ReactNode,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
-  ReactNode,
-  PropsWithChildren,
+  useState,
 } from 'react';
+
 import PropTypes from 'prop-types';
-
-import cx from 'classnames';
-
-import { TagSetOverflow } from './TagSetOverflow';
-import { TagSetModal } from './TagSetModal';
 import { Tag } from '@carbon/react';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { TagBaseProps } from '@carbon/type';
-
+import { TagSetModal } from './TagSetModal';
+import { TagSetOverflow } from './TagSetOverflow';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -68,7 +66,7 @@ type TagType = {
   label: string;
   type?: keyof typeof tagTypes;
 } & TagBaseProps;
-interface TagSetProps extends PropsWithChildren {
+export interface TagSetProps extends PropsWithChildren {
   /**
    * align the Tags displayed by the TagSet. Default start.
    */

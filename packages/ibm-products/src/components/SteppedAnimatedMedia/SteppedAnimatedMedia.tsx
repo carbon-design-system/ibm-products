@@ -33,7 +33,7 @@ const defaults = {
   playStep: 0,
 };
 
-interface SteppedAnimatedMediaProps {
+export interface SteppedAnimatedMediaProps {
   /**
    * Optional class name for this component.
    */

@@ -7,20 +7,19 @@
 
 import React, { ReactNode, useRef, useState } from 'react';
 
+import { ChevronDown } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ChevronDown } from '@carbon/react/icons';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--non-linear-reading`;
 const componentName = 'NonLinearReading';
 
 type Theme = 'light' | 'dark';
-interface NonLinearReadingProps {
+export interface NonLinearReadingProps {
   /**
    * The keyword of the component appears as a pill.
    */

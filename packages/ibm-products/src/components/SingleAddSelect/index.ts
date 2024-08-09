@@ -6,3 +6,4 @@
 //
 
 export { SingleAddSelect } from './SingleAddSelect';
+export type { SingleAddSelectProps } from './SingleAddSelect';

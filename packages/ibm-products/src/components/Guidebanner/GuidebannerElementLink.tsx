@@ -7,9 +7,10 @@
 
 // Import portions of React that are needed.
 import React, { ReactNode } from 'react';
+
+import { Link } from '@carbon/react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link } from '@carbon/react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -17,7 +18,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element-link`;
 const componentName = 'GuidebannerElementLink';
 
-interface GuidebannerElementLinkProps {
+export interface GuidebannerElementLinkProps {
   /**
    * Provide the contents of the GuidebannerElementLink.
    */
@@ -33,7 +34,7 @@ interface GuidebannerElementLinkProps {
  * A link styled specifically for the GuidebannerElement.
  */
 export let GuidebannerElementLink = React.forwardRef<
-  Link,
+  typeof Link,
   GuidebannerElementLinkProps
 >(({ children, className, ...rest }: GuidebannerElementLinkProps, ref) => {
   return (

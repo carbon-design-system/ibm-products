@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
+import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
 import { node, string } from 'prop-types';
-import React, { forwardRef, ReactNode, PropsWithChildren } from 'react';
 
-import { pkg } from '../../settings';
 import { blockClass } from './Toolbar';
+import cx from 'classnames';
+import { pkg } from '../../settings';
 
-interface ToolbarGroupProps {
+export interface ToolbarGroupProps {
   /** Provide the content of the `ToolbarGroup` */
   children?: ReactNode;
 

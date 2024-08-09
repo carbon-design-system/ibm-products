@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+import { Button, Column, FlexGrid, Row, Tag, Tooltip } from '@carbon/react';
+import { ButtonProps, PopoverAlignment, TagProps } from '@carbon/type';
 import React, {
   ForwardedRef,
   MutableRefObject,
@@ -14,40 +16,33 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import { spacing10, baseFontSize } from '@carbon/layout';
-import cx from 'classnames';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-
-import { FlexGrid, Column, Row, Button, Tag, Tooltip } from '@carbon/react';
-import { breakpoints } from '@carbon/layout';
-
-import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import {
-  deprecateProp,
-  prepareProps,
-} from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-
-import { ActionBar } from '../ActionBar/';
-import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
-import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { ChevronUp } from '@carbon/react/icons';
-import { ButtonProps, PopoverAlignment, TagProps } from '@carbon/type';
-
-const componentName = 'PageHeader';
-
+import { baseFontSize, spacing10 } from '@carbon/layout';
 import {
   blockClass,
   utilCheckUpdateVerticalSpace,
   utilGetBreadcrumbItemForTitle,
   utilSetCollapsed,
 } from './PageHeaderUtils';
+import {
+  deprecateProp,
+  prepareProps,
+} from '../../global/js/utils/props-helper';
+import { useNearestScroll, useWindowResize } from '../../global/js/hooks';
+
+import { ActionBar } from '../ActionBar/';
+import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
+import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
+import { ChevronUp } from '@carbon/react/icons';
 import { PageHeaderTitle } from './PageHeaderTitle';
+import PropTypes from 'prop-types';
+import { breakpoints } from '@carbon/layout';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+
+const componentName = 'PageHeader';
 
 pkg._silenceWarnings(true);
 pkg.component.ActionBar = true;
@@ -380,7 +375,7 @@ interface PageHeaderBaseProps extends PropsWithChildren {
   hasBackgroundAlways?: boolean;
 }
 
-type PageHeaderProps = PageHeaderBaseProps &
+export type PageHeaderProps = PageHeaderBaseProps &
   PageActionProps &
   CollapseHeaderProps &
   BreadcrumbProps &

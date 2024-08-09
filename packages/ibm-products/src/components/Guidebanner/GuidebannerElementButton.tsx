@@ -7,10 +7,11 @@
 
 // Import portions of React that are needed.
 import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
+
 import { Button } from '@carbon/react';
 import { Crossroads } from '@carbon/react/icons';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -18,7 +19,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element-button`;
 const componentName = 'GuidebannerElementButton';
 
-interface GuidebannerElementButtonProps {
+export interface GuidebannerElementButtonProps {
   /**
    * Provide the contents of the GuidebannerElementLink.
    */
@@ -49,7 +50,7 @@ const defaults = {
  * One of two buttons styled specifically for the GuidebannerElement.
  */
 export let GuidebannerElementButton = React.forwardRef<
-  Button,
+  typeof Button,
   GuidebannerElementButtonProps
 >(
   (

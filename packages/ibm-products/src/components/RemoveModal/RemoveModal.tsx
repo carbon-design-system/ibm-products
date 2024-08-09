@@ -5,32 +5,33 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, {
-  useState,
-  useRef,
-  forwardRef,
-  useEffect,
-  ReactNode,
-} from 'react';
-import cx from 'classnames';
 import {
   Button,
   ComposedModal,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
+  ModalFooter,
+  ModalHeader,
   TextInput,
 } from '@carbon/react';
-import PropTypes from 'prop-types';
+import React, {
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
-import { usePreviousValue } from '../../global/js/hooks';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import { usePreviousValue } from '../../global/js/hooks';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'RemoveModal';
-interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
+export interface RemoveModalProps
+  extends React.ComponentProps<typeof ComposedModal> {
   /**
    * The content to be displayed in the body of the modal
    */

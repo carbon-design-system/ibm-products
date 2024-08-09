@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { TagOverflow } from './TagOverflow';
+export { FullPageError } from './FullPageError';
+export type { FullPageErrorProps } from './FullPageError';

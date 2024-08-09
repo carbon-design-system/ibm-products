@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { PageHeader } from './PageHeader';
+export { RemoveModal } from './RemoveModal';
+export type { RemoveModalProps } from './RemoveModal';

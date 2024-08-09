@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { TagSet } from './TagSet';
+export { PageHeader } from './PageHeader';
+export type { PageHeaderProps } from './PageHeader';

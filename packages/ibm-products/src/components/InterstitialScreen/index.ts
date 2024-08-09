@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { TruncatedList } from './TruncatedList';
+export { InterstitialScreen } from './InterstitialScreen';
+export type { InterstitialScreenProps } from './InterstitialScreen';

@@ -5,42 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  ReactNode,
-  ForwardedRef,
-  MutableRefObject,
-  RefObject,
-} from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { moderate02 } from '@carbon/motion';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { allPropTypes } from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-import { SIDE_PANEL_SIZES } from './constants';
-import { useFocus, usePreviousValue } from '../../global/js/hooks';
-
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, Close } from '@carbon/react/icons';
 // Carbon and package components we use.
 import { Button, IconButton } from '@carbon/react';
-import { Close, ArrowLeft } from '@carbon/react/icons';
-import { ActionSet } from '../ActionSet';
+// Import portions of React that are needed.
+import React, {
+  ForwardedRef,
+  MutableRefObject,
+  ReactNode,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
+  actionSetVariants,
   overlayVariants,
   panelVariants,
-  actionSetVariants,
 } from './motion/variants';
-import pconsole from '../../global/js/utils/pconsole';
+import { useFocus, usePreviousValue } from '../../global/js/hooks';
+
+import { ActionSet } from '../ActionSet';
 import { ButtonProps } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { SIDE_PANEL_SIZES } from './constants';
+import { allPropTypes } from '../../global/js/utils/props-helper';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import pconsole from '../../global/js/utils/pconsole';
+import { pkg } from '../../settings';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -211,7 +208,7 @@ type SidePanelSlideInProps =
       selectorPageContent: string;
     };
 
-type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
+export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
 // `any` is a work around until ActionSet is migrated to TS
 const MotionActionSet = motion(ActionSet);

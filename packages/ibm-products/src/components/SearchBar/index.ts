@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { GetStartedCard } from './GetStartedCard';
+export { SearchBar } from './SearchBar';
+export type { SearchBarProps } from './SearchBar';

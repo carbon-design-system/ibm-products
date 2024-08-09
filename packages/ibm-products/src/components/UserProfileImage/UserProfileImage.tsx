@@ -5,24 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
-import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { User, Group } from '@carbon/react/icons';
-
+import { Group, User } from '@carbon/react/icons';
 import { Tooltip, usePrefix } from '@carbon/react';
-import { TooltipTrigger } from '../TooltipTrigger';
+
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { IconButton } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
+// Import portions of React that are needed.
+import React from 'react';
+import { TooltipTrigger } from '../TooltipTrigger';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -102,7 +100,7 @@ type UserProfileImageBaseProps = {
   tooltipText?: string;
 };
 
-type UserProfileImageProps = UserProfileImageBaseProps & imageProps;
+export type UserProfileImageProps = UserProfileImageBaseProps & imageProps;
 
 /**
  * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.

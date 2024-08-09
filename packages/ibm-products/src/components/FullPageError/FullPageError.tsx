@@ -5,27 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import { Column, Grid } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { ReactNode } from 'react';
 
+import { Error403SVG } from './assets/Error403SVG';
+import { Error404SVG } from './assets/Error404SVG';
+import { ErrorGenericSVG } from './assets/ErrorGenericSVG';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { ErrorGenericSVG } from './assets/ErrorGenericSVG';
-import { Error404SVG } from './assets/Error404SVG';
-import { Error403SVG } from './assets/Error403SVG';
-
-// Carbon and package components we use.
-import { Grid, Column } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--full-page-error`;
 const componentName = 'FullPageError';
 
-interface FullPageErrorProps {
+export interface FullPageErrorProps {
   /**
    * Provide the contents of the FullPageError.
    */

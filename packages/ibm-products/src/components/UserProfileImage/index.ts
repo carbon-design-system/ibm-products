@@ -8,3 +8,4 @@
 // NOTE: An index file is most useful when you have multiple components
 
 export { UserProfileImage } from './UserProfileImage';
+export type { UserProfileImageProps } from './UserProfileImage';

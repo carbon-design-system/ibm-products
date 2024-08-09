@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Button, IconButton } from '@carbon/react';
+// Other standard imports.
+import { Close, Crossroads, Idea } from '@carbon/react/icons';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -16,17 +19,13 @@ import React, {
   useState,
 } from 'react';
 
-// Other standard imports.
-import { Close, Crossroads, Idea } from '@carbon/react/icons';
-import { Button, IconButton } from '@carbon/react';
 import PropTypes from 'prop-types';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import cx from 'classnames';
 import { getComponentText } from './utils';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-tip`;
@@ -52,7 +51,7 @@ type MediaType = {
   filePaths?: string[];
 };
 
-interface InlineTipProps {
+export interface InlineTipProps {
   /**
    * Optional "call to action" ghost button or link that can appear
    * directly below the content. This component comes with pre-styled

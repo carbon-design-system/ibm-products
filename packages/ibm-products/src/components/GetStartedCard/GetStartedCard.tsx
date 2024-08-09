@@ -6,12 +6,12 @@
  */
 
 import React, { PropsWithChildren, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 
+import { Card } from '../Card';
+import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-import { Card } from '../Card';
 const componentName = 'GetStartedCard';
 
 type MetaData = {
@@ -20,7 +20,7 @@ type MetaData = {
   iconDescription?: string;
 };
 
-interface GetStartedCardProps extends PropsWithChildren {
+export interface GetStartedCardProps extends PropsWithChildren {
   /**
    * Provide an optional class to be applied to the containing node.
    */

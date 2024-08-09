@@ -6,3 +6,4 @@
 //
 
 export { MultiAddSelect } from './MultiAddSelect';
+export type { MultiAddSelectProps } from './MultiAddSelect';

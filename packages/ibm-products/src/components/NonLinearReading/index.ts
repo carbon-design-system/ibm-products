@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';
+export { NonLinearReading } from './NonLinearReading';
+export type { NonLinearReadingProps } from './NonLinearReading';

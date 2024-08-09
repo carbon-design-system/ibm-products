@@ -5,6 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  Button,
+  Column,
+  ComposedModal,
+  FlexGrid,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  ProgressIndicator,
+  ProgressStep,
+  Row,
+} from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   Children,
@@ -17,30 +29,16 @@ import React, {
   useState,
 } from 'react';
 
+import { ArrowRight } from '@carbon/react/icons';
+import { Carousel } from '../Carousel';
 // Other standard imports.
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 // Other standard imports.
 import { clamp } from 'lodash';
-import { ArrowRight } from '@carbon/react/icons';
-import {
-  Button,
-  Column,
-  ComposedModal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  FlexGrid,
-  ProgressIndicator,
-  ProgressStep,
-  Row,
-} from '@carbon/react';
-import { Carousel } from '../Carousel';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--interstitial-screen`;
@@ -90,7 +88,7 @@ type Media = {
       filePaths?: string[];
     }
 );
-interface InterstitialScreenProps extends PropsWithChildren {
+export interface InterstitialScreenProps extends PropsWithChildren {
   /**
    * Provide the contents of the InterstitialScreen.
    */

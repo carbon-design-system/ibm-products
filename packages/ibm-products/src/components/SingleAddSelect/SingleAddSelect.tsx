@@ -6,17 +6,18 @@
 //
 
 import React, { ForwardedRef, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+
 import { AddSelect } from '../AddSelect';
+import { AddSelectProps } from '../AddSelect/AddSelect';
+import { Entry } from '../AddSelect/types';
+import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-import { AddSelectProps } from '../AddSelect/AddSelect';
-import { Entry } from '../AddSelect/types';
 
 const componentName = 'SingleAddSelect';
 
-interface SingleAddSelectProps {
+export interface SingleAddSelectProps {
   /**
    * optional class name
    */

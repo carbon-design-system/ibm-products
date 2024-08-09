@@ -6169,10 +6169,14 @@ th.c4p--datagrid__select-all-toggle-on.button {
   background: var(--cds-layer-02, #ffffff);
 }
 
+.c4p--add-select__supplemental-header {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
 .c4p--add-select__header {
   padding: 1rem;
   padding-bottom: 0;
-  border-top: 1px solid var(--cds-layer-accent-01, #e0e0e0);
 }
 
 .c4p--add-select__body {

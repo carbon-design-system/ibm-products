@@ -11,7 +11,7 @@ export const sampleDataStructure_tree = {
   operator: 'or',
   groups: [
     {
-      groupOperator: 'and', //'and|or',
+      operator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       id: uuidv4(),
       conditions: [
@@ -41,7 +41,7 @@ export const sampleDataStructure_tree = {
         },
         //group object repeats
         {
-          groupOperator: 'and', //'and|or',
+          operator: 'and', //'and|or',
           statement: 'if', // 'if|exclude if',
           id: uuidv4(),
           conditions: [
@@ -71,7 +71,7 @@ export const sampleDataStructure_tree = {
             },
             //group object repeats
             {
-              groupOperator: 'and', //'and|or',
+              operator: 'and', //'and|or',
               statement: 'if', // 'if|exclude if',
               id: uuidv4(),
               conditions: [
@@ -101,7 +101,7 @@ export const sampleDataStructure_tree = {
       ],
     },
     {
-      groupOperator: 'and', //'and|or',
+      operator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       id: uuidv4(),
       conditions: [
@@ -131,7 +131,7 @@ export const sampleDataStructure_tree = {
 export const sampleDataStructure_sentence = {
   groups: [
     {
-      groupOperator: 'and', //'and|or',
+      operator: 'and', //'and|or',
       statement: 'if', // 'if|exclude if',
       id: uuidv4(),
       conditions: [

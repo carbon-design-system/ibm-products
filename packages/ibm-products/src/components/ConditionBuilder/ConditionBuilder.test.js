@@ -873,7 +873,7 @@ describe(componentName, () => {
       operator: 'or',
       groups: [
         {
-          groupOperator: 'and', //'and|or',
+          operator: 'and', //'and|or',
           statement: 'if', // 'if|exclude if',
           id: uuidv4(),
           conditions: [
@@ -902,7 +902,7 @@ describe(componentName, () => {
               id: uuidv4(),
             },
             {
-              groupOperator: 'and',
+              operator: 'and',
               statement: 'if',
               id: uuidv4(),
               conditions: [
@@ -984,7 +984,7 @@ describe(componentName, () => {
       operator: 'or',
       groups: [
         {
-          groupOperator: 'and', //'and|or',
+          operator: 'and', //'and|or',
           statement: 'if', // 'if|exclude if',
           id: uuidv4(),
           conditions: [
@@ -1146,7 +1146,7 @@ describe(componentName, () => {
       operator: 'or',
       groups: [
         {
-          groupOperator: 'and',
+          operator: 'and',
           statement: 'if',
           id: '686c62a9-e33d-4e31-817b-4fd319168935',
           conditions: [
@@ -1163,7 +1163,7 @@ describe(componentName, () => {
               id: '87b6cc99-b463-45e2-ab88-44a2a2069a25',
             },
             {
-              groupOperator: 'and',
+              operator: 'and',
               statement: 'if',
               conditions: [
                 {
@@ -1179,7 +1179,7 @@ describe(componentName, () => {
                   id: 'b1ab21df-1791-4955-a9f4-5e257b1d8ee2',
                 },
                 {
-                  groupOperator: 'and',
+                  operator: 'and',
                   statement: 'if',
                   conditions: [
                     {

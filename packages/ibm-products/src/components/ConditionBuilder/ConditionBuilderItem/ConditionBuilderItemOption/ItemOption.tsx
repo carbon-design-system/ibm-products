@@ -15,10 +15,23 @@ import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../../utils/useTranslations';
+import { PropertyConfigOption } from '../../ConditionBuilder.types';
 
-export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
+interface ItemOptionProps {
+  conditionState: {
+    label?: string;
+    value?: string;
+  };
+  config: PropertyConfigOption['config'];
+  onChange: (value: string, e: Event) => void;
+}
+export const ItemOption = ({
+  conditionState = {},
+  config = {},
+  onChange,
+}: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
-  const contentRef = useRef();
+  const contentRef = useRef<HTMLDivElement>(null);
   const [propertyText, clearSearchText] = useTranslations([
     'propertyText',
     'clearSearchText',
@@ -36,8 +49,9 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
     //this will focus the first input field in the popover
 
     if (contentRef.current) {
-      const firstFocusableElement =
-        contentRef.current.querySelector('input, button,li');
+      const firstFocusableElement = contentRef.current?.querySelector(
+        'input, button,li'
+      ) as HTMLInputElement;
 
       if (firstFocusableElement) {
         firstFocusableElement.focus();
@@ -55,11 +69,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   };
 
   const getAriaLabel = () => {
-    return conditionState.label
-      ? conditionState.label
-      : conditionState.property
-      ? conditionState.property
-      : propertyText;
+    return conditionState.label ? conditionState.label : propertyText;
   };
 
   if (!allOptions) {
@@ -67,7 +77,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   }
   return (
     <div className={`${blockClass}__item-option`} ref={contentRef}>
-      {allOptions.length > popOverSearchThreshold && (
+      {popOverSearchThreshold && allOptions.length > popOverSearchThreshold && (
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
@@ -93,7 +103,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
               onKeyUp={() => {
                 return false;
               }}
-              onClick={(evt) => onClickHandler(evt, option, isSelected)}
+              onClick={(evt) => onClickHandler(evt, option)}
             >
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>

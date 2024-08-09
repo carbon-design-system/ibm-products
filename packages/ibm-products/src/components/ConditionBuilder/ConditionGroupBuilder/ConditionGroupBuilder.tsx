@@ -23,6 +23,11 @@ import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { useTranslations } from '../utils/useTranslations';
+import {
+  Condition,
+  ConditionGroup,
+  LogicalOperator,
+} from '../ConditionBuilder.types';
 /**
  *
  *  state - this is the current group that is being rendered . This can be a inner group or outer group
@@ -30,13 +35,25 @@ import { useTranslations } from '../utils/useTranslations';
  * @returns
  */
 
+interface ConditionGroupBuilderProps {
+  group: ConditionGroup;
+  onRemove: (e: Event) => void;
+  onChange: (group: ConditionGroup) => void;
+  className?: string;
+  aria: {
+    level: number;
+    posinset: number;
+    setsize: number;
+  };
+}
+
 const ConditionGroupBuilder = ({
   group,
   aria,
   onRemove,
   onChange,
   className,
-}) => {
+}: ConditionGroupBuilderProps) => {
   const [conditionBuilderGroupText, conditionText, conditionBuilderText] =
     useTranslations([
       'conditionBuilderGroupText',
@@ -48,9 +65,9 @@ const ConditionGroupBuilder = ({
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
     useState(-1);
   useState(false);
-  const conditionBuilderContentRef = useRef();
+  const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
-    if (group.conditions.length > 1) {
+    if (group && group.conditions && group.conditions.length > 1) {
       variant == 'tree'
         ? handleFocusOnCloseTree(evt)
         : handleFocusOnClose(evt, conditionIndex);
@@ -60,35 +77,45 @@ const ConditionGroupBuilder = ({
         //we will shift the group one level up. The subgroups will open up as conditions.
 
         //spreading out the condition inside the subgroup
-        const allConditions = group.conditions.reduce((acc, condition) => {
-          if (condition.conditions) {
-            //this is a subgroup
-            return acc.concat(condition.conditions);
-          }
-          return acc;
-        }, []);
+        const allConditions = group?.conditions?.reduce(
+          (acc: (ConditionGroup | Condition)[], condition) => {
+            const _condition: ConditionGroup = condition as ConditionGroup;
+            if (_condition.conditions) {
+              //this is a subgroup
+              return acc.concat(_condition.conditions);
+            }
+            return acc;
+          },
+          []
+        );
 
-        onChange({
+        onChange?.({
           ...group,
           conditions: allConditions,
         });
       } else {
-        const filteredConditions = group.conditions.filter(
-          (condition) => conditionId !== condition.id
-        );
+        const filteredConditions: (ConditionGroup | Condition)[] =
+          group.conditions.filter((condition) => conditionId !== condition.id);
         //This is to handle a edge case.
         //When a group has structure as 1 condition,1 subgroup, 1 condition and if we delete first condition,
         //the group will start with a subgroup. To avoid this,opening up that subgroup.
-        if (filteredConditions?.[0].conditions) {
-          filteredConditions.splice(0, 1, ...filteredConditions[0].conditions);
+        if ((filteredConditions?.[0] as ConditionGroup).conditions) {
+          const firstFilteredConditions: ConditionGroup =
+            filteredConditions[0] as ConditionGroup;
+
+          filteredConditions.splice(
+            0,
+            1,
+            ...(firstFilteredConditions?.conditions as ConditionGroup[])
+          );
         }
-        onChange({
+        onChange?.({
           ...group,
           conditions: filteredConditions,
         });
       }
     } else {
-      onRemove(evt);
+      onRemove?.(evt);
     }
   };
   //check to identify a group without a plain condition
@@ -100,18 +127,19 @@ const ConditionGroupBuilder = ({
 
   const onChangeHandler = (updatedCondition, conditionIndex) => {
     const updatedConditions = [
-      ...group.conditions.slice(0, conditionIndex),
+      ...(group?.conditions ? group.conditions.slice(0, conditionIndex) : []),
       updatedCondition,
-      ...group.conditions.slice(conditionIndex + 1),
+      ...(group?.conditions ? group.conditions.slice(conditionIndex + 1) : []),
     ];
-    onChange({
+    onChange?.({
       ...group,
       conditions: updatedConditions,
+      id: group?.id ?? uuidv4(),
     });
   };
 
   const addConditionHandler = (conditionIndex) => {
-    let newCondition = {
+    const newCondition = {
       property: undefined,
       operator: '',
       value: '',
@@ -119,14 +147,16 @@ const ConditionGroupBuilder = ({
       id: uuidv4(),
     };
 
-    onChange({
+    onChange?.({
       ...group,
       conditions: [
-        ...group.conditions.slice(0, conditionIndex + 1),
+        ...(group.conditions
+          ? group.conditions.slice(0, conditionIndex + 1)
+          : []),
         newCondition,
-        ...group.conditions.slice(conditionIndex + 1),
+        ...(group.conditions ? group.conditions.slice(conditionIndex + 1) : []),
       ],
-    });
+    } as ConditionGroup);
   };
 
   const handleFocusOnClose = (e, conditionIndex) => {
@@ -201,7 +231,7 @@ const ConditionGroupBuilder = ({
         };
         setTimeout(() => {
           const currentRowToFocus =
-            conditionBuilderContentRef.current.querySelector(
+            conditionBuilderContentRef.current?.querySelector(
               `[role="row"][aria-level="${rowIdentity.ariaLevel}"][aria-posinset="${rowIdentity.ariaPosInSet}"]`
             );
           manageTabIndexAndFocus(
@@ -209,7 +239,7 @@ const ConditionGroupBuilder = ({
             conditionBuilderRef
           );
         }, 0);
-      } else if (prevRows?.length > 1) {
+      } else if (prevRows?.length && prevRows.length > 1) {
         manageTabIndexAndFocus(
           prevRows[prevRows.length - 2]?.querySelector(
             '[data-name="closeCondition"]'
@@ -224,10 +254,12 @@ const ConditionGroupBuilder = ({
     onChange({
       ...group,
       conditions: [
-        ...group.conditions.slice(0, conditionIndex + 1),
+        ...(group.conditions
+          ? group.conditions.slice(0, conditionIndex + 1)
+          : []),
         {
-          groupOperator: 'and',
           statement: 'if',
+          operator: 'and',
           conditions: [
             {
               property: undefined,
@@ -239,7 +271,7 @@ const ConditionGroupBuilder = ({
           ],
           id: uuidv4(),
         },
-        ...group.conditions.slice(conditionIndex + 1),
+        ...(group.conditions ? group.conditions.slice(conditionIndex + 1) : []),
       ],
     });
   };
@@ -266,10 +298,11 @@ const ConditionGroupBuilder = ({
   const onStatementChangeHandler = (updatedStatement) => {
     const groupOperator = statementConfig.find(
       (statement) => statement.id == updatedStatement
-    )?.connector;
+    )?.connector as LogicalOperator;
+
     onChange({
       ...group,
-      groupOperator: groupOperator,
+      operator: groupOperator,
       statement: updatedStatement,
     });
   };
@@ -277,7 +310,7 @@ const ConditionGroupBuilder = ({
   const onConnectorOperatorChange = (op) => {
     onChange({
       ...group,
-      groupOperator: op,
+      operator: op,
     });
   };
 
@@ -297,13 +330,11 @@ const ConditionGroupBuilder = ({
               className={`${blockClass}__group-wrapper`}
             >
               <ConditionBlock
-                conjunction={
-                  conditionIndex > 0 ? group.groupOperator : undefined
-                }
+                conjunction={conditionIndex > 0 ? group.operator : undefined}
                 aria={{
                   level: aria.level + 1,
                   posinset: conditionIndex + 1,
-                  setsize: group.conditions.length,
+                  setsize: group?.conditions?.length,
                 }}
                 isStatement={conditionIndex == 0}
                 condition={eachCondition}
@@ -369,13 +400,15 @@ const ConditionGroupBuilder = ({
         {group?.conditions?.map((eachCondition, conditionIndex) => (
           <Fragment key={eachCondition.id}>
             {/* This condition is for tree model where there will be subgroups inside each group */}
-            {eachCondition.conditions ? (
+            {(eachCondition as ConditionGroup).conditions ? (
               <div
                 className={cx(
                   `${blockClass}__condition-block subgroup  ${blockClass}__gap`,
 
                   {
                     [`${blockClass}__gap-bottom`]:
+                      group &&
+                      group.conditions &&
                       group.conditions.length < conditionIndex + 1,
                   },
                   {}
@@ -383,7 +416,7 @@ const ConditionGroupBuilder = ({
               >
                 <ConditionConnector
                   className={`${blockClass}__gap ${blockClass}__gap-bottom ${blockClass}__groupConnector`}
-                  operator={group.groupOperator}
+                  operator={group.operator as string}
                   aria-hidden
                 />
 
@@ -391,28 +424,26 @@ const ConditionGroupBuilder = ({
                   aria={{
                     level: aria.level + 1,
                     posinset: conditionIndex + 1,
-                    setsize: group.conditions.length,
+                    setsize: group.conditions?.length ?? 0,
                   }}
                   className={`${blockClass}__group`}
-                  group={eachCondition}
+                  group={eachCondition as ConditionGroup}
                   onChange={(updatedConditions) => {
                     onChangeHandler(updatedConditions, conditionIndex);
                   }}
                   onRemove={(e) => {
-                    onRemoveHandler(eachCondition.id, e);
+                    onRemoveHandler(eachCondition.id, e, conditionIndex);
                   }}
                 />
               </div>
             ) : (
               <div>
                 <ConditionBlock
-                  conjunction={
-                    conditionIndex > 0 ? group.groupOperator : undefined
-                  }
+                  conjunction={conditionIndex > 0 ? group.operator : undefined}
                   aria={{
                     level: aria.level + 1,
                     posinset: conditionIndex + 1,
-                    setsize: group.conditions.length,
+                    setsize: group.conditions?.length ?? 0,
                   }}
                   isStatement={false}
                   condition={eachCondition}
@@ -424,7 +455,7 @@ const ConditionGroupBuilder = ({
                     onChangeHandler(updatedConditions, conditionIndex);
                   }}
                   onRemove={(e) => {
-                    onRemoveHandler(eachCondition.id, e);
+                    onRemoveHandler(eachCondition.id, e, conditionIndex);
                   }}
                   onConnectorOperatorChange={onConnectorOperatorChange}
                   onStatementChange={onStatementChangeHandler}

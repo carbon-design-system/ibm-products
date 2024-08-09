@@ -13,7 +13,18 @@ import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderIt
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
-const ConditionPreview = ({ previewType, group, colorIndex }) => {
+import { ConditionGroup } from '../ConditionBuilder.types';
+
+interface ConditionPreviewProps {
+  previewType: 'newGroup' | 'subGroup' | 'condition';
+  group: ConditionGroup;
+  colorIndex?: number;
+}
+const ConditionPreview = ({
+  previewType,
+  group,
+  colorIndex,
+}: ConditionPreviewProps) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
     'valueText',
@@ -47,7 +58,7 @@ const ConditionPreview = ({ previewType, group, colorIndex }) => {
           >
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
-              label={group.groupOperator}
+              label={group.operator}
             />
           </div>
           <div
@@ -78,7 +89,7 @@ const ConditionPreview = ({ previewType, group, colorIndex }) => {
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={group.groupOperator}
+              label={group.operator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />
@@ -104,7 +115,7 @@ const ConditionPreview = ({ previewType, group, colorIndex }) => {
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={group.groupOperator}
+              label={group.operator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />

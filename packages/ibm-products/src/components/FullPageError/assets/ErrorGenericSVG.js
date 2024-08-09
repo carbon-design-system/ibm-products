@@ -11,13 +11,14 @@ import React from 'react';
 // Other standard imports.
 import { string } from 'prop-types';
 
-export const ErrorGenericSVG = ({ className }) => {
+export const ErrorGenericSVG = ({ className, title }) => {
   return (
     <svg
       viewBox="0 0 750 506"
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
+      aria-label={title}
     >
       <g clipPath="url(#clip0_203_144)">
         <path
@@ -827,4 +828,5 @@ export const ErrorGenericSVG = ({ className }) => {
 // See https://www.npmjs.com/package/prop-types#usage.
 ErrorGenericSVG.propTypes = {
   className: string,
+  title: string,
 };

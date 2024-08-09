@@ -84,18 +84,25 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
     const errorData = {
       403: {
         svg: (
-          <Error403SVG className={`${blockClass}__svg ${blockClass}__403`} />
+          <Error403SVG
+            className={`${blockClass}__svg ${blockClass}__403`}
+            title={title}
+          />
         ),
       },
       404: {
         svg: (
-          <Error404SVG className={`${blockClass}__svg ${blockClass}__404`} />
+          <Error404SVG
+            className={`${blockClass}__svg ${blockClass}__404`}
+            title={title}
+          />
         ),
       },
       custom: {
         svg: (
           <ErrorGenericSVG
             className={`${blockClass}__svg ${blockClass}__custom`}
+            title={title}
           />
         ),
       },

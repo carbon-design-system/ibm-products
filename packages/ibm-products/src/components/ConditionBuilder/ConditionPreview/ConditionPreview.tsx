@@ -58,7 +58,7 @@ const ConditionPreview = ({
           >
             <ConditionBuilderItem
               className={`${blockClass}__statement-button`}
-              label={group.operator}
+              label={group.groupOperator}
             />
           </div>
           <div
@@ -89,7 +89,7 @@ const ConditionPreview = ({
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={group.operator}
+              label={group.groupOperator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />
@@ -115,7 +115,7 @@ const ConditionPreview = ({
         >
           <div className={`${blockClass}__condition-block  ${blockClass}__gap`}>
             <ConditionBuilderItem
-              label={group.operator}
+              label={group.groupOperator}
               className={`${blockClass}__statement-button`}
               popOverClassName={`${blockClass}__gap`}
             />

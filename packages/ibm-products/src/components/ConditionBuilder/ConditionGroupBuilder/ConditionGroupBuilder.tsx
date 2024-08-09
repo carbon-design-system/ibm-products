@@ -259,7 +259,7 @@ const ConditionGroupBuilder = ({
           : []),
         {
           statement: 'if',
-          operator: 'and',
+          groupOperator: 'and',
           conditions: [
             {
               property: undefined,
@@ -302,7 +302,7 @@ const ConditionGroupBuilder = ({
 
     onChange({
       ...group,
-      operator: groupOperator,
+      groupOperator: groupOperator,
       statement: updatedStatement,
     });
   };
@@ -310,7 +310,7 @@ const ConditionGroupBuilder = ({
   const onConnectorOperatorChange = (op) => {
     onChange({
       ...group,
-      operator: op,
+      groupOperator: op,
     });
   };
 
@@ -330,7 +330,9 @@ const ConditionGroupBuilder = ({
               className={`${blockClass}__group-wrapper`}
             >
               <ConditionBlock
-                conjunction={conditionIndex > 0 ? group.operator : undefined}
+                conjunction={
+                  conditionIndex > 0 ? group.groupOperator : undefined
+                }
                 aria={{
                   level: aria.level + 1,
                   posinset: conditionIndex + 1,
@@ -416,7 +418,7 @@ const ConditionGroupBuilder = ({
               >
                 <ConditionConnector
                   className={`${blockClass}__gap ${blockClass}__gap-bottom ${blockClass}__groupConnector`}
-                  operator={group.operator as string}
+                  operator={group.groupOperator as string}
                   aria-hidden
                 />
 
@@ -439,7 +441,9 @@ const ConditionGroupBuilder = ({
             ) : (
               <div>
                 <ConditionBlock
-                  conjunction={conditionIndex > 0 ? group.operator : undefined}
+                  conjunction={
+                    conditionIndex > 0 ? group.groupOperator : undefined
+                  }
                   aria={{
                     level: aria.level + 1,
                     posinset: conditionIndex + 1,

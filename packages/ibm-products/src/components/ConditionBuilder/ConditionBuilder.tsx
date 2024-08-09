@@ -182,6 +182,7 @@ ConditionBuilder.propTypes = {
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
+        groupOperator: PropTypes.string,
         statement: PropTypes.string,
         conditions: PropTypes.arrayOf(
           PropTypes.oneOfType([

@@ -18,7 +18,7 @@ export const emptyState: ConditionBuilderState = {
   operator: 'or',
   groups: [
     {
-      operator: 'and',
+      groupOperator: 'and',
       statement: 'if',
       id: uuidv4(),
       conditions: [

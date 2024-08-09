@@ -157,7 +157,7 @@ export type Condition = {
 
 export type ConditionGroup = {
   conditions?: (ConditionGroup | Condition)[];
-  operator?: LogicalOperator;
+  groupOperator?: LogicalOperator;
   statement?: StatementOperator;
   id: string;
 };

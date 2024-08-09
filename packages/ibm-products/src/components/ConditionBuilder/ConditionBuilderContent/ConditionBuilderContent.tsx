@@ -122,6 +122,7 @@ const ConditionBuilderContent = ({
   const addConditionGroupHandler = () => {
     const newGroup: ConditionGroup = {
       statement: 'if', // 'if|exclude if',
+      groupOperator: 'and',
       id: uuidv4(),
       conditions: [
         {
@@ -231,7 +232,7 @@ const ConditionBuilderContent = ({
           <ConditionPreview
             previewType="newGroup"
             colorIndex={getColorIndex()}
-            group={{ operator: rootState?.operator, id: uuidv4() }}
+            group={{ groupOperator: rootState?.operator, id: uuidv4() }}
           />
         )}
       </div>
@@ -271,12 +272,13 @@ ConditionBuilderContent.propTypes = {
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
-        statement: PropTypes.string.isRequired,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
         conditions: PropTypes.arrayOf(
           PropTypes.oneOfType([
             PropTypes.shape({
-              property: PropTypes.string.isRequired,
-              operator: PropTypes.string.isRequired,
+              property: PropTypes.string,
+              operator: PropTypes.string,
               value: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.arrayOf(

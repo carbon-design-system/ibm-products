@@ -14,7 +14,7 @@ import { pkg } from '../../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--http-errors-other`;
-export const HTTPErrorSvgOther = ({ className }) => {
+export const HTTPErrorSvgOther = ({ className, title }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +22,7 @@ export const HTTPErrorSvgOther = ({ className }) => {
       viewBox="0 0 1584 916"
       className={className}
       preserveAspectRatio="xMinYMax meet"
+      aria-label={title}
     >
       <defs>
         <clipPath id="prefix__clip-path">
@@ -1239,4 +1240,5 @@ export const HTTPErrorSvgOther = ({ className }) => {
 // See https://www.npmjs.com/package/prop-types#usage.
 HTTPErrorSvgOther.propTypes = {
   className: string,
+  title: string,
 };

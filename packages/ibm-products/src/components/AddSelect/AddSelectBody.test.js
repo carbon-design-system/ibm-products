@@ -12,6 +12,7 @@ import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
 import { Document } from '@carbon/react/icons';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
+import { waitForPosition } from '../../global/js/utils/wait_for_position';
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelectBody.name;
@@ -345,6 +346,7 @@ describe(componentName, () => {
       onSubmit,
     };
     render(<AddSelectBody {...newProps} />);
+    await waitForPosition();
     const submitBtn = screen.getByText('Add');
     const opt1 = screen.getByLabelText('Kansas');
     fireEvent.click(opt1);

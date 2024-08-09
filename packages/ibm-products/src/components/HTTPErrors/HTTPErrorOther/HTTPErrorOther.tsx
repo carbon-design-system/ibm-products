@@ -77,7 +77,7 @@ export let HTTPErrorOther = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <HTTPErrorContent {...{ description, errorCodeLabel, title, links }} />
-        <HTTPErrorSvgOther className={`${blockClass}__image`} />
+        <HTTPErrorSvgOther title={title} className={`${blockClass}__image`} />
       </div>
     );
   }

@@ -6,3 +6,4 @@
 //
 
 export { AddSelect } from './AddSelect';
+export type { AddSelectProps } from './AddSelect';

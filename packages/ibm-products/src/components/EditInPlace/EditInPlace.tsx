@@ -5,24 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Checkmark, Close, Edit, WarningFilled } from '@carbon/react/icons';
 import React, {
-  useState,
-  useEffect,
-  forwardRef,
-  useRef,
   PropsWithChildren,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
+import { carbon, pkg } from '../../settings';
+
 import { IconButton } from '@carbon/react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  Edit,
-  Checkmark,
-  Close,
-  // EditOff,
-  WarningFilled,
-} from '@carbon/react/icons';
-import { pkg, carbon } from '../../settings';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'EditInPlace';
@@ -49,7 +44,7 @@ type Shape = {
   save: AlignPropType;
 };
 
-interface EditInplaceProps extends PropsWithChildren {
+export interface EditInplaceProps extends PropsWithChildren {
   /**
    * label for cancel button
    */

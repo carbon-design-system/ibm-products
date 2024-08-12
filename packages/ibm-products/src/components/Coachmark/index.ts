@@ -13,3 +13,4 @@ export {
   COACHMARK_ALIGNMENT,
 } from './utils/enums';
 export { useCoachmark } from './utils/context';
+export type { CoachmarkProps } from './Coachmark';

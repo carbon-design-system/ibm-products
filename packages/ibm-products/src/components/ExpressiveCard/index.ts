@@ -6,3 +6,4 @@
 //
 
 export { ExpressiveCard } from './ExpressiveCard';
+export type { ExpressiveCardProps } from './ExpressiveCard';

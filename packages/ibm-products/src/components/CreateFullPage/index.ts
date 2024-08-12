@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { EditSidePanel } from './EditSidePanel';
+export { CreateFullPage } from './CreateFullPage';
+export { CreateFullPageStep } from './CreateFullPageStep';
+export type { CreateFullPageProps } from './CreateFullPage';

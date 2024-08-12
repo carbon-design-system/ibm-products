@@ -5,18 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import { Button, MultiSelect, Search } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-
-// Carbon and package components we use.
-import { Search, Button, MultiSelect } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--search-bar`;
@@ -35,7 +33,7 @@ const defaults = {
 
 type Scopes = string[] | object[];
 
-interface SearchBarProps extends PropsWithChildren {
+export interface SearchBarProps extends PropsWithChildren {
   /** @type {string} Optional additional class name. */
   className?: string;
 

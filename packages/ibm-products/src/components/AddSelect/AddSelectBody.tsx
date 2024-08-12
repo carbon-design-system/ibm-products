@@ -28,6 +28,7 @@ const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
 
 export interface AddSelectBodyProps {
+  supplementalHeader?: ReactNode;
   className?: string;
   clearFiltersText?: string;
   closeIconDescription?: string;
@@ -72,6 +73,7 @@ export interface AddSelectBodyProps {
 export const AddSelectBody = forwardRef(
   (
     {
+      supplementalHeader,
       className,
       clearFiltersText,
       closeIconDescription,
@@ -275,6 +277,12 @@ export const AddSelectBody = forwardRef(
     // main content
     const body = (
       <>
+        {supplementalHeader && (
+          <div className={`${blockClass}__supplemental-header`}>
+            {supplementalHeader}
+          </div>
+        )}
+
         <div id="add-select" className={`${blockClass}__header`}>
           <AddSelectFilter
             inputLabel={globalSearchLabel}

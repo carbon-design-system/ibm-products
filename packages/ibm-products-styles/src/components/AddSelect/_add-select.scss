@@ -17,10 +17,14 @@
 $block-class: #{$pkg-prefix}--add-select;
 $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
+.#{$block-class}__supplemental-header {
+  padding: $spacing-05;
+  padding-bottom: 0;
+}
+
 .#{$block-class}__header {
   padding: $spacing-05;
   padding-bottom: 0;
-  border-top: 1px solid $layer-accent-01;
 }
 
 .#{$block-class}__body {

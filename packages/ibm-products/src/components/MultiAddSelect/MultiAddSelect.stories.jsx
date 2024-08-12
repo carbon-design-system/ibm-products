@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { MultiAddSelect } from '.';
-import { Button } from '@carbon/react';
+import { Button, TextInput } from '@carbon/react';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 import { Group, Document } from '@carbon/react/icons';
 
@@ -27,6 +27,26 @@ export default {
     },
   },
   argTypes: {
+    supplementalHeader: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no supplemental header',
+          1: 'Text Input',
+        },
+      },
+      options: [0, 1],
+      mapping: {
+        0: null,
+        1: (
+          <TextInput
+            id="text-input-1"
+            type="text"
+            labelText="Text input label"
+          />
+        ),
+      },
+    },
     items: {
       control: {
         type: 'select',
@@ -263,6 +283,7 @@ const Template = (args, context) => {
 export const Default = Template.bind({});
 Default.args = {
   items: 1,
+  supplementalHeader: 0,
   ...defaultProps,
 };
 
@@ -301,5 +322,12 @@ WithModifiers.args = {
 export const WithAvatars = Template.bind({});
 WithAvatars.args = {
   items: 4,
+  ...defaultProps,
+};
+
+export const WithSupplementalHeader = Template.bind({});
+WithSupplementalHeader.args = {
+  items: 1,
+  supplementalHeader: 1,
   ...defaultProps,
 };

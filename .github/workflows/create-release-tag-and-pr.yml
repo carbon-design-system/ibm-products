@@ -36,7 +36,13 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
-          fetch-depth: '0'
+          token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
+
+      # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
+      - run: |
+          git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
+          git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
+
       # Create a new branch off the release branch for the PR, we do this to ensure the release branch
       # is not affected
       - name: Create branch

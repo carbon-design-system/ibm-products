@@ -300,7 +300,7 @@ export let DataSpreadsheet = React.forwardRef(
         return null;
       }
 
-      if (element.props.headerKey === true) {
+      if (element.props.headerKey) {
         return element.props.children;
       }
 

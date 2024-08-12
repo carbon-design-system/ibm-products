@@ -8,3 +8,4 @@
 export { CreateTearsheet } from './CreateTearsheet';
 export { CreateTearsheetStep } from './CreateTearsheetStep';
 export { CreateTearsheetDivider } from './CreateTearsheetDivider';
+export type { CreateTearsheetProps } from './CreateTearsheet';

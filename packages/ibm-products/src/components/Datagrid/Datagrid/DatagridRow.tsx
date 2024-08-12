@@ -39,6 +39,7 @@ const DatagridRow = (datagridState: DataGridState) => {
     setMouseOverRowIndex,
     headers,
     visibleColumns,
+    getAsyncSubRows,
   } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
@@ -136,6 +137,8 @@ const DatagridRow = (datagridState: DataGridState) => {
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
     [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
     [`${blockClass}__carbon-row-expandable`]: row.canExpand,
+    [`${blockClass}__carbon-row-expandable--async`]:
+      getAsyncSubRows && row.depth > 0,
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
   });
@@ -144,12 +147,13 @@ const DatagridRow = (datagridState: DataGridState) => {
     ? !!headers.filter((header) => header.isAction).length
     : false;
 
+  const rowKey = !row.isSkeleton ? key : row.skeletonKey;
   return (
-    <React.Fragment key={key}>
+    <React.Fragment key={`${rowKey}__${key}__row--fragment`}>
       <TableRow
         {...rowProps}
         className={cx(rowClassNames, className)}
-        key={row.id}
+        key={rowKey}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
         onFocus={hoverHandler}
@@ -202,7 +206,7 @@ const DatagridRow = (datagridState: DataGridState) => {
                 `${blockClass}__cell`,
                 {
                   [`${blockClass}__expandable-row-cell`]:
-                    row.canExpand && index === 0,
+                    (row.canExpand || getAsyncSubRows) && index === 0,
                   [`${blockClass}__expandable-row-cell--is-expanded`]:
                     row.isExpanded && index === 0,
                   [`${blockClass}__slug--cell`]:

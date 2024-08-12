@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { DataSpreadsheet } from './DataSpreadsheet';
+export { EditUpdateCards } from './EditUpdateCards';
+export type { EditUpdateCardsProps } from './EditUpdateCards';

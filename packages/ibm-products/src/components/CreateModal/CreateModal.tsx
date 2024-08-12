@@ -5,22 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import {
+  Button,
+  ComposedModal,
+  Form,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from '@carbon/react';
 // Import portions of React that are needed.
 import React, { PropsWithChildren, ReactNode } from 'react';
 
-// Carbon and package components we use.
-import {
-  ComposedModal,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  Form,
-  Button,
-} from '@carbon/react';
-
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
@@ -40,7 +38,8 @@ const isValidChildren =
     return;
   };
 
-interface CreateModalProps extends React.ComponentProps<typeof ComposedModal> {
+export interface CreateModalProps
+  extends React.ComponentProps<typeof ComposedModal> {
   /**
    * Specify an optional className to be applied to the modal root node
    */

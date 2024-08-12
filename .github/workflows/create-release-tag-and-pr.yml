@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
         with:
-          token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
+          fetch-depth: '0'
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |

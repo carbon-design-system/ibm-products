@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { RemoveModal } from './RemoveModal';
+export { TagSet } from './TagSet';
+export type { TagSetProps } from './TagSet';

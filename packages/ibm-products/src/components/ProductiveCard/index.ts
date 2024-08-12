@@ -6,3 +6,4 @@
 //
 
 export { ProductiveCard } from './ProductiveCard';
+export type { ProductiveCardProps } from './ProductiveCard';

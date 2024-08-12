@@ -7,28 +7,26 @@
 
 // Import portions of React that are needed.
 import React, {
+  ReactNode,
+  useCallback,
   useEffect,
   useRef,
   useState,
-  useCallback,
-  ReactNode,
-  TransitionEvent,
 } from 'react';
 
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-
-import { createPortal } from 'react-dom';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
+import { CoachmarkContext } from '../Coachmark/utils/context';
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
-import { CoachmarkContext } from '../Coachmark/utils/context';
-import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { useReducedMotion } from 'framer-motion';
+
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -38,7 +36,7 @@ const blockClass = `${coachmarkClass}-fixed`;
 const overlayBlockClass = `${coachmarkClass}-overlay`;
 const componentName = 'CoachmarkFixed';
 
-interface CoachmarkFixedProps {
+export interface CoachmarkFixedProps {
   /**
    * CoachmarkFixed should use a single CoachmarkOverlayElements component as a child.
    */

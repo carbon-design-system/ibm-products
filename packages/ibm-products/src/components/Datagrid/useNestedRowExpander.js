@@ -11,6 +11,7 @@ import { ChevronRight } from '@carbon/react/icons';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { useFocusRowExpander } from './useFocusRowExpander';
+import { handleDynamicRowCheck } from './Datagrid/addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -28,17 +29,43 @@ const useNestedRowExpander = (hooks) => {
     activeElement: typeof document !== 'undefined' && document.activeElement,
   });
 
-  const visibleColumns = (columns) => {
+  const visibleColumns = (columns, state) => {
+    const {
+      getAsyncSubRows,
+      dispatch,
+      state: tableState,
+    } = state.instance || {};
+    const fetchingDynamicSubRows = !!tableState.dynamicRowSkeleton;
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
         const expanderButtonProps = {
           ...row.getToggleRowExpandedProps(),
-          onClick: (event) => {
+          disabled: getAsyncSubRows && fetchingDynamicSubRows,
+          onClick: async (event) => {
             // Prevents `onRowClick` from being called if `useOnRowClick` is included
             event.stopPropagation();
             row.toggleRowExpanded();
             lastExpandedRowIndex.current = row.id;
+            if (!row.isExpanded) {
+              try {
+                handleDynamicRowCheck({
+                  dispatch,
+                  status: 'start',
+                  rowId: row.id,
+                  depth: row.depth,
+                  index: row.index,
+                });
+                await getAsyncSubRows?.(row);
+                handleDynamicRowCheck({
+                  dispatch,
+                  status: 'finish',
+                  rowId: row.id,
+                });
+              } catch (error) {
+                console.log({ error });
+              }
+            }
           },
         };
         const {
@@ -49,7 +76,7 @@ const useNestedRowExpander = (hooks) => {
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
         return (
-          row.canExpand && (
+          (row.canExpand || getAsyncSubRows) && (
             <button
               type="button"
               aria-label={expanderTitle}

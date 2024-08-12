@@ -5,4 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { APIKeyModal } from './APIKeyModal';
+// NOTE: An index file is most useful when you have multiple components
+
+export { CreateModal } from './CreateModal';
+export type { CreateModalProps } from './CreateModal';

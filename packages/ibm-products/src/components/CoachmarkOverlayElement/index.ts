@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { CoachmarkButton } from './CoachmarkButton';
+export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
+export type { CoachmarkOverlayElementProps } from './CoachmarkOverlayElement';

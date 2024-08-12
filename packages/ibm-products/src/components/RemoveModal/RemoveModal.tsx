@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ interface RemoveModalProps extends React.ComponentProps<typeof ComposedModal> {
   /**
    * The content to be displayed in the body of the modal
    */
-  body: string;
+  body: ReactNode;
   /**
    * Optional classname
    */
@@ -192,7 +192,11 @@ export let RemoveModal = forwardRef(
           iconDescription={iconDescription}
         />
         <ModalBody>
-          <p className={`${blockClass}__body`}>{body}</p>
+          {typeof body === 'string' ? (
+            <p className={`${blockClass}__body`}>{body}</p>
+          ) : (
+            body
+          )}
           {textConfirmation && (
             <TextInput
               id={`${idRef.current}-confirmation-input`}
@@ -237,7 +241,7 @@ RemoveModal.propTypes = {
   /**
    * The content to be displayed in the body of the modal
    */
-  body: PropTypes.string.isRequired,
+  body: PropTypes.node.isRequired,
   /**
    * Optional classname
    */

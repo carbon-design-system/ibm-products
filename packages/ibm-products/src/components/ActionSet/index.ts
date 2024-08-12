@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { AboutModal } from './AboutModal';
+export { ActionSet } from './ActionSet';
+export type { ActionSetProps } from './ActionSet';

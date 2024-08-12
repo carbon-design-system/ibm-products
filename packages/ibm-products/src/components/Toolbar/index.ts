@@ -8,3 +8,6 @@
 export { Toolbar } from './Toolbar';
 export { ToolbarButton } from './ToolbarButton';
 export { ToolbarGroup } from './ToolbarGroup';
+export type { ToolbarProps } from './Toolbar';
+export type { ToolbarButtonProps } from './ToolbarButton';
+export type { ToolbarGroupProps } from './ToolbarGroup';

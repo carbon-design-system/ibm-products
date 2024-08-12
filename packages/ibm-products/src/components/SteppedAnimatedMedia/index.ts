@@ -5,6 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InlineTip } from './InlineTip';
-export { InlineTipButton } from './InlineTipButton';
-export { InlineTipLink } from './InlineTipLink';
+export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';
+export type { SteppedAnimatedMediaProps } from './SteppedAnimatedMedia';

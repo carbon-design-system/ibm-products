@@ -6,3 +6,4 @@
 //
 
 export { Saving } from './Saving';
+export type { SavingProps } from './Saving';

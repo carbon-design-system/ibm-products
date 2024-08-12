@@ -6,13 +6,12 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode, PropsWithChildren, ForwardedRef } from 'react';
+import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 
+import { Button } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button } from '@carbon/react';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -22,7 +21,7 @@ const componentName = 'InlineTipButton';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-interface InlineTipButtonProps {
+export interface InlineTipButtonProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

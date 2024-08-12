@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Button, IconButton } from '@carbon/react';
+import { CaretLeft, CaretRight, Close, Idea } from '@carbon/react/icons';
 // Import portions of React that are needed.
 import React, { ReactNode, useRef, useState } from 'react';
+import { blue90, purple70 } from '@carbon/colors';
+
+import { Carousel } from '../Carousel';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { blue90, purple70 } from '@carbon/colors';
-import { CaretLeft, CaretRight, Close, Idea } from '@carbon/react/icons';
-import { Button, IconButton } from '@carbon/react';
-import { Carousel } from '../Carousel';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -21,7 +22,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = 'Guidebanner';
 
-interface GuidebannerProps {
+export interface GuidebannerProps {
   /**
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.

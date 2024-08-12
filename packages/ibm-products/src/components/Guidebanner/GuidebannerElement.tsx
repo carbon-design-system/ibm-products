@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { ReactNode } from 'react';
+
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -16,7 +17,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--guidebanner__element`;
 const componentName = 'GuidebannerElement';
 
-interface GuidebannerElementProps {
+export interface GuidebannerElementProps {
   /**
    * An optional button can be rendered below the description.
    * This can be a link, button, Coachmark button, etc.

@@ -183,6 +183,7 @@ export interface DatagridRow<T extends object = any>
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
   hasExpanded?: boolean;
+  skeletonKey?: string;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -333,6 +334,7 @@ export interface DataGridState<T extends object = any>
     event: React.MouseEvent<HTMLElement>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
+  getAsyncSubRows?: (row: DatagridRow) => void;
 }
 
 export interface DataGridData {

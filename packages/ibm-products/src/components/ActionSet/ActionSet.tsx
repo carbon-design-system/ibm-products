@@ -5,18 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import { Button, ButtonSet, InlineLoading } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { ComponentProps, PropsWithChildren } from 'react';
+import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
+import { ButtonProps } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
-
-// Carbon and package components we use.
-import { Button, ButtonSet, InlineLoading } from '@carbon/react';
-import { ButtonProps } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';
@@ -90,7 +89,7 @@ const defaults = {
   size: 'md',
 };
 
-interface ActionSetProps {
+export interface ActionSetProps {
   /**
    * The action buttons to show. Each action is specified as an object
    * representation of a Carbon button.

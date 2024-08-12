@@ -95,9 +95,8 @@ const DatagridBatchActionsToolbar = (
     // and if there is enough available space to render all the items
     if (
       toolbarBatchActions &&
-      ((!toolbarBatchActionsDisplayMin &&
-        toolbarBatchActions?.length <= 3 &&
-        !displayAllInMenu) ||
+      !displayAllInMenu &&
+      ((!toolbarBatchActionsDisplayMin && toolbarBatchActions?.length <= 3) ||
         (toolbarBatchActionsDisplayMin !== undefined &&
           toolbarBatchActions?.length <= toolbarBatchActionsDisplayMin))
     ) {
@@ -131,7 +130,8 @@ const DatagridBatchActionsToolbar = (
             !displayAllInMenu;
           if (
             toolbarBatchActionsDisplayMin !== undefined &&
-            index < toolbarBatchActionsDisplayMin
+            index < toolbarBatchActionsDisplayMin &&
+            !displayAllInMenu
           ) {
             hidden = true;
           }

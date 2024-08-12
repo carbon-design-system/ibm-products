@@ -15,8 +15,8 @@ import mdx from './ConditionBuilder.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
-  sampleDataStructure_sentence,
-  sampleDataStructure_tree,
+  sampleDataStructure_nonHierarchical,
+  sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { variants } from './ConditionBuilderContext/DataConfigs';
@@ -240,7 +240,7 @@ export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
 );
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  initialState: sampleDataStructure_sentence,
+  initialState: sampleDataStructure_nonHierarchical,
   inputConfig: inputData,
   variant: variants[0],
   translateWithId: translateWithId,
@@ -257,27 +257,27 @@ conditionBuilderWithActions.args = {
   },
 };
 
-export const conditionBuilderTree = ConditionBuilderTemplate.bind({});
-conditionBuilderTree.storyName = 'Condition Builder (Hierarchical)';
-conditionBuilderTree.args = {
+export const conditionBuilderHierarchical = ConditionBuilderTemplate.bind({});
+conditionBuilderHierarchical.storyName = 'Condition Builder (Hierarchical)';
+conditionBuilderHierarchical.args = {
   inputConfig: inputData,
   variant: variants[1],
 };
-export const conditionBuilderWithInitialStateTree =
+export const conditionBuilderWithInitialStateHierarchical =
   ConditionBuilderTemplate.bind({});
-conditionBuilderWithInitialStateTree.storyName =
+conditionBuilderWithInitialStateHierarchical.storyName =
   'With initial state (Hierarchical)';
-conditionBuilderWithInitialStateTree.args = {
-  initialState: sampleDataStructure_tree,
+conditionBuilderWithInitialStateHierarchical.args = {
+  initialState: sampleDataStructure_Hierarchical,
   inputConfig: inputData,
   variant: variants[1],
 };
 
-export const conditionBuilderWithActionsTree = ConditionBuilderTemplate.bind(
-  {}
-);
-conditionBuilderWithActionsTree.storyName = 'With Actions (Hierarchical)';
-conditionBuilderWithActionsTree.args = {
+export const conditionBuilderWithActionsHierarchical =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithActionsHierarchical.storyName =
+  'With Actions (Hierarchical)';
+conditionBuilderWithActionsHierarchical.args = {
   inputConfig: inputData,
   variant: variants[1],
   actions: actions,

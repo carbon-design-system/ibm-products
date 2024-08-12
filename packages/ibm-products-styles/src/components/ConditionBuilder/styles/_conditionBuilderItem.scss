@@ -213,7 +213,7 @@ $colors: (
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $item-index: ((($item-index - 1) % $group-colors-length) +1);
+    $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
         /* stylelint-disable-next-line carbon/theme-token-use */

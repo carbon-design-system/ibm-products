@@ -70,7 +70,7 @@ const ConditionGroupBuilder = ({
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
       variant == variants[1]
-        ? handleFocusOnCloseTree(evt)
+        ? handleFocusOnCloseHierarchical(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
       if (!checkGroupHaveCondition(group.conditions, conditionId)) {
@@ -179,7 +179,7 @@ const ConditionGroupBuilder = ({
       );
     }
   };
-  const handleFocusOnCloseTree = (evt) => {
+  const handleFocusOnCloseHierarchical = (evt) => {
     //getting the current aria-level and aria-posinset.
     const currentLevel = evt.currentTarget
       ?.closest('[role="row"]')
@@ -315,7 +315,7 @@ const ConditionGroupBuilder = ({
     });
   };
 
-  const getSentenceVariant = () => {
+  const getNonHierarchicalVariant = () => {
     return (
       <div className={`${className}  eachGroup`}>
         <div
@@ -361,7 +361,7 @@ const ConditionGroupBuilder = ({
     );
   };
 
-  const getTreeVariant = () => {
+  const getHierarchicalVariant = () => {
     return (
       <div
         className={`${className} ${blockClass}__condition-wrapper`}
@@ -492,8 +492,8 @@ const ConditionGroupBuilder = ({
   };
   return (
     <>
-      {variant == variants[1] && getTreeVariant()}
-      {variant == variants[0] && getSentenceVariant()}
+      {variant == variants[1] && getHierarchicalVariant()}
+      {variant == variants[0] && getNonHierarchicalVariant()}
     </>
   );
 };

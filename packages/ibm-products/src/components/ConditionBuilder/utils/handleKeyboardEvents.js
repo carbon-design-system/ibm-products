@@ -185,7 +185,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
         );
         if (allCellsInRow.length === 1) {
           evt.target = evt.target.closest('[role="row"]');
-          handleRowNavigationTree(evt, conditionBuilderRef, variant);
+          handleRowNavigationHierarchical(evt, conditionBuilderRef, variant);
           //focus next row
         } else if (evt.target.getAttribute('role') == 'row') {
           //when current focus is on a row, then we need to enter inside and focus the first cell of that row
@@ -242,7 +242,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
     case 'ArrowDown':
       evt.preventDefault();
       if (variant == variants[1]) {
-        handleRowNavigationTree(evt, conditionBuilderRef, variant);
+        handleRowNavigationHierarchical(evt, conditionBuilderRef, variant);
       } else {
         handleRowNavigation(evt, conditionBuilderRef, variant);
       }
@@ -282,7 +282,7 @@ const handleRowNavigation = (evt, conditionBuilderRef, variant) => {
     conditionBuilderRef
   );
 };
-const handleRowNavigationTree = (evt, conditionBuilderRef, variant) => {
+const handleRowNavigationHierarchical = (evt, conditionBuilderRef, variant) => {
   const rows = getRows(conditionBuilderRef);
   const currentRowIndex = getRowIndex(evt.target, conditionBuilderRef);
   let nextRowIndex = currentRowIndex;

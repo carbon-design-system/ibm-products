@@ -18,8 +18,8 @@ import userEvent from '@testing-library/user-event';
 
 import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
-  sampleDataStructure_sentence,
-  sampleDataStructure_tree,
+  sampleDataStructure_nonHierarchical,
+  sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import { variants } from './ConditionBuilderContext/DataConfigs';
 
@@ -135,7 +135,7 @@ describe(componentName, () => {
     );
   });
 
-  //test cases for sentence variant
+  //test cases for Non-Hierarchical variant
   it('should render the component with provided label to start condition builder', async () => {
     const startConditionLabel = 'Add condition';
     render(
@@ -374,7 +374,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_sentence}
+        initialState={sampleDataStructure_nonHierarchical}
       />
     );
     //start builder
@@ -604,7 +604,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_sentence}
+        initialState={sampleDataStructure_nonHierarchical}
         translateWithId={translateWithId}
       />
     );
@@ -614,8 +614,8 @@ describe(componentName, () => {
     expect(screen.getByText('Condition Heading'));
   });
 
-  //test cases for tree variant
-  it('render the tree variant with  3 conditions and 1 subgroup', async () => {
+  //test cases for Hierarchical variant
+  it('render the Hierarchical variant with  3 conditions and 1 subgroup', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -707,7 +707,7 @@ describe(componentName, () => {
     expect(subGroups).toHaveLength(2);
   });
 
-  it('render the tree variant with 2 groups', async () => {
+  it('render the Hierarchical variant with 2 groups', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -843,7 +843,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_sentence}
+        initialState={sampleDataStructure_nonHierarchical}
       />
     );
 
@@ -869,7 +869,7 @@ describe(componentName, () => {
     expect(closeButtons[0]).toHaveFocus();
   });
 
-  it('check the next/previous close button is focussed on remove condition for tree variant', async () => {
+  it('check the next/previous close button is focussed on remove condition for Hierarchical variant', async () => {
     const sampleDataStructure = {
       operator: 'or',
       groups: [
@@ -1254,7 +1254,7 @@ describe(componentName, () => {
   });
 
   // keyboard navigation tests
-  //for sentence variant
+  //for Non-Hierarchical variant
   it('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
@@ -1383,7 +1383,7 @@ describe(componentName, () => {
     expect(screen.getByText('Add condition')).toHaveFocus();
   });
 
-  //for tree variant
+  //for Hierarchical variant
   it('add and remove conditions using keyboard', async () => {
     render(
       <ConditionBuilder
@@ -1518,7 +1518,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={variants[1]}
         inputConfig={inputData}
-        initialState={sampleDataStructure_tree}
+        initialState={sampleDataStructure_Hierarchical}
       />
     );
 

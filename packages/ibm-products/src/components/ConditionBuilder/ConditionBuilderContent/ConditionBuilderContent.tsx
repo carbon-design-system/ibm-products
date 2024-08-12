@@ -52,9 +52,14 @@ const ConditionBuilderContent = ({
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
 
-  const [addConditionGroupText, conditionHeadingText] = useTranslations([
+  const [
+    addConditionGroupText,
+    conditionHeadingText,
+    conditionBuilderHierarchicalText,
+  ] = useTranslations([
     'addConditionGroupText',
     'conditionHeadingText',
+    'conditionBuilderHierarchicalText',
   ]);
   const showConditionGroupPreviewHandler = () => {
     setShowConditionGroupPreview(true);
@@ -172,7 +177,7 @@ const ConditionBuilderContent = ({
       <div
         className={`${blockClass}__content-container`}
         role="treegrid"
-        aria-label="condition builder tree"
+        aria-label={conditionBuilderHierarchicalText}
       >
         {rootState &&
           rootState?.groups?.map((eachGroup, groupIndex) => (

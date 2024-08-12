@@ -270,7 +270,7 @@ ConditionBuilder.propTypes = {
   translateWithId: PropTypes.func,
   /* TODO: add types and DocGen for all props. */
   /**
-   * Provide the condition builder variant: sentence/ tree
+   * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
   variant: PropTypes.oneOf(['Non-Hierarchical', 'Hierarchical']),
 };

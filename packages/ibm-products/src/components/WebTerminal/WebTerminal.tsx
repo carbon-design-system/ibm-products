@@ -5,29 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Button, OverflowMenu, OverflowMenuItem, Theme } from '@carbon/react';
+// Carbon and package components we use.
+import { Close, Help } from '@carbon/react/icons';
 // Import portions of React that are needed.
 import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
-  PropsWithChildren,
-  ForwardedRef,
-  ReactNode,
 } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../settings';
-
-// Carbon and package components we use.
-import { Close, Help } from '@carbon/react/icons';
-import { Button, OverflowMenu, OverflowMenuItem, Theme } from '@carbon/react';
-import { moderate02 } from '@carbon/motion';
-import { useWebTerminal } from './hooks';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import { pkg } from '../../settings';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { useWebTerminal } from './hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -48,11 +46,11 @@ interface Action {
   iconDescription: string;
 }
 
-interface WebTerminalProps extends PropsWithChildren {
+export interface WebTerminalProps extends PropsWithChildren {
   /**
    * Provide your own terminal component as children to show up in the web terminal
    */
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
   /**
    * An array of actions to be displayed in the web terminal header bar
    */
@@ -71,7 +69,7 @@ interface WebTerminalProps extends PropsWithChildren {
   /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
-  documentationLinks?: readonly OverflowMenuItem[];
+  documentationLinks?: readonly (typeof OverflowMenuItem)[];
 
   /**
    * Description for the documentation link overflow menu tooltip

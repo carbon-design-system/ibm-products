@@ -5,27 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, forwardRef, ReactNode } from 'react';
-import { Add } from '@carbon/react/icons';
 import {
+  Button,
   ComposedModal,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
   FileUploaderDropContainer,
   FileUploaderItem,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   TextInput,
-  Button,
   usePrefix,
 } from '@carbon/react';
-import cx from 'classnames';
-import PropTypes from 'prop-types';
+import React, { ReactNode, forwardRef, useState } from 'react';
 
+import { Add } from '@carbon/react/icons';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg } from '../../settings';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -47,7 +47,7 @@ type FileType = {
   errorSubject?: string;
 };
 
-interface ImportModalProps {
+export interface ImportModalProps {
   /**
    * Specifies the file types that are valid for importing
    */

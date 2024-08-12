@@ -127,7 +127,7 @@ export interface EditInplaceProps extends PropsWithChildren {
   /**
    * placeholder for the input
    */
-  placeholder: string;
+  placeholder?: string;
 }
 
 export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
@@ -447,7 +447,6 @@ EditInPlace.propTypes = {
   /**
    * Placeholder for text input
    */
-  /**@ts-ignore*/
   placeholder: PropTypes.string,
   /**
    * determines if the input is in readOnly mode

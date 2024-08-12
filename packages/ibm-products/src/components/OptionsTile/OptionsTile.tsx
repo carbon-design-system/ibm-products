@@ -454,7 +454,6 @@ OptionsTile.propTypes = {
   /**
    * Define the size of the OptionsTile.
    */
-  /**@ts-ignore*/
   size: PropTypes.oneOf(['lg', 'xl']),
 
   /**

@@ -14,7 +14,7 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import { blockClass, variants } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
@@ -202,7 +202,7 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {variant == 'tree' && (
+        {variant == variants[1] && (
           <div
             role="row"
             tabIndex={-1}

@@ -11,6 +11,7 @@ import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/I
 import {
   blockClass,
   connectorConfig,
+  variants,
 } from '../ConditionBuilderContext/DataConfigs';
 import PropTypes from 'prop-types';
 import { focusThisField } from '../utils/util';
@@ -52,7 +53,7 @@ const ConditionConnector = ({
     onChange?.(op);
     focusThisField(evt, conditionBuilderRef);
   };
-  return variant == 'tree' ? (
+  return variant == variants[1] ? (
     <span className={`${className} ${blockClass}__connector--disabled`}>
       <ConditionBuilderButton label={operator} />
     </span>

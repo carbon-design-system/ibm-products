@@ -19,6 +19,7 @@ import {
   sampleDataStructure_tree,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { variants } from './ConditionBuilderContext/DataConfigs';
 export default {
   title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,
@@ -223,7 +224,7 @@ export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: variants[0],
 };
 
 export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});
@@ -231,7 +232,7 @@ conditionBuilderDynamicOptions.storyName = 'With dynamic options';
 conditionBuilderDynamicOptions.args = {
   inputConfig: inputDataDynamicOptions,
   getOptions: getOptions,
-  variant: 'sentence',
+  variant: variants[0],
 };
 
 export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
@@ -241,7 +242,7 @@ conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
   initialState: sampleDataStructure_sentence,
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: variants[0],
   translateWithId: translateWithId,
 };
 
@@ -249,7 +250,7 @@ export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
 conditionBuilderWithActions.storyName = 'With Actions';
 conditionBuilderWithActions.args = {
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: variants[0],
   actions: actions,
   getActionsState: (actionState) => {
     console.log('action state', actionState);
@@ -257,27 +258,28 @@ conditionBuilderWithActions.args = {
 };
 
 export const conditionBuilderTree = ConditionBuilderTemplate.bind({});
-conditionBuilderTree.storyName = 'Condition Builder(Tree)';
+conditionBuilderTree.storyName = 'Condition Builder (Hierarchical)';
 conditionBuilderTree.args = {
   inputConfig: inputData,
-  variant: 'tree',
+  variant: variants[1],
 };
 export const conditionBuilderWithInitialStateTree =
   ConditionBuilderTemplate.bind({});
-conditionBuilderWithInitialStateTree.storyName = 'With initial state(Tree)';
+conditionBuilderWithInitialStateTree.storyName =
+  'With initial state (Hierarchical)';
 conditionBuilderWithInitialStateTree.args = {
   initialState: sampleDataStructure_tree,
   inputConfig: inputData,
-  variant: 'tree',
+  variant: variants[1],
 };
 
 export const conditionBuilderWithActionsTree = ConditionBuilderTemplate.bind(
   {}
 );
-conditionBuilderWithActionsTree.storyName = 'With Actions(Tree)';
+conditionBuilderWithActionsTree.storyName = 'With Actions (Hierarchical)';
 conditionBuilderWithActionsTree.args = {
   inputConfig: inputData,
-  variant: 'tree',
+  variant: variants[1],
   actions: actions,
   getActionsState: (actionState) => {},
 };

@@ -14,6 +14,7 @@ import cx from 'classnames';
 import {
   blockClass,
   statementConfig,
+  variants,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import { focusThisField, manageTabIndexAndFocus } from '../utils/util';
@@ -68,7 +69,7 @@ const ConditionGroupBuilder = ({
   const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
-      variant == 'tree'
+      variant == variants[1]
         ? handleFocusOnCloseTree(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
@@ -491,8 +492,8 @@ const ConditionGroupBuilder = ({
   };
   return (
     <>
-      {variant == 'tree' && getTreeVariant()}
-      {variant == 'sentence' && getSentenceVariant()}
+      {variant == variants[1] && getTreeVariant()}
+      {variant == variants[0] && getSentenceVariant()}
     </>
   );
 };

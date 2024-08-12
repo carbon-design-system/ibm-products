@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import {
   operatorConfig,
   statementConfig,
+  variants,
 } from '../ConditionBuilderContext/DataConfigs';
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
@@ -177,7 +178,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     setShowDeletionPreview(false);
   };
   const manageActionButtons = (conditionIndex, conditions) => {
-    if (variant === 'tree') {
+    if (variant === variants[1]) {
       return true;
     }
     return isLastCondition(conditionIndex, conditions);
@@ -191,7 +192,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     );
   };
   const getAriaAttributes = () => {
-    return variant == 'tree'
+    return variant == variants[1]
       ? {
           'aria-level': aria.level,
           'aria-posinset': aria.posinset,
@@ -224,11 +225,11 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         },
         {
-          [`${blockClass}__gap-bottom`]: variant == 'tree',
+          [`${blockClass}__gap-bottom`]: variant == variants[1],
         },
         {
           [`${blockClass}__gap ${blockClass}__gap-bottom`]:
-            variant == 'sentence',
+            variant == variants[0],
         },
         {
           [`${blockClass}__condition--interacting`]: showAllActions,
@@ -356,7 +357,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           hideConditionSubGroupPreviewHandler={
             hideConditionSubGroupPreviewHandler
           }
-          enableSubGroup={variant == 'tree'}
+          enableSubGroup={variant == variants[1]}
           showConditionPreviewHandler={showConditionPreviewHandler}
           hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}

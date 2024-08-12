@@ -99,6 +99,7 @@ export const operatorConfig = [
     type: 'date',
   },
 ];
+export const variants = ['Non-Hierarchical', 'Hierarchical'];
 // The block part of our conventional BEM class names (blockClass__E--M).
 export const blockClass = `${pkg.prefix}--condition-builder`;
 

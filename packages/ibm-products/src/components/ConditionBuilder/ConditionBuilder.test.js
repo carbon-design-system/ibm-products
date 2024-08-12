@@ -21,6 +21,7 @@ import {
   sampleDataStructure_sentence,
   sampleDataStructure_tree,
 } from './assets/SampleData';
+import { variants } from './ConditionBuilderContext/DataConfigs';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -33,7 +34,7 @@ const defaultProps = {
   startConditionLabel: 'Add condition',
   popOverSearchThreshold: 4,
   getConditionState: () => {},
-  variant: 'sentence',
+  variant: variants[0],
 };
 
 const inputConfigOptionType = {
@@ -618,7 +619,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={'tree'}
+        variant={variants[1]}
         inputConfig={inputData}
       />
     );
@@ -710,7 +711,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={'tree'}
+        variant={variants[1]}
         inputConfig={inputData}
       />
     );
@@ -935,7 +936,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        variant="tree"
+        variant={variants[1]}
         initialState={sampleDataStructure}
       />
     );
@@ -1204,7 +1205,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={'tree'}
+        variant={variants[1]}
         inputConfig={inputData}
         initialState={sampleDataStructure}
       />
@@ -1387,7 +1388,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={'tree'}
+        variant={variants[1]}
         inputConfig={inputData}
       />
     );
@@ -1515,7 +1516,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={'tree'}
+        variant={variants[1]}
         inputConfig={inputData}
         initialState={sampleDataStructure_tree}
       />

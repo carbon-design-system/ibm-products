@@ -172,6 +172,8 @@ export type Action = {
   label?: string;
 };
 
+export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
+
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: ConditionBuilderState;
@@ -185,7 +187,7 @@ export type ConditionBuilderProps = {
   className?: string;
   popOverSearchThreshold: number;
   startConditionLabel: string;
-  variant?: 'sentence' | 'tree';
+  variant?: variantsType;
   translateWithId: (id: string) => string;
 };
 

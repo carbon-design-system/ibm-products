@@ -6,23 +6,24 @@
  */
 
 import React, {
-  forwardRef,
   MutableRefObject,
   ReactNode,
+  forwardRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
-  useCallback,
 } from 'react';
-import cx from 'classnames';
+import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
+
+import { COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { CoachmarkContext } from './utils/context';
+import { CoachmarkOverlay } from './CoachmarkOverlay';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import { CoachmarkOverlay } from './CoachmarkOverlay';
-import { CoachmarkContext } from './utils/context';
-import { COACHMARK_OVERLAY_KIND } from './utils/enums';
-import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 import { throttle } from 'lodash';
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
@@ -39,7 +40,7 @@ const defaults = {
   theme: 'light',
 };
 
-interface CoachmarkProps {
+export interface CoachmarkProps {
   /**
    * Where to render the Coachmark relative to its target.
    * Applies only to Floating and Tooltip Coachmarks.

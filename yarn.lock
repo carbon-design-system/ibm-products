@@ -1689,7 +1689,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.22.0, @carbon/grid@npm:^11.25.0":
+"@carbon/grid@npm:^11.24.1":
+  version: 11.24.1
+  resolution: "@carbon/grid@npm:11.24.1"
+  dependencies:
+    "@carbon/layout": "npm:^11.23.1"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 9a096d8ed9cc4886cdb2dfd6e0ecf651cdb46eb73e18332808ef9810e736b22f4762fef2482cda9be1e5b048d7e4ab1438561aa9f0131859c2693e353bc39430
+  languageName: node
+  linkType: hard
+
+"@carbon/grid@npm:^11.25.0":
   version: 11.25.0
   resolution: "@carbon/grid@npm:11.25.0"
   dependencies:
@@ -1724,13 +1734,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
-    "@carbon/grid": "npm:^11.22.0"
+    "@carbon/grid": "npm:^11.24.1"
     "@carbon/ibm-products-styles": "npm:^2.43.0-rc.0"
-    "@carbon/layout": "npm:^11.21.0"
-    "@carbon/motion": "npm:^11.17.0"
-    "@carbon/react": "npm:^1.60.3"
+    "@carbon/layout": "npm:^11.23.1"
+    "@carbon/motion": "npm:^11.19.1"
+    "@carbon/react": "npm:^1.61.0"
     "@carbon/themes": "npm:^11.37.1"
-    "@carbon/type": "npm:^11.26.0"
+    "@carbon/type": "npm:^11.28.1"
     "@percy/cli": "npm:^1.24.2"
     "@percy/storybook": "npm:^6.0.0"
     "@storybook/addon-a11y": "npm:^8.1.10"
@@ -1781,12 +1791,12 @@ __metadata:
     rimraf: "npm:^5.0.1"
     sass: "npm:^1.77.2"
   peerDependencies:
-    "@carbon/grid": ^11.22.0
-    "@carbon/layout": ^11.21.0
-    "@carbon/motion": ^11.17.0
-    "@carbon/react": ^1.60.3
+    "@carbon/grid": ^11.24.1
+    "@carbon/layout": ^11.23.1
+    "@carbon/motion": ^11.19.1
+    "@carbon/react": ^1.61.0
     "@carbon/themes": ^11.37.1
-    "@carbon/type": ^11.26.0
+    "@carbon/type": ^11.28.1
     react: ^18.2.0
     react-dom: ^18.2.0
   languageName: unknown
@@ -1810,11 +1820,11 @@ __metadata:
     sass: "npm:^1.77.2"
     yargs: "npm:^17.7.2"
   peerDependencies:
-    "@carbon/grid": ^11.22.0
-    "@carbon/layout": ^11.21.0
-    "@carbon/motion": ^11.17.0
+    "@carbon/grid": ^11.24.1
+    "@carbon/layout": ^11.23.1
+    "@carbon/motion": ^11.19.1
     "@carbon/themes": ^11.37.1
-    "@carbon/type": ^11.26.0
+    "@carbon/type": ^11.28.1
   languageName: unknown
   linkType: soft
 
@@ -1874,12 +1884,12 @@ __metadata:
     typescript-config-carbon: "npm:^0.2.1"
     yargs: "npm:^17.7.2"
   peerDependencies:
-    "@carbon/grid": ^11.22.0
-    "@carbon/layout": ^11.21.0
-    "@carbon/motion": ^11.17.0
-    "@carbon/react": ^1.60.3
+    "@carbon/grid": ^11.24.1
+    "@carbon/layout": ^11.23.1
+    "@carbon/motion": ^11.19.1
+    "@carbon/react": ^1.61.0
     "@carbon/themes": ^11.37.1
-    "@carbon/type": ^11.26.0
+    "@carbon/type": ^11.28.1
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
   languageName: unknown
@@ -1907,7 +1917,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.21.0, @carbon/layout@npm:^11.24.0":
+"@carbon/layout@npm:^11.23.1":
+  version: 11.23.1
+  resolution: "@carbon/layout@npm:11.23.1"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 85febc872d9415031c474d5740bfd4ab0bcca8eb00dbb13326d7aec8357e4b74fb9e00349ab7e200db35bcb1afb6e9d0d0f45910ff040afd0de92b3df52cbe79
+  languageName: node
+  linkType: hard
+
+"@carbon/layout@npm:^11.24.0":
   version: 11.24.0
   resolution: "@carbon/layout@npm:11.24.0"
   dependencies:
@@ -1916,7 +1935,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.17.0, @carbon/motion@npm:^11.20.0":
+"@carbon/motion@npm:^11.19.1":
+  version: 11.19.1
+  resolution: "@carbon/motion@npm:11.19.1"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 174aaf7cb388ff87fe1abf87418cb6d77ff6e9ae35709276c47c6613807970001b4f646b98b094ead16cc9caafcdee375f846a863aa94afd948b8eaee743e498
+  languageName: node
+  linkType: hard
+
+"@carbon/motion@npm:^11.20.0":
   version: 11.20.0
   resolution: "@carbon/motion@npm:11.20.0"
   dependencies:
@@ -1925,7 +1953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.60.3":
+"@carbon/react@npm:^1.61.0":
   version: 1.63.1
   resolution: "@carbon/react@npm:1.63.1"
   dependencies:
@@ -2029,7 +2057,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.26.0, @carbon/type@npm:^11.29.0":
+"@carbon/type@npm:^11.28.1":
+  version: 11.28.1
+  resolution: "@carbon/type@npm:11.28.1"
+  dependencies:
+    "@carbon/grid": "npm:^11.24.1"
+    "@carbon/layout": "npm:^11.23.1"
+    "@ibm/telemetry-js": "npm:^1.5.0"
+  checksum: 1148758456ec01e66c209a50b725ee48d5552f8e164e91a2186b008eef204c1b8553cfb952e717aa733b03247dc2af90dd1b2a0016d14e52d6fe6977414ab748
+  languageName: node
+  linkType: hard
+
+"@carbon/type@npm:^11.29.0":
   version: 11.29.0
   resolution: "@carbon/type@npm:11.29.0"
   dependencies:
@@ -13773,7 +13812,7 @@ __metadata:
     rimraf: "npm:^5.0.5"
     stylelint: "npm:^15.11.0"
     stylelint-config-ibm-products: "npm:*"
-    stylelint-plugin-carbon-tokens: "npm:2.3.1"
+    stylelint-plugin-carbon-tokens: "npm:2.8.0"
     webpack: "npm:^5.90.0"
   languageName: unknown
   linkType: soft
@@ -22216,7 +22255,7 @@ __metadata:
     stylelint-config-standard: "npm:^34.0.0"
     stylelint-config-standard-scss: "npm:^10.0.0"
     stylelint-no-unsupported-browser-features: "npm:^7.0.0"
-    stylelint-plugin-carbon-tokens: "npm:^2.3.1"
+    stylelint-plugin-carbon-tokens: "npm:^2.8.0"
     stylelint-use-logical: "npm:^2.1.0"
   peerDependencies:
     stylelint: ^15.11.0
@@ -22400,25 +22439,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:2.3.1":
-  version: 2.3.1
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.3.1"
-  dependencies:
-    lodash: "npm:^4.17.21"
-    postcss: "npm:^8.4.16"
-    postcss-scss: "npm:^4.0.4"
-    postcss-value-parser: "npm:^4.2.0"
-  peerDependencies:
-    "@carbon/colors": ">=10 <= 11"
-    "@carbon/layout": ">=10 <= 11"
-    "@carbon/motion": ">=10 <= 11"
-    "@carbon/themes": ">=10 <= 11"
-    "@carbon/type": ">=10 <= 11"
-  checksum: f60ac9fafb7a5e718cffc7991b5b8af23afb22ef9e5ef047d425e04c66c2b9d0a0a7a9545b3d11b825d15fc7f47cd8a516b2b574934d1fe85ae5dcf0e42a0a6d
-  languageName: node
-  linkType: hard
-
-"stylelint-plugin-carbon-tokens@npm:^2.3.1":
+"stylelint-plugin-carbon-tokens@npm:2.8.0, stylelint-plugin-carbon-tokens@npm:^2.8.0":
   version: 2.8.0
   resolution: "stylelint-plugin-carbon-tokens@npm:2.8.0"
   dependencies:

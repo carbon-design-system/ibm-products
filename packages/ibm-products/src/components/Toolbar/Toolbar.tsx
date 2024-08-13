@@ -5,9 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
-import { bool, node, string } from 'prop-types';
-
 import React, {
   PropsWithChildren,
   createContext,
@@ -17,15 +14,18 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { bool, node, string } from 'prop-types';
+
 // cspell:words Focusable focusable
 import { getFocusableElements as _getFocusableElements } from '../../global/js/utils/getFocusableElements';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 const { checkComponentEnabled, prefix } = pkg;
 const blockClass = `${prefix}--toolbar`;
 
-interface ToolbarProps {
+export interface ToolbarProps {
   /** Provide an optional class to be applied to the containing node */
   className?: string;
 

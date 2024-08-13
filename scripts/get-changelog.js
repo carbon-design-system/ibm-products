@@ -118,11 +118,15 @@ function getChangelog(pkgName, folder) {
     }
 
     if (
+      commit.startsWith('build') ||
+      commit.startsWith('ci') ||
       commit.startsWith('chore') ||
       commit.startsWith('docs') ||
-      commit.startsWith('test') ||
-      commit.startsWith('type') ||
-      commit.startsWith('refactor')
+      commit.startsWith('perf') ||
+      commit.startsWith('refactor') ||
+      commit.startsWith('revert') ||
+      commit.startsWith('style') ||
+      commit.startsWith('test')
     ) {
       chores.push(commitParse);
     }
@@ -170,8 +174,6 @@ function generateLog() {
     '@carbon/ibm-products-styles',
     './packages/ibm-products-styles'
   );
-
-  console.log(log);
 
   return log;
 }

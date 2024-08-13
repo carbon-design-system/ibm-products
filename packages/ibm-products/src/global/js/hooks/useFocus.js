@@ -47,13 +47,13 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;
-    const specifiedElement = getSpecificElement(modalEl, selectorPrimaryFocus);
+    const specified = getSpecificElement(modalEl, selectorPrimaryFocus);
 
     return {
       first,
       last,
       all,
-      specifiedElement,
+      specified,
     };
   }, [modalEl, query, selectorPrimaryFocus]);
 

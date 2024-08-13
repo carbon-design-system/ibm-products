@@ -7,3 +7,5 @@
 
 export { Tearsheet } from './Tearsheet';
 export { TearsheetNarrow } from './TearsheetNarrow';
+export type { TearsheetProps } from './Tearsheet';
+export type { TearsheetNarrowProps } from './TearsheetNarrow';

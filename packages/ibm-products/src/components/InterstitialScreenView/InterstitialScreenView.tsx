@@ -12,7 +12,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -21,7 +21,7 @@ import { pkg /*, carbon */ } from '../../settings';
 const blockClass = `${pkg.prefix}--interstitial-screen-view`;
 const componentName = 'InterstitialScreenView';
 
-interface InterstitialScreenViewProps extends PropsWithChildren {
+export interface InterstitialScreenViewProps extends PropsWithChildren {
   /**
    * Provide the contents of the InterstitialScreenView.
    */

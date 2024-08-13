@@ -5,19 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef, MutableRefObject, useRef, useState } from 'react';
-import { Button, IconButton } from '@carbon/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Button, IconButton } from '@carbon/react';
+import { DURATIONS, EASINGS } from '../../global/js/utils/motionConstants';
+import React, { ForwardedRef, MutableRefObject, useRef, useState } from 'react';
+import { usePreviousValue, useWindowResize } from '../../global/js/hooks';
+
 import { ChevronDown } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { TagSet } from '../TagSet';
-import { pkg } from '../../settings';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { DURATIONS, EASINGS } from '../../global/js/utils/motionConstants';
-import { useWindowResize, usePreviousValue } from '../../global/js/hooks';
+import cx from 'classnames';
 import debounce from 'lodash/debounce';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -25,7 +26,7 @@ export interface Filter {
   key: string;
   value: string;
 }
-interface FilterSummaryProps {
+export interface FilterSummaryProps {
   className?: string;
   clearButtonInline?: boolean;
   clearFilters: () => void;

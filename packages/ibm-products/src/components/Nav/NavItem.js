@@ -52,7 +52,7 @@ export let NavItem = ({
 }) => {
   const [hrefHasDifferentHost, setHrefHasDifferentHost] = useState(false);
   useEffect(() => {
-    if (href.indexOf(window.location.host) === -1) {
+    if (href?.indexOf(window.location.host) === -1) {
       setHrefHasDifferentHost(true);
     }
   }, [href]);

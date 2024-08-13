@@ -261,7 +261,7 @@ const gridData = [
     progress: 31,
     status: 'relationship',
     role: 'designer',
-    joined: '2023-08-08T02:34:00.987Z',
+    joined: '2023-08-07T02:34:00.987Z',
     someone1: 'button',
     someone2: 'caption',
     someone3: 'pig',

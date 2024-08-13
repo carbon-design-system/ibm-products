@@ -130,7 +130,7 @@ export const storyDocsPageInfo = (csfFile) => {
 
     result.section = a;
 
-    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind.toLowerCase()}/${paramCase(
       result.section
     )}/usage`;
   } else {

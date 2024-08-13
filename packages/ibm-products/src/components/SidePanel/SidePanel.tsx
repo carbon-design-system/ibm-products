@@ -287,6 +287,12 @@ export let SidePanel = React.forwardRef(
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
 
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && open) {
+        onRequestClose?.();
+      }
+    };
+
     useEffect(() => {
       if (open && !titleRef?.current) {
         setDoAnimateTitle(false);
@@ -725,6 +731,7 @@ export let SidePanel = React.forwardRef(
               className={`${blockClass}__close-button`}
               label={closeIconDescription}
               onClick={onRequestClose}
+              onKeyDown={slideIn ? undefined : handleEscapeKey}
               title={closeIconDescription}
               aria-label={closeIconDescription}
               ref={closeRef}
@@ -822,6 +829,13 @@ export let SidePanel = React.forwardRef(
       );
     };
 
+    const handleKeyDown = (event) => {
+      if (!slideIn) {
+        handleEscapeKey(event);
+        keyDownListener(event);
+      }
+    };
+
     return (
       <AnimatePresence>
         {open && (
@@ -841,7 +855,7 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
-              onKeyDown={slideIn ? undefined : keyDownListener}
+              onKeyDown={handleKeyDown}
             >
               <>
                 {/* header */}

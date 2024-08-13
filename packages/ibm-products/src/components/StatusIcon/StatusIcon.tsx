@@ -1,3 +1,16 @@
+import {
+  CheckmarkFilled,
+  CheckmarkOutline,
+  ErrorFilled,
+  InProgress,
+  InformationSquareFilled,
+  Misuse,
+  Pending,
+  UndefinedFilled,
+  UnknownFilled,
+  WarningAltFilled,
+  WarningAltInvertedFilled,
+} from '@carbon/react/icons';
 /**
  * Copyright IBM Corp. 2021, 2022
  *
@@ -7,26 +20,12 @@
 import React, {
   PropsWithChildren,
   ReactSVGElement,
-  forwardRef,
   Ref,
+  forwardRef,
 } from 'react';
+
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
-import {
-  Misuse,
-  ErrorFilled,
-  WarningAltInvertedFilled,
-  WarningAltFilled,
-  UndefinedFilled,
-  UnknownFilled,
-  CheckmarkFilled,
-  InformationSquareFilled,
-  InProgress,
-  CheckmarkOutline,
-  Pending,
-} from '@carbon/react/icons';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -57,7 +56,7 @@ type Kind =
   | 'in-progress'
   | 'running'
   | 'pending';
-interface StatusIconProps extends PropsWithChildren {
+export interface StatusIconProps extends PropsWithChildren {
   /**
    * Provide an optional class to be applied to the modal root node.
    */

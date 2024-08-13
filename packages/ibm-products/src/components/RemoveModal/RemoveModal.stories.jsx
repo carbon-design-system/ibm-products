@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@carbon/react';
+import { Button, Link } from '@carbon/react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { RemoveModal } from '.';
 import DocsPage from './RemoveModal.docs-page';
@@ -82,4 +82,18 @@ export const DeletePattern = Template.bind({});
 DeletePattern.args = {
   ...defaultProps,
   textConfirmation: true,
+};
+
+export const ComponentInBodyPattern = Template.bind({});
+ComponentInBodyPattern.args = {
+  ...defaultProps,
+  body: (
+    <React.Fragment>
+      {`Before removing ${resourceName}, you can find out more information on the `}
+      <Link href={'https://www.carbondesignsystem.com'}>
+        Carbon Design System
+      </Link>
+      {' website.'}
+    </React.Fragment>
+  ),
 };

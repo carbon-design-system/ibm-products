@@ -6,33 +6,34 @@
  */
 
 import React, {
-  forwardRef,
-  useState,
-  useRef,
-  createContext,
-  useEffect,
-  ReactNode,
+  Dispatch,
   ForwardedRef,
   PropsWithChildren,
-  Dispatch,
+  ReactNode,
   SetStateAction,
+  createContext,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { Form } from '@carbon/react';
-import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { CreateInfluencer } from '../CreateInfluencer';
-import { pkg } from '../../settings';
 import {
-  usePreviousValue,
-  useValidCreateStepCount,
-  useResetCreateComponent,
   useCreateComponentFocus,
   useCreateComponentStepChange,
+  usePreviousValue,
+  useResetCreateComponent,
+  useValidCreateStepCount,
 } from '../../global/js/hooks';
+
+import { CreateInfluencer } from '../CreateInfluencer';
+import { Form } from '@carbon/react';
+import PropTypes from 'prop-types';
+import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { pkg } from '../../settings';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -56,7 +57,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface CreateTearsheetProps extends PropsWithChildren {
+export interface CreateTearsheetProps extends PropsWithChildren {
   /**
    * The back button text
    */

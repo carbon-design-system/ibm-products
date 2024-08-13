@@ -12,6 +12,9 @@
  *   PageHeader (PageHeaderTitle, PageHeaderUtils)
  */
 
+// Carbon and package components we use.
+import { Button, IconButton } from '@carbon/react';
+import { Kind, Kinds, Theme, Themes } from './Checklist.types';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
@@ -21,21 +24,15 @@ import React, {
   useState,
 } from 'react';
 
+import { ChecklistChart } from './ChecklistChart';
+import { ChecklistIcon } from './ChecklistIcon';
+import { ChevronUp } from '@carbon/react/icons';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
-
-// Carbon and package components we use.
-import { Button, IconButton } from '@carbon/react';
-import { ChevronUp } from '@carbon/react/icons';
-
-import { ChecklistIcon } from './ChecklistIcon';
-import { ChecklistChart } from './ChecklistChart';
-import { Kinds, Kind, Theme, Themes } from './Checklist.types';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--checklist`;
@@ -63,7 +60,7 @@ type TaskList = {
   tasks: Array<Task>;
 };
 
-interface ChecklistProps {
+export interface ChecklistProps {
   /**
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */

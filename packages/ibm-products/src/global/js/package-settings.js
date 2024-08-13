@@ -70,6 +70,8 @@ const defaults = {
     EditFullPage: false,
     EditUpdateCards: false,
     Nav: false,
+    NavItem: false,
+    NavList: false,
     BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,

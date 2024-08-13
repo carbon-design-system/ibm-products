@@ -6,13 +6,13 @@
 //
 
 import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { Card } from '../Card';
-
+import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 type ActionIcon = {
   id?: string;
@@ -23,7 +23,7 @@ type ActionIcon = {
   href?: string;
 };
 
-interface ExpressiveCardProps extends PropsWithChildren {
+export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */

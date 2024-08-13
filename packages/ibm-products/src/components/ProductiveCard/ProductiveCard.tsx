@@ -11,13 +11,13 @@ import React, {
   ReactNode,
   forwardRef,
 } from 'react';
-import PropTypes from 'prop-types';
-import { Card } from '../Card';
 
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { prepareProps } from '../../global/js/utils/props-helper';
-import { pkg } from '../../settings';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { Card } from '../Card';
+import PropTypes from 'prop-types';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const componentName = 'ProductiveCard';
 
@@ -37,7 +37,7 @@ type overflowAction = {
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
-interface ProductiveCardProps extends PropsWithChildren {
+export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */

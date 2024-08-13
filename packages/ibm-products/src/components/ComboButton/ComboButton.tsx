@@ -5,31 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { ChevronDown, ChevronUp } from '@carbon/react/icons';
-
-import { Button, OverflowMenuItem, OverflowMenu } from '@carbon/react';
-
-import classnames from 'classnames';
-import { node, shape, string } from 'prop-types';
-import uuidv4 from '../../global/js/utils/uuidv4';
-
 import React, {
   Children,
   ComponentProps,
+  PropsWithChildren,
+  ReactNode,
   createElement,
+  forwardRef,
   useRef,
   useState,
-  ReactNode,
-  PropsWithChildren,
-  forwardRef,
 } from 'react';
+import { node, shape, string } from 'prop-types';
 
+import classnames from 'classnames';
 import { pkg } from '../../settings';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--combo-button`;
 const componentName = 'ComboButton';
 
-interface ComboButtonProps extends ComponentProps<'div'> {
+export interface ComboButtonProps extends ComponentProps<'div'> {
   /** Provide the contents of the `ComboButton` */
   children?: ReactNode;
 

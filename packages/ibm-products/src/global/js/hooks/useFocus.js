@@ -10,7 +10,7 @@ import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
 
 export const getSpecificElement = (parentEl, elementId) => {
-  const element = parentEl?.querySelector(`${elementId}`);
+  const element = parentEl?.querySelector(elementId);
 
   return elementId && !element?.disabled ? element : null;
 };

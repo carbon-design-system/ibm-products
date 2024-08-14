@@ -9,6 +9,7 @@ import React from 'react';
 import { act, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg, carbon } from '../../settings';
+import { waitForPosition } from '../../global/js/utils/wait_for_position';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SearchBar } from '.';
 
@@ -26,6 +27,7 @@ const defaultProps = {
   clearButtonLabelText: 'Clear',
   placeholderText: 'Search...',
   submitLabel: 'Search',
+  labelText: 'Search label',
   onChange: mockOnChange,
   onSubmit: mockOnSubmit,
 };
@@ -163,6 +165,7 @@ describe(componentName, () => {
 
   it('renders with selected scopes', async () => {
     renderComponent({ ...scopesDefaultProps });
+    await waitForPosition();
   });
 
   it.skip('select scope, type text, and calls submit with an expected object', async () => {

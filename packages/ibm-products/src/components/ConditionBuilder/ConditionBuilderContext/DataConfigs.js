@@ -1,14 +1,22 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { pkg } from '../../../settings';
-import { translationsObject } from './translationObject';
 
 export const statementConfig = [
   {
     label: 'if',
     id: 'if',
+    connector: 'and',
   },
   {
     label: 'excl.if',
-    id: 'excl.if',
+    id: 'excl_if',
+    connector: 'or',
   },
 ];
 
@@ -22,7 +30,13 @@ export const connectorConfig = [
     id: 'or',
   },
 ];
-//op types : option, text, number, date,
+export const actionConfig = [
+  {
+    label: 'then',
+    id: 'then',
+  },
+];
+
 export const operatorConfig = [
   {
     label: 'is',
@@ -36,7 +50,7 @@ export const operatorConfig = [
   },
   {
     label: 'is greater than or equal to',
-    id: 'greater-equal',
+    id: 'greaterEqual',
     type: 'number',
   },
   {
@@ -46,27 +60,27 @@ export const operatorConfig = [
   },
   {
     label: 'is lower than or equal to',
-    id: 'lower-equal',
+    id: 'lowerEqual',
     type: 'number',
   },
   {
     label: 'starts with',
-    id: 'starts-with',
-    type: 'text',
+    id: 'startsWith',
+    type: 'text,textarea',
   },
   {
     label: 'ends with',
-    id: 'ends-with',
-    type: 'text',
+    id: 'endsWith',
+    type: 'text,textarea',
   },
   {
     label: 'contains',
     id: 'contains',
-    type: 'text',
+    type: 'text,textarea',
   },
   {
     label: 'is one of',
-    id: 'one-of',
+    id: 'oneOf',
     type: 'option',
   },
   {
@@ -94,27 +108,37 @@ const formatDate = (date) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
-export const translateWithId = (key) => {
-  return translationsObjectCurrent[key] ?? key;
-};
+//const translationsObjectCurrent = translationsObject['en']; // TO DO: need to discuss if language is to be passed as prop
 
 export const valueRenderers = {
   text: (val) => val,
+  textarea: (val) => val,
   time: (val) => val,
-  number: (val, config) => {
-    return config.unit && val ? `${val} ${config.unit}` : val;
-  },
+  number: (val) => val,
   option: (value) => {
-    return Array.isArray(value) ? value.join(', ') : value;
+    if (value && typeof value !== 'string') {
+      const selectedValues = Array.isArray(value) ? value : [value];
+      return selectedValues.map((option) => option.label).join(', ');
+    }
+
+    return value;
   },
   date: (value) => {
     if (Array.isArray(value) && value.length > 1) {
-      let start = value?.[0] ? formatDate(new Date(value[0])) : '';
-      let end = value?.[1] ? formatDate(new Date(value[1])) : '';
+      const start =
+        value?.[0] && !isNaN(new Date(value[0]))
+          ? formatDate(new Date(value[0]))
+          : '';
+      const end =
+        value?.[1] && !isNaN(new Date(value[1]))
+          ? formatDate(new Date(value[1]))
+          : '';
       return `${start} To ${end}`;
+    } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
+      return formatDate(new Date(value[0]));
     } else {
-      return value && new Date(value) ? formatDate(new Date(value)) : value;
+      return value;
     }
   },
+  custom: (value) => value,
 };

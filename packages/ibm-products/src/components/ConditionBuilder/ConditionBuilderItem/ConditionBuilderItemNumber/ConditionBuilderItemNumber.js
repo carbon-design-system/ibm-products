@@ -1,36 +1,51 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 
 import { NumberInput } from '@carbon/react';
 
-import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
+import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { useTranslations } from '../../utils/useTranslations';
 
 export const ConditionBuilderItemNumber = ({
   conditionState,
   config,
   onChange,
 }) => {
+  const [invalidNumberWarnText] = useTranslations(['invalidNumberWarnText']);
   const onChangeHandler = (e, { value }) => {
-    onChange(value + '');
+    if (value !== '' && !isNaN(value) && checkIfValid(value)) {
+      onChange(`${value} ${config.unit ?? ''}`);
+    } else {
+      onChange('INVALID');
+    }
+  };
+  const checkIfValid = (value) => {
+    if (value > config.max || value < config.min) {
+      return false;
+    }
+    return true;
+  };
+  const getDefaultValue = () => {
+    return conditionState.value?.split(' ')?.[0] ?? '';
   };
   return (
-    <div className={`${blockClass}__condition-builder-item-number`}>
+    <div className={`${blockClass}__item-number`}>
       <NumberInput
         label={conditionState.property}
         hideLabel
         id={conditionState.property?.replace(/\s/g, '')}
-        value={
-          conditionState.value
-            ? conditionState.value.split(' ')[0]
-            : conditionState.value
-        }
-        min={config.min}
-        max={config.max}
-        step={config.step}
+        invalidText={invalidNumberWarnText}
         allowEmpty
         onChange={onChangeHandler}
+        {...config}
+        defaultValue={getDefaultValue()}
       />
     </div>
   );

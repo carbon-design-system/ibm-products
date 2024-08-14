@@ -1,10 +1,9 @@
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -15,14 +14,13 @@
   position: sticky !important;
   display: flex;
   align-items: center;
-  border-inline-start: 1px solid $layer-active-02;
-  inset-inline-end: 0;
+  border-inline-start: 1px solid $border-subtle;
 }
 
 .#{variables.$block-class}__right-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
-  border-inline-start: 1px solid $layer-active-02;
+  border-inline-start: 1px solid $border-subtle;
   inset-inline-end: 0;
 }
 
@@ -31,15 +29,14 @@
   position: sticky !important;
   display: flex;
   align-items: center;
-  border-inline-end: 1px solid $layer-active-02;
-  inset-inline-start: 0;
+  border-inline-end: 1px solid $border-subtle;
 }
 
 .#{variables.$block-class}__left-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   z-index: 1;
-  border-inline-end: 1px solid $layer-active-02;
+  border-inline-end: 1px solid $border-subtle;
   inset-inline-start: 0;
 }
 

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useEffect, useState } from 'react';
 
 import { TimePicker, TimePickerSelect, SelectItem } from '@carbon/react';
@@ -17,23 +24,23 @@ export const ConditionBuilderItemTime = ({ onChange, config }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeValue, dayZoneValue, timeZoneValue]);
 
-  const setTimeZone = (e) => {
-    setTimeZoneValue(e.target.value);
+  const setTimeZone = (evt) => {
+    setTimeZoneValue(evt.target.value);
   };
-  const setDayZone = (e) => {
-    setDayZoneValue(e.target.value);
+  const setDayZone = (evt) => {
+    setDayZoneValue(evt.target.value);
   };
-  const setTime = (e) => {
-    setTimeValue(e.target.value);
+  const setTime = (evt) => {
+    setTimeValue(evt.target.value);
   };
   return (
-    <div className={`${blockClass}__condition-builder-item-time`}>
+    <div className={`${blockClass}__item-time`}>
       <TimePicker id="time-picker" labelText="Select a time" onChange={setTime}>
         <TimePickerSelect id="time-picker-day-zone" onChange={setDayZone}>
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
         </TimePickerSelect>
-        <TimePickerSelect id="time-picker-select-2" onChange={setTimeZone}>
+        <TimePickerSelect id="time-picker-time-zone" onChange={setTimeZone}>
           {config?.timeZones?.map((timeZone, index) => (
             <SelectItem key={index} value={timeZone} text={timeZone} />
           ))}

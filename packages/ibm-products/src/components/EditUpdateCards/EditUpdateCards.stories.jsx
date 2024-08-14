@@ -30,7 +30,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditUpdateCards',
+  title: 'Experimental/Patterns/Edit and update/EditUpdateCards',
   component: EditUpdateCards,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -250,9 +250,9 @@ const Template = (args) => {
           primaryButtonText={editMode && !loading ? 'Save' : null}
           secondaryButtonIcon={null}
           secondaryButtonText={editMode && !loading ? 'Cancel' : null}
-          id={`${
-            editMode ? pkg.prefix + '--edit-update-cards--edit' : ''
-          }`} /*Used id for overriding the SVG(icon) path fill*/
+          id={
+            editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
+          } /*Used id for overriding the SVG(icon) path fill*/
         />
       </Column>
     </Grid>

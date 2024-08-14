@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Theme } from '@carbon/react';
 
 import { pkg } from '../../settings';
@@ -30,7 +30,7 @@ const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
 
 export default {
-  title: 'IBM Products/Components/Tag overflow/TagOverflow',
+  title: 'Experimental/Components/Tag overflow/TagOverflow',
   component: TagOverflow,
   tags: ['autodocs'],
   parameters: {
@@ -118,5 +118,42 @@ CustomComponentsWithOverflowModal.args = {
   containerWidth: 200,
   items: IconComponentArr,
   tagComponent: IconComponent,
+  ...overflowAndModalStrings,
+};
+
+const TemplateWithClose = (argsIn) => {
+  const { containerWidth, allTagsModalTargetCustomDomNode, items, ...args } = {
+    ...argsIn,
+  };
+  const [liveTags, setLiveTags] = useState(
+    items.map((item) => ({
+      ...item,
+      filter: true,
+      onClose: () => handleTagClose(item.label),
+    }))
+  );
+
+  const handleTagClose = (key) => {
+    setLiveTags((prev) => prev.filter((item) => item.label !== key));
+  };
+
+  const ref = useRef();
+  return (
+    <div style={{ width: containerWidth }} ref={ref}>
+      <TagOverflow
+        {...args}
+        items={liveTags}
+        allTagsModalTarget={
+          allTagsModalTargetCustomDomNode ? ref.current : undefined
+        }
+      />
+    </div>
+  );
+};
+
+export const InteractiveTags = TemplateWithClose.bind({});
+InteractiveTags.args = {
+  items: tags,
+  containerWidth: 500,
   ...overflowAndModalStrings,
 };

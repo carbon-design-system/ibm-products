@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
@@ -26,6 +27,8 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { CodeSnippet } from '@carbon/react';
 import { pkg } from '../../../../settings';
+import { FeatureFlags } from '../../../FeatureFlags';
+import { WithFeatureFlags } from '../../../../../../core/.storybook/WithFeatureFlags';
 
 export default {
   title: 'IBM Products/Components/Datagrid/ColumnCustomization',
@@ -182,7 +185,7 @@ const sharedDatagridProps = {
 
 const ColumnCustomizationUsage = ({ ...args }) => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const datagridState = useDatagrid(
     {
@@ -203,14 +206,12 @@ const ColumnCustomizationUsage = ({ ...args }) => {
     useColumnOrder
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useCustomizeColumns` hook
-  pkg.feature['Datagrid.useCustomizeColumns'] = true;
-  pkg._silenceWarnings(true);
-
   return (
-    <>
+    <WithFeatureFlags
+      flags={{
+        'enable-datagrid-useCustomizeColumns': true,
+      }}
+    >
       <Datagrid datagridState={datagridState} />
       <div className={`${blockClass}-story__hidden-column-id-snippet`}>
         <p>Hidden column ids:</p>
@@ -218,7 +219,7 @@ const ColumnCustomizationUsage = ({ ...args }) => {
           {JSON.stringify(datagridState.state.hiddenColumns, null, 2)}
         </CodeSnippet>
       </div>
-    </>
+    </WithFeatureFlags>
   );
 };
 
@@ -245,7 +246,6 @@ ColumnCustomizationUsageStory.argTypes = {
 };
 ColumnCustomizationUsageStory.args = {
   ...columnCustomizationControlProps,
-  featureFlags: ['Datagrid.useCustomizeColumns'],
 };
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
@@ -275,7 +275,7 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
 
   const datagridState = useDatagrid(
     {
@@ -329,14 +329,12 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
     useSortableColumns
   );
 
-  // Warnings are ordinarily silenced in storybook, add this to test
-  pkg._silenceWarnings(false);
-  // Enable feature flag for `useCustomizeColumns` hook
-  pkg.feature['Datagrid.useCustomizeColumns'] = true;
-  pkg._silenceWarnings(true);
-
   return (
-    <>
+    <WithFeatureFlags
+      flags={{
+        'enable-datagrid-useCustomizeColumns': true,
+      }}
+    >
       <Datagrid datagridState={datagridState} />
       <div className={`${blockClass}-story__hidden-column-id-snippet`}>
         <p>Hidden column ids:</p>
@@ -344,7 +342,7 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
           {JSON.stringify(datagridState.state.hiddenColumns, null, 2)}
         </CodeSnippet>
       </div>
-    </>
+    </WithFeatureFlags>
   );
 };
 
@@ -366,5 +364,4 @@ ColumnCustomizationWithFixedColumnAndDisabledStory.argTypes = {
 };
 ColumnCustomizationWithFixedColumnAndDisabledStory.args = {
   ...columnCustomizationControlProps,
-  featureFlags: ['Datagrid.useCustomizeColumns'],
 };

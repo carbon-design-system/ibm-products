@@ -9,6 +9,10 @@ import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
 
+export const getSpecificElement = (parentEl, elementId) => {
+  return elementId ? parentEl?.querySelector(elementId) : null;
+};
+
 export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const carbonPrefix = usePrefix();
   const tearsheetBaseClass = `${pkg.prefix}--tearsheet`;
@@ -40,15 +44,13 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;
-    const specifiedElement = selectorPrimaryFocus
-      ? modalEl?.querySelector(selectorPrimaryFocus)
-      : null;
+    const specified = getSpecificElement(modalEl, selectorPrimaryFocus);
 
     return {
       first,
       last,
       all,
-      specifiedElement,
+      specified,
     };
   }, [modalEl, query, selectorPrimaryFocus]);
 

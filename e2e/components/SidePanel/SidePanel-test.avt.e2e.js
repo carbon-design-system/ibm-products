@@ -22,4 +22,53 @@ test.describe('SidePanel @avt', () => {
     await page.getByText('Open side panel').click();
     await expect(page).toHaveNoACViolations('SidePanel @avt-default-state');
   });
+
+  test('@avt-multi-step', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      id: 'ibm-products-components-side-panel-sidepanel--panel-with-second-step',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await page.getByText('Open side panel').click();
+    await expect(page.getByText('Main view')).toBeVisible();
+    await page.getByText('View all').click();
+    await expect(page.getByText('Detail view')).toBeVisible();
+    await page.getByLabel('back').click();
+    await expect(page.getByText('Main view')).toBeVisible();
+  });
+
+  test('@avt-action-toolbar', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      id: 'ibm-products-components-side-panel-sidepanel--with-action-toolbar',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await page.getByText('Open side panel').click();
+    await expect(page.getByLabel('Close')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.getByText('Copy')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.getByLabel('Settings')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.getByLabel('Delete')).toBeFocused();
+  });
+
+  test('@avt-focus-trap', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      // This used to be a specific story but using a default story to test the focus trap
+      id: 'ibm-products-components-side-panel-sidepanel--slide-over',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await page.getByText('Open side panel').click();
+    await expect(page.getByLabel('Close')).toBeFocused();
+    await page.getByLabel('Close').click();
+    await expect(page.getByText('Open side panel')).toBeFocused();
+  });
 });

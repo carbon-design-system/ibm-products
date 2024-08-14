@@ -5,46 +5,45 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, {
-  useEffect,
-  useState,
-  createContext,
-  ReactNode,
-  ForwardedRef,
-} from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
-
 // Carbon and package components we use.
 import {
-  ModalFooter,
-  ComposedModal,
-  ModalHeader,
-  ModalBody,
   Button,
+  ComposedModal,
   Form,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from '@carbon/react';
-import { CreateInfluencer } from '../CreateInfluencer';
-import { ActionSet } from '../ActionSet';
-import {
-  usePreviousValue,
-  useValidCreateStepCount,
-  useResetCreateComponent,
-  useCreateComponentFocus,
-  useCreateComponentStepChange,
-} from '../../global/js/hooks';
-import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
-import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+// Import portions of React that are needed.
+import React, {
+  ForwardedRef,
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 import {
   SimpleHeader,
   overflowAriaLabel_required_if_breadcrumbs_exist,
 } from '../SimpleHeader/SimpleHeader';
+import {
+  useCreateComponentFocus,
+  useCreateComponentStepChange,
+  usePreviousValue,
+  useResetCreateComponent,
+  useValidCreateStepCount,
+} from '../../global/js/hooks';
+
+import { ActionSet } from '../ActionSet';
+import { CreateInfluencer } from '../CreateInfluencer';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { StepsContextType } from '../CreateTearsheet/CreateTearsheet';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -52,7 +51,7 @@ const componentName = 'CreateFullPage';
 // This is a general context for the steps container
 // containing information about the state of the container
 // and providing some callback methods for steps to use
-export const StepsContext = createContext(null);
+export const StepsContext = createContext<StepsContextType | null>(null);
 
 // This is a context supplied separately to each step in the container
 // to let it know what number it is in the sequence of steps
@@ -192,7 +191,7 @@ type CreateFullPageBaseProps = {
   title?: string;
 };
 
-type CreateFullPageProps = CreateFullPageBaseProps &
+export type CreateFullPageProps = CreateFullPageBaseProps &
   CreateFullPageBreadcrumbsProps;
 
 interface Step {
@@ -245,6 +244,7 @@ export let CreateFullPage = React.forwardRef(
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     const previousState = usePreviousValue({ currentStep, open });
     const [isDisabled, setIsDisabled] = useState(false);
     const [onNext, setOnNext] = useState();
@@ -291,8 +291,7 @@ export let CreateFullPage = React.forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
-      /**@ts-ignore */
-      open,
+      open: true,
       setCurrentStep,
       stepData,
       /**@ts-ignore */

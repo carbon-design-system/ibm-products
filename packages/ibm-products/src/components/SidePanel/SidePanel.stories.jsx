@@ -243,7 +243,7 @@ const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
     <div className={`${prefix}body-content`}>
-      <h5>Section</h5>
+      <h3 className={`${prefix}body-subheading`}>Section</h3>
       <div className={`${prefix}text-inputs`}>
         <TextInput
           labelText="Input A"
@@ -289,7 +289,9 @@ const ChildrenContent = () => {
           onChange={(event) => setNotesValue(event.target.value)}
         />
       </div>
-      <h5 className={`${prefix}content-subtitle`}>Section</h5>
+      <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+        Section
+      </h3>
       {renderDataTable()}
     </div>
   );
@@ -301,7 +303,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
     <>
       {currentStep === 0 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Main view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Main view
+          </h3>
           {renderDataTable()}
           <Button
             kind="tertiary"
@@ -313,7 +317,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
       )}
       {currentStep === 1 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Detail view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Detail view
+          </h3>
           {renderDataTable()}
         </div>
       )}
@@ -421,9 +427,15 @@ docs: {
 const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const testRef = useRef();
+  const buttonRef = useRef();
+
   return (
     <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
         {open ? 'Close side panel' : 'Open side panel'}
       </Button>
       <SidePanel
@@ -433,6 +445,7 @@ const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
         actions={actionSets[actions]}
         ref={testRef}
         slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
       >
         {!minimalContent && <ChildrenContent />}
       </SidePanel>
@@ -444,9 +457,15 @@ const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
 const StepTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const buttonRef = useRef();
+
   return (
     <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
         {open ? 'Close side panel' : 'Open side panel'}
       </Button>
       <SidePanel
@@ -457,6 +476,7 @@ const StepTemplate = ({ actions, slug, ...args }) => {
         onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
         actions={actionSets[actions]}
         slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
       >
         <ChildrenContentWithSteps
           currentStep={currentStep}
@@ -470,11 +490,17 @@ const StepTemplate = ({ actions, slug, ...args }) => {
 // eslint-disable-next-line react/prop-types
 const SlideInTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef();
+
   return (
     <>
       <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
         <Column lg={16} md={8} sm={4}>
-          <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
+          <Button
+            ref={buttonRef}
+            onClick={() => setOpen(!open)}
+            className={`${prefix}toggle`}
+          >
             {open ? 'Close side panel' : 'Open side panel'}
           </Button>
         </Column>
@@ -485,6 +511,7 @@ const SlideInTemplate = ({ actions, slug, ...args }) => {
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
         slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
       >
         <ChildrenContent />
       </SidePanel>
@@ -566,19 +593,23 @@ WithStaticTitleAndActionToolbar.args = {
   includeOverlay: true,
   actionToolbarButtons: [
     {
+      leading: true,
       label: 'Copy',
       icon: (props) => <Copy size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Copy'),
+      kind: 'primary',
     },
     {
       label: 'Settings',
       icon: (props) => <Settings size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Settings'),
+      hasIconOnly: true,
     },
     {
       label: 'Delete',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('Action toolbar button clicked: Delete'),
+      hasIconOnly: true,
     },
   ],
 };

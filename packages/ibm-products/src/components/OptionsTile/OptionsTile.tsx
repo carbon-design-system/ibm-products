@@ -5,28 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, ReactNode } from 'react';
+import * as carbonMotion from '@carbon/motion';
 
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg } from '../../settings';
-import { useControllableState } from '../../global/js/hooks';
-import { Layer, Toggle } from '@carbon/react';
 import {
   ChevronDown,
   Locked,
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import * as carbonMotion from '@carbon/motion';
+import { Layer, Toggle } from '@carbon/react';
+import React, { ReactNode, useRef, useState } from 'react';
+
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { useControllableState } from '../../global/js/hooks';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
 
-interface OptionsTileProps {
+export interface OptionsTileProps {
   /**
    * Provide content to render as expandable OptionsTile. If no children
    * are present, the OptionsTile will render as its variant.
@@ -84,7 +86,7 @@ interface OptionsTileProps {
   /**
    * Define the size of the OptionsTile.
    */
-  size: 'lg' | 'xl';
+  size?: 'lg' | 'xl';
 
   /**
    * Optionally provide a text summarizing the current state of the content.
@@ -161,11 +163,7 @@ export let OptionsTile = React.forwardRef(
     const isInvalid = invalid;
     const isWarn = !isInvalid && warn;
     const isLocked = !isInvalid && !isWarn && locked;
-
-    const reducedMotion =
-      window && window.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     if (open !== prevIsOpen) {
       if (isOpen && !open) {
@@ -177,7 +175,7 @@ export let OptionsTile = React.forwardRef(
     }
 
     function expand() {
-      if (detailsRef.current && contentRef.current && !reducedMotion.matches) {
+      if (detailsRef.current && contentRef.current && !shouldReduceMotion) {
         setIsOpen(true);
 
         detailsRef.current.open = true;
@@ -214,13 +212,16 @@ export let OptionsTile = React.forwardRef(
     }
 
     function collapse() {
-      if (contentRef.current && !reducedMotion.matches) {
+      if (contentRef.current && !shouldReduceMotion) {
         setClosing(true);
 
         const { paddingTop, paddingBottom, height } = getComputedStyle(
           contentRef.current
         );
 
+        const animationDuration = Number(
+          carbonMotion.moderate01.replace('ms', '')
+        );
         const animation = contentRef.current.animate(
           [
             {
@@ -237,7 +238,7 @@ export let OptionsTile = React.forwardRef(
             },
           ],
           {
-            duration: Number(carbonMotion.moderate01.replace('ms', '')),
+            duration: animationDuration,
             easing: carbonMotion.easings.entrance.productive,
           }
         );
@@ -247,7 +248,14 @@ export let OptionsTile = React.forwardRef(
           setClosing(false);
         };
 
-        animation.onfinish = callback;
+        //This is to fix the flicking issue while collapsing.
+        //root cause : after the animation is finished , isOpen is still true until onFinish callback is triggered.For that minute duration , collapsed content will again show.
+        // To avoid this , isOpen is set to false after the 90% of animation duration.
+        setTimeout(() => {
+          callback();
+        }, animationDuration * 0.9);
+
+        // animation.onfinish = callback;
         animation.oncancel = callback;
       } else {
         // in case the ref is not set or the user prefers reduced motion, skip the animation
@@ -269,6 +277,12 @@ export let OptionsTile = React.forwardRef(
       let Icon: CarbonIconType | null = null;
       let text = summary;
       const summaryClasses = [`${blockClass}__summary`];
+      if (closing) {
+        summaryClasses.push(`${blockClass}__summary--closing`);
+      }
+      if (isOpen) {
+        summaryClasses.push(`${blockClass}__summary--open`);
+      }
 
       if (invalid) {
         Icon = WarningFilled;
@@ -341,7 +355,13 @@ export let OptionsTile = React.forwardRef(
                */
               /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
               <summary className={`${blockClass}__header`} onClick={toggle}>
-                <ChevronDown size={16} className={`${blockClass}__chevron`} />
+                <ChevronDown
+                  size={16}
+                  className={cx(`${blockClass}__chevron`, {
+                    [`${blockClass}__chevron--open`]: isOpen,
+                    [`${blockClass}__chevron--closing`]: closing,
+                  })}
+                />
                 {renderTitle()}
               </summary>
             }
@@ -435,7 +455,6 @@ OptionsTile.propTypes = {
   /**
    * Define the size of the OptionsTile.
    */
-  /**@ts-ignore*/
   size: PropTypes.oneOf(['lg', 'xl']),
 
   /**

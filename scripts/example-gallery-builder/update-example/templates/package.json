@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@carbon/ibm-products": "^2.21.0",
-    "@carbon/react": "^1.51.1",
+    "@carbon/react": "^1.60.3",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -44,11 +44,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
     ]
   }
 }

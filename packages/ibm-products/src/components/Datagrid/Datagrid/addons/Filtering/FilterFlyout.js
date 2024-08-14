@@ -33,11 +33,13 @@ const defaults = {
   title: 'Filter',
   primaryActionLabel: 'Apply',
   secondaryActionLabel: 'Cancel',
+  align: 'bottom',
 };
 
 const FilterFlyout = ({
   updateMethod,
   flyoutIconDescription = defaults.flyoutIconDescription,
+  align = defaults.align,
   filters = [],
   title = defaults.title,
   primaryActionLabel = defaults.primaryActionLabel,
@@ -221,7 +223,11 @@ const FilterFlyout = ({
     cancel();
   });
 
-  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+  // tableId is passed in from the event emitter from the FilterSummary component
+  // in  DatagridContent
+  useSubscribeToEventEmitter(CLEAR_FILTERS, (tableId) => {
+    reset(tableId);
+  });
 
   useEffect(
     function reflectLastAppliedFiltersWhenReactTableUpdates() {
@@ -235,7 +241,7 @@ const FilterFlyout = ({
       <IconButton
         label={flyoutIconDescription}
         kind="ghost"
-        align="bottom"
+        align={align}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
@@ -270,6 +276,10 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * Tooltip alignment for the filter button
+   */
+  align: PropTypes.string,
   /**
    * All data rows in the table
    */

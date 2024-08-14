@@ -16,7 +16,7 @@ import {
   unstable__SlugContent as SlugContent,
 } from '@carbon/react';
 import { ProductiveCard } from '.';
-// import mdx from './ProductiveCard.mdx';
+import DocsPage from './ProductiveCard.docs-page';
 import { action } from '@storybook/addon-actions';
 
 const sampleSlug = (
@@ -45,11 +45,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
   argTypes: {
     columnSizeSm: {
@@ -164,6 +162,7 @@ LabelOnly.args = {
 export const WithOverflow = Template.bind({});
 WithOverflow.args = {
   ...defaultProps,
+  iconDescription: 'Option',
   overflowAriaLabel: 'Overflow menu',
   overflowActions: [
     {

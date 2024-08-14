@@ -77,11 +77,17 @@ export let HTTPError403 = React.forwardRef<HTMLDivElement, HTTPError403Props>(
         {...getDevtoolsProps(componentName)}
       >
         <HTTPErrorContent {...{ description, errorCodeLabel, title, links }} />
-        <HTTPErrorSvg403 className={`${blockClass}__image`} />
+        <HTTPErrorSvg403 className={`${blockClass}__image`} title={title} />
       </div>
     );
   }
 );
+
+/**@ts-ignore*/
+HTTPError403.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with FullPageError`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 HTTPError403 = pkg.checkComponentEnabled(HTTPError403, componentName);

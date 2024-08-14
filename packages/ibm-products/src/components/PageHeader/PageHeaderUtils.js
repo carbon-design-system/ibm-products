@@ -17,7 +17,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * Assesses the vertical height of various elements and calls setMetrics with update
  * @param {{}} headerRef
  * @param {{}} offsetTopMeasuringRef
- * @param {{}} navigation
+ * @param {object} navigation
  * @param {boolean} enableBreadcrumbScroll
  * @param {boolean} hasActionBar
  * @param {boolean} widthIsNarrow
@@ -86,7 +86,7 @@ export const utilCheckUpdateVerticalSpace = (
     // The header offset calculation is either going to work out at 0 if we have no gap between scrolling container
     // top and the measuring ref top, or the difference between.
     update.headerOffset =
-      offsetMeasuringTop === 0
+      offsetMeasuringTop !== 0
         ? offsetMeasuringTop - scrollableContainerTop
         : 0;
 

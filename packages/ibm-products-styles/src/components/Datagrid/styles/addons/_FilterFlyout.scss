@@ -9,7 +9,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/layout' as *;
 
@@ -27,7 +27,7 @@ $action-set-height: to-rem(64px);
   position: absolute;
   display: none;
   background-color: $layer-02;
-  inset-block-start: $spacing-09;
+  inset-block-start: spacing.$spacing-09;
   inset-inline-end: 0;
   /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
   inline-size: to-rem(642px);
@@ -53,7 +53,8 @@ $action-set-height: to-rem(64px);
 }
 
 .#{variables.$block-class}-filter-flyout__inner-container {
-  padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+  padding: spacing.$spacing-05 spacing.$spacing-05 spacing.$spacing-09
+    spacing.$spacing-05;
 }
 
 .#{variables.$block-class}-filter-flyout__inner-container::before {
@@ -74,7 +75,7 @@ $action-set-height: to-rem(64px);
   display: block;
   @include type-style('heading-compact-01');
 
-  margin-block-end: $spacing-06;
+  margin-block-end: spacing.$spacing-06;
 }
 
 .#{variables.$block-class}-filter-flyout__filters {

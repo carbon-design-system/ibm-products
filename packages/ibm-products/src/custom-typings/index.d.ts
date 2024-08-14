@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 declare module '@carbon/react' {
   export {
     Accordion,
@@ -74,6 +81,7 @@ declare module '@carbon/react' {
     Heading,
     IconButton,
     IconTab,
+    IconSkeleton,
     IdPrefix,
     InlineLoading,
     InlineNotification,
@@ -107,6 +115,8 @@ declare module '@carbon/react' {
     PaginationNav,
     PasswordInput,
     Popover,
+    PopoverAlignment,
+    PopoverContent,
     PrimaryButton,
     ProgressBar,
     ProgressBar,
@@ -147,6 +157,8 @@ declare module '@carbon/react' {
     TabPanels,
     Table,
     Table,
+    TableBatchAction,
+    TableBatchActions,
     TableBody,
     TableBody,
     TableCell,
@@ -164,6 +176,7 @@ declare module '@carbon/react' {
     TableSelectAll,
     TableSelectAllProps,
     TableSelectRow,
+    TableToolbar,
     TableToolbarSearch,
     Tabs,
     Tabs,
@@ -197,3 +210,5 @@ declare module '@carbon/react' {
 }
 
 declare module '@carbon/colors';
+declare module '@carbon/motion';
+declare module '@carbon/feature-flags';

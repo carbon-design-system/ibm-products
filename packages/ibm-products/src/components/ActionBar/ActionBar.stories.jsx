@@ -29,7 +29,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: 'IBM Products/Components/ActionBar',
+  title: 'Experimental/Components/ActionBar',
   component: ActionBar,
   tags: ['autodocs'],
   argTypes: {

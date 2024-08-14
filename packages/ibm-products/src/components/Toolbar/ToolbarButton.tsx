@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React, { forwardRef, useContext } from 'react';
+import { ToolbarContext, blockClass as toolbarClass } from './Toolbar';
+import { bool, func, node, string } from 'prop-types';
+
 import { IconButton } from '@carbon/react';
 import cx from 'classnames';
-import { bool, func, node, string } from 'prop-types';
-import React, { forwardRef, useContext } from 'react';
-
 import { pkg } from '../../settings';
-
-import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
 
 export const blockClass = `${toolbarClass}__button`;
 
-interface ToolbarButtonProps extends React.ComponentProps<typeof IconButton> {
+export interface ToolbarButtonProps
+  extends React.ComponentProps<typeof IconButton> {
   /** Determines whether the caret is rendered */
   caret?: boolean;
   /** Provide an optional class to be applied to the containing node */
@@ -41,10 +41,9 @@ export let ToolbarButton = forwardRef(
     ref
   ) => {
     const Icon = renderIcon;
-
     return (
       <IconButton
-        align={useContext(ToolbarContext)?.vertical && 'right'}
+        align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
         {...rest}
         label={iconDescription}
         ref={ref}

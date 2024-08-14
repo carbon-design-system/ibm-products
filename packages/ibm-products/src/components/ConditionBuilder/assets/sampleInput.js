@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   Calendar,
   ColorPalette,
@@ -10,6 +17,62 @@ import {
   Tree,
   Wikis,
 } from '@carbon/react/icons';
+import CustomInput from './CustomInput';
+
+//keeping this , an alternative way to give support for dynamic options.
+//instead of supplying getOptions callback, we keep option property in inputConfig always as a async method instead to array as below.
+// export const inputDataForAsyncOptions = {
+//   properties: [
+//     {
+//       id: 'continent',
+//       label: 'Continent',
+//       icon: Earth,
+//       type: 'option',
+//       config: {
+//         options: async () => {
+//           let returnVal = [
+//             {
+//               label: 'Africa',
+//               id: 'Africa',
+//             },
+//             {
+//               label: 'Antarctica',
+//               id: 'Antarctica',
+//             },
+//             {
+//               label: 'Asia',
+//               id: 'Asia',
+//             },
+//             {
+//               label: 'Australia',
+//               id: 'Australia',
+//             },
+//             {
+//               label: 'Europe',
+//               id: 'Europe',
+//             },
+//           ];
+//           return new Promise((resolve) => {
+//             setTimeout(() => {
+//               resolve(returnVal);
+//             }, 2000);
+//           });
+//         },
+//       },
+//     },
+//   ],
+// };
+
+const customOperators = [
+  {
+    label: 'is greater than',
+    id: 'greater',
+  },
+  {
+    label: 'is greater than or equal to',
+    id: 'greaterEqual',
+  },
+];
 
 export const inputData = {
   properties: [
@@ -76,7 +139,6 @@ export const inputData = {
             icon: Wikis,
           },
         ],
-        includeSearch: true,
       },
     },
     {
@@ -158,6 +220,13 @@ export const inputData = {
       label: 'ID',
       icon: Hashtag,
       type: 'text',
+      config: {},
+    },
+    {
+      id: 'id_long',
+      label: 'Id Long',
+      icon: Hashtag,
+      type: 'textarea',
       config: {},
     },
     {
@@ -247,8 +316,11 @@ export const inputData = {
       id: 'product',
       label: 'Product',
       icon: Cube,
-      type: 'text',
-      config: {},
+      type: 'custom',
+      config: {
+        component: CustomInput,
+        operators: customOperators,
+      },
     },
   ],
 };
@@ -267,9 +339,7 @@ export const inputDataDynamicOptions = {
       label: 'Region',
       icon: Flag,
       type: 'option',
-      config: {
-        includeSearch: true,
-      },
+      config: {},
     },
     {
       id: 'color',

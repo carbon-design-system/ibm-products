@@ -5,24 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import { allPropTypes } from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-
 // Carbon and package components we use.
 import { Button, ButtonProps } from '@carbon/react';
+// Import portions of React that are needed.
+import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
+import { TearsheetShell, tearsheetHasCloseIcon } from './TearsheetShell';
+
 import { ActionSet } from '../ActionSet';
-
-import { tearsheetHasCloseIcon, TearsheetShell } from './TearsheetShell';
-
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { allPropTypes } from '../../global/js/utils/props-helper';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
 
 const componentName = 'Tearsheet';
@@ -51,7 +45,7 @@ export type CloseIconDescriptionTypes =
 
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
-interface TearsheetProps extends PropsWithChildren {
+export interface TearsheetProps extends PropsWithChildren {
   /**
    * The navigation actions to be shown as buttons in the action area at the
    * bottom of the tearsheet. Each action is specified as an object with
@@ -142,9 +136,17 @@ interface TearsheetProps extends PropsWithChildren {
   portalTarget: ReactNode;
 
   /**
-   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
   selectorPrimaryFocus?: string;
+
+  /**
+   * Specify the CSS selectors that match the floating menus.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-composedmodal--overview#focus-management
+   */
+  selectorsFloatingMenus?: string[];
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -321,6 +323,11 @@ Tearsheet.propTypes = {
   label: PropTypes.node,
 
   /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef: PropTypes.any,
+
+  /**
    * Navigation content, such as a set of tabs, to be displayed at the bottom
    * of the header area of the tearsheet.
    */
@@ -345,9 +352,18 @@ Tearsheet.propTypes = {
   portalTarget: portalType,
 
   /**
-   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
   selectorPrimaryFocus: PropTypes.string,
+
+  /**
+   * Specify the CSS selectors that match the floating menus.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-composedmodal--overview#focus-management
+   */
+  /**@ts-ignore*/
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * The main title of the tearsheet, displayed in the header area.

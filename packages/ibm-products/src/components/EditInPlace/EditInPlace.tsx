@@ -5,24 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Checkmark, Close, Edit, WarningFilled } from '@carbon/react/icons';
 import React, {
-  useState,
-  useEffect,
-  forwardRef,
-  useRef,
   PropsWithChildren,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
+import { carbon, pkg } from '../../settings';
+
 import { IconButton } from '@carbon/react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import {
-  Edit,
-  Checkmark,
-  Close,
-  // EditOff,
-  WarningFilled,
-} from '@carbon/react/icons';
-import { pkg, carbon } from '../../settings';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'EditInPlace';
@@ -49,7 +44,7 @@ type Shape = {
   save: AlignPropType;
 };
 
-interface EditInplaceProps extends PropsWithChildren {
+export interface EditInplaceProps extends PropsWithChildren {
   /**
    * label for cancel button
    */
@@ -86,6 +81,11 @@ interface EditInplaceProps extends PropsWithChildren {
    * Provide the text that will be read by a screen reader when visiting this control
    */
   labelText: string;
+
+  /**
+   * handler to add custom onBlur event
+   */
+  onBlur?: (value: string) => void;
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
@@ -124,6 +124,10 @@ interface EditInplaceProps extends PropsWithChildren {
    * current value of the input
    */
   value: string;
+  /**
+   * placeholder for the input
+   */
+  placeholder?: string;
 }
 
 export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
@@ -141,12 +145,14 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onCancel,
       onChange,
       onSave,
+      onBlur,
       // readOnly,
       // readOnlyLabel,
       saveLabel,
       size = 'sm',
       tooltipAlignment,
       value,
+      placeholder,
       ...rest
     }: EditInplaceProps & { invalidLabel?: string },
     ref
@@ -159,7 +165,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
     const escaping = useRef(false);
 
     const tipAlignIsObject = typeof tooltipAlignment === 'object';
-    const tipAlignments: { [key: string]: string } = [
+    const tipAlignments: { [key: string]: AlignPropType } = [
       'edit',
       'save',
       'cancel',
@@ -212,17 +218,22 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onCancel(initialValue);
     };
 
-    const onBlurHandler = (e) => {
-      // if (readOnly || escaping.current) {
-      if (escaping.current) {
-        return;
-      }
-
-      if (!isTargetingChild(e)) {
-        if (canSave) {
-          onSaveHandler();
-        } else {
-          onCancelHandler();
+    const onBlurHandler = (e: any) => {
+      // Use custom function provided if passed through
+      if (typeof onBlur === 'function' && !isTargetingChild(e)) {
+        onBlur(initialValue);
+        setFocused(false);
+      } else {
+        // Use Default behavior if no custom function provided
+        if (escaping.current) {
+          return;
+        }
+        if (!isTargetingChild(e)) {
+          if (canSave) {
+            onSaveHandler();
+          } else {
+            onCancelHandler();
+          }
         }
       }
     };
@@ -278,6 +289,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
               `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
+            placeholder={placeholder}
             value={value}
             onChange={onChangeHandler}
             ref={inputRef}
@@ -416,9 +428,14 @@ EditInPlace.propTypes = {
    */
   labelText: PropTypes.string.isRequired,
   /**
+   * handler to add custom onBlur event
+   */
+  onBlur: PropTypes.func,
+  /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
   onCancel: PropTypes.func.isRequired,
+
   /**
    * handler that is called when the input is updated
    */
@@ -427,6 +444,10 @@ EditInPlace.propTypes = {
    * handler that is called when the save button is pressed or when the user removes focus from the input if it has a new value
    */
   onSave: PropTypes.func.isRequired,
+  /**
+   * Placeholder for text input
+   */
+  placeholder: PropTypes.string,
   /**
    * determines if the input is in readOnly mode
    */

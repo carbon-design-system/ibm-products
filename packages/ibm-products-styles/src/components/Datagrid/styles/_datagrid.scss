@@ -389,7 +389,8 @@
   border-block-end: none;
 }
 
-.#{$block-class}__empty-state .#{$block-class}__table-simple td {
+.#{$block-class}__empty-state .#{$block-class}__table-simple td,
+.#{$block-class}__empty-state .#{$block-class}__table-virtual-scroll td {
   padding: $spacing-11;
 }
 
@@ -473,7 +474,8 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
-  padding-inline: $spacing-09;
+  min-inline-size: $spacing-09;
+  padding-inline-end: $spacing-09;
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;

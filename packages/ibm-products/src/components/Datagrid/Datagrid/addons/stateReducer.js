@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
 const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
 const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
+const DYNAMIC_ROW_CHECK = 'dynamicRowCheck';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
@@ -77,8 +78,41 @@ export const handleSelectAllRowData = ({
     payload: { rows, getRowId, indeterminate, isChecked },
   });
 
+export const handleDynamicRowCheck = ({
+  dispatch,
+  status,
+  rowId,
+  depth,
+  index,
+}) =>
+  dispatch({
+    type: DYNAMIC_ROW_CHECK,
+    payload: { status, rowId, depth, index },
+  });
+
 export const stateReducer = (newState, action) => {
   switch (action.type) {
+    case DYNAMIC_ROW_CHECK: {
+      const { status, rowId, depth, index } = action.payload;
+      if (status === 'start') {
+        const skeletonRow = (id) => ({
+          isSkeleton: true,
+          values: 'skeleton',
+          id,
+          depth,
+          index,
+          skeletonKey: `${id}__skeleton`,
+        });
+        return {
+          ...newState,
+          dynamicRowSkeleton: skeletonRow(rowId),
+        };
+      }
+      return {
+        ...newState,
+        dynamicRowSkeleton: null,
+      };
+    }
     case TOGGLE_ALL_ROWS_SELECTED: {
       const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
       const newSelectedRowIds = {};

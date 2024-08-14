@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { Datagrid, useDatagrid } from '../../index';
@@ -14,8 +15,8 @@ import styles from '../../_storybook-styles.scss?inline';
 // import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
-import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: 'IBM Products/Components/Datagrid/RowHeightSettings',
@@ -23,6 +24,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    docs: {
+      page: () => <StoryDocsPage omitCodedExample />,
+    },
     layout: 'fullscreen',
     // docs: { page: mdx },
   },
@@ -148,7 +152,7 @@ const sharedDatagridProps = {
 
 const BasicUsage = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
-  const [data] = useState(makeData(10));
+  const [data] = useState(gridData.slice(0, 10));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid({

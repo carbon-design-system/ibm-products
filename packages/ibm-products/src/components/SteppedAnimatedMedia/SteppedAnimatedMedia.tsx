@@ -33,7 +33,7 @@ const defaults = {
   playStep: 0,
 };
 
-interface SteppedAnimatedMediaProps {
+export interface SteppedAnimatedMediaProps {
   /**
    * Optional class name for this component.
    */
@@ -49,7 +49,7 @@ interface SteppedAnimatedMediaProps {
 }
 
 /**
- * The SteppedAnimatedMedia is a Novice to Pro internal component and is not intended for general use.
+ * The SteppedAnimatedMedia is an Onboarding internal component and is not intended for general use.
  */
 export const SteppedAnimatedMedia = React.forwardRef(
   (

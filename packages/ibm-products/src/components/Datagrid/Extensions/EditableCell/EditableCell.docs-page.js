@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 import {
@@ -7,6 +14,7 @@ import {
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         description: `The \`Datagrid\` supports inline editing when used with the \`useEditableCell\` hook (previously named \`useInlineEdit\` in v1) and columns are provided the required configuration. The four data types supported are strings, numbers, dates, and
@@ -14,7 +22,7 @@ export const DocsPage = () => (
       },
       {
         description: `Below are example column configurations for the supported inline edit data types:
-        
+
 Default/string:
         `,
         source: {
@@ -172,6 +180,19 @@ const MyInlineEditDatagrid = () => {
           `,
         },
         story: InlineEditUsageStory,
+      },
+      {
+        title: 'Opt out of editing at cell level',
+        description: `In some cases you may want to disable editing per cell. This is possible by providing the following structure for the cell value within your row data:`,
+        source: {
+          code: `
+{
+  value: '\u2014', // Value displayed for static cell
+  isStaticCell: true,
+  columnId: 'lastName',
+}
+          `,
+        },
       },
     ]}
   />

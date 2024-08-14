@@ -139,7 +139,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-novice-to-pro-checklist--checklist
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-onboarding-checklist--checklist
     tags:
       - content-block
   combo-button:
@@ -315,6 +315,22 @@ assets:
         action: link
         url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-cards-expressivecard
     tags:
+      - content-block
+      - contextual-navigation
+  full-page-error:
+    name: Full page error
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/full-page-errors/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error
+    tags:
+      - system-feedback
       - content-block
       - contextual-navigation
   http-error:

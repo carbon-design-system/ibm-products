@@ -18,7 +18,7 @@ import {
 } from '@carbon/react';
 
 import { ExpressiveCard } from '.';
-// import mdx from './ExpressiveCard.mdx';
+import DocsPage from './ExpressiveCard.docs-page';
 import { action } from '@storybook/addon-actions';
 
 const sampleSlug = (
@@ -47,11 +47,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
   argTypes: {
     columnSizeSm: {
@@ -113,7 +111,7 @@ const defaultProps = {
       action on the card.
     </p>
   ),
-  primaryButtonText: 'Primary',
+  primaryButtonText: 'Button',
 };
 
 const Template = (opts) => {

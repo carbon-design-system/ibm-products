@@ -192,7 +192,11 @@ const FilterPanel = ({
     [filterPanelMinHeight]
   );
 
-  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+  // tableId is passed in from the event emitter from the FilterSummary component
+  // in DatagridContent
+  useSubscribeToEventEmitter(CLEAR_FILTERS, (tableId) => {
+    reset(tableId);
+  });
 
   const getScrollableContainerHeight = () => {
     const filterHeadingHeight =
@@ -320,7 +324,7 @@ FilterPanel.propTypes = {
   searchLabelText: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,
-  setAllFilters: PropTypes.func.isRequired,
+  setAllFilters: PropTypes.func,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),

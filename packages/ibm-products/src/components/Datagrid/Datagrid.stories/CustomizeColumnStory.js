@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 const notes = `
   # Customizing columns
   Customizing columns allows user to reorder and hide certain columns of the datagrid. Consuming component can use the provided callback to save/update according to their persistent strategy.
@@ -21,8 +28,6 @@ const notes = `
     - \`options.customizeColumnsProps.onSaveColumnPrefs\`
       - type: \`Function(Columns: Array<{ColumnId: String, isVisible: Boolean}>) => void\`
       - It's a callback function when 'Save' button clicked on the modal. It allows consumer to preserve the updated column preference. This output can also be used to compute the \`hiddenColumns\` and \`columnOrder\`
-  - (optional) Reset to default
-    - There is a reset to default button on the modal. It will use the \`options.columns\` as the default. If there are columns should be hidden by default, denote them with property: \`isVisible: false\` (undefined will be treated as \`true\`)
 
   code snippet:
 
@@ -60,7 +65,7 @@ const notes = `
       <IntlProvider locale="en">
         <Datagrid {...datagridState} />
         <div>
-          Hidden column ids: 
+          Hidden column ids:
           <pre>{JSON.stringify(datagridState.state.hiddenColumns, null, 2)}</pre>
         </div>
       </IntlProvider>

@@ -1,8 +1,16 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    omitCodedExample
     blocks={[
       {
         description: `The \`Datagrid\` supports expandable rows with the use of the \`useExpandedRow\` hook.`,
@@ -25,7 +33,7 @@ const App = () => {
       data,
       ExpandedRowContentComponent: expansionRenderer,
       expanderButtonTitleExpanded: 'Collapse row',
-      expanderButtonTitleCollapsed: 'Expand row', 
+      expanderButtonTitleCollapsed: 'Expand row',
     },
     useExpandedRow
   );

@@ -11,7 +11,6 @@ import React, { PropsWithChildren } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -23,7 +22,7 @@ const defaults = {
   items: [],
   truncate: true,
 };
-interface DelimitedListProps extends PropsWithChildren {
+export interface DelimitedListProps extends PropsWithChildren {
   /**
    * Provide an optional class to be applied to the containing node.
    */

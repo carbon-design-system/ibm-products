@@ -27,7 +27,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 // .#{$block-class} {
 //   // TODO: Styles.
 // }
-
+.#{$block-class} {
+  padding: $spacing-06;
+}
 .#{$block-class}__condition-builder__group {
   display: flex;
 }
@@ -48,4 +50,28 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__condition-block {
   display: flex;
   flex-direction: row;
+  inline-size: fit-content;
+}
+.#{$block-class}__content-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: $spacing-02;
+}
+.#{$block-class}__heading {
+  margin-block: $spacing-03;
+}
+.#{$block-class}__tree
+  .#{$block-class}__actions-container
+  .#{$block-class}__condition-wrapper {
+  flex-direction: column;
+}
+.#{$block-class}__group-separator {
+  margin-block-start: $spacing-02;
+}
+.#{$block-class}__add-group,
+.#{$block-class}__group-separator {
+  inline-size: fit-content;
+}
+.#{$block-class}__tooltip {
+  word-break: break-all;
 }

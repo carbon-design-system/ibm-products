@@ -69,7 +69,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
   }
   .#{$block-class}__target {
     // the hit area
-    position: absolute;
+    display: flex;
     padding: 0;
     border: none;
     border-radius: 50%;

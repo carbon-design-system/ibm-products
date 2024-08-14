@@ -46,6 +46,11 @@ $draghandle-btn-class: #{$block-class}__handle;
   // see also ./utils/constants.js > distanceOffset
   $distance-offset: $spacing-06;
 
+  &--tooltip {
+    position: initial;
+    transform: none !important;
+  }
+
   &--fixed {
     position: fixed;
     inset-block-end: 0;
@@ -69,45 +74,19 @@ $draghandle-btn-class: #{$block-class}__handle;
     visibility: visible;
   }
 
-  // CARET STYLING
-  &__caret {
-    // background-color: this property is set in _coachmark-overlay-theme.scss
-    position: absolute;
-    z-index: 5902;
-    block-size: 0;
-    border-block-end: solid $caret-center $background-inverse;
-    // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
-    border-inline-end: $caret-center solid transparent;
-    border-inline-start: $caret-center solid transparent;
-    inline-size: 0;
-  }
-
-  // OVERLAY AND CARET POSITIONING
+  // OVERLAY POSITIONING
   &--top {
     $horizontal-push: calc($distance-offset - $caret-center);
     $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
 
     transform: translate(-50%, $translate-y);
 
-    .#{$block-class}__caret {
-      inset-inline-start: calc(50% - $caret-center);
-      transform: rotate(180deg);
-    }
-
     &-left {
       transform: translate(calc(-1 * $distance-offset), $translate-y);
-      .#{$block-class}__caret {
-        inset-inline-start: $horizontal-push;
-        transform: rotate(180deg);
-      }
     }
 
     &-right {
       transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
-      .#{$block-class}__caret {
-        inset-inline-end: $horizontal-push;
-        transform: rotate(180deg);
-      }
     }
   }
 
@@ -117,26 +96,13 @@ $draghandle-btn-class: #{$block-class}__handle;
     $translate-y: calc($distance-offset + $caret-height);
 
     transform: translate(-50%, $translate-y);
-    .#{$block-class}__caret {
-      inset-block-start: $top;
-      inset-inline-start: calc(50% - $caret-center);
-    }
 
     &-left {
       transform: translate(calc(-1 * $distance-offset), $translate-y);
-      .#{$block-class}__caret {
-        inset-block-start: $top;
-        inset-inline-start: $horizontal-push;
-      }
     }
 
     &-right {
       transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
-
-      .#{$block-class}__caret {
-        inset-block-start: $top;
-        inset-inline-end: $horizontal-push;
-      }
     }
   }
 
@@ -146,28 +112,13 @@ $draghandle-btn-class: #{$block-class}__handle;
     $vertical-push: calc($distance-offset - ($caret-height * 0.5));
 
     transform: translate($translate-x, -50%);
-    .#{$block-class}__caret {
-      inset-block-start: calc(50% - ($caret-height * 0.5));
-      inset-inline-end: $right;
-      transform: rotate(90deg);
-    }
 
     &-top {
       transform: translate($translate-x, calc(-1 * $distance-offset));
-      .#{$block-class}__caret {
-        inset-block-start: $vertical-push;
-        inset-inline-end: $right;
-        transform: rotate(90deg);
-      }
     }
 
     &-bottom {
       transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
-      .#{$block-class}__caret {
-        inset-block-end: $vertical-push;
-        inset-inline-end: $right;
-        transform: rotate(90deg);
-      }
     }
   }
 
@@ -177,28 +128,13 @@ $draghandle-btn-class: #{$block-class}__handle;
     $vertical-push: calc($distance-offset - ($caret-height * 0.5));
 
     transform: translate($translate-x, -50%);
-    .#{$block-class}__caret {
-      inset-block-start: calc(50% - ($caret-height * 0.5));
-      inset-inline-start: $left;
-      transform: rotate(-90deg);
-    }
 
     &-top {
       transform: translate($translate-x, calc(-1 * $distance-offset));
-      .#{$block-class}__caret {
-        inset-block-start: $vertical-push;
-        inset-inline-start: $left;
-        transform: rotate(-90deg);
-      }
     }
 
     &-bottom {
       transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
-      .#{$block-class}__caret {
-        inset-block-end: $vertical-push;
-        inset-inline-start: $left;
-        transform: rotate(-90deg);
-      }
     }
   }
 

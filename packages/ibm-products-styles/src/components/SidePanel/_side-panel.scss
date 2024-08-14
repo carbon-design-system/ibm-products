@@ -338,11 +338,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     align-items: center;
     justify-content: center;
     padding: 0;
-    block-size: $spacing-07;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    background-color: unset;
     color: $text-primary;
-    inline-size: $spacing-07;
+    min-block-size: 0;
 
-    .#{c4p-settings.$carbon-prefix}--btn__icon {
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover {
+      background-color: $background-hover;
+    }
+    .#{$block-class}--btn__icon {
       margin: 0;
     }
   }
@@ -354,7 +359,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close {
-    position: fixed;
+    position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     display: flex;
     inset-block-start: 0;

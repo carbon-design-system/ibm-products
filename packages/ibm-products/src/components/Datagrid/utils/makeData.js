@@ -93,8 +93,16 @@ const newPerson = (index, config) => {
   twoDaysAgoDate.setDate(twoDaysAgoDate.getDate() - 2);
 
   return {
+    disabledColumn: namor.generate({ words: 1, numbers: 0 }),
     firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
+    lastName:
+      index === 1 && config?.includeNonEditableCell && config?.column
+        ? {
+            value: '\u2014',
+            isStaticCell: true,
+            columnId: config?.column,
+          }
+        : namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
@@ -138,6 +146,7 @@ const newPerson = (index, config) => {
         : initialChartTypeIndex === 1
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
+    key: false,
     activeSince:
       activeChance > 0.66
         ? activeSinceDate
@@ -151,6 +160,7 @@ const newPerson = (index, config) => {
       (index === 1 || index === 3 || index === 4) && (
         <ExampleSlug align={config?.slugAlign} />
       ),
+    id: config?.id ? `${config?.id}__${index}` : `row_${index}`,
   };
 };
 

@@ -5,28 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Button, OverflowMenu, OverflowMenuItem, Theme } from '@carbon/react';
+// Carbon and package components we use.
+import { Close, Help } from '@carbon/react/icons';
 // Import portions of React that are needed.
 import React, {
+  ForwardedRef,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
   useMemo,
   useState,
-  useEffect,
-  PropsWithChildren,
-  ForwardedRef,
-  ReactNode,
 } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg } from '../../settings';
-
-// Carbon and package components we use.
-import { Close, Help } from '@carbon/react/icons';
-import { Button, OverflowMenu, OverflowMenuItem, Theme } from '@carbon/react';
-import { moderate02 } from '@carbon/motion';
-import { useWebTerminal } from './hooks';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import { pkg } from '../../settings';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { useWebTerminal } from './hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -38,6 +37,7 @@ const defaults = {
   documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
   isInitiallyOpen: false,
+  webTerminalAriaLabel: 'Web terminal header',
 };
 
 interface Action {
@@ -46,11 +46,11 @@ interface Action {
   iconDescription: string;
 }
 
-interface WebTerminalProps extends PropsWithChildren {
+export interface WebTerminalProps extends PropsWithChildren {
   /**
    * Provide your own terminal component as children to show up in the web terminal
    */
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
   /**
    * An array of actions to be displayed in the web terminal header bar
    */
@@ -69,7 +69,7 @@ interface WebTerminalProps extends PropsWithChildren {
   /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
-  documentationLinks?: readonly OverflowMenuItem[];
+  documentationLinks?: readonly (typeof OverflowMenuItem)[];
 
   /**
    * Description for the documentation link overflow menu tooltip
@@ -80,6 +80,11 @@ interface WebTerminalProps extends PropsWithChildren {
    * Optionally pass if the web terminal should be open by default
    */
   isInitiallyOpen?: boolean;
+
+  /**
+   * Specifies aria label for Web terminal
+   */
+  webTerminalAriaLabel?: string;
 }
 
 /**
@@ -97,7 +102,7 @@ export let WebTerminal = React.forwardRef(
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
       isInitiallyOpen = defaults.isInitiallyOpen,
-
+      webTerminalAriaLabel = defaults.webTerminalAriaLabel,
       // Collect any other property values passed in.
       ...rest
     }: WebTerminalProps,
@@ -106,13 +111,10 @@ export let WebTerminal = React.forwardRef(
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
     const [shouldRender, setRender] = useState(open);
-    const { matches: prefersReducedMotion } =
-      window && window.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     const webTerminalAnimationName = `${
-      open ? 'web-terminal-entrance' : 'web-terminal-exit'
+      open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'
     } ${moderate02}`;
 
     const showDocumentationLinks = useMemo(
@@ -149,7 +151,7 @@ export let WebTerminal = React.forwardRef(
         If the user prefers reduced motion, we have to manually set render to false
         because onAnimationEnd will never be called.
       */
-      if (prefersReducedMotion) {
+      if (shouldReduceMotion) {
         setRender(false);
       }
       closeWebTerminal?.();
@@ -172,11 +174,14 @@ export let WebTerminal = React.forwardRef(
           },
         ])}
         style={{
-          animation: !prefersReducedMotion ? webTerminalAnimationName : '',
+          animation: !shouldReduceMotion ? webTerminalAnimationName : '',
         }}
         onAnimationEnd={onAnimationEnd}
       >
-        <header className={`${blockClass}__bar`}>
+        <header
+          aria-label={webTerminalAriaLabel}
+          className={`${blockClass}__bar`}
+        >
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
@@ -279,4 +284,9 @@ WebTerminal.propTypes = {
    * Optionally pass if the web terminal should be open by default
    */
   isInitiallyOpen: PropTypes.bool,
+
+  /**
+   * Specifies aria label for Web terminal
+   */
+  webTerminalAriaLabel: PropTypes.string,
 };

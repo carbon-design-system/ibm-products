@@ -1,9 +1,11 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2024
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+import '../feature-flags';
 
 export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
@@ -117,11 +119,11 @@ export {
 } from './DescriptionList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
-export { Nav } from './Nav';
+export { Nav, NavItem, NavList } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { ScrollGradient } from './ScrollGradient';
-export { StatusIndicator } from './StatusIndicator';
+export { StatusIndicator, StatusIndicatorStep } from './StatusIndicator';
 export { TagOverflow } from './TagOverflow';
 export { ActionBar } from './ActionBar';
 export {
@@ -136,3 +138,9 @@ export {
 } from './FilterPanel';
 export { ConditionBuilder } from './ConditionBuilder';
 export { GetStartedCard } from './GetStartedCard';
+
+export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './FeatureFlags';

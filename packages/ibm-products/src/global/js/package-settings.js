@@ -29,6 +29,7 @@ const defaults = {
     ErrorEmptyState: true,
     ExportModal: true,
     ExpressiveCard: true,
+    FullPageError: true,
     HTTPError403: true,
     HTTPError404: true,
     HTTPErrorOther: true,
@@ -69,10 +70,11 @@ const defaults = {
     EditFullPage: false,
     EditUpdateCards: false,
     Nav: false,
+    NavItem: false,
+    NavList: false,
     BigNumbers: false,
     TruncatedList: false,
     DelimitedList: false,
-    FullPageError: false,
     ScrollGradient: false,
     StringFormatter: false,
     StatusIndicator: false,
@@ -94,7 +96,7 @@ const defaults = {
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
+    // Onboarding components not yet reviewed and released:
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,
@@ -115,7 +117,7 @@ const defaults = {
 
     /* new component flags here - comment used by generate CLI */
 
-    // Novice to pro components not yet reviewed and released:
+    // Onboarding components not yet reviewed and released:
     EmptyStateV2: false,
     Guidebanner: false,
     GuidebannerElement: false,

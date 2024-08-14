@@ -1,9 +1,14 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export type Size = 'xs' | 'sm' | 'md' | 'lg';
 export type Theme = 'light' | 'dark';
-export interface Column {
-  Header?: string;
-  accessor?: string | (() => void);
-  Cell?: () => void; // optional cell formatter
+
+export interface SpreadsheetColumn {
   rowHeight?: number;
   rowHeaderWidth?: number;
   width?: number;
@@ -15,10 +20,12 @@ export interface ActiveCellCoordinates {
 }
 
 export interface PrevState {
+  cellEditorValue?: string;
   activeCellCoordinates?: ActiveCellCoordinates;
   isEditing?: boolean;
-  selectionAreaData?: object[];
+  selectionAreaData?: any[];
   clickAndHoldActive?: boolean;
+  selectedHeaderReorderActive?: boolean;
   rowHeight?: number;
   cellSize?: Size;
 }

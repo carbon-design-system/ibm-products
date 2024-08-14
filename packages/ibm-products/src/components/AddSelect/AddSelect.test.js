@@ -7,6 +7,7 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { waitForPosition } from '../../global/js/utils/wait_for_position';
 import { AddSelect } from './AddSelect';
 import { pkg } from '../../settings';
 
@@ -159,6 +160,7 @@ describe(componentName, () => {
       },
     };
     render(<AddSelect {...newProps} />);
+    await waitForPosition();
     expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 
@@ -169,10 +171,9 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(
-      <AddSelect {...defaultProps} className="test-class" />
-    );
-    expect(container.firstChild).toHaveClass('test-class');
+    render(<AddSelect {...defaultProps} className="test-class" />);
+    const tearsheetElement = screen.getByRole('dialog');
+    expect(tearsheetElement.parentElement).toHaveClass('test-class');
   });
 
   it('adds additional properties to the containing node', async () => {

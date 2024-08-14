@@ -36,15 +36,15 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import React, { useState } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-import DocsPage from './Toolbar.docs-page';
+import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/Toolbars/Toolbar',
+  title: 'Experimental/Patterns/Toolbars/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {
     docs: {
-      page: DocsPage,
+      page: mdx,
     },
   },
   argTypes: {
@@ -128,6 +128,8 @@ function _Toolbar(args) {
       <ToolbarGroup>
         <Dropdown
           id="dropdown"
+          hideLabel
+          titleText="Font size"
           initialSelectedItem={selectedDropdownItem}
           items={dropdownItems}
           label={selectedDropdownItem}

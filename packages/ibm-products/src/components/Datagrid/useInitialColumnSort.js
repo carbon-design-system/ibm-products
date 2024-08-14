@@ -20,6 +20,10 @@ export const useInitialColumnSort = (instance) => {
 
     if (sortableColumn) {
       const { id: columnId, order } = sortableColumn;
+      // prevents edge case where initial sort state of none actually starts out as ascending
+      if (order !== 'ASC' && order !== 'DESC') {
+        return;
+      }
       const { newSortDesc, newOrder } = getNewSortOrder(order);
       onSort?.(columnId, newOrder);
       instance.toggleSortBy(columnId, newSortDesc, false);

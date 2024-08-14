@@ -6,8 +6,8 @@
  */
 
 import React, { useEffect } from 'react';
-import { StaticNotification, UnorderedList, ListItem } from '@carbon/react';
 import { white, g10, g90, g100 } from '@carbon/themes';
+import '../../ibm-products/src/feature-flags';
 
 import { pkg } from '../../ibm-products/src/settings';
 
@@ -28,7 +28,12 @@ const Style = ({ children, styles }) => (
 const isDev = CONFIG_TYPE === 'DEVELOPMENT';
 if (isDev) {
   // use a prefix in all development storybook
-  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  if (!pkg.originalPrefix) {
+    pkg.originalPrefix = pkg.prefix;
+  }
+  if (pkg.prefix !== `dev-prefix--${pkg.originalPrefix}`) {
+    pkg.prefix = `dev-prefix--${pkg.prefix}`;
+  }
 }
 
 const decorators = [
@@ -49,32 +54,6 @@ const decorators = [
     return (
       <div className="preview-position-fix story-wrapper">
         <Style styles={index}>
-          {args.featureFlags ? (
-            <StaticNotification
-              className="preview__notification--feature-flag"
-              kind="warning"
-              inline
-              lowContrast
-              actionButtonLabel="Learn more"
-              statusIconDescription="describes the close button"
-              title="This story uses the following feature flags to enable or disable some functionality."
-              titleId="storybook--feature-flag-warning-notification"
-              aria-describedby="storybook--feature-flag-warning-notification"
-              onActionButtonClick={() => {
-                window.open(
-                  'https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
-                );
-              }}
-            >
-              <UnorderedList>
-                {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey}>
-                    {flagKey}: {`${args.featureFlags[flagKey]}`}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </StaticNotification>
-          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>
@@ -87,9 +66,9 @@ const makeViewport = (name, width, shadow) => ({
   styles: {
     border: '1px solid #1EA7FD',
     boxShadow: `0 0 50px 20px rgb(30 167 253 / ${shadow}%)`,
-    width,
+    width: width === '100%' ? 'calc(100% - 2px)' : width,
     // when width is fixed, leave room for a horizontal scroll bar
-    height: width === '100%' ? '100%' : 'calc(100% - 12px)',
+    height: width === '100%' ? 'calc(100% - 2px)' : 'calc(100% - 12px)',
   },
 });
 const carbonViewports = {
@@ -146,8 +125,10 @@ const parameters = {
         'Overview',
         ['Welcome', 'Getting started', 'Examples', '*'],
         'IBM Products',
-        ['Components', 'Patterns', 'Internal', 'Novice to pro'],
+        ['Components', 'Patterns', 'Internal', 'Onboarding'],
         'Community',
+        'Experimental',
+        ['Components', 'Patterns', 'Onboarding'],
       ],
     },
   },

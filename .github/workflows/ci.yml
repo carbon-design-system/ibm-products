@@ -3,8 +3,7 @@ name: CI # Run CI Checks
 on:
   pull_request:
     branches:
-      - main
-      - v1
+      - feat/percy-integration
   merge_group:
     types: [checks_requested]
 
@@ -17,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
@@ -37,14 +36,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -57,14 +56,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key: spellcheck-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -77,14 +76,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -98,14 +97,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: '**/node_modules'
           key:
@@ -119,13 +118,13 @@ jobs:
   avt-runner:
     strategy:
       matrix:
-        shard: [1, 2]
+        shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: yarn
@@ -149,11 +148,16 @@ jobs:
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+      - name: Run VRT
+        working-directory: packages/core
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+        run: yarn percy storybook http://localhost:3000
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-avt-report
           path: .playwright
@@ -165,4 +169,3 @@ jobs:
     steps:
       - name: Check AVT Runner job status
         if: ${{ needs.avt-runner.result != 'success' }}
-        run: exit 1

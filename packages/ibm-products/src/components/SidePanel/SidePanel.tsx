@@ -5,41 +5,40 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, Close } from '@carbon/react/icons';
+// Carbon and package components we use.
+import { Button, IconButton } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  ReactNode,
   ForwardedRef,
   MutableRefObject,
+  ReactNode,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { moderate02 } from '@carbon/motion';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { allPropTypes } from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-import { SIDE_PANEL_SIZES } from './constants';
-import { useFocus, usePreviousValue } from '../../global/js/hooks';
-
-// Carbon and package components we use.
-import { Button } from '@carbon/react';
-import { Close, ArrowLeft } from '@carbon/react/icons';
-import { ActionSet } from '../ActionSet';
 import {
+  actionSetVariants,
   overlayVariants,
   panelVariants,
-  actionSetVariants,
 } from './motion/variants';
-import pconsole from '../../global/js/utils/pconsole';
+import { useFocus, usePreviousValue } from '../../global/js/hooks';
+
+import { ActionSet } from '../ActionSet';
 import { ButtonProps } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { SIDE_PANEL_SIZES } from './constants';
+import { allPropTypes } from '../../global/js/utils/props-helper';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import pconsole from '../../global/js/utils/pconsole';
+import { pkg } from '../../settings';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -48,7 +47,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the action toolbar buttons
    */
-  actionToolbarButtons?: ButtonProps[];
+  actionToolbarButtons?: ButtonProps<any>[];
 
   /**
    * The primary actions to be shown in the side panel. Each action is
@@ -58,7 +57,7 @@ type SidePanelBaseProps = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps[];
+  actions?: ButtonProps<any>[];
 
   /**
    * Determines if the title will animate on scroll
@@ -104,6 +103,11 @@ type SidePanelBaseProps = {
    * Sets the label text which will display above the title text
    */
   labelText?: string;
+
+  /**
+   * Provide a ref to return focus to once the side panel is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
 
   /**
    * Sets the icon description for the navigation back icon button
@@ -157,7 +161,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the size of the side panel
    */
-  size: 'xs' | 'sm' | 'md' | 'lg' | '2xl';
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
   /**
    * Determines if this panel slides in
@@ -204,7 +208,7 @@ type SidePanelSlideInProps =
       selectorPageContent: string;
     };
 
-type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
+export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
 // `any` is a work around until ActionSet is migrated to TS
 const MotionActionSet = motion(ActionSet);
@@ -252,6 +256,7 @@ export let SidePanel = React.forwardRef(
       slug,
       subtitle,
       title,
+      launcherButtonRef,
 
       // Collect any other property values passed in.
       ...rest
@@ -269,17 +274,24 @@ export let SidePanel = React.forwardRef(
     const titleRef = useRef<HTMLDivElement>(null);
     const labelTextRef = useRef<HTMLParagraphElement>(null);
     const subtitleRef = useRef<HTMLParagraphElement>(null);
-    const previousState = usePreviousValue({ size, open });
+    const previousState = usePreviousValue({ size, open, currentStep });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
     const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
       .current;
+    const previousOpen = usePreviousValue(open);
 
-    const shouldReduceMotion = useReducedMotion();
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
+
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && open) {
+        onRequestClose?.();
+      }
+    };
 
     useEffect(() => {
       if (open && !titleRef?.current) {
@@ -342,20 +354,20 @@ export let SidePanel = React.forwardRef(
       titleItemsStyles,
     ]);
 
-    const reducedMotion =
-      typeof document !== 'undefined' && window?.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : { matches: true };
-
     // scroll panel to top going between steps
     useEffect(() => {
       if (sidePanelRef && panelRefValue) {
         const scrollableSection =
           animatedScrollRef.current ?? innerContentRef.current;
 
-        if (scrollableSection) {
+        if (
+          previousState &&
+          previousState['currentStep'] !== currentStep &&
+          scrollableSection
+        ) {
           scrollableSection.scrollTop = 0;
         }
+
         // The size of the panel has changed while it is still opened
         // so we need to scroll it to the top and reset the header
         // height css custom property
@@ -379,6 +391,14 @@ export let SidePanel = React.forwardRef(
       }
     }, [labelText, title]);
 
+    useEffect(() => {
+      if (previousOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, previousOpen]);
+
     const checkSetDoAnimateTitle = () => {
       let canDoAnimateTitle = false;
       if (
@@ -389,7 +409,7 @@ export let SidePanel = React.forwardRef(
         titleRef?.current &&
         title &&
         title.length &&
-        !reducedMotion.matches
+        !shouldReduceMotion
       ) {
         const titleEl = titleRef.current;
         const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
@@ -464,7 +484,7 @@ export let SidePanel = React.forwardRef(
         titleRef?.current &&
         title &&
         title.length &&
-        !reducedMotion.matches
+        !shouldReduceMotion
       ) {
         checkSetDoAnimateTitle();
       }
@@ -477,7 +497,7 @@ export let SidePanel = React.forwardRef(
       handleScroll,
       title,
       size,
-      reducedMotion.matches,
+      shouldReduceMotion,
       id,
     ]);
 
@@ -528,10 +548,10 @@ export let SidePanel = React.forwardRef(
     // Set the internal state `animationComplete` to true if
     // prefers reduced motion is true
     useEffect(() => {
-      if (reducedMotion.matches) {
+      if (shouldReduceMotion) {
         setAnimationComplete(true);
       }
-    }, [reducedMotion.matches]);
+    }, [shouldReduceMotion]);
 
     // initializes the side panel to open
     const onAnimationStart = () => {
@@ -557,11 +577,11 @@ export let SidePanel = React.forwardRef(
         !open &&
         previousState &&
         previousState['open'] &&
-        reducedMotion.matches
+        shouldReduceMotion
       ) {
         onUnmount?.();
       }
-    }, [open, onUnmount, reducedMotion.matches, previousState]);
+    }, [open, onUnmount, shouldReduceMotion, previousState]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
@@ -578,13 +598,13 @@ export let SidePanel = React.forwardRef(
         }
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginInlineEnd = '0';
-          pageContentElement.style.transition = !reducedMotion.matches
+          pageContentElement.style.transition = !shouldReduceMotion
             ? `margin-inline-end ${moderate02}`
             : '';
           pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginInlineStart = '0';
-          pageContentElement.style.transition = !reducedMotion.matches
+          pageContentElement.style.transition = !shouldReduceMotion
             ? `margin-inline-start ${moderate02}`
             : '';
           pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
@@ -595,7 +615,7 @@ export let SidePanel = React.forwardRef(
       selectorPageContent,
       placement,
       size,
-      reducedMotion.matches,
+      shouldReduceMotion,
       open,
     ]);
 
@@ -607,12 +627,12 @@ export let SidePanel = React.forwardRef(
             if (primeFocusEl) {
               (primeFocusEl as HTMLElement)?.focus();
             }
-          } else {
+          } else if (!slideIn) {
             firstElement?.focus();
           }
         }, 0);
       }
-    }, [animationComplete, firstElement, open, selectorPrimaryFocus]);
+    }, [animationComplete, firstElement, open, selectorPrimaryFocus, slideIn]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
@@ -651,7 +671,7 @@ export let SidePanel = React.forwardRef(
           {title}
         </h2>
 
-        {doAnimateTitle && !reducedMotion.matches && (
+        {doAnimateTitle && !shouldReduceMotion && (
           <h2
             className={`${blockClass}__collapsed-title-text`}
             title={title}
@@ -679,7 +699,7 @@ export let SidePanel = React.forwardRef(
           className={cx(`${blockClass}__header`, {
             [`${blockClass}__header--on-detail-step`]: currentStep > 0,
             [`${blockClass}__header--no-title-animation`]: !animateTitle,
-            [`${blockClass}__header--reduced-motion`]: reducedMotion.matches,
+            [`${blockClass}__header--reduced-motion`]: shouldReduceMotion,
             [`${blockClass}__header--has-title`]: title,
           })}
           ref={headerRef}
@@ -687,7 +707,6 @@ export let SidePanel = React.forwardRef(
           {/* back button */}
           {currentStep > 0 && (
             <Button
-              aria-label={navigationBackIconDescription}
               kind="ghost"
               size={slugCloseSize}
               disabled={false}
@@ -708,16 +727,23 @@ export let SidePanel = React.forwardRef(
           {/* slug and close */}
           <div className={`${blockClass}__slug-and-close`}>
             {normalizedSlug}
-            <Button
-              aria-label={closeIconDescription}
-              kind="ghost"
-              size={slugCloseSize}
-              renderIcon={(props) => <Close size={20} {...props} />}
-              iconDescription={closeIconDescription}
+            <IconButton
               className={`${blockClass}__close-button`}
+              label={closeIconDescription}
               onClick={onRequestClose}
+              onKeyDown={slideIn ? undefined : handleEscapeKey}
+              title={closeIconDescription}
+              aria-label={closeIconDescription}
               ref={closeRef}
-            />
+              align="left"
+            >
+              <Close
+                size={20}
+                aria-hidden="true"
+                tabIndex="-1"
+                className={`${blockClass}--btn__icon`}
+              />
+            </IconButton>
           </div>
           {/* subtitle */}
           {subtitle && (
@@ -803,6 +829,13 @@ export let SidePanel = React.forwardRef(
       );
     };
 
+    const handleKeyDown = (event) => {
+      if (!slideIn) {
+        handleEscapeKey(event);
+        keyDownListener(event);
+      }
+    };
+
     return (
       <AnimatePresence>
         {open && (
@@ -822,7 +855,7 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
-              onKeyDown={keyDownListener}
+              onKeyDown={handleKeyDown}
             >
               <>
                 {/* header */}
@@ -867,6 +900,7 @@ SidePanel.propTypes = {
   /**
    * Sets the action toolbar buttons
    */
+  /**@ts-ignore */
   actionToolbarButtons: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
@@ -900,6 +934,7 @@ SidePanel.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -913,6 +948,7 @@ SidePanel.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore */
         onClick: Button.propTypes.onClick,
       })
     ),
@@ -965,6 +1001,12 @@ SidePanel.propTypes = {
    * Sets the label text which will display above the title text
    */
   labelText: PropTypes.string,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
 
   /**
    * Sets the icon description for the navigation back icon button
@@ -1021,7 +1063,7 @@ SidePanel.propTypes = {
    * Sets the size of the side panel
    */
   /**@ts-ignore*/
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Determines if this panel slides in

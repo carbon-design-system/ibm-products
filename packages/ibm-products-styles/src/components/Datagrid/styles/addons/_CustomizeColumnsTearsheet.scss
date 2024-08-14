@@ -5,8 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable carbon/layout-token-use
+
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
@@ -24,9 +26,9 @@
 
 .#{variables.$block-class}__customize-columns-tearsheet--actions
   input[role='searchbox'] {
-  block-size: $spacing-09;
+  block-size: spacing.$spacing-09;
   border-block-end: 1px solid $background-active;
-  padding-inline-start: $spacing-09;
+  padding-inline-start: spacing.$spacing-09;
 }
 
 .#{c4p-settings.$carbon-prefix}--form-item.#{c4p-settings.$carbon-prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
@@ -64,10 +66,10 @@
   z-index: 1;
   display: flex;
   background-color: $layer;
-  block-size: $spacing-09;
+  block-size: spacing.$spacing-09;
   border-block-end: 1px solid $layer-active;
   inset-block-start: 0;
-  padding-inline-start: $spacing-08;
+  padding-inline-start: spacing.$spacing-08;
 
   .#{c4p-settings.$carbon-prefix}--checkbox-label-text {
     @include font-family.font-weight('semibold');

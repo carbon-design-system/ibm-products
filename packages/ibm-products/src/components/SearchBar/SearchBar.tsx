@@ -5,18 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import { Button, MultiSelect, Search } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-
-// Carbon and package components we use.
-import { Search, Button, MultiSelect } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--search-bar`;
@@ -35,7 +33,7 @@ const defaults = {
 
 type Scopes = string[] | object[];
 
-interface SearchBarProps extends PropsWithChildren {
+export interface SearchBarProps extends PropsWithChildren {
   /** @type {string} Optional additional class name. */
   className?: string;
 
@@ -48,7 +46,7 @@ interface SearchBarProps extends PropsWithChildren {
   hideScopesLabel?: boolean;
 
   /** @type {string} The label text for the search text input. */
-  labelText?: string;
+  labelText: string;
 
   /** @type {Function} Function handler for when the user changes their query search. */
   onChange?: (event: any) => void;
@@ -212,7 +210,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
         <Search
           className={`${blockClass}__input`}
           closeButtonLabelText={clearButtonLabelText}
-          labelText={labelText || ''}
+          labelText={labelText}
           name="search-input"
           onChange={handleInputChange}
           placeholder={placeholderText}
@@ -280,7 +278,7 @@ SearchBar.propTypes = {
   hideScopesLabel: PropTypes.bool,
 
   /** @type {string} The label text for the search text input. */
-  labelText: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
 
   /** @type {Function} Function handler for when the user changes their query search. */
   onChange: PropTypes.func,

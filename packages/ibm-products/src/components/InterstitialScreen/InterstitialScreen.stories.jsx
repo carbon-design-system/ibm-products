@@ -22,7 +22,7 @@ import styles from './_storybook-styles.scss?inline';
 const storyClass = 'interstitial-stories';
 
 export default {
-  title: 'IBM Products/Novice to pro/Interstitial screen/InterstitialScreen',
+  title: 'Experimental/Onboarding/Interstitial screen/InterstitialScreen',
   component: InterstitialScreen,
   tags: ['autodocs'],
   argTypes: {

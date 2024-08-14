@@ -66,7 +66,9 @@ body:
   - type: dropdown
     id: severity
     attributes:
-      label: Severity
+      label: Suggested Severity
+      description:
+        'Read more to understand our [severity levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
       options:
         - 'Severity 1 = The design is broken in a critical way that blocks users
           from completing tasks or damages the brand. Affects major
@@ -79,8 +81,6 @@ body:
           functionality, has a workaround.'
         - 'Severity 4 = The problem is not visible to or noticeable to an
           average user. Affects minor functionality, no workaround needed.'
-    validations:
-      required: true
   - type: input
     id: application
     attributes:

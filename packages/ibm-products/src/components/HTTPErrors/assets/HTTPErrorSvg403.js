@@ -10,8 +10,11 @@ import React from 'react';
 
 // Other standard imports.
 import { string } from 'prop-types';
+import { pkg } from '../../../settings';
 
-export const HTTPErrorSvg403 = ({ className }) => {
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--http-errors-403`;
+export const HTTPErrorSvg403 = ({ className, title }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,187 +22,368 @@ export const HTTPErrorSvg403 = ({ className }) => {
       viewBox="0 0 1584 916"
       className={className}
       preserveAspectRatio="xMinYMax meet"
+      aria-label={title}
     >
       <defs>
         <clipPath id="prefix__clip-path">
-          <path className="prefix__cls-1" d="M412 617.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M412 617.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-2">
-          <path className="prefix__cls-1" d="M416 624.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M416 624.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-3">
-          <path className="prefix__cls-1" d="M398.19 625.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M398.19 625.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-4">
-          <path className="prefix__cls-1" d="M402.19 632.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M402.19 632.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-5">
-          <path className="prefix__cls-1" d="M384.33 633.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M384.33 633.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-6">
-          <path className="prefix__cls-1" d="M388.33 640.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M388.33 640.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-7">
-          <path className="prefix__cls-1" d="M370.48 641.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M370.48 641.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-8">
-          <path className="prefix__cls-1" d="M374.48 648.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M374.48 648.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-9">
-          <path className="prefix__cls-1" d="M356.62 649.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M356.62 649.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-10">
-          <path className="prefix__cls-1" d="M360.62 656.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M360.62 656.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-11">
-          <path className="prefix__cls-1" d="M342.76 657.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M342.76 657.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-12">
-          <path className="prefix__cls-1" d="M346.76 664.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M346.76 664.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-13">
-          <path className="prefix__cls-1" d="M328.91 665.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M328.91 665.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-14">
-          <path className="prefix__cls-1" d="M332.91 672.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M332.91 672.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-15">
-          <path className="prefix__cls-1" d="M315.05 673.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M315.05 673.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-16">
-          <path className="prefix__cls-1" d="M319.05 680.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M319.05 680.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-17">
-          <path className="prefix__cls-1" d="M301.19 681.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M301.19 681.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-18">
-          <path className="prefix__cls-1" d="M305.19 688.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M305.19 688.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-19">
-          <path className="prefix__cls-1" d="M287.34 689.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M287.34 689.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-20">
-          <path className="prefix__cls-1" d="M291.34 696.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M291.34 696.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-21">
-          <path className="prefix__cls-1" d="M273.48 697.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M273.48 697.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-22">
-          <path className="prefix__cls-1" d="M277.48 704.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M277.48 704.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-23">
-          <path className="prefix__cls-1" d="M259.62 705.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M259.62 705.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-24">
-          <path className="prefix__cls-1" d="M263.62 712.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M263.62 712.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-25">
-          <path className="prefix__cls-1" d="M245.77 713.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M245.77 713.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-26">
-          <path className="prefix__cls-1" d="M249.77 720.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M249.77 720.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-27">
-          <path className="prefix__cls-1" d="M231.91 721.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M231.91 721.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-28">
-          <path className="prefix__cls-1" d="M235.91 728.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M235.91 728.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-29">
-          <path className="prefix__cls-1" d="M218.05 729.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M218.05 729.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-30">
-          <path className="prefix__cls-1" d="M222.05 736.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M222.05 736.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-31">
-          <path className="prefix__cls-1" d="M204.2 737.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M204.2 737.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-32">
-          <path className="prefix__cls-1" d="M208.2 744.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M208.2 744.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-33">
-          <path className="prefix__cls-1" d="M190.34 745.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M190.34 745.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-34">
-          <path className="prefix__cls-1" d="M194.34 752.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M194.34 752.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-35">
-          <path className="prefix__cls-1" d="M176.49 753.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M176.49 753.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-36">
-          <path className="prefix__cls-1" d="M180.49 760.38a4 4 0 11-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M180.49 760.38a4 4 0 11-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-37">
-          <path className="prefix__cls-1" d="M162.63 761.45a4 4 0 014 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M162.63 761.45a4 4 0 014 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-38">
-          <path className="prefix__cls-1" d="M166.63 768.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M166.63 768.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-39">
-          <path className="prefix__cls-1" d="M148.77 769.45a4 4 0 114 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M148.77 769.45a4 4 0 114 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-40">
-          <path className="prefix__cls-1" d="M152.77 776.38a4 4 0 01-4-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M152.77 776.38a4 4 0 01-4-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-41">
-          <path className="prefix__cls-1" d="M138.92 768.48a4 4 0 11-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M138.92 768.48a4 4 0 11-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-42">
-          <path className="prefix__cls-1" d="M134.92 775.41a4 4 0 114-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M134.92 775.41a4 4 0 114-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-43">
-          <path className="prefix__cls-1" d="M125.06 760.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M125.06 760.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-44">
-          <path className="prefix__cls-1" d="M121.06 767.41a4 4 0 014-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M121.06 767.41a4 4 0 014-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-45">
-          <path className="prefix__cls-1" d="M111.2 752.48a4 4 0 11-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M111.2 752.48a4 4 0 11-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-46">
-          <path className="prefix__cls-1" d="M107.2 759.41a4 4 0 014-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M107.2 759.41a4 4 0 014-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-47">
-          <path className="prefix__cls-1" d="M97.35 744.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M97.35 744.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-48">
-          <path className="prefix__cls-1" d="M93.35 751.41a4 4 0 114-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M93.35 751.41a4 4 0 114-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-49">
-          <path className="prefix__cls-1" d="M83.49 736.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M83.49 736.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-50">
-          <path className="prefix__cls-1" d="M79.49 743.41a4 4 0 014-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M79.49 743.41a4 4 0 014-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-51">
-          <path className="prefix__cls-1" d="M69.63 728.48a4 4 0 11-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M69.63 728.48a4 4 0 11-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-52">
-          <path className="prefix__cls-1" d="M65.63 735.41a4 4 0 114-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M65.63 735.41a4 4 0 114-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-53">
-          <path className="prefix__cls-1" d="M55.78 720.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M55.78 720.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-54">
-          <path className="prefix__cls-1" d="M51.78 727.41a4 4 0 114-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M51.78 727.41a4 4 0 114-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-55">
-          <path className="prefix__cls-1" d="M41.92 712.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M41.92 712.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-56">
-          <path className="prefix__cls-1" d="M37.92 719.41a4 4 0 014-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M37.92 719.41a4 4 0 014-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-57">
-          <path className="prefix__cls-1" d="M28.06 704.48a4 4 0 11-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M28.06 704.48a4 4 0 11-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-58">
-          <path className="prefix__cls-1" d="M24.06 711.41a4 4 0 114-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M24.06 711.41a4 4 0 114-6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-59">
-          <path className="prefix__cls-1" d="M14.21 696.48a4 4 0 01-4 6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M14.21 696.48a4 4 0 01-4 6.93z"
+          />
         </clipPath>
         <clipPath id="prefix__clip-path-60">
-          <path className="prefix__cls-1" d="M10.21 703.41a4 4 0 014-6.93z" />
+          <path
+            className={`${blockClass}__prefix-cls-1`}
+            d="M10.21 703.41a4 4 0 014-6.93z"
+          />
         </clipPath>
         <linearGradient
           id="prefix__linear-gradient"
@@ -339,11 +523,6 @@ export const HTTPErrorSvg403 = ({ className }) => {
           <stop offset={0.99} stopColor="#d6d6d6" stopOpacity={0.13} />
           <stop offset={1} stopColor="#d0d0d0" stopOpacity={0} />
         </linearGradient>
-        <style>
-          {
-            '.prefix__cls-1{fill:none}.prefix__cls-80{opacity:.25}.prefix__cls-75{fill:#595655}.prefix__cls-76{opacity:.15}.prefix__cls-77{fill:#373d42}.prefix__cls-78{fill:#002b50}.prefix__cls-80{mix-blend-mode:multiply}.prefix__cls-81{fill:#2b2828}'
-          }
-        </style>
       </defs>
       <g
         style={{
@@ -1063,24 +1242,27 @@ export const HTTPErrorSvg403 = ({ className }) => {
             fill="url(#prefix__White_100_-0_)"
           />
           <path
-            className="prefix__cls-75"
+            className={`${blockClass}__prefix-cls-75`}
             d="M281.57 349.8l5.43 67.25 11.14-27.5a11 11 0 000-8.28c-1-2.61-6.48-20.46-7.72-22.47a22.31 22.31 0 00-8.86-9l-.22 24.93 5.48 12a4 4 0 01.21 2.67l-5.69 20.6zM281.21 566s-12.66-7.32-11.76-14.55c.45-3.43 1.52-8.75 2.58-14.67 1.76-9.87 3.8-21.35 4.67-28.27 1.22-9.84 1.42-7.78 2-14.21.71-7.29.44-7.32.7-9.41l4.94-41.28-24.49-3.92 2.45 52.16c0 1 .06 2 .1 3a40.85 40.85 0 01-.65 7.84c-.19 1.14-.24 2.42-.43 3.81-1.51 10.83-1.92 29.76-1.94 32.8 0 5.24-.25 8.2-.25 8.2a21.12 21.12 0 01-2 7.88l-.19.46c.12 5.87 6 7.8 6 7.8a44.7 44.7 0 0110.87 5.44c2.63 1.82 4.86 2.5 7.44 1.09 2.31-1.3.89-3.4-.1-4.15"
           />
           <path
-            className="prefix__cls-76"
+            className={`${blockClass}__prefix-cls-76`}
             d="M261.15 516.57c6.33-27.67 17.75-21.87 18.06-26.91l-16.83 3.27c.43 3.94-1.56 20.93-2.13 26.31.09 0 .22-.22.35-.52a14.42 14.42 0 00.55-2.15z"
           />
           <path
-            className="prefix__cls-77"
+            className={`${blockClass}__prefix-cls-77`}
             d="M289.81 573.39c-.11-2.81-9-7.61-9-7.61 1 .73 2.36 2.79.1 4.07-2.54 1.38-4.72.71-7.31-1.08a44.28 44.28 0 00-10.67-5.34s-5.76-1.89-5.88-7.66l-.13.36c-.07.18-.13.36-.19.53a16.69 16.69 0 00-.64 2.62 13.83 13.83 0 00-.16 2.14.28.28 0 000-.09v.41a8.1 8.1 0 00.21 1.42 7.14 7.14 0 01-.21-1.42v1a5.67 5.67 0 002.9 5.25 1 1 0 01.52.88v4.45c.11.78 1.86.78 2 0v-4c.11-1.1 1.88-.33 2.58-.28a31.62 31.62 0 016.37 2.58c4.22 1.92 8 5.25 12.87 5.32 2.11.12 6.62-.88 6.7-2.76v-.77zm-4.31 2.28a8 8 0 002.45-.44 8 8 0 01-2.45.44z"
           />
           <path
-            className="prefix__cls-78"
+            className={`${blockClass}__prefix-cls-78`}
             d="M289.8 573.39c-.11-2.81-9-7.64-9-7.64 1 .74 2.37 2.82.11 4.1-2.54 1.38-4.72.71-7.31-1.08a44.28 44.28 0 00-10.67-5.34s-5.76-1.89-5.88-7.66l-.13.36c-.11.29-.23.58-.32.88a6.45 6.45 0 01.21-.62 15.49 15.49 0 00-.74 3v-.27a14.5 14.5 0 00-.18 2.28.28.28 0 000-.09v.41a6.4 6.4 0 00.91 3.14c2.07 3.32 6.55 2.11 9.64 3.72 4 1.61 7.72 3.93 11.64 5.92.51.2 1 .37 1.53.56h.14a14.94 14.94 0 003.32.54c2.12 0 4.55.23 6.25-1.27a1.19 1.19 0 00.46-1z"
           />
-          <path className="prefix__cls-76" d="M279.14 489.68z" />
+          <path
+            className={`${blockClass}__prefix-cls-76`}
+            d="M279.14 489.68z"
+          />
           <ellipse
-            className="prefix__cls-77"
+            className={`${blockClass}__prefix-cls-77`}
             cx={244.95}
             cy={586.07}
             rx={9.61}
@@ -1088,15 +1270,15 @@ export const HTTPErrorSvg403 = ({ className }) => {
             transform="rotate(-88.16 244.923 586.061)"
           />
           <path
-            className="prefix__cls-78"
+            className={`${blockClass}__prefix-cls-78`}
             d="M251.55 572.91c0-2.37-2.13-4.43-5-4.67a5.22 5.22 0 00-5.54 3.18 73.89 73.89 0 00-2.49 13.44v.34c-.1 5.21 2.6 9.49 6.09 9.6s6.55-4.09 6.72-9.39l.18-12.49z"
           />
           <path
-            className="prefix__cls-75"
+            className={`${blockClass}__prefix-cls-75`}
             d="M245.76 486c-2.13 41.53-2 74.42-4.61 86.95a80.25 80.25 0 00-1.69 10.54 1.44 1.44 0 001.36 1.51c2.42-.69 5.72-.85 8 .45a1.46 1.46 0 002-1.24c.92-34.21 7-41.71 13.91-95.51z"
           />
           <path
-            className="prefix__cls-78"
+            className={`${blockClass}__prefix-cls-78`}
             d="M244.58 403.14c-3.05 8.5-9.25 22.24-6 40.51 4.19 23.54 4.18 33.11 4.16 40.72a7.13 7.13 0 003.27 6c10.57 6.83 35.93 3.44 36.67-6 1-13.12 4.33-35.61 5.82-45.89 2.41-16.53.37-26.22-3.43-37.63 0 0-.59 9.63-17.63 9.6-15.71.03-22.86-7.31-22.86-7.31z"
           />
           <path
@@ -1104,11 +1286,11 @@ export const HTTPErrorSvg403 = ({ className }) => {
             fill="#6ea6ff"
           />
           <path
-            className="prefix__cls-75"
+            className={`${blockClass}__prefix-cls-75`}
             d="M252.2 346.48c-3.46 2.81.61 7.87 5.72 11.79 4.29 3.3 9.31 5.8 11.2 5.51a3.65 3.65 0 002-1.53 14.32 14.32 0 001.72-12.95 13.23 13.23 0 00-3.51-5.13s.3-8.54.54-15.71a3.68 3.68 0 00-2.06-3.1 12.3 12.3 0 00-7-1.41c-2.69.24-5.15 1.39-5.73 4-.22 6.28-.25 7.08-.38 10.91l-.12 3.43a7.41 7.41 0 01-2.38 4.19z"
           />
           <image
-            className="prefix__cls-80"
+            className={`${blockClass}__prefix-cls-80`}
             width={24}
             height={41}
             transform="translate(250 323)"
@@ -1116,22 +1298,22 @@ export const HTTPErrorSvg403 = ({ className }) => {
           />
           <path d="M286.2 404.44z" />
           <path
-            className="prefix__cls-75"
+            className={`${blockClass}__prefix-cls-75`}
             d="M265.31 305.37a16.71 16.71 0 00-17.41 16l-.44 10.24a16.7 16.7 0 1033.36 1.39l.45-10.24a16.71 16.71 0 00-15.96-17.39z"
           />
           <path
-            className="prefix__cls-81"
+            className={`${blockClass}__prefix-cls-81`}
             d="M249.63 315.19a9.16 9.16 0 007.28 2.8 8.88 8.88 0 00.77-17.6 9.18 9.18 0 00-7.5 2.16 9.08 9.08 0 00-2.72 8 8.65 8.65 0 002.17 4.64z"
           />
           <image
-            className="prefix__cls-80"
+            className={`${blockClass}__prefix-cls-80`}
             width={19}
             height={19}
             transform="translate(247 300)"
             xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAACXBIWXMAAAsSAAALEgHS3X78AAADaUlEQVQ4T51UTU/rRhS9djyO7YydDwguboD2iQ+VSs2iQWJBNl2y5Xd22yWb10WlhsVD4iHyqkRBkOI4dWyPP2fscRdgCpRueqSRrCvP8TnnXl+hLEt4D4QQTCmVkyRROeeiJEm5YRgBxjh69wIASG8Lvu8bQRAYGOOwKIraw8PDV5RSmXMuiqLILcuam6Zpq6qa/icZ51xwHKe7XC7XwzDEURQ1PM9reZ7XyrKsLooi7/f7n57eFdM0rSuKkr0kE6sHSqlMKZUZY2gymXwAABAEoQQAKIqiliSJOhqNBufn5z/d3NwcRFHUgDd4ZXM8Hu+7rttJkkQdj8f7q9Wq7bpuJwxDzBhDCCGGMQ5t2zZPT09/QQgxwzDIK7LpdPpNHMdanucSAMDt7e32fD63BEEoHcfpEkL0PM8lRVHSdru9KoqiNhqNBrIsU0mSZpqmJa+UqaqauK7bmU6n387nc2uxWGwIglDatm1GUdRot9urPM+lNE2VMAxxEATGbDbbwRiHjLGg2WwGEgBAHMfa9fX1d2EY4ionxhjKsqye57lEKZXv7u56CCGm6zrJsqwOAJCmqbK2tvbX1tbW3bOyJEnUIAiMIAgM13U7y+Vy3XGcLmMM+b7fJIToVWYVUWU5jmPtVWaUUjmOY40QoodhiAkhOiFEp5TKhBA9iqIG51zknIuKoqRFUdTKshQ452IURQ1CCNZ1PRQBHuemspOmqcIYQwCPIwEAUJalkOe5xBhDaZoqLz88mUw+XF1dff+sTBRFDgBQr9ezWq1WVJm9PEVRSO/V8zyXqimQAABkWaZ7e3tfbNs2F4vFBkKIIYSY7/tNzrmIEGIAAFW9OsPh8OPBwcFNr9f7pwGWZc09z2sZhhH0er07x3G6vu83syyrS5KUVxarbg6Hw4/L5XJd13WiqmrSarW8Z7Jut+tsbm7+GUVRwzRN+/Dw8HOapgrAY/srS5Uay7Lmx8fHv7VaLU/XdVJtEulJfr6zszMTBKF8mZ/ruh3OuXh5efkDYwwdHR393ul03N3d3T/6/f4n0zTtZrMZwBOe/wCMcbS9vX0ryzJtNBqRYRhBEARGHMfaycnJr/f3919rmhafnZ39fHFx8eP+/v4XeAPhveXoOM76YrHYSJJEfbnLZFmmg8Hg4l8XnvAu2f/F39fINtG4P6L+AAAAAElFTkSuQmCC"
           />
           <path
-            className="prefix__cls-81"
+            className={`${blockClass}__prefix-cls-81`}
             d="M253.18 322.85c3.58-7 13.7-2 18.2-4.27 5.87-3 8.92-1.57 8.73-2.74a16.83 16.83 0 00-14.94-10.66c-9.33-.16-17.1 6.57-17.57 16.11l-.36 8.26c.97.76 2.76-.45 5.94-6.7z"
           />
           <path
@@ -1140,11 +1322,11 @@ export const HTTPErrorSvg403 = ({ className }) => {
             fill="none"
           />
           <path
-            className="prefix__cls-76"
+            className={`${blockClass}__prefix-cls-76`}
             d="M285.55 402.38c.22.66.42 1.32.62 2 1.92.63 3.72 1.2 5.29 1.68l.64-1.56c-1.9-.61-4.1-1.33-6.55-2.12zM287.94 415h-.07a1.84 1.84 0 00-.67-.3l-2.58-.54-16.07-3.36-1-.21-6.69-1.39a16.45 16.45 0 01-9.51-5.89v-.06a122.09 122.09 0 01-8.7-12.94 26.21 26.21 0 004 9.43q1.59 2.31 3.36 4.56a18.16 18.16 0 005.48 4.62 17 17 0 002.93 1.29 18.7 18.7 0 002.07.58l25.77 5.4.63.13.08.06.24.15 1.86 1.13c-.09-.72-.18-1.44-.29-2.14z"
           />
           <path
-            className="prefix__cls-75"
+            className={`${blockClass}__prefix-cls-75`}
             d="M290.31 416.4a35.22 35.22 0 003.74 2c6.44 2.94 7.48 1.58 11.3-4.4.46-.72 1.45-.64 2.28-.42 1.79.5 5.49 2.59 7.27 3.08a2.14 2.14 0 002.78-2.23 2.29 2.29 0 00-1.24-1.69c-1.77-1-4.74-2.54-7.87-3.91-2.36-1-6-2.42-8.7-2.54-2.31-.1-4.92.78-7.14.13-9.64-2.82-30.42-10.34-31.47-10.65l-.05-.06c-4.68-12.86-12.12-28.63-15.85-32.49-4.33-4.48-10.38-5-12.09-.33-1.62 4.5-.7 10.08 4.89 19.7 3.64 6.27 7.8 13.78 13.15 20.58v.06a16.35 16.35 0 009.51 5.88l26.34 5.51a1.81 1.81 0 01.74.35z"
           />
           <path
@@ -1162,4 +1344,5 @@ export const HTTPErrorSvg403 = ({ className }) => {
 // See https://www.npmjs.com/package/prop-types#usage.
 HTTPErrorSvg403.propTypes = {
   className: string,
+  title: string,
 };

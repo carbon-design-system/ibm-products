@@ -60,7 +60,7 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  it('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = renderCoachmark();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

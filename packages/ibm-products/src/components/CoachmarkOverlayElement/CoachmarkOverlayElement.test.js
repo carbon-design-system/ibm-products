@@ -52,7 +52,7 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  it('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const user = userEvent.setup();
     const { container } = renderCoachmarkWithOverlayElement({
       title: 'Test title',

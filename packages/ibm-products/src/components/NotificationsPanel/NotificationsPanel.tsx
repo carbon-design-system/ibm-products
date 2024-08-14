@@ -27,7 +27,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { timeAgo } from './utils';
-import { useClickOutside } from '../../global/js/hooks';
+import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 

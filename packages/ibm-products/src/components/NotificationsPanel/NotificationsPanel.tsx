@@ -305,7 +305,7 @@ export let NotificationsPanel = React.forwardRef(
     ref
   ) => {
     const notificationPanelRef = useRef();
-    const notificationPaneInnerlRef = useRef(null);
+    const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
     const [shouldRender, setRender] = useState(open);
@@ -345,9 +345,9 @@ export let NotificationsPanel = React.forwardRef(
         open &&
         currentActiveNode &&
         oldActiveNode &&
-        notificationPaneInnerlRef.current
+        notificationPanelInnerRef.current
       ) {
-        const { current: bodyNode } = notificationPaneInnerlRef;
+        const { current: bodyNode } = notificationPanelInnerRef;
         const { current: startSentinelNode } = startSentinel;
         const { current: endSentinelNode } = endSentinel;
         wrapFocus({
@@ -640,7 +640,7 @@ export let NotificationsPanel = React.forwardRef(
           }
           {...getDevtoolsProps(componentName)}
         >
-          <div ref={notificationPaneInnerlRef}>
+          <div ref={notificationPanelInnerRef}>
             <div className={`${blockClass}__header-container`}>
               <div className={`${blockClass}__header-flex`}>
                 <h2 className={`${blockClass}__header`}>{title}</h2>

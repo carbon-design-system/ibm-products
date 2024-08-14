@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
 // Other standard imports.
 import PropTypes from 'prop-types';
+// Import portions of React that are needed.
+import React, { ForwardedRef } from 'react';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -39,6 +37,16 @@ const componentName = 'DISPLAY_NAME';
 // };
 
 /**
+ * TODO: add component type props
+ */
+
+export interface DISPLAY_NAMEProps {
+  children: React.ReactNode;
+  className: string;
+  [key: string]: any;
+}
+
+/**
  * TODO: A description of the component.
  */
 export let DISPLAY_NAME = React.forwardRef(
@@ -52,8 +60,8 @@ export let DISPLAY_NAME = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: DISPLAY_NAMEProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <div

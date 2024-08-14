@@ -206,22 +206,16 @@ export const DraggableItemsList = ({
         >
           {visibleCols.map((colDef) => {
             const colHeaderTitle = getNodeTextContent(colDef.Header);
-            const searchString = new RegExp('(' + filterString + ')');
-            const res = filterString.length
-              ? colHeaderTitle.toLowerCase().split(searchString)
-              : null;
-            const firstWord =
-              res !== null
-                ? res[0] === ''
-                  ? res[1].charAt(0).toUpperCase() + res[1].substring(1)
-                  : res[0].charAt(0).toUpperCase() + res[0].substring(1)
-                : null;
-            const highlightedText =
-              res !== null
-                ? res[0] === ''
-                  ? `<strong>${firstWord}</strong>` + res[2]
-                  : firstWord + `<strong>${res[1]}</strong>` + res[2]
-                : colHeaderTitle;
+            const parts = colHeaderTitle.split(
+              new RegExp(`(${filterString})`, 'gi')
+            );
+            const highlightedText = parts
+              .map((part) =>
+                part.toLowerCase() === filterString.toLowerCase()
+                  ? `<strong>${part}</strong>`
+                  : part
+              )
+              .join('');
             const isFrozenColumn = !!colDef.sticky;
             const isDisabled = colDef.disabled;
             const listContents = (

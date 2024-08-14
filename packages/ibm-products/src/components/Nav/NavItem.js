@@ -35,7 +35,7 @@ const defaults = {
 /**
  * Navigation item component.
  */
-export const NavItem = ({
+export let NavItem = ({
   activeHref = defaults.activeHref,
   children = defaults.children,
   className,
@@ -52,7 +52,7 @@ export const NavItem = ({
 }) => {
   const [hrefHasDifferentHost, setHrefHasDifferentHost] = useState(false);
   useEffect(() => {
-    if (href.indexOf(window.location.host) === -1) {
+    if (href?.indexOf(window.location.host) === -1) {
       setHrefHasDifferentHost(true);
     }
   }, [href]);
@@ -173,5 +173,8 @@ NavItem.propTypes = {
    */
   tabIndex: PropTypes.number,
 };
+
+// Return a placeholder if not released and not enabled by feature flag
+NavItem = pkg.checkComponentEnabled(NavItem, componentName);
 
 export default NavItem;

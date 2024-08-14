@@ -305,6 +305,7 @@ export let NotificationsPanel = React.forwardRef(
     ref
   ) => {
     const notificationPanelRef = useRef();
+    const notificationPaneInnerlRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
     const [shouldRender, setRender] = useState(open);
@@ -344,9 +345,9 @@ export let NotificationsPanel = React.forwardRef(
         open &&
         currentActiveNode &&
         oldActiveNode &&
-        notificationPanelRef.current
+        notificationPaneInnerlRef.current
       ) {
-        const { current: bodyNode } = notificationPanelRef;
+        const { current: bodyNode } = notificationPaneInnerlRef;
         const { current: startSentinelNode } = startSentinel;
         const { current: endSentinelNode } = endSentinel;
         wrapFocus({
@@ -639,93 +640,96 @@ export let NotificationsPanel = React.forwardRef(
           }
           {...getDevtoolsProps(componentName)}
         >
-          <div className={`${blockClass}__header-container`}>
-            <div className={`${blockClass}__header-flex`}>
-              <h2 className={`${blockClass}__header`}>{title}</h2>
-              <Button
-                size="sm"
-                kind="ghost"
-                className={`${blockClass}__dismiss-button`}
-                onClick={() => onDismissAllNotifications()}
-              >
-                {dismissAllLabel}
-              </Button>
+          <div ref={notificationPaneInnerlRef}>
+            <div className={`${blockClass}__header-container`}>
+              <div className={`${blockClass}__header-flex`}>
+                <h2 className={`${blockClass}__header`}>{title}</h2>
+                <Button
+                  size="sm"
+                  kind="ghost"
+                  className={`${blockClass}__dismiss-button`}
+                  onClick={() => onDismissAllNotifications()}
+                >
+                  {dismissAllLabel}
+                </Button>
+              </div>
+              {onDoNotDisturbChange && (
+                <Toggle
+                  size="sm"
+                  className={`${blockClass}__do-not-disturb-toggle`}
+                  id={`${blockClass}__do-not-disturb-toggle-component`}
+                  labelA={doNotDisturbLabel}
+                  labelB={doNotDisturbLabel}
+                  onToggle={(event) => onDoNotDisturbChange(event)}
+                  defaultToggled={doNotDisturbDefaultToggled}
+                  aria-label={doNotDisturbLabel}
+                  labelText={doNotDisturbLabel}
+                />
+              )}
             </div>
-            {onDoNotDisturbChange && (
-              <Toggle
-                size="sm"
-                className={`${blockClass}__do-not-disturb-toggle`}
-                id={`${blockClass}__do-not-disturb-toggle-component`}
-                labelA={doNotDisturbLabel}
-                labelB={doNotDisturbLabel}
-                onToggle={(event) => onDoNotDisturbChange(event)}
-                defaultToggled={doNotDisturbDefaultToggled}
-                aria-label={doNotDisturbLabel}
-                labelText={doNotDisturbLabel}
-              />
-            )}
-          </div>
-          <div className={mainSectionClassName}>
-            {withinLastDayNotifications && withinLastDayNotifications.length ? (
-              <>
-                <h6 className={`${blockClass}__time-section-label`}>
-                  {todayLabel}
-                </h6>
-                {withinLastDayNotifications.map((notification, index) =>
-                  renderNotification('today', notification, index)
-                )}
-              </>
-            ) : null}
-            {previousDayNotifications && previousDayNotifications.length ? (
-              <>
-                <h6 className={`${blockClass}__time-section-label`}>
-                  {yesterdayLabel}
-                </h6>
-                {previousDayNotifications.map((notification, index) =>
-                  renderNotification('yesterday', notification, index)
-                )}
-              </>
-            ) : null}
-            {previousNotifications && previousNotifications.length ? (
-              <>
-                <h6 className={`${blockClass}__time-section-label`}>
-                  {previousLabel}
-                </h6>
-                {previousNotifications.map((notification, index) =>
-                  renderNotification('previous', notification, index)
-                )}
-              </>
-            ) : null}
-            {!allNotifications.length && (
-              <NotificationsEmptyState
-                illustrationTheme="dark"
-                title=""
-                subtitle={emptyStateLabel}
-              />
-            )}
-          </div>
-          {onViewAllClick &&
-          onSettingsClick &&
-          allNotifications &&
-          allNotifications.length ? (
-            <div className={`${blockClass}__bottom-actions`}>
-              <Button
-                kind="ghost"
-                className={`${blockClass}__view-all-button`}
-                onClick={() => onViewAllClick()}
-              >
-                {viewAllLabel(allNotifications.length)}
-              </Button>
-              <Button
-                kind="ghost"
-                size="sm"
-                className={`${blockClass}__settings-button`}
-                renderIcon={(props) => <Settings size={16} {...props} />}
-                iconDescription={settingsIconDescription}
-                onClick={() => onSettingsClick()}
-              />
+            <div className={mainSectionClassName}>
+              {withinLastDayNotifications &&
+              withinLastDayNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {todayLabel}
+                  </h6>
+                  {withinLastDayNotifications.map((notification, index) =>
+                    renderNotification('today', notification, index)
+                  )}
+                </>
+              ) : null}
+              {previousDayNotifications && previousDayNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {yesterdayLabel}
+                  </h6>
+                  {previousDayNotifications.map((notification, index) =>
+                    renderNotification('yesterday', notification, index)
+                  )}
+                </>
+              ) : null}
+              {previousNotifications && previousNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {previousLabel}
+                  </h6>
+                  {previousNotifications.map((notification, index) =>
+                    renderNotification('previous', notification, index)
+                  )}
+                </>
+              ) : null}
+              {!allNotifications.length && (
+                <NotificationsEmptyState
+                  illustrationTheme="dark"
+                  title=""
+                  subtitle={emptyStateLabel}
+                />
+              )}
             </div>
-          ) : null}
+            {onViewAllClick &&
+            onSettingsClick &&
+            allNotifications &&
+            allNotifications.length ? (
+              <div className={`${blockClass}__bottom-actions`}>
+                <Button
+                  kind="ghost"
+                  className={`${blockClass}__view-all-button`}
+                  onClick={() => onViewAllClick()}
+                >
+                  {viewAllLabel(allNotifications.length)}
+                </Button>
+                <Button
+                  kind="ghost"
+                  size="sm"
+                  className={`${blockClass}__settings-button`}
+                  renderIcon={(props) => <Settings size={16} {...props} />}
+                  iconDescription={settingsIconDescription}
+                  onClick={() => onSettingsClick()}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
         {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <button

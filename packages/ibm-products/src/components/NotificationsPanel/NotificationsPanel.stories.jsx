@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -43,7 +43,12 @@ docs: {
   },
 };
 
-const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
+const renderUIShellHeader = (
+  open,
+  setOpen,
+  notificationTriggerRef,
+  hasUnreadNotifications
+) => (
   <HeaderContainer
     render={() => (
       <Header
@@ -61,6 +66,7 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
           <HeaderGlobalAction
             aria-label="Notifications"
             onClick={() => setOpen(!open)}
+            ref={notificationTriggerRef}
           >
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
@@ -79,6 +85,8 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
 
 const Template = (args) => {
   const [open, setOpen] = useState(false);
+  const notificationPanelRef = useRef(null);
+  const notificationTriggerRef = useRef(null);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsData, setNotificationsData] = useState(data);
 
@@ -98,6 +106,9 @@ const Template = (args) => {
   // logic for unread bell indicator
   useEffect(() => {
     let unreadTimer;
+    if (open && notificationPanelRef.current) {
+      notificationPanelRef.current.focus();
+    }
     if (open && hasUnreadNotifications) {
       const tempData = [...notificationsData];
       tempData.forEach((element) => {
@@ -121,16 +132,34 @@ const Template = (args) => {
       setHasUnreadNotifications(hasUnreadNotificationsCheck);
     }
     return () => clearTimeout(unreadTimer);
-  }, [open, notificationsData, hasUnreadNotifications]);
+  }, [
+    open,
+    notificationsData,
+    hasUnreadNotifications,
+    notificationPanelRef,
+    notificationTriggerRef,
+  ]);
+
+  useEffect(() => {
+    if (!open && notificationTriggerRef.current) {
+      notificationTriggerRef.current.focus();
+    }
+  }, [open]);
 
   return (
     <div className={`${storyBlockClass}--full-height`}>
-      {renderUIShellHeader(open, setOpen, hasUnreadNotifications)}
+      {renderUIShellHeader(
+        open,
+        setOpen,
+        notificationTriggerRef,
+        hasUnreadNotifications
+      )}
       <div className={`${storyBlockClass}__add`}>
         <Button onClick={addNewNotification}>Add new notification</Button>
       </div>
       <NotificationsPanel
         {...args}
+        ref={notificationPanelRef}
         data={notificationsData}
         open={open}
         onClickOutside={() => setOpen(false)}

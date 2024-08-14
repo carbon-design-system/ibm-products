@@ -65,12 +65,13 @@ const customColumnData = [
     Header: (
       <div>
         <div>
-          <span headerKey={true}>{'First Name'}</span>&nbsp;
+          <span>{'First Name'}</span>&nbsp;
           <span>{'(Pets)'}</span>
         </div>
       </div>
     ),
     accessor: 'firstName',
+    column_name: 'First Name', // This will equal to the same string you want to represent as your header
   },
   {
     Header: 'Age',

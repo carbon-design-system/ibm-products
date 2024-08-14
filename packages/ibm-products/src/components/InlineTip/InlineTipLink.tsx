@@ -8,12 +8,11 @@
 // Import portions of React that are needed.
 import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 
+import { Launch } from '@carbon/react/icons';
+import { Link } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Launch } from '@carbon/react/icons';
-import { Link } from '@carbon/react';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -23,7 +22,7 @@ const componentName = 'InlineTipLink';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-interface InlineTipLinkProps extends PropsWithChildren {
+export interface InlineTipLinkProps extends PropsWithChildren {
   /**
    * Provide the contents of the InlineTipLink.
    */

@@ -8,15 +8,13 @@
 // Import portions of React that are needed.
 import React, { PropsWithChildren, ReactNode } from 'react';
 
+import { Form } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
+import { TearsheetNarrow } from '../Tearsheet/TearsheetNarrow';
 import cx from 'classnames';
-import { Form } from '@carbon/react';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-
-import { TearsheetNarrow } from '../Tearsheet/TearsheetNarrow';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -26,7 +24,7 @@ const componentName = 'CreateTearsheetNarrow';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 type VerticalPosition = 'normal' | 'lower';
-interface CreateTearsheetNarrowProps extends PropsWithChildren {
+export interface CreateTearsheetNarrowProps extends PropsWithChildren {
   /**
    * Provide the contents of the CreateTearsheetNarrow.
    */

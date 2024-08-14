@@ -5,21 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
+import { Button } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
+// Import portions of React that are needed.
+import React from 'react';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-import { Button } from '@carbon/react';
+import { pkg } from '../../settings';
 import { useCoachmark } from '../Coachmark';
+
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
-interface CoachmarkButtonProps {
+export interface CoachmarkButtonProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

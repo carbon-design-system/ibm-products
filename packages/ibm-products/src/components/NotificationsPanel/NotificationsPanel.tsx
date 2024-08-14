@@ -5,34 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, { useEffect, useState, useRef, MutableRefObject } from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { useClickOutside } from '../../global/js/hooks';
-import { pkg } from '../../settings';
-import { timeAgo } from './utils';
-import { prepareProps } from '../../global/js/utils/props-helper';
-
-import { NotificationsEmptyState } from '../EmptyStates';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
-import wrapFocus from '../../global/js/utils/wrapFocus';
 // Carbon and package components we use.
 import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
 import {
-  ErrorFilled,
-  WarningAltFilled,
   CheckmarkFilled,
-  InformationSquareFilled,
   ChevronDown,
   Close,
+  ErrorFilled,
+  InformationSquareFilled,
   Settings,
+  WarningAltFilled,
 } from '@carbon/react/icons';
-import { usePreviousValue } from '../../global/js/hooks';
+// Import portions of React that are needed.
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+
+import { NotificationsEmptyState } from '../EmptyStates';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
+import { timeAgo } from './utils';
+import { useClickOutside } from '../../global/js/hooks';
+import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import wrapFocus from '../../global/js/utils/wrapFocus';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
@@ -84,7 +81,7 @@ interface Data {
   onNotificationClick?: () => void;
 }
 
-interface NotificationsPanelProps {
+export interface NotificationsPanelProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

@@ -124,6 +124,10 @@ export interface EditInplaceProps extends PropsWithChildren {
    * current value of the input
    */
   value: string;
+  /**
+   * placeholder for the input
+   */
+  placeholder?: string;
 }
 
 export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
@@ -148,6 +152,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       size = 'sm',
       tooltipAlignment,
       value,
+      placeholder,
       ...rest
     }: EditInplaceProps & { invalidLabel?: string },
     ref
@@ -284,6 +289,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
               `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
+            placeholder={placeholder}
             value={value}
             onChange={onChangeHandler}
             ref={inputRef}
@@ -438,6 +444,10 @@ EditInPlace.propTypes = {
    * handler that is called when the save button is pressed or when the user removes focus from the input if it has a new value
    */
   onSave: PropTypes.func.isRequired,
+  /**
+   * Placeholder for text input
+   */
+  placeholder: PropTypes.string,
   /**
    * determines if the input is in readOnly mode
    */

@@ -8,7 +8,7 @@
 // Other standard imports.
 import PropTypes from 'prop-types';
 // Import portions of React that are needed.
-import React from 'react';
+import React, { ForwardedRef } from 'react';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -61,7 +61,7 @@ export let DISPLAY_NAME = React.forwardRef(
       // Collect any other property values passed in.
       ...rest
     }: DISPLAY_NAMEProps,
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
       <div

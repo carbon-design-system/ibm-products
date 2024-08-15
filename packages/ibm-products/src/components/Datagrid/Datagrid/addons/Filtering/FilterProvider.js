@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { createContext, useState, useReducer } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   DATE,
@@ -14,7 +14,6 @@ import {
   RADIO,
   CHECKBOX,
   CLEAR_SINGLE_FILTER,
-  SAVED_FILTERS,
   MULTISELECT,
 } from './constants';
 
@@ -148,37 +147,16 @@ const prepareFiltersForTags = (filters, renderDateLabel, tableId) => {
   return tags;
 };
 
-const filteringReducer = (state, action) => {
-  switch (action.type) {
-    case SAVED_FILTERS: {
-      const { savedFilters } = action.payload || {};
-      return {
-        ...state,
-        savedFilters,
-      };
-    }
-    default:
-      return state;
-  }
-};
-
 export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
   const { renderDateLabel } = filterProps || {};
   const filterTags = prepareFiltersForTags(filters, renderDateLabel, tableId);
   const [panelOpen, setPanelOpen] = useState(false);
-
-  const initialState = {
-    savedFilters: [],
-  };
-  const [state, dispatch] = useReducer(filteringReducer, initialState);
 
   const value = {
     filterTags,
     EventEmitter,
     panelOpen,
     setPanelOpen,
-    state,
-    dispatch,
     tableId,
   };
 

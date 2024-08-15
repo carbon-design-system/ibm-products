@@ -28,6 +28,3 @@ export const CLEAR_SINGLE_FILTER = 'clearSingleFilter';
 /** Constants for panel dimensions */
 export const PANEL_WIDTH = 320;
 export const ACTION_SET_HEIGHT = 64;
-
-/** Constants for local reducer */
-export const SAVED_FILTERS = 'savedFilters';

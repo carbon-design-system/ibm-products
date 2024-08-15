@@ -102,6 +102,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(initialData ?? makeData(20));
+  const [isFetching, setIsFetching] = useState(false);
 
   const datagridState = useDatagrid(
     {
@@ -111,6 +112,8 @@ export const FilteringUsage = ({ defaultGridProps }) => {
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
+      isFetching,
+      setIsFetching,
       filterProps,
       gridTitle,
       gridDescription,

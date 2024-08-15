@@ -44,6 +44,7 @@ export const DatagridActions = (datagridState) => {
     rowSizeDropdownProps,
     useDenseHeader,
     filterProps,
+    setIsFetching,
     getFilterFlyoutProps,
     FilterFlyout,
     data,
@@ -52,7 +53,13 @@ export const DatagridActions = (datagridState) => {
     alert('Downloading...');
   };
   const refreshColumns = () => {
+    setIsFetching(true);
     alert('refreshing...');
+    console.log('isFetching: true');
+    setTimeout(() => {
+      setIsFetching(false);
+      console.log('isFetching: false');
+    }, 2000);
   };
 
   const searchForAColumn = 'Search';

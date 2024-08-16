@@ -145,6 +145,46 @@ test.describe('Tearsheet @avt', () => {
     await expect(modalElement).not.toBeInViewport();
   });
 
+  test('@avt-first-element-disabled-focus-behaviour', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tearsheet',
+      id: 'ibm-products-components-tearsheet--first-element-disabled',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    const openButton = page.getByText('Open Tearsheet');
+    const input2 = page.locator('#tss-ft2');
+    const closeIcon = page.getByLabel('Close the tearsheet');
+
+    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
+    await page.keyboard.press('Tab');
+    await expect(openButton).toBeFocused();
+
+    // Pressing 'Enter' key to open the Tearsheet
+    await page.keyboard.press('Enter');
+
+    // Opening Tearsheet
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+
+    await expect(page).toHaveNoACViolations(
+      'Tearsheet @avt-focus-return-to-launcher-button'
+    );
+
+    // Initially expect close button to be focused
+    await expect(closeIcon).toBeFocused();
+
+    // Press 'Tab' key to focus the second input box
+    await page.keyboard.press('Tab');
+    await expect(input2).toBeFocused();
+  });
+
   test('@avt-focus-return-to-launcher-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',

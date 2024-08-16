@@ -5,20 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '../../global/js/utils/props-helper';
+
 // Import portions of React that are needed.
 import React, { ForwardedRef, ReactNode } from 'react';
 
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-
 // Carbon and package components we use.
 import { Form } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
 import { SidePanel } from '../SidePanel';
-import '../../global/js/utils/props-helper';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -27,7 +26,7 @@ const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-interface EditSidePanelProps {
+export interface EditSidePanelProps {
   /**
    * Sets the body content of the create side panel
    */

@@ -87,6 +87,7 @@ const defaultProps = {
   // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
   value: 'default',
+  placeholder: 'placeholder text',
 };
 
 const Template = ({ containerWidth, ...args }) => {

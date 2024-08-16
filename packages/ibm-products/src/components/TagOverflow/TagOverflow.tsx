@@ -6,26 +6,27 @@
  */
 
 import React, {
+  ReactNode,
+  Ref,
+  RefObject,
+  createElement,
+  forwardRef,
   useCallback,
   useEffect,
   useRef,
   useState,
-  forwardRef,
-  Ref,
-  createElement,
-  RefObject,
-  ReactNode,
 } from 'react';
+import { Tag, Tooltip } from '@carbon/react';
+
 import PropTypes from 'prop-types';
+import { TYPES } from './constants';
+import { TagOverflowModal } from './TagOverflowModal';
+import { TagOverflowPopover } from './TagOverflowPopover';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { Tag, Tooltip } from '@carbon/react';
-import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { TagOverflowPopover } from './TagOverflowPopover';
-import { TagOverflowModal } from './TagOverflowModal';
 
 export interface TagOverflowItem {
   className?: string;
@@ -49,7 +50,7 @@ export interface TagOverflowItem {
   type?: string;
 }
 
-export interface Props {
+export interface TagOverflowProps {
   align?: 'start' | 'center' | 'end';
   allTagsModalSearchLabel?: string;
   allTagsModalSearchPlaceholderText?: string;
@@ -86,7 +87,7 @@ const componentName = 'TagOverflow';
 const allTagsModalSearchThreshold = 10;
 
 export let TagOverflow = forwardRef(
-  (props: Props, ref: Ref<HTMLDivElement>) => {
+  (props: TagOverflowProps, ref: Ref<HTMLDivElement>) => {
     const {
       align = 'start',
       allTagsModalSearchLabel,

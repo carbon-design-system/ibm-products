@@ -106,9 +106,6 @@ const Template = (args) => {
   // logic for unread bell indicator
   useEffect(() => {
     let unreadTimer;
-    if (open && notificationPanelRef.current) {
-      notificationPanelRef.current.focus();
-    }
     if (open && hasUnreadNotifications) {
       const tempData = [...notificationsData];
       tempData.forEach((element) => {
@@ -132,15 +129,27 @@ const Template = (args) => {
       setHasUnreadNotifications(hasUnreadNotificationsCheck);
     }
     return () => clearTimeout(unreadTimer);
-  }, [
-    open,
-    notificationsData,
-    hasUnreadNotifications,
-    notificationPanelRef,
-    notificationTriggerRef,
-  ]);
+  }, [open, notificationsData, hasUnreadNotifications]);
 
+  // Focus the dialog content and trigger button
   useEffect(() => {
+    if (open) {
+      const observer = new MutationObserver(() => {
+        if (notificationPanelRef.current) {
+          notificationPanelRef.current.focus();
+          observer.disconnect();
+        }
+      });
+      if (notificationPanelRef.current) {
+        notificationPanelRef.current.focus();
+      } else {
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      }
+      return () => observer.disconnect();
+    }
     if (!open && notificationTriggerRef.current) {
       notificationTriggerRef.current.focus();
     }

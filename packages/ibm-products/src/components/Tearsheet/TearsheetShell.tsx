@@ -33,6 +33,7 @@ import {
   ModalHeader,
   usePrefix,
   type ButtonProps,
+  /**@ts-ignore*/
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 

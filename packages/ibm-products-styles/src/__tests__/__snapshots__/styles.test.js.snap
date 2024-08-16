@@ -4064,13 +4064,12 @@ p.c4p--about-modal__copyright-text:first-child {
   width: 1rem;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2020 - 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .cds--data-table tr.c4p--datagrid__carbon-nested-row {
   border-left: 1px solid transparent;
 }
@@ -4121,7 +4120,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--data-table td.c4p--datagrid__expandable-row-cell.c4p--datagrid__expandable-row-cell--is-expanded + td::before,
-.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2)::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable):not(.c4p--datagrid__carbon-row-expandable--async) td.c4p--datagrid__cell:nth-of-type(2)::before,
 .cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__expandable-row-cell + td::before {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
@@ -4145,13 +4144,12 @@ p.c4p--about-modal__copyright-text:first-child {
   border-bottom: none;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2020
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid__expanded-row .cds--data-table-container {
   width: calc(100% - 2rem);
   border-left: 2px solid var(--cds-background-brand, #0f62fe);
@@ -4229,13 +4227,12 @@ p.c4p--about-modal__copyright-text:first-child {
   visibility: visible;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2020
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid__right-align-header {
   width: 100%;
   text-align: right;
@@ -4267,13 +4264,12 @@ p.c4p--about-modal__copyright-text:first-child {
   margin-left: auto;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid__right-sticky-column-cell {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
@@ -4334,13 +4330,12 @@ p.c4p--about-modal__copyright-text:first-child {
   left: 0;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid__actions-column-cell {
   display: flex;
   flex-flow: column;
@@ -4428,13 +4423,12 @@ p.c4p--about-modal__copyright-text:first-child {
   background-color: var(--cds-layer-selected);
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid .c4p--datagrid__row-size-toggle-tip-content {
   background-color: var(--cds-layer-02, #ffffff);
   box-shadow: 1px 4px 8px -3px var(--cds-overlay, rgba(22, 22, 22, 0.5)), -1px 6px 8px -5px var(--cds-overlay, rgba(22, 22, 22, 0.5));
@@ -4725,13 +4719,12 @@ th.c4p--datagrid__select-all-toggle-on.button {
   width: 10rem;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2022
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid .c4p--datagrid__expanded-row-content {
   position: relative;
   padding: 1rem 1rem 1.5rem 4rem;
@@ -4899,13 +4892,12 @@ th.c4p--datagrid__select-all-toggle-on.button {
   white-space: nowrap;
 }
 
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 .c4p--datagrid .c4p--datagrid__inline-edit--outer-cell-button--xs .cds--text-input,
 .c4p--datagrid .c4p--datagrid__inline-edit--outer-cell-button--xs .cds--number input[type=number],
 .c4p--datagrid .c4p--datagrid__inline-edit--outer-cell-button--xs .c4p--datagrid__inline-edit--select .cds--list-box.cds--dropdown,

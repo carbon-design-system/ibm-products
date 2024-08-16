@@ -33,9 +33,9 @@ import {
   ModalHeader,
   usePrefix,
   type ButtonProps,
-  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 
+import { FeatureFlags } from '../FeatureFlags';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';

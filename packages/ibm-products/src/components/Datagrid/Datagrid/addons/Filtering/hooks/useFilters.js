@@ -85,6 +85,7 @@ const useFilters = ({
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
     setAllFilters(JSON.parse(lastAppliedFilters.current));
+    setLocalFilterState(JSON.parse(lastAppliedFilters.current));
 
     // Set the temp prev refs, these will be used to populate the prev values once the
     // panel opens again
@@ -117,6 +118,7 @@ const useFilters = ({
         setFiltersState(initialFiltersState);
         setFiltersObjectArray(initialFiltersObjectArray);
         setAllFilters([]);
+        setLocalFilterState([]);
 
         // Update their respective refs so everything is in sync
         prevFiltersRef.current = JSON.stringify(initialFiltersState);

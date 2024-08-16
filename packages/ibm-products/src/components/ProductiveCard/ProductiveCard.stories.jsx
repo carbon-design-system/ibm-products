@@ -19,6 +19,8 @@ import { ProductiveCard } from '.';
 import DocsPage from './ProductiveCard.docs-page';
 import { action } from '@storybook/addon-actions';
 
+const storyClass = 'productive-card-stories';
+
 const sampleSlug = (
   <Slug className="slug-container" size="xs">
     <SlugContent>
@@ -98,7 +100,11 @@ const defaultProps = {
   columnSizeLg: 4,
   children: (
     <>
-      <div className="graph" />
+      <div className={`${storyClass}__graph`}>
+        <span className={`${storyClass}__visually-hidden`}>
+          graph showing progress
+        </span>
+      </div>
       <p>Productive content text</p>
       <p>Productive content text</p>
     </>

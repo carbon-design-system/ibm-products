@@ -335,6 +335,19 @@ export const TearsheetShell = React.forwardRef(
           }
           firstElement?.focus();
         }, 0);
+
+        /**
+         * useFocus not using focus sentinel button hence removing to avoid wrong focus
+         * Fix issue #5737
+         */
+        const visuallyHiddenEls = modalRef.current?.querySelectorAll(
+          `.${carbonPrefix}--visually-hidden`
+        );
+        visuallyHiddenEls?.forEach((el) => {
+          if (el?.innerHTML?.toLowerCase() === 'focus sentinel') {
+            el?.remove();
+          }
+        });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);

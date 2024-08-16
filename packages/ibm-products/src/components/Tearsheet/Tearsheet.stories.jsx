@@ -275,6 +275,72 @@ const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
   );
 };
 
+const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef();
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          slug={slug && sampleSlug}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            <Form>
+              <p>Main content</p>
+              <FormGroup
+                legendId="tearsheet-form-group"
+                legendText="FormGroup Legend"
+              >
+                <TextInput
+                  id="tss-ft1"
+                  labelText="Enter an important value here"
+                  style={
+                    // stylelint-disable-next-line carbon/layout-token-use
+                    { marginBottom: '1em' }
+                  }
+                  disabled
+                />
+                <TextInput
+                  id="tss-ft2"
+                  labelText="Here is an entry field:"
+                  style={
+                    // stylelint-disable-next-line carbon/layout-token-use
+                    { marginBottom: '1em' }
+                  }
+                />
+              </FormGroup>
+            </Form>
+          </div>
+        </Tearsheet>
+      </div>
+    </>
+  );
+};
+
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
@@ -480,6 +546,18 @@ ReturnFocusToOpenButton.args = {
   onClose: action('onClose called'),
   title,
   actions: 7,
+};
+
+export const firstElementDisabled = FirstElementDisabledTemplate.bind({});
+firstElementDisabled.storyName = 'First Element Disabled';
+firstElementDisabled.args = {
+  closeIconDescription,
+  hasCloseIcon: true,
+  description,
+  onClose: action('onClose called'),
+  title,
+  actions: 7,
+  selectorPrimaryFocus: '#tss-ft1',
 };
 
 export const fullyLoaded = Template.bind({});

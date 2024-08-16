@@ -126,6 +126,14 @@ const useSortableColumns = (hooks: Hooks) => {
         }
         return <ArrowsVertical {...iconProps} />;
       };
+
+      const handleKey = (e, columnId) => {
+        const { key } = e;
+        if (key === 'Enter') {
+          setTimeout(() => document.getElementById(columnId)?.focus(), 0);
+        }
+      };
+
       const Header = (headerProp) =>
         column.disableSortBy === true ||
         column.id === 'datagridSelection' ||
@@ -153,6 +161,7 @@ const useSortableColumns = (hooks: Hooks) => {
                 </>
               );
             }}
+            id={column?.id}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {
@@ -162,6 +171,7 @@ const useSortableColumns = (hooks: Hooks) => {
                   headerProp?.column.isSortedDesc === false,
               }
             )}
+            onKeyDown={(event) => handleKey(event, column.id)}
           >
             {column.Header}
           </Button>

@@ -147,7 +147,7 @@ export const TagSetOverflow = React.forwardRef(
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__popover-trigger`)}
           >
-            +{overflowTags.length}
+            {'+' + overflowTags.length}
           </Tag>
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>

@@ -33,8 +33,8 @@ import {
   ModalHeader,
   usePrefix,
   type ButtonProps,
+  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
-import { unstable_FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
 
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';

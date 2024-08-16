@@ -34,8 +34,8 @@ import {
   usePrefix,
   type ButtonProps,
 } from '@carbon/react';
+import { unstable_FeatureFlags as FeatureFlags } from '@carbon/ibm-products';
 
-import { FeatureFlags } from '../FeatureFlags';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';

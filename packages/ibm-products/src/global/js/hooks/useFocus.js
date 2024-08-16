@@ -10,7 +10,9 @@ import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
 
 export const getSpecificElement = (parentEl, elementId) => {
-  return elementId ? parentEl?.querySelector(elementId) : null;
+  const element = parentEl?.querySelector(elementId);
+
+  return elementId && !element?.disabled ? element : null;
 };
 
 export const useFocus = (modalRef, selectorPrimaryFocus) => {
@@ -19,7 +21,7 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   // Querying focusable element in the modal
   // Query to exclude hidden elements in the modal from querySelectorAll() method
   // feel free to include more if needed :)
-  const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${tearsheetBaseClass}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"])`;
+  const notQuery = `:not(.${carbonPrefix}--visually-hidden,.${tearsheetBaseClass}__header--no-close-icon,.${carbonPrefix}--btn--disabled,[aria-hidden="true"],[tabindex="-1"],[disabled])`;
   // Queries to include element types button, input, select, textarea
   const queryButton = `button${notQuery}`;
   const queryInput = `input${notQuery}`;
@@ -41,6 +43,7 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
         (el) => window?.getComputedStyle(el)?.display !== 'none'
       );
     }
+
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;

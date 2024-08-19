@@ -42,7 +42,7 @@ import {
 
 interface ConditionBlockProps {
   condition?: Condition;
-  onRemove: (e: any) => void;
+  onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onChange: (condition: Condition) => void;
   onConnectorOperatorChange?: (op: string) => void;
   onStatementChange?: (v: string) => void;

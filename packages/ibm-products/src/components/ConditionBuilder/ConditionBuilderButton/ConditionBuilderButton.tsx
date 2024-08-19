@@ -20,11 +20,9 @@ interface ConditionBuilderButtonProps {
   hideLabel?: boolean;
   tooltipAlign?: string;
   renderIcon?: CarbonIconType;
-  onClick?: (e: any) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;
   onFocus?: React.FocusEventHandler<HTMLButtonElement>;
-  //onBlur:any,
-  //onFocus:any,
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onMouseLeave?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   showToolTip?: boolean;

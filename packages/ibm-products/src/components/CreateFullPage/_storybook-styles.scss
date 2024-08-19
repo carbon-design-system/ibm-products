@@ -65,11 +65,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
   padding-left: 0;
 }
 
-.#{$story-class}__viewport {
-  overflow: hidden;
-  height: 100vh;
-}
-
 .#{$story-class}__viewport .#{$story-class}__content-container {
   height: 100%;
   overflow-y: auto;

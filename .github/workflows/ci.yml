@@ -3,7 +3,13 @@ name: CI # Run CI Checks
 on:
   pull_request:
     branches:
+<<<<<<< HEAD
       - feat/percy-integration
+=======
+      - main
+      - v1
+      - 'release/v2*'
+>>>>>>> 93395596b529fb2e1bb7591e8d4792f1ff1de7ff
   merge_group:
     types: [checks_requested]
 

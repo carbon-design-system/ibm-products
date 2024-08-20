@@ -262,25 +262,27 @@ $colors: (
   align-self: center;
   margin-inline-start: auto;
 }
-.#{$block-class}__add-button-wrapper > :nth-child(1) {
-  @include actions-animation(-100%);
-}
-.#{$block-class}__add-button-wrapper > :nth-child(2) {
-  @include actions-animation(-200%);
-}
+.#{$block-class}__content-container {
+  .#{$block-class}__add-button-wrapper > :nth-child(1) {
+    @include actions-animation(-100%);
+  }
+  .#{$block-class}__add-button-wrapper > :nth-child(2) {
+    @include actions-animation(-200%);
+  }
 
-.#{$block-class}__condition-block:focus-within:first-child
-  .#{$block-class}__add-button-wrapper
-  > span,
-.#{$block-class}__condition--interacting
-  .#{$block-class}__add-button-wrapper
-  > span {
-  z-index: 0;
-  opacity: 1;
-  pointer-events: all;
-  transform: translateX(0);
-  /* stylelint-disable-next-line carbon/motion-easing-use */
-  transition: transform motion(exit, productive) $duration-fast-02;
+  .#{$block-class}__condition-block:focus-within:first-child
+    .#{$block-class}__add-button-wrapper
+    > span,
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__add-button-wrapper
+    > span {
+    z-index: 0;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: transform motion(exit, productive) $duration-fast-02;
+  }
 }
 
 .#{$block-class}__invalid-input {

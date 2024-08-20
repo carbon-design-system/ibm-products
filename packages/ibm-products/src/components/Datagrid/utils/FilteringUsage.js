@@ -98,6 +98,7 @@ export const FilteringUsage = ({ defaultGridProps }) => {
     {
       Header: 'Role',
       accessor: 'role',
+      filter: 'radio',
     },
   ];
 

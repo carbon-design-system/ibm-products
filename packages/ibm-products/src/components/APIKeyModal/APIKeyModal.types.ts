@@ -146,7 +146,7 @@ interface APIKeyModalCommonProps {
   /**
    * The DOM node the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: ReactNode;
+  portalTarget?: ReactNode;
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

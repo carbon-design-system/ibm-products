@@ -21,7 +21,6 @@ import { TagSetModal } from './TagSetModal';
 import { TagSetOverflow } from './TagSetOverflow';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -55,13 +54,6 @@ type OverflowAlign =
   | 'right-top';
 type OverflowType = 'default' | 'tag';
 
-// interface TagType extends TagBaseProps
-// {
-//   label: string;
-//   // we duplicate this prop to improve the DocGen
-//   type?: typeof tagTypes[number];
-// }
-
 type TagType = {
   label: string;
   type?: keyof typeof tagTypes;
@@ -72,11 +64,11 @@ export interface TagSetProps extends PropsWithChildren {
    */
   align?: Align;
   /**
-   * label text for the show all search. **Note: Required if more than 10 tags**
+   * label text for the show all search.
    */
   allTagsModalSearchLabel?: string;
   /**
-   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   * placeholder text for the show all search.
    */
   allTagsModalSearchPlaceholderText?: string;
   /**
@@ -84,7 +76,7 @@ export interface TagSetProps extends PropsWithChildren {
    */
   allTagsModalTarget?: ReactNode;
   /**
-   * title for the show all modal. **Note: Required if more than 10 tags**
+   * title for the show all modal.
    */
   allTagsModalTitle?: string;
   /**
@@ -127,10 +119,8 @@ export interface TagSetProps extends PropsWithChildren {
   overflowType?: OverflowType;
   /**
    * label for the overflow show all tags link.
-   *
-   * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: string;
+  showAllTagsLabel?: string;
   /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and
@@ -155,11 +145,11 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
-      allTagsModalTitle,
-      allTagsModalSearchLabel,
-      allTagsModalSearchPlaceholderText,
-      showAllTagsLabel,
-      tags,
+      allTagsModalTitle = 'All tags',
+      allTagsModalSearchLabel = 'Search all tags',
+      allTagsModalSearchPlaceholderText = 'Search all tags',
+      showAllTagsLabel = 'View all tags',
+      tags = [],
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
       onOverflowTagChange = defaults.onOverflowTagChange,
@@ -414,15 +404,6 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 // Return a placeholder if not released and not enabled by feature flag
 TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
-/**
- * The strings shown in the showAllModal are only shown if we have more than allTagsModalSearchLThreshold
- * @returns null if no problems
- */
-export const string_required_if_more_than_10_tags = isRequiredIf(
-  PropTypes.string,
-  ({ tags }) => tags && tags.length > allTagsModalSearchThreshold
-);
-
 // copied from carbon-components-react/src/components/Tag/Tag.js for DocGen
 const TYPES = {
   red: 'Red',
@@ -448,21 +429,21 @@ TagSet.propTypes = {
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
   /**
-   * label text for the show all search. **Note: Required if more than 10 tags**
+   * label text for the show all search.
    */
-  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+  allTagsModalSearchLabel: PropTypes.string,
   /**
-   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   * placeholder text for the show all search.
    */
-  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  allTagsModalSearchPlaceholderText: PropTypes.string,
   /**
    * portal target for the all tags modal
    */
   allTagsModalTarget: PropTypes.node,
   /**
-   * title for the show all modal. **Note: Required if more than 10 tags**
+   * title for the show all modal.
    */
-  allTagsModalTitle: string_required_if_more_than_10_tags,
+  allTagsModalTitle: PropTypes.string,
   /**
    * className
    */
@@ -517,10 +498,8 @@ TagSet.propTypes = {
   overflowType: PropTypes.oneOf(['default', 'tag']),
   /**
    * label for the overflow show all tags link.
-   *
-   * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: string_required_if_more_than_10_tags,
+  showAllTagsLabel: PropTypes.string,
   /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and

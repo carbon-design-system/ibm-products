@@ -80,6 +80,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "accessibility-checker": "^3.1.65",
     "cheerio": "^1.0.0-rc.12",
+    "commander": "^12.0.0",
     "copyfiles": "^2.4.1",
     "cspell": "^8.3.2",
     "eslint": "^8.56.0",
@@ -104,7 +105,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "stylelint": "^15.11.0",
-    "stylelint-config-ibm-products": "*",
+    "stylelint-config-ibm-products": "^0.0.45",
     "webpack": "^5.90.0"
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",

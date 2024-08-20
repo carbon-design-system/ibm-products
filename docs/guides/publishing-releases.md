@@ -135,15 +135,31 @@ validated. During this stage, the release team will do the following:
 - [ ] We want to make sure all changes from the release branch have been merged
       to `main`. The
       [automerge workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/automerge.yml)
-      handles this automatically but fails when there are merge conflicts. Check
-      the workflow to ensure the changes have been merged in. If it has failed,
-      you will have to manually merge the release branch into `main`. Branch
-      protections to the `main` branch may have to be turn off temporarily to do
-      so.
-- [ ] Ensure the
-      [generated release notes](https://github.com/carbon-design-system/ibm-products/releases)
-      are correct. If a full release has been published, you may have to copy
-      and bundle the notes previously posted in the release candidates.
+      handles this automatically this when PRs are merged into the release
+      branch. However for the changelogs and version bumps pushed to the release
+      branch by Lerna, we have to run the following workflow:
+
+  - Run the
+    [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
+    This workflow creates the release tag, generates the release with notes, and
+    opens a PR to merge the changelog and version bumps from the release branch
+    to `main`.
+  - Make sure to specify to release branch and the correct release versions.
+    ![Screenshot of create github tag and PR workflow with options selected](https://github.com/user-attachments/assets/85b8abfc-3dbe-4fd2-9d22-1d87e042148b)
+    - The `release tag` option is the version that was just published (ie. full
+      minor version or release candidate). To select the `previous tag`:
+      - If published tag is the first release candidate (ie. v2.47.0-rc.0),
+        choose the previous full release tag (ie. v2.46.0).
+      - If published tag is a subsequent release candidate (ie. v2.47.0-rc.1),
+        choose the previous release candidate (ie. v2.47.0-rc.1).
+      - If published tag is a full release (ie. v2.47.0), choose the previous
+        full release tag (ie. v2.46.0).
+  - Merge in the generated PR (the title of the PR should start with
+    `chore(release):` followed by the version).
+  - Check the generated
+    [release](https://github.com/carbon-design-system/ibm-products/releases) to
+    ensure the release notes are correct.
+
 - [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
@@ -162,29 +178,29 @@ validated. During this stage, the release team will do the following:
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
     ```
 
-- For **full releases**, list some of the features included in the release.
-  These can be pulled from the release changelog. An example message:
+  - For **full releases**, list some of the features included in the release.
+    These can be pulled from the release changelog. An example message:
 
-  ```
-  :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+    ```
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
 
-  Hi everyone! :wave: We are happy to announce the release of Carbon for IBM Products v2.44.0! This release comes with a bunch of new features, along with our usual bug squashing!
+    Hi everyone! :wave: We are happy to announce the release of Carbon for IBM Products v2.44.0! This release comes with a bunch of new features, along with our usual bug squashing!
 
-  New features and fixes include:
-  - Optional custom component to row header in Data SpreadSheet
-  - Action section and custom input for Condition Builder
-  - Opt out ability for editable cells in DataGrid
-  - Specify additional floating menu selectors for Tearsheet Shell
-  - lots of a11y fixes!
-  - lots of dependency upgrades!
-  - and many more bug fixes! :bugsquash:
+    New features and fixes include:
+    - Optional custom component to row header in Data SpreadSheet
+    - Action section and custom input for Condition Builder
+    - Opt out ability for editable cells in DataGrid
+    - Specify additional floating menu selectors for Tearsheet Shell
+    - lots of a11y fixes!
+    - lots of dependency upgrades!
+    - and many more bug fixes! :bugsquash:
 
-  Check out the full changelog, available at:
-  https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.44.0
-  Thank you for being an active member of our community! If you see any issues, you can reach out to us here, or open an issue on our board! :github:
+    Check out the full changelog, available at:
+    https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.44.0
+    Thank you for being an active member of our community! If you see any issues, you can reach out to us here, or open an issue on our board! :github:
 
-  :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
-  ```
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+    ```
 
 - [ ] Remove the branch protections for `release/v2.*` by changing the branch
       name pattern to `released/v2*`

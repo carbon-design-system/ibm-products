@@ -4,11 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import {
-  DatePickerInputProps,
-  TextAreaProps,
-  TextInputProps,
-} from '@carbon/react';
+import { TextAreaProps, TextInputProps } from '@carbon/react';
 import { CarbonIconType } from '@carbon/react/icons';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 import {
@@ -93,7 +89,7 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: DatePickerInputProps;
+  config: object;
 };
 
 export type PropertyConfigTime = {

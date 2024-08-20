@@ -62,7 +62,6 @@ export const InlineEditCell = ({
   const checkboxRef = useRef();
   const numberInputRef = useRef();
   const dropdownRef = useRef();
-  const datePickerRef = useRef();
   const outerButtonElement = useRef();
 
   const { rowSize, onDataUpdate } = instance;
@@ -333,11 +332,12 @@ export const InlineEditCell = ({
   useIsomorphicEffect(() => {
     if (dropdownRef.current && dropdownRef.current.style) {
       const closestElement = dropdownRef.current.closest(
-        `.dev-prefix--c4p--datagrid__inline-edit--select`
+        `.${blockClass}__inline-edit--select`
       );
       closestElement.style.width = `${cell.column.totalWidth}px`;
     }
-  }, [cell.column.totalWidth, dropdownRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dropdownRef.current, cell.column.totalWidth]);
 
   const renderSelectCell = () => {
     const { inputProps } = config || {};
@@ -411,11 +411,10 @@ export const InlineEditCell = ({
         {...datePickerPreparedProps}
         appendTo={outerButtonElement?.current?.parentElement}
         ref={(el) => {
-          datePickerRef.current = el;
-          if (datePickerRef.current && datePickerRef.current.style) {
-            datePickerRef.current.style.width = `${cell.column.totalWidth}px`;
+          if (el && el.style) {
+            el.style.width = `${cell.column.totalWidth}px`;
             const elementId = `${blockClass}__inline-edit--date-picker--${cell.row.index}`;
-            const element = document.getElementById(elementId);
+            const element = el.querySelector(`input#${elementId}`);
             if (element) {
               element.style.position = 'static';
             }

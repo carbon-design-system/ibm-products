@@ -138,7 +138,6 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
             const { key } = row.getRowProps();
             return (
               <div
-                className={'myDiv'}
                 ref={innerRef}
                 style={{
                   ...style,

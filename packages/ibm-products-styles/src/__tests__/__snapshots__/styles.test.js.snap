@@ -4121,7 +4121,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--data-table td.c4p--datagrid__expandable-row-cell.c4p--datagrid__expandable-row-cell--is-expanded + td::before,
-.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable) td.c4p--datagrid__cell:nth-of-type(2)::before,
+.cds--data-table .c4p--datagrid__carbon-nested-row:not(.c4p--datagrid__carbon-row-expandable):not(.c4p--datagrid__carbon-row-expandable--async) td.c4p--datagrid__cell:nth-of-type(2)::before,
 .cds--data-table .c4p--datagrid__carbon-nested-row td.c4p--datagrid__expandable-row-cell + td::before {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */

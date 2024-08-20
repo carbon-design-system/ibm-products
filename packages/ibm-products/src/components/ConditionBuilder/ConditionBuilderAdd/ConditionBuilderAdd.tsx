@@ -13,6 +13,18 @@ import PropTypes from 'prop-types';
 import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../utils/useTranslations';
 
+interface ConditionBuilderAddProps {
+  className?: string;
+  onClick: () => void;
+  addConditionSubGroupHandler?: () => void;
+  showConditionSubGroupPreviewHandler?: () => void;
+  hideConditionSubGroupPreviewHandler?: () => void;
+  showConditionPreviewHandler?: () => void;
+  hideConditionPreviewHandler?: () => void;
+  enableSubGroup?: boolean;
+  buttonLabel?: string;
+  tabIndex?: number;
+}
 const ConditionBuilderAdd = ({
   className,
   onClick,
@@ -24,7 +36,7 @@ const ConditionBuilderAdd = ({
   enableSubGroup,
   buttonLabel,
   tabIndex,
-}) => {
+}: ConditionBuilderAddProps) => {
   const [addConditionText, addConditionRowText, addSubgroupText] =
     useTranslations([
       'addConditionText',

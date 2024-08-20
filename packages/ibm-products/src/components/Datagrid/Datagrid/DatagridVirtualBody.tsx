@@ -66,7 +66,7 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     if (listRef && listRef.current) {
       listRef.current.resetAfterIndex(0);
     }
-  }, [listRef]);
+  }, [listRef,rowHeight]);
 
   const visibleRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const testRef: MutableRefObject<HTMLDivElement | null> = useRef(null);

@@ -104,6 +104,7 @@ collect:
         - formTitle
         - fullHeightDatagrid
         - getActionsState
+        - getAsyncSubRows
         - getConditionState
         - getFilterFlyoutProps
         - getOptions
@@ -530,7 +531,6 @@ collect:
         - isStatement
         - onConnectorOperatorChange
         - onStatementChange
-        - setShowDeletionPreviewForSubgroups
         # ConditionBuilderAdd
         - buttonLabel
         - enableSubGroup

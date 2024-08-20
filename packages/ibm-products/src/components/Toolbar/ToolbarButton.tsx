@@ -21,8 +21,14 @@ export interface ToolbarButtonProps
   caret?: boolean;
   /** Provide an optional class to be applied to the containing node */
   className?: string;
+  /**
+   * @deprecated use `label` instead
+   * Specifies the label for the icon button */
+  iconDescription?: string;
+
   /** Specifies the label for the icon button */
-  iconDescription: string;
+  label: string;
+
   /** Specifies the icon to be used by the ToolbarButton component */
   renderIcon: React.ElementType;
 }
@@ -35,7 +41,7 @@ export let ToolbarButton = forwardRef(
       children,
       className,
       renderIcon,
-      iconDescription = '',
+      label = '',
       ...rest
     }: React.PropsWithChildren<ToolbarButtonProps>,
     ref
@@ -45,7 +51,7 @@ export let ToolbarButton = forwardRef(
       <IconButton
         align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
         {...rest}
-        label={iconDescription}
+        label={label}
         ref={ref}
         className={cx(className, { [`${blockClass}--caret`]: caret })}
         kind="ghost"
@@ -76,7 +82,10 @@ ToolbarButton.propTypes = {
   className: string,
 
   /** Specifies the label for the icon button */
-  iconDescription: string.isRequired,
+  iconDescription: string,
+
+  /** Specifies the label for the icon button */
+  label: string.isRequired,
 
   /** Specifies the icon to be used by the ToolbarButton component */
   renderIcon: func.isRequired,

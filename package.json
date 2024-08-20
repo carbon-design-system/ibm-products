@@ -105,7 +105,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "stylelint": "^15.11.0",
-    "stylelint-config-ibm-products": "*",
+    "stylelint-config-ibm-products": "^0.0.45",
     "webpack": "^5.90.0"
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",

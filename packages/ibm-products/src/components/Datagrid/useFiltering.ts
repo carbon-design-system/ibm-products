@@ -13,9 +13,22 @@ import {
   DATE,
   MULTISELECT,
   NUMBER,
+  RADIO,
 } from './Datagrid/addons/Filtering/constants';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
+
+// This function was taken from https://github.com/TanStack/table/blob/v7/src/filterTypes.js
+export const exactText = (rows, ids, filterValue) => {
+  return rows.filter((row) => {
+    return ids.some((id) => {
+      const rowValue = row.values[id];
+      return rowValue !== undefined
+        ? String(rowValue).toLowerCase() === String(filterValue).toLowerCase()
+        : true;
+    });
+  });
+};
 
 const handleMultiFilter = (rows, id, value) => {
   // gets all the items that are selected and returns their value
@@ -72,6 +85,7 @@ const useFiltering = (hooks: Hooks) => {
       },
       [CHECKBOX]: (rows, id, value) => handleMultiFilter(rows, id, value),
       [MULTISELECT]: (rows, id, value) => handleMultiFilter(rows, id, value),
+      [RADIO]: (rows, id, value) => exactText(rows, id, value),
     }),
     []
   );

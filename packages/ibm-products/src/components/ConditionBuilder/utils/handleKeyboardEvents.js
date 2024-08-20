@@ -151,9 +151,9 @@ const handleKeyPressForPopover = (
       if (isMultiSelect === 'true') {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, for other elements trigger click
+          evt.preventDefault();
           document.activeElement?.click();
         }
-        evt.preventDefault();
       } else {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, else trigger click

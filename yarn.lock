@@ -8243,13 +8243,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.4.0, axios@npm:^1.6.0, axios@npm:^1.6.7":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
+  version: 1.7.4
+  resolution: "axios@npm:1.7.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 3f9a79eaf1d159544fca9576261ff867cbbff64ed30017848e4210e49f3b01e97cf416390150e6fdf6633f336cd43dc1151f890bbd09c3c01ad60bb0891eee63
+  checksum: 7a1429be1e3d0c2e1b96d4bba4d113efbfabc7c724bed107beb535c782c7bea447ff634886b0c7c43395a264d085450d009eb1154b5f38a8bae49d469fdcbc61
   languageName: node
   linkType: hard
 
@@ -13852,7 +13852,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     rimraf: "npm:^5.0.5"
     stylelint: "npm:^15.11.0"
-    stylelint-config-ibm-products: "npm:*"
+    stylelint-config-ibm-products: "npm:^0.0.45"
     stylelint-plugin-carbon-tokens: "npm:2.8.0"
     webpack: "npm:^5.90.0"
   languageName: unknown
@@ -22237,7 +22237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-ibm-products@npm:*, stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products":
+"stylelint-config-ibm-products@npm:^0.0.45, stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products":
   version: 0.0.0-use.local
   resolution: "stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products"
   dependencies:

@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
-import cx from 'classnames';
 import { Button, InlineLoading } from '@carbon/react';
 import {
-  Save,
   CheckmarkOutline,
-  ErrorOutline,
   ErrorFilled,
+  ErrorOutline,
+  Save,
 } from '@carbon/react/icons';
-import PropTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -24,7 +24,7 @@ const componentName = 'Saving';
 type Type = 'manual' | 'auto';
 type Status = 'default' | 'in-progress' | 'success' | 'fail';
 
-interface SavingProps {
+export interface SavingProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

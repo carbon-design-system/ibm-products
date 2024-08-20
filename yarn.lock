@@ -1757,7 +1757,7 @@ __metadata:
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
     "@carbon/grid": "npm:^11.24.1"
-    "@carbon/ibm-products-styles": "npm:^2.43.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.43.0"
     "@carbon/layout": "npm:^11.23.1"
     "@carbon/motion": "npm:^11.19.1"
     "@carbon/react": "npm:^1.61.0"
@@ -1806,7 +1806,7 @@ __metadata:
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     cross-env: "npm:^7.0.3"
     jest: "npm:^29.6.2"
-    jest-config-ibm-cloud-cognitive: "npm:^1.6.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.6.0"
     jest-environment-jsdom: "npm:^29.6.2"
     rimraf: "npm:^5.0.1"
     sass: "npm:^1.77.2"
@@ -1822,7 +1822,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@npm:^2.43.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.43.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -1832,7 +1832,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     glob: "npm:^10.3.10"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.6.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.6.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-check-updates: "npm:^16.14.12"
     npm-run-all: "npm:^4.1.5"
@@ -1863,7 +1863,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.21.5"
     "@babel/runtime": "npm:^7.23.9"
     "@carbon/feature-flags": "npm:^0.20.0"
-    "@carbon/ibm-products-styles": "npm:^2.43.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.43.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/modifiers": "npm:^7.0.0"
@@ -1888,7 +1888,7 @@ __metadata:
     glob: "npm:^10.3.10"
     immutability-helper: "npm:^3.1.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.6.0-rc.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.6.0"
     jest-environment-jsdom: "npm:^29.7.0"
     lodash: "npm:^4.17.21"
     lottie-web: "npm:^5.12.2"
@@ -8243,13 +8243,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.4.0, axios@npm:^1.6.0, axios@npm:^1.6.7":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
+  version: 1.7.4
+  resolution: "axios@npm:1.7.4"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 3f9a79eaf1d159544fca9576261ff867cbbff64ed30017848e4210e49f3b01e97cf416390150e6fdf6633f336cd43dc1151f890bbd09c3c01ad60bb0891eee63
+  checksum: 7a1429be1e3d0c2e1b96d4bba4d113efbfabc7c724bed107beb535c782c7bea447ff634886b0c7c43395a264d085450d009eb1154b5f38a8bae49d469fdcbc61
   languageName: node
   linkType: hard
 
@@ -13827,6 +13827,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^6.21.0"
     accessibility-checker: "npm:^3.1.65"
     cheerio: "npm:^1.0.0-rc.12"
+    commander: "npm:^12.0.0"
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^8.3.2"
     eslint: "npm:^8.56.0"
@@ -13851,7 +13852,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     rimraf: "npm:^5.0.5"
     stylelint: "npm:^15.11.0"
-    stylelint-config-ibm-products: "npm:*"
+    stylelint-config-ibm-products: "npm:^0.0.45"
     stylelint-plugin-carbon-tokens: "npm:2.8.0"
     webpack: "npm:^5.90.0"
   languageName: unknown
@@ -15004,7 +15005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.6.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.6.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -22236,7 +22237,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-ibm-products@npm:*, stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products":
+"stylelint-config-ibm-products@npm:^0.0.45, stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products":
   version: 0.0.0-use.local
   resolution: "stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products"
   dependencies:

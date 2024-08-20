@@ -613,7 +613,7 @@ export let NotificationsPanel = React.forwardRef(
           className={`${carbonPrefix}--visually-hidden`}
           ref={startSentinel}
         >
-          Focus sentinel
+          Focus sentinel start
         </button>
         {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <div
@@ -737,7 +737,7 @@ export let NotificationsPanel = React.forwardRef(
           className={`${carbonPrefix}--visually-hidden`}
           ref={endSentinel}
         >
-          Focus sentinel
+          Focus sentinel end
         </button>
       </>
     ) : null;

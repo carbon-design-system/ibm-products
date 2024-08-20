@@ -27,6 +27,7 @@ import { NotificationsPanel } from '.';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
+const blockClass = `${pkg.prefix}--notifications-panel`;
 
 export default {
   title: 'IBM Products/Patterns/Notifications/NotificationsPanel',
@@ -136,7 +137,8 @@ const Template = (args) => {
     if (open) {
       const observer = new MutationObserver(() => {
         if (notificationPanelRef.current) {
-          notificationPanelRef.current.focus();
+          const parentElement = notificationPanelRef.current;
+          parentElement.querySelector(`.${blockClass}__dismiss-button`).focus();
           observer.disconnect();
         }
       });

@@ -5,11 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  PropsWithChildren,
+  KeyboardEvent,
+  ReactNode,
+  RefObject,
+  MouseEvent,
+} from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
-import { Add } from '@carbon/react/icons';
+import { Add, CarbonIconType } from '@carbon/react/icons';
 import {
   blockClass,
   valueRenderers,
@@ -18,7 +28,32 @@ import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuild
 import { useTranslations } from '../utils/useTranslations';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
+import {
+  Condition,
+  PropertyConfig,
+  Action,
+  Option,
+} from '../ConditionBuilder.types';
 
+interface ConditionBuilderItemProps extends PropsWithChildren {
+  className?: string;
+
+  label?: string | Option | Option[];
+  renderIcon?: CarbonIconType;
+  title?: string;
+  showToolTip?: boolean;
+  popOverClassName?: string;
+  type?: string;
+  condition?: Action & Condition;
+  config?: PropertyConfig;
+  renderChildren?: (ref: RefObject<HTMLDivElement>) => ReactNode;
+  onChange?: (val: string) => void;
+  tabIndex?: number;
+  onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+}
 export const ConditionBuilderItem = ({
   children,
   className,
@@ -33,8 +68,8 @@ export const ConditionBuilderItem = ({
   renderChildren,
   onChange,
   ...rest
-}) => {
-  const popoverRef = useRef(null);
+}: ConditionBuilderItemProps) => {
+  const popoverRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
   const [
@@ -91,7 +126,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition.operator !== 'oneOf'
+        condition?.operator !== 'oneOf'
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();
@@ -111,8 +146,9 @@ export const ConditionBuilderItem = ({
   useEffect(() => {
     //this will focus the first input field in the popover
     if (open && popoverRef.current) {
-      const firstFocusableElement =
-        popoverRef.current.querySelector('input,textarea');
+      const firstFocusableElement = popoverRef?.current?.querySelector(
+        'input,textarea'
+      ) as HTMLInputElement;
       if (firstFocusableElement) {
         setTimeout(() => firstFocusableElement.focus(), 0);
       }
@@ -142,7 +178,7 @@ export const ConditionBuilderItem = ({
     }
   };
 
-  const handleKeyDownHandler = (evt) => {
+  const handleKeyDownHandler = (evt: KeyboardEvent) => {
     handleKeyDownForPopover(evt, conditionBuilderRef, popoverRef);
     if (evt.key === 'Escape') {
       manageInvalidSelection();
@@ -179,10 +215,11 @@ export const ConditionBuilderItem = ({
         className={className}
         aria-haspopup
         aria-expanded={open}
-        renderIcon={renderIcon ? renderIcon : label == undefined ? Add : null}
+        renderIcon={
+          renderIcon ? renderIcon : label == undefined ? Add : undefined
+        }
         showToolTip={showToolTip}
         isInvalid={isInvalid}
-        condition={condition}
         {...rest}
       />
 

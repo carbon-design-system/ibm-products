@@ -204,7 +204,7 @@ $colors: (
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $next-group-color: list.nth($colors, ($i%list.length($colors)) +1);
+    $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }
@@ -213,7 +213,7 @@ $colors: (
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $item-index: ((($item-index - 1) % $group-colors-length) +1);
+    $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
         /* stylelint-disable-next-line carbon/theme-token-use */
@@ -263,25 +263,27 @@ $colors: (
   align-self: center;
   margin-left: auto;
 }
-.#{$block-class}__add-button-wrapper > :nth-child(1) {
-  @include actions-animation(-100%);
-}
-.#{$block-class}__add-button-wrapper > :nth-child(2) {
-  @include actions-animation(-200%);
-}
+.#{$block-class}__content-container {
+  .#{$block-class}__add-button-wrapper > :nth-child(1) {
+    @include actions-animation(-100%);
+  }
+  .#{$block-class}__add-button-wrapper > :nth-child(2) {
+    @include actions-animation(-200%);
+  }
 
-.#{$block-class}__condition-block:focus-within:first-child
-  .#{$block-class}__add-button-wrapper
-  > span,
-.#{$block-class}__condition--interacting
-  .#{$block-class}__add-button-wrapper
-  > span {
-  z-index: 0;
-  opacity: 1;
-  pointer-events: all;
-  transform: translateX(0);
-  /* stylelint-disable-next-line carbon/motion-easing-use */
-  transition: transform motion(exit, productive) $duration-fast-02;
+  .#{$block-class}__condition-block:focus-within:first-child
+    .#{$block-class}__add-button-wrapper
+    > span,
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__add-button-wrapper
+    > span {
+    z-index: 0;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: transform motion(exit, productive) $duration-fast-02;
+  }
 }
 
 .#{$block-class}__invalid-input {

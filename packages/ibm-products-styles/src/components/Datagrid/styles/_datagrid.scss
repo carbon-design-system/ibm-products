@@ -779,6 +779,7 @@
 }
 
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
+  overflow: hidden;
   background-color: $layer-accent;
 }
 

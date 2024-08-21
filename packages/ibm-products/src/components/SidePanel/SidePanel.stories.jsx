@@ -90,7 +90,7 @@ const rowData = [
 
 const actions_1 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -114,12 +114,12 @@ const actions_3 = [
 
 const actions_4 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -132,7 +132,7 @@ const actions_5 = [
     kind: 'ghost',
   },
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -153,12 +153,12 @@ const actions_6 = [
 
 const actions_7 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -171,12 +171,12 @@ const actions_7 = [
 
 const actions_8 = [
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -189,17 +189,17 @@ const actions_8 = [
 
 const actions_9 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },

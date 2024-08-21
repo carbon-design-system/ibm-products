@@ -14,7 +14,10 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass, variants } from '../ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  HIERARCHICAL_VARIANT,
+} from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
@@ -207,7 +210,7 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {variant == variants[1] && (
+        {variant == HIERARCHICAL_VARIANT && (
           <div
             role="row"
             tabIndex={-1}

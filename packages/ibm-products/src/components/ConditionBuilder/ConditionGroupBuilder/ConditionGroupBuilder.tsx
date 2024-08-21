@@ -13,8 +13,9 @@ import cx from 'classnames';
 
 import {
   blockClass,
+  HIERARCHICAL_VARIANT,
+  NON_HIERARCHICAL_VARIANT,
   statementConfig,
-  variants,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import { focusThisField, manageTabIndexAndFocus } from '../utils/util';
@@ -69,7 +70,7 @@ const ConditionGroupBuilder = ({
   const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
-      variant == variants[1]
+      variant == HIERARCHICAL_VARIANT
         ? handleFocusOnCloseHierarchical(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
@@ -492,8 +493,8 @@ const ConditionGroupBuilder = ({
   };
   return (
     <>
-      {variant == variants[1] && getHierarchicalVariant()}
-      {variant == variants[0] && getNonHierarchicalVariant()}
+      {variant == HIERARCHICAL_VARIANT && getHierarchicalVariant()}
+      {variant == NON_HIERARCHICAL_VARIANT && getNonHierarchicalVariant()}
     </>
   );
 };

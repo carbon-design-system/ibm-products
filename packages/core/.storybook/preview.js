@@ -129,6 +129,7 @@ const parameters = {
         'Community',
         'Experimental',
         ['Components', 'Patterns', 'Onboarding'],
+        'Deprecated',
       ],
     },
   },

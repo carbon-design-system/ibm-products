@@ -14,7 +14,7 @@ test.describe('APIKeyModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'APIKeyModal',
-      id: 'ibm-products-patterns-generating-an-api-key-apikeymodal--generate',
+      id: 'ibm-products-components-generating-an-api-key-apikeymodal--generate',
       globals: {
         carbonTheme: 'white',
       },

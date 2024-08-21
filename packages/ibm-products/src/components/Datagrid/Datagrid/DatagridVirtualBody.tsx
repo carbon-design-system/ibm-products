@@ -12,6 +12,7 @@ import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { DataGridState, DatagridRow } from '../types';
+import { useIsomorphicEffect } from '../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -43,6 +44,9 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     tableId,
     onVirtualScroll,
   } = datagridState;
+
+  const headWrapRef = useRef<HTMLDivElement | null>(null);
+  const innerRef = useRef<HTMLDivElement | null>(null);
 
   /* istanbul ignore next */
   const handleVirtualGridResize = () => {
@@ -91,12 +95,21 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     };
   });
 
+  useIsomorphicEffect(() => {
+    if (headWrapRef.current && headWrapRef.current.style) {
+      headWrapRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
+    }
+  }, [headWrapRef, gridRef]);
+
+  useIsomorphicEffect(() => {
+    if (testRef?.current && testRef.current.style) {
+      testRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
+    }
+  }, [testRef, gridRef]);
+
   return (
     <>
-      <div
-        className={`${blockClass}__head-wrap`}
-        style={{ width: gridRef?.current?.clientWidth, overflow: 'hidden' }}
-      >
+      <div className={`${blockClass}__head-wrap`} ref={headWrapRef}>
         <DatagridHead {...datagridState} />
       </div>
       <TableBody
@@ -118,7 +131,6 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
           outerRef={testRef}
           ref={listRef}
           className={`${blockClass}__virtual-scrollbar`}
-          style={{ width: gridRef?.current?.clientWidth }}
         >
           {({ index, style }) => {
             const row = visibleRows[index];
@@ -126,6 +138,7 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
             const { key } = row.getRowProps();
             return (
               <div
+                ref={innerRef}
                 style={{
                   ...style,
                 }}

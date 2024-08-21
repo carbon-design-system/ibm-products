@@ -130,7 +130,7 @@ const makeMatcherArray = (args) =>
  * A helper function to enable a test to expect a single call to
  * console.warn, for example when intentionally using a deprecated prop
  * or supplying invalid parameters for the purposes of the test.
- * @param {string|regex|function|[]} message the expected parameters for the call to
+ * @param {string | regex | Function | []} message the expected parameters for the call to
  * console.warn, which must be called exactly once. A single string or regex or an
  * expect matcher can be used to match a single-argument call to console.warn (most common),
  * while an array of strings and/or regex and/or expect matchers can be used to match a
@@ -226,7 +226,7 @@ export const expectLogging = async ({ errors, warnings }, test) => {
  * A helper function to enable a test to expect a single call to
  * console.error, for example when intentionally omitting a required prop
  * or supplying an invalid prop type or value for the purposes of the test.
- * @param {string|regex|function|[]} message the expected parameters for the call to
+ * @param {string | regex | Function | []} message the expected parameters for the call to
  * console.error, which must be called exactly once. A single string or regex or an
  * expect matcher can be used to match a single-argument call to console.error (most common),
  * while an array of strings and/or regex and/or expect matchers can be used to match a

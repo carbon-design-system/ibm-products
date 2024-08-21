@@ -202,7 +202,7 @@ const DatagridBatchActionsToolbar = (
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
-                className={cx(`${carbon.prefix}--noLabel`, {
+                className={cx({
                   [`${carbon.prefix}--noLabel`]:
                     !batchAction.label || batchAction.label === '',
                 })}

@@ -49,4 +49,5 @@ export const translationsObject = {
   addPropertyText: 'Add property',
   addOperatorText: 'Add operator',
   addValueText: 'Add value',
+  conditionBuilderHierarchicalText: 'Condition Builder Hierarchical',
 };

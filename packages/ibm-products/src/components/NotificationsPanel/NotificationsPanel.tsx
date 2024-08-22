@@ -304,7 +304,7 @@ export let NotificationsPanel = React.forwardRef(
     }: NotificationsPanelProps,
     ref
   ) => {
-    const notificationPanelRef = useRef(null);
+    const notificationPanelRef = useRef<HTMLDialogElement | null>(null);
     const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
@@ -333,16 +333,20 @@ export let NotificationsPanel = React.forwardRef(
         const observer = new MutationObserver(() => {
           if (notificationPanelRef.current) {
             const parentElement = notificationPanelRef.current;
-            parentElement
-              .querySelector(`.${blockClass}__dismiss-button`)
-              .focus();
+            (parentElement as HTMLDialogElement)
+              ?.querySelector<HTMLButtonElement>(
+                `.${blockClass}__dismiss-button`
+              )
+              ?.focus();
             observer.disconnect();
           }
         });
         if (notificationPanelRef.current) {
-          notificationPanelRef.current
-            .querySelector(`.${blockClass}__dismiss-button`)
-            .focus();
+          const parentElement = notificationPanelRef.current;
+          const button = (
+            parentElement as HTMLDialogElement
+          )?.querySelector<HTMLButtonElement>(`.${blockClass}__dismiss-button`);
+          button?.focus();
         } else {
           observer.observe(document.body, {
             childList: true,

@@ -638,7 +638,7 @@ export let NotificationsPanel = React.forwardRef(
         {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
         <div
           role="dialog"
-          aria-label="Notifications"
+          aria-label="Notification Panel"
           onBlur={handleBlur}
           tabIndex={0}
           onKeyDown={handleKeydown}

@@ -14,7 +14,7 @@ import styles from '../_storybook-styles.scss?inline';
 const storyClass = 'http-error-stories';
 
 export default {
-  title: 'IBM Products/Patterns/HTTP errors/HTTPErrorOther',
+  title: 'Deprecated/HTTP errors/HTTPErrorOther',
   component: HTTPErrorOther,
   tags: ['autodocs'],
   parameters: {

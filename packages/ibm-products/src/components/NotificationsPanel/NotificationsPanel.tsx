@@ -304,7 +304,7 @@ export let NotificationsPanel = React.forwardRef(
     }: NotificationsPanelProps,
     ref
   ) => {
-    const notificationPanelRef = useRef();
+    const notificationPanelRef = useRef(null);
     const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
@@ -330,6 +330,26 @@ export let NotificationsPanel = React.forwardRef(
       // initialize the notification panel to open
       if (open) {
         setRender(true);
+        const observer = new MutationObserver(() => {
+          if (notificationPanelRef.current) {
+            const parentElement = notificationPanelRef.current;
+            parentElement
+              .querySelector(`.${blockClass}__dismiss-button`)
+              .focus();
+            observer.disconnect();
+          }
+        });
+        if (notificationPanelRef.current) {
+          notificationPanelRef.current
+            .querySelector(`.${blockClass}__dismiss-button`)
+            .focus();
+        } else {
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        }
+        return () => observer.disconnect();
       }
     }, [open]);
 

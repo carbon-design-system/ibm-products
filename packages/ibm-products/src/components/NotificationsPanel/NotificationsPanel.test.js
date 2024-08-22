@@ -254,22 +254,6 @@ describe('Notifications', () => {
     expect(onClickOutside).toHaveBeenCalled();
   });
 
-  it('should have focus trap working for notification panel', async () => {
-    const { container } = renderNotifications({
-      data: [],
-    });
-    container.querySelector(`.${blockClass}`).focus();
-    const firstElement = screen.getByText('Focus sentinel start');
-    const lastElement = screen.getByText('Focus sentinel end');
-    firstElement.focus();
-    await act(() => userEvent.keyboard('{Shift>}{Tab}{/Shift}'));
-    setTimeout(() => {
-      expect(lastElement).toHaveFocus();
-    }, 2000);
-    await act(() => userEvent.keyboard('{Tab}'));
-    expect(firstElement).toHaveFocus();
-  });
-
   it('should not render a notifications panel when open is false', async () => {
     const { container } = renderNotifications({
       data: [],

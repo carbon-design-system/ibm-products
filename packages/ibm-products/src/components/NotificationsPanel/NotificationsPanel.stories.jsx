@@ -86,7 +86,6 @@ const renderUIShellHeader = (
 
 const Template = (args) => {
   const [open, setOpen] = useState(false);
-  const notificationPanelRef = useRef(null);
   const notificationTriggerRef = useRef(null);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsData, setNotificationsData] = useState(data);
@@ -134,24 +133,6 @@ const Template = (args) => {
 
   // Focus the dialog content and trigger button
   useEffect(() => {
-    if (open) {
-      const observer = new MutationObserver(() => {
-        if (notificationPanelRef.current) {
-          const parentElement = notificationPanelRef.current;
-          parentElement.querySelector(`.${blockClass}__dismiss-button`).focus();
-          observer.disconnect();
-        }
-      });
-      if (notificationPanelRef.current) {
-        notificationPanelRef.current.focus();
-      } else {
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true,
-        });
-      }
-      return () => observer.disconnect();
-    }
     if (!open && notificationTriggerRef.current) {
       notificationTriggerRef.current.focus();
     }
@@ -170,7 +151,6 @@ const Template = (args) => {
       </div>
       <NotificationsPanel
         {...args}
-        ref={notificationPanelRef}
         data={notificationsData}
         open={open}
         onClickOutside={() => setOpen(false)}

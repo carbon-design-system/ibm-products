@@ -175,6 +175,8 @@ function generateLog() {
     './packages/ibm-products-styles'
   );
 
+  console.log(log);
+
   return log;
 }
 

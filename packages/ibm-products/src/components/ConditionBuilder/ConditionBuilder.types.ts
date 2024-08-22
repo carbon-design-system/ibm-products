@@ -181,7 +181,7 @@ export type ConditionBuilderProps = {
   className?: string;
   popOverSearchThreshold: number;
   startConditionLabel: string;
-  variant?: 'sentence' | 'tree';
+  variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
 };
 

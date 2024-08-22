@@ -334,6 +334,7 @@ export interface DataGridState<T extends object = any>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
   getAsyncSubRows?: (row: DatagridRow) => void;
+  enableSpacerColumn?: boolean;
 }
 
 export interface DataGridData {

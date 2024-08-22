@@ -20,7 +20,10 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
-import { blockClass } from './ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  NON_HIERARCHICAL_VARIANT,
+} from './ConditionBuilderContext/DataConfigs';
 import { handleKeyDown } from './utils/handleKeyboardEvents';
 
 import { ConditionBuilderProps } from './ConditionBuilder.types';
@@ -61,7 +64,7 @@ export let ConditionBuilder = React.forwardRef(
       initialState,
       getConditionState,
       getActionsState,
-      variant = 'sentence',
+      variant = NON_HIERARCHICAL_VARIANT,
       actions,
       translateWithId,
       ...rest
@@ -270,7 +273,7 @@ ConditionBuilder.propTypes = {
   translateWithId: PropTypes.func,
   /* TODO: add types and DocGen for all props. */
   /**
-   * Provide the condition builder variant: sentence/ tree
+   * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
-  variant: PropTypes.oneOf(['tree', 'sentence']),
+  variant: PropTypes.oneOf(['Non-Hierarchical', 'Hierarchical']),
 };

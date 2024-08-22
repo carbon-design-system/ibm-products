@@ -204,7 +204,7 @@ $colors: (
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $next-group-color: list.nth($colors, ($i%list.length($colors)) +1);
+    $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }
@@ -213,7 +213,7 @@ $colors: (
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $item-index: ((($item-index - 1) % $group-colors-length) +1);
+    $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
         /* stylelint-disable-next-line carbon/theme-token-use */
@@ -231,7 +231,7 @@ $colors: (
   }
 }
 
-.#{$block-class}__tree {
+.#{$block-class}__Hierarchical {
   .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
     flex-basis: 100%;
   }

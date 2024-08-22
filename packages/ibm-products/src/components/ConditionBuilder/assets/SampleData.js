@@ -7,7 +7,7 @@
 
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
-export const sampleDataStructure_tree = {
+export const sampleDataStructure_Hierarchical = {
   operator: 'or',
   groups: [
     {
@@ -128,7 +128,7 @@ export const sampleDataStructure_tree = {
   ],
 };
 
-export const sampleDataStructure_sentence = {
+export const sampleDataStructure_nonHierarchical = {
   groups: [
     {
       groupOperator: 'and', //'and|or',

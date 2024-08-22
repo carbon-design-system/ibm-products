@@ -8,3 +8,4 @@
 export { CreateFullPage } from './CreateFullPage';
 export { CreateFullPageStep } from './CreateFullPageStep';
 export type { CreateFullPageProps } from './CreateFullPage';
+export type { CreateFullPageStepProps } from './CreateFullPageStep';

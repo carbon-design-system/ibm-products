@@ -41,7 +41,8 @@ export let ToolbarButton = forwardRef(
       children,
       className,
       renderIcon,
-      label = '',
+      iconDescription: deprecated_iconDescription = '',
+      label,
       ...rest
     }: React.PropsWithChildren<ToolbarButtonProps>,
     ref
@@ -51,7 +52,7 @@ export let ToolbarButton = forwardRef(
       <IconButton
         align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
         {...rest}
-        label={label}
+        label={label ?? deprecated_iconDescription}
         ref={ref}
         className={cx(className, { [`${blockClass}--caret`]: caret })}
         kind="ghost"
@@ -71,6 +72,14 @@ export let ToolbarButton = forwardRef(
 const componentName = 'ToolbarButton';
 ToolbarButton.displayName = componentName;
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   * Specifies the label for the icon button
+   *  */
+  iconDescription: string,
+};
+
 ToolbarButton.propTypes = {
   /** Determines whether the caret is rendered */
   caret: bool,
@@ -82,13 +91,12 @@ ToolbarButton.propTypes = {
   className: string,
 
   /** Specifies the label for the icon button */
-  iconDescription: string,
-
-  /** Specifies the label for the icon button */
   label: string.isRequired,
 
   /** Specifies the icon to be used by the ToolbarButton component */
   renderIcon: func.isRequired,
+
+  ...deprecatedProps,
 };
 
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);

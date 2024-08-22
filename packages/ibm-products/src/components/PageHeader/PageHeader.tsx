@@ -510,9 +510,11 @@ export let PageHeader = React.forwardRef(
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
+      const overflowMenuWidth = 40;
+
       /* don't know how to test resize */
       /* istanbul ignore next */
-      setActionBarMaxWidth(maxWidth);
+      setActionBarMaxWidth(maxWidth + overflowMenuWidth);
       /* don't know how to test resize */
       /* istanbul ignore next */
       setActionBarMinWidth(minWidth);

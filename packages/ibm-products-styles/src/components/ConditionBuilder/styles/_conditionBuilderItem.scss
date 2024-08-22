@@ -204,7 +204,7 @@ $colors: (
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $next-group-color: list.nth($colors, ($i%list.length($colors)) +1);
+    $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }

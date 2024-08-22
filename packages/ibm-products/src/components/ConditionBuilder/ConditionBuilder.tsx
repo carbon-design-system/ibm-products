@@ -20,10 +20,13 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
-import { blockClass, variants } from './ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  NON_HIERARCHICAL_VARIANT,
+} from './ConditionBuilderContext/DataConfigs';
 import { handleKeyDown } from './utils/handleKeyboardEvents';
 
-import { ConditionBuilderProps, variantsType } from './ConditionBuilder.types';
+import { ConditionBuilderProps } from './ConditionBuilder.types';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -61,7 +64,7 @@ export let ConditionBuilder = React.forwardRef(
       initialState,
       getConditionState,
       getActionsState,
-      variant = variants[0] as variantsType,
+      variant = NON_HIERARCHICAL_VARIANT,
       actions,
       translateWithId,
       ...rest

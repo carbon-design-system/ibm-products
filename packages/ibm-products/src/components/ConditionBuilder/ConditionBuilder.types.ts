@@ -183,7 +183,7 @@ export type ConditionBuilderProps = {
   className?: string;
   popOverSearchThreshold: number;
   startConditionLabel: string;
-  variant?: variantsType;
+  variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
 };
 

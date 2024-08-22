@@ -205,6 +205,7 @@ declare module '@carbon/react' {
     UIShell,
     UnorderedList,
     TagTypeName,
+    unstable_FeatureFlags,
     usePrefix,
   } from '@carbon/react';
 }

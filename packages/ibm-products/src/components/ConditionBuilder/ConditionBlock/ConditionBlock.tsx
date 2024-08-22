@@ -10,9 +10,10 @@ import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import PropTypes from 'prop-types';
 import {
+  HIERARCHICAL_VARIANT,
+  NON_HIERARCHICAL_VARIANT,
   operatorConfig,
   statementConfig,
-  variants,
 } from '../ConditionBuilderContext/DataConfigs';
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
@@ -178,7 +179,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     setShowDeletionPreview(false);
   };
   const manageActionButtons = (conditionIndex, conditions) => {
-    if (variant === variants[1]) {
+    if (variant === HIERARCHICAL_VARIANT) {
       return true;
     }
     return isLastCondition(conditionIndex, conditions);
@@ -192,7 +193,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     );
   };
   const getAriaAttributes = () => {
-    return variant == variants[1]
+    return variant == HIERARCHICAL_VARIANT
       ? {
           'aria-level': aria.level,
           'aria-posinset': aria.posinset,
@@ -225,11 +226,11 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         },
         {
-          [`${blockClass}__gap-bottom`]: variant == variants[1],
+          [`${blockClass}__gap-bottom`]: variant == HIERARCHICAL_VARIANT,
         },
         {
           [`${blockClass}__gap ${blockClass}__gap-bottom`]:
-            variant == variants[0],
+            variant == NON_HIERARCHICAL_VARIANT,
         },
         {
           [`${blockClass}__condition--interacting`]: showAllActions,
@@ -357,7 +358,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           hideConditionSubGroupPreviewHandler={
             hideConditionSubGroupPreviewHandler
           }
-          enableSubGroup={variant == variants[1]}
+          enableSubGroup={variant == HIERARCHICAL_VARIANT}
           showConditionPreviewHandler={showConditionPreviewHandler}
           hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}

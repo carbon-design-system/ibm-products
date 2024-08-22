@@ -19,7 +19,10 @@ import {
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { variants } from './ConditionBuilderContext/DataConfigs';
+import {
+  NON_HIERARCHICAL_VARIANT,
+  HIERARCHICAL_VARIANT,
+} from './ConditionBuilderContext/DataConfigs';
 export default {
   title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,
@@ -224,7 +227,7 @@ export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
   inputConfig: inputData,
-  variant: variants[0],
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});
@@ -232,7 +235,7 @@ conditionBuilderDynamicOptions.storyName = 'With dynamic options';
 conditionBuilderDynamicOptions.args = {
   inputConfig: inputDataDynamicOptions,
   getOptions: getOptions,
-  variant: variants[0],
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
@@ -242,7 +245,7 @@ conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
   initialState: sampleDataStructure_nonHierarchical,
   inputConfig: inputData,
-  variant: variants[0],
+  variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
 };
 
@@ -250,7 +253,7 @@ export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
 conditionBuilderWithActions.storyName = 'With Actions';
 conditionBuilderWithActions.args = {
   inputConfig: inputData,
-  variant: variants[0],
+  variant: NON_HIERARCHICAL_VARIANT,
   actions: actions,
   getActionsState: (actionState) => {
     console.log('action state', actionState);
@@ -261,7 +264,7 @@ export const conditionBuilderHierarchical = ConditionBuilderTemplate.bind({});
 conditionBuilderHierarchical.storyName = 'Condition Builder (Hierarchical)';
 conditionBuilderHierarchical.args = {
   inputConfig: inputData,
-  variant: variants[1],
+  variant: HIERARCHICAL_VARIANT,
 };
 export const conditionBuilderWithInitialStateHierarchical =
   ConditionBuilderTemplate.bind({});
@@ -270,7 +273,7 @@ conditionBuilderWithInitialStateHierarchical.storyName =
 conditionBuilderWithInitialStateHierarchical.args = {
   initialState: sampleDataStructure_Hierarchical,
   inputConfig: inputData,
-  variant: variants[1],
+  variant: HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderWithActionsHierarchical =
@@ -279,7 +282,7 @@ conditionBuilderWithActionsHierarchical.storyName =
   'With Actions (Hierarchical)';
 conditionBuilderWithActionsHierarchical.args = {
   inputConfig: inputData,
-  variant: variants[1],
+  variant: HIERARCHICAL_VARIANT,
   actions: actions,
   getActionsState: (actionState) => {},
 };

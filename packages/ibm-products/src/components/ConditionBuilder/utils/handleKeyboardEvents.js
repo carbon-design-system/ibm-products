@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { blockClass, variants } from '../ConditionBuilderContext/DataConfigs';
+import {
+  blockClass,
+  HIERARCHICAL_VARIANT,
+} from '../ConditionBuilderContext/DataConfigs';
 import {
   checkForHoldingKey,
   focusThisField,
@@ -177,7 +180,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
   switch (evt.key) {
     case 'ArrowRight':
       evt.preventDefault();
-      if (variant == variants[1]) {
+      if (variant == HIERARCHICAL_VARIANT) {
         let allCellsInRow = Array.from(
           evt.target
             .closest('[role="row"]')
@@ -210,7 +213,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
       break;
     case 'ArrowLeft':
       evt.preventDefault();
-      if (variant == variants[1]) {
+      if (variant == HIERARCHICAL_VARIANT) {
         if (evt.target.getAttribute('role') !== 'row') {
           //when any cell is focussed, arrow left will select the previous cell or current row
 
@@ -241,7 +244,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
     case 'ArrowUp':
     case 'ArrowDown':
       evt.preventDefault();
-      if (variant == variants[1]) {
+      if (variant == HIERARCHICAL_VARIANT) {
         handleRowNavigationHierarchical(evt, conditionBuilderRef, variant);
       } else {
         handleRowNavigation(evt, conditionBuilderRef, variant);
@@ -341,7 +344,7 @@ const navigateToNextRowCell = (
       nextRow?.querySelector(`[data-name="${itemName}"]`),
       conditionBuilderRef
     );
-  } else if (variant === variants[1]) {
+  } else if (variant === HIERARCHICAL_VARIANT) {
     //when the next row is a if statement , then that row is focused. From any cell of last row of an group , arrow down select the next row (if)
     manageTabIndexAndFocus(nextRow, conditionBuilderRef);
   }

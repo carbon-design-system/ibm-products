@@ -21,7 +21,10 @@ import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
-import { variants } from './ConditionBuilderContext/DataConfigs';
+import {
+  NON_HIERARCHICAL_VARIANT,
+  HIERARCHICAL_VARIANT,
+} from './ConditionBuilderContext/DataConfigs';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -34,7 +37,7 @@ const defaultProps = {
   startConditionLabel: 'Add condition',
   popOverSearchThreshold: 4,
   getConditionState: () => {},
-  variant: variants[0],
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 const inputConfigOptionType = {
@@ -619,7 +622,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
       />
     );
@@ -711,7 +714,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
       />
     );
@@ -936,7 +939,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         initialState={sampleDataStructure}
       />
     );
@@ -1205,7 +1208,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
         initialState={sampleDataStructure}
       />
@@ -1388,7 +1391,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
       />
     );
@@ -1516,7 +1519,7 @@ describe(componentName, () => {
     render(
       <ConditionBuilder
         {...defaultProps}
-        variant={variants[1]}
+        variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
         initialState={sampleDataStructure_Hierarchical}
       />

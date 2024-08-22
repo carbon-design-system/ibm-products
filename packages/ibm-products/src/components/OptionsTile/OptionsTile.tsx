@@ -5,29 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, ReactNode } from 'react';
+import * as carbonMotion from '@carbon/motion';
 
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg } from '../../settings';
-import { useControllableState } from '../../global/js/hooks';
-import { Layer, Toggle } from '@carbon/react';
 import {
   ChevronDown,
   Locked,
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import * as carbonMotion from '@carbon/motion';
+import { Layer, Toggle } from '@carbon/react';
+import React, { ReactNode, useRef, useState } from 'react';
+
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { useControllableState } from '../../global/js/hooks';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--options-tile`;
 const componentName = 'OptionsTile';
 
-interface OptionsTileProps {
+export interface OptionsTileProps {
   /**
    * Provide content to render as expandable OptionsTile. If no children
    * are present, the OptionsTile will render as its variant.
@@ -85,7 +86,7 @@ interface OptionsTileProps {
   /**
    * Define the size of the OptionsTile.
    */
-  size: 'lg' | 'xl';
+  size?: 'lg' | 'xl';
 
   /**
    * Optionally provide a text summarizing the current state of the content.
@@ -277,10 +278,10 @@ export let OptionsTile = React.forwardRef(
       let text = summary;
       const summaryClasses = [`${blockClass}__summary`];
       if (closing) {
-        summaryClasses.push(`${blockClass}__summary--closing`)
+        summaryClasses.push(`${blockClass}__summary--closing`);
       }
       if (isOpen) {
-        summaryClasses.push(`${blockClass}__summary--open`)
+        summaryClasses.push(`${blockClass}__summary--open`);
       }
 
       if (invalid) {
@@ -354,10 +355,13 @@ export let OptionsTile = React.forwardRef(
                */
               /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
               <summary className={`${blockClass}__header`} onClick={toggle}>
-                <ChevronDown size={16} className={cx(`${blockClass}__chevron`, {
-                  [`${blockClass}__chevron--open`]: isOpen,
-                  [`${blockClass}__chevron--closing`]: closing
-                })} />
+                <ChevronDown
+                  size={16}
+                  className={cx(`${blockClass}__chevron`, {
+                    [`${blockClass}__chevron--open`]: isOpen,
+                    [`${blockClass}__chevron--closing`]: closing,
+                  })}
+                />
                 {renderTitle()}
               </summary>
             }
@@ -451,7 +455,6 @@ OptionsTile.propTypes = {
   /**
    * Define the size of the OptionsTile.
    */
-  /**@ts-ignore*/
   size: PropTypes.oneOf(['lg', 'xl']),
 
   /**

@@ -1,6 +1,13 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
-export const sampleDataStructure_tree = {
+export const sampleDataStructure_Hierarchical = {
   operator: 'or',
   groups: [
     {
@@ -121,7 +128,7 @@ export const sampleDataStructure_tree = {
   ],
 };
 
-export const sampleDataStructure_sentence = {
+export const sampleDataStructure_nonHierarchical = {
   groups: [
     {
       groupOperator: 'and', //'and|or',

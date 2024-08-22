@@ -28,6 +28,8 @@ import {
   TableCell,
   usePrefix,
   TabList,
+  TabPanels,
+  TabPanel,
 } from '@carbon/react';
 import {
   CheckmarkFilled,
@@ -162,40 +164,18 @@ const children = {
 
 const navigation = {
   'No navigation': null,
-  'Four tabs': (
-    <Tabs>
-      <TabList aria-label="Tab list">
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-        <Tab>Tab 4</Tab>
-      </TabList>
-    </Tabs>
-  ),
-  'Many tabs': (
-    <Tabs>
-      <TabList aria-label="Tab list">
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-        <Tab>Tab 4</Tab>
-        <Tab>Tab 5</Tab>
-        <Tab>Tab 6</Tab>
-        <Tab>Tab 7</Tab>
-        <Tab>Tab 8</Tab>
-      </TabList>
-    </Tabs>
-  ),
-  'In context tabs': (
-    <Tabs>
-      <TabList aria-label="Tab list">
-        <Tab>Summary</Tab>
-        <Tab>Region 1</Tab>
-        <Tab>Region 2</Tab>
-        <Tab>Region 3</Tab>
-      </TabList>
-    </Tabs>
-  ),
+  'Four tabs': ['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'],
+  'Many tabs': [
+    'Tab 1',
+    'Tab 2',
+    'Tab 3',
+    'Tab 4',
+    'Tab 5',
+    'Tab 6',
+    'Tab 7',
+    'Tab 8',
+  ],
+  'In context tabs': ['Summary', 'Region 1', 'Region 2', 'Region 3'],
 };
 
 const pageActions = {
@@ -566,10 +546,48 @@ const demoDummyPageContent = (
 const actionTitleChange = action('title onChange');
 const actionTitleSave = action('title onSave');
 const actionTitleCancel = action('title change cancelled');
+
+const getNavProps = (navigation) =>
+  navigation
+    ? {
+        navigation: (
+          <TabList>
+            {navigation.map((nav) => (
+              <Tab>{nav}</Tab>
+            ))}
+          </TabList>
+        ),
+      }
+    : null;
+
+const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
+  navigation ? (
+    <div className={props.className}>
+      <Tabs {...props}>{children}</Tabs>
+    </div>
+  ) : (
+    <div {...props}>{children}</div>
+  );
+
+const ChildrenMaybeTabPanels = ({ children, navigation, ...props }) =>
+  navigation ? (
+    <TabPanels {...props}>
+      {navigation.map((nav) => (
+        <TabPanel>
+          <label>Panel for "{nav}"</label>
+          {children}
+        </TabPanel>
+      ))}
+    </TabPanels>
+  ) : (
+    children
+  );
+
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({
   children,
+  navigation,
   // eslint-disable-next-line no-unused-vars
   storyOptionWholePageScroll,
   title,
@@ -624,12 +642,18 @@ const Template = ({
   // }, [title]);
 
   // console.log(theTitle);
+
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <div className={`${storyClass}__content-container`} tabIndex={0}>
+      <ContainerDivOrTabs
+        className={`${storyClass}__content-container`}
+        tabIndex={0}
+        navigation={navigation}
+      >
         <PageHeader
           {...props}
+          {...getNavProps(navigation)}
           title={
             title?.onSave
               ? {
@@ -644,8 +668,10 @@ const Template = ({
         >
           {children}
         </PageHeader>
-        {dummyPageContent}
-      </div>
+        <ChildrenMaybeTabPanels navigation={navigation}>
+          {dummyPageContent}
+        </ChildrenMaybeTabPanels>
+      </ContainerDivOrTabs>
     </>
   );
 };
@@ -792,6 +818,7 @@ fullyLoadedAndSome.args = {
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({
   children,
+  navigation,
   // eslint-disable-next-line no-unused-vars
   storyOptionWholePageScroll,
   ...props
@@ -832,8 +859,18 @@ const TemplateDemo = ({
       <div
         className={`${storyClass}__content-container ${storyClass}__content-container--with-global-header`}
       >
-        <PageHeader {...props}>{children}</PageHeader>
-        {demoDummyPageContent}
+        <ContainerDivOrTabs
+          className={`${storyClass}__content-container`}
+          tabIndex={0}
+          navigation={navigation}
+        >
+          <PageHeader {...props} {...getNavProps(navigation)}>
+            {children}
+          </PageHeader>
+          <ChildrenMaybeTabPanels navigation={navigation}>
+            {demoDummyPageContent}
+          </ChildrenMaybeTabPanels>
+        </ContainerDivOrTabs>
       </div>
     </>
   );

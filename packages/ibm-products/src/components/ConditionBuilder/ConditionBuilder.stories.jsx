@@ -15,12 +15,16 @@ import mdx from './ConditionBuilder.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
-  sampleDataStructure_sentence,
-  sampleDataStructure_tree,
+  sampleDataStructure_nonHierarchical,
+  sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import {
+  NON_HIERARCHICAL_VARIANT,
+  HIERARCHICAL_VARIANT,
+} from './ConditionBuilderContext/DataConfigs';
 export default {
-  title: 'IBM Products/Components/ConditionBuilder',
+  title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,
   tags: ['autodocs'],
 
@@ -181,7 +185,7 @@ const getOptions = async (conditionState, { property }) => {
   }
 };
 const requiredProps = {
-  startConditionLabel: 'Add Condition',
+  startConditionLabel: 'Add condition',
   popOverSearchThreshold: 4,
   getConditionState: (rootState) => {
     console.log(rootState);
@@ -223,7 +227,7 @@ export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});
@@ -231,7 +235,7 @@ conditionBuilderDynamicOptions.storyName = 'With dynamic options';
 conditionBuilderDynamicOptions.args = {
   inputConfig: inputDataDynamicOptions,
   getOptions: getOptions,
-  variant: 'sentence',
+  variant: NON_HIERARCHICAL_VARIANT,
 };
 
 export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
@@ -239,9 +243,9 @@ export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
 );
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  initialState: sampleDataStructure_sentence,
+  initialState: sampleDataStructure_nonHierarchical,
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
 };
 
@@ -249,35 +253,36 @@ export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});
 conditionBuilderWithActions.storyName = 'With Actions';
 conditionBuilderWithActions.args = {
   inputConfig: inputData,
-  variant: 'sentence',
+  variant: NON_HIERARCHICAL_VARIANT,
   actions: actions,
   getActionsState: (actionState) => {
     console.log('action state', actionState);
   },
 };
 
-export const conditionBuilderTree = ConditionBuilderTemplate.bind({});
-conditionBuilderTree.storyName = 'Condition Builder(Tree)';
-conditionBuilderTree.args = {
+export const conditionBuilderHierarchical = ConditionBuilderTemplate.bind({});
+conditionBuilderHierarchical.storyName = 'Condition Builder (Hierarchical)';
+conditionBuilderHierarchical.args = {
   inputConfig: inputData,
-  variant: 'tree',
+  variant: HIERARCHICAL_VARIANT,
 };
-export const conditionBuilderWithInitialStateTree =
+export const conditionBuilderWithInitialStateHierarchical =
   ConditionBuilderTemplate.bind({});
-conditionBuilderWithInitialStateTree.storyName = 'With initial state(Tree)';
-conditionBuilderWithInitialStateTree.args = {
-  initialState: sampleDataStructure_tree,
+conditionBuilderWithInitialStateHierarchical.storyName =
+  'With initial state (Hierarchical)';
+conditionBuilderWithInitialStateHierarchical.args = {
+  initialState: sampleDataStructure_Hierarchical,
   inputConfig: inputData,
-  variant: 'tree',
+  variant: HIERARCHICAL_VARIANT,
 };
 
-export const conditionBuilderWithActionsTree = ConditionBuilderTemplate.bind(
-  {}
-);
-conditionBuilderWithActionsTree.storyName = 'With Actions(Tree)';
-conditionBuilderWithActionsTree.args = {
+export const conditionBuilderWithActionsHierarchical =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithActionsHierarchical.storyName =
+  'With Actions (Hierarchical)';
+conditionBuilderWithActionsHierarchical.args = {
   inputConfig: inputData,
-  variant: 'tree',
+  variant: HIERARCHICAL_VARIANT,
   actions: actions,
   getActionsState: (actionState) => {},
 };

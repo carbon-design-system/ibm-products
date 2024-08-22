@@ -14,7 +14,7 @@ test.describe('DescriptionList @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DescriptionList',
-      id: 'ibm-products-components-description-list-descriptionlist--description-list',
+      id: 'experimental-components-description-list-descriptionlist--description-list',
       globals: {
         carbonTheme: 'white',
       },

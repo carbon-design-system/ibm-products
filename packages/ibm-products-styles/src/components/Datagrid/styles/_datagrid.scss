@@ -479,6 +479,7 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
+  min-width: $spacing-09;
   padding-right: $spacing-09;
 
   &.#{$block-class}__select-all-sticky-left {
@@ -778,6 +779,7 @@
 }
 
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
+  overflow: hidden;
   background-color: $layer-accent;
 }
 

@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
 // Other standard imports.
 import PropTypes from 'prop-types';
+// Import portions of React that are needed.
+import React from 'react';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -33,7 +31,7 @@ const componentName = 'InterstitialScreenViewModule';
 // Default values should be provided when the component needs to make a choice
 // or assumption when a prop is not supplied.
 
-interface InterstitialScreenViewModuleProps {
+export interface InterstitialScreenViewModuleProps {
   /**
    * Provide an optional class to be applied to the containing node.
    */

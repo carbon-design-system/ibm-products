@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Carbon and package components we use.
+import { Button, ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   Children,
@@ -15,28 +17,25 @@ import React, {
   useState,
 } from 'react';
 
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-
-// Carbon and package components we use.
-import { Button, ButtonProps } from '@carbon/react';
-import { useCoachmark } from '../Coachmark';
-import { clamp } from 'lodash';
-import pconsole from '../../global/js/utils/pconsole';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
 import { Carousel } from '../Carousel';
+import { CarouselProps } from '../Carousel/Carousel';
+// Other standard imports.
+import PropTypes from 'prop-types';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
-import { CarouselProps } from '../Carousel/Carousel';
+import { clamp } from 'lodash';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import pconsole from '../../global/js/utils/pconsole';
+import { pkg } from '../../settings';
+import { useCoachmark } from '../Coachmark';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
 const componentName = 'CoachmarkOverlayElements';
 
-interface CoachmarkOverlayElementsProps {
+export interface CoachmarkOverlayElementsProps {
   /**
    * CoachmarkOverlayElements should be used with one or many CoachmarkOverlayElement components as children.
    * @see CoachmarkOverlayElement
@@ -114,7 +113,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     },
     ref
   ) => {
-    const buttonFocusRef = useRef<ButtonProps>();
+    const buttonFocusRef = useRef<ButtonProps<any>>();
     const scrollRef = useRef<CarouselProps>();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(0);
@@ -123,7 +122,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
         setTimeout(() => {
-          buttonFocusRef.current.focus();
+          buttonFocusRef.current?.focus();
         }, 1000);
       }
       _setCurrentProgStep(value);

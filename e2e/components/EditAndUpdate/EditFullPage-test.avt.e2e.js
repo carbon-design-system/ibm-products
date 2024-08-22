@@ -14,7 +14,7 @@ test.describe('EditFullPage @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditFullPage',
-      id: 'ibm-products-patterns-edit-and-update-editfullpage--edit-full-page',
+      id: 'experimental-patterns-edit-and-update-editfullpage--edit-full-page',
       globals: {
         carbonTheme: 'white',
       },

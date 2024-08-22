@@ -61,11 +61,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   margin-top: $spacing-03;
   margin-bottom: $spacing-03;
 }
-.#{$block-class}__tree
+.#{$block-class}__Hierarchical
   .#{$block-class}__actions-container
   .#{$block-class}__condition-wrapper {
   flex-direction: column;
 }
 .#{$block-class}__group-separator {
   margin-top: $spacing-02;
+}
+.#{$block-class}__add-group,
+.#{$block-class}__group-separator {
+  width: fit-content;
+}
+.#{$block-class}__tooltip {
+  word-break: break-all;
 }

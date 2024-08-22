@@ -5,57 +5,52 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
+import {
+  Column,
+  TableInstance,
+  UseColumnOrderInstanceProps,
+  useBlockLayout,
+  useColumnOrder,
+  useTable,
+} from 'react-table';
 // Import portions of React that are needed.
 import React, {
+  ForwardedRef,
+  LegacyRef,
+  MutableRefObject,
+  useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
-  useCallback,
-  useEffect,
-  ForwardedRef,
-  MutableRefObject,
-  LegacyRef,
 } from 'react';
-import {
-  useBlockLayout,
-  useTable,
-  useColumnOrder,
-  Column,
-  UseColumnOrderInstanceProps,
-  TableInstance,
-} from 'react-table';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { pkg } from '../../settings';
-import { DataSpreadsheetBody } from './DataSpreadsheetBody';
-import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { useActiveElement, usePreviousValue } from '../../global/js/hooks';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
-
 import {
-  useResetSpreadsheetFocus,
-  useSpreadsheetOutsideClick,
   useMoveActiveCell,
   useMultipleKeyTracking,
+  useResetSpreadsheetFocus,
   useSpreadsheetEdit,
+  useSpreadsheetOutsideClick,
 } from './hooks';
 
+import { DataSpreadsheetBody } from './DataSpreadsheetBody';
+import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
+// Other standard imports.
+import PropTypes from 'prop-types';
 import { createActiveCellFn } from './utils/createActiveCellFn';
+import cx from 'classnames';
+import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import { getCellSize } from './utils/getCellSize';
-
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
+import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { handleKeyPress } from './utils/commonEventHandlers';
+import { pkg } from '../../settings';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
-import { handleEditSubmit } from './utils/handleEditSubmit';
-import { handleKeyPress } from './utils/commonEventHandlers';
-import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -67,12 +62,13 @@ const defaults = {
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
   onDataUpdate: Object.freeze(() => {}),
+  onColDrag: Object.freeze(() => {}),
   onActiveCellChange: Object.freeze(() => {}),
   onSelectionAreaChange: Object.freeze(() => {}),
   theme: 'light',
 };
 
-interface DataSpreadsheetProps {
+export interface DataSpreadsheetProps {
   /**
    * Specifies the cell height
    */
@@ -117,6 +113,11 @@ interface DataSpreadsheetProps {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange?: () => void;
+
+  /**
+   * Callback for columns after being dragged
+   */
+  onColDrag?: ({ ...args }) => void;
 
   /**
    * The setter fn for the data prop
@@ -180,6 +181,7 @@ export let DataSpreadsheet = React.forwardRef(
       data = defaults.data,
       defaultEmptyRowCount = defaults.defaultEmptyRowCount,
       onDataUpdate = defaults.onDataUpdate,
+      onColDrag = defaults.onColDrag,
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
@@ -201,6 +203,8 @@ export let DataSpreadsheet = React.forwardRef(
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
+    const [currentColumns, setCurrentColumns] = useState<object>(columns);
+    const [pastColumns, setPastColumns] = useState<object[]>([]);
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] =
       useState<ActiveCellCoordinates | null>(null);
@@ -223,6 +227,7 @@ export let DataSpreadsheet = React.forwardRef(
         activeCellCoordinates,
         isEditing,
         cellEditorValue,
+        selectedHeaderReorderActive,
       }) || {};
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef<HTMLTextAreaElement>();
@@ -284,6 +289,44 @@ export let DataSpreadsheet = React.forwardRef(
       },
       [cellEditorValue, onDataUpdate]
     );
+
+    useEffect(() => {
+      const currentHeaders: Array<any> = [];
+      if (Object.keys(currentColumns).length > 0) {
+        Object.keys(currentColumns).forEach((itemIndex) => {
+          if (currentColumns[itemIndex].Header) {
+            currentHeaders.push(currentColumns[itemIndex].Header);
+          }
+        });
+      }
+
+      if (previousState.selectedHeaderReorderActive) {
+        setPastColumns(currentHeaders);
+      }
+
+      if (
+        !previousState.selectedHeaderReorderActive &&
+        pastColumns.length > 0 &&
+        !headerCellHoldActive &&
+        JSON.stringify(currentHeaders) !== JSON.stringify(pastColumns)
+      ) {
+        onColDrag({
+          headers: currentHeaders,
+          data: activeCellContent.props.data,
+        });
+        if (currentHeaders.length === 0) {
+          setPastColumns([]);
+        }
+      }
+    }, [
+      previousState?.selectedHeaderReorderActive,
+      currentColumns,
+      headerCellHoldActive,
+      columns,
+      activeCellContent,
+      onColDrag,
+      pastColumns,
+    ]);
 
     // Removes the active cell element
     const removeActiveCell = useCallback(() => {
@@ -908,6 +951,7 @@ export let DataSpreadsheet = React.forwardRef(
           <DataSpreadsheetBody
             activeCellRef={activeCellRef}
             activeCellCoordinates={activeCellCoordinates}
+            setCurrentColumns={setCurrentColumns}
             ref={spreadsheetRef as LegacyRef<HTMLDivElement>}
             clickAndHoldActive={clickAndHoldActive}
             setClickAndHoldActive={setClickAndHoldActive}
@@ -1076,6 +1120,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * Callback for when columns are dropped after dragged
+   */
+  onColDrag: PropTypes.func,
 
   /**
    * The setter fn for the data prop

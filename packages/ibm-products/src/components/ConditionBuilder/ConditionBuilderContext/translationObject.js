@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export const translationsObject = {
   ifText: 'if',
   excl_if: 'excl.if',
@@ -24,7 +31,8 @@ export const translationsObject = {
   valueText: 'Value',
   connectorText: 'Connector',
   conditionRowText: 'Condition row',
-  removeConditionText: 'Remove condition',
+  conditionRowGroupText: 'Condition row group',
+  removeConditionText: 'Delete condition',
   addConditionRowText: 'Add condition row',
   startText: 'Start',
   endText: 'End',
@@ -34,6 +42,12 @@ export const translationsObject = {
   removeActionText: 'Remove Action',
   addActionText: 'Add action',
   invalidText: 'Incomplete',
-  invalidDateText: 'Invalid Date',
   invalidNumberWarnText: 'Invalid number, must be 0 or greater',
+  conditionBuilderText: 'Condition Builder',
+  actionSectionText: 'Action Section',
+  conditionHeadingText: 'Condition',
+  addPropertyText: 'Add property',
+  addOperatorText: 'Add operator',
+  addValueText: 'Add value',
+  conditionBuilderHierarchicalText: 'Condition Builder Hierarchical',
 };

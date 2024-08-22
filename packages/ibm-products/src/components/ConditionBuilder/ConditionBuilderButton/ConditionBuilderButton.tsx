@@ -9,10 +9,10 @@ import React from 'react';
 import cx from 'classnames';
 
 import PropTypes from 'prop-types';
-import { Tooltip } from '@carbon/react';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import { PopoverAlignment, Tooltip } from '@carbon/react';
 import { CarbonIconType, WarningAltFilled } from '@carbon/react/icons';
 import { usePrefix } from '@carbon/react';
+import { blockClass } from '../utils/util';
 
 interface ConditionBuilderButtonProps {
   className?: string;
@@ -84,7 +84,7 @@ export const ConditionBuilderButton = ({
   return hideLabel || showToolTip ? (
     <Tooltip
       label={label}
-      align={tooltipAlign}
+      align={tooltipAlign as PopoverAlignment}
       className={`${wrapperClassName} ${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       {...wrapperProps}
       leaveDelayMs={0}

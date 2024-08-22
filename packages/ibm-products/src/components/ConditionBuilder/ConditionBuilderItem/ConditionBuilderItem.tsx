@@ -20,10 +20,6 @@ import React, {
 import { Popover, PopoverContent, Layer } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Add, CarbonIconType } from '@carbon/react/icons';
-import {
-  blockClass,
-  valueRenderers,
-} from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { useTranslations } from '../utils/useTranslations';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
@@ -34,6 +30,7 @@ import {
   Action,
   Option,
 } from '../ConditionBuilder.types';
+import { blockClass, valueRenderers } from '../utils/util';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;
@@ -71,7 +68,12 @@ export const ConditionBuilderItem = ({
 }: ConditionBuilderItemProps) => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-
+  const statementIdMap = {
+    ifAll: 'if',
+    ifAny: 'if',
+    unlessAll: 'unless',
+    unlessAny: 'unless',
+  };
   const [
     invalidText,
     addConditionText,
@@ -79,14 +81,17 @@ export const ConditionBuilderItem = ({
     addOperatorText,
     addValueText,
     labelText,
-  ] = useTranslations([
-    'invalidText',
-    'addConditionText',
-    'addPropertyText',
-    'addOperatorText',
-    'addValueText',
-    label,
-  ]);
+  ] = useTranslations(
+    [
+      'invalidText',
+      'addConditionText',
+      'addPropertyText',
+      'addOperatorText',
+      'addValueText',
+      label,
+    ],
+    statementIdMap
+  );
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const getPropertyDetails = () => {
     const { property, operator } = condition || {};

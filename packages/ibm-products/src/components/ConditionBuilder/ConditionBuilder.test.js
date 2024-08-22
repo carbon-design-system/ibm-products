@@ -21,10 +21,7 @@ import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
-import {
-  NON_HIERARCHICAL_VARIANT,
-  HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
+import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;

@@ -9,8 +9,8 @@ import React, { useEffect, useState } from 'react';
 
 import { TimePicker, TimePickerSelect, SelectItem } from '@carbon/react';
 import PropTypes from 'prop-types';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { PropertyConfigTime } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
 interface ConditionBuilderItemTime {
   onChange: (value: string | undefined) => void;

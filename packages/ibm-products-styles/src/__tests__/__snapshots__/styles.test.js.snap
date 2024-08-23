@@ -5423,12 +5423,12 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--edit-in-place--invalid {
-  outline: 2px solid var(--cds-support-error, #da1e28);
+  border: 2px solid var(--cds-support-error, #da1e28);
 }
 
 .c4p--edit-in-place--focused {
+  border: 2px solid var(--cds-focus, #0f62fe);
   background: var(--cds-field-01, #f4f4f4);
-  outline: 2px solid var(--cds-focus, #0f62fe);
 }
 
 .c4p--edit-in-place__text-input {

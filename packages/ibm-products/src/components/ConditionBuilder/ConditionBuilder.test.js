@@ -98,7 +98,7 @@ const getOptions = async (conditionState, { property }) => {
   }
 };
  // cspell:words xdescribe
-xdescribe(componentName, () => {
+describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
     render(<ConditionBuilder {...defaultProps} />);
     expect(screen.getByRole('main')).toHaveClass(cx(blockClass));

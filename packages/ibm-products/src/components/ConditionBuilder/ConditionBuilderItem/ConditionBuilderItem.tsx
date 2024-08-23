@@ -30,7 +30,7 @@ import {
   Action,
   Option,
 } from '../ConditionBuilder.types';
-import { blockClass, valueRenderers } from '../utils/util';
+import { blockClass, getValue } from '../utils/util';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;
@@ -107,7 +107,7 @@ export const ConditionBuilderItem = ({
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
-        ? valueRenderers[type](label, config)
+        ? getValue[type](label, config)
         : labelText;
 
     return {

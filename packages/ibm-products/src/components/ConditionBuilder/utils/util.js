@@ -114,11 +114,11 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-export const valueRenderers = {
-  text: (val) => val,
-  textarea: (val) => val,
-  time: (val) => val,
-  number: (val) => val,
+export const getValue = {
+  text: (value) => value,
+  textarea: (value) => value,
+  time: (value) => value,
+  number: (value) => value,
   option: (value) => {
     if (value && typeof value !== 'string') {
       const selectedValues = Array.isArray(value) ? value : [value];

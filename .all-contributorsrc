@@ -315,6 +315,25 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "amal-k-joy",
+      "name": "Amal K Joy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/153802538?v=4",
+      "profile": "https://github.com/amal-k-joy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "annawen1",
+      "name": "Anna Wen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54281166?v=4",
+      "profile": "https://github.com/annawen1",
+      "contributions": [
+        "code",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 5,

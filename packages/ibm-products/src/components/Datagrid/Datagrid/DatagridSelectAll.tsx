@@ -79,12 +79,13 @@ const SelectAll = (datagridState: DataGridState) => {
         target: { checked: false },
       } as any);
     }
-    handleSelectAllRowData({
-      dispatch,
-      rows,
-      getRowId,
-      isChecked: event.target.checked,
-      indeterminate,
+    // deselect all rows first
+    (getToggleAllRowsSelectedProps as any)?.()?.onChange({
+      target: { checked: false },
+    });
+    // select all row on current page
+    (getToggleAllPageRowsSelectedProps as any)().onChange({
+      target: { checked: true },
     });
     onAllRowSelect?.(rows, event);
     return onChange?.(event);

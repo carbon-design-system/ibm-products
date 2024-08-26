@@ -55,7 +55,7 @@ checkpoints:
 | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
 | [Prerelease](#prerelease)                       | Publish a prerelease that will be used to test out the release candidate before becoming stabilized                      |
 | [Subsequent prerelease](#subsequent-prerelease) | Publish a subsequent prerelease with any fixes added to the release branch                                               |
-| [Stable release](#stablerelease)                | Graduate the prerelease into a stable release that is available through packages on NPM                                  |
+| [Stable release](#stable-release)               | Graduate the prerelease into a stable release that is available through packages on NPM                                  |
 | [Post release](#post-release)                   | Support the latest stable release and address any issues that may come up as a result of promoting the release to stable |
 
 ### Prerelease
@@ -79,18 +79,57 @@ release team will need to do the following:
       [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
       to generate the prerelease versions for the packages
 
-  ![Screenshot of minor release workflow](https://github.com/carbon-design-system/ibm-products/assets/54281166/8ee243b5-0933-4505-be7d-58c64d99ce40)
-
   - [ ] Ensure the release branch is selected
   - [ ] Specify the type of release - in this case we will select
         `first minor rc` (rc stands for release candidate)
   - [ ] Ensure the dry run is checked
-  - [ ] Once the job has completed, which it should have failed, check the
-        action's log. Lerna should have logged what versions it is bumping the
-        packages to. It should bump the packages up by a minor version with the
-        prerelease identifier (ie. `v2.39.0 ---> v2.40.0-rc.0`).
-  - [ ] If the version bumps are expected, run the workflow again with the same
-        inputs as above, but this time with dry run unchecked.
+
+  ![Screenshot of minor release workflow](https://github.com/carbon-design-system/ibm-products/assets/54281166/8ee243b5-0933-4505-be7d-58c64d99ce40)
+
+- [ ] Once the job has completed, which it should have failed, check the
+      action's log. Lerna should have logged what versions it is bumping the
+      packages to. It should bump the packages up by a minor version with the
+      prerelease identifier (ie. `v2.39.0 ---> v2.40.0-rc.0`).
+- [ ] If the version bumps are expected, run the workflow again with the same
+      inputs as above, but this time with dry run unchecked.
+- [ ] Once job has completed, check the packages on npm to ensure they have been
+      published under the ` next` tag:
+  - [ ] `@carbon/ibm-products`:
+        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
+  - [ ] `@carbon/ibm-products-styles`:
+        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] Run the
+      [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
+      This workflow creates the release tag, generates the release with notes,
+      and opens a PR to merge the changelog and version bumps from the release
+      branch to `main`.
+  - [ ] Make sure to specify to release branch and the correct release versions.
+        ![Screenshot of create github tag and PR workflow with options selected](https://github.com/user-attachments/assets/3e11b0b1-1af9-421c-95b2-bf45fbca1a0b)
+    - The `release tag` option is the version that was just published (ie.
+      v2.47.0-rc.0). Fill in the `previous tag` option with the previous full
+      release (ie. v2.46.0).
+  - [ ] Merge in the generated PR (the title of the PR should start with
+        `chore(release):` followed by the version).
+  - [ ] Check the generated
+        [release](https://github.com/carbon-design-system/ibm-products/releases)
+        to ensure the release notes are correct.
+- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+      new version of `@carbon/ibm-products`.
+
+  - For **release candidates**, an example message:
+
+    ```
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+
+    Hi all! Release candidate v2.45.0-rc.0 of `@carbon/ibm-products` has been created and is ready for testing!
+
+    What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
+
+    Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.0
+    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+    ```
 
 ### Subsequent Prerelease
 
@@ -99,13 +138,58 @@ available for testing. If there are any issues during the testing period, fixes
 can be pushed to the release branch. We can then publish subsequent prereleases
 from the release branch for further testing. To publish subsequent prereleases,
 
-- [ ] Follow the above steps for [Prerelease](#prerelease), but select
-      `subsequent rc` in the type of release dropdown instead.
+- [ ] Run the
+      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml)
+      to generate the prerelease versions for the packages
       ![Screenshot of minor release workflow with subsequent release selected](https://github.com/carbon-design-system/ibm-products/assets/54281166/5d2694df-251d-46f4-bb9f-b86587758236)
+  - [ ] Ensure the release branch is selected
+  - [ ] Specify the type of release - in this case we will select
+        `subsequent rc`
+  - [ ] Ensure the dry run is checked
+- [ ] Once the job has completed, which it should have failed, check the
+      action's log. Lerna should have logged what versions it is bumping the
+      packages to. It should bump the packages up by the prerelease identifier
+      (ie. `v2.40.0-rc.0 ---> v2.40.0-rc.1`).
+- [ ] If the version bumps are expected, run the workflow again with the same
+      inputs as above, but this time with dry run unchecked.
+- [ ] Once job has completed, check the packages on npm to ensure they have been
+      published under the ` next` tag:
+  - [ ] `@carbon/ibm-products`:
+        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
+  - [ ] `@carbon/ibm-products-styles`:
+        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] Run the
+      [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
+      This workflow creates the release tag, generates the release with notes,
+      and opens a PR to merge the changelog and version bumps from the release
+      branch to `main`.
+  - [ ] Make sure to specify to release branch and the correct release versions.
+        ![Screenshot of create github tag and PR workflow with options selected](https://github.com/user-attachments/assets/854ca22d-997e-48b7-98dc-6b337c821a00)
+    - The `release tag` option is the version that was just published (ie.
+      v2.47.0-rc.1). Fill in the `previous tag` option with the previous release
+      candidate (ie. v2.47.0-rc.0)
+  - [ ] Merge in the generated PR (the title of the PR should start with
+        `chore(release):` followed by the version).
+  - [ ] Check the generated
+        [release](https://github.com/carbon-design-system/ibm-products/releases)
+        to ensure the release notes are correct.
+- [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
+      new version of `@carbon/ibm-products`.
 
-  - [ ] When checking the action's log after the dry run, ensure the version has
-        been bumped up by the release candidate (ie.
-        `v2.40.0-rc.0 ---> v2.40.0-rc.1`).
+  - For **release candidates**, an example message:
+
+    ```
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+
+    Hi all! Release candidate v2.45.0-rc.1 of `@carbon/ibm-products` has been created and is ready for testing!
+
+    What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
+
+    Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.1
+    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
+
+    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
+    ```
 
 ### Stable release
 
@@ -123,60 +207,36 @@ validated. During this stage, the release team will do the following:
   - [ ] Specify the type of release - in this case we will select
         `full minor release`
   - [ ] Ensure the dry run is checked
-  - [ ] Once the job has completed, which it should have failed, check the
-        action's log. Lerna should have logged what versions it is bumping the
-        packages to. It should bump the packages up by a minor version (ie.
-        `v2.40.0-rc.1 ---> v2.40.0`).
-  - [ ] If the version bumps are expected, run the workflow again with the same
-        inputs as above, but this time with dry run unchecked.
 
-### Post release
-
-- [ ] We want to make sure all changes from the release branch have been merged
-      to `main`. The
-      [automerge workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/automerge.yml)
-      handles this automatically this when PRs are merged into the release
-      branch. However for the changelogs and version bumps pushed to the release
-      branch by Lerna, we have to run the following workflow:
-
-  - Run the
-    [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
-    This workflow creates the release tag, generates the release with notes, and
-    opens a PR to merge the changelog and version bumps from the release branch
-    to `main`.
-  - Make sure to specify to release branch and the correct release versions.
-    ![Screenshot of create github tag and PR workflow with options selected](https://github.com/user-attachments/assets/85b8abfc-3dbe-4fd2-9d22-1d87e042148b)
-    - The `release tag` option is the version that was just published (ie. full
-      minor version or release candidate). To select the `previous tag`:
-      - If published tag is the first release candidate (ie. v2.47.0-rc.0),
-        choose the previous full release tag (ie. v2.46.0).
-      - If published tag is a subsequent release candidate (ie. v2.47.0-rc.1),
-        choose the previous release candidate (ie. v2.47.0-rc.1).
-      - If published tag is a full release (ie. v2.47.0), choose the previous
-        full release tag (ie. v2.46.0).
-  - Merge in the generated PR (the title of the PR should start with
-    `chore(release):` followed by the version).
-  - Check the generated
-    [release](https://github.com/carbon-design-system/ibm-products/releases) to
-    ensure the release notes are correct.
-
+- [ ] Once the job has completed, which it should have failed, check the
+      action's log. Lerna should have logged what versions it is bumping the
+      packages to. It should bump the packages up by a minor version (ie.
+      `v2.40.0-rc.1 ---> v2.40.0`).
+- [ ] If the version bumps are expected, run the workflow again with the same
+      inputs as above, but this time with dry run unchecked.
+- [ ] Once job has completed, check the packages on npm to ensure they have been
+      published under the ` next` tag:
+  - [ ] `@carbon/ibm-products`:
+        https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
+  - [ ] `@carbon/ibm-products-styles`:
+        https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] Run the
+      [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
+      This workflow creates the release tag, generates the release with notes,
+      and opens a PR to merge the changelog and version bumps from the release
+      branch to `main`.
+  - [ ] Make sure to specify to release branch and the correct release versions.
+        ![Screenshot of create github tag and PR workflow with options selected](https://github.com/user-attachments/assets/85b8abfc-3dbe-4fd2-9d22-1d87e042148b)
+    - The `release tag` option is the version that was just published (ie.
+      v2.47.0). Fill in the `previous tag` option with the previous full release
+      (ie. v2.46.0)
+  - [ ] Merge in the generated PR (the title of the PR should start with
+        `chore(release):` followed by the version).
+  - [ ] Check the generated
+        [release](https://github.com/carbon-design-system/ibm-products/releases)
+        to ensure the release notes are correct.
 - [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
       new version of `@carbon/ibm-products`.
-
-  - For **release candidates**, an example message:
-
-    ```
-    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
-
-    Hi all! Release candidate v2.45.0-rc.0 of @carbon/ibm-products has been created and is ready for testing!
-
-    What is a release candidate? Before releasing a full version (ie. v2.45.0), we publish prerelease versions / release candidates for testing purposes. This helps to prevent any major bugs making their way to our full versions. If you find any issues with this release candidate, you can report any issues here: https://github.com/carbon-design-system/ibm-products/issues/new/choose.
-
-    Changelog: https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.45.0-rc.0
-    Storybook environment (Staging): https://carbon-design-system.github.io/ibm-products/staging/
-
-    :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
-    ```
 
   - For **full releases**, list some of the features included in the release.
     These can be pulled from the release changelog. An example message:
@@ -184,7 +244,7 @@ validated. During this stage, the release team will do the following:
     ```
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
 
-    Hi everyone! :wave: We are happy to announce the release of Carbon for IBM Products v2.44.0! This release comes with a bunch of new features, along with our usual bug squashing!
+    Hi everyone! :wave: We are happy to announce the release of `@carbon/ibm-products` v2.47.0! This release comes with a bunch of new features, along with our usual bug squashing!
 
     New features and fixes include:
     - Optional custom component to row header in Data SpreadSheet
@@ -196,7 +256,7 @@ validated. During this stage, the release team will do the following:
     - and many more bug fixes! :bugsquash:
 
     Check out the full changelog, available at:
-    https://github.com/carbon-design-system/ibm-products/releases/tag/%40carbon%2Fibm-products%402.44.0
+    https://github.com/carbon-design-system/ibm-products/releases/tag/v2.47.0
     Thank you for being an active member of our community! If you see any issues, you can reach out to us here, or open an issue on our board! :github:
 
     :ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products::ibm-products:
@@ -208,6 +268,8 @@ validated. During this stage, the release team will do the following:
 
 - [ ] Update the release in the
       [Wiki release page](https://github.com/carbon-design-system/ibm-products/wiki/Carbon-for-IBM-Products-Releases)
+
+### Post release
 
 After a release has switched packages from `next` to `latest`, it is important
 to monitor channels on Slack and issues on GitHub in case breaking changes may
@@ -237,6 +299,7 @@ patch release:
   - [ ] Then reopen the dropdown, select the `Branches` tab, and create the
         release branch off the previously selected tag
         ![Screenshot of GitHub's branch/tag dropdown with release branch created](https://github.com/carbon-design-system/ibm-products/assets/54281166/8b5face8-d982-42df-b9ba-df5ffc01f85e)
-- [ ] Run the
+- [ ] Follow the same steps as the [prerelease](#prerelease),
+      [subsequent prerelease](#subsequent-prerelease), and
+      [stable release](#stable-release) publishes, except use the
       [patch release workflow](https://github.com/carbon-design-system/ibm-products/ibm-products/actions/workflows/release-patch.yml)
-      following the same steps as the minor release.

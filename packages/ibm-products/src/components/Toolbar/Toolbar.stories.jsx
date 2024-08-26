@@ -39,7 +39,7 @@ import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'Experimental/Patterns/Toolbars/Toolbar',
+  title: 'Experimental/Components/Toolbars/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {
@@ -65,62 +65,62 @@ function _Toolbar(args) {
     <Toolbar {...args}>
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Save"
+          label="Save"
           renderIcon={(props) => <Save size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Share"
+          label="Share"
           renderIcon={(props) => <Share size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Upload"
+          label="Upload"
           renderIcon={(props) => <Upload size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Print"
+          label="Print"
           renderIcon={(props) => <Printer size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Undo"
+          label="Undo"
           renderIcon={(props) => <Undo size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Redo"
+          label="Redo"
           renderIcon={(props) => <Redo size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Zoom in"
+          label="Zoom in"
           renderIcon={(props) => <ZoomIn size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Zoom out"
+          label="Zoom out"
           renderIcon={(props) => <ZoomOut size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Minimize"
+          label="Minimize"
           renderIcon={(props) => <Minimize size={16} {...props} />}
         />
 
         <ToolbarButton
-          iconDescription="Align horizontal center"
+          label="Align horizontal center"
           renderIcon={(props) => <AlignHorizontalCenter size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Ruler"
+          label="Ruler"
           renderIcon={(props) => <RulerAlt size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Pin"
+          label="Pin"
           renderIcon={(props) => <Pin size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Copy file"
+          label="Copy file"
           renderIcon={(props) => <CopyFile size={16} {...props} />}
         />
       </ToolbarGroup>
@@ -139,7 +139,7 @@ function _Toolbar(args) {
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Text align center"
+          label="Text align center"
           renderIcon={(props) => <TextAlignCenter size={16} {...props} />}
           caret
         />
@@ -156,12 +156,12 @@ function _Toolbar(args) {
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Table"
+          label="Table"
           renderIcon={(props) => <Table size={16} {...props} />}
         />
 
         <ToolbarButton
-          iconDescription="Settings adjust"
+          label="Settings adjust"
           renderIcon={(props) => <SettingsAdjust size={16} {...props} />}
         />
       </ToolbarGroup>
@@ -178,62 +178,62 @@ function vertical(args) {
     <Toolbar {...args}>
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Drag"
+          label="Drag"
           renderIcon={(props) => <Draggable size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Ruler"
+          label="Ruler"
           renderIcon={(props) => <RulerAlt size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Pin"
+          label="Pin"
           renderIcon={(props) => <Pin size={16} {...props} />}
         />
 
         <ToolbarButton
-          iconDescription="Color palette"
+          label="Color palette"
           renderIcon={(props) => <ColorPalette size={16} {...props} />}
         />
 
         <ToolbarButton
-          iconDescription="Text creation"
+          label="Text creation"
           renderIcon={(props) => <TextCreation size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Open panel left"
+          label="Open panel left"
           renderIcon={(props) => <OpenPanelLeft size={16} {...props} />}
         />
 
         <ToolbarButton
-          iconDescription="Open panel right"
+          label="Open panel right"
           renderIcon={(props) => <OpenPanelRight size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Move"
+          label="Move"
           renderIcon={(props) => <Move size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Rotate"
+          label="Rotate"
           renderIcon={(props) => <Rotate size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
-          iconDescription="Zoom in"
+          label="Zoom in"
           renderIcon={(props) => <ZoomIn size={16} {...props} />}
         />
         <ToolbarButton
-          iconDescription="Zoom out"
+          label="Zoom out"
           renderIcon={(props) => <ZoomOut size={16} {...props} />}
         />
       </ToolbarGroup>

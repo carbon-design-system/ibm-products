@@ -14,7 +14,7 @@ test.describe('HTTPError403 @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'HTTPError403',
-      id: 'ibm-products-patterns-http-errors-httperror403--with-all-props-set',
+      id: 'deprecated-http-errors-httperror403--with-all-props-set',
       globals: {
         carbonTheme: 'white',
       },

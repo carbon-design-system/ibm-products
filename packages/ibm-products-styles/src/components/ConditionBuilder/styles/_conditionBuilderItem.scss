@@ -231,7 +231,7 @@ $colors: (
   }
 }
 
-.#{$block-class}__tree {
+.#{$block-class}__Hierarchical {
   .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
     flex-basis: 100%;
   }

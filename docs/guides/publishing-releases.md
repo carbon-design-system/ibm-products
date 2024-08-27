@@ -57,6 +57,7 @@ checkpoints:
 | [Subsequent prerelease](#subsequent-prerelease) | Publish a subsequent prerelease with any fixes added to the release branch                                               |
 | [Stable release](#stable-release)               | Graduate the prerelease into a stable release that is available through packages on NPM                                  |
 | [Post release](#post-release)                   | Support the latest stable release and address any issues that may come up as a result of promoting the release to stable |
+| [Patch release](#patch-release)                 | Publish a patch release with hot fixes to the full release                                                               |
 
 ### Prerelease
 
@@ -93,11 +94,16 @@ release team will need to do the following:
 - [ ] If the version bumps are expected, run the workflow again with the same
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
-      published under the ` next` tag:
+      published under the `next` tag:
   - [ ] `@carbon/ibm-products`:
         https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
   - [ ] `@carbon/ibm-products-styles`:
         https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] The workflow should have triggered the
+      [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
+      Once this workflow has completed, check the
+      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      and ensure the version in the storybook top left header has been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,
@@ -153,11 +159,16 @@ from the release branch for further testing. To publish subsequent prereleases,
 - [ ] If the version bumps are expected, run the workflow again with the same
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
-      published under the ` next` tag:
+      published under the `next` tag:
   - [ ] `@carbon/ibm-products`:
         https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
   - [ ] `@carbon/ibm-products-styles`:
         https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] The workflow should have triggered the
+      [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml).
+      Once this workflow has completed, check the
+      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      and ensure the version in the storybook top left header has been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,
@@ -215,11 +226,20 @@ validated. During this stage, the release team will do the following:
 - [ ] If the version bumps are expected, run the workflow again with the same
       inputs as above, but this time with dry run unchecked.
 - [ ] Once job has completed, check the packages on npm to ensure they have been
-      published under the ` next` tag:
+      published under the `latest` tag:
   - [ ] `@carbon/ibm-products`:
         https://www.npmjs.com/package/@carbon/ibm-products?activeTab=versions
   - [ ] `@carbon/ibm-products-styles`:
         https://www.npmjs.com/package/@carbon/ibm-products-styles?activeTab=versions
+- [ ] The workflow should have triggered the
+      [deploy staging environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-staging.yml)
+      and the
+      [deploy production environment workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/deploy-latest.yml).
+      Once both these workflows have completed, check the
+      [staging environment](https://carbon-design-system.github.io/ibm-products/staging)
+      and the
+      [production/latest environment](https://carbon-design-system.github.io/ibm-products/latest)
+      to ensure the versions in the storybook top left header have been updated.
 - [ ] Run the
       [create github tag and PR workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/create-release-tag-and-pr.yml).
       This workflow creates the release tag, generates the release with notes,

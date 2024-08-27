@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useState } from 'react';
 import cx from 'classnames';
 import { TableSelectRow } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
@@ -22,7 +22,10 @@ const useSelectRows = (hooks: Hooks) => {
   useHighlightSelection(hooks);
   const useInstance = (instance: TableInstance) => {
     const { rows } = instance;
-    const rowsWithSelect = rows.map((row) => ({ ...row, isSelectable: true }));
+    const rowsWithSelect = useMemo(
+      () => rows.map((row) => ({ ...row, isSelectable: true })),
+      [rows]
+    );
     Object.assign(instance, { rows: rowsWithSelect });
   };
   hooks.useInstance.push(useInstance);

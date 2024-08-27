@@ -30,8 +30,6 @@ const defaultOptions = {
 };
 
 async function toHaveNoAxeViolations(node, options = {}) {
-  await axe.run();
-
   const result = await axe.run(node, {
     ...defaultOptions,
     ...options,

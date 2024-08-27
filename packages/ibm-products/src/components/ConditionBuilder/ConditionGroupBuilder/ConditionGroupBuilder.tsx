@@ -13,6 +13,8 @@ import cx from 'classnames';
 
 import {
   blockClass,
+  HIERARCHICAL_VARIANT,
+  NON_HIERARCHICAL_VARIANT,
   statementConfig,
 } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
@@ -68,8 +70,8 @@ const ConditionGroupBuilder = ({
   const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
-      variant == 'tree'
-        ? handleFocusOnCloseTree(evt)
+      variant == HIERARCHICAL_VARIANT
+        ? handleFocusOnCloseHierarchical(evt)
         : handleFocusOnClose(evt, conditionIndex);
 
       if (!checkGroupHaveCondition(group.conditions, conditionId)) {
@@ -178,7 +180,7 @@ const ConditionGroupBuilder = ({
       );
     }
   };
-  const handleFocusOnCloseTree = (evt) => {
+  const handleFocusOnCloseHierarchical = (evt) => {
     //getting the current aria-level and aria-posinset.
     const currentLevel = evt.currentTarget
       ?.closest('[role="row"]')
@@ -314,7 +316,7 @@ const ConditionGroupBuilder = ({
     });
   };
 
-  const getSentenceVariant = () => {
+  const getNonHierarchicalVariant = () => {
     return (
       <div className={`${className}  eachGroup`}>
         <div
@@ -360,7 +362,7 @@ const ConditionGroupBuilder = ({
     );
   };
 
-  const getTreeVariant = () => {
+  const getHierarchicalVariant = () => {
     return (
       <div
         className={`${className} ${blockClass}__condition-wrapper`}
@@ -491,8 +493,8 @@ const ConditionGroupBuilder = ({
   };
   return (
     <>
-      {variant == 'tree' && getTreeVariant()}
-      {variant == 'sentence' && getSentenceVariant()}
+      {variant == HIERARCHICAL_VARIANT && getHierarchicalVariant()}
+      {variant == NON_HIERARCHICAL_VARIANT && getNonHierarchicalVariant()}
     </>
   );
 };

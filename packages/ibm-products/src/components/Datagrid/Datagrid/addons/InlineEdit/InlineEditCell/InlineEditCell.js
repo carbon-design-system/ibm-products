@@ -26,7 +26,10 @@ import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
-import { usePreviousValue } from '../../../../../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  usePreviousValue,
+} from '../../../../../../global/js/hooks';
 import { prepareProps } from '../../../../../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -59,7 +62,6 @@ export const InlineEditCell = ({
   const checkboxRef = useRef();
   const numberInputRef = useRef();
   const dropdownRef = useRef();
-  const datePickerRef = useRef();
   const outerButtonElement = useRef();
 
   const { rowSize, onDataUpdate } = instance;
@@ -327,6 +329,16 @@ export const InlineEditCell = ({
       : null;
   };
 
+  useIsomorphicEffect(() => {
+    if (dropdownRef.current && dropdownRef.current.style) {
+      const closestElement = dropdownRef.current.closest(
+        `.${blockClass}__inline-edit--select`
+      );
+      closestElement.style.width = `${cell.column.totalWidth}px`;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dropdownRef.current, cell.column.totalWidth]);
+
   const renderSelectCell = () => {
     const { inputProps } = config || {};
     return (
@@ -336,9 +348,6 @@ export const InlineEditCell = ({
         ariaLabel={cellLabel || 'Dropdown menu options'}
         {...inputProps}
         hideLabel
-        style={{
-          width: cell.column.totalWidth,
-        }}
         className={cx(`${blockClass}__inline-edit--select`, {
           [`${blockClass}__inline-edit--select-${rowSize}`]: rowSize,
         })}
@@ -388,10 +397,6 @@ export const InlineEditCell = ({
     }
   };
 
-  const renderRegularCell = () => {
-    return <span {...inputProps} id={cellId}></span>;
-  };
-
   const renderDateCell = () => {
     const datePickerPreparedProps = prepareProps(config.inputProps, [
       'datePickerInputProps',
@@ -401,9 +406,15 @@ export const InlineEditCell = ({
       <DatePicker
         {...datePickerPreparedProps}
         appendTo={outerButtonElement?.current?.parentElement}
-        ref={datePickerRef}
-        style={{
-          width: cell.column.totalWidth,
+        ref={(el) => {
+          if (el && el.style) {
+            el.style.width = `${cell.column.totalWidth}px`;
+            const elementId = `${blockClass}__inline-edit--date-picker--${cell.row.index}`;
+            const element = el.querySelector(`input#${elementId}`);
+            if (element) {
+              element.style.position = 'static';
+            }
+          }
         }}
         datePickerType="single"
         className={cx(`${blockClass}__inline-edit--date`, {
@@ -426,9 +437,6 @@ export const InlineEditCell = ({
       >
         <DatePickerInput
           {...datePickerInputProps}
-          style={{
-            position: 'static',
-          }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
           labelText={datePickerInputProps?.labelText || cellLabel || 'Set date'}
           id={`${blockClass}__inline-edit--date-picker--${cell.row.index}`}
@@ -572,10 +580,6 @@ export const InlineEditCell = ({
         [`${blockClass}__static--outer-cell`]: !disabledCell,
       })}
     >
-      {!nonEditCell &&
-        !disabledCell &&
-        type !== 'checkbox' &&
-        renderRegularCell()}
       {(!inEditMode || disabledCell) && type !== 'checkbox' && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}

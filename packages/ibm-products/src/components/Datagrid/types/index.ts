@@ -308,6 +308,7 @@ export interface DataGridState<T extends object = any>
   setGlobalFilter?: (filterValue: FilterValue) => void;
   batchActionMenuButtonLabel?: string;
   translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];
+  toolbarBatchActionsDisplayMin?: number;
   onScroll?: (evt?: any) => void;
   innerListRef?: MutableRefObject<HTMLDivElement>;
   tableHeight?: number;

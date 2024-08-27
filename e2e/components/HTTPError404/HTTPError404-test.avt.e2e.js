@@ -14,7 +14,7 @@ test.describe('HTTPError404 @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'HTTPError404',
-      id: 'ibm-products-patterns-http-errors-httperror404--with-all-props-set',
+      id: 'deprecated-http-errors-httperror404--with-all-props-set',
       globals: {
         carbonTheme: 'white',
       },

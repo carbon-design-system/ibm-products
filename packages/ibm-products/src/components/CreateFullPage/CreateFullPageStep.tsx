@@ -50,7 +50,7 @@ interface CreateFullPageStepBaseProps extends PropsWithChildren {
   /**
    * This optional prop will render your form content inside of a fieldset html element
    */
-  hasFieldset: boolean;
+  hasFieldset?: boolean;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -107,7 +107,7 @@ type CreateFullPageStepFieldsetProps =
       fieldsetLegendText: string;
     };
 
-type CreateFullPageStepProps = CreateFullPageStepBaseProps &
+export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
 export let CreateFullPageStep = forwardRef(

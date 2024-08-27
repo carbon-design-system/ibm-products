@@ -5,7 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { Button, Column, FlexGrid, Row, Tag, Tooltip } from '@carbon/react';
+import {
+  Button,
+  Column,
+  FlexGrid,
+  Row,
+  Tag,
+  Tooltip,
+  usePrefix,
+} from '@carbon/react';
 import { ButtonProps, PopoverAlignment, TagProps } from '@carbon/type';
 import React, {
   ForwardedRef,
@@ -454,6 +462,7 @@ export let PageHeader = React.forwardRef(
     const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
       useRef(null);
     const offsetTopMeasuringRef = useRef(null);
+    const overflowMenuRef = useRef<HTMLDivElement>(null);
 
     // state based on props only
     const hasActionBar = actionBarItems && actionBarItems.length > 0;
@@ -508,10 +517,19 @@ export let PageHeader = React.forwardRef(
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
     const [widthIsNarrow, setWidthIsNarrow] = useState(false);
 
+    const prefix = usePrefix();
+
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
-      // Warning: This is bound to break if we change the size of the overflow menu
-      const overflowMenuWidth = 40;
+      let overflowMenuWidth = 0;
+
+      const overflowMenu = overflowMenuRef?.current?.querySelector(
+        `.${prefix}--overflow-menu`
+      );
+
+      if (overflowMenu) {
+        overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+      }
 
       /* don't know how to test resize */
       /* istanbul ignore next */
@@ -956,6 +974,7 @@ export let PageHeader = React.forwardRef(
                                 )}`,
                                 onWidthChange: handleActionBarWidthChange,
                                 overflowAriaLabel: actionBarOverflowAriaLabel,
+                                overflowMenuRef,
                                 rightAlign: true,
                               } as any)}
                             />

@@ -219,10 +219,7 @@ export const DatagridContent = ({
         filters={filterTags}
         clearFilters={() => {
           EventEmitter.dispatch(CLEAR_FILTERS, tableId);
-          if (
-            typeof filterProps?.onClearFilters !== 'undefined' &&
-            typeof filterProps?.onClearFilters === 'function'
-          ) {
+          if (typeof filterProps?.onClearFilters === 'function') {
             filterProps.onClearFilters();
           }
         }}

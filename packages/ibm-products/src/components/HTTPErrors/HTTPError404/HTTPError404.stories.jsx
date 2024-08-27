@@ -14,7 +14,7 @@ import styles from '../_storybook-styles.scss?inline';
 const storyClass = 'http-error-stories';
 
 export default {
-  title: 'IBM Products/Patterns/HTTP errors/HTTPError404',
+  title: 'Deprecated/HTTP errors/HTTPError404',
   component: HTTPError404,
   tags: ['autodocs'],
   parameters: {

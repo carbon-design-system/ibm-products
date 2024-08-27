@@ -2337,7 +2337,7 @@ describe(componentName, () => {
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
   };
 
-  it.only('should test basic interactions of filter panel', async () => {
+  it('should test basic interactions of filter panel', async () => {
     const user = userEvent.setup({
       advanceTimers: jest.advanceTimersByTime,
     });
@@ -2771,6 +2771,7 @@ const TestBatch = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridPagination,
+      toolbarBatchActionsDisplayMin: 2,
     },
     useSelectRows,
     useSelectAllWithToggle,
@@ -2850,11 +2851,15 @@ describe('batch action testing', () => {
       await click(screen.getByLabelText(getBatchActions()[1].label));
       expect(addOnClickFn).toHaveBeenCalledTimes(1);
 
-      const menuButton = screen.getByRole('button', { name: /More/i });
-      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
-      const selectAllButton = screen.getByRole('button', {
-        name: /Select all/i,
-      });
+      const moreButton = screen.getByText(/More/i);
+      expect(moreButton).toBeVisible();
+      const downloadButton = screen.queryByText(/Download/i);
+      expect(downloadButton).toBeNull();
+
+      const menuButton = screen.getByText(/More/i);
+      const cancelButton = screen.getByText(/Cancel/i);
+      const selectAllButton = screen.getByText(/^Select all \(\d+\)$/);
+
       expect(menuButton).toBeInTheDocument();
       await click(menuButton);
       const options = Array.from(

@@ -18,7 +18,7 @@ interface ConditionBuilderButtonProps {
   className?: string;
   label: string;
   hideLabel?: boolean;
-  tooltipAlign?: string;
+  tooltipAlign?: PopoverAlignment;
   renderIcon?: CarbonIconType;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;
@@ -84,7 +84,7 @@ export const ConditionBuilderButton = ({
   return hideLabel || showToolTip ? (
     <Tooltip
       label={label}
-      align={tooltipAlign as PopoverAlignment}
+      align={tooltipAlign}
       className={`${wrapperClassName} ${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       {...wrapperProps}
       leaveDelayMs={0}

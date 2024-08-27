@@ -10,8 +10,7 @@ import React from 'react';
 import { TextArea, TextInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
-import { checkIsValid } from '../../utils/util';
+import { blockClass, checkIsValid } from '../../utils/util';
 import {
   Condition,
   PropertyConfigText,

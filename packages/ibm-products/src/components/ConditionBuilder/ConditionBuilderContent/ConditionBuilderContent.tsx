@@ -14,10 +14,6 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import {
-  blockClass,
-  HIERARCHICAL_VARIANT,
-} from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
@@ -33,7 +29,7 @@ import {
   ConditionBuilderState,
   ConditionGroup,
 } from '../ConditionBuilder.types';
-
+import { blockClass, HIERARCHICAL_VARIANT } from '../utils/util';
 interface ConditionBuilderContentProps {
   startConditionLabel: string;
   getConditionState: (state: ConditionBuilderState) => void;
@@ -129,7 +125,7 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const newGroup: ConditionGroup = {
-      statement: 'if', // 'if|exclude if',
+      statement: 'ifAll', // 'if|exclude if',
       groupOperator: 'and',
       id: uuidv4(),
       conditions: [

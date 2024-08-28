@@ -6,7 +6,7 @@
  */
 
 // Carbon and package components we use.
-import { Button, IconButton, Link, Toggle } from '@carbon/react';
+import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
 import {
   CheckmarkFilled,
   ChevronDown,
@@ -27,9 +27,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { timeAgo } from './utils';
-import { useClickOutside } from '../../global/js/hooks';
+import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
-import { usePreviousValue } from '../../global/js/hooks';
+import wrapFocus from '../../global/js/utils/wrapFocus';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
@@ -251,6 +251,9 @@ export interface NotificationsPanelProps {
    * Sets the yesterday label text
    */
   yesterdayLabel?: string;
+
+  /** Specify the CSS selectors that match the floating menus. */
+  selectorsFloatingMenus?: string[];
 }
 interface PreviousStateProps {
   open: boolean;
@@ -294,13 +297,17 @@ export let NotificationsPanel = React.forwardRef(
       yearsAgoText = defaults.yearsAgoText,
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
+      selectorsFloatingMenus,
 
       // Collect any other property values passed in.
       ...rest
     }: NotificationsPanelProps,
     ref
   ) => {
-    const notificationPanelRef = useRef();
+    const notificationPanelRef = useRef<HTMLDialogElement | null>(null);
+    const notificationPanelInnerRef = useRef(null);
+    const startSentinel = useRef<HTMLButtonElement>(null);
+    const endSentinel = useRef<HTMLButtonElement>(null);
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const previousState = usePreviousValue({ open }) as
@@ -308,6 +315,7 @@ export let NotificationsPanel = React.forwardRef(
       | undefined;
 
     const reducedMotion = usePrefersReducedMotion();
+    const carbonPrefix = usePrefix();
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -322,6 +330,30 @@ export let NotificationsPanel = React.forwardRef(
       // initialize the notification panel to open
       if (open) {
         setRender(true);
+        const observer = new MutationObserver(() => {
+          if (notificationPanelRef.current) {
+            const parentElement = notificationPanelRef.current;
+            (parentElement as HTMLDialogElement)
+              ?.querySelector<HTMLButtonElement>(
+                `.${blockClass}__dismiss-button`
+              )
+              ?.focus();
+            observer.disconnect();
+          }
+        });
+        if (notificationPanelRef.current) {
+          const parentElement = notificationPanelRef.current;
+          const button = (
+            parentElement as HTMLDialogElement
+          )?.querySelector<HTMLButtonElement>(`.${blockClass}__dismiss-button`);
+          button?.focus();
+        } else {
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        }
+        return () => observer.disconnect();
       }
     }, [open]);
 
@@ -329,7 +361,37 @@ export let NotificationsPanel = React.forwardRef(
       // initialize the notification panel to close
       !open && setRender(false);
     };
-
+    const handleBlur = ({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }) => {
+      if (
+        open &&
+        currentActiveNode &&
+        oldActiveNode &&
+        notificationPanelInnerRef.current
+      ) {
+        const { current: bodyNode } = notificationPanelInnerRef;
+        const { current: startSentinelNode } = startSentinel;
+        const { current: endSentinelNode } = endSentinel;
+        wrapFocus({
+          bodyNode,
+          startTrapNode: startSentinelNode,
+          endTrapNode: endSentinelNode,
+          currentActiveNode,
+          oldActiveNode,
+          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
+            Boolean
+          ) as string[],
+        });
+      }
+    };
+    const handleKeydown = (event) => {
+      event.stopPropagation();
+      if (event.key === 'Escape') {
+        onClickOutside();
+      }
+    };
     useEffect(() => {
       if (!open && previousState?.open && reducedMotion) {
         setRender(false);
@@ -569,113 +631,139 @@ export let NotificationsPanel = React.forwardRef(
     ]);
 
     return shouldRender ? (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        id={blockClass}
-        className={cx(blockClass, className, `${blockClass}__container`)}
-        style={{
-          animation: !reducedMotion
-            ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
-            : undefined,
-        }}
-        onAnimationEnd={onAnimationEnd}
-        ref={
-          (ref as MutableRefObject<HTMLDivElement | null>) ||
-          notificationPanelRef
-        }
-        {...getDevtoolsProps(componentName)}
-      >
-        <div className={`${blockClass}__header-container`}>
-          <div className={`${blockClass}__header-flex`}>
-            <h2 className={`${blockClass}__header`}>{title}</h2>
-            <Button
-              size="sm"
-              kind="ghost"
-              className={`${blockClass}__dismiss-button`}
-              onClick={() => onDismissAllNotifications()}
-            >
-              {dismissAllLabel}
-            </Button>
+      <>
+        <button
+          type="button"
+          className={`${carbonPrefix}--visually-hidden`}
+          ref={startSentinel}
+        >
+          Focus sentinel start
+        </button>
+        {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
+        <div
+          role="dialog"
+          aria-label="Notification Panel"
+          onBlur={handleBlur}
+          tabIndex={0}
+          onKeyDown={handleKeydown}
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          id={blockClass}
+          className={cx(blockClass, className, `${blockClass}__container`)}
+          style={{
+            animation: !reducedMotion
+              ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
+              : undefined,
+          }}
+          onAnimationEnd={onAnimationEnd}
+          ref={
+            (ref as MutableRefObject<HTMLDivElement | null>) ||
+            notificationPanelRef
+          }
+          {...getDevtoolsProps(componentName)}
+        >
+          <div ref={notificationPanelInnerRef}>
+            <div className={`${blockClass}__header-container`}>
+              <div className={`${blockClass}__header-flex`}>
+                <h2 className={`${blockClass}__header`}>{title}</h2>
+                <Button
+                  size="sm"
+                  kind="ghost"
+                  className={`${blockClass}__dismiss-button`}
+                  onClick={() => onDismissAllNotifications()}
+                >
+                  {dismissAllLabel}
+                </Button>
+              </div>
+              {onDoNotDisturbChange && (
+                <Toggle
+                  size="sm"
+                  className={`${blockClass}__do-not-disturb-toggle`}
+                  id={`${blockClass}__do-not-disturb-toggle-component`}
+                  labelA={doNotDisturbLabel}
+                  labelB={doNotDisturbLabel}
+                  onToggle={(event) => onDoNotDisturbChange(event)}
+                  defaultToggled={doNotDisturbDefaultToggled}
+                  aria-label={doNotDisturbLabel}
+                  labelText={doNotDisturbLabel}
+                />
+              )}
+            </div>
+            <div className={mainSectionClassName}>
+              {withinLastDayNotifications &&
+              withinLastDayNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {todayLabel}
+                  </h6>
+                  {withinLastDayNotifications.map((notification, index) =>
+                    renderNotification('today', notification, index)
+                  )}
+                </>
+              ) : null}
+              {previousDayNotifications && previousDayNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {yesterdayLabel}
+                  </h6>
+                  {previousDayNotifications.map((notification, index) =>
+                    renderNotification('yesterday', notification, index)
+                  )}
+                </>
+              ) : null}
+              {previousNotifications && previousNotifications.length ? (
+                <>
+                  <h6 className={`${blockClass}__time-section-label`}>
+                    {previousLabel}
+                  </h6>
+                  {previousNotifications.map((notification, index) =>
+                    renderNotification('previous', notification, index)
+                  )}
+                </>
+              ) : null}
+              {!allNotifications.length && (
+                <NotificationsEmptyState
+                  illustrationTheme="dark"
+                  title=""
+                  subtitle={emptyStateLabel}
+                />
+              )}
+            </div>
+            {onViewAllClick &&
+            onSettingsClick &&
+            allNotifications &&
+            allNotifications.length ? (
+              <div className={`${blockClass}__bottom-actions`}>
+                <Button
+                  kind="ghost"
+                  className={`${blockClass}__view-all-button`}
+                  onClick={() => onViewAllClick()}
+                >
+                  {viewAllLabel(allNotifications.length)}
+                </Button>
+                <Button
+                  kind="ghost"
+                  size="sm"
+                  className={`${blockClass}__settings-button`}
+                  renderIcon={(props) => <Settings size={16} {...props} />}
+                  iconDescription={settingsIconDescription}
+                  onClick={() => onSettingsClick()}
+                />
+              </div>
+            ) : null}
           </div>
-          {onDoNotDisturbChange && (
-            <Toggle
-              size="sm"
-              className={`${blockClass}__do-not-disturb-toggle`}
-              id={`${blockClass}__do-not-disturb-toggle-component`}
-              labelA={doNotDisturbLabel}
-              labelB={doNotDisturbLabel}
-              onToggle={(event) => onDoNotDisturbChange(event)}
-              defaultToggled={doNotDisturbDefaultToggled}
-              aria-label={doNotDisturbLabel}
-              labelText={doNotDisturbLabel}
-            />
-          )}
         </div>
-        <div className={mainSectionClassName}>
-          {withinLastDayNotifications && withinLastDayNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}__time-section-label`}>
-                {todayLabel}
-              </h6>
-              {withinLastDayNotifications.map((notification, index) =>
-                renderNotification('today', notification, index)
-              )}
-            </>
-          ) : null}
-          {previousDayNotifications && previousDayNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}__time-section-label`}>
-                {yesterdayLabel}
-              </h6>
-              {previousDayNotifications.map((notification, index) =>
-                renderNotification('yesterday', notification, index)
-              )}
-            </>
-          ) : null}
-          {previousNotifications && previousNotifications.length ? (
-            <>
-              <h6 className={`${blockClass}__time-section-label`}>
-                {previousLabel}
-              </h6>
-              {previousNotifications.map((notification, index) =>
-                renderNotification('previous', notification, index)
-              )}
-            </>
-          ) : null}
-          {!allNotifications.length && (
-            <NotificationsEmptyState
-              illustrationTheme="dark"
-              title=""
-              subtitle={emptyStateLabel}
-            />
-          )}
-        </div>
-        {onViewAllClick &&
-        onSettingsClick &&
-        allNotifications &&
-        allNotifications.length ? (
-          <div className={`${blockClass}__bottom-actions`}>
-            <Button
-              kind="ghost"
-              className={`${blockClass}__view-all-button`}
-              onClick={() => onViewAllClick()}
-            >
-              {viewAllLabel(allNotifications.length)}
-            </Button>
-            <Button
-              kind="ghost"
-              size="sm"
-              className={`${blockClass}__settings-button`}
-              renderIcon={(props) => <Settings size={16} {...props} />}
-              iconDescription={settingsIconDescription}
-              onClick={() => onSettingsClick()}
-            />
-          </div>
-        ) : null}
-      </div>
+        {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
+        <button
+          type="button"
+          className={`${carbonPrefix}--visually-hidden`}
+          ref={endSentinel}
+        >
+          Focus sentinel end
+        </button>
+      </>
     ) : null;
   }
 );
@@ -838,6 +926,11 @@ NotificationsPanel.propTypes = {
    * Sets the `seconds ago` label text
    */
   secondsAgoText: PropTypes.func,
+
+  /**
+   * Specify the CSS selectors that match the floating menus
+   */
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Sets the settings icon description text

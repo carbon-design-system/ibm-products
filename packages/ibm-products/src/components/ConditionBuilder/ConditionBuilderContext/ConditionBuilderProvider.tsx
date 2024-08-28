@@ -19,7 +19,7 @@ export const emptyState: ConditionBuilderState = {
   groups: [
     {
       groupOperator: 'and',
-      statement: 'if',
+      statement: 'ifAll',
       id: uuidv4(),
       conditions: [
         {

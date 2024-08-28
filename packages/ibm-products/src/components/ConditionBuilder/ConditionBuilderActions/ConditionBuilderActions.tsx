@@ -12,7 +12,6 @@ import { Close } from '@carbon/react/icons';
 /**@ts-ignore */
 import { Section, Heading } from '@carbon/react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import uuidv4 from '../../../global/js/utils/uuidv4';
@@ -20,6 +19,7 @@ import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuild
 import { useTranslations } from '../utils/useTranslations';
 import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
 import { Action, Option } from '../ConditionBuilder.types';
+import { blockClass } from '../utils/util';
 
 interface ConditionBuilderActionsProps {
   actions: Action[] | Option[];

@@ -156,7 +156,7 @@ LabelOnly.args = {
   title: '',
   label: 'Label',
   actionsPlacement: 'bottom',
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
 };
 
 export const WithOverflow = Template.bind({});
@@ -183,16 +183,16 @@ WithOverflow.args = {
 export const SupplementalBottomBar = Template.bind({});
 SupplementalBottomBar.args = {
   ...defaultProps,
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
 };
 
 export const ComplexBottomBar = Template.bind({});
 ComplexBottomBar.args = {
   ...defaultProps,
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
   actionsPlacement: 'bottom',
   title: '',
-  label: 'label',
+  label: 'Label',
 };
 
 export const Clickable = Template.bind({});
@@ -200,14 +200,14 @@ Clickable.args = {
   ...defaultProps,
   onClick: action('on click'),
   onKeyDown: action('on keydown'),
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
   actionIcons: [],
 };
 
 export const WithButtonHref = Template.bind({});
 WithButtonHref.args = {
   ...defaultProps,
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
   primaryButtonHref: '#',
 };
 
@@ -215,7 +215,7 @@ export const WithActionGhostButton = Template.bind({});
 WithActionGhostButton.args = {
   ...defaultProps,
   primaryButtonPlacement: 'top',
-  primaryButtonText: 'Ghost button',
+  primaryButtonText: 'Read more',
   primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
   primaryButtonDisabled: true,
 };

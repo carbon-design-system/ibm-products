@@ -185,14 +185,12 @@ export const stateReducer = (newState, action) => {
           ...newSelectedRowData,
         };
 
-        console.log('here', finalSelectedRowIds, finalSelectedRowData);
         return {
           ...newState,
           selectedRowIds: finalSelectedRowIds,
           selectedRowData: finalSelectedRowData,
         };
       }
-      console.log('default return');
 
       return {
         ...newState,

@@ -790,6 +790,12 @@
 }
 
 .#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--noLabel
+  svg.#{c4p-settings.$carbon-prefix}--btn__icon {
+  margin-inline-start: 0;
+}
+
+.#{$block-class}
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn__icon {
   margin-top: 0;

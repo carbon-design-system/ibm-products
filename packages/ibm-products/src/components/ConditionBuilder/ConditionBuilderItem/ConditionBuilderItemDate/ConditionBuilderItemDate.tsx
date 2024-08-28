@@ -9,12 +9,10 @@ import React, { ForwardedRef, useRef } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
-import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition } from '../../ConditionBuilder.types';
-
-const blockClass = `${pkg.prefix}--condition-builder`;
+import { blockClass } from '../../utils/util';
 
 interface ConditionBuilderItemDate {
   conditionState: Condition;

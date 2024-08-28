@@ -9,12 +9,6 @@ import React, { useContext, useState } from 'react';
 import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import PropTypes from 'prop-types';
-import {
-  HIERARCHICAL_VARIANT,
-  NON_HIERARCHICAL_VARIANT,
-  operatorConfig,
-  statementConfig,
-} from '../ConditionBuilderContext/DataConfigs';
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderItemNumber } from '../ConditionBuilderItem/ConditionBuilderItemNumber/ConditionBuilderItemNumber';
@@ -22,13 +16,20 @@ import { ConditionBuilderItemText } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuilderItemDate/ConditionBuilderItemDate';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { checkIsValid, focusThisField } from '../utils/util';
+import {
+  blockClass,
+  checkIsValid,
+  focusThisField,
+  HIERARCHICAL_VARIANT,
+  NON_HIERARCHICAL_VARIANT,
+} from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
 import { useTranslations } from '../utils/useTranslations';
+import { useDataConfigs } from '../utils/useDataConfigs';
+
 import {
   Condition,
   ConditionGroup,
@@ -109,6 +110,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     'operatorText',
     'removeConditionText',
   ]);
+
+  const { statementConfig, operatorConfig } = useDataConfigs();
 
   //filtering the current property to access its properties and config options
   const getCurrentConfig = (property) => {
@@ -269,7 +272,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
               label: conditionText,
             }}
             onChange={onStatementChangeHandler}
-            config={{ options: statementConfig }}
+            config={{ options: statementConfig, isStatement: true }}
           />
         </ConditionBuilderItem>
       )}

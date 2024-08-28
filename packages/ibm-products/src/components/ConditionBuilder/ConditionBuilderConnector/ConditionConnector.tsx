@@ -8,15 +8,15 @@
 import React, { useCallback, useContext } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
+import PropTypes from 'prop-types';
 import {
   blockClass,
-  connectorConfig,
+  focusThisField,
   HIERARCHICAL_VARIANT,
-} from '../ConditionBuilderContext/DataConfigs';
-import PropTypes from 'prop-types';
-import { focusThisField } from '../utils/util';
+} from '../utils/util';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../utils/useTranslations';
+import { useDataConfigs } from '../utils/useDataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 
 interface ConditionConnectorProps {
@@ -32,6 +32,7 @@ const ConditionConnector = ({
 }: ConditionConnectorProps) => {
   const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
   const [connectorText] = useTranslations(['connectorText']);
+  const { connectorConfig } = useDataConfigs();
 
   const handleConnectorHover = useCallback((parentGroup, isHover) => {
     if (isHover) {

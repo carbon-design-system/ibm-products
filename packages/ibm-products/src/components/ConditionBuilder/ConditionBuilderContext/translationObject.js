@@ -7,10 +7,15 @@
 
 export const translationsObject = {
   ifText: 'if',
+  unlessText: 'unless',
   excl_if: 'excl.if',
   and: 'and',
   or: 'or',
   is: 'is',
+  ifAll: 'if all',
+  ifAny: 'if any',
+  unlessAll: 'unless all',
+  unlessAny: 'unless any',
   greater: 'is greater than',
   greaterEqual: 'is greater than or equal to',
   lower: 'is lower than',

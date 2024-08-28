@@ -9,16 +9,16 @@ import React from 'react';
 import cx from 'classnames';
 
 import PropTypes from 'prop-types';
-import { Tooltip } from '@carbon/react';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
+import { PopoverAlignment, Tooltip } from '@carbon/react';
 import { CarbonIconType, WarningAltFilled } from '@carbon/react/icons';
 import { usePrefix } from '@carbon/react';
+import { blockClass } from '../utils/util';
 
 interface ConditionBuilderButtonProps {
   className?: string;
   label: string;
   hideLabel?: boolean;
-  tooltipAlign?: string;
+  tooltipAlign?: PopoverAlignment;
   renderIcon?: CarbonIconType;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBlur?: React.FocusEventHandler<HTMLButtonElement>;

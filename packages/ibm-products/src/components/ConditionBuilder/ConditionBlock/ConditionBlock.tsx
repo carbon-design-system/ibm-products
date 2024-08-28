@@ -9,10 +9,6 @@ import React, { useContext, useState } from 'react';
 import { Close } from '@carbon/react/icons';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import PropTypes from 'prop-types';
-import {
-  operatorConfig,
-  statementConfig,
-} from '../ConditionBuilderContext/DataConfigs';
 import cx from 'classnames';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderItemNumber } from '../ConditionBuilderItem/ConditionBuilderItemNumber/ConditionBuilderItemNumber';
@@ -20,24 +16,64 @@ import { ConditionBuilderItemText } from '../ConditionBuilderItem/ConditionBuild
 import { ConditionBuilderItemDate } from '../ConditionBuilderItem/ConditionBuilderItemDate/ConditionBuilderItemDate';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { checkIsValid, focusThisField } from '../utils/util';
+import {
+  blockClass,
+  checkIsValid,
+  focusThisField,
+  HIERARCHICAL_VARIANT,
+  NON_HIERARCHICAL_VARIANT,
+} from '../utils/util';
 import { ConditionBuilderItemTime } from '../ConditionBuilderItem/ConditionBuilderItemTime/ConditionBuilderItemTime';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
 import { useTranslations } from '../utils/useTranslations';
+import { useDataConfigs } from '../utils/useDataConfigs';
+
+import {
+  Condition,
+  ConditionGroup,
+  LogicalOperator,
+  Property,
+  PropertyConfig,
+  PropertyConfigCustom,
+} from '../ConditionBuilder.types';
 
 /**
  * This component build each block of condition consisting of property, operator value and close button.
  */
 
-const ConditionBlock = (props) => {
-  const { property, value, operator } = props.condition;
+interface ConditionBlockProps {
+  condition?: Condition;
+  onRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onChange: (condition: Condition) => void;
+  onConnectorOperatorChange?: (op: string) => void;
+  onStatementChange?: (v: string) => void;
+  addConditionHandler?: (conditionIndex: number) => void;
+  addConditionSubGroupHandler?: (conditionIndex: number) => void;
+  hideConditionSubGroupPreviewHandler?: () => void;
+  showConditionSubGroupPreviewHandler?: () => void;
+  hideConditionPreviewHandler?: () => void;
+  showConditionPreviewHandler?: () => void;
+  conjunction?: LogicalOperator;
+  isStatement?: boolean;
+  group: ConditionGroup;
+  conditionIndex: number;
+  aria: {
+    level: number;
+    posinset: number;
+    setsize?: number;
+  };
+  isLastCondition: (
+    index: number,
+    conditions: (ConditionGroup | Condition)[]
+  ) => void;
+}
+const ConditionBlock = (props: ConditionBlockProps) => {
   const {
     onRemove,
     onChange,
-    condition,
+    condition = {},
     conjunction,
     onConnectorOperatorChange,
     isStatement,
@@ -53,6 +89,7 @@ const ConditionBlock = (props) => {
     showConditionPreviewHandler,
     isLastCondition,
   } = props;
+  const { property, value, operator } = condition;
   const { inputConfig, variant, conditionBuilderRef } = useContext(
     ConditionBuilderContext
   );
@@ -74,16 +111,20 @@ const ConditionBlock = (props) => {
     'removeConditionText',
   ]);
 
+  const { statementConfig, operatorConfig } = useDataConfigs();
+
   //filtering the current property to access its properties and config options
   const getCurrentConfig = (property) => {
     return (
-      inputConfig.properties?.find(
+      inputConfig?.properties?.find(
         (eachProperty) => eachProperty.id == property
       ) ?? {}
     );
   };
 
-  const { icon, type, config, label } = getCurrentConfig(property);
+  const { icon, type, config, label }: Property = getCurrentConfig(
+    property
+  ) as Property;
 
   //Below possible input types expected for value field.
   const itemComponents = {
@@ -92,10 +133,10 @@ const ConditionBlock = (props) => {
     date: ConditionBuilderItemDate,
     time: ConditionBuilderItemTime,
     option: ItemOptionForValueField,
-    custom: config?.component,
+    custom: (config as PropertyConfigCustom['config'])?.component,
     textarea: ConditionBuilderItemText,
   };
-  const ItemComponent = property ? itemComponents[type] : null;
+  const ItemComponent = itemComponents[type];
 
   const showAllActionsHandler = () => {
     setShowAllActions(true);
@@ -105,7 +146,7 @@ const ConditionBlock = (props) => {
   };
   const onStatementChangeHandler = (v, evt) => {
     focusThisField(evt, conditionBuilderRef);
-    onStatementChange(v);
+    onStatementChange?.(v);
   };
 
   const onPropertyChangeHandler = (newProperty) => {
@@ -141,21 +182,21 @@ const ConditionBlock = (props) => {
     setShowDeletionPreview(false);
   };
   const manageActionButtons = (conditionIndex, conditions) => {
-    if (variant === 'tree') {
+    if (variant === HIERARCHICAL_VARIANT) {
       return true;
     }
     return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
-    if (config?.operators) {
-      return config.operators;
+    if ((config as PropertyConfigCustom['config'])?.operators) {
+      return (config as PropertyConfigCustom['config']).operators;
     }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
     );
   };
   const getAriaAttributes = () => {
-    return variant == 'tree'
+    return variant == HIERARCHICAL_VARIANT
       ? {
           'aria-level': aria.level,
           'aria-posinset': aria.posinset,
@@ -188,11 +229,11 @@ const ConditionBlock = (props) => {
           [`${blockClass}__condition__deletion-preview`]: showDeletionPreview,
         },
         {
-          [`${blockClass}__gap-bottom`]: variant == 'tree',
+          [`${blockClass}__gap-bottom`]: variant == HIERARCHICAL_VARIANT,
         },
         {
           [`${blockClass}__gap ${blockClass}__gap-bottom`]:
-            variant == 'sentence',
+            variant == NON_HIERARCHICAL_VARIANT,
         },
         {
           [`${blockClass}__condition--interacting`]: showAllActions,
@@ -210,7 +251,7 @@ const ConditionBlock = (props) => {
         <ConditionConnector
           className={`${blockClass}__gap`}
           operator={conjunction}
-          onChange={(op) => onConnectorOperatorChange(op)}
+          onChange={(op) => onConnectorOperatorChange?.(op)}
         />
       ) : (
         <div role="gridcell" />
@@ -231,7 +272,7 @@ const ConditionBlock = (props) => {
               label: conditionText,
             }}
             onChange={onStatementChangeHandler}
-            config={{ options: statementConfig }}
+            config={{ options: statementConfig, isStatement: true }}
           />
         </ConditionBuilderItem>
       )}
@@ -241,7 +282,7 @@ const ConditionBlock = (props) => {
       <ConditionBuilderItem
         label={label ?? condition?.property}
         title={propertyText}
-        renderIcon={icon ?? null}
+        renderIcon={icon ?? undefined}
         className={`${blockClass}__property-field`}
         data-name="propertyField"
         condition={condition}
@@ -254,7 +295,7 @@ const ConditionBlock = (props) => {
             label: propertyText,
           }}
           onChange={onPropertyChangeHandler}
-          config={{ options: inputConfig.properties }}
+          config={{ options: inputConfig?.properties }}
         />
       </ConditionBuilderItem>
       {checkIsValid(property) && (
@@ -286,7 +327,7 @@ const ConditionBlock = (props) => {
           showToolTip={true}
           data-name="valueField"
           condition={condition}
-          config={config}
+          config={config as PropertyConfig}
           onChange={onValueChangeHandler}
           renderChildren={renderChildren}
         />
@@ -309,10 +350,10 @@ const ConditionBlock = (props) => {
       {manageActionButtons(conditionIndex, group.conditions) && (
         <ConditionBuilderAdd
           onClick={() => {
-            addConditionHandler(conditionIndex);
+            addConditionHandler?.(conditionIndex);
           }}
           addConditionSubGroupHandler={() => {
-            addConditionSubGroupHandler(conditionIndex);
+            addConditionSubGroupHandler?.(conditionIndex);
           }}
           showConditionSubGroupPreviewHandler={
             showConditionSubGroupPreviewHandler
@@ -320,7 +361,7 @@ const ConditionBlock = (props) => {
           hideConditionSubGroupPreviewHandler={
             hideConditionSubGroupPreviewHandler
           }
-          enableSubGroup={variant == 'tree'}
+          enableSubGroup={variant == HIERARCHICAL_VARIANT}
           showConditionPreviewHandler={showConditionPreviewHandler}
           hideConditionPreviewHandler={hideConditionPreviewHandler}
           className={`${blockClass}__gap ${blockClass}__gap-left`}

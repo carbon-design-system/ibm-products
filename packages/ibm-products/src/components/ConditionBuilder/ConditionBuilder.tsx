@@ -6,8 +6,9 @@
  */
 
 // Import portions of React that are needed.
-import React, { useRef } from 'react';
+import React, { ForwardedRef, useRef } from 'react';
 
+/**@ts-ignore */
 import { VStack } from '@carbon/react';
 
 // Other standard imports.
@@ -19,8 +20,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
-import { blockClass } from './ConditionBuilderContext/DataConfigs';
+
+import { ConditionBuilderProps } from './ConditionBuilder.types';
+
 import { handleKeyDown } from './utils/handleKeyboardEvents';
+import { blockClass, NON_HIERARCHICAL_VARIANT } from './utils/util';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -50,9 +54,6 @@ const componentName = 'ConditionBuilder';
 export let ConditionBuilder = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
-      // children /* TODO: remove if not needed. */,
       className,
       inputConfig,
       startConditionLabel,
@@ -61,14 +62,14 @@ export let ConditionBuilder = React.forwardRef(
       initialState,
       getConditionState,
       getActionsState,
-      variant = 'sentence',
+      variant = NON_HIERARCHICAL_VARIANT,
       actions,
       translateWithId,
       ...rest
-    },
-    ref
+    }: ConditionBuilderProps,
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const localRef = useRef();
+    const localRef = useRef(null);
     const conditionBuilderRef = ref || localRef;
 
     const handleKeyDownHandler = (evt) => {
@@ -134,6 +135,7 @@ ConditionBuilder.propTypes = {
   /**
    * optional array of actions
    */
+  /**@ts-ignore */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -177,16 +179,17 @@ ConditionBuilder.propTypes = {
    * Optional prop if you want to pass a saved condition state.
    *  This object should respect the structure of condition state that is available in getConditionState callback
    */
+  /**@ts-ignore */
   initialState: PropTypes.shape({
     groups: PropTypes.arrayOf(
       PropTypes.shape({
-        groupOperator: PropTypes.string.isRequired,
-        statement: PropTypes.string.isRequired,
+        groupOperator: PropTypes.string,
+        statement: PropTypes.string,
         conditions: PropTypes.arrayOf(
           PropTypes.oneOfType([
             PropTypes.shape({
-              property: PropTypes.string.isRequired,
-              operator: PropTypes.string.isRequired,
+              property: PropTypes.string,
+              operator: PropTypes.string,
               value: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.arrayOf(
@@ -213,6 +216,7 @@ ConditionBuilder.propTypes = {
    * This is a mandatory prop that defines the input to the condition builder.
    
    */
+  /**@ts-ignore */
   inputConfig: PropTypes.shape({
     properties: PropTypes.arrayOf(
       PropTypes.shape({
@@ -263,10 +267,11 @@ ConditionBuilder.propTypes = {
    * The message id will be one of [   "ifText","addConditionText",   "addConditionGroupText",   "addSubgroupText",   "conditionText",   "propertyText",   "operatorText",   "valueText",   "connectorText",   "conditionRowText","conditionRowGroupText","conditionBuilderText","actionSectionText",   "removeConditionText",   "addConditionRowText",   "startText",   "endText",   "clearSearchText",   "actionsText",   "then",   "removeActionText",   "addActionText",   "invalidText",  "invalidNumberWarnText"]
 ]
    */
+  /**@ts-ignore */
   translateWithId: PropTypes.func,
   /* TODO: add types and DocGen for all props. */
   /**
-   * Provide the condition builder variant: sentence/ tree
+   * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
-  variant: PropTypes.oneOf(['tree', 'sentence']),
+  variant: PropTypes.oneOf(['Non-Hierarchical', 'Hierarchical']),
 };

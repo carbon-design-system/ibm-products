@@ -13,12 +13,25 @@ import { Checkmark } from '@carbon/react/icons';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../../utils/useTranslations';
+import { PropertyConfigOption } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
-export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
+interface ItemOptionProps {
+  conditionState: {
+    label?: string;
+    value?: string;
+  };
+  config: PropertyConfigOption['config'] & { isStatement?: boolean };
+  onChange: (value: string, e: Event) => void;
+}
+export const ItemOption = ({
+  conditionState = {},
+  config = {},
+  onChange,
+}: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
-  const contentRef = useRef();
+  const contentRef = useRef<HTMLDivElement>(null);
   const [propertyText, clearSearchText] = useTranslations([
     'propertyText',
     'clearSearchText',
@@ -28,16 +41,19 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
 
   const selection = conditionState.value;
 
-  const filteredItems = allOptions?.filter((opt) =>
-    opt.label.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredItems = searchValue
+    ? allOptions?.filter((opt) =>
+        opt.label?.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : allOptions;
 
   useEffect(() => {
     //this will focus the first input field in the popover
 
     if (contentRef.current) {
-      const firstFocusableElement =
-        contentRef.current.querySelector('input, button,li');
+      const firstFocusableElement = contentRef.current?.querySelector(
+        'input, button,li'
+      ) as HTMLInputElement;
 
       if (firstFocusableElement) {
         firstFocusableElement.focus();
@@ -55,11 +71,18 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   };
 
   const getAriaLabel = () => {
-    return conditionState.label
-      ? conditionState.label
-      : conditionState.property
-      ? conditionState.property
-      : propertyText;
+    return conditionState.label ? conditionState.label : propertyText;
+  };
+
+  const getStatementContent = (option) => {
+    return (
+      <div className={`${blockClass}__statement_wrapper`}>
+        <div>
+          {option.text1} ({option.connector})
+        </div>
+        <div>{option.text2}</div>
+      </div>
+    );
   };
 
   if (!allOptions) {
@@ -67,7 +90,7 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
   }
   return (
     <div className={`${blockClass}__item-option`} ref={contentRef}>
-      {allOptions.length > popOverSearchThreshold && (
+      {popOverSearchThreshold && allOptions.length > popOverSearchThreshold && (
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
@@ -93,12 +116,14 @@ export const ItemOption = ({ conditionState = {}, config = {}, onChange }) => {
               onKeyUp={() => {
                 return false;
               }}
-              onClick={(evt) => onClickHandler(evt, option, isSelected)}
+              onClick={(evt) => onClickHandler(evt, option)}
             >
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {option.label}
+                  {config.isStatement
+                    ? getStatementContent(option)
+                    : option.label}
                 </span>
                 {isSelected && (
                   <Checkmark className={`${blockClass}__checkmark`} />

@@ -9,18 +9,29 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close } from '@carbon/react/icons';
+/**@ts-ignore */
 import { Section, Heading } from '@carbon/react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import ConditionBuilderAdd from '../ConditionBuilderAdd/ConditionBuilderAdd';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import { useTranslations } from '../utils/useTranslations';
 import { ItemOptionForValueField } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOptionForValueField';
+import { Action, Option } from '../ConditionBuilder.types';
+import { blockClass } from '../utils/util';
 
-const ConditionBuilderActions = ({ actions, className }) => {
-  const { actionState, setActionState } = useContext(ConditionBuilderContext);
+interface ConditionBuilderActionsProps {
+  actions: Action[] | Option[];
+  className?: string;
+}
+const ConditionBuilderActions = ({
+  actions,
+  className,
+}: ConditionBuilderActionsProps) => {
+  const { actionState = [], setActionState } = useContext(
+    ConditionBuilderContext
+  );
   const [showDeletionPreview, setShowDeletionPreview] = useState(-1);
   const [
     actionsText,
@@ -44,15 +55,15 @@ const ConditionBuilderActions = ({ actions, className }) => {
       label: undefined,
       popoverToOpen: 'valueField',
     };
-    setActionState([...actionState, action]);
+    setActionState?.([...actionState, action]);
   };
 
-  const onchangeHandler = (selectedId, actionIndex) => {
+  const onchangeHandler = (selectedId: string, actionIndex: number) => {
     const action = actions.find((action) => action.id === selectedId); //fetch the selected action from the input action array
 
     // same actions can be added multiple times
     const newAction = { ...action, id: actionState[actionIndex].id };
-    setActionState([
+    setActionState?.([
       ...actionState.slice(0, actionIndex),
       newAction,
       ...actionState.slice(actionIndex + 1),
@@ -60,9 +71,9 @@ const ConditionBuilderActions = ({ actions, className }) => {
   };
 
   const onRemove = (selectedId) => {
-    setActionState(actionState.filter((action) => action.id !== selectedId));
+    setActionState?.(actionState.filter((action) => action.id !== selectedId));
   };
-  const handleShowDeletionPreview = (index) => {
+  const handleShowDeletionPreview = (index: number) => {
     setShowDeletionPreview(index);
   };
   const handleHideDeletionPreview = () => {
@@ -100,7 +111,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
             <ConditionBuilderItem
               label={action.label}
               title={actionsText}
-              condition={action}
+              condition={action as Action}
               data-name="valueField"
               type="option"
             >
@@ -109,7 +120,7 @@ const ConditionBuilderActions = ({ actions, className }) => {
                   value: action.label,
                 }}
                 onChange={(selection) => onchangeHandler(selection.id, index)}
-                config={{ options: actions }}
+                config={{ options: actions as Option[] }}
               />
             </ConditionBuilderItem>
             <span role="gridcell" aria-label={removeActionText}>

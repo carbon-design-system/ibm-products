@@ -5,22 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { ForwardedRef, useRef } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
-import { pkg } from '../../../../settings';
 import PropTypes from 'prop-types';
 import { useTranslations } from '../../utils/useTranslations';
+import { Condition } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
-const blockClass = `${pkg.prefix}--condition-builder`;
-
+interface ConditionBuilderItemDate {
+  conditionState: Condition;
+  onChange: (date: string) => void;
+  parentRef: ForwardedRef<HTMLDivElement>;
+}
 export const ConditionBuilderItemDate = ({
   conditionState,
   onChange,
   parentRef,
 }) => {
-  const DatePickerInputRef = useRef();
+  const DatePickerInputRef = useRef<HTMLDivElement>(null);
   const [startText, endText] = useTranslations(['startText', 'endText']);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';

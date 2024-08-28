@@ -9,10 +9,28 @@ import React from 'react';
 import cx from 'classnames';
 
 import PropTypes from 'prop-types';
-import { Tooltip } from '@carbon/react';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
-import { WarningAltFilled } from '@carbon/react/icons';
+import { PopoverAlignment, Tooltip } from '@carbon/react';
+import { CarbonIconType, WarningAltFilled } from '@carbon/react/icons';
 import { usePrefix } from '@carbon/react';
+import { blockClass } from '../utils/util';
+
+interface ConditionBuilderButtonProps {
+  className?: string;
+  label: string;
+  hideLabel?: boolean;
+  tooltipAlign?: PopoverAlignment;
+  renderIcon?: CarbonIconType;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
+  onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  showToolTip?: boolean;
+  wrapperProps?: object;
+  isInvalid?: boolean;
+  wrapperClassName?: string;
+  tabIndex?: number;
+}
 
 export const ConditionBuilderButton = ({
   className,
@@ -31,13 +49,13 @@ export const ConditionBuilderButton = ({
   wrapperClassName,
   tabIndex,
   ...rest
-}) => {
+}: ConditionBuilderButtonProps) => {
   const carbonPrefix = usePrefix();
   const Button = () => {
     const dataName = rest['data-name'] ?? '';
     return (
       <button
-        tabIndex={tabIndex != undefined ? tabIndex : -1}
+        tabIndex={tabIndex !== undefined ? tabIndex : -1}
         className={cx([
           className,
           `${blockClass}__button`,

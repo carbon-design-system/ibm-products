@@ -14,7 +14,7 @@ test.describe('HTTPErrorOther @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'HTTPErrorOther',
-      id: 'ibm-products-patterns-http-errors-httperrorother--with-all-props-set',
+      id: 'deprecated-http-errors-httperrorother--with-all-props-set',
       globals: {
         carbonTheme: 'white',
         errorCodeLabel: 'Error 502',

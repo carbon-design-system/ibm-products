@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import {
+  blockClass,
   checkForHoldingKey,
   focusThisField,
   focusThisItem,
+  HIERARCHICAL_VARIANT,
   manageTabIndexAndFocus,
   traverseClockVise,
   traverseReverse,
@@ -151,9 +152,9 @@ const handleKeyPressForPopover = (
       if (isMultiSelect === 'true') {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, for other elements trigger click
+          evt.preventDefault();
           document.activeElement?.click();
         }
-        evt.preventDefault();
       } else {
         if (document.activeElement.type !== 'button') {
           //for button , enter key is click which already handled by framework, else trigger click
@@ -177,7 +178,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
   switch (evt.key) {
     case 'ArrowRight':
       evt.preventDefault();
-      if (variant == 'tree') {
+      if (variant == HIERARCHICAL_VARIANT) {
         let allCellsInRow = Array.from(
           evt.target
             .closest('[role="row"]')
@@ -185,7 +186,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
         );
         if (allCellsInRow.length === 1) {
           evt.target = evt.target.closest('[role="row"]');
-          handleRowNavigationTree(evt, conditionBuilderRef, variant);
+          handleRowNavigationHierarchical(evt, conditionBuilderRef, variant);
           //focus next row
         } else if (evt.target.getAttribute('role') == 'row') {
           //when current focus is on a row, then we need to enter inside and focus the first cell of that row
@@ -210,7 +211,7 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
       break;
     case 'ArrowLeft':
       evt.preventDefault();
-      if (variant == 'tree') {
+      if (variant == HIERARCHICAL_VARIANT) {
         if (evt.target.getAttribute('role') !== 'row') {
           //when any cell is focussed, arrow left will select the previous cell or current row
 
@@ -241,8 +242,8 @@ const handleKeyPressForMainContent = (evt, conditionBuilderRef, variant) => {
     case 'ArrowUp':
     case 'ArrowDown':
       evt.preventDefault();
-      if (variant == 'tree') {
-        handleRowNavigationTree(evt, conditionBuilderRef, variant);
+      if (variant == HIERARCHICAL_VARIANT) {
+        handleRowNavigationHierarchical(evt, conditionBuilderRef, variant);
       } else {
         handleRowNavigation(evt, conditionBuilderRef, variant);
       }
@@ -282,7 +283,7 @@ const handleRowNavigation = (evt, conditionBuilderRef, variant) => {
     conditionBuilderRef
   );
 };
-const handleRowNavigationTree = (evt, conditionBuilderRef, variant) => {
+const handleRowNavigationHierarchical = (evt, conditionBuilderRef, variant) => {
   const rows = getRows(conditionBuilderRef);
   const currentRowIndex = getRowIndex(evt.target, conditionBuilderRef);
   let nextRowIndex = currentRowIndex;
@@ -341,7 +342,7 @@ const navigateToNextRowCell = (
       nextRow?.querySelector(`[data-name="${itemName}"]`),
       conditionBuilderRef
     );
-  } else if (variant === 'tree') {
+  } else if (variant === HIERARCHICAL_VARIANT) {
     //when the next row is a if statement , then that row is focused. From any cell of last row of an group , arrow down select the next row (if)
     manageTabIndexAndFocus(nextRow, conditionBuilderRef);
   }

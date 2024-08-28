@@ -46,6 +46,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { handleKeyPress } from './utils/commonEventHandlers';
 import { pkg } from '../../settings';
 import { removeCellSelections } from './utils/removeCellSelections';
@@ -294,7 +295,15 @@ export let DataSpreadsheet = React.forwardRef(
       const currentHeaders: Array<any> = [];
       if (Object.keys(currentColumns).length > 0) {
         Object.keys(currentColumns).forEach((itemIndex) => {
-          if (currentColumns[itemIndex].Header) {
+          if (typeof currentColumns[itemIndex].Header === 'object') {
+            if (currentColumns[itemIndex].column_name) {
+              currentHeaders.push(currentColumns[itemIndex].column_name);
+            } else {
+              currentHeaders.push(
+                getNodeTextContent(currentColumns[itemIndex].Header)
+              );
+            }
+          } else if (currentColumns[itemIndex].Header) {
             currentHeaders.push(currentColumns[itemIndex].Header);
           }
         });

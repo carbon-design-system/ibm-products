@@ -8,13 +8,18 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import uuidv4 from '../../../global/js/utils/uuidv4';
+import {
+  Action,
+  ConditionBuilderContextProps,
+  ConditionBuilderState,
+} from '../ConditionBuilder.types';
 
-export const emptyState = {
+export const emptyState: ConditionBuilderState = {
   operator: 'or',
   groups: [
     {
       groupOperator: 'and',
-      statement: 'if',
+      statement: 'ifAll',
       id: uuidv4(),
       conditions: [
         {
@@ -29,44 +34,36 @@ export const emptyState = {
   ],
 };
 
-export const ConditionBuilderContext = createContext();
+export const ConditionBuilderContext =
+  createContext<ConditionBuilderContextProps>({
+    rootState: {
+      groups: [],
+    },
+  });
 
-// const rootReducer=(state,action)=>{
-//   switch(action.type){
-//   case 'update':
-//      ;
-//     return {
-//       ...state,
-//       ...action.payload
-//     }
-//     break;
-//     default:
-//       return state;
-//   }
-
-// }
-
-export const ConditionBuilderProvider = (props) => {
-  const [rootState, setRootState] = useState({
+export const ConditionBuilderProvider: React.FC<
+  ConditionBuilderContextProps
+> = (props) => {
+  const [rootState, setRootState] = useState<ConditionBuilderState>({
     groups: [],
   });
-  const [actionState, setActionState] = useState([]);
+  const [actionState, setActionState] = useState<Action[]>([]);
+
+  const contextValue: ConditionBuilderContextProps = {
+    rootState,
+    setRootState,
+    actionState,
+    setActionState,
+    inputConfig: props.inputConfig,
+    popOverSearchThreshold: props.popOverSearchThreshold,
+    getOptions: props.getOptions,
+    variant: props.variant,
+    translateWithId: props.translateWithId,
+    conditionBuilderRef: props.conditionBuilderRef,
+  };
 
   return (
-    <ConditionBuilderContext.Provider
-      value={{
-        rootState,
-        setRootState,
-        actionState,
-        setActionState,
-        inputConfig: props.inputConfig,
-        popOverSearchThreshold: props.popOverSearchThreshold,
-        getOptions: props.getOptions,
-        variant: props.variant,
-        translateWithId: props.translateWithId,
-        conditionBuilderRef: props.conditionBuilderRef,
-      }}
-    >
+    <ConditionBuilderContext.Provider value={contextValue}>
       {
         // eslint-disable-next-line react/prop-types
         props.children
@@ -84,6 +81,7 @@ ConditionBuilderProvider.propTypes = {
   /**
    * ref of condition builder
    */
+  /**@ts-ignore */
   conditionBuilderRef: PropTypes.object,
 
   /**
@@ -100,6 +98,7 @@ ConditionBuilderProvider.propTypes = {
    * This is a mandatory prop that defines the input to the condition builder.
     
    */
+  /**@ts-ignore */
   inputConfig: PropTypes.shape({
     properties: PropTypes.arrayOf(
       PropTypes.shape({
@@ -149,7 +148,7 @@ ConditionBuilderProvider.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * Provide the condition builder variant: sentence/ tree
+   * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
   variant: PropTypes.string.isRequired,
 };

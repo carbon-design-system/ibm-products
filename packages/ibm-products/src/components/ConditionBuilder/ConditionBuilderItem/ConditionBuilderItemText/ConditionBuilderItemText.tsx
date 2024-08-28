@@ -10,31 +10,41 @@ import React from 'react';
 import { TextArea, TextInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
-import { checkIsValid } from '../../utils/util';
+import { blockClass, checkIsValid } from '../../utils/util';
+import {
+  Condition,
+  PropertyConfigText,
+  PropertyConfigTextArea,
+} from '../../ConditionBuilder.types';
 
+interface ConditionBuilderItemTextProps {
+  conditionState: Condition;
+  config: PropertyConfigText | PropertyConfigTextArea;
+  onChange: (value: string) => void;
+  type: 'textarea' | 'text';
+}
 export const ConditionBuilderItemText = ({
   conditionState,
   onChange,
   config,
   type,
-}) => {
+}: ConditionBuilderItemTextProps) => {
   const inputProps = {
-    labelText: conditionState.property,
+    ...config,
     hideLabel: true,
     value: checkIsValid(conditionState.value) ? conditionState.value : '',
     id: conditionState.property?.replace(/\s/g, ''),
     onChange: (evt) => {
       onChange(evt.target.value);
     },
-    ...config,
+    labelText: conditionState.property,
   };
   return (
     <div className={`${blockClass}__item-text`}>
       {type == 'textarea' ? (
-        <TextArea {...inputProps} />
+        <TextArea {...(inputProps as PropertyConfigTextArea['config'])} />
       ) : (
-        <TextInput {...inputProps} />
+        <TextInput {...(inputProps as PropertyConfigText['config'])} />
       )}
     </div>
   );

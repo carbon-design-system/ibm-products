@@ -8,12 +8,23 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
-const ConditionPreview = ({ previewType, group, colorIndex }) => {
+import { ConditionGroup } from '../ConditionBuilder.types';
+import { blockClass } from '../utils/util';
+
+interface ConditionPreviewProps {
+  previewType: 'newGroup' | 'subGroup' | 'condition';
+  group: ConditionGroup;
+  colorIndex?: number;
+}
+const ConditionPreview = ({
+  previewType,
+  group,
+  colorIndex,
+}: ConditionPreviewProps) => {
   const [animate, setAnimate] = useState(false);
   const [propertyText, operatorText, valueText, ifText] = useTranslations([
     'valueText',

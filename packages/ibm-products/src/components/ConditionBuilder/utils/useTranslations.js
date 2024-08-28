@@ -9,10 +9,12 @@ import { useContext } from 'react';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
 
-export const useTranslations = (translationKeys) => {
+export const useTranslations = (translationKeys, alterTranslationKeyMap) => {
   const { translateWithId } = useContext(ConditionBuilderContext);
-
   return translationKeys.map((translationKey) => {
+    if (alterTranslationKeyMap?.[translationKey]) {
+      translationKey = alterTranslationKeyMap[translationKey];
+    }
     if (translateWithId?.(translationKey)) {
       return translateWithId(translationKey);
     } else if (translationsObject[translationKey]) {

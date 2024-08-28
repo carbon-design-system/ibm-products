@@ -9,15 +9,23 @@ import React, { useEffect, useState } from 'react';
 
 import { TimePicker, TimePickerSelect, SelectItem } from '@carbon/react';
 import PropTypes from 'prop-types';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
+import { PropertyConfigTime } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
-export const ConditionBuilderItemTime = ({ onChange, config }) => {
+interface ConditionBuilderItemTime {
+  onChange: (value: string | undefined) => void;
+  config: PropertyConfigTime['config'];
+}
+export const ConditionBuilderItemTime = ({
+  onChange,
+  config,
+}: ConditionBuilderItemTime) => {
   const [timeValue, setTimeValue] = useState('');
   const [dayZoneValue, setDayZoneValue] = useState('AM');
   const [timeZoneValue, setTimeZoneValue] = useState(config?.timeZones?.[0]);
 
   useEffect(() => {
-    let timeToUpdate = `${timeValue ?? ''} ${dayZoneValue ?? ''} ${
+    const timeToUpdate = `${timeValue ?? ''} ${dayZoneValue ?? ''} ${
       timeZoneValue ?? ''
     }`;
     onChange(timeValue ? timeToUpdate : undefined);

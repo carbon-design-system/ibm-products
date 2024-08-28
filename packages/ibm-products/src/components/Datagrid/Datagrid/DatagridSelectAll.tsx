@@ -9,7 +9,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import { handleSelectAllRowData } from './addons/stateReducer';
+import { handleOnPageSelectAllRowData } from './addons/stateReducer';
 import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -41,7 +41,6 @@ const SelectAll = (datagridState: DataGridState) => {
     dispatch,
     rows,
     getRowId,
-    toggleAllRowsSelected,
     onAllRowSelect,
   } = datagridState;
   const isFirstColumnStickyLeft =
@@ -63,30 +62,15 @@ const SelectAll = (datagridState: DataGridState) => {
   const { onChange, ...selectProps } = getProps() as DataGridToggleAllRowsProps;
   const { indeterminate } = selectProps;
 
-  const handleSelectAllChange = (event) => {
-    if (indeterminate) {
-      handleSelectAllRowData({
-        dispatch,
-        rows,
-        getRowId,
-        indeterminate: true,
-        isChecked: undefined,
-      });
-      toggleAllRowsSelected(false);
-      onAllRowSelect?.(rows, event);
+  const handleOnPageSelectAllChange = (event) => {
+    handleOnPageSelectAllRowData({
+      dispatch,
+      rows,
+      getRowId,
+      isChecked: event.target.checked,
+      indeterminate,
+    });
 
-      return onChange?.({
-        target: { checked: false },
-      } as any);
-    }
-    // deselect all rows first
-    (getToggleAllRowsSelectedProps as any)?.()?.onChange({
-      target: { checked: false },
-    });
-    // select all row on current page
-    (getToggleAllPageRowsSelectedProps as any)().onChange({
-      target: { checked: true },
-    });
     onAllRowSelect?.(rows, event);
     return onChange?.(event);
   };
@@ -104,7 +88,7 @@ const SelectAll = (datagridState: DataGridState) => {
         }
       )}
       name={`${tableId}-select-all-checkbox-name`}
-      onSelect={handleSelectAllChange}
+      onSelect={handleOnPageSelectAllChange}
       disabled={isFetching || selectProps?.disabled}
       id={`${tableId}-select-all-checkbox-id`}
     />

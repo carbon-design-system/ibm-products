@@ -19,10 +19,7 @@ import {
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  NON_HIERARCHICAL_VARIANT,
-  HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
+import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 export default {
   title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,

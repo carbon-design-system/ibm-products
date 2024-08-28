@@ -39,6 +39,7 @@ const DatagridBatchActionsToolbar = (
     state: { selectedRowIds },
     toggleAllRowsSelected,
     toolbarBatchActions,
+    toolbarBatchActionsDisplayMin,
     setGlobalFilter,
     rows,
     dispatch,
@@ -94,8 +95,10 @@ const DatagridBatchActionsToolbar = (
     // and if there is enough available space to render all the items
     if (
       toolbarBatchActions &&
-      toolbarBatchActions?.length <= 3 &&
-      !displayAllInMenu
+      !displayAllInMenu &&
+      ((!toolbarBatchActionsDisplayMin && toolbarBatchActions?.length <= 3) ||
+        (toolbarBatchActionsDisplayMin !== undefined &&
+          toolbarBatchActions?.length <= toolbarBatchActionsDisplayMin))
     ) {
       return;
     }
@@ -121,7 +124,17 @@ const DatagridBatchActionsToolbar = (
         menuAlignment="bottom"
       >
         {toolbarBatchActions?.map((batchAction, index) => {
-          const hidden = index < 2 && !displayAllInMenu;
+          let hidden =
+            toolbarBatchActionsDisplayMin === undefined &&
+            index < 2 &&
+            !displayAllInMenu;
+          if (
+            toolbarBatchActionsDisplayMin !== undefined &&
+            index < toolbarBatchActionsDisplayMin &&
+            !displayAllInMenu
+          ) {
+            hidden = true;
+          }
           if (!hidden) {
             return renderItem(batchAction, index);
           }
@@ -177,14 +190,22 @@ const DatagridBatchActionsToolbar = (
         toolbarBatchActions &&
         toolbarBatchActions?.map((batchAction, index) => {
           if (
-            (index < 2 && toolbarBatchActions.length > 3) ||
-            (index < 3 && toolbarBatchActions.length <= 3)
+            (!toolbarBatchActionsDisplayMin &&
+              index < 2 &&
+              toolbarBatchActions.length > 3) ||
+            (index < 3 && toolbarBatchActions.length <= 3) ||
+            (toolbarBatchActionsDisplayMin !== undefined &&
+              index < toolbarBatchActionsDisplayMin)
           ) {
             return (
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
+                className={cx({
+                  [`${carbon.prefix}--noLabel`]:
+                    !batchAction.label || batchAction.label === '',
+                })}
                 iconDescription={batchAction.label}
                 tabIndex={totalSelected > 0 ? 0 : -1}
               >

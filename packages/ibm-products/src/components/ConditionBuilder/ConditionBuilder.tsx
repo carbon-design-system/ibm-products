@@ -20,13 +20,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
-import {
-  blockClass,
-  NON_HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
-import { handleKeyDown } from './utils/handleKeyboardEvents';
 
 import { ConditionBuilderProps } from './ConditionBuilder.types';
+
+import { handleKeyDown } from './utils/handleKeyboardEvents';
+import { blockClass, NON_HIERARCHICAL_VARIANT } from './utils/util';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */

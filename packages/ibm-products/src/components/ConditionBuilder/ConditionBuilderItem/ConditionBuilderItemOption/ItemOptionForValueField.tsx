@@ -19,7 +19,6 @@ import { SelectSkeleton } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../../utils/useTranslations';
 import {
   Condition,
@@ -27,6 +26,7 @@ import {
   Option,
   PropertyConfigOption,
 } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
 interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };

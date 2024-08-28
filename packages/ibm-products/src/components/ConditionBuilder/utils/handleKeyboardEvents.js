@@ -7,12 +7,10 @@
 
 import {
   blockClass,
-  HIERARCHICAL_VARIANT,
-} from '../ConditionBuilderContext/DataConfigs';
-import {
   checkForHoldingKey,
   focusThisField,
   focusThisItem,
+  HIERARCHICAL_VARIANT,
   manageTabIndexAndFocus,
   traverseClockVise,
   traverseReverse,

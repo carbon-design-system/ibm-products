@@ -294,15 +294,11 @@ PanelInstant.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },

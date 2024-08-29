@@ -464,6 +464,7 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
+      toolbarBatchActionsDisplayMin: 3,
       rowActions: getRowActions(),
       onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
       onAllRowSelect: (rows, event) =>

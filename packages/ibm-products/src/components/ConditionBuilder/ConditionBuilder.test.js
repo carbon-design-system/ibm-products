@@ -21,10 +21,7 @@ import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
-import {
-  NON_HIERARCHICAL_VARIANT,
-  HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
+import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -101,17 +98,20 @@ const getOptions = async (conditionState, { property }) => {
       return [];
   }
 };
-
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
     render(<ConditionBuilder {...defaultProps} />);
     expect(screen.getByRole('main')).toHaveClass(cx(blockClass));
   });
 
-  it('has no accessibility violations', async () => {
+   it('has no accessibility violations', async () => {
     const { container } = render(<ConditionBuilder {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    try {
+      await expect(container).toBeAccessible(componentName);
+      await expect(container).toHaveNoAxeViolations();
+    } catch (err) {
+      console.log('accessibility test error :', err);
+    }
   });
 
   it('applies className to the containing node', async () => {

@@ -11,14 +11,14 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
+import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import {
   blockClass,
+  focusThisField,
   HIERARCHICAL_VARIANT,
+  manageTabIndexAndFocus,
   NON_HIERARCHICAL_VARIANT,
-  statementConfig,
-} from '../ConditionBuilderContext/DataConfigs';
-import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import { focusThisField, manageTabIndexAndFocus } from '../utils/util';
+} from '../utils/util';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import uuidv4 from '../../../global/js/utils/uuidv4';
@@ -30,6 +30,7 @@ import {
   ConditionGroup,
   LogicalOperator,
 } from '../ConditionBuilder.types';
+import { useDataConfigs } from '../utils/useDataConfigs';
 /**
  *
  *  state - this is the current group that is being rendered . This can be a inner group or outer group
@@ -62,6 +63,7 @@ const ConditionGroupBuilder = ({
       'conditionText',
       'conditionBuilderText',
     ]);
+  const { statementConfig } = useDataConfigs();
   const { variant, conditionBuilderRef } = useContext(ConditionBuilderContext);
   const [showConditionPreview, setShowConditionPreview] = useState(-1);
   const [showConditionSubGroupPreview, setShowConditionSubGroupPreview] =
@@ -260,7 +262,7 @@ const ConditionGroupBuilder = ({
           ? group.conditions.slice(0, conditionIndex + 1)
           : []),
         {
-          statement: 'if',
+          statement: 'ifAll',
           groupOperator: 'and',
           conditions: [
             {
@@ -301,7 +303,6 @@ const ConditionGroupBuilder = ({
     const groupOperator = statementConfig.find(
       (statement) => statement.id == updatedStatement
     )?.connector as LogicalOperator;
-
     onChange({
       ...group,
       groupOperator: groupOperator,
@@ -395,7 +396,7 @@ const ConditionGroupBuilder = ({
                   focusThisField(evt, conditionBuilderRef);
                   onStatementChangeHandler(v);
                 }}
-                config={{ options: statementConfig }}
+                config={{ options: statementConfig, isStatement: true }}
               />
             </ConditionBuilderItem>
           </div>

@@ -48,7 +48,7 @@ const SelectAll = (datagridState: DataGridState) => {
     columns[0]?.sticky === 'left' && withStickyColumn;
   if (hideSelectAll || radio) {
     return (
-      <div
+      <th
         className={cx(`${blockClass}__head-hidden-select-all`, {
           [`${blockClass}__select-all-sticky-left`]:
             /* istanbul ignore next */
@@ -91,7 +91,8 @@ const SelectAll = (datagridState: DataGridState) => {
   };
 
   return (
-    <div
+    <TableSelectAll
+      {...selectProps}
       className={cx(
         `${blockClass}__head-select-all`,
         `${blockClass}__checkbox-cell`,
@@ -101,15 +102,11 @@ const SelectAll = (datagridState: DataGridState) => {
             isFirstColumnStickyLeft && Number(windowSize) > 671,
         }
       )}
-    >
-      <TableSelectAll
-        {...selectProps}
-        name={`${tableId}-select-all-checkbox-name`}
-        onSelect={handleSelectAllChange}
-        disabled={isFetching || selectProps?.disabled}
-        id={`${tableId}-select-all-checkbox-id`}
-      />
-    </div>
+      name={`${tableId}-select-all-checkbox-name`}
+      onSelect={handleSelectAllChange}
+      disabled={isFetching || selectProps?.disabled}
+      id={`${tableId}-select-all-checkbox-id`}
+    />
   );
 };
 

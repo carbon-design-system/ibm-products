@@ -10,7 +10,9 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
-.graph {
+$story-class: 'productive-card-stories';
+
+.#{$story-class}__graph {
   width: 200px;
   height: 100px;
   border: 10px solid $border-subtle-01;
@@ -20,4 +22,15 @@
   margin: 0 auto $spacing-06 auto;
   border-top-left-radius: 110px;
   border-top-right-radius: 110px;
+}
+.#{$story-class}__visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  visibility: inherit;
+  white-space: nowrap;
 }

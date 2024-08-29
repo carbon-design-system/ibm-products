@@ -29,7 +29,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'IBM Products/Components/Decorators/Decorator',
+  title: 'Experimental/Components/Decorators/Decorator',
   component: Decorator,
   tags: ['autodocs'],
   parameters: {

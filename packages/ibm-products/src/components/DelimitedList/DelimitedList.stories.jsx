@@ -15,7 +15,7 @@ import { DocsPage } from './DelimitedList.docs-page';
 const storyClass = 'delimited-list-stories';
 
 export default {
-  title: 'IBM Products/Components/Delimited list/DelimitedList',
+  title: 'Experimental/Components/Delimited list/DelimitedList',
   component: DelimitedList,
   tags: ['autodocs'],
   parameters: {

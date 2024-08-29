@@ -987,7 +987,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1009,7 +1008,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1994,7 +1992,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2017,7 +2014,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2345,7 +2341,7 @@ describe(componentName, () => {
     const user = userEvent.setup({
       advanceTimers: jest.advanceTimersByTime,
     });
-    const { keyboard } = user;
+    const { keyboard, type } = user;
     const dropdownOnChange = jest.fn();
     render(
       <FilteringUsage
@@ -2410,11 +2406,6 @@ describe(componentName, () => {
     await click(dropdownOption);
     expect(dropdownOnChange).toHaveBeenCalledTimes(1);
 
-    // Add beginning date but no end date, confirm no changes are made since we need a beginning and end date
-    const dateInput = screen.getAllByPlaceholderText('mm/dd/yyyy');
-    await click(dateInput[0]);
-    await keyboard('01/01/2024');
-    expect(dateInput[0].value).toEqual('01/01/2024');
     // Apply radio button change
     const designerRadio = screen.getByRole('radio', { name: 'Designer' });
     await click(designerRadio);
@@ -2422,11 +2413,15 @@ describe(componentName, () => {
     // Apply valid date filter
     const dateInputs = screen.getAllByPlaceholderText('mm/dd/yyyy');
     await click(dateInputs[0]);
-    await keyboard('01/01/2024');
-    await click(dateInputs[1]);
+    // Clear previously value from date input
+    dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
+    await type(dateInputs[0], '01/01/2024');
+    await keyboard('[Escape]');
+    await keyboard('[Tab]');
     await keyboard('01/02/2024');
-    expect(dateInput[0].value).toEqual('01/01/2024');
-    expect(dateInput[1].value).toEqual('01/02/2024');
+    await keyboard('[Escape]');
+    expect(dateInputs[0].value).toEqual('01/01/2024');
+    expect(dateInputs[1].value).toEqual('01/02/2024');
     // Reset to "Any" radio filter
     const anyRadio = screen.getByRole('radio', { name: 'Any' });
     await click(anyRadio);
@@ -2776,6 +2771,7 @@ const TestBatch = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridPagination,
+      toolbarBatchActionsDisplayMin: 2,
     },
     useSelectRows,
     useSelectAllWithToggle,
@@ -2855,11 +2851,15 @@ describe('batch action testing', () => {
       await click(screen.getByLabelText(getBatchActions()[1].label));
       expect(addOnClickFn).toHaveBeenCalledTimes(1);
 
-      const menuButton = screen.getByRole('button', { name: /More/i });
-      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
-      const selectAllButton = screen.getByRole('button', {
-        name: /Select all/i,
-      });
+      const moreButton = screen.getByText(/More/i);
+      expect(moreButton).toBeVisible();
+      const downloadButton = screen.queryByText(/Download/i);
+      expect(downloadButton).toBeNull();
+
+      const menuButton = screen.getByText(/More/i);
+      const cancelButton = screen.getByText(/Cancel/i);
+      const selectAllButton = screen.getByText(/^Select all \(\d+\)$/);
+
       expect(menuButton).toBeInTheDocument();
       await click(menuButton);
       const options = Array.from(

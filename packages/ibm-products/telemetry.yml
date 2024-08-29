@@ -104,6 +104,7 @@ collect:
         - formTitle
         - fullHeightDatagrid
         - getActionsState
+        - getAsyncSubRows
         - getConditionState
         - getFilterFlyoutProps
         - getOptions
@@ -552,6 +553,7 @@ collect:
         # ConditionConnector
         - operator
         # ConditionPreview
+        - colorIndex
         - previewType
         # CreateFullPage
         - breadcrumbsOverflowAriaLabel

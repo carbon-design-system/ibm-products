@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.9.0-rc.0...@carbon/ibm-products-community@0.9.0) (2024-08-28)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+# [0.9.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.7.0-rc.0...@carbon/ibm-products-community@0.9.0-rc.0) (2024-08-20)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#5664](https://github.com/carbon-design-system/ibm-products/issues/5664)) ([aa77fed](https://github.com/carbon-design-system/ibm-products/commit/aa77fedd2543836346544f068b60aa7329066af1))
+
+
+
+
+
+# [0.8.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.8.0-rc.0...@carbon/ibm-products-community@0.8.0) (2024-08-14)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+# [0.8.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.7.0-rc.0...@carbon/ibm-products-community@0.8.0-rc.0) (2024-08-05)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
+# [0.7.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.7.0-rc.0...@carbon/ibm-products-community@0.7.0) (2024-07-31)
+
+**Note:** Version bump only for package @carbon/ibm-products-community
+
+
+
+
+
 # [0.7.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.6.0...@carbon/ibm-products-community@0.7.0-rc.0) (2024-07-22)
 
 

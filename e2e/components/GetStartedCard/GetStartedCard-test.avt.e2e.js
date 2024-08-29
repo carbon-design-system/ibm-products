@@ -15,7 +15,7 @@ test.describe('GetStartedCard @avt', () => {
     await visitStory(page, {
       component: 'GetStartedCard',
       // cspell:disable-next-line
-      id: 'ibm-products-onboarding-getstartedcard--default',
+      id: 'experimental-onboarding-getstartedcard--default',
       globals: {
         carbonTheme: 'white',
       },

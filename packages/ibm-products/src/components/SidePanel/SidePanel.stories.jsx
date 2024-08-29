@@ -90,7 +90,7 @@ const rowData = [
 
 const actions_1 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -114,12 +114,12 @@ const actions_3 = [
 
 const actions_4 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -132,7 +132,7 @@ const actions_5 = [
     kind: 'ghost',
   },
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -153,12 +153,12 @@ const actions_6 = [
 
 const actions_7 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -171,12 +171,12 @@ const actions_7 = [
 
 const actions_8 = [
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -189,17 +189,17 @@ const actions_8 = [
 
 const actions_9 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -243,7 +243,7 @@ const ChildrenContent = () => {
   const [notesValue, setNotesValue] = useState('');
   return (
     <div className={`${prefix}body-content`}>
-      <h5>Section</h5>
+      <h3 className={`${prefix}body-subheading`}>Section</h3>
       <div className={`${prefix}text-inputs`}>
         <TextInput
           labelText="Input A"
@@ -289,7 +289,9 @@ const ChildrenContent = () => {
           onChange={(event) => setNotesValue(event.target.value)}
         />
       </div>
-      <h5 className={`${prefix}content-subtitle`}>Section</h5>
+      <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+        Section
+      </h3>
       {renderDataTable()}
     </div>
   );
@@ -301,7 +303,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
     <>
       {currentStep === 0 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Main view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Main view
+          </h3>
           {renderDataTable()}
           <Button
             kind="tertiary"
@@ -313,7 +317,9 @@ const ChildrenContentWithSteps = ({ currentStep, setCurrentStep }) => {
       )}
       {currentStep === 1 && (
         <div className={`${prefix}body-content`}>
-          <h5 className={`${prefix}content-subtitle`}>Detail view</h5>
+          <h3 className={`${prefix}content-subtitle ${prefix}body-subheading`}>
+            Detail view
+          </h3>
           {renderDataTable()}
         </div>
       )}
@@ -421,85 +427,6 @@ docs: {
 const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const testRef = useRef();
-  return (
-    <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        ref={testRef}
-        slug={slug && sampleSlug}
-      >
-        {!minimalContent && <ChildrenContent />}
-      </SidePanel>
-    </>
-  );
-};
-
-// eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  return (
-    <>
-      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        currentStep={currentStep}
-        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
-        actions={actionSets[actions]}
-        slug={slug && sampleSlug}
-      >
-        <ChildrenContentWithSteps
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      </SidePanel>
-    </>
-  );
-};
-
-// eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <>
-      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
-        <Column lg={16} md={8} sm={4}>
-          <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        slug={slug && sampleSlug}
-      >
-        <ChildrenContent />
-      </SidePanel>
-    </>
-  );
-};
-
-const ReturnFocusToOpenButtonTemplate = ({
-  minimalContent,
-  actions,
-  slug,
-  ...args
-}) => {
-  const [open, setOpen] = useState(false);
-  const testRef = useRef();
   const buttonRef = useRef();
 
   return (
@@ -521,6 +448,72 @@ const ReturnFocusToOpenButtonTemplate = ({
         launcherButtonRef={buttonRef}
       >
         {!minimalContent && <ChildrenContent />}
+      </SidePanel>
+    </>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const StepTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        currentStep={currentStep}
+        onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
+        actions={actionSets[actions]}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        <ChildrenContentWithSteps
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </SidePanel>
+    </>
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const SlideInTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
+        <Column lg={16} md={8} sm={4}>
+          <Button
+            ref={buttonRef}
+            onClick={() => setOpen(!open)}
+            className={`${prefix}toggle`}
+          >
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
+      </Grid>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        actions={actionSets[actions]}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        <ChildrenContent />
       </SidePanel>
     </>
   );
@@ -581,11 +574,6 @@ export const SpecifyElementToHaveInitialFocus = SlideOverTemplate.bind({});
 SpecifyElementToHaveInitialFocus.args = {
   actions: 0,
   selectorPrimaryFocus: '#side-panel-story-text-input-a',
-  ...defaultStoryProps,
-};
-
-export const ReturnFocusToOpenButton = ReturnFocusToOpenButtonTemplate.bind({});
-ReturnFocusToOpenButton.args = {
   ...defaultStoryProps,
 };
 

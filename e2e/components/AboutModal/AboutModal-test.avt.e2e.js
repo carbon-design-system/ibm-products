@@ -14,7 +14,7 @@ test.describe('AboutModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'AboutModal',
-      id: 'ibm-products-patterns-about-modal-aboutmodal--about-modal',
+      id: 'ibm-products-components-about-modal-aboutmodal--about-modal',
       globals: {
         carbonTheme: 'white',
       },

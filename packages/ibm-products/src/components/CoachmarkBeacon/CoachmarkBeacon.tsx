@@ -5,16 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
+import { BEACON_KIND, useCoachmark } from '../Coachmark';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
+// Import portions of React that are needed.
+import React from 'react';
 import cx from 'classnames';
-import { BEACON_KIND, useCoachmark } from '../Coachmark';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-beacon`;
@@ -24,7 +23,7 @@ const defaults = {
   kind: 'default',
 };
 
-interface CoachmarkBeaconProps {
+export interface CoachmarkBeaconProps {
   /**
    * Optional class name for this component.
    */
@@ -76,6 +75,7 @@ export let CoachmarkBeacon = React.forwardRef<
         className={`${blockClass}__target`}
       >
         <svg className={`${blockClass}__center`}>
+          <title>{label}</title>
           <circle r={1} cx={38} cy={38} />
         </svg>
       </button>

@@ -11,13 +11,13 @@ import React, {
   ReactNode,
   forwardRef,
 } from 'react';
-import PropTypes from 'prop-types';
-import { Card } from '../Card';
 
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { prepareProps } from '../../global/js/utils/props-helper';
-import { pkg } from '../../settings';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { Card } from '../Card';
+import PropTypes from 'prop-types';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const componentName = 'ProductiveCard';
 
@@ -37,7 +37,7 @@ type overflowAction = {
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
-interface ProductiveCardProps extends PropsWithChildren {
+export interface ProductiveCardProps extends PropsWithChildren {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines. Note- href will supersede onClick
    */
@@ -138,11 +138,16 @@ interface ProductiveCardProps extends PropsWithChildren {
    * Determines title size
    */
   titleSize?: 'default' | 'large';
+
+  /**
+   * Tooltip icon description
+   */
+  iconDescription?: string;
 }
 
 export let ProductiveCard = forwardRef(
   (
-    { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
+    { actionsPlacement = 'top', iconDescription, ...rest }: ProductiveCardProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const validProps = prepareProps(rest, [
@@ -155,7 +160,13 @@ export let ProductiveCard = forwardRef(
     ]);
     return (
       <Card
-        {...{ ...validProps, actionsPlacement, ref, productive: true }}
+        {...{
+          ...validProps,
+          iconDescription,
+          actionsPlacement,
+          ref,
+          productive: true,
+        }}
         {...getDevtoolsProps(componentName)}
       />
     );
@@ -204,6 +215,10 @@ ProductiveCard.propTypes = {
     PropTypes.object,
     PropTypes.node,
   ]),
+  /**
+   * Tooltip icon description
+   */
+  iconDescription: PropTypes.string,
   /**
    * Optional label for the top of the card
    */

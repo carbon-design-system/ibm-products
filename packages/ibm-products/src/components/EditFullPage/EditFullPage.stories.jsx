@@ -34,7 +34,7 @@ import {
 import DocsPage from './EditFullPage.docs-page';
 
 export default {
-  title: 'IBM Products/Patterns/Edit and update/EditFullPage',
+  title: 'Experimental/Patterns/Edit and update/EditFullPage',
   component: EditFullPage,
   tags: ['autodocs'],
   parameters: {

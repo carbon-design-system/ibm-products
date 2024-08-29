@@ -10,6 +10,7 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { Error403SVG } from './assets/Error403SVG';
 
 import { FullPageError } from '.';
 
@@ -88,12 +89,29 @@ describe(componentName, () => {
     render(<FullPageError {...defaultProps} />);
     expect(screen.getByText(title)).toBeInTheDocument();
   });
-  it('renders custom svg illustration if kind is custom', async () => {
+  it('renders generic svg illustration if kind is custom', async () => {
     const { container } = render(
       <FullPageError {...defaultProps} kind="custom" />
     );
     const svgElement = container.querySelector(`.${blockClass}__svg`);
     expect(svgElement).toHaveClass(`${blockClass}__custom`);
+  });
+  it('renders 403 svg illustration if it is passed as customSvg and kind is custom', async () => {
+    const { container } = render(
+      <FullPageError
+        {...defaultProps}
+        kind="custom"
+        customSvg={
+          <Error403SVG
+            className={`${blockClass}__svg ${blockClass}__403`}
+            title={title}
+          />
+        }
+      />
+    );
+
+    const svgElement = container.querySelector(`.${blockClass}__svg`);
+    expect(svgElement).toHaveClass(`${blockClass}__403`);
   });
   it('renders 404 svg illustration if kind is 404', async () => {
     const { container } = render(

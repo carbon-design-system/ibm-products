@@ -52,6 +52,11 @@ export interface FullPageErrorProps {
    * This will be for the main title of the FullPageError component
    */
   title: string;
+
+  /**
+   * Custom svg that can be used for custom full page errors
+   */
+  customSvg?: JSX.Element;
 }
 
 // Default values for props
@@ -73,6 +78,7 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
       label,
       kind = defaults.kind,
       title,
+      customSvg,
 
       // Collect any other property values passed in.
       ...rest
@@ -97,7 +103,9 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
         ),
       },
       custom: {
-        svg: (
+        svg: customSvg ? (
+          customSvg
+        ) : (
           <ErrorGenericSVG
             className={`${blockClass}__svg ${blockClass}__custom`}
             title={title}
@@ -155,6 +163,11 @@ FullPageError.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * Custom svg that can be used for custom full page errors
+   */
+  customSvg: PropTypes.element,
   /**
    * String that will provide the description for the error code. <br/>
    * This is optional for 403 and 404 kinds, and passing this would override their default descriptions.

@@ -6,7 +6,6 @@ on:
       - main
       - v1
       - 'release/v2*'
-      - 'chore/v2*'
   merge_group:
     types: [checks_requested]
 

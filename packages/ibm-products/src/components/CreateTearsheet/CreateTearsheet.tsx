@@ -33,6 +33,7 @@ import {
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+import { ExperimentalAlternateSubmit } from './CreateTearsheetStep';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -43,11 +44,10 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 
 export interface StepsContextType {
   currentStep: number;
-  setIsCustomButtonDisabled: Dispatch<SetStateAction<boolean>>;
-  setIsCustomButtonHide: Dispatch<SetStateAction<boolean>>;
+  setExperimentalAlternateSubmit: Dispatch<
+    SetStateAction<ExperimentalAlternateSubmit>
+  >;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
-  setOnCustomButtonClick: (fn: any) => void;
-  setOnCustomButtonChangeName: (fn: any) => void;
   setOnPrevious: (fn: any) => void;
   setOnNext: (fn: any) => void;
   setOnMount: (fn: any) => void;
@@ -82,9 +82,9 @@ interface CreateTearsheetProps extends PropsWithChildren {
   className?: string;
 
   /**
-   * The custom button text
+   * The experimentalAlternate submit button text
    */
-  customButtonText?: string;
+  experimentalAlternateSubmitText?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -179,7 +179,7 @@ export let CreateTearsheet = forwardRef(
       cancelButtonText,
       children,
       className,
-      customButtonText,
+      experimentalAlternateSubmitText,
       description,
       influencerWidth = 'narrow',
       initialStep,
@@ -211,11 +211,8 @@ export let CreateTearsheet = forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-    const [onCustomButtonClick, setOnCustomButtonClick] = useState();
-    const [onCustomButtonChangeName, setOnCustomButtonChangeName] = useState();
-    const [isCustomButtonDisabled, setIsCustomButtonDisabled] = useState(false);
-    const [isCustomButtonHide, setIsCustomButtonHide] = useState(false);
-
+    const [experimentalAlternateSubmit, setExperimentalAlternateSubmit] =
+      useState<ExperimentalAlternateSubmit>({});
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -284,12 +281,10 @@ export let CreateTearsheet = forwardRef(
       nextButtonText,
       isSubmitting,
       componentBlockClass: blockClass,
-      onCustomButtonClick,
-      isCustomButtonDisabled,
-      isCustomButtonHide,
-      customButtonText: onCustomButtonChangeName
-        ? onCustomButtonChangeName
-        : customButtonText,
+      experimentalAlternateSubmit,
+      experimentalAlternateSubmitText: experimentalAlternateSubmit.labelText
+        ? experimentalAlternateSubmit.labelText
+        : experimentalAlternateSubmitText,
       setCreateComponentActions: setCreateTearsheetActions,
     });
 
@@ -321,16 +316,11 @@ export let CreateTearsheet = forwardRef(
             <StepsContext.Provider
               value={{
                 currentStep,
+                setExperimentalAlternateSubmit,
                 setIsDisabled,
-                setIsCustomButtonDisabled,
-                setIsCustomButtonHide,
                 setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
                 setOnMount: (fn) => setOnMount(() => fn),
-                setOnCustomButtonClick: (fn) =>
-                  setOnCustomButtonClick(() => fn),
-                setOnCustomButtonChangeName: (fn) =>
-                  setOnCustomButtonChangeName(() => fn),
                 setStepData,
                 stepData,
               }}
@@ -379,14 +369,14 @@ CreateTearsheet.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The custom button text
-   */
-  customButtonText: PropTypes.string,
-
-  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * The experimentalAlternate submit button text
+   */
+  experimentalAlternateSubmitText: PropTypes.string,
 
   /**
    * Specifies elements to focus on first on render.

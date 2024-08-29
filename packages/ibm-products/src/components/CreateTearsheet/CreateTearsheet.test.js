@@ -49,8 +49,9 @@ const submitButtonText = 'Submit';
 const cancelButtonText = 'Cancel';
 const backButtonText = 'Back';
 const nextButtonText = 'Next';
-const customButtonText = 'Skip';
-const customButtonChangeText = 'Skip step';
+const experimentalAlternateSubmitText = 'Alternate submit';
+const experimentalAlternateLabelText = 'Skip all step';
+const onExperimentalAlternateSubmitClickFn = jest.fn();
 const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
@@ -61,7 +62,6 @@ const dataTestId = uuidv4();
 const ref = React.createRef();
 const onMountFn = jest.fn();
 const ariaLabel = 'test-aria-label';
-const onCustomButtonClickFn = jest.fn();
 const defaultProps = {
   title,
   submitButtonText,
@@ -82,10 +82,12 @@ const renderCreateTearsheet = ({
   onPrevious = onPreviousStepFn,
   finalOnNextFn = finalStepOnNext,
   rejectOnSubmitNext = false,
-  isCustomButtonDisabled = false,
-  isCustomButtonHide = false,
-  customButtonChangeText = customButtonText,
-  onCustomButtonClick = onCustomButtonClickFn,
+  experimentalAlternateSubmit = {
+    labelText: '',
+    disabled: false,
+    hideAltSubmit: false,
+    onClick: onExperimentalAlternateSubmitClickFn,
+  },
   ...rest
 }) =>
   render(
@@ -100,10 +102,12 @@ const renderCreateTearsheet = ({
         onMount={onMountFn}
         description={step1Description}
         subtitle={step1Subtitle}
-        isCustomButtonDisabled={isCustomButtonDisabled}
-        isCustomButtonHide={isCustomButtonHide}
-        customButtonChangeText={customButtonChangeText}
-        onCustomButtonClick={onCustomButtonClick}
+        experimentalAlternateSubmit={{
+          labelText: experimentalAlternateSubmit.labelText,
+          disabled: experimentalAlternateSubmit.disabled,
+          hideAltSubmit: experimentalAlternateSubmit.hideAltSubmit,
+          onClick: experimentalAlternateSubmit.onClick,
+        }}
       >
         step 1 content
         <button type="button" disabled>
@@ -486,54 +490,60 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should show custom button', () => {
+  it('should show experimentalAlternateSubmit button (4th button)', () => {
     renderCreateTearsheet({
       ...defaultProps,
-      customButtonText: customButtonText,
+      experimentalAlternateSubmitText,
     });
-    const customButton = screen.getByText(customButtonText);
-    expect(customButton).toBeInTheDocument();
+    const button = screen.getByText(experimentalAlternateSubmitText);
+    expect(button).toBeInTheDocument();
   });
 
-  it('should disabled custom button', () => {
+  it('should disabled experimentalAlternateSubmit button', () => {
     renderCreateTearsheet({
       ...defaultProps,
-      customButtonText: customButtonText,
-      isCustomButtonDisabled: true,
+      experimentalAlternateSubmitText,
+      experimentalAlternateSubmit: { disabled: true },
     });
-    const customButton = screen.getByText(customButtonText);
-    expect(customButton).toBeDisabled();
+    const button = screen.getByText(experimentalAlternateSubmitText);
+    expect(button).toBeDisabled();
   });
 
-  it('should hide custom button', () => {
+  it('should hide experimentalAlternateSubmit button', () => {
     renderCreateTearsheet({
       ...defaultProps,
-      customButtonText: customButtonText,
-      isCustomButtonHide: true,
+      experimentalAlternateSubmitText,
+      experimentalAlternateSubmit: { hideAltSubmit: true },
     });
-    const customButton = screen.queryByText(customButtonText);
-    expect(customButton).toBeNull();
+    const button = screen.queryByText(experimentalAlternateSubmitText);
+    expect(button).toBeNull();
   });
 
-  it('should update custom button text', async () => {
+  it('should rename experimentalAlternateSubmit button text', () => {
     renderCreateTearsheet({
       ...defaultProps,
-      customButtonText: customButtonText,
-      customButtonChangeText: customButtonChangeText,
+      experimentalAlternateSubmitText,
+      experimentalAlternateSubmit: {
+        labelText: experimentalAlternateLabelText,
+      },
     });
 
-    const customButton = screen.getByText(customButtonChangeText);
-    expect(customButton).toBeInTheDocument();
+    const button = screen.getByText(experimentalAlternateLabelText);
+    expect(button).toBeInTheDocument();
   });
-  it('should call onCustomButtonClick', async () => {
+  it('should call experimentalAlternateSubmit onClick', async () => {
     renderCreateTearsheet({
       ...defaultProps,
-      customButtonText: customButtonText,
-      onCustomButtonClick: onCustomButtonClickFn,
+      experimentalAlternateSubmitText,
+      experimentalAlternateSubmit: {
+        onClick: onExperimentalAlternateSubmitClickFn,
+      },
     });
-    const customButton = screen.getByText(customButtonText);
-    await act(() => click(customButton));
-    await waitFor(() => expect(onCustomButtonClickFn).toHaveBeenCalled());
+    const button = screen.getByText(experimentalAlternateSubmitText);
+    await act(() => click(button));
+    await waitFor(() =>
+      expect(onExperimentalAlternateSubmitClickFn).toHaveBeenCalled()
+    );
   });
 
   it('should create a console warning when using CreateTearsheet with only one step', async () => {

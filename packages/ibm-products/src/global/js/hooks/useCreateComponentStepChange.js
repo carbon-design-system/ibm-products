@@ -30,10 +30,8 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
-  customButtonText,
-  onCustomButtonClick,
-  isCustomButtonDisabled,
-  isCustomButtonHide,
+  experimentalAlternateSubmit,
+  experimentalAlternateSubmitText,
 }) => {
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
@@ -124,9 +122,9 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
-    const handleCustom = () => {
-      if (typeof onCustomButtonClick === 'function') {
-        onCustomButtonClick();
+    const handleExperimentalAlternateSubmit = () => {
+      if (typeof experimentalAlternateSubmit?.onClick === 'function') {
+        experimentalAlternateSubmit.onClick();
       }
     };
     if (stepData?.length > 0) {
@@ -150,13 +148,16 @@ export const useCreateComponentStepChange = ({
             : onUnmount,
         kind: 'ghost',
       });
-      if (customButtonText && !isCustomButtonHide) {
+      if (
+        experimentalAlternateSubmitText &&
+        !experimentalAlternateSubmit?.hideAltSubmit
+      ) {
         buttons.push({
-          key: 'create-action-button-custom',
-          label: customButtonText,
-          onClick: handleCustom,
+          key: 'create-action-button-experimentalAlternateSubmit',
+          label: experimentalAlternateSubmitText,
+          onClick: handleExperimentalAlternateSubmit,
           kind: 'secondary',
-          disabled: isCustomButtonDisabled,
+          disabled: experimentalAlternateSubmit?.disabled,
         });
       }
       buttons.push({
@@ -197,9 +198,7 @@ export const useCreateComponentStepChange = ({
     onPrevious,
     setLoadingPrevious,
     loadingPrevious,
-    isCustomButtonDisabled,
-    isCustomButtonHide,
-    onCustomButtonClick,
-    customButtonText,
+    experimentalAlternateSubmit,
+    experimentalAlternateSubmitText,
   ]);
 };

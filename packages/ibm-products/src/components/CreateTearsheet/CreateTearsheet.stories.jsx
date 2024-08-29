@@ -12,7 +12,7 @@ import DocsPage from './CreateTearsheet.docs-page';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
-import { MultiStepWithCustomButton } from './preview-components/MultiStepWithCustomButton';
+import { MultiStepWithExperimentalAlternateSubmit } from './preview-components/MultiStepWithExperimentalAlternateSubmit';
 
 export default {
   title: 'IBM Products/Patterns/Create flows/CreateTearsheet',
@@ -47,7 +47,7 @@ const createTearsheetProps = {
   firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
-const customButtonText = 'Custom';
+const experimentalAlternateSubmitText = 'Alternate submit';
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});
 multiStepTearsheet.storyName = 'Create tearsheet';
@@ -67,9 +67,12 @@ withErrorState.args = {
   ...createTearsheetProps,
 };
 
-export const withCustomButton = MultiStepWithCustomButton.bind({});
-withCustomButton.storyName = 'Create tearsheet with custom button';
+export const withCustomButton = MultiStepWithExperimentalAlternateSubmit.bind(
+  {}
+);
+withCustomButton.storyName =
+  'Create tearsheet with experimentalAlternateSubmit button';
 withCustomButton.args = {
   ...createTearsheetProps,
-  customButtonText,
+  experimentalAlternateSubmitText,
 };

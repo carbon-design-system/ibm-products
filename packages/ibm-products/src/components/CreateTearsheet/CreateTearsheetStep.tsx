@@ -75,11 +75,6 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   className?: string;
 
   /**
-   * Updates the text of the custom button in the tearsheet step.
-   */
-  customButtonChangeText?: string;
-
-  /**
    * Sets an optional description on the step component
    */
   description?: React.ReactNode;
@@ -88,6 +83,11 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
    * This will conditionally disable the submit button in the multi step Tearsheet
    */
   disableSubmit?: boolean;
+
+  /**
+   * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+   */
+  experimentalAlternateSubmit?: ExperimentalAlternateSubmit;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -104,21 +104,6 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
    * This optional prop will indicate an error icon on the progress indicator step item
    */
   invalid?: boolean;
-
-  /**
-   * Disable custom button
-   */
-  isCustomButtonDisabled?: boolean;
-
-  /**
-   * Hide custom button
-   */
-  isCustomButtonHide?: boolean;
-
-  /**
-   * Optional function to be called when you click to custom button.
-   */
-  onCustomButtonClick?: () => void;
 
   /**
    * Optional function to be called on initial mount of a step.
@@ -159,6 +144,21 @@ interface PreviousStateProps {
 type CreateTearsheetStepProps = CreateTearsheetStepBaseProps &
   fieldsetLegendTextProps;
 
+/**
+ * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+ *
+ * @property {string} [labelText] - Optional text to replace the default button text.
+ * @property {boolean} [disabled] - If true, the button will be disabled and not clickable.
+ * @property {boolean} [hideAltSubmit] - If true, the button will be hidden from view.
+ * @property {() => void} [onClick] - Optional click handler function to be executed when the button is clicked.
+ */
+export type ExperimentalAlternateSubmit = {
+  labelText?: string;
+  disabled?: boolean;
+  hideAltSubmit?: boolean;
+  onClick?: () => void;
+};
+
 export let CreateTearsheetStep = forwardRef(
   (
     {
@@ -166,17 +166,14 @@ export let CreateTearsheetStep = forwardRef(
 
       children,
       className,
-      customButtonChangeText,
       description,
       disableSubmit,
+      experimentalAlternateSubmit,
       fieldsetLegendText,
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
       introStep,
       invalid,
-      isCustomButtonDisabled,
-      isCustomButtonHide,
-      onCustomButtonClick,
       onMount,
       onNext,
       onPrevious,
@@ -218,13 +215,13 @@ export let CreateTearsheetStep = forwardRef(
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
         stepsContext?.setOnMount(onMount);
-        stepsContext?.setOnCustomButtonClick(onCustomButtonClick);
-        stepsContext?.setOnCustomButtonChangeName(customButtonChangeText);
+        stepsContext?.setExperimentalAlternateSubmit({
+          ...experimentalAlternateSubmit,
+        });
       }
     }, [
       onMount,
-      onCustomButtonClick,
-      customButtonChangeText,
+      experimentalAlternateSubmit,
       stepsContext,
       stepNumber,
       previousState?.currentStep,
@@ -267,8 +264,6 @@ export let CreateTearsheetStep = forwardRef(
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
-        stepsContext?.setIsCustomButtonDisabled(!!isCustomButtonDisabled);
-        stepsContext?.setIsCustomButtonHide(!!isCustomButtonHide);
       }
     }, [
       stepsContext,
@@ -278,8 +273,6 @@ export let CreateTearsheetStep = forwardRef(
       onPrevious,
       stepRef,
       stepRefValue,
-      isCustomButtonDisabled,
-      isCustomButtonHide,
     ]);
 
     const renderDescription = () => {
@@ -360,11 +353,6 @@ CreateTearsheetStep.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Updates the text of the custom button in the tearsheet step.
-   */
-  customButtonChangeText: PropTypes.string,
-
-  /**
    * Sets an optional description on the step component
    */
   description: PropTypes.node,
@@ -373,6 +361,22 @@ CreateTearsheetStep.propTypes = {
    * This will conditionally disable the submit button in the multi step Tearsheet
    */
   disableSubmit: PropTypes.bool,
+
+  /**
+   * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+   *
+   * @property {string} [labelText] - Optional text to replace the default button text.
+   * @property {boolean} [disabled] - If true, the button will be disabled and not clickable.
+   * @property {boolean} [hideAltSubmit] - If true, the button will be hidden from view.
+   * @property {() => void} [onClick] - Optional click handler function to be executed when the button is clicked.
+   */
+  /**@ts-ignore*/
+  experimentalAlternateSubmit: PropTypes.shape({
+    labelText: PropTypes.string,
+    disabled: PropTypes.bool,
+    hideAltSubmit: PropTypes.bool,
+    onClick: PropTypes.func,
+  }),
 
   /**
    * This is the required legend text that appears above a fieldset html element for accessibility purposes.
@@ -407,21 +411,6 @@ CreateTearsheetStep.propTypes = {
    * This optional prop will indicate an error icon on the progress indicator step item
    */
   invalid: PropTypes.bool,
-
-  /**
-   * Disable custom button
-   */
-  isCustomButtonDisabled: PropTypes.bool,
-
-  /**
-   * Hide custom button
-   */
-  isCustomButtonHide: PropTypes.bool,
-
-  /**
-   * Optional function to be called when you click to custom button.
-   */
-  onCustomButtonClick: PropTypes.func,
 
   /**
    * Optional function to be called on initial mount of a step.

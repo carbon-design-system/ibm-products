@@ -16,7 +16,7 @@ import { SlugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepWithCustomButton = ({
+export const MultiStepWithExperimentalAlternateSubmit = ({
   backButtonText,
   cancelButtonText,
   className,
@@ -27,7 +27,7 @@ export const MultiStepWithCustomButton = ({
   slug,
   submitButtonText,
   title,
-  customButtonText,
+  experimentalAlternateSubmitText,
 }) => {
   const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
@@ -63,39 +63,48 @@ export const MultiStepWithCustomButton = ({
           })
         }
         slug={slug && SlugSample()}
-        customButtonText={customButtonText}
+        experimentalAlternateSubmitText={experimentalAlternateSubmitText}
       >
-        <CreateTearsheetStep title="Custom button" includeStep>
-          This step will show the custom button
+        <CreateTearsheetStep
+          title="Experimental alternate submit button"
+          includeStep
+        >
+          This step will show the configuration options for customizing the
+          behavior of the experimental alternate submit button
         </CreateTearsheetStep>
         <CreateTearsheetStep
-          title="Disabled custom button"
+          title="Disabled experimentalAlternateSubmit button"
           includeStep
-          isCustomButtonDisabled
+          experimentalAlternateSubmit={{ disabled: true }}
         >
-          This step will show the disabled custom button
+          This step will show the disabled experimentalAlternateSubmit button
         </CreateTearsheetStep>
         <CreateTearsheetStep
-          title="Change custom button name"
+          title="Change experimentalAlternateSubmit button name"
           includeStep
-          customButtonChangeText="Skip all steps"
-          onCustomButtonClick={clearCreateData}
+          experimentalAlternateSubmit={{
+            labelText: 'Skip all steps',
+            onClick: clearCreateData,
+          }}
         >
-          This step will show you how to rename a custom button
+          This step will show you how to rename a experimentalAlternateSubmit
+          button
         </CreateTearsheetStep>
         <CreateTearsheetStep
-          title="Hide custom button"
+          title="Hide experimentalAlternateSubmit button"
           includeStep
-          isCustomButtonHide
+          experimentalAlternateSubmit={{ hideAltSubmit: true }}
         >
-          This step will be used to hide the custom button
+          This step will be used to hide the experimentalAlternateSubmit button
         </CreateTearsheetStep>
         <CreateTearsheetStep
-          title="OnClick custom button"
+          title="OnClick experimentalAlternateSubmit button"
           includeStep
-          onCustomButtonClick={() => console.log('custom button clicked!')}
+          experimentalAlternateSubmit={{
+            onClick: () => console.log('button clicked!'),
+          }}
         >
-          This step will show onClick work on custom button
+          This step will show onClick work on experimentalAlternateSubmit button
         </CreateTearsheetStep>
       </CreateTearsheet>
     </div>

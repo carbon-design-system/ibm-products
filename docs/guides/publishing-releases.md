@@ -119,6 +119,9 @@ release team will need to do the following:
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
+  - [ ] Edit the generated release, and change the release from `pre-release` to
+        `latest`.
+        ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
 - [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 

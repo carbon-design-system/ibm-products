@@ -17399,13 +17399,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:4.0.6":
-  version: 4.0.6
-  resolution: "micromatch@npm:4.0.6"
+"micromatch@npm:4.0.8":
+  version: 4.0.8
+  resolution: "micromatch@npm:4.0.8"
   dependencies:
     braces: "npm:^3.0.3"
-    picomatch: "npm:^4.0.2"
-  checksum: ed95dc8d00dbe3795a0daf0f19f411714f4b39d888824f7b460f4bdbd8952b06628c64704c05b319aca27e2418628a6286b5595890ce9d0c53e5ae962435c83f
+    picomatch: "npm:^2.3.1"
+  checksum: 6bf2a01672e7965eb9941d1f02044fad2bd12486b5553dc1116ff24c09a8723157601dc992e74c911d896175918448762df3b3fd0a6b61037dd1a9766ddfbf58
   languageName: node
   linkType: hard
 
@@ -19478,13 +19478,6 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 60c2595003b05e4535394d1da94850f5372c9427ca4413b71210f437f7b2ca091dbd611c45e8b37d10036fa8eade25c1b8951654f9d3973bfa66a2ff4d3b08bc
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "picomatch@npm:4.0.2"
-  checksum: ce617b8da36797d09c0baacb96ca8a44460452c89362d7cb8f70ca46b4158ba8bc3606912de7c818eb4a939f7f9015cef3c766ec8a0c6bfc725fdc078e39c717
   languageName: node
   linkType: hard
 

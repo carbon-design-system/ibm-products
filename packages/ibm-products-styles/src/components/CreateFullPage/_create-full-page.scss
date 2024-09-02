@@ -25,10 +25,9 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   display: grid;
   height: 100%;
   color: $text-primary;
-  grid-template-rows: minmax(auto, 100%);
 
   &:has(.#{$block-class}__header) {
-    grid-template-rows: auto minmax(auto, 100%);
+    grid-template-rows: auto minmax(min-content, 100%);
   }
 }
 

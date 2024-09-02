@@ -67,6 +67,7 @@ const defaultHeader = [
     Header: 'Age',
     accessor: 'age',
     width: 50,
+    disableGlobalFilter: true,
   },
   {
     Header: 'Visits',
@@ -160,30 +161,43 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
-  customizeColumnsProps: {
-    onSaveColumnPrefs: (newColDefs) => {
-      console.log(newColDefs);
-    },
-    labels: {
-      findColumnPlaceholderLabel: 'Find column',
-      resetToDefaultLabel: 'Reset to default',
-      customizeTearsheetHeadingLabel: 'Customize columns',
-      primaryButtonTextLabel: 'Save',
-      secondaryButtonTextLabel: 'Cancel',
-      instructionsLabel:
-        'Deselect columns to hide them. Drag rows to change column order. These specifications will be saved if you leave and return to the data table.',
-      iconTooltipLabel: 'Customize columns',
-      assistiveTextInstructionsLabel:
-        'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-      assistiveTextDisabledInstructionsLabel:
-        'Reordering columns are disabled because they are filtered currently.',
-      selectAllLabel: 'Column name',
-    },
-  },
 };
 
 const ColumnCustomizationUsage = ({ ...args }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const [hiddenIndices, setHiddenIndices] = useState([]);
+
+  // const initialStateUpdate = React.useMemo(() => {
+  //   const initialState = {
+  //     pageSize: 10,
+  //     pageSizes: [5, 10, 25, 50],
+  //     hiddenColumns: ['age'],
+  //     columnOrder: [],
+  //   };
+  //   let hiddenColumns = ['age'];
+  //   hiddenIndices.forEach((index)=>{
+  //     if(!hiddenColumns.includes(defaultHeader[index].accessor)){
+  //       hiddenColumns.push(defaultHeader[index].accessor);
+  //     }
+  //   });
+  //   initialState.hiddenColumns = hiddenColumns;
+  //   return initialState;
+  // }, [hiddenIndices]);
+
+  const columns = React.useMemo(() => {
+    const header = [...defaultHeader];
+    header.forEach((headerItem) => {
+      hiddenIndices.some((index) => {
+        if (headerItem.accessor === index) {
+          headerItem.disableGlobalFilter = true;
+          return true;
+        } else {
+          headerItem.disableGlobalFilter = false;
+        }
+      });
+    });
+    return header;
+  }, [hiddenIndices]);
+
   const [data] = useState(makeData(10));
 
   const datagridState = useDatagrid(
@@ -200,6 +214,30 @@ const ColumnCustomizationUsage = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ...args.defaultGridProps,
+      customizeColumnsProps: {
+        onSaveColumnPrefs: (newColDefs) => {
+          // console.log(newColDefs);
+          const indices = newColDefs
+            .map((col, index) => (!col.isVisible ? col.id : null)) // Map to index if condition is true, else -1
+            .filter((col) => col !== null); // Filter out the -1 values
+          setHiddenIndices(indices);
+        },
+        labels: {
+          findColumnPlaceholderLabel: 'Find column',
+          resetToDefaultLabel: 'Reset to default',
+          customizeTearsheetHeadingLabel: 'Customize columns',
+          primaryButtonTextLabel: 'Save',
+          secondaryButtonTextLabel: 'Cancel',
+          instructionsLabel:
+            'Deselect columns to hide them. Drag rows to change column order. These specifications will be saved if you leave and return to the data table.',
+          iconTooltipLabel: 'Customize columns',
+          assistiveTextInstructionsLabel:
+            'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+          assistiveTextDisabledInstructionsLabel:
+            'Reordering columns are disabled because they are filtered currently.',
+          selectAllLabel: 'Column name',
+        },
+      },
     },
     useCustomizeColumns,
     useColumnOrder
@@ -320,6 +358,26 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
         },
       ],
       ...args.defaultGridProps,
+      customizeColumnsProps: {
+        onSaveColumnPrefs: (newColDefs) => {
+          console.log(newColDefs);
+        },
+        labels: {
+          findColumnPlaceholderLabel: 'Find column',
+          resetToDefaultLabel: 'Reset to default',
+          customizeTearsheetHeadingLabel: 'Customize columns',
+          primaryButtonTextLabel: 'Save',
+          secondaryButtonTextLabel: 'Cancel',
+          instructionsLabel:
+            'Deselect columns to hide them. Drag rows to change column order. These specifications will be saved if you leave and return to the data table.',
+          iconTooltipLabel: 'Customize columns',
+          assistiveTextInstructionsLabel:
+            'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+          assistiveTextDisabledInstructionsLabel:
+            'Reordering columns are disabled because they are filtered currently.',
+          selectAllLabel: 'Column name',
+        },
+      },
     },
     useCustomizeColumns,
     useColumnOrder,

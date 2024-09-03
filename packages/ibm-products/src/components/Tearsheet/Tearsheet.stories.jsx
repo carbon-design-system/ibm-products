@@ -157,7 +157,7 @@ const mainContent = (
 const tabs = (
   <div className="tearsheet-stories__tabs">
     <Tabs onChange={action('Tab selection changed')}>
-      <TabList aria-label="Tab list">
+      <TabList aria-label="Tab list" tabIndex={-1}>
         <Tab>Tab 1</Tab>
         <Tab>Tab 2</Tab>
         <Tab>Tab 3</Tab>

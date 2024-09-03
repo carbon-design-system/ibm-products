@@ -131,10 +131,18 @@ ActionBarOverflowItems.propTypes = {
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
   overflowAriaLabel: PropTypes.string,
+
   /**
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
   overflowItems: PropTypes.arrayOf(PropTypes.element),
+
+  /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  /**@ts-ignore */
+  overflowMenuRef: PropTypes.shape({ current: PropTypes.elementType })
+    .isRequired,
 
   /**
    * Optional tab index

@@ -369,6 +369,12 @@ ActionBar.propTypes = {
    */
   overflowAriaLabel: PropTypes.string.isRequired,
   /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  /**@ts-ignore */
+  overflowMenuRef: PropTypes.shape({ current: PropTypes.elementType })
+    .isRequired,
+  /**
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,

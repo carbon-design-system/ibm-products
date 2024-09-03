@@ -65,11 +65,11 @@ export interface TagSetProps extends PropsWithChildren {
    */
   align?: Align;
   /**
-   * label text for the show all search. **Note: Required if more than 10 tags**
+   * label text for the show all search.
    */
   allTagsModalSearchLabel?: string;
   /**
-   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   * placeholder text for the show all search.
    */
   allTagsModalSearchPlaceholderText?: string;
   /**
@@ -77,7 +77,7 @@ export interface TagSetProps extends PropsWithChildren {
    */
   allTagsModalTarget?: ReactNode;
   /**
-   * title for the show all modal. **Note: Required if more than 10 tags**
+   * title for the show all modal.
    */
   allTagsModalTitle?: string;
   /**
@@ -120,8 +120,6 @@ export interface TagSetProps extends PropsWithChildren {
   overflowType?: OverflowType;
   /**
    * label for the overflow show all tags link.
-   *
-   *  **Note: Required if more than 10 tags**
    */
   showAllTagsLabel?: string;
   /**

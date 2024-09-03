@@ -271,71 +271,18 @@ export const WithVirtualizedData = () => {
 
 export const Pagination = () => {
   const [data] = useState(makeData(100));
-
-  const columns = React.useMemo(
-    () => [
-      ...getColumns(data),
-      {
-        Header: '',
-        accessor: 'actions',
-        sticky: 'right',
-        isAction: true,
-      },
-    ],
-    []
-  );
-
-  const getRowActions = () => {
-    return [
-      {
-        id: 'edit',
-        itemText: 'Edit',
-        icon: Edit,
-        onClick: action('Clicked row action: edit'),
-      },
-
-      {
-        id: 'delete',
-        itemText: 'Delete',
-        icon: TrashCan,
-        onClick: action('Clicked row action: delete'),
-      },
-    ];
-  };
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState: {
-        pageSize: 10,
-        pageSizes: [5, 10, 25, 50],
-      },
-      DatagridPagination,
-      batchActions: true,
-      toolbarBatchActions: getBatchActions(),
-      DatagridActions,
-      DatagridBatchActions,
-      rowActions: getRowActions(),
-      onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
-      endPlugins: [useDisableSelectRows],
-      shouldDisableSelectRow: (row) => row.id % 15 === 0,
-      onAllRowSelect: (rows, event) =>
-        console.log('onAllRowsClick called', rows, event),
-      batchActionMenuButtonLabel: 'More',
+  const columns = React.useMemo(() => getColumns(data), []);
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    initialState: {
+      pageSize: 25,
+      pageSizes: [5, 10, 25, 50],
     },
-    useSelectRows,
-    // useSelectAllWithToggle,
-    useActionsColumn,
-    useStickyColumn
-  );
+    DatagridPagination,
+  });
 
-  return (
-    <Datagrid
-      datagridState={{ ...datagridState }}
-      ariaToolbarLabel="batch actions toolbar"
-    />
-  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const SelectableRow = () => {

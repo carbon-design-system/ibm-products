@@ -53,6 +53,7 @@ const delimiter = '----DELIMITER----';
 const denyList = [
   'chore(release): publish [skip ci]',
   'chore(telemetry): update telemetry config',
+  'chore(release): v2.',
 ];
 
 /**

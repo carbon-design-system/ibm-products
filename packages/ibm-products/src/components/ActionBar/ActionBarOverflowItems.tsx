@@ -49,7 +49,7 @@ interface ActionBarOverflowItemProps extends PropsWithChildren {
   /**
    * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
    */
-  overflowMenuRef: ForwardedRef<HTMLDivElement>;
+  overflowMenuRef?: ForwardedRef<HTMLDivElement>;
   /**
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
@@ -141,8 +141,10 @@ ActionBarOverflowItems.propTypes = {
    * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
    */
   /**@ts-ignore */
-  overflowMenuRef: PropTypes.shape({ current: PropTypes.elementType })
-    .isRequired,
+  overflowMenuRef: PropTypes.oneOfType([
+    PropTypes.shape({ current: PropTypes.elementType }),
+    PropTypes.object,
+  ]),
 
   /**
    * Optional tab index

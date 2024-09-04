@@ -89,7 +89,7 @@ interface ActionBarProps extends PropsWithChildren {
   /**
    * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
    */
-  overflowMenuRef: ForwardedRef<HTMLDivElement>;
+  overflowMenuRef?: ForwardedRef<HTMLDivElement>;
   /**
    * align tags to right of available space
    */
@@ -372,8 +372,10 @@ ActionBar.propTypes = {
    * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
    */
   /**@ts-ignore */
-  overflowMenuRef: PropTypes.shape({ current: PropTypes.elementType })
-    .isRequired,
+  overflowMenuRef: PropTypes.oneOfType([
+    PropTypes.shape({ current: PropTypes.elementType }),
+    PropTypes.object,
+  ]),
   /**
    * align tags to right of available space
    */

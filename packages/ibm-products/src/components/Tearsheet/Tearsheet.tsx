@@ -243,6 +243,7 @@ Tearsheet.propTypes = {
     ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -254,6 +255,7 @@ Tearsheet.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore*/
         onClick: Button.propTypes.onClick,
       })
     ),

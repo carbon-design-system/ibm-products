@@ -199,7 +199,7 @@ type PageActionProps =
        * - maxWidth: maximum number of pixels the content will grow to
        * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
        */
-      pageActions: ButtonProps[] | PageAction;
+      pageActions: ButtonProps<'button'>[] | PageAction;
       /**
        * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
        * containing the page actions. This label is used as the display content of the dropdown button menu.
@@ -311,7 +311,7 @@ interface PageHeaderBaseProps extends PropsWithChildren {
    * Content for the navigation area in the PageHeader. Should
    * be a React element that is normally a Carbon Tabs component. Optional.
    */
-  navigation?: object;
+  navigation?: ReactNode;
   // Supports Tabs
   /**
    * class name applied to the page actions overflow options
@@ -1151,7 +1151,7 @@ export let PageHeader = React.forwardRef(
                     `${blockClass}__button-set-menu-options`
                   )}
                   onWidthChange={handleWidthChange}
-                  buttons={pageActions as ButtonProps[]}
+                  buttons={pageActions as ButtonProps<'button'>[]}
                   buttonSetOverflowLabel={
                     pageActionsOverflowLabel as NonNullable<ReactNode>
                   }
@@ -1215,6 +1215,7 @@ PageHeader.propTypes = {
   /**@ts-ignore */
   actionBarItems: PropTypes.arrayOf(
     PropTypes.shape({
+      /**@ts-ignore*/
       ...prepareProps(Button.propTypes, [
         'kind',
         'size',
@@ -1222,7 +1223,9 @@ PageHeader.propTypes = {
         'tooltipAlignment',
       ]),
       iconDescription: PropTypes.string.isRequired,
+      /**@ts-ignore*/
       onClick: Button.propTypes.onClick,
+      /**@ts-ignore*/
       renderIcon: Button.propTypes.renderIcon.isRequired,
     })
   ),
@@ -1408,8 +1411,10 @@ PageHeader.propTypes = {
   pageActions: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         key: PropTypes.string.isRequired,
+        /**@ts-ignore*/
         kind: Button.propTypes.kind,
         label: PropTypes.node,
         onClick: PropTypes.func,

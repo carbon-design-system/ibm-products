@@ -47,7 +47,7 @@ type SidePanelBaseProps = {
   /**
    * Sets the action toolbar buttons
    */
-  actionToolbarButtons?: ButtonProps<any>[];
+  actionToolbarButtons?: ButtonProps<React.ElementType>[];
 
   /**
    * The primary actions to be shown in the side panel. Each action is
@@ -57,7 +57,7 @@ type SidePanelBaseProps = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<any>[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * Determines if the title will animate on scroll

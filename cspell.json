@@ -1,7 +1,11 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": ["contributors", "html", "packages"],
+  "dictionaries": [
+    "contributors",
+    "html",
+    "packages"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -91,7 +95,6 @@
     "disttags",
     "dragbar",
     "draggable",
-    "interstitialscreenviewmodule",
     "draghandle",
     "dragmode",
     "editinplace",
@@ -110,15 +113,17 @@
     "homescreen",
     "httperror",
     "httperrorother",
-    "interstitialscreenview",
     "importmodal",
     "inlineedit",
-    "noninteractive",
     "inlinetip",
+    "interstitialscreenview",
+    "interstitialscreenviewmodule",
     "listbox",
     "loglevel",
     "namor",
+    "nocheck",
     "nodataemptystate",
+    "noninteractive",
     "nonlinearreading",
     "noreply",
     "overridable",

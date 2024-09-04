@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -106,8 +106,7 @@ const commonTests = (Ts, name, props, testActions) => {
     });
   });
 
-  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
-  it.skip('has no accessibility violations when closed', async () => {
+  it('has no accessibility violations when closed', async () => {
     const { container } = render(
       <Ts {...{ ...props, closeIconDescription, label, title }} />
     );

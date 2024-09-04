@@ -32,6 +32,7 @@ collect:
         - assistiveText
         - assistiveTextDisabledInstructionsLabel
         - assistiveTextInstructionsLabel
+        - autoAlign
         - backButtonText
         - backgroundColor
         - batchActionMenuButtonLabel
@@ -219,7 +220,10 @@ collect:
         - onContextMenuLabel
         - onContextMenuValue
         - onDataUpdate
+        - onFocus
         - onMount
+        - onMouseEnter
+        - onMouseLeave
         - onNext
         - onOverflowTagChange
         - onPrimaryButtonClick
@@ -343,6 +347,7 @@ collect:
         - title
         - titleSize
         - toolbarBatchActions
+        - toolbarBatchActionsDisplayMin
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
@@ -502,7 +507,6 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
-        - autoAlign
         - overlayClassName
         - overlayKind
         - overlayRef
@@ -537,9 +541,6 @@ collect:
         # ConditionBuilderButton
         - hideLabel
         - isInvalid
-        - onFocus
-        - onMouseEnter
-        - onMouseLeave
         - tooltipAlign
         - wrapperClassName
         - wrapperProps
@@ -549,7 +550,11 @@ collect:
         # ConditionBuilderItemDate
         - parentRef
         # ConditionBuilderProvider
+        - actionState
         - conditionBuilderRef
+        - rootState
+        - setActionState
+        - setRootState
         # ConditionConnector
         - operator
         # ConditionPreview
@@ -1101,12 +1106,13 @@ collect:
         - radio
         - selection
         - text
+        - textarea
         # General - updateMethod
         - batch
         - instant
         # General - variant
-        - sentence
-        - tree
+        - Hierarchical
+        - Non-Hierarchical
         # General - verticalPosition
         - lower
         - normal
@@ -1129,6 +1135,9 @@ collect:
         - floating
         - stacked
         - tooltip
+        # ConditionBlock - conjunction
+        - and
+        - or
         # ConditionPreview - previewType
         - condition
         - newGroup

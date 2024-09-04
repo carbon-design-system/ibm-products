@@ -168,9 +168,7 @@ const logo = (
 );
 
 const Template = (storyName, storyInitiallyOpen, props, context) => {
-  const [open, setOpen] = useState(
-    context.viewMode !== 'docs' && storyInitiallyOpen
-  );
+  const [open, setOpen] = useState(false);
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 

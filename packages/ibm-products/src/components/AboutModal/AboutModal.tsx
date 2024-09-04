@@ -12,14 +12,16 @@ import {
   ModalFooter,
   ModalHeader,
   Theme,
+  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { MutableRefObject, ReactNode, useEffect, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { useFocus } from '../../global/js/hooks/useFocus';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -136,9 +138,12 @@ export let AboutModal = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const bodyRef = useRef<HTMLElement | null | undefined>(null);
+    const localRef = useRef();
+    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();
     const renderPortalUse = usePortalTarget(portalTargetIn);
+    const { firstElement } = useFocus(modalRef);
 
     // We can't add a ref directly to the ModalBody, so track it in a ref
     // as the parent of the current bodyRef element
@@ -146,55 +151,71 @@ export let AboutModal = React.forwardRef(
       bodyRef.current = contentRef.current?.parentElement;
     }, [bodyRef]);
 
+    useEffect(() => {
+      if (open) {
+        setTimeout(() => firstElement?.focus(), 0);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [open]);
+
     return renderPortalUse(
-      <ComposedModal
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className // Apply any supplied class names to the main HTML element.
-        )}
-        aria-label={modalAriaLabel}
-        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
+      <FeatureFlags
+        flags={{
+          'enable-experimental-focus-wrap-without-sentinels': true,
+        }}
       >
-        <div className={`${blockClass}__logo`}>{logo}</div>
-        <ModalHeader
-          className={`${blockClass}__header`}
-          closeModal={onClose}
-          iconDescription={closeIconDescription}
-          label={title}
-          labelClassName={`${blockClass}__title`}
-        />
-        <ModalBody className={`${blockClass}__body`}>
-          <div
-            className={`${blockClass}__body-content`}
-            ref={contentRef}
-            id={contentId}
-          >
-            <div className={`${blockClass}__version`}>{version}</div>
-            {links && links.length > 0 && (
-              <div className={`${blockClass}__links-container`}>
-                {links.map((link, i) => (
-                  <React.Fragment key={i}>{link}</React.Fragment>
-                ))}
-              </div>
-            )}
-            {content && <p className={`${blockClass}__content`}>{content}</p>}
-            {copyrightText && (
-              <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
-            )}
-          </div>
-        </ModalBody>
-        {additionalInfo && (
-          <Theme theme="g100">
-            <ModalFooter className={`${blockClass}__footer`}>
-              {additionalInfo}
-            </ModalFooter>
-          </Theme>
-        )}
-      </ComposedModal>
+        <ComposedModal
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          className={cx(
+            blockClass, // Apply the block class to the main HTML element
+            className // Apply any supplied class names to the main HTML element.
+          )}
+          aria-label={modalAriaLabel}
+          ref={modalRef}
+          {...{ onClose, open, ...getDevtoolsProps(componentName) }}
+        >
+          <div className={`${blockClass}__logo`}>{logo}</div>
+          <ModalHeader
+            className={`${blockClass}__header`}
+            closeModal={onClose}
+            iconDescription={closeIconDescription}
+            label={title}
+            labelClassName={`${blockClass}__title`}
+          />
+          <ModalBody className={`${blockClass}__body`}>
+            <div
+              className={`${blockClass}__body-content`}
+              ref={contentRef}
+              id={contentId}
+            >
+              <div className={`${blockClass}__version`}>{version}</div>
+              {links && links.length > 0 && (
+                <div className={`${blockClass}__links-container`}>
+                  {links.map((link, i) => (
+                    <React.Fragment key={i}>{link}</React.Fragment>
+                  ))}
+                </div>
+              )}
+              {content && <p className={`${blockClass}__content`}>{content}</p>}
+              {copyrightText && (
+                <p className={`${blockClass}__copyright-text`}>
+                  {copyrightText}
+                </p>
+              )}
+            </div>
+          </ModalBody>
+          {additionalInfo && (
+            <Theme theme="g100">
+              <ModalFooter className={`${blockClass}__footer`}>
+                {additionalInfo}
+              </ModalFooter>
+            </Theme>
+          )}
+        </ComposedModal>
+      </FeatureFlags>
     );
   }
 );

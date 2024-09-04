@@ -111,6 +111,10 @@ export interface TagSetProps extends PropsWithChildren {
    */
   overflowAlign?: OverflowAlign;
   /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overFlowAutoAlign?: boolean;
+  /**
    * overflowClassName for the tooltip popup
    */
   overflowClassName?: string;
@@ -143,6 +147,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       className,
       maxVisible,
       multiline,
+      overFlowAutoAlign,
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
@@ -248,6 +253,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       newDisplayedTags.push(
         <TagSetOverflow
           allTagsModalSearchThreshold={allTagsModalSearchThreshold}
+          overFlowAutoAlign={overFlowAutoAlign}
           className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
@@ -273,6 +279,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       onOverflowTagChange,
       popoverOpen,
       handleTagOnClose,
+      overFlowAutoAlign,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -481,6 +488,10 @@ TagSet.propTypes = {
    * Handler to get overflow tags
    */
   onOverflowTagChange: PropTypes.func,
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overFlowAutoAlign: PropTypes.bool,
   /**
    * overflowAlign from the standard tooltip. Default center.
    */

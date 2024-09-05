@@ -285,6 +285,29 @@ export const Pagination = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+export const PaginationWithSelectableRow = () => {
+  const [data] = useState(makeData(100));
+  const columns = React.useMemo(() => getColumns(data), []);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id % 5 === 0,
+      DatagridPagination,
+    },
+    useSelectRows
+  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
 export const SelectableRow = () => {
   const [data] = useState(makeData(10));
   const columns = React.useMemo(() => getColumns(data), []);

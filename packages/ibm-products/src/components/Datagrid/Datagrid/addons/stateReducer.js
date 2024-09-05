@@ -118,9 +118,17 @@ export const stateReducer = (newState, action) => {
       const newSelectedRowIds = {};
       if (rows) {
         const newSelectedRowData = {};
+        const nonSelectableRows =
+          rows[0]?.getRowProps?.()?.nonselectablerows || [];
         rows.forEach((row) => {
           const props = row.getRowProps?.();
           if (props && props.disabled) {
+            return;
+          } else if (
+            !props &&
+            nonSelectableRows.length > 0 &&
+            nonSelectableRows.includes(row)
+          ) {
             return;
           }
           newSelectedRowIds[getRowId(row.original, row.index)] = true;

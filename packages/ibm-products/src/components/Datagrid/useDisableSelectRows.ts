@@ -15,14 +15,21 @@ const useDisableSelectRows = (hooks: Hooks) => {
   const getRowProps: RowPropGetter<any> = (
     props: Partial<TableRowProps>,
     { row, instance }: PropGetterMeta
-  ) =>
-    [
+  ) => {
+    const nonselectablerows: Row<any>[] =
+      instance?.rows?.filter(
+        (row) =>
+          instance.shouldDisableSelectRow &&
+          instance.shouldDisableSelectRow(row)
+      ) || [];
+    return [
       props,
       {
         disabled: instance?.shouldDisableSelectRow?.(row),
+        nonselectablerows,
       },
     ] as Partial<TableRowProps>[];
-
+  };
   hooks.getRowProps.push(getRowProps);
 };
 

@@ -170,7 +170,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
           }
         )}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         {media &&

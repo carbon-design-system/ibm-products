@@ -50,6 +50,9 @@ const defaults = {
   searchPlaceholder: 'Find filters',
 };
 
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
+
 const FilterPanel = ({
   title = defaults.title,
   closeIconDescription = defaults.closeIconDescription,
@@ -66,7 +69,7 @@ const FilterPanel = ({
   secondaryActionLabel = defaults.secondaryActionLabel,
   searchLabelText = defaults.searchLabelText,
   searchPlaceholder = defaults.searchPlaceholder,
-  reactTableFiltersState = [],
+  reactTableFiltersState = emptyArray,
   autoHideFilters = false,
   isFetching = false,
 }) => {

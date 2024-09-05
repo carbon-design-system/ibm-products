@@ -44,9 +44,12 @@ import { FilterContext } from '../FilterProvider';
 import { handleCheckboxChange } from '../handleCheckboxChange';
 import uuidv4 from '../../../../../../global/js/utils/uuidv4';
 
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
+
 const useFilters = ({
   updateMethod,
-  filters = [],
+  filters = emptyArray,
   setAllFilters,
   variation,
   reactTableFiltersState,

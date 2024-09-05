@@ -36,11 +36,14 @@ const defaults = {
   align: 'bottom',
 };
 
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
+
 const FilterFlyout = ({
   updateMethod,
   flyoutIconDescription = defaults.flyoutIconDescription,
   align = defaults.align,
-  filters = [],
+  filters = emptyArray,
   title = defaults.title,
   primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
@@ -49,8 +52,8 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
-  data = [],
-  reactTableFiltersState = [],
+  data = emptyArray,
+  reactTableFiltersState = emptyArray,
 }) => {
   /** State */
   const [open, setOpen] = useState(false);

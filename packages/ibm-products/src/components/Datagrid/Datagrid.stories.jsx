@@ -422,8 +422,7 @@ const DatagridBatchActions = (datagridState) => {
 };
 
 export const BatchActions = () => {
-  const [data] = useState(makeData(10));
-
+  const [data] = useState(makeData(100));
   const columns = React.useMemo(
     () => [
       ...getColumns(data),
@@ -436,25 +435,6 @@ export const BatchActions = () => {
     ],
     []
   );
-
-  const getRowActions = () => {
-    return [
-      {
-        id: 'edit',
-        itemText: 'Edit',
-        icon: Edit,
-        onClick: action('Clicked row action: edit'),
-      },
-
-      {
-        id: 'delete',
-        itemText: 'Delete',
-        icon: TrashCan,
-        onClick: action('Clicked row action: delete'),
-      },
-    ];
-  };
-
   const datagridState = useDatagrid(
     {
       columns,
@@ -462,43 +442,55 @@ export const BatchActions = () => {
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
-      DatagridBatchActions,
-      rowActions: getRowActions(),
-      onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
-      onAllRowSelect: (rows, event) =>
-        console.log('onAllRowsClick called', rows, event),
-      batchActionMenuButtonLabel: 'More',
-    },
-    useSelectRows,
-    useActionsColumn,
-    useStickyColumn
-  );
-
-  return (
-    <Datagrid
-      datagridState={{ ...datagridState }}
-      ariaToolbarLabel="batch actions toolbar"
-    />
-  );
-};
-
-export const DisableSelectRow = () => {
-  const [data] = useState(makeData(10));
-  const columns = React.useMemo(() => getColumns(data), []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      DatagridActions,
-      DatagridBatchActions,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
       endPlugins: [useDisableSelectRows],
-      shouldDisableSelectRow: (row) => row.id % 2 === 0,
-      disableSelectAll: true,
+      shouldDisableSelectRow: (row) => row.id % 15 === 0,
+      DatagridPagination,
     },
     useSelectRows
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const DisableSelectRow = () => {
+  const [data] = useState(makeData(100));
+  const columns = React.useMemo(() => getColumns(data), []);
+  const [areAllSelected, setAreAllSelected] = useState(false);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id % 15 === 0,
+      selectAllToggle: {
+        labels: {
+          allRows: 'Select all',
+        },
+        onSelectAllRows: setAreAllSelected,
+      },
+      DatagridPagination,
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows,
+    useSelectAllWithToggle
+  );
+
+  return (
+    <>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <h3>Doc in Notes...</h3>
+      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
+    </>
+  );
 };
 
 export const FrozenColumns = () => {

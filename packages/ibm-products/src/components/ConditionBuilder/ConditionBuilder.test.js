@@ -104,7 +104,7 @@ describe(componentName, () => {
     expect(screen.getByRole('main')).toHaveClass(cx(blockClass));
   });
 
-   it('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<ConditionBuilder {...defaultProps} />);
     try {
       await expect(container).toBeAccessible(componentName);
@@ -377,7 +377,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_nonHierarchical}
+        initialState={{ state: sampleDataStructure_nonHierarchical }}
       />
     );
     //start builder
@@ -607,7 +607,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_nonHierarchical}
+        initialState={{ state: sampleDataStructure_nonHierarchical }}
         translateWithId={translateWithId}
       />
     );
@@ -846,7 +846,7 @@ describe(componentName, () => {
       <ConditionBuilder
         {...defaultProps}
         inputConfig={inputData}
-        initialState={sampleDataStructure_nonHierarchical}
+        initialState={{ state: sampleDataStructure_nonHierarchical }}
       />
     );
 
@@ -940,7 +940,7 @@ describe(componentName, () => {
         {...defaultProps}
         inputConfig={inputData}
         variant={HIERARCHICAL_VARIANT}
-        initialState={sampleDataStructure}
+        initialState={{ state: sampleDataStructure }}
       />
     );
 
@@ -1016,7 +1016,7 @@ describe(componentName, () => {
         {...defaultProps}
         inputConfig={inputData}
         actions={actions}
-        initialState={sampleDataStructure}
+        initialState={{ state: sampleDataStructure }}
       />
     );
 
@@ -1210,7 +1210,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
-        initialState={sampleDataStructure}
+        initialState={{ state: sampleDataStructure }}
       />
     );
 
@@ -1521,7 +1521,7 @@ describe(componentName, () => {
         {...defaultProps}
         variant={HIERARCHICAL_VARIANT}
         inputConfig={inputData}
-        initialState={sampleDataStructure_Hierarchical}
+        initialState={{ state: sampleDataStructure_Hierarchical }}
       />
     );
 

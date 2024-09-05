@@ -56,7 +56,7 @@ export let ConditionBuilder = React.forwardRef(
     {
       className,
       inputConfig,
-      startConditionLabel,
+      startConditionLabel = 'Add Condition',
       popOverSearchThreshold,
       getOptions,
       initialState,
@@ -176,40 +176,45 @@ ConditionBuilder.propTypes = {
    */
   getOptions: PropTypes.func,
   /**
-   * Optional prop if you want to pass a saved condition state.
-   *  This object should respect the structure of condition state that is available in getConditionState callback
+   * Optional prop if you want to pass a saved condition state, pass as "initialState.state".
+   * "initialState.enabledDefault" will populate the builder with the provided initial state before clicking Add Condition button.
+   *
+   *  This state should respect the structure of condition state that is available in getConditionState callback
    */
   /**@ts-ignore */
   initialState: PropTypes.shape({
-    groups: PropTypes.arrayOf(
-      PropTypes.shape({
-        groupOperator: PropTypes.string,
-        statement: PropTypes.string,
-        conditions: PropTypes.arrayOf(
-          PropTypes.oneOfType([
-            PropTypes.shape({
-              property: PropTypes.string,
-              operator: PropTypes.string,
-              value: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.arrayOf(
+    state: PropTypes.shape({
+      groups: PropTypes.arrayOf(
+        PropTypes.shape({
+          groupOperator: PropTypes.string,
+          statement: PropTypes.string,
+          conditions: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+              PropTypes.shape({
+                property: PropTypes.string,
+                operator: PropTypes.string,
+                value: PropTypes.oneOfType([
+                  PropTypes.string,
+                  PropTypes.arrayOf(
+                    PropTypes.shape({
+                      id: PropTypes.string,
+                      label: PropTypes.string,
+                    })
+                  ),
                   PropTypes.shape({
                     id: PropTypes.string,
                     label: PropTypes.string,
-                  })
-                ),
-                PropTypes.shape({
-                  id: PropTypes.string,
-                  label: PropTypes.string,
-                }),
-              ]),
-            }),
-            PropTypes.object,
-          ])
-        ),
-      })
-    ),
-    operator: PropTypes.string,
+                  }),
+                ]),
+              }),
+              PropTypes.object,
+            ])
+          ),
+        })
+      ),
+      operator: PropTypes.string,
+    }),
+    enabledDefault: PropTypes.bool,
   }),
 
   /**
@@ -260,7 +265,7 @@ ConditionBuilder.propTypes = {
   /**
    * Provide a label to the button that starts condition builder
    */
-  startConditionLabel: PropTypes.string.isRequired,
+  startConditionLabel: PropTypes.string,
   /**
    * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.

@@ -28,13 +28,14 @@ import {
   ConditionBuilderContextProps,
   ConditionBuilderState,
   ConditionGroup,
+  InitialState,
 } from '../ConditionBuilder.types';
 import { blockClass, HIERARCHICAL_VARIANT } from '../utils/util';
 interface ConditionBuilderContentProps {
   startConditionLabel: string;
   getConditionState: (state: ConditionBuilderState) => void;
   getActionsState?: (state: Action[]) => void;
-  initialState?: ConditionBuilderState;
+  initialState?: InitialState;
   actions?: Action[];
 }
 const ConditionBuilderContent = ({
@@ -46,6 +47,10 @@ const ConditionBuilderContent = ({
 }: ConditionBuilderContentProps) => {
   const { rootState, setRootState, variant, actionState } =
     useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
+
+  const [initialConditionState, setInitialConditionState] = useState(
+    initialState?.state
+  );
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(false);
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
@@ -86,10 +91,24 @@ const ConditionBuilderContent = ({
     getActionsState?.(actionState ?? []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actionState]);
+  useEffect(() => {
+    if (initialState?.enabledDefault) {
+      setRootState?.(initialConditionState as ConditionBuilderState);
+      setInitialConditionState(undefined);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialState]);
+
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(true);
-    setRootState?.(initialState ?? emptyState); //here we can set an empty skeleton object for an empty condition builder,
+    if (initialConditionState?.groups?.length) {
+      setRootState?.(initialConditionState);
+      setInitialConditionState(undefined);
+    } else {
+      setRootState?.(emptyState); //here we can set an empty skeleton object for an empty condition builder,
+    }
+
     //or we can even pre-populate some existing builder and continue editing
   };
 
@@ -274,35 +293,38 @@ ConditionBuilderContent.propTypes = {
    * Optional prop if the condition building need to start from a predefined initial state
    */
   initialState: PropTypes.shape({
-    groups: PropTypes.arrayOf(
-      PropTypes.shape({
-        groupOperator: PropTypes.string,
-        statement: PropTypes.string,
-        conditions: PropTypes.arrayOf(
-          PropTypes.oneOfType([
-            PropTypes.shape({
-              property: PropTypes.string,
-              operator: PropTypes.string,
-              value: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.arrayOf(
+    state: PropTypes.shape({
+      groups: PropTypes.arrayOf(
+        PropTypes.shape({
+          groupOperator: PropTypes.string,
+          statement: PropTypes.string,
+          conditions: PropTypes.arrayOf(
+            PropTypes.oneOfType([
+              PropTypes.shape({
+                property: PropTypes.string,
+                operator: PropTypes.string,
+                value: PropTypes.oneOfType([
+                  PropTypes.string,
+                  PropTypes.arrayOf(
+                    PropTypes.shape({
+                      id: PropTypes.string,
+                      label: PropTypes.string,
+                    })
+                  ),
                   PropTypes.shape({
                     id: PropTypes.string,
                     label: PropTypes.string,
-                  })
-                ),
-                PropTypes.shape({
-                  id: PropTypes.string,
-                  label: PropTypes.string,
-                }),
-              ]),
-            }),
-            PropTypes.object,
-          ])
-        ),
-      })
-    ),
-    operator: PropTypes.string,
+                  }),
+                ]),
+              }),
+              PropTypes.object,
+            ])
+          ),
+        })
+      ),
+      operator: PropTypes.string,
+    }),
+    enabledDefault: PropTypes.bool,
   }),
   /* Provide a label to the button that starts condition builder
    */

@@ -84,13 +84,10 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
       const headWrapEl = document?.querySelector(
         `#${tableId} .${blockClass}__head-wrap`
       );
-      if (headWrapEl) {
+      if (headWrapEl && enableSpacerColumn) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
-      }
-      if (enableSpacerColumn === true) {
-        const spacerColumn: HTMLDivElement | null = document.querySelector(
-          `#${tableId} .${blockClass}__head-wrap thead th:last-child`
-        );
+        const spacerColumn: HTMLDivElement | null =
+          headWrapEl.querySelector(`thead th:last-child`);
 
         if (spacerColumn) {
           spacerColumn.style.width = px(

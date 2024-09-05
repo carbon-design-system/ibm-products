@@ -182,6 +182,35 @@ const BasicUsage = ({ ...rest } = {}) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const SpacerColumn = ({ ...rest } = {}) => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        rightAlignedColumn: true,
+      },
+    ],
+    []
+  );
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      enableSpacerColumn: true,
+    },
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 const DatagridActions = (datagridState) => {
   const {
     selectedFlatRows,
@@ -920,6 +949,21 @@ describe(componentName, () => {
     expect(screen.getAllByRole('columnheader').length).toEqual(
       defaultHeader.length
     );
+  });
+
+  it('renders a table with spacer column', () => {
+    render(<SpacerColumn />);
+    expect(screen.getByRole('table')).toHaveClass(
+      `${carbon.prefix}--data-table`
+    );
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th').length
+    ).toEqual(3);
   });
 
   it('renders a basic data grid component with devTools attribute', async () => {

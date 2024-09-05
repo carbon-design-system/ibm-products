@@ -26,11 +26,11 @@ const useFlexResize = (hooks) => {
   hooks.visibleColumns.push((columns) => {
     // always move actions to the end
     const actionsIdx = columns.findIndex((col) => col.isAction);
-    if (spacerColumn === false && actionsIdx === -1) {
+    if (!spacerColumn && actionsIdx === -1) {
       const lastCol = columns.at(-1);
       lastCol.isFlexCol = true;
       return [...columns];
-    } else if ((spacerColumn === true) & (actionsIdx === -1)) {
+    } else if (spacerColumn & (actionsIdx === -1)) {
       return [...columns, spacer];
     }
     const cols = [...columns];

@@ -30,7 +30,7 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 export interface TagOverflowItem {
   className?: string;
-  filter?: string;
+  filter?: boolean;
   id: string;
   label: string;
   onClose: () => void;

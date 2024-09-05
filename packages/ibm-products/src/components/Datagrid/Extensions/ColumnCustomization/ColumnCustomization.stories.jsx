@@ -165,24 +165,6 @@ const sharedDatagridProps = {
 
 const ColumnCustomizationUsage = ({ ...args }) => {
   const [hiddenIndices, setHiddenIndices] = useState([]);
-
-  // const initialStateUpdate = React.useMemo(() => {
-  //   const initialState = {
-  //     pageSize: 10,
-  //     pageSizes: [5, 10, 25, 50],
-  //     hiddenColumns: ['age'],
-  //     columnOrder: [],
-  //   };
-  //   let hiddenColumns = ['age'];
-  //   hiddenIndices.forEach((index)=>{
-  //     if(!hiddenColumns.includes(defaultHeader[index].accessor)){
-  //       hiddenColumns.push(defaultHeader[index].accessor);
-  //     }
-  //   });
-  //   initialState.hiddenColumns = hiddenColumns;
-  //   return initialState;
-  // }, [hiddenIndices]);
-
   const columns = React.useMemo(() => {
     const header = [...defaultHeader];
     header.forEach((headerItem) => {
@@ -216,10 +198,9 @@ const ColumnCustomizationUsage = ({ ...args }) => {
       ...args.defaultGridProps,
       customizeColumnsProps: {
         onSaveColumnPrefs: (newColDefs) => {
-          // console.log(newColDefs);
           const indices = newColDefs
-            .map((col, index) => (!col.isVisible ? col.id : null)) // Map to index if condition is true, else -1
-            .filter((col) => col !== null); // Filter out the -1 values
+            .map((col, index) => (!col.isVisible ? col.id : null))
+            .filter((col) => col !== null);
           setHiddenIndices(indices);
         },
         labels: {
@@ -286,10 +267,11 @@ ColumnCustomizationUsageStory.args = {
 };
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
+  const [hiddenIndices, setHiddenIndices] = useState([]);
   const stickyHeaders = defaultHeader.slice(2, 15);
 
-  const columns = React.useMemo(
-    () => [
+  const columns = React.useMemo(() => {
+    const header = [
       {
         Header: 'Row Index',
         accessor: (row, i) => i,
@@ -309,9 +291,19 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
         width: 48,
         isAction: true,
       },
-    ],
-    []
-  );
+    ];
+    header.forEach((headerItem) => {
+      hiddenIndices.some((index) => {
+        if (headerItem.accessor === index) {
+          headerItem.disableGlobalFilter = true;
+          return true;
+        } else {
+          headerItem.disableGlobalFilter = false;
+        }
+      });
+    });
+    return header;
+  }, [hiddenIndices]);
   const [data] = useState(makeData(10));
 
   const datagridState = useDatagrid(
@@ -360,7 +352,10 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
       ...args.defaultGridProps,
       customizeColumnsProps: {
         onSaveColumnPrefs: (newColDefs) => {
-          console.log(newColDefs);
+          const indices = newColDefs
+            .map((col, index) => (!col.isVisible ? col.id : null))
+            .filter((col) => col !== null);
+          setHiddenIndices(indices);
         },
         labels: {
           findColumnPlaceholderLabel: 'Find column',

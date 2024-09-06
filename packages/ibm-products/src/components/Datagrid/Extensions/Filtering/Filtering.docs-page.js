@@ -434,6 +434,27 @@ const datagridState = useDatagrid({
           `,
         },
       },
+      {
+        subTitle: `onClearFilters method`,
+        source: {
+          language: 'jsx',
+          code: `
+/*
+  This method is called when the user clears filters from the filters summary.
+*/
+
+const datagridState = useDatagrid({
+    columns,
+    data,
+    filterProps: {
+      onClearFilters: () => console.log('callback to be run after clearing all filters'),
+    }
+  });
+
+  return <Datagrid datagridState={datagridState} />;
+          `,
+        },
+      },
     ]}
   />
 );

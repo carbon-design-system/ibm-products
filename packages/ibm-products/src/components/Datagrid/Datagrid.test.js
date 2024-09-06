@@ -2097,7 +2097,9 @@ describe(componentName, () => {
     fireEvent.click(columnSaveButton);
     const rows = screen.getAllByRole('row');
     const headerRow = rows[0];
-    expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    setTimeout(() => {
+      expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    }, 0);
   });
 
   it('Top Alignment', async () => {

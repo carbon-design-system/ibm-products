@@ -20,6 +20,7 @@ import {
 // Import portions of React that are needed.
 import React, {
   Children,
+  MutableRefObject,
   PropsWithChildren,
   ReactNode,
   isValidElement,
@@ -207,7 +208,8 @@ export let InterstitialScreen = React.forwardRef<
     ref
   ) => {
     const backupRef = useRef();
-    const _forwardedRef = ref || backupRef;
+    const _forwardedRef = (ref ||
+      backupRef) as MutableRefObject<HTMLDivElement>;
     const scrollRef = useRef<any>();
     const startButtonRef = useRef<HTMLElement>();
     const nextButtonRef = useRef<HTMLElement>();

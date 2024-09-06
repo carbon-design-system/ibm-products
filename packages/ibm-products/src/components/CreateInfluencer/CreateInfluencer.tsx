@@ -90,7 +90,7 @@ export const CreateInfluencer = ({
             {progressSteps.map((step, stepIndex) => {
               return (
                 <ProgressStep
-                  label={step.title}
+                  label={step?.title as string}
                   key={stepIndex}
                   secondaryLabel={step.secondaryLabel || undefined}
                   invalid={(step as any).invalid}

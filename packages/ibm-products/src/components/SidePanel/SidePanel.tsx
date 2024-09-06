@@ -57,7 +57,7 @@ type SidePanelBaseProps = {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<'button'>[];
+  actions?: ButtonProps<React.ElementType>[];
 
   /**
    * Determines if the title will animate on scroll

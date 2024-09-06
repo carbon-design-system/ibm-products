@@ -9,13 +9,14 @@
 import {
   Button,
   ComposedModal,
+  ComposedModalProps,
   Form,
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { LegacyRef, PropsWithChildren, ReactNode } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -39,7 +40,8 @@ const isValidChildren =
   };
 
 export interface CreateModalProps
-  extends React.ComponentProps<typeof ComposedModal> {
+  // extends React.ComponentProps<typeof ComposedModal> {
+  extends ComposedModalProps {
   /**
    * Specify an optional className to be applied to the modal root node
    */
@@ -61,7 +63,7 @@ export interface CreateModalProps
   /**
    * The title of the CreateModal is usually the product or service name.
    */
-  title: ReactNode;
+  title: string;
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */
@@ -90,7 +92,7 @@ export interface CreateModalProps
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: ReactNode;
+  selectorPrimaryFocus: string;
 }
 
 /**
@@ -121,8 +123,9 @@ export let CreateModal = React.forwardRef(
       // Collect any other property values passed in.
       ...rest
     }: PropsWithChildren<CreateModalProps>,
-    ref
+    ref: LegacyRef<HTMLDivElement>
   ) => {
+    console.log(title, selectorPrimaryFocus);
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
     return renderPortalUse(
@@ -222,7 +225,7 @@ CreateModal.propTypes = {
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: PropTypes.node.isRequired,
+  selectorPrimaryFocus: PropTypes.string.isRequired,
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */
@@ -230,7 +233,7 @@ CreateModal.propTypes = {
   /**
    * The title of the CreateModal is usually the product or service name.
    */
-  title: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 CreateModal.displayName = componentName;

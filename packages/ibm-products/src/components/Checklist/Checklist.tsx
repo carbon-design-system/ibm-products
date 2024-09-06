@@ -170,7 +170,7 @@ export let Checklist = React.forwardRef(
       theme = defaults.theme,
       title,
       toggleLabel = defaults.toggleLabel,
-      toggleLabelAlign = defaults.toggleLabelAlign,
+      toggleLabelAlign = 'top',
       viewAllLabel,
       ...rest
     }: ChecklistProps,

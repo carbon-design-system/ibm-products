@@ -143,7 +143,7 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
-  title?: ReactNode;
+  title?: string;
 
   /**
    * The position of the top of tearsheet in the viewport. The 'normal'
@@ -417,7 +417,7 @@ CreateTearsheet.propTypes = {
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
-  title: PropTypes.node,
+  title: PropTypes.string,
 
   /**
    * The position of the top of tearsheet in the viewport. The 'normal'

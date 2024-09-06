@@ -97,7 +97,7 @@ export interface ActionSetProps {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps<'button'>[];
+  actions: ButtonProps<React.ElementType>[];
 
   /**
    * The size of buttons to use for the actions. The allowed values are

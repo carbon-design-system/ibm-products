@@ -49,7 +49,7 @@ const componentName = 'TearsheetShell';
 const maxDepth = 3;
 
 interface TearsheetShellProps extends PropsWithChildren {
-  actions?: ButtonProps<'button'>[];
+  actions?: ButtonProps<React.ElementType>[];
 
   ariaLabel?: string;
 

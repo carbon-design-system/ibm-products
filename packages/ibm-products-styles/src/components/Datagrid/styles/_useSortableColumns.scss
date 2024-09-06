@@ -64,6 +64,7 @@
 
   .#{c4p-settings.$carbon-prefix}--table-sort.#{$block-class}--table-sort {
     width: calc(100% + #{$spacing-07}); // offset due to inner label
+    align-items: inherit;
     margin: 0 calc(-1 * #{$spacing-05}); // fill width of parent table column header
   }
 }

@@ -136,6 +136,7 @@ export interface FilterFlyoutProps {
   flyoutIconDescription?: string;
   onFlyoutClose?: () => void;
   onFlyoutOpen?: () => void;
+  onClearFilters?: () => void;
   panelIconDescription?: string;
   primaryActionLabel?: string;
   reactTableFiltersState?: ReactTableFiltersState[];

@@ -141,7 +141,7 @@ export const TagSetOverflow = React.forwardRef(
           dropShadow
           highContrast
           onKeyDown={handleEscKeyPress}
-          open={popoverOpen}
+          open={popoverOpen || false}
         >
           <Tag
             onClick={() => setPopoverOpen?.(!popoverOpen)}

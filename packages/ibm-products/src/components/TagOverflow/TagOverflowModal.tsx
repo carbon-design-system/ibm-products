@@ -33,7 +33,7 @@ const defaults = {
 interface TagType {
   label: string;
 }
-type AllTags = (TagType & Omit<React.ComponentProps<Tag>, 'filter'>)[];
+type AllTags = (TagType & Omit<React.ComponentProps<typeof Tag>, 'filter'>)[];
 interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;

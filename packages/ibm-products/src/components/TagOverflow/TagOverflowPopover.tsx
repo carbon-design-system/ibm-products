@@ -8,7 +8,13 @@
 import React, { useRef, forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import {
+  Link,
+  Tag,
+  Popover,
+  PopoverContent,
+  PopoverAlignment,
+} from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { TagOverflowItem } from './TagOverflow';
@@ -18,7 +24,7 @@ export interface Props {
   autoAlign?: boolean;
   className?: string;
   onShowAllClick: () => void;
-  overflowAlign?: string;
+  overflowAlign?: PopoverAlignment;
   overflowTags: TagOverflowItem[];
   overflowType?: string;
   popoverOpen?: boolean;
@@ -60,7 +66,7 @@ export const TagOverflowPopover = forwardRef(
       onShowAllClick?.();
     };
 
-    const handleEscKeyPress = (evt: KeyboardEvent) => {
+    const handleEscKeyPress = (evt) => {
       const { key } = evt;
       if (key === 'Escape') {
         setPopoverOpen?.(false);
@@ -96,7 +102,7 @@ export const TagOverflowPopover = forwardRef(
           dropShadow
           highContrast
           onKeyDown={handleEscKeyPress}
-          open={popoverOpen}
+          open={popoverOpen || false}
         >
           <Tag
             onClick={() => setPopoverOpen?.(!popoverOpen)}

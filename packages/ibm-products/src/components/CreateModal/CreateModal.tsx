@@ -9,7 +9,6 @@
 import {
   Button,
   ComposedModal,
-  ComposedModalProps,
   Form,
   ModalBody,
   ModalFooter,
@@ -40,8 +39,7 @@ const isValidChildren =
   };
 
 export interface CreateModalProps
-  // extends React.ComponentProps<typeof ComposedModal> {
-  extends ComposedModalProps {
+  extends React.ComponentProps<typeof ComposedModal> {
   /**
    * Specify an optional className to be applied to the modal root node
    */

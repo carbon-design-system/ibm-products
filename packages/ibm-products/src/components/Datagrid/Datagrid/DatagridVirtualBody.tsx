@@ -9,7 +9,6 @@ import React, { MutableRefObject, useEffect, useRef } from 'react';
 import { VariableSizeList } from 'react-window';
 import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
-import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { DataGridState, DatagridRow } from '../types';
@@ -44,7 +43,6 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     gridRef,
     tableId,
     onVirtualScroll,
-    enableSpacerColumn,
   } = datagridState;
 
   const headWrapRef = useRef<HTMLDivElement | null>(null);
@@ -84,16 +82,8 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
       const headWrapEl = document?.querySelector(
         `#${tableId} .${blockClass}__head-wrap`
       );
-      if (headWrapEl && enableSpacerColumn) {
+      if (headWrapEl) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
-        const spacerColumn: HTMLDivElement | null =
-          headWrapEl.querySelector(`thead th:last-child`);
-
-        if (spacerColumn) {
-          spacerColumn.style.width = px(
-            32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
-          ); // scrollbar width to header column to fix header alignment
-        }
       }
     }
 

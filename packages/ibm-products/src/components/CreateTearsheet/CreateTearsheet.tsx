@@ -208,9 +208,10 @@ export let CreateTearsheet = forwardRef(
 
     useEffect(() => {
       const firstItem =
-        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+        stepData.findIndex((item) => item.shouldIncludeStep === true) + 1;
       const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
+        setCurrentStep(firstItem);
         setFirstIncludedStep(firstItem);
       }
       if (lastItem !== lastIncludedStep) {
@@ -222,10 +223,8 @@ export let CreateTearsheet = forwardRef(
           initialStep
         );
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
-      } else {
-        setCurrentStep(firstIncludedStep);
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
+    }, [firstIncludedStep, initialStep, lastIncludedStep, open, stepData]);
 
     useCreateComponentFocus({
       previousState,

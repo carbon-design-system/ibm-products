@@ -49,8 +49,8 @@ describe(componentName, () => {
   });
 
   it('renders a component TagOverflow', async () => {
-    render(<TagOverflow />);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<TagOverflow data-testid={dataTestId} />);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
@@ -60,8 +60,8 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    render(<TagOverflow className={className} />);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(<TagOverflow className={className} data-testid={dataTestId} />);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {

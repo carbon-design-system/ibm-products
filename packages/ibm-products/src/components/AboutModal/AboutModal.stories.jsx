@@ -26,7 +26,7 @@ const blockClass = `${pkg.prefix}--about-modal`;
 import DocsPage from './AboutModal.docs-page';
 
 export default {
-  title: 'IBM Products/Patterns/About modal/AboutModal',
+  title: 'IBM Products/Components/About modal/AboutModal',
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {
@@ -168,9 +168,7 @@ const logo = (
 );
 
 const Template = (storyName, storyInitiallyOpen, props, context) => {
-  const [open, setOpen] = useState(
-    context.viewMode !== 'docs' && storyInitiallyOpen
-  );
+  const [open, setOpen] = useState(false);
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 

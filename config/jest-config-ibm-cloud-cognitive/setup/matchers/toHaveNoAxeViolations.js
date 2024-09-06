@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,33 +29,22 @@ const defaultOptions = {
   },
 };
 
-function toHaveNoAxeViolations(node, options = {}) {
-  return new Promise((resolve) => {
-    axe.run(
-      node,
-      {
-        ...defaultOptions,
-        ...options,
-      },
-      (error, result) => {
-        if (error) {
-          throw error;
-        }
-
-        if (result.violations.length > 0) {
-          resolve({
-            message: () => formatOutput(result.violations),
-            pass: false,
-          });
-          return;
-        }
-
-        resolve({
-          pass: true,
-        });
-      }
-    );
+async function toHaveNoAxeViolations(node, options = {}) {
+  const result = await axe.run(node, {
+    ...defaultOptions,
+    ...options,
   });
+
+  if (result.violations.length > 0) {
+    return {
+      message: () => formatOutput(result.violations),
+      pass: false,
+    };
+  }
+
+  return {
+    pass: true,
+  };
 }
 
 function formatOutput(violations) {

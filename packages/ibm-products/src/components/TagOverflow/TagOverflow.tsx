@@ -30,7 +30,7 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 export interface TagOverflowItem {
   className?: string;
-  filter?: string;
+  filter?: boolean;
   id: string;
   label: string;
   onClose: () => void;
@@ -56,6 +56,7 @@ export interface TagOverflowProps {
   allTagsModalSearchPlaceholderText?: string;
   allTagsModalTarget?: ReactNode;
   allTagsModalTitle?: string;
+  autoAlign?: boolean;
   className?: string;
   containingElementRef?: RefObject<HTMLElement>;
   items: TagOverflowItem[];
@@ -94,6 +95,7 @@ export let TagOverflow = forwardRef(
       allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
       allTagsModalTitle,
+      autoAlign,
       className,
       containingElementRef,
       items,
@@ -261,7 +263,6 @@ export let TagOverflow = forwardRef(
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems?.length > 0 &&
@@ -304,6 +305,7 @@ export let TagOverflow = forwardRef(
                 ref={overflowRef}
                 popoverOpen={popoverOpen}
                 setPopoverOpen={setPopoverOpen}
+                autoAlign={autoAlign}
               />
               <TagOverflowModal
                 allTags={items}
@@ -365,6 +367,10 @@ TagOverflow.propTypes = {
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
   /**
    * Provide an optional class to be applied to the containing node.
    */

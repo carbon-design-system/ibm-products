@@ -7,17 +7,16 @@
 
 import React, { useContext } from 'react';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
-import {
-  blockClass,
-  connectorConfig,
-} from '../ConditionBuilderContext/DataConfigs';
 import { ItemOption } from '../ConditionBuilderItem/ConditionBuilderItemOption/ItemOption';
 import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../utils/useTranslations';
+import { blockClass } from '../utils/util';
+import { useDataConfigs } from '../utils/useDataConfigs';
 
 const GroupConnector = () => {
   const { rootState, setRootState } = useContext(ConditionBuilderContext);
   const [conditionText] = useTranslations(['conditionText']);
+  const { connectorConfig } = useDataConfigs();
 
   const onStatementChangeHandler = (updatedStatement) => {
     setRootState({

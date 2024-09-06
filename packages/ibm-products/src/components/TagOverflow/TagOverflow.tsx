@@ -263,7 +263,6 @@ export let TagOverflow = forwardRef(
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems?.length > 0 &&

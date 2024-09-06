@@ -25,7 +25,7 @@ import mdx from './DescriptionList.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Components/Description list/DescriptionList',
+  title: 'Experimental/Components/Description list/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

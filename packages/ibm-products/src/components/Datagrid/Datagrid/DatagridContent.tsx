@@ -45,7 +45,12 @@ export const DatagridContent = ({
   title,
 }: DatagridContentProps) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
-  const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
+  const {
+    filterTags,
+    EventEmitter,
+    panelOpen,
+    tableId: contextTableId,
+  } = useContext(FilterContext);
   const { activeCellId, gridActive, editId, featureFlags } = inlineEditState;
   const {
     getTableProps,
@@ -204,7 +209,7 @@ export const DatagridContent = ({
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
   useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
-    clearSingleFilter(id, setAllFilters, state)
+    clearSingleFilter(id, setAllFilters, state, contextTableId)
   );
 
   const renderFilterSummary = () =>
@@ -212,7 +217,12 @@ export const DatagridContent = ({
       <FilterSummary
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS, tableId)}
+        clearFilters={() => {
+          EventEmitter.dispatch(CLEAR_FILTERS, tableId);
+          if (typeof filterProps?.onClearFilters === 'function') {
+            filterProps.onClearFilters();
+          }
+        }}
         renderLabel={filterProps?.renderLabel}
         overflowType="tag"
       />

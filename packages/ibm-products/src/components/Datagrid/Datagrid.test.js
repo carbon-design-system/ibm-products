@@ -384,39 +384,30 @@ const ExpandedRow = ({ ...rest } = {}) => {
   return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
+// with toolbarBatchActions
 const SelectItemsInAllPages = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
-  const [areAllSelected, setAreAllSelected] = useState(false);
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
       },
-      selectAllToggle: {
-        labels: {
-          allRows: 'Select all',
-        },
-        onSelectAllRows: setAreAllSelected,
-      },
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id % 15 === 0,
       DatagridPagination,
-      DatagridActions,
-      DatagridBatchActions,
     },
-    useSelectRows,
-    useSelectAllWithToggle
+    useSelectRows
   );
 
-  return (
-    <>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-      <h3>Doc in Notes...</h3>
-      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
-    </>
-  );
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
 const HideSelectAll = ({ ...rest } = {}) => {
@@ -987,7 +978,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1009,7 +999,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1651,46 +1640,20 @@ describe(componentName, () => {
     radioSelectButton(2, 6);
   });
 
-  // requires refactor
-  it.skip('Select Items In All Pages', async () => {
+  // with toolbarBatchActions
+  it('Select Items In All Pages', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
     render(
       <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
     );
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('input')[0]
-    );
-
+    // check if 10 rows are rendered on initial load
     var numRows = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr').length;
+    expect(numRows).toEqual(10);
 
-    for (var i = 0; i < numRows; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbon.prefix}--data-table--selected`);
-    }
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('input')[0]
-    );
     for (var j = 0; j < numRows; j++) {
       expect(
         screen
@@ -1699,61 +1662,12 @@ describe(componentName, () => {
           .getElementsByTagName('tr')[j].classList[0]
       ).toEqual('c4p--datagrid__carbon-row');
     }
-
+    // check if batch actions toolbar is present in dom (is still visually hidden)
     expect(
       document.getElementsByClassName('c4p--datagrid__table-toolbar').length
     ).toBe(1);
 
-    const filterButton = screen.getByLabelText('Left panel');
-    fireEvent.click(filterButton);
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    const rowHeightButton = screen.getByRole('button', {
-      name: /Row settings/i,
-    });
-    fireEvent.click(rowHeightButton);
-
-    expect(
-      screen.getByLabelText('Row settings', { selector: 'button' })
-    ).toHaveClass(`c4p--datagrid__row-size-button--open`);
-    expect(
-      document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
-    ).toBeDefined();
-    expect(
-      document
-        .getElementsByClassName(
-          `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-        )[0]
-        .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row settings');
-
-    const rowDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Small',
-      'Extra Small',
-    ];
-
-    var rowSize = document
-      .getElementsByClassName(
-        `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-      )[0]
-      .getElementsByTagName('div').length;
-
-    for (let j = 0; i < rowSize; i++) {
-      expect(
-        document
-          .getElementsByClassName(
-            `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-          )[0]
-          .getElementsByTagName('div')
-          .item(j)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[0].textContent
-      ).toEqual(rowDropDown[j]);
-    }
-
+    // select all on page 1 (to make the batch actions toolbar visible, so we can test select all on all pages)
     fireEvent.click(
       screen
         .getByRole('table')
@@ -1772,38 +1686,39 @@ describe(componentName, () => {
         .getElementsByTagName('div')[0]
         .getElementsByTagName('p')[0]
         .getElementsByTagName('span')[0].textContent
-    ).toEqual('10 items selected');
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    const selectAllOverflow = screen.getByLabelText('Select all', {
-      selector: 'button',
-    });
-    fireEvent.click(selectAllOverflow);
+    ).toEqual('9 items selected'); // one row is disabled on first page
 
     expect(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
         .getElementsByTagName('section')[0]
         .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Action');
+    ).toEqual('Select all (100)');
+    // ).toEqual('Select all (93)'); (7 rows are disabled in entire table) switch to this after #5937 issue fixes
+
+    // click select all button in toolbar
     fireEvent.click(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
         .getElementsByTagName('section')[0]
         .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0]
     );
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('99 items selected');
+    // ).toEqual('93 items selected'); (7 rows are disabled in entire table) switch to this after #5972 issue fixes
 
+    // check for cancel button in batch actions and click
     expect(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
@@ -1823,11 +1738,11 @@ describe(componentName, () => {
 
     const refreshButton = screen.getByLabelText('Refresh');
     fireEvent.click(refreshButton);
-    expect(alertMock).toHaveBeenCalledTimes(3);
+    expect(alertMock).toHaveBeenCalledTimes(1);
 
     const downloadButton = screen.getByLabelText('Download CSV');
     fireEvent.click(downloadButton);
-    expect(alertMock).toHaveBeenCalledTimes(4);
+    expect(alertMock).toHaveBeenCalledTimes(2);
   });
 
   const rightAlignedColumnsData = [
@@ -1994,7 +1909,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2017,7 +1931,6 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2345,7 +2258,7 @@ describe(componentName, () => {
     const user = userEvent.setup({
       advanceTimers: jest.advanceTimersByTime,
     });
-    const { keyboard } = user;
+    const { keyboard, type } = user;
     const dropdownOnChange = jest.fn();
     render(
       <FilteringUsage
@@ -2410,11 +2323,6 @@ describe(componentName, () => {
     await click(dropdownOption);
     expect(dropdownOnChange).toHaveBeenCalledTimes(1);
 
-    // Add beginning date but no end date, confirm no changes are made since we need a beginning and end date
-    const dateInput = screen.getAllByPlaceholderText('mm/dd/yyyy');
-    await click(dateInput[0]);
-    await keyboard('01/01/2024');
-    expect(dateInput[0].value).toEqual('01/01/2024');
     // Apply radio button change
     const designerRadio = screen.getByRole('radio', { name: 'Designer' });
     await click(designerRadio);
@@ -2422,11 +2330,15 @@ describe(componentName, () => {
     // Apply valid date filter
     const dateInputs = screen.getAllByPlaceholderText('mm/dd/yyyy');
     await click(dateInputs[0]);
-    await keyboard('01/01/2024');
-    await click(dateInputs[1]);
+    // Clear previously value from date input
+    dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
+    await type(dateInputs[0], '01/01/2024');
+    await keyboard('[Escape]');
+    await keyboard('[Tab]');
     await keyboard('01/02/2024');
-    expect(dateInput[0].value).toEqual('01/01/2024');
-    expect(dateInput[1].value).toEqual('01/02/2024');
+    await keyboard('[Escape]');
+    expect(dateInputs[0].value).toEqual('01/01/2024');
+    expect(dateInputs[1].value).toEqual('01/02/2024');
     // Reset to "Any" radio filter
     const anyRadio = screen.getByRole('radio', { name: 'Any' });
     await click(anyRadio);
@@ -2776,6 +2688,7 @@ const TestBatch = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridPagination,
+      toolbarBatchActionsDisplayMin: 2,
     },
     useSelectRows,
     useSelectAllWithToggle,
@@ -2855,11 +2768,15 @@ describe('batch action testing', () => {
       await click(screen.getByLabelText(getBatchActions()[1].label));
       expect(addOnClickFn).toHaveBeenCalledTimes(1);
 
-      const menuButton = screen.getByRole('button', { name: /More/i });
-      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
-      const selectAllButton = screen.getByRole('button', {
-        name: /Select all/i,
-      });
+      const moreButton = screen.getByText(/More/i);
+      expect(moreButton).toBeVisible();
+      const downloadButton = screen.queryByText(/Download/i);
+      expect(downloadButton).toBeNull();
+
+      const menuButton = screen.getByText(/More/i);
+      const cancelButton = screen.getByText(/Cancel/i);
+      const selectAllButton = screen.getByText(/^Select all \(\d+\)$/);
+
       expect(menuButton).toBeInTheDocument();
       await click(menuButton);
       const options = Array.from(

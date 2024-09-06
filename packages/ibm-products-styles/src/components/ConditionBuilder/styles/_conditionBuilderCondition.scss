@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/motion' as *;
@@ -31,7 +38,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   .#{$block-class}__button:not(
     .#{$block-class}__statement-button,
     .#{$block-class}__connector-button,
-    .#{$block-class}__add-button
+    .#{$block-class}__add-button,
+    .#{$block-class}__add-condition-sub-group
   ) {
   background-color: $tag-background-red;
   color: $tag-color-red;
@@ -63,6 +71,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__group-preview-animate {
   height: auto;
+  color: $text-secondary;
   opacity: 0.5;
   pointer-events: none;
   transition: all $duration-moderate-02 motion(exit, expressive);
@@ -70,10 +79,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__connector--disabled {
   display: flex;
   min-width: $spacing-10;
-  align-items: center;
   background-color: $layer;
   color: $text-helper;
-  padding-inline: $spacing-03;
+  pointer-events: none;
 }
 .#{$block-class}__condition-wrapper
   > .#{$block-class}__condition-block:last-child

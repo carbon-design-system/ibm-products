@@ -7,7 +7,7 @@
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Datagrid } from '../../index';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { handleFilterTagLabelText } from '../../utils/handleFilterTagLabelText';
@@ -33,7 +33,7 @@ export default {
       },
     },
   },
-  excludeStories: ['filterProps', 'getDateFormat', 'multiSelectProps'],
+  excludeStories: ['getFilterProps', 'getDateFormat', 'multiSelectProps'],
 };
 
 // This is to show off the View all button in checkboxes
@@ -72,13 +72,14 @@ export const multiSelectProps = {
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
 };
 
-export const filterProps = {
+export const getFilterProps = (id = 'id') => ({
   variation: 'panel',
   updateMethod: 'batch',
   primaryActionLabel: 'Apply',
   secondaryActionLabel: 'Cancel',
   panelIconDescription: `Open filters`,
   closeIconDescription: 'Close panel',
+  align: 'bottom',
   sections: [
     {
       categoryTitle: 'Category title',
@@ -143,17 +144,17 @@ export const filterProps = {
               },
               RadioButton: [
                 {
-                  id: 'developer',
+                  id: `developer-${id}`,
                   labelText: 'Developer',
                   value: 'developer',
                 },
                 {
-                  id: 'designer',
+                  id: `designer-${id}`,
                   labelText: 'Designer',
                   value: 'designer',
                 },
                 {
-                  id: 'researcher',
+                  id: `researcher-${id}`,
                   labelText: 'Researcher',
                   value: 'researcher',
                 },
@@ -188,17 +189,17 @@ export const filterProps = {
               },
               Checkbox: [
                 {
-                  id: 'normal',
+                  id: `normal-${id}`,
                   labelText: 'Normal',
                   value: 'normal',
                 },
                 {
-                  id: 'minor-warning',
+                  id: `minor-warning-${id}`,
                   labelText: 'Minor warning',
                   value: 'minor-warning',
                 },
                 {
-                  id: 'critical',
+                  id: `critical-${id}`,
                   labelText: 'Critical',
                   value: 'critical',
                 },
@@ -218,7 +219,7 @@ export const filterProps = {
     const endDateObj = new Date(end);
     return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
   },
-};
+});
 
 export const PanelBatch = FilteringTemplateWrapper.bind({});
 PanelBatch.storyName = 'Filter panel with batch update';
@@ -235,7 +236,7 @@ PanelBatch.args = {
   emptyStateTitle: 'No filters match',
   emptyStateDescription:
     'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-  filterProps,
+  filterProps: getFilterProps(),
 };
 
 export const PanelInstant = FilteringTemplateWrapper.bind({});
@@ -260,6 +261,7 @@ PanelInstant.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -292,15 +294,11 @@ PanelInstant.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },
@@ -454,6 +452,7 @@ PanelWithInitialFilters.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -486,15 +485,11 @@ PanelWithInitialFilters.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },
@@ -615,6 +610,7 @@ PanelOnlyAccordions.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -647,15 +643,11 @@ PanelOnlyAccordions.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },
@@ -777,6 +769,7 @@ PanelNoAccordions.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -809,15 +802,11 @@ PanelNoAccordions.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },
@@ -939,6 +928,7 @@ PanelNoData.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -971,15 +961,11 @@ PanelNoData.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },
@@ -1101,6 +1087,7 @@ PanelManyCheckboxes.args = {
     secondaryActionLabel: 'Cancel',
     panelIconDescription: `Open filters`,
     closeIconDescription: 'Close panel',
+    align: 'bottom',
     sections: [
       {
         categoryTitle: 'Category title',
@@ -1133,15 +1120,11 @@ PanelManyCheckboxes.args = {
           {
             filterLabel: 'Status',
             filter: {
-              type: 'dropdown',
+              type: 'multiSelect',
               column: 'status',
               props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ['aria-label']: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
+                MultiSelect: {
+                  ...multiSelectProps,
                 },
               },
             },

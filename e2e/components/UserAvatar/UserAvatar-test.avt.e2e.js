@@ -16,7 +16,7 @@ test.describe('UserAvatar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'UserAvatar',
-      id: 'ibm-products-components-user-avatar-useravatar--default',
+      id: 'experimental-components-user-avatar-useravatar--default',
       globals: {
         carbonTheme: 'white',
       },

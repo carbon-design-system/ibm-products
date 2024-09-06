@@ -19,6 +19,8 @@ import {
   FormGroup,
   Tab,
   Tabs,
+  TabPanels,
+  TabPanel,
   TabList,
   TextInput,
   unstable__Slug as Slug,
@@ -154,19 +156,6 @@ const mainContent = (
   </div>
 );
 
-const tabs = (
-  <div className="tearsheet-stories__tabs">
-    <Tabs onChange={action('Tab selection changed')}>
-      <TabList aria-label="Tab list">
-        <Tab>Tab 1</Tab>
-        <Tab>Tab 2</Tab>
-        <Tab>Tab 3</Tab>
-        <Tab>Tab 4</Tab>
-      </TabList>
-    </Tabs>
-  </div>
-);
-
 const title = 'Title of the tearsheet';
 
 const sampleSlug = (
@@ -231,6 +220,64 @@ const Template = ({ actions, slug, ...args }) => {
   );
 };
 
+const tabs = (
+  <div className="tearsheet-stories__tabs">
+    <TabList aria-label="Tab list">
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <Tab>Tab 4</Tab>
+    </TabList>
+  </div>
+);
+
+const TemplateWithNav = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef();
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <div ref={ref}>
+        <Tabs onChange={action('Tab selection changed')}>
+          <Tearsheet
+            {...args}
+            actions={wiredActions}
+            open={open}
+            onClose={() => setOpen(false)}
+            slug={slug && sampleSlug}
+          >
+            <TabPanels>
+              <TabPanel>Tab 1</TabPanel>
+              <TabPanel>Tab 2</TabPanel>
+              <TabPanel>Tab 3</TabPanel>
+              <TabPanel>Tab 4</TabPanel>
+            </TabPanels>
+          </Tearsheet>
+        </Tabs>
+      </div>
+    </>
+  );
+};
+
 const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef();
@@ -269,6 +316,72 @@ const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
           launcherButtonRef={buttonRef}
         >
           {mainContent}
+        </Tearsheet>
+      </div>
+    </>
+  );
+};
+
+const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
+  const [open, setOpen] = useState(false);
+
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef();
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          slug={slug && sampleSlug}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            <Form>
+              <p>Main content</p>
+              <FormGroup
+                legendId="tearsheet-form-group"
+                legendText="FormGroup Legend"
+              >
+                <TextInput
+                  id="tss-ft1"
+                  labelText="Enter an important value here"
+                  style={
+                    // stylelint-disable-next-line carbon/layout-token-use
+                    { marginBottom: '1em' }
+                  }
+                  disabled
+                />
+                <TextInput
+                  id="tss-ft2"
+                  labelText="Here is an entry field:"
+                  style={
+                    // stylelint-disable-next-line carbon/layout-token-use
+                    { marginBottom: '1em' }
+                  }
+                />
+              </FormGroup>
+            </Form>
+          </div>
         </Tearsheet>
       </div>
     </>
@@ -448,7 +561,7 @@ tearsheet.args = {
   selectorPrimaryFocus: '#tss-ft1',
 };
 
-export const withNavigation = Template.bind({});
+export const withNavigation = TemplateWithNav.bind({});
 withNavigation.storyName = 'Tearsheet with navigation';
 withNavigation.args = {
   closeIconDescription,
@@ -482,7 +595,19 @@ ReturnFocusToOpenButton.args = {
   actions: 7,
 };
 
-export const fullyLoaded = Template.bind({});
+export const firstElementDisabled = FirstElementDisabledTemplate.bind({});
+firstElementDisabled.storyName = 'First Element Disabled';
+firstElementDisabled.args = {
+  closeIconDescription,
+  hasCloseIcon: true,
+  description,
+  onClose: action('onClose called'),
+  title,
+  actions: 7,
+  selectorPrimaryFocus: '#tss-ft1',
+};
+
+export const fullyLoaded = TemplateWithNav.bind({});
 fullyLoaded.storyName = 'Tearsheet with all header items and influencer';
 fullyLoaded.args = {
   closeIconDescription,

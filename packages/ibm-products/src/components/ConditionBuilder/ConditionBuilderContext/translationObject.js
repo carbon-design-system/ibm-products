@@ -1,9 +1,21 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export const translationsObject = {
   ifText: 'if',
+  unlessText: 'unless',
   excl_if: 'excl.if',
   and: 'and',
   or: 'or',
   is: 'is',
+  ifAll: 'if all',
+  ifAny: 'if any',
+  unlessAll: 'unless all',
+  unlessAny: 'unless any',
   greater: 'is greater than',
   greaterEqual: 'is greater than or equal to',
   lower: 'is lower than',
@@ -25,7 +37,7 @@ export const translationsObject = {
   connectorText: 'Connector',
   conditionRowText: 'Condition row',
   conditionRowGroupText: 'Condition row group',
-  removeConditionText: 'Remove condition',
+  removeConditionText: 'Delete condition',
   addConditionRowText: 'Add condition row',
   startText: 'Start',
   endText: 'End',
@@ -39,4 +51,8 @@ export const translationsObject = {
   conditionBuilderText: 'Condition Builder',
   actionSectionText: 'Action Section',
   conditionHeadingText: 'Condition',
+  addPropertyText: 'Add property',
+  addOperatorText: 'Add operator',
+  addValueText: 'Add value',
+  conditionBuilderHierarchicalText: 'Condition Builder Hierarchical',
 };

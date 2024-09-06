@@ -1,11 +1,18 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import uuidv4 from '../../../global/js/utils/uuidv4';
 
-export const sampleDataStructure_tree = {
+export const sampleDataStructure_Hierarchical = {
   operator: 'or',
   groups: [
     {
       groupOperator: 'and', //'and|or',
-      statement: 'if', // 'if|exclude if',
+      statement: 'ifAll', // 'if|exclude if',
       id: uuidv4(),
       conditions: [
         {
@@ -35,7 +42,7 @@ export const sampleDataStructure_tree = {
         //group object repeats
         {
           groupOperator: 'and', //'and|or',
-          statement: 'if', // 'if|exclude if',
+          statement: 'unlessAll', // 'if|exclude if',
           id: uuidv4(),
           conditions: [
             {
@@ -64,8 +71,8 @@ export const sampleDataStructure_tree = {
             },
             //group object repeats
             {
-              groupOperator: 'and', //'and|or',
-              statement: 'if', // 'if|exclude if',
+              groupOperator: 'or', //'and|or',
+              statement: 'ifAny', // 'if|exclude if',
               id: uuidv4(),
               conditions: [
                 {
@@ -95,7 +102,7 @@ export const sampleDataStructure_tree = {
     },
     {
       groupOperator: 'and', //'and|or',
-      statement: 'if', // 'if|exclude if',
+      statement: 'ifAll', // 'if|exclude if',
       id: uuidv4(),
       conditions: [
         {
@@ -121,11 +128,11 @@ export const sampleDataStructure_tree = {
   ],
 };
 
-export const sampleDataStructure_sentence = {
+export const sampleDataStructure_nonHierarchical = {
   groups: [
     {
       groupOperator: 'and', //'and|or',
-      statement: 'if', // 'if|exclude if',
+      statement: 'ifAll', // 'if|exclude if',
       id: uuidv4(),
       conditions: [
         {

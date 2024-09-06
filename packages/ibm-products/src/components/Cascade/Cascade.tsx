@@ -5,17 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef, PropsWithChildren, ReactNode } from 'react';
+import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
+
 import { Grid } from '@carbon/react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--cascade`;
 const componentName = 'Cascade';
 
-interface CascadeProps {
+export interface CascadeProps {
   children: ReactNode;
   /**
    * Specify an optional className to be applied to

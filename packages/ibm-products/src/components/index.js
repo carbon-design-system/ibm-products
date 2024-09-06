@@ -119,7 +119,7 @@ export {
 } from './DescriptionList';
 export { FullPageError } from './FullPageError';
 export { SearchBar } from './SearchBar';
-export { Nav } from './Nav';
+export { Nav, NavItem, NavList } from './Nav';
 export { StringFormatter } from './StringFormatter';
 export { UserAvatar } from './UserAvatar';
 export { ScrollGradient } from './ScrollGradient';

@@ -14,16 +14,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { carbon, pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Button } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--truncated-list`;
@@ -38,7 +36,7 @@ const defaults = {
   viewMoreLabel: (value) => `View more (${value})`,
 };
 
-interface TruncatedListProps extends PropsWithChildren {
+export interface TruncatedListProps extends PropsWithChildren {
   as?: React.ElementType | string;
   /**
    * Optional class name for expand/collapse button.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,14 +8,13 @@
 // Import portions of React that are needed.
 import React, { ForwardedRef, ReactNode } from 'react';
 
+import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { ProductiveCard } from '../ProductiveCard';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
-import { ProductiveCard } from '../ProductiveCard';
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { pkg } from '../../settings';
 
 // import { children } from 'cheerio/lib/api/traversing';
 
@@ -46,7 +45,8 @@ type ActionIcon = {
   href?: string;
 };
 type PlacementType = 'top' | 'bottom';
-interface EditUpdateCardsProps {
+
+export interface EditUpdateCardsProps {
   /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
@@ -200,7 +200,6 @@ export let EditUpdateCards = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <ProductiveCard

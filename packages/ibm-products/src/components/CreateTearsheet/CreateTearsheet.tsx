@@ -6,33 +6,34 @@
  */
 
 import React, {
-  forwardRef,
-  useState,
-  useRef,
-  createContext,
-  useEffect,
-  ReactNode,
+  Dispatch,
   ForwardedRef,
   PropsWithChildren,
-  Dispatch,
+  ReactNode,
   SetStateAction,
+  createContext,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { Form } from '@carbon/react';
-import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { CreateInfluencer } from '../CreateInfluencer';
-import { pkg } from '../../settings';
 import {
-  usePreviousValue,
-  useValidCreateStepCount,
-  useResetCreateComponent,
   useCreateComponentFocus,
   useCreateComponentStepChange,
+  usePreviousValue,
+  useResetCreateComponent,
+  useValidCreateStepCount,
 } from '../../global/js/hooks';
+
+import { CreateInfluencer } from '../CreateInfluencer';
+import { Form } from '@carbon/react';
+import PropTypes from 'prop-types';
+import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { pkg } from '../../settings';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -56,7 +57,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface CreateTearsheetProps extends PropsWithChildren {
+export interface CreateTearsheetProps extends PropsWithChildren {
   /**
    * The back button text
    */
@@ -207,9 +208,10 @@ export let CreateTearsheet = forwardRef(
 
     useEffect(() => {
       const firstItem =
-        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+        stepData.findIndex((item) => item.shouldIncludeStep === true) + 1;
       const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
+        setCurrentStep(firstItem);
         setFirstIncludedStep(firstItem);
       }
       if (lastItem !== lastIncludedStep) {
@@ -221,10 +223,8 @@ export let CreateTearsheet = forwardRef(
           initialStep
         );
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
-      } else {
-        setCurrentStep(firstIncludedStep);
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
+    }, [firstIncludedStep, initialStep, lastIncludedStep, open, stepData]);
 
     useCreateComponentFocus({
       previousState,

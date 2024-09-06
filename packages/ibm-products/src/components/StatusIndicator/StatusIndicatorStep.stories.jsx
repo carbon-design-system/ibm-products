@@ -12,7 +12,7 @@ import mdx from './StatusIndicatorStep.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'IBM Products/Components/Status indicator/StatusIndicatorStep',
+  title: 'Experimental/Components/Status indicator/StatusIndicatorStep',
   component: StatusIndicatorStep,
   tags: ['autodocs'],
   argTypes: {

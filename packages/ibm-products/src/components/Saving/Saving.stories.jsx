@@ -13,7 +13,7 @@ import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Patterns/Saving',
+  title: 'IBM Products/Components/Saving',
   component: Saving,
   tags: ['autodocs'],
   parameters: {

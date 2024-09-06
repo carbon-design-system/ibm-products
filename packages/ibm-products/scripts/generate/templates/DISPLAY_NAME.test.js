@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. FULL_YEAR, FULL_YEAR
+ * Copyright IBM Corp. 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,8 +23,8 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component DISPLAY_NAME', async () => {
-    render(<DISPLAY_NAME> </DISPLAY_NAME>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<DISPLAY_NAME data-testid={dataTestId}> </DISPLAY_NAME>);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
@@ -39,8 +39,12 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    render(<DISPLAY_NAME className={className}> </DISPLAY_NAME>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(
+      <DISPLAY_NAME data-testid={dataTestId} className={className}>
+        {' '}
+      </DISPLAY_NAME>
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {

@@ -33,12 +33,17 @@ const defaults = {
   title: 'Filter',
   primaryActionLabel: 'Apply',
   secondaryActionLabel: 'Cancel',
+  align: 'bottom',
 };
+
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
 
 const FilterFlyout = ({
   updateMethod,
   flyoutIconDescription = defaults.flyoutIconDescription,
-  filters = [],
+  align = defaults.align,
+  filters = emptyArray,
   title = defaults.title,
   primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
@@ -47,8 +52,8 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
-  data = [],
-  reactTableFiltersState = [],
+  data = emptyArray,
+  reactTableFiltersState = emptyArray,
 }) => {
   /** State */
   const [open, setOpen] = useState(false);
@@ -239,7 +244,7 @@ const FilterFlyout = ({
       <IconButton
         label={flyoutIconDescription}
         kind="ghost"
-        align="bottom"
+        align={align}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
@@ -274,6 +279,10 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * Tooltip alignment for the filter button
+   */
+  align: PropTypes.string,
   /**
    * All data rows in the table
    */

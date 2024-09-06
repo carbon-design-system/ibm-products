@@ -119,7 +119,8 @@ export const stateReducer = (newState, action) => {
       if (rows) {
         const newSelectedRowData = {};
         const nonSelectableRows =
-          rows[0]?.getRowProps?.()?.nonselectablerows || [];
+          rows.find((row) => row.getRowProps)?.getRowProps?.()
+            ?.nonselectablerows || [];
         rows.forEach((row) => {
           const props = row.getRowProps?.();
           if (props && props.disabled) {

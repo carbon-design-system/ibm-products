@@ -426,7 +426,7 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
     .#{$carbon-prefix}--slug {
     inset-inline-end: 0;
-    margin-block: 0.5rem;
+    margin-block: 6px;
     margin-inline-end: 1rem;
   }
 }

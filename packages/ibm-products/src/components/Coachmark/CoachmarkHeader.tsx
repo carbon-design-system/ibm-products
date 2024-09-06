@@ -75,7 +75,6 @@ export let CoachmarkHeader = React.forwardRef<
         }
         className={cx(blockClass, `${blockClass}__${theme}`)}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         {showCloseButton && (

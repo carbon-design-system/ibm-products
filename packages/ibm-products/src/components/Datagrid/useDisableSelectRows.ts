@@ -37,7 +37,7 @@ const useDisableSelectRows = (hooks: Hooks) => {
       props,
       {
         disabled: instance?.shouldDisableSelectRow?.(row),
-        nonselectablerows: nonselectablerows,
+        nonselectablerows,
       },
     ] as Partial<TableRowProps>[];
   };

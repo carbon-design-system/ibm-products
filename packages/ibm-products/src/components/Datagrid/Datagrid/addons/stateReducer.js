@@ -122,11 +122,7 @@ export const stateReducer = (newState, action) => {
           rows.find((row) => row.getRowProps)?.getRowProps?.()
             ?.nonselectablerows || [];
         rows.forEach((row) => {
-          const props = row.getRowProps?.();
-          if (props && props.disabled) {
-            return;
-          } else if (
-            !props &&
+          if (
             nonSelectableRows.length > 0 &&
             nonSelectableRows.includes(row.id)
           ) {

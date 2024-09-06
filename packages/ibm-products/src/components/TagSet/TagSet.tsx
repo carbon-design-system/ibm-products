@@ -113,7 +113,7 @@ export interface TagSetProps extends PropsWithChildren {
   /**
    * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
-  overFlowAutoAlign?: boolean;
+  overflowAutoAlign?: boolean;
   /**
    * overflowClassName for the tooltip popup
    */
@@ -147,7 +147,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       className,
       maxVisible,
       multiline,
-      overFlowAutoAlign,
+      overflowAutoAlign,
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
@@ -253,7 +253,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       newDisplayedTags.push(
         <TagSetOverflow
           allTagsModalSearchThreshold={allTagsModalSearchThreshold}
-          overFlowAutoAlign={overFlowAutoAlign}
+          overflowAutoAlign={overflowAutoAlign}
           className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
@@ -279,7 +279,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       onOverflowTagChange,
       popoverOpen,
       handleTagOnClose,
-      overFlowAutoAlign,
+      overflowAutoAlign,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
@@ -489,10 +489,6 @@ TagSet.propTypes = {
    */
   onOverflowTagChange: PropTypes.func,
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
-   */
-  overFlowAutoAlign: PropTypes.bool,
-  /**
    * overflowAlign from the standard tooltip. Default center.
    */
   overflowAlign: PropTypes.oneOf([
@@ -509,6 +505,10 @@ TagSet.propTypes = {
     'right-bottom',
     'right-top',
   ]),
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign: PropTypes.bool,
   /**
    * overflowClassName for the tooltip popup
    */

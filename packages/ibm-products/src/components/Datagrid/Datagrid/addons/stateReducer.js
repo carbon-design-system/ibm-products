@@ -163,7 +163,7 @@ export const stateReducer = (newState, action) => {
             return;
           }
           if (props) {
-            if (!indeterminate && !isChecked) {
+            if (!indeterminate && isChecked) {
               // adds selection to newly selected rows
               newSelectedRowIds[getRowId(row.original, row.index)] = true;
               newSelectedRowData[getRowId(row.original, row.index)] =

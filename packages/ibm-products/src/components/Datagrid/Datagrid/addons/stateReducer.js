@@ -127,7 +127,7 @@ export const stateReducer = (newState, action) => {
           } else if (
             !props &&
             nonSelectableRows.length > 0 &&
-            nonSelectableRows.includes(row)
+            nonSelectableRows.includes(row.id)
           ) {
             return;
           }

@@ -15,9 +15,7 @@ const nonselectablerowsList = (instance) => {
           instance.shouldDisableSelectRow &&
           instance.shouldDisableSelectRow(row)
       )
-      .map((row) => {
-        return row.id;
-      }) || [];
+      .map((row) => row.id) || [];
   return nonselectablerows;
 };
 

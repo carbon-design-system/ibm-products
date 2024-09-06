@@ -123,7 +123,6 @@ export let CoachmarkDragbar = React.forwardRef<
           }
         )}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         <button

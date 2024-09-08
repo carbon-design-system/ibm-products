@@ -85,9 +85,9 @@ interface CreateTearsheetStepBaseProps extends PropsWithChildren {
   disableSubmit?: boolean;
 
   /**
-   * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+   * Configuration options for customizing the behavior of the experimentalSecondary submit button.
    */
-  experimentalAlternateSubmit?: ExperimentalAlternateSubmit;
+  experimentalSecondarySubmit?: ExperimentalSecondarySubmit;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -145,17 +145,17 @@ type CreateTearsheetStepProps = CreateTearsheetStepBaseProps &
   fieldsetLegendTextProps;
 
 /**
- * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+ * Configuration options for customizing the behavior of the experimentalSecondary submit button.
  *
  * @property {string} [labelText] - Optional text to replace the default button text.
  * @property {boolean} [disabled] - If true, the button will be disabled and not clickable.
- * @property {boolean} [hideAltSubmit] - If true, the button will be hidden from view.
+ * @property {boolean} [hideSecondarySubmit] - If true, the button will be hidden from view.
  * @property {() => void} [onClick] - Optional click handler function to be executed when the button is clicked.
  */
-export type ExperimentalAlternateSubmit = {
+export type ExperimentalSecondarySubmit = {
   labelText?: string;
   disabled?: boolean;
-  hideAltSubmit?: boolean;
+  hideSecondarySubmit?: boolean;
   onClick?: () => void;
 };
 
@@ -168,7 +168,7 @@ export let CreateTearsheetStep = forwardRef(
       className,
       description,
       disableSubmit,
-      experimentalAlternateSubmit,
+      experimentalSecondarySubmit,
       fieldsetLegendText,
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
@@ -215,13 +215,13 @@ export let CreateTearsheetStep = forwardRef(
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
         stepsContext?.setOnMount(onMount);
-        stepsContext?.setExperimentalAlternateSubmit({
-          ...experimentalAlternateSubmit,
+        stepsContext?.setExperimentalSecondarySubmit({
+          ...experimentalSecondarySubmit,
         });
       }
     }, [
       onMount,
-      experimentalAlternateSubmit,
+      experimentalSecondarySubmit,
       stepsContext,
       stepNumber,
       previousState?.currentStep,
@@ -363,18 +363,18 @@ CreateTearsheetStep.propTypes = {
   disableSubmit: PropTypes.bool,
 
   /**
-   * Configuration options for customizing the behavior of the experimentalAlternate submit button.
+   * Configuration options for customizing the behavior of the experimentalSecondary submit button.
    *
    * @property {string} [labelText] - Optional text to replace the default button text.
    * @property {boolean} [disabled] - If true, the button will be disabled and not clickable.
-   * @property {boolean} [hideAltSubmit] - If true, the button will be hidden from view.
+   * @property {boolean} [hideSecondarySubmit] - If true, the button will be hidden from view.
    * @property {() => void} [onClick] - Optional click handler function to be executed when the button is clicked.
    */
   /**@ts-ignore*/
-  experimentalAlternateSubmit: PropTypes.shape({
+  experimentalSecondarySubmit: PropTypes.shape({
     labelText: PropTypes.string,
     disabled: PropTypes.bool,
-    hideAltSubmit: PropTypes.bool,
+    hideSecondarySubmit: PropTypes.bool,
     onClick: PropTypes.func,
   }),
 

@@ -30,8 +30,8 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
-  experimentalAlternateSubmit,
-  experimentalAlternateSubmitText,
+  experimentalSecondarySubmit,
+  experimentalSecondarySubmitText,
 }) => {
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
@@ -122,9 +122,9 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
-    const handleExperimentalAlternateSubmit = () => {
-      if (typeof experimentalAlternateSubmit?.onClick === 'function') {
-        experimentalAlternateSubmit.onClick();
+    const handleExperimentalSecondarySubmit = () => {
+      if (typeof experimentalSecondarySubmit?.onClick === 'function') {
+        experimentalSecondarySubmit.onClick();
       }
     };
     if (stepData?.length > 0) {
@@ -149,15 +149,15 @@ export const useCreateComponentStepChange = ({
         kind: 'ghost',
       });
       if (
-        experimentalAlternateSubmitText &&
-        !experimentalAlternateSubmit?.hideAltSubmit
+        experimentalSecondarySubmitText &&
+        !experimentalSecondarySubmit?.hideSecondarySubmit
       ) {
         buttons.push({
-          key: 'create-action-button-experimentalAlternateSubmit',
-          label: experimentalAlternateSubmitText,
-          onClick: handleExperimentalAlternateSubmit,
+          key: 'create-action-button-experimentalSecondarySubmit',
+          label: experimentalSecondarySubmitText,
+          onClick: handleExperimentalSecondarySubmit,
           kind: 'secondary',
-          disabled: experimentalAlternateSubmit?.disabled,
+          disabled: experimentalSecondarySubmit?.disabled,
         });
       }
       buttons.push({
@@ -198,7 +198,7 @@ export const useCreateComponentStepChange = ({
     onPrevious,
     setLoadingPrevious,
     loadingPrevious,
-    experimentalAlternateSubmit,
-    experimentalAlternateSubmitText,
+    experimentalSecondarySubmit,
+    experimentalSecondarySubmitText,
   ]);
 };

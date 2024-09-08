@@ -34,7 +34,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { pkg } from '../../settings';
-import { ExperimentalAlternateSubmit } from './CreateTearsheetStep';
+import { ExperimentalSecondarySubmit } from './CreateTearsheetStep';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -45,8 +45,8 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 
 export interface StepsContextType {
   currentStep: number;
-  setExperimentalAlternateSubmit: Dispatch<
-    SetStateAction<ExperimentalAlternateSubmit>
+  setExperimentalSecondarySubmit: Dispatch<
+    SetStateAction<ExperimentalSecondarySubmit>
   >;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
   setOnPrevious: (fn: any) => void;
@@ -83,9 +83,9 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   className?: string;
 
   /**
-   * The experimentalAlternate submit button text
+   * The experimentalSecondary submit button text
    */
-  experimentalAlternateSubmitText?: string;
+  experimentalSecondarySubmitText?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -180,7 +180,7 @@ export let CreateTearsheet = forwardRef(
       cancelButtonText,
       children,
       className,
-      experimentalAlternateSubmitText,
+      experimentalSecondarySubmitText,
       description,
       influencerWidth = 'narrow',
       initialStep,
@@ -212,8 +212,8 @@ export let CreateTearsheet = forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-    const [experimentalAlternateSubmit, setExperimentalAlternateSubmit] =
-      useState<ExperimentalAlternateSubmit>({});
+    const [experimentalSecondarySubmit, setExperimentalSecondarySubmit] =
+      useState<ExperimentalSecondarySubmit>({});
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -281,10 +281,10 @@ export let CreateTearsheet = forwardRef(
       nextButtonText,
       isSubmitting,
       componentBlockClass: blockClass,
-      experimentalAlternateSubmit,
-      experimentalAlternateSubmitText: experimentalAlternateSubmit.labelText
-        ? experimentalAlternateSubmit.labelText
-        : experimentalAlternateSubmitText,
+      experimentalSecondarySubmit,
+      experimentalSecondarySubmitText: experimentalSecondarySubmit.labelText
+        ? experimentalSecondarySubmit.labelText
+        : experimentalSecondarySubmitText,
       setCreateComponentActions: setCreateTearsheetActions,
     });
 
@@ -316,7 +316,7 @@ export let CreateTearsheet = forwardRef(
             <StepsContext.Provider
               value={{
                 currentStep,
-                setExperimentalAlternateSubmit,
+                setExperimentalSecondarySubmit,
                 setIsDisabled,
                 setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
@@ -374,9 +374,9 @@ CreateTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
-   * The experimentalAlternate submit button text
+   * The experimentalSecondary submit button text
    */
-  experimentalAlternateSubmitText: PropTypes.string,
+  experimentalSecondarySubmitText: PropTypes.string,
 
   /**
    * Specifies elements to focus on first on render.

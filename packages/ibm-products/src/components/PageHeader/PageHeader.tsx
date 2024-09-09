@@ -17,7 +17,7 @@ import React, {
   useState,
 } from 'react';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
-import { baseFontSize, spacing10 } from '@carbon/layout';
+import { baseFontSize, spacing } from '@carbon/layout';
 import {
   blockClass,
   utilCheckUpdateVerticalSpace,
@@ -763,7 +763,8 @@ export let PageHeader = React.forwardRef(
         metrics.headerHeight > 0 &&
         (breadcrumbs || actionBarItems || tags || navigation)
       ) {
-        const startAddingAt = parseFloat(spacing10) * parseInt(baseFontSize);
+        const startAddingAt =
+          parseFloat(`${spacing[9]}`) * parseInt(`${baseFontSize}`);
         const scrollRemaining = metrics.headerHeight - scrollYValue;
 
         /* don't know how to test resize */

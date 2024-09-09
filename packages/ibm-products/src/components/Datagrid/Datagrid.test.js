@@ -1715,8 +1715,7 @@ describe(componentName, () => {
         .getElementsByTagName('div')[0]
         .getElementsByTagName('p')[0]
         .getElementsByTagName('span')[0].textContent
-      // ).toEqual('99 items selected');
-    ).toEqual('93 items selected'); //(7 rows are disabled in entire table) switch to this after #5972 issue fixes
+    ).toEqual('93 items selected');
 
     // check for cancel button in batch actions and click
     expect(

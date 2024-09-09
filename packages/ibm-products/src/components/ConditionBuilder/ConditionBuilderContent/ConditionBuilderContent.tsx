@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@carbon/react';
 import { Add, TextNewLine } from '@carbon/react/icons';
@@ -48,8 +54,8 @@ const ConditionBuilderContent = ({
   const { rootState, setRootState, variant, actionState } =
     useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
-  const [initialConditionState, setInitialConditionState] = useState(
-    initialState?.state
+  const initialConditionState = useRef(
+    initialState?.state ? JSON.parse(JSON.stringify(initialState?.state)) : null
   );
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(false);
@@ -93,8 +99,8 @@ const ConditionBuilderContent = ({
   }, [actionState]);
   useEffect(() => {
     if (initialState?.enabledDefault) {
-      setRootState?.(initialConditionState as ConditionBuilderState);
-      setInitialConditionState(undefined);
+      setRootState?.(initialConditionState.current as ConditionBuilderState);
+      initialConditionState.current = null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialState]);
@@ -102,9 +108,9 @@ const ConditionBuilderContent = ({
   const onStartConditionBuilder = () => {
     //when add condition button is clicked.
     setIsConditionBuilderActive(true);
-    if (initialConditionState?.groups?.length) {
-      setRootState?.(initialConditionState);
-      setInitialConditionState(undefined);
+    if (initialConditionState?.current?.groups?.length) {
+      setRootState?.(initialConditionState.current);
+      initialConditionState.current = null;
     } else {
       setRootState?.(emptyState); //here we can set an empty skeleton object for an empty condition builder,
     }

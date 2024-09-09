@@ -123,7 +123,6 @@ export let CreateModal = React.forwardRef(
     }: PropsWithChildren<CreateModalProps>,
     ref: LegacyRef<HTMLDivElement>
   ) => {
-    console.log(title, selectorPrimaryFocus);
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
     return renderPortalUse(

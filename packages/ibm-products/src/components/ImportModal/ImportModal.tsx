@@ -314,8 +314,6 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
     const fileStatusString = `${numberOfValidFiles} / ${numberOfFiles} ${fileUploadLabel}`;
     const blockClass = `${pkg.prefix}--import-modal`;
 
-    console.log(files);
-
     return renderPortalUse(
       <ComposedModal
         {...rest}

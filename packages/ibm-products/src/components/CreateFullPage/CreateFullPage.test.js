@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -185,8 +185,7 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 
     expect(container).toBeAccessible(componentName);

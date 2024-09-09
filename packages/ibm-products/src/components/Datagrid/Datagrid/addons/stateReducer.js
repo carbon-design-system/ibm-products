@@ -130,9 +130,14 @@ export const stateReducer = (newState, action) => {
       const newSelectedRowIds = {};
       if (rows) {
         const newSelectedRowData = {};
+        const nonSelectableRows =
+          rows.find((row) => row.getRowProps)?.getRowProps?.()
+            ?.nonselectablerows || [];
         rows.forEach((row) => {
-          const props = row.getRowProps?.();
-          if (props && props.disabled) {
+          if (
+            nonSelectableRows.length > 0 &&
+            nonSelectableRows.includes(row.id)
+          ) {
             return;
           }
           newSelectedRowIds[getRowId(row.original, row.index)] = true;

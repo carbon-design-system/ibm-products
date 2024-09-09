@@ -25,14 +25,14 @@
     "npm-check-updates": "^16.7.4"
   },
   "peerDependencies": {
-    "jest": "^29.4.2"
+    "jest": "30.0.0-alpha.6"
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@testing-library/jest-dom": "^5.16.5",
     "accessibility-checker": "3.1.40",
     "axe-core": "^4.6.3",
-    "babel-jest": "^29.4.2",
+    "babel-jest": "30.0.0-alpha.6",
     "babel-preset-ibm-cloud-cognitive": "^0.14.28",
     "chalk": "^4.1.2",
     "enzyme": "^3.11.0",

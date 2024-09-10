@@ -91,11 +91,17 @@ const CustomizeColumnsTearsheet = ({
     });
 
     setColumnObjects(finalDefinitions);
-    setDirty();
+    if (selectedColumnsCount === 0) {
+      setDirty(false);
+    } else {
+      setDirty();
+    }
   };
 
-  const setDirty = () => {
-    if (!isDirty) {
+  const setDirty = (dirty) => {
+    if (dirty !== undefined) {
+      setIsDirty(dirty);
+    } else if (!isDirty) {
       setIsDirty(true);
     }
   };
@@ -172,7 +178,11 @@ const CustomizeColumnsTearsheet = ({
           onSelectColumn={onCheckboxCheck}
           setColumnsObject={(cols) => {
             setColumnObjects(cols);
-            setDirty();
+            if (getVisibleColumnsCount() === 0) {
+              setDirty(false);
+            } else {
+              setDirty();
+            }
           }}
           selectAllLabel={selectAllLabel}
           customizeTearsheetHeadingLabel={customizeTearsheetHeadingLabel}

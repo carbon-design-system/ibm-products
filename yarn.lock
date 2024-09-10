@@ -1707,7 +1707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.24.1, @carbon/grid@npm:^11.26.0":
+"@carbon/grid@npm:^11.26.0":
   version: 11.26.0
   resolution: "@carbon/grid@npm:11.26.0"
   dependencies:
@@ -1742,11 +1742,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
-    "@carbon/grid": "npm:^11.24.1"
+    "@carbon/grid": "npm:^11.26.0"
     "@carbon/ibm-products-styles": "npm:^2.45.0-rc.0"
     "@carbon/layout": "npm:^11.25.0"
     "@carbon/motion": "npm:^11.21.0"
-    "@carbon/react": "npm:^1.61.0"
+    "@carbon/react": "npm:^1.65.0"
     "@carbon/themes": "npm:^11.39.0"
     "@carbon/type": "npm:^11.30.0"
     "@storybook/addon-a11y": "npm:^8.1.10"
@@ -1890,10 +1890,10 @@ __metadata:
     typescript-config-carbon: "npm:^0.3.0"
     yargs: "npm:^17.7.2"
   peerDependencies:
-    "@carbon/grid": ^11.24.1
+    "@carbon/grid": ^11.26.0
     "@carbon/layout": ^11.25.0
     "@carbon/motion": ^11.21.0
-    "@carbon/react": ^1.61.0
+    "@carbon/react": ^1.65.0
     "@carbon/themes": ^11.39.0
     "@carbon/type": ^11.30.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -1941,7 +1941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.61.0":
+"@carbon/react@npm:^1.65.0":
   version: 1.65.0
   resolution: "@carbon/react@npm:1.65.0"
   dependencies:

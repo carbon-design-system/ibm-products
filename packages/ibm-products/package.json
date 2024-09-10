@@ -111,10 +111,10 @@
     "react-window": "^1.8.10"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.24.1",
+    "@carbon/grid": "^11.26.0",
     "@carbon/layout": "^11.25.0",
     "@carbon/motion": "^11.21.0",
-    "@carbon/react": "^1.61.0",
+    "@carbon/react": "^1.65.0",
     "@carbon/themes": "^11.39.0",
     "@carbon/type": "^11.30.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",

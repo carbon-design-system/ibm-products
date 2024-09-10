@@ -49,6 +49,9 @@ const submitButtonText = 'Submit';
 const cancelButtonText = 'Cancel';
 const backButtonText = 'Back';
 const nextButtonText = 'Next';
+const experimentalSecondarySubmitText = 'Secondary submit';
+const experimentalSecondaryLabelText = 'Skip all step';
+const onExperimentalSecondarySubmitClickFn = jest.fn();
 const step3Title = uuidv4();
 const step2Title = uuidv4();
 const step1Title = uuidv4();
@@ -79,6 +82,12 @@ const renderCreateTearsheet = ({
   onPrevious = onPreviousStepFn,
   finalOnNextFn = finalStepOnNext,
   rejectOnSubmitNext = false,
+  experimentalSecondarySubmit = {
+    labelText: '',
+    disabled: false,
+    hideSecondarySubmit: false,
+    onClick: onExperimentalSecondarySubmitClickFn,
+  },
   ...rest
 }) =>
   render(
@@ -93,6 +102,12 @@ const renderCreateTearsheet = ({
         onMount={onMountFn}
         description={step1Description}
         subtitle={step1Subtitle}
+        experimentalSecondarySubmit={{
+          labelText: experimentalSecondarySubmit.labelText,
+          disabled: experimentalSecondarySubmit.disabled,
+          hideSecondarySubmit: experimentalSecondarySubmit.hideSecondarySubmit,
+          onClick: experimentalSecondarySubmit.onClick,
+        }}
       >
         step 1 content
         <button type="button" disabled>
@@ -472,6 +487,62 @@ describe(CreateTearsheet.displayName, () => {
       tearsheetChildren[0].classList.contains(
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )
+    );
+  });
+
+  it('should show experimentalSecondarySubmit button (4th button)', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      experimentalSecondarySubmitText,
+    });
+    const button = screen.getByText(experimentalSecondarySubmitText);
+    expect(button).toBeInTheDocument();
+  });
+
+  it('should disabled experimentalSecondarySubmit button', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      experimentalSecondarySubmitText,
+      experimentalSecondarySubmit: { disabled: true },
+    });
+    const button = screen.getByText(experimentalSecondarySubmitText);
+    expect(button).toBeDisabled();
+  });
+
+  it('should hide experimentalSecondarySubmit button', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      experimentalSecondarySubmitText,
+      experimentalSecondarySubmit: { hideSecondarySubmit: true },
+    });
+    const button = screen.queryByText(experimentalSecondarySubmitText);
+    expect(button).toBeNull();
+  });
+
+  it('should rename experimentalSecondarySubmit button text', () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      experimentalSecondarySubmitText,
+      experimentalSecondarySubmit: {
+        labelText: experimentalSecondaryLabelText,
+      },
+    });
+
+    const button = screen.getByText(experimentalSecondaryLabelText);
+    expect(button).toBeInTheDocument();
+  });
+  it('should call experimentalSecondarySubmit onClick', async () => {
+    renderCreateTearsheet({
+      ...defaultProps,
+      experimentalSecondarySubmitText,
+      experimentalSecondarySubmit: {
+        onClick: onExperimentalSecondarySubmitClickFn,
+      },
+    });
+    const button = screen.getByText(experimentalSecondarySubmitText);
+    await act(() => click(button));
+    await waitFor(() =>
+      expect(onExperimentalSecondarySubmitClickFn).toHaveBeenCalled()
     );
   });
 

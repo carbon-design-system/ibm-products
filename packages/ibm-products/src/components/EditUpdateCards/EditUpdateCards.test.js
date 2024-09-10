@@ -23,8 +23,8 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component EditUpdateCards', async () => {
-    render(<EditUpdateCards> </EditUpdateCards>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
@@ -39,8 +39,12 @@ describe(componentName, () => {
   // });
 
   it('applies className to the containing node', async () => {
-    render(<EditUpdateCards className={className}> </EditUpdateCards>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(
+      <EditUpdateCards className={className} data-testid={dataTestId}>
+        {' '}
+      </EditUpdateCards>
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {

@@ -75,7 +75,6 @@ export let CoachmarkOverlayElement = React.forwardRef<
           }
         )}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__content`}>

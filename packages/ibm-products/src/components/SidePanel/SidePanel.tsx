@@ -623,7 +623,6 @@ export let SidePanel = React.forwardRef(
             selectorPrimaryFocus &&
             getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
           ) {
-            // const primeFocusEl = document?.querySelector(selectorPrimaryFocus);
             const primeFocusEl = getSpecificElement(
               sidePanelRef?.current,
               selectorPrimaryFocus

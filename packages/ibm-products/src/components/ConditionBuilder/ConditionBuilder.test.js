@@ -100,11 +100,11 @@ const getOptions = async (conditionState, { property }) => {
 };
 describe(componentName, () => {
   it('renders a component ConditionBuilder', async () => {
-    render(<ConditionBuilder {...defaultProps} />);
-    expect(screen.getByRole('main')).toHaveClass(cx(blockClass));
+    render(<ConditionBuilder data-testid={dataTestId} {...defaultProps} />);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(cx(blockClass));
   });
 
-   it('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<ConditionBuilder {...defaultProps} />);
     try {
       await expect(container).toBeAccessible(componentName);
@@ -115,8 +115,14 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    render(<ConditionBuilder className={className} {...defaultProps} />);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(
+      <ConditionBuilder
+        data-testid={dataTestId}
+        className={className}
+        {...defaultProps}
+      />
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
@@ -517,8 +523,8 @@ describe(componentName, () => {
     const inputElement = document.querySelector('#datePicker');
     await act(() => userEvent.type(inputElement, '12/06/2024{enter}'));
 
-    await act(() => userEvent.keyboard('{escape}'));
-
+    const outsideElement = document.body;
+    fireEvent.mouseDown(outsideElement);
     const selectedItem = screen.getByRole('button', { name: '12/06/2024' });
 
     expect(selectedItem);

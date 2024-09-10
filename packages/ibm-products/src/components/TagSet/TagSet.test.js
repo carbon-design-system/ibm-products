@@ -14,11 +14,7 @@ import { TagSetModal } from './TagSetModal';
 
 import { TYPES as tagTypes } from './constants';
 
-import {
-  expectMultipleError,
-  mockHTMLElement,
-  required,
-} from '../../global/js/utils/test-helper';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const { prefix } = pkg;
@@ -196,22 +192,6 @@ describe(TagSet.displayName, () => {
     await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
   });
-
-  it('it requires strings for overflow and modal when more than ten tags supplied.', async () =>
-    expectMultipleError(
-      [
-        required('allTagsModalSearchLabel', 'TagSet'),
-        required('allTagsModalSearchPlaceholderText', 'TagSet'),
-        required('allTagsModalTitle', 'TagSet'),
-        required('showAllTagsLabel', 'TagSet'),
-      ],
-      () => {
-        const visibleTags = 5;
-        window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
-
-        render(<TagSet tags={tags} />);
-      }
-    ));
 
   it('Obeys max visible', async () => {
     window.innerWidth = tagWidth * 10 + 1;

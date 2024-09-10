@@ -99,7 +99,6 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
-          role="main"
           ref={conditionBuilderRef}
           {...getDevtoolsProps(componentName)}
         >
@@ -214,7 +213,7 @@ ConditionBuilder.propTypes = {
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
-   
+
    */
   /**@ts-ignore */
   inputConfig: PropTypes.shape({

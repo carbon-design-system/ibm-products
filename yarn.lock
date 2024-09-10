@@ -1707,7 +1707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.26.0":
+"@carbon/grid@npm:^11.24.1, @carbon/grid@npm:^11.26.0":
   version: 11.26.0
   resolution: "@carbon/grid@npm:11.26.0"
   dependencies:
@@ -1742,11 +1742,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
-    "@carbon/grid": "npm:^11.26.0"
-    "@carbon/ibm-products-styles": "npm:^2.44.0"
+    "@carbon/grid": "npm:^11.24.1"
+    "@carbon/ibm-products-styles": "npm:^2.45.0-rc.0"
     "@carbon/layout": "npm:^11.25.0"
     "@carbon/motion": "npm:^11.21.0"
-    "@carbon/react": "npm:^1.65.0"
+    "@carbon/react": "npm:^1.61.0"
     "@carbon/themes": "npm:^11.39.0"
     "@carbon/type": "npm:^11.30.0"
     "@storybook/addon-a11y": "npm:^8.1.10"
@@ -1792,7 +1792,7 @@ __metadata:
     babel-preset-ibm-cloud-cognitive: "npm:^0.14.40"
     cross-env: "npm:^7.0.3"
     jest: "npm:^29.6.2"
-    jest-config-ibm-cloud-cognitive: "npm:^1.7.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.8.0-rc.0"
     jest-environment-jsdom: "npm:^29.6.2"
     rimraf: "npm:^5.0.1"
     sass: "npm:^1.77.2"
@@ -1808,7 +1808,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products-styles@npm:^2.44.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.45.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -1818,7 +1818,7 @@ __metadata:
     cross-env: "npm:^7.0.3"
     glob: "npm:^10.3.10"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.7.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.8.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-check-updates: "npm:^16.14.12"
     npm-run-all: "npm:^4.1.5"
@@ -1849,7 +1849,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.21.5"
     "@babel/runtime": "npm:^7.23.9"
     "@carbon/feature-flags": "npm:^0.22.0"
-    "@carbon/ibm-products-styles": "npm:^2.44.0"
+    "@carbon/ibm-products-styles": "npm:^2.45.0-rc.0"
     "@carbon/telemetry": "npm:^0.1.0"
     "@dnd-kit/core": "npm:^6.0.8"
     "@dnd-kit/modifiers": "npm:^7.0.0"
@@ -1874,7 +1874,7 @@ __metadata:
     glob: "npm:^10.3.10"
     immutability-helper: "npm:^3.1.1"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.7.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.8.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
     lodash: "npm:^4.17.21"
     lottie-web: "npm:^5.12.2"
@@ -1890,10 +1890,10 @@ __metadata:
     typescript-config-carbon: "npm:^0.3.0"
     yargs: "npm:^17.7.2"
   peerDependencies:
-    "@carbon/grid": ^11.26.0
+    "@carbon/grid": ^11.24.1
     "@carbon/layout": ^11.25.0
     "@carbon/motion": ^11.21.0
-    "@carbon/react": ^1.65.0
+    "@carbon/react": ^1.61.0
     "@carbon/themes": ^11.39.0
     "@carbon/type": ^11.30.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -1941,7 +1941,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.65.0":
+"@carbon/react@npm:^1.61.0":
   version: 1.65.0
   resolution: "@carbon/react@npm:1.65.0"
   dependencies:
@@ -15010,7 +15010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.7.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.8.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -17329,13 +17329,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:4.0.6":
-  version: 4.0.6
-  resolution: "micromatch@npm:4.0.6"
+"micromatch@npm:4.0.8":
+  version: 4.0.8
+  resolution: "micromatch@npm:4.0.8"
   dependencies:
     braces: "npm:^3.0.3"
-    picomatch: "npm:^4.0.2"
-  checksum: ed95dc8d00dbe3795a0daf0f19f411714f4b39d888824f7b460f4bdbd8952b06628c64704c05b319aca27e2418628a6286b5595890ce9d0c53e5ae962435c83f
+    picomatch: "npm:^2.3.1"
+  checksum: 6bf2a01672e7965eb9941d1f02044fad2bd12486b5553dc1116ff24c09a8723157601dc992e74c911d896175918448762df3b3fd0a6b61037dd1a9766ddfbf58
   languageName: node
   linkType: hard
 
@@ -19408,13 +19408,6 @@ __metadata:
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 60c2595003b05e4535394d1da94850f5372c9427ca4413b71210f437f7b2ca091dbd611c45e8b37d10036fa8eade25c1b8951654f9d3973bfa66a2ff4d3b08bc
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "picomatch@npm:4.0.2"
-  checksum: ce617b8da36797d09c0baacb96ca8a44460452c89362d7cb8f70ca46b4158ba8bc3606912de7c818eb4a939f7f9015cef3c766ec8a0c6bfc725fdc078e39c717
   languageName: node
   linkType: hard
 

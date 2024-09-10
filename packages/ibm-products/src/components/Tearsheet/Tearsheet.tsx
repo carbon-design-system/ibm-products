@@ -59,7 +59,7 @@ export interface TearsheetProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps<'button'>[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.

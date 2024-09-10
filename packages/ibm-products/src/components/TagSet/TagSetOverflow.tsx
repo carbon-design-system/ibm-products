@@ -68,6 +68,10 @@ interface TagSetOverflowProps {
    */
   overflowType?: OverflowType;
   /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign?: boolean;
+  /**
    * Open state of the popover
    */
   popoverOpen?: boolean;
@@ -90,6 +94,7 @@ export const TagSetOverflow = React.forwardRef(
       className,
       onShowAllClick,
       overflowAlign = 'bottom',
+      overflowAutoAlign,
       overflowTags,
       overflowType,
       showAllTagsLabel,
@@ -142,6 +147,7 @@ export const TagSetOverflow = React.forwardRef(
           highContrast
           onKeyDown={handleEscKeyPress}
           open={popoverOpen}
+          autoAlign={overflowAutoAlign}
         >
           <Tag
             onClick={() => setPopoverOpen?.(!popoverOpen)}
@@ -234,6 +240,10 @@ TagSetOverflow.propTypes = {
     'right-bottom',
     'right-top',
   ]),
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign: PropTypes.bool,
   /**
    * tags shown in overflow
    */

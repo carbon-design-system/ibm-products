@@ -11,8 +11,9 @@ const COLUMN_RESIZE_START = 'columnStartResizing';
 const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
-const TOGGLE_ROW_SELECTED = 'toggleRowSelected';
-const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected';
+const TOGGLE_ROW_SELECTED = 'toggleRowSelected'; // selects individual row
+const TOGGLE_ALL_ROWS_SELECTED = 'toggleAllRowsSelected'; // selects all rows in entire table
+const TOGGLE_ON_PAGE_ALL_ROWS_SELECTED = 'toggleAllRowsOnPageSelected'; // selects all rows in the current page
 const DYNAMIC_ROW_CHECK = 'dynamicRowCheck';
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -77,6 +78,17 @@ export const handleSelectAllRowData = ({
     type: TOGGLE_ALL_ROWS_SELECTED,
     payload: { rows, getRowId, indeterminate, isChecked },
   });
+export const handleOnPageSelectAllRowData = ({
+  dispatch,
+  rows,
+  getRowId,
+  indeterminate,
+  isChecked,
+}) =>
+  dispatch({
+    type: TOGGLE_ON_PAGE_ALL_ROWS_SELECTED,
+    payload: { rows, getRowId, indeterminate, isChecked },
+  });
 
 export const handleDynamicRowCheck = ({
   dispatch,
@@ -118,9 +130,14 @@ export const stateReducer = (newState, action) => {
       const newSelectedRowIds = {};
       if (rows) {
         const newSelectedRowData = {};
+        const nonSelectableRows =
+          rows.find((row) => row.getRowProps)?.getRowProps?.()
+            ?.nonselectablerows || [];
         rows.forEach((row) => {
-          const props = row.getRowProps?.();
-          if (props && props.disabled) {
+          if (
+            nonSelectableRows.length > 0 &&
+            nonSelectableRows.includes(row.id)
+          ) {
             return;
           }
           newSelectedRowIds[getRowId(row.original, row.index)] = true;
@@ -133,6 +150,53 @@ export const stateReducer = (newState, action) => {
             indeterminate || !isChecked ? {} : newSelectedRowData,
         };
       }
+      return {
+        ...newState,
+      };
+    }
+    case TOGGLE_ON_PAGE_ALL_ROWS_SELECTED: {
+      const { rows, getRowId, indeterminate, isChecked } = action.payload || {};
+      const previousSelectedRowIds = newState.selectedRowIds || {};
+      const previousSelectedRowData = newState.selectedRowData || {};
+
+      const newSelectedRowIds = {};
+      if (rows) {
+        const newSelectedRowData = {};
+        rows.forEach((row) => {
+          const props = row.getRowProps?.();
+          if (props && props.disabled) {
+            return;
+          }
+          if (props) {
+            if (!indeterminate && isChecked) {
+              // adds selection to newly selected rows
+              newSelectedRowIds[getRowId(row.original, row.index)] = true;
+              newSelectedRowData[getRowId(row.original, row.index)] =
+                row.original;
+            } else {
+              // removes selection from previously selected rows
+              delete previousSelectedRowIds[getRowId(row.original, row.index)];
+              delete previousSelectedRowData[getRowId(row.original, row.index)];
+            }
+          }
+        });
+
+        const finalSelectedRowIds = {
+          ...previousSelectedRowIds,
+          ...newSelectedRowIds,
+        };
+        const finalSelectedRowData = {
+          ...previousSelectedRowData,
+          ...newSelectedRowData,
+        };
+
+        return {
+          ...newState,
+          selectedRowIds: finalSelectedRowIds,
+          selectedRowData: finalSelectedRowData,
+        };
+      }
+
       return {
         ...newState,
       };

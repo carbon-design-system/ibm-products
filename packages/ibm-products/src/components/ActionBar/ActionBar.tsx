@@ -12,6 +12,7 @@ import React, {
   useRef,
   PropsWithChildren,
   Ref,
+  ForwardedRef,
 } from 'react';
 
 // Other standard imports.
@@ -86,6 +87,10 @@ interface ActionBarProps extends PropsWithChildren {
    */
   overflowAriaLabel: string;
   /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  overflowMenuRef?: ForwardedRef<HTMLDivElement>;
+  /**
    * align tags to right of available space
    */
   rightAlign?: boolean;
@@ -107,6 +112,7 @@ export let ActionBar = React.forwardRef(
       menuOptionsClass,
       onWidthChange,
       overflowAriaLabel,
+      overflowMenuRef,
       rightAlign,
 
       // Collect any other property values passed in.
@@ -139,6 +145,7 @@ export let ActionBar = React.forwardRef(
             <ActionBarOverflowItems
               className={`${blockClass}__hidden-sizing-item`}
               overflowAriaLabel="hidden sizing overflow items"
+              overflowMenuRef={overflowMenuRef}
               overflowItems={[]}
               key="hidden-overflow-menu"
               tabIndex={-1}
@@ -156,7 +163,7 @@ export let ActionBar = React.forwardRef(
           </span>
         </div>
       );
-    }, [actions]);
+    }, [actions, overflowMenuRef]);
 
     // creates displayed items based on actions, displayCount and alignment
     useEffect(() => {
@@ -174,6 +181,7 @@ export let ActionBar = React.forwardRef(
           <ActionBarOverflowItems
             menuOptionsClass={menuOptionsClass}
             overflowAriaLabel={overflowAriaLabel}
+            overflowMenuRef={overflowMenuRef}
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}
           />
@@ -181,7 +189,13 @@ export let ActionBar = React.forwardRef(
       }
 
       setDisplayedItems(newDisplayedItems);
-    }, [actions, displayCount, overflowAriaLabel, menuOptionsClass]);
+    }, [
+      actions,
+      displayCount,
+      overflowAriaLabel,
+      menuOptionsClass,
+      overflowMenuRef,
+    ]);
 
     // determine display count based on space available and width of pageActions
     const checkFullyVisibleItems = () => {
@@ -354,6 +368,14 @@ ActionBar.propTypes = {
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
   overflowAriaLabel: PropTypes.string.isRequired,
+  /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  /**@ts-ignore */
+  overflowMenuRef: PropTypes.oneOfType([
+    PropTypes.shape({ current: PropTypes.elementType }),
+    PropTypes.object,
+  ]),
   /**
    * align tags to right of available space
    */

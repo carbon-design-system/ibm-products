@@ -94,15 +94,12 @@ const CustomizeColumnsTearsheet = ({
     if (selectedColumnsCount === 0) {
       setDirty(false);
     } else {
-      setDirty();
+      setDirty(true);
     }
   };
-
   const setDirty = (dirty) => {
-    if (dirty !== undefined) {
+    if (dirty !== isDirty) {
       setIsDirty(dirty);
-    } else if (!isDirty) {
-      setIsDirty(true);
     }
   };
 
@@ -160,7 +157,7 @@ const CustomizeColumnsTearsheet = ({
         searchText={searchText}
         setColumnsObject={(cols) => {
           setColumnObjects(cols);
-          setDirty();
+          setDirty(true);
         }}
         setSearchText={setSearchText}
         findColumnPlaceholderLabel={findColumnPlaceholderLabel}
@@ -181,7 +178,7 @@ const CustomizeColumnsTearsheet = ({
             if (getVisibleColumnsCount() === 0) {
               setDirty(false);
             } else {
-              setDirty();
+              setDirty(true);
             }
           }}
           selectAllLabel={selectAllLabel}

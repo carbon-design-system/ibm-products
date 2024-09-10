@@ -4,25 +4,43 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import { Hooks, Row, RowPropGetter, TableRowProps } from 'react-table';
 import { DatagridRow, PropGetterMeta } from './types';
+
+const nonselectablerowsList = (instance) => {
+  const nonselectablerows: number[] =
+    instance?.rows
+      ?.filter(
+        (row) =>
+          instance.shouldDisableSelectRow &&
+          instance.shouldDisableSelectRow(row)
+      )
+      .map((row) => row.id) || [];
+  return nonselectablerows;
+};
 
 const useDisableSelectRows = (hooks: Hooks) => {
   updateSelectAll(hooks);
   updatePageSelectAll(hooks);
 
+  let nonselectablerows: number[] = [];
+  const useInstance = (instance) => {
+    nonselectablerows = nonselectablerowsList(instance);
+  };
+  hooks.useInstance.push(useInstance);
+
   const getRowProps: RowPropGetter<any> = (
     props: Partial<TableRowProps>,
     { row, instance }: PropGetterMeta
-  ) =>
-    [
+  ) => {
+    return [
       props,
       {
         disabled: instance?.shouldDisableSelectRow?.(row),
+        nonselectablerows,
       },
     ] as Partial<TableRowProps>[];
-
+  };
   hooks.getRowProps.push(getRowProps);
 };
 

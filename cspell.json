@@ -125,6 +125,7 @@
     "nodataemptystate",
     "noninteractive",
     "nonlinearreading",
+    "nonselectablerows",
     "noreply",
     "overridable",
     "overscan",

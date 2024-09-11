@@ -146,6 +146,7 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
+    page.waitForLoadState('domcontentloaded');
 
     // renders all buttons on large screens by default
     await page.keyboard.press('Tab');
@@ -163,10 +164,11 @@ test.describe('PageHeader @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.waitForTimeout(40);
-    const dangerButton = page.getByRole('button', {
-      name: 'danger Danger button',
-    });
-    await expect(dangerButton).toBeFocused();
+    await expect(
+      page.getByRole('button', {
+        name: 'danger Danger button',
+      })
+    ).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(
       page.getByRole('button', { name: 'Secondary button' })
@@ -212,7 +214,7 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-
+    page.waitForLoadState('domcontentloaded');
     // renders all buttons on large screens by default
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
@@ -275,7 +277,7 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-
+    page.waitForLoadState('domcontentloaded');
     // renders all buttons on large screens by default
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');

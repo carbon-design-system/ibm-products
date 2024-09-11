@@ -34,6 +34,7 @@ import {
   usePrefix,
   type ButtonProps,
   unstable_FeatureFlags as FeatureFlags,
+  Tooltip,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -519,9 +520,11 @@ export const TearsheetShell = React.forwardRef(
                     >
                       {title}
                     </Wrap>
-                    <Wrap className={`${bc}__header-description`}>
-                      {description}
-                    </Wrap>
+                    <Tooltip label={description} align="bottom-right">
+                      <Wrap className={`${bc}__header-description`}>
+                        {description}
+                      </Wrap>
+                    </Tooltip>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>
                     {headerActions}

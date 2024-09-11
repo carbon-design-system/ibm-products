@@ -1,0 +1,1 @@
+import{a as c,c as n,_ as p}from"./floating-ui.react-DMp4y4mM.js";import{P as e}from"./index-Dk74W0Oi.js";import{R as i}from"./index-BwDkhjyp.js";function f(s){let{className:r,children:a,...o}=s;const t=c(),m=n(`${t}--form`,r);return i.createElement("form",p({className:m},o),a)}f.propTypes={children:e.node,className:e.string};export{f as F};

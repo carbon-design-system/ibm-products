@@ -520,7 +520,7 @@ export const TearsheetShell = React.forwardRef(
                     >
                       {title}
                     </Wrap>
-                    <Tooltip label={description} align="bottom-right">
+                    <Tooltip label={description} align="bottom-end">
                       <Wrap className={`${bc}__header-description`}>
                         {description}
                       </Wrap>

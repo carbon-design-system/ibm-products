@@ -175,12 +175,18 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState<HTMLDivElement[]>([]);
     const overflowTag = useRef<HTMLDivElement>(null);
+    const [maxVisibleCount, setMaxVisibleCount] = useState<number>(0);
 
     const [popoverOpen, setPopoverOpen] = useState(false);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
+
+    useEffect(() => {
+      const maxCount = maxVisible || tags?.length || 0;
+      setMaxVisibleCount(maxCount);
+    }, [maxVisible, tags]);
 
     useEffect(() => {
       const newSizingTags: HTMLDivElement[] = [];
@@ -284,7 +290,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     const checkFullyVisibleTags = useCallback(() => {
       if (multiline) {
-        return setDisplayCount(maxVisible || 3);
+        return setDisplayCount(maxVisibleCount);
       }
 
       // how many will fit?
@@ -324,10 +330,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       if (willFit < 1) {
         setDisplayCount(0);
       } else {
-        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
+        setDisplayCount(
+          maxVisibleCount ? Math.min(willFit, maxVisibleCount) : willFit
+        );
       }
     }, [
-      maxVisible,
+      maxVisibleCount,
       multiline,
       sizingTags,
       tagSetRef,
@@ -337,7 +345,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     useEffect(() => {
       checkFullyVisibleTags();
-    }, [checkFullyVisibleTags, maxVisible, multiline, sizingTags]);
+    }, [checkFullyVisibleTags, maxVisibleCount, multiline, sizingTags]);
 
     /* don't know how to test resize */
     /* istanbul ignore next */

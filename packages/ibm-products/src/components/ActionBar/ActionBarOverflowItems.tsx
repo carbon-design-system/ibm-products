@@ -6,7 +6,12 @@
 //
 
 // Import portions of React that are needed.
-import React, { useRef, PropsWithChildren, ReactElement } from 'react';
+import React, {
+  useRef,
+  PropsWithChildren,
+  ReactElement,
+  ForwardedRef,
+} from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -38,9 +43,13 @@ interface ActionBarOverflowItemProps extends PropsWithChildren {
    */
   menuOptionsClass?: string;
   /**
-   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   * overflowAriaLabel label for open close button overflow used for action bar items that do not fit.
    */
   overflowAriaLabel?: string;
+  /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  overflowMenuRef?: ForwardedRef<HTMLDivElement>;
   /**
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
@@ -57,48 +66,52 @@ export const ActionBarOverflowItems = ({
   menuOptionsClass,
   overflowItems,
   overflowAriaLabel,
+  overflowMenuRef,
 }: ActionBarOverflowItemProps) => {
   const internalId = useRef(uuidv4());
+
   return (
-    <OverflowMenu
-      aria-label={overflowAriaLabel}
-      className={cx(blockClass, className)}
-      direction="bottom"
-      flipped
-      iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
-      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
-    >
-      {React.Children.map(overflowItems, (item, index) => {
-        // This uses a copy of a menu item option
-        // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
-        // div equivalent below is based on Carbon 10.25.0
-        const ItemIcon = item?.props.renderIcon as React.ComponentType<any>;
-        return (
-          <OverflowMenuItem
-            className={`${blockClass}__item`}
-            onClick={item?.props.onClick}
-            itemText={
-              <div
-                className={`${blockClass}__item-content`}
-                aria-describedby={`${internalId.current}-${index}--item-label`}
-              >
-                <span
-                  className={`${blockClass}__item-label`}
-                  id={`${internalId.current}-${index}--item-label`}
+    <div ref={overflowMenuRef}>
+      <OverflowMenu
+        aria-label={overflowAriaLabel}
+        className={cx(blockClass, className)}
+        direction="bottom"
+        flipped
+        iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
+        menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
+      >
+        {React.Children.map(overflowItems, (item, index) => {
+          // This uses a copy of a menu item option
+          // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
+          // div equivalent below is based on Carbon 10.25.0
+          const ItemIcon = item?.props.renderIcon as React.ComponentType<any>;
+          return (
+            <OverflowMenuItem
+              className={`${blockClass}__item`}
+              onClick={item?.props.onClick}
+              itemText={
+                <div
+                  className={`${blockClass}__item-content`}
+                  aria-describedby={`${internalId.current}-${index}--item-label`}
                 >
-                  {item?.props.label}
-                </span>
-                {typeof item?.props.renderIcon === 'function' ? (
-                  <ItemIcon />
-                ) : (
-                  item?.props.renderIcon
-                )}
-              </div>
-            }
-          />
-        );
-      })}
-    </OverflowMenu>
+                  <span
+                    className={`${blockClass}__item-label`}
+                    id={`${internalId.current}-${index}--item-label`}
+                  >
+                    {item?.props.label}
+                  </span>
+                  {typeof item?.props.renderIcon === 'function' ? (
+                    <ItemIcon />
+                  ) : (
+                    item?.props.renderIcon
+                  )}
+                </div>
+              }
+            />
+          );
+        })}
+      </OverflowMenu>
+    </div>
   );
 };
 
@@ -118,10 +131,20 @@ ActionBarOverflowItems.propTypes = {
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
   overflowAriaLabel: PropTypes.string,
+
   /**
    * overflowItems: items to bre shown in the ActionBar overflow menu
    */
   overflowItems: PropTypes.arrayOf(PropTypes.element),
+
+  /**
+   * overflowMenuRef for the overflow menu width that is needed to calculate the width of the action bar with overflow
+   */
+  /**@ts-ignore */
+  overflowMenuRef: PropTypes.oneOfType([
+    PropTypes.shape({ current: PropTypes.elementType }),
+    PropTypes.object,
+  ]),
 
   /**
    * Optional tab index

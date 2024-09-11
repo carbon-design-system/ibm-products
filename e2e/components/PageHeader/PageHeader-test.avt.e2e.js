@@ -163,9 +163,10 @@ test.describe('PageHeader @avt', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.waitForTimeout(40);
-    await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
-    ).toBeFocused();
+    const dangerButton = page.getByRole('button', {
+      name: 'danger Danger button',
+    });
+    await expect(dangerButton).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(
       page.getByRole('button', { name: 'Secondary button' })

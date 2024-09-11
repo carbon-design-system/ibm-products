@@ -103,7 +103,26 @@ test.describe('PageHeader @avt', () => {
     await expect(pageTitle).toBeInViewport();
 
     // The header collapses when the cheveron button is toggled close.
-    await pressTabKey(page, 19);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(page.getByLabel('Collapse the page header')).toBeFocused();
     await page.keyboard.press('Enter');
     await page.waitForTimeout(300);
@@ -129,7 +148,21 @@ test.describe('PageHeader @avt', () => {
     });
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 14);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -145,7 +178,12 @@ test.describe('PageHeader @avt', () => {
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
     await page.getByLabel('Open and close additional').focus();
-    await pressTabKey(page, 5);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
 
     await expect(
       page.getByRole('button', { name: 'Page actions' })
@@ -175,7 +213,21 @@ test.describe('PageHeader @avt', () => {
     });
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 14);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -187,15 +239,20 @@ test.describe('PageHeader @avt', () => {
     await expect(
       page.getByRole('button', { name: 'Primary button' })
     ).toBeFocused();
-    // reset focus to first focusable element
-    await page.getByRole('link', { name: 'Home page' }).focus();
     // changes position when header collapsed
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 180);
-    await pressTabKey(page, 4);
-    await expect(
-      page.getByRole('button', { name: 'Page actions...' })
-    ).toBeFocused();
+    await page.waitForTimeout(40);
+    // reset focus to first focusable element
+    await page.getByRole('link', { name: 'Home page' }).focus();
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
+    const pageActionsButton = page.getByRole('button', {
+      name: 'Page actions',
+    });
+    await expect(pageActionsButton).toBeFocused();
     await page.keyboard.press('Enter');
     (await page.locator('*:focus').textContent()) === 'Primary button';
     await page.keyboard.press('ArrowDown');
@@ -203,9 +260,7 @@ test.describe('PageHeader @avt', () => {
     await page.keyboard.press('ArrowDown');
     (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Escape');
-    await expect(
-      page.getByRole('button', { name: 'Page actions' })
-    ).toBeFocused();
+    await expect(pageActionsButton).toBeFocused();
   });
 
   // action bar buttons move into MenuButton on small screens
@@ -221,26 +276,43 @@ test.describe('PageHeader @avt', () => {
     });
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 4);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip').getByText('Action 2')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip').getByText('Action 3')).toBeVisible();
-    await pressTabKey(page, 5);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(page.getByRole('tooltip').getByText('Action 8')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip').getByText('Action 9')).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('tooltip').getByText('Action 10')
+    ).toBeVisible();
 
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
     await page.getByLabel('Open and close additional').focus();
-    await pressTabKey(page, 1);
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
-    await pressTabKey(page, 2);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(page.getByRole('tooltip').getByText('Action 3')).toBeVisible();
-    await pressTabKey(page, 1);
+    await page.keyboard.press('Tab');
+    await page.waitForTimeout(40);
     await expect(
       page.getByRole('button', { name: 'Show further action bar items' })
     ).toBeFocused();
@@ -261,10 +333,3 @@ test.describe('PageHeader @avt', () => {
     ).toBeFocused();
   });
 });
-
-async function pressTabKey(page, number) {
-  for (let i = 0; i < number; i++) {
-    await page.keyboard.press('Tab');
-    await page.waitForTimeout(40);
-  }
-}

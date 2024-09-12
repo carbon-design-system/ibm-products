@@ -104,7 +104,7 @@ describe(componentName, () => {
     expect(screen.getByRole('main')).toHaveClass(cx(blockClass));
   });
 
-   it('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<ConditionBuilder {...defaultProps} />);
     try {
       await expect(container).toBeAccessible(componentName);

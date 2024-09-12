@@ -54,6 +54,12 @@ interface WrapProps extends PropsWithChildren {
   neverRender?: boolean;
 
   className?: string;
+
+  /**
+   * Tab index for the wrapper div
+   */
+  tabIndex?: number;
+
   /**
    * The title attribute the content.
    */

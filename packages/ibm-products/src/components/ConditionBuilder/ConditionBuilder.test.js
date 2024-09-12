@@ -523,8 +523,8 @@ describe(componentName, () => {
     const inputElement = document.querySelector('#datePicker');
     await act(() => userEvent.type(inputElement, '12/06/2024{enter}'));
 
-    await act(() => userEvent.keyboard('{escape}'));
-
+    const outsideElement = document.body;
+    fireEvent.mouseDown(outsideElement);
     const selectedItem = screen.getByRole('button', { name: '12/06/2024' });
 
     expect(selectedItem);

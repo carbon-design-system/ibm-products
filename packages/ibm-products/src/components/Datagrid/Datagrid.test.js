@@ -2377,7 +2377,7 @@ describe(componentName, () => {
     dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
     await type(dateInputs[0], '01/01/2024');
     await keyboard('[Escape]');
-    await keyboard('[Tab]');
+    await click(dateInputs[1]);
     await keyboard('01/02/2024');
     await keyboard('[Escape]');
     expect(dateInputs[0].value).toEqual('01/01/2024');

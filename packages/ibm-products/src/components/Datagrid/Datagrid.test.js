@@ -949,11 +949,7 @@ describe(componentName, () => {
     );
 
     expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th').length
+      screen.getAllByRole('columnheader', { hidden: true }).length
     ).toEqual(3);
   });
 

@@ -77,11 +77,16 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
 
   // Sync the scrollLeft position of the virtual body to the table header
   useEffect(() => {
+    const headWrapEl = document?.querySelector(
+      `#${tableId} .${blockClass}__head-wrap`
+    );
+    const headEle = headWrapEl?.querySelector(`thead`);
+    if (headEle) {
+      headEle.style.display = 'flex';
+    } // scrollbar width to header column to fix header alignment
+
     function handleScroll(event) {
       const virtualBody = event.target;
-      const headWrapEl = document?.querySelector(
-        `#${tableId} .${blockClass}__head-wrap`
-      );
       if (headWrapEl) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
       }
@@ -89,7 +94,6 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
 
     const testRefValue = testRef?.current;
     testRefValue?.addEventListener('scroll', handleScroll);
-
     return () => {
       testRefValue?.removeEventListener('scroll', handleScroll);
     };

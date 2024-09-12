@@ -54,6 +54,10 @@ interface WrapProps extends PropsWithChildren {
   neverRender?: boolean;
 
   className?: string;
+  /**
+   * The title attribute the content.
+   */
+  title?: string;
 }
 
 /**
@@ -76,6 +80,7 @@ export const Wrap = React.forwardRef(
       element: Wrapper = 'div',
       neverRender,
       className,
+      title,
 
       // Collect any other property values passed in.
       ...rest
@@ -83,7 +88,7 @@ export const Wrap = React.forwardRef(
     ref: ForwardedRef<HTMLElement>
   ) =>
     (neverRender || isEmpty(children)) && !alwaysRender ? null : (
-      <Wrapper className={className} {...rest} ref={ref}>
+      <Wrapper className={className} {...rest} ref={ref} title={title}>
         {children}
       </Wrapper>
     )
@@ -122,4 +127,8 @@ Wrap.propTypes = {
    * content will be rendered.
    */
   neverRender: PropTypes.bool,
+  /**
+   * The title attribute the content.
+   */
+  title: PropTypes.string,
 };

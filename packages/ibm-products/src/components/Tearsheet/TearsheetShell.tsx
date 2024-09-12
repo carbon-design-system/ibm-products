@@ -34,7 +34,6 @@ import {
   usePrefix,
   type ButtonProps,
   unstable_FeatureFlags as FeatureFlags,
-  Tooltip,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -270,7 +269,7 @@ export const TearsheetShell = React.forwardRef(
       selectorPrimaryFocus
     );
     const modalRefValue = modalRef.current;
-
+    const titleText = String(description);
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -520,11 +519,12 @@ export const TearsheetShell = React.forwardRef(
                     >
                       {title}
                     </Wrap>
-                    <Tooltip label={description} align="bottom-end">
-                      <Wrap className={`${bc}__header-description`}>
-                        {description}
-                      </Wrap>
-                    </Tooltip>
+                    <Wrap
+                      className={`${bc}__header-description`}
+                      title={titleText}
+                    >
+                      {description}
+                    </Wrap>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>
                     {headerActions}

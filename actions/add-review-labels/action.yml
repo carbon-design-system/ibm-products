@@ -1,0 +1,12 @@
+name: Add review labels
+description: A custom action that adds review labels to a Pull Request
+inputs:
+  APP_ID:
+    description: GitHub app id
+    required: true
+  APP_PRIVATE_KEY:
+    description: GitHub app private key
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

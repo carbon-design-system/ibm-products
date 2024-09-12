@@ -245,6 +245,15 @@ describe('Notifications', () => {
     expect(onClickOutside).toHaveBeenCalled();
   });
 
+  it('should close the notifications panel when esc key is pressed', async () => {
+    const { container } = renderNotifications({
+      data: [],
+    });
+    container.querySelector(`.${blockClass}`).focus();
+    await act(() => userEvent.keyboard('{Escape}'));
+    expect(onClickOutside).toHaveBeenCalled();
+  });
+
   it('should not render a notifications panel when open is false', async () => {
     const { container } = renderNotifications({
       data: [],

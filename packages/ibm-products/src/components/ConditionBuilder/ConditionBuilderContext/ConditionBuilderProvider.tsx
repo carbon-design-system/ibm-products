@@ -19,7 +19,7 @@ export const emptyState: ConditionBuilderState = {
   groups: [
     {
       groupOperator: 'and',
-      statement: 'if',
+      statement: 'ifAll',
       id: uuidv4(),
       conditions: [
         {
@@ -148,7 +148,7 @@ ConditionBuilderProvider.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * Provide the condition builder variant: sentence/ tree
+   * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
   variant: PropTypes.string.isRequired,
 };

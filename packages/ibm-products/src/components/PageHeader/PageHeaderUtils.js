@@ -124,12 +124,6 @@ export const utilCheckUpdateVerticalSpace = (
       update.headerTopValue += update.navigationRowHeight;
     }
 
-    if (!hasActionBar && !widthIsNarrow) {
-      // Add difference between $spacing-08 and $spacing-07 to ensure space below breadcrumb is correct on scroll
-      // $spacing-07 is used as size for breadcrumb when no action bar otherwise $spacing-08
-      update.headerTopValue += 8;
-    }
-
     if (!enableBreadcrumbScroll || !navigation) {
       // adjust sticky top if no navigation or breadcrumb is to stay on screen
       update.headerTopValue += update.breadcrumbRowHeight;

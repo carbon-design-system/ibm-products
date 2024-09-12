@@ -14,7 +14,6 @@ import {
   ConditionBuilderContext,
   emptyState,
 } from '../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import ConditionPreview from '../ConditionPreview/ConditionPreview';
@@ -30,7 +29,7 @@ import {
   ConditionBuilderState,
   ConditionGroup,
 } from '../ConditionBuilder.types';
-
+import { blockClass, HIERARCHICAL_VARIANT } from '../utils/util';
 interface ConditionBuilderContentProps {
   startConditionLabel: string;
   getConditionState: (state: ConditionBuilderState) => void;
@@ -52,9 +51,14 @@ const ConditionBuilderContent = ({
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
     useState(false);
 
-  const [addConditionGroupText, conditionHeadingText] = useTranslations([
+  const [
+    addConditionGroupText,
+    conditionHeadingText,
+    conditionBuilderHierarchicalText,
+  ] = useTranslations([
     'addConditionGroupText',
     'conditionHeadingText',
+    'conditionBuilderHierarchicalText',
   ]);
   const showConditionGroupPreviewHandler = () => {
     setShowConditionGroupPreview(true);
@@ -121,7 +125,7 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const newGroup: ConditionGroup = {
-      statement: 'if', // 'if|exclude if',
+      statement: 'ifAll', // 'if|exclude if',
       groupOperator: 'and',
       id: uuidv4(),
       conditions: [
@@ -172,7 +176,7 @@ const ConditionBuilderContent = ({
       <div
         className={`${blockClass}__content-container`}
         role="treegrid"
-        aria-label="condition builder tree"
+        aria-label={conditionBuilderHierarchicalText}
       >
         {rootState &&
           rootState?.groups?.map((eachGroup, groupIndex) => (
@@ -202,7 +206,7 @@ const ConditionBuilderContent = ({
           ))}
 
         {/* button to add a new group */}
-        {variant == 'tree' && (
+        {variant == HIERARCHICAL_VARIANT && (
           <div
             role="row"
             tabIndex={-1}

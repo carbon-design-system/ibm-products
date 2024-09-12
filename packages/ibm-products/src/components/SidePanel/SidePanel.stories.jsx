@@ -90,7 +90,7 @@ const rowData = [
 
 const actions_1 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -114,12 +114,12 @@ const actions_3 = [
 
 const actions_4 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -132,7 +132,7 @@ const actions_5 = [
     kind: 'ghost',
   },
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
@@ -153,12 +153,12 @@ const actions_6 = [
 
 const actions_7 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -171,12 +171,12 @@ const actions_7 = [
 
 const actions_8 = [
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -189,17 +189,17 @@ const actions_8 = [
 
 const actions_9 = [
   {
-    label: 'Primary button',
+    label: 'Submit',
     onClick: action('Clicked action button'),
     kind: 'primary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
   {
-    label: 'Secondary button',
+    label: 'Cancel',
     onClick: action('Clicked action button'),
     kind: 'secondary',
   },
@@ -453,6 +453,69 @@ const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   );
 };
 
+const FirstElementDisabledTemplate = ({
+  minimalContent,
+  actions,
+  slug,
+  ...args
+}) => {
+  const [open, setOpen] = useState(false);
+  const testRef = useRef();
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        actions={actionSets[actions]}
+        ref={testRef}
+        slug={slug && sampleSlug}
+        launcherButtonRef={buttonRef}
+      >
+        {!minimalContent && (
+          <div className={`${prefix}body-content`}>
+            <h3 className={`${prefix}body-subheading`}>Section</h3>
+            <div className={`${prefix}text-inputs`}>
+              <TextInput
+                labelText="Input A"
+                id="side-panel-story-text-input-a"
+                className={`${prefix}text-input`}
+                disabled
+              />
+              <TextInput
+                labelText="Input B"
+                id="side-panel-story-text-input-b"
+                className={`${prefix}text-input`}
+              />
+            </div>
+            <div className={`${prefix}text-inputs`}>
+              <TextInput
+                labelText="Input C"
+                id="side-panel-story-text-input-c"
+                className={`${prefix}text-input`}
+              />
+              <TextInput
+                labelText="Input D"
+                id="side-panel-story-text-input-d"
+                className={`${prefix}text-input`}
+              />
+            </div>
+          </div>
+        )}
+      </SidePanel>
+    </>
+  );
+};
+
 // eslint-disable-next-line react/prop-types
 const StepTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
@@ -579,6 +642,14 @@ SpecifyElementToHaveInitialFocus.args = {
 
 export const WithStaticTitle = SlideOverTemplate.bind({});
 WithStaticTitle.args = {
+  ...defaultStoryProps,
+  actions: 0,
+  animateTitle: false,
+  includeOverlay: true,
+};
+
+export const FirstElementDisabled = FirstElementDisabledTemplate.bind({});
+FirstElementDisabled.args = {
   ...defaultStoryProps,
   actions: 0,
   animateTitle: false,

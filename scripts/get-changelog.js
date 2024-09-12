@@ -53,6 +53,7 @@ const delimiter = '----DELIMITER----';
 const denyList = [
   'chore(release): publish [skip ci]',
   'chore(telemetry): update telemetry config',
+  'chore(release): v2.',
 ];
 
 /**
@@ -174,6 +175,8 @@ function generateLog() {
     '@carbon/ibm-products-styles',
     './packages/ibm-products-styles'
   );
+
+  console.log(log);
 
   return log;
 }

@@ -16,7 +16,7 @@ import {
 } from 'react';
 
 export type LogicalOperator = 'and' | 'or';
-export type StatementOperator = 'if' | 'if-not';
+export type StatementOperator = 'ifAll' | 'ifAny' | 'unlessAll' | 'unlessAny';
 
 type CoreOperator = 'is';
 type NumberOperator = 'greater' | 'greaterEqual' | 'lower' | 'lowerEqual';
@@ -168,6 +168,8 @@ export type Action = {
   label?: string;
 };
 
+export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
+
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: ConditionBuilderState;
@@ -181,7 +183,7 @@ export type ConditionBuilderProps = {
   className?: string;
   popOverSearchThreshold: number;
   startConditionLabel: string;
-  variant?: 'sentence' | 'tree';
+  variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
 };
 

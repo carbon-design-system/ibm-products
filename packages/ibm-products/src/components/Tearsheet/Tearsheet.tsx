@@ -59,7 +59,7 @@ export interface TearsheetProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -133,7 +133,7 @@ export interface TearsheetProps extends PropsWithChildren {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: ReactNode;
+  portalTarget?: ReactNode;
 
   /**
    * Specify a CSS selector that matches the DOM element that should be

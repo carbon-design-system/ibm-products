@@ -38,7 +38,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.

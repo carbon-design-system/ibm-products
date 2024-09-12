@@ -326,7 +326,10 @@ patch release:
         release branch off the previously selected tag
         ![Screenshot of GitHub's branch/tag dropdown with release branch created](https://github.com/carbon-design-system/ibm-products/assets/54281166/8b5face8-d982-42df-b9ba-df5ffc01f85e)
 - [ ] Once the patch release branch has been created, open a PR(s) to merge in
-      any fixes / changes needed for the patch release.
+      any fixes / changes needed for the patch release. NOTE: Any changes merged
+      into a `release/v2*` branch will be merged automatically into the `main`
+      branch via the
+      [automerge workflow](https://github.com/carbon-design-system/ibm-products/blob/main/.github/workflows/automerge.yml)
 - [ ] Follow the same steps as the [prerelease](#prerelease) (skipping the
       branch creation steps as we have already created the patch release branch
       from the steps above here),

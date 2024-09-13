@@ -71,3 +71,7 @@ package-lock.json
 
 # Playwright
 .playwright/
+
+# Actions
+/actions/**/node_modules
+/actions/**/yarn.lock

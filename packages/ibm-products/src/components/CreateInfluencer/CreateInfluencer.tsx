@@ -87,7 +87,7 @@ export const CreateInfluencer = ({
             vertical
             className={cx(`${blockClass}__progress-indicator`)}
           >
-            {progressSteps.map((step, stepIndex) => {
+            {progressSteps.map((step: Step, stepIndex: number) => {
               return (
                 <ProgressStep
                   label={step?.title as string}

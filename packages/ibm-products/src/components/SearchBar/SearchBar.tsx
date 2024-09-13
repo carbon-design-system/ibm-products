@@ -199,7 +199,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
       >
         {scopes?.length ? (
           <MultiSelect
-            {...(multiSelectProps as any)}
+            {...multiSelectProps}
             id={`${blockClass}__multi-select`}
             name="search-scopes"
             className={`${blockClass}__scopes`}

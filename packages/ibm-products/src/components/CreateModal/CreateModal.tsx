@@ -61,7 +61,7 @@ export interface CreateModalProps
   /**
    * The title of the CreateModal is usually the product or service name.
    */
-  title: string;
+  title: ReactNode;
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */
@@ -230,7 +230,7 @@ CreateModal.propTypes = {
   /**
    * The title of the CreateModal is usually the product or service name.
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
 };
 
 CreateModal.displayName = componentName;

@@ -30,6 +30,8 @@ export const useCreateComponentStepChange = ({
   componentBlockClass,
   setCreateComponentActions,
   setModalIsOpen,
+  experimentalSecondarySubmit,
+  experimentalSecondarySubmitText,
 }) => {
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
@@ -120,6 +122,11 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
+    const handleExperimentalSecondarySubmit = () => {
+      if (typeof experimentalSecondarySubmit?.onClick === 'function') {
+        experimentalSecondarySubmit.onClick();
+      }
+    };
     if (stepData?.length > 0) {
       const buttons = [];
       if (stepData?.length > 1) {
@@ -141,6 +148,18 @@ export const useCreateComponentStepChange = ({
             : onUnmount,
         kind: 'ghost',
       });
+      if (
+        experimentalSecondarySubmitText &&
+        !experimentalSecondarySubmit?.hideSecondarySubmit
+      ) {
+        buttons.push({
+          key: 'create-action-button-experimentalSecondarySubmit',
+          label: experimentalSecondarySubmitText,
+          onClick: handleExperimentalSecondarySubmit,
+          kind: 'secondary',
+          disabled: experimentalSecondarySubmit?.disabled,
+        });
+      }
       buttons.push({
         key: 'create-action-button-submit',
         label:
@@ -151,6 +170,7 @@ export const useCreateComponentStepChange = ({
         loading: isSubmitting,
         className: `${componentBlockClass}__create-button`,
       });
+
       setCreateComponentActions(buttons);
     }
   }, [
@@ -178,5 +198,7 @@ export const useCreateComponentStepChange = ({
     onPrevious,
     setLoadingPrevious,
     loadingPrevious,
+    experimentalSecondarySubmit,
+    experimentalSecondarySubmitText,
   ]);
 };

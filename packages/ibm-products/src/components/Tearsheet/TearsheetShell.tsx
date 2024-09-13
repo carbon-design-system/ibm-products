@@ -49,7 +49,7 @@ const componentName = 'TearsheetShell';
 const maxDepth = 3;
 
 interface TearsheetShellProps extends PropsWithChildren {
-  actions?: ButtonProps<any>[];
+  actions?: ButtonProps<'button'>[];
 
   ariaLabel?: string;
 
@@ -550,6 +550,7 @@ export const TearsheetShell = React.forwardRef(
                     alwaysRender={
                       !!(influencer && influencerPosition === 'right')
                     }
+                    tabIndex={-1}
                   >
                     {children}
                   </Wrap>

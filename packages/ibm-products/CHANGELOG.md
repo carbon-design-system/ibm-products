@@ -8,7 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **Datagrid:** return ull for older react versions ([#6048](https://github.com/carbon-design-system/ibm-products/issues/6048)) ([386d750](https://github.com/carbon-design-system/ibm-products/commit/386d7504afd35428fb1957ac2104f417f0a8e77e))
+* **Datagrid:** return null for older react versions ([#6048](https://github.com/carbon-design-system/ibm-products/issues/6048)) ([386d750](https://github.com/carbon-design-system/ibm-products/commit/386d7504afd35428fb1957ac2104f417f0a8e77e))
 
 
 

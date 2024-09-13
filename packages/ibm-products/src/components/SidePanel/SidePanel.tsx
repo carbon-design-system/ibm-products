@@ -39,6 +39,7 @@ import { moderate02 } from '@carbon/motion';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { getSpecificElement } from '../../global/js/hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -265,7 +266,7 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [animationComplete, setAnimationComplete] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
-    const sidePanelRef = ref || localRef;
+    const sidePanelRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const overlayRef = useRef<HTMLDivElement>(null);
     const innerContentRef = useRef<HTMLDivElement>(null);
     const closeRef = useRef<HTMLButtonElement>(null);
@@ -278,8 +279,7 @@ export let SidePanel = React.forwardRef(
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
-    const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
-      .current;
+    const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = usePrefersReducedMotion();
@@ -456,10 +456,7 @@ export let SidePanel = React.forwardRef(
     };
 
     useEffect(() => {
-      if (
-        !doAnimateTitle &&
-        (sidePanelRef as MutableRefObject<HTMLDivElement>).current
-      ) {
+      if (!doAnimateTitle && sidePanelRef.current) {
         panelRefValue?.style.setProperty(
           `--${blockClass}--scroll-animation-progress`,
           '0'
@@ -622,9 +619,18 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open) {
         setTimeout(() => {
-          if (selectorPrimaryFocus) {
-            const primeFocusEl = document?.querySelector(selectorPrimaryFocus);
-            if (primeFocusEl) {
+          if (
+            selectorPrimaryFocus &&
+            getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
+          ) {
+            const primeFocusEl = getSpecificElement(
+              sidePanelRef?.current,
+              selectorPrimaryFocus
+            );
+            if (
+              primeFocusEl &&
+              window?.getComputedStyle(primeFocusEl)?.display !== 'none'
+            ) {
               (primeFocusEl as HTMLElement)?.focus();
             }
           } else if (!slideIn) {
@@ -632,7 +638,14 @@ export let SidePanel = React.forwardRef(
           }
         }, 0);
       }
-    }, [animationComplete, firstElement, open, selectorPrimaryFocus, slideIn]);
+    }, [
+      animationComplete,
+      firstElement,
+      open,
+      selectorPrimaryFocus,
+      sidePanelRef,
+      slideIn,
+    ]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,

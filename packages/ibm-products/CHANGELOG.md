@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.49.1-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.49.0...@carbon/ibm-products@2.49.1-rc.0) (2024-09-13)
+
+
+### Bug Fixes
+
+* **Datagrid:** return null for older react versions ([#6048](https://github.com/carbon-design-system/ibm-products/issues/6048)) ([386d750](https://github.com/carbon-design-system/ibm-products/commit/386d7504afd35428fb1957ac2104f417f0a8e77e))
+
+
+
+
+
 # [2.49.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.49.0-rc.0...@carbon/ibm-products@2.49.0) (2024-09-11)
 
 **Note:** Version bump only for package @carbon/ibm-products

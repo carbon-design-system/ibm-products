@@ -85,6 +85,7 @@ collect:
         - emptyStateSize
         - emptyStateTitle
         - emptyStateType
+        - enableSpacerColumn
         - error
         - errorCodeLabel
         - errorMessage
@@ -249,6 +250,7 @@ collect:
         - overflowActions
         - overflowAlign
         - overflowAriaLabel
+        - overflowAutoAlign
         - overflowClassName
         - overflowTags
         - overflowType
@@ -386,6 +388,7 @@ collect:
         - version
         # ActionBar
         - overflowItems
+        - overflowMenuRef
         # Actions
         - searchText
         - setSearchText
@@ -570,7 +573,10 @@ collect:
         - secondaryTitle
         # CreateInfluencer
         - stepData
+        # CreateTearsheet
+        - experimentalSecondarySubmitText
         # CreateTearsheetStep
+        - experimentalSecondarySubmit
         - onPrevious
         # CustomizeColumnsTearsheet
         - columnDefinitions

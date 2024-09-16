@@ -397,10 +397,6 @@ export const InlineEditCell = ({
     }
   };
 
-  const renderRegularCell = () => {
-    return <span {...inputProps} id={cellId}></span>;
-  };
-
   const renderDateCell = () => {
     const datePickerPreparedProps = prepareProps(config.inputProps, [
       'datePickerInputProps',
@@ -584,10 +580,6 @@ export const InlineEditCell = ({
         [`${blockClass}__static--outer-cell`]: !disabledCell,
       })}
     >
-      {!nonEditCell &&
-        !disabledCell &&
-        type !== 'checkbox' &&
-        renderRegularCell()}
       {(!inEditMode || disabledCell) && type !== 'checkbox' && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}

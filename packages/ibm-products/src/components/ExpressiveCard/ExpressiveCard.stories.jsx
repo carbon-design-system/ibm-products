@@ -111,7 +111,7 @@ const defaultProps = {
       action on the card.
     </p>
   ),
-  primaryButtonText: 'Button',
+  primaryButtonText: 'Read more',
 };
 
 const Template = (opts) => {
@@ -205,7 +205,7 @@ WithPictogram.args = {
 export const WithSecondaryAction = Template.bind({});
 WithSecondaryAction.args = {
   ...defaultProps,
-  secondaryButtonText: 'Secondary',
+  secondaryButtonText: 'Remove',
   secondaryButtonKind: 'ghost',
   mediaRatio: null,
 };
@@ -224,7 +224,7 @@ WithButtonHref.args = {
   ...defaultProps,
   primaryButtonHref: '#',
   secondaryButtonHref: '#',
-  secondaryButtonText: 'Secondary',
+  secondaryButtonText: 'Remove',
   secondaryButtonKind: 'ghost',
 };
 

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gridData } from '../../Datagrid.stories/data/grid-data';
 import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
@@ -19,10 +19,8 @@ import {
   useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
-// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
-import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { Link } from '@carbon/react';
 import { pkg } from '../../../../settings';
@@ -352,6 +350,26 @@ const ClickableRowWithPanel = ({ ...args }) => {
   const [data] = useState(gridData.slice(0, 10));
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [rowData, setRowData] = useState({});
+  const [focusBackElm, setFocusBackElm] = useState();
+  const sidePanelRef = useRef();
+
+  useEffect(() => {
+    if (openSidePanel) {
+      const focusableElements = sidePanelRef.current.querySelectorAll(
+        'button, [href], input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      const lastFocusableElement =
+        focusableElements[focusableElements.length - 2]; //excluding 'Focus sentinel' span
+      const handleFocus = () => {
+        focusBackElm.focus();
+      };
+      lastFocusableElement.addEventListener('blur', handleFocus);
+      return () => {
+        lastFocusableElement.removeEventListener('blur', handleFocus);
+      };
+    }
+  }, [openSidePanel]);
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -360,6 +378,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
         action()(event);
         setOpenSidePanel(true);
         setRowData(row);
+        setFocusBackElm(event.currentTarget);
       },
       DatagridActions,
       batchActions: true,
@@ -384,7 +403,12 @@ const ClickableRowWithPanel = ({ ...args }) => {
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
         selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}
-        onRequestClose={() => setOpenSidePanel(false)}
+        onRequestClose={() => {
+          setOpenSidePanel(false);
+          focusBackElm.focus();
+        }}
+        ref={sidePanelRef}
+        tabIndex="0"
         size={'sm'}
         title={'Title'}
         slideIn

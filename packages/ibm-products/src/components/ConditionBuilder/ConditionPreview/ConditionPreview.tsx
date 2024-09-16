@@ -8,12 +8,12 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { ConditionBuilderItem } from '../ConditionBuilderItem/ConditionBuilderItem';
 import ConditionConnector from '../ConditionBuilderConnector/ConditionConnector';
 import { useTranslations } from '../utils/useTranslations';
 import { Bee } from '@carbon/react/icons';
 import { ConditionGroup } from '../ConditionBuilder.types';
+import { blockClass } from '../utils/util';
 
 interface ConditionPreviewProps {
   previewType: 'newGroup' | 'subGroup' | 'condition';

@@ -13,16 +13,16 @@ import { Checkmark } from '@carbon/react/icons';
 
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../../utils/useTranslations';
 import { PropertyConfigOption } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
 interface ItemOptionProps {
   conditionState: {
     label?: string;
     value?: string;
   };
-  config: PropertyConfigOption['config'];
+  config: PropertyConfigOption['config'] & { isStatement?: boolean };
   onChange: (value: string, e: Event) => void;
 }
 export const ItemOption = ({
@@ -41,9 +41,11 @@ export const ItemOption = ({
 
   const selection = conditionState.value;
 
-  const filteredItems = allOptions?.filter((opt) =>
-    opt.label.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const filteredItems = searchValue
+    ? allOptions?.filter((opt) =>
+        opt.label?.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : allOptions;
 
   useEffect(() => {
     //this will focus the first input field in the popover
@@ -70,6 +72,17 @@ export const ItemOption = ({
 
   const getAriaLabel = () => {
     return conditionState.label ? conditionState.label : propertyText;
+  };
+
+  const getStatementContent = (option) => {
+    return (
+      <div className={`${blockClass}__statement_wrapper`}>
+        <div>
+          {option.text1} ({option.connector})
+        </div>
+        <div>{option.text2}</div>
+      </div>
+    );
   };
 
   if (!allOptions) {
@@ -108,7 +121,9 @@ export const ItemOption = ({
               <div className={`${blockClass}__item-option__option-content`}>
                 <span className={`${blockClass}__item-option__option-label`}>
                   {Icon && <Icon />}
-                  {option.label}
+                  {config.isStatement
+                    ? getStatementContent(option)
+                    : option.label}
                 </span>
                 {isSelected && (
                   <Checkmark className={`${blockClass}__checkmark`} />

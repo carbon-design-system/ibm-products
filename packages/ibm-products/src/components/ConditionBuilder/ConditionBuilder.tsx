@@ -20,13 +20,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
 import { pkg } from '../../settings';
-import {
-  blockClass,
-  NON_HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
-import { handleKeyDown } from './utils/handleKeyboardEvents';
 
 import { ConditionBuilderProps } from './ConditionBuilder.types';
+
+import { handleKeyDown } from './utils/handleKeyboardEvents';
+import { blockClass, NON_HIERARCHICAL_VARIANT } from './utils/util';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -101,7 +99,6 @@ export let ConditionBuilder = React.forwardRef(
               // example: [`${blockClass}__here-if-small`]: size === 'sm',
             }
           )}
-          role="main"
           ref={conditionBuilderRef}
           {...getDevtoolsProps(componentName)}
         >
@@ -216,7 +213,7 @@ ConditionBuilder.propTypes = {
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
-   
+
    */
   /**@ts-ignore */
   inputConfig: PropTypes.shape({

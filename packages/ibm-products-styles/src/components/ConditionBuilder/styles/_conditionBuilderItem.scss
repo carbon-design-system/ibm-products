@@ -54,8 +54,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__item-option__option {
-  block-size: $spacing-07;
+  display: grid;
   cursor: pointer;
+  min-block-size: 2rem;
   padding-inline: $spacing-05;
 }
 
@@ -294,5 +295,13 @@ $colors: (
   /* stylelint-disable max-nesting-depth */
   > path:first-child {
     fill: $icon-primary;
+  }
+}
+
+.#{$block-class}__statement_wrapper {
+  padding: $spacing-03 0;
+
+  :nth-child(2) {
+    color: $text-secondary;
   }
 }

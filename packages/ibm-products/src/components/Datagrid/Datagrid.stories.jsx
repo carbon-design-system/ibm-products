@@ -24,6 +24,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   getAutoSizedColumnWidth,
+  useColumnRightAlign,
 } from '.';
 
 // import mdx from './Datagrid.mdx';
@@ -490,6 +491,7 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
+      toolbarBatchActionsDisplayMin: 3,
       rowActions: getRowActions(),
       onRowSelect: (row, event) => console.log('onRowClick: ', row, event),
       onAllRowSelect: (rows, event) =>
@@ -640,4 +642,42 @@ Skeleton.parameters = {
   percy: {
     skip: true,
   },
+};
+
+export const SpacerColumn = () => {
+  const [data] = useState(makeData(10));
+  const rows = React.useMemo(() => data, [data]);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        width: getAutoSizedColumnWidth(rows, 'lastName', 'Last name'),
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true, //If `multiLineWrap` is required only for specific columns
+        rightAlignedColumn: true,
+      },
+    ],
+    []
+  );
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data: rows,
+      enableSpacerColumn: true,
+    },
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={datagridState} />;
 };

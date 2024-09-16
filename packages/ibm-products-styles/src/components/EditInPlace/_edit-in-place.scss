@@ -55,12 +55,12 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--invalid {
-  outline: 2px solid $support-error;
+  border: 2px solid $support-error;
 }
 
 .#{$block-class}--focused {
+  border: 2px solid $focus;
   background: $field-01;
-  outline: 2px solid $focus;
 }
 
 .#{$block-class}__text-input {

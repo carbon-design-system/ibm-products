@@ -14,6 +14,7 @@ import {
   useDatagrid,
   useStickyColumn,
   useActionsColumn,
+  useDisableSelectRows,
   useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss?inline';
@@ -280,7 +281,7 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
     ],
     []
   );
-  const [data] = useState(gridData.slice(0, 10));
+  const [data] = useState(gridData.slice(0, 50));
   const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
@@ -293,6 +294,8 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
       },
       DatagridActions,
       DatagridPagination,
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id % 5 === 0,
       ...args.defaultGridProps,
     },
     useStickyColumn,

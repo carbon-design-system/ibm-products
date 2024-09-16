@@ -180,7 +180,6 @@ export let CoachmarkStackHome = forwardRef<
             }
             className={cx(blockClass, className)}
             ref={ref}
-            role="main"
             {...getDevtoolsProps(componentName)}
           >
             <CoachmarkHeader

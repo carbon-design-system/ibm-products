@@ -10,9 +10,9 @@ import React from 'react';
 import { NumberInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
-import { blockClass } from '../../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition, PropertyConfigNumber } from '../../ConditionBuilder.types';
+import { blockClass } from '../../utils/util';
 
 interface ConditionBuilderItemNumberProps {
   conditionState: Condition;

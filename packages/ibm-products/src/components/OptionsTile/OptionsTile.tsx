@@ -76,7 +76,7 @@ export interface OptionsTileProps {
    * Provide a function which will be called each time the user
    * interacts with the toggle.
    */
-  onToggle: (value: boolean) => void;
+  onToggle?: (value: boolean) => void;
 
   /**
    * Whether the OptionsTile is in open state.
@@ -444,7 +444,6 @@ OptionsTile.propTypes = {
    * Provide a function which will be called each time the user
    * interacts with the toggle.
    */
-  /**@ts-ignore*/
   onToggle: PropTypes.func,
 
   /**

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.7.0-rc.0...jest-config-ibm-cloud-cognitive@1.9.0-rc.0) (2024-09-16)
+
+
+### Bug Fixes
+
+* update toHaveNoAxeViolations and remove skips ([#5955](https://github.com/carbon-design-system/ibm-products/issues/5955)) ([694128b](https://github.com/carbon-design-system/ibm-products/commit/694128bb707a2400d67e6618af3fea3f3ffba86f))
+
+
+
+
+
 # [1.8.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.8.0-rc.0...jest-config-ibm-cloud-cognitive@1.8.0) (2024-09-11)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

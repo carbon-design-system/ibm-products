@@ -64,7 +64,7 @@ test.describe('AboutModal @avt', () => {
       },
     });
 
-    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    const modalElement = page.locator(`.${carbon.prefix}--modal`);
     const openButton = page.getByText(
       'Open the About modal with all props set'
     );
@@ -107,8 +107,11 @@ test.describe('AboutModal @avt', () => {
     await page.keyboard.press('Tab');
     await expect(closeIcon).toBeFocused();
 
-    // Press escape to close modal
+    // Press escape to twise
+    // first to close tooltip then close modal
     await page.keyboard.press('Escape');
+    await page.keyboard.press('Escape');
+
     // Opening modal
     await modalElement.evaluate((element) =>
       Promise.all(

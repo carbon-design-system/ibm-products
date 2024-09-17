@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.9.0-rc.0...@carbon/ibm-products-community@0.11.0-rc.0) (2024-09-16)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#5987](https://github.com/carbon-design-system/ibm-products/issues/5987)) ([173e6c6](https://github.com/carbon-design-system/ibm-products/commit/173e6c6455a4fe619d56148ab432926bc6c640a4))
+
+
+
+
+
 # [0.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-community@0.10.0-rc.0...@carbon/ibm-products-community@0.10.0) (2024-09-11)
 
 **Note:** Version bump only for package @carbon/ibm-products-community

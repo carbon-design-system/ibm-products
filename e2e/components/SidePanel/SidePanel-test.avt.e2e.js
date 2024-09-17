@@ -71,4 +71,26 @@ test.describe('SidePanel @avt', () => {
     await page.getByLabel('Close').click();
     await expect(page.getByText('Open side panel')).toBeFocused();
   });
+
+  test('@avt-first-element-disabled', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SidePanel',
+      // This used to be a specific story but using a default story to test the focus trap
+      id: 'ibm-products-components-side-panel-sidepanel--first-element-disabled',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    // Open side panel
+    await page.getByText('Open side panel').click();
+    // Expect close button to be focused
+    await expect(page.getByLabel('Close')).toBeFocused();
+
+    // Move focus to next element
+    await page.keyboard.press('Tab');
+
+    // Expect the second input to be focus as the first input is disabled
+    await expect(page.locator('#side-panel-story-text-input-b')).toBeFocused();
+  });
 });

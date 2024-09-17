@@ -182,6 +182,35 @@ const BasicUsage = ({ ...rest } = {}) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const SpacerColumn = ({ ...rest } = {}) => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        rightAlignedColumn: true,
+      },
+    ],
+    []
+  );
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      enableSpacerColumn: true,
+    },
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 const DatagridActions = (datagridState) => {
   const {
     selectedFlatRows,
@@ -911,6 +940,17 @@ describe(componentName, () => {
     expect(screen.getAllByRole('columnheader').length).toEqual(
       defaultHeader.length
     );
+  });
+
+  it('renders a table with spacer column', () => {
+    render(<SpacerColumn />);
+    expect(screen.getByRole('table')).toHaveClass(
+      `${carbon.prefix}--data-table`
+    );
+
+    expect(
+      screen.getAllByRole('columnheader', { hidden: true }).length
+    ).toEqual(3);
   });
 
   it('renders a basic data grid component with devTools attribute', async () => {
@@ -2333,7 +2373,7 @@ describe(componentName, () => {
     dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
     await type(dateInputs[0], '01/01/2024');
     await keyboard('[Escape]');
-    await keyboard('[Tab]');
+    await click(dateInputs[1]);
     await keyboard('01/02/2024');
     await keyboard('[Escape]');
     expect(dateInputs[0].value).toEqual('01/01/2024');

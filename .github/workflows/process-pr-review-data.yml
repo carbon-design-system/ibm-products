@@ -1,0 +1,28 @@
+name: Process saved PR data and apply appropriate labels
+
+# We have access to repo secrets from here. If the `Received PR review` workflow has completed
+# it means there has been a workflow artifact created with the data we need to apply the appropriate 
+# review labels from the custom action used from this workflow
+on:
+  workflow_run:
+    workflows: ['Received PR review']
+    types:
+      - completed
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.event == 'pull_request_review' &&
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - uses: ./actions/add-review-labels
+        with:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}

@@ -56,7 +56,7 @@ const useNestedRowExpander = (hooks) => {
                   depth: row.depth,
                   index: row.index,
                 });
-                if(getAsyncSubRows){
+                if (getAsyncSubRows) {
                   await getAsyncSubRows?.(row);
                 }
                 handleDynamicRowCheck({

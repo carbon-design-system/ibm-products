@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-community",
   "description": "Carbon for IBM Products Community package",
-  "version": "0.7.0-rc.0",
+  "version": "0.11.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,12 +24,12 @@
     "test": "jest --colors"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.22.0",
-    "@carbon/layout": "^11.21.0",
-    "@carbon/motion": "^11.17.0",
-    "@carbon/react": "^1.60.3",
-    "@carbon/themes": "^11.37.1",
-    "@carbon/type": "^11.26.0",
+    "@carbon/grid": "^11.27.0",
+    "@carbon/layout": "^11.26.0",
+    "@carbon/motion": "^11.22.0",
+    "@carbon/react": "^1.66.0",
+    "@carbon/themes": "^11.40.0",
+    "@carbon/type": "^11.31.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -39,7 +39,7 @@
     "babel-preset-ibm-cloud-cognitive": "^0.14.40",
     "cross-env": "^7.0.3",
     "jest": "^29.6.2",
-    "jest-config-ibm-cloud-cognitive": "^1.5.0-rc.0",
+    "jest-config-ibm-cloud-cognitive": "^1.9.0-rc.0",
     "jest-environment-jsdom": "^29.6.2",
     "rimraf": "^5.0.1",
     "sass": "^1.77.2"

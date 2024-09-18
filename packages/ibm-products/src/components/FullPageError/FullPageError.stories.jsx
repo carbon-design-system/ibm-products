@@ -20,7 +20,7 @@ import styles from './_storybook-styles.scss?inline';
 const storyClass = 'full-page-error-stories';
 
 export default {
-  title: 'IBM Products/Patterns/Full-page error/FullPageError',
+  title: 'IBM Products/Components/Full-page error/FullPageError',
   component: FullPageError,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { MultiSelectProps } from '@carbon/react/lib/components/MultiSelect/MultiSelect';
 import { FormGroupProps } from '@carbon/react/lib/components/FormGroup/FormGroup';
 import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/RadioButton';
@@ -129,6 +136,7 @@ export interface FilterFlyoutProps {
   flyoutIconDescription?: string;
   onFlyoutClose?: () => void;
   onFlyoutOpen?: () => void;
+  onClearFilters?: () => void;
   panelIconDescription?: string;
   primaryActionLabel?: string;
   reactTableFiltersState?: ReactTableFiltersState[];
@@ -176,6 +184,7 @@ export interface DatagridRow<T extends object = any>
   cells: Array<DataGridCell>;
   isSkeleton?: boolean;
   hasExpanded?: boolean;
+  skeletonKey?: string;
 }
 
 export interface DataGridHeader<T extends object = any>
@@ -299,6 +308,7 @@ export interface DataGridState<T extends object = any>
   setGlobalFilter?: (filterValue: FilterValue) => void;
   batchActionMenuButtonLabel?: string;
   translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];
+  toolbarBatchActionsDisplayMin?: number;
   onScroll?: (evt?: any) => void;
   innerListRef?: MutableRefObject<HTMLDivElement>;
   tableHeight?: number;
@@ -325,6 +335,8 @@ export interface DataGridState<T extends object = any>
     event: React.MouseEvent<HTMLElement>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
+  getAsyncSubRows?: (row: DatagridRow) => void;
+  enableSpacerColumn?: boolean;
 }
 
 export interface DataGridData {

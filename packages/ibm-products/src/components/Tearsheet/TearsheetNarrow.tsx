@@ -5,29 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, { ReactNode, PropsWithChildren, ForwardedRef } from 'react';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-
 // Carbon and package components we use.
 import { Button, ButtonProps } from '@carbon/react';
-import { ActionSet } from '../ActionSet';
-
 import {
-  tearsheetHasCloseIcon,
+  CloseIconDescriptionTypes,
   TearsheetShell,
   tearsheetShellWideProps as blocked,
-  CloseIconDescriptionTypes,
+  tearsheetHasCloseIcon,
 } from './TearsheetShell';
+// Import portions of React that are needed.
+import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
+import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
+import { ActionSet } from '../ActionSet';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
 
 interface TearsheetNarrowBaseProps extends PropsWithChildren {
@@ -44,7 +38,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -124,7 +118,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
   verticalPosition?: 'normal' | 'lower';
 }
 
-type TearsheetNarrowProps = TearsheetNarrowBaseProps &
+export type TearsheetNarrowProps = TearsheetNarrowBaseProps &
   CloseIconDescriptionTypes;
 
 const componentName = 'TearsheetNarrow';

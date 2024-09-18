@@ -5,57 +5,53 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
+import {
+  Column,
+  TableInstance,
+  UseColumnOrderInstanceProps,
+  useBlockLayout,
+  useColumnOrder,
+  useTable,
+} from 'react-table';
 // Import portions of React that are needed.
 import React, {
+  ForwardedRef,
+  LegacyRef,
+  MutableRefObject,
+  useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
-  useCallback,
-  useEffect,
-  ForwardedRef,
-  MutableRefObject,
-  LegacyRef,
 } from 'react';
-import {
-  useBlockLayout,
-  useTable,
-  useColumnOrder,
-  Column,
-  UseColumnOrderInstanceProps,
-  TableInstance,
-} from 'react-table';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-
-import { pkg } from '../../settings';
-import { DataSpreadsheetBody } from './DataSpreadsheetBody';
-import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { useActiveElement, usePreviousValue } from '../../global/js/hooks';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
-
 import {
-  useResetSpreadsheetFocus,
-  useSpreadsheetOutsideClick,
   useMoveActiveCell,
   useMultipleKeyTracking,
+  useResetSpreadsheetFocus,
   useSpreadsheetEdit,
+  useSpreadsheetOutsideClick,
 } from './hooks';
 
+import { DataSpreadsheetBody } from './DataSpreadsheetBody';
+import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
+// Other standard imports.
+import PropTypes from 'prop-types';
 import { createActiveCellFn } from './utils/createActiveCellFn';
+import cx from 'classnames';
+import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import { getCellSize } from './utils/getCellSize';
-
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
+import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
+import { handleKeyPress } from './utils/commonEventHandlers';
+import { pkg } from '../../settings';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
-import { handleEditSubmit } from './utils/handleEditSubmit';
-import { handleKeyPress } from './utils/commonEventHandlers';
-import { ActiveCellCoordinates, PrevState, Size, Theme } from './types';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -73,7 +69,7 @@ const defaults = {
   theme: 'light',
 };
 
-interface DataSpreadsheetProps {
+export interface DataSpreadsheetProps {
   /**
    * Specifies the cell height
    */
@@ -299,7 +295,15 @@ export let DataSpreadsheet = React.forwardRef(
       const currentHeaders: Array<any> = [];
       if (Object.keys(currentColumns).length > 0) {
         Object.keys(currentColumns).forEach((itemIndex) => {
-          if (currentColumns[itemIndex].Header) {
+          if (typeof currentColumns[itemIndex].Header === 'object') {
+            if (currentColumns[itemIndex].column_name) {
+              currentHeaders.push(currentColumns[itemIndex].column_name);
+            } else {
+              currentHeaders.push(
+                getNodeTextContent(currentColumns[itemIndex].Header)
+              );
+            }
+          } else if (currentColumns[itemIndex].Header) {
             currentHeaders.push(currentColumns[itemIndex].Header);
           }
         });

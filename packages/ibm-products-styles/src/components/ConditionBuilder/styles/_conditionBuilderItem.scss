@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:string';
@@ -14,6 +21,15 @@
 @use '@carbon/react/scss/colors' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
+
+@mixin actions-animation($translateValue) {
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateX($translateValue);
+  transition: all $duration-fast-02 motion(standard, productive);
+}
 
 .#{$block-class}__condition-wrapper * {
   @include type-style('body-01');
@@ -38,7 +54,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 
 .#{$block-class}__item-option__option {
-  height: 2rem;
+  display: grid;
+  min-height: 2rem;
   cursor: pointer;
   padding-inline: $spacing-05;
 }
@@ -188,7 +205,7 @@ $colors: (
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $next-group-color: list.nth($colors, ($i%list.length($colors)) +1);
+    $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }
@@ -197,7 +214,7 @@ $colors: (
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
     /* stylelint-disable-next-line carbon/theme-token-use */
-    $item-index: ((($item-index - 1) % $group-colors-length) +1);
+    $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
         /* stylelint-disable-next-line carbon/theme-token-use */
@@ -215,7 +232,7 @@ $colors: (
   }
 }
 
-.#{$block-class}__tree {
+.#{$block-class}__Hierarchical {
   .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
     flex-basis: 100%;
   }
@@ -227,7 +244,10 @@ $colors: (
     .#{$block-class}__button,
   .#{$block-class}__condition-wrapper:not(.#{$block-class}__group-preview)
     > :nth-child(2)
-    .#{$block-class}__button {
+    .#{$block-class}__button:not(
+      .#{$block-class}__add-button,
+      .#{$block-class}__add-condition-sub-group
+    ) {
     /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
   }
@@ -244,27 +264,45 @@ $colors: (
   align-self: center;
   margin-left: auto;
 }
-.#{$block-class}__add-condition-sub-group-wrapper {
-  z-index: -1;
-  width: 0;
-  pointer-events: none;
-  transform: translateX(-100%);
-  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-  transition: transform motion(exit, productive) $duration-fast-02;
+.#{$block-class}__content-container {
+  .#{$block-class}__add-button-wrapper > :nth-child(1) {
+    @include actions-animation(-100%);
+  }
+  .#{$block-class}__add-button-wrapper > :nth-child(2) {
+    @include actions-animation(-200%);
+  }
+
+  .#{$block-class}__condition-block:focus-within:first-child
+    .#{$block-class}__add-button-wrapper
+    > span,
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__add-button-wrapper
+    > span {
+    z-index: 0;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: transform motion(exit, productive) $duration-fast-02;
+  }
 }
-.#{$block-class}__add-condition-sub-group-wrapper--show {
-  z-index: 0;
-  width: auto;
-  pointer-events: all;
-  transform: translateX(0);
-}
+
 .#{$block-class}__invalid-input {
   display: flex;
+  direction: rtl;
 }
 .#{$block-class}__invalid-input > svg {
   color: $support-warning;
   /* stylelint-disable max-nesting-depth */
   > path:first-child {
     fill: $icon-primary;
+  }
+}
+
+.#{$block-class}__statement_wrapper {
+  padding: $spacing-03 0;
+
+  :nth-child(2) {
+    color: $text-secondary;
   }
 }

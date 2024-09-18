@@ -86,7 +86,7 @@ export const utilCheckUpdateVerticalSpace = (
     // The header offset calculation is either going to work out at 0 if we have no gap between scrolling container
     // top and the measuring ref top, or the difference between.
     update.headerOffset =
-      offsetMeasuringTop === 0
+      offsetMeasuringTop !== 0
         ? offsetMeasuringTop - scrollableContainerTop
         : 0;
 
@@ -122,12 +122,6 @@ export const utilCheckUpdateVerticalSpace = (
     if (navigation) {
       // adjust top for sticky with navigation
       update.headerTopValue += update.navigationRowHeight;
-    }
-
-    if (!hasActionBar && !widthIsNarrow) {
-      // Add difference between $spacing-08 and $spacing-07 to ensure space below breadcrumb is correct on scroll
-      // $spacing-07 is used as size for breadcrumb when no action bar otherwise $spacing-08
-      update.headerTopValue += 8;
     }
 
     if (!enableBreadcrumbScroll || !navigation) {

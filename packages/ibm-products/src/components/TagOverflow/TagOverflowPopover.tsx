@@ -15,6 +15,7 @@ import { TagOverflowItem } from './TagOverflow';
 
 export interface Props {
   allTagsModalSearchThreshold?: number;
+  autoAlign?: boolean;
   className?: string;
   onShowAllClick: () => void;
   overflowAlign?: string;
@@ -32,6 +33,7 @@ export const TagOverflowPopover = forwardRef(
   (props: Props, ref: Ref<HTMLDivElement>) => {
     const {
       allTagsModalSearchThreshold,
+      autoAlign,
       className,
       onShowAllClick,
       overflowAlign,
@@ -89,6 +91,7 @@ export const TagOverflowPopover = forwardRef(
       >
         <Popover
           align={overflowAlign}
+          autoAlign={autoAlign}
           className={cx(className, `${blockClass}__el`)}
           dropShadow
           highContrast
@@ -165,6 +168,10 @@ TagOverflowPopover.propTypes = {
    * count of overflowTags over which a modal is offered
    */
   allTagsModalSearchThreshold: PropTypes.number,
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
   /**
    * className
    */

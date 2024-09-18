@@ -15,7 +15,6 @@ import {
   NUMBER,
   PANEL,
   RADIO,
-  SAVED_FILTERS,
 } from '../constants';
 import {
   Checkbox,
@@ -44,9 +43,12 @@ import { FilterContext } from '../FilterProvider';
 import { handleCheckboxChange } from '../handleCheckboxChange';
 import uuidv4 from '../../../../../../global/js/utils/uuidv4';
 
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
+
 const useFilters = ({
   updateMethod,
-  filters = [],
+  filters = emptyArray,
   setAllFilters,
   variation,
   reactTableFiltersState,
@@ -55,11 +57,7 @@ const useFilters = ({
   autoHideFilters,
   isFetching,
 }) => {
-  const {
-    state,
-    dispatch: localDispatch,
-    tableId: contextTableId,
-  } = useContext(FilterContext);
+  const { state, tableId: contextTableId } = useContext(FilterContext);
   const { savedFilters } = state;
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -166,16 +164,6 @@ const useFilters = ({
     }
 
     setFiltersObjectArray(filterCopy);
-
-    // Dispatch action from local filter context to track filters in order
-    // to keep history if `isFetching` becomes true. If so, react-table
-    // clears all filter history
-    localDispatch({
-      type: SAVED_FILTERS,
-      payload: {
-        savedFilters: filterCopy,
-      },
-    });
 
     if (updateMethod === INSTANT) {
       setAllFilters(filterCopy);

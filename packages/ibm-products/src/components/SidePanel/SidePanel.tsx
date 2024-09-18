@@ -5,43 +5,41 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  ReactNode,
-  ForwardedRef,
-  MutableRefObject,
-  RefObject,
-} from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-// Other standard imports.
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { moderate02 } from '@carbon/motion';
-
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { allPropTypes } from '../../global/js/utils/props-helper';
-
-import { pkg } from '../../settings';
-import { SIDE_PANEL_SIZES } from './constants';
-import { useFocus, usePreviousValue } from '../../global/js/hooks';
-
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowLeft, Close } from '@carbon/react/icons';
 // Carbon and package components we use.
 import { Button, IconButton } from '@carbon/react';
-import { Close, ArrowLeft } from '@carbon/react/icons';
-import { ActionSet } from '../ActionSet';
+// Import portions of React that are needed.
+import React, {
+  ForwardedRef,
+  MutableRefObject,
+  ReactNode,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
+  actionSetVariants,
   overlayVariants,
   panelVariants,
-  actionSetVariants,
 } from './motion/variants';
-import pconsole from '../../global/js/utils/pconsole';
+import { useFocus, usePreviousValue } from '../../global/js/hooks';
+
+import { ActionSet } from '../ActionSet';
 import { ButtonProps } from '@carbon/react';
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { SIDE_PANEL_SIZES } from './constants';
+import { allPropTypes } from '../../global/js/utils/props-helper';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import pconsole from '../../global/js/utils/pconsole';
+import { pkg } from '../../settings';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { getSpecificElement } from '../../global/js/hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -211,7 +209,7 @@ type SidePanelSlideInProps =
       selectorPageContent: string;
     };
 
-type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
+export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
 // `any` is a work around until ActionSet is migrated to TS
 const MotionActionSet = motion(ActionSet);
@@ -268,7 +266,7 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [animationComplete, setAnimationComplete] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
-    const sidePanelRef = ref || localRef;
+    const sidePanelRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const overlayRef = useRef<HTMLDivElement>(null);
     const innerContentRef = useRef<HTMLDivElement>(null);
     const closeRef = useRef<HTMLButtonElement>(null);
@@ -281,14 +279,19 @@ export let SidePanel = React.forwardRef(
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
     const { firstElement, keyDownListener } = useFocus(sidePanelRef);
-    const panelRefValue = (sidePanelRef as MutableRefObject<HTMLDivElement>)
-      .current;
+    const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = usePrefersReducedMotion();
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
+
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && open) {
+        onRequestClose?.();
+      }
+    };
 
     useEffect(() => {
       if (open && !titleRef?.current) {
@@ -453,10 +456,7 @@ export let SidePanel = React.forwardRef(
     };
 
     useEffect(() => {
-      if (
-        !doAnimateTitle &&
-        (sidePanelRef as MutableRefObject<HTMLDivElement>).current
-      ) {
+      if (!doAnimateTitle && sidePanelRef.current) {
         panelRefValue?.style.setProperty(
           `--${blockClass}--scroll-animation-progress`,
           '0'
@@ -619,9 +619,18 @@ export let SidePanel = React.forwardRef(
     useEffect(() => {
       if (open) {
         setTimeout(() => {
-          if (selectorPrimaryFocus) {
-            const primeFocusEl = document?.querySelector(selectorPrimaryFocus);
-            if (primeFocusEl) {
+          if (
+            selectorPrimaryFocus &&
+            getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
+          ) {
+            const primeFocusEl = getSpecificElement(
+              sidePanelRef?.current,
+              selectorPrimaryFocus
+            );
+            if (
+              primeFocusEl &&
+              window?.getComputedStyle(primeFocusEl)?.display !== 'none'
+            ) {
               (primeFocusEl as HTMLElement)?.focus();
             }
           } else if (!slideIn) {
@@ -629,7 +638,14 @@ export let SidePanel = React.forwardRef(
           }
         }, 0);
       }
-    }, [animationComplete, firstElement, open, selectorPrimaryFocus, slideIn]);
+    }, [
+      animationComplete,
+      firstElement,
+      open,
+      selectorPrimaryFocus,
+      sidePanelRef,
+      slideIn,
+    ]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,
@@ -728,6 +744,7 @@ export let SidePanel = React.forwardRef(
               className={`${blockClass}__close-button`}
               label={closeIconDescription}
               onClick={onRequestClose}
+              onKeyDown={slideIn ? undefined : handleEscapeKey}
               title={closeIconDescription}
               aria-label={closeIconDescription}
               ref={closeRef}
@@ -825,6 +842,13 @@ export let SidePanel = React.forwardRef(
       );
     };
 
+    const handleKeyDown = (event) => {
+      if (!slideIn) {
+        handleEscapeKey(event);
+        keyDownListener(event);
+      }
+    };
+
     return (
       <AnimatePresence>
         {open && (
@@ -844,7 +868,7 @@ export let SidePanel = React.forwardRef(
               animate="visible"
               exit="exit"
               custom={{ placement, shouldReduceMotion }}
-              onKeyDown={slideIn ? undefined : keyDownListener}
+              onKeyDown={handleKeyDown}
             >
               <>
                 {/* header */}

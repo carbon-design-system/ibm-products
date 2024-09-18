@@ -6,8 +6,21 @@
  */
 
 import { Accordion, AccordionItem, Button, Layer, Search } from '@carbon/react';
-import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  BATCH,
+  CLEAR_FILTERS,
+  INSTANT,
+  PANEL,
+  SAVED_FILTERS,
+} from './constants';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   actionSetVariants,
   innerContainerVariants,
@@ -27,6 +40,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
+import { useIsomorphicEffect } from '../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const componentClass = `${blockClass}-filter-panel`;
@@ -41,6 +55,9 @@ const defaults = {
   searchLabelText: 'Filter search',
   searchPlaceholder: 'Find filters',
 };
+
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
 
 const FilterPanel = ({
   title = defaults.title,
@@ -58,7 +75,7 @@ const FilterPanel = ({
   secondaryActionLabel = defaults.secondaryActionLabel,
   searchLabelText = defaults.searchLabelText,
   searchPlaceholder = defaults.searchPlaceholder,
-  reactTableFiltersState = [],
+  reactTableFiltersState = emptyArray,
   autoHideFilters = false,
   isFetching = false,
 }) => {
@@ -66,7 +83,11 @@ const FilterPanel = ({
   const [showDividerLine, setShowDividerLine] = useState(false);
 
   /** Context */
-  const { panelOpen, setPanelOpen } = useContext(FilterContext);
+  const {
+    panelOpen,
+    setPanelOpen,
+    dispatch: localDispatch,
+  } = useContext(FilterContext);
 
   const {
     filtersState,
@@ -94,7 +115,7 @@ const FilterPanel = ({
   const filterHeadingRef = useRef();
   const filterSearchRef = useRef();
   const actionSetRef = useRef();
-
+  const innerContainerRef = useRef();
   /** State from hooks */
   const [shouldDisableButtons, setShouldDisableButtons] =
     useShouldDisableButtons({
@@ -131,6 +152,16 @@ const FilterPanel = ({
 
     // Update the last applied filters
     lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
+
+    // Dispatch action from local filter context to track filters in order
+    // to keep history if `isFetching` becomes true. If so, react-table
+    // clears all filter history
+    localDispatch({
+      type: SAVED_FILTERS,
+      payload: {
+        savedFilters: filtersObjectArray,
+      },
+    });
   };
 
   const renderActionSet = () => {
@@ -198,7 +229,7 @@ const FilterPanel = ({
     reset(tableId);
   });
 
-  const getScrollableContainerHeight = () => {
+  const getScrollableContainerHeight = useCallback(() => {
     const filterHeadingHeight =
       filterHeadingRef.current?.getBoundingClientRect().height;
     const filterSearchHeight =
@@ -212,9 +243,22 @@ const FilterPanel = ({
           showFilterSearch ? filterSearchHeight : 0
         }px - ${updateMethod === BATCH ? actionSetHeight : 0}px)`
       : 0;
-
     return height;
-  };
+  }, [
+    filterHeadingRef,
+    filterSearchRef,
+    actionSetRef,
+    panelOpen,
+    showFilterSearch,
+    updateMethod,
+  ]);
+
+  useIsomorphicEffect(() => {
+    const height = getScrollableContainerHeight();
+    if (innerContainerRef.current && innerContainerRef.current.style) {
+      innerContainerRef.current.style.height = height;
+    }
+  }, [getScrollableContainerHeight, innerContainerRef]);
 
   return (
     <motion.div
@@ -262,7 +306,7 @@ const FilterPanel = ({
 
         <div
           className={`${componentClass}__inner-container`}
-          style={{ height: getScrollableContainerHeight() }}
+          ref={innerContainerRef}
           onScroll={onInnerContainerScroll}
         >
           {filterSections.map(

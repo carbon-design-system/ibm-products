@@ -6,30 +6,31 @@
  */
 
 import React, {
+  ReactNode,
+  Ref,
+  RefObject,
+  createElement,
+  forwardRef,
   useCallback,
   useEffect,
   useRef,
   useState,
-  forwardRef,
-  Ref,
-  createElement,
-  RefObject,
-  ReactNode,
 } from 'react';
+import { Tag, Tooltip } from '@carbon/react';
+
 import PropTypes from 'prop-types';
+import { TYPES } from './constants';
+import { TagOverflowModal } from './TagOverflowModal';
+import { TagOverflowPopover } from './TagOverflowPopover';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { Tag, Tooltip } from '@carbon/react';
-import { TYPES } from './constants';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { TagOverflowPopover } from './TagOverflowPopover';
-import { TagOverflowModal } from './TagOverflowModal';
 
 export interface TagOverflowItem {
   className?: string;
-  filter?: string;
+  filter?: boolean;
   id: string;
   label: string;
   onClose: () => void;
@@ -49,12 +50,13 @@ export interface TagOverflowItem {
   type?: string;
 }
 
-export interface Props {
+export interface TagOverflowProps {
   align?: 'start' | 'center' | 'end';
   allTagsModalSearchLabel?: string;
   allTagsModalSearchPlaceholderText?: string;
   allTagsModalTarget?: ReactNode;
   allTagsModalTitle?: string;
+  autoAlign?: boolean;
   className?: string;
   containingElementRef?: RefObject<HTMLElement>;
   items: TagOverflowItem[];
@@ -86,13 +88,14 @@ const componentName = 'TagOverflow';
 const allTagsModalSearchThreshold = 10;
 
 export let TagOverflow = forwardRef(
-  (props: Props, ref: Ref<HTMLDivElement>) => {
+  (props: TagOverflowProps, ref: Ref<HTMLDivElement>) => {
     const {
       align = 'start',
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
       allTagsModalTitle,
+      autoAlign,
       className,
       containingElementRef,
       items,
@@ -260,7 +263,6 @@ export let TagOverflow = forwardRef(
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems?.length > 0 &&
@@ -303,6 +305,7 @@ export let TagOverflow = forwardRef(
                 ref={overflowRef}
                 popoverOpen={popoverOpen}
                 setPopoverOpen={setPopoverOpen}
+                autoAlign={autoAlign}
               />
               <TagOverflowModal
                 allTags={items}
@@ -364,6 +367,10 @@ TagOverflow.propTypes = {
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  autoAlign: PropTypes.bool,
   /**
    * Provide an optional class to be applied to the containing node.
    */

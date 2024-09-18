@@ -50,7 +50,7 @@ interface CreateFullPageStepBaseProps extends PropsWithChildren {
   /**
    * This optional prop will render your form content inside of a fieldset html element
    */
-  hasFieldset: boolean;
+  hasFieldset?: boolean;
 
   /**
    * This prop is used to help track dynamic steps. If this value is `false` then the step is not included in the visible steps or the ProgressIndicator
@@ -97,17 +97,28 @@ interface CreateFullPageStepBaseProps extends PropsWithChildren {
   title: ReactNode;
 }
 
+// Try to specify the hasFieldset and fieldsetLegendText Typescript requirements.
+// Basically, fieldsetLegendText should only be specified when hasFieldset is true.
+// And usually, hasFieldset won't be specified at all unless it's being set to true.
 type CreateFullPageStepFieldsetProps =
   | {
-      hasFieldset: false;
+      // fieldsetLegendText should not be specified unless hasFieldset is true, but
+      // not sure how to do that in Typescript.
       fieldsetLegendText?: string;
     }
   | {
-      hasFieldset?: true;
+      hasFieldset: false;
+
+      // fieldsetLegendText should not be specified unless hasFieldset is true, but
+      // not sure how to do that in Typescript.
+      fieldsetLegendText?: string;
+    }
+  | {
+      hasFieldset: true;
       fieldsetLegendText: string;
     };
 
-type CreateFullPageStepProps = CreateFullPageStepBaseProps &
+export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
 export let CreateFullPageStep = forwardRef(
@@ -271,7 +282,6 @@ CreateFullPageStep.propTypes = {
   /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
-  /**@ts-ignore */
   disableSubmit: PropTypes.bool,
 
   /**
@@ -285,7 +295,6 @@ CreateFullPageStep.propTypes = {
   /**
    * This optional prop will render your form content inside of a fieldset html element
    */
-  /**@ts-ignore */
   hasFieldset: PropTypes.bool,
 
   /**

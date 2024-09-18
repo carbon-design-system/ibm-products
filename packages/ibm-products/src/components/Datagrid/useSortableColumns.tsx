@@ -15,26 +15,35 @@ import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
 
+interface Order {
+  newOrder: 'ASC' | 'DESC' | 'NONE';
+  newSortDesc: undefined | boolean;
+}
+
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const ordering = {
-  ASC: 'ASC',
-  DESC: 'DESC',
-  NONE: 'NONE',
-};
-
-export const getNewSortOrder = (sortOrder?: boolean | string) => {
-  const order = {
-    newSortDesc: false,
-    newOrder: ordering.NONE,
+export const getNewSortOrder = (currentOrder?: boolean | string) => {
+  const order: Order = {
+    newOrder: 'NONE',
+    newSortDesc: undefined,
   };
-  if (sortOrder === false || sortOrder === ordering.DESC) {
-    order.newOrder = ordering.DESC;
+
+  // NONE => ASC
+  if (currentOrder === undefined) {
+    order.newOrder = 'ASC';
+    order.newSortDesc = false;
+  }
+
+  // ACS => DESC
+  if (currentOrder === false || currentOrder === 'DESC') {
+    order.newOrder = 'DESC';
     order.newSortDesc = true;
   }
-  if (sortOrder === undefined || sortOrder === ordering.ASC) {
-    order.newOrder = ordering.ASC;
-    order.newSortDesc = false;
+
+  // DESC => NONE
+  if (currentOrder === true || currentOrder === 'ASC') {
+    order.newOrder = 'NONE';
+    order.newSortDesc = undefined;
   }
   return order;
 };
@@ -117,6 +126,14 @@ const useSortableColumns = (hooks: Hooks) => {
         }
         return <ArrowsVertical {...iconProps} />;
       };
+
+      const handleKey = (e, columnId) => {
+        const { key } = e;
+        if (key === 'Enter') {
+          setTimeout(() => document.getElementById(columnId)?.focus(), 0);
+        }
+      };
+
       const Header = (headerProp) =>
         column.disableSortBy === true ||
         column.id === 'datagridSelection' ||
@@ -144,6 +161,7 @@ const useSortableColumns = (hooks: Hooks) => {
                 </>
               );
             }}
+            id={column?.id}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {
@@ -153,6 +171,7 @@ const useSortableColumns = (hooks: Hooks) => {
                   headerProp?.column.isSortedDesc === false,
               }
             )}
+            onKeyDown={(event) => handleKey(event, column.id)}
           >
             {column.Header}
           </Button>
@@ -160,12 +179,9 @@ const useSortableColumns = (hooks: Hooks) => {
       return {
         ...column,
         Header,
-        minWidth:
-          column.disableSortBy === true
-            ? 0
-            : column.minWidth
-            ? column.minWidth
-            : 90,
+        minWidth: column.disableSortBy
+          ? 0
+          : column.minWidth ?? (column.isAction ? 50 : 90),
       };
     });
     return instance.customizeColumnsProps?.isTearsheetOpen

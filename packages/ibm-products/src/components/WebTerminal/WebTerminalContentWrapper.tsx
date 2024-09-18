@@ -18,11 +18,11 @@ import { useWebTerminal } from './hooks';
 const componentName = 'WebTerminalContentWrapper';
 const blockClass = `${pkg.prefix}--web-terminal-content-wrapper`;
 
-interface WebTerminalContentWrapperProps {
+export interface WebTerminalContentWrapperProps {
   /**
    * Pass in content as children.
    */
-  children: ReactNode | ReactNode[];
+  children: ReactNode;
 }
 export let WebTerminalContentWrapper = React.forwardRef<
   HTMLDivElement,

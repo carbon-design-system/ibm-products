@@ -5,9 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
+import {
+  BATCH,
+  CLEAR_FILTERS,
+  FLYOUT,
+  INSTANT,
+  SAVED_FILTERS,
+} from './constants';
 import { IconButton, usePrefix } from '@carbon/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { breakpoints, px } from '@carbon/layout';
 import {
   useClickOutside,
@@ -24,6 +30,7 @@ import { Filter } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../../settings';
+import { FilterContext } from './FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -33,12 +40,17 @@ const defaults = {
   title: 'Filter',
   primaryActionLabel: 'Apply',
   secondaryActionLabel: 'Cancel',
+  align: 'bottom',
 };
+
+// Use same empty array every time, for benefit of useEffect() etc. dependency checking.
+const emptyArray = [];
 
 const FilterFlyout = ({
   updateMethod,
   flyoutIconDescription = defaults.flyoutIconDescription,
-  filters = [],
+  align = defaults.align,
+  filters = emptyArray,
   title = defaults.title,
   primaryActionLabel = defaults.primaryActionLabel,
   onFlyoutOpen = () => {},
@@ -47,8 +59,8 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = defaults.secondaryActionLabel,
   setAllFilters,
-  data = [],
-  reactTableFiltersState = [],
+  data = emptyArray,
+  reactTableFiltersState = emptyArray,
 }) => {
   /** State */
   const [open, setOpen] = useState(false);
@@ -132,6 +144,9 @@ const FilterFlyout = ({
     handleResize(current);
   });
 
+  /** Context */
+  const { dispatch: localDispatch } = useContext(FilterContext);
+
   /** Memos */
   const showActionSet = updateMethod === BATCH;
   const carbonPrefix = usePrefix();
@@ -171,6 +186,16 @@ const FilterFlyout = ({
 
     // Update the last applied filters
     lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
+
+    // Dispatch action from local filter context to track filters in order
+    // to keep history if `isFetching` becomes true. If so, react-table
+    // clears all filter history
+    localDispatch({
+      type: SAVED_FILTERS,
+      payload: {
+        savedFilters: filtersObjectArray,
+      },
+    });
   };
 
   /** Renders all filters */
@@ -239,7 +264,7 @@ const FilterFlyout = ({
       <IconButton
         label={flyoutIconDescription}
         kind="ghost"
-        align="bottom"
+        align={align}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
@@ -274,6 +299,10 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * Tooltip alignment for the filter button
+   */
+  align: PropTypes.string,
   /**
    * All data rows in the table
    */

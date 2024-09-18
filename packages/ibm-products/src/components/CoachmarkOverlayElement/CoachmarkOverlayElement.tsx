@@ -11,15 +11,14 @@ import React, { ReactNode } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-element`;
 const componentName = 'CoachmarkOverlayElement';
 
-interface CoachmarkOverlayElementProps {
+export interface CoachmarkOverlayElementProps {
   /**
    * An optional button can be rendered below the description.
    * This can be a link, button, Coachmark button, etc.
@@ -76,7 +75,6 @@ export let CoachmarkOverlayElement = React.forwardRef<
           }
         )}
         ref={ref}
-        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__content`}>

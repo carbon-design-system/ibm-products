@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import { ReactNode } from 'react';
 
 interface APIKeyModalCommonProps {
@@ -139,7 +146,7 @@ interface APIKeyModalCommonProps {
   /**
    * The DOM node the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: ReactNode;
+  portalTarget?: ReactNode;
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

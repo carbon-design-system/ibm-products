@@ -779,6 +779,7 @@
 }
 
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
+  overflow: hidden;
   background-color: $layer-accent;
 }
 
@@ -786,6 +787,12 @@
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
   padding: 0;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--noLabel
+  svg.#{c4p-settings.$carbon-prefix}--btn__icon {
+  margin-inline-start: 0;
 }
 
 .#{$block-class}

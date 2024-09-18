@@ -14,7 +14,7 @@ test.describe('Saving @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Saving',
-      id: 'ibm-products-patterns-saving--auto',
+      id: 'ibm-products-components-saving--auto',
       globals: {
         carbonTheme: 'white',
       },

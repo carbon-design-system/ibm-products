@@ -337,7 +337,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         tabIndex={-1}
         className={cx(blockClass, className)}
         ref={carouselRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div className={cx(`${blockClass}__elements-container`)}>

@@ -49,7 +49,7 @@ const NumericLayout = ({ value }) => {
   );
 };
 
-const columnData = [
+const customColumnData = [
   {
     Header: 'Row Index',
     accessor: (row, index) => index,
@@ -59,6 +59,50 @@ const columnData = [
   },
   {
     Header: 'Pet type',
+    accessor: 'petType',
+  },
+  {
+    Header: (
+      <div>
+        <div>
+          <span>{'First Name'}</span>&nbsp;
+          <span>{'(Pets)'}</span>
+        </div>
+      </div>
+    ),
+    accessor: 'firstName',
+    column_name: 'First Name', // This will equal to the same string you want to represent as your header
+  },
+  {
+    Header: 'Age',
+    accessor: 'age',
+    Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
+  },
+  {
+    Header: 'Vet visits',
+    accessor: 'visits',
+    Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
+  },
+  {
+    Header: 'Health',
+    accessor: 'health',
+    Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
+  },
+];
+
+const columnData = [
+  {
+    Header: 'Row index',
+    accessor: (row, index) => index,
+    Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
+    width: 275,
+  },
+  {
+    Header: 'Pet Type',
     accessor: 'petType',
   },
   {
@@ -237,7 +281,7 @@ const dragDropCallback = ({ ...args }) => {
 
   const columnDataClone = useMemo(
     () => [
-      ...columnData,
+      ...customColumnData,
       {
         Header: 'Owner name',
         accessor: 'ownerName',

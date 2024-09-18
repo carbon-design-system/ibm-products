@@ -6,26 +6,24 @@
 //
 
 import React, {
-  useState,
+  PropsWithChildren,
+  ReactNode,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
-  ReactNode,
-  PropsWithChildren,
+  useState,
 } from 'react';
+
 import PropTypes from 'prop-types';
-
-import cx from 'classnames';
-
-import { TagSetOverflow } from './TagSetOverflow';
-import { TagSetModal } from './TagSetModal';
 import { Tag } from '@carbon/react';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { TagBaseProps } from '@carbon/type';
-
+import { TagSetModal } from './TagSetModal';
+import { TagSetOverflow } from './TagSetOverflow';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -57,28 +55,21 @@ type OverflowAlign =
   | 'right-top';
 type OverflowType = 'default' | 'tag';
 
-// interface TagType extends TagBaseProps
-// {
-//   label: string;
-//   // we duplicate this prop to improve the DocGen
-//   type?: typeof tagTypes[number];
-// }
-
 type TagType = {
   label: string;
   type?: keyof typeof tagTypes;
 } & TagBaseProps;
-interface TagSetProps extends PropsWithChildren {
+export interface TagSetProps extends PropsWithChildren {
   /**
    * align the Tags displayed by the TagSet. Default start.
    */
   align?: Align;
   /**
-   * label text for the show all search. **Note: Required if more than 10 tags**
+   * label text for the show all search.
    */
   allTagsModalSearchLabel?: string;
   /**
-   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   * placeholder text for the show all search.
    */
   allTagsModalSearchPlaceholderText?: string;
   /**
@@ -86,7 +77,7 @@ interface TagSetProps extends PropsWithChildren {
    */
   allTagsModalTarget?: ReactNode;
   /**
-   * title for the show all modal. **Note: Required if more than 10 tags**
+   * title for the show all modal.
    */
   allTagsModalTitle?: string;
   /**
@@ -124,6 +115,10 @@ interface TagSetProps extends PropsWithChildren {
    */
   overflowAlign?: OverflowAlign;
   /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign?: boolean;
+  /**
    * overflowClassName for the tooltip popup
    */
   overflowClassName?: string;
@@ -133,10 +128,8 @@ interface TagSetProps extends PropsWithChildren {
   overflowType?: OverflowType;
   /**
    * label for the overflow show all tags link.
-   *
-   * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: string;
+  showAllTagsLabel?: string;
   /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and
@@ -158,13 +151,14 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       className,
       maxVisible,
       multiline,
+      overflowAutoAlign,
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
-      allTagsModalTitle,
-      allTagsModalSearchLabel,
-      allTagsModalSearchPlaceholderText,
-      showAllTagsLabel,
+      allTagsModalTitle = 'All tags',
+      allTagsModalSearchLabel = 'Search all tags',
+      allTagsModalSearchPlaceholderText = 'Search all tags',
+      showAllTagsLabel = 'View all tags',
       disableOverflowPopup = false,
       tags,
       containingElementRef,
@@ -186,12 +180,18 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState<HTMLDivElement[]>([]);
     const overflowTag = useRef<HTMLDivElement>(null);
+    const [maxVisibleCount, setMaxVisibleCount] = useState<number>(0);
 
     const [popoverOpen, setPopoverOpen] = useState(false);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
+
+    useEffect(() => {
+      const maxCount = maxVisible || tags?.length || 0;
+      setMaxVisibleCount(maxCount);
+    }, [maxVisible, tags]);
 
     useEffect(() => {
       const newSizingTags: HTMLDivElement[] = [];
@@ -264,6 +264,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       newDisplayedTags.push(
         <TagSetOverflow
           allTagsModalSearchThreshold={allTagsModalSearchThreshold}
+          overflowAutoAlign={overflowAutoAlign}
           className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
@@ -291,11 +292,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       onOverflowTagChange,
       popoverOpen,
       handleTagOnClose,
+      overflowAutoAlign,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
       if (multiline) {
-        return setDisplayCount(maxVisible || 3);
+        return setDisplayCount(maxVisibleCount);
       }
 
       // how many will fit?
@@ -335,10 +337,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       if (willFit < 1) {
         setDisplayCount(0);
       } else {
-        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
+        setDisplayCount(
+          maxVisibleCount ? Math.min(willFit, maxVisibleCount) : willFit
+        );
       }
     }, [
-      maxVisible,
+      maxVisibleCount,
       multiline,
       sizingTags,
       tagSetRef,
@@ -348,7 +352,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     useEffect(() => {
       checkFullyVisibleTags();
-    }, [checkFullyVisibleTags, maxVisible, multiline, sizingTags]);
+    }, [checkFullyVisibleTags, maxVisibleCount, multiline, sizingTags]);
 
     /* don't know how to test resize */
     /* istanbul ignore next */
@@ -459,21 +463,21 @@ TagSet.propTypes = {
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
   /**
-   * label text for the show all search. **Note: Required if more than 10 tags**
+   * label text for the show all search.
    */
-  allTagsModalSearchLabel: string_required_if_more_than_10_tags,
+  allTagsModalSearchLabel: PropTypes.string,
   /**
-   * placeholder text for the show all search. **Note: Required if more than 10 tags**
+   * placeholder text for the show all search.
    */
-  allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  allTagsModalSearchPlaceholderText: PropTypes.string,
   /**
    * portal target for the all tags modal
    */
   allTagsModalTarget: PropTypes.node,
   /**
-   * title for the show all modal. **Note: Required if more than 10 tags**
+   * title for the show all modal.
    */
-  allTagsModalTitle: string_required_if_more_than_10_tags,
+  allTagsModalTitle: PropTypes.string,
   /**
    * className
    */
@@ -523,6 +527,10 @@ TagSet.propTypes = {
     'right-top',
   ]),
   /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign: PropTypes.bool,
+  /**
    * overflowClassName for the tooltip popup
    */
   overflowClassName: PropTypes.string,
@@ -532,10 +540,8 @@ TagSet.propTypes = {
   overflowType: PropTypes.oneOf(['default', 'tag']),
   /**
    * label for the overflow show all tags link.
-   *
-   * **Note:** Required if more than 10 tags
    */
-  showAllTagsLabel: string_required_if_more_than_10_tags,
+  showAllTagsLabel: PropTypes.string,
   /**
    * The tags to be shown in the TagSet. Each tag is specified as an object
    * with properties: **label**\* (required) to supply the tag content, and

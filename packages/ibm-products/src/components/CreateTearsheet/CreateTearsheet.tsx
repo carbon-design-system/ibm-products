@@ -6,33 +6,35 @@
  */
 
 import React, {
-  forwardRef,
-  useState,
-  useRef,
-  createContext,
-  useEffect,
-  ReactNode,
+  Dispatch,
   ForwardedRef,
   PropsWithChildren,
-  Dispatch,
+  ReactNode,
   SetStateAction,
+  createContext,
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { Form } from '@carbon/react';
-import { TearsheetShell } from '../Tearsheet/TearsheetShell';
-import { CreateInfluencer } from '../CreateInfluencer';
-import { pkg } from '../../settings';
 import {
-  usePreviousValue,
-  useValidCreateStepCount,
-  useResetCreateComponent,
   useCreateComponentFocus,
   useCreateComponentStepChange,
+  usePreviousValue,
+  useResetCreateComponent,
+  useValidCreateStepCount,
 } from '../../global/js/hooks';
+
+import { CreateInfluencer } from '../CreateInfluencer';
+import { Form } from '@carbon/react';
+import PropTypes from 'prop-types';
+import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { pkg } from '../../settings';
+import { ExperimentalSecondarySubmit } from './CreateTearsheetStep';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -43,6 +45,9 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 
 export interface StepsContextType {
   currentStep: number;
+  setExperimentalSecondarySubmit: Dispatch<
+    SetStateAction<ExperimentalSecondarySubmit>
+  >;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
   setOnPrevious: (fn: any) => void;
   setOnNext: (fn: any) => void;
@@ -56,7 +61,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface CreateTearsheetProps extends PropsWithChildren {
+export interface CreateTearsheetProps extends PropsWithChildren {
   /**
    * The back button text
    */
@@ -76,6 +81,11 @@ interface CreateTearsheetProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
+
+  /**
+   * The experimentalSecondary submit button text
+   */
+  experimentalSecondarySubmitText?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -170,6 +180,7 @@ export let CreateTearsheet = forwardRef(
       cancelButtonText,
       children,
       className,
+      experimentalSecondarySubmitText,
       description,
       influencerWidth = 'narrow',
       initialStep,
@@ -201,15 +212,17 @@ export let CreateTearsheet = forwardRef(
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
-
+    const [experimentalSecondarySubmit, setExperimentalSecondarySubmit] =
+      useState<ExperimentalSecondarySubmit>({});
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       const firstItem =
-        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+        stepData.findIndex((item) => item.shouldIncludeStep === true) + 1;
       const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
       if (firstItem !== firstIncludedStep) {
+        setCurrentStep(firstItem);
         setFirstIncludedStep(firstItem);
       }
       if (lastItem !== lastIncludedStep) {
@@ -221,10 +234,8 @@ export let CreateTearsheet = forwardRef(
           initialStep
         );
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
-      } else {
-        setCurrentStep(firstIncludedStep);
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
+    }, [firstIncludedStep, initialStep, lastIncludedStep, open, stepData]);
 
     useCreateComponentFocus({
       previousState,
@@ -270,6 +281,10 @@ export let CreateTearsheet = forwardRef(
       nextButtonText,
       isSubmitting,
       componentBlockClass: blockClass,
+      experimentalSecondarySubmit,
+      experimentalSecondarySubmitText: experimentalSecondarySubmit.labelText
+        ? experimentalSecondarySubmit.labelText
+        : experimentalSecondarySubmitText,
       setCreateComponentActions: setCreateTearsheetActions,
     });
 
@@ -301,6 +316,7 @@ export let CreateTearsheet = forwardRef(
             <StepsContext.Provider
               value={{
                 currentStep,
+                setExperimentalSecondarySubmit,
                 setIsDisabled,
                 setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
@@ -356,6 +372,11 @@ CreateTearsheet.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * The experimentalSecondary submit button text
+   */
+  experimentalSecondarySubmitText: PropTypes.string,
 
   /**
    * Specifies elements to focus on first on render.

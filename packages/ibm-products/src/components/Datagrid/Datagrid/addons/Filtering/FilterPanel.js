@@ -6,7 +6,13 @@
  */
 
 import { Accordion, AccordionItem, Button, Layer, Search } from '@carbon/react';
-import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
+import {
+  BATCH,
+  CLEAR_FILTERS,
+  INSTANT,
+  PANEL,
+  SAVED_FILTERS,
+} from './constants';
 import React, {
   useCallback,
   useContext,
@@ -77,7 +83,11 @@ const FilterPanel = ({
   const [showDividerLine, setShowDividerLine] = useState(false);
 
   /** Context */
-  const { panelOpen, setPanelOpen } = useContext(FilterContext);
+  const {
+    panelOpen,
+    setPanelOpen,
+    dispatch: localDispatch,
+  } = useContext(FilterContext);
 
   const {
     filtersState,
@@ -142,6 +152,16 @@ const FilterPanel = ({
 
     // Update the last applied filters
     lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
+
+    // Dispatch action from local filter context to track filters in order
+    // to keep history if `isFetching` becomes true. If so, react-table
+    // clears all filter history
+    localDispatch({
+      type: SAVED_FILTERS,
+      payload: {
+        savedFilters: filtersObjectArray,
+      },
+    });
   };
 
   const renderActionSet = () => {

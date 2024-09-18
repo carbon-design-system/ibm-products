@@ -91,16 +91,7 @@ const CustomizeColumnsTearsheet = ({
     });
 
     setColumnObjects(finalDefinitions);
-    if (selectedColumnsCount === 0) {
-      setDirty(false);
-    } else {
-      setDirty(true);
-    }
-  };
-  const setDirty = (dirty) => {
-    if (dirty !== isDirty) {
-      setIsDirty(dirty);
-    }
+    setIsDirty(selectedColumnsCount !== 0);
   };
 
   const getVisibleColumnsCount = useCallback(() => {
@@ -157,7 +148,7 @@ const CustomizeColumnsTearsheet = ({
         searchText={searchText}
         setColumnsObject={(cols) => {
           setColumnObjects(cols);
-          setDirty(true);
+          setIsDirty(true);
         }}
         setSearchText={setSearchText}
         findColumnPlaceholderLabel={findColumnPlaceholderLabel}
@@ -175,11 +166,7 @@ const CustomizeColumnsTearsheet = ({
           onSelectColumn={onCheckboxCheck}
           setColumnsObject={(cols) => {
             setColumnObjects(cols);
-            if (getVisibleColumnsCount() === 0) {
-              setDirty(false);
-            } else {
-              setDirty(true);
-            }
+            setIsDirty(getVisibleColumnsCount() !== 0);
           }}
           selectAllLabel={selectAllLabel}
           customizeTearsheetHeadingLabel={customizeTearsheetHeadingLabel}

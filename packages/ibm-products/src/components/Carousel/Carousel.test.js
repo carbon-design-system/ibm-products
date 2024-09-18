@@ -31,8 +31,8 @@ describe(componentName, () => {
   });
 
   it('renders a component Carousel', () => {
-    render(<Carousel> </Carousel>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(<Carousel data-testid={dataTestId}> </Carousel>);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   // Skipping.
@@ -49,8 +49,12 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', () => {
-    render(<Carousel className={className}> </Carousel>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(
+      <Carousel data-testid={dataTestId} className={className}>
+        {' '}
+      </Carousel>
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {

@@ -136,6 +136,7 @@ export interface FilterFlyoutProps {
   flyoutIconDescription?: string;
   onFlyoutClose?: () => void;
   onFlyoutOpen?: () => void;
+  onClearFilters?: () => void;
   panelIconDescription?: string;
   primaryActionLabel?: string;
   reactTableFiltersState?: ReactTableFiltersState[];
@@ -335,6 +336,7 @@ export interface DataGridState<T extends object = any>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
   getAsyncSubRows?: (row: DatagridRow) => void;
+  enableSpacerColumn?: boolean;
 }
 
 export interface DataGridData {

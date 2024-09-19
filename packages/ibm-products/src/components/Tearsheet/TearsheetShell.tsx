@@ -15,6 +15,7 @@ import React, {
   ForwardedRef,
   MutableRefObject,
   RefObject,
+  useCallback,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -217,9 +218,6 @@ export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
 export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
 
-// Function to strip html tags out of a string.
-const stripTags = (input) => input.replace(/<\/?[^>]+(>|$)/g, '');
-
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
  *
@@ -273,6 +271,13 @@ export const TearsheetShell = React.forwardRef(
       selectorPrimaryFocus
     );
     const modalRefValue = modalRef.current;
+
+    // Function to strip html tags out of a string.
+    const stripTags = useCallback(
+      (input) => input.replace(/<\/?[^>]+(>|$)/g, ''),
+      []
+    );
+
     const titleText = stripTags(String(description));
     const wide = size === 'wide';
 
@@ -296,7 +301,6 @@ export const TearsheetShell = React.forwardRef(
       setDepth(newDepth);
       setPosition(newPosition);
     }
-
     handleStackChange.checkFocus = function () {
       // if we are now the topmost tearsheet, ensure we have focus
       if (

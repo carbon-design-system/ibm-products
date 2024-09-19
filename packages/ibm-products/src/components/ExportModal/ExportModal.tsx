@@ -30,7 +30,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -187,6 +187,7 @@ export let ExportModal = forwardRef(
     }: React.PropsWithChildren<ExportModalProps>,
     ref
   ) => {
+    const blockClass = `${pkg.prefix}--export-modal`;
     const [name, setName] = useState('');
     const [dirtyInput, setDirtyInput] = useState(false);
     // by default (if it exists) use the first extension in the extension array
@@ -203,6 +204,14 @@ export let ExportModal = forwardRef(
         setExtension(preformattedExtensions?.[0]?.extension);
       }
     }, [filename, preformattedExtensions, open]);
+    useEffect(() => {
+      if (successful) {
+        const button: HTMLButtonElement | null = document.querySelector(
+          `.${carbon.prefix}--modal-close-button button`
+        );
+        button?.focus();
+      }
+    }, [successful]);
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);
@@ -237,7 +246,6 @@ export let ExportModal = forwardRef(
       return false;
     };
 
-    const blockClass = `${pkg.prefix}--export-modal`;
     const internalId = useRef(uuidv4());
     const primaryButtonDisabled = loading || !name || hasInvalidExtension();
     const submitted = loading || error || successful;
@@ -306,7 +314,11 @@ export let ExportModal = forwardRef(
               )}
             </>
           )}
-          <div className={`${blockClass}__messaging`}>
+          <div
+            className={`${blockClass}__messaging`}
+            aria-live="assertive"
+            role="alert"
+          >
             {loading && (
               <>
                 <Loading small withOverlay={false} />

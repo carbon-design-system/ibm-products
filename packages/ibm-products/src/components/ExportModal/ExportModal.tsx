@@ -316,7 +316,7 @@ export let ExportModal = forwardRef(
           )}
           <div
             className={`${blockClass}__messaging`}
-            aria-live="assertive"
+            aria-live="polite"
             role="alert"
           >
             {loading && (

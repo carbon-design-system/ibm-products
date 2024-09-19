@@ -12,7 +12,7 @@ import * as stories from './CreateModal.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#modal"
+      altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage#modal"
       blocks={[
         {
           story: stories.Default,

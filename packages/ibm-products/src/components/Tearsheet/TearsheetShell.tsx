@@ -201,6 +201,7 @@ type stackTypes = {
   }>;
   sizes: Array<string>;
 };
+
 const stack: stackTypes = { open: [], all: [], sizes: [] };
 
 // these props are only applicable when size='wide'
@@ -215,6 +216,9 @@ export const tearsheetShellWideProps = [
 export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
 export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
+
+// Function to strip html tags out of a string.
+const stripTags = (input) => input.replace(/<\/?[^>]+(>|$)/g, '');
 
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
@@ -269,7 +273,7 @@ export const TearsheetShell = React.forwardRef(
       selectorPrimaryFocus
     );
     const modalRefValue = modalRef.current;
-    const titleText = String(description);
+    const titleText = stripTags(String(description));
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)

@@ -1,9 +1,9 @@
-name: Update example gallery # Updates examples twice a month
+name: Update example gallery # Updates examples every month
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 8,22 * *' # Updates will happen every 8th/22nd of the month
+    - cron: '0 0 1 * *' # Updates will happen at 12:00 AM, on day 1 of the month
 
 jobs:
   check_gallery:

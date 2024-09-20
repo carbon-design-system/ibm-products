@@ -11,9 +11,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **Datagrid:** dynamic nested rows skeleton always showing regardless of dynamic prop being set ([#6076](https://github.com/carbon-design-system/ibm-products/issues/6076)) ([2d7c570](https://github.com/carbon-design-system/ibm-products/commit/2d7c570a9814bb63bf0c49db43c21dc8e3cd47a6))
 
 
-
-
-
 # [2.50.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.48.0-rc.0...@carbon/ibm-products@2.50.0-rc.0) (2024-09-16)
 
 

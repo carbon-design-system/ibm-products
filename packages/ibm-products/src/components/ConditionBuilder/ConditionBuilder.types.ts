@@ -172,7 +172,7 @@ export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
-  initialState?: ConditionBuilderState;
+  initialState?: InitialState;
   getActionsState?: (state: Action[] | undefined) => void;
   getConditionState: (state: ConditionBuilderState | undefined) => void;
   getOptions?: (
@@ -182,9 +182,14 @@ export type ConditionBuilderProps = {
   actions?: Action[];
   className?: string;
   popOverSearchThreshold: number;
-  startConditionLabel: string;
+  startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
+};
+
+export type InitialState = {
+  state: ConditionBuilderState;
+  enabledDefault?: boolean;
 };
 
 export interface ConditionBuilderContextInputProps extends PropsWithChildren {

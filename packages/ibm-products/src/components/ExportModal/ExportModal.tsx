@@ -306,11 +306,16 @@ export let ExportModal = forwardRef(
               )}
             </>
           )}
-          <div className={`${blockClass}__messaging`}>
+          <div aria-live="polite" className={`${blockClass}__messaging`}>
             {loading && (
               <>
-                <Loading small withOverlay={false} />
-                <p aria-live="assertive">{loadingMessage}</p>
+                <Loading
+                  aria-live="off"
+                  description=""
+                  small
+                  withOverlay={false}
+                />
+                <p>{loadingMessage}</p>
               </>
             )}
             {successful && (
@@ -319,7 +324,7 @@ export let ExportModal = forwardRef(
                   size={16}
                   className={`${blockClass}__checkmark-icon`}
                 />
-                <p aria-live="assertive">{successMessage}</p>
+                <p>{successMessage}</p>
               </>
             )}
             {error && (
@@ -328,7 +333,7 @@ export let ExportModal = forwardRef(
                   size={16}
                   className={`${blockClass}__error-icon`}
                 />
-                <p aria-live="assertive">{errorMessage}</p>
+                <p>{errorMessage}</p>
               </>
             )}
           </div>

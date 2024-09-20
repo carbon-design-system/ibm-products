@@ -1,9 +1,9 @@
-name: Update example gallery # Updates examples twice a month
+name: Update example gallery # Updates examples every month
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 8,22 * *' # Updates will happen every 8th/22nd of the month
+    - cron: '0 0 1 * *' # Updates will happen every month
 
 jobs:
   check_gallery:
@@ -43,11 +43,11 @@ jobs:
           fi
 
       - name: Create pull request
-        if: steps.up_to_date.outcome == 'failure'
+        if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: update example gallery'
           committer: GitHub <noreply@github.com>
           author:

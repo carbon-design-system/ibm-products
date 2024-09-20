@@ -1735,8 +1735,7 @@ describe(componentName, () => {
         .getElementsByTagName('div')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Select all (100)');
-    // ).toEqual('Select all (93)'); (7 rows are disabled in entire table) switch to this after #5937 issue fixes
+    ).toEqual('Select all (93)');
 
     // click select all button in toolbar
     fireEvent.click(

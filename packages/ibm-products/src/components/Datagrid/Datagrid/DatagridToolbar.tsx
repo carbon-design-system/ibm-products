@@ -56,7 +56,7 @@ const DatagridBatchActionsToolbar = (
   useEffect(() => {
     const countDisabledRows =
       (rows.find((row) => row.getRowProps)?.getRowProps?.() as DatagridRowProps)
-        ?.nonselectablerows.length || 0;
+        ?.nonselectablerows?.length || 0;
     rows && setAvailableRowsCount(rows.length - countDisabledRows);
   }, [rows]);
 

@@ -309,11 +309,7 @@ export let ExportModal = forwardRef(
           <div className={`${blockClass}__messaging`}>
             {loading && (
               <>
-                <Loading
-                  description={loadingMessage}
-                  small
-                  withOverlay={false}
-                />
+                <Loading small withOverlay={false} />
                 <p aria-live="assertive">{loadingMessage}</p>
               </>
             )}

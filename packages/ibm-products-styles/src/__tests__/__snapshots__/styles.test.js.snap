@@ -3207,6 +3207,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--tearsheet.c4p--tearsheet--has-slug:not(.c4p--tearsheet--has-close) .cds--slug {
   inset-inline-end: 0;
+  margin-block: 6px;
+  margin-inline-end: 1rem;
 }
 
 .c4p--create-tearsheet-narrow .cds--modal-header__heading,
@@ -3982,6 +3984,10 @@ p.c4p--about-modal__copyright-text:first-child {
   padding: 0;
 }
 
+.c4p--datagrid .cds--noLabel svg.cds--btn__icon {
+  margin-inline-start: 0;
+}
+
 .c4p--datagrid .cds--action-list .cds--btn__icon {
   margin-top: 0;
 }
@@ -4213,6 +4219,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--datagrid__sortableColumn .cds--table-sort.c4p--datagrid--table-sort {
   width: calc(100% + 2rem);
+  align-items: inherit;
   margin: 0 calc(-1 * 1rem);
 }
 
@@ -8875,6 +8882,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__popover-trigger {
   font-family: inherit;
+  border: none !important;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link.cds--link:visited {
   display: inline-block;

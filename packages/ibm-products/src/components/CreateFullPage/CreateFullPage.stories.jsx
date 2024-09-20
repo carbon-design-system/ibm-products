@@ -568,6 +568,7 @@ createFullPageWithHeader.args = {
     { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
   ],
   maxVisibleBreadcrumbs: 3,
+  breadcrumbOverflowTooltipAlign: 'right',
 };
 
 export const createFullPageWithStepInErrorState = TemplateWithError.bind({});
@@ -818,4 +819,5 @@ createFullPageWithGlobalHeader.args = {
     { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
   ],
   maxVisibleBreadcrumbs: 3,
+  breadcrumbOverflowTooltipAlign: 'right',
 };

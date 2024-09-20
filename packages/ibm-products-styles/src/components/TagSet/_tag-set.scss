@@ -124,6 +124,8 @@ $block-class-modal: #{$_block-class}-modal;
   }
 
   .#{$block-class-overflow}__popover-trigger {
+    /* stylelint-disable-next-line declaration-no-important */
+    border: none !important;
     font-family: inherit;
   }
 

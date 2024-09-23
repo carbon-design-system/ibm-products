@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 /**@ts-ignore */
-import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import { Link, Popover, PopoverContent, OperationalTag } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 
@@ -83,6 +83,10 @@ interface TagSetOverflowProps {
    * label for the overflow show all tags link
    */
   showAllTagsLabel?: string;
+  /**
+   * Size of the overflow tag
+   */
+  size?: string;
 }
 
 export const TagSetOverflow = React.forwardRef(
@@ -100,6 +104,7 @@ export const TagSetOverflow = React.forwardRef(
       showAllTagsLabel,
       popoverOpen,
       setPopoverOpen,
+      size,
       // Collect any other property values passed in.
       ...rest
     }: PropsWithChildren<TagSetOverflowProps>,
@@ -149,12 +154,12 @@ export const TagSetOverflow = React.forwardRef(
           open={popoverOpen}
           autoAlign={overflowAutoAlign}
         >
-          <Tag
+          <OperationalTag
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__popover-trigger`)}
-          >
-            {`+${overflowTags.length}`}
-          </Tag>
+            size={size}
+            text={`+${overflowTags.length}`}
+          />
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
@@ -265,4 +270,8 @@ TagSetOverflow.propTypes = {
    * label for the overflow show all tags link
    */
   showAllTagsLabel: PropTypes.string,
+  /**
+   * Size of the overflow tag
+   */
+  size: PropTypes.string,
 };

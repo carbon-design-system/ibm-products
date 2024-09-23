@@ -92,6 +92,10 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   overflowAriaLabel?: string;
   /**
+   * Determines if the primary button is enabled or not
+   */
+  primaryButtonDisabled?: boolean;
+  /**
    * Optionally specify an href for your Button to become an <a> element
    */
   primaryButtonHref?: string;
@@ -255,6 +259,10 @@ ProductiveCard.propTypes = {
    * Aria label prop required for OverflowMenu
    */
   overflowAriaLabel: PropTypes.string,
+  /**
+   * Determines if the primary button is enabled or not
+   */
+  primaryButtonDisabled: PropTypes.bool,
   /**
    * Optionally specify an href for your Button to become an <a> element
    */

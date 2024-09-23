@@ -204,6 +204,7 @@ export let ExportModal = forwardRef(
         setExtension(preformattedExtensions?.[0]?.extension);
       }
     }, [filename, preformattedExtensions, open]);
+
     useEffect(() => {
       if (successful) {
         const button: HTMLButtonElement | null = document.querySelector(
@@ -314,11 +315,7 @@ export let ExportModal = forwardRef(
               )}
             </>
           )}
-          <div
-            className={`${blockClass}__messaging`}
-            aria-live="polite"
-            role="alert"
-          >
+          <div className={`${blockClass}__messaging`}>
             {loading && (
               <>
                 <Loading small withOverlay={false} />

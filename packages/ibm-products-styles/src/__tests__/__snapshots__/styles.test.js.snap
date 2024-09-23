@@ -3978,6 +3978,12 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__head-wrap {
   overflow: hidden;
   background-color: var(--cds-layer-accent);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.c4p--datagrid .c4p--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .c4p--datagrid .cds--action-list .cds--btn.c4p--button-menu {
@@ -8881,8 +8887,9 @@ button.c4p--add-select__global-filter-toggle--open {
   text-align: left;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__popover-trigger {
-  font-family: inherit;
+  /* stylelint-disable-next-line declaration-no-important */
   border: none !important;
+  font-family: inherit;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link.cds--link:visited {
   display: inline-block;

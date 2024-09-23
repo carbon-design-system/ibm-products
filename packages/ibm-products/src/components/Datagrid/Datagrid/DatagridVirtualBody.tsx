@@ -85,23 +85,38 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
       headEle.style.display = 'flex';
     } // scrollbar width to header column to fix header alignment
 
-    function handleScroll(event) {
+    // Syncs header scroll position when virtual body is scrolled
+    function handleVirtualScrollX(event) {
       const virtualBody = event.target;
       if (headWrapEl) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
       }
     }
 
+    // Syncs virtual body scroll position when header is scrolled
+    function handleHeaderScrollX(event) {
+      const header = event.target;
+
+      if (testRef && testRef.current) {
+        testRef.current.scrollLeft = header?.scrollLeft;
+        // this prevents the scroll bar from over exceeding the vertical scroll bar compensation in the right
+        header.scrollLeft = testRef.current.scrollLeft;
+      }
+    }
+
     const testRefValue = testRef?.current;
-    testRefValue?.addEventListener('scroll', handleScroll);
+    testRefValue?.addEventListener('scroll', handleVirtualScrollX);
+    headWrapEl?.addEventListener('scroll', handleHeaderScrollX);
     return () => {
-      testRefValue?.removeEventListener('scroll', handleScroll);
+      testRefValue?.removeEventListener('scroll', handleVirtualScrollX);
+      headWrapEl?.removeEventListener('scroll', handleHeaderScrollX);
     };
   });
 
   useIsomorphicEffect(() => {
     if (headWrapRef.current && headWrapRef.current.style) {
       headWrapRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
+      headWrapRef.current.style.overflowX = 'auto';
     }
   }, [headWrapRef, gridRef]);
 

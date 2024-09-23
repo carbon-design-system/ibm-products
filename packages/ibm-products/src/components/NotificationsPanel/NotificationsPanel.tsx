@@ -17,7 +17,13 @@ import {
   WarningAltFilled,
 } from '@carbon/react/icons';
 // Import portions of React that are needed.
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { NotificationsEmptyState } from '../EmptyStates';
 // Other standard imports.
@@ -228,6 +234,11 @@ export interface NotificationsPanelProps {
   todayLabel?: string;
 
   /**
+   * Reference to trigger button
+   */
+  triggerButtonref?: RefObject<any>;
+
+  /**
    * Sets the View all button text
    */
   viewAllLabel?: (value: number) => string;
@@ -298,7 +309,7 @@ export let NotificationsPanel = React.forwardRef(
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
       selectorsFloatingMenus,
-
+      triggerButtonref,
       // Collect any other property values passed in.
       ...rest
     }: NotificationsPanelProps,
@@ -316,7 +327,6 @@ export let NotificationsPanel = React.forwardRef(
 
     const reducedMotion = usePrefersReducedMotion();
     const carbonPrefix = usePrefix();
-
     useEffect(() => {
       // Set the notifications passed to the state within this component
       setAllNotifications(data);
@@ -324,6 +334,9 @@ export let NotificationsPanel = React.forwardRef(
 
     useClickOutside(ref || notificationPanelRef, () => {
       onClickOutside();
+      setTimeout(() => {
+        triggerButtonref?.current?.focus();
+      }, 0);
     });
 
     useEffect(() => {
@@ -390,6 +403,9 @@ export let NotificationsPanel = React.forwardRef(
       event.stopPropagation();
       if (event.key === 'Escape') {
         onClickOutside();
+        setTimeout(() => {
+          triggerButtonref?.current?.focus();
+        }, 0);
       }
     };
     useEffect(() => {
@@ -946,6 +962,11 @@ NotificationsPanel.propTypes = {
    * Sets the today label text
    */
   todayLabel: PropTypes.string,
+
+  /**
+   * Sets the today label text
+   */
+  triggerButtonref: PropTypes.any,
 
   /**
    * Sets the View all button text

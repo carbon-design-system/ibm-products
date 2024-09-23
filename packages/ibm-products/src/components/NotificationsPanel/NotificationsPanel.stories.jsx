@@ -131,13 +131,6 @@ const Template = (args) => {
     return () => clearTimeout(unreadTimer);
   }, [open, notificationsData, hasUnreadNotifications]);
 
-  // Focus the dialog content and trigger button
-  useEffect(() => {
-    if (!open && notificationTriggerRef.current) {
-      notificationTriggerRef.current.focus();
-    }
-  }, [open]);
-
   return (
     <div className={`${storyBlockClass}--full-height`}>
       {renderUIShellHeader(
@@ -160,6 +153,7 @@ const Template = (args) => {
           tempData = tempData.filter((item) => item.id !== id);
           setNotificationsData(tempData);
         }}
+        triggerButtonref={notificationTriggerRef}
       />
     </div>
   );

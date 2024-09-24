@@ -45,6 +45,7 @@ jobs:
       - name: Commit the changes
         if: failure() && steps.up_to_date.outcome == 'failure'
         id: commit
+        working-directory: ./
         run: |
           git add .
           git commit -m "chore: update example gallery"

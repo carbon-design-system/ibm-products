@@ -47,8 +47,8 @@ jobs:
         id: commit
         working-directory: ./
         run: |
-          git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
-          git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
+          git config --global user.email makafsal@gmail.com
+          git config --global user.name Afsal
           git add .
           git commit -m "chore: update example gallery"
           git push origin

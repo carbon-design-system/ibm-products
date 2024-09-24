@@ -48,19 +48,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: update-examples
-        # run: |
-        #   git add .
-        #   git commit -m "Your commit message"
-        #   git push origin feature-branch
-        # # run: |
-        # #   git checkout -b update-examples
-        # #   git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
-        # #   git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
-        # #   git add .
-        # #   git commit -m "chore: update example gallery"
-        # #   git push --set-upstream origin update-examples
 
       - name: Commit and push
+        if: failure() && steps.up_to_date.outcome == 'failure'
         run: |
           git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}

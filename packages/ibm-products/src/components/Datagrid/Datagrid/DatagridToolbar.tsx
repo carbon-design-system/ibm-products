@@ -18,7 +18,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { handleSelectAllRowData } from './addons/stateReducer';
-import { DataGridState } from '../types';
+import { DataGridState, DatagridRowProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
@@ -47,9 +47,18 @@ const DatagridBatchActionsToolbar = (
     batchActionMenuButtonLabel,
     translateWithIdBatchActions,
   } = datagridState;
+  const [availableRowsCount, setAvailableRowsCount] = useState(rows.length);
+
   const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
+
+  useEffect(() => {
+    const countDisabledRows =
+      (rows.find((row) => row.getRowProps)?.getRowProps?.() as DatagridRowProps)
+        ?.nonselectablerows?.length || 0;
+    rows && setAvailableRowsCount(rows.length - countDisabledRows);
+  }, [rows]);
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside
@@ -183,7 +192,7 @@ const DatagridBatchActionsToolbar = (
       totalSelected={totalSelected}
       onCancel={onCancelHandler}
       onSelectAll={onSelectAllHandler}
-      totalCount={rows && rows.length}
+      totalCount={availableRowsCount}
       translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&

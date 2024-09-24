@@ -42,6 +42,15 @@ jobs:
             exit 0
           fi
 
+      - name: Commit the changes
+        if: failure() && steps.up_to_date.outcome == 'failure'
+        id: commit
+        run: |
+          git add .
+          git commit -m "chore: update example gallery"
+          git push origin
+
+
       - name: Create pull request
         if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr

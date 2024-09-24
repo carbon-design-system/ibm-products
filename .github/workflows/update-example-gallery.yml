@@ -52,7 +52,7 @@ jobs:
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
           git add .
           git commit -m "chore: update example gallery"
-          git push origin update-examples
+          git push
 
       - name: Create pull request
         if: steps.up_to_date.outcome == 'failure'

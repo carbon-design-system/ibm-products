@@ -236,7 +236,7 @@ export interface NotificationsPanelProps {
   /**
    * Reference to trigger button
    */
-  triggerButtonref?: RefObject<any>;
+  triggerButtonRef?: RefObject<any>;
 
   /**
    * Sets the View all button text
@@ -309,7 +309,7 @@ export let NotificationsPanel = React.forwardRef(
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
       selectorsFloatingMenus,
-      triggerButtonref,
+      triggerButtonRef,
       // Collect any other property values passed in.
       ...rest
     }: NotificationsPanelProps,
@@ -335,7 +335,7 @@ export let NotificationsPanel = React.forwardRef(
     useClickOutside(ref || notificationPanelRef, () => {
       onClickOutside();
       setTimeout(() => {
-        triggerButtonref?.current?.focus();
+        triggerButtonRef?.current?.focus();
       }, 0);
     });
 
@@ -404,7 +404,7 @@ export let NotificationsPanel = React.forwardRef(
       if (event.key === 'Escape') {
         onClickOutside();
         setTimeout(() => {
-          triggerButtonref?.current?.focus();
+          triggerButtonRef?.current?.focus();
         }, 0);
       }
     };
@@ -966,7 +966,7 @@ NotificationsPanel.propTypes = {
   /**
    * Sets the today label text
    */
-  triggerButtonref: PropTypes.any,
+  triggerButtonRef: PropTypes.any,
 
   /**
    * Sets the View all button text

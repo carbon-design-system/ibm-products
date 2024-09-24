@@ -153,7 +153,7 @@ const Template = (args) => {
           tempData = tempData.filter((item) => item.id !== id);
           setNotificationsData(tempData);
         }}
-        triggerButtonref={notificationTriggerRef}
+        triggerButtonRef={notificationTriggerRef}
       />
     </div>
   );

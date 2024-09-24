@@ -11,7 +11,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage"
+      altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage"
       blocks={[
         {
           title: 'Structuring items',

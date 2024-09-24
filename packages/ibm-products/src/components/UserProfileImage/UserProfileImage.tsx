@@ -49,7 +49,7 @@ type imageProps =
 type UserProfileImageBaseProps = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
-   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   * https://pages.github.ibm.com/carbon/ibm-products/patterns/user-profile-images/
    */
   backgroundColor?: string;
 
@@ -237,7 +237,7 @@ UserProfileImage.displayName = componentName;
 UserProfileImage.propTypes = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
-   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   * https://pages.github.ibm.com/carbon/ibm-products/patterns/user-profile-images/
    */
   backgroundColor: PropTypes.oneOf([
     'light-cyan',

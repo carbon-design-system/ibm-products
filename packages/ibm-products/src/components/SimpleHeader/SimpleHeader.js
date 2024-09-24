@@ -13,6 +13,7 @@ import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
+import { Tooltip } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--simple-header`;
 const componentName = 'SimpleHeader';
@@ -35,6 +36,7 @@ const SimpleHeader = ({
   noTrailingSlash = true,
   maxVisible,
   overflowAriaLabel,
+  overflowTooltipAlign,
   ...rest
 }) => {
   const warnIfNoTitleOrBreadcrumbs = useCallback(() => {
@@ -58,6 +60,7 @@ const SimpleHeader = ({
           breadcrumbs={breadcrumbs}
           maxVisible={maxVisible}
           overflowAriaLabel={overflowAriaLabel}
+          overflowTooltipAlign={overflowTooltipAlign}
         />
       )}
       {title && <h1 className={cx(`${blockClass}__title`)}>{title}</h1>}
@@ -99,6 +102,10 @@ SimpleHeader.propTypes = {
   /** Label for open/close overflow button used for breadcrumb items that do not fit */
   overflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
 
+  /**
+   * overflowTooltipAlign: align tooltip position
+   */
+  overflowTooltipAlign: Tooltip.propTypes.align,
   /** Header title */
   title: PropTypes.string,
 };

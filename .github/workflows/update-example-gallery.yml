@@ -42,20 +42,34 @@ jobs:
             exit 0
           fi
 
-      - name: Commit the changes
+      - name: Checkout branch
         if: failure() && steps.up_to_date.outcome == 'failure'
-        id: commit
-        working-directory: ./
+        id: checkout_branch
+        uses: actions/checkout@v3
+        with:
+          ref: update-examples
+        # run: |
+        #   git add .
+        #   git commit -m "Your commit message"
+        #   git push origin feature-branch
+        # # run: |
+        # #   git checkout -b update-examples
+        # #   git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
+        # #   git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
+        # #   git add .
+        # #   git commit -m "chore: update example gallery"
+        # #   git push --set-upstream origin update-examples
+
+      - name: Commit and push
         run: |
-          git checkout -b update-examples
           git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
           git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
           git add .
           git commit -m "chore: update example gallery"
-          git push --set-upstream origin update-examples
+          git push origin update-examples
 
       - name: Create pull request
-        if: steps.up_to_date.outcome == 'failure'
+        if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:

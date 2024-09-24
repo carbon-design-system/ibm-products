@@ -209,11 +209,11 @@ export let ExportModal = forwardRef(
     useEffect(() => {
       if (successful) {
         const button: HTMLButtonElement | null = document.querySelector(
-          `.${carbon.prefix}--modal-close-button button`
+          `.${blockClass} .${carbon.prefix}--modal-close-button button`
         );
         button?.focus();
       }
-    }, [successful]);
+    }, [successful, blockClass]);
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);

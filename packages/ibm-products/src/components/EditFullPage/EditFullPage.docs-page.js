@@ -12,7 +12,7 @@ import * as stories from './EditFullPage.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#full-page-edit"
+      altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/edit-and-update/usage/#full-page-edit"
       blocks={[
         {
           description: `There are **2** components that make up a Create Full Page component, which can

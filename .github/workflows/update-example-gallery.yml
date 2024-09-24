@@ -42,13 +42,13 @@ jobs:
             exit 0
           fi
 
-      # - name: Commit and push
-      #   if: failure() && steps.up_to_date.outcome == 'failure'
-      #   run: |
-      #     git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
-      #     git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
-      #     git add .
-      #     git commit -m "chore: update example gallery"
+      - name: Commit and push
+        if: failure() && steps.up_to_date.outcome == 'failure'
+        run: |
+          git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
+          git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
+          git add .
+          git commit -m "chore: update example gallery"
 
       - name: Create pull request
         if: failure() && steps.up_to_date.outcome == 'failure'

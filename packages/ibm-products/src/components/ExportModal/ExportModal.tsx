@@ -17,6 +17,7 @@ import {
   RadioButton,
   RadioButtonGroup,
   TextInput,
+  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/react/icons';
 import React, {
@@ -263,101 +264,107 @@ export let ExportModal = forwardRef(
     };
 
     return renderPortalUse(
-      <ComposedModal
-        {...rest}
-        className={cx(blockClass, className)}
-        aria-label={title}
-        size="sm"
-        preventCloseOnClickOutside
-        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
+      <FeatureFlags
+        flags={{
+          'enable-experimental-focus-wrap-without-sentinels': true,
+        }}
       >
-        <ModalHeader
-          className={`${blockClass}__header`}
-          closeModal={onClose}
-          title={title}
-        />
-        <ModalBody className={`${blockClass}__body-container`}>
-          {!submitted && (
-            <>
-              {body && <p className={`${blockClass}__body`}>{body}</p>}
-              {preformattedExtensions.length ? (
-                <FormGroup legendText={preformattedExtensionsLabel}>
-                  <RadioButtonGroup
-                    orientation="vertical"
-                    onChange={onExtensionChangeHandler}
-                    valueSelected={extension}
-                    name="extensions"
-                  >
-                    {preformattedExtensions.map((o) => (
-                      <RadioButton
-                        key={o.extension}
-                        id={o.extension}
-                        value={o.extension}
-                        labelText={`${o.extension} (${o.description})`}
-                        data-modal-primary-focus
+        <ComposedModal
+          {...rest}
+          className={cx(blockClass, className)}
+          aria-label={title}
+          size="sm"
+          preventCloseOnClickOutside
+          {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
+        >
+          <ModalHeader
+            className={`${blockClass}__header`}
+            closeModal={onClose}
+            title={title}
+          />
+          <ModalBody className={`${blockClass}__body-container`}>
+            {!submitted && (
+              <>
+                {body && <p className={`${blockClass}__body`}>{body}</p>}
+                {preformattedExtensions.length ? (
+                  <FormGroup legendText={preformattedExtensionsLabel}>
+                    <RadioButtonGroup
+                      orientation="vertical"
+                      onChange={onExtensionChangeHandler}
+                      valueSelected={extension}
+                      name="extensions"
+                    >
+                      {preformattedExtensions.map((o) => (
+                        <RadioButton
+                          key={o.extension}
+                          id={o.extension}
+                          value={o.extension}
+                          labelText={`${o.extension} (${o.description})`}
+                          data-modal-primary-focus
+                        />
+                      ))}
+                    </RadioButtonGroup>
+                  </FormGroup>
+                ) : (
+                  <div className={`${blockClass}__input-container`}>
+                    {inputType === 'text' ? (
+                      <TextInput {...commonInputProps} />
+                    ) : (
+                      <PasswordInput
+                        {...commonInputProps}
+                        showPasswordLabel={showPasswordLabel}
+                        hidePasswordLabel={hidePasswordLabel}
+                        tooltipPosition="left"
                       />
-                    ))}
-                  </RadioButtonGroup>
-                </FormGroup>
-              ) : (
-                <div className={`${blockClass}__input-container`}>
-                  {inputType === 'text' ? (
-                    <TextInput {...commonInputProps} />
-                  ) : (
-                    <PasswordInput
-                      {...commonInputProps}
-                      showPasswordLabel={showPasswordLabel}
-                      hidePasswordLabel={hidePasswordLabel}
-                      tooltipPosition="left"
-                    />
-                  )}
-                </div>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+            <div className={`${blockClass}__messaging`}>
+              {loading && (
+                <>
+                  <Loading small withOverlay={false} />
+                  <p>{loadingMessage}</p>
+                </>
               )}
-            </>
+              {successful && (
+                <>
+                  <CheckmarkFilled
+                    size={16}
+                    className={`${blockClass}__checkmark-icon`}
+                  />
+                  <p>{successMessage}</p>
+                </>
+              )}
+              {error && (
+                <>
+                  <ErrorFilled
+                    size={16}
+                    className={`${blockClass}__error-icon`}
+                  />
+                  <p>{errorMessage}</p>
+                </>
+              )}
+            </div>
+          </ModalBody>
+          {!submitted && (
+            <ModalFooter className={`${blockClass}__footer`}>
+              <Button type="button" kind="secondary" onClick={onClose}>
+                {secondaryButtonText}
+              </Button>
+              <Button
+                type="submit"
+                kind="primary"
+                onClick={onSubmitHandler}
+                disabled={primaryButtonDisabled}
+              >
+                {primaryButtonText}
+              </Button>
+            </ModalFooter>
           )}
-          <div className={`${blockClass}__messaging`}>
-            {loading && (
-              <>
-                <Loading small withOverlay={false} />
-                <p>{loadingMessage}</p>
-              </>
-            )}
-            {successful && (
-              <>
-                <CheckmarkFilled
-                  size={16}
-                  className={`${blockClass}__checkmark-icon`}
-                />
-                <p>{successMessage}</p>
-              </>
-            )}
-            {error && (
-              <>
-                <ErrorFilled
-                  size={16}
-                  className={`${blockClass}__error-icon`}
-                />
-                <p>{errorMessage}</p>
-              </>
-            )}
-          </div>
-        </ModalBody>
-        {!submitted && (
-          <ModalFooter className={`${blockClass}__footer`}>
-            <Button type="button" kind="secondary" onClick={onClose}>
-              {secondaryButtonText}
-            </Button>
-            <Button
-              type="submit"
-              kind="primary"
-              onClick={onSubmitHandler}
-              disabled={primaryButtonDisabled}
-            >
-              {primaryButtonText}
-            </Button>
-          </ModalFooter>
-        )}
-      </ComposedModal>
+        </ComposedModal>
+      </FeatureFlags>
     );
   }
 );

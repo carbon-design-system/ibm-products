@@ -25,7 +25,7 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage',
+              href: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
               label: 'Error pattern usage guidelines',
             },
             {

@@ -15,7 +15,6 @@ import {
   NUMBER,
   PANEL,
   RADIO,
-  SAVED_FILTERS,
 } from '../constants';
 import {
   Checkbox,
@@ -58,11 +57,7 @@ const useFilters = ({
   autoHideFilters,
   isFetching,
 }) => {
-  const {
-    state,
-    dispatch: localDispatch,
-    tableId: contextTableId,
-  } = useContext(FilterContext);
+  const { state, tableId: contextTableId } = useContext(FilterContext);
   const { savedFilters } = state;
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -169,16 +164,6 @@ const useFilters = ({
     }
 
     setFiltersObjectArray(filterCopy);
-
-    // Dispatch action from local filter context to track filters in order
-    // to keep history if `isFetching` becomes true. If so, react-table
-    // clears all filter history
-    localDispatch({
-      type: SAVED_FILTERS,
-      payload: {
-        savedFilters: filterCopy,
-      },
-    });
 
     if (updateMethod === INSTANT) {
       setAllFilters(filterCopy);

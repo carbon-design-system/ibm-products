@@ -13,6 +13,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Tooltip,
 } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
@@ -57,7 +58,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface HeaderBreadcrumbs {
+interface HeaderBreadcrumb {
   /** breadcrumb item key */
   key: string;
   /** breadcrumb item label */
@@ -79,15 +80,19 @@ type CreateFullPageBreadcrumbsProps =
        * Label for open/close overflow button used for breadcrumb items that do not fit
        */
       breadcrumbsOverflowAriaLabel?: never;
+
+      breadcrumbOverflowTooltipAlign?: never;
     }
   | {
       /** The header breadcrumbs */
-      breadcrumbs: HeaderBreadcrumbs;
+      breadcrumbs: HeaderBreadcrumb[];
 
       /**
        * Label for open/close overflow button used for breadcrumb items that do not fit
        */
       breadcrumbsOverflowAriaLabel: string;
+
+      breadcrumbOverflowTooltipAlign?: string;
     };
 
 type CreateFullPageBaseProps = {
@@ -235,6 +240,7 @@ export let CreateFullPage = React.forwardRef(
       noTrailingSlash,
       title,
       secondaryTitle,
+      breadcrumbOverflowTooltipAlign = 'right',
       ...rest
     }: CreateFullPageProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -340,6 +346,7 @@ export let CreateFullPage = React.forwardRef(
             overflowAriaLabel={breadcrumbsOverflowAriaLabel}
             maxVisible={maxVisibleBreadcrumbs}
             className={`${blockClass}__header`}
+            overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
           />
         )}
         <div className={`${blockClass}__influencer-and-body-container`}>
@@ -432,6 +439,11 @@ CreateFullPage.propTypes = {
    * The back button text
    */
   backButtonText: PropTypes.string.isRequired,
+
+  /**
+   * align breadcrumb overflow tooltip
+   */
+  breadcrumbOverflowTooltipAlign: Tooltip.propTypes.align,
 
   /** The header breadcrumbs */
   /**@ts-ignore */

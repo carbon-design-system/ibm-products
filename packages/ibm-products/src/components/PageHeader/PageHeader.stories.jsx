@@ -848,7 +848,7 @@ const TemplateDemo = ({
         >
           <SideNavItems>
             <SideNavLink
-              href="https://pages.github.ibm.com/cdai-design/pal/"
+              href="https://pages.github.ibm.com/carbon/ibm-products/"
               target="_blank"
             >
               Sample link: Carbon for IBM Products

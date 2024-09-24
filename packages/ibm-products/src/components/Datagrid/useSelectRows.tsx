@@ -120,7 +120,7 @@ const SelectRow = (datagridState) => {
       selectAll: null,
     });
     // focus the radio / checkbox if lost
-    const activeElement = document.activeElement?.id ?? '';
+    const activeElement = document?.activeElement?.id ?? '';
     await undefined;
     document.getElementById(activeElement)?.focus();
   };

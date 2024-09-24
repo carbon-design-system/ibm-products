@@ -528,7 +528,10 @@ const RowSizeDropdown = ({ ...rest } = {}) => {
 };
 
 const CustomizingColumns = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => (rest.columns ? rest.columns : defaultHeader),
+    [rest.columns]
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
@@ -2019,6 +2022,41 @@ describe(componentName, () => {
         'none'
       );
     });
+  });
+  it('Customizing Columns disable save button when un-select all columns', async () => {
+    const columnsWithoutSticky = [
+      {
+        Header: 'Row Index',
+        accessor: (row, i) => i,
+        id: 'rowIndex', // id is required when accessor is a function.
+      },
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+      },
+    ];
+    const columns = [...columnsWithoutSticky, ...defaultHeader.slice(2)];
+    render(
+      <CustomizingColumns
+        data-testid={dataTestId}
+        columns={columns}
+      ></CustomizingColumns>
+    );
+
+    const customizeColumnsButton = screen.getByLabelText('Customize columns');
+    fireEvent.click(customizeColumnsButton);
+    screen.getByRole('heading', { name: /Customize columns/ });
+
+    const selectAllCheckBox = screen.getByRole('checkbox', {
+      name: 'Column name',
+    });
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(true);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(false);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
   });
 
   it('Customizing Columns', async () => {

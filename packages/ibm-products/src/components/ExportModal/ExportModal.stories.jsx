@@ -24,7 +24,7 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage',
+              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/export/usage/',
               label: 'Export guidelines',
             },
             {

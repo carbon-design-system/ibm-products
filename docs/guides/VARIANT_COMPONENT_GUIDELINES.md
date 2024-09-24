@@ -1,7 +1,7 @@
 # Variant Component Guidelines
 
 If you are creating a component with variant or themed modes such as the
-[Card](https://pages.github.ibm.com/cdai-design/pal/components/card/overview)
+[Card](https://pages.github.ibm.com/carbon/ibm-products/components/card/overview)
 you'll want to follow these guidelines. Please note that this pattern may not be
 applicable for every scenario, so please use your best judgment.
 

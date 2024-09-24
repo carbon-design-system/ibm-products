@@ -12,7 +12,7 @@ import * as stories from './CreateFullPage.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#full-page"
+      altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page"
       blocks={[
         {
           description: `There are **2** components that make up a Create Full Page component, which can

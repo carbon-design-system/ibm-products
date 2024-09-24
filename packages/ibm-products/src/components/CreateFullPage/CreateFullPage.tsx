@@ -58,7 +58,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface HeaderBreadcrumbs {
+interface HeaderBreadcrumb {
   /** breadcrumb item key */
   key: string;
   /** breadcrumb item label */
@@ -85,7 +85,7 @@ type CreateFullPageBreadcrumbsProps =
     }
   | {
       /** The header breadcrumbs */
-      breadcrumbs: HeaderBreadcrumbs;
+      breadcrumbs: HeaderBreadcrumb[];
 
       /**
        * Label for open/close overflow button used for breadcrumb items that do not fit

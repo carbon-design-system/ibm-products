@@ -68,7 +68,7 @@ const renderDocLink = () => {
       chance > 0.66
         ? 'https://carbondesignsystem.com/'
         : chance > 0.33
-        ? 'https://pages.github.ibm.com/cdai-design/pal/'
+        ? 'https://pages.github.ibm.com/carbon/ibm-products/'
         : 'https://ibm-products.carbondesignsystem.com/',
     text:
       chance > 0.66

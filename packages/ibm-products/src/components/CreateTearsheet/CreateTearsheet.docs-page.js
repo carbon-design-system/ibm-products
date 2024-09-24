@@ -12,7 +12,7 @@ import * as stories from './CreateTearsheet.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#wide-tearsheet"
+      altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#wide-tearsheet"
       blocks={[
         {
           story: stories.multiStepTearsheet,

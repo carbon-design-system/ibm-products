@@ -8,7 +8,13 @@
 import React, { useRef, forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import {
+  Link,
+  Tag,
+  Popover,
+  PopoverContent,
+  DismissibleTag,
+} from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { TagOverflowItem } from './TagOverflow';
@@ -115,6 +121,24 @@ export const TagOverflowPopover = forwardRef(
                       const isFilterable =
                         overflowType === 'tag' ? filter : false;
 
+                      let tag;
+                      if (isFilterable) {
+                        tag = (
+                          <DismissibleTag
+                            {...other}
+                            onClose={() => onClose?.()}
+                            type={typeValue}
+                            text={label}
+                          />
+                        );
+                      } else {
+                        tag = (
+                          <Tag {...other} type={typeValue}>
+                            {label}
+                          </Tag>
+                        );
+                      }
+
                       return (
                         <li
                           className={cx(`${blockClass}__tag-item`, {
@@ -125,18 +149,7 @@ export const TagOverflowPopover = forwardRef(
                           })}
                           key={id}
                         >
-                          {overflowType === 'tag' ? (
-                            <Tag
-                              {...other}
-                              onClose={() => onClose?.()}
-                              type={typeValue}
-                              filter={isFilterable}
-                            >
-                              {label}
-                            </Tag>
-                          ) : (
-                            label
-                          )}
+                          {overflowType === 'tag' ? tag : label}
                         </li>
                       );
                     }

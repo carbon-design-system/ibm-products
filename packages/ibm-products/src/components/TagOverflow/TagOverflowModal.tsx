@@ -15,6 +15,7 @@ import {
   ModalBody,
   Search,
   Tag,
+  DismissibleTag,
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
@@ -38,6 +39,7 @@ interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
   onClose?: () => void;
+  onTagClose: () => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
   portalTarget?: ReactNode;
@@ -53,6 +55,7 @@ export const TagOverflowModal = ({
   className,
   title,
   onClose,
+  onTagClose,
   open,
   overflowType,
   portalTarget: portalTargetIn,
@@ -107,10 +110,14 @@ export const TagOverflowModal = ({
       <ModalBody className={`${blockClass}__body`} hasForm>
         {getFilteredItems().map(({ label, id, filter }) => {
           const isFilterable = overflowType === 'tag' ? filter : false;
-          return (
-            <Tag key={id} filter={isFilterable}>
-              {label}
-            </Tag>
+          return isFilterable ? (
+            <DismissibleTag
+              key={id}
+              text={label}
+              onClose={() => onTagClose({ label, id })}
+            />
+          ) : (
+            <Tag key={id}>{label}</Tag>
           );
         })}
       </ModalBody>
@@ -128,6 +135,7 @@ TagOverflowModal.propTypes = {
   ),
   className: PropTypes.string,
   onClose: PropTypes.func,
+  onTagClose: PropTypes.func.isRequired,
   open: PropTypes.bool,
   overflowType: PropTypes.oneOf(['default', 'tag']),
   portalTarget: PropTypes.node,

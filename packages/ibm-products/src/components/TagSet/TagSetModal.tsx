@@ -119,7 +119,7 @@ export const TagSetModal = ({
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
         {filteredModalTags.map(({ label, ...other }, index) => (
-          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+          <Tag {...other} key={`all-tags-${index}`}>
             {label}
           </Tag>
         ))}

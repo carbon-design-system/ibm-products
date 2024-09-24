@@ -27,6 +27,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { DismissibleTag } from '@carbon/react';
 
 export interface TagOverflowItem {
   className?: string;
@@ -271,19 +272,28 @@ export let TagOverflow = forwardRef(
             if (tagComponent) {
               return getCustomComponent(item, tagComponent);
             } else {
-              const { id, label, tagType, onClose, ...other } = item;
+              const { id, label, tagType, onClose, filter, ...other } = item;
               // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
                   <Tooltip align={overflowAlign} label={label}>
-                    <Tag
-                      {...other}
-                      className={`${blockClass}__item--tag`}
-                      type={tagType}
-                      onClose={() => handleTagOnClose(onClose, index)}
-                    >
-                      {label}
-                    </Tag>
+                    {filter ? (
+                      <DismissibleTag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                        onClose={() => handleTagOnClose(onClose, index)}
+                        text={label}
+                      />
+                    ) : (
+                      <Tag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                      >
+                        {label}
+                      </Tag>
+                    )}
                   </Tooltip>
                 </div>
               );

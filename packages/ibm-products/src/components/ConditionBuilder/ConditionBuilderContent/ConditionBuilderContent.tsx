@@ -191,6 +191,10 @@ const ConditionBuilderContent = ({
       </Button>
     );
   }
+  const wrapperRole =
+    variant === HIERARCHICAL_VARIANT
+      ? { role: 'treegrid', 'aria-label': conditionBuilderHierarchicalText }
+      : null;
 
   return (
     <>
@@ -198,11 +202,7 @@ const ConditionBuilderContent = ({
         <Heading>{conditionHeadingText}</Heading>
       </Section>
 
-      <div
-        className={`${blockClass}__content-container`}
-        role="treegrid"
-        aria-label={conditionBuilderHierarchicalText}
-      >
+      <div className={`${blockClass}__content-container`} {...wrapperRole}>
         {rootState &&
           rootState?.groups?.map((eachGroup, groupIndex) => (
             <div key={eachGroup.id} className={`${blockClass}__group-wrapper`}>

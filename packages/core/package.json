@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.26.0-rc.0",
+  "version": "2.26.0",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@carbon/grid": "^11.26.0",
-    "@carbon/ibm-products-styles": "^2.46.0-rc.0",
+    "@carbon/ibm-products-styles": "^2.46.0",
     "@carbon/layout": "^11.25.0",
     "@carbon/motion": "^11.21.0",
     "@carbon/react": "^1.65.0",

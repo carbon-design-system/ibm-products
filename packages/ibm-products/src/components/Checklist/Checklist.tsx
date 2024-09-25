@@ -145,7 +145,6 @@ const defaults = {
   taskLists: [],
   theme: Themes.light,
   toggleLabel: 'Toggle',
-  toggleLabelAlign: 'top',
 };
 
 /**

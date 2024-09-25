@@ -281,7 +281,7 @@ export interface DataGridState<T extends object = any>
   emptyStateAction: {
     kind?: 'primary' | 'secondary' | 'tertiary';
     renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<'button'>['onClick'];
+    onClick?: ButtonProps<React.ElementType>['onClick'];
     text?: string;
   };
   emptyStateLink?: {

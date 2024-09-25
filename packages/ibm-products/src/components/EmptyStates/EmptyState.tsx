@@ -44,7 +44,7 @@ interface EmptyStateProps {
   action?: {
     kind?: 'primary' | 'secondary' | 'tertiary';
     renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<'button'>['onClick'];
+    onClick?: ButtonProps<React.ElementType>['onClick'];
     text?: string;
   };
 

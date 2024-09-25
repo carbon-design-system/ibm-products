@@ -207,7 +207,7 @@ type PageActionProps =
        * - maxWidth: maximum number of pixels the content will grow to
        * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
        */
-      pageActions: ButtonProps<'button'>[] | PageAction;
+      pageActions: ButtonProps<React.ElementType>[] | PageAction;
       /**
        * When there is insufficient space to display all of hte page actions inline a dropdown button menu is shown,
        * containing the page actions. This label is used as the display content of the dropdown button menu.
@@ -1174,7 +1174,7 @@ export let PageHeader = React.forwardRef(
                     `${blockClass}__button-set-menu-options`
                   )}
                   onWidthChange={handleWidthChange}
-                  buttons={pageActions as ButtonProps<'button'>[]}
+                  buttons={pageActions as ButtonProps<React.ElementType>[]}
                   buttonSetOverflowLabel={
                     pageActionsOverflowLabel as NonNullable<ReactNode>
                   }

@@ -25,6 +25,7 @@ import React, {
   forwardRef,
   useEffect,
   useRef,
+  RefObject,
   useState,
 } from 'react';
 
@@ -145,6 +146,10 @@ export interface ExportModalProps
    */
   title: string;
   /**
+   * Reference to trigger button
+   */
+  triggerButtonRef?: RefObject<any>;
+  /**
    * array of valid extensions the file can have
    */
   validExtensions: readonly any[];
@@ -181,6 +186,7 @@ export let ExportModal = forwardRef(
       successMessage,
       successful,
       title,
+      triggerButtonRef,
       validExtensions = defaults.validExtensions,
 
       // Collect any other property values passed in.
@@ -262,7 +268,10 @@ export let ExportModal = forwardRef(
       onBlur: onBlurHandler,
       ['data-modal-primary-focus']: true,
     };
-
+    const closeModal = () => {
+      onClose && onClose();
+      triggerButtonRef?.current.focus();
+    };
     return renderPortalUse(
       <FeatureFlags
         flags={{
@@ -275,7 +284,8 @@ export let ExportModal = forwardRef(
           aria-label={title}
           size="sm"
           preventCloseOnClickOutside
-          {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
+          onClose={closeModal}
+          {...{ open, ref, ...getDevtoolsProps(componentName) }}
         >
           <ModalHeader
             className={`${blockClass}__header`}
@@ -478,6 +488,10 @@ ExportModal.propTypes = {
    * The text displayed at the top of the modal
    */
   title: PropTypes.string.isRequired,
+  /**
+   * Sets the trigger button ref
+   */
+  triggerButtonRef: PropTypes.any,
   /**
    * array of valid extensions the file can have
    */

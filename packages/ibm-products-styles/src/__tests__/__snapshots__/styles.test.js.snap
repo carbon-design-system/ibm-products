@@ -5450,16 +5450,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   line-height: inherit;
 }
 
-.c4p--edit-in-place__ellipsis {
-  position: relative;
-  margin-left: -1rem;
-  opacity: 0;
-}
-
-.c4p--edit-in-place--overflows:not(.c4p--edit-in-place--focused) .c4p--edit-in-place__ellipsis {
-  opacity: 1;
-}
-
 .c4p--edit-in-place__text-input-label {
   display: none;
 }
@@ -8881,8 +8871,9 @@ button.c4p--add-select__global-filter-toggle--open {
   text-align: left;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__popover-trigger {
-  font-family: inherit;
+  /* stylelint-disable-next-line declaration-no-important */
   border: none !important;
+  font-family: inherit;
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__show-all-tags-link.cds--link:visited {
   display: inline-block;

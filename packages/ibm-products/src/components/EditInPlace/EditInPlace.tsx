@@ -301,9 +301,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
             aria-label={labelText}
             aria-invalid={invalid}
           />
-          <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
-            &hellip;
-          </div>
           <div className={`${blockClass}__toolbar`}>
             {invalid && (
               <WarningFilled

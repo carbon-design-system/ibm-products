@@ -45,7 +45,6 @@ const DraggableElement = ({
     disabled,
     id,
   });
-
   const content = (
     <>
       <div
@@ -66,7 +65,6 @@ const DraggableElement = ({
     transform: !disabled ? CSS.Transform.toString(transform) : undefined,
     transition,
   };
-
   return (
     <li
       className={cx(classList, `${blockClass}__draggable-handleHolder`, {
@@ -79,6 +77,7 @@ const DraggableElement = ({
       style={style}
       {...attributes}
       {...listeners}
+      aria-disabled={undefined}
       aria-selected={selected}
       role="option"
     >

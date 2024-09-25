@@ -119,7 +119,8 @@ export const TagOverflowPopover = forwardRef(
                       const typeValue =
                         overflowType === 'tag' ? 'high-contrast' : tagType;
                       const isFilterable =
-                        overflowType === 'tag' ? filter : false;
+                        overflowType === 'tag' &&
+                        (typeof onClose === 'function' || filter);
 
                       let tag;
                       if (isFilterable) {

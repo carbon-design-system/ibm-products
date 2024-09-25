@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Tag, Tooltip } from '@carbon/react';
+import { Tag, Tooltip, DismissibleTag } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { TYPES } from './constants';
@@ -27,10 +27,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { DismissibleTag } from '@carbon/react';
-
 export interface TagOverflowItem {
   className?: string;
+  /**
+   * @deprecated The `filter` prop is no longer going to be used. To use DismissibleTags, pass in an onClose function.
+   */
   filter?: boolean;
   id: string;
   label: string;
@@ -277,7 +278,7 @@ export let TagOverflow = forwardRef(
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
                   <Tooltip align={overflowAlign} label={label}>
-                    {filter ? (
+                    {typeof onClose === 'function' || filter ? (
                       <DismissibleTag
                         {...other}
                         className={`${blockClass}__item--tag`}

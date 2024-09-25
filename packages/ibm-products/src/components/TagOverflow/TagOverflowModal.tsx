@@ -108,8 +108,9 @@ export const TagOverflowModal = ({
         />
       </ModalHeader>
       <ModalBody className={`${blockClass}__body`} hasForm>
-        {getFilteredItems().map(({ label, id, filter }) => {
-          const isFilterable = overflowType === 'tag' ? filter : false;
+        {getFilteredItems().map(({ label, id, filter, onClose }) => {
+          const isFilterable =
+            overflowType === 'tag' && (typeof onClose === 'function' || filter);
           return isFilterable ? (
             <DismissibleTag
               key={id}

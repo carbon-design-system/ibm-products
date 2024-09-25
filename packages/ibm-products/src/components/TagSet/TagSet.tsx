@@ -59,6 +59,10 @@ type OverflowType = 'default' | 'tag';
 type TagType = {
   label: string;
   type?: keyof typeof tagTypes;
+  /**
+   * @deprecated Use the `onClose` function instead to render as a DismissibleTag
+   */
+  filter?: boolean;
 } & TagBaseProps;
 export interface TagSetProps extends PropsWithChildren {
   /**
@@ -194,7 +198,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       // create sizing tags
       setHiddenSizingTags(
         tags && tags.length > 0
-          ? tags.map(({ label, id, filter, ...other }, index) => {
+          ? tags.map(({ label, id, filter, onClose, ...other }, index) => {
               return (
                 <div
                   key={index}
@@ -205,7 +209,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
                     }
                   }}
                 >
-                  {filter ? (
+                  {typeof onClose === 'function' || filter ? (
                     <DismissibleTag
                       {...other}
                       data-original-id={id}
@@ -247,7 +251,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
                 size = other.size;
               }
 
-              if (filter) {
+              if (typeof onClose === 'function' || filter) {
                 return (
                   <DismissibleTag
                     {...other}

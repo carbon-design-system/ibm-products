@@ -104,7 +104,7 @@ export const TagOverflowModal = ({
           size="lg"
         />
       </ModalHeader>
-      <ModalBody className={`${blockClass}__body`} hasForm>
+      <ModalBody className={`${blockClass}__body`} hasForm hasScrollingContent>
         {getFilteredItems().map(({ label, id, filter }) => {
           const isFilterable = overflowType === 'tag' ? filter : false;
           return (
@@ -113,8 +113,8 @@ export const TagOverflowModal = ({
             </Tag>
           );
         })}
+        <div className={`${blockClass}__fade`} />
       </ModalBody>
-      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };

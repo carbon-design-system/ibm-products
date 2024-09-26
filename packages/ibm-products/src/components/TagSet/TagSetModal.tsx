@@ -123,6 +123,7 @@ export const TagSetModal = ({
             {label}
           </Tag>
         ))}
+        <div className={`${blockClass}__fade`} />
       </ModalBody>
     </ComposedModal>
   );

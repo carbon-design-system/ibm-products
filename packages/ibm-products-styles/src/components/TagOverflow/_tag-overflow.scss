@@ -188,28 +188,12 @@ $block-class-modal: #{$block-class}-modal;
     margin-bottom: 0;
   }
 
-  &.#{$block-class-modal} .#{$block-class-modal}__fade {
-    position: relative;
-    margin-right: $spacing-05;
-    margin-left: $spacing-05;
-  }
-
   .#{$block-class-modal}__body {
-    padding-bottom: $spacing-06;
+    padding-bottom: $spacing-07;
   }
 
   .#{$block-class-modal}__header {
     padding-right: 0;
     margin-right: $spacing-05;
-  }
-
-  &.#{$block-class-modal} .#{$block-class-modal}__fade::after {
-    position: absolute;
-    top: calc(-1 * #{$spacing-11});
-    left: 0;
-    width: 100%;
-    height: $spacing-07;
-    background: linear-gradient(to bottom, transparent, $layer-01);
-    content: '';
   }
 }

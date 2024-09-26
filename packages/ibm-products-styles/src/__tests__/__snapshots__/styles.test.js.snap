@@ -8845,7 +8845,7 @@ button.c4p--add-select__global-filter-toggle--open {
   margin-bottom: 0;
 }
 .c4p--tag-set-modal .c4p--tag-set-modal__body {
-  padding-bottom: 1.5rem;
+  padding-bottom: 2rem;
 }
 .c4p--tag-set-modal .c4p--tag-set-modal__header {
   padding-right: 0;

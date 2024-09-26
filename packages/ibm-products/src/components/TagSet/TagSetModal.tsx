@@ -117,14 +117,13 @@ export const TagSetModal = ({
           size="lg"
         />
       </ModalHeader>
-      <ModalBody className={`${blockClass}__body`} hasForm>
+      <ModalBody className={`${blockClass}__body`} hasForm hasScrollingContent>
         {filteredModalTags.map(({ label, ...other }, index) => (
           <Tag {...other} filter={false} key={`all-tags-${index}`}>
             {label}
           </Tag>
         ))}
       </ModalBody>
-      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };

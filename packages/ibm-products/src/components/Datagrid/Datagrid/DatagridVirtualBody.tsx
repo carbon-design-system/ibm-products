@@ -12,7 +12,6 @@ import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { DataGridState, DatagridRow } from '../types';
-import { useIsomorphicEffect } from '../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -41,12 +40,12 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     page,
     handleResize,
     gridRef,
-    tableId,
     onVirtualScroll,
   } = datagridState;
 
   const headWrapRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
+  const fakeScrollRef = useRef<HTMLDivElement | null>(null);
 
   /* istanbul ignore next */
   const handleVirtualGridResize = () => {
@@ -74,57 +73,33 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
 
   const visibleRows = ((DatagridPagination && page) || rows) as DatagridRow[];
   const testRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-
-  // Sync the scrollLeft position of the virtual body to the table header
   useEffect(() => {
-    const headWrapEl = document?.querySelector(
-      `#${tableId} .${blockClass}__head-wrap`
-    );
-    const headEle = headWrapEl?.querySelector(`thead`);
-    if (headEle) {
-      headEle.style.display = 'flex';
-    } // scrollbar width to header column to fix header alignment
+    const testScrollEl = testRef.current;
+    const fakeScrollEl = fakeScrollRef.current;
 
-    // Syncs header scroll position when virtual body is scrolled
-    function handleVirtualScrollX(event) {
-      const virtualBody = event.target;
-      if (headWrapEl) {
-        headWrapEl.scrollLeft = virtualBody?.scrollLeft;
-      }
+    if (testScrollEl && fakeScrollEl) {
+      let isSyncing = false;
+
+      const syncScroll = (source, target) => {
+        if (!isSyncing) {
+          isSyncing = true;
+          target.scrollTop = source.scrollTop;
+          isSyncing = false;
+        }
+      };
+
+      const handleTestScroll = () => syncScroll(testScrollEl, fakeScrollEl);
+      const handleFakeScroll = () => syncScroll(fakeScrollEl, testScrollEl);
+
+      testScrollEl.addEventListener('scroll', handleTestScroll);
+      fakeScrollEl.addEventListener('scroll', handleFakeScroll);
+
+      return () => {
+        testScrollEl.removeEventListener('scroll', handleTestScroll);
+        fakeScrollEl.removeEventListener('scroll', handleFakeScroll);
+      };
     }
-
-    // Syncs virtual body scroll position when header is scrolled
-    function handleHeaderScrollX(event) {
-      const header = event.target;
-
-      if (testRef && testRef.current) {
-        testRef.current.scrollLeft = header?.scrollLeft;
-        // this prevents the scroll bar from over exceeding the vertical scroll bar compensation in the right
-        header.scrollLeft = testRef.current.scrollLeft;
-      }
-    }
-
-    const testRefValue = testRef?.current;
-    testRefValue?.addEventListener('scroll', handleVirtualScrollX);
-    headWrapEl?.addEventListener('scroll', handleHeaderScrollX);
-    return () => {
-      testRefValue?.removeEventListener('scroll', handleVirtualScrollX);
-      headWrapEl?.removeEventListener('scroll', handleHeaderScrollX);
-    };
-  });
-
-  useIsomorphicEffect(() => {
-    if (headWrapRef.current && headWrapRef.current.style) {
-      headWrapRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
-      headWrapRef.current.style.overflowX = 'auto';
-    }
-  }, [headWrapRef, gridRef]);
-
-  useIsomorphicEffect(() => {
-    if (testRef?.current && testRef.current.style) {
-      testRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
-    }
-  }, [testRef, gridRef]);
+  }, []);
 
   return (
     <>
@@ -167,6 +142,25 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
             );
           }}
         </VariableSizeList>
+        <div
+          className="fake-scrollbar"
+          ref={fakeScrollRef}
+          style={{
+            position: 'absolute',
+            overflow: 'auto',
+            right: 0,
+            bottom: 0,
+            height: 'calc(100% - 48px)',
+            width: '16px',
+          }}
+        >
+          <div
+            style={{
+              height: testRef.current?.children[0]?.clientHeight,
+              width: '16px',
+            }}
+          ></div>
+        </div>
       </TableBody>
     </>
   );

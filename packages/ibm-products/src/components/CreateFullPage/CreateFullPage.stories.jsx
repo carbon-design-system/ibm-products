@@ -568,6 +568,7 @@ createFullPageWithHeader.args = {
     { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
   ],
   maxVisibleBreadcrumbs: 3,
+  breadcrumbOverflowTooltipAlign: 'right',
 };
 
 export const createFullPageWithStepInErrorState = TemplateWithError.bind({});
@@ -609,7 +610,7 @@ const TemplateWithGlobalHeader = ({ ...args }) => {
         >
           <SideNavItems>
             <SideNavLink
-              href="https://pages.github.ibm.com/cdai-design/pal/"
+              href="https://pages.github.ibm.com/carbon/ibm-products/"
               target="_blank"
             >
               Sample link: Carbon for IBM Products
@@ -818,4 +819,5 @@ createFullPageWithGlobalHeader.args = {
     { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
   ],
   maxVisibleBreadcrumbs: 3,
+  breadcrumbOverflowTooltipAlign: 'right',
 };

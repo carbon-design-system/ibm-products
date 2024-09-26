@@ -75,17 +75,6 @@ $carbon-input: #{$carbon-prefix}--text-input;
   line-height: inherit;
 }
 
-.#{$block-class}__ellipsis {
-  position: relative;
-  margin-left: calc(-1 * $spacing-05);
-  opacity: 0;
-}
-
-.#{$block-class}--overflows:not(.#{$block-class}--focused)
-  .#{$block-class}__ellipsis {
-  opacity: 1;
-}
-
 .#{$block-class}__text-input-label {
   display: none;
 }

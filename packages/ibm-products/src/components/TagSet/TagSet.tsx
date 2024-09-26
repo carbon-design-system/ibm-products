@@ -111,6 +111,10 @@ export interface TagSetProps extends PropsWithChildren {
    */
   overflowAlign?: OverflowAlign;
   /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign?: boolean;
+  /**
    * overflowClassName for the tooltip popup
    */
   overflowClassName?: string;
@@ -143,6 +147,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       className,
       maxVisible,
       multiline,
+      overflowAutoAlign,
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
@@ -170,12 +175,18 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState<HTMLDivElement[]>([]);
     const overflowTag = useRef<HTMLDivElement>(null);
+    const [maxVisibleCount, setMaxVisibleCount] = useState<number>(0);
 
     const [popoverOpen, setPopoverOpen] = useState(false);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
+
+    useEffect(() => {
+      const maxCount = maxVisible || tags?.length || 0;
+      setMaxVisibleCount(maxCount);
+    }, [maxVisible, tags]);
 
     useEffect(() => {
       const newSizingTags: HTMLDivElement[] = [];
@@ -218,18 +229,24 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     );
 
     useEffect(() => {
+      let size = 'md';
       // create visible and overflow tags
       let newDisplayedTags =
         tags && tags.length > 0
-          ? tags.map(({ label, onClose, ...other }, index) => (
-              <Tag
-                {...other}
-                key={`displayed-tag-${index}`}
-                onClose={() => handleTagOnClose(onClose, index)}
-              >
-                {label}
-              </Tag>
-            ))
+          ? tags.map(({ label, onClose, ...other }, index) => {
+              if (index == tags.length - 1 && other.size) {
+                size = other.size;
+              }
+              return (
+                <Tag
+                  {...other}
+                  key={`displayed-tag-${index}`}
+                  onClose={() => handleTagOnClose(onClose, index)}
+                >
+                  {label}
+                </Tag>
+              );
+            })
           : [];
 
       // separate out tags for the overflow
@@ -248,12 +265,14 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       newDisplayedTags.push(
         <TagSetOverflow
           allTagsModalSearchThreshold={allTagsModalSearchThreshold}
+          overflowAutoAlign={overflowAutoAlign}
           className={overflowClassName}
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
           overflowType={overflowType}
           showAllTagsLabel={showAllTagsLabel}
+          size={size}
           key="displayed-tag-overflow"
           ref={overflowTag}
           popoverOpen={popoverOpen}
@@ -273,11 +292,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       onOverflowTagChange,
       popoverOpen,
       handleTagOnClose,
+      overflowAutoAlign,
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
       if (multiline) {
-        return setDisplayCount(maxVisible || 3);
+        return setDisplayCount(maxVisibleCount);
       }
 
       // how many will fit?
@@ -317,10 +337,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       if (willFit < 1) {
         setDisplayCount(0);
       } else {
-        setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
+        setDisplayCount(
+          maxVisibleCount ? Math.min(willFit, maxVisibleCount) : willFit
+        );
       }
     }, [
-      maxVisible,
+      maxVisibleCount,
       multiline,
       sizingTags,
       tagSetRef,
@@ -330,7 +352,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
 
     useEffect(() => {
       checkFullyVisibleTags();
-    }, [checkFullyVisibleTags, maxVisible, multiline, sizingTags]);
+    }, [checkFullyVisibleTags, maxVisibleCount, multiline, sizingTags]);
 
     /* don't know how to test resize */
     /* istanbul ignore next */
@@ -498,6 +520,10 @@ TagSet.propTypes = {
     'right-bottom',
     'right-top',
   ]),
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
+   */
+  overflowAutoAlign: PropTypes.bool,
   /**
    * overflowClassName for the tooltip popup
    */

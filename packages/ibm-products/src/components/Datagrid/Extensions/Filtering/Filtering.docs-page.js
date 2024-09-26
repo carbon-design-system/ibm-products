@@ -24,7 +24,7 @@ export const DocsPage = () => (
         description: `Applied filters can affect both the data that is visible in the table and also data that might not be displayed in the columns available in the table. Filter options can be displayed in many form components, including dropdowns, text inputs, checkboxes, radio buttons, and date range pickers.`,
       },
       {
-        description: `[Check out the Guidance here.](https://pages.github.ibm.com/cdai-design/pal/components/data-table/filters/)`,
+        description: `[Check out the Guidance here.](https://pages.github.ibm.com/carbon/ibm-products/components/datagrid/filtering/usage/)`,
       },
       {
         subTitle: 'Preparing your column headers',

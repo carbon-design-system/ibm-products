@@ -405,7 +405,7 @@ export let NotificationsPanel = React.forwardRef(
         onClickOutside();
         setTimeout(() => {
           triggerButtonRef?.current?.focus();
-        }, 0);
+        }, 100);
       }
     };
     useEffect(() => {

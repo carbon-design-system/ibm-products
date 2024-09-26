@@ -42,16 +42,6 @@ jobs:
             exit 0
           fi
 
-      - name: Commit the changes
-        if: failure() && steps.up_to_date.outcome == 'failure'
-        id: commit_changes
-        run: |
-          git config --global user.email ${{ secrets.CARBON_BOT_EMAIL }}
-          git config --global user.name ${{ secrets.CARBON_BOT_NAME }}
-          git add .
-          git commit -m "chore: update examples gallery"
-          git push origin
-
       - name: Create pull request
         if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr

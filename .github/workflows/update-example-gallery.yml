@@ -1,9 +1,9 @@
-name: Update example gallery # Updates examples twice a month
+name: Update example gallery # Updates examples once a month
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 8,22 * *' # Updates will happen every 8th/22nd of the month
+    - cron: '0 0 15 * *' # At 12:00 AM, on day 15 of the month
 
 jobs:
   check_gallery:
@@ -43,7 +43,7 @@ jobs:
           fi
 
       - name: Create pull request
-        if: steps.up_to_date.outcome == 'failure'
+        if: failure() && steps.up_to_date.outcome == 'failure'
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:

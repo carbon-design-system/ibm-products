@@ -14,6 +14,7 @@ import {
   Column,
   TextArea,
   TextInput,
+  MultiSelect,
   DataTable,
   Table,
   TableHeader,
@@ -266,6 +267,21 @@ const ChildrenContent = () => {
           labelText="Input D"
           id="side-panel-story-text-input-d"
           className={`${prefix}text-input`}
+        />
+      </div>
+      <div className={`${prefix}multi-select-container`}>
+        <MultiSelect
+          data-testid="alert--subtype--transfer--secondary-zones"
+          id="multiselectA"
+          titleText="Multiselect A"
+          label="Select an item"
+          items={[
+            {
+              value: 'all',
+              label: 'Multiselect A',
+            },
+          ]}
+          selectionFeedback="top-after-reopen"
         />
       </div>
       <div className={`${prefix}text-area-container`}>

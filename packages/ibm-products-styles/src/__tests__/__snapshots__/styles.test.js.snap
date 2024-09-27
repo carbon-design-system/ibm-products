@@ -3555,15 +3555,12 @@ p.c4p--about-modal__copyright-text:first-child {
   width: 1%;
   align-items: center;
 }
-.c4p--datagrid__grid-container .c4p--datagrid__virtual-scrollbar {
-  scrollbar-width: thin;
-}
-.c4p--datagrid__grid-container .c4p--datagrid__virtual-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--cds-text-placeholder, rgba(22, 22, 22, 0.4));
-}
-.c4p--datagrid__grid-container .c4p--datagrid__virtual-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  background-color: var(--cds-background, #ffffff);
+.c4p--datagrid__grid-container .c4p--datagrid__fake-scrollbar {
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: calc(100% - 48px);
+  overflow-y: auto;
 }
 .c4p--datagrid__grid-container .c4p--datagrid__cell {
   display: flex;
@@ -3922,19 +3919,6 @@ p.c4p--about-modal__copyright-text:first-child {
   margin-right: 0.5rem;
 }
 
-.c4p--datagrid__virtual-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 7px;
-}
-
-.c4p--datagrid__virtual-scrollbar::-webkit-scrollbar-track {
-  background: var(--cds-layer);
-}
-
-.c4p--datagrid__virtual-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-}
-
 .c4p--datagrid__virtualScrollContainer {
   width: 100%;
 }
@@ -3978,8 +3962,8 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__head-wrap {
   overflow: hidden;
   background-color: var(--cds-layer-accent);
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .c4p--datagrid .c4p--datagrid__head-wrap::-webkit-scrollbar {

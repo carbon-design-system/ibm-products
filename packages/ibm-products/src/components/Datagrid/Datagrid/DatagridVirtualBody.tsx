@@ -124,7 +124,7 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
           innerRef={innerListRef}
           outerRef={testRef}
           ref={listRef}
-          className={`${blockClass}__virtual-scrollbar`}
+          className={`${blockClass}__virtual-container`}
         >
           {({ index, style }) => {
             const row = visibleRows[index];

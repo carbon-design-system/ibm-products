@@ -1210,7 +1210,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
-    ).toBe('c4p--datagrid__virtual-scrollbar');
+    ).toBe('c4p--datagrid__virtual-container');
   });
 
   it('renders Ten Thousand table entries', async () => {

@@ -35,7 +35,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 .carbon-nested-table {
   border-bottom: 1px solid $border-subtle-01;
 
-  .#{$block-class}__virtual-scrollbar > div > div:last-child td {
+  .#{$block-class}__virtual-container > div > div:last-child td {
     border-bottom: none;
   }
 }

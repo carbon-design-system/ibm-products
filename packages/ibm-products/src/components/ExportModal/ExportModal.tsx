@@ -268,10 +268,6 @@ export let ExportModal = forwardRef(
       onBlur: onBlurHandler,
       ['data-modal-primary-focus']: true,
     };
-    const closeModal = () => {
-      onClose && onClose();
-      triggerButtonRef?.current.focus();
-    };
     return renderPortalUse(
       <FeatureFlags
         flags={{
@@ -284,8 +280,8 @@ export let ExportModal = forwardRef(
           aria-label={title}
           size="sm"
           preventCloseOnClickOutside
-          onClose={closeModal}
-          {...{ open, ref, ...getDevtoolsProps(componentName) }}
+          launcherButtonRef={triggerButtonRef}
+          {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
         >
           <ModalHeader
             className={`${blockClass}__header`}

@@ -2540,15 +2540,13 @@ describe(componentName, () => {
     expect(innerContainer.childElementCount).toEqual(1);
   });
   const findFilterTagAndRemove = async () => {
-    const filterTagCloseButtons = screen.getAllByLabelText('Clear filter');
+    const filterTagCloseButtons = screen.getAllByLabelText('Dismiss');
     const visibleFilterTags = filterTagCloseButtons.filter((el) =>
-      el.parentElement.parentElement.classList.contains(
-        `${pkg.prefix}--tag-set__displayed-tag`
-      )
+      el.closest(`.${pkg.prefix}--tag-set__displayed-tag`)
     );
     await click(visibleFilterTags[0]);
     const checkAgainForCloseFilterButton =
-      screen.queryAllByLabelText('Clear filter');
+      screen.queryAllByLabelText('Dismiss');
     expect(checkAgainForCloseFilterButton).toEqual([]);
   };
   it('should render initial filters in panel and test close button on filter tag', async () => {

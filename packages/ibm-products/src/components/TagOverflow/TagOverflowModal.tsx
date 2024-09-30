@@ -136,7 +136,7 @@ TagOverflowModal.propTypes = {
   ),
   className: PropTypes.string,
   onClose: PropTypes.func,
-  onTagClose: PropTypes.func.isRequired,
+  onTagClose: PropTypes.func,
   open: PropTypes.bool,
   overflowType: PropTypes.oneOf(['default', 'tag']),
   portalTarget: PropTypes.node,

@@ -781,6 +781,13 @@
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
   overflow: hidden;
   background-color: $layer-accent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .#{$block-class}

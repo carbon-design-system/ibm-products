@@ -1,0 +1,40 @@
+{
+  "name": "ibm-products-web-components",
+  "description": "Carbon for IBM Products Web Components",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 3000"
+  },
+  "dependencies": {
+    "@carbon/ibm-products-styles": "^2.30.1",
+    "@carbon/styles": "1.63.1",
+    "@carbon/web-components": "2.13.0"
+  },
+  "devDependencies": {
+    "@carbon/icons": "^11.50.0",
+    "@carbon/motion": "^11.23.0",
+    "@storybook/addon-essentials": "^8.2.8",
+    "@storybook/addon-links": "^8.2.8",
+    "@storybook/addon-storysource": "^8.2.8",
+    "@storybook/blocks": "^8.2.8",
+    "@storybook/manager-api": "^8.3.4",
+    "@storybook/theming": "^8.3.4",
+    "@storybook/web-components": "^8.2.8",
+    "@storybook/web-components-vite": "^8.2.8",
+    "eslint": "^9.11.1",
+    "eslint-config-carbon": "^3.17.0",
+    "remark-gfm": "^4.0.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-postcss-lit": "^2.1.0",
+    "sass": "^1.51.0",
+    "storybook": "^8.2.8",
+    "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1"
+  }
+}

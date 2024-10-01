@@ -1,0 +1,352 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "cds-side-panel",
+      "path": "./src/components/side-panel/side-panel.ts",
+      "description": "SidePanel.",
+      "attributes": [
+        {
+          "name": "animate-title",
+          "description": "Determines if the title will animate on scroll",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "close-icon-description",
+          "description": "Sets the close button icon description",
+          "type": "string",
+          "default": "\"Close\""
+        },
+        {
+          "name": "condensed-actions",
+          "description": "Determines whether the side panel should render the condensed version (affects action buttons primarily)",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "current-step",
+          "description": "Sets the current step of the side panel"
+        },
+        {
+          "name": "include-overlay",
+          "description": "Determines whether the side panel should render with an overlay",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label-text",
+          "description": "Sets the label text which will display above the title text"
+        },
+        {
+          "name": "navigation-back-icon-description",
+          "description": "Sets the icon description for the navigation back icon button",
+          "type": "string",
+          "default": "\"Back\""
+        },
+        {
+          "name": "open",
+          "description": "`true` if the side-panel should be open.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placement",
+          "description": "SidePanel placement.",
+          "type": "SIDE_PANEL_PLACEMENT",
+          "default": "\"right\""
+        },
+        {
+          "name": "prevent-close-on-click-outside",
+          "description": "Prevent closing on click outside of side-panel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "selector-initial-focus",
+          "description": "The initial location of focus in the side panel"
+        },
+        {
+          "name": "selector-page-content",
+          "description": "Selector for page content, used to push content to side except",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "description": "SidePanel size.",
+          "type": "SIDE_PANEL_SIZE",
+          "default": "\"md\""
+        },
+        {
+          "name": "slide-in",
+          "description": "Determines if this panel slides in",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "title",
+          "description": "Sets the title text"
+        }
+      ],
+      "properties": [
+        {
+          "name": "animateTitle",
+          "attribute": "animate-title",
+          "description": "Determines if the title will animate on scroll",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "closeIconDescription",
+          "attribute": "close-icon-description",
+          "description": "Sets the close button icon description",
+          "type": "string",
+          "default": "\"Close\""
+        },
+        {
+          "name": "condensedActions",
+          "attribute": "condensed-actions",
+          "description": "Determines whether the side panel should render the condensed version (affects action buttons primarily)",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "currentStep",
+          "attribute": "current-step",
+          "description": "Sets the current step of the side panel"
+        },
+        {
+          "name": "includeOverlay",
+          "attribute": "include-overlay",
+          "description": "Determines whether the side panel should render with an overlay",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "labelText",
+          "attribute": "label-text",
+          "description": "Sets the label text which will display above the title text"
+        },
+        {
+          "name": "navigationBackIconDescription",
+          "attribute": "navigation-back-icon-description",
+          "description": "Sets the icon description for the navigation back icon button",
+          "type": "string",
+          "default": "\"Back\""
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "`true` if the side-panel should be open.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placement",
+          "attribute": "placement",
+          "description": "SidePanel placement.",
+          "type": "SIDE_PANEL_PLACEMENT",
+          "default": "\"right\""
+        },
+        {
+          "name": "preventCloseOnClickOutside",
+          "attribute": "prevent-close-on-click-outside",
+          "description": "Prevent closing on click outside of side-panel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "selectorInitialFocus",
+          "attribute": "selector-initial-focus",
+          "description": "The initial location of focus in the side panel"
+        },
+        {
+          "name": "selectorPageContent",
+          "attribute": "selector-page-content",
+          "description": "Selector for page content, used to push content to side except",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "description": "SidePanel size.",
+          "type": "SIDE_PANEL_SIZE",
+          "default": "\"md\""
+        },
+        {
+          "name": "slideIn",
+          "attribute": "slide-in",
+          "description": "Determines if this panel slides in",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "title",
+          "attribute": "title",
+          "description": "Sets the title text"
+        },
+        {
+          "name": "styles",
+          "default": "\"styles\""
+        }
+      ],
+      "events": [
+        {
+          "name": "cds-side-panel-beingclosed",
+          "description": "The custom event fired before this side-panel is being closed upon a user gesture.\nCancellation of this event stops the user-initiated action of closing this side-panel."
+        },
+        {
+          "name": "cds-side-panel-closed",
+          "description": "The custom event fired after this side-panel is closed upon a user gesture."
+        },
+        {
+          "name": "cds-side-panel-navigate-back",
+          "description": "custom event fired when clicking navigate back (available when step > 0)"
+        }
+      ]
+    },
+    {
+      "name": "cds-tearsheet",
+      "path": "./src/components/tearsheet/tearsheet.ts",
+      "description": "Tearsheet.",
+      "attributes": [
+        {
+          "name": "aria-label",
+          "description": "Optional aria label for the tearsheet",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "close-icon-description",
+          "description": "Sets the close button icon description",
+          "type": "string",
+          "default": "\"Close\""
+        },
+        {
+          "name": "has-close-icon",
+          "description": "Enable a close icon ('x') in the header area of the tearsheet. By default,\n(when this prop is omitted, or undefined or null) a tearsheet does not\ndisplay a close icon if there are navigation actions (\"transactional\ntearsheet\") and displays one if there are no navigation actions (\"passive\ntearsheet\"), and that behavior can be overridden if required by setting\nthis prop to either true or false.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "influencer-placement",
+          "description": "The placement of the influencer section, 'left' or 'right'.",
+          "type": "TEARSHEET_INFLUENCER_PLACEMENT",
+          "default": "\"right\""
+        },
+        {
+          "name": "influencer-width",
+          "description": "The width of the influencer section, 'narrow' or 'wide'.",
+          "type": "TEARSHEET_INFLUENCER_WIDTH",
+          "default": "\"narrow\""
+        },
+        {
+          "name": "open",
+          "description": "`true` if the tearsheet should be open.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "prevent-close-on-click-outside",
+          "description": "Prevent closing on click outside of tearsheet",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "selector-initial-focus",
+          "description": "The initial location of focus in the side panel"
+        },
+        {
+          "name": "width",
+          "description": "The width of the influencer section, 'narrow' or 'wide'.",
+          "type": "TEARSHEET_WIDTH",
+          "default": "\"narrow\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ariaLabel",
+          "attribute": "aria-label",
+          "description": "Optional aria label for the tearsheet",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "closeIconDescription",
+          "attribute": "close-icon-description",
+          "description": "Sets the close button icon description",
+          "type": "string",
+          "default": "\"Close\""
+        },
+        {
+          "name": "hasCloseIcon",
+          "attribute": "has-close-icon",
+          "description": "Enable a close icon ('x') in the header area of the tearsheet. By default,\n(when this prop is omitted, or undefined or null) a tearsheet does not\ndisplay a close icon if there are navigation actions (\"transactional\ntearsheet\") and displays one if there are no navigation actions (\"passive\ntearsheet\"), and that behavior can be overridden if required by setting\nthis prop to either true or false.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "influencerPlacement",
+          "attribute": "influencer-placement",
+          "description": "The placement of the influencer section, 'left' or 'right'.",
+          "type": "TEARSHEET_INFLUENCER_PLACEMENT",
+          "default": "\"right\""
+        },
+        {
+          "name": "influencerWidth",
+          "attribute": "influencer-width",
+          "description": "The width of the influencer section, 'narrow' or 'wide'.",
+          "type": "TEARSHEET_INFLUENCER_WIDTH",
+          "default": "\"narrow\""
+        },
+        {
+          "name": "open",
+          "attribute": "open",
+          "description": "`true` if the tearsheet should be open.",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "preventCloseOnClickOutside",
+          "attribute": "prevent-close-on-click-outside",
+          "description": "Prevent closing on click outside of tearsheet",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "selectorInitialFocus",
+          "attribute": "selector-initial-focus",
+          "description": "The initial location of focus in the side panel"
+        },
+        {
+          "name": "width",
+          "attribute": "width",
+          "description": "The width of the influencer section, 'narrow' or 'wide'.",
+          "type": "TEARSHEET_WIDTH",
+          "default": "\"narrow\""
+        },
+        {
+          "name": "actionsMultiple",
+          "type": "string",
+          "default": "\"['', 'single', 'double', 'triple'][this._actionsCount]\""
+        },
+        {
+          "name": "styles",
+          "default": "\"styles\""
+        }
+      ],
+      "events": [
+        {
+          "name": "cds-tearsheet-beingclosed",
+          "description": "The custom event fired before this tearsheet is being closed upon a user gesture.\nCancellation of this event stops the user-initiated action of closing this tearsheet."
+        },
+        {
+          "name": "cds-tearsheet-closed",
+          "description": "The custom event fired after this tearsheet is closed upon a user gesture."
+        }
+      ]
+    }
+  ]
+}

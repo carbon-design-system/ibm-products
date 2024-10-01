@@ -256,8 +256,8 @@
     height: 100%;
     overflow-x: auto;
   }
-
-  .#{$block-class}-filter-panel
+  s
+    .#{$block-class}-filter-panel
     + .#{$block-class}__table-container-inner
     .#{c4p-settings.$carbon-prefix}--data-table-content {
     height: fit-content;
@@ -735,6 +735,10 @@
 
 .#{$block-class}__virtualScrollContainer {
   width: 100%;
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
+    // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
+    overflow-x: hidden;
+  }
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {

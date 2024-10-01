@@ -33,18 +33,9 @@ const config = {
       plugins: [
         postcss(),
         postcssLit({
-          // include: [
-          //   './node_modules',
-          //   '../../node_modules',
-          //   '../src/**/*.scss',
-          //   '../src/**/*.scss?*',
-          // ],
-          include: [
-            '**/*.{css,sss,pcss,styl,stylus,sass,scss,less}',
-            '**/*.{css,sss,pcss,styl,stylus,sass,scss,less}?*'
-          ],
+          include: ['**/*.{css,sass,scss}', '**/*.{css,sass,scss}?*'],
         }),
-        // viteSVGResultCarbonIconLoader(),
+        viteSVGResultCarbonIconLoader(),
       ],
     });
   },

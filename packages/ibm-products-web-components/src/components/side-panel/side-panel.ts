@@ -24,11 +24,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import ArrowLeft16 from '@carbon/icons/lib/arrow--left/16';
 import Close20 from '@carbon/icons/lib/close/20';
 import { moderate02 } from '@carbon/motion';
+import Handle from '../../globals/internal/handle';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/button/button-set-base.js';
 import '@carbon/web-components/es/components/icon-button/index.js';
 import '@carbon/web-components/es/components/layer/index.js';
-import Handle from '../../globals/internal/handle';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
@@ -64,22 +64,22 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 /**
  * Tries to focus on the given elements and bails out if one of them is successful.
  *
- * @param elems The elements.
+ * @param elements The elements.
  * @param reverse `true` to go through the list in reverse order.
  * @returns `true` if one of the attempts is successful, `false` otherwise.
  */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
+function tryFocusElements(elements: NodeListOf<HTMLElement>, reverse: boolean) {
   if (!reverse) {
-    for (let i = 0; i < elems.length; ++i) {
-      const elem = elems[i];
+    for (let i = 0; i < elements.length; ++i) {
+      const elem = elements[i];
       elem.focus();
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
       }
     }
   } else {
-    for (let i = elems.length - 1; i >= 0; --i) {
-      const elem = elems[i];
+    for (let i = elements.length - 1; i >= 0; --i) {
+      const elem = elements[i];
       elem.focus();
       if (elem.ownerDocument!.activeElement === elem) {
         return true;
@@ -145,7 +145,10 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({ slot: 'actions', selector: `${carbonPrefix}-button` })
+  @queryAssignedElements({
+    slot: 'actions',
+    selector: `${carbonPrefix}-button`,
+  })
   private _actions!: Array<HTMLElement>;
 
   @state()
@@ -211,7 +214,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
-          !tryFocusElems(
+          !tryFocusElements(
             this.querySelectorAll(selectorTabbableForSidePanel),
             true
           ) &&
@@ -227,7 +230,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       ) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
-          !tryFocusElems(
+          !tryFocusElements(
             this.querySelectorAll(selectorTabbableForSidePanel),
             true
           )
@@ -690,7 +693,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
     const titleTemplate = html`<div
       class=${`${blockClass}__title`}
-      ?no-label=${!!labelText}>
+      ?no-label=${!!labelText}
+    >
       <h2 class=${title ? `${blockClass}__title-text` : ''} title=${title}>
         ${title}
       </h2>
@@ -699,7 +703,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
             title=${title}
-            aria-hidden="true">
+            aria-hidden="true"
+          >
             ${title}
           </h2>`
         : ''}
@@ -713,7 +718,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         class=${`${blockClass}__header${headerHasTitleClass}`}
         ?detail-step=${currentStep > 0}
         ?no-title-animation=${!this._doAnimateTitle}
-        ?reduced-motion=${this._reducedMotion.matches}>
+        ?reduced-motion=${this._reducedMotion.matches}
+      >
         <!-- render back button -->
         ${currentStep > 0
           ? html`<cds-icon-button
@@ -722,7 +728,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
               kind="ghost"
               size="sm"
               class=${`${prefix}--btn ${blockClass}__navigation-back-button`}
-              @click=${this._handleNavigateBack}>
+              @click=${this._handleNavigateBack}
+            >
               ${ArrowLeft16({ slot: 'icon' })}
               <span slot="tooltip-content">
                 ${navigationBackIconDescription}
@@ -748,13 +755,9 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             kind="ghost"
             size="sm"
             class=${`${blockClass}__close-button`}
-            @click=${this._handleCloseClick}>
-            <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
-              <polygon points="17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16"/>
-              <g id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;">
-                <rect fill="none" width="32" height="32"/>
-              </g>
-            </svg>
+            @click=${this._handleCloseClick}
+          >
+            ${Close20({ slot: 'icon' })}
             <span slot="tooltip-content"> ${closeIconDescription} </span>
           </cds-icon-button>
         </div>
@@ -765,26 +768,31 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           ?hidden=${!this._hasSubtitle}
           ?no-title-animation=${!this._doAnimateTitle}
           ?no-action-toolbar=${!this._hasActionToolbar}
-          ?no-title=${!title}>
+          ?no-title=${!title}
+        >
           <slot
             name="subtitle"
-            @slotchange=${this._handleSubtitleChange}></slot>
+            @slotchange=${this._handleSubtitleChange}
+          ></slot>
         </p>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}
           ?hidden=${!this._hasActionToolbar}
-          ?no-title-animation=${!this._doAnimateTitle}>
+          ?no-title-animation=${!this._doAnimateTitle}
+        >
           <slot
             name="action-toolbar"
-            @slotchange=${this._handleActionToolbarChange}></slot>
+            @slotchange=${this._handleActionToolbarChange}
+          ></slot>
         </div>
       </div>
     `;
 
     const mainTemplate = html`<div
       class=${`${blockClass}__inner-content`}
-      ?scrolls=${!this._doAnimateTitle}>
+      ?scrolls=${!this._doAnimateTitle}
+    >
       <cds-layer level="1">
         <slot></slot>
       </cds-layer>
@@ -807,13 +815,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?condensed-actions=${condensedActions}
         ?overlay=${includeOverlay || slideIn}
         ?slide-in=${slideIn}
-        size=${size}>
+        size=${size}
+      >
         <a
           id="start-sentinel"
           class="sentinel"
           hidden
           href="javascript:void 0"
-          role="navigation"></a>
+          role="navigation"
+        ></a>
 
         ${this._doAnimateTitle
           ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
@@ -826,7 +836,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           ?hidden=${this._actionsCount === 0}
           ?condensed=${condensedActions}
           actions-multiple=${actionsMultiple}
-          size=${size}>
+          size=${size}
+        >
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
         </cds-button-set-base>
 
@@ -835,7 +846,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           class="sentinel"
           hidden
           href="javascript:void 0"
-          role="navigation"></a>
+          role="navigation"
+        ></a>
       </div>
 
       ${includeOverlay
@@ -846,13 +858,13 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             ?opening=${open && !this._isOpen}
             ?closing=${!open && this._isOpen}
             tabindex="-1"
-            @click=${this._handleClickOnOverlay}></div>`
+            @click=${this._handleClickOnOverlay}
+          ></div>`
         : ''}
     `;
   }
 
   async updated(changedProperties) {
-    console.log(changedProperties);
     if (changedProperties.has('condensedActions')) {
       this._checkUpdateActionSizes();
     }
@@ -914,7 +926,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           // where its first update/render cycle that makes it focusable happens after `<cds-side-panel>`'s first update/render cycle
           (focusNode as HTMLElement).focus();
         } else if (
-          !tryFocusElems(
+          !tryFocusElements(
             this.querySelectorAll(
               (this.constructor as typeof CDSSidePanel).selectorTabbable
             ),

@@ -7,8 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from 'path';
-import createSVGResultFromCarbonIcon from './svg-result-carbon-icon';
+const path = require('path');
+const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
 
 /**
  * A Vite plugin to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
@@ -51,7 +51,7 @@ export default function svgResultCarbonIconLoader() {
         return outcome;
       }
 
-      const descriptor = import(id);
+      const descriptor = require(id);
       return `
           import { svg } from 'lit';
           import spread from '${path.resolve(

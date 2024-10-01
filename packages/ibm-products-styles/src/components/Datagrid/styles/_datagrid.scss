@@ -256,8 +256,7 @@
     height: 100%;
     overflow-x: auto;
   }
-  s
-    .#{$block-class}-filter-panel
+  .#{$block-class}-filter-panel
     + .#{$block-class}__table-container-inner
     .#{c4p-settings.$carbon-prefix}--data-table-content {
     height: fit-content;

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { SkeletonText } from '@carbon/react';
+import { DefinitionTooltip, SkeletonText } from '@carbon/react';
 import { EditInPlace } from '../EditInPlace';
 
 /**
@@ -38,6 +38,22 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState(true);
+  const longTitleRef = useRef();
+
+  useLayoutEffect(() => {
+    setIsEllipsisApplied(isEllipsisActive());
+  }, [longTitleRef]);
+
+  const isEllipsisActive = () => {
+    if (longTitleRef.current) {
+      return (
+        longTitleRef.current?.offsetWidth < longTitleRef.current?.scrollWidth
+      );
+    }
+    return false;
+  };
+
   if (text || !content) {
     if (text === undefined && typeof title === 'string') {
       text = title;
@@ -48,7 +64,9 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     titleInnards = (
       <>
         {icon && !loading ? (
-          <TitleIcon className={`${blockClass}__title-icon`} />
+          <span className={`${blockClass}__title-icon-wrapper`}>
+            <TitleIcon className={`${blockClass}__title-icon`} />
+          </span>
         ) : null}
 
         {loading ? (
@@ -67,6 +85,17 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
             inheritTypography
             {...rest}
           />
+        ) : isEllipsisApplied ? (
+          <DefinitionTooltip
+            openOnHover={false}
+            align={'bottom'}
+            definition={text}
+            className={`${blockClass}__tooltip`}
+          >
+            <span ref={longTitleRef} className={`${blockClass}__longTitle`}>
+              {text}
+            </span>
+          </DefinitionTooltip>
         ) : (
           <span title={!loading ? asText : null}>{text}</span>
         )}

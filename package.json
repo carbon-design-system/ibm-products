@@ -128,7 +128,9 @@
     "plugins": [
       "ssr-friendly"
     ],
-    "ignorePatterns": ["packages/ibm-products-web-components/**/*"],
+    "ignorePatterns": [
+      "packages/ibm-products-web-components/**/*"
+    ],
     "extends": [
       "carbon",
       "plugin:ssr-friendly/recommended"

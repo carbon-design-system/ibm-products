@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.7.0-rc.0...jest-config-ibm-cloud-cognitive@1.10.0-rc.0) (2024-09-30)
+
+
+### Bug Fixes
+
+* adds typescript to coverage report ([#6140](https://github.com/carbon-design-system/ibm-products/issues/6140)) ([2466c5b](https://github.com/carbon-design-system/ibm-products/commit/2466c5bb001f18ad065eb669f380cd32db0d0bfc))
+* update toHaveNoAxeViolations and remove skips ([#5955](https://github.com/carbon-design-system/ibm-products/issues/5955)) ([694128b](https://github.com/carbon-design-system/ibm-products/commit/694128bb707a2400d67e6618af3fea3f3ffba86f))
+
+
+
+
+
 # [1.9.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.9.0-rc.0...jest-config-ibm-cloud-cognitive@1.9.0) (2024-09-25)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

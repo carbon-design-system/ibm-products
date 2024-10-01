@@ -4,6 +4,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
+    "directory": "packages/ibm-products-web-components"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

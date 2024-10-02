@@ -34,6 +34,7 @@ const config = {
         postcss(),
         postcssLit({
           include: ['**/*.{css,sass,scss}', '**/*.{css,sass,scss}?*'],
+          exclude: ['../node_modules/**/*', '../../../node_modules/**/*'],
         }),
         viteSVGResultCarbonIconLoader(),
       ],

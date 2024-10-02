@@ -15,7 +15,6 @@ import './index';
 import { prefix } from '../../globals/settings';
 
 import styles from './story-styles.scss?inline';
-// import { BUTTON_KIND } from '../button/button';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
@@ -73,11 +72,13 @@ const getContent = (index) => {
         <cds-text-input
           label="Input A"
           id="side-panel-story-text-input-a"
-          class="${storyPrefix}text-input"></cds-text-input>
+          class="${storyPrefix}text-input"
+        ></cds-text-input>
         <cds-text-input
           label="Input B"
           id="side-panel-story-text-input-b"
-          class="${storyPrefix}text-input"></cds-text-input>
+          class="${storyPrefix}text-input"
+        ></cds-text-input>
       `;
     case 2:
       return html`
@@ -88,29 +89,36 @@ const getContent = (index) => {
         <div class="${storyPrefix}text-inputs">
           <cds-text-input
             label="Input A"
-            id="side-panel-story-text-input-a"></cds-text-input>
+            id="side-panel-story-text-input-a"
+          ></cds-text-input>
           <cds-text-input
             label="Input B"
-            id="side-panel-story-text-input-b"></cds-text-input>
+            id="side-panel-story-text-input-b"
+          ></cds-text-input>
         </div>
         <div class="${storyPrefix}text-inputs">
           <cds-text-input
             label="Input C"
-            id="side-panel-story-text-input-c"></cds-text-input>
+            id="side-panel-story-text-input-c"
+          ></cds-text-input>
           <cds-text-input
             label="Input D"
-            id="side-panel-story-text-input-d"></cds-text-input>
+            id="side-panel-story-text-input-d"
+          ></cds-text-input>
         </div>
         <div class="${storyPrefix}textarea-container">
           <cds-textarea
             label="Notes"
-            value="This is a text area"></cds-textarea>
+            value="This is a text area"
+          ></cds-textarea>
           <cds-textarea
             label="Notes"
-            value="This is a text area"></cds-textarea>
+            value="This is a text area"
+          ></cds-textarea>
           <cds-textarea
             label="Notes"
-            value="This is a text area"></cds-textarea>
+            value="This is a text area"
+          ></cds-textarea>
         </div>
       `;
 
@@ -171,7 +179,8 @@ const getActionToolbarItems = (index) => {
           has-icon-only="true"
           kind=${BUTTON_KIND.GHOST}
           size="sm"
-          tooltip-text="Settings">
+          tooltip-text="Settings"
+        >
         </cds-button>
         <cds-button
           slot="action-toolbar"
@@ -179,7 +188,8 @@ const getActionToolbarItems = (index) => {
           has-icon-only="true"
           kind=${BUTTON_KIND.GHOST}
           size="sm"
-          tooltip-text="Delete">
+          tooltip-text="Delete"
+        >
         </cds-button>
       `;
     default:
@@ -275,10 +285,12 @@ const getSlug = (index) => {
           <p class="secondary">AI Explained</p>
           <h1>84%</h1>
           <p class="secondary bold">Confidence score</p>
+          <!-- //cspell: disable -->
           <p class="secondary">
             Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
           </p>
+          <!-- //cspell: enable -->
           <hr />
           <p class="secondary">Model type</p>
           <p class="bold">Foundation model</p>
@@ -420,7 +432,8 @@ const defaultTemplate = {
         size=${args.size}
         ?slide-in=${args.slideIn}
         .title=${args.title}
-        @cds-side-panel-navigate-back=${prevStep}>
+        @cds-side-panel-navigate-back=${prevStep}
+      >
         <!-- default slotted content -->
         ${args.content}
         <cds-button @click="${nextStep}">Step two</cds-button>

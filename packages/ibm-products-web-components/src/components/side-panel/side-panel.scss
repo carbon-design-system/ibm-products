@@ -164,7 +164,7 @@ $block-class-action-set: #{$prefix}--action-set;
 
   .#{$block-class}__subtitle-text {
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden;
+      @extend .#{$carbon-prefix}--visually-hidden !optional;
     }
   }
 
@@ -173,12 +173,12 @@ $block-class-action-set: #{$prefix}--action-set;
     padding-inline-start: 0;
 
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden;
+      @extend .#{$carbon-prefix}--visually-hidden !optional;
     }
   }
 
   .#{$block-class} .#{$block-class}__action-toolbar[hidden] {
-    @extend .#{$carbon-prefix}--visually-hidden;
+    @extend .#{$carbon-prefix}--visually-hidden !optional;
   }
 
   .#{$block-class}[has-slug] {
@@ -209,7 +209,7 @@ $block-class-action-set: #{$prefix}--action-set;
     }
 
     ::slotted(#{$prefix}-button[hidden]) {
-      @extend .#{$carbon-prefix}--visually-hidden;
+      @extend .#{$carbon-prefix}--visually-hidden !optional;
 
       display: none;
     }
@@ -272,7 +272,7 @@ $block-class-action-set: #{$prefix}--action-set;
     }
 
     &[hidden] {
-      @extend .#{$carbon-prefix}--visually-hidden;
+      @extend .#{$carbon-prefix}--visually-hidden !optional;
 
       display: none;
     }
@@ -293,7 +293,7 @@ $block-class-action-set: #{$prefix}--action-set;
   }
 
   .sentinel {
-    @extend .#{$carbon-prefix}--visually-hidden;
+    @extend .#{$carbon-prefix}--visually-hidden !optional;
   }
 
   .#{$block-class}__close-button {

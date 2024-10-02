@@ -1,5 +1,5 @@
 {
-  "name": "ibm-products-web-components",
+  "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
   "private": true,
   "version": "0.0.0",

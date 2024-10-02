@@ -121,9 +121,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       alias({
         entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
       }),
-      alias({
-        entries: [{ find: /^(.*)\.scss\?inline$/, replacement: '$1.scss' }],
-      }),
       copy({
         targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
         flatten: false,

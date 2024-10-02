@@ -8,7 +8,7 @@
  */
 
 import { html, TemplateResult } from 'lit';
-import containerStyles from './_container.scss?inline';
+import containerStyles from './_container.scss?lit';
 import '@carbon/web-components/es/components/skip-to-content/index.js';
 
 /**

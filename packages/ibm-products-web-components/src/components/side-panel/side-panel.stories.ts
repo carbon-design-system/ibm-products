@@ -14,7 +14,7 @@ import './index';
 // import Trashcan from '@carbon/icons/lib/trash-can/16';
 import { prefix } from '../../globals/settings';
 
-import styles from './story-styles.scss?inline';
+import styles from './story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';

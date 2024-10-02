@@ -1,6 +1,5 @@
 import { mergeConfig } from 'vite';
-import postcss from 'rollup-plugin-postcss';
-import postcssLit from 'rollup-plugin-postcss-lit';
+import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import sass from 'sass';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
 
@@ -31,11 +30,8 @@ const config = {
         },
       },
       plugins: [
-        postcss(),
-        postcssLit({
-          include: ['**/*.{css,sass,scss}', '**/*.{css,sass,scss}?*'],
-          exclude: ['../node_modules/**/*', '../../../node_modules/**/*'],
-        }),
+        litStyleLoader(),
+        litTemplateLoader(),
         viteSVGResultCarbonIconLoader(),
       ],
     });

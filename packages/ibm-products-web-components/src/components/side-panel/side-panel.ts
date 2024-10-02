@@ -32,13 +32,6 @@ import '@carbon/web-components/es/components/layer/index.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
-// eslint-disable-next-line no-bitwise
-const PRECEDING =
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-// eslint-disable-next-line no-bitwise
-const FOLLOWING =
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
 const blockClass = `${prefix}--side-panel`;
 const blockClassActionSet = `${prefix}--action-set`;
 
@@ -211,7 +204,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         relatedTarget as Node
       );
       // eslint-disable-next-line no-bitwise
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
+      if (relatedTarget === startSentinelNode || comparisonResult) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
           !tryFocusElements(
@@ -224,10 +217,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         }
       }
       // eslint-disable-next-line no-bitwise
-      else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
-      ) {
+      else if (relatedTarget === endSentinelNode || comparisonResult) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
           !tryFocusElements(

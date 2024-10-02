@@ -24,27 +24,27 @@ const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
      *
      * @private
      */
-    _hFormdata: Handle | null = null; // Not using TypeScript `private` due to: microsoft/TypeScript#17744
+    _hFormData: Handle | null = null; // Not using TypeScript `private` due to: microsoft/TypeScript#17744
 
     /**
      * Handles `formdata` event.
      *
      * @param event The event.
      */
-    abstract _handleFormdata(event: Event): void;
+    abstract _handleFormData(event: Event): void;
 
     connectedCallback() {
       // @ts-ignore
       super.connectedCallback();
       const form = this.closest('form');
       if (form) {
-        this._hFormdata = on(form, 'formdata', this._handleFormdata.bind(this));
+        this._hFormData = on(form, 'formdata', this._handleFormData.bind(this));
       }
     }
 
     disconnectedCallback() {
-      if (this._hFormdata) {
-        this._hFormdata = this._hFormdata.release();
+      if (this._hFormData) {
+        this._hFormData = this._hFormData.release();
       }
       // @ts-ignore
       super.disconnectedCallback();

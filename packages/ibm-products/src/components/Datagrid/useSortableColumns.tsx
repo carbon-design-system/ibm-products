@@ -91,11 +91,11 @@ const useSortableColumns = (hooks: Hooks) => {
       defaultSortableLabelText,
     } = instance;
     const onSortClick = (event, column) => {
-      const slug =
+      const aiLabel =
         event.target.classList.contains(`${carbon.prefix}--slug`) ||
         event.target.closest(`.${carbon.prefix}--slug`);
       // Do not continue with sorting if we find a slug
-      if (slug) {
+      if (aiLabel) {
         event.stopPropagation();
         return;
       }
@@ -156,11 +156,11 @@ const useSortableColumns = (hooks: Hooks) => {
             renderIcon={(props) => {
               return (
                 <>
-                  <DatagridAILabel
-                    aiLabel={
-                      headerProp?.column?.aiLabel || headerProp?.column?.slug
-                    }
-                  />
+                  {headerProp?.column?.aiLabel ? (
+                    <DatagridAILabel aiLabel={headerProp?.column?.aiLabel} />
+                  ) : (
+                    <DatagridAILabel aiLabel={headerProp?.column?.slug} />
+                  )}
                   {icon(headerProp?.column, props)}
                 </>
               );

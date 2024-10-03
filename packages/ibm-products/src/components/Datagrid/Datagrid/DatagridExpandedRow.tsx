@@ -37,6 +37,9 @@ const DatagridExpandedRow =
       <tr
         className={cx(`${blockClass}__expanded-row`, {
           [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
+          [`${blockClass}__aiLabel--row`]: isValidElement(
+            row?.original?.aiLabel
+          ),
         })}
         onMouseEnter={(event) => toggleParentHoverClass(event, 'enter')}
         onMouseLeave={(event) => toggleParentHoverClass(event)}

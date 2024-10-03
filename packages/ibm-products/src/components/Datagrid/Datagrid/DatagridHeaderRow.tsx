@@ -182,14 +182,17 @@ const HeaderRow = (
   const { className: headerGroupClassName, ...headerGroupProps } =
     headerGroup.getHeaderGroupProps({ role: undefined });
 
-  const renderSlug = (slug) => {
+  const renderAILabel = (aiLabel) => {
     if (isTableSortable) {
       return;
     }
-    return <DatagridAILabel aiLabel={slug} />;
+    return <DatagridAILabel aiLabel={aiLabel} />;
   };
 
-  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some(
+    (r) =>
+      isValidElement(r?.original?.aiLabel) || isValidElement(r?.original?.slug)
+  );
   const { key, ...rowProps } = headerGroupProps;
   const withActionsColumn = headers
     ? !!headers.filter((header) => header.isAction).length
@@ -243,8 +246,9 @@ const HeaderRow = (
                   [`${blockClass}__isSorted`]: header?.isSorted,
                   [`${blockClass}__header-actions-column`]: header?.isAction,
                   [`${blockClass}__with-slug`]:
-                    (header.slug && React.isValidElement(header?.slug)) ||
-                    (header.aiLabel && React.isValidElement(header?.aiLabel)),
+                    header.slug && React.isValidElement(header?.slug),
+                  [`${blockClass}__with-aiLabel`]:
+                    header.aiLabel && React.isValidElement(header?.aiLabel),
                 },
                 headerProps.className
               )}
@@ -253,7 +257,9 @@ const HeaderRow = (
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {renderSlug(header.aiLabel) || renderSlug(header.slug)}
+              {header.aiLabel
+                ? renderAILabel(header.aiLabel)
+                : renderAILabel(header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

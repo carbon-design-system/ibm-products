@@ -18,7 +18,12 @@ import {
 } from '@carbon/react';
 
 export const ExampleAILabel = ({ align = 'bottom-right', ...rest }) => (
-  <AILabel className="slug-container" autoAlign={false} align={align} {...rest}>
+  <AILabel
+    className="aiLabel-container"
+    autoAlign={false}
+    align={align}
+    {...rest}
+  >
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

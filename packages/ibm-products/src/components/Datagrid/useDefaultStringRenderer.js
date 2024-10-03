@@ -28,8 +28,9 @@ const useDefaultStringRenderer = (hooks) => {
       <div
         className={cx(`${blockClass}__defaultStringRenderer`, {
           [`${blockClass}__defaultStringRenderer--slug`]:
-            (slug && React.isValidElement(slug)) ||
-            (aiLabel && React.isValidElement(aiLabel)),
+            slug && React.isValidElement(slug),
+          [`${blockClass}__defaultStringRenderer--aiLabel`]:
+            aiLabel && React.isValidElement(aiLabel),
         })}
         key={typeof header === 'string' ? header : ''}
       >

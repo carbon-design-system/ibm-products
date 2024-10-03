@@ -38,7 +38,7 @@ export default {
           blocks={[
             {
               description:
-                "A Carbon AI Label can be used within the Datagrid for both column headers and rows. To include a column header AI Label, include a `aiLabel` property within your column definition and include the AILabel component as it's own custom component",
+                "A Carbon AI Label can be used within the Datagrid for both column headers and rows. To include a column header AI Label, include a `aiLabel` property within your column definition and include the AILabel component as it's own custom component. <br/> The `slug` property has been deprecated and will be phased out soon. It will only be supported for a limited time in future. Please use `aiLabel` instead going forward.",
               source: {
                 code: `
 {
@@ -57,7 +57,7 @@ export default {
   Header: 'Visits',
   accessor: 'visits',
   aiLabel: (
-    <AILabel className="slug-container" autoAlign={false} align="bottom-right">
+    <AILabel className="aiLabel-container" autoAlign={false} align="bottom-right">
       <AILabelContent>
         ...
         ...
@@ -223,7 +223,7 @@ const ExpansionRenderer = ({ row }) => {
   );
 };
 
-const GridWithSlugColumnHeader = ({
+const GridWithAILabelColumnHeader = ({
   rowAiLabel,
   rowAiLabelAlign,
   withSorting,
@@ -254,7 +254,7 @@ const GridWithSlugColumnHeader = ({
   return <Datagrid datagridState={datagridState} />;
 };
 
-const GridWithSlugColumnHeaderWrapper = ({
+const GridWithAILabelColumnHeaderWrapper = ({
   rowAiLabel,
   rowAiLabelAlign,
   withSorting,
@@ -263,7 +263,7 @@ const GridWithSlugColumnHeaderWrapper = ({
   ...args
 }) => {
   return (
-    <GridWithSlugColumnHeader
+    <GridWithAILabelColumnHeader
       defaultGridProps={{ ...args }}
       withSorting={withSorting}
       rowAiLabel={rowAiLabel}
@@ -275,7 +275,7 @@ const GridWithSlugColumnHeaderWrapper = ({
 };
 
 const aiLabelColumnHeaderStoryName = 'Column AILabel';
-export const AILabelColumnHeaderStory = GridWithSlugColumnHeaderWrapper.bind(
+export const AILabelColumnHeaderStory = GridWithAILabelColumnHeaderWrapper.bind(
   {}
 );
 AILabelColumnHeaderStory.storyName = aiLabelColumnHeaderStoryName;
@@ -295,7 +295,7 @@ AILabelColumnHeaderStory.args = {
 
 const aiLabelSortableColumnHeaderStoryName = 'Column AILabel sort';
 export const AILabelSortableColumnHeaderStory =
-  GridWithSlugColumnHeaderWrapper.bind({});
+  GridWithAILabelColumnHeaderWrapper.bind({});
 AILabelSortableColumnHeaderStory.storyName =
   aiLabelSortableColumnHeaderStoryName;
 AILabelSortableColumnHeaderStory.argTypes = {
@@ -314,7 +314,7 @@ AILabelSortableColumnHeaderStory.args = {
 };
 
 const aiLabelRowStoryName = 'Row AILabel';
-export const AILabelRowStory = GridWithSlugColumnHeaderWrapper.bind({});
+export const AILabelRowStory = GridWithAILabelColumnHeaderWrapper.bind({});
 AILabelRowStory.storyName = aiLabelRowStoryName;
 AILabelRowStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
@@ -333,7 +333,7 @@ AILabelRowStory.args = {
 };
 
 const aiLabelRowSelectionStoryName = 'Row AILabel with selection';
-export const AILabelRowSelectionStory = GridWithSlugColumnHeaderWrapper.bind(
+export const AILabelRowSelectionStory = GridWithAILabelColumnHeaderWrapper.bind(
   {}
 );
 AILabelRowSelectionStory.storyName = aiLabelRowSelectionStoryName;
@@ -357,7 +357,7 @@ AILabelRowSelectionStory.args = {
 const aiLabelRowSelectionAndExpandStoryName =
   'Row AILabel with selection and expansion';
 export const AILabelRowSelectionAndExpandStory =
-  GridWithSlugColumnHeaderWrapper.bind({});
+  GridWithAILabelColumnHeaderWrapper.bind({});
 AILabelRowSelectionAndExpandStory.storyName =
   aiLabelRowSelectionAndExpandStoryName;
 AILabelRowSelectionAndExpandStory.argTypes = {

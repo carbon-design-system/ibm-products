@@ -1,14 +1,28 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/ibm-products-web-components"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "carbon",
+    "carbon design system",
+    "carbon community",
+    "carbon for ibm products",
+    "carbon for ibm products web components",
+    "web components"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "yarn clean && node tasks/build.js",

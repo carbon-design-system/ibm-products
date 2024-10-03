@@ -11,7 +11,7 @@ import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
-import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './addons/AILabel/DatagridAILabel';
 import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -173,8 +173,8 @@ const DatagridRow = (datagridState: DataGridState) => {
                 [`${blockClass}__slug--expanded`]: row.isExpanded,
               })}
             >
-              <DatagridSlug
-                slug={row?.original?.aiLabel || row?.original?.slug}
+              <DatagridAILabel
+                aiLabel={row?.original?.aiLabel || row?.original?.slug}
               />
             </td>
           ) : (

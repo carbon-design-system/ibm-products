@@ -11,7 +11,7 @@ import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
-import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './Datagrid/addons/AILabel/DatagridAILabel';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
 
@@ -156,8 +156,8 @@ const useSortableColumns = (hooks: Hooks) => {
             renderIcon={(props) => {
               return (
                 <>
-                  <DatagridSlug
-                    slug={
+                  <DatagridAILabel
+                    aiLabel={
                       headerProp?.column?.aiLabel || headerProp?.column?.slug
                     }
                   />

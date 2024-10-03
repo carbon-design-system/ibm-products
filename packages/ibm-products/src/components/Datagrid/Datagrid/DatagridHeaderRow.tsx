@@ -22,7 +22,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
-import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './addons/AILabel/DatagridAILabel';
 import { useInitialColumnSort } from '../useInitialColumnSort';
 import {
   DataGridHeader,
@@ -186,7 +186,7 @@ const HeaderRow = (
     if (isTableSortable) {
       return;
     }
-    return <DatagridSlug slug={slug} />;
+    return <DatagridAILabel aiLabel={slug} />;
   };
 
   const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));

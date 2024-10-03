@@ -23,7 +23,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
-import { ExampleAiLabel } from '../../utils/ExampleAiLabel';
+import { ExampleAILabel } from '../../utils/ExampleAILabel';
 
 export default {
   title: 'IBM Products/Components/Datagrid/AILabel',
@@ -44,7 +44,7 @@ export default {
 {
   Header: 'Visits',
   accessor: 'visits',
-  aiLabel: <ExampleAiLabel />,
+  aiLabel: <ExampleAILabel />,
 }
 `,
               },
@@ -85,7 +85,7 @@ export default {
       },
     },
   },
-  excludeStories: ['ExampleSlug'],
+  excludeStories: ['ExampleAILabel'],
 };
 
 const getDefaultHeader = (rowAiLabel, align) => [
@@ -112,12 +112,12 @@ const getDefaultHeader = (rowAiLabel, align) => [
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
-    aiLabel: !rowAiLabel && <ExampleAiLabel align={align} />,
+    aiLabel: !rowAiLabel && <ExampleAILabel align={align} />,
   },
   {
     Header: 'Someone 1',
     accessor: 'someone1',
-    aiLabel: !rowAiLabel && <ExampleAiLabel align={align} />,
+    aiLabel: !rowAiLabel && <ExampleAILabel align={align} />,
     width: 200,
   },
   {

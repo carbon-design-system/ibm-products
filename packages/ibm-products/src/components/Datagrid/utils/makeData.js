@@ -8,7 +8,7 @@
 import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
-import { ExampleAiLabel } from './ExampleAiLabel';
+import { ExampleAILabel } from './ExampleAILabel';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
   const roundedMin = Math.ceil(min);
@@ -158,7 +158,7 @@ const newPerson = (index, config) => {
     doc_link: renderDocLink(),
     aiLabel: config?.enableAIRow &&
       (index === 1 || index === 3 || index === 4) && (
-        <ExampleAiLabel align={config?.aiLabelAlign} />
+        <ExampleAILabel align={config?.aiLabelAlign} />
       ),
     id: config?.id ? `${config?.id}__${index}` : `row_${index}`,
   };

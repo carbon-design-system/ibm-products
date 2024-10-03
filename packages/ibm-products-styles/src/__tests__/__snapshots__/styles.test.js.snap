@@ -3303,7 +3303,7 @@ p.c4p--about-modal__copyright-text:first-child {
   }
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__content {
-  height: 100%;
+  min-height: 100%;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   overflow-x: hidden;

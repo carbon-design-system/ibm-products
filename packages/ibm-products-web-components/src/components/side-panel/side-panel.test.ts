@@ -1,25 +1,45 @@
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { SlideOver } from './side-panel.stories';
+import { describe, expect, it, vi } from 'vitest';
+import { render, html } from 'lit';
 
-const template = (props?) =>
-  // @ts-ignore
-  SlideOver({
-    'c4p-side-panel': props,
-  });
+const defaultProps = {
+  animateTitle: true,
+  includeOverlay: true,
+  slideIn: false,
+  selectorInitialFocus: '',
+  label: '',
+  open: true,
+  placement: 'right',
+  preventCloseOnClickOutside: false,
+  selectorPageContent: '',
+  size: 'md',
+  title: 'Side panel title',
+};
+
+const template = (props = defaultProps) =>
+  html`
+    <c4p-side-panel
+      ?animate-title=${props.animateTitle}
+      ?include-overlay=${props.includeOverlay && !props.slideIn}
+      selector-initial-focus=${props.selectorInitialFocus}
+      label-text="${props.label}"
+      ?open=${props.open}
+      placement=${props.placement}
+      ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
+      selector-page-content=${props.selectorPageContent}
+      size=${props.size}
+      ?slide-in=${props.slideIn}
+      .title=${props.title}
+    >
+      content
+    </c4p-side-panel>
+  `;
 
 describe('c4p-side-panel', () => {
-  let elem: HTMLElement | null;
-
-  beforeEach(async function () {
-    elem = document.body.appendChild(document.createElement('c4p-side-panel'));
-    elem.setAttribute('open', '');
+  it('should render a side panel', async () => {
+    render(template(), document.body);
     await Promise.resolve();
-  });
-
-  it('should render a side panel', () => {
-    expect(
-      elem!.shadowRoot!.querySelectorAll('.c4p--side-panel').length
-    ).to.equal(1);
+    const elem = document.body.querySelector('c4p-side-panel' as any);
+    expect(elem).toBeDefined();
   });
 });

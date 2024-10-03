@@ -156,7 +156,11 @@ const useSortableColumns = (hooks: Hooks) => {
             renderIcon={(props) => {
               return (
                 <>
-                  <DatagridSlug slug={headerProp?.column?.slug} />
+                  <DatagridSlug
+                    slug={
+                      headerProp?.column?.aiLabel || headerProp?.column?.slug
+                    }
+                  />
                   {icon(headerProp?.column, props)}
                 </>
               );

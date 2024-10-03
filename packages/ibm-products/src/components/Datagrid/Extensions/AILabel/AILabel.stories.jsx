@@ -23,10 +23,10 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
-import { ExampleSlug } from '../../utils/ExampleSlug';
+import { ExampleAiLabel } from '../../utils/ExampleAiLabel';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Slug',
+  title: 'IBM Products/Components/Datagrid/AILabel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -38,31 +38,31 @@ export default {
           blocks={[
             {
               description:
-                "A Carbon AI slug can be used within the Datagrid for both column headers and rows. To include a column header AI slug, include a `slug` property within your column definition and include the Slug component as it's own custom component",
+                "A Carbon AI Label can be used within the Datagrid for both column headers and rows. To include a column header AI Label, include a `aiLabel` property within your column definition and include the AILabel component as it's own custom component",
               source: {
                 code: `
 {
   Header: 'Visits',
   accessor: 'visits',
-  slug: <ExampleSlug />,
+  aiLabel: <ExampleAiLabel />,
 }
 `,
               },
             },
             {
-              description: 'or used directly from the Slug component itself',
+              description: 'or used directly from the AILabel component itself',
               source: {
                 code: `
 {
   Header: 'Visits',
   accessor: 'visits',
-  slug: (
-    <Slug className="slug-container" autoAlign={false} align="bottom-right">
-      <SlugContent>
+  aiLabel: (
+    <AILabel className="slug-container" autoAlign={false} align="bottom-right">
+      <AILabelContent>
         ...
         ...
-      </SlugContent>
-    </Slug>
+      </AILabelContent>
+    </AILabel>
   ),
 }
 `,
@@ -70,7 +70,7 @@ export default {
             },
             {
               description:
-                'To include a slug on the row level, include a `slug` property in your row data with the same structure as outlined above.',
+                'To include a AILabel on the row level, include a `aiLabel` property in your row data with the same structure as outlined above.',
             },
           ]}
         />
@@ -88,7 +88,7 @@ export default {
   excludeStories: ['ExampleSlug'],
 };
 
-const getDefaultHeader = (rowSlug, align) => [
+const getDefaultHeader = (rowAiLabel, align) => [
   {
     Header: 'Row Index',
     accessor: (row, i) => i,
@@ -112,12 +112,12 @@ const getDefaultHeader = (rowSlug, align) => [
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
-    slug: !rowSlug && <ExampleSlug align={align} />,
+    aiLabel: !rowAiLabel && <ExampleAiLabel align={align} />,
   },
   {
     Header: 'Someone 1',
     accessor: 'someone1',
-    slug: !rowSlug && <ExampleSlug align={align} />,
+    aiLabel: !rowAiLabel && <ExampleAiLabel align={align} />,
     width: 200,
   },
   {
@@ -224,19 +224,19 @@ const ExpansionRenderer = ({ row }) => {
 };
 
 const GridWithSlugColumnHeader = ({
-  rowSlug,
-  rowSlugAlign,
+  rowAiLabel,
+  rowAiLabelAlign,
   withSorting,
   withSelect,
   withExpansion,
   ...args
 }) => {
   const columns = React.useMemo(
-    () => getDefaultHeader(rowSlug, rowSlugAlign),
+    () => getDefaultHeader(rowAiLabel, rowAiLabelAlign),
     []
   );
   const [data] = useState(
-    makeData(10, 2, { enableAIRow: rowSlug, slugAlign: rowSlugAlign })
+    makeData(10, 2, { enableAIRow: rowAiLabel, aiLabelAlign: rowAiLabelAlign })
   );
   const datagridState = useDatagrid(
     {
@@ -255,8 +255,8 @@ const GridWithSlugColumnHeader = ({
 };
 
 const GridWithSlugColumnHeaderWrapper = ({
-  rowSlug,
-  rowSlugAlign,
+  rowAiLabel,
+  rowAiLabelAlign,
   withSorting,
   withSelect,
   withExpansion,
@@ -266,18 +266,20 @@ const GridWithSlugColumnHeaderWrapper = ({
     <GridWithSlugColumnHeader
       defaultGridProps={{ ...args }}
       withSorting={withSorting}
-      rowSlug={rowSlug}
-      rowSlugAlign={rowSlugAlign}
+      rowAiLabel={rowAiLabel}
+      rowAiLabelAlign={rowAiLabelAlign}
       withSelect={withSelect}
       withExpansion={withExpansion}
     />
   );
 };
 
-const slugColumnHeaderStoryName = 'Column slug';
-export const SlugColumnHeaderStory = GridWithSlugColumnHeaderWrapper.bind({});
-SlugColumnHeaderStory.storyName = slugColumnHeaderStoryName;
-SlugColumnHeaderStory.argTypes = {
+const aiLabelColumnHeaderStoryName = 'Column AILabel';
+export const AILabelColumnHeaderStory = GridWithSlugColumnHeaderWrapper.bind(
+  {}
+);
+AILabelColumnHeaderStory.storyName = aiLabelColumnHeaderStoryName;
+AILabelColumnHeaderStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
@@ -287,15 +289,16 @@ SlugColumnHeaderStory.argTypes = {
   expanderButtonTitleExpanded: 'Collapse row',
   expanderButtonTitleCollapsed: 'Expand row',
 };
-SlugColumnHeaderStory.args = {
+AILabelColumnHeaderStory.args = {
   ...controlProps,
 };
 
-const slugSortableColumnHeaderStoryName = 'Column slug sort';
-export const SlugSortableColumnHeaderStory =
+const aiLabelSortableColumnHeaderStoryName = 'Column AILabel sort';
+export const AILabelSortableColumnHeaderStory =
   GridWithSlugColumnHeaderWrapper.bind({});
-SlugSortableColumnHeaderStory.storyName = slugSortableColumnHeaderStoryName;
-SlugSortableColumnHeaderStory.argTypes = {
+AILabelSortableColumnHeaderStory.storyName =
+  aiLabelSortableColumnHeaderStoryName;
+AILabelSortableColumnHeaderStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
@@ -305,15 +308,15 @@ SlugSortableColumnHeaderStory.argTypes = {
   expanderButtonTitleExpanded: 'Collapse row',
   expanderButtonTitleCollapsed: 'Expand row',
 };
-SlugSortableColumnHeaderStory.args = {
+AILabelSortableColumnHeaderStory.args = {
   ...controlProps,
   withSorting: true,
 };
 
-const slugRowStoryName = 'Row slug';
-export const SlugRowStory = GridWithSlugColumnHeaderWrapper.bind({});
-SlugRowStory.storyName = slugRowStoryName;
-SlugRowStory.argTypes = {
+const aiLabelRowStoryName = 'Row AILabel';
+export const AILabelRowStory = GridWithSlugColumnHeaderWrapper.bind({});
+AILabelRowStory.storyName = aiLabelRowStoryName;
+AILabelRowStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
@@ -323,16 +326,18 @@ SlugRowStory.argTypes = {
   expanderButtonTitleExpanded: 'Collapse row',
   expanderButtonTitleCollapsed: 'Expand row',
 };
-SlugRowStory.args = {
+AILabelRowStory.args = {
   ...controlProps,
-  rowSlug: true,
-  rowSlugAlign: 'right',
+  rowAiLabel: true,
+  rowAiLabelAlign: 'right',
 };
 
-const slugRowSelectionStoryName = 'Row slug with selection';
-export const SlugRowSelectionStory = GridWithSlugColumnHeaderWrapper.bind({});
-SlugRowSelectionStory.storyName = slugRowSelectionStoryName;
-SlugRowSelectionStory.argTypes = {
+const aiLabelRowSelectionStoryName = 'Row AILabel with selection';
+export const AILabelRowSelectionStory = GridWithSlugColumnHeaderWrapper.bind(
+  {}
+);
+AILabelRowSelectionStory.storyName = aiLabelRowSelectionStoryName;
+AILabelRowSelectionStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
@@ -342,19 +347,20 @@ SlugRowSelectionStory.argTypes = {
   expanderButtonTitleExpanded: 'Collapse row',
   expanderButtonTitleCollapsed: 'Expand row',
 };
-SlugRowSelectionStory.args = {
+AILabelRowSelectionStory.args = {
   ...controlProps,
-  rowSlug: true,
-  rowSlugAlign: 'right',
+  rowAiLabel: true,
+  rowAiLabelAlign: 'right',
   withSelect: true,
 };
 
-const slugRowSelectionAndExpandStoryName =
-  'Row slug with selection and expansion';
-export const SlugRowSelectionAndExpandStory =
+const aiLabelRowSelectionAndExpandStoryName =
+  'Row AILabel with selection and expansion';
+export const AILabelRowSelectionAndExpandStory =
   GridWithSlugColumnHeaderWrapper.bind({});
-SlugRowSelectionAndExpandStory.storyName = slugRowSelectionAndExpandStoryName;
-SlugRowSelectionAndExpandStory.argTypes = {
+AILabelRowSelectionAndExpandStory.storyName =
+  aiLabelRowSelectionAndExpandStoryName;
+AILabelRowSelectionAndExpandStory.argTypes = {
   gridTitle: ARG_TYPES.gridTitle,
   gridDescription: ARG_TYPES.gridDescription,
   useDenseHeader: ARG_TYPES.useDenseHeader,
@@ -364,10 +370,10 @@ SlugRowSelectionAndExpandStory.argTypes = {
   expanderButtonTitleExpanded: 'Collapse row',
   expanderButtonTitleCollapsed: 'Expand row',
 };
-SlugRowSelectionAndExpandStory.args = {
+AILabelRowSelectionAndExpandStory.args = {
   ...controlProps,
-  rowSlug: true,
-  rowSlugAlign: 'right',
+  rowAiLabel: true,
+  rowAiLabelAlign: 'right',
   withSelect: true,
   withExpansion: true,
 };

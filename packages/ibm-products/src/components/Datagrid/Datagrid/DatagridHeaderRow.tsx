@@ -243,7 +243,8 @@ const HeaderRow = (
                   [`${blockClass}__isSorted`]: header?.isSorted,
                   [`${blockClass}__header-actions-column`]: header?.isAction,
                   [`${blockClass}__with-slug`]:
-                    header.slug && React.isValidElement(header?.slug),
+                    (header.slug && React.isValidElement(header?.slug)) ||
+                    (header.aiLabel && React.isValidElement(header?.aiLabel)),
                 },
                 headerProps.className
               )}
@@ -252,7 +253,7 @@ const HeaderRow = (
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {renderSlug(header.slug)}
+              {renderSlug(header.aiLabel) || renderSlug(header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

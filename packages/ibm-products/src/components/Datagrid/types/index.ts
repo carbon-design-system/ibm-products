@@ -195,6 +195,7 @@ export interface DataGridHeader<T extends object = any>
   className(className: any, arg1: { [x: string]: any }): unknown;
   isAction?: boolean;
   slug?: any;
+  aiLabel?: any;
 }
 
 export interface DataGridHeaderGroup<T extends object = any>

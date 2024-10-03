@@ -132,7 +132,10 @@ const DatagridRow = (datagridState: DataGridState) => {
   };
 
   const { className, ...rowProps } = row.getRowProps({ role: undefined });
-  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some(
+    (r) =>
+      isValidElement(r?.original?.slug) || isValidElement(r?.original?.aiLabel)
+  );
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
     [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
@@ -140,7 +143,9 @@ const DatagridRow = (datagridState: DataGridState) => {
     [`${blockClass}__carbon-row-expandable--async`]:
       getAsyncSubRows && row.depth > 0,
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
-    [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
+    [`${blockClass}__slug--row`]:
+      isValidElement(row?.original?.slug) ||
+      isValidElement(row?.original?.aiLabel),
   });
 
   const withActionsColumn = headers
@@ -162,13 +167,15 @@ const DatagridRow = (datagridState: DataGridState) => {
         {...setAdditionalRowProps()}
       >
         {foundAIRow ? (
-          row?.original?.slug ? (
+          row?.original?.aiLabel || row?.original?.slug ? (
             <td
               className={cx(`${blockClass}__table-row-ai-enabled`, {
                 [`${blockClass}__slug--expanded`]: row.isExpanded,
               })}
             >
-              <DatagridSlug slug={row?.original?.slug} />
+              <DatagridSlug
+                slug={row?.original?.aiLabel || row?.original?.slug}
+              />
             </td>
           ) : (
             <td className={`${blockClass}__table-row-ai-spacer`} />
@@ -212,7 +219,8 @@ const DatagridRow = (datagridState: DataGridState) => {
                   [`${blockClass}__slug--cell`]:
                     associatedHeader &&
                     associatedHeader.length &&
-                    isValidElement(associatedHeader[0]?.slug),
+                    (isValidElement(associatedHeader[0]?.aiLabel) ||
+                      isValidElement(associatedHeader[0]?.slug)),
                 },
                 columnClassname
               )}

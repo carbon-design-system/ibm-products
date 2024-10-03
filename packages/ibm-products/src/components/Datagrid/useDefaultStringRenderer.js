@@ -23,12 +23,13 @@ const useDefaultStringRenderer = (hooks) => {
     </div>
   );
 
-  const HeaderRenderer = (header, slug) => {
+  const HeaderRenderer = (header, slug, aiLabel) => {
     return (
       <div
         className={cx(`${blockClass}__defaultStringRenderer`, {
           [`${blockClass}__defaultStringRenderer--slug`]:
-            slug && React.isValidElement(slug),
+            (slug && React.isValidElement(slug)) ||
+            (aiLabel && React.isValidElement(aiLabel)),
         })}
         key={typeof header === 'string' ? header : ''}
       >
@@ -42,7 +43,8 @@ const useDefaultStringRenderer = (hooks) => {
       Cell: StringRenderer,
       ...column,
       Header:
-        column.HeaderRenderer || HeaderRenderer(column.Header, column.slug),
+        column.HeaderRenderer ||
+        HeaderRenderer(column.Header, column.slug, column.aiLabel),
     }));
     return [...columnsWithDefaultCells];
   };

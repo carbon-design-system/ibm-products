@@ -188,10 +188,6 @@ $block-class-modal: #{$block-class}-modal;
     margin-bottom: 0;
   }
 
-  .#{$block-class-modal}__body {
-    padding-bottom: $spacing-07;
-  }
-
   .#{$block-class-modal}__header {
     padding-right: 0;
     margin-right: $spacing-05;

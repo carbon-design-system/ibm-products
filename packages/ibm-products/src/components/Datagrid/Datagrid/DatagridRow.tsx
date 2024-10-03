@@ -11,7 +11,7 @@ import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
-// import { DatagridAILabel } from './addons/AILabel/DatagridAILabel';
+import { DatagridAILabel } from './addons/AILAbel/DatagridLabel';
 import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -172,7 +172,11 @@ const DatagridRow = (datagridState: DataGridState) => {
               className={cx(`${blockClass}__table-row-ai-enabled`, {
                 [`${blockClass}__slug--expanded`]: row.isExpanded,
               })}
-            ></td>
+            >
+              <DatagridAILabel
+                aiLabel={row?.original?.aiLabel || row?.original?.slug}
+              />
+            </td>
           ) : (
             <td className={`${blockClass}__table-row-ai-spacer`} />
           )

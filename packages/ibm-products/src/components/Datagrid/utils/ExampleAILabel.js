@@ -10,16 +10,16 @@
 import React from 'react';
 import { FolderOpen, View, Folders } from '@carbon/react/icons';
 import {
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
-  unstable__SlugActions as SlugActions,
+  AILabel,
+  AILabelContent,
+  AILabelActions,
   IconButton,
   Button,
 } from '@carbon/react';
 
-export const ExampleSlug = ({ align = 'bottom-right', ...rest }) => (
-  <Slug className="slug-container" autoAlign={false} align={align} {...rest}>
-    <SlugContent>
+export const ExampleAILabel = ({ align = 'bottom-right', ...rest }) => (
+  <AILabel className="slug-container" autoAlign={false} align={align} {...rest}>
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -32,7 +32,7 @@ export const ExampleSlug = ({ align = 'bottom-right', ...rest }) => (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-      <SlugActions>
+      <AILabelActions>
         <IconButton kind="ghost" label="View">
           <View />
         </IconButton>
@@ -43,7 +43,7 @@ export const ExampleSlug = ({ align = 'bottom-right', ...rest }) => (
           <Folders />
         </IconButton>
         <Button>View details</Button>
-      </SlugActions>
-    </SlugContent>
-  </Slug>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
 );

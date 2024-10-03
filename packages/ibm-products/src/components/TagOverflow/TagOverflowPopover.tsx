@@ -13,7 +13,6 @@ import {
   Tag,
   Popover,
   PopoverContent,
-  /**@ts-ignore */
   OperationalTag,
 } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';

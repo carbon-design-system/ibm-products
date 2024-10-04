@@ -234,18 +234,24 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     );
 
     useEffect(() => {
+      let size = 'md';
       // create visible and overflow tags
       let newDisplayedTags =
         tags && tags.length > 0
-          ? tags.map(({ label, onClose, ...other }, index) => (
-              <Tag
-                {...other}
-                key={`displayed-tag-${index}`}
-                onClose={() => handleTagOnClose(onClose, index)}
-              >
-                {label}
-              </Tag>
-            ))
+          ? tags.map(({ label, onClose, ...other }, index) => {
+              if (index == tags.length - 1 && other.size) {
+                size = other.size;
+              }
+              return (
+                <Tag
+                  {...other}
+                  key={`displayed-tag-${index}`}
+                  onClose={() => handleTagOnClose(onClose, index)}
+                >
+                  {label}
+                </Tag>
+              );
+            })
           : [];
 
       // separate out tags for the overflow
@@ -271,6 +277,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
           overflowAlign={overflowAlign}
           overflowType={overflowType}
           showAllTagsLabel={showAllTagsLabel}
+          size={size}
           key="displayed-tag-overflow"
           ref={overflowTag}
           popoverOpen={popoverOpen}

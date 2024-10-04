@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { Hooks, Row, RowPropGetter, TableRowProps } from 'react-table';
-import { DatagridRow, PropGetterMeta } from './types';
+import { DatagridRow, PropGetterMeta, DatagridRowProps } from './types';
 
 const nonselectablerowsList = (instance) => {
   const nonselectablerows: number[] =
@@ -39,7 +39,7 @@ const useDisableSelectRows = (hooks: Hooks) => {
         disabled: instance?.shouldDisableSelectRow?.(row),
         nonselectablerows,
       },
-    ] as Partial<TableRowProps>[];
+    ] as Partial<DatagridRowProps>[];
   };
   hooks.getRowProps.push(getRowProps);
 };

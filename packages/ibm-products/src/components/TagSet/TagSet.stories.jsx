@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
@@ -140,6 +140,15 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
+    size: {
+      control: {
+        type: 'select',
+      },
+      options: ['sm', 'md', 'lg'],
+      type: 'string',
+      description:
+        'This prop is only for storybook representation, and does not belong to `tagset` component, the size can be passed to each tag{} in tags[], the overflow tag takes the size of last tag{} in tags[]',
+    },
     disableOverflowPopup: {
       control: { type: 'boolean' },
       description:
@@ -164,9 +173,13 @@ export default {
 };
 
 const Template = (argsIn) => {
-  const { containerWidth, allTagsModalTargetCustomDomNode, ...args } = {
+  const { containerWidth, allTagsModalTargetCustomDomNode, size, ...args } = {
     ...argsIn,
   };
+  if (args.tags) {
+    args.tags = args.tags.map((tag) => ({ ...tag, size }));
+  }
+
   const ref = useRef();
   return (
     <div style={{ width: containerWidth }} ref={ref}>
@@ -210,13 +223,20 @@ HundredsOfTags.args = {
 };
 
 const TemplateWithClose = (argsIn) => {
-  const { containerWidth, allTagsModalTargetCustomDomNode, tags, ...args } = {
+  const {
+    containerWidth,
+    allTagsModalTargetCustomDomNode,
+    size,
+    tags,
+    ...args
+  } = {
     ...argsIn,
   };
   const [liveTags, setLiveTags] = useState(
     tags.map((tag) => ({
       ...tag,
       filter: true,
+      size: size,
       onClose: () => handleTagClose(tag.label),
     }))
   );
@@ -226,6 +246,14 @@ const TemplateWithClose = (argsIn) => {
   };
 
   const ref = useRef();
+  useEffect(() => {
+    setLiveTags((prevTags) =>
+      prevTags.map((tag) => ({
+        ...tag,
+        size: size,
+      }))
+    );
+  }, [size]);
   return (
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet

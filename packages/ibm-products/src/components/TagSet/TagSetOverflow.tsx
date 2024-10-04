@@ -139,10 +139,12 @@ export const TagSetOverflow = React.forwardRef(
     };
 
     const handleOverflowClick = () => {
+      // If a custom overflow function is provided then trigger that function
+      // on clicking the overflow
       if (onOverflowClick) {
-        onOverflowClick(overflowTags);  // Invoke the custom handler
+        onOverflowClick(overflowTags);
       } else {
-       setPopoverOpen?.(!popoverOpen) // Opens default popover
+        setPopoverOpen?.(!popoverOpen);
       }
     };
 
@@ -261,9 +263,9 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Disable the popover component from being rendered. Defaults to false.
+   * Changes the behaviour that occurs on selecting the overflow tag component
    */
-  disablePopOver: PropTypes.bool,
+  onOverflowClick: PropTypes.func,
   /**
    * function to execute on clicking show all
    */

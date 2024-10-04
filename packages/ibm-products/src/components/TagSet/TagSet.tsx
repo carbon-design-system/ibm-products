@@ -90,10 +90,6 @@ export interface TagSetProps extends PropsWithChildren {
    */
   containingElementRef?: React.RefObject<HTMLElement>;
   /**
-   * Changes the behaviour that occurs on selecting the overflow tag component
-   */
-  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
-  /**
    * maximum visible tags
    */
   maxVisible?: number;
@@ -106,6 +102,10 @@ export interface TagSetProps extends PropsWithChildren {
    * display tags in multiple lines
    */
   multiline?: boolean;
+  /**
+   * Changes the behaviour that occurs on selecting the overflow tag component
+   */
+  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
    * Handler to get overflow tags
    */
@@ -496,9 +496,9 @@ TagSet.propTypes = {
   /**@ts-ignore */
   containingElementRef: PropTypes.object,
   /**
-   * Disable the overflow tags popup component, default to false.
+   * Changes the behaviour that occurs on selecting the overflow tag component
    */
-  disableOverflowPopup: PropTypes.bool,
+  onOverflowClick: PropTypes.func,
   /**
    * maximum visible tags
    */

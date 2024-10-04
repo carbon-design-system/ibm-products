@@ -3304,7 +3304,7 @@ p.c4p--about-modal__copyright-text:first-child {
   }
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__content {
-  height: 100%;
+  min-height: 100%;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   overflow-x: hidden;
@@ -3979,6 +3979,12 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__head-wrap {
   overflow: hidden;
   background-color: var(--cds-layer-accent);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.c4p--datagrid .c4p--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .c4p--datagrid .cds--action-list .cds--btn.c4p--button-menu {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 
 // https://vitejs.dev/config/
@@ -18,7 +18,8 @@ export default defineConfig({
   ],
   test: {
     environment: 'happy-dom',
-    include: ['**/*.{test,spec}.{js,ts}'],
+    include: ['./src/**/*.{test,spec}.{js,ts}'],
+    exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {

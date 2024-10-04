@@ -47,7 +47,7 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
 
   const headWrapRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
-
+  const gridWidth = gridRef?.current?.clientWidth;
   /* istanbul ignore next */
   const handleVirtualGridResize = () => {
     const gridRefElement = gridRef?.current;
@@ -80,36 +80,46 @@ const DatagridVirtualBody = (datagridState: DataGridState) => {
     const headWrapEl = document?.querySelector(
       `#${tableId} .${blockClass}__head-wrap`
     );
-    const headEle = headWrapEl?.querySelector(`thead`);
-    if (headEle) {
-      headEle.style.display = 'flex';
-    } // scrollbar width to header column to fix header alignment
 
-    function handleScroll(event) {
+    // Syncs header scroll position when virtual body is scrolled
+    function handleVirtualScrollX(event) {
       const virtualBody = event.target;
       if (headWrapEl) {
         headWrapEl.scrollLeft = virtualBody?.scrollLeft;
       }
     }
 
+    // Syncs virtual body scroll position when header is scrolled
+    function handleHeaderScrollX(event) {
+      const header = event.target;
+      if (testRef && testRef.current) {
+        testRef.current.scrollLeft = header?.scrollLeft;
+        // this prevents the scroll bar from over exceeding the vertical scroll bar compensation in the right
+        header.scrollLeft = testRef.current.scrollLeft;
+      }
+    }
+
     const testRefValue = testRef?.current;
-    testRefValue?.addEventListener('scroll', handleScroll);
+    testRefValue?.addEventListener('scroll', handleVirtualScrollX);
+    headWrapEl?.addEventListener('scroll', handleHeaderScrollX);
     return () => {
-      testRefValue?.removeEventListener('scroll', handleScroll);
+      testRefValue?.removeEventListener('scroll', handleVirtualScrollX);
+      headWrapEl?.removeEventListener('scroll', handleHeaderScrollX);
     };
   });
 
   useIsomorphicEffect(() => {
     if (headWrapRef.current && headWrapRef.current.style) {
-      headWrapRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
+      headWrapRef.current.style.width = `${gridWidth}px`;
+      headWrapRef.current.style.overflow = `auto`;
     }
-  }, [headWrapRef, gridRef]);
+  }, [headWrapRef, gridWidth]);
 
   useIsomorphicEffect(() => {
     if (testRef?.current && testRef.current.style) {
-      testRef.current.style.width = `${gridRef?.current?.clientWidth}px`;
+      testRef.current.style.width = `${gridWidth}px`;
     }
-  }, [testRef, gridRef]);
+  }, [testRef, gridWidth]);
 
   return (
     <>

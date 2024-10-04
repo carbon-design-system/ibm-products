@@ -36,17 +36,10 @@ export default function rollupPluginIcons(inputs, banner) {
           'icons',
           path.relative(iconsDir, iconPath)
         );
-        const spreadModulePath = path.resolve(
-          __dirname,
-          '../es/globals/directives/spread'
-        );
 
         const code = `${banner}
 import { svg } from 'lit';
-import spread from '${path.relative(
-          path.dirname(iconsESPath),
-          spreadModulePath
-        )}';
+import spread from '@carbon/web-components/es/globals/directives/spread.js';
 
 const svgResultCarbonIcon = ${icon(svg.default)};
 export default svgResultCarbonIcon;`;

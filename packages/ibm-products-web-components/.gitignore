@@ -23,3 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 __screenshots__
+custom-elements.json

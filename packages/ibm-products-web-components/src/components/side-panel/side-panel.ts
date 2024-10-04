@@ -15,12 +15,12 @@ import {
   state,
 } from 'lit/decorators.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
-import HostListener from '../../globals/decorators/host-listener';
-import HostListenerMixin from '../../globals/mixins/host-listener';
+import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
+import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
 import styles from './side-panel.scss?lit';
-import { selectorTabbable } from '../../globals/settings';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { selectorTabbable } from '@carbon/web-components/es/globals/settings.js';
+import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import ArrowLeft16 from '@carbon/icons/lib/arrow--left/16';
 import Close20 from '@carbon/icons/lib/close/20';
 import { moderate02 } from '@carbon/motion';

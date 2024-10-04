@@ -38,6 +38,7 @@ collect:
         - batchActionMenuButtonLabel
         - batchActions
         - body
+        - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
         - cancelButtonText
@@ -253,6 +254,7 @@ collect:
         - overflowAutoAlign
         - overflowClassName
         - overflowTags
+        - overflowTooltipAlign
         - overflowType
         - parentId
         - path
@@ -475,8 +477,6 @@ collect:
         - tooltipDescription
         - total
         - trending
-        # BreadcrumbWithOverflow
-        - overflowTooltipAlign
         # ButtonMenu
         - menuAriaLabel
         # ButtonSetWithOverflow
@@ -768,6 +768,7 @@ collect:
         - secondsAgoText
         - settingsIconDescription
         - todayLabel
+        - triggerButtonRef
         - yearAgoText
         - yearsAgoText
         - yesterdayAtText
@@ -790,7 +791,6 @@ collect:
         - actionBarMenuOptionsClass
         - actionBarOverflowAriaLabel
         - breadcrumbOverflowAriaLabel
-        - breadcrumbOverflowTooltipAlign
         - collapseHeader
         - collapseHeaderIconDescription
         - collapseTitle

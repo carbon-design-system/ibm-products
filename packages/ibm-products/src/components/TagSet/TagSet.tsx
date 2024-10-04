@@ -90,9 +90,9 @@ export interface TagSetProps extends PropsWithChildren {
    */
   containingElementRef?: React.RefObject<HTMLElement>;
   /**
-   * Disable the overflow tags popup component, default to false.
+   * Changes the behaviour that occurs on selecting the overflow tag component
    */
-  disableOverflowPopup?: boolean;
+  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
    * maximum visible tags
    */
@@ -159,7 +159,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       allTagsModalSearchLabel = 'Search all tags',
       allTagsModalSearchPlaceholderText = 'Search all tags',
       showAllTagsLabel = 'View all tags',
-      disableOverflowPopup = false,
+      onOverflowClick,
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
@@ -281,7 +281,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
           key="displayed-tag-overflow"
           ref={overflowTag}
           popoverOpen={popoverOpen}
-          disablePopOver={disableOverflowPopup}
+          onOverflowClick={onOverflowClick}
           setPopoverOpen={setPopoverOpen}
         />
       );
@@ -294,7 +294,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowClassName,
       overflowType,
       showAllTagsLabel,
-      disableOverflowPopup,
+      onOverflowClick,
       tags,
       onOverflowTagChange,
       popoverOpen,
@@ -417,7 +417,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             {displayedTags}
           </div>
         </div>
-        {!disableOverflowPopup && (
+        {!onOverflowClick && (
           <TagSetModal
             allTags={tags}
             open={showAllModalOpen}

@@ -52,9 +52,9 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
-   * Disable the popover component from being rendered. Defaults to false.
+   * changes the behaviour of clicking the overflow tags button
    */
-  disablePopOver?: boolean;
+  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
    * function to execute on clicking show all
    */
@@ -99,7 +99,7 @@ export const TagSetOverflow = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
-      disablePopOver = false,
+      onOverflowClick,
       className,
       onShowAllClick,
       overflowAlign = 'bottom',
@@ -138,7 +138,15 @@ export const TagSetOverflow = React.forwardRef(
       }
     };
 
-    if (disablePopOver) {
+    const handleOverflowClick = () => {
+      if (onOverflowClick) {
+        onOverflowClick(overflowTags);  // Invoke the custom handler
+      } else {
+       setPopoverOpen?.(!popoverOpen) // Opens default popover
+      }
+    };
+
+    if (onOverflowClick) {
       return (
         <span
           {
@@ -151,7 +159,12 @@ export const TagSetOverflow = React.forwardRef(
           })}
           ref={ref || localRef}
         >
-          <Tag>+{overflowTags.length}</Tag>
+          <OperationalTag
+            onClick={() => handleOverflowClick()}
+            className={cx(`${blockClass}__popover-trigger`)}
+            size={size}
+            text={`+${overflowTags.length}`}
+          />
         </span>
       );
     }

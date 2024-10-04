@@ -149,10 +149,10 @@ export default {
       description:
         'This prop is only for storybook representation, and does not belong to `tagset` component, the size can be passed to each tag{} in tags[], the overflow tag takes the size of last tag{} in tags[]',
     },
-    disableOverflowPopup: {
-      control: { type: 'boolean' },
+    onOverflowClick: {
+      control: { type: 'function' },
       description:
-        'Disable the overflow tags popup component, default to false.',
+        'Function that runs on clicking the tag overflow button',
     },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
@@ -279,5 +279,6 @@ WithCloseAndOverflowTags.args = {
   tags: manyTags,
   containerWidth: 500,
   overflowType: 'tag',
+  onOverflowClick: (data)=> {console.log('Hello world', data)},
   ...overflowAndModalStrings,
 };

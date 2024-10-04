@@ -264,11 +264,7 @@ export let ExportModal = forwardRef(
     };
 
     return renderPortalUse(
-      <FeatureFlags
-        flags={{
-          'enable-experimental-focus-wrap-without-sentinels': true,
-        }}
-      >
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {...rest}
           className={cx(blockClass, className)}

@@ -2840,6 +2840,7 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel .cds--text-area,
 .c4p--side-panel .cds--search-input,
 .c4p--side-panel .cds--select-input,
+.c4p--side-panel .cds--multi-select,
 .c4p--side-panel .cds--dropdown,
 .c4p--side-panel .cds--dropdown-list,
 .c4p--side-panel .cds--number input[type=number],
@@ -6651,7 +6652,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #002d9c;
+  --cds-highlight: #001d6c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
@@ -10484,7 +10485,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #0043ce;
+  --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
@@ -10915,7 +10916,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #002d9c;
+  --cds-highlight: #001d6c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;

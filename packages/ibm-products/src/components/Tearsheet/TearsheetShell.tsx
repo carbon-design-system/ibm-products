@@ -455,11 +455,7 @@ export const TearsheetShell = React.forwardRef(
       };
 
       return renderPortalUse(
-        <FeatureFlags
-          flags={{
-            'enable-experimental-focus-wrap-without-sentinels': true,
-          }}
-        >
+        <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
             {
               // Pass through any other property values.

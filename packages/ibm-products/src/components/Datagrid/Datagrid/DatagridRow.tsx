@@ -207,7 +207,7 @@ const DatagridRow = (datagridState: DataGridState) => {
           const lastVisibleIndex = withActionsColumn ? 2 : 1;
           const lastVisibleFlexStyle =
             index === visibleColumns.length - lastVisibleIndex
-              ? '1 1 0'
+              ? '1 0 auto'
               : '0 0 auto';
           if (style) {
             style.flex = lastVisibleFlexStyle;

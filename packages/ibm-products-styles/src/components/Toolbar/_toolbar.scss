@@ -52,7 +52,8 @@ $toolbar-dimensions: $spacing-08;
   border-bottom-width: 0;
 }
 
-.#{$block-class}__button--caret {
+.#{$block-class}__button--caret,
+.#{$block-class}__button__iconButtonWrapper {
   position: relative;
 }
 

@@ -40,12 +40,12 @@ test.describe('Datagrid @avt', () => {
     firstRow.click();
     await page.waitForTimeout(3000);
     const sidePanel = page.locator('[aria-label="Title"]');
-    await page.waitForTimeout(3000);
     await expect(sidePanel).toBeVisible();
     const button = sidePanel.getByText('View details');
     await expect(button).toBeFocused();
     await page.keyboard.press('Shift+Tab');
     await page.keyboard.press('Enter');
+    await page.waitForTimeout(3000);
     await expect(firstRow).toBeFocused();
     await expect(page).toHaveNoACViolations(
       'Datagrid @avt-open-and-dismiss-sidepanel-onRowClick'

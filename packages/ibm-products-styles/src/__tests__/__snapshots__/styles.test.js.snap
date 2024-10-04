@@ -2840,6 +2840,7 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--side-panel .cds--text-area,
 .c4p--side-panel .cds--search-input,
 .c4p--side-panel .cds--select-input,
+.c4p--side-panel .cds--multi-select,
 .c4p--side-panel .cds--dropdown,
 .c4p--side-panel .cds--dropdown-list,
 .c4p--side-panel .cds--number input[type=number],
@@ -3978,6 +3979,12 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid .c4p--datagrid__head-wrap {
   overflow: hidden;
   background-color: var(--cds-layer-accent);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.c4p--datagrid .c4p--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .c4p--datagrid .cds--action-list .cds--btn.c4p--button-menu {

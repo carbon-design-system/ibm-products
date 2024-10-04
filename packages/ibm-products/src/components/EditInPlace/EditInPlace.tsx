@@ -209,6 +209,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       setInitialValue(value);
       setDirtyInput(false);
       onSave();
+      setFocused(false);
     };
 
     const onCancelHandler = () => {

@@ -103,7 +103,7 @@ export interface TagSetProps extends PropsWithChildren {
    */
   multiline?: boolean;
   /**
-   * Changes the behaviour that occurs on selecting the overflow tag component
+   * Changes the behavior that occurs on selecting the overflow tag component
    */
   onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
@@ -496,10 +496,6 @@ TagSet.propTypes = {
   /**@ts-ignore */
   containingElementRef: PropTypes.object,
   /**
-   * Changes the behaviour that occurs on selecting the overflow tag component
-   */
-  onOverflowClick: PropTypes.func,
-  /**
    * maximum visible tags
    */
   maxVisible: PropTypes.number,
@@ -512,6 +508,10 @@ TagSet.propTypes = {
    * display tags in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * Changes the behavior that occurs on selecting the overflow tag component
+   */
+  onOverflowClick: PropTypes.func,
   /**
    * Handler to get overflow tags
    */

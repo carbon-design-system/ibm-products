@@ -192,12 +192,12 @@ describe(TagSet.displayName, () => {
     expect(modal).not.toHaveClass('is-visible');
   });
 
-  it('Tags set overflow trigger can be overriden, and does not show TagSetModal or overflow popup', async () => {
+  it('Tags set overflow trigger can be overridden, and does not show TagSetModal or overflow popup', async () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    const overflowClickSpy = jest.fn()
-    
+    const overflowClickSpy = jest.fn();
+
     const { queryByText } = render(
       <TagSet
         {...overflowAndModalStrings}
@@ -206,8 +206,7 @@ describe(TagSet.displayName, () => {
       />
     );
 
-
-    const overFlowButton = queryByText(`+${tags.length - visibleTags}`)
+    const overFlowButton = queryByText(`+${tags.length - visibleTags}`);
     // Ensure the number of visible elements are rendered on the screen
     expect(overFlowButton).toBeInTheDocument();
     // Clicking the overflow button causes the spyFunction to be called

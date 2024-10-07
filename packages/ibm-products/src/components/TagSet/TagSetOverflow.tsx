@@ -52,7 +52,7 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
-   * changes the behaviour of clicking the overflow tags button
+   * changes the behavior of clicking the overflow tags button
    */
   onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
@@ -263,7 +263,7 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Changes the behaviour that occurs on selecting the overflow tag component
+   * Changes the behavior that occurs on selecting the overflow tag component
    */
   onOverflowClick: PropTypes.func,
   /**

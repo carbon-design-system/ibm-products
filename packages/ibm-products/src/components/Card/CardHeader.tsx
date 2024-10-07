@@ -132,7 +132,7 @@ export const CardHeader = ({
       <div
         className={cx([
           `${headerClass}-container`,
-          { [`${headerClass}-container--has-slug`]: !!aiLabel || !!slug },
+          { [`${headerClass}-container--has-aiLabel`]: !!aiLabel || !!slug },
           { [`${headerClass}-container--has-actions`]: !!hasActions },
           {
             [`${headerClass}-container--large-tile-or-label`]:

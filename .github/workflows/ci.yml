@@ -110,12 +110,33 @@ jobs:
         with:
           path: '**/node_modules'
           key:
-            test-community-modules-${{ runner.os }}-${{ hashFiles('yarn.lock')
-            }}
+            test-community-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
       - name: CI tests for community
         run: yarn ci-check:test:community
+  test-c4p-wc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.x'
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key:
+            test-c4p-wc-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+      - name: CI tests for products web components
+        run: yarn ci-check:test:c4p-wc
 
   avt-runner:
     strategy:

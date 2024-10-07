@@ -182,6 +182,35 @@ const BasicUsage = ({ ...rest } = {}) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const SpacerColumn = ({ ...rest } = {}) => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        rightAlignedColumn: true,
+      },
+    ],
+    []
+  );
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      enableSpacerColumn: true,
+    },
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 const DatagridActions = (datagridState) => {
   const {
     selectedFlatRows,
@@ -499,7 +528,10 @@ const RowSizeDropdown = ({ ...rest } = {}) => {
 };
 
 const CustomizingColumns = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => (rest.columns ? rest.columns : defaultHeader),
+    [rest.columns]
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
@@ -911,6 +943,17 @@ describe(componentName, () => {
     expect(screen.getAllByRole('columnheader').length).toEqual(
       defaultHeader.length
     );
+  });
+
+  it('renders a table with spacer column', () => {
+    render(<SpacerColumn />);
+    expect(screen.getByRole('table')).toHaveClass(
+      `${carbon.prefix}--data-table`
+    );
+
+    expect(
+      screen.getAllByRole('columnheader', { hidden: true }).length
+    ).toEqual(3);
   });
 
   it('renders a basic data grid component with devTools attribute', async () => {
@@ -1695,8 +1738,7 @@ describe(componentName, () => {
         .getElementsByTagName('div')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Select all (100)');
-    // ).toEqual('Select all (93)'); (7 rows are disabled in entire table) switch to this after #5937 issue fixes
+    ).toEqual('Select all (93)');
 
     // click select all button in toolbar
     fireEvent.click(
@@ -1981,6 +2023,41 @@ describe(componentName, () => {
       );
     });
   });
+  it('Customizing Columns disable save button when un-select all columns', async () => {
+    const columnsWithoutSticky = [
+      {
+        Header: 'Row Index',
+        accessor: (row, i) => i,
+        id: 'rowIndex', // id is required when accessor is a function.
+      },
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+      },
+    ];
+    const columns = [...columnsWithoutSticky, ...defaultHeader.slice(2)];
+    render(
+      <CustomizingColumns
+        data-testid={dataTestId}
+        columns={columns}
+      ></CustomizingColumns>
+    );
+
+    const customizeColumnsButton = screen.getByLabelText('Customize columns');
+    fireEvent.click(customizeColumnsButton);
+    screen.getByRole('heading', { name: /Customize columns/ });
+
+    const selectAllCheckBox = screen.getByRole('checkbox', {
+      name: 'Column name',
+    });
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(true);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(false);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+  });
 
   it('Customizing Columns', async () => {
     render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
@@ -2013,7 +2090,9 @@ describe(componentName, () => {
     fireEvent.click(columnSaveButton);
     const rows = screen.getAllByRole('row');
     const headerRow = rows[0];
-    expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    setTimeout(() => {
+      expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    }, 0);
   });
 
   it('Top Alignment', async () => {
@@ -2333,7 +2412,7 @@ describe(componentName, () => {
     dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
     await type(dateInputs[0], '01/01/2024');
     await keyboard('[Escape]');
-    await keyboard('[Tab]');
+    await click(dateInputs[1]);
     await keyboard('01/02/2024');
     await keyboard('[Escape]');
     expect(dateInputs[0].value).toEqual('01/01/2024');

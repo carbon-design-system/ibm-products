@@ -28,6 +28,10 @@ $story-prefix: side-panel-stories__;
   .#{$story-prefix}text-area-container {
     position: relative;
   }
+  .#{$story-prefix}multi-select-container {
+    position: relative;
+    margin: $spacing-05 0;
+  }
   .#{$story-prefix}text-area-container .#{$story-prefix}allowed-characters {
     @include type.type-style('label-01');
 

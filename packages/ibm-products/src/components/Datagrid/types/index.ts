@@ -11,6 +11,7 @@ import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/Radio
 import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonGroup/RadioButtonGroup';
 import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
+import { TableRowProps } from 'react-table';
 
 import React, {
   CSSProperties,
@@ -136,6 +137,7 @@ export interface FilterFlyoutProps {
   flyoutIconDescription?: string;
   onFlyoutClose?: () => void;
   onFlyoutOpen?: () => void;
+  onClearFilters?: () => void;
   panelIconDescription?: string;
   primaryActionLabel?: string;
   reactTableFiltersState?: ReactTableFiltersState[];
@@ -307,6 +309,7 @@ export interface DataGridState<T extends object = any>
   setGlobalFilter?: (filterValue: FilterValue) => void;
   batchActionMenuButtonLabel?: string;
   translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];
+  toolbarBatchActionsDisplayMin?: number;
   onScroll?: (evt?: any) => void;
   innerListRef?: MutableRefObject<HTMLDivElement>;
   tableHeight?: number;
@@ -334,6 +337,7 @@ export interface DataGridState<T extends object = any>
   ) => void;
   ExpandedRowContentComponent?: JSXElementConstructor<any>;
   getAsyncSubRows?: (row: DatagridRow) => void;
+  enableSpacerColumn?: boolean;
 }
 
 export interface DataGridData {
@@ -369,4 +373,8 @@ export type NodeFuncType = (props) => ReactNode;
 export interface PropGetterMeta {
   instance?: DataGridTableInstance;
   row?: Partial<Row<any> & DatagridRow<any>>;
+}
+
+export interface DatagridRowProps extends TableRowProps {
+  nonselectablerows: Array<number>;
 }

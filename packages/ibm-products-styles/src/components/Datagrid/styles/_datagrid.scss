@@ -735,6 +735,10 @@
 
 .#{$block-class}__virtualScrollContainer {
   width: 100%;
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
+    // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
+    overflow-x: hidden;
+  }
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
@@ -781,12 +785,25 @@
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
   overflow: hidden;
   background-color: $layer-accent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
   padding: 0;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--noLabel
+  svg.#{c4p-settings.$carbon-prefix}--btn__icon {
+  margin-inline-start: 0;
 }
 
 .#{$block-class}

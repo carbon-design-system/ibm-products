@@ -10,8 +10,8 @@ import cx from 'classnames';
 import { AddAlt, TextNewLine } from '@carbon/react/icons';
 import { ConditionBuilderButton } from '../ConditionBuilderButton/ConditionBuilderButton';
 import PropTypes from 'prop-types';
-import { blockClass } from '../ConditionBuilderContext/DataConfigs';
 import { useTranslations } from '../utils/useTranslations';
+import { blockClass } from '../utils/util';
 
 interface ConditionBuilderAddProps {
   className?: string;

@@ -35,7 +35,7 @@ const RowSizeRadioGroup = forwardRef(
       <div className={`${blockClass}-dropdown`} role="presentation" ref={ref}>
         <RadioButtonGroup
           legendText={legendText}
-          name="row-height-group"
+          name={`${tableId}--row-height-group`}
           orientation="vertical"
           defaultSelected={getBackwardCompatibleRowSize(selectedOption)}
           onChange={onChange}

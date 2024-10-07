@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -27,6 +27,7 @@ import { NotificationsPanel } from '.';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
+const blockClass = `${pkg.prefix}--notifications-panel`;
 
 export default {
   title: 'IBM Products/Patterns/Notifications/NotificationsPanel',
@@ -43,7 +44,12 @@ docs: {
   },
 };
 
-const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
+const renderUIShellHeader = (
+  open,
+  setOpen,
+  notificationTriggerRef,
+  hasUnreadNotifications
+) => (
   <HeaderContainer
     render={() => (
       <Header
@@ -61,6 +67,7 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
           <HeaderGlobalAction
             aria-label="Notifications"
             onClick={() => setOpen(!open)}
+            ref={notificationTriggerRef}
           >
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
@@ -79,6 +86,7 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
 
 const Template = (args) => {
   const [open, setOpen] = useState(false);
+  const notificationTriggerRef = useRef(null);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsData, setNotificationsData] = useState(data);
 
@@ -125,7 +133,12 @@ const Template = (args) => {
 
   return (
     <div className={`${storyBlockClass}--full-height`}>
-      {renderUIShellHeader(open, setOpen, hasUnreadNotifications)}
+      {renderUIShellHeader(
+        open,
+        setOpen,
+        notificationTriggerRef,
+        hasUnreadNotifications
+      )}
       <div className={`${storyBlockClass}__add`}>
         <Button onClick={addNewNotification}>Add new notification</Button>
       </div>
@@ -140,6 +153,7 @@ const Template = (args) => {
           tempData = tempData.filter((item) => item.id !== id);
           setNotificationsData(tempData);
         }}
+        triggerButtonRef={notificationTriggerRef}
       />
     </div>
   );

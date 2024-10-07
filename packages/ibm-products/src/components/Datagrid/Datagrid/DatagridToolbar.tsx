@@ -18,7 +18,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { handleSelectAllRowData } from './addons/stateReducer';
-import { DataGridState } from '../types';
+import { DataGridState, DatagridRowProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
@@ -39,6 +39,7 @@ const DatagridBatchActionsToolbar = (
     state: { selectedRowIds },
     toggleAllRowsSelected,
     toolbarBatchActions,
+    toolbarBatchActionsDisplayMin,
     setGlobalFilter,
     rows,
     dispatch,
@@ -46,9 +47,18 @@ const DatagridBatchActionsToolbar = (
     batchActionMenuButtonLabel,
     translateWithIdBatchActions,
   } = datagridState;
+  const [availableRowsCount, setAvailableRowsCount] = useState(rows.length);
+
   const batchActionMenuButtonLabelText = batchActionMenuButtonLabel ?? 'More';
   const selectedKeys = Object.keys(selectedRowIds || {});
   const totalSelected = selectedKeys.length;
+
+  useEffect(() => {
+    const countDisabledRows =
+      (rows.find((row) => row.getRowProps)?.getRowProps?.() as DatagridRowProps)
+        ?.nonselectablerows?.length || 0;
+    rows && setAvailableRowsCount(rows.length - countDisabledRows);
+  }, [rows]);
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside
@@ -94,8 +104,10 @@ const DatagridBatchActionsToolbar = (
     // and if there is enough available space to render all the items
     if (
       toolbarBatchActions &&
-      toolbarBatchActions?.length <= 3 &&
-      !displayAllInMenu
+      !displayAllInMenu &&
+      ((!toolbarBatchActionsDisplayMin && toolbarBatchActions?.length <= 3) ||
+        (toolbarBatchActionsDisplayMin !== undefined &&
+          toolbarBatchActions?.length <= toolbarBatchActionsDisplayMin))
     ) {
       return;
     }
@@ -121,7 +133,17 @@ const DatagridBatchActionsToolbar = (
         menuAlignment="bottom"
       >
         {toolbarBatchActions?.map((batchAction, index) => {
-          const hidden = index < 2 && !displayAllInMenu;
+          let hidden =
+            toolbarBatchActionsDisplayMin === undefined &&
+            index < 2 &&
+            !displayAllInMenu;
+          if (
+            toolbarBatchActionsDisplayMin !== undefined &&
+            index < toolbarBatchActionsDisplayMin &&
+            !displayAllInMenu
+          ) {
+            hidden = true;
+          }
           if (!hidden) {
             return renderItem(batchAction, index);
           }
@@ -170,21 +192,29 @@ const DatagridBatchActionsToolbar = (
       totalSelected={totalSelected}
       onCancel={onCancelHandler}
       onSelectAll={onSelectAllHandler}
-      totalCount={rows && rows.length}
+      totalCount={availableRowsCount}
       translateWithId={translateWithIdBatchActions}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
         toolbarBatchActions?.map((batchAction, index) => {
           if (
-            (index < 2 && toolbarBatchActions.length > 3) ||
-            (index < 3 && toolbarBatchActions.length <= 3)
+            (!toolbarBatchActionsDisplayMin &&
+              index < 2 &&
+              toolbarBatchActions.length > 3) ||
+            (index < 3 && toolbarBatchActions.length <= 3) ||
+            (toolbarBatchActionsDisplayMin !== undefined &&
+              index < toolbarBatchActionsDisplayMin)
           ) {
             return (
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
                 onClick={(event) => onClickHandler(event, batchAction)}
+                className={cx({
+                  [`${carbon.prefix}--noLabel`]:
+                    !batchAction.label || batchAction.label === '',
+                })}
                 iconDescription={batchAction.label}
                 tabIndex={totalSelected > 0 ? 0 : -1}
               >

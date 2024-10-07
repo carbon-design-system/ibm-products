@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { TearsheetNarrow } from '../../../../Tearsheet';
 import Columns from './Columns';
@@ -36,6 +36,7 @@ const CustomizeColumnsTearsheet = ({
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnObjects] = useState(columnDefinitions);
   const [isDirty, setIsDirty] = useState(false);
+  const prevColumnDefinitions = useRef();
 
   const onRequestClose = () => {
     setColumnObjects(columnDefinitions);
@@ -90,13 +91,7 @@ const CustomizeColumnsTearsheet = ({
     });
 
     setColumnObjects(finalDefinitions);
-    setDirty();
-  };
-
-  const setDirty = () => {
-    if (!isDirty) {
-      setIsDirty(true);
-    }
+    setIsDirty(selectedColumnsCount !== 0);
   };
 
   const getVisibleColumnsCount = useCallback(() => {
@@ -106,6 +101,9 @@ const CustomizeColumnsTearsheet = ({
   const string = searchText.trim().toLowerCase();
 
   useEffect(() => {
+    if (prevColumnDefinitions.current !== columnDefinitions) {
+      setColumnObjects(columnDefinitions);
+    }
     const actionCount = columnObjects.filter(
       (col) => col.id === 'actions'
     ).length;
@@ -121,7 +119,8 @@ const CustomizeColumnsTearsheet = ({
     setTotalColumns(
       columnObjects.length - actionCount - datagridSelectionCount
     );
-  }, [getVisibleColumnsCount, columnObjects]);
+    prevColumnDefinitions.current = columnDefinitions;
+  }, [getVisibleColumnsCount, columnObjects, columnDefinitions]);
 
   return (
     <TearsheetNarrow
@@ -149,7 +148,7 @@ const CustomizeColumnsTearsheet = ({
         searchText={searchText}
         setColumnsObject={(cols) => {
           setColumnObjects(cols);
-          setDirty();
+          setIsDirty(true);
         }}
         setSearchText={setSearchText}
         findColumnPlaceholderLabel={findColumnPlaceholderLabel}
@@ -167,7 +166,7 @@ const CustomizeColumnsTearsheet = ({
           onSelectColumn={onCheckboxCheck}
           setColumnsObject={(cols) => {
             setColumnObjects(cols);
-            setDirty();
+            setIsDirty(getVisibleColumnsCount() !== 0);
           }}
           selectAllLabel={selectAllLabel}
           customizeTearsheetHeadingLabel={customizeTearsheetHeadingLabel}

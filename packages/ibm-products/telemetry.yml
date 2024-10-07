@@ -32,11 +32,13 @@ collect:
         - assistiveText
         - assistiveTextDisabledInstructionsLabel
         - assistiveTextInstructionsLabel
+        - autoAlign
         - backButtonText
         - backgroundColor
         - batchActionMenuButtonLabel
         - batchActions
         - body
+        - breadcrumbOverflowTooltipAlign
         - breadcrumbs
         - button
         - cancelButtonText
@@ -84,6 +86,7 @@ collect:
         - emptyStateSize
         - emptyStateTitle
         - emptyStateType
+        - enableSpacerColumn
         - error
         - errorCodeLabel
         - errorMessage
@@ -219,7 +222,10 @@ collect:
         - onContextMenuLabel
         - onContextMenuValue
         - onDataUpdate
+        - onFocus
         - onMount
+        - onMouseEnter
+        - onMouseLeave
         - onNext
         - onOverflowTagChange
         - onPrimaryButtonClick
@@ -245,8 +251,10 @@ collect:
         - overflowActions
         - overflowAlign
         - overflowAriaLabel
+        - overflowAutoAlign
         - overflowClassName
         - overflowTags
+        - overflowTooltipAlign
         - overflowType
         - parentId
         - path
@@ -343,6 +351,7 @@ collect:
         - title
         - titleSize
         - toolbarBatchActions
+        - toolbarBatchActionsDisplayMin
         - tooltipAlignment
         - tooltipText
         - totalVisibleColumns
@@ -381,6 +390,7 @@ collect:
         - version
         # ActionBar
         - overflowItems
+        - overflowMenuRef
         # Actions
         - searchText
         - setSearchText
@@ -467,8 +477,6 @@ collect:
         - tooltipDescription
         - total
         - trending
-        # BreadcrumbWithOverflow
-        - overflowTooltipAlign
         # ButtonMenu
         - menuAriaLabel
         # ButtonSetWithOverflow
@@ -502,7 +510,6 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
-        - autoAlign
         - overlayClassName
         - overlayKind
         - overlayRef
@@ -537,9 +544,6 @@ collect:
         # ConditionBuilderButton
         - hideLabel
         - isInvalid
-        - onFocus
-        - onMouseEnter
-        - onMouseLeave
         - tooltipAlign
         - wrapperClassName
         - wrapperProps
@@ -549,7 +553,11 @@ collect:
         # ConditionBuilderItemDate
         - parentRef
         # ConditionBuilderProvider
+        - actionState
         - conditionBuilderRef
+        - rootState
+        - setActionState
+        - setRootState
         # ConditionConnector
         - operator
         # ConditionPreview
@@ -565,7 +573,10 @@ collect:
         - secondaryTitle
         # CreateInfluencer
         - stepData
+        # CreateTearsheet
+        - experimentalSecondarySubmitText
         # CreateTearsheetStep
+        - experimentalSecondarySubmit
         - onPrevious
         # CustomizeColumnsTearsheet
         - columnDefinitions
@@ -757,6 +768,7 @@ collect:
         - secondsAgoText
         - settingsIconDescription
         - todayLabel
+        - triggerButtonRef
         - yearAgoText
         - yearsAgoText
         - yesterdayAtText
@@ -779,7 +791,6 @@ collect:
         - actionBarMenuOptionsClass
         - actionBarOverflowAriaLabel
         - breadcrumbOverflowAriaLabel
-        - breadcrumbOverflowTooltipAlign
         - collapseHeader
         - collapseHeaderIconDescription
         - collapseTitle
@@ -1101,12 +1112,13 @@ collect:
         - radio
         - selection
         - text
+        - textarea
         # General - updateMethod
         - batch
         - instant
         # General - variant
-        - sentence
-        - tree
+        - Hierarchical
+        - Non-Hierarchical
         # General - verticalPosition
         - lower
         - normal
@@ -1129,6 +1141,9 @@ collect:
         - floating
         - stacked
         - tooltip
+        # ConditionBlock - conjunction
+        - and
+        - or
         # ConditionPreview - previewType
         - condition
         - newGroup

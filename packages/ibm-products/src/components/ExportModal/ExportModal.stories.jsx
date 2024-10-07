@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { ExportModal } from '.';
@@ -24,7 +24,7 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage',
+              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/export/usage/',
               label: 'Export guidelines',
             },
             {
@@ -98,6 +98,7 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
   const [open, setOpen] = useState(
     context.viewMode !== 'docs' && storyInitiallyOpen
   );
+  const triggerButtonRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);
@@ -118,9 +119,16 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
     setSuccessful(false);
     setError(false);
   };
-
+  function RenderButton(triggerButtonRef) {
+    return (
+      <Button ref={triggerButtonRef} onClick={() => setOpen(true)}>
+        Launch modal
+      </Button>
+    );
+  }
   return (
     <>
+      {RenderButton(triggerButtonRef)}
       <ExportModal
         {...args}
         open={open}
@@ -132,8 +140,8 @@ const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
         successMessage="The file has been exported."
         error={error}
         errorMessage="Server error 500"
+        triggerButtonRef={triggerButtonRef}
       />
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>
   );
 };

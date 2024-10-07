@@ -105,7 +105,7 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const onSelectHandler = (event) => {
+  const onSelectHandler = async (event) => {
     event.stopPropagation(); // avoid triggering onRowClick
     if (radio) {
       toggleAllRowsSelected(false);
@@ -122,6 +122,10 @@ const SelectRow = (datagridState) => {
       getRowId,
       selectAll: null,
     });
+    // focus the radio / checkbox if lost
+    const activeElement = document?.activeElement?.id ?? '';
+    await undefined;
+    document?.getElementById(activeElement)?.focus();
   };
 
   const selectDisabled = isFetching || row.getRowProps().disabled;

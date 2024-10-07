@@ -19,10 +19,7 @@ import {
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  NON_HIERARCHICAL_VARIANT,
-  HIERARCHICAL_VARIANT,
-} from './ConditionBuilderContext/DataConfigs';
+import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 export default {
   title: 'Experimental/Components/ConditionBuilder',
   component: ConditionBuilder,
@@ -243,7 +240,10 @@ export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
 );
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  initialState: sampleDataStructure_nonHierarchical,
+  initialState: {
+    state: sampleDataStructure_nonHierarchical,
+    enabledDefault: true,
+  },
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
@@ -271,7 +271,10 @@ export const conditionBuilderWithInitialStateHierarchical =
 conditionBuilderWithInitialStateHierarchical.storyName =
   'With initial state (Hierarchical)';
 conditionBuilderWithInitialStateHierarchical.args = {
-  initialState: sampleDataStructure_Hierarchical,
+  initialState: {
+    state: sampleDataStructure_Hierarchical,
+    enabledDefault: false,
+  },
   inputConfig: inputData,
   variant: HIERARCHICAL_VARIANT,
 };

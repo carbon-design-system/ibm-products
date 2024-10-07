@@ -59,8 +59,8 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--focused {
-  border: 2px solid $focus;
   background: $field-01;
+  outline: 2px solid $focus;
 }
 
 .#{$block-class}__text-input {
@@ -73,17 +73,6 @@ $carbon-input: #{$carbon-prefix}--text-input;
   font-weight: inherit;
   letter-spacing: inherit;
   line-height: inherit;
-}
-
-.#{$block-class}__ellipsis {
-  position: relative;
-  margin-left: calc(-1 * $spacing-05);
-  opacity: 0;
-}
-
-.#{$block-class}--overflows:not(.#{$block-class}--focused)
-  .#{$block-class}__ellipsis {
-  opacity: 1;
 }
 
 .#{$block-class}__text-input-label {

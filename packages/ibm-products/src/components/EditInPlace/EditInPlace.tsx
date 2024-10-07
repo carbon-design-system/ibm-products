@@ -207,13 +207,12 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
 
     const onSaveHandler = () => {
       setInitialValue(value);
-      setFocused(false);
       setDirtyInput(false);
       onSave();
+      setFocused(false);
     };
 
     const onCancelHandler = () => {
-      setFocused(false);
       setDirtyInput(false);
       onCancel(initialValue);
     };
@@ -248,16 +247,21 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
       onCancelHandler();
     };
 
+    const removeFocus = () => {
+      inputRef.current?.blur();
+      setFocused(false);
+    };
+
     const onKeyHandler = (e) => {
       // to prevent blur handler from being called twice add additional state to check if escape is being used
       escaping.current = true;
       switch (e.key) {
         case 'Escape':
-          inputRef.current?.blur();
+          removeFocus();
           escapeHandler();
           break;
         case 'Enter':
-          inputRef.current?.blur();
+          removeFocus();
           returnHandler();
           break;
         default:
@@ -298,9 +302,6 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
             aria-label={labelText}
             aria-invalid={invalid}
           />
-          <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
-            &hellip;
-          </div>
           <div className={`${blockClass}__toolbar`}>
             {invalid && (
               <WarningFilled

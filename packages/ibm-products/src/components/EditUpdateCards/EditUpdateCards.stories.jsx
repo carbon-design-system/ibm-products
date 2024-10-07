@@ -41,7 +41,7 @@ export default {
     styles,
     docs: {
       page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#other-edit-behaviors" />
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/edit-and-update/usage/#other-edit-behaviors" />
       ),
     },
   },

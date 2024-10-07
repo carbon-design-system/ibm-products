@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,17 +76,16 @@ describe(componentName, () => {
     expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
-  it.skip('has no accessibility violations when closed', async () => {
-    // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
+  it('has no accessibility violations when closed', async () => {
     const { container } = renderComponent({ open: false });
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

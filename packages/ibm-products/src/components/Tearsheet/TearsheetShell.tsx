@@ -15,6 +15,7 @@ import React, {
   ForwardedRef,
   MutableRefObject,
   RefObject,
+  useCallback,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -49,7 +50,7 @@ const componentName = 'TearsheetShell';
 const maxDepth = 3;
 
 interface TearsheetShellProps extends PropsWithChildren {
-  actions?: ButtonProps<any>[];
+  actions?: ButtonProps<'button'>[];
 
   ariaLabel?: string;
 
@@ -201,6 +202,7 @@ type stackTypes = {
   }>;
   sizes: Array<string>;
 };
+
 const stack: stackTypes = { open: [], all: [], sizes: [] };
 
 // these props are only applicable when size='wide'
@@ -270,6 +272,13 @@ export const TearsheetShell = React.forwardRef(
     );
     const modalRefValue = modalRef.current;
 
+    // Function to strip html tags out of a string.
+    const stripTags = useCallback(
+      (input) => input.replace(/<\/?[^>]+(>|$)/g, ''),
+      []
+    );
+
+    const titleText = stripTags(String(description));
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -292,7 +301,6 @@ export const TearsheetShell = React.forwardRef(
       setDepth(newDepth);
       setPosition(newPosition);
     }
-
     handleStackChange.checkFocus = function () {
       // if we are now the topmost tearsheet, ensure we have focus
       if (
@@ -519,7 +527,10 @@ export const TearsheetShell = React.forwardRef(
                     >
                       {title}
                     </Wrap>
-                    <Wrap className={`${bc}__header-description`}>
+                    <Wrap
+                      className={`${bc}__header-description`}
+                      title={titleText}
+                    >
                       {description}
                     </Wrap>
                   </Wrap>
@@ -550,6 +561,7 @@ export const TearsheetShell = React.forwardRef(
                     alwaysRender={
                       !!(influencer && influencerPosition === 'right')
                     }
+                    tabIndex={-1}
                   >
                     {children}
                   </Wrap>

@@ -59,7 +59,7 @@ export interface TearsheetProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps<'button'>[];
+  actions?: ButtonProps<'button'>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -86,6 +86,14 @@ export interface TearsheetProps extends PropsWithChildren {
    * this prop to either true or false.
    */
   hasCloseIcon?: boolean;
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions?: ReactNode;
 
   /**
    * The content for the influencer section of the tearsheet, displayed
@@ -296,6 +304,14 @@ Tearsheet.propTypes = {
    */
   /**@ts-ignore */
   hasCloseIcon: PropTypes.bool,
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions: PropTypes.element,
 
   /**
    * The content for the influencer section of the tearsheet, displayed

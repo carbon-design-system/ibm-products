@@ -87,7 +87,8 @@ expect.extend({
         'html_skipnav_exists',
         'aria_content_in_landmark',
         'aria_child_tabbable',
-        'skip_main_described'
+        'skip_main_described',
+        'target_spacing_sufficient'
       ]);
 
       const ruleset = await aChecker.getRuleset('IBM_Accessibility');

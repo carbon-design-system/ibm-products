@@ -39,7 +39,7 @@ interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
   onClose?: () => void;
-  onTagClose: () => void;
+  onTagClose: (params: { label: string; id: any }) => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
   portalTarget?: ReactNode;

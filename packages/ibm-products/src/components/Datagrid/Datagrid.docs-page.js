@@ -184,7 +184,7 @@ const App = () => {
       },
       {
         title: 'Resizable columns',
-        description: 'Columns are resizable by default',
+        description: 'Columns are resizable by default.',
       },
       {
         description:

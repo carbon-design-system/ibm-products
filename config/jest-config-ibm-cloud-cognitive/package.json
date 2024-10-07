@@ -38,5 +38,8 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.7",
     "jest-circus": "^29.4.2"
+  },
+  "resolutions": {
+    "**/ip": "https://registry.npmjs.org/neoip/-/neoip-2.1.0.tgz"
   }
 }

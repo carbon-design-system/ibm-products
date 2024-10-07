@@ -23,8 +23,8 @@ import {
   TabPanel,
   TabList,
   TextInput,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
+  AILabel,
+  AILabelContent,
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
@@ -102,12 +102,12 @@ export default {
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
     portalTarget: { control: { disable: true } },
-    slug: {
+    aiLabel: {
       control: {
         type: 'select',
         labels: {
-          0: 'No AI slug',
-          1: 'with AI Slug',
+          0: 'No AI Label',
+          1: 'with AI Label',
         },
         default: 0,
       },
@@ -158,9 +158,9 @@ const mainContent = (
 
 const title = 'Title of the tearsheet';
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -174,13 +174,13 @@ const sampleSlug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-    </SlugContent>
-  </Slug>
+    </AILabelContent>
+  </AILabel>
 );
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, slug, ...args }) => {
+const Template = ({ actions, aiLabel, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -211,7 +211,7 @@ const Template = ({ actions, slug, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           {mainContent}
         </Tearsheet>
@@ -231,7 +231,7 @@ const tabs = (
   </div>
 );
 
-const TemplateWithNav = ({ actions, slug, ...args }) => {
+const TemplateWithNav = ({ actions, aiLabel, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -263,7 +263,7 @@ const TemplateWithNav = ({ actions, slug, ...args }) => {
             actions={wiredActions}
             open={open}
             onClose={() => setOpen(false)}
-            slug={slug && sampleSlug}
+            aiLabel={aiLabel && sampleAILabel}
           >
             <TabPanels>
               <TabPanel>Tab 1</TabPanel>
@@ -278,7 +278,7 @@ const TemplateWithNav = ({ actions, slug, ...args }) => {
   );
 };
 
-const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
+const ReturnFocusTemplate = ({ actions, aiLabel, ...args }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef();
 
@@ -312,7 +312,7 @@ const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
           launcherButtonRef={buttonRef}
         >
           {mainContent}
@@ -322,7 +322,7 @@ const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
   );
 };
 
-const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
+const FirstElementDisabledTemplate = ({ actions, aiLabel, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -353,7 +353,7 @@ const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           <div className="tearsheet-stories__dummy-content-block">
             <Form>
@@ -389,7 +389,7 @@ const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
+const StackedTemplate = ({ mixedSizes, actions, aiLabel, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -485,7 +485,7 @@ const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
           open={open1}
           onClose={() => setOpen1(false)}
           selectorPrimaryFocus="#stacked-input-1"
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 1
@@ -515,7 +515,7 @@ const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
           open={open2}
           onClose={() => setOpen2(false)}
           selectorPrimaryFocus="#stacked-input-2"
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 2
@@ -533,7 +533,7 @@ const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
             open={open3}
             onClose={() => setOpen3(false)}
             selectorPrimaryFocus="#stacked-input-3"
-            slug={slug && sampleSlug}
+            aiLabel={aiLabel && sampleAILabel}
           >
             <div className="tearsheet-stories__dummy-content-block">
               Main content 3
@@ -622,7 +622,7 @@ fullyLoaded.args = {
   onClose: action('onClose called'),
   title,
   actions: 0,
-  slug: 1,
+  aiLabel: 1,
 };
 
 // eslint-disable-next-line react/prop-types

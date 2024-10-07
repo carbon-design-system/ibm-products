@@ -16,8 +16,8 @@ import {
   Form,
   FormGroup,
   TextInput,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
+  AILabel,
+  AILabelContent,
 } from '@carbon/react';
 
 import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';
@@ -59,12 +59,12 @@ export default {
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
     portalTarget: { control: { disable: true } },
-    slug: {
+    aiLabel: {
       control: {
         type: 'select',
         labels: {
-          0: 'No AI slug',
-          1: 'with AI Slug',
+          0: 'No AI Label',
+          1: 'with AI Label',
         },
         default: 0,
       },
@@ -99,9 +99,9 @@ const mainContent = (
 
 const title = 'Title of the tearsheet';
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -115,13 +115,13 @@ const sampleSlug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-    </SlugContent>
-  </Slug>
+    </AILabelContent>
+  </AILabel>
 );
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, slug, ...args }) => {
+const Template = ({ actions, aiLabel, ...args }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
@@ -149,7 +149,7 @@ const Template = ({ actions, slug, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           {mainContent}
         </TearsheetNarrow>
@@ -159,7 +159,7 @@ const Template = ({ actions, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, slug, ...args }) => {
+const StackedTemplate = ({ actions, aiLabel, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -231,7 +231,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
           title="Tearsheet #1"
           open={open1}
           onClose={() => setOpen1(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
         >
           <div className="tearsheet-stories__narrow-content-block">
             Main content 1
@@ -243,7 +243,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
           title="Tearsheet #2"
           open={open2}
           onClose={() => setOpen2(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
           selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
@@ -256,7 +256,7 @@ const StackedTemplate = ({ actions, slug, ...args }) => {
           title="Tearsheet #3"
           open={open3}
           onClose={() => setOpen3(false)}
-          slug={slug && sampleSlug}
+          aiLabel={aiLabel && sampleAILabel}
           selectorPrimaryFocus="#main-content"
         >
           <div className="tearsheet-stories__narrow-content-block">
@@ -289,7 +289,7 @@ fullyLoaded.args = {
   onClose: action('onClose called'),
   title,
   actions: 0,
-  slug: 1,
+  aiLabel: 1,
 };
 
 export const stacked = StackedTemplate.bind({});

@@ -12,12 +12,7 @@ import { createPortal } from 'react-dom';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import {
-  Button,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
-  TextInput,
-} from '@carbon/react';
+import { Button, AILabel, AILabelContent, TextInput } from '@carbon/react';
 
 // import mdx from './TearsheetShell.mdx';
 
@@ -37,12 +32,12 @@ export default {
       },
     },
     portalTarget: { control: { disable: true } },
-    slug: {
+    aiLabel: {
       control: {
         type: 'select',
         labels: {
-          0: 'No AI slug',
-          1: 'with AI Slug',
+          0: 'No AI Label',
+          1: 'with AI Label',
         },
         default: 0,
       },
@@ -76,9 +71,9 @@ const dummyContent = (
   </div>
 );
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -92,12 +87,12 @@ const sampleSlug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-    </SlugContent>
-  </Slug>
+    </AILabelContent>
+  </AILabel>
 );
 
 // Template.
-const Template = ({ influencer, open: _open, slug, ...args }, context) => {
+const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
   const ref = useRef();
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
@@ -120,7 +115,7 @@ const Template = ({ influencer, open: _open, slug, ...args }, context) => {
         }
         open={open}
         onClose={() => setOpen(false)}
-        slug={slug && sampleSlug}
+        aiLabel={aiLabel && sampleAILabel}
         title={'Tearsheet title'}
       >
         {dummyContent}
@@ -130,7 +125,7 @@ const Template = ({ influencer, open: _open, slug, ...args }, context) => {
 };
 
 const ReturnFocusTemplate = (
-  { influencer, open: _open, slug, ...args },
+  { influencer, open: _open, aiLabel, ...args },
   context
 ) => {
   const ref = useRef();
@@ -156,7 +151,7 @@ const ReturnFocusTemplate = (
         }
         open={open}
         onClose={() => setOpen(false)}
-        slug={slug && sampleSlug}
+        aiLabel={aiLabel && sampleAILabel}
         title={'Tearsheet title'}
         launcherButtonRef={buttonRef}
       >

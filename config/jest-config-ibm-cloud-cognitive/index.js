@@ -8,7 +8,14 @@
 'use strict';
 
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!**/*.stories.{js,jsx}'],
+  coverageReporters: ['json', 'html'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!**/*.stories.{js,jsx}',
+    '!**/*.story.{js,jsx}',
+    '!**/*.docs-page.{js,jsx}',
+  ],
+  coveragePathIgnorePatterns: ['preview-components'],
   resolver: require.resolve('./setup/resolver.js'),
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js', 'json', 'node'],
   moduleNameMapper: {

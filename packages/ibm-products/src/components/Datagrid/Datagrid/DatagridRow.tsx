@@ -11,7 +11,7 @@ import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
-import { DatagridAILabel } from './addons/AILAbel/DatagridLabel';
+import { DatagridAILabel } from './addons/AiLAbel/DatagridAiLabel';
 import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;

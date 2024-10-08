@@ -95,7 +95,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.9",
-    "@carbon/feature-flags": "^0.22.0",
+    "@carbon/feature-flags": "^0.23.1",
     "@carbon/ibm-products-styles": "^2.47.0-rc.0",
     "@carbon/telemetry": "^0.1.0",
     "@dnd-kit/core": "^6.0.8",
@@ -111,12 +111,12 @@
     "react-window": "^1.8.10"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.27.0",
-    "@carbon/layout": "^11.26.0",
-    "@carbon/motion": "^11.22.0",
-    "@carbon/react": "^1.66.0",
-    "@carbon/themes": "^11.40.0",
-    "@carbon/type": "^11.31.0",
+    "@carbon/grid": "^11.28.1",
+    "@carbon/layout": "^11.27.1",
+    "@carbon/motion": "^11.23.1",
+    "@carbon/react": "^1.67.1",
+    "@carbon/themes": "^11.41.1",
+    "@carbon/type": "^11.32.1",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
   }

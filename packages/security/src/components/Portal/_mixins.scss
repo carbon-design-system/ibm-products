@@ -13,10 +13,7 @@
   &__overlay {
     position: fixed;
     z-index: z($layer: overlay);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     display: flex;
     justify-content: center;
     background-color: $overlay-01;

@@ -194,8 +194,7 @@ $toolbar__panel__transition__timing-function: $timing-function;
     padding-bottom: $toolbar__spacing__position__vertical;
     background-color: $ui-01;
     box-shadow: carbon--mini-units($count: 0.25) 0 0 0 $overlay-01;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
   }
 
   &__content {

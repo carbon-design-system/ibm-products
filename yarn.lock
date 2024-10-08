@@ -2931,7 +2931,7 @@ __metadata:
     npm-check-updates: ^16.7.4
     pluralize: ^8.0.0
     react-select: ^5.7.0
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.1
     sinon: ^15.0.1
     uuid: ^9.0.0
   peerDependencies:
@@ -26511,7 +26511,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^4.4.1":
+"rimraf@npm:^4.1, rimraf@npm:^4.4.1":
   version: 4.4.1
   resolution: "rimraf@npm:4.4.1"
   dependencies:

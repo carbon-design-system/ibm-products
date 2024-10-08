@@ -28,11 +28,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-02-font-weight, 400);
   line-height: var(--cds-body-short-02-line-height, 1.375);
   letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  overflow: hidden auto;
   min-height: var(--cds-layout-05, 4rem);
   padding: 0 20% 0 var(--cds-spacing-05, 1rem);
   grid-row: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .c4p--about-modal.c4p--about-modal--with-tabs .c4p--about-modal__body {
@@ -987,10 +986,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation + .c4p--side-panel__body-content {
-  margin-top: calc(
-        var(--c4p--side-panel--title-text-height) +
-          var(--c4p--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
-      );
+  margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem));
 }
 .c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation.c4p--side-panel__subtitle-text-no-animation-no-action-toolbar {
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
@@ -1115,13 +1111,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__overlay {
   position: fixed;
   z-index: 6000;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: var(--cds-overlay-01, rgba(22, 22, 22, 0.5));
+  inset: 0;
 }
 
 .c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
@@ -1130,13 +1123,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__title-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(16rem * 0.2 - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text {
   width: calc(16rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((16rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(16rem * 0.2 - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   color: var(--cds-text-02, #525252);
@@ -1144,13 +1137,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__title-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(20rem * 0.2 - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text {
   width: calc(20rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((20rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(20rem * 0.2 - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   color: var(--cds-text-02, #525252);
@@ -1158,13 +1151,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__title-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(30rem * 0.2 - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container--md .c4p--side-panel__subtitle-text {
   width: calc(30rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((30rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(30rem * 0.2 - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   color: var(--cds-text-02, #525252);
@@ -1172,13 +1165,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__title-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(40rem * 0.2 - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text {
   width: calc(40rem - var(--cds-spacing-05, 1rem));
-  padding-right: calc((40rem * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(40rem * 0.2 - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   color: var(--cds-text-02, #525252);
@@ -1186,13 +1179,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--create-side-panel.c4p--side-panel__container--max .c4p--side-panel__title-text {
   width: calc(75% - var(--cds-spacing-05, 1rem));
-  padding-right: calc((75% * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(75% * 0.2 - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-02, 0.25rem);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container--max .c4p--side-panel__subtitle-text {
   width: calc(75% - var(--cds-spacing-05, 1rem));
-  padding-right: calc((75% * 0.2) - var(--cds-spacing-05, 1rem));
+  padding-right: calc(75% * 0.2 - var(--cds-spacing-05, 1rem));
   padding-bottom: var(--cds-spacing-05, 1rem);
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   color: var(--cds-text-02, #525252);
@@ -1341,25 +1334,23 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-height: calc(100% - var(--cds-spacing-09, 3rem) + var(--cds-spacing-05, 1rem));
 }
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-3 .c4p--tearsheet__container {
-  max-height: calc(100% - var(--cds-spacing-09, 3rem) + (2 * var(--cds-spacing-05, 1rem)));
+  max-height: calc(100% - var(--cds-spacing-09, 3rem) + 2 * var(--cds-spacing-05, 1rem));
 }
 .c4p--tearsheet .c4p--tearsheet__container--lower {
   max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)));
 }
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-2 .c4p--tearsheet__container--lower, .c4p--tearsheet.c4p--tearsheet--stacked-2-of-3 .c4p--tearsheet__container--lower {
-  max-height: calc(
-        100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + var(--cds-spacing-05, 1rem)
-      );
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + var(--cds-spacing-05, 1rem));
 }
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-3 .c4p--tearsheet__container--lower {
-  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + (2 * var(--cds-spacing-05, 1rem)));
+  max-height: calc(100% - (var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem)) + 2 * var(--cds-spacing-05, 1rem));
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
   width: 100%;
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
-    width: calc(100% - (2 * var(--cds-spacing-10, 4rem)));
+    width: calc(100% - 2 * var(--cds-spacing-10, 4rem));
   }
 }
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-2.is-visible .c4p--tearsheet__container, .c4p--tearsheet.c4p--tearsheet--stacked-2-of-3.is-visible .c4p--tearsheet__container {
@@ -2006,8 +1997,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--datagrid__simple-body {
   position: relative;
   display: table;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   scrollbar-width: thin;
 }
 
@@ -2100,9 +2090,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--datagrid--row-height);
   /* stylelint-disable-next-line carbon/layout-token-use */
-  left: calc(
-      var(--c4p--datagrid--indicator-offset-amount) + var(--cds-spacing-05, 1rem)
-    );
+  left: calc(var(--c4p--datagrid--indicator-offset-amount) + var(--cds-spacing-05, 1rem));
   width: 1px;
   height: var(--c4p--datagrid--indicator-height);
   border-left: 1px solid var(--cds-active-ui, #c6c6c6);
@@ -3436,7 +3424,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
   position: absolute;
   top: 0;
   left: var(--cds-spacing-01, 0.125rem);
-  width: calc(100% - (var(--cds-spacing-01, 0.125rem) * 2));
+  width: calc(100% - var(--cds-spacing-01, 0.125rem) * 2);
   height: var(--cds-spacing-01, 0.125rem);
   background-color: var(--cds-ui-01, #f4f4f4);
   content: "";
@@ -3446,7 +3434,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
   position: absolute;
   top: var(--cds-spacing-01, 0.125rem);
   left: var(--cds-spacing-03, 0.5rem);
-  width: calc(100% - (var(--cds-spacing-03, 0.5rem) * 2));
+  width: calc(100% - var(--cds-spacing-03, 0.5rem) * 2);
   height: 1px;
   background-color: var(--cds-ui-03, #e0e0e0);
   content: "";
@@ -3973,12 +3961,8 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--inline-edit .c4p--inline-edit__input {
   display: inline-block;
   overflow: hidden;
-  width: calc(
-        100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem)
-      );
-  max-width: calc(
-        100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem)
-      );
+  width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
+  max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
   min-height: var(--c4p--inline-edit--size);
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
@@ -4892,7 +4876,7 @@ th.c4p--datagrid__select-all-toggle-on.button {
 .c4p--notifications-panel__container .c4p--notifications-panel__notification-previous:not(:first-of-type):before {
   position: absolute;
   top: 0;
-  width: calc(100% - (2 * var(--cds-spacing-05, 1rem)));
+  width: calc(100% - 2 * var(--cds-spacing-05, 1rem));
   height: 1px;
   margin: 0 auto;
   background-color: var(--cds-ui-02, #ffffff);

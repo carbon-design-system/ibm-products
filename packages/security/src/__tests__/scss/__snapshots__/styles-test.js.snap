@@ -21166,10 +21166,10 @@ optgroup.bx--select-optgroup:disabled,
 .security--portal__overlay {
   position: fixed;
   z-index: 6000;
-  inset: 0;
   display: flex;
   justify-content: center;
   background-color: var(--cds-overlay-01, rgba(0, 0, 0, 0.65));
+  inset: 0;
 }
 .security--portal__overlay:focus {
   outline: unset;
@@ -22620,13 +22620,13 @@ optgroup.bx--select-optgroup:disabled,
   top: 0;
   bottom: 0;
   left: 3rem;
+  overflow: hidden auto;
   width: 16rem;
   box-sizing: border-box;
   padding-top: var(--cds-spacing-03, 0.5rem);
   padding-bottom: var(--cds-spacing-03, 0.5rem);
   background-color: var(--cds-ui-01, #262626);
   box-shadow: 0.125rem 0 0 0 var(--cds-overlay-01, rgba(0, 0, 0, 0.65));
-  overflow: hidden auto;
 }
 .security--toolbar__content {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);

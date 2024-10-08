@@ -2,8 +2,6 @@ name: v1 release # Builds and releases @carbon/v10 supported version of @carbon/
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
   Release_v1:

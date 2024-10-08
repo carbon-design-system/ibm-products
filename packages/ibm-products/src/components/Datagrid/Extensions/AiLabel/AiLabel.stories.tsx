@@ -38,7 +38,7 @@ export default {
           blocks={[
             {
               description:
-                "A Carbon AI Label can be used within the Datagrid for both column headers and rows. To include a column header AI Label, include a `aiLabel` property within your column definition and include the AILabel component as it's own custom component. <br/> The `slug` property has been deprecated and will be phased out soon. It will only be supported for a limited time in future. Please use `aiLabel` instead going forward.",
+                "A Carbon AI Label can be used within the Datagrid for both column headers and rows. To include a column header AI Label, include a `aiLabel` property within your column definition and include the AILabel component as it's own custom component. <br/> The `slug` property has been deprecated. It will only be supported for a limited time in future. Please use `aiLabel` property instead.",
               source: {
                 code: `
 {

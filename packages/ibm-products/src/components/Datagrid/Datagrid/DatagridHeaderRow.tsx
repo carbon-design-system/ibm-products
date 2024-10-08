@@ -257,9 +257,7 @@ const HeaderRow = (
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {header.aiLabel
-                ? renderAILabel(header.aiLabel)
-                : renderAILabel(header.slug)}
+              {renderAILabel(header.aiLabel || header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

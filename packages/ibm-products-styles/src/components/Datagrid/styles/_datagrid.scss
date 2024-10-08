@@ -390,12 +390,7 @@
     white-space: initial;
   }
 
-  /* This section to be removed after support for slug dropped  - start */
-  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug {
-    width: fit-content;
-  }
-  /* This section to be removed after support for slug dropped  - end */
-
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug,
   .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--aiLabel {
     width: fit-content;
   }
@@ -971,12 +966,7 @@
   display: flex;
   align-items: center;
 
-  /* This section to be removed after support for slug dropped  - start */
-  &.#{$block-class}__slug--expanded {
-    border: none;
-  }
-  /* This section to be removed after support for slug dropped  - end */
-
+  &.#{$block-class}__slug--expanded,
   &.#{$block-class}__aiLabel--expanded {
     border: none;
   }

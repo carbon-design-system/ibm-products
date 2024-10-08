@@ -100,6 +100,8 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__trigger {
+    /* stylelint-disable-next-line declaration-no-important */
+    border: none !important;
     font-family: inherit;
   }
 

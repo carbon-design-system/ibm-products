@@ -77,7 +77,11 @@ module.exports = {
     'templates',
     '/umd/',
   ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    'ace-node\\.js',
+    'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
+  ],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',

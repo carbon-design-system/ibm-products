@@ -8589,20 +8589,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:3.1.76":
-  version: 3.1.76
-  resolution: "accessibility-checker@npm:3.1.76"
+"accessibility-checker@npm:3.1.50":
+  version: 3.1.50
+  resolution: "accessibility-checker@npm:3.1.50"
   dependencies:
-    axios: ^1.4.0
+    axios: ^0.27.2
     chromedriver: "*"
     deep-diff: ^1.0.2
     exceljs: ^4.3.0
     js-yaml: ^4.1.0
     puppeteer: ^13.0.0
     string-hash: ^1.1.3
+    uuid: ^8.3.2
   bin:
     achecker: bin/achecker.js
-  checksum: 4a8974de3fd6445ff928bd9c0db16646e36ec47de59a949e711d71d98ba5969868008522beb5fe7b3d70cf99dc91ebb5dfb940a79e9b74b1e461af20688a0ddd
+  checksum: cb14814cc5e941da1e25a6f652c9ade5219001df773615d0d985d636793560b400ba7e78213876d7ad3adc804783c354253daaf5b1326d247018e5d8d1cce849
   languageName: node
   linkType: hard
 
@@ -9614,7 +9615,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.0.0, axios@npm:^1.4.0, axios@npm:^1.7.4":
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
+  dependencies:
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.0.0, axios@npm:^1.7.4":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
   dependencies:
@@ -15668,7 +15679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.6":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:
@@ -19012,7 +19023,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.12
     "@testing-library/jest-dom": ^5.16.5
-    accessibility-checker: 3.1.76
+    accessibility-checker: 3.1.50
     axe-core: ^4.6.3
     babel-jest: ^29.4.2
     babel-preset-ibm-cloud-cognitive: ^0.14.28
@@ -30519,7 +30530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:8.3.2, uuid@npm:^8.3.0":
+"uuid@npm:8.3.2, uuid@npm:^8.3.0, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:

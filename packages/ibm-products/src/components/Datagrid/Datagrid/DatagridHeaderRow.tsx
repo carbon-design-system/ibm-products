@@ -22,7 +22,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
-import { DatagridAILabel } from './addons/AiLabel1/DatagridAiLabel1';
+import { DatagridAILabel } from './addons/AiLabel/DatagridAiLabel';
 import { useInitialColumnSort } from '../useInitialColumnSort';
 import {
   DataGridHeader,

@@ -188,13 +188,13 @@ $toolbar__panel__transition__timing-function: $timing-function;
     top: 0;
     bottom: 0;
     left: $toolbar__sizing__width;
+    overflow: hidden auto;
     width: $toolbar__panel__sizing__width;
     box-sizing: border-box;
     padding-top: $toolbar__spacing__position__vertical;
     padding-bottom: $toolbar__spacing__position__vertical;
     background-color: $ui-01;
     box-shadow: carbon--mini-units($count: 0.25) 0 0 0 $overlay-01;
-    overflow: hidden auto;
   }
 
   &__content {

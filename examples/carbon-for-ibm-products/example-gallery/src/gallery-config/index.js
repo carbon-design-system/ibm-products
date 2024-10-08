@@ -19,6 +19,7 @@ import imageCoachmarkFixed from './CoachmarkFixed--thumbnail.png';
 import imageCoachmarkOverlayElement from './CoachmarkOverlayElement--thumbnail.png';
 import imageCoachmarkOverlayElements from './CoachmarkOverlayElements--thumbnail.png';
 import imageCoachmarkStack from './CoachmarkStack--thumbnail.png';
+import imageConditionBuilder from './ConditionBuilder--thumbnail.png';
 import imageCreateFullPage from './CreateFullPage--thumbnail.png';
 import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
@@ -35,6 +36,7 @@ import imageExportModal from './ExportModal--thumbnail.png';
 import imageExpressiveCard from './ExpressiveCard--thumbnail.png';
 import imageFilterPanel from './FilterPanel--thumbnail.png';
 import imageFullPageError from './FullPageError--thumbnail.png';
+import imageGetStartedCard from './GetStartedCard--thumbnail.png';
 import imageHTTPErrors from './HTTPErrors--thumbnail.png';
 import imageImportModal from './ImportModal--thumbnail.png';
 import imageInterstitialScreen from './InterstitialScreen--thumbnail.png';
@@ -116,6 +118,11 @@ const config = [
     thumbnail: `url(${imageCoachmarkStack}`,
   },
   {
+    label: 'Condition-Builder',
+    directory: 'ConditionBuilder',
+    thumbnail: `url(${imageConditionBuilder}`,
+  },
+  {
     label: 'Create Full Page',
     directory: 'CreateFullPage',
     thumbnail: `url(${imageCreateFullPage}`,
@@ -194,6 +201,11 @@ const config = [
     label: 'Full-Page-Error',
     directory: 'FullPageError',
     thumbnail: `url(${imageFullPageError}`,
+  },
+  {
+    label: 'Get-Started-Card',
+    directory: 'GetStartedCard',
+    thumbnail: `url(${imageGetStartedCard}`,
   },
   {
     label: 'HTTP Error',

@@ -11,7 +11,7 @@ import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
-import { DatagridAILabel } from './Datagrid/addons/AiLabel/DatagridAiLabel';
+import { DatagridAILabel } from './Datagrid/addons/AiLabel1/DatagridAiLabel1';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
 

@@ -42,11 +42,10 @@
   .#{$block-class} .#{$block-class}__body {
     @include carbon--type-style('body-short-02');
 
+    overflow: hidden auto;
     min-height: $layout-05;
     padding: 0 20% 0 $spacing-05;
     grid-row: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
   .#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body {

@@ -274,6 +274,7 @@ export let OptionsTile = React.forwardRef(
         )}
         {isExpandable ? (
           <details open={isOpen} ref={detailsRef}>
+            {/* eslint-disable-next-line  */}
             <summary className={`${blockClass}__header`} onClick={toggle}>
               <ChevronDown16 className={`${blockClass}__chevron`} />
               {renderTitle()}

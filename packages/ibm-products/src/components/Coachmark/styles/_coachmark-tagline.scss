@@ -43,12 +43,9 @@
     &::before {
       position: absolute;
       z-index: -1;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
       background: linear-gradient(90deg, $blue-70 0%, $purple-70 100%);
       content: '';
+      inset: 0;
       opacity: 0;
       /* stylelint-disable-next-line carbon/motion-duration-use */
       transition: opacity 240ms carbon--motion(exit, productive);

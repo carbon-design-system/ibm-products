@@ -52,6 +52,9 @@ module.exports = {
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
   snapshotSerializers: [],
   testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: ['node'],
+  },
   testMatch: [
     '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',
@@ -74,7 +77,11 @@ module.exports = {
     'templates',
     '/umd/',
   ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    'ace-node\\.js',
+    'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
+  ],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',
@@ -84,4 +91,7 @@ module.exports = {
     '/storybook/',
     '/results/',
   ],
+  moduleNameMapper: {
+    sinon: '<rootDir>/../../node_modules/sinon/pkg/sinon.js',
+  },
 };

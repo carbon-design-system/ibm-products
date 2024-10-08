@@ -9,5 +9,9 @@ module.exports = {
   ...require('deepmerge')(require('jest-config-ibm-cloud-cognitive'), {
     setupFilesAfterEnv: ['./setup/setupFilesAfterEnv'],
   }),
-  transformIgnorePatterns: ['node_modules/(?!carbon-components-react)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!carbon-components-react)',
+    'ace-node\\.js',
+    'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
+  ],
 };

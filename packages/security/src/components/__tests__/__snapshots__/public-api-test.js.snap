@@ -1398,10 +1398,22 @@ Map {
             "onDeactivate": {
               "type": "func",
             },
+            "onPause": {
+              "type": "func",
+            },
             "onPostActivate": {
               "type": "func",
             },
             "onPostDeactivate": {
+              "type": "func",
+            },
+            "onPostPause": {
+              "type": "func",
+            },
+            "onPostUnpause": {
+              "type": "func",
+            },
+            "onUnpause": {
               "type": "func",
             },
             "preventScroll": {
@@ -7277,10 +7289,22 @@ Map {
             "onDeactivate": {
               "type": "func",
             },
+            "onPause": {
+              "type": "func",
+            },
             "onPostActivate": {
               "type": "func",
             },
             "onPostDeactivate": {
+              "type": "func",
+            },
+            "onPostPause": {
+              "type": "func",
+            },
+            "onPostUnpause": {
+              "type": "func",
+            },
+            "onUnpause": {
               "type": "func",
             },
             "preventScroll": {
@@ -7612,10 +7636,22 @@ Map {
             "onDeactivate": {
               "type": "func",
             },
+            "onPause": {
+              "type": "func",
+            },
             "onPostActivate": {
               "type": "func",
             },
             "onPostDeactivate": {
+              "type": "func",
+            },
+            "onPostPause": {
+              "type": "func",
+            },
+            "onPostUnpause": {
+              "type": "func",
+            },
+            "onUnpause": {
               "type": "func",
             },
             "preventScroll": {

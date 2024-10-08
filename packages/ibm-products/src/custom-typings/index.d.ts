@@ -109,6 +109,7 @@ declare module '@carbon/react' {
     NumberInput,
     NumberInputOnChangeDataVariant,
     OnChangeData,
+    OperationalTag,
     OrderedList,
     OverflowMenu,
     OverflowMenuItem,

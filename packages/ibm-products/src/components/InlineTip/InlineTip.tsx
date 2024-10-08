@@ -94,7 +94,7 @@ export interface InlineTipProps {
    *
    * Enabling `media` disables the `collapsible` feature.
    */
-  media: MediaType;
+  media?: MediaType;
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.

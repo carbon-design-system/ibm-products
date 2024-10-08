@@ -14,6 +14,7 @@ import {
   Popover,
   PopoverContent,
   DismissibleTag,
+  OperationalTag,
 } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
@@ -104,12 +105,11 @@ export const TagOverflowPopover = forwardRef(
           onKeyDown={handleEscKeyPress}
           open={popoverOpen}
         >
-          <Tag
+          <OperationalTag
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__trigger`)}
-          >
-            +{overflowTags?.length}
-          </Tag>
+            text={`+${overflowTags.length}`}
+          />
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>

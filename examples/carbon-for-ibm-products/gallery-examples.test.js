@@ -20,6 +20,7 @@ import { Example as CoachmarkFixedExample } from './CoachmarkFixed/src/Example/E
 import { Example as CoachmarkOverlayElementExample } from './CoachmarkOverlayElement/src/Example/Example';
 import { Example as CoachmarkOverlayElementsExample } from './CoachmarkOverlayElements/src/Example/Example';
 import { Example as CoachmarkStackExample } from './CoachmarkStack/src/Example/Example';
+import { Example as ConditionBuilderExample } from './ConditionBuilder/src/Example/Example';
 import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
 import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
 import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example';
@@ -36,6 +37,7 @@ import { Example as ExportModalExample } from './ExportModal/src/Example/Example
 import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
 import { Example as FilterPanelExample } from './FilterPanel/src/Example/Example';
 import { Example as FullPageErrorExample } from './FullPageError/src/Example/Example';
+import { Example as GetStartedCardExample } from './GetStartedCard/src/Example/Example';
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InterstitialScreenExample } from './InterstitialScreen/src/Example/Example';
@@ -134,6 +136,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('ConditionBuilder renders', () => {
+    render(<ConditionBuilderExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('CreateFullPage renders', () => {
     render(<CreateFullPageExample />);
     // expect no errors int the console
@@ -226,6 +234,12 @@ describe('All examples', () => {
 
   it('FullPageError renders', () => {
     render(<FullPageErrorExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('GetStartedCard renders', () => {
+    render(<GetStartedCardExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

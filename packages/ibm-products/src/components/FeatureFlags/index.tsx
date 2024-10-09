@@ -25,30 +25,35 @@ import {
 const FeatureFlagContext = createContext(GlobalFeatureFlags);
 
 /**
- * Supports an object of feature flag values with the `flags` prop, merging them
+ * Supports individual feature flag values as props, merging them
  * along with the current `FeatureFlagContext` to provide consumers to check if
  * a feature flag is enabled or disabled in a given React tree
  */
-function FeatureFlags({ children, flags = {} }) {
+function FeatureFlags({ children, ...flags }) {
   const parentScope = useContext(FeatureFlagContext);
+
+  const flagObject = Object.keys(flags).reduce((acc, key) => {
+    acc[key] = flags[key];
+    return acc;
+  }, {});
+
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
   const [scope, updateScope] = useState(() => {
-    const scope = createScope(flags);
+    const scope = createScope(flagObject);
     scope.mergeWithScope(parentScope);
     return scope;
   });
 
   if (parentScope !== prevParentScope) {
-    const scope = createScope(flags);
+    const scope = createScope(flagObject);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
     setPrevParentScope(parentScope);
   }
 
-  // We use a custom hook to detect if any of the keys or their values change
-  // for flags that are passed in. If they have changed, then we re-create the
-  // FeatureFlagScope using the new flags
-  useChangedValue(flags, isEqual, (changedFlags) => {
+  // We use a custom hook to detect if any of the individual flag props or their values change
+  // If any flags have changed, we re-create the FeatureFlagScope using the updated flags
+  useChangedValue(flagObject, isEqual, (changedFlags) => {
     const scope = createScope(changedFlags);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
@@ -63,11 +68,6 @@ function FeatureFlags({ children, flags = {} }) {
 
 FeatureFlags.propTypes = {
   children: PropTypes.node,
-
-  /**
-   * Provide the feature flags to enabled or disabled in the current React tree
-   */
-  flags: PropTypes.objectOf(PropTypes.bool),
 };
 
 /**

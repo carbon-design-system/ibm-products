@@ -461,8 +461,6 @@ export const TearsheetShell = React.forwardRef(
           [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
         };
       };
-      console.log(typeof aiLabel, 'type of aiLabel');
-
       return renderPortalUse(
         <FeatureFlags
           flags={{

@@ -39,7 +39,7 @@ interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
   onClose?: () => void;
-  onTagClose: (params: { label: string; id: any }) => void;
+  onTagClose?: (params: { label: string; id: any }) => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
   portalTarget?: ReactNode;
@@ -115,7 +115,7 @@ export const TagOverflowModal = ({
             <DismissibleTag
               key={id}
               text={label}
-              onClose={() => onTagClose({ label, id })}
+              onClose={() => onTagClose?.({ label, id })}
             />
           ) : (
             <Tag key={id}>{label}</Tag>

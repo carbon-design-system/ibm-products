@@ -59,8 +59,8 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--focused {
-  border: 2px solid $focus;
   background: $field-01;
+  outline: 2px solid $focus;
 }
 
 .#{$block-class}__text-input {

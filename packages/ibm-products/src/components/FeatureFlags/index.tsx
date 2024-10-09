@@ -29,23 +29,28 @@ const FeatureFlagContext = createContext(GlobalFeatureFlags);
  * along with the current `FeatureFlagContext` to provide consumers to check if
  * a feature flag is enabled or disabled in a given React tree
  */
-function FeatureFlags({ children, ...flags }) {
+function FeatureFlags({ children, flags = {}, ...newFlags }) {
   const parentScope = useContext(FeatureFlagContext);
 
-  const flagObject = Object.keys(flags).reduce((acc, key) => {
-    acc[key] = flags[key];
+  const newFlagsObject = Object.keys(newFlags).reduce((acc, key) => {
+    acc[key] = newFlags[key];
     return acc;
   }, {});
 
+  const combinedFlags = {
+    ...newFlagsObject,
+    ...flags,
+  };
+
   const [prevParentScope, setPrevParentScope] = useState(parentScope);
   const [scope, updateScope] = useState(() => {
-    const scope = createScope(flagObject);
+    const scope = createScope(combinedFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   });
 
   if (parentScope !== prevParentScope) {
-    const scope = createScope(flagObject);
+    const scope = createScope(combinedFlags);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
     setPrevParentScope(parentScope);
@@ -53,7 +58,7 @@ function FeatureFlags({ children, ...flags }) {
 
   // We use a custom hook to detect if any of the individual flag props or their values change
   // If any flags have changed, we re-create the FeatureFlagScope using the updated flags
-  useChangedValue(flagObject, isEqual, (changedFlags) => {
+  useChangedValue(combinedFlags, isEqual, (changedFlags) => {
     const scope = createScope(changedFlags);
     scope.mergeWithScope(parentScope);
     updateScope(scope);
@@ -68,6 +73,11 @@ function FeatureFlags({ children, ...flags }) {
 
 FeatureFlags.propTypes = {
   children: PropTypes.node,
+
+  /**
+   * Provide the feature flags to enabled or disabled in the current React tree, this has been deprecated. as we are going to pass individual boolean props for each flag.
+   */
+  flags: PropTypes.objectOf(PropTypes.bool),
 };
 
 /**

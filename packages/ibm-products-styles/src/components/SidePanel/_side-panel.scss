@@ -109,7 +109,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     left: 0;
     border-right: 1px solid $border-subtle-02;
   }
-  &.#{$block-class}.#{$block-class}--has-slug {
+  &.#{$block-class}.#{$block-class}--has-aiLabel {
     border-color: transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
@@ -195,13 +195,13 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar,
-  &.#{$block-class}--has-slug {
+  &.#{$block-class}--has-aiLabel {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar {
-    &.#{$block-class}--has-slug {
+    &.#{$block-class}--has-aiLabel {
       --#{$block-class}--title-padding-right: #{$spacing-11};
     }
   }
@@ -308,7 +308,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-03;
   }
 
-  &.#{$block-class}--has-slug .#{$block-class}--scrolls {
+  &.#{$block-class}--has-aiLabel .#{$block-class}--scrolls {
     @include utilities.ai-popover-gradient('default', 0, 'layer');
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
@@ -362,7 +362,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     height: $spacing-08;
   }
 
-  .#{$block-class}__slug-and-close {
+  .#{$block-class}__aiLabel-and-close {
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
@@ -464,7 +464,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   inset: 0;
 }
 
-.#{$block-class}--has-slug + .#{$block-class}__overlay {
+.#{$block-class}--has-aiLabel + .#{$block-class}__overlay {
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: $ai-overlay;
 }

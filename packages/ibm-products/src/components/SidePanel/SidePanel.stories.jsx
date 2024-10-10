@@ -26,8 +26,8 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
+  AILabel,
+  AILabelContent,
 } from '@carbon/react';
 
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
@@ -219,9 +219,9 @@ const actionSets = [
   [],
 ];
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -235,8 +235,8 @@ const sampleSlug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-    </SlugContent>
-  </Slug>
+    </AILabelContent>
+  </AILabel>
 );
 
 // eslint-disable-next-line react/prop-types
@@ -435,43 +435,26 @@ docs: {
       },
       options: [0, 1],
     },
+    aiLabel: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI slug',
+          1: 'with AI Slug',
+        },
+        default: 0,
+      },
+      options: [0, 1],
+    },
   },
   decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
-  const testRef = useRef();
-  const buttonRef = useRef();
-
-  return (
-    <>
-      <Button
-        ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        className={`${prefix}toggle`}
-      >
-        {open ? 'Close side panel' : 'Open side panel'}
-      </Button>
-      <SidePanel
-        {...args}
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        actions={actionSets[actions]}
-        ref={testRef}
-        slug={slug && sampleSlug}
-        launcherButtonRef={buttonRef}
-      >
-        {!minimalContent && <ChildrenContent />}
-      </SidePanel>
-    </>
-  );
-};
-
-const FirstElementDisabledTemplate = ({
+const SlideOverTemplate = ({
   minimalContent,
   actions,
+  aiLabel,
   slug,
   ...args
 }) => {
@@ -494,7 +477,44 @@ const FirstElementDisabledTemplate = ({
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
         ref={testRef}
-        slug={slug && sampleSlug}
+        aiLabel={aiLabel && sampleAILabel}
+        slug={slug && sampleAILabel}
+        launcherButtonRef={buttonRef}
+      >
+        {!minimalContent && <ChildrenContent />}
+      </SidePanel>
+    </>
+  );
+};
+
+const FirstElementDisabledTemplate = ({
+  minimalContent,
+  actions,
+  aiLabel,
+  slug,
+  ...args
+}) => {
+  const [open, setOpen] = useState(false);
+  const testRef = useRef();
+  const buttonRef = useRef();
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
+      <SidePanel
+        {...args}
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        actions={actionSets[actions]}
+        ref={testRef}
+        aiLabel={aiLabel && sampleAILabel}
+        slug={slug && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         {!minimalContent && (
@@ -533,7 +553,7 @@ const FirstElementDisabledTemplate = ({
 };
 
 // eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, slug, ...args }) => {
+const StepTemplate = ({ actions, aiLabel, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const buttonRef = useRef();
@@ -554,7 +574,8 @@ const StepTemplate = ({ actions, slug, ...args }) => {
         currentStep={currentStep}
         onNavigationBack={() => setCurrentStep((prev) => prev - 1)}
         actions={actionSets[actions]}
-        slug={slug && sampleSlug}
+        aiLabel={aiLabel && sampleAILabel}
+        slug={slug && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         <ChildrenContentWithSteps
@@ -567,7 +588,7 @@ const StepTemplate = ({ actions, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, slug, ...args }) => {
+const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef();
 
@@ -589,7 +610,8 @@ const SlideInTemplate = ({ actions, slug, ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         actions={actionSets[actions]}
-        slug={slug && sampleSlug}
+        aiLabel={aiLabel && sampleAILabel}
+        slug={slug && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         <ChildrenContent />

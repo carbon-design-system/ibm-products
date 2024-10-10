@@ -152,7 +152,7 @@ export default {
     onOverflowClick: {
       control: { type: 'function' },
       description:
-        'Function that runs on clicking the tag overflow button',
+        'An optional click handler that overrides the default functionality of displaying all tags in a modal',
     },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
@@ -279,6 +279,8 @@ WithCloseAndOverflowTags.args = {
   tags: manyTags,
   containerWidth: 500,
   overflowType: 'tag',
-  onOverflowClick: (data)=> {console.log('Hello world', data)},
+  onOverflowClick: (data) => {
+    console.log('Hello world', data);
+  },
   ...overflowAndModalStrings,
 };

@@ -107,7 +107,7 @@ export interface TagSetProps extends PropsWithChildren {
    */
   multiline?: boolean;
   /**
-   * Changes the behavior that occurs on selecting the overflow tag component
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
    */
   onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
@@ -519,7 +519,7 @@ TagSet.propTypes = {
    */
   multiline: PropTypes.bool,
   /**
-   * Changes the behavior that occurs on selecting the overflow tag component
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
    */
   onOverflowClick: PropTypes.func,
   /**

@@ -52,7 +52,7 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
-   * changes the behavior of clicking the overflow tags button
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
    */
   onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
@@ -82,7 +82,7 @@ interface TagSetOverflowProps {
   /**
    * Setter function for the popoverOpen state value
    */
-  setPopoverOpen?: ((value: boolean) => void) | undefined;
+  setPopoverOpen: (value: boolean) => void;
   /**
    * label for the overflow show all tags link
    */
@@ -120,21 +120,21 @@ export const TagSetOverflow = React.forwardRef(
 
     useClickOutside(ref || localRef, () => {
       if (popoverOpen) {
-        setPopoverOpen?.(false);
+        setPopoverOpen(false);
       }
     });
 
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
-      setPopoverOpen?.(false);
+      setPopoverOpen(false);
       onShowAllClick();
     };
 
     const handleEscKeyPress = (event) => {
       const { key } = event;
       if (key === 'Escape') {
-        setPopoverOpen?.(false);
+        setPopoverOpen(false);
       }
     };
 
@@ -144,7 +144,7 @@ export const TagSetOverflow = React.forwardRef(
       if (onOverflowClick) {
         onOverflowClick(overflowTags);
       } else {
-        setPopoverOpen?.(!popoverOpen);
+        setPopoverOpen(!popoverOpen);
       }
     };
 
@@ -163,7 +163,7 @@ export const TagSetOverflow = React.forwardRef(
         >
           <OperationalTag
             onClick={() => handleOverflowClick()}
-            className={cx(`${blockClass}__popover-trigger`)}
+            className={`${blockClass}__popover-trigger`}
             size={size}
             text={`+${overflowTags.length}`}
           />
@@ -193,7 +193,7 @@ export const TagSetOverflow = React.forwardRef(
           autoAlign={overflowAutoAlign}
         >
           <OperationalTag
-            onClick={() => setPopoverOpen?.(!popoverOpen)}
+            onClick={() => setPopoverOpen(!popoverOpen)}
             className={cx(`${blockClass}__popover-trigger`)}
             size={size}
             text={`+${overflowTags.length}`}
@@ -263,7 +263,7 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Changes the behavior that occurs on selecting the overflow tag component
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
    */
   onOverflowClick: PropTypes.func,
   /**
@@ -307,7 +307,7 @@ TagSetOverflow.propTypes = {
   /**
    * Setter function for the popoverOpen state value
    */
-  setPopoverOpen: PropTypes.func,
+  setPopoverOpen: PropTypes.func.isRequired,
   /**
    * label for the overflow show all tags link
    */

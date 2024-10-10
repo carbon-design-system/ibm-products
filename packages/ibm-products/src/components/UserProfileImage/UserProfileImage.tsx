@@ -218,9 +218,7 @@ export let UserProfileImage = React.forwardRef<
           label={tooltipText}
           className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
-          <TooltipTrigger className={''}>
-            {renderUserProfileImage()}
-          </TooltipTrigger>
+          <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
         </Tooltip>
       ) : (
         renderUserProfileImage()

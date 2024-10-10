@@ -279,8 +279,5 @@ WithCloseAndOverflowTags.args = {
   tags: manyTags,
   containerWidth: 500,
   overflowType: 'tag',
-  onOverflowClick: (data) => {
-    console.log('Hello world', data);
-  },
   ...overflowAndModalStrings,
 };

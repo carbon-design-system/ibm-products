@@ -185,7 +185,6 @@ const Template = (argsIn) => {
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet
         {...args}
-        onOverflowClick={args.onOverflowClick}
         allTagsModalTarget={
           allTagsModalTargetCustomDomNode ? ref.current : undefined
         }

@@ -2,6 +2,14 @@ import React, { createContext, useReducer } from 'react';
 
 export const themeData = [
   {
+    text: 'System W/90',
+    value: 'carbon-theme--user-preference-white-90',
+  },
+  {
+    text: 'System 10/100',
+    value: 'carbon-theme--user-preference-10-100',
+  },
+  {
     text: 'White',
     value: 'carbon-theme--white',
   },
@@ -22,17 +30,16 @@ export const themeData = [
 export const ThemeContext = createContext();
 
 const initialState = {
-  currentTheme: themeData[0],
+  currentTheme: themeData[1],
 };
 
 const themeReducer = (state, action) => {
   switch (action.type.value) {
+    case 'carbon-theme--user-preference-white-90':
+    case 'carbon-theme--user-preference-10-100':
     case 'carbon-theme--white':
-      return { currentTheme: action.type };
     case 'carbon-theme--g10':
-      return { currentTheme: action.type };
     case 'carbon-theme--g90':
-      return { currentTheme: action.type };
     case 'carbon-theme--g100':
       return { currentTheme: action.type };
     default:

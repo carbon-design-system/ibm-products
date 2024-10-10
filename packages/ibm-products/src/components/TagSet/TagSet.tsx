@@ -65,6 +65,10 @@ export interface TagSetProps extends PropsWithChildren {
    */
   align?: Align;
   /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel?: string;
+  /**
    * label text for the show all search.
    */
   allTagsModalSearchLabel?: string;
@@ -155,6 +159,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
+      allTagsModalAriaLabel,
       allTagsModalTitle = 'All tags',
       allTagsModalSearchLabel = 'Search all tags',
       allTagsModalSearchPlaceholderText = 'Search all tags',
@@ -423,6 +428,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             open={showAllModalOpen}
             title={allTagsModalTitle}
             onClose={handleModalClose}
+            modalAriaLabel={allTagsModalAriaLabel}
             searchLabel={allTagsModalSearchLabel}
             searchPlaceholder={allTagsModalSearchPlaceholderText}
             portalTarget={allTagsModalTarget}
@@ -469,6 +475,10 @@ TagSet.propTypes = {
    * align the Tags displayed by the TagSet. Default start.
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel: PropTypes.string,
   /**
    * label text for the show all search.
    */

@@ -88,6 +88,14 @@ export interface TearsheetProps extends PropsWithChildren {
   hasCloseIcon?: boolean;
 
   /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions?: ReactNode;
+
+  /**
    * The content for the influencer section of the tearsheet, displayed
    * alongside the main content. This is typically a menu, or filter, or
    * progress indicator, or similar.
@@ -298,6 +306,14 @@ Tearsheet.propTypes = {
    */
   /**@ts-ignore */
   hasCloseIcon: PropTypes.bool,
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions: PropTypes.element,
 
   /**
    * The content for the influencer section of the tearsheet, displayed

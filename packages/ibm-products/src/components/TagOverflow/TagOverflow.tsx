@@ -52,6 +52,7 @@ export interface TagOverflowItem {
 
 export interface TagOverflowProps {
   align?: 'start' | 'center' | 'end';
+  allTagsModalAriaLabel?: string;
   allTagsModalSearchLabel?: string;
   allTagsModalSearchPlaceholderText?: string;
   allTagsModalTarget?: ReactNode;
@@ -91,6 +92,7 @@ export let TagOverflow = forwardRef(
   (props: TagOverflowProps, ref: Ref<HTMLDivElement>) => {
     const {
       align = 'start',
+      allTagsModalAriaLabel,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
@@ -311,6 +313,7 @@ export let TagOverflow = forwardRef(
                 allTags={items}
                 open={showAllModalOpen}
                 title={allTagsModalTitle}
+                modalAriaLabel={allTagsModalAriaLabel}
                 onClose={handleModalClose}
                 overflowType={overflowType}
                 searchLabel={allTagsModalSearchLabel}
@@ -351,6 +354,10 @@ TagOverflow.propTypes = {
    * align the Tags displayed by the TagSet. Default start.
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel: PropTypes.string,
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */

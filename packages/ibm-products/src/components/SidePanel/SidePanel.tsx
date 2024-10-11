@@ -670,7 +670,7 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}--right-placement`]: placement === 'right',
         [`${blockClass}--left-placement`]: placement === 'left',
         [`${blockClass}--slide-in`]: slideIn,
-        [`${blockClass}--has-aiLabel`]: !!aiLabel || !!slug,
+        [`${blockClass}--has-ai-label`]: !!aiLabel || !!slug,
         [`${blockClass}--condensed-actions`]: condensedActions,
         [`${blockClass}--has-overlay`]: includeOverlay,
       },
@@ -762,7 +762,7 @@ export let SidePanel = React.forwardRef(
           {/* title */}
           {title && title.length && renderTitle()}
           {/* aiLabel and close */}
-          <div className={`${blockClass}__aiLabel-and-close`}>
+          <div className={`${blockClass}__ai-label-and-close`}>
             {normalizedAILabel}
             <IconButton
               className={`${blockClass}__close-button`}

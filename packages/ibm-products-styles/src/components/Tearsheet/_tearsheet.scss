@@ -111,7 +111,7 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
     .#{$block-class}__container,
-  &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-aiLabel
+  &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-ai-label
     .#{$block-class}__container {
     border: 1px solid transparent;
     border-bottom: 0;
@@ -279,14 +279,14 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide
     .#{$block-class}__header.#{$block-class}__header--with-close-icon,
   &.#{$block-class}--has-slug .#{$block-class}__header.#{$block-class}__header,
-  &.#{$block-class}--has-aiLabel
+  &.#{$block-class}--has-ai-label
     .#{$block-class}__header.#{$block-class}__header {
     padding-inline-end: $spacing-11;
   }
 
   &.#{$block-class}--wide.#{$block-class}--has-slug
     .#{$block-class}__header.#{$block-class}__header--with-close-icon,
-  &.#{$block-class}--wide.#{$block-class}--has-aiLabel
+  &.#{$block-class}--wide.#{$block-class}--has-ai-label
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
     /* spacing 11 plus additional space for slug/close */
     /* stylelint-disable-next-line carbon/layout-token-use */
@@ -369,7 +369,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--has-slug .#{$block-class}__content,
-  &.#{$block-class}--has-aiLabel .#{$block-class}__content {
+  &.#{$block-class}--has-ai-label .#{$block-class}__content {
     @include utilities.ai-popover-gradient('default', 0);
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
@@ -426,14 +426,14 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--has-slug,
-  &.#{$block-class}--has-aiLabel {
+  &.#{$block-class}--has-ai-label {
     /* stylelint-disable-next-line carbon/theme-token-use */
     --overlay-color: #{$ai-overlay};
   }
 
   &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
     .#{$carbon-prefix}--slug,
-  &.#{$block-class}--has-aiLabel:not(.#{$block-class}--has-close)
+  &.#{$block-class}--has-ai-label:not(.#{$block-class}--has-close)
     .#{$carbon-prefix}--slug {
     inset-inline-end: 0;
     margin-block: 6px;

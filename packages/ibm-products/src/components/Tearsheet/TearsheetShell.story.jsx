@@ -72,7 +72,7 @@ const dummyContent = (
 );
 
 const sampleAILabel = (
-  <AILabel className="aiLabel-container" size="xs">
+  <AILabel className="ai-label-container" size="xs">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

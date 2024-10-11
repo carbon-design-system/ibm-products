@@ -480,7 +480,7 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--wide`]: wide,
               [`${bc}--narrow`]: !wide,
               [`${bc}--has-slug`]: deprecated_slug,
-              [`${bc}--has-aiLabel`]: aiLabel,
+              [`${bc}--has-ai-label`]: aiLabel,
               [`${bc}--has-close`]: effectiveHasCloseIcon,
             })}
             slug={aiLabel || deprecated_slug}

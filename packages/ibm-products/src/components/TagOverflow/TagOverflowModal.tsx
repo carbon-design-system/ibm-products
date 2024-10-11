@@ -26,6 +26,8 @@ const blockClass = `${pkg.prefix}--tag-overflow-modal`;
 
 // Default values for props
 const defaults = {
+  // required for accessibility if using hasScrollingContent
+  modalAriaLabel: 'List of all tags',
   // marked as required by TagSet if needed, default used to satisfy <Search /> component
   searchLabel: '',
 };
@@ -37,6 +39,7 @@ type AllTags = (TagType & Omit<React.ComponentProps<Tag>, 'filter'>)[];
 interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
+  modalAriaLabel?: string;
   onClose?: () => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
@@ -52,6 +55,7 @@ export const TagOverflowModal = ({
   allTags,
   className,
   title,
+  modalAriaLabel = defaults.modalAriaLabel,
   onClose,
   open,
   overflowType,
@@ -104,7 +108,12 @@ export const TagOverflowModal = ({
           size="lg"
         />
       </ModalHeader>
-      <ModalBody className={`${blockClass}__body`} hasForm>
+      <ModalBody
+        className={`${blockClass}__body`}
+        hasForm
+        hasScrollingContent
+        aria-label={modalAriaLabel}
+      >
         {getFilteredItems().map(({ label, id, filter }) => {
           const isFilterable = overflowType === 'tag' ? filter : false;
           return (
@@ -113,8 +122,8 @@ export const TagOverflowModal = ({
             </Tag>
           );
         })}
+        <div className={`${blockClass}__fade`} />
       </ModalBody>
-      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };

@@ -149,6 +149,11 @@ export default {
       description:
         'This prop is only for storybook representation, and does not belong to `tagset` component, the size can be passed to each tag{} in tags[], the overflow tag takes the size of last tag{} in tags[]',
     },
+    onOverflowClick: {
+      control: { type: 'function' },
+      description:
+        'An optional click handler that overrides the default functionality of displaying all tags in a modal',
+    },
     allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
       description: 'Optional DOM node: Modal target defaults to document.body',

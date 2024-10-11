@@ -247,7 +247,7 @@ const HeaderRow = (
                   [`${blockClass}__header-actions-column`]: header?.isAction,
                   [`${blockClass}__with-slug`]:
                     header.slug && React.isValidElement(header?.slug),
-                  [`${blockClass}__with-aiLabel`]:
+                  [`${blockClass}__with-ai-label`]:
                     header.aiLabel && React.isValidElement(header?.aiLabel),
                 },
                 headerProps.className

@@ -19,7 +19,7 @@ import {
 
 export const ExampleAILabel = ({ align = 'bottom-right', ...rest }) => (
   <AILabel
-    className="aiLabel-container"
+    className="ai-label-container"
     autoAlign={false}
     align={align}
     {...rest}

@@ -144,7 +144,7 @@ const DatagridRow = (datagridState: DataGridState) => {
       getAsyncSubRows && row.depth > 0,
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
-    [`${blockClass}__aiLabel--row`]: isValidElement(row?.original?.aiLabel),
+    [`${blockClass}__ai-label--row`]: isValidElement(row?.original?.aiLabel),
   });
 
   const withActionsColumn = headers
@@ -169,7 +169,7 @@ const DatagridRow = (datagridState: DataGridState) => {
           row?.original?.aiLabel ? (
             <td
               className={cx(`${blockClass}__table-row-ai-enabled`, {
-                [`${blockClass}__aiLabel--expanded`]: row.isExpanded,
+                [`${blockClass}__ai-label--expanded`]: row.isExpanded,
               })}
             >
               <DatagridAILabel aiLabel={row?.original?.aiLabel} />
@@ -225,7 +225,7 @@ const DatagridRow = (datagridState: DataGridState) => {
                     associatedHeader &&
                     associatedHeader.length &&
                     isValidElement(associatedHeader[0]?.slug),
-                  [`${blockClass}__aiLabel--cell`]:
+                  [`${blockClass}__ai-label--cell`]:
                     associatedHeader &&
                     associatedHeader.length &&
                     isValidElement(associatedHeader[0]?.aiLabel),

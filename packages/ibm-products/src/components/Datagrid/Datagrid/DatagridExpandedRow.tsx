@@ -37,7 +37,7 @@ const DatagridExpandedRow =
       <tr
         className={cx(`${blockClass}__expanded-row`, {
           [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
-          [`${blockClass}__aiLabel--row`]: isValidElement(
+          [`${blockClass}__ai-label--row`]: isValidElement(
             row?.original?.aiLabel
           ),
         })}

@@ -57,7 +57,7 @@ export default {
   Header: 'Visits',
   accessor: 'visits',
   aiLabel: (
-    <AILabel className="aiLabel-container" autoAlign={false} align="bottom-right">
+    <AILabel className="ai-label-container" autoAlign={false} align="bottom-right">
       <AILabelContent>
         ...
         ...

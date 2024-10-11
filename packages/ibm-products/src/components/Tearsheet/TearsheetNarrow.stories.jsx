@@ -308,6 +308,7 @@ fullyLoaded.args = {
   title,
   actions: 0,
   aiLabel: 1,
+  slug: 0,
 };
 
 export const stacked = StackedTemplate.bind({});

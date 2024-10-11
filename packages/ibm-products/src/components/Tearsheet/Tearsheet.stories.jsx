@@ -642,6 +642,7 @@ fullyLoaded.args = {
   title,
   actions: 0,
   aiLabel: 1,
+  slug: 0,
 };
 
 // eslint-disable-next-line react/prop-types

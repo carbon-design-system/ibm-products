@@ -57,6 +57,8 @@
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
+    "storybook-wc": "cd packages/ibm-products-web-components && yarn storybook",
+    "storybook-wc:build": "cd packages/ibm-products-web-components && run-s build build:storybook",
     "sync": "carbon-cli sync",
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write --loglevel=silent",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
@@ -116,7 +118,8 @@
     "cheerio": "1.0.0-rc.10",
     "braces": "^3.0.3",
     "micromatch": "4.0.8",
-    "ws": "^8.17.1"
+    "ws": "^8.17.1",
+    "@carbon/ibm-products-styles": "^2.47.0"
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",

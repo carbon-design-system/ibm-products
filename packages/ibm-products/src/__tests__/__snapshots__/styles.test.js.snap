@@ -3491,7 +3491,6 @@ th.c4p--datagrid__select-all-toggle-on.button {
   /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 }
 .c4p--datagrid__datagridWrap-simple :global .bx--pagination {
-  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   overflow-x: unset;
 }
 

@@ -14,6 +14,10 @@ import {
   TEARSHEET_WIDTH,
 } from './tearsheet';
 import './index';
+import '@carbon/web-components/es/components/tabs/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
+import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/textarea/index.js';

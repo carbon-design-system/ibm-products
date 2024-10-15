@@ -1924,7 +1924,6 @@ __metadata:
     "@storybook/addon-storysource": "npm:^8.2.8"
     "@storybook/blocks": "npm:^8.2.8"
     "@storybook/manager-api": "npm:^8.3.4"
-    "@storybook/theming": "npm:^8.3.4"
     "@storybook/web-components": "npm:^8.2.8"
     "@storybook/web-components-vite": "npm:^8.2.8"
     "@types/jest": "npm:^29.5.13"
@@ -7492,15 +7491,6 @@ __metadata:
   peerDependencies:
     storybook: ^8.3.3
   checksum: e0560e617158e57cb3efb61a1405d9a5351b353e1a685f5647a9bf8b491e481297316c6748ccff3eaae65324608802bb394ca7d6a809d33e9671c49d80a331ab
-  languageName: node
-  linkType: hard
-
-"@storybook/theming@npm:^8.3.4":
-  version: 8.3.4
-  resolution: "@storybook/theming@npm:8.3.4"
-  peerDependencies:
-    storybook: ^8.3.4
-  checksum: eb38c1621a0ec4c25c086f3d9a3f78e10e7fc906e40114a4527848a88c2c7dd77e8478f8d894cfb8df632e62beb4bfa1d9c8fd0b978a74176e4f7fa244b8057f
   languageName: node
   linkType: hard
 

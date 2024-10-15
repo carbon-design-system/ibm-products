@@ -258,7 +258,8 @@ export const Card = forwardRef(
             [`${blockClass}__productive`]: productive,
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
-            [`${blockClass}--has-aiLabel`]: !!aiLabel || !!slug,
+            [`${blockClass}--has-slug`]: !!slug,
+            [`${blockClass}--has-ai-label`]: !!aiLabel,
           },
           className
         ),

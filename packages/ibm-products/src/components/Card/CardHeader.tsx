@@ -92,7 +92,7 @@ export const CardHeader = ({
 
   const hollowAiIcon = (
     <svg
-      className={`${carbonPrefix}--slug ${carbonPrefix}--slug-icon`}
+      className={`${carbonPrefix}--slug ${carbonPrefix}--slug-icon`} // NOTE: We cannot change this to ai-label until carbon changes their classnames on their end
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -116,7 +116,7 @@ export const CardHeader = ({
     ) {
       normalizedAiLabel = hollowAiIcon;
     } else {
-      const element = aiLabel ?? slug;
+      const element = aiLabel || slug;
       normalizedAiLabel = React.cloneElement(
         element as React.ReactElement<any>,
         {
@@ -132,7 +132,8 @@ export const CardHeader = ({
       <div
         className={cx([
           `${headerClass}-container`,
-          { [`${headerClass}-container--has-aiLabel`]: !!aiLabel || !!slug },
+          { [`${headerClass}-container--has-slug`]: !!slug },
+          { [`${headerClass}-container--has-ai-label`]: !!aiLabel },
           { [`${headerClass}-container--has-actions`]: !!hasActions },
           {
             [`${headerClass}-container--large-tile-or-label`]:

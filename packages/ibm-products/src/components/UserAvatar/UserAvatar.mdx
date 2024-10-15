@@ -11,7 +11,24 @@ import * as UserAvatarStories from './UserAvatar.stories';
 - [Example usage](#example-usage)
 - [Component API](#component-api)
 
-## Overview
+## Migration from `UserProfileImage`
+
+If you are currently using `UserProfileImage` you can use the following guide to
+migrate to the newer `UserAvatar` component.
+
+The following props have been updated in `UserAvatar`:
+
+`icon` has been replaced with `renderIcon`
+
+`backgroundColor` remains the same but the values have changed. To see the new
+values please refer to the component API table below.
+
+`initials` has been replaced with `name`. Please refer to the component API
+table below to see the new specifications.
+
+`sm` has been removed from the options for `size`
+
+`theme` and `kind` have been removed
 
 {/* TODO: Overview. */}
 

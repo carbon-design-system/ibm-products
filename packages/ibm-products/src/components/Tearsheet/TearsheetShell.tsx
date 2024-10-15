@@ -358,8 +358,7 @@ export const TearsheetShell = React.forwardRef(
 
         setTimeout(() => firstElement?.focus(), 0);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
+    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

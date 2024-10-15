@@ -87,7 +87,6 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
               <stop offset={0.93} stopColor="#404040" stopOpacity={0.35} />
               <stop offset={0.97} stopColor="#262626" stopOpacity={0} />
             </linearGradient>
-            <style>{`.prefix__f_dark_${svgId}{fill:#525252}`}</style>
           </defs>
           <path fill="none" d="M0 0h80v80H0z" />
           <path
@@ -107,7 +106,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
             fill={`url(#prefix__c_dark_${svgId})`}
           />
           <path
-            className={`prefix__f_dark_${svgId}`}
+            fill="#525252"
             d="M57.99 37.07l-.01 3.9L18.03 17.9l.01-3.9 39.95 23.07zM57.99 45.11l-.01 3.91-39.95-23.07.01-3.9 39.95 23.06zM44.62 45.04l-.01 3.9L18.03 33.6l.01-3.9 26.58 15.34z"
           />
           <path
@@ -232,7 +231,6 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
               <stop offset={0.95} stopColor="#d7d7d7" stopOpacity={0.14} />
               <stop offset={0.97} stopColor="#d0d0d0" stopOpacity={0} />
             </linearGradient>
-            <style>{`.prefix__f_${svgId}{fill:url(#prefix__e_${svgId})}`}</style>
           </defs>
           <path fill="none" d="M0 0h80v80H0z" />
           <path
@@ -252,7 +250,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
             fill={`url(#prefix__d_${svgId})`}
           />
           <path
-            className={`prefix__f_${svgId}`}
+            fill={`url(#prefix__e_${svgId})`}
             d="M59.48 28.88a3.17 3.17 0 011.42 2.47l-.1 36.08c0 .9-.65 1.26-1.42.81l-26.7-15.4-2.26 4.22a.9.9 0 01-1.33.28 3.07 3.07 0 01-1.22-1.53l-2.33-7.09-9-5.2a3.15 3.15 0 01-1.43-2.46L15.23 5c0-.9.64-1.27 1.43-.81z"
           />
           <path
@@ -260,7 +258,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
             fill={`url(#prefix__f_${svgId})`}
           />
           <path
-            className={`prefix__f_${svgId}`}
+            fill={`url(#prefix__e_${svgId})`}
             d="M59.48 28.88a3.17 3.17 0 011.42 2.47l-.1 36.08c0 .9-.65 1.26-1.42.81l-26.7-15.4-2.26 4.22a.9.9 0 01-1.33.28 3.07 3.07 0 01-1.22-1.53l-2.33-7.09-9-5.2a3.15 3.15 0 01-1.43-2.46L15.23 5c0-.9.64-1.27 1.43-.81z"
           />
           <path

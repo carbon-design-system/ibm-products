@@ -52,6 +52,10 @@ interface TagSetOverflowProps {
    */
   className?: string;
   /**
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
+   */
+  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
+  /**
    * function to execute on clicking show all
    */
   onShowAllClick: () => void;
@@ -78,7 +82,7 @@ interface TagSetOverflowProps {
   /**
    * Setter function for the popoverOpen state value
    */
-  setPopoverOpen?: ((value: boolean) => void) | undefined;
+  setPopoverOpen: (value: boolean) => void;
   /**
    * label for the overflow show all tags link
    */
@@ -95,6 +99,7 @@ export const TagSetOverflow = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
+      onOverflowClick,
       className,
       onShowAllClick,
       overflowAlign = 'bottom',
@@ -115,23 +120,56 @@ export const TagSetOverflow = React.forwardRef(
 
     useClickOutside(ref || localRef, () => {
       if (popoverOpen) {
-        setPopoverOpen?.(false);
+        setPopoverOpen(false);
       }
     });
 
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
-      setPopoverOpen?.(false);
+      setPopoverOpen(false);
       onShowAllClick();
     };
 
     const handleEscKeyPress = (event) => {
       const { key } = event;
       if (key === 'Escape') {
-        setPopoverOpen?.(false);
+        setPopoverOpen(false);
       }
     };
+
+    const handleOverflowClick = () => {
+      // If a custom overflow function is provided then trigger that function
+      // on clicking the overflow
+      if (onOverflowClick) {
+        onOverflowClick(overflowTags);
+      } else {
+        setPopoverOpen(!popoverOpen);
+      }
+    };
+
+    if (onOverflowClick) {
+      return (
+        <span
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
+          aria-hidden={overflowTags.length === 0}
+          className={cx(`${blockClass}`, {
+            [`${blockClass}--hidden`]: overflowTags.length === 0,
+          })}
+          ref={ref || localRef}
+        >
+          <OperationalTag
+            onClick={() => handleOverflowClick()}
+            className={`${blockClass}__popover-trigger`}
+            size={size}
+            text={`+${overflowTags.length}`}
+          />
+        </span>
+      );
+    }
 
     return (
       <span
@@ -155,7 +193,7 @@ export const TagSetOverflow = React.forwardRef(
           autoAlign={overflowAutoAlign}
         >
           <OperationalTag
-            onClick={() => setPopoverOpen?.(!popoverOpen)}
+            onClick={() => setPopoverOpen(!popoverOpen)}
             className={cx(`${blockClass}__popover-trigger`)}
             size={size}
             text={`+${overflowTags.length}`}
@@ -225,6 +263,10 @@ TagSetOverflow.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
+   */
+  onOverflowClick: PropTypes.func,
+  /**
    * function to execute on clicking show all
    */
   onShowAllClick: PropTypes.func.isRequired,
@@ -265,7 +307,7 @@ TagSetOverflow.propTypes = {
   /**
    * Setter function for the popoverOpen state value
    */
-  setPopoverOpen: PropTypes.func,
+  setPopoverOpen: PropTypes.func.isRequired,
   /**
    * label for the overflow show all tags link
    */

@@ -201,7 +201,7 @@ export let DataSpreadsheet = React.forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const multiKeyTrackingRef: LegacyRef<HTMLDivElement> = useRef(null);
-    const localRef = useRef();
+    const localRef = useRef(undefined);
     const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
     const [currentColumns, setCurrentColumns] = useState<object>(columns);

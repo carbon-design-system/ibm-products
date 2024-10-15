@@ -206,7 +206,7 @@ export let InterstitialScreen = React.forwardRef<
     }: InterstitialScreenProps,
     ref
   ) => {
-    const backupRef = useRef();
+    const backupRef = useRef(undefined);
     const _forwardedRef = ref || backupRef;
     const scrollRef = useRef<any>();
     const startButtonRef = useRef<HTMLElement>();

@@ -802,7 +802,7 @@ export const DataSpreadsheetBody = forwardRef(
       ]
     );
 
-    const spreadsheetBodyRef = useRef();
+    const spreadsheetBodyRef = useRef(undefined);
     return (
       <div
         ref={spreadsheetBodyRef as MutableRefObject<any>}

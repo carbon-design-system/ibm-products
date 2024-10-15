@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.7.0-rc.0...jest-config-ibm-cloud-cognitive@1.11.0-rc.0) (2024-10-14)
+
+
+### Bug Fixes
+
+* adds html output for coverage reporting ([#6150](https://github.com/carbon-design-system/ibm-products/issues/6150)) ([beaa94c](https://github.com/carbon-design-system/ibm-products/commit/beaa94c98a2df75f6773d810726fe1b6522658d2))
+* adds typescript to coverage report ([#6140](https://github.com/carbon-design-system/ibm-products/issues/6140)) ([2466c5b](https://github.com/carbon-design-system/ibm-products/commit/2466c5bb001f18ad065eb669f380cd32db0d0bfc))
+* temp workaround for target_spacing_sufficient rule ([#6166](https://github.com/carbon-design-system/ibm-products/issues/6166)) ([314a6d8](https://github.com/carbon-design-system/ibm-products/commit/314a6d835bc5335d750392156c6fbcdff25db85b))
+* update toHaveNoAxeViolations and remove skips ([#5955](https://github.com/carbon-design-system/ibm-products/issues/5955)) ([694128b](https://github.com/carbon-design-system/ibm-products/commit/694128bb707a2400d67e6618af3fea3f3ffba86f))
+
+
+
+
+
 # [1.10.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@1.10.0-rc.0...jest-config-ibm-cloud-cognitive@1.10.0) (2024-10-09)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

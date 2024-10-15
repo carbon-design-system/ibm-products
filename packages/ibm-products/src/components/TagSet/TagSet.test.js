@@ -177,7 +177,6 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    // const { container } =
     render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
@@ -191,6 +190,35 @@ describe(TagSet.displayName, () => {
     const closeButton = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
+  });
+
+  it('Tags set overflow trigger can be overridden, and does not show TagSetModal or overflow popup', async () => {
+    const visibleTags = 5;
+    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+
+    const overflowClickSpy = jest.fn();
+
+    const { queryByText } = render(
+      <TagSet
+        {...overflowAndModalStrings}
+        onOverflowClick={overflowClickSpy}
+        tags={tags}
+      />
+    );
+
+    const overFlowButton = queryByText(`+${tags.length - visibleTags}`);
+    // Ensure the number of visible elements are rendered on the screen
+    expect(overFlowButton).toBeInTheDocument();
+    // Clicking the overflow button causes the spyFunction to be called
+    await act(() => userEvent.click(overFlowButton));
+    expect(overflowClickSpy).toHaveBeenCalledTimes(1);
+
+    // Ensure the overflow popup is not rendered onto the screen
+    expect(queryByText('View all tags')).toBeNull();
+
+    // Ensure the modal is not rendered onto the screen
+    const modal = screen.queryByRole('presentation');
+    expect(modal).not.toBeInTheDocument();
   });
 
   it('Obeys max visible', async () => {

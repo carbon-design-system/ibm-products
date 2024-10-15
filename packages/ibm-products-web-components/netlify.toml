@@ -1,7 +1,7 @@
 # Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 [build]
 command = "yarn build:storybook"
-publish = "packages/ibm-products-web-components/storybook-static"
+publish = "storybook-static"
 
 [build.environment]
 YARN_ENABLE_GLOBAL_CACHE = "true"

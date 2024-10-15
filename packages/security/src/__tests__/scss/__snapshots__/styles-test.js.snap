@@ -31040,6 +31040,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   width: 16rem;
   border-right: 1px solid #393939;
   border-left: 1px solid #393939;
+  overflow-y: auto;
 }
 
 .bx--panel--overlay {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.73.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.73.2...@carbon/ibm-products@1.73.3) (2024-10-15)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#6212](https://github.com/carbon-design-system/ibm-products/issues/6212)) ([412d09d](https://github.com/carbon-design-system/ibm-products/commit/412d09ddeaa269d362ca08ec36c4a403bbae3a14))
+
+
+
+
+
 ## [1.73.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.73.1...@carbon/ibm-products@1.73.2) (2024-10-08)
 
 **Note:** Version bump only for package @carbon/ibm-products

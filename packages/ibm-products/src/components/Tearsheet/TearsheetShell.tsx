@@ -266,8 +266,10 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener, specifiedElement, allElements } =
-      useFocus(modalRef, selectorPrimaryFocus);
+    const { firstElement, keyDownListener, specifiedElement } = useFocus(
+      modalRef,
+      selectorPrimaryFocus
+    );
     const modalRefValue = modalRef.current;
 
     // Function to strip html tags out of a string.
@@ -357,7 +359,7 @@ export const TearsheetShell = React.forwardRef(
         setTimeout(() => firstElement?.focus(), 0);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open, allElements]);
+    }, [open]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

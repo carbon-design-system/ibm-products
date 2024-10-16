@@ -14,7 +14,7 @@ const useFlexResize = (hooks) => {
     const { enableSpacerColumn } = instance;
     useEffect(() => {
       setSpacerColumn(enableSpacerColumn);
-    });
+    }, [enableSpacerColumn]);
   };
   const spacer = {
     id: 'spacer',

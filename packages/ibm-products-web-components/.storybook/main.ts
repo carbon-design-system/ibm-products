@@ -4,7 +4,20 @@ import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-
 
 const config = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: [
+    '@storybook/addon-links',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
+  ],
   framework: {
     name: '@storybook/web-components-vite',
     options: {},

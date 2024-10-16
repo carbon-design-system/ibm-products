@@ -18,6 +18,7 @@ collect:
         - align
         - allPageRowsLabel
         - allRowsLabel
+        - allTagsModalAriaLabel
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
         - allTagsModalSearchThreshold
@@ -131,6 +132,7 @@ collect:
         - hasCloseIcon
         - hasCustomRowHeader
         - hasFieldset
+        - headerActions
         - headerGroups
         - HeaderRow
         - headers
@@ -227,6 +229,7 @@ collect:
         - onMouseEnter
         - onMouseLeave
         - onNext
+        - onOverflowClick
         - onOverflowTagChange
         - onPrimaryButtonClick
         - onRemove
@@ -357,6 +360,7 @@ collect:
         - totalVisibleColumns
         - translateWithId
         - translateWithIdBatchActions
+        - triggerButtonRef
         - truncate
         - truncateValue
         - type
@@ -768,7 +772,6 @@ collect:
         - secondsAgoText
         - settingsIconDescription
         - todayLabel
-        - triggerButtonRef
         - yearAgoText
         - yearsAgoText
         - yesterdayAtText
@@ -883,8 +886,6 @@ collect:
         - width
         # TagOverflow
         - tagComponent
-        # TearsheetShell
-        - headerActions
         # Toolbar
         - vertical
         # ToolbarButton

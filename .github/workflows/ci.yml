@@ -92,7 +92,9 @@ jobs:
       - name: Install
         run: yarn
       - name: CI tests for c4p
-        run: yarn ci-check:test:c4p
+        run: yarn ci-check:test:c4p --collectCoverage
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673 # v4.5.0
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
   test-community:
@@ -110,7 +112,8 @@ jobs:
         with:
           path: '**/node_modules'
           key:
-            test-community-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+            test-community-modules-${{ runner.os }}-${{ hashFiles('yarn.lock')
+            }}
       - name: Install
         run: yarn
       - name: CI tests for community

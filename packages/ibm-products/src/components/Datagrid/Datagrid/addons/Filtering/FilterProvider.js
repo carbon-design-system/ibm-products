@@ -18,7 +18,7 @@ import {
   MULTISELECT,
 } from './constants';
 
-export const FilterContext = createContext(undefined);
+export const FilterContext = createContext();
 
 const EventEmitter = {
   events: {},

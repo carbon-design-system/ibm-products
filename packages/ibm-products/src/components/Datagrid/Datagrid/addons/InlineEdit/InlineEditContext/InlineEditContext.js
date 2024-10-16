@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { returnUpdatedActiveCell } from './returnUpdatedActiveCell';
 import { getCellIdAsObject } from './getCellIdAsObject';
 
-export const InlineEditContext = createContext(undefined);
+export const InlineEditContext = createContext();
 
 const inlineEditReducer = (state, action) => {
   switch (action.type) {

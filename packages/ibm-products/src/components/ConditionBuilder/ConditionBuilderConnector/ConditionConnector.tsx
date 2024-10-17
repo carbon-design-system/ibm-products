@@ -59,8 +59,6 @@ const ConditionConnector = ({
       <ConditionBuilderButton label={operator} />
     </span>
   ) : (
-    // <div className={className} {...rest}>
-
     <ConditionBuilderItem
       label={operator}
       title={connectorText}
@@ -84,8 +82,6 @@ const ConditionConnector = ({
         onChange={onChangeHandler}
       />
     </ConditionBuilderItem>
-
-    // </div>
   );
 };
 

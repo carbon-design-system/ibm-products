@@ -150,7 +150,7 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const newGroup: ConditionGroup = {
-      statement: 'ifAll', // 'if|exclude if',
+      statement: 'ifAll',
       groupOperator: 'and',
       id: uuidv4(),
       conditions: [

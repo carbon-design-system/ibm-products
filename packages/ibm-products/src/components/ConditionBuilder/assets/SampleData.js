@@ -18,25 +18,25 @@ export const sampleDataStructure_Hierarchical = {
         {
           property: 'region',
           operator: 'is',
-          value: 'IL',
+          value: { id: 'India', label: 'India' },
           id: uuidv4(),
         },
         {
           property: 'delivery',
           operator: 'is',
-          value: 'processing',
+          value: { id: 'Processing', label: 'Processing' },
           id: uuidv4(),
         },
         {
           property: 'delivery',
           operator: 'is',
-          value: 'processing',
+          value: { id: 'Processing', label: 'Processing' },
           id: uuidv4(),
         },
         {
           property: 'delivery',
           operator: 'is',
-          value: 'processing',
+          value: { id: 'Processing', label: 'Processing' },
           id: uuidv4(),
         },
         //group object repeats
@@ -48,25 +48,25 @@ export const sampleDataStructure_Hierarchical = {
             {
               property: 'region',
               operator: 'is',
-              value: 'IL',
+              value: { id: 'India', label: 'India' },
               id: uuidv4(),
             },
             {
               property: 'delivery',
               operator: 'is',
-              value: 'processing',
+              value: { id: 'Processing', label: 'Processing' },
               id: uuidv4(),
             },
             {
               property: 'delivery',
               operator: 'is',
-              value: 'processing',
+              value: { id: 'Processing', label: 'Processing' },
               id: uuidv4(),
             },
             {
               property: 'delivery',
               operator: 'is',
-              value: 'processing',
+              value: { id: 'Processing', label: 'Processing' },
               id: uuidv4(),
             },
             //group object repeats
@@ -78,19 +78,19 @@ export const sampleDataStructure_Hierarchical = {
                 {
                   property: 'region',
                   operator: 'is',
-                  value: 'IL',
+                  value: { id: 'India', label: 'India' },
                   id: uuidv4(),
                 },
                 {
                   property: 'delivery',
                   operator: 'is',
-                  value: 'processing',
+                  value: { id: 'Processing', label: 'Processing' },
                   id: uuidv4(),
                 },
                 {
                   property: 'delivery',
                   operator: 'is',
-                  value: 'processing',
+                  value: { id: 'Processing', label: 'Processing' },
                   id: uuidv4(),
                 },
                 //group object repeats
@@ -108,13 +108,13 @@ export const sampleDataStructure_Hierarchical = {
         {
           property: 'continent',
           operator: 'is',
-          value: 'Asia',
+          value: { id: 'Asia', label: 'Asia' },
           id: uuidv4(),
         },
         {
           property: 'region',
           operator: 'is',
-          value: 'India',
+          value: { id: 'India', label: 'India' },
           id: uuidv4(),
         },
         {
@@ -144,7 +144,7 @@ export const sampleDataStructure_nonHierarchical = {
               id: 'Africa',
             },
             {
-              label: 'India',
+              label: { id: 'India', label: 'India' },
               id: 'Ind',
             },
           ],
@@ -153,7 +153,7 @@ export const sampleDataStructure_nonHierarchical = {
         {
           property: 'delivery',
           operator: 'is',
-          value: 'processing',
+          value: { id: 'Processing', label: 'Processing' },
           id: uuidv4(),
         },
         {

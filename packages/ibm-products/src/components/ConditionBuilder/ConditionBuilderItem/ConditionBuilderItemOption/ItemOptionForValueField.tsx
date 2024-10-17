@@ -65,6 +65,7 @@ export const ItemOptionForValueField = ({
     : [];
 
   useEffect(() => {
+    //this commented code is kept as intentional. Alternate approach to pass async options instead of getOptions callback.
     // if(rest['data-name'] == 'valueField'){
     //   const fetchData = async () => {
     //     const response = await config.options(conditionState);
@@ -153,6 +154,8 @@ export const ItemOptionForValueField = ({
       ? conditionState.property
       : propertyText;
   };
+  const preventDefault = (evt) => evt.preventDefault();
+
   if (!allOptions) {
     return <SelectSkeleton />;
   }
@@ -165,6 +168,7 @@ export const ItemOptionForValueField = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
+            onKeyDown={preventDefault}
           />
         </div>
       )}

@@ -18,6 +18,7 @@ import { CarouselItem } from './CarouselItem';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 export interface CarouselProps {
   /**
@@ -100,6 +101,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
   ) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const leftFadedEdgeRef = useRef<HTMLDivElement>(null);
+    const rightFadedEdgeRef = useRef<HTMLDivElement>(null);
     // Array of refs used to reference this component's children DOM elements
     const childElementsRef = useRef(
       Array(React.Children.count(children)).fill(useRef(null))
@@ -331,6 +334,18 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       ]
     );
 
+    useIsomorphicEffect(() => {
+      if (leftFadedEdgeRef?.current && leftFadedEdgeRef.current.style) {
+        leftFadedEdgeRef.current.style.background = `linear-gradient(90deg, ${leftFadedEdgeColor}, transparent)`;
+      }
+    }, [leftFadedEdgeRef, leftFadedEdgeColor]);
+
+    useIsomorphicEffect(() => {
+      if (rightFadedEdgeRef?.current && rightFadedEdgeRef.current.style) {
+        rightFadedEdgeRef.current.style.background = `linear-gradient(270deg, ${rightFadedEdgeColor}, transparent)`;
+      }
+    }, [rightFadedEdgeRef, rightFadedEdgeColor]);
+
     return (
       <div
         {...rest}
@@ -355,19 +370,15 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
           {leftFadedEdgeColor && (
             <div
+              ref={leftFadedEdgeRef}
               className={`${blockClass}__elements-container--scrolled`}
-              style={{
-                background: `linear-gradient(90deg, ${leftFadedEdgeColor}, transparent)`,
-              }}
             ></div>
           )}
 
           {rightFadedEdgeColor && (
             <div
+              ref={rightFadedEdgeRef}
               className={`${blockClass}__elements-container--scroll-max`}
-              style={{
-                background: `linear-gradient(270deg, ${rightFadedEdgeColor}, transparent)`,
-              }}
             ></div>
           )}
         </div>

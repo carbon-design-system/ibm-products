@@ -208,8 +208,8 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       }
     };
     const overlayPositionStyle = {
-      top: (positionTune?.y ?? 0) - 16,
-      left: (positionTune?.x ?? 0) - 16,
+      top: `${(positionTune?.y ?? 0) - 16}px`,
+      left: `${(positionTune?.x ?? 0) - 16}px`,
     };
 
     const contextValue = {
@@ -299,7 +299,15 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
             <Popover
               highContrast
               caret
-              style={{ position: 'absolute', ...overlayPositionStyle }}
+              ref={(el) => {
+                if (el && el?.style && overlayPositionStyle) {
+                  const combinedStyle = {
+                    position: 'absolute',
+                    ...overlayPositionStyle,
+                  };
+                  Object.assign(el.style, combinedStyle);
+                }
+              }}
               align={align as PopoverAlignment}
               autoAlign={autoAlign}
               open={isOpen}

@@ -124,7 +124,7 @@ export let CoachmarkStackHome = forwardRef<
     },
     ref
   ) => {
-    const buttonFocusRef = useRef<ButtonProps<any> | null>(null);
+    const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
     useEffect(() => {
       setTimeout(() => {
@@ -152,7 +152,7 @@ export let CoachmarkStackHome = forwardRef<
     function renderNavLink(
       index,
       label,
-      ref: React.RefObject<ButtonProps<any>> | null = null
+      ref: React.RefObject<ButtonProps<React.ElementType>> | null = null
     ) {
       return (
         <li key={index}>

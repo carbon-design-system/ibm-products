@@ -113,7 +113,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     },
     ref
   ) => {
-    const buttonFocusRef = useRef<ButtonProps<any>>();
+    const buttonFocusRef = useRef<ButtonProps<React.ElementType>>();
     const scrollRef = useRef<CarouselProps>();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(0);

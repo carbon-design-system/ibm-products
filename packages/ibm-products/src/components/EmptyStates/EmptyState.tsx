@@ -44,7 +44,7 @@ interface EmptyStateProps {
   action?: {
     kind?: 'primary' | 'secondary' | 'tertiary';
     renderIcon?: CarbonIconType;
-    onClick?: ButtonProps['onClick'];
+    onClick?: ButtonProps<React.ElementType>['onClick'];
     text?: string;
   };
 
@@ -162,9 +162,11 @@ EmptyState.propTypes = {
    * Empty state action button
    */
   action: PropTypes.shape({
+    /**@ts-ignore*/
     ...Button.propTypes,
     kind: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    /**@ts-ignore*/
     onClick: Button.propTypes.onClick,
     text: PropTypes.string,
   }),
@@ -196,6 +198,7 @@ EmptyState.propTypes = {
   /**
    * Empty state link object
    */
+  /**@ts-ignore*/
   link: PropTypes.shape({
     ...Link.propTypes,
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),

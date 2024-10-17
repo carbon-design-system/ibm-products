@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -19,29 +19,41 @@ const componentName = 'TooltipTrigger';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+export interface TooltipTriggerProps extends PropsWithChildren {
+  /**
+   * Provide an optional class to be applied to the containing node.
+   */
+  className?: string;
+}
+
 /**
  * This is an tooltip trigger as Carbon Tooltip requires an active element to work but provides
  * no blanked button.
  */
-export let TooltipTrigger = ({
-  children,
-  className,
-  // Collect any other property values passed in.
-  ...rest
-}) => {
-  return (
-    <button
-      type="button"
-      {...rest}
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className // Apply any supplied class names to the main HTML element.
-      )}
-    >
-      {children}
-    </button>
-  );
-};
+export let TooltipTrigger = React.forwardRef<
+  HTMLDivElement,
+  TooltipTriggerProps
+>(
+  ({
+    children,
+    className,
+    // Collect any other property values passed in.
+    ...rest
+  }) => {
+    return (
+      <button
+        type="button"
+        {...rest}
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className // Apply any supplied class names to the main HTML element.
+        )}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag.
 TooltipTrigger = pkg.checkComponentEnabled(TooltipTrigger, componentName);

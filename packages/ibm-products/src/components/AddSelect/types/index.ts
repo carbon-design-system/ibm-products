@@ -55,5 +55,5 @@ export interface SortOption {
   id?: string;
   direction?: string;
   attribute?: string;
-  itemText?: object;
+  itemText?: ReactNode;
 }

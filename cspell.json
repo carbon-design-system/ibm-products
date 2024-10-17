@@ -64,6 +64,7 @@
   ],
   "words": [
     "aboutmodal",
+    "accountibility",
     "actionbar",
     "apikey",
     "apikeymodal",
@@ -95,6 +96,7 @@
     "disttags",
     "dragbar",
     "draggable",
+    "explainability",
     "interstitialscreenviewmodule",
     "draghandle",
     "dragmode",
@@ -155,6 +157,7 @@
     "rowindex",
     "ruleset",
     "sbdocs",
+    "scenerio",
     "scrollend",
     "semibold",
     "serializers",

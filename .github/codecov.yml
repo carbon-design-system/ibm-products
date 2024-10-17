@@ -1,0 +1,30 @@
+coverage:
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
+
+# This is the configuration on how the codecov report layout will look like in PR's
+comment:
+  layout: 'header, diff, flags, components'
+
+component_management:
+  default_rules:
+    statuses:
+      - type: project
+        target: auto
+        threshold: 1%
+        branches:
+          - '!main'
+  individual_components:
+    - component_id: ibm-products
+      name: ibm-products
+      paths:
+        - ../packages/ibm-products/**
+    - component_id: ibm-products-web-components
+      name: ibm-products-web-components
+      paths:
+        - ../packages/ibm-products-web-components/**

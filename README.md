@@ -14,6 +14,7 @@
 [![Netlify status](https://img.shields.io/netlify/e8cd9972-0fc8-4c51-a911-e9a930ca6605)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-products)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)
+[![codecov](https://codecov.io/gh/carbon-design-system/ibm-products/graph/badge.svg?token=TKEL92HSUK)](https://codecov.io/gh/carbon-design-system/ibm-products)
 
 ## 🚀 Getting started
 

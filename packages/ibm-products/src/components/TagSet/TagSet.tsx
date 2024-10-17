@@ -24,6 +24,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { DismissibleTag } from '@carbon/react';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -58,6 +59,10 @@ type OverflowType = 'default' | 'tag';
 type TagType = {
   label: string;
   type?: keyof typeof tagTypes;
+  /**
+   * @deprecated Use the `onClose` function instead to render as a DismissibleTag
+   */
+  filter?: boolean;
 } & TagBaseProps;
 export interface TagSetProps extends PropsWithChildren {
   /**
@@ -203,7 +208,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       // create sizing tags
       setHiddenSizingTags(
         tags && tags.length > 0
-          ? tags.map(({ label, id, ...other }, index) => {
+          ? tags.map(({ label, id, filter, onClose, ...other }, index) => {
               return (
                 <div
                   key={index}
@@ -214,12 +219,20 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
                     }
                   }}
                 >
-                  <Tag
-                    {...other} // ensure id is not duplicated
-                    data-original-id={id}
-                  >
-                    {label}
-                  </Tag>
+                  {typeof onClose === 'function' || filter ? (
+                    <DismissibleTag
+                      {...other}
+                      data-original-id={id}
+                      text={label}
+                    />
+                  ) : (
+                    <Tag
+                      {...other} // ensure id is not duplicated
+                      data-original-id={id}
+                    >
+                      {label}
+                    </Tag>
+                  )}
                 </div>
               );
             })
@@ -243,16 +256,24 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       // create visible and overflow tags
       let newDisplayedTags =
         tags && tags.length > 0
-          ? tags.map(({ label, onClose, ...other }, index) => {
+          ? tags.map(({ label, onClose, filter, ...other }, index) => {
               if (index == tags.length - 1 && other.size) {
                 size = other.size;
               }
+
+              if (typeof onClose === 'function' || filter) {
+                return (
+                  <DismissibleTag
+                    {...other}
+                    key={`displayed-tag-${index}`}
+                    onClose={() => handleTagOnClose(onClose, index)}
+                    text={label}
+                  />
+                );
+              }
+
               return (
-                <Tag
-                  {...other}
-                  key={`displayed-tag-${index}`}
-                  onClose={() => handleTagOnClose(onClose, index)}
-                >
+                <Tag {...other} key={`displayed-tag-${index}`}>
                   {label}
                 </Tag>
               );

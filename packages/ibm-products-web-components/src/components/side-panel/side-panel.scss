@@ -182,7 +182,7 @@ $block-class-action-set: #{$prefix}--action-set;
   }
 
   .#{$block-class}[has-slug] {
-    @extend .#{$block-class}--has-ai-label !optional;
+    @extend .#{$block-class}--has-slug;
   }
 
   [scrolls] {

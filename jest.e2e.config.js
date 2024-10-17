@@ -21,7 +21,6 @@ module.exports = {
   ],
   testPathIgnorePatterns: [
     'examples',
-    '/packages/ibm-products-community/',
     '/packages/ibm-products/',
   ],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],

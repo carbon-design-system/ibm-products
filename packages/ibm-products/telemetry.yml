@@ -2,7 +2,7 @@
 
 version: 1
 projectId: 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-endpoint: https://www-api.ibm.com/ibm-telemetry/v1/telemetry
+endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
 collect:
   jsx:
     elements:

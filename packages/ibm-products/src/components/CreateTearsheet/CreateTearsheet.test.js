@@ -309,7 +309,10 @@ describe(CreateTearsheet.displayName, () => {
     const createTearsheetSteps = tearsheetElement.querySelector(
       `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
     ).children;
-    click(nextButtonElement);
+    act(() => {
+      /* fire events that update state */
+      click(nextButtonElement);
+    });
     expect(
       createTearsheetSteps[1].classList.contains(
         `.${createTearsheetBlockClass}__step__step--visible-section`

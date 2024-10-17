@@ -338,15 +338,27 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        setTimeout(() => {
-          if (selectorPrimaryFocus) {
-            return specifiedElement?.focus();
+        if (
+          selectorPrimaryFocus &&
+          getSpecificElement(modalRef?.current, selectorPrimaryFocus)
+        ) {
+          const specifiedEl = getSpecificElement(
+            modalRef?.current,
+            selectorPrimaryFocus
+          );
+
+          if (
+            specifiedEl &&
+            window?.getComputedStyle(specifiedEl)?.display !== 'none'
+          ) {
+            setTimeout(() => specifiedEl.focus(), 0);
+            return;
           }
-          firstElement?.focus();
-        }, 0);
+        }
+
+        setTimeout(() => firstElement?.focus(), 0);
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open]);
+    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

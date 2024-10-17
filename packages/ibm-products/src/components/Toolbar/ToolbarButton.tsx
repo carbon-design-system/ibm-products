@@ -49,22 +49,23 @@ export let ToolbarButton = forwardRef(
   ) => {
     const Icon = renderIcon;
     return (
-      <IconButton
-        align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
-        {...rest}
-        label={label ?? deprecated_iconDescription}
-        ref={ref}
-        className={cx(className, { [`${blockClass}--caret`]: caret })}
-        kind="ghost"
-        size="md"
-      >
-        <>
-          {Icon ? <Icon /> : null}
-          {children}
-
-          {caret && <span className={`${blockClass}__caret`} />}
-        </>
-      </IconButton>
+      <span className={`${blockClass}__iconButtonWrapper`}>
+        <IconButton
+          align={useContext(ToolbarContext)?.vertical ? 'right' : 'top'}
+          {...rest}
+          label={label ?? deprecated_iconDescription}
+          ref={ref}
+          className={cx(className, { [`${blockClass}--caret`]: caret })}
+          kind="ghost"
+          size="md"
+        >
+          <>
+            {Icon ? <Icon /> : null}
+            {children}
+          </>
+        </IconButton>
+        {caret && <span className={`${blockClass}__caret`} />}
+      </span>
     );
   }
 );

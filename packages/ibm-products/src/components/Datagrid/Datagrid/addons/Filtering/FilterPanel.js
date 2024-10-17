@@ -111,11 +111,11 @@ const FilterPanel = ({
   });
 
   /** Refs */
-  const filterPanelRef = useRef();
-  const filterHeadingRef = useRef();
-  const filterSearchRef = useRef();
-  const actionSetRef = useRef();
-  const innerContainerRef = useRef();
+  const filterPanelRef = useRef(undefined);
+  const filterHeadingRef = useRef(undefined);
+  const filterSearchRef = useRef(undefined);
+  const actionSetRef = useRef(undefined);
+  const innerContainerRef = useRef(undefined);
   /** State from hooks */
   const [shouldDisableButtons, setShouldDisableButtons] =
     useShouldDisableButtons({

@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
  * to use React hooks.
  */
 export const ClickListener = ({ children, onClickOutside }) => {
-  const targetElement = useRef();
+  const targetElement = useRef(undefined);
   const getEventTarget = (evt) => {
     // support Shadow DOM
     if (evt.composed && typeof evt.composedPath === 'function') {

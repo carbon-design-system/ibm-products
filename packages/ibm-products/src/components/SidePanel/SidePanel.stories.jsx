@@ -442,8 +442,8 @@ docs: {
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ minimalContent, actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
-  const testRef = useRef();
-  const buttonRef = useRef();
+  const testRef = useRef(undefined);
+  const buttonRef = useRef(undefined);
 
   return (
     <>
@@ -476,8 +476,8 @@ const FirstElementDisabledTemplate = ({
   ...args
 }) => {
   const [open, setOpen] = useState(false);
-  const testRef = useRef();
-  const buttonRef = useRef();
+  const testRef = useRef(undefined);
+  const buttonRef = useRef(undefined);
 
   return (
     <>
@@ -536,7 +536,7 @@ const FirstElementDisabledTemplate = ({
 const StepTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  const buttonRef = useRef();
+  const buttonRef = useRef(undefined);
 
   return (
     <>
@@ -569,7 +569,7 @@ const StepTemplate = ({ actions, slug, ...args }) => {
 // eslint-disable-next-line react/prop-types
 const SlideInTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef();
+  const buttonRef = useRef(undefined);
 
   return (
     <>

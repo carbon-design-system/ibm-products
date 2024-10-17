@@ -8,11 +8,11 @@
 import { useRef, useState } from 'react';
 
 const useParentDimensions = (hooks) => {
-  const rootRef = useRef();
-  const headRef = useRef();
-  const innerListRef = useRef();
-  const listRef = useRef();
-  const gridRef = useRef();
+  const rootRef = useRef(undefined);
+  const headRef = useRef(undefined);
+  const innerListRef = useRef(undefined);
+  const listRef = useRef(undefined);
+  const gridRef = useRef(undefined);
   const [tableHeight, setTableHeight] = useState();
 
   const useInstance = (instance) => {

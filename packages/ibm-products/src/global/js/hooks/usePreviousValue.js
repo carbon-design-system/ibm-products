@@ -13,7 +13,7 @@ import { useEffect, useRef } from 'react';
  * @returns {T | undefined} - The previous value of the same type, or undefined if there is none
  */
 export const usePreviousValue = (value) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
   useEffect(() => {
     ref.current = value;
   });

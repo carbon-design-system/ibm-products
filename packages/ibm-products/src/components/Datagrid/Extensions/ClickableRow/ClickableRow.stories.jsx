@@ -352,7 +352,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [rowData, setRowData] = useState({});
   const [focusBackElm, setFocusBackElm] = useState();
-  const sidePanelRef = useRef();
+  const sidePanelRef = useRef(undefined);
 
   useEffect(() => {
     if (openSidePanel) {

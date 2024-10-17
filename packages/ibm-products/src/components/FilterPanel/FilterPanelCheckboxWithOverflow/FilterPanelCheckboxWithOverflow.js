@@ -50,7 +50,7 @@ export let FilterPanelCheckboxWithOverflow = React.forwardRef(
     // Destructure overflow menu properties.
     const { ...other } = overflowMenuProps;
 
-    const backupRef = useRef();
+    const backupRef = useRef(undefined);
     const localRef = ref || backupRef;
 
     const setHideButton = (activeElement) => {

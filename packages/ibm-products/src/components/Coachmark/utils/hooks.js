@@ -22,7 +22,7 @@ function useClickOutsideElement(
   overlayKind,
   callback
 ) {
-  const cb = useRef();
+  const cb = useRef(undefined);
   const isTooltip = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
   useLayoutEffect(() => {
     cb.current = callback;

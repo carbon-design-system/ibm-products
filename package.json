@@ -149,7 +149,11 @@
             {
               "propName": "style",
               "disallowedFor": [
-                "Datagrid"
+                "Datagrid",
+                "DataSpreadsheet",
+                "NotificationsPanel",
+                "PageHeader",
+                "TearsheetSheel"
               ],
               "message": "Avoid using style prop"
             }

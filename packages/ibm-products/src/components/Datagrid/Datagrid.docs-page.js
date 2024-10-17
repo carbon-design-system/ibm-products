@@ -572,6 +572,23 @@ return <Datagrid datagridState={datagridState} />;
           `,
         },
       },
+      {
+        title: 'Skeleton',
+        description: `By default, \`isFetching: true\` will render 3 skeleton rows. Use \`skeletonRowCount: Number\` to change the number of skeleton rows.`,
+      },
+      {
+        source: {
+          code: `
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    isFetching: true,
+    skeletonRowCount: 5,
+  }
+);`,
+        },
+      },
     ]}
   />
 );

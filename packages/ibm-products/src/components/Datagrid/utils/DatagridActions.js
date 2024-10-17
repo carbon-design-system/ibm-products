@@ -57,11 +57,6 @@ export const DatagridActions = (datagridState) => {
 
   const searchForAColumn = 'Search';
   const isNothingSelected = selectedFlatRows.length === 0;
-  const style = {
-    'button:nthChild(1) > span:nthChild(1)': {
-      bottom: '-37px',
-    },
-  };
 
   const renderFilterFlyout = () =>
     filterProps?.variation === 'flyout' && (
@@ -101,7 +96,7 @@ export const DatagridActions = (datagridState) => {
         {!mobileToolbar ? (
           <>
             {renderFilterPanelButton()}
-            <div style={style}>
+            <div>
               <Button
                 kind="ghost"
                 hasIconOnly
@@ -113,12 +108,12 @@ export const DatagridActions = (datagridState) => {
             </div>
             {renderFilterFlyout()}
             {CustomizeColumnsButton && (
-              <div style={style}>
+              <div>
                 <CustomizeColumnsButton />
               </div>
             )}
             <RowSizeDropdown {...rowSizeDropdownProps} />
-            <div style={style} className={`${blockClass}__toolbar-divider`}>
+            <div className={`${blockClass}__toolbar-divider`}>
               <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
                 Ghost button
               </Button>
@@ -150,7 +145,7 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <div style={style}>
+        <div>
           <Button
             kind="ghost"
             hasIconOnly
@@ -160,7 +155,7 @@ export const DatagridActions = (datagridState) => {
             onClick={refreshColumns}
           />
         </div>
-        <div style={style}>
+        <div>
           <Button
             kind="ghost"
             hasIconOnly
@@ -171,7 +166,7 @@ export const DatagridActions = (datagridState) => {
           />
         </div>
         {CustomizeColumnsButton && (
-          <div style={style}>
+          <div>
             <CustomizeColumnsButton />
           </div>
         )}

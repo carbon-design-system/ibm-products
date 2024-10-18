@@ -11,7 +11,7 @@ import '../../global/js/utils/props-helper';
 import React, { ForwardedRef, ReactNode } from 'react';
 
 // Carbon and package components we use.
-import { Form } from '@carbon/react';
+import { ButtonProps, Form } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { SidePanel } from '../SidePanel';
@@ -159,7 +159,7 @@ export let EditSidePanel = React.forwardRef(
     }: EditSidePanelProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const actions = [
+    const actions: ButtonProps<React.ElementType>[] = [
       {
         label: primaryButtonText,
         onClick: (event) => {

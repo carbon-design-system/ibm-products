@@ -72,7 +72,7 @@ export interface TruncatedListProps extends PropsWithChildren {
   /**
    * Callback function for building the label when the list is collapsed.
    */
-  viewMoreLabel?: (value: any) => void;
+  viewMoreLabel?: (value: any) => ReactNode;
 }
 /**
  * The `TruncatedList` allows consumers to control how many items are

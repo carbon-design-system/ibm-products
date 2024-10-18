@@ -220,12 +220,7 @@ const actionSets = [
 ];
 
 const sampleAILabel = (
-  <AILabel
-    className="aiLabel-container"
-    size="xs"
-    autoAlign={false}
-    align="left-start"
-  >
+  <AILabel className="aiLabel-container" size="xs" align="left-start">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

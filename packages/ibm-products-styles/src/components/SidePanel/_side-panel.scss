@@ -469,10 +469,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   inset: 0;
 }
 
-.#{$block-class}--has-slug
-  + .#{$block-class}__overlay
-  .#{$block-class}--has-ai-label
-  + .#{$block-class}__overlay {
+.#{$block-class}--has-slug + .#{$block-class}__overlay,
+.#{$block-class}--has-ai-label + .#{$block-class}__overlay {
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: $ai-overlay;
 }

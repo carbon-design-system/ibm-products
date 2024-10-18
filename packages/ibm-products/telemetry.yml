@@ -2,7 +2,7 @@
 
 version: 1
 projectId: 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
+endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
 collect:
   jsx:
     elements:
@@ -18,6 +18,7 @@ collect:
         - align
         - allPageRowsLabel
         - allRowsLabel
+        - allTagsModalAriaLabel
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
         - allTagsModalSearchThreshold
@@ -131,6 +132,7 @@ collect:
         - hasCloseIcon
         - hasCustomRowHeader
         - hasFieldset
+        - headerActions
         - headerGroups
         - HeaderRow
         - headers
@@ -227,6 +229,7 @@ collect:
         - onMouseEnter
         - onMouseLeave
         - onNext
+        - onOverflowClick
         - onOverflowTagChange
         - onPrimaryButtonClick
         - onRemove
@@ -357,6 +360,7 @@ collect:
         - totalVisibleColumns
         - translateWithId
         - translateWithIdBatchActions
+        - triggerButtonRef
         - truncate
         - truncateValue
         - type
@@ -768,7 +772,6 @@ collect:
         - secondsAgoText
         - settingsIconDescription
         - todayLabel
-        - triggerButtonRef
         - yearAgoText
         - yearsAgoText
         - yesterdayAtText
@@ -883,8 +886,6 @@ collect:
         - width
         # TagOverflow
         - tagComponent
-        # TearsheetShell
-        - headerActions
         # Toolbar
         - vertical
         # ToolbarButton

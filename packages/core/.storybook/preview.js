@@ -126,7 +126,6 @@ const parameters = {
         ['Welcome', 'Getting started', 'Examples', '*'],
         'IBM Products',
         ['Components', 'Patterns', 'Internal', 'Onboarding'],
-        'Community',
         'Experimental',
         ['Components', 'Patterns', 'Onboarding'],
         'Deprecated',

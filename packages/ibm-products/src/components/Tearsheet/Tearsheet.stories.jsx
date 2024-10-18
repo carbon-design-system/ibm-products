@@ -124,7 +124,7 @@ export default {
         },
         default: 0,
       },
-      description: 'deprecated Property replaced by "aiLabel"',
+      description: 'Deprecated: Property replaced by "aiLabel"',
       options: [0, 1],
     },
   },

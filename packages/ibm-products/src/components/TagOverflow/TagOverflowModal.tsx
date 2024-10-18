@@ -15,6 +15,7 @@ import {
   ModalBody,
   Search,
   Tag,
+  DismissibleTag,
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
@@ -41,6 +42,7 @@ interface TagOverflowModalProps {
   className?: string;
   modalAriaLabel?: string;
   onClose?: () => void;
+  onTagClose?: (params: { label: string; id: any }) => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
   portalTarget?: ReactNode;
@@ -57,6 +59,7 @@ export const TagOverflowModal = ({
   title,
   modalAriaLabel = defaults.modalAriaLabel,
   onClose,
+  onTagClose,
   open,
   overflowType,
   portalTarget: portalTargetIn,
@@ -114,12 +117,18 @@ export const TagOverflowModal = ({
         hasScrollingContent
         aria-label={modalAriaLabel}
       >
-        {getFilteredItems().map(({ label, id, filter }) => {
-          const isFilterable = overflowType === 'tag' ? filter : false;
-          return (
-            <Tag key={id} filter={isFilterable}>
-              {label}
-            </Tag>
+        {getFilteredItems().map(({ label, id, filter, onClose }) => {
+          const isFilterable =
+            overflowType === 'tag' && (typeof onClose === 'function' || filter);
+      
+          return isFilterable ? (
+            <DismissibleTag
+              key={id}
+              text={label}
+              onClose={() => onTagClose?.({ label, id })}
+            />
+          ) : (
+            <Tag key={id}>{label}</Tag>
           );
         })}
         <div className={`${blockClass}__fade`} />
@@ -137,6 +146,7 @@ TagOverflowModal.propTypes = {
   ),
   className: PropTypes.string,
   onClose: PropTypes.func,
+  onTagClose: PropTypes.func,
   open: PropTypes.bool,
   overflowType: PropTypes.oneOf(['default', 'tag']),
   portalTarget: PropTypes.node,

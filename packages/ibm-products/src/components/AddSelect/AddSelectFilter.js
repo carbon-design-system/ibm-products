@@ -6,7 +6,14 @@
 //
 
 import React, { useState } from 'react';
-import { Button, ButtonSet, Dropdown, Search, Tag, Layer } from '@carbon/react';
+import {
+  Button,
+  ButtonSet,
+  Dropdown,
+  Search,
+  DismissibleTag,
+  Layer,
+} from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/react/icons';
@@ -148,15 +155,13 @@ export let AddSelectFilter = ({
       {hasFiltersApplied && (
         <div className={`${blockClass}-applied`}>
           {Object.keys(appliedFilters).map((filterType) => (
-            <Tag
+            <DismissibleTag
               key={filterType}
+              text={`${filterType}: ${appliedFilters[filterType]}`}
               type="gray"
               size="sm"
               onClose={() => removeTag(filterType)}
-              filter
-            >
-              {`${filterType}: ${appliedFilters[filterType]}`}
-            </Tag>
+            />
           ))}
           <Button kind="ghost" size="sm" onClick={clearFilters}>
             {clearFiltersText}

@@ -194,7 +194,8 @@ export interface DataGridHeader<T extends object = any>
     UseSortByColumnProps<T> {
   className(className: any, arg1: { [x: string]: any }): unknown;
   isAction?: boolean;
-  slug?: any;
+  slug?: ReactNode; // To be removed once the support for slug is not available
+  aiLabel?: ReactNode;
 }
 
 export interface DataGridHeaderGroup<T extends object = any>

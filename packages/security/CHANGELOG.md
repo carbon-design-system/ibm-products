@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.15.3...@carbon/ibm-security@2.15.4) (2024-10-18)
+
+
+### Bug Fixes
+
+* **telemetry:** updating URL ([#6244](https://github.com/carbon-design-system/ibm-products/issues/6244)) ([6ce0f21](https://github.com/carbon-design-system/ibm-products/commit/6ce0f21ea9ee38330d494b735587efdac96ee941))
+
+
+
+
+
 ## [2.15.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.15.2...@carbon/ibm-security@2.15.3) (2024-10-17)
 
 **Note:** Version bump only for package @carbon/ibm-security

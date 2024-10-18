@@ -96,22 +96,16 @@ export const DatagridActions = (datagridState) => {
         {!mobileToolbar ? (
           <>
             {renderFilterPanelButton()}
-            <div>
-              <Button
-                kind="ghost"
-                hasIconOnly
-                tooltipPosition="bottom"
-                renderIcon={Download}
-                iconDescription={'Download CSV'}
-                onClick={downloadCsv}
-              />
-            </div>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Download}
+              iconDescription={'Download CSV'}
+              onClick={downloadCsv}
+            />
             {renderFilterFlyout()}
-            {CustomizeColumnsButton && (
-              <div>
-                <CustomizeColumnsButton />
-              </div>
-            )}
+            {CustomizeColumnsButton && <CustomizeColumnsButton />}
             <RowSizeDropdown {...rowSizeDropdownProps} />
             <div className={`${blockClass}__toolbar-divider`}>
               <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
@@ -145,31 +139,26 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <div>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Restart}
-            iconDescription={'Refresh'}
-            onClick={refreshColumns}
-          />
-        </div>
-        <div>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Download}
-            iconDescription={'Download CSV'}
-            onClick={downloadCsv}
-          />
-        </div>
-        {CustomizeColumnsButton && (
-          <div>
-            <CustomizeColumnsButton />
-          </div>
-        )}
+
+        <Button
+          kind="ghost"
+          hasIconOnly
+          tooltipPosition="bottom"
+          renderIcon={Restart}
+          iconDescription={'Refresh'}
+          onClick={refreshColumns}
+        />
+
+        <Button
+          kind="ghost"
+          hasIconOnly
+          tooltipPosition="bottom"
+          renderIcon={Download}
+          iconDescription={'Download CSV'}
+          onClick={downloadCsv}
+        />
+
+        {CustomizeColumnsButton && <CustomizeColumnsButton />}
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <MenuButton
           label="Primary button"

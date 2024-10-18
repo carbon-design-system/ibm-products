@@ -27,3 +27,7 @@ export { default as useEditableCell } from './useEditableCell';
 export { default as useFiltering } from './useFiltering';
 export { getAutoSizedColumnWidth } from './utils/getAutoSizedColumnWidth';
 export { useFilterContext } from './Datagrid/addons/Filtering/hooks';
+
+// types/index.ts defines a lot of types.  Unclear which ones should be exported,
+// but presumably not all of them because some have generic names like "Size".
+export type { DataGridState } from './types';

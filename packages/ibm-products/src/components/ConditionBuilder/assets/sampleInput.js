@@ -19,7 +19,7 @@ import {
 } from '@carbon/react/icons';
 import CustomInput from './CustomInput';
 
-//keeping this , an alternative way to give support for dynamic options.
+//keeping this commented code intentionally ,which is an alternative way to give support for dynamic options.
 //instead of supplying getOptions callback, we keep option property in inputConfig always as a async method instead to array as below.
 // export const inputDataForAsyncOptions = {
 //   properties: [

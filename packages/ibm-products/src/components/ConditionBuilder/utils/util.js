@@ -25,8 +25,6 @@ export const focusThisField = (evt, conditionBuilderRef) => {
 };
 export const focusThisItem = (currentElement, conditionBuilderRef) => {
   setTimeout(() => {
-    //document.activeElement.setAttribute('tabindex', '-1');
-    // currentElement.setAttribute('tabindex', '0');
     manageTabIndexAndFocus(currentElement, conditionBuilderRef);
   }, 0);
 };

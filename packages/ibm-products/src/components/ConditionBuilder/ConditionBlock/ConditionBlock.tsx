@@ -254,7 +254,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           onChange={(op) => onConnectorOperatorChange?.(op)}
         />
       ) : (
-        <div role="gridcell" />
+        ''
       )}
 
       {isStatement && (
@@ -344,6 +344,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           renderIcon={Close}
           className={`${blockClass}__close-condition`}
           data-name="closeCondition"
+          wrapperClassName={`${blockClass}__close-condition-wrapper`}
         />
       </span>
       {/* </div> */}

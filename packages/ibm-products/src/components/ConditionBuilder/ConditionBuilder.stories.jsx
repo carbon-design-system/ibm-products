@@ -212,7 +212,7 @@ const translateWithId = (key) => {
  */
 
 const ConditionBuilderTemplate = (args) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
   return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
 };
 

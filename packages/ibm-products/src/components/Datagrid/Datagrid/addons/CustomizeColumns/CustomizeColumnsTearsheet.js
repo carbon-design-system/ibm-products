@@ -36,7 +36,7 @@ const CustomizeColumnsTearsheet = ({
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnObjects] = useState(columnDefinitions);
   const [isDirty, setIsDirty] = useState(false);
-  const prevColumnDefinitions = useRef();
+  const prevColumnDefinitions = useRef(undefined);
 
   const onRequestClose = () => {
     setColumnObjects(columnDefinitions);

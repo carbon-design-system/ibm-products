@@ -41,11 +41,10 @@ const useRowExpander = (hooks) => {
             row?.onClick?.(row, event);
             lastExpandedRowIndex.current = row.id;
           },
+          title: null,
         };
-        const {
-          expanderButtonTitleExpanded = 'Collapse row',
-          expanderButtonTitleCollapsed = 'Expand row',
-        } = tempState?.current || {};
+        const { expanderButtonTitleExpanded, expanderButtonTitleCollapsed } =
+          tempState?.current || {};
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;

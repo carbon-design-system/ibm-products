@@ -85,6 +85,8 @@ export const ItemOption = ({
     );
   };
 
+  const preventDefault = (evt) => evt.preventDefault();
+
   if (!allOptions) {
     return;
   }
@@ -97,6 +99,7 @@ export const ItemOption = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
+            onKeyDown={preventDefault}
           />
         </div>
       )}

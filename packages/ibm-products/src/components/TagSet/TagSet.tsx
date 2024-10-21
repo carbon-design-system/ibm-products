@@ -65,6 +65,10 @@ export interface TagSetProps extends PropsWithChildren {
    */
   align?: Align;
   /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel?: string;
+  /**
    * label text for the show all search.
    */
   allTagsModalSearchLabel?: string;
@@ -102,6 +106,10 @@ export interface TagSetProps extends PropsWithChildren {
    * display tags in multiple lines
    */
   multiline?: boolean;
+  /**
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
+   */
+  onOverflowClick?: ((overFlowTags: ReactNode[]) => void) | undefined;
   /**
    * Handler to get overflow tags
    */
@@ -151,10 +159,12 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowAlign = 'bottom',
       overflowClassName,
       overflowType = 'default',
+      allTagsModalAriaLabel,
       allTagsModalTitle = 'All tags',
       allTagsModalSearchLabel = 'Search all tags',
       allTagsModalSearchPlaceholderText = 'Search all tags',
       showAllTagsLabel = 'View all tags',
+      onOverflowClick,
       tags,
       containingElementRef,
       measurementOffset = defaults.measurementOffset,
@@ -276,6 +286,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
           key="displayed-tag-overflow"
           ref={overflowTag}
           popoverOpen={popoverOpen}
+          onOverflowClick={onOverflowClick}
           setPopoverOpen={setPopoverOpen}
         />
       );
@@ -288,6 +299,7 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowClassName,
       overflowType,
       showAllTagsLabel,
+      onOverflowClick,
       tags,
       onOverflowTagChange,
       popoverOpen,
@@ -410,15 +422,18 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             {displayedTags}
           </div>
         </div>
-        <TagSetModal
-          allTags={tags}
-          open={showAllModalOpen}
-          title={allTagsModalTitle}
-          onClose={handleModalClose}
-          searchLabel={allTagsModalSearchLabel}
-          searchPlaceholder={allTagsModalSearchPlaceholderText}
-          portalTarget={allTagsModalTarget}
-        />
+        {!onOverflowClick && (
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            modalAriaLabel={allTagsModalAriaLabel}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+            portalTarget={allTagsModalTarget}
+          />
+        )}
       </div>
     );
   }
@@ -461,6 +476,10 @@ TagSet.propTypes = {
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
   /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel: PropTypes.string,
+  /**
    * label text for the show all search.
    */
   allTagsModalSearchLabel: PropTypes.string,
@@ -499,6 +518,10 @@ TagSet.propTypes = {
    * display tags in multiple lines
    */
   multiline: PropTypes.bool,
+  /**
+   * An optional click handler that overrides the default functionality of displaying all tags in a modal
+   */
+  onOverflowClick: PropTypes.func,
   /**
    * Handler to get overflow tags
    */

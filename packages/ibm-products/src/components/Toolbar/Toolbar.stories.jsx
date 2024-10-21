@@ -141,7 +141,6 @@ function _Toolbar(args) {
         <ToolbarButton
           label="Text align center"
           renderIcon={(props) => <TextAlignCenter size={16} {...props} />}
-          caret
         />
       </ToolbarGroup>
 

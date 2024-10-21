@@ -129,32 +129,26 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     };
 
     const styledTune: StyledTune = useMemo(() => {
-      let left = 0,
-        top = 0;
+      const style: StyledTune = {};
       if (isBeacon || isDraggable) {
         if (coachmark.targetRect) {
-          (left = coachmark.targetRect.x + window.scrollX),
-            (top = coachmark.targetRect.y + window.scrollY);
+          style.left = coachmark.targetRect.x + window.scrollX;
+          style.top = coachmark.targetRect.y + window.scrollY;
         }
-        if (left && top) {
+        if (style.left && style.top) {
           if (isBeacon) {
-            // Compensate for radius of beacon
-            return {
-              left: left + 16,
-              top: top + 16,
-            };
+            style.left = style.left + 16;
+            style.top = style.top + 16;
           }
           if (isDraggable) {
-            // Compensate for width and height of target element
             const offsetTune = getOffsetTune(coachmark, kind);
-            return {
-              left: left + offsetTune.left,
-              top: top + offsetTune.top,
-            };
+
+            style.left = style.left + offsetTune.left;
+            style.top = style.top + offsetTune.top;
           }
         }
       }
-      return { left, top };
+      return style;
     }, [isBeacon, isDraggable, coachmark, kind]);
 
     function handleDragBounds(x, y) {

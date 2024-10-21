@@ -65,6 +65,7 @@
     "@storybook/addon-essentials": "^8.3.6",
     "@storybook/addon-links": "^8.3.6",
     "@storybook/addon-storysource": "^8.3.6",
+    "@storybook/addon-toolbars": "^8.3.6",
     "@storybook/blocks": "^8.3.6",
     "@storybook/theming": "^8.3.6",
     "@storybook/web-components": "^8.3.6",

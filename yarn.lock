@@ -1922,6 +1922,7 @@ __metadata:
     "@storybook/addon-essentials": "npm:^8.3.6"
     "@storybook/addon-links": "npm:^8.3.6"
     "@storybook/addon-storysource": "npm:^8.3.6"
+    "@storybook/addon-toolbars": "npm:^8.3.6"
     "@storybook/blocks": "npm:^8.3.6"
     "@storybook/theming": "npm:^8.3.6"
     "@storybook/web-components": "npm:^8.3.6"
@@ -6413,7 +6414,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-toolbars@npm:8.3.6":
+"@storybook/addon-toolbars@npm:8.3.6, @storybook/addon-toolbars@npm:^8.3.6":
   version: 8.3.6
   resolution: "@storybook/addon-toolbars@npm:8.3.6"
   peerDependencies:

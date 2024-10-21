@@ -1923,7 +1923,6 @@ __metadata:
     "@storybook/addon-links": "npm:^8.3.6"
     "@storybook/addon-storysource": "npm:^8.3.6"
     "@storybook/blocks": "npm:^8.3.6"
-    "@storybook/manager-api": "npm:^8.3.6"
     "@storybook/theming": "npm:^8.3.6"
     "@storybook/web-components": "npm:^8.3.6"
     "@storybook/web-components-vite": "npm:^8.3.6"

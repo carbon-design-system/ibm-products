@@ -66,7 +66,6 @@
     "@storybook/addon-links": "^8.3.6",
     "@storybook/addon-storysource": "^8.3.6",
     "@storybook/blocks": "^8.3.6",
-    "@storybook/manager-api": "^8.3.6",
     "@storybook/theming": "^8.3.6",
     "@storybook/web-components": "^8.3.6",
     "@storybook/web-components-vite": "^8.3.6",

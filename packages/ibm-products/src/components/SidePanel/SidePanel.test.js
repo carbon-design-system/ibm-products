@@ -499,7 +499,7 @@ describe('SidePanel', () => {
     const mockCloseFn = jest.fn();
 
     const DummyComponent = ({ open }) => {
-      const buttonRef = React.useRef();
+      const buttonRef = React.useRef(undefined);
 
       return (
         <div>

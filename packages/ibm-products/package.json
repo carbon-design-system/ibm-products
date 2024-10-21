@@ -97,8 +97,5 @@
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
-  },
-  "resolutions": {
-    "carbon-components-react": "^7.60.0"
   }
 }

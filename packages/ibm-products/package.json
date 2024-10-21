@@ -93,7 +93,7 @@
     "@carbon/themes": "^10.55.5",
     "@carbon/type": "^10.45.5",
     "carbon-components": "^10.59.0",
-    "carbon-components-react": "^7.70.0",
+    "carbon-components-react": "^7.60.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

@@ -11,7 +11,6 @@ import remarkGfm from 'remark-gfm';
 
 const storyGlobs = [
   '../../ibm-products/src/**/*.stories.*',
-  '../../ibm-products-community/src/**/*.stories.*',
   '../src/**/*.stories.*',
   '../src/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.js',

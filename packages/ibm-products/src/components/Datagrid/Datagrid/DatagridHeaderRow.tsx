@@ -226,13 +226,16 @@ const HeaderRow = (
           const resizerProps = header?.getResizerProps?.({ role: undefined });
           const headerStyle = headerProps?.style;
           const lastVisibleIndex = withActionsColumn ? 2 : 1;
-          const lastVisibleFlexStyle =
-            index === visibleColumns.length - lastVisibleIndex
-              ? '1 1 0'
-              : '0 0 auto';
+          const isLastVisibleColumn =
+            index === visibleColumns.length - lastVisibleIndex;
+
           if (headerStyle) {
-            headerStyle.flex = lastVisibleFlexStyle;
+            Object.assign(headerStyle, {
+              flex: isLastVisibleColumn ? '1 1 0' : '0 0 auto',
+              overflow: isLastVisibleColumn ? 'hidden' : headerStyle.overflow,
+            });
           }
+
           return (
             <TableHeader
               {...headerProps}

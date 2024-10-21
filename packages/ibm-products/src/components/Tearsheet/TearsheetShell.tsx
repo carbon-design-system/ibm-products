@@ -286,7 +286,7 @@ export const TearsheetShell = React.forwardRef(
     const [position, setPosition] = useState(0);
 
     // Keep a record of the previous value of depth.
-    const prevDepth = useRef<number>();
+    const prevDepth = useRef<number | undefined>(undefined);
     useEffect(() => {
       prevDepth.current = depth;
     });

@@ -231,10 +231,12 @@ export let DataSpreadsheet = React.forwardRef(
         selectedHeaderReorderActive,
       }) || {};
     const cellSizeValue = getCellSize(cellSize);
-    const cellEditorRef = useRef<HTMLTextAreaElement>();
+    const cellEditorRef = useRef<HTMLTextAreaElement | undefined>(undefined);
     const [activeCellContent, setActiveCellContent] = useState<any>();
-    const activeCellRef = useRef<HTMLDivElement | HTMLButtonElement>();
-    const cellEditorRulerRef = useRef<HTMLPreElement>();
+    const activeCellRef = useRef<
+      HTMLDivElement | HTMLButtonElement | undefined
+    >(undefined);
+    const cellEditorRulerRef = useRef<HTMLPreElement | undefined>(undefined);
 
     const hasCustomRowHeader = typeof renderRowHeader === 'function';
     const maxNumRowsCount = data.length.toString().length;

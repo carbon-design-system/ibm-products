@@ -8,7 +8,13 @@
 import React, { useRef, forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import {
+  Link,
+  Tag,
+  Popover,
+  PopoverContent,
+  OperationalTag,
+} from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { TagOverflowItem } from './TagOverflow';
@@ -98,12 +104,11 @@ export const TagOverflowPopover = forwardRef(
           onKeyDown={handleEscKeyPress}
           open={popoverOpen}
         >
-          <Tag
+          <OperationalTag
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__trigger`)}
-          >
-            +{overflowTags?.length}
-          </Tag>
+            text={`+${overflowTags.length}`}
+          />
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>

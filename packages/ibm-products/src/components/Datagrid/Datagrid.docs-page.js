@@ -146,36 +146,6 @@ const App = () => {
         },
       },
       {
-        description:
-          "There is also an optional resize callback when resizing columns, allowing you to save the widths of columns that have been resized. The resize callback returns the column that was just resized and it's width, in addition to all of the columns that have been resized and their widths.",
-        source: {
-          language: 'jsx',
-          code: `
-useDatagrid({
-  columns,
-  data,
-  onColResizeEnd: (currentColumn, allColumns) =>
-      console.log(currentColumn, allColumns),
-  resizerAriaLabel: 'Resize column',
-});
-          `,
-        },
-      },
-      {
-        description:
-          'Disabling the resizable columns is possible by specifying `disableResizing: true` within the `useDatagrid` hook. To pass in your own translated label for the column resizer, add the `resizerAriaLabel` property',
-        source: {
-          language: 'jsx',
-          code: `
-useDatagrid({
-  columns,
-  data,
-  disableResizing: true,
-});
-          `,
-        },
-      },
-      {
         title: 'Rendering the table toolbar',
         image: (
           <img
@@ -209,6 +179,40 @@ const App = () => {
 
   return <Datagrid datagridState={datagridState} />;
 };
+          `,
+        },
+      },
+      {
+        title: 'Resizable columns',
+        description: 'Columns are resizable by default.',
+      },
+      {
+        description:
+          'Disabling the resizable columns is possible by specifying `disableResizing: true` within the `useDatagrid` hook. To pass in your own translated label for the column resizer, add the `resizerAriaLabel` property',
+        source: {
+          language: 'jsx',
+          code: `
+useDatagrid({
+  columns,
+  data,
+  disableResizing: true,
+});
+          `,
+        },
+      },
+      {
+        description:
+          "There is also an optional resize callback when resizing columns, allowing you to save the widths of columns that have been resized. The resize callback returns the column that was just resized and it's width, in addition to all of the columns that have been resized and their widths.",
+        source: {
+          language: 'jsx',
+          code: `
+useDatagrid({
+  columns,
+  data,
+  onColResizeEnd: (currentColumn, allColumns) =>
+      console.log(currentColumn, allColumns),
+  resizerAriaLabel: 'Resize column',
+});
           `,
         },
       },
@@ -485,6 +489,21 @@ return <Datagrid datagridState={datagridState} />;
         },
       },
       {
+        description: `Sorting on any particular column can be disabled by providing \`disableSortBy: true\` for the column definition`,
+        source: {
+          code: `
+          const columns = [
+  ...
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    disableSortBy: true,
+  },
+  ...
+];`,
+        },
+      },
+      {
         description: `Columns can also be initially sorted by providing a \`sortableColumn\` object to the \`initialState\`. The structure of
         the \`sortableColumn\` property is as follows:
 \`
@@ -551,6 +570,23 @@ const datagridState = useDatagrid(
 
 return <Datagrid datagridState={datagridState} />;
           `,
+        },
+      },
+      {
+        title: 'Skeleton',
+        description: `By default, \`isFetching: true\` will render 3 skeleton rows. Use \`skeletonRowCount: Number\` to change the number of skeleton rows.`,
+      },
+      {
+        source: {
+          code: `
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    isFetching: true,
+    skeletonRowCount: 5,
+  }
+);`,
         },
       },
     ]}

@@ -437,17 +437,16 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     min-width: 0;
     flex-basis: auto;
 
-    .#{$block-class}__longTitle {
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
     button {
       border-block-end: none;
       cursor: default;
     }
+  }
+  .#{$block-class}__titleText {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .#{$block-class}__title-icon-wrapper {
     display: flex;

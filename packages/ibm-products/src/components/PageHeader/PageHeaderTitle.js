@@ -38,19 +38,23 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState(true);
-  const longTitleRef = useRef();
+  const [isEllipsisApplied, setIsEllipsisApplied] = useState();
+  const longTitleRef = useRef(undefined);
+  const titleRef = useRef(undefined);
 
   useLayoutEffect(() => {
     setIsEllipsisApplied(isEllipsisActive());
-  }, [longTitleRef]);
+  }, [longTitleRef, titleRef, title]);
 
   const isEllipsisActive = () => {
     if (longTitleRef.current) {
       return (
         longTitleRef.current?.offsetWidth < longTitleRef.current?.scrollWidth
       );
+    } else if (titleRef.current) {
+      return titleRef.current?.offsetWidth < titleRef.current?.scrollWidth;
     }
+
     return false;
   };
 
@@ -92,12 +96,18 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
             definition={text}
             className={`${blockClass}__tooltip`}
           >
-            <span ref={longTitleRef} className={`${blockClass}__longTitle`}>
+            <span ref={longTitleRef} className={`${blockClass}__titleText`}>
               {text}
             </span>
           </DefinitionTooltip>
         ) : (
-          <span title={!loading ? asText : null}>{text}</span>
+          <span
+            ref={titleRef}
+            className={`${blockClass}__titleText`}
+            title={!loading ? asText : null}
+          >
+            {text}
+          </span>
         )}
       </>
     );

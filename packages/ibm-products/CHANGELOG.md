@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.73.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.73.5...@carbon/ibm-products@1.73.6) (2024-10-21)
+
+
+### Bug Fixes
+
+* v1 version mismatch ([#6256](https://github.com/carbon-design-system/ibm-products/issues/6256)) ([a2c4fe7](https://github.com/carbon-design-system/ibm-products/commit/a2c4fe79a76cce4c95cff9fc49438b0e84338c8b))
+
+
+
+
+
 ## [1.73.5](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.73.4...@carbon/ibm-products@1.73.5) (2024-10-18)
 
 

@@ -154,9 +154,3 @@ export const decorators = [
     return container({ hasMainTag, children: result });
   },
 ];
-
-export const Preview = {
-  parameters,
-  globalTypes,
-  decorators,
-};

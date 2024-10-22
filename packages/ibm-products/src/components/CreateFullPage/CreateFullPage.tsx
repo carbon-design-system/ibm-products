@@ -162,6 +162,12 @@ type CreateFullPageBaseProps = {
   noTrailingSlash?: boolean;
 
   /**
+   * onChange event for Progress Indicator in the Influencer
+   * @param data step index
+   */
+  onClickInfluencerStep?: (data: number) => void;
+
+  /**
    * An optional handler that is called when the user closes the full page (by
    * clicking the secondary button, located in the modal, which triggers after
    * clicking the ghost button in the modal
@@ -233,6 +239,7 @@ export let CreateFullPage = React.forwardRef(
       modalSecondaryButtonText,
       modalTitle,
       nextButtonText,
+      onClickInfluencerStep,
       onClose,
       onRequestSubmit,
       firstFocusElement,
@@ -355,6 +362,7 @@ export let CreateFullPage = React.forwardRef(
               stepData={stepData}
               currentStep={currentStep}
               title={secondaryTitle}
+              onClickStep={onClickInfluencerStep}
             />
           </div>
           <div className={`${blockClass}__body`}>
@@ -526,6 +534,11 @@ CreateFullPage.propTypes = {
    * A prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash: PropTypes.bool,
+
+  /**
+   * onChange event for Progress Indicator in the Influencer
+   */
+  onClickInfluencerStep: PropTypes.func,
 
   /**
    * An optional handler that is called when the user closes the full page (by

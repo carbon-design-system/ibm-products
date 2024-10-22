@@ -212,6 +212,17 @@ describe(componentName, () => {
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
+  it('should call onClickInfluencerStep when expected', async () => {
+    const onChange = jest.fn();
+    renderCreateFullPage({
+      ...defaultFullPageProps,
+      onClickInfluencerStep: onChange,
+    });
+
+    await userEvent.click(screen.getByTitle('Title 2'));
+    expect(onChange).toHaveBeenCalled();
+  });
+
   it('should render the CreateFullPage on the specified initialStep prop provided', () => {
     const { container } = renderCreateFullPage({
       ...defaultFullPageProps,

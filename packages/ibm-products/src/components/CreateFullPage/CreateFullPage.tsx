@@ -260,6 +260,7 @@ export let CreateFullPage = React.forwardRef(
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     const previousState = usePreviousValue({ currentStep, open });
     const [isDisabled, setIsDisabled] = useState(false);
+    const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState<Step[]>([]);
@@ -316,6 +317,7 @@ export let CreateFullPage = React.forwardRef(
       firstIncludedStep,
       lastIncludedStep,
       stepData,
+      onPrevious,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
@@ -374,6 +376,7 @@ export let CreateFullPage = React.forwardRef(
                       {
                         currentStep,
                         setIsDisabled,
+                        setOnPrevious: (fn) => setOnPrevious(() => fn),
                         setOnNext: (fn) => setOnNext(() => fn),
                         setOnMount: (fn) => setOnMount(() => fn),
                         setStepData,

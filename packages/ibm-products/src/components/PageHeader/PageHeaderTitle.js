@@ -33,6 +33,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     editableLabel,
     cancelDescription,
     saveDescription,
+    tooltipAlignment = 'bottom',
     ...rest
   } = title;
   let titleText;
@@ -92,7 +93,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
         ) : isEllipsisApplied ? (
           <DefinitionTooltip
             openOnHover={false}
-            align={'bottom'}
+            align={tooltipAlignment}
             definition={text}
             className={`${blockClass}__tooltip`}
           >
@@ -175,6 +176,16 @@ PageHeaderTitle.propTypes = {
       onSave: PropTypes.func,
       cancelDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
       saveDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      tooltipAlignment: PropTypes.oneOf([
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ]),
       // Update docgen if changed
     }),
     PropTypes.string,

@@ -60,7 +60,7 @@ describe('FeatureFlags', () => {
     }
 
     render(
-      <FeatureFlags a>
+      <FeatureFlags a b={false}>
         <TestComponent />
       </FeatureFlags>
     );
@@ -98,7 +98,7 @@ describe('FeatureFlags', () => {
     }
 
     const { rerender } = render(
-      <FeatureFlags a>
+      <FeatureFlags a b={false}>
         <TestComponent />
       </FeatureFlags>
     );
@@ -113,7 +113,7 @@ describe('FeatureFlags', () => {
     });
 
     rerender(
-      <FeatureFlags b>
+      <FeatureFlags a={false} b>
         <TestComponent />
       </FeatureFlags>
     );
@@ -155,7 +155,7 @@ describe('FeatureFlags', () => {
 
     render(
       <FeatureFlags local>
-        <FeatureFlags>
+        <FeatureFlags global={false}>
           <TestComponent />
         </FeatureFlags>
       </FeatureFlags>
@@ -168,8 +168,8 @@ describe('FeatureFlags', () => {
 
     render(
       <FeatureFlags local>
-        <FeatureFlags>
-          <FeatureFlags>
+        <FeatureFlags global={false}>
+          <FeatureFlags local={false}>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>
@@ -183,7 +183,7 @@ describe('FeatureFlags', () => {
 
     rerender(
       <FeatureFlags local>
-        <FeatureFlags>
+        <FeatureFlags global={false}>
           <FeatureFlags local>
             <TestComponent />
           </FeatureFlags>

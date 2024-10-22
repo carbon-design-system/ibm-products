@@ -36,9 +36,9 @@ const leftStickyStyleClassPrefix = `${blockClass}__left-sticky-column`;
 const OFFSET_SCROLL_CLASS = `${styleClassPrefix}-offset-scroll`;
 
 const useStickyColumn = (hooks: Hooks) => {
-  const tableBodyRef = useRef<HTMLElement>();
-  const stickyHeaderCellRef = useRef<HTMLElement>();
-  const [windowSize, setWindowSize] = useState<number | undefined>();
+  const tableBodyRef = useRef<HTMLElement | undefined>(undefined);
+  const stickyHeaderCellRef = useRef<HTMLElement | undefined>(undefined);
+  const [windowSize, setWindowSize] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     setWindowSize(window?.innerWidth);

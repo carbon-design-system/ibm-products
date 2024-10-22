@@ -58,11 +58,11 @@ export const InlineEditCell = ({
   const previousState = usePreviousValue({ editId, activeCellId });
   const { inputProps } = config || {};
 
-  const textInputRef = useRef();
-  const checkboxRef = useRef();
-  const numberInputRef = useRef();
-  const dropdownRef = useRef();
-  const outerButtonElement = useRef();
+  const textInputRef = useRef(undefined);
+  const checkboxRef = useRef(undefined);
+  const numberInputRef = useRef(undefined);
+  const dropdownRef = useRef(undefined);
+  const outerButtonElement = useRef(undefined);
 
   const { rowSize, onDataUpdate } = instance;
   let saveCellData;

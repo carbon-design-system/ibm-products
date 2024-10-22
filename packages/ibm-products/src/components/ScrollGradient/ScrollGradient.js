@@ -52,8 +52,8 @@ export let ScrollGradient = React.forwardRef(
     const [horizontalPosition, setHorizontalPosition] = useState(
       ScrollStates.NONE
     );
-    const scrollContainer = useRef();
-    const contentChildrenContainer = useRef();
+    const scrollContainer = useRef(undefined);
+    const contentChildrenContainer = useRef(undefined);
 
     const updateScrollState = throttle(() => {
       const updatedVerticalVal = getScrollState(

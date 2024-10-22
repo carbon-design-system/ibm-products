@@ -93,7 +93,7 @@ const sampleAILabel = (
 
 // Template.
 const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
@@ -128,11 +128,11 @@ const ReturnFocusTemplate = (
   { influencer, open: _open, aiLabel, ...args },
   context
 ) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
-  const buttonRef = useRef();
+  const buttonRef = useRef(undefined);
 
   return (
     <div ref={ref}>

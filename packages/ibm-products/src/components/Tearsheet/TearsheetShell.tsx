@@ -268,7 +268,7 @@ export const TearsheetShell = React.forwardRef(
     const carbonPrefix = usePrefix();
     const bcModalHeader = `${carbonPrefix}--modal-header`;
     const renderPortalUse = usePortalTarget(portalTargetIn);
-    const localRef = useRef();
+    const localRef = useRef(undefined);
     const resizer = useRef(null);
     const modalBodyRef = useRef(null);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
@@ -294,7 +294,7 @@ export const TearsheetShell = React.forwardRef(
     const [position, setPosition] = useState(0);
 
     // Keep a record of the previous value of depth.
-    const prevDepth = useRef<number>();
+    const prevDepth = useRef<number | undefined>(undefined);
     useEffect(() => {
       prevDepth.current = depth;
     });

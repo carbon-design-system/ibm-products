@@ -137,7 +137,7 @@ const sampleAILabel = (
 // eslint-disable-next-line react/prop-types
 const Template = ({ actions, aiLabel, slug, ...args }) => {
   const [open, setOpen] = useState(false);
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   const wiredActions = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -178,7 +178,7 @@ const StackedTemplate = ({ actions, aiLabel, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {

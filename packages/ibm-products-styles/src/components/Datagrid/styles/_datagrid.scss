@@ -446,6 +446,8 @@
 }
 
 .#{$block-class}__resizableColumn:hover {
+  background-color: $background-selected-hover;
+
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;
     background-color: $background-selected-hover;

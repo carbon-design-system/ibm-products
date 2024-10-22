@@ -162,7 +162,7 @@ export let CoachmarkStack = React.forwardRef<
     const [parentHeight, setParentHeight] = useState<number>();
     // parent height = child height when stacked behind a child that is shorter
     const childArray = Children.toArray(children);
-    const mountedRef = useRef<boolean>();
+    const mountedRef = useRef<boolean | undefined>(undefined);
     // same value as CSS animation speed
     const delayMs = 240;
 

@@ -70,14 +70,14 @@ const useFilters = ({
   );
 
   const previousState = usePreviousValue({ panelOpen });
-  const filteredItemsRef = useRef();
+  const filteredItemsRef = useRef(undefined);
 
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const lastAppliedFilters = useRef(JSON.stringify(reactTableFiltersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
-  const holdingPrevFiltersRef = useRef();
+  const holdingPrevFiltersRef = useRef(undefined);
   const holdingLastAppliedFiltersRef = useRef([]);
   const holdingPrevFiltersObjectArrayRef = useRef([]);
 

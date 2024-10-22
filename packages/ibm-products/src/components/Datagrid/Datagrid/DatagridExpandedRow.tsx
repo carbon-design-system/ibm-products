@@ -47,8 +47,10 @@ const DatagridExpandedRow =
         <td className={`${blockClass}__expanded-row-cell-wrapper`}>
           <div
             className={`${blockClass}__expanded-row-content`}
-            style={{
-              height: expandedContentHeight && expandedContentHeight,
+            ref={(el) => {
+              if (el && el.style && expandedContentHeight) {
+                el.style.height = `${expandedContentHeight}px`;
+              }
             }}
           >
             <ExpandedRowContentComponent key={key} {..._state} />

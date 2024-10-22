@@ -159,11 +159,7 @@ export let AboutModal = React.forwardRef(
     }, [open]);
 
     return renderPortalUse(
-      <FeatureFlags
-        flags={{
-          'enable-experimental-focus-wrap-without-sentinels': true,
-        }}
-      >
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {
             // Pass through any other property values as HTML attributes.

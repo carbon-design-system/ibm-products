@@ -199,7 +199,7 @@ const Template = ({ actions, slug, ...args }) => {
       return action;
     });
 
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   return (
     <>
@@ -250,7 +250,7 @@ const TemplateWithNav = ({ actions, slug, ...args }) => {
       return action;
     });
 
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   return (
     <>
@@ -280,7 +280,7 @@ const TemplateWithNav = ({ actions, slug, ...args }) => {
 
 const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef();
+  const buttonRef = useRef(undefined);
 
   const wiredActions =
     actions &&
@@ -298,7 +298,7 @@ const ReturnFocusTemplate = ({ actions, slug, ...args }) => {
       return action;
     });
 
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   return (
     <>
@@ -341,7 +341,7 @@ const FirstElementDisabledTemplate = ({ actions, slug, ...args }) => {
       return action;
     });
 
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   return (
     <>
@@ -393,7 +393,7 @@ const StackedTemplate = ({ mixedSizes, actions, slug, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {

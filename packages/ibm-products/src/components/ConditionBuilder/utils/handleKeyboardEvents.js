@@ -57,120 +57,126 @@ const handleKeyPressForPopover = (
   const isHoldingShiftKey = checkForHoldingKey(evt, 'shiftKey');
   const isMultiSelect =
     parentContainer.querySelector('ul')?.dataset.multiSelect;
+  const isOptionInput =
+    parentContainer.querySelectorAll(`[role="option"]`)?.length;
   let allItems = [];
-  switch (key) {
-    case 'ArrowUp':
-      evt.preventDefault();
-      //traverse through the popover options, search box, selectAll button
-      parentContainer
-        .querySelectorAll(`[role="option"]`)
-        .forEach((eachElem, index, allElements) => {
-          traverseReverse(
-            eachElem,
-            index,
-            allElements,
-            null,
-            null,
-            conditionBuilderRef
-          );
-        });
-      //scroll to top when we reach a the top of the list to make search box visible
-      if (
-        Array.from(evt.target.closest('ul').querySelectorAll('li')).indexOf(
-          evt.target
-        ) === 1
-      ) {
-        parentContainer.querySelector(
-          `.${blockClass}__popover-content-wrapper`
-        ).scrollTop = 0;
-      }
 
-      break;
-    case 'ArrowDown':
-      evt.preventDefault();
-      //traverse through the popover options, search box, selectAll button
-      parentContainer
-        .querySelectorAll(`[role="option"]`)
-        .forEach((eachElem, index, allElements) => {
-          traverseClockVise(
-            eachElem,
-            index,
-            allElements,
-            null,
-            null,
-            conditionBuilderRef
-          );
-        });
+  if (key === 'Escape') {
+    //focus the corresponding field in which the popover is triggered from
+    focusThisField(evt, conditionBuilderRef);
+    evt.preventDefault();
+  }
 
-      break;
-
-    case 'Tab':
-      allItems = [
-        ...Array.from(
-          parentContainer.querySelectorAll(
-            `.${blockClass}__selectAll-button,[role="searchbox"]`
-          )
-        ),
-        parentContainer.querySelector(`[role="option"]`),
-      ];
-
-      allItems.forEach((eachElem, index, allElements) => {
-        if (isHoldingShiftKey) {
-          traverseReverse(
-            eachElem,
-            index,
-            allElements,
-            true,
-            true,
-            conditionBuilderRef
-          );
-        } else {
-          traverseClockVise(
-            eachElem,
-            index,
-            allElements,
-            true,
-            true,
-            conditionBuilderRef
-          );
-        }
-      });
-      evt.preventDefault();
-      break;
-
-    case ' ':
-      if (isMultiSelect === 'true') {
-        if (document.activeElement.type !== 'button') {
-          //for button , enter key is click which already handled by framework, for other elements trigger click
-          document.activeElement?.click();
-        }
+  if (isOptionInput) {
+    switch (key) {
+      case 'ArrowUp':
         evt.preventDefault();
-      }
+        //traverse through the popover options, search box, selectAll button
+        parentContainer
+          .querySelectorAll(`[role="option"]`)
+          .forEach((eachElem, index, allElements) => {
+            traverseReverse(
+              eachElem,
+              index,
+              allElements,
+              null,
+              null,
+              conditionBuilderRef
+            );
+          });
+        //scroll to top when we reach a the top of the list to make search box visible
+        if (
+          Array.from(
+            evt.target.closest('ul')?.querySelectorAll('li') ?? []
+          ).indexOf(evt.target) === 1
+        ) {
+          parentContainer.querySelector(
+            `.${blockClass}__popover-content-wrapper`
+          ).scrollTop = 0;
+        }
 
-      break;
-    case 'Enter':
-      if (isMultiSelect === 'true') {
-        if (document.activeElement.type !== 'button') {
-          //for button , enter key is click which already handled by framework, for other elements trigger click
+        break;
+      case 'ArrowDown':
+        evt.preventDefault();
+        //traverse through the popover options, search box, selectAll button
+        parentContainer
+          .querySelectorAll(`[role="option"]`)
+          .forEach((eachElem, index, allElements) => {
+            traverseClockVise(
+              eachElem,
+              index,
+              allElements,
+              null,
+              null,
+              conditionBuilderRef
+            );
+          });
+
+        break;
+
+      case 'Tab':
+        allItems = [
+          ...Array.from(
+            parentContainer.querySelectorAll(
+              `.${blockClass}__selectAll-button,[role="searchbox"]`
+            )
+          ),
+          parentContainer.querySelector(`[role="option"]`),
+        ];
+
+        allItems.forEach((eachElem, index, allElements) => {
+          if (isHoldingShiftKey) {
+            traverseReverse(
+              eachElem,
+              index,
+              allElements,
+              true,
+              true,
+              conditionBuilderRef
+            );
+          } else {
+            traverseClockVise(
+              eachElem,
+              index,
+              allElements,
+              true,
+              true,
+              conditionBuilderRef
+            );
+          }
+        });
+        evt.preventDefault();
+        break;
+
+      case ' ':
+        if (isMultiSelect === 'true') {
+          if (document.activeElement.type !== 'button') {
+            //for button , enter key is click which already handled by framework, for other elements trigger click
+            document.activeElement?.click();
+          }
           evt.preventDefault();
-          document.activeElement?.click();
         }
-      } else {
-        if (document.activeElement.type !== 'button') {
-          //for button , enter key is click which already handled by framework, else trigger click
-          focusThisField(evt, conditionBuilderRef);
-          document.activeElement?.click();
+
+        break;
+      case 'Enter':
+        if (isMultiSelect === 'true') {
+          if (document.activeElement.type !== 'button') {
+            //for button , enter key is click which already handled by framework, for other elements trigger click
+            evt.preventDefault();
+            document.activeElement?.click();
+          }
+        } else {
+          if (document.activeElement.type !== 'button') {
+            //for button , enter key is click which already handled by framework, else trigger click
+            focusThisField(evt, conditionBuilderRef);
+            document.activeElement?.click();
+          }
         }
-      }
 
-      break;
-    case 'Escape':
-      //focus the corresponding field in which the popover is triggered\
-      focusThisField(evt, conditionBuilderRef);
-      break;
-
-    default:
-      break;
+        break;
+      default:
+        break;
+    }
   }
 };
 

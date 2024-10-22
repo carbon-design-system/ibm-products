@@ -180,7 +180,7 @@ const Template = (argsIn) => {
     args.tags = args.tags.map((tag) => ({ ...tag, size }));
   }
 
-  const ref = useRef();
+  const ref = useRef(undefined);
   return (
     <div style={{ width: containerWidth }} ref={ref}>
       <TagSet
@@ -244,7 +244,7 @@ const TemplateWithClose = (argsIn) => {
     setLiveTags((prev) => prev.filter((tag) => tag.label !== key));
   };
 
-  const ref = useRef();
+  const ref = useRef(undefined);
   useEffect(() => {
     setLiveTags((prevTags) =>
       prevTags.map((tag) => ({

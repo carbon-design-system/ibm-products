@@ -2,7 +2,7 @@
 
 version: 1
 projectId: 495342db-5046-4ecf-85ea-9ffceb6f8cdf
-endpoint: https://www-api.ibm.com/ibm-telemetry/v1/metrics
+endpoint: https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics
 collect:
   jsx:
     elements:
@@ -857,6 +857,7 @@ collect:
         - isAllRowsSelected
         # SidePanel
         - actionToolbarButtons
+        - aiLabel
         - animateTitle
         - condensedActions
         - includeOverlay

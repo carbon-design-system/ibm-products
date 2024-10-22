@@ -45,7 +45,7 @@ let Toolbar = forwardRef(
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
     r: React.Ref<HTMLDivElement>
   ) => {
-    const focusableElements = useRef<HTMLElement[] | undefined>();
+    const focusableElements = useRef<HTMLElement[] | undefined>(undefined);
 
     const getFocusableElements = useCallback(
       (): HTMLElement[] | undefined => focusableElements.current,

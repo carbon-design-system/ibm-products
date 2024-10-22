@@ -87,7 +87,7 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });

@@ -149,8 +149,8 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
-    const overlayBackupRef = useRef();
-    const backupRef = useRef();
+    const overlayBackupRef = useRef(undefined);
+    const backupRef = useRef(undefined);
     const _coachmarkRef = ref || backupRef;
     const _overlayRef = overlayRef || overlayBackupRef;
 

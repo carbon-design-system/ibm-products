@@ -138,7 +138,7 @@ export let AboutModal = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const bodyRef = useRef<HTMLElement | null | undefined>(null);
-    const localRef = useRef();
+    const localRef = useRef(undefined);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = uuidv4();

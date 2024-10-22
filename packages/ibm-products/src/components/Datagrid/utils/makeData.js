@@ -8,7 +8,7 @@
 import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
-import { ExampleSlug } from './ExampleSlug';
+import { ExampleAILabel } from './ExampleAILabel';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
   const roundedMin = Math.ceil(min);
@@ -156,9 +156,9 @@ const newPerson = (index, config) => {
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),
-    slug: config?.enableAIRow &&
+    aiLabel: config?.enableAIRow &&
       (index === 1 || index === 3 || index === 4) && (
-        <ExampleSlug align={config?.slugAlign} />
+        <ExampleAILabel align={config?.aiLabelAlign} />
       ),
     id: config?.id ? `${config?.id}__${index}` : `row_${index}`,
   };

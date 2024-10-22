@@ -11,6 +11,7 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -154,6 +155,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     const _overlayRef = overlayRef || overlayBackupRef;
 
     const portalNode = useRef<Element | DocumentFragment | null>(null);
+    const popoverRef = useRef<HTMLDivElement>(null);
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
@@ -207,10 +209,15 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         setShouldResetPosition(true);
       }
     };
-    const overlayPositionStyle = {
-      top: `${(positionTune?.y ?? 0) - 16}px`,
-      left: `${(positionTune?.x ?? 0) - 16}px`,
-    };
+    const overlayPositionStyle = useMemo(() => {
+      const top = (positionTune?.y ?? 0) - 16;
+      const left = (positionTune?.x ?? 0) - 16;
+
+      return {
+        top: `${top}px`,
+        left: `${left}px`,
+      };
+    }, [positionTune]);
 
     const contextValue = {
       buttonProps: {
@@ -242,6 +249,20 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         setIsOpen(true);
       }
     }, [shouldResetPosition]);
+
+    useIsomorphicEffect(() => {
+      if (
+        popoverRef.current &&
+        popoverRef.current.style &&
+        overlayPositionStyle
+      ) {
+        const combinedStyle = {
+          position: 'absolute',
+          ...overlayPositionStyle,
+        };
+        Object.assign(popoverRef.current.style, combinedStyle);
+      }
+    }, [popoverRef, overlayPositionStyle]);
 
     // On unmount:
     // - DO NOT "Close()" the coachmark.
@@ -299,15 +320,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
             <Popover
               highContrast
               caret
-              ref={(el) => {
-                if (el && el?.style && overlayPositionStyle) {
-                  const combinedStyle = {
-                    position: 'absolute',
-                    ...overlayPositionStyle,
-                  };
-                  Object.assign(el.style, combinedStyle);
-                }
-              }}
+              ref={popoverRef}
               align={align as PopoverAlignment}
               autoAlign={autoAlign}
               open={isOpen}

@@ -267,7 +267,7 @@ const commonTests = (Ts, name, props, testActions) => {
 
       // eslint-disable-next-line react/prop-types
       const DummyComponent = ({ open }) => {
-        const buttonRef = React.useRef();
+        const buttonRef = React.useRef(undefined);
 
         return (
           <>

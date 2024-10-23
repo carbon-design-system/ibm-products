@@ -368,6 +368,22 @@ $motion-duration: $duration-moderate-02;
     flex-grow: 1;
   }
 
+  .#{$block-class}__content.#{$block-class}__content__v2 {
+    display: grid;
+    padding: $spacing-06 $spacing-06 0 $spacing-06;
+    grid-template-rows: 1fr min-content max-content;
+  }
+
+  .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    width: calc(100% + #{$spacing-09});
+    transform: translateX(calc(-1 * #{$spacing-06}));
+  }
+
+  .#{$block-class}__button-container.#{$block-class}__button-container__v2
+    .cds--btn {
+    max-width: none;
+  }
+
   &.#{$block-class}--has-slug .#{$block-class}__content,
   &.#{$block-class}--has-ai-label .#{$block-class}__content {
     @include utilities.ai-popover-gradient('default', 0);

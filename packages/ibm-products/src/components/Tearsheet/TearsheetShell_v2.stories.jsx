@@ -10,7 +10,15 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetShellV2 } from './TearsheetShell_v2';
-import { Button, AILabel, AILabelContent, TextInput, ProgressIndicator, ProgressStep, CodeSnippet } from '@carbon/react';
+import {
+  Button,
+  AILabel,
+  AILabelContent,
+  TextInput,
+  ProgressIndicator,
+  ProgressStep,
+  CodeSnippet,
+} from '@carbon/react';
 import { useStepContext } from './StepFlow/stepContext';
 import { StepGroup } from './StepFlow/StepGroup';
 import { StepActions } from './StepFlow/StepActions';
@@ -72,14 +80,15 @@ function Step1() {
   const { setFormState, formState } = useStepContext();
   const { email } = formState || {};
   return (
-    <div>
+    <div className="step-container">
       <h4>Step 1</h4>
       <TextInput
         onChange={(e) => {
-          setFormState(prev => ({
-          ...prev,
-          email: e.target.value,
-        }))}}
+          setFormState((prev) => ({
+            ...prev,
+            email: e.target.value,
+          }));
+        }}
         labelText="Email"
         value={email}
       />
@@ -91,14 +100,15 @@ function Step2() {
   const { setFormState, formState } = useStepContext();
   const { city } = formState || {};
   return (
-    <div>
+    <div className="step-container">
       <h4>Step 2</h4>
       <TextInput
         onChange={(e) => {
-          setFormState(prev => ({
-          ...prev,
-          city: e.target.value,
-        }))}}
+          setFormState((prev) => ({
+            ...prev,
+            city: e.target.value,
+          }));
+        }}
         labelText="City"
         value={city}
       />
@@ -111,15 +121,11 @@ function Step3() {
   const { formState } = useStepContext();
   console.log(formState);
   return (
-    <div>
+    <div className="step-container">
       <h4>Step 3</h4>
       <p>
         Form state
-        <CodeSnippet type="multi">
-          {
-            JSON.stringify(formState)
-          }
-        </CodeSnippet>
+        <CodeSnippet type="multi">{JSON.stringify(formState)}</CodeSnippet>
       </p>
     </div>
   );
@@ -154,30 +160,49 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
         </StepGroup>
 
         {/* Step actions */}
-        <StepActions buttonRenderer={({
-          currentStep,
-          handleNext,
-          numSteps,
-          handleGoToStep,
-          setFormState,
-          handlePrev
-        }) => (
-          <>
-            <Button className='step-action-button' kind="ghost" onClick={() => setOpen(false)}>Cancel</Button>
-            <Button className='step-action-button' kind="secondary" onClick={() => handlePrev()} disabled={currentStep === 1}>Back</Button>
-            <Button className='step-action-button' onClick={() => {
-              if (currentStep === numSteps) {
-                // submit
-                setOpen(false);
-                handleGoToStep(1);
-                setFormState({});
-              } else {
-                handleNext()
-              }
-              
-            }}>{currentStep === numSteps ? 'Submit' : 'Next'}</Button>
-          </>
-        )} />
+        <StepActions
+          buttonRenderer={({
+            currentStep,
+            handleNext,
+            numSteps,
+            handleGoToStep,
+            setFormState,
+            handlePrev,
+          }) => (
+            <>
+              <Button
+                className="step-action-button"
+                kind="ghost"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="step-action-button"
+                kind="secondary"
+                onClick={() => handlePrev()}
+                disabled={currentStep === 1}
+              >
+                Back
+              </Button>
+              <Button
+                className="step-action-button"
+                onClick={() => {
+                  if (currentStep === numSteps) {
+                    // submit
+                    setOpen(false);
+                    handleGoToStep(1);
+                    setFormState({});
+                  } else {
+                    handleNext();
+                  }
+                }}
+              >
+                {currentStep === numSteps ? 'Submit' : 'Next'}
+              </Button>
+            </>
+          )}
+        />
       </TearsheetShellV2>
     </div>
   );
@@ -190,11 +215,25 @@ AllAttributesSet.args = {
   height: 'normal',
   open: true,
   size: 'wide',
-  influencer: ({ currentStep, handleGoToStep }) => <div className="tearsheet-stories__dummy-content-block">
-  <ProgressIndicator vertical onChange={stepIndex => handleGoToStep(stepIndex + 1)}>
-    <ProgressStep complete={currentStep > 1} current={currentStep === 1} label="Step 1" secondaryLabel="Optional label" />
-    <ProgressStep complete={currentStep > 2} current={currentStep === 2} label="Step 2" />
-    <ProgressStep current={currentStep === 3} label="Step 3" />
-  </ProgressIndicator>
-</div>
+  influencer: ({ currentStep, handleGoToStep }) => (
+    <div className="tearsheet-stories__dummy-content-block">
+      <ProgressIndicator
+        vertical
+        onChange={(stepIndex) => handleGoToStep(stepIndex + 1)}
+      >
+        <ProgressStep
+          complete={currentStep > 1}
+          current={currentStep === 1}
+          label="Step 1"
+          secondaryLabel="Optional label"
+        />
+        <ProgressStep
+          complete={currentStep > 2}
+          current={currentStep === 2}
+          label="Step 2"
+        />
+        <ProgressStep current={currentStep === 3} label="Step 3" />
+      </ProgressIndicator>
+    </div>
+  ),
 };

@@ -19,15 +19,13 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
+    defaultValue: 'g10',
     toolbar: {
       icon: 'paintbrush',
-      title: 'Theme',
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
 };
-
 export const parameters = {
   a11y: {
     // Can specify engine as "axe" or "accessibility-checker" (axe default)

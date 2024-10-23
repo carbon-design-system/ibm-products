@@ -137,7 +137,7 @@ const TemplateWithClose = (argsIn) => {
     setLiveTags((prev) => prev.filter((item) => item.label !== key));
   };
 
-  const ref = useRef();
+  const ref = useRef(undefined);
   return (
     <div style={{ width: containerWidth }} ref={ref}>
       <TagOverflow

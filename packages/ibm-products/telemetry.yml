@@ -857,6 +857,7 @@ collect:
         - isAllRowsSelected
         # SidePanel
         - actionToolbarButtons
+        - aiLabel
         - animateTitle
         - condensedActions
         - includeOverlay

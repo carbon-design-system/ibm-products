@@ -22,7 +22,7 @@ import {
   handleColumnResizingEvent,
 } from './addons/stateReducer';
 import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
-import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './addons/AiLabel/DatagridAiLabel';
 import { useInitialColumnSort } from '../useInitialColumnSort';
 import {
   DataGridHeader,
@@ -182,14 +182,17 @@ const HeaderRow = (
   const { className: headerGroupClassName, ...headerGroupProps } =
     headerGroup.getHeaderGroupProps({ role: undefined });
 
-  const renderSlug = (slug) => {
+  const renderAILabel = (aiLabel) => {
     if (isTableSortable) {
       return;
     }
-    return <DatagridSlug slug={slug} />;
+    return <DatagridAILabel aiLabel={aiLabel} />;
   };
 
-  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some(
+    (r) =>
+      isValidElement(r?.original?.aiLabel) || isValidElement(r?.original?.slug)
+  );
   const { key, ...rowProps } = headerGroupProps;
   const withActionsColumn = headers
     ? !!headers.filter((header) => header.isAction).length
@@ -223,13 +226,16 @@ const HeaderRow = (
           const resizerProps = header?.getResizerProps?.({ role: undefined });
           const headerStyle = headerProps?.style;
           const lastVisibleIndex = withActionsColumn ? 2 : 1;
-          const lastVisibleFlexStyle =
-            index === visibleColumns.length - lastVisibleIndex
-              ? '1 1 0'
-              : '0 0 auto';
+          const isLastVisibleColumn =
+            index === visibleColumns.length - lastVisibleIndex;
+
           if (headerStyle) {
-            headerStyle.flex = lastVisibleFlexStyle;
+            Object.assign(headerStyle, {
+              flex: isLastVisibleColumn ? '1 1 0' : '0 0 auto',
+              overflow: isLastVisibleColumn ? 'hidden' : headerStyle.overflow,
+            });
           }
+
           return (
             <TableHeader
               {...headerProps}
@@ -244,6 +250,8 @@ const HeaderRow = (
                   [`${blockClass}__header-actions-column`]: header?.isAction,
                   [`${blockClass}__with-slug`]:
                     header.slug && React.isValidElement(header?.slug),
+                  [`${blockClass}__with-ai-label`]:
+                    header.aiLabel && React.isValidElement(header?.aiLabel),
                 },
                 headerProps.className
               )}
@@ -252,7 +260,7 @@ const HeaderRow = (
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
-              {renderSlug(header.slug)}
+              {renderAILabel(header.aiLabel || header.slug)}
               {resizerProps && !header.isAction && (
                 <ResizeHeader
                   {...{

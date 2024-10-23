@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// NOTE: Please do not remove the duplicate `slug` and `ai-label` classes. We need both until slug is fully deprecated
+
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -148,16 +150,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   right: $spacing-05;
 }
 
-.#{$block-class}__header-container--has-slug {
+.#{$block-class}__header-container--has-slug,
+.#{$block-class}__header-container--has-ai-label {
   width: 100%;
   padding-right: $spacing-07;
 }
 
-.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions {
+.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions,
+.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--has-actions {
   padding-right: $spacing-08;
 }
 
-.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label {
+.#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label,
+.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--large-tile-or-label {
   padding-right: $spacing-09;
 }
 
@@ -170,7 +175,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   pointer-events: none;
 }
 
-.#{$block-class}--has-slug {
+.#{$block-class}--has-slug,
+.#{$block-class}--has-ai-label {
   @include utilities.ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -178,7 +184,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     0 4px 10px 2px $ai-drop-shadow;
 }
 
-.#{$block-class}__clickable.#{$block-class}--has-slug::before {
+.#{$block-class}__clickable.#{$block-class}--has-slug::before,
+.#{$block-class}__clickable.#{$block-class}--has-ai-label::before {
   @include utilities.ai-popover-gradient('hover', 0, 'layer');
 
   position: absolute;
@@ -193,7 +200,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   transition: opacity $duration-fast-02 motion(standard, productive);
 }
 
-.#{$block-class}__clickable.#{$block-class}--has-slug:hover::before {
+.#{$block-class}__clickable.#{$block-class}--has-slug:hover::before,
+.#{$block-class}__clickable.#{$block-class}--has-ai-label:hover::before {
   opacity: 1;
 }
 

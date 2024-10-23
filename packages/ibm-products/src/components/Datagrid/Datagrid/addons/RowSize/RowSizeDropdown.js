@@ -20,7 +20,7 @@ const RowSizeDropdown = ({
   legendText = 'Row settings',
   ...props
 }) => {
-  const radioGroupRef = useRef();
+  const radioGroupRef = useRef(undefined);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const onCloseHandler = () => {

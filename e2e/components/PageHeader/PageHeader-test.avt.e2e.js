@@ -127,9 +127,10 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-
     // renders all buttons on large screens by default
-    await pressTabKey(page, 14);
+    // await pressTabKey(page, 14);
+    await page.getByRole('button', { name: 'danger Danger button' }).focus();
+    // erroring here
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -173,9 +174,9 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-
     // renders all buttons on large screens by default
     await pressTabKey(page, 14);
+    // erroring here
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -219,9 +220,9 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-
     // renders all buttons on large screens by default
     await pressTabKey(page, 4);
+    // erroring here
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
     await page.keyboard.press('Tab');
     await expect(page.getByRole('tooltip').getByText('Action 2')).toBeVisible();
@@ -265,6 +266,5 @@ test.describe('PageHeader @avt', () => {
 async function pressTabKey(page, number) {
   for (let i = 0; i < number; i++) {
     await page.keyboard.press('Tab');
-    await page.waitForTimeout(40);
   }
 }

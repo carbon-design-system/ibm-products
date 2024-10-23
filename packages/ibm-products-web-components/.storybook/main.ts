@@ -19,6 +19,10 @@ const config = {
         litTemplateLoader(),
         viteSVGResultCarbonIconLoader(),
       ],
+      optimizeDeps: {
+        include: ['@storybook/web-components'],
+        exclude: ['lit', 'lit-html'],
+      },
     });
   },
 };

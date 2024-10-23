@@ -33,11 +33,10 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const pageTitle = page
-      .getByRole('heading', {
-        name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
-      })
-      .locator('span');
+
+    const pageTitle = page.getByRole('button', {
+      name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
+    });
 
     // The header starts expanded.
     await expect(pageTitle).toBeInViewport();
@@ -68,11 +67,8 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const pageTitle = page
-      .getByRole('heading', {
-        name: 'Page title',
-      })
-      .locator('span');
+
+    const pageTitle = page.getByRole('heading').getByText('Page title');
 
     // The header starts collapsed.
     await page.waitForTimeout(200);
@@ -93,17 +89,15 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const pageTitle = page
-      .getByRole('heading', {
-        name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
-      })
-      .locator('span');
+    const pageTitle = page.getByRole('button', {
+      name: 'A very long page title with a short version in breadcrumbs; this will almost certainly be truncated at some point',
+    });
 
     // The header starts expanded.
     await expect(pageTitle).toBeInViewport();
 
     // The header collapses when the cheveron button is toggled close.
-    await pressTabKey(page, 19);
+    await pressTabKey(page, 20);
     await expect(page.getByLabel('Collapse the page header')).toBeFocused();
     await page.keyboard.press('Enter');
     await page.waitForTimeout(300);
@@ -129,7 +123,7 @@ test.describe('PageHeader @avt', () => {
     });
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 14);
+    await pressTabKey(page, 15);
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();
@@ -145,7 +139,7 @@ test.describe('PageHeader @avt', () => {
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
     await page.getByLabel('Open and close additional').focus();
-    await pressTabKey(page, 5);
+    await pressTabKey(page, 6);
 
     await expect(
       page.getByRole('button', { name: 'Page actions' })
@@ -175,7 +169,7 @@ test.describe('PageHeader @avt', () => {
     });
 
     // renders all buttons on large screens by default
-    await pressTabKey(page, 14);
+    await pressTabKey(page, 15);
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();

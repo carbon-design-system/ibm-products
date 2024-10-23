@@ -14,21 +14,21 @@ import theme from './theme';
 import './templates/with-layer';
 
 setCustomElementsManifest(customElements);
+console.log('inside????');
+console.log(theme, 'theme');
 
-export const globalTypes = {
+const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
+    defaultValue: 'g10',
     toolbar: {
       icon: 'paintbrush',
-      title: 'Theme',
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
 };
-
-export const parameters = {
+const parameters = {
   a11y: {
     // Can specify engine as "axe" or "accessibility-checker" (axe default)
     engine: 'accessibility-checker',
@@ -139,7 +139,7 @@ export const parameters = {
   },
 };
 
-export const decorators = [
+const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
@@ -153,6 +153,12 @@ export const decorators = [
     return container({ hasMainTag, children: result });
   },
 ];
+
+// export const Preview = {
+//   parameters,
+//   globalTypes,
+//   decorators,
+// };
 
 export default {
   parameters,

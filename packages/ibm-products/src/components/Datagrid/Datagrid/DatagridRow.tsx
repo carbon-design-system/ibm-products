@@ -11,7 +11,7 @@ import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
-import { DatagridSlug } from './addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './addons/AiLabel/DatagridAiLabel';
 import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -132,7 +132,10 @@ const DatagridRow = (datagridState: DataGridState) => {
   };
 
   const { className, ...rowProps } = row.getRowProps({ role: undefined });
-  const foundAIRow = rows.some((r) => isValidElement(r?.original?.slug));
+  const foundAIRow = rows.some(
+    (r) =>
+      isValidElement(r?.original?.aiLabel) || isValidElement(r?.original?.slug)
+  );
 
   const rowClassNames = cx(`${blockClass}__carbon-row`, {
     [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
@@ -141,6 +144,7 @@ const DatagridRow = (datagridState: DataGridState) => {
       getAsyncSubRows && row.depth > 0,
     [`${carbon.prefix}--data-table--selected`]: row.isSelected,
     [`${blockClass}__slug--row`]: isValidElement(row?.original?.slug),
+    [`${blockClass}__ai-label--row`]: isValidElement(row?.original?.aiLabel),
   });
 
   const withActionsColumn = headers
@@ -162,13 +166,21 @@ const DatagridRow = (datagridState: DataGridState) => {
         {...setAdditionalRowProps()}
       >
         {foundAIRow ? (
-          row?.original?.slug ? (
+          row?.original?.aiLabel ? (
+            <td
+              className={cx(`${blockClass}__table-row-ai-enabled`, {
+                [`${blockClass}__ai-label--expanded`]: row.isExpanded,
+              })}
+            >
+              <DatagridAILabel aiLabel={row?.original?.aiLabel} />
+            </td>
+          ) : row?.original?.slug ? (
             <td
               className={cx(`${blockClass}__table-row-ai-enabled`, {
                 [`${blockClass}__slug--expanded`]: row.isExpanded,
               })}
             >
-              <DatagridSlug slug={row?.original?.slug} />
+              <DatagridAILabel aiLabel={row?.original?.slug} />
             </td>
           ) : (
             <td className={`${blockClass}__table-row-ai-spacer`} />
@@ -213,6 +225,10 @@ const DatagridRow = (datagridState: DataGridState) => {
                     associatedHeader &&
                     associatedHeader.length &&
                     isValidElement(associatedHeader[0]?.slug),
+                  [`${blockClass}__ai-label--cell`]:
+                    associatedHeader &&
+                    associatedHeader.length &&
+                    isValidElement(associatedHeader[0]?.aiLabel),
                 },
                 columnClassname
               )}

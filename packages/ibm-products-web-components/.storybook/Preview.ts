@@ -154,7 +154,7 @@ export const decorators = [
   },
 ];
 
-export default {
+export const Preview = {
   parameters,
   globalTypes,
   decorators,

@@ -162,6 +162,12 @@ type CreateFullPageBaseProps = {
   noTrailingSlash?: boolean;
 
   /**
+   * onChange event for Progress Indicator in the Influencer
+   * @param data step index
+   */
+  onClickInfluencerStep?: (data: number) => void;
+
+  /**
    * An optional handler that is called when the user closes the full page (by
    * clicking the secondary button, located in the modal, which triggers after
    * clicking the ghost button in the modal
@@ -233,6 +239,7 @@ export let CreateFullPage = React.forwardRef(
       modalSecondaryButtonText,
       modalTitle,
       nextButtonText,
+      onClickInfluencerStep,
       onClose,
       onRequestSubmit,
       firstFocusElement,
@@ -253,6 +260,7 @@ export let CreateFullPage = React.forwardRef(
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     const previousState = usePreviousValue({ currentStep, open });
     const [isDisabled, setIsDisabled] = useState(false);
+    const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState<Step[]>([]);
@@ -309,6 +317,7 @@ export let CreateFullPage = React.forwardRef(
       firstIncludedStep,
       lastIncludedStep,
       stepData,
+      onPrevious,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
@@ -355,6 +364,7 @@ export let CreateFullPage = React.forwardRef(
               stepData={stepData}
               currentStep={currentStep}
               title={secondaryTitle}
+              onClickStep={onClickInfluencerStep}
             />
           </div>
           <div className={`${blockClass}__body`}>
@@ -366,6 +376,7 @@ export let CreateFullPage = React.forwardRef(
                       {
                         currentStep,
                         setIsDisabled,
+                        setOnPrevious: (fn) => setOnPrevious(() => fn),
                         setOnNext: (fn) => setOnNext(() => fn),
                         setOnMount: (fn) => setOnMount(() => fn),
                         setStepData,
@@ -526,6 +537,11 @@ CreateFullPage.propTypes = {
    * A prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash: PropTypes.bool,
+
+  /**
+   * onChange event for Progress Indicator in the Influencer
+   */
+  onClickInfluencerStep: PropTypes.func,
 
   /**
    * An optional handler that is called when the user closes the full page (by

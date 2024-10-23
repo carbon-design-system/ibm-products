@@ -15,7 +15,7 @@ import './templates/with-layer';
 
 setCustomElementsManifest(customElements);
 
-export const globalTypes = {
+const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
@@ -26,7 +26,7 @@ export const globalTypes = {
     },
   },
 };
-export const parameters = {
+const parameters = {
   a11y: {
     // Can specify engine as "axe" or "accessibility-checker" (axe default)
     engine: 'accessibility-checker',
@@ -137,7 +137,7 @@ export const parameters = {
   },
 };
 
-export const decorators = [
+const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
@@ -152,7 +152,13 @@ export const decorators = [
   },
 ];
 
-export const Preview = {
+// export const Preview = {
+//   parameters,
+//   globalTypes,
+//   decorators,
+// };
+
+export default {
   parameters,
   globalTypes,
   decorators,

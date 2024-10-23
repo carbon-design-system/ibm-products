@@ -234,6 +234,12 @@ export let UserProfileImage = React.forwardRef<
   }
 );
 
+/**@ts-ignore*/
+UserProfileImage.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with UserAvatar`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 UserProfileImage = pkg.checkComponentEnabled(UserProfileImage, componentName);
 

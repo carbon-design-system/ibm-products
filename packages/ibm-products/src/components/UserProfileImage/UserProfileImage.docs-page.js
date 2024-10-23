@@ -1,3 +1,4 @@
+/* cSpell:disable */
 /**
  * Copyright IBM Corp. 2024
  *
@@ -12,6 +13,11 @@ import * as stories from './UserProfileImage.stories';
 const DocsPage = () => (
   <StoryDocsPage
     blocks={[
+      {
+        title: 'Deprecation notice',
+        description:
+          'This component is deprecated and will be removed in the next major version. Please migrate to [UserAvatar](?path=/docs/experimental-components-user-avatar-useravatar--docs#migration-from-userprofileimage).',
+      },
       {
         story: stories.Default,
       },

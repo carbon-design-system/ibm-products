@@ -448,15 +448,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .#{$block-class}__title-icon-wrapper {
-    display: flex;
-  }
   .#{$block-class}__title {
     @include type.type-style('heading-04');
 
     display: flex;
     min-height: $spacing-08;
-    align-items: center;
   }
 
   .#{$block-class}__title--editable {

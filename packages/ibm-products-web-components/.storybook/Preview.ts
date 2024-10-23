@@ -14,6 +14,8 @@ import theme from './theme';
 import './templates/with-layer';
 
 setCustomElementsManifest(customElements);
+console.log('inside????');
+console.log(theme, 'theme');
 
 const globalTypes = {
   theme: {

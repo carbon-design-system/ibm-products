@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Tag, Tooltip } from '@carbon/react';
+import { Tag, Tooltip, DismissibleTag } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { TYPES } from './constants';
@@ -27,9 +27,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-
 export interface TagOverflowItem {
   className?: string;
+  /**
+   * @deprecated The `filter` prop is no longer going to be used. To use DismissibleTags, pass in an onClose function.
+   */
   filter?: boolean;
   id: string;
   label: string;
@@ -273,19 +275,28 @@ export let TagOverflow = forwardRef(
             if (tagComponent) {
               return getCustomComponent(item, tagComponent);
             } else {
-              const { id, label, tagType, onClose, ...other } = item;
+              const { id, label, tagType, onClose, filter, ...other } = item;
               // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
                   <Tooltip align={overflowAlign} label={label}>
-                    <Tag
-                      {...other}
-                      className={`${blockClass}__item--tag`}
-                      type={tagType}
-                      onClose={() => handleTagOnClose(onClose, index)}
-                    >
-                      {label}
-                    </Tag>
+                    {typeof onClose === 'function' || filter ? (
+                      <DismissibleTag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                        onClose={() => handleTagOnClose(onClose, index)}
+                        text={label}
+                      />
+                    ) : (
+                      <Tag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                      >
+                        {label}
+                      </Tag>
+                    )}
                   </Tooltip>
                 </div>
               );

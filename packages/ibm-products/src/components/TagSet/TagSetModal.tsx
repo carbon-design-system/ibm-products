@@ -128,7 +128,7 @@ export const TagSetModal = ({
         aria-label={modalAriaLabel}
       >
         {filteredModalTags.map(({ label, ...other }, index) => (
-          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+          <Tag {...other} key={`all-tags-${index}`}>
             {label}
           </Tag>
         ))}

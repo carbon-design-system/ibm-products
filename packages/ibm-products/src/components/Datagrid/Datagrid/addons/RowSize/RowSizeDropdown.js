@@ -18,6 +18,7 @@ const blockClass = `${pkg.prefix}--datagrid__row-size`;
 const RowSizeDropdown = ({
   align = 'bottom-right',
   legendText = 'Row settings',
+  autoAlign,
   ...props
 }) => {
   const radioGroupRef = useRef(undefined);
@@ -63,6 +64,7 @@ const RowSizeDropdown = ({
       className={`${blockClass}-options-container`}
       onKeyDown={onKeyHandler}
       onBlur={onBlurHandler}
+      autoAlign={autoAlign}
     >
       <IconButton
         align={align}
@@ -90,6 +92,7 @@ const RowSizeDropdown = ({
 
 RowSizeDropdown.propTypes = {
   align: IconButton.propTypes.align,
+  autoAlign: PropTypes.bool,
   datagridName: PropTypes.string,
   legendText: PropTypes.string,
   light: PropTypes.bool,

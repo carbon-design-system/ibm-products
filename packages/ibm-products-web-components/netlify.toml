@@ -5,5 +5,6 @@ publish = "storybook-static"
 ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF packages/ibm-products-web-components"
 
 [build.environment]
+NODE_VERSION="20"
 YARN_ENABLE_GLOBAL_CACHE = "true"
 YARN_GLOBAL_FOLDER = "/opt/buildhome/.yarn_cache"

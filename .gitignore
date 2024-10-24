@@ -75,3 +75,6 @@ package-lock.json
 # Actions
 /actions/**/node_modules
 /actions/**/yarn.lock
+
+# Local Netlify folder
+.netlify

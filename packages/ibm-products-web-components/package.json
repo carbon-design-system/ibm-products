@@ -40,7 +40,7 @@
   ],
   "scripts": {
     "build": "yarn clean && node tasks/build.js && yarn wca",
-    "build:storybook": "yarn wca && storybook build",
+    "build:storybook": "yarn && yarn wca && storybook build",
     "clean": "rimraf es lib scss dist storybook-static",
     "preview": "vite preview",
     "storybook": "storybook dev -p 3000",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.48.0",
-    "@carbon/styles": "1.67.0",
+    "@carbon/styles": "1.68.0",
     "@carbon/web-components": "2.15.0",
     "lit": "^3.1.0"
   },

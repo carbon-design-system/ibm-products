@@ -1863,7 +1863,7 @@ __metadata:
     "@carbon/icons": "npm:^11.51.0"
     "@carbon/motion": "npm:^11.23.1"
     "@carbon/styles": "npm:1.67.0"
-    "@carbon/web-components": "npm:2.16.0-rc.0"
+    "@carbon/web-components": "npm:^2.16.0-rc.0"
     "@mordech/vite-lit-loader": "npm:^0.35.0"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^28.0.0"
@@ -2197,7 +2197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.16.0-rc.0":
+"@carbon/web-components@npm:^2.16.0-rc.0":
   version: 2.16.0-rc.0
   resolution: "@carbon/web-components@npm:2.16.0-rc.0"
   dependencies:

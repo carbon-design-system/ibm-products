@@ -9,7 +9,12 @@ import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
-import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
+import {
+  Tearsheet,
+  TearsheetNarrow,
+  TearsheetNarrowProps,
+  TearsheetProps,
+} from '../../components/Tearsheet';
 import { NotFoundEmptyState } from '../EmptyStates';
 import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
@@ -68,6 +73,9 @@ export interface AddSelectBodyProps {
   title?: string;
   useNormalizedItems?: boolean;
 }
+
+type CommonTearsheetProps = TearsheetNarrowProps &
+  TearsheetProps & { ref: ForwardedRef<HTMLDivElement> };
 
 export const AddSelectBody = forwardRef(
   (
@@ -231,7 +239,7 @@ export const AddSelectBody = forwardRef(
       parentId: path[0].id,
     };
 
-    const commonTearsheetProps = {
+    const commonTearsheetProps: CommonTearsheetProps = {
       ...rest,
       className: tearsheetClassnames,
       open,

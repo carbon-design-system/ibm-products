@@ -67,6 +67,7 @@ const ActionSetButton = React.forwardRef(
 ActionSetButton.displayName = 'ActionSetButton';
 
 ActionSetButton.propTypes = {
+  /**@ts-ignore*/
   ...Button.PropTypes,
   kind: PropTypes.oneOf([
     'ghost',
@@ -96,7 +97,7 @@ export interface ActionSetProps {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps[];
+  actions: ButtonProps<React.ElementType>[];
 
   /**
    * The size of buttons to use for the actions. The allowed values are
@@ -304,6 +305,7 @@ ActionSet.propTypes = {
     ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -315,6 +317,7 @@ ActionSet.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore*/
         onClick: Button.propTypes.onClick,
       })
     ),
@@ -326,6 +329,7 @@ ActionSet.propTypes = {
    * the buttons will be set to this size, overriding any 'size' values (if any)
    * supplied in the actions array (if any).
    */
+  /**@ts-ignore*/
   buttonSize: Button.propTypes.size,
 
   /**

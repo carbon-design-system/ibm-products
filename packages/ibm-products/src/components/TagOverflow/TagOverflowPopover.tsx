@@ -13,6 +13,7 @@ import {
   Tag,
   Popover,
   PopoverContent,
+  PopoverAlignment,
   DismissibleTag,
   OperationalTag,
 } from '@carbon/react';
@@ -25,7 +26,7 @@ export interface Props {
   autoAlign?: boolean;
   className?: string;
   onShowAllClick: () => void;
-  overflowAlign?: string;
+  overflowAlign?: PopoverAlignment;
   overflowTags: TagOverflowItem[];
   overflowType?: string;
   popoverOpen?: boolean;
@@ -67,7 +68,7 @@ export const TagOverflowPopover = forwardRef(
       onShowAllClick?.();
     };
 
-    const handleEscKeyPress = (evt: KeyboardEvent) => {
+    const handleEscKeyPress = (evt) => {
       const { key } = evt;
       if (key === 'Escape') {
         setPopoverOpen?.(false);
@@ -103,7 +104,7 @@ export const TagOverflowPopover = forwardRef(
           dropShadow
           highContrast
           onKeyDown={handleEscKeyPress}
-          open={popoverOpen}
+          open={popoverOpen || false}
         >
           <OperationalTag
             onClick={() => setPopoverOpen?.(!popoverOpen)}

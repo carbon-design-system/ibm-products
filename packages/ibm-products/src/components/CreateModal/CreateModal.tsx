@@ -15,7 +15,7 @@ import {
   ModalHeader,
 } from '@carbon/react';
 // Import portions of React that are needed.
-import React, { PropsWithChildren, ReactNode } from 'react';
+import React, { LegacyRef, PropsWithChildren, ReactNode } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -90,7 +90,7 @@ export interface CreateModalProps
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: ReactNode;
+  selectorPrimaryFocus: string;
 }
 
 /**
@@ -121,7 +121,7 @@ export let CreateModal = React.forwardRef(
       // Collect any other property values passed in.
       ...rest
     }: PropsWithChildren<CreateModalProps>,
-    ref
+    ref: LegacyRef<HTMLDivElement>
   ) => {
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
@@ -222,7 +222,7 @@ CreateModal.propTypes = {
   /**
    * Specifies which DOM element in the form should be focused.
    */
-  selectorPrimaryFocus: PropTypes.node.isRequired,
+  selectorPrimaryFocus: PropTypes.string.isRequired,
   /**
    * The subtitle of the CreateModal is optional and serves to provide more information about the modal.
    */

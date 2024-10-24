@@ -65,6 +65,10 @@ $sizes: (
   }
 }
 
+.#{$block-class}__tooltip button {
+  pointer-events: none;
+}
+
 @mixin photo-styling {
   border-radius: 100%;
   object-fit: fill;

@@ -5,5 +5,6 @@ command = "yarn build && yarn build:storybook"
 publish = "storybook-static"
 
 [build.environment]
+NODE_VERSION="20"
 YARN_ENABLE_GLOBAL_CACHE = "true"
 YARN_GLOBAL_FOLDER = "/opt/buildhome/.yarn_cache"

@@ -69,5 +69,17 @@ test.describe('APIKeyModal @avt', () => {
 
     // Expect focus came back again to input field
     await expect(apiKeyInput).toBeFocused();
+
+    // Close using Esc key
+    await page.keyboard.press('Escape');
+
+    await page
+      .locator(`.${carbon.prefix}--modal`)
+      .evaluate((element) =>
+        Promise.all(
+          element.getAnimations().map((animation) => animation.finished)
+        )
+      );
+    await expect(modalElement).not.toBeInViewport();
   });
 });

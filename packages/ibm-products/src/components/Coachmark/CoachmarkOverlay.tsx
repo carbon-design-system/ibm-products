@@ -12,6 +12,7 @@ import React, {
   useState,
   useEffect,
   ReactNode,
+  useMemo,
 } from 'react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
@@ -26,6 +27,7 @@ import { CoachmarkHeader } from './CoachmarkHeader';
 import { getOffsetTune } from './utils/constants';
 import { useCoachmark } from './utils/context';
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay`;
@@ -126,27 +128,28 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       }
     };
 
-    const styledTune: StyledTune = {};
+    const styledTune: StyledTune = useMemo(() => {
+      const style: StyledTune = {};
+      if (isBeacon || isDraggable) {
+        if (coachmark.targetRect) {
+          style.left = coachmark.targetRect.x + window.scrollX;
+          style.top = coachmark.targetRect.y + window.scrollY;
+        }
+        if (style.left && style.top) {
+          if (isBeacon) {
+            style.left = style.left + 16;
+            style.top = style.top + 16;
+          }
+          if (isDraggable) {
+            const offsetTune = getOffsetTune(coachmark, kind);
 
-    if (isBeacon || isDraggable) {
-      if (coachmark.targetRect) {
-        styledTune.left = coachmark.targetRect.x + window.scrollX;
-        styledTune.top = coachmark.targetRect.y + window.scrollY;
-      }
-      if (styledTune.left && styledTune.top) {
-        if (isBeacon) {
-          // Compensate for radius of beacon
-          styledTune.left += 16;
-          styledTune.top += 16;
-        }
-        if (isDraggable) {
-          // Compensate for width and height of target element
-          const offsetTune = getOffsetTune(coachmark, kind);
-          styledTune.left += offsetTune.left;
-          styledTune.top += offsetTune.top;
+            style.left = style.left + offsetTune.left;
+            style.top = style.top + offsetTune.top;
+          }
         }
       }
-    }
+      return style;
+    }, [isBeacon, isDraggable, coachmark, kind]);
 
     function handleDragBounds(x, y) {
       let xRes = x;
@@ -187,6 +190,16 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     }
     const contentId = uuidv4();
 
+    useIsomorphicEffect(() => {
+      if (overlayRef.current) {
+        const currentStyle = overlayRef.current?.style;
+        Object.keys(styledTune).forEach((key) => {
+          const value = styledTune[key];
+          currentStyle.setProperty(key, `${value}px`);
+        });
+      }
+    }, [styledTune, overlayRef]);
+
     return (
       <div
         {...rest}
@@ -200,7 +213,6 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           className
         )}
         ref={overlayRef}
-        style={styledTune}
         aria-labelledby={contentId}
         tabIndex={-1}
         {...getDevtoolsProps(componentName)}

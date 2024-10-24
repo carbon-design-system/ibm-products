@@ -23,7 +23,7 @@ import { px } from '@carbon/layout';
 
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
-import { usePreviousValue } from '../../global/js/hooks';
+import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
@@ -44,6 +44,8 @@ import {
   IdType,
   TableBodyPropGetter,
   TableBodyProps,
+  Row,
+  Cell,
 } from 'react-table';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -682,6 +684,56 @@ export const DataSpreadsheetBody = forwardRef(
       return <div />;
     };
 
+    const rowHeaderButtonRefs = useRef<
+      Array<{ el: HTMLButtonElement | null; row: Row }>
+    >([]);
+
+    const cellRefs = useRef<Array<{ el: HTMLDivElement | null; cell: Cell }>>(
+      []
+    );
+
+    // This function loops over the row header button inside the row and saves each ref inside an obj and it's respective row it is in
+
+    const aggregateRowHeaderButtonRefs = (
+      el: HTMLButtonElement | null,
+      row: any
+    ) => rowHeaderButtonRefs.current.push({ el, row });
+
+    const aggregateCellRefs = (el: HTMLDivElement | null, cell: Cell) =>
+      cellRefs.current.push({ el, cell });
+
+    // Applies inline styles to elements inside refs, this is due to CSP Violations
+    useIsomorphicEffect(() => {
+      rowHeaderButtonRefs.current.forEach(({ el, row }) => {
+        if (!el) {
+          return;
+        }
+        el.style.width = String(defaultColumn?.rowHeaderWidth);
+        el.style.flexDirection = String(
+          hasCustomRowHeader
+            ? renderRowHeaderDirection === 'Left'
+              ? 'row-reverse'
+              : row
+            : undefined
+        );
+      });
+    }, [hasCustomRowHeader, defaultColumn, renderRowHeaderDirection]);
+
+    useIsomorphicEffect(() => {
+      cellRefs.current.forEach(({ el, cell }) => {
+        if (!el) {
+          return;
+        }
+        el.style.display = 'grid';
+        el.style.minWidth = String(cell?.column?.width || defaultColumn?.width);
+        console.log(cell.getCellProps().style);
+        // Convert any extra styles by using entries
+        Object.entries({ ...cell.getCellProps().style }).forEach(
+          ([key, value]) => (el.style[key] = value)
+        );
+      });
+    }, [defaultColumn?.width]);
+
     // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
@@ -704,6 +756,7 @@ export const DataSpreadsheetBody = forwardRef(
                 className={`${blockClass}__td-th--cell-container`}
               >
                 <button
+                  ref={(el) => aggregateRowHeaderButtonRefs(el, row)}
                   id={`${blockClass}__cell--${index}--header`}
                   tabIndex={-1}
                   data-row-index={index}
@@ -732,14 +785,6 @@ export const DataSpreadsheetBody = forwardRef(
                         ),
                     }
                   )}
-                  style={{
-                    width: defaultColumn?.rowHeaderWidth,
-                    flexDirection: hasCustomRowHeader
-                      ? renderRowHeaderDirection === 'Left'
-                        ? 'row-reverse'
-                        : row
-                      : undefined,
-                  }}
                 >
                   {index + 1}
                   {hasCustomRowHeader &&
@@ -752,15 +797,11 @@ export const DataSpreadsheetBody = forwardRef(
                 const cellProps = prepareProps(cell.getCellProps(), 'key');
                 return (
                   <div
+                    ref={(el) => aggregateCellRefs(el, cell)}
                     key={`cell_${index}`}
                     aria-colindex={index + 1}
                     {...cellProps}
                     role="gridcell"
-                    style={{
-                      ...cell.getCellProps().style,
-                      display: 'grid',
-                      minWidth: cell?.column?.width || defaultColumn?.width,
-                    }}
                   >
                     <button
                       id={`${blockClass}__cell--${cell.row.index}--${index}`}
@@ -789,7 +830,6 @@ export const DataSpreadsheetBody = forwardRef(
       [
         prepareRow,
         renderRowHeader,
-        renderRowHeaderDirection,
         rows,
         hasCustomRowHeader,
         activeCellCoordinates?.row,
@@ -797,7 +837,6 @@ export const DataSpreadsheetBody = forwardRef(
         handleRowHeaderClickEvent,
         handleBodyCellClickEvent,
         handleBodyCellHoverEvent,
-        defaultColumn,
         columns,
       ]
     );

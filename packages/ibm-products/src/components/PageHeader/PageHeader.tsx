@@ -36,7 +36,11 @@ import {
   deprecateProp,
   prepareProps,
 } from '../../global/js/utils/props-helper';
-import { useNearestScroll, useWindowResize } from '../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  useNearestScroll,
+  useWindowResize,
+} from '../../global/js/hooks';
 
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -457,7 +461,7 @@ export let PageHeader = React.forwardRef(
     });
 
     // refs
-    const localHeaderRef = useRef(null);
+    const localHeaderRef = useRef<HTMLDivElement | null>(null);
     const headerRef = ref || localHeaderRef;
     const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
       useRef(null);
@@ -883,6 +887,12 @@ export let PageHeader = React.forwardRef(
 
     const displayedBreadcrumbs = getBreadcrumbs();
 
+    useIsomorphicEffect(() => {
+      if (headerRef.current) {
+        headerRef.current.style = pageHeaderStyles;
+      }
+    }, [headerRef, pageHeaderStyles]);
+
     return (
       <>
         <div
@@ -900,7 +910,6 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
             },
           ])}
-          style={pageHeaderStyles}
           ref={headerRef}
           {...getDevtoolsProps(componentName)}
         >

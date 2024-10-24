@@ -5,7 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, useEffect, forwardRef } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  forwardRef,
+  MutableRefObject,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
@@ -18,6 +24,7 @@ import {
   InlineLoading,
   Form,
   Button,
+  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { InformationFilled, Copy, ErrorFilled } from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
@@ -28,6 +35,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
+import { useFocus } from '../../global/js/hooks';
 
 const componentName = 'APIKeyModal';
 
@@ -108,12 +116,23 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       ref: copyRef,
     };
     const blockClass = `${pkg.prefix}--apikey-modal`;
+    const localRef = useRef(undefined);
+    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
+    const { firstElement, keyDownListener } = useFocus(modalRef);
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
         copyRef.current.focus();
       }
     }, [open, apiKeyLoaded]);
+
+    useEffect(() => {
+      if (open) {
+        setTimeout(() => {
+          firstElement?.focus();
+        }, 0);
+      }
+    }, [firstElement, open, ref]);
 
     const isPrimaryButtonDisabled = () => {
       if (loading) {
@@ -211,110 +230,121 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     };
 
     return renderPortalUse(
-      <ComposedModal
-        {...rest}
-        {...{ open, ref, ...getDevtoolsProps(componentName) }}
-        className={cx(className, blockClass)}
-        onClose={onCloseHandler}
-        size="sm"
-        aria-label={modalLabel}
-        preventCloseOnClickOutside
+      <FeatureFlags
+        flags={{
+          'enable-experimental-focus-wrap-without-sentinels': true,
+        }}
       >
-        <ModalHeader
-          className={`${blockClass}__header`}
-          title={title}
-          label={modalLabel}
-        />
-        <ModalBody className={`${blockClass}__body-container`}>
-          {hasSteps && !apiKeyLoaded ? (
-            customSteps[currentStep]?.content
-          ) : (
-            <>
-              {body && <p className={`${blockClass}__body`}>{body}</p>}
-              {!editing && apiKey && hasAPIKeyVisibilityToggle && (
-                <PasswordInput
-                  value={apiKey}
-                  labelText={apiKeyLabel}
-                  id={apiKeyInputId.current}
-                  showPasswordLabel={showAPIKeyLabel}
-                  hidePasswordLabel={hideAPIKeyLabel}
-                  tooltipPosition="left"
-                />
-              )}
-              {!editing && apiKey && !hasAPIKeyVisibilityToggle && (
-                <TextInput
-                  value={apiKey}
-                  labelText={apiKeyLabel}
-                  id={apiKeyInputId.current}
-                />
-              )}
-              {(editing || (!apiKeyLoaded && nameRequired)) && (
-                <Form onSubmit={submitHandler} aria-label={title ?? undefined}>
-                  <TextInput
-                    helperText={nameHelperText}
-                    placeholder={namePlaceholder}
-                    labelText={nameLabel}
-                    onChange={setNameHandler}
-                    value={name}
-                    id={nameInputId.current}
-                    disabled={loading}
-                    required={nameRequired}
-                    data-modal-primary-focus
+        <ComposedModal
+          {...rest}
+          {...{ open, ...getDevtoolsProps(componentName) }}
+          ref={modalRef}
+          onKeyDown={keyDownListener}
+          className={cx(className, blockClass)}
+          onClose={onCloseHandler}
+          size="sm"
+          aria-label={modalLabel}
+          preventCloseOnClickOutside
+        >
+          <ModalHeader
+            className={`${blockClass}__header`}
+            title={title}
+            label={modalLabel}
+          />
+          <ModalBody className={`${blockClass}__body-container`}>
+            {hasSteps && !apiKeyLoaded ? (
+              customSteps[currentStep]?.content
+            ) : (
+              <>
+                {body && <p className={`${blockClass}__body`}>{body}</p>}
+                {!editing && apiKey && hasAPIKeyVisibilityToggle && (
+                  <PasswordInput
+                    value={apiKey}
+                    labelText={apiKeyLabel}
+                    id={apiKeyInputId.current}
+                    showPasswordLabel={showAPIKeyLabel}
+                    hidePasswordLabel={hideAPIKeyLabel}
+                    tooltipPosition="left"
                   />
-                </Form>
-              )}
-              {loading && (
-                <InlineLoading
-                  description={loadingText}
-                  className={`${blockClass}__loader`}
-                />
-              )}
-              {(copyError || error) && (
-                <div className={`${blockClass}__messaging`}>
-                  <div className={`${blockClass}__error-icon`}>
-                    <ErrorFilled size={16} />
-                  </div>
-                  <p className={`${blockClass}__messaging-text`}>
-                    {copyError ? copyErrorText : errorText}
-                  </p>
-                </div>
-              )}
-              {apiKeyLoaded && (
-                <div className={`${blockClass}__messaging`}>
-                  <InformationFilled size={16} />
-                  {hasDownloadLink ? (
-                    <APIKeyDownloader
-                      apiKey={apiKey}
-                      body={downloadBodyText}
-                      fileName={downloadFileName}
-                      linkText={downloadLinkText}
-                      fileType={downloadFileType}
+                )}
+                {!editing && apiKey && !hasAPIKeyVisibilityToggle && (
+                  <TextInput
+                    value={apiKey}
+                    labelText={apiKeyLabel}
+                    id={apiKeyInputId.current}
+                  />
+                )}
+                {(editing || (!apiKeyLoaded && nameRequired)) && (
+                  <Form
+                    onSubmit={submitHandler}
+                    aria-label={title ?? undefined}
+                  >
+                    <TextInput
+                      helperText={nameHelperText}
+                      placeholder={namePlaceholder}
+                      labelText={nameLabel}
+                      onChange={setNameHandler}
+                      value={name}
+                      id={nameInputId.current}
+                      disabled={loading}
+                      required={nameRequired}
+                      data-modal-primary-focus
                     />
-                  ) : (
-                    <div className={`${blockClass}__messaging-text`}>
-                      {generateSuccessBody}
+                  </Form>
+                )}
+                {loading && (
+                  <InlineLoading
+                    description={loadingText}
+                    className={`${blockClass}__loader`}
+                  />
+                )}
+                {(copyError || error) && (
+                  <div className={`${blockClass}__messaging`}>
+                    <div className={`${blockClass}__error-icon`}>
+                      <ErrorFilled size={16} />
                     </div>
-                  )}
-                </div>
-              )}
-            </>
-          )}
-        </ModalBody>
-        <ModalFooter className={`${blockClass}__footer`}>
-          <Button type="button" kind="secondary" onClick={onBackHandler}>
-            {getSecondaryButtonText()}
-          </Button>
-          <Button
-            {...(apiKeyLoaded && copyButtonProps)}
-            type="submit"
-            kind="primary"
-            onClick={submitHandler}
-            disabled={isPrimaryButtonDisabled()}
-          >
-            {getPrimaryButtonText()}
-          </Button>
-        </ModalFooter>
-      </ComposedModal>
+                    <p className={`${blockClass}__messaging-text`}>
+                      {copyError ? copyErrorText : errorText}
+                    </p>
+                  </div>
+                )}
+                {apiKeyLoaded && (
+                  <div className={`${blockClass}__messaging`}>
+                    <InformationFilled size={16} />
+                    {hasDownloadLink ? (
+                      <APIKeyDownloader
+                        apiKey={apiKey}
+                        body={downloadBodyText}
+                        fileName={downloadFileName}
+                        linkText={downloadLinkText}
+                        fileType={downloadFileType}
+                      />
+                    ) : (
+                      <div className={`${blockClass}__messaging-text`}>
+                        {generateSuccessBody}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+          </ModalBody>
+          <ModalFooter className={`${blockClass}__footer`}>
+            <Button type="button" kind="secondary" onClick={onBackHandler}>
+              {getSecondaryButtonText()}
+            </Button>
+            <Button
+              {...(apiKeyLoaded && copyButtonProps)}
+              type="submit"
+              kind="primary"
+              onClick={submitHandler}
+              disabled={isPrimaryButtonDisabled()}
+            >
+              {getPrimaryButtonText()}
+            </Button>
+          </ModalFooter>
+        </ComposedModal>
+      </FeatureFlags>
     );
   }
 );

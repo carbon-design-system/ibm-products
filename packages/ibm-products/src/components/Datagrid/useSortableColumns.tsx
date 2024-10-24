@@ -11,7 +11,7 @@ import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
-import { DatagridSlug } from './Datagrid/addons/Slug/DatagridSlug';
+import { DatagridAILabel } from './Datagrid/addons/AiLabel/DatagridAiLabel';
 import { Hooks, TableInstance } from 'react-table';
 import { DataGridState } from './types';
 
@@ -91,11 +91,11 @@ const useSortableColumns = (hooks: Hooks) => {
       defaultSortableLabelText,
     } = instance;
     const onSortClick = (event, column) => {
-      const slug =
+      const aiLabel =
         event.target.classList.contains(`${carbon.prefix}--slug`) ||
         event.target.closest(`.${carbon.prefix}--slug`);
       // Do not continue with sorting if we find a slug
-      if (slug) {
+      if (aiLabel) {
         event.stopPropagation();
         return;
       }
@@ -156,7 +156,11 @@ const useSortableColumns = (hooks: Hooks) => {
             renderIcon={(props) => {
               return (
                 <>
-                  <DatagridSlug slug={headerProp?.column?.slug} />
+                  <DatagridAILabel
+                    aiLabel={
+                      headerProp?.column?.aiLabel || headerProp?.column?.slug
+                    }
+                  />
                   {icon(headerProp?.column, props)}
                 </>
               );

@@ -37,6 +37,7 @@ declare module '@carbon/react' {
     CopyButton,
     CopyButtonProps,
     DangerButton,
+    DismissibleTag,
     DataTable,
     DataTable,
     DataTable,

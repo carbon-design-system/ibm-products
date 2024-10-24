@@ -14,6 +14,7 @@ import {
   Popover,
   PopoverContent,
   PopoverAlignment,
+  DismissibleTag,
   OperationalTag,
 } from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
@@ -119,7 +120,26 @@ export const TagOverflowPopover = forwardRef(
                       const typeValue =
                         overflowType === 'tag' ? 'high-contrast' : tagType;
                       const isFilterable =
-                        overflowType === 'tag' ? filter : false;
+                        overflowType === 'tag' &&
+                        (typeof onClose === 'function' || filter);
+
+                      let tag;
+                      if (isFilterable) {
+                        tag = (
+                          <DismissibleTag
+                            {...other}
+                            onClose={() => onClose?.()}
+                            type={typeValue}
+                            text={label}
+                          />
+                        );
+                      } else {
+                        tag = (
+                          <Tag {...other} type={typeValue}>
+                            {label}
+                          </Tag>
+                        );
+                      }
 
                       return (
                         <li
@@ -131,18 +151,7 @@ export const TagOverflowPopover = forwardRef(
                           })}
                           key={id}
                         >
-                          {overflowType === 'tag' ? (
-                            <Tag
-                              {...other}
-                              onClose={() => onClose?.()}
-                              type={typeValue}
-                              filter={isFilterable}
-                            >
-                              {label}
-                            </Tag>
-                          ) : (
-                            label
-                          )}
+                          {overflowType === 'tag' ? tag : label}
                         </li>
                       );
                     }

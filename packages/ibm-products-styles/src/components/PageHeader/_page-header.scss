@@ -433,13 +433,26 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
   }
 
+  .#{$block-class}__tooltip {
+    min-width: 0;
+    flex-basis: auto;
+
+    button {
+      border-block-end: none;
+      cursor: default;
+    }
+  }
+  .#{$block-class}__titleText {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .#{$block-class}__title {
     @include type.type-style('heading-04');
 
+    display: flex;
     min-height: $spacing-08;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .#{$block-class}__title--editable {

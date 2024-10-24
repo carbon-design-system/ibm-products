@@ -240,6 +240,15 @@ interface TitleIcon {
   cancelDescription?: string; //.isRequired.if(editInPlaceRequired),
   editDescription?: string; // .isRequired.if(editInPlaceRequired),
   saveDescription?: string; //.isRequired.if(editInPlaceRequired),
+  tooltipAlignment?:
+    | 'top'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left'
+    | 'right';
   // Update docgen if changed
 }
 
@@ -366,6 +375,7 @@ interface PageHeaderBaseProps extends PropsWithChildren {
    *    - editableLabel: label for edit required if onChange supplied
    *    - cancelDescription: label for edit cancel button
    *    - saveDescription: label for edit save button
+   *    - tooltipAlignment: position for tooltip displayed for large titles. Default to "bottom"
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
    *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
@@ -1512,6 +1522,7 @@ PageHeader.propTypes = {
    *    - editableLabel: label for edit required if onChange supplied
    *    - cancelDescription: label for edit cancel button
    *    - saveDescription: label for edit save button
+   *    - tooltipAlignment: position for tooltip displayed for large titles. Default to "bottom".
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
    *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
@@ -1535,6 +1546,16 @@ PageHeader.propTypes = {
       cancelDescription: PropTypes.string, //.isRequired.if(editInPlaceRequired),
       editDescription: PropTypes.string, // .isRequired.if(editInPlaceRequired),
       saveDescription: PropTypes.string, //.isRequired.if(editInPlaceRequired),
+      tooltipAlignment: PropTypes.oneOf([
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ]),
       // Update docgen if changed
     }),
     PropTypes.string,

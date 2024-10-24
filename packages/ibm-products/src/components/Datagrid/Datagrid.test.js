@@ -2392,9 +2392,8 @@ describe(componentName, () => {
     // Add value to dropdown and apply to filter panel
     const statusAccordion = screen.getByRole('button', { name: 'Status' });
     await click(statusAccordion);
-    const statusDropdown = screen.getByRole('combobox', {
-      name: 'Marital status',
-    });
+    const statusDropdown = screen.getByLabelText('Marital status dropdown');
+
     await click(statusDropdown);
     const dropdownOption = screen.getByRole('option', { name: 'single' });
     await click(dropdownOption);

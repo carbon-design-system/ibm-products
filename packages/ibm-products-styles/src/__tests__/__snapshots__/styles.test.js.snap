@@ -3939,6 +3939,9 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--datagrid__virtualScrollContainer {
   width: 100%;
 }
+.c4p--datagrid__virtualScrollContainer .cds--data-table-content {
+  overflow-x: hidden;
+}
 
 .c4p--datagrid .cds--modal {
   width: 100%;
@@ -5441,8 +5444,8 @@ th.c4p--datagrid__select-all-toggle-on.button {
 }
 
 .c4p--edit-in-place--focused {
-  border: 2px solid var(--cds-focus, #0f62fe);
   background: var(--cds-field-01, #f4f4f4);
+  outline: 2px solid var(--cds-focus, #0f62fe);
 }
 
 .c4p--edit-in-place__text-input {
@@ -6658,7 +6661,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #002d9c;
+  --cds-highlight: #001d6c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
@@ -10474,7 +10477,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #0043ce;
+  --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
@@ -10905,7 +10908,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus: #ffffff;
   --cds-focus-inset: #161616;
   --cds-focus-inverse: #0f62fe;
-  --cds-highlight: #002d9c;
+  --cds-highlight: #001d6c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
   --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;

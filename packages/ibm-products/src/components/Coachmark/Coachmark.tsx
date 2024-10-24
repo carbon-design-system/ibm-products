@@ -11,7 +11,6 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -209,15 +208,6 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         setShouldResetPosition(true);
       }
     };
-    const overlayPositionStyle = useMemo(() => {
-      const top = (positionTune?.y ?? 0) - 16;
-      const left = (positionTune?.x ?? 0) - 16;
-
-      return {
-        top: `${top}px`,
-        left: `${left}px`,
-      };
-    }, [positionTune]);
 
     const contextValue = {
       buttonProps: {
@@ -251,6 +241,10 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
     }, [shouldResetPosition]);
 
     useIsomorphicEffect(() => {
+      const overlayPositionStyle = {
+        top: `${(positionTune?.y ?? 0) - 16}px`,
+        left: `${(positionTune?.x ?? 0) - 16}px`,
+      };
       if (
         popoverRef.current &&
         popoverRef.current.style &&
@@ -262,7 +256,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
         };
         Object.assign(popoverRef.current.style, combinedStyle);
       }
-    }, [popoverRef, overlayPositionStyle]);
+    }, [popoverRef, positionTune]);
 
     // On unmount:
     // - DO NOT "Close()" the coachmark.

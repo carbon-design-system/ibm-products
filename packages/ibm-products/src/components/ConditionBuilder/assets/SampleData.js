@@ -140,12 +140,12 @@ export const sampleDataStructure_nonHierarchical = {
           operator: 'oneOf',
           value: [
             {
-              label: 'Africa',
-              id: 'Africa',
+              id: 'India',
+              label: 'India',
             },
             {
-              label: { id: 'India', label: 'India' },
-              id: 'Ind',
+              id: 'AN',
+              label: 'Andorra',
             },
           ],
           id: uuidv4(),

@@ -60,7 +60,7 @@ describe('FeatureFlags', () => {
     }
 
     render(
-      <FeatureFlags flags={{ a: true, b: false }}>
+      <FeatureFlags a b={false}>
         <TestComponent />
       </FeatureFlags>
     );
@@ -98,7 +98,7 @@ describe('FeatureFlags', () => {
     }
 
     const { rerender } = render(
-      <FeatureFlags flags={{ a: true, b: false }}>
+      <FeatureFlags a b={false}>
         <TestComponent />
       </FeatureFlags>
     );
@@ -113,7 +113,7 @@ describe('FeatureFlags', () => {
     });
 
     rerender(
-      <FeatureFlags flags={{ a: false, b: true }}>
+      <FeatureFlags a={false} b>
         <TestComponent />
       </FeatureFlags>
     );
@@ -143,7 +143,7 @@ describe('FeatureFlags', () => {
     }
 
     const { rerender } = render(
-      <FeatureFlags flags={{ local: true }}>
+      <FeatureFlags local>
         <TestComponent />
       </FeatureFlags>
     );
@@ -154,8 +154,8 @@ describe('FeatureFlags', () => {
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
           <TestComponent />
         </FeatureFlags>
       </FeatureFlags>
@@ -167,9 +167,9 @@ describe('FeatureFlags', () => {
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
-          <FeatureFlags flags={{ local: false }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
+          <FeatureFlags local={false}>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>
@@ -182,9 +182,9 @@ describe('FeatureFlags', () => {
     });
 
     rerender(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
-          <FeatureFlags flags={{ local: true }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
+          <FeatureFlags local>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>

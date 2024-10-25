@@ -10,10 +10,8 @@ import { Button, ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   Children,
-  lazy,
   ReactNode,
   RefObject,
-  Suspense,
   useEffect,
   useRef,
   useState,
@@ -25,19 +23,13 @@ import { CarouselProps } from '../Carousel/Carousel';
 // Other standard imports.
 import PropTypes from 'prop-types';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
-//import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { clamp } from 'lodash';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import { useCoachmark } from '../Coachmark';
-
-const SteppedAnimatedMedia = lazy(() =>
-  import('../SteppedAnimatedMedia').then((module) => ({
-    default: module.SteppedAnimatedMedia,
-  }))
-);
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
@@ -127,8 +119,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
 
-    console.log('media', media);
-
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
         setTimeout(() => {
@@ -186,22 +176,11 @@ export let CoachmarkOverlayElements = React.forwardRef<
           (media.render ? (
             media.render()
           ) : (
-            <div>
-              {
-                <Suspense fallback={<div>Loading...</div>}>
-                  <SteppedAnimatedMedia
-                    className={`${blockClass}__element-stepped-media`}
-                    filePaths={media.filePaths}
-                    playStep={currentProgStep}
-                  />
-                </Suspense>
-                // <SteppedAnimatedMedia
-                //              className={`${blockClass}__element-stepped-media`}
-                //              filePaths={media.filePaths}
-                //              playStep={currentProgStep}
-                //            />
-              }
-            </div>
+            <SteppedAnimatedMedia
+              className={`${blockClass}__element-stepped-media`}
+              filePaths={media.filePaths}
+              playStep={currentProgStep}
+            />
           ))}
 
         {numProgSteps === 1 ? (

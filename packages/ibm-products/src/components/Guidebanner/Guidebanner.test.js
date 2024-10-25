@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Guidebanner, GuidebannerElement } from '.';
+import { Guidebanner, GuidebannerElement, GuidebannerElementButton } from '.';
 
 const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = Guidebanner.displayName;
@@ -32,7 +32,14 @@ const renderComponent = (customProps = {}) => {
   // The Guidebanner must have at least one GuidebannerElement as a child.
   return render(
     <Guidebanner {...defaultProps} {...customProps}>
-      <GuidebannerElement description="GuidebannerElement description"></GuidebannerElement>
+      <GuidebannerElement
+        description="GuidebannerElement description"
+        button={
+          <GuidebannerElementButton type="primary">
+            Show Me
+          </GuidebannerElementButton>
+        }
+      ></GuidebannerElement>
     </Guidebanner>
   );
 };
@@ -91,5 +98,19 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('renders the icon in the CTA button', () => {
+    renderComponent();
+
+    const button = screen.getByRole('button', { name: /show me/i });
+
+    expect(button).toBeInTheDocument();
+
+    const svgIcon = button.querySelector('svg');
+    expect(svgIcon).toBeInTheDocument();
+
+    expect(svgIcon).toHaveAttribute('width', '16');
+    expect(svgIcon).toHaveAttribute('height', '16');
   });
 });

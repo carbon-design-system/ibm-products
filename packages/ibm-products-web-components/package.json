@@ -39,7 +39,7 @@
     "web components"
   ],
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && yarn wca",
+    "build": "node tasks/build.js && yarn wca",
     "build:storybook": "yarn wca && storybook build",
     "clean": "rimraf es lib scss dist storybook-static",
     "preview": "vite preview",

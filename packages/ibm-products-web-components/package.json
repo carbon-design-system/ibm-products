@@ -40,7 +40,7 @@
   ],
   "scripts": {
     "build": "node tasks/build.js && yarn wca",
-    "build:storybook": "yarn wca && storybook build",
+    "build:storybook": "storybook build",
     "clean": "rimraf es lib scss dist storybook-static",
     "preview": "vite preview",
     "storybook": "storybook dev -p 3000",

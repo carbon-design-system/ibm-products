@@ -133,4 +133,15 @@ describe(componentName, () => {
     expect(toggleButton).toHaveTextContent('Read more');
     expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('renders the close button and triggers the onClose callback when provided', () => {
+    const onCloseMock = jest.fn();
+    renderComponent({ onClose: onCloseMock });
+
+    const closeButton = screen.getByRole('button', { name: /close/i });
+    expect(closeButton).toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
 });

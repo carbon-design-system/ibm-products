@@ -13,7 +13,7 @@ import React, {
   useState,
   MutableRefObject,
 } from 'react';
-import lottie, { type AnimationItem } from 'lottie-web';
+import { type LottiePlayer, type AnimationItem } from 'lottie-web';
 import clamp from 'lodash/clamp';
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -84,25 +84,27 @@ export const SteppedAnimatedMedia = React.forwardRef(
     }, [filePaths]);
 
     useEffect(() => {
-      const prefersReducedMotion = window?.matchMedia
-        ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        : true;
-      if (localRefValue) {
-        animRef.current?.destroy();
-        animRef.current = lottie.loadAnimation({
-          container: localRefValue,
-          renderer: 'svg',
-          animationData: jsonData[clamp(playStep, 0, jsonData.length - 1)],
-          loop: false,
-          autoplay: false,
-          rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-          },
-        });
-        prefersReducedMotion
-          ? animRef.current?.goToAndStop(0)
-          : animRef.current?.goToAndPlay(0);
-      }
+      import('lottie-web').then((lottie) => {
+        const prefersReducedMotion = window?.matchMedia
+          ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          : true;
+        if (localRefValue) {
+          animRef.current?.destroy();
+          animRef.current = (lottie as unknown as LottiePlayer).loadAnimation({
+            container: localRefValue,
+            renderer: 'svg',
+            animationData: jsonData[clamp(playStep, 0, jsonData.length - 1)],
+            loop: false,
+            autoplay: false,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+            },
+          });
+          prefersReducedMotion
+            ? animRef.current?.goToAndStop(0)
+            : animRef.current?.goToAndPlay(0);
+        }
+      });
 
       return () => animRef.current?.destroy();
     }, [jsonData, localRefValue, playStep]);

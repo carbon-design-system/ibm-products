@@ -158,6 +158,7 @@ const globalTypes = {
     defaultValue: 'g10',
     toolbar: {
       icon: 'paintbrush',
+      title: 'Theme',
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },

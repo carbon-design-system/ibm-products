@@ -26,7 +26,7 @@ import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NotificationsEmptyState';
 
-interface NotificationsEmptyStateProps {
+export interface NotificationsEmptyStateProps {
   /**
    * Empty state action button
    */

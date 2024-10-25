@@ -25,7 +25,7 @@ import { defaults } from '../EmptyState';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'UnauthorizedEmptyState';
 
-interface UnauthorizedEmptyStateProps {
+export interface UnauthorizedEmptyStateProps {
   /**
    * Empty state action button
    */

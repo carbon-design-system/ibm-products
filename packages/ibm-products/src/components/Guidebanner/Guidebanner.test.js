@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -112,5 +112,25 @@ describe(componentName, () => {
 
     expect(svgIcon).toHaveAttribute('width', '16');
     expect(svgIcon).toHaveAttribute('height', '16');
+  });
+
+  it('expands/collapses the guidebanner', () => {
+    renderComponent({ collapsible: true });
+
+    const toggleButton = screen.getByRole('button', { name: /read more/i });
+    expect(toggleButton).toHaveClass(`${blockClass}__toggle-button`);
+
+    // starts collapsed
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+
+    // Expands on click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveTextContent('Read less');
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+
+    // Collapses back on second click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveTextContent('Read more');
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
   });
 });

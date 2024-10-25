@@ -23,7 +23,6 @@ export const globalTypes = {
     toolbar: {
       icon: 'paintbrush',
       title: 'Theme',
-      dynamicTitle: true,
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
@@ -154,3 +153,9 @@ export const decorators = [
     return container({ hasMainTag, children: result });
   },
 ];
+
+export default {
+  parameters,
+  globalTypes,
+  decorators,
+};

@@ -16,6 +16,7 @@ export const APIKeyDownloader = ({
   fileName,
   fileType,
   linkText,
+  DownloadLinkLabel,
 }) => {
   const [linkProps, setLinkProps] = useState({});
 
@@ -44,6 +45,8 @@ export const APIKeyDownloader = ({
         <a
           {...linkProps}
           className={`${pkg.prefix}--apikey-modal__download-link`}
+          aria-label={DownloadLinkLabel}
+          role="button"
         >
           {linkText}
         </a>
@@ -54,6 +57,10 @@ export const APIKeyDownloader = ({
 
 APIKeyDownloader.displayName = componentName;
 APIKeyDownloader.propTypes = {
+  /**
+   * aria-label for the download link
+   */
+  DownloadLinkLabel: PropTypes.string,
   /**
    * the api key that's displayed to the user when a request to create is fulfilled.
    */

@@ -289,6 +289,9 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                       fileName={downloadFileName}
                       linkText={downloadLinkText}
                       fileType={downloadFileType}
+                      DownloadLinkLabel={
+                        'Download API Key in Java Script File format'
+                      }
                     />
                   ) : (
                     <div className={`${blockClass}__messaging-text`}>

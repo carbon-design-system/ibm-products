@@ -76,7 +76,7 @@ const defaultProps = {
   generateSuccessTitle: 'API key successfully created',
   editSuccessTitle: 'API key successfully saved',
   loadingText: 'Generating...',
-  modalLabel: 'Generate API key',
+  modalLabel: 'An example of Generate API key',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;

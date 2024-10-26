@@ -7,5 +7,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as CDSSidePanel } from './components/side-panel/side-panel';
-export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
+import './tearsheet';

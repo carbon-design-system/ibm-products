@@ -12,7 +12,6 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/react/scss/components/tooltip';
 
 // Other Carbon settings if needed
 // TODO: @use '@carbon/styles/scss/grid';
@@ -21,6 +20,7 @@
 
 // UserAvatar uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by UserAvatar
+@use '@carbon/react/scss/components/tooltip';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -62,11 +62,8 @@ $sizes: (
   &:focus-within .#{$block-class} {
     // stylelint-disable-next-line carbon/theme-token-use
     outline: 2px solid $focus;
+    outline-offset: 1px;
   }
-}
-
-.#{$block-class}__tooltip button {
-  pointer-events: none;
 }
 
 @mixin photo-styling {

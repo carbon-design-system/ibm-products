@@ -83,6 +83,7 @@ function Step1() {
     <div className="step-container">
       <h4>Step 1</h4>
       <TextInput
+        id="email"
         onChange={(e) => {
           setFormState((prev) => ({
             ...prev,
@@ -90,7 +91,7 @@ function Step1() {
           }));
         }}
         labelText="Email"
-        value={email}
+        value={email ?? ''}
       />
     </div>
   );
@@ -103,6 +104,7 @@ function Step2() {
     <div className="step-container">
       <h4>Step 2</h4>
       <TextInput
+        id="city"
         onChange={(e) => {
           setFormState((prev) => ({
             ...prev,
@@ -138,6 +140,13 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
+  const handleNextDisabledState = (formState, currentStep) => {
+    if (!formState?.email && currentStep === 1) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <div ref={ref}>
       <Button onClick={() => setOpen(true)}>
@@ -149,8 +158,9 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
         influencer={influencer}
         open={open}
         onClose={() => setOpen(false)}
-        aiLabel={aiLabel && sampleAILabel}
         title={'Tearsheet title'}
+        hasCloseIcon={false}
+        preventCloseOnClickOutside
       >
         {/* Steps */}
         <StepGroup>
@@ -168,12 +178,14 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
             handleGoToStep,
             setFormState,
             handlePrev,
+            formState
           }) => (
             <>
               <Button
                 className="step-action-button"
                 kind="ghost"
                 onClick={() => setOpen(false)}
+                size={'2xl'}
               >
                 Cancel
               </Button>
@@ -182,10 +194,13 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
                 kind="secondary"
                 onClick={() => handlePrev()}
                 disabled={currentStep === 1}
+                size={'2xl'}
               >
                 Back
               </Button>
               <Button
+                disabled={handleNextDisabledState(formState, currentStep)}
+                size={'2xl'}
                 className="step-action-button"
                 onClick={() => {
                   if (currentStep === numSteps) {

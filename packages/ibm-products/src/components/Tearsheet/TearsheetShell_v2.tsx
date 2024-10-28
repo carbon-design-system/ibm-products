@@ -189,9 +189,9 @@ export const tearsheetShellWideProps = [
   'navigation',
 ];
 
-export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
-export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
-  hasCloseIcon ?? tearsheetIsPassive(actions);
+// export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
+// export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
+//   hasCloseIcon ?? tearsheetIsPassive(actions);
 
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
@@ -239,7 +239,7 @@ export const TearsheetShellV2 = React.forwardRef(
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
 
     const [numSteps, setNumSteps] = useState();
-    const [currentStep, setCurrentStep] = useState(1); // start at 1
+    const [currentStep, setCurrentStep] = useState(1);
     const [formState, setFormState] = useState();
 
     const context = {
@@ -263,8 +263,8 @@ export const TearsheetShellV2 = React.forwardRef(
     const wide = size === 'wide';
 
     // A "passive" tearsheet is one with no navigation actions.
-    const isPassive = tearsheetIsPassive(actions);
-    const effectiveHasCloseIcon = tearsheetHasCloseIcon(actions, hasCloseIcon);
+    // const isPassive = tearsheetIsPassive(actions);
+    const effectiveHasCloseIcon = hasCloseIcon;
 
     // Include a modal header if and only if one or more of these is given.
     // We can't use a Wrap for the ModalHeader because ComposedModal requires
@@ -274,13 +274,10 @@ export const TearsheetShellV2 = React.forwardRef(
       title ||
       description ||
       headerActions ||
-      navigation ||
-      effectiveHasCloseIcon;
+      navigation
 
     // Include an ActionSet if and only if one or more actions is given.
     const includeActions = actions && actions?.length > 0;
-
-    console.log(typeof influencer);
 
     return renderPortalUse(
       <FeatureFlags
@@ -304,10 +301,7 @@ export const TearsheetShellV2 = React.forwardRef(
             })}
             slug={aiLabel}
             {...{ onClose, open, selectorPrimaryFocus }}
-            // onFocus={handleFocus}
-            // onKeyDown={keyDownListener}
             containerClassName={cx(`${bc}__container`)}
-            preventCloseOnClickOutside={!isPassive}
             ref={modalRef}
             selectorsFloatingMenus={[
               `.${carbonPrefix}--overflow-menu-options`,
@@ -494,7 +488,7 @@ TearsheetShellV2.propTypes = {
    */
   /**@ts-ignore*/
   closeIconDescription: PropTypes.string.isRequired.if(
-    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
+    ({ hasCloseIcon }) => !!hasCloseIcon
   ),
 
   /**
@@ -527,7 +521,7 @@ TearsheetShellV2.propTypes = {
    * progress indicator, or similar. NB the influencer is only applicable for
    * wide tearsheets.
    */
-  influencer: PropTypes.element,
+  influencer: PropTypes.oneOfType([PropTypes.element, PropTypes.func,]),
 
   /**
    * The position of the influencer section, 'left' or 'right'.

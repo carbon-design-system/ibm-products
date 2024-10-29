@@ -11,7 +11,12 @@ import { render, screen, fireEvent } from '@testing-library/react'; // https://t
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Guidebanner, GuidebannerElement, GuidebannerElementButton } from '.';
+import {
+  Guidebanner,
+  GuidebannerElement,
+  GuidebannerElementButton,
+  GuidebannerElementLink,
+} from '.';
 
 const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = Guidebanner.displayName;
@@ -112,6 +117,36 @@ describe(componentName, () => {
 
     expect(svgIcon).toHaveAttribute('width', '16');
     expect(svgIcon).toHaveAttribute('height', '16');
+  });
+
+  it('renders default ghost button variant if type is not passed for GuidebannerElementButton', () => {
+    render(
+      <Guidebanner title="test title">
+        <GuidebannerElement
+          title="test title"
+          description="test description"
+          button={<GuidebannerElementButton>Show Me</GuidebannerElementButton>}
+        />
+      </Guidebanner>
+    );
+    const button = screen.getByRole('button', { name: /show me/i });
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass(`${blockClass}__element-button`);
+    expect(button).toHaveClass('cds--btn--ghost');
+  });
+
+  it('returns link for GuidebannerElementLink', () => {
+    render(
+      <Guidebanner title="test title">
+        <GuidebannerElement
+          title="test title"
+          description="test description"
+          button={<GuidebannerElementLink>Learn more</GuidebannerElementLink>}
+        />
+      </Guidebanner>
+    );
+    const link = screen.getByRole('link', { name: /learn more/i });
+    expect(link).toBeInTheDocument();
   });
 
   it('expands/collapses the guidebanner', () => {

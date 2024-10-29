@@ -145,7 +145,7 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
       return true;
     }
     return false;
-  }
+  };
 
   return (
     <div ref={ref}>
@@ -161,6 +161,7 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
         title={'Tearsheet title'}
         hasCloseIcon={false}
         preventCloseOnClickOutside
+        selectorPrimaryFocus="#email"
       >
         {/* Steps */}
         <StepGroup>
@@ -171,6 +172,7 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
 
         {/* Step actions */}
         <StepActions
+          className={'my-custom-action-set'}
           buttonRenderer={({
             currentStep,
             handleNext,
@@ -178,14 +180,14 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
             handleGoToStep,
             setFormState,
             handlePrev,
-            formState
+            formState,
           }) => (
             <>
               <Button
-                className="step-action-button"
+                className="step-action-button step-action-button__cancel"
                 kind="ghost"
                 onClick={() => setOpen(false)}
-                size={'2xl'}
+                size="xl"
               >
                 Cancel
               </Button>
@@ -194,13 +196,13 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
                 kind="secondary"
                 onClick={() => handlePrev()}
                 disabled={currentStep === 1}
-                size={'2xl'}
+                size="xl"
               >
                 Back
               </Button>
               <Button
                 disabled={handleNextDisabledState(formState, currentStep)}
-                size={'2xl'}
+                size="xl"
                 className="step-action-button"
                 onClick={() => {
                   if (currentStep === numSteps) {

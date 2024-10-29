@@ -25,10 +25,20 @@
 }
 
 .step-action-button {
-  width: 33.33%;
+  width: 100%;
 }
 
 .step-container {
   width: 50%;
   min-width: 320px;
+}
+
+.my-custom-action-set {
+  display: grid;
+  grid-auto-rows: minmax(120px, auto);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.step-action-button__cancel {
+  grid-column: span 2;
 }

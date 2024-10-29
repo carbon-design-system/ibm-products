@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -91,10 +91,12 @@ describe(componentName, () => {
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderComponent({ ref });
-
+    await waitFor(() => expect(ref.current).toHaveClass(blockClass), {
+      timeout: 10,
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 

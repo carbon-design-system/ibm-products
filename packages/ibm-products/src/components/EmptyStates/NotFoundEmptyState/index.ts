@@ -6,3 +6,4 @@
  */
 
 export { NotFoundEmptyState } from './NotFoundEmptyState';
+export type { NotFoundEmptyStateProps } from './NotFoundEmptyState';

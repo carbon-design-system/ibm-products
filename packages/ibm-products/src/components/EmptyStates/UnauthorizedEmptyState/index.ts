@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { NoTagsEmptyState } from './NoTagsEmptyState';
+export { UnauthorizedEmptyState } from './UnauthorizedEmptyState';
+export type { UnauthorizedEmptyStateProps } from './UnauthorizedEmptyState';

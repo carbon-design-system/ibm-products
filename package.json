@@ -148,7 +148,10 @@
             {
               "propName": "style",
               "disallowedFor": [
-                "Datagrid"
+                "Datagrid",
+                "Carousel",
+                "Checklist",
+                "Coachmark"
               ],
               "message": "Avoid using style prop"
             }
@@ -162,7 +165,10 @@
             {
               "propName": "style",
               "disallowedFor": [
-                "Datagrid"
+                "Datagrid",
+                "Carousel",
+                "Checklist",
+                "Coachmark"
               ],
               "message": "Avoid using style prop"
             }

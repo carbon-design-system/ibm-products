@@ -17,7 +17,7 @@ import EmptyStateIllustration from './EmptyStateIllustration';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
 
-interface EmptyStateV2Props {
+export interface EmptyStateV2Props {
   /**
    * Props for the action button. Refer to the Carbon Components button documentation for full list of props.
    */

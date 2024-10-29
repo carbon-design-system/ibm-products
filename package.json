@@ -36,7 +36,7 @@
     "format": "run-p -s 'format:*'",
     "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,md,scss} --write --ignore-unknown",
     "format:e2e": "prettier ./e2e/**/*.js --write --ignore-unknown",
-    "format:diff": "prettier --list-different '**/*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!examples/**/*' '!scripts/**/*'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:license": "scripts/check-license.cjs -a",

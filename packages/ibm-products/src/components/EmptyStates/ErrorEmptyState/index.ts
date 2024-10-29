@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { NotFoundEmptyState } from './NotFoundEmptyState';
+export { ErrorEmptyState } from './ErrorEmptyState';
+export type { ErrorEmptyStateProps } from './ErrorEmptyState';

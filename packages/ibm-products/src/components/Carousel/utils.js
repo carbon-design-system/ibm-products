@@ -13,26 +13,6 @@ import {
   useState,
 } from 'react';
 
-export const useIntersection = (element, threshold) => {
-  const [isVisible, setState] = useState(false);
-
-  useEffect(() => {
-    const el = element.current;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setState(entry.isIntersecting);
-      },
-      { threshold }
-    );
-
-    el && observer.observe(el);
-
-    return () => observer.unobserve(el);
-  }, [element, threshold]);
-
-  return isVisible;
-};
-
 export const useIsOverflow = (ref) => {
   const [isScrollable, setIsScrollable] = useState();
   const [mutationObserver, setMutationObserver] = useState();
@@ -43,6 +23,13 @@ export const useIsOverflow = (ref) => {
       return;
     }
     const hasOverflow = ref.current.scrollWidth > ref.current.clientWidth;
+    console.log(
+      'HAS OVERFLOW',
+      hasOverflow,
+      ref.current.scrollWidth,
+      ref.current.clientWidth,
+      ref.current
+    );
     setIsScrollable(hasOverflow);
   }, [ref]);
 
@@ -62,6 +49,9 @@ export const useIsOverflow = (ref) => {
   });
 
   useLayoutEffect(() => {
+    if (!ref) {
+      return;
+    }
     const { current } = ref;
     if (current) {
       if ('ResizeObserver' in window && !resizeObserver) {

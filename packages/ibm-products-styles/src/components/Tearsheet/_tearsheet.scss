@@ -21,6 +21,7 @@
 @use '../ActionSet/action-set';
 
 $block-class: #{$pkg-prefix}--tearsheet;
+$influencer-width: 257px;
 
 // stylelint-disable-next-line carbon/theme-token-use
 $motion-duration: $duration-moderate-02;
@@ -314,7 +315,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__influencer {
-    flex: 0 0 257px; // influencer width 256px plus 1px border
+    flex: 0 0 $influencer-width; // influencer width 256px plus 1px border
     border-right: 1px solid $border-subtle-01;
     overflow-y: auto;
 
@@ -369,14 +370,34 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__content.#{$block-class}__content__v2 {
-    display: grid;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     padding: $spacing-06 $spacing-06 0 $spacing-06;
-    grid-template-rows: 1fr min-content max-content;
   }
 
-  .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
-    width: calc(100% + #{$spacing-09});
-    transform: translateX(calc(-1 * #{$spacing-06}));
+  &.#{$block-class}--has-influencer .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 120px;
+    margin-top: auto;
+  }
+
+  &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    width: calc(100% - $influencer-width);
+  }
+
+  &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    left: 0;
+  }
+
+  &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    left: $influencer-width;
   }
 
   .#{$block-class}__button-container.#{$block-class}__button-container__v2

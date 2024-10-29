@@ -228,7 +228,7 @@ export const TearsheetShellV2 = React.forwardRef(
       hasCloseIcon,
       headerActions,
       influencer,
-      influencerPosition,
+      influencerPosition = 'left',
       influencerWidth,
       label,
       navigation,
@@ -312,6 +312,9 @@ export const TearsheetShellV2 = React.forwardRef(
               [`${bc}--narrow`]: !wide,
               [`${bc}--has-ai-label`]: aiLabel,
               [`${bc}--has-close`]: effectiveHasCloseIcon,
+              [`${bc}--has-influencer`]: influencer,
+              [`${bc}--has-influencer__right`]: influencerPosition === 'right',
+              [`${bc}--has-influencer__left`]: influencerPosition === 'left',
             })}
             slug={aiLabel}
             onClose={(e) => onClose?.(e, context)}

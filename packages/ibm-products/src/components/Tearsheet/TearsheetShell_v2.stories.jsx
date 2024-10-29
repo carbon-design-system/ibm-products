@@ -80,20 +80,23 @@ function Step1() {
   const { setFormState, formState } = useStepContext();
   const { email } = formState || {};
   return (
-    <div className="step-container">
-      <h4>Step 1</h4>
-      <TextInput
-        id="email"
-        onChange={(e) => {
-          setFormState((prev) => ({
-            ...prev,
-            email: e.target.value,
-          }));
-        }}
-        labelText="Email"
-        value={email ?? ''}
-      />
-    </div>
+    <>
+      <h4>test</h4>
+      <div className="step-container">
+        <h4>Step 1</h4>
+        <TextInput
+          id="email"
+          onChange={(e) => {
+            setFormState((prev) => ({
+              ...prev,
+              email: e.target.value,
+            }));
+          }}
+          labelText="Email"
+          value={email ?? ''}
+        />
+      </div>
+    </>
   );
 }
 
@@ -112,7 +115,7 @@ function Step2() {
           }));
         }}
         labelText="City"
-        value={city}
+        value={city ?? ''}
       />
     </div>
   );
@@ -125,10 +128,10 @@ function Step3() {
   return (
     <div className="step-container">
       <h4>Step 3</h4>
-      <p>
+      <div>
         Form state
         <CodeSnippet type="multi">{JSON.stringify(formState)}</CodeSnippet>
-      </p>
+      </div>
     </div>
   );
 }
@@ -143,6 +146,9 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
   const handleNextDisabledState = (formState, currentStep) => {
     if (!formState?.email && currentStep === 1) {
       return true;
+    }
+    if (!formState?.city && currentStep === 2) {
+      return true
     }
     return false;
   };

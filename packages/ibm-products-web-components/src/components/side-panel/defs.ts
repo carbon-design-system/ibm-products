@@ -14,7 +14,7 @@ export enum SIDE_PANEL_SIZE {
   /**
    * Extra small size.
    */
-EXTRA_SMALL = 'xs',
+  EXTRA_SMALL = 'xs',
 
   /**
    * Small size.

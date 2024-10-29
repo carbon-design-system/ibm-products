@@ -24,10 +24,6 @@
   display: none;
 }
 
-.step-action-button {
-  width: 100%;
-}
-
 .step-container {
   width: 50%;
   min-width: 320px;
@@ -37,6 +33,10 @@
   display: grid;
   grid-auto-rows: minmax(120px, auto);
   grid-template-columns: repeat(4, 1fr);
+}
+
+.step-action-button {
+  width: 100%;
 }
 
 .step-action-button__cancel {

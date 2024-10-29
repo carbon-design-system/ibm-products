@@ -15,6 +15,8 @@ import React, {
   MutableRefObject,
   RefObject,
   useCallback,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 
 // Other standard imports.
@@ -124,6 +126,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * clicking the close button, if enabled, or clicking outside, if enabled).
    * Returning `false` here prevents the modal from closing.
    */
+  // onClose?: () => (React.MouseEventHandler<HTMLButtonElement>, {});
   onClose?: () => void;
 
   /**
@@ -193,6 +196,17 @@ export const tearsheetShellWideProps = [
 // export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
 //   hasCloseIcon ?? tearsheetIsPassive(actions);
 
+interface StepContext {
+  formState: object,
+  setFormState: Dispatch<SetStateAction<object>>,
+  numSteps: number | undefined,
+  setNumSteps: Dispatch<SetStateAction<number | undefined>>,
+  currentStep: number,
+  handleGoToStep: (a: StepContext) => typeof a,
+  handleNext: () => void,
+  handlePrev: () => void,
+}
+
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
  *
@@ -238,11 +252,11 @@ export const TearsheetShellV2 = React.forwardRef(
     const modalBodyRef = useRef(null);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
 
-    const [numSteps, setNumSteps] = useState();
+    const [numSteps, setNumSteps] = useState<number>();
     const [currentStep, setCurrentStep] = useState(1);
-    const [formState, setFormState] = useState();
+    const [formState, setFormState] = useState({});
 
-    const context = {
+    const context: StepContext = {
       formState,
       setFormState,
       numSteps,
@@ -300,7 +314,8 @@ export const TearsheetShellV2 = React.forwardRef(
               [`${bc}--has-close`]: effectiveHasCloseIcon,
             })}
             slug={aiLabel}
-            {...{ onClose, open, selectorPrimaryFocus }}
+            onClose={(e) => onClose?.(e, context)}
+            {...{ open, selectorPrimaryFocus }}
             containerClassName={cx(`${bc}__container`)}
             ref={modalRef}
             selectorsFloatingMenus={[

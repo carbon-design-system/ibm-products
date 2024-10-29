@@ -26,7 +26,7 @@ import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'ErrorEmptyState';
 
-interface ErrorEmptyStateProps {
+export interface ErrorEmptyStateProps {
   /**
    * Empty state action button
    */

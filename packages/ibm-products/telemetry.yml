@@ -15,6 +15,7 @@ collect:
         - activeCellCoordinates
         - activeHref
         - addConditionSubGroupHandler
+        - aiLabel
         - align
         - allPageRowsLabel
         - allRowsLabel
@@ -857,7 +858,6 @@ collect:
         - isAllRowsSelected
         # SidePanel
         - actionToolbarButtons
-        - aiLabel
         - animateTitle
         - condensedActions
         - includeOverlay

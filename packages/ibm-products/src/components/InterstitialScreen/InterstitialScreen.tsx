@@ -243,7 +243,7 @@ export let InterstitialScreen = React.forwardRef<
     }, [onClose]);
 
     const scrollBodyToTop = () => {
-      bodyScrollRef.current?.scroll({
+      bodyScrollRef.current?.scroll?.({
         top: 0,
         behavior: 'smooth',
       });

@@ -91,7 +91,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * progress indicator, or similar. NB the influencer is only applicable for
    * wide tearsheets.
    */
-  influencer?: ((step: StepContext) => void) | ReactNode;
+  influencer?: ((step: StepContextType) => void) | ReactNode;
 
   /**
    * The position of the influencer section, 'left' or 'right'.
@@ -129,7 +129,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * Returning `false` here prevents the modal from closing.
    */
   // onClose?: () => (React.MouseEventHandler<HTMLButtonElement>, {});
-  onClose?: (event: MouseEvent, step: StepContext) => void;
+  onClose?: (event: MouseEvent, step: StepContextType) => void;
 
   /**
    * Specifies whether the tearsheet is currently open.
@@ -198,7 +198,7 @@ export const tearsheetShellWideProps = [
 // export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
 //   hasCloseIcon ?? tearsheetIsPassive(actions);
 
-interface StepContext {
+export interface StepContextType {
   formState: object;
   setFormState: Dispatch<SetStateAction<object>>;
   numSteps: number | undefined;
@@ -259,7 +259,7 @@ export const TearsheetShellV2 = React.forwardRef(
     const [currentStep, setCurrentStep] = useState(1);
     const [formState, setFormState] = useState({});
 
-    const context: StepContext = {
+    const context: StepContextType = {
       formState,
       setFormState,
       numSteps,

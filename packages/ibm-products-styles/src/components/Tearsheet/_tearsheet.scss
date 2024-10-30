@@ -21,6 +21,8 @@
 @use '../ActionSet/action-set';
 
 $block-class: #{$pkg-prefix}--tearsheet;
+$step-actions: #{$pkg-prefix}--step-actions__button-container;
+
 $influencer-width: 257px;
 
 // stylelint-disable-next-line carbon/theme-token-use
@@ -376,7 +378,8 @@ $motion-duration: $duration-moderate-02;
     padding: $spacing-06 $spacing-06 0 $spacing-06;
   }
 
-  .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+  .#{$block-class}__button-container,
+  .#{$step-actions} {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -386,22 +389,29 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+  &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
+    .#{$step-actions} {
     width: calc(100% - $influencer-width);
   }
 
   &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+  &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
+    .#{$step-actions} {
     left: 0;
   }
 
   &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+  &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
+    .#{$step-actions} {
     left: $influencer-width;
   }
 
   .#{$block-class}__button-container.#{$block-class}__button-container__v2
-    .cds--btn {
+    .cds--btn,
+  .#{$step-actions} .cds--btn {
     max-width: none;
   }
 

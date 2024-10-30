@@ -18,10 +18,13 @@ import {
   ProgressIndicator,
   ProgressStep,
   CodeSnippet,
+  TileGroup,
+  RadioTile,
 } from '@carbon/react';
 import { useStepContext } from './StepFlow/stepContext';
 import { StepGroup } from './StepFlow/StepGroup';
 import { StepActions } from './StepFlow/StepActions';
+import mdx from './TearsheetShell_v2.mdx';
 
 export default {
   title: 'Experimental/TearsheetShell_v2',
@@ -29,7 +32,8 @@ export default {
   tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
-    styles /* docs: { page: mdx } */,
+    styles,
+    docs: { page: mdx },
   },
   argTypes: {
     influencer: {
@@ -80,23 +84,20 @@ function Step1() {
   const { setFormState, formState } = useStepContext();
   const { email } = formState || {};
   return (
-    <>
-      <h4>test</h4>
-      <div className="step-container">
-        <h4>Step 1</h4>
-        <TextInput
-          id="email"
-          onChange={(e) => {
-            setFormState((prev) => ({
-              ...prev,
-              email: e.target.value,
-            }));
-          }}
-          labelText="Email"
-          value={email ?? ''}
-        />
-      </div>
-    </>
+    <div className="step-container">
+      <h4>Step 1</h4>
+      <TextInput
+        id="email"
+        onChange={(e) => {
+          setFormState((prev) => ({
+            ...prev,
+            email: e.target.value,
+          }));
+        }}
+        labelText="Email"
+        value={email ?? ''}
+      />
+    </div>
   );
 }
 
@@ -124,7 +125,6 @@ function Step2() {
 function Step3() {
   // Example showing how to get step state via hook
   const { formState } = useStepContext();
-  console.log(formState);
   return (
     <div className="step-container">
       <h4>Step 3</h4>
@@ -136,19 +136,89 @@ function Step3() {
   );
 }
 
+const PlusOnly = () => <>This step only renders for plus flows.</>;
+
+const buildCustomInfluencer = (
+  { currentStep, handleGoToStep },
+  includeIntro,
+  showIntro,
+  selectedFlow
+) => {
+  if (showIntro) {
+    return null;
+  }
+  return (
+    <div className="tearsheet-stories__dummy-content-block">
+      {includeIntro && (
+        <h6 className="selected-intro-option">{selectedFlow}</h6>
+      )}
+      <ProgressIndicator
+        vertical
+        onChange={(stepIndex) => handleGoToStep(stepIndex + 1)}
+      >
+        <ProgressStep
+          complete={currentStep > 1}
+          current={currentStep === 1}
+          label="Step 1"
+          secondaryLabel="Optional label"
+        />
+        <ProgressStep
+          complete={currentStep > 2}
+          current={currentStep === 2}
+          label="Step 2"
+        />
+        <ProgressStep
+          current={currentStep === 3}
+          label="Step 3"
+          complete={currentStep > 3}
+        />
+        {includeIntro && selectedFlow === 'plus' && (
+          <ProgressStep current={currentStep === 4} label="Plus only step" />
+        )}
+      </ProgressIndicator>
+    </div>
+  );
+};
+
 // Template
-const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
+const Template = (
+  { influencer, open: _open, aiLabel, introExample, ...args },
+  context
+) => {
   const ref = useRef(undefined);
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(introExample);
+  const [selectedFlow, setSelectedFlow] = useState(null);
+
+  useEffect(() => {
+    setShowIntro(introExample);
+    if (introExample) {
+      setSelectedFlow('standard');
+    }
+  }, []);
+
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
   const handleNextDisabledState = (formState, currentStep) => {
+    if (showIntro) {
+      return false;
+    }
     if (!formState?.email && currentStep === 1) {
       return true;
     }
     if (!formState?.city && currentStep === 2) {
-      return true
+      return true;
+    }
+    return false;
+  };
+
+  const handleBackDisabledState = (currentStep) => {
+    if (showIntro) {
+      return true;
+    }
+    if (currentStep === 1 && !introExample) {
+      return true;
     }
     return false;
   };
@@ -161,7 +231,17 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
       <TearsheetShellV2
         className={className}
         {...args}
-        influencer={influencer}
+        influencer={
+          !showIntro
+            ? (state) =>
+                buildCustomInfluencer(
+                  state,
+                  introExample,
+                  showIntro,
+                  selectedFlow
+                )
+            : influencer
+        }
         open={open}
         onClose={() => setOpen(false)}
         title={'Tearsheet title'}
@@ -169,12 +249,46 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
         preventCloseOnClickOutside
         selectorPrimaryFocus="#email"
       >
+        {showIntro && (
+          <TileGroup
+            valueSelected={selectedFlow}
+            defaultSelected="standard"
+            legend="Options"
+            name="radio tile group"
+            onChange={(a) => setSelectedFlow(a)}
+          >
+            <RadioTile
+              className="custom-intro-tile"
+              id="radio-tile-1"
+              value="standard"
+            >
+              Standard
+            </RadioTile>
+            <RadioTile
+              className="custom-intro-tile"
+              id="radio-tile-2"
+              value="premium"
+            >
+              Premium
+            </RadioTile>
+            <RadioTile
+              className="custom-intro-tile"
+              id="radio-tile-3"
+              value="plus"
+            >
+              Plus
+            </RadioTile>
+          </TileGroup>
+        )}
         {/* Steps */}
-        <StepGroup>
-          <Step1 />
-          <Step2 />
-          <Step3 />
-        </StepGroup>
+        {!showIntro && (
+          <StepGroup>
+            <Step1 />
+            <Step2 />
+            <Step3 />
+            {introExample && selectedFlow === 'plus' && <PlusOnly />}
+          </StepGroup>
+        )}
 
         {/* Step actions */}
         <StepActions
@@ -192,7 +306,12 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
               <Button
                 className="step-action-button step-action-button__cancel"
                 kind="ghost"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  if (introExample) {
+                    setShowIntro(true);
+                  }
+                }}
                 size="xl"
               >
                 Cancel
@@ -200,8 +319,14 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
               <Button
                 className="step-action-button"
                 kind="secondary"
-                onClick={() => handlePrev()}
-                disabled={currentStep === 1}
+                onClick={() => {
+                  if (currentStep === 1 && introExample) {
+                    setShowIntro(true);
+                    return;
+                  }
+                  handlePrev();
+                }}
+                disabled={handleBackDisabledState(currentStep)}
                 size="xl"
               >
                 Back
@@ -211,11 +336,18 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
                 size="xl"
                 className="step-action-button"
                 onClick={() => {
+                  if (showIntro) {
+                    setShowIntro(false);
+                    return;
+                  }
                   if (currentStep === numSteps) {
                     // submit
                     setOpen(false);
                     handleGoToStep(1);
                     setFormState({});
+                    if (introExample) {
+                      setShowIntro(true);
+                    }
                   } else {
                     handleNext();
                   }
@@ -232,31 +364,20 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
 };
 
 // Stories
-export const AllAttributesSet = Template.bind({});
-AllAttributesSet.args = {
+export const WithSteps = Template.bind({});
+WithSteps.args = {
   closeIconDescription,
   height: 'normal',
   open: true,
   size: 'wide',
-  influencer: ({ currentStep, handleGoToStep }) => (
-    <div className="tearsheet-stories__dummy-content-block">
-      <ProgressIndicator
-        vertical
-        onChange={(stepIndex) => handleGoToStep(stepIndex + 1)}
-      >
-        <ProgressStep
-          complete={currentStep > 1}
-          current={currentStep === 1}
-          label="Step 1"
-          secondaryLabel="Optional label"
-        />
-        <ProgressStep
-          complete={currentStep > 2}
-          current={currentStep === 2}
-          label="Step 2"
-        />
-        <ProgressStep current={currentStep === 3} label="Step 3" />
-      </ProgressIndicator>
-    </div>
-  ),
+  influencer: (state) => buildCustomInfluencer(state),
+};
+
+export const IntroStep = Template.bind({});
+IntroStep.args = {
+  closeIconDescription,
+  height: 'normal',
+  open: true,
+  size: 'wide',
+  introExample: true,
 };

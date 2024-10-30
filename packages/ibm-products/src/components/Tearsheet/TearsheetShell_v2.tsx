@@ -9,6 +9,7 @@
 import React, {
   useState,
   useRef,
+  useEffect,
   PropsWithChildren,
   ReactNode,
   ForwardedRef,
@@ -39,6 +40,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { StepContext } from './StepFlow/stepContext';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -89,7 +91,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * progress indicator, or similar. NB the influencer is only applicable for
    * wide tearsheets.
    */
-  influencer?: ReactNode | (() => void);
+  influencer?: ((step: StepContext) => void) | ReactNode;
 
   /**
    * The position of the influencer section, 'left' or 'right'.
@@ -127,7 +129,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * Returning `false` here prevents the modal from closing.
    */
   // onClose?: () => (React.MouseEventHandler<HTMLButtonElement>, {});
-  onClose?: () => void;
+  onClose?: (event: MouseEvent, step: StepContext) => void;
 
   /**
    * Specifies whether the tearsheet is currently open.
@@ -197,14 +199,14 @@ export const tearsheetShellWideProps = [
 //   hasCloseIcon ?? tearsheetIsPassive(actions);
 
 interface StepContext {
-  formState: object,
-  setFormState: Dispatch<SetStateAction<object>>,
-  numSteps: number | undefined,
-  setNumSteps: Dispatch<SetStateAction<number | undefined>>,
-  currentStep: number,
-  handleGoToStep: (a: StepContext) => typeof a,
-  handleNext: () => void,
-  handlePrev: () => void,
+  formState: object;
+  setFormState: Dispatch<SetStateAction<object>>;
+  numSteps: number | undefined;
+  setNumSteps: Dispatch<SetStateAction<number | undefined>>;
+  currentStep: number;
+  handleGoToStep: (a: number) => void;
+  handleNext: () => void;
+  handlePrev: () => void;
 }
 
 /**
@@ -251,6 +253,7 @@ export const TearsheetShellV2 = React.forwardRef(
     const localRef = useRef(undefined);
     const modalBodyRef = useRef(null);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
+    const prevOpen = usePreviousValue(open);
 
     const [numSteps, setNumSteps] = useState<number>();
     const [currentStep, setCurrentStep] = useState(1);
@@ -266,6 +269,14 @@ export const TearsheetShellV2 = React.forwardRef(
       handleNext: () => setCurrentStep((step) => step + 1),
       handlePrev: () => setCurrentStep((step) => step - 1),
     };
+
+    useEffect(() => {
+      if (prevOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef.current.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, prevOpen]);
 
     // Function to strip html tags out of a string.
     const stripTags = useCallback(
@@ -284,11 +295,7 @@ export const TearsheetShellV2 = React.forwardRef(
     // We can't use a Wrap for the ModalHeader because ComposedModal requires
     // the direct child to be the ModalHeader instance.
     const includeHeader =
-      label ||
-      title ||
-      description ||
-      headerActions ||
-      navigation
+      label || title || description || headerActions || navigation;
 
     // Include an ActionSet if and only if one or more actions is given.
     const includeActions = actions && actions?.length > 0;
@@ -300,7 +307,6 @@ export const TearsheetShellV2 = React.forwardRef(
         }}
       >
         <StepContext.Provider value={context}>
-
           <ComposedModal
             {
               // Pass through any other property values.
@@ -386,7 +392,11 @@ export const TearsheetShellV2 = React.forwardRef(
                 })}
                 neverRender={influencerPosition === 'right'}
               >
-                {typeof influencer === 'function' ? influencer(context) : influencer}
+                {typeof influencer === 'function' ? (
+                  <>{influencer(context)}</>
+                ) : (
+                  influencer
+                )}
               </Wrap>
               <Wrap className={`${bc}__right`}>
                 <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
@@ -397,7 +407,6 @@ export const TearsheetShellV2 = React.forwardRef(
                     }
                     tabIndex={-1}
                   >
-
                     {children}
                   </Wrap>
                   <Wrap
@@ -407,7 +416,11 @@ export const TearsheetShellV2 = React.forwardRef(
                     })}
                     neverRender={influencerPosition !== 'right'}
                   >
-                    {typeof influencer === 'function' ? influencer(context) : influencer}
+                    {typeof influencer === 'function' ? (
+                      <>{influencer(context)}</>
+                    ) : (
+                      influencer
+                    )}
                   </Wrap>
                 </Wrap>
                 {includeActions && (
@@ -488,6 +501,8 @@ TearsheetShellV2.propTypes = {
    */
   aiLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 
+  ariaLabel: PropTypes.string,
+
   /**
    * The main content of the tearsheet.
    */
@@ -539,7 +554,7 @@ TearsheetShellV2.propTypes = {
    * progress indicator, or similar. NB the influencer is only applicable for
    * wide tearsheets.
    */
-  influencer: PropTypes.oneOfType([PropTypes.element, PropTypes.func,]),
+  influencer: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
   /**
    * The position of the influencer section, 'left' or 'right'.

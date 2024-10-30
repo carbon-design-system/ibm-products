@@ -376,7 +376,7 @@ $motion-duration: $duration-moderate-02;
     padding: $spacing-06 $spacing-06 0 $spacing-06;
   }
 
-  &.#{$block-class}--has-influencer .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
+  .#{$block-class}__button-container.#{$block-class}__button-container__v2 {
     position: fixed;
     bottom: 0;
     left: 0;

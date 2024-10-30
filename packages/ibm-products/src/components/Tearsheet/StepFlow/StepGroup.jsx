@@ -5,18 +5,16 @@ import { useStepContext } from './stepContext';
 export function StepGroup({ children }) {
   const { currentStep, setNumSteps } = useStepContext();
 
-  const childrenCount = React.Children.count(children);
+  const cleanedChildren = children?.filter(Boolean);
+  const childrenCount = React.Children.count(cleanedChildren);
 
   // set number of steps, based on num of children passed in
-  useEffect(
-      () => setNumSteps(childrenCount),
-      [childrenCount, setNumSteps]
-  );
+  useEffect(() => setNumSteps(childrenCount), [childrenCount, setNumSteps]);
 
   // get currently selected step
-  const currentStepComponent = 
-      React.Children.toArray(children)[currentStep - 1];
+  const currentStepComponent =
+    React.Children.toArray(cleanedChildren)[currentStep - 1];
 
   // and just return that one single current step
-  return currentStepComponent
+  return currentStepComponent;
 }

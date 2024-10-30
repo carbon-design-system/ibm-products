@@ -21,13 +21,13 @@ import {
   TileGroup,
   RadioTile,
 } from '@carbon/react';
-import { useStepContext } from './StepFlow/stepContext';
-import { StepGroup } from './StepFlow/StepGroup';
-import { StepActions } from './StepFlow/StepActions';
+import { useStepContext } from '../StepFlow/stepContext';
+import { StepGroup } from '../StepFlow/StepGroup';
+import { StepActions } from '../StepFlow/StepActions';
 import mdx from './TearsheetShell_v2.mdx';
 
 export default {
-  title: 'Experimental/TearsheetShell_v2',
+  title: 'Experimental/Components/TearsheetShell_v2',
   component: TearsheetShellV2,
   tags: ['autodocs'],
   parameters: {

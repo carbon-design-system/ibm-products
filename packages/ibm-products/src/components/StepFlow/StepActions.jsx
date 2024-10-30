@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../../settings';
+import { pkg } from '../../settings';
 import { useStepContext } from './stepContext';
 import cx from 'classnames';
 

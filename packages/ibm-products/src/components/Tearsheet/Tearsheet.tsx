@@ -18,6 +18,8 @@ import { allPropTypes } from '../../global/js/utils/props-helper';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { portalType } from './TearsheetShell';
+import { useFeatureFlag } from '../FeatureFlags';
+import { TearsheetShellV2 } from './TearsheetShell_v2';
 
 const componentName = 'Tearsheet';
 
@@ -192,18 +194,32 @@ export let Tearsheet = React.forwardRef(
       ...rest
     }: TearsheetProps & CloseIconDescriptionTypes,
     ref: ForwardedRef<HTMLDivElement>
-  ) => (
-    <TearsheetShell
-      {...{
-        ...getDevtoolsProps(componentName),
-        ...rest,
-        influencerPosition,
-        influencerWidth,
-        ref,
-        size: 'wide',
-      }}
-    />
-  )
+  ) => {
+    const enableV3Tearsheet = useFeatureFlag('enable-v3-tearsheet');
+    return !enableV3Tearsheet ? (
+      <TearsheetShell
+        {...{
+          ...getDevtoolsProps(componentName),
+          ...rest,
+          influencerPosition,
+          influencerWidth,
+          ref,
+          size: 'wide',
+        }}
+      />
+    ) : (
+      <TearsheetShellV2
+        {...{
+          ...getDevtoolsProps(componentName),
+          ...rest,
+          influencerPosition,
+          influencerWidth,
+          ref,
+          size: 'wide',
+        }}
+      />
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag

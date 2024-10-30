@@ -15,4 +15,5 @@ FeatureFlags.merge({
   'ExampleComponent.secondaryIcon': false,
   'ExampleComponent.useExample': false,
   'enable-example-flag': false,
+  'enable-v3-tearsheet': false,
 });

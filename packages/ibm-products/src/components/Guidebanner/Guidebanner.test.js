@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import {
@@ -134,7 +134,7 @@ describe(componentName, () => {
     const button = screen.getByRole('button', { name: /show me/i });
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass(`${blockClass}__element-button`);
-    expect(button).toHaveClass('cds--btn--ghost');
+    expect(button).toHaveClass(`${carbon.prefix}--btn--ghost`);
   });
 
   it('returns link for GuidebannerElementLink', () => {

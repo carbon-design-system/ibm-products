@@ -7,7 +7,7 @@
 
 const { devices, expect } = require('@playwright/test');
 const path = require('path');
-const { pkg } =  require('./packages/ibm-products/src/settings');
+const { pkg } = require('./packages/ibm-products/src/settings');
 
 const config = {
   // https://playwright.dev/docs/api/class-testconfig#test-config-test-dir
@@ -88,7 +88,7 @@ expect.extend({
         'aria_content_in_landmark',
         'aria_child_tabbable',
         'skip_main_described',
-        'target_spacing_sufficient'
+        'target_spacing_sufficient',
       ]);
 
       const ruleset = await aChecker.getRuleset('IBM_Accessibility');
@@ -101,7 +101,8 @@ expect.extend({
             return !denylist.has(rule.id);
           });
           return checkpoint;
-        });
+        }
+      );
 
       aChecker.addRuleset(customRuleset);
     }
@@ -154,7 +155,7 @@ expect.extend({
             globals: ${JSON.stringify(options.globals)} 
             args: ${JSON.stringify(options.args)},
           }
-          `
+          `,
       };
     }
   },

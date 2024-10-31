@@ -280,7 +280,7 @@ export const DataSpreadsheetBody = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [validStartingPoint, setValidStartingPoint] = useState(false);
-    const contentScrollRef = useRef<HTMLDivElement>();
+    const contentScrollRef = useRef<HTMLDivElement | undefined>(undefined);
 
     const previousState: PrevState =
       usePreviousValue({
@@ -841,7 +841,7 @@ export const DataSpreadsheetBody = forwardRef(
       ]
     );
 
-    const spreadsheetBodyRef = useRef();
+    const spreadsheetBodyRef = useRef(undefined);
     return (
       <div
         ref={spreadsheetBodyRef as MutableRefObject<any>}

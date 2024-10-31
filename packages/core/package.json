@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.28.0-rc.0",
+  "version": "2.29.0-rc.0",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -28,13 +28,13 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
-    "@carbon/grid": "^11.27.0",
-    "@carbon/ibm-products-styles": "^2.48.0-rc.0",
-    "@carbon/layout": "^11.26.0",
-    "@carbon/motion": "^11.22.0",
-    "@carbon/react": "^1.66.0",
-    "@carbon/themes": "^11.40.0",
-    "@carbon/type": "^11.31.0",
+    "@carbon/grid": "^11.28.1",
+    "@carbon/ibm-products-styles": "^2.49.0-rc.0",
+    "@carbon/layout": "^11.27.1",
+    "@carbon/motion": "^11.23.1",
+    "@carbon/react": "^1.68.0",
+    "@carbon/themes": "^11.42.0",
+    "@carbon/type": "^11.32.1",
     "@storybook/addon-a11y": "^8.1.10",
     "@storybook/addon-actions": "^8.0.9",
     "@storybook/addon-controls": "^8.0.9",

@@ -221,7 +221,7 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
         {onClose && (
           <span className={`${blockClass}__close-button`}>
             <IconButton
-              align="bottom-right"
+              align="bottom-end"
               kind="ghost"
               label={closeIconDescription}
               onClick={onClose}

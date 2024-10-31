@@ -198,7 +198,9 @@ export const tearsheetShellWideProps = [
 // export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
 //   hasCloseIcon ?? tearsheetIsPassive(actions);
 
-export interface StepContextType {
+export type StepContextType = StepState | undefined;
+
+interface StepState {
   formState: object;
   setFormState: Dispatch<SetStateAction<object>>;
   numSteps: number | undefined;

@@ -44,7 +44,7 @@ const Step2 = () => {
   return <div>Step 2 content</div>;
 };
 
-const StepComponent = ({ children }) => {
+const StepComponent = ({ children, noContextValue }) => {
   const [numSteps, setNumSteps] = useState();
   const [currentStep, setCurrentStep] = useState(1);
   const [formState, setFormState] = useState({});
@@ -61,12 +61,15 @@ const StepComponent = ({ children }) => {
   };
 
   return (
-    <StepContext.Provider value={context}>{children}</StepContext.Provider>
+    <StepContext.Provider value={noContextValue ? undefined : context}>
+      {children}
+    </StepContext.Provider>
   );
 };
 
 StepComponent.propTypes = {
   children: PropTypes.node,
+  noContextValue: PropTypes.bool,
 };
 
 describe(componentName, () => {
@@ -126,14 +129,32 @@ describe(componentName, () => {
         />
       </StepComponent>
     );
-    // const cancelButton = screen.getByRole('button', {
-    //   name: /Cancel/i
-    // });
-    // const submitButton = screen.getByRole('button', {
-    //   name: /Submit/i
-    // });
     const step1TextInput = screen.getByLabelText('Email');
     await act(() => user.type(step1TextInput, 'Pizza'));
     expect(step1TextInput).toHaveValue('Pizza');
+  });
+
+  it('handles undefined value passed to provider', async () => {
+    let testState;
+    render(
+      <StepComponent noContextValue>
+        <StepGroup>
+          <Step1 />
+          <Step2 />
+        </StepGroup>
+        <StepActions
+          buttonRenderer={(stepData) => {
+            testState = stepData;
+            return (
+              <>
+                <Button>Cancel</Button>
+                <Button>Submit</Button>
+              </>
+            );
+          }}
+        />
+      </StepComponent>
+    );
+    expect(testState).not.toBeDefined();
   });
 });

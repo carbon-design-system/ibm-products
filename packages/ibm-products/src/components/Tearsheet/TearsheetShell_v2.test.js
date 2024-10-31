@@ -54,6 +54,16 @@ ExampleTearsheet.propTypes = {
 };
 
 describe(componentName, () => {
+  let warn;
+
+  beforeEach(() => {
+    warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+  });
+
+  afterEach(() => {
+    warn.mockRestore();
+  });
+
   it('renders a tearsheet with a custom class', async () => {
     const testClass = 'my-custom-class';
     const ref = React.createRef();

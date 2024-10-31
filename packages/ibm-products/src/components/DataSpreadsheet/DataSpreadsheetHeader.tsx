@@ -12,14 +12,13 @@ import React, {
   SetStateAction,
   forwardRef,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
-import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
+import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
@@ -315,15 +314,6 @@ export const DataSpreadsheetHeader = forwardRef(
 
     useSpreadsheetMouseMove({ ref, headerCellHoldActive, defaultColumn });
 
-    const headerRefs = useRef<
-      Array<{ el: HTMLDivElement | null; headerGroup: any }>
-    >([]);
-
-    const aggregateHeaderRefs = (el: HTMLDivElement | null, headerGroup: any) =>
-      headerRefs.current.push({ el, headerGroup });
-
-    useIsomorphicEffect(() => {}, []);
-
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
         {headerGroups?.map((headerGroup, index) => {
@@ -333,7 +323,6 @@ export const DataSpreadsheetHeader = forwardRef(
           );
           return (
             <div
-              ref={(el) => aggregateHeaderRefs(el, headerGroup)}
               key={`header_${index}`}
               {...headerProps}
               style={{

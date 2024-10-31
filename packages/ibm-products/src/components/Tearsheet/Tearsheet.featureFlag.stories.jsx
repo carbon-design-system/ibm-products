@@ -152,53 +152,7 @@ const description =
   'This is a description for the tearsheet, providing an opportunity to \
   describe the flow over a couple of lines in the header of the tearsheet.';
 
-const mainContent = (
-  <div className="tearsheet-stories__dummy-content-block">
-    <Form>
-      <p>Main content</p>
-      <FormGroup legendId="tearsheet-form-group" legendText="FormGroup Legend">
-        <TextInput
-          id="tss-ft1"
-          labelText="Enter an important value here"
-          style={
-            // stylelint-disable-next-line carbon/layout-token-use
-            { marginBottom: '1em' }
-          }
-        />
-        <TextInput
-          id="tss-ft2"
-          labelText="Here is an entry field:"
-          style={
-            // stylelint-disable-next-line carbon/layout-token-use
-            { marginBottom: '1em' }
-          }
-        />
-      </FormGroup>
-    </Form>
-  </div>
-);
-
 const title = 'Title of the tearsheet';
-
-const sampleAILabel = (
-  <AILabel className="ai-label-container" size="xs">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          This is not really Lorem Ipsum but the spell checker did not like the
-          previous text with it&apos;s non-words which is why this unwieldy
-          sentence, should one choose to call it that, here.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-    </AILabelContent>
-  </AILabel>
-);
 
 function Step1() {
   const { setFormState, formState } = useStepContext();

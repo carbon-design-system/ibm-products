@@ -157,7 +157,7 @@ interface TearsheetShellProps extends PropsWithChildren {
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
-  size: 'narrow' | 'wide';
+  size?: 'narrow' | 'wide';
 
   /**
    * The main title of the tearsheet, displayed in the header area.
@@ -625,7 +625,7 @@ TearsheetShellV2.propTypes = {
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   /**@ts-ignore*/
-  size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+  size: PropTypes.oneOf(['narrow', 'wide']),
   /**
    * The main title of the tearsheet, displayed in the header area.
    */

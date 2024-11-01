@@ -102,7 +102,7 @@ function Step1() {
 
 function Step2() {
   const { setFormState, formState } = useStepContext();
-  const { city } = formState || {};
+  const { city, state } = formState || {};
   const stepPrimaryFocus = 'city';
   useStepFocus(`#${stepPrimaryFocus}`);
   return (
@@ -118,6 +118,17 @@ function Step2() {
         }}
         labelText="City"
         value={city ?? ''}
+      />
+      <TextInput
+        id="state"
+        onChange={(e) => {
+          setFormState((prev) => ({
+            ...prev,
+            state: e.target.value,
+          }));
+        }}
+        labelText="State"
+        value={state ?? ''}
       />
     </div>
   );

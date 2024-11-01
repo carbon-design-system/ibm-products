@@ -378,7 +378,7 @@ $motion-duration: $duration-moderate-02;
     padding: $spacing-06 $spacing-06 0 $spacing-06;
   }
 
-  @container style(--tearsheet-next: true) {
+  &.#{$block-class}__next {
     .#{$step-actions} {
       position: fixed;
       bottom: 0;

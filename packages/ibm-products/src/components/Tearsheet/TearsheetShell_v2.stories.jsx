@@ -108,28 +108,30 @@ function Step2() {
   return (
     <div className="step-container">
       <h4>Step 2</h4>
-      <TextInput
-        id="city"
-        onChange={(e) => {
-          setFormState((prev) => ({
-            ...prev,
-            city: e.target.value,
-          }));
-        }}
-        labelText="City"
-        value={city ?? ''}
-      />
-      <TextInput
-        id="state"
-        onChange={(e) => {
-          setFormState((prev) => ({
-            ...prev,
-            state: e.target.value,
-          }));
-        }}
-        labelText="State"
-        value={state ?? ''}
-      />
+      <div className="step-form-items">
+        <TextInput
+          id="city"
+          onChange={(e) => {
+            setFormState((prev) => ({
+              ...prev,
+              city: e.target.value,
+            }));
+          }}
+          labelText="City"
+          value={city ?? ''}
+        />
+        <TextInput
+          id="state"
+          onChange={(e) => {
+            setFormState((prev) => ({
+              ...prev,
+              state: e.target.value,
+            }));
+          }}
+          labelText="State"
+          value={state ?? ''}
+        />
+      </div>
     </div>
   );
 }

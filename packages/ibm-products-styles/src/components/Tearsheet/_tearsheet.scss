@@ -378,41 +378,42 @@ $motion-duration: $duration-moderate-02;
     padding: $spacing-06 $spacing-06 0 $spacing-06;
   }
 
-  .#{$block-class}__button-container,
-  .#{$step-actions} {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 120px;
-    margin-top: auto;
-  }
-
-  &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
-  &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
+  @container style(--tearsheet-next: true) {
     .#{$step-actions} {
-    width: calc(100% - $influencer-width);
-  }
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 120px;
+      margin-top: auto;
+    }
 
-  &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
-  &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
-    .#{$step-actions} {
-    left: 0;
-  }
+    &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
+      .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+    &.#{$block-class}--has-influencer.#{$block-class}--has-influencer
+      .#{$step-actions} {
+      width: calc(100% - $influencer-width);
+    }
 
-  &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
-    .#{$block-class}__button-container.#{$block-class}__button-container__v2,
-  &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
-    .#{$step-actions} {
-    left: $influencer-width;
-  }
+    &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
+      .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+    &.#{$block-class}--has-influencer__right.#{$block-class}--has-influencer
+      .#{$step-actions} {
+      left: 0;
+    }
 
-  .#{$block-class}__button-container.#{$block-class}__button-container__v2
-    .cds--btn,
-  .#{$step-actions} .cds--btn {
-    max-width: none;
+    &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
+      .#{$block-class}__button-container.#{$block-class}__button-container__v2,
+    &.#{$block-class}--has-influencer__left.#{$block-class}--has-influencer
+      .#{$step-actions} {
+      left: $influencer-width;
+    }
+
+    .#{$block-class}__button-container.#{$block-class}__button-container__v2
+      .cds--btn,
+    .#{$step-actions} .cds--btn {
+      max-width: none;
+    }
   }
 
   &.#{$block-class}--has-slug .#{$block-class}__content,

@@ -58,3 +58,12 @@
   padding-bottom: $spacing-06;
   text-transform: capitalize;
 }
+
+.step-form-items {
+  display: flex;
+  container-type: size;
+
+  #city {
+    margin-right: $spacing-06;
+  }
+}

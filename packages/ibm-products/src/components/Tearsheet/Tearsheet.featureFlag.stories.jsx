@@ -42,6 +42,7 @@ export default {
   title: 'IBM Products/Components/Tearsheet/Feature Flag',
   component: Tearsheet,
   tags: ['autodocs'],
+  excludeStories: ['useStepFocus'],
   decorators: [
     (Story) => (
       <WithFeatureFlags

@@ -40,7 +40,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { StepContext } from '../StepFlow';
-import { usePreviousValue } from '../../global/js/hooks';
+import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
@@ -271,6 +271,13 @@ export const TearsheetShellV2 = React.forwardRef(
       handleNext: () => setCurrentStep((step) => step + 1),
       handlePrevious: () => setCurrentStep((step) => step - 1),
     };
+
+    // Set css property to add conditional styles in _tearsheet.scss
+    useIsomorphicEffect(() => {
+      if (modalRef) {
+        modalRef.current.style.setProperty(`--tearsheet-next`, 'true');
+      }
+    }, [modalRef]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

@@ -290,7 +290,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                       fileName={downloadFileName}
                       linkText={downloadLinkText}
                       fileType={downloadFileType}
-                      DownloadLinkLabel={downloadLinkLabel}
+                      downloadLinkLabel={downloadLinkLabel}
                     />
                   ) : (
                     <div className={`${blockClass}__messaging-text`}>

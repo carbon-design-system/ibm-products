@@ -315,7 +315,7 @@ export const TearsheetShellV2 = React.forwardRef(
               ...rest
             }
             aria-label={ariaLabel || getNodeTextContent(title)}
-            className={cx(bc, className, {
+            className={cx(bc, className, `${bc}__next`, {
               [`${bc}--wide`]: wide,
               [`${bc}--narrow`]: !wide,
               [`${bc}--has-ai-label`]: aiLabel,

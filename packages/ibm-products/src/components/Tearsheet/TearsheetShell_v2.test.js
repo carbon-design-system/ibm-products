@@ -16,6 +16,8 @@ import { Button, TextInput } from '@carbon/react';
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import { StepActions, StepGroup, useStepContext } from '../StepFlow';
+import { FeatureFlags } from '../FeatureFlags';
+import { Tearsheet } from './Tearsheet';
 
 const componentName = TearsheetShellV2.displayName;
 
@@ -46,6 +48,20 @@ const ExampleTearsheet = forwardRef(
     );
   }
 );
+
+const ExampleWithFeatureFlag = forwardRef(({ children, ...rest }, ref) => {
+  return (
+    <FeatureFlags flags={{ 'enable-v3-tearsheet': true }}>
+      <Tearsheet ref={ref} closeIconDescription="Close icon" {...rest}>
+        {children}
+      </Tearsheet>
+    </FeatureFlags>
+  );
+});
+
+ExampleWithFeatureFlag.propTypes = {
+  children: PropTypes.node,
+};
 
 ExampleTearsheet.propTypes = {
   children: PropTypes.node,
@@ -253,5 +269,15 @@ describe(componentName, () => {
     expect(prevButtonMock).toHaveBeenCalled();
     await act(() => userEvent.click(skipButton));
     expect(skipButtonMock).toHaveBeenCalled();
+  });
+
+  it('should render next version of tearsheet shell via feature flags from base tearsheet', () => {
+    const ref = React.createRef();
+    render(
+      <ExampleWithFeatureFlag ref={ref} open>
+        tearsheet content
+      </ExampleWithFeatureFlag>
+    );
+    expect(ref.current).toHaveClass(`${bc}__next`);
   });
 });

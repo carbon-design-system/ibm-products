@@ -108,6 +108,7 @@ describe(componentName, () => {
 
   it('updates formState from custom hook', async () => {
     const user = userEvent.setup();
+    let tempFormState;
     render(
       <StepComponent>
         <StepGroup>
@@ -115,20 +116,24 @@ describe(componentName, () => {
           <Step2 />
         </StepGroup>
         <StepActions
-          buttonRenderer={({ currentStep }) => (
-            <>
-              <Button kind={'ghost'} disabled={currentStep === 1}>
-                Cancel
-              </Button>
-              <Button>Submit</Button>
-            </>
-          )}
+          buttonRenderer={({ currentStep, formState }) => {
+            tempFormState = formState;
+            return (
+              <>
+                <Button kind={'ghost'} disabled={currentStep === 1}>
+                  Cancel
+                </Button>
+                <Button>Submit</Button>
+              </>
+            );
+          }}
         />
       </StepComponent>
     );
     const step1TextInput = screen.getByLabelText('Email');
     await act(() => user.type(step1TextInput, 'Pizza'));
     expect(step1TextInput).toHaveValue('Pizza');
+    expect(tempFormState).toEqual({ email: 'Pizza' });
   });
 
   it('handles undefined value passed to provider', async () => {

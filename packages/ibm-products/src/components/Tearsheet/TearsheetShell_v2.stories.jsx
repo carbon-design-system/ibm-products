@@ -23,6 +23,7 @@ import {
 } from '@carbon/react';
 import { useStepContext, StepGroup, StepActions } from '../StepFlow';
 import mdx from './TearsheetShell_v2.mdx';
+import { useStepFocus } from './Tearsheet.featureFlag.stories';
 
 export default {
   title: 'Experimental/Components/TearsheetShell_v2',
@@ -102,6 +103,8 @@ function Step1() {
 function Step2() {
   const { setFormState, formState } = useStepContext();
   const { city } = formState || {};
+  const stepPrimaryFocus = 'city';
+  useStepFocus(`#${stepPrimaryFocus}`);
   return (
     <div className="step-container">
       <h4>Step 2</h4>

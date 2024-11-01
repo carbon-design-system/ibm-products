@@ -15,13 +15,9 @@ import {
   Button,
   ButtonSet,
   Dropdown,
-  Form,
-  FormGroup,
   Tab,
   TabList,
   TextInput,
-  AILabel,
-  AILabelContent,
   ProgressIndicator,
   ProgressStep,
   CodeSnippet,
@@ -38,6 +34,7 @@ import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { WithFeatureFlags } from '../../../../core/.storybook/WithFeatureFlags';
 import { useStepContext, StepGroup, StepActions } from '../StepFlow';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -152,6 +149,13 @@ const description =
 
 const title = 'Title of the tearsheet';
 
+export const useStepFocus = (stepPrimaryFocus) => {
+  useIsomorphicEffect(() => {
+    const stepFocusElement = document?.querySelector(stepPrimaryFocus);
+    stepFocusElement?.focus();
+  }, []);
+};
+
 function Step1() {
   const { setFormState, formState } = useStepContext();
   const { email } = formState || {};
@@ -176,11 +180,13 @@ function Step1() {
 function Step2() {
   const { setFormState, formState } = useStepContext();
   const { city } = formState || {};
+  const stepPrimaryFocus = 'city';
+  useStepFocus(`#${stepPrimaryFocus}`);
   return (
     <div className="step-container">
       <h4>Step 2</h4>
       <TextInput
-        id="city"
+        id={stepPrimaryFocus}
         onChange={(e) => {
           setFormState((prev) => ({
             ...prev,

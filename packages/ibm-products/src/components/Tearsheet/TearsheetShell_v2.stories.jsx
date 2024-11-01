@@ -21,9 +21,7 @@ import {
   TileGroup,
   RadioTile,
 } from '@carbon/react';
-import { useStepContext } from '../StepFlow/stepContext';
-import { StepGroup } from '../StepFlow/StepGroup';
-import { StepActions } from '../StepFlow/StepActions';
+import { useStepContext, StepGroup, StepActions } from '../StepFlow';
 import mdx from './TearsheetShell_v2.mdx';
 
 export default {
@@ -299,7 +297,7 @@ const Template = (
             numSteps,
             handleGoToStep,
             setFormState,
-            handlePrev,
+            handlePrevious,
             formState,
           }) => (
             <>
@@ -324,7 +322,7 @@ const Template = (
                     setShowIntro(true);
                     return;
                   }
-                  handlePrev();
+                  handlePrevious();
                 }}
                 disabled={handleBackDisabledState(currentStep)}
                 size="xl"

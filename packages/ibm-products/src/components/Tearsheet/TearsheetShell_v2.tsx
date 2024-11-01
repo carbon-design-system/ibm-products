@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2024, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,7 +39,7 @@ import {
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-import { StepContext } from '../StepFlow/stepContext';
+import { StepContext } from '../StepFlow';
 import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -208,7 +208,7 @@ interface StepState {
   currentStep: number;
   handleGoToStep: (a: number) => void;
   handleNext: () => void;
-  handlePrev: () => void;
+  handlePrevious: () => void;
 }
 
 /**
@@ -269,7 +269,7 @@ export const TearsheetShellV2 = React.forwardRef(
       currentStep,
       handleGoToStep: (step) => setCurrentStep(step),
       handleNext: () => setCurrentStep((step) => step + 1),
-      handlePrev: () => setCurrentStep((step) => step - 1),
+      handlePrevious: () => setCurrentStep((step) => step - 1),
     };
 
     useEffect(() => {

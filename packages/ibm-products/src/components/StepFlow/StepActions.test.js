@@ -9,13 +9,10 @@ import React, { act, useState } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import PropTypes from 'prop-types';
+import { Button, TextInput } from '@carbon/react';
 
 import { carbon } from '../../settings';
-
-import { StepActions } from './StepActions';
-import { StepContext, useStepContext } from './stepContext';
-import { StepGroup } from './StepGroup';
-import { Button, TextInput } from '@carbon/react';
+import { StepActions, StepGroup, StepContext, useStepContext } from '.';
 
 const componentName = StepActions.displayName;
 
@@ -57,7 +54,7 @@ const StepComponent = ({ children, noContextValue }) => {
     currentStep,
     handleGoToStep: (step) => setCurrentStep(step),
     handleNext: () => setCurrentStep((step) => step + 1),
-    handlePrev: () => setCurrentStep((step) => step - 1),
+    handlePrevious: () => setCurrentStep((step) => step - 1),
   };
 
   return (

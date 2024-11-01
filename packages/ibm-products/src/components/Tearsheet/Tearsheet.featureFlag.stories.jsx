@@ -37,9 +37,7 @@ import {
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 import styles from './_storybook-styles.scss?inline';
 import { WithFeatureFlags } from '../../../../core/.storybook/WithFeatureFlags';
-import { useStepContext } from '../StepFlow/stepContext';
-import { StepGroup } from '../StepFlow/StepGroup';
-import { StepActions } from '../StepFlow/StepActions';
+import { useStepContext, StepGroup, StepActions } from '../StepFlow';
 
 // import mdx from './Tearsheet.mdx';
 
@@ -284,7 +282,7 @@ const Template = ({ actions, aiLabel, influencer, slug, ...args }) => {
               numSteps,
               handleGoToStep,
               setFormState,
-              handlePrev,
+              handlePrevious,
               formState,
             }) => (
               <>
@@ -301,7 +299,7 @@ const Template = ({ actions, aiLabel, influencer, slug, ...args }) => {
                 <Button
                   className="step-action-button"
                   kind="secondary"
-                  onClick={() => handlePrev()}
+                  onClick={() => handlePrevious()}
                   disabled={handleBackDisabledState(currentStep)}
                   size="xl"
                 >

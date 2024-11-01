@@ -144,3 +144,10 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './FeatureFlags';
+
+export {
+  StepActions as unstable_StepActions,
+  StepGroup as unstable_StepGroup,
+  StepContext as unstableStepContext,
+  useStepContext as unstable_useStepContext,
+} from './StepFlow';

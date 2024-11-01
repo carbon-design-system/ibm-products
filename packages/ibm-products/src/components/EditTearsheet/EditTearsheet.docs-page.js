@@ -25,7 +25,7 @@ component with form items as children:`,
     title="Required title"
     subtitle="Optional subtitle"
     description="Optional description"
-    onNext={() => {
+    handleNext={() => {
       'Optional function';
     }}
   >

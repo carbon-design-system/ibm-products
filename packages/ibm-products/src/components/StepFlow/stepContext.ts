@@ -11,6 +11,4 @@ import { StepContextType } from '../Tearsheet/TearsheetShell_v2';
 export const StepContext = createContext<StepContextType>(undefined);
 
 // helper function to get context
-export function useStepContext() {
-  return useContext(StepContext);
-}
+export const useStepContext = () => useContext(StepContext);

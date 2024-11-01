@@ -7,14 +7,14 @@
 
 import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
-import { useStepContext } from './stepContext';
 import cx from 'classnames';
+import { useStepContext } from '.';
+import { pkg } from '../../settings';
 import { StepContextType } from '../Tearsheet/TearsheetShell_v2';
 
 const bc = `${pkg.prefix}--step-actions`;
 
-interface StepActionsProps {
+export interface StepActionsProps {
   buttonRenderer: (stepData: StepContextType) => ReactNode;
   className?: string;
 }

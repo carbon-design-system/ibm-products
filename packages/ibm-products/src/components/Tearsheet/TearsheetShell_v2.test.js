@@ -196,23 +196,22 @@ describe(componentName, () => {
   }
 
   it('should render a tearsheet with steps', async () => {
-    const ref = React.createRef();
     const nextButtonMock = jest.fn();
     const prevButtonMock = jest.fn();
     const skipButtonMock = jest.fn();
     render(
-      <ExampleTearsheet ref={ref} title="Test title" open size="narrow">
+      <ExampleTearsheet title="Test title" open size="narrow">
         <StepGroup>
           <Step1 />
           <Step2 />
           <Step3 />
         </StepGroup>
         <StepActions
-          buttonRenderer={({ handleNext, handlePrev, handleGoToStep }) => (
+          buttonRenderer={({ handleNext, handlePrevious, handleGoToStep }) => (
             <>
               <Button
                 onClick={() => {
-                  handlePrev();
+                  handlePrevious();
                   prevButtonMock();
                 }}
               >

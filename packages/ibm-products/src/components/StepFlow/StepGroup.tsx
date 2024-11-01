@@ -6,10 +6,10 @@
  */
 
 import React, { useEffect } from 'react';
-import { useStepContext } from './stepContext';
+import { useStepContext } from '.';
 
 // container for multiple children, each one representing a step
-export function StepGroup({ children }) {
+export const StepGroup = ({ children }) => {
   const stepState = useStepContext();
 
   const cleanedChildren = children?.filter(Boolean);
@@ -32,4 +32,4 @@ export function StepGroup({ children }) {
 
   // and just return that one single current step
   return currentStepComponent;
-}
+};

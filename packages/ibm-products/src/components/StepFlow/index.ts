@@ -6,5 +6,6 @@
  */
 
 export { StepActions } from './StepActions';
+export type { StepActionsProps } from './StepActions';
 export { StepGroup } from './StepGroup';
-export { StepContext, useStepContext } from './stepContext';
+export { StepContext, useStepContext } from './StepContext';

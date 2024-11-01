@@ -17,12 +17,9 @@ module.exports = {
   ],
   testMatch: [
     '<rootDir>/e2e/**/*-test.avt.e2e.js',
-    '<rootDir>/e2e/**/*-test.vrt.e2e.js'
+    '<rootDir>/e2e/**/*-test.vrt.e2e.js',
   ],
-  testPathIgnorePatterns: [
-    'examples',
-    '/packages/ibm-products/',
-  ],
+  testPathIgnorePatterns: ['examples', '/packages/ibm-products/'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   reporters: ['default', 'jest-junit'],
 };

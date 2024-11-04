@@ -36,6 +36,7 @@ import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus } from '../../global/js/hooks';
+import { getSpecificElement } from '../../global/js/hooks/useFocus';
 
 const componentName = 'APIKeyModal';
 
@@ -92,6 +93,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       open,
       portalTarget: portalTargetIn,
       previousStepButtonText,
+      selectorPrimaryFocus,
       showAPIKeyLabel,
 
       // Collect any other property values passed in.
@@ -119,7 +121,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     const blockClass = `${pkg.prefix}--apikey-modal`;
     const localRef = useRef(undefined);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
-    const { firstElement, keyDownListener } = useFocus(modalRef);
+    const { firstElement, keyDownListener } = useFocus(
+      modalRef,
+      selectorPrimaryFocus
+    );
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
@@ -129,11 +134,30 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
 
     useEffect(() => {
       if (open) {
+        // Focusing the first element or selectorPrimaryFocus element
+        if (
+          selectorPrimaryFocus &&
+          getSpecificElement(modalRef?.current, selectorPrimaryFocus)
+        ) {
+          const specifiedEl = getSpecificElement(
+            modalRef?.current,
+            selectorPrimaryFocus
+          );
+
+          if (
+            specifiedEl &&
+            window?.getComputedStyle(specifiedEl)?.display !== 'none'
+          ) {
+            setTimeout(() => specifiedEl.focus(), 0);
+            return;
+          }
+        }
+
         setTimeout(() => {
           firstElement?.focus();
         }, 0);
       }
-    }, [firstElement, open, ref]);
+    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
 
     const isPrimaryButtonDisabled = () => {
       if (loading) {
@@ -554,6 +578,11 @@ APIKeyModal.propTypes = {
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */
   previousStepButtonText: customStepsRequiredProps(PropTypes.string),
+  /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus: PropTypes.string,
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

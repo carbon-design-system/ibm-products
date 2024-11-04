@@ -78,6 +78,7 @@ const defaultProps = {
   editSuccessTitle: 'API key successfully saved',
   loadingText: 'Generating...',
   modalLabel: 'An example of Generate API key',
+  selectorPrimaryFocus: 'resource-input',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
@@ -238,6 +239,7 @@ const MultiStepTemplate = (args) => {
               valueSelected={permissions}
               name="permission"
               orientation="vertical"
+              id="test"
             >
               <RadioButton value="Read and write" labelText="Read and write" />
               <RadioButton value="Read only" labelText="Read only" />

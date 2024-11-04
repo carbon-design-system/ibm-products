@@ -31,8 +31,8 @@
 
 .my-custom-action-set {
   display: grid;
-  grid-auto-rows: minmax(120px, auto);
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .step-action-button {
@@ -40,7 +40,7 @@
 }
 
 .step-action-button__cancel {
-  grid-column: span 2;
+  grid-column: span 4;
 }
 
 .#{c4p-settings.$carbon-prefix}--tile-group div {

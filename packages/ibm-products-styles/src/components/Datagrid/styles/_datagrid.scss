@@ -413,17 +413,27 @@
     }
   }
 
-  .#{$block-class}__carbon-row td {
+  .#{$block-class}__carbon-row .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-01;
   }
 
-  .#{$block-class}__carbon-row:hover td {
+  .#{$block-class}__carbon-row:hover .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover
+    .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-hover-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table--selected td {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__left-sticky-column-cell,
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__right-sticky-column-cell,
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-selected-01;
   }

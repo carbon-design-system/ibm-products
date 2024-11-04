@@ -16,7 +16,7 @@ import {
   TextInput,
   usePrefix,
 } from '@carbon/react';
-import React, { ReactNode, forwardRef, useState } from 'react';
+import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
 
 import { Add } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
@@ -28,11 +28,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'ImportModal';
 
-// Default values for props
-const defaults = {
-  accept: Object.freeze([]),
-};
-
 type FileType = {
   fetchError?: undefined | boolean;
   fileData?: File;
@@ -40,7 +35,7 @@ type FileType = {
   iconDescription?: string;
   invalidFileType?: boolean;
   name: string;
-  status?: string;
+  status?: 'uploading' | 'edit' | 'complete';
   uuid?: string;
   invalid?: boolean;
   errorBody?: string;
@@ -167,7 +162,7 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
 
-      accept = defaults.accept,
+      accept = [],
       className,
       defaultErrorBody,
       defaultErrorHeader,
@@ -199,7 +194,7 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
       // Collect any other property values passed in.
       ...rest
     },
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
     const [files, setFiles] = useState<Array<FileType>>([]);
@@ -258,7 +253,7 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
       const fileName = importUrl
         .substring(importUrl.lastIndexOf('/') + 1)
         .split('?')[0];
-      const pendingFile = {
+      const pendingFile: FileType = {
         name: fileName,
         status: 'uploading',
         uuid: uuidv4(),
@@ -350,7 +345,7 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
           <div className={`${blockClass}__input-group`}>
             <TextInput
               labelText=""
-              id={inputId}
+              id={inputId || ''}
               onChange={inputHandler}
               placeholder={inputPlaceholder}
               value={importUrl}
@@ -363,7 +358,9 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
               size="sm"
               disabled={importButtonDisabled}
               renderIcon={
-                inputButtonIcon ? (props) => <Add size={20} {...props} /> : null
+                inputButtonIcon
+                  ? (props) => <Add size={20} {...props} />
+                  : undefined
               }
             >
               {inputButtonText}
@@ -387,7 +384,9 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
                 invalid={file.invalid}
                 errorBody={file.errorBody}
                 errorSubject={file.errorSubject}
-                filesize={file.fileSize /* cspell:disable-line */}
+                {...{
+                  filesize: file.fileSize /* cspell:disable-line */,
+                }}
               />
             ))}
           </div>

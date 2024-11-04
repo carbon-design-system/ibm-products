@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { ErrorEmptyState } from './ErrorEmptyState';
+export { NotificationsEmptyState } from './NotificationsEmptyState';
+export type { NotificationsEmptyStateProps } from './NotificationsEmptyState';

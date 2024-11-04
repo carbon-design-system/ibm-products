@@ -25,7 +25,7 @@ import { defaults } from '../EmptyState';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NoDataEmptyState';
 
-interface NoDataEmptyStateProps {
+export interface NoDataEmptyStateProps {
   /**
    * Empty state action button
    */

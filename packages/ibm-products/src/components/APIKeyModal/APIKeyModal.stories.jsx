@@ -68,6 +68,7 @@ const defaultProps = {
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
+  downloadLinkLabel: 'Download API Key in Java Script File format',
   hasDownloadLink: true,
   downloadFileName: 'apikey',
   downloadFileType: 'json',
@@ -76,7 +77,7 @@ const defaultProps = {
   generateSuccessTitle: 'API key successfully created',
   editSuccessTitle: 'API key successfully saved',
   loadingText: 'Generating...',
-  modalLabel: 'Generate API key',
+  modalLabel: 'An example of Generate API key',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;

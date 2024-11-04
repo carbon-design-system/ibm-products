@@ -37,7 +37,7 @@ export const defaults: { position: string; size: sizes } = {
   size: sizes.lg,
 };
 
-interface EmptyStateProps {
+export interface EmptyStateProps {
   /**
    * Empty state action button
    */

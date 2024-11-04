@@ -139,6 +139,7 @@ declare module '@carbon/react' {
     SideNav,
     SideNavItems,
     SideNavLink,
+    SideNavMenuItem,
     SkeletonIcon,
     SkeletonIconProps,
     SkeletonPlaceholder,

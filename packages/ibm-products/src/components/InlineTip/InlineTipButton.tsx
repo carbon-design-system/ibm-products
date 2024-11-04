@@ -8,7 +8,7 @@
 // Import portions of React that are needed.
 import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 
-import { Button } from '@carbon/react';
+import { Button, ButtonProps } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -37,7 +37,7 @@ export interface InlineTipButtonProps {
 export let InlineTipButton = React.forwardRef(
   (
     { children, className, ...rest }: PropsWithChildren<InlineTipButtonProps>,
-    ref: ForwardedRef<HTMLButtonElement>
+    ref: ForwardedRef<ButtonProps<React.ElementType>>
   ) => {
     return (
       <Button

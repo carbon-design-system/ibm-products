@@ -153,7 +153,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
     const handleSearchScopeChange = ({
       selectedItems,
     }: {
-      selectedItems: Scopes;
+      selectedItems: Scopes[];
     }) => {
       setSelectedScopes(selectedItems);
 
@@ -211,7 +211,7 @@ export let SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
           className={`${blockClass}__input`}
           closeButtonLabelText={clearButtonLabelText}
           labelText={labelText}
-          name="search-input"
+          {...{ name: 'search-input' }}
           onChange={handleInputChange}
           placeholder={placeholderText}
           value={text}

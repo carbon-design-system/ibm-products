@@ -78,6 +78,7 @@ const SelectAll = (datagridState: DataGridState) => {
   return (
     <TableSelectAll
       {...selectProps}
+      checked={selectProps?.checked || false}
       className={cx(
         `${blockClass}__head-select-all`,
         `${blockClass}__checkbox-cell`,

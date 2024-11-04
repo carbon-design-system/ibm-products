@@ -38,7 +38,7 @@ const defaultProps = {
   downloadBodyText: 'download body',
   downloadFileName: 'filename',
   downloadFileType: 'json',
-  downloadLinkText: 'download link text',
+  downloadLinkText: 'download',
   downloadLinkLabel: 'Download API Key in Java Script File format',
   editButtonText: 'edit button',
   editSuccess: false,
@@ -133,7 +133,7 @@ describe(componentName, () => {
     rerender(<APIKeyModal {...props} loading />);
     getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     getByText(props.downloadBodyText);
     const modal = getByRole('presentation');
     expect(modal.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -295,7 +295,7 @@ describe(componentName, () => {
     );
     const modal = getByRole('presentation');
 
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe(props.apiKey);
     expect(screen.getByLabelText(props.apiKeyLabel)).toHaveAttribute(
       'type',
@@ -309,7 +309,7 @@ describe(componentName, () => {
     mouseOver(modal.querySelector(`.${carbon.prefix}--icon-visibility-off`));
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     expect(getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 

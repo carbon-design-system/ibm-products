@@ -232,6 +232,7 @@ export let EditInPlace = forwardRef<HTMLDivElement, EditInplaceProps>(
             onSaveHandler();
           } else {
             onCancelHandler();
+            setFocused(false);
           }
         }
       }

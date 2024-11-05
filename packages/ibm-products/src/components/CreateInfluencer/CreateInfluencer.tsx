@@ -34,6 +34,10 @@ interface CreateInfluencerProps {
    */
   currentStep: number;
   /**
+   * onChange event for Progress Indicator
+   */
+  onClickStep?: (step: number) => void;
+  /**
    * Provide the Set Data.
    */
   stepData: Step[];
@@ -46,6 +50,7 @@ interface CreateInfluencerProps {
 export const CreateInfluencer = ({
   className,
   currentStep,
+  onClickStep,
   stepData,
   title,
 }: PropsWithChildren<CreateInfluencerProps>) => {
@@ -86,11 +91,12 @@ export const CreateInfluencer = ({
             spaceEqually
             vertical
             className={cx(`${blockClass}__progress-indicator`)}
+            onChange={onClickStep}
           >
-            {progressSteps.map((step, stepIndex) => {
+            {progressSteps.map((step: Step, stepIndex: number) => {
               return (
                 <ProgressStep
-                  label={step.title}
+                  label={step?.title as string}
                   key={stepIndex}
                   secondaryLabel={step.secondaryLabel || undefined}
                   invalid={(step as any).invalid}
@@ -121,6 +127,11 @@ CreateInfluencer.propTypes = {
    * Used to mark the current step on the ProgressIndicator component
    */
   currentStep: PropTypes.number.isRequired,
+
+  /**
+   * onChange event for Progress Indicator
+   */
+  onClickStep: PropTypes.func,
 
   /**
    * The step data that renders the progress items

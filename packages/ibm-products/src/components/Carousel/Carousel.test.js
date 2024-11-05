@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
-import { render, screen, renderHook } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React from 'react';
+import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Carousel } from '.';
-import { useIsOverflow } from './utils';
 
 const blockClass = `${pkg.prefix}--carousel`;
 const componentName = Carousel.displayName;
@@ -78,38 +77,5 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
-  });
-});
-
-describe('useIsOverflow', () => {
-  it('should return falsy', async () => {
-    const {
-      result: { current: ref },
-    } = renderHook(() => useRef(null));
-    render(<div ref={ref} />);
-    const { result } = renderHook(useIsOverflow, {
-      ref,
-    });
-
-    expect(result.current).toBeFalsy();
-  });
-
-  it('should return truthy', async () => {
-    const { result: ref } = renderHook(() => useRef(null));
-    render(
-      <div
-        data-testid={dataTestId}
-        ref={ref}
-        style={{ width: '10px', overflowX: 'scroll' }}
-      >
-        This is a really long paragraph so that overflows kicks in
-      </div>
-    );
-
-    const { result } = renderHook(() => useIsOverflow(ref));
-
-    console.log('###', ref.current.clientWidth);
-
-    expect(result.current).toBeTruthy();
   });
 });

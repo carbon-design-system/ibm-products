@@ -44,7 +44,7 @@ const defaults = {
 };
 
 interface Action {
-  renderIcon: () => void;
+  renderIcon?: React.ElementType;
   onClick: () => void;
   iconDescription: string;
 }
@@ -287,6 +287,7 @@ WebTerminal.propTypes = {
   /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
+  /**@ts-ignore */
   documentationLinks: PropTypes.arrayOf(
     PropTypes.shape({
       ...OverflowMenuItem.propTypes,

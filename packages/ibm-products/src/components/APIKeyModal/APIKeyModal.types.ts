@@ -212,6 +212,10 @@ type HasDownloadLinkProps = {
    * anchor text for the download link
    */
   downloadLinkText: string;
+  /**
+   * Aria-label for the download link
+   */
+  downloadLinkLabel?: string;
 };
 
 export type APIKeyModalProps = APIKeyModalCommonProps &

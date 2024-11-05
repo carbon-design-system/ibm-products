@@ -2,10 +2,10 @@
 
 ## Version support
 
-| Version | Status | Ongoing support |
-| ------- | ------ | --------------- |
-| 2.x     | Active | ✅              |
-| 1.x     | Active | ✅              |
+| Version | Ongoing support |
+| ------- | --------------- |
+| 2.x     | ✅              |
+| 1.x     | ❌              |
 
 Version 2.x corresponds with Carbon v11 while 1.x corresponds with Carbon v10.
 
@@ -13,8 +13,7 @@ Support for these versions includes the discrete version numbers of individual
 packages as listed in the
 [release changelogs](https://github.com/carbon-design-system/ibm-products/releases).
 
-Please note that the **1.x version is anticipated to reach maintenance phase
-near the end of 2023**.
+Please note that the **1.x version reached end of support in October 2024**.
 
 ## Reporting a vulnerability
 

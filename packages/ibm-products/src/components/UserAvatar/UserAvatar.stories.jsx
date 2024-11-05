@@ -11,6 +11,7 @@ import React from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 import { UserAvatar } from '.';
+import { Theme, useTheme } from '@carbon/react';
 import mdx from './UserAvatar.mdx';
 import styles from './_storybook-styles.scss?inline';
 import { Add, Group, User } from '@carbon/react/icons';
@@ -85,6 +86,16 @@ export default {
   },
 };
 
+const ThemeText = () => {
+  const { theme, isDark } = useTheme();
+
+  return (
+    <p className="theme-text">
+      {`useTheme reveals theme: '${theme}', isDark: '${isDark}'`}
+    </p>
+  );
+};
+
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
@@ -97,11 +108,41 @@ const Template = (args) => {
     />
   );
 };
+const ThemeTemplate = (args) => {
+  return (
+    <>
+      <Theme theme="white">
+        <section className="theme-section">
+          <ThemeText />
+          <UserAvatar {...args} />
+        </section>
+      </Theme>
+      <Theme theme="g10">
+        <section className="theme-section">
+          <ThemeText />
+          <UserAvatar {...args} />
+        </section>
+      </Theme>
+      <Theme theme="g90">
+        <section className="theme-section">
+          <ThemeText />
+          <UserAvatar {...args} />
+        </section>
+      </Theme>
+      <Theme theme="g100">
+        <section className="theme-section">
+          <ThemeText />
+          <UserAvatar {...args} />
+        </section>
+      </Theme>
+    </>
+  );
+};
 /**
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const Default = Template.bind({});
+export const Default = ThemeTemplate.bind({});
 Default.storyName = 'Default';
 Default.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args

@@ -17,7 +17,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 // @ts-ignore
-import { Form, SideNav, SideNavItems, SideNavMenuItem } from '@carbon/react';
+import {
+  ButtonProps,
+  Form,
+  SideNav,
+  SideNavItems,
+  SideNavMenuItem,
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
@@ -170,7 +176,7 @@ export let EditTearsheet = forwardRef(
       }
       setIsSubmitting(false);
     };
-    const actions = [
+    const actions: ButtonProps<React.ElementType>[] = [
       {
         key: 'edit-action-button-submit',
         label: submitButtonText,

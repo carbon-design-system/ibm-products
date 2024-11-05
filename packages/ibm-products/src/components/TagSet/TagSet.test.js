@@ -14,11 +14,7 @@ import { TagSetModal } from './TagSetModal';
 
 import { TYPES as tagTypes } from './constants';
 
-import {
-  expectMultipleError,
-  mockHTMLElement,
-  required,
-} from '../../global/js/utils/test-helper';
+import { mockHTMLElement } from '../../global/js/utils/test-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const { prefix } = pkg;
@@ -181,7 +177,6 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    // const { container } =
     render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
@@ -197,21 +192,34 @@ describe(TagSet.displayName, () => {
     expect(modal).not.toHaveClass('is-visible');
   });
 
-  it('it requires strings for overflow and modal when more than ten tags supplied.', async () =>
-    expectMultipleError(
-      [
-        required('allTagsModalSearchLabel', 'TagSet'),
-        required('allTagsModalSearchPlaceholderText', 'TagSet'),
-        required('allTagsModalTitle', 'TagSet'),
-        required('showAllTagsLabel', 'TagSet'),
-      ],
-      () => {
-        const visibleTags = 5;
-        window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
+  it('Tags set overflow trigger can be overridden, and does not show TagSetModal or overflow popup', async () => {
+    const visibleTags = 5;
+    window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-        render(<TagSet tags={tags} />);
-      }
-    ));
+    const overflowClickSpy = jest.fn();
+
+    const { queryByText } = render(
+      <TagSet
+        {...overflowAndModalStrings}
+        onOverflowClick={overflowClickSpy}
+        tags={tags}
+      />
+    );
+
+    const overFlowButton = queryByText(`+${tags.length - visibleTags}`);
+    // Ensure the number of visible elements are rendered on the screen
+    expect(overFlowButton).toBeInTheDocument();
+    // Clicking the overflow button causes the spyFunction to be called
+    await act(() => userEvent.click(overFlowButton));
+    expect(overflowClickSpy).toHaveBeenCalledTimes(1);
+
+    // Ensure the overflow popup is not rendered onto the screen
+    expect(queryByText('View all tags')).toBeNull();
+
+    // Ensure the modal is not rendered onto the screen
+    const modal = screen.queryByRole('presentation');
+    expect(modal).not.toBeInTheDocument();
+  });
 
   it('Obeys max visible', async () => {
     window.innerWidth = tagWidth * 10 + 1;

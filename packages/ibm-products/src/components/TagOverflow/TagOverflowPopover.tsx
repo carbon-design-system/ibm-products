@@ -8,7 +8,15 @@
 import React, { useRef, forwardRef, Ref } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import {
+  Link,
+  Tag,
+  Popover,
+  PopoverContent,
+  PopoverAlignment,
+  DismissibleTag,
+  OperationalTag,
+} from '@carbon/react';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { TagOverflowItem } from './TagOverflow';
@@ -18,7 +26,7 @@ export interface Props {
   autoAlign?: boolean;
   className?: string;
   onShowAllClick: () => void;
-  overflowAlign?: string;
+  overflowAlign?: PopoverAlignment;
   overflowTags: TagOverflowItem[];
   overflowType?: string;
   popoverOpen?: boolean;
@@ -60,7 +68,7 @@ export const TagOverflowPopover = forwardRef(
       onShowAllClick?.();
     };
 
-    const handleEscKeyPress = (evt: KeyboardEvent) => {
+    const handleEscKeyPress = (evt) => {
       const { key } = evt;
       if (key === 'Escape') {
         setPopoverOpen?.(false);
@@ -96,14 +104,13 @@ export const TagOverflowPopover = forwardRef(
           dropShadow
           highContrast
           onKeyDown={handleEscKeyPress}
-          open={popoverOpen}
+          open={popoverOpen || false}
         >
-          <Tag
+          <OperationalTag
             onClick={() => setPopoverOpen?.(!popoverOpen)}
             className={cx(`${blockClass}__trigger`)}
-          >
-            +{overflowTags?.length}
-          </Tag>
+            text={`+${overflowTags.length}`}
+          />
           <PopoverContent>
             <div ref={overflowTagContent} className={`${blockClass}__content`}>
               <ul className={`${blockClass}__tag-list`}>
@@ -113,7 +120,26 @@ export const TagOverflowPopover = forwardRef(
                       const typeValue =
                         overflowType === 'tag' ? 'high-contrast' : tagType;
                       const isFilterable =
-                        overflowType === 'tag' ? filter : false;
+                        overflowType === 'tag' &&
+                        (typeof onClose === 'function' || filter);
+
+                      let tag;
+                      if (isFilterable) {
+                        tag = (
+                          <DismissibleTag
+                            {...other}
+                            onClose={() => onClose?.()}
+                            type={typeValue}
+                            text={label}
+                          />
+                        );
+                      } else {
+                        tag = (
+                          <Tag {...other} type={typeValue}>
+                            {label}
+                          </Tag>
+                        );
+                      }
 
                       return (
                         <li
@@ -125,18 +151,7 @@ export const TagOverflowPopover = forwardRef(
                           })}
                           key={id}
                         >
-                          {overflowType === 'tag' ? (
-                            <Tag
-                              {...other}
-                              onClose={() => onClose?.()}
-                              type={typeValue}
-                              filter={isFilterable}
-                            >
-                              {label}
-                            </Tag>
-                          ) : (
-                            label
-                          )}
+                          {overflowType === 'tag' ? tag : label}
                         </li>
                       );
                     }

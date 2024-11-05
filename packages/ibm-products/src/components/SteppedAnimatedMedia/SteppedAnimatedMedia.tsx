@@ -63,7 +63,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [jsonData, setJsonData] = useState<object[]>([]);
-    const animRef = useRef<AnimationItem>();
+    const animRef = useRef<AnimationItem | undefined>(undefined);
     const backupRef = useRef<HTMLDivElement>(null);
     const localRef = ref ?? backupRef;
     const localRefValue = (localRef as MutableRefObject<HTMLDivElement>)

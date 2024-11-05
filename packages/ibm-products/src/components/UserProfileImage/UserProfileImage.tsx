@@ -9,10 +9,9 @@ import '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
 import { Group, User } from '@carbon/react/icons';
-import { Tooltip, usePrefix } from '@carbon/react';
+import { PopoverAlignment, Tooltip, usePrefix } from '@carbon/react';
 
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
-import { IconButton } from '@carbon/react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 // Import portions of React that are needed.
@@ -27,11 +26,6 @@ const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = 'UserProfileImage';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
-
-// Default values for props
-const defaults = {
-  tooltipAlignment: 'bottom',
-};
 
 type Size = 'xl' | 'lg' | 'md';
 type Theme = 'light' | 'dark';
@@ -55,7 +49,7 @@ type imageProps =
 type UserProfileImageBaseProps = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
-   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   * https://pages.github.ibm.com/carbon/ibm-products/patterns/user-profile-images/
    */
   backgroundColor?: string;
 
@@ -92,7 +86,7 @@ type UserProfileImageBaseProps = {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
+  tooltipAlignment?: PopoverAlignment;
 
   /**
    * Pass in the display name to have it shown on hover
@@ -121,7 +115,7 @@ export let UserProfileImage = React.forwardRef<
       size,
       theme,
       tooltipText,
-      tooltipAlignment = defaults.tooltipAlignment,
+      tooltipAlignment = 'bottom',
       // Collect any other property values passed in.
       ...rest
     },
@@ -224,7 +218,6 @@ export let UserProfileImage = React.forwardRef<
           label={tooltipText}
           className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
-          {/**@ts-ignore */}
           <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
         </Tooltip>
       ) : (
@@ -242,7 +235,7 @@ UserProfileImage.displayName = componentName;
 UserProfileImage.propTypes = {
   /**
    * The background color passed should match one of the background colors in the library documentation:
-   * https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/
+   * https://pages.github.ibm.com/carbon/ibm-products/patterns/user-profile-images/
    */
   backgroundColor: PropTypes.oneOf([
     'light-cyan',

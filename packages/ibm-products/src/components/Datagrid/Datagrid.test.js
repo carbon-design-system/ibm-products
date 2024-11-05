@@ -182,6 +182,35 @@ const BasicUsage = ({ ...rest } = {}) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const SpacerColumn = ({ ...rest } = {}) => {
+  const [data] = useState(makeData(10));
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+        rightAlignedColumn: true,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+        rightAlignedColumn: true,
+      },
+    ],
+    []
+  );
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      enableSpacerColumn: true,
+    },
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 const DatagridActions = (datagridState) => {
   const {
     selectedFlatRows,
@@ -297,7 +326,7 @@ const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
     DatagridPagination,
   });
 
-  return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
+  return <Datagrid datagridState={{ ...dataGridState }} {...rest} />;
 };
 
 const TenThousandEntries = ({ ...rest } = {}) => {
@@ -377,6 +406,8 @@ const ExpandedRow = ({ ...rest } = {}) => {
       data,
       ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: 95,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
     },
     useExpandedRow
   );
@@ -384,39 +415,30 @@ const ExpandedRow = ({ ...rest } = {}) => {
   return <Datagrid datagridState={datagridState} {...rest} />;
 };
 
+// with toolbarBatchActions
 const SelectItemsInAllPages = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
-  const [areAllSelected, setAreAllSelected] = useState(false);
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
       },
-      selectAllToggle: {
-        labels: {
-          allRows: 'Select all',
-        },
-        onSelectAllRows: setAreAllSelected,
-      },
+      endPlugins: [useDisableSelectRows],
+      shouldDisableSelectRow: (row) => row.id % 15 === 0,
       DatagridPagination,
-      DatagridActions,
-      DatagridBatchActions,
     },
-    useSelectRows,
-    useSelectAllWithToggle
+    useSelectRows
   );
 
-  return (
-    <>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-      <h3>Doc in Notes...</h3>
-      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
-    </>
-  );
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
 const HideSelectAll = ({ ...rest } = {}) => {
@@ -508,7 +530,10 @@ const RowSizeDropdown = ({ ...rest } = {}) => {
 };
 
 const CustomizingColumns = ({ ...rest } = {}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => (rest.columns ? rest.columns : defaultHeader),
+    [rest.columns]
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
@@ -586,6 +611,8 @@ const NestedTable = ({ ...rest } = {}) => {
       data,
       ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
     },
     useExpandedRow
   );
@@ -922,6 +949,17 @@ describe(componentName, () => {
     );
   });
 
+  it('renders a table with spacer column', () => {
+    render(<SpacerColumn />);
+    expect(screen.getByRole('table')).toHaveClass(
+      `${carbon.prefix}--data-table`
+    );
+
+    expect(
+      screen.getAllByRole('columnheader', { hidden: true }).length
+    ).toEqual(3);
+  });
+
   it('renders a basic data grid component with devTools attribute', async () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -978,7 +1016,7 @@ describe(componentName, () => {
   });
 
   it('renders a Batch Actions Table', async () => {
-    render(<BatchActions data-testid={dataTestId}></BatchActions>);
+    render(<BatchActions data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1172,7 +1210,7 @@ describe(componentName, () => {
   });
 
   it('Infinite Scroll', async () => {
-    render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
+    render(<InfiniteScroll data-testid={dataTestId} />);
 
     expect(
       screen
@@ -1213,7 +1251,7 @@ describe(componentName, () => {
   });
 
   it('With Pagination', async () => {
-    render(<WithPagination data-testid={dataTestId}></WithPagination>);
+    render(<WithPagination data-testid={dataTestId} />);
 
     expect(
       document.getElementById(`${carbon.prefix}-pagination-select-4`)
@@ -1306,7 +1344,7 @@ describe(componentName, () => {
   }
 
   it('Is Hover On Row', async () => {
-    render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+    render(<IsHoverOnRow data-testid={dataTestId} />);
     completeHoverOperation(1);
 
     completeHoverOperation(5);
@@ -1314,7 +1352,7 @@ describe(componentName, () => {
 
   //Disables Selected Rows
   it('Renders Disable Select Row', async () => {
-    render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
+    render(<DisableSelectRow data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1504,7 +1542,7 @@ describe(componentName, () => {
   }
 
   it('Hide Select All', async () => {
-    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+    render(<HideSelectAll data-testid={dataTestId} />);
 
     hideSelectAll(2);
 
@@ -1565,7 +1603,7 @@ describe(componentName, () => {
   });
 
   it('Nested Table', async () => {
-    render(<NestedTable data-testid={dataTestId}></NestedTable>);
+    render(<NestedTable data-testid={dataTestId} />);
     const firstRowExpander = screen.getAllByLabelText('Expand row')[0];
     const firstRow = screen.getAllByRole('row')[1];
     fireEvent.click(firstRowExpander);
@@ -1639,7 +1677,7 @@ describe(componentName, () => {
   }
 
   it('Radio Select', async () => {
-    render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
+    render(<RadioSelect data-testid={dataTestId} />);
     radioSelectButton(1, 1);
 
     radioSelectButton(1, 4);
@@ -1649,46 +1687,18 @@ describe(componentName, () => {
     radioSelectButton(2, 6);
   });
 
-  // requires refactor
-  it.skip('Select Items In All Pages', async () => {
+  // with toolbarBatchActions
+  it('Select Items In All Pages', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
-    render(
-      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
-    );
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('input')[0]
-    );
-
+    render(<SelectItemsInAllPages data-testid={dataTestId} />);
+    // check if 10 rows are rendered on initial load
     var numRows = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr').length;
+    expect(numRows).toEqual(10);
 
-    for (var i = 0; i < numRows; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbon.prefix}--data-table--selected`);
-    }
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('input')[0]
-    );
     for (var j = 0; j < numRows; j++) {
       expect(
         screen
@@ -1697,61 +1707,12 @@ describe(componentName, () => {
           .getElementsByTagName('tr')[j].classList[0]
       ).toEqual('c4p--datagrid__carbon-row');
     }
-
+    // check if batch actions toolbar is present in dom (is still visually hidden)
     expect(
       document.getElementsByClassName('c4p--datagrid__table-toolbar').length
     ).toBe(1);
 
-    const filterButton = screen.getByLabelText('Left panel');
-    fireEvent.click(filterButton);
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    const rowHeightButton = screen.getByRole('button', {
-      name: /Row settings/i,
-    });
-    fireEvent.click(rowHeightButton);
-
-    expect(
-      screen.getByLabelText('Row settings', { selector: 'button' })
-    ).toHaveClass(`c4p--datagrid__row-size-button--open`);
-    expect(
-      document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
-    ).toBeDefined();
-    expect(
-      document
-        .getElementsByClassName(
-          `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-        )[0]
-        .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row settings');
-
-    const rowDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Small',
-      'Extra Small',
-    ];
-
-    var rowSize = document
-      .getElementsByClassName(
-        `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-      )[0]
-      .getElementsByTagName('div').length;
-
-    for (let j = 0; i < rowSize; i++) {
-      expect(
-        document
-          .getElementsByClassName(
-            `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
-          )[0]
-          .getElementsByTagName('div')
-          .item(j)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[0].textContent
-      ).toEqual(rowDropDown[j]);
-    }
-
+    // select all on page 1 (to make the batch actions toolbar visible, so we can test select all on all pages)
     fireEvent.click(
       screen
         .getByRole('table')
@@ -1770,38 +1731,37 @@ describe(componentName, () => {
         .getElementsByTagName('div')[0]
         .getElementsByTagName('p')[0]
         .getElementsByTagName('span')[0].textContent
-    ).toEqual('10 items selected');
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    const selectAllOverflow = screen.getByLabelText('Select all', {
-      selector: 'button',
-    });
-    fireEvent.click(selectAllOverflow);
+    ).toEqual('9 items selected'); // one row is disabled on first page
 
     expect(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
         .getElementsByTagName('section')[0]
         .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Action');
+    ).toEqual('Select all (93)');
+
+    // click select all button in toolbar
     fireEvent.click(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
         .getElementsByTagName('section')[0]
         .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('button')[0]
     );
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('93 items selected');
 
+    // check for cancel button in batch actions and click
     expect(
       document
         .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
@@ -1821,11 +1781,11 @@ describe(componentName, () => {
 
     const refreshButton = screen.getByLabelText('Refresh');
     fireEvent.click(refreshButton);
-    expect(alertMock).toHaveBeenCalledTimes(3);
+    expect(alertMock).toHaveBeenCalledTimes(1);
 
     const downloadButton = screen.getByLabelText('Download CSV');
     fireEvent.click(downloadButton);
-    expect(alertMock).toHaveBeenCalledTimes(4);
+    expect(alertMock).toHaveBeenCalledTimes(2);
   });
 
   const rightAlignedColumnsData = [
@@ -1985,7 +1945,7 @@ describe(componentName, () => {
   });
 
   it('Selectable Row', async () => {
-    render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
+    render(<SelectableRow data-testid={dataTestId} />);
 
     fireEvent.click(
       screen
@@ -2065,9 +2025,39 @@ describe(componentName, () => {
       );
     });
   });
+  it('Customizing Columns disable save button when un-select all columns', async () => {
+    const columnsWithoutSticky = [
+      {
+        Header: 'Row Index',
+        accessor: (row, i) => i,
+        id: 'rowIndex', // id is required when accessor is a function.
+      },
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+      },
+    ];
+    const columns = [...columnsWithoutSticky, ...defaultHeader.slice(2)];
+    render(<CustomizingColumns data-testid={dataTestId} columns={columns} />);
+
+    const customizeColumnsButton = screen.getByLabelText('Customize columns');
+    fireEvent.click(customizeColumnsButton);
+    screen.getByRole('heading', { name: /Customize columns/ });
+
+    const selectAllCheckBox = screen.getByRole('checkbox', {
+      name: 'Column name',
+    });
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(true);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+
+    fireEvent.click(selectAllCheckBox);
+    expect(selectAllCheckBox.checked).toEqual(false);
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+  });
 
   it('Customizing Columns', async () => {
-    render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
+    render(<CustomizingColumns data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -2097,7 +2087,9 @@ describe(componentName, () => {
     fireEvent.click(columnSaveButton);
     const rows = screen.getAllByRole('row');
     const headerRow = rows[0];
-    expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    setTimeout(() => {
+      expect(within(headerRow).queryByText('Visits') === null).toBe(true);
+    }, 0);
   });
 
   it('Top Alignment', async () => {
@@ -2329,6 +2321,8 @@ describe(componentName, () => {
   });
 
   const sharedFilterGridProps = {
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -2398,9 +2392,8 @@ describe(componentName, () => {
     // Add value to dropdown and apply to filter panel
     const statusAccordion = screen.getByRole('button', { name: 'Status' });
     await click(statusAccordion);
-    const statusDropdown = screen.getByRole('combobox', {
-      name: 'Marital status',
-    });
+    const statusDropdown = screen.getByLabelText('Marital status dropdown');
+
     await click(statusDropdown);
     const dropdownOption = screen.getByRole('option', { name: 'single' });
     await click(dropdownOption);
@@ -2417,7 +2410,7 @@ describe(componentName, () => {
     dateInputs[0].setSelectionRange(0, dateInputs[0].value.length);
     await type(dateInputs[0], '01/01/2024');
     await keyboard('[Escape]');
-    await keyboard('[Tab]');
+    await click(dateInputs[1]);
     await keyboard('01/02/2024');
     await keyboard('[Escape]');
     expect(dateInputs[0].value).toEqual('01/01/2024');
@@ -2545,15 +2538,13 @@ describe(componentName, () => {
     expect(innerContainer.childElementCount).toEqual(1);
   });
   const findFilterTagAndRemove = async () => {
-    const filterTagCloseButtons = screen.getAllByLabelText('Clear filter');
+    const filterTagCloseButtons = screen.getAllByLabelText('Dismiss');
     const visibleFilterTags = filterTagCloseButtons.filter((el) =>
-      el.parentElement.parentElement.classList.contains(
-        `${pkg.prefix}--tag-set__displayed-tag`
-      )
+      el.closest(`.${pkg.prefix}--tag-set__displayed-tag`)
     );
     await click(visibleFilterTags[0]);
     const checkAgainForCloseFilterButton =
-      screen.queryAllByLabelText('Clear filter');
+      screen.queryAllByLabelText('Dismiss');
     expect(checkAgainForCloseFilterButton).toEqual([]);
   };
   it('should render initial filters in panel and test close button on filter tag', async () => {

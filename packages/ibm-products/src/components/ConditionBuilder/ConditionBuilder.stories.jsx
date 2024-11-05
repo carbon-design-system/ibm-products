@@ -212,7 +212,7 @@ const translateWithId = (key) => {
  */
 
 const ConditionBuilderTemplate = (args) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
   return <ConditionBuilder {...args} ref={ref} {...requiredProps} />;
 };
 
@@ -240,7 +240,10 @@ export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
 );
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  initialState: sampleDataStructure_nonHierarchical,
+  initialState: {
+    state: sampleDataStructure_nonHierarchical,
+    enabledDefault: true,
+  },
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
@@ -268,7 +271,10 @@ export const conditionBuilderWithInitialStateHierarchical =
 conditionBuilderWithInitialStateHierarchical.storyName =
   'With initial state (Hierarchical)';
 conditionBuilderWithInitialStateHierarchical.args = {
-  initialState: sampleDataStructure_Hierarchical,
+  initialState: {
+    state: sampleDataStructure_Hierarchical,
+    enabledDefault: false,
+  },
   inputConfig: inputData,
   variant: HIERARCHICAL_VARIANT,
 };

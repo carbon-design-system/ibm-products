@@ -82,6 +82,11 @@ interface CreateFullPageStepBaseProps extends PropsWithChildren {
   onNext?: () => void | Promise<any>;
 
   /**
+   * Optional function to be called when you move to the previous step.
+   */
+  onPrevious?: () => void;
+
+  /**
    * Sets the optional secondary label on the progress step component
    */
   secondaryLabel?: string;
@@ -97,13 +102,24 @@ interface CreateFullPageStepBaseProps extends PropsWithChildren {
   title: ReactNode;
 }
 
+// Try to specify the hasFieldset and fieldsetLegendText Typescript requirements.
+// Basically, fieldsetLegendText should only be specified when hasFieldset is true.
+// And usually, hasFieldset won't be specified at all unless it's being set to true.
 type CreateFullPageStepFieldsetProps =
   | {
-      hasFieldset: false;
+      // fieldsetLegendText should not be specified unless hasFieldset is true, but
+      // not sure how to do that in Typescript.
       fieldsetLegendText?: string;
     }
   | {
-      hasFieldset?: true;
+      hasFieldset: false;
+
+      // fieldsetLegendText should not be specified unless hasFieldset is true, but
+      // not sure how to do that in Typescript.
+      fieldsetLegendText?: string;
+    }
+  | {
+      hasFieldset: true;
       fieldsetLegendText: string;
     };
 
@@ -127,6 +143,7 @@ export let CreateFullPageStep = forwardRef(
       hasFieldset,
       fieldsetLegendText,
       onNext,
+      onPrevious,
       onMount,
       secondaryLabel,
 
@@ -173,8 +190,9 @@ export let CreateFullPageStep = forwardRef(
       if (stepNumber === stepsContext?.currentStep) {
         stepsContext.setIsDisabled(disableSubmit as boolean);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
+        stepsContext?.setOnPrevious(onPrevious);
       }
-    }, [stepsContext, stepNumber, disableSubmit, onNext]);
+    }, [stepsContext, stepNumber, disableSubmit, onNext, onPrevious]);
 
     const span = { span: 50 }; // Half.
 
@@ -271,7 +289,6 @@ CreateFullPageStep.propTypes = {
   /**
    * This will conditionally disable the submit button in the multi step CreateFullPage
    */
-  /**@ts-ignore */
   disableSubmit: PropTypes.bool,
 
   /**
@@ -285,7 +302,6 @@ CreateFullPageStep.propTypes = {
   /**
    * This optional prop will render your form content inside of a fieldset html element
    */
-  /**@ts-ignore */
   hasFieldset: PropTypes.bool,
 
   /**
@@ -316,6 +332,11 @@ CreateFullPageStep.propTypes = {
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateFullPage will handle the submitting state of the next button.
    */
   onNext: PropTypes.func,
+
+  /**
+   * Optional function to be called when you move to the previous step.
+   */
+  onPrevious: PropTypes.func,
 
   /**
    * Sets the optional secondary label on the progress step component

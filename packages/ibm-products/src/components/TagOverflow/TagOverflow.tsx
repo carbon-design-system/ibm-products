@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Tag, Tooltip } from '@carbon/react';
+import { Tag, Tooltip, DismissibleTag } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { TYPES } from './constants';
@@ -27,10 +27,12 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-
 export interface TagOverflowItem {
   className?: string;
-  filter?: string;
+  /**
+   * @deprecated The `filter` prop is no longer going to be used. To use DismissibleTags, pass in an onClose function.
+   */
+  filter?: boolean;
   id: string;
   label: string;
   onClose: () => void;
@@ -52,6 +54,7 @@ export interface TagOverflowItem {
 
 export interface TagOverflowProps {
   align?: 'start' | 'center' | 'end';
+  allTagsModalAriaLabel?: string;
   allTagsModalSearchLabel?: string;
   allTagsModalSearchPlaceholderText?: string;
   allTagsModalTarget?: ReactNode;
@@ -91,6 +94,7 @@ export let TagOverflow = forwardRef(
   (props: TagOverflowProps, ref: Ref<HTMLDivElement>) => {
     const {
       align = 'start',
+      allTagsModalAriaLabel,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       allTagsModalTarget,
@@ -263,7 +267,6 @@ export let TagOverflow = forwardRef(
           [`${blockClass}--multiline`]: multiline,
         })}
         ref={containerRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {visibleItems?.length > 0 &&
@@ -272,19 +275,28 @@ export let TagOverflow = forwardRef(
             if (tagComponent) {
               return getCustomComponent(item, tagComponent);
             } else {
-              const { id, label, tagType, onClose, ...other } = item;
+              const { id, label, tagType, onClose, filter, ...other } = item;
               // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
                   <Tooltip align={overflowAlign} label={label}>
-                    <Tag
-                      {...other}
-                      className={`${blockClass}__item--tag`}
-                      type={tagType}
-                      onClose={() => handleTagOnClose(onClose, index)}
-                    >
-                      {label}
-                    </Tag>
+                    {typeof onClose === 'function' || filter ? (
+                      <DismissibleTag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                        onClose={() => handleTagOnClose(onClose, index)}
+                        text={label}
+                      />
+                    ) : (
+                      <Tag
+                        {...other}
+                        className={`${blockClass}__item--tag`}
+                        type={tagType}
+                      >
+                        {label}
+                      </Tag>
+                    )}
                   </Tooltip>
                 </div>
               );
@@ -312,6 +324,7 @@ export let TagOverflow = forwardRef(
                 allTags={items}
                 open={showAllModalOpen}
                 title={allTagsModalTitle}
+                modalAriaLabel={allTagsModalAriaLabel}
                 onClose={handleModalClose}
                 overflowType={overflowType}
                 searchLabel={allTagsModalSearchLabel}
@@ -352,6 +365,10 @@ TagOverflow.propTypes = {
    * align the Tags displayed by the TagSet. Default start.
    */
   align: PropTypes.oneOf(['start', 'center', 'end']),
+  /**
+   * aria label for all tags modal with hasScrollingContent
+   */
+  allTagsModalAriaLabel: PropTypes.string,
   /**
    * label text for the show all search. **Note: Required if more than 10 tags**
    */

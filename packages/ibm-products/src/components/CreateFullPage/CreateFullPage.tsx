@@ -13,6 +13,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Tooltip,
 } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
@@ -57,7 +58,7 @@ export const StepsContext = createContext<StepsContextType | null>(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
-interface HeaderBreadcrumbs {
+interface HeaderBreadcrumb {
   /** breadcrumb item key */
   key: string;
   /** breadcrumb item label */
@@ -79,15 +80,19 @@ type CreateFullPageBreadcrumbsProps =
        * Label for open/close overflow button used for breadcrumb items that do not fit
        */
       breadcrumbsOverflowAriaLabel?: never;
+
+      breadcrumbOverflowTooltipAlign?: never;
     }
   | {
       /** The header breadcrumbs */
-      breadcrumbs: HeaderBreadcrumbs;
+      breadcrumbs: HeaderBreadcrumb[];
 
       /**
        * Label for open/close overflow button used for breadcrumb items that do not fit
        */
       breadcrumbsOverflowAriaLabel: string;
+
+      breadcrumbOverflowTooltipAlign?: string;
     };
 
 type CreateFullPageBaseProps = {
@@ -155,6 +160,12 @@ type CreateFullPageBaseProps = {
    * A prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash?: boolean;
+
+  /**
+   * onChange event for Progress Indicator in the Influencer
+   * @param data step index
+   */
+  onClickInfluencerStep?: (data: number) => void;
 
   /**
    * An optional handler that is called when the user closes the full page (by
@@ -228,6 +239,7 @@ export let CreateFullPage = React.forwardRef(
       modalSecondaryButtonText,
       modalTitle,
       nextButtonText,
+      onClickInfluencerStep,
       onClose,
       onRequestSubmit,
       firstFocusElement,
@@ -235,6 +247,7 @@ export let CreateFullPage = React.forwardRef(
       noTrailingSlash,
       title,
       secondaryTitle,
+      breadcrumbOverflowTooltipAlign = 'right',
       ...rest
     }: CreateFullPageProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -247,6 +260,7 @@ export let CreateFullPage = React.forwardRef(
     // eslint-disable-next-line ssr-friendly/no-dom-globals-in-react-fc
     const previousState = usePreviousValue({ currentStep, open });
     const [isDisabled, setIsDisabled] = useState(false);
+    const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState<Step[]>([]);
@@ -303,6 +317,7 @@ export let CreateFullPage = React.forwardRef(
       firstIncludedStep,
       lastIncludedStep,
       stepData,
+      onPrevious,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
@@ -340,6 +355,7 @@ export let CreateFullPage = React.forwardRef(
             overflowAriaLabel={breadcrumbsOverflowAriaLabel}
             maxVisible={maxVisibleBreadcrumbs}
             className={`${blockClass}__header`}
+            overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
           />
         )}
         <div className={`${blockClass}__influencer-and-body-container`}>
@@ -348,6 +364,7 @@ export let CreateFullPage = React.forwardRef(
               stepData={stepData}
               currentStep={currentStep}
               title={secondaryTitle}
+              onClickStep={onClickInfluencerStep}
             />
           </div>
           <div className={`${blockClass}__body`}>
@@ -359,6 +376,7 @@ export let CreateFullPage = React.forwardRef(
                       {
                         currentStep,
                         setIsDisabled,
+                        setOnPrevious: (fn) => setOnPrevious(() => fn),
                         setOnNext: (fn) => setOnNext(() => fn),
                         setOnMount: (fn) => setOnMount(() => fn),
                         setStepData,
@@ -432,6 +450,11 @@ CreateFullPage.propTypes = {
    * The back button text
    */
   backButtonText: PropTypes.string.isRequired,
+
+  /**
+   * align breadcrumb overflow tooltip
+   */
+  breadcrumbOverflowTooltipAlign: Tooltip.propTypes.align,
 
   /** The header breadcrumbs */
   /**@ts-ignore */
@@ -514,6 +537,11 @@ CreateFullPage.propTypes = {
    * A prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash: PropTypes.bool,
+
+  /**
+   * onChange event for Progress Indicator in the Influencer
+   */
+  onClickInfluencerStep: PropTypes.func,
 
   /**
    * An optional handler that is called when the user closes the full page (by

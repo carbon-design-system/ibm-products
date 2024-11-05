@@ -44,87 +44,29 @@ describe('FeatureFlags', () => {
     function TestComponent() {
       const featureFlags = useFeatureFlags();
       const a = useFeatureFlag('a');
-      const b = useFeatureFlag('b');
 
       checkFlags({
         a: featureFlags.enabled('a'),
-        b: featureFlags.enabled('b'),
       });
 
       checkFlag({
         a,
-        b,
       });
 
       return null;
     }
 
     render(
-      <FeatureFlags flags={{ a: true, b: false }}>
+      <FeatureFlags a>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
       a: true,
-      b: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: true,
-      b: false,
-    });
-  });
-
-  it('should re-render when flags change', () => {
-    const checkFlags = jest.fn();
-    const checkFlag = jest.fn();
-
-    function TestComponent() {
-      const featureFlags = useFeatureFlags();
-      const a = useFeatureFlag('a');
-      const b = useFeatureFlag('b');
-
-      checkFlags({
-        a: featureFlags.enabled('a'),
-        b: featureFlags.enabled('b'),
-      });
-
-      checkFlag({
-        a,
-        b,
-      });
-
-      return null;
-    }
-
-    const { rerender } = render(
-      <FeatureFlags flags={{ a: true, b: false }}>
-        <TestComponent />
-      </FeatureFlags>
-    );
-
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-
-    rerender(
-      <FeatureFlags flags={{ a: false, b: true }}>
-        <TestComponent />
-      </FeatureFlags>
-    );
-
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
     });
   });
 
@@ -143,7 +85,7 @@ describe('FeatureFlags', () => {
     }
 
     const { rerender } = render(
-      <FeatureFlags flags={{ local: true }}>
+      <FeatureFlags local>
         <TestComponent />
       </FeatureFlags>
     );
@@ -154,8 +96,8 @@ describe('FeatureFlags', () => {
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
           <TestComponent />
         </FeatureFlags>
       </FeatureFlags>
@@ -167,9 +109,9 @@ describe('FeatureFlags', () => {
     });
 
     render(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
-          <FeatureFlags flags={{ local: false }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
+          <FeatureFlags local={false}>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>
@@ -182,9 +124,9 @@ describe('FeatureFlags', () => {
     });
 
     rerender(
-      <FeatureFlags flags={{ local: true }}>
-        <FeatureFlags flags={{ global: false }}>
-          <FeatureFlags flags={{ local: true }}>
+      <FeatureFlags local>
+        <FeatureFlags global={false}>
+          <FeatureFlags local>
             <TestComponent />
           </FeatureFlags>
         </FeatureFlags>

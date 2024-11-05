@@ -24,7 +24,7 @@
     "ci-check:tests": "run-p -s 'ci-check:test:*'",
     "ci-check:test:c4p": "yarn test:c4p --ci",
     "ci-check:test:c4p:snapshot": "yarn test:c4p:snapshot --ci",
-    "ci-check:test:community": "yarn test:community --ci",
+    "ci-check:test:c4p-wc": "yarn test:c4p-wc",
     "ci-check:spellcheck": "yarn spellcheck",
     "clean": "run-p -s 'clean:*' && run-p -s 'clean:finally:*'",
     "clean:cache": "yarn cache clean",
@@ -34,8 +34,10 @@
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
     "format": "run-p -s 'format:*'",
-    "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,md,scss} --write --ignore-unknown",
+    "format:config": "prettier ./*.{js,jsx,tsx,ts,md,scss} --write --ignore-unknown",
+    "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,ts,md,scss} --write --ignore-unknown",
     "format:e2e": "prettier ./e2e/**/*.js --write --ignore-unknown",
+    "format:diff": "prettier --list-different '**/*.{js,jsx,md,scss,ts,tsx}' '*.{js,jsx,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!examples/**/*' '!scripts/**/*'",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*'",
     "lint:license": "scripts/check-license.cjs -a",
@@ -49,12 +51,14 @@
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
-    "test:community": "lerna run --stream --scope @carbon/ibm-products-community test --",
+    "test:c4p-wc": "yarn playwright install && lerna run --stream --scope @carbon/ibm-products-web-components test --",
     "spellcheck": "cspell '**' -e './examples' --gitignore --quiet --no-must-find-files",
     "storybook": "yarn storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
+    "storybook-wc": "cd packages/ibm-products-web-components && yarn storybook",
+    "storybook-wc:build": "cd packages/ibm-products-web-components && run-s build build:storybook",
     "sync": "carbon-cli sync",
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write --loglevel=silent",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
@@ -76,6 +80,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
+    "@types/carbon__layout": "^0.0.3",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "accessibility-checker": "^3.1.65",
@@ -84,7 +89,7 @@
     "copyfiles": "^2.4.1",
     "cspell": "^8.3.2",
     "eslint": "^8.56.0",
-    "eslint-config-carbon": "^3.12.0",
+    "eslint-config-carbon": "^3.17.1",
     "eslint-plugin-ssr-friendly": "^1.3.0",
     "gitignore-to-glob": "^0.3.0",
     "globby": "^14.0.0",
@@ -105,7 +110,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "stylelint": "^15.11.0",
-    "stylelint-config-carbon": "1.17.0",
+    "stylelint-config-carbon": "1.19.1",
     "webpack": "^5.90.0"
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
@@ -113,7 +118,7 @@
   "resolutions": {
     "cheerio": "1.0.0-rc.10",
     "braces": "^3.0.3",
-    "micromatch": "4.0.6",
+    "micromatch": "4.0.8",
     "ws": "^8.17.1"
   },
   "eslintConfig": {
@@ -127,6 +132,9 @@
     },
     "plugins": [
       "ssr-friendly"
+    ],
+    "ignorePatterns": [
+      "packages/ibm-products-web-components/**/*"
     ],
     "extends": [
       "carbon",
@@ -143,7 +151,10 @@
             {
               "propName": "style",
               "disallowedFor": [
-                "Datagrid"
+                "Datagrid",
+                "Carousel",
+                "Checklist",
+                "Coachmark"
               ],
               "message": "Avoid using style prop"
             }
@@ -157,7 +168,10 @@
             {
               "propName": "style",
               "disallowedFor": [
-                "Datagrid"
+                "Datagrid",
+                "Carousel",
+                "Checklist",
+                "Coachmark"
               ],
               "message": "Avoid using style prop"
             }

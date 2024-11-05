@@ -6,7 +6,7 @@
  */
 
 // Carbon and package components we use.
-import { Button, ButtonProps } from '@carbon/react';
+import { Button, type ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 import { TearsheetShell, tearsheetHasCloseIcon } from './TearsheetShell';
@@ -43,6 +43,10 @@ export type CloseIconDescriptionTypes =
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 
+export interface TearsheetAction extends ButtonProps<'button'> {
+  label?: string;
+}
+
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 export interface TearsheetProps extends PropsWithChildren {
@@ -59,7 +63,7 @@ export interface TearsheetProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions: ButtonProps<'button'>[];
+  actions?: TearsheetAction[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -86,6 +90,14 @@ export interface TearsheetProps extends PropsWithChildren {
    * this prop to either true or false.
    */
   hasCloseIcon?: boolean;
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions?: ReactNode;
 
   /**
    * The content for the influencer section of the tearsheet, displayed
@@ -243,6 +255,7 @@ Tearsheet.propTypes = {
     ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -254,6 +267,7 @@ Tearsheet.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore*/
         onClick: Button.propTypes.onClick,
       })
     ),
@@ -296,6 +310,14 @@ Tearsheet.propTypes = {
    */
   /**@ts-ignore */
   hasCloseIcon: PropTypes.bool,
+
+  /**
+   * The content for the header actions area, displayed alongside the title in
+   * the header area of the tearsheet. This is typically a drop-down, or a set
+   * of small buttons, or similar. NB the headerActions is only applicable for
+   * wide tearsheets.
+   */
+  headerActions: PropTypes.element,
 
   /**
    * The content for the influencer section of the tearsheet, displayed

@@ -1,7 +1,7 @@
 # Carbon for IBM Products
 
 > Carbon for IBM Products is an open source implementation of the closed source
-> [IBM Software pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> [IBM Software pattern asset library (PAL)](https://pages.github.ibm.com/carbon/ibm-products/).
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
@@ -14,6 +14,7 @@
 [![Netlify status](https://img.shields.io/netlify/e8cd9972-0fc8-4c51-a911-e9a930ca6605)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-products)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)
+[![codecov](https://codecov.io/gh/carbon-design-system/ibm-products/graph/badge.svg?token=TKEL92HSUK)](https://codecov.io/gh/carbon-design-system/ibm-products)
 
 ## 🚀 Getting started
 
@@ -53,14 +54,15 @@ published on npm.
 ### Version support
 
 Carbon 11 support is introduced in Carbon for IBM Products
-<https://github.com/carbon-design-system/ibm-products/labels/v2>
+<https://github.com/carbon-design-system/ibm-products/labels/version%3A%202>
 
 | Package name           | Carbon package      | React version |
 | ---------------------- | ------------------- | ------------- |
 | `@carbon/ibm-products` | **`@carbon/react`** | 18, 17, 16    |
 
 The following packages support Carbon 10 and are considered
-<https://github.com/carbon-design-system/ibm-products/labels/v1> packages.
+<https://github.com/carbon-design-system/ibm-products/labels/version%3A%201>
+packages.
 
 | Package name                                                                                     | Carbon package                                                                                                                                                   | React version |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

@@ -14,7 +14,7 @@ const DocsPage = () => {
     <StoryDocsPage
       altGuidelinesHref={[
         {
-          href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#side-panel',
+          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel',
           label: 'Carbon create flows side panel usage guidelines',
         },
       ]}

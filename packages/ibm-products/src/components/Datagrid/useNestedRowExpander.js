@@ -16,8 +16,8 @@ import { handleDynamicRowCheck } from './Datagrid/addons/stateReducer';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useNestedRowExpander = (hooks) => {
-  const tempState = useRef();
-  const lastExpandedRowIndex = useRef();
+  const tempState = useRef(undefined);
+  const lastExpandedRowIndex = useRef(undefined);
   const useInstance = (instance) => {
     tempState.current = instance;
   };
@@ -56,7 +56,9 @@ const useNestedRowExpander = (hooks) => {
                   depth: row.depth,
                   index: row.index,
                 });
-                await getAsyncSubRows?.(row);
+                if (getAsyncSubRows) {
+                  await getAsyncSubRows?.(row);
+                }
                 handleDynamicRowCheck({
                   dispatch,
                   status: 'finish',
@@ -75,27 +77,25 @@ const useNestedRowExpander = (hooks) => {
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;
-        return (
-          (row.canExpand || getAsyncSubRows) && (
-            <button
-              type="button"
-              aria-label={expanderTitle}
-              className={cx(
-                `${blockClass}__row-expander`,
-                `${carbon.prefix}--btn`,
-                `${carbon.prefix}--btn--ghost`
-              )}
-              {...expanderButtonProps}
-            >
-              <ChevronRight
-                className={cx(`${blockClass}__expander-icon`, {
-                  [`${blockClass}__expander-icon--not-open`]: !row.isExpanded,
-                  [`${blockClass}__expander-icon--open`]: row.isExpanded,
-                })}
-              />
-            </button>
-          )
-        );
+        return row.canExpand || getAsyncSubRows ? (
+          <button
+            type="button"
+            aria-label={expanderTitle}
+            className={cx(
+              `${blockClass}__row-expander`,
+              `${carbon.prefix}--btn`,
+              `${carbon.prefix}--btn--ghost`
+            )}
+            {...expanderButtonProps}
+          >
+            <ChevronRight
+              className={cx(`${blockClass}__expander-icon`, {
+                [`${blockClass}__expander-icon--not-open`]: !row.isExpanded,
+                [`${blockClass}__expander-icon--open`]: row.isExpanded,
+              })}
+            />
+          </button>
+        ) : null;
       },
       width: 48,
       disableResizing: true,

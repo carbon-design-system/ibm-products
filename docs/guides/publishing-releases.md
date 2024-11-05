@@ -119,9 +119,6 @@ release team will need to do the following:
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
-  - [ ] Edit the generated release, and change the release from `pre-release` to
-        `latest`.
-        ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
 - [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
@@ -258,6 +255,9 @@ validated. During this stage, the release team will do the following:
   - [ ] Check the generated
         [release](https://github.com/carbon-design-system/ibm-products/releases)
         to ensure the release notes are correct.
+  - [ ] Edit the generated release, and change the release from `pre-release` to
+        `latest`.
+        ![Screenshot of release label with latest option selected](https://github.com/user-attachments/assets/0be18f12-380e-45f2-b8aa-cfd01b9aa50c)
 - [ ] Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the
       new version of `@carbon/ibm-products`.
 
@@ -316,13 +316,25 @@ these steps (similar to the minor release process) below to ensure a proper
 patch release:
 
 - [ ] Create a release branch from the previous release tag
+  - [ ] Make sure the branch name follows the `release/vx.x.x` format. For
+        example, if the last release was `v2.49.0`, the patch release branch
+        name should be `release/v2.49.1`
   - [ ] This can be done through the GitHub UI. First select the previous
         release tag from the GitHub branches / tags dropdown.
         ![Screenshot of GitHub's branch/tag dropdown](https://github.com/carbon-design-system/ibm-products/assets/54281166/93650016-5d30-40b6-8675-bc057755ec35)
   - [ ] Then reopen the dropdown, select the `Branches` tab, and create the
         release branch off the previously selected tag
         ![Screenshot of GitHub's branch/tag dropdown with release branch created](https://github.com/carbon-design-system/ibm-products/assets/54281166/8b5face8-d982-42df-b9ba-df5ffc01f85e)
-- [ ] Follow the same steps as the [prerelease](#prerelease),
+- [ ] Once the patch release branch has been created, open a PR(s) to merge in
+      any fixes / changes needed for the patch release. NOTE: Any changes merged
+      into a `release/v2*` branch will be merged automatically into the `main`
+      branch via the
+      [automerge workflow](https://github.com/carbon-design-system/ibm-products/blob/main/.github/workflows/automerge.yml)
+- [ ] Follow the same steps as the [prerelease](#prerelease) (skipping the
+      branch creation steps as we have already created the patch release branch
+      from the steps above here),
       [subsequent prerelease](#subsequent-prerelease), and
-      [stable release](#stable-release) publishes, except use the
-      [patch release workflow](https://github.com/carbon-design-system/ibm-products/ibm-products/actions/workflows/release-patch.yml)
+      [stable release](#stable-release) publishes, except instead of using the
+      [minor release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-minor.yml),
+      use the
+      [patch release workflow](https://github.com/carbon-design-system/ibm-products/actions/workflows/release-patch.yml)

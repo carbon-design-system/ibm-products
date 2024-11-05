@@ -26,7 +26,7 @@ import mdx from './Coachmark.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Experimental/Components/Coachmark',
+  title: 'Experimental/Onboarding/Coachmark',
   component: Coachmark,
   tags: ['autodocs'],
   argTypes: {
@@ -87,7 +87,7 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const ref = useRef();
+  const ref = useRef(undefined);
 
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });

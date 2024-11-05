@@ -20,6 +20,7 @@
 
 // UserAvatar uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by UserAvatar
+@use '@carbon/react/scss/components/tooltip';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -61,6 +62,7 @@ $sizes: (
   &:focus-within .#{$block-class} {
     // stylelint-disable-next-line carbon/theme-token-use
     outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 }
 
@@ -74,6 +76,7 @@ $sizes: (
   background-color: $color;
 }
 
+//this mixin allows you to set background color based on the lighter themes such as g10 and white
 @mixin setLightBg($order, $color) {
   :root .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
@@ -84,6 +87,7 @@ $sizes: (
   }
 }
 
+//this mixin allows you to set background color based on the darker themes such as g90 and g100
 @mixin setDarkBg($order, $color) {
   .#{$carbon-prefix}--g90 .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g100 .#{$block-class}--#{$order},

@@ -15,6 +15,7 @@ import {
   ModalBody,
   Search,
   Tag,
+  DismissibleTag,
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
@@ -26,6 +27,8 @@ const blockClass = `${pkg.prefix}--tag-overflow-modal`;
 
 // Default values for props
 const defaults = {
+  // required for accessibility if using hasScrollingContent
+  modalAriaLabel: 'List of all tags',
   // marked as required by TagSet if needed, default used to satisfy <Search /> component
   searchLabel: '',
 };
@@ -33,11 +36,13 @@ const defaults = {
 interface TagType {
   label: string;
 }
-type AllTags = (TagType & Omit<React.ComponentProps<Tag>, 'filter'>)[];
+type AllTags = (TagType & Omit<React.ComponentProps<typeof Tag>, 'filter'>)[];
 interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
+  modalAriaLabel?: string;
   onClose?: () => void;
+  onTagClose?: (params: { label: string; id: any }) => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
   portalTarget?: ReactNode;
@@ -52,7 +57,9 @@ export const TagOverflowModal = ({
   allTags,
   className,
   title,
+  modalAriaLabel = defaults.modalAriaLabel,
   onClose,
+  onTagClose,
   open,
   overflowType,
   portalTarget: portalTargetIn,
@@ -104,17 +111,28 @@ export const TagOverflowModal = ({
           size="lg"
         />
       </ModalHeader>
-      <ModalBody className={`${blockClass}__body`} hasForm>
-        {getFilteredItems().map(({ label, id, filter }) => {
-          const isFilterable = overflowType === 'tag' ? filter : false;
-          return (
-            <Tag key={id} filter={isFilterable}>
-              {label}
-            </Tag>
+      <ModalBody
+        className={`${blockClass}__body`}
+        hasForm
+        hasScrollingContent
+        aria-label={modalAriaLabel}
+      >
+        {getFilteredItems().map(({ label, id, filter, onClose }) => {
+          const isFilterable =
+            overflowType === 'tag' && (typeof onClose === 'function' || filter);
+
+          return isFilterable ? (
+            <DismissibleTag
+              key={id}
+              text={label}
+              onClose={() => onTagClose?.({ label, id })}
+            />
+          ) : (
+            <Tag key={id}>{label}</Tag>
           );
         })}
+        <div className={`${blockClass}__fade`} />
       </ModalBody>
-      <div className={`${blockClass}__fade`} />
     </ComposedModal>
   );
 };
@@ -128,6 +146,7 @@ TagOverflowModal.propTypes = {
   ),
   className: PropTypes.string,
   onClose: PropTypes.func,
+  onTagClose: PropTypes.func,
   open: PropTypes.bool,
   overflowType: PropTypes.oneOf(['default', 'tag']),
   portalTarget: PropTypes.node,

@@ -285,6 +285,10 @@ $colors: (
     /* stylelint-disable-next-line carbon/motion-easing-use */
     transition: transform motion(exit, productive) $duration-fast-02;
   }
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__close-condition-wrapper {
+    z-index: 2;
+  }
 }
 
 .#{$block-class}__invalid-input {

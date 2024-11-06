@@ -339,10 +339,9 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
 
     // When withoutBackground is false this should result in the value 1 for opacity
-    const regStyle = new RegExp(
-      `--${prefix}--page-header--background-opacity: 1`
-    );
-    expect(header.getAttribute('style')).toMatch(regStyle);
+    const backgroundOpacity =
+      header.style[`--${prefix}--page-header--background-opacity`];
+    expect(backgroundOpacity).toBe(1);
   });
 
   const dataTestId = 'data-testid';
@@ -713,10 +712,9 @@ describe('PageHeader', () => {
     const header = screen.getByTestId(dataTestId);
 
     // When withoutBackground is true this should result in the value 0 for opacity
-    const regStyle = new RegExp(
-      `--${prefix}--page-header--background-opacity: 0`
-    );
-    expect(header.getAttribute('style')).toMatch(regStyle);
+    const backgroundOpacity =
+      header.style[`--${prefix}--page-header--background-opacity`];
+    expect(backgroundOpacity).toBe(0);
   });
 
   it('Works, for now, with deprecated props', async () =>
@@ -733,10 +731,9 @@ describe('PageHeader', () => {
       const header = screen.getByTestId(dataTestId);
 
       // When hasBackgroundAlways is false this should result in the value 0 for opacity
-      const regStyle = new RegExp(
-        `--${prefix}--page-header--background-opacity: 0`
-      );
-      expect(header.getAttribute('style')).toMatch(regStyle);
+      const backgroundOpacity =
+        header.style[`--${prefix}--page-header--background-opacity`];
+      expect(backgroundOpacity).toBe(0);
     }));
 
   it('PageHeader grid settings narrow and fullWidth', async () => {

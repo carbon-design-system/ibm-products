@@ -417,6 +417,10 @@ interface Metrics {
   navigationRowHeight?: number;
 }
 
+interface HTMLElementStyled extends HTMLElement {
+  style: CSSStyleDeclaration;
+}
+
 export let PageHeader = React.forwardRef(
   (
     {
@@ -472,7 +476,8 @@ export let PageHeader = React.forwardRef(
 
     // refs
     const localHeaderRef = useRef<HTMLDivElement | null>(null);
-    const headerRef = ref || localHeaderRef;
+    const headerRef = (ref ||
+      localHeaderRef) as MutableRefObject<HTMLElementStyled>;
     const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
       useRef(null);
     const offsetTopMeasuringRef = useRef(null);
@@ -899,9 +904,9 @@ export let PageHeader = React.forwardRef(
     const displayedBreadcrumbs = getBreadcrumbs();
 
     useIsomorphicEffect(() => {
-      if (headerRef.current) {
-        headerRef.current.style = pageHeaderStyles;
-      }
+      Object.keys(pageHeaderStyles).forEach(
+        (key) => (headerRef.current.style[key] = pageHeaderStyles[key])
+      );
     }, [headerRef, pageHeaderStyles]);
 
     return (

@@ -90,7 +90,7 @@ export interface WebTerminalProps extends PropsWithChildren {
   webTerminalAriaLabel?: string;
 }
 
-interface HTMLElementStyled extends HTMLElement {
+interface HTMLElementStyled extends HTMLDivElement {
   style: CSSStyleDeclaration;
 }
 
@@ -115,11 +115,9 @@ export let WebTerminal = React.forwardRef(
     }: WebTerminalProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const localRef = useRef<HTMLDivElement | null>(null);
-    const webTerminalRef = (ref ?? localRef) as
-      | MutableRefObject<HTMLElementStyled>
-      | undefined
-      | null;
+    const localRef = useRef<HTMLDivElement>();
+    const webTerminalRef = (ref ??
+      localRef) as MutableRefObject<HTMLElementStyled>;
 
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 

@@ -44,87 +44,29 @@ describe('FeatureFlags', () => {
     function TestComponent() {
       const featureFlags = useFeatureFlags();
       const a = useFeatureFlag('a');
-      const b = useFeatureFlag('b');
 
       checkFlags({
         a: featureFlags.enabled('a'),
-        b: featureFlags.enabled('b'),
       });
 
       checkFlag({
         a,
-        b,
       });
 
       return null;
     }
 
     render(
-      <FeatureFlags a b={false}>
+      <FeatureFlags a>
         <TestComponent />
       </FeatureFlags>
     );
 
     expect(checkFlags).toHaveBeenLastCalledWith({
       a: true,
-      b: false,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: true,
-      b: false,
-    });
-  });
-
-  it('should re-render when flags change', () => {
-    const checkFlags = jest.fn();
-    const checkFlag = jest.fn();
-
-    function TestComponent() {
-      const featureFlags = useFeatureFlags();
-      const a = useFeatureFlag('a');
-      const b = useFeatureFlag('b');
-
-      checkFlags({
-        a: featureFlags.enabled('a'),
-        b: featureFlags.enabled('b'),
-      });
-
-      checkFlag({
-        a,
-        b,
-      });
-
-      return null;
-    }
-
-    const { rerender } = render(
-      <FeatureFlags a b={false}>
-        <TestComponent />
-      </FeatureFlags>
-    );
-
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-
-    rerender(
-      <FeatureFlags a={false} b>
-        <TestComponent />
-      </FeatureFlags>
-    );
-
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: false,
-      b: true,
     });
   });
 

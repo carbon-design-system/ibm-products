@@ -88,7 +88,7 @@ type UserAvatarBaseProps = {
   /**
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
-  renderIcon?: React.ElementType;
+  renderIcon?: React.ElementType | string;
   /**
    * Set the size of the avatar circle
    */
@@ -221,7 +221,8 @@ UserAvatar.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 UserAvatar.propTypes = {
   /**
-   * Provide the background color need to be set for UserAvatar.
+   * Provide the background color need to be set for UserAvatar. Background color will be set based on lighter or darker theme.
+   * For example: if you select order-5-purple, it will take $purple-60 for lighter theme and $purple-50 for darker theme.
    */
   backgroundColor: PropTypes.oneOf([
     'order-1-cyan',
@@ -259,7 +260,11 @@ UserAvatar.propTypes = {
    * Provide a custom icon to use if you need to use an icon other than the default one
    */
   /**@ts-ignore */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  renderIcon: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.string,
+  ]),
   /**
    * Set the size of the avatar circle
    */

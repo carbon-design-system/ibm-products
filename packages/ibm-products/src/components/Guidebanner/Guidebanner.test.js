@@ -6,12 +6,17 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Guidebanner, GuidebannerElement } from '.';
+import {
+  Guidebanner,
+  GuidebannerElement,
+  GuidebannerElementButton,
+  GuidebannerElementLink,
+} from '.';
 
 const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = Guidebanner.displayName;
@@ -32,7 +37,14 @@ const renderComponent = (customProps = {}) => {
   // The Guidebanner must have at least one GuidebannerElement as a child.
   return render(
     <Guidebanner {...defaultProps} {...customProps}>
-      <GuidebannerElement description="GuidebannerElement description"></GuidebannerElement>
+      <GuidebannerElement
+        description="GuidebannerElement description"
+        button={
+          <GuidebannerElementButton type="primary">
+            Show Me
+          </GuidebannerElementButton>
+        }
+      ></GuidebannerElement>
     </Guidebanner>
   );
 };
@@ -79,10 +91,12 @@ describe(componentName, () => {
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderComponent({ ref });
-
+    await waitFor(() => expect(ref.current).toHaveClass(blockClass), {
+      timeout: 10,
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 
@@ -91,5 +105,91 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('renders the icon in the CTA button', () => {
+    renderComponent();
+
+    const button = screen.getByRole('button', { name: /show me/i });
+
+    expect(button).toBeInTheDocument();
+
+    const svgIcon = button.querySelector('svg');
+    expect(svgIcon).toBeInTheDocument();
+
+    expect(svgIcon).toHaveAttribute('width', '16');
+    expect(svgIcon).toHaveAttribute('height', '16');
+  });
+
+  it('renders default ghost button variant if type is not passed for GuidebannerElementButton', () => {
+    render(
+      <Guidebanner title="test title">
+        <GuidebannerElement
+          title="test title"
+          description="test description"
+          button={<GuidebannerElementButton>Show Me</GuidebannerElementButton>}
+        />
+      </Guidebanner>
+    );
+    const button = screen.getByRole('button', { name: /show me/i });
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveClass(`${blockClass}__element-button`);
+    expect(button).toHaveClass(`${carbon.prefix}--btn--ghost`);
+  });
+
+  it('returns link for GuidebannerElementLink', () => {
+    render(
+      <Guidebanner title="test title">
+        <GuidebannerElement
+          title="test title"
+          description="test description"
+          button={<GuidebannerElementLink>Learn more</GuidebannerElementLink>}
+        />
+      </Guidebanner>
+    );
+    const link = screen.getByRole('link', { name: /learn more/i });
+    expect(link).toBeInTheDocument();
+  });
+
+  it('expands/collapses the guidebanner', () => {
+    renderComponent({ collapsible: true });
+
+    const toggleButton = screen.getByRole('button', { name: /read more/i });
+    expect(toggleButton).toHaveClass(`${blockClass}__toggle-button`);
+
+    // starts collapsed
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+
+    // Expands on click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveTextContent('Read less');
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+
+    // Collapses back on second click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveTextContent('Read more');
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('renders the close button and triggers the onClose callback when provided', () => {
+    const onCloseMock = jest.fn();
+    renderComponent({ onClose: onCloseMock });
+
+    const closeButton = screen.getByRole('button', { name: /close/i });
+    expect(closeButton).toBeInTheDocument();
+
+    fireEvent.click(closeButton);
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('throws error for an invalid child', () => {
+    const errorMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    render(
+      <Guidebanner title="test title">
+        <p>invalid child</p>
+      </Guidebanner>
+    );
+    expect(errorMock).toHaveBeenCalledTimes(1);
   });
 });

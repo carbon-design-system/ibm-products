@@ -7800,6 +7800,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/carbon__layout@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@types/carbon__layout@npm:0.0.3"
+  checksum: a5bc0d216f8d710ae8f286ea7673963f0553d6d9e8bd5ca9d26ddcf26eb5091f4a443c34341b5fb0615b83549ad34d656c7afd0be4d78e1e35a072712b1a2169
+  languageName: node
+  linkType: hard
+
 "@types/connect@npm:*":
   version: 3.4.38
   resolution: "@types/connect@npm:3.4.38"
@@ -15647,13 +15654,13 @@ __metadata:
   linkType: hard
 
 "happy-dom@npm:^15.7.4":
-  version: 15.7.4
-  resolution: "happy-dom@npm:15.7.4"
+  version: 15.10.1
+  resolution: "happy-dom@npm:15.10.1"
   dependencies:
     entities: "npm:^4.5.0"
     webidl-conversions: "npm:^7.0.0"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: fd5026e8a2d9437f161e4c6d9725ffe68f6d31cd09ac7d729b3cd5dd2207a3833272607171da1caf4b1247839ead8bd01a4381a0e31909589af29d27fa24a0f5
+  checksum: 637b0330a6ed33708beb2287076bc078f31d839525b7492d1008774e28e17ba9752d1c496cc8528f94fe8fe892bc2603a751287ab06ae708afa648873f571c9f
   languageName: node
   linkType: hard
 
@@ -16065,6 +16072,7 @@ __metadata:
     "@testing-library/react": "npm:^14.0.0"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@testing-library/user-event": "npm:^14.4.3"
+    "@types/carbon__layout": "npm:^0.0.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.21.0"
     "@typescript-eslint/parser": "npm:^6.21.0"
     accessibility-checker: "npm:^3.1.65"

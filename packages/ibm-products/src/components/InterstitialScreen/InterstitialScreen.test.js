@@ -6,14 +6,15 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { InterstitialScreen } from '.';
 import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
+import userEvent from '@testing-library/user-event';
 
 const blockClass = `${pkg.prefix}--interstitial-screen`;
 const componentName = InterstitialScreen.displayName;
@@ -23,14 +24,13 @@ const componentName = InterstitialScreen.displayName;
 const className = `class-${uuidv4()}`;
 const InterstitialScreenViewModuleTitle = `Title-${uuidv4()}`;
 const dataTestId = uuidv4();
-
+const { fn } = jest;
+const onClose = fn();
 const renderComponent = ({ ...rest } = {}) =>
   render(
     <InterstitialScreen
       isOpen={true}
-      onClose={() => {
-        console.log('Closed');
-      }}
+      onClose={onClose}
       data-testid={dataTestId}
       {...{ ...rest }}
     >
@@ -38,6 +38,13 @@ const renderComponent = ({ ...rest } = {}) =>
         <InterstitialScreenViewModule
           title={InterstitialScreenViewModuleTitle}
           description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
+      </InterstitialScreenView>
+
+      <InterstitialScreenView stepTitle="Step 2">
+        <InterstitialScreenViewModule
+          title="Use case-specific heading 2"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
         />
       </InterstitialScreenView>
     </InterstitialScreen>
@@ -171,5 +178,53 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('clicking on the next and back button', async () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    expect(screen.getByText('Next'));
+    expect(screen.getByText('Step 1'));
+    const step1 = screen.getByText('Step 1');
+    const listElement1 = step1.closest('li');
+    const step2 = screen.getByText('Step 2');
+    const listElement2 = step2.closest('li');
+    expect(listElement1).toHaveClass(
+      `${carbon.prefix}--progress-step--current`
+    );
+    expect(listElement2).toHaveClass(
+      `${carbon.prefix}--progress-step--incomplete`
+    );
+    const nextButtonElement = screen.getByText('Next');
+    expect(nextButtonElement).toHaveClass(`${blockClass}--next-btn`);
+    await act(() => userEvent.click(nextButtonElement));
+    expect(listElement1).toHaveClass(
+      `${carbon.prefix}--progress-step--complete`
+    );
+    expect(listElement2).toHaveClass(
+      `${carbon.prefix}--progress-step--current`
+    );
+    expect(screen.getByText('Back')).toBeInTheDocument();
+    const backButtonElement = screen.getByText('Back');
+    expect(backButtonElement).toHaveClass(`${blockClass}--prev-btn`);
+    await act(() => userEvent.click(backButtonElement));
+    expect(listElement1).toHaveClass(
+      `${carbon.prefix}--progress-step--current`
+    );
+    expect(listElement2).toHaveClass(
+      `${carbon.prefix}--progress-step--incomplete`
+    );
+  });
+
+  it('Clicking the close button', async () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+    });
+    const closeBtn = screen.getByLabelText('Close');
+    await act(() => userEvent.click(closeBtn));
+    expect(onClose).toBeCalled();
   });
 });

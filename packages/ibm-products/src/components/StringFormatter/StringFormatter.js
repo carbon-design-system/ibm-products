@@ -52,8 +52,8 @@ export let StringFormatter = React.forwardRef(
     const contentRef = useRef(null);
 
     useIsomorphicEffect(() => {
-      contentRef.current.maxWidth = width;
-      contentRef.current.WebkitLineClamp = lines;
+      contentRef.current.style.maxWidth = width;
+      contentRef.current.style.WebkitLineClamp = lines;
     }, [lines, width]);
 
     const stringFormatterContent = (

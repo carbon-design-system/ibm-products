@@ -175,7 +175,7 @@ const Template = (storyName, storyInitiallyOpen, props, context) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>
-        {beenOpen ? 'Reopen the' : 'Open the'} {storyName}
+        {beenOpen ? 'reopen the' : 'Open the'} {storyName}
       </Button>
 
       <style>{`.${blockClass} { opacity: 0; }`};</style>

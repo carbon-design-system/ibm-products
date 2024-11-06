@@ -213,7 +213,9 @@ declare module '@carbon/react' {
   } from '@carbon/react';
 }
 
-declare module '@carbon/type';
+declare module '@carbon/type' {
+  export { ButtonProps } from '@carbon/type';
+}
 declare module '@carbon/react/icons';
 declare module '@carbon/colors';
 declare module '@carbon/motion';

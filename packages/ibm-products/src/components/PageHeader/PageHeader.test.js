@@ -1,3 +1,5 @@
+/* eslint react/forbid-component-props: 0 */
+
 /**
  * Copyright IBM Corp. 2020, 2023
  *

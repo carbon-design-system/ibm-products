@@ -486,19 +486,6 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      const setScaleValues = () => {
-        if (!areAllSameSizeVariant()) {
-          return {
-            [`--${bc}--stacking-scale-factor-single`]: 1,
-            [`--${bc}--stacking-scale-factor-double`]: 1,
-          };
-        }
-        return {
-          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
-          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
-        };
-      };
-
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal

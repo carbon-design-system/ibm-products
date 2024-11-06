@@ -39,6 +39,7 @@ const defaultProps = {
   downloadFileName: 'filename',
   downloadFileType: 'json',
   downloadLinkText: 'download link text',
+  downloadLinkLabel: 'Download API Key in Java Script File format',
   editButtonText: 'edit button',
   editSuccess: false,
   editSuccessTitle: 'edited successfully',

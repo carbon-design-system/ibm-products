@@ -54,14 +54,15 @@ published on npm.
 ### Version support
 
 Carbon 11 support is introduced in Carbon for IBM Products
-<https://github.com/carbon-design-system/ibm-products/labels/v2>
+<https://github.com/carbon-design-system/ibm-products/labels/version%3A%202>
 
 | Package name           | Carbon package      | React version |
 | ---------------------- | ------------------- | ------------- |
 | `@carbon/ibm-products` | **`@carbon/react`** | 18, 17, 16    |
 
 The following packages support Carbon 10 and are considered
-<https://github.com/carbon-design-system/ibm-products/labels/v1> packages.
+<https://github.com/carbon-design-system/ibm-products/labels/version%3A%201>
+packages.
 
 | Package name                                                                                     | Carbon package                                                                                                                                                   | React version |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |

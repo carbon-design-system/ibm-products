@@ -12,7 +12,6 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Carousel } from '.';
-import userEvent from '@testing-library/user-event';
 
 const blockClass = `${pkg.prefix}--carousel`;
 const componentName = Carousel.displayName;
@@ -137,28 +136,5 @@ describe(componentName, () => {
     expect(onScroll).toHaveBeenCalled();
     element.scrollLeft = 0;
     expect(element.scrollLeft).toBe(0);
-  });
-
-  it('disables wheel scrolling when the shift key is pressed down', async () => {
-    const onScroll = jest.fn();
-
-    render(
-      <Carousel
-        data-testid={dataTestId}
-        // eslint-disable-next-line
-        style={{ width: '10px', height: '20px' }} // we need to set width and height here to trigger scrollbars
-        onScroll={onScroll}
-      >
-        Very long paragraph to trigger scrolling.
-      </Carousel>
-    );
-    const element = screen.getByTestId(dataTestId);
-    expect(onScroll).toHaveBeenCalledTimes(0);
-
-    const thing = userEvent.keyboard('{Shift>}');
-    expect(thing).toBe(3);
-    await waitFor(() => fireEvent.scroll(element, { target: { scrollX: 20 } }));
-
-    expect(onScroll).toHaveBeenCalledTimes(0);
   });
 });

@@ -7,7 +7,14 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Search, Tag, OverflowMenu, Checkbox, usePrefix } from '@carbon/react';
+import {
+  Search,
+  Tag,
+  OverflowMenu,
+  Checkbox,
+  usePrefix,
+  unstable_FeatureFlags as FeatureFlags,
+} from '@carbon/react';
 import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import { AddSelectList } from './AddSelectList';
@@ -139,33 +146,38 @@ export let AddSelectColumn = ({
               sortByLabel={sortByLabel}
             />
             {filterByOpts.length > 0 && (
-              <OverflowMenu
-                renderIcon={(props) => <Filter size={32} {...props} />}
-                className={`${colClass}-overflow`}
-                flipped
-                aria-label={filterByLabel}
-                iconDescription={filterByLabel}
-              >
-                {filterByOpts.map((opt) => (
-                  <div
-                    key={opt}
-                    className={`${carbonPrefix}--overflow-menu-options__option`}
-                  >
+              <FeatureFlags enableV12DynamicFloatingStyles>
+                <OverflowMenu
+                  autoAlign
+                  renderIcon={(props) => <Filter size={32} {...props} />}
+                  className={`${colClass}-overflow`}
+                  flipped
+                  aria-label={filterByLabel}
+                  iconDescription={filterByLabel}
+                >
+                  {filterByOpts.map((opt) => (
                     <div
-                      className={`${carbonPrefix}--overflow-menu-options__btn`}
+                      key={opt}
+                      className={`${carbonPrefix}--overflow-menu-options__option`}
                     >
-                      <Checkbox
-                        id={opt}
-                        labelText={opt}
-                        onChange={(event, { checked }) =>
-                          filterHandler(checked, opt)
-                        }
-                        checked={filters.find((o) => o === opt) ? true : false}
-                      />
+                      <div
+                        className={`${carbonPrefix}--overflow-menu-options__btn`}
+                      >
+                        <Checkbox
+                          id={opt}
+                          labelText={opt}
+                          onChange={(event, { checked }) =>
+                            filterHandler(checked, opt)
+                          }
+                          checked={
+                            filters.find((o) => o === opt) ? true : false
+                          }
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </OverflowMenu>
+                  ))}
+                </OverflowMenu>
+              </FeatureFlags>
             )}
           </div>
         </div>

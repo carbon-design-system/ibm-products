@@ -7,7 +7,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import {
+  OverflowMenu,
+  OverflowMenuItem,
+  unstable_FeatureFlags as FeatureFlags,
+} from '@carbon/react';
 import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import { SortOption } from './types';
@@ -67,24 +71,27 @@ export const AddSelectSort = ({
   return (
     <div className={blockClass}>
       {sortByOpts.length > 0 && (
-        <OverflowMenu
-          renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
-          className={`${blockClass}_overflow`}
-          flipped
-          aria-label={sortByLabel}
-          iconDescription={sortByLabel}
-        >
-          {sortByOpts.map((opt) => {
-            return (
-              <OverflowMenuItem
-                className={`${blockClass}_overflow-item`}
-                key={opt?.id}
-                itemText={opt?.itemText}
-                onClick={() => sortHandler(opt)}
-              />
-            );
-          })}
-        </OverflowMenu>
+        <FeatureFlags enableV12DynamicFloatingStyles>
+          <OverflowMenu
+            autoAlign
+            renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
+            className={`${blockClass}_overflow`}
+            flipped
+            aria-label={sortByLabel}
+            iconDescription={sortByLabel}
+          >
+            {sortByOpts.map((opt) => {
+              return (
+                <OverflowMenuItem
+                  className={`${blockClass}_overflow-item`}
+                  key={opt?.id}
+                  itemText={opt?.itemText}
+                  onClick={() => sortHandler(opt)}
+                />
+              );
+            })}
+          </OverflowMenu>
+        </FeatureFlags>
       )}
     </div>
   );

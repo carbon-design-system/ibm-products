@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "@testing-library/jest-dom": "^6.3.0",
-    "accessibility-checker": "^3.1.65",
+    "accessibility-checker": "^3.1.77",
     "axe-core": "^4.8.3",
     "babel-jest": "^29.7.0",
     "babel-preset-ibm-cloud-cognitive": "^0.14.40",

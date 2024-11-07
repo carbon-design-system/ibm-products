@@ -29,7 +29,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: 'Experimental/Components/ActionBar',
+  title: 'Utils/Components/ActionBar',
   component: ActionBar,
   tags: ['autodocs'],
   argTypes: {

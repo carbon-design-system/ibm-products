@@ -315,7 +315,7 @@ export const SelectableRow = () => {
 
 export const Header = () => {
   const [data] = useState(makeData(10));
-  const columns = getColumns(data);
+  const columns = React.useMemo(() => getColumns(data), []);
   const emptyStateTitle = 'Empty state title';
   const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({

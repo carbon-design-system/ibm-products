@@ -31,7 +31,7 @@ export const WithFeatureFlags = ({ flags, children }) => {
   }, [flags]);
 
   return (
-    <FeatureFlags flags={flags ? updatedFlags : allFlagsEnabled}>
+    <FeatureFlags flags={updatedFlags ?? allFlagsEnabled}>
       <Annotation
         type="feature-flags"
         text={

@@ -55,6 +55,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       downloadFileName,
       downloadFileType,
       downloadLinkText,
+      downloadLinkLabel = downloadLinkText,
       editButtonText,
       editSuccess,
       editSuccessTitle,
@@ -289,6 +290,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                       fileName={downloadFileName}
                       linkText={downloadLinkText}
                       fileType={downloadFileType}
+                      downloadLinkLabel={downloadLinkLabel}
                     />
                   ) : (
                     <div className={`${blockClass}__messaging-text`}>
@@ -403,6 +405,10 @@ APIKeyModal.propTypes = {
    * designates the file type for the downloadable key
    */
   downloadFileType: downloadRequiredProps(PropTypes.oneOf(['txt', 'json'])),
+  /**
+   * aria-label for the download link
+   */
+  downloadLinkLabel: downloadRequiredProps(PropTypes.string),
   /**
    * anchor text for the download link
    */

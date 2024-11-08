@@ -174,8 +174,10 @@ export const Card = forwardRef(
         const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
           <Layer level={2}>
-            <FeatureFlags enableV12DynamicFloatingStyles>
+            <FeatureFlags enableV12Overflowmenu>
               <OverflowMenu
+                autoAlign
+                menuAlignment="bottom-end"
                 size={size}
                 direction={pos}
                 flipped

@@ -67,6 +67,11 @@ export let StatusIndicator = React.forwardRef(
   }
 );
 
+StatusIndicator.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 StatusIndicator = pkg.checkComponentEnabled(StatusIndicator, componentName);
 

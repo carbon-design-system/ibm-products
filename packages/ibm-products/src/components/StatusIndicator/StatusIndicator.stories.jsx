@@ -11,6 +11,7 @@ import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'Experimental/Components/Status indicator/StatusIndicator',
@@ -90,16 +91,26 @@ const stepsAsync = [
 
 const Template = (args) => {
   return (
-    <StatusIndicator {...args}>
-      <StatusIndicatorStep status="inactive" description="Waiting" />
-      <StatusIndicatorStep status="active" description="Working" />
-      <StatusIndicatorStep
-        status="error"
-        description="Error"
-        errorMessage="Error message"
-      />
-      <StatusIndicatorStep status="finished" description="Success" />
-    </StatusIndicator>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
+      <StatusIndicator {...args}>
+        <StatusIndicatorStep status="inactive" description="Waiting" />
+        <StatusIndicatorStep status="active" description="Working" />
+        <StatusIndicatorStep
+          status="error"
+          description="Error"
+          errorMessage="Error message"
+        />
+        <StatusIndicatorStep status="finished" description="Success" />
+      </StatusIndicator>
+    </Annotation>
   );
 };
 
@@ -138,18 +149,28 @@ const TemplateSuccess = (args) => {
   }, []);
 
   return (
-    <StatusIndicator {...args}>
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            description={steps[i].description}
-            errorMessage={steps[i].errorMessage}
-            status={status}
-          />
-        );
-      })}
-    </StatusIndicator>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
+      <StatusIndicator {...args}>
+        {statuses.map((status, i) => {
+          return (
+            <StatusIndicatorStep
+              key={i}
+              description={steps[i].description}
+              errorMessage={steps[i].errorMessage}
+              status={status}
+            />
+          );
+        })}
+      </StatusIndicator>
+    </Annotation>
   );
 };
 
@@ -188,18 +209,28 @@ const TemplateSuccessAsync = (args) => {
   }, []);
 
   return (
-    <StatusIndicator {...args}>
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            errorMessage={stepsAsync[i].errorMessage}
-            description={stepsAsync[i].description}
-            status={status}
-          />
-        );
-      })}
-    </StatusIndicator>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
+      <StatusIndicator {...args}>
+        {statuses.map((status, i) => {
+          return (
+            <StatusIndicatorStep
+              key={i}
+              errorMessage={stepsAsync[i].errorMessage}
+              description={stepsAsync[i].description}
+              status={status}
+            />
+          );
+        })}
+      </StatusIndicator>
+    </Annotation>
   );
 };
 
@@ -240,28 +271,38 @@ const TemplateFail = (args) => {
   }, []);
 
   return (
-    <StatusIndicator
-      {...args}
-      onRetry={(event) => {
-        action('onRetry')(event);
-        setIsError(false);
-        setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
-        runDemo();
-      }}
-      retryLabel="Retry"
-      showRetry={isError}
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
     >
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            description={steps[i].description}
-            errorMessage={steps[i].errorMessage}
-            status={status}
-          />
-        );
-      })}
-    </StatusIndicator>
+      <StatusIndicator
+        {...args}
+        onRetry={(event) => {
+          action('onRetry')(event);
+          setIsError(false);
+          setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+          runDemo();
+        }}
+        retryLabel="Retry"
+        showRetry={isError}
+      >
+        {statuses.map((status, i) => {
+          return (
+            <StatusIndicatorStep
+              key={i}
+              description={steps[i].description}
+              errorMessage={steps[i].errorMessage}
+              status={status}
+            />
+          );
+        })}
+      </StatusIndicator>
+    </Annotation>
   );
 };
 
@@ -306,28 +347,38 @@ const TemplateFailAsync = (args) => {
   }, []);
 
   return (
-    <StatusIndicator
-      {...args}
-      onRetry={(event) => {
-        action('onRetry')(event);
-        setIsError(false);
-        setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
-        runDemo();
-      }}
-      retryLabel="Retry"
-      showRetry={isError}
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
     >
-      {statuses.map((status, i) => {
-        return (
-          <StatusIndicatorStep
-            key={i}
-            errorMessage={stepsAsync[i].errorMessage}
-            description={stepsAsync[i].description}
-            status={status}
-          />
-        );
-      })}
-    </StatusIndicator>
+      <StatusIndicator
+        {...args}
+        onRetry={(event) => {
+          action('onRetry')(event);
+          setIsError(false);
+          setStatuses(['inactive', 'inactive', 'inactive', 'inactive']);
+          runDemo();
+        }}
+        retryLabel="Retry"
+        showRetry={isError}
+      >
+        {statuses.map((status, i) => {
+          return (
+            <StatusIndicatorStep
+              key={i}
+              errorMessage={stepsAsync[i].errorMessage}
+              description={stepsAsync[i].description}
+              status={status}
+            />
+          );
+        })}
+      </StatusIndicator>
+    </Annotation>
   );
 };
 

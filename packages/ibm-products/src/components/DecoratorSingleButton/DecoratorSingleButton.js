@@ -39,6 +39,11 @@ export let DecoratorSingleButton = React.forwardRef((props, ref) => {
   );
 });
 
+DecoratorSingleButton.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorSingleButton = pkg.checkComponentEnabled(
   DecoratorSingleButton,

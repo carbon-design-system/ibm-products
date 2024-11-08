@@ -37,6 +37,11 @@ export let DecoratorDualButton = React.forwardRef((props, ref) => {
   );
 });
 
+DecoratorDualButton.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorDualButton = pkg.checkComponentEnabled(
   DecoratorDualButton,

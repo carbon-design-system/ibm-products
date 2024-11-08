@@ -64,6 +64,10 @@ const renderComponent = ({ ...rest } = {}, children = childrenContent) =>
   render(<DescriptionList {...rest}>{children}</DescriptionList>);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component DescriptionList', async () => {
     renderComponent({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

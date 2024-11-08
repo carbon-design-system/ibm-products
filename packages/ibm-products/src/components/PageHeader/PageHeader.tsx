@@ -294,6 +294,10 @@ interface PageHeaderBaseProps extends PropsWithChildren {
    */
   breadcrumbOverflowTooltipAlign?: PopoverAlignment;
   /**
+   * Label for the Breadcrumb component
+   */
+  breadcrumbLabel?: string;
+  /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
    */
@@ -428,6 +432,7 @@ export let PageHeader = React.forwardRef(
       allTagsModalTitle,
       hasBackgroundAlways: deprecated_hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
+      breadcrumbLabel,
       breadcrumbs,
       children,
       className,
@@ -955,6 +960,7 @@ export let PageHeader = React.forwardRef(
                           breadcrumbs={displayedBreadcrumbs}
                           overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
                           maxVisible={undefined}
+                          label={breadcrumbLabel}
                         />
                       )}
                     </Column>

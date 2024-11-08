@@ -129,6 +129,11 @@ export let Nav = React.forwardRef(
   }
 );
 
+Nav.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
+
 Nav.propTypes = {
   /**
    * Hypertext reference for active page.

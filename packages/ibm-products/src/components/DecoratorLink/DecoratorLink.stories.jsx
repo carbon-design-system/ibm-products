@@ -11,6 +11,7 @@ import { DecoratorLink } from '.';
 import mdx from './DecoratorLink.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const scoreOptions = {
   '-1 (less than 0 is 0)': -1,
@@ -97,7 +98,15 @@ export default {
 const Template = (args) => {
   if (args.truncateValue) {
     return (
-      <>
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
         <div style={{ padding: '0 0 1rem' }}>With limited width.</div>
         <div
           style={{
@@ -108,11 +117,23 @@ const Template = (args) => {
         >
           <DecoratorLink {...args} value="Very long value to show truncation" />
         </div>
-      </>
+      </Annotation>
     );
   }
 
-  return <DecoratorLink {...args} />;
+  return (
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
+      <DecoratorLink {...args} />
+    </Annotation>
+  );
 };
 
 export const Default = Template.bind({});

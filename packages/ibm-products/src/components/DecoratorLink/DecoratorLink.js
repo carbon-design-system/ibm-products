@@ -39,6 +39,11 @@ export let DecoratorLink = React.forwardRef((props, ref) => {
   );
 });
 
+DecoratorLink.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorLink = pkg.checkComponentEnabled(DecoratorLink, componentName);
 

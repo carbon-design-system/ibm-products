@@ -10,6 +10,7 @@ import { StatusIndicatorStep } from '.';
 import mdx from './StatusIndicatorStep.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'Experimental/Components/Status indicator/StatusIndicatorStep',
@@ -33,9 +34,19 @@ export default {
 
 const Template = (args) => {
   return (
-    <ul>
-      <StatusIndicatorStep {...args} />
-    </ul>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
+      <ul>
+        <StatusIndicatorStep {...args} />
+      </ul>
+    </Annotation>
   );
 };
 

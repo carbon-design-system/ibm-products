@@ -178,7 +178,15 @@ const WithValidationTemplate = ({ slug, ...args }) => {
     retentionTime <= 0 ||
     quantity <= 0;
   return (
-    <div>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheetNarrow' : 'Open EditTearsheetNarrow'}
@@ -274,7 +282,7 @@ const WithValidationTemplate = ({ slug, ...args }) => {
           />
         </FormGroup>
       </CreateTearsheetNarrow>
-    </div>
+    </Annotation>
   );
 };
 

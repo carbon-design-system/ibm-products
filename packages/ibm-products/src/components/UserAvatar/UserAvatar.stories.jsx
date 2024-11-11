@@ -147,7 +147,7 @@ Default.storyName = 'Default';
 Default.args = {
   // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#UserAvatar-args
   name: 'thomas j. watson',
-  tooltipText: 'TW Thomas J. Watson user profile',
+  tooltipText: 'TW, Thomas J. Watson user profile',
   renderIcon: 'No icon',
 };
 
@@ -155,6 +155,6 @@ export const WithImage = Template.bind({});
 WithImage.storyName = 'WithImage';
 WithImage.args = {
   image: headshot,
-  tooltipText: 'TW Thomas J. Watson user profile',
+  tooltipText: 'TW, Thomas J. Watson user profile',
   imageDescription: 'Avatar of Thomas J. Watson',
 };

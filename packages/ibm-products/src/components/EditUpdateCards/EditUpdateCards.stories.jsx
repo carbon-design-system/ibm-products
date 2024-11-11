@@ -28,6 +28,7 @@ import {
 } from '@carbon/react/icons';
 import { pkg /*, carbon */ } from '../../settings';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'Experimental/Patterns/Edit and update/EditUpdateCards',
@@ -230,30 +231,40 @@ const Template = (args) => {
   return (
     <Grid>
       <Column sm={4} md={8}>
-        <EditUpdateCards
-          // TODO: handle events with action or local handler.
-          // onTodo={action('onTodo log action')}
-          actionIcons={
-            editMode && !loading
-              ? null
-              : editMode && loading
-              ? actionIconsLoading
-              : actionIcons
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version.
+            </div>
           }
-          previewChildren={preview}
-          editChildren={edit}
-          editMode={editMode}
-          {...args}
-          onPrimaryButtonClick={onSave}
-          onSecondaryButtonClick={() => setEditMode(false)}
-          primaryButtonIcon={Save}
-          primaryButtonText={editMode && !loading ? 'Save' : null}
-          secondaryButtonIcon={null}
-          secondaryButtonText={editMode && !loading ? 'Cancel' : null}
-          id={
-            editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
-          } /*Used id for overriding the SVG(icon) path fill*/
-        />
+        >
+          <EditUpdateCards
+            // TODO: handle events with action or local handler.
+            // onTodo={action('onTodo log action')}
+            actionIcons={
+              editMode && !loading
+                ? null
+                : editMode && loading
+                ? actionIconsLoading
+                : actionIcons
+            }
+            previewChildren={preview}
+            editChildren={edit}
+            editMode={editMode}
+            {...args}
+            onPrimaryButtonClick={onSave}
+            onSecondaryButtonClick={() => setEditMode(false)}
+            primaryButtonIcon={Save}
+            primaryButtonText={editMode && !loading ? 'Save' : null}
+            secondaryButtonIcon={null}
+            secondaryButtonText={editMode && !loading ? 'Cancel' : null}
+            id={
+              editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
+            } /*Used id for overriding the SVG(icon) path fill*/
+          />
+        </Annotation>
       </Column>
     </Grid>
   );

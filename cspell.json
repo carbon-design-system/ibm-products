@@ -1,11 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "contributors",
-    "html",
-    "packages"
-  ],
+  "dictionaries": ["contributors", "html", "packages"],
   "dictionaryDefinitions": [
     {
       "name": "contributors",
@@ -140,6 +136,7 @@
     "nonlinearreading",
     "nonselectablerows",
     "noreply",
+    "Overflowmenu",
     "overridable",
     "overscan",
     "overscroll",

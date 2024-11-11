@@ -146,7 +146,7 @@ export let AddSelectColumn = ({
               sortByLabel={sortByLabel}
             />
             {filterByOpts.length > 0 && (
-              <FeatureFlags enableV12DynamicFloatingStyles>
+              <FeatureFlags enableV12Overflowmenu>
                 <OverflowMenu
                   autoAlign
                   renderIcon={(props) => <Filter size={32} {...props} />}

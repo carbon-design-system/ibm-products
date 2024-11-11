@@ -71,7 +71,7 @@ export const AddSelectSort = ({
   return (
     <div className={blockClass}>
       {sortByOpts.length > 0 && (
-        <FeatureFlags enableV12DynamicFloatingStyles>
+        <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu
             autoAlign
             renderIcon={(props) => <ArrowsVertical size={32} {...props} />}

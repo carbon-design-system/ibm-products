@@ -74,10 +74,12 @@ const Template = ({ ...args }) => {
 
   return (
     <>
-      <style>
-        {`.${pkg.prefix}--annotation__content { height: 100% } .${pkg.prefix}--annotation { height: 100% }`}
-      </style>
+      <style>{`
+      .${pkg.prefix}--custom-annotation { height: 100% }
+      .${pkg.prefix}--custom-annotation > .${pkg.prefix}--annotation__content { height: calc(100% - 2rem) }
+      `}</style>
       <Annotation
+        className={`${pkg.prefix}--custom-annotation`}
         type="deprecation-notice"
         text={
           <div>

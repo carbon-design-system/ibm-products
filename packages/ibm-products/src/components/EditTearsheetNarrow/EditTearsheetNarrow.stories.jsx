@@ -22,6 +22,7 @@ import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'Experimental/Patterns/Edit and update/EditTearsheetNarrow',
@@ -71,7 +72,15 @@ const Template = ({ slug, ...args }) => {
     retentionTime <= 0 ||
     quantity <= 0;
   return (
-    <div>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheetNarrow' : 'Open EditTearsheetNarrow'}
@@ -148,7 +157,7 @@ const Template = ({ slug, ...args }) => {
           onChange={(event) => setQuantity(event.imaginaryTarget.value)}
         />
       </CreateTearsheetNarrow>
-    </div>
+    </Annotation>
   );
 };
 

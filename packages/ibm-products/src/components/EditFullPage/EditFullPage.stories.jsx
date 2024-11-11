@@ -73,194 +73,199 @@ const Template = ({ ...args }) => {
     useState(false);
 
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-      <CreateFullPage {...args}>
-        <CreateFullPageStep
-          className={`${storyClass}__step-fieldset--no-label`}
-          title="Partition"
-          subtitle="One or more partitions make up a topic. A partition is an ordered list
+    <>
+      <style>
+        {`.${pkg.prefix}--annotation__content { height: 100% } .${pkg.prefix}--annotation { height: 100% }`}
+      </style>
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+        <CreateFullPage {...args}>
+          <CreateFullPageStep
+            className={`${storyClass}__step-fieldset--no-label`}
+            title="Partition"
+            subtitle="One or more partitions make up a topic. A partition is an ordered list
         of messages."
-          description="Partitions are distributed across the brokers in order to increase the
+            description="Partitions are distributed across the brokers in order to increase the
         scalability of your topic. You can also use them to distribute
         messages across the members of a consumer group."
-          onNext={() => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                // Example usage of how to prevent the next step if some kind
-                // of error occurred during the `onNext` handler.
-                if (shouldReject) {
-                  setHasSubmitError(true);
-                  reject();
-                }
-                setIsInvalid(false);
-                resolve();
-              }, simulatedDelay);
-            });
-          }}
-          disableSubmit={!textInput}
-        >
-          <Grid>
-            <Column xlg={5} lg={5} md={4} sm={4}>
-              <TextInput
-                id="test-1"
-                invalidText="A valid value is required"
-                labelText="Topic name"
-                placeholder="Enter topic name"
-                value={textInput}
-                onChange={(e) => {
-                  setTextInput(e.target.value);
+            onNext={() => {
+              return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  // Example usage of how to prevent the next step if some kind
+                  // of error occurred during the `onNext` handler.
+                  if (shouldReject) {
+                    setHasSubmitError(true);
+                    reject();
+                  }
                   setIsInvalid(false);
-                }}
-                onBlur={() => {
-                  textInput.length === 0 && setIsInvalid(true);
-                }}
-                invalid={isInvalid}
-              />
-              {hasSubmitError && (
-                <InlineNotification
-                  lowContrast
-                  kind="error"
-                  title="Error"
-                  subtitle="Resolve errors to continue"
-                  onClose={() => setHasSubmitError(false)}
+                  resolve();
+                }, simulatedDelay);
+              });
+            }}
+            disableSubmit={!textInput}
+          >
+            <Grid>
+              <Column xlg={5} lg={5} md={4} sm={4}>
+                <TextInput
+                  id="test-1"
+                  invalidText="A valid value is required"
+                  labelText="Topic name"
+                  placeholder="Enter topic name"
+                  value={textInput}
+                  onChange={(e) => {
+                    setTextInput(e.target.value);
+                    setIsInvalid(false);
+                  }}
+                  onBlur={() => {
+                    textInput.length === 0 && setIsInvalid(true);
+                  }}
+                  invalid={isInvalid}
                 />
-              )}
-              <div>
+                {hasSubmitError && (
+                  <InlineNotification
+                    lowContrast
+                    kind="error"
+                    title="Error"
+                    subtitle="Resolve errors to continue"
+                    onClose={() => setHasSubmitError(false)}
+                  />
+                )}
                 <div>
-                  <DefinitionTooltip
-                    className={`${storyClass}__error--text`}
+                  <div>
+                    <DefinitionTooltip
+                      className={`${storyClass}__error--text`}
+                      size="sm"
+                      definition={
+                        'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                      }
+                    >
+                      Simulate error
+                    </DefinitionTooltip>
+                  </div>
+                  <Toggle
+                    labelText="Simulate error"
+                    hideLabel
+                    id="simulated-error-toggle"
                     size="sm"
-                    definition={
-                      'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
-                    }
-                  >
-                    Simulate error
-                  </DefinitionTooltip>
+                    onToggle={(event) => setShouldReject(event)}
+                  />
                 </div>
-                <Toggle
-                  labelText="Simulate error"
-                  hideLabel
-                  id="simulated-error-toggle"
-                  size="sm"
-                  onToggle={(event) => setShouldReject(event)}
+                <Checkbox
+                  labelText={`Include additional step`}
+                  id="include-additional-step-checkbox"
+                  onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                  checked={shouldIncludeAdditionalStep}
                 />
-              </div>
-              <Checkbox
-                labelText={`Include additional step`}
-                id="include-additional-step-checkbox"
-                onChange={(value) => setShouldIncludeAdditionalStep(value)}
-                checked={shouldIncludeAdditionalStep}
-              />
-            </Column>
-          </Grid>
-        </CreateFullPageStep>
-        <CreateFullPageStep
-          title="Dynamic step"
-          description="Example dynamic step"
-          includeStep={shouldIncludeAdditionalStep}
-        />
-        <CreateFullPageStep
-          title="Empty"
-          secondaryLabel="Optional"
-          description="Empty step for demonstration purposes"
-        />
-        <CreateFullPageStep
-          className={`${storyClass}__step-fieldset--no-label`}
-          title="Core configuration"
-          description="Here is an example description for the 'Core configuration' step."
-          secondaryLabel="Optional"
-        >
-          <Grid>
-            <Column xlg={5} lg={5} md={4} sm={4}>
-              <Grid>
-                <Column xlg={5} lg={5} md={4} sm={4}>
-                  <TextInput
-                    id="test-2"
-                    invalidText="A valid value is required"
-                    labelText="Topic name (optional)"
-                    placeholder="Enter topic name"
-                    value={textInput}
+              </Column>
+            </Grid>
+          </CreateFullPageStep>
+          <CreateFullPageStep
+            title="Dynamic step"
+            description="Example dynamic step"
+            includeStep={shouldIncludeAdditionalStep}
+          />
+          <CreateFullPageStep
+            title="Empty"
+            secondaryLabel="Optional"
+            description="Empty step for demonstration purposes"
+          />
+          <CreateFullPageStep
+            className={`${storyClass}__step-fieldset--no-label`}
+            title="Core configuration"
+            description="Here is an example description for the 'Core configuration' step."
+            secondaryLabel="Optional"
+          >
+            <Grid>
+              <Column xlg={5} lg={5} md={4} sm={4}>
+                <Grid>
+                  <Column xlg={5} lg={5} md={4} sm={4}>
+                    <TextInput
+                      id="test-2"
+                      invalidText="A valid value is required"
+                      labelText="Topic name (optional)"
+                      placeholder="Enter topic name"
+                      value={textInput}
+                    />
+                  </Column>
+                  <Column xlg={5} lg={5} md={4} sm={4}>
+                    <NumberInput
+                      id="test-3"
+                      invalidText="Number is not valid"
+                      label="Label (optional)"
+                      max={100}
+                      min={0}
+                      step={10}
+                      value={0}
+                      iconDescription="Number input"
+                    />
+                    <NumberInput
+                      id="test-4"
+                      invalidText="Number is not valid"
+                      label="Label (optional)"
+                      max={100}
+                      min={0}
+                      step={10}
+                      value={0}
+                      iconDescription="Number input"
+                    />
+                  </Column>
+                  <Column xlg={5} lg={5} md={4} sm={4}>
+                    <TextInput
+                      id="test-5"
+                      invalidText="A valid value is required"
+                      labelText="Minimum in-sync replicas (optional)"
+                      placeholder="Enter topic name"
+                      value={textInput}
+                    />
+                  </Column>
+                </Grid>
+              </Column>
+            </Grid>
+          </CreateFullPageStep>
+          <CreateFullPageStep
+            title="Message retention"
+            subtitle="This is how many copies of a topic will be made for high availability"
+            description="The partitions of each topic can be replicated across a configurable number of brokers"
+          >
+            <Grid>
+              <Column xlg={5} lg={5} md={4} sm={4}>
+                <RadioButtonGroup
+                  defaultSelected="standard"
+                  legend="Group Legend"
+                  name="radio-button-group"
+                  valueSelected="standard"
+                  orientation="vertical"
+                >
+                  <RadioButton
+                    id="radio-1"
+                    labelText="Replication factor: 1"
+                    value="standard"
                   />
-                </Column>
-                <Column xlg={5} lg={5} md={4} sm={4}>
-                  <NumberInput
-                    id="test-3"
-                    invalidText="Number is not valid"
-                    label="Label (optional)"
-                    max={100}
-                    min={0}
-                    step={10}
-                    value={0}
-                    iconDescription="Number input"
+                  <RadioButton
+                    id="radio-2"
+                    labelText="Replication factor: 2"
+                    value="default-selected"
                   />
-                  <NumberInput
-                    id="test-4"
-                    invalidText="Number is not valid"
-                    label="Label (optional)"
-                    max={100}
-                    min={0}
-                    step={10}
-                    value={0}
-                    iconDescription="Number input"
+                  <RadioButton
+                    id="radio-3"
+                    labelText="Replication factor: 3"
+                    value="disabled"
                   />
-                </Column>
-                <Column xlg={5} lg={5} md={4} sm={4}>
-                  <TextInput
-                    id="test-5"
-                    invalidText="A valid value is required"
-                    labelText="Minimum in-sync replicas (optional)"
-                    placeholder="Enter topic name"
-                    value={textInput}
-                  />
-                </Column>
-              </Grid>
-            </Column>
-          </Grid>
-        </CreateFullPageStep>
-        <CreateFullPageStep
-          title="Message retention"
-          subtitle="This is how many copies of a topic will be made for high availability"
-          description="The partitions of each topic can be replicated across a configurable number of brokers"
-        >
-          <Grid>
-            <Column xlg={5} lg={5} md={4} sm={4}>
-              <RadioButtonGroup
-                defaultSelected="standard"
-                legend="Group Legend"
-                name="radio-button-group"
-                valueSelected="standard"
-                orientation="vertical"
-              >
-                <RadioButton
-                  id="radio-1"
-                  labelText="Replication factor: 1"
-                  value="standard"
-                />
-                <RadioButton
-                  id="radio-2"
-                  labelText="Replication factor: 2"
-                  value="default-selected"
-                />
-                <RadioButton
-                  id="radio-3"
-                  labelText="Replication factor: 3"
-                  value="disabled"
-                />
-              </RadioButtonGroup>
-            </Column>
-          </Grid>
-        </CreateFullPageStep>
-      </CreateFullPage>
-    </Annotation>
+                </RadioButtonGroup>
+              </Column>
+            </Grid>
+          </CreateFullPageStep>
+        </CreateFullPage>
+      </Annotation>
+    </>
   );
 };
 
@@ -272,7 +277,15 @@ const TemplateWithSections = ({ ...args }) => {
   const [simulatedDelay] = useState(750);
 
   return (
-    <>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage className={`${blockClass}`} {...args}>
         <CreateFullPageStep
@@ -438,7 +451,7 @@ const TemplateWithSections = ({ ...args }) => {
           </Grid>
         </CreateFullPageStep>
       </CreateFullPage>
-    </>
+    </Annotation>
   );
 };
 

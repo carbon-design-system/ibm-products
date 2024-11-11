@@ -42,6 +42,7 @@ const componentName = 'BreadcrumbWithOverflow';
 export let BreadcrumbWithOverflow = ({
   breadcrumbs,
   className,
+  label,
   maxVisible,
   noTrailingSlash,
   overflowAriaLabel,
@@ -95,7 +96,7 @@ export let BreadcrumbWithOverflow = ({
         aria-hidden={true}
         ref={sizingContainerRef}
       >
-        <Breadcrumb>
+        <Breadcrumb aria-label={`${label}-hidden`}>
           <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
             <OverflowMenu
               aria-label={overflowAriaLabel}
@@ -129,7 +130,7 @@ export let BreadcrumbWithOverflow = ({
         </Breadcrumb>
       </div>
     );
-  }, [breadcrumbs, overflowAriaLabel]);
+  }, [breadcrumbs, label, overflowAriaLabel]);
 
   useEffect(() => {
     // updates displayedBreadcrumbItems and overflowBreadcrumbItems based on displayCount and breadcrumbs
@@ -308,6 +309,7 @@ export let BreadcrumbWithOverflow = ({
         {hiddenSizingItems}
 
         <Breadcrumb
+          aria-label={label}
           className={cx(`${blockClass}__breadcrumb-container`, {
             [`${blockClass}__breadcrumb-container-with-items`]:
               displayedBreadcrumbItems.length > 1,
@@ -386,6 +388,10 @@ BreadcrumbWithOverflow.propTypes = {
    * className
    */
   className: PropTypes.string,
+  /**
+   * Label for the Breadcrumb component
+   */
+  label: PropTypes.string,
   /**
    * maxVisible: maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1)
    */

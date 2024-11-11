@@ -9,8 +9,6 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
-  Grid,
-  Column,
   TextInput,
   NumberInput,
   Dropdown,
@@ -127,13 +125,9 @@ const Template = ({ slug, ...args }) => {
       }
     >
       {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content" className="story-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <EditSidePanel
         {...args}
         id="storybook-id"

@@ -27,6 +27,7 @@ import { EditSidePanel } from '.';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const sampleSlug = (
   <Slug className="slug-container" size="xs">
@@ -116,7 +117,15 @@ const Template = ({ slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [topicValue, setTopicValue] = useState('Cluster management');
   return (
-    <>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content" className="story-content">
         <Column lg={{ span: 2, start: 8 }}>
@@ -206,7 +215,7 @@ const Template = ({ slug, ...args }) => {
           value={1}
         />
       </EditSidePanel>
-    </>
+    </Annotation>
   );
 };
 

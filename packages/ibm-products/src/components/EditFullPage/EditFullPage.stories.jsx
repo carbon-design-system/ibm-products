@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { EditFullPage } from '.';
 
 import styles from '../CreateFullPage/_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;
@@ -72,7 +73,15 @@ const Template = ({ ...args }) => {
     useState(false);
 
   return (
-    <>
+    <Annotation
+      type="deprecation-notice"
+      text={
+        <div>
+          This component is deprecated and will be removed in the next major
+          version.
+        </div>
+      }
+    >
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage {...args}>
         <CreateFullPageStep
@@ -251,7 +260,7 @@ const Template = ({ ...args }) => {
           </Grid>
         </CreateFullPageStep>
       </CreateFullPage>
-    </>
+    </Annotation>
   );
 };
 

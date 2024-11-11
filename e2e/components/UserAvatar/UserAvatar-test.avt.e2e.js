@@ -58,7 +58,7 @@ test.describe('UserAvatar @avt', () => {
     await expect(tooltipTrigger).toBeVisible();
     await tooltipTrigger.hover();
     const tooltipContent = page
-      .getByText('TW Thomas J. Watson user profile')
+      .getByText('TW, Thomas J. Watson user profile')
       .first();
     await expect(tooltipContent).toBeVisible();
     // Press ESCAPE key while hover is active

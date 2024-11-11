@@ -773,6 +773,7 @@ export let NotificationsPanel = React.forwardRef(
                   renderIcon={(props) => <Settings size={16} {...props} />}
                   iconDescription={settingsIconDescription}
                   onClick={() => onSettingsClick()}
+                  hasIconOnly
                 />
               </div>
             ) : null}

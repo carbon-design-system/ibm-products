@@ -35,6 +35,7 @@ type OverflowActions = {
   itemText?: string;
   onClick?: () => void;
   onKeydown?: () => void;
+  closeMenu?: () => void;
 };
 
 type Metadata = {
@@ -180,9 +181,8 @@ export const Card = forwardRef(
                 menuAlignment="bottom-end"
                 size={size}
                 direction={pos}
-                flipped
                 aria-label={overflowAriaLabel}
-                iconDescription={iconDescription}
+                label={iconDescription}
               >
                 {overflowActions.map(({ id, ...rest }) => (
                   <OverflowMenuItem key={id} {...rest} />
@@ -432,6 +432,7 @@ Card.propTypes = {
       itemText: PropTypes.string,
       onClick: PropTypes.func,
       onKeyDown: PropTypes.func,
+      closeMenu: PropTypes.func,
     })
   ),
   overflowAriaLabel: PropTypes.string,

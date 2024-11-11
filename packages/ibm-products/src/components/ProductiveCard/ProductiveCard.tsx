@@ -34,6 +34,7 @@ type overflowAction = {
   itemText?: string;
   onClick?: () => void;
   onKeydown?: () => void;
+  closeMenu?: () => void;
 };
 type PlacementType = 'top' | 'bottom';
 type ClickZoneType = 'one' | 'two' | 'three';
@@ -262,6 +263,7 @@ ProductiveCard.propTypes = {
       itemText: PropTypes.string,
       onClick: PropTypes.func,
       onKeyDown: PropTypes.func,
+      closeMenu: PropTypes.func,
     })
   ),
   /**

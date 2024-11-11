@@ -174,12 +174,14 @@ describe(componentName, () => {
   it('renders productive with overflow', async () => {
     const { click } = userEvent;
     const onClick = jest.fn();
+    const closeMenu = jest.fn();
     const props = {
       overflowActions: [
         {
           id: '1',
           itemText: 'Edit',
           onClick,
+          closeMenu,
         },
       ],
       overflowAriaLabel: 'Overflow menu',

@@ -139,6 +139,7 @@ interface EditTearsheetProps extends PropsWithChildren {
 }
 
 /**
+ * **This component is deprecated** <br>
  * Use Tearsheet with medium to complex edits. See usage guidance for further information.
  */
 export let EditTearsheet = forwardRef(
@@ -275,6 +276,12 @@ export let EditTearsheet = forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+EditTearsheet.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated and will be removed in the next major version.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 EditTearsheet = pkg.checkComponentEnabled(EditTearsheet, componentName);

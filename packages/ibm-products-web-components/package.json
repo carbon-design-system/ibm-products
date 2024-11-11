@@ -84,7 +84,7 @@
     "rimraf": "^5.0.5",
     "rollup": "^3.29.5",
     "rollup-plugin-copy": "^3.5.0",
-    "sass": "^1.77.2",
+    "sass": "^1.80.6",
     "storybook": "^8.2.8",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "typescript": "^5.5.3",

@@ -89,7 +89,7 @@
     "rimraf": "^5.0.5",
     "rollup": "^3.29.5",
     "rollup-plugin-strip-banner": "^3.0.0",
-    "sass": "^1.77.2",
+    "sass": "^1.80.6",
     "typescript-config-carbon": "^0.3.0",
     "yargs": "^17.7.2"
   },

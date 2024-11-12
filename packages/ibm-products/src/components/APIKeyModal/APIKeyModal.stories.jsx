@@ -396,7 +396,7 @@ GenerateWithError.args = {
 export const InstantGenerate = InstantTemplate.bind({});
 InstantGenerate.args = {
   ...defaultProps,
-  apiKeyLabel: '',
+  apiKeyLabel: 'Unique API Key',
 };
 
 export const CustomGenerate = MultiStepTemplate.bind({});

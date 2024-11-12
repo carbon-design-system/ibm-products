@@ -1,6 +1,7 @@
 # Percy config
 version: 2
 snapshot:
+  timeout: 200
   widths:
     - 360
     - 1366

@@ -171,16 +171,15 @@ export const Card = forwardRef(
     // actions can either be an overflow menu or series of icons
     const getActions = () => {
       if (overflowActions.length > 0) {
-        const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
+        const pos = actionsPlacement === 'top' ? 'bottom-end' : 'top-end';
         const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
           <Layer level={2}>
             <FeatureFlags enableV12Overflowmenu>
               <OverflowMenu
                 autoAlign
-                menuAlignment="bottom-end"
+                menuAlignment={pos}
                 size={size}
-                direction={pos}
                 aria-label={overflowAriaLabel}
                 label={iconDescription}
               >

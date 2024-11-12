@@ -104,6 +104,12 @@ export let Datagrid = React.forwardRef(
   }
 );
 
+/**@ts-ignore*/
+Datagrid.deprecated = {
+  level: 'warn',
+  details: `${componentName} will be deprecated in the next major version`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
 

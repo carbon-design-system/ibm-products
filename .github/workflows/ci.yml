@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
@@ -59,14 +59,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: lint-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -79,14 +79,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: spellcheck-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -99,14 +99,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: test-c4p-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -124,14 +124,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key:
@@ -148,9 +148,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: '20.x'
           cache: yarn
@@ -195,3 +195,4 @@ jobs:
     steps:
       - name: Check AVT Runner job status
         if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1

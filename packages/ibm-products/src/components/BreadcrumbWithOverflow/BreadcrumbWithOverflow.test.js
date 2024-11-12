@@ -152,9 +152,10 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     // item 2 contains an overflow menu
-    const overflowBtn = screen.getByLabelText(/Open and close/, {
-      selector: `.${blockClass}__overflow-menu`,
-    });
+    const overflowBtn = document.querySelector(
+      `.${blockClass}__overflow-menu button`
+    );
+
     await act(() => click(overflowBtn));
 
     // <ul role='menu' /> but default <ul> role of list used for query

@@ -8,8 +8,16 @@ snapshot:
 storybook:
   include: ['/IBM Products/']
   exclude: [
-      # Exclude the following snapshots until randomized data is removed
-      '/Datagrid/**', #excluding datagrid in percy in favour of tanstack carbon
+      # Exclude the entire Datagrid folder and its contents
+      '/Datagrid/*',
+      # Exclude individual snapshots
+      '/Datagrid/ClickableRow/',
+      '/Datagrid/ColumnCustomization/',
+      '/Datagrid/EditableCell/',
+      '/Datagrid/ExpandableRow/',
+      '/Datagrid/NestedRows/',
+      '/Datagrid/RowHeightSettings/',
+      '/Datagrid/Slug/',
       '/Datagrid: Batch Actions/',
       '/Datagrid: Disable Select Row/',
       '/Datagrid: With Virtualized Data/',

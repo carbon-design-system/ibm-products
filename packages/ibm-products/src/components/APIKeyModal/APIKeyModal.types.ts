@@ -148,6 +148,11 @@ interface APIKeyModalCommonProps {
    */
   portalTarget?: ReactNode;
   /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus?: string;
+  /**
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel?: string;

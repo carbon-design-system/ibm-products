@@ -11,7 +11,8 @@ import {
   Button,
   IconButton,
   OverflowMenu,
-  OverflowMenuItem,
+  MenuItem,
+  // OverflowMenuItem,
   Layer,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
@@ -35,7 +36,6 @@ type OverflowActions = {
   itemText?: string;
   onClick?: () => void;
   onKeydown?: () => void;
-  closeMenu?: () => void;
 };
 
 type Metadata = {
@@ -184,8 +184,8 @@ export const Card = forwardRef(
                 aria-label={overflowAriaLabel}
                 label={iconDescription}
               >
-                {overflowActions.map(({ id, ...rest }) => (
-                  <OverflowMenuItem key={id} {...rest} />
+                {overflowActions.map(({ id, itemText, ...rest }) => (
+                  <MenuItem key={id} label={itemText} {...rest} />
                 ))}
               </OverflowMenu>
             </FeatureFlags>
@@ -432,7 +432,6 @@ Card.propTypes = {
       itemText: PropTypes.string,
       onClick: PropTypes.func,
       onKeyDown: PropTypes.func,
-      closeMenu: PropTypes.func,
     })
   ),
   overflowAriaLabel: PropTypes.string,

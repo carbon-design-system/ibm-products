@@ -187,14 +187,12 @@ WithOverflow.args = {
       itemText: 'Edit',
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
-      closeMenu: () => {},
     },
     {
       id: '2',
       itemText: 'Delete',
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
-      closeMenu: () => {},
     },
   ],
 };

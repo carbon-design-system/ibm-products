@@ -6,6 +6,7 @@ on:
       - main
       - v1
       - 'release/v2*'
+      - vrt-setup-5236
   merge_group:
     types: [checks_requested]
 
@@ -173,6 +174,11 @@ jobs:
         if: github.repository == 'carbon-design-system/ibm-products'
         run: |
           yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shard }}/4"
+      - name: Run VRT
+        working-directory: packages/core
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+        run: yarn percy storybook http://localhost:3000
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results

@@ -35,6 +35,8 @@
     "@carbon/react": "^1.69.0",
     "@carbon/themes": "^11.43.0",
     "@carbon/type": "^11.33.0",
+    "@percy/cli": "^1.24.2",
+    "@percy/storybook": "^6.0.0",
     "@storybook/addon-a11y": "^8.1.10",
     "@storybook/addon-actions": "^8.0.9",
     "@storybook/addon-controls": "^8.0.9",

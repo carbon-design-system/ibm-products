@@ -282,7 +282,7 @@ export let CreateTearsheet = forwardRef(
       isSubmitting,
       componentBlockClass: blockClass,
       experimentalSecondarySubmit,
-      experimentalSecondarySubmitText: experimentalSecondarySubmit.labelText
+      experimentalSecondarySubmitText: experimentalSecondarySubmit?.labelText
         ? experimentalSecondarySubmit.labelText
         : experimentalSecondarySubmitText,
       setCreateComponentActions: setCreateTearsheetActions,

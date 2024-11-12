@@ -31,18 +31,22 @@ export interface TooltipTriggerProps extends PropsWithChildren {
  * no blanked button.
  */
 export let TooltipTrigger = React.forwardRef<
-  HTMLDivElement,
+  HTMLButtonElement,
   TooltipTriggerProps
 >(
-  ({
-    children,
-    className,
-    // Collect any other property values passed in.
-    ...rest
-  }) => {
+  (
+    {
+      children,
+      className,
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <button
         type="button"
+        ref={ref}
         {...rest}
         className={cx(
           blockClass, // Apply the block class to the main HTML element

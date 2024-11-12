@@ -121,7 +121,7 @@ export let AboutModal = React.forwardRef(
     {
       additionalInfo,
       className,
-      closeIconDescription,
+      //  closeIconDescription,
       copyrightText,
       content,
       links,
@@ -130,7 +130,7 @@ export let AboutModal = React.forwardRef(
       onClose,
       open,
       portalTarget: portalTargetIn,
-      title,
+      //  title,
       version,
       // Collect any other property values passed in.
       ...rest
@@ -177,8 +177,8 @@ export let AboutModal = React.forwardRef(
           <ModalHeader
             className={`${blockClass}__header`}
             closeModal={onClose}
-            iconDescription={closeIconDescription}
-            label={title}
+            iconDescription={'closeIconDescription'}
+            label={'title'}
             labelClassName={`${blockClass}__title`}
           />
           <ModalBody className={`${blockClass}__body`}>

@@ -12,7 +12,6 @@ import {
   IconButton,
   OverflowMenu,
   MenuItem,
-  // OverflowMenuItem,
   Layer,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';

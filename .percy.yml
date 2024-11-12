@@ -10,17 +10,6 @@ storybook:
   exclude: [
       # Exclude the entire Datagrid folder and its contents
       '/Datagrid/*',
-      # Exclude individual snapshots
-      '/Datagrid/ClickableRow/',
-      '/Datagrid/ColumnCustomization/',
-      '/Datagrid/EditableCell/',
-      '/Datagrid/ExpandableRow/',
-      '/Datagrid/NestedRows/',
-      '/Datagrid/RowHeightSettings/',
-      '/Datagrid/Slug/',
-      '/Datagrid: Batch Actions/',
-      '/Datagrid: Disable Select Row/',
-      '/Datagrid: With Virtualized Data/',
       '/DataSpreadsheet/',
       '/MultiAddSelect: With Avatars/',
       '/Tag set/TagSet: Five Tags/',

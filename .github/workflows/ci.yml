@@ -120,7 +120,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: CI snapshot tests for c4p
         run: yarn ci-check:test:c4p:snapshot
-  test-community:
+  test-c4p-wc:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -16,11 +16,6 @@ const DocsPage = () => (
     deprecationNotice={`\`Datagrid\` will be deprecated in the next major version and moving to an example based approach. For more information please refer to the [migration docs](https://github.com/carbon-design-system/tanstack-carbon).`}
     blocks={[
       {
-        title: 'Deprecation notice',
-        description:
-          '`Datagrid` will be deprecated in the next major version and moving to an example based approach. For more information please refer to the [migration docs](https://github.com/carbon-design-system/tanstack-carbon).',
-      },
-      {
         title: 'Getting started',
         description: `You can use the \`Datagrid\` component to create various kinds of Carbon data tables. Simply import the \`Datagrid\` along with any accompanying hooks (listed below) depending on what extensions you'd like to be included.`,
         source: {

@@ -50,8 +50,9 @@ export interface EditTearsheetNarrowProps {
 }
 
 /**
- * **This component is deprecated** <br>
+ * **This component is deprecated.** <br>
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling. See usage guidance for further information.
+ * @deprecated
  */
 export let EditTearsheetNarrow = React.forwardRef(
   (

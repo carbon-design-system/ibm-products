@@ -128,8 +128,9 @@ export interface EditSidePanelProps {
 }
 
 /**
- * **This component is deprecated** <br>
+ * **This component is deprecated.** <br>
  * Use with medium complexity edits if the user needs page context.
+ * @deprecated
  */
 export let EditSidePanel = React.forwardRef(
   (

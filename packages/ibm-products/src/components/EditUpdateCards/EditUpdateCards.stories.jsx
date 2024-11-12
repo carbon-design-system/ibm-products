@@ -31,7 +31,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditUpdateCards',
+  title: 'Deprecated/Edit and update/EditUpdateCards',
   component: EditUpdateCards,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

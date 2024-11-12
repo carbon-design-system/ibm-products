@@ -25,7 +25,7 @@ import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditTearsheetNarrow',
+  title: 'Deprecated/Edit and update/EditTearsheetNarrow',
   component: EditTearsheetNarrow,
   tags: ['autodocs'],
   parameters: {

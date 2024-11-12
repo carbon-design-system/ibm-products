@@ -12,7 +12,7 @@ import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsh
 import { slugArgTypes } from '../../global/js/story-parts/slug';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditTearsheet',
+  title: 'Deprecated/Edit and update/EditTearsheet',
   component: EditTearsheet,
   tags: ['autodocs'],
   argTypes: {

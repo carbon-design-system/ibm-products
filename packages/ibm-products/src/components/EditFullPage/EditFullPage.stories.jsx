@@ -35,7 +35,7 @@ import {
 import DocsPage from './EditFullPage.docs-page';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditFullPage',
+  title: 'Deprecated/Edit and update/EditFullPage',
   component: EditFullPage,
   tags: ['autodocs'],
   parameters: {

@@ -55,6 +55,15 @@ const taskLists = [
           // handleClick(task.guid);
         },
       },
+      {
+        kind: 'indeterminate',
+        label: 'Task name',
+        onClick: (task) => {
+          action('task')(task);
+          // E.g. define your own inline code
+          // window.open('https://www.ibm.com/', '_blank').focus();
+        },
+      },
     ],
   },
 ];

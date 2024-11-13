@@ -180,6 +180,13 @@ export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
   }
 );
 
+/**@ts-ignore*/
+EmptyStateV2.deprecated = {
+  level: 'warn',
+  details:
+    'For more information, please refer to the Carbon docs https://carbondesignsystem.com/patterns/empty-states-pattern/',
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 EmptyStateV2 = pkg.checkComponentEnabled(EmptyStateV2, componentName);
 

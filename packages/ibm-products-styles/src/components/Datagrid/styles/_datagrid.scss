@@ -44,7 +44,7 @@
 
       .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
-        z-index: 1;
+        z-index: 10;
         left: 0;
       }
     }
@@ -572,7 +572,7 @@
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
-    z-index: 1;
+    z-index: 10;
     left: 0;
     background-color: $layer-accent-01;
   }

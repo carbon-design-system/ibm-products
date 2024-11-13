@@ -17,12 +17,8 @@ storybook:
       # Datagrid DataSpreadsheet
       '/Datagrid/*',
       '/DataSpreadsheet/',
-      # PageHeader
       '/Page header/*',
-      # TagSet
       '/Tag set/*',
-      # MultiAddSelect
       '/MultiAddSelect: With Avatars/',
-      # FullPageError
       '/FullPageError/*',
     ]

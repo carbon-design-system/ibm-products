@@ -25,7 +25,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: 'Deprecated/Datagrid/RowActionButtons',
+  title: 'Deprecated/Datagrid/Datagrid/RowActionButtons',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

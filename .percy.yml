@@ -18,12 +18,7 @@ storybook:
       '/Datagrid/*',
       '/DataSpreadsheet/',
       # PageHeader
-      '/Page header/PageHeader: Page header in context/',
-      '/Page header/PageHeader: Page header with actions toolbar/',
-      '/Page header/PageHeader: Page header with all items, pre-collapsed/',
-      '/Page header/PageHeader: Page header with long values and many items/',
-      '/Page header/PageHeader: Page header with tags and navigation tabs/',
-      '/Page header/PageHeader: Page header with tags',
+      '/Page header/*',
       # TagSet
       '/Tag set/*',
       # MultiAddSelect

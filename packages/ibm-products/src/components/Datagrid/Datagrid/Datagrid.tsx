@@ -108,7 +108,7 @@ export let Datagrid = React.forwardRef(
 /**@ts-ignore*/
 Datagrid.deprecated = {
   level: 'warn',
-  details: `${componentName} will be deprecated in the next major version`,
+  details: `For more information, please refer to the migration docs https://github.com/carbon-design-system/tanstack-carbon`,
 };
 
 // Return a placeholder if not released and not enabled by feature flag

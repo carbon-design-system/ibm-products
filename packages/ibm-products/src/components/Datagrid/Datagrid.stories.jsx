@@ -64,8 +64,8 @@ export default {
           type="deprecation-notice"
           text={
             <div>
-              This component is deprecated and will be removed in the next major
-              version. Please refer to the{' '}
+              This component is deprecated and will be moving to an
+              example-based approach. For more information, please refer to the{' '}
               <a href="https://github.com/carbon-design-system/tanstack-carbon">
                 migration documentation
               </a>

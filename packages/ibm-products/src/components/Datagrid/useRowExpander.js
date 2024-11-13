@@ -15,8 +15,8 @@ import { useFocusRowExpander } from './useFocusRowExpander';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useRowExpander = (hooks) => {
-  const tempState = useRef();
-  const lastExpandedRowIndex = useRef();
+  const tempState = useRef(undefined);
+  const lastExpandedRowIndex = useRef(undefined);
   const useInstance = (instance) => {
     tempState.current = instance;
   };
@@ -41,11 +41,10 @@ const useRowExpander = (hooks) => {
             row?.onClick?.(row, event);
             lastExpandedRowIndex.current = row.id;
           },
+          title: null,
         };
-        const {
-          expanderButtonTitleExpanded = 'Collapse row',
-          expanderButtonTitleCollapsed = 'Expand row',
-        } = tempState?.current || {};
+        const { expanderButtonTitleExpanded, expanderButtonTitleCollapsed } =
+          tempState?.current || {};
         const expanderTitle = row.isExpanded
           ? expanderButtonTitleExpanded
           : expanderButtonTitleCollapsed;

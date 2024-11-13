@@ -269,11 +269,7 @@ export let ExportModal = forwardRef(
       ['data-modal-primary-focus']: true,
     };
     return renderPortalUse(
-      <FeatureFlags
-        flags={{
-          'enable-experimental-focus-wrap-without-sentinels': true,
-        }}
-      >
+      <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
         <ComposedModal
           {...rest}
           className={cx(blockClass, className)}

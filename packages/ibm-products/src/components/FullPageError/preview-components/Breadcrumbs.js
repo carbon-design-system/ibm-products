@@ -12,44 +12,24 @@ import React from 'react';
 import { string } from 'prop-types';
 import { BreadcrumbWithOverflow } from '../../BreadcrumbWithOverflow';
 
+const makeCrumbs = (n) =>
+  Array.from(Array(n)).map((i, idx) => ({
+    href: '/#',
+    id: `id-${idx}`,
+    key: `${idx}`,
+    label: `Link ${idx}`,
+    onClick: () => {},
+  }));
+
 export const Breadcrumbs = ({ className }) => {
-  const breadcrumbs = [
-    {
-      href: '/#',
-      id: 'id-1',
-      key: '1',
-      label: 'Breadcrumb',
-      onClick: () => {},
-    },
-    {
-      href: '/#',
-      id: 'id-2',
-      key: '2',
-      label: 'Breadcrumb',
-      onClick: () => {},
-    },
-    {
-      href: '/#',
-      id: 'id-3',
-      key: '3',
-      label: 'Breadcrumb',
-      onClick: () => {},
-    },
-    {
-      href: '/#',
-      id: 'id-4',
-      key: '4',
-      label: 'Breadcrumb',
-      onClick: () => {},
-      title: 'Breadcrumb 4 title',
-    },
-  ];
+  const breadcrumbs = makeCrumbs(4);
 
   return (
     <BreadcrumbWithOverflow
       className={className}
       breadcrumbs={breadcrumbs}
       overflowAriaLabel="open breadcrumbs"
+      label="Breadcrumbs"
     />
   );
 };

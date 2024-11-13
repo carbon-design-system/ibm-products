@@ -16,8 +16,8 @@ import { handleDynamicRowCheck } from './Datagrid/addons/stateReducer';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useNestedRowExpander = (hooks) => {
-  const tempState = useRef();
-  const lastExpandedRowIndex = useRef();
+  const tempState = useRef(undefined);
+  const lastExpandedRowIndex = useRef(undefined);
   const useInstance = (instance) => {
     tempState.current = instance;
   };

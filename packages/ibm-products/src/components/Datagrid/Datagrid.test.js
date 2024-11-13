@@ -326,7 +326,7 @@ const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
     DatagridPagination,
   });
 
-  return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
+  return <Datagrid datagridState={{ ...dataGridState }} {...rest} />;
 };
 
 const TenThousandEntries = ({ ...rest } = {}) => {
@@ -406,6 +406,8 @@ const ExpandedRow = ({ ...rest } = {}) => {
       data,
       ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: 95,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
     },
     useExpandedRow
   );
@@ -609,6 +611,8 @@ const NestedTable = ({ ...rest } = {}) => {
       data,
       ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row',
     },
     useExpandedRow
   );
@@ -1012,7 +1016,7 @@ describe(componentName, () => {
   });
 
   it('renders a Batch Actions Table', async () => {
-    render(<BatchActions data-testid={dataTestId}></BatchActions>);
+    render(<BatchActions data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1206,7 +1210,7 @@ describe(componentName, () => {
   });
 
   it('Infinite Scroll', async () => {
-    render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
+    render(<InfiniteScroll data-testid={dataTestId} />);
 
     expect(
       screen
@@ -1247,7 +1251,7 @@ describe(componentName, () => {
   });
 
   it('With Pagination', async () => {
-    render(<WithPagination data-testid={dataTestId}></WithPagination>);
+    render(<WithPagination data-testid={dataTestId} />);
 
     expect(
       document.getElementById(`${carbon.prefix}-pagination-select-4`)
@@ -1340,7 +1344,7 @@ describe(componentName, () => {
   }
 
   it('Is Hover On Row', async () => {
-    render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+    render(<IsHoverOnRow data-testid={dataTestId} />);
     completeHoverOperation(1);
 
     completeHoverOperation(5);
@@ -1348,7 +1352,7 @@ describe(componentName, () => {
 
   //Disables Selected Rows
   it('Renders Disable Select Row', async () => {
-    render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
+    render(<DisableSelectRow data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1538,7 +1542,7 @@ describe(componentName, () => {
   }
 
   it('Hide Select All', async () => {
-    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+    render(<HideSelectAll data-testid={dataTestId} />);
 
     hideSelectAll(2);
 
@@ -1599,7 +1603,7 @@ describe(componentName, () => {
   });
 
   it('Nested Table', async () => {
-    render(<NestedTable data-testid={dataTestId}></NestedTable>);
+    render(<NestedTable data-testid={dataTestId} />);
     const firstRowExpander = screen.getAllByLabelText('Expand row')[0];
     const firstRow = screen.getAllByRole('row')[1];
     fireEvent.click(firstRowExpander);
@@ -1673,7 +1677,7 @@ describe(componentName, () => {
   }
 
   it('Radio Select', async () => {
-    render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
+    render(<RadioSelect data-testid={dataTestId} />);
     radioSelectButton(1, 1);
 
     radioSelectButton(1, 4);
@@ -1687,9 +1691,7 @@ describe(componentName, () => {
   it('Select Items In All Pages', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
-    render(
-      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
-    );
+    render(<SelectItemsInAllPages data-testid={dataTestId} />);
     // check if 10 rows are rendered on initial load
     var numRows = screen
       .getByRole('table')
@@ -1943,7 +1945,7 @@ describe(componentName, () => {
   });
 
   it('Selectable Row', async () => {
-    render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
+    render(<SelectableRow data-testid={dataTestId} />);
 
     fireEvent.click(
       screen
@@ -2036,12 +2038,7 @@ describe(componentName, () => {
       },
     ];
     const columns = [...columnsWithoutSticky, ...defaultHeader.slice(2)];
-    render(
-      <CustomizingColumns
-        data-testid={dataTestId}
-        columns={columns}
-      ></CustomizingColumns>
-    );
+    render(<CustomizingColumns data-testid={dataTestId} columns={columns} />);
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
@@ -2060,7 +2057,7 @@ describe(componentName, () => {
   });
 
   it('Customizing Columns', async () => {
-    render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
+    render(<CustomizingColumns data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -2324,6 +2321,8 @@ describe(componentName, () => {
   });
 
   const sharedFilterGridProps = {
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -2393,9 +2392,8 @@ describe(componentName, () => {
     // Add value to dropdown and apply to filter panel
     const statusAccordion = screen.getByRole('button', { name: 'Status' });
     await click(statusAccordion);
-    const statusDropdown = screen.getByRole('combobox', {
-      name: 'Marital status',
-    });
+    const statusDropdown = screen.getByLabelText('Marital status dropdown');
+
     await click(statusDropdown);
     const dropdownOption = screen.getByRole('option', { name: 'single' });
     await click(dropdownOption);
@@ -2540,15 +2538,13 @@ describe(componentName, () => {
     expect(innerContainer.childElementCount).toEqual(1);
   });
   const findFilterTagAndRemove = async () => {
-    const filterTagCloseButtons = screen.getAllByLabelText('Clear filter');
+    const filterTagCloseButtons = screen.getAllByLabelText('Dismiss');
     const visibleFilterTags = filterTagCloseButtons.filter((el) =>
-      el.parentElement.parentElement.classList.contains(
-        `${pkg.prefix}--tag-set__displayed-tag`
-      )
+      el.closest(`.${pkg.prefix}--tag-set__displayed-tag`)
     );
     await click(visibleFilterTags[0]);
     const checkAgainForCloseFilterButton =
-      screen.queryAllByLabelText('Clear filter');
+      screen.queryAllByLabelText('Dismiss');
     expect(checkAgainForCloseFilterButton).toEqual([]);
   };
   it('should render initial filters in panel and test close button on filter tag', async () => {

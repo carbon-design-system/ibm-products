@@ -82,6 +82,17 @@ export default {
       },
       options: [0, 1],
     },
+    aiLabel: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'No AI label',
+          1: 'with AI label',
+        },
+        default: 0,
+      },
+      options: [false, true],
+    },
   },
   decorators: [
     (Story) => {

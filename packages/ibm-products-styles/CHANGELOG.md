@@ -3,6 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.50.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.44.0-rc.0...@carbon/ibm-products-styles@2.50.0-rc.0) (2024-11-11)
+
+
+### Bug Fixes
+
+* **conditionBuilder:** _conditionBuilderItem.scss causing sass warnings ([#5906](https://github.com/carbon-design-system/ibm-products/issues/5906)) ([2100bd4](https://github.com/carbon-design-system/ibm-products/commit/2100bd4134628ce785c411f582cd3e5d2b53cbbb))
+* **conditionBuilder:** release review changes1 ([#6133](https://github.com/carbon-design-system/ibm-products/issues/6133)) ([d3f08bc](https://github.com/carbon-design-system/ibm-products/commit/d3f08bcd0b479a84e69fc29dfe03a931618168a7))
+* createTearsheet height fix ([#6111](https://github.com/carbon-design-system/ibm-products/issues/6111)) ([00a472f](https://github.com/carbon-design-system/ibm-products/commit/00a472fb18ccc231343f0851fbae76e9d98db300))
+* **datagrid:** adds missing header hover styles in v2 ([#6272](https://github.com/carbon-design-system/ibm-products/issues/6272)) ([2311bdb](https://github.com/carbon-design-system/ibm-products/commit/2311bdb7477e72a6cd4d7f915f6dc754874b7375))
+* **DataGrid:** column headers vertically misaligned for sortable ([#5994](https://github.com/carbon-design-system/ibm-products/issues/5994)) ([df0ade1](https://github.com/carbon-design-system/ibm-products/commit/df0ade1c26c17448aa2dd212d75e88f1c4544e61))
+* **Datagrid:** csp violation ([#5831](https://github.com/carbon-design-system/ibm-products/issues/5831)) ([73a9824](https://github.com/carbon-design-system/ibm-products/commit/73a98242150e421a7c414bf7743f453a2234caba))
+* **dataGrid:** header scroll issues ([#6135](https://github.com/carbon-design-system/ibm-products/issues/6135)) ([9d60c0c](https://github.com/carbon-design-system/ibm-products/commit/9d60c0cd0f0ab98ba87915eb50a9de2a55dff5a1))
+* editinplace replace outline with border ([#5869](https://github.com/carbon-design-system/ibm-products/issues/5869)) ([0fb5afd](https://github.com/carbon-design-system/ibm-products/commit/0fb5afd7c210e6b726f67887b8126f3f0692c106))
+* **EditInPlace:** focus and style issue ([#6146](https://github.com/carbon-design-system/ibm-products/issues/6146)) ([831a0bc](https://github.com/carbon-design-system/ibm-products/commit/831a0bc7da65e65c09228cf2b292cbb879484d3a))
+* **Pageheader:** scrollable headers are not tabbable ([#6145](https://github.com/carbon-design-system/ibm-products/issues/6145)) ([ed578ec](https://github.com/carbon-design-system/ibm-products/commit/ed578ec0d45dcd72a7c96fd1e8370d4a67019ec6))
+* remove ellipsis from EditInPlace ([#6098](https://github.com/carbon-design-system/ibm-products/issues/6098)) ([0b40cce](https://github.com/carbon-design-system/ibm-products/commit/0b40cce8451abd0e509a6b16490fff862496b414))
+* **SidePanel:** style issue with multi select ([#6123](https://github.com/carbon-design-system/ibm-products/issues/6123)) ([feb6a99](https://github.com/carbon-design-system/ibm-products/commit/feb6a993cb0971442cca80f4c7c86d90eede0bbf))
+* **TagOverflow:** use operational tag ([#6132](https://github.com/carbon-design-system/ibm-products/issues/6132)) ([791cbec](https://github.com/carbon-design-system/ibm-products/commit/791cbecb2319ce832c1a6341c0a8fbf16b76a3e0))
+* **TagSet:** modal gradient ([#4478](https://github.com/carbon-design-system/ibm-products/issues/4478)) ([459109d](https://github.com/carbon-design-system/ibm-products/commit/459109d08ca6baf6a66954dd6fa49360dc553dc6))
+* **tearsheet:** slug spacing ([#6023](https://github.com/carbon-design-system/ibm-products/issues/6023)) ([1db6688](https://github.com/carbon-design-system/ibm-products/commit/1db66886b00f9540825988c7397fe6c84411d26a))
+* these at imports should not exist ([#6359](https://github.com/carbon-design-system/ibm-products/issues/6359)) ([3ea78f2](https://github.com/carbon-design-system/ibm-products/commit/3ea78f2cefc632bfec990026418a4851b3f582f0))
+* update Carbon 11 compatible versions to latest ([#6054](https://github.com/carbon-design-system/ibm-products/issues/6054)) ([0ac7669](https://github.com/carbon-design-system/ibm-products/commit/0ac76692a6eeb85655ca64ca9189297708e26bd9))
+* update to Carbon 11 compatible versions to latest ([#5987](https://github.com/carbon-design-system/ibm-products/issues/5987)) ([173e6c6](https://github.com/carbon-design-system/ibm-products/commit/173e6c6455a4fe619d56148ab432926bc6c640a4))
+* update to Carbon 11 compatible versions to latest ([#6214](https://github.com/carbon-design-system/ibm-products/issues/6214)) ([911c341](https://github.com/carbon-design-system/ibm-products/commit/911c341d258b410ff2109ecb39293c2670796a0e))
+* update to Carbon 11 compatible versions to latest ([#6343](https://github.com/carbon-design-system/ibm-products/issues/6343)) ([71a201a](https://github.com/carbon-design-system/ibm-products/commit/71a201a50fbebe76699ffb0d7df1d2d998370256))
+* **UserAvatar:** release review fixes ([#6293](https://github.com/carbon-design-system/ibm-products/issues/6293)) ([eafbba3](https://github.com/carbon-design-system/ibm-products/commit/eafbba33b6c9630457eeb0c6d86d030ee699940f))
+
+
+### Features
+
+* **`ibm-products-web-components`:** setup new web component package and storybook ([#6148](https://github.com/carbon-design-system/ibm-products/issues/6148)) ([6962187](https://github.com/carbon-design-system/ibm-products/commit/6962187634ba4317c5a4dcbf495978a176efcb79))
+* **cards:** renames slug to aiLabel ([#6167](https://github.com/carbon-design-system/ibm-products/issues/6167)) ([5b94ed8](https://github.com/carbon-design-system/ibm-products/commit/5b94ed8d01638db747277f104d9f7dd9ab2e0eb3))
+* **ConditionBuilder:** enhancing the conditional operators section that manages the primary logic flow ([#5921](https://github.com/carbon-design-system/ibm-products/issues/5921)) ([91733fb](https://github.com/carbon-design-system/ibm-products/commit/91733fb43157eab26c885f0652adaf9276f372d4))
+* **Conditionbuilder:** renaming both variants to Hierarchical and Non-Hierarchical ([#5847](https://github.com/carbon-design-system/ibm-products/issues/5847)) ([791e2b3](https://github.com/carbon-design-system/ibm-products/commit/791e2b31549f3f4480cac2fc142e550b5e12ea31))
+* **datagrids:** Add custom batch actions display min ([#5776](https://github.com/carbon-design-system/ibm-products/issues/5776)) ([485e8bc](https://github.com/carbon-design-system/ibm-products/commit/485e8bcac3193e56d65721076160944b4e126256))
+* **Datagrid:** slug to aiLabel renaming ([#6151](https://github.com/carbon-design-system/ibm-products/issues/6151)) ([b0b3c1c](https://github.com/carbon-design-system/ibm-products/commit/b0b3c1cf40199e7458584ea1d9093224264e1f4c))
+* **tagset:** support for size on overflow tag ([#6065](https://github.com/carbon-design-system/ibm-products/issues/6065)) ([ba29c09](https://github.com/carbon-design-system/ibm-products/commit/ba29c0950f1fcc7388e58523e94a32abd588d59d))
+* **Tearsheet:** Slug to aiLabel ([#6169](https://github.com/carbon-design-system/ibm-products/issues/6169)) ([5c0f2ad](https://github.com/carbon-design-system/ibm-products/commit/5c0f2adf55e6c9c7f081dab72ab711b611593476))
+
+
+
+
+
+# [2.49.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.49.0-rc.0...@carbon/ibm-products-styles@2.49.0) (2024-11-06)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
+# [2.49.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.44.0-rc.0...@carbon/ibm-products-styles@2.49.0-rc.0) (2024-10-28)
+
+
+### Bug Fixes
+
+* **conditionBuilder:** _conditionBuilderItem.scss causing sass warnings ([#5906](https://github.com/carbon-design-system/ibm-products/issues/5906)) ([2100bd4](https://github.com/carbon-design-system/ibm-products/commit/2100bd4134628ce785c411f582cd3e5d2b53cbbb))
+* **conditionBuilder:** release review changes1 ([#6133](https://github.com/carbon-design-system/ibm-products/issues/6133)) ([d3f08bc](https://github.com/carbon-design-system/ibm-products/commit/d3f08bcd0b479a84e69fc29dfe03a931618168a7))
+* createTearsheet height fix ([#6111](https://github.com/carbon-design-system/ibm-products/issues/6111)) ([00a472f](https://github.com/carbon-design-system/ibm-products/commit/00a472fb18ccc231343f0851fbae76e9d98db300))
+* **datagrid:** adds missing header hover styles in v2 ([#6272](https://github.com/carbon-design-system/ibm-products/issues/6272)) ([2311bdb](https://github.com/carbon-design-system/ibm-products/commit/2311bdb7477e72a6cd4d7f915f6dc754874b7375))
+* **DataGrid:** column headers vertically misaligned for sortable ([#5994](https://github.com/carbon-design-system/ibm-products/issues/5994)) ([df0ade1](https://github.com/carbon-design-system/ibm-products/commit/df0ade1c26c17448aa2dd212d75e88f1c4544e61))
+* **Datagrid:** csp violation ([#5831](https://github.com/carbon-design-system/ibm-products/issues/5831)) ([73a9824](https://github.com/carbon-design-system/ibm-products/commit/73a98242150e421a7c414bf7743f453a2234caba))
+* **dataGrid:** header scroll issues ([#6135](https://github.com/carbon-design-system/ibm-products/issues/6135)) ([9d60c0c](https://github.com/carbon-design-system/ibm-products/commit/9d60c0cd0f0ab98ba87915eb50a9de2a55dff5a1))
+* editinplace replace outline with border ([#5869](https://github.com/carbon-design-system/ibm-products/issues/5869)) ([0fb5afd](https://github.com/carbon-design-system/ibm-products/commit/0fb5afd7c210e6b726f67887b8126f3f0692c106))
+* **EditInPlace:** focus and style issue ([#6146](https://github.com/carbon-design-system/ibm-products/issues/6146)) ([831a0bc](https://github.com/carbon-design-system/ibm-products/commit/831a0bc7da65e65c09228cf2b292cbb879484d3a))
+* **Pageheader:** scrollable headers are not tabbable ([#6145](https://github.com/carbon-design-system/ibm-products/issues/6145)) ([ed578ec](https://github.com/carbon-design-system/ibm-products/commit/ed578ec0d45dcd72a7c96fd1e8370d4a67019ec6))
+* remove ellipsis from EditInPlace ([#6098](https://github.com/carbon-design-system/ibm-products/issues/6098)) ([0b40cce](https://github.com/carbon-design-system/ibm-products/commit/0b40cce8451abd0e509a6b16490fff862496b414))
+* **SidePanel:** style issue with multi select ([#6123](https://github.com/carbon-design-system/ibm-products/issues/6123)) ([feb6a99](https://github.com/carbon-design-system/ibm-products/commit/feb6a993cb0971442cca80f4c7c86d90eede0bbf))
+* **TagOverflow:** use operational tag ([#6132](https://github.com/carbon-design-system/ibm-products/issues/6132)) ([791cbec](https://github.com/carbon-design-system/ibm-products/commit/791cbecb2319ce832c1a6341c0a8fbf16b76a3e0))
+* **TagSet:** modal gradient ([#4478](https://github.com/carbon-design-system/ibm-products/issues/4478)) ([459109d](https://github.com/carbon-design-system/ibm-products/commit/459109d08ca6baf6a66954dd6fa49360dc553dc6))
+* **tearsheet:** slug spacing ([#6023](https://github.com/carbon-design-system/ibm-products/issues/6023)) ([1db6688](https://github.com/carbon-design-system/ibm-products/commit/1db66886b00f9540825988c7397fe6c84411d26a))
+* update Carbon 11 compatible versions to latest ([#6054](https://github.com/carbon-design-system/ibm-products/issues/6054)) ([0ac7669](https://github.com/carbon-design-system/ibm-products/commit/0ac76692a6eeb85655ca64ca9189297708e26bd9))
+* update to Carbon 11 compatible versions to latest ([#5987](https://github.com/carbon-design-system/ibm-products/issues/5987)) ([173e6c6](https://github.com/carbon-design-system/ibm-products/commit/173e6c6455a4fe619d56148ab432926bc6c640a4))
+* update to Carbon 11 compatible versions to latest ([#6214](https://github.com/carbon-design-system/ibm-products/issues/6214)) ([911c341](https://github.com/carbon-design-system/ibm-products/commit/911c341d258b410ff2109ecb39293c2670796a0e))
+
+
+### Features
+
+* **`ibm-products-web-components`:** setup new web component package and storybook ([#6148](https://github.com/carbon-design-system/ibm-products/issues/6148)) ([6962187](https://github.com/carbon-design-system/ibm-products/commit/6962187634ba4317c5a4dcbf495978a176efcb79))
+* **cards:** renames slug to aiLabel ([#6167](https://github.com/carbon-design-system/ibm-products/issues/6167)) ([5b94ed8](https://github.com/carbon-design-system/ibm-products/commit/5b94ed8d01638db747277f104d9f7dd9ab2e0eb3))
+* **ConditionBuilder:** enhancing the conditional operators section that manages the primary logic flow ([#5921](https://github.com/carbon-design-system/ibm-products/issues/5921)) ([91733fb](https://github.com/carbon-design-system/ibm-products/commit/91733fb43157eab26c885f0652adaf9276f372d4))
+* **Conditionbuilder:** renaming both variants to Hierarchical and Non-Hierarchical ([#5847](https://github.com/carbon-design-system/ibm-products/issues/5847)) ([791e2b3](https://github.com/carbon-design-system/ibm-products/commit/791e2b31549f3f4480cac2fc142e550b5e12ea31))
+* **datagrids:** Add custom batch actions display min ([#5776](https://github.com/carbon-design-system/ibm-products/issues/5776)) ([485e8bc](https://github.com/carbon-design-system/ibm-products/commit/485e8bcac3193e56d65721076160944b4e126256))
+* **Datagrid:** slug to aiLabel renaming ([#6151](https://github.com/carbon-design-system/ibm-products/issues/6151)) ([b0b3c1c](https://github.com/carbon-design-system/ibm-products/commit/b0b3c1cf40199e7458584ea1d9093224264e1f4c))
+* **tagset:** support for size on overflow tag ([#6065](https://github.com/carbon-design-system/ibm-products/issues/6065)) ([ba29c09](https://github.com/carbon-design-system/ibm-products/commit/ba29c0950f1fcc7388e58523e94a32abd588d59d))
+* **Tearsheet:** Slug to aiLabel ([#6169](https://github.com/carbon-design-system/ibm-products/issues/6169)) ([5c0f2ad](https://github.com/carbon-design-system/ibm-products/commit/5c0f2adf55e6c9c7f081dab72ab711b611593476))
+
+
+
+
+
+# [2.48.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.48.0-rc.0...@carbon/ibm-products-styles@2.48.0) (2024-10-23)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
 # [2.48.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.44.0-rc.0...@carbon/ibm-products-styles@2.48.0-rc.0) (2024-10-14)
 
 

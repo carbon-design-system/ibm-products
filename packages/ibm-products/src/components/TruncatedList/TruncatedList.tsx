@@ -72,7 +72,7 @@ export interface TruncatedListProps extends PropsWithChildren {
   /**
    * Callback function for building the label when the list is collapsed.
    */
-  viewMoreLabel?: (value: any) => void;
+  viewMoreLabel?: (value: any) => ReactNode;
 }
 /**
  * The `TruncatedList` allows consumers to control how many items are
@@ -107,7 +107,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
     // guesstimate the initial height to reduce animation distance.
     //   (difference of the guessed height to rendered height - a few pixels)
     const [listHeight, setListHeight] = useState(minItems * 16);
-    const listRef = useRef<HTMLElement>();
+    const listRef = useRef<HTMLElement | undefined>(undefined);
 
     const handleToggle = () => {
       setIsCollapsed((prev) => !prev);

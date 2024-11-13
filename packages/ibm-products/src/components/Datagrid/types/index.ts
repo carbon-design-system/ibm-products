@@ -11,7 +11,6 @@ import { RadioButtonProps } from '@carbon/react/lib/components/RadioButton/Radio
 import { RadioButtonGroupProps } from '@carbon/react/lib/components/RadioButtonGroup/RadioButtonGroup';
 import { CheckboxProps } from '@carbon/react/lib/components/Checkbox';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
-import { TableRowProps } from 'react-table';
 
 import React, {
   CSSProperties,
@@ -34,6 +33,7 @@ import {
   TableCommonProps,
   TableDispatch,
   TableInstance,
+  TableRowProps,
   TableState,
   TableToggleAllRowsSelectedProps,
   UseExpandedRowProps,
@@ -194,7 +194,8 @@ export interface DataGridHeader<T extends object = any>
     UseSortByColumnProps<T> {
   className(className: any, arg1: { [x: string]: any }): unknown;
   isAction?: boolean;
-  slug?: any;
+  slug?: ReactNode; // To be removed once the support for slug is not available
+  aiLabel?: ReactNode;
 }
 
 export interface DataGridHeaderGroup<T extends object = any>
@@ -229,17 +230,16 @@ export interface RowAction {
   icon?: ComponentType | FunctionComponent;
   align?: React.ComponentProps<typeof IconButton>['align'];
   shouldHideMenuItem?: (...args) => void;
-  shouldDisableMenuItem?: (...args) => void;
+  shouldDisableMenuItem?: (...args) => boolean;
   disabled?: boolean;
   onClick?: (...args) => void;
 }
 export interface DataGridState<T extends object = any>
   extends TableCommonProps,
-    UsePaginationInstanceProps<T>,
+    Partial<UsePaginationInstanceProps<T>>,
     Omit<TableInstance<T>, 'state' | 'headers' | 'rows' | 'columns'>,
-    Omit<UseFiltersInstanceProps<T>, 'rows'>,
-    UseRowSelectInstanceProps<T>,
-    Pick<UseRowSelectInstanceProps<T>, 'toggleAllRowsSelected'> {
+    Partial<Pick<UseFiltersInstanceProps<T>, 'setFilter' | 'setAllFilters'>>,
+    UseRowSelectInstanceProps<T> {
   withVirtualScroll?: boolean;
   DatagridPagination?: JSXElementConstructor<any>;
   isFetching?: boolean;
@@ -278,10 +278,10 @@ export interface DataGridState<T extends object = any>
   emptyStateSize?: 'lg' | 'sm';
   emptyStateType?: string;
   illustrationTheme?: 'light' | 'dark';
-  emptyStateAction: {
+  emptyStateAction?: {
     kind?: 'primary' | 'secondary' | 'tertiary';
     renderIcon?: CarbonIconType;
-    onClick?: ButtonProps<any>['onClick'];
+    onClick?: ButtonProps<React.ElementType>['onClick'];
     text?: string;
   };
   emptyStateLink?: {
@@ -297,15 +297,15 @@ export interface DataGridState<T extends object = any>
   setMouseOverRowIndex?: (arg: any) => void;
   hideSelectAll?: boolean;
   radio?: boolean;
-  onAllRowSelect: (rows: DatagridRow[], evt: any) => void;
+  onAllRowSelect?: (rows: DatagridRow[], evt: any) => void;
   selectAllToggle?: {
     onSelectAllRows?: (args) => void;
     labels?: Labels;
   };
   allPageRowsLabel?: string | object;
-  allRowsLabel: string | object;
+  allRowsLabel?: string | object;
   onSelectAllRows?: (val?: boolean) => void;
-  toolbarBatchActions?: ButtonProps<any>[];
+  toolbarBatchActions?: ButtonProps<React.ElementType>[];
   setGlobalFilter?: (filterValue: FilterValue) => void;
   batchActionMenuButtonLabel?: string;
   translateWithIdBatchActions?: TableBatchActionsProps['translateWithId'];

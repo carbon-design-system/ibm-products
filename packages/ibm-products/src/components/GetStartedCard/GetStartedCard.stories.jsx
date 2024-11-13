@@ -6,6 +6,7 @@
  */
 
 import { GetStartedCard } from '.';
+import React from 'react';
 import mdx from './GetStartedCard.mdx';
 
 import { action } from '@storybook/addon-actions';

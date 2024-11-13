@@ -35,7 +35,7 @@ const defaults = {
 interface TagType {
   label: string;
 }
-type AllTags = TagType[] & Omit<React.ComponentProps<Tag>, 'filter'>[];
+type AllTags = TagType[] & Omit<React.ComponentProps<typeof Tag>, 'filter'>[];
 
 interface TagSetModalProps {
   allTags?: AllTags;
@@ -128,7 +128,7 @@ export const TagSetModal = ({
         aria-label={modalAriaLabel}
       >
         {filteredModalTags.map(({ label, ...other }, index) => (
-          <Tag {...other} filter={false} key={`all-tags-${index}`}>
+          <Tag {...other} key={`all-tags-${index}`}>
             {label}
           </Tag>
         ))}

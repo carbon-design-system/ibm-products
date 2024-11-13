@@ -6,7 +6,7 @@
  */
 
 // Carbon and package components we use.
-import { Button, ButtonProps } from '@carbon/react';
+import { Button, type ButtonProps } from '@carbon/react';
 // Import portions of React that are needed.
 import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 import { TearsheetShell, tearsheetHasCloseIcon } from './TearsheetShell';
@@ -43,6 +43,10 @@ export type CloseIconDescriptionTypes =
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 
+export interface TearsheetAction extends ButtonProps<'button'> {
+  label?: string;
+}
+
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 export interface TearsheetProps extends PropsWithChildren {
@@ -59,7 +63,7 @@ export interface TearsheetProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<'button'>[];
+  actions?: TearsheetAction[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -141,7 +145,7 @@ export interface TearsheetProps extends PropsWithChildren {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
 
   /**
    * Specify a CSS selector that matches the DOM element that should be
@@ -251,6 +255,7 @@ Tearsheet.propTypes = {
     ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -262,6 +267,7 @@ Tearsheet.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore*/
         onClick: Button.propTypes.onClick,
       })
     ),

@@ -337,10 +337,11 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             newValues.marginInlineEnd = `${this?._sidePanel?.offsetWidth}px`;
           }
         }
-
-        Object.keys(newValues).forEach((key) => {
-          pageContentEl.style[key] = newValues[key];
-        });
+        if (this.slideIn) {
+          Object.keys(newValues).forEach((key) => {
+            pageContentEl.style[key] = newValues[key];
+          });
+        }
       }
     }
   };
@@ -680,7 +681,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     const actionsMultiple = ['', 'single', 'double', 'triple'][
       this._actionsCount
     ];
-
     const titleTemplate = html`<div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}

@@ -18,6 +18,7 @@ const componentName = 'DecoratorLink';
 
 /**
  * The DecoratorLink groups a key/value pair to behave like a link.
+ * @deprecated This component is deprecated
  */
 export let DecoratorLink = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [

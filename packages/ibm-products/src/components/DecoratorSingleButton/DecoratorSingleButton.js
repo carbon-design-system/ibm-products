@@ -18,6 +18,7 @@ const componentName = 'DecoratorSingleButton';
 
 /**
  * The DecoratorSingleButton groups a key/value pair to behave like a button.
+ * @deprecated This component is deprecated
  */
 export let DecoratorSingleButton = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [

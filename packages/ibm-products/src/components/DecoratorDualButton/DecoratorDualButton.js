@@ -18,6 +18,7 @@ const componentName = 'DecoratorDualButton';
 
 /**
  * The DecoratorDualButton groups a key/value pair where the key and value each behave like a button.
+ * @deprecated This component is deprecated
  */
 export let DecoratorDualButton = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [

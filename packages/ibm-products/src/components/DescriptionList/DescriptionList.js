@@ -40,6 +40,7 @@ const defaults = {
 
 /**
  * Type layouts provide an orderly layout of terms and definitions.
+ * @deprecated This component is deprecated
  */
 export let DescriptionList = React.forwardRef(
   (

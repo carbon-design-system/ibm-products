@@ -28,6 +28,7 @@ const defaults = {
 
 /**
  * A list of icon/description pairs used to show multiple states of progress.
+ * @deprecated This component is deprecated
  */
 export let StatusIndicator = React.forwardRef(
   (

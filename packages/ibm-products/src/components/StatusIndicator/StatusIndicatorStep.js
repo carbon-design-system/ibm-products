@@ -30,6 +30,7 @@ const defaults = {
 
 /**
  * An icon/description pair that describes one step of the `StatusIndicator`.
+ * @deprecated This component is deprecated
  */
 export let StatusIndicatorStep = React.forwardRef(
   (

@@ -1805,7 +1805,7 @@ __metadata:
     "@carbon/react": "npm:^1.69.0"
     "@carbon/themes": "npm:^11.43.0"
     "@carbon/type": "npm:^11.33.0"
-    "@percy/cli": "npm:^1.24.2"
+    "@percy/cli": "npm:^1.30.1"
     "@percy/storybook": "npm:^6.0.0"
     "@storybook/addon-a11y": "npm:^8.1.10"
     "@storybook/addon-actions": "npm:^8.0.9"
@@ -5121,7 +5121,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/cli@npm:^1.24.2":
+"@percy/cli@npm:^1.30.1":
   version: 1.30.1
   resolution: "@percy/cli@npm:1.30.1"
   dependencies:

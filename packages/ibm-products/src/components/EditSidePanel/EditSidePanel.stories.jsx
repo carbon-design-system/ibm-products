@@ -107,17 +107,21 @@ export default {
   },
   decorators: [
     (story) => (
-      <Annotation
-        type="deprecation-notice"
-        text={
-          <div>
-            This component is deprecated and will be removed in the next major
-            version.
-          </div>
-        }
-      >
-        {story()}
-      </Annotation>
+      <Grid id="ibm-products-page-content" className="story-content">
+        <Column sm={{ span: 4 }} md={{ span: 6 }}>
+          <Annotation
+            type="deprecation-notice"
+            text={
+              <div>
+                This component is deprecated and will be removed in the next
+                major version.
+              </div>
+            }
+          >
+            {story()}
+          </Annotation>
+        </Column>
+      </Grid>
     ),
     sidePanelDecorator(renderUIShellHeader, prefix),
   ],
@@ -133,14 +137,9 @@ const Template = ({ slug, ...args }) => {
   const [topicValue, setTopicValue] = useState('Cluster management');
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content" className="story-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <EditSidePanel
         {...args}
         id="storybook-id"

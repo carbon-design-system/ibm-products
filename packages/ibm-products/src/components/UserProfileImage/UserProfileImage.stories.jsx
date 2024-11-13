@@ -9,6 +9,7 @@ import React from 'react';
 import { UserProfileImage } from '.';
 import image from './headshot.jpg'; // cspell:disable-line
 import DocsPage from './UserProfileImage.docs-page';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
@@ -19,7 +20,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/User profile images/UserProfileImage',
+  title: 'Deprecated/User profile images/UserProfileImage',
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {
@@ -69,6 +70,27 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to{' '}
+              <a href="/?path=/docs/experimental-components-user-avatar-useravatar--docs">
+                UserAvatar
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const Template = (args) => {

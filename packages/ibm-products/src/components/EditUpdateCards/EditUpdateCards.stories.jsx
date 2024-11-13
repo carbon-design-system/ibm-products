@@ -46,6 +46,21 @@ export default {
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const defaultStoryProps = {
@@ -231,40 +246,30 @@ const Template = (args) => {
   return (
     <Grid>
       <Column sm={4} md={8}>
-        <Annotation
-          type="deprecation-notice"
-          text={
-            <div>
-              This component is deprecated and will be removed in the next major
-              version.
-            </div>
+        <EditUpdateCards
+          // TODO: handle events with action or local handler.
+          // onTodo={action('onTodo log action')}
+          actionIcons={
+            editMode && !loading
+              ? null
+              : editMode && loading
+              ? actionIconsLoading
+              : actionIcons
           }
-        >
-          <EditUpdateCards
-            // TODO: handle events with action or local handler.
-            // onTodo={action('onTodo log action')}
-            actionIcons={
-              editMode && !loading
-                ? null
-                : editMode && loading
-                ? actionIconsLoading
-                : actionIcons
-            }
-            previewChildren={preview}
-            editChildren={edit}
-            editMode={editMode}
-            {...args}
-            onPrimaryButtonClick={onSave}
-            onSecondaryButtonClick={() => setEditMode(false)}
-            primaryButtonIcon={Save}
-            primaryButtonText={editMode && !loading ? 'Save' : null}
-            secondaryButtonIcon={null}
-            secondaryButtonText={editMode && !loading ? 'Cancel' : null}
-            id={
-              editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
-            } /*Used id for overriding the SVG(icon) path fill*/
-          />
-        </Annotation>
+          previewChildren={preview}
+          editChildren={edit}
+          editMode={editMode}
+          {...args}
+          onPrimaryButtonClick={onSave}
+          onSecondaryButtonClick={() => setEditMode(false)}
+          primaryButtonIcon={Save}
+          primaryButtonText={editMode && !loading ? 'Save' : null}
+          secondaryButtonIcon={null}
+          secondaryButtonText={editMode && !loading ? 'Cancel' : null}
+          id={
+            editMode ? pkg.prefix + '--edit-update-cards--edit' : undefined
+          } /*Used id for overriding the SVG(icon) path fill*/
+        />
       </Column>
     </Grid>
   );

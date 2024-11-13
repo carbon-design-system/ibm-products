@@ -4,12 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import React from 'react';
 import styles from './_storybook-styles.scss?inline';
 import { EditTearsheet } from './EditTearsheet';
 import DocsPage from './EditTearsheet.docs-page';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
 import { slugArgTypes } from '../../global/js/story-parts/slug';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
   title: 'Deprecated/Edit and update/EditTearsheet',
@@ -25,6 +26,21 @@ export default {
     ...slugArgTypes(),
   },
   parameters: { styles, docs: { page: DocsPage } },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const editTearsheetProps = {

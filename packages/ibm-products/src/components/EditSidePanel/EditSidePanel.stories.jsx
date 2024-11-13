@@ -103,7 +103,22 @@ export default {
       ),
     },
   },
-  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+    sidePanelDecorator(renderUIShellHeader, prefix),
+  ],
 };
 
 /**
@@ -115,15 +130,7 @@ const Template = ({ slug, ...args }) => {
   const [open, setOpen] = useState(false);
   const [topicValue, setTopicValue] = useState('Cluster management');
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
+    <>
       {renderUIShellHeader()}
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close side panel' : 'Open side panel'}
@@ -209,7 +216,7 @@ const Template = ({ slug, ...args }) => {
           value={1}
         />
       </EditSidePanel>
-    </Annotation>
+    </>
   );
 };
 

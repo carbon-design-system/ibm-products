@@ -36,6 +36,21 @@ export default {
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   argTypes: {
     ...slugArgTypes(),
   },
@@ -72,15 +87,7 @@ const Template = ({ slug, ...args }) => {
     retentionTime <= 0 ||
     quantity <= 0;
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
+    <>
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheetNarrow' : 'Open EditTearsheetNarrow'}
@@ -157,7 +164,7 @@ const Template = ({ slug, ...args }) => {
           onChange={(event) => setQuantity(event.imaginaryTarget.value)}
         />
       </CreateTearsheetNarrow>
-    </Annotation>
+    </>
   );
 };
 
@@ -178,15 +185,7 @@ const WithValidationTemplate = ({ slug, ...args }) => {
     retentionTime <= 0 ||
     quantity <= 0;
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
+    <>
       <style>{`.${defaultStoryProps.className} { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheetNarrow' : 'Open EditTearsheetNarrow'}
@@ -282,7 +281,7 @@ const WithValidationTemplate = ({ slug, ...args }) => {
           />
         </FormGroup>
       </CreateTearsheetNarrow>
-    </Annotation>
+    </>
   );
 };
 

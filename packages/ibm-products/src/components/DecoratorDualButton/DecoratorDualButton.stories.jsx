@@ -93,11 +93,8 @@ export default {
     theme: 0,
     truncateValue: 0,
   },
-};
-
-const Template = (args) => {
-  if (args.truncateValue) {
-    return (
+  decorators: [
+    (story) => (
       <Annotation
         type="deprecation-notice"
         text={
@@ -107,6 +104,16 @@ const Template = (args) => {
           </div>
         }
       >
+        {story()}
+      </Annotation>
+    ),
+  ],
+};
+
+const Template = (args) => {
+  if (args.truncateValue) {
+    return (
+      <>
         <div style={{ padding: '0 0 1rem' }}>With limited width.</div>
         <div
           style={{
@@ -120,24 +127,11 @@ const Template = (args) => {
             value="Very long value to show truncation"
           />
         </div>
-      </Annotation>
+      </>
     );
   }
 
-  return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
-      {' '}
-      <DecoratorDualButton {...args} />
-    </Annotation>
-  );
+  return <DecoratorDualButton {...args} />;
 };
 
 export const Default = Template.bind({});

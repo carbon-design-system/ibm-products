@@ -31,19 +31,26 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
+    <>
       <div style={{ width: '300px' }}>
         <Nav {...args}>
           <NavList title="Nav list 1">
@@ -86,7 +93,7 @@ const Template = (args) => {
           </NavList>
         </Nav>
       </div>
-    </Annotation>
+    </>
   );
 };
 

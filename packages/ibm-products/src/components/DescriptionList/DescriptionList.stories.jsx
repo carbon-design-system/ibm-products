@@ -45,6 +45,21 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 /**
@@ -52,15 +67,7 @@ export default {
  */
 const Template = (args) => {
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
+    <>
       <DescriptionList
         // TODO: handle events with action or local handler.
         // onTodo={action('onTodo log action')}
@@ -97,7 +104,7 @@ const Template = (args) => {
           </DescriptionListRow>
         </DescriptionListBody>
       </DescriptionList>
-    </Annotation>
+    </>
   );
 };
 

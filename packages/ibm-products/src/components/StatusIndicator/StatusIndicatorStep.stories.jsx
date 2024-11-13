@@ -30,23 +30,28 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {
   return (
-    <Annotation
-      type="deprecation-notice"
-      text={
-        <div>
-          This component is deprecated and will be removed in the next major
-          version.
-        </div>
-      }
-    >
-      <ul>
-        <StatusIndicatorStep {...args} />
-      </ul>
-    </Annotation>
+    <ul>
+      <StatusIndicatorStep {...args} />
+    </ul>
   );
 };
 

@@ -18,7 +18,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Nav',
+  title: 'Deprecated/Nav',
   component: Nav,
   subcomponents: {
     NavList,

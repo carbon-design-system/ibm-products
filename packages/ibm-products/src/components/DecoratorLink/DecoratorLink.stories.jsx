@@ -31,7 +31,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Experimental/Components/Decorators/DecoratorLink',
+  title: 'Deprecated/Decorators/DecoratorLink',
   component: DecoratorLink,
   tags: ['autodocs'],
   parameters: {

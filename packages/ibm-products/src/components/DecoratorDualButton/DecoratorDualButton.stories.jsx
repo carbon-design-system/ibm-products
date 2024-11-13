@@ -31,7 +31,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Experimental/Components/Decorators/DecoratorDualButton',
+  title: 'Deprecated/Decorators/DecoratorDualButton',
   component: DecoratorDualButton,
   tags: ['autodocs'],
   parameters: {

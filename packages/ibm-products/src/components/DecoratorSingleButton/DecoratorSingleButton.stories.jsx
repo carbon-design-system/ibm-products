@@ -31,7 +31,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Experimental/Components/Decorators/DecoratorSingleButton',
+  title: 'Deprecated/Decorators/DecoratorSingleButton',
   component: DecoratorSingleButton,
   tags: ['autodocs'],
   parameters: {

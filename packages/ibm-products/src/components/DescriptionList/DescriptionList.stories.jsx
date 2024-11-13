@@ -26,7 +26,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Description list/DescriptionList',
+  title: 'Deprecated/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

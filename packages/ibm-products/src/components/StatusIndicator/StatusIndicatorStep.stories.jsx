@@ -13,7 +13,7 @@ import styles from './_storybook-styles.scss?inline';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Status indicator/StatusIndicatorStep',
+  title: 'Deprecated/Status indicator/StatusIndicatorStep',
   component: StatusIndicatorStep,
   tags: ['autodocs'],
   argTypes: {

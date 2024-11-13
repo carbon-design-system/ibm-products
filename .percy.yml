@@ -6,6 +6,11 @@ snapshot:
     - 360
     - 1366
   minHeight: 1024
+  percy-css: |
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
 storybook:
   include: ['/IBM Products/']
   exclude: [
@@ -20,10 +25,7 @@ storybook:
       '/Page header/PageHeader: Page header with tags and navigation tabs/',
       '/Page header/PageHeader: Page header with tags',
       # TagSet
-      '/Tag set/TagSet: Five Tags/',
-      '/Tag set/TagSet: Hundreds Of Tags/',
-      '/Tag set/TagSet: Many Tags/',
-      '/Tag set/TagSet: Multiline Tags',
+      '/Tag set/*',
       # MultiAddSelect
       '/MultiAddSelect: With Avatars/',
       # FullPageError

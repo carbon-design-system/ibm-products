@@ -39,7 +39,7 @@ import { StatusIcon } from '../StatusIcon';
 import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Deprecated/Datagrid/Datagrid',
+  title: 'Deprecated/Datagrid',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

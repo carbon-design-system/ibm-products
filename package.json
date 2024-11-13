@@ -117,6 +117,7 @@
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
     "cheerio": "1.0.0-rc.10",
+    "body-parser": "1.20.3",
     "braces": "^3.0.3",
     "micromatch": "4.0.8",
     "ws": "^8.17.1",

@@ -18,10 +18,12 @@ storybook:
       '/Page header/PageHeader: Page header with all items, pre-collapsed/',
       '/Page header/PageHeader: Page header with long values and many items/',
       '/Page header/PageHeader: Page header with tags and navigation tabs/',
+      '/Page header/PageHeader: Page header with tags',
       # TagSet
       '/Tag set/TagSet: Five Tags/',
       '/Tag set/TagSet: Hundreds Of Tags/',
       '/Tag set/TagSet: Many Tags/',
+      '/Tag set/TagSet: Multiline Tags',
       # MultiAddSelect
       '/MultiAddSelect: With Avatars/',
       # FullPageError

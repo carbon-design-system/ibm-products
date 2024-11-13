@@ -8,20 +8,4 @@ snapshot:
   minHeight: 1024
 storybook:
   include: ['/IBM Products/']
-  exclude: [
-      # Exclude the entire Datagrid folder and its contents
-      '/Datagrid/*',
-      '/DataSpreadsheet/',
-      '/MultiAddSelect: With Avatars/',
-      '/Tag set/TagSet: Five Tags/',
-      '/Tag set/TagSet: Hundreds Of Tags/',
-      '/Tag set/TagSet: Many Tags/',
-      # Exclude the following snapshots until transitions are completed
-      '/Datagrid/Filtering/Flyout: Filter flyout with initial filters/',
-      '/Datagrid/Filtering/Panel: Filter panel with initial filters/',
-      '/Page header/PageHeader: Page header in context/',
-      '/Page header/PageHeader: Page header with actions toolbar/',
-      '/Page header/PageHeader: Page header with all items, pre-collapsed/',
-      '/Page header/PageHeader: Page header with long values and many items/',
-      '/Page header/PageHeader: Page header with tags and navigation tabs/',
-    ]
+  exclude: ['/Datagrid/*', '/DataSpreadsheet/']

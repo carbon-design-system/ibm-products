@@ -46,12 +46,13 @@ const taskLists = [
         },
       },
       {
-        kind: 'indeterminate',
+        kind: 'unchecked',
         label: 'Task name',
+        guid: '6B29FC40-CA47-1067-B31D-00DD010662DA',
         onClick: (task) => {
           action('task')(task);
-          // E.g. define your own inline code
-          // window.open('https://www.ibm.com/', '_blank').focus();
+          // E.g. trigger your own callback
+          // handleClick(task.guid);
         },
       },
     ],

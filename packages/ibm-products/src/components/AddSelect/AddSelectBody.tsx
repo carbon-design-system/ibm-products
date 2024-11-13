@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, ReactNode, forwardRef, useState } from 'react';
+import React, { ForwardedRef, forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
@@ -67,7 +67,7 @@ export interface AddSelectBodyProps {
   onSubmit?: (selection) => void;
   onSubmitButtonText?: string;
   open?: boolean;
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
   searchResultsTitle?: string;
   sortByLabel?: string;
   title?: string;
@@ -457,6 +457,7 @@ AddSelectBody.propTypes = {
   onSubmit: PropTypes.func,
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
+  /**@ts-ignore */
   portalTarget: PropTypes.node,
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,

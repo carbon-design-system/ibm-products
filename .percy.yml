@@ -8,4 +8,22 @@ snapshot:
   minHeight: 1024
 storybook:
   include: ['/IBM Products/']
-  exclude: ['/Datagrid/*', '/DataSpreadsheet/']
+  exclude: [
+      # Datagrid DataSpreadsheet
+      '/Datagrid/*',
+      '/DataSpreadsheet/',
+      # PageHeader
+      '/Page header/PageHeader: Page header in context/',
+      '/Page header/PageHeader: Page header with actions toolbar/',
+      '/Page header/PageHeader: Page header with all items, pre-collapsed/',
+      '/Page header/PageHeader: Page header with long values and many items/',
+      '/Page header/PageHeader: Page header with tags and navigation tabs/',
+      # TagSet
+      '/Tag set/TagSet: Five Tags/',
+      '/Tag set/TagSet: Hundreds Of Tags/',
+      '/Tag set/TagSet: Many Tags/',
+      # MultiAddSelect
+      '/MultiAddSelect: With Avatars/',
+      # FullPageError
+      '/FullPageError/*',
+    ]

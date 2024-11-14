@@ -6,7 +6,13 @@
  */
 
 import React from 'react';
-import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import {
+  render,
+  screen,
+  act,
+  waitFor,
+  fireEvent,
+} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -17,7 +23,8 @@ import {
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
-import { BEACON_KIND } from './utils/enums';
+import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { CoachmarkDragbar } from './CoachmarkDragbar';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
@@ -104,5 +111,141 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('renders the closeIconDescription text ', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onClose = jest.fn();
+    const closeIconDescription = 'Close';
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        closeIconDescription={closeIconDescription}
+        onClose={onClose}
+        showCloseButton
+      />
+    );
+
+    const tooltip = screen.getByText(closeIconDescription);
+
+    expect(tooltip).toBeInTheDocument();
+  });
+
+  it('calls the onClose prop when close is clicked', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onClose = jest.fn();
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        onClose={onClose}
+      />
+    );
+
+    const closeButton = screen.getAllByRole('button')[1];
+
+    expect(closeButton).toBeInTheDocument();
+    await waitFor(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('showCloseButton prop works as expected', async () => {
+    const a11yKeyboardHandler = jest.fn();
+
+    const { rerender } = render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton
+      />
+    );
+
+    expect(screen.queryAllByRole('button').length).toBe(2);
+
+    rerender(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton={false}
+      />
+    );
+
+    expect(screen.queryAllByRole('button').length).toBe(1);
+  });
+
+  it('calls the onDrag prop', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onDrag = jest.fn();
+
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton={false}
+        onDrag={onDrag}
+      />
+    );
+
+    const dragbar = screen.getByRole('button');
+
+    await waitFor(() => {
+      fireEvent.mouseDown(dragbar, { clientX: 0, clientY: 0 });
+      fireEvent.mouseMove(dragbar, { clientX: 100, clientY: 100 });
+      fireEvent.mouseUp(dragbar);
+    });
+
+    expect(onDrag).toHaveBeenCalled();
+  });
+
+  it('renders the theme prop', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      theme: 'dark',
+    });
+
+    await expect(screen.getByTestId(dataTestId)).toHaveClass(
+      'c4p--coachmark__dark'
+    );
+  });
+
+  it('tests key presses to drag the coachmark with keyboard', async () => {
+    const { container } = renderCoachmark({
+      kind: COACHMARK_OVERLAY_KIND.FLOATING,
+      'data-testid': dataTestId,
+    });
+
+    // open the coachmark
+    const targetButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    await waitFor(() => userEvent.click(targetButton));
+
+    // Select the icon button that allows drag to happen
+    const toolbarButton = screen.getAllByRole('button')[1];
+    await waitFor(() => toolbarButton.focus());
+    expect(toolbarButton.matches(':focus')).toBe(true);
+
+    const overlayElement = container.querySelector(
+      `.${pkg.prefix}--coachmark-overlay`
+    );
+
+    const initialX = overlayElement.style.left;
+    const initialY = overlayElement.style.top;
+
+    expect(initialX).toBe('0px');
+    expect(initialY).toBe('0px');
+
+    // After the button has been focused we can press space to enable keyboard arrow drag mode
+    await waitFor(() =>
+      fireEvent.keyDown(container, {
+        key: 'Space',
+      })
+    );
+    expect(overlayElement).toBe(1);
+
+    // await waitFor(() => userEvent.keyboard('{ArrowRight}'));
+    // await waitFor(() => userEvent.keyboard('{ArrowDown}'));
+
+    // const newX = style.left;
+    // const newY = style.top;
+    // expect(newX).toBe(1);
+    // expect(newX).not.toBe(newX);
+    // expect(initialY).not.toBe(newY);
   });
 });

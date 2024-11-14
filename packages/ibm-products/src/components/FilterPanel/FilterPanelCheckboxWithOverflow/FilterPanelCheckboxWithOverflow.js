@@ -30,6 +30,7 @@ const defaults = {
  * just like FilterPanelCheckbox.
  *
  * Use `overflowMenuProps` for properties specific to the OverflowMenu.
+ * @deprecated This component is deprecated
  */
 export let FilterPanelCheckboxWithOverflow = React.forwardRef(
   (
@@ -121,6 +122,11 @@ export let FilterPanelCheckboxWithOverflow = React.forwardRef(
     );
   }
 );
+
+FilterPanelCheckboxWithOverflow.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanelCheckboxWithOverflow = pkg.checkComponentEnabled(

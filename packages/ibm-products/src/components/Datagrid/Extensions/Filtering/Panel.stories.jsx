@@ -18,7 +18,7 @@ import { FilteringUsage } from '../../utils/FilteringUsage';
 import { getDateFormat } from '../../utils/getDateFormat';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Filtering/Panel',
+  title: 'Deprecated/Datagrid/Datagrid/Filtering/Panel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

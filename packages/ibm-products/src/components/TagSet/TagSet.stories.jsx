@@ -136,7 +136,7 @@ export default {
     // docs: { page: mdx },
     styles,
     percy: {
-      waitForTimeout: 2000,
+      waitForTimeout: 1000,
     },
   },
   argTypes: {

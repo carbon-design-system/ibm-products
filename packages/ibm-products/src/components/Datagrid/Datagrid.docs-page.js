@@ -13,6 +13,7 @@ import toolbarScreenshot from './storybook-assets/datagrid-actions-example.png';
 
 const DocsPage = () => (
   <StoryDocsPage
+    deprecationNotice={`\`Datagrid\` is deprecated and will be moving to an example-based approach. For more information, please refer to the [migration docs](https://github.com/carbon-design-system/tanstack-carbon).`}
     blocks={[
       {
         title: 'Getting started',

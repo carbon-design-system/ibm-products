@@ -1,24 +1,16 @@
 # Percy config
 version: 2
 snapshot:
-  timeout: 200
   widths:
     - 360
     - 1366
   minHeight: 1024
-  percy-css: |
-    * {
-      animation: none !important;
-      transition: none !important;
-    }
 storybook:
   include: ['/IBM Products/']
   exclude: [
-      # Datagrid DataSpreadsheet
       '/Datagrid/*',
       '/DataSpreadsheet/',
-      '/Page header/*',
-      '/Tag set/*',
-      '/MultiAddSelect: With Avatars/',
-      '/FullPageError/*',
+      '/MultiAddSelect: With Avatars/', # avoid dynamic avatar color generation
+      '/Tag set/TagSet: Hundreds Of Tags', # avoid dynamic tag color generation
+      '/Page header/PageHeader: Page header with all items, pre-collapsed', # takes random time, to collapse on initial load
     ]

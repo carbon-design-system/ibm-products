@@ -26,7 +26,7 @@ import { DocsPage } from './ExpandableRow.docs-page';
 import { usePrefix } from '../../../../global/js/hooks';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/ExpandableRow',
+  title: 'Deprecated/Datagrid/Datagrid/ExpandableRow',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -6,8 +6,6 @@ on:
       - main
       - v1
       - 'release\/v2**'
-      - vrt-setup-5236
-
   merge_group:
     types: [checks_requested]
 

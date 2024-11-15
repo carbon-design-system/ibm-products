@@ -16,7 +16,7 @@ test.describe('Datagrid @avt', () => {
   test('@avt-basic-usage', async ({ page }) => {
     await visitStory(page, {
       component: 'Datagrid',
-      id: 'ibm-products-components-datagrid--basic-usage',
+      id: 'deprecated-datagrid-datagrid--basic-usage',
       globals: {
         carbonTheme: 'white',
       },
@@ -27,7 +27,7 @@ test.describe('Datagrid @avt', () => {
   test('@avt-open-and-dismiss-sidepanel-onRowClick', async ({ page }) => {
     await visitStory(page, {
       component: 'Datagrid',
-      id: 'ibm-products-components-datagrid-clickablerow--clickable-row-story',
+      id: 'deprecated-datagrid-datagrid-clickablerow--clickable-row-story',
       globals: {
         carbonTheme: 'white',
       },

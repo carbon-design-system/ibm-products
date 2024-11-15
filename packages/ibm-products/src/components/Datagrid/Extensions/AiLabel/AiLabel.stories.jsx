@@ -26,7 +26,7 @@ import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 import { ExampleAILabel } from '../../utils/ExampleAILabel';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/AILabel',
+  title: 'Deprecated/Datagrid/Datagrid/AILabel',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

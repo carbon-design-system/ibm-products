@@ -31,13 +31,7 @@ export default {
               label: 'Carbon empty pattern usage guidelines',
             },
           ]}
-          blocks={[
-            {
-              title: 'Deprecation notice',
-              description:
-                'This component is deprecated and will be removed in the next major version. For more information, please refer to the [Carbon docs](https://carbondesignsystem.com/patterns/empty-states-pattern/).',
-            },
-          ]}
+          deprecationNotice="This component is deprecated and will be removed in the next major version. For more information, please refer to the [Carbon docs](https://carbondesignsystem.com/patterns/empty-states-pattern/)."
         />
       ),
     },

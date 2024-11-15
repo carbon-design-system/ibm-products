@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, ReactNode, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelectBody } from './AddSelectBody';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
@@ -48,7 +48,7 @@ export interface AddSelectProps {
   /**
    * portal target for the all tags modal
    */
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
   searchResultsTitle?: string;
   sortByLabel?: string;
   title: string;
@@ -172,6 +172,7 @@ AddSelect.propTypes = {
   /**
    * portal target for the all tags modal
    */
+  /**@ts-ignore */
   portalTarget: PropTypes.node,
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,

@@ -12,12 +12,8 @@ import * as stories from './UserProfileImage.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [UserAvatar](?path=/docs/experimental-components-user-avatar-useravatar--docs#migration-from-userprofileimage)."
     blocks={[
-      {
-        title: 'Deprecation notice',
-        description:
-          'This component is deprecated and will be removed in the next major version. Please migrate to [UserAvatar](?path=/docs/experimental-components-user-avatar-useravatar--docs#migration-from-userprofileimage).',
-      },
       {
         story: stories.Default,
       },

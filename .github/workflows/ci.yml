@@ -201,7 +201,7 @@ jobs:
       - name: Run VRT
         working-directory: packages/core
         env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN_IBM_PRODUCTS }}
+          PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
         run: yarn percy storybook storybook-static
 
   avt:

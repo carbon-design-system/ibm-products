@@ -97,6 +97,7 @@ export const StoryDocsPage = ({
   blocks,
   omitCodedExample,
   omitUnreferencedStories,
+  deprecationNotice,
 }) => {
   const { csfFile } = useOf('meta', ['meta']);
 
@@ -140,6 +141,12 @@ export const StoryDocsPage = ({
         )
       ) : null}
 
+      {deprecationNotice && (
+        <>
+          <h2 style={{ marginTop: '16px' }}>Deprecation notice</h2>
+          <Markdown>{deprecationNotice}</Markdown>
+        </>
+      )}
       <h2 style={{ marginTop: guidelinesHref ? '16px' : '' }}>
         Table of contents
       </h2>
@@ -290,6 +297,10 @@ StoryDocsPage.propTypes = {
       }),
     })
   ),
+  /**
+   * Designates a special top level area for important notices or messaging like deprecation
+   */
+  deprecationNotice: PropTypes.string,
   /**
    * Set to true if no published example exists (all components and patterns should have an example)
    */

@@ -145,6 +145,10 @@ export const ItemOptionForValueField = ({
     } else {
       onChange(option, evt);
     }
+    if (evt.target instanceof SVGElement) {
+      evt.stopPropagation();
+      //stop propagate event , since this closes the popover when clicked on checkboxes which are SVGs.
+    }
   };
 
   const getAriaLabel = () => {
@@ -154,7 +158,6 @@ export const ItemOptionForValueField = ({
       ? conditionState.property
       : propertyText;
   };
-  const preventDefault = (evt) => evt.preventDefault();
 
   if (!allOptions) {
     return <SelectSkeleton />;
@@ -168,7 +171,6 @@ export const ItemOptionForValueField = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
-            onKeyDown={preventDefault}
           />
         </div>
       )}

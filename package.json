@@ -117,9 +117,10 @@
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
-    "cheerio": "1.0.0-rc.10",
     "body-parser": "1.20.3",
     "braces": "^3.0.3",
+    "cheerio": "1.0.0-rc.10",
+    "cross-spawn": "7.0.6",
     "micromatch": "4.0.8",
     "ws": "^8.17.1",
     "@carbon/ibm-products-styles": "^2.49.0"

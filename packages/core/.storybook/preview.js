@@ -128,6 +128,8 @@ const parameters = {
         ['Components', 'Patterns', 'Internal', 'Onboarding'],
         'Experimental',
         ['Components', 'Patterns', 'Onboarding'],
+        'Utils',
+        ['Components'],
         'Deprecated',
       ],
     },

@@ -1,7 +1,11 @@
 module.exports = {
-  root: true,
-  extends: ['stylelint-config-ibm-products'],
+  extends: ['stylelint-config-carbon'],
   rules: {
-    'import-notation': 'string',
+    'max-nesting-depth': null,
+    'scss/no-global-function-names': null,
+    'csstools/use-logical': null,
+    'scss/load-no-partial-leading-underscore': null,
+    'scss/double-slash-comment-inline': null,
+    'no-duplicate-selectors': null,
   },
 };

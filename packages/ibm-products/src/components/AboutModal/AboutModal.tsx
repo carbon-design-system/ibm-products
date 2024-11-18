@@ -21,7 +21,7 @@ import React, { MutableRefObject, ReactNode, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { useFocus } from '../../global/js/hooks/useFocus';
+import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import uuidv4 from '../../global/js/utils/uuidv4';

@@ -36,9 +36,10 @@ import { Wrapper } from './utils/Wrapper';
 import DocsPage from './Datagrid.docs-page';
 import { getBatchActions } from './utils/getBatchActions';
 import { StatusIcon } from '../StatusIcon';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'IBM Products/Components/Datagrid',
+  title: 'Deprecated/Datagrid/Datagrid',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
@@ -56,6 +57,27 @@ export default {
     },
   },
   excludeStories: ['getBatchActions'],
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be moving to an
+              example-based approach. For more information, please refer to the{' '}
+              <a href="https://github.com/carbon-design-system/tanstack-carbon">
+                migration documentation
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const getColumns = (rows) => {
@@ -315,7 +337,7 @@ export const SelectableRow = () => {
 
 export const Header = () => {
   const [data] = useState(makeData(10));
-  const columns = getColumns(data);
+  const columns = React.useMemo(() => getColumns(data), []);
   const emptyStateTitle = 'Empty state title';
   const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({

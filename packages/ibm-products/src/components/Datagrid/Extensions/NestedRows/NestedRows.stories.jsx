@@ -33,7 +33,7 @@ const sharedArgTypes = {
 };
 
 export default {
-  title: 'IBM Products/Components/Datagrid/NestedRows',
+  title: 'Deprecated/Datagrid/Datagrid/NestedRows',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

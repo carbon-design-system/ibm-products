@@ -28,9 +28,10 @@ import {
 } from '@carbon/react/icons';
 import { pkg /*, carbon */ } from '../../settings';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditUpdateCards',
+  title: 'Deprecated/Edit and update/EditUpdateCards',
   component: EditUpdateCards,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -45,6 +46,21 @@ export default {
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const defaultStoryProps = {

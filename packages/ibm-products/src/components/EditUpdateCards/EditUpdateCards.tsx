@@ -139,9 +139,11 @@ export interface EditUpdateCardsProps {
 // };
 
 /**
+ * **This component is deprecated.** <br>
  Editable cards allow a user to view, modify, and save the content contained within the card.
  These cards are generally used in instances where a user needs to make changes to a resource instances
  (ex. configuration details), account plan, etc. Editable cards allow a user to edit something within context.
+ @deprecated
  */
 export let EditUpdateCards = React.forwardRef(
   (
@@ -219,6 +221,12 @@ export let EditUpdateCards = React.forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+EditUpdateCards.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated and will be removed in the next major version.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 EditUpdateCards = pkg.checkComponentEnabled(EditUpdateCards, componentName);

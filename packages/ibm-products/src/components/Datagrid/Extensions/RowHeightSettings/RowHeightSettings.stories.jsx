@@ -19,7 +19,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/RowHeightSettings',
+  title: 'Deprecated/Datagrid/Datagrid/RowHeightSettings',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

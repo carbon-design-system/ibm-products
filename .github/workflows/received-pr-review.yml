@@ -21,7 +21,7 @@ jobs:
           echo $JSON > ./pr_data/github.json
       - name: Upload event data
         id: upload_artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 #4.4.3
         with:
           name: pr-data-to-process
           path: pr_data/

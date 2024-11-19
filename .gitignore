@@ -26,6 +26,7 @@ logs
 pids
 *.pid
 *.seed
+.env
 
 # Certificates
 *.crt

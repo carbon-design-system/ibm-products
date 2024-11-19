@@ -27,6 +27,7 @@ import { EditSidePanel } from '.';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const sampleSlug = (
   <Slug className="slug-container" size="xs">
@@ -73,7 +74,7 @@ const renderUIShellHeader = () => (
 const prefix = 'edit-side-panel-stories__';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditSidePanel',
+  title: 'Deprecated/Edit and update/EditSidePanel',
   component: EditSidePanel,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -104,7 +105,26 @@ export default {
       ),
     },
   },
-  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+  decorators: [
+    (story) => (
+      <Grid id="ibm-products-page-content" className="story-content">
+        <Column sm={{ span: 4 }} md={{ span: 6 }}>
+          <Annotation
+            type="deprecation-notice"
+            text={
+              <div>
+                This component is deprecated and will be removed in the next
+                major version.
+              </div>
+            }
+          >
+            {story()}
+          </Annotation>
+        </Column>
+      </Grid>
+    ),
+    sidePanelDecorator(renderUIShellHeader, prefix),
+  ],
 };
 
 /**
@@ -117,14 +137,9 @@ const Template = ({ slug, ...args }) => {
   const [topicValue, setTopicValue] = useState('Cluster management');
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content" className="story-content">
-        <Column lg={{ span: 2, start: 8 }}>
-          <Button onClick={() => setOpen(!open)}>
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </Column>
-      </Grid>
+      <Button onClick={() => setOpen(!open)}>
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <EditSidePanel
         {...args}
         id="storybook-id"
@@ -222,16 +237,19 @@ editSidePanel.args = {
       label: 'Copy platform id',
       icon: (props) => <Copy size={16} {...props} />,
       onClick: action('Toolbar button clicked: Copy'),
+      hasIconOnly: true,
     },
     {
       label: 'Settings',
       icon: (props) => <Settings size={16} {...props} />,
       onClick: action('Toolbar button clicked: Settings'),
+      hasIconOnly: true,
     },
     {
       label: 'Delete',
       icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('Toolbar button clicked: Delete'),
+      hasIconOnly: true,
     },
   ],
   includeOverlay: true,

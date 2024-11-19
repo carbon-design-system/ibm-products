@@ -3647,15 +3647,21 @@ p.c4p--about-modal__copyright-text:first-child {
   /* stylelint-disable-next-line declaration-no-important */
   color: var(--cds-link-primary-hover, #0043ce) !important;
 }
-.c4p--datagrid__grid-container .c4p--datagrid__carbon-row td {
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row .c4p--datagrid__left-sticky-column-cell,
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row .c4p--datagrid__right-sticky-column-cell,
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row .c4p--datagrid__checkbox-cell-sticky-left {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: var(--cds-layer-01, #f4f4f4);
 }
-.c4p--datagrid__grid-container .c4p--datagrid__carbon-row:hover td {
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row:hover .c4p--datagrid__left-sticky-column-cell,
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row:hover .c4p--datagrid__right-sticky-column-cell,
+.c4p--datagrid__grid-container .c4p--datagrid__carbon-row:hover .c4p--datagrid__checkbox-cell-sticky-left {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: var(--cds-layer-hover-01, #e8e8e8);
 }
-.c4p--datagrid__grid-container .cds--data-table--selected td {
+.c4p--datagrid__grid-container .cds--data-table--selected .c4p--datagrid__left-sticky-column-cell,
+.c4p--datagrid__grid-container .cds--data-table--selected .c4p--datagrid__right-sticky-column-cell,
+.c4p--datagrid__grid-container .cds--data-table--selected .c4p--datagrid__checkbox-cell-sticky-left {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: var(--cds-layer-selected-01, #e0e0e0);
 }
@@ -3740,7 +3746,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid__resizableColumn:hover {
-  background-color: var(--cds-background-selected-hover, rgba(141, 141, 141, 0.32));
+  background-color: var(--cds-layer-selected-hover);
 }
 .c4p--datagrid__resizableColumn:hover .c4p--datagrid__resizer {
   border-right: 0.125rem solid var(--cds-border-strong-01, #8d8d8d);

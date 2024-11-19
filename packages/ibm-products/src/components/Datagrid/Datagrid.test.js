@@ -917,7 +917,10 @@ const ActionsColumnExample = ({
 
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation((message) => {
-    if (!message.includes('componentWillReceiveProps')) {
+    if (
+      !message.includes('componentWillReceiveProps') &&
+      !message.includes('deprecated')
+    ) {
       global.console.warn(message);
     }
   });
@@ -1171,7 +1174,8 @@ describe(componentName, () => {
         );
         expect(container.children.length).toEqual(0);
         jest.spyOn(console, 'error').mockRestore();
-      }
+      },
+      2
     );
   });
 

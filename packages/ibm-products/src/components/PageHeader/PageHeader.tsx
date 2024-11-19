@@ -13,8 +13,10 @@ import {
   Tag,
   Tooltip,
   usePrefix,
+  ButtonProps,
+  PopoverAlignment,
 } from '@carbon/react';
-import { ButtonProps, PopoverAlignment, TagProps } from '@carbon/type';
+import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
   MutableRefObject,
@@ -221,7 +223,7 @@ type PageActionProps =
       pageActionsOverflowLabel?: ReactNode;
     };
 
-interface Tag extends TagProps {
+interface Tag extends TagProps<React.ElementType> {
   label: string;
 }
 
@@ -291,6 +293,10 @@ interface PageHeaderBaseProps extends PropsWithChildren {
    * align breadcrumb overflow tooltip
    */
   breadcrumbOverflowTooltipAlign?: PopoverAlignment;
+  /**
+   * Label for the Breadcrumb component
+   */
+  breadcrumbLabel?: string;
   /**
    * Specifies class(es) to be applied to the top-level PageHeader node.
    * Optional.
@@ -426,6 +432,7 @@ export let PageHeader = React.forwardRef(
       allTagsModalTitle,
       hasBackgroundAlways: deprecated_hasBackgroundAlways,
       breadcrumbOverflowAriaLabel,
+      breadcrumbLabel,
       breadcrumbs,
       children,
       className,
@@ -953,6 +960,7 @@ export let PageHeader = React.forwardRef(
                           breadcrumbs={displayedBreadcrumbs}
                           overflowTooltipAlign={breadcrumbOverflowTooltipAlign}
                           maxVisible={undefined}
+                          label={breadcrumbLabel}
                         />
                       )}
                     </Column>

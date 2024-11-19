@@ -48,7 +48,7 @@ export const APIKeyDownloader = ({
           aria-label={downloadLinkLabel ?? linkText}
           role="button"
         >
-          {linkText}
+          {downloadLinkLabel ?? linkText}
         </a>
       </p>
     </div>

@@ -8,16 +8,16 @@
 // Standard imports.
 
 // Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+// TODO: @use 'carbon-components/scss/globals/grid/grid'; if needed
 @use '@carbon/colors/' as *;
 @use '@carbon/motion/' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // EditUpdateCards uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by EditUpdateCards
+// TODO: @use(s) of Carbon component styles used by EditUpdateCards
 
 // EditUpdateCards uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by EditUpdateCards
+// TODO: @use(s) of IBM Products component styles used by EditUpdateCards
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

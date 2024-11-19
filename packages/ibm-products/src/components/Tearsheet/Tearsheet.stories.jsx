@@ -6,6 +6,7 @@
  */
 
 import React, { useRef, useState } from 'react';
+import DocsPage from './Tearsheet.docs-page';
 
 import { action } from '@storybook/addon-actions';
 
@@ -44,7 +45,13 @@ export default {
   title: 'IBM Products/Components/Tearsheet',
   component: Tearsheet,
   tags: ['autodocs'],
-  parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },
+  parameters: {
+    styles,
+    layout: 'fullscreen',
+    docs: {
+      page: DocsPage,
+    },
+  },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
@@ -173,7 +180,7 @@ const mainContent = (
 const title = 'Title of the tearsheet';
 
 const sampleAILabel = (
-  <AILabel className="ai-label-container" size="xs">
+  <AILabel align="bottom-start" className="ai-label-container" size="xs">
     <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>

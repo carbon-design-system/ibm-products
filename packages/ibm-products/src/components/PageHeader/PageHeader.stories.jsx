@@ -373,7 +373,14 @@ export default {
   title: 'IBM Products/Components/Page header/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
-  parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },
+  parameters: {
+    styles,
+    layout: 'fullscreen',
+    /* docs: { page: mdx } */
+    percy: {
+      waitForTimeout: 1000,
+    },
+  },
   decorators: [
     (story, { args }) => (
       <div

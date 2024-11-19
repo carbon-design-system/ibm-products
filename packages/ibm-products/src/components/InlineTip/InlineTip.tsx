@@ -99,6 +99,8 @@ export interface InlineTipProps {
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.
    */
+  renderMedia?: () => ReactNode;
+
   narrow?: boolean;
   /**
    * Function to call when the tertiary button is clicked.
@@ -143,6 +145,7 @@ export let InlineTip = React.forwardRef(
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
       media,
+      renderMedia,
       narrow = defaults.narrow,
       onClick,
       onClose,
@@ -153,6 +156,8 @@ export let InlineTip = React.forwardRef(
     }: PropsWithChildren<InlineTipProps>,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const hasMedia = renderMedia || media;
+
     const [isCollapsed, setIsCollapsed] = useState(collapsible);
     const labelId = useRef(uuidv4()).current;
 
@@ -162,7 +167,7 @@ export let InlineTip = React.forwardRef(
     );
     let childrenToRender = children;
 
-    if (!media && collapsible && isCollapsed) {
+    if (!hasMedia && collapsible && isCollapsed) {
       childrenToRender = (
         <p className={`${blockClass}__preview-text`}>{previewText}</p>
       );
@@ -182,7 +187,7 @@ export let InlineTip = React.forwardRef(
           className,
           collapsible && `${blockClass}__collapsible`,
           isCollapsed && `${blockClass}__collapsible-collapsed`,
-          media && `${blockClass}__has-media`,
+          hasMedia && `${blockClass}__has-media`,
           [narrow ? `${blockClass}__narrow` : `${blockClass}__wide`],
           withLeftGutter && !narrow && `${blockClass}__with-left-gutter`
         )}
@@ -203,7 +208,7 @@ export let InlineTip = React.forwardRef(
         </div>
 
         {/* Hide the idea icon if is narrow and showing an image */}
-        {((!media && narrow) || !narrow) && (
+        {((!hasMedia && narrow) || !narrow) && (
           <div className={`${blockClass}__icon-idea`} tabIndex={-1}>
             <Idea size={16} />
           </div>
@@ -224,7 +229,7 @@ export let InlineTip = React.forwardRef(
           {(collapsible || tertiaryButtonLabel) && (
             <footer className={`${blockClass}__footer`}>
               {/* Disable the collapsible feature if an image is visible */}
-              {collapsible && !media && (
+              {collapsible && !hasMedia && (
                 <Button
                   className={`${blockClass}__toggle-btn`}
                   kind="ghost"
@@ -250,15 +255,18 @@ export let InlineTip = React.forwardRef(
             </footer>
           )}
         </div>
-        {media &&
-          (media.render ? (
-            <div className={`${blockClass}__media`}>{media.render()}</div>
-          ) : (
-            <SteppedAnimatedMedia
-              className={`${blockClass}__media`}
-              filePaths={media.filePaths}
-            />
-          ))}
+        {hasMedia && media?.render && (
+          <div className={`${blockClass}__media`}>{media.render()}</div>
+        )}
+        {hasMedia && media?.filePaths && (
+          <SteppedAnimatedMedia
+            className={`${blockClass}__media`}
+            filePaths={media.filePaths}
+          />
+        )}
+        {hasMedia && renderMedia && (
+          <div className={`${blockClass}__media`}>{renderMedia()}</div>
+        )}
       </div>
     );
   }
@@ -332,6 +340,10 @@ InlineTip.propTypes = {
    * Function to call when the InlineTip is closed via the "X" button.
    */
   onClose: PropTypes.func,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
   /**
    * Defining the label will show a the tertiary button with the crossroads icon.
    * You will still need to define the `onClose` method to trigger a callback.

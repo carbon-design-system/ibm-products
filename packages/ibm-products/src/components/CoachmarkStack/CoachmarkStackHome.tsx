@@ -63,6 +63,8 @@ interface CoachmarkStackHomeProps {
    */
   media?: Media;
 
+  renderMedia?: (params) => ReactNode;
+
   /**
    * The labels used to link to the stackable Coachmarks.
    */
@@ -114,6 +116,7 @@ export let CoachmarkStackHome = forwardRef<
       description,
       isOpen,
       media,
+      renderMedia,
       navLinkLabels,
       onClickNavItem,
       onClose,
@@ -126,6 +129,9 @@ export let CoachmarkStackHome = forwardRef<
   ) => {
     const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
+
+    const hasMedia = media || renderMedia;
+
     useEffect(() => {
       setTimeout(() => {
         if (isOpen && buttonFocusRef.current) {
@@ -190,20 +196,23 @@ export let CoachmarkStackHome = forwardRef<
             />
             <div className={`${overlayClass}__body`}>
               <div className={`${overlayClass}-element`}>
-                {!media && (
+                {!hasMedia && (
                   <Idea size={20} className={`${blockClass}__icon-idea`} />
                 )}
 
-                {media &&
-                  (media.render ? (
-                    media.render()
-                  ) : (
-                    <SteppedAnimatedMedia
-                      className={`${overlayClass}__element-stepped-media`}
-                      filePaths={media.filePaths}
-                      playStep={0}
-                    />
-                  ))}
+                {hasMedia && media?.render && media.render()}
+                {hasMedia && media?.filePaths && (
+                  <SteppedAnimatedMedia
+                    className={`${blockClass}__element-stepped-media`}
+                    filePaths={media.filePaths}
+                    playStep={0}
+                  />
+                )}
+                {hasMedia && renderMedia && (
+                  <div className={`${blockClass}__element-stepped-media`}>
+                    {renderMedia({ playStep: 0 })}
+                  </div>
+                )}
 
                 <div className={`${overlayClass}-element__content`}>
                   {title && (
@@ -295,6 +304,7 @@ CoachmarkStackHome.propTypes = {
       filePaths: PropTypes.arrayOf(PropTypes.string),
     }),
   ]) as PropTypes.Validator<Media>,
+
   /**
    * The labels used to link to the stackable Coachmarks.
    */
@@ -318,6 +328,10 @@ CoachmarkStackHome.propTypes = {
    * element is hidden or component is unmounted, the CoachmarkStackHome will disappear.
    */
   portalTarget: PropTypes.string,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
 
   /**
    * The title of the Coachmark.

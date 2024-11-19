@@ -15,6 +15,7 @@ import { CoachmarkOverlayElements } from '.';
 import mdx from './CoachmarkOverlayElements.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 export default {
   title:
@@ -68,5 +69,7 @@ coachmarkOverlayElements.args = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   className: 'myOverlayElements',
-  media: { filePaths: [Anim1, Anim2] },
+  renderMedia: ({ playStep }) => (
+    <SteppedAnimatedMedia filePaths={[Anim1, Anim2]} playStep={playStep} />
+  ),
 };

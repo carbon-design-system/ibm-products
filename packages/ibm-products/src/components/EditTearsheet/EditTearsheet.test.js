@@ -98,6 +98,7 @@ describe(componentName, () => {
   const { ResizeObserver } = window;
 
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),

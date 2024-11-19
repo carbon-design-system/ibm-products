@@ -14,7 +14,7 @@ test.describe('DelimitedList @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'DelimitedList',
-      id: 'experimental-components-delimited-list-delimitedlist--delimited',
+      id: 'utils-components-delimitedlist--delimited',
       globals: {
         carbonTheme: 'white',
       },

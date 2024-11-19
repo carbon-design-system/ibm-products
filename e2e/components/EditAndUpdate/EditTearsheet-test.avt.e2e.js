@@ -15,7 +15,7 @@ test.describe('EditTearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditTearsheet',
-      id: 'experimental-patterns-edit-and-update-edittearsheet--multi-form-edit-tearsheet',
+      id: 'deprecated-edit-and-update-edittearsheet--multi-form-edit-tearsheet',
       globals: {
         carbonTheme: 'white',
       },

@@ -82,7 +82,7 @@
     "postcss": "^8.4.47",
     "remark-gfm": "^4.0.0",
     "rimraf": "^5.0.5",
-    "rollup": "^3.29.5",
+    "rollup": "^4.27.3",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.80.6",
     "storybook": "^8.2.8",

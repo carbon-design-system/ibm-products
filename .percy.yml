@@ -6,7 +6,7 @@ snapshot:
     - 1366
   minHeight: 1024
 discovery:
-  network_idle_timeout: 1000
+  network_idle_timeout: 700
 storybook:
   include: ['/IBM Products/']
   exclude: [

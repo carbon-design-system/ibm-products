@@ -1,12 +1,12 @@
 # Percy config
 version: 2
 snapshot:
-  discovery:
-    network_idle_timeout: 1000
   widths:
     - 360
     - 1366
   minHeight: 1024
+discovery:
+  network_idle_timeout: 1000
 storybook:
   include: ['/IBM Products/']
   exclude: [

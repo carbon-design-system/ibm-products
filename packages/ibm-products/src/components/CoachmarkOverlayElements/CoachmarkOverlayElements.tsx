@@ -30,6 +30,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import { useCoachmark } from '../Coachmark';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
@@ -54,11 +55,15 @@ export interface CoachmarkOverlayElementsProps {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * * @deprecated please use the `renderMedia` prop
    */
   media?: {
     render?: () => ReactNode;
     filePaths?: string[];
   };
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
   renderMedia?: (params) => ReactNode;
   /**
    * The label for the Next button.
@@ -319,16 +324,19 @@ CoachmarkOverlayElements.propTypes = {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ]),
+  media: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        render: PropTypes.func,
+      }),
+      PropTypes.shape({
+        filePaths: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ])
+  ),
   /**
    * The label for the Next button.
    */

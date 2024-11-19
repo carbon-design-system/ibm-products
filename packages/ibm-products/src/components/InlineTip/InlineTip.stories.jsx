@@ -44,6 +44,10 @@ export default {
     narrow: {
       control: { type: null },
     },
+    media: {
+      control: { type: null },
+      description: 'Deprecated: Property replaced by "renderMedia"',
+    },
   },
 };
 

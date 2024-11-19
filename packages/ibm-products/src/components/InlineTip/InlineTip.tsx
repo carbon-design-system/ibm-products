@@ -26,6 +26,7 @@ import { getComponentText } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-tip`;
@@ -93,13 +94,17 @@ export interface InlineTipProps {
    * - If a stepped animation is required, use `{filePaths}`.
    *
    * Enabling `media` disables the `collapsible` feature.
+   * @deprecated please use the `renderMedia` prop
    */
   media?: MediaType;
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
+  renderMedia?: () => ReactNode;
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.
    */
-  renderMedia?: () => ReactNode;
 
   narrow?: boolean;
   /**
@@ -317,16 +322,19 @@ InlineTip.propTypes = {
    * - If a stepped animation is required, use `{filePaths}`.
    *
    * Enabling `media` disables the `collapsible` feature.
+   * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.string,
-    }),
-  ]),
+  media: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        render: PropTypes.func,
+      }),
+      PropTypes.shape({
+        filePaths: PropTypes.string,
+      }),
+    ])
+  ),
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.

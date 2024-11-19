@@ -28,6 +28,7 @@ export default {
     },
     media: {
       control: { type: null },
+      description: 'Deprecated: Property replaced by "renderMedia"',
     },
   },
   parameters: {

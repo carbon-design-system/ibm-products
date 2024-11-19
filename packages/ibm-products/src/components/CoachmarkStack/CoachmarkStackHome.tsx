@@ -24,6 +24,7 @@ import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 type Media =
   | {
@@ -62,7 +63,9 @@ interface CoachmarkStackHomeProps {
    * @see {@link MEDIA_PROP_TYPE}.
    */
   media?: Media;
-
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
   renderMedia?: (params) => ReactNode;
 
   /**
@@ -295,15 +298,19 @@ CoachmarkStackHome.propTypes = {
    * If a stepped animation is required, use `{filePaths}`.
    *
    * @see {@link MEDIA_PROP_TYPE}.
+   * @deprecated please use the `renderMedia` prop
    */
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ]) as PropTypes.Validator<Media>,
+  media: deprecateProp(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        render: PropTypes.func,
+      }),
+      PropTypes.shape({
+        filePaths: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ]),
+    ''
+  ) as PropTypes.Validator<Media>,
 
   /**
    * The labels used to link to the stackable Coachmarks.

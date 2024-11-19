@@ -1911,7 +1911,7 @@ __metadata:
     eslint: "npm:^9.11.1"
     eslint-config-carbon: "npm:3.17.1"
     globby: "npm:^14.0.2"
-    happy-dom: "npm:^15.11.3"
+    happy-dom: "npm:^15.11.6"
     lit: "npm:^3.1.0"
     postcss: "npm:^8.4.47"
     remark-gfm: "npm:^4.0.0"
@@ -16031,14 +16031,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^15.11.3":
-  version: 15.11.3
-  resolution: "happy-dom@npm:15.11.3"
+"happy-dom@npm:^15.11.6":
+  version: 15.11.6
+  resolution: "happy-dom@npm:15.11.6"
   dependencies:
     entities: "npm:^4.5.0"
     webidl-conversions: "npm:^7.0.0"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 43e0b6a5d84b139924322b2d200709a412793561515be78ff72c8b1989bca8b46003afcf1cbe2d9ac4ea71db23b46600c08f167745f60420ee98d427fa461294
+  checksum: 895a40bda00753f833ea563f64aef80558b6f701a3238e9fe7143265a1246bde57bc5a7a58ed89e77e2bbe309a119dcf956a70c48033fa84893c41206a6b4128
   languageName: node
   linkType: hard
 

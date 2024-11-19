@@ -18,7 +18,7 @@ import mdx from './TruncatedList.mdx';
 const storyClass = 'truncated-list-stories';
 
 export default {
-  title: 'Experimental/Components/Truncated list/TruncatedList',
+  title: 'Utils/Components/TruncatedList',
   component: TruncatedList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

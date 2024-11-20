@@ -30,6 +30,7 @@ const defaults = {
 
 /**
  * An icon/description pair that describes one step of the `StatusIndicator`.
+ * @deprecated This component is deprecated
  */
 export let StatusIndicatorStep = React.forwardRef(
   (
@@ -62,6 +63,11 @@ export let StatusIndicatorStep = React.forwardRef(
     );
   }
 );
+
+StatusIndicatorStep.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 StatusIndicatorStep = pkg.checkComponentEnabled(

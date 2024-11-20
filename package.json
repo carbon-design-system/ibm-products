@@ -120,8 +120,7 @@
     "cheerio": "1.0.0-rc.10",
     "braces": "^3.0.3",
     "micromatch": "4.0.8",
-    "ws": "^8.17.1",
-    "@carbon/ibm-products-styles": "^2.49.0"
+    "ws": "^8.17.1"
   },
   "lint-staged": {
     "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [

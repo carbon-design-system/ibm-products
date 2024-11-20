@@ -26,8 +26,13 @@ import { prefix } from '../../globals/settings';
 
 import styles from './story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
+
 const toggleButton = () => {
   document.querySelector(`${prefix}-tearsheet`)?.toggleAttribute('open');
+};
+
+const cancelButton = () => {
+  document.querySelector(`${prefix}-tearsheet`)?.removeAttribute('open');
 };
 
 const widths = {
@@ -251,7 +256,12 @@ const actionItems = {
 
 const toActions = (kinds: BUTTON_KIND[]) => {
   return kinds?.map((kind) => {
-    return html`<cds-button key=${kind} slot="actions" kind=${kind}>
+    return html`<cds-button
+      key=${kind}
+      slot="actions"
+      kind=${kind}
+      @click=${kind === 'ghost' && cancelButton}
+    >
       ${kind.charAt(0).toUpperCase() + kind.slice(1)}
     </cds-button>`;
   });

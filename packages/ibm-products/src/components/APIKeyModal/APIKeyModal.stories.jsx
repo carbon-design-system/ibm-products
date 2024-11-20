@@ -65,7 +65,7 @@ const defaultProps = {
   copyButtonText: 'Copy',
   copyIconDescription: 'Copy',
   hasAPIKeyVisibilityToggle: true,
-  downloadBodyText:
+  helperText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
   downloadLinkLabel: 'Download API Key in Java Script File format',
@@ -288,7 +288,7 @@ const MultiStepTemplate = (args) => {
           )}
           {editSuccess && (
             <div className={`${blockClass}__messaging`}>
-              Edited successfully
+              Edited successfully, API key successfully saved.
             </div>
           )}
         </>

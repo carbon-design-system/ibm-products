@@ -35,7 +35,7 @@ const defaultProps = {
   copyButtonText: 'copy',
   copyIconDescription: 'copy icon description',
   customSteps: [],
-  downloadBodyText: 'download body',
+  helperText: 'download body',
   downloadFileName: 'filename',
   downloadFileType: 'json',
   downloadLinkText: 'download',
@@ -134,7 +134,7 @@ describe(componentName, () => {
     getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkLabel));
-    getByText(props.downloadBodyText);
+    getByText(props.helperText);
     const modal = getByRole('presentation');
     expect(modal.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
@@ -200,7 +200,7 @@ describe(componentName, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText } = render(
+    const { rerender, getByPlaceholderText, getByText, getAllByText } = render(
       <APIKeyModal {...props} />
     );
 
@@ -251,7 +251,7 @@ describe(componentName, () => {
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe('abc-123');
     getByText(props.generateSuccessBody);
-    getByText(props.generateSuccessTitle);
+    getAllByText(props.generateSuccessTitle);
     await act(() => click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
@@ -314,7 +314,7 @@ describe(componentName, () => {
       onRequestEdit,
     };
 
-    const { getByText, getByRole, rerender } = render(
+    const { getByText, getAllByText, getByRole, rerender } = render(
       <APIKeyModal {...props} />
     );
 
@@ -326,7 +326,7 @@ describe(componentName, () => {
     await act(() => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
-    getByText(props.editSuccessTitle);
+    getAllByText(props.editSuccessTitle);
   });
 
   it('toggles key visibility', async () => {

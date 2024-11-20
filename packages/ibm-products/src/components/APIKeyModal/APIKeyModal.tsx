@@ -95,6 +95,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       previousStepButtonText,
       selectorPrimaryFocus,
       showAPIKeyLabel,
+      helperText,
 
       // Collect any other property values passed in.
       ...rest
@@ -102,6 +103,9 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const [title, setTitle] = useState<string | null | undefined>(null);
+    const [successMessage, setSuccessMessage] = useState<
+      string | null | undefined
+    >(null);
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
@@ -120,6 +124,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     };
     const blockClass = `${pkg.prefix}--apikey-modal`;
     const localRef = useRef(undefined);
+    const PasswordInputRef = useRef<HTMLElement | null>(null);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { firstElement, keyDownListener } = useFocus(
       modalRef,
@@ -129,6 +134,9 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
         copyRef.current.focus();
+      }
+      if (PasswordInputRef?.current) {
+        PasswordInputRef?.current.setAttribute('readOnly', 'true');
       }
     }, [open, apiKeyLoaded]);
 
@@ -195,8 +203,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (editing && editSuccess) {
         setTitle(editSuccessTitle);
+        setSuccessMessage(editSuccessTitle);
       } else if (apiKeyLoaded) {
         setTitle(generateSuccessTitle);
+        loading !== undefined && setSuccessMessage(generateSuccessTitle);
       } else if (hasSteps) {
         setTitle(customSteps[currentStep]?.title);
       } else {
@@ -204,6 +214,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       }
     }, [
       apiKeyLoaded,
+      loading,
       editing,
       editSuccess,
       editSuccessTitle,
@@ -286,6 +297,8 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                     showPasswordLabel={showAPIKeyLabel}
                     hidePasswordLabel={hideAPIKeyLabel}
                     tooltipPosition="left"
+                    helperText={helperText}
+                    ref={PasswordInputRef}
                   />
                 )}
                 {!editing && apiKey && !hasAPIKeyVisibilityToggle && (
@@ -324,7 +337,11 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                     <div className={`${blockClass}__error-icon`}>
                       <ErrorFilled size={16} />
                     </div>
-                    <p className={`${blockClass}__messaging-text`}>
+                    <p
+                      className={`${blockClass}__messaging-text`}
+                      role="alert"
+                      aria-live="assertive"
+                    >
                       {copyError ? copyErrorText : errorText}
                     </p>
                   </div>
@@ -342,10 +359,26 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                         downloadLinkLabel={downloadLinkLabel}
                       />
                     ) : (
-                      <div className={`${blockClass}__messaging-text`}>
+                      <div
+                        className={`${blockClass}__messaging-text`}
+                        role="alert"
+                        aria-live="assertive"
+                      >
                         {generateSuccessBody}
                       </div>
                     )}
+                  </div>
+                )}
+
+                {(editing || apiKeyLoaded) && (
+                  <div className={`${blockClass}__messaging`}>
+                    <p
+                      className={`${blockClass}__messaging-text`}
+                      role="alert"
+                      aria-live="assertive"
+                    >
+                      {successMessage}
+                    </p>
                   </div>
                 )}
               </>
@@ -446,7 +479,7 @@ APIKeyModal.propTypes = {
   /**
    * the content that appears that indicates the key is downloadable
    */
-  downloadBodyText: downloadRequiredProps(PropTypes.string),
+  downloadBodyText: PropTypes.string,
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */
@@ -513,6 +546,10 @@ APIKeyModal.propTypes = {
    * designates if user is able to download the api key
    */
   hasDownloadLink: PropTypes.bool,
+  /**
+   * helper text for password input
+   */
+  helperText: PropTypes.string,
   /**
    * label text that's displayed when hovering over visibility toggler to hide key
    */

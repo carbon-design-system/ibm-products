@@ -156,6 +156,10 @@ interface APIKeyModalCommonProps {
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel?: string;
+  /**
+   * helper text for password input
+   */
+  helperText?: string;
 }
 
 type CustomStepConditionalProps = {
@@ -204,7 +208,7 @@ type HasDownloadLinkProps = {
   /**
    * the content that appears that indicates the key is downloadable
    */
-  downloadBodyText: string;
+  downloadBodyText?: string;
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */

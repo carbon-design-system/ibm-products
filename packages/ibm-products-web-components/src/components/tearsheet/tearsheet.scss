@@ -102,6 +102,12 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__influencer[wide] {
     @extend .#{$block-class}__influencer--wide;
   }
+  ::slotted(#{$carbon-prefix}-slug) {
+    display: flex;
+    inset-inline-end: 0;
+    margin-block: 6px;
+    margin-inline-end: 1rem;
+  }
 }
 
 :host(#{$prefix}-tearsheet[open]) {

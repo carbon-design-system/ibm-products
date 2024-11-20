@@ -26,6 +26,7 @@ const componentName = 'FilterPanelCheckbox';
  *
  * All of Carbon Checkbox's props are directly available
  * through "...rest", including id, onClick, etc.
+ * @deprecated This component is deprecated
  */
 export let FilterPanelCheckbox = React.forwardRef(
   ({ className, count, id, labelText, title, ...rest }, ref) => {
@@ -43,6 +44,11 @@ export let FilterPanelCheckbox = React.forwardRef(
     );
   }
 );
+
+FilterPanelCheckbox.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanelCheckbox = pkg.checkComponentEnabled(

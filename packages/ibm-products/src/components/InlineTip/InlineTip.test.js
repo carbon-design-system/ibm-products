@@ -143,7 +143,7 @@ describe(componentName, () => {
     render(
       <InlineTip
         title={title}
-        media={{ render: () => <img alt="img" src={InlineTipImage} /> }}
+        renderMedia={() => <img alt="img" src={InlineTipImage} />}
       >
         {children}
       </InlineTip>

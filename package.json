@@ -112,7 +112,7 @@
     "rimraf": "^5.0.5",
     "stylelint": "^15.11.0",
     "stylelint-config-carbon": "1.19.1",
-    "webpack": "^5.90.0"
+    "webpack": "^5.96.1"
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",

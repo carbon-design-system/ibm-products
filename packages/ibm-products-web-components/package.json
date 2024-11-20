@@ -76,7 +76,7 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "^9.11.1",
-    "eslint-config-carbon": "3.18.0",
+    "eslint-config-carbon": "3.17.1",
     "globby": "^14.0.2",
     "happy-dom": "^15.7.4",
     "postcss": "^8.4.47",

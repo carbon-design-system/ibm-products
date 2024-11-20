@@ -17,6 +17,7 @@ import React from 'react';
 import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
+import { Button } from '@carbon/react';
 
 Object.assign(navigator, {
   clipboard: {
@@ -300,6 +301,52 @@ describe(componentName, () => {
     const step1InputB = getByTestId('step1-input-b');
     await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
     expect(step1InputB).toHaveFocus();
+  });
+
+  it('should return focus to the generate button', async () => {
+    const onOpen = jest.fn(() => false);
+    const onClose = jest.fn(() => true);
+
+    // eslint-disable-next-line react/prop-types
+    const DummyComponent = ({ open }) => {
+      const buttonRef = React.useRef(undefined);
+
+      return (
+        <>
+          <APIKeyModal
+            {...defaultProps}
+            launcherButtonRef={buttonRef}
+            onClose={onClose}
+            open={open}
+          />
+          <Button ref={buttonRef} onClick={onOpen}>
+            Generate
+          </Button>
+        </>
+      );
+    };
+
+    const { getByText, rerender } = render(<DummyComponent open={false} />);
+
+    const launchButtonEl = getByText('Generate');
+    expect(launchButtonEl).toBeInTheDocument();
+
+    await act(() => userEvent.click(launchButtonEl));
+    expect(onOpen).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={true} />);
+
+    const closeButton = getByText(defaultProps.closeButtonText);
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(closeButton).toBeInTheDocument();
+
+    await act(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={false} />);
+
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(launchButtonEl).toHaveFocus();
   });
 
   it('successfully edits', async () => {

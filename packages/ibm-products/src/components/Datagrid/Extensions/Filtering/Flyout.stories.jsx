@@ -18,7 +18,7 @@ import { getDateFormat } from '../../utils/getDateFormat';
 import { getFilterProps } from './Panel.stories';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Filtering/Flyout',
+  title: 'Deprecated/Datagrid/Datagrid/Filtering/Flyout',
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -40,7 +40,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { getSpecificElement, useFocus } from '../../global/js/hooks/useFocus';
-import { usePreviousValue } from '../../global/js/hooks';
+import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 import { TearsheetAction } from './Tearsheet';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -436,6 +436,31 @@ export const TearsheetShell = React.forwardRef(
       };
     }, [open, size]);
 
+    const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
+
+    useIsomorphicEffect(() => {
+      const setScaleValues = () => {
+        if (!areAllSameSizeVariant()) {
+          return {
+            [`--${bc}--stacking-scale-factor-single`]: 1,
+            [`--${bc}--stacking-scale-factor-double`]: 1,
+          };
+        }
+        return {
+          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
+        };
+      };
+      if (modalRef.current) {
+        modalRef.current.setAttribute(
+          'styles',
+          Object.entries(setScaleValues())
+            .map(([key, value]) => `${key}: ${value};`)
+            .join(' ') // converts the array of css properties and values to a string separated by semicolons
+        );
+      }
+    }, [modalRef, width]);
+
     function handleFocus() {
       // If something within us is receiving focus but we are not the topmost
       // stacked tearsheet, transfer focus to the topmost tearsheet instead
@@ -461,18 +486,6 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      const setScaleValues = () => {
-        if (!areAllSameSizeVariant()) {
-          return {
-            [`--${bc}--stacking-scale-factor-single`]: 1,
-            [`--${bc}--stacking-scale-factor-double`]: 1,
-          };
-        }
-        return {
-          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
-          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
-        };
-      };
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
@@ -492,7 +505,6 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--has-close`]: effectiveHasCloseIcon,
             })}
             slug={aiLabel || deprecated_slug}
-            style={setScaleValues()}
             containerClassName={cx(`${bc}__container`, {
               [`${bc}__container--lower`]: verticalPosition === 'lower',
               [`${bc}__container--mixed-size-stacking`]:

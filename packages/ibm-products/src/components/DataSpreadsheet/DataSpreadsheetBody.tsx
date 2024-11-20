@@ -789,7 +789,6 @@ export const DataSpreadsheetBody = forwardRef(
       [
         prepareRow,
         renderRowHeader,
-        renderRowHeaderDirection,
         rows,
         hasCustomRowHeader,
         activeCellCoordinates?.row,
@@ -797,8 +796,9 @@ export const DataSpreadsheetBody = forwardRef(
         handleRowHeaderClickEvent,
         handleBodyCellClickEvent,
         handleBodyCellHoverEvent,
-        defaultColumn,
         columns,
+        defaultColumn,
+        renderRowHeaderDirection,
       ]
     );
 

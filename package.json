@@ -154,6 +154,10 @@
               "propName": "style",
               "disallowedFor": [
                 "Datagrid",
+                "DataSpreadsheet",
+                "NotificationsPanel",
+                "PageHeader",
+                "TearsheetSheet",
                 "Carousel",
                 "Checklist",
                 "Coachmark"

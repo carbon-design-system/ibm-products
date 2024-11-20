@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.30.0-rc.1...@carbon/ibm-cloud-cognitive-core@2.30.0) (2024-11-20)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [2.30.0-rc.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.24.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.30.0-rc.1) (2024-11-15)
+
+
+### Bug Fixes
+
+* correctly renders component when using feature flags ([#6357](https://github.com/carbon-design-system/ibm-products/issues/6357)) ([c04f635](https://github.com/carbon-design-system/ibm-products/commit/c04f63508bb0f43d6b31dcf983d0cd9ac6083a06))
+* move config to core to follow monorepo docs w/ multiple sites ([#6196](https://github.com/carbon-design-system/ibm-products/issues/6196)) ([fa285b7](https://github.com/carbon-design-system/ibm-products/commit/fa285b743bff65577aece8ebddad6e3a75dff85e))
+* update Carbon 11 compatible versions to latest ([#6054](https://github.com/carbon-design-system/ibm-products/issues/6054)) ([0ac7669](https://github.com/carbon-design-system/ibm-products/commit/0ac76692a6eeb85655ca64ca9189297708e26bd9))
+* update to Carbon 11 compatible versions to latest ([#5987](https://github.com/carbon-design-system/ibm-products/issues/5987)) ([173e6c6](https://github.com/carbon-design-system/ibm-products/commit/173e6c6455a4fe619d56148ab432926bc6c640a4))
+* update to Carbon 11 compatible versions to latest ([#6214](https://github.com/carbon-design-system/ibm-products/issues/6214)) ([911c341](https://github.com/carbon-design-system/ibm-products/commit/911c341d258b410ff2109ecb39293c2670796a0e))
+* update to Carbon 11 compatible versions to latest ([#6343](https://github.com/carbon-design-system/ibm-products/issues/6343)) ([71a201a](https://github.com/carbon-design-system/ibm-products/commit/71a201a50fbebe76699ffb0d7df1d2d998370256))
+
+
+### Features
+
+* add conditional deploys for web component and react netlify sites ([#6221](https://github.com/carbon-design-system/ibm-products/issues/6221)) ([8a4255c](https://github.com/carbon-design-system/ibm-products/commit/8a4255c0a0269068f66018d215a7bc07d3015f25))
+* **Tearsheet:** Move Tearsheet into @carbon/ibm-products-web-components ([#6204](https://github.com/carbon-design-system/ibm-products/issues/6204)) ([c21d102](https://github.com/carbon-design-system/ibm-products/commit/c21d102de17c311421884ddc17065f81e2c0f44a))
+
+
+
+
+
+# [2.30.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.24.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.30.0-rc.0) (2024-11-11)
+
+
+### Bug Fixes
+
+* correctly renders component when using feature flags ([#6357](https://github.com/carbon-design-system/ibm-products/issues/6357)) ([c04f635](https://github.com/carbon-design-system/ibm-products/commit/c04f63508bb0f43d6b31dcf983d0cd9ac6083a06))
+* move config to core to follow monorepo docs w/ multiple sites ([#6196](https://github.com/carbon-design-system/ibm-products/issues/6196)) ([fa285b7](https://github.com/carbon-design-system/ibm-products/commit/fa285b743bff65577aece8ebddad6e3a75dff85e))
+* update Carbon 11 compatible versions to latest ([#6054](https://github.com/carbon-design-system/ibm-products/issues/6054)) ([0ac7669](https://github.com/carbon-design-system/ibm-products/commit/0ac76692a6eeb85655ca64ca9189297708e26bd9))
+* update to Carbon 11 compatible versions to latest ([#5987](https://github.com/carbon-design-system/ibm-products/issues/5987)) ([173e6c6](https://github.com/carbon-design-system/ibm-products/commit/173e6c6455a4fe619d56148ab432926bc6c640a4))
+* update to Carbon 11 compatible versions to latest ([#6214](https://github.com/carbon-design-system/ibm-products/issues/6214)) ([911c341](https://github.com/carbon-design-system/ibm-products/commit/911c341d258b410ff2109ecb39293c2670796a0e))
+* update to Carbon 11 compatible versions to latest ([#6343](https://github.com/carbon-design-system/ibm-products/issues/6343)) ([71a201a](https://github.com/carbon-design-system/ibm-products/commit/71a201a50fbebe76699ffb0d7df1d2d998370256))
+
+
+### Features
+
+* add conditional deploys for web component and react netlify sites ([#6221](https://github.com/carbon-design-system/ibm-products/issues/6221)) ([8a4255c](https://github.com/carbon-design-system/ibm-products/commit/8a4255c0a0269068f66018d215a7bc07d3015f25))
+* **Tearsheet:** Move Tearsheet into @carbon/ibm-products-web-components ([#6204](https://github.com/carbon-design-system/ibm-products/issues/6204)) ([c21d102](https://github.com/carbon-design-system/ibm-products/commit/c21d102de17c311421884ddc17065f81e2c0f44a))
+
+
+
+
+
 # [2.29.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.29.0-rc.0...@carbon/ibm-cloud-cognitive-core@2.29.0) (2024-11-06)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

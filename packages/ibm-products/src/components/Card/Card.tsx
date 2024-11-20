@@ -11,8 +11,9 @@ import {
   Button,
   IconButton,
   OverflowMenu,
-  OverflowMenuItem,
+  MenuItem,
   Layer,
+  unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { CheckmarkOutline, Incomplete } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
@@ -169,21 +170,23 @@ export const Card = forwardRef(
     // actions can either be an overflow menu or series of icons
     const getActions = () => {
       if (overflowActions.length > 0) {
-        const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
+        const pos = actionsPlacement === 'top' ? 'bottom-end' : 'top-end';
         const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
           <Layer level={2}>
-            <OverflowMenu
-              size={size}
-              direction={pos}
-              flipped
-              aria-label={overflowAriaLabel}
-              iconDescription={iconDescription}
-            >
-              {overflowActions.map(({ id, ...rest }) => (
-                <OverflowMenuItem key={id} {...rest} />
-              ))}
-            </OverflowMenu>
+            <FeatureFlags enableV12Overflowmenu>
+              <OverflowMenu
+                autoAlign
+                menuAlignment={pos}
+                size={size}
+                aria-label={overflowAriaLabel}
+                label={iconDescription}
+              >
+                {overflowActions.map(({ id, itemText, ...rest }) => (
+                  <MenuItem key={id} label={itemText} {...rest} />
+                ))}
+              </OverflowMenu>
+            </FeatureFlags>
           </Layer>
         );
       }

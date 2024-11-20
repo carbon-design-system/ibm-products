@@ -1,0 +1,22 @@
+# Percy config
+version: 2
+snapshot:
+  widths:
+    - 360
+    - 1366
+  minHeight: 1024
+discovery:
+  network_idle_timeout: 500
+storybook:
+  include: ['/IBM Products/']
+  exclude: [
+      '/Datagrid/*',
+      '/DataSpreadsheet/',
+      'Cascade: With Grid',
+      'Cascade: Without Grid',
+      # to be fixed
+      '/MultiAddSelect: With Avatars/', # avoid dynamic avatar color generation
+      '/Tag set/TagSet: Hundreds Of Tags', # avoid dynamic tag color generation
+      '/Page header/PageHeader: Page header with all items, pre-collapsed', # takes random time, to collapse on initial load.
+      '/Tag set/TagSet: Many Tags', # takes time to calculate the overflow, causing random layout shift
+    ]

@@ -15,7 +15,7 @@ test.describe('EditSidePanel @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'EditSidePanel',
-      id: 'experimental-patterns-edit-and-update-editsidepanel--edit-side-panel',
+      id: 'deprecated-edit-and-update-editsidepanel--edit-side-panel',
       globals: {
         carbonTheme: 'white',
       },

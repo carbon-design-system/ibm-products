@@ -11,11 +11,12 @@ import { FilterPanel, FilterPanelGroup } from '..';
 import mdx from './FilterPanelGroup.mdx';
 
 import styles from '../_storybook-styles.scss?inline';
+import { Annotation } from '../../../../../core/.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Experimental/Components/Filter panel/FilterPanelGroup',
+  title: 'Deprecated/Filter panel/FilterPanelGroup',
   component: FilterPanelGroup,
   tags: ['autodocs'],
   parameters: {
@@ -69,6 +70,21 @@ export default {
     count: 1,
     labelText: 0,
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {

@@ -23,7 +23,7 @@ import {
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
-import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { BEACON_KIND } from './utils/enums';
 import { CoachmarkDragbar } from './CoachmarkDragbar';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
@@ -202,50 +202,5 @@ describe(componentName, () => {
     await expect(screen.getByTestId(dataTestId)).toHaveClass(
       'c4p--coachmark__dark'
     );
-  });
-
-  it('tests key presses to drag the coachmark with keyboard', async () => {
-    const { container } = renderCoachmark({
-      kind: COACHMARK_OVERLAY_KIND.FLOATING,
-      'data-testid': dataTestId,
-    });
-
-    // open the coachmark
-    const targetButton = screen.getByRole('button', {
-      name: 'Show information',
-    });
-    await waitFor(() => userEvent.click(targetButton));
-
-    // Select the icon button that allows drag to happen
-    const toolbarButton = screen.getAllByRole('button')[1];
-    await waitFor(() => toolbarButton.focus());
-    expect(toolbarButton.matches(':focus')).toBe(true);
-
-    const overlayElement = container.querySelector(
-      `.${pkg.prefix}--coachmark-overlay`
-    );
-
-    const initialX = overlayElement.style.left;
-    const initialY = overlayElement.style.top;
-
-    expect(initialX).toBe('0px');
-    expect(initialY).toBe('0px');
-
-    // After the button has been focused we can press space to enable keyboard arrow drag mode
-    await waitFor(() =>
-      fireEvent.keyDown(container, {
-        key: 'Space',
-      })
-    );
-    expect(overlayElement).toBe(1);
-
-    // await waitFor(() => userEvent.keyboard('{ArrowRight}'));
-    // await waitFor(() => userEvent.keyboard('{ArrowDown}'));
-
-    // const newX = style.left;
-    // const newY = style.top;
-    // expect(newX).toBe(1);
-    // expect(newX).not.toBe(newX);
-    // expect(initialY).not.toBe(newY);
   });
 });

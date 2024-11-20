@@ -17,6 +17,7 @@ import React from 'react';
 import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
+import { Button } from '@carbon/react';
 
 Object.assign(navigator, {
   clipboard: {
@@ -38,7 +39,7 @@ const defaultProps = {
   downloadBodyText: 'download body',
   downloadFileName: 'filename',
   downloadFileType: 'json',
-  downloadLinkText: 'download link text',
+  downloadLinkText: 'download',
   downloadLinkLabel: 'Download API Key in Java Script File format',
   editButtonText: 'edit button',
   editSuccess: false,
@@ -133,7 +134,7 @@ describe(componentName, () => {
     rerender(<APIKeyModal {...props} loading />);
     getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     getByText(props.downloadBodyText);
     const modal = getByRole('presentation');
     expect(modal.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -256,6 +257,98 @@ describe(componentName, () => {
     expect(onClose).toHaveBeenCalled();
   });
 
+  it('should focus to a custom specified element', async () => {
+    const customSteps = [
+      {
+        valid: true,
+        content: (
+          <>
+            <input id="step1-input-a" type="text" placeholder="input a" />
+            <input
+              id="step1-input-b"
+              type="text"
+              data-testid="step1-input-b"
+              placeholder="input b"
+            />
+            <input
+              id="step1-input-c"
+              type="text"
+              data-testid="step1-input-c"
+              placeholder="input b"
+            />
+          </>
+        ),
+        title: 'step 1',
+      },
+      {
+        valid: true,
+        content: (
+          <>
+            <input id="step2-input-a" type="text" placeholder="input a" />
+            <input id="step2-input-b" type="text" placeholder="input b" />
+          </>
+        ),
+        title: 'step 2',
+      },
+    ];
+    const props = {
+      ...defaultProps,
+      customSteps,
+      selectorPrimaryFocus: '#step1-input-b',
+    };
+
+    const { getByTestId } = render(<APIKeyModal {...props} />);
+    const step1InputB = getByTestId('step1-input-b');
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(step1InputB).toHaveFocus();
+  });
+
+  it('should return focus to the generate button', async () => {
+    const onOpen = jest.fn(() => false);
+    const onClose = jest.fn(() => true);
+
+    // eslint-disable-next-line react/prop-types
+    const DummyComponent = ({ open }) => {
+      const buttonRef = React.useRef(undefined);
+
+      return (
+        <>
+          <APIKeyModal
+            {...defaultProps}
+            launcherButtonRef={buttonRef}
+            onClose={onClose}
+            open={open}
+          />
+          <Button ref={buttonRef} onClick={onOpen}>
+            Generate
+          </Button>
+        </>
+      );
+    };
+
+    const { getByText, rerender } = render(<DummyComponent open={false} />);
+
+    const launchButtonEl = getByText('Generate');
+    expect(launchButtonEl).toBeInTheDocument();
+
+    await act(() => userEvent.click(launchButtonEl));
+    expect(onOpen).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={true} />);
+
+    const closeButton = getByText(defaultProps.closeButtonText);
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(closeButton).toBeInTheDocument();
+
+    await act(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={false} />);
+
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(launchButtonEl).toHaveFocus();
+  });
+
   it('successfully edits', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
@@ -295,7 +388,7 @@ describe(componentName, () => {
     );
     const modal = getByRole('presentation');
 
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe(props.apiKey);
     expect(screen.getByLabelText(props.apiKeyLabel)).toHaveAttribute(
       'type',
@@ -309,7 +402,7 @@ describe(componentName, () => {
     mouseOver(modal.querySelector(`.${carbon.prefix}--icon-visibility-off`));
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
-    await waitFor(() => getByText(props.downloadLinkText));
+    await waitFor(() => getByText(props.downloadLinkLabel));
     expect(getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 

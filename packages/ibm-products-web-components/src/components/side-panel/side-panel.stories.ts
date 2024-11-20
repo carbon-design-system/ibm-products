@@ -432,7 +432,7 @@ const defaultTemplate = {
         size=${args.size}
         ?slide-in=${args.slideIn}
         .title=${args.title}
-        @cds-side-panel-navigate-back=${prevStep}
+        @c4p-side-panel-navigate-back=${prevStep}
       >
         <!-- default slotted content -->
         ${args.content}

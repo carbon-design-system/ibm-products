@@ -16,7 +16,7 @@ test.describe('TruncatedList @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TruncatedList',
-      id: 'experimental-components-truncated-list-truncatedlist--truncated-list',
+      id: 'utils-components-truncatedlist--truncated-list',
       globals: {
         carbonTheme: 'white',
       },

@@ -11,9 +11,10 @@ import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import { EmptyStateV2 } from '.';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Patterns/Empty state/EmptyStateV2',
+  title: 'Deprecated/Empty state/EmptyStateV2',
   component: EmptyStateV2,
   tags: ['autodocs'],
   parameters: {
@@ -30,10 +31,32 @@ export default {
               label: 'Carbon empty pattern usage guidelines',
             },
           ]}
+          deprecationNotice="This component is deprecated and will be removed in the next major version. For more information, please refer to the [Carbon docs](https://carbondesignsystem.com/patterns/empty-states-pattern/)."
         />
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. For more information, please refer to the{' '}
+              <a href="https://carbondesignsystem.com/patterns/empty-states-pattern/">
+                Carbon docs
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {

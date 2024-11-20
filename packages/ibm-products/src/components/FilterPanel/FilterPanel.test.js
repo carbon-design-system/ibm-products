@@ -25,6 +25,9 @@ const renderComponent = ({ ...rest } = {}) =>
   render(<FilterPanel data-testid={dataTestId} {...{ ...rest }} />);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component FilterPanel', async () => {
     renderComponent();
     expect(screen.getByTestId(dataTestId)).toBeInTheDocument();

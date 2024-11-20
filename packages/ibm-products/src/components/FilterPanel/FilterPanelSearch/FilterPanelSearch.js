@@ -24,6 +24,7 @@ const defaults = {
 
 /**
  * An input field and container to show search results.
+ * @deprecated This component is deprecated
  */
 export let FilterPanelSearch = React.forwardRef(
   (
@@ -71,6 +72,10 @@ export let FilterPanelSearch = React.forwardRef(
   }
 );
 
+FilterPanelSearch.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanelSearch = pkg.checkComponentEnabled(FilterPanelSearch, componentName);
 

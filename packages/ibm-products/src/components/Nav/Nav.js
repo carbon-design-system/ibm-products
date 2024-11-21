@@ -17,6 +17,9 @@ import { pkg } from '../../settings';
 const componentName = 'Nav';
 const blockClass = `${pkg.prefix}--nav`;
 
+/**
+ * @deprecated This component is deprecated
+ */
 export let Nav = React.forwardRef(
   ({ activeHref, className, children, heading, label, ...rest }, ref) => {
     const [_activeHref, setActiveHref] = useState(activeHref);
@@ -128,6 +131,11 @@ export let Nav = React.forwardRef(
     );
   }
 );
+
+Nav.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 Nav.propTypes = {
   /**

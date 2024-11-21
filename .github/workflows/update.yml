@@ -32,11 +32,11 @@ jobs:
         uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          commit-message: 'chore(deps): update Carbon 11 compatible versions to latest'
+          commit-message: 'build(deps): update Carbon 11 compatible versions to latest'
           delete-branch: true
           branch: 'deps/update-carbon-packages'
           branch-suffix: random
-          title: 'chore(deps): update to Carbon 11 compatible versions to latest'
+          title: 'build(deps): update to Carbon 11 compatible versions to latest'
           body: |
             This PR was automatically generated to update Carbon 11 compatible versions on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
 
@@ -79,11 +79,11 @@ jobs:
         uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f # v7.0.5
         with:
           token: ${{ steps.generate_token.outputs.token }}
-          commit-message: 'chore(deps): update dev dependencies'
+          commit-message: 'build(deps): update dev dependencies'
           delete-branch: true
           branch: 'deps/update-dev-packages'
           branch-suffix: random
-          title: 'chore(deps): update dev dependencies'
+          title: 'build(deps): update dev dependencies'
           body: |
             This PR was automatically generated to update versions of dev dependencies to their latest versions. This helps ensure we get fixes and improvements in a timely fashion and reduces the impact of updating the versions that can arise if versions are allowed to become stale for an extended period.
 

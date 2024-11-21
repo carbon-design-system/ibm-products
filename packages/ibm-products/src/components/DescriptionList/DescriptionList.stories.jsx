@@ -23,9 +23,10 @@ import { DescriptionListSize } from './constants';
 import mdx from './DescriptionList.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Description list/DescriptionList',
+  title: 'Deprecated/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
@@ -44,6 +45,21 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 /**
@@ -51,42 +67,44 @@ export default {
  */
 const Template = (args) => {
   return (
-    <DescriptionList
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    >
-      <DescriptionListBody>
-        <DescriptionListRow>
-          <DescriptionListCell>Term 1</DescriptionListCell>
+    <>
+      <DescriptionList
+        // TODO: handle events with action or local handler.
+        // onTodo={action('onTodo log action')}
+        {...args}
+      >
+        <DescriptionListBody>
+          <DescriptionListRow>
+            <DescriptionListCell>Term 1</DescriptionListCell>
 
-          <DescriptionListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </DescriptionListCell>
-        </DescriptionListRow>
+            <DescriptionListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </DescriptionListCell>
+          </DescriptionListRow>
 
-        <DescriptionListRow>
-          <DescriptionListCell>Term 2</DescriptionListCell>
+          <DescriptionListRow>
+            <DescriptionListCell>Term 2</DescriptionListCell>
 
-          <DescriptionListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
-            lacus ex at libero. Aenean euismod viverra odio, id volutpat turpis
-            commodo.
-          </DescriptionListCell>
-        </DescriptionListRow>
+            <DescriptionListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+              lacus ex at libero. Aenean euismod viverra odio, id volutpat
+              turpis commodo.
+            </DescriptionListCell>
+          </DescriptionListRow>
 
-        <DescriptionListRow>
-          <DescriptionListCell>Term 3</DescriptionListCell>
+          <DescriptionListRow>
+            <DescriptionListCell>Term 3</DescriptionListCell>
 
-          <DescriptionListCell>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
-            lacus ex at libero.
-          </DescriptionListCell>
-        </DescriptionListRow>
-      </DescriptionListBody>
-    </DescriptionList>
+            <DescriptionListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
+              lacus ex at libero.
+            </DescriptionListCell>
+          </DescriptionListRow>
+        </DescriptionListBody>
+      </DescriptionList>
+    </>
   );
 };
 

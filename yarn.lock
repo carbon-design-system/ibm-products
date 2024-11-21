@@ -16396,7 +16396,6 @@ __metadata:
     eslint: "npm:^8.56.0"
     eslint-config-carbon: "npm:3.17.1"
     eslint-plugin-ssr-friendly: "npm:^1.3.0"
-    framer-motion: "npm:^11.11.17"
     gitignore-to-glob: "npm:^0.3.0"
     globby: "npm:^14.0.0"
     husky: "npm:^9.0.5"

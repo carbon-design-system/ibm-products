@@ -4,7 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { useContext } from 'react';
 import { useTranslations } from './useTranslations';
+import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBuilderProvider';
 
 export const useDataConfigs = () => {
   const [
@@ -46,8 +48,9 @@ export const useDataConfigs = () => {
     'after',
     'between',
   ]);
+  const { statementConfigCustom } = useContext(ConditionBuilderContext);
 
-  const statementConfig = [
+  const statementConfigDefault = [
     {
       label: 'ifText',
       id: 'ifAll',
@@ -153,7 +156,7 @@ export const useDataConfigs = () => {
   ];
 
   return {
-    statementConfig,
+    statementConfig: statementConfigCustom ?? statementConfigDefault,
     connectorConfig,
     operatorConfig,
   };

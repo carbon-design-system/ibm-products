@@ -220,11 +220,24 @@ const ConditionBuilderTemplate = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
+const statementConfigCustom = [
+  {
+    id: 'if',
+    connector: 'and',
+    text1: 'if',
+  },
+  {
+    id: 'exclIf',
+    connector: 'or',
+    text1: 'excl. if',
+  },
+];
 export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
+  statementConfigCustom: statementConfigCustom,
 };
 
 export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});

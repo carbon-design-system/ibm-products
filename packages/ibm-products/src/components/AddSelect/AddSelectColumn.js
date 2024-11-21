@@ -149,9 +149,9 @@ export let AddSelectColumn = ({
               <FeatureFlags enableV12Overflowmenu>
                 <OverflowMenu
                   autoAlign
+                  menuAlignment="bottom-end"
                   renderIcon={(props) => <Filter size={32} {...props} />}
                   className={`${colClass}-overflow`}
-                  flipped
                   aria-label={filterByLabel}
                   iconDescription={filterByLabel}
                 >

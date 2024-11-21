@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   OverflowMenu,
-  OverflowMenuItem,
+  MenuItem,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
 import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/react/icons';
@@ -37,23 +37,15 @@ export const AddSelectSort = ({
         const opts = [
           {
             id: `${cur}-asc`,
-            itemText: (
-              <>
-                <ArrowUp size={16} />
-                {cur}
-              </>
-            ),
+            label: cur,
+            shortcut: <ArrowUp size={16} />,
             direction: 'asc',
             attribute: cur,
           },
           {
             id: `${cur}-desc`,
-            itemText: (
-              <>
-                <ArrowDown size={16} />
-                {cur}
-              </>
-            ),
+            label: cur,
+            shortcut: <ArrowDown size={16} />,
             direction: 'desc',
             attribute: cur,
           },
@@ -74,18 +66,19 @@ export const AddSelectSort = ({
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu
             autoAlign
+            menuAlignment="bottom-end"
             renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
             className={`${blockClass}_overflow`}
-            flipped
             aria-label={sortByLabel}
             iconDescription={sortByLabel}
           >
             {sortByOpts.map((opt) => {
               return (
-                <OverflowMenuItem
+                <MenuItem
                   className={`${blockClass}_overflow-item`}
+                  shortcut={opt?.shortcut}
                   key={opt?.id}
-                  itemText={opt?.itemText}
+                  label={opt?.label}
                   onClick={() => sortHandler(opt)}
                 />
               );

@@ -97,3 +97,34 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     getFocusable: getFocusable,
   };
 };
+
+/**
+ *
+ * @param {*} firstElement
+ * @param {*} modalRef
+ * @param {string | undefined} selectorPrimaryFocus
+ */
+export const claimFocus = (
+  firstElement,
+  modalRef,
+  selectorPrimaryFocus = undefined
+) => {
+  if (
+    selectorPrimaryFocus &&
+    getSpecificElement(modalRef?.current, selectorPrimaryFocus)
+  ) {
+    const specifiedEl = getSpecificElement(
+      modalRef?.current,
+      selectorPrimaryFocus
+    );
+
+    if (
+      specifiedEl &&
+      window?.getComputedStyle(specifiedEl)?.display !== 'none'
+    ) {
+      return specifiedEl.focus();
+    }
+  }
+
+  setTimeout(() => firstElement?.focus(), 0);
+};

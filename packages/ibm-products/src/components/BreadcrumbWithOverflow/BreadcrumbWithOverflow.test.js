@@ -19,13 +19,13 @@ const breadcrumbContent = Array.from(
   { length: 5 },
   (_, index) => `Breadcrumb ${index + 1}`
 );
-
+const myOnClick = jest.fn();
 const breadcrumbItems = breadcrumbContent.map((item) => ({
   href: '/#',
   id: `id-${item.replace(' ', '_')}`,
   key: item,
   label: item,
-  onClick: () => {},
+  onClick: myOnClick,
 }));
 
 const sizes = {
@@ -168,6 +168,8 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(menuItems).toHaveLength(overflowItemsExpected);
     expect(menuItems[0]).toHaveTextContent(breadcrumbContent[1]);
     expect(menuItems[1]).toHaveTextContent(breadcrumbContent[2]);
+    await act(() => click(menuItems[1]));
+    expect(myOnClick).toHaveBeenCalled();
   });
 
   it('Renders just the breadcrumb and last item when very little space', async () => {

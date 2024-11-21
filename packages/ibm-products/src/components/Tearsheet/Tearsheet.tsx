@@ -145,7 +145,7 @@ export interface TearsheetProps extends PropsWithChildren {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
 
   /**
    * Specify a CSS selector that matches the DOM element that should be

@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { EditFullPage } from '.';
 
 import styles from '../CreateFullPage/_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;
@@ -34,7 +35,7 @@ import {
 import DocsPage from './EditFullPage.docs-page';
 
 export default {
-  title: 'Experimental/Patterns/Edit and update/EditFullPage',
+  title: 'Deprecated/Edit and update/EditFullPage',
   component: EditFullPage,
   tags: ['autodocs'],
   parameters: {
@@ -44,7 +45,27 @@ export default {
     controls: { sort: 'requiredFirst' },
   },
   decorators: [
-    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+    (story) => (
+      <div className={`${storyClass}__viewport`}>
+        {/* fullPage component styles */}
+        <style>{`
+      .${pkg.prefix}--custom-annotation { height: 100% }
+      .${pkg.prefix}--custom-annotation > .${pkg.prefix}--annotation__content { height: calc(100% - 1.6rem); padding: 0 }
+      `}</style>
+        <Annotation
+          className={`${pkg.prefix}--custom-annotation`}
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
   ],
 };
 

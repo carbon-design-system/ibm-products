@@ -138,11 +138,12 @@ const makeMatcherArray = (args) =>
  * argument.
  * @param {Function} test the test function to call, during which the call to
  * console.warn will be expected.
+ * @param {number} calls by default the test assumes warn will be called a single time, but it's possible it'll be called more than once
  */
-export const expectWarn = (message, test) => {
+export const expectWarn = (message, test, calls = 1) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
   const result = test();
-  expect(warn).toBeCalledTimes(1);
+  expect(warn).toBeCalledTimes(calls);
   // expect(warn).toHaveBeenCalledWith(...makeMatcherArray(message));
   warn.mockRestore();
   return result;

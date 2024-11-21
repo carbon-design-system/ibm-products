@@ -1773,27 +1773,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-cloud-cognitive-cli@workspace:config/cli":
-  version: 0.0.0-use.local
-  resolution: "@carbon/ibm-cloud-cognitive-cli@workspace:config/cli"
-  dependencies:
-    "@commitlint/parse": "npm:^18.6.0"
-    chalk: "npm:^5.3.0"
-    execa: "npm:^8.0.1"
-    fast-glob: "npm:^3.3.2"
-    fs-extra: "npm:^11.2.0"
-    inquirer: "npm:^9.2.12"
-    npm-check-updates: "npm:^16.14.12"
-    prettier: "npm:^3.2.4"
-    prettier-config-carbon: "npm:^0.11.0"
-    remark: "npm:^15.0.1"
-    semver: "npm:^7.6.3"
-    yargs: "npm:^17.7.2"
-  bin:
-    carbon-cli: ./bin/carbon-cli.js
-  languageName: unknown
-  linkType: soft
-
 "@carbon/ibm-cloud-cognitive-core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
@@ -2349,7 +2328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/parse@npm:^18.6.0, @commitlint/parse@npm:^18.6.1":
+"@commitlint/parse@npm:^18.6.1":
   version: 18.6.1
   resolution: "@commitlint/parse@npm:18.6.1"
   dependencies:
@@ -3860,13 +3839,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@inquirer/figures@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@inquirer/figures@npm:1.0.1"
-  checksum: ed9f23ce881e7fe7042f5f1a630d7d0febe7cce0eadc6e2eeb10238d80c4a19d03c344e980cb2e199081823fbaad42b3e1fab46ef77d3ac68e0575fc7037067a
-  languageName: node
-  linkType: hard
-
 "@inquirer/figures@npm:^1.0.6":
   version: 1.0.6
   resolution: "@inquirer/figures@npm:1.0.6"
@@ -4325,15 +4297,6 @@ __metadata:
   dependencies:
     "@lit-labs/ssr-dom-shim": "npm:^1.2.0"
   checksum: 16aa5a8d917bce24d6c7cb5979f0a978e91f6205b4d9a8ebea2baf965e7a8215dab581b83b331123b04190612f4992ecc7b219cf00cf9b82f53403b08b1b6d49
-  languageName: node
-  linkType: hard
-
-"@ljharb/through@npm:^2.3.13":
-  version: 2.3.13
-  resolution: "@ljharb/through@npm:2.3.13"
-  dependencies:
-    call-bind: "npm:^1.0.7"
-  checksum: 6150c6c43a726d52c26863ed6dc4ab54fa7cf625c81463a5ddec86278c99e23bf94dfc99ebf09a9ac3191332d4a27344e092f7e07f252b8cd600e2b38e645870
   languageName: node
   linkType: hard
 
@@ -14641,7 +14604,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"external-editor@npm:^3.0.3, external-editor@npm:^3.1.0":
+"external-editor@npm:^3.0.3":
   version: 3.1.0
   resolution: "external-editor@npm:3.1.0"
   dependencies:
@@ -16722,29 +16685,6 @@ __metadata:
     through: "npm:^2.3.6"
     wrap-ansi: "npm:^6.0.1"
   checksum: f642b9e5a94faaba54f277bdda2af0e0a6b592bd7f88c60e1614b5795b19336c7025e0c2923915d5f494f600a02fe8517413779a794415bb79a9563b061d68ab
-  languageName: node
-  linkType: hard
-
-"inquirer@npm:^9.2.12":
-  version: 9.2.20
-  resolution: "inquirer@npm:9.2.20"
-  dependencies:
-    "@inquirer/figures": "npm:^1.0.1"
-    "@ljharb/through": "npm:^2.3.13"
-    ansi-escapes: "npm:^4.3.2"
-    chalk: "npm:^5.3.0"
-    cli-cursor: "npm:^3.1.0"
-    cli-width: "npm:^4.1.0"
-    external-editor: "npm:^3.1.0"
-    lodash: "npm:^4.17.21"
-    mute-stream: "npm:1.0.0"
-    ora: "npm:^5.4.1"
-    run-async: "npm:^3.0.0"
-    rxjs: "npm:^7.8.1"
-    string-width: "npm:^4.2.3"
-    strip-ansi: "npm:^6.0.1"
-    wrap-ansi: "npm:^6.2.0"
-  checksum: beeca2f0da3eaca18fdf00d1c45e9db71b7699e5b4c96793056434928a96587bf83dcfb594d535162f62e59a6e3c4f0a64e0cdafcc5109123ab16ffa93f87903
   languageName: node
   linkType: hard
 
@@ -20457,7 +20397,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mute-stream@npm:1.0.0, mute-stream@npm:^1.0.0, mute-stream@npm:~1.0.0":
+"mute-stream@npm:^1.0.0, mute-stream@npm:~1.0.0":
   version: 1.0.0
   resolution: "mute-stream@npm:1.0.0"
   checksum: 36fc968b0e9c9c63029d4f9dc63911950a3bdf55c9a87f58d3a266289b67180201cade911e7699f8b2fa596b34c9db43dad37649e3f7fdd13c3bb9edb0017ee7
@@ -22771,7 +22711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.1.1, prettier@npm:^3.2.4":
+"prettier@npm:^3.1.1":
   version: 3.2.5
   resolution: "prettier@npm:3.2.5"
   bin:
@@ -23809,18 +23749,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark@npm:^15.0.1":
-  version: 15.0.1
-  resolution: "remark@npm:15.0.1"
-  dependencies:
-    "@types/mdast": "npm:^4.0.0"
-    remark-parse: "npm:^11.0.0"
-    remark-stringify: "npm:^11.0.0"
-    unified: "npm:^11.0.0"
-  checksum: 671eae3a4482377373cbbae956e2dbc0f8c40df1c3e5e2e1e82efa248b310ef5989340e1a5a8ebe94ff14fcf9c72612f40a29d002ffc0a465e3d6d50de973839
-  languageName: node
-  linkType: hard
-
 "remote-git-tags@npm:^3.0.0":
   version: 3.0.0
   resolution: "remote-git-tags@npm:3.0.0"
@@ -24221,13 +24149,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-async@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "run-async@npm:3.0.0"
-  checksum: 97fb8747f7765b77ebcd311d3a33548099336f04c6434e0763039b98c1de0f1b4421000695aff8751f309c0b995d8dfd620c1f1e4c35572da38c101488165305
-  languageName: node
-  linkType: hard
-
 "run-parallel@npm:^1.1.9":
   version: 1.2.0
   resolution: "run-parallel@npm:1.2.0"
@@ -24246,7 +24167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.5.5, rxjs@npm:^7.8.1":
+"rxjs@npm:^7.5.5":
   version: 7.8.1
   resolution: "rxjs@npm:7.8.1"
   dependencies:

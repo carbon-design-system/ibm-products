@@ -24,11 +24,12 @@ import {
 import mdx from './FilterPanel.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Experimental/Components/Filter panel/FilterPanel',
+  title: 'Deprecated/Filter panel/FilterPanel',
   component: FilterPanel,
   tags: ['autodocs'],
   parameters: {
@@ -64,6 +65,21 @@ export default {
   args: {
     title: 1,
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const demoData = [

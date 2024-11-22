@@ -35,6 +35,9 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component FilterPanelGroup', async () => {
     renderComponent();
     expect(screen.getByTestId(dataTestId)).toBeInTheDocument();

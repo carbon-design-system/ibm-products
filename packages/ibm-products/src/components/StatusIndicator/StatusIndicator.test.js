@@ -28,6 +28,10 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component StatusIndicator', async () => {
     renderComponent();
     screen.getByTestId(dataTestId);

@@ -22,6 +22,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
+import json from '@rollup/plugin-json';
 
 import * as packageJson from '../package.json' assert { type: 'json' };
 
@@ -125,6 +126,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
         targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
         flatten: false,
       }),
+      [json()],
       nodeResolve({
         browser: true,
         mainFields: ['jsnext', 'module', 'main'],

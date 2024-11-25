@@ -11,6 +11,7 @@ import { DecoratorSingleButton } from '.';
 import mdx from './DecoratorSingleButton.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 const scoreOptions = {
   '-1 (less than 0 is 0)': -1,
@@ -30,7 +31,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Experimental/Components/Decorators/DecoratorSingleButton',
+  title: 'Deprecated/Decorators/DecoratorSingleButton',
   component: DecoratorSingleButton,
   tags: ['autodocs'],
   parameters: {
@@ -90,6 +91,21 @@ export default {
     theme: 0,
     truncateValue: 0,
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {
@@ -113,7 +129,11 @@ const Template = (args) => {
     );
   }
 
-  return <DecoratorSingleButton {...args} />;
+  return (
+    <>
+      <DecoratorSingleButton {...args} />
+    </>
+  );
 };
 
 export const Default = Template.bind({});

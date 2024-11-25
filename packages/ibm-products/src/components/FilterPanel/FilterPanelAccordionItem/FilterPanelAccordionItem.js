@@ -27,6 +27,7 @@ const defaults = {
 
 /**
  * A container with a label and optional count.
+ * @deprecated This component is deprecated
  */
 export let FilterPanelAccordionItem = React.forwardRef(
   (
@@ -72,6 +73,10 @@ export let FilterPanelAccordionItem = React.forwardRef(
   }
 );
 
+FilterPanelAccordionItem.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanelAccordionItem = pkg.checkComponentEnabled(
   FilterPanelAccordionItem,

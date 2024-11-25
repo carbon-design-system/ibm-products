@@ -36,7 +36,7 @@
 .#{variables.$block-class}__left-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   border-right: 1px solid $border-subtle;
 }
@@ -67,6 +67,6 @@
 
 .#{variables.$block-class}__select-all-toggle-on.#{variables.$block-class}__select-all-sticky-left {
   position: sticky;
-  z-index: 1;
+  z-index: 10;
   left: 0;
 }

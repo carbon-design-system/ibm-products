@@ -35,8 +35,8 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
-import { useFocus } from '../../global/js/hooks';
-import { getSpecificElement } from '../../global/js/hooks/useFocus';
+import { useFocus, usePreviousValue } from '../../global/js/hooks';
+import { claimFocus } from '../../global/js/hooks/useFocus';
 
 const componentName = 'APIKeyModal';
 
@@ -78,6 +78,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       hasAPIKeyVisibilityToggle,
       hasDownloadLink,
       hideAPIKeyLabel,
+      launcherButtonRef,
       loading,
       loadingText,
       modalLabel,
@@ -125,6 +126,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       modalRef,
       selectorPrimaryFocus
     );
+    const prevOpen = usePreviousValue(open);
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
@@ -135,29 +137,17 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        if (
-          selectorPrimaryFocus &&
-          getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-        ) {
-          const specifiedEl = getSpecificElement(
-            modalRef?.current,
-            selectorPrimaryFocus
-          );
-
-          if (
-            specifiedEl &&
-            window?.getComputedStyle(specifiedEl)?.display !== 'none'
-          ) {
-            setTimeout(() => specifiedEl.focus(), 0);
-            return;
-          }
-        }
-
-        setTimeout(() => {
-          firstElement?.focus();
-        }, 0);
+        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
       }
     }, [firstElement, modalRef, open, selectorPrimaryFocus]);
+
+    useEffect(() => {
+      if (prevOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef.current.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, prevOpen]);
 
     const isPrimaryButtonDisabled = () => {
       if (loading) {
@@ -517,6 +507,11 @@ APIKeyModal.propTypes = {
    * label text that's displayed when hovering over visibility toggler to hide key
    */
   hideAPIKeyLabel: PropTypes.string,
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
   /**
    * designates if the modal is in a loading state via a request or some other in progress operation
    */

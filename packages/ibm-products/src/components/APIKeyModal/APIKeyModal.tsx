@@ -36,7 +36,7 @@ import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
-import { getSpecificElement } from '../../global/js/hooks/useFocus';
+import { claimFocus } from '../../global/js/hooks/useFocus';
 
 const componentName = 'APIKeyModal';
 
@@ -137,27 +137,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        if (
-          selectorPrimaryFocus &&
-          getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-        ) {
-          const specifiedEl = getSpecificElement(
-            modalRef?.current,
-            selectorPrimaryFocus
-          );
-
-          if (
-            specifiedEl &&
-            window?.getComputedStyle(specifiedEl)?.display !== 'none'
-          ) {
-            setTimeout(() => specifiedEl.focus(), 0);
-            return;
-          }
-        }
-
-        setTimeout(() => {
-          firstElement?.focus();
-        }, 0);
+        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
       }
     }, [firstElement, modalRef, open, selectorPrimaryFocus]);
 

@@ -200,7 +200,7 @@ describe(componentName, () => {
     });
 
     await expect(screen.getByTestId(dataTestId)).toHaveClass(
-      'c4p--coachmark__dark'
+      `${pkg.prefix}--coachmark__dark`
     );
   });
 });

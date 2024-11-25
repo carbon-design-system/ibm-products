@@ -17,6 +17,7 @@ export const Error403SVG = ({ className }) => {
       viewBox="0 0 750 570"
       fill="none"
       className={className}
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g clipPath="url(#clip0_0_2401)">

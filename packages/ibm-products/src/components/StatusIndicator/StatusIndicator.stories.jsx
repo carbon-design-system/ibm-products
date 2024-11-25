@@ -11,9 +11,10 @@ import { StatusIndicator, StatusIndicatorStep } from '.';
 import mdx from './StatusIndicator.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Status indicator/StatusIndicator',
+  title: 'Deprecated/Status indicator/StatusIndicator',
   component: StatusIndicator,
   tags: ['autodocs'],
   argTypes: {
@@ -35,6 +36,21 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const steps = [
@@ -90,16 +106,18 @@ const stepsAsync = [
 
 const Template = (args) => {
   return (
-    <StatusIndicator {...args}>
-      <StatusIndicatorStep status="inactive" description="Waiting" />
-      <StatusIndicatorStep status="active" description="Working" />
-      <StatusIndicatorStep
-        status="error"
-        description="Error"
-        errorMessage="Error message"
-      />
-      <StatusIndicatorStep status="finished" description="Success" />
-    </StatusIndicator>
+    <>
+      <StatusIndicator {...args}>
+        <StatusIndicatorStep status="inactive" description="Waiting" />
+        <StatusIndicatorStep status="active" description="Working" />
+        <StatusIndicatorStep
+          status="error"
+          description="Error"
+          errorMessage="Error message"
+        />
+        <StatusIndicatorStep status="finished" description="Success" />
+      </StatusIndicator>
+    </>
   );
 };
 

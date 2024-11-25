@@ -1,9 +1,20 @@
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
-
+const glob = require('fast-glob');
+const stories = glob.sync(
+  [
+    '../docs/**/*.mdx',
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
+  {
+    ignore: ['../src/**/docs/*.mdx'],
+    cwd: __dirname,
+  }
+);
 const config = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: stories,
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-toolbars',
@@ -22,9 +33,6 @@ const config = {
   framework: {
     name: '@storybook/web-components-vite',
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
   async viteFinal(config) {
     return mergeConfig(config, {

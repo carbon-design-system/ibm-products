@@ -48,8 +48,10 @@ export interface EditFullPageProps {
 // };
 
 /**
+ * **This component is deprecated.** <br>
  * Use when settings on a page need to always be shown in edit mode, or when the context of the page is needed to make several changes.
  * See usage guidance for further details.
+ * @deprecated
  */
 export let EditFullPage = React.forwardRef(
   (
@@ -89,6 +91,12 @@ export let EditFullPage = React.forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+EditFullPage.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated and will be removed in the next major version.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 EditFullPage = pkg.checkComponentEnabled(EditFullPage, componentName);

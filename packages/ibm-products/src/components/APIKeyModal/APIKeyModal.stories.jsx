@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Button,
   TextInput,
@@ -85,6 +85,7 @@ const blockClass = `${pkg.prefix}--apikey-modal`;
 const InstantTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const buttonRef = useRef(undefined);
 
   const generateKey = async () => {
     setLoading(true);
@@ -96,7 +97,12 @@ const InstantTemplate = (args) => {
   return (
     <>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
-      <APIKeyModal {...args} onClose={() => setOpen(false)} open={open} />
+      <APIKeyModal
+        {...args}
+        onClose={() => setOpen(false)}
+        open={open}
+        launcherButtonRef={buttonRef}
+      />
       {loading ? (
         <Button
           renderIcon={InlineLoading}
@@ -105,7 +111,9 @@ const InstantTemplate = (args) => {
           Generating...
         </Button>
       ) : (
-        <Button onClick={generateKey}>Generate</Button>
+        <Button onClick={generateKey} ref={buttonRef}>
+          Generate
+        </Button>
       )}
     </>
   );
@@ -117,6 +125,7 @@ const TemplateWithState = (args) => {
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
+  const buttonRef = useRef(undefined);
 
   // eslint-disable-next-line
   const submitHandler = async (apiKeyName) => {
@@ -148,8 +157,11 @@ const TemplateWithState = (args) => {
         onRequestGenerate={submitHandler}
         open={open}
         error={fetchError}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
+      <Button onClick={() => setOpen(!open)} ref={buttonRef}>
+        Generate API key
+      </Button>
     </>
   );
 };
@@ -166,6 +178,7 @@ const MultiStepTemplate = (args) => {
   const [open, setOpen] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+  const buttonRef = useRef(undefined);
 
   // multi step options
   const [name, setName] = useState(savedName);
@@ -310,8 +323,9 @@ const MultiStepTemplate = (args) => {
         customSteps={steps}
         nameRequired={false}
         editSuccess={editSuccess}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={() => setOpen(!open)}>
+      <Button onClick={() => setOpen(!open)} ref={buttonRef}>
         {editing ? 'Edit API key' : 'Generate API key'}
       </Button>
     </>
@@ -324,6 +338,7 @@ const EditTemplate = (args) => {
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const [fetchSuccess, setFetchSuccess] = useState(false);
+  const buttonRef = useRef(undefined);
 
   const submitHandler = async () => {
     action(`submitted ${apiKeyName}`)();
@@ -357,8 +372,11 @@ const EditTemplate = (args) => {
         open={open}
         error={fetchError}
         editSuccess={fetchSuccess}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={onOpenHandler}>Edit API key</Button>
+      <Button onClick={onOpenHandler} ref={buttonRef}>
+        Edit API key
+      </Button>
     </>
   );
 };

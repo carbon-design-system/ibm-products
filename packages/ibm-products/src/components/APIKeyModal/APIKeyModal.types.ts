@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode } from 'react';
+import { ReactNode, RefObject } from 'react';
 
 interface APIKeyModalCommonProps {
   /**
@@ -94,6 +94,10 @@ interface APIKeyModalCommonProps {
    * label text that's displayed when hovering over visibility toggler to hide key
    */
   hideAPIKeyLabel?: string;
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
   /**
    * designates if the modal is in a loading state via a request or some other in progress operation
    */

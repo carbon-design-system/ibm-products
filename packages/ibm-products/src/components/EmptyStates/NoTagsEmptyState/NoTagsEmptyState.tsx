@@ -77,6 +77,10 @@ export interface NoTagsEmptyStateProps {
    * Empty state subtitle
    */
   subtitle?: string | ReactNode;
+  /**
+   * Optional prop to specify ids for SVG elements, it will use generated id by default
+   */
+  svgId?: string;
 
   /**
    * Empty state title
@@ -104,6 +108,7 @@ export let NoTagsEmptyState = React.forwardRef<
       size = defaults.size,
       subtitle,
       title,
+      svgId,
 
       // Collect any other property values passed in.
       ...rest
@@ -129,6 +134,7 @@ export let NoTagsEmptyState = React.forwardRef<
           theme={illustrationTheme}
           size={size}
           alt={illustrationDescription || title}
+          svgId={svgId}
         />
         <EmptyStateContent
           action={action}
@@ -208,7 +214,10 @@ NoTagsEmptyState.propTypes = {
    * Empty state subtitle
    */
   subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-
+  /**
+   * Optional prop to specify ids for SVG elements, it will use generated id by default
+   */
+  svgId: PropTypes.string,
   /**
    * Empty state title
    */

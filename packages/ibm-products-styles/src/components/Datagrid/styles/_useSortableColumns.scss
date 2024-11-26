@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// stylelint-disable declaration-no-important
+
 @use '@carbon/styles/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
@@ -27,9 +29,8 @@
   .#{c4p-settings.$carbon-prefix}--table-header-label
     button:focus
     .#{$block-class}__sortable-icon {
-    // stylelint-disable-next-line declaration-no-important
     background: none !important;
-    // stylelint-disable-next-line declaration-no-important
+
     color: $text-primary !important;
   }
 
@@ -48,9 +49,9 @@
     min-width: 100%;
     padding: 0 $spacing-05;
     border: none;
-    // stylelint-disable-next-line declaration-no-important
+
     background: none !important;
-    // stylelint-disable-next-line declaration-no-important
+
     color: $text-primary !important;
     font: inherit;
   }

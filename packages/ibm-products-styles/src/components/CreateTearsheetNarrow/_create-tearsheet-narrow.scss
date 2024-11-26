@@ -44,7 +44,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow;
 .#{$block-class} .#{$block-class}__form > * {
   margin-bottom: $spacing-05;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   &:last-child {
     margin-bottom: 0;
   }

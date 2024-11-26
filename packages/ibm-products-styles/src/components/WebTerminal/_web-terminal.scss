@@ -58,7 +58,6 @@ $block-class: #{$pkg-prefix}--web-terminal;
   height: calc(100vh - #{$spacing-09});
   border-left: 1px solid $gray-90;
   color: $text-primary;
-  /* stylelint-disable-next-line  */
 }
 
 .#{$block-class}__bar {

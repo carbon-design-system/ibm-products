@@ -39,7 +39,6 @@
 .#{variables.$block-class}__customize-columns-column-list
   .#{variables.$block-class}__customize-columns-checkbox-visible-label {
   // Disabling linter only to match the spacing that Carbon uses for the Checkbox label
-  /* stylelint-disable-next-line */
   padding-left: convert.to-rem(6px);
 }
 

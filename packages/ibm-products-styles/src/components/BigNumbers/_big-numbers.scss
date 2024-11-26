@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable declaration-no-important
+
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
@@ -111,7 +113,6 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 }
 
 .#{$skeleton-block-class}__value {
-  // stylelint-disable-next-line declaration-no-important
   height: $spacing-08 !important;
   margin: 0;
 }
@@ -131,7 +132,6 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--lg
   .#{$skeleton-block-class}__value {
-  // stylelint-disable-next-line declaration-no-important
   height: $spacing-09 !important;
 }
 
@@ -142,7 +142,6 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--xl
   .#{$skeleton-block-class}__value {
-  // stylelint-disable-next-line declaration-no-important
   height: $spacing-10 !important;
 }
 

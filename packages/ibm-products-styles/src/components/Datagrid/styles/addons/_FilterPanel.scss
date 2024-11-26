@@ -14,7 +14,7 @@
 
 .#{$block-class}-filter-panel__container {
   position: relative;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+
   width: to-rem(320px);
   height: clamp(var(--filter-panel-min-height), 100%, 100vh);
   border-top: 1px $layer-accent-01 solid;
@@ -30,7 +30,7 @@
   top: -1px;
   left: 0;
   display: block;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+
   width: to-rem(47px); // size of filter panel button
   height: 1px;
   background-color: $layer-01;
@@ -97,7 +97,7 @@
   position: sticky;
   z-index: 1; // To layer action set on top of content behind when sticky
   bottom: 0;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+
   height: to-rem(64px);
   margin-top: auto;
 }

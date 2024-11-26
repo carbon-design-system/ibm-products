@@ -5,9 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable function-no-unknown */
-
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/react/scss/colors' as *;
@@ -107,7 +104,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
   // Onboarding does not always use Carbon defaults/tokens
   animation: fade 600ms;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }

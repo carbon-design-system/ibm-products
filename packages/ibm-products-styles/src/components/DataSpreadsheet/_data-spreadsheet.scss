@@ -71,7 +71,6 @@ $header-cell-background: $layer-accent-01;
     color: $text-secondary;
   }
 
-  /* stylelint-disable-next-line max-nesting-depth */
   [role="'columnheader'"]:last-child,
   [role="'gridcell'"]:last-child {
     border-right: 1px solid $text-placeholder;
@@ -84,7 +83,6 @@ $header-cell-background: $layer-accent-01;
     background-color: $header-cell-background;
     cursor: pointer;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:hover,
     &:focus {
       background-color: $background-selected-hover;
@@ -133,7 +131,7 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     min-width: initial;
     min-height: initial;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
     margin: 0;
     background-color: $body-cell-background;
@@ -141,7 +139,6 @@ $header-cell-background: $layer-accent-01;
     font-family: inherit;
     resize: none;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:focus,
     &:active {
       @include utilities.focus-outline('outline');
@@ -158,11 +155,10 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     width: fit-content;
     max-width: var(--#{$block-class}--total-width);
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
     visibility: hidden;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:focus {
       outline: $spacing-01 solid $background-brand;
     }
@@ -177,10 +173,9 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     // Could be fixed by using border-right but the fact that
     // this element is positioned absolute prevents that from working
-    /* stylelint-disable-next-line carbon/layout-token-use */
     padding-right: calc(#{$spacing-03} - 1px);
     padding-bottom: $spacing-01;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     padding-left: calc(#{$spacing-03} - #{$spacing-01});
     border: $spacing-01 solid $background-brand;
     background-color: $body-cell-background;
@@ -188,14 +183,12 @@ $header-cell-background: $layer-accent-01;
     font-family: inherit;
     text-align: left;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &[data-active-row-index='header'],
     &[data-active-column-index='header'] {
       z-index: 4;
       background-color: transparent;
     }
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:focus {
       border: $spacing-01 solid $background-brand;
       outline: 0;
@@ -214,7 +207,6 @@ $header-cell-background: $layer-accent-01;
     border: 1px solid $background-brand;
     pointer-events: none;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       position: absolute;
       top: 0;
@@ -229,7 +221,6 @@ $header-cell-background: $layer-accent-01;
     &.#{$block-class}__selection-area--element-cloned {
       z-index: 4;
 
-      /* stylelint-disable-next-line max-nesting-depth */
       &::before {
         background-color: $border-inverse;
         opacity: 0.25;
@@ -253,7 +244,6 @@ $header-cell-background: $layer-accent-01;
       background-color: $background-inverse;
       color: $text-inverse;
 
-      /* stylelint-disable-next-line max-nesting-depth */
       &:focus,
       &:hover {
         background-color: $background-inverse;
@@ -289,7 +279,6 @@ $header-cell-background: $layer-accent-01;
     background-color: $background-inverse;
     color: $text-inverse;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:focus,
     &:hover {
       background-color: $background-inverse;

@@ -21,7 +21,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--carousel;
 .#{$block-class} {
   position: relative;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   &:focus {
     outline: none;
   }
@@ -61,7 +60,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--carousel;
   -ms-user-select: none;
   user-select: none;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion) {
     scroll-behavior: auto;
   }

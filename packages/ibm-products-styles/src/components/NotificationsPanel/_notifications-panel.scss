@@ -184,7 +184,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
           transition: transform $duration-moderate-02 ease;
-          /* stylelint-disable-next-line max-nesting-depth */
+
           @media (prefers-reduced-motion: reduce) {
             transition: none;
           }
@@ -216,7 +216,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       color: $text-primary;
       opacity: 0;
 
-      /* stylelint-disable-next-line max-nesting-depth */
       &:hover,
       &:focus {
         opacity: 1;

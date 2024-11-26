@@ -17,10 +17,8 @@
 $block-class: #{c4p-settings.$pkg-prefix}--truncated-list;
 
 .#{$block-class}__list {
-  /* stylelint-disable-next-line carbon/motion-duration-use */
   transition: height 240ms motion(exit, productive);
 
-  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }

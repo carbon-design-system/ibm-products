@@ -30,7 +30,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-search;
   top: 100%;
   right: 0;
   left: 0;
-  /* stylelint-disable-next-line function-no-unknown */
+
   max-height: to-rem(320px);
   padding: $spacing-03;
   background-color: $layer;

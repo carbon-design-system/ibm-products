@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable max-nesting-depth */
+// stylelint-disable media-feature-range-notation
+// stylelint-disable declaration-no-important
 
-/* stylelint-disable media-feature-range-notation */
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -32,7 +32,6 @@
 }
 
 .GenericView {
-  // stylelint-disable-next-line declaration-no-important
   margin-top: $spacing-12 !important;
 }
 

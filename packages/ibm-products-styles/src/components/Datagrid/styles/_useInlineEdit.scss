@@ -54,7 +54,6 @@ $row-heights: (
 }
 
 @mixin input-outline($color: $focus) {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: $spacing-01 solid $color;
   outline-offset: calc(-1 * #{$spacing-01});
 
@@ -138,7 +137,6 @@ $row-heights: (
     display: none;
   }
 
-  /* stylelint-disable-next-line */
   &:hover,
   &.#{variables.$block-class}__inline-edit-button--active {
     .#{variables.$block-class}__inline-edit-button-icon {

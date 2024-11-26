@@ -13,8 +13,6 @@
 
 @use './styles/index';
 
-/* stylelint-disable max-nesting-depth */
-
 // Other Carbon settings.
 // TODO: @use '@carbon/react/scss/grid'; if needed
 
@@ -63,11 +61,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   height: 100%;
   flex-direction: column;
 
-  /* stylelint-disable-next-line */
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   :global {
     .#{c4p-settings.$carbon-prefix}--pagination {
       // newer version of carbon pagination has scroll which doesn't make any sense, removing it
-      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
       overflow-x: unset;
     }
   }

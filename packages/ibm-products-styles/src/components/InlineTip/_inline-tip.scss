@@ -15,11 +15,7 @@
  * instead of many individual rules.
  */
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable carbon/theme-token-use */
-/* stylelint-disable declaration-no-important */
-/* stylelint-disable function-no-unknown */
-/* stylelint-disable max-nesting-depth */
+// stylelint-disable declaration-no-important
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;

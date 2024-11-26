@@ -1,5 +1,3 @@
-/* stylelint-disable function-no-unknown */
-/* stylelint-disable max-nesting-depth */
 //
 // Copyright IBM Corp. 2023, 2024
 //
@@ -7,9 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable carbon/theme-token-use */
-/* stylelint-disable declaration-no-important */
+// stylelint-disable declaration-no-important
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;

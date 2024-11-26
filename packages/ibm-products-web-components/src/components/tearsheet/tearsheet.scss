@@ -288,15 +288,14 @@ $motion-duration: $duration-moderate-02;
 
     // and restore the 'light' prop in case light fields are wanted
     .#{$carbon-prefix}--text-input--light,
-  .#{$carbon-prefix}--text-area--light,
-  .#{$carbon-prefix}--search--light .#{$carbon-prefix}--search-input,
-  .#{$carbon-prefix}--select--light .#{$carbon-prefix}--select-input,
-  .#{$carbon-prefix}--dropdown--light,
-  .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
-  /* stylelint-disable-next-line prettier/prettier */
-  .#{$carbon-prefix}--number--light input[type='number'],
-  .#{$carbon-prefix}--date-picker--light
-    .#{$carbon-prefix}--date-picker__input {
+    .#{$carbon-prefix}--text-area--light,
+    .#{$carbon-prefix}--search--light .#{$carbon-prefix}--search-input,
+    .#{$carbon-prefix}--select--light .#{$carbon-prefix}--select-input,
+    .#{$carbon-prefix}--dropdown--light,
+    .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
+    .#{$carbon-prefix}--number--light input[type='number'],
+    .#{$carbon-prefix}--date-picker--light
+      .#{$carbon-prefix}--date-picker__input {
       background-color: $field-02;
     }
   }

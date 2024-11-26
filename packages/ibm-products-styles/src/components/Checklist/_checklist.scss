@@ -92,7 +92,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   transform: rotate(0deg);
   transition: all $duration-fast-02 motion(standard, productive);
 
-  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
@@ -111,7 +110,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   max-width: none;
   min-height: auto;
   // override bx--btn to allow two-line ellipsis
-  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   flex-shrink: unset;
   padding: 0;
   border: none;
@@ -147,7 +145,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   transform: translate(0, 0);
   transition: all $duration-fast-02 motion(standard, productive);
 
-  /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
@@ -183,7 +180,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__icon {
-  /* stylelint-disable-next-line */
   margin: to-rem(1px) $spacing-03 0 0;
   color: $icon-primary;
 }

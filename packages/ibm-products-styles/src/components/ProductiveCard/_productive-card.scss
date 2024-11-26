@@ -57,7 +57,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
     padding-left: calc($spacing-01 + $spacing-03);
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       position: absolute;
       left: 0;
@@ -68,24 +67,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
       opacity: 1;
     }
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:hover {
-      /* stylelint-disable-next-line max-nesting-depth */
       &::before {
         opacity: 0;
       }
 
       + .#{$block-class}__actions-header-ghost-button {
-        /* stylelint-disable-next-line max-nesting-depth */
         &::before {
           opacity: 0;
         }
       }
     }
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:first-child:not(:last-child) {
-      /* stylelint-disable-next-line max-nesting-depth */
       &::before {
         display: none;
       }

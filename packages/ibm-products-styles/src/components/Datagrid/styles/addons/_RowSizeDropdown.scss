@@ -32,7 +32,6 @@
   .#{c4p-settings.$carbon-prefix}--popover--bottom-right.#{variables.$block-class}__row-height-settings-popover
   .#{c4p-settings.$carbon-prefix}--popover-caret {
   // Used to fix layout issue with IconButton caret inside of Popover component
-  /* stylelint-disable-next-line carbon/layout-token-use */
   left: -4px;
 }
 

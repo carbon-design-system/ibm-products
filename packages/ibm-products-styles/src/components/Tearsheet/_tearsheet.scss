@@ -287,7 +287,6 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide.#{$block-class}--has-ai-label
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
     /* spacing 11 plus additional space for slug/close */
-    /* stylelint-disable-next-line carbon/layout-token-use */
     padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 
@@ -399,7 +398,6 @@ $motion-duration: $duration-moderate-02;
     .#{$carbon-prefix}--select--light .#{$carbon-prefix}--select-input,
     .#{$carbon-prefix}--dropdown--light,
     .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
-    /* stylelint-disable-next-line prettier/prettier */
     .#{$carbon-prefix}--number--light input[type='number'],
     .#{$carbon-prefix}--date-picker--light
       .#{$carbon-prefix}--date-picker__input {
@@ -425,7 +423,6 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--has-slug,
   &.#{$block-class}--has-ai-label {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     --overlay-color: #{$ai-overlay};
   }
 

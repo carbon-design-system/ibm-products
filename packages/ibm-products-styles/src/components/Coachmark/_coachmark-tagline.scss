@@ -5,9 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable max-nesting-depth */
-/* stylelint-disable carbon/theme-token-use */
-/* stylelint-disable declaration-no-important */
+// stylelint-disable declaration-no-important
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -52,7 +50,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
     content: '';
     inset: 0;
     opacity: 0;
-    /* stylelint-disable-next-line carbon/motion-duration-use */
+
     transition: opacity $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
       transition: none;

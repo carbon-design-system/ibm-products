@@ -51,7 +51,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
-  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
   padding-right: var(--#{$block-class}--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -121,7 +120,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
     min-height: $spacing-08;
     padding: $spacing-05;
@@ -149,7 +148,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       padding-top: $spacing-08;
     }
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       @include setDividerStyles();
 
@@ -217,7 +215,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__title {
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     top: var(--#{$block-class}--title-stop);
 
     /* border-bottom used instead of padding which wrapped text shows through */
@@ -234,7 +232,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__title-text {
-    /* stylelint-disable-next-line carbon/layout-token-use */
     transform: translateY(
       calc(
         -1 * #{$spacing-05} * var(--#{$block-class}--scroll-animation-progress)
@@ -261,13 +258,12 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include setCommonTitleStyles();
 
     position: absolute;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     top: 0;
     opacity: var(--#{$block-class}--scroll-animation-progress);
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
-    /* stylelint-disable-next-line carbon/layout-token-use */
     transform: translateY(
       calc(
         #{$spacing-05} * (1 - var(--#{$block-class}--scroll-animation-progress))
@@ -346,12 +342,11 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     align-items: center;
     justify-content: center;
     padding: 0;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+
     background-color: unset;
     color: $text-primary;
     min-block-size: 0;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     &:hover {
       background-color: $background-hover;
     }
@@ -374,7 +369,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     right: 0;
     display: flex;
 
-    /* stylelint-disable-next-line max-nesting-depth */
     @media (prefers-reduced-motion) {
       position: absolute;
     }
@@ -471,6 +465,5 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}--has-slug + .#{$block-class}__overlay,
 .#{$block-class}--has-ai-label + .#{$block-class}__overlay {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: $ai-overlay;
 }

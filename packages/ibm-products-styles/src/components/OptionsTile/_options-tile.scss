@@ -121,12 +121,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__summary--warn svg path[fill='none'] {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   fill: $black-100;
 }
 
 .#{$block-class}__summary--warn svg path[fill='none'] {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   fill: $black-100;
 }
 

@@ -70,10 +70,8 @@ $theme-keys: map-keys($themes);
 
 .#{$carbon-prefix}--tooltip__trigger.#{$block-class}__tooltip,
 .#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
-  /* stylelint-disable-next-line max-nesting-depth */
   &:hover,
   &:focus {
-    /* stylelint-disable-next-line max-nesting-depth */
     svg {
       fill: $layer-01;
     }

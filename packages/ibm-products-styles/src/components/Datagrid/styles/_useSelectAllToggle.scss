@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable declaration-no-important
+
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use './variables';
@@ -13,9 +15,8 @@
 .#{variables.$block-class}__grid-container {
   th.#{variables.$block-class}__select-all-toggle-on,
   td.#{variables.$block-class}__select-all-toggle-on {
-    // stylelint-disable-next-line declaration-no-important
     width: 4.5rem !important;
-    // stylelint-disable-next-line declaration-no-important
+
     min-width: initial !important;
     box-sizing: border-box;
     flex: 0 0 auto;

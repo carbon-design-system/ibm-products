@@ -19,7 +19,6 @@ $handle-class: #{c4p-settings.$pkg-prefix}--coachmark-dragbar__handle;
 .#{$block-class} {
   display: flex;
 
-  /* stylelint-disable-next-line max-nesting-depth */
   svg {
     color: $icon-inverse;
   }

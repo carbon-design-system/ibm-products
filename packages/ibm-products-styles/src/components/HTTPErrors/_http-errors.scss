@@ -69,7 +69,6 @@ $block-class-other: #{c4p-settings.$pkg-prefix}--http-errors-other;
     transform: scale(1.5);
   }
 }
-/* stylelint-disable carbon/theme-token-use */
 
 .#{$block-class-404}__prefix-cls-1 {
   fill: none;
@@ -141,5 +140,3 @@ $block-class-other: #{c4p-settings.$pkg-prefix}--http-errors-other;
 .#{$block-class-other}__prefix-cls-75 {
   opacity: 0.15;
 }
-
-/* stylelint-enable */

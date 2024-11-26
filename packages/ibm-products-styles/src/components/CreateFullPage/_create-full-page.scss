@@ -135,7 +135,6 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
     calc(-1 * #{$spacing-08});
 
-  /* stylelint-disable-next-line max-nesting-depth */
   &::after {
     position: absolute;
     top: 0;

@@ -15,13 +15,6 @@
  * individual rules.
  */
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable carbon/motion-duration-use */
-/* stylelint-disable carbon/theme-token-use */
-/* stylelint-disable declaration-no-important */
-/* stylelint-disable function-no-unknown */
-/* stylelint-disable max-nesting-depth */
-
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/react/scss/colors' as *;

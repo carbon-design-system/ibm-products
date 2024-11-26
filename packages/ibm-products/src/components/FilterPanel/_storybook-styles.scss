@@ -5,9 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable declaration-no-important */
-
 @use '../../../../ibm-products-styles/src/global/styles/project-settings' as
   c4p-settings;
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel;

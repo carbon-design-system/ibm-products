@@ -27,7 +27,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   padding: $spacing-05;
 }
 
-/* stylelint-disable max-nesting-depth */
 .#{$block-class}__selections {
   &-wrapper {
     display: block;

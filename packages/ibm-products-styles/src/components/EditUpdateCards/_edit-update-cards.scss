@@ -21,7 +21,7 @@
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
-/* stylelint-disable max-nesting-depth */
+
 $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
 
 .#{$block-class} {

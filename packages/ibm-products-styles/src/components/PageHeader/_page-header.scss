@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable declaration-no-important
+
 // Other Carbon settings.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
@@ -38,27 +40,23 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
 @keyframes background-appear {
   from {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
   }
 
   to {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
   }
 }
 @keyframes background-and-shadow-appear {
   from {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
-    /* stylelint-disable-next-line carbon/theme-token-use */
+
     box-shadow: 0 1px 0 var(--from-color);
   }
 
   to {
-    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
-    /* stylelint-disable-next-line carbon/theme-token-use */
+
     box-shadow: 0 1px 0 var(--to-color-shadow);
   }
 }
@@ -88,7 +86,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: $animation $duration linear paused forwards;
   // Added separately for clarity
   animation-delay: calc(
@@ -104,7 +101,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     /* z-index used to raise above any position relative content as per Carbon header */
     /* dropped  1 below Carbon header so as not to overlay the side panel */
     z-index: $z-index-header-minus;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+
     top: var(--#{$block-class}--header-top);
     display: inline-block; /* cause top/bottom margin to reserve space */
     width: 100%;
@@ -648,9 +645,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 }
 
 .#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
-  // stylelint-disable-next-line
   position: var(--#{$block-class}--tagset-tooltip-position) !important;
-  // stylelint-disable-next-line
   top: var(--#{$block-class}--tagset-tooltip-offset) !important;
 }
 

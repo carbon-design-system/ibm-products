@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// stylelint-disable declaration-no-important
+
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
@@ -100,7 +102,6 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__trigger {
-    // stylelint-disable-next-line declaration-no-important
     border: none !important;
     font-family: inherit;
   }

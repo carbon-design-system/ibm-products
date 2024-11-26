@@ -491,6 +491,7 @@ CustomEdit.args = {
   savedPermissions: 'Read only',
   editing: true,
   editButtonText: 'Save API key',
+  generateTitle: 'Save an API key',
 };
 CustomEdit.parameters = {
   docs: {

@@ -192,6 +192,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
 
     useEffect(() => {
       if (editing && editSuccess) {
+        setTitle(generateTitle);
         setSuccessMessage(editSuccessTitle);
       } else if (apiKeyLoaded) {
         setTitle(generateTitle);

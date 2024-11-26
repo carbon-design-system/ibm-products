@@ -415,6 +415,7 @@ export const InstantGenerate = InstantTemplate.bind({});
 InstantGenerate.args = {
   ...defaultProps,
   apiKeyLabel: 'Unique API Key',
+  generateTitle: 'Generate an API key',
 };
 
 export const CustomGenerate = MultiStepTemplate.bind({});
@@ -428,6 +429,7 @@ CustomGenerate.args = {
   savedAllResources: false,
   savedResource: '',
   savedPermissions: '',
+  generateTitle: 'Generate an API key',
 };
 CustomGenerate.parameters = {
   docs: {

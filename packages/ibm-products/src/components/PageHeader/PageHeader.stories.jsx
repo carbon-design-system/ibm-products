@@ -133,7 +133,6 @@ const children = {
     <div style={{ display: 'flex' }}>
       <p
         style={{
-          // stylelint-disable-next-line carbon/layout-token-use
           marginRight: '50px',
           maxWidth: '400px',
         }}

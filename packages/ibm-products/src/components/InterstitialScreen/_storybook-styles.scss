@@ -32,42 +32,28 @@
 }
 
 .GenericView {
-  /* stylelint-disable-next-line declaration-no-important */
+  // stylelint-disable-next-line declaration-no-important
   margin-top: $spacing-12 !important;
 }
 
 .NoImageExampleModal {
-  $one-grid-column: calc(
-    100% / 16
-  ); // stylelint-disable-line carbon/layout-token-use
+  $one-grid-column: calc(100% / 16);
 
-  width: calc(
-    $one-grid-column * 16
-  ); // stylelint-disable-line carbon/layout-token-use
+  width: calc($one-grid-column * 16);
 
   @media (min-width: 672px) {
-    width: calc(
-      $one-grid-column * 12
-    ); // stylelint-disable-line carbon/layout-token-use
+    width: calc($one-grid-column * 12);
   }
 }
 
 .NoImageExampleFullScreen {
-  $one-grid-column: calc(
-    100% / 16
-  ); // stylelint-disable-line carbon/layout-token-use
+  $one-grid-column: calc(100% / 16);
 
-  width: calc(
-    $one-grid-column * 16
-  ); // stylelint-disable-line carbon/layout-token-use
+  width: calc($one-grid-column * 16);
   @media (min-width: 672px) {
-    width: calc(
-      $one-grid-column * 12
-    ); // stylelint-disable-line carbon/layout-token-use
+    width: calc($one-grid-column * 12);
   }
   @media (min-width: 1056px) {
-    width: calc(
-      $one-grid-column * 8
-    ); // stylelint-disable-line carbon/layout-token-use
+    width: calc($one-grid-column * 8);
   }
 }

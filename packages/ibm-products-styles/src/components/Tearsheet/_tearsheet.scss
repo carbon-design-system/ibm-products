@@ -22,7 +22,6 @@
 
 $block-class: #{$pkg-prefix}--tearsheet;
 
-// stylelint-disable-next-line carbon/theme-token-use
 $motion-duration: $duration-moderate-02;
 
 @include block-wrap($block-class) {
@@ -54,7 +53,7 @@ $motion-duration: $duration-moderate-02;
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
-    // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+
     transition: visibility 0s linear $motion-duration,
       background-color $motion-duration motion(exit, expressive),
       opacity $motion-duration motion(exit, expressive);
@@ -65,7 +64,7 @@ $motion-duration: $duration-moderate-02;
   &.is-visible {
     z-index: utilities.z('modal');
     align-items: flex-end;
-    // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+
     transition: visibility 0s linear,
       background-color $motion-duration motion(entrance, expressive),
       opacity $motion-duration motion(entrance, expressive);
@@ -105,7 +104,6 @@ $motion-duration: $duration-moderate-02;
     // viewport, capped at 500px to set an upper limit on the movement speed
     // For the reason for calc() see https://github.com/sass/sass/issues/2849
     // and https://github.com/sass/node-sass/issues/2815.
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 

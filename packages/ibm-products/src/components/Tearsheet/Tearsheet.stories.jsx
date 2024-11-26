@@ -159,18 +159,12 @@ const mainContent = (
         <TextInput
           id="tss-ft1"
           labelText="Enter an important value here"
-          style={
-            // stylelint-disable-next-line carbon/layout-token-use
-            { marginBottom: '1em' }
-          }
+          style={{ marginBottom: '1em' }}
         />
         <TextInput
           id="tss-ft2"
           labelText="Here is an entry field:"
-          style={
-            // stylelint-disable-next-line carbon/layout-token-use
-            { marginBottom: '1em' }
-          }
+          style={{ marginBottom: '1em' }}
         />
       </FormGroup>
     </Form>
@@ -388,19 +382,13 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
                 <TextInput
                   id="tss-ft1"
                   labelText="Enter an important value here"
-                  style={
-                    // stylelint-disable-next-line carbon/layout-token-use
-                    { marginBottom: '1em' }
-                  }
+                  style={{ marginBottom: '1em' }}
                   disabled
                 />
                 <TextInput
                   id="tss-ft2"
                   labelText="Here is an entry field:"
-                  style={
-                    // stylelint-disable-next-line carbon/layout-token-use
-                    { marginBottom: '1em' }
-                  }
+                  style={{ marginBottom: '1em' }}
                 />
               </FormGroup>
             </Form>

@@ -13,9 +13,9 @@
 .#{variables.$block-class}__grid-container {
   th.#{variables.$block-class}__select-all-toggle-on,
   td.#{variables.$block-class}__select-all-toggle-on {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     width: 4.5rem !important;
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     min-width: initial !important;
     box-sizing: border-box;
     flex: 0 0 auto;

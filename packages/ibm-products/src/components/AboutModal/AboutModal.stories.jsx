@@ -143,15 +143,7 @@ export default {
         1: <>IBM Product name example that is longer than one line</>,
         2: (
           <>
-            IBM{' '}
-            <span
-              style={
-                // stylelint-disable-next-line carbon/type-token-use
-                { fontWeight: '600' }
-              }
-            >
-              Product name
-            </span>
+            IBM <span style={{ fontWeight: '600' }}>Product name</span>
           </>
         ),
       },

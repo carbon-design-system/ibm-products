@@ -24,7 +24,7 @@
 @keyframes step-content-entrance {
   0% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+
     transform: translateY(-0.75rem);
   }
 
@@ -46,7 +46,6 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 
   margin-left: 0;
 
-  // stylelint-disable-next-line carbon/motion-easing-use
   animation: step-content-entrance $duration-slow-01;
   animation-fill-mode: forwards;
   animation-timing-function: $standard-easing;
@@ -66,7 +65,6 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 }
 
 .#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
-  // stylelint-disable-next-line carbon/motion-easing-use
   animation: step-content-entrance $duration-slow-01;
   animation-fill-mode: forwards;
   animation-timing-function: $standard-easing;

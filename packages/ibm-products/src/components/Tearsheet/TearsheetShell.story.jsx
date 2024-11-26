@@ -53,10 +53,8 @@ const className = 'client-class-1 client-class-2';
 const dummyContent = (
   <div
     style={{
-      // stylelint-disable-next-line carbon/layout-token-use
       padding: '50px',
       height: '400px',
-      // stylelint-disable-next-line color-named
     }}
   >
     {Array.from({ length: 10 }, (_, k) => ({ key: `Paragraph-${k}` })).map(

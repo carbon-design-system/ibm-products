@@ -79,7 +79,6 @@ const App = () => {
       <GlobalHeader />
       <div
         style={{
-          // stylelint-disable-next-line carbon/layout-token-use
           marginTop: '48px',
         }}
       ></div>
@@ -119,7 +118,6 @@ const App = () => {
               key={card.topic.name}
               lg={4}
               style={{
-                // stylelint-disable-next-line carbon/layout-token-use
                 marginTop: '36px',
               }}
             >

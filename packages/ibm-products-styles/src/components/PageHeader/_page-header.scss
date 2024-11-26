@@ -69,11 +69,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   $to-color: $layer-01,
   $to-color-shadow: $layer-accent-01
 ) {
-  // stylelint-disable-next-line carbon/theme-token-use
   --from-color: #{$from-color};
-  // stylelint-disable-next-line carbon/theme-token-use
   --to-color: #{$to-color};
-  // stylelint-disable-next-line carbon/theme-token-use
   --to-color-shadow: #{$to-color-shadow};
 
   position: absolute;
@@ -196,7 +193,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     content: '';
     opacity: 0;
     transform: translateX(-50%) scaleX(1);
-    // stylelint-disable-next-line carbon/motion-easing-use
+
     transition: all $duration-moderate-01 ease-out;
   }
 
@@ -417,7 +414,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     + .#{$block-class}__title-row--sticky {
-    // stylelint-disable-next-line carbon/layout-token-use
     top: calc(
       var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
     );
@@ -473,7 +469,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__title-icon {
     margin-right: $spacing-04;
-    // stylelint-disable-next-line carbon/layout-token-use
+
     transform: translateY(-2px); // positional tweak requested by design review
 
     vertical-align: middle;

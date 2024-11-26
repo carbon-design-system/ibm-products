@@ -87,7 +87,7 @@ $one-grid-column: calc(100% / 16);
   &--container {
     min-width: 47rem;
     max-width: 82rem;
-    margin: calc($spacing-10 * 2) auto; // stylelint-disable-line carbon/layout-token-use
+    margin: calc($spacing-10 * 2) auto;
     background-color: $background;
   }
 

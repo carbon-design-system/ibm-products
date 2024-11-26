@@ -58,7 +58,6 @@ $theme-keys: map-keys($themes);
   @each $color in $base-colors {
     @each $contrast-key in $theme-keys {
       .#{$block-class}--#{$key}.#{$block-class}--#{$contrast-key}-#{$color} {
-        // stylelint-disable-next-line carbon/theme-token-use
         background-color: carbon-get-background-color(
           $color,
           $key,

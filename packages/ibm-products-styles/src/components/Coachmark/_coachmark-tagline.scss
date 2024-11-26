@@ -38,7 +38,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-tagline;
   color: $white-0 !important;
   grid-template-columns: [cta-col] auto [close-btn-col] $spacing-08;
   opacity: 1;
-  // stylelint-disable-next-line carbon/motion-duration-use
   transition: opacity $duration-moderate-02 motion(exit, productive) 300ms;
   transition-delay: $duration-moderate-02;
 

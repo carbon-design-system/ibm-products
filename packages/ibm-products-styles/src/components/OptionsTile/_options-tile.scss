@@ -134,7 +134,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   overflow: hidden;
   height: max-content;
   // spacing-05 + toggle width
-  // stylelint-disable-next-line carbon/layout-token-use
   padding-right: calc(#{$spacing-05} + 2rem);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -149,7 +148,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 .#{$block-class}__content {
   padding-right: $spacing-05;
   // spacing-05 + chevron size + spacing-05
-  // stylelint-disable-next-line carbon/layout-token-use
   padding-left: calc(#{$spacing-05} * 2 + 1rem);
 }
 
@@ -208,13 +206,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class}--lg .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  // stylelint-disable-next-line carbon/layout-token-use
   top: 1rem;
 }
 
 .#{$block-class}--xl .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  // stylelint-disable-next-line carbon/layout-token-use
   top: 1.5rem;
 }
 

@@ -221,7 +221,7 @@ $colors: (
         --#{$block-class}__condition-wrapper-color: #{list.nth(
             $group-colors,
             $item-index
-          )}; // stylelint-disable-line carbon/theme-token-use
+          )};
       }
     }
 

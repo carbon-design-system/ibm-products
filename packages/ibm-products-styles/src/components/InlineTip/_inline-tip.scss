@@ -177,7 +177,7 @@ $purple: #7f3ae7;
 }
 
 .#{$block-class} .#{$block-class}__close-icon {
-  padding: to-rem(6px) 0 0 0;
+  padding: to-rem(6px) 0 0;
   block-size: $spacing-07;
   color: $white-0;
   inline-size: $spacing-07;

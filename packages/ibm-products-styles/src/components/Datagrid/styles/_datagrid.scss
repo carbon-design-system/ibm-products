@@ -404,11 +404,11 @@
   }
 
   .#{$block-class}__carbon-row {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     flex: none !important;
 
     .#{$block-class}__carbon-row:hover a {
-      /* stylelint-disable-next-line declaration-no-important */
+      // stylelint-disable-next-line declaration-no-important
       color: $link-primary-hover !important;
     }
   }
@@ -416,7 +416,7 @@
   .#{$block-class}__carbon-row .#{$block-class}__left-sticky-column-cell,
   .#{$block-class}__carbon-row .#{$block-class}__right-sticky-column-cell,
   .#{$block-class}__carbon-row .#{$block-class}__checkbox-cell-sticky-left {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     background-color: $layer-01;
   }
 
@@ -424,7 +424,7 @@
   .#{$block-class}__carbon-row:hover .#{$block-class}__right-sticky-column-cell,
   .#{$block-class}__carbon-row:hover
     .#{$block-class}__checkbox-cell-sticky-left {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     background-color: $layer-hover-01;
   }
 
@@ -434,7 +434,7 @@
     .#{$block-class}__right-sticky-column-cell,
   .#{c4p-settings.$carbon-prefix}--data-table--selected
     .#{$block-class}__checkbox-cell-sticky-left {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     background-color: $layer-selected-01;
   }
 
@@ -448,9 +448,9 @@
 
   td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
   th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     width: $spacing-09 !important;
-    /* stylelint-disable-next-line declaration-no-important */
+    // stylelint-disable-next-line declaration-no-important
     padding-right: $spacing-05 !important;
   }
 }
@@ -596,7 +596,7 @@
 }
 
 .#{$block-class}__sticky.#{$block-class}__table-simple {
-  /* stylelint-disable-next-line declaration-no-important */
+  // stylelint-disable-next-line declaration-no-important
   min-width: 0 !important;
 }
 
@@ -606,7 +606,7 @@
 
 .#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
   overflow: hidden;
-  /* stylelint-disable-next-line declaration-no-important */
+  // stylelint-disable-next-line declaration-no-important
   width: 100% !important;
 }
 

@@ -74,7 +74,6 @@ $themes: ('light', 'dark');
 $block-class: #{$pkg-prefix}--status-icon;
 
 @function carbon-clr($name, $theme: light) {
-  // stylelint-disable-next-line carbon/theme-token-use
   $color: map-get(map-get($colors, $name), $theme);
   @return $color;
 }
@@ -96,7 +95,6 @@ $block-class: #{$pkg-prefix}--status-icon;
 
 .#{$block-class}--light.#{$block-class}--light-minor-warning,
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning {
-  // stylelint-disable-next-line carbon/theme-token-use
   fill: $yellow-20;
 }
 
@@ -106,7 +104,6 @@ $block-class: #{$pkg-prefix}--status-icon;
 .#{$block-class}--light.#{$block-class}--light-minor-warning
   path:nth-of-type(1),
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
-  // stylelint-disable-next-line carbon/theme-token-use
   fill: $gray-100;
 }
 
@@ -122,15 +119,13 @@ $block-class: #{$pkg-prefix}--status-icon;
           @media (prefers-reduced-motion: reduce) {
             animation: none;
           }
-          // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+
           animation: rotating 8000ms infinite linear;
-          // stylelint-disable-next-line carbon/theme-token-use
+
           fill: carbon-clr($icon, $theme);
         } @else if $icon == running {
-          // stylelint-disable-next-line carbon/theme-token-use
           fill: carbon-clr($icon, $theme);
         } @else {
-          // stylelint-disable-next-line carbon/theme-token-use
           fill: carbon-clr($icon, $theme);
           @media (prefers-reduced-motion) {
             .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {

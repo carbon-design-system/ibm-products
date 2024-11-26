@@ -23,7 +23,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 @keyframes fade-in {
   0% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+
     transform: translateY(-38.5rem); // the height of the notification panel
   }
 
@@ -41,7 +41,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
   100% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+
     transform: translateY(-38.5rem); // the height of the notification panel
   }
 }
@@ -93,7 +93,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 
     position: sticky;
     z-index: 2;
-    // stylelint-disable-next-line carbon/layout-token-use
+
     top: 4.8125rem;
     padding: $spacing-03 $spacing-05;
     background-color: $layer-01;
@@ -183,7 +183,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
         padding: 0;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
-          // stylelint-disable-next-line carbon/motion-easing-use
           transition: transform $duration-moderate-02 ease;
           /* stylelint-disable-next-line max-nesting-depth */
           @media (prefers-reduced-motion: reduce) {

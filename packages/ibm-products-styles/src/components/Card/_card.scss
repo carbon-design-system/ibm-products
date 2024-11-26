@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// NOTE: Please do not remove the duplicate `slug` and `ai-label` classes. We need both until slug is fully deprecated
+// NOTE: Please do not remove the duplicate `slug` and `decorator` classes. We need both until slug is fully deprecated
 
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
@@ -151,18 +151,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__header-container--has-slug,
-.#{$block-class}__header-container--has-ai-label {
+.#{$block-class}__header-container--has-decorator {
   width: 100%;
   padding-right: $spacing-07;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions,
-.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--has-actions {
+.#{$block-class}__header-container--has-decorator.#{$block-class}__header-container--has-actions {
   padding-right: $spacing-08;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label,
-.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--large-tile-or-label {
+.#{$block-class}__header-container--has-decorator.#{$block-class}__header-container--large-tile-or-label {
   padding-right: $spacing-09;
 }
 
@@ -176,7 +176,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}--has-slug,
-.#{$block-class}--has-ai-label {
+.#{$block-class}--has-decorator {
   @include utilities.ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -184,8 +184,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     0 4px 10px 2px $ai-drop-shadow;
 }
 
+.#{$block-class}--has-decorator-non-ai-label {
+  background-color: $layer-01;
+}
+
 .#{$block-class}__clickable.#{$block-class}--has-slug::before,
-.#{$block-class}__clickable.#{$block-class}--has-ai-label::before {
+.#{$block-class}__clickable.#{$block-class}--has-decorator::before {
   @include utilities.ai-popover-gradient('hover', 0, 'layer');
 
   position: absolute;
@@ -201,7 +205,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__clickable.#{$block-class}--has-slug:hover::before,
-.#{$block-class}__clickable.#{$block-class}--has-ai-label:hover::before {
+.#{$block-class}__clickable.#{$block-class}--has-decorator:hover::before {
   opacity: 1;
 }
 

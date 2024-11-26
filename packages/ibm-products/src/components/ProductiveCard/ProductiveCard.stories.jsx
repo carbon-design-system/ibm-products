@@ -12,8 +12,8 @@ import {
   Grid,
   Column,
   usePrefix,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
+  AILabel,
+  AILabelContent,
 } from '@carbon/react';
 import { ProductiveCard } from '.';
 import DocsPage from './ProductiveCard.docs-page';
@@ -21,9 +21,9 @@ import { action } from '@storybook/addon-actions';
 
 const storyClass = 'productive-card-stories';
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
+const sampleDecorator = (
+  <AILabel className="decorator-container" size="xs">
+    <AILabelContent>
       <div>
         <p className="secondary">AI Explained</p>
         <h1>84%</h1>
@@ -37,8 +37,8 @@ const sampleSlug = (
         <p className="secondary">Model type</p>
         <p className="bold">Foundation model</p>
       </div>
-    </SlugContent>
-  </Slug>
+    </AILabelContent>
+  </AILabel>
 );
 
 export default {
@@ -76,22 +76,22 @@ export default {
         labels: {
           0: 'No AI slug',
           1: 'with AI Slug',
-          2: 'with hollow slug (boolean)',
         },
         default: 0,
       },
-      options: [0, 1],
+      options: [false, true],
     },
-    aiLabel: {
+    decorator: {
       control: {
         type: 'select',
         labels: {
           0: 'No AI label',
           1: 'with AI label',
+          2: 'with hollow AI label (boolean)',
         },
         default: 0,
       },
-      options: [false, true],
+      options: [0, 1],
     },
   },
   decorators: [
@@ -137,12 +137,21 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSizeSm, columnSizeMd, columnSizeLg, slug, ...args } =
-    opts;
+  const {
+    children,
+    columnSizeSm,
+    columnSizeMd,
+    columnSizeLg,
+    decorator,
+    ...args
+  } = opts;
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ProductiveCard {...args} slug={slug && (slug === 2 || sampleSlug)}>
+        <ProductiveCard
+          {...args}
+          decorator={decorator && (decorator === 2 || sampleDecorator)}
+        >
           {children}
         </ProductiveCard>
       </Column>

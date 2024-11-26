@@ -16,6 +16,7 @@ import {
 import './index';
 import '@carbon/web-components/es/components/tabs/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/progress-bar/index.js';
 import '@carbon/web-components/es/components/button/index.js';
@@ -25,8 +26,13 @@ import { prefix } from '../../globals/settings';
 
 import styles from './story-styles.scss?lit';
 import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs.js';
+
 const toggleButton = () => {
   document.querySelector(`${prefix}-tearsheet`)?.toggleAttribute('open');
+};
+
+const cancelButton = () => {
+  document.querySelector(`${prefix}-tearsheet`)?.removeAttribute('open');
 };
 
 const widths = {
@@ -205,7 +211,7 @@ const headerActions = {
 const getActionToolbarItems = (index) => {
   switch (index) {
     case 1:
-      return html`<cds-dropdown slot="header-actions">
+      return html`<cds-dropdown slot="header-actions" value="option 1">
         ${['option 1', 'option 2', 'option 3', 'option 4'].map(
           (option) => html` <cds-dropdown-item value="${option}"
             >${option}</cds-dropdown-item
@@ -250,7 +256,12 @@ const actionItems = {
 
 const toActions = (kinds: BUTTON_KIND[]) => {
   return kinds?.map((kind) => {
-    return html`<cds-button key=${kind} slot="actions" kind=${kind}>
+    return html`<cds-button
+      key=${kind}
+      slot="actions"
+      kind=${kind}
+      @click=${kind === 'ghost' && cancelButton}
+    >
       ${kind.charAt(0).toUpperCase() + kind.slice(1)}
     </cds-button>`;
   });
@@ -359,21 +370,21 @@ const getSlug = (index) => {
 
 export const Default = {
   args: {
-    actionItems: getActionItems(4),
-    headerActions: getActionToolbarItems(0),
-    content: getContent(2),
-    label: getLabel(1),
+    actionItems: 4,
+    headerActions: 0,
+    content: 2,
+    label: 1,
     open: false,
     influencerWidth: TEARSHEET_INFLUENCER_WIDTH.NARROW,
     influencerPlacement: TEARSHEET_INFLUENCER_PLACEMENT.LEFT,
-    influencer: getInfluencer(0),
+    influencer: 0,
     preventCloseOnClickOutside: false,
     selectorInitialFocus: '',
     width: TEARSHEET_WIDTH.WIDE,
-    slug: getSlug(0),
+    slug: 0,
     description: 'Description used to describe the flow if need be.',
     title: 'Title used to designate the overarching flow of the tearsheet.',
-    headerNavigation: getNavigation(0),
+    headerNavigation: 0,
   },
   argTypes: {
     actionItems: {
@@ -465,10 +476,10 @@ export const Default = {
         width=${args.width}
       >
         <!-- default slotted content -->
-        ${args.content}
+        ${getContent(args.content)}
 
         <!-- slotted header label -->
-        ${args.label}
+        ${getLabel(args.label)}
 
         <!-- slotted header title -->
         ${args.title ? html`<span slot="title">${args.title}</span>` : ''}
@@ -479,19 +490,19 @@ export const Default = {
           : ''}
 
         <!-- slotted action in header cds-buttons -->
-        ${args.headerActions}
+        ${getActionToolbarItems(args.headerActions)}
 
         <!-- slotted action items cds-buttons -->
-        ${args.actionItems}
+        ${getActionItems(args.actionItems)}
 
         <!-- slotted slug -->
-        ${args.slug}
+        ${getSlug(args.slug)}
 
         <!-- slotted header-navigation -->
-        ${args.headerNavigation}
+        ${getNavigation(args.headerNavigation)}
 
         <!-- slotted influencer -->
-        ${args.influencer}
+        ${getInfluencer(args.influencer)}
       </c4p-tearsheet>
     `;
   },
@@ -501,7 +512,7 @@ export const WithNavigation = {
   ...Default,
   args: {
     ...Default.args,
-    headerNavigation: getNavigation(1),
+    headerNavigation: 1,
   },
 };
 
@@ -509,7 +520,7 @@ export const WithInfluencer = {
   ...Default,
   args: {
     ...Default.args,
-    influencer: getInfluencer(2),
+    influencer: 2,
   },
 };
 
@@ -517,8 +528,8 @@ export const WithAllHeaderItemsAndInfluencer = {
   ...Default,
   args: {
     ...Default.args,
-    headerActions: getActionToolbarItems(2),
-    influencer: getInfluencer(2),
+    headerActions: 2,
+    influencer: 2,
   },
 };
 
@@ -581,10 +592,10 @@ export const StackingTemplate = {
         <cds-button @click="${() => toggleButton('two')}"
           >Toggle tearsheet two</cds-button
         >
-        ${args.content}
+        ${getContent(args.content)}
 
         <!-- slotted header label -->
-        ${args.label}
+        ${getLabel(args.label)}
 
         <!-- slotted header title -->
         ${args.title ? html`<span slot="title">One ${args.title}</span>` : ''}
@@ -595,19 +606,19 @@ export const StackingTemplate = {
           : ''}
 
         <!-- slotted action in header cds-buttons -->
-        ${args.headerActions}
+        ${getActionToolbarItems(args.headerActions)}
 
         <!-- slotted action items cds-buttons -->
-        ${args.actionItems}
+        ${getActionItems(args.actionItems)}
 
         <!-- slotted slug -->
-        ${args.slug}
+        ${getSlug(args.slug)}
 
         <!-- slotted header-navigation -->
-        ${args.headerNavigation}
+        ${getNavigation(args.headerNavigation)}
 
         <!-- slotted influencer -->
-        ${args.influencer}
+        ${getInfluencer(args.influencer)}
       </c4p-tearsheet>
       <c4p-tearsheet
         data-index="two"
@@ -624,10 +635,10 @@ export const StackingTemplate = {
         <cds-button @click="${() => toggleButton('three')}"
           >Toggle tearsheet three</cds-button
         >
-        ${args.content}
+        ${getContent(args.content)}
 
         <!-- slotted header label -->
-        ${args.label}
+        ${getLabel(args.label)}
 
         <!-- slotted header title -->
         ${args.title ? html`<span slot="title">Two ${args.title}</span>` : ''}
@@ -638,19 +649,19 @@ export const StackingTemplate = {
           : ''}
 
         <!-- slotted action in header cds-buttons -->
-        ${args.headerActions}
+        ${getActionToolbarItems(args.headerActions)}
 
         <!-- slotted action items cds-buttons -->
-        ${args.actionItems}
+        ${getActionItems(args.actionItems)}
 
         <!-- slotted slug -->
-        ${args.slug}
+        ${getSlug(args.slug)}
 
         <!-- slotted header-navigation -->
-        ${args.headerNavigation}
+        ${getNavigation(args.headerNavigation)}
 
         <!-- slotted influencer -->
-        ${args.influencer}
+        ${getInfluencer(args.influencer)}
       </c4p-tearsheet>
       <c4p-tearsheet
         data-index="three"
@@ -664,10 +675,10 @@ export const StackingTemplate = {
         width=${args.width}
       >
         <!-- default slotted content -->
-        ${args.content}
+        ${getContent(args.content)}
 
         <!-- slotted header label -->
-        ${args.label}
+        ${getLabel(args.label)}
 
         <!-- slotted header title -->
         ${args.title ? html`<span slot="title">Three ${args.title}</span>` : ''}
@@ -678,19 +689,19 @@ export const StackingTemplate = {
           : ''}
 
         <!-- slotted action in header cds-buttons -->
-        ${args.headerActions}
+        ${getActionToolbarItems(args.headerActions)}
 
         <!-- slotted action items cds-buttons -->
-        ${args.actionItems}
+        ${getActionItems(args.actionItems)}
 
         <!-- slotted slug -->
-        ${args.slug}
+        ${getSlug(args.slug)}
 
         <!-- slotted header-navigation -->
-        ${args.headerNavigation}
+        ${getNavigation(args.headerNavigation)}
 
         <!-- slotted influencer -->
-        ${args.influencer}
+        ${getInfluencer(args.influencer)}
       </c4p-tearsheet>
     `;
   },

@@ -594,8 +594,8 @@ const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
 
   return (
     <>
-      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
-        <Column lg={16} md={8} sm={4}>
+      <div class={`${prefix}story-container`}>
+        <div class={`${prefix}story-content`} id="ibm-products-page-content">
           <Button
             ref={buttonRef}
             onClick={() => setOpen(!open)}
@@ -603,8 +603,8 @@ const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
           >
             {open ? 'Close side panel' : 'Open side panel'}
           </Button>
-        </Column>
-      </Grid>
+        </div>
+      </div>
       <SidePanel
         {...args}
         open={open}

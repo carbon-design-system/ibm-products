@@ -89,3 +89,6 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     text-overflow: ellipsis;
   }
 }
+.#{$_block-class}__overflow-menu {
+  line-height: 0;
+}

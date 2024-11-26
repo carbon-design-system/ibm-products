@@ -14,7 +14,7 @@ test.describe('Nav @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Nav',
-      id: 'experimental-components-nav--nav',
+      id: 'deprecated-nav--nav',
       globals: {
         carbonTheme: 'white',
       },

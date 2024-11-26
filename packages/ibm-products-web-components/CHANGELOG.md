@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.3.0-rc.0...@carbon/ibm-products-web-components@0.4.0-rc.0) (2024-11-25)
+
+
+### Bug Fixes
+
+* **Tearsheet in Web Components:** cancel button not working as expected ([#6458](https://github.com/carbon-design-system/ibm-products/issues/6458)) ([2461f81](https://github.com/carbon-design-system/ibm-products/commit/2461f8120431c125ceb826ccb5d139a82d49f39c))
+* **Tearsheet web components:** control changes doesn't reflect in stories ([#6413](https://github.com/carbon-design-system/ibm-products/issues/6413)) ([84f6d14](https://github.com/carbon-design-system/ibm-products/commit/84f6d140d0476868a13b18ea886515d856bb0835))
+* update to Carbon 11 compatible versions to latest ([#6437](https://github.com/carbon-design-system/ibm-products/issues/6437)) ([48d5c34](https://github.com/carbon-design-system/ibm-products/commit/48d5c34dca79a4b00fc69391a513431fa21295ee))
+
+
+
+
+
+# [0.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.3.0-rc.1...@carbon/ibm-products-web-components@0.3.0) (2024-11-20)
+
+**Note:** Version bump only for package @carbon/ibm-products-web-components
+
+
+
+
+
 # 0.3.0-rc.1 (2024-11-15)
 
 

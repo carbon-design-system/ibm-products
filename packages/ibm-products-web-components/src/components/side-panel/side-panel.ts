@@ -85,13 +85,13 @@ function tryFocusElements(elements: NodeListOf<HTMLElement>, reverse: boolean) {
 /**
  * SidePanel.
  *
- * @element cds-side-panel
+ * @element c4p-side-panel
  * @csspart dialog The dialog.
- * @fires cds-side-panel-beingclosed
+ * @fires c4p-side-panel-beingclosed
  *   The custom event fired before this side-panel is being closed upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of closing this side-panel.
- * @fires cds-side-panel-closed - The custom event fired after this side-panel is closed upon a user gesture.
- * @fires cds-side-panel-navigate-back - custom event fired when clicking navigate back (available when step > 0)
+ * @fires c4p-side-panel-closed - The custom event fired after this side-panel is closed upon a user gesture.
+ * @fires c4p-side-panel-navigate-back - custom event fired when clicking navigate back (available when step > 0)
  */
 @customElement(`${prefix}-side-panel`)
 class CDSSidePanel extends HostListenerMixin(LitElement) {
@@ -913,7 +913,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (focusNode) {
           // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-side-panel>`'s first update/render cycle
+          // where its first update/render cycle that makes it focusable happens after `<c4p-side-panel>`'s first update/render cycle
           (focusNode as HTMLElement).focus();
         } else if (
           !tryFocusElements(

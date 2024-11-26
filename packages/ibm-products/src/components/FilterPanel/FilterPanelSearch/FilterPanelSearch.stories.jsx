@@ -12,11 +12,12 @@ import { FilterPanelSearch } from '.';
 import mdx from './FilterPanelSearch.mdx';
 
 import styles from '../_storybook-styles.scss?inline';
+import { Annotation } from '../../../../../core/.storybook/Annotation';
 
 const storyClass = 'filter-panel-stories';
 
 export default {
-  title: 'Experimental/Components/Filter Panel/FilterPanelSearch',
+  title: 'Deprecated/Filter Panel/FilterPanelSearch',
   component: FilterPanelSearch,
   tags: ['autodocs'],
   parameters: {
@@ -29,6 +30,21 @@ export default {
     children: { table: { disable: true } },
     className: { control: { type: {} } },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {

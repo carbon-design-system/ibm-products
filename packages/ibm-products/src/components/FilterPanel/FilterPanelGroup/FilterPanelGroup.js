@@ -20,6 +20,7 @@ const componentName = 'FilterPanelGroup';
 
 /**
  * A container with a label and optional count.
+ * @deprecated This component is deprecated
  */
 export let FilterPanelGroup = React.forwardRef(
   ({ children, className, count, labelText, title, ...rest }, ref) => {
@@ -44,6 +45,11 @@ export let FilterPanelGroup = React.forwardRef(
     );
   }
 );
+
+FilterPanelGroup.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanelGroup = pkg.checkComponentEnabled(FilterPanelGroup, componentName);

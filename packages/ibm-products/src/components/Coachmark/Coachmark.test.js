@@ -5,14 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import {
-  render,
-  screen,
-  act,
-  waitFor,
-  fireEvent,
-} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React, { act } from 'react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -23,7 +17,7 @@ import {
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
-import { BEACON_KIND } from './utils/enums';
+import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
 import { CoachmarkDragbar } from './CoachmarkDragbar';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
@@ -202,5 +196,31 @@ describe(componentName, () => {
     await expect(screen.getByTestId(dataTestId)).toHaveClass(
       `${pkg.prefix}--coachmark__dark`
     );
+  });
+
+  it('renders the theme prop', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      theme: 'dark',
+    });
+
+    await expect(screen.getByTestId(dataTestId)).toHaveClass(
+      `${pkg.prefix}--coachmark__dark`
+    );
+  });
+
+  it('enables a11y drag mode', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      kind: COACHMARK_OVERLAY_KIND.FLOATING,
+    });
+
+    const targetButton = screen.getByRole('button', {
+      name: /Show information/,
+    });
+
+    await act(() => userEvent.click(targetButton));
+
+    await act(() => userEvent.keyboard('{Enter}'));
   });
 });

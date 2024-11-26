@@ -33,6 +33,9 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component FilterPanelSearch', async () => {
     renderComponent();
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

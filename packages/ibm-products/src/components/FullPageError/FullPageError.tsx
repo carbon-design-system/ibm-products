@@ -110,8 +110,9 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
           <Grid className={`${blockClass}__grid`}>
             <Column sm={4} md={3} lg={6} className={`${blockClass}__column`}>
               <h1 className={`${blockClass}__title`}>
-                <span className={`${blockClass}__label`} aria-hidden="true">
-                  ↳ {label}
+                <span className={`${blockClass}__label`}>
+                  <span aria-hidden="true">↳ </span>
+                  {label}
                 </span>
                 <span>{title}</span>
               </h1>

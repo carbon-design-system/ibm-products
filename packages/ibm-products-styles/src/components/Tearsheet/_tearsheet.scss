@@ -22,7 +22,7 @@
 
 $block-class: #{$pkg-prefix}--tearsheet;
 
-// stylelint-disable-next-line carbon/theme-token-use
+// stylelint-disable-next-line carbon/theme-use
 $motion-duration: $duration-moderate-02;
 
 @include block-wrap($block-class) {
@@ -105,7 +105,7 @@ $motion-duration: $duration-moderate-02;
     // viewport, capped at 500px to set an upper limit on the movement speed
     // For the reason for calc() see https://github.com/sass/sass/issues/2849
     // and https://github.com/sass/node-sass/issues/2815.
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     transform: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 
@@ -289,7 +289,7 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--wide.#{$block-class}--has-ai-label
     .#{$block-class}__header.#{$block-class}__header--with-close-icon {
     /* spacing 11 plus additional space for slug/close */
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 
@@ -427,7 +427,7 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--has-slug,
   &.#{$block-class}--has-ai-label {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     --overlay-color: #{$ai-overlay};
   }
 
@@ -436,7 +436,8 @@ $motion-duration: $duration-moderate-02;
   &.#{$block-class}--has-ai-label:not(.#{$block-class}--has-close)
     .#{$carbon-prefix}--slug {
     inset-inline-end: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
-    margin-inline-end: 1rem;
+    margin-inline-end: $spacing-05;
   }
 }

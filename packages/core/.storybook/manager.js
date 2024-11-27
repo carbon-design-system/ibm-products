@@ -29,12 +29,12 @@ const renderComponentLabel = (label, dark, type = 'Canary') => {
       <div
         style={{
           background: dark ? '#555555' : '#e0e0e0',
-          /* stylelint-disable-next-line carbon/type-token-use */
+          /* stylelint-disable-next-line carbon/type-use */
           fontSize: '11px',
           border: '.1px solid transparent',
-          /* stylelint-disable-next-line carbon/layout-token-use */
+          /* stylelint-disable-next-line carbon/layout-use */
           padding: '0 .5rem',
-          /* stylelint-disable-next-line carbon/layout-token-use */
+          /* stylelint-disable-next-line carbon/layout-use */
           margin: '0 .5em',
           borderRadius: '8px',
         }}

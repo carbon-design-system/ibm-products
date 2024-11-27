@@ -13,8 +13,8 @@
   display: inline-block;
   max-height: 100%;
   box-sizing: border-box;
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  padding: 1rem;
+  /* stylelint-disable-next-line carbon/layout-use */
+  padding: $spacing-05;
   margin-left: 50%;
   transform: translateX(-50%);
 }

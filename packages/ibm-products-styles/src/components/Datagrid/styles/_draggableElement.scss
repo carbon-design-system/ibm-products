@@ -35,7 +35,7 @@
   width: 100%;
   height: $spacing-09;
   border: 2px dashed $focus;
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   background-color: colors.$blue-10; // not good in dark mode
 }
 
@@ -82,7 +82,7 @@
   width: 100%;
   align-items: center;
   padding-left: $spacing-05;
-  /* stylelint-disable-next-line carbon/type-token-use */
+  /* stylelint-disable-next-line carbon/type-use */
   line-height: 1; // center align text within row
   transition-property: opacity;
 }

@@ -12,11 +12,13 @@
 
 // TODO: add any additional styles used by UserAvatar.stories.js
 .theme-section {
+  /* stylelint-disable-next-line carbon/layout-use */
   padding: spacing.$spacing-05;
   background: theme.$background;
   color: theme.$text-primary;
 }
 
 .theme-text {
+  /* stylelint-disable-next-line carbon/layout-use */
   margin-bottom: spacing.$spacing-03;
 }

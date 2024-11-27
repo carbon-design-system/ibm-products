@@ -363,6 +363,38 @@ describe('SidePanel', () => {
     );
     expect(navigationAction).toBeTruthy();
   });
+
+  it('should not have a ai label container when a it is not passed', () => {
+    const { container } = renderSidePanel();
+    expect(container.querySelector('.aiLabel-container')).toBe(null);
+  });
+
+  it('should have AI Label when it is passed', () => {
+    const sampleAILabel = (
+      <AILabel className="aiLabel-container" size="xs" align="left-start">
+        <AILabelContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              This is not really Lorem Ipsum but the spell checker did not like
+              the previous text with it&apos;s non-words which is why this
+              unwieldy sentence, should one choose to call it that, here.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+    const { container } = renderSidePanel({
+      aiLabel: sampleAILabel,
+    });
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
+  });
+
   it('should not have a decorator container when a decorator not passed', () => {
     const { container } = renderSidePanel();
     expect(container.querySelector('.aiLabel-container')).toBe(null);

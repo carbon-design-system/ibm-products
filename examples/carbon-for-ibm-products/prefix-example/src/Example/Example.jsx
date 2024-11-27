@@ -83,15 +83,7 @@ export const Example = () => {
         onClose={handleCloseModal}
         title={
           <>
-            IBM{' '}
-            <span
-              style={
-                
-                { fontWeight: '600' }
-              }
-            >
-              Watson AI Ops
-            </span>
+            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
           </>
         }
       />

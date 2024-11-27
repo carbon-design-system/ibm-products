@@ -66,6 +66,11 @@ interface TearsheetShellProps extends PropsWithChildren {
   className?: string;
 
   /**
+   * Used to track the current step on components which use `StepsContext` and `TearsheetShell`
+   */
+  currentStep?: number;
+
+  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;
@@ -238,6 +243,7 @@ export const TearsheetShell = React.forwardRef(
       children,
       className,
       closeIconDescription,
+      currentStep,
       description,
       hasCloseIcon,
       headerActions,
@@ -307,16 +313,12 @@ export const TearsheetShell = React.forwardRef(
     }
 
     useEffect(() => {
-      if (
-        open &&
-        position === depth &&
-        modalRef &&
-        !modalRef?.current.contains(document.activeElement)
-      ) {
+      if (open && position === depth) {
         // Focusing the first element or selectorPrimaryFocus element
         claimFocus(firstElement, modalRef, selectorPrimaryFocus);
       }
     }, [
+      currentStep,
       depth,
       firstElement,
       modalRef,

@@ -215,9 +215,9 @@ export let CreateTearsheetStep = forwardRef(
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
         stepsContext?.setOnMount(onMount);
-        stepsContext?.setExperimentalSecondarySubmit({
-          ...experimentalSecondarySubmit,
-        });
+        stepsContext?.setExperimentalSecondarySubmit(
+          experimentalSecondarySubmit
+        );
       }
     }, [
       onMount,
@@ -264,6 +264,11 @@ export let CreateTearsheetStep = forwardRef(
         stepsContext.setIsDisabled(!!disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
         stepsContext?.setOnPrevious(onPrevious);
+
+        //Handle props for experimentalSecondarySubmit button, depending on state change
+        stepsContext?.setExperimentalSecondarySubmit(
+          experimentalSecondarySubmit
+        );
       }
     }, [
       stepsContext,
@@ -273,6 +278,7 @@ export let CreateTearsheetStep = forwardRef(
       onPrevious,
       stepRef,
       stepRefValue,
+      experimentalSecondarySubmit,
     ]);
 
     const renderDescription = () => {

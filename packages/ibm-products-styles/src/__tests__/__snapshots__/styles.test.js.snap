@@ -9538,6 +9538,10 @@ button.c4p--add-select__global-filter-toggle--open {
   z-index: 7999;
 }
 
+.c4p--page-header__button-set-menu-options > button.cds--menu-button__trigger {
+  min-inline-size: 0;
+}
+
 .c4p--card__productive {
   display: flex;
   flex-direction: column;

@@ -38,6 +38,26 @@ const selectorPageContentValue = '#side-panel-test-page-content';
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
 
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs" align="left-start">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </AILabelContent>
+  </AILabel>
+);
+
 const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
     <SidePanel
@@ -364,35 +384,11 @@ describe('SidePanel', () => {
     expect(navigationAction).toBeTruthy();
   });
 
-  it('should not have a ai label container when a slug is not passed', () => {
-    const { container } = renderSidePanel();
-    expect(container.querySelector('.slug-container')).toBe(null);
-  });
-
   it('should have AI Label when it is passed through slug', () => {
-    const sampleAILabel = (
-      <AILabel className="slug-container" size="xs" align="left-start">
-        <AILabelContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              This is not really Lorem Ipsum but the spell checker did not like
-              the previous text with it&apos;s non-words which is why this
-              unwieldy sentence, should one choose to call it that, here.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-        </AILabelContent>
-      </AILabel>
-    );
     const { container } = renderSidePanel({
       slug: sampleAILabel,
     });
-    expect(container.querySelector('.slug-container')).toBeTruthy();
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
   });
 
   it('should not have a ai label container when a it is not passed', () => {
@@ -401,60 +397,19 @@ describe('SidePanel', () => {
   });
 
   it('should have AI Label when it is passed', () => {
-    const sampleAILabel = (
-      <AILabel className="aiLabel-container" size="xs" align="left-start">
-        <AILabelContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              This is not really Lorem Ipsum but the spell checker did not like
-              the previous text with it&apos;s non-words which is why this
-              unwieldy sentence, should one choose to call it that, here.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-        </AILabelContent>
-      </AILabel>
-    );
     const { container } = renderSidePanel({
       aiLabel: sampleAILabel,
     });
     expect(container.querySelector('.aiLabel-container')).toBeTruthy();
   });
 
-  it('should not have a decorator container when a decorator not passed', () => {
-    const { container } = renderSidePanel();
-    expect(container.querySelector('.decorator-container')).toBe(null);
-  });
   it('should have AI Label when it is passed to decorator', () => {
-    const sampleAILabel = (
-      <AILabel className="decorator-container" size="xs" align="left-start">
-        <AILabelContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              This is not really Lorem Ipsum but the spell checker did not like
-              the previous text with it&apos;s non-words which is why this
-              unwieldy sentence, should one choose to call it that, here.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-        </AILabelContent>
-      </AILabel>
-    );
     const { container } = renderSidePanel({
       decorator: sampleAILabel,
     });
-    expect(container.querySelector('.decorator-container')).toBeTruthy();
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
   });
+
   it('should throw console warning if labelText passed without Title', () => {
     const consoleWarnSpy = jest
       .spyOn(console, 'warn')

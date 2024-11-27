@@ -78,10 +78,7 @@ export interface NotificationsEmptyStateProps {
    * Empty state subtitle
    */
   subtitle: ReactNode;
-  /**
-   * Optional prop to specify ids for SVG elements, it will use generated id by default
-   */
-  svgId?: string;
+
   /**
    * Empty state title
    */
@@ -108,7 +105,6 @@ export let NotificationsEmptyState = React.forwardRef<
       size = defaults.size,
       subtitle,
       title,
-      svgId,
 
       // Collect any other property values passed in.
       ...rest
@@ -134,7 +130,6 @@ export let NotificationsEmptyState = React.forwardRef<
           size={size}
           theme={illustrationTheme}
           alt={illustrationDescription || title}
-          svgId={svgId}
         />
         <EmptyStateContent
           action={action}

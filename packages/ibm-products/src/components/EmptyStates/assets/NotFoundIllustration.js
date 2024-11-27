@@ -6,24 +6,18 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useId } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import uuidv4 from '../../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 
-export const NotFoundIllustration = ({
-  theme,
-  size,
-  alt,
-  svgId = uuidv4(),
-  ...rest
-}) => {
+export const NotFoundIllustration = ({ theme, size, alt, ...rest }) => {
+  const svgId = useId();
   return (
     <svg
       {...rest}
@@ -293,7 +287,6 @@ export const NotFoundIllustration = ({
 NotFoundIllustration.propTypes = {
   alt: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['lg', 'sm']),
-  svgId: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
 };
 

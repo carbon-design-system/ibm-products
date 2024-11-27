@@ -274,7 +274,7 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener, specifiedElement } = useFocus(
+    const { firstElement, keyDownListener } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
@@ -340,24 +340,6 @@ export const TearsheetShell = React.forwardRef(
         }, 0);
       }
     }, [launcherButtonRef, open, prevOpen]);
-
-    useEffect(() => {
-      if (open && position !== depth) {
-        setTimeout(() => {
-          if (selectorPrimaryFocus) {
-            return specifiedElement?.focus();
-          }
-          firstElement?.focus();
-        }, 0);
-      }
-    }, [
-      position,
-      depth,
-      firstElement,
-      open,
-      specifiedElement,
-      selectorPrimaryFocus,
-    ]);
 
     useEffect(() => {
       const notify = () =>

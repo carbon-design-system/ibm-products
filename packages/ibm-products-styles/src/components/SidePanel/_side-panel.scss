@@ -110,7 +110,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     border-right: 1px solid $border-subtle-02;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
-  &.#{$block-class}.#{$block-class}--has-ai-label {
+  &.#{$block-class}.#{$block-class}--has-ai-label,
+  &.#{$block-class}.#{$block-class}--has-decorator {
     border-color: transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
@@ -197,14 +198,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar,
   &.#{$block-class}--has-slug,
-  &.#{$block-class}--has-ai-label {
+  &.#{$block-class}--has-ai-label,
+  &.#{$block-class}--has-decorator {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar {
     &.#{$block-class}--has-slug,
-    &.#{$block-class}--has-ai-label {
+    &.#{$block-class}--has-ai-label,
+    &.#{$block-class}--has-decorator {
       --#{$block-class}--title-padding-right: #{$spacing-11};
     }
   }
@@ -312,7 +315,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   &.#{$block-class}--has-slug .#{$block-class}--scrolls,
-  &.#{$block-class}--has-ai-label .#{$block-class}--scrolls {
+  &.#{$block-class}--has-ai-label .#{$block-class}--scrolls,
+  &.#{$block-class}--has-decorator .#{$block-class}--scrolls {
     @include utilities.ai-popover-gradient('default', 0, 'layer');
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
@@ -367,7 +371,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close,
-  .#{$block-class}__ai-label-and-close {
+  .#{$block-class}__ai-label-and-close,
+  .#{$block-class}__decorator-and-close {
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
@@ -470,7 +475,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 .#{$block-class}--has-slug + .#{$block-class}__overlay,
-.#{$block-class}--has-ai-label + .#{$block-class}__overlay {
+.#{$block-class}--has-ai-label + .#{$block-class}__overlay,
+.#{$block-class}--has-decorator + .#{$block-class}__overlay {
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: $ai-overlay;
 }

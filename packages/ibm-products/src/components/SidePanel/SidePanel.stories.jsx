@@ -458,6 +458,7 @@ const SlideOverTemplate = ({
   actions,
   aiLabel,
   slug,
+  decorator,
   ...args
 }) => {
   const [open, setOpen] = useState(false);
@@ -481,6 +482,7 @@ const SlideOverTemplate = ({
         ref={testRef}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
+        decorator={decorator && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         {!minimalContent && <ChildrenContent />}

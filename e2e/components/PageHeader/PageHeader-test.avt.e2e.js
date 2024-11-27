@@ -138,7 +138,10 @@ test.describe('PageHeader @avt', () => {
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
-    await page.getByLabel('Open and close additional').focus();
+    await page
+      .getByLabel('Breadcrumb', { exact: true })
+      .getByRole('button')
+      .focus();
     await pressTabKey(page, 6);
 
     await expect(
@@ -229,7 +232,10 @@ test.describe('PageHeader @avt', () => {
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
-    await page.getByLabel('Open and close additional').focus();
+    await page
+      .getByLabel('Breadcrumb', { exact: true })
+      .getByRole('button')
+      .focus();
     await pressTabKey(page, 1);
     await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
     await pressTabKey(page, 2);

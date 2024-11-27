@@ -365,7 +365,7 @@ describe('SidePanel', () => {
   });
   it('should not have a decorator container when a decorator not passed', () => {
     const { container } = renderSidePanel();
-    expect(container.querySelector('.decorator-container')).toBe(null);
+    expect(container.querySelector('.aiLabel-container')).toBe(null);
   });
   it('should have AI Label when it is passed to decorator', () => {
     const sampleAILabel = (
@@ -390,7 +390,7 @@ describe('SidePanel', () => {
     const { container } = renderSidePanel({
       decorator: sampleAILabel,
     });
-    expect(container.querySelector('.decorator-container')).toBeTruthy();
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
   });
   it('should throw console warning if labelText passed without Title', () => {
     const consoleWarnSpy = jest

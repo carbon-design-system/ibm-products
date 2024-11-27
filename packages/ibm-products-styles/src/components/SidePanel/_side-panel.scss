@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
+@use 'sass:map';
+
 // Other Carbon settings.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -22,7 +25,6 @@
 // SidePanel uses the following IBM Products components:
 // ActionSet
 @use '../ActionSet/action-set';
-@use 'sass:list';
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;

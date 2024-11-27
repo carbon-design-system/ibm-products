@@ -38,6 +38,7 @@ const defaults = {
   onClose: () => {},
   overlayKind: 'tooltip',
   theme: 'light',
+  isOpenByDefault: false,
 };
 
 export interface CoachmarkProps {
@@ -114,10 +115,10 @@ export interface CoachmarkProps {
    */
   theme?: 'light' | 'dark';
   /**
-   * If set, determines if the coachmark will be opened by default.
-   * Setting this value override the behavior set by the overlay kind.
+   * Determines if the coachmark is open by default.
+   * Does nothing is `overlayKind=slacked`.
    */
-  isOpenByDefault?: boolean;
+  isOpenByDefault: boolean;
 }
 
 /**
@@ -141,7 +142,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
       portalTarget,
       target,
       theme = defaults.theme,
-      isOpenByDefault,
+      isOpenByDefault = defaults.isOpenByDefault,
       // Collect any other property values passed in.
       ...rest
     },
@@ -149,7 +150,7 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
   ) => {
     const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
-    const [isOpen, setIsOpen] = useState(isOpenByDefault || isStacked);
+    const [isOpen, setIsOpen] = useState(isStacked || isOpenByDefault);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
@@ -400,13 +401,6 @@ Coachmark.propTypes = {
    * Optional class name for this component.
    */
   className: PropTypes.string,
-
-  /**
-   * If set, determines if the coachmark will be opened by default.
-   * This property is optional, but if set it overrides
-   *  the behavior set by the overlay kind.
-   */
-  isOpenByDefault: PropTypes.bool,
 
   /**
    * Function to call when the Coachmark closes.

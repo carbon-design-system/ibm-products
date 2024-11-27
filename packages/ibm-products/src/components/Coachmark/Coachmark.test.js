@@ -105,4 +105,28 @@ describe(componentName, () => {
       componentName
     );
   });
+
+  it('Check coachmark can be open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: true,
+    });
+    const coachmarkContainer = screen.getByTestId(dataTestId);
+    const coachmarkButton =
+      coachmarkContainer.children[0].children[0].children[0];
+    const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+    expect(ariaExpanded).toEqual('true');
+  });
+
+  it('Check stacked coachmark are always open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: false,
+      overlayKind: 'stacked',
+    });
+    const coachmarkContainer = screen.getByTestId(dataTestId);
+    const coachmarkButton = coachmarkContainer.children[0].children[0];
+    const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+    expect(ariaExpanded).toEqual('true');
+  });
 });

@@ -37,7 +37,7 @@ export interface ExpressiveCardProps extends PropsWithChildren {
    */
   className?: string;
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator?: ReactNode | boolean;
   /**
@@ -161,7 +161,7 @@ ExpressiveCard.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   /**

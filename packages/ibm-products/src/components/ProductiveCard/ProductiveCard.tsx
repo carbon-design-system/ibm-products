@@ -43,7 +43,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   actionIcons?: ActionIcon[];
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator?: ReactNode | boolean;
 
@@ -217,7 +217,7 @@ ProductiveCard.propTypes = {
    */
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   /**

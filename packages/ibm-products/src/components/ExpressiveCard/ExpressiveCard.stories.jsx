@@ -7,7 +7,7 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
+import { ArrowRight, Cloud, Add, Information } from '@carbon/react/icons';
 import {
   AspectRatio,
   Column,
@@ -15,31 +15,52 @@ import {
   usePrefix,
   AILabel,
   AILabelContent,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
 } from '@carbon/react';
 
 import { ExpressiveCard } from '.';
 import DocsPage from './ExpressiveCard.docs-page';
 import { action } from '@storybook/addon-actions';
 
-const sampleDecorator = (
-  <AILabel className="decorator-container" size="xs">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          This is not really Lorem Ipsum but the spell checker did not like the
-          previous text with it&apos;s non-words which is why this unwieldy
-          sentence, should one choose to call it that, here.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-    </AILabelContent>
-  </AILabel>
-);
+const sampleDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return (
+        <AILabel className="decorator-container" size="xs">
+          <AILabelContent>
+            <div>
+              <p className="secondary">AI Explained</p>
+              <h1>84%</h1>
+              <p className="secondary bold">Confidence score</p>
+              <p className="secondary">
+                This is not really Lorem Ipsum but the spell checker did not
+                like the previous text with it&apos;s non-words which is why
+                this unwieldy sentence, should one choose to call it that, here.
+              </p>
+              <hr />
+              <p className="secondary">Model type</p>
+              <p className="bold">Foundation model</p>
+            </div>
+          </AILabelContent>
+        </AILabel>
+      );
+    case 2:
+      return (
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Custom content here</p>
+          </ToggletipContent>
+        </Toggletip>
+      );
+    default:
+      return;
+  }
+};
 
 export default {
   title: 'IBM Products/Components/Cards/ExpressiveCard',
@@ -93,11 +114,12 @@ export default {
         labels: {
           0: 'No AI label',
           1: 'with AI label',
-          2: 'with hollow AI label (boolean)',
+          2: 'With non AI Label component',
+          3: 'with hollow AI label (boolean)',
         },
         default: 0,
       },
-      options: [0, 1, 2],
+      options: [0, 1, 2, 3],
     },
   },
   decorators: [
@@ -140,7 +162,9 @@ const Template = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           {...args}
-          decorator={decorator && (decorator === 2 || sampleDecorator)}
+          decorator={
+            decorator && (decorator === 3 || sampleDecorator(decorator))
+          }
         >
           {children}
         </ExpressiveCard>
@@ -164,7 +188,9 @@ const MediaTemplate = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          decorator={decorator && (decorator === 2 || sampleDecorator)}
+          decorator={
+            decorator && (decorator === 3 || sampleDecorator(decorator))
+          }
           {...args}
         >
           {children}

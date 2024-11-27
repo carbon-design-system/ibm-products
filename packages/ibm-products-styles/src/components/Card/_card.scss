@@ -144,6 +144,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   position: relative;
 }
 
+.#{$block-class}__header__inner-wrapper--decorator > * {
+  // stylelint-disable-next-line
+  position: absolute !important;
+  top: $spacing-05;
+  right: $spacing-05;
+}
+
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
   position: absolute;
   top: $spacing-05;

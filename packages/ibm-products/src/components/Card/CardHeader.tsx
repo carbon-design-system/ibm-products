@@ -20,7 +20,7 @@ const defaults = {
 interface CardHeaderProps {
   actions?: ReactNode;
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator?: ReactNode | boolean;
   description?: ReactNode;
@@ -197,7 +197,7 @@ export const CardHeader = ({
 CardHeader.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   description: PropTypes.oneOfType([

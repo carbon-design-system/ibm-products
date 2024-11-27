@@ -7,13 +7,16 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import { TrashCan, Edit } from '@carbon/react/icons';
+import { TrashCan, Edit, Information } from '@carbon/react/icons';
 import {
   Grid,
   Column,
   usePrefix,
   AILabel,
   AILabelContent,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
 } from '@carbon/react';
 import { ProductiveCard } from '.';
 import DocsPage from './ProductiveCard.docs-page';
@@ -21,25 +24,43 @@ import { action } from '@storybook/addon-actions';
 
 const storyClass = 'productive-card-stories';
 
-const sampleDecorator = (
-  <AILabel className="decorator-container" size="xs">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          This is not really Lorem Ipsum but the spell checker did not like the
-          previous text with it&apos;s non-words which is why this unwieldy
-          sentence, should one choose to call it that, here.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-    </AILabelContent>
-  </AILabel>
-);
+const sampleDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return (
+        <AILabel className="decorator-container" size="xs">
+          <AILabelContent>
+            <div>
+              <p className="secondary">AI Explained</p>
+              <h1>84%</h1>
+              <p className="secondary bold">Confidence score</p>
+              <p className="secondary">
+                This is not really Lorem Ipsum but the spell checker did not
+                like the previous text with it&apos;s non-words which is why
+                this unwieldy sentence, should one choose to call it that, here.
+              </p>
+              <hr />
+              <p className="secondary">Model type</p>
+              <p className="bold">Foundation model</p>
+            </div>
+          </AILabelContent>
+        </AILabel>
+      );
+    case 2:
+      return (
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Custom content here</p>
+          </ToggletipContent>
+        </Toggletip>
+      );
+    default:
+      return;
+  }
+};
 
 export default {
   title: 'IBM Products/Components/Cards/ProductiveCard',
@@ -87,11 +108,12 @@ export default {
         labels: {
           0: 'No AI label',
           1: 'with AI label',
-          2: 'with hollow AI label (boolean)',
+          2: 'With non AI Label component',
+          3: 'with hollow AI label (boolean)',
         },
         default: 0,
       },
-      options: [0, 1],
+      options: [0, 1, 2, 3],
     },
   },
   decorators: [
@@ -150,7 +172,9 @@ const Template = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ProductiveCard
           {...args}
-          decorator={decorator && (decorator === 2 || sampleDecorator)}
+          decorator={
+            decorator && (decorator === 3 || sampleDecorator(decorator))
+          }
         >
           {children}
         </ProductiveCard>

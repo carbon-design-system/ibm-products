@@ -88,7 +88,7 @@ interface CardProp extends PropsWithChildren {
   slug?: ReactNode | boolean;
 
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator?: ReactNode | boolean;
 
@@ -402,7 +402,7 @@ Card.propTypes = {
   className: PropTypes.string,
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
   /**
-   * Optional prop that can be used to pass any component, such as Tooltip or Toggletip.
+   * Optional prop that allows you to pass any component.
    */
   decorator: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
   /**@ts-ignore */

@@ -33,7 +33,7 @@ import {
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { SidePanel } from './SidePanel';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
-// import mdx from './SidePanel.mdx';
+import DocsPage from './SidePanel.docs-page';
 
 const prefix = 'side-panel-stories__';
 
@@ -393,11 +393,9 @@ export default {
   parameters: {
     layout: 'fullscreen',
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
   argTypes: {
     actions: {
@@ -596,8 +594,8 @@ const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
 
   return (
     <>
-      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
-        <Column lg={16} md={8} sm={4}>
+      <div class={`${prefix}story-container`}>
+        <div class={`${prefix}story-content`} id="ibm-products-page-content">
           <Button
             ref={buttonRef}
             onClick={() => setOpen(!open)}
@@ -605,8 +603,8 @@ const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
           >
             {open ? 'Close side panel' : 'Open side panel'}
           </Button>
-        </Column>
-      </Grid>
+        </div>
+      </div>
       <SidePanel
         {...args}
         open={open}

@@ -26,7 +26,6 @@ import { getComponentText } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-tip`;
@@ -325,16 +324,14 @@ InlineTip.propTypes = {
    * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
-  media: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        render: PropTypes.func,
-      }),
-      PropTypes.shape({
-        filePaths: PropTypes.string,
-      }),
-    ])
-  ),
+  media: PropTypes.oneOfType([
+    PropTypes.shape({
+      render: PropTypes.func,
+    }),
+    PropTypes.shape({
+      filePaths: PropTypes.string,
+    }),
+  ]),
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.

@@ -30,7 +30,6 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import { useCoachmark } from '../Coachmark';
-import { deprecateProp } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
@@ -327,16 +326,14 @@ CoachmarkOverlayElements.propTypes = {
    * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
-  media: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        render: PropTypes.func,
-      }),
-      PropTypes.shape({
-        filePaths: PropTypes.arrayOf(PropTypes.string),
-      }),
-    ])
-  ),
+  media: PropTypes.oneOfType([
+    PropTypes.shape({
+      render: PropTypes.func,
+    }),
+    PropTypes.shape({
+      filePaths: PropTypes.arrayOf(PropTypes.string),
+    }),
+  ]),
   /**
    * The label for the Next button.
    */

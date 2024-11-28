@@ -8857,8 +8857,8 @@ button.c4p--add-select__global-filter-toggle--open {
   text-overflow: ellipsis;
 }
 
-.c4p--breadcrumb-with-overflow__overflow-menu-options.c4p--breadcrumb-with-overflow__overflow-menu-options {
-  z-index: 8000;
+.c4p--breadcrumb-with-overflow__overflow-menu {
+  line-height: 0;
 }
 
 .c4p--tag-set.c4p--tag-set {

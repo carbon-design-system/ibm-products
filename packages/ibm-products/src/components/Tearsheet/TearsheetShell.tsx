@@ -39,7 +39,7 @@ import {
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
-import { getSpecificElement, useFocus } from '../../global/js/hooks/useFocus';
+import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
 import { usePreviousValue } from '../../global/js/hooks';
 import { TearsheetAction } from './Tearsheet';
 
@@ -323,48 +323,13 @@ export const TearsheetShell = React.forwardRef(
 
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
-      if (
-        selectorPrimaryFocus &&
-        getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-      ) {
-        const specifiedEl = getSpecificElement(
-          modalRef?.current,
-          selectorPrimaryFocus
-        );
-
-        if (
-          specifiedEl &&
-          window?.getComputedStyle(specifiedEl)?.display !== 'none'
-        ) {
-          return specifiedEl.focus();
-        }
-      }
-
-      setTimeout(() => firstElement?.focus(), 0);
+      claimFocus(firstElement, modalRef, selectorPrimaryFocus);
     };
 
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        if (
-          selectorPrimaryFocus &&
-          getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-        ) {
-          const specifiedEl = getSpecificElement(
-            modalRef?.current,
-            selectorPrimaryFocus
-          );
-
-          if (
-            specifiedEl &&
-            window?.getComputedStyle(specifiedEl)?.display !== 'none'
-          ) {
-            setTimeout(() => specifiedEl.focus(), 0);
-            return;
-          }
-        }
-
-        setTimeout(() => firstElement?.focus(), 0);
+        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
       }
     }, [firstElement, modalRef, open, selectorPrimaryFocus]);
 

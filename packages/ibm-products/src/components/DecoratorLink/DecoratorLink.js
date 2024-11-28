@@ -18,6 +18,7 @@ const componentName = 'DecoratorLink';
 
 /**
  * The DecoratorLink groups a key/value pair to behave like a link.
+ * @deprecated This component is deprecated
  */
 export let DecoratorLink = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [
@@ -38,6 +39,11 @@ export let DecoratorLink = React.forwardRef((props, ref) => {
     />
   );
 });
+
+DecoratorLink.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorLink = pkg.checkComponentEnabled(DecoratorLink, componentName);

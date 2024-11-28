@@ -7,15 +7,14 @@
 
 // https://github.com/IBMa/equal-access/blob/master/accessibility-checker/boilerplates/jest/matchers/toBeAccessible.js
 
-// let accessibilityChecker;
+let accessibilityChecker;
 
 export default async (node, label) => {
   // For performance, defer initialization to when the matcher is needed.
-  // if (!accessibilityChecker) {
-  const accessibilityChecker = require('accessibility-checker');
-  // }
+  if (!accessibilityChecker) {
+    accessibilityChecker = require('accessibility-checker');
+  }
 
-  // try {
   const { assertCompliance, getCompliance, stringifyResults } =
     accessibilityChecker;
 
@@ -25,7 +24,4 @@ export default async (node, label) => {
     message: () => stringifyResults(report),
     pass: assertCompliance(report) === 0,
   };
-  // } finally {
-  // await accessibilityChecker?.close?.();
-  // }
 };

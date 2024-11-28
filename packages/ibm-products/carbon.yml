@@ -596,7 +596,7 @@ assets:
     name: User avatar
     externalDocsUrl: https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage
     status: stable
-    type: pattern
+    type: component
     platform: web
     framework: react
     demoLinks:

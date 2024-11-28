@@ -116,7 +116,7 @@ export interface CoachmarkProps {
   theme?: 'light' | 'dark';
   /**
    * Determines if the coachmark is open by default.
-   * Does nothing is `overlayKind=slacked`.
+   * Does nothing if `overlayKind=slacked`.
    */
   isOpenByDefault: boolean;
 }
@@ -403,6 +403,12 @@ Coachmark.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Determines if the coachmark is open by default.
+   * Does nothing if `overlayKind=slacked`.
+   */
+  isOpenByDefault: PropTypes.bool.isRequired,
+
+  /**
    * Function to call when the Coachmark closes.
    */
   onClose: PropTypes.func,
@@ -413,8 +419,7 @@ Coachmark.propTypes = {
 
   /**
    * What kind or style of Coachmark to render.
-   * Note that stacked coachmark are opened by default, unless the property
-   * `isOpenByDefault` is defined.
+   * Note that, `stacked` coachmarks are always open, even if `isOpenByDefault=true`.
    */
   overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
 

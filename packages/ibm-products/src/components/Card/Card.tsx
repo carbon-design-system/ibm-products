@@ -179,8 +179,7 @@ export const Card = forwardRef(
                 autoAlign
                 menuAlignment={pos}
                 size={size}
-                aria-label={overflowAriaLabel}
-                label={iconDescription}
+                label={iconDescription || overflowAriaLabel}
               >
                 {overflowActions.map(({ id, itemText, ...rest }) => (
                   <MenuItem key={id} label={itemText} {...rest} />

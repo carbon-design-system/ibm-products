@@ -18,10 +18,10 @@ export default async (node, label) => {
   const { assertCompliance, getCompliance, stringifyResults } =
     accessibilityChecker;
 
-  const { report } = await getCompliance(node, label);
-
-  return {
-    message: () => stringifyResults(report),
-    pass: assertCompliance(report) === 0,
-  };
+  getCompliance(node, label).then(({ report }) => {
+    return {
+      message: () => stringifyResults(report),
+      pass: assertCompliance(report) === 0,
+    };
+  });
 };

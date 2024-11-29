@@ -404,7 +404,7 @@ Coachmark.propTypes = {
 
   /**
    * Determines if the coachmark is open by default.
-   * Does nothing if `overlayKind=slacked`.
+   * Does nothing if `overlayKind=stacked`.
    */
   isOpenByDefault: PropTypes.bool.isRequired,
 

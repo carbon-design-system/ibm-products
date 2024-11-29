@@ -92,7 +92,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   overflowActions?: overflowAction[];
   /**
-   * Aria label prop required for OverflowMenu
+   * Aria label prop required for OverflowMenu, also applies to tooltip text on menu button. gets overridden by `iconDescription`
    */
   overflowAriaLabel?: string;
   /**
@@ -149,7 +149,7 @@ export interface ProductiveCardProps extends PropsWithChildren {
   titleSize?: 'default' | 'large';
 
   /**
-   * Tooltip icon description
+   * Tooltip icon description, also applies to Aria label prop required for OverflowMenu. overrides `overflowAriaLabel`
    */
   iconDescription?: string;
 }
@@ -229,7 +229,7 @@ ProductiveCard.propTypes = {
     PropTypes.node,
   ]),
   /**
-   * Tooltip icon description
+   * Tooltip icon description, also applies to Aria label prop required for OverflowMenu. overrides `overflowAriaLabel`
    */
   iconDescription: PropTypes.string,
   /**
@@ -265,7 +265,7 @@ ProductiveCard.propTypes = {
     })
   ),
   /**
-   * Aria label prop required for OverflowMenu
+   * Aria label prop required for OverflowMenu, also applies to tooltip text on menu button. gets overridden by `iconDescription`
    */
   overflowAriaLabel: PropTypes.string,
   /**

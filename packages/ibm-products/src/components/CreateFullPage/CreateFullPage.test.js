@@ -41,7 +41,7 @@ const onRequestSubmitNonPromiseFn = jest.fn();
 const onRequestSubmitRejectFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
-const onNextStepFn = jest.fn(async () => await Promise.resolve());
+const onNextStepFn = jest.fn(() => Promise.resolve());
 const onPreviousStepFn = jest.fn();
 const onNextStepNonPromiseFn = jest.fn();
 const onNextStepRejectionFn = jest.fn(() =>

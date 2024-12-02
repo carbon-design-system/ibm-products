@@ -129,7 +129,7 @@ export const MultiStepTearsheet = ({
                   reject();
                 }
                 setIsInvalid(false);
-                reject();
+                resolve();
               }, simulatedDelay);
             });
           }}

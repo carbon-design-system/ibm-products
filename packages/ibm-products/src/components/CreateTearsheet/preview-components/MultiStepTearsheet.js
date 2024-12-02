@@ -46,22 +46,25 @@ const CustomStep = ({ value1, setValue1, ...rest }) => {
   );
 };
 
-export const MultiStepTearsheet = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  firstFocusElement,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  submitButtonText,
-  title,
-  ...rest
-}) => {
+export const MultiStepTearsheet = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    firstFocusElement,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    submitButtonText,
+    title,
+    ...rest
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [value1, setValue1] = useState('');

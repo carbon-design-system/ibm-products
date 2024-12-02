@@ -62,6 +62,7 @@ export const Default = Template.bind({});
 Default.args = {
   documentationLinks,
   actions,
+  isInitiallyOpen: true,
   closeIconDescription: 'Close terminal',
   documentationLinksIconDescription: 'Show documentation links',
 };
@@ -70,12 +71,14 @@ export const WithDocumentationLinks = Template.bind({});
 WithDocumentationLinks.args = {
   documentationLinks,
   closeIconDescription: 'Close terminal',
+  isInitiallyOpen: true,
   documentationLinksIconDescription: 'Show documentation links',
 };
 
 export const WithActions = Template.bind({});
 WithActions.args = {
   actions,
+  isInitiallyOpen: true,
   closeIconDescription: 'Close terminal',
 };
 

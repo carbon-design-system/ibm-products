@@ -167,8 +167,8 @@ const logo = (
   />
 );
 
-const Template = (storyName, storyInitiallyOpen, props, context) => {
-  const [open, setOpen] = useState(false);
+const Template = (storyName, storyInitiallyOpen, args, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
@@ -180,7 +180,7 @@ const Template = (storyName, storyInitiallyOpen, props, context) => {
 
       <style>{`.${blockClass} { opacity: 0; }`};</style>
       <AboutModal
-        {...props}
+        {...args}
         onClose={() => setOpen(false)}
         logo={logo}
         modalAriaLabel="About this product"

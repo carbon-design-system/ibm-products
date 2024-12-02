@@ -118,7 +118,7 @@ export interface CoachmarkProps {
    * Determines if the coachmark is open by default.
    * Does nothing if `overlayKind=slacked`.
    */
-  isOpenByDefault: boolean;
+  isOpenByDefault?: boolean;
 }
 
 /**
@@ -406,7 +406,7 @@ Coachmark.propTypes = {
    * Determines if the coachmark is open by default.
    * Does nothing if `overlayKind=stacked`.
    */
-  isOpenByDefault: PropTypes.bool.isRequired,
+  isOpenByDefault: PropTypes.bool,
 
   /**
    * Function to call when the Coachmark closes.

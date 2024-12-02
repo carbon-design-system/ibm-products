@@ -10,7 +10,7 @@
 .sb-show-main.sb-main-centered #storybook-root {
   // Override default center/center with top/center.
   /* stylelint-disable-next-line carbon/layout-use */
-  margin-top: $spacing-05;
+  margin-top: 1rem;
 }
 
 .truncated-list-stories__viewport {

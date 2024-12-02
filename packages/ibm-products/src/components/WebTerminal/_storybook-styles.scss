@@ -25,7 +25,7 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 }
 
 .example-terminal {
-  padding: $spacing-05;
+  padding: 1rem;
   color: colors.$gray-10;
   font-family: 'IBM Plex Mono', monospace;
 

@@ -13,6 +13,7 @@ import React, {
   ReactNode,
   RefObject,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -139,6 +140,11 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const progStepFloor = 0;
     const progStepCeil = numProgSteps - 1;
 
+    const renderMediaContent = useMemo(
+      () => renderMedia?.({ playStep: currentProgStep }),
+      [currentProgStep, renderMedia]
+    );
+
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
       // will be rendered and must have focus. (a11y)
@@ -189,7 +195,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
         )}
         {hasMedia && renderMedia && (
           <div className={`${blockClass}__element-stepped-media`}>
-            {renderMedia({ playStep: currentProgStep })}
+            {renderMediaContent}
           </div>
         )}
 

@@ -302,7 +302,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { container } = renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
-    await act(() => click(nextButtonElement));
+    await waitFor(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;

@@ -6,17 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import React from 'react';
+import React, { act } from 'react';
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -184,9 +178,9 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
+    await act(() => fireEvent.animationStart(outerElement));
     rerender(<SlideIn placement="right" open={false} />);
-    fireEvent.animationEnd(outerElement);
+    await act(() => fireEvent.animationEnd(outerElement));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();

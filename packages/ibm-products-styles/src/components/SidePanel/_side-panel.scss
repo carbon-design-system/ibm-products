@@ -263,7 +263,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include setCommonTitleStyles();
 
     position: absolute;
-    /* stylelint-disable-next-line carbon/layout-use */
     top: 0;
     opacity: var(--#{$block-class}--scroll-animation-progress);
   }

@@ -61,6 +61,13 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
     </Coachmark>
   );
 
+const isCoachmarkVisible = () => {
+  const coachmarkContainer = screen.getByTestId(dataTestId);
+  const coachmarkButton = coachmarkContainer.getElementsByTagName('button')[0];
+  const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+  return ariaExpanded === 'true';
+};
+
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
@@ -209,11 +216,7 @@ describe(componentName, () => {
       'data-testid': dataTestId,
       isOpenByDefault: true,
     });
-    const coachmarkContainer = screen.getByTestId(dataTestId);
-    const coachmarkButton =
-      coachmarkContainer.children[0].children[0].children[0];
-    const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
-    expect(ariaExpanded).toEqual('true');
+    expect(isCoachmarkVisible()).toBeTruthy();
   });
 
   it('Check stacked coachmark are always open by default', () => {
@@ -222,9 +225,6 @@ describe(componentName, () => {
       isOpenByDefault: false,
       overlayKind: 'stacked',
     });
-    const coachmarkContainer = screen.getByTestId(dataTestId);
-    const coachmarkButton = coachmarkContainer.children[0].children[0];
-    const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
-    expect(ariaExpanded).toEqual('true');
+    expect(isCoachmarkVisible()).toBeTruthy();
   });
 });

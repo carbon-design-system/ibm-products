@@ -35,7 +35,7 @@ export const UiShell = ({ children }) => {
             <Header aria-label="IBM Product">
               <SkipToContent />
               <HeaderMenuButton
-                aria-label="Open menu"
+                aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
                 onClick={onClickSideNavExpand}
                 isCollapsible
                 isActive={isSideNavExpanded}

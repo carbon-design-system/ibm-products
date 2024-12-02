@@ -33,7 +33,7 @@ import {
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { SidePanel } from './SidePanel';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
-// import mdx from './SidePanel.mdx';
+import DocsPage from './SidePanel.docs-page';
 
 const prefix = 'side-panel-stories__';
 
@@ -393,11 +393,9 @@ export default {
   parameters: {
     layout: 'fullscreen',
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
   argTypes: {
     actions: {

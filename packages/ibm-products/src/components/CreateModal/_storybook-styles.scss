@@ -14,7 +14,7 @@
 @use '@carbon/react/scss/components/progress-indicator';
 @use '@carbon/react/scss/components/tooltip';
 @use '@carbon/react/scss/components/modal';
-@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/spacing' as *;
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 .#{c4p-settings.$carbon-prefix}--number {
@@ -43,12 +43,11 @@
 }
 
 .#{c4p-settings.$carbon-prefix}--list-box__menu-icon {
-  /* stylelint-disable-next-line carbon/layout-use */
-  top: spacing.$spacing-03;
+  top: $spacing-03;
 }
 
 .example-wrapper {
   display: grid;
-  grid-gap: spacing.$spacing-05;
+  grid-gap: $spacing-05;
   grid-template-columns: 1fr 1fr;
 }

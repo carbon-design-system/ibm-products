@@ -29,7 +29,6 @@
 @keyframes form-content-entrance {
   0% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-use
     transform: translateY(-$spacing-04);
   }
 

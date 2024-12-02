@@ -208,13 +208,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class}--lg .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  // stylelint-disable-next-line carbon/layout-use
   top: $spacing-05;
 }
 
 .#{$block-class}--xl .#{$block-class}__toggle {
   // "top" shouldn't be spacing token as it depends on the toggle size
-  // stylelint-disable-next-line carbon/layout-use
   top: $spacing-06;
 }
 

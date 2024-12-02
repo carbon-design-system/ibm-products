@@ -427,7 +427,6 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--has-slug,
   &.#{$block-class}--has-ai-label {
-    /* stylelint-disable-next-line carbon/theme-use */
     --overlay-color: #{$ai-overlay};
   }
 

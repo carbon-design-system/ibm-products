@@ -75,9 +75,14 @@ interface APIKeyModalCommonProps {
    */
   generateSuccessBody?: ReactNode;
   /**
+   * * @deprecated use `generateSuccessMessage` instead
    * title for a successful key generation
    */
   generateSuccessTitle?: string;
+  /**
+   * success message for a successful key generation
+   */
+  generateSuccessMessage?: string;
   /**
    * default title for the modal in generate key mode
    */
@@ -199,9 +204,14 @@ type EditingConditionalProps = {
    */
   editSuccess: boolean;
   /**
+   * * @deprecated use `editSuccessMessage` instead
    * title for a successful edit
    */
-  editSuccessTitle: string;
+  editSuccessTitle?: string;
+  /**
+   * success message for edit
+   */
+  editSuccessMessage: string;
 };
 
 type HasDownloadLinkProps = {

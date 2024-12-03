@@ -74,8 +74,8 @@ const defaultProps = {
   downloadFileType: 'json',
   open: true,
   closeButtonText: 'Close',
-  generateSuccessTitle: 'API key successfully created',
-  editSuccessTitle: 'API key successfully saved',
+  generateSuccessMessage: 'API key successfully created',
+  editSuccessMessage: 'API key successfully saved',
   loadingText: 'Generating...',
   modalLabel: 'An example of Generate API key',
 };

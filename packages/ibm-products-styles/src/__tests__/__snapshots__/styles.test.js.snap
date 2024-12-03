@@ -129,6 +129,10 @@ p.c4p--about-modal__copyright-text:first-child {
   fill: var(--cds-button-danger-primary, #da1e28);
 }
 
+.c4p--apikey-modal__checkmark-icon {
+  fill: var(--cds-button-primary, #0f62fe);
+}
+
 .c4p--action-set {
   align-items: stretch;
   justify-content: flex-end;
@@ -8857,8 +8861,8 @@ button.c4p--add-select__global-filter-toggle--open {
   text-overflow: ellipsis;
 }
 
-.c4p--breadcrumb-with-overflow__overflow-menu-options.c4p--breadcrumb-with-overflow__overflow-menu-options {
-  z-index: 8000;
+.c4p--breadcrumb-with-overflow__overflow-menu {
+  line-height: 0;
 }
 
 .c4p--tag-set.c4p--tag-set {

@@ -26,7 +26,12 @@ import {
   Button,
   unstable_FeatureFlags as FeatureFlags,
 } from '@carbon/react';
-import { InformationFilled, Copy, ErrorFilled } from '@carbon/react/icons';
+import {
+  InformationFilled,
+  Copy,
+  ErrorFilled,
+  CheckmarkFilled,
+} from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
@@ -68,12 +73,14 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       editButtonText,
       editSuccess,
       editSuccessTitle,
+      editSuccessMessage,
       editing,
       error,
       errorText,
       generateButtonText,
       generateSuccessBody,
       generateSuccessTitle,
+      generateSuccessMessage,
       generateTitle,
       hasAPIKeyVisibilityToggle,
       hasDownloadLink,
@@ -193,10 +200,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (editing && editSuccess) {
         setTitle(generateTitle);
-        setSuccessMessage(editSuccessTitle);
+        setSuccessMessage(editSuccessMessage ?? editSuccessTitle);
       } else if (apiKeyLoaded) {
         setTitle(generateTitle);
-        setSuccessMessage(generateSuccessTitle);
+        setSuccessMessage(generateSuccessMessage ?? generateSuccessTitle);
       } else if (hasSteps) {
         setTitle(customSteps[currentStep]?.title);
       } else {
@@ -208,8 +215,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       editing,
       editSuccess,
       editSuccessTitle,
+      editSuccessMessage,
       hasSteps,
       generateSuccessTitle,
+      generateSuccessMessage,
       generateTitle,
       currentStep,
       customSteps,
@@ -360,8 +369,12 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
                   </div>
                 )}
 
-                {(editing || apiKeyLoaded) && (
+                {(editSuccess || (apiKeyLoaded && successMessage)) && (
                   <div className={`${blockClass}__messaging`}>
+                    <CheckmarkFilled
+                      size={16}
+                      className={`${blockClass}__checkmark-icon`}
+                    />
                     <p
                       className={`${blockClass}__messaging-text`}
                       role="alert"
@@ -408,6 +421,20 @@ const downloadRequiredProps = (type) =>
 
 // Return a placeholder if not released and not enabled by feature flag
 APIKeyModal = pkg.checkComponentEnabled(APIKeyModal, componentName);
+
+export const deprecatedProps = {
+  /**
+   * deprecated
+   * title for a successful edit
+   */
+  editSuccessTitle: PropTypes.string,
+
+  /**
+   * deprecated
+   * title for a successful key generation
+   */
+  generateSuccessTitle: PropTypes.string,
+};
 
 APIKeyModal.propTypes = {
   /**
@@ -497,7 +524,7 @@ APIKeyModal.propTypes = {
   /**
    * title for a successful edit
    */
-  editSuccessTitle: editRequiredProps(PropTypes.string),
+  editSuccessMessage: editRequiredProps(PropTypes.string),
   /**
    * designates if the modal is in the edit mode
    */
@@ -523,7 +550,7 @@ APIKeyModal.propTypes = {
   /**
    * title for a successful key generation
    */
-  generateSuccessTitle: PropTypes.string,
+  generateSuccessMessage: PropTypes.string,
   /**
    * default title for the modal in generate key mode
    */
@@ -619,6 +646,8 @@ APIKeyModal.propTypes = {
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel: PropTypes.string,
+
+  ...deprecatedProps,
 };
 
 APIKeyModal.displayName = componentName;

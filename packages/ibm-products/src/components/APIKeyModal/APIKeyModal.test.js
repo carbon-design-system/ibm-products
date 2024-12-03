@@ -43,13 +43,13 @@ const defaultProps = {
   downloadLinkLabel: 'Download API Key in Java Script File format',
   editButtonText: 'edit button',
   editSuccess: false,
-  editSuccessTitle: 'edited successfully',
+  editSuccessMessage: 'edited successfully',
   editing: false,
   error: false,
   errorText: 'an error occurred',
   generateButtonText: 'create button',
   generateSuccessBody: 'created successfully body',
-  generateSuccessTitle: 'created successfully title',
+  generateSuccessMessage: 'created successfully title',
   generateTitle: 'create title',
   hasAPIKeyVisibilityToggle: true,
   hasDownloadLink: true,
@@ -252,7 +252,7 @@ describe(componentName, () => {
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe('abc-123');
     getByText(props.generateSuccessBody);
-    getAllByText(props.generateSuccessTitle);
+    getAllByText(props.generateSuccessMessage);
     await act(() => click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
@@ -373,7 +373,7 @@ describe(componentName, () => {
     await act(() => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
-    getAllByText(props.editSuccessTitle);
+    getAllByText(props.editSuccessMessage);
   });
 
   it('toggles key visibility', async () => {

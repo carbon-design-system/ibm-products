@@ -17,8 +17,14 @@ import {
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
-import { BEACON_KIND, COACHMARK_OVERLAY_KIND } from './utils/enums';
+import {
+  BEACON_KIND,
+  COACHMARK_ALIGNMENT,
+  COACHMARK_OVERLAY_KIND,
+} from './utils/enums';
 import { CoachmarkDragbar } from './CoachmarkDragbar';
+import { getOffsetTune } from './utils/constants';
+import { clamp } from './utils/helpers';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
@@ -209,18 +215,97 @@ describe(componentName, () => {
     );
   });
 
-  it('enables a11y drag mode', async () => {
-    renderCoachmark({
-      'data-testid': dataTestId,
-      kind: COACHMARK_OVERLAY_KIND.FLOATING,
-    });
+  it('tests getOffsetTune util', async () => {
+    let result;
+    const distanceOffset = 24;
+    const coachmarkTarget = {
+      targetRect: {
+        width: 200,
+        height: 200,
+      },
+      align: COACHMARK_ALIGNMENT.TOP,
+    };
 
-    const targetButton = screen.getByRole('button', {
-      name: /Show information/,
-    });
+    // Test case when it is a tooltip
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.TOOLTIP);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(0);
 
-    await act(() => userEvent.click(targetButton));
+    // Test top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(100);
+    expect(result.top).toBe(0);
 
-    await act(() => userEvent.keyboard('{Enter}'));
+    // Test top left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP_LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(distanceOffset);
+    expect(result.top).toBe(0);
+
+    // Test top right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP_RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200 - distanceOffset);
+    expect(result.top).toBe(0);
+
+    // Test bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(100);
+    expect(result.top).toBe(200);
+
+    // Test bottom left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM_LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(distanceOffset);
+    expect(result.top).toBe(200);
+
+    // Test bottom right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM_RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200 - distanceOffset);
+    expect(result.top).toBe(200);
+
+    // Test left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(100);
+
+    // Test left top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT_TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(distanceOffset);
+
+    // Test left bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT_BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(200 - distanceOffset);
+
+    // Test right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(100);
+
+    // Test right top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT_TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(distanceOffset);
+
+    // Test right bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT_BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(200 - distanceOffset);
+  });
+
+  it('tests clamp helper function', () => {
+    expect(clamp(100, 50, 20)).toBe(50);
+    expect(clamp(40, 10, 50)).toBe(40);
   });
 });

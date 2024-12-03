@@ -192,8 +192,8 @@ describe(componentName, () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 
     try {
-      expect(container).toBeAccessible(componentName);
-      expect(container).toHaveNoAxeViolations();
+      await expect(container).toBeAccessible(componentName);
+      await expect(container).toHaveNoAxeViolations();
     } catch (err) {
       console.log('accessibility test error: ', err);
     }

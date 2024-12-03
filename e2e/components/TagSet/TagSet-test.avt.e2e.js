@@ -145,11 +145,15 @@ test.describe('TagSet @avt', () => {
     });
 
     await expect(
-      page.locator('.dev-prefix--c4p--tag-set__displayed-tag').getByText('One')
+      page
+        .locator(`.${pkg.prefix}--c4p--tag-set__displayed-tag`)
+        .getByText('One')
     ).toBeVisible();
     await page.getByRole('button', { name: 'Dismiss' }).first().click();
     await expect(
-      page.locator('.dev-prefix--c4p--tag-set__displayed-tag').getByText('One')
+      page
+        .locator(`.${pkg.prefix}--c4p--tag-set__displayed-tag`)
+        .getByText('One')
     ).toBeHidden();
   });
 

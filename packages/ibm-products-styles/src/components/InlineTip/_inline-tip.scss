@@ -15,8 +15,8 @@
  * instead of many individual rules.
  */
 
-/* stylelint-disable carbon/layout-token-use */
-/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable carbon/theme-use */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable max-nesting-depth */
@@ -177,7 +177,7 @@ $purple: #7f3ae7;
 }
 
 .#{$block-class} .#{$block-class}__close-icon {
-  padding: to-rem(6px) 0 0 0;
+  padding: to-rem(6px) 0 0;
   block-size: $spacing-07;
   color: $white-0;
   inline-size: $spacing-07;
@@ -221,7 +221,7 @@ $purple: #7f3ae7;
   // Repeating here.
   svg {
     position: absolute;
-    right: 1rem;
+    right: $spacing-05;
     width: 1rem;
     height: 1rem;
     flex-shrink: 0;

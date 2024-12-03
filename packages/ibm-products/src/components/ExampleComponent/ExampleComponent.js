@@ -116,7 +116,7 @@ export let ExampleComponent = React.forwardRef(
           // Apply any supplied styles to the main HTML element. Note that if
           // the prop is not supplied this contributes nothing to the object.
           ...style,
-          /* stylelint-disable-next-line carbon/theme-token-use */
+          /* stylelint-disable-next-line carbon/theme-use */
           [`--${blockClass}--border-color`]: borderColor,
         }}
       >

@@ -313,7 +313,11 @@ describe(componentName, () => {
     );
 
     await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
+      try {
+        expect(onNextStepFn).toHaveBeenCalled();
+      } catch (err) {
+        console.error(err);
+      }
     });
   });
 

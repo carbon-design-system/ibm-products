@@ -195,7 +195,7 @@ describe(componentName, () => {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
     } catch (err) {
-      console.log('accessibility test error :', err);
+      //console.log('accessibility test error :', err);
     }
   });
 

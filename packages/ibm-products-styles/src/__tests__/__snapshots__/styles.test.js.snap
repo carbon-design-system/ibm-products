@@ -2715,7 +2715,6 @@ p.c4p--about-modal__copyright-text:first-child {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   position: absolute;
-  /* stylelint-disable-next-line carbon/layout-use */
   top: 0;
   opacity: var(--c4p--side-panel--scroll-animation-progress);
 }
@@ -2898,7 +2897,6 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .c4p--side-panel--has-slug + .c4p--side-panel__overlay,
 .c4p--side-panel--has-ai-label + .c4p--side-panel__overlay {
-  /* stylelint-disable-next-line carbon/theme-use */
   background-color: var(--cds-ai-overlay, rgba(0, 17, 65, 0.5));
 }
 
@@ -3214,7 +3212,6 @@ p.c4p--about-modal__copyright-text:first-child {
   background: var(--cds-background, #ffffff);
 }
 .c4p--tearsheet.c4p--tearsheet--has-slug, .c4p--tearsheet.c4p--tearsheet--has-ai-label {
-  /* stylelint-disable-next-line carbon/theme-use */
   --overlay-color: var(--cds-ai-overlay, rgba(0, 17, 65, 0.5));
 }
 .c4p--tearsheet.c4p--tearsheet--has-slug:not(.c4p--tearsheet--has-close) .cds--slug, .c4p--tearsheet.c4p--tearsheet--has-ai-label:not(.c4p--tearsheet--has-close) .cds--slug {
@@ -3486,7 +3483,6 @@ p.c4p--about-modal__copyright-text:first-child {
 
 /* This section to be removed after support for slug dropped  - start */
 .c4p--datagrid th.c4p--datagrid__with-slug {
-  /* stylelint-disable-next-line carbon/theme-use */
   box-shadow: inset 0 1px var(--cds-ai-border-strong, #4589ff);
 }
 
@@ -3527,7 +3523,6 @@ p.c4p--about-modal__copyright-text:first-child {
 
 /* This section to be removed after support for slug dropped  - end */
 .c4p--datagrid th.c4p--datagrid__with-ai-label {
-  /* stylelint-disable-next-line carbon/theme-use */
   box-shadow: inset 0 1px var(--cds-ai-border-strong, #4589ff);
 }
 
@@ -3543,7 +3538,6 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid .cds--data-table tbody tr.c4p--datagrid__ai-label--row {
-  /* stylelint-disable-next-line carbon/theme-use */
   box-shadow: inset 1px 0 var(--cds-ai-border-strong, #4589ff);
 }
 
@@ -4529,7 +4523,6 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--datagrid .cds--popover--bottom-right.c4p--datagrid__row-height-settings-popover .cds--popover-caret {
-  /* stylelint-disable-next-line carbon/layout-use */
   left: -0.25rem;
 }
 

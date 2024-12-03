@@ -1555,7 +1555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.22.15, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.24.5
   resolution: "@babel/runtime@npm:7.24.5"
   dependencies:
@@ -1570,6 +1570,15 @@ __metadata:
   dependencies:
     regenerator-runtime: "npm:^0.14.0"
   checksum: 6870e9e0e9125075b3aeba49a266f442b10820bfc693019eb6c1785c5a0edbe927e98b8238662cdcdba17842107c040386c3b69f39a0a3b217f9d00ffe685b27
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.24.5":
+  version: 7.26.0
+  resolution: "@babel/runtime@npm:7.26.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 9f4ea1c1d566c497c052d505587554e782e021e6ccd302c2ad7ae8291c8e16e3f19d4a7726fb64469e057779ea2081c28b7dbefec6d813a22f08a35712c0f699
   languageName: node
   linkType: hard
 
@@ -1648,15 +1657,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@npm:^11.24.0, @carbon/colors@npm:^11.27.0":
-  version: 11.27.0
-  resolution: "@carbon/colors@npm:11.27.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: f6c7ca939e4093f02ee30fc3d869b32f616d1fdec51fea4f83df4dcf788aa9f293bdf2cabdc63f3594fb1f6a21a38af5bd15349b52c876fcb2682d9f06f9e8ad
-  languageName: node
-  linkType: hard
-
 "@carbon/colors@npm:^11.28.0":
   version: 11.28.0
   resolution: "@carbon/colors@npm:11.28.0"
@@ -1666,31 +1666,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/feature-flags@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@carbon/feature-flags@npm:0.21.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: c8d9377cfd428ecc819ce28b2030aa9da33ffebc2d8c915e5ae589be8b9ccf582b9dccdcc731f62eea0b5643ef52c39d2471bfe202713572501997d3dffa1aa7
-  languageName: node
-  linkType: hard
-
 "@carbon/feature-flags@npm:^0.24.0":
   version: 0.24.0
   resolution: "@carbon/feature-flags@npm:0.24.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: abfe35e02d45208e64ead6e22c76c1f97c3099013bb0f0bbca46893c33f4571c9c6f0a2cacc6e8b5cd78aa90696beef89145b7bfc06fcab06c8ca3ff7cd11e02
-  languageName: node
-  linkType: hard
-
-"@carbon/grid@npm:^11.25.0, @carbon/grid@npm:^11.28.0":
-  version: 11.28.0
-  resolution: "@carbon/grid@npm:11.28.0"
-  dependencies:
-    "@carbon/layout": "npm:^11.27.0"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: e1311bbac3f75f529fe2a7fd76b19456bda29fd46cdaa2849a7c571a2a0e9d0181220cb1c22ce2b2841b3c7f5fbe1b574599994b483d3a94a57a742ac5f1cba2
   languageName: node
   linkType: hard
 
@@ -1712,7 +1693,7 @@ __metadata:
     "@carbon/ibm-products-styles": "npm:^2.51.0-rc.0"
     "@carbon/layout": "npm:^11.28.0"
     "@carbon/motion": "npm:^11.24.0"
-    "@carbon/react": "npm:^1.70.0"
+    "@carbon/react": "npm:^1.71.1"
     "@carbon/themes": "npm:^11.43.0"
     "@carbon/type": "npm:^11.33.0"
     "@percy/cli": "npm:^1.30.1"
@@ -1781,10 +1762,10 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@carbon/ibm-products-styles": "npm:^2.51.0-rc.0"
-    "@carbon/icons": "npm:^11.52.0"
+    "@carbon/icons": "npm:^11.53.0"
     "@carbon/motion": "npm:^11.24.0"
-    "@carbon/styles": "npm:1.69.0"
-    "@carbon/web-components": "npm:2.17.0"
+    "@carbon/styles": "npm:1.70.0"
+    "@carbon/web-components": "npm:2.18.0"
     "@mordech/vite-lit-loader": "npm:^0.35.0"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^28.0.1"
@@ -1805,7 +1786,7 @@ __metadata:
     autoprefixer: "npm:^10.4.20"
     cssnano: "npm:^7.0.6"
     eslint: "npm:^9.11.1"
-    eslint-config-carbon: "npm:3.17.1"
+    eslint-config-carbon: "npm:3.18.0"
     globby: "npm:^14.0.2"
     happy-dom: "npm:^15.11.6"
     lit: "npm:^3.1.0"
@@ -1883,7 +1864,7 @@ __metadata:
     "@carbon/grid": ^11.29.0
     "@carbon/layout": ^11.28.0
     "@carbon/motion": ^11.24.0
-    "@carbon/react": ^1.70.0
+    "@carbon/react": ^1.71.1
     "@carbon/themes": ^11.43.0
     "@carbon/type": ^11.33.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
@@ -1900,34 +1881,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.52.0":
-  version: 11.52.0
-  resolution: "@carbon/icons-react@npm:11.52.0"
+"@carbon/icons-react@npm:^11.53.0":
+  version: 11.53.0
+  resolution: "@carbon/icons-react@npm:11.53.0"
   dependencies:
     "@carbon/icon-helpers": "npm:^10.54.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.7.2"
   peerDependencies:
     react: ">=16"
-  checksum: 3b9397c2bdb07ec302e22101e9f10292a1a27ed63a7363292a805821dbfd3fff611c63b77cb675a7dce6f5cd5faac3f9a8ccde5be9540d146534cccd101ba5b1
+  checksum: 32eafc698024b3228e8d42c151f22384fdd82206e7259023a92994b19d268c171a0ed8ff85a00718d2ef7bc1fbaccce584e3ea4c7a766ef1b464eccd8fb4537b
   languageName: node
   linkType: hard
 
-"@carbon/icons@npm:^11.52.0":
-  version: 11.52.0
-  resolution: "@carbon/icons@npm:11.52.0"
+"@carbon/icons@npm:^11.53.0":
+  version: 11.53.0
+  resolution: "@carbon/icons@npm:11.53.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 240f960271c4aa4de07c953d9c8fa2df7b4eba235a8f8c45d8a863dc36229965d6198aef65c79a3817387b41e5672571dd7356d7225c8fc61290664ef736984b
-  languageName: node
-  linkType: hard
-
-"@carbon/layout@npm:^11.24.0, @carbon/layout@npm:^11.27.0":
-  version: 11.27.0
-  resolution: "@carbon/layout@npm:11.27.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 3357ba5a44f88a33c3408b6290677bbc3edf347d28aac36fad9c3a7cf90da23c5fdc2c02e54439b2a738d4d90375736b4f931bbfeab1eddef384fd53b423fdb4
+  checksum: fdd4ab7387cea3e5cdb09e701e2c121cc649e1525cffb85e32f48b814e457df83753f32eb018e22cfef96ab646b7112bec623d749c9d4f8958157383f818bc0d
   languageName: node
   linkType: hard
 
@@ -1940,15 +1912,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.20.0":
-  version: 11.23.0
-  resolution: "@carbon/motion@npm:11.23.0"
-  dependencies:
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 3fabfe0d1f970028199a436c1b3a7b083731617d945f8a078bb0fc7f16e31771a4ab49ca59047e4e9876f2473c58794d95876e31c0ee74b4406e1b29642d7b96
-  languageName: node
-  linkType: hard
-
 "@carbon/motion@npm:^11.24.0":
   version: 11.24.0
   resolution: "@carbon/motion@npm:11.24.0"
@@ -1958,24 +1921,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.70.0":
-  version: 1.70.0
-  resolution: "@carbon/react@npm:1.70.0"
+"@carbon/react@npm:^1.71.1":
+  version: 1.71.1
+  resolution: "@carbon/react@npm:1.71.1"
   dependencies:
     "@babel/runtime": "npm:^7.24.7"
     "@carbon/feature-flags": "npm:^0.24.0"
-    "@carbon/icons-react": "npm:^11.52.0"
+    "@carbon/icons-react": "npm:^11.53.0"
     "@carbon/layout": "npm:^11.28.0"
-    "@carbon/styles": "npm:^1.69.0"
+    "@carbon/styles": "npm:^1.70.0"
     "@floating-ui/react": "npm:^0.26.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     classnames: "npm:2.5.1"
     copy-to-clipboard: "npm:^3.3.1"
-    downshift: "npm:8.5.0"
+    downshift: "npm:9.0.8"
     flatpickr: "npm:4.6.13"
     invariant: "npm:^2.2.3"
     lodash.debounce: "npm:^4.0.8"
-    lodash.findlast: "npm:^4.5.0"
     lodash.omit: "npm:^4.5.0"
     lodash.throttle: "npm:^4.1.1"
     prop-types: "npm:^15.7.2"
@@ -1988,7 +1950,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: b74d9f56caa93cbac8b58ab28d57959e0881591e81e4f4dbaec233ea443423acc51d8ee64cd32968a2b03aec1ffbabf7be6ddd29aadd0169177e2ed285ca3b26
+  checksum: 51fde69cfc9962d4f3671dcb93c8f8da02cf3715f5a8e34a4724731e3dc519860bb2edffd8996134f41ca667051e18b56d0cd98ee7b1d57c76ef4805ae720b83
   languageName: node
   linkType: hard
 
@@ -2018,31 +1980,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:1.63.1":
-  version: 1.63.1
-  resolution: "@carbon/styles@npm:1.63.1"
-  dependencies:
-    "@carbon/colors": "npm:^11.24.0"
-    "@carbon/feature-flags": "npm:^0.21.0"
-    "@carbon/grid": "npm:^11.25.0"
-    "@carbon/layout": "npm:^11.24.0"
-    "@carbon/motion": "npm:^11.20.0"
-    "@carbon/themes": "npm:^11.38.0"
-    "@carbon/type": "npm:^11.29.0"
-    "@ibm/plex": "npm:6.0.0-next.6"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  peerDependencies:
-    sass: ^1.33.0
-  peerDependenciesMeta:
-    sass:
-      optional: true
-  checksum: fe83a42fc0bdbb5e0285cc7bab78dadb898b17db85a2aafaf6e8027e137e2efd09b439c9e7569af37ff00ea821b3918de116909848ab0965d2e642870054a6d5
-  languageName: node
-  linkType: hard
-
-"@carbon/styles@npm:1.69.0, @carbon/styles@npm:^1.69.0":
-  version: 1.69.0
-  resolution: "@carbon/styles@npm:1.69.0"
+"@carbon/styles@npm:1.70.0, @carbon/styles@npm:^1.70.0":
+  version: 1.70.0
+  resolution: "@carbon/styles@npm:1.70.0"
   dependencies:
     "@carbon/colors": "npm:^11.28.0"
     "@carbon/feature-flags": "npm:^0.24.0"
@@ -2052,13 +1992,21 @@ __metadata:
     "@carbon/themes": "npm:^11.43.0"
     "@carbon/type": "npm:^11.33.0"
     "@ibm/plex": "npm:6.0.0-next.6"
+    "@ibm/plex-mono": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-arabic": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-devanagari": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-hebrew": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-thai": "npm:0.0.3-alpha.0"
+    "@ibm/plex-sans-thai-looped": "npm:0.0.3-alpha.0"
+    "@ibm/plex-serif": "npm:0.0.3-alpha.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
   peerDependencies:
     sass: ^1.33.0
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 7ff43f020ec6ef8641873863637aeb05d849ac34441a9d273b6d7d69b67b7996f4111fadb43697cfb3b2ac736b6815129760c9a1fbbe6f3d195592c186daf6f2
+  checksum: 6a6c7c6c8c226b95bcac86633db516bb7099a4bb203bf68cced7f259ceaf0e0ff0c205e620be02abf2424e380c752ff57ebd9179ac2d242ccc252a36ad2b1532
   languageName: node
   linkType: hard
 
@@ -2068,19 +2016,6 @@ __metadata:
   bin:
     carbon-telemetry: bin/carbon-telemetry.js
   checksum: 4a803573ab2ff78088d972a6b5570cc8bce3230306882d58eee99a37bbf98b167143401cb1435c0c5b607436de603e23fe3cdd9bb39d41e56a172bedcde8c1f3
-  languageName: node
-  linkType: hard
-
-"@carbon/themes@npm:^11.38.0":
-  version: 11.41.0
-  resolution: "@carbon/themes@npm:11.41.0"
-  dependencies:
-    "@carbon/colors": "npm:^11.27.0"
-    "@carbon/layout": "npm:^11.27.0"
-    "@carbon/type": "npm:^11.32.0"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-    color: "npm:^4.0.0"
-  checksum: 16711109a6f861083db88858f4b254676ed492b833ed2f4aec4960d3f6956ab35ce9b33909ab431d2061f1e4d86a115738fa1732c56683717d78e53680e1fa48
   languageName: node
   linkType: hard
 
@@ -2097,17 +2032,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.29.0, @carbon/type@npm:^11.32.0":
-  version: 11.32.0
-  resolution: "@carbon/type@npm:11.32.0"
-  dependencies:
-    "@carbon/grid": "npm:^11.28.0"
-    "@carbon/layout": "npm:^11.27.0"
-    "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 2055a12c09c269087d1ef5cbd70e64a8e41c3f2b0623a498e44e457d45bb9951355ef0cba593086bb8e7d96e3403b60ba2be941c7a9ad1d470b31adfe7db4d99
-  languageName: node
-  linkType: hard
-
 "@carbon/type@npm:^11.33.0":
   version: 11.33.0
   resolution: "@carbon/type@npm:11.33.0"
@@ -2119,18 +2043,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.17.0":
-  version: 2.17.0
-  resolution: "@carbon/web-components@npm:2.17.0"
+"@carbon/web-components@npm:2.18.0":
+  version: 2.18.0
+  resolution: "@carbon/web-components@npm:2.18.0"
   dependencies:
-    "@carbon/styles": "npm:1.63.1"
+    "@carbon/styles": "npm:^1.70.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     flatpickr: "npm:4.6.13"
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     tslib: "npm:^2.6.3"
-  checksum: dfdea6127f7cf35a4538023e97b5c40ada4dcd8c10a49a506ca5c38a7061f35eacc91ccb93a8d8dc55c4be9c3bb9266f1248192dcb7ba1aed6221f00623f31fd
+  checksum: 51d99f31649ad9e021316bf11c9f55b0712be7d2ebc9d83591d6a47fe78a441b5a219e9d55ef2daa0b565b9361ddde402554e1aecdd7090ca7ee2cc281c68586
   languageName: node
   linkType: hard
 
@@ -2912,6 +2836,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@double-great/stylelint-a11y@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@double-great/stylelint-a11y@npm:3.0.2"
+  dependencies:
+    postcss: "npm:^8.4.33"
+  peerDependencies:
+    stylelint: ">=16.0.0"
+  checksum: 5abfe4f251e67eb9ef9d8e96a1fe9ae9c620e3f8279d5aab79269bd4d2ce86c578185072822346dd118e9cd915b3a11ada0980e26b6b6c4547111be2152f7fdb
+  languageName: node
+  linkType: hard
+
 "@emotion/is-prop-valid@npm:^0.8.2":
   version: 0.8.8
   resolution: "@emotion/is-prop-valid@npm:0.8.8"
@@ -3534,6 +3469,62 @@ __metadata:
   version: 3.0.2
   resolution: "@hutson/parse-repository-url@npm:3.0.2"
   checksum: dae0656f2e77315a3027ab9ca438ed344bf78a5fda7b145f65a1fface20dfb17e94e1d31e146c8b76de4657c21020aabc72dc53b53941c9f5fe2c27416559283
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-mono@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-mono@npm:0.0.3-alpha.0"
+  checksum: fbdfb70762dead35bd12fd69344133f3290bd4ede4fd3607f6949e80e3c516190e772afc5f8ba060426911bf1b89744f02e7b0fdd25cca818086f3ce312fcad4
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans-arabic@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans-arabic@npm:0.0.3-alpha.0"
+  checksum: c390dd9788a36f4cb2abb2fcf63deb2a3c8b9e7aa8a7e6263ff6484b2fe99044258e2daeb36e7c0b0eeaea17e4128a8ce567208458f851ee6b05ec8c54f84edb
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans-devanagari@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans-devanagari@npm:0.0.3-alpha.0"
+  checksum: ef3cd967100210a822bea7b36c5ac54f915a319d5e23fa1175ea63d0405c826023f241d54b4f7beb5928603fbe01a5bae22839dad6922330bb84921eb289d193
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans-hebrew@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans-hebrew@npm:0.0.3-alpha.0"
+  checksum: e67ed6e081dbf9a522eca8e35471a329c788e6a03042df89649b034eaa2e66898bc44b72c0c0f57d93d24b37796cfc92729cee7754eb83ec2cd27f1fa9bdeea6
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans-thai-looped@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans-thai-looped@npm:0.0.3-alpha.0"
+  checksum: 11272b1353611fed07788a870793ca6f45c644f47faa99880d5278552a7acd85b0696ca02336b7aa8e29bf5d6353538d322149cb8b6b2e65985c38f0af6359fe
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans-thai@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans-thai@npm:0.0.3-alpha.0"
+  checksum: baac49d77d2075ee6ecbd5ed22d938b1afca898e5d8d9948f079613d2be011216acf52a6ae555e3cf732d8aa60b7b89b1eaef4380590a66270d7b166067a271a
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-sans@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-sans@npm:0.0.3-alpha.0"
+  checksum: 5b0b0521dbeb7c32eb13a932b53baef0013b96d5d39547b35c69a991707a3f75cec37383c9f239229fdedfb91fda8c8005f25fdddcb900937d6de7dbd456175a
+  languageName: node
+  linkType: hard
+
+"@ibm/plex-serif@npm:0.0.3-alpha.0":
+  version: 0.0.3-alpha.0
+  resolution: "@ibm/plex-serif@npm:0.0.3-alpha.0"
+  checksum: 462dcf33937f50f5a0ecf320f1d930c612e92293aa40dda08c05f6630d8795e4233023bb4f8ed3d340d2dbbd82a4b7ec5ae5e511f4260b16ff9ade6f481e48e8
   languageName: node
   linkType: hard
 
@@ -10387,7 +10378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compute-scroll-into-view@npm:^3.0.3":
+"compute-scroll-into-view@npm:^3.1.0":
   version: 3.1.0
   resolution: "compute-scroll-into-view@npm:3.1.0"
   checksum: cc5211d49bced5ad23385da5c2eaf69b6045628581b0dcb9f4dd407bfee51bbd26d2bce426be26edf2feaf8c243706f5a7c3759827d89cc5a01a5cf7d299a5eb
@@ -10979,6 +10970,16 @@ __metadata:
     mdn-data: "npm:2.0.30"
     source-map-js: "npm:^1.0.1"
   checksum: e5e39b82eb4767c664fa5c2cd9968c8c7e6b7fd2c0079b52680a28466d851e2826d5e64699c449d933c0e8ca0554beca43c41a9fcb09fb6a46139d462dbdf0df
+  languageName: node
+  linkType: hard
+
+"css-tree@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "css-tree@npm:3.0.1"
+  dependencies:
+    mdn-data: "npm:2.12.1"
+    source-map-js: "npm:^1.0.1"
+  checksum: 877a77669739f94e57589c94c1ea8b7b105e373d4855e94375638b411e2913337a900120dc45c13511d0f7c339b73cecf8dc61ce28034984dbf75993dac756b0
   languageName: node
   linkType: hard
 
@@ -11587,7 +11588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"doiuse@npm:^6.0.1":
+"doiuse@npm:^6.0.5":
   version: 6.0.5
   resolution: "doiuse@npm:6.0.5"
   dependencies:
@@ -11746,18 +11747,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:8.5.0":
-  version: 8.5.0
-  resolution: "downshift@npm:8.5.0"
+"downshift@npm:9.0.8":
+  version: 9.0.8
+  resolution: "downshift@npm:9.0.8"
   dependencies:
-    "@babel/runtime": "npm:^7.22.15"
-    compute-scroll-into-view: "npm:^3.0.3"
+    "@babel/runtime": "npm:^7.24.5"
+    compute-scroll-into-view: "npm:^3.1.0"
     prop-types: "npm:^15.8.1"
-    react-is: "npm:^18.2.0"
+    react-is: "npm:18.2.0"
     tslib: "npm:^2.6.2"
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 275f2b6868bf61aae276780c54e7511b2e4b3966c568ad9760df00bf306fef3a8aa76eae56a66d09526b062d8747a17358d21d9d8f60107f87e9f7398c85c92d
+  checksum: 9dc4577e780c54742ba4dde11f481f0d839f001b309200fbe4db112385b227ccd9cd2ef97d9e995379fa70249f0664a562240e415b9966f18c8a5cb7ce435f2c
   languageName: node
   linkType: hard
 
@@ -12411,9 +12412,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:3.17.1":
-  version: 3.17.1
-  resolution: "eslint-config-carbon@npm:3.17.1"
+"eslint-config-carbon@npm:3.18.0":
+  version: 3.18.0
+  resolution: "eslint-config-carbon@npm:3.18.0"
   dependencies:
     "@babel/eslint-parser": "npm:^7.24.7"
     "@typescript-eslint/eslint-plugin": "npm:^5.59.6"
@@ -12435,7 +12436,7 @@ __metadata:
     eslint-restricted-globals: "npm:^0.2.0"
   peerDependencies:
     eslint: ^9.0.0
-  checksum: 487f796cff9a45a4ae8029d52fa6e38596c741df7205c22ef85eaf9dd54d6b67e74beb24e2bd0c30e2474978129dcb9345fcae7f3eee978063fa7fa9ddcd6923
+  checksum: 64c3494d833f95abbf8e0048ebd63b6b0dde2d01d54d2f35a6ab277f37277330b1d72f571b7eb50e55081b868f99acff649f833cc3ab21554d67301611405720
   languageName: node
   linkType: hard
 
@@ -14691,7 +14692,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^8.3.2"
     eslint: "npm:^8.56.0"
-    eslint-config-carbon: "npm:3.17.1"
+    eslint-config-carbon: "npm:3.18.0"
     eslint-plugin-ssr-friendly: "npm:^1.3.0"
     gitignore-to-glob: "npm:^0.3.0"
     globby: "npm:^14.0.0"
@@ -14712,7 +14713,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     rimraf: "npm:^5.0.5"
     stylelint: "npm:^15.11.0"
-    stylelint-config-carbon: "npm:1.19.1"
+    stylelint-config-carbon: "npm:1.20.0"
     stylelint-plugin-carbon-tokens: "npm:2.8.0"
     webpack: "npm:^5.96.1"
   languageName: unknown
@@ -16642,6 +16643,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"known-css-properties@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "known-css-properties@npm:0.35.0"
+  checksum: a6f3f271a94913c72b29e59bd1e96836b0b5427c5dd9969f4673026cd39f7f441b5e8d0b704b0a830c43d745a5f7ca98d41d99961dc4c008ebf756545bada85c
+  languageName: node
+  linkType: hard
+
 "language-subtag-registry@npm:^0.3.20":
   version: 0.3.22
   resolution: "language-subtag-registry@npm:0.3.22"
@@ -17040,13 +17048,6 @@ __metadata:
   version: 4.1.2
   resolution: "lodash.escaperegexp@npm:4.1.2"
   checksum: 6d99452b1cfd6073175a9b741a9b09ece159eac463f86f02ea3bee2e2092923fce812c8d2bf446309cc52d1d61bf9af51c8118b0d7421388e6cead7bd3798f0f
-  languageName: node
-  linkType: hard
-
-"lodash.findlast@npm:^4.5.0":
-  version: 4.6.0
-  resolution: "lodash.findlast@npm:4.6.0"
-  checksum: ee7c3e6287ebab628b06449c8847aa00263f10b43bc67f1245e4b34c2edd80802148299f61e8577675790a05a4abe75ffdadacd0984a93724a69c7a01873fb1d
   languageName: node
   linkType: hard
 
@@ -17717,6 +17718,20 @@ __metadata:
   version: 2.0.30
   resolution: "mdn-data@npm:2.0.30"
   checksum: e4944322bf3e0461a2daa2aee7e14e208960a036289531e4ef009e53d32bd41528350c070c4a33be867980443fe4c0523518d99318423cffa7c825fe7b1154e2
+  languageName: node
+  linkType: hard
+
+"mdn-data@npm:2.12.1":
+  version: 2.12.1
+  resolution: "mdn-data@npm:2.12.1"
+  checksum: 7928cfc828b0ebbde84ce56be2e3aa729c1770bfbc83ef1dadf5f98346ab003ca0a1b3339076115d77acf623719efa3f9f2be8c69f73c453fe887cb982bfa625
+  languageName: node
+  linkType: hard
+
+"mdn-data@npm:^2.12.2":
+  version: 2.12.2
+  resolution: "mdn-data@npm:2.12.2"
+  checksum: 854e41715a9358e69f9a530117cd6ca7e71d06176469de8d70b1e629753b6827f5bd730995c16ad3750f3c9bad92230f8e4e178de2b34926b05f5205d27d76af
   languageName: node
   linkType: hard
 
@@ -20633,6 +20648,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-resolve-nested-selector@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "postcss-resolve-nested-selector@npm:0.1.6"
+  checksum: 85453901afe2a4db497b4e0d2c9cf2a097a08fa5d45bc646547025176217050334e423475519a1e6c74a1f31ade819d16bb37a39914e5321e250695ee3feea14
+  languageName: node
+  linkType: hard
+
 "postcss-safe-parser@npm:^6.0.0":
   version: 6.0.0
   resolution: "postcss-safe-parser@npm:6.0.0"
@@ -20651,7 +20673,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.11, postcss-selector-parser@npm:^6.1.2":
+"postcss-selector-parser@npm:^6.0.13":
+  version: 6.0.16
+  resolution: "postcss-selector-parser@npm:6.0.16"
+  dependencies:
+    cssesc: "npm:^3.0.0"
+    util-deprecate: "npm:^1.0.2"
+  checksum: 9324f63992c6564d392f9f6b16c56c05f157256e3be2d55d1234f7728252257dfd6b870a65a5d04ee3ceb9d9e7b78c043f630a58c9869b4b0481d6e064edc2cf
+  languageName: node
+  linkType: hard
+
+"postcss-selector-parser@npm:^6.1.2":
   version: 6.1.2
   resolution: "postcss-selector-parser@npm:6.1.2"
   dependencies:
@@ -20661,13 +20693,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.13":
-  version: 6.0.16
-  resolution: "postcss-selector-parser@npm:6.0.16"
+"postcss-selector-parser@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "postcss-selector-parser@npm:7.0.0"
   dependencies:
     cssesc: "npm:^3.0.0"
     util-deprecate: "npm:^1.0.2"
-  checksum: 9324f63992c6564d392f9f6b16c56c05f157256e3be2d55d1234f7728252257dfd6b870a65a5d04ee3ceb9d9e7b78c043f630a58c9869b4b0481d6e064edc2cf
+  checksum: 0e92be7281e2b440a8be8cf207de40a24ca7bc765577916499614d5a47827a3e658206728cc559db96803e554270516104aad919a04f91bfa8914ccef1ba14ca
   languageName: node
   linkType: hard
 
@@ -21160,6 +21192,13 @@ __metadata:
   version: 3.2.2
   resolution: "react-fast-compare@npm:3.2.2"
   checksum: a6826180ba75cefba1c8d3ac539735f9b627ca05d3d307fe155487f5d0228d376dac6c9708d04a283a7b9f9aee599b637446635b79c8c8753d0b4eece56c125c
+  languageName: node
+  linkType: hard
+
+"react-is@npm:18.2.0":
+  version: 18.2.0
+  resolution: "react-is@npm:18.2.0"
+  checksum: 200cd65bf2e0be7ba6055f647091b725a45dd2a6abef03bf2380ce701fd5edccee40b49b9d15edab7ac08a762bf83cb4081e31ec2673a5bfb549a36ba21570df
   languageName: node
   linkType: hard
 
@@ -23220,32 +23259,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-a11y@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "stylelint-a11y@npm:1.2.3"
-  peerDependencies:
-    stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
-  checksum: 97f0fd3e2ed79746a80b5b96037ddc6de16f25d5d3cfcecea0db054603336cafa0f52ab0027e1621e9ecb35aa5ee5217c273eec25e335901a82a96691537cc2d
-  languageName: node
-  linkType: hard
-
-"stylelint-config-carbon@npm:1.19.1":
-  version: 1.19.1
-  resolution: "stylelint-config-carbon@npm:1.19.1"
+"stylelint-config-carbon@npm:1.20.0":
+  version: 1.20.0
+  resolution: "stylelint-config-carbon@npm:1.20.0"
   dependencies:
-    stylelint-a11y: "npm:^1.2.3"
+    "@double-great/stylelint-a11y": "npm:^3.0.2"
     stylelint-config-idiomatic-order: "npm:^10.0.0"
     stylelint-config-prettier: "npm:^9.0.3"
-    stylelint-config-standard: "npm:^34.0.0"
-    stylelint-config-standard-scss: "npm:^11.0.0"
-    stylelint-no-unsupported-browser-features: "npm:^7.0.0"
+    stylelint-config-standard: "npm:^36.0.0"
+    stylelint-config-standard-scss: "npm:^13.1.0"
+    stylelint-no-unsupported-browser-features: "npm:^8.0.1"
     stylelint-order: "npm:^6.0.0"
-    stylelint-prettier: "npm:^2.0.0"
-    stylelint-scss: "npm:^4.1.0"
+    stylelint-prettier: "npm:^5.0.0"
+    stylelint-scss: "npm:^6.2.1"
     stylelint-use-logical: "npm:^2.1.0"
   peerDependencies:
-    stylelint: ^15.0.0
-  checksum: 923a37ace652c98f34d806f9a49fac3b4c660a6cfac5aa274bdf07b6abfb735cf8549ff068b49accf7a9aebc15aff1efb4ce4293393e31174b89e255d47ef7fb
+    stylelint: ^16.0.0
+  checksum: d66020246b27e85cb8f411dc008364991e5efe4487c44317f33380c5f2f0ede571fdcf3ab54a4a77d030658d7240315aff9899125ff2e3dd8bf56dd3ba0ea977
   languageName: node
   linkType: hard
 
@@ -23272,69 +23302,68 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-recommended-scss@npm:^13.1.0":
-  version: 13.1.0
-  resolution: "stylelint-config-recommended-scss@npm:13.1.0"
+"stylelint-config-recommended-scss@npm:^14.0.0":
+  version: 14.1.0
+  resolution: "stylelint-config-recommended-scss@npm:14.1.0"
   dependencies:
     postcss-scss: "npm:^4.0.9"
-    stylelint-config-recommended: "npm:^13.0.0"
-    stylelint-scss: "npm:^5.3.0"
+    stylelint-config-recommended: "npm:^14.0.1"
+    stylelint-scss: "npm:^6.4.0"
   peerDependencies:
     postcss: ^8.3.3
-    stylelint: ^15.10.0
+    stylelint: ^16.6.1
   peerDependenciesMeta:
     postcss:
       optional: true
-  checksum: 249cc4705759f779da2be797b2155b05b6d0ce49542b5144634d46295955c32b22734468529c772ba0a926fdf3bd3b0583088a74a0790cfc5e354d09b1f9a8c7
+  checksum: 4dbebd9883e94eea9a6c7e1dc6978f385c4631e88a7014f41b14e2d8a5e52db6b4ac0015b41c75e8031e53c227a381b252a92ed48e6f2296c28d90fbb185f6eb
   languageName: node
   linkType: hard
 
-"stylelint-config-recommended@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "stylelint-config-recommended@npm:13.0.0"
+"stylelint-config-recommended@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "stylelint-config-recommended@npm:14.0.1"
   peerDependencies:
-    stylelint: ^15.10.0
-  checksum: a56eb6d1a7c7f3a7a172b54bc34218859ba22a5a06816fb4d0964f66cb83cf372062f2c97830e994ad68243548e15fc49abf28887c3261ab1b471b3aa69f8e82
+    stylelint: ^16.1.0
+  checksum: 93c3fe920902abfd3f4130173876bb633230c910a3b293f5b74a0ea9c4427d197d7ade28dd62718246264f22f1e012899d0160a0176da723d14680d73876d701
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:^11.0.0":
-  version: 11.1.0
-  resolution: "stylelint-config-standard-scss@npm:11.1.0"
+"stylelint-config-standard-scss@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "stylelint-config-standard-scss@npm:13.1.0"
   dependencies:
-    stylelint-config-recommended-scss: "npm:^13.1.0"
-    stylelint-config-standard: "npm:^34.0.0"
+    stylelint-config-recommended-scss: "npm:^14.0.0"
+    stylelint-config-standard: "npm:^36.0.0"
   peerDependencies:
     postcss: ^8.3.3
-    stylelint: ^15.10.0
+    stylelint: ^16.3.1
   peerDependenciesMeta:
     postcss:
       optional: true
-  checksum: fdeb533e19230cec6975f18a5ef97252968b4387f385508c7157d8bef42fe75eb9888ff6ce97c8d6fd985fc7d7d28c897732cd3c3285907cb18a9bf8df91a6d2
+  checksum: c5105e3b3390c9d0aa95e252abdf1850fa50d82e1a25a1fcc11a88b111038e00c8033a4b34905405f2203c84c0fa26ce1d40248df2172c83c76cc3baa552db07
   languageName: node
   linkType: hard
 
-"stylelint-config-standard@npm:^34.0.0":
-  version: 34.0.0
-  resolution: "stylelint-config-standard@npm:34.0.0"
+"stylelint-config-standard@npm:^36.0.0":
+  version: 36.0.1
+  resolution: "stylelint-config-standard@npm:36.0.1"
   dependencies:
-    stylelint-config-recommended: "npm:^13.0.0"
+    stylelint-config-recommended: "npm:^14.0.1"
   peerDependencies:
-    stylelint: ^15.10.0
-  checksum: 536249800c04b48a9c354067765f042713982e8222be17bb897a27d26546e50adfb87e6f1e4541807d720de3554345da99ab470e13e8d7ab0ab326c73ae3df61
+    stylelint: ^16.1.0
+  checksum: 50b8fb396f1cb8cb3539aa97187eb8c2a4b2858c897374faa726837a809dae7c686cb5dc32528c9698745d4e97af1fe9035a04a5a8cb220bd6b1530795437013
   languageName: node
   linkType: hard
 
-"stylelint-no-unsupported-browser-features@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "stylelint-no-unsupported-browser-features@npm:7.0.0"
+"stylelint-no-unsupported-browser-features@npm:^8.0.1":
+  version: 8.0.2
+  resolution: "stylelint-no-unsupported-browser-features@npm:8.0.2"
   dependencies:
-    doiuse: "npm:^6.0.1"
-    lodash: "npm:^4.17.15"
-    postcss: "npm:^8.4.16"
+    doiuse: "npm:^6.0.5"
+    postcss: "npm:^8.4.32"
   peerDependencies:
-    stylelint: ^14.0.0||^15.0.0
-  checksum: cb6ba284988a0c5fcc49b8ed66f164a95ef34e3ddc6302baf4b6bd37ea8b3421ce781fe13455beb31f2a12279c0f0c62a5c3ec2c6324c53a2a1ee643962e6976
+    stylelint: ^16.0.2
+  checksum: e11a657a52dae7383fbc561401e4cb93d949096af7a41f40ea1d3627a0abc6b178caa8cdf9fe6f7dd412ab528d6b30817fc29b9aa721129f125816fbf45c4e50
   languageName: node
   linkType: hard
 
@@ -23369,44 +23398,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-prettier@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "stylelint-prettier@npm:2.0.0"
+"stylelint-prettier@npm:^5.0.0":
+  version: 5.0.2
+  resolution: "stylelint-prettier@npm:5.0.2"
   dependencies:
     prettier-linter-helpers: "npm:^1.0.0"
   peerDependencies:
-    prettier: ">=2.0.0"
-    stylelint: ">=14.0.0"
-  checksum: 1366d7efaa11b60421ff4953df1f675fa204b960e663621707cc4e2c2306a21f46326c447158c93c96ba2fcb18a4323bf08197ca781ab81dda03eb9da9ef0d2e
+    prettier: ">=3.0.0"
+    stylelint: ">=16.0.0"
+  checksum: bee52ac6bfd03bfec07a429556d05e1cc754be9f0cf6802e19f06410d7d4cf6b2a01ca987f5e6f7816d8c88a0e73d04aa5b04be43fd121a9f805a9ab079a3719
   languageName: node
   linkType: hard
 
-"stylelint-scss@npm:^4.1.0":
-  version: 4.7.0
-  resolution: "stylelint-scss@npm:4.7.0"
+"stylelint-scss@npm:^6.2.1, stylelint-scss@npm:^6.4.0":
+  version: 6.10.0
+  resolution: "stylelint-scss@npm:6.10.0"
   dependencies:
+    css-tree: "npm:^3.0.1"
+    is-plain-object: "npm:^5.0.0"
+    known-css-properties: "npm:^0.35.0"
+    mdn-data: "npm:^2.12.2"
     postcss-media-query-parser: "npm:^0.2.3"
-    postcss-resolve-nested-selector: "npm:^0.1.1"
-    postcss-selector-parser: "npm:^6.0.11"
+    postcss-resolve-nested-selector: "npm:^0.1.6"
+    postcss-selector-parser: "npm:^7.0.0"
     postcss-value-parser: "npm:^4.2.0"
   peerDependencies:
-    stylelint: ^14.5.1 || ^15.0.0
-  checksum: 6a49f1f19339c812adc1fc89bb30d0a79ab1a88082f8d18b9403893f06e4f646131d9d4f2788a2fe2847fe38ff6cf505de8a3f6358665e022f91903c7453f4c4
-  languageName: node
-  linkType: hard
-
-"stylelint-scss@npm:^5.3.0":
-  version: 5.3.2
-  resolution: "stylelint-scss@npm:5.3.2"
-  dependencies:
-    known-css-properties: "npm:^0.29.0"
-    postcss-media-query-parser: "npm:^0.2.3"
-    postcss-resolve-nested-selector: "npm:^0.1.1"
-    postcss-selector-parser: "npm:^6.0.13"
-    postcss-value-parser: "npm:^4.2.0"
-  peerDependencies:
-    stylelint: ^14.5.1 || ^15.0.0
-  checksum: 1b8406bdb37dd00c81e1229d2c0153f88091ce98c31c1a2a5f453329ce9421f79bb18a94f1e65b39095e0ea3693480705fb5bbc5edd565afc396365018473c3a
+    stylelint: ^16.0.2
+  checksum: 16ce7aadf2eb95a47f6d8cf6fef28bdf65ecff5977a6e702b16709340a1ef4108ab90708ef0d63062e1386ff04d682b83599e7841291e15279035e4c65724767
   languageName: node
   linkType: hard
 

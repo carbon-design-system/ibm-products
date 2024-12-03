@@ -197,7 +197,7 @@ test.describe('ProductiveCard @avt', () => {
     });
     await page.keyboard.press('Tab');
 
-    const zone2 = page.locator(`.dev-prefix--c4p--card__header-body-container`);
+    const zone2 = page.locator(`.${pkg.prefix}--card__header-body-container`);
     await expect(zone2).toBeFocused();
     await expect(zone2).toHaveAttribute('role', 'button');
 
@@ -213,7 +213,7 @@ test.describe('ProductiveCard @avt', () => {
       id: 'ibm-products-components-cards-productivecard--clickable&args=clickZone:three',
     });
     await page.keyboard.press('Tab');
-    const zone3 = page.locator(`.dev-prefix--c4p--card__body`);
+    const zone3 = page.locator(`.${pkg.prefix}--card__body`);
     await expect(zone3).toBeFocused();
     await expect(zone3).toHaveAttribute('role', 'button');
 

@@ -116,7 +116,7 @@ export interface CoachmarkProps {
   theme?: 'light' | 'dark';
   /**
    * Determines if the coachmark is open by default.
-   * Does nothing if `overlayKind=slacked`.
+   * Does nothing if `overlayKind=stacked`.
    */
   isOpenByDefault?: boolean;
 }

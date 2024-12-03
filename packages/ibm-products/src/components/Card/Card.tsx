@@ -262,9 +262,9 @@ export const Card = forwardRef(
             [`${blockClass}__clickable`]: clickable,
             [`${blockClass}__media-left`]: mediaPosition === 'left',
             [`${blockClass}--has-slug`]: !!slug,
-            [`${blockClass}--has-decorator-non-ai-label`]:
-              !!decorator && decorator['type']?.displayName !== 'AILabel',
             [`${blockClass}--has-decorator`]:
+              !!decorator && decorator['type']?.displayName !== 'AILabel',
+            [`${blockClass}--has-ai-label`]:
               !!decorator && decorator['type']?.displayName === 'AILabel',
           },
           className

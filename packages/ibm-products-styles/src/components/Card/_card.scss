@@ -144,7 +144,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   position: relative;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--ai-label {
   position: absolute;
   top: $spacing-05;
   right: $spacing-05;
@@ -155,7 +156,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   top: $spacing-05;
   right: $spacing-05;
 
-  .#{c4p-settings.$carbon-prefix}--slug {
+  .#{c4p-settings.$carbon-prefix}--slug,
+  .#{c4p-settings.$carbon-prefix}--ai-label {
     position: relative;
     top: unset;
     right: unset;
@@ -188,7 +190,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}--has-slug,
-.#{$block-class}--has-decorator {
+.#{$block-class}--has-ai-label {
   @include utilities.ai-popover-gradient('default', 0, 'layer');
 
   border: 1px solid transparent;
@@ -196,11 +198,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     0 4px 10px 2px $ai-drop-shadow;
 }
 
-.#{$block-class}--has-decorator-non-ai-label {
-  background-color: $layer-01;
-}
-
 .#{$block-class}__clickable.#{$block-class}--has-slug::before,
+.#{$block-class}__clickable.#{$block-class}--has-ai-label::before,
 .#{$block-class}__clickable.#{$block-class}--has-decorator::before {
   @include utilities.ai-popover-gradient('hover', 0, 'layer');
 
@@ -217,6 +216,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__clickable.#{$block-class}--has-slug:hover::before,
+.#{$block-class}__clickable.#{$block-class}--has-ai-label:hover::before,
 .#{$block-class}__clickable.#{$block-class}--has-decorator:hover::before {
   opacity: 1;
 }

@@ -15,17 +15,13 @@ export default async (node, label) => {
     accessibilityChecker = require('accessibility-checker');
   }
 
-  try {
-    const { assertCompliance, getCompliance, stringifyResults } =
-      accessibilityChecker;
+  const { assertCompliance, getCompliance, stringifyResults } =
+    accessibilityChecker;
 
-    const { report } = await getCompliance(node, label);
+  const { report } = await getCompliance(node, label);
 
-    return {
-      message: () => stringifyResults(report),
-      pass: assertCompliance(report) === 0,
-    };
-  } catch (err) {
-    console.error(err);
-  }
+  return {
+    message: () => stringifyResults(report),
+    pass: assertCompliance(report) === 0,
+  };
 };

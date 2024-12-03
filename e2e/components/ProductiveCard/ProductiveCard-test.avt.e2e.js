@@ -165,7 +165,7 @@ test.describe('ProductiveCard @avt', () => {
       'ProductiveCard @keyboard-navigation - Read more Button'
     );
 
-    // Navigate to the "Clickable Card" story for ProductiveCard
+    // Tab Navigation in "Clickable Card" story for ProductiveCard, (zone one is default, whole card recieves focus)
     await visitStory(page, {
       component: 'ProductiveCard',
       id: 'ibm-products-components-cards-productivecard--clickable',
@@ -178,17 +178,50 @@ test.describe('ProductiveCard @avt', () => {
 
     // Move focus to the card element and validate
     await page.keyboard.press('Tab');
-    const cardElement = page.locator(
-      `[data-carbon-devtools-id="${pkg.prefix}--ProductiveCard"]`
+    const zone1 = page.locator(
+      `[${pkg.devtoolsAttribute}="${pkg.prefix}--ProductiveCard"]`
     );
-    await expect(cardElement).toBeFocused();
-    await expect(cardElement).toHaveAttribute('role', 'button');
+    await expect(zone1).toBeFocused();
+    await expect(zone1).toHaveAttribute('role', 'button');
 
     // Move focus to the Read more button and validate
     await page.keyboard.press('Tab');
     const readMoreButton2 = page.getByText('Read more');
     await expect(readMoreButton2).toBeVisible();
     await expect(readMoreButton2).toBeFocused();
+
+    // Validate zone two focus
+    await visitStory(page, {
+      component: 'ProductiveCard',
+      id: 'ibm-products-components-cards-productivecard--clickable&args=clickZone:two',
+    });
+    await page.keyboard.press('Tab');
+
+    const zone2 = page.locator(`.dev-prefix--c4p--card__header-body-container`);
+    await expect(zone2).toBeFocused();
+    await expect(zone2).toHaveAttribute('role', 'button');
+
+    // Move focus to the Read more button and validate
+    await page.keyboard.press('Tab');
+    const readMoreButton3 = page.getByText('Read more');
+    await expect(readMoreButton3).toBeVisible();
+    await expect(readMoreButton3).toBeFocused();
+
+    // Validate zone three focus
+    await visitStory(page, {
+      component: 'ProductiveCard',
+      id: 'ibm-products-components-cards-productivecard--clickable&args=clickZone:three',
+    });
+    await page.keyboard.press('Tab');
+    const zone3 = page.locator(`.dev-prefix--c4p--card__body`);
+    await expect(zone3).toBeFocused();
+    await expect(zone3).toHaveAttribute('role', 'button');
+
+    // Move focus to the Read more button and validate
+    await page.keyboard.press('Tab');
+    const readMoreButton4 = page.getByText('Read more');
+    await expect(readMoreButton4).toBeVisible();
+    await expect(readMoreButton4).toBeFocused();
 
     // Navigate to the "button with href" story for ProductiveCard
     await visitStory(page, {

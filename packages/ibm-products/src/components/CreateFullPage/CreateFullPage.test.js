@@ -191,8 +191,8 @@ describe(componentName, () => {
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 
-     try {
-      await expect(container).toBeAccessible(componentName,);
+    try {
+      await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
     } catch (err) {
       console.log('accessibility test error :', err);

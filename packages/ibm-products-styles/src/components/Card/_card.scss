@@ -199,8 +199,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__clickable.#{$block-class}--has-slug::before,
-.#{$block-class}__clickable.#{$block-class}--has-ai-label::before,
-.#{$block-class}__clickable.#{$block-class}--has-decorator::before {
+.#{$block-class}__clickable.#{$block-class}--has-ai-label::before {
   @include utilities.ai-popover-gradient('hover', 0, 'layer');
 
   position: absolute;

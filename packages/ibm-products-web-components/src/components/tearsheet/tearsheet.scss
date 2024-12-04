@@ -105,8 +105,9 @@ $motion-duration: $duration-moderate-02;
   ::slotted(#{$carbon-prefix}-slug) {
     display: flex;
     inset-inline-end: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
     margin-block: 6px;
-    margin-inline-end: 1rem;
+    margin-inline-end: $spacing-05;
   }
 }
 
@@ -118,7 +119,7 @@ $motion-duration: $duration-moderate-02;
   align-items: flex-end;
   background: initial;
   opacity: 1;
-
+  /* stylelint-disable-next-line */
   transition: visibility 0s linear;
   visibility: inherit;
 
@@ -259,6 +260,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header[has-close-icon][has-slug] {
+    /* stylelint-disable-next-line carbon/layout-use */
     padding-inline-end: calc(#{$spacing-11 + $spacing-09});
   }
 

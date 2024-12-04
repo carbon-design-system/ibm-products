@@ -68,12 +68,12 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
     visibility: visible;
 
     &__light {
-      /* stylelint-disable-next-line carbon/theme-token-use */
+      /* stylelint-disable-next-line carbon/theme-use */
       background-color: $gray-90;
     }
 
     &__dark {
-      /* stylelint-disable-next-line carbon/theme-token-use */
+      /* stylelint-disable-next-line carbon/theme-use */
       background-color: $button-tertiary-active;
     }
   }

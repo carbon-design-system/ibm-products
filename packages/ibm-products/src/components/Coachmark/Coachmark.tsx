@@ -419,7 +419,6 @@ Coachmark.propTypes = {
 
   /**
    * What kind or style of Coachmark to render.
-   * Note that, `stacked` coachmarks are always open, even if `isOpenByDefault=false`.
    */
   overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
 

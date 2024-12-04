@@ -29,7 +29,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
     // stylelint-disable-next-line
     font-size: type-scale(3);
     letter-spacing: 0;
-    // stylelint-disable-next-line carbon/type-token-use
+    // stylelint-disable-next-line carbon/type-use
     line-height: 1.5;
   }
 }
@@ -48,7 +48,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
     margin-right: $spacing-01;
 
     path {
-      // stylelint-disable-next-line carbon/theme-token-use
+      // stylelint-disable-next-line carbon/theme-use
       fill: $green-50;
     }
   }

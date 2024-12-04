@@ -72,7 +72,7 @@ describe(componentName, () => {
     renderCoachmarkWithBeacon({
       label: testingLabel,
     });
-    screen.getByLabelText(testingLabel);
+    screen.getAllByLabelText(testingLabel)[1];
   });
 
   it('forwards a ref to an appropriate node', () => {

@@ -139,11 +139,22 @@ describe(componentName, () => {
     expect(screen.getByText(readLessLabel)).toBeInTheDocument();
   });
 
-  it(`renders an image`, () => {
+  it(`renders an image with media prop`, () => {
     render(
       <InlineTip
         title={title}
         media={{ render: () => <img alt="img" src={InlineTipImage} /> }}
+      >
+        {children}
+      </InlineTip>
+    );
+    expect(screen.getByRole('img')).toBeInTheDocument();
+  });
+  it(`renders an image`, () => {
+    render(
+      <InlineTip
+        title={title}
+        renderMedia={() => <img alt="img" src={InlineTipImage} />}
       >
         {children}
       </InlineTip>

@@ -76,7 +76,8 @@ describe(componentName, () => {
 
   it('renders error label', () => {
     render(<FullPageError {...defaultProps} />);
-    expect(screen.getByText('↳ ' + label)).toBeInTheDocument();
+    const labelElement = screen.getByText(label).closest('span');
+    expect(labelElement).toContainHTML('<span aria-hidden="true">↳ </span>');
   });
 
   it('renders description', () => {

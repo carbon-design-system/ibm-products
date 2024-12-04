@@ -44,7 +44,7 @@
 
       .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
-        z-index: 1;
+        z-index: 10;
         left: 0;
       }
     }
@@ -57,7 +57,7 @@
 
     td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
     th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
-      /* stylelint-disable-next-line carbon/layout-token-use */
+      /* stylelint-disable-next-line carbon/layout-use */
       padding-top: 0.6875rem;
 
       &.#{$block-class}__checkbox-cell {
@@ -158,7 +158,6 @@
 
 /* This section to be removed after support for slug dropped  - start */
 .#{$block-class} th.#{$block-class}__with-slug {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 0 1px $ai-border-strong;
 }
 
@@ -185,7 +184,7 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
   tr.#{$block-class}__slug--row {
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   box-shadow: inset 1px 0 $ai-border-strong;
 }
 
@@ -232,7 +231,6 @@
 /* This section to be removed after support for slug dropped  - end */
 
 .#{$block-class} th.#{$block-class}__with-ai-label {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 0 1px $ai-border-strong;
 }
 
@@ -259,7 +257,6 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
   tr.#{$block-class}__ai-label--row {
-  /* stylelint-disable-next-line carbon/theme-token-use */
   box-shadow: inset 1px 0 $ai-border-strong;
 }
 
@@ -413,17 +410,27 @@
     }
   }
 
-  .#{$block-class}__carbon-row td {
+  .#{$block-class}__carbon-row .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-01;
   }
 
-  .#{$block-class}__carbon-row:hover td {
+  .#{$block-class}__carbon-row:hover .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover
+    .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-hover-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table--selected td {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__left-sticky-column-cell,
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__right-sticky-column-cell,
+  .#{c4p-settings.$carbon-prefix}--data-table--selected
+    .#{$block-class}__checkbox-cell-sticky-left {
     /* stylelint-disable-next-line declaration-no-important */
     background-color: $layer-selected-01;
   }
@@ -522,7 +529,7 @@
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $background-selected-hover;
+  background-color: $layer-selected-hover;
 
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;
@@ -562,7 +569,7 @@
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
-    z-index: 1;
+    z-index: 10;
     left: 0;
     background-color: $layer-accent-01;
   }
@@ -667,9 +674,9 @@
   &.#{$block-class}__carbon-row-expanded-hover-active::before {
     position: absolute;
     z-index: 2;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     top: var(--#{$block-class}--row-height);
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     left: calc(
       var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
     );
@@ -939,7 +946,7 @@
   .#{$block-class}__col-resizer-range:focus
   + .#{$block-class}__col-resize-indicator::after {
   position: absolute;
-  /* stylelint-disable-next-line carbon/layout-token-use */
+  /* stylelint-disable-next-line carbon/layout-use */
   top: calc(var(--#{$block-class}--row-height) - 20px);
   right: $spacing-02;
   width: 1px;

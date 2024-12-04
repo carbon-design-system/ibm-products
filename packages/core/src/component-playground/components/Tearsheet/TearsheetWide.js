@@ -48,7 +48,7 @@ const TearsheetWide = (props) => {
             id="tss-ft1"
             labelText="Enter an important value here"
             style={{
-              // stylelint-disable-next-line carbon/layout-token-use
+              // stylelint-disable-next-line carbon/layout-use
               marginBottom: '1em',
             }}
           />
@@ -57,7 +57,7 @@ const TearsheetWide = (props) => {
             labelText="Here is a light entry field:"
             light
             style={{
-              // stylelint-disable-next-line carbon/layout-token-use
+              // stylelint-disable-next-line carbon/layout-use
               marginBottom: '1em',
             }}
           />

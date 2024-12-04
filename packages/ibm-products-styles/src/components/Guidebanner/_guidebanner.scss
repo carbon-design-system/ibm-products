@@ -15,9 +15,9 @@
  * individual rules.
  */
 
-/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/layout-use */
 /* stylelint-disable carbon/motion-duration-use */
-/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable carbon/theme-use */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable function-no-unknown */
 /* stylelint-disable max-nesting-depth */
@@ -105,7 +105,7 @@ $purple-3: #7433e3;
 
 // Specify Carousel look and feel.
 .#{$block-class}__carousel {
-  padding: 0 0 $spacing-05 0;
+  padding: 0 0 $spacing-05;
   color: $gray-10;
 
   @include when-collapsed() {
@@ -173,7 +173,7 @@ $purple-3: #7433e3;
   // Repeating here.
   svg {
     position: absolute;
-    right: 1rem;
+    right: $spacing-05;
     width: 1rem;
     height: 1rem;
     flex-shrink: 0;

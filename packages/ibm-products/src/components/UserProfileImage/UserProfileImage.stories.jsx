@@ -79,7 +79,7 @@ export default {
             <div>
               This component is deprecated and will be removed in the next major
               version. Please migrate to{' '}
-              <a href="/?path=/docs/experimental-components-user-avatar-useravatar--docs">
+              <a href="/?path=/docs/ibm-products-components-user-avatar-useravatar--docs">
                 UserAvatar
               </a>
               .

@@ -46,7 +46,7 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 export interface StepsContextType {
   currentStep: number;
   setExperimentalSecondarySubmit: Dispatch<
-    SetStateAction<ExperimentalSecondarySubmit>
+    SetStateAction<ExperimentalSecondarySubmit | undefined>
   >;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
   setOnPrevious: (fn: any) => void;
@@ -213,7 +213,7 @@ export let CreateTearsheet = forwardRef(
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
     const [experimentalSecondarySubmit, setExperimentalSecondarySubmit] =
-      useState<ExperimentalSecondarySubmit>({});
+      useState<ExperimentalSecondarySubmit>();
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -282,7 +282,7 @@ export let CreateTearsheet = forwardRef(
       isSubmitting,
       componentBlockClass: blockClass,
       experimentalSecondarySubmit,
-      experimentalSecondarySubmitText: experimentalSecondarySubmit.labelText
+      experimentalSecondarySubmitText: experimentalSecondarySubmit?.labelText
         ? experimentalSecondarySubmit.labelText
         : experimentalSecondarySubmitText,
       setCreateComponentActions: setCreateTearsheetActions,

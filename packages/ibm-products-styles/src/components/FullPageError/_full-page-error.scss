@@ -49,7 +49,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
   height: 100%;
   padding: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
   @include breakpoint(md) {
-    padding: auto $spacing-03 $spacing-11 $spacing-03;
+    padding: auto $spacing-03 $spacing-11;
   }
 }
 

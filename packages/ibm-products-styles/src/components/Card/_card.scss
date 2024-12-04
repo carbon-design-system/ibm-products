@@ -215,8 +215,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__clickable.#{$block-class}--has-slug:hover::before,
-.#{$block-class}__clickable.#{$block-class}--has-ai-label:hover::before,
-.#{$block-class}__clickable.#{$block-class}--has-decorator:hover::before {
+.#{$block-class}__clickable.#{$block-class}--has-ai-label:hover::before {
   opacity: 1;
 }
 

@@ -1,1 +1,0 @@
-import{b as c,c as n,_ as p}from"./index-CO-HQMMN.js";import{P as e}from"./index-Dk74W0Oi.js";import{R as i}from"./index-BwDkhjyp.js";function f(s){let{className:r,children:o,...a}=s;const t=c(),m=n(`${t}--form`,r);return i.createElement("form",p({className:m},a),o)}f.propTypes={children:e.node,className:e.string};export{f as F};

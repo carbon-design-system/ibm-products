@@ -54,7 +54,7 @@ $row-heights: (
 }
 
 @mixin input-outline($color: $focus) {
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   outline: $spacing-01 solid $color;
   outline-offset: calc(-1 * #{$spacing-01});
 

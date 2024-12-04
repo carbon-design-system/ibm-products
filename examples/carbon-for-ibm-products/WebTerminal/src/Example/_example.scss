@@ -11,7 +11,7 @@
   @include type-style('code-02');
 
   padding: $spacing-05;
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   color: $gray-10;
 }
 

@@ -164,24 +164,24 @@ test.describe('TagSet @avt', () => {
     });
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
 
-    simulateKeyPress(page, 'Tab');
+    await simulateKeyPress(page, 'Tab');
 
     await expect(
       page.getByRole('button', { name: 'Dismiss' }).first()
     ).toBeFocused();
-    simulateKeyPress(page, 'Tab', 6);
+    await simulateKeyPress(page, 'Tab', 6);
 
     const moreTagsButton = page.locator(
       `.${pkg.prefix}--tag-set-overflow__popover-trigger`
     );
     await expect(moreTagsButton).toBeFocused();
-    simulateKeyPress(page, 'Enter');
+    await simulateKeyPress(page, 'Enter');
 
     await expect(
       page.locator(`.${carbon.prefix}--popover--open`)
     ).toBeVisible();
 
-    simulateKeyPress(page, 'Tab');
+    await simulateKeyPress(page, 'Tab');
     //first tag inside popover is focussed
     await expect(
       page
@@ -190,13 +190,13 @@ test.describe('TagSet @avt', () => {
         .first()
     ).toBeFocused();
 
-    simulateKeyPress(page, 'Tab', 10);
+    await simulateKeyPress(page, 'Tab', 10);
 
     await expect(
       page.locator(`.${pkg.prefix}--tag-set-overflow__show-all-tags-link`)
     ).toBeFocused(); //view all tags modal link is focussed
 
-    simulateKeyPress(page, 'Enter');
+    await simulateKeyPress(page, 'Enter');
 
     await modalElement.evaluate((element) =>
       Promise.all(
@@ -205,9 +205,9 @@ test.describe('TagSet @avt', () => {
     );
 
     await expect(page.getByRole('heading', { name: 'All tags' })).toBeVisible();
-    simulateKeyPress(page, 'Tab');
+    await simulateKeyPress(page, 'Tab');
 
-    simulateKeyPress(page, 'Enter');
+    await simulateKeyPress(page, 'Enter');
     await expect(page.locator(`.${carbon.prefix}--modal`)).toBeHidden();
   });
 });

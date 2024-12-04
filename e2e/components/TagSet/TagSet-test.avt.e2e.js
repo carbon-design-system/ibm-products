@@ -10,6 +10,7 @@
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
 import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
+import { simulateKeyPress } from '../../test-utils/simulateKeyPress';
 
 test.describe('TagSet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -163,23 +164,25 @@ test.describe('TagSet @avt', () => {
     });
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
 
-    await page.keyboard.press('Tab');
+    simulateKeyPress(page, 'Tab');
+
     await expect(
       page.getByRole('button', { name: 'Dismiss' }).first()
     ).toBeFocused();
-    pressTabKey(page, 6);
+    simulateKeyPress(page, 'Tab', 6);
 
     const moreTagsButton = page.locator(
       `.${pkg.prefix}--tag-set-overflow__popover-trigger`
     );
     await expect(moreTagsButton).toBeFocused();
-    await page.keyboard.press('Enter');
+    simulateKeyPress(page, 'Enter');
 
     await expect(
       page.locator(`.${carbon.prefix}--popover--open`)
     ).toBeVisible();
 
-    pressTabKey(page, 1); //first tag inside popover is focussed
+    simulateKeyPress(page, 'Tab');
+    //first tag inside popover is focussed
     await expect(
       page
         .locator(`.${pkg.prefix}--tag-set-overflow__tag-list`)
@@ -187,13 +190,13 @@ test.describe('TagSet @avt', () => {
         .first()
     ).toBeFocused();
 
-    pressTabKey(page, 10);
+    simulateKeyPress(page, 'Tab', 10);
 
     await expect(
       page.locator(`.${pkg.prefix}--tag-set-overflow__show-all-tags-link`)
     ).toBeFocused(); //view all tags modal link is focussed
 
-    await page.keyboard.press('Enter');
+    simulateKeyPress(page, 'Enter');
 
     await modalElement.evaluate((element) =>
       Promise.all(
@@ -202,13 +205,9 @@ test.describe('TagSet @avt', () => {
     );
 
     await expect(page.getByRole('heading', { name: 'All tags' })).toBeVisible();
-    pressTabKey(page, 1);
-    await page.keyboard.press('Enter');
+    simulateKeyPress(page, 'Tab');
+
+    simulateKeyPress(page, 'Enter');
     await expect(page.locator(`.${carbon.prefix}--modal`)).toBeHidden();
   });
 });
-async function pressTabKey(page, number) {
-  for (let i = 0; i < number; i++) {
-    await page.keyboard.press('Tab');
-  }
-}

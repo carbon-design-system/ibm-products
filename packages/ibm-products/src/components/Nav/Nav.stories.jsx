@@ -15,9 +15,10 @@ import NavList from './NavList';
 import mdx from './Nav.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Nav',
+  title: 'Deprecated/Nav',
   component: Nav,
   subcomponents: {
     NavList,
@@ -30,49 +31,69 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {
   return (
-    <div style={{ width: '300px' }}>
-      <Nav {...args}>
-        <NavList title="Nav list 1">
-          <NavItem
-            key="navitem_1-1"
-            element="span"
-            customprop="uniqueValue"
-            href="#navitem_1-1"
+    <>
+      <div style={{ width: '300px' }}>
+        <Nav {...args}>
+          <NavList title="Nav list 1">
+            <NavItem
+              key="navitem_1-1"
+              element="span"
+              customprop="uniqueValue"
+              href="#navitem_1-1"
+            >
+              Nav item 1-1 (with a custom element)
+            </NavItem>
+            <NavItem
+              key="navitem_1-2"
+              onClick={action('onClick')}
+              href="#navitem_1-2"
+            >
+              Nav item 1-2
+            </NavItem>
+          </NavList>
+          <NavList
+            title="Nav list 2 expanded on page load"
+            isExpandedOnPageLoad
           >
-            Nav item 1-1 (with a custom element)
-          </NavItem>
-          <NavItem
-            key="navitem_1-2"
-            onClick={action('onClick')}
-            href="#navitem_1-2"
-          >
-            Nav item 1-2
-          </NavItem>
-        </NavList>
-        <NavList title="Nav list 2 expanded on page load" isExpandedOnPageLoad>
-          <NavItem key="navitem_2-1" href="#navitem_2-1">
-            Nav item 2-1 - Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.
-          </NavItem>
-          <NavItem key="navitem_2-2" href="#navitem_2-2">
-            Nav item 2-2
-          </NavItem>
-        </NavList>
-        <NavList title="Nav list 3">
-          <NavItem key="navitem_3-1" href="#navitem_3-1">
-            Nav item 3-1
-          </NavItem>
-          <NavItem key="navitem_3-2" href="https://www.ibm.com/">
-            Nav item that is an external link and wraps to a new line
-          </NavItem>
-        </NavList>
-      </Nav>
-    </div>
+            <NavItem key="navitem_2-1" href="#navitem_2-1">
+              Nav item 2-1 - Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+              aliqua.
+            </NavItem>
+            <NavItem key="navitem_2-2" href="#navitem_2-2">
+              Nav item 2-2
+            </NavItem>
+          </NavList>
+          <NavList title="Nav list 3">
+            <NavItem key="navitem_3-1" href="#navitem_3-1">
+              Nav item 3-1
+            </NavItem>
+            <NavItem key="navitem_3-2" href="https://www.ibm.com/">
+              Nav item that is an external link and wraps to a new line
+            </NavItem>
+          </NavList>
+        </Nav>
+      </div>
+    </>
   );
 };
 

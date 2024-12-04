@@ -592,6 +592,20 @@ assets:
         url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-toolbars-toolbar-canary
     tags:
       - input-control
+  user avatar:
+    name: User avatar
+    externalDocsUrl: https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-components-user-avatar-useravatar
+    tags:
+      - media
   user-profile-image:
     name: User profile image
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage

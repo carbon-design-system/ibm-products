@@ -89,7 +89,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     text-overflow: ellipsis;
   }
 }
-
-.#{$_block-class}__overflow-menu-options.#{$_block-class}__overflow-menu-options {
-  z-index: utilities.z('header');
+.#{$_block-class}__overflow-menu {
+  /* stylelint-disable-next-line carbon/type-use */
+  line-height: 0;
 }

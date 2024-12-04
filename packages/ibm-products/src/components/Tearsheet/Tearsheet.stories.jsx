@@ -160,7 +160,7 @@ const mainContent = (
           id="tss-ft1"
           labelText="Enter an important value here"
           style={
-            // stylelint-disable-next-line carbon/layout-token-use
+            // stylelint-disable-next-line carbon/layout-use
             { marginBottom: '1em' }
           }
         />
@@ -168,7 +168,7 @@ const mainContent = (
           id="tss-ft2"
           labelText="Here is an entry field:"
           style={
-            // stylelint-disable-next-line carbon/layout-token-use
+            // stylelint-disable-next-line carbon/layout-use
             { marginBottom: '1em' }
           }
         />
@@ -389,7 +389,7 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
                   id="tss-ft1"
                   labelText="Enter an important value here"
                   style={
-                    // stylelint-disable-next-line carbon/layout-token-use
+                    // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
                   disabled
@@ -398,7 +398,7 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
                   id="tss-ft2"
                   labelText="Here is an entry field:"
                   style={
-                    // stylelint-disable-next-line carbon/layout-token-use
+                    // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
                 />

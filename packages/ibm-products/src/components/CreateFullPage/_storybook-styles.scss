@@ -35,7 +35,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 
 .#{$story-class}__tooltip {
   position: relative;
-  // stylelint-disable-next-line carbon/layout-token-use
+  // stylelint-disable-next-line carbon/layout-use
   top: calc(#{$spacing-05} + #{$spacing-01});
   left: $spacing-11;
 }

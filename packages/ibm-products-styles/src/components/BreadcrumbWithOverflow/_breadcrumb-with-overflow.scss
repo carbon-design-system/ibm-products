@@ -90,5 +90,6 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
   }
 }
 .#{$_block-class}__overflow-menu {
+  /* stylelint-disable-next-line carbon/type-use */
   line-height: 0;
 }

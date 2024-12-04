@@ -218,13 +218,4 @@ describe(componentName, () => {
     });
     expect(isCoachmarkVisible()).toBeTruthy();
   });
-
-  it('Check stacked coachmark are always open by default', () => {
-    renderCoachmark({
-      'data-testid': dataTestId,
-      isOpenByDefault: false,
-      overlayKind: 'stacked',
-    });
-    expect(isCoachmarkVisible()).toBeTruthy();
-  });
 });

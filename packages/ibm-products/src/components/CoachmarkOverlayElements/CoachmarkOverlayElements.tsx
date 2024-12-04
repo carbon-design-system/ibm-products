@@ -13,6 +13,7 @@ import React, {
   ReactNode,
   RefObject,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -54,11 +55,16 @@ export interface CoachmarkOverlayElementsProps {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * * @deprecated please use the `renderMedia` prop
    */
   media?: {
     render?: () => ReactNode;
     filePaths?: string[];
   };
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
+  renderMedia?: (params) => ReactNode;
   /**
    * The label for the Next button.
    */
@@ -105,6 +111,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
       children,
       isVisible = defaults.isVisible,
       media,
+      renderMedia,
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
@@ -118,6 +125,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
+    const hasMedia = media || renderMedia;
 
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
@@ -131,6 +139,11 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const numProgSteps = Children.count(children);
     const progStepFloor = 0;
     const progStepCeil = numProgSteps - 1;
+
+    const renderMediaContent = useMemo(
+      () => renderMedia?.({ playStep: currentProgStep }),
+      [currentProgStep, renderMedia]
+    );
 
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
@@ -172,16 +185,19 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {media &&
-          (media.render ? (
-            media.render()
-          ) : (
-            <SteppedAnimatedMedia
-              className={`${blockClass}__element-stepped-media`}
-              filePaths={media.filePaths}
-              playStep={currentProgStep}
-            />
-          ))}
+        {hasMedia && media?.render && media.render()}
+        {hasMedia && media?.filePaths && (
+          <SteppedAnimatedMedia
+            className={`${blockClass}__element-stepped-media`}
+            filePaths={media.filePaths}
+            playStep={currentProgStep}
+          />
+        )}
+        {hasMedia && renderMedia && (
+          <div className={`${blockClass}__element-stepped-media`}>
+            {renderMediaContent}
+          </div>
+        )}
 
         {numProgSteps === 1 ? (
           <>
@@ -313,6 +329,7 @@ CoachmarkOverlayElements.propTypes = {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
   media: PropTypes.oneOfType([
@@ -331,4 +348,8 @@ CoachmarkOverlayElements.propTypes = {
    * The label for the Previous button.
    */
   previousButtonLabel: PropTypes.string,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
 };

@@ -38,7 +38,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  actions?: ButtonProps<'button'>[];
+  actions?: ButtonProps<React.ElementType>[];
 
   /**
    * The aria-label for the tearsheet, which is optional.
@@ -86,7 +86,7 @@ interface TearsheetNarrowBaseProps extends PropsWithChildren {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget?: ReactNode;
+  portalTarget?: HTMLElement;
 
   /**
    * Specify a CSS selector that matches the DOM element that should be
@@ -204,6 +204,7 @@ TearsheetNarrow.propTypes = {
     ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({
+        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',
@@ -215,6 +216,7 @@ TearsheetNarrow.propTypes = {
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore*/
         onClick: Button.propTypes.onClick,
       })
     ),

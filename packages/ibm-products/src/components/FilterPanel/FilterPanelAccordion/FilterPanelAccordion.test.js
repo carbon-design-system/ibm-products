@@ -33,6 +33,9 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   const { getComputedStyle } = window;
 
   beforeEach(() => {

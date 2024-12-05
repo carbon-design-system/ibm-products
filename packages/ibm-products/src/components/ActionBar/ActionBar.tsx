@@ -22,12 +22,11 @@ import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, ButtonProps } from '@carbon/react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
 import { ActionBarOverflowItems } from './ActionBarOverflowItems';
-import { ButtonProps } from '@carbon/type';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

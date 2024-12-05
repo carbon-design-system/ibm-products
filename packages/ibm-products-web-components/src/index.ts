@@ -8,3 +8,4 @@
  */
 
 export { default as CDSSidePanel } from './components/side-panel/side-panel';
+export { default as CDSTearsheet } from './components/tearsheet/tearsheet';

@@ -64,6 +64,10 @@ const renderComponent = ({ ...rest } = {}, children = childrenContent) =>
   render(<DescriptionList {...rest}>{children}</DescriptionList>);
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component DescriptionList', async () => {
     renderComponent({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
@@ -71,8 +75,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

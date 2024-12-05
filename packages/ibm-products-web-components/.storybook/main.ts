@@ -1,16 +1,38 @@
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
-
+const glob = require('fast-glob');
+const stories = glob.sync(
+  [
+    '../docs/**/*.mdx',
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
+  {
+    ignore: ['../src/**/docs/*.mdx'],
+    cwd: __dirname,
+  }
+);
 const config = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  stories: stories,
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-toolbars',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
+  ],
   framework: {
     name: '@storybook/web-components-vite',
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
   async viteFinal(config) {
     return mergeConfig(config, {

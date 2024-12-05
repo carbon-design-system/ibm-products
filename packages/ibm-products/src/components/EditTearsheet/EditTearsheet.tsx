@@ -17,7 +17,13 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 // @ts-ignore
-import { Form, SideNav, SideNavItems, SideNavMenuItem } from '@carbon/react';
+import {
+  ButtonProps,
+  Form,
+  SideNav,
+  SideNavItems,
+  SideNavMenuItem,
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
@@ -133,7 +139,9 @@ interface EditTearsheetProps extends PropsWithChildren {
 }
 
 /**
+ * **This component is deprecated.** <br>
  * Use Tearsheet with medium to complex edits. See usage guidance for further information.
+ * @deprecated
  */
 export let EditTearsheet = forwardRef(
   (
@@ -170,7 +178,7 @@ export let EditTearsheet = forwardRef(
       }
       setIsSubmitting(false);
     };
-    const actions = [
+    const actions: ButtonProps<React.ElementType>[] = [
       {
         key: 'edit-action-button-submit',
         label: submitButtonText,
@@ -269,6 +277,12 @@ export let EditTearsheet = forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+EditTearsheet.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated and will be removed in the next major version.`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 EditTearsheet = pkg.checkComponentEnabled(EditTearsheet, componentName);

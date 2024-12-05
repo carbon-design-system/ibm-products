@@ -131,38 +131,51 @@ export const sampleDataStructure_Hierarchical = {
 export const sampleDataStructure_nonHierarchical = {
   groups: [
     {
-      groupOperator: 'and', //'and|or',
-      statement: 'ifAll', // 'if|exclude if',
+      groupOperator: 'and',
+      statement: 'ifAll',
       id: uuidv4(),
       conditions: [
+        {
+          property: 'continent',
+          operator: 'is',
+          value: {
+            label: 'Asia',
+            id: 'Asia',
+          },
+          id: uuidv4(),
+        },
         {
           property: 'region',
           operator: 'oneOf',
           value: [
             {
-              id: 'India',
-              label: 'India',
+              label: 'Afghanistan',
+              id: 'AF',
             },
             {
-              id: 'AN',
-              label: 'Andorra',
+              label: 'India',
+              id: 'India',
             },
           ],
           id: uuidv4(),
         },
         {
-          property: 'delivery',
-          operator: 'is',
-          value: { id: 'Processing', label: 'Processing' },
+          property: 'date',
+          operator: 'between',
+          value: ['2024-12-04T18:30:00.000Z', '2024-12-18T18:30:00.000Z'],
           id: uuidv4(),
         },
         {
-          property: 'price',
+          property: 'season',
           operator: 'is',
-          value: '3 Dollars',
+          value: {
+            label: 'Fall',
+            id: 'Fall',
+          },
           id: uuidv4(),
         },
       ],
     },
   ],
+  operator: 'or',
 };

@@ -10,9 +10,10 @@ import { StatusIndicatorStep } from '.';
 import mdx from './StatusIndicatorStep.mdx';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../../core/.storybook/Annotation';
 
 export default {
-  title: 'Experimental/Components/Status indicator/StatusIndicatorStep',
+  title: 'Deprecated/Status indicator/StatusIndicatorStep',
   component: StatusIndicatorStep,
   tags: ['autodocs'],
   argTypes: {
@@ -29,6 +30,21 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (args) => {

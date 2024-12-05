@@ -22,6 +22,10 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component EditUpdateCards', async () => {
     render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);

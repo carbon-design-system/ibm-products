@@ -17,7 +17,7 @@ import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React from 'react';
-import { Button, TextInput } from '@carbon/react';
+import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
@@ -241,6 +241,29 @@ describe('SidePanel', () => {
     }, 250);
   });
 
+  it('should label text be hidden on scroll on main body', async () => {
+    const subtitle = 'Test label text';
+    const labelText = uuidv4();
+    const { container } = render(
+      <SlideIn
+        subtitle={subtitle}
+        labelText={labelText}
+        animateTitle={true}
+        placement="right"
+        open
+        actionToolbarButtons={[]}
+      />
+    );
+    const mainBody = container.querySelector(`.${blockClass}__inner-content`);
+    expect(mainBody).toBeTruthy();
+    const subTitle = screen.getByText('Test label text');
+    const initialMarginTop = window.getComputedStyle(subTitle).marginTop;
+    fireEvent.scroll(mainBody, { target: { scrollTop: 300 } });
+    expect(mainBody.scrollTop).toBe(300);
+    const updatedMarginTop = window.getComputedStyle(subTitle).marginTop;
+    expect(updatedMarginTop).not.toBe(initialMarginTop);
+  });
+
   it('should render one primary action button', async () => {
     const { container } = renderSidePanel({
       includeOverlay: true,
@@ -340,7 +363,51 @@ describe('SidePanel', () => {
     );
     expect(navigationAction).toBeTruthy();
   });
-
+  it('should not have AI Label when it is not passed', () => {
+    const { container } = renderSidePanel();
+    expect(container.querySelector('.aiLabel-container')).toBe(null);
+  });
+  it('should have AI Label when it is passed', () => {
+    const sampleAILabel = (
+      <AILabel className="aiLabel-container" size="xs" align="left-start">
+        <AILabelContent>
+          <div>
+            <p className="secondary">AI Explained</p>
+            <h1>84%</h1>
+            <p className="secondary bold">Confidence score</p>
+            <p className="secondary">
+              This is not really Lorem Ipsum but the spell checker did not like
+              the previous text with it&apos;s non-words which is why this
+              unwieldy sentence, should one choose to call it that, here.
+            </p>
+            <hr />
+            <p className="secondary">Model type</p>
+            <p className="bold">Foundation model</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+    const { container } = renderSidePanel({
+      aiLabel: sampleAILabel,
+    });
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
+  });
+  it('should throw console warning if labelText passed without Title', () => {
+    const consoleWarnSpy = jest
+      .spyOn(console, 'warn')
+      .mockImplementation(() => {});
+    renderSidePanel({
+      title: '',
+      labelText: 'Side Panel test label',
+    });
+    expect(consoleWarnSpy).toHaveBeenCalled();
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
+      )
+    ); // Adjust the expected message
+    consoleWarnSpy.mockRestore();
+  });
   it('should click the navigation button', async () => {
     const { fn } = jest;
     const { click } = userEvent;
@@ -425,6 +492,15 @@ describe('SidePanel', () => {
       `.${blockClass}__close-button`
     );
     await act(() => click(closeIconButton));
+    expect(onRequestCloseFn).toHaveBeenCalled();
+  });
+
+  it('should call the onRequestClose event handler on pressing Esc key', async () => {
+    const { keyboard } = userEvent;
+    renderSidePanel();
+    await act(async () => {
+      await keyboard('{Escape}');
+    });
     expect(onRequestCloseFn).toHaveBeenCalled();
   });
 

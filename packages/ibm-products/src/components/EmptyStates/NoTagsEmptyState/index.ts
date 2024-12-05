@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { NoDataEmptyState } from './NoDataEmptyState';
+export { NoTagsEmptyState } from './NoTagsEmptyState';
+export type { NoTagsEmptyStateProps } from './NoTagsEmptyState';

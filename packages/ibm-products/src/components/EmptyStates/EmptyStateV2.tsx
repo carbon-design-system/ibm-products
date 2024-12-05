@@ -17,7 +17,7 @@ import EmptyStateIllustration from './EmptyStateIllustration';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateV2';
 
-interface EmptyStateV2Props {
+export interface EmptyStateV2Props {
   /**
    * Props for the action button. Refer to the Carbon Components button documentation for full list of props.
    */
@@ -90,6 +90,7 @@ interface EmptyStateV2Props {
 /**
  * This is the V2 version of the `EmptyState` component. To use you must pass the `v2` prop to the V1 version of the component `EmptyState` and use the props below.
  * In order to avoid breaking changes in the future `EmptyStateV2` is not actually directly importable.
+ * @deprecated
  */
 
 export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
@@ -179,6 +180,13 @@ export let EmptyStateV2 = React.forwardRef<HTMLDivElement, EmptyStateV2Props>(
     );
   }
 );
+
+/**@ts-ignore*/
+EmptyStateV2.deprecated = {
+  level: 'warn',
+  details:
+    'For more information, please refer to the Carbon docs https://carbondesignsystem.com/patterns/empty-states-pattern/',
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 EmptyStateV2 = pkg.checkComponentEnabled(EmptyStateV2, componentName);

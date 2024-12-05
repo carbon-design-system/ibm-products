@@ -667,3 +667,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 .#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
   z-index: $z-index-header-minus;
 }
+
+.#{$block-class}__button-set-menu-options
+  > button.#{$carbon-prefix}--menu-button__trigger {
+  min-inline-size: 0;
+}

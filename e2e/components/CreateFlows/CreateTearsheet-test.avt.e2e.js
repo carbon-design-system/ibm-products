@@ -62,6 +62,7 @@ test.describe('CreateTearsheet @avt', () => {
     const nextButton = page.getByText('Next');
     const backButton = page.getByText('Back');
     // Expect the Learn More link to be focused
+    await expect(learnMoreAnchor).toBeVisible();
     await expect(learnMoreAnchor).toBeFocused();
 
     // Switch focus to input box

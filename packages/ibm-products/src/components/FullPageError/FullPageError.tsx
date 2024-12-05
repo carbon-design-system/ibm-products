@@ -82,25 +82,18 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
     const errorData = {
       403: {
         svg: (
-          <Error403SVG
-            className={`${blockClass}__svg ${blockClass}__403`}
-            title={title}
-          />
+          <Error403SVG className={`${blockClass}__svg ${blockClass}__403`} />
         ),
       },
       404: {
         svg: (
-          <Error404SVG
-            className={`${blockClass}__svg ${blockClass}__404`}
-            title={title}
-          />
+          <Error404SVG className={`${blockClass}__svg ${blockClass}__404`} />
         ),
       },
       custom: {
         svg: (
           <ErrorGenericSVG
             className={`${blockClass}__svg ${blockClass}__custom`}
-            title={title}
           />
         ),
       },
@@ -117,7 +110,10 @@ export let FullPageError = React.forwardRef<HTMLDivElement, FullPageErrorProps>(
           <Grid className={`${blockClass}__grid`}>
             <Column sm={4} md={3} lg={6} className={`${blockClass}__column`}>
               <h1 className={`${blockClass}__title`}>
-                <span className={`${blockClass}__label`}>↳ {label}</span>
+                <span className={`${blockClass}__label`}>
+                  <span aria-hidden="true">↳ </span>
+                  {label}
+                </span>
                 <span>{title}</span>
               </h1>
               <p className={`${blockClass}__description`}>{description}</p>

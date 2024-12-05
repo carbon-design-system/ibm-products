@@ -51,6 +51,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
+import { StringFormatter } from '../StringFormatter';
 
 const componentName = 'PageHeader';
 
@@ -1038,7 +1039,8 @@ export let PageHeader = React.forwardRef(
               {subtitle ? (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {subtitle}
+                    {/**@ts-ignore*/}
+                    <StringFormatter value={subtitle} lines={2} truncate />
                   </Column>
                 </Row>
               ) : null}

@@ -538,13 +538,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle-row {
-    display: -webkit-box;
-    overflow: hidden;
-    max-width: 100%;
     margin-top: $spacing-03;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 
     @include breakpoint-up('md') {
       max-width: $left-section-std-width;

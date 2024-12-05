@@ -16,7 +16,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 @keyframes influencer-menu-entrance {
   0% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     transform: translateX($influencerAnimationStart);
   }
 
@@ -33,7 +33,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 
   100% {
     opacity: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     transform: translateX($influencerAnimationStart);
   }
 }

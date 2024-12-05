@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:map';
+
 // Standard imports.
 @use '@carbon/react/scss/colors' as *;
 @use '../../global/styles/project-settings' as *;
@@ -74,8 +76,8 @@ $themes: ('light', 'dark');
 $block-class: #{$pkg-prefix}--status-icon;
 
 @function carbon-clr($name, $theme: light) {
-  // stylelint-disable-next-line carbon/theme-token-use
-  $color: map-get(map-get($colors, $name), $theme);
+  // stylelint-disable-next-line carbon/theme-use
+  $color: map.get(map.get($colors, $name), $theme);
   @return $color;
 }
 
@@ -96,7 +98,7 @@ $block-class: #{$pkg-prefix}--status-icon;
 
 .#{$block-class}--light.#{$block-class}--light-minor-warning,
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning {
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   fill: $yellow-20;
 }
 
@@ -106,7 +108,7 @@ $block-class: #{$pkg-prefix}--status-icon;
 .#{$block-class}--light.#{$block-class}--light-minor-warning
   path:nth-of-type(1),
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   fill: $gray-100;
 }
 
@@ -124,13 +126,13 @@ $block-class: #{$pkg-prefix}--status-icon;
           }
           // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
           animation: rotating 8000ms infinite linear;
-          // stylelint-disable-next-line carbon/theme-token-use
+          // stylelint-disable-next-line carbon/theme-use
           fill: carbon-clr($icon, $theme);
         } @else if $icon == running {
-          // stylelint-disable-next-line carbon/theme-token-use
+          // stylelint-disable-next-line carbon/theme-use
           fill: carbon-clr($icon, $theme);
         } @else {
-          // stylelint-disable-next-line carbon/theme-token-use
+          // stylelint-disable-next-line carbon/theme-use
           fill: carbon-clr($icon, $theme);
           @media (prefers-reduced-motion) {
             .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {

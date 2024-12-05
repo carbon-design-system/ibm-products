@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:map';
+
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins';
@@ -34,7 +36,7 @@ $sizes: (
 );
 
 @mixin size($size) {
-  $_size: map-get($sizes, $size);
+  $_size: map.get($sizes, $size);
 
   width: $_size;
   height: $_size;
@@ -60,7 +62,7 @@ $sizes: (
 
 .#{$block-class}__tooltip {
   &:focus-within .#{$block-class} {
-    // stylelint-disable-next-line carbon/theme-token-use
+    // stylelint-disable-next-line carbon/theme-use
     outline: 2px solid $focus;
     outline-offset: 1px;
   }
@@ -72,7 +74,7 @@ $sizes: (
 }
 
 @mixin setBgColor($color) {
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   background-color: $color;
 }
 

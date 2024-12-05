@@ -68,6 +68,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
     const localRef = ref ?? backupRef;
     const localRefValue = (localRef as MutableRefObject<HTMLDivElement>)
       .current;
+    const filePathStr = filePaths?.join(); //converting the array to string will avoid unwanted useEffect trigger.
     // load animation source
     useEffect(() => {
       const isJsonFile = (filePath) => filePath.includes('.json');
@@ -81,7 +82,8 @@ export const SteppedAnimatedMedia = React.forwardRef(
         }
       }
       loadArtifact();
-    }, [filePaths]);
+      // eslint-disable-next-line
+    }, [filePathStr]);
 
     useEffect(() => {
       const prefersReducedMotion = window?.matchMedia

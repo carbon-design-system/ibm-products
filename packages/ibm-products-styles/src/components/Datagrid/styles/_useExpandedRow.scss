@@ -24,7 +24,7 @@
 .#{variables.$block-class}
   .#{variables.$block-class}__expanded-row-content::before {
   position: absolute;
-  /* stylelint-disable-next-line carbon/layout-token-use */
+  /* stylelint-disable-next-line carbon/layout-use */
   top: -1px;
   right: 0;
   width: calc(100% - #{$spacing-09});

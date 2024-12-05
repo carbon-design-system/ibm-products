@@ -1,4 +1,4 @@
-/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/layout-use */
 /* stylelint-disable carbon/motion-easing-use */
 /* stylelint-disable max-nesting-depth */
 //
@@ -44,7 +44,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
         width: $spacing-04;
         height: $spacing-04;
         border-radius: 50%;
-        /* stylelint-disable-next-line carbon/theme-token-use */
+        /* stylelint-disable-next-line carbon/theme-use */
         background-color: $blue-50;
         content: '';
       }
@@ -61,7 +61,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--coachmark-beacon;
           height: 18px;
           border-radius: 100%;
           content: '';
-          /* stylelint-disable-next-line carbon/theme-token-use */
+          /* stylelint-disable-next-line carbon/theme-use */
           outline: $spacing-01 $focus solid;
         }
       }

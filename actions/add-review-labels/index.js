@@ -21,8 +21,11 @@ async function run() {
   const privateKey = core.getInput('APP_PRIVATE_KEY', {
     required: true,
   });
+  const installId = core.getInput('APP_INSTALLATION_ID', {
+    required: true,
+  });
   const app = new App({ appId, privateKey });
-  const octokit = await app.getInstallationOctokit(52238220);
+  const octokit = await app.getInstallationOctokit(installId);
 
   const { workflow_run, repository, organization } = context.payload;
   const workflowRunId = workflow_run.id;

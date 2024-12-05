@@ -94,7 +94,6 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
       open,
       portalTarget: portalTargetIn,
       previousStepButtonText,
-      selectorPrimaryFocus,
       showAPIKeyLabel,
 
       // Collect any other property values passed in.
@@ -122,10 +121,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     const blockClass = `${pkg.prefix}--apikey-modal`;
     const localRef = useRef(undefined);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
-    const { firstElement, keyDownListener } = useFocus(
-      modalRef,
-      selectorPrimaryFocus
-    );
+    const { firstElement, keyDownListener } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
 
     useEffect(() => {
@@ -137,9 +133,13 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
+        claimFocus(
+          firstElement,
+          modalRef,
+          `#${CSS.escape(apiKeyInputId?.current)}`
+        );
       }
-    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
+    }, [firstElement, modalRef, open]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

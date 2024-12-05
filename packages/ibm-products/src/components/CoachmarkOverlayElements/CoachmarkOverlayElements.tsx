@@ -77,6 +77,14 @@ export interface CoachmarkOverlayElementsProps {
    * The label for the Close button.
    */
   closeButtonLabel?: string;
+  /**
+   * Callback called when clicking on the Next button.
+   */
+  onClickNext?: () => void;
+  /**
+   * Callback called when clicking on the Previous button.
+   */
+  onClickBack?: () => void;
 }
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -96,6 +104,8 @@ const defaults = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
+  onClickNext: undefined,
+  onClickBack: undefined,
 };
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
@@ -115,6 +125,8 @@ export let CoachmarkOverlayElements = React.forwardRef<
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
+      onClickNext = defaults.onClickNext,
+      onClickBack = defaults.onClickBack,
       // Collect any other property values passed in.
       ...rest
     },
@@ -248,6 +260,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onClickBack?.();
                   }}
                 >
                   {previousButtonLabel}
@@ -268,6 +281,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onClickNext?.();
                   }}
                 >
                   {nextButtonText}
@@ -344,6 +358,14 @@ CoachmarkOverlayElements.propTypes = {
    * The label for the Next button.
    */
   nextButtonText: PropTypes.string,
+  /**
+   * Optional callback called when clicking on the Previous button.
+   */
+  onClickBack: PropTypes.func,
+  /**
+   * Optional callback called when clicking on the Next button.
+   */
+  onClickNext: PropTypes.func,
   /**
    * The label for the Previous button.
    */

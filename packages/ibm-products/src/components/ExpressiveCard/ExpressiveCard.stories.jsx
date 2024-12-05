@@ -7,39 +7,60 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
-import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
+import { ArrowRight, Cloud, Add, Information } from '@carbon/react/icons';
 import {
   AspectRatio,
   Column,
   Grid,
   usePrefix,
-  unstable__Slug as Slug,
-  unstable__SlugContent as SlugContent,
+  AILabel,
+  AILabelContent,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
 } from '@carbon/react';
 
 import { ExpressiveCard } from '.';
 import DocsPage from './ExpressiveCard.docs-page';
 import { action } from '@storybook/addon-actions';
 
-const sampleSlug = (
-  <Slug className="slug-container" size="xs">
-    <SlugContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          This is not really Lorem Ipsum but the spell checker did not like the
-          previous text with it&apos;s non-words which is why this unwieldy
-          sentence, should one choose to call it that, here.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-    </SlugContent>
-  </Slug>
-);
+const sampleDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return (
+        <AILabel className="decorator-container" size="xs">
+          <AILabelContent>
+            <div>
+              <p className="secondary">AI Explained</p>
+              <h1>84%</h1>
+              <p className="secondary bold">Confidence score</p>
+              <p className="secondary">
+                This is not really Lorem Ipsum but the spell checker did not
+                like the previous text with it&apos;s non-words which is why
+                this unwieldy sentence, should one choose to call it that, here.
+              </p>
+              <hr />
+              <p className="secondary">Model type</p>
+              <p className="bold">Foundation model</p>
+            </div>
+          </AILabelContent>
+        </AILabel>
+      );
+    case 2:
+      return (
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Custom content here</p>
+          </ToggletipContent>
+        </Toggletip>
+      );
+    default:
+      return;
+  }
+};
 
 export default {
   title: 'IBM Products/Components/Cards/ExpressiveCard',
@@ -82,22 +103,23 @@ export default {
         labels: {
           0: 'No AI slug',
           1: 'with AI Slug',
-          2: 'with hollow slug (boolean)',
         },
         default: 0,
       },
-      options: [0, 1, 2],
+      options: [false, true],
     },
-    aiLabel: {
+    decorator: {
       control: {
         type: 'select',
         labels: {
           0: 'No AI label',
           1: 'with AI label',
+          2: 'With non AI Label component',
+          3: 'with hollow AI label (boolean)',
         },
         default: 0,
       },
-      options: [false, true],
+      options: [0, 1, 2, 3],
     },
   },
   decorators: [
@@ -126,13 +148,24 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSizeSm, columnSizeMd, columnSizeLg, slug, ...args } =
-    opts;
+  const {
+    children,
+    columnSizeSm,
+    columnSizeMd,
+    columnSizeLg,
+    decorator,
+    ...args
+  } = opts;
 
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
-        <ExpressiveCard {...args} slug={slug && (slug === 2 || sampleSlug)}>
+        <ExpressiveCard
+          {...args}
+          decorator={
+            decorator && (decorator === 3 || sampleDecorator(decorator))
+          }
+        >
           {children}
         </ExpressiveCard>
       </Column>
@@ -147,7 +180,7 @@ const MediaTemplate = (opts) => {
     columnSizeMd,
     columnSizeLg,
     mediaRatio = '1x1',
-    slug,
+    decorator,
     ...args
   } = opts;
   return (
@@ -155,7 +188,9 @@ const MediaTemplate = (opts) => {
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
-          slug={slug && (slug === 2 || sampleSlug)}
+          decorator={
+            decorator && (decorator === 3 || sampleDecorator(decorator))
+          }
           {...args}
         >
           {children}

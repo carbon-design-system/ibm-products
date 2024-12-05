@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// NOTE: Please do not remove the duplicate `slug` and `ai-label` classes. We need both until slug is fully deprecated
+// NOTE: Please do not remove the duplicate `slug` and `decorator` classes. We need both until slug is fully deprecated
 
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
@@ -144,25 +144,39 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   position: relative;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--slug,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--ai-label {
   position: absolute;
   top: $spacing-05;
   right: $spacing-05;
 }
 
+.#{$block-class}__header__inner-wrapper--decorator {
+  position: absolute;
+  top: $spacing-05;
+  right: $spacing-05;
+
+  .#{c4p-settings.$carbon-prefix}--slug,
+  .#{c4p-settings.$carbon-prefix}--ai-label {
+    position: relative;
+    top: unset;
+    right: unset;
+  }
+}
+
 .#{$block-class}__header-container--has-slug,
-.#{$block-class}__header-container--has-ai-label {
+.#{$block-class}__header-container--has-decorator {
   width: 100%;
   padding-right: $spacing-07;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--has-actions,
-.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--has-actions {
+.#{$block-class}__header-container--has-decorator.#{$block-class}__header-container--has-actions {
   padding-right: $spacing-08;
 }
 
 .#{$block-class}__header-container--has-slug.#{$block-class}__header-container--large-tile-or-label,
-.#{$block-class}__header-container--has-ai-label.#{$block-class}__header-container--large-tile-or-label {
+.#{$block-class}__header-container--has-decorator.#{$block-class}__header-container--large-tile-or-label {
   padding-right: $spacing-09;
 }
 

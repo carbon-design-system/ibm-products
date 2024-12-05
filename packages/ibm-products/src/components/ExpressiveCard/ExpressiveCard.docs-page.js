@@ -53,7 +53,7 @@ const DocsPage = () => (
       <ExpressiveCard
   label="Label"
   primaryButtonText="Primary"
-  aiLabel={<AILabel><AILabelContent>{renderedContent}</AILabelContent></AILabel>}
+  decorator={<AILabel><AILabelContent>{renderedContent}</AILabelContent></AILabel>}
   title="Title">
   <p>
     expressive card body content block. description inviting the user to take action on the card.
@@ -64,7 +64,7 @@ const DocsPage = () => (
       },
       {
         description:
-          'Clickable tiles only accept a boolean value of true for the aiLabel property.',
+          'Clickable tiles only accept a boolean value of true for the decorator property.',
         source: {
           language: 'html',
           code: `
@@ -73,7 +73,7 @@ const DocsPage = () => (
   primaryButtonText="Primary"
   onClick={() => {}}
   onKeyDown={() => {}}
-  aiLabel={true}
+  decorator={true}
   title="Title">
   <p>
     expressive card body content block. description inviting the user to take action on the card.

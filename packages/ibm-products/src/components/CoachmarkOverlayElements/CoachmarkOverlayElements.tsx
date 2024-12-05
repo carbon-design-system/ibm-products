@@ -85,6 +85,10 @@ export interface CoachmarkOverlayElementsProps {
    * Callback called when clicking on the Previous button.
    */
   onClickBack?: () => void;
+  /**
+   * Current step of the coachmarks.
+   */
+  currentStep?: number;
 }
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -106,6 +110,7 @@ const defaults = {
   closeButtonLabel: 'Got it',
   onClickNext: undefined,
   onClickBack: undefined,
+  currentStep: 0,
 };
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
@@ -122,6 +127,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
       isVisible = defaults.isVisible,
       media,
       renderMedia,
+      currentStep = defaults.currentStep,
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
@@ -134,7 +140,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
   ) => {
     const buttonFocusRef = useRef<ButtonProps<any> | undefined>(undefined);
     const scrollRef = useRef<CarouselProps | undefined>(undefined);
-    const [scrollPosition, setScrollPosition] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(currentStep);
     const [currentProgStep, _setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
     const hasMedia = media || renderMedia;
@@ -334,6 +340,10 @@ CoachmarkOverlayElements.propTypes = {
    * The label for the Close button.
    */
   closeButtonLabel: PropTypes.string,
+  /**
+   * Current step of the coachmarks
+   */
+  currentStep: PropTypes.number,
   /**
    * The visibility of CoachmarkOverlayElements is
    * managed in the parent component.

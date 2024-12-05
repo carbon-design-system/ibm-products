@@ -44,25 +44,21 @@ test.describe('ProductiveCard @avt', () => {
     });
 
     await expect(page).toHaveNoACViolations('ProductiveCard @avt-disabled');
-
-    const buttons = page.locator(`button.${carbon.prefix}--btn`);
-    const disabledButton = buttons.nth(2);
-    expect(await disabledButton.getAttribute('disabled')).not.toBeNull();
-
-    await page.keyboard.press('Tab');
-    expect(
-      await buttons.nth(0).evaluate((btn) => document.activeElement === btn)
-    ).toBe(true);
+    const editButton = page.getByRole('button', { name: 'Edit' });
+    const deleteButton = page.getByRole('button', { name: 'Delete' });
+    const disabledButton = page.getByRole('button', { name: 'Read more' });
+    expect(disabledButton.getAttribute('disabled')).not.toBeNull();
 
     await page.keyboard.press('Tab');
-    expect(
-      await buttons.nth(1).evaluate((btn) => document.activeElement === btn)
-    ).toBe(true);
+    expect(editButton).toBeFocused();
+
+    await page.keyboard.press('Tab');
+    expect(deleteButton).toBeFocused();
     // disabled button
     await page.keyboard.press('Tab');
     expect(
-      await buttons.nth(2).evaluate((btn) => document.activeElement === btn)
-    ).toBe(false);
+      await disabledButton.evaluate((btn) => document.activeElement !== btn)
+    ).toBe(true);
   });
 
   // Overflow menu open/close states test
@@ -74,8 +70,8 @@ test.describe('ProductiveCard @avt', () => {
       id: 'ibm-products-components-cards-productivecard--with-overflow',
     });
 
-    const menuButton = page.locator('button[aria-haspopup="true"]');
-    const menu = page.locator('ul[role="menu"]');
+    const menuButton = page.getByRole('button', { label: 'Option' });
+    const menu = page.getByRole('menu');
 
     // Check initial state
     expect(await menuButton.getAttribute('aria-expanded')).toBe('false');
@@ -178,9 +174,7 @@ test.describe('ProductiveCard @avt', () => {
 
     // Move focus to the card element and validate
     await page.keyboard.press('Tab');
-    const zone1 = page.locator(
-      `[${pkg.devtoolsAttribute}="${pkg.prefix}--ProductiveCard"]`
-    );
+    const zone1 = page.locator(`.${pkg.prefix}--card__clickable`);
     await expect(zone1).toBeFocused();
     await expect(zone1).toHaveAttribute('role', 'button');
 

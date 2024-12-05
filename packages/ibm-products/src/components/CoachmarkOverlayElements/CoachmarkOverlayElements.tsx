@@ -140,8 +140,8 @@ export let CoachmarkOverlayElements = React.forwardRef<
   ) => {
     const buttonFocusRef = useRef<ButtonProps<any> | undefined>(undefined);
     const scrollRef = useRef<CarouselProps | undefined>(undefined);
-    const [scrollPosition, setScrollPosition] = useState(currentStep);
-    const [currentProgStep, _setCurrentProgStep] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [currentProgStep, _setCurrentProgStep] = useState(currentStep);
     const coachmark = useCoachmark();
     const hasMedia = media || renderMedia;
 

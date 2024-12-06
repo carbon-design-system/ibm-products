@@ -137,7 +137,6 @@ export let AboutModal = React.forwardRef(
     }: AboutModalProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
-    console.log('component onClose: ', onClose);
     const bodyRef = useRef<HTMLElement | null | undefined>(null);
     const localRef = useRef(undefined);
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;

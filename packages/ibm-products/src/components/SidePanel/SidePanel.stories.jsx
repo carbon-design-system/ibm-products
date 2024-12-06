@@ -507,6 +507,7 @@ const FirstElementDisabledTemplate = ({
   actions,
   aiLabel,
   slug,
+  decorator,
   ...args
 }) => {
   const [open, setOpen] = useState(false);
@@ -530,6 +531,7 @@ const FirstElementDisabledTemplate = ({
         ref={testRef}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
+        decorator={decorator && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         {!minimalContent && (
@@ -568,7 +570,7 @@ const FirstElementDisabledTemplate = ({
 };
 
 // eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, aiLabel, slug, ...args }) => {
+const StepTemplate = ({ actions, aiLabel, slug, decorator, ...args }) => {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const buttonRef = useRef(undefined);
@@ -591,6 +593,7 @@ const StepTemplate = ({ actions, aiLabel, slug, ...args }) => {
         actions={actionSets[actions]}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
+        decorator={decorator && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         <ChildrenContentWithSteps
@@ -603,7 +606,7 @@ const StepTemplate = ({ actions, aiLabel, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
+const SlideInTemplate = ({ actions, aiLabel, slug, decorator, ...args }) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(undefined);
 
@@ -627,6 +630,7 @@ const SlideInTemplate = ({ actions, aiLabel, slug, ...args }) => {
         actions={actionSets[actions]}
         aiLabel={aiLabel && sampleAILabel}
         slug={slug && sampleAILabel}
+        decorator={decorator && sampleAILabel}
         launcherButtonRef={buttonRef}
       >
         <ChildrenContent />

@@ -20,13 +20,9 @@ test.describe('CreateTearsheet @avt', () => {
         carbonTheme: 'white',
       },
     });
+    await page.screenshot({ animations: 'disabled' });
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
     await expect(modalElement).toBeVisible();
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
     await expect(modalElement).toHaveAttribute('aria-hidden', 'false');
     await expect(page).toHaveNoACViolations(
       'CreateTearsheet @avt-default-state'

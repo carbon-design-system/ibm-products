@@ -92,7 +92,8 @@ export interface ProductiveCardProps extends PropsWithChildren {
    */
   overflowActions?: overflowAction[];
   /**
-   * Aria label prop required for OverflowMenu, also applies to tooltip text on menu button. gets overridden by `iconDescription`
+   * Sets the text for the OverflowMenu aria label and the OverflowMenu trigger button tooltip.
+   * Overrides `iconDescription` prop.
    */
   overflowAriaLabel?: string;
   /**
@@ -149,14 +150,17 @@ export interface ProductiveCardProps extends PropsWithChildren {
   titleSize?: 'default' | 'large';
 
   /**
-   * Tooltip icon description, also applies to Aria label prop required for OverflowMenu. overrides `overflowAriaLabel`
+   * Sets the text for the OverflowMenu trigger button tooltip and OverflowMenu aria label,
+   * gets overridden by the `overflowAriaLabel` prop.
+   *
+   * @deprecated Please use the `overflowAriaLabel` prop instead.
    */
   iconDescription?: string;
 }
 
 export let ProductiveCard = forwardRef(
   (
-    { actionsPlacement = 'top', iconDescription, ...rest }: ProductiveCardProps,
+    { actionsPlacement = 'top', ...rest }: ProductiveCardProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const validProps = prepareProps(rest, [
@@ -171,7 +175,6 @@ export let ProductiveCard = forwardRef(
       <Card
         {...{
           ...validProps,
-          iconDescription,
           actionsPlacement,
           ref,
           productive: true,
@@ -229,7 +232,10 @@ ProductiveCard.propTypes = {
     PropTypes.node,
   ]),
   /**
-   * Tooltip icon description, also applies to Aria label prop required for OverflowMenu. overrides `overflowAriaLabel`
+   * Sets the text for the OverflowMenu trigger button tooltip and OverflowMenu aria label,
+   * gets overridden by the `overflowAriaLabel` prop.
+   *
+   * @deprecated Please use the `overflowAriaLabel` prop instead.
    */
   iconDescription: PropTypes.string,
   /**
@@ -265,7 +271,8 @@ ProductiveCard.propTypes = {
     })
   ),
   /**
-   * Aria label prop required for OverflowMenu, also applies to tooltip text on menu button. gets overridden by `iconDescription`
+   * Sets the text for the OverflowMenu aria label and the OverflowMenu trigger button tooltip.
+   * Overrides `iconDescription` prop.
    */
   overflowAriaLabel: PropTypes.string,
   /**

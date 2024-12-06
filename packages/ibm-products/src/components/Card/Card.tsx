@@ -118,9 +118,9 @@ export const Card = forwardRef(
       onClick,
       onKeyDown,
       onPrimaryButtonClick,
+      onSecondaryButtonClick,
       overflowActions = Object.freeze([]),
       overflowAriaLabel,
-      onSecondaryButtonClick,
       pictogram: Pictogram,
       primaryButtonDisabled,
       primaryButtonHref,
@@ -179,7 +179,7 @@ export const Card = forwardRef(
                 autoAlign
                 menuAlignment={pos}
                 size={size}
-                label={iconDescription || overflowAriaLabel}
+                label={overflowAriaLabel || iconDescription}
               >
                 {overflowActions.map(({ id, itemText, ...rest }) => (
                   <MenuItem key={id} label={itemText} {...rest} />

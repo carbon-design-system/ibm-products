@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { DefinitionTooltip, SkeletonText } from '@carbon/react';
 import { EditInPlace } from '../EditInPlace';
+import useOverflow from './hooks/useOverflow';
 
 /**
  *
@@ -39,25 +40,14 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
-  const [isEllipsisApplied, setIsEllipsisApplied] = useState();
   const longTitleRef = useRef(undefined);
   const titleRef = useRef(undefined);
 
-  useLayoutEffect(() => {
-    setIsEllipsisApplied(isEllipsisActive());
-  }, [longTitleRef, titleRef, title]);
-
-  const isEllipsisActive = () => {
-    if (longTitleRef.current) {
-      return (
-        longTitleRef.current?.offsetWidth < longTitleRef.current?.scrollWidth
-      );
-    } else if (titleRef.current) {
-      return titleRef.current?.offsetWidth < titleRef.current?.scrollWidth;
-    }
-
-    return false;
-  };
+  const isEllipsisApplied = useOverflow({
+    longRef: longTitleRef,
+    shortRef: titleRef,
+    text,
+  });
 
   if (text || !content) {
     if (text === undefined && typeof title === 'string') {

@@ -19,7 +19,6 @@ export const APIKeyDownloader = ({
   downloadLinkLabel,
 }) => {
   const [linkProps, setLinkProps] = useState({});
-
   useEffect(() => {
     const generateLinkProps = async () => {
       const data = fileType === 'txt' ? apiKey : JSON.stringify({ apiKey });
@@ -27,7 +26,9 @@ export const APIKeyDownloader = ({
         type: fileType === 'txt' ? 'text/plain' : 'application/json',
       });
       const href = await URL.createObjectURL(blob);
-      const download = `${fileName || 'apikey'}.${fileType}`;
+      const download = `${
+        fileName.length > 0 ? fileName : 'apikey'
+      }.${fileType}`;
       const props = {
         href,
         download,

@@ -82,8 +82,8 @@ const defaultProps = {
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
 
-const InstantTemplate = (args) => {
-  const [open, setOpen] = useState(false);
+const InstantTemplate = (args, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
 
@@ -119,9 +119,9 @@ const InstantTemplate = (args) => {
   );
 };
 
-const TemplateWithState = (args) => {
+const TemplateWithState = (args, context) => {
   const { error } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
@@ -166,7 +166,7 @@ const TemplateWithState = (args) => {
   );
 };
 
-const MultiStepTemplate = (args) => {
+const MultiStepTemplate = (args, context) => {
   const { editing } = args;
   const {
     savedName,
@@ -175,7 +175,7 @@ const MultiStepTemplate = (args) => {
     savedResource,
     ...finalArgs
   } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
@@ -332,9 +332,9 @@ const MultiStepTemplate = (args) => {
   );
 };
 
-const EditTemplate = (args) => {
+const EditTemplate = (args, context) => {
   const { error, apiKeyName } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const [fetchSuccess, setFetchSuccess] = useState(false);

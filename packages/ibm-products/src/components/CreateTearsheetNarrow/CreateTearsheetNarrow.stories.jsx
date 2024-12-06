@@ -54,8 +54,8 @@ const defaultStoryProps = {
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
 };
 
-const Template = ({ slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
   const [replicaCount, setReplicaCount] = useState(1);
@@ -156,8 +156,8 @@ const Template = ({ slug, ...args }) => {
   );
 };
 
-const WithValidationTemplate = ({ slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const WithValidationTemplate = ({ slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
   const [replicaCount, setReplicaCount] = useState(1);

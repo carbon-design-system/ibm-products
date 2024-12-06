@@ -201,8 +201,8 @@ const sampleAILabel = (
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, aiLabel, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ actions, aiLabel, slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
 
   const wiredActions =
     actions &&
@@ -253,8 +253,8 @@ const tabs = (
   </div>
 );
 
-const TemplateWithNav = ({ actions, aiLabel, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const TemplateWithNav = ({ actions, aiLabel, slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
 
   const wiredActions =
     actions &&
@@ -301,8 +301,8 @@ const TemplateWithNav = ({ actions, aiLabel, slug, ...args }) => {
   );
 };
 
-const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const buttonRef = useRef(undefined);
 
   const wiredActions =
@@ -346,8 +346,11 @@ const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }) => {
   );
 };
 
-const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const FirstElementDisabledTemplate = (
+  { actions, aiLabel, slug, ...args },
+  context
+) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
@@ -412,10 +415,13 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ mixedSizes, actions, aiLabel, slug, ...args }) => {
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [open3, setOpen3] = useState(false);
+const StackedTemplate = (
+  { mixedSizes, actions, aiLabel, slug, ...args },
+  context
+) => {
+  const [open1, setOpen1] = useState(context.viewMode !== 'docs');
+  const [open2, setOpen2] = useState(context.viewMode !== 'docs');
+  const [open3, setOpen3] = useState(context.viewMode !== 'docs');
   const ref = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {

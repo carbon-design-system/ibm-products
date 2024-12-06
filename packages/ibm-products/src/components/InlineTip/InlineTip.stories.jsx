@@ -19,6 +19,7 @@ const InlineTipAnimation = new URL(
   import.meta.url
 ).pathname;
 import DocsPage from './InlineTip.docs-page';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 export default {
   title: 'Experimental/Onboarding/Inline tip/InlineTip',
@@ -36,12 +37,16 @@ export default {
       options: ['None', '<InlineTipButton>', '<InlineTipLink>'],
       control: { type: 'radio' },
     },
-    media: {
+    renderMedia: {
       options: ['None', 'Render a static image', 'Render an animation'],
       control: { type: 'radio' },
     },
     narrow: {
       control: { type: null },
+    },
+    media: {
+      control: { type: null },
+      description: 'Deprecated: Property replaced by "renderMedia"',
     },
   },
 };
@@ -68,7 +73,7 @@ const defaultProps = {
   collapsible: false,
   action: 'None',
   expandButtonLabel: 'Read more',
-  media: 'None',
+  renderMedia: 'None',
   onClick: () => {
     action(`Clicked the tertiary button`)();
   },
@@ -80,16 +85,18 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  const { media, narrow, action: componentAction } = args;
+  const { renderMedia, narrow, action: componentAction } = args;
 
   const selectedMedia = (function () {
-    switch (media) {
+    switch (renderMedia) {
       case 'Render a static image':
-        return { render: () => <img alt="" src={InlineTipImage} /> };
+        return () => <img alt="" src={InlineTipImage} />;
+
       case 'Render an animation':
-        return {
-          filePaths: [InlineTipAnimation],
-        };
+        return () => (
+          <SteppedAnimatedMedia filePaths={[InlineTipAnimation]} playStep={1} />
+        );
+
       default:
         return null;
     }
@@ -129,7 +136,11 @@ const Template = (args) => {
         narrow ? 'storybook--inline-tip-narrow' : 'storybook--inline-tip-wide',
       ])}
     >
-      <InlineTip {...args} media={selectedMedia} action={selectedAction} />
+      <InlineTip
+        {...args}
+        renderMedia={selectedMedia}
+        action={selectedAction}
+      />
     </div>
   );
 };

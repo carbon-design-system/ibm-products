@@ -22,21 +22,10 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import pconsole from '../../global/js/utils/pconsole';
 
 const componentName = 'CreateModal';
 const blockClass = `${pkg.prefix}--create-modal`;
-
-// Custom PropType validator which checks and ensures that the children property has no more than 4 nodes
-const isValidChildren =
-  () =>
-  ({ children }) => {
-    if (children && children.length > 4) {
-      throw new Error(
-        'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
-      );
-    }
-    return;
-  };
 
 export interface CreateModalProps
   extends React.ComponentProps<typeof ComposedModal> {
@@ -123,6 +112,16 @@ export let CreateModal = React.forwardRef(
     }: PropsWithChildren<CreateModalProps>,
     ref: LegacyRef<HTMLDivElement>
   ) => {
+    const validateProps = () => {
+      if (children && React.Children.count(children) > 4) {
+        pconsole.error(
+          'The `CreateModal` component does not take more than 4 nodes as children. This is to ensure that the modal does not overflow. Please remove 1 or more nodes.'
+        );
+      }
+    };
+
+    validateProps();
+
     const renderPortalUse = usePortalTarget(portalTargetIn);
 
     return renderPortalUse(
@@ -176,8 +175,7 @@ CreateModal.propTypes = {
   /**
    * Children refers to all form items within a form inside of the modal's body.
    */
-  /**@ts-ignore*/
-  children: isValidChildren(),
+  children: PropTypes.node,
   /**
    * Specify an optional className to be applied to the modal root node
    */

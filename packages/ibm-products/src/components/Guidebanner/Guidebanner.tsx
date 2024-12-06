@@ -17,6 +17,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import pconsole from '../../global/js/utils/pconsole';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--guidebanner`;
@@ -87,6 +88,19 @@ const defaults = {
   previousIconDescription: 'Back',
 };
 
+function getComponentDisplayName(element: React.ReactElement<any>) {
+  const node = element as React.ReactElement<React.ComponentType<any>>;
+  const type = (node as unknown as React.ReactElement<React.FunctionComponent>)
+    .type;
+  const displayName =
+    typeof type === 'function'
+      ? (type as React.FunctionComponent).displayName ||
+        (type as React.FunctionComponent).name ||
+        'Unknown'
+      : type;
+  return displayName;
+}
+
 /**
  * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
@@ -110,6 +124,35 @@ export let Guidebanner = React.forwardRef<HTMLDivElement, GuidebannerProps>(
     },
     ref
   ) => {
+    const validateProps = () => {
+      if (!children) {
+        pconsole.error(
+          '`Guidebanner` requires one or more children of type `GuidebannerElement`.'
+        );
+      }
+
+      React.Children.forEach(children, (child) => {
+        if (React.isValidElement(child)) {
+          if (
+            (getComponentDisplayName(child) as any)?.displayName !==
+            'GuidebannerElement'
+          ) {
+            // If child element is not `GuidebannerElement`, then show:
+            // Carbon Products component's `displayName` (child.type.displayName) or
+            // React component's `name` (child.type.name) or
+            // HTML element's tag name (child.type).
+            pconsole.error(
+              `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${getComponentDisplayName(
+                child
+              )}\` instead.`
+            );
+          }
+        }
+      });
+    };
+
+    validateProps();
+
     const scrollRef = useRef<any>(null);
     const toggleRef = useRef<HTMLDivElement>(null);
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -251,29 +294,7 @@ Guidebanner.propTypes = {
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
    */
-  children: (props, propName) => {
-    let error;
-    const prop = props[propName];
-    if (!prop) {
-      error = new Error(
-        '`Guidebanner` requires one or more children of type `GuidebannerElement`.'
-      );
-    }
-    React.Children.forEach(prop, (child) => {
-      if (child.type.displayName !== 'GuidebannerElement') {
-        // If child element is not `GuidebannerElement`, then show:
-        // Carbon Products component's `displayName` (child.type.displayName) or
-        // React component's `name` (child.type.name) or
-        // HTML element's tag name (child.type).
-        error = new Error(
-          `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${
-            child.type?.displayName || child.type?.name || child.type
-          }\` instead.`
-        );
-      }
-    });
-    return error;
-  },
+  children: PropTypes.node,
   /**
    * Provide an optional class to be applied to the containing node.
    */

@@ -8,7 +8,7 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
-import * as stories from './SidePanel';
+import * as stories from './SidePanel.stories';
 
 const DocsPage = () => (
   <StoryDocsPage

@@ -546,7 +546,7 @@ export let SidePanel = React.forwardRef(
       if (!open) {
         onUnmount?.();
       }
-      setAnimationComplete(true);
+      setAnimationComplete(!animationComplete);
     };
 
     // Set the internal state `animationComplete` to true if
@@ -624,26 +624,25 @@ export let SidePanel = React.forwardRef(
     ]);
 
     useEffect(() => {
-      if (open) {
-        setTimeout(() => {
+      if (open && animationComplete) {
+        if (
+          selectorPrimaryFocus &&
+          getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
+        ) {
+          const primeFocusEl = getSpecificElement(
+            sidePanelRef?.current,
+            selectorPrimaryFocus
+          );
           if (
-            selectorPrimaryFocus &&
-            getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
+            primeFocusEl &&
+            window?.getComputedStyle(primeFocusEl)?.display !== 'none'
           ) {
-            const primeFocusEl = getSpecificElement(
-              sidePanelRef?.current,
-              selectorPrimaryFocus
-            );
-            if (
-              primeFocusEl &&
-              window?.getComputedStyle(primeFocusEl)?.display !== 'none'
-            ) {
-              (primeFocusEl as HTMLElement)?.focus();
-            }
-          } else if (!slideIn) {
-            firstElement?.focus();
+            console.log(animationComplete);
+            setTimeout(() => primeFocusEl?.focus(), 0);
           }
-        }, 0);
+        } else if (!slideIn) {
+          setTimeout(() => firstElement?.focus(), 0);
+        }
       }
     }, [
       animationComplete,

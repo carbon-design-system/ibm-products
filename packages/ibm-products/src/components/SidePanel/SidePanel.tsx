@@ -637,7 +637,6 @@ export let SidePanel = React.forwardRef(
             primeFocusEl &&
             window?.getComputedStyle(primeFocusEl)?.display !== 'none'
           ) {
-            console.log(animationComplete);
             setTimeout(() => primeFocusEl?.focus(), 0);
           }
         } else if (!slideIn) {

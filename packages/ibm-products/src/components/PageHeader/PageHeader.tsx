@@ -15,6 +15,7 @@ import {
   usePrefix,
   ButtonProps,
   PopoverAlignment,
+  DefinitionTooltip,
 } from '@carbon/react';
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
@@ -51,7 +52,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { StringFormatter } from '../StringFormatter';
+import useOverflow from './hooks/useOverflow';
 
 const componentName = 'PageHeader';
 
@@ -902,12 +903,21 @@ export let PageHeader = React.forwardRef(
 
     const displayedBreadcrumbs = getBreadcrumbs();
 
+    const longTitleRef = useRef<HTMLSpanElement>(null);
+    const titleRef = useRef<HTMLSpanElement>(null);
+
+    const isEllipsisApplied = useOverflow({
+      longRef: longTitleRef,
+      shortRef: titleRef,
+      text: subtitle,
+    });
+
     return (
       <>
         <div
           className={`${blockClass}--offset-top-measuring-element`}
           ref={offsetTopMeasuringRef}
-        ></div>
+        />
         <section
           {...rest}
           className={cx([
@@ -1036,14 +1046,32 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null}
 
-              {subtitle ? (
+              {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {/**@ts-ignore*/}
-                    <StringFormatter value={subtitle} lines={2} truncate />
+                    {isEllipsisApplied ? (
+                      <DefinitionTooltip
+                        definition={subtitle}
+                        className={`${blockClass}__subtitle-tooltip`}
+                      >
+                        <span
+                          ref={titleRef}
+                          className={`${blockClass}__subtitle-text--long`}
+                        >
+                          {subtitle}
+                        </span>
+                      </DefinitionTooltip>
+                    ) : (
+                      <span
+                        ref={longTitleRef}
+                        className={`${blockClass}__subtitle-text`}
+                      >
+                        {subtitle}
+                      </span>
+                    )}
                   </Column>
                 </Row>
-              ) : null}
+              )}
 
               {children ? (
                 <Row className={`${blockClass}__available-row`}>

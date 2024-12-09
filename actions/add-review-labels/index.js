@@ -21,8 +21,11 @@ async function run() {
   const privateKey = core.getInput('APP_PRIVATE_KEY', {
     required: true,
   });
+  const installId = core.getInput('APP_INSTALLATION_ID', {
+    required: true,
+  });
   const app = new App({ appId, privateKey });
-  const octokit = await app.getInstallationOctokit(52238220);
+  const octokit = await app.getInstallationOctokit(installId);
 
   const { workflow_run, repository, organization } = context.payload;
   const workflowRunId = workflow_run.id;
@@ -98,7 +101,7 @@ async function run() {
   // Get reviewer team data
   const { data } = await octokit.request('GET /orgs/{org}/teams/{team_slug}', {
     org: organization.login,
-    team_slug: 'reviewing-team', // Should be only hardcoded value (outside of the labels) needed within this action. Replace with the appropriate reviewing team that is assigned to review PRs.
+    team_slug: 'carbon-for-ibm-products-reviewers', // Should be only hardcoded value (outside of the labels) needed within this action.
     headers: {
       'X-GitHub-Api-Version': '2022-11-28',
     },

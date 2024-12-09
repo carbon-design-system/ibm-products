@@ -7,6 +7,9 @@ inputs:
   APP_PRIVATE_KEY:
     description: GitHub app private key
     required: true
+  APP_INSTALLATION_ID:
+    description: Carbon automation GitHub app installation id
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

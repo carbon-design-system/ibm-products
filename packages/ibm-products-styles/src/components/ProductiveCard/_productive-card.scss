@@ -52,9 +52,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
   .#{$block-class}__actions-header-ghost-button {
     min-height: $spacing-07;
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     padding-right: calc($spacing-01 + $spacing-03);
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     padding-left: calc($spacing-01 + $spacing-03);
 
     /* stylelint-disable-next-line max-nesting-depth */

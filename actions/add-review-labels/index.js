@@ -101,7 +101,7 @@ async function run() {
   // Get reviewer team data
   const { data } = await octokit.request('GET /orgs/{org}/teams/{team_slug}', {
     org: organization.login,
-    team_slug: 'reviewing-team', // Should be only hardcoded value (outside of the labels) needed within this action. Replace with the appropriate reviewing team that is assigned to review PRs.
+    team_slug: 'carbon-for-ibm-products-reviewers', // Should be only hardcoded value (outside of the labels) needed within this action.
     headers: {
       'X-GitHub-Api-Version': '2022-11-28',
     },

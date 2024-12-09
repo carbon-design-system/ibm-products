@@ -86,7 +86,7 @@ export const Example = () => {
             IBM{' '}
             <span
               style={
-                // stylelint-disable-next-line carbon/type-token-use
+                // stylelint-disable-next-line carbon/type-use
                 { fontWeight: '600' }
               }
             >

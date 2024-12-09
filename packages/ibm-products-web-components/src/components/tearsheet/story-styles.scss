@@ -9,8 +9,6 @@
 
 $story-prefix: 'tearsheet-stories';
 
-@use '@carbon/styles/scss/spacing' as *;
-
 #page-content-selector {
   position: absolute;
   z-index: 9999;

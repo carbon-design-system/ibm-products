@@ -28,7 +28,7 @@
 	"prefix": [
 		"//la"
 	],
-	"body": "// stylelint-disable-next-line carbon/layout-token-use"
+	"body": "// stylelint-disable-next-line carbon/layout-use"
 },
 "Stylelint disable next line Carbon Duraion": {
 	"scope": "scss",
@@ -49,14 +49,14 @@
 	"prefix": [
 		"//ty"
 	],
-	"body": "// stylelint-disable-next-line carbon/type-token-use"
+	"body": "// stylelint-disable-next-line carbon/type-use"
 },
 "Stylelint disable next line Carbon Theme": {
 	"scope": "scss",
 	"prefix": [
 		"//th"
 	],
-	"body": "// stylelint-disable-next-line carbon/theme-token-use"
+	"body": "// stylelint-disable-next-line carbon/theme-use"
 },
 // spacing tokens
 "spacing-01 (0.125rem 2px)": { "scope": "scss", "prefix": ["$sp", "$car"], "body": "$$spacing-01", "description": "Carbon spacing token" },

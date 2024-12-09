@@ -58,18 +58,18 @@ $types: (
 @each $type, $colors in $types {
   $border: map.get($colors, 'border');
   $background: map.get($colors, 'background');
-  /* stylelint-disable-next-line carbon/theme-token-use */
+  /* stylelint-disable-next-line carbon/theme-use */
   $color: map.get($colors, 'color');
 
   .#{$pkg-prefix}--annotation--#{$type} {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     border-color: $border;
   }
 
   .#{$pkg-prefix}--annotation--#{$type} > .#{$pkg-prefix}--annotation__label {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     background-color: $background;
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     color: $color;
   }
 }

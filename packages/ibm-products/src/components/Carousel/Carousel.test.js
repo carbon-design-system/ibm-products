@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -77,5 +77,64 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('calls the onScroll prop and returns value from 0 to 1', async () => {
+    const onScroll = jest.fn().mockReturnValue(0.2);
+    render(
+      <Carousel
+        data-testid={dataTestId}
+        // eslint-disable-next-line
+        style={{ width: '10px', height: '20px' }} // we need to set width and height here to trigger scrollbars
+        onScroll={onScroll}
+      >
+        Very long paragraph to trigger scrolling.
+      </Carousel>
+    );
+
+    const element = screen.getByTestId(dataTestId);
+    expect(element).not.toBeNull();
+
+    await waitFor(() =>
+      fireEvent.scroll(element, { target: { scrollX: '20px' } })
+    );
+    expect(onScroll).toHaveBeenCalled();
+    expect(onScroll()).toBe(0.2);
+  });
+
+  it('resets the scroll when the window size changes', async () => {
+    const onScroll = jest.fn().mockReturnValue(0.2);
+
+    render(
+      <Carousel
+        data-testid={dataTestId}
+        // eslint-disable-next-line
+        style={{ width: '10px', height: '20px' }} // we need to set width and height here to trigger scrollbars
+        onScroll={onScroll}
+      >
+        Very long paragraph to trigger scrolling.
+      </Carousel>
+    );
+
+    const element = screen.getByTestId(dataTestId);
+    expect(onScroll).toHaveBeenCalledTimes(0);
+    expect(element.scrollLeft).toBe(0);
+
+    const scrollXAmount = 20;
+    await waitFor(() =>
+      fireEvent.scroll(element, { target: { scrollX: scrollXAmount } })
+    );
+    element.scrollLeft = scrollXAmount;
+    expect(element.scrollLeft).toBe(scrollXAmount);
+
+    // Change the viewport to 500px.
+    global.innerWidth = 500;
+
+    // Trigger the window resize event.
+    global.dispatchEvent(new Event('resize'));
+
+    expect(onScroll).toHaveBeenCalled();
+    element.scrollLeft = 0;
+    expect(element.scrollLeft).toBe(0);
   });
 });

@@ -133,7 +133,7 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     min-width: initial;
     min-height: initial;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
     margin: 0;
     background-color: $body-cell-background;
@@ -158,7 +158,7 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     width: fit-content;
     max-width: var(--#{$block-class}--total-width);
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
     visibility: hidden;
 
@@ -177,10 +177,10 @@ $header-cell-background: $layer-accent-01;
     overflow: hidden;
     // Could be fixed by using border-right but the fact that
     // this element is positioned absolute prevents that from working
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     padding-right: calc(#{$spacing-03} - 1px);
     padding-bottom: $spacing-01;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     padding-left: calc(#{$spacing-03} - #{$spacing-01});
     border: $spacing-01 solid $background-brand;
     background-color: $body-cell-background;

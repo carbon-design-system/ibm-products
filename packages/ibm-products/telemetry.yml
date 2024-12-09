@@ -72,6 +72,7 @@ collect:
         - DatagridBatchActions
         - DatagridPagination
         - datagridState
+        - decorator
         - defaultColumn
         - defaultEmptyRowCount
         - description
@@ -284,6 +285,7 @@ collect:
         - reactTableFiltersState
         - readOnlyTable
         - renderIcon
+        - renderMedia
         - renderRowHeader
         - renderRowHeaderDirection
         - resetToDefaultLabel
@@ -517,6 +519,7 @@ collect:
         - toggleLabel
         - toggleLabelAlign
         # Coachmark
+        - isOpenByDefault
         - overlayClassName
         - overlayKind
         - overlayRef

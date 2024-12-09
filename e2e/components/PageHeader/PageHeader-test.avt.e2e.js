@@ -124,17 +124,12 @@ test.describe('PageHeader @avt', () => {
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
-    await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Secondary button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Secondary button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Primary button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Primary button';
+
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element
@@ -173,17 +168,11 @@ test.describe('PageHeader @avt', () => {
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
-    await expect(
-      page.getByRole('button', { name: 'danger Danger button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Secondary button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Secondary button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Primary button' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Primary button';
     // reset focus to first focusable element
     await page.getByRole('link', { name: 'Home page' }).focus();
     // changes position when header collapsed

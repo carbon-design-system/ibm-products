@@ -21,8 +21,6 @@ test.describe('CreateTearsheetNarrow @avt', () => {
       },
     });
 
-    await page.getByText('Open CreateTearsheetNarrow').click();
-
     await page
       .locator(`.${pkg.prefix}--create-tearsheet-narrow`)
       .screenshot({ animations: 'disabled' });

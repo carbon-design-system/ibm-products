@@ -99,7 +99,8 @@ const ConditionBuilderContent = ({
   }, [actionState]);
   useEffect(() => {
     if (initialState?.enabledDefault) {
-      setRootState?.(initialState.state);
+      setRootState?.(initialConditionState.current as ConditionBuilderState);
+      initialConditionState.current = null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialState]);
@@ -119,17 +120,12 @@ const ConditionBuilderContent = ({
 
   const onRemove = useCallback(
     (groupId) => {
-      const groups = rootState?.groups?.filter(
-        (group) => groupId !== group?.id
-      );
       setRootState?.({
         ...rootState,
-        groups: rootState ? groups : [],
+        groups: rootState
+          ? rootState?.groups?.filter((group) => groupId !== group?.id)
+          : [],
       });
-      //set the initial state to empty.
-      if (groups?.length === 0) {
-        initialConditionState.current = null;
-      }
     },
     [setRootState, rootState]
   );

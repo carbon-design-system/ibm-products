@@ -122,20 +122,25 @@ test.describe('PageHeader @avt', () => {
       },
     });
 
+    const dangerButton = page.getByRole('button', { name: 'Danger button' });
+    const secondaryButton = page.getByRole('button', {
+      name: 'Secondary button',
+    });
+    const primaryButton = page.getByRole('button', { name: 'Primary button' });
+
     // renders all buttons on large screens by default
+    await expect(dangerButton).toBeVisible();
+    await expect(secondaryButton).toBeVisible();
+    await expect(primaryButton).toBeVisible();
+
     await pressTabKey(page, 15);
 
-    await expect(
-      page.getByRole('button', { name: 'Danger button' })
-    ).toBeFocused();
+    await expect(dangerButton).toBeFocused();
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Secondary button' })
-    ).toBeFocused();
+    await expect(secondaryButton).toBeFocused();
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: 'Primary button' })
-    ).toBeFocused();
+    await expect(primaryButton).toBeFocused();
+
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
     // reset focus to first focusable element

@@ -240,4 +240,37 @@ test.describe('ProductiveCard @avt', () => {
       'ProductiveCard @keyboard-navigation - href Button'
     );
   });
+
+  // hover states
+  test('@avt-hover: validates hover states', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProductiveCard',
+      id: 'ibm-products-components-cards-productivecard--with-overflow',
+    });
+    const menuButton = page.getByRole('button', { label: 'Overflow menu' });
+    const tooltip = page.getByRole('tooltip', { name: 'Overflow menu' });
+
+    await menuButton.hover();
+    await expect(page).toHaveNoACViolations(
+      'ProductiveCard @hover - with overflow'
+    );
+    await expect(tooltip).toBeVisible();
+
+    await visitStory(page, {
+      component: 'ProductiveCard',
+      id: 'ibm-products-components-cards-productivecard--default',
+    });
+    const editButton = page.getByLabel('Edit');
+    const editTooltip = page.getByRole('tooltip', { name: 'Edit' });
+    const deleteButton = page.getByLabel('Delete');
+    const deleteTooltip = page.getByRole('tooltip', { name: 'Delete' });
+
+    await editButton.hover();
+    await expect(page).toHaveNoACViolations('ProductiveCard @hover - default');
+    await expect(editTooltip).toBeVisible();
+
+    await deleteButton.hover();
+    await expect(page).toHaveNoACViolations('ProductiveCard @hover - default');
+    await expect(deleteTooltip).toBeVisible();
+  });
 });

@@ -121,9 +121,13 @@ test.describe('PageHeader @avt', () => {
         carbonTheme: 'white',
       },
     });
+    await page.screenshot({ animations: 'disabled' });
+    await page.waitForLoadState('load');
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
+    console.log(await page.locator('*:focus').textContent());
+
     await expect(
       page.getByRole('button', { name: 'danger Danger button' })
     ).toBeFocused();

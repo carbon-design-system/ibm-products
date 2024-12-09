@@ -26,7 +26,6 @@ import CustomInput from './assets/CustomInput';
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
 
-
 const customOperators = [
   {
     label: 'is greater than',

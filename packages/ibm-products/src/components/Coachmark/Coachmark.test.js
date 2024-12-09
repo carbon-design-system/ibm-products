@@ -62,6 +62,13 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
     </Coachmark>
   );
 
+const isCoachmarkVisible = () => {
+  const coachmarkContainer = screen.getByTestId(dataTestId);
+  const coachmarkButton = coachmarkContainer.getElementsByTagName('button')[0];
+  const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+  return ariaExpanded === 'true';
+};
+
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
@@ -308,5 +315,11 @@ describe(componentName, () => {
   it('tests clamp helper function', () => {
     expect(clamp(100, 50, 20)).toBe(50);
     expect(clamp(40, 10, 50)).toBe(40);
+  it('Check coachmark can be open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
   });
 });

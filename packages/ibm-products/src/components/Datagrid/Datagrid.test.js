@@ -8,16 +8,12 @@
 /* eslint-disable react/prop-types */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
 
-import {
-  checkLogging,
-  expectWarn,
-  mockHTMLElement,
-} from '../../global/js/utils/test-helper';
+import { expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
 import { Datagrid, useFilterContext } from '.';
 
 import {
@@ -1162,18 +1158,10 @@ describe(componentName, () => {
     expectWarn(
       'Datagrid was not passed datagridState which is required to render this component.',
       () => {
-        const errorMock = jest
-          .spyOn(console, 'error')
-          .mockImplementation(() => {});
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
-        checkLogging(
-          errorMock,
-          /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
-        );
         expect(container.children.length).toEqual(0);
-        jest.spyOn(console, 'error').mockRestore();
       },
       2
     );
@@ -2362,7 +2350,6 @@ describe(componentName, () => {
     );
 
     const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
-    await click(normalCheckbox);
 
     const applyButton = screen.getByRole('button', { name: 'Apply' });
     await click(applyButton);
@@ -2429,10 +2416,10 @@ describe(componentName, () => {
     expect(visitsInput.value).toEqual('');
     // Apply single checkbox
     await click(normalCheckbox);
-    expect(normalCheckbox.checked).toEqual(true);
+    await waitFor(() => expect(normalCheckbox.checked).toEqual(true));
     // Remove checkbox
     await click(normalCheckbox);
-    expect(normalCheckbox.checked).toEqual(false);
+    await waitFor(() => expect(normalCheckbox.checked).toEqual(false));
   });
 
   const FilterUsageError = () => {

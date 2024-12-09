@@ -61,6 +61,13 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
     </Coachmark>
   );
 
+const isCoachmarkVisible = () => {
+  const coachmarkContainer = screen.getByTestId(dataTestId);
+  const coachmarkButton = coachmarkContainer.getElementsByTagName('button')[0];
+  const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+  return ariaExpanded === 'true';
+};
+
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
@@ -202,5 +209,13 @@ describe(componentName, () => {
     await expect(screen.getByTestId(dataTestId)).toHaveClass(
       `${pkg.prefix}--coachmark__dark`
     );
+  });
+
+  it('Check coachmark can be open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
   });
 });

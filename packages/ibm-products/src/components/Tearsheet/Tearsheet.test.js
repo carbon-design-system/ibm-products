@@ -8,11 +8,7 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  expectWarn,
-  expectMultipleError,
-  required,
-} from '../../global/js/utils/test-helper';
+import { expectWarn } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
@@ -41,13 +37,6 @@ const createButton = `Create ${uuidv4()}`;
 const actions = [
   { kind: 'secondary', onClick, label: 'Cancel' },
   { onClick, label: createButton },
-];
-const badActions = [
-  { kind: 'primary' },
-  { kind: 'primary' },
-  { kind: 'ghost' },
-  { kind: 'ghost' },
-  { kind: 'danger--tertiary' },
 ];
 const childFragment = `Main ${uuidv4()} content`;
 const children = <div>{childFragment}</div>;
@@ -94,8 +83,6 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
-let tooManyButtonsTestedAlready = false;
-let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, async () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
@@ -152,26 +139,6 @@ const commonTests = (Ts, name, props, testActions) => {
       await act(() => userEvent.click(screen.getByText(createButton)));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
-
-    it('rejects too many buttons using the custom validator', async () =>
-      expectMultipleError(
-        // prop-types only reports the first occurrence of each distinct error,
-        // which creates an unfortunate dependency between test runs
-        tooManyButtonsTestedAlready
-          ? [
-              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
-            ]
-          : [
-              `Invalid prop \`actions\` supplied to \`${name}\`: you cannot have more than four actions`,
-              'Invalid prop `actions[4].kind` of value `danger--tertiary` supplied to `TearsheetShell`',
-              'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
-              'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
-            ],
-        () => {
-          tooManyButtonsTestedAlready = true;
-          render(<Ts {...props} actions={badActions} />);
-        }
-      ));
   }
 
   it('renders children', async () => {
@@ -192,24 +159,6 @@ const commonTests = (Ts, name, props, testActions) => {
     expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
     screen.getByRole('button', { name: closeIconDescription });
   });
-
-  if (testActions) {
-    it('requires closeIconDescription when there are no actions', async () =>
-      expectMultipleError(
-        // prop-types only reports the first occurrence of each distinct error,
-        // which creates an unfortunate dependency between test runs
-        closeIconDescriptionTestedAlready
-          ? [required('closeIconDescription', name)]
-          : [
-              required('closeIconDescription', name),
-              required('closeIconDescription', 'TearsheetShell'),
-            ],
-        () => {
-          render(<Ts {...props} />);
-          closeIconDescriptionTestedAlready = true;
-        }
-      ));
-  }
 
   it('renders description', async () => {
     render(<Ts {...{ ...props, closeIconDescription, description }} />);

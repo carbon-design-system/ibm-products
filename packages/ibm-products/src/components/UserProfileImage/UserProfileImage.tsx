@@ -20,7 +20,6 @@ import { TooltipTrigger } from '../TooltipTrigger';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import pconsole from '../../global/js/utils/pconsole';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -122,16 +121,6 @@ export let UserProfileImage = React.forwardRef<
     },
     ref
   ) => {
-    const validateProps = () => {
-      if (image && !imageDescription) {
-        pconsole.error(
-          'An `image` was provided without an `imageDescription`.'
-        );
-      }
-    };
-
-    validateProps();
-
     const carbonPrefix = usePrefix();
     const icons = {
       user: {

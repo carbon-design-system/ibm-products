@@ -21,7 +21,6 @@ import { ButtonProps } from '@carbon/react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 
 import { EmptyStateContent } from './EmptyStateContent';
-import pconsole from '../../global/js/utils/pconsole';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
@@ -121,16 +120,6 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       title,
       ...rest
     } = props;
-
-    const validateProps = () => {
-      if (illustration && !illustrationDescription) {
-        pconsole.error(
-          'An `illustration` was provided without an `illustrationDescription`.'
-        );
-      }
-    };
-
-    validateProps();
 
     return (
       <div

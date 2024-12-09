@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { expectError, required } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
@@ -111,11 +110,6 @@ describe(componentName, () => {
     );
     expect(tooltipElement).toBeTruthy();
   });
-
-  it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), () => {
-      renderComponent({ image: 'path_to_image.jpg' });
-    }));
 
   it('should display a custom icon if one is provided', async () => {
     const { container } = renderComponent({

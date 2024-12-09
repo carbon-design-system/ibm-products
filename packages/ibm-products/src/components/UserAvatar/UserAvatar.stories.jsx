@@ -156,5 +156,5 @@ WithImage.storyName = 'WithImage';
 WithImage.args = {
   image: headshot,
   tooltipText: 'TW, Thomas J. Watson user profile',
-  imageDescription: null,
+  imageDescription: 'Avatar of Thomas J. Watson',
 };

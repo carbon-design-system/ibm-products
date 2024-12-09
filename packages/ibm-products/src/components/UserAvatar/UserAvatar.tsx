@@ -19,7 +19,6 @@ import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { User } from '@carbon/react/icons';
 import '../../global/js/utils/props-helper';
-import pconsole from '../../global/js/utils/pconsole';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 
@@ -125,16 +124,6 @@ export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
     },
     ref
   ) => {
-    const validateProps = () => {
-      if (image && !imageDescription) {
-        pconsole.error(
-          'An `image` was provided without an `imageDescription`.'
-        );
-      }
-    };
-
-    validateProps();
-
     const carbonPrefix = usePrefix();
     const iconSize = {
       sm: 16,

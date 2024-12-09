@@ -559,28 +559,29 @@ const getNavProps = (navigation) =>
     ? {
         navigation: (
           <TabList>
-            {navigation.map((nav) => (
-              <Tab>{nav}</Tab>
+            {navigation.map((nav, index) => (
+              <Tab key={index}>{nav}</Tab>
             ))}
           </TabList>
         ),
       }
     : null;
 
-const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
-  navigation ? (
-    <div className={props.className}>
+const ContainerDivOrTabs = ({ children, navigation, ...props }) => {
+  return navigation ? (
+    <div className={`${props.className} test-hello1`}>
       <Tabs {...props}>{children}</Tabs>
     </div>
   ) : (
     <div {...props}>{children}</div>
   );
+};
 
 const ChildrenMaybeTabPanels = ({ children, navigation, ...props }) =>
   navigation ? (
     <TabPanels {...props}>
-      {navigation.map((nav) => (
-        <TabPanel>
+      {navigation.map((nav, index) => (
+        <TabPanel key={index}>
           <label>Panel for "{nav}"</label>
           {children}
         </TabPanel>
@@ -896,3 +897,23 @@ demo.args = {
   actionBarItems: 4,
   ...commonArgs,
 };
+
+const testNav = ['One', 'Two', 'Three', 'Four'];
+
+const TabTemplate = () => (
+  <Tabs>
+    <TabList>
+      {testNav.map((t) => (
+        <Tab key={t}>{t}</Tab>
+      ))}
+    </TabList>
+    <TabPanels>
+      {testNav.map((t) => (
+        <TabPanel key={t}>Content for tab: {t}</TabPanel>
+      ))}
+    </TabPanels>
+  </Tabs>
+);
+
+export const tabIssueStory = TabTemplate.bind({});
+tabIssueStory.storyName = 'Only to demonstrate issue with Tabs';

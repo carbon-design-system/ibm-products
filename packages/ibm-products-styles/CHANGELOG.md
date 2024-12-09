@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.52.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.52.0-rc.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+
+
+
+
+
 # [2.51.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.51.0-rc.0...@carbon/ibm-products-styles@2.51.0) (2024-12-04)
 
 **Note:** Version bump only for package @carbon/ibm-products-styles

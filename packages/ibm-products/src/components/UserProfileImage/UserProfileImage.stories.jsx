@@ -78,7 +78,7 @@ export default {
           text={
             <div>
               This component is deprecated and will be removed in the next major
-              version. Please migrate to{' '}
+              version. Please migrate to {/* cspell:disable-next-line */}
               <a href="/?path=/docs/ibm-products-components-user-avatar-useravatar--docs">
                 UserAvatar
               </a>

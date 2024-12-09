@@ -897,23 +897,3 @@ demo.args = {
   actionBarItems: 4,
   ...commonArgs,
 };
-
-const testNav = ['One', 'Two', 'Three', 'Four'];
-
-const TabTemplate = () => (
-  <Tabs>
-    <TabList>
-      {testNav.map((t) => (
-        <Tab key={t}>{t}</Tab>
-      ))}
-    </TabList>
-    <TabPanels>
-      {testNav.map((t) => (
-        <TabPanel key={t}>Content for tab: {t}</TabPanel>
-      ))}
-    </TabPanels>
-  </Tabs>
-);
-
-export const tabIssueStory = TabTemplate.bind({});
-tabIssueStory.storyName = 'Only to demonstrate issue with Tabs';

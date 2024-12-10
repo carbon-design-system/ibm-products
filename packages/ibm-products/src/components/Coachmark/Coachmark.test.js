@@ -315,11 +315,12 @@ describe(componentName, () => {
   it('tests clamp helper function', () => {
     expect(clamp(100, 50, 20)).toBe(50);
     expect(clamp(40, 10, 50)).toBe(40);
-  it('Check coachmark can be open by default', () => {
-    renderCoachmark({
-      'data-testid': dataTestId,
-      isOpenByDefault: true,
+    it('Check coachmark can be open by default', () => {
+      renderCoachmark({
+        'data-testid': dataTestId,
+        isOpenByDefault: true,
+      });
+      expect(isCoachmarkVisible()).toBeTruthy();
     });
-    expect(isCoachmarkVisible()).toBeTruthy();
   });
 });

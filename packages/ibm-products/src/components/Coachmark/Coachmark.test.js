@@ -75,6 +75,14 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
+  it('Check coachmark can be open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = renderCoachmark();
     await expect(container).toBeAccessible(componentName);
@@ -315,12 +323,5 @@ describe(componentName, () => {
   it('tests clamp helper function', () => {
     expect(clamp(100, 50, 20)).toBe(50);
     expect(clamp(40, 10, 50)).toBe(40);
-    it('Check coachmark can be open by default', () => {
-      renderCoachmark({
-        'data-testid': dataTestId,
-        isOpenByDefault: true,
-      });
-      expect(isCoachmarkVisible()).toBeTruthy();
-    });
   });
 });

@@ -332,11 +332,23 @@ export let NotificationsPanel = React.forwardRef(
       setAllNotifications(data);
     }, [data]);
 
-    useClickOutside(ref || notificationPanelRef, () => {
-      onClickOutside();
-      setTimeout(() => {
-        triggerButtonRef?.current?.focus();
-      }, 0);
+    useClickOutside(ref ?? notificationPanelRef, (target) => {
+      // Trigger element should not be included in the click outside functionality
+      // otherwise the panel will open and close immediately after opening
+      const transformedClasses = `.${Array.from(
+        triggerButtonRef?.current?.classList
+      ).join('.')}`;
+      const triggerElementType = triggerButtonRef?.current?.tagName;
+      const triggerSelector = `${triggerElementType.toLowerCase()}${transformedClasses}`;
+      if (target.closest(triggerSelector)) {
+        return;
+      }
+      if (open && shouldRender) {
+        onClickOutside();
+        setTimeout(() => {
+          triggerButtonRef?.current?.focus();
+        }, 0);
+      }
     });
 
     useEffect(() => {

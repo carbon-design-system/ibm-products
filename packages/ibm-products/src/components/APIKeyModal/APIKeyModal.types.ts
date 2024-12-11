@@ -75,9 +75,14 @@ interface APIKeyModalCommonProps {
    */
   generateSuccessBody?: ReactNode;
   /**
+   * * @deprecated use `generateSuccessMessage` instead
    * title for a successful key generation
    */
   generateSuccessTitle?: string;
+  /**
+   * success message for a successful key generation
+   */
+  generateSuccessMessage?: string;
   /**
    * default title for the modal in generate key mode
    */
@@ -155,6 +160,10 @@ interface APIKeyModalCommonProps {
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel?: string;
+  /**
+   * helper text for password input
+   */
+  helperText?: string;
 }
 
 type CustomStepConditionalProps = {
@@ -190,9 +199,14 @@ type EditingConditionalProps = {
    */
   editSuccess: boolean;
   /**
+   * * @deprecated use `editSuccessMessage` instead
    * title for a successful edit
    */
-  editSuccessTitle: string;
+  editSuccessTitle?: string;
+  /**
+   * success message for edit
+   */
+  editSuccessMessage: string;
 };
 
 type HasDownloadLinkProps = {
@@ -203,7 +217,7 @@ type HasDownloadLinkProps = {
   /**
    * the content that appears that indicates the key is downloadable
    */
-  downloadBodyText: string;
+  downloadBodyText?: string;
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */

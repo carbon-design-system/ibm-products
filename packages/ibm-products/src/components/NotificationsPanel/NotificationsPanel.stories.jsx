@@ -161,14 +161,16 @@ const Template = (args) => {
 
 const EmptyNotifications = (args) => {
   const [open, setOpen] = useState(false);
+  const notificationTriggerRef = useRef(null);
   return (
     <>
-      {renderUIShellHeader(open, setOpen)}
+      {renderUIShellHeader(open, setOpen, notificationTriggerRef)}
       <NotificationsPanel
         {...args}
         open={open}
         onClickOutside={() => setOpen(false)}
         doNotDisturbDefaultToggled
+        triggerButtonRef={notificationTriggerRef}
       />
     </>
   );

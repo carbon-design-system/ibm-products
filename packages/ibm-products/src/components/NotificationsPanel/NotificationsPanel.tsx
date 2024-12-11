@@ -236,7 +236,7 @@ export interface NotificationsPanelProps {
   /**
    * Reference to trigger button
    */
-  triggerButtonRef?: RefObject<any>;
+  triggerButtonRef: RefObject<any>;
 
   /**
    * Sets the View all button text
@@ -335,13 +335,15 @@ export let NotificationsPanel = React.forwardRef(
     useClickOutside(ref ?? notificationPanelRef, (target) => {
       // Trigger element should not be included in the click outside functionality
       // otherwise the panel will open and close immediately after opening
-      const transformedClasses = `.${Array.from(
-        triggerButtonRef?.current?.classList
-      ).join('.')}`;
-      const triggerElementType = triggerButtonRef?.current?.tagName;
-      const triggerSelector = `${triggerElementType.toLowerCase()}${transformedClasses}`;
-      if (target.closest(triggerSelector)) {
-        return;
+      if (triggerButtonRef) {
+        const transformedClasses = `.${Array.from(
+          triggerButtonRef?.current?.classList
+        ).join('.')}`;
+        const triggerElementType = triggerButtonRef?.current?.tagName;
+        const triggerSelector = `${triggerElementType.toLowerCase()}${transformedClasses}`;
+        if (target.closest(triggerSelector)) {
+          return;
+        }
       }
       onClickOutside();
       setTimeout(() => {
@@ -975,9 +977,9 @@ NotificationsPanel.propTypes = {
   todayLabel: PropTypes.string,
 
   /**
-   * Sets the today label text
+   * Sets triggerButtonRef value, element where focus will return to
    */
-  triggerButtonRef: PropTypes.any,
+  triggerButtonRef: PropTypes.any.isRequired,
 
   /**
    * Sets the View all button text

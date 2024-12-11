@@ -56,7 +56,13 @@ export interface AddSelectProps {
 
 export const AddSelect = forwardRef(
   (
-    { items, globalFilters, ...props }: AddSelectProps,
+    {
+      items = {
+        entries: [],
+      },
+      globalFilters,
+      ...props
+    }: AddSelectProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const useNormalizedItems = !!items.entries.find((item) => item.children);
@@ -177,24 +183,6 @@ AddSelect.propTypes = {
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
-};
-
-AddSelect.defaultProps = {
-  closeIconDescription: '',
-  description: '',
-  itemsLabel: '',
-  items: {
-    entries: [],
-  },
-  multi: false,
-  noResultsDescription: '',
-  noResultsTitle: '',
-  onClose: () => {},
-  onCloseButtonText: '',
-  onSubmit: () => {},
-  onSubmitButtonText: '',
-  open: false,
-  title: '',
 };
 
 AddSelect.displayName = componentName;

@@ -32,15 +32,11 @@ const ButtonWrapper = ({
       onClick={() => {
         setIsTearsheetOpen(!isTearsheetOpen);
         if (typeof onClick === 'function') {
-          onClick();
+          onClick?.();
         }
       }}
     />
   );
-};
-
-ButtonWrapper.defaultProps = {
-  onClick: () => {},
 };
 
 ButtonWrapper.propTypes = {

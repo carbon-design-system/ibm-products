@@ -21,7 +21,6 @@ test.describe('CreateSidePanel @avt', () => {
       },
     });
 
-    await page.getByText('Open side panel').click();
     await page
       .locator(`#${pkg.prefix}--side-panel`)
       .screenshot({ animations: 'disabled' });

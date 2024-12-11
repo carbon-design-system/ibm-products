@@ -86,7 +86,7 @@ export let HTTPErrorOther = React.forwardRef(
 /**@ts-ignore*/
 HTTPErrorOther.deprecated = {
   level: 'warn',
-  details: `Please replace ${componentName} with FullPageError`,
+  details: `${componentName} is deprecated. Please migrate to FullPageError by running npx @carbon/upgrade migrate ibm-products-update-http-errors --write`,
 };
 
 // Return a placeholder if not released and not enabled by feature flag

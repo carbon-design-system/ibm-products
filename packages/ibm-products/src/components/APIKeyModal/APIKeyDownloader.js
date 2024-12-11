@@ -65,7 +65,7 @@ APIKeyDownloader.propTypes = {
   /**
    * body content for the downloader
    */
-  body: PropTypes.string.isRequired,
+  body: PropTypes.string,
   /**
    * aria-label for the download link
    */

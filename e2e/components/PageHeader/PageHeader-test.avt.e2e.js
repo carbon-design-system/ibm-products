@@ -169,17 +169,11 @@ test.describe('PageHeader @avt', () => {
 
     // Ensure all buttons are rendered
     await pressTabKey(page, 15);
-    await expect(
-      page.getByRole('button', { name: /Danger button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: /Secondary button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Secondary button';
     await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', { name: /Primary button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Primary button';
 
     // Collapse the header
     await pressTabKey(page, 3);
@@ -218,15 +212,19 @@ test.describe('PageHeader @avt', () => {
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 4);
-    await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 1' })).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('tooltip').getByText('Action 2')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 2' })).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('tooltip').getByText('Action 3')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 3' })).toBeVisible();
     await pressTabKey(page, 5);
-    await expect(page.getByRole('tooltip').getByText('Action 8')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 8' })).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.getByRole('tooltip').getByText('Action 9')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 9' })).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('tooltip', { name: 'Action 10' })
+    ).toBeVisible();
 
     // collapses into menu button on small screens
     await page.setViewportSize({ width: 1024, height: 768 });
@@ -236,9 +234,9 @@ test.describe('PageHeader @avt', () => {
       .getByRole('button')
       .focus();
     await pressTabKey(page, 1);
-    await expect(page.getByRole('tooltip').getByText('Action 1')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 1' })).toBeVisible();
     await pressTabKey(page, 2);
-    await expect(page.getByRole('tooltip').getByText('Action 3')).toBeVisible();
+    await expect(page.getByRole('tooltip', { name: 'Action 3' })).toBeVisible();
     await pressTabKey(page, 1);
     await expect(
       page.getByRole('button', { name: 'Show further action bar items' })

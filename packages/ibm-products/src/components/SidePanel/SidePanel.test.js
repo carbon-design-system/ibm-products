@@ -163,7 +163,7 @@ describe('SidePanel', () => {
       `.${blockClass}__close-button`
     );
     await act(() => userEvent.click(closeIconButton));
-    rerender(<SlideIn placement="left" open={false} />);
+    await act(() => rerender(<SlideIn placement="left" open={false} />));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineStart).toBe('0');
   });

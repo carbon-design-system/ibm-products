@@ -55,6 +55,8 @@ test.describe('APIKeyModal @avt', () => {
       'APIKeyModal @avt-instant-generate-focus-trap'
     );
 
+    await page.keyboard.press('Tab');
+
     const apiKeyInput = page.getByLabel('Unique API Key');
     await expect(apiKeyInput).toBeFocused();
 

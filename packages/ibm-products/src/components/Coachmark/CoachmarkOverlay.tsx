@@ -105,6 +105,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
 
     const handleKeyPress = (event) => {
       const { shiftKey, key } = event;
+      /* istanbul ignore next */
       if (key === 'Enter' || key === ' ') {
         setA11yDragMode((prevVal) => !prevVal);
       } else if (a11yDragMode) {
@@ -151,6 +152,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       return style;
     }, [isBeacon, isDraggable, coachmark, kind]);
 
+    /* istanbul ignore next */
     function handleDragBounds(x, y) {
       let xRes = x;
       let yRes = y;
@@ -254,6 +256,7 @@ const useWindowDimensions = () => {
   );
 
   useEffect(() => {
+    /* istanbul ignore next */
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
     }

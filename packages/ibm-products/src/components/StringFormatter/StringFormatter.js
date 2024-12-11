@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -20,6 +20,7 @@ import {
   propMappingFunction,
 } from './utils/enums';
 import { allPropTypes } from '../../global/js/utils/props-helper';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--string-formatter`;
 const componentName = 'StringFormatter';
@@ -48,15 +49,19 @@ export let StringFormatter = React.forwardRef(
     },
     ref
   ) => {
+    const contentRef = useRef(null);
+
+    useIsomorphicEffect(() => {
+      contentRef.current.style.maxWidth = width;
+      contentRef.current.style.WebkitLineClamp = lines;
+    }, [lines, width]);
+
     const stringFormatterContent = (
       <span
+        ref={contentRef}
         className={cx(`${blockClass}--content`, {
           [`${blockClass}--truncate`]: truncate,
         })}
-        style={{
-          maxWidth: width,
-          WebkitLineClamp: lines,
-        }}
       >
         {value}
       </span>

@@ -104,10 +104,10 @@ export interface EmptyStateProps {
  */
 export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
   ({ v2 = false, ...props }, ref) => {
-    // todo: deprecate v1
     if (v2) {
       return <EmptyStateV2 {...props} />;
     }
+
     const {
       action,
       className,
@@ -120,6 +120,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       title,
       ...rest
     } = props;
+
     return (
       <div
         {

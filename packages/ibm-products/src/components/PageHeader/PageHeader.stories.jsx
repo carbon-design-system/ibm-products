@@ -559,28 +559,29 @@ const getNavProps = (navigation) =>
     ? {
         navigation: (
           <TabList>
-            {navigation.map((nav) => (
-              <Tab>{nav}</Tab>
+            {navigation.map((nav, index) => (
+              <Tab key={index}>{nav}</Tab>
             ))}
           </TabList>
         ),
       }
     : null;
 
-const ContainerDivOrTabs = ({ children, navigation, ...props }) =>
-  navigation ? (
-    <div className={props.className}>
+const ContainerDivOrTabs = ({ children, navigation, ...props }) => {
+  return navigation ? (
+    <div className={`${props.className} test-hello1`}>
       <Tabs {...props}>{children}</Tabs>
     </div>
   ) : (
     <div {...props}>{children}</div>
   );
+};
 
 const ChildrenMaybeTabPanels = ({ children, navigation, ...props }) =>
   navigation ? (
     <TabPanels {...props}>
-      {navigation.map((nav) => (
-        <TabPanel>
+      {navigation.map((nav, index) => (
+        <TabPanel key={index}>
           <label>Panel for "{nav}"</label>
           {children}
         </TabPanel>

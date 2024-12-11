@@ -343,12 +343,10 @@ export let NotificationsPanel = React.forwardRef(
       if (target.closest(triggerSelector)) {
         return;
       }
-      if (open && shouldRender) {
-        onClickOutside();
-        setTimeout(() => {
-          triggerButtonRef?.current?.focus();
-        }, 0);
-      }
+      onClickOutside();
+      setTimeout(() => {
+        triggerButtonRef?.current?.focus();
+      }, 0);
     });
 
     useEffect(() => {

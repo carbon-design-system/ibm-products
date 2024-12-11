@@ -8,6 +8,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { CardHeader } from '.';
+import { AILabel } from '@carbon/react';
 import { pkg } from '../../settings';
 
 const { name } = CardHeader;
@@ -49,5 +50,14 @@ describe(name, () => {
     };
     const { getByText } = render(<CardHeader {...props} />);
     expect(getByText('action 1')).toBeVisible();
+  });
+
+  it('should respect decorator prop', () => {
+    const { container } = render(<CardHeader decorator={<AILabel />} />);
+    expect(
+      container.querySelector(
+        `.${blockClass}__header__inner-wrapper--decorator`
+      )
+    ).not.toBeNull();
   });
 });

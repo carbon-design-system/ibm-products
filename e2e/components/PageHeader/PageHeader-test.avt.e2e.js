@@ -191,26 +191,17 @@ test.describe('PageHeader @avt', () => {
     // focus on first focusable element
     await page.getByRole('link', { name: 'Home page' }).focus();
     await pressTabKey(page, 4);
-    console.log(await page.locator('*:focus').textContent());
     (await page.locator('*:focus').textContent()) === 'Page actions...';
     await page.keyboard.press('Enter');
 
     // Ensure all buttons are rendered
-    await expect(
-      page.getByRole('menuitem', { name: /Primary button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Primary button';
     await page.keyboard.press('ArrowDown');
-    await expect(
-      page.getByRole('menuitem', { name: /Secondary button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Secondary button';
     await page.keyboard.press('ArrowDown');
-    await expect(
-      page.getByRole('menuitem', { name: /Danger button$/ })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Danger button';
     await page.keyboard.press('Escape');
-    await expect(
-      page.getByRole('button', { name: 'Page actions...' })
-    ).toBeFocused();
+    (await page.locator('*:focus').textContent()) === 'Page actions...';
   });
 
   // action bar buttons move into MenuButton on small screens

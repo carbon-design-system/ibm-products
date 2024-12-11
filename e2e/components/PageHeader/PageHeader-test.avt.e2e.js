@@ -173,12 +173,17 @@ test.describe('PageHeader @avt', () => {
     (await page.locator('*:focus').textContent()) === 'Secondary button';
     await page.keyboard.press('Tab');
     (await page.locator('*:focus').textContent()) === 'Primary button';
-    // reset focus to first focusable element
-    await page.getByRole('link', { name: 'Home page' }).focus();
-    // changes position when header collapsed
-    await page.locator(`.page-header-stories__dummy-content`).first().hover();
-    await page.mouse.wheel(0, 180);
-    await pressTabKey(page, 4);
+
+    // collapse header through args
+    await visitStory(page, {
+      component: 'PageHeader',
+      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some&args=collapseHeader:!true',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await page.screenshot({ animations: 'disabled' });
+    await pressTabKey(page, 5);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();

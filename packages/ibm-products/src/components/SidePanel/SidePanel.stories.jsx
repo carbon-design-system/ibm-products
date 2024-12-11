@@ -464,14 +464,10 @@ export default {
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideOverTemplate = ({
-  minimalContent,
-  actions,
-  aiLabel,
-  slug,
-  decorator,
-  ...args
-}, context) => {
+const SlideOverTemplate = (
+  { minimalContent, actions, aiLabel, slug, decorator, ...args },
+  context
+) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const testRef = useRef(undefined);
   const buttonRef = useRef(undefined);
@@ -566,7 +562,10 @@ const FirstElementDisabledTemplate = (
 };
 
 // eslint-disable-next-line react/prop-types
-const StepTemplate = ({ actions, aiLabel, slug, decorator, ...args }, context) => {
+const StepTemplate = (
+  { actions, aiLabel, slug, decorator, ...args },
+  context
+) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [currentStep, setCurrentStep] = useState(0);
   const buttonRef = useRef(undefined);
@@ -602,7 +601,10 @@ const StepTemplate = ({ actions, aiLabel, slug, decorator, ...args }, context) =
 };
 
 // eslint-disable-next-line react/prop-types
-const SlideInTemplate = ({ actions, aiLabel, slug, decorator, ...args }, context) => {
+const SlideInTemplate = (
+  { actions, aiLabel, slug, decorator, ...args },
+  context
+) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const buttonRef = useRef(undefined);
 

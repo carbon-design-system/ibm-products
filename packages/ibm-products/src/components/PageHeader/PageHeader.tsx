@@ -52,7 +52,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import useOverflow from './hooks/useOverflow';
+import { replaceOverflowHeight } from '../../global/js/utils/replaceWithOverflow';
 
 const componentName = 'PageHeader';
 
@@ -903,13 +903,11 @@ export let PageHeader = React.forwardRef(
 
     const displayedBreadcrumbs = getBreadcrumbs();
 
-    const longTitleRef = useRef<HTMLSpanElement>(null);
-    const titleRef = useRef<HTMLSpanElement>(null);
-
-    const isEllipsisApplied = useOverflow({
-      longRef: longTitleRef,
-      shortRef: titleRef,
-      text: subtitle,
+    const subtitleRef = useRef<HTMLSpanElement>(null);
+    const overflowSubtitleRef = useRef<HTMLSpanElement>(null);
+    const isOverflowing = replaceOverflowHeight({
+      overflowRef: overflowSubtitleRef,
+      ref: subtitleRef,
     });
 
     return (
@@ -1049,21 +1047,21 @@ export let PageHeader = React.forwardRef(
               {subtitle && (
                 <Row className={`${blockClass}__subtitle-row`}>
                   <Column className={`${blockClass}__subtitle`}>
-                    {isEllipsisApplied ? (
+                    {isOverflowing ? (
                       <DefinitionTooltip
                         definition={subtitle}
                         className={`${blockClass}__subtitle-tooltip`}
                       >
                         <span
-                          ref={titleRef}
-                          className={`${blockClass}__subtitle-text--long`}
+                          ref={overflowSubtitleRef}
+                          className={`${blockClass}__subtitle-text`}
                         >
                           {subtitle}
                         </span>
                       </DefinitionTooltip>
                     ) : (
                       <span
-                        ref={longTitleRef}
+                        ref={subtitleRef}
                         className={`${blockClass}__subtitle-text`}
                       >
                         {subtitle}

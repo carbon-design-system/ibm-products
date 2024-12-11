@@ -564,11 +564,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle-text {
-    display: block;
-    white-space: nowrap;
-  }
-
-  .#{$block-class}__subtitle-text--long {
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;

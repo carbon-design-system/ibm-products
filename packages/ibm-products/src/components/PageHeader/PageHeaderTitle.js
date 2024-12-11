@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { DefinitionTooltip, SkeletonText } from '@carbon/react';
 import { EditInPlace } from '../EditInPlace';
-import useOverflow from './hooks/useOverflow';
+import { replaceOverflowWidth } from '../../global/js/utils/replaceWithOverflow';
 
 /**
  *
@@ -42,11 +42,9 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
 
   const longTitleRef = useRef(undefined);
   const titleRef = useRef(undefined);
-
-  const isEllipsisApplied = useOverflow({
-    longRef: longTitleRef,
-    shortRef: titleRef,
-    text,
+  const isEllipsisApplied = replaceOverflowWidth({
+    overflowRef: longTitleRef,
+    ref: titleRef,
   });
 
   if (text || !content) {

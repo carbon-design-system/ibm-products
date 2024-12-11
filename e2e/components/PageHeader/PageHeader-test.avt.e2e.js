@@ -9,6 +9,7 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
+import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.use({ viewport: { width: 1600, height: 900 } });
 
@@ -166,36 +167,50 @@ test.describe('PageHeader @avt', () => {
       },
     });
 
-    // renders all buttons on large screens by default
+    // Ensure all buttons are rendered
     await pressTabKey(page, 15);
-    (await page.locator('*:focus').textContent()) === 'Danger button';
+    await expect(
+      page.getByRole('button', { name: /Danger button$/ })
+    ).toBeFocused();
     await page.keyboard.press('Tab');
-    (await page.locator('*:focus').textContent()) === 'Secondary button';
+    await expect(
+      page.getByRole('button', { name: /Secondary button$/ })
+    ).toBeFocused();
     await page.keyboard.press('Tab');
-    (await page.locator('*:focus').textContent()) === 'Primary button';
+    await expect(
+      page.getByRole('button', { name: /Primary button$/ })
+    ).toBeFocused();
 
-    // collapse header through args
-    await visitStory(page, {
-      component: 'PageHeader',
-      id: 'ibm-products-components-page-header-pageheader--fully-loaded-and-some&args=collapseHeader:!true',
-      globals: {
-        carbonTheme: 'white',
-      },
-    });
-    await page.screenshot({ animations: 'disabled' });
-    await pressTabKey(page, 5);
+    // Collapse the header
+    await pressTabKey(page, 3);
+    await expect(page.getByLabel('Collapse the page header')).toBeFocused();
+    await page.keyboard.press('Enter');
+    await page.waitForSelector(
+      `.${pkg.prefix}--page-header__page-actions--in-breadcrumb`
+    );
+    // focus on first focusable element
+    await page.getByRole('link', { name: 'Home page' }).focus();
+    await pressTabKey(page, 4);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();
     await page.keyboard.press('Enter');
-    (await page.locator('*:focus').textContent()) === 'Primary button';
+
+    // Ensure all buttons are rendered
+    await expect(
+      page.getByRole('menuitem', { name: /Primary button$/ })
+    ).toBeFocused();
     await page.keyboard.press('ArrowDown');
-    (await page.locator('*:focus').textContent()) === 'Secondary button';
+    await expect(
+      page.getByRole('menuitem', { name: /Secondary button$/ })
+    ).toBeFocused();
     await page.keyboard.press('ArrowDown');
-    (await page.locator('*:focus').textContent()) === 'Danger button';
+    await expect(
+      page.getByRole('menuitem', { name: /Danger button$/ })
+    ).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(
-      page.getByRole('button', { name: 'Page actions' })
+      page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();
   });
 

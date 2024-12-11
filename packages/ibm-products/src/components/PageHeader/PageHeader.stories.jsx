@@ -559,8 +559,8 @@ const getNavProps = (navigation) =>
     ? {
         navigation: (
           <TabList>
-            {navigation.map((nav, index) => (
-              <Tab key={index}>{nav}</Tab>
+            {navigation.map((nav) => (
+              <Tab key={nav}>{nav}</Tab>
             ))}
           </TabList>
         ),
@@ -569,7 +569,7 @@ const getNavProps = (navigation) =>
 
 const ContainerDivOrTabs = ({ children, navigation, ...props }) => {
   return navigation ? (
-    <div className={`${props.className} test-hello1`}>
+    <div className={props.className}>
       <Tabs {...props}>{children}</Tabs>
     </div>
   ) : (
@@ -580,8 +580,8 @@ const ContainerDivOrTabs = ({ children, navigation, ...props }) => {
 const ChildrenMaybeTabPanels = ({ children, navigation, ...props }) =>
   navigation ? (
     <TabPanels {...props}>
-      {navigation.map((nav, index) => (
-        <TabPanel key={index}>
+      {navigation.map((nav) => (
+        <TabPanel key={nav}>
           <label>Panel for "{nav}"</label>
           {children}
         </TabPanel>

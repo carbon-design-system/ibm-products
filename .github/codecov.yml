@@ -28,3 +28,24 @@ component_management:
       name: ibm-products-web-components
       paths:
         - ../packages/ibm-products-web-components/**
+
+flag_management:
+  default_rules: # the rules that will be followed for any flag added, generally
+    carryforward: true
+    statuses:
+      - type: project
+        target: auto
+        threshold: 1%
+      - type: patch
+        target: 80%
+  individual_flags:
+    - name: exclude_deprecated #custom flag name to view the project coverage without deprecated components
+      paths:
+        - '../packages/ibm-products/src/components/**/*.deprecated.test.js' #fill in your own path. Note, accepts globs, not regexes
+        - '../packages/ibm-products/src/components/**/*.deprecated.test.ts' #fill in your own path. Note, accepts globs, not regexes
+      carryforward: true
+      statuses:
+        - type: project
+          target: 20%
+        - type: patch
+          target: 100%

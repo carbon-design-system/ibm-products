@@ -20,5 +20,38 @@ test.describe('Checklist @avt', () => {
       },
     });
     await expect(page).toHaveNoACViolations('Checklist @avt-default-state');
+
+    const buttonEle = page.locator('[aria-label="Checklist toggle"]');
+    const viewButton = page.getByRole('button', { name: 'View all (10)' });
+    //press tab to move focus to buttonELement
+    await page.keyboard.press('Tab');
+    await expect(buttonEle).toBeInViewport();
+    await expect(buttonEle).toBeFocused();
+
+    //check the checklist is expanded
+    await expect(buttonEle).toHaveAttribute('aria-expanded', 'true');
+    await expect(viewButton).toBeVisible();
+    //Press enter to collapse the checklist
+    await page.keyboard.press('Enter');
+    await expect(buttonEle).toHaveAttribute('aria-expanded', 'false');
+
+    //Press escape to clear the focus
+    await page.keyboard.press('Escape');
+
+    //check button element is showing Toggle tooltip while hovering
+    await buttonEle.hover();
+    const tooltipContent = await page.getByText('Toggle');
+    await expect(tooltipContent).toBeVisible();
+  });
+
+  test('@avt-task-state', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Checklist',
+      id: 'ibm-products-onboarding-checklist--task-states',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Checklist @avt-task-state');
   });
 });

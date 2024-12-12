@@ -355,7 +355,7 @@ const ReturnFocusTemplate = ({ actions, decorator, slug, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          decorator={aiLabel && sampleDecorator(decorator)}
+          decorator={decorator && sampleDecorator(decorator)}
           slug={slug && sampleDecorator(slug)}
           launcherButtonRef={buttonRef}
         >

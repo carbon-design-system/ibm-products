@@ -179,7 +179,7 @@ describe('SidePanel', () => {
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
     await act(() => fireEvent.animationStart(outerElement));
-    rerender(<SlideIn placement="right" open={false} />);
+    await act(() => rerender(<SlideIn placement="right" open={false} />));
     await act(() => fireEvent.animationEnd(outerElement));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
@@ -219,16 +219,18 @@ describe('SidePanel', () => {
     );
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     await act(() => userEvent.click(closeIconButton));
-    rerender(
-      <SidePanel
-        title={title}
-        includeOverlay
-        open={false}
-        onRequestClose={onRequestCloseFn}
-        id="sidepanel-id"
-      >
-        Content
-      </SidePanel>
+    await act(() =>
+      rerender(
+        <SidePanel
+          title={title}
+          includeOverlay
+          open={false}
+          onRequestClose={onRequestCloseFn}
+          id="sidepanel-id"
+        >
+          Content
+        </SidePanel>
+      )
     );
     setTimeout(() => {
       expect(overlayElement).not.toBeInTheDocument();

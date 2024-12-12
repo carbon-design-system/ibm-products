@@ -131,10 +131,9 @@ export const claimFocus = (
       specifiedEl &&
       window?.getComputedStyle(specifiedEl)?.display !== 'none'
     ) {
-      setTimeout(() => specifiedEl.focus());
-      return;
+      setTimeout(() => specifiedEl.focus(), 0);
     }
+  } else {
+    setTimeout(() => firstElement?.focus(), 0);
   }
-
-  setTimeout(() => firstElement?.focus(), 0);
 };

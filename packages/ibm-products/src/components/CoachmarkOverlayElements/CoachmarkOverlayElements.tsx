@@ -80,11 +80,11 @@ export interface CoachmarkOverlayElementsProps {
   /**
    * Callback called when clicking on the Next button.
    */
-  onClickNext?: () => void;
+  onNext?: () => void;
   /**
    * Callback called when clicking on the Previous button.
    */
-  onClickBack?: () => void;
+  onBack?: () => void;
   /**
    * Current step of the coachmarks.
    */
@@ -108,8 +108,8 @@ const defaults = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
-  onClickNext: undefined,
-  onClickBack: undefined,
+  onNext: undefined,
+  onBack: undefined,
   currentStep: 0,
 };
 /**
@@ -131,8 +131,8 @@ export let CoachmarkOverlayElements = React.forwardRef<
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
-      onClickNext = defaults.onClickNext,
-      onClickBack = defaults.onClickBack,
+      onNext = defaults.onNext,
+      onBack = defaults.onBack,
       // Collect any other property values passed in.
       ...rest
     },
@@ -162,6 +162,16 @@ export let CoachmarkOverlayElements = React.forwardRef<
       () => renderMedia?.({ playStep: currentProgStep }),
       [currentProgStep, renderMedia]
     );
+
+    useEffect(() => {
+      // When current step is set by props
+      // scroll to the appropriate view on the carrousel
+      const targetStep = clamp(currentStep, progStepFloor, progStepCeil);
+
+      scrollRef?.current?.scrollToView?.(targetStep);
+      // Avoid circular call to this hook
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentStep]);
 
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
@@ -240,7 +250,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ) : (
           <>
             <Carousel
-              disableArrowScroll
               ref={scrollRef as RefObject<HTMLDivElement>}
               onScroll={(scrollPercent) => {
                 setScrollPosition(scrollPercent);
@@ -266,7 +275,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
-                    onClickBack?.();
+                    onBack?.();
                   }}
                 >
                   {previousButtonLabel}
@@ -287,7 +296,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
-                    onClickNext?.();
+                    onNext?.();
                   }}
                 >
                   {nextButtonText}
@@ -371,11 +380,11 @@ CoachmarkOverlayElements.propTypes = {
   /**
    * Optional callback called when clicking on the Previous button.
    */
-  onClickBack: PropTypes.func,
+  onBack: PropTypes.func,
   /**
    * Optional callback called when clicking on the Next button.
    */
-  onClickNext: PropTypes.func,
+  onNext: PropTypes.func,
   /**
    * The label for the Previous button.
    */

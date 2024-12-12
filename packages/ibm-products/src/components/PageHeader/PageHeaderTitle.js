@@ -49,13 +49,6 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
       asText = title;
     }
     const TitleIcon = icon;
-    console.log(
-      'cheese',
-      isEllipsisApplied,
-      loading,
-      'final!! =',
-      !isEllipsisApplied && !loading
-    );
 
     const titleContent = (
       <span ref={titleRef} className={`${blockClass}__titleText`}>

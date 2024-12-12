@@ -7,7 +7,7 @@
 
 import { createContext, useContext } from 'react';
 
-export const CoachmarkContext = createContext();
+export const CoachmarkContext = createContext(undefined);
 
 export const useCoachmark = () => {
   return useContext(CoachmarkContext);

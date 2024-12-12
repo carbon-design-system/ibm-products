@@ -50,3 +50,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
 .#{$block-class}__error-icon svg {
   fill: $button-danger-primary;
 }
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}

@@ -16,7 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Tag, Tooltip, DismissibleTag } from '@carbon/react';
+import { Tag, DismissibleTag } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { TYPES } from './constants';
@@ -279,25 +279,23 @@ export let TagOverflow = forwardRef(
               // If there is no template prop, then render items as Tags
               return (
                 <div ref={(node) => itemRefHandler(id, node)} key={id}>
-                  <Tooltip align={overflowAlign} label={label}>
-                    {typeof onClose === 'function' || filter ? (
-                      <DismissibleTag
-                        {...other}
-                        className={`${blockClass}__item--tag`}
-                        type={tagType}
-                        onClose={() => handleTagOnClose(onClose, index)}
-                        text={label}
-                      />
-                    ) : (
-                      <Tag
-                        {...other}
-                        className={`${blockClass}__item--tag`}
-                        type={tagType}
-                      >
-                        {label}
-                      </Tag>
-                    )}
-                  </Tooltip>
+                  {typeof onClose === 'function' || filter ? (
+                    <DismissibleTag
+                      {...other}
+                      className={`${blockClass}__item--tag`}
+                      type={tagType}
+                      onClose={() => handleTagOnClose(onClose, index)}
+                      text={label}
+                    />
+                  ) : (
+                    <Tag
+                      {...other}
+                      className={`${blockClass}__item--tag`}
+                      type={tagType}
+                    >
+                      {label}
+                    </Tag>
+                  )}
                 </div>
               );
             }

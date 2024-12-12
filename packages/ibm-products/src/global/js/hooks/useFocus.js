@@ -29,11 +29,12 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const queryInput = `input${notQuery}`;
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
+  const queryAnchor = `a${notQuery}`;
   const queryLink = `[href]${notQuery}`;
   const queryTabIndex = `[tabindex="0"]${notQuery}`;
   const querySidePanelScroll = `.${sidePanelBaseClass}--scrolls`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
+  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll},${queryAnchor}`;
 
   const [focusableElements, setFocusableElements] = useState({});
 

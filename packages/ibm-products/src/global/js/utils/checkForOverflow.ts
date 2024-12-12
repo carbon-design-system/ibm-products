@@ -6,7 +6,7 @@
 //
 
 /**
- * used to calculate if a function is overflow width or height of an area
+ * used to calculate if a element is overflowing the width or height of an area
  */
 
 export const checkWidthOverflow = (el: HTMLElement | null): boolean => {

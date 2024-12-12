@@ -66,6 +66,11 @@ interface TearsheetShellProps extends PropsWithChildren {
   className?: string;
 
   /**
+   * Used to track the current step on components which use `StepsContext` and `TearsheetShell`
+   */
+  currentStep?: number;
+
+  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;
@@ -199,13 +204,9 @@ export type CloseIconDescriptionTypes =
 type stackTypes = {
   open: Array<{
     (a: number, b: number): void;
-    checkFocus?: () => void;
-    claimFocus?: () => void;
   }>;
   all: Array<{
     (a: number, b: number): void;
-    checkFocus?: () => void;
-    claimFocus?: () => void;
   }>;
   sizes: Array<string>;
 };
@@ -242,6 +243,7 @@ export const TearsheetShell = React.forwardRef(
       children,
       className,
       closeIconDescription,
+      currentStep,
       description,
       hasCloseIcon,
       headerActions,
@@ -274,7 +276,7 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener, specifiedElement } = useFocus(
+    const { firstElement, keyDownListener } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
@@ -309,29 +311,22 @@ export const TearsheetShell = React.forwardRef(
       setDepth(newDepth);
       setPosition(newPosition);
     }
-    handleStackChange.checkFocus = function () {
-      // if we are now the topmost tearsheet, ensure we have focus
-      if (
-        open &&
-        position === depth &&
-        modalRefValue &&
-        !modalRefValue.contains(document.activeElement)
-      ) {
-        handleStackChange.claimFocus();
-      }
-    };
-
-    // Callback to give the tearsheet the opportunity to claim focus
-    handleStackChange.claimFocus = function () {
-      claimFocus(firstElement, modalRef, selectorPrimaryFocus);
-    };
 
     useEffect(() => {
-      if (open) {
+      if (open && position === depth) {
         // Focusing the first element or selectorPrimaryFocus element
         claimFocus(firstElement, modalRef, selectorPrimaryFocus);
       }
-    }, [firstElement, modalRef, open, selectorPrimaryFocus]);
+    }, [
+      currentStep,
+      depth,
+      firstElement,
+      modalRef,
+      modalRefValue,
+      open,
+      position,
+      selectorPrimaryFocus,
+    ]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {
@@ -342,31 +337,12 @@ export const TearsheetShell = React.forwardRef(
     }, [launcherButtonRef, open, prevOpen]);
 
     useEffect(() => {
-      if (open && position !== depth) {
-        setTimeout(() => {
-          if (selectorPrimaryFocus) {
-            return specifiedElement?.focus();
-          }
-          firstElement?.focus();
-        }, 0);
-      }
-    }, [
-      position,
-      depth,
-      firstElement,
-      open,
-      specifiedElement,
-      selectorPrimaryFocus,
-    ]);
-
-    useEffect(() => {
       const notify = () =>
         stack.all.forEach((handler) => {
           handler(
             Math.min(stack.open.length, maxDepth),
             stack.open.indexOf(handler) + 1
           );
-          handler.checkFocus?.();
         });
 
       // Register this tearsheet's stack change callback/listener.
@@ -400,14 +376,6 @@ export const TearsheetShell = React.forwardRef(
         }
       };
     }, [open, size]);
-
-    function handleFocus() {
-      // If something within us is receiving focus but we are not the topmost
-      // stacked tearsheet, transfer focus to the topmost tearsheet instead
-      if (position < depth) {
-        stack.open[stack.open.length - 1].claimFocus?.();
-      }
-    }
 
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
@@ -464,7 +432,6 @@ export const TearsheetShell = React.forwardRef(
                 !areAllSameSizeVariant(),
             })}
             {...{ onClose, open, selectorPrimaryFocus }}
-            onFocus={handleFocus}
             onKeyDown={keyDownListener}
             preventCloseOnClickOutside={!isPassive}
             ref={modalRef}

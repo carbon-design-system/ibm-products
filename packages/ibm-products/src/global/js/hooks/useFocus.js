@@ -7,7 +7,7 @@
 
 import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import wait from '../utils/wait';
 
 export const getSpecificElement = (parentEl, elementId) => {
@@ -35,30 +35,39 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   // Final query
   const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
 
-  const modalEl = modalRef?.current;
+  const [focusableElements, setFocusableElements] = useState({});
 
   const getFocusable = useCallback(() => {
-    // Selecting all focusable elements based on the above conditions
-    let focusableElements = modalEl?.querySelectorAll(`${query}`);
-    if (focusableElements?.length) {
-      focusableElements = Array.prototype.filter.call(
-        focusableElements,
-        (el) => window?.getComputedStyle(el)?.display !== 'none'
+    const observer = new MutationObserver(() => {
+      // Selecting all focusable elements based on the above conditions
+      let elements = modalRef?.current?.querySelectorAll(`${query}`);
+      if (elements?.length) {
+        elements = Array.prototype.filter.call(
+          elements,
+          (el) => window?.getComputedStyle(el)?.display !== 'none'
+        );
+      }
+
+      const first = elements?.[0];
+      const last = elements?.[elements?.length - 1];
+      const all = elements;
+      const specified = getSpecificElement(
+        modalRef?.current,
+        selectorPrimaryFocus
       );
-    }
 
-    const first = focusableElements?.[0];
-    const last = focusableElements?.[focusableElements?.length - 1];
-    const all = focusableElements;
-    const specified = getSpecificElement(modalEl, selectorPrimaryFocus);
+      observer.disconnect();
 
-    return {
-      first,
-      last,
-      all,
-      specified,
-    };
-  }, [modalEl, query, selectorPrimaryFocus]);
+      setFocusableElements({
+        first,
+        last,
+        all,
+        specified,
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }, [modalRef, query, selectorPrimaryFocus]);
 
   useEffect(() => {
     getFocusable();
@@ -89,10 +98,10 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   };
 
   return {
-    firstElement: getFocusable().first,
-    lastElement: getFocusable().last,
-    allElements: getFocusable().all,
-    specifiedElement: getFocusable().specified,
+    firstElement: focusableElements?.first,
+    lastElement: focusableElements?.last,
+    allElements: focusableElements?.all,
+    specifiedElement: focusableElements?.specified,
     keyDownListener: handleKeyDown,
     getFocusable: getFocusable,
   };

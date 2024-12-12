@@ -904,15 +904,9 @@ export let PageHeader = React.forwardRef(
     const displayedBreadcrumbs = getBreadcrumbs();
 
     const subtitleRef = useRef<HTMLSpanElement>(null);
-    const overflowSubtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = checkHeightOverflow(
-      subtitleRef.current || overflowSubtitleRef.current
-    );
+    const isOverflowing = checkHeightOverflow(subtitleRef.current);
     const subtitleContent = (
-      <span
-        ref={overflowSubtitleRef}
-        className={`${blockClass}__subtitle-text`}
-      >
+      <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
         {subtitle}
       </span>
     );

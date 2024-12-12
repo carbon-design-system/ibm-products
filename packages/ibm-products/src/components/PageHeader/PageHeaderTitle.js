@@ -40,11 +40,8 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let titleText;
   let isEditable = !!onSave;
 
-  const longTitleRef = useRef(undefined);
-  const titleRef = useRef(undefined);
-  const isEllipsisApplied = checkWidthOverflow(
-    titleRef.current || longTitleRef.current
-  );
+  const titleRef = useRef();
+  const isEllipsisApplied = checkWidthOverflow(titleRef.current);
 
   if (text || !content) {
     if (text === undefined && typeof title === 'string') {
@@ -52,6 +49,16 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
       asText = title;
     }
     const TitleIcon = icon;
+
+    const titleContent = (
+      <span
+        ref={titleRef}
+        className={`${blockClass}__titleText`}
+        title={!isEllipsisApplied && !loading ? asText : null}
+      >
+        {text}
+      </span>
+    );
 
     titleInnards = (
       <>
@@ -84,18 +91,10 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
             definition={text}
             className={`${blockClass}__tooltip`}
           >
-            <span ref={longTitleRef} className={`${blockClass}__titleText`}>
-              {text}
-            </span>
+            {titleContent}
           </DefinitionTooltip>
         ) : (
-          <span
-            ref={titleRef}
-            className={`${blockClass}__titleText`}
-            title={!loading ? asText : null}
-          >
-            {text}
-          </span>
+          titleContent
         )}
       </>
     );

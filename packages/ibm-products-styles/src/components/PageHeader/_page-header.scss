@@ -553,13 +553,14 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     @include type.type-style('body-01');
   }
 
-  .#{$block-class}__subtitle-tooltip .cds--definition-term {
+  .#{$block-class}__subtitle-tooltip .#{$carbon-prefix}--definition-term {
     border-bottom: 0;
     letter-spacing: inherit;
   }
 
+  // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
   .#{$block-class}__subtitle-tooltip
-    .cds--popover-content.cds--definition-tooltip {
+    .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
     max-inline-size: fit-content;
   }
 

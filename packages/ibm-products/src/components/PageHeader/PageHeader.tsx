@@ -52,7 +52,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { replaceOverflowHeight } from '../../global/js/utils/replaceWithOverflow';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
 
 const componentName = 'PageHeader';
 
@@ -905,10 +905,17 @@ export let PageHeader = React.forwardRef(
 
     const subtitleRef = useRef<HTMLSpanElement>(null);
     const overflowSubtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = replaceOverflowHeight({
-      overflowRef: overflowSubtitleRef,
-      ref: subtitleRef,
-    });
+    const isOverflowing = checkHeightOverflow(
+      subtitleRef.current || overflowSubtitleRef.current
+    );
+    const subtitleContent = (
+      <span
+        ref={overflowSubtitleRef}
+        className={`${blockClass}__subtitle-text`}
+      >
+        {subtitle}
+      </span>
+    );
 
     return (
       <>
@@ -1052,20 +1059,10 @@ export let PageHeader = React.forwardRef(
                         definition={subtitle}
                         className={`${blockClass}__subtitle-tooltip`}
                       >
-                        <span
-                          ref={overflowSubtitleRef}
-                          className={`${blockClass}__subtitle-text`}
-                        >
-                          {subtitle}
-                        </span>
+                        {subtitleContent}
                       </DefinitionTooltip>
                     ) : (
-                      <span
-                        ref={subtitleRef}
-                        className={`${blockClass}__subtitle-text`}
-                      >
-                        {subtitle}
-                      </span>
+                      subtitleContent
                     )}
                   </Column>
                 </Row>

@@ -78,6 +78,24 @@ describe(TagSet.displayName, () => {
     warn.mockRestore();
   });
 
+  it('Displays a DismissibleTag when passed an onClose or filter', async () => {
+    const handler1 = jest.fn();
+    const handler2 = jest.fn();
+    render(
+      <TagSet
+        tags={[
+          { id: '1', label: 'Tag 1', filter: true, onClose: handler1 },
+          { id: '2', label: 'Tag 2', onClose: handler2 },
+        ]}
+      />
+    );
+    const visible = screen.getAllByLabelText('Dismiss');
+    await act(() => userEvent.click(visible[2]));
+    expect(handler1).toHaveBeenCalled();
+    await act(() => userEvent.click(visible[3]));
+    expect(handler2).toHaveBeenCalled();
+  });
+
   it('Has the same tag types as Carbon Tag', async () => {
     // Same number of tags
     expect(TagSet.types.length).toEqual(Object.keys(tagTypes).length);

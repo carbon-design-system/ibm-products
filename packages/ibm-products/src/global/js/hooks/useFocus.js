@@ -77,7 +77,7 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     // Checking whether the key is tab or not
     if (event.key === 'Tab') {
       // updating the focusable elements list
-      const { first, last, all } = getFocusable();
+      const { first, last, all } = focusableElements;
 
       await wait(1);
       if (

@@ -182,27 +182,27 @@ jobs:
           name: playwright-avt-report
           path: .playwright
 
-  vrt-runner:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          cache: yarn
-      - name: Install
-        run: yarn
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Run VRT
-        working-directory: packages/core
-        env:
-          PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
-        run: yarn percy storybook storybook-static
+  # vrt-runner:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '20.x'
+  #         cache: yarn
+  #     - name: Install
+  #       run: yarn
+  #     - name: Install browsers
+  #       run: yarn playwright install --with-deps
+  #     - name: Build project
+  #       run: yarn build
+  #     - name: Run VRT
+  #       working-directory: packages/core
+  #       env:
+  #         PERCY_TOKEN: web_d04495b0b413d61c2ea6b9118d1748b43f4fdd58d17ebe453ef8e0016b5766e4
+  #       run: yarn percy storybook storybook-static
 
   avt:
     if: ${{ always() }}

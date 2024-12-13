@@ -140,6 +140,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
               `${blockClass}__illustration`,
               `${blockClass}__illustration--${size}`,
             ])}
+            aria-hidden="true"
           />
         )}
         <EmptyStateContent

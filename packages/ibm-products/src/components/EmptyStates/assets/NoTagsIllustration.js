@@ -32,6 +32,7 @@ export const NoTagsIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration--${size}`,
       ])}
       role="img"
+      aria-hidden="true"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

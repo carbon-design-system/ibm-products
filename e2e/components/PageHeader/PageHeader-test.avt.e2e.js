@@ -176,6 +176,12 @@ test.describe('PageHeader @avt', () => {
       },
     });
 
+    // Race conditions
+    // Wait for the "+13" tag element to appear and be visible
+    await page.waitForSelector('span.cds--tag__label[title="+13"]', {
+      visible: true,
+    });
+
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
     await expect(

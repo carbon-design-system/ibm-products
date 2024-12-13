@@ -202,8 +202,9 @@ test.describe('Tearsheet @avt', () => {
     const stackInput2 = page.locator('#stacked-input-2');
     const stackInput3 = page.locator('#stacked-input-3');
 
-    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
-    await page.keyboard.press('Tab');
+    const openButton1 = page.getByText('Toggle tearsheet 1');
+    // Expect the "Toggle tearsheet 1" button is focused in the Storybook
+    await expect(openButton1).toBeFocused();
     // Pressing 'Enter' key to open the Tearsheet
     await page.keyboard.press('Enter');
     await page.screenshot({ animations: 'disabled' });
@@ -298,8 +299,7 @@ test.describe('Tearsheet @avt', () => {
     const wideTs = page.locator(`[class*="${bc}--wide"]`);
     const openButton = page.getByText('Toggle tearsheet 1');
 
-    // Pressing 'Tab' key to focus on the "Open Tearsheet" button in the Storybook
-    await page.keyboard.press('Tab');
+    // Expect the "Toggle tearsheet 1" button is focused in the Storybook
     await expect(openButton).toBeFocused();
     // Pressing 'Enter' key to open the Tearsheet
     await page.keyboard.press('Enter');

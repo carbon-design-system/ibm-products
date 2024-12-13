@@ -202,16 +202,18 @@ test.describe('PageHeader @avt', () => {
     await expect(
       page.getByRole('button', { name: 'Primary button' })
     ).toBeFocused();
-    // reset focus to first focusable element
-    await page.getByRole('link', { name: 'Home page' }).focus();
-    // changes position when header collapsed
-    await page.locator(`.page-header-stories__dummy-content`).first().hover();
-    await page.mouse.wheel(0, 180);
+
+    // collapse the header
+    await pressTabKey(page, 3);
+    await page.keyboard.press('Enter');
     await page.waitForSelector(
       `.${pkg.prefix}--page-header__collapse-expand-toggle--collapsed`,
       { visible: true }
     );
-    await pressTabKey(page, 4);
+
+    // reset focus to first focusable element
+    await page.getByRole('link', { name: 'Home page' }).focus();
+    await pressTabKey(page, 3);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })
     ).toBeFocused();

@@ -69,8 +69,8 @@ test.describe('AboutModal @avt', () => {
     await page.keyboard.press('Tab');
     await expect(closeIcon).toBeFocused();
 
-    // Press escape to twice
-    // first to close tooltip then close modal
+    // Press escape twice
+    // To close tooltip and modal
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
 

@@ -111,21 +111,18 @@ export const claimFocus = (
   modalRef,
   selectorPrimaryFocus = undefined
 ) => {
-  if (
-    selectorPrimaryFocus &&
-    getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-  ) {
-    const specifiedEl = getSpecificElement(
-      modalRef?.current,
-      selectorPrimaryFocus
-    );
+  let specifiedEl;
 
-    if (
-      specifiedEl &&
-      window?.getComputedStyle(specifiedEl)?.display !== 'none'
-    ) {
-      setTimeout(() => specifiedEl.focus(), 0);
-    }
+  if (selectorPrimaryFocus) {
+    specifiedEl = getSpecificElement(modalRef?.current, selectorPrimaryFocus);
+  }
+
+  if (
+    specifiedEl &&
+    window?.getComputedStyle(specifiedEl)?.display !== 'none' &&
+    specifiedEl?.tabIndex !== -1
+  ) {
+    setTimeout(() => specifiedEl.focus(), 0);
   } else {
     setTimeout(() => firstElement?.focus(), 0);
   }

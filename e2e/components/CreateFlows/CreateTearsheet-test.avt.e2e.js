@@ -49,6 +49,10 @@ test.describe('CreateTearsheet @avt', () => {
     );
     const nextButton = page.getByText('Next');
     const backButton = page.getByText('Back');
+
+    // Focus learn more link
+    await page.keyboard.press('Shift+Tab');
+
     // Expect the Learn More link to be focused
     await expect(learnMoreAnchor).toBeVisible();
     await expect(learnMoreAnchor).toBeFocused();
@@ -165,19 +169,12 @@ test.describe('CreateTearsheet @avt', () => {
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
     await expect(modalElement).toBeVisible();
 
-    const learnMoreAnchor = page.getByText('Learn more.');
     const step1Input1 = page.locator(
       '#tearsheet-multi-step-story-text-input-multi-step-1'
     );
     const nextButton = page.getByText('Next');
     const errorToggle = page.locator('#simulated-error-toggle');
 
-    // Expect the Learn More link to be focused
-    await expect(learnMoreAnchor).toBeVisible();
-    await expect(learnMoreAnchor).toBeFocused();
-
-    // Switch focus to input box
-    await page.keyboard.press('Tab');
     // Expect the input box to be focused
     await expect(step1Input1).toBeFocused();
 
@@ -207,6 +204,6 @@ test.describe('CreateTearsheet @avt', () => {
     await expect(errorNotification).toBeVisible();
 
     // Expect the focus returned to first element
-    await expect(learnMoreAnchor).toBeFocused();
+    await expect(step1Input1).toBeFocused();
   });
 });

@@ -18,7 +18,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
   useResetCreateComponent,
@@ -93,9 +92,10 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   description?: ReactNode;
 
   /**
-   * Specifies elements to focus on first on render.
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
-  firstFocusElement?: string;
+  selectorPrimaryFocus?: string;
 
   /**
    * To indicate an error occurred in the Tearsheet step
@@ -196,7 +196,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      firstFocusElement,
+      selectorPrimaryFocus,
       slug,
       submitButtonText,
       title,
@@ -215,6 +215,7 @@ export let CreateTearsheet = forwardRef(
     const [loadingPrevious, setLoadingPrevious] = useState<boolean>(false);
     const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
@@ -244,13 +245,6 @@ export let CreateTearsheet = forwardRef(
       }
     }, [firstIncludedStep, initialStep, lastIncludedStep, open, stepData]);
 
-    useCreateComponentFocus({
-      previousState,
-      currentStep,
-      blockClass,
-      onMount,
-      firstFocusElement,
-    });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
       firstIncludedStep,
@@ -319,6 +313,7 @@ export let CreateTearsheet = forwardRef(
         }}
         currentStep={currentStep}
         hasError={hasError}
+        selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>
@@ -388,9 +383,10 @@ CreateTearsheet.propTypes = {
   experimentalSecondarySubmitText: PropTypes.string,
 
   /**
-   * Specifies elements to focus on first on render.
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
    */
-  firstFocusElement: PropTypes.string,
+  hasError: PropTypes.bool,
 
   /**
    * Used to set the size of the influencer
@@ -433,6 +429,12 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus: PropTypes.string,
 
   /**
    *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component

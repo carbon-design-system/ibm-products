@@ -52,7 +52,6 @@ export const MultiStepTearsheet = (
     cancelButtonText,
     className,
     description,
-    firstFocusElement,
     influencerWidth,
     label,
     nextButtonText,
@@ -117,10 +116,10 @@ export const MultiStepTearsheet = (
             }, simulatedDelay);
           })
         }
-        firstFocusElement={firstFocusElement}
         slug={slug && SlugSample()}
         {...rest}
         hasError={hasSubmitError}
+        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
       >
         <CreateTearsheetStep
           onNext={() => {

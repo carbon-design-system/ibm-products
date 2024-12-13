@@ -147,6 +147,7 @@ test.describe('CreateTearsheet @avt', () => {
     await page.keyboard.press('Enter');
     await page.screenshot({ animations: 'disabled' });
     //  Expect the previous page first element to be focused
+    await expect(step1Input1).toBeVisible();
     await expect(step1Input1).toBeFocused();
   });
 

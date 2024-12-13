@@ -310,6 +310,7 @@ export let CreateTearsheet = forwardRef(
           verticalPosition,
           closeIconDescription: '',
         }}
+        currentStep={currentStep}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>

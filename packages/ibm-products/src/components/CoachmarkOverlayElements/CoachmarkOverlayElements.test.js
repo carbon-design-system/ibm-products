@@ -22,12 +22,18 @@ const children = `hello, world (${uuidv4()})`;
 const dataTestId = uuidv4();
 const className = `class-${uuidv4()}`;
 
-const childrenContent = (
+const childrenContent = [
   <CoachmarkOverlayElement
+    key="element1"
     title="Hello World"
     description="this is a description test"
-  />
-);
+  />,
+  <CoachmarkOverlayElement
+    key="element2"
+    title="Hello World"
+    description="this is a another description test"
+  />,
+];
 
 const renderCoachmarkWithOverlayElements = (
   { ...rest } = {},
@@ -164,5 +170,23 @@ describe(componentName, () => {
     await act(() => user.click(beaconOrButton));
 
     expect(screen.getByRole('img')).toBeInTheDocument();
+  });
+
+  it('calls onNext', async () => {
+    const user = userEvent.setup();
+    const onNext = jest.fn();
+    renderCoachmarkWithOverlayElements({
+      'data-testid': dataTestId,
+      onNext,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    await act(() => user.click(beaconOrButton));
+    const nextButton = screen.getByRole('button', {
+      name: 'Next',
+    });
+    await act(() => user.click(nextButton));
+    await expect(onNext).toHaveBeenCalled();
   });
 });

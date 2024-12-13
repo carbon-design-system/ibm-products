@@ -9,7 +9,8 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-
+import { carbon } from '../../../packages/ibm-products/src/settings';
+import { pkg } from '../../../packages/ibm-products/src/settings';
 test.use({ viewport: { width: 1600, height: 900 } });
 
 test.describe('PageHeader @avt', () => {
@@ -123,9 +124,12 @@ test.describe('PageHeader @avt', () => {
     });
     // Race conditions
     // Wait for the "+13" tag element to appear and be visible
-    await page.waitForSelector('span.cds--tag__label[title="+13"]', {
-      visible: true,
-    });
+    await page.waitForSelector(
+      `span.${carbon.prefix}--tag__label[title="+13"]`,
+      {
+        visible: true,
+      }
+    );
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
@@ -178,9 +182,12 @@ test.describe('PageHeader @avt', () => {
 
     // Race conditions
     // Wait for the "+13" tag element to appear and be visible
-    await page.waitForSelector('span.cds--tag__label[title="+13"]', {
-      visible: true,
-    });
+    await page.waitForSelector(
+      `span.${carbon.prefix}--tag__label[title="+13"]`,
+      {
+        visible: true,
+      }
+    );
 
     // renders all buttons on large screens by default
     await pressTabKey(page, 15);
@@ -200,6 +207,10 @@ test.describe('PageHeader @avt', () => {
     // changes position when header collapsed
     await page.locator(`.page-header-stories__dummy-content`).first().hover();
     await page.mouse.wheel(0, 180);
+    await page.waitForSelector(
+      `.${pkg.prefix}--page-header__collapse-expand-toggle--collapsed`,
+      { visible: true }
+    );
     await pressTabKey(page, 4);
     await expect(
       page.getByRole('button', { name: 'Page actions...' })

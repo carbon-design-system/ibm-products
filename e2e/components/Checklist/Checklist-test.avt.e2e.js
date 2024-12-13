@@ -23,6 +23,8 @@ test.describe('Checklist @avt', () => {
 
     const buttonEle = page.locator('[aria-label="Checklist toggle"]');
     const viewButton = page.getByRole('button', { name: 'View all (10)' });
+    const tooltipContent = await page.getByText('Toggle');
+    const taskButtons = page.locator('[title="Task name"]');
     //press tab to move focus to buttonELement
     await page.keyboard.press('Tab');
     await expect(buttonEle).toBeInViewport();
@@ -35,12 +37,28 @@ test.describe('Checklist @avt', () => {
     await page.keyboard.press('Enter');
     await expect(buttonEle).toHaveAttribute('aria-expanded', 'false');
 
-    //Press escape to clear the focus
+    //Press to hide tooltip
     await page.keyboard.press('Escape');
+    await expect(tooltipContent).not.toBeVisible();
+
+    //Press tab to move focus to 1st Task name
+    await page.keyboard.press('Tab');
+    await expect(taskButtons.nth(0)).toBeFocused();
+
+    //Press tab to move focus to 2nd Task name
+    await page.keyboard.press('Tab');
+    await expect(taskButtons.nth(1)).toBeFocused();
+
+    //Press tab to move focus to 3rd Task name
+    await page.keyboard.press('Tab');
+    await expect(taskButtons.nth(2)).toBeFocused();
+
+    //Press tab to move focus to View all(10) button
+    await page.keyboard.press('Tab');
+    await expect(viewButton).toBeFocused();
 
     //check button element is showing Toggle tooltip while hovering
     await buttonEle.hover();
-    const tooltipContent = await page.getByText('Toggle');
     await expect(tooltipContent).toBeVisible();
   });
 

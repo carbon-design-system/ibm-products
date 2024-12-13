@@ -127,7 +127,6 @@ export const claimFocus = (
       setTimeout(() => specifiedEl.focus(), 0);
     }
   } else {
-    console.log('> ', firstElement, modalRef?.current?.isConnected);
     setTimeout(() => firstElement?.focus(), 0);
   }
 };

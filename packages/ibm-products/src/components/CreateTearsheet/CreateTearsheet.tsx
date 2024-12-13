@@ -18,6 +18,7 @@ import React, {
   useState,
 } from 'react';
 import {
+  useCreateComponentFocus,
   useCreateComponentStepChange,
   usePreviousValue,
   useResetCreateComponent,
@@ -85,6 +86,11 @@ export interface CreateTearsheetProps extends PropsWithChildren {
    * The experimentalSecondary submit button text
    */
   experimentalSecondarySubmitText?: string;
+
+  /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement?: string;
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -187,6 +193,7 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       experimentalSecondarySubmitText,
+      firstFocusElement,
       description,
       hasError,
       influencerWidth = 'narrow',
@@ -215,7 +222,6 @@ export let CreateTearsheet = forwardRef(
     const [loadingPrevious, setLoadingPrevious] = useState<boolean>(false);
     const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState<Step[]>([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
@@ -245,6 +251,13 @@ export let CreateTearsheet = forwardRef(
       }
     }, [firstIncludedStep, initialStep, lastIncludedStep, open, stepData]);
 
+    useCreateComponentFocus({
+      previousState,
+      currentStep,
+      blockClass,
+      onMount,
+      firstFocusElement,
+    });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
       firstIncludedStep,
@@ -381,6 +394,11 @@ CreateTearsheet.propTypes = {
    * The experimentalSecondary submit button text
    */
   experimentalSecondarySubmitText: PropTypes.string,
+
+  /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement: PropTypes.string,
 
   /**
    * To indicate an error occurred in the Tearsheet step

@@ -149,4 +149,63 @@ test.describe('CreateTearsheet @avt', () => {
     //  Expect the previous page first element to be focused
     await expect(step1Input1).toBeFocused();
   });
+
+  test('@avt-simulate-error-and-focus', async ({ page }) => {
+    await visitStory(page, {
+      component: 'CreateTearsheet',
+      id: 'ibm-products-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      globals: {
+        carbonTheme: 'white',
+      },
+    });
+
+    await page.screenshot({ animations: 'disabled' });
+
+    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
+    await expect(modalElement).toBeVisible();
+
+    const learnMoreAnchor = page.getByText('Learn more.');
+    const step1Input1 = page.locator(
+      '#tearsheet-multi-step-story-text-input-multi-step-1'
+    );
+    const nextButton = page.getByText('Next');
+    const errorToggle = page.locator('#simulated-error-toggle');
+
+    // Expect the Learn More link to be focused
+    await expect(learnMoreAnchor).toBeVisible();
+    await expect(learnMoreAnchor).toBeFocused();
+
+    // Switch focus to input box
+    await page.keyboard.press('Tab');
+    // Expect the input box to be focused
+    await expect(step1Input1).toBeFocused();
+
+    // Type some text in the input field
+    await page.keyboard.type('H');
+    // Expect the Next button to be enabled at this moment
+    await expect(nextButton).toBeEnabled();
+
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+
+    await expect(errorToggle).toBeFocused();
+    // Enable simulate error toggle
+    await page.keyboard.press('Enter');
+
+    // Navigate to next button
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+
+    // Press on Next button
+    await page.keyboard.press('Enter');
+
+    await page.waitForSelector('#step-submit-error', { visible: true });
+    const errorNotification = page.locator('#step-submit-error');
+    await expect(errorNotification).toBeVisible();
+
+    // Expect the focus returned to first element
+    await expect(learnMoreAnchor).toBeFocused();
+  });
 });

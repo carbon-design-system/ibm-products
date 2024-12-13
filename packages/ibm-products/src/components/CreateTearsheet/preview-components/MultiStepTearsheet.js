@@ -120,6 +120,7 @@ export const MultiStepTearsheet = (
         firstFocusElement={firstFocusElement}
         slug={slug && SlugSample()}
         {...rest}
+        hasError={hasSubmitError}
       >
         <CreateTearsheetStep
           onNext={() => {
@@ -186,6 +187,7 @@ export const MultiStepTearsheet = (
                   kind="error"
                   title="Error"
                   subtitle="Resolve errors to continue"
+                  id="step-submit-error"
                   onClose={() => setHasSubmitError(false)}
                 />
               )}

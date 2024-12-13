@@ -98,6 +98,12 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   firstFocusElement?: string;
 
   /**
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
+   */
+  hasError?: boolean;
+
+  /**
    * Used to set the size of the influencer
    */
   influencerWidth?: 'narrow' | 'wide';
@@ -182,6 +188,7 @@ export let CreateTearsheet = forwardRef(
       className,
       experimentalSecondarySubmitText,
       description,
+      hasError,
       influencerWidth = 'narrow',
       initialStep,
       label,
@@ -311,6 +318,7 @@ export let CreateTearsheet = forwardRef(
           closeIconDescription: '',
         }}
         currentStep={currentStep}
+        hasError={hasError}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>

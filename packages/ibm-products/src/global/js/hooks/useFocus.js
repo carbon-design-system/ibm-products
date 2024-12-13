@@ -7,7 +7,7 @@
 
 import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import wait from '../utils/wait';
 
 export const getSpecificElement = (parentEl, elementId) => {
@@ -29,56 +29,48 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const queryInput = `input${notQuery}`;
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
-  const queryAnchor = `a${notQuery}`;
   const queryLink = `[href]${notQuery}`;
+  const queryAnchor = `a${notQuery}`;
   const queryTabIndex = `[tabindex="0"]${notQuery}`;
   const querySidePanelScroll = `.${sidePanelBaseClass}--scrolls`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll},${queryAnchor}`;
-
-  const [focusableElements, setFocusableElements] = useState({});
+  const query = `${queryButton},${queryLink},${queryAnchor},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
 
   const getFocusable = useCallback(() => {
-    const observer = new MutationObserver(() => {
-      // Selecting all focusable elements based on the above conditions
-      let elements = modalRef?.current?.querySelectorAll(`${query}`);
-      if (elements?.length) {
-        elements = Array.prototype.filter.call(
-          elements,
-          (el) => window?.getComputedStyle(el)?.display !== 'none'
-        );
-      }
-
-      const first = elements?.[0];
-      const last = elements?.[elements?.length - 1];
-      const all = elements;
-      const specified = getSpecificElement(
-        modalRef?.current,
-        selectorPrimaryFocus
+    // Selecting all focusable elements based on the above conditions
+    let focusableElements = modalRef?.current?.querySelectorAll(`${query}`);
+    if (focusableElements?.length) {
+      focusableElements = Array.prototype.filter.call(
+        focusableElements,
+        (el) => window?.getComputedStyle(el)?.display !== 'none'
       );
+    }
 
-      observer.disconnect();
+    const first = focusableElements?.[0];
+    const last = focusableElements?.[focusableElements?.length - 1];
+    const all = focusableElements;
+    const specified = getSpecificElement(
+      modalRef?.current,
+      selectorPrimaryFocus
+    );
 
-      setFocusableElements({
-        first,
-        last,
-        all,
-        specified,
-      });
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
+    return {
+      first,
+      last,
+      all,
+      specified,
+    };
   }, [modalRef, query, selectorPrimaryFocus]);
 
   useEffect(() => {
     getFocusable();
-  }, [getFocusable]);
+  }, [getFocusable, modalRef]);
 
   const handleKeyDown = async (event) => {
     // Checking whether the key is tab or not
     if (event.key === 'Tab') {
       // updating the focusable elements list
-      const { first, last, all } = focusableElements;
+      const { first, last, all } = getFocusable();
 
       await wait(1);
       if (
@@ -99,10 +91,10 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   };
 
   return {
-    firstElement: focusableElements?.first,
-    lastElement: focusableElements?.last,
-    allElements: focusableElements?.all,
-    specifiedElement: focusableElements?.specified,
+    firstElement: getFocusable()?.first,
+    lastElement: getFocusable()?.last,
+    allElements: getFocusable()?.all,
+    specifiedElement: getFocusable()?.specified,
     keyDownListener: handleKeyDown,
     getFocusable: getFocusable,
   };
@@ -135,6 +127,7 @@ export const claimFocus = (
       setTimeout(() => specifiedEl.focus(), 0);
     }
   } else {
+    console.log('> ', firstElement, modalRef?.current?.isConnected);
     setTimeout(() => firstElement?.focus(), 0);
   }
 };

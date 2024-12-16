@@ -36,6 +36,7 @@ const componentNameCreateNarrow = CreateTearsheetNarrow.displayName;
 const onClick = jest.fn();
 const onCloseReturnsFalse = jest.fn(() => false);
 const onCloseReturnsTrue = jest.fn(() => true);
+const onBlur = jest.fn();
 
 const createButton = `Create ${uuidv4()}`;
 const actions = [
@@ -91,6 +92,41 @@ const navigation = (
   </div>
 );
 const title = `Title of the ${uuidv4()} tearsheet`;
+
+const mainText = 'Main content 1';
+const inputId = 'stacked-input-1';
+
+// eslint-disable-next-line react/prop-types
+const DummyComponent = ({ props, open }) => {
+  const buttonRef = React.useRef(undefined);
+
+  return (
+    <>
+      <Button ref={buttonRef}>Open</Button>
+      <Tearsheet
+        {...{ ...props, closeIconDescription }}
+        {...{
+          open: open,
+        }}
+        hasCloseIcon={true}
+        onClose={onCloseReturnsTrue}
+        open={open}
+        selectorPrimaryFocus={`#${inputId}`}
+        launcherButtonRef={buttonRef}
+      >
+        <div className="tearsheet-stories__dummy-content-block">
+          {mainText}
+          <TextInput
+            id={inputId}
+            data-testid={inputId}
+            labelText="Enter an important value here"
+            onBlur={onBlur}
+          />
+        </div>
+      </Tearsheet>
+    </>
+  );
+};
 
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
@@ -262,40 +298,6 @@ const commonTests = (Ts, name, props, testActions) => {
     });
 
     it('should return focus to the launcher button', async () => {
-      const mainText = 'Main content 1';
-      const inputId = 'stacked-input-1';
-
-      // eslint-disable-next-line react/prop-types
-      const DummyComponent = ({ open }) => {
-        const buttonRef = React.useRef(undefined);
-
-        return (
-          <>
-            <Button ref={buttonRef}>Open</Button>
-            <Ts
-              {...{ ...props, closeIconDescription }}
-              {...{
-                open: open,
-              }}
-              hasCloseIcon={true}
-              onClose={onCloseReturnsTrue}
-              open={open}
-              selectorPrimaryFocus={`#${inputId}`}
-              launcherButtonRef={buttonRef}
-            >
-              <div className="tearsheet-stories__dummy-content-block">
-                {mainText}
-                <TextInput
-                  id={inputId}
-                  data-testid={inputId}
-                  labelText="Enter an important value here"
-                />
-              </div>
-            </Ts>
-          </>
-        );
-      };
-
       const { rerender, getByText, getByTestId } = render(
         <DummyComponent open={true} />
       );
@@ -319,6 +321,19 @@ const commonTests = (Ts, name, props, testActions) => {
 
       await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
       expect(launchButtonEl).toHaveFocus();
+    });
+
+    it('should call onBlur only once', async () => {
+      const { getByTestId } = render(<DummyComponent open={true} />);
+
+      const inputEl = getByTestId(inputId);
+      const closeButton = screen.getByRole('button', {
+        name: closeIconDescription,
+      });
+
+      expect(inputEl).toHaveFocus();
+      await act(() => userEvent.click(closeButton));
+      expect(onBlur).toHaveBeenCalledTimes(1);
     });
   }
 

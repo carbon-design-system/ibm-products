@@ -223,9 +223,11 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
-    fireEvent.animationEnd(outerElement);
-    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
+    await act(() => fireEvent.animationStart(outerElement));
+    await act(() => fireEvent.animationEnd(outerElement));
+    await act(() =>
+      rerender(<SlideIn animateTitle={false} placement="right" open={false} />)
+    );
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
   });

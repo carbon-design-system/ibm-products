@@ -47,6 +47,12 @@ test.describe('ProductiveCard @avt', () => {
     const editButton = page.getByRole('button', { name: 'Edit' });
     const deleteButton = page.getByRole('button', { name: 'Delete' });
     const disabledButton = page.getByRole('button', { name: 'Read more' });
+
+    // race conditions
+    await page.waitForSelector(
+      `.${pkg.prefix}--card__actions-header-ghost-button`
+    );
+
     expect(disabledButton.getAttribute('disabled')).not.toBeNull();
 
     await page.keyboard.press('Tab');

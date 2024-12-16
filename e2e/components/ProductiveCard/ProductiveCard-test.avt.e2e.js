@@ -56,10 +56,10 @@ test.describe('ProductiveCard @avt', () => {
     expect(disabledButton.getAttribute('disabled')).not.toBeNull();
 
     await page.keyboard.press('Tab');
-    expect(editButton).toBeFocused();
+    await expect(editButton).toBeFocused();
 
     await page.keyboard.press('Tab');
-    expect(deleteButton).toBeFocused();
+    await expect(deleteButton).toBeFocused();
     // disabled button
     await page.keyboard.press('Tab');
     expect(

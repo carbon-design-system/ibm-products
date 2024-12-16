@@ -180,6 +180,10 @@ test.describe('TearsheetNarrow @avt', () => {
       },
     });
 
+    await page.waitForSelector(`.${bc}--stacked-${3}-of-${3}`, {
+      visible: true,
+    });
+
     // press escape thrice to close all pre open tearsheets
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });
@@ -191,28 +195,33 @@ test.describe('TearsheetNarrow @avt', () => {
     // Open tearsheet one
     await page.getByText('Toggle #1').click();
     await page.screenshot({ animations: 'disabled' });
-    await expect(page).toHaveNoACViolations('Tearsheet @avt-stacking');
-
-    const ts2 = page.locator(
-      `[class*="${bc}--stacked-${2}-of-${2}"].is-visible`
-    );
+    await expect(page).toHaveNoACViolations('TearsheetNarrow @avt-stacking');
 
     // Open second tearsheet
     await page.getByText('Toggle #2').click();
     await page.screenshot({ animations: 'disabled' });
+    await page.waitForSelector(`.${bc}--stacked-${2}-of-${2}`, {
+      visible: true,
+    });
 
     // Tearsheet 2 is now open
+    const ts2 = page.locator(
+      `[class*="${bc}--stacked-${2}-of-${2}"].is-visible`
+    );
     await expect(ts2).toBeInViewport();
     await expect(ts2).toHaveAttribute('aria-hidden', 'false');
 
     // Open third tearsheet
     await page.getByText('Toggle #3').click();
     await page.screenshot({ animations: 'disabled' });
+    await page.waitForSelector(`.${bc}--stacked-${3}-of-${3}`, {
+      visible: true,
+    });
+
+    // Tearsheet 3 is now open
     const ts3 = page.locator(
       `[class*="${bc}--stacked-${3}-of-${3}"].is-visible`
     );
-
-    // Tearsheet 3 is now open
     await expect(ts3).toBeInViewport();
     await expect(ts3).toHaveAttribute('aria-hidden', 'false');
   });

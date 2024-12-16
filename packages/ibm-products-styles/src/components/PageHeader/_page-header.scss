@@ -538,13 +538,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle-row {
-    display: -webkit-box;
-    overflow: hidden;
-    max-width: 100%;
     margin-top: $spacing-03;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 
     @include breakpoint-up('md') {
       max-width: $left-section-std-width;
@@ -557,6 +551,24 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__subtitle {
     @include type.type-style('body-01');
+  }
+
+  .#{$block-class}__subtitle-tooltip .#{$carbon-prefix}--definition-term {
+    border-bottom: 0;
+    letter-spacing: inherit;
+  }
+
+  // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
+  .#{$block-class}__subtitle-tooltip
+    .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
+    max-inline-size: fit-content;
+  }
+
+  .#{$block-class}__subtitle-text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .#{$block-class}__available-row {

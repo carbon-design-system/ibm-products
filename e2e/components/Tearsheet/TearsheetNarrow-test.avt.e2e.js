@@ -12,7 +12,7 @@ import { visitStory } from '../../test-utils/storybook';
 import { carbon, pkg } from '../../../packages/ibm-products/src/settings';
 
 const bc = `${pkg.prefix}--tearsheet`;
-test.setTimeout(6000);
+
 test.describe('TearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {

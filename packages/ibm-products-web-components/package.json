@@ -89,7 +89,7 @@
     "storybook": "^8.4.5",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1",
+    "vite": "^6.0.3",
     "vitest": "^2.1.2",
     "web-component-analyzer": "2.0.0"
   }

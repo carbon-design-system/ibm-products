@@ -203,6 +203,7 @@ export let UserAvatar = React.forwardRef<HTMLDivElement, UserAvatarProps>(
         </Tooltip>
       );
     }
+
     return <Avatar />;
   }
 );

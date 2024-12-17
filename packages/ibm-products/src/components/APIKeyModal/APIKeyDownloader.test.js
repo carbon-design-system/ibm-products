@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import React from 'react';
 import { APIKeyDownloader } from './APIKeyDownloader';
 
@@ -20,15 +20,15 @@ const defaultProps = {
 
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
-describe(name, () => {
+describe('APIKeyDownloader', () => {
   it('has json file download', async () => {
-    const { getByText } = render(<APIKeyDownloader {...defaultProps} />);
-    const link = getByText(defaultProps.linkText);
+    render(<APIKeyDownloader {...defaultProps} />);
+    const link = screen.getByText(defaultProps.linkText);
     await waitFor(() => {
       expect(link).toHaveProperty('download');
     });
-    getByText(defaultProps.body);
-    expect(link).toHaveProperty('download', 'file.json');
+    screen.getByText(defaultProps.body);
+    await waitFor(() => expect(link).toHaveProperty('download', 'file.json'));
     expect(link).toHaveProperty('href', 'http://localhost/download-link');
   });
 
@@ -37,13 +37,13 @@ describe(name, () => {
       ...defaultProps,
       fileType: 'txt',
     };
-    const { getByText } = render(<APIKeyDownloader {...props} />);
-    const link = getByText(props.linkText);
+    render(<APIKeyDownloader {...props} />);
+    const link = screen.getByText(props.linkText);
 
     await waitFor(() => {
       expect(link).toHaveProperty('download');
     });
-    expect(link).toHaveProperty('download', 'file.txt');
+    await waitFor(() => expect(link).toHaveProperty('download', 'file.txt'));
     expect(link).toHaveProperty('href', 'http://localhost/download-link');
   });
 
@@ -63,7 +63,7 @@ describe(name, () => {
     await waitFor(() => {
       expect(link).toHaveProperty('download');
     });
-    expect(link).toHaveProperty('download', 'apikey.json');
+    await waitFor(() => expect(link).toHaveProperty('download', 'apikey.json'));
     expect(link).toHaveProperty('href', 'http://localhost/download-link');
   });
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,13 +9,14 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expectMultipleError } from '../../global/js/utils/test-helper';
+import { expectError } from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
+import { validateActionSetProps } from './ActionSet';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
@@ -97,11 +98,8 @@ describe(componentName, () => {
   });
 
   it('rejects too many buttons using the custom validator', async () =>
-    expectMultipleError(
-      [
-        'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
-        'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
-      ],
+    expectError(
+      'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
       () =>
         render(
           <ActionSet
@@ -166,8 +164,6 @@ describe(componentName, () => {
   });
 });
 
-const v = (size, props, propName, componentName) =>
-  ActionSet.validateActions(() => size)(props, propName, componentName);
 const prop = `prop-${uuidv4()}`;
 
 const primary = { kind: 'primary' };
@@ -200,73 +196,148 @@ const props = {
 };
 
 describe(`${componentName}.validateActions`, () => {
+  let mockError;
+  beforeEach(() => {
+    mockError = jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    mockError.mockRestore();
+  });
   it('rejects more than three actions for a small size', async () => {
-    expect(v('sm', props[1], prop, componentName)).toBeNull();
-    expect(v('sm', props[2], prop, componentName)).toBeNull();
-    expect(v('sm', props[3], prop, componentName)).toBeNull();
-    expect(v('sm', props[4], prop, componentName)).toBeInstanceOf(Error);
+    expect(
+      validateActionSetProps({ size: 'sm', actions: props[1][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'sm', actions: props[2][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'sm', actions: props[3][prop] })
+    ).toBeNull();
+    expect(validateActionSetProps({ size: 'sm', actions: props[4][prop] }));
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects more than three actions for a medium size', async () => {
-    expect(v('md', props[1], prop, componentName)).toBeNull();
-    expect(v('md', props[2], prop, componentName)).toBeNull();
-    expect(v('md', props[3], prop, componentName)).toBeNull();
-    expect(v('md', props[4], prop, componentName)).toBeInstanceOf(Error);
+    expect(
+      validateActionSetProps({ size: 'md', actions: props[1][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props[2][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props[3][prop] })
+    ).toBeNull();
+    expect(validateActionSetProps({ size: 'md', actions: props[4][prop] }));
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects more than four actions for a large size', async () => {
-    expect(v('lg', props[1], prop, componentName)).toBeNull();
-    expect(v('lg', props[2], prop, componentName)).toBeNull();
-    expect(v('lg', props[3], prop, componentName)).toBeNull();
-    expect(v('lg', props[4], prop, componentName)).toBeNull();
-    expect(v('lg', props[5], prop, componentName)).toBeInstanceOf(Error);
+    expect(
+      validateActionSetProps({ size: 'lg', actions: props[1][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'lg', actions: props[2][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'lg', actions: props[3][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'lg', actions: props[4][prop] })
+    ).toBeNull();
+    expect(validateActionSetProps({ size: 'lg', actions: props[5][prop] }));
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects more than four actions for a 2xl size', async () => {
-    expect(v('2xl', props[1], prop, componentName)).toBeNull();
-    expect(v('2xl', props[2], prop, componentName)).toBeNull();
-    expect(v('2xl', props[3], prop, componentName)).toBeNull();
-    expect(v('2xl', props[4], prop, componentName)).toBeNull();
-    expect(v('2xl', props[5], prop, componentName)).toBeInstanceOf(Error);
+    expect(
+      validateActionSetProps({ size: '2xl', actions: props[1][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: '2xl', actions: props[2][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: '2xl', actions: props[3][prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: '2xl', actions: props[4][prop] })
+    ).toBeNull();
+    expect(validateActionSetProps({ size: '2xl', actions: props[5][prop] }));
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects more than one primary kind', async () => {
-    expect(v('md', props.primary, prop, componentName)).toBeNull();
-    expect(v('md', props.twoPrimaries, prop, componentName)).toBeInstanceOf(
-      Error
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.primary[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.twoPrimaries[prop] })
     );
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects more than one ghost kind', async () => {
-    expect(v('md', props.ghost, prop, componentName)).toBeNull();
-    expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.ghost[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.twoGhosts[prop] })
+    );
+    expect(mockError).toHaveBeenCalledTimes(1);
   });
 
   it('rejects ghost kind with other kinds for extra small, small, medium size', async () => {
-    expect(v('sm', props.psg, prop, componentName)).toBeInstanceOf(Error);
-    expect(v('md', props.psg, prop, componentName)).toBeInstanceOf(Error);
-    expect(v('lg', props.psg, prop, componentName)).toBeNull();
-    expect(v('2xl', props.psg, prop, componentName)).toBeNull();
+    expect(validateActionSetProps({ size: 'sm', actions: props.psg[prop] }));
+    expect(mockError).toHaveBeenCalledTimes(1);
+    expect(validateActionSetProps({ size: 'md', actions: props.psg[prop] }));
+    expect(mockError).toHaveBeenCalledTimes(2);
+    expect(
+      validateActionSetProps({ size: 'lg', actions: props.psg[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: '2xl', actions: props.psg[prop] })
+    ).toBeNull();
   });
 
   it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', async () => {
-    expect(v('md', props.primary, prop, componentName)).toBeNull();
-    expect(v('md', props.danger, prop, componentName)).toBeNull();
-    expect(v('md', props.secondary, prop, componentName)).toBeNull();
-    expect(v('md', props.dangerGhost, prop, componentName)).toBeNull();
-    expect(v('md', props.ghost, prop, componentName)).toBeNull();
-
-    expect(v('md', props.dangerPrimary, prop, componentName)).toBeInstanceOf(
-      Error
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.primary[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.danger[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.secondary[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.dangerGhost[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.ghost[prop] })
+    ).toBeNull();
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.dangerPrimary[prop] })
     );
-    expect(v('md', props.dangerTertiary, prop, componentName)).toBeInstanceOf(
-      Error
+    expect(mockError).toHaveBeenCalledTimes(1);
+    expect(
+      validateActionSetProps({
+        size: 'md',
+        actions: props.dangerTertiary[prop],
+      })
     );
-    expect(v('md', props.tertiary, prop, componentName)).toBeInstanceOf(Error);
-    expect(v('md', props.twoPrimaries, prop, componentName)).toBeInstanceOf(
-      Error
+    expect(mockError).toHaveBeenCalledTimes(2);
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.tertiary[prop] })
     );
-    expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
+    expect(mockError).toHaveBeenCalledTimes(3);
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.twoPrimaries[prop] })
+    );
+    expect(mockError).toHaveBeenCalledTimes(4);
+    expect(
+      validateActionSetProps({ size: 'md', actions: props.twoGhosts[prop] })
+    );
+    expect(mockError).toHaveBeenCalledTimes(5);
   });
 
   it('should render both expressive and regular buttons inside of the button set', async () => {

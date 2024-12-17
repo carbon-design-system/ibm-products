@@ -13,20 +13,42 @@ import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
+const defaults = {
+  rowSizes: [
+    {
+      value: 'xl', // 64
+    },
+    {
+      value: 'lg', // 48
+    },
+    {
+      value: 'md', // 40
+    },
+    {
+      value: 'sm', // 32
+    },
+    {
+      value: 'xs', // 24
+    },
+  ],
+  rowSizeLabels: {
+    xl: 'Extra large',
+    lg: 'Large (default)',
+    md: 'Medium',
+    sm: 'Small',
+    xs: 'Extra small',
+  },
+  selectedOption: 'lg',
+};
+
 const RowSizeRadioGroup = forwardRef(
   (
     {
-      rowSizes,
-      selectedOption,
+      rowSizes = defaults.rowSizes,
+      selectedOption = defaults.selectedOption,
       onChange,
       legendText,
-      rowSizeLabels = {
-        xl: 'Extra large',
-        lg: 'Large (default)',
-        md: 'Medium',
-        sm: 'Small',
-        xs: 'Extra small',
-      },
+      rowSizeLabels = defaults.rowSizeLabels,
       tableId,
     },
     ref
@@ -74,27 +96,6 @@ const getBackwardCompatibleRowSize = (rowSize) => {
     // md is a new value
   };
   return rowSizeMap[rowSize] || rowSize;
-};
-
-RowSizeRadioGroup.defaultProps = {
-  rowSizes: [
-    {
-      value: 'xl', // 64
-    },
-    {
-      value: 'lg', // 48
-    },
-    {
-      value: 'md', // 40
-    },
-    {
-      value: 'sm', // 32
-    },
-    {
-      value: 'xs', // 24
-    },
-  ],
-  selectedOption: 'lg',
 };
 
 RowSizeRadioGroup.propTypes = {

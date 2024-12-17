@@ -202,8 +202,6 @@ export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
     tableId,
   };
 
-  console.log(value);
-
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
   );

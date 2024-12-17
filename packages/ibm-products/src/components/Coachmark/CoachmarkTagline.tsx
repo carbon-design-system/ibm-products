@@ -75,16 +75,15 @@ export let CoachmarkTagline = React.forwardRef<
         className={cx(
           blockClass,
           `${blockClass}__${theme}`,
-          coachmark.isOpen && `${blockClass}--is-open`
+          coachmark?.isOpen && `${blockClass}--is-open`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
         <button
-          // {...rest}
           className={`${blockClass}__cta`}
           type="button"
-          {...coachmark.buttonProps}
+          {...coachmark?.buttonProps}
         >
           <div className={`${blockClass}__idea`}>
             <Idea size={16} />

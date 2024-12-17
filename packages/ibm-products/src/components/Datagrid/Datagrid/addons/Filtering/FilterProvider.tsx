@@ -17,8 +17,28 @@ import {
   SAVED_FILTERS,
   MULTISELECT,
 } from './constants';
+import { Filter } from '../../../../FilterSummary/FilterSummary';
 
-export const FilterContext = createContext(undefined);
+type ActionType = typeof SAVED_FILTERS;
+
+interface Action {
+  type: ActionType;
+  payload?: any;
+}
+
+export interface ContextType {
+  EventEmitter: any;
+  dispatch: React.Dispatch<Action>;
+  state: {
+    savedFilters: object[];
+  };
+  setPanelOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  panelOpen: boolean;
+  tableId: string;
+  filterTags: Filter[];
+}
+
+export const FilterContext = createContext<ContextType>({} as ContextType);
 
 const EventEmitter = {
   events: {},
@@ -109,7 +129,7 @@ const formatDateRange = (startDate, endDate) => {
 };
 
 const prepareFiltersForTags = (filters, renderDateLabel, tableId) => {
-  const tags = [];
+  const tags: Filter[] = [];
 
   filters.forEach(({ id, type, value }) => {
     const sharedFilterProps = {
@@ -181,6 +201,8 @@ export const FilterProvider = ({ children, filters, filterProps, tableId }) => {
     dispatch,
     tableId,
   };
+
+  console.log(value);
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,35 @@ import PropTypes from 'prop-types';
 import { returnUpdatedActiveCell } from './returnUpdatedActiveCell';
 import { getCellIdAsObject } from './getCellIdAsObject';
 
-export const InlineEditContext = createContext(undefined);
+type ActionType =
+  | 'ADD_GRID_ACTIVE_FOCUS'
+  | 'REMOVE_GRID_ACTIVE_FOCUS'
+  | 'ENTER_EDIT_MODE'
+  | 'EXIT_EDIT_MODE'
+  | 'UPDATE_ACTIVE_CELL_ID'
+  | 'SET_FEATURE_FLAGS';
+
+interface Action {
+  type: ActionType;
+  payload?: any;
+}
+
+interface ContextType {
+  state: {
+    activeCellId?: string | null;
+    editId?: string | null;
+    featureFlags?: {
+      'enable-datagrid-useEditableCell'?: boolean;
+      'enable-datagrid-useInlineEdit'?: boolean;
+      'enable-datagrid-useCustomizeColumns'?: boolean;
+    };
+    gridActive?: boolean;
+    previousActiveCellId?: string | null;
+  };
+  dispatch: React.Dispatch<Action>;
+}
+
+export const InlineEditContext = createContext<ContextType>({} as ContextType);
 
 const inlineEditReducer = (state, action) => {
   switch (action.type) {

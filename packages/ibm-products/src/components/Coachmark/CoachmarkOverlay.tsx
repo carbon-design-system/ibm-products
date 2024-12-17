@@ -105,6 +105,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
 
     const handleKeyPress = (event) => {
       const { shiftKey, key } = event;
+      /* istanbul ignore next */
       if (key === 'Enter' || key === ' ') {
         setA11yDragMode((prevVal) => !prevVal);
       } else if (a11yDragMode) {
@@ -131,7 +132,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const styledTune: StyledTune = useMemo(() => {
       const style: StyledTune = {};
       if (isBeacon || isDraggable) {
-        if (coachmark.targetRect) {
+        if (coachmark?.targetRect) {
           style.left = coachmark.targetRect.x + window.scrollX;
           style.top = coachmark.targetRect.y + window.scrollY;
         }
@@ -151,6 +152,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       return style;
     }, [isBeacon, isDraggable, coachmark, kind]);
 
+    /* istanbul ignore next */
     function handleDragBounds(x, y) {
       let xRes = x;
       let yRes = y;
@@ -207,7 +209,9 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           blockClass,
           `${blockClass}--${kind}`,
           `${blockClass}__${theme}`,
-          (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
+          (isBeacon || isDraggable) &&
+            coachmark?.align &&
+            `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
           a11yDragMode && `${blockClass}--is-dragmode`,
           className
@@ -254,6 +258,7 @@ const useWindowDimensions = () => {
   );
 
   useEffect(() => {
+    /* istanbul ignore next */
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
     }

@@ -77,6 +77,18 @@ export interface CoachmarkOverlayElementsProps {
    * The label for the Close button.
    */
   closeButtonLabel?: string;
+  /**
+   * Callback called when clicking on the Next button.
+   */
+  onNext?: () => void;
+  /**
+   * Callback called when clicking on the Previous button.
+   */
+  onBack?: () => void;
+  /**
+   * Current step of the coachmarks.
+   */
+  currentStep?: number;
 }
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -96,6 +108,9 @@ const defaults = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
+  onNext: undefined,
+  onBack: undefined,
+  currentStep: 0,
 };
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
@@ -112,9 +127,12 @@ export let CoachmarkOverlayElements = React.forwardRef<
       isVisible = defaults.isVisible,
       media,
       renderMedia,
+      currentStep = defaults.currentStep,
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
+      onNext = defaults.onNext,
+      onBack = defaults.onBack,
       // Collect any other property values passed in.
       ...rest
     },
@@ -123,7 +141,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const buttonFocusRef = useRef<ButtonProps<any> | undefined>(undefined);
     const scrollRef = useRef<CarouselProps | undefined>(undefined);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [currentProgStep, _setCurrentProgStep] = useState(0);
+    const [currentProgStep, _setCurrentProgStep] = useState(currentStep);
     const coachmark = useCoachmark();
     const hasMedia = media || renderMedia;
 
@@ -144,6 +162,16 @@ export let CoachmarkOverlayElements = React.forwardRef<
       () => renderMedia?.({ playStep: currentProgStep }),
       [currentProgStep, renderMedia]
     );
+
+    useEffect(() => {
+      // When current step is set by props
+      // scroll to the appropriate view on the carrousel
+      const targetStep = clamp(currentStep, progStepFloor, progStepCeil);
+
+      scrollRef?.current?.scrollToView?.(targetStep);
+      // Avoid circular call to this hook
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentStep]);
 
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
@@ -222,7 +250,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ) : (
           <>
             <Carousel
-              disableArrowScroll
               ref={scrollRef as RefObject<HTMLDivElement>}
               onScroll={(scrollPercent) => {
                 setScrollPosition(scrollPercent);
@@ -248,6 +275,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onBack?.();
                   }}
                 >
                   {previousButtonLabel}
@@ -268,6 +296,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onNext?.();
                   }}
                 >
                   {nextButtonText}
@@ -321,6 +350,10 @@ CoachmarkOverlayElements.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
   /**
+   * Current step of the coachmarks
+   */
+  currentStep: PropTypes.number,
+  /**
    * The visibility of CoachmarkOverlayElements is
    * managed in the parent component.
    */
@@ -344,6 +377,14 @@ CoachmarkOverlayElements.propTypes = {
    * The label for the Next button.
    */
   nextButtonText: PropTypes.string,
+  /**
+   * Optional callback called when clicking on the Previous button.
+   */
+  onBack: PropTypes.func,
+  /**
+   * Optional callback called when clicking on the Next button.
+   */
+  onNext: PropTypes.func,
   /**
    * The label for the Previous button.
    */

@@ -304,7 +304,7 @@ export let InterstitialScreen = React.forwardRef<
             className // Apply any supplied class names to the main HTML element.
           )}
           size="lg"
-          onClose={onClose}
+          onClose={handleClose}
           open={isOpen}
           ref={_forwardedRef}
           aria-label={interstitialAriaLabel}
@@ -317,7 +317,6 @@ export let InterstitialScreen = React.forwardRef<
               headerClassName
             )}
             iconDescription={closeIconDescription}
-            buttonOnClick={handleClose}
           >
             {headerTitle && <h2>{headerTitle}</h2>}
             {!hideProgressIndicator && (

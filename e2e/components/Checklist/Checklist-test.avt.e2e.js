@@ -37,7 +37,7 @@ test.describe('Checklist @avt', () => {
     await page.keyboard.press('Enter');
     await expect(buttonEle).toHaveAttribute('aria-expanded', 'false');
 
-    //Press to hide tooltip
+    //Press escape to hide tooltip
     await page.keyboard.press('Escape');
     await expect(tooltipContent).not.toBeVisible();
 

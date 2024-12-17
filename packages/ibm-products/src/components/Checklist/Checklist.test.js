@@ -6,7 +6,7 @@
  */
 
 import React, { act } from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -47,6 +47,48 @@ const taskLists = [
       {
         kind: 'unchecked',
         label: 'Unchecked task without callback',
+      },
+    ],
+  },
+  {
+    title: 'List 3 title',
+    tasks: [
+      {
+        kind: 'indeterminate',
+        label: 'indeterminate task with callback',
+        onClick: () => {},
+      },
+      {
+        kind: 'indeterminate',
+        label: 'indeterminate task without callback',
+      },
+    ],
+  },
+  {
+    title: 'List 4 title',
+    tasks: [
+      {
+        kind: 'disabled',
+        label: 'disabled task with callback',
+        onClick: () => {},
+      },
+      {
+        kind: 'disabled',
+        label: 'disabled task without callback',
+      },
+    ],
+  },
+  {
+    title: 'List 5 title',
+    tasks: [
+      {
+        kind: 'error',
+        label: 'error task with callback',
+        onClick: () => {},
+      },
+      {
+        kind: 'error',
+        label: 'error task without callback',
       },
     ],
   },
@@ -172,5 +214,64 @@ describe(componentName, () => {
       .closest('button');
     await click(taskItemWithCallback);
     expect(list1itemCallbackFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should expand/collapse while clicking on checklist header button ', async () => {
+    renderComponent({
+      title: 'Checklist header',
+      viewAllLabel: `View all (10)`,
+    });
+
+    const buttonEle = screen.getAllByRole('button');
+    const toggleButton = buttonEle.find(
+      (btn) => btn.getAttribute('aria-label') === 'Checklist toggle'
+    );
+    // checking if the checklist is expanded
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByText('View all (10)')).toBeVisible();
+
+    // collapsing checklist
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'false');
+
+    // expand back on second click
+    fireEvent.click(toggleButton);
+    expect(toggleButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByText('View all (10)')).toBeVisible();
+  });
+
+  it('should call checklist with checked, unchecked,indeterminate, disabled and error state', async () => {
+    renderComponent();
+    const checkedElement = screen
+      .getByTitle('List 1 title')
+      .nextElementSibling?.querySelector('li > span');
+    expect(checkedElement).toBeInViewport;
+    expect(checkedElement).toHaveClass(`${blockClass}__icon--checked`);
+
+    const uncheckedElement = screen
+      .getByTitle('List 2 title')
+      .nextElementSibling?.querySelector('li > span');
+    expect(uncheckedElement).toBeInViewport;
+    expect(uncheckedElement).toHaveClass(`${blockClass}__icon--unchecked`);
+
+    const indeterminateElement = screen
+      .getByTitle('List 3 title')
+      .nextElementSibling?.querySelector('li > span');
+    expect(indeterminateElement).toBeInViewport;
+    expect(indeterminateElement).toHaveClass(
+      `${blockClass}__icon--indeterminate`
+    );
+
+    const disabledElement = screen
+      .getByTitle('List 4 title')
+      .nextElementSibling?.querySelector('li > span');
+    expect(disabledElement).toBeInViewport;
+    expect(disabledElement).toHaveClass(`${blockClass}__icon--disabled`);
+
+    const errorElement = screen
+      .getByTitle('List 5 title')
+      .nextElementSibling?.querySelector('li > span');
+    expect(errorElement).toBeInViewport;
+    expect(errorElement).toHaveClass(`${blockClass}__icon--error`);
   });
 });

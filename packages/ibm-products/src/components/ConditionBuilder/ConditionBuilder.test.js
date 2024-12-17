@@ -16,16 +16,376 @@ import { ConditionBuilder } from '.';
 import cx from 'classnames';
 import userEvent from '@testing-library/user-event';
 
-import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
 } from './assets/SampleData';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
+import CustomInput from './assets/CustomInput';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
 
+const customOperators = [
+  {
+    label: 'is greater than',
+    id: 'greater',
+  },
+  {
+    label: 'is greater than or equal to',
+    id: 'greaterEqual',
+  },
+];
+
+const inputData = {
+  properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Africa',
+            id: 'Africa',
+          },
+          {
+            label: 'Antarctica',
+            id: 'Antarctica',
+          },
+          {
+            label: 'Asia',
+            id: 'Asia',
+          },
+          {
+            label: 'Australia',
+            id: 'Australia',
+          },
+          {
+            label: 'Europe',
+            id: 'Europe',
+          },
+        ],
+      },
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Afghanistan',
+            id: 'AF',
+          },
+          {
+            label: 'Albania',
+            id: 'AL',
+          },
+          {
+            label: 'Algeria',
+            id: 'AG',
+          },
+          {
+            label: 'Andorra',
+            id: 'AN',
+          },
+          {
+            label: 'India',
+            id: 'India',
+          },
+        ],
+      },
+    },
+    {
+      id: 'color',
+      label: 'Color',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'black',
+            id: 'black',
+          },
+          {
+            label: 'silver',
+            id: 'silver',
+          },
+          {
+            label: 'gray',
+            id: 'gray',
+          },
+          {
+            label: 'white',
+            id: 'white',
+          },
+          {
+            label: 'maroon',
+            id: 'maroon',
+          },
+          {
+            label: 'red',
+            id: 'red',
+          },
+          {
+            label: 'purple',
+            id: 'purple',
+          },
+          {
+            label: 'fuchsia',
+            id: 'fuchsia',
+          },
+          {
+            label: 'green',
+            id: 'green',
+          },
+          {
+            label: 'lime',
+            id: 'lime',
+          },
+          {
+            label: 'olive',
+            id: 'olive',
+          },
+          {
+            label: 'yellow',
+            id: 'yellow',
+          },
+          {
+            label: 'navy',
+            id: 'navy',
+          },
+          {
+            label: 'blue',
+            id: 'blue',
+          },
+          {
+            label: 'teal',
+            id: 'teal',
+          },
+          {
+            label: 'aqua',
+            id: 'aqua',
+          },
+        ],
+      },
+    },
+    {
+      id: 'id',
+      label: 'ID',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'id_long',
+      label: 'Id Long',
+      type: 'textarea',
+      config: {},
+    },
+    {
+      id: 'price',
+      label: 'Price',
+      type: 'number',
+      config: {
+        min: 0,
+        step: 1,
+        unit: 'Dollars',
+      },
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      type: 'date',
+      config: {},
+    },
+    {
+      id: 'time',
+      label: 'Time',
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Processing',
+            id: 'Processing',
+          },
+          {
+            label: 'Preparing for dispatch',
+            id: 'Preparing for dispatch',
+          },
+          {
+            label: 'Dispatched',
+            id: 'Dispatched',
+          },
+          {
+            label: 'In delivery',
+            id: 'In delivery',
+          },
+          {
+            label: 'Delivered',
+            id: 'Delivered',
+          },
+        ],
+      },
+    },
+    {
+      id: 'season',
+      label: 'Season',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Winter',
+            id: 'Winter',
+          },
+          {
+            label: 'Spring',
+            id: 'Spring',
+          },
+          {
+            label: 'Summer',
+            id: 'Summer',
+          },
+          {
+            label: 'Fall',
+            id: 'Fall',
+          },
+        ],
+      },
+    },
+    {
+      id: 'product',
+      label: 'Product',
+      type: 'custom',
+      config: {
+        component: CustomInput,
+        operators: customOperators,
+      },
+    },
+  ],
+};
+
+const inputDataDynamicOptions = {
+  properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      icon: Earth,
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'color',
+      label: 'Color',
+      type: 'option',
+      config: {},
+    },
+    {
+      id: 'id',
+      label: 'ID',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'price',
+      label: 'Price',
+      type: 'number',
+      config: {
+        min: 0,
+        step: 1,
+        unit: 'Dollars',
+      },
+    },
+    {
+      id: 'date',
+      label: 'Date',
+      type: 'date',
+      config: {},
+    },
+    {
+      id: 'time',
+      label: 'Time',
+      type: 'time',
+      config: {
+        timeZones: ['IST', 'CET', 'UTC', 'LOCAL'],
+      },
+    },
+
+    {
+      id: 'product',
+      label: 'Product',
+      type: 'text',
+      config: {},
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Processing',
+            id: 'Processing',
+          },
+          {
+            label: 'Preparing for dispatch',
+            id: 'Preparing for dispatch',
+          },
+          {
+            label: 'Dispatched',
+            id: 'Dispatched',
+          },
+          {
+            label: 'In delivery',
+            id: 'In delivery',
+          },
+          {
+            label: 'Delivered',
+            id: 'Delivered',
+          },
+        ],
+      },
+    },
+    {
+      id: 'season',
+      label: 'Season',
+      type: 'option',
+      config: {
+        options: [
+          {
+            label: 'Winter',
+            id: 'Winter',
+          },
+          {
+            label: 'Spring',
+            id: 'Spring',
+          },
+          {
+            label: 'Summer',
+            id: 'Summer',
+          },
+          {
+            label: 'Fall',
+            id: 'Fall',
+          },
+        ],
+      },
+    },
+  ],
+};
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
@@ -861,12 +1221,12 @@ describe(componentName, () => {
     let closeButtons = document.querySelectorAll(
       `.${blockClass}__close-condition`
     );
-    expect(closeButtons).toHaveLength(3);
+    expect(closeButtons).toHaveLength(4);
     //click first close button
     await act(() => userEvent.click(closeButtons[0]));
 
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
-    expect(closeButtons).toHaveLength(2);
+    expect(closeButtons).toHaveLength(3);
 
     expect(closeButtons[0]).toHaveFocus();
 
@@ -874,8 +1234,8 @@ describe(componentName, () => {
 
     await act(() => userEvent.click(closeButtons[1]));
     closeButtons = document.querySelectorAll(`.${blockClass}__close-condition`);
-    expect(closeButtons).toHaveLength(1);
-    expect(closeButtons[0]).toHaveFocus();
+    expect(closeButtons).toHaveLength(2);
+    expect(closeButtons[1]).toHaveFocus();
   });
 
   it('check the next/previous close button is focussed on remove condition for Hierarchical variant', async () => {
@@ -1558,16 +1918,6 @@ describe(componentName, () => {
 
     await act(() => userEvent.keyboard('{ArrowDown}'));
     expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowDown}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowDown}'));
-    expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
     ).toHaveFocus();
 
@@ -1578,29 +1928,45 @@ describe(componentName, () => {
 
     await act(() => userEvent.keyboard('{ArrowDown}'));
     expect(
-      document.querySelector(`[role="row"][aria-level="3"][aria-posinset="3"]`)
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="1"]`
+      )[1]
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowDown}'));
+    expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="2"]`
+      )[1]
     ).toHaveFocus();
 
     //reverse row navigation
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
     expect(
+      document.querySelectorAll(
+        `[role="row"][aria-level="3"][aria-posinset="1"]`
+      )[1]
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
+      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
+    ).toHaveFocus();
+
+    await act(() => userEvent.keyboard('{ArrowUp}'));
+    expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="2"]`)
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
     expect(
       document.querySelector(`[role="row"][aria-level="3"][aria-posinset="1"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowUp}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="5"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowUp}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="4"]`)
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowUp}'));
@@ -1624,14 +1990,6 @@ describe(componentName, () => {
     ).toHaveFocus();
 
     await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(
-      document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
-    ).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowRight}'));
-    expect(screen.getAllByRole('button', { name: 'Region' })[0]).toHaveFocus();
-
-    await act(() => userEvent.keyboard('{ArrowLeft}'));
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();

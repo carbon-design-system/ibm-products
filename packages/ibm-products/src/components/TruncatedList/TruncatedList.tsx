@@ -22,6 +22,7 @@ import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--truncated-list`;
@@ -140,6 +141,12 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
       }
     }, [childrenArray, minItems, maxItems, isCollapsed, listRef]);
 
+    useIsomorphicEffect(() => {
+      if (listRef.current) {
+        listRef.current.style.height = listHeight.toString();
+      }
+    }, [listHeight]);
+
     return (
       <div
         {...rest}
@@ -156,11 +163,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <List
-          className={`${blockClass}__list`}
-          ref={listRef}
-          style={{ height: listHeight }}
-        >
+        <List className={`${blockClass}__list`} ref={listRef}>
           {isCollapsed ? childrenArray.slice(0, minItems) : children}
         </List>
 

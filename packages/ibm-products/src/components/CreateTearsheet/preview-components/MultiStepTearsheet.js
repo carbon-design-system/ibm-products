@@ -24,7 +24,7 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
-import { SlugSample } from '../../../global/js/story-parts/slug';
+import { sampleDecorator } from '../../../global/js/story-parts/decorator';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
@@ -56,6 +56,7 @@ export const MultiStepTearsheet = ({
   label,
   nextButtonText,
   slug,
+  decorator,
   submitButtonText,
   title,
   ...rest
@@ -115,7 +116,8 @@ export const MultiStepTearsheet = ({
           })
         }
         firstFocusElement={firstFocusElement}
-        slug={slug && SlugSample()}
+        slug={slug && sampleDecorator(slug)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...rest}
       >
         <CreateTearsheetStep

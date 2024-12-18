@@ -24,6 +24,7 @@ import {
   useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 import { CreateInfluencer } from '../CreateInfluencer';
 import { Form } from '@carbon/react';
@@ -88,6 +89,11 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   experimentalSecondarySubmitText?: string;
 
   /**
+   * Optional prop that allows you to pass any component.
+   */
+  decorator?: ReactNode;
+
+  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;
@@ -140,11 +146,6 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   open?: boolean;
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
-   */
-  slug?: ReactNode;
-
-  /**
    * The submit button text
    */
   submitButtonText: string;
@@ -162,6 +163,12 @@ export interface CreateTearsheetProps extends PropsWithChildren {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition?: 'normal' | 'lower';
+
+  // Deprecated props
+  /**
+   * @deprecated Property replaced by `decorator`
+   */
+  slug?: ReactNode;
 }
 
 interface Step {
@@ -190,7 +197,8 @@ export let CreateTearsheet = forwardRef(
       onRequestSubmit,
       open,
       firstFocusElement,
-      slug,
+      slug: deprecated_slug,
+      decorator,
       submitButtonText,
       title,
       verticalPosition = 'normal',
@@ -305,7 +313,7 @@ export let CreateTearsheet = forwardRef(
           onClose,
           open,
           size: 'wide',
-          slug,
+          decorator: decorator || deprecated_slug,
           title,
           verticalPosition,
           closeIconDescription: '',
@@ -346,6 +354,12 @@ CreateTearsheet = pkg.checkComponentEnabled(CreateTearsheet, componentName);
 // is used in preference to relying on function.name.
 CreateTearsheet.displayName = componentName;
 
+export const deprecatedProps = {
+  /**
+   *  @deprecated Property replaced by `decorator`
+   */
+  slug: deprecateProp(PropTypes.node, 'Property replaced by `decorator`'),
+};
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 CreateTearsheet.propTypes = {
@@ -368,6 +382,11 @@ CreateTearsheet.propTypes = {
    * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
+
+  /**
+   *  Optional prop that allows you to pass any component.
+   */
+  decorator: PropTypes.node,
 
   /**
    * A description of the flow, displayed in the header area of the tearsheet.
@@ -427,11 +446,6 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
-   */
-  slug: PropTypes.node,
-
-  /**
    * The submit button text
    */
   submitButtonText: PropTypes.string.isRequired,
@@ -449,4 +463,5 @@ CreateTearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };

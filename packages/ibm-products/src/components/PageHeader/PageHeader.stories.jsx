@@ -133,7 +133,7 @@ const children = {
     <div style={{ display: 'flex' }}>
       <p
         style={{
-          // stylelint-disable-next-line carbon/layout-token-use
+          // stylelint-disable-next-line carbon/layout-use
           marginRight: '50px',
           maxWidth: '400px',
         }}
@@ -486,7 +486,7 @@ const pageActionsOverflowLabel = 'Page actions...';
 
 const subtitle = 'Optional subtitle if necessary';
 const longSubtitle =
-  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on.';
+  'Optional subtitle if necessary, which is very long in this case, but will need to be handled somehow. It just keeps going on and on and on and on and on and on and on and on and on and on and on.';
 const demoSubtitle = 'This report details the monthly authentication failures';
 
 const dummyPageContent = (

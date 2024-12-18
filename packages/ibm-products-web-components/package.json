@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.4.0-rc.0",
+  "version": "0.5.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -49,13 +49,13 @@
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.51.0-rc.0",
-    "@carbon/styles": "1.69.0",
-    "@carbon/web-components": "2.17.0",
+    "@carbon/ibm-products-styles": "^2.52.0-rc.0",
+    "@carbon/styles": "1.71.0",
+    "@carbon/web-components": "2.19.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {
-    "@carbon/icons": "^11.52.0",
+    "@carbon/icons": "^11.53.0",
     "@carbon/motion": "^11.24.0",
     "@mordech/vite-lit-loader": "^0.35.0",
     "@rollup/plugin-alias": "^5.1.1",
@@ -77,7 +77,7 @@
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "^9.11.1",
-    "eslint-config-carbon": "3.17.1",
+    "eslint-config-carbon": "3.18.0",
     "globby": "^14.0.2",
     "happy-dom": "^15.11.6",
     "postcss": "^8.4.47",
@@ -89,7 +89,7 @@
     "storybook": "^8.4.5",
     "storybook-addon-accessibility-checker": "^3.1.61-rc.3",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1",
+    "vite": "^6.0.3",
     "vitest": "^2.1.2",
     "web-component-analyzer": "2.0.0"
   }

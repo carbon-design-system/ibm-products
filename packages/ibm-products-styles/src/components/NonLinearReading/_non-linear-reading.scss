@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/layout-use */
 /* stylelint-disable function-no-unknown */
 
 // Standard imports.
@@ -70,7 +70,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 }
 // The "up" chevron
 .#{$block-class} .#{$block-class}__keyword svg {
-  margin: to-rem(1px) 0 0 0;
+  margin: to-rem(1px) 0 0;
   vertical-align: text-top;
 }
 

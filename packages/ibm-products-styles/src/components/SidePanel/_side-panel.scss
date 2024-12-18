@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
+@use 'sass:map';
+
 // Other Carbon settings.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -22,12 +25,11 @@
 // SidePanel uses the following IBM Products components:
 // ActionSet
 @use '../ActionSet/action-set';
-@use 'sass:list';
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
-@mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
+@mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
   /* any value is single value list */
   width: list.nth($size, 1);
   @if list.length($size) > 1 {
@@ -51,7 +53,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 @mixin setCommonTitleStyles() {
   display: -webkit-box;
   overflow: hidden;
-  /* stylelint-disable-next-line carbon/layout-token-use -- custom css property set below */
+  /* stylelint-disable-next-line carbon/layout-use -- custom css property set below */
   padding-right: var(--#{$block-class}--title-padding-right);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -110,7 +112,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     border-right: 1px solid $border-subtle-02;
   }
   &.#{$block-class}.#{$block-class}--has-slug,
-  &.#{$block-class}.#{$block-class}--has-ai-label {
+  &.#{$block-class}.#{$block-class}--has-ai-label,
+  &.#{$block-class}.#{$block-class}--has-decorator {
     border-color: transparent;
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
@@ -121,7 +124,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     top: calc(-1px * var(--#{$block-class}--scroll-animation-distance));
     min-height: $spacing-08;
     padding: $spacing-05;
@@ -197,14 +200,16 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar,
   &.#{$block-class}--has-slug,
-  &.#{$block-class}--has-ai-label {
+  &.#{$block-class}--has-ai-label,
+  &.#{$block-class}--has-decorator {
     --#{$block-class}--title-padding-right: #{$spacing-10};
   }
 
   &.#{$block-class}:has(.#{$block-class}__action-toolbar),
   &.#{$block-class}--has-action-toolbar {
     &.#{$block-class}--has-slug,
-    &.#{$block-class}--has-ai-label {
+    &.#{$block-class}--has-ai-label,
+    &.#{$block-class}--has-decorator {
       --#{$block-class}--title-padding-right: #{$spacing-11};
     }
   }
@@ -217,7 +222,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__title {
     position: sticky;
     z-index: 4;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     top: var(--#{$block-class}--title-stop);
 
     /* border-bottom used instead of padding which wrapped text shows through */
@@ -234,7 +239,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__title-text {
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     transform: translateY(
       calc(
         -1 * #{$spacing-05} * var(--#{$block-class}--scroll-animation-progress)
@@ -261,13 +266,12 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     @include setCommonTitleStyles();
 
     position: absolute;
-    /* stylelint-disable-next-line carbon/layout-token-use */
     top: 0;
     opacity: var(--#{$block-class}--scroll-animation-progress);
   }
 
   .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     transform: translateY(
       calc(
         #{$spacing-05} * (1 - var(--#{$block-class}--scroll-animation-progress))
@@ -312,7 +316,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   &.#{$block-class}--has-slug .#{$block-class}--scrolls,
-  &.#{$block-class}--has-ai-label .#{$block-class}--scrolls {
+  &.#{$block-class}--has-ai-label .#{$block-class}--scrolls,
+  &.#{$block-class}--has-decorator .#{$block-class}--scrolls {
     @include utilities.ai-popover-gradient('default', 0, 'layer');
 
     box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
@@ -367,7 +372,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__slug-and-close,
-  .#{$block-class}__ai-label-and-close {
+  .#{$block-class}__ai-label-and-close,
+  .#{$block-class}__decorator-and-close {
     position: absolute;
     z-index: 10; /* must be higher than title container border bottom */
     top: 0;
@@ -409,7 +415,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
   &.#{$block-class}.#{$block-class}--xs
     .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
-    @include setPanelSize(map-get($side-panel-sizes, xs));
+    @include setPanelSize(map.get($side-panel-sizes, xs));
   }
 }
 
@@ -453,7 +459,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   height: 1px;
   padding: 0;
   border: 0;
-  // stylelint-disable-next-line carbon/layout-token-use
+  // stylelint-disable-next-line carbon/layout-use
   margin: -1px;
   clip: rect(0, 0, 0, 0);
   visibility: inherit;
@@ -469,8 +475,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   inset: 0;
 }
 
+/* stylelint-disable-next-line carbon/theme-token-use */
 .#{$block-class}--has-slug + .#{$block-class}__overlay,
-.#{$block-class}--has-ai-label + .#{$block-class}__overlay {
-  /* stylelint-disable-next-line carbon/theme-token-use */
+.#{$block-class}--has-ai-label + .#{$block-class}__overlay,
+.#{$block-class}--has-decorator + .#{$block-class}__overlay {
   background-color: $ai-overlay;
 }

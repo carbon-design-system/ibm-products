@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.56.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.54.0-rc.0...@carbon/ibm-products@2.56.0-rc.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** implement focus return to generate button ([#6440](https://github.com/carbon-design-system/ibm-products/issues/6440)) ([535e871](https://github.com/carbon-design-system/ibm-products/commit/535e87142413695c530952f7b314201c8a35becc))
+* **APIKeyModal:** implement useFocus hook ([#6290](https://github.com/carbon-design-system/ibm-products/issues/6290)) ([4a92770](https://github.com/carbon-design-system/ibm-products/commit/4a92770d9179f6b59bfe18e53c998fdb51bd794a))
+* **conditionBuilder:** issue fix and data correction ([#6421](https://github.com/carbon-design-system/ibm-products/issues/6421)) ([1f5b63e](https://github.com/carbon-design-system/ibm-products/commit/1f5b63ec428ddd2a2b2ee7c4153c83c2fff6a61c))
+* **CreateTearsheet:** Dynamically disable/hide the experimentalSecondarySubmit button in CreateTearsheet ([#6412](https://github.com/carbon-design-system/ibm-products/issues/6412)) ([2eab4db](https://github.com/carbon-design-system/ibm-products/commit/2eab4db31164aed9f84c003466fce0bc74467ce3))
+* **EmptyState:** empty states throws hydration errors in next js due to dynamic id ([#6508](https://github.com/carbon-design-system/ibm-products/issues/6508)) ([d5767e8](https://github.com/carbon-design-system/ibm-products/commit/d5767e8e9e5bc078d7324fbda71268a4d42d0bee))
+* **FullPageError:** accessibility violations ([#6503](https://github.com/carbon-design-system/ibm-products/issues/6503)) ([3f45528](https://github.com/carbon-design-system/ibm-products/commit/3f45528cd037c0232c2699c18d8bf63a5da8891b))
+* **side panel in react:** slideIn not working as expected ([#6501](https://github.com/carbon-design-system/ibm-products/issues/6501)) ([9d07dab](https://github.com/carbon-design-system/ibm-products/commit/9d07dab82cefd4046f65f8cac25d1d829f6d7c1a))
+* **tearsheet:** address portalTarget type ([#6400](https://github.com/carbon-design-system/ibm-products/issues/6400)) ([a11d036](https://github.com/carbon-design-system/ibm-products/commit/a11d0364a5beaa3d018db559656c3d7806e1b484))
+* update accessibility-checker version ([#6525](https://github.com/carbon-design-system/ibm-products/issues/6525)) ([d8c7051](https://github.com/carbon-design-system/ibm-products/commit/d8c70518087e7e41fdf1aa45cbbf692389058d56))
+* update to Carbon 11 compatible versions to latest ([#6437](https://github.com/carbon-design-system/ibm-products/issues/6437)) ([48d5c34](https://github.com/carbon-design-system/ibm-products/commit/48d5c34dca79a4b00fc69391a513431fa21295ee))
+* **useravatar:** accessibility issue and add avt complex state ([#6399](https://github.com/carbon-design-system/ibm-products/issues/6399)) ([4a70821](https://github.com/carbon-design-system/ibm-products/commit/4a70821b85688730a9d4484340da2517ee079db1))
+
+
+### Features
+
+* add utils section to storybook ([#6394](https://github.com/carbon-design-system/ibm-products/issues/6394)) ([711eb72](https://github.com/carbon-design-system/ibm-products/commit/711eb72ef00d1f1935fd0fcec9e0c0383dff53dc))
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **coachmark:** Add default opening for not-stacked coachmarks ([#6516](https://github.com/carbon-design-system/ibm-products/issues/6516)) ([73ee693](https://github.com/carbon-design-system/ibm-products/commit/73ee693dda68bbbc0ccc6ed802b0efe8f528950e))
+* Decouple lottie-web dependency from our repo ([#6477](https://github.com/carbon-design-system/ibm-products/issues/6477)) ([6b0a75b](https://github.com/carbon-design-system/ibm-products/commit/6b0a75ba4d15d7b2e640b4bb6992635ec3ab770c))
+* **productive card:** floating ui for overflow menu ([#6395](https://github.com/carbon-design-system/ibm-products/issues/6395)) ([42a1362](https://github.com/carbon-design-system/ibm-products/commit/42a1362ad2ff4998f8286ed0698a82c4ec8ea552))
+
+
+
+
+
+# [2.55.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.55.0-rc.0...@carbon/ibm-products@2.55.0) (2024-12-04)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.55.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.54.0-rc.0...@carbon/ibm-products@2.55.0-rc.0) (2024-11-25)
 
 

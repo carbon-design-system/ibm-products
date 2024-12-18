@@ -9,7 +9,10 @@ import React, { useLayoutEffect, useState } from 'react';
 import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import { handleOnPageSelectAllRowData } from './addons/stateReducer';
+import {
+  handleOnPageSelectAllRowData,
+  handleSelectAllRowData,
+} from './addons/stateReducer';
 import { DataGridState, DataGridToggleAllRowsProps } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -41,6 +44,8 @@ const SelectAll = (datagridState: DataGridState) => {
     dispatch,
     rows,
     getRowId,
+    toggleAllRowsSelected,
+    withVirtualScroll,
     onAllRowSelect,
   } = datagridState;
   const isFirstColumnStickyLeft =
@@ -75,6 +80,33 @@ const SelectAll = (datagridState: DataGridState) => {
     return onChange?.(event);
   };
 
+  const handleSelectAllChange = (event) => {
+    if (indeterminate) {
+      handleSelectAllRowData({
+        dispatch,
+        rows,
+        getRowId,
+        indeterminate: true,
+        isChecked: undefined,
+      });
+      toggleAllRowsSelected(false);
+      onAllRowSelect?.(rows, event);
+
+      return onChange?.({
+        target: { checked: false },
+      } as any);
+    }
+    handleSelectAllRowData({
+      dispatch,
+      rows,
+      getRowId,
+      isChecked: event.target.checked,
+      indeterminate,
+    });
+    onAllRowSelect?.(rows, event);
+    return onChange?.(event);
+  };
+
   return (
     <TableSelectAll
       {...selectProps}
@@ -89,7 +121,9 @@ const SelectAll = (datagridState: DataGridState) => {
         }
       )}
       name={`${tableId}-select-all-checkbox-name`}
-      onSelect={handleOnPageSelectAllChange}
+      onSelect={
+        withVirtualScroll ? handleSelectAllChange : handleOnPageSelectAllChange
+      }
       disabled={isFetching || selectProps?.disabled}
       id={`${tableId}-select-all-checkbox-id`}
     />

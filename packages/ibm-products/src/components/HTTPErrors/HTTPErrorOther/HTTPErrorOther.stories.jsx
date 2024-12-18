@@ -45,8 +45,11 @@ const Template = (args) => {
           version. Please migrate to{' '}
           <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error-fullpageerror--docs">
             FullPageError
-          </a>
-          .
+          </a>{' '}
+          by running{' '}
+          <code>
+            npx @carbon/upgrade migrate ibm-products-update-http-errors --write
+          </code>
         </div>
       }
     >

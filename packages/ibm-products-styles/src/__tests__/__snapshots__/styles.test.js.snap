@@ -129,6 +129,10 @@ p.c4p--about-modal__copyright-text:first-child {
   fill: var(--cds-button-danger-primary, #da1e28);
 }
 
+.c4p--apikey-modal__checkmark-icon {
+  fill: var(--cds-button-primary, #0f62fe);
+}
+
 .c4p--action-set {
   align-items: stretch;
   justify-content: flex-end;

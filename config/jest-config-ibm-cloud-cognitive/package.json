@@ -22,7 +22,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^16.14.12"
+    "npm-check-updates": "^17.1.11"
   },
   "peerDependencies": {
     "jest": "^29.7.0"

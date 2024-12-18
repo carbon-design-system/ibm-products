@@ -67,7 +67,6 @@
     "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'scripts/example-gallery-builder/update-example/**/package.json'",
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
-    "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh",
     "visual-snapshot": "cd packages/core && yarn percy storybook storybook-static"
   },
   "devDependencies": {
@@ -99,11 +98,10 @@
     "jest-canvas-mock": "2.5.2",
     "jest-junit": "^16.0.0",
     "json": "^11.0.0",
-    "lerna": "^8.0.2",
+    "lerna": "^8.1.9",
     "lint-staged": "^15.2.0",
-    "npm-check-updates": "^16.14.12",
+    "npm-check-updates": "^17.1.11",
     "npm-run-all": "^4.1.5",
-    "npm-upgrade": "^3.1.0",
     "postcss": "^8.4.33",
     "prettier": "^2.8.8",
     "prettier-config-carbon": "^0.11.0",

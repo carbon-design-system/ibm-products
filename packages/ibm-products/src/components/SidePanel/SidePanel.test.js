@@ -6,17 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import React from 'react';
+import React, { act } from 'react';
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -37,6 +31,26 @@ const selectorPageContentValue = '#side-panel-test-page-content';
 
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
+
+const sampleAILabel = (
+  <AILabel className="aiLabel-container" size="xs" align="left-start">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h1>84%</h1>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          This is not really Lorem Ipsum but the spell checker did not like the
+          previous text with it&apos;s non-words which is why this unwieldy
+          sentence, should one choose to call it that, here.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+    </AILabelContent>
+  </AILabel>
+);
 
 const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
@@ -169,7 +183,7 @@ describe('SidePanel', () => {
       `.${blockClass}__close-button`
     );
     await act(() => userEvent.click(closeIconButton));
-    rerender(<SlideIn placement="left" open={false} />);
+    await act(() => rerender(<SlideIn placement="left" open={false} />));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineStart).toBe('0');
   });
@@ -184,9 +198,9 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
-    rerender(<SlideIn placement="right" open={false} />);
-    fireEvent.animationEnd(outerElement);
+    await act(() => fireEvent.animationStart(outerElement));
+    await act(() => rerender(<SlideIn placement="right" open={false} />));
+    await act(() => fireEvent.animationEnd(outerElement));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();
@@ -209,9 +223,11 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
-    fireEvent.animationEnd(outerElement);
-    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
+    await act(() => fireEvent.animationStart(outerElement));
+    await act(() => fireEvent.animationEnd(outerElement));
+    await act(() =>
+      rerender(<SlideIn animateTitle={false} placement="right" open={false} />)
+    );
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
   });
@@ -225,16 +241,18 @@ describe('SidePanel', () => {
     );
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     await act(() => userEvent.click(closeIconButton));
-    rerender(
-      <SidePanel
-        title={title}
-        includeOverlay
-        open={false}
-        onRequestClose={onRequestCloseFn}
-        id="sidepanel-id"
-      >
-        Content
-      </SidePanel>
+    await act(() =>
+      rerender(
+        <SidePanel
+          title={title}
+          includeOverlay
+          open={false}
+          onRequestClose={onRequestCloseFn}
+          id="sidepanel-id"
+        >
+          Content
+        </SidePanel>
+      )
     );
     setTimeout(() => {
       expect(overlayElement).not.toBeInTheDocument();
@@ -363,35 +381,33 @@ describe('SidePanel', () => {
     );
     expect(navigationAction).toBeTruthy();
   });
-  it('should not have AI Label when it is not passed', () => {
+
+  it('should have AI Label when it is passed through slug', () => {
+    const { container } = renderSidePanel({
+      slug: sampleAILabel,
+    });
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
+  });
+
+  it('should not have a ai label container when a it is not passed', () => {
     const { container } = renderSidePanel();
     expect(container.querySelector('.aiLabel-container')).toBe(null);
   });
+
   it('should have AI Label when it is passed', () => {
-    const sampleAILabel = (
-      <AILabel className="aiLabel-container" size="xs" align="left-start">
-        <AILabelContent>
-          <div>
-            <p className="secondary">AI Explained</p>
-            <h1>84%</h1>
-            <p className="secondary bold">Confidence score</p>
-            <p className="secondary">
-              This is not really Lorem Ipsum but the spell checker did not like
-              the previous text with it&apos;s non-words which is why this
-              unwieldy sentence, should one choose to call it that, here.
-            </p>
-            <hr />
-            <p className="secondary">Model type</p>
-            <p className="bold">Foundation model</p>
-          </div>
-        </AILabelContent>
-      </AILabel>
-    );
     const { container } = renderSidePanel({
       aiLabel: sampleAILabel,
     });
     expect(container.querySelector('.aiLabel-container')).toBeTruthy();
   });
+
+  it('should have AI Label when it is passed to decorator', () => {
+    const { container } = renderSidePanel({
+      decorator: sampleAILabel,
+    });
+    expect(container.querySelector('.aiLabel-container')).toBeTruthy();
+  });
+
   it('should throw console warning if labelText passed without Title', () => {
     const consoleWarnSpy = jest
       .spyOn(console, 'warn')

@@ -88,14 +88,26 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   experimentalSecondarySubmitText?: string;
 
   /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement?: string;
+
+  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description?: ReactNode;
 
   /**
-   * Specifies elements to focus on first on render.
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
-  firstFocusElement?: string;
+  selectorPrimaryFocus?: string;
+
+  /**
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
+   */
+  hasError?: boolean;
 
   /**
    * Used to set the size of the influencer
@@ -181,7 +193,9 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       experimentalSecondarySubmitText,
+      firstFocusElement,
       description,
+      hasError,
       influencerWidth = 'narrow',
       initialStep,
       label,
@@ -189,7 +203,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      firstFocusElement,
+      selectorPrimaryFocus,
       slug,
       submitButtonText,
       title,
@@ -311,6 +325,8 @@ export let CreateTearsheet = forwardRef(
           closeIconDescription: '',
         }}
         currentStep={currentStep}
+        hasError={hasError}
+        selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>
@@ -385,6 +401,12 @@ CreateTearsheet.propTypes = {
   firstFocusElement: PropTypes.string,
 
   /**
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
+   */
+  hasError: PropTypes.bool,
+
+  /**
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
@@ -425,6 +447,12 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus: PropTypes.string,
 
   /**
    *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component

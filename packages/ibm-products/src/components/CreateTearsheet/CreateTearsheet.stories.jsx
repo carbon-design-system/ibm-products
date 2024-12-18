@@ -43,7 +43,7 @@ const createTearsheetProps = {
   className: 'test-class-name',
   label: '',
   influencerWidth: 'narrow',
-  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
+  selectorPrimaryFocus: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});

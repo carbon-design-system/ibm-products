@@ -21,15 +21,6 @@ test.describe('NotificationsPanel @avt', () => {
       },
     });
 
-    const notificationPanelElement = page.locator(
-      `#${pkg.prefix}--notifications-panel`
-    );
-    await page.getByLabel('Notifications').click();
-    await notificationPanelElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
     await expect(page).toHaveNoACViolations(
       'NotificationsPanel @avt-default-state'
     );
@@ -42,10 +33,6 @@ test.describe('NotificationsPanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    const notificationTrigger = page.getByRole('button', {
-      name: 'Notifications',
-    });
-    await notificationTrigger.click();
 
     const notificationPanel = await page.locator(
       `div#${pkg.prefix}--notifications-panel`
@@ -73,5 +60,12 @@ test.describe('NotificationsPanel @avt', () => {
         await page.evaluate(() => document.activeElement?.textContent || '')
       );
     }
+
+    // check if focus returns to trigger button when panel is closed
+    await page.keyboard.press('Escape');
+    const notificationTrigger = page.getByRole('button', {
+      name: 'Notifications',
+    });
+    await expect(notificationTrigger).toBeFocused();
   });
 });

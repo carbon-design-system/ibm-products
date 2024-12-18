@@ -162,6 +162,14 @@ test.describe('TagSet @avt', () => {
         carbonTheme: 'white',
       },
     });
+    // Race conditions
+    // Wait for the "+14" tag element to appear and be visible
+    await page.waitForSelector(
+      `span.${carbon.prefix}--tag__label[title="+14"]`,
+      {
+        visible: true,
+      }
+    );
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
 
     await simulateKeyPress(page, 'Tab');

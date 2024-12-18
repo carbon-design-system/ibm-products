@@ -29,6 +29,11 @@ docs: {
     },
 */
   },
+  percy: {
+    args: {
+      open: true,
+    },
+  },
 };
 
 const Template = (args) => {

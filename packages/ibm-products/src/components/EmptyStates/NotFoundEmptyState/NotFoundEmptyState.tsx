@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -68,6 +68,11 @@ export interface NotFoundEmptyStateProps {
   };
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs?: (() => ReactNode) | string | ElementType;
+
+  /**
    * Empty state size
    */
   size?: 'lg' | 'sm';
@@ -101,6 +106,7 @@ export let NotFoundEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
+      headingAs,
       subtitle,
       title,
 
@@ -133,6 +139,7 @@ export let NotFoundEmptyState = React.forwardRef<
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title || ''}
         />
@@ -172,6 +179,11 @@ NotFoundEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
 
   /**
    * The alt text for empty state svg images. If not provided , title will be used.

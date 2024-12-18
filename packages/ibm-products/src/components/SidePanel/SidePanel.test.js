@@ -6,17 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import React from 'react';
+import React, { act } from 'react';
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -189,7 +183,7 @@ describe('SidePanel', () => {
       `.${blockClass}__close-button`
     );
     await act(() => userEvent.click(closeIconButton));
-    rerender(<SlideIn placement="left" open={false} />);
+    await act(() => rerender(<SlideIn placement="left" open={false} />));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineStart).toBe('0');
   });
@@ -204,9 +198,9 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
-    rerender(<SlideIn placement="right" open={false} />);
-    fireEvent.animationEnd(outerElement);
+    await act(() => fireEvent.animationStart(outerElement));
+    await act(() => rerender(<SlideIn placement="right" open={false} />));
+    await act(() => fireEvent.animationEnd(outerElement));
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();
@@ -229,9 +223,11 @@ describe('SidePanel', () => {
     );
     const outerElement = container.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(closeIconButton));
-    fireEvent.animationStart(outerElement);
-    fireEvent.animationEnd(outerElement);
-    rerender(<SlideIn animateTitle={false} placement="right" open={false} />);
+    await act(() => fireEvent.animationStart(outerElement));
+    await act(() => fireEvent.animationEnd(outerElement));
+    await act(() =>
+      rerender(<SlideIn animateTitle={false} placement="right" open={false} />)
+    );
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
   });
@@ -245,16 +241,18 @@ describe('SidePanel', () => {
     );
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     await act(() => userEvent.click(closeIconButton));
-    rerender(
-      <SidePanel
-        title={title}
-        includeOverlay
-        open={false}
-        onRequestClose={onRequestCloseFn}
-        id="sidepanel-id"
-      >
-        Content
-      </SidePanel>
+    await act(() =>
+      rerender(
+        <SidePanel
+          title={title}
+          includeOverlay
+          open={false}
+          onRequestClose={onRequestCloseFn}
+          id="sidepanel-id"
+        >
+          Content
+        </SidePanel>
+      )
     );
     setTimeout(() => {
       expect(overlayElement).not.toBeInTheDocument();

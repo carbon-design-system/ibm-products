@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import useId from '../../../global/js/utils/useId';
+import { useId } from '../../../global/js/utils/useId';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;

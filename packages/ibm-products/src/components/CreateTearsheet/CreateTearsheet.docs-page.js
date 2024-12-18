@@ -155,7 +155,7 @@ sections, you can utilize the below included class names.
             code: `
 <CreateTearsheet
   {...args}
-  slug={
+  decorator={
     <AILabel
       className="ai-label-container"
       autoAlign={false}

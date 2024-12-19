@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.56.1-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.56.0...@carbon/ibm-products@2.56.1-rc.0) (2024-12-18)
+
+
+### Bug Fixes
+
+* **EmptyState:** added useId handling for older react version ([#6620](https://github.com/carbon-design-system/ibm-products/issues/6620)) ([45af420](https://github.com/carbon-design-system/ibm-products/commit/45af4204487b79754b6ee9c950c23119e2684a99))
+
+
+
+
+
 # [2.56.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.56.0-rc.0...@carbon/ibm-products@2.56.0) (2024-12-18)
 
 **Note:** Version bump only for package @carbon/ibm-products

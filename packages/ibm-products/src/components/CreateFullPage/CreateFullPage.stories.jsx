@@ -57,7 +57,6 @@ export default {
     controls: { sort: 'requiredFirst' },
     percy: {
       waitForSelector: `button.${blockClass}__create-button`,
-      waitForSelector: `.${blockClass}__influencer`,
     },
   },
 

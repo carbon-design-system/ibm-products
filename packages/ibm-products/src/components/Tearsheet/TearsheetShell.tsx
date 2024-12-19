@@ -86,6 +86,12 @@ interface TearsheetShellProps extends PropsWithChildren {
   hasCloseIcon?: boolean;
 
   /**
+   * To indicate an error occurred in the Tearsheet step
+   * Mainly used by CreateTearsheet component to pass error state
+   */
+  hasError?: boolean;
+
+  /**
    * The content for the header actions area, displayed alongside the title in
    * the header area of the tearsheet. This is typically a drop-down, or a set
    * of small buttons, or similar. NB the headerActions is only applicable for
@@ -246,6 +252,7 @@ export const TearsheetShell = React.forwardRef(
       currentStep,
       description,
       hasCloseIcon,
+      hasError,
       headerActions,
       influencer,
       influencerPosition,
@@ -326,6 +333,7 @@ export const TearsheetShell = React.forwardRef(
       open,
       position,
       selectorPrimaryFocus,
+      hasError,
     ]);
 
     useEffect(() => {

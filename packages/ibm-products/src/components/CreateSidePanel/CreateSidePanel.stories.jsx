@@ -103,9 +103,9 @@ export default {
   decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
 };
 
-const DefaultTemplate = ({ slug, ...args }) => {
+const DefaultTemplate = ({ slug, ...args }, context) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
       {renderUIShellHeader()}
@@ -197,9 +197,9 @@ const DefaultTemplate = ({ slug, ...args }) => {
   );
 };
 
-const TemplateWithFormValidation = ({ slug, ...args }) => {
+const TemplateWithFormValidation = ({ slug, ...args }, context) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
   return (
@@ -296,9 +296,9 @@ const TemplateWithFormValidation = ({ slug, ...args }) => {
   );
 };
 
-const TemplateWithMultipleForms = ({ slug, ...args }) => {
+const TemplateWithMultipleForms = ({ slug, ...args }, context) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
   return (

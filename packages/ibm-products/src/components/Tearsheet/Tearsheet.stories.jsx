@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DocsPage from './Tearsheet.docs-page';
 
 import { action } from '@storybook/addon-actions';
@@ -201,8 +201,12 @@ const sampleAILabel = (
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, aiLabel, slug, ...args }) => {
+const Template = ({ actions, aiLabel, slug, ...args }, context) => {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
 
   const wiredActions =
     actions &&
@@ -253,9 +257,12 @@ const tabs = (
   </div>
 );
 
-const TemplateWithNav = ({ actions, aiLabel, slug, ...args }) => {
+const TemplateWithNav = ({ actions, aiLabel, slug, ...args }, context) => {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
@@ -301,7 +308,7 @@ const TemplateWithNav = ({ actions, aiLabel, slug, ...args }) => {
   );
 };
 
-const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }) => {
+const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }, context) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(undefined);
 
@@ -322,6 +329,10 @@ const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }) => {
     });
 
   const ref = useRef(undefined);
+
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
 
   return (
     <>
@@ -346,7 +357,10 @@ const ReturnFocusTemplate = ({ actions, aiLabel, slug, ...args }) => {
   );
 };
 
-const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
+const FirstElementDisabledTemplate = (
+  { actions, aiLabel, slug, ...args },
+  context
+) => {
   const [open, setOpen] = useState(false);
   const wiredActions =
     actions &&
@@ -365,6 +379,11 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
     });
 
   const ref = useRef(undefined);
+
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
+
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
@@ -412,11 +431,15 @@ const FirstElementDisabledTemplate = ({ actions, aiLabel, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ mixedSizes, actions, aiLabel, slug, ...args }) => {
+const StackedTemplate = (
+  { mixedSizes, actions, aiLabel, slug, ...args },
+  context
+) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const ref = useRef(undefined);
+  const openButton1 = useRef();
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -462,6 +485,14 @@ const StackedTemplate = ({ mixedSizes, actions, aiLabel, slug, ...args }) => {
 
   const VariableSizeTearsheet = mixedSizes ? TearsheetNarrow : Tearsheet;
 
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen1(context.viewMode !== 'docs');
+      setOpen2(context.viewMode !== 'docs');
+      setOpen3(context.viewMode !== 'docs');
+    }, 0);
+  }, []);
+
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
@@ -475,7 +506,7 @@ const StackedTemplate = ({ mixedSizes, actions, aiLabel, slug, ...args }) => {
           zIndex: 10000,
         }}
       >
-        <Button onClick={() => setOpen1(!open1)}>
+        <Button onClick={() => setOpen1(!open1)} ref={openButton1}>
           Toggle&nbsp;tearsheet&nbsp;1
         </Button>
         <Button onClick={() => setOpen2(!open2)}>
@@ -510,6 +541,7 @@ const StackedTemplate = ({ mixedSizes, actions, aiLabel, slug, ...args }) => {
           selectorPrimaryFocus="#stacked-input-1"
           aiLabel={aiLabel && sampleAILabel}
           slug={slug && sampleAILabel}
+          launcherButtonRef={openButton1}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 1

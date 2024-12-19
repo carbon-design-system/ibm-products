@@ -30,16 +30,15 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   const querySelect = `select${notQuery}`;
   const queryTextarea = `textarea${notQuery}`;
   const queryLink = `[href]${notQuery}`;
+  const queryAnchor = `a${notQuery}`;
   const queryTabIndex = `[tabindex="0"]${notQuery}`;
   const querySidePanelScroll = `.${sidePanelBaseClass}--scrolls`;
   // Final query
-  const query = `${queryButton},${queryLink},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
-
-  const modalEl = modalRef?.current;
+  const query = `${queryButton},${queryLink},${queryAnchor},${queryInput},${querySelect},${queryTextarea},${queryTabIndex},${querySidePanelScroll}`;
 
   const getFocusable = useCallback(() => {
     // Selecting all focusable elements based on the above conditions
-    let focusableElements = modalEl?.querySelectorAll(`${query}`);
+    let focusableElements = modalRef?.current?.querySelectorAll(`${query}`);
     if (focusableElements?.length) {
       focusableElements = Array.prototype.filter.call(
         focusableElements,
@@ -50,7 +49,10 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     const first = focusableElements?.[0];
     const last = focusableElements?.[focusableElements?.length - 1];
     const all = focusableElements;
-    const specified = getSpecificElement(modalEl, selectorPrimaryFocus);
+    const specified = getSpecificElement(
+      modalRef?.current,
+      selectorPrimaryFocus
+    );
 
     return {
       first,
@@ -58,11 +60,11 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
       all,
       specified,
     };
-  }, [modalEl, query, selectorPrimaryFocus]);
+  }, [modalRef, query, selectorPrimaryFocus]);
 
   useEffect(() => {
     getFocusable();
-  }, [getFocusable]);
+  }, [getFocusable, modalRef]);
 
   const handleKeyDown = async (event) => {
     // Checking whether the key is tab or not
@@ -89,10 +91,10 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
   };
 
   return {
-    firstElement: getFocusable().first,
-    lastElement: getFocusable().last,
-    allElements: getFocusable().all,
-    specifiedElement: getFocusable().specified,
+    firstElement: getFocusable()?.first,
+    lastElement: getFocusable()?.last,
+    allElements: getFocusable()?.all,
+    specifiedElement: getFocusable()?.specified,
     keyDownListener: handleKeyDown,
     getFocusable: getFocusable,
   };
@@ -109,21 +111,18 @@ export const claimFocus = (
   modalRef,
   selectorPrimaryFocus = undefined
 ) => {
-  if (
-    selectorPrimaryFocus &&
-    getSpecificElement(modalRef?.current, selectorPrimaryFocus)
-  ) {
-    const specifiedEl = getSpecificElement(
-      modalRef?.current,
-      selectorPrimaryFocus
-    );
+  let specifiedEl;
 
-    if (
-      specifiedEl &&
-      window?.getComputedStyle(specifiedEl)?.display !== 'none'
-    ) {
-      setTimeout(() => specifiedEl.focus(), 0);
-    }
+  if (selectorPrimaryFocus) {
+    specifiedEl = getSpecificElement(modalRef?.current, selectorPrimaryFocus);
+  }
+
+  if (
+    specifiedEl &&
+    window?.getComputedStyle(specifiedEl)?.display !== 'none' &&
+    specifiedEl?.tabIndex !== -1
+  ) {
+    setTimeout(() => specifiedEl.focus(), 0);
   } else {
     setTimeout(() => firstElement?.focus(), 0);
   }

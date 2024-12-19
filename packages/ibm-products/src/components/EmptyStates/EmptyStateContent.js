@@ -14,22 +14,30 @@ import { pkg } from '../../settings';
 import cx from 'classnames';
 
 // Carbon and package components we use.
-import { Button, Link } from '@carbon/react';
+import { Button, Link, Section } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyStateContent';
 
-export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
+export const EmptyStateContent = ({
+  action,
+  link,
+  headingAs,
+  size,
+  subtitle,
+  title,
+}) => {
   return (
     <div className={`${blockClass}__content`}>
-      <h3
+      <Section
+        as={headingAs}
         className={cx(`${blockClass}__header`, {
           [`${blockClass}__header--small`]: size === 'sm',
         })}
       >
         {title}
-      </h3>
+      </Section>
       {subtitle && (
         <p
           className={cx(`${blockClass}__subtitle`, {
@@ -79,6 +87,10 @@ EmptyStateContent.propTypes = {
     onClick: Button.propTypes.onClick,
     text: PropTypes.string,
   }),
+  /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
   /**
    * Empty state link object
    */

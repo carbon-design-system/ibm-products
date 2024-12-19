@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -66,6 +66,10 @@ export interface UnauthorizedEmptyStateProps {
     text?: string | ReactNode;
     href?: string;
   };
+  /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs?: (() => ReactNode) | string | ElementType;
 
   /**
    * Empty state size
@@ -101,6 +105,7 @@ export let UnauthorizedEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
+      headingAs,
       subtitle,
       title,
 
@@ -133,6 +138,7 @@ export let UnauthorizedEmptyState = React.forwardRef<
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title || ''}
         />
@@ -174,6 +180,11 @@ UnauthorizedEmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
+
+  /**
    * The alt text for empty state svg images. If not provided , title will be used.
    */
   illustrationDescription: PropTypes.string,
@@ -190,7 +201,6 @@ UnauthorizedEmptyState.propTypes = {
    * `illustrationTheme={appTheme === ('carbon--g100' || 'carbon--g90') ? 'dark' : 'light'}`
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
-
   /**
    * Empty state link object
    */
@@ -200,7 +210,6 @@ UnauthorizedEmptyState.propTypes = {
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     href: PropTypes.string,
   }),
-
   /**
    * Empty state size
    */

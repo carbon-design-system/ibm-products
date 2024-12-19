@@ -41,6 +41,7 @@ export default {
 };
 
 const defaultStoryProps = {
+  headingAs: 'h3',
   title: 'Empty state title',
   subtitle: 'Description text explaining why this section is empty.',
   illustrationDescription: 'Test alt text',

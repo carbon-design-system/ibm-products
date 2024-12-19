@@ -8,6 +8,7 @@
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
 import { render, html } from 'lit';
+import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 
 const defaultProps = {
   animateTitle: true,
@@ -16,10 +17,10 @@ const defaultProps = {
   selectorInitialFocus: '',
   label: '',
   open: true,
-  placement: 'right',
+  placement: SIDE_PANEL_PLACEMENT.RIGHT,
   preventCloseOnClickOutside: false,
   selectorPageContent: '',
-  size: 'md',
+  size: SIDE_PANEL_SIZE.MEDIUM,
   title: 'Side panel title',
 };
 

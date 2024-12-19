@@ -354,7 +354,7 @@ CreateTearsheet = pkg.checkComponentEnabled(CreateTearsheet, componentName);
 // is used in preference to relying on function.name.
 CreateTearsheet.displayName = componentName;
 
-export const deprecatedProps = {
+const deprecatedProps = {
   /**
    *  @deprecated Property replaced by `decorator`
    */

@@ -106,7 +106,7 @@ export let NotFoundEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
-      headingAs,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
 

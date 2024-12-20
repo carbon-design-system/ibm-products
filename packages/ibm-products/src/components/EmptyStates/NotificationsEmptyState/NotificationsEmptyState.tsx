@@ -108,7 +108,7 @@ export let NotificationsEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
-      headingAs,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
 

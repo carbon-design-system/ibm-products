@@ -106,7 +106,7 @@ export let ErrorEmptyState = React.forwardRef<
       illustrationTheme,
       link,
       size = defaults.size,
-      headingAs,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
 

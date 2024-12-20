@@ -105,7 +105,7 @@ export let UnauthorizedEmptyState = React.forwardRef<
       illustrationDescription,
       link,
       size = defaults.size,
-      headingAs,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
 

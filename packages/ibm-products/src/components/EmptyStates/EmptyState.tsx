@@ -32,9 +32,10 @@ enum sizes {
 }
 
 // Default values for props
-export const defaults: { position: string; size: sizes } = {
+export const defaults: { position: string; size: sizes; headingAs: string } = {
   position: 'top',
   size: sizes.lg,
+  headingAs: 'h3',
 };
 
 export interface EmptyStateProps {
@@ -121,7 +122,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       illustrationPosition = defaults.position,
       link,
       size = defaults.size,
-      headingAs,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
       ...rest

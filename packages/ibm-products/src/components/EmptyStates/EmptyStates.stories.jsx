@@ -42,6 +42,7 @@ export default {
 };
 
 const emptyStateCommonProps = {
+  headingAs: 'h3',
   title: 'Start by adding data assets',
   subtitle: (
     <>

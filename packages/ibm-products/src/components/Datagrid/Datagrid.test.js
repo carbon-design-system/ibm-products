@@ -1184,19 +1184,38 @@ describe(componentName, () => {
     const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
     screen.getAllByText('Empty State Title');
     screen.getByText('Description test explaining why this card is empty.');
-    expect(screen.getByRole('img')).toHaveClass(
-      `${pkg.prefix}--empty-state__illustration-noData`
-    );
+
+    expect(
+      screen
+        .getAllByRole('img', { hidden: true })
+        .find((img) =>
+          img.classList.contains(
+            `${pkg.prefix}--empty-state__illustration-noData`
+          )
+        )
+    ).toBeInTheDocument();
 
     rerender(<EmptyUsage emptyStateType="error" />);
-    expect(screen.getByRole('img')).toHaveClass(
-      `${pkg.prefix}--empty-state__illustration-error`
-    );
+    expect(
+      screen
+        .getAllByRole('img', { hidden: true })
+        .find((img) =>
+          img.classList.contains(
+            `${pkg.prefix}--empty-state__illustration-error`
+          )
+        )
+    ).toBeInTheDocument();
 
     rerender(<EmptyUsage emptyStateType="notFound" />);
-    expect(screen.getByRole('img')).toHaveClass(
-      `${pkg.prefix}--empty-state__illustration-notFound`
-    );
+    expect(
+      screen
+        .getAllByRole('img', { hidden: true })
+        .find((img) =>
+          img.classList.contains(
+            `${pkg.prefix}--empty-state__illustration-notFound`
+          )
+        )
+    ).toBeInTheDocument();
 
     rerender(<EmptyUsage emptyStateType="12345" />);
     expect(screen.queryByRole('img')).not.toBeInTheDocument();

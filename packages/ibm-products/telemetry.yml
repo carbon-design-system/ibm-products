@@ -456,14 +456,17 @@ collect:
         - editButtonText
         - editing
         - editSuccess
+        - editSuccessMessage
         - editSuccessTitle
         - errorText
         - generateButtonText
         - generateSuccessBody
+        - generateSuccessMessage
         - generateSuccessTitle
         - generateTitle
         - hasAPIKeyVisibilityToggle
         - hasDownloadLink
+        - helperText
         - hideAPIKeyLabel
         - loadingText
         - modalLabel
@@ -532,6 +535,7 @@ collect:
         - fixedIsVisible
         # CoachmarkOverlayElements
         - isVisible
+        - onBack
         # CoachmarkStackHome
         - onClickNavItem
         # Columns

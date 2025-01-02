@@ -125,7 +125,7 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(page).toHaveNoACViolations(
       'TearsheetNarrow @avt-all-header-items'
     );
-    await expect(page.locator('.ai-label-container')).toBeInViewport();
+    await expect(page.locator('.decorator-container')).toBeInViewport();
 
     // Selecting the first slug button
     const slugButton1 = page

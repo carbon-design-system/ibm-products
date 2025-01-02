@@ -31,6 +31,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration-notification`,
         `${blockClass}__illustration--${size}`,
       ])}
+      aria-hidden="true"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

@@ -132,7 +132,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const styledTune: StyledTune = useMemo(() => {
       const style: StyledTune = {};
       if (isBeacon || isDraggable) {
-        if (coachmark.targetRect) {
+        if (coachmark?.targetRect) {
           style.left = coachmark.targetRect.x + window.scrollX;
           style.top = coachmark.targetRect.y + window.scrollY;
         }
@@ -209,7 +209,9 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           blockClass,
           `${blockClass}--${kind}`,
           `${blockClass}__${theme}`,
-          (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
+          (isBeacon || isDraggable) &&
+            coachmark?.align &&
+            `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
           a11yDragMode && `${blockClass}--is-dragmode`,
           className

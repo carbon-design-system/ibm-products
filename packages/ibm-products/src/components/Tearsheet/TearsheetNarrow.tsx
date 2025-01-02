@@ -17,7 +17,6 @@ import {
 import React, { ForwardedRef, PropsWithChildren, ReactNode } from 'react';
 import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 
-import { ActionSet } from '../ActionSet';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -200,11 +199,8 @@ TearsheetNarrow.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore */
-    ActionSet.validateActions(() => 'lg'),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore*/
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

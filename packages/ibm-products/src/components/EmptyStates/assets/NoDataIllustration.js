@@ -6,12 +6,13 @@
  */
 
 // Import portions of React that are needed.
-import React, { useId } from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
+import { useId } from '../../../global/js/utils/useId';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
@@ -31,6 +32,7 @@ export const NoDataIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration--${size}`,
       ])}
       role="img"
+      aria-hidden="true"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

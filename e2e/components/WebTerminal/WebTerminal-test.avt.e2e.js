@@ -9,7 +9,6 @@
 
 import { expect, test } from '@playwright/test';
 import { visitStory } from '../../test-utils/storybook';
-import { pkg } from '../../../packages/ibm-products/src/settings';
 
 test.describe('WebTerminal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
@@ -20,14 +19,17 @@ test.describe('WebTerminal @avt', () => {
         carbonTheme: 'white',
       },
     });
+    await page.screenshot({ animations: 'disabled' });
+    await expect(page).toHaveNoACViolations('WebTerminal @avt-default-state');
 
-    await page.getByLabel('Web terminal').click();
-    const modalElement = page.locator(`.${pkg.prefix}--web-terminal`);
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
+    // test web terminal from trigger button
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Enter');
+    await page.screenshot({ animations: 'disabled' });
+    await expect(page).toHaveNoACViolations('WebTerminal @avt-default-state');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.screenshot({ animations: 'disabled' });
     await expect(page).toHaveNoACViolations('WebTerminal @avt-default-state');
   });
 });

@@ -328,7 +328,10 @@ const TemplateWithNav = ({ actions, decorator, slug, ...args }, context) => {
   );
 };
 
-const ReturnFocusTemplate = ({ actions, decorator, slug, ...args }, context) => {
+const ReturnFocusTemplate = (
+  { actions, decorator, slug, ...args },
+  context
+) => {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef(undefined);
 
@@ -377,12 +380,10 @@ const ReturnFocusTemplate = ({ actions, decorator, slug, ...args }, context) => 
   );
 };
 
-const FirstElementDisabledTemplate = ({
-  actions,
-  decorator,
-  slug,
-  ...args
-}, context) => {
+const FirstElementDisabledTemplate = (
+  { actions, decorator, slug, ...args },
+  context
+) => {
   const [open, setOpen] = useState(false);
   const wiredActions =
     actions &&
@@ -453,7 +454,10 @@ const FirstElementDisabledTemplate = ({
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ mixedSizes, actions, decorator, slug, ...args }, context) => {
+const StackedTemplate = (
+  { mixedSizes, actions, decorator, slug, ...args },
+  context
+) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);

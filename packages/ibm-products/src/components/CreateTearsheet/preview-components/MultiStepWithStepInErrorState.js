@@ -16,20 +16,23 @@ import { SlugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepWithStepInErrorState = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  submitButtonText,
-  title,
-}) => {
+export const MultiStepWithStepInErrorState = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    submitButtonText,
+    title,
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);

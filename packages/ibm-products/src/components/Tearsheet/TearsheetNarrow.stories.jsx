@@ -155,8 +155,8 @@ const sampleDecorator = (decorator) => {
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, decorator, slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ actions, decorator, slug, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const ref = useRef(undefined);
 
   const wiredActions = Array.prototype.map.call(actions, (action) => {
@@ -194,10 +194,10 @@ const Template = ({ actions, decorator, slug, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, decorator, slug, ...args }) => {
-  const [open1, setOpen1] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  const [open3, setOpen3] = useState(false);
+const StackedTemplate = ({ actions, decorator, slug, ...args }, context) => {
+  const [open1, setOpen1] = useState(context.viewMode !== 'docs');
+  const [open2, setOpen2] = useState(context.viewMode !== 'docs');
+  const [open3, setOpen3] = useState(context.viewMode !== 'docs');
   const ref = useRef(undefined);
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {

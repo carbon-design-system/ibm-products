@@ -85,7 +85,7 @@ const renderUIShellHeader = (
 );
 
 const Template = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(args.open);
   const notificationTriggerRef = useRef(null);
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
   const [notificationsData, setNotificationsData] = useState(data);
@@ -160,7 +160,7 @@ const Template = (args) => {
 };
 
 const EmptyNotifications = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(args.open);
   return (
     <>
       {renderUIShellHeader(open, setOpen)}
@@ -176,6 +176,7 @@ const EmptyNotifications = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
+  open: true,
   onDoNotDisturbChange: action('Toggled to do not disturb'),
   onViewAllClick: action('Clicked view all button'),
   onSettingsClick: action('Clicked settings gear'),
@@ -184,6 +185,7 @@ Default.args = {
 export const EmptyState = EmptyNotifications.bind({});
 EmptyState.args = {
   data: [],
+  open: true,
   onDoNotDisturbChange: action('Toggled to do not disturb'),
   onViewAllClick: action('Clicked view all button'),
   onSettingsClick: action('Clicked settings gear'),

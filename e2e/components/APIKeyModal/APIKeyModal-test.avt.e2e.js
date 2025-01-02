@@ -21,8 +21,6 @@ test.describe('APIKeyModal @avt', () => {
       },
     });
 
-    await page.getByRole('button', { name: 'Generate API key' }).click();
-
     await expect(page).toHaveNoACViolations('APIKeyModal @avt-default-state');
   });
 
@@ -36,25 +34,15 @@ test.describe('APIKeyModal @avt', () => {
     });
 
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
-    const generateButton = page.getByRole('button', { name: 'Generate' });
 
-    // Focus the Generate button
-    await page.keyboard.press('Tab');
-    await expect(generateButton).toBeFocused();
-
-    await page.keyboard.press('Enter');
-
-    // Evaluate the Instant Generate Modal opening animation
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
+    await expect(modalElement).toBeInViewport();
+    await expect(modalElement).not.toHaveAttribute('aria-hidden', 'true');
 
     await expect(page).toHaveNoACViolations(
       'APIKeyModal @avt-instant-generate-focus-trap'
     );
 
+    // Initial focus should be on first interactive element, on an open modal
     const apiKeyInput = page.getByLabel('Unique API Key');
     await expect(apiKeyInput).toBeFocused();
 
@@ -81,5 +69,20 @@ test.describe('APIKeyModal @avt', () => {
         )
       );
     await expect(modalElement).not.toBeInViewport();
+
+    // check the focus returns to trigger button
+    const generateButton = page.getByRole('button', { name: 'Generate' });
+    await expect(generateButton).toBeFocused();
+
+    // Reopen modal from trigger button to check if first focusable element is input field
+    await generateButton.click();
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(modalElement).toBeInViewport();
+    await expect(modalElement).not.toHaveAttribute('aria-hidden', 'true');
+    await expect(apiKeyInput).toBeFocused();
   });
 });

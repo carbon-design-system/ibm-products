@@ -29,21 +29,24 @@ import { sampleDecorator } from '../../../global/js/story-parts/decorator';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepWithIntro = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  decorator,
-  submitButtonText,
-  title,
-}) => {
+export const MultiStepWithIntro = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    decorator,
+    submitButtonText,
+    title,
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');

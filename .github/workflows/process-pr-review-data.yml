@@ -17,12 +17,8 @@ jobs:
       github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          cache: yarn
       - uses: ./actions/add-review-labels
         with:
           APP_ID: ${{ secrets.APP_ID }}
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          APP_INSTALLATION_ID: ${{ secrets.APP_INSTALLATION_ID }}

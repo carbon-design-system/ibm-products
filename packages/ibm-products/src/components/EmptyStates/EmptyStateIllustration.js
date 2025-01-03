@@ -44,7 +44,7 @@ const EmptyStateIllustration = ({ kind, ...rest }) => {
   const Illustration = getIllustration(kind);
   return (
     <Suspense>
-      <Illustration {...rest} />
+      <Illustration aria-hidden="true" {...rest} />
     </Suspense>
   );
 };

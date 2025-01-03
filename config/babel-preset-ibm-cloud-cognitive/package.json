@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.14.40",
+  "version": "0.15.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -22,7 +22,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^16.14.12"
+    "npm-check-updates": "^17.1.11"
   },
   "dependencies": {
     "@babel/core": "^7.23.9",

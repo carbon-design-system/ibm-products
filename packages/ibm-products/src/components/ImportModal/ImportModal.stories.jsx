@@ -76,8 +76,8 @@ const defaultProps = {
   title: 'Import',
 };
 
-const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(false);
+const TemplateWithState = ({ ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   return (
     <>
       <ImportModal {...args} open={open} onClose={() => setOpen(false)} />

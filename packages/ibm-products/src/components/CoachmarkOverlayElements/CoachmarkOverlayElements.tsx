@@ -13,6 +13,7 @@ import React, {
   ReactNode,
   RefObject,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -54,11 +55,16 @@ export interface CoachmarkOverlayElementsProps {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * * @deprecated please use the `renderMedia` prop
    */
   media?: {
     render?: () => ReactNode;
     filePaths?: string[];
   };
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
+  renderMedia?: (params) => ReactNode;
   /**
    * The label for the Next button.
    */
@@ -71,6 +77,18 @@ export interface CoachmarkOverlayElementsProps {
    * The label for the Close button.
    */
   closeButtonLabel?: string;
+  /**
+   * Callback called when clicking on the Next button.
+   */
+  onNext?: () => void;
+  /**
+   * Callback called when clicking on the Previous button.
+   */
+  onBack?: () => void;
+  /**
+   * Current step of the coachmarks.
+   */
+  currentStep?: number;
 }
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -90,6 +108,9 @@ const defaults = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
+  onNext: undefined,
+  onBack: undefined,
+  currentStep: 0,
 };
 /**
  * Composable container to allow for the displaying of CoachmarkOverlayElement
@@ -105,9 +126,13 @@ export let CoachmarkOverlayElements = React.forwardRef<
       children,
       isVisible = defaults.isVisible,
       media,
+      renderMedia,
+      currentStep = defaults.currentStep,
       nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
+      onNext = defaults.onNext,
+      onBack = defaults.onBack,
       // Collect any other property values passed in.
       ...rest
     },
@@ -116,8 +141,9 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const buttonFocusRef = useRef<ButtonProps<any> | undefined>(undefined);
     const scrollRef = useRef<CarouselProps | undefined>(undefined);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [currentProgStep, _setCurrentProgStep] = useState(0);
+    const [currentProgStep, _setCurrentProgStep] = useState(currentStep);
     const coachmark = useCoachmark();
+    const hasMedia = media || renderMedia;
 
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
@@ -131,6 +157,21 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const numProgSteps = Children.count(children);
     const progStepFloor = 0;
     const progStepCeil = numProgSteps - 1;
+
+    const renderMediaContent = useMemo(
+      () => renderMedia?.({ playStep: currentProgStep }),
+      [currentProgStep, renderMedia]
+    );
+
+    useEffect(() => {
+      // When current step is set by props
+      // scroll to the appropriate view on the carrousel
+      const targetStep = clamp(currentStep, progStepFloor, progStepCeil);
+
+      scrollRef?.current?.scrollToView?.(targetStep);
+      // Avoid circular call to this hook
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentStep]);
 
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
@@ -172,16 +213,19 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {media &&
-          (media.render ? (
-            media.render()
-          ) : (
-            <SteppedAnimatedMedia
-              className={`${blockClass}__element-stepped-media`}
-              filePaths={media.filePaths}
-              playStep={currentProgStep}
-            />
-          ))}
+        {hasMedia && media?.render && media.render()}
+        {hasMedia && media?.filePaths && (
+          <SteppedAnimatedMedia
+            className={`${blockClass}__element-stepped-media`}
+            filePaths={media.filePaths}
+            playStep={currentProgStep}
+          />
+        )}
+        {hasMedia && renderMedia && (
+          <div className={`${blockClass}__element-stepped-media`}>
+            {renderMediaContent}
+          </div>
+        )}
 
         {numProgSteps === 1 ? (
           <>
@@ -206,7 +250,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ) : (
           <>
             <Carousel
-              disableArrowScroll
               ref={scrollRef as RefObject<HTMLDivElement>}
               onScroll={(scrollPercent) => {
                 setScrollPosition(scrollPercent);
@@ -232,6 +275,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onBack?.();
                   }}
                 >
                   {previousButtonLabel}
@@ -252,6 +296,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
                     );
                     scrollRef?.current?.scrollToView?.(targetStep);
                     setCurrentProgStep(targetStep);
+                    onNext?.();
                   }}
                 >
                   {nextButtonText}
@@ -305,6 +350,10 @@ CoachmarkOverlayElements.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
   /**
+   * Current step of the coachmarks
+   */
+  currentStep: PropTypes.number,
+  /**
    * The visibility of CoachmarkOverlayElements is
    * managed in the parent component.
    */
@@ -313,6 +362,7 @@ CoachmarkOverlayElements.propTypes = {
    * The object describing an image in one of two shapes.
    * If a single media element is required, use `{render}`.
    * If a stepped animation is required, use `{filePaths}`.
+   * @deprecated please use the `renderMedia` prop
    */
   /**@ts-ignore*/
   media: PropTypes.oneOfType([
@@ -328,7 +378,19 @@ CoachmarkOverlayElements.propTypes = {
    */
   nextButtonText: PropTypes.string,
   /**
+   * Optional callback called when clicking on the Previous button.
+   */
+  onBack: PropTypes.func,
+  /**
+   * Optional callback called when clicking on the Next button.
+   */
+  onNext: PropTypes.func,
+  /**
    * The label for the Previous button.
    */
   previousButtonLabel: PropTypes.string,
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
 };

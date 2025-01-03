@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React, { act } from 'react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -17,7 +18,14 @@ import {
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
 } from '..';
-import { BEACON_KIND } from './utils/enums';
+import {
+  BEACON_KIND,
+  COACHMARK_ALIGNMENT,
+  COACHMARK_OVERLAY_KIND,
+} from './utils/enums';
+import { CoachmarkDragbar } from './CoachmarkDragbar';
+import { getOffsetTune } from './utils/constants';
+import { clamp } from './utils/helpers';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
@@ -54,10 +62,25 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
     </Coachmark>
   );
 
+const isCoachmarkVisible = () => {
+  const coachmarkContainer = screen.getByTestId(dataTestId);
+  const coachmarkButton = coachmarkContainer.getElementsByTagName('button')[0];
+  const ariaExpanded = coachmarkButton.getAttribute('aria-expanded');
+  return ariaExpanded === 'true';
+};
+
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
     renderCoachmark({ 'data-testid': dataTestId });
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
+  });
+
+  it('Check coachmark can be open by default', () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      isOpenByDefault: true,
+    });
+    expect(isCoachmarkVisible()).toBeTruthy();
   });
 
   it('has no accessibility violations', async () => {
@@ -104,5 +127,201 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('renders the closeIconDescription text ', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onClose = jest.fn();
+    const closeIconDescription = 'Close';
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        closeIconDescription={closeIconDescription}
+        onClose={onClose}
+        showCloseButton
+      />
+    );
+
+    const tooltip = screen.getByText(closeIconDescription);
+
+    expect(tooltip).toBeInTheDocument();
+  });
+
+  it('calls the onClose prop when close is clicked', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onClose = jest.fn();
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        onClose={onClose}
+      />
+    );
+
+    const closeButton = screen.getAllByRole('button')[1];
+
+    expect(closeButton).toBeInTheDocument();
+    await waitFor(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('showCloseButton prop works as expected', async () => {
+    const a11yKeyboardHandler = jest.fn();
+
+    const { rerender } = render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton
+      />
+    );
+
+    expect(screen.queryAllByRole('button').length).toBe(2);
+
+    rerender(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton={false}
+      />
+    );
+
+    expect(screen.queryAllByRole('button').length).toBe(1);
+  });
+
+  it('calls the onDrag prop', async () => {
+    const a11yKeyboardHandler = jest.fn();
+    const onDrag = jest.fn();
+
+    render(
+      <CoachmarkDragbar
+        a11yKeyboardHandler={a11yKeyboardHandler}
+        showCloseButton={false}
+        onDrag={onDrag}
+      />
+    );
+
+    const dragbar = screen.getByRole('button');
+
+    await waitFor(() => {
+      fireEvent.mouseDown(dragbar, { clientX: 0, clientY: 0 });
+      fireEvent.mouseMove(dragbar, { clientX: 100, clientY: 100 });
+      fireEvent.mouseUp(dragbar);
+    });
+
+    expect(onDrag).toHaveBeenCalled();
+  });
+
+  it('renders the theme prop', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      theme: 'dark',
+    });
+
+    await expect(screen.getByTestId(dataTestId)).toHaveClass(
+      `${pkg.prefix}--coachmark__dark`
+    );
+  });
+
+  it('renders the theme prop', async () => {
+    renderCoachmark({
+      'data-testid': dataTestId,
+      theme: 'dark',
+    });
+
+    await expect(screen.getByTestId(dataTestId)).toHaveClass(
+      `${pkg.prefix}--coachmark__dark`
+    );
+  });
+
+  it('tests getOffsetTune util', async () => {
+    let result;
+    const distanceOffset = 24;
+    const coachmarkTarget = {
+      targetRect: {
+        width: 200,
+        height: 200,
+      },
+      align: COACHMARK_ALIGNMENT.TOP,
+    };
+
+    // Test case when it is a tooltip
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.TOOLTIP);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(0);
+
+    // Test top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(100);
+    expect(result.top).toBe(0);
+
+    // Test top left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP_LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(distanceOffset);
+    expect(result.top).toBe(0);
+
+    // Test top right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.TOP_RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200 - distanceOffset);
+    expect(result.top).toBe(0);
+
+    // Test bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(100);
+    expect(result.top).toBe(200);
+
+    // Test bottom left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM_LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(distanceOffset);
+    expect(result.top).toBe(200);
+
+    // Test bottom right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.BOTTOM_RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200 - distanceOffset);
+    expect(result.top).toBe(200);
+
+    // Test left alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(100);
+
+    // Test left top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT_TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(distanceOffset);
+
+    // Test left bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.LEFT_BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(0);
+    expect(result.top).toBe(200 - distanceOffset);
+
+    // Test right alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(100);
+
+    // Test right top alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT_TOP;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(distanceOffset);
+
+    // Test right bottom alignment
+    coachmarkTarget.align = COACHMARK_ALIGNMENT.RIGHT_BOTTOM;
+    result = getOffsetTune(coachmarkTarget, COACHMARK_OVERLAY_KIND.FLOATING);
+    expect(result.left).toBe(200);
+    expect(result.top).toBe(200 - distanceOffset);
+  });
+
+  it('tests clamp helper function', () => {
+    expect(clamp(100, 50, 20)).toBe(50);
+    expect(clamp(40, 10, 50)).toBe(40);
   });
 });

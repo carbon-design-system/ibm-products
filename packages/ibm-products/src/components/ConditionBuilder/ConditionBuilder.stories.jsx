@@ -237,7 +237,6 @@ conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
-  statementConfigCustom: statementConfigCustom,
 };
 
 export const conditionBuilderDynamicOptions = ConditionBuilderTemplate.bind({});
@@ -260,6 +259,17 @@ conditionBuilderWithInitialState.args = {
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
+};
+
+export const conditionBuilderWithCustomStatements =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithCustomStatements.storyName =
+  'With Custom statement configuration';
+conditionBuilderWithCustomStatements.args = {
+  inputConfig: inputData,
+  variant: NON_HIERARCHICAL_VARIANT,
+  translateWithId: translateWithId,
+  statementConfigCustom: statementConfigCustom,
 };
 
 export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});

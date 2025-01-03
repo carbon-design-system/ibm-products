@@ -31,7 +31,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   transition: all $duration-fast-02 motion(standard, productive);
 }
 
-.#{$block-class}__condition-wrapper * {
+.#{$block-class}__condition-wrapper {
   @include type-style('body-01');
 }
 

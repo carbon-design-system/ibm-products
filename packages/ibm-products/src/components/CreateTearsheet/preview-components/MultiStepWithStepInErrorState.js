@@ -12,7 +12,7 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
-import { sampleDecorator } from '../../../global/js/story-parts/decorator';
+import { SlugSample } from '../../../global/js/story-parts/slug';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
@@ -26,7 +26,6 @@ export const MultiStepWithStepInErrorState = (
     label,
     nextButtonText,
     slug,
-    decorator,
     submitButtonText,
     title,
   },
@@ -76,8 +75,7 @@ export const MultiStepWithStepInErrorState = (
             }, simulatedDelay);
           })
         }
-        slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        slug={slug && SlugSample()}
       >
         <CreateTearsheetStep
           title="Topic name"

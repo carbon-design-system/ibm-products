@@ -68,7 +68,7 @@ export const MultiStepWithIntro = (
     setOpen(false);
     setSelectedCategory('standard');
   };
-
+  // test change
   return (
     <div>
       <style>{`.${blockClass} { opacity: 0 }`};</style>

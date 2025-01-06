@@ -1627,12 +1627,12 @@ describe(componentName, () => {
       {
         id: 'if',
         connector: 'and',
-        text1: 'if',
+        label: 'if',
       },
       {
         id: 'exclIf',
         connector: 'or',
-        text1: 'excl. if',
+        label: 'excl. if',
       },
     ];
 

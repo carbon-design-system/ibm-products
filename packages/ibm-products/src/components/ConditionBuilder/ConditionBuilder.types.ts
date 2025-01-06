@@ -56,14 +56,15 @@ export type Operators = {
   date: DateOperator;
 };
 
+export type option = {
+  id: string;
+  label: string;
+  icon?: CarbonIconType;
+};
 export type PropertyConfigOption = {
   type: 'option';
   config?: {
-    options?: {
-      id: string;
-      label: string;
-      icon?: CarbonIconType;
-    }[];
+    options?: option[];
   };
 };
 
@@ -173,8 +174,8 @@ export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 export type statementConfig = {
   id: string;
   connector: 'and' | 'or';
-  text1: string;
-  text2?: string;
+  label: string;
+  secondaryLabel?: string;
 };
 
 export type ConditionBuilderProps = {

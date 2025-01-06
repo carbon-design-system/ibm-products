@@ -276,8 +276,8 @@ ConditionBuilder.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       connector: PropTypes.oneOf(['and', 'or']).isRequired,
-      text1: PropTypes.string.isRequired,
-      text2: PropTypes.string,
+      label: PropTypes.string.isRequired,
+      secondaryLabel: PropTypes.string,
     })
   ),
   /**

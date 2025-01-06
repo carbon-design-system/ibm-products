@@ -52,32 +52,28 @@ export const useDataConfigs = () => {
 
   const statementConfigDefault = [
     {
-      label: 'ifText',
       id: 'ifAll',
       connector: 'and',
-      text1: ifAll,
-      text2: '(a && b)',
+      label: ifAll,
+      secondaryLabel: '(a && b)',
     },
     {
-      label: 'ifText',
       id: 'ifAny',
       connector: 'or',
-      text1: ifAny,
-      text2: '(a || b)',
+      label: ifAny,
+      secondaryLabel: '(a || b)',
     },
     {
-      label: 'unlessText',
       id: 'unlessAll',
       connector: 'and',
-      text1: unlessAll,
-      text2: '! (a && b)',
+      label: unlessAll,
+      secondaryLabel: '! (a && b)',
     },
     {
-      label: 'unlessText',
       id: 'unlessAny',
       connector: 'or',
-      text1: unlessAny,
-      text2: '! (a || b)',
+      label: unlessAny,
+      secondaryLabel: '! (a || b)',
     },
   ];
 

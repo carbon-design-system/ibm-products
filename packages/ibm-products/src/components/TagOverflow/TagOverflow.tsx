@@ -128,7 +128,7 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
       hiddenItems: overflowItems,
       containerRef,
       itemRefHandler,
-    } = useOverflowItems(items, ref, maxVisible, onOverflowTagChange);
+    } = useOverflowItems(items, ref, maxVisible, onOverflowTagChange, 40);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);

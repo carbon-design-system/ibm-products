@@ -54,7 +54,7 @@ export const sampleDecorator = (decorator) => {
 };
 
 export const decoratorArgTypes = ({
-  _default = 0,
+  _default = 1,
   withHollow = false,
 } = {}) => {
   const decorator = {
@@ -77,7 +77,7 @@ export const decoratorArgTypes = ({
   return { decorator };
 };
 
-export const slugArgTypes = ({ _default = 0, withHollow = false } = {}) => {
+export const slugArgTypes = ({ _default = 1, withHollow = false } = {}) => {
   const slug = {
     control: {
       type: 'select',

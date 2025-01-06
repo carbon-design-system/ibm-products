@@ -57,8 +57,6 @@ const defaultStoryProps = {
   secondaryButtonText: 'Cancel',
   label: 'Test label',
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
-  slug: 0,
-  decorator: 1,
 };
 
 const Template = ({ slug, decorator, ...args }, context) => {
@@ -164,7 +162,7 @@ const Template = ({ slug, decorator, ...args }, context) => {
   );
 };
 
-const WithValidationTemplate = ({ slug, ...args }, context) => {
+const WithValidationTemplate = ({ slug, decorator, ...args }, context) => {
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);

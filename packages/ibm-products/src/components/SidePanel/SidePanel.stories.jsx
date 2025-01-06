@@ -610,7 +610,7 @@ const SlideInTemplate = (
 
   return (
     <>
-      <div class={`${prefix}story-container`}>
+      <div class={`${prefix}story-container-lg`}>
         <div class={`${prefix}story-content`} id="ibm-products-page-content">
           <Button
             ref={buttonRef}

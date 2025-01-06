@@ -60,6 +60,11 @@ const defaultStoryProps = {
 };
 
 const Template = ({ slug, decorator, ...args }, context) => {
+  console.log('context', context);
+  console.log('decorator', decorator);
+  console.log('slug', slug);
+  console.log('args', args);
+
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
@@ -86,7 +91,7 @@ const Template = ({ slug, decorator, ...args }, context) => {
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
         slug={slug && sampleDecorator(slug)}
-        //   decorator={decorator && sampleDecorator(decorator)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <TextInput
@@ -194,7 +199,7 @@ const WithValidationTemplate = ({ slug, ...args }, context) => {
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
         slug={slug && sampleDecorator(slug)}
-        // decorator={decorator && sampleDecorator(decorator)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <FormGroup

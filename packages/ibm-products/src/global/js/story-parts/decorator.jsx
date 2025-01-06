@@ -65,7 +65,7 @@ export const decoratorArgTypes = ({
         1: 'with AI Label',
         2: 'With non AI Label component',
       },
-      default: _default,
+      default: 1,
     },
     options: [0, 1, 2],
   };
@@ -85,7 +85,7 @@ export const slugArgTypes = ({ _default = 0, withHollow = false } = {}) => {
         0: 'No AI slug',
         1: 'with AI Slug',
       },
-      default: _default,
+      default: 1,
     },
     options: [0, 1],
   };

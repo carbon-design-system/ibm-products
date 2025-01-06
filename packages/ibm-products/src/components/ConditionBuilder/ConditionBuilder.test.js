@@ -1622,6 +1622,68 @@ describe(componentName, () => {
     expect(selectedItem);
   });
 
+  it('check with custom statement configuration ', async () => {
+    const statementConfigCustom = [
+      {
+        id: 'if',
+        connector: 'and',
+        text1: 'if',
+      },
+      {
+        id: 'exclIf',
+        connector: 'or',
+        text1: 'excl. if',
+      },
+    ];
+
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputData}
+        statementConfigCustom={statementConfigCustom}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'is' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'is' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+
+    //change statement option
+
+    expect(screen.getByRole('button', { name: 'if' }));
+    await act(() =>
+      userEvent.click(screen.getByRole('button', { name: 'if' }))
+    );
+    expect(screen.getByRole('option', { name: 'if (and)' }));
+    expect(screen.getByRole('option', { name: 'excl. if (or)' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'excl. if (or)' }))
+    );
+    expect(screen.getByRole('button', { name: 'excl. if' }));
+  });
+
   // keyboard navigation tests
   //for Non-Hierarchical variant
   it('add and remove conditions using keyboard', async () => {

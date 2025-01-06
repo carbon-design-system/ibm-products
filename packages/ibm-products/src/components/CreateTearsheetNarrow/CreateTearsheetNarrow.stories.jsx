@@ -58,7 +58,7 @@ const defaultStoryProps = {
   label: 'Test label',
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
   slug: 0,
-  decorator: 0,
+  decorator: 1,
 };
 
 const Template = ({ slug, decorator, ...args }, context) => {

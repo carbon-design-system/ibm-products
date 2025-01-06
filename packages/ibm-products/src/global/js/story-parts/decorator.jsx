@@ -71,8 +71,8 @@ export const decoratorArgTypes = ({
   };
 
   if (withHollow) {
-    decorator.control.labels[3] = 'with hollow AI Label (boolean)';
-    decorator.options.push(3);
+    // decorator.control.labels[3] = 'with hollow AI Label (boolean)';
+    //  decorator.options.push(3);
   }
   return { decorator };
 };

@@ -610,17 +610,13 @@ const SlideInTemplate = (
 
   return (
     <>
-      <div class={`${prefix}story-container-lg`}>
-        <div class={`${prefix}story-content`} id="ibm-products-page-content">
-          <Button
-            ref={buttonRef}
-            onClick={() => setOpen(!open)}
-            className={`${prefix}toggle`}
-          >
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </div>
-      </div>
+      <Button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className={`${prefix}toggle`}
+      >
+        {open ? 'Close side panel' : 'Open side panel'}
+      </Button>
       <SidePanel
         {...args}
         open={open}

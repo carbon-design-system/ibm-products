@@ -63,11 +63,10 @@ export const decoratorArgTypes = ({
       labels: {
         0: 'No AI Label',
         1: 'with AI Label',
-        2: 'With non AI Label component',
       },
       default: 1,
     },
-    options: [0, 1, 2],
+    options: [0, 1],
   };
 
   if (withHollow) {

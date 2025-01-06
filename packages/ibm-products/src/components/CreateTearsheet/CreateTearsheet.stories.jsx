@@ -48,6 +48,8 @@ const createTearsheetProps = {
   label: '',
   influencerWidth: 'narrow',
   selectorPrimaryFocus: '#tearsheet-multi-step-story-text-input-multi-step-1',
+  slug: 0,
+  decorator: 0,
 };
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});

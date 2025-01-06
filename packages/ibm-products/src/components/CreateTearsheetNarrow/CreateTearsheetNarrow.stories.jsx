@@ -86,7 +86,7 @@ const Template = ({ slug, decorator, ...args }, context) => {
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
         slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        //   decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <TextInput
@@ -194,7 +194,7 @@ const WithValidationTemplate = ({ slug, ...args }, context) => {
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
         slug={slug && sampleDecorator(slug)}
-        decorator={decorator && sampleDecorator(decorator)}
+        // decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <FormGroup

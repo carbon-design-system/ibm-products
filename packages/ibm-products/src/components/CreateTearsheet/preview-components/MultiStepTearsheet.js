@@ -46,22 +46,24 @@ const CustomStep = ({ value1, setValue1, ...rest }) => {
   );
 };
 
-export const MultiStepTearsheet = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  firstFocusElement,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  submitButtonText,
-  title,
-  ...rest
-}) => {
+export const MultiStepTearsheet = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    submitButtonText,
+    title,
+    ...rest
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [value1, setValue1] = useState('');
@@ -114,9 +116,10 @@ export const MultiStepTearsheet = ({
             }, simulatedDelay);
           })
         }
-        firstFocusElement={firstFocusElement}
         slug={slug && SlugSample()}
         {...rest}
+        hasError={hasSubmitError}
+        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
       >
         <CreateTearsheetStep
           onNext={() => {
@@ -183,6 +186,7 @@ export const MultiStepTearsheet = ({
                   kind="error"
                   title="Error"
                   subtitle="Resolve errors to continue"
+                  id="step-submit-error"
                   onClose={() => setHasSubmitError(false)}
                 />
               )}

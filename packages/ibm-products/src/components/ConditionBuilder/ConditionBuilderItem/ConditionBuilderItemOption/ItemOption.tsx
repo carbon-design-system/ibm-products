@@ -14,7 +14,7 @@ import { Checkmark } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../../utils/useTranslations';
-import { PropertyConfigOption } from '../../ConditionBuilder.types';
+import { option, statementConfig } from '../../ConditionBuilder.types';
 import { blockClass } from '../../utils/util';
 
 interface ItemOptionProps {
@@ -22,7 +22,9 @@ interface ItemOptionProps {
     label?: string;
     value?: string;
   };
-  config: PropertyConfigOption['config'] & { isStatement?: boolean };
+  config: { options?: option[] | statementConfig[] } & {
+    isStatement?: boolean;
+  };
   onChange: (value: string, e: Event) => void;
 }
 export const ItemOption = ({
@@ -78,9 +80,9 @@ export const ItemOption = ({
     return (
       <div className={`${blockClass}__statement_wrapper`}>
         <div>
-          {option.text1} ({option.connector})
+          {option.label} ({option.connector})
         </div>
-        <div>{option.text2}</div>
+        <div>{option.secondaryLabel}</div>
       </div>
     );
   };
@@ -104,7 +106,7 @@ export const ItemOption = ({
       <ul aria-label={getAriaLabel()} role="listbox">
         {filteredItems?.map((option) => {
           const isSelected = selection === option.id;
-          const Icon = option.icon;
+          const Icon = (option as option).icon;
 
           return (
             <li

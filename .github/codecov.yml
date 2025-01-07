@@ -23,11 +23,11 @@ component_management:
     - component_id: ibm-products
       name: ibm-products
       paths:
-        - ../packages/ibm-products/**
+        - ../packages/ibm-products
     - component_id: ibm-products-web-components
       name: ibm-products-web-components
       paths:
-        - ../packages/ibm-products-web-components/**
+        - ../packages/ibm-products-web-components
 
 flag_management:
   default_rules: # the rules that will be followed for any flag added, generally

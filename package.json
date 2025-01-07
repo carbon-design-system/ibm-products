@@ -52,6 +52,7 @@
     "test:c4p:snapshot": "yarn test:c4p-styles styles -u",
     "test:c4p-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
     "test:c4p-wc": "yarn playwright install && lerna run --stream --scope @carbon/ibm-products-web-components test --",
+    "test:c4p-exclude-deprecated": "yarn test:c4p --testPathIgnorePatterns='\\.deprecated\\.test\\.js$' --",
     "spellcheck": "cspell '**' -e './examples' --gitignore --quiet --no-must-find-files",
     "storybook": "yarn storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",

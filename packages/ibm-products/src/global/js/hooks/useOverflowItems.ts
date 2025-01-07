@@ -17,7 +17,7 @@ export function useOverflowItems<T extends Item>(
   ref?: ForwardedRef<HTMLDivElement>,
   maxVisible?: number,
   onChange?: (hiddenItems: T[]) => void,
-  additionalOffset = 0
+  additionalOffset: number = 0
 ) {
   const localRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Map<number, number> | null>(null);
@@ -42,26 +42,25 @@ export function useOverflowItems<T extends Item>(
     id: string | number,
     node: HTMLElement | null
   ): void => {
-    const map = getMap();
-    if (node && !map.get(id)) {
+    if (id && node) {
+      const map = getMap();
       const style = getComputedStyle?.(node);
       const totalWidth = style
         ? parseInt(style.marginLeft) +
           parseInt(style.marginRight) +
           node.offsetWidth
         : node.offsetWidth;
-      map.set(id, totalWidth);
+      if (map.get(id) !== totalWidth) {
+        map.set(id, totalWidth);
+      }
     }
   };
 
   const getItems = (): T[] => {
     const map = getMap();
-    if (!containerWidth) {
-      return items;
-    }
-    const spaceAvailable = containerWidth - additionalOffset;
+    const maxWidth = containerWidth ? containerWidth - additionalOffset : 0;
     let maxReached = false;
-    let totalWidth = 0;
+    let currentWidth = 0;
 
     return items.reduce((prev, cur) => {
       if (maxVisible && prev.length >= maxVisible) {
@@ -69,9 +68,9 @@ export function useOverflowItems<T extends Item>(
       }
       if (maxReached === false) {
         const itemWidth = map.get(cur.id) || 0;
-        const willFit = itemWidth + totalWidth <= spaceAvailable;
+        const willFit = itemWidth + currentWidth <= maxWidth;
         if (willFit) {
-          totalWidth += itemWidth;
+          currentWidth += itemWidth;
           prev.push(cur);
         } else {
           maxReached = true;

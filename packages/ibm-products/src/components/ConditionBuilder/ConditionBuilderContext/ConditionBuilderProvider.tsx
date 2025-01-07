@@ -60,6 +60,7 @@ export const ConditionBuilderProvider: React.FC<
     variant: props.variant,
     translateWithId: props.translateWithId,
     conditionBuilderRef: props.conditionBuilderRef,
+    statementConfigCustom: props.statementConfigCustom,
   };
 
   return (

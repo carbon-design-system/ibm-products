@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { slugArgTypes } from '../../global/js/story-parts/slug';
+import {
+  decoratorArgTypes,
+  slugArgTypes,
+} from '../../global/js/story-parts/decorator';
 import styles from './_storybook-styles.scss?inline';
 import { CreateTearsheet } from './CreateTearsheet';
 import DocsPage from './CreateTearsheet.docs-page';
@@ -26,6 +29,7 @@ export default {
     open: { control: { disable: true } },
     children: { control: { disable: true } },
     ...slugArgTypes(),
+    ...decoratorArgTypes(),
   },
   parameters: {
     styles,
@@ -43,7 +47,6 @@ const createTearsheetProps = {
   className: 'test-class-name',
   label: '',
   influencerWidth: 'narrow',
-  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const multiStepTearsheet = MultiStepTearsheet.bind({});

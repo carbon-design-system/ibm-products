@@ -24,7 +24,7 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
-import { SlugSample } from '../../../global/js/story-parts/slug';
+import { sampleDecorator } from '../../../global/js/story-parts/decorator';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
@@ -46,22 +46,26 @@ const CustomStep = ({ value1, setValue1, ...rest }) => {
   );
 };
 
-export const MultiStepTearsheet = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  firstFocusElement,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  submitButtonText,
-  title,
-  ...rest
-}) => {
+export const MultiStepTearsheet = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    firstFocusElement,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    decorator,
+    submitButtonText,
+    title,
+    ...rest
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [value1, setValue1] = useState('');
@@ -115,8 +119,11 @@ export const MultiStepTearsheet = ({
           })
         }
         firstFocusElement={firstFocusElement}
-        slug={slug && SlugSample()}
+        slug={slug && sampleDecorator(slug)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...rest}
+        hasError={hasSubmitError}
+        selectorPrimaryFocus="#tearsheet-multi-step-story-text-input-multi-step-1"
       >
         <CreateTearsheetStep
           onNext={() => {
@@ -183,6 +190,7 @@ export const MultiStepTearsheet = ({
                   kind="error"
                   title="Error"
                   subtitle="Resolve errors to continue"
+                  id="step-submit-error"
                   onClose={() => setHasSubmitError(false)}
                 />
               )}

@@ -245,7 +245,7 @@ export const TearsheetShell = React.forwardRef(
       ariaLabel,
       children,
       className,
-      closeIconDescription = 'Close the tearsheet',
+      closeIconDescription = 'Close',
       currentStep,
       description,
       hasCloseIcon,

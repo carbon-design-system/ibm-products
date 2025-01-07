@@ -525,9 +525,8 @@ export let SidePanel = React.forwardRef(
         }
       };
       const bodyElement = document.body;
-      const isStorybook = document.getElementById('storybook-sidepanel');
 
-      if (includeOverlay && open && !isStorybook) {
+      if (includeOverlay && open) {
         bodyElement.style.overflow = 'hidden';
       } else if (includeOverlay && !open) {
         bodyElement.style.overflow = '';

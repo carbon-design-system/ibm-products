@@ -56,14 +56,15 @@ export type Operators = {
   date: DateOperator;
 };
 
+export type option = {
+  id: string;
+  label: string;
+  icon?: CarbonIconType;
+};
 export type PropertyConfigOption = {
   type: 'option';
   config?: {
-    options?: {
-      id: string;
-      label: string;
-      icon?: CarbonIconType;
-    }[];
+    options?: option[];
   };
 };
 
@@ -170,6 +171,13 @@ export type Action = {
 
 export type variantsType = 'Non-Hierarchical' | 'Hierarchical';
 
+export type statementConfig = {
+  id: string;
+  connector: 'and' | 'or';
+  label: string;
+  secondaryLabel?: string;
+};
+
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: InitialState;
@@ -185,6 +193,7 @@ export type ConditionBuilderProps = {
   startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId: (id: string) => string;
+  statementConfigCustom: statementConfig[];
 };
 
 export type InitialState = {
@@ -202,6 +211,7 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   ) => Promise<Option[]>;
   variant?: string;
   translateWithId?: (id: string) => string;
+  statementConfigCustom?: statementConfig[];
 
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
 }

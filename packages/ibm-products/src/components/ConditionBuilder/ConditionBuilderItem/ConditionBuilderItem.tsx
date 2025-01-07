@@ -31,6 +31,7 @@ import {
   Option,
 } from '../ConditionBuilder.types';
 import { blockClass, getValue } from '../utils/util';
+import { translationsObject } from '../ConditionBuilderContext/translationObject';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;
@@ -68,12 +69,22 @@ export const ConditionBuilderItem = ({
 }: ConditionBuilderItemProps) => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+
+  const { conditionBuilderRef, statementConfigCustom } = useContext(
+    ConditionBuilderContext
+  );
+
   const statementIdMap = {
-    ifAll: 'if',
-    ifAny: 'if',
-    unlessAll: 'unless',
-    unlessAny: 'unless',
+    ifAll: translationsObject.ifText,
+    ifAny: translationsObject.ifText,
+    unlessAll: translationsObject.unlessText,
+    unlessAny: translationsObject.unlessText,
   };
+  //Appending statements from custom statement configuration if present
+  statementConfigCustom?.forEach((statement) => {
+    statementIdMap[statement.id] = statement.label;
+  });
+
   const [
     invalidText,
     addConditionText,
@@ -92,7 +103,7 @@ export const ConditionBuilderItem = ({
     ],
     statementIdMap
   );
-  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
+
   const getPropertyDetails = () => {
     const { property, operator } = condition || {};
     if (

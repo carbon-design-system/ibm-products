@@ -8,11 +8,19 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-
+import { Information } from '@carbon/react/icons';
 import styles from './_storybook-styles.scss?inline';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import { Button, AILabel, AILabelContent, TextInput } from '@carbon/react';
+import {
+  Button,
+  AILabel,
+  AILabelContent,
+  TextInput,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+} from '@carbon/react';
 
 // import mdx from './TearsheetShell.mdx';
 
@@ -32,16 +40,17 @@ export default {
       },
     },
     portalTarget: { control: { disable: true } },
-    aiLabel: {
+    decorator: {
       control: {
         type: 'select',
         labels: {
           0: 'No AI Label',
           1: 'with AI Label',
+          2: 'With non AI Label component',
         },
         default: 0,
       },
-      options: [0, 1],
+      options: [0, 1, 2],
     },
   },
 };
@@ -53,7 +62,7 @@ const className = 'client-class-1 client-class-2';
 const dummyContent = (
   <div
     style={{
-      // stylelint-disable-next-line carbon/layout-token-use
+      // stylelint-disable-next-line carbon/layout-use
       padding: '50px',
       height: '400px',
       // stylelint-disable-next-line color-named
@@ -71,28 +80,46 @@ const dummyContent = (
   </div>
 );
 
-const sampleAILabel = (
-  <AILabel className="ai-label-container" size="xs">
-    <AILabelContent>
-      <div>
-        <p className="secondary">AI Explained</p>
-        <h1>84%</h1>
-        <p className="secondary bold">Confidence score</p>
-        <p className="secondary">
-          This is not really Lorem Ipsum but the spell checker did not like the
-          previous text with it&apos;s non-words which is why this unwieldy
-          sentence, should one choose to call it that, here.
-        </p>
-        <hr />
-        <p className="secondary">Model type</p>
-        <p className="bold">Foundation model</p>
-      </div>
-    </AILabelContent>
-  </AILabel>
-);
+const sampleDecorator = (decorator) => {
+  switch (decorator) {
+    case 1:
+      return (
+        <AILabel className="decorator-container" size="xs">
+          <AILabelContent>
+            <div>
+              <p className="secondary">AI Explained</p>
+              <h1>84%</h1>
+              <p className="secondary bold">Confidence score</p>
+              <p className="secondary">
+                This is not really Lorem Ipsum but the spell checker did not
+                like the previous text with it&apos;s non-words which is why
+                this unwieldy sentence, should one choose to call it that, here.
+              </p>
+              <hr />
+              <p className="secondary">Model type</p>
+              <p className="bold">Foundation model</p>
+            </div>
+          </AILabelContent>
+        </AILabel>
+      );
+    case 2:
+      return (
+        <Toggletip>
+          <ToggletipButton label="Additional information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>Custom content here</p>
+          </ToggletipContent>
+        </Toggletip>
+      );
+    default:
+      return;
+  }
+};
 
 // Template.
-const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
+const Template = ({ influencer, open: _open, decorator, ...args }, context) => {
   const ref = useRef(undefined);
   const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
   const [beenOpen, setBeenOpen] = useState(false);
@@ -115,7 +142,7 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
         }
         open={open}
         onClose={() => setOpen(false)}
-        aiLabel={aiLabel && sampleAILabel}
+        decorator={decorator && sampleDecorator(decorator)}
         title={'Tearsheet title'}
       >
         {dummyContent}
@@ -125,7 +152,7 @@ const Template = ({ influencer, open: _open, aiLabel, ...args }, context) => {
 };
 
 const ReturnFocusTemplate = (
-  { influencer, open: _open, aiLabel, ...args },
+  { influencer, open: _open, decorator, ...args },
   context
 ) => {
   const ref = useRef(undefined);
@@ -151,7 +178,7 @@ const ReturnFocusTemplate = (
         }
         open={open}
         onClose={() => setOpen(false)}
-        aiLabel={aiLabel && sampleAILabel}
+        decorator={decorator && sampleDecorator(decorator)}
         title={'Tearsheet title'}
         launcherButtonRef={buttonRef}
       >

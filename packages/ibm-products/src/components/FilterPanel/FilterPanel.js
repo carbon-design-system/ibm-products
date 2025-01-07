@@ -19,7 +19,9 @@ const componentName = 'FilterPanel';
 
 /**
  * The container for filter panel subcomponents.
+ * @deprecated This component is deprecated
  */
+
 export let FilterPanel = React.forwardRef(
   ({ children, className, title, ...rest }, ref) => {
     return (
@@ -35,6 +37,10 @@ export let FilterPanel = React.forwardRef(
     );
   }
 );
+FilterPanel.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 FilterPanel = pkg.checkComponentEnabled(FilterPanel, componentName);

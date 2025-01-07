@@ -18,6 +18,7 @@ const componentName = 'DecoratorSingleButton';
 
 /**
  * The DecoratorSingleButton groups a key/value pair to behave like a button.
+ * @deprecated This component is deprecated
  */
 export let DecoratorSingleButton = React.forwardRef((props, ref) => {
   const validProps = prepareProps(props, [
@@ -38,6 +39,11 @@ export let DecoratorSingleButton = React.forwardRef((props, ref) => {
     />
   );
 });
+
+DecoratorSingleButton.deprecated = {
+  level: 'warn',
+  details: `This component is deprecated`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 DecoratorSingleButton = pkg.checkComponentEnabled(

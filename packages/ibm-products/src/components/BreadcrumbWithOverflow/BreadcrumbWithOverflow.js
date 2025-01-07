@@ -19,9 +19,10 @@ import {
   BreadcrumbItem,
   Link,
   OverflowMenu,
-  OverflowMenuItem,
   Tooltip,
   usePrefix,
+  unstable_FeatureFlags as FeatureFlags,
+  MenuItem,
 } from '@carbon/react';
 import { pkg } from '../../settings';
 import { ArrowLeft, OverflowMenuHorizontal } from '@carbon/react/icons';
@@ -59,30 +60,37 @@ export let BreadcrumbWithOverflow = ({
 
   // eslint-disable-next-line react/prop-types
   const BreadcrumbOverflowMenu = ({ overflowItems }) => {
+    const handleClick = (evt, item) => {
+      if (item?.props?.href) {
+        window.location.href = item.props.href;
+      }
+      item?.props?.onClick?.(evt);
+    };
+
     return (
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
-        <OverflowMenu
-          align={overflowTooltipAlign}
-          aria-label={overflowAriaLabel}
-          iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
-          renderIcon={(props) => (
-            <OverflowMenuHorizontal size={32} {...props} />
-          )}
-          className={`${blockClass}__overflow-menu`}
-          menuOptionsClass={`${blockClass}__overflow-menu-options`}
-        >
-          {
-            // eslint-disable-next-line react/prop-types
-            overflowItems.map((item, index) => (
-              <OverflowMenuItem
-                key={`breadcrumb-overflow-menu-item-${internalId.current}-${index}`}
-                href={item.props.href}
-                onClick={item.props.onClick}
-                itemText={item.props.children}
-              />
-            ))
-          }
-        </OverflowMenu>
+        <FeatureFlags enableV12Overflowmenu>
+          <OverflowMenu
+            aria-label={overflowAriaLabel}
+            label={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
+            renderIcon={(props) => (
+              <OverflowMenuHorizontal size={32} {...props} />
+            )}
+            className={`${blockClass}__overflow-menu`}
+            tooltipAlignment={overflowTooltipAlign}
+          >
+            {
+              // eslint-disable-next-line react/prop-types
+              overflowItems.map((item, index) => (
+                <MenuItem
+                  key={`breadcrumb-overflow-menu-item-${internalId.current}-${index}`}
+                  onClick={(evt) => handleClick(evt, item)}
+                  label={item.props.children}
+                />
+              ))
+            }
+          </OverflowMenu>
+        </FeatureFlags>
       </BreadcrumbItem>
     );
   };

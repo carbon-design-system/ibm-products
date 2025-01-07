@@ -12,14 +12,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import uuidv4 from '../../../global/js/utils/uuidv4';
+import { useId } from '../../../global/js/utils/useId';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 
 export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
-  const svgId = uuidv4();
-
+  const svgId = useId();
   return (
     <svg
       {...rest}
@@ -32,6 +31,7 @@ export const NotificationsIllustration = ({ theme, size, alt, ...rest }) => {
         `${blockClass}__illustration-notification`,
         `${blockClass}__illustration--${size}`,
       ])}
+      aria-hidden="true"
     >
       <title>{alt}</title>
       {theme === 'dark' ? (

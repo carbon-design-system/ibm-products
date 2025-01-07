@@ -314,7 +314,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
     this._hasSlug = childItems.length > 0;
     if (this._hasSlug) {
-      childItems[0].setAttribute('size', 'lg');
+      childItems[0].setAttribute('size', 'sm');
       this.setAttribute('slug', '');
     } else {
       this.removeAttribute('slug');

@@ -31,6 +31,9 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component FilterPanelAccordionItem', async () => {
     const { container } = renderComponent();
     const component = container.querySelector(`.${blockClass}`);

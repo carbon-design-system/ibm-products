@@ -24,6 +24,7 @@ import {
   useResetCreateComponent,
   useValidCreateStepCount,
 } from '../../global/js/hooks';
+import { deprecateProp } from '../../global/js/utils/props-helper';
 
 import { CreateInfluencer } from '../CreateInfluencer';
 import { Form } from '@carbon/react';
@@ -46,7 +47,7 @@ const blockClass = `${pkg.prefix}--tearsheet-create`;
 export interface StepsContextType {
   currentStep: number;
   setExperimentalSecondarySubmit: Dispatch<
-    SetStateAction<ExperimentalSecondarySubmit>
+    SetStateAction<ExperimentalSecondarySubmit | undefined>
   >;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
   setOnPrevious: (fn: any) => void;
@@ -88,14 +89,31 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   experimentalSecondarySubmitText?: string;
 
   /**
-   * A description of the flow, displayed in the header area of the tearsheet.
+   * Optional prop that allows you to pass any component.
    */
-  description?: ReactNode;
+  decorator?: ReactNode;
 
   /**
    * Specifies elements to focus on first on render.
    */
   firstFocusElement?: string;
+
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description?: ReactNode;
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
+   */
+  selectorPrimaryFocus?: string;
+
+  /**
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
+   */
+  hasError?: boolean;
 
   /**
    * Used to set the size of the influencer
@@ -140,11 +158,6 @@ export interface CreateTearsheetProps extends PropsWithChildren {
   open?: boolean;
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
-   */
-  slug?: ReactNode;
-
-  /**
    * The submit button text
    */
   submitButtonText: string;
@@ -162,6 +175,12 @@ export interface CreateTearsheetProps extends PropsWithChildren {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition?: 'normal' | 'lower';
+
+  // Deprecated props
+  /**
+   * @deprecated Property replaced by `decorator`
+   */
+  slug?: ReactNode;
 }
 
 interface Step {
@@ -181,7 +200,9 @@ export let CreateTearsheet = forwardRef(
       children,
       className,
       experimentalSecondarySubmitText,
+      firstFocusElement,
       description,
+      hasError,
       influencerWidth = 'narrow',
       initialStep,
       label,
@@ -189,8 +210,9 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      firstFocusElement,
-      slug,
+      selectorPrimaryFocus,
+      slug: deprecated_slug,
+      decorator,
       submitButtonText,
       title,
       verticalPosition = 'normal',
@@ -213,7 +235,7 @@ export let CreateTearsheet = forwardRef(
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState<number>();
     const [experimentalSecondarySubmit, setExperimentalSecondarySubmit] =
-      useState<ExperimentalSecondarySubmit>({});
+      useState<ExperimentalSecondarySubmit>();
     const previousState = usePreviousValue({ currentStep, open });
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -282,7 +304,7 @@ export let CreateTearsheet = forwardRef(
       isSubmitting,
       componentBlockClass: blockClass,
       experimentalSecondarySubmit,
-      experimentalSecondarySubmitText: experimentalSecondarySubmit.labelText
+      experimentalSecondarySubmitText: experimentalSecondarySubmit?.labelText
         ? experimentalSecondarySubmit.labelText
         : experimentalSecondarySubmitText,
       setCreateComponentActions: setCreateTearsheetActions,
@@ -305,11 +327,14 @@ export let CreateTearsheet = forwardRef(
           onClose,
           open,
           size: 'wide',
-          slug,
+          decorator: decorator || deprecated_slug,
           title,
           verticalPosition,
           closeIconDescription: '',
         }}
+        currentStep={currentStep}
+        hasError={hasError}
+        selectorPrimaryFocus={selectorPrimaryFocus}
       >
         <div className={`${blockClass}__content`} ref={contentRef}>
           <Form aria-label={title}>
@@ -345,6 +370,12 @@ CreateTearsheet = pkg.checkComponentEnabled(CreateTearsheet, componentName);
 // is used in preference to relying on function.name.
 CreateTearsheet.displayName = componentName;
 
+const deprecatedProps = {
+  /**
+   *  @deprecated Property replaced by `decorator`
+   */
+  slug: deprecateProp(PropTypes.node, 'Property replaced by `decorator`'),
+};
 // Note that the descriptions here should be kept in sync with those for the
 // corresponding props for TearsheetNarrow and TearsheetShell components.
 CreateTearsheet.propTypes = {
@@ -369,6 +400,11 @@ CreateTearsheet.propTypes = {
   className: PropTypes.string,
 
   /**
+   *  Optional prop that allows you to pass any component.
+   */
+  decorator: PropTypes.node,
+
+  /**
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
@@ -382,6 +418,12 @@ CreateTearsheet.propTypes = {
    * Specifies elements to focus on first on render.
    */
   firstFocusElement: PropTypes.string,
+
+  /**
+   * To indicate an error occurred in the Tearsheet step
+   * Used to pass this value to TearsheetShell
+   */
+  hasError: PropTypes.bool,
 
   /**
    * Used to set the size of the influencer
@@ -426,9 +468,10 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   *  **Experimental:** Provide a `Slug` component to be rendered inside the `Tearsheet` component
+   * Specify a CSS selector that matches the DOM element that should be
+   * focused when the Modal opens.
    */
-  slug: PropTypes.node,
+  selectorPrimaryFocus: PropTypes.string,
 
   /**
    * The submit button text
@@ -448,4 +491,5 @@ CreateTearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
+  ...deprecatedProps,
 };

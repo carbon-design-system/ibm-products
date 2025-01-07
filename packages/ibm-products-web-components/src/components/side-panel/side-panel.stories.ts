@@ -303,15 +303,15 @@ const getSlug = (index) => {
 
 const defaultTemplate = {
   args: {
-    actionItems: getActionItems(1),
-    actionToolbarItems: getActionToolbarItems(0),
+    actionItems: 1,
+    actionToolbarItems: 0,
     animateTitle: true,
     class: 'a-user-class',
     closeIconDescription: 'Close panel',
     condensedActions: false,
-    content: getContent(2),
+    content: 2,
     includeOverlay: true,
-    label: getLabel(2),
+    label: 2,
     open: false,
     placement: SIDE_PANEL_PLACEMENT.RIGHT,
     preventCloseOnClickOutside: false,
@@ -319,8 +319,8 @@ const defaultTemplate = {
     selectorInitialFocus: '#side-panel-story-text-input-a',
     size: SIDE_PANEL_SIZE.MEDIUM,
     slideIn: false,
-    slug: getSlug(0),
-    subtitle: getSubTitle(1),
+    slug: 0,
+    subtitle: 1,
     title:
       'This title is testing a very long title to see how this behaves with a longer title. It needs to be long enough to trigger overflow when collapsed.',
   },
@@ -424,7 +424,7 @@ const defaultTemplate = {
         current-step="0"
         ?include-overlay=${args.includeOverlay && !args.slideIn}
         selector-initial-focus=${args.selectorInitialFocus}
-        label-text="${args.label}"
+        label-text="${getLabel(args.label)}"
         ?open=${args.open}
         placement=${args.placement}
         ?prevent-close-on-click-outside=${args.preventCloseOnClickOutside}
@@ -432,23 +432,23 @@ const defaultTemplate = {
         size=${args.size}
         ?slide-in=${args.slideIn}
         .title=${args.title}
-        @cds-side-panel-navigate-back=${prevStep}
+        @c4p-side-panel-navigate-back=${prevStep}
       >
         <!-- default slotted content -->
-        ${args.content}
+        ${getContent(args.content)}
         <cds-button @click="${nextStep}">Step two</cds-button>
 
         <!-- slotted subtitle slotted content -->
-        ${args.subtitle}
+        ${getSubTitle(args.subtitle)}
 
         <!-- slotted action toolbar cds-buttons -->
-        ${args.actionToolbarItems}
+        ${getActionToolbarItems(args.actionToolbarItems)}
 
         <!-- slotted action items cds-buttons -->
-        ${args.actionItems}
+        ${getActionItems(args.actionItems)}
 
         <!-- slotted slug -->
-        ${args.slug}
+        ${getSlug(args.slug)}
       </c4p-side-panel>
     `;
   },
@@ -470,7 +470,7 @@ export const WithActionToolbar = {
   ...defaultTemplate,
   args: {
     ...defaultTemplate.args,
-    actionToolbarItems: getActionToolbarItems(1),
+    actionToolbarItems: 1,
   },
 };
 
@@ -479,7 +479,7 @@ export const SpecifyElementToHaveFocus = {
   args: {
     ...defaultTemplate.args,
     focusSelector: '#side-panel-story-text-input-a',
-    label: getLabel(0),
+    label: 0,
   },
   argTypes: {
     ...defaultTemplate.argTypes,
@@ -495,7 +495,7 @@ export const WithStaticTitle = {
   args: {
     ...defaultTemplate.args,
     animateTitle: false,
-    label: getLabel(0),
+    label: 0,
   },
 };
 
@@ -503,9 +503,9 @@ export const WithStaticTitleAndActionToolbar = {
   ...defaultTemplate,
   args: {
     ...defaultTemplate.args,
-    actionToolbarItems: getActionToolbarItems(1),
+    actionToolbarItems: 1,
     animateTitle: false,
-    label: getLabel(0),
+    label: 0,
   },
 };
 
@@ -513,7 +513,7 @@ export const WithoutTitle = {
   ...defaultTemplate,
   args: {
     ...defaultTemplate.args,
-    label: getLabel(0),
+    label: 0,
     title: '',
   },
 };

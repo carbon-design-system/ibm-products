@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Button,
   TextInput,
@@ -65,7 +65,7 @@ const defaultProps = {
   copyButtonText: 'Copy',
   copyIconDescription: 'Copy',
   hasAPIKeyVisibilityToggle: true,
-  downloadBodyText:
+  helperText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
   downloadLinkLabel: 'Download API Key in Java Script File format',
@@ -74,17 +74,18 @@ const defaultProps = {
   downloadFileType: 'json',
   open: true,
   closeButtonText: 'Close',
-  generateSuccessTitle: 'API key successfully created',
-  editSuccessTitle: 'API key successfully saved',
+  generateSuccessMessage: 'API key successfully created',
+  editSuccessMessage: 'API key successfully saved',
   loadingText: 'Generating...',
   modalLabel: 'An example of Generate API key',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
 
-const InstantTemplate = (args) => {
-  const [open, setOpen] = useState(false);
+const InstantTemplate = (args, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
+  const buttonRef = useRef(undefined);
 
   const generateKey = async () => {
     setLoading(true);
@@ -96,7 +97,12 @@ const InstantTemplate = (args) => {
   return (
     <>
       <style>{`.${blockClass} { opacity: 0; }`};</style>
-      <APIKeyModal {...args} onClose={() => setOpen(false)} open={open} />
+      <APIKeyModal
+        {...args}
+        onClose={() => setOpen(false)}
+        open={open}
+        launcherButtonRef={buttonRef}
+      />
       {loading ? (
         <Button
           renderIcon={InlineLoading}
@@ -105,18 +111,21 @@ const InstantTemplate = (args) => {
           Generating...
         </Button>
       ) : (
-        <Button onClick={generateKey}>Generate</Button>
+        <Button onClick={generateKey} ref={buttonRef}>
+          Generate
+        </Button>
       )}
     </>
   );
 };
 
-const TemplateWithState = (args) => {
+const TemplateWithState = (args, context) => {
   const { error } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
+  const buttonRef = useRef(undefined);
 
   // eslint-disable-next-line
   const submitHandler = async (apiKeyName) => {
@@ -148,13 +157,16 @@ const TemplateWithState = (args) => {
         onRequestGenerate={submitHandler}
         open={open}
         error={fetchError}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={() => setOpen(!open)}>Generate API key</Button>
+      <Button onClick={() => setOpen(!open)} ref={buttonRef}>
+        Generate API key
+      </Button>
     </>
   );
 };
 
-const MultiStepTemplate = (args) => {
+const MultiStepTemplate = (args, context) => {
   const { editing } = args;
   const {
     savedName,
@@ -163,9 +175,10 @@ const MultiStepTemplate = (args) => {
     savedResource,
     ...finalArgs
   } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
+  const buttonRef = useRef(undefined);
 
   // multi step options
   const [name, setName] = useState(savedName);
@@ -288,7 +301,7 @@ const MultiStepTemplate = (args) => {
           )}
           {editSuccess && (
             <div className={`${blockClass}__messaging`}>
-              Edited successfully
+              Edited successfully, API key successfully saved.
             </div>
           )}
         </>
@@ -310,20 +323,22 @@ const MultiStepTemplate = (args) => {
         customSteps={steps}
         nameRequired={false}
         editSuccess={editSuccess}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={() => setOpen(!open)}>
+      <Button onClick={() => setOpen(!open)} ref={buttonRef}>
         {editing ? 'Edit API key' : 'Generate API key'}
       </Button>
     </>
   );
 };
 
-const EditTemplate = (args) => {
+const EditTemplate = (args, context) => {
   const { error, apiKeyName } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const [fetchSuccess, setFetchSuccess] = useState(false);
+  const buttonRef = useRef(undefined);
 
   const submitHandler = async () => {
     action(`submitted ${apiKeyName}`)();
@@ -357,8 +372,11 @@ const EditTemplate = (args) => {
         open={open}
         error={fetchError}
         editSuccess={fetchSuccess}
+        launcherButtonRef={buttonRef}
       />
-      <Button onClick={onOpenHandler}>Edit API key</Button>
+      <Button onClick={onOpenHandler} ref={buttonRef}>
+        Edit API key
+      </Button>
     </>
   );
 };
@@ -397,6 +415,7 @@ export const InstantGenerate = InstantTemplate.bind({});
 InstantGenerate.args = {
   ...defaultProps,
   apiKeyLabel: 'Unique API Key',
+  generateTitle: 'Generate an API key',
 };
 
 export const CustomGenerate = MultiStepTemplate.bind({});
@@ -410,6 +429,7 @@ CustomGenerate.args = {
   savedAllResources: false,
   savedResource: '',
   savedPermissions: '',
+  generateTitle: 'Generate an API key',
 };
 CustomGenerate.parameters = {
   docs: {
@@ -471,6 +491,7 @@ CustomEdit.args = {
   savedPermissions: 'Read only',
   editing: true,
   editButtonText: 'Save API key',
+  generateTitle: 'Save an API key',
 };
 CustomEdit.parameters = {
   docs: {

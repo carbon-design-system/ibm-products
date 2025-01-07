@@ -55,7 +55,11 @@ export default {
     layout: 'fullscreen',
     docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },
+    percy: {
+      waitForSelector: `button.${blockClass}__create-button`,
+    },
   },
+
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],

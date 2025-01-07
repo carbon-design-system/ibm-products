@@ -17,6 +17,7 @@ import React from 'react';
 import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
+import { Button } from '@carbon/react';
 
 Object.assign(navigator, {
   clipboard: {
@@ -35,20 +36,20 @@ const defaultProps = {
   copyButtonText: 'copy',
   copyIconDescription: 'copy icon description',
   customSteps: [],
-  downloadBodyText: 'download body',
+  helperText: 'download body',
   downloadFileName: 'filename',
   downloadFileType: 'json',
   downloadLinkText: 'download',
   downloadLinkLabel: 'Download API Key in Java Script File format',
   editButtonText: 'edit button',
   editSuccess: false,
-  editSuccessTitle: 'edited successfully',
+  editSuccessMessage: 'edited successfully',
   editing: false,
   error: false,
   errorText: 'an error occurred',
   generateButtonText: 'create button',
   generateSuccessBody: 'created successfully body',
-  generateSuccessTitle: 'created successfully title',
+  generateSuccessMessage: 'created successfully title',
   generateTitle: 'create title',
   hasAPIKeyVisibilityToggle: true,
   hasDownloadLink: true,
@@ -134,7 +135,7 @@ describe(componentName, () => {
     getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkLabel));
-    getByText(props.downloadBodyText);
+    getByText(props.helperText);
     const modal = getByRole('presentation');
     expect(modal.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
@@ -200,7 +201,7 @@ describe(componentName, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText } = render(
+    const { rerender, getByPlaceholderText, getByText, getAllByText } = render(
       <APIKeyModal {...props} />
     );
 
@@ -251,7 +252,7 @@ describe(componentName, () => {
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(screen.getByLabelText(props.apiKeyLabel).value).toBe('abc-123');
     getByText(props.generateSuccessBody);
-    getByText(props.generateSuccessTitle);
+    getAllByText(props.generateSuccessMessage);
     await act(() => click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
@@ -302,6 +303,52 @@ describe(componentName, () => {
     expect(step1InputB).toHaveFocus();
   });
 
+  it('should return focus to the generate button', async () => {
+    const onOpen = jest.fn(() => false);
+    const onClose = jest.fn(() => true);
+
+    // eslint-disable-next-line react/prop-types
+    const DummyComponent = ({ open }) => {
+      const buttonRef = React.useRef(undefined);
+
+      return (
+        <>
+          <APIKeyModal
+            {...defaultProps}
+            launcherButtonRef={buttonRef}
+            onClose={onClose}
+            open={open}
+          />
+          <Button ref={buttonRef} onClick={onOpen}>
+            Generate
+          </Button>
+        </>
+      );
+    };
+
+    const { getByText, rerender } = render(<DummyComponent open={false} />);
+
+    const launchButtonEl = getByText('Generate');
+    expect(launchButtonEl).toBeInTheDocument();
+
+    await act(() => userEvent.click(launchButtonEl));
+    expect(onOpen).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={true} />);
+
+    const closeButton = getByText(defaultProps.closeButtonText);
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(closeButton).toBeInTheDocument();
+
+    await act(() => userEvent.click(closeButton));
+    expect(onClose).toHaveBeenCalled();
+
+    rerender(<DummyComponent open={false} />);
+
+    await act(() => new Promise((resolve) => setTimeout(resolve, 0)));
+    expect(launchButtonEl).toHaveFocus();
+  });
+
   it('successfully edits', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
@@ -314,7 +361,7 @@ describe(componentName, () => {
       onRequestEdit,
     };
 
-    const { getByText, getByRole, rerender } = render(
+    const { getByText, getAllByText, getByRole, rerender } = render(
       <APIKeyModal {...props} />
     );
 
@@ -326,7 +373,7 @@ describe(componentName, () => {
     await act(() => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
-    getByText(props.editSuccessTitle);
+    getAllByText(props.editSuccessMessage);
   });
 
   it('toggles key visibility', async () => {

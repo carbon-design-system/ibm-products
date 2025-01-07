@@ -38,27 +38,27 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
 @keyframes background-appear {
   from {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     background-color: var(--from-color);
   }
 
   to {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     background-color: var(--to-color);
   }
 }
 @keyframes background-and-shadow-appear {
   from {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     background-color: var(--from-color);
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     box-shadow: 0 1px 0 var(--from-color);
   }
 
   to {
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     background-color: var(--to-color);
-    /* stylelint-disable-next-line carbon/theme-token-use */
+    /* stylelint-disable-next-line carbon/theme-use */
     box-shadow: 0 1px 0 var(--to-color-shadow);
   }
 }
@@ -69,11 +69,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   $to-color: $layer-01,
   $to-color-shadow: $layer-accent-01
 ) {
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   --from-color: #{$from-color};
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   --to-color: #{$to-color};
-  // stylelint-disable-next-line carbon/theme-token-use
+  // stylelint-disable-next-line carbon/theme-use
   --to-color-shadow: #{$to-color-shadow};
 
   position: absolute;
@@ -107,7 +107,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     /* z-index used to raise above any position relative content as per Carbon header */
     /* dropped  1 below Carbon header so as not to overlay the side panel */
     z-index: $z-index-header-minus;
-    /* stylelint-disable-next-line carbon/layout-token-use */
+    /* stylelint-disable-next-line carbon/layout-use */
     top: var(--#{$block-class}--header-top);
     display: inline-block; /* cause top/bottom margin to reserve space */
     width: 100%;
@@ -417,7 +417,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     + .#{$block-class}__title-row--sticky {
-    // stylelint-disable-next-line carbon/layout-token-use
+    // stylelint-disable-next-line carbon/layout-use
     top: calc(
       var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
     );
@@ -473,8 +473,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__title-icon {
     margin-right: $spacing-04;
-    // stylelint-disable-next-line carbon/layout-token-use
-    transform: translateY(-2px); // positional tweak requested by design review
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateY(
+      -$spacing-01
+    ); // positional tweak requested by design review
 
     vertical-align: middle;
   }
@@ -536,13 +538,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle-row {
-    display: -webkit-box;
-    overflow: hidden;
-    max-width: 100%;
     margin-top: $spacing-03;
-
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 
     @include breakpoint-up('md') {
       max-width: $left-section-std-width;
@@ -555,6 +551,24 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__subtitle {
     @include type.type-style('body-01');
+  }
+
+  .#{$block-class}__subtitle-tooltip .#{$carbon-prefix}--definition-term {
+    border-bottom: 0;
+    letter-spacing: inherit;
+  }
+
+  // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
+  .#{$block-class}__subtitle-tooltip
+    .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
+    max-inline-size: fit-content;
+  }
+
+  .#{$block-class}__subtitle-text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .#{$block-class}__available-row {
@@ -666,4 +680,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 .#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
 .#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
   z-index: $z-index-header-minus;
+}
+
+.#{$block-class}__button-set-menu-options
+  > button.#{$carbon-prefix}--menu-button__trigger {
+  min-inline-size: 0;
 }

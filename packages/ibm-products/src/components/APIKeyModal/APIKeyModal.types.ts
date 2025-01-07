@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode } from 'react';
+import { ReactNode, RefObject } from 'react';
 
 interface APIKeyModalCommonProps {
   /**
@@ -75,9 +75,14 @@ interface APIKeyModalCommonProps {
    */
   generateSuccessBody?: ReactNode;
   /**
+   * * @deprecated use `generateSuccessMessage` instead
    * title for a successful key generation
    */
   generateSuccessTitle?: string;
+  /**
+   * success message for a successful key generation
+   */
+  generateSuccessMessage?: string;
   /**
    * default title for the modal in generate key mode
    */
@@ -94,6 +99,10 @@ interface APIKeyModalCommonProps {
    * label text that's displayed when hovering over visibility toggler to hide key
    */
   hideAPIKeyLabel?: string;
+  /**
+   * Provide a ref to return focus to once the tearsheet is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
   /**
    * designates if the modal is in a loading state via a request or some other in progress operation
    */
@@ -148,14 +157,13 @@ interface APIKeyModalCommonProps {
    */
   portalTarget?: ReactNode;
   /**
-   * Specify a CSS selector that matches the DOM element that should be
-   * focused when the Modal opens.
-   */
-  selectorPrimaryFocus?: string;
-  /**
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel?: string;
+  /**
+   * helper text for password input
+   */
+  helperText?: string;
 }
 
 type CustomStepConditionalProps = {
@@ -191,9 +199,14 @@ type EditingConditionalProps = {
    */
   editSuccess: boolean;
   /**
+   * * @deprecated use `editSuccessMessage` instead
    * title for a successful edit
    */
-  editSuccessTitle: string;
+  editSuccessTitle?: string;
+  /**
+   * success message for edit
+   */
+  editSuccessMessage: string;
 };
 
 type HasDownloadLinkProps = {
@@ -204,7 +217,7 @@ type HasDownloadLinkProps = {
   /**
    * the content that appears that indicates the key is downloadable
    */
-  downloadBodyText: string;
+  downloadBodyText?: string;
   /**
    * designates the name of downloadable json file with the key. if not specified will default to 'apikey'
    */

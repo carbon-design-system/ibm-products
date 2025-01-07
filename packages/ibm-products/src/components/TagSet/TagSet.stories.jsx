@@ -135,6 +135,9 @@ export default {
   parameters: {
     // docs: { page: mdx },
     styles,
+    percy: {
+      waitForTimeout: 1000,
+    },
   },
   argTypes: {
     containerWidth: {

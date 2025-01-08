@@ -46,7 +46,8 @@ async function build() {
   ]);
 
   const iconInput = await globby([
-    'node_modules/@carbon/icons/lib/**/*.js',
+    '../node_modules/@carbon/icons/lib/**/*.js',
+    '../../node_modules/@carbon/icons/lib/**/*.js',
     '!**/index.js',
   ]);
 

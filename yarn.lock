@@ -1753,6 +1753,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@carbon/ibm-products-styles": "npm:^2.53.0"
+    "@carbon/icon-helpers": "npm:^10.54.0"
     "@carbon/icons": "npm:^11.53.0"
     "@carbon/motion": "npm:^11.24.0"
     "@carbon/styles": "npm:1.71.0"

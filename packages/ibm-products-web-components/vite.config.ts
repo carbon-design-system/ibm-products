@@ -7,14 +7,13 @@
 
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import viteSVGResultCarbonIconLoader from './tools/vite-svg-result-carbon-icon-loader';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    // @ts-ignore
     litStyleLoader(),
-    // @ts-ignore
     litTemplateLoader(),
+    viteSVGResultCarbonIconLoader(),
   ],
   test: {
     environment: 'happy-dom',

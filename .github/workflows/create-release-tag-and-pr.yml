@@ -51,15 +51,10 @@ jobs:
           git push origin chore/${{ github.event.inputs.tag }}-release
       
       # Check for conflicts and if exists resolve it
-      - name: Check for conflicts and resolve
+      - name: Attempt merge and resolve conflict (if any)
         run: |
-          git merge origin/main
-          if [ $? -ne 0 ]; then
-            echo "Merge conflicts detected"
-            # Resolve conflicts by choosing current version as latest than main
-            git checkout --ours .
-            git add .
-            git commit -m "chore: resolved merge conflicts"
+          git merge origin/main -Xours || true
+          git push origin chore/${{ github.event.inputs.tag }}-release
       
       # Create PR with the new branch
       - name: Create Pull Request

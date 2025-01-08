@@ -21,15 +21,6 @@ test.describe('AboutModal @avt', () => {
       },
     });
 
-    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
-    await page.getByText('Open the About modal').click();
-
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-
     await expect(page).toHaveNoACViolations('AboutModal @avt-default-state');
   });
 
@@ -42,16 +33,7 @@ test.describe('AboutModal @avt', () => {
       },
     });
 
-    const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
-    await page.getByText('Open the About modal').click();
-
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
     const closeButton = page.getByLabel('Close');
-
     await expect(closeButton).toBeFocused();
   });
 
@@ -65,31 +47,11 @@ test.describe('AboutModal @avt', () => {
     });
 
     const modalElement = page.locator(`.${carbon.prefix}--modal`);
-    const openButton = page.getByText(
-      'Open the About modal with all props set'
-    );
     const closeIcon = page.getByLabel('Close');
     const linkActions = page.getByText('Link action');
 
-    // Focus the open button
-    await page.keyboard.press('Tab');
-    // Expect open button to be focused
-    await expect(openButton).toBeFocused();
-    // Open modal by pressing 'Enter' key
-    await page.keyboard.press('Enter');
-
-    // Opening modal
-    await modalElement.evaluate((element) =>
-      Promise.all(
-        element.getAnimations().map((animation) => animation.finished)
-      )
-    );
-
-    await expect(page).toHaveNoACViolations(
-      'AboutModal @avt-open-close-with-focus-trap'
-    );
-
-    // Initial focus should be on close button
+    // Initial focus should be on close button, on an open modal
+    await expect(modalElement).not.toHaveAttribute('aria-hidden', 'true');
     await expect(closeIcon).toBeFocused();
     // Press tab to move focus to first link element
     await page.keyboard.press('Tab');
@@ -107,12 +69,12 @@ test.describe('AboutModal @avt', () => {
     await page.keyboard.press('Tab');
     await expect(closeIcon).toBeFocused();
 
-    // Press escape to twise
-    // first to close tooltip then close modal
+    // Press escape twice
+    // To close tooltip and modal
     await page.keyboard.press('Escape');
     await page.keyboard.press('Escape');
 
-    // Opening modal
+    // Closing modal
     await modalElement.evaluate((element) =>
       Promise.all(
         element.getAnimations().map((animation) => animation.finished)
@@ -120,5 +82,55 @@ test.describe('AboutModal @avt', () => {
     );
 
     await expect(modalElement).toHaveAttribute('aria-hidden', 'true');
+    await expect(page).toHaveNoACViolations(
+      'AboutModal @avt-open-close-with-focus-trap'
+    );
+
+    // Reopening modal from trigger button to check if focus trap is working
+    const openButton = page.getByText(
+      'Reopen the About modal with all props set'
+    );
+    await openButton.click();
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+    await expect(modalElement).not.toHaveAttribute('aria-hidden', 'true');
+    await expect(closeIcon).toBeFocused();
+
+    // Press tab to move focus to first link element
+    await page.keyboard.press('Tab');
+    await expect(linkActions.first()).toBeFocused();
+
+    // Press tab to move focus to second link element
+    await page.keyboard.press('Tab');
+    await expect(linkActions.nth(1)).toBeFocused();
+
+    // Press tab to move focus to last link element
+    await page.keyboard.press('Tab');
+    await expect(linkActions.last()).toBeFocused();
+
+    // Press tab to move focus back to close button
+    await page.keyboard.press('Tab');
+    await expect(closeIcon).toBeFocused();
+
+    // Press escape to twice
+    // first to close tooltip then close modal
+    await page.keyboard.press('Escape');
+    await page.keyboard.press('Escape');
+
+    // Closing modal
+    await modalElement.evaluate((element) =>
+      Promise.all(
+        element.getAnimations().map((animation) => animation.finished)
+      )
+    );
+
+    await expect(modalElement).toHaveAttribute('aria-hidden', 'true');
+
+    await expect(page).toHaveNoACViolations(
+      'AboutModal @avt-open-close-with-focus-trap'
+    );
   });
 });

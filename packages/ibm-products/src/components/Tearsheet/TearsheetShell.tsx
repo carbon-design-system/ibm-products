@@ -409,14 +409,6 @@ export const TearsheetShell = React.forwardRef(
       }
     }, [modalRef, width]);
 
-    function handleFocus() {
-      // If something within us is receiving focus but we are not the topmost
-      // stacked tearsheet, transfer focus to the topmost tearsheet instead
-      if (position < depth) {
-        stack.open[stack.open.length - 1].claimFocus?.();
-      }
-    }
-
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
       // We can't use a Wrap for the ModalHeader because ComposedModal requires

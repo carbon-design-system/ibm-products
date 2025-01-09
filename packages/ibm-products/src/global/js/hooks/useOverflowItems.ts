@@ -58,22 +58,23 @@ export function useOverflowItems<T extends Item>(
 
   const getItems = (): T[] => {
     const map = getMap();
-    const maxWidth = containerWidth ? containerWidth - additionalOffset : 0;
+    const visibleItems = maxVisible ? items.slice(0, maxVisible) : items;
+    if (containerWidth === 0) {
+      return visibleItems;
+    }
+    const maxWidth = containerWidth - additionalOffset;
     let maxReached = false;
     let currentWidth = 0;
 
-    return items.reduce((prev, cur) => {
-      if (maxVisible && prev.length >= maxVisible) {
-        maxReached = true;
-      }
+    return visibleItems.reduce((prev, cur) => {
       if (maxReached === false) {
         const itemWidth = map.get(cur.id) || 0;
-        const willFit = itemWidth + currentWidth <= maxWidth;
-        if (willFit) {
+        if (itemWidth + currentWidth > maxWidth) {
+          maxReached = true;
+        }
+        if (maxReached === false) {
           currentWidth += itemWidth;
           prev.push(cur);
-        } else {
-          maxReached = true;
         }
       }
       return prev;

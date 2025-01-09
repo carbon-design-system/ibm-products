@@ -142,12 +142,10 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
       item: TagOverflowItem,
       tagComponent: string
     ) => {
-      const { className, id, ...other } = item;
+      const { className, ...other } = item;
       return createElement(tagComponent, {
         ...other,
-        key: id,
         className: cx(`${blockClass}__item`, className),
-        ref: (node) => itemRefHandler(id, node as HTMLDivElement),
       });
     };
 
@@ -164,43 +162,49 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
     return (
       <div
         {...rest}
-        className={cx(blockClass, className, `${blockClass}--align-${align}`)}
-        ref={containerRef}
+        className={cx(blockClass, className)}
         {...getDevtoolsProps(componentName)}
+        ref={ref}
       >
-        {visibleItems?.length > 0 &&
-          visibleItems.map((item, index) => {
-            if (tagComponent) {
-              return getCustomComponent(item, tagComponent);
-            } else {
-              const { id, label, tagType, onClose, filter, ...other } = item;
-              return (
-                <div ref={(node) => itemRefHandler(id, node)} key={id}>
-                  {typeof onClose === 'function' || filter ? (
-                    <DismissibleTag
-                      {...other}
-                      className={`${blockClass}__item--tag`}
-                      type={tagType}
-                      onClose={() => handleTagOnClose(onClose, index)}
-                      text={label}
-                    />
-                  ) : (
-                    <Tag
-                      {...other}
-                      className={`${blockClass}__item--tag`}
-                      type={tagType}
-                    >
-                      {label}
-                    </Tag>
-                  )}
-                </div>
-              );
-            }
+        <div
+          className={cx(
+            `${blockClass}__visible-tags`,
+            `${blockClass}--align-${align}`
+          )}
+          ref={containerRef}
+        >
+          {visibleItems.map((item, index) => {
+            const { id, label, tagType, onClose, filter, ...other } = item;
+            return (
+              <div
+                className={`${blockClass}__tag-container`}
+                ref={(node) => itemRefHandler(id, node)}
+                key={id}
+              >
+                {tagComponent ? (
+                  getCustomComponent(item, tagComponent)
+                ) : typeof onClose === 'function' || filter ? (
+                  <DismissibleTag
+                    {...other}
+                    className={`${blockClass}__item--tag`}
+                    type={tagType}
+                    onClose={() => handleTagOnClose(onClose, index)}
+                    text={label}
+                  />
+                ) : (
+                  <Tag
+                    {...other}
+                    className={`${blockClass}__item--tag`}
+                    type={tagType}
+                  >
+                    {label}
+                  </Tag>
+                )}
+              </div>
+            );
           })}
-
-        <span className={`${blockClass}__indicator`} ref={overflowRef}>
-          {overflowItems?.length > 0 && (
-            <>
+          {overflowItems.length > 0 && (
+            <div className={`${blockClass}__indicator`} ref={overflowRef}>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}
                 className={overflowClassName}
@@ -226,9 +230,9 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
                 searchPlaceholder={allTagsModalSearchPlaceholderText}
                 portalTarget={allTagsModalTarget}
               />
-            </>
+            </div>
           )}
-        </span>
+        </div>
       </div>
     );
   }

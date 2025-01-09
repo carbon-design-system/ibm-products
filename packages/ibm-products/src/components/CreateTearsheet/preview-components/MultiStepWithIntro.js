@@ -25,24 +25,28 @@ import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
 import { NoDataIllustration } from '../../EmptyStates/assets/NoDataIllustration';
-import { SlugSample } from '../../../global/js/story-parts/slug';
+import { sampleDecorator } from '../../../global/js/story-parts/decorator';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 
-export const MultiStepWithIntro = ({
-  backButtonText,
-  cancelButtonText,
-  className,
-  description,
-  influencerWidth,
-  label,
-  nextButtonText,
-  slug,
-  submitButtonText,
-  title,
-}) => {
+export const MultiStepWithIntro = (
+  {
+    backButtonText,
+    cancelButtonText,
+    className,
+    description,
+    influencerWidth,
+    label,
+    nextButtonText,
+    slug,
+    decorator,
+    submitButtonText,
+    title,
+  },
+  context
+) => {
   const [simulatedDelay] = useState(750);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');
@@ -92,7 +96,8 @@ export const MultiStepWithIntro = ({
             }, simulatedDelay);
           })
         }
-        slug={slug && SlugSample()}
+        slug={slug && sampleDecorator(slug)}
+        decorator={decorator && sampleDecorator(decorator)}
       >
         <CreateTearsheetStep
           title="Select a category"

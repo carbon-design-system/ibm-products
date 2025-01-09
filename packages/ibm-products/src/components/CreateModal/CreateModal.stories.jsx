@@ -151,13 +151,9 @@ const Template = (
   );
 };
 
-const TemplateWithFormValidation = ({
-  storyInitiallyOpen = false,
-  story,
-  ...args
-}) => {
+const TemplateWithFormValidation = ({ story, ...args }, context) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(storyInitiallyOpen);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
 

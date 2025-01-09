@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 import { EmptyStateV2 } from '.';
 
 // Other standard imports.
@@ -32,9 +32,10 @@ enum sizes {
 }
 
 // Default values for props
-export const defaults: { position: string; size: sizes } = {
+export const defaults: { position: string; size: sizes; headingAs: string } = {
   position: 'top',
   size: sizes.lg,
+  headingAs: 'h3',
 };
 
 export interface EmptyStateProps {
@@ -78,6 +79,11 @@ export interface EmptyStateProps {
   };
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs?: (() => ReactNode) | string | ElementType;
+
+  /**
    * Empty state size
    */
   size?: 'lg' | 'sm';
@@ -116,6 +122,7 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
       illustrationPosition = defaults.position,
       link,
       size = defaults.size,
+      headingAs = defaults.headingAs,
       subtitle,
       title,
       ...rest
@@ -140,12 +147,14 @@ export let EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
               `${blockClass}__illustration`,
               `${blockClass}__illustration--${size}`,
             ])}
+            aria-hidden="true"
           />
         )}
         <EmptyStateContent
           action={action}
           link={link}
           size={size}
+          headingAs={headingAs}
           subtitle={subtitle}
           title={title ?? ''}
         />
@@ -177,6 +186,11 @@ EmptyState.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Empty state headingAs allows you to customize the type of heading element
+   */
+  headingAs: PropTypes.elementType,
+
+  /**
    * Empty state illustration, specify the `src` for a provided illustration to be displayed. In the case of requiring a light and dark illustration of your own, simply pass the corresponding illustration based on the current theme of your application.
    * For example: `illustration={appTheme === 'dark' ? darkIllustration : lightIllustration}`
    */
@@ -194,7 +208,6 @@ EmptyState.propTypes = {
    * Designates the position of the illustration relative to the content
    */
   illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
   /**
    * Empty state link object
    */
@@ -204,7 +217,6 @@ EmptyState.propTypes = {
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     href: PropTypes.string,
   }),
-
   /**
    * Empty state size
    */

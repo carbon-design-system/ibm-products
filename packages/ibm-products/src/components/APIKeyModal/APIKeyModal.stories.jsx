@@ -65,7 +65,7 @@ const defaultProps = {
   copyButtonText: 'Copy',
   copyIconDescription: 'Copy',
   hasAPIKeyVisibilityToggle: true,
-  downloadBodyText:
+  helperText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
   downloadLinkLabel: 'Download API Key in Java Script File format',
@@ -74,16 +74,16 @@ const defaultProps = {
   downloadFileType: 'json',
   open: true,
   closeButtonText: 'Close',
-  generateSuccessTitle: 'API key successfully created',
-  editSuccessTitle: 'API key successfully saved',
+  generateSuccessMessage: 'API key successfully created',
+  editSuccessMessage: 'API key successfully saved',
   loadingText: 'Generating...',
   modalLabel: 'An example of Generate API key',
 };
 
 const blockClass = `${pkg.prefix}--apikey-modal`;
 
-const InstantTemplate = (args) => {
-  const [open, setOpen] = useState(false);
+const InstantTemplate = (args, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
 
@@ -119,9 +119,9 @@ const InstantTemplate = (args) => {
   );
 };
 
-const TemplateWithState = (args) => {
+const TemplateWithState = (args, context) => {
   const { error } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
@@ -166,7 +166,7 @@ const TemplateWithState = (args) => {
   );
 };
 
-const MultiStepTemplate = (args) => {
+const MultiStepTemplate = (args, context) => {
   const { editing } = args;
   const {
     savedName,
@@ -175,7 +175,7 @@ const MultiStepTemplate = (args) => {
     savedResource,
     ...finalArgs
   } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef(undefined);
@@ -301,7 +301,7 @@ const MultiStepTemplate = (args) => {
           )}
           {editSuccess && (
             <div className={`${blockClass}__messaging`}>
-              Edited successfully
+              Edited successfully, API key successfully saved.
             </div>
           )}
         </>
@@ -332,9 +332,9 @@ const MultiStepTemplate = (args) => {
   );
 };
 
-const EditTemplate = (args) => {
+const EditTemplate = (args, context) => {
   const { error, apiKeyName } = args;
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const [fetchSuccess, setFetchSuccess] = useState(false);
@@ -415,6 +415,7 @@ export const InstantGenerate = InstantTemplate.bind({});
 InstantGenerate.args = {
   ...defaultProps,
   apiKeyLabel: 'Unique API Key',
+  generateTitle: 'Generate an API key',
 };
 
 export const CustomGenerate = MultiStepTemplate.bind({});
@@ -428,6 +429,7 @@ CustomGenerate.args = {
   savedAllResources: false,
   savedResource: '',
   savedPermissions: '',
+  generateTitle: 'Generate an API key',
 };
 CustomGenerate.parameters = {
   docs: {
@@ -489,6 +491,7 @@ CustomEdit.args = {
   savedPermissions: 'Read only',
   editing: true,
   editButtonText: 'Save API key',
+  generateTitle: 'Save an API key',
 };
 CustomEdit.parameters = {
   docs: {

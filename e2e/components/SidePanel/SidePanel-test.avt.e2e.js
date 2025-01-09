@@ -19,7 +19,6 @@ test.describe('SidePanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('Open side panel').click();
     await expect(page).toHaveNoACViolations('SidePanel @avt-default-state');
   });
 
@@ -31,7 +30,6 @@ test.describe('SidePanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('Open side panel').click();
     await expect(page.getByText('Main view')).toBeVisible();
     await page.getByText('View all').click();
     await expect(page.getByText('Detail view')).toBeVisible();
@@ -47,7 +45,6 @@ test.describe('SidePanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('Open side panel').click();
     await expect(page.getByLabel('Close')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.getByText('Copy')).toBeFocused();
@@ -66,7 +63,6 @@ test.describe('SidePanel @avt', () => {
         carbonTheme: 'white',
       },
     });
-    await page.getByText('Open side panel').click();
     await expect(page.getByLabel('Close')).toBeFocused();
     await page.getByLabel('Close').click();
     await expect(page.getByText('Open side panel')).toBeFocused();
@@ -82,8 +78,6 @@ test.describe('SidePanel @avt', () => {
       },
     });
 
-    // Open side panel
-    await page.getByText('Open side panel').click();
     // Expect close button to be focused
     await expect(page.getByLabel('Close')).toBeFocused();
 
@@ -92,5 +86,15 @@ test.describe('SidePanel @avt', () => {
 
     // Expect the second input to be focus as the first input is disabled
     await expect(page.locator('#side-panel-story-text-input-b')).toBeFocused();
+
+    // Expect focus to return to trigger button, on a closed panel
+    await page.keyboard.press('Escape');
+    await expect(
+      page.getByRole('button', { name: 'Open side panel' })
+    ).toBeFocused();
+
+    // Move focus to first element, on an open panel
+    await page.getByRole('button', { name: 'Open side panel' }).click();
+    await expect(page.getByLabel('Close')).toBeFocused();
   });
 });

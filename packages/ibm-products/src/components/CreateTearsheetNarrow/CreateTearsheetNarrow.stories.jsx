@@ -19,7 +19,11 @@ import { pkg } from '../../settings';
 import { CreateTearsheetNarrow } from '.';
 import styles from './_storybook-styles.scss?inline';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { SlugSample, slugArgTypes } from '../../global/js/story-parts/slug';
+import {
+  sampleDecorator,
+  slugArgTypes,
+  decoratorArgTypes,
+} from '../../global/js/story-parts/decorator';
 
 export default {
   title: 'IBM Products/Patterns/Create flows/CreateTearsheetNarrow',
@@ -28,6 +32,7 @@ export default {
   argTypes: {
     children: { control: { disable: true } },
     ...slugArgTypes(),
+    ...decoratorArgTypes(),
   },
   parameters: {
     styles,
@@ -54,8 +59,8 @@ const defaultStoryProps = {
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',
 };
 
-const Template = ({ slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ slug, decorator, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
   const [replicaCount, setReplicaCount] = useState(1);
@@ -80,7 +85,8 @@ const Template = ({ slug, ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && SlugSample()}
+        slug={slug && sampleDecorator(slug)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <TextInput
@@ -156,8 +162,8 @@ const Template = ({ slug, ...args }) => {
   );
 };
 
-const WithValidationTemplate = ({ slug, ...args }) => {
-  const [open, setOpen] = useState(false);
+const WithValidationTemplate = ({ slug, decorator, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs');
   const [topicName, setTopicName] = useState('');
   const [partitionCount, setPartitionCount] = useState(1);
   const [replicaCount, setReplicaCount] = useState(1);
@@ -187,7 +193,8 @@ const WithValidationTemplate = ({ slug, ...args }) => {
         }}
         onRequestSubmit={action('onRequestSubmit action called')}
         disableSubmit={!topicName || numberInputsInvalid}
-        slug={slug && SlugSample()}
+        slug={slug && sampleDecorator(slug)}
+        decorator={decorator && sampleDecorator(decorator)}
         {...args}
       >
         <FormGroup

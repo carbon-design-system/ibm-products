@@ -7,14 +7,9 @@
 
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
-import viteSVGResultCarbonIconLoader from './tools/vite-svg-result-carbon-icon-loader';
 
 export default defineConfig({
-  plugins: [
-    litStyleLoader(),
-    litTemplateLoader(),
-    viteSVGResultCarbonIconLoader(),
-  ],
+  plugins: [litStyleLoader(), litTemplateLoader()],
   test: {
     environment: 'happy-dom',
     include: ['./src/**/*.{test,spec}.{js,ts}'],

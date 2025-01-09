@@ -37,8 +37,7 @@ const useOnRowClick = (hooks: Hooks) => {
             instance.selectedFlatRows &&
               instance.selectedFlatRows.map(
                 (toggleRow) =>
-                  toggleRow.toggleRowSelected &&
-                  toggleRow.toggleRowSelected(false)
+                  toggleRow.toggleRowSelected?.(false)
               );
             toggleRowSelected(id, true);
           }

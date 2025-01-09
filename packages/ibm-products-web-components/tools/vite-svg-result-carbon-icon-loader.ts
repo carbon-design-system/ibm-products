@@ -14,7 +14,7 @@ import createSVGResultFromCarbonIcon from './svg-result-carbon-icon';
  *
  * @returns {string} The massaged module content.
  */
-export default async function svgResultCarbonIconLoader() {
+export default function svgResultCarbonIconLoader() {
   const svgRegex = /@carbon[\\/]icons[\\/]/i;
 
   const paths = new Map<string, string>();
@@ -49,7 +49,6 @@ export default async function svgResultCarbonIconLoader() {
       if (!id.match(svgRegex)) {
         return outcome;
       }
-      console.log('id: ', id);
       const descriptor = require(id);
       return `
           import { svg } from 'lit';

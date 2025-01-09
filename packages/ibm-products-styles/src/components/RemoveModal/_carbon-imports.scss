@@ -7,6 +7,6 @@
 
 // RemoveModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput
-@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/button/tokens';
 @use '@carbon/react/scss/components/modal';
 @use '@carbon/react/scss/components/text-input';

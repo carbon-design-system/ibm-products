@@ -8,7 +8,7 @@
 // ExportModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
 // RadioButton, RadioButtonGroup, FormGroup, Loading
-@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/button/tokens';
 @use '@carbon/react/scss/components/modal';
 @use '@carbon/react/scss/components/text-input';
 @use '@carbon/react/scss/components/radio-button';

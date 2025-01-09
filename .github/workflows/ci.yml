@@ -138,7 +138,7 @@ jobs:
       - name: Install
         run: yarn
       - name: CI tests for products web components
-        run: yarn ci-check:test:c4p-wc
+        run: yarn ci-check:test:c4p:wc
 
   avt-runner:
     strategy:

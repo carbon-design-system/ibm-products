@@ -216,8 +216,6 @@ declare module '@carbon/type' {
   export { ButtonProps, PopoverAlignment, TagProps } from '@carbon/type';
 }
 
-declare module '@carbon/react/icons';
-declare module '@carbon/icons-react';
 declare module '@carbon/colors';
 declare module '@carbon/motion';
 declare module '@carbon/feature-flags';

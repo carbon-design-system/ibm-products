@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.6.0",
+  "version": "0.6.1-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -49,7 +49,7 @@
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.53.0",
+    "@carbon/ibm-products-styles": "^2.53.1-rc.0",
     "@carbon/styles": "1.71.0",
     "@carbon/web-components": "2.19.0",
     "lit": "^3.1.0"

@@ -913,9 +913,15 @@ export let PageHeader = React.forwardRef(
     const displayedBreadcrumbs = getBreadcrumbs();
 
     useIsomorphicEffect(() => {
-      Object.keys(pageHeaderStyles).forEach(
-        (key) => (headerRef.current.style[key] = pageHeaderStyles[key])
-      );
+      console.log({ pageHeaderStyles, headerRef });
+      Object.keys(pageHeaderStyles).forEach((key) => {
+        // check if style is a css var
+        if (key.startsWith('--')) {
+          headerRef.current.style.setProperty(key, pageHeaderStyles[key]);
+        } else {
+          headerRef.current.style[key] = pageHeaderStyles[key];
+        }
+      });
     }, [headerRef, pageHeaderStyles]);
 
     const subtitleRef = useRef<HTMLSpanElement>(null);

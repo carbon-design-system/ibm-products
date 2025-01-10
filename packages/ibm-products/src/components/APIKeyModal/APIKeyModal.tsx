@@ -31,7 +31,7 @@ import {
   Copy,
   ErrorFilled,
   CheckmarkFilled,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';

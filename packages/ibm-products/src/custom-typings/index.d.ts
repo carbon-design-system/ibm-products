@@ -212,13 +212,6 @@ declare module '@carbon/react' {
     usePrefix,
   } from '@carbon/react';
 }
-
-declare module '@carbon/type' {
-  export { ButtonProps } from '@carbon/type';
-}
-declare module '@carbon/react/icons' {
-  export { CarbonIconType } from '@carbon/react/icons';
-}
 declare module '@carbon/colors';
 declare module '@carbon/motion';
 declare module '@carbon/feature-flags';

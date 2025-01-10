@@ -1753,6 +1753,7 @@ __metadata:
   resolution: "@carbon/ibm-products-web-components@workspace:packages/ibm-products-web-components"
   dependencies:
     "@carbon/ibm-products-styles": "npm:^2.53.0"
+    "@carbon/icon-helpers": "npm:^10.54.0"
     "@carbon/icons": "npm:^11.53.0"
     "@carbon/motion": "npm:^11.24.0"
     "@carbon/styles": "npm:1.71.0"
@@ -1831,7 +1832,7 @@ __metadata:
     classnames: "npm:^2.5.1"
     copyfiles: "npm:^2.4.1"
     cross-env: "npm:^7.0.3"
-    framer-motion: "npm:^11.11.17"
+    framer-motion: "npm:^6.5.1 < 7"
     fs-extra: "npm:^11.2.0"
     glob: "npm:^10.3.10"
     immutability-helper: "npm:^3.1.1"
@@ -2863,6 +2864,22 @@ __metadata:
   dependencies:
     tslib: "npm:^2.4.0"
   checksum: 949f8bdcb11153d530652516b11d4b11d8c6ed48a692b4a59cbaa4305327aed59a61f0d87c366085c20ad0b0336c3b50eaddbddeeb3e8c55e7e82b583b9d98fb
+  languageName: node
+  linkType: hard
+
+"@emotion/is-prop-valid@npm:^0.8.2":
+  version: 0.8.8
+  resolution: "@emotion/is-prop-valid@npm:0.8.8"
+  dependencies:
+    "@emotion/memoize": "npm:0.7.4"
+  checksum: e85bdeb9d9d23de422f271e0f5311a0142b15055bb7e610440dbf250f0cdfd049df88af72a49e2c6081954481f1cbeca9172e2116ff536b38229397dfbed8082
+  languageName: node
+  linkType: hard
+
+"@emotion/memoize@npm:0.7.4":
+  version: 0.7.4
+  resolution: "@emotion/memoize@npm:0.7.4"
+  checksum: 4e3920d4ec95995657a37beb43d3f4b7d89fed6caa2b173a4c04d10482d089d5c3ea50bbc96618d918b020f26ed6e9c4026bbd45433566576c1f7b056c3271dc
   languageName: node
   linkType: hard
 
@@ -4095,6 +4112,71 @@ __metadata:
     cheerio: "npm:1.0.0-rc.12"
     tslib: "npm:^2.6.2"
   checksum: 297c42f5facbe6cd06e5a23d233f6da67b4a7c0a2b7680bdbcbe54bf9770d0e8b23f137f1926e7b9404fb45af07adbeb067691bd571706ee4c847f68d2ebdb4b
+  languageName: node
+  linkType: hard
+
+"@motionone/animation@npm:^10.12.0":
+  version: 10.18.0
+  resolution: "@motionone/animation@npm:10.18.0"
+  dependencies:
+    "@motionone/easing": "npm:^10.18.0"
+    "@motionone/types": "npm:^10.17.1"
+    "@motionone/utils": "npm:^10.18.0"
+    tslib: "npm:^2.3.1"
+  checksum: c7fc04dd10d6cade3d3b63d26f2532a2b2731233afc0454722e55ad8061fb3923d926db9cc09f1bcedb39f504fcee1e80adaab270523846998aad3017364a583
+  languageName: node
+  linkType: hard
+
+"@motionone/dom@npm:10.12.0":
+  version: 10.12.0
+  resolution: "@motionone/dom@npm:10.12.0"
+  dependencies:
+    "@motionone/animation": "npm:^10.12.0"
+    "@motionone/generators": "npm:^10.12.0"
+    "@motionone/types": "npm:^10.12.0"
+    "@motionone/utils": "npm:^10.12.0"
+    hey-listen: "npm:^1.0.8"
+    tslib: "npm:^2.3.1"
+  checksum: 6fd7804b8adba5578d700fced12df6e7fca366aeda8837471286481ebfb5275facd3883448df84a2f772c32e7e3297fc696d3a19b110214f070f305b1ab21c67
+  languageName: node
+  linkType: hard
+
+"@motionone/easing@npm:^10.18.0":
+  version: 10.18.0
+  resolution: "@motionone/easing@npm:10.18.0"
+  dependencies:
+    "@motionone/utils": "npm:^10.18.0"
+    tslib: "npm:^2.3.1"
+  checksum: a455a06ccee907ce9da7b1dfe392060a473132733e3f92bbee3a99c36af7baa333cf3c6e38c6d44ad0f9878fdafca3c3f4bcfe55aaeb2a633e45d8e0429f8fa5
+  languageName: node
+  linkType: hard
+
+"@motionone/generators@npm:^10.12.0":
+  version: 10.18.0
+  resolution: "@motionone/generators@npm:10.18.0"
+  dependencies:
+    "@motionone/types": "npm:^10.17.1"
+    "@motionone/utils": "npm:^10.18.0"
+    tslib: "npm:^2.3.1"
+  checksum: 149720881e8db6a1ff38cea98349c3a00f72e5318b645459b68a2aeddb1f2be63ad2ae8978f6c4a63e2414f39e65f06de13a43fd35cf24dc3fb3e3c7f87526bc
+  languageName: node
+  linkType: hard
+
+"@motionone/types@npm:^10.12.0, @motionone/types@npm:^10.17.1":
+  version: 10.17.1
+  resolution: "@motionone/types@npm:10.17.1"
+  checksum: 21d92d733ba30f810b72609fe04f2ef86125ba0160b826974605cc4cc5fbb6ab7bbf1640cbc64fd6298eb8d36fb920ad3ca646c76adf0e2c47a4920200616952
+  languageName: node
+  linkType: hard
+
+"@motionone/utils@npm:^10.12.0, @motionone/utils@npm:^10.18.0":
+  version: 10.18.0
+  resolution: "@motionone/utils@npm:10.18.0"
+  dependencies:
+    "@motionone/types": "npm:^10.17.1"
+    hey-listen: "npm:^1.0.8"
+    tslib: "npm:^2.3.1"
+  checksum: 0fa9232d132383880d6004522ded763d60f490946584e02bca7f64df98fae07421071f3a85de06aa6ecb52632a47a7586b4143e824e459a87cc852fab657e549
   languageName: node
   linkType: hard
 
@@ -13007,23 +13089,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^11.11.17":
-  version: 11.11.17
-  resolution: "framer-motion@npm:11.11.17"
+"framer-motion@npm:^6.5.1 < 7":
+  version: 6.5.1
+  resolution: "framer-motion@npm:6.5.1"
   dependencies:
-    tslib: "npm:^2.4.0"
+    "@emotion/is-prop-valid": "npm:^0.8.2"
+    "@motionone/dom": "npm:10.12.0"
+    framesync: "npm:6.0.1"
+    hey-listen: "npm:^1.0.8"
+    popmotion: "npm:11.0.3"
+    style-value-types: "npm:5.0.0"
+    tslib: "npm:^2.1.0"
   peerDependencies:
-    "@emotion/is-prop-valid": "*"
-    react: ^18.0.0
-    react-dom: ^18.0.0
-  peerDependenciesMeta:
+    react: ">=16.8 || ^17.0.0 || ^18.0.0"
+    react-dom: ">=16.8 || ^17.0.0 || ^18.0.0"
+  dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: 85193dea8ea4161efa20604db31d82761008b56f1c68097239e6e825a422c4fcc8e3b06c3a81e9cbbb1905c4b9d69632b520db2f9dd4808e03bf83e1826791ea
+  checksum: ecdb2cceb0ff400f2bddc8800b74e0b377fd7d627a051437ec510cf3c1e7184b6a0afc68696e70cb21bf277e41ea41813e2833f8878e23de178be10d7b2978e5
+  languageName: node
+  linkType: hard
+
+"framesync@npm:6.0.1":
+  version: 6.0.1
+  resolution: "framesync@npm:6.0.1"
+  dependencies:
+    tslib: "npm:^2.1.0"
+  checksum: 38a985189c90867a969e9acc1d31bfcab8184bccc0f1ad41a12dbd573e3ec0ba74259d12f3fcabaccd914330601cabd686f47b543798cf6e8c4ad23ea3c0a581
   languageName: node
   linkType: hard
 
@@ -13784,6 +13876,13 @@ __metadata:
   version: 4.0.3
   resolution: "headers-polyfill@npm:4.0.3"
   checksum: 3a008aa2ef71591e2077706efb48db1b2729b90cf646cc217f9b69744e35cca4ba463f39debb6000904aa7de4fada2e5cc682463025d26bcc469c1d99fa5af27
+  languageName: node
+  linkType: hard
+
+"hey-listen@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "hey-listen@npm:1.0.8"
+  checksum: 744b5f4c18c7cfb82b22bd22e1d300a9ac4eafe05a22e58fb87e48addfca8be00604d9aa006434ea02f9530990eb4b393ddb28659e2ab7f833ce873e32eb809c
   languageName: node
   linkType: hard
 
@@ -18719,6 +18818,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"popmotion@npm:11.0.3":
+  version: 11.0.3
+  resolution: "popmotion@npm:11.0.3"
+  dependencies:
+    framesync: "npm:6.0.1"
+    hey-listen: "npm:^1.0.8"
+    style-value-types: "npm:5.0.0"
+    tslib: "npm:^2.1.0"
+  checksum: d2b6f16536b093d6106ab4caff105b1b4a8bb260e1deb316ca4fe81997c2ca1fc9e2d7747cee08dc2ce34d23ef7be8fd096efa7bc7f6908479da9d16343e1f63
+  languageName: node
+  linkType: hard
+
 "possible-typed-array-names@npm:^1.0.0":
   version: 1.0.0
   resolution: "possible-typed-array-names@npm:1.0.0"
@@ -21179,6 +21290,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"style-value-types@npm:5.0.0":
+  version: 5.0.0
+  resolution: "style-value-types@npm:5.0.0"
+  dependencies:
+    hey-listen: "npm:^1.0.8"
+    tslib: "npm:^2.1.0"
+  checksum: a4043bcc8e9f73e393c48f3f3d26f0ed42ac518cf623b1966737a17dc07ef9a4bcefaa81bfb91037c38b160a7683e139132c87fe747aebe6527b785a04262dd8
+  languageName: node
+  linkType: hard
+
 "stylehacks@npm:^7.0.4":
   version: 7.0.4
   resolution: "stylehacks@npm:7.0.4"
@@ -21934,6 +22055,13 @@ __metadata:
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.3.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 

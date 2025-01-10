@@ -1,1 +1,0 @@
-const t=typeof window<"u",r={current:null},o={current:!1};function s(){if(o.current=!0,!!t)if(window.matchMedia){const e=window.matchMedia("(prefers-reduced-motion)"),n=()=>r.current=e.matches;e.addListener(n),n()}else r.current=!1}export{t as a,o as h,s as i,r as p};

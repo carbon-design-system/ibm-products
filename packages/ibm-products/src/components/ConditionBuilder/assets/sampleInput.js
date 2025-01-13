@@ -477,11 +477,12 @@ const colors = [
 const customOperators = [
   {
     label: 'is greater than',
-    id: 'greater',
+    id: 'greaterxx',
   },
   {
     label: 'is greater than or equal to',
-    id: 'greaterEqual',
+    id: 'greaterEqualxx',
+    enableMultiselect: true,
   },
 ];
 
@@ -493,6 +494,8 @@ export const inputData = {
       icon: Earth,
       type: 'option',
       config: {
+        operators: customOperators,
+
         options: [
           {
             label: 'Africa',

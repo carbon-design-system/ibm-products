@@ -38,7 +38,18 @@ export const ItemOptionForValueField = ({
   config = {},
   onChange,
 }: ItemOptionForValueFieldProps) => {
-  const multiSelectable = conditionState.operator === 'oneOf';
+  const checkForMultiselect = () => {
+    //move this to utils
+    const operator = conditionState.operator;
+    const currentCustomOperator = config.operators.find(
+      (op) => op.id === operator
+    );
+    return currentCustomOperator.enableMultiselect;
+  };
+
+  const multiSelectable =
+    conditionState.operator === 'oneOf' ||
+    (config.operators && checkForMultiselect());
 
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
@@ -135,6 +146,7 @@ export const ItemOptionForValueField = ({
     const updatedSelections = selection.filter(
       (item) => item !== 'INVALID'
     ) as Option[];
+    // return;
     if (multiSelectable) {
       if (isSelected) {
         const items = updatedSelections.filter((v) => v.id !== option.id);

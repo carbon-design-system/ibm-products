@@ -305,6 +305,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           data-name="operatorField"
           condition={condition}
           type={type}
+          config={config as PropertyConfig}
           onChange={onOperatorChangeHandler}
         >
           <ItemOption
@@ -345,6 +346,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           className={`${blockClass}__close-condition`}
           data-name="closeCondition"
           wrapperClassName={`${blockClass}__close-condition-wrapper`}
+          //disabled={true}
         />
       </span>
       {/* </div> */}

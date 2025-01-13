@@ -142,7 +142,8 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type == 'option' &&
-        condition?.operator !== 'oneOf'
+        condition?.operator !== 'oneOf' &&
+        !config.enableMultiselect
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();
@@ -201,8 +202,16 @@ export const ConditionBuilderItem = ({
     }
   };
 
+  const getCustomOperatorLabel = () => {
+    return config?.operators.filter((operator) => {
+      return operator.id === propertyLabel[0];
+    });
+  };
+
   const getLabel = () => {
-    if (propertyLabel) {
+    if (config?.operators && rest['data-name'] == 'operatorField') {
+      return getCustomOperatorLabel(propertyLabel)?.[0]?.label ?? propertyLabel;
+    } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {
       return addPropertyText;

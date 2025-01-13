@@ -913,7 +913,6 @@ export let PageHeader = React.forwardRef(
     const displayedBreadcrumbs = getBreadcrumbs();
 
     useIsomorphicEffect(() => {
-      console.log({ pageHeaderStyles, headerRef });
       Object.keys(pageHeaderStyles).forEach((key) => {
         // check if style is a css var
         if (key.startsWith('--')) {

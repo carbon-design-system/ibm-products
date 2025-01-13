@@ -400,12 +400,9 @@ export const TearsheetShell = React.forwardRef(
         };
       };
       if (modalRef.current) {
-        modalRef.current.setAttribute(
-          'styles',
-          Object.entries(setScaleValues())
-            .map(([key, value]) => `${key}: ${value};`)
-            .join(' ') // converts the array of css properties and values to a string separated by semicolons
-        );
+        Object.entries(setScaleValues()).map(([key, value]) => {
+          modalRef.current.style.setProperty(key, String(value));
+        });
       }
     }, [modalRef, width]);
 

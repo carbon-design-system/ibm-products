@@ -651,11 +651,16 @@ export let NotificationsPanel = React.forwardRef(
     ]);
 
     useIsomorphicEffect(() => {
-      if (notificationPanelRef.current) {
-        notificationPanelRef.current.style.animation = !reducedMotion
-          ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
-          : '';
-      }
+      // setTimeout ensures that this gets run
+      const timeout = setTimeout(() => {
+        if (notificationPanelRef.current && !reducedMotion) {
+          console.log({ open, notificationPanelRef });
+          notificationPanelRef.current.style.animation = open
+            ? 'fade-in 250ms'
+            : 'fade-out forwards 250ms';
+        }
+      }, 0);
+      return () => clearTimeout(timeout);
     }, [open, reducedMotion]);
 
     return shouldRender ? (

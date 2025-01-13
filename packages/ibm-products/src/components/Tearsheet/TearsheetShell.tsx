@@ -15,7 +15,6 @@ import React, {
   ForwardedRef,
   MutableRefObject,
   RefObject,
-  useCallback,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -26,10 +25,12 @@ import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
 // Carbon and package components we use.
 import {
   Button,
   ComposedModal,
+  DefinitionTooltip,
   Layer,
   ModalHeader,
   usePrefix,
@@ -288,13 +289,13 @@ export const TearsheetShell = React.forwardRef(
     );
     const modalRefValue = modalRef.current;
 
-    // Function to strip html tags out of a string.
-    const stripTags = useCallback(
-      (input) => input.replace(/<\/?[^>]+(>|$)/g, ''),
-      []
+    const descriptionRef = useRef<HTMLSpanElement>(null);
+    const isOverflowing = checkHeightOverflow(descriptionRef.current);
+    const descriptionContent = (
+      <span ref={descriptionRef} className={`${bc}__description-text`}>
+        {description}
+      </span>
     );
-
-    const titleText = stripTags(String(description));
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -485,11 +486,17 @@ export const TearsheetShell = React.forwardRef(
                     >
                       {title}
                     </Wrap>
-                    <Wrap
-                      className={`${bc}__header-description`}
-                      title={titleText}
-                    >
-                      {description}
+                    <Wrap className={`${bc}__header-description`}>
+                      {isOverflowing ? (
+                        <DefinitionTooltip
+                          definition={description}
+                          className={`${bc}__description-tooltip`}
+                        >
+                          {descriptionContent}
+                        </DefinitionTooltip>
+                      ) : (
+                        descriptionContent
+                      )}
                     </Wrap>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>

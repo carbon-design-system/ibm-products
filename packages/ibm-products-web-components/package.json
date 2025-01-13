@@ -12,6 +12,12 @@
     "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/ibm-products-web-components"
   },
+  "files": [
+    "custom-elements.json",
+    "es/**/*",
+    "lib/**/*",
+    "scss/**/*"
+  ],
   "publishConfig": {
     "access": "public",
     "provenance": true

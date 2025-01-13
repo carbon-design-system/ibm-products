@@ -23,16 +23,10 @@
     "provenance": true
   },
   "exports": {
-    "./es/components/*": {
-      "node": "./lib/components/*",
-      "default": "./es/components/*"
-    },
-    "./es/globals/*": {
-      "node": "./lib/globals/*",
-      "default": "./es/globals/*"
-    },
     "./es/*": "./es/*",
     "./lib/*": "./lib/*",
+    "./dist/*": "./dist/*",
+    "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
     "./package.json": "./package.json"
   },

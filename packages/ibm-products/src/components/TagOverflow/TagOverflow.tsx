@@ -118,17 +118,22 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
       tagComponent,
       ...rest
     } = props;
-
-    const overflowRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const offsetRef = useRef<HTMLDivElement>(null);
     const [showAllModalOpen, setShowAllModalOpen] = useState<boolean>(false);
     const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
 
     const {
       visibleItems,
       hiddenItems: overflowItems,
-      containerRef,
       itemRefHandler,
-    } = useOverflowItems(items, ref, maxVisible, onOverflowTagChange, 40);
+    } = useOverflowItems(
+      items,
+      containerRef,
+      offsetRef,
+      maxVisible,
+      onOverflowTagChange
+    );
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
@@ -178,7 +183,9 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
             return (
               <div
                 className={`${blockClass}__tag-container`}
-                ref={(node) => itemRefHandler(id, node)}
+                ref={(node) => {
+                  itemRefHandler(id, node);
+                }}
                 key={id}
               >
                 {tagComponent ? (
@@ -204,7 +211,7 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
             );
           })}
           {overflowItems.length > 0 && (
-            <div className={`${blockClass}__indicator`} ref={overflowRef}>
+            <div className={`${blockClass}__indicator`} ref={offsetRef}>
               <TagOverflowPopover
                 allTagsModalSearchThreshold={allTagsModalSearchThreshold}
                 className={overflowClassName}
@@ -214,7 +221,7 @@ export let TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
                 overflowType={overflowType}
                 showAllTagsLabel={showAllTagsLabel}
                 key="tag-overflow-popover"
-                ref={overflowRef}
+                ref={offsetRef}
                 popoverOpen={popoverOpen}
                 setPopoverOpen={setPopoverOpen}
                 autoAlign={autoAlign}

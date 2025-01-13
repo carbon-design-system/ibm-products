@@ -734,8 +734,6 @@ describe('PageHeader', () => {
       const header = screen.getByTestId(dataTestId);
 
       // When hasBackgroundAlways is false this should result in the value 0 for opacity
-      // const backgroundOpacity =
-      //   header.style[`--${prefix}--page-header--background-opacity`];
       const backgroundOpacity = window
         .getComputedStyle(header)
         .getPropertyValue(`--${prefix}--page-header--background-opacity`);

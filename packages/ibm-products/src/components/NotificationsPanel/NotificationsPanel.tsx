@@ -33,7 +33,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { timeAgo } from './utils';
-import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
+import {
+  useClickOutside,
+  useIsomorphicEffect,
+  usePreviousValue,
+} from '../../global/js/hooks';
 import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 
@@ -646,6 +650,18 @@ export let NotificationsPanel = React.forwardRef(
       },
     ]);
 
+    useIsomorphicEffect(() => {
+      // setTimeout ensures that this gets run
+      const timeout = setTimeout(() => {
+        if (notificationPanelRef.current && !reducedMotion) {
+          notificationPanelRef.current.style.animation = open
+            ? 'fade-in 250ms'
+            : 'fade-out forwards 250ms';
+        }
+      }, 0);
+      return () => clearTimeout(timeout);
+    }, [open, reducedMotion]);
+
     return shouldRender ? (
       <>
         <button
@@ -668,11 +684,6 @@ export let NotificationsPanel = React.forwardRef(
           }
           id={blockClass}
           className={cx(blockClass, className, `${blockClass}__container`)}
-          style={{
-            animation: !reducedMotion
-              ? `${open ? 'fade-in 250ms' : 'fade-out forwards 250ms'}`
-              : undefined,
-          }}
           onAnimationEnd={onAnimationEnd}
           ref={
             (ref as MutableRefObject<HTMLDivElement | null>) ||

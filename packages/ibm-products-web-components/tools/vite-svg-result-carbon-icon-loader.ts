@@ -1,14 +1,13 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-const path = require('path');
-const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
+import createSVGResultFromCarbonIcon from './svg-result-carbon-icon';
 
 /**
  * A Vite plugin to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
@@ -50,12 +49,11 @@ export default function svgResultCarbonIconLoader() {
       if (!id.match(svgRegex)) {
         return outcome;
       }
-
       const descriptor = require(id);
       return `
           import { svg } from 'lit';
           import spread from '@carbon/web-components/es/globals/directives/spread.js';
-          const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon.default(
+          const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon(
             descriptor
           )};
           export default svgResultCarbonIcon;

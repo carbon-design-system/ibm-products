@@ -39,7 +39,11 @@ import {
   deprecateProp,
   prepareProps,
 } from '../../global/js/utils/props-helper';
-import { useNearestScroll, useWindowResize } from '../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  useNearestScroll,
+  useWindowResize,
+} from '../../global/js/hooks';
 
 import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
@@ -421,6 +425,10 @@ interface Metrics {
   navigationRowHeight?: number;
 }
 
+interface HTMLElementStyled extends HTMLElement {
+  style: CSSStyleDeclaration;
+}
+
 export let PageHeader = React.forwardRef(
   (
     {
@@ -476,8 +484,9 @@ export let PageHeader = React.forwardRef(
     });
 
     // refs
-    const localHeaderRef = useRef(null);
-    const headerRef = ref || localHeaderRef;
+    const localHeaderRef = useRef<HTMLDivElement | null>(null);
+    const headerRef = (ref ||
+      localHeaderRef) as MutableRefObject<HTMLElementStyled>;
     const sizingContainerRef: MutableRefObject<HTMLDivElement | null> =
       useRef(null);
     const offsetTopMeasuringRef = useRef(null);
@@ -903,6 +912,17 @@ export let PageHeader = React.forwardRef(
 
     const displayedBreadcrumbs = getBreadcrumbs();
 
+    useIsomorphicEffect(() => {
+      Object.keys(pageHeaderStyles).forEach((key) => {
+        // check if style is a css var
+        if (key.startsWith('--')) {
+          headerRef.current.style.setProperty(key, pageHeaderStyles[key]);
+        } else {
+          headerRef.current.style[key] = pageHeaderStyles[key];
+        }
+      });
+    }, [headerRef, pageHeaderStyles]);
+
     const subtitleRef = useRef<HTMLSpanElement>(null);
     const isOverflowing = checkHeightOverflow(subtitleRef.current);
     const subtitleContent = (
@@ -928,7 +948,6 @@ export let PageHeader = React.forwardRef(
               [`${blockClass}--has-navigation-tags-only`]: !navigation && tags,
             },
           ])}
-          style={pageHeaderStyles}
           ref={headerRef}
           {...getDevtoolsProps(componentName)}
         >

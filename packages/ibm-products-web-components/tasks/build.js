@@ -12,8 +12,6 @@ import { globby } from 'globby';
 import { rollup } from 'rollup';
 import alias from '@rollup/plugin-alias';
 import autoprefixer from 'autoprefixer';
-import carbonIcons from '../tools/rollup-plugin-icons.js';
-import carbonIconPaths from '../tools/rollup-plugin-icon-paths.js';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import cssnano from 'cssnano';
@@ -149,7 +147,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           ).css;
         },
       }),
-      carbonIcons(iconInput, banner),
       typescript({
         noEmitOnError: true,
         compilerOptions: {
@@ -157,7 +154,6 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           outDir,
         },
       }),
-      carbonIconPaths(),
     ],
   };
 }

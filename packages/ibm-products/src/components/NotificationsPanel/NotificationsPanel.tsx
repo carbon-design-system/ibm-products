@@ -654,7 +654,6 @@ export let NotificationsPanel = React.forwardRef(
       // setTimeout ensures that this gets run
       const timeout = setTimeout(() => {
         if (notificationPanelRef.current && !reducedMotion) {
-          console.log({ open, notificationPanelRef });
           notificationPanelRef.current.style.animation = open
             ? 'fade-in 250ms'
             : 'fade-out forwards 250ms';

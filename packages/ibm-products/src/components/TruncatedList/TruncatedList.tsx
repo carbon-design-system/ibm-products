@@ -143,7 +143,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
 
     useIsomorphicEffect(() => {
       if (listRef.current) {
-        listRef.current.style.height = listHeight.toString();
+        listRef.current.style.height = `${listHeight}px`;
       }
     }, [listHeight]);
 

@@ -129,11 +129,12 @@ export let WebTerminal = React.forwardRef(
     } ${moderate02}`;
 
     useIsomorphicEffect(() => {
-      if (webTerminalRef.current) {
-        webTerminalRef.current.style.animation = !shouldReduceMotion
-          ? webTerminalAnimationName
-          : '';
-      }
+      const timeout = setTimeout(() => {
+        if (webTerminalRef.current && !shouldReduceMotion) {
+          webTerminalRef.current.style.animation = webTerminalAnimationName;
+        }
+      }, 0);
+      return () => clearTimeout(timeout);
     }, [shouldReduceMotion, webTerminalAnimationName, webTerminalRef]);
 
     const showDocumentationLinks = useMemo(

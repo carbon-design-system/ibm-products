@@ -42,10 +42,9 @@ flag_management:
     - name: exclude_deprecated #custom flag name to view the project coverage without deprecated components
       paths:
         - '../packages/ibm-products/src/components/**/*.deprecated.test.js' #fill in your own path. Note, accepts globs, not regexes
-        - '../packages/ibm-products/src/components/**/*.deprecated.test.ts' #fill in your own path. Note, accepts globs, not regexes
       carryforward: true
       statuses:
         - type: project
-          target: 20%
+          target: 80%
         - type: patch
-          target: 100%
+          target: auto

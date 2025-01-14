@@ -7,15 +7,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const path = require('path');
-const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
+import createSVGResultFromCarbonIcon from './svg-result-carbon-icon';
 
 /**
  * A Vite loader to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
  *
  * @returns {string} The massaged module content.
  */
-function svgResultCarbonIconLoader() {
+export default function svgResultCarbonIconLoader() {
   const descriptor = require(this.resourcePath); // eslint-disable-line global-require
   return `
     import { svg } from 'lit';
@@ -24,5 +23,3 @@ function svgResultCarbonIconLoader() {
     export default svgResultCarbonIcon;
   `;
 }
-
-module.exports = svgResultCarbonIconLoader;

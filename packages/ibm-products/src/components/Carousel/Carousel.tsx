@@ -6,6 +6,8 @@
  */
 
 import React, {
+  ForwardedRef,
+  MutableRefObject,
   ReactNode,
   useCallback,
   useEffect,
@@ -97,9 +99,10 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onScroll = defaults.onScroll,
       ...rest
     },
-    ref
+    ref: ForwardedRef<any>
   ) => {
-    const carouselRef = useRef<HTMLDivElement>(null);
+    const localRef = useRef<HTMLDivElement>(null);
+    const carouselRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
     const scrollRef = useRef<HTMLDivElement>(null);
     const leftFadedEdgeRef = useRef<HTMLDivElement>(null);
     const rightFadedEdgeRef = useRef<HTMLDivElement>(null);
@@ -307,7 +310,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         carouselDiv.addEventListener('keydown', handleKeydown);
         return () => carouselDiv.removeEventListener('keydown', handleKeydown);
       }
-    }, [disableArrowScroll]);
+    }, [disableArrowScroll, carouselRef]);
 
     // Enable external function calls
     useImperativeHandle(

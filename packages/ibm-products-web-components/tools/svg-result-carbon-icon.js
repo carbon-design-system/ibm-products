@@ -31,7 +31,7 @@ const toString = (descriptor) => {
  */
 const icon = (descriptor) => {
   descriptor.attrs = getAttributes(
-    Object.assign(descriptor.attrs, {
+    Object.assign(descriptor.attrs ?? {}, {
       '...': '${spread(attrs)}', // eslint-disable-line no-template-curly-in-string
     })
   );

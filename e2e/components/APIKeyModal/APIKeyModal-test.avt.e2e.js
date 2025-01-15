@@ -83,6 +83,7 @@ test.describe('APIKeyModal @avt', () => {
     );
     await expect(modalElement).toBeInViewport();
     await expect(modalElement).not.toHaveAttribute('aria-hidden', 'true');
+    await page.keyboard.press('Tab');
     await expect(apiKeyInput).toBeFocused();
   });
 });

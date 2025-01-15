@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.54.0-rc.0",
-    "@carbon/styles": "1.71.0",
-    "@carbon/web-components": "2.19.0",
+    "@carbon/styles": "1.72.0",
+    "@carbon/web-components": "2.20.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {

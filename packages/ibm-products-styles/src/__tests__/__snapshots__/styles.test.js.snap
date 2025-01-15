@@ -3102,6 +3102,9 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: inherit;
   word-break: break-word;
 }
+.c4p--tearsheet .c4p--tearsheet__description-tooltip {
+  display: inline-flex;
+}
 .c4p--tearsheet .c4p--tearsheet__description-tooltip .cds--popover-content.cds--definition-tooltip {
   max-inline-size: -webkit-fill-available;
 }

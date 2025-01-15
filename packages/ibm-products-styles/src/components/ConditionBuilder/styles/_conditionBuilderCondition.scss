@@ -8,7 +8,7 @@
 @use '@carbon/react/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/motion' as *;
-@use '@carbon/styles/scss/components/tag' as *;
+@use '@carbon/styles/scss/components/tag/tokens' as *;
 @use '@carbon/styles/scss/utilities/focus-outline';
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';

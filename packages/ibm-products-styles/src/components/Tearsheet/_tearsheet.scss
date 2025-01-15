@@ -264,9 +264,11 @@ $motion-duration: $duration-moderate-02;
   }
 
   // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the description
-  .#{$block-class}__description-tooltip
+  .#{$block-class}__description-tooltip {
+    display: inline-flex;
     .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
-    max-inline-size: -webkit-fill-available;
+      max-inline-size: -webkit-fill-available;
+    }
   }
 
   .#{$block-class}__description-text {

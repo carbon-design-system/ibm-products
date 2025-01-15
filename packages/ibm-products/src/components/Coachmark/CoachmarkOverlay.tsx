@@ -13,6 +13,7 @@ import React, {
   useEffect,
   ReactNode,
   useMemo,
+  ForwardedRef,
 } from 'react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
@@ -93,7 +94,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       theme = defaults.theme,
       ...rest
     },
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const { winHeight, winWidth } = useWindowDimensions();
     const [a11yDragMode, setA11yDragMode] = useState(false);

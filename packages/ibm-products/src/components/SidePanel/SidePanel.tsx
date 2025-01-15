@@ -894,6 +894,7 @@ export let SidePanel = React.forwardRef(
       <AnimatePresence>
         {open && (
           <>
+            {/* @ts-expect-error */}
             <motion.div
               {...getDevtoolsProps(componentName)}
               {...rest}
@@ -936,6 +937,7 @@ export let SidePanel = React.forwardRef(
                   animate="visible"
                   exit="exit"
                   ref={overlayRef}
+                  // @ts-expect-error
                   className={`${blockClass}__overlay`}
                 />
               )}

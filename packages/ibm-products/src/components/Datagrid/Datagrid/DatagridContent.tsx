@@ -261,6 +261,7 @@ export const DatagridContent = ({
           ref={gridAreaRef}
         >
           {filterProps?.variation === 'panel' && (
+            // @ts-expect-error
             <FilterPanel
               {...getFilterFlyoutProps?.()}
               title={filterProps.panelTitle}

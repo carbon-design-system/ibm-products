@@ -325,7 +325,10 @@ export let InterstitialScreen = React.forwardRef<
                   {childArray.map((child: ReactNode, idx) => {
                     if (isValidElement(child)) {
                       return (
-                        <ProgressStep key={idx} label={child.props.stepTitle} />
+                        <ProgressStep
+                          key={idx}
+                          label={(child?.props as any)?.stepTitle}
+                        />
                       );
                     }
                   })}
@@ -377,7 +380,7 @@ export let InterstitialScreen = React.forwardRef<
                         return (
                           <ProgressStep
                             key={idx}
-                            label={child.props.stepTitle}
+                            label={(child?.props as any).stepTitle}
                           />
                         );
                       }

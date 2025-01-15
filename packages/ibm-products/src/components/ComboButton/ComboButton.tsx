@@ -89,7 +89,7 @@ const ComboButton = forwardRef(
         if (React.isValidElement(child)) {
           const { props } = child;
           return {
-            ...props,
+            ...(props as any),
             children: <span className={`${blockClass}__action`}>{child}</span>,
           };
         }

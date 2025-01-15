@@ -97,6 +97,7 @@ const FilterSummary = React.forwardRef(
       (filterSummaryClearButton?.current?.offsetWidth || 0) + viewAllWidth;
 
     const renderTagSet = (type) => (
+      // @ts-expect-error Expected until we remove framer-motion
       <motion.div
         key={type}
         initial={{
@@ -126,6 +127,7 @@ const FilterSummary = React.forwardRef(
           className={cx({
             [`${blockClass}__clear-button-inline`]: clearButtonInline,
           })}
+          // @ts-expect-error: Fixed once we replace MutableRefObject
           containingElementRef={localRef}
           measurementOffset={measurementOffset}
           onOverflowTagChange={(overflowTags: any) =>

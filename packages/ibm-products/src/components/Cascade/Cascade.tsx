@@ -81,8 +81,8 @@ export let Cascade = forwardRef(
       let colIdx = 0;
       const gridElm = React.Children.map(children, (row: React.ReactNode) => {
         if (React.isValidElement(row)) {
-          // @ts-ignore revisit type
           const cols = React.Children.map(
+            // @ts-ignore revisit type
             row?.props?.children,
             (col: JSX.Element) => {
               colIdx = colIdx + 1;
@@ -95,7 +95,8 @@ export let Cascade = forwardRef(
             }
           );
           return React.cloneElement(row, {
-            [children as any]: cols,
+            // @ts-ignore revisit type
+            children: cols,
           });
         }
         return children;

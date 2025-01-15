@@ -60,6 +60,14 @@ interface TearsheetShellProps extends PropsWithChildren {
   className?: string;
 
   /**
+   * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
+   */
+  closeIconDescription?: string;
+
+  /**
    * Used to track the current step on components which use `StepsContext` and `TearsheetShell`
    */
   currentStep?: number;
@@ -185,16 +193,6 @@ interface TearsheetShellProps extends PropsWithChildren {
   slug?: ReactNode;
 }
 
-export type CloseIconDescriptionTypes =
-  | {
-      hasCloseIcon?: false;
-      closeIconDescription?: string;
-    }
-  | {
-      hasCloseIcon: true;
-      closeIconDescription: string;
-    };
-
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 // Global data structure to communicate the state of tearsheet stacking
@@ -247,7 +245,7 @@ export const TearsheetShell = React.forwardRef(
       ariaLabel,
       children,
       className,
-      closeIconDescription,
+      closeIconDescription = 'Close',
       currentStep,
       description,
       hasCloseIcon,
@@ -270,7 +268,7 @@ export const TearsheetShell = React.forwardRef(
       launcherButtonRef,
       // Collect any other property values passed in.
       ...rest
-    }: TearsheetShellProps & CloseIconDescriptionTypes,
+    }: TearsheetShellProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
@@ -653,9 +651,7 @@ TearsheetShell.propTypes = {
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
   /**@ts-ignore*/
-  closeIconDescription: PropTypes.string.isRequired.if(
-    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
-  ),
+  closeIconDescription: PropTypes.string,
 
   /**
    * Optional prop that allows you to pass any component.

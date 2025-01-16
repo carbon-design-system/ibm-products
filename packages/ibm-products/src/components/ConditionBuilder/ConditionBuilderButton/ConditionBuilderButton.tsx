@@ -53,14 +53,14 @@ export const ConditionBuilderButton = ({
   ...rest
 }: ConditionBuilderButtonProps) => {
   const [tooltipText, setTooltipText] = useState(label);
+
   useEffect(() => {
     if (description) {
       setTooltipText(description as string);
     } else {
       setTooltipText(label);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [description]);
+  }, [description, label]);
 
   const carbonPrefix = usePrefix();
   const Button = () => {

@@ -28,13 +28,13 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
-    "@carbon/grid": "^11.29.0",
+    "@carbon/grid": "^11.30.0",
     "@carbon/ibm-products-styles": "^2.54.0-rc.0",
     "@carbon/layout": "^11.28.0",
     "@carbon/motion": "^11.24.0",
-    "@carbon/react": "^1.72.0",
-    "@carbon/themes": "^11.43.0",
-    "@carbon/type": "^11.33.0",
+    "@carbon/react": "^1.73.0",
+    "@carbon/themes": "^11.44.0",
+    "@carbon/type": "^11.34.0",
     "@percy/cli": "^1.30.1",
     "@percy/storybook": "^6.0.0",
     "@storybook/addon-a11y": "^8.4.5",

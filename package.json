@@ -33,6 +33,7 @@
     "clean:packages": "yarn run-all --no-sort clean",
     "coverage": "echo 'you can pass a name argument to specify which tests are ran such as `yarn coverage decorator` and then view the results with `yarn coverage:report`'; yarn test:c4p --coverage",
     "coverage:report": "open ./packages/ibm-products/coverage/index.html",
+    "wc-coverage": "cd packages/ibm-products-web-components && yarn coverage",
     "format": "run-p -s 'format:*'",
     "format:config": "prettier ./*.{js,jsx,tsx,ts,md,scss} --write --ignore-unknown",
     "format:packages": "prettier ./packages/**/*.{js,jsx,tsx,ts,md,scss} --write --ignore-unknown",

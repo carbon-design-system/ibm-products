@@ -12,9 +12,8 @@ export default defineConfig({
   plugins: [litStyleLoader(), litTemplateLoader()],
   test: {
     environment: 'happy-dom',
-    // include: ['./src/**/*.{test,spec}.{ts,tsx}'],
     include: ['src/**/*.test.ts'],
-    // exclude: [...configDefaults.exclude, 'es', 'lib', 'node_modules', '**/es/**'],
+    exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {

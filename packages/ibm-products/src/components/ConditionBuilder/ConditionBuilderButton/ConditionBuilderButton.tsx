@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import cx from 'classnames';
 
 import PropTypes from 'prop-types';
@@ -52,15 +52,7 @@ export const ConditionBuilderButton = ({
   description,
   ...rest
 }: ConditionBuilderButtonProps) => {
-  const [tooltipText, setTooltipText] = useState(label);
-
-  useEffect(() => {
-    if (description) {
-      setTooltipText(description as string);
-    } else {
-      setTooltipText(label);
-    }
-  }, [description, label]);
+  const tooltipText = description || label;
 
   const carbonPrefix = usePrefix();
   const Button = () => {

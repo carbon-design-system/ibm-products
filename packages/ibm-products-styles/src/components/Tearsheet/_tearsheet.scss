@@ -267,7 +267,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__description-tooltip {
     display: inline-flex;
     .#{$carbon-prefix}--popover-content.#{$carbon-prefix}--definition-tooltip {
-      max-inline-size: -webkit-fill-available;
+      max-inline-size: fit-content;
     }
   }
 

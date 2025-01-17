@@ -128,9 +128,7 @@ test.describe('TearsheetNarrow @avt', () => {
     await expect(page.locator('.decorator-container')).toBeInViewport();
 
     // Selecting the first slug button
-    const slugButton1 = page
-      .locator('*[aria-label="AI - Show information"]')
-      .first();
+    const slugButton1 = page.getByLabel('AI - Show information');
     const closeButton = page.getByLabel('Close the tearsheet');
     const inputField = page.locator('#tss-ft1');
 

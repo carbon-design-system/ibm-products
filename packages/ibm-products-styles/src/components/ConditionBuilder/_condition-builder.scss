@@ -46,9 +46,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   width: fit-content;
   flex-direction: row;
 }
-// .#{$block-class}__condition-block:hover button:not([data-name="connectorField"]) {
-//  background-color: red;
-// }
 .#{$block-class}__content-container {
   display: flex;
   flex-direction: column;

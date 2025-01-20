@@ -1,57 +1,54 @@
+// @ts-check
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
-// Other standard imports.
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import classnames from 'classnames';
-// Carbon and package components we use.
 import { ArrowUp, Information } from '@carbon/react/icons';
-import { Tooltip, SkeletonText } from '@carbon/react';
+import { Tooltip } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
+import { BigNumbersSkeleton } from './BigNumbersSkeleton';
 import {
+  Characters,
+  DefaultLocale,
   formatValue,
   getIconSize,
   getSupportedLocale,
-  BigNumbersSize,
-  DefaultLocale,
-  Characters,
 } from './constants';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--big-numbers`;
-const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;
 const componentName = 'BigNumbers';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values for props
-const defaults = {
-  forceShowTotal: false,
-  fractionDigits: 1,
-  loading: false,
-  locale: DefaultLocale,
-  percentage: false,
-  size: BigNumbersSize.Default,
-  total: 0,
-  trending: false,
-  truncate: true,
-  value: null,
-};
+export interface BigNumbersProps {
+  className?: string;
+  forceShowTotal?: boolean;
+  fractionDigits?: number;
+  iconButton?: ReactNode;
+  loading?: boolean;
+  label: string;
+  locale?: string;
+  percentage?: boolean;
+  size?: 'default' | 'lg' | 'xl';
+  tooltipDescription?: string;
+  total?: number;
+  trending?: boolean;
+  truncate?: boolean;
+  value?: number;
+}
 
 /**
  * BigNumbers is used to display large values in a small area. The display of
- * values can be the value itself, or grouped in a numerator / denominator fashion.
+ * values can be the value itself, or grouped in a `numerator/denominator` fashion.
  * Control over the total fraction decimals displayed as well as how the
  * values/totals are displayed are done via a locale prop. Other optional props
  * allow control over size, truncation, if the value is a percentage, the addition
@@ -63,27 +60,27 @@ export let BigNumbers = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       className,
-      forceShowTotal = defaults.forceShowTotal,
-      fractionDigits = defaults.fractionDigits,
+      forceShowTotal = false,
+      fractionDigits = 1,
       iconButton,
-      loading = defaults.loading,
+      loading = false,
       label,
-      locale = defaults.locale,
-      percentage = defaults.percentage,
-      size = defaults.size,
+      locale = DefaultLocale,
+      percentage = false,
+      size = 'default',
       tooltipDescription,
-      total = defaults.total,
-      trending = defaults.trending,
-      truncate = defaults.truncate,
-      value = defaults.value,
+      total = undefined,
+      trending = false,
+      truncate = true,
+      value,
       // Collect any other property values passed in.
       ...rest
-    },
-    ref
+    }: BigNumbersProps,
+    ref: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const BigNumbersClasses = classnames(className, {
-      [`${blockClass}--lg`]: size === BigNumbersSize.Large,
-      [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
+    const BigNumbersClasses = cx(className, {
+      [`${blockClass}--lg`]: size === 'lg',
+      [`${blockClass}--xl`]: size === 'xl',
     });
 
     const supportedLocale = getSupportedLocale(locale);
@@ -97,12 +94,16 @@ export let BigNumbers = React.forwardRef(
       'Unknown';
 
     const shouldDisplayDenominator =
-      (!percentage && total > value && truncatedValue !== truncatedTotal) ||
-      (forceShowTotal && total > 0);
+      forceShowTotal ||
+      (!percentage &&
+        total &&
+        value &&
+        total > value &&
+        truncatedValue !== truncatedTotal);
 
     if (loading) {
       return (
-        <SkeletonBigNumbers
+        <BigNumbersSkeleton
           {...rest}
           ref={ref}
           className={className}
@@ -119,7 +120,7 @@ export let BigNumbers = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {/* Label and tooltip row */}
+        {/* Label and tooltip */}
         <span className={`${blockClass}__row`}>
           <h4 className={`${blockClass}__label`}>{label}</h4>
           {tooltipDescription && (
@@ -135,7 +136,6 @@ export let BigNumbers = React.forwardRef(
           )}
         </span>
 
-        {/* Trending arrow, numerator, denominator, and optional iconButton row */}
         <span className={`${blockClass}__row`} role="math">
           {trending && (
             <ArrowUp
@@ -157,16 +157,12 @@ export let BigNumbers = React.forwardRef(
           </span>
 
           {/* Denominator */}
-          {shouldDisplayDenominator && (
+          {!percentage && shouldDisplayDenominator && (
             <span className={`${blockClass}__total`}>
-              <span>
-                {Characters.Slash}
-                {truncatedTotal}
-              </span>
+              <span>{`${Characters.Slash}${truncatedTotal}`}</span>
             </span>
           )}
-
-          {iconButton}
+          <span className={`${blockClass}__icon-button`}>{iconButton}</span>
         </span>
       </div>
     );
@@ -184,126 +180,64 @@ BigNumbers.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 BigNumbers.propTypes = {
-  /**
-   * Optional class name.
-   * @type number
-   */
+  /* Optional class name. */
   className: PropTypes.string,
 
   /**
-   * Display the `total` even when the `value` is equal to
-   * the `total` when `forceShowTotal` prop is true on the
-   * condition that the `total` is greater than 0.
-   * @type bool
+   * This component's default behavior will hide `total` if `undefined` or is the same as
+   * `value`.
+   *
+   * Set to `true` to ignore the default behavior and show the `total`.
    */
   forceShowTotal: PropTypes.bool,
-
   /**
-   * Optional value to control the maximum fraction digits
-   * used when truncating the value and total.
-   * @type number
+   * Specifies the number of fraction digits when truncating `value` and `total`.
    */
   fractionDigits: PropTypes.number,
-
-  /** Displays an iconButton next to the BigNumbers value
-   * @type node
+  /**
+   * Displays an iconButton next to `value`.
    */
   iconButton: PropTypes.node,
-
   /**
-   * Text label for BigNumbers.
-   * @type string
+   * Text label above the `value`.
    */
   label: PropTypes.string.isRequired,
-
-  /** Specify if the BigNumbers is in a loading state
-   * @type bool
+  /**
+   * When `true`, will show the loading state.
    */
   loading: PropTypes.bool,
-
   /**
-   * Locale value to determine approach to formatting numbers.
-   * @type string
+   * Determines how `value` and `total` will be formatted.
    */
   locale: PropTypes.string,
-
   /**
-   * Format number to percentage when `percentage` prop is true.
-   * @type bool
+   * Will add a percent sign `%` after `value` and hide `total`.
    */
   percentage: PropTypes.bool,
 
-  /** The size of the BigNumbers.
-   * @type string
-   */
-  size: PropTypes.oneOf(Object.values(BigNumbersSize)),
-
-  /** Label applied to a Tooltip - marked with the Information icon.
-   * @type string
+  size: PropTypes.oneOf(['default', 'lg', 'xl']),
+  /**
+   * When applied, an Information icon will be rendered next to the
+   * `label` and the description will be applied to its tooltip.
    */
   tooltipDescription: PropTypes.string,
-
   /**
-   * Total value that the main BigNumbers value is a subset of.
-   * @type number
+   * The number that will appear after the slash (i.e. the "denominator" of a fraction).
+   *
+   * This number will not be rendered if it's the same as `value` or
+   * `percentage=true`. See also **forceShowTotal**.
    */
   total: PropTypes.number,
-
-  /** Display trending icon.
-   * @type boolean
+  /**
+   * When `true`, will render a "trending up" icon.
    */
   trending: PropTypes.bool,
-
-  /** Specify whether or not the values should be truncated.
-   * @type boolean
+  /**
+   * Abbreviates the number when `true`. E.g. from _1,000_ to _1K_.
    */
   truncate: PropTypes.bool,
-
   /**
-   * The main BigNumbers value to display
-   * @type number
+   * The primary value to display (or the "numerator" of a fraction).
    */
   value: PropTypes.number,
-};
-
-/**
- * SkeletonBigNumbers is used to display a skeleton version while
- * content is loading (handled by the BigNumbers prop `loading').
- *
- * Note: This component is only used within BigNumbers.
- */
-let SkeletonBigNumbers = React.forwardRef(
-  ({ className, size, ...rest }, ref) => {
-    const BigNumbersSkeletonClasses = classnames(className, {
-      [`${skeletonBlockClass}--lg`]: size === BigNumbersSize.Large,
-      [`${skeletonBlockClass}--xl`]: size === BigNumbersSize.XLarge,
-    });
-    return (
-      <div
-        {...rest}
-        className={cx(className, skeletonBlockClass, BigNumbersSkeletonClasses)}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      >
-        <SkeletonText className={`${skeletonBlockClass}__label`} />
-        <SkeletonText
-          heading
-          className={`${skeletonBlockClass}__value`}
-          width="80%"
-        />
-      </div>
-    );
-  }
-);
-
-SkeletonBigNumbers.propTypes = {
-  /**
-   * Optional class name.
-   * @type number
-   */
-  className: PropTypes.string,
-  /** The size of the BigNumbers.
-   * @type string
-   */
-  size: PropTypes.oneOf(Object.values(BigNumbersSize)),
 };

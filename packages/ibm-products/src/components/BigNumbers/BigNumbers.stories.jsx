@@ -8,6 +8,7 @@
 import React from 'react';
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
+import { action } from '@storybook/addon-actions';
 
 import { BigNumbers } from '.';
 import { BigNumbersSize } from './constants';
@@ -17,13 +18,14 @@ import mdx from './BigNumbers.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 const numericOptions = {
-  '-123': -123,
+  '-123 ': -123,
   '0 ': 0,
   '12 ': 12,
   '345 ': 345,
   '6789 ': 6789,
   '12345.678 ': 12345.678,
   '678901.2456 ': 678901.2456,
+  '1000000 ': 1000000,
   '2345678 ': 2345678,
   '90123456 ': 90123456,
   '789012345 ': 789012345,
@@ -32,44 +34,37 @@ const numericOptions = {
   'undefined ': undefined,
 };
 
+const iconButtonOptions = {
+  'undefined ': null,
+  'Example <Button> ': (
+    <Button
+      renderIcon={Edit}
+      iconDescription="Icon Description"
+      kind="ghost"
+      size={'sm'}
+      hasIconOnly
+      onClick={action('Button.onClick()')}
+      tooltipPosition="bottom"
+    />
+  ),
+};
+
 export default {
   title: 'Experimental/Components/Big numbers/BigNumbers',
   component: BigNumbers,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
-    loading: {
-      options: [true, false],
-      control: { type: 'boolean' },
-    },
-    value: {
-      control: { type: 'select', labels: Object.keys(numericOptions) },
-      options: Object.values(numericOptions).map((_k, i) => i),
-      mapping: Object.values(numericOptions),
-    },
-    total: {
-      control: { type: 'select', labels: Object.keys(numericOptions) },
-      options: Object.values(numericOptions).map((_k, i) => i),
-      mapping: Object.values(numericOptions),
-    },
-    size: {
-      options: Object.values(BigNumbersSize),
-      control: { type: 'radio' },
-    },
-    percentage: {
-      options: [true, false],
-      control: { type: 'boolean' },
-    },
     forceShowTotal: {
       options: [true, false],
       control: { type: 'boolean' },
     },
-
-    trending: {
-      options: [true, false],
-      control: { type: 'boolean' },
+    iconButton: {
+      control: { type: 'select', labels: Object.keys(iconButtonOptions) },
+      options: Object.values(iconButtonOptions).map((_k, i) => i),
+      mapping: Object.values(iconButtonOptions),
     },
-    truncate: {
+    loading: {
       options: [true, false],
       control: { type: 'boolean' },
     },
@@ -112,8 +107,31 @@ export default {
       ],
       control: { type: 'select' },
     },
-    iconButton: {
-      control: { type: null },
+    percentage: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    size: {
+      options: Object.values(BigNumbersSize),
+      control: { type: 'radio' },
+    },
+    total: {
+      control: { type: 'select', labels: Object.keys(numericOptions) },
+      options: Object.values(numericOptions).map((_k, i) => i),
+      mapping: Object.values(numericOptions),
+    },
+    trending: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    truncate: {
+      options: [true, false],
+      control: { type: 'boolean' },
+    },
+    value: {
+      control: { type: 'select', labels: Object.keys(numericOptions) },
+      options: Object.values(numericOptions).map((_k, i) => i),
+      mapping: Object.values(numericOptions),
     },
   },
   parameters: {
@@ -125,28 +143,26 @@ export default {
 };
 
 const defaultProps = {
+  forceShowTotal: false,
+  fractionDigits: 1,
+  iconButton: 0,
   label: 'Label',
-  value: 12345.678,
-  total: 678901.2456,
+  loading: false,
+  locale: 'en-US',
   percentage: false,
   size: BigNumbersSize.Default,
-  forceShowTotal: false,
+  tooltipDescription: '',
+  total: 13,
   trending: false,
   truncate: true,
-  locale: 'en-US',
+  value: 5,
 };
 
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  return (
-    <BigNumbers
-      // TODO: handle events with action or local handler.
-      // onTodo={action('onTodo log action')}
-      {...args}
-    />
-  );
+  return <BigNumbers {...args} />;
 };
 
 /**
@@ -156,21 +172,4 @@ const Template = (args) => {
 export const bigNumbers = Template.bind({});
 bigNumbers.args = {
   ...defaultProps,
-};
-
-export const withEditButton = Template.bind({});
-withEditButton.args = {
-  ...defaultProps,
-  tooltipDescription: 'Tooltip description',
-  iconButton: (
-    <Button
-      renderIcon={Edit}
-      iconDescription="Icon Description"
-      kind="ghost"
-      size={'sm'}
-      hasIconOnly
-      onClick={() => console.log('clicked icon')}
-      tooltipPosition="bottom"
-    />
-  ),
 };

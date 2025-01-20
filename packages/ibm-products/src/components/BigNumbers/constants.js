@@ -25,10 +25,10 @@ export const DefaultLocale = 'en-US';
 /**
  * Ensure that the value is formatted correctly based on whether it should be truncated or not.
  * @param {string} locale Locale value to be used in formatting numbers.
- * @param {number} value The value to format.
+ * @param {number | null | undefined } value The value to format.
  * @param {number} fractionDigits How many significant figures should be displayed.
  * @param {boolean} truncate Whether or not the value should be truncated.
- * @returns {string | null} The formatted value.
+ * @returns {string | null | undefined } The formatted value.
  */
 export const formatValue = (locale, value, fractionDigits, truncate) => {
   if (value === null || value === undefined || typeof value !== 'number') {
@@ -37,7 +37,7 @@ export const formatValue = (locale, value, fractionDigits, truncate) => {
   return truncate
     ? Intl.NumberFormat(locale, {
         notation: 'compact',
-        minimumFractionDigits: 0,
+        minimumFractionDigits: fractionDigits,
         maximumFractionDigits: Math.round(fractionDigits),
       }).format(value)
     : Intl.NumberFormat(locale).format(value);
@@ -64,7 +64,13 @@ export const getIconSize = (size) => {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales
  */
-export const getSupportedLocale = (locale) =>
-  Intl.NumberFormat.supportedLocalesOf(locale).length > 0
-    ? locale
-    : DefaultLocale;
+export const getSupportedLocale = (locale) => {
+  let supportedLocale;
+  try {
+    Intl.NumberFormat.supportedLocalesOf(locale);
+    supportedLocale = locale;
+  } catch (error) {
+    supportedLocale = DefaultLocale;
+  }
+  return supportedLocale;
+};

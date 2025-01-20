@@ -69,7 +69,7 @@ export let BigNumbers = React.forwardRef(
       percentage = false,
       size = 'default',
       tooltipDescription,
-      total = undefined,
+      total,
       trending = false,
       truncate = true,
       value,
@@ -157,7 +157,7 @@ export let BigNumbers = React.forwardRef(
           </span>
 
           {/* Denominator */}
-          {!percentage && shouldDisplayDenominator && (
+          {shouldDisplayDenominator && (
             <span className={`${blockClass}__total`}>
               <span>{`${Characters.Slash}${truncatedTotal}`}</span>
             </span>

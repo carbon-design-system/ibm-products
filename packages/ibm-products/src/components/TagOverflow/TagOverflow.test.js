@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -104,12 +104,9 @@ describe(componentName, () => {
 
   it('Obeys max visible', async () => {
     render(<TagOverflow {...tagOverflowProps} maxVisible={3} />);
-
-    expect(
-      screen.getAllByText(/Tag [0-9]+/, {
-        selector: `.${blockClass}__item--tag span`,
-      }).length
-    ).toEqual(3);
+    await waitFor(() => {
+      expect(screen.getByText('+2'));
+    });
   });
 
   // The below test case is failing due to ResizeObserver mock

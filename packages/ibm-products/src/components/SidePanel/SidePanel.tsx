@@ -525,7 +525,6 @@ export let SidePanel = React.forwardRef(
         }
       };
       const bodyElement = document.body;
-
       if (includeOverlay && open) {
         bodyElement.style.overflow = 'hidden';
       } else if (includeOverlay && !open) {

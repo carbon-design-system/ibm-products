@@ -12,9 +12,35 @@ import { FeatureFlags, useFeatureFlags, useFeatureFlag } from '.';
 
 GlobalFeatureFlags.merge({
   test: 123,
+  b: true,
 });
 
+const checkFlags = jest.fn();
+const checkFlag = jest.fn();
+
+function TestComponent() {
+  const featureFlags = useFeatureFlags();
+  const a = useFeatureFlag('a');
+  const b = useFeatureFlag('b');
+
+  checkFlags({
+    a: featureFlags.enabled('a'),
+    b: featureFlags.enabled('b'),
+  });
+
+  checkFlag({
+    a,
+    b,
+  });
+
+  return null;
+}
+
 describe('FeatureFlags', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should default to the global feature flag scope', () => {
     GlobalFeatureFlags.add('enable-feature-flags-test', true);
 
@@ -38,24 +64,6 @@ describe('FeatureFlags', () => {
   });
 
   it('should provide access to the feature flags for a scope', () => {
-    const checkFlags = jest.fn();
-    const checkFlag = jest.fn();
-
-    function TestComponent() {
-      const featureFlags = useFeatureFlags();
-      const a = useFeatureFlag('a');
-
-      checkFlags({
-        a: featureFlags.enabled('a'),
-      });
-
-      checkFlag({
-        a,
-      });
-
-      return null;
-    }
-
     render(
       <FeatureFlags a>
         <TestComponent />
@@ -67,6 +75,43 @@ describe('FeatureFlags', () => {
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: true,
+    });
+  });
+
+  it('should update flags if values change', () => {
+    const { rerender } = render(
+      <FeatureFlags a>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      a: true,
+      b: true,
+    });
+
+    rerender(
+      <FeatureFlags a={false}>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      a: false,
+      b: true,
+    });
+
+    render(
+      <FeatureFlags a>
+        <FeatureFlags a={false}>
+          <TestComponent />
+        </FeatureFlags>
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      a: false,
+      b: true,
     });
   });
 

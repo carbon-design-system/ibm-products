@@ -72,9 +72,11 @@ describe('FeatureFlags', () => {
 
     expect(checkFlags).toHaveBeenLastCalledWith({
       a: true,
+      b: true,
     });
     expect(checkFlag).toHaveBeenLastCalledWith({
       a: true,
+      b: true,
     });
   });
 

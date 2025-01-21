@@ -21,88 +21,71 @@ import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import fs from 'fs';
 
 import * as packageJson from '../package.json' assert { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-async function build() {
-  const esInputs = await globby([
-    'src/**/*.ts',
-    '!src/**/*.stories.ts',
-    '!src/**/*.d.ts',
-    '!src/polyfills',
-  ]);
-
-  const libInputs = await globby([
-    'src/components/**/defs.ts',
-    'src/globals/**/*.ts',
-    '!src/globals/decorators/**/*.ts',
-    '!src/globals/directives/**/*.ts',
-    '!src/globals/internal/**/*.ts',
-    '!src/globals/mixins/**/*.ts',
-  ]);
-
-  const iconInput = await globby([
-    '../node_modules/@carbon/icons/lib/**/*.js',
-    '../../node_modules/@carbon/icons/lib/**/*.js',
-    '!**/index.js',
-  ]);
-
-  const entryPoint = {
-    rootDir: 'src',
-    outputDirectory: path.resolve(__dirname, '..'),
-  };
-
-  const formats = [
-    {
-      type: 'esm',
-      directory: 'es',
-    },
-    {
-      type: 'commonjs',
-      directory: 'lib',
-    },
-  ];
-
-  for (const format of formats) {
-    const outputDirectory = path.join(
-      entryPoint.outputDirectory,
-      format.directory
-    );
-
-    const cwcInputConfig = getRollupConfig(
-      format.type === 'esm' ? esInputs : libInputs,
-      entryPoint.rootDir,
-      outputDirectory,
-      format.type === 'esm' ? iconInput : []
-    );
-
-    const cwcBundle = await rollup(cwcInputConfig);
-
-    await cwcBundle.write({
-      dir: outputDirectory,
-      format: format.type,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      banner,
-      exports: 'named',
-      sourcemap: true,
-    });
-  }
+/**
+ * Gets all of the folders and returns out
+ *
+ * @param {string} dir Directory to check
+ * @returns {string[]} List of folders
+ * @private
+ */
+function _getFolders(dir) {
+  return fs
+    .readdirSync(dir)
+    .filter((file) => fs.statSync(path.join(dir, file)).isDirectory());
 }
 
-const banner = `/**
- * Copyright IBM Corp. 2024
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-`;
+async function build() {
+  if (!fs.existsSync('dist')) {
+    fs.mkdirSync('dist');
+  }
 
-function getRollupConfig(input, rootDir, outDir, iconInput) {
+  const folders = _getFolders('src/components');
+
+  for (let i = folders.length - 1; i >= 0; i--) {
+    if (!fs.existsSync(`src/components/${folders[i]}/index.ts`)) {
+      folders.splice(i, 1);
+    }
+  }
+
+  return rollup(getRollupConfig({ folders }))
+    .then((bundle) => {
+      bundle.write({
+        format: 'es',
+        dir: 'dist',
+        banner: 'let process = { env: {} };',
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+/**
+ * Generates the multi-input for the rollup config
+ *
+ * @param {Array} folders Package names as inputs
+ * @returns {{}} Object with inputs
+ * @private
+ */
+function _generateInputs(folders) {
+  const inputs = {};
+
+  folders.forEach((folder) => {
+    inputs[`${folder}.min`] = `src/components/${folder}/index.ts`;
+  });
+
+  return inputs;
+}
+
+function getRollupConfig({ folders = [] } = {}) {
   return {
-    input,
+    input: _generateInputs(folders),
     // Mark dependencies listed in `package.json` as external so that they are
     // not included in the output bundle.
     external: [
@@ -133,6 +116,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       }),
       commonjs({
         include: [/node_modules/],
+        sourceMap: true,
       }),
       litSCSS({
         includePaths: [
@@ -149,9 +133,10 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
       }),
       typescript({
         noEmitOnError: true,
+        declaration: false,
         compilerOptions: {
-          rootDir,
-          outDir,
+          rootDir: 'src',
+          outDir: 'dist',
         },
       }),
     ],

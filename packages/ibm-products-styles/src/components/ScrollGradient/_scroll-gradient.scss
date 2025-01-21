@@ -8,8 +8,8 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/motion' as *;
+@use '@carbon/react/scss/spacing' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
 

@@ -6,9 +6,9 @@
 //
 
 // Standard imports.
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--empty-state;

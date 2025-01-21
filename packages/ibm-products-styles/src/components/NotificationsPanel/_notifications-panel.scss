@@ -6,14 +6,14 @@
 //
 
 // Standard imports.
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/themes' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/themes' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/motion' as *;
+@use '@carbon/react/scss/type';
 @use '@carbon/type/scss/font-family' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/react/scss/utilities';
 
 // NotificationsPanel uses the following IBM Products components:
 // NotificationsEmptyState
@@ -108,7 +108,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   }
   .#{$block-class}__notification:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 2px $background;
+    box-shadow:
+      inset 0 0 0 2px $focus,
+      inset 0 0 0 2px $background;
     outline: 0;
   }
   .#{$block-class}__notification {

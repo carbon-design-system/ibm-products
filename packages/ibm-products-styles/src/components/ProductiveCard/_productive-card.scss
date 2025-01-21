@@ -8,9 +8,9 @@
 // ProductiveCard uses the following IBM Products components:
 // Card
 @use '../Card/card' as *;
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--card;

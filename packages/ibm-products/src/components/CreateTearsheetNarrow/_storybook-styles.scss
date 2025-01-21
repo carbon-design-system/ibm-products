@@ -6,7 +6,7 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/spacing' as *;
 
 $story-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow--story;
 

@@ -1,6 +1,4 @@
-@use '@carbon/react' with (
-  $font-path: '@ibm/plex'
-);
+@use '@carbon/react';
 // @use '@carbon/ibm-products/css/index';
 @use './components/_Gallery';
 @use './components/_GalleryCard';

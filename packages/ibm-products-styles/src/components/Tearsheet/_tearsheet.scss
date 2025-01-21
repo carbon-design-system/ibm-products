@@ -1,3 +1,5 @@
+// stylelint-disable carbon/motion-duration-use, carbon/motion-easing-use
+
 //
 // Copyright IBM Corp. 2020, 2023
 //
@@ -6,13 +8,13 @@
 //
 
 // Standard imports.
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/colors' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/motion' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/utilities';
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 
@@ -38,7 +40,8 @@ $motion-duration: $duration-moderate-02;
       inset: 0;
       opacity: var(--overlay-opacity);
 
-      transition: background-color $motion-duration motion(exit, expressive),
+      transition:
+        background-color $motion-duration motion(exit, expressive),
         opacity $motion-duration motion(exit, expressive);
 
       @media (prefers-reduced-motion: reduce) {
@@ -54,8 +57,8 @@ $motion-duration: $duration-moderate-02;
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
-    // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear $motion-duration,
+    transition:
+      visibility 0s linear $motion-duration,
       background-color $motion-duration motion(exit, expressive),
       opacity $motion-duration motion(exit, expressive);
     --#{$block-class}--stacking-scale-factor-single: 0.95;
@@ -65,8 +68,8 @@ $motion-duration: $duration-moderate-02;
   &.is-visible {
     z-index: utilities.z('modal');
     align-items: flex-end;
-    // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-    transition: visibility 0s linear,
+    transition:
+      visibility 0s linear,
       background-color $motion-duration motion(entrance, expressive),
       opacity $motion-duration motion(entrance, expressive);
     @media (prefers-reduced-motion: reduce) {
@@ -117,8 +120,8 @@ $motion-duration: $duration-moderate-02;
     border-bottom: 0;
 
     /* override carbon ai removing background gradient */
-    background: linear-gradient(to top, var(--cds-layer), var(--cds-layer))
-        padding-box,
+    background:
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
       linear-gradient(
           to bottom,
           var(--cds-ai-border-start, #78a9ff),
@@ -131,7 +134,8 @@ $motion-duration: $duration-moderate-02;
 
   // extra specificity to ensure this transition overrides the carbon default
   &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-    transition: transform $motion-duration motion(entrance, expressive),
+    transition:
+      transform $motion-duration motion(entrance, expressive),
       max-height $motion-duration motion(entrance, expressive);
   }
 

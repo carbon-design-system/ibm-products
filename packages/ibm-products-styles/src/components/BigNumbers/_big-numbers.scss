@@ -7,14 +7,14 @@
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/type' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type' as *;
 @use '../../global/styles/mixins';
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/react/scss/utilities';
 
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
+// TODO: @use '@carbon/react/scss/grid';
 // or
 // TODO: @use '@carbon/react/scss/grid';
 // BigNumbers uses the following Carbon for IBM Products components:

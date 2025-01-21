@@ -39,8 +39,8 @@ export const panelVariants = {
           ? 0
           : '100%'
         : shouldReduceMotion
-        ? 0
-        : -320,
+          ? 0
+          : -320,
     opacity: shouldReduceMotion ? 0 : 1,
   }),
   exit: ({ placement, shouldReduceMotion }) => ({
@@ -50,8 +50,8 @@ export const panelVariants = {
           ? 0
           : '100%'
         : shouldReduceMotion
-        ? 0
-        : -320,
+          ? 0
+          : -320,
     transition: {
       duration: DURATIONS.moderate01,
       ease: EASINGS.productive.exit,

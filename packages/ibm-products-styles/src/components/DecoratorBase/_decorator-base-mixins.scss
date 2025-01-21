@@ -7,7 +7,7 @@
 
 /* stylelint-disable carbon/layout-use */
 
-@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/react/scss/theme' as *;
 
 // Use value-divider() by default for the component's dividing line.
 @mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {

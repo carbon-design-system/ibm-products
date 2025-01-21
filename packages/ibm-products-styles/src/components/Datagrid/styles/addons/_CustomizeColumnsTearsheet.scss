@@ -7,9 +7,9 @@
 
 // stylelint-disable carbon/layout-use
 
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/type' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/type' as *;
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
 @use '@carbon/layout/scss/convert';

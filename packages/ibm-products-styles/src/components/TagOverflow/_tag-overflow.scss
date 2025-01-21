@@ -8,13 +8,13 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type';
 
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
+// TODO: @use '@carbon/react/scss/grid';
 // or
 // TODO: @use '@carbon/react/scss/grid';
 

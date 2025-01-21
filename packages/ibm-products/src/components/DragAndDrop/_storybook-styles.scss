@@ -6,11 +6,11 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/colors';
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/utilities';
 
 // TODO: add any additional styles used by DragAndDrop.stories.js
 

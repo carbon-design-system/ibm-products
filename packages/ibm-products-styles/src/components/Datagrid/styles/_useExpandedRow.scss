@@ -6,8 +6,8 @@
  */
 
 @use '../../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
 @use './variables';
 
 @mixin shared-pseudo-styles() {

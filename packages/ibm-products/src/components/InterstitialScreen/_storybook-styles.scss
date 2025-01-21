@@ -8,12 +8,12 @@
 /* stylelint-disable max-nesting-depth */
 
 /* stylelint-disable media-feature-range-notation */
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 @use '@carbon/react/scss/colors' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/type';
 
 .CustomLayout {
   display: flex;

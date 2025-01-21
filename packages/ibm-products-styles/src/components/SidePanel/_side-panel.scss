@@ -9,13 +9,13 @@
 @use 'sass:map';
 
 // Other Carbon settings.
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/grid' as *;
-@use '@carbon/styles/scss/motion' as *;
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/utilities';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/grid' as *;
+@use '@carbon/react/scss/motion' as *;
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/utilities';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
@@ -115,7 +115,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}.#{$block-class}--has-ai-label,
   &.#{$block-class}.#{$block-class}--has-decorator {
     border-color: transparent;
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
   }
 
@@ -320,7 +321,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}--has-decorator .#{$block-class}--scrolls {
     @include utilities.ai-popover-gradient('default', 0, 'layer');
 
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
   }
 

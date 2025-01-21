@@ -9,7 +9,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
-@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/react/scss/utilities' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--search-bar;

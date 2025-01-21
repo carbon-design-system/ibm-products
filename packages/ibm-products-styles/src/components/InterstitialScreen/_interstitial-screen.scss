@@ -11,11 +11,11 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 @use '@carbon/react/scss/colors' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/type';
 
 // InterstitialScreen uses the following Carbon for IBM Products components:
 @use '../Carousel/carousel';

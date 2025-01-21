@@ -8,7 +8,7 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/styles/scss/config';
+@use '@carbon/react/scss/config';
 
 @use './coachmark-dragbar';
 @use './coachmark-header';
@@ -16,7 +16,7 @@
 @use './coachmark-tagline';
 
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
+// TODO: @use '@carbon/react/scss/grid';
 // or
 // TODO: @use '@carbon/react/scss/grid';
 

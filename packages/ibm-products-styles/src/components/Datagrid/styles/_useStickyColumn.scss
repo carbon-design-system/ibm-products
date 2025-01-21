@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
 @use './variables';
 
 .#{variables.$block-class}__right-sticky-column-cell {

@@ -1,3 +1,4 @@
+// stylelint-disable carbon/theme-use, declaration-empty-line-before
 /**
  * Copyright IBM Corp. 2024
  *
@@ -10,14 +11,14 @@
 @use 'sass:string';
 @use '@carbon/react/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/type';
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/utilities';
 @use '@carbon/react/scss/motion' as *;
 @use '@carbon/react/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/components/tag';
+@use '@carbon/react/scss/components/tag';
 
-@use '@carbon/styles/scss/type' as *;
+@use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/colors' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
@@ -204,24 +205,20 @@ $colors: (
   //this is to select and add color to the new group preview
   .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
     button {
-    /* stylelint-disable-next-line carbon/theme-use */
     $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
-    /* stylelint-disable-next-line carbon/theme-use */
     box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
   }
 
   //we need to select the group color from the $colors array and need to repeat the colors after $colors.length subgroups
   @for $el-index from 1 through 50 {
     $item-index: $el-index;
-    /* stylelint-disable-next-line carbon/theme-use */
     $item-index: ((($item-index - 1) % $group-colors-length) + 1);
     #{$selector} {
       @if $item-index != 1 {
-        /* stylelint-disable-next-line carbon/theme-use */
         --#{$block-class}__condition-wrapper-color: #{list.nth(
             $group-colors,
             $item-index
-          )}; // stylelint-disable-line carbon/theme-use
+          )};
       }
     }
 
@@ -248,8 +245,8 @@ $colors: (
       .#{$block-class}__add-button,
       .#{$block-class}__add-condition-sub-group
     ) {
-    /* stylelint-disable-next-line carbon/theme-use */
-    box-shadow: inset 0 #{$spacing-01} 0 0 var(--#{$block-class}__condition-wrapper-color);
+    box-shadow: inset 0 #{$spacing-01} 0 0
+      var(--#{$block-class}__condition-wrapper-color);
   }
 }
 

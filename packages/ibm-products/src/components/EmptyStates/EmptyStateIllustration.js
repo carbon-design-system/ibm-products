@@ -11,14 +11,14 @@ import PropTypes from 'prop-types';
 const ErrorIllustration = lazy(() => import('./assets/ErrorIllustration'));
 const NoDataIllustration = lazy(() => import('./assets/NoDataIllustration'));
 const NoTagsIllustration = lazy(() => import('./assets/NoTagsIllustration'));
-const NotFoundIllustration = lazy(() =>
-  import('./assets/NotFoundIllustration')
+const NotFoundIllustration = lazy(
+  () => import('./assets/NotFoundIllustration')
 );
-const NotificationsIllustration = lazy(() =>
-  import('./assets/NotificationsIllustration')
+const NotificationsIllustration = lazy(
+  () => import('./assets/NotificationsIllustration')
 );
-const UnauthorizedIllustration = lazy(() =>
-  import('./assets/UnauthorizedIllustration')
+const UnauthorizedIllustration = lazy(
+  () => import('./assets/UnauthorizedIllustration')
 );
 
 const getIllustration = (kind) => {

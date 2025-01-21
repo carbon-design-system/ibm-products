@@ -11,11 +11,11 @@
 @use '../../global/styles/mixins';
 @use '@carbon/layout/scss/convert' as *;
 
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/spacing' as *;
 // Other Carbon settings if needed
-// TODO: @use '@carbon/styles/scss/grid';
+// TODO: @use '@carbon/react/scss/grid';
 // or
 // TODO: @use '@carbon/react/scss/grid';
 

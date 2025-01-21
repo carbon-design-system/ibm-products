@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+
 /**
  * Copyright IBM Corp. 2024
  *
@@ -362,7 +364,6 @@ export interface ResizeHeaderProps {
   isFetching?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type VisibleColumns<T extends object = {}> = (
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>

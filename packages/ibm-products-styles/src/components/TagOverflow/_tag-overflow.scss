@@ -26,13 +26,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--tag-overflow;
 $block-class-overflow: #{$block-class}-popover;
 $block-class-modal: #{$block-class}-modal;
 
-.#{$block-class} {
+.#{$block-class}__visible-tags {
   display: flex;
-  width: 100%;
-  min-width: $spacing-12;
-  align-items: center;
-  justify-content: flex-start;
-  white-space: nowrap;
 }
 
 .#{$block-class}--align-end {

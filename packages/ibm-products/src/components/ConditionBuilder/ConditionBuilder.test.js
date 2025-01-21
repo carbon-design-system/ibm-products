@@ -267,6 +267,7 @@ const inputData = {
       config: {
         component: CustomInput,
         operators: customOperators,
+        valueFormatter: (value) => value?.toUpperCase(),
       },
     },
   ],
@@ -1616,8 +1617,9 @@ describe(componentName, () => {
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
-
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    // the value formatter will format to uppercase
+    // cspell: disable
+    const selectedItem = screen.getByRole('button', { name: 'TESTID123' });
 
     expect(selectedItem);
   });

@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['stylelint-config-carbon'],
-  plugins: ['stylelint-plugin-carbon-tokens'],
+  plugins: ['stylelint-plugin-carbon-tokens', 'stylelint-use-logical'],
   rules: {
     'max-nesting-depth': null,
     'scss/no-global-function-names': null,
@@ -14,5 +14,8 @@ module.exports = {
     'carbon/motion-easing-use': true,
     'carbon/theme-use': true,
     'carbon/type-use': true,
+
+    // CSS Logical properties
+    'csstools/use-logical': true,
   },
 };

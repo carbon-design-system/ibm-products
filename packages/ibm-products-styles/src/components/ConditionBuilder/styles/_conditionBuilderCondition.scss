@@ -56,12 +56,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 .#{$block-class}__text-ellipsis {
   display: block;
   overflow: hidden;
-  max-width: $spacing-13;
+  max-inline-size: $spacing-13;
   text-overflow: ellipsis;
   text-wrap: nowrap;
 }
 .#{$block-class}__group-preview {
-  height: 0;
+  block-size: 0;
   opacity: 0;
   pointer-events: none;
   transition: all $duration-moderate-02 motion(exit, expressive);
@@ -70,7 +70,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   }
 }
 .#{$block-class}__group-preview-animate {
-  height: auto;
+  block-size: auto;
   color: $text-secondary;
   opacity: 0.5;
   pointer-events: none;
@@ -78,13 +78,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 }
 .#{$block-class}__connector--disabled {
   display: flex;
-  min-width: $spacing-10;
   background-color: $layer;
   color: $text-helper;
+  min-inline-size: $spacing-10;
   pointer-events: none;
 }
 .#{$block-class}__condition-wrapper
   > .#{$block-class}__condition-block:last-child
   > .#{$block-class}__groupConnector {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }

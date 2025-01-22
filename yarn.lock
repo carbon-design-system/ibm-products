@@ -14072,6 +14072,7 @@ __metadata:
     stylelint: "npm:^16.10.0"
     stylelint-config-carbon: "npm:^1.20.0"
     stylelint-plugin-carbon-tokens: "npm:^3.2.1"
+    stylelint-use-logical: "npm:^2.1.2"
     webpack: "npm:^5.96.1"
   languageName: unknown
   linkType: soft
@@ -21480,7 +21481,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-use-logical@npm:^2.1.0":
+"stylelint-use-logical@npm:^2.1.0, stylelint-use-logical@npm:^2.1.2":
   version: 2.1.2
   resolution: "stylelint-use-logical@npm:2.1.2"
   peerDependencies:

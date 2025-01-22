@@ -147,7 +147,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__content {
-  padding-inline: $spacing-11 $spacing-05;
+  padding-inline: $spacing-09 $spacing-05;
   // spacing-05 + chevron size + spacing-05
   // stylelint-disable-next-line carbon/layout-use
 }

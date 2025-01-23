@@ -12,21 +12,21 @@
     "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/ibm-products-web-components"
   },
+  "files": [
+    "custom-elements.json",
+    "es/**/*",
+    "lib/**/*",
+    "scss/**/*"
+  ],
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
   "exports": {
-    "./es/components/*": {
-      "node": "./lib/components/*",
-      "default": "./es/components/*"
-    },
-    "./es/globals/*": {
-      "node": "./lib/globals/*",
-      "default": "./es/globals/*"
-    },
     "./es/*": "./es/*",
     "./lib/*": "./lib/*",
+    "./dist/*": "./dist/*",
+    "./scss/*": "./scss/*",
     "./custom-elements.json": "./custom-elements.json",
     "./package.json": "./package.json"
   },
@@ -52,7 +52,8 @@
     "@carbon/ibm-products-styles": "^2.54.0-rc.0",
     "@carbon/styles": "1.71.0",
     "@carbon/web-components": "2.19.0",
-    "lit": "^3.1.0"
+    "lit": "^3.1.0",
+    "tslib": "^2.6.3"
   },
   "devDependencies": {
     "@carbon/icon-helpers": "^10.54.0",

@@ -24,12 +24,6 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
-.#{$block-class} {
-  padding: $spacing-06;
-}
 .#{$block-class}__condition-builder__group {
   display: flex;
 }

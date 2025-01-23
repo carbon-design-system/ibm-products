@@ -24,8 +24,10 @@ import { createPortal } from 'react-dom';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { useIsomorphicEffect } from '../../global/js/hooks';
-import { usePrefersReducedMotion } from '../../global/js/hooks';
+import {
+  useIsomorphicEffect,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */

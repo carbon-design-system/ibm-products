@@ -26,7 +26,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { moderate02 } from '@carbon/motion';
 import { pkg } from '../../settings';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { usePrefersReducedMotion } from '../../global/js/hooks';
 import { useWebTerminal } from './hooks';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 

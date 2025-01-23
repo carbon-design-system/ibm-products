@@ -26,7 +26,8 @@ import {
   innerContainerVariants,
   panelVariants,
 } from './motion/variants';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { usePrefersReducedMotion } from '../../../../../global/js/hooks';
 import {
   useFilters,
   useShouldDisableButtons,
@@ -124,7 +125,7 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);

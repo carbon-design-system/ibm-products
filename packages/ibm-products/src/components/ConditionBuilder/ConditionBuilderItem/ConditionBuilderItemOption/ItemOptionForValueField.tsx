@@ -177,11 +177,9 @@ export const ItemOptionForValueField = ({
 
       {multiSelectable && (
         <div className={`${blockClass}__multiselectSelectionStatusContainer`}>
-          <h4>
-            <label>
-              {selection.length}/{allOptions.length} Selected
-            </label>
-          </h4>
+          <label>
+            {selection.length}/{allOptions.length} Selected
+          </label>
           <Button
             kind={'ghost'}
             size={'sm'}

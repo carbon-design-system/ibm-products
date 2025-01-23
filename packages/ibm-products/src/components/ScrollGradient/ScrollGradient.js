@@ -20,6 +20,7 @@ import {
   getScrollState,
   useIsOverflow,
 } from './constants';
+import { useIsomorphicEffect } from '../../global/js/hooks';
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
 
@@ -48,12 +49,47 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
+    const scrollContainer = useRef(undefined);
+    const contentChildrenContainer = useRef(undefined);
+    const { xScrollable, yScrollable } = useIsOverflow(scrollContainer);
+
+    const gradientRight =
+      yScrollable && scrollContainer.current && contentChildrenContainer.current
+        ? scrollContainer.current.offsetWidth -
+          contentChildrenContainer.current.offsetWidth
+        : 0;
+    const gradientBottom =
+      xScrollable && scrollContainer.current && contentChildrenContainer.current
+        ? scrollContainer.current.offsetHeight -
+          contentChildrenContainer.current.offsetHeight
+        : 0;
+
     const [verticalPosition, setVerticalPosition] = useState(ScrollStates.NONE);
     const [horizontalPosition, setHorizontalPosition] = useState(
       ScrollStates.NONE
     );
-    const scrollContainer = useRef(undefined);
-    const contentChildrenContainer = useRef(undefined);
+
+    const startVerticalRef = useRef(null);
+    const startHorizontalRef = useRef(null);
+    const endVerticalRef = useRef(null);
+    const endHorizontalRef = useRef(null);
+
+    useIsomorphicEffect(() => {
+      // start vertical styles
+      startVerticalRef.current.style.right = gradientRight;
+      startVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, transparent, ${color} 90%)`;
+      // start horizontal styles
+      startHorizontalRef.current.backgroundImage = `linear-gradient(-90deg, transparent, ${color} 90%)`;
+      startHorizontalRef.current.bottom = gradientBottom;
+      // end vertical styles
+      endVerticalRef.current.style.right = gradientRight;
+      endVerticalRef.current.style.bottom = gradientBottom;
+      endVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, ${color} 10%, transparent)`;
+      // end horizontal styles
+      endHorizontalRef.current.style.right = gradientRight;
+      endHorizontalRef.current.style.bottom = gradientBottom;
+      endHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, ${color} 10%, transparent)`;
+    }, [color, gradientRight, gradientBottom]);
 
     const updateScrollState = throttle(() => {
       const updatedVerticalVal = getScrollState(
@@ -84,19 +120,6 @@ export let ScrollGradient = React.forwardRef(
     useEffect(() => {
       scrollHandler();
     }, [scrollHandler]);
-
-    const { xScrollable, yScrollable } = useIsOverflow(scrollContainer);
-
-    const gradientRight =
-      yScrollable && scrollContainer.current && contentChildrenContainer.current
-        ? scrollContainer.current.offsetWidth -
-          contentChildrenContainer.current.offsetWidth
-        : 0;
-    const gradientBottom =
-      xScrollable && scrollContainer.current && contentChildrenContainer.current
-        ? scrollContainer.current.offsetHeight -
-          contentChildrenContainer.current.offsetHeight
-        : 0;
 
     return (
       <div
@@ -134,42 +157,28 @@ export let ScrollGradient = React.forwardRef(
         {!hideStartGradient && (
           <>
             <div
+              ref={startVerticalRef}
               className={`${blockClass}__start-vertical`}
-              style={{
-                right: gradientRight,
-                backgroundImage: `linear-gradient(0deg, transparent, ${color} 90%)`,
-              }}
               role="presentation"
               aria-hidden
             />
             <div
+              ref={startHorizontalRef}
               className={`${blockClass}__start-horizontal`}
-              style={{
-                backgroundImage: `linear-gradient(-90deg, transparent, ${color} 90%)`,
-                bottom: gradientBottom,
-              }}
               role="presentation"
               aria-hidden
             />
           </>
         )}
         <div
+          ref={endVerticalRef}
           className={`${blockClass}__end-vertical`}
-          style={{
-            right: gradientRight,
-            bottom: gradientBottom,
-            backgroundImage: `linear-gradient(0deg, ${color} 10%, transparent)`,
-          }}
           role="presentation"
           aria-hidden
         />
         <div
+          ref={endHorizontalRef}
           className={`${blockClass}__end-horizontal`}
-          style={{
-            right: gradientRight,
-            bottom: gradientBottom,
-            backgroundImage: `linear-gradient(-90deg, ${color} 10%, transparent)`,
-          }}
           role="presentation"
           aria-hidden
         />

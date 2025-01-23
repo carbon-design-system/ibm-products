@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { BigNumbers } from '.';
 import { BigNumbersSize } from './constants';
@@ -137,5 +137,18 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('should render a tooltip ', async () => {
+    renderBigNumbers({
+      tooltipDescription: 'Tooltip description',
+      trending: true,
+      'data-testid': dataTestId,
+    });
+    const element = screen.getByTestId(dataTestId);
+    const tooltipElement = element
+      .querySelector(`.${blockClass}__label`)
+      .getElementsByClassName(`span.${carbon.prefix}--tooltip`);
+    expect(tooltipElement).toBeTruthy();
   });
 });

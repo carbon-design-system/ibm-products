@@ -6,12 +6,12 @@
 //
 
 /**
- * The Guidebanner specifically is theme-agnostic, and so we have to 
- * use color tokens to keep the colors static instead of theme tokens 
+ * The Guidebanner specifically is theme-agnostic, and so we have to
+ * use color tokens to keep the colors static instead of theme tokens
  * that will change depending on the selected theme.
- * 
+ *
  * Because of this, we are triggering a *large* amount of linting errors.
- * So, we're adding a few "disable" rules for the file instead of 60 
+ * So, we're adding a few "disable" rules for the file instead of 60
  * individual rules.
  */
 

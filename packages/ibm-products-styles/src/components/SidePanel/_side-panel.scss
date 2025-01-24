@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -28,6 +28,64 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
+
+@property --duration {
+  inherits: true;
+  initial-value: $duration-moderate-01;
+  syntax: '*';
+}
+
+@property --panel-transform {
+  inherits: true;
+  initial-value: 320px;
+  syntax: '*';
+}
+
+@keyframes side-panel-entrance {
+  0% {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(var(--panel-transform));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes side-panel-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(var(--panel-transform));
+  }
+}
+
+@keyframes side-panel-entrance-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes side-panel-exit-reduced {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
   /* any value is single value list */
@@ -81,9 +139,60 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   /* if the title does not scroll then we have a child scrolling section. */
   grid-template-rows: auto 1fr auto; /* titles content and actions */
 
+  transform: translateX(0);
+  transition-behavior: allow-discrete;
+  transition-duration: var(--duration);
+  transition-property: display, opacity, transform;
+
+  @starting-style {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(var(--panel-transform));
+  }
+
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}--#{$size} {
       @include setPanelSize($size_value);
+    }
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class}--open {
+    animation: side-panel-entrance var(--duration) motion(entrance, productive)
+      forwards;
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class}--closing {
+    animation: side-panel-exit var(--duration) motion(exit, productive) forwards;
+  }
+
+  @supports (transition-behavior: allow-discrete) {
+    .panel.closing {
+      opacity: 0;
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(var(--panel-transform));
+      transition-duration: var(--duration);
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    /* styles to apply if a user's device settings are set to reduced motion */
+    &.#{$block-class}--open {
+      animation: side-panel-entrance-reduced var(--duration)
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 0;
+        transform: translateX(0);
+      }
+    }
+    &.#{$block-class}--closing {
+      animation: side-panel-exit-reduced var(--duration)
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   }
 
@@ -300,8 +409,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: $spacing-05;
   }
   .#{$block-class}__inner-content {
-    padding: $spacing-05;
-    padding-top: 0;
+    padding: 0 $spacing-05 $spacing-05;
   }
 
   .#{$block-class}__inner-content--no-animated-title {
@@ -471,8 +579,15 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   z-index: utilities.z('overlay');
   width: 100%;
   height: 100%;
+  animation: side-panel-overlay-entrance var(--duration)
+    motion(entrance, productive) forwards;
   background-color: $overlay;
   inset: 0;
+}
+
+.#{$block-class}__overlay--closing {
+  animation: side-panel-overlay-exit var(--duration) motion(exit, productive)
+    forwards;
 }
 
 /* stylelint-disable-next-line carbon/theme-token-use */

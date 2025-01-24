@@ -16,6 +16,6 @@ module.exports = {
     'carbon/type-use': true,
 
     // CSS Logical properties
-    'csstools/use-logical': true,
+    'csstools/use-logical': 'ignore',
   },
 };

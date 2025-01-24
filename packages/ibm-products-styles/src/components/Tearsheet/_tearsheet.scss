@@ -249,9 +249,9 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__header-description {
-    max-inline-size: 100%;
     margin-block-start: $spacing-05;
-    
+    max-inline-size: 100%;
+
     @include type.type-style('body-compact-01');
 
     @include breakpoint-up('md') {
@@ -278,6 +278,7 @@ $motion-duration: $duration-moderate-02;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {

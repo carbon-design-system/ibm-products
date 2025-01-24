@@ -36,6 +36,10 @@ $right-section-std-width: 100% - $left-section-std-width;
 $left-section-alt-width: 75%;
 $right-section-alt-width: 100% - $left-section-alt-width;
 
+$animation: background-appear;
+// This transitions the background-color between from-color and to-color
+$duration: 1000ms;
+
 @keyframes background-appear {
   from {
     /* stylelint-disable-next-line carbon/theme-use */
@@ -91,10 +95,6 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   inset-block-start: 0;
   inset-inline-start: 0;
 
-  // This transitions the background-color between from-color and to-color
-  $duration: 1000ms;
-
-  $animation: background-appear;
   @if $with-shadow {
     $animation: background-and-shadow-appear;
   }

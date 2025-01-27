@@ -3084,22 +3084,35 @@ p.c4p--about-modal__copyright-text:first-child {
   letter-spacing: var(--cds-heading-04-letter-spacing, 0);
 }
 .c4p--tearsheet .c4p--tearsheet__header-description {
-  display: -webkit-box;
-  overflow: hidden;
   max-width: 100%;
   margin-top: 1rem;
   font-size: var(--cds-body-compact-01-font-size, 0.875rem);
   font-weight: var(--cds-body-compact-01-font-weight, 400);
   line-height: var(--cds-body-compact-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   word-break: break-word;
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet .c4p--tearsheet__header-description {
     max-width: 60%;
   }
+}
+.c4p--tearsheet .c4p--tearsheet__description-tooltip .cds--definition-term {
+  border-bottom: 0;
+  letter-spacing: inherit;
+  word-break: break-word;
+}
+.c4p--tearsheet .c4p--tearsheet__description-tooltip {
+  display: inline-flex;
+}
+.c4p--tearsheet .c4p--tearsheet__description-tooltip .cds--popover-content.cds--definition-tooltip {
+  max-inline-size: -webkit-fill-available;
+}
+.c4p--tearsheet .c4p--tearsheet__description-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
   margin-top: 0.5rem;

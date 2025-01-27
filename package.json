@@ -67,7 +67,8 @@
     "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'scripts/example-gallery-builder/update-example/**/package.json'",
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
     "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
-    "visual-snapshot": "cd packages/core && yarn percy storybook storybook-static"
+    "visual-snapshot": "cd packages/core && yarn percy storybook storybook-static",
+    "wc-coverage": "cd packages/ibm-products-web-components && yarn coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
@@ -141,7 +142,8 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^3.2.1"
+    "stylelint-plugin-carbon-tokens": "^3.2.1",
+    "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.0.2"
 }

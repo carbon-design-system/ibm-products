@@ -11,7 +11,7 @@
 import { useState } from 'react';
 import { useIsomorphicEffect } from './useIsomorphicEffect';
 
-const usePrefersReducedMotion = () => {
+export const usePrefersReducedMotion = () => {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useIsomorphicEffect(() => {
@@ -33,5 +33,3 @@ const usePrefersReducedMotion = () => {
 
   return prefersReducedMotion;
 };
-
-export default usePrefersReducedMotion;

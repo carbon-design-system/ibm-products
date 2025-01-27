@@ -54,7 +54,7 @@ describe('usePresence', () => {
     expect(screen.getByText(content)).toBeInTheDocument();
   });
 
-  it('should wait to unmount component to account for animation duration', async () => {
+  it('should wait to unmount component to account for exit animation', async () => {
     const animationEventMixin = (animationName) => ({ animationName });
     const ref = React.createRef();
     const { rerender } = render(<TestComponent open ref={ref} />);

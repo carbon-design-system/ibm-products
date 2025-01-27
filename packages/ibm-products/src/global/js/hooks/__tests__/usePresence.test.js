@@ -55,17 +55,14 @@ describe('usePresence', () => {
   });
 
   it('should wait to unmount component to account for exit animation', async () => {
-    const animationEventMixin = (animationName) => ({ animationName });
     const ref = React.createRef();
     const { rerender } = render(<TestComponent open ref={ref} />);
 
     rerender(<TestComponent open={false} ref={ref} />);
 
     const event = new Event('animationend');
-    Object.assign(event, animationEventMixin('fade-out'));
-    act(() => {
-      ref?.current.dispatchEvent(event);
-    });
+    Object.assign(event, { animationName: 'fade-out' });
+    act(() => ref?.current.dispatchEvent(event));
     expect(ref.current).toBeNull();
   });
 });

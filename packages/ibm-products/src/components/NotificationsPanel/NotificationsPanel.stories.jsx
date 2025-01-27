@@ -16,6 +16,7 @@ import {
   HeaderGlobalAction,
 } from '@carbon/react';
 import { User, Notification } from '@carbon/react/icons';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
@@ -36,11 +37,11 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/notification-panel/usage/" />
+      ),
     },
-*/
   },
 };
 

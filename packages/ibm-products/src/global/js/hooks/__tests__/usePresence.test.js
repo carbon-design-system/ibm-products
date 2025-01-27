@@ -5,37 +5,67 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { act } from 'react';
+import React, { act, forwardRef } from 'react';
 import { usePresence } from '../usePresence';
 import { render, screen } from '@testing-library/react';
+import cx from 'classnames';
 
 const content = 'Component content';
-const defaultDuration = 1000; // specified in `usePresence.ts`
 // eslint-disable-next-line react/prop-types
-const TestComponent = ({ open }) => {
-  const { shouldRender } = usePresence(open);
-  return shouldRender ? <div>{content}</div> : null;
-};
+const TestComponent = forwardRef(({ open }, ref) => {
+  const { shouldRender } = usePresence(open, ref, 'fade-out');
+  return shouldRender ? (
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+    @keyframes fade-out {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(10rem);
+      }
+    }
+    .closing {
+      animation: fade-out 240ms ease-in forwards;
+    }
+  `,
+        }}
+      />
+      <div
+        ref={ref}
+        className={cx({
+          ['closing']: !open,
+        })}
+      >
+        {content}
+      </div>
+    </>
+  ) : null;
+});
 
 describe('usePresence', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.useRealTimers();
-  });
-
   it('should immediately render component', () => {
     render(<TestComponent open />);
     expect(screen.getByText(content)).toBeInTheDocument();
   });
-  it('should wait to unmount component to account for animation duration', () => {
-    const { rerender, container } = render(<TestComponent open />);
-    rerender(<TestComponent open={false} />);
+
+  it('should wait to unmount component to account for animation duration', async () => {
+    const animationEventMixin = (animationName) => ({ animationName });
+    const ref = React.createRef();
+    const { rerender } = render(<TestComponent open ref={ref} />);
+
+    rerender(<TestComponent open={false} ref={ref} />);
+
+    const event = new Event('animationend');
+    Object.assign(event, animationEventMixin('fade-out'));
     act(() => {
-      jest.advanceTimersByTime(defaultDuration);
+      ref?.current.dispatchEvent(event);
     });
-    expect(container.firstChild).toBeNull();
+    expect(ref.current).toBeNull();
   });
 });

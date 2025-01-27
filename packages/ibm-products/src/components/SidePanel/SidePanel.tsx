@@ -288,7 +288,7 @@ export let SidePanel = React.forwardRef(
     const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = usePrefersReducedMotion();
-    const { shouldRender } = usePresence(open, parseInt(moderate02));
+    const { shouldRender } = usePresence(open, sidePanelRef, 'side-panel-exit');
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);

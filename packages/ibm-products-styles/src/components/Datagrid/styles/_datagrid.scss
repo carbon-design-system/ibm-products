@@ -433,6 +433,7 @@
 
   .#{c4p-settings.$carbon-prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
+    appearance: none;
   }
 
   th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {

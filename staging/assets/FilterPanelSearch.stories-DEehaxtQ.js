@@ -1,0 +1,30 @@
+import{e as o}from"./index-CPiZ6Cnx.js";import{a}from"./chunk-D5ZWXAHU-CGElDDNX.js";import{aw as e,al as h,ax as d,ak as x}from"./index-Be1mmqnw.js";import{useMDXComponents as p}from"./index-CUO_02de.js";import"./chunk-NUUEMKO5-Dwg16tLQ.js";import{s as u}from"./_storybook-styles-C0uQlRwR.js";import{A as j}from"./index-Spu41qs0.js";import{F as m}from"./FilterPanelSearch-Ci_aEFLw.js";import"./_commonjsHelpers-BosuxZz1.js";import"./v4-CQkTLCs1.js";import"./iframe-C_4cBVrG.js";import"../sb-preview/runtime.js";import"./index-BSHYryQu.js";import"./index-Bsyy8W_U.js";import"./index-Df9so8jS.js";import"./index-DMCuvgYY.js";import"./index-DrFu-skq.js";import"./react-18-C6q_qjn2.js";import"./index-CXyjPnaX.js";import"./settings-DkGFwmHv.js";import"./events-OVwOsPzJ.js";import"./index-DJK44odq.js";import"./bucket-18-By6NmkK1.js";import"./bucket-9-BSWQ2dSd.js";import"./Search-soxfLq4A.js";import"./FormContext-CgeSXHS1.js";import"./bucket-14-BKxafgTW.js";import"./devtools-BgfuqBVa.js";function i(n){const r={a:"a",blockquote:"blockquote",code:"code",h1:"h1",h2:"h2",li:"li",p:"p",ul:"ul",...p(),...n.components};return e.jsxs(e.Fragment,{children:[e.jsx(r.h1,{id:"filterpanelsearch",children:"FilterPanelSearch"}),`
+`,e.jsx(r.h2,{id:"table-of-contents",children:"Table of Contents"}),`
+`,e.jsxs(r.ul,{children:[`
+`,e.jsx(r.li,{children:e.jsx(r.a,{href:"#overview",children:"Overview"})}),`
+`,e.jsx(r.li,{children:e.jsx(r.a,{href:"#example-usage",children:"Example usage"})}),`
+`,e.jsx(r.li,{children:e.jsx(r.a,{href:"#component-api",children:"Component API"})}),`
+`]}),`
+`,e.jsx(r.h2,{id:"deprecation-notice",children:"Deprecation notice"}),`
+`,e.jsxs(r.blockquote,{children:[`
+`,e.jsx(r.p,{children:"This component is deprecated and will be removed in the next major version."}),`
+`]}),`
+`,e.jsx(r.h2,{id:"overview",children:"Overview"}),`
+`,e.jsxs(r.p,{children:["The ",e.jsx(r.code,{children:"FilterPanelSearch"})," returns the value when the search value changes."]}),`
+`,e.jsx(r.h2,{id:"example-usage",children:"Example usage"}),`
+`,e.jsx(h,{children:e.jsx(d,{of:t})}),`
+`,e.jsx(r.h2,{id:"component-api",children:"Component API"}),`
+`,e.jsx(x,{})]})}function v(n={}){const{wrapper:r}={...p(),...n.components};return r?e.jsx(r,{...n,children:e.jsx(i,{...n})}):i(n)}const f="filter-panel-stories",Q={title:"Deprecated/Filter Panel/FilterPanelSearch",component:m,tags:["autodocs"],parameters:{styles:u,docs:{page:v}},argTypes:{children:{table:{disable:!0}},className:{control:{type:{}}}},decorators:[n=>o.createElement(j,{type:"deprecation-notice",text:o.createElement("div",null,"This component is deprecated and will be removed in the next major version.")},n())]},g=n=>o.createElement("div",{className:`${f}__viewport`},o.createElement(m,{...n,searchProps:{labelText:"Search",placeholder:"Search",onChange:r=>{a('onChange "'+r.target.value+'"')(r)},onClear:()=>{a()("onClear")}}})),t=g.bind({});t.storyName="Default";t.args={};var s,l,c;t.parameters={...t.parameters,docs:{...(s=t.parameters)==null?void 0:s.docs,source:{originalSource:`args => {
+  return <div className={\`\${storyClass}__viewport\`}>
+      <FilterPanelSearch {...args} searchProps={{
+      labelText: 'Search',
+      placeholder: 'Search',
+      onChange: event => {
+        action('onChange "' + event.target.value + '"')(event);
+      },
+      onClear: () => {
+        action()('onClear');
+      }
+    }} />
+    </div>;
+}`,...(c=(l=t.parameters)==null?void 0:l.docs)==null?void 0:c.source}}};const U=["Default"];export{t as Default,U as __namedExportsOrder,Q as default};

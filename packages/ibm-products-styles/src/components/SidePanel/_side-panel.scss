@@ -21,6 +21,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 @use './side-panel-variables' as *;
+@use './animations' as *;
 
 // SidePanel uses the following IBM Products components:
 // ActionSet
@@ -39,52 +40,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   inherits: true;
   initial-value: 320px;
   syntax: '*';
-}
-
-@keyframes side-panel-entrance {
-  0% {
-    opacity: 0;
-    /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(var(--panel-transform));
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes side-panel-exit {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  100% {
-    opacity: 0;
-    /* stylelint-disable-next-line carbon/layout-use */
-    transform: translateX(var(--panel-transform));
-  }
-}
-
-@keyframes side-panel-entrance-reduced {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes side-panel-exit-reduced {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
@@ -123,6 +78,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 .#{$block-class} {
+  --panel-transform: 320px;
   --#{$block-class}--title-stop: #{$spacing-05};
   --#{$block-class}--scroll-animation-progress: 0;
   --#{$block-class}--title-padding-right: #{$spacing-07};
@@ -156,23 +112,43 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     }
   }
 
+  &.#{$block-class}--open.#{$block-class}--right-placement {
+    /* stylelint-disable-next-line carbon/motion-duration-use */
+    animation: side-panel-entrance-right var(--duration)
+      motion(entrance, productive) forwards;
+  }
+
   // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
-  &.#{$block-class}--open {
-    animation: side-panel-entrance var(--duration) motion(entrance, productive)
+  &.#{$block-class}--open.#{$block-class}--left-placement {
+    /* stylelint-disable-next-line carbon/motion-duration-use */
+    animation: side-panel-entrance-left var(--duration)
+      motion(entrance, productive) forwards;
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class}--closing.#{$block-class}--right-placement {
+    /* stylelint-disable-next-line carbon/motion-duration-use */
+    animation: side-panel-exit-right var(--duration) motion(exit, productive)
       forwards;
   }
 
-  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
-  &.#{$block-class}--closing {
-    animation: side-panel-exit var(--duration) motion(exit, productive) forwards;
+  &.#{$block-class}--closing.#{$block-class}--left-placement {
+    /* stylelint-disable-next-line carbon/motion-duration-use */
+    animation: side-panel-exit-left var(--duration) motion(exit, productive)
+      forwards;
   }
 
   @supports (transition-behavior: allow-discrete) {
-    .panel.closing {
+    &.#{$block-class}--closing {
       opacity: 0;
       /* stylelint-disable-next-line carbon/layout-use */
-      transform: translateX(var(--panel-transform));
+      transform: translateX(var(--panel-transform, 320px));
+      /* stylelint-disable-next-line carbon/motion-duration-use */
       transition-duration: var(--duration);
+    }
+    &.#{$block-class}--closing.#{$block-class}--left-placement {
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(calc(-1 * var(--panel-transform, 320px)));
     }
   }
 

@@ -10,10 +10,10 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import { Button } from '@carbon/react';
 import { Edit } from '@carbon/react/icons';
 import { pkg, carbon } from '../../settings';
+import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { BigNumbers } from '.';
 import { BigNumbersSkeleton } from './BigNumbersSkeleton';
-import { getSupportedLocale } from './constants';
 
 const blockClass = `${pkg.prefix}--big-numbers`;
 const skeletonBlockClass = `${pkg.prefix}--big-numbers-skeleton`;
@@ -189,7 +189,7 @@ describe(componentName, () => {
 
   it('should return the DefaultLocale ("en-US") if locale is unsupported', async () => {
     const supportedLocale = getSupportedLocale(
-      'this is not a supported locale'
+      'this string is not a supported locale'
     );
     expect(supportedLocale).toEqual('en-US');
   });

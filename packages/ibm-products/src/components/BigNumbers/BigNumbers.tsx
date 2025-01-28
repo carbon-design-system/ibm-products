@@ -6,11 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import { pkg } from '../../settings';
 import { ArrowUp, Information } from '@carbon/react/icons';
 import { Tooltip } from '@carbon/react';
@@ -21,7 +22,6 @@ import {
   DefaultLocale,
   formatValue,
   getIconSize,
-  getSupportedLocale,
 } from './constants';
 
 const blockClass = `${pkg.prefix}--big-numbers`;
@@ -55,7 +55,7 @@ export interface BigNumbersProps {
  * of a button as well as tool tip functionality.
  * The default locale is English (`en-US`) if one is not provided or if the provided one is not supported.
  */
-export let BigNumbers = React.forwardRef(
+export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -75,15 +75,15 @@ export let BigNumbers = React.forwardRef(
       value,
       // Collect any other property values passed in.
       ...rest
-    }: BigNumbersProps,
-    ref: React.ForwardedRef<HTMLDivElement>
+    },
+    ref
   ) => {
     const BigNumbersClasses = cx(className, {
       [`${blockClass}--lg`]: size === 'lg',
       [`${blockClass}--xl`]: size === 'xl',
     });
 
-    const supportedLocale = getSupportedLocale(locale);
+    const supportedLocale = getSupportedLocale(locale, DefaultLocale);
 
     const truncatedValue =
       formatValue(supportedLocale, value, fractionDigits, truncate) ??
@@ -136,6 +136,7 @@ export let BigNumbers = React.forwardRef(
           )}
         </span>
 
+        {/* Trending up arrow */}
         <span className={`${blockClass}__row`} role="math">
           {trending && (
             <ArrowUp
@@ -180,12 +181,12 @@ BigNumbers.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 BigNumbers.propTypes = {
-  /* Optional class name. */
-  className: PropTypes.string,
-
   /**
-   * This component's default behavior will hide `total` if `undefined` or is the same as
-   * `value`.
+   * Provide an optional class to be applied to the containing node.
+   */
+  className: PropTypes.string,
+  /**
+   * The default behavior will hide `total` if `undefined` or is the same as `value`.
    *
    * Set to `true` to ignore the default behavior and show the `total`.
    */
@@ -195,7 +196,7 @@ BigNumbers.propTypes = {
    */
   fractionDigits: PropTypes.number,
   /**
-   * Displays an iconButton next to `value`.
+   * Displays an icon button next to `value`.
    */
   iconButton: PropTypes.node,
   /**
@@ -211,13 +212,15 @@ BigNumbers.propTypes = {
    */
   locale: PropTypes.string,
   /**
-   * Will add a percent sign `%` after `value` and hide `total`.
+   * Appends a percent sign (_%_) after `value` and hides `total`.
    */
   percentage: PropTypes.bool,
-
+  /**
+   *
+   */
   size: PropTypes.oneOf(['default', 'lg', 'xl']),
   /**
-   * When applied, an Information icon will be rendered next to the
+   * When applied, an information icon will be rendered next to the
    * `label` and the description will be applied to its tooltip.
    */
   tooltipDescription: PropTypes.string,
@@ -225,7 +228,7 @@ BigNumbers.propTypes = {
    * The number that will appear after the slash (i.e. the "denominator" of a fraction).
    *
    * This number will not be rendered if it's the same as `value` or
-   * `percentage=true`. See also **forceShowTotal**.
+   * `percentage` is true. See also the **forceShowTotal** prop.
    */
   total: PropTypes.number,
   /**

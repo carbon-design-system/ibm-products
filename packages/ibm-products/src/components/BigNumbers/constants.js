@@ -57,20 +57,3 @@ export const getIconSize = (size) => {
       return 16;
   }
 };
-
-/**
- * Function which takes a locale and returns a supported locale or the default
- * @param {string} locale Desired locale for number formatting.
- *
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales
- */
-export const getSupportedLocale = (locale) => {
-  let supportedLocale;
-  try {
-    Intl.NumberFormat.supportedLocalesOf(locale);
-    supportedLocale = locale;
-  } catch (error) {
-    supportedLocale = DefaultLocale;
-  }
-  return supportedLocale;
-};

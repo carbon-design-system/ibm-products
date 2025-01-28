@@ -7,7 +7,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,7 +15,6 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import classnames from 'classnames';
 // Carbon and package components we use.
 import { SkeletonText } from '@carbon/react';
 import { BigNumbersProps } from './BigNumbers';
@@ -35,28 +34,27 @@ const componentName = 'BigNumbersSkeleton';
 // Use the same properties and values as parent BigNumbersProps
 type BigNumbersSkeletonProps = Pick<BigNumbersProps, 'className' | 'size'>;
 
-export const BigNumbersSkeleton = React.forwardRef(
-  (
-    { className, size, ...rest }: BigNumbersSkeletonProps,
-    ref: React.ForwardedRef<HTMLDivElement>
-  ) => {
-    const BigNumbersSkeletonClasses = classnames(className, {
-      [`${blockClass}--lg`]: size === BigNumbersSize.Large,
-      [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
-    });
-    return (
-      <div
-        {...rest}
-        className={cx(className, blockClass, BigNumbersSkeletonClasses)}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      >
-        <SkeletonText className={`${blockClass}__label`} />
-        <SkeletonText heading className={`${blockClass}__value`} width="80%" />
-      </div>
-    );
-  }
-);
+export const BigNumbersSkeleton = forwardRef<
+  HTMLDivElement,
+  BigNumbersSkeletonProps
+>(({ className, size, ...rest }, ref) => {
+  const BigNumbersSkeletonClasses = cx(className, blockClass, {
+    [`${blockClass}--lg`]: size === BigNumbersSize.Large,
+    [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
+  });
+
+  return (
+    <div
+      {...rest}
+      className={BigNumbersSkeletonClasses}
+      ref={ref}
+      {...getDevtoolsProps(componentName)}
+    >
+      <SkeletonText className={`${blockClass}__label`} />
+      <SkeletonText heading className={`${blockClass}__value`} width="80%" />
+    </div>
+  );
+});
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
@@ -64,13 +62,11 @@ BigNumbersSkeleton.displayName = componentName;
 
 BigNumbersSkeleton.propTypes = {
   /**
-   * Optional class name.
-   * @type number
+   * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-  /** The size of the BigNumbers.
-   * @type string
+  /**
+   *
    */
-  // size: PropTypes.oneOf(Object.values(BigNumbersSize)),
   size: PropTypes.oneOf(['default', 'lg', 'xl']),
 };

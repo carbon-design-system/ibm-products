@@ -5,7 +5,23 @@ on:
     types: [ labeled ]
 
 jobs:
+  gen-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token: ${{ steps.generate_token.outputs.token }}
+    steps:
+      - name: Generate token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Save token
+        run: |
+          echo "token=${{ steps.generate_token.outputs.token }}" >> $GITHUB_OUTPUT
+
   move-ts-issues:
+    needs: gen-token
     if: ${{contains(github.event.label.name, format('area{0} typescript', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
     with:
@@ -13,8 +29,9 @@ jobs:
       field_option: '🟦 Typescript'
       project_number: '65'
     secrets:
-      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+      token: ${{ needs.gen-token.outputs.token }}
   move-migration-issues:
+    needs: gen-token
     if: ${{contains(github.event.label.name, format('area{0} migration ➡️', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
     with:
@@ -22,8 +39,9 @@ jobs:
       field_option: '🗺 Migration'
       project_number: '65'
     secrets:
-      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+      token: ${{ needs.gen-token.outputs.token }}
   move-a11y-issues:
+    needs: gen-token
     if: ${{contains(github.event.label.name, format('type{0} a11y ♿', ':'))}}
     uses: carbon-design-system/.github/.github/workflows/move-issue-to-project-and-set-fields.yml@main
     with:
@@ -31,4 +49,4 @@ jobs:
       field_option: '♿️ Accessibility'
       project_number: '65'
     secrets:
-      token: ${{ secrets.ADD_TO_PROJECT_SET_FIELD }}
+      token: ${{ needs.gen-token.outputs.token }}

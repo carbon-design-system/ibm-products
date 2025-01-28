@@ -65,13 +65,25 @@ export const useOverflowItems = <T extends Item>(
     let maxReached = false;
     let accumulatedWidth = 0;
 
+    const requiredWidth = items
+      ?.slice(0, maxItems)
+      ?.reduce((acc, item) => acc + (map.get(item.id) || 0), 0);
+
+    const _offsetWidth = offsetRef?.current?.offsetWidth || 0;
+    const includeOffset = requiredWidth > maxWidth + _offsetWidth;
+
     const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
       if (maxReached) {
         return prev;
       }
 
       const itemWidth = map.get(cur.id) || 0;
-      const willFit = accumulatedWidth + itemWidth <= maxWidth;
+      let willFit = accumulatedWidth + itemWidth <= maxWidth;
+
+      if (!includeOffset) {
+        willFit = accumulatedWidth + itemWidth <= maxWidth + _offsetWidth;
+      }
+
       if (willFit) {
         accumulatedWidth += itemWidth;
         prev.push(cur);

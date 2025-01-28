@@ -30,12 +30,6 @@
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
-@property --duration {
-  inherits: true;
-  initial-value: $duration-moderate-01;
-  syntax: '*';
-}
-
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
@@ -97,7 +91,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
   transform: translateX(0);
   transition-behavior: allow-discrete;
-  transition-duration: var(--duration);
+  transition-duration: $duration-moderate-01;
   transition-property: display, opacity, transform;
 
   @starting-style {
@@ -113,29 +107,25 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   }
 
   &.#{$block-class}--open.#{$block-class}--right-placement {
-    /* stylelint-disable-next-line carbon/motion-duration-use */
-    animation: side-panel-entrance-right var(--duration)
+    animation: side-panel-entrance-right $duration-moderate-01
       motion(entrance, productive) forwards;
   }
 
   // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
   &.#{$block-class}--open.#{$block-class}--left-placement {
-    /* stylelint-disable-next-line carbon/motion-duration-use */
-    animation: side-panel-entrance-left var(--duration)
+    animation: side-panel-entrance-left $duration-moderate-01
       motion(entrance, productive) forwards;
   }
 
   // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
   &.#{$block-class}--closing.#{$block-class}--right-placement {
-    /* stylelint-disable-next-line carbon/motion-duration-use */
-    animation: side-panel-exit-right var(--duration) motion(exit, productive)
-      forwards;
+    animation: side-panel-exit-right $duration-moderate-01
+      motion(exit, productive) forwards;
   }
 
   &.#{$block-class}--closing.#{$block-class}--left-placement {
-    /* stylelint-disable-next-line carbon/motion-duration-use */
-    animation: side-panel-exit-left var(--duration) motion(exit, productive)
-      forwards;
+    animation: side-panel-exit-left $duration-moderate-01
+      motion(exit, productive) forwards;
   }
 
   @supports (transition-behavior: allow-discrete) {
@@ -143,8 +133,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       opacity: 0;
       /* stylelint-disable-next-line carbon/layout-use */
       transform: translateX(var(--panel-transform, 320px));
-      /* stylelint-disable-next-line carbon/motion-duration-use */
-      transition-duration: var(--duration);
+      transition-duration: $duration-moderate-01;
     }
     &.#{$block-class}--closing.#{$block-class}--left-placement {
       /* stylelint-disable-next-line carbon/layout-use */
@@ -155,7 +144,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   @media (prefers-reduced-motion) {
     /* styles to apply if a user's device settings are set to reduced motion */
     &.#{$block-class}--open {
-      animation: side-panel-entrance-reduced var(--duration)
+      animation: side-panel-entrance-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {
         opacity: 0;
@@ -163,7 +152,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       }
     }
     &.#{$block-class}--closing {
-      animation: side-panel-exit-reduced var(--duration)
+      animation: side-panel-exit-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {
         opacity: 1;
@@ -555,15 +544,15 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   z-index: utilities.z('overlay');
   width: 100%;
   height: 100%;
-  animation: side-panel-overlay-entrance var(--duration)
+  animation: side-panel-overlay-entrance $duration-moderate-01
     motion(entrance, productive) forwards;
   background-color: $overlay;
   inset: 0;
 }
 
 .#{$block-class}__overlay--closing {
-  animation: side-panel-overlay-exit var(--duration) motion(exit, productive)
-    forwards;
+  animation: side-panel-overlay-exit $duration-moderate-01
+    motion(exit, productive) forwards;
 }
 
 /* stylelint-disable-next-line carbon/theme-token-use */

@@ -20,58 +20,60 @@
 .#{c4p-settings.$pkg-prefix}--create-modal
   .#{c4p-settings.$carbon-prefix}--modal-container {
   @include breakpoint(md) {
-    max-height: 95%;
+    max-block-size: 95%;
   }
   @include breakpoint(lg) {
-    max-height: 95%;
+    max-block-size: 95%;
   }
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
   .#{c4p-settings.$carbon-prefix}--modal-header {
-  padding-right: 20%;
-  padding-bottom: $spacing-03;
-  border-bottom: 1px solid $layer-accent-01;
-  margin-bottom: 0;
+  border-block-end: 1px solid $layer-accent-01;
+  margin-block-end: 0;
+  padding-block-end: $spacing-03;
+  padding-inline-end: 20%;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
   .#{c4p-settings.$carbon-prefix}--modal-footer
   .#{c4p-settings.$carbon-prefix}--btn {
-  max-width: none;
+  max-inline-size: none;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__title {
   @include type.type-style('heading-03');
 
-  margin-bottom: $spacing-02;
+  margin-block-end: $spacing-02;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__subtitle {
   @include type.type-style('body-compact-01');
 
-  margin-bottom: $spacing-03;
   color: $text-secondary;
+
+  margin-block-end: $spacing-03;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__description {
   @include type.type-style('body-01');
 
-  padding-right: calc(20% - #{$spacing-05});
   margin: $spacing-03 0 $spacing-05 0;
+
+  padding-inline-end: calc(20% - #{$spacing-05});
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__form
   .#{c4p-settings.$carbon-prefix}--fieldset {
-  min-width: 100%;
-  margin-bottom: 0;
+  margin-block-end: 0;
+  min-inline-size: 100%;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__form > * {
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 
   /* stylelint-disable-next-line max-nesting-depth */
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }

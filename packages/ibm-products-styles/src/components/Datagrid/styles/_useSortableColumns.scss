@@ -13,12 +13,12 @@
 .#{$block-class}__sortableColumn {
   .#{c4p-settings.$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
-    width: auto;
+    inline-size: auto;
   }
   .#{c4p-settings.$carbon-prefix}--table-header-label {
     display: block;
-    width: 100%;
-    height: 100%;
+    block-size: 100%;
+    inline-size: 100%;
   }
   .#{c4p-settings.$carbon-prefix}--table-header-label
     .#{c4p-settings.$carbon-prefix}--table-sort:focus,
@@ -44,8 +44,6 @@
 
   .#{c4p-settings.$carbon-prefix}--table-header-label
     .#{c4p-settings.$carbon-prefix}--table-sort {
-    width: 100%;
-    min-width: 100%;
     padding: 0 $spacing-05;
     border: none;
     /* stylelint-disable-next-line declaration-no-important */
@@ -53,6 +51,8 @@
     /* stylelint-disable-next-line declaration-no-important */
     color: $text-primary !important;
     font: inherit;
+    inline-size: 100%;
+    min-inline-size: 100%;
   }
   .#{c4p-settings.$carbon-prefix}--table-header-label
     .#{c4p-settings.$carbon-prefix}--table-sort
@@ -63,9 +63,9 @@
   }
 
   .#{c4p-settings.$carbon-prefix}--table-sort.#{$block-class}--table-sort {
-    width: calc(100% + #{$spacing-07}); // offset due to inner label
     align-items: inherit;
     margin: 0 calc(-1 * #{$spacing-05}); // fill width of parent table column header
+    inline-size: calc(100% + #{$spacing-07}); // offset due to inner label
   }
 }
 

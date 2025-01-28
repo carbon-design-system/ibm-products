@@ -1684,6 +1684,43 @@ describe(componentName, () => {
     expect(screen.getByRole('button', { name: 'excl. if' }));
   });
 
+  it('check description tooltip for property', async () => {
+    const inputConfig_ = JSON.parse(JSON.stringify(inputData));
+    inputConfig_.properties[0].description = 'This is a tooltip';
+    const user = userEvent.setup();
+    render(<ConditionBuilder {...defaultProps} inputConfig={inputConfig_} />);
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'is' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'is' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
+    //hover on property
+    await act(() =>
+      user.hover(document.querySelector(`.${blockClass}__property-field`))
+    );
+    expect(screen.getByText('This is a tooltip')).toBeInTheDocument();
+  });
+
   // keyboard navigation tests
   //for Non-Hierarchical variant
   it('add and remove conditions using keyboard', async () => {

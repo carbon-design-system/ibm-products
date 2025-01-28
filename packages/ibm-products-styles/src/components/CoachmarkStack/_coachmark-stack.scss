@@ -35,14 +35,14 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
 
   position: fixed;
   z-index: 5901;
-  right: $spacing-05;
-  bottom: -100%;
+  inset-block-end: -100%;
+  inset-inline-end: $spacing-05;
   //opacity: 0;
   transform: translateY(100%);
   visibility: hidden;
 
   &--is-mounted {
-    bottom: 0;
+    inset-block-end: 0;
     /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
     transition: $duration-moderate-02 motion(exit, productive);
     @media (prefers-reduced-motion) {
@@ -58,8 +58,8 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
 
   // Stack the level-one item behind the level-two item.
   &--is-stacked {
-    bottom: 0;
     overflow: hidden;
+    inset-block-end: 0;
     pointer-events: none;
     /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
     transform: perspective(convert.to-rem(144px))
@@ -87,11 +87,11 @@ $stack-home-class: #{c4p-settings.$pkg-prefix}--coachmark-stacked-home;
 // SPECIFIC TO THE HOME ELEMENT
 .#{$stack-home-class} {
   &__nav-links {
-    margin-top: $spacing-04;
-    margin-left: calc(-1 * $spacing-05);
+    margin-block-start: $spacing-04;
+    margin-inline-start: calc(-1 * $spacing-05);
   }
 
   &__icon-idea {
-    margin-bottom: $spacing-03;
+    margin-block-end: $spacing-03;
   }
 }

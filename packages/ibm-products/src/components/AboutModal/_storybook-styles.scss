@@ -14,15 +14,16 @@
 $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class}__stories--tech-logo {
-  width: $spacing-06;
-  height: $spacing-06;
-  margin-right: $spacing-03;
+  block-size: $spacing-06;
+  inline-size: $spacing-06;
+  margin-inline-end: $spacing-03;
   object-fit: contain;
 }
 
 .#{$block-class}__footer-label {
   @include type.type-style('label-01');
 
-  margin-bottom: $spacing-02;
   color: $text-secondary;
+
+  margin-block-end: $spacing-02;
 }

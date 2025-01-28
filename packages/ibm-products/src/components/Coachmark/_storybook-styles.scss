@@ -11,9 +11,9 @@
 .CoachmarkBaseExampleUsage {
   position: relative;
   display: inline-block;
-  max-height: 100%;
   box-sizing: border-box;
   padding: $spacing-05;
-  margin-left: 50%;
+  margin-inline-start: 50%;
+  max-block-size: 100%;
   transform: translateX(-50%);
 }

@@ -492,6 +492,7 @@ export const inputData = {
       label: 'Continent',
       icon: Earth,
       type: 'option',
+      description: 'Continent',
       config: {
         options: [
           {

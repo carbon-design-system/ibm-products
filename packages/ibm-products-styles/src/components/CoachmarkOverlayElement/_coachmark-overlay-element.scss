@@ -26,7 +26,7 @@ $carousel-item-class: #{c4p-settings.$pkg-prefix}--carousel__item;
   padding: $spacing-01 $spacing-05 0;
 
   &__content {
-    padding-bottom: $spacing-05;
+    padding-block-end: $spacing-05;
   }
 
   &__title {
@@ -40,13 +40,13 @@ $carousel-item-class: #{c4p-settings.$pkg-prefix}--carousel__item;
   }
 
   &__button {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 .#{$carousel-item-class} {
   .#{$block-class} {
     &__button {
-      margin-bottom: $spacing-05;
+      margin-block-end: $spacing-05;
     }
   }
 }

@@ -23,7 +23,7 @@
   position: fixed;
   bottom: 1rem; // stylelint-disable-line carbon/layout-use
   left: 1rem; // stylelint-disable-line carbon/layout-use
-  min-width: 11.5rem;
+  min-inline-size: 11.5rem;
 }
 
 .carbon-theme-dropdown .#{config.$prefix}--label {

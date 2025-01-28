@@ -39,8 +39,8 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 }
 .#{$influencer-block-class} {
   display: grid;
-  height: 100%;
   padding: $spacing-06 $spacing-07;
+  block-size: 100%;
   grid-template-columns: 100%;
   grid-template-rows: 1fr auto;
 }
@@ -54,7 +54,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 .#{$influencer-block-class}__title {
   @include type.type-style('heading-03');
 
-  margin-bottom: $spacing-06;
+  margin-block-end: $spacing-06;
 }
 
 .#{$influencer-block-class}__view-all-toggle {

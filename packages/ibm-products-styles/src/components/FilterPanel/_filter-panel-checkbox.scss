@@ -38,10 +38,10 @@ $carbon: #{c4p-settings.$carbon-prefix};
 
 .#{$block-class} .#{$carbon}--checkbox-label,
 .#{$block-class} .#{$carbon}--checkbox-label-text {
-  // Set Carbon's Checkbox label to 100% the width of the filter panel.
-  width: 100%;
   // Match height to the "checkbox with overflow" button.
-  height: $spacing-06;
+  block-size: $spacing-06;
+  // Set Carbon's Checkbox label to 100% the width of the filter panel.
+  inline-size: 100%;
 }
 
 .#{$block-class} .#{$label}__text {

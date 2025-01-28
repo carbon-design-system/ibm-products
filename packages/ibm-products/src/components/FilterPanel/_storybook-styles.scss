@@ -16,6 +16,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
 $carbon: #{c4p-settings.$carbon-prefix}--filter-panel;
 
 .filter-panel-stories__viewport {
-  width: 16rem;
   padding: $spacing-05;
+  inline-size: 16rem;
 }

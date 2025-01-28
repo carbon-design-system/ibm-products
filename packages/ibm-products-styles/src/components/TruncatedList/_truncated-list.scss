@@ -35,9 +35,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-list;
 }
 
 .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__button {
-  width: 100%;
   padding: 0;
-  margin-top: $spacing-02;
+  inline-size: 100%;
+  margin-block-start: $spacing-02;
   min-block-size: auto;
 }
 .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__button:hover {

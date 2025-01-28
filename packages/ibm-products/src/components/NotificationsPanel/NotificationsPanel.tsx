@@ -37,8 +37,8 @@ import {
   useClickOutside,
   useIsomorphicEffect,
   usePreviousValue,
+  usePrefersReducedMotion,
 } from '../../global/js/hooks';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

@@ -24,20 +24,20 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 
 .#{$block-class} {
   display: inline-block;
-  text-align: left;
+  text-align: start;
 }
 
 .#{$block-class}--content {
   display: inline-block;
-  text-align: left;
+  text-align: start;
 }
 
 .#{$block-class}--truncate {
   display: -webkit-box;
   overflow: hidden;
-  max-width: 80ch;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  max-inline-size: 80ch;
 }
 
 .#{$block-class}__tooltip > button {
@@ -49,8 +49,8 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
 }
 
 .#{$block-class} .#{$popover-block-class} {
-  max-width: $spacing-05;
   margin: 0 auto;
+  max-inline-size: $spacing-05;
 }
 
 .#{$block-class} .#{$popover-block-class}-content {
@@ -68,8 +68,7 @@ $popover-block-class: #{c4p-settings.$carbon-prefix}--popover;
   .#{$popover-block-class}--right-bottom
   .#{$popover-block-class},
 .#{$block-class} .#{$popover-block-class}--right-top .#{$popover-block-class} {
-  margin-right: 0;
-  margin-left: auto;
+  margin-inline: auto 0;
 }
 
 .#{$block-class} .#{$popover-block-class}--top .#{$popover-block-class}-caret,

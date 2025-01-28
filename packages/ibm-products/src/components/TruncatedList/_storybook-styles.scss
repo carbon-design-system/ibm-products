@@ -10,9 +10,9 @@
 
 .sb-show-main.sb-main-centered #storybook-root {
   // Override default center/center with top/center.
-  margin-top: $spacing-05;
+  margin-block-start: $spacing-05;
 }
 
 .truncated-list-stories__viewport {
-  width: 10rem;
+  inline-size: 10rem;
 }

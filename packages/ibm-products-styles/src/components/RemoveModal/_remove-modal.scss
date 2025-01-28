@@ -14,14 +14,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-footer
   .#{c4p-settings.$carbon-prefix}--btn {
-  max-width: none;
+  max-inline-size: none;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content {
-  padding-right: $spacing-05;
+  padding-inline-end: $spacing-05;
 }
 
 .#{$block-class}__body {
-  padding-right: 20%;
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
+  padding-inline-end: 20%;
 }

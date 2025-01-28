@@ -19,6 +19,6 @@
 .ccs-theme-dropdown {
   position: fixed;
   inset-block-end: $spacing-05;
-  left: $spacing-05;
   min-inline-size: 11.5rem;
+  inset-inline-start: 1rem; // stylelint-disable-line carbon/layout-use
 }

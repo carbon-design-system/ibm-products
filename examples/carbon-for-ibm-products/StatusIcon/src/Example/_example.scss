@@ -3,20 +3,20 @@
 .ccs-theme-dropdown {
   position: fixed;
   inset-block-end: $spacing-05;
-  left: $spacing-05;
   min-inline-size: 11.5rem;
+  inset-inline-start: $spacing-05;
 }
 
 .ccs-status-dropdown {
   position: fixed;
   inset-block-start: $spacing-05;
-  left: $spacing-05;
   min-inline-size: 11.5rem;
+  inset-inline-start: $spacing-05;
 }
 
 .example__status-icon {
   position: fixed;
   inset-block-start: 50%;
-  left: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
 }

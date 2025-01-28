@@ -4,14 +4,14 @@
   position: fixed;
   bottom: $spacing-05;
   left: $spacing-05;
-  min-width: 11.5rem;
+  min-inline-size: 11.5rem;
 }
 
 .ccs-status-dropdown {
   position: fixed;
   top: $spacing-05;
   left: $spacing-05;
-  min-width: 11.5rem;
+  min-inline-size: 11.5rem;
 }
 
 .example__status-icon {

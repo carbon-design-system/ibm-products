@@ -15,5 +15,5 @@ $story-class: create-tearsheet-narrow--story;
 .#{$story-class}__flex-container .#{config.$prefix}--form-item,
 .#{$story-class}__flex-container
   .#{config.$prefix}--dropdown__wrapper.#{config.$prefix}--list-box__wrapper {
-  width: 50%;
+  inline-size: 50%;
 }

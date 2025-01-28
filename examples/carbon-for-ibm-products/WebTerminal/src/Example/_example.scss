@@ -3,7 +3,7 @@
 @use '@carbon/react/scss/type' as *;
 
 .main--content {
-  width: 100%;
+  inline-size: 100%;
   margin-top: $spacing-09;
 }
 

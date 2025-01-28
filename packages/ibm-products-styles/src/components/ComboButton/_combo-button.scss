@@ -24,10 +24,10 @@
 
 .#{c4p-settings.$pkg-prefix}--combo-button
   .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu {
-  width: $spacing-09;
-  height: $spacing-09;
-  border-left: $spacing-01 solid $border-subtle-01;
   background-color: $background-brand;
+  block-size: $spacing-09;
+  border-inline-start: $spacing-01 solid $border-subtle-01;
+  inline-size: $spacing-09;
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button
@@ -43,8 +43,8 @@
 
 .#{c4p-settings.$pkg-prefix}--combo-button
   .cds--overflow-menu--flip.cds--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-  width: 0;
-  height: 0;
+  block-size: 0;
+  inline-size: 0;
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:active {
@@ -57,8 +57,8 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__list.#{c4p-settings.$carbon-prefix}--overflow-menu-options {
-  left: 0;
-  width: 100%;
+  inline-size: 100%;
+  inset-inline-start: 0;
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__list:after {
@@ -66,9 +66,9 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__item.#{c4p-settings.$carbon-prefix}--overflow-menu-options__btn {
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__item__icon {
-  margin-left: auto;
+  margin-inline-start: auto;
 }

@@ -22,6 +22,7 @@ $story-class: 'page-header-stories';
 .#{$story-class}__dummy-content {
   position: relative; // used to raise the stacking context and check it still goes under the page header
   background-color: $background;
+  padding-block-start: $spacing-05;
   color: $text-primary;
   margin-block-start: $spacing-05;
   padding-block-start: $spacing-05;

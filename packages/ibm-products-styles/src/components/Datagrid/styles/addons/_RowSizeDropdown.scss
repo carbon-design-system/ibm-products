@@ -17,7 +17,8 @@
 }
 
 .#{variables.$block-class}
-  .#{variables.$block-class}__row-size-radio-button
+  .#{variables.$block-class}__row-s
+  ize-radio-button
   .#{c4p-settings.$carbon-prefix}--radio-button__label {
   color: $text-primary;
 }

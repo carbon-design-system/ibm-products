@@ -111,6 +111,7 @@ $row-heights: (
   justify-content: space-between;
   block-size: 100%;
   color: $text-secondary;
+  padding-inline-start: $spacing-05;
   cursor: pointer;
   inline-size: 100%;
   outline: 0; // handled by active class

@@ -42,6 +42,7 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   showToolTip?: boolean;
   popOverClassName?: string;
   type?: string;
+  description?: string;
   condition?: Action & Condition;
   config?: PropertyConfig;
   renderChildren?: (ref: RefObject<HTMLDivElement>) => ReactNode;
@@ -65,6 +66,7 @@ export const ConditionBuilderItem = ({
   config,
   renderChildren,
   onChange,
+  description,
   ...rest
 }: ConditionBuilderItemProps) => {
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -236,6 +238,7 @@ export const ConditionBuilderItem = ({
         }
         showToolTip={showToolTip}
         isInvalid={isInvalid}
+        description={description}
         {...rest}
       />
 

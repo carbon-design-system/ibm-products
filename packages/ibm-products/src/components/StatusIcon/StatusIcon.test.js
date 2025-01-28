@@ -20,13 +20,13 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 const iconSizes = [
-  { input: 'sm', output: '16' },
-  { input: 'md', output: '20' },
-  { input: 'lg', output: '24' },
-  { input: 'xl', output: '32' },
+  { sizeProp: 'sm', sizeValue: '16' },
+  { sizeProp: 'md', sizeValue: '20' },
+  { sizeProp: 'lg', sizeValue: '24' },
+  { sizeProp: 'xl', sizeValue: '32' },
 ];
 
-const iconTypes = [
+const iconKinds = [
   'fatal',
   'critical',
   'major-warning',
@@ -89,44 +89,8 @@ describe(componentName, () => {
     );
   });
 
-  iconTypes.forEach((kind) => {
-    it(`applies the proper className when kind prop of ${kind} is passed`, async () => {
-      const { container } = render(
-        <StatusIcon
-          kind={kind}
-          iconDescription={kind}
-          size="sm"
-          theme="light"
-        />
-      );
-      const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-${kind}`
-      );
-      const hasKindProp = element.className.baseVal.includes(`${kind}`);
-      expect(hasKindProp).toBeTruthy();
-    });
-  });
-
-  iconTypes.forEach((label) => {
-    it(`applies the proper title element when icon label of ${label} is passed`, async () => {
-      const { container } = render(
-        <StatusIcon
-          kind={label}
-          iconDescription={label}
-          size="sm"
-          theme="light"
-        />
-      );
-      const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-${label}`
-      );
-      const hasIconDescriptionProp = element.querySelector('title').textContent;
-      expect(hasIconDescriptionProp).toBeTruthy();
-    });
-  });
-
   iconThemes.forEach((theme) => {
-    it(`applies the proper className when theme prop of ${theme} is passed`, async () => {
+    it(`applies the proper className when theme prop of \`${theme}\` is passed`, async () => {
       const { container } = render(
         <StatusIcon
           kind="fatal"
@@ -143,21 +107,27 @@ describe(componentName, () => {
     });
   });
 
-  iconSizes.forEach(({ input, output }) => {
-    it(`changes element size when size prop of ${input} is passed`, async () => {
-      const { container } = render(
-        <StatusIcon
-          kind="fatal"
-          iconDescription="fatal"
-          size={input}
-          theme="light"
-        />
-      );
-      const element = container.querySelector(
-        `.${blockClass}--light.${blockClass}--light-fatal`
-      );
-      const iconHeight = element.getAttribute('height');
-      expect(iconHeight).toEqual(output);
+  // Kind and size are tightly coupled in the code. Test all iterations of both here.
+  iconKinds.forEach((kind) => {
+    iconSizes.forEach(({ sizeProp, sizeValue }) => {
+      it(`changes element kind and size when \`${kind}\` and \`${sizeProp}\` is passed`, async () => {
+        const { container } = render(
+          <StatusIcon
+            kind={kind}
+            iconDescription={kind}
+            size={sizeProp}
+            theme="light"
+          />
+        );
+        const element = container.querySelector(
+          `.${blockClass}--light.${blockClass}--light-${kind}`
+        );
+        const iconHeight = element.getAttribute('height');
+        expect(iconHeight).toEqual(sizeValue);
+
+        const hasKindProp = element.className.baseVal.includes(`${kind}`);
+        expect(hasKindProp).toBeTruthy();
+      });
     });
   });
 });

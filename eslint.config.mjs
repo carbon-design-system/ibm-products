@@ -22,17 +22,52 @@ const compat = new FlatCompat({
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
-  // { languageOptions: { globals: globals.browser } },
+  {
+    languageOptions: {
+      globals: {
+          ...globals.browser,
+          ...globals.jest,
+          ...globals.node,
+      }
+    }
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  // ...compat.extends("eslint-config-carbon"),
+  // ...compat.extends("eslint-config-carbon").map(c => {
+  //   console.log(c.plugins)
+  // }),
   pluginReact.configs.flat.recommended,
+  {
+    ignores: [
+      'build',
+      'packages/*/build',
+      'packages/*/examples/*/build',
+      'es',
+      'lib',
+      'dist',
+      'umd',
+      'examples',
+      'node_modules',
+      'packages/*/examples/*',
+      '**/node_modules/**',
+      '**/storybook-static/**',
+      '*.stories.*',
+      '**/coverage/**',
+      'packages/ibm-products/scripts/generate/templates/**/*.js*',
+      'scripts/example-gallery-builder/update-example/**/*.js*'
+    ]
+  },
   {
     plugins: {
       pluginSsrFriendly,
       pluginReactHooks
     },
     rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/no-unused-expressions': ['error', { allowTernary: true }],
+      'ssr-friendly/no-dom-globals-in-module-scope': [
+        0
+      ],
       'react/display-name': [
         0
       ],

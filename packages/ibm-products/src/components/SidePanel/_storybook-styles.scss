@@ -59,16 +59,6 @@ $story-prefix: side-panel-stories__;
   height: 100%;
 }
 
-.#{$story-prefix}story-container {
-  position: fixed;
-  display: grid;
-  block-size: 100vh;
-  grid-template-rows: 3rem 1fr;
-  inline-size: 100vw;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-}
-
 .#{$story-prefix}story-content {
   position: relative;
   display: flex;

@@ -24,8 +24,10 @@ import { createPortal } from 'react-dom';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { useIsomorphicEffect } from '../../global/js/hooks';
-import { useReducedMotion } from 'framer-motion';
+import {
+  useIsomorphicEffect,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -106,7 +108,7 @@ export let CoachmarkFixed = React.forwardRef<
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
     const [fixedIsVisible, setFixedIsVisible] = useState(false);
-    const shouldReduceMotion = useReducedMotion();
+    const shouldReduceMotion = usePrefersReducedMotion();
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget

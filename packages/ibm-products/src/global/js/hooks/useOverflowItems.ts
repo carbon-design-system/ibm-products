@@ -70,7 +70,7 @@ export const useOverflowItems = <T extends Item>(
         return prev;
       }
 
-      const itemWidth = map.get(cur.id) || 0;
+      const itemWidth = map.get(cur.id || cur.key) || 0;
       const willFit = accumulatedWidth + itemWidth <= maxWidth;
       if (willFit) {
         accumulatedWidth += itemWidth;

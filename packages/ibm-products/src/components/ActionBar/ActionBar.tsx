@@ -6,28 +6,24 @@
 //
 
 // Import portions of React that are needed.
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  PropsWithChildren,
-  Ref,
-  ForwardedRef,
-} from 'react';
+import React, { useRef, PropsWithChildren, ForwardedRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Carbon and package components we use.
-import { Button, ButtonProps } from '@carbon/react';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import {
+  Button,
+  ButtonProps,
+  OverflowMenu,
+  OverflowMenuItem,
+} from '@carbon/react';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
-import { ActionBarOverflowItems } from './ActionBarOverflowItems';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
+import { useOverflowItems } from '../../global/js/hooks/useOverflowItems';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--action-bar`;
@@ -100,205 +96,73 @@ interface ActionBarProps extends PropsWithChildren {
 /**
  * The ActionBar is used internally by the PageHeader to wrap ActionBarItems.
  */
-export let ActionBar = React.forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
+export let ActionBar = React.forwardRef<HTMLDivElement, ActionBarProps>(
+  (props, ref) => {
+    const {
       actions = defaults.actions,
       className,
       maxVisible,
-      menuOptionsClass,
       onWidthChange,
-      overflowAriaLabel,
-      overflowMenuRef,
-      rightAlign,
-
-      // Collect any other property values passed in.
       ...rest
-    }: ActionBarProps,
-    ref: Ref<HTMLDivElement>
-  ) => {
-    const [displayCount, setDisplayCount] = useState(0);
-    const [displayedItems, setDisplayedItems] = useState<JSX.Element[]>([]);
-    const [hiddenSizingItems, setHiddenSizingItems] =
-      useState<JSX.Element | null>(null);
-    const internalId = useRef(uuidv4());
-    const refDisplayedItems = useRef<HTMLDivElement>(null);
-    const sizingRef = useRef<HTMLDivElement>(null);
-    const sizes = useRef<{ minWidth?: number; maxWidth?: number }>({});
+    } = props;
 
-    const backupRef = useRef<HTMLDivElement>(null);
-    const localRef = ref || backupRef;
+    const containerRef = useRef<HTMLDivElement>(null);
+    const offsetRef = useRef<HTMLDivElement>(null);
 
-    // create hidden sizing items
-    useEffect(() => {
-      // Hidden action bar and items used to calculate sizes
-      setHiddenSizingItems(
-        <div
-          className={`${blockClass}__hidden-sizing-items`}
-          aria-hidden={true}
-          ref={sizingRef}
-        >
-          <span>
-            <ActionBarOverflowItems
-              className={`${blockClass}__hidden-sizing-item`}
-              overflowAriaLabel="hidden sizing overflow items"
-              overflowMenuRef={overflowMenuRef}
-              overflowItems={[]}
-              key="hidden-overflow-menu"
-              tabIndex={-1}
-            />
-            {actions.map(({ key, id, ...rest }) => (
-              <ActionBarItem
-                {...rest}
-                // ensure id is not duplicated
-                data-original-id={id}
-                key={`hidden-item-${key}`}
-                className={`${blockClass}__hidden-sizing-item`}
-                tabIndex={-1}
-              />
-            ))}
-          </span>
-        </div>
-      );
-    }, [actions, overflowMenuRef]);
-
-    // creates displayed items based on actions, displayCount and alignment
-    useEffect(() => {
-      // Calculate the displayed items
-      const newDisplayedItems = actions.map(({ key, ...rest }) => (
-        <ActionBarItem {...rest} key={key} />
-      ));
-
-      // extract any there is not enough room for into newOverflowItems
-      const newOverflowItems = newDisplayedItems.splice(displayCount);
-
-      // add overflow menu if needed
-      if (newOverflowItems.length) {
-        newDisplayedItems.push(
-          <ActionBarOverflowItems
-            menuOptionsClass={menuOptionsClass}
-            overflowAriaLabel={overflowAriaLabel}
-            overflowMenuRef={overflowMenuRef}
-            overflowItems={newOverflowItems}
-            key={`overflow-menu-${internalId.current}`}
-          />
-        );
-      }
-
-      setDisplayedItems(newDisplayedItems);
-    }, [
+    const {
+      visibleItems,
+      hiddenItems: overflowItems,
+      itemRefHandler,
+    } = useOverflowItems(
       actions,
-      displayCount,
-      overflowAriaLabel,
-      menuOptionsClass,
-      overflowMenuRef,
-    ]);
-
-    // determine display count based on space available and width of pageActions
-    const checkFullyVisibleItems = () => {
-      /* istanbul ignore if */
-      if (sizingRef.current) {
-        const sizingItems = Array.from(
-          sizingRef.current.querySelectorAll<HTMLElement>(
-            `.${blockClass}__hidden-sizing-item`
-          )
-        );
-
-        // first item is always the overflow even if nothing else is rendered
-        const overflowItem = sizingItems.shift();
-
-        // determine how many will fit
-        let spaceAvailable = refDisplayedItems.current?.offsetWidth;
-        let willFit = 0;
-        let maxVisibleWidth = 0;
-        const fitLimit = maxVisible
-          ? Math.min(maxVisible, sizingItems.length)
-          : sizingItems.length;
-
-        // loop checking the space available
-        for (let i = 0; i < fitLimit; i++) {
-          const newSpaceAvailable =
-            spaceAvailable && spaceAvailable - sizingItems[i].offsetWidth;
-
-          // update maxVisibleWidth for later use by onWidthChange
-          maxVisibleWidth += sizingItems[i].offsetWidth;
-
-          if (newSpaceAvailable && newSpaceAvailable >= 0) {
-            spaceAvailable = newSpaceAvailable;
-            willFit += 1;
-          }
-        }
-
-        // if not enough space for all items then make room for the overflow
-        const overflowWidth = overflowItem!.offsetWidth;
-        if (willFit < sizingItems.length) {
-          // Check space for overflow
-          while (
-            willFit > 0 &&
-            spaceAvailable &&
-            spaceAvailable < overflowWidth
-          ) {
-            willFit -= 1;
-
-            // Highly unlikely that any action bar item is narrower than the overflow item
-
-            // Make sure by removing items in reverse order
-            spaceAvailable += sizingItems[willFit].offsetWidth;
-          }
-        }
-
-        if (
-          onWidthChange &&
-          (sizes.current.minWidth !== overflowWidth ||
-            sizes.current.maxWidth !== maxVisibleWidth)
-        ) {
-          sizes.current.minWidth = overflowWidth;
-          sizes.current.maxWidth = maxVisibleWidth;
-          // emit onWidthChange
-          onWidthChange({
-            minWidth: overflowWidth,
-            maxWidth: maxVisibleWidth,
-          });
-        }
-        if (willFit < 1) {
-          setDisplayCount(0);
-        } else {
-          setDisplayCount(willFit);
-        }
-      }
-    };
-
-    useEffect(() => {
-      checkFullyVisibleItems();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [maxVisible, hiddenSizingItems]);
-
-    // /* istanbul ignore next */ // not sure how to fake window resize
-    const handleResize = () => {
-      // when the hidden sizing items change size
-      /* istanbul ignore next */
-      // not sure how to fake window resize
-      checkFullyVisibleItems();
-    };
-
-    // // resize of the items
-    useResizeObserver(sizingRef, handleResize);
-    useResizeObserver(localRef, handleResize);
+      containerRef,
+      offsetRef,
+      maxVisible,
+      onWidthChange
+    );
 
     return (
-      <div {...rest} className={cx([blockClass, className])} ref={localRef}>
-        {hiddenSizingItems}
-
+      <div {...rest} className={cx([blockClass, className])} ref={ref}>
         <div
-          ref={refDisplayedItems}
-          className={cx([
-            `${blockClass}__displayed-items`,
-            { [`${blockClass}__displayed-items--right`]: rightAlign },
-          ])}
+          ref={containerRef}
+          className="visible-items"
+          style={{ display: 'flex' }}
         >
-          {displayedItems}
+          {visibleItems.map((item) => {
+            const { key, id, ...rest } = item;
+            return (
+              <div
+                className="action-container"
+                key={key}
+                ref={(node) => {
+                  itemRefHandler(key || id, node);
+                }}
+              >
+                <ActionBarItem {...rest} />
+              </div>
+            );
+          })}
+          {overflowItems.length > 0 && (
+            <div className={`offset-indicator`} ref={offsetRef}>
+              <OverflowMenu>
+                {overflowItems.map((item) => (
+                  <OverflowMenuItem
+                    key={item.id || item.key}
+                    className={`${blockClass}__item`}
+                    onClick={item?.onClick}
+                    itemText={
+                      <div className={`${blockClass}__item-content`}>
+                        <span className={`${blockClass}__item-label`}>
+                          {item?.label}
+                        </span>
+                        {item?.renderIcon}
+                      </div>
+                    }
+                  />
+                ))}
+              </OverflowMenu>
+            </div>
+          )}
         </div>
       </div>
     );

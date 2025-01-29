@@ -36,8 +36,8 @@ import { Carousel } from '../Carousel';
 import PropTypes from 'prop-types';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 // Other standard imports.
-import { clamp } from 'lodash';
 import cx from 'classnames';
+import { clamp } from '../../global/js/utils/clamp';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 

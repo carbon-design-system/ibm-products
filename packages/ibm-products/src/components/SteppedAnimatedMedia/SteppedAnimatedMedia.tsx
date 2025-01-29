@@ -14,11 +14,11 @@ import React, {
   MutableRefObject,
 } from 'react';
 import lottie, { type AnimationItem } from 'lottie-web';
-import clamp from 'lodash/clamp';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import { clamp } from '../../global/js/utils/clamp';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 

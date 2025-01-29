@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg, carbon } from '../../settings';
-import { throttle } from 'lodash';
+import { throttle } from '../../global/js/utils/throttle';
 import {
   ScrollDirection,
   ScrollStates,

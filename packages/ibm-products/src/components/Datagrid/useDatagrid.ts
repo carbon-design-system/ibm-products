@@ -18,7 +18,6 @@ import {
   usePagination,
   TableInstance,
 } from 'react-table';
-import uniqueId from 'lodash/uniqueId';
 import useSkeletonRows from './useSkeletonRows';
 import useDefaultStringRenderer from './useDefaultStringRenderer';
 import useRowRenderer from './useRowRenderer';
@@ -27,6 +26,7 @@ import useHeaderRow from './Datagrid/DatagridHeaderRow';
 import useFlexResize from './useFlexResize';
 import useFloatingScroll from './useFloatingScroll';
 import { stateReducer } from './Datagrid/addons/stateReducer';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const useDatagrid = (params, ...plugins): TableInstance => {
   const defaultPlugins = [
@@ -62,7 +62,7 @@ const useDatagrid = (params, ...plugins): TableInstance => {
     minWidth: 50,
   };
 
-  const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
+  const tableId = useMemo(() => uuidv4('datagrid-table-id'), []);
   const tableState = useTable(
     { tableId, ...params, stateReducer, defaultColumn },
     ...defaultPlugins,

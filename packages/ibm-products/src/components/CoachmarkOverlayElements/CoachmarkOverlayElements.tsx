@@ -25,7 +25,7 @@ import { CarouselProps } from '../Carousel/Carousel';
 import PropTypes from 'prop-types';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
-import { clamp } from 'lodash';
+import { clamp } from '../../global/js/utils/clamp';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import pconsole from '../../global/js/utils/pconsole';

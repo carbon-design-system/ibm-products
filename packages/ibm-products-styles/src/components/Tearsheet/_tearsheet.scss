@@ -260,7 +260,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__description-tooltip .#{$carbon-prefix}--definition-term {
-    border-block-end: 0;
+    border-bottom: 0;
     letter-spacing: inherit;
     word-break: break-word;
   }

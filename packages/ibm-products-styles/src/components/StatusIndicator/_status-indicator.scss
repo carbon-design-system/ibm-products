@@ -28,17 +28,17 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 .#{$block-class}__title {
   @include type-style('heading-02');
 
-  margin-bottom: $spacing-02;
+  margin-block-end: $spacing-02;
 }
 .#{$block-class-step}__details {
   display: flex;
-  min-height: $spacing-07;
   align-items: center;
+  min-block-size: $spacing-07;
 }
 .#{$block-class-step}__icon {
   position: relative;
   display: flex;
-  width: $spacing-06;
+  inline-size: $spacing-06;
 }
 .#{$block-class-step}__text {
   @include type-style('body-compact-01');
@@ -47,12 +47,12 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 }
 .#{$block-class} .#{$block-class}__button {
   align-items: center;
-  margin-top: $spacing-01;
-  margin-left: $spacing-03;
+  margin-block-start: $spacing-01;
+  margin-inline-start: $spacing-03;
 }
 .#{$block-class} .#{$block-class}__button:not([disabled]) svg {
-  margin-left: $spacing-03;
   fill: currentColor;
+  margin-inline-start: $spacing-03;
 }
 
 // Text
@@ -67,11 +67,11 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 //
 // Override <InlineLoading's> large margins.
 .#{$block-class-step}--active .#{$block-class-step}__icon {
-  margin-right: 0;
+  margin-inline-end: 0;
 }
 .#{$block-class-step}--active
   .#{c4p-settings.$carbon-prefix}--inline-loading__animation {
-  margin-right: to-rem(7px);
+  margin-inline-end: to-rem(7px);
 }
 // /Override
 //
@@ -86,8 +86,8 @@ $block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
 .#{$block-class-step}__error-message {
   @include type-style('label-01');
 
-  margin-top: to-rem(-2px);
-  margin-bottom: to-rem(6px);
-  margin-left: $spacing-06;
   color: $text-error;
+
+  margin-block: to-rem(-2px) to-rem(6px);
+  margin-inline-start: $spacing-06;
 }

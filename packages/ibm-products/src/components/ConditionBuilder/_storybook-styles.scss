@@ -3,8 +3,13 @@
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
-//
 
-@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+@use '@carbon/styles/scss/spacing' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
-// TODO: add any additional styles used by ConditionBuilder.stories.js
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
+
+.#{$block-class} {
+  padding: $spacing-06;
+}

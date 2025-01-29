@@ -1,12 +1,9 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2025, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles/scss/spacing' as *;
-
-.saving-story-textarea {
-  margin-block-end: $spacing-03;
-}
+@use '@carbon/react/scss/components/toggle/toggle';
+@use '@carbon/react/scss/components/ui-shell/side-nav';

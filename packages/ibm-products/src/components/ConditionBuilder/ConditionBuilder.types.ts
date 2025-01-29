@@ -125,6 +125,7 @@ export type Property = {
   id: string;
   label: string;
   icon?: CarbonIconType;
+  description?: string;
 } & (
   | PropertyConfig['option']
   | PropertyConfig['text']

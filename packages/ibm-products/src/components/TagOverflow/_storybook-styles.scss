@@ -15,11 +15,11 @@
 
 .custom-icon {
   display: inline-flex;
-  width: $spacing-07;
-  min-width: $spacing-07;
-  height: $spacing-07;
   align-items: center;
   justify-content: center;
   border: 1px solid $text-primary;
   border-radius: 50%;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+  min-inline-size: $spacing-07;
 }

@@ -59,12 +59,12 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__viewport--scroll {
-  overflow-y: auto;
+  overflow-block: auto;
 }
 
 .#{$story-class}__viewport .#{$story-class}__content-container {
   block-size: 100%;
-  overflow-y: auto;
+  overflow-block: auto;
 }
 
 .#{$story-class}__viewport
@@ -74,7 +74,7 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__viewport--scroll .#{$story-class}__content-container {
-  overflow-y: initial;
+  overflow-block: initial;
 }
 
 // cspell:disable-next-line

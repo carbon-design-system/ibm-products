@@ -65,7 +65,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 
 .#{$block-class} .#{$block-class}__content {
   block-size: 100%;
-  overflow-x: hidden;
+  overflow-inline: hidden;
   padding-block: $spacing-06;
 }
 

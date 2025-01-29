@@ -17,7 +17,7 @@
 
 .#{c4p-settings.$pkg-prefix}--combo-button__action {
   display: block;
-  overflow-x: hidden;
+  overflow-inline: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

@@ -68,7 +68,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
     .#{c4p-settings.$carbon-prefix}--pagination {
       // newer version of carbon pagination has scroll which doesn't make any sense, removing it
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-      overflow-x: unset;
+      overflow-inline: unset;
     }
   }
 }

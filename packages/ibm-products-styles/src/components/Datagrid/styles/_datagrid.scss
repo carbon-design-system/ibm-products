@@ -322,7 +322,7 @@
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     block-size: 100%;
     inline-size: 100%;
-    overflow-x: auto;
+    overflow-inline: auto;
   }
 
   .#{$block-class}-filter-panel
@@ -509,7 +509,7 @@
 
 .#{$block-class}__grid-container
   table.#{$block-class}__table-simple.#{c4p-settings.$carbon-prefix}--data-table.#{$block-class}__table-is-resizing {
-  overflow-y: hidden;
+  overflow-block: hidden;
 }
 
 .#{$block-class}__resizableColumn {
@@ -661,7 +661,7 @@
   overflow: auto;
   inline-size: 100%;
   max-block-size: 100%;
-  overflow-y: auto;
+  overflow-block: auto;
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -754,7 +754,7 @@
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
   .#{c4p-settings.$carbon-prefix}--batch-actions
   .#{c4p-settings.$carbon-prefix}--batch-actions--active {
-  overflow-x: hidden;
+  overflow-inline: hidden;
 }
 
 .#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
@@ -818,7 +818,7 @@
   inline-size: 100%;
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
-    overflow-x: hidden;
+    overflow-inline: hidden;
   }
 }
 

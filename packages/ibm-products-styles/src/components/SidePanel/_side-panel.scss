@@ -61,7 +61,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}--scrolls {
   overflow: auto;
-  overflow-x: hidden;
+  overflow-inline: hidden;
 }
 
 .#{$block-class} {

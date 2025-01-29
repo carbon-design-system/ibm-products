@@ -1879,7 +1879,6 @@ __metadata:
     framer-motion: "npm:^6.5.1 < 7"
     fs-extra: "npm:^11.2.0"
     glob: "npm:^10.3.10"
-    immutability-helper: "npm:^3.1.1"
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.18.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
@@ -14101,13 +14100,6 @@ __metadata:
   version: 3.0.6
   resolution: "immediate@npm:3.0.6"
   checksum: f9b3486477555997657f70318cc8d3416159f208bec4cca3ff3442fd266bc23f50f0c9bd8547e1371a6b5e82b821ec9a7044a4f7b944798b25aa3cc6d5e63e62
-  languageName: node
-  linkType: hard
-
-"immutability-helper@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "immutability-helper@npm:3.1.1"
-  checksum: f5cbbd3c39341f6119c0533618dc282c828a752994670f459eebb2ac35f051255963ba1480031230800b19eb05acdd09d2e757e7804d7494eb024eed065a33b5
   languageName: node
   linkType: hard
 

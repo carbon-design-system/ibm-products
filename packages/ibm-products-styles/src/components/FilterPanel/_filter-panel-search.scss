@@ -21,18 +21,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-search;
 
 .#{$block-class} {
   position: relative;
-  margin-bottom: $spacing-05;
+  margin-block-end: $spacing-05;
 }
 
 .#{$block-class}__results {
   position: absolute;
   z-index: utilities.z('dropdown');
-  top: 100%;
-  right: 0;
-  left: 0;
-  /* stylelint-disable-next-line function-no-unknown */
-  max-height: to-rem(320px);
   padding: $spacing-03;
   background-color: $layer;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  /* stylelint-disable-next-line function-no-unknown */
+  max-block-size: to-rem(320px);
   overflow-y: auto;
 }

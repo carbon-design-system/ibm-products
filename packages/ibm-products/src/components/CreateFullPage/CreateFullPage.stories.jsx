@@ -75,6 +75,11 @@ export default {
     children: {
       control: false,
     },
+    headingLevel: {
+      control: { type: 'select' },
+      options: [1, 2, 3, 4, 5, 6],
+      description: 'Sets the heading level for the title element ',
+    },
   },
 };
 

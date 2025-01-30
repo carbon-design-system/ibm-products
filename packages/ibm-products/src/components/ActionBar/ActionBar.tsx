@@ -12,7 +12,6 @@ import React, {
   Ref,
   ForwardedRef,
   RefObject,
-  useEffect,
 } from 'react';
 
 // Other standard imports.
@@ -80,7 +79,7 @@ interface ActionBarProps extends PropsWithChildren {
   /**
    * onItemCountChange - event reporting maxWidth
    */
-  onWidthChange?: (sizes: { minWidth: number; maxWidth: number }) => void;
+  onWidthChange?: (sizes?: { minWidth?: number; maxWidth?: number }) => void;
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */
@@ -126,20 +125,13 @@ export let ActionBar = React.forwardRef(
     const _offsetRef = useRef<HTMLDivElement>(null);
     const offsetRef = overflowMenuRef || _offsetRef;
     const _items = actions.map((action) => ({ id: action?.key, ...action }));
-    const { visibleItems, hiddenItems, itemRefHandler, maxWidth, minWidth } =
-      useOverflowItems(
-        _items,
-        localRef as RefObject<HTMLDivElement>,
-        offsetRef as RefObject<HTMLDivElement>,
-        maxVisible
-      );
-
-    useEffect(() => {
-      onWidthChange?.({
-        minWidth: minWidth,
-        maxWidth: maxWidth,
-      });
-    }, [maxWidth, minWidth, onWidthChange]);
+    const { visibleItems, hiddenItems, itemRefHandler } = useOverflowItems(
+      _items,
+      localRef as RefObject<HTMLDivElement>,
+      offsetRef as RefObject<HTMLDivElement>,
+      maxVisible,
+      onWidthChange
+    );
 
     // Calculate the displayed items
     const displayedItems = visibleItems.map(({ key, id, ...rest }) => (

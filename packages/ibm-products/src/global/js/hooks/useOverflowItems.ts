@@ -17,11 +17,17 @@ export const useOverflowItems = <T extends Item>(
   containerRef: RefObject<HTMLDivElement>,
   offsetRef?: RefObject<HTMLDivElement>,
   maxItems?: number,
-  onChange?: (hiddenItems: T[]) => void
+  onChange?: (value: {
+    hiddenItems?: T[];
+    minWidth?: number;
+    maxWidth?: number;
+  }) => void
 ) => {
   const itemsRef = useRef<Map<string, number> | null>(null);
   const [maxWidth, setMaxWidth] = useState(0);
   const visibleItemCount = useRef<number>(0);
+  const minWidthRef = useRef<number>();
+  const requiredWidthRef = useRef<number>();
   const offset = offsetRef?.current?.offsetWidth || 0;
 
   const handleResize = () => {
@@ -95,20 +101,29 @@ export const useOverflowItems = <T extends Item>(
 
   const visibleItems = getVisibleItems();
   const hiddenItems = items.slice(visibleItems.length);
-  // only call the change handler when the number of visible items has changed
-  if (visibleItems.length !== visibleItemCount.current) {
-    visibleItemCount.current = visibleItems.length;
-    onChange?.(hiddenItems);
-  }
-
   const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
   const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+
+  // only call the change handler when the number of visible items has changed
+  if (
+    visibleItems.length !== visibleItemCount.current ||
+    maxWidth !== minWidthRef.current ||
+    requiredWidth !== requiredWidthRef.current
+  ) {
+    visibleItemCount.current = visibleItems.length;
+    minWidthRef.current = maxWidth;
+    requiredWidthRef.current = requiredWidth;
+
+    onChange?.({
+      hiddenItems,
+      minWidth: maxWidth,
+      maxWidth: requiredWidth + firstItemWidth,
+    });
+  }
 
   return {
     visibleItems,
     itemRefHandler,
     hiddenItems,
-    minWidth: maxWidth,
-    maxWidth: requiredWidth + firstItemWidth,
   };
 };

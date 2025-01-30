@@ -120,7 +120,7 @@ export const ConditionBuilderItem = ({
     }
     const propertyId =
       rest['data-name'] == 'valueField' && type
-        ? getValue[type](label, config)
+        ? getValue(type, label, config)
         : labelText;
 
     return {

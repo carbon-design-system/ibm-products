@@ -13,7 +13,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import { Layer, Toggle } from '@carbon/react';
+import { Heading, Layer, Section, Toggle } from '@carbon/react';
 import React, { ReactNode, useRef, useState } from 'react';
 
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
@@ -112,6 +112,12 @@ export interface OptionsTileProps {
    * Provide a text explaining why the OptionsTile is in warning state.
    */
   warnText?: string;
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: number;
 }
 
 // Default values for props
@@ -138,6 +144,7 @@ export let OptionsTile = React.forwardRef(
       titleId: userDefinedTitleId,
       warn,
       warnText,
+      headingLevel = 1,
       ...rest
     }: OptionsTileProps,
     ref: React.Ref<HTMLDivElement>
@@ -309,17 +316,17 @@ export let OptionsTile = React.forwardRef(
       }
 
       return (
-        <div className={`${blockClass}__heading`}>
-          <h6 id={titleId} className={`${blockClass}__title`}>
+        <Section className={`${blockClass}__heading`} level={headingLevel}>
+          <Heading id={titleId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </Heading>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
               {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
-        </div>
+        </Section>
       );
     }
 

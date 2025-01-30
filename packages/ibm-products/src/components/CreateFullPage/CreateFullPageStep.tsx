@@ -18,7 +18,7 @@ import React, {
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { Column, FormGroup, Grid } from '@carbon/react';
+import { Column, FormGroup, Grid, Heading, Section } from '@carbon/react';
 import { StepsContext, StepNumberContext } from './CreateFullPage';
 import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 import pconsole from '../../global/js/utils/pconsole';
@@ -157,7 +157,7 @@ export let CreateFullPageStep = forwardRef(
     const [shouldIncludeStep, setShouldIncludeStep] = useState<boolean>();
     const previousState = usePreviousValue({
       currentStep: stepsContext?.currentStep,
-    });
+    }) as unknown as { currentStep: number | undefined };
 
     useRetrieveStepData({
       invalid,
@@ -214,7 +214,7 @@ export let CreateFullPageStep = forwardRef(
     };
 
     return stepsContext ? (
-      <section
+      <Section
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -230,14 +230,20 @@ export let CreateFullPageStep = forwardRef(
         <Grid>
           <Column {...span}>
             <Grid>
-              <Column className={`${blockClass}-title`} as="h5" {...span}>
+              <Column className={`${blockClass}-title`} as={Heading} {...span}>
                 {title}
               </Column>
 
               {subtitle && (
-                <Column className={`${blockClass}-subtitle`} as="h6" {...span}>
-                  {subtitle}
-                </Column>
+                <Section>
+                  <Column
+                    className={`${blockClass}-subtitle`}
+                    as={Heading}
+                    {...span}
+                  >
+                    {subtitle}
+                  </Column>
+                </Section>
               )}
 
               {renderDescription()}
@@ -255,7 +261,7 @@ export let CreateFullPageStep = forwardRef(
         ) : (
           children
         )}
-      </section>
+      </Section>
     ) : (
       pconsole.warn(
         `You have tried using a ${componentName} component outside of a CreateFullPage. This is not allowed. ${componentName}s should always be children of the CreateFullPage`

@@ -165,6 +165,12 @@ export interface TearsheetProps extends PropsWithChildren {
    */
   title?: ReactNode;
 
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: number;
+
   /** @deprecated */
   /**
    * The position of the top of tearsheet in the viewport. The 'normal'

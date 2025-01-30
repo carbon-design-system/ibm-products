@@ -31,9 +31,11 @@ import {
   Button,
   ComposedModal,
   Layer,
+  Section,
   ModalHeader,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Heading,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -178,6 +180,12 @@ interface TearsheetShellProps extends PropsWithChildren {
 
   verticalPosition?: 'normal' | 'lower';
 
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: number;
+
   // Deprecated props
   /**
    * @deprecated Property replaced by `decorator`
@@ -268,6 +276,7 @@ export const TearsheetShell = React.forwardRef(
       title,
       verticalPosition,
       launcherButtonRef,
+      headingLevel = 1,
       // Collect any other property values passed in.
       ...rest
     }: TearsheetShellProps & CloseIconDescriptionTypes,
@@ -476,15 +485,17 @@ export const TearsheetShell = React.forwardRef(
                     <Wrap element="h2" className={`${bcModalHeader}__label`}>
                       {label}
                     </Wrap>
-                    <Wrap
-                      element="h3"
-                      className={cx(
-                        `${bcModalHeader}__heading`,
-                        `${bc}__heading`
-                      )}
-                    >
-                      {title}
-                    </Wrap>
+                    <Section level={headingLevel}>
+                      <Wrap
+                        element={Heading}
+                        className={cx(
+                          `${bcModalHeader}__heading`,
+                          `${bc}__heading`
+                        )}
+                      >
+                        {title}
+                      </Wrap>
+                    </Section>
                     <Wrap
                       className={`${bc}__header-description`}
                       title={titleText}

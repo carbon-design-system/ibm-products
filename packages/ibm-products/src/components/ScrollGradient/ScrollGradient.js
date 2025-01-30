@@ -1,25 +1,19 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg, carbon } from '../../settings';
-import { throttle } from '../../global/js/utils/throttle';
-import {
-  ScrollDirection,
-  ScrollStates,
-  getScrollState,
-  useIsOverflow,
-} from './constants';
+import { ScrollStates, useIsOverflow } from './constants';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 const blockClass = `${pkg.prefix}--scroll-gradient`;
 const componentName = 'ScrollGradient';
@@ -49,6 +43,11 @@ export let ScrollGradient = React.forwardRef(
     },
     ref
   ) => {
+    const intersectionStartRef = useRef();
+    const intersectionEndRef = useRef();
+    const intersectionLeftRef = useRef();
+    const intersectionRightRef = useRef();
+
     const scrollContainer = useRef(undefined);
     const contentChildrenContainer = useRef(undefined);
     const { xScrollable, yScrollable } = useIsOverflow(scrollContainer);
@@ -64,10 +63,8 @@ export let ScrollGradient = React.forwardRef(
           contentChildrenContainer.current.offsetHeight
         : 0;
 
-    const [verticalPosition, setVerticalPosition] = useState(ScrollStates.NONE);
-    const [horizontalPosition, setHorizontalPosition] = useState(
-      ScrollStates.NONE
-    );
+    const [verticalPosition] = useState(ScrollStates.NONE);
+    const [horizontalPosition] = useState(ScrollStates.NONE);
 
     const startVerticalRef = useRef(null);
     const startHorizontalRef = useRef(null);
@@ -91,35 +88,66 @@ export let ScrollGradient = React.forwardRef(
       endHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, ${color} 10%, transparent)`;
     }, [color, gradientRight, gradientBottom]);
 
-    const updateScrollState = throttle(() => {
-      const updatedVerticalVal = getScrollState(
-        scrollContainer.current,
-        ScrollDirection.Y
-      );
-      const updatedHorizontalVal = getScrollState(
-        scrollContainer.current,
-        ScrollDirection.X
-      );
-      setVerticalPosition(updatedVerticalVal);
-      setHorizontalPosition(updatedHorizontalVal);
-    }, 150);
+    const setGradientOnIntersection = (entry, gradientRef) => {
+      if (gradientRef.current) {
+        if (entry.isIntersecting) {
+          gradientRef.current.style.opacity = 0;
+          gradientRef.current.style.display = 'none';
+          gradientRef?.current.setAttribute('aria-hidden', false);
+        } else {
+          gradientRef.current.style.opacity = 1;
+          gradientRef.current.style.display = 'block';
+          gradientRef?.current.setAttribute('aria-hidden', true);
+        }
+      }
+    };
 
-    const scrollHandler = useCallback(
-      (event) => {
-        onScroll(event);
-        updateScrollState();
-      },
-      [onScroll, updateScrollState]
-    );
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target.hasAttribute('data-start-vertical')) {
+              setGradientOnIntersection(entry, startVerticalRef);
+            }
+            if (entry.target.hasAttribute('data-end-vertical')) {
+              setGradientOnIntersection(entry, endVerticalRef);
+            }
+            if (entry.target.hasAttribute('data-start-horizontal')) {
+              setGradientOnIntersection(entry, startHorizontalRef);
+            }
+            if (entry.target.hasAttribute('data-end-horizontal')) {
+              setGradientOnIntersection(entry, endHorizontalRef);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      );
+
+      observer.observe(intersectionStartRef.current);
+      observer.observe(intersectionEndRef.current);
+      observer.observe(intersectionLeftRef.current);
+      observer.observe(intersectionRightRef.current);
+
+      const startVerticalRefValue = intersectionStartRef.current;
+      const endVerticalRefValue = intersectionEndRef.current;
+      const startHorizontalRefValue = intersectionLeftRef.current;
+      const endHorizontalRefValue = intersectionRightRef.current;
+      return () => {
+        observer.unobserve(startVerticalRefValue);
+        observer.unobserve(endVerticalRefValue);
+        observer.unobserve(startHorizontalRefValue);
+        observer.unobserve(endHorizontalRefValue);
+      };
+    }, []);
 
     const setRefs = (element) => {
       scrollContainer.current = element;
       getScrollElementRef(element);
     };
-
-    useEffect(() => {
-      scrollHandler();
-    }, [scrollHandler]);
 
     return (
       <div
@@ -140,17 +168,21 @@ export let ScrollGradient = React.forwardRef(
       >
         {/* eslint-disable jsx-a11y/no-noninteractive-tabindex */}
         <div
-          onScroll={scrollHandler}
+          onScroll={onScroll}
           ref={setRefs}
           className={cx(`${blockClass}__content`, scrollElementClassName)}
           tabIndex={0}
         >
+          <span ref={intersectionStartRef} data-start-vertical />
+          <span ref={intersectionLeftRef} data-start-horizontal />
           <div
             ref={contentChildrenContainer}
             className={`${blockClass}__content-children`}
           >
             {children}
           </div>
+          <span ref={intersectionEndRef} data-end-vertical />
+          <span ref={intersectionRightRef} data-end-horizontal />
         </div>
 
         {/* Gradient elements */}

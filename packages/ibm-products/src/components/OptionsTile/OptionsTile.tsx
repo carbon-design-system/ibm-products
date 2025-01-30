@@ -21,8 +21,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { useControllableState } from '../../global/js/hooks';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import {
+  useControllableState,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--options-tile`;

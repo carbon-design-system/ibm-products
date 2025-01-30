@@ -20,13 +20,20 @@ jobs:
           cache: yarn
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 #4.2.0
         with:
           path: '**/node_modules'
           key: check-gallery-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
 
       - name: Install
         run: yarn
+
+      - name: Generate token
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Check gallery
         id: up_to_date
@@ -47,7 +54,7 @@ jobs:
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          token: ${{ secrets.generate_token.outputs.token }}
           commit-message: 'chore: update example gallery'
           committer: GitHub <noreply@github.com>
           author:

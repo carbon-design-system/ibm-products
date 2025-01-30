@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { TextAreaProps, TextInputProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/react/icons';
+import { CarbonIconType } from '@carbon/icons-react';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 import {
   Dispatch,
@@ -125,6 +125,7 @@ export type Property = {
   id: string;
   label: string;
   icon?: CarbonIconType;
+  description?: string;
 } & (
   | PropertyConfig['option']
   | PropertyConfig['text']

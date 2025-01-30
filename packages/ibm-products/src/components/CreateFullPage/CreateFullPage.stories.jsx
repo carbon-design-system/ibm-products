@@ -94,6 +94,7 @@ const defaultFullPageProps = {
     "If you cancel, the information you have entered won't be saved.",
   modalDangerButtonText: 'Cancel partition',
   modalSecondaryButtonText: 'Return to form',
+  headingLevel: 1,
   onClickInfluencerStep: (step) => console.log('Step: ', step),
   onRequestSubmit: action('Submit handler called'),
   onClose: action('Close handler called'),

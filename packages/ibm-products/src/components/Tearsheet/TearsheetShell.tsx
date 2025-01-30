@@ -15,7 +15,6 @@ import React, {
   ForwardedRef,
   MutableRefObject,
   RefObject,
-  useCallback,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
@@ -26,10 +25,12 @@ import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 import { deprecateProp } from '../../global/js/utils/props-helper';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
 // Carbon and package components we use.
 import {
   Button,
   ComposedModal,
+  DefinitionTooltip,
   Layer,
   Section,
   ModalHeader,
@@ -41,8 +42,8 @@ import {
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
 import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
-import { usePreviousValue } from '../../global/js/hooks';
 import { TearsheetAction } from './Tearsheet';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -60,6 +61,14 @@ interface TearsheetShellProps extends PropsWithChildren {
    * An optional class or classes to be added to the outermost element.
    */
   className?: string;
+
+  /**
+   * The accessibility title for the close icon (if shown).
+   *
+   * **Note:** This prop is only required if a close icon is shown, i.e. if
+   * there are a no navigation actions and/or hasCloseIcon is true.
+   */
+  closeIconDescription?: string;
 
   /**
    * Used to track the current step on components which use `StepsContext` and `TearsheetShell`
@@ -193,16 +202,6 @@ interface TearsheetShellProps extends PropsWithChildren {
   slug?: ReactNode;
 }
 
-export type CloseIconDescriptionTypes =
-  | {
-      hasCloseIcon?: false;
-      closeIconDescription?: string;
-    }
-  | {
-      hasCloseIcon: true;
-      closeIconDescription: string;
-    };
-
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 // Global data structure to communicate the state of tearsheet stacking
@@ -255,7 +254,7 @@ export const TearsheetShell = React.forwardRef(
       ariaLabel,
       children,
       className,
-      closeIconDescription,
+      closeIconDescription = 'Close',
       currentStep,
       description,
       hasCloseIcon,
@@ -279,7 +278,7 @@ export const TearsheetShell = React.forwardRef(
       headingLevel = 1,
       // Collect any other property values passed in.
       ...rest
-    }: TearsheetShellProps & CloseIconDescriptionTypes,
+    }: TearsheetShellProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const carbonPrefix = usePrefix();
@@ -297,13 +296,13 @@ export const TearsheetShell = React.forwardRef(
     );
     const modalRefValue = modalRef.current;
 
-    // Function to strip html tags out of a string.
-    const stripTags = useCallback(
-      (input) => input.replace(/<\/?[^>]+(>|$)/g, ''),
-      []
+    const descriptionRef = useRef<HTMLSpanElement>(null);
+    const isOverflowing = checkHeightOverflow(descriptionRef.current);
+    const descriptionContent = (
+      <span ref={descriptionRef} className={`${bc}__description-text`}>
+        {description}
+      </span>
     );
-
-    const titleText = stripTags(String(description));
     const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
@@ -393,6 +392,28 @@ export const TearsheetShell = React.forwardRef(
       };
     }, [open, size]);
 
+    const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
+
+    useIsomorphicEffect(() => {
+      const setScaleValues = () => {
+        if (!areAllSameSizeVariant()) {
+          return {
+            [`--${bc}--stacking-scale-factor-single`]: 1,
+            [`--${bc}--stacking-scale-factor-double`]: 1,
+          };
+        }
+        return {
+          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
+        };
+      };
+      if (modalRef.current) {
+        Object.entries(setScaleValues()).map(([key, value]) => {
+          modalRef.current.style.setProperty(key, String(value));
+        });
+      }
+    }, [modalRef, width]);
+
     if (position <= depth) {
       // Include a modal header if and only if one or more of these is given.
       // We can't use a Wrap for the ModalHeader because ComposedModal requires
@@ -410,18 +431,6 @@ export const TearsheetShell = React.forwardRef(
 
       const areAllSameSizeVariant = () => new Set(stack.sizes).size === 1;
 
-      const setScaleValues = () => {
-        if (!areAllSameSizeVariant()) {
-          return {
-            [`--${bc}--stacking-scale-factor-single`]: 1,
-            [`--${bc}--stacking-scale-factor-double`]: 1,
-          };
-        }
-        return {
-          [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
-          [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
-        };
-      };
       return renderPortalUse(
         <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
           <ComposedModal
@@ -444,7 +453,6 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--has-close`]: effectiveHasCloseIcon,
             })}
             decorator={decorator || deprecated_slug}
-            style={setScaleValues()}
             containerClassName={cx(`${bc}__container`, {
               [`${bc}__container--lower`]: verticalPosition === 'lower',
               [`${bc}__container--mixed-size-stacking`]:
@@ -482,25 +490,33 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
-                      {label}
-                    </Wrap>
                     <Section level={headingLevel}>
-                      <Wrap
-                        element={Heading}
-                        className={cx(
-                          `${bcModalHeader}__heading`,
-                          `${bc}__heading`
-                        )}
-                      >
-                        {title}
+                      <Wrap element="h2" className={`${bcModalHeader}__label`}>
+                        {label}
                       </Wrap>
+                      <Section>
+                        <Wrap
+                          element={Heading}
+                          className={cx(
+                            `${bcModalHeader}__heading`,
+                            `${bc}__heading`
+                          )}
+                        >
+                          {title}
+                        </Wrap>
+                      </Section>
                     </Section>
-                    <Wrap
-                      className={`${bc}__header-description`}
-                      title={titleText}
-                    >
-                      {description}
+                    <Wrap className={`${bc}__header-description`}>
+                      {isOverflowing ? (
+                        <DefinitionTooltip
+                          definition={description}
+                          className={`${bc}__description-tooltip`}
+                        >
+                          {descriptionContent}
+                        </DefinitionTooltip>
+                      ) : (
+                        descriptionContent
+                      )}
                     </Wrap>
                   </Wrap>
                   <Wrap className={`${bc}__header-actions`}>
@@ -655,9 +671,7 @@ TearsheetShell.propTypes = {
    * there are a no navigation actions and/or hasCloseIcon is true.
    */
   /**@ts-ignore*/
-  closeIconDescription: PropTypes.string.isRequired.if(
-    ({ actions, hasCloseIcon }) => tearsheetHasCloseIcon(actions, hasCloseIcon)
-  ),
+  closeIconDescription: PropTypes.string,
 
   /**
    * Optional prop that allows you to pass any component.

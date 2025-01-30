@@ -5,8 +5,8 @@
 
 .main--content {
   display: flex;
-  width: 100%;
-  height: calc(100vh - #{$spacing-09});
+  inline-size: 100%;
+  block-size: calc(100vh - #{$spacing-09});
   align-items: center;
   justify-content: center;
   margin-top: $spacing-09;

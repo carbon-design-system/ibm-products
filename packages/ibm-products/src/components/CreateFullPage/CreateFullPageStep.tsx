@@ -235,15 +235,11 @@ export let CreateFullPageStep = forwardRef(
               </Column>
 
               {subtitle && (
-                <Section>
-                  <Column
-                    className={`${blockClass}-subtitle`}
-                    as={Heading}
-                    {...span}
-                  >
+                <Column as={Section} {...span}>
+                  <Heading className={`${blockClass}-subtitle`}>
                     {subtitle}
-                  </Column>
-                </Section>
+                  </Heading>
+                </Column>
               )}
 
               {renderDescription()}

@@ -61,7 +61,11 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}--scrolls {
   overflow: auto;
-  overflow-inline: hidden;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class} {

@@ -16,7 +16,11 @@
   border-inline-start: 2px solid $background-brand;
   inline-size: calc(100% - #{$spacing-07});
   margin-inline-start: $spacing-07;
-  overflow-inline: hidden;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
 
   tr.#{variables.$block-class}__carbon-nested-row {
     border-inline-start: none;

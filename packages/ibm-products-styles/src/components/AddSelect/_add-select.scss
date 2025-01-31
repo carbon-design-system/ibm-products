@@ -199,7 +199,11 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow-inline: auto;
+  overflow-x: auto;
+
+  @supports (overflow-inline: auto) {
+    overflow-inline: auto;
+  }
 
   .#{$block-class}__selections-form-control-label-wrapper {
     margin-inline-start: $spacing-03;

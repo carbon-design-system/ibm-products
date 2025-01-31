@@ -33,5 +33,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-search;
   inset-inline: 0;
   /* stylelint-disable-next-line function-no-unknown */
   max-block-size: to-rem(320px);
-  overflow-block: auto;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }

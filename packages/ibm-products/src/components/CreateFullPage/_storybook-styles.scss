@@ -18,7 +18,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
   block-size: 100vh;
   box-shadow: 0 0 4px 1px $border-subtle-01;
   color: $text-primary;
-  overflow-block: auto;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$story-class}__step-fieldset--no-label
@@ -72,7 +75,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 
 .#{$story-class}__viewport .#{$story-class}__content-container {
   block-size: 100%;
-  overflow-block: auto;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$story-class}__viewport

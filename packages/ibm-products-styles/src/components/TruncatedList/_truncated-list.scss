@@ -27,11 +27,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--truncated-list;
 }
 
 .#{$block-class}--expanded .#{$block-class}__list {
-  overflow-block: auto;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$block-class}--expanded-all .#{$block-class}__list {
-  overflow-block: hidden;
+  overflow-y: hidden;
+  @supports (overflow-block: hidden) {
+    overflow-block: hidden;
+  }
 }
 
 .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__button {

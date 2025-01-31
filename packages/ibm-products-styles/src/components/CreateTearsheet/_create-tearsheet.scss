@@ -79,7 +79,11 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 
 .#{$create-tearsheet-block-class} .#{$create-tearsheet-block-class}__content {
   min-block-size: 100%;
-  overflow-inline: hidden;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
   padding-block: $spacing-06;
 }
 

@@ -176,7 +176,7 @@ export interface NotificationsPanelProps {
   onDismissSingleNotification?: (prop) => void;
 
   /**
-   * Optional function called after toggling "Do not disturb". Returns the selected value as a boolean.
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange?: (prop) => void;
 
@@ -872,7 +872,7 @@ NotificationsPanel.propTypes = {
   onDismissSingleNotification: PropTypes.func,
 
   /**
-   * Optional function called after toggling "Do not disturb". Returns the selected value as a boolean.
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange: PropTypes.func,
 

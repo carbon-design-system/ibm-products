@@ -2,7 +2,7 @@
 
 .container {
   margin: 50px auto;
-  max-width: 300px;
+  max-inline-size: 300px;
 
   @include type-style('productive-heading-02');
 }

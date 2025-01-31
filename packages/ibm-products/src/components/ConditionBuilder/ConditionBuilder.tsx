@@ -239,6 +239,7 @@ ConditionBuilder.propTypes = {
           'time',
           'custom',
         ]).isRequired,
+        description: PropTypes.string, //will be displayed on hover of property field
         config: PropTypes.shape({
           options: PropTypes.arrayOf(
             PropTypes.shape({
@@ -254,6 +255,7 @@ ConditionBuilder.propTypes = {
               label: PropTypes.string.isRequired,
             })
           ),
+          valueFormatter: PropTypes.func,
         }),
       })
     ),

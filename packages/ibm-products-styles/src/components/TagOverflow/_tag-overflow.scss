@@ -53,14 +53,14 @@ $block-class-modal: #{$block-class}-modal;
 .#{$block-class}__item--tag span {
   display: inline-block;
   overflow: hidden;
-  max-width: $spacing-12;
+  max-inline-size: $spacing-12;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .#{$block-class}__indicator {
   display: inline-block;
-  max-width: $spacing-09;
+  max-inline-size: $spacing-09;
 }
 
 .#{c4p-settings.$carbon-prefix}--popover
@@ -83,15 +83,15 @@ $block-class-modal: #{$block-class}-modal;
 
 .#{$block-class-overflow}--hidden {
   overflow: hidden;
-  max-width: 0;
+  max-inline-size: 0;
   visibility: hidden;
 }
 
 @include mixins.block-wrap('#{$block-class-overflow}__el') {
   &.#{$block-class-overflow}__el {
     // removes the min width in Carbon
-    min-width: initial;
-    text-align: left;
+    min-inline-size: initial;
+    text-align: start;
   }
 
   .#{$block-class-overflow}__trigger {
@@ -118,8 +118,8 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__show-all-tags-link {
-    margin-top: $spacing-03;
     color: $link-inverse;
+    margin-block-start: $spacing-03;
   }
 
   .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
@@ -134,13 +134,13 @@ $block-class-modal: #{$block-class}-modal;
 
     display: block;
     overflow: hidden;
-    min-width: initial;
-    min-height: initial;
     padding: 0;
     border-radius: 0;
     margin: 0;
     background-color: inherit;
     color: inherit;
+    min-block-size: initial;
+    min-inline-size: initial;
   }
 
   .#{$block-class-overflow}__tag
@@ -175,18 +175,17 @@ $block-class-modal: #{$block-class}-modal;
 
   .#{$block-class-modal}__container {
     @include breakpoint(md) {
-      height: 90%;
-      max-height: 450px;
+      block-size: 90%;
+      max-block-size: 450px;
     }
   }
 
   .#{$block-class-modal}__search {
-    margin-top: $spacing-05;
-    margin-bottom: 0;
+    margin-block: $spacing-05 0;
   }
 
   .#{$block-class-modal}__header {
-    padding-right: 0;
-    margin-right: $spacing-05;
+    margin-inline-end: $spacing-05;
+    padding-inline-end: 0;
   }
 }

@@ -13,21 +13,20 @@
 // used for tables within a expandable row
 .#{variables.$block-class}__expanded-row
   .#{c4p-settings.$carbon-prefix}--data-table-container {
-  width: calc(100% - #{$spacing-07});
-  border-left: 2px solid $background-brand;
-  margin-left: $spacing-07;
+  border-inline-start: 2px solid $background-brand;
+  inline-size: calc(100% - #{$spacing-07});
+  margin-inline-start: $spacing-07;
   overflow-x: hidden;
 
   tr.#{variables.$block-class}__carbon-nested-row {
-    border-left: none;
+    border-inline-start: none;
   }
 }
 
 .#{variables.$block-class}__expanded-row
   .#{c4p-settings.$carbon-prefix}--data-table-container
   th {
-  padding-top: 0;
-  padding-bottom: 0;
-  border-top-color: $layer-accent-01;
   background-color: $layer-accent-01;
+  border-block-start-color: $layer-accent-01;
+  padding-block: 0;
 }

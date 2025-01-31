@@ -30,6 +30,7 @@ interface ConditionBuilderButtonProps {
   isInvalid?: boolean;
   wrapperClassName?: string;
   tabIndex?: number;
+  description?: string;
 }
 
 export const ConditionBuilderButton = ({
@@ -48,8 +49,11 @@ export const ConditionBuilderButton = ({
   isInvalid,
   wrapperClassName,
   tabIndex,
+  description,
   ...rest
 }: ConditionBuilderButtonProps) => {
+  const tooltipText = description || label;
+
   const carbonPrefix = usePrefix();
   const Button = () => {
     const dataName = rest['data-name'] ?? '';
@@ -81,9 +85,9 @@ export const ConditionBuilderButton = ({
     );
   };
 
-  return hideLabel || showToolTip ? (
+  return hideLabel || showToolTip || description ? (
     <Tooltip
-      label={label}
+      label={tooltipText}
       align={tooltipAlign}
       className={`${wrapperClassName} ${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       {...wrapperProps}

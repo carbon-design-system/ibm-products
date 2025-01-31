@@ -1,3 +1,5 @@
+/* stylelint-disable carbon/type-use */
+
 //
 // Copyright IBM Corp. 2020, 2020
 //
@@ -12,8 +14,8 @@
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 
 .#{$storybook-block-class}--full-height {
-  height: 100vh;
-  max-height: var(--doc-story-height); // set in core if needed;
+  block-size: 100vh;
+  max-block-size: var(--doc-story-height); // set in core if needed;
 }
 
 .#{$storybook-block-class}__add {
@@ -22,11 +24,15 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 
 .#{$storybook-block-class}__header-panel {
   padding: $spacing-10 $spacing-05 0;
-  /* stylelint-disable-next-line carbon/type-use */
   font-weight: bold;
+  line-height: 1.4;
   text-align: center;
 }
 
 .cds--header__global {
   z-index: 2;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // block-size: 100%;
 }

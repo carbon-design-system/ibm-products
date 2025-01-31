@@ -32,7 +32,7 @@ import {
   useIsomorphicEffect,
   usePreviousValue,
 } from '../../global/js/hooks';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
+import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';

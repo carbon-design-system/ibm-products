@@ -17,6 +17,7 @@ import {
   HeaderGlobalAction,
 } from '@carbon/react';
 import { User, Notification, Switcher } from '@carbon/react/icons';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
@@ -34,7 +35,7 @@ const dataOptions = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/Notifications/NotificationsPanel',
+  title: 'IBM Products/Components/Notifications panel/NotificationsPanel',
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {
@@ -46,6 +47,11 @@ export default {
       control: { type: 'select', labels: Object.keys(dataOptions) },
       options: Object.values(dataOptions).map((_k, i) => i),
       mapping: Object.values(dataOptions),
+    },
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/notification-panel/usage/" />
+      ),
     },
   },
 };
@@ -159,6 +165,8 @@ const Template = (args) => {
           <HeaderPanel expanded={userOpen}>
             <div className={`${storyBlockClass}__header-panel`}>
               User account
+              <br />
+              example panel
             </div>
           </HeaderPanel>
           {/**
@@ -232,6 +240,8 @@ const Template = (args) => {
           <HeaderPanel expanded={switcherOpen}>
             <div className={`${storyBlockClass}__header-panel`}>
               App switcher
+              <br />
+              example panel
             </div>
           </HeaderPanel>
         </HeaderGlobalBar>

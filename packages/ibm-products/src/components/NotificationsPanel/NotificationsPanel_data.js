@@ -39,6 +39,7 @@ const data = [
     title: 'System alert',
     description: 'Email classification was exported successfully.',
     timestamp: new Date(currentDate.getTime() - 11 * msInOneMinute),
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -47,6 +48,7 @@ const data = [
     title: 'IBM Cloud Pak for Automation Success',
     description: 'Successfully connected cartridge',
     timestamp: new Date(currentDate.getTime() - 120 * msInOneMinute),
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -55,6 +57,7 @@ const data = [
     title: 'Successfully connected LogDNA',
     description: 'App connection succeeded',
     timestamp: yesterdayDate,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -63,6 +66,7 @@ const data = [
     title: 'Cloud Foundry app memory',
     description: 'Allocated app memory low',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -74,6 +78,7 @@ const data = [
       url: 'https://www.carbondesignsystem.com',
     },
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -83,6 +88,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -92,6 +98,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -101,6 +108,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -110,6 +118,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -119,6 +128,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -128,6 +138,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -137,6 +148,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -146,6 +158,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
   {
@@ -155,6 +168,7 @@ const data = [
     description:
       'Not able to establish connection with provided cluster. Please check your logs and memory allocation to resolve this issue further.',
     timestamp: dayBeforeYesterday,
+    unread: false,
     onNotificationClick: action(`Clicked on notification`),
   },
 ];

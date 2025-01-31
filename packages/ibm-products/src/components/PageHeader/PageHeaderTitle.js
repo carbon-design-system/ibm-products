@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { DefinitionTooltip, SkeletonText } from '@carbon/react';
 import { EditInPlace } from '../EditInPlace';
-import { checkWidthOverflow } from '../../global/js/utils/checkForOverflow';
+import { useOverflowString } from '../../global/js/hooks/useOverflowString';
 
 /**
  *
@@ -41,7 +41,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   let isEditable = !!onSave;
 
   const titleRef = useRef();
-  const isEllipsisApplied = checkWidthOverflow(titleRef.current);
+  const isEllipsisApplied = useOverflowString(titleRef, 'WIDTH');
 
   if (text || !content) {
     if (text === undefined && typeof title === 'string') {

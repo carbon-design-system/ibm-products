@@ -324,6 +324,14 @@ export let NotificationsPanel = React.forwardRef(
       onClickOutside?.();
     });
 
+    const handleKeydown = (event) => {
+      event.stopPropagation();
+      if (event.key === 'Escape') {
+        setRender(false);
+        onClickOutside?.();
+      }
+    };
+
     useEffect(() => {
       // initialize the notification panel to open
       if (open) {
@@ -623,6 +631,7 @@ export let NotificationsPanel = React.forwardRef(
         <div
           role="dialog"
           aria-label="Notification Panel"
+          onKeyDown={handleKeydown}
           tabIndex={0}
           {
             // Pass through any other property values as HTML attributes.

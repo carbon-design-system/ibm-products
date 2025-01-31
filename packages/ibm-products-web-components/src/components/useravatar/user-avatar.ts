@@ -17,7 +17,6 @@ import styles from './user-avatar.scss?lit';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import User from '@carbon/web-components/es/icons/user/16';
 
-const blockClass = `${prefix}--user-avatar`;
 /**
  * Useravatar.
  *

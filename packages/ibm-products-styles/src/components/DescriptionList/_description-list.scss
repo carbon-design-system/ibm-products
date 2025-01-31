@@ -17,7 +17,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--description-list;
 $carbon-block-class: #{c4p-settings.$carbon-prefix}--structured-list;
 
 .#{$block-class} .#{$carbon-block-class} {
-  margin-bottom: $spacing-07;
+  margin-block-end: $spacing-07;
 }
 
 // ROW /////////////////////////
@@ -51,28 +51,28 @@ $carbon-block-class: #{c4p-settings.$carbon-prefix}--structured-list;
 }
 
 .#{$block-class} .#{$block-class}__body .#{$block-class}__cell:first-of-type {
-  width: 1%;
-  padding-left: 0;
+  inline-size: 1%;
+  padding-inline-start: 0;
   white-space: nowrap;
 }
 
 .#{$block-class} .#{$block-class}__body .#{$block-class}__cell:last-of-type {
-  padding-right: 0;
   color: $text-primary;
+  padding-inline-end: 0;
 }
 
 .#{$block-class}
   .#{$block-class}__body
   .#{$block-class}__row:first-of-type
   > .#{$block-class}__cell {
-  padding-top: 0;
+  padding-block-start: 0;
 }
 
 .#{$block-class}
   .#{$block-class}__body
   .#{$block-class}__row:last-of-type
   > .#{$block-class}__cell {
-  padding-bottom: 0;
+  padding-block-end: 0;
 }
 
 .#{$block-class} .#{$block-class}__body .#{$block-class}__cell ul {
@@ -80,7 +80,7 @@ $carbon-block-class: #{c4p-settings.$carbon-prefix}--structured-list;
 }
 
 .#{$block-class} .#{$block-class}__body .#{$block-class}__cell ul > li {
-  margin-bottom: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 // LG SIZE /////////////////////////

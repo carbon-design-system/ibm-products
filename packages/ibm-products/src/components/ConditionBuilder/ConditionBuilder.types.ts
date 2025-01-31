@@ -90,7 +90,9 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: object;
+  config: {
+    valueFormatter?: (value: string) => string;
+  };
 };
 
 export type PropertyConfigTime = {
@@ -108,6 +110,7 @@ export type PropertyConfigCustom = {
       label: string;
       id: string;
     }[];
+    valueFormatter?: (value: string) => string;
   };
 };
 
@@ -125,6 +128,7 @@ export type Property = {
   id: string;
   label: string;
   icon?: CarbonIconType;
+  description?: string;
 } & (
   | PropertyConfig['option']
   | PropertyConfig['text']

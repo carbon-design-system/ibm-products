@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [litStyleLoader(), litTemplateLoader()],
   test: {
     environment: 'happy-dom',
-    include: ['./src/**/*.{test,spec}.{js,ts}'],
+    include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
@@ -21,6 +21,12 @@ export default defineConfig({
       enabled: true,
       headless: true,
       name: 'chromium',
+    },
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*'],
+      exclude: ['src/**/*.stories.{js,ts}'],
+      reporter: ['text', 'html'],
     },
   },
 });

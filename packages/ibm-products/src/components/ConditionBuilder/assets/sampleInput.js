@@ -492,6 +492,7 @@ export const inputData = {
       label: 'Continent',
       icon: Earth,
       type: 'option',
+      description: 'Continent',
       config: {
         options: [
           {
@@ -660,6 +661,10 @@ export const inputData = {
       config: {
         component: CustomInput,
         operators: customOperators,
+        valueFormatter: (value) => {
+          // add any customization to the value to be populated
+          return value;
+        },
       },
     },
   ],

@@ -3,8 +3,8 @@
 @use '@carbon/react/scss/config';
 
 .container {
-  width: 80vw;
-  min-width: 16rem;
+  inline-size: 80vw;
+  min-inline-size: 16rem;
 }
 
 .container .#{config.$prefix}--fieldset.recovery-location {

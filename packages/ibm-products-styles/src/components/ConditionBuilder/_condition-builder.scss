@@ -24,12 +24,6 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 
-// .#{$block-class} {
-//   // TODO: Styles.
-// }
-.#{$block-class} {
-  padding: $spacing-06;
-}
 .#{$block-class}__condition-builder__group {
   display: flex;
 }
@@ -39,18 +33,18 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   flex-flow: row wrap;
 }
 .#{$block-class}__gap {
-  margin-right: $spacing-01;
+  margin-inline-end: $spacing-01;
 }
 .#{$block-class}__gap-bottom {
-  margin-bottom: $spacing-01;
+  margin-block-end: $spacing-01;
 }
 .#{$block-class}__gap-left {
-  margin-left: $spacing-01;
+  margin-inline-start: $spacing-01;
 }
 .#{$block-class}__condition-block {
   display: flex;
-  width: fit-content;
   flex-direction: row;
+  inline-size: fit-content;
 }
 .#{$block-class}__content-container {
   display: flex;
@@ -58,8 +52,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   row-gap: $spacing-02;
 }
 .#{$block-class}__heading {
-  margin-top: $spacing-03;
-  margin-bottom: $spacing-03;
+  margin-block: $spacing-03;
 }
 .#{$block-class}__Hierarchical
   .#{$block-class}__actions-container
@@ -67,11 +60,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
   flex-direction: column;
 }
 .#{$block-class}__group-separator {
-  margin-top: $spacing-02;
+  margin-block-start: $spacing-02;
 }
 .#{$block-class}__add-group,
 .#{$block-class}__group-separator {
-  width: fit-content;
+  inline-size: fit-content;
 }
 .#{$block-class}__tooltip {
   word-break: break-all;

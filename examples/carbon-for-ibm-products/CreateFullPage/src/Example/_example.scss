@@ -15,8 +15,8 @@ $preview-block-class: #{full-page-example}--create-full-page-sandbox;
   legend {
   position: absolute;
   overflow: hidden;
-  width: 1px;
-  height: 1px;
+  inline-size: 1px;
+  block-size: 1px;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;

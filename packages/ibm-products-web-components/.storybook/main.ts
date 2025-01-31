@@ -1,6 +1,5 @@
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
-import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
 const glob = require('fast-glob');
 const stories = glob.sync(
   [
@@ -36,11 +35,7 @@ const config = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [
-        litStyleLoader(),
-        litTemplateLoader(),
-        viteSVGResultCarbonIconLoader(),
-      ],
+      plugins: [litStyleLoader(), litTemplateLoader()],
     });
   },
 };

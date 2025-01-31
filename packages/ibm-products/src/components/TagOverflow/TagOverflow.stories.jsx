@@ -75,6 +75,7 @@ export const TagsWithOverflowCount = Template.bind({});
 TagsWithOverflowCount.args = {
   containerWidth: 250,
   items: fiveTags,
+  onOverflowTagChange: (items) => console.log(items),
 };
 
 export const TagsWithTruncation = Template.bind({});

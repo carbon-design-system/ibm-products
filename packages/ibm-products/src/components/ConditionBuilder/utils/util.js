@@ -112,35 +112,42 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-export const getValue = {
-  text: (value) => value,
-  textarea: (value) => value,
-  time: (value) => value,
-  number: (value) => value,
-  option: (value) => {
-    if (value && typeof value !== 'string') {
-      const selectedValues = Array.isArray(value) ? value : [value];
-      return selectedValues.map((option) => option.label).join(', ');
-    }
+export const getValue = (type, value, config) => {
+  if (config?.valueFormatter && ['date', 'custom'].includes(type)) {
+    return config.valueFormatter(value);
+  } else {
+    const formatters = {
+      text: (value) => value,
+      textarea: (value) => value,
+      time: (value) => value,
+      number: (value) => value,
+      option: (value) => {
+        if (value && typeof value !== 'string') {
+          const selectedValues = Array.isArray(value) ? value : [value];
+          return selectedValues.map((option) => option.label).join(', ');
+        }
 
-    return value;
-  },
-  date: (value) => {
-    if (Array.isArray(value) && value.length > 1) {
-      const start =
-        value?.[0] && !isNaN(new Date(value[0]))
-          ? formatDate(new Date(value[0]))
-          : '';
-      const end =
-        value?.[1] && !isNaN(new Date(value[1]))
-          ? formatDate(new Date(value[1]))
-          : '';
-      return `${start} To ${end}`;
-    } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
-      return formatDate(new Date(value[0]));
-    } else {
-      return value;
-    }
-  },
-  custom: (value) => value,
+        return value;
+      },
+      date: (value) => {
+        if (Array.isArray(value) && value.length > 1) {
+          const start =
+            value?.[0] && !isNaN(new Date(value[0]))
+              ? formatDate(new Date(value[0]))
+              : '';
+          const end =
+            value?.[1] && !isNaN(new Date(value[1]))
+              ? formatDate(new Date(value[1]))
+              : '';
+          return `${start} To ${end}`;
+        } else if (Array.isArray(value) && !isNaN(new Date(value[0]))) {
+          return formatDate(new Date(value[0]));
+        } else {
+          return value;
+        }
+      },
+      custom: (value) => value,
+    };
+    return formatters[type](value, config);
+  }
 };

@@ -11,10 +11,12 @@ import { Close, Help } from '@carbon/react/icons';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
+  MutableRefObject,
   PropsWithChildren,
   ReactNode,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -24,8 +26,11 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { moderate02 } from '@carbon/motion';
 import { pkg } from '../../settings';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import { useWebTerminal } from './hooks';
+import {
+  useIsomorphicEffect,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -87,6 +92,10 @@ export interface WebTerminalProps extends PropsWithChildren {
   webTerminalAriaLabel?: string;
 }
 
+interface HTMLElementStyled extends HTMLDivElement {
+  style: CSSStyleDeclaration;
+}
+
 /**
  * The `WebTerminal` is prompted by the user and is persistent until dismissed. The purpose of a web terminal is to provide users with the ability to type commands manually instead of using the GUI.
  */
@@ -108,6 +117,10 @@ export let WebTerminal = React.forwardRef(
     }: WebTerminalProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const localRef = useRef<HTMLDivElement>();
+    const webTerminalRef = (ref ??
+      localRef) as MutableRefObject<HTMLElementStyled>;
+
     const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
     const [shouldRender, setRender] = useState(open);
@@ -116,6 +129,15 @@ export let WebTerminal = React.forwardRef(
     const webTerminalAnimationName = `${
       open ? 'web-terminal-entrance' : 'web-terminal-exit forwards'
     } ${moderate02}`;
+
+    useIsomorphicEffect(() => {
+      const timeout = setTimeout(() => {
+        if (webTerminalRef.current && !shouldReduceMotion) {
+          webTerminalRef.current.style.animation = webTerminalAnimationName;
+        }
+      }, 0);
+      return () => clearTimeout(timeout);
+    }, [shouldReduceMotion, webTerminalAnimationName, webTerminalRef]);
 
     const showDocumentationLinks = useMemo(
       () => documentationLinks.length > 0,
@@ -164,7 +186,7 @@ export let WebTerminal = React.forwardRef(
           ...rest,
           ...getDevtoolsProps(componentName),
         }}
-        ref={ref}
+        ref={webTerminalRef}
         className={cx([
           blockClass,
           className,
@@ -173,9 +195,6 @@ export let WebTerminal = React.forwardRef(
             [`${blockClass}--closed`]: !open,
           },
         ])}
-        style={{
-          animation: !shouldReduceMotion ? webTerminalAnimationName : '',
-        }}
         onAnimationEnd={onAnimationEnd}
       >
         <header

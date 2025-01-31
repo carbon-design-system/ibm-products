@@ -80,16 +80,17 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}__warning-icon {
-  width: $spacing-05;
   margin: auto $spacing-03;
   color: $support-error;
+  inline-size: $spacing-05;
 }
 
 .#{$block-class}__warning-text {
   @include type.type-style('label-01');
 
-  margin-top: $spacing-03;
   color: $support-error;
+
+  margin-block-start: $spacing-03;
 }
 
 // overrides
@@ -117,7 +118,7 @@ $carbon-input: #{$carbon-prefix}--text-input;
 
   // animation div
   display: inline-flex;
-  width: var(--toolbar-width);
+  inline-size: var(--toolbar-width);
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {
@@ -131,23 +132,23 @@ $carbon-input: #{$carbon-prefix}--text-input;
 @keyframes slide-in {
   0% {
     overflow: hidden;
-    width: var(--toolbar-width);
+    inline-size: var(--toolbar-width);
   }
 
   99% {
     overflow: hidden;
-    width: var(--toolbar-width-focussed);
+    inline-size: var(--toolbar-width-focussed);
   }
 
   100% {
     overflow: visible;
-    width: var(--toolbar-width-focussed);
+    inline-size: var(--toolbar-width-focussed);
   }
 }
 
 .#{$block-class}--focused .#{$block-class}__toolbar {
   overflow: initial;
-  width: var(--toolbar-width-focussed);
 
   animation: slide-in $duration-moderate-01 motion(entrance, productive);
+  inline-size: var(--toolbar-width-focussed);
 }

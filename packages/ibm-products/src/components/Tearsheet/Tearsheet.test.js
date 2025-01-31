@@ -11,7 +11,6 @@ import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
   expectMultipleError,
-  required,
 } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -27,6 +26,11 @@ import {
 } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
+import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+
+jest.mock('../../global/js/utils/checkForOverflow', () => ({
+  checkHeightOverflow: jest.fn(),
+}));
 
 const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
@@ -131,7 +135,6 @@ const DummyComponent = ({ props, open }) => {
 // These are tests than apply to both Tearsheet and TearsheetNarrow
 // and also (with extra props and omitting button tests) to CreateTearsheetNarrow
 let tooManyButtonsTestedAlready = false;
-let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, async () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
@@ -229,27 +232,25 @@ const commonTests = (Ts, name, props, testActions) => {
     screen.getByRole('button', { name: closeIconDescription });
   });
 
-  if (testActions) {
-    it('requires closeIconDescription when there are no actions', async () =>
-      expectMultipleError(
-        // prop-types only reports the first occurrence of each distinct error,
-        // which creates an unfortunate dependency between test runs
-        closeIconDescriptionTestedAlready
-          ? [required('closeIconDescription', name)]
-          : [
-              required('closeIconDescription', name),
-              required('closeIconDescription', 'TearsheetShell'),
-            ],
-        () => {
-          render(<Ts {...props} />);
-          closeIconDescriptionTestedAlready = true;
-        }
-      ));
-  }
-
   it('renders description', async () => {
     render(<Ts {...{ ...props, closeIconDescription, description }} />);
     screen.getByText(descriptionFragment);
+  });
+
+  it('renders description with DefinitionTooltip when overflowing', async () => {
+    checkHeightOverflow.mockReturnValue(true);
+    render(<Ts {...{ ...props, closeIconDescription, description }} open />);
+    expect(
+      document.querySelector(`.${blockClass}__description-tooltip`)
+    ).not.toBeNull();
+  });
+
+  it('renders description without DefinitionTooltip when not overflowing', async () => {
+    checkHeightOverflow.mockReturnValue(false);
+    render(<Ts {...{ ...props, closeIconDescription, description }} open />);
+    expect(
+      document.querySelector(`.${blockClass}__description-tooltip`)
+    ).toBeNull();
   });
 
   it('renders label', async () => {

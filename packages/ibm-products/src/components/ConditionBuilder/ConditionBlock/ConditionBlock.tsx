@@ -122,7 +122,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     );
   };
 
-  const { icon, type, config, label }: Property = getCurrentConfig(
+  const { icon, type, config, label, description }: Property = getCurrentConfig(
     property
   ) as Property;
 
@@ -277,8 +277,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         </ConditionBuilderItem>
       )}
 
-      {/* <div className={`${blockClass}__block`}> */}
-
       <ConditionBuilderItem
         label={label ?? condition?.property}
         title={propertyText}
@@ -287,6 +285,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         data-name="propertyField"
         condition={condition}
         type={type}
+        description={description}
         onChange={onPropertyChangeHandler}
       >
         <ItemOption
@@ -349,7 +348,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           //disabled={true}
         />
       </span>
-      {/* </div> */}
       {manageActionButtons(conditionIndex, group.conditions) && (
         <ConditionBuilderAdd
           onClick={() => {

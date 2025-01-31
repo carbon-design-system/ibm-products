@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { TextAreaProps, TextInputProps } from '@carbon/react';
-import { CarbonIconType } from '@carbon/react/icons';
+import { CarbonIconType } from '@carbon/icons-react';
 import { NumberInputProps } from '@carbon/react/lib/components/NumberInput/NumberInput';
 import {
   Dispatch,
@@ -90,7 +90,9 @@ export interface PropertyConfigNumber {
 
 export type PropertyConfigDate = {
   type: 'date';
-  config: object;
+  config: {
+    valueFormatter?: (value: string) => string;
+  };
 };
 
 export type PropertyConfigTime = {
@@ -108,6 +110,7 @@ export type PropertyConfigCustom = {
       label: string;
       id: string;
     }[];
+    valueFormatter?: (value: string) => string;
   };
 };
 
@@ -125,6 +128,7 @@ export type Property = {
   id: string;
   label: string;
   icon?: CarbonIconType;
+  description?: string;
 } & (
   | PropertyConfig['option']
   | PropertyConfig['text']

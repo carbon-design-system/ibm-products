@@ -29,9 +29,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   margin: 0;
 
   &.#{$action-set-block-class}__action-button--expressive {
-    height: $spacing-10;
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-07;
+    block-size: $spacing-10;
+    padding-block: $spacing-05 $spacing-07;
   }
 }
 
@@ -39,12 +38,12 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive,
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
   .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn {
-  max-width: none;
+  max-inline-size: none;
 }
 
 .#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
   .#{$action-set-block-class}__action-button--ghost {
-  padding-left: $spacing-07;
+  padding-inline-start: $spacing-07;
 }
 
 // For row-single in medium,
@@ -107,9 +106,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$action-set-block-class}__action-button:not(
     .#{$action-set-block-class}__action-button--ghost
   ) {
-  /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
-  max-width: to-rem(232px);
   flex: 0 1 25%;
+  /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+  max-inline-size: to-rem(232px);
 }
 
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
@@ -121,7 +120,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$action-set-block-class}__action-button
   .#{c4p-settings.$carbon-prefix}--inline-loading {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: $spacing-07;
+  inline-size: $spacing-07;
+  inset-block-start: 0;
+  inset-inline-end: 0;
 }

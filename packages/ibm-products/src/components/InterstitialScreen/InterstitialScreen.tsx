@@ -25,6 +25,7 @@ import React, {
   isValidElement,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -288,6 +289,14 @@ export let InterstitialScreen = React.forwardRef<
       return () => window.removeEventListener('keydown', close);
     }, [handleClose]);
 
+    const stepSize = useMemo(
+      () =>
+        children && Children.count(children) > 1
+          ? parseFloat((1 / (Children.count(children) - 1)).toFixed(2))
+          : 0,
+      [children]
+    );
+
     if (!isOpen) {
       return null;
     }
@@ -394,6 +403,11 @@ export let InterstitialScreen = React.forwardRef<
       );
     };
 
+    const scrollToCurrentStep = (scrollPercent) => {
+      const currentStep = scrollPercent / stepSize;
+      setProgStep(Math.ceil(currentStep));
+    };
+
     const renderBody = () => {
       {
         /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
@@ -419,9 +433,7 @@ export let InterstitialScreen = React.forwardRef<
                         <Carousel
                           disableArrowScroll
                           ref={scrollRef}
-                          onScroll={(scrollPercent) => {
-                            scrollPercent === 0 && setProgStep(0);
-                          }}
+                          onScroll={scrollToCurrentStep}
                         >
                           {children}
                         </Carousel>
@@ -461,9 +473,7 @@ export let InterstitialScreen = React.forwardRef<
                   <Carousel
                     disableArrowScroll
                     ref={scrollRef}
-                    onScroll={(scrollPercent) => {
-                      scrollPercent === 0 && setProgStep(0);
-                    }}
+                    onScroll={scrollToCurrentStep}
                   >
                     {children}
                   </Carousel>

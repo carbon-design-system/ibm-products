@@ -25,7 +25,11 @@ import {
   overlayVariants,
   panelVariants,
 } from './motion/variants';
-import { useFocus, usePreviousValue } from '../../global/js/hooks';
+import {
+  useFocus,
+  usePreviousValue,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
 
 import { ActionSet } from '../ActionSet';
 import { ButtonProps } from '@carbon/react';
@@ -38,7 +42,6 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { moderate02 } from '@carbon/motion';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
-import usePrefersReducedMotion from '../../global/js/hooks/usePrefersReducedMotion';
 import { getSpecificElement } from '../../global/js/hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--side-panel`;

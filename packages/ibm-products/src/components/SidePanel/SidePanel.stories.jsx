@@ -6,7 +6,7 @@
  */
 
 import styles from './_storybook-styles.scss?inline';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -472,6 +472,12 @@ const SlideOverTemplate = (
   const testRef = useRef(undefined);
   const buttonRef = useRef(undefined);
 
+  useEffect(() => {
+    if (context.viewMode === 'docs') {
+      document.body.style.overflow = '';
+    }
+  }, [open]);
+
   return (
     <>
       <Button
@@ -505,6 +511,12 @@ const FirstElementDisabledTemplate = (
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const testRef = useRef(undefined);
   const buttonRef = useRef(undefined);
+
+  useEffect(() => {
+    if (context.viewMode === 'docs') {
+      document.body.style.overflow = '';
+    }
+  }, [open]);
 
   return (
     <>
@@ -570,6 +582,12 @@ const StepTemplate = (
   const [currentStep, setCurrentStep] = useState(0);
   const buttonRef = useRef(undefined);
 
+  useEffect(() => {
+    if (context.viewMode === 'docs') {
+      document.body.style.overflow = '';
+    }
+  }, [open]);
+
   return (
     <>
       <Button
@@ -608,18 +626,22 @@ const SlideInTemplate = (
   const [open, setOpen] = useState(context.viewMode !== 'docs');
   const buttonRef = useRef(undefined);
 
+  useEffect(() => {
+    if (context.viewMode === 'docs') {
+      document.body.style.overflow = '';
+    }
+  }, [open]);
+
   return (
     <>
-      <div class={`${prefix}story-container`}>
-        <div class={`${prefix}story-content`} id="ibm-products-page-content">
-          <Button
-            ref={buttonRef}
-            onClick={() => setOpen(!open)}
-            className={`${prefix}toggle`}
-          >
-            {open ? 'Close side panel' : 'Open side panel'}
-          </Button>
-        </div>
+      <div class={`${prefix}story-content`} id="ibm-products-page-content">
+        <Button
+          ref={buttonRef}
+          onClick={() => setOpen(!open)}
+          className={`${prefix}toggle`}
+        >
+          {open ? 'Close side panel' : 'Open side panel'}
+        </Button>
       </div>
       <SidePanel
         {...args}

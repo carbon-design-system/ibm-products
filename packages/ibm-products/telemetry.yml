@@ -134,11 +134,13 @@ collect:
         - hasActions
         - hasCloseIcon
         - hasCustomRowHeader
+        - hasError
         - hasFieldset
         - headerActions
         - headerGroups
         - HeaderRow
         - headers
+        - headingAs
         - headRef
         - hideConditionPreviewHandler
         - hideConditionSubGroupPreviewHandler
@@ -346,6 +348,7 @@ collect:
         - sortByLabel
         - startConditionLabel
         - state
+        - statementConfigCustom
         - status
         - style
         - submitButtonText

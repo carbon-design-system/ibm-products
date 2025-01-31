@@ -159,6 +159,7 @@ export let TruncatedList = React.forwardRef<HTMLDivElement, TruncatedListProps>(
         <List
           className={`${blockClass}__list`}
           ref={listRef}
+          // eslint-disable-next-line react/forbid-component-props
           style={{ height: listHeight }}
         >
           {isCollapsed ? childrenArray.slice(0, minItems) : children}

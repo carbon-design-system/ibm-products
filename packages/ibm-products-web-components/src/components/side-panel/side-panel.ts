@@ -203,7 +203,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       const comparisonResult = (target as Node).compareDocumentPosition(
         relatedTarget as Node
       );
-      // eslint-disable-next-line no-bitwise
       if (relatedTarget === startSentinelNode || comparisonResult) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
@@ -215,9 +214,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ) {
           this.focus();
         }
-      }
-      // eslint-disable-next-line no-bitwise
-      else if (relatedTarget === endSentinelNode || comparisonResult) {
+      } else if (relatedTarget === endSentinelNode || comparisonResult) {
         await (this.constructor as typeof CDSSidePanel)._delay();
         if (
           !tryFocusElements(
@@ -406,7 +403,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();

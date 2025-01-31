@@ -435,6 +435,7 @@ export const TearsheetShell = React.forwardRef(
               [`${bc}--has-close`]: effectiveHasCloseIcon,
             })}
             decorator={decorator || deprecated_slug}
+            // eslint-disable-next-line react/forbid-component-props
             style={setScaleValues()}
             containerClassName={cx(`${bc}__container`, {
               [`${bc}__container--lower`]: verticalPosition === 'lower',

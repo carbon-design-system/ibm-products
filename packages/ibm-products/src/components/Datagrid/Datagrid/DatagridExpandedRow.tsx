@@ -12,7 +12,6 @@ import { DataGridState } from '../types';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-// eslint-disable-next-line react/prop-types
 const DatagridExpandedRow =
   (ExpandedRowContentComponent: JSXElementConstructor<any>) =>
   (datagridState: DataGridState) => {

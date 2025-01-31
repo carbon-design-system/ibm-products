@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import globals from "globals";
-import { fixupPluginRules } from "@eslint/compat";
+import globals from 'globals';
+import { fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc'
-import eslint from "@eslint/js";
-import react from "eslint-plugin-react";
+import eslint from '@eslint/js';
+import react from 'eslint-plugin-react';
 import pluginSsrFriendly from 'eslint-plugin-ssr-friendly';
-import tsEslint from "typescript-eslint";
+import tsEslint from 'typescript-eslint';
 
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -25,7 +25,7 @@ const compat = new FlatCompat({
 });
 
 export default tsEslint.config(
-  ...compat.extends("eslint-config-carbon").map(c => {
+  ...compat.extends('eslint-config-carbon').map(c => {
     if (c.plugins?.['@typescript-eslint']) {
       return {};
     }
@@ -35,7 +35,7 @@ export default tsEslint.config(
   tsEslint.configs.recommended,
   react.configs.flat.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
+    files: ['**/*.{js,mjs,cjs,jsx}'],
     languageOptions: {
       parser: {
         meta: {

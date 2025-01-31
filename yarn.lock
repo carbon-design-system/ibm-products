@@ -12321,7 +12321,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:^3.19.0-rc.0":
+"eslint-config-carbon@npm:^3.19.0, eslint-config-carbon@npm:^3.19.0-rc.0":
   version: 3.19.0
   resolution: "eslint-config-carbon@npm:3.19.0"
   dependencies:
@@ -14342,7 +14342,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^8.3.2"
     eslint: "npm:^9.19.0"
-    eslint-config-carbon: "npm:^3.19.0-rc.0"
+    eslint-config-carbon: "npm:^3.19.0"
     eslint-plugin-jsx-a11y: "npm:^6.7.1"
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.1.0"

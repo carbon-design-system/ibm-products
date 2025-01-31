@@ -14,6 +14,10 @@ import { prefix } from '../../globals/settings';
 
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import styles from './story-styles.scss?lit';
+import Group from '@carbon/web-components/es/icons/group/16';
+import User from '@carbon/web-components/es/icons/user/16';
+import Add from '@carbon/web-components/es/icons/add/16';
+//import Group from '@carbon/icons/lib/group/16';
 
 const storyPrefix = 'user-avatar-stories__';
 
@@ -32,22 +36,27 @@ const defaultTemplate = {
   args: {
     tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     tooltipText: 'TW, Thomas J. Watson user profile',
-    name: 'Thomas J Watson',
+    renderIcon: Group,
   },
   argTypes: {
     tooltipAlignment: {
       control: 'select',
-      description:
-        'Specify the alignment of the tooltip to the icon-only button. Can be one of: start, center, or end.',
+      description: 'Specify the alignment of the tooltip.',
       options: tooltipAlignments,
     },
     tooltipText: {
       control: 'text',
-      description: 'Specify the text of the tooltip for icon-only buttons.',
+      description: 'Specify the text of the tooltip',
     },
     name: {
       control: 'text',
       description: 'Specify the name of the user',
+    },
+    renderIcon: {
+      control: 'select',
+      description: 'Specify the renderIcon for user',
+      options: ['No icon', 'User', 'Group', 'Add'],
+      mapping: { 'No icon': '', User: User, Group: Group, Add: Add },
     },
   },
   render: (args) => {
@@ -67,6 +76,7 @@ const defaultTemplate = {
         tooltip-alignment=${args.tooltipAlignment}
         tooltip-text=${args.tooltipText}
         name=${args.name}
+        .renderIcon=${args.renderIcon}
       >
       </c4p-user-avatar>
     `;

@@ -15,8 +15,7 @@ import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-lis
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './user-avatar.scss?lit';
 import '@carbon/web-components/es/components/tooltip/index.js';
-
-import { classMap } from 'lit/directives/class-map.js';
+import User from '@carbon/web-components/es/icons/user/16';
 
 const blockClass = `${prefix}--user-avatar`;
 /**
@@ -45,21 +44,32 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
   @property({ reflect: true })
   name;
 
-  getItem = () => {
-    const parts = this.name?.split(' ') || [];
-    const firstChar = parts[0].charAt(0).toUpperCase();
-    const secondChar = parts[0].charAt(1).toUpperCase();
-    if (parts.length === 1) {
-      return firstChar + secondChar;
-    }
-    const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
-    const initials = [firstChar];
-    if (lastChar) {
-      initials.push(lastChar);
-    }
-    console.log(initials);
+  /**
+   * Provide a custom icon to use if you need to use an icon other than the default one
+   */
+  @property()
+  renderIcon;
 
-    return ''.concat(...initials);
+  getItem = () => {
+    if (this.name) {
+      const parts = this.name?.split(' ') || [];
+      const firstChar = parts[0].charAt(0).toUpperCase();
+      const secondChar = parts[0].charAt(1).toUpperCase();
+      if (parts.length === 1) {
+        return firstChar + secondChar;
+      }
+      const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
+      const initials = [firstChar];
+      if (lastChar) {
+        initials.push(lastChar);
+      }
+
+      return ''.concat(...initials);
+    } else if (this.renderIcon) {
+      return html`${this.renderIcon()}`;
+    } else {
+      return html`${User({ slot: 'icon' })} `;
+    }
   };
 
   Avatar = () => html`<div>${this.getItem()}</div>`;

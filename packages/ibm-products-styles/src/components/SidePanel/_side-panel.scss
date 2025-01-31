@@ -33,7 +33,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 @property --panel-transform {
   inherits: true;
   initial-value: 320px;
-  syntax: '*';
+  syntax: '<integer>';
 }
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {

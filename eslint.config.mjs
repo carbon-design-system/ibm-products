@@ -66,6 +66,8 @@ export default tsEslint.config(
     ignores: [
       'build',
       'packages/*/build',
+      'packages/*/lib/*',
+      'packages/*/es/*',
       'packages/*/examples/*/build',
       'es',
       'lib',
@@ -80,10 +82,6 @@ export default tsEslint.config(
       '**/coverage/**',
       'packages/ibm-products/scripts/generate/templates/**/*.js*',
       'scripts/example-gallery-builder/update-example/**/*.js*',
-      'packages/ibm-products/lib/*',
-      'packages/ibm-products/es/*',
-      'packages/ibm-products-web-components/lib/*',
-      'packages/ibm-products-web-components/es/*',
     ],
   },
   {

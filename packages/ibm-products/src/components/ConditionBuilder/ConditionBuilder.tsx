@@ -255,6 +255,7 @@ ConditionBuilder.propTypes = {
               label: PropTypes.string.isRequired,
             })
           ),
+          valueFormatter: PropTypes.func,
         }),
       })
     ),

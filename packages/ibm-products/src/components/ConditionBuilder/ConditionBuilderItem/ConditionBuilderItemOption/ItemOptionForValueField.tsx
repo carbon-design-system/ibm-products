@@ -41,10 +41,10 @@ export const ItemOptionForValueField = ({
   const checkForMultiselect = () => {
     //move this to utils
     const operator = conditionState.operator;
-    const currentCustomOperator = config.operators.find(
+    const currentCustomOperator = config?.operators?.find(
       (op) => op.id === operator
     );
-    return currentCustomOperator.enableMultiselect;
+    return currentCustomOperator?.isMultiSelect;
   };
 
   const multiSelectable =

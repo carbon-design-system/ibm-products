@@ -26,9 +26,9 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
 import {
   Condition,
-  PropertyConfig,
   Action,
   Option,
+  ConfigType,
 } from '../ConditionBuilder.types';
 import { blockClass, getValue } from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
@@ -44,7 +44,7 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   type?: string;
   description?: string;
   condition?: Action & Condition;
-  config?: PropertyConfig;
+  config?: ConfigType;
   renderChildren?: (ref: RefObject<HTMLDivElement>) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
@@ -130,6 +130,17 @@ export const ConditionBuilderItem = ({
   };
   const { propertyLabel, isInvalid } = getPropertyDetails();
 
+  //check if the operator is configured as multiSelect in the input configuration
+  const checkForMultiSelectOperator = () => {
+    return (
+      condition?.operator === 'oneOf' ||
+      config?.operators?.find(
+        (operator) =>
+          condition?.operator === operator.id && operator.isMultiSelect
+      )
+    );
+  };
+
   useEffect(() => {
     /**
      * rest['data-name'] holds the current field name
@@ -143,9 +154,8 @@ export const ConditionBuilderItem = ({
         closePopover();
       } else if (
         currentField == 'valueField' &&
-        type == 'option' &&
-        condition?.operator !== 'oneOf' &&
-        !config.enableMultiselect
+        type === 'option' &&
+        !checkForMultiSelectOperator()
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();
@@ -204,15 +214,18 @@ export const ConditionBuilderItem = ({
     }
   };
 
-  const getCustomOperatorLabel = () => {
-    return config?.operators.filter((operator) => {
-      return operator.id === propertyLabel[0];
-    });
+  const getCustomOperatorLabel = (propertyLabel) => {
+    return (
+      propertyLabel &&
+      config?.operators?.find((operator) => {
+        return operator.id === propertyLabel;
+      })
+    );
   };
 
   const getLabel = () => {
-    if (config?.operators && rest['data-name'] == 'operatorField') {
-      return getCustomOperatorLabel(propertyLabel)?.[0]?.label ?? propertyLabel;
+    if (config?.operators && rest['data-name'] === 'operatorField') {
+      return getCustomOperatorLabel(propertyLabel)?.label ?? propertyLabel;
     } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {

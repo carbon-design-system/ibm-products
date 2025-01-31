@@ -476,13 +476,17 @@ const colors = [
 
 const customOperators = [
   {
-    label: 'is greater than',
-    id: 'greaterxx',
+    label: 'has value',
+    id: 'hasValue',
   },
   {
-    label: 'is greater than or equal to',
-    id: 'greaterEqualxx',
-    enableMultiselect: true,
+    label: 'has no value',
+    id: 'hasNoValue',
+  },
+  {
+    label: 'has values',
+    id: 'hasValues',
+    isMultiSelect: true,
   },
 ];
 
@@ -495,8 +499,6 @@ export const inputData = {
       type: 'option',
       description: 'Continent',
       config: {
-        operators: customOperators,
-
         options: [
           {
             label: 'Africa',
@@ -672,6 +674,34 @@ export const inputData = {
     },
   ],
 };
+function modifyPropertiesWithoutCustomOperators(inputData) {
+  const newProperties = inputData.properties.map((property) => {
+    if (property.id === 'continent') {
+      return {
+        ...property,
+        config: {
+          ...property.config,
+          operators: customOperators,
+        },
+      };
+    }
+    if (property.id === 'id') {
+      return {
+        ...property,
+        config: {
+          ...property.config,
+          operators: customOperators.slice(0, 2),
+        },
+      };
+    }
+    return property;
+  });
+
+  return { ...inputData, properties: newProperties };
+}
+
+export const inputDataForCustomOperator =
+  modifyPropertiesWithoutCustomOperators(inputData);
 
 export const inputDataDynamicOptions = {
   properties: [

@@ -133,7 +133,7 @@
     "ws": "^8.17.1"
   },
   "lint-staged": {
-    "!(examples/**/*)**/*.{js,jsx,ts,tsx}": [
+    "!(examples/**/*)**/*.{js,jsx,ts,tsx,mjs}": [
       "npx prettier --cache --write",
       "npx eslint --fix",
       "npx cspell --no-must-find-files",

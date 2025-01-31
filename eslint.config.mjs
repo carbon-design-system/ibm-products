@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import globals from 'globals';
+import globals from "globals";
 import { fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js';

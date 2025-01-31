@@ -15,7 +15,7 @@
 @use '@carbon/react/scss/utilities';
 @use '@carbon/react/scss/motion' as *;
 @use '@carbon/react/scss/utilities/focus-outline';
-@use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/components/tag/tokens' as *;
 
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/react/scss/colors' as *;

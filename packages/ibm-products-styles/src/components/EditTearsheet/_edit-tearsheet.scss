@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,10 +16,6 @@
 
 // Other Carbon settings.
 @use '@carbon/react/scss/grid' as *;
-
-// EditTearsheet uses the following Carbon components:
-@use '@carbon/react/scss/components/toggle/toggle';
-@use '@carbon/react/scss/components/ui-shell/side-nav';
 
 // EditTearsheet uses the following IBM Products components:
 // TearsheetShell

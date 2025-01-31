@@ -36,7 +36,7 @@ const defaultTemplate = {
   args: {
     tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
     tooltipText: 'TW, Thomas J. Watson user profile',
-    renderIcon: Group,
+    name: 'Thomas J. Watson',
   },
   argTypes: {
     tooltipAlignment: {

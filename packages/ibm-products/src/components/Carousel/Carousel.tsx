@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2023
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
+  ForwardedRef,
   ReactNode,
   useCallback,
   useEffect,
@@ -97,7 +98,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       onScroll = defaults.onScroll,
       ...rest
     },
-    ref
+    ref: ForwardedRef<any>
   ) => {
     const carouselRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -301,7 +302,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           event.cancelBubble = false;
         }
       }
-
       const carouselDiv = carouselRef.current;
       if (carouselDiv) {
         carouselDiv.addEventListener('keydown', handleKeydown);
@@ -311,8 +311,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     // Enable external function calls
     useImperativeHandle(
-      ref as React.RefObject<void>,
-      () => ({
+      ref,
+      (): any => ({
         scrollNext() {
           handleScrollNext();
         },
@@ -360,7 +360,9 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
               return (
                 <CarouselItem
                   key={index}
-                  ref={(element) => (childElementsRef.current[index] = element)}
+                  ref={(element: HTMLDivElement | null) => {
+                    childElementsRef.current[index] = element;
+                  }}
                 >
                   {child}
                 </CarouselItem>

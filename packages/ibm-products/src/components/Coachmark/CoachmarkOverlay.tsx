@@ -13,6 +13,7 @@ import React, {
   useEffect,
   ReactNode,
   useMemo,
+  ForwardedRef,
 } from 'react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
@@ -93,7 +94,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
       theme = defaults.theme,
       ...rest
     },
-    ref
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
     const { winHeight, winWidth } = useWindowDimensions();
     const [a11yDragMode, setA11yDragMode] = useState(false);
@@ -132,7 +133,7 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
     const styledTune: StyledTune = useMemo(() => {
       const style: StyledTune = {};
       if (isBeacon || isDraggable) {
-        if (coachmark.targetRect) {
+        if (coachmark?.targetRect) {
           style.left = coachmark.targetRect.x + window.scrollX;
           style.top = coachmark.targetRect.y + window.scrollY;
         }
@@ -209,7 +210,9 @@ export let CoachmarkOverlay = forwardRef<HTMLDivElement, CoachmarkOverlayProps>(
           blockClass,
           `${blockClass}--${kind}`,
           `${blockClass}__${theme}`,
-          (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
+          (isBeacon || isDraggable) &&
+            coachmark?.align &&
+            `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
           a11yDragMode && `${blockClass}--is-dragmode`,
           className

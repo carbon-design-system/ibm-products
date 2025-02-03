@@ -897,6 +897,7 @@ export let SidePanel = React.forwardRef(
       <AnimatePresence>
         {open && (
           <>
+            {/* @ts-expect-error */}
             <motion.div
               {...getDevtoolsProps(componentName)}
               {...rest}
@@ -939,6 +940,7 @@ export let SidePanel = React.forwardRef(
                   animate="visible"
                   exit="exit"
                   ref={overlayRef}
+                  // @ts-expect-error
                   className={`${blockClass}__overlay`}
                 />
               )}
@@ -1002,11 +1004,8 @@ SidePanel.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    /**@ts-ignore*/
-    ActionSet.validateActions(),
     PropTypes.arrayOf(
       PropTypes.shape({
-        /**@ts-ignore */
         ...Button.propTypes,
         kind: PropTypes.oneOf([
           'ghost',

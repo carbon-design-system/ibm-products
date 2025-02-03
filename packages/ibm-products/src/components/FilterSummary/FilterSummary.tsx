@@ -25,6 +25,7 @@ const blockClass = `${pkg.prefix}--filter-summary`;
 export interface Filter {
   key: string;
   value: string;
+  onClose?: () => void;
 }
 export interface FilterSummaryProps {
   className?: string;
@@ -72,10 +73,11 @@ const FilterSummary = React.forwardRef(
     const localRef = filterSummaryRef || ref;
     const [overflowCount, setOverflowCount] = useState(0);
     const [multiline, setMultiline] = useState(false);
+    // @ts-ignore
     const previousState: PrevState =
       usePreviousValue({
         multiline,
-      }) || {};
+      }) ?? {};
 
     const handleViewAll = () => {
       if (overflowCount === 0) {
@@ -95,6 +97,7 @@ const FilterSummary = React.forwardRef(
       (filterSummaryClearButton?.current?.offsetWidth || 0) + viewAllWidth;
 
     const renderTagSet = (type) => (
+      // @ts-expect-error Expected until we remove framer-motion
       <motion.div
         key={type}
         initial={{
@@ -124,6 +127,7 @@ const FilterSummary = React.forwardRef(
           className={cx({
             [`${blockClass}__clear-button-inline`]: clearButtonInline,
           })}
+          // @ts-expect-error: Fixed once we replace MutableRefObject
           containingElementRef={localRef}
           measurementOffset={measurementOffset}
           onOverflowTagChange={(overflowTags: any) =>

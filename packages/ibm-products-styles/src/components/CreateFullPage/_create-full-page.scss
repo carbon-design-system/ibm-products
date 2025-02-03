@@ -83,6 +83,9 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$block-class} .#{$block-class}__body {
@@ -104,6 +107,10 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   background-color: $background;
   color: $text-primary;
   overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
   padding-block-start: $spacing-06;
 }
 
@@ -123,6 +130,10 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   grid-row: 1;
   inset-block-start: 0;
   overflow-x: auto;
+  @supports (overflow-inline: auto) {
+    overflow-inline: auto;
+  }
+
   padding-block-start: 0;
 }
 

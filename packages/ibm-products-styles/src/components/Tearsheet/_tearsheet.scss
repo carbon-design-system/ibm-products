@@ -260,7 +260,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   .#{$block-class}__description-tooltip .#{$carbon-prefix}--definition-term {
-    border-bottom: 0;
+    border-block-end: 0;
     letter-spacing: inherit;
     word-break: break-word;
   }
@@ -335,6 +335,9 @@ $motion-duration: $duration-moderate-02;
     flex: 0 0 257px; // influencer width 256px plus 1px border
     border-inline-end: 1px solid $border-subtle-01;
     overflow-y: auto;
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
 
     // the normal 80% content width inside modals should not apply to influencer content
     // apply the class again for higher specificity
@@ -431,6 +434,10 @@ $motion-duration: $duration-moderate-02;
     grid-column: 1 / -1;
     grid-row: -1 / -1;
     overflow-x: auto;
+    @supports (overflow-inline: auto) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: auto;
+    }
   }
 
   .#{$block-class}__buttons {

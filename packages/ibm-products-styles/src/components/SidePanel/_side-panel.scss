@@ -62,6 +62,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$block-class}--scrolls {
   overflow: auto;
   overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class} {
@@ -288,6 +292,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-block-end: $spacing-05;
     padding-inline-end: var(--#{$block-class}--title-padding-right);

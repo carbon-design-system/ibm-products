@@ -157,8 +157,7 @@ export interface DataGridToggleAllRowsProps
   disabled?: boolean;
 }
 
-export interface DatagridTableHooks<T extends object = any>
-  extends UseTableHooks<T> {}
+export type DatagridTableHooks<T extends object = any> = UseTableHooks<T>;
 
 export interface DatagridColumn<T extends object = any>
   extends ColumnInstance<T>,
@@ -204,7 +203,7 @@ export interface DataGridHeaderGroup<T extends object = any>
   extends HeaderGroup<T>,
     UseResizeColumnsColumnProps<T> {}
 
-export interface DataGridTableProps extends TableCommonProps {}
+export type DataGridTableProps = TableCommonProps;
 
 interface DataGridTableState
   extends UseResizeColumnsState<any>,
@@ -364,6 +363,7 @@ export interface ResizeHeaderProps {
   isFetching?: boolean;
 }
 
+ 
 export type VisibleColumns<T extends object = {}> = (
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>

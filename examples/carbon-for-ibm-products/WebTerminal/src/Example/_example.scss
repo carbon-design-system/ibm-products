@@ -18,5 +18,5 @@
 .main--content .example-terminal p {
   @include type-style('body-short-01');
 
-  padding-bottom: $spacing-07;
+  padding-block-end: $spacing-07;
 }

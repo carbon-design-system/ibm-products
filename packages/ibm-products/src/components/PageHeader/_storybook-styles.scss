@@ -60,11 +60,17 @@ $story-class: 'page-header-stories';
 
 .#{$story-class}__viewport--scroll {
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$story-class}__viewport .#{$story-class}__content-container {
   block-size: 100%;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$story-class}__viewport
@@ -75,6 +81,9 @@ $story-class: 'page-header-stories';
 
 .#{$story-class}__viewport--scroll .#{$story-class}__content-container {
   overflow-y: initial;
+  @supports (overflow-block: initial) {
+    overflow-block: initial;
+  }
 }
 
 // cspell:disable-next-line

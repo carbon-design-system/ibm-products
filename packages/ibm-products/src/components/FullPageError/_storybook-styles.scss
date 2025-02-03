@@ -36,6 +36,9 @@ $story-class: 'full-page-error-stories';
   block-size: calc(100% - #{$spacing-09});
   margin-block-start: $spacing-09;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$story-class}__viewport {

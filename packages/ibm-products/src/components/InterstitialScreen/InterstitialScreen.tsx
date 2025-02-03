@@ -89,6 +89,10 @@ type Media = {
       filePaths?: string[];
     }
 );
+type BreakpointsWithMedia = {
+  xlg?: number;
+  lg?: number;
+};
 export interface InterstitialScreenProps extends PropsWithChildren {
   /**
    * Provide the contents of the InterstitialScreen.
@@ -143,9 +147,22 @@ export interface InterstitialScreenProps extends PropsWithChildren {
    *
    * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
    * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
+   *
+   *  * * @deprecated please use the `renderMedia` prop
    * @see {@link MEDIA_PROP_TYPE}.
    */
   media?: Media;
+  /**
+   * Optional prop to render any media like images or any animated media.
+   */
+  renderMedia?: (params) => ReactNode;
+
+  /**
+   * optional prop to specify breakpoints when media is rendered through renderMedia
+   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
+   * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
+   */
+  breakpointsWithMedia?: BreakpointsWithMedia;
   /**
    * The label for the Next button.
    */
@@ -193,6 +210,8 @@ export let InterstitialScreen = React.forwardRef<
       isFullScreen = defaults.isFullScreen,
       isOpen = defaults.isOpen,
       media,
+      renderMedia,
+      breakpointsWithMedia,
       nextButtonLabel = defaults.nextButtonLabel,
       onClose = defaults.onClose,
       previousButtonLabel = defaults.previousButtonLabel,
@@ -218,9 +237,10 @@ export let InterstitialScreen = React.forwardRef<
     const isMultiStep = childArray.length > 1;
     const mediaIsDefined = media?.render || media?.filePaths;
     const bodyScrollRef = useRef<HTMLDivElement>(null);
+    const hasMedia = mediaIsDefined || renderMedia;
     const mediaBreakpoints = {
-      xlg: media?.breakpoints?.xlg || 0,
-      lg: media?.breakpoints?.lg || 0,
+      xlg: breakpointsWithMedia?.xlg || 0,
+      lg: breakpointsWithMedia?.lg || 0,
       md: 0,
       sm: 0,
     };
@@ -418,7 +438,7 @@ export let InterstitialScreen = React.forwardRef<
           ref={bodyScrollRef}
           tabIndex={0}
         >
-          {mediaIsDefined ? (
+          {hasMedia ? (
             <FlexGrid fullWidth className={cx(`${blockClass}--body-grid`)}>
               <Row className={cx(`${blockClass}--body-row`)}>
                 <Column
@@ -443,7 +463,7 @@ export let InterstitialScreen = React.forwardRef<
                     )}
                   </div>
                 </Column>
-                {mediaIsDefined && (
+                {hasMedia && (
                   <Column
                     xlg={mediaBreakpoints.xlg}
                     lg={mediaBreakpoints.lg}
@@ -452,14 +472,20 @@ export let InterstitialScreen = React.forwardRef<
                     className={cx(`${blockClass}--media-container`)}
                   >
                     <div className={`${blockClass}--media`}>
-                      {media.render ? (
-                        media.render()
-                      ) : (
+                      {hasMedia && media?.render && media.render()}
+                      {hasMedia && media?.filePaths && (
                         <SteppedAnimatedMedia
                           className={`${blockClass}--stepped-animated-media`}
                           filePaths={media.filePaths}
                           playStep={progStep}
                         />
+                      )}
+                      {hasMedia && renderMedia && (
+                        <div
+                          className={`${blockClass}--stepped-animated-media`}
+                        >
+                          {renderMedia({ playStep: progStep })}
+                        </div>
                       )}
                     </div>
                   </Column>
@@ -575,6 +601,11 @@ InterstitialScreen.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 InterstitialScreen.propTypes = {
   /**
+   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size. Medium and small breakpoints will be set to 0 internally to focus on the main content area.
+   */
+  breakpointsWithMedia: PropTypes.object,
+
+  /**
    * Provide the contents of the InterstitialScreen.
    */
   children: PropTypes.node.isRequired,
@@ -583,7 +614,6 @@ InterstitialScreen.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
   /**
    * Tooltip text and aria label for the Close button icon.
    */
@@ -600,11 +630,11 @@ InterstitialScreen.propTypes = {
    * Provide an optional class to be applied to the <header> element >.
    */
   headerTitle: PropTypes.string,
+
   /**
    * Optional parameter to hide the progress indicator when multiple steps are used.
    */
   hideProgressIndicator: PropTypes.bool,
-
   /**
    * The aria label applied to the Interstitial Screen component
    */
@@ -628,8 +658,9 @@ InterstitialScreen.propTypes = {
    * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
    * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
    * @see {@link MEDIA_PROP_TYPE}.
+   * * @deprecated please use the `renderMedia` prop
    */
-  /**@ts-ignore */
+  /**@ts-ignore*/
   media: PropTypes.oneOfType([
     PropTypes.shape({
       render: PropTypes.func,
@@ -658,11 +689,15 @@ InterstitialScreen.propTypes = {
    * The label for the Previous button.
    */
   previousButtonLabel: PropTypes.string,
+
   /**
    * The name of this app, e.g. "QRadar".
    */
   productName: PropTypes.string,
-
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
   /**
    * The label for the skip button.
    */

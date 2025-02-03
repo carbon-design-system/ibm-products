@@ -6,15 +6,15 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/react/scss/utilities';
+@use '@carbon/styles/scss/utilities';
 
 $block-class: #{c4p-settings.$pkg-prefix}--nav;
 $nav-list-block-class: #{c4p-settings.$pkg-prefix}--nav-list;

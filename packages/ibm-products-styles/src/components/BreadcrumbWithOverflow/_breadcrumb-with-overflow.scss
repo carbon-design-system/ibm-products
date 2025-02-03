@@ -6,9 +6,9 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/breakpoint' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/utilities';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 

@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/themes/scss/themes';
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/type';
 // @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
 //   as *;
 @use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'

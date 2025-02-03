@@ -6,7 +6,7 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 .tearsheet-stories__dummy-content-block {
   padding: $spacing-06 $spacing-07;

@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/components/tag/tokens' as *;
-@use '@carbon/react/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/tag/tokens' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
 @use '../../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/type' as *;
-@use '@carbon/react/scss/utilities';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 

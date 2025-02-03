@@ -12,8 +12,8 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--filter-panel-accordion-item;

@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 .#{c4p-settings.$pkg-prefix}--combo-button {

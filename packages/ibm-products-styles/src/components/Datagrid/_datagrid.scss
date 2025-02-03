@@ -6,8 +6,8 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
@@ -16,7 +16,7 @@
 /* stylelint-disable max-nesting-depth */
 
 // Other Carbon settings.
-// TODO: @use '@carbon/react/scss/grid'; if needed
+// TODO: @use '@carbon/styles/scss/grid'; if needed
 
 // Datagrid uses the following Carbon components:
 // TODO: @use(s) of Carbon component styles used by Datagrid

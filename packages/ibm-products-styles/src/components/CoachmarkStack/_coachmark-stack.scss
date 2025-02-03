@@ -10,16 +10,16 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/layout/scss/convert';
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 // Other Carbon settings if needed
-// TODO: @use '@carbon/react/scss/grid';
+// TODO: @use '@carbon/styles/scss/grid';
 // or
-// TODO: @use '@carbon/react/scss/grid';
+// TODO: @use '@carbon/styles/scss/grid';
 
 // CoachmarkStack uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by CoachmarkStack

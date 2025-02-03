@@ -16,11 +16,11 @@
 
 // DecoratorBase uses the following Carbon for IBM Products components:
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--decorator;

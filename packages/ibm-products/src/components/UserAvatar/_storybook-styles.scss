@@ -6,8 +6,8 @@
 //
 
 @forward '../../../../ibm-products-styles/src/global/styles/project-settings';
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 // TODO: add any additional styles used by UserAvatar.stories.js
 .theme-section {

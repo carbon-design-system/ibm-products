@@ -6,16 +6,16 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // Other Carbon settings.
-@use '@carbon/react/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--options-tile;

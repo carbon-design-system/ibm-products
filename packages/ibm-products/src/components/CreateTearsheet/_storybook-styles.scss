@@ -6,9 +6,9 @@
 //
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 $preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step;
 

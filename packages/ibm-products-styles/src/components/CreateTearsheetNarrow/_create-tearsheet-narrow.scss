@@ -6,9 +6,9 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateTearsheetNarrow uses the following IBM Products components:

@@ -10,12 +10,12 @@
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/type';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
 @keyframes fade {

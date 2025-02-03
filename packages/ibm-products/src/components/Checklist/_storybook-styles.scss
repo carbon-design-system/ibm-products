@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 .checklist-stories__viewport {
   max-inline-size: calc(2 * $spacing-13);

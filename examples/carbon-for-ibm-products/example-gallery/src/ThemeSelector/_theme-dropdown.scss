@@ -1,7 +1,7 @@
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/config';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config';
 
 .carbon-theme--white {
   @include theme(themes.$white, true);

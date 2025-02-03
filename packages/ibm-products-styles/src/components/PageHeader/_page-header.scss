@@ -6,13 +6,13 @@
 //
 
 // Other Carbon settings.
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/breakpoint' as *;
-@use '@carbon/react/scss/grid/flexbox';
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/utilities';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/grid/flexbox';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;

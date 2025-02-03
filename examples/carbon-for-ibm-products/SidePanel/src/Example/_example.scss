@@ -1,7 +1,7 @@
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/config';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config';
 
 .main--content {
   display: flex;

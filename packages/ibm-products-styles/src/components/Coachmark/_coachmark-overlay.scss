@@ -15,12 +15,12 @@
 @use '@carbon/layout/scss/convert' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/colors' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
-@use '@carbon/react/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 

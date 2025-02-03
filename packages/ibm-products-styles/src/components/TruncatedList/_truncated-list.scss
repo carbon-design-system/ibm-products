@@ -10,8 +10,8 @@
 @use '../../global/styles/mixins';
 
 // Other Carbon settings if needed
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--truncated-list;

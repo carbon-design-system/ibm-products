@@ -9,9 +9,9 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
-@use '@carbon/react/scss/utilities';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
 
 // FilterPanel uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by FilterPanel

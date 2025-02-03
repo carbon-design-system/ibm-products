@@ -8,12 +8,12 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
 // Other Carbon settings if needed
-// TODO: @use '@carbon/react/scss/grid';
+// TODO: @use '@carbon/styles/scss/grid';
 // or
-// TODO: @use '@carbon/react/scss/grid';
+// TODO: @use '@carbon/styles/scss/grid';
 
 // StringFormatter uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by StringFormatter

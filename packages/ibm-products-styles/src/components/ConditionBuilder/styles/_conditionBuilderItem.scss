@@ -9,17 +9,17 @@
 @use 'sass:list';
 @use 'sass:math';
 @use 'sass:string';
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/react/scss/type';
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/utilities';
-@use '@carbon/react/scss/motion' as *;
-@use '@carbon/react/scss/utilities/focus-outline';
-@use '@carbon/react/scss/components/tag/tokens' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/tag/tokens' as *;
 
-@use '@carbon/react/scss/type' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/colors' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
 

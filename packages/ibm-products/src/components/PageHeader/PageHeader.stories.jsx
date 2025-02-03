@@ -91,16 +91,7 @@ const makeBreadcrumb = (item, title) => ({
   key: `Breadcrumb ${item}`,
   label: typeof title === 'string' ? title : `Breadcrumb ${item}`,
 });
-const now = new Date();
-const m = now.getMonth();
-if (m === 0) {
-  now.setFullYear(now.getFullYear() - 1);
-  now.setMonth(11);
-} else {
-  now.setMonth(m - 1);
-}
-const ms = now.toLocaleString('default', { month: 'long' });
-const ys = now.toLocaleString('default', { year: 'numeric' });
+
 const breadcrumbs = {
   'No breadcrumb': null,
   'A single breadcrumb': [makeBreadcrumb(1, 'Home page')],
@@ -116,7 +107,7 @@ const breadcrumbs = {
   'Demo breadcrumbs': [
     makeBreadcrumb(1, 'Home page', '../../../homepage'),
     makeBreadcrumb(2, 'Reports', '../../Reports'),
-    makeBreadcrumb(3, `${ms} ${ys}`, `../${ms}{ys}`),
+    makeBreadcrumb(3, `January 2025`, `../January 2025`),
   ],
 };
 

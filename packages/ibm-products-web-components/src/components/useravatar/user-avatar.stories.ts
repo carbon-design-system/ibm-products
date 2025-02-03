@@ -17,7 +17,6 @@ import styles from './story-styles.scss?lit';
 import Group from '@carbon/web-components/es/icons/group/16';
 import User from '@carbon/web-components/es/icons/user/16';
 import Add from '@carbon/web-components/es/icons/add/16';
-//import Group from '@carbon/icons/lib/group/16';
 
 const storyPrefix = 'user-avatar-stories__';
 

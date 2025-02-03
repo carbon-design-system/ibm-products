@@ -10,12 +10,7 @@
 @use '@carbon/styles/scss/theme' as *;
 
 // Use value-divider() by default for the component's dividing line.
-@mixin value-divider(
-  $inset-block-start: 0,
-  $bottom: 0,
-  $left: 0,
-  $color: $border-subtle-02
-) {
+@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
   &::after {
     position: absolute;
     border-inline-start: 1px solid #{$color};
@@ -28,7 +23,7 @@
 // Use label-divider() only when hovering/focusing the label.
 @mixin label-divider(
   // Nudge the line over so it occupies the same space as the value divider.
-  $inset-block-start: -1px,
+  $top: -1px,
   $right: -1px,
   $bottom: -1px,
   $color: $border-strong

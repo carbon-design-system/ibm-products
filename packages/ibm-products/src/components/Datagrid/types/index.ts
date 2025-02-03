@@ -363,7 +363,6 @@ export interface ResizeHeaderProps {
   isFetching?: boolean;
 }
 
- 
 export type VisibleColumns<T extends object = {}> = (
   allColumns: Array<ColumnInstance<T>>,
   meta: Meta<T>

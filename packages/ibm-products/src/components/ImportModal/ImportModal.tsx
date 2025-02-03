@@ -271,7 +271,6 @@ export let ImportModal: React.FC<ImportModalProps> = forwardRef(
         fetchedFile.invalidFileType = isInvalidFileType(fetchedFile);
         fetchedFile.uuid = pendingFile.uuid;
         updateFiles([fetchedFile]);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         const failedFile = {
           ...pendingFile,

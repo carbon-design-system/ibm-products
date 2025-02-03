@@ -75,16 +75,12 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
         // Prevents the default "Tab" behavior
         event.preventDefault();
         // if the user press shift+tab and the current element not in focusable items
-        // setTimeout(() => {
         last?.focus();
-        // }, 0);
       } else if (!event.shiftKey && document?.activeElement === last) {
         event.preventDefault();
         // user pressing tab key only then
         // focusing the first element if the current element is not in focusable items
-        // setTimeout(() => {
         first?.focus();
-        // }, 0);
       }
     }
   };

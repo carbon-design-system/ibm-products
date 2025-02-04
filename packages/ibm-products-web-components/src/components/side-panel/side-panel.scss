@@ -297,6 +297,6 @@ $block-class-action-set: #{$prefix}--action-set;
   }
 
   .#{$block-class}__close-button {
-    width: 2rem;
+    inline-size: 2rem;
   }
 }

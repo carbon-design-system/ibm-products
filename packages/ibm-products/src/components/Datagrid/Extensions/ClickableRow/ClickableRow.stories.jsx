@@ -355,7 +355,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
   const sidePanelRef = useRef(undefined);
 
   useEffect(() => {
-    if (openSidePanel) {
+    if (openSidePanel && sidePanelRef?.current) {
       const focusableElements = sidePanelRef.current.querySelectorAll(
         'button, [href], input, select, [tabindex]:not([tabindex="-1"])'
       );

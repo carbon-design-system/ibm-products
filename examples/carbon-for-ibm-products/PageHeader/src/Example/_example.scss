@@ -1,11 +1,14 @@
 .example {
-  height: 100vh;
+  block-size: 100vh;
   overflow: hidden;
 }
 
 .content-area.content-area {
-  height: calc(100% - 3rem);
+  block-size: calc(100% - 3rem);
   padding: 0;
   margin-top: 3rem;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }

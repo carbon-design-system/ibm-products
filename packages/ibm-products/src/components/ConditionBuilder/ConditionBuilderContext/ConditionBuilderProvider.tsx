@@ -65,10 +65,7 @@ export const ConditionBuilderProvider: React.FC<
 
   return (
     <ConditionBuilderContext.Provider value={contextValue}>
-      {
-        // eslint-disable-next-line react/prop-types
-        props.children
-      }
+      {props.children}
     </ConditionBuilderContext.Provider>
   );
 };
@@ -106,6 +103,7 @@ ConditionBuilderProvider.propTypes = {
         id: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+        description: PropTypes.string,
         type: PropTypes.oneOf([
           'text',
           'textarea',

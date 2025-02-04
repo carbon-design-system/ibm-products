@@ -65,7 +65,6 @@ export interface SearchBarProps extends PropsWithChildren {
 
   /** @type {string} The name text for the search scope type. */
 
-  // eslint-disable-next-line react/require-default-props
   scopesTypeLabel?: typeof conditionalScopePropValidator;
 
   /** @type {Array<any> Array of initially selected search scopes. */
@@ -76,7 +75,7 @@ export interface SearchBarProps extends PropsWithChildren {
    * By default, scope items are sorted in ascending alphabetical order,
    * with "selected" items moved to the start of the scope items array.
    */
-  sortItems?: () => void; // eslint-disable-line react/require-default-props
+  sortItems?: () => void;
 
   /** @type {string} The label text for the search submit button. */
   submitLabel: string;
@@ -87,7 +86,7 @@ export interface SearchBarProps extends PropsWithChildren {
   titleText?: string;
 
   /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
-  translateWithId?: () => void; // eslint-disable-line react/require-default-props
+  translateWithId?: () => void;
 
   /** @type {string} Search query value. */
   value?: string;
@@ -299,7 +298,6 @@ SearchBar.propTypes = {
   ),
 
   /** @type {string} The name text for the search scope type. */
-  // eslint-disable-next-line react/require-default-props
   scopesTypeLabel: conditionalScopePropValidator,
 
   /** @type {Array<any> Array of initially selected search scopes. */
@@ -313,13 +311,13 @@ SearchBar.propTypes = {
    * By default, scope items are sorted in ascending alphabetical order,
    * with "selected" items moved to the start of the scope items array.
    */
-  sortItems: PropTypes.func, // eslint-disable-line react/require-default-props
+  sortItems: PropTypes.func,
 
   /** @type {string} The label text for the search submit button. */
   submitLabel: PropTypes.string.isRequired,
 
   /** @type {func} Callback function for translating MultiSelect's child ListBoxMenuIcon SVG title. */
-  translateWithId: PropTypes.func, // eslint-disable-line react/require-default-props
+  translateWithId: PropTypes.func,
 
   /** @type {string} Search query value. */
   value: PropTypes.string,

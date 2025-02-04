@@ -133,13 +133,32 @@ export let ActionBar = React.forwardRef(
       onWidthChange
     );
 
-    const newHiddenItems = hiddenItems?.map(({ id: key, ...rest }) => (
+    const overflowMenuItems = hiddenItems?.map(({ id: key, ...rest }) => (
       <ActionBarItem {...rest} key={key} />
     ));
 
+    const overflowHiddenMenu =
+      overflowMenuItems?.length === 0 ? (
+        <div
+          className={`${blockClass}__hidden-sizing-items`}
+          aria-hidden={true}
+        >
+          <span>
+            <ActionBarOverflowItems
+              className={`${blockClass}__hidden-sizing-item`}
+              overflowAriaLabel="hidden sizing overflow items"
+              overflowMenuRef={offsetRef}
+              overflowItems={[]}
+              key="hidden-overflow-menu"
+              tabIndex={-1}
+            />
+          </span>
+        </div>
+      ) : null;
+
     return (
       <div {...rest} className={cx([blockClass, className])} ref={localRef}>
-        {' '}
+        {overflowHiddenMenu}
         <div
           ref={refDisplayedItems}
           className={cx([
@@ -156,12 +175,12 @@ export let ActionBar = React.forwardRef(
               }}
             />
           ))}
-          {newHiddenItems?.length ? (
+          {overflowMenuItems?.length ? (
             <ActionBarOverflowItems
               menuOptionsClass={menuOptionsClass}
               overflowAriaLabel={overflowAriaLabel}
               overflowMenuRef={offsetRef}
-              overflowItems={newHiddenItems}
+              overflowItems={overflowMenuItems}
               key={`overflow-menu-${internalId.current}`}
             />
           ) : null}

@@ -28,10 +28,10 @@ export const useOverflowItems = <T extends Item>(
   const visibleItemCount = useRef<number>(0);
   const minWidthRef = useRef<number>();
   const requiredWidthRef = useRef<number>();
-  const offset = offsetRef?.current?.offsetWidth || 0;
 
   const handleResize = () => {
     if (containerRef.current) {
+      const offset = offsetRef?.current?.offsetWidth || 0;
       const newMax = containerRef.current.offsetWidth - offset;
       setMaxWidth(newMax);
     }
@@ -74,6 +74,7 @@ export const useOverflowItems = <T extends Item>(
     const map = getMap();
     let maxReached = false;
     let accumulatedWidth = 0;
+    const offset = offsetRef?.current?.offsetWidth || 0;
     const includeOffset = requiredWidth > maxWidth + offset;
 
     const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {

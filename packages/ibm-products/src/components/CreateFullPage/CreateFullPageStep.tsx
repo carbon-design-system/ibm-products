@@ -157,7 +157,7 @@ export let CreateFullPageStep = forwardRef(
     const [shouldIncludeStep, setShouldIncludeStep] = useState<boolean>();
     const previousState = usePreviousValue({
       currentStep: stepsContext?.currentStep,
-    }) as unknown as { currentStep: number | undefined };
+    }) as { currentStep?: number } | undefined;
 
     useRetrieveStepData({
       invalid,

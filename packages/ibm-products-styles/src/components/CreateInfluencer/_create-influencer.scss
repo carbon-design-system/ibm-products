@@ -49,6 +49,9 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
 }
 
 .#{$influencer-block-class}__title {

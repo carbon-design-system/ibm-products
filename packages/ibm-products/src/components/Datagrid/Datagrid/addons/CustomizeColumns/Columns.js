@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2024
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from '@carbon/react';
-import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import cx from 'classnames';
 import { DraggableItemsList } from './DraggableItemsList';
@@ -34,18 +33,15 @@ const Columns = ({
   // after a drag/drop action set the columns
   const moveElement = React.useCallback(
     (from, to) => {
-      const fromCol = columns[from];
-
-      setColumnsObject(
-        update(columns, {
-          $splice: [
-            [from, 1],
-            [to, 0, fromCol],
-          ],
-        })
-      );
+      setColumnsObject((prev) => {
+        const prevClone = [...prev];
+        const item = prevClone[from];
+        prevClone.splice(from, 1);
+        prevClone.splice(to, 0, item);
+        return prevClone;
+      });
     },
-    [columns, setColumnsObject]
+    [setColumnsObject]
   );
 
   const filteredStickyColumn = columns?.filter((item) => !item.sticky);

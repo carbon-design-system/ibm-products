@@ -6,6 +6,10 @@
 //
 #storybook-root {
   overflow-x: hidden;
+
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
 }
 
 // The layout has been changed from middle/center to top/left, because

@@ -345,7 +345,6 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           className={`${blockClass}__close-condition`}
           data-name="closeCondition"
           wrapperClassName={`${blockClass}__close-condition-wrapper`}
-          //disabled={true}
         />
       </span>
       {manageActionButtons(conditionIndex, group.conditions) && (

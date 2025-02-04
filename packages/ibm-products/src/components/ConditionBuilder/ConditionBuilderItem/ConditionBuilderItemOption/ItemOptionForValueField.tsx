@@ -135,7 +135,6 @@ export const ItemOptionForValueField = ({
     const updatedSelections = selection.filter(
       (item) => item !== 'INVALID'
     ) as Option[];
-    // return;
     if (multiSelectable) {
       if (isSelected) {
         const items = updatedSelections.filter((v) => v.id !== option.id);

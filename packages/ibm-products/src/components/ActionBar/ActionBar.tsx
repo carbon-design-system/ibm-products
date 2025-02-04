@@ -133,33 +133,9 @@ export let ActionBar = React.forwardRef(
       onWidthChange
     );
 
-    // Calculate the displayed items
-    const displayedItems = visibleItems.map(({ key, id, ...rest }) => (
-      <ActionBarItem
-        {...rest}
-        key={key}
-        ref={(node) => {
-          itemRefHandler(id, node);
-        }}
-      />
-    ));
-
     const newHiddenItems = hiddenItems?.map(({ id: key, ...rest }) => (
       <ActionBarItem {...rest} key={key} />
     ));
-
-    // add overflow menu if needed
-    if (newHiddenItems?.length) {
-      displayedItems.push(
-        <ActionBarOverflowItems
-          menuOptionsClass={menuOptionsClass}
-          overflowAriaLabel={overflowAriaLabel}
-          overflowMenuRef={offsetRef}
-          overflowItems={newHiddenItems}
-          key={`overflow-menu-${internalId.current}`}
-        />
-      );
-    }
 
     return (
       <div {...rest} className={cx([blockClass, className])} ref={localRef}>
@@ -171,7 +147,24 @@ export let ActionBar = React.forwardRef(
             { [`${blockClass}__displayed-items--right`]: rightAlign },
           ])}
         >
-          {displayedItems}
+          {visibleItems.map(({ key, id, ...rest }) => (
+            <ActionBarItem
+              {...rest}
+              key={key}
+              ref={(node) => {
+                itemRefHandler(id, node);
+              }}
+            />
+          ))}
+          {newHiddenItems?.length ? (
+            <ActionBarOverflowItems
+              menuOptionsClass={menuOptionsClass}
+              overflowAriaLabel={overflowAriaLabel}
+              overflowMenuRef={offsetRef}
+              overflowItems={newHiddenItems}
+              key={`overflow-menu-${internalId.current}`}
+            />
+          ) : null}
         </div>
       </div>
     );

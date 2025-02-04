@@ -239,8 +239,8 @@ export let InterstitialScreen = React.forwardRef<
     const bodyScrollRef = useRef<HTMLDivElement>(null);
     const hasMedia = mediaIsDefined || renderMedia;
     const mediaBreakpoints = {
-      xlg: breakpointsWithMedia?.xlg || 0,
-      lg: breakpointsWithMedia?.lg || 0,
+      xlg: media?.breakpoints?.xlg || breakpointsWithMedia?.xlg || 0,
+      lg: media?.breakpoints?.lg || breakpointsWithMedia?.lg || 0,
       md: 0,
       sm: 0,
     };

@@ -43,7 +43,7 @@
     "lint:license": "scripts/check-license.cjs -a",
     "lint:license:staged": "scripts/check-license.cjs -w",
     "lint:js": "eslint packages --fix",
-    "lint:styles": "stylelint '**/*.scss'",
+    "lint:styles": "stylelint '**/*.scss' --fix",
     "prepare": "husky install",
     "postinstall": "husky",
     "run-all": "lerna run --stream --prefix --loglevel success",
@@ -141,7 +141,7 @@
     ],
     "**/*.scss": [
       "npx prettier --cache --write",
-      "npx stylelint --allow-empty-input"
+      "npx stylelint --allow-empty-input --fix"
     ],
     "!(examples/**/*).md": [
       "npx prettier --cache --write",

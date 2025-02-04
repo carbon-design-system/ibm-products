@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft, Close } from '@carbon/react/icons';
 // Carbon and package components we use.
 import { Button, IconButton } from '@carbon/react';
@@ -21,13 +20,9 @@ import React, {
   useState,
 } from 'react';
 import {
-  actionSetVariants,
-  overlayVariants,
-  panelVariants,
-} from './motion/variants';
-import {
   useFocus,
   usePreviousValue,
+  usePresence,
   usePrefersReducedMotion,
 } from '../../global/js/hooks';
 
@@ -226,9 +221,6 @@ type SidePanelSlideInProps =
 
 export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
 
-// `any` is a work around until ActionSet is migrated to TS
-const MotionActionSet = motion(ActionSet);
-
 // Default values for props
 const defaults = {
   animateTitle: true,
@@ -300,6 +292,9 @@ export let SidePanel = React.forwardRef(
     const previousOpen = usePreviousValue(open);
 
     const shouldReduceMotion = usePrefersReducedMotion();
+    const exitAnimationName =
+      placement === 'right' ? 'side-panel-exit-right' : 'side-panel-exit-left';
+    const { shouldRender } = usePresence(open, sidePanelRef, exitAnimationName);
 
     // Title animation on scroll related state
     const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
@@ -683,6 +678,9 @@ export let SidePanel = React.forwardRef(
         [`${blockClass}--has-ai-label`]: aiLabel,
         [`${blockClass}--condensed-actions`]: condensedActions,
         [`${blockClass}--has-overlay`]: includeOverlay,
+        [`${blockClass}--open`]: open,
+        [`${blockClass}--closing`]: !open,
+        [`${blockClass}--reduced-motion`]: shouldReduceMotion,
       },
     ]);
 
@@ -875,7 +873,7 @@ export let SidePanel = React.forwardRef(
             `${blockClass}__inner-content`,
             `${blockClass}--scrolls`,
             `${
-              !doAnimateTitle
+              !doAnimateTitle && !animateTitle
                 ? `${blockClass}__inner-content--no-animated-title`
                 : ''
             }`
@@ -893,60 +891,44 @@ export let SidePanel = React.forwardRef(
       }
     };
 
-    return (
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              {...getDevtoolsProps(componentName)}
-              {...rest}
-              id={id}
-              className={mainPanelClassNames}
-              ref={sidePanelRef}
-              role="complementary"
-              aria-label={title}
-              onAnimationComplete={onAnimationEnd}
-              onAnimationStart={onAnimationStart}
-              variants={panelVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              custom={{ placement, shouldReduceMotion }}
-              onKeyDown={handleKeyDown}
-            >
-              <>
-                {/* header */}
-                {renderHeader()}
+    return shouldRender ? (
+      <>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+        <div
+          {...getDevtoolsProps(componentName)}
+          {...rest}
+          id={id}
+          className={mainPanelClassNames}
+          ref={sidePanelRef}
+          role="complementary"
+          aria-label={title}
+          onAnimationEnd={onAnimationEnd}
+          onAnimationStart={onAnimationStart}
+          onKeyDown={handleKeyDown}
+        >
+          {/* header */}
+          {renderHeader()}
 
-                {/* main */}
-                {renderMain()}
-              </>
+          {/* main */}
+          {renderMain()}
 
-              {/* footer */}
-              <MotionActionSet
-                actions={actions ?? []}
-                className={primaryActionContainerClassNames}
-                size={size === 'xs' ? 'sm' : size}
-                custom={shouldReduceMotion}
-                variants={actionSetVariants}
-              />
-            </motion.div>
-            <AnimatePresence>
-              {includeOverlay && (
-                <motion.div
-                  variants={overlayVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  ref={overlayRef}
-                  className={`${blockClass}__overlay`}
-                />
-              )}
-            </AnimatePresence>
-          </>
+          {/* footer */}
+          <ActionSet
+            actions={actions ?? []}
+            className={primaryActionContainerClassNames}
+            size={size === 'xs' ? 'sm' : size}
+          />
+        </div>
+        {includeOverlay && (
+          <div
+            ref={overlayRef}
+            className={cx(`${blockClass}__overlay`, {
+              [`${blockClass}__overlay--closing`]: !open,
+            })}
+          />
         )}
-      </AnimatePresence>
-    );
+      </>
+    ) : null;
   }
 );
 

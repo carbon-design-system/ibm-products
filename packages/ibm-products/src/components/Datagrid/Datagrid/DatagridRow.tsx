@@ -24,7 +24,6 @@ const rowHeights = {
   xl: 64,
 };
 
-// eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState: DataGridState) => {
   const {
     row,
@@ -188,7 +187,6 @@ const DatagridRow = (datagridState: DataGridState) => {
         ) : null}
         {row.cells.map((cell, index) => {
           const cellProps = cell.getCellProps({ role: undefined });
-          // eslint-disable-next-line no-unused-vars
           const { style, children, ...restProps } = cellProps as any;
           const columnClassname = cell?.column?.className;
           const content = children || (
@@ -233,6 +231,7 @@ const DatagridRow = (datagridState: DataGridState) => {
                 columnClassname
               )}
               {...restProps}
+              // eslint-disable-next-line react/forbid-component-props
               style={style}
               key={cell.column.id}
             >

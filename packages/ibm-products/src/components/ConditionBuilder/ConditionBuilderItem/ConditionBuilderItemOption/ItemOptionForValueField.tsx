@@ -26,7 +26,7 @@ import {
   Option,
   PropertyConfigOption,
 } from '../../ConditionBuilder.types';
-import { blockClass } from '../../utils/util';
+import { blockClass, checkForMultiSelectOperator } from '../../utils/util';
 
 interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };
@@ -38,18 +38,7 @@ export const ItemOptionForValueField = ({
   config = {},
   onChange,
 }: ItemOptionForValueFieldProps) => {
-  const checkForMultiselect = () => {
-    //move this to utils
-    const operator = conditionState.operator;
-    const currentCustomOperator = config?.operators?.find(
-      (op) => op.id === operator
-    );
-    return currentCustomOperator?.isMultiSelect;
-  };
-
-  const multiSelectable =
-    conditionState.operator === 'oneOf' ||
-    (config.operators && checkForMultiselect());
+  const multiSelectable = checkForMultiSelectOperator(conditionState, config);
 
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext

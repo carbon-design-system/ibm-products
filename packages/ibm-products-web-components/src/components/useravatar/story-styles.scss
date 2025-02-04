@@ -7,7 +7,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
-$story-prefix: 'side-panel-stories__';
+$story-prefix: 'user-avatar-stories__';
 
 .#{$story-prefix}body-content {
   display: flex;
@@ -33,10 +33,6 @@ $story-prefix: 'side-panel-stories__';
   inline-size: 100vw;
   inset-block-start: 0;
   inset-inline-start: 0;
-}
-
-.#{$story-prefix}story-header {
-  background: $background-inverse;
 }
 
 .#{$story-prefix}story-content {

@@ -17,6 +17,7 @@ import styles from './story-styles.scss?lit';
 import Group from '@carbon/web-components/es/icons/group/16';
 import User from '@carbon/web-components/es/icons/user/16';
 import Add from '@carbon/web-components/es/icons/add/16';
+import headshot from './_story-assets/headshot.jpg';
 
 const storyPrefix = 'user-avatar-stories__';
 
@@ -34,10 +35,29 @@ const tooltipAlignments = {
 const defaultTemplate = {
   args: {
     tooltipAlignment: POPOVER_ALIGNMENT.RIGHT,
-    tooltipText: 'TW, Thomas J. Watson user profile',
-    name: 'Thomas J. Watson',
+    size: 'md',
   },
+
   argTypes: {
+    backgroundColor: {
+      control: {
+        type: 'select',
+      },
+      options: [
+        'order-1-cyan',
+        'order-2-gray',
+        'order-3-green',
+        'order-4-magenta',
+        'order-5-purple',
+        'order-6-teal',
+        'order-7-cyan',
+        'order-8-gray',
+        'order-9-green',
+        'order-10-magenta',
+        'order-11-purple',
+        'order-12-teal',
+      ],
+    },
     tooltipAlignment: {
       control: 'select',
       description: 'Specify the alignment of the tooltip.',
@@ -56,6 +76,21 @@ const defaultTemplate = {
       description: 'Specify the renderIcon for user',
       options: ['No icon', 'User', 'Group', 'Add'],
       mapping: { 'No icon': '', User: User, Group: Group, Add: Add },
+    },
+    size: {
+      control: {
+        type: 'radio',
+      },
+      options: ['xl', 'lg', 'md', 'sm'],
+    },
+    image: {
+      control: 'textNullable',
+      description: 'Specify the full path to the image to be displayed',
+    },
+    imageDescription: {
+      control: 'text',
+      description:
+        'Specify the to description of image for screen reader users',
     },
   },
   render: (args) => {
@@ -76,6 +111,10 @@ const defaultTemplate = {
         tooltip-text=${args.tooltipText}
         name=${args.name}
         .renderIcon=${args.renderIcon}
+        size=${args.size}
+        image=${args.image}
+        image-description=${args.imageDescription}
+        background-color=${args.backgroundColor}
       >
       </c4p-user-avatar>
     `;
@@ -86,6 +125,19 @@ export const Default = {
   ...defaultTemplate,
   args: {
     ...defaultTemplate.args,
+    tooltipText: 'TW, Thomas J. Watson user profile',
+    name: 'Thomas J. Watson',
+    backgroundColor: 'order-1-cyan',
+  },
+};
+
+export const WithImage = {
+  ...defaultTemplate,
+  args: {
+    ...defaultTemplate.args,
+    image: headshot,
+    tooltipText: 'TW, Thomas J. Watson user profile',
+    imageDescription: 'Avatar of Thomas J. Watson',
   },
 };
 

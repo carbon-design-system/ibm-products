@@ -9,8 +9,8 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
-
-import { prefix } from '../../globals/settings';
+import { classMap } from 'lit/directives/class-map.js';
+import { prefix, carbonPrefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import styles from './user-avatar.scss?lit';
@@ -22,6 +22,16 @@ import User from '@carbon/web-components/es/icons/user/16';
  *
  * @element c4p-user-avatar
  * */
+
+const blockClass = `${prefix}--user-avatar`;
+
+const iconSize = {
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 32,
+};
+
 @customElement(`${prefix}-user-avatar`)
 class CDSUseravatar extends HostListenerMixin(LitElement) {
   /**
@@ -49,43 +59,87 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
   @property()
   renderIcon;
 
-  getItem = () => {
-    if (this.name) {
-      const parts = this.name?.split(' ') || [];
-      const firstChar = parts[0].charAt(0).toUpperCase();
-      const secondChar = parts[0].charAt(1).toUpperCase();
-      if (parts.length === 1) {
-        return firstChar + secondChar;
-      }
-      const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
-      const initials = [firstChar];
-      if (lastChar) {
-        initials.push(lastChar);
-      }
+  /**
+   * Set the size of the avatar circle
+   */
+  @property({ reflect: true })
+  size;
 
-      return ''.concat(...initials);
-    } else if (this.renderIcon) {
-      return html`${this.renderIcon()}`;
-    } else {
-      return html`${User({ slot: 'icon' })} `;
-    }
-  };
+  /**
+   * When passing the image prop, supply a full path to the image to be displayed.
+   */
+  @property({ reflect: true })
+  image;
+  /**
+   * When passing the image prop use the imageDescription prop to describe the image for screen reader.
+   */
+  @property({ reflect: true, attribute: 'image-description' })
+  imageDescription;
 
-  Avatar = () => html`<div>${this.getItem()}</div>`;
+  /**
+   * Provide the background color need to be set for UserAvatar.
+   */
+  @property({ reflect: true, attribute: 'background-color' })
+  backgroundColor = 'order-1-cyan';
 
   render() {
-    const { tooltipText, title, tooltipAlignment } = this;
+    const getItem = () => {
+      const iconProps = { size: iconSize[this.size] };
+      console.log(iconProps);
+
+      if (this.image) {
+        const imageClasses = classMap({
+          [`${blockClass}__photo`]: true,
+          [`${blockClass}__photo--${this.size}`]: this.size,
+        });
+        return html` <img
+          alt="${this.imageDescription}"
+          src="${this.image}"
+          class="${imageClasses}"
+        />`;
+      }
+      if (this.name) {
+        const parts = this.name?.split(' ') || [];
+        const firstChar = parts[0].charAt(0).toUpperCase();
+        const secondChar = parts[0].charAt(1).toUpperCase();
+        if (parts.length === 1) {
+          return firstChar + secondChar;
+        }
+        const lastChar = parts[parts.length - 1].charAt(0).toUpperCase();
+        const initials = [firstChar];
+        if (lastChar) {
+          initials.push(lastChar);
+        }
+
+        return ''.concat(...initials);
+      }
+      if (this.renderIcon) {
+        return html`${this.renderIcon()}`;
+      }
+
+      return html`${User({ slot: 'icon' })} `;
+    };
+
+    const { tooltipText, tooltipAlignment, size, backgroundColor } = this;
+    const classes = classMap({
+      [`${blockClass}`]: true,
+      [`${blockClass}--${size}`]: size,
+      [`${blockClass}--${backgroundColor}`]: backgroundColor,
+    });
+
+    const Avatar = () => html`<div class="${classes}">${getItem()}</div>`;
+
     if (tooltipText) {
       return html`<cds-tooltip
         align=${tooltipAlignment}
         aria-label=${tooltipText}
-        class=${`${prefix}__tooltip ${prefix}--icon-tooltip`}
+        class=${`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       >
-        ${this.Avatar()}
+        ${Avatar()}
         <cds-tooltip-content id="content"> ${tooltipText} </cds-tooltip-content>
       </cds-tooltip>`;
     } else {
-      return html` <button>${title}</button>`;
+      return html` ${Avatar()}`;
     }
   }
 

@@ -28,7 +28,19 @@ $carbon-prefix: 'cds';
 $block-class: #{$prefix}--user-avatar;
 
 :host(#{$prefix}-user-avatar) {
-  @extend .#{$prefix}--user-avatar;
-
-  background-color: $border-interactive;
+  @extend .#{$block-class};
+  @extend .#{$block-class}__tooltip;
 }
+@mixin setBgColor($color) {
+  // stylelint-disable-next-line carbon/theme-use
+  background-color: $color;
+}
+
+//this mixin allows you to set background color based on the lighter themes such as g10 and white
+@mixin setLightBg($order, $color) {
+  :host .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
+}
+
+@include setLightBg(order-1-cyan, $cyan-60);

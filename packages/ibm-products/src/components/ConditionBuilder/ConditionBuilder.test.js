@@ -22,6 +22,7 @@ import {
 } from './assets/SampleData';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
 import CustomInput from './assets/CustomInput';
+import { inputDataForCustomOperator } from './assets/sampleInput';
 
 const blockClass = `${pkg.prefix}--condition-builder`;
 const componentName = ConditionBuilder.displayName;
@@ -1686,6 +1687,40 @@ describe(componentName, () => {
       userEvent.click(screen.getByRole('option', { name: 'excl. if (or)' }))
     );
     expect(screen.getByRole('button', { name: 'excl. if' }));
+  });
+
+  it('check with custom operator configuration ', async () => {
+    render(
+      <ConditionBuilder
+        {...defaultProps}
+        inputConfig={inputDataForCustomOperator}
+      />
+    );
+
+    // add one condition
+    await act(() => userEvent.click(screen.getByText('Add condition')));
+
+    expect(screen.getByRole('option', { name: 'Continent' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'has value' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'has value' }))
+    );
+
+    expect(screen.getByRole('option', { name: 'Africa' }));
+
+    await act(() =>
+      userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+    );
+
+    const selectedItem = screen.getByRole('button', { name: 'Africa' });
+
+    expect(selectedItem);
   });
 
   it('check description tooltip for property', async () => {

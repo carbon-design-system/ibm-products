@@ -7,12 +7,7 @@
 
 import { RefObject, useCallback, useEffect, useState } from 'react';
 
-type ObserveType = 'HEIGHT' | 'WIDTH';
-
-export const useOverflowString = (
-  elementRef: RefObject<HTMLElement>,
-  observe: ObserveType
-) => {
+export const useOverflowStringWidth = (elementRef: RefObject<HTMLElement>) => {
   const innerText = elementRef?.current?.innerText;
   const [overflowInfo, setOverflowInfo] = useState<boolean>();
 
@@ -26,6 +21,17 @@ export const useOverflowString = (
     setOverflowInfo(_isWidthOverflowing);
   }, [elementRef]);
 
+  useEffect(() => {
+    checkWidthOverflow();
+  }, [checkWidthOverflow, elementRef, innerText]);
+
+  return overflowInfo;
+};
+
+export const useOverflowStringHeight = (elementRef: RefObject<HTMLElement>) => {
+  const innerText = elementRef?.current?.innerText;
+  const [overflowInfo, setOverflowInfo] = useState<boolean>();
+
   const checkHeightOverflow = useCallback(() => {
     const offsetHeight = elementRef?.current?.offsetHeight;
     const scrollHeight = elementRef?.current?.scrollHeight;
@@ -37,14 +43,8 @@ export const useOverflowString = (
   }, [elementRef]);
 
   useEffect(() => {
-    if (elementRef && observe === 'WIDTH') {
-      checkWidthOverflow();
-    }
-
-    if (elementRef && observe === 'HEIGHT') {
-      checkHeightOverflow();
-    }
-  }, [checkHeightOverflow, checkWidthOverflow, elementRef, observe, innerText]);
+    checkHeightOverflow();
+  }, [checkHeightOverflow, elementRef, innerText]);
 
   return overflowInfo;
 };

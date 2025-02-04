@@ -56,7 +56,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { useOverflowString } from '../../global/js/hooks/useOverflowString';
+import { useOverflowStringHeight } from '../../global/js/hooks/useOverflowString';
 
 const componentName = 'PageHeader';
 
@@ -924,7 +924,7 @@ export let PageHeader = React.forwardRef(
     }, [headerRef, pageHeaderStyles]);
 
     const subtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = useOverflowString(subtitleRef, 'HEIGHT');
+    const isOverflowing = useOverflowStringHeight(subtitleRef);
     const subtitleContent = (
       <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
         {subtitle}

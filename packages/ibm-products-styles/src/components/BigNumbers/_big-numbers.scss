@@ -112,7 +112,6 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 }
 
 .#{$skeleton-block-class}__label {
-  height: $spacing-04;
   block-size: $spacing-04;
   margin-block: 0 $spacing-03;
 }

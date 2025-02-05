@@ -38,7 +38,7 @@ export const BigNumbersSkeleton = forwardRef<
   HTMLDivElement,
   BigNumbersSkeletonProps
 >(({ className, size, ...rest }, ref) => {
-  const BigNumbersSkeletonClasses = cx(className, blockClass, {
+  const bigNumbersSkeletonClasses = cx(className, blockClass, {
     [`${blockClass}--lg`]: size === BigNumbersSize.Large,
     [`${blockClass}--xl`]: size === BigNumbersSize.XLarge,
   });
@@ -46,7 +46,7 @@ export const BigNumbersSkeleton = forwardRef<
   return (
     <div
       {...rest}
-      className={BigNumbersSkeletonClasses}
+      className={bigNumbersSkeletonClasses}
       ref={ref}
       {...getDevtoolsProps(componentName)}
     >
@@ -68,5 +68,9 @@ BigNumbersSkeleton.propTypes = {
   /**
    *
    */
-  size: PropTypes.oneOf(['default', 'lg', 'xl']),
+  size: PropTypes.oneOf([
+    BigNumbersSize.Default,
+    BigNumbersSize.Large,
+    BigNumbersSize.XLarge,
+  ]),
 };

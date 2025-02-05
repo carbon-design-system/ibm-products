@@ -150,7 +150,7 @@ const defaultProps = {
   loading: false,
   locale: 'en-US',
   percentage: false,
-  size: BigNumbersSize.Default,
+  size: 'default',
   tooltipDescription: '',
   total: 13,
   trending: false,

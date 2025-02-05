@@ -18,6 +18,7 @@ import { Tooltip } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { BigNumbersSkeleton } from './BigNumbersSkeleton';
 import {
+  BigNumbersSizeValues,
   Characters,
   DefaultLocale,
   formatValue,
@@ -38,7 +39,7 @@ export interface BigNumbersProps {
   label: string;
   locale?: string;
   percentage?: boolean;
-  size?: 'default' | 'lg' | 'xl';
+  size?: BigNumbersSizeValues;
   tooltipDescription?: string;
   total?: number;
   trending?: boolean;
@@ -78,7 +79,7 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
     },
     ref
   ) => {
-    const BigNumbersClasses = cx(className, {
+    const bigNumbersClasses = cx(className, {
       [`${blockClass}--lg`]: size === 'lg',
       [`${blockClass}--xl`]: size === 'xl',
     });
@@ -116,7 +117,7 @@ export let BigNumbers = forwardRef<HTMLDivElement, BigNumbersProps>(
     return (
       <div
         {...rest}
-        className={cx(blockClass, BigNumbersClasses, className)}
+        className={cx(blockClass, bigNumbersClasses, className)}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >

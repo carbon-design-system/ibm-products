@@ -52,15 +52,11 @@ export default {
 };
 
 const Template = (argsIn) => {
-  const [containerWidth, setContainerWidth] = useState();
-
-  useEffect(() => {
-    setContainerWidth(argsIn?.containerWidth);
-  }, [argsIn]);
+  const { containerWidth, ...args } = { ...argsIn };
 
   return (
     <div style={{ width: containerWidth }}>
-      <ActionBar {...argsIn} />
+      <ActionBar {...args} />
     </div>
   );
 };

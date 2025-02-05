@@ -6,14 +6,15 @@
  */
 
 /**
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales
- *
- * @param {string} locale Desired locale for number formatting.
- * @param {string} defaultLocale Fallback locale if `locale` is not supported.
- * @returns `locale` or `defaultLocale`
+ * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales
  */
-export const getSupportedLocale = (locale, defaultLocale = 'en-US') => {
-  let supportedLocale;
+
+export const getSupportedLocale = (
+  locale: Intl.LocalesArgument,
+  defaultLocale: string = 'en-US'
+): Intl.LocalesArgument => {
+  let supportedLocale: Intl.LocalesArgument;
+
   try {
     // This line will throw an error if `locale` is not supported.
     Intl.NumberFormat.supportedLocalesOf(locale);
@@ -23,5 +24,6 @@ export const getSupportedLocale = (locale, defaultLocale = 'en-US') => {
     // else return `defaultLocale`.
     supportedLocale = defaultLocale;
   }
+
   return supportedLocale;
 };

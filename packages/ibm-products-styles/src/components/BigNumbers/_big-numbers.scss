@@ -43,8 +43,7 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 
 .#{$block-class}__total,
 .#{$block-class}__percentage-mark {
-  margin-block-end: $spacing-02;
-  margin-block-start: auto;
+  margin-block: auto $spacing-02;
 }
 
 .#{$block-class}__info {
@@ -109,49 +108,49 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 //
 
 .#{$skeleton-block-class} {
-  width: 4rem;
+  inline-size: 4rem;
 }
 
 .#{$skeleton-block-class}__label {
   height: $spacing-04;
-  margin-block-end: $spacing-03;
-  margin-block-start: 0;
+  block-size: $spacing-04;
+  margin-block: 0 $spacing-03;
 }
 
 .#{$skeleton-block-class}__value {
-  /* stylelint-disable-next-line declaration-no-important */
-  height: $spacing-08 !important;
   margin: 0;
+  /* stylelint-disable-next-line declaration-no-important */
+  block-size: $spacing-08 !important;
 }
 
 .#{$skeleton-block-class}--lg {
-  width: 5rem;
+  inline-size: 5rem;
 }
 
 .#{$skeleton-block-class}--xl {
-  width: 6rem;
+  inline-size: 6rem;
 }
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--lg
   .#{$skeleton-block-class}__label {
-  height: $spacing-04;
+  block-size: $spacing-04;
 }
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--lg
   .#{$skeleton-block-class}__value {
   /* stylelint-disable-next-line declaration-no-important */
-  height: $spacing-09 !important;
+  block-size: $spacing-09 !important;
 }
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--xl
   .#{$skeleton-block-class}__label {
-  height: $spacing-04;
+  block-size: $spacing-04;
 }
 
 .#{$skeleton-block-class}.#{$skeleton-block-class}--xl
   .#{$skeleton-block-class}__value {
   /* stylelint-disable-next-line declaration-no-important */
-  height: $spacing-10 !important;
+  block-size: $spacing-10 !important;
 }
 
 .#{$block-class} .#{$block-class}__tooltip-trigger:focus {

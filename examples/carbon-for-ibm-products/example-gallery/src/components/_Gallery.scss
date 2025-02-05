@@ -5,20 +5,24 @@ $block-class: 'gallery';
 
 body {
   overflow-x: hidden;
+
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class}.#{$block-class} {
-  width: 100vw;
-  min-height: 100vh;
+  inline-size: 100vw;
+  min-block-size: 100vh;
   background-color: $background;
   color: $text-primary;
 }
 
 .#{$block-class} .#{$block-class}__container {
   display: flex;
-  width: 100%;
-  max-width: 1024px;
-  min-height: 100%;
+  inline-size: 100%;
+  max-inline-size: 1024px;
+  min-block-size: 100%;
   flex-direction: column;
   margin: 0 auto;
 }
@@ -42,13 +46,13 @@ $item-width: 320px;
 $item-height: 240px;
 
 .#{$block-class} .#{$block-class}__gallery-item {
-  width: $item-width;
-  height: $item-height;
+  inline-size: $item-width;
+  block-size: $item-height;
   margin-bottom: $spacing-06;
 }
 
 .#{$block-class} .#{$block-class}__gallery-item--dummy {
-  width: $item-width;
-  height: 0;
+  inline-size: $item-width;
+  block-size: 0;
   visibility: hidden;
 }

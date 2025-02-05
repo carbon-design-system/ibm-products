@@ -31,25 +31,25 @@ $carbon: #{c4p-settings.$carbon-prefix};
 // Position the menu button via its wrapper, not the button itself.
 .#{$block-class} .#{$carbon}--overflow-menu__wrapper {
   position: absolute;
-  top: 0;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
 }
 // Size the menu button.
 .#{$block-class} .#{$block-class}__overflow-button {
-  width: $spacing-06;
   background-color: $layer;
   block-size: $spacing-06;
+  inline-size: $spacing-06;
   min-block-size: $spacing-06;
 }
 
 // OverflowMenu <li>
 .#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__option {
-  height: $spacing-06;
+  block-size: $spacing-06;
 }
 // OverflowMenu <button>
 .#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__btn {
-  max-width: none;
   justify-content: flex-end;
+  max-inline-size: none;
 }
 // SIZE FIX: This element is being used to "erase" the drop shadow
 // created by the menu items overtop the menu button.

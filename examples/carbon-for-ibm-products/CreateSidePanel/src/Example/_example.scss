@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  block-size: 100vh;
 }
 
 $block-class: #{config.$pkg-prefix}--create-side-panel;

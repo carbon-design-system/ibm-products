@@ -150,7 +150,7 @@
     ]
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "^3.2.1",
+    "stylelint-plugin-carbon-tokens": "^3.2.3",
     "stylelint-use-logical": "^2.1.2"
   },
   "packageManager": "yarn@4.6.0"

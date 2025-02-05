@@ -133,6 +133,7 @@ expect.extend({
       await expect(page.locator('css=.story-wrapper')).toBeInViewport();
       pass = true;
     } catch (e) {
+      console.error(e);
       pass = false;
     }
 

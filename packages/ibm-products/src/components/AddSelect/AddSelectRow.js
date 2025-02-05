@@ -135,6 +135,7 @@ export let AddSelectRow = ({
         [`${blockClass}-row--selected`]: isSelected(),
         [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
         [`${blockClass}-row--active`]: expanded,
+        [`${blockClass}-row--focused`]: focus === index,
       })}
       onKeyDown={onSelectKeyDown}
       tabIndex={tabIndex}

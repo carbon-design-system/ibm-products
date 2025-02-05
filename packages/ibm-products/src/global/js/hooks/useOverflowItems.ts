@@ -24,7 +24,7 @@ export const useOverflowItems = <T extends Item>(
   }) => void
 ) => {
   const itemsRef = useRef<Map<string, number> | null>(null);
-  const [maxWidth, setMaxWidth] = useState(0);
+  const [remainingWidth, setRemainingWidth] = useState(0);
   const visibleItemCount = useRef<number>(0);
   const minWidthRef = useRef<number>();
   const requiredWidthRef = useRef<number>();
@@ -32,8 +32,8 @@ export const useOverflowItems = <T extends Item>(
   const handleResize = () => {
     if (containerRef.current) {
       const offset = offsetRef?.current?.offsetWidth || 0;
-      const newMax = containerRef.current.offsetWidth - offset;
-      setMaxWidth(newMax);
+      const usableWidth = containerRef.current.offsetWidth - offset;
+      setRemainingWidth(usableWidth);
     }
   };
 
@@ -75,7 +75,7 @@ export const useOverflowItems = <T extends Item>(
     let maxReached = false;
     let accumulatedWidth = 0;
     const offset = offsetRef?.current?.offsetWidth || 0;
-    const includeOffset = requiredWidth > maxWidth + offset;
+    const includeOffset = requiredWidth > remainingWidth + offset;
 
     const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
       if (maxReached) {
@@ -83,10 +83,10 @@ export const useOverflowItems = <T extends Item>(
       }
 
       const itemWidth = map.get(cur.id) || 0;
-      let willFit = accumulatedWidth + itemWidth <= maxWidth;
+      let willFit = accumulatedWidth + itemWidth <= remainingWidth;
 
       if (!includeOffset) {
-        willFit = accumulatedWidth + itemWidth <= maxWidth + offset;
+        willFit = accumulatedWidth + itemWidth <= remainingWidth + offset;
       }
 
       if (willFit) {
@@ -108,16 +108,16 @@ export const useOverflowItems = <T extends Item>(
   // only call the change handler when the number of visible items has changed
   if (
     visibleItems.length !== visibleItemCount.current ||
-    maxWidth !== minWidthRef.current ||
+    remainingWidth !== minWidthRef.current ||
     requiredWidth !== requiredWidthRef.current
   ) {
     visibleItemCount.current = visibleItems.length;
-    minWidthRef.current = maxWidth;
+    minWidthRef.current = remainingWidth;
     requiredWidthRef.current = requiredWidth;
 
     onChange?.({
       hiddenItems,
-      minWidth: maxWidth,
+      minWidth: remainingWidth,
       maxWidth: requiredWidth + firstItemWidth,
     });
   }

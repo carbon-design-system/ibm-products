@@ -14,8 +14,8 @@ type Item = {
 
 export const useOverflowItems = <T extends Item>(
   items: T[] = [],
-  containerRef: RefObject<HTMLDivElement>,
-  offsetRef?: RefObject<HTMLDivElement>,
+  containerRef: RefObject<HTMLDivElement | null>,
+  offsetRef?: RefObject<HTMLDivElement | null>,
   maxItems?: number,
   onChange?: (value: {
     hiddenItems?: T[];
@@ -30,7 +30,7 @@ export const useOverflowItems = <T extends Item>(
   const requiredWidthRef = useRef<number>();
 
   const handleResize = () => {
-    if (containerRef.current) {
+    if (containerRef?.current) {
       const offset = offsetRef?.current?.offsetWidth || 0;
       const usableWidth = containerRef.current.offsetWidth - offset;
       setRemainingWidth(usableWidth);

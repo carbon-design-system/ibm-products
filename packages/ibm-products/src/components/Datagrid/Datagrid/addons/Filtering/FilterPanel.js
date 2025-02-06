@@ -26,7 +26,7 @@ import {
   innerContainerVariants,
   panelVariants,
 } from './motion/variants';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   useFilters,
   useShouldDisableButtons,
@@ -40,10 +40,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
-import {
-  useIsomorphicEffect,
-  usePrefersReducedMotion,
-} from '../../../../../global/js/hooks';
+import { useIsomorphicEffect } from '../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const componentClass = `${blockClass}-filter-panel`;
@@ -127,7 +124,9 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
-  const shouldReduceMotion = usePrefersReducedMotion();
+  // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
+  // using our own was causing an error
+  const shouldReduceMotion = useReducedMotion();
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);

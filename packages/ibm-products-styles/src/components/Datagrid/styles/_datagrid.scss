@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/breakpoint';
 @use './variables' as *;
@@ -383,6 +383,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     white-space: initial;
   }
 
@@ -436,6 +437,7 @@
 
   .#{c4p-settings.$carbon-prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
+    appearance: none; // could be fixed by post-css plugin
   }
 
   th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {

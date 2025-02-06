@@ -332,7 +332,6 @@ export let NotificationsPanel = React.forwardRef(
     }, [data]);
 
     useClickOutside(ref || notificationPanelRef, () => {
-      setRender(false);
       onClickOutside?.();
       setTimeout(() => {
         triggerButtonRef?.current?.focus();

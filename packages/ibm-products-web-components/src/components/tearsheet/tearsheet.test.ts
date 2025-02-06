@@ -67,46 +67,45 @@ const defaultProps = {
   headerNavigation: '',
 };
 
-const template = (props = defaultProps) =>
-  html`
-    <c4p-tearsheet
-      selector-initial-focus=${props.selectorInitialFocus}
-      ?open=${props.open}
-      influencer-placement=${props.influencerPlacement}
-      influencer-width=${props.influencerWidth}
-      ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
-      width=${props.width}
-    >
-      <!-- default slotted content -->
-      ${props.content}
+const template = (props = defaultProps) => html`
+  <c4p-tearsheet
+    selector-initial-focus=${props.selectorInitialFocus}
+    ?open=${props.open}
+    influencer-placement=${props.influencerPlacement}
+    influencer-width=${props.influencerWidth}
+    ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
+    width=${props.width}
+  >
+    <!-- default slotted content -->
+    ${props.content}
 
-      <!-- slotted header label -->
-      ${props.label}
+    <!-- slotted header label -->
+    ${props.label}
 
-      <!-- slotted header title -->
-      ${props.title ? html`<span slot="title">${props.title}</span>` : ''}
+    <!-- slotted header title -->
+    ${props.title ? html`<span slot="title">${props.title}</span>` : ''}
 
-      <!-- slotted header description -->
-      ${props.description
-        ? html`<span slot="description">${props.description}</span>`
-        : ''}
+    <!-- slotted header description -->
+    ${props.description
+      ? html`<span slot="description">${props.description}</span>`
+      : ''}
 
-      <!-- slotted action in header cds-buttons -->
-      ${props.headerActions}
+    <!-- slotted action in header cds-buttons -->
+    ${props.headerActions}
 
-      <!-- slotted action items cds-buttons -->
-      ${props.actionItems}
+    <!-- slotted action items cds-buttons -->
+    ${props.actionItems}
 
-      <!-- slotted slug -->
-      ${props.slug}
+    <!-- slotted slug -->
+    ${props.slug}
 
-      <!-- slotted header-navigation -->
-      ${props.headerNavigation}
+    <!-- slotted header-navigation -->
+    ${props.headerNavigation}
 
-      <!-- slotted influencer -->
-      ${props.influencer}
-    </c4p-tearsheet>
-  `;
+    <!-- slotted influencer -->
+    ${props.influencer}
+  </c4p-tearsheet>
+`;
 
 describe('c4p-tearsheet', () => {
   it('should render a tearsheet', async () => {

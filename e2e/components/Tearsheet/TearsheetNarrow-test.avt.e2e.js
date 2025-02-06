@@ -129,7 +129,7 @@ test.describe('TearsheetNarrow @avt', () => {
 
     // Selecting the first slug button
     const slugButton1 = page
-      .locator('*[aria-label="AI - Show information"]')
+      .locator('*[aria-label="AI Show information"]')
       .first();
     const closeButton = page.getByLabel('Close the tearsheet');
     const inputField = page.locator('#tss-ft1');

@@ -35,9 +35,11 @@ applicable.
 
 `- [ ]` Verify the dependency has previously been
 [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)\
-`- [ ]` Verify the dependency [doesn't contain any vulnerabilities](https://snyk.io/vuln)\
+`- [ ]` Verify the dependency
+[doesn't contain any vulnerabilities](https://snyk.io/vuln)\
 `- [ ]` Verify the dependency [bundle size](https://bundlephobia.com) is
 acceptable\
-`- [ ]` Verify the dependency is [actively maintained](https://www.npmtrends.com)\
+`- [ ]` Verify the dependency is
+[actively maintained](https://www.npmtrends.com)\
 `- [ ]` Verify license conditions are met e.g. forwarding of copyright if
 necessary.

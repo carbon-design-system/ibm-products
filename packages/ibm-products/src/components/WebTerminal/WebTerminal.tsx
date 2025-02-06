@@ -117,7 +117,7 @@ export let WebTerminal = React.forwardRef(
     }: WebTerminalProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const localRef = useRef<HTMLDivElement>();
+    const localRef = useRef<HTMLDivElement>(null);
     const webTerminalRef = (ref ??
       localRef) as MutableRefObject<HTMLElementStyled>;
 

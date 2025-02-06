@@ -86,6 +86,7 @@ about: Review process before release of a new component or pattern from Canary
       and Stackblitz for the components.
 
 [^1]: Any labels, text, or other strings within a component should use a prop.
+
 [^2]:
     See Carbon’s
     [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/main/.github/CONTRIBUTING.md)

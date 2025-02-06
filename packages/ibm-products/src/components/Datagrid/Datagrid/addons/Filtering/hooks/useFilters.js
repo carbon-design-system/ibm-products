@@ -283,7 +283,7 @@ const useFilters = ({
                 {...components.RadioButtonGroup}
                 valueSelected={
                   filtersState[column]?.value === ''
-                    ? components.DefaultRadioButton?.value ?? 'Any'
+                    ? (components.DefaultRadioButton?.value ?? 'Any')
                     : filtersState[column]?.value
                 }
                 onChange={(selected) => {

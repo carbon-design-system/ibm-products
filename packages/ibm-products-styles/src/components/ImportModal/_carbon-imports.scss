@@ -8,7 +8,7 @@
 // ImportModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody,
 // FileUploaderDropContainer, FileUploaderItem, TextInput, Button
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/file-uploader';
-@use '@carbon/react/scss/components/text-input';
-@use '@carbon/react/scss/components/button';
+@use '@carbon/styles/scss/components/modal';
+@use '@carbon/styles/scss/components/file-uploader';
+@use '@carbon/styles/scss/components/text-input';
+@use '@carbon/styles/scss/components/button';

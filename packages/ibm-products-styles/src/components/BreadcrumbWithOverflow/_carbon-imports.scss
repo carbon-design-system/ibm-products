@@ -7,6 +7,6 @@
 
 // BreadcrumbWithOverflow uses the following Carbon components:
 // Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem, IconButton
-@use '@carbon/react/scss/components/breadcrumb';
-@use '@carbon/react/scss/components/overflow-menu';
-@use '@carbon/react/scss/components/button';
+@use '@carbon/styles/scss/components/breadcrumb';
+@use '@carbon/styles/scss/components/overflow-menu';
+@use '@carbon/styles/scss/components/button';

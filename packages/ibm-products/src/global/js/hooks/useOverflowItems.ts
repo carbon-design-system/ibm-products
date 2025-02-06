@@ -62,7 +62,7 @@ export const useOverflowItems = <T extends Item>(
 
       if (containerRef?.current && items?.length === itemsRef?.current?.size) {
         node.style.visibility = 'visible';
-      } else {
+      } else if (!maxItems) {
         node.style.visibility = 'hidden';
       }
     }
@@ -81,7 +81,13 @@ export const useOverflowItems = <T extends Item>(
     let maxReached = false;
     let accumulatedWidth = 0;
     const offset = offsetRef?.current?.offsetWidth || 0;
-    const includeOffset = requiredWidth > remainingWidth + offset;
+    let includeOffset = false;
+
+    if (maxItems) {
+      includeOffset = requiredWidth + offset > requiredWidth;
+    } else {
+      includeOffset = requiredWidth > remainingWidth + offset;
+    }
 
     const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
       if (maxReached) {

@@ -250,7 +250,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--css-grid--narrow {
-  --cds-grid-gutter-start: 0;
+  --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
 }
 
 .cds--css-grid--condensed {
@@ -282,7 +282,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--subgrid--narrow {
-  --cds-grid-gutter-start: 0;
+  --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   --cds-grid-gutter-end: 1rem;
   --cds-grid-column-hang: 1rem;
 }

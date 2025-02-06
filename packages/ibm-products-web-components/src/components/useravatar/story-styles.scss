@@ -16,15 +16,6 @@ $story-prefix: 'user-avatar-stories__';
   gap: $spacing-05;
 }
 
-.#{$story-prefix}text-inputs {
-  display: flex;
-  gap: $spacing-05;
-
-  > * {
-    flex-basis: 50%;
-  }
-}
-
 .#{$story-prefix}story-container {
   position: fixed;
   display: grid;

@@ -8,12 +8,25 @@
 import { action } from '@storybook/addon-actions';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-const currentDate = new Date();
-let yesterdayDate = new Date();
-yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-let dayBeforeYesterday = new Date();
-dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
+/**
+ Currently setting this to Jan 1st of the current year so notifications aren't too far back. I set it to current year for this case.
+ The reason we changed this to hardcode is because percy was showing the change in timestamp as a design change. So technically it will
+  only trigger a percy check once a year.
+*/
+const currentYear = new Date().getFullYear();
+const currentDate = new Date(currentYear, 0, 1); // Month is 0-based, 4 = May
+
+// Static yesterday date (May 3, 2024)
+let yesterdayDate = new Date(currentDate);
+yesterdayDate.setDate(currentDate.getDate() - 1);
+
+// Static day before yesterday date (May 2, 2024)
+let dayBeforeYesterday = new Date(currentDate);
+dayBeforeYesterday.setDate(currentDate.getDate() - 2);
+
+// Constant for milliseconds in one minute
 const msInOneMinute = 60000;
+
 const data = [
   {
     id: uuidv4(),

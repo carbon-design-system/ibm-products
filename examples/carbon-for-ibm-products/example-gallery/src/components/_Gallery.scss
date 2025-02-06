@@ -5,6 +5,10 @@ $block-class: 'gallery';
 
 body {
   overflow-x: hidden;
+
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class}.#{$block-class} {

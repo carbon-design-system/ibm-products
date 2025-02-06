@@ -17,7 +17,13 @@ import {
   WarningAltFilled,
 } from '@carbon/react/icons';
 // Import portions of React that are needed.
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { NotificationsEmptyState } from '../EmptyStates';
 // Other standard imports.
@@ -231,6 +237,11 @@ export interface NotificationsPanelProps {
   todayLabel?: string;
 
   /**
+   * Reference to trigger button
+   */
+  triggerButtonRef?: RefObject<any>;
+
+  /**
    * Sets the View all button text
    */
   viewAllLabel?: (value: number) => string;
@@ -296,6 +307,7 @@ export let NotificationsPanel = React.forwardRef(
       yearsAgoText = defaults.yearsAgoText,
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
+      triggerButtonRef,
       // Collect any other property values passed in.
       ...rest
     }: NotificationsPanelProps,
@@ -322,6 +334,9 @@ export let NotificationsPanel = React.forwardRef(
     useClickOutside(ref || notificationPanelRef, () => {
       setRender(false);
       onClickOutside?.();
+      setTimeout(() => {
+        triggerButtonRef?.current?.focus();
+      }, 0);
     });
 
     const handleKeydown = (event) => {
@@ -329,6 +344,9 @@ export let NotificationsPanel = React.forwardRef(
       if (event.key === 'Escape') {
         setRender(false);
         onClickOutside?.();
+        setTimeout(() => {
+          triggerButtonRef?.current?.focus();
+        }, 100);
       }
     };
 
@@ -925,6 +943,11 @@ NotificationsPanel.propTypes = {
    * Sets the today label text
    */
   todayLabel: PropTypes.string,
+
+  /**
+   * Sets the today label text
+   */
+  triggerButtonRef: PropTypes.any,
 
   /**
    * Sets the View all button text

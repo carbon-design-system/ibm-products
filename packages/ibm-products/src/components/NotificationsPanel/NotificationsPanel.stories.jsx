@@ -194,6 +194,7 @@ const Template = (args) => {
             )}
           </HeaderGlobalAction>
           <NotificationsPanel
+            triggerButtonRef={notificationActionRef}
             data={notificationsData}
             open={notificationsOpen}
             onClickOutside={() => {

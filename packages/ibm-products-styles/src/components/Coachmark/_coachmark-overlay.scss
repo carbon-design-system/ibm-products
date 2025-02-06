@@ -91,7 +91,7 @@ $draghandle-btn-class: #{$block-class}__handle;
 
   &--bottom {
     $horizontal-push: calc($distance-offset - $caret-center);
-    $inset-block-start: calc(-1 * $caret-height);
+    $top: calc(-1 * $caret-height);
     $translate-y: calc($distance-offset + $caret-height);
 
     transform: translate(-50%, $translate-y);

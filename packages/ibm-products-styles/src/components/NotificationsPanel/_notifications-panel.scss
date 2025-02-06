@@ -170,11 +170,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
           overflow: hidden;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
+          line-clamp: 2;
         }
         &.#{$block-class}__notification-long-description {
           display: block;
           overflow: initial;
           -webkit-line-clamp: initial;
+          line-clamp: initial;
         }
       }
       .#{$block-class}__notification-read-more-button,

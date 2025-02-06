@@ -65,14 +65,14 @@ const mockSizes = () => {
 };
 
 const testSizes = (el, property) => {
-  const classes = el.getAttribute('class').split(' ');
+  const classes = el.getAttribute('class')?.split(' ');
   const container = el.closest('.test-container');
 
   // if no container we are looking at the popup, assign something more than big enough e.g. 1001
   const base = container ? parseInt(container.style.width, 10) : 1001;
   const propSizes = sizes(base)[property];
 
-  if (propSizes) {
+  if (propSizes && classes) {
     for (let cls of classes) {
       const val = propSizes[cls] ? propSizes[cls] : -1;
       if (val >= 0) {

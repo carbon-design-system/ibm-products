@@ -168,7 +168,10 @@ export let ActionBar = React.forwardRef(
         >
           {visibleItems.map(({ key, id, ...rest }) => (
             <ActionBarItem
-              {...rest}
+              {...{
+                id,
+                ...rest,
+              }}
               key={key}
               ref={(node) => {
                 itemRefHandler(id, node);

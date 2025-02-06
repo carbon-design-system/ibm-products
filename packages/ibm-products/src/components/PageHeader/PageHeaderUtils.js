@@ -126,7 +126,12 @@ export const utilCheckUpdateVerticalSpace = (
 
     if (!enableBreadcrumbScroll || !navigation) {
       // adjust sticky top if no navigation or breadcrumb is to stay on screen
-      update.headerTopValue += update.breadcrumbRowHeight;
+      // also check for page actions, and use max height
+      const pageActionsElH = pageActionsEl ? pageActionsEl.clientHeight : 0;
+      update.headerTopValue += Math.max(
+        update.breadcrumbRowHeight,
+        pageActionsElH
+      );
     }
 
     if (enableBreadcrumbScroll) {

@@ -12,7 +12,7 @@ describe('story decorator', () => {
   it('should render a story decorator utility', () => {
     render(sampleDecorator(1));
     expect(screen.getByText('AI Explained'));
-    expect(screen.getByLabelText('AI - Show information')).toBeInTheDocument();
+    expect(screen.getByLabelText('AI Show information')).toBeInTheDocument();
   });
   it('should render default toggle tip', () => {
     render(sampleDecorator(2));

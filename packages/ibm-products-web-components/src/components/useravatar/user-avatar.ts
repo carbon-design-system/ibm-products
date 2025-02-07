@@ -85,8 +85,6 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
   render() {
     const getItem = () => {
       const iconProps = { size: iconSize[this.size] };
-      console.log(iconProps);
-
       if (this.image) {
         const imageClasses = classMap({
           [`${blockClass}__photo`]: true,
@@ -114,10 +112,17 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
         return ''.concat(...initials);
       }
       if (this.renderIcon) {
-        return html`${this.renderIcon()}`;
+        return html`${this.renderIcon({
+          width: `${iconProps.size}`,
+          height: `${iconProps.size}`,
+        })}`;
       }
 
-      return html`${User({ slot: 'icon' })} `;
+      return html`${User({
+        slot: 'icon',
+        width: `${iconProps.size}`,
+        height: `${iconProps.size}`,
+      })} `;
     };
 
     const { tooltipText, tooltipAlignment, size, backgroundColor } = this;

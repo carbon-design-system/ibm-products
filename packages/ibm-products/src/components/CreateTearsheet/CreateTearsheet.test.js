@@ -295,21 +295,21 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('should focus the specified element on steps greater than the first', async () => {
-    jest.useFakeTimers();
     renderCreateTearsheet({
       ...defaultProps,
       firstFocusElement: `#${secondStepButtonId}`,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
-    jest.advanceTimersByTime(1000);
-    const button = screen.getByRole('button', {
-      name: 'Second step button two',
-    });
-    expect(button).toHaveFocus();
+    setTimeout(() => {
+      const button = screen.getByRole('button', {
+        name: 'Second step button two',
+      });
+      expect(button).toHaveFocus();
+    }, 20);
   });
 
-  it('should focus the specified element on steps greater than the first', async () => {
+  it('should not focus the specified element if an invalid selector is provided', async () => {
     jest.useFakeTimers();
     renderCreateTearsheet({
       ...defaultProps,

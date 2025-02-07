@@ -267,6 +267,7 @@ const inputData = {
       config: {
         component: CustomInput,
         operators: customOperators,
+        valueFormatter: (value) => value?.toUpperCase(),
       },
     },
   ],
@@ -396,7 +397,7 @@ const defaultProps = {
   getConditionState: () => {},
   variant: NON_HIERARCHICAL_VARIANT,
 };
-
+const testInputText = 'testID123';
 const inputConfigOptionType = {
   properties: [
     {
@@ -786,12 +787,12 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#id');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -815,12 +816,12 @@ describe(componentName, () => {
     await act(() => userEvent.click(isOperator));
 
     const inputText = document.querySelector('#id_long');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
 
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    const selectedItem = screen.getByRole('button', { name: testInputText });
 
     expect(selectedItem);
   });
@@ -1612,12 +1613,15 @@ describe(componentName, () => {
     );
 
     const inputText = document.querySelector('#customInput');
-    fireEvent.change(inputText, { target: { value: 'testID123' } });
+    fireEvent.change(inputText, { target: { value: testInputText } });
 
     const container = document.querySelector(`.${blockClass}`);
     await act(() => userEvent.click(container));
-
-    const selectedItem = screen.getByRole('button', { name: 'testID123' });
+    // the value formatter will format to uppercase
+    // cspell: disable
+    const selectedItem = screen.getByRole('button', {
+      name: testInputText.toUpperCase(),
+    });
 
     expect(selectedItem);
   });

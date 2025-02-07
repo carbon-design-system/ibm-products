@@ -17,6 +17,7 @@ import {
   useFilters,
   usePagination,
   TableInstance,
+  PluginHook,
 } from 'react-table';
 import useSkeletonRows from './useSkeletonRows';
 import useDefaultStringRenderer from './useDefaultStringRenderer';
@@ -41,7 +42,7 @@ const useDatagrid = (params, ...plugins): TableInstance => {
     useGlobalFilter,
     useSortBy,
     useExpanded,
-  ];
+  ] as PluginHook<object>[];
 
   // Disable resizing
   if (params.disableResizing) {

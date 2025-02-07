@@ -376,7 +376,9 @@ export let NotificationsPanel = React.forwardRef(
 
     const onAnimationEnd = () => {
       // initialize the notification panel to close
-      !open && setRender(false);
+      if (!open) {
+        setRender(false);
+      }
     };
     const handleBlur = ({
       target: oldActiveNode,
@@ -546,8 +548,9 @@ export let NotificationsPanel = React.forwardRef(
             ) {
               return;
             }
-            event.which === 13 &&
+            if (event.which === 13) {
               notification.onNotificationClick(notification);
+            }
           }}
         >
           {notification.type === 'error' && (

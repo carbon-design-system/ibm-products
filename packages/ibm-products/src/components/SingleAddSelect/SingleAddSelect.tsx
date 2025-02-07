@@ -108,6 +108,7 @@ export let SingleAddSelect = forwardRef(
         {...validProps}
         ref={ref}
         {...getDevtoolsProps(componentName)}
+        multi={false}
       />
     );
   }

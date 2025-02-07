@@ -57,7 +57,9 @@ const DatagridBatchActionsToolbar = (
     const countDisabledRows =
       (rows.find((row) => row.getRowProps)?.getRowProps?.() as DatagridRowProps)
         ?.nonselectablerows?.length || 0;
-    rows && setAvailableRowsCount(rows.length - countDisabledRows);
+    if (rows) {
+      setAvailableRowsCount(rows.length - countDisabledRows);
+    }
   }, [rows]);
 
   // Get initial width of batch actions container,

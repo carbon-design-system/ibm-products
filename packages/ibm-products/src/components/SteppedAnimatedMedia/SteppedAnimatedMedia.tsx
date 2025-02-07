@@ -101,9 +101,11 @@ export const SteppedAnimatedMedia = React.forwardRef(
             preserveAspectRatio: 'xMidYMid slice',
           },
         });
-        prefersReducedMotion
-          ? animRef.current?.goToAndStop(0)
-          : animRef.current?.goToAndPlay(0);
+        if (prefersReducedMotion) {
+          animRef.current?.goToAndStop(0);
+        } else {
+          animRef.current?.goToAndPlay(0);
+        }
       }
 
       return () => animRef.current?.destroy();

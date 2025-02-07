@@ -213,9 +213,10 @@ const getActionToolbarItems = (index) => {
     case 1:
       return html`<cds-dropdown slot="header-actions" value="option 1">
         ${['option 1', 'option 2', 'option 3', 'option 4'].map(
-          (option) => html` <cds-dropdown-item value="${option}"
-            >${option}</cds-dropdown-item
-          >`
+          (option) =>
+            html` <cds-dropdown-item value="${option}"
+              >${option}</cds-dropdown-item
+            >`
         )}
       </cds-dropdown>`;
     case 2:

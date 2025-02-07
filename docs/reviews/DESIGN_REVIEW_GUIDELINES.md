@@ -50,16 +50,16 @@ maintainer\
 maintainer\
 `- [ ]` The component’s motion matches the specifications set by the pattern
 maintainer(s)\
-`- [ ]` The UI produced is responsive, cross-browser, and responds to the currently
-set Carbon theme.\
+`- [ ]` The UI produced is responsive, cross-browser, and responds to the
+currently set Carbon theme.\
 `- [ ]` Colors, themes, sizes and additional props are true and correct,
 aligning with Carbon set tokens (unless otherwise specified by the pattern)\
-`- [ ]` Paddings/margins/spacings are true and correct, in both desktop and mobile
-views
+`- [ ]` Paddings/margins/spacings are true and correct, in both desktop and
+mobile views
 
 `###` Storybook
 
 `- [ ]` A functioning component renders in Storybook\
-`- [ ]` The Storybook displays multiple scenarios that show how the component can
-be used\
+`- [ ]` The Storybook displays multiple scenarios that show how the component
+can be used\
 `- [ ]` Changing props in the Storybook updates the component

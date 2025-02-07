@@ -71,6 +71,10 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
   @include type-style('body-compact-01');
 }
 
+.#{$block-class}__icon-button {
+  margin-inline-start: $spacing-02;
+}
+
 .#{$block-class}--lg .#{$block-class}__value,
 .#{$block-class}--lg .#{$block-class}__percentage {
   @include type-style('heading-06');
@@ -98,6 +102,10 @@ $skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-numbers-skeleton;
 .#{$block-class}--xl .#{$block-class}__trend {
   margin-block-start: $spacing-04;
 }
+
+//
+// Skeleton
+//
 
 .#{$skeleton-block-class} {
   inline-size: 4rem;

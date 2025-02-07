@@ -183,3 +183,37 @@ export const sampleDataStructure_nonHierarchical = {
   ],
   operator: 'or',
 };
+
+export const initialStateWithCustomOperators = {
+  operator: 'or',
+  groups: [
+    {
+      groupOperator: 'and',
+      statement: 'ifAll',
+      id: 'e1c37cb2-3e11-4eb6-937a-b9add468345b',
+      conditions: [
+        {
+          property: 'continent',
+          operator: 'hasValues',
+          value: [
+            {
+              label: 'Africa',
+              id: 'Africa',
+            },
+            {
+              label: 'Antarctica',
+              id: 'Antarctica',
+            },
+          ],
+          id: 'b7720ec9-e52a-4a7b-90c1-b4aa3c55daeb',
+        },
+        {
+          property: 'id',
+          operator: 'hasValue',
+          value: 'test',
+          id: 'eba8a891-7203-4b22-bf44-c4a9f0c80c4b',
+        },
+      ],
+    },
+  ],
+};

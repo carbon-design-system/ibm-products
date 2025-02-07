@@ -151,3 +151,14 @@ export const getValue = (type, value, config) => {
     return formatters[type](value, config);
   }
 };
+
+//check if the operator is configured as multiSelect in the input configuration or operator is on of
+export const checkForMultiSelectOperator = (condition, config) => {
+  return (
+    condition?.operator === 'oneOf' ||
+    config?.operators?.find(
+      (operator) =>
+        condition?.operator === operator.id && operator.isMultiSelect
+    )
+  );
+};

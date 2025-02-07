@@ -62,17 +62,20 @@ let Toolbar = forwardRef(
         ref?.['current']
       ) as HTMLElement[];
 
-      focus !== -1 &&
+      if (focus !== -1) {
         getFocusableElements()?.forEach((element, index) => {
           element[index !== focus ? 'setAttribute' : 'removeAttribute'](
             'tabindex',
             '-1'
           );
         });
+      }
     });
 
     useEffect(() => {
-      focus !== -1 && getFocusableElements()?.[focus].focus();
+      if (focus !== -1) {
+        getFocusableElements()?.[focus].focus();
+      }
     }, [focus, getFocusableElements]);
 
     const [arrowNext, arrowPrevious] = !vertical
@@ -82,13 +85,17 @@ let Toolbar = forwardRef(
     function onArrowDown(increment: number) {
       const nextFocus = focus + increment;
 
-      getFocusableElements()?.[nextFocus] && setFocus(nextFocus);
+      if (getFocusableElements()?.[nextFocus]) {
+        setFocus(nextFocus);
+      }
     }
 
     function onFocus({ target }) {
       const elements = getFocusableElements();
 
-      elements?.includes(target) && setFocus(elements.indexOf(target));
+      if (elements?.includes(target)) {
+        setFocus(elements.indexOf(target));
+      }
     }
 
     function onKeyDown({ key, target }) {

@@ -6,8 +6,8 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/grid' as *;
-@use '@carbon/react/scss/motion' as *;
+@use '@carbon/styles/scss/grid' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--cascade;

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 @use './side-panel-variables' as *;
+@use './animations' as *;
 
 // SidePanel uses the following IBM Products components:
 // ActionSet
@@ -28,6 +29,12 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
+
+@property --panel-transform {
+  inherits: true;
+  initial-value: 320px;
+  syntax: '<integer>';
+}
 
 @mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
   /* any value is single value list */
@@ -62,9 +69,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$block-class}--scrolls {
   overflow: auto;
   overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class} {
+  --panel-transform: 320px;
   --#{$block-class}--title-stop: #{$spacing-05};
   --#{$block-class}--scroll-animation-progress: 0;
   --#{$block-class}--title-padding-right: #{$spacing-07};
@@ -81,9 +93,75 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   grid-template-rows: auto 1fr auto; /* titles content and actions */
   inset-block-start: $spacing-09;
 
+  transform: translateX(0);
+  transition-behavior: allow-discrete;
+  transition-duration: $duration-moderate-01;
+  transition-property: display, opacity, transform;
+
+  @starting-style {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(var(--panel-transform));
+  }
+
   @each $size, $size_value in $side-panel-sizes {
     &.#{$block-class}--#{$size} {
       @include setPanelSize($size_value);
+    }
+  }
+
+  &.#{$block-class}--open.#{$block-class}--right-placement {
+    animation: side-panel-entrance-right $duration-moderate-01
+      motion(entrance, productive) forwards;
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class}--open.#{$block-class}--left-placement {
+    animation: side-panel-entrance-left $duration-moderate-01
+      motion(entrance, productive) forwards;
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class}--closing.#{$block-class}--right-placement {
+    animation: side-panel-exit-right $duration-moderate-01
+      motion(exit, productive) forwards;
+  }
+
+  &.#{$block-class}--closing.#{$block-class}--left-placement {
+    animation: side-panel-exit-left $duration-moderate-01
+      motion(exit, productive) forwards;
+  }
+
+  @supports (transition-behavior: allow-discrete) {
+    &.#{$block-class}--closing {
+      opacity: 0;
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(var(--panel-transform, 320px));
+      transition-duration: $duration-moderate-01;
+    }
+    &.#{$block-class}--closing.#{$block-class}--left-placement {
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(calc(-1 * var(--panel-transform, 320px)));
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    /* styles to apply if a user's device settings are set to reduced motion */
+    &.#{$block-class}--open {
+      animation: side-panel-entrance-reduced $duration-moderate-01
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 0;
+        transform: translateX(0);
+      }
+    }
+    &.#{$block-class}--closing {
+      animation: side-panel-exit-reduced $duration-moderate-01
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   }
 
@@ -115,7 +193,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}.#{$block-class}--has-ai-label,
   &.#{$block-class}.#{$block-class}--has-decorator {
     border-color: transparent;
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
   }
 
@@ -288,6 +367,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
     padding-block-end: $spacing-05;
     padding-inline-end: var(--#{$block-class}--title-padding-right);
@@ -302,8 +382,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-block-start: $spacing-05;
   }
   .#{$block-class}__inner-content {
-    padding: $spacing-05;
-    padding-block-start: 0;
+    padding: 0 $spacing-05 $spacing-05;
   }
 
   .#{$block-class}__inner-content--no-animated-title {
@@ -322,7 +401,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   &.#{$block-class}--has-decorator .#{$block-class}--scrolls {
     @include utilities.ai-popover-gradient('default', 0, 'layer');
 
-    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow,
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
       0 4px 10px 2px $ai-drop-shadow;
   }
 
@@ -471,10 +551,17 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$block-class}__overlay {
   position: fixed;
   z-index: utilities.z('overlay');
+  animation: side-panel-overlay-entrance $duration-moderate-01
+    motion(entrance, productive) forwards;
   background-color: $overlay;
   block-size: 100%;
   inline-size: 100%;
   inset: 0;
+}
+
+.#{$block-class}__overlay--closing {
+  animation: side-panel-overlay-exit $duration-moderate-01
+    motion(exit, productive) forwards;
 }
 
 /* stylelint-disable-next-line carbon/theme-token-use */

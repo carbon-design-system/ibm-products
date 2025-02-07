@@ -8,7 +8,7 @@
 const { outputFileSync, readFileSync, removeSync } = require('fs-extra');
 const fs = require('fs');
 const { sync } = require('glob');
-const { camelCase, paramCase, pascalCase, headerCase } = require('change-case');
+const { camelCase, kebabCase, pascalCase, headerCase } = require('change-case');
 const { basename, join, resolve, relative, dirname } = require('path');
 
 const compile = (template, substitutions) =>
@@ -78,7 +78,7 @@ const updateExample = (name, config) => {
       TITLE_NAME: headerCase(name),
       FULL_YEAR: new Date().getFullYear(),
       CAMEL_NAME: camelCase(name),
-      STYLE_NAME: paramCase(name),
+      STYLE_NAME: kebabCase(name),
     };
 
     const keywords = substitutions.STYLE_NAME.split('-');

@@ -13,8 +13,7 @@ import React, {
   PropsWithChildren,
   KeyboardEvent,
   ReactNode,
-  RefObject,
-  MouseEvent,
+  Ref,
 } from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
@@ -26,11 +25,15 @@ import { ConditionBuilderContext } from '../ConditionBuilderContext/ConditionBui
 import { handleKeyDownForPopover } from '../utils/handleKeyboardEvents';
 import {
   Condition,
-  PropertyConfig,
   Action,
   Option,
+  ConfigType,
 } from '../ConditionBuilder.types';
-import { blockClass, getValue } from '../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  getValue,
+} from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
@@ -44,8 +47,8 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   type?: string;
   description?: string;
   condition?: Action & Condition;
-  config?: PropertyConfig;
-  renderChildren?: (ref: RefObject<HTMLDivElement>) => ReactNode;
+  config?: ConfigType;
+  renderChildren?: (ref: Ref<HTMLDivElement>) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -143,8 +146,8 @@ export const ConditionBuilderItem = ({
         closePopover();
       } else if (
         currentField == 'valueField' &&
-        type == 'option' &&
-        condition?.operator !== 'oneOf'
+        type === 'option' &&
+        !checkForMultiSelectOperator(condition, config)
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();
@@ -203,8 +206,19 @@ export const ConditionBuilderItem = ({
     }
   };
 
+  const getCustomOperatorLabel = (propertyLabel) => {
+    return (
+      propertyLabel &&
+      config?.operators?.find((operator) => {
+        return operator.id === propertyLabel;
+      })
+    );
+  };
+
   const getLabel = () => {
-    if (propertyLabel) {
+    if (config?.operators && rest['data-name'] === 'operatorField') {
+      return getCustomOperatorLabel(propertyLabel)?.label ?? propertyLabel;
+    } else if (propertyLabel) {
       return propertyLabel;
     } else if (rest['data-name'] === 'propertyField') {
       return addPropertyText;

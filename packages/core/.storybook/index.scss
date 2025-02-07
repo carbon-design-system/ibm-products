@@ -18,7 +18,7 @@
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings; // loads config.css or config-dev.scss from ibm-prodcuts/src (see main.js)
-@use '../../ibm-products-styles/src/index-without-carbon.scss';
+@use '../../ibm-products-styles/src/index-without-carbon';
 
 // Load all Carbon styles now
 @use '@carbon/styles' as styles;
@@ -27,7 +27,7 @@
 
 @use './Annotation/annotation';
 
-// Setting attribute storybook-carbon-theme="XXX" on the html element
+// Setting attribute data-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
 // Adding class sb--use-carbon-theme-XXX on any element
 // will set the carbon theme used within that element.

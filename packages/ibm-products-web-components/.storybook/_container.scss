@@ -37,19 +37,19 @@
 }
 // Set the <html> theme attribute to "g10" to use the Gray 10 theme
 // <html theme="g10">
-:root[storybook-carbon-theme='g10'] {
+:root[data-carbon-theme='g10'] {
   @include theme.theme(themes.$g10);
 }
 
 // Set the <html> theme attribute to "g90" to use the Gray 90 theme
 // <html theme="g90">
-:root[storybook-carbon-theme='g90'] {
+:root[data-carbon-theme='g90'] {
   @include theme.theme(themes.$g90);
 }
 
 // Set the <html> theme attribute to "g100" to use the Gray 100 theme
 // <html theme="g100">
-:root[storybook-carbon-theme='g100'] {
+:root[data-carbon-theme='g100'] {
   @include theme.theme(themes.$g100);
 }
 
@@ -68,7 +68,7 @@ body {
 }
 
 .#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {
-  padding: 2rem;
+  padding: $spacing-07;
   margin: 0;
   block-size: 100vh;
   inline-size: 100%;

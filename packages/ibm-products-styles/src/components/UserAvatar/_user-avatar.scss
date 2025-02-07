@@ -73,8 +73,8 @@ $sizes: (
   :root .#{$block-class}--#{$order},
   .#{$carbon-prefix}--g10 .#{$block-class}--#{$order},
   .#{$carbon-prefix}--white .#{$block-class}--#{$order},
-  [storybook-carbon-theme='g10'] .#{$block-class}--#{$order},
-  [storybook-carbon-theme='white'] .#{$block-class}--#{$order} {
+  [data-carbon-theme='g10'] .#{$block-class}--#{$order},
+  [data-carbon-theme='white'] .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }

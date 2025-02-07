@@ -248,7 +248,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--css-grid--narrow {
-  --cds-grid-gutter-start: 0;
+  --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
 }
 
 .cds--css-grid--condensed {
@@ -280,7 +280,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .cds--subgrid--narrow {
-  --cds-grid-gutter-start: 0;
+  --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   --cds-grid-gutter-end: 1rem;
   --cds-grid-column-hang: 1rem;
 }
@@ -3816,6 +3816,7 @@ p.c4p--about-modal__copyright-text:first-child {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   white-space: initial;
 }
 .c4p--datagrid__grid-container .c4p--datagrid__defaultStringRenderer.c4p--datagrid__defaultStringRenderer--slug,
@@ -3857,6 +3858,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--datagrid__grid-container .cds--select-input {
   -webkit-appearance: none;
+  appearance: none;
 }
 .c4p--datagrid__grid-container th.cds--table-column-checkbox {
   display: block;
@@ -7425,11 +7427,13 @@ button.c4p--add-select__global-filter-toggle--open {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-description.c4p--notifications-panel__notification-long-description {
   display: block;
   overflow: initial;
   -webkit-line-clamp: initial;
+  line-clamp: initial;
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button {

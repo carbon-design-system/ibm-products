@@ -6,6 +6,7 @@
 //
 
 import React, {
+  JSX,
   PropsWithChildren,
   ReactNode,
   useCallback,
@@ -97,7 +98,7 @@ export interface TagSetProps extends PropsWithChildren {
    * Optional ref for custom resize container to measure available space
    * Default will measure the available space of the TagSet container itself.
    */
-  containingElementRef?: React.RefObject<HTMLElement>;
+  containingElementRef?: React.Ref<HTMLElement>;
   /**
    * maximum visible tags
    */
@@ -337,7 +338,9 @@ export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       let willFit = 0;
 
       if (sizingTags.length > 0) {
-        const optionalContainingElement = containingElementRef?.current;
+        const optionalContainingElement =
+          typeof containingElementRef !== 'function' &&
+          containingElementRef?.current;
         const measurementOffsetValue =
           typeof measurementOffset === 'number' ? measurementOffset : 0;
         let spaceAvailable = optionalContainingElement

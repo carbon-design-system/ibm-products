@@ -7,9 +7,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles' with (
-  $font-path: '@ibm/plex'
-);
+@use '@carbon/styles';
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/theme';
@@ -64,11 +62,13 @@ body {
 
 #main-content {
   position: relative;
+  /* stylelint-disable-next-line carbon/layout-use */
   padding: 42px;
 }
 
 .#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {
-  padding: $spacing-07;
+  /* stylelint-disable-next-line carbon/layout-use */
+  padding: 2rem;
   margin: 0;
   block-size: 100vh;
   inline-size: 100%;

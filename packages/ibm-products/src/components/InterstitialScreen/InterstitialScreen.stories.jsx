@@ -12,11 +12,22 @@ import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
-import HowACaseIsCreated1 from './_story-assets/illustrations/how-a-case-is-created-1.json';
-import HowACaseIsCreated2 from './_story-assets/illustrations/how-a-case-is-created-2.json';
-import HowACaseIsCreated3 from './_story-assets/illustrations/how-a-case-is-created-3.json';
 import InterstitialExampleImg from './_story-assets/illustrations/interstitial-ph.png';
+
+const HowACaseIsCreated1 = new URL(
+  './_story-assets/illustrations/how-a-case-is-created-1.json',
+  import.meta.url
+).pathname;
+const HowACaseIsCreated2 = new URL(
+  './_story-assets/illustrations/how-a-case-is-created-2.json',
+  import.meta.url
+).pathname;
+const HowACaseIsCreated3 = new URL(
+  './_story-assets/illustrations/how-a-case-is-created-3.json',
+  import.meta.url
+).pathname;
 
 import styles from './_storybook-styles.scss?inline';
 const storyClass = 'interstitial-stories';
@@ -26,9 +37,19 @@ export default {
   component: InterstitialScreen,
   tags: ['autodocs'],
   argTypes: {
-    media: {
+    renderMedia: {
       options: ['None', 'With a static image', 'With an animation'],
       control: { type: 'select' },
+      description:
+        'Optional prop to render any media like images or any animated media. This is a callback prop where you need to return the component with media to be rendered',
+    },
+    media: {
+      control: { type: null },
+      description: 'Deprecated: Property replaced by "renderMedia"',
+    },
+    breakpointsWithMedia: {
+      description:
+        'Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size. Medium and small breakpoints will be set to 0 internally to focus on the main content area.',
     },
     children: { control: { disable: true } },
   },
@@ -48,23 +69,26 @@ const getSelectedMedia = (media) => {
   console.log('Story media: ', InterstitialExampleImg);
   switch (media) {
     case 'With a static image':
-      return {
-        render: () => (
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              background: `center center / contain no-repeat url("${InterstitialExampleImg}") `,
-            }}
-          />
-        ),
-        breakpoints: { xlg: 8, lg: 8 },
-      };
+      return () => (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: `center center / contain no-repeat url("${InterstitialExampleImg}") `,
+          }}
+        />
+      );
     case 'With an animation':
-      return {
-        filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
-        breakpoints: { xlg: 8, lg: 8 },
-      };
+      return ({ playStep }) => (
+        <SteppedAnimatedMedia
+          filePaths={[
+            HowACaseIsCreated1,
+            HowACaseIsCreated2,
+            HowACaseIsCreated3,
+          ]}
+          playStep={playStep}
+        />
+      );
     default:
       return null;
   }
@@ -98,8 +122,9 @@ const GenerateExampleObjects = ({ total, startValue, copyPrefix }) => {
 const TemplateModal = ({ children, ...args }) => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
+  const { renderMedia } = args;
+
+  const selectedMedia = getSelectedMedia(renderMedia);
 
   return (
     <>
@@ -117,7 +142,7 @@ const TemplateModal = ({ children, ...args }) => {
           setShowInterstitialModal(false);
         }}
         {...args}
-        media={selectedMedia}
+        renderMedia={selectedMedia}
       >
         {children}
       </InterstitialScreen>
@@ -128,8 +153,8 @@ const TemplateModal = ({ children, ...args }) => {
 const TemplateModalMultipleChildren = ({ children, ...args }) => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
 
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
+  const { renderMedia } = args;
+  const selectedMedia = getSelectedMedia(renderMedia);
 
   return (
     <>
@@ -147,7 +172,7 @@ const TemplateModalMultipleChildren = ({ children, ...args }) => {
           setShowInterstitialModal(false);
         }}
         {...args}
-        media={selectedMedia}
+        renderMedia={selectedMedia}
       >
         {children.props.children}
       </InterstitialScreen>
@@ -159,8 +184,8 @@ const TemplateFullScreenMultiples = ({ children, ...args }) => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
   const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
     useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
+  const { renderMedia } = args;
+  const selectedMedia = getSelectedMedia(renderMedia);
 
   return (
     <>
@@ -179,7 +204,7 @@ const TemplateFullScreenMultiples = ({ children, ...args }) => {
           setShowInterstitialFullScreen(false);
         }}
         {...args}
-        media={selectedMedia}
+        renderMedia={selectedMedia}
       >
         {children.props.children}
       </InterstitialScreen>
@@ -191,8 +216,8 @@ const TemplateFullScreen = ({ children, ...args }) => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
   const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
     useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
+  const { renderMedia } = args;
+  const selectedMedia = getSelectedMedia(renderMedia);
 
   return (
     <>
@@ -211,7 +236,7 @@ const TemplateFullScreen = ({ children, ...args }) => {
           setShowInterstitialFullScreen(false);
         }}
         {...args}
-        media={selectedMedia}
+        renderMedia={selectedMedia}
       >
         {children}
       </InterstitialScreen>
@@ -223,8 +248,8 @@ const TemplateFullScreenMultipleCardGrids = ({ children, ...args }) => {
   const [showInterstitialModal, setShowInterstitialModal] = useState(true);
   const [showInterstitialFullScreen, setShowInterstitialFullScreen] =
     useState(true);
-  const { media } = args;
-  const selectedMedia = getSelectedMedia(media);
+  const { renderMedia } = args;
+  const selectedMedia = getSelectedMedia(renderMedia);
 
   return (
     <>
@@ -243,7 +268,7 @@ const TemplateFullScreenMultipleCardGrids = ({ children, ...args }) => {
           setShowInterstitialFullScreen(false);
         }}
         {...args}
-        media={selectedMedia}
+        renderMedia={selectedMedia}
       >
         {children.props.children}
       </InterstitialScreen>
@@ -258,12 +283,13 @@ const defaultProps = {
   nextButtonLabel: 'Next',
   startButtonLabel: 'Get started',
   skipButtonLabel: 'Skip',
-  media: 'None', // sets media's default radio button selection
+  renderMedia: 'None', // sets media's default radio button selection
+  breakpointsWithMedia: { xlg: 8, lg: 8 },
 };
 
 const defaultPropsImage = {
   ...defaultProps,
-  media: 'With a static image',
+  renderMedia: 'With a static image',
 };
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

@@ -25,7 +25,7 @@ import {
 } from './utils/enums';
 import { CoachmarkDragbar } from './CoachmarkDragbar';
 import { getOffsetTune } from './utils/constants';
-import { clamp } from './utils/helpers';
+import { clamp } from '../../global/js/utils/clamp';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 

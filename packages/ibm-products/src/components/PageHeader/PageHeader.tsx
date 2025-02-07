@@ -23,6 +23,7 @@ import React, {
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
+  RefObject,
   useEffect,
   useRef,
   useState,
@@ -924,7 +925,9 @@ export let PageHeader = React.forwardRef(
     }, [headerRef, pageHeaderStyles]);
 
     const subtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = useOverflowStringHeight(subtitleRef);
+    const isOverflowing = useOverflowStringHeight(
+      subtitleRef as RefObject<HTMLElement>
+    );
     const subtitleContent = (
       <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
         {subtitle}

@@ -9,42 +9,40 @@ import { RefObject, useCallback, useEffect, useState } from 'react';
 
 export const useOverflowStringWidth = (elementRef: RefObject<HTMLElement>) => {
   const innerText = elementRef?.current?.innerText;
-  const [overflowInfo, setOverflowInfo] = useState<boolean>();
+  const [isOverflowing, setIsOverflowing] = useState<boolean>();
 
   const checkWidthOverflow = useCallback(() => {
     const offsetWidth = elementRef?.current?.offsetWidth;
     const scrollWidth = elementRef?.current?.scrollWidth;
 
-    const _isWidthOverflowing =
-      offsetWidth && scrollWidth ? offsetWidth < scrollWidth : false;
-
-    setOverflowInfo(_isWidthOverflowing);
+    if (offsetWidth && scrollWidth) {
+      setIsOverflowing(offsetWidth < scrollWidth);
+    }
   }, [elementRef]);
 
   useEffect(() => {
     checkWidthOverflow();
   }, [checkWidthOverflow, elementRef, innerText]);
 
-  return overflowInfo;
+  return isOverflowing;
 };
 
 export const useOverflowStringHeight = (elementRef: RefObject<HTMLElement>) => {
   const innerText = elementRef?.current?.innerText;
-  const [overflowInfo, setOverflowInfo] = useState<boolean>();
+  const [isOverflowing, setIsOverflowing] = useState<boolean>();
 
   const checkHeightOverflow = useCallback(() => {
     const offsetHeight = elementRef?.current?.offsetHeight;
     const scrollHeight = elementRef?.current?.scrollHeight;
 
-    const _isHeightOverflowing =
-      offsetHeight && scrollHeight ? offsetHeight < scrollHeight : false;
-
-    setOverflowInfo(_isHeightOverflowing);
+    if (offsetHeight && scrollHeight) {
+      setIsOverflowing(offsetHeight < scrollHeight);
+    }
   }, [elementRef]);
 
   useEffect(() => {
     checkHeightOverflow();
   }, [checkHeightOverflow, elementRef, innerText]);
 
-  return overflowInfo;
+  return isOverflowing;
 };

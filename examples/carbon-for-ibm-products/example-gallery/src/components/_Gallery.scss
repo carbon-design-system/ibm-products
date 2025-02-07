@@ -1,10 +1,14 @@
-@use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 $block-class: 'gallery';
 
 body {
   overflow-x: hidden;
+
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
 }
 
 .#{$block-class}.#{$block-class} {

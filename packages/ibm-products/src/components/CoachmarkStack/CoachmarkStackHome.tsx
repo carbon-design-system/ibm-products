@@ -147,8 +147,8 @@ export let CoachmarkStackHome = forwardRef<
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
-        ? document?.querySelector(portalTarget) ??
-          document?.querySelector('body')
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
         : document?.querySelector('body');
     }, [portalTarget]);
 

@@ -72,8 +72,8 @@ export const ItemOptionForValueField = ({
   const selection = Array.isArray(conditionState.value)
     ? conditionState.value
     : conditionState.value !== undefined
-    ? [conditionState.value]
-    : [];
+      ? [conditionState.value]
+      : [];
 
   useEffect(() => {
     //this commented code is kept as intentional. Alternate approach to pass async options instead of getOptions callback.
@@ -167,8 +167,8 @@ export const ItemOptionForValueField = ({
     return conditionState.label
       ? conditionState.label
       : conditionState.property
-      ? conditionState.property
-      : propertyText;
+        ? conditionState.property
+        : propertyText;
   };
 
   if (!allOptions) {

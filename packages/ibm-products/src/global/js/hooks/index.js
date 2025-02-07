@@ -19,4 +19,5 @@ export { useControllableState } from './useControllableState';
 export { usePrefix } from './usePrefix';
 export { useFocus } from './useFocus';
 export { useIsomorphicEffect } from './useIsomorphicEffect';
+export { usePresence } from './usePresence';
 export { usePrefersReducedMotion } from './usePrefersReducedMotion';

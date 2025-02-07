@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import React, { ReactNode, forwardRef } from 'react';
 
 import { Grid } from '@carbon/react';
 import PropTypes from 'prop-types';
@@ -35,6 +35,11 @@ const defaults = {
   grid: false,
 };
 
+type EnrichedChildren = {
+  children?: ReactNode;
+  className?: string;
+};
+
 /**
 
 This pattern is intended for use with cards, tiles, or similarly styled
@@ -44,39 +49,28 @@ the page. It should not be used on a page if it is the secondary focus of the
 page as that will distract the user.
 
 */
-export let Cascade = forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
+export let Cascade = forwardRef<HTMLDivElement, CascadeProps>((props, ref) => {
+  const { children, className, grid = defaults.grid, ...rest } = props;
+  const childProps = {
+    ...rest,
+    className: cx(blockClass, className),
+    ref,
+    ...getDevtoolsProps(componentName),
+  };
+  const modifyChildren = (child) => {
+    const className = cx(child.props.className, `${blockClass}__element`);
+    return React.cloneElement(child, { className });
+  };
+  const getModifiedChildren = () => {
+    return React.Children.map(children, (child) => modifyChildren(child));
+  };
 
-      children,
-      className,
-      grid = defaults.grid,
-
-      // Collect any other property values passed in.
-      ...rest
-    }: PropsWithChildren<CascadeProps>,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const props = {
-      ...rest,
-      className: cx(blockClass, className),
-      ref,
-      ...getDevtoolsProps(componentName),
-    };
-    const modifyChildren = (child) => {
-      const className = cx(child.props.className, `${blockClass}__element`);
-      return React.cloneElement(child, { className });
-    };
-    const getModifiedChildren = () => {
-      return React.Children.map(children, (child) => modifyChildren(child));
-    };
-
-    if (grid) {
-      let colIdx = 0;
-      const gridElm = React.Children.map(children, (row) => {
-        if (React.isValidElement(row)) {
-          const cols = React.Children.map(row?.props.children, (col) => {
+  if (grid) {
+    let colIdx = 0;
+    const gridElm = React.Children.map(children, (row) => {
+      if (React.isValidElement<EnrichedChildren>(row)) {
+        const cols = React.Children.map(row?.props.children, (col) => {
+          if (React.isValidElement<EnrichedChildren>(col)) {
             colIdx = colIdx + 1;
             const colClassnames = cx(
               col.props.className,
@@ -84,23 +78,23 @@ export let Cascade = forwardRef(
               `${blockClass}__col-${colIdx}`
             );
             return React.cloneElement(col, { className: colClassnames });
-          });
-          return React.cloneElement(row as React.ReactElement, {
-            children: cols,
-          });
-        }
-        return children;
-      });
-      return (
-        <div {...props}>
-          <Grid>{gridElm}</Grid>
-        </div>
-      );
-    }
-
-    return <div {...props}>{getModifiedChildren()}</div>;
+          }
+        });
+        return React.cloneElement(row, {
+          children: cols,
+        });
+      }
+      return children;
+    });
+    return (
+      <div {...childProps}>
+        <Grid>{gridElm}</Grid>
+      </div>
+    );
   }
-);
+
+  return <div {...childProps}>{getModifiedChildren()}</div>;
+});
 
 Cascade = pkg.checkComponentEnabled(Cascade, componentName);
 

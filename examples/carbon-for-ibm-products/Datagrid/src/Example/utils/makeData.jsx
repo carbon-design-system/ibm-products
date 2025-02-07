@@ -73,20 +73,20 @@ const newPerson = () => {
       statusChance > 0.66
         ? 'relationship'
         : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
+          ? 'complicated'
+          : 'single',
     chartType:
       initialChartTypeIndex === 0
         ? inlineEditSelectItems[0]
         : initialChartTypeIndex === 1
-        ? inlineEditSelectItems[1]
-        : inlineEditSelectItems[2],
+          ? inlineEditSelectItems[1]
+          : inlineEditSelectItems[2],
     activeSince:
       statusChance > 0.66
         ? activeSinceDate
         : statusChance > 0.33
-        ? yesterdayDate
-        : twoDaysAgoDate,
+          ? yesterdayDate
+          : twoDaysAgoDate,
   };
 };
 

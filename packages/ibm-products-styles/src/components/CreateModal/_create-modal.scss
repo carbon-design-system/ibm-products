@@ -59,7 +59,6 @@
   @include type.type-style('body-01');
 
   margin: $spacing-03 0 $spacing-05 0;
-
   padding-inline-end: calc(20% - #{$spacing-05});
 }
 

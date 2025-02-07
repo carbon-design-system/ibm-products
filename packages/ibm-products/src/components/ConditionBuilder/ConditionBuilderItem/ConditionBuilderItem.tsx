@@ -13,8 +13,7 @@ import React, {
   PropsWithChildren,
   KeyboardEvent,
   ReactNode,
-  RefObject,
-  MouseEvent,
+  Ref,
 } from 'react';
 
 import { Popover, PopoverContent, Layer } from '@carbon/react';
@@ -45,7 +44,7 @@ interface ConditionBuilderItemProps extends PropsWithChildren {
   description?: string;
   condition?: Action & Condition;
   config?: ConfigType;
-  renderChildren?: (ref: RefObject<HTMLDivElement>) => ReactNode;
+  renderChildren?: (ref: Ref<HTMLDivElement>) => ReactNode;
   onChange?: (val: string) => void;
   tabIndex?: number;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;

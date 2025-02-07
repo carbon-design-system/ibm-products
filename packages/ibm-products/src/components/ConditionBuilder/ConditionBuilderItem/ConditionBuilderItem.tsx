@@ -29,7 +29,11 @@ import {
   Option,
   ConfigType,
 } from '../ConditionBuilder.types';
-import { blockClass, getValue } from '../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  getValue,
+} from '../utils/util';
 import { translationsObject } from '../ConditionBuilderContext/translationObject';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
@@ -129,17 +133,6 @@ export const ConditionBuilderItem = ({
   };
   const { propertyLabel, isInvalid } = getPropertyDetails();
 
-  //check if the operator is configured as multiSelect in the input configuration
-  const checkForMultiSelectOperator = () => {
-    return (
-      condition?.operator === 'oneOf' ||
-      config?.operators?.find(
-        (operator) =>
-          condition?.operator === operator.id && operator.isMultiSelect
-      )
-    );
-  };
-
   useEffect(() => {
     /**
      * rest['data-name'] holds the current field name
@@ -154,7 +147,7 @@ export const ConditionBuilderItem = ({
       } else if (
         currentField == 'valueField' &&
         type === 'option' &&
-        !checkForMultiSelectOperator()
+        !checkForMultiSelectOperator(condition, config)
       ) {
         //close the current popover if the field is valueField and  is a single select dropdown. For all other inputs ,popover need to be open on value changes.
         closePopover();

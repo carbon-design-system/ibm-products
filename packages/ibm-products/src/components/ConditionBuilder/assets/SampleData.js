@@ -184,7 +184,7 @@ export const sampleDataStructure_nonHierarchical = {
   operator: 'or',
 };
 
-export const intialStateWithCustomOperators = {
+export const initialStateWithCustomOperators = {
   operator: 'or',
   groups: [
     {

@@ -83,8 +83,7 @@ const testSizes = (el, property) => {
   }
 
   // The test should never get here as all cases should be catered for in setup.
-  // eslint-disable-next-line
-  console.log('testSizes found nothing.', property, el.outerHTML);
+
   return base;
 };
 

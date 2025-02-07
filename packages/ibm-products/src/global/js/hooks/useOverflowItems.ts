@@ -26,8 +26,8 @@ export const useOverflowItems = <T extends Item>(
   const itemsRef = useRef<Map<string, number> | null>(null);
   const [remainingWidth, setRemainingWidth] = useState(0);
   const visibleItemCount = useRef<number>(0);
-  const minWidthRef = useRef<number>();
-  const requiredWidthRef = useRef<number>();
+  const minWidthRef = useRef<number>(0);
+  const requiredWidthRef = useRef<number>(0);
 
   const handleResize = () => {
     if (containerRef?.current) {
@@ -60,11 +60,11 @@ export const useOverflowItems = <T extends Item>(
         parseInt(style.marginRight);
       map.set(id, totalWidth);
 
-      if (containerRef?.current && items?.length === itemsRef?.current?.size) {
-        node.style.visibility = 'visible';
-      } else if (!maxItems) {
-        node.style.visibility = 'hidden';
-      }
+      // if (containerRef?.current && items?.length === itemsRef?.current?.size) {
+      //   node.style.visibility = 'visible';
+      // } else if (!maxItems) {
+      //   node.style.visibility = 'hidden';
+      // }
     }
 
     return () => {

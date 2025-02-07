@@ -321,7 +321,7 @@ describe(componentName, () => {
   });
 
   it('tests clamp helper function', () => {
-    expect(clamp(100, 50, 20)).toBe(50);
-    expect(clamp(40, 10, 50)).toBe(40);
+    expect(clamp(20, 50, 100)).toBe(50);
+    expect(clamp(50, 10, 40)).toBe(40);
   });
 });

@@ -20,4 +20,13 @@ describe('clamp', () => {
     const clampedNumber = clamp(20, 5, 15);
     expect(clampedNumber).toEqual(15);
   });
+  it('should not return anything if anything other than a number is provided', () => {
+    const clampedNumber = clamp('a', 1, 3);
+    expect(clampedNumber).toBeUndefined();
+  });
+  it('should always return the greater of the bounding numbers', () => {
+    // Even if min bound is greater than max bound
+    expect(clamp(100, 50, 20)).toEqual(50);
+    expect(clamp(100, 20, 50)).toEqual(50);
+  });
 });

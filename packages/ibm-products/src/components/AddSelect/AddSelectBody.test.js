@@ -75,11 +75,14 @@ const hierarchyItems = {
       title: 'California',
       value: 'california',
       children: {
+        sortBy: ['title'],
+        filterBy: 'fileType',
         entries: [
           {
             id: '5',
             title: 'Los Angeles',
             value: 'la',
+            fileType: 'pdf',
           },
         ],
       },
@@ -242,6 +245,27 @@ describe(componentName, () => {
     const tearsheetElement = screen.getByRole('dialog').parentElement;
     expect(tearsheetElement).toHaveClass(`${blockClass}__single`);
     expect(tearsheetElement).toBeVisible();
+  });
+
+  it('handles item focusing with keyboard', async () => {
+    render(<AddSelectBody {...singleProps} open />);
+    const focus = document.querySelector('#add-select-focus');
+    fireEvent.keyDown(focus, { keyCode: '40' });
+    expect(
+      document.querySelector(`.${blockClass}__selections-row--focused`)
+    ).toHaveFocus();
+    fireEvent.keyDown(focus, { keyCode: '38' });
+    fireEvent.keyDown(focus, { keyCode: '40' });
+    fireEvent.keyDown(focus, { keyCode: '40' });
+    fireEvent.keyDown(focus, { keyCode: '40' });
+    fireEvent.keyDown(focus, { keyCode: '38' });
+    expect(
+      document.querySelector(`.${blockClass}__selections-row--focused`)
+    ).toHaveFocus();
+    fireEvent.keyDown(focus, { keyCode: '39' });
+    expect(
+      document.querySelector(`.${blockClass}__selections-row--focused`)
+    ).toHaveFocus();
   });
 
   it('returns the selected values on submit', async () => {

@@ -178,9 +178,11 @@ $duration: 1000ms;
     min-inline-size: calc(
       100% +
         (
-          var(--#{$block-class}--width-px) -
-            var(--#{$block-class}--breadcrumb-row-width-px)
-        ) / 2
+          var(--#{$block-class}--width-px) - var(
+              --#{$block-class}--breadcrumb-row-width-px
+            )
+        ) /
+        2
     );
   }
   .#{$block-class}__breadcrumb-row::after {
@@ -188,7 +190,9 @@ $duration: 1000ms;
     display: block;
     block-size: 1px;
     /* creates a full width box shadow without causing scroll */
-    box-shadow: 0 1px 0 0 $layer-accent-01, 0 1px 0 0 $layer-accent-01;
+    box-shadow:
+      0 1px 0 0 $layer-accent-01,
+      0 1px 0 0 $layer-accent-01;
     content: '';
     inline-size: 50vw;
     inset-block-end: 0;
@@ -204,7 +208,9 @@ $duration: 1000ms;
     )::after,
   .#{$block-class}__breadcrumb-row--has-action-bar::after {
     /* creates a full width box shadow without causing scroll */
-    box-shadow: 25vw 1px 0 0 $layer-accent-01, -25vw 1px 0 0 $layer-accent-01;
+    box-shadow:
+      25vw 1px 0 0 $layer-accent-01,
+      -25vw 1px 0 0 $layer-accent-01;
     opacity: 1;
   }
 
@@ -568,6 +574,7 @@ $duration: 1000ms;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .#{$block-class}__available-row {

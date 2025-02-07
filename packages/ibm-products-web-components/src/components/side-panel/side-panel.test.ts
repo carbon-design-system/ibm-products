@@ -24,24 +24,23 @@ const defaultProps = {
   title: 'Side panel title',
 };
 
-const template = (props = defaultProps) =>
-  html`
-    <c4p-side-panel
-      ?animate-title=${props.animateTitle}
-      ?include-overlay=${props.includeOverlay && !props.slideIn}
-      selector-initial-focus=${props.selectorInitialFocus}
-      label-text="${props.label}"
-      ?open=${props.open}
-      placement=${props.placement}
-      ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
-      selector-page-content=${props.selectorPageContent}
-      size=${props.size}
-      ?slide-in=${props.slideIn}
-      .title=${props.title}
-    >
-      content
-    </c4p-side-panel>
-  `;
+const template = (props = defaultProps) => html`
+  <c4p-side-panel
+    ?animate-title=${props.animateTitle}
+    ?include-overlay=${props.includeOverlay && !props.slideIn}
+    selector-initial-focus=${props.selectorInitialFocus}
+    label-text="${props.label}"
+    ?open=${props.open}
+    placement=${props.placement}
+    ?prevent-close-on-click-outside=${props.preventCloseOnClickOutside}
+    selector-page-content=${props.selectorPageContent}
+    size=${props.size}
+    ?slide-in=${props.slideIn}
+    .title=${props.title}
+  >
+    content
+  </c4p-side-panel>
+`;
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {

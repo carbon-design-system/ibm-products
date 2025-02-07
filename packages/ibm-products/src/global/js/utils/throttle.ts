@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const throttle = (fn, delay: number) => {
+export const throttle = (fn, delay: number = 100) => {
   let time = Date.now();
 
   return () => {

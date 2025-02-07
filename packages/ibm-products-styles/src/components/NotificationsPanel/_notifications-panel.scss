@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/themes' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type';
@@ -47,12 +46,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 }
 
 .#{$block-class}__container {
-  @include theme($g100);
-
   position: fixed;
   z-index: 2;
   overflow: auto;
-  background-color: $background;
+  background-color: $layer-01;
   color: $text-primary;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;
@@ -66,8 +63,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     position: sticky;
     z-index: 2;
     padding: $spacing-03 $spacing-05 $spacing-05;
-    background-color: $background;
-    border-block-end: 1px solid $layer-02;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
     inset-block-start: 0;
     .#{$block-class}__header-flex {
       display: flex;
@@ -119,19 +116,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     align-items: flex-start;
     padding: $spacing-05;
     border: 0;
-    background-color: $background;
+    background-color: $layer-01;
     cursor: pointer;
     inline-size: 100%;
     min-block-size: 6.25rem;
     text-align: start;
     transition: background-color $duration-moderate-02 motion(standard);
     .#{$block-class}__notification-title {
-      color: $text-on-color;
+      color: $text-secondary;
       margin-block-end: $spacing-02;
       @include font-weight('regular');
     }
     .#{$block-class}__notification-title.#{$block-class}__notification-title-unread {
-      color: $text-on-color;
+      color: $text-secondary;
       margin-block-end: $spacing-02;
       @include font-weight('semibold');
     }
@@ -234,7 +231,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   .#{$block-class}__notification-previous:not(:first-of-type):before {
     position: absolute;
     margin: 0 auto;
-    background-color: $layer-02;
+    // background-color: $layer-02;
+    background-color: $border-subtle-01;
     block-size: 1px;
     content: '';
     inline-size: calc(100% - (2 * #{$spacing-05}));
@@ -268,14 +266,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     z-index: 2;
     display: flex;
     align-items: center;
-    background-color: $background;
+    background-color: $layer-01;
     block-size: 2.5rem;
-    border-block-start: 1px solid $layer-02;
+    border-block-start: 1px solid $border-subtle-01;
     inset-block-end: 0;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
       block-size: 2.5rem;
-      border-inline-end: 1px solid $layer-02;
+      border-inline-end: 1px solid $border-subtle-01;
       color: $text-primary;
       inline-size: 100%;
       max-inline-size: calc(100% - 2.5rem);

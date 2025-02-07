@@ -13,6 +13,7 @@ import React, {
   PropsWithChildren,
   Ref,
   ForwardedRef,
+  JSX,
 } from 'react';
 
 // Other standard imports.

@@ -10,7 +10,7 @@
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -65,7 +65,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 .#{$block-class} .#{$block-class}__keyword:focus {
   border-color: $text-inverse;
   background-color: $button-tertiary;
-  box-shadow: 0 0 0 1px $text-inverse, 0 0 0 3px $button-tertiary;
+  box-shadow:
+    0 0 0 1px $text-inverse,
+    0 0 0 3px $button-tertiary;
   color: $text-inverse;
 }
 // The "up" chevron
@@ -88,7 +90,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
 .#{$block-class} .#{$block-class}__keyword-open:focus {
   border-color: $text-inverse;
   background-color: transparent;
-  box-shadow: inset 0 0 0 1px $button-tertiary, 0 0 0 1px $text-inverse,
+  box-shadow:
+    inset 0 0 0 1px $button-tertiary,
+    0 0 0 1px $text-inverse,
     0 0 0 3px $button-tertiary;
   color: $button-tertiary;
 }

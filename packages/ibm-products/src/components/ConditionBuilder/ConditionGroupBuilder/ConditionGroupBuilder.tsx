@@ -72,9 +72,11 @@ const ConditionGroupBuilder = ({
   const conditionBuilderContentRef = useRef<HTMLDivElement>(null);
   const onRemoveHandler = (conditionId, evt, conditionIndex) => {
     if (group && group.conditions && group.conditions.length > 1) {
-      variant == HIERARCHICAL_VARIANT
-        ? handleFocusOnCloseHierarchical(evt)
-        : handleFocusOnClose(evt, conditionIndex);
+      if (variant == HIERARCHICAL_VARIANT) {
+        handleFocusOnCloseHierarchical(evt);
+      } else {
+        handleFocusOnClose(evt, conditionIndex);
+      }
 
       if (!checkGroupHaveCondition(group.conditions, conditionId)) {
         //when we delete the last  condition of a group without deleting  the subgroup, we need to restructure the group.

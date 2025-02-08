@@ -59,12 +59,6 @@ export const useOverflowItems = <T extends Item>(
         parseInt(style.marginLeft) +
         parseInt(style.marginRight);
       map.set(id, totalWidth);
-
-      // if (containerRef?.current && items?.length === itemsRef?.current?.size) {
-      //   node.style.visibility = 'visible';
-      // } else if (!maxItems) {
-      //   node.style.visibility = 'hidden';
-      // }
     }
 
     return () => {

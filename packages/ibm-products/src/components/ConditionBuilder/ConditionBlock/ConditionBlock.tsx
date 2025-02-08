@@ -33,9 +33,9 @@ import { useDataConfigs } from '../utils/useDataConfigs';
 import {
   Condition,
   ConditionGroup,
+  ConfigType,
   LogicalOperator,
   Property,
-  PropertyConfig,
   PropertyConfigCustom,
 } from '../ConditionBuilder.types';
 
@@ -188,8 +188,8 @@ const ConditionBlock = (props: ConditionBlockProps) => {
     return isLastCondition(conditionIndex, conditions);
   };
   const getOperators = () => {
-    if ((config as PropertyConfigCustom['config'])?.operators) {
-      return (config as PropertyConfigCustom['config']).operators;
+    if ((config as ConfigType)?.operators) {
+      return (config as ConfigType).operators;
     }
     return operatorConfig.filter(
       (operator) => operator.type.indexOf(type) != -1 || operator.type == 'all'
@@ -304,6 +304,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           data-name="operatorField"
           condition={condition}
           type={type}
+          config={config as ConfigType}
           onChange={onOperatorChangeHandler}
         >
           <ItemOption
@@ -326,7 +327,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           showToolTip={true}
           data-name="valueField"
           condition={condition}
-          config={config as PropertyConfig}
+          config={config as ConfigType}
           onChange={onValueChangeHandler}
           renderChildren={renderChildren}
         />

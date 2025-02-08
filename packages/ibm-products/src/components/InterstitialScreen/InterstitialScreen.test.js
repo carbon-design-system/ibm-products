@@ -227,4 +227,21 @@ describe(componentName, () => {
     await act(() => userEvent.click(closeBtn));
     expect(onClose).toBeCalled();
   });
+  it('renders an image with media prop', async () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+      media: { render: () => <img alt="img" /> },
+    });
+    expect(screen.getByRole('img')).toBeInTheDocument();
+  });
+
+  it('renders an image with renderMedia prop', async () => {
+    renderComponent({
+      className: blockClass,
+      interstitialAriaLabel: 'Modal Interstitial Screen',
+      renderMedia: () => <img alt="img" />,
+    });
+    expect(screen.getByRole('img')).toBeInTheDocument();
+  });
 });

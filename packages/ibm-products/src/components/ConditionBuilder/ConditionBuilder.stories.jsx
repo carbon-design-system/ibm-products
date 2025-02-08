@@ -13,10 +13,15 @@ import { ConditionBuilder } from '.';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { inputData, inputDataDynamicOptions } from './assets/sampleInput';
+import {
+  inputData,
+  inputDataDynamicOptions,
+  inputDataForCustomOperator,
+} from './assets/sampleInput';
 import {
   sampleDataStructure_nonHierarchical,
   sampleDataStructure_Hierarchical,
+  initialStateWithCustomOperators,
 } from './assets/SampleData';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { HIERARCHICAL_VARIANT, NON_HIERARCHICAL_VARIANT } from './utils/util';
@@ -25,10 +30,6 @@ export default {
   component: ConditionBuilder,
   tags: ['autodocs'],
 
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     layout: 'fullscreen',
     styles,
@@ -232,6 +233,7 @@ const statementConfigCustom = [
     label: 'excl. if',
   },
 ];
+
 export const conditionBuilder = ConditionBuilderTemplate.bind({});
 conditionBuilder.storyName = 'Condition Builder';
 conditionBuilder.args = {
@@ -270,6 +272,20 @@ conditionBuilderWithCustomStatements.args = {
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
   statementConfigCustom: statementConfigCustom,
+};
+
+export const conditionBuilderWithCustomOperators =
+  ConditionBuilderTemplate.bind({});
+conditionBuilderWithCustomOperators.storyName =
+  'With Custom operator configuration';
+conditionBuilderWithCustomOperators.args = {
+  inputConfig: inputDataForCustomOperator,
+  initialState: {
+    state: initialStateWithCustomOperators,
+    enabledDefault: true,
+  },
+  variant: NON_HIERARCHICAL_VARIANT,
+  translateWithId: translateWithId,
 };
 
 export const conditionBuilderWithActions = ConditionBuilderTemplate.bind({});

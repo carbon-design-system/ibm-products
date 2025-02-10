@@ -20,8 +20,8 @@ import '@carbon/web-components/es/components/link/index.js';
 
 const storyPrefix = 'about-modal-stories__';
 const blockClass = `${prefix}--about-modal`;
-const toggleButton = () => {
-  document.querySelector(`${prefix}-about-modal`)?.toggleAttribute('open');
+const openModal = () => {
+  document.querySelector(`${prefix}-about-modal`)?.setAttribute('open', '');
 };
 
 const argTypes = {
@@ -119,21 +119,21 @@ const getAdditionalInfo = (index) => {
   switch (index) {
     case 1:
       return html`
-        <p class=${`${storyPrefix}__footer-label`}>Powered by</p>
+        <p class=${`${blockClass}__footer-label`}>Powered by</p>
         <img
           src=${grafanaLogo}
           alt="Grafana"
-          class=${`${blockClass}__stories--tech-logo`}
+          class=${`${blockClass}__footer--tech-logo`}
         />
         <img
           src=${ansibleLogo}
           alt="Ansible"
-          class=${`${blockClass}__stories--tech-logo`}
+          class=${`${blockClass}__footer--tech-logo`}
         />
         <img
           src=${jsLogo}
           alt="JavaScript"
-          class=${`${blockClass}__stories--tech-logo`}
+          class=${`${blockClass}__footer--tech-logo`}
         />
       `;
     default:
@@ -220,41 +220,46 @@ const getLinks = (index) => {
   }
 };
 
+const renderTemplate = (args) => {
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <div class="${storyPrefix}story-container">
+      <div class="${storyPrefix}story-header"></div>
+      <div id="page-content-selector" class="${storyPrefix}story-content">
+        <cds-button @click="${openModal}">Reopen the About Modal</cds-button>
+      </div>
+    </div>
+    <c4p-about-modal
+      closeIconDescription=${args.closeIconDescription}
+      copyrightText=${args.copyrightText}
+      .logo=${args.logo}
+      .title=${getTitle(args.title)}
+      .version=${args.version}
+      .additionalInfo=${getAdditionalInfo(args.additionalInfo)}
+      .content=${getContent(args.content)}
+      .links=${getLinks(args.links)}
+      aria-label=${args.modalAriaLabel}
+    ></c4p-about-modal>
+  `;
+};
+
 export const Default = {
   args: {
     closeIconDescription: 'close',
     copyrightText: 'Copyright © IBM Corp. 2020, 2023',
     logo: logo,
-    title: 0,
+    title: 2,
     version: 'Version 0.0.0',
     additionalInfo: 0,
-    content: 0,
+    content: 1,
     links: 0,
     modalAriaLabel: '',
     portalTarget: '',
   },
   argTypes,
-  render: (args) => {
-    return html`
-      <div class="${storyPrefix}story-container">
-        <div class="${storyPrefix}story-header"></div>
-        <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button @click="${toggleButton}">Toggle About Modal</cds-button>
-        </div>
-      </div>
-      <c4p-about-modal
-        closeIconDescription=${args.closeIconDescription}
-        copyrightText=${args.copyrightText}
-        .logo=${args.logo}
-        .title=${getTitle(args.title)}
-        .version=${args.version}
-        .additionalInfo=${getAdditionalInfo(args.additionalInfo)}
-        .content=${getContent(args.content)}
-        .links=${getLinks(args.links)}
-        aria-label=${args.modalAriaLabel}
-      ></c4p-about-modal>
-    `;
-  },
+  render: renderTemplate,
 };
 
 export const AboutModalWithAllPropsSet = {
@@ -271,27 +276,7 @@ export const AboutModalWithAllPropsSet = {
     portalTarget: '',
   },
   argTypes,
-  render: (args) => {
-    return html`
-      <div class="${storyPrefix}story-container">
-        <div class="${storyPrefix}story-header"></div>
-        <div id="page-content-selector" class="${storyPrefix}story-content">
-          <cds-button @click="${toggleButton}">Toggle About Modal</cds-button>
-        </div>
-      </div>
-      <c4p-about-modal
-        closeIconDescription=${args.closeIconDescription}
-        copyrightText=${args.copyrightText}
-        .logo=${args.logo}
-        .title=${getTitle(args.title)}
-        .version=${args.version}
-        .additionalInfo=${getAdditionalInfo(args.additionalInfo)}
-        .content=${getContent(args.content)}
-        .links=${getLinks(args.links)}
-        aria-label=${args.modalAriaLabel}
-      ></c4p-about-modal>
-    `;
-  },
+  render: renderTemplate,
 };
 
 const meta = {

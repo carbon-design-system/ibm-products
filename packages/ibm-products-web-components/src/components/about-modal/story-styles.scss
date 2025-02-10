@@ -7,4 +7,28 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/config' as *;
 
-$story-prefix: 'about-modal-stories';
+$story-prefix: 'about-modal-stories__';
+
+.#{$story-prefix}body-content {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-05;
+  gap: $spacing-05;
+}
+
+.#{$story-prefix}story-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.#{$story-prefix}story-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

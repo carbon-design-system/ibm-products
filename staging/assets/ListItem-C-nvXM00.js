@@ -1,1 +1,0 @@
-import{b as m,c,_ as n,P as e}from"./index-CXyjPnaX.js";import{e as l}from"./index-CPiZ6Cnx.js";import{T as p}from"./Text-vNWzJqus.js";function f(s){let{className:t,children:r,...a}=s;const o=m(),i=c(`${o}--list__item`,t);return l.createElement(p,n({as:"li",className:i},a),r)}f.propTypes={children:e.node,className:e.string};export{f as L};

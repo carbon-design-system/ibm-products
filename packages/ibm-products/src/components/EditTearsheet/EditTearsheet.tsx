@@ -28,6 +28,7 @@ import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { TearsheetAction } from '../Tearsheet/Tearsheet';
 
 const componentName = 'EditTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-edit`;
@@ -138,6 +139,10 @@ interface EditTearsheetProps extends PropsWithChildren {
   verticalPosition?: 'normal' | 'lower';
 }
 
+interface EditAction extends TearsheetAction {
+  loading?: boolean;
+}
+
 /**
  * **This component is deprecated.** <br>
  * Use Tearsheet with medium to complex edits. See usage guidance for further information.
@@ -178,7 +183,8 @@ export let EditTearsheet = forwardRef(
       }
       setIsSubmitting(false);
     };
-    const actions: ButtonProps<React.ElementType>[] = [
+
+    const actions: EditAction[] = [
       {
         key: 'edit-action-button-submit',
         label: submitButtonText,

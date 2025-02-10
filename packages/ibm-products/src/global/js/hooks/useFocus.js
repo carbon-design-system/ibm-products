@@ -8,7 +8,6 @@
 import { usePrefix } from '@carbon/react';
 import { pkg } from '../../../settings';
 import { useCallback, useEffect } from 'react';
-import wait from '../utils/wait';
 
 export const getSpecificElement = (parentEl, elementId) => {
   const element = parentEl?.querySelector(elementId);
@@ -70,18 +69,14 @@ export const useFocus = (modalRef, selectorPrimaryFocus) => {
     // Checking whether the key is tab or not
     if (event.key === 'Tab') {
       // updating the focusable elements list
-      const { first, last, all } = getFocusable();
+      const { first, last } = getFocusable();
 
-      await wait(1);
-      if (
-        event.shiftKey &&
-        !Array.prototype.includes.call(all, document?.activeElement)
-      ) {
+      if (event.shiftKey && document?.activeElement === first) {
         // Prevents the default "Tab" behavior
         event.preventDefault();
         // if the user press shift+tab and the current element not in focusable items
         last?.focus();
-      } else if (!Array.prototype.includes.call(all, document?.activeElement)) {
+      } else if (!event.shiftKey && document?.activeElement === last) {
         event.preventDefault();
         // user pressing tab key only then
         // focusing the first element if the current element is not in focusable items

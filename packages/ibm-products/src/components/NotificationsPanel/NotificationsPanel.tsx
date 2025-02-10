@@ -33,11 +33,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { timeAgo } from './utils';
-import {
-  useClickOutside,
-  useIsomorphicEffect,
-  usePreviousValue,
-} from '../../global/js/hooks';
+import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
 import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -626,18 +622,6 @@ export let NotificationsPanel = React.forwardRef(
       },
     ]);
 
-    useIsomorphicEffect(() => {
-      // setTimeout ensures that this gets run
-      const timeout = setTimeout(() => {
-        if (notificationPanelRef.current && !reducedMotion) {
-          notificationPanelRef.current.style.animation = open
-            ? 'fade-in 250ms'
-            : 'fade-out forwards 250ms';
-        }
-      }, 0);
-      return () => clearTimeout(timeout);
-    }, [open, reducedMotion]);
-
     return shouldRender ? (
       <>
         <button
@@ -658,7 +642,10 @@ export let NotificationsPanel = React.forwardRef(
             ...rest
           }
           id={blockClass}
-          className={cx(blockClass, className, `${blockClass}__container`)}
+          className={cx(blockClass, className, `${blockClass}__container`, {
+            [`${blockClass}__entrance`]: open,
+            [`${blockClass}__exit`]: !open,
+          })}
           onAnimationEnd={onAnimationEnd}
           ref={
             (ref as MutableRefObject<HTMLDivElement | null>) ||

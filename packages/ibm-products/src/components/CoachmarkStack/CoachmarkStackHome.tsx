@@ -233,7 +233,13 @@ export let CoachmarkStackHome = forwardRef<
                 <ul className={`${blockClass}__nav-links`}>
                   {navLinkLabels.map((label, index) => {
                     if (index === linkFocusIndex) {
-                      return renderNavLink(index, label, buttonFocusRef);
+                      return renderNavLink(
+                        index,
+                        label,
+                        buttonFocusRef as React.RefObject<
+                          ButtonProps<React.ElementType>
+                        >
+                      );
                     }
                     return renderNavLink(index, label);
                   })}

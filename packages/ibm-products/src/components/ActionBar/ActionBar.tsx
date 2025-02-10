@@ -37,7 +37,7 @@ const defaults = {
   actions: Object.freeze([]),
 };
 
-interface Action extends ButtonProps {
+interface Action extends ButtonProps<React.ElementType> {
   id?: string;
   key: string;
   iconDescription: string;

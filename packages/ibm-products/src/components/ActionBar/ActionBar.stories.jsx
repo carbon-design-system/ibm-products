@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { Bee, Lightning } from '@carbon/react/icons';
@@ -53,7 +53,6 @@ export default {
 
 const Template = (argsIn) => {
   const { containerWidth, ...args } = { ...argsIn };
-
   return (
     <div style={{ width: containerWidth }}>
       <ActionBar {...args} />

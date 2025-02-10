@@ -121,44 +121,20 @@ export let ActionBar = React.forwardRef(
     const internalId = useRef(uuidv4());
     const refDisplayedItems = useRef<HTMLDivElement>(null);
     const backupRef = useRef<HTMLDivElement>(null);
-    const localRef = ref || backupRef;
-    const _offsetRef = useRef<HTMLDivElement>(null);
-    const offsetRef = overflowMenuRef || _offsetRef;
+    const localRef = (ref || backupRef) as RefObject<HTMLDivElement>;
+    const _offsetRef = useRef<HTMLElement>(null);
+    const offsetRef = (overflowMenuRef ||
+      _offsetRef) as RefObject<HTMLElement | null>;
     const _items = actions.map((action) => ({ id: action?.key, ...action }));
-    const { visibleItems, hiddenItems, itemRefHandler } = useOverflowItems(
-      _items,
-      localRef as RefObject<HTMLDivElement>,
-      offsetRef as RefObject<HTMLDivElement>,
-      maxVisible,
-      onWidthChange
-    );
+    const { visibleItems, hiddenItems, itemRefHandler, offsetRefHandler } =
+      useOverflowItems(_items, localRef, offsetRef, maxVisible, onWidthChange);
 
     const overflowMenuItems = hiddenItems?.map(({ id: key, ...rest }) => (
       <ActionBarItem {...rest} key={key} />
     ));
 
-    const overflowHiddenMenu =
-      overflowMenuItems?.length === 0 ? (
-        <div
-          className={`${blockClass}__hidden-sizing-items`}
-          aria-hidden={true}
-        >
-          <span>
-            <ActionBarOverflowItems
-              className={`${blockClass}__hidden-sizing-item`}
-              overflowAriaLabel="hidden sizing overflow items"
-              overflowMenuRef={offsetRef}
-              overflowItems={[]}
-              key="hidden-overflow-menu"
-              tabIndex={-1}
-            />
-          </span>
-        </div>
-      ) : null;
-
     return (
       <div {...rest} className={cx([blockClass, className])} ref={localRef}>
-        {overflowHiddenMenu}
         <div
           ref={refDisplayedItems}
           className={cx([
@@ -178,15 +154,17 @@ export let ActionBar = React.forwardRef(
               }}
             />
           ))}
-          {overflowMenuItems?.length ? (
+          {overflowMenuItems?.length > 0 && (
             <ActionBarOverflowItems
               menuOptionsClass={menuOptionsClass}
               overflowAriaLabel={overflowAriaLabel}
-              overflowMenuRef={offsetRef}
+              overflowMenuRef={(node) =>
+                (offsetRef.current = offsetRefHandler(node))
+              }
               overflowItems={overflowMenuItems}
               key={`overflow-menu-${internalId.current}`}
             />
-          ) : null}
+          )}
         </div>
       </div>
     );

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { useResizeObserver } from './useResizeObserver';
 
 type Item = {
@@ -14,8 +14,8 @@ type Item = {
 
 export const useOverflowItems = <T extends Item>(
   items: T[] = [],
-  containerRef: RefObject<HTMLDivElement | null>,
-  offsetRef?: RefObject<HTMLDivElement | null>,
+  containerRef: RefObject<HTMLElement | null>,
+  offsetRef?: RefObject<HTMLElement | null>,
   maxItems?: number,
   onChange?: (value: {
     hiddenItems?: T[];
@@ -23,18 +23,33 @@ export const useOverflowItems = <T extends Item>(
     maxWidth?: number;
   }) => void
 ) => {
-  const itemsRef = useRef<Map<string, number> | null>(null);
   const [remainingWidth, setRemainingWidth] = useState(0);
+  const offsetWidthRef = useRef<number>(0);
+  const itemsRef = useRef<Map<string, number> | null>(null);
   const visibleItemCount = useRef<number>(0);
   const minWidthRef = useRef<number>(0);
   const requiredWidthRef = useRef<number>(0);
+  const visibleItemsRef = useRef<T[]>([]);
+  const hiddenItemsRef = useRef<T[]>([]);
 
   const handleResize = () => {
     if (containerRef?.current) {
-      const offset = offsetRef?.current?.offsetWidth || 0;
-      const usableWidth = containerRef.current.offsetWidth - offset;
+      offsetWidthRef.current = offsetRef?.current?.offsetWidth || 0;
+      const usableWidth =
+        containerRef.current.offsetWidth - offsetWidthRef.current;
       setRemainingWidth(usableWidth);
     }
+  };
+
+  const offsetRefHandler = (node) => {
+    if (node && containerRef?.current) {
+      offsetWidthRef.current = node.offsetWidth;
+      const usableWidth =
+        containerRef.current.offsetWidth - offsetWidthRef.current;
+      setRemainingWidth(usableWidth);
+    }
+
+    return node;
   };
 
   useResizeObserver(containerRef, handleResize);
@@ -50,7 +65,7 @@ export const useOverflowItems = <T extends Item>(
     ?.slice(0, maxItems)
     ?.reduce((acc, item) => acc + (getMap().get(item.id) || 0), 0);
 
-  const itemRefHandler = (id: string, node: HTMLDivElement | null) => {
+  const itemRefHandler = (id: string, node: HTMLElement | null) => {
     const map = getMap();
     if (node) {
       const style = getComputedStyle?.(node);
@@ -66,21 +81,23 @@ export const useOverflowItems = <T extends Item>(
     };
   };
 
-  const getVisibleItems = () => {
+  const getVisibleItems = useCallback(() => {
     if (!containerRef) {
-      return items;
+      return {
+        visibleItems: items,
+        hiddenItems: [],
+      };
     }
 
     const map = getMap();
     let maxReached = false;
     let accumulatedWidth = 0;
-    const offset = offsetRef?.current?.offsetWidth || 0;
     let includeOffset = false;
 
     if (maxItems) {
-      includeOffset = requiredWidth + offset > requiredWidth;
+      includeOffset = requiredWidth + offsetWidthRef?.current > requiredWidth;
     } else {
-      includeOffset = requiredWidth > remainingWidth + offset;
+      includeOffset = requiredWidth > remainingWidth + offsetWidthRef?.current;
     }
 
     const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
@@ -92,7 +109,9 @@ export const useOverflowItems = <T extends Item>(
       let willFit = accumulatedWidth + itemWidth <= remainingWidth;
 
       if (!includeOffset) {
-        willFit = accumulatedWidth + itemWidth <= remainingWidth + offset;
+        willFit =
+          accumulatedWidth + itemWidth <=
+          remainingWidth + offsetWidthRef?.current;
       }
 
       if (willFit) {
@@ -103,34 +122,54 @@ export const useOverflowItems = <T extends Item>(
       }
       return prev;
     }, [] as T[]);
-    return visibleItems;
-  };
 
-  const visibleItems = getVisibleItems();
-  const hiddenItems = items.slice(visibleItems.length);
-  const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
-  const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+    visibleItemsRef.current = visibleItems;
+    const hiddenItems = items.slice(visibleItems?.length);
+    hiddenItemsRef.current = hiddenItems;
 
-  // only call the change handler when the number of visible items has changed
-  if (
-    visibleItems.length !== visibleItemCount.current ||
-    remainingWidth !== minWidthRef.current ||
-    requiredWidth !== requiredWidthRef.current
-  ) {
-    visibleItemCount.current = visibleItems.length;
-    minWidthRef.current = remainingWidth;
-    requiredWidthRef.current = requiredWidth;
-
-    onChange?.({
+    return {
+      visibleItems,
       hiddenItems,
-      minWidth: remainingWidth,
-      maxWidth: requiredWidth + firstItemWidth,
-    });
-  }
+    };
+  }, [
+    containerRef,
+    items,
+    maxItems,
+    offsetWidthRef,
+    remainingWidth,
+    requiredWidth,
+  ]);
+
+  const onChangeVisibleItems = useCallback(() => {
+    // only call the change handler when the number of visible items has changed
+    if (
+      visibleItemsRef?.current.length !== visibleItemCount.current ||
+      remainingWidth !== minWidthRef.current ||
+      requiredWidth !== requiredWidthRef.current
+    ) {
+      visibleItemCount.current = visibleItemsRef?.current.length;
+      minWidthRef.current = remainingWidth;
+      requiredWidthRef.current = requiredWidth;
+      const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
+      const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+
+      onChange?.({
+        hiddenItems: getVisibleItems()?.hiddenItems,
+        minWidth: remainingWidth,
+        maxWidth: requiredWidth + firstItemWidth,
+      });
+    }
+  }, [getVisibleItems, onChange, remainingWidth, requiredWidth]);
+
+  useEffect(() => {
+    getVisibleItems();
+    onChangeVisibleItems();
+  }, [getVisibleItems, onChangeVisibleItems]);
 
   return {
-    visibleItems,
+    visibleItems: getVisibleItems()?.visibleItems,
     itemRefHandler,
-    hiddenItems,
+    hiddenItems: getVisibleItems()?.hiddenItems,
+    offsetRefHandler,
   };
 };

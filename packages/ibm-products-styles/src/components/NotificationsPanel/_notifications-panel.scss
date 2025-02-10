@@ -276,8 +276,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
       display: flex;
-      width: 100%;
-      max-width: calc(100% - 2.5rem);
       align-items: center;
       block-size: 2.5rem;
       border-inline-end: 1px solid $layer-02;

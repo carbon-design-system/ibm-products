@@ -19,11 +19,13 @@
 @use '../EmptyStates/empty-state';
 
 $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
+$block-size: 38.5rem;
+
 @keyframes fade-in {
   0% {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-use
-    transform: translateY(-38.5rem); // the height of the notification panel
+    transform: translateY(-$block-size); // the height of the notification panel
   }
 
   100% {
@@ -41,7 +43,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   100% {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-use
-    transform: translateY(-38.5rem); // the height of the notification panel
+    transform: translateY(-$block-size); // the height of the notification panel
   }
 }
 
@@ -50,12 +52,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   z-index: 2;
   overflow: auto;
   background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-02;
+  border-inline-start: 1px solid $border-subtle-02;
+  box-shadow: 0 $spacing-01 $spacing-02 $overlay;
   color: $text-primary;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;
-  max-block-size: 38.5rem;
+  max-block-size: $block-size;
   max-inline-size: 22.75rem;
-  min-block-size: 38.5rem;
+  min-block-size: $block-size;
   min-inline-size: 20rem;
   transition: transform $duration-fast-02 motion(standard);
 

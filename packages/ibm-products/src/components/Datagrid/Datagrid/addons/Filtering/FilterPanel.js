@@ -40,12 +40,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
-import { useIsomorphicEffect } from '../../../../../global/js/hooks';
-
+import {
+  useIsomorphicEffect,
+  usePresence,
+} from '../../../../../global/js/hooks';
 const blockClass = `${pkg.prefix}--datagrid`;
 export const componentClass = `${blockClass}-filter-panel`;
-
-const MotionActionSet = motion(ActionSet);
 
 const defaults = {
   title: 'Filter',
@@ -124,6 +124,12 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
+  const exitAnimationName = 'filter-panel-exit-left';
+  const { shouldRender } = usePresence(
+    panelOpen,
+    filterPanelRef,
+    exitAnimationName
+  );
   // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
   // using our own was causing an error
   const shouldReduceMotion = useReducedMotion();
@@ -169,7 +175,7 @@ const FilterPanel = ({
   const renderActionSet = () => {
     return (
       showActionSet && (
-        <MotionActionSet
+        <ActionSet
           actions={[
             {
               key: 1,
@@ -188,8 +194,6 @@ const FilterPanel = ({
           ]}
           className={`${componentClass}__action-set`}
           ref={actionSetRef}
-          custom={shouldReduceMotion}
-          variants={actionSetVariants}
         />
       )
     );
@@ -222,7 +226,7 @@ const FilterPanel = ({
         rem(filterPanelMinHeight)
       );
     },
-    [filterPanelMinHeight]
+    [filterPanelMinHeight, shouldRender]
   );
 
   // tableId is passed in from the event emitter from the FilterSummary component
@@ -260,22 +264,25 @@ const FilterPanel = ({
     if (innerContainerRef.current && innerContainerRef.current.style) {
       innerContainerRef.current.style.height = height;
     }
-  }, [getScrollableContainerHeight, innerContainerRef]);
+  }, [getScrollableContainerHeight, innerContainerRef, shouldRender]);
 
-  return (
-    <motion.div
+  return shouldRender ? (
+    <div
       ref={filterPanelRef}
-      className={cx(componentClass, `${componentClass}__container`, {
-        [`${componentClass}--open`]: panelOpen,
-        [`${componentClass}--batch`]: showActionSet,
-        [`${componentClass}--instant`]: !showActionSet,
-      })}
-      initial={false}
-      animate={panelOpen ? 'visible' : 'hidden'}
-      custom={shouldReduceMotion}
-      variants={panelVariants}
+      className={cx(
+        componentClass,
+        `${componentClass}__container`,
+        `${componentClass}--left-placement`,
+        {
+          [`${componentClass}--open`]: panelOpen,
+          [`${componentClass}--closing`]: !panelOpen,
+          [`${componentClass}--reduced-motion`]: shouldReduceMotion,
+          [`${componentClass}--batch`]: showActionSet,
+          [`${componentClass}--instant`]: !showActionSet,
+        }
+      )}
     >
-      <motion.div custom={shouldReduceMotion} variants={innerContainerVariants}>
+      <div>
         <header
           ref={filterHeadingRef}
           className={cx(`${componentClass}__heading`, {
@@ -340,9 +347,9 @@ const FilterPanel = ({
           )}
         </div>
         {renderActionSet()}
-      </motion.div>
-    </motion.div>
-  );
+      </div>
+    </div>
+  ) : null;
 };
 
 FilterPanel.propTypes = {

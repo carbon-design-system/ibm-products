@@ -108,7 +108,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   }
   .#{$block-class}__notification:focus {
     border-color: $focus;
-    box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 2px $background;
+    box-shadow:
+      inset 0 0 0 2px $focus,
+      inset 0 0 0 2px $background;
     outline: 0;
   }
   .#{$block-class}__notification {
@@ -168,19 +170,22 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
           overflow: hidden;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
+          line-clamp: 2;
         }
         &.#{$block-class}__notification-long-description {
           display: block;
           overflow: initial;
           -webkit-line-clamp: initial;
+          line-clamp: initial;
         }
       }
       .#{$block-class}__notification-read-more-button,
       .#{$block-class}__notification-read-less-button {
         @include type.type-style('label-01');
 
+        display: flex;
+        align-items: center;
         padding: 0;
-
         min-inline-size: 5.5rem;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
@@ -270,6 +275,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     inset-block-end: 0;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
+      display: flex;
+      width: 100%;
+      max-width: calc(100% - 2.5rem);
+      align-items: center;
       block-size: 2.5rem;
       border-inline-end: 1px solid $layer-02;
       color: $text-primary;

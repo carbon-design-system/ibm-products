@@ -24,7 +24,7 @@
 
 // Standard imports.
 @use '@carbon/layout/scss/convert' as *;
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
@@ -125,7 +125,8 @@ $purple-3: #7433e3;
   opacity: 1;
   padding-inline-start: $horizontal-margin;
   scroll-snap-align: start;
-  transition: max-height 50ms motion(exit, productive),
+  transition:
+    max-height 50ms motion(exit, productive),
     margin-top 50ms motion(exit, productive),
     opacity 300ms motion(exit, productive);
 

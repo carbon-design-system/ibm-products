@@ -69,8 +69,8 @@ const ConditionBuilderAdd = ({
     return buttonLabel
       ? buttonLabel
       : !enableSubGroup
-      ? addConditionRowText
-      : undefined;
+        ? addConditionRowText
+        : undefined;
   };
 
   const wrapperProps = enableSubGroup

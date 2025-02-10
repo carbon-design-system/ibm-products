@@ -48,6 +48,14 @@ $block-class: #{$pkg-prefix}--web-terminal;
   despite of which carbon theme the user has.
 */
 
+.#{$block-class}--open {
+  animation: web-terminal-entrance $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}--closed {
+  animation: web-terminal-exit forwards $duration-moderate-02 motion(standard);
+}
+
 .#{$block-class} {
   @include theme($g90);
 
@@ -59,24 +67,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;
   max-inline-size: $web-terminal-width;
-  @media screen and (prefers-reduced-motion: reduce) {
-    &--open {
-      animation: none;
-    }
-  }
 
-  &--open {
-    animation: web-terminal-entrance $duration-moderate-02 motion(standard);
-  }
-  @media screen and (prefers-reduced-motion: reduce) {
-    &--closed {
-      animation: none;
-    }
-  }
-
-  &--closed {
-    animation: web-terminal-exit forwards $duration-moderate-02 motion(standard);
-  }
   @media (prefers-reduced-motion) {
     animation: none;
   }

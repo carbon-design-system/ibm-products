@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useCallback, useRef, useState } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { useResizeObserver } from './useResizeObserver';
 
 type Item = {
@@ -79,7 +79,7 @@ export const useOverflowItems = <T extends Item>(
     };
   };
 
-  const getVisibleItems = useCallback(() => {
+  const getVisibleItems = () => {
     if (!containerRef) {
       return items;
     }
@@ -117,14 +117,7 @@ export const useOverflowItems = <T extends Item>(
       }
       return prev;
     }, [] as T[]);
-  }, [
-    containerRef,
-    items,
-    maxItems,
-    offsetWidthRef,
-    remainingWidth,
-    requiredWidth,
-  ]);
+  };
 
   const visibleItems = getVisibleItems();
   const hiddenItems = items.slice(visibleItems?.length);
@@ -141,7 +134,7 @@ export const useOverflowItems = <T extends Item>(
     const firstItemWidth = getMap()?.get(firstItemKey) || 0;
 
     onChange?.({
-      hiddenItems: hiddenItems,
+      hiddenItems,
       minWidth: remainingWidth,
       maxWidth: requiredWidth + firstItemWidth,
     });
@@ -150,7 +143,7 @@ export const useOverflowItems = <T extends Item>(
   return {
     visibleItems,
     itemRefHandler,
-    hiddenItems: hiddenItems,
+    hiddenItems,
     offsetRefHandler,
   };
 };

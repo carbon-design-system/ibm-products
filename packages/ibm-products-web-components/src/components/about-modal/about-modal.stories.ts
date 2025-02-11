@@ -87,11 +87,6 @@ const argTypes = {
     control: 'text',
     description: 'Specifies aria label for AboutModal',
   },
-  portalTarget: {
-    control: false,
-    description:
-      'The DOM node the tearsheet should be rendered within. Defaults to document.body.',
-  },
 };
 
 const logo = html`
@@ -147,7 +142,7 @@ const getContent = (index) => {
       return html`This Web site contains proprietary notices and copyright
       information, the terms of which must be observed and followed.`;
     case 2:
-      return html`IThis Web site contains proprietary notices and copyright
+      return html`This Web site contains proprietary notices and copyright
       information, the terms of which must be observed and followed. Please see
       the tab entitled 'Copyright and trademark information' for related
       information. IBM grants you a non-exclusive, non-transferable, limited
@@ -253,10 +248,9 @@ export const Default = {
     title: 2,
     version: 'Version 0.0.0',
     additionalInfo: 0,
-    content: 1,
+    content: 0,
     links: 0,
     modalAriaLabel: '',
-    portalTarget: '',
   },
   argTypes,
   render: renderTemplate,
@@ -270,10 +264,9 @@ export const AboutModalWithAllPropsSet = {
     title: 2,
     version: 'Version 0.0.0',
     additionalInfo: 1,
-    content: 1,
+    content: 2,
     links: 3,
     modalAriaLabel: '',
-    portalTarget: '',
   },
   argTypes,
   render: renderTemplate,

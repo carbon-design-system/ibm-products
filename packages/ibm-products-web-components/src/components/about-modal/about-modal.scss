@@ -58,6 +58,7 @@ $carbon-prefix: 'cds';
     @include type.type-style('heading-04');
 
     color: $text-primary;
+    margin-block-end: $spacing-02;
   }
 
   .#{$prefix}--about-modal__version {
@@ -72,6 +73,17 @@ $carbon-prefix: 'cds';
     margin-block: $spacing-06 0;
   }
 
+  .#{$prefix}--about-modal__copyright-text {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--about-modal__content:first-child,
+  .#{$prefix}--about-modal__copyright-text:first-child {
+    margin-block-start: $spacing-07;
+  }
+  #{$carbon-prefix}-link {
+    display: inline-flex;
+  }
   .#{$prefix}--about-modal__links-container {
     @include type.type-style('body-compact-01');
 
@@ -83,7 +95,6 @@ $carbon-prefix: 'cds';
     }
   }
   #{$carbon-prefix}-modal-footer {
-    // @include theme.theme(themes.$g100);
     @include styles.theme(styles.$g100);
 
     display: block;

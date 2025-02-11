@@ -79,7 +79,7 @@ export { decorators, globals };
 @use '@carbon/styles' as styles;
 @use '@carbon/styles/scss/theme' as *;
 
-[storybook-carbon-theme] {
+[data-carbon-theme] {
   @include styles.theme(styles.$white);
 
   /* make sure background and color are set if theme in use */
@@ -87,17 +87,17 @@ export { decorators, globals };
   color: $text-primary;
 }
 
-[storybook-carbon-theme='g10'],
+[data-carbon-theme='g10'],
 .sb--use-carbon-theme-g10 {
   @include styles.theme(styles.$g10);
 }
 
-[storybook-carbon-theme='g90'],
+[data-carbon-theme='g90'],
 .sb--use-carbon-theme-g90 {
   @include styles.theme(styles.$g90);
 }
 
-[storybook-carbon-theme='g100'],
+[data-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }
@@ -116,7 +116,7 @@ $feature-flags: (
 @import "carbon-components/scss/globals/scss/styles";
 @import "@carbon/themes/scss/themes";
 
-[storybook-carbon-theme] {
+[data-carbon-theme] {
   background: $ui-background;
   color: $ui-01;
 
@@ -126,14 +126,14 @@ $feature-flags: (
   );
 }
 
-[storybook-carbon-theme="g10"] {
+[data-carbon-theme="g10"] {
   @include carbon--theme(
     $theme: $carbon--theme--g10,
     $emit-custom-properties: true
   );
 }
 
-[storybook-carbon-theme="g90"] {
+[data-carbon-theme="g90"] {
   z-index: 90;
   @include carbon--theme(
     $theme: $carbon--theme--g90,
@@ -141,7 +141,7 @@ $feature-flags: (
   );
 }
 
-[storybook-carbon-theme="g100"] {
+[data-carbon-theme="g100"] {
   @include carbon--theme(
     $theme: $carbon--theme--g100,
     $emit-custom-properties: true

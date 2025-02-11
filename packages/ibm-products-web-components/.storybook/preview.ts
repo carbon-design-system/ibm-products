@@ -145,7 +145,7 @@ export const decorators = [
     const { hasMainTag } = result;
     const { locale, dir, theme } = context.globals;
 
-    document.documentElement.setAttribute('storybook-carbon-theme', theme);
+    document.documentElement.setAttribute('data-carbon-theme', theme);
 
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;

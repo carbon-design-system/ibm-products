@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react';
 import { useResizeObserver } from './useResizeObserver';
 
 type Item = {
@@ -29,8 +29,6 @@ export const useOverflowItems = <T extends Item>(
   const visibleItemCount = useRef<number>(0);
   const minWidthRef = useRef<number>(0);
   const requiredWidthRef = useRef<number>(0);
-  const visibleItemsRef = useRef<T[]>([]);
-  const hiddenItemsRef = useRef<T[]>([]);
 
   const handleResize = () => {
     if (containerRef?.current) {
@@ -83,10 +81,7 @@ export const useOverflowItems = <T extends Item>(
 
   const getVisibleItems = useCallback(() => {
     if (!containerRef) {
-      return {
-        visibleItems: items,
-        hiddenItems: [],
-      };
+      return items;
     }
 
     const map = getMap();
@@ -100,7 +95,7 @@ export const useOverflowItems = <T extends Item>(
       includeOffset = requiredWidth > remainingWidth + offsetWidthRef?.current;
     }
 
-    const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
+    return items.slice(0, maxItems).reduce((prev, cur) => {
       if (maxReached) {
         return prev;
       }
@@ -122,15 +117,6 @@ export const useOverflowItems = <T extends Item>(
       }
       return prev;
     }, [] as T[]);
-
-    visibleItemsRef.current = visibleItems;
-    const hiddenItems = items.slice(visibleItems?.length);
-    hiddenItemsRef.current = hiddenItems;
-
-    return {
-      visibleItems,
-      hiddenItems,
-    };
   }, [
     containerRef,
     items,
@@ -140,36 +126,31 @@ export const useOverflowItems = <T extends Item>(
     requiredWidth,
   ]);
 
-  const onChangeVisibleItems = useCallback(() => {
-    // only call the change handler when the number of visible items has changed
-    if (
-      visibleItemsRef?.current.length !== visibleItemCount.current ||
-      remainingWidth !== minWidthRef.current ||
-      requiredWidth !== requiredWidthRef.current
-    ) {
-      visibleItemCount.current = visibleItemsRef?.current.length;
-      minWidthRef.current = remainingWidth;
-      requiredWidthRef.current = requiredWidth;
-      const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
-      const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+  const visibleItems = getVisibleItems();
+  const hiddenItems = items.slice(visibleItems?.length);
+  // only call the change handler when the number of visible items has changed
+  if (
+    visibleItems?.length !== visibleItemCount.current ||
+    remainingWidth !== minWidthRef.current ||
+    requiredWidth !== requiredWidthRef.current
+  ) {
+    visibleItemCount.current = visibleItems?.length;
+    minWidthRef.current = remainingWidth;
+    requiredWidthRef.current = requiredWidth;
+    const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
+    const firstItemWidth = getMap()?.get(firstItemKey) || 0;
 
-      onChange?.({
-        hiddenItems: getVisibleItems()?.hiddenItems,
-        minWidth: remainingWidth,
-        maxWidth: requiredWidth + firstItemWidth,
-      });
-    }
-  }, [getVisibleItems, onChange, remainingWidth, requiredWidth]);
-
-  useEffect(() => {
-    getVisibleItems();
-    onChangeVisibleItems();
-  }, [getVisibleItems, onChangeVisibleItems]);
+    onChange?.({
+      hiddenItems: hiddenItems,
+      minWidth: remainingWidth,
+      maxWidth: requiredWidth + firstItemWidth,
+    });
+  }
 
   return {
-    visibleItems: getVisibleItems()?.visibleItems,
+    visibleItems,
     itemRefHandler,
-    hiddenItems: getVisibleItems()?.hiddenItems,
+    hiddenItems: hiddenItems,
     offsetRefHandler,
   };
 };

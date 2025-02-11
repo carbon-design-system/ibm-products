@@ -30,7 +30,6 @@ LICENSE file in the root directory of this source tree.
       animate-title
       label-text="An optional label"
       size="md"
-      title="A title, can be omitted"
       selector-page-content="#page-content-selector"
       >
       <h5>Section</h5>
@@ -62,5 +61,14 @@ LICENSE file in the root directory of this source tree.
 
       <cds-button slot="actions" kind="primary">Primary</cds-button>
   </c4p-side-panel>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+      const panel = document.querySelector("c4p-side-panel");
+      if (panel) {
+        panel.title = "A title, can be omitted";
+      }
+    });
+  </script>
 </body>
 </html>

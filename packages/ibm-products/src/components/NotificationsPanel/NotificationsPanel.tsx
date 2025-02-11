@@ -32,17 +32,19 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-import { timeAgo } from './utils';
 import {
   useClickOutside,
   useIsomorphicEffect,
   usePreviousValue,
 } from '../../global/js/hooks';
 import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
+import { timeAgo } from './utils';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
+
+export type Themes = 'light' | 'dark';
 
 // Default values for props
 const defaults = {
@@ -53,6 +55,7 @@ const defaults = {
   emptyStateLabel: 'You do not have any notifications',
   hourAgoText: (value) => `${value} hour ago`,
   hoursAgoText: (value) => `${value} hours ago`,
+  illustrationTheme: 'light' as Themes,
   minuteAgoText: (value) => `${value} minute ago`,
   minutesAgoText: (value) => `${value} minutes ago`,
   monthAgoText: (value) => `${value} month ago`,
@@ -140,6 +143,11 @@ export interface NotificationsPanelProps {
    * Sets the `hours ago` label text
    */
   hoursAgoText?: (value: number) => string;
+
+  /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: Themes;
 
   /**
    * Sets the `minute ago` label text
@@ -283,6 +291,7 @@ export let NotificationsPanel = React.forwardRef(
       emptyStateLabel = defaults.emptyStateLabel,
       hourAgoText = defaults.hourAgoText,
       hoursAgoText = defaults.hoursAgoText,
+      illustrationTheme = defaults.illustrationTheme,
       minuteAgoText = defaults.minuteAgoText,
       minutesAgoText = defaults.minutesAgoText,
       monthAgoText = defaults.monthAgoText,
@@ -727,7 +736,7 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {!allNotifications.length && (
                 <NotificationsEmptyState
-                  illustrationTheme="dark"
+                  illustrationTheme={illustrationTheme}
                   title=""
                   subtitle={emptyStateLabel}
                 />
@@ -850,6 +859,11 @@ NotificationsPanel.propTypes = {
    * Sets the `hours ago` label text
    */
   hoursAgoText: PropTypes.func,
+
+  /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
 
   /**
    * Sets the `minute ago` label text

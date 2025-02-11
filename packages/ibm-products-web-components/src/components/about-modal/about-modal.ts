@@ -8,14 +8,8 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  //   queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-// import HostListener from '@carbon/web-components/es/globals/decorators/host-listener.js';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import styles from './about-modal.scss?lit';
@@ -27,6 +21,10 @@ const blockClass = `${prefix}--about-modal`;
  *
  * @element c4p-about-modal
  * @csspart dialog The dialog.
+ * @fires c4p-about-modal-beingclosed
+ *   The custom event fired before this about modal is being closed upon a user gesture.
+ *   Cancellation of this event stops the user-initiated action of closing this about modal.
+ * @fires c4p-about-modal-closed - The custom event fired after this about modal is closed upon a user gesture.
  */
 @customElement(`${prefix}-about-modal`)
 class CDSAboutModal extends HostListenerMixin(LitElement) {

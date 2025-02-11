@@ -9,6 +9,7 @@ vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
 import { render, html } from 'lit';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
+import { prefix } from '../../globals/settings';
 
 const defaultProps = {
   animateTitle: true,
@@ -23,6 +24,8 @@ const defaultProps = {
   size: SIDE_PANEL_SIZE.MEDIUM,
   title: 'Side panel title',
 };
+
+const blockClass = `${prefix}--side-panel`;
 
 const template = (props = defaultProps) => html`
   <c4p-side-panel
@@ -48,5 +51,27 @@ describe('c4p-side-panel', () => {
     await Promise.resolve();
     const elem = document.body.querySelector('c4p-side-panel' as any);
     expect(elem).toBeDefined();
+  });
+
+  it('should render a side panel on the left', async () => {
+    render(
+      template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT }),
+      document.body
+    );
+
+    await Promise.resolve();
+    const elem = document.body.querySelector('c4p-side-panel');
+    expect(elem).toBeDefined();
+    const placement = elem?.getAttribute('placement');
+    expect(placement).toBe('left');
+
+    const dialogShadowEl = elem?.shadowRoot?.querySelectorAll(
+      `.${blockClass}`
+    )?.[0];
+
+    if (dialogShadowEl) {
+      const left = window.getComputedStyle(dialogShadowEl)?.left;
+      expect(left).toBe('0px');
+    }
   });
 });

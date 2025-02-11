@@ -10,12 +10,12 @@ import { action } from '@storybook/addon-actions';
 import {
   Button,
   Header,
-  HeaderContainer,
   HeaderName,
+  HeaderPanel,
   HeaderGlobalBar,
   HeaderGlobalAction,
 } from '@carbon/react';
-import { User, Notification } from '@carbon/react/icons';
+import { User, Notification, Switcher } from '@carbon/react/icons';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -24,11 +24,14 @@ import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
-// import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
-const blockClass = `${pkg.prefix}--notifications-panel`;
+
+const dataOptions = {
+  'Sample data set': data,
+  'Empty data set': [],
+};
 
 export default {
   title: 'IBM Products/Components/Notifications panel/NotificationsPanel',
@@ -37,6 +40,13 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
+  },
+  argTypes: {
+    data: {
+      control: { type: 'select', labels: Object.keys(dataOptions) },
+      options: Object.values(dataOptions).map((_k, i) => i),
+      mapping: Object.values(dataOptions),
+    },
     docs: {
       page: () => (
         <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/notification-panel/usage/" />
@@ -45,149 +55,203 @@ export default {
   },
 };
 
-const renderUIShellHeader = (
-  open,
-  setOpen,
-  notificationTriggerRef,
-  hasUnreadNotifications
-) => (
-  <HeaderContainer
-    render={() => (
+const defaultProps = {
+  data: 0,
+  open: true,
+  onDoNotDisturbChange: action('Toggled "Do not disturb"'),
+  onViewAllClick: action('Clicked "View all"'),
+  onSettingsClick: action('Clicked gear icon'),
+};
+
+// Create a new notification.
+const newNotification = () => {
+  // Pick a random notification from the existing data set.
+  const random = Math.floor(Math.random() * data.length);
+  const notification = { ...data[random] };
+  // Update dynamic data.
+  notification.id = uuidv4();
+  notification.timestamp = new Date();
+  notification.unread = true;
+
+  return notification;
+};
+
+const Template = (args) => {
+  const { data, open, ...rest } = args;
+  const [notificationsData, setNotificationsData] = useState(data);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
+  const [userOpen, setUserOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(open);
+  const [switcherOpen, setSwitcherOpen] = useState(false);
+  const userActionRef = useRef(null);
+  const notificationActionRef = useRef(null);
+  const switcherActionRef = useRef(null);
+
+  const markAllAsUnread = () => {
+    let tempData = [...notificationsData];
+    tempData.forEach((element) => (element.unread = false));
+    setNotificationsData(tempData);
+  };
+
+  // Every time data is added or removed, check for unread notifications.
+  useEffect(() => {
+    const hasUnread = notificationsData.find(
+      (notification) => notification.unread === true
+    );
+    setHasUnreadNotifications(hasUnread);
+  }, [notificationsData]);
+
+  // Every time the panel is opened, mark all notifications as unread.
+  useEffect(() => {
+    if (notificationsOpen) {
+      markAllAsUnread();
+    }
+  }, [notificationsOpen]);
+
+  // After changing `data` from the Storybook control.
+  useEffect(() => {
+    setNotificationsData(data);
+  }, [data]);
+  // After changing `open` from the Storybook control.
+  useEffect(() => {
+    setNotificationsOpen(open);
+  }, [open]);
+
+  const addNewNotification = () => {
+    const notification = newNotification();
+    setNotificationsData((data) => [...data, { ...notification }]);
+  };
+
+  return (
+    <div className={`${storyBlockClass}--full-height`}>
       <Header
         aria-label="IBM Cloud Pak"
         className={`${storyBlockClass}--header`}
       >
-        <HeaderName href="/" prefix="IBM">
-          Cloud Pak
-        </HeaderName>
-        <HeaderGlobalBar
-          style={{
-            zIndex: 2,
+        <HeaderName
+          href="/"
+          prefix="IBM"
+          onClick={(e) => {
+            e.preventDefault();
           }}
         >
+          Cloud Pak
+        </HeaderName>
+        <HeaderGlobalBar>
+          {/**
+           *
+           * User account
+           *
+           */}
           <HeaderGlobalAction
-            aria-label="Notifications"
-            onClick={() => setOpen(!open)}
-            ref={notificationTriggerRef}
+            ref={userActionRef}
+            aria-label={userOpen ? 'Close user account' : 'Open user account'}
+            isActive={userOpen}
+            onClick={(e) => {
+              e.preventDefault();
+              setUserOpen((prevState) => !prevState);
+              setNotificationsOpen(false);
+              setSwitcherOpen(false);
+              setTimeout(() => {
+                userActionRef?.current?.focus();
+              }, 0);
+            }}
           >
-            {hasUnreadNotifications ? (
+            <User size={20} />
+          </HeaderGlobalAction>
+          <HeaderPanel expanded={userOpen}>
+            <div className={`${storyBlockClass}__header-panel`}>
+              User account
+              <br />
+              example panel
+            </div>
+          </HeaderPanel>
+          {/**
+           *
+           * Notifications
+           *
+           */}
+          <HeaderGlobalAction
+            ref={notificationActionRef}
+            aria-label={
+              notificationsOpen ? 'Close notifications' : 'Open notifications'
+            }
+            aria-expanded={notificationsOpen}
+            isActive={notificationsOpen}
+            onClick={(e) => {
+              e.preventDefault();
+              markAllAsUnread();
+              setNotificationsOpen((prevState) => !prevState);
+              setUserOpen(false);
+              setSwitcherOpen(false);
+            }}
+          >
+            {!notificationsOpen && hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
               <Notification size={20} />
             )}
           </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="App switcher">
-            <User size={20} />
+          <NotificationsPanel
+            triggerButtonRef={notificationActionRef}
+            data={notificationsData}
+            open={notificationsOpen}
+            onClickOutside={() => {
+              action('Clicked outside')();
+              setNotificationsOpen(false);
+            }}
+            onDismissAllNotifications={() => {
+              action('Clicked "Dismiss all"')();
+              setNotificationsData([]);
+            }}
+            onDismissSingleNotification={({ id }) => {
+              const deletedItem = notificationsData.find((item) => item.id);
+              action('Clicked "Dismiss notification"')(deletedItem);
+
+              let tempData = [...notificationsData];
+              tempData = tempData.filter((item) => item.id !== id);
+              setNotificationsData(tempData);
+            }}
+            {...rest}
+          />
+          {/**
+           *
+           * App switcher
+           *
+           */}
+          <HeaderGlobalAction
+            ref={switcherActionRef}
+            aria-label={switcherOpen ? 'Close switcher' : 'Open switcher'}
+            isActive={switcherOpen}
+            onClick={(e) => {
+              e.preventDefault();
+              setSwitcherOpen((prevState) => !prevState);
+              setUserOpen(false);
+              setNotificationsOpen(false);
+              setTimeout(() => {
+                switcherActionRef?.current?.focus();
+              }, 0);
+            }}
+          >
+            <Switcher size={20} />
           </HeaderGlobalAction>
+          <HeaderPanel expanded={switcherOpen}>
+            <div className={`${storyBlockClass}__header-panel`}>
+              App switcher
+              <br />
+              example panel
+            </div>
+          </HeaderPanel>
         </HeaderGlobalBar>
       </Header>
-    )}
-  />
-);
-
-const Template = (args) => {
-  const [open, setOpen] = useState(args.open);
-  const notificationTriggerRef = useRef(null);
-  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(false);
-  const [notificationsData, setNotificationsData] = useState(data);
-
-  const addNewNotification = () => {
-    const newNotification = {
-      id: uuidv4(),
-      type: 'success',
-      title: 'Deployed app successfully',
-      description: 'Application has been deployed.',
-      timestamp: new Date(),
-      unread: true,
-      onNotificationClick: action(`Clicked on notification`),
-    };
-    setNotificationsData((arr) => [...arr, newNotification]);
-  };
-
-  // logic for unread bell indicator
-  useEffect(() => {
-    let unreadTimer;
-    if (open && hasUnreadNotifications) {
-      const tempData = [...notificationsData];
-      tempData.forEach((element) => {
-        element.unread = false;
-      });
-      unreadTimer = setTimeout(() => {
-        setHasUnreadNotifications(false);
-        setNotificationsData(tempData);
-      }, 2000);
-    }
-    if (!open && !hasUnreadNotifications) {
-      let hasUnreadNotificationsCheck;
-      for (let i = 0; i < notificationsData.length; i++) {
-        if (notificationsData[i].unread === true) {
-          hasUnreadNotificationsCheck = true;
-          break;
-        } else {
-          hasUnreadNotificationsCheck = false;
-        }
-      }
-      setHasUnreadNotifications(hasUnreadNotificationsCheck);
-    }
-    return () => clearTimeout(unreadTimer);
-  }, [open, notificationsData, hasUnreadNotifications]);
-
-  return (
-    <div className={`${storyBlockClass}--full-height`}>
-      {renderUIShellHeader(
-        open,
-        setOpen,
-        notificationTriggerRef,
-        hasUnreadNotifications
-      )}
       <div className={`${storyBlockClass}__add`}>
         <Button onClick={addNewNotification}>Add new notification</Button>
       </div>
-      <NotificationsPanel
-        {...args}
-        data={notificationsData}
-        open={open}
-        onClickOutside={() => setOpen(false)}
-        onDismissAllNotifications={() => setNotificationsData([])}
-        onDismissSingleNotification={({ id }) => {
-          let tempData = [...notificationsData];
-          tempData = tempData.filter((item) => item.id !== id);
-          setNotificationsData(tempData);
-        }}
-        triggerButtonRef={notificationTriggerRef}
-      />
     </div>
-  );
-};
-
-const EmptyNotifications = (args) => {
-  const [open, setOpen] = useState(args.open);
-  return (
-    <>
-      {renderUIShellHeader(open, setOpen)}
-      <NotificationsPanel
-        {...args}
-        open={open}
-        onClickOutside={() => setOpen(false)}
-        doNotDisturbDefaultToggled
-      />
-    </>
   );
 };
 
 export const Default = Template.bind({});
 Default.args = {
-  open: true,
-  onDoNotDisturbChange: action('Toggled to do not disturb'),
-  onViewAllClick: action('Clicked view all button'),
-  onSettingsClick: action('Clicked settings gear'),
-};
-
-export const EmptyState = EmptyNotifications.bind({});
-EmptyState.args = {
-  data: [],
-  open: true,
-  onDoNotDisturbChange: action('Toggled to do not disturb'),
-  onViewAllClick: action('Clicked view all button'),
-  onSettingsClick: action('Clicked settings gear'),
+  ...defaultProps,
 };

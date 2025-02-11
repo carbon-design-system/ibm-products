@@ -183,8 +183,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       .#{$block-class}__notification-read-less-button {
         @include type.type-style('label-01');
 
+        display: flex;
+        align-items: center;
         padding: 0;
-
         min-inline-size: 5.5rem;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
@@ -274,6 +275,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     inset-block-end: 0;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
+      display: flex;
+      width: 100%;
+      max-width: calc(100% - 2.5rem);
+      align-items: center;
       block-size: 2.5rem;
       border-inline-end: 1px solid $layer-02;
       color: $text-primary;

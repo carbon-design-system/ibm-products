@@ -20,6 +20,7 @@ import {
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
+  JSX,
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
@@ -70,10 +71,10 @@ const defaults = {
   breadcrumbOverflowTooltipAlign: 'right',
 };
 
-interface ActionBarItem extends ButtonProps {
+interface ActionBarItem extends ButtonProps<'button'> {
   iconDescription: string;
   onClick: () => void;
-  renderIcon: ReactNode;
+  renderIcon: React.ElementType;
 }
 
 type Size = 'xl';
@@ -464,7 +465,7 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
-      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign,
+      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign as PopoverAlignment,
 
       // Collect any other property values passed in.
       ...rest

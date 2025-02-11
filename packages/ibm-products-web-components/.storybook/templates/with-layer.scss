@@ -15,10 +15,12 @@
 
 .#{$prefix}--with-layer__layer {
   position: relative;
+  /* stylelint-disable-next-line carbon/theme-use */
   border: 1px dashed colors.$purple-50;
 }
 
 .#{$prefix}--with-layer__layer .#{$prefix}--with-layer__layer {
+  /* stylelint-disable-next-line carbon/theme-use */
   background-color: theme.$layer;
   margin-block-start: spacing.$spacing-07;
 }
@@ -28,7 +30,9 @@
 
   display: inline-flex;
   padding: spacing.$spacing-02;
+  /* stylelint-disable-next-line carbon/theme-use */
   background-color: tag.$tag-background-purple;
+  /* stylelint-disable-next-line carbon/theme-use */
   color: tag.$tag-color-purple;
   column-gap: spacing.$spacing-02;
 }

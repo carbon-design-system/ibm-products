@@ -58,9 +58,9 @@
 
 .carbon-theme-dropdown {
   position: fixed;
-  bottom: 1rem; // stylelint-disable-line carbon/layout-use
-  left: 1rem; // stylelint-disable-line carbon/layout-use
+  inset-block-end: 1rem; // stylelint-disable-line carbon/layout-use
   min-inline-size: 11.5rem;
+  inset-inline-start: 1rem; // stylelint-disable-line carbon/layout-use
 }
 
 .carbon-theme-dropdown .#{config.$prefix}--label {

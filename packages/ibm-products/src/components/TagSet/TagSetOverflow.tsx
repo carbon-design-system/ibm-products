@@ -107,7 +107,7 @@ export const TagSetOverflow = React.forwardRef(
       overflowTags,
       overflowType,
       showAllTagsLabel,
-      popoverOpen,
+      popoverOpen = false,
       setPopoverOpen,
       size,
       // Collect any other property values passed in.

@@ -13,6 +13,7 @@ import React, {
   PropsWithChildren,
   Ref,
   ForwardedRef,
+  JSX,
 } from 'react';
 
 // Other standard imports.
@@ -38,7 +39,7 @@ const defaults = {
   actions: Object.freeze([]),
 };
 
-interface Action extends ButtonProps {
+interface Action extends ButtonProps<React.ElementType> {
   id?: string;
   key: string;
   iconDescription: string;

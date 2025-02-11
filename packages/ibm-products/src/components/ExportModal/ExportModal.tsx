@@ -237,7 +237,7 @@ export let ExportModal = forwardRef(
       const returnName = extension
         ? `${filename}.${extension.toLocaleLowerCase()}`
         : name;
-      onRequestSubmit && onRequestSubmit(returnName);
+      onRequestSubmit?.(returnName);
     };
 
     const hasInvalidExtension = () => {

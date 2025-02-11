@@ -6,11 +6,10 @@
  */
 
 import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
-import { ChevronDown, ChevronUp } from '@carbon/react/icons';
+import { ChevronDown, ChevronUp, CarbonIconType } from '@carbon/react/icons';
 import React, {
   Children,
   ComponentProps,
-  PropsWithChildren,
   ReactNode,
   createElement,
   forwardRef,
@@ -63,30 +62,24 @@ export interface ComboButtonProps extends ComponentProps<'div'> {
   };
 }
 
+type EnrichedChildren = {
+  children?: ReactNode;
+  renderIcon?: CarbonIconType;
+};
+
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.
  */
-const ComboButton = forwardRef(
-  (
-    {
-      // The component props, in alphabetical order (for consistency).
-
-      children,
-      className,
-      overflowMenu,
-
-      // Collect any other property values passed in.
-      ...rest
-    }: PropsWithChildren<ComboButtonProps>,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
+const ComboButton = forwardRef<HTMLDivElement, ComboButtonProps>(
+  (props, ref) => {
+    const { children, className, overflowMenu, ...rest } = props;
     const { current: instanceId } = useRef(uuidv4());
     const [isOpen, setIsOpen] = useState(false);
 
-    const [primaryAction, ...restActions] = Children.toArray(children)
+    const actions = Children.toArray(children)
       .filter(Boolean)
       .map((child) => {
-        if (React.isValidElement(child)) {
+        if (React.isValidElement<EnrichedChildren>(child)) {
           const { props } = child;
           return {
             ...props,
@@ -94,7 +87,9 @@ const ComboButton = forwardRef(
           };
         }
         return null;
-      });
+      }) as EnrichedChildren[];
+    const primaryAction = actions.slice(0, 1);
+    const secondaryActions = actions.slice(1);
 
     return (
       <div
@@ -104,8 +99,7 @@ const ComboButton = forwardRef(
         data-floating-menu-container
       >
         <Button {...primaryAction} />
-
-        {restActions.length > 0 && (
+        {secondaryActions.length > 0 && (
           <OverflowMenu
             {...overflowMenu}
             className={`${blockClass}__overflow-menu`}
@@ -124,7 +118,7 @@ const ComboButton = forwardRef(
             }
             flipped
           >
-            {restActions.map(
+            {secondaryActions.map(
               ({ children, renderIcon: Icon, ...action }, index) => (
                 <OverflowMenuItem
                   {...action}
@@ -133,7 +127,6 @@ const ComboButton = forwardRef(
                   itemText={
                     <>
                       {children}
-
                       {Icon && (
                         <span
                           className={`${blockClass}__overflow-menu__item__icon`}

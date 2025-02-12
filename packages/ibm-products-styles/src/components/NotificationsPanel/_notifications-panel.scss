@@ -250,7 +250,6 @@ $block-size: 38.5rem;
   .#{$block-class}__notification-previous:not(:first-of-type):before {
     position: absolute;
     margin: 0 auto;
-    // background-color: $layer-02;
     background-color: $border-subtle-01;
     block-size: 1px;
     content: '';

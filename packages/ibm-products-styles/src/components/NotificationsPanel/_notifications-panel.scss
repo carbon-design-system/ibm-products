@@ -45,6 +45,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     transform: translateY(-38.5rem); // the height of the notification panel
   }
 }
+.#{$block-class}__entrance {
+  animation: fade-in $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}__exit {
+  animation: fade-out forwards $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class} {
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
 
 .#{$block-class}__container {
   @include theme($g100);

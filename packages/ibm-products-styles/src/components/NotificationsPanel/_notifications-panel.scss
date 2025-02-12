@@ -46,6 +46,19 @@ $block-size: 38.5rem;
     transform: translateY(-$block-size); // the height of the notification panel
   }
 }
+.#{$block-class}__entrance {
+  animation: fade-in $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}__exit {
+  animation: fade-out forwards $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class} {
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
 
 .#{$block-class}__container {
   position: fixed;
@@ -279,8 +292,6 @@ $block-size: 38.5rem;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
       display: flex;
-      width: 100%;
-      max-width: calc(100% - 2.5rem);
       align-items: center;
       block-size: 2.5rem;
       border-inline-end: 1px solid $border-subtle-01;

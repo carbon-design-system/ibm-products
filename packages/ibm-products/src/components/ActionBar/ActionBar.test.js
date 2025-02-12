@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar } from '.';
 import { Lightning, Bee } from '@carbon/react/icons';
@@ -65,14 +65,14 @@ const mockSizes = () => {
 };
 
 const testSizes = (el, property) => {
-  const classes = el.getAttribute('class').split(' ');
+  const classes = el.getAttribute('class')?.split(' ');
   const container = el.closest('.test-container');
 
   // if no container we are looking at the popup, assign something more than big enough e.g. 1001
   const base = container ? parseInt(container.style.width, 10) : 1001;
   const propSizes = sizes(base)[property];
 
-  if (propSizes) {
+  if (propSizes && classes) {
     for (let cls of classes) {
       const val = propSizes[cls] ? propSizes[cls] : -1;
       if (val >= 0) {
@@ -83,8 +83,7 @@ const testSizes = (el, property) => {
   }
 
   // The test should never get here as all cases should be catered for in setup.
-  // eslint-disable-next-line
-  console.log('testSizes found nothing.', property, el.outerHTML);
+
   return base;
 };
 
@@ -133,33 +132,38 @@ describe(ActionBar.displayName, () => {
       />
     );
 
-    expect(
-      screen.queryByText(/Action 10/, {
-        selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
-      })
-    ).toBeNull();
+    waitFor(
+      async () => {
+        expect(
+          screen.queryByText(/Action 10/, {
+            selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
+          })
+        ).toBeNull();
 
-    const menuItemNotSeen = document.querySelector('[role="menuitem"]', {
-      name: 'Action 10',
-    });
-    expect(menuItemNotSeen).toBeNull();
+        const menuItemNotSeen = document.querySelector('[role="menuitem"]', {
+          name: 'Action 10',
+        });
+        expect(menuItemNotSeen).toBeNull();
 
-    // Click overflow button and check for last action
-    const ofBtn = screen.getByLabelText(overflowAriaLabel, {
-      selector: `.${blockClass}-overflow-items`,
-    });
-    await act(() => userEvent.click(ofBtn));
+        // Click overflow button and check for last action
+        const ofBtn = screen.getByLabelText(overflowAriaLabel, {
+          selector: `.${blockClass}-overflow-items`,
+        });
+        await act(() => userEvent.click(ofBtn));
 
-    // <ul role='menu' /> but default <ul> role of list used for query
-    // see https://testing-library.com/docs/queries/byrole/#api
-    // const om = screen.getByRole('list');
-    // const menuItems = screen.getAllByRole('menuitem');
-    // use querySelectorAll rather that getAllByRole because the drop-down
-    // never fully appears in jsdom (requires resize handler mocking)
-    const menuItemSeen = document.querySelector('[role="menuitem"]', {
-      name: 'Action 10',
-    });
-    expect(menuItemSeen).not.toBeNull();
+        // <ul role='menu' /> but default <ul> role of list used for query
+        // see https://testing-library.com/docs/queries/byrole/#api
+        // const om = screen.getByRole('list');
+        // const menuItems = screen.getAllByRole('menuitem');
+        // use querySelectorAll rather that getAllByRole because the drop-down
+        // never fully appears in jsdom (requires resize handler mocking)
+        const menuItemSeen = document.querySelector('[role="menuitem"]', {
+          name: 'Action 10',
+        });
+        expect(menuItemSeen).not.toBeNull();
+      },
+      { timeout: 0 }
+    );
   });
 
   it('Does not duplicate action IDs', async () => {

@@ -88,7 +88,11 @@ export interface TagOverflowProps {
     | 'right-top';
   overflowClassName?: string;
   overflowType?: 'default' | 'tag';
-  onOverflowTagChange?: (arr: TagOverflowItem[]) => void;
+  onOverflowTagChange?: (value: {
+    hiddenItems?: TagOverflowItem[];
+    minWidth?: number;
+    maxWidth?: number;
+  }) => void;
   showAllTagsLabel?: string;
   tagComponent?: string;
 }

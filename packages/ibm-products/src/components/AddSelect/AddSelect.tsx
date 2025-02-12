@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelectBody } from './AddSelectBody';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
@@ -54,11 +54,8 @@ export interface AddSelectProps {
   title: string;
 }
 
-export const AddSelect = forwardRef(
-  (
-    { items, globalFilters, ...props }: AddSelectProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
+export const AddSelect = forwardRef<HTMLDivElement, AddSelectProps>(
+  ({ items = { entries: [] }, globalFilters, ...props }, ref) => {
     const useNormalizedItems = !!items.entries.find((item) => item.children);
     const normalizedItems = useNormalizedItems ? normalize(items) : null;
     const globalFilterOpts =
@@ -177,24 +174,6 @@ AddSelect.propTypes = {
   searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
-};
-
-AddSelect.defaultProps = {
-  closeIconDescription: '',
-  description: '',
-  itemsLabel: '',
-  items: {
-    entries: [],
-  },
-  multi: false,
-  noResultsDescription: '',
-  noResultsTitle: '',
-  onClose: () => {},
-  onCloseButtonText: '',
-  onSubmit: () => {},
-  onSubmitButtonText: '',
-  open: false,
-  title: '',
 };
 
 AddSelect.displayName = componentName;

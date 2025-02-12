@@ -11,11 +11,31 @@ import { MultiAddSelect } from './MultiAddSelect';
 
 const componentName = MultiAddSelect.name;
 const defaultProps = {
-  globalSearchLabel: 'test input label',
-  noSelectionTitle: 'No selection title',
-  noSelectionDescription: 'No selection description',
-  noResultsTitle: 'No results title',
-  noResultsDescription: 'Try again description',
+  closeIconDescription: 'test icon description',
+  description: 'test description',
+  globalFiltersLabel: 'filters',
+  globalSearchLabel: 'global search label',
+  items: {
+    entries: [
+      {
+        id: 'test-entry-1',
+        title: 'test entry 1 title',
+        value: 'test-entry-1',
+      },
+    ],
+  },
+  itemsLabel: 'test items label',
+  multi: true,
+  noResultsDescription: 'no results body',
+  noResultsTitle: 'no results title',
+  noSelectionDescription: 'no results body',
+  noSelectionTitle: 'no results title',
+  onClose: () => {},
+  onCloseButtonText: 'close button text',
+  onSubmit: () => {},
+  onSubmitButtonText: 'submit button text',
+  open: true,
+  title: 'test title',
 };
 
 describe(componentName, () => {

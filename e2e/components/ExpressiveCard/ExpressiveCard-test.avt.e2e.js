@@ -125,9 +125,7 @@ test.describe('ExpressiveCard @avt', () => {
     await expect(page).toHaveNoACViolations(
       'ExpressiveCard @avt-clickable-state'
     );
-    const cardElement = page.locator(
-      `[data-carbon-devtools-id="${pkg.prefix}--ExpressiveCard"]`
-    );
+    const cardElement = page.locator(`.${pkg.prefix}--card__clickable`);
     // Pressing 'Tab' key to focus on the clickable card
     await page.keyboard.press('Tab');
     await expect(cardElement).toBeFocused();

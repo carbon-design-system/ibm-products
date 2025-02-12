@@ -32,18 +32,15 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
+import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
 import { timeAgo } from './utils';
-import {
-  useClickOutside,
-  useIsomorphicEffect,
-  usePreviousValue,
-  usePrefersReducedMotion,
-} from '../../global/js/hooks';
-import wrapFocus from '../../global/js/utils/wrapFocus';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
+
+export type Themes = 'light' | 'dark';
 
 // Default values for props
 const defaults = {
@@ -54,6 +51,7 @@ const defaults = {
   emptyStateLabel: 'You do not have any notifications',
   hourAgoText: (value) => `${value} hour ago`,
   hoursAgoText: (value) => `${value} hours ago`,
+  illustrationTheme: 'light' as Themes,
   minuteAgoText: (value) => `${value} minute ago`,
   minutesAgoText: (value) => `${value} minutes ago`,
   monthAgoText: (value) => `${value} month ago`,
@@ -143,6 +141,11 @@ export interface NotificationsPanelProps {
   hoursAgoText?: (value: number) => string;
 
   /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: Themes;
+
+  /**
    * Sets the `minute ago` label text
    */
   minuteAgoText?: (value: number) => string;
@@ -168,32 +171,32 @@ export interface NotificationsPanelProps {
   nowText?: string;
 
   /**
-   * Sets the notifications panel open state
+   * Optional function called after clicking outside of the panel.
    */
-  onClickOutside: () => void;
+  onClickOutside?: () => void;
 
   /**
-   * Function that will dismiss all notifications
+   * Optional function called after clicking the "Dismiss all" button.
    */
   onDismissAllNotifications?: () => void;
 
   /**
-   * Function that will dismiss a single notification
+   * Optional function called after clicking a notification's "X" button.
    */
   onDismissSingleNotification?: (prop) => void;
 
   /**
-   * Optional: function that returns the current selected value of the disable notification toggle
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange?: (prop) => void;
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking settings / gear icon button.
    */
   onSettingsClick?: () => void;
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking the "View all" button.
    */
   onViewAllClick?: () => void;
 
@@ -266,9 +269,6 @@ export interface NotificationsPanelProps {
    * Sets the yesterday label text
    */
   yesterdayLabel?: string;
-
-  /** Specify the CSS selectors that match the floating menus. */
-  selectorsFloatingMenus?: string[];
 }
 interface PreviousStateProps {
   open: boolean;
@@ -277,7 +277,6 @@ export let NotificationsPanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       className,
       data,
       daysAgoText = defaults.daysAgoText,
@@ -288,6 +287,7 @@ export let NotificationsPanel = React.forwardRef(
       emptyStateLabel = defaults.emptyStateLabel,
       hourAgoText = defaults.hourAgoText,
       hoursAgoText = defaults.hoursAgoText,
+      illustrationTheme = defaults.illustrationTheme,
       minuteAgoText = defaults.minuteAgoText,
       minutesAgoText = defaults.minutesAgoText,
       monthAgoText = defaults.monthAgoText,
@@ -312,7 +312,6 @@ export let NotificationsPanel = React.forwardRef(
       yearsAgoText = defaults.yearsAgoText,
       yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
-      selectorsFloatingMenus,
       triggerButtonRef,
       // Collect any other property values passed in.
       ...rest
@@ -331,17 +330,29 @@ export let NotificationsPanel = React.forwardRef(
 
     const reducedMotion = usePrefersReducedMotion();
     const carbonPrefix = usePrefix();
+
     useEffect(() => {
       // Set the notifications passed to the state within this component
       setAllNotifications(data);
     }, [data]);
 
     useClickOutside(ref || notificationPanelRef, () => {
-      onClickOutside();
+      onClickOutside?.();
       setTimeout(() => {
         triggerButtonRef?.current?.focus();
       }, 0);
     });
+
+    const handleKeydown = (event) => {
+      event.stopPropagation();
+      if (event.key === 'Escape') {
+        setRender(false);
+        onClickOutside?.();
+        setTimeout(() => {
+          triggerButtonRef?.current?.focus();
+        }, 100);
+      }
+    };
 
     useEffect(() => {
       // initialize the notification panel to open
@@ -376,42 +387,11 @@ export let NotificationsPanel = React.forwardRef(
 
     const onAnimationEnd = () => {
       // initialize the notification panel to close
-      !open && setRender(false);
-    };
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      if (
-        open &&
-        currentActiveNode &&
-        oldActiveNode &&
-        notificationPanelInnerRef.current
-      ) {
-        const { current: bodyNode } = notificationPanelInnerRef;
-        const { current: startSentinelNode } = startSentinel;
-        const { current: endSentinelNode } = endSentinel;
-        wrapFocus({
-          bodyNode,
-          startTrapNode: startSentinelNode,
-          endTrapNode: endSentinelNode,
-          currentActiveNode,
-          oldActiveNode,
-          selectorsFloatingMenus: selectorsFloatingMenus?.filter(
-            Boolean
-          ) as string[],
-        });
+      if (!open) {
+        setRender(false);
       }
     };
-    const handleKeydown = (event) => {
-      event.stopPropagation();
-      if (event.key === 'Escape') {
-        onClickOutside();
-        setTimeout(() => {
-          triggerButtonRef?.current?.focus();
-        }, 100);
-      }
-    };
+
     useEffect(() => {
       if (!open && previousState?.open && reducedMotion) {
         setRender(false);
@@ -546,8 +526,9 @@ export let NotificationsPanel = React.forwardRef(
             ) {
               return;
             }
-            event.which === 13 &&
+            if (event.which === 13) {
               notification.onNotificationClick(notification);
+            }
           }}
         >
           {notification.type === 'error' && (
@@ -650,18 +631,6 @@ export let NotificationsPanel = React.forwardRef(
       },
     ]);
 
-    useIsomorphicEffect(() => {
-      // setTimeout ensures that this gets run
-      const timeout = setTimeout(() => {
-        if (notificationPanelRef.current && !reducedMotion) {
-          notificationPanelRef.current.style.animation = open
-            ? 'fade-in 250ms'
-            : 'fade-out forwards 250ms';
-        }
-      }, 0);
-      return () => clearTimeout(timeout);
-    }, [open, reducedMotion]);
-
     return shouldRender ? (
       <>
         <button
@@ -675,15 +644,17 @@ export let NotificationsPanel = React.forwardRef(
         <div
           role="dialog"
           aria-label="Notification Panel"
-          onBlur={handleBlur}
-          tabIndex={0}
           onKeyDown={handleKeydown}
+          tabIndex={0}
           {
             // Pass through any other property values as HTML attributes.
             ...rest
           }
           id={blockClass}
-          className={cx(blockClass, className, `${blockClass}__container`)}
+          className={cx(blockClass, className, `${blockClass}__container`, {
+            [`${blockClass}__entrance`]: open,
+            [`${blockClass}__exit`]: !open,
+          })}
           onAnimationEnd={onAnimationEnd}
           ref={
             (ref as MutableRefObject<HTMLDivElement | null>) ||
@@ -699,7 +670,7 @@ export let NotificationsPanel = React.forwardRef(
                   size="sm"
                   kind="ghost"
                   className={`${blockClass}__dismiss-button`}
-                  onClick={() => onDismissAllNotifications()}
+                  onClick={onDismissAllNotifications}
                 >
                   {dismissAllLabel}
                 </Button>
@@ -752,35 +723,36 @@ export let NotificationsPanel = React.forwardRef(
               ) : null}
               {!allNotifications.length && (
                 <NotificationsEmptyState
-                  illustrationTheme="dark"
+                  illustrationTheme={illustrationTheme}
                   title=""
                   subtitle={emptyStateLabel}
                 />
               )}
             </div>
             {onViewAllClick &&
-            onSettingsClick &&
-            allNotifications &&
-            allNotifications.length ? (
-              <div className={`${blockClass}__bottom-actions`}>
-                <Button
-                  kind="ghost"
-                  className={`${blockClass}__view-all-button`}
-                  onClick={() => onViewAllClick()}
-                >
-                  {viewAllLabel(allNotifications.length)}
-                </Button>
-                <Button
-                  kind="ghost"
-                  size="sm"
-                  className={`${blockClass}__settings-button`}
-                  renderIcon={(props) => <Settings size={16} {...props} />}
-                  iconDescription={settingsIconDescription}
-                  onClick={() => onSettingsClick()}
-                  hasIconOnly
-                />
-              </div>
-            ) : null}
+              onSettingsClick &&
+              allNotifications &&
+              allNotifications.length > 0 && (
+                <div className={`${blockClass}__bottom-actions`}>
+                  <Button
+                    kind="ghost"
+                    className={`${blockClass}__view-all-button`}
+                    onClick={onViewAllClick}
+                  >
+                    {viewAllLabel(allNotifications.length)}
+                  </Button>
+                  <Button
+                    kind="ghost"
+                    size="sm"
+                    className={`${blockClass}__settings-button`}
+                    renderIcon={(props) => <Settings size={16} {...props} />}
+                    iconDescription={settingsIconDescription}
+                    onClick={onSettingsClick}
+                    hasIconOnly
+                    tooltipPosition="left"
+                  />
+                </div>
+              )}
           </div>
         </div>
         {/* eslint-enable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */}
@@ -876,6 +848,11 @@ NotificationsPanel.propTypes = {
   hoursAgoText: PropTypes.func,
 
   /**
+   * Determines the theme of the empty state's illustration.
+   */
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
+  /**
    * Sets the `minute ago` label text
    */
   minuteAgoText: PropTypes.func,
@@ -901,32 +878,32 @@ NotificationsPanel.propTypes = {
   nowText: PropTypes.string,
 
   /**
-   * Sets the notifications panel open state
+   * Optional function called after clicking outside of the panel.
    */
-  onClickOutside: PropTypes.func.isRequired,
+  onClickOutside: PropTypes.func,
 
   /**
-   * Function that will dismiss all notifications
+   * Optional function called after clicking the "Dismiss all" button.
    */
   onDismissAllNotifications: PropTypes.func,
 
   /**
-   * Function that will dismiss a single notification
+   * Optional function called after clicking a notification's "X" button.
    */
   onDismissSingleNotification: PropTypes.func,
 
   /**
-   * Optional: function that returns the current selected value of the disable notification toggle
+   * Optional function called after toggling "Do not disturb".
    */
   onDoNotDisturbChange: PropTypes.func,
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking settings / gear icon button.
    */
   onSettingsClick: PropTypes.func,
 
   /**
-   * Event handler for the View all button
+   * Optional function called after clicking the "View all" button.
    */
   onViewAllClick: PropTypes.func,
 
@@ -954,11 +931,6 @@ NotificationsPanel.propTypes = {
    * Sets the `seconds ago` label text
    */
   secondsAgoText: PropTypes.func,
-
-  /**
-   * Specify the CSS selectors that match the floating menus
-   */
-  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string.isRequired),
 
   /**
    * Sets the settings icon description text

@@ -20,6 +20,7 @@ import {
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
+  JSX,
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
@@ -71,10 +72,10 @@ const defaults = {
   breadcrumbOverflowTooltipAlign: 'right',
 };
 
-interface ActionBarItem extends ButtonProps {
+interface ActionBarItem extends ButtonProps<'button'> {
   iconDescription: string;
   onClick: () => void;
-  renderIcon: ReactNode;
+  renderIcon: React.ElementType;
 }
 
 type Size = 'xl';
@@ -465,7 +466,7 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
-      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign,
+      breadcrumbOverflowTooltipAlign = defaults.breadcrumbOverflowTooltipAlign as PopoverAlignment,
 
       // Collect any other property values passed in.
       ...rest
@@ -550,22 +551,24 @@ export let PageHeader = React.forwardRef(
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
-      let overflowMenuWidth = 0;
+      if (minWidth !== actionBarMinWidth || maxWidth !== actionBarMaxWidth) {
+        let overflowMenuWidth = 0;
 
-      const overflowMenu = overflowMenuRef?.current?.querySelector(
-        `.${prefix}--overflow-menu`
-      );
+        const overflowMenu = overflowMenuRef?.current?.querySelector(
+          `.${prefix}--overflow-menu`
+        );
 
-      if (overflowMenu) {
-        overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        if (overflowMenu) {
+          overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        }
+
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMaxWidth(maxWidth + overflowMenuWidth);
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMinWidth(minWidth);
       }
-
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMaxWidth(maxWidth + overflowMenuWidth);
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMinWidth(minWidth);
     };
 
     const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {

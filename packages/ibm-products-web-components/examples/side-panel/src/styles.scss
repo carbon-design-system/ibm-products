@@ -16,3 +16,24 @@
   background-color: var(--cds-background);
   color: var(--cds-text-primary);
 }
+
+.example-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.example-header {
+  background: #393939;
+}
+
+.example-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

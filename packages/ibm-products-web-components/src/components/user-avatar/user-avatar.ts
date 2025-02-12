@@ -96,6 +96,12 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
           class="${imageClasses}"
         />`;
       }
+      if (this.renderIcon) {
+        return html`${this.renderIcon({
+          width: `${iconProps.size}`,
+          height: `${iconProps.size}`,
+        })}`;
+      }
       if (this.name) {
         const parts = this.name?.split(' ') || [];
         const firstChar = parts[0].charAt(0).toUpperCase();
@@ -111,13 +117,6 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
 
         return ''.concat(...initials);
       }
-      if (this.renderIcon) {
-        return html`${this.renderIcon({
-          width: `${iconProps.size}`,
-          height: `${iconProps.size}`,
-        })}`;
-      }
-
       return html`${User({
         slot: 'icon',
         width: `${iconProps.size}`,

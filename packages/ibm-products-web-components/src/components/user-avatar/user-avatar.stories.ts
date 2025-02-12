@@ -9,9 +9,6 @@
 
 import { html } from 'lit';
 import './index';
-import './user-avatar';
-import { prefix } from '../../globals/settings';
-
 import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
 import styles from './story-styles.scss?lit';
 import Group from '@carbon/web-components/es/icons/group/16';
@@ -95,17 +92,6 @@ const defaultTemplate = {
   },
   render: (args) => {
     return html`
-      <style>
-        ${styles}
-      </style>
-
-      <div class="${storyPrefix}story-container">
-        <div class="${storyPrefix}story-header"></div>
-        <div
-          id="page-content-selector"
-          class="${storyPrefix}story-content"
-        ></div>
-      </div>
       <c4p-user-avatar
         tooltip-alignment=${args.tooltipAlignment}
         tooltip-text=${args.tooltipText}
@@ -128,6 +114,7 @@ export const Default = {
     tooltipText: 'TW, Thomas J. Watson user profile',
     name: 'Thomas J. Watson',
     backgroundColor: 'order-1-cyan',
+    renderIcon: 'No icon',
   },
 };
 

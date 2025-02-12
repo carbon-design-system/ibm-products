@@ -94,7 +94,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
         animRef.current = lottie.loadAnimation({
           container: localRefValue,
           renderer: 'svg',
-          animationData: jsonData[clamp(playStep, 0, jsonData.length - 1)],
+          animationData: jsonData[clamp(playStep, 0, jsonData.length - 1)!],
           loop: false,
           autoplay: false,
           rendererSettings: {

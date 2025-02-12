@@ -45,6 +45,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     transform: translateY(-38.5rem); // the height of the notification panel
   }
 }
+.#{$block-class}__entrance {
+  animation: fade-in $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}__exit {
+  animation: fade-out forwards $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class} {
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
 
 .#{$block-class}__container {
   @include theme($g100);
@@ -183,8 +196,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       .#{$block-class}__notification-read-less-button {
         @include type.type-style('label-01');
 
+        display: flex;
+        align-items: center;
         padding: 0;
-
         min-inline-size: 5.5rem;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
@@ -274,6 +288,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     inset-block-end: 0;
     min-block-size: 2.5rem;
     .#{$block-class}__view-all-button {
+      display: flex;
+      align-items: center;
       block-size: 2.5rem;
       border-inline-end: 1px solid $layer-02;
       color: $text-primary;

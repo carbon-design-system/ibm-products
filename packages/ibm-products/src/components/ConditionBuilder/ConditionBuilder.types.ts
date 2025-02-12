@@ -129,6 +129,8 @@ export type ConfigType =
 export type Property = Item & {
   icon?: CarbonIconType;
   description?: string;
+  type?: any;
+  config?: any;
 } & ConfigType;
 
 export type inputConfig = {

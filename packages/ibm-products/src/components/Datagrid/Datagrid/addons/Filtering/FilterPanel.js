@@ -22,12 +22,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  actionSetVariants,
-  innerContainerVariants,
-  panelVariants,
-} from './motion/variants';
-import { motion, useReducedMotion } from 'framer-motion';
-import {
   useFilters,
   useShouldDisableButtons,
   useSubscribeToEventEmitter,
@@ -42,6 +36,7 @@ import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
 import {
   useIsomorphicEffect,
+  usePrefersReducedMotion,
   usePresence,
 } from '../../../../../global/js/hooks';
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -124,15 +119,19 @@ const FilterPanel = ({
       prevFiltersRef,
     });
 
-  const exitAnimationName = 'filter-panel-exit-left';
+  // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
+  // using our own was causing an error
+  const shouldReduceMotion = usePrefersReducedMotion();
+
+  const exitAnimationName = shouldReduceMotion
+    ? 'filter-panel-exit-reduced'
+    : 'filter-panel-exit-left';
+
   const { shouldRender } = usePresence(
     panelOpen,
     filterPanelRef,
     exitAnimationName
   );
-  // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
-  // using our own was causing an error
-  const shouldReduceMotion = useReducedMotion();
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);

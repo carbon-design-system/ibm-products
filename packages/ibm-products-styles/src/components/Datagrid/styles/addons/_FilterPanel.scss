@@ -61,7 +61,7 @@ $block-class-component: #{$block-class}-filter-panel;
 
   @media (prefers-reduced-motion) {
     /* styles to apply if a user's device settings are set to reduced motion */
-    &.#{$block-class-component}--open {
+    &.#{$block-class-component}--open.#{$block-class-component}--left-placement {
       animation: filter-panel-entrance-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {
@@ -69,7 +69,7 @@ $block-class-component: #{$block-class}-filter-panel;
         transform: translateX(0);
       }
     }
-    &.#{$block-class-component}--closing {
+    &.#{$block-class-component}--closing.#{$block-class-component}--left-placement {
       animation: filter-panel-exit-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {

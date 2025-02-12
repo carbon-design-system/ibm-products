@@ -36,12 +36,6 @@ export const ConditionBuilderItemDate = ({
       selectedDate && selectedDate.length > 0 ? selectedDate : 'INVALID'
     );
   };
-  // this will close the popover on enter key press
-  const onKeyPressHandler = (evt: KeyboardEvent) => {
-    if (evt.key === 'Enter') {
-      focusThisField(evt, conditionBuilderRef);
-    }
-  };
   return (
     <div className={`${blockClass}__item-date `}>
       {datePickerType == 'single' && (
@@ -52,7 +46,6 @@ export const ConditionBuilderItemDate = ({
           value={conditionState.value}
           onClose={onCloseHandler}
           appendTo={parentRef?.current}
-          onKeyPress={onKeyPressHandler}
         >
           <DatePickerInput
             id="datePicker"
@@ -70,7 +63,6 @@ export const ConditionBuilderItemDate = ({
           onClose={onCloseHandler}
           value={conditionState.value}
           appendTo={parentRef?.current}
-          onKeyPress={onKeyPressHandler}
         >
           <DatePickerInput
             id="datePickerStart"

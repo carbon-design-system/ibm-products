@@ -144,6 +144,7 @@ ActionBarOverflowItems.propTypes = {
   overflowMenuRef: PropTypes.oneOfType([
     PropTypes.shape({ current: PropTypes.elementType }),
     PropTypes.object,
+    PropTypes.func,
   ]),
 
   /**

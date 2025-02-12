@@ -23,7 +23,7 @@
 
 @use './Annotation/annotation';
 
-// Setting attribute storybook-carbon-theme="XXX" on the html element
+// Setting attribute data-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
 // Adding class sb--use-carbon-theme-XXX on any element
 // will set the carbon theme used within that element.

@@ -550,22 +550,24 @@ export let PageHeader = React.forwardRef(
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
-      let overflowMenuWidth = 0;
+      if (minWidth !== actionBarMinWidth || maxWidth !== actionBarMaxWidth) {
+        let overflowMenuWidth = 0;
 
-      const overflowMenu = overflowMenuRef?.current?.querySelector(
-        `.${prefix}--overflow-menu`
-      );
+        const overflowMenu = overflowMenuRef?.current?.querySelector(
+          `.${prefix}--overflow-menu`
+        );
 
-      if (overflowMenu) {
-        overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        if (overflowMenu) {
+          overflowMenuWidth = (overflowMenu as HTMLDivElement).offsetWidth;
+        }
+
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMaxWidth(maxWidth + overflowMenuWidth);
+        /* don't know how to test resize */
+        /* istanbul ignore next */
+        setActionBarMinWidth(minWidth);
       }
-
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMaxWidth(maxWidth + overflowMenuWidth);
-      /* don't know how to test resize */
-      /* istanbul ignore next */
-      setActionBarMinWidth(minWidth);
     };
 
     const handlePageActionWidthChange = ({ minWidth, maxWidth }) => {

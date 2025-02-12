@@ -43,13 +43,14 @@ const decorators = [
       globals,
       parameters: { styles },
     } = context;
-    const { theme } = globals;
+    const { theme, dir } = globals;
     const story = storyFn();
     JSON.stringify(args.featureFlags);
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
-    }, [theme]);
+      document.documentElement.dir = dir;
+    }, [theme, dir]);
 
     return (
       <div className="preview-position-fix story-wrapper">
@@ -154,6 +155,32 @@ const argTypes = {
 };
 
 const globalTypes = {
+  dir: {
+    name: 'Text direction',
+    description: 'Set the text direction for the story',
+    defaultValue: 'ltr',
+    toolbar: {
+      icon: 'transfer',
+      title: 'Text direction',
+      items: [
+        {
+          right: '🔄',
+          title: 'auto',
+          value: 'auto',
+        },
+        {
+          right: '➡️',
+          title: 'left-to-right (ltr)',
+          value: 'ltr',
+        },
+        {
+          right: '⬅️',
+          title: 'right-to-left (rtl)',
+          value: 'rtl',
+        },
+      ],
+    },
+  },
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',

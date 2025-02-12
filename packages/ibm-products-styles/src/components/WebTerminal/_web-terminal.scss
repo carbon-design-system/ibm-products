@@ -8,6 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/themes' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as *;
@@ -47,6 +48,14 @@ $block-class: #{$pkg-prefix}--web-terminal;
   despite of which carbon theme the user has.
 */
 
+.#{$block-class}--open {
+  animation: web-terminal-entrance $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}--closed {
+  animation: web-terminal-exit forwards $duration-moderate-02 motion(standard);
+}
+
 .#{$block-class} {
   @include theme($g90);
 
@@ -58,7 +67,10 @@ $block-class: #{$pkg-prefix}--web-terminal;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;
   max-inline-size: $web-terminal-width;
-  /* stylelint-disable-next-line  */
+
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
 }
 
 .#{$block-class}__bar {

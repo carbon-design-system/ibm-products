@@ -1,0 +1,33 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+@use 'sass:map';
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/grid';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/ibm-products-styles/scss/components/FullPageError' as *;
+
+@include grid.css-grid();
+
+// Local vars
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+$block-class: #{$prefix}--side-panel;
+
+:host(#{$prefix}-full-page-error) {
+  .#{$block-class} {
+    @extend .#{$block-class};
+  }
+}

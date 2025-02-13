@@ -1774,7 +1774,6 @@ __metadata:
     jest: "npm:^29.7.0"
     jest-config-ibm-cloud-cognitive: "npm:^1.19.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
-    lodash: "npm:^4.17.21"
     lottie-web: "npm:^5.12.2"
     namor: "npm:^1.1.2"
     npm-check-updates: "npm:^17.1.13"

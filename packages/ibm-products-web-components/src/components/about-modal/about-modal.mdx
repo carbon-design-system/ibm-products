@@ -1,0 +1,32 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AboutModalStories from './about-modal.stories';
+
+<Meta of={AboutModalStories} />
+
+# Tearsheet
+
+Tearsheets keep users in-context of a page while performing tasks like
+navigating, editing, viewing details, or configuring something new.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/about-modal/index.js';
+```
+
+
+### HTML
+
+```html
+<c4p-about-modal>
+</c4p-about-modal>
+```
+
+## `<c4p-about-modal>` attributes, properties and events
+
+<ArgTypes of="c4p-about-modal" />

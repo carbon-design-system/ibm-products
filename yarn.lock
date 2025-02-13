@@ -1621,6 +1621,7 @@ __metadata:
     "@carbon/react": "npm:^1.75.0"
     "@carbon/themes": "npm:^11.46.0"
     "@carbon/type": "npm:^11.35.0"
+    "@carbon/utilities": "npm:^0.4.0"
     "@percy/cli": "npm:^1.30.6"
     "@percy/storybook": "npm:^6.0.3"
     "@storybook/addon-a11y": "npm:^8.4.7"
@@ -1964,6 +1965,15 @@ __metadata:
     "@carbon/layout": "npm:^11.29.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
   checksum: 10/f759e65e399f231a6a2ffc43036eae5d63456c82124b0550bf3d2dd09545c16b037ae8a550d9601ff9a3d86856199d9c9cfa5ecdb3f00c280f7b8c65727fadde
+  languageName: node
+  linkType: hard
+
+"@carbon/utilities@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@carbon/utilities@npm:0.4.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+  checksum: 10/72d0442c54933acc56109e2c0068d8355305e8fbed031d2edaf51be1a1c8bfbbf8f131713b1d6672acc2989e645b5cb6ea0d749503916192cafd40f44823e36a
   languageName: node
   linkType: hard
 

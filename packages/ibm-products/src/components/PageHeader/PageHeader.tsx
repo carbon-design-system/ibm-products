@@ -24,6 +24,7 @@ import React, {
   MutableRefObject,
   PropsWithChildren,
   ReactNode,
+  RefObject,
   useEffect,
   useRef,
   useState,
@@ -57,7 +58,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { checkHeightOverflow } from '../../global/js/utils/checkForOverflow';
+import { useOverflowStringHeight } from '../../global/js/hooks/useOverflowString';
 
 const componentName = 'PageHeader';
 
@@ -927,7 +928,9 @@ export let PageHeader = React.forwardRef(
     }, [headerRef, pageHeaderStyles]);
 
     const subtitleRef = useRef<HTMLSpanElement>(null);
-    const isOverflowing = checkHeightOverflow(subtitleRef.current);
+    const isOverflowing = useOverflowStringHeight(
+      subtitleRef as RefObject<HTMLElement>
+    );
     const subtitleContent = (
       <span ref={subtitleRef} className={`${blockClass}__subtitle-text`}>
         {subtitle}

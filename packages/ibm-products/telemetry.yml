@@ -729,6 +729,7 @@ collect:
         - narrow
         - tertiaryButtonLabel
         # InterstitialScreen
+        - breakpointsWithMedia
         - domainName
         - headerClassName
         - headerTitle
@@ -1074,13 +1075,15 @@ collect:
         - bottom
         - top
         # General - size
-        - '"default"'
         - '"lg"'
         - '"md"'
         - '"sm"'
-        - '"xl"'
         - '"xs"'
         - 2xl
+        - BigNumbersSize.Default
+        - BigNumbersSize.Large
+        - BigNumbersSize.XLarge
+        - default
         - lg
         - md
         - narrow

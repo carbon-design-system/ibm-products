@@ -23,7 +23,7 @@ export const withCarbonTheme = (StoryFn, context) => {
     const rootElements = document.querySelectorAll(selector);
     rootElements.forEach((rootElement) => {
       rootElement.setAttribute(
-        'storybook-carbon-theme',
+        'data-carbon-theme',
         globalCarbonTheme ?? storyCarbonTheme
       );
     });

@@ -9,3 +9,4 @@
 
 export { default as CDSSidePanel } from './components/side-panel/side-panel';
 export { default as CDSTearsheet } from './components/tearsheet/tearsheet';
+export { default as CDSFullPageError } from './components/full-page-error/full-page-error';

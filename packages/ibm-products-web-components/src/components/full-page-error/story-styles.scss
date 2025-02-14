@@ -5,4 +5,20 @@
 * LICENSE file in the root directory of this source tree.
 */
 
-@use '@carbon/styles/scss/component/link' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$story-prefix: 'full-page-error-stories__';
+
+.#{$story-prefix}story-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.#{$story-prefix}story-header {
+  background: $background-inverse;
+}

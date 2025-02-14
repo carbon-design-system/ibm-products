@@ -591,7 +591,11 @@ export const inputData = {
       label: 'Date',
       icon: Calendar,
       type: 'date',
-      config: {},
+      config: {
+        // locale:'en-US',
+        dateFormat: 'M j, Y',
+        // datePickerType:'range'
+      },
     },
     {
       id: 'time',
@@ -749,7 +753,11 @@ export const inputDataDynamicOptions = {
       label: 'Date',
       icon: Calendar,
       type: 'date',
-      config: {},
+      config: {
+        locale: 'en-US',
+        dateFormat: 'M j, Y',
+        // datePickerType:'range'
+      },
     },
     {
       id: 'time',

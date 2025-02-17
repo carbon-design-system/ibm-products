@@ -82,6 +82,30 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
   @property({ reflect: true, attribute: 'background-color' })
   backgroundColor = 'order-1-cyan';
 
+  observer: MutationObserver | null = null;
+  connectedCallback() {
+    super.connectedCallback();
+    this.updateThemeFromHtml();
+    this.observer = new MutationObserver(() => this.updateThemeFromHtml());
+    this.observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-carbon-theme'],
+    });
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+  updateThemeFromHtml() {
+    const htmlElement = document.documentElement;
+    const newTheme = htmlElement.getAttribute('data-carbon-theme');
+    if (newTheme) {
+      this.setAttribute('data-carbon-theme', newTheme);
+    }
+  }
+
   render() {
     const getItem = () => {
       const iconProps = { size: iconSize[this.size] };

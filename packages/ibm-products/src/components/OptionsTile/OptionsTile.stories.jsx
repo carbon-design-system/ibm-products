@@ -124,15 +124,15 @@ const Template = (args) => {
 const ControlledTemplate = (args) => {
   const id = uuidv4();
   const titleId = args.titleId ?? `${id}-title`;
-  const { invalid, warn, locked, enabled } = args;
+  const { invalid, warn, locked, enabled, open: userOpen } = args;
   const isWarn = !invalid && warn;
   const isLocked = !invalid && !isWarn && locked;
   const disableControls = !enabled || isLocked;
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(userOpen);
 
-  const onChangeHandler = () => {
-    setOpen(!open);
+  const onChangeHandler = (value) => {
+    setOpen(value);
   };
 
   return (

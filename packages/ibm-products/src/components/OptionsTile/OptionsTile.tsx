@@ -142,7 +142,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       ...rest
     } = props;
     const [closing, setClosing] = useState(false);
-    const [open, setOpen] = useControllableState(userOpen || false, onChange);
+    const [open, setOpen] = useControllableState(userOpen ?? false, onChange);
 
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);

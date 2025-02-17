@@ -7,10 +7,10 @@
 
 import { useState, useCallback } from 'react';
 
-export const useControllableState = <T>(
+export function useControllableState<T>(
   value: T,
   onChange?: (value: T) => void
-): [T, (value: T) => void] => {
+): [T, (value: T) => void] {
   if (typeof value === 'function') {
     throw new TypeError('Functions are not supported');
   }
@@ -29,4 +29,4 @@ export const useControllableState = <T>(
   }
 
   return [uncontrolledValue, setUncontrolledValue];
-};
+}

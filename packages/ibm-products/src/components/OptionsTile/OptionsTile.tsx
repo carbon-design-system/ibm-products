@@ -14,8 +14,7 @@ import {
   WarningFilled,
 } from '@carbon/react/icons';
 import { Layer, Toggle } from '@carbon/react';
-import React, { ReactNode, useRef, useState } from 'react';
-
+import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -121,9 +120,9 @@ const defaults = {
   size: 'lg' as const,
 };
 
-export let OptionsTile = React.forwardRef(
-  (
-    {
+export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
+  (props, ref) => {
+    const {
       children,
       className,
       enabled,
@@ -133,7 +132,7 @@ export let OptionsTile = React.forwardRef(
       lockedText,
       onChange,
       onToggle,
-      open,
+      open: userOpen,
       size = defaults.size,
       summary,
       title,
@@ -141,44 +140,22 @@ export let OptionsTile = React.forwardRef(
       warn,
       warnText,
       ...rest
-    }: OptionsTileProps,
-    ref: React.Ref<HTMLDivElement>
-  ) => {
-    const [prevIsOpen, setPrevIsOpen] = useState(open);
+    } = props;
     const [closing, setClosing] = useState(false);
-
-    const [isOpen, setIsOpen] = useControllableState({
-      defaultValue: open || null,
-      name: 'OptionsTile',
-      onChange: (value: boolean) => onChange?.(value),
-      value: open,
-    });
+    const [open, setOpen] = useControllableState(userOpen || false, onChange);
 
     const detailsRef = useRef<HTMLDetailsElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
-    const id = uuidv4();
-    const titleId = userDefinedTitleId ?? `${id}-title`;
-
+    const titleId = userDefinedTitleId ?? `${uuidv4()}-title`;
     const isExpandable = children !== undefined;
-
-    const isInvalid = invalid;
-    const isWarn = !isInvalid && warn;
-    const isLocked = !isInvalid && !isWarn && locked;
+    const isWarn = !invalid && warn;
+    const isLocked = !invalid && !isWarn && locked;
     const shouldReduceMotion = usePrefersReducedMotion();
 
-    if (open !== prevIsOpen) {
-      if (isOpen && !open) {
-        collapse();
-      } else if (!isOpen && open) {
-        expand();
-      }
-      setPrevIsOpen(open);
-    }
-
-    function expand() {
+    const expand = () => {
       if (detailsRef.current && contentRef.current && !shouldReduceMotion) {
-        setIsOpen(true);
+        setOpen(true);
 
         detailsRef.current.open = true;
         const { paddingTop, paddingBottom, height } = getComputedStyle(
@@ -209,11 +186,11 @@ export let OptionsTile = React.forwardRef(
         );
       } else {
         // in case the refs are not set or the user prefers reduced motion, skip the animation
-        setIsOpen(true);
+        setOpen(true);
       }
-    }
+    };
 
-    function collapse() {
+    const collapse = () => {
       if (contentRef.current && !shouldReduceMotion) {
         setClosing(true);
 
@@ -246,7 +223,7 @@ export let OptionsTile = React.forwardRef(
         );
 
         const callback = () => {
-          setIsOpen(false);
+          setOpen(false);
           setClosing(false);
         };
 
@@ -261,43 +238,32 @@ export let OptionsTile = React.forwardRef(
         animation.oncancel = callback;
       } else {
         // in case the ref is not set or the user prefers reduced motion, skip the animation
-        setIsOpen(false);
+        setOpen(false);
       }
-    }
+    };
 
-    function toggle(e: { preventDefault: () => void }) {
-      e.preventDefault();
+    const toggle = (evt: MouseEvent) => {
+      evt.preventDefault();
 
-      if (isOpen) {
+      if (open) {
         collapse();
       } else {
         expand();
       }
-    }
+    };
 
-    function renderTitle() {
+    const renderTitle = () => {
       let Icon: CarbonIconType | null = null;
       let text = summary;
-      const summaryClasses = [`${blockClass}__summary`];
-      if (closing) {
-        summaryClasses.push(`${blockClass}__summary--closing`);
-      }
-      if (isOpen) {
-        summaryClasses.push(`${blockClass}__summary--open`);
-      }
 
       if (invalid) {
         Icon = WarningFilled;
         text = invalidText;
-        summaryClasses.push(`${blockClass}__summary--invalid`);
       } else if (warn) {
         Icon = WarningAltFilled;
         text = warnText;
-        summaryClasses.push(`${blockClass}__summary--warn`);
       } else if (locked) {
         Icon = Locked;
-        summaryClasses.push(`${blockClass}__summary--locked`);
-
         if (!text) {
           text = lockedText;
         }
@@ -305,10 +271,14 @@ export let OptionsTile = React.forwardRef(
 
       const hasValidationState = invalid || warn || locked;
       const summaryHidden = !hasValidationState && enabled === false;
-
-      if (summaryHidden) {
-        summaryClasses.push(`${blockClass}__summary--hidden`);
-      }
+      const summaryClasses = cx(`${blockClass}__summary`, {
+        [`${blockClass}__summary--closing`]: closing,
+        [`${blockClass}__summary--open`]: open,
+        [`${blockClass}__summary--invalid`]: invalid,
+        [`${blockClass}__summary--warn`]: warn,
+        [`${blockClass}__summary--locked`]: locked,
+        [`${blockClass}__summary--hidden`]: summaryHidden,
+      });
 
       return (
         <div className={`${blockClass}__heading`}>
@@ -316,14 +286,14 @@ export let OptionsTile = React.forwardRef(
             {title}
           </h6>
           {text && (
-            <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
+            <span className={summaryClasses} aria-hidden={summaryHidden}>
               {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
         </div>
       );
-    }
+    };
 
     return (
       <div
@@ -349,7 +319,7 @@ export let OptionsTile = React.forwardRef(
           </div>
         )}
         {isExpandable ? (
-          <details open={isOpen} ref={detailsRef}>
+          <details open={open} ref={detailsRef}>
             {
               /* summary should not be considered non-interactive
                * https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/656
@@ -360,7 +330,7 @@ export let OptionsTile = React.forwardRef(
                 <ChevronDown
                   size={16}
                   className={cx(`${blockClass}__chevron`, {
-                    [`${blockClass}__chevron--open`]: isOpen,
+                    [`${blockClass}__chevron--open`]: open,
                     [`${blockClass}__chevron--closing`]: closing,
                   })}
                 />

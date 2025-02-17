@@ -157,6 +157,7 @@ export default {
             id: 'role',
             label: 'Role',
             options: ['editor', 'viewer', 'admin'],
+            multiSelect: true,
           },
           entries: [
             {

@@ -6,7 +6,7 @@
 //
 
 import React, { useRef, useEffect, useCallback } from 'react';
-import { Button, Dropdown, Layer } from '@carbon/react';
+import { Button, Dropdown, Layer, MultiSelect } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -158,19 +158,34 @@ export let AddSelectRow = ({
               />
               {hasModifiers && (
                 <Layer>
-                  <Dropdown
-                    titleText={modifiers.label}
-                    id={`add-select-modifier-${item.id}`}
-                    type="inline"
-                    items={modifiers.options}
-                    label={modifiers.label}
-                    disabled={!isSelected()}
-                    className={`${blockClass}-dropdown`}
-                    initialSelectedItem={item[modifiers.id]}
-                    onChange={({ selectedItem }) =>
-                      modifierHandler(item.id, selectedItem)
-                    }
-                  />
+                  {modifiers?.multiSelect ? (
+                    <MultiSelect
+                      titleText={modifiers.label}
+                      id={`add-select-modifier-${item.id}`}
+                      type="inline"
+                      items={modifiers.options}
+                      label={modifiers.label}
+                      disabled={!isSelected()}
+                      initialSelectedItems={[item[modifiers.id]]}
+                      onChange={({ selectedItems }) =>
+                        modifierHandler(item.id, selectedItems)
+                      }
+                    />
+                  ) : (
+                    <Dropdown
+                      titleText={modifiers.label}
+                      id={`add-select-modifier-${item.id}`}
+                      type="inline"
+                      items={modifiers.options}
+                      label={modifiers.label}
+                      disabled={!isSelected()}
+                      className={`${blockClass}-dropdown`}
+                      initialSelectedItem={item[modifiers.id]}
+                      onChange={({ selectedItem }) =>
+                        modifierHandler(item.id, selectedItem)
+                      }
+                    />
+                  )}
                 </Layer>
               )}
             </>

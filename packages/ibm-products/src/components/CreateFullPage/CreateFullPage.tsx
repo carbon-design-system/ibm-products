@@ -257,7 +257,7 @@ export let CreateFullPage = React.forwardRef(
       title,
       secondaryTitle,
       breadcrumbOverflowTooltipAlign = 'right',
-      headingLevel = 1,
+      headingLevel,
       ...rest
     }: CreateFullPageProps,
     ref: ForwardedRef<HTMLDivElement>

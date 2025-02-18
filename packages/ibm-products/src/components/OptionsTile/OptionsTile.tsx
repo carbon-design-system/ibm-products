@@ -146,7 +146,7 @@ export let OptionsTile = React.forwardRef(
       titleId: userDefinedTitleId,
       warn,
       warnText,
-      headingLevel = 1,
+      headingLevel,
       ...rest
     }: OptionsTileProps,
     ref: React.Ref<HTMLDivElement>

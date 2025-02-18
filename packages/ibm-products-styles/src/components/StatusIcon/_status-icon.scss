@@ -8,7 +8,7 @@
 @use 'sass:map';
 
 // Standard imports.
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '../../global/styles/project-settings' as *;
 
 $colors: (

@@ -24,7 +24,7 @@ import { createPortal } from 'react-dom';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-import { throttle } from 'lodash';
+import { throttle } from '../../global/js/utils/throttle';
 import { Popover, PopoverAlignment, PopoverContent } from '@carbon/react';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
@@ -164,8 +164,8 @@ export let Coachmark = forwardRef<HTMLElement, CoachmarkProps>(
 
     useIsomorphicEffect(() => {
       portalNode.current = portalTarget
-        ? document?.querySelector(portalTarget) ??
-          document?.querySelector('body')
+        ? (document?.querySelector(portalTarget) ??
+          document?.querySelector('body'))
         : document?.querySelector('body');
     }, [portalTarget]);
 

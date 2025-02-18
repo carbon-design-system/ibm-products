@@ -15,7 +15,7 @@ import { ChevronDown } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { TagSet } from '../TagSet';
 import cx from 'classnames';
-import debounce from 'lodash/debounce';
+import { debounce } from '../../global/js/utils/debounce';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -89,8 +89,8 @@ const FilterSummary = React.forwardRef(
       typeof viewAllButtonRef?.current?.offsetWidth === 'undefined'
         ? 0
         : overflowCount > 0
-        ? 48
-        : 0;
+          ? 48
+          : 0;
     const measurementOffset =
       (filterSummaryClearButton?.current?.offsetWidth || 0) + viewAllWidth;
 
@@ -158,7 +158,7 @@ const FilterSummary = React.forwardRef(
           [`${blockClass}__expanded`]: multiline,
         })}
       >
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {!multiline && renderTagSet('single')}
           {multiline && renderTagSet('multiline')}
         </AnimatePresence>

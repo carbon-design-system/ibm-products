@@ -164,6 +164,36 @@ describe(componentName, () => {
     expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 
+  it('renders with modifiers with multi select', async () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      items: {
+        modifiers: {
+          id: 'role',
+          label: 'Role',
+          options: ['editor', 'viewer', 'admin'],
+          multiSelect: true,
+        },
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            role: ['editor', 'admin'],
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
+    await waitForPosition();
+    const combobox = screen.getByRole('combobox', { name: /role/i });
+    expect(combobox).toBeInTheDocument();
+    const modifiersCount = screen.getByTitle('2');
+    expect(modifiersCount).toBeInTheDocument();
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(<AddSelect {...defaultProps} />);
     expect(container).toBeAccessible(componentName);

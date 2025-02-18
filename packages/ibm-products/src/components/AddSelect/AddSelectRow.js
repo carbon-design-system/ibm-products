@@ -166,7 +166,7 @@ export let AddSelectRow = ({
                       items={modifiers.options}
                       label={modifiers.label}
                       disabled={!isSelected()}
-                      initialSelectedItems={[item[modifiers.id]]}
+                      initialSelectedItems={item[modifiers.id]}
                       onChange={({ selectedItems }) =>
                         modifierHandler(item.id, selectedItems)
                       }

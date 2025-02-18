@@ -51,12 +51,11 @@ export let AddSelectSidebar = ({
     let modifierEl;
 
     if (hasModifiers) {
-      let _modifiers;
-      modifierEl = _modifiers;
-
-      _modifiers = appliedModifiers?.find(
+      const _modifiers = appliedModifiers?.find(
         (modifier) => modifier?.id === item?.id
       )[modifiers?.id];
+
+      modifierEl = _modifiers;
 
       if (Array.isArray(_modifiers)) {
         modifierEl = _modifiers?.map(

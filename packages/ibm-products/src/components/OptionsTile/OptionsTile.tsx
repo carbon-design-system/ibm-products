@@ -68,8 +68,7 @@ export interface OptionsTileProps {
   lockedText?: string;
 
   /**
-   * Provide a function which will be called each time the user
-   * toggles the open state of the OptionsTile.
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
    */
   onChange?: (value: boolean) => void;
 
@@ -80,7 +79,7 @@ export interface OptionsTileProps {
   onToggle?: (value: boolean) => void;
 
   /**
-   * Whether the OptionsTile is in open state.
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
    */
   open?: boolean;
 
@@ -185,7 +184,6 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
           }
         );
       } else {
-        // in case the refs are not set or the user prefers reduced motion, skip the animation
         setOpen(true);
       }
     };
@@ -201,6 +199,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         const animationDuration = Number(
           carbonMotion.moderate01.replace('ms', '')
         );
+
         const animation = contentRef.current.animate(
           [
             {
@@ -227,17 +226,11 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
           setClosing(false);
         };
 
-        //This is to fix the flicking issue while collapsing.
-        //root cause : after the animation is finished , isOpen is still true until onFinish callback is triggered.For that minute duration , collapsed content will again show.
-        // To avoid this , isOpen is set to false after the 90% of animation duration.
         setTimeout(() => {
           callback();
         }, animationDuration * 0.9);
-
-        // animation.onfinish = callback;
         animation.oncancel = callback;
       } else {
-        // in case the ref is not set or the user prefers reduced motion, skip the animation
         setOpen(false);
       }
     };
@@ -320,24 +313,16 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         )}
         {isExpandable ? (
           <details open={open} ref={detailsRef}>
-            {
-              /* summary should not be considered non-interactive
-               * https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/656
-               * https://github.com/A11yance/axobject-query/issues/319
-               */
-
-              <summary className={`${blockClass}__header`} onClick={toggle}>
-                <ChevronDown
-                  size={16}
-                  className={cx(`${blockClass}__chevron`, {
-                    [`${blockClass}__chevron--open`]: open,
-                    [`${blockClass}__chevron--closing`]: closing,
-                  })}
-                />
-                {renderTitle()}
-              </summary>
-            }
-
+            <summary className={`${blockClass}__header`} onClick={toggle}>
+              <ChevronDown
+                size={16}
+                className={cx(`${blockClass}__chevron`, {
+                  [`${blockClass}__chevron--open`]: open,
+                  [`${blockClass}__chevron--closing`]: closing,
+                })}
+              />
+              {renderTitle()}
+            </summary>
             <div className={`${blockClass}__content`} ref={contentRef}>
               <Layer>
                 {isLocked && (
@@ -407,8 +392,7 @@ OptionsTile.propTypes = {
   lockedText: PropTypes.string,
 
   /**
-   * Provide a function which will be called each time the user
-   * toggles the open state of the OptionsTile.
+   * A handler for managing the controlled state of open prop. If not passed the open prop will not be honored and an uncontrolled state will be used.
    */
   onChange: PropTypes.func,
 
@@ -419,7 +403,7 @@ OptionsTile.propTypes = {
   onToggle: PropTypes.func,
 
   /**
-   * Whether the OptionsTile is in open state.
+   * For controlled usage of the tile open state. This prop only works when an onChange prop is also passed, otherwise an uncontrolled state is used.
    */
   open: PropTypes.bool,
 

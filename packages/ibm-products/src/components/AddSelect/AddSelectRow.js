@@ -160,7 +160,6 @@ export let AddSelectRow = ({
                 <Layer>
                   {modifiers?.multiSelect ? (
                     <MultiSelect
-                      titleText={modifiers.label}
                       id={`add-select-modifier-${item.id}`}
                       type="inline"
                       items={modifiers.options}

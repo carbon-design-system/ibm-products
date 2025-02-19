@@ -155,7 +155,8 @@ export default {
         3: {
           modifiers: {
             id: 'role',
-            label: 'Role',
+            label: 'Select Roles',
+            title: 'Role',
             options: ['editor', 'viewer', 'admin'],
             multiSelect: true,
           },

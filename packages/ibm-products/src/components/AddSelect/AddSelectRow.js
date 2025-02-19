@@ -160,6 +160,7 @@ export let AddSelectRow = ({
                 <Layer>
                   {modifiers?.multiSelect ? (
                     <MultiSelect
+                      titleText={modifiers.title}
                       id={`add-select-modifier-${item.id}`}
                       type="inline"
                       items={modifiers.options}
@@ -172,7 +173,7 @@ export let AddSelectRow = ({
                     />
                   ) : (
                     <Dropdown
-                      titleText={modifiers.label}
+                      titleText={modifiers.title}
                       id={`add-select-modifier-${item.id}`}
                       type="inline"
                       items={modifiers.options}

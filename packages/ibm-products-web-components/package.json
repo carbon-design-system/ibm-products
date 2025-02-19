@@ -50,13 +50,13 @@
   },
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.56.0",
-    "@carbon/styles": "1.74.0",
-    "@carbon/web-components": "2.22.0",
+    "@carbon/styles": "1.75.0",
+    "@carbon/web-components": "2.23.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {
     "@carbon/icon-helpers": "^10.54.0",
-    "@carbon/icons": "^11.54.0",
+    "@carbon/icons": "^11.55.0",
     "@carbon/motion": "^11.24.0",
     "@mordech/vite-lit-loader": "^0.35.0",
     "@rollup/plugin-alias": "^5.1.1",

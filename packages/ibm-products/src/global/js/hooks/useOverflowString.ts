@@ -7,7 +7,7 @@
 
 import { RefObject, useCallback, useEffect, useState } from 'react';
 
-export const useOverflowStringWidth = (elementRef: RefObject<HTMLElement>) => {
+export function useOverflowStringWidth(elementRef: RefObject<HTMLElement>) {
   const innerText = elementRef?.current?.innerText;
   const [isOverflowing, setIsOverflowing] = useState<boolean>();
 
@@ -25,7 +25,7 @@ export const useOverflowStringWidth = (elementRef: RefObject<HTMLElement>) => {
   }, [checkWidthOverflow, elementRef, innerText]);
 
   return isOverflowing;
-};
+}
 
 export const useOverflowStringHeight = (elementRef: RefObject<HTMLElement>) => {
   const innerText = elementRef?.current?.innerText;

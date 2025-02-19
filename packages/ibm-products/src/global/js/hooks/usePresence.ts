@@ -10,11 +10,11 @@ import { useEffect, useState, RefObject } from 'react';
 // Used as a replacement for AnimatePresence from framer-motion,
 // this hook will return a boolean value to let the component
 // calling this hook to know whether it should render or not
-export const usePresence = (
+export function usePresence(
   open: boolean,
   ref: RefObject<HTMLElement>,
   animationName: string
-) => {
+) {
   const [shouldRender, setShouldRender] = useState(open);
   useEffect(() => {
     const handleAnimationEnd = (event: AnimationEvent) => {
@@ -37,4 +37,4 @@ export const usePresence = (
     };
   }, [open, setShouldRender, ref, animationName]);
   return { shouldRender };
-};
+}

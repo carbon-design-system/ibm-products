@@ -12,7 +12,7 @@ type Item = {
   id: string;
 };
 
-export const useOverflowItems = <T extends Item>(
+export function useOverflowItems<T extends Item>(
   items: T[] = [],
   containerRef: RefObject<HTMLElement | null>,
   offsetRef?: RefObject<HTMLElement | null>,
@@ -22,7 +22,7 @@ export const useOverflowItems = <T extends Item>(
     minWidth?: number;
     maxWidth?: number;
   }) => void
-) => {
+) {
   const [remainingWidth, setRemainingWidth] = useState(0);
   const offsetWidthRef = useRef<number>(0);
   const itemsRef = useRef<Map<string, number> | null>(null);
@@ -146,4 +146,4 @@ export const useOverflowItems = <T extends Item>(
     hiddenItems,
     offsetRefHandler,
   };
-};
+}

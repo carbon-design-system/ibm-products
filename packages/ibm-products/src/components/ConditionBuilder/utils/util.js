@@ -162,3 +162,9 @@ export const checkForMultiSelectOperator = (condition, config) => {
     )
   );
 };
+//this will close the popover on escape key on search box
+export const onKeyDownHandlerForSearch = (evt, conditionBuilderRef) => {
+  if (!evt.currentTarget.value && evt.key === 'Escape') {
+    focusThisField(evt, conditionBuilderRef);
+  }
+};

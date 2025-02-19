@@ -26,7 +26,11 @@ import {
   Option,
   PropertyConfigOption,
 } from '../../ConditionBuilder.types';
-import { blockClass, checkForMultiSelectOperator } from '../../utils/util';
+import {
+  blockClass,
+  checkForMultiSelectOperator,
+  onKeyDownHandlerForSearch,
+} from '../../utils/util';
 
 interface ItemOptionForValueFieldProps {
   conditionState: Condition & { label?: string };
@@ -47,6 +51,7 @@ export const ItemOptionForValueField = ({
     'propertyText',
     'clearSearchText',
   ]);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const [allOptions, setAllOptions] = useState<Option[]>(
@@ -171,6 +176,9 @@ export const ItemOptionForValueField = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
+            onKeyDown={(evt) =>
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
+            }
           />
         </div>
       )}

@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ForwardedRef, useRef } from 'react';
+import React, { ForwardedRef, useContext, useRef } from 'react';
 
 import { DatePicker, DatePickerInput } from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import { useTranslations } from '../../utils/useTranslations';
 import { Condition } from '../../ConditionBuilder.types';
-import { blockClass } from '../../utils/util';
+import { blockClass, focusThisField } from '../../utils/util';
+import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 
 interface ConditionBuilderItemDate {
   conditionState: Condition;
@@ -26,6 +27,7 @@ export const ConditionBuilderItemDate = ({
 }) => {
   const DatePickerInputRef = useRef<HTMLDivElement>(null);
   const [startText, endText] = useTranslations(['startText', 'endText']);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const datePickerType =
     conditionState.operator == 'between' ? 'range' : 'single';
 

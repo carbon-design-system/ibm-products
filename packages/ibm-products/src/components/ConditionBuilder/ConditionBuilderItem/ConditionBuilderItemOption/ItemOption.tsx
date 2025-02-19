@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import { ConditionBuilderContext } from '../../ConditionBuilderContext/ConditionBuilderProvider';
 import { useTranslations } from '../../utils/useTranslations';
 import { option, statementConfig } from '../../ConditionBuilder.types';
-import { blockClass } from '../../utils/util';
+import { blockClass, onKeyDownHandlerForSearch } from '../../utils/util';
 
 interface ItemOptionProps {
   conditionState: {
@@ -38,6 +38,7 @@ export const ItemOption = ({
     'propertyText',
     'clearSearchText',
   ]);
+  const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const allOptions = config.options;
   const [searchValue, setSearchValue] = useState('');
 
@@ -99,6 +100,9 @@ export const ItemOption = ({
             labelText={clearSearchText}
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
+            onKeyDown={(evt: KeyboardEvent) =>
+              onKeyDownHandlerForSearch(evt, conditionBuilderRef)
+            }
           />
         </div>
       )}

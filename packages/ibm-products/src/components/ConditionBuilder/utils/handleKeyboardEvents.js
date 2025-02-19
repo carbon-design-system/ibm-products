@@ -43,8 +43,7 @@ export const handleKeyDownForPopover = (
 const excludeKeyPress = (evt) => {
   return (
     !['Escape'].includes(evt.key) &&
-    (evt.target.closest(`.${blockClass}__item-date`) ||
-      evt.target.closest(`.${blockClass}__item-time`))
+    evt.target.closest(`.${blockClass}__item-date`)
   );
 };
 
@@ -159,23 +158,23 @@ const handleKeyPressForPopover = (
 
         break;
       case 'Enter':
-        if (isMultiSelect === 'true') {
-          if (document.activeElement.type !== 'button') {
-            //for button , enter key is click which already handled by framework, for other elements trigger click
-            evt.preventDefault();
-            document.activeElement?.click();
-          }
-        } else {
-          if (document.activeElement.type !== 'button') {
-            //for button , enter key is click which already handled by framework, else trigger click
-            focusThisField(evt, conditionBuilderRef);
-            document.activeElement?.click();
-          }
+        if (document.activeElement.type !== 'button') {
+          //for button , enter key is click which already handled by framework, else trigger click
+          focusThisField(evt, conditionBuilderRef);
+          document.activeElement?.click();
         }
 
         break;
       default:
         break;
+    }
+  } else {
+    if (key === 'Enter' && !isHoldingShiftKey) {
+      if (document.activeElement.type !== 'button') {
+        //for button , enter key is click which already handled by framework, else trigger click
+        focusThisField(evt, conditionBuilderRef);
+        document.activeElement?.click();
+      }
     }
   }
 };

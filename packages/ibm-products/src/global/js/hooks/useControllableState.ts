@@ -9,6 +9,12 @@ import { useState, useCallback } from 'react';
 
 type Callback<T> = (value: T) => void;
 
+/**
+ * handles controlling state for any component that utilizes controlled and uncontrolled state
+ * @param {T} value - any generic value being held in state
+ * @param {Callback} onChange - a callback function to handle state change when the user puts the component in a controlled state
+ * @returns {[value: T, Callback]}
+ */
 export function useControllableState<T>(
   value: T,
   onChange?: Callback<T>

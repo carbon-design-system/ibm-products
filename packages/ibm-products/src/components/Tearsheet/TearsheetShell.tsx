@@ -32,9 +32,11 @@ import {
   ComposedModal,
   DefinitionTooltip,
   Layer,
+  Section,
   ModalHeader,
   usePrefix,
   unstable_FeatureFlags as FeatureFlags,
+  Heading,
 } from '@carbon/react';
 
 import { ActionSet } from '../ActionSet';
@@ -187,6 +189,12 @@ interface TearsheetShellProps extends PropsWithChildren {
 
   verticalPosition?: 'normal' | 'lower';
 
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: number;
+
   // Deprecated props
   /**
    * @deprecated Property replaced by `decorator`
@@ -267,6 +275,7 @@ export const TearsheetShell = React.forwardRef(
       title,
       verticalPosition,
       launcherButtonRef,
+      headingLevel = 1,
       // Collect any other property values passed in.
       ...rest
     }: TearsheetShellProps,
@@ -481,18 +490,25 @@ export const TearsheetShell = React.forwardRef(
                   <Wrap className={`${bc}__header-fields`}>
                     {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
-                      {label}
-                    </Wrap>
-                    <Wrap
-                      element="h3"
-                      className={cx(
-                        `${bcModalHeader}__heading`,
-                        `${bc}__heading`
-                      )}
-                    >
-                      {title}
-                    </Wrap>
+                    <Section level={headingLevel}>
+                      <Wrap
+                        element={Heading}
+                        className={`${bcModalHeader}__label`}
+                      >
+                        {label}
+                      </Wrap>
+                      <Section>
+                        <Wrap
+                          element={Heading}
+                          className={cx(
+                            `${bcModalHeader}__heading`,
+                            `${bc}__heading`
+                          )}
+                        >
+                          {title}
+                        </Wrap>
+                      </Section>
+                    </Section>
                     <Wrap className={`${bc}__header-description`}>
                       {isOverflowing ? (
                         <DefinitionTooltip

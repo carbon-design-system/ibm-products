@@ -38,14 +38,13 @@ $block-class: #{$prefix}--user-avatar;
 
 //this mixin allows you to set background color based on the lighter themes such as g10 and white
 @mixin setLightBg($order, $color) {
-  :host([data-carbon-theme='g10']) .#{$block-class}--#{$order},
-  :host([data-carbon-theme='white']) .#{$block-class}--#{$order} {
+  :host(#{$prefix}-user-avatar) .#{$block-class}--#{$order},
+  :host(#{$prefix}-user-avatar[theme='light']) .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }
 @mixin setDarkBg($order, $color) {
-  :host([data-carbon-theme='g90']) .#{$block-class}--#{$order},
-  :host([data-carbon-theme='g100']) .#{$block-class}--#{$order} {
+  :host(#{$prefix}-user-avatar[theme='dark']) .#{$block-class}--#{$order} {
     @include setBgColor($color);
   }
 }

@@ -6,14 +6,9 @@
  */
 
 import { addons } from '@storybook/manager-api';
-import { create } from '@storybook/theming/create';
-
 import React from 'react';
-
-import packageInfo from '../../ibm-products/package.json';
+import theme from './theme';
 import { checkCanaryStatus } from '../../ibm-products/src/global/js/utils/story-helper';
-
-const { description, version } = packageInfo;
 
 const renderComponentLabel = (label, dark, type = 'Canary') => {
   return (
@@ -46,10 +41,7 @@ const renderComponentLabel = (label, dark, type = 'Canary') => {
 };
 
 addons.setConfig({
-  theme: create({
-    brandTitle: `${description} v${version}`,
-  }),
-
+  theme: theme,
   sidebar: {
     renderLabel: (item) => {
       const isUnstable = !!(

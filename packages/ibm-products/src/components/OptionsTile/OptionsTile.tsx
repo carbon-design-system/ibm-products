@@ -312,7 +312,11 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
           </div>
         )}
         {isExpandable ? (
-          <details open={open} ref={detailsRef}>
+          <details
+            className={`${blockClass}__details`}
+            open={open}
+            ref={detailsRef}
+          >
             <summary className={`${blockClass}__header`} onClick={toggle}>
               <ChevronDown
                 size={16}

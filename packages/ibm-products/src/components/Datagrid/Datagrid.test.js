@@ -8,7 +8,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import { within } from '@testing-library/dom';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { makeData } from './utils/makeData';
@@ -2390,13 +2390,21 @@ describe(componentName, () => {
     expect(panelContainer).toHaveClass(
       `${blockClass}__table-container--filter-open`
     );
+    await waitFor(
+      () =>
+        expect(
+          document.querySelector(`.${blockClass}-filter-panel`)
+        ).toBeInTheDocument(),
+      {
+        timeout: 1000, // Match the animation duration
+      }
+    );
 
     const normalCheckbox = screen.getByRole('checkbox', { name: 'Normal' });
     await click(normalCheckbox);
 
     const applyButton = screen.getByRole('button', { name: 'Apply' });
     await click(applyButton);
-
     const panelCloseButton = screen.getByLabelText('Close filter panel');
     await click(panelCloseButton);
     expect(panelContainer).not.toHaveClass(
@@ -2725,6 +2733,17 @@ describe(componentName, () => {
       ...defaultCheckboxFilters,
       ...generateDummyCheckboxes,
     ].length;
+
+    await waitFor(
+      () =>
+        expect(
+          document.querySelector(`.${blockClass}-filter-panel`)
+        ).toBeInTheDocument(),
+      {
+        timeout: 1000, // Match the animation duration
+      }
+    );
+
     const viewMoreButton = screen.getByRole('button', {
       name: `View all (${checkboxTotal})`,
     });

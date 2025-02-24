@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.3.0-rc.0...@carbon/ibm-products-web-components@0.10.0-rc.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **Side Panel Web components:** storybook controls issue ([#6500](https://github.com/carbon-design-system/ibm-products/issues/6500)) ([19a7536](https://github.com/carbon-design-system/ibm-products/commit/19a75363d0683ed6765e0d713c3f68878eaeaef2))
+* **Tearsheet in Web Components:** cancel button not working as expected ([#6458](https://github.com/carbon-design-system/ibm-products/issues/6458)) ([2461f81](https://github.com/carbon-design-system/ibm-products/commit/2461f8120431c125ceb826ccb5d139a82d49f39c))
+* **Tearsheet web components:** control changes doesn't reflect in stories ([#6413](https://github.com/carbon-design-system/ibm-products/issues/6413)) ([84f6d14](https://github.com/carbon-design-system/ibm-products/commit/84f6d140d0476868a13b18ea886515d856bb0835))
+* update to Carbon 11 compatible versions to latest ([#6437](https://github.com/carbon-design-system/ibm-products/issues/6437)) ([48d5c34](https://github.com/carbon-design-system/ibm-products/commit/48d5c34dca79a4b00fc69391a513431fa21295ee))
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+* **web-components:** addresses issues in wc build script ([#6675](https://github.com/carbon-design-system/ibm-products/issues/6675)) ([90dc01c](https://github.com/carbon-design-system/ibm-products/commit/90dc01cf337a252c1f7698121820f0ca4cd40755))
+* **web-components:** specify files/dirs to include in package ([#6688](https://github.com/carbon-design-system/ibm-products/issues/6688)) ([be14cc3](https://github.com/carbon-design-system/ibm-products/commit/be14cc36febcb6e0731b158bc502c66b27cff555))
+
+
+### Features
+
+* **storybook:** add text direction toolbar item ([#6855](https://github.com/carbon-design-system/ibm-products/issues/6855)) ([ae10146](https://github.com/carbon-design-system/ibm-products/commit/ae10146ff442e4aa70dfe998d5245bf68f1359bd))
+* **userAvatar:** backgroundcolor change based on theme ([#6918](https://github.com/carbon-design-system/ibm-products/issues/6918)) ([ea7b04c](https://github.com/carbon-design-system/ibm-products/commit/ea7b04c2ac6e7f1ef8334eb977981a68bbcaf904))
+* **useravatar:** create useravatar web component ([#6823](https://github.com/carbon-design-system/ibm-products/issues/6823)) ([7ee85ea](https://github.com/carbon-design-system/ibm-products/commit/7ee85eaa305eb79abf653eeed775d87db294f053))
+
+
+
+
+
 # [0.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-web-components@0.9.0-rc.0...@carbon/ibm-products-web-components@0.9.0) (2025-02-19)
 
 **Note:** Version bump only for package @carbon/ibm-products-web-components

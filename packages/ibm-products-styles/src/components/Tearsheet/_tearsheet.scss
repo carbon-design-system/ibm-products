@@ -401,18 +401,21 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__content {
-    // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
-    .#{$carbon-prefix}--pagination,
-    .#{$carbon-prefix}--pagination__control-buttons,
-    .#{$carbon-prefix}--text-input,
-    .#{$carbon-prefix}--text-area,
-    .#{$carbon-prefix}--search-input,
-    .#{$carbon-prefix}--select-input,
-    .#{$carbon-prefix}--dropdown,
-    .#{$carbon-prefix}--dropdown-list,
-    .#{$carbon-prefix}--number input[type='number'],
-    .#{$carbon-prefix}--date-picker__input {
+    // Restore "readonly" styling of various input fields overridden by Carbon's modal
+    // https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
+    .#{$carbon-prefix}--date-picker__input:not([readonly]),
+    .#{$carbon-prefix}--dropdown:not(.#{$carbon-prefix}--dropdown--readonly),
+    .#{$carbon-prefix}--number input[type='number']:not([readonly]),
+    .#{$carbon-prefix}--select-input:not([aria-readonly='true']),
+    .#{$carbon-prefix}--text-area:not([readonly]),
+    .#{$carbon-prefix}--text-input:not([readonly]) {
       background-color: $field;
+    }
+
+    .cds--radio-button[readonly]
+      + .cds--radio-button__label
+      .cds--radio-button__appearance {
+      border-color: $icon-disabled;
     }
 
     .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {

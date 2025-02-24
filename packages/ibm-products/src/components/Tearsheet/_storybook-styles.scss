@@ -1,3 +1,7 @@
+/* stylelint-disable carbon/type-use */
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable order/properties-order */
+
 //
 // Copyright IBM Corp. 2020, 2021
 //
@@ -22,4 +26,31 @@
 
 .tearsheet-stories__tabs .#{c4p-settings.$carbon-prefix}--tab-content {
   display: none;
+}
+
+.tearsheet-stories__styles--controls {
+  align-items: flex-end;
+  display: flex;
+  margin-block-start: 1rem;
+}
+
+.tearsheet-stories__styles--table {
+  margin-block-start: 2rem;
+  inline-size: 80%;
+
+  th,
+  td {
+    padding: 0.5rem 0.8rem;
+    text-align: start;
+  }
+
+  th {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-block-end: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+  }
+
+  td {
+    border-block-end: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }

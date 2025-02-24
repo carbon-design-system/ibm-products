@@ -40,16 +40,17 @@ export const Default = (args) => {
       style={{
         resize: 'horizontal',
         overflow: 'scroll',
-        border: '1px solid black',
+        background: '#d0e2ff',
         padding: '1rem',
-        maxWidth: '500px',
-        width: '100%',
+        width: '500px',
+        maxWidth: '100%',
       }}
     >
       <div ref={containerRef} style={{ whiteSpace: 'nowrap' }}>
         <p>Visible items:</p>
         {visibleItems.map((tag) => (
           <Tag
+            type="red"
             key={tag.id}
             ref={(node) => {
               itemRefHandler(tag.id, node);
@@ -62,7 +63,9 @@ export const Default = (args) => {
       <div>
         <p>Hidden items:</p>
         {hiddenItems.map((tag) => (
-          <Tag key={tag.id}>{tag.label}</Tag>
+          <Tag key={tag.id} type="red">
+            {tag.label}
+          </Tag>
         ))}
       </div>
     </div>

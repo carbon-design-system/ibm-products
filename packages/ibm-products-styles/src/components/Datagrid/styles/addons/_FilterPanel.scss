@@ -169,6 +169,16 @@ $block-class-component: #{$block-class}-filter-panel;
   block-size: to-rem(64px);
   inset-block-end: 0;
   margin-block-start: auto;
+
+  opacity: 1;
+  transform: translateY(64px) translateZ(0);
+
+  &.#{$block-class-component}__animationComplete {
+    transform: none;
+    transition-behavior: allow-discrete;
+    transition-duration: $duration-moderate-01;
+    transition-property: display, opacity, transform;
+  }
 }
 
 // Overrides

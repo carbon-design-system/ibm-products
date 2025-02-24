@@ -133,6 +133,8 @@ const FilterPanel = ({
     exitAnimationName
   );
 
+  const [animationComplete, setAnimationComplete] = useState(false);
+
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
@@ -140,6 +142,22 @@ const FilterPanel = ({
   const closePanel = () => {
     cancel();
     setPanelOpen(false);
+  };
+
+  // Set the internal state `animationComplete` to true if
+  // prefers reduced motion is true
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setAnimationComplete(true);
+    }
+  }, [shouldReduceMotion]);
+
+  // initializes the side panel to open
+  const onAnimationStart = () => {
+    setAnimationComplete(false);
+  };
+  const onAnimationEnd = () => {
+    setAnimationComplete(!animationComplete);
   };
 
   const apply = () => {
@@ -191,7 +209,9 @@ const FilterPanel = ({
               disabled: shouldDisableButtons,
             },
           ]}
-          className={`${componentClass}__action-set`}
+          className={cx(`${componentClass}__action-set`, {
+            [`${componentClass}__animationComplete`]: animationComplete,
+          })}
           ref={actionSetRef}
         />
       )
@@ -268,6 +288,8 @@ const FilterPanel = ({
   return shouldRender ? (
     <div
       ref={filterPanelRef}
+      onAnimationEnd={onAnimationEnd}
+      onAnimationStart={onAnimationStart}
       className={cx(
         componentClass,
         `${componentClass}__container`,

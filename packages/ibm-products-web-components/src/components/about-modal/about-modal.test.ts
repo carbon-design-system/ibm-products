@@ -8,7 +8,6 @@
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
 import { render, html, TemplateResult } from 'lit';
-import styles from './story-styles.scss?lit';
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';

@@ -22,12 +22,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  actionSetVariants,
-  innerContainerVariants,
-  panelVariants,
-} from './motion/variants';
-import { motion, useReducedMotion } from 'framer-motion';
-import {
   useFilters,
   useShouldDisableButtons,
   useSubscribeToEventEmitter,
@@ -40,12 +34,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../../../../settings';
 import { rem } from '@carbon/layout';
-import { useIsomorphicEffect } from '../../../../../global/js/hooks';
-
+import {
+  useIsomorphicEffect,
+  usePrefersReducedMotion,
+  usePresence,
+} from '../../../../../global/js/hooks';
 const blockClass = `${pkg.prefix}--datagrid`;
 export const componentClass = `${blockClass}-filter-panel`;
-
-const MotionActionSet = motion(ActionSet);
 
 const defaults = {
   title: 'Filter',
@@ -126,7 +121,19 @@ const FilterPanel = ({
 
   // NOTE: In the future when we get rid of framer-motion we can use our own usePrefersReducedMotion hook
   // using our own was causing an error
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+
+  const exitAnimationName = shouldReduceMotion
+    ? 'filter-panel-exit-reduced'
+    : 'filter-panel-exit-left';
+
+  const { shouldRender } = usePresence(
+    panelOpen,
+    filterPanelRef,
+    exitAnimationName
+  );
+
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -135,6 +142,22 @@ const FilterPanel = ({
   const closePanel = () => {
     cancel();
     setPanelOpen(false);
+  };
+
+  // Set the internal state `animationComplete` to true if
+  // prefers reduced motion is true
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setAnimationComplete(true);
+    }
+  }, [shouldReduceMotion]);
+
+  // initializes the side panel to open
+  const onAnimationStart = () => {
+    setAnimationComplete(false);
+  };
+  const onAnimationEnd = () => {
+    setAnimationComplete(!animationComplete);
   };
 
   const apply = () => {
@@ -169,7 +192,7 @@ const FilterPanel = ({
   const renderActionSet = () => {
     return (
       showActionSet && (
-        <MotionActionSet
+        <ActionSet
           actions={[
             {
               key: 1,
@@ -186,10 +209,10 @@ const FilterPanel = ({
               disabled: shouldDisableButtons,
             },
           ]}
-          className={`${componentClass}__action-set`}
+          className={cx(`${componentClass}__action-set`, {
+            [`${componentClass}__animationComplete`]: animationComplete,
+          })}
           ref={actionSetRef}
-          custom={shouldReduceMotion}
-          variants={actionSetVariants}
         />
       )
     );
@@ -222,7 +245,7 @@ const FilterPanel = ({
         rem(filterPanelMinHeight)
       );
     },
-    [filterPanelMinHeight]
+    [filterPanelMinHeight, shouldRender]
   );
 
   // tableId is passed in from the event emitter from the FilterSummary component
@@ -257,25 +280,34 @@ const FilterPanel = ({
 
   useIsomorphicEffect(() => {
     const height = getScrollableContainerHeight();
-    if (innerContainerRef.current && innerContainerRef.current.style) {
+    if (
+      innerContainerRef.current &&
+      innerContainerRef.current.style &&
+      height
+    ) {
       innerContainerRef.current.style.height = height;
     }
-  }, [getScrollableContainerHeight, innerContainerRef]);
+  }, [getScrollableContainerHeight, innerContainerRef, shouldRender]);
 
-  return (
-    <motion.div
+  return shouldRender ? (
+    <div
       ref={filterPanelRef}
-      className={cx(componentClass, `${componentClass}__container`, {
-        [`${componentClass}--open`]: panelOpen,
-        [`${componentClass}--batch`]: showActionSet,
-        [`${componentClass}--instant`]: !showActionSet,
-      })}
-      initial={false}
-      animate={panelOpen ? 'visible' : 'hidden'}
-      custom={shouldReduceMotion}
-      variants={panelVariants}
+      onAnimationEnd={onAnimationEnd}
+      onAnimationStart={onAnimationStart}
+      className={cx(
+        componentClass,
+        `${componentClass}__container`,
+        `${componentClass}--left-placement`,
+        {
+          [`${componentClass}--open`]: panelOpen,
+          [`${componentClass}--closing`]: !panelOpen,
+          [`${componentClass}--reduced-motion`]: shouldReduceMotion,
+          [`${componentClass}--batch`]: showActionSet,
+          [`${componentClass}--instant`]: !showActionSet,
+        }
+      )}
     >
-      <motion.div custom={shouldReduceMotion} variants={innerContainerVariants}>
+      <div>
         <header
           ref={filterHeadingRef}
           className={cx(`${componentClass}__heading`, {
@@ -340,9 +372,9 @@ const FilterPanel = ({
           )}
         </div>
         {renderActionSet()}
-      </motion.div>
-    </motion.div>
-  );
+      </div>
+    </div>
+  ) : null;
 };
 
 FilterPanel.propTypes = {

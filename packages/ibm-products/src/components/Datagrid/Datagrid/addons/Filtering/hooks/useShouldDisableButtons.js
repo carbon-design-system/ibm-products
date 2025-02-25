@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 /* eslint-disable jsdoc/check-param-names */
 
 import { useState, useEffect } from 'react';
-import isEqual from 'lodash/isEqual';
+import { deepCompareObject } from '../../../../../../global/js/utils/deepCompareObject';
 
 /**
  * Keeps track of the button disabled state
@@ -28,7 +28,7 @@ const useShouldDisableButtons = ({
   useEffect(
     function updateDisabledButtonsState() {
       setShouldDisableButtons(
-        isEqual(filtersState, JSON.parse(prevFiltersRef.current))
+        deepCompareObject(filtersState, JSON.parse(prevFiltersRef.current))
       );
     },
     [filtersState, prevFiltersRef]

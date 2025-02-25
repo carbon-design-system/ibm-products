@@ -147,7 +147,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
   @media (prefers-reduced-motion) {
     /* styles to apply if a user's device settings are set to reduced motion */
-    &.#{$block-class}--open {
+    &.#{$block-class}--open.#{$block-class}--right-placement,
+    &.#{$block-class}--open.#{$block-class}--left-placement {
       animation: side-panel-entrance-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {
@@ -155,7 +156,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
         transform: translateX(0);
       }
     }
-    &.#{$block-class}--closing {
+    &.#{$block-class}--closing.#{$block-class}--left-placement,
+    &.#{$block-class}--closing.#{$block-class}--right-placement {
       animation: side-panel-exit-reduced $duration-moderate-01
         motion(exit, productive) forwards;
       @starting-style {

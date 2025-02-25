@@ -8,23 +8,31 @@
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
 import { render, html, TemplateResult } from 'lit';
-import ExampleLogo from './_story-assets/example-logo.svg';
-import ansibleLogo from './_story-assets/ansible-logo.png';
-import grafanaLogo from './_story-assets/grafana-logo.png';
-import jsLogo from './_story-assets/js-logo.png';
 
 const logo = html`
   <img
-    src=${ExampleLogo}
+    src="./_story-assets/example-logo.svg"
     alt="Example product or service logo"
     style="max-width: 6rem"
   />
 `;
 const additionalInfo = html`
-  <p class=${`c4p__footer-label`}>Powered by</p>
-  <img src=${grafanaLogo} alt="Grafana" class=${`c4p__footer--tech-logo`} />
-  <img src=${ansibleLogo} alt="Ansible" class=${`c4p__footer--tech-logo`} />
-  <img src=${jsLogo} alt="JavaScript" class=${`c4p__footer--tech-logo`} />
+  <p class="c4p__footer-label">Powered by</p>
+  <img
+    src="./_story-assets/ansible-logo.png"
+    alt="Grafana"
+    class="c4p__footer--tech-logo"
+  />
+  <img
+    src="./_story-assets/ansible-logo.png"
+    alt="Ansible"
+    class="c4p__footer--tech-logo"
+  />
+  <img
+    src="./_story-assets/js-logo.png"
+    alt="JavaScript"
+    class="c4p__footer--tech-logo"
+  />
 `;
 const content = html`This Web site contains proprietary notices and copyright
 information, the terms of which must be observed and followed. Please see the

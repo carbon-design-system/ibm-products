@@ -6,8 +6,8 @@
  */
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi } from 'vitest';
-import { render, html } from 'lit';
+import { describe, it, vi } from 'vitest';
+import { expect, fixture, html } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 
 const defaultProps = {
@@ -44,9 +44,8 @@ const template = (props = defaultProps) => html`
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {
-    render(template(), document.body);
-    await Promise.resolve();
-    const elem = document.body.querySelector('c4p-side-panel' as any);
-    expect(elem).toBeDefined();
+    const elem = await fixture(template());
+
+    expect(elem).dom.to.equal('<div></div>');
   });
 });

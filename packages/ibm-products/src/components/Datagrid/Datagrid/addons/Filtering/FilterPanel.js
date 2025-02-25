@@ -280,7 +280,11 @@ const FilterPanel = ({
 
   useIsomorphicEffect(() => {
     const height = getScrollableContainerHeight();
-    if (innerContainerRef.current && innerContainerRef.current.style) {
+    if (
+      innerContainerRef.current &&
+      innerContainerRef.current.style &&
+      height
+    ) {
       innerContainerRef.current.style.height = height;
     }
   }, [getScrollableContainerHeight, innerContainerRef, shouldRender]);

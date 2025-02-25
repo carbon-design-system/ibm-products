@@ -9,12 +9,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import clamp from 'lodash/clamp';
 import { purple50, gray20, gray70 } from '@carbon/colors';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { Themes } from './Checklist.types';
+import { clamp } from '../../global/js/utils/clamp';
 
 const blockClass = `${pkg.prefix}--checklist__chart`;
 const componentName = 'ChecklistChart';

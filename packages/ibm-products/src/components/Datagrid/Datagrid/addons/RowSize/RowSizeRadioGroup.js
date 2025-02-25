@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { RadioButtonGroup, RadioButton } from '@carbon/react';
-import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
@@ -41,7 +40,7 @@ const RowSizeRadioGroup = forwardRef(
           onChange={onChange}
         >
           {rowSizes &&
-            isArray(rowSizes) &&
+            Array.isArray(rowSizes) &&
             rowSizes.map((option) => {
               let labelText;
               try {

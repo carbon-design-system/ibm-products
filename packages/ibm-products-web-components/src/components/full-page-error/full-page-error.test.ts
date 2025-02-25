@@ -6,8 +6,8 @@
  */
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi } from 'vitest';
-import { render, html } from 'lit';
+import { html, fixture, expect } from '@open-wc/testing';
+import { describe, it, vi } from 'vitest';
 import { Kind } from './types';
 
 const defaultProps = {
@@ -59,5 +59,14 @@ describe(elementName, () => {
     const element = document.body.querySelector(elementName);
 
     element?.classList.contains('test-class');
+  });
+
+  it('renders an error label', async () => {
+    const props = { label: 'Test Label' };
+    render(template(props), document.body);
+    await Promise.resolve();
+    const element = document.body.querySelector(elementName);
+
+    expect(element!.shadowRoot!).toBe(1);
   });
 });

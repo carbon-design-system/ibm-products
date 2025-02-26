@@ -16,6 +16,32 @@ import './templates/with-layer';
 setCustomElementsManifest(customElements);
 
 export const globalTypes = {
+  dir: {
+    name: 'Text direction',
+    description: 'Set the text direction for the story',
+    defaultValue: 'ltr',
+    toolbar: {
+      icon: 'transfer',
+      title: 'Text direction',
+      items: [
+        {
+          right: '🔄',
+          title: 'auto',
+          value: 'auto',
+        },
+        {
+          right: '➡️',
+          title: 'left-to-right (ltr)',
+          value: 'ltr',
+        },
+        {
+          right: '⬅️',
+          title: 'right-to-left (rtl)',
+          value: 'rtl',
+        },
+      ],
+    },
+  },
   theme: {
     name: 'Theme',
     description: 'Set the global theme for displaying components',
@@ -145,7 +171,7 @@ export const decorators = [
     const { hasMainTag } = result;
     const { locale, dir, theme } = context.globals;
 
-    document.documentElement.setAttribute('storybook-carbon-theme', theme);
+    document.documentElement.setAttribute('data-carbon-theme', theme);
 
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;

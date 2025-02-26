@@ -10,6 +10,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, html } from 'lit';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
+import './index';
 
 const defaultProps = {
   animateTitle: true,

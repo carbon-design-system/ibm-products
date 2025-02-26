@@ -36,8 +36,8 @@ import { Carousel } from '../Carousel';
 import PropTypes from 'prop-types';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 // Other standard imports.
-import { clamp } from 'lodash';
 import cx from 'classnames';
+import { clamp } from '../../global/js/utils/clamp';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
@@ -274,14 +274,14 @@ export let InterstitialScreen = React.forwardRef<
     const targetStep = clamp(progStep - 1, progStepFloor, progStepCeil);
     scrollRef.current.scrollPrev();
     scrollBodyToTop();
-    setProgStep(targetStep);
+    setProgStep(targetStep as number);
   };
 
   const handleClickNext = () => {
     const targetStep = clamp(progStep + 1, progStepFloor, progStepCeil);
     scrollRef.current.scrollNext();
     scrollBodyToTop();
-    setProgStep(targetStep);
+    setProgStep(targetStep as number);
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.8.0",
+  "version": "0.10.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -49,14 +49,14 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.55.0",
-    "@carbon/styles": "1.74.0",
-    "@carbon/web-components": "2.22.0",
+    "@carbon/ibm-products-styles": "^2.57.0-rc.0",
+    "@carbon/styles": "1.75.0",
+    "@carbon/web-components": "2.23.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {
     "@carbon/icon-helpers": "^10.54.0",
-    "@carbon/icons": "^11.54.0",
+    "@carbon/icons": "^11.55.0",
     "@carbon/motion": "^11.24.0",
     "@mordech/vite-lit-loader": "^0.35.0",
     "@open-wc/testing": "3.0.0-next.5",

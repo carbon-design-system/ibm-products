@@ -53,7 +53,7 @@
     "telemetry-config": "ibmtelemetry-config --id 495342db-5046-4ecf-85ea-9ffceb6f8cdf --endpoint https://collector-prod.1am6wm210aow.us-south.codeengine.appdomain.cloud/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor|^framer-motion)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor|^framer-motion|^commander)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",

@@ -25,14 +25,14 @@ export default {
           altGuidelinesHref={[
             {
               href: 'https://pages.github.ibm.com/carbon/ibm-products/components/export/usage/',
-              label: 'Export guidelines',
+              label: 'Export usage guidelines',
             },
             {
               href: 'https://www.carbondesignsystem.com/components/modal/usage',
               label: 'Carbon Modal usage guidelines',
             },
             {
-              href: 'https://react.carbondesignsystem.com/?path=/docs/modal--default',
+              href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal--overview',
               label: 'Carbon Modal documentation',
             },
           ]}

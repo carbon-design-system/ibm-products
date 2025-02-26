@@ -12,7 +12,20 @@ import * as stories from './AboutModal.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
-    guidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/"
+    altGuidelinesHref={[
+      {
+        href: 'https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/',
+        label: 'AboutModal usage guidelines',
+      },
+      {
+        href: 'https://www.carbondesignsystem.com/components/modal/usage',
+        label: 'Carbon Modal usage guidelines',
+      },
+      {
+        href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal--overview',
+        label: 'Carbon Modal documentation',
+      },
+    ]}
     blocks={[
       {
         story: stories.aboutModal,

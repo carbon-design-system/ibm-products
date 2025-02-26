@@ -10,6 +10,7 @@ import { useOverflowItems } from './useOverflowItems';
 import { Tag, Slider } from '@carbon/react';
 import { Annotation } from '../../../../../core/.storybook/Annotation';
 import { FitToWidth } from '@carbon/react/icons';
+import './_useOverflowItems.scss';
 
 export default {
   title: 'Hooks/useOverflowItems',
@@ -55,15 +56,13 @@ const Template = (args) => {
         labelText="Parent container width"
       />
       <div
+        className="parent"
         style={{
-          overflow: 'scroll',
-          padding: '1rem',
           width: `${width}px`,
-          maxWidth: '100%',
         }}
       >
         <Annotation text="Parent container" type="layer" icon={FitToWidth}>
-          <div ref={containerRef} style={{ whiteSpace: 'nowrap' }}>
+          <div className="child" ref={containerRef}>
             <p>Visible items:</p>
             {visibleItems.map((tag) => (
               <Tag

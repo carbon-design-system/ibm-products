@@ -51,9 +51,13 @@ const defaultProps = {
   kind: 'custom',
   children: (
     <>
-      <Link href={'/'}>– Forwarding Link 1</Link>
+      <Link size="lg" href={'/'}>
+        – Forwarding Link 1
+      </Link>
       <br />
-      <Link href={'/'}>– Forwarding Link 1</Link>
+      <Link size="lg" href={'/'}>
+        – Forwarding Link 1
+      </Link>
     </>
   ),
 };

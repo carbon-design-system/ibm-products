@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi } from 'vitest';
-import { render, html } from 'lit';
+import { describe, expect, it } from 'vitest';
+import { html, fixture } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 import './index';
@@ -48,31 +47,27 @@ const template = (props = defaultProps) => html`
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {
-    render(template(), document.body);
-    await Promise.resolve();
+    await fixture(template());
     const elem = document.body.querySelector('c4p-side-panel' as any);
     expect(elem).toBeDefined();
   });
 
   it('should render a side panel on the left', async () => {
-    render(
-      template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT }),
-      document.body
+    const el = await fixture(
+      template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT })
     );
-
-    await Promise.resolve();
     const elem = document.body.querySelector('c4p-side-panel');
     expect(elem).toBeDefined();
-    const placement = elem?.getAttribute('placement');
+    const placement = el?.getAttribute('placement');
     expect(placement).toBe('left');
 
-    const dialogShadowEl = elem?.shadowRoot?.querySelectorAll(
+    const dialogShadowEl = el?.shadowRoot?.querySelectorAll(
       `.${blockClass}`
     )?.[0];
 
     if (dialogShadowEl) {
-      const left = window.getComputedStyle(dialogShadowEl)?.left;
-      expect(left).toBe('0px');
+      const transform = window.getComputedStyle(dialogShadowEl)?.transform;
+      expect(transform).toBe('matrix(1, 0, 0, 1, -414, 0)');
     }
   });
 });

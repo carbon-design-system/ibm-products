@@ -7,7 +7,7 @@
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { describe, expect, it, vi } from 'vitest';
-import { render, html } from 'lit';
+import { fixture, html } from '@open-wc/testing';
 
 const defaultProps = {
   actionItems: `
@@ -109,8 +109,7 @@ const template = (props = defaultProps) => html`
 
 describe('c4p-tearsheet', () => {
   it('should render a tearsheet', async () => {
-    render(template(), document.body);
-    await Promise.resolve();
+    await fixture(template());
     const elem = document.body.querySelector('c4p-tearsheet' as any);
     expect(elem).toBeDefined();
   });

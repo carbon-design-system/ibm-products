@@ -207,7 +207,7 @@ type CreateFullPageBaseProps = {
    * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
    * Helps control the semantic structure of the page.
    */
-  headingLevel?: number;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
 export type CreateFullPageProps = CreateFullPageBaseProps &
@@ -507,6 +507,12 @@ CreateFullPage.propTypes = {
    * Specifies elements to focus on first on render.
    */
   firstFocusElement: PropTypes.string,
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
 
   /**
    * This can be used to open the component to a step other than the first step.

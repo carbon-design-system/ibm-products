@@ -168,7 +168,7 @@ export interface TearsheetProps extends PropsWithChildren {
    * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
    * Helps control the semantic structure of the page.
    */
-  headingLevel?: number;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 
   /** @deprecated */
   /**
@@ -390,6 +390,12 @@ Tearsheet.propTypes = {
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  // headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
 
   ...deprecatedProps,
 };

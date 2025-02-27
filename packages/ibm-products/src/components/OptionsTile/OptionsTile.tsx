@@ -117,7 +117,7 @@ export interface OptionsTileProps {
    * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
    * Helps control the semantic structure of the page.
    */
-  headingLevel?: number;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 // Default values for props
@@ -381,6 +381,12 @@ OptionsTile.propTypes = {
    * no toggle will be rendered.
    */
   enabled: PropTypes.bool,
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
 
   /**
    * Whether the OptionsTile is in invalid validation state.

@@ -193,7 +193,7 @@ interface TearsheetShellProps extends PropsWithChildren {
    * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
    * Helps control the semantic structure of the page.
    */
-  headingLevel?: number;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 
   // Deprecated props
   /**
@@ -701,6 +701,12 @@ TearsheetShell.propTypes = {
   headerActions: PropTypes.element,
 
   /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
+
+  /**
    * The content for the influencer section of the tearsheet, displayed
    * alongside the main content. This is typically a menu, or filter, or
    * progress indicator, or similar. NB the influencer is only applicable for
@@ -770,15 +776,17 @@ TearsheetShell.propTypes = {
    */
   /**@ts-ignore*/
   selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
-
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.
    */
   /**@ts-ignore*/
+
   size: PropTypes.oneOf(['narrow', 'wide']).isRequired,
+
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,
+
   ...deprecatedProps,
 };

@@ -401,18 +401,12 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__content {
-    // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
-    .#{$carbon-prefix}--pagination,
-    .#{$carbon-prefix}--pagination__control-buttons,
-    .#{$carbon-prefix}--text-input,
-    .#{$carbon-prefix}--text-area,
-    .#{$carbon-prefix}--search-input,
-    .#{$carbon-prefix}--select-input,
-    .#{$carbon-prefix}--dropdown,
-    .#{$carbon-prefix}--dropdown-list,
-    .#{$carbon-prefix}--number input[type='number'],
-    .#{$carbon-prefix}--date-picker__input {
-      background-color: $field;
+    // Specific to the Tearsheet *and* radio buttons,
+    // `readOnly` styling is not applying a grey outline.
+    .#{$carbon-prefix}--radio-button[readonly]
+      + .#{$carbon-prefix}--radio-button__label
+      .#{$carbon-prefix}--radio-button__appearance {
+      border-color: $icon-disabled;
     }
 
     .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {

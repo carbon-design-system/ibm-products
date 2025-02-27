@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.57.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.57.0-rc.0) (2025-02-24)
+
+
+### Bug Fixes
+
+* **APIKeyModal:** improve screen reader announcement ([#6481](https://github.com/carbon-design-system/ibm-products/issues/6481)) ([bea9003](https://github.com/carbon-design-system/ibm-products/commit/bea9003e1c1dcf2f1c19ecaccd6a4096bc313d8d))
+* **BigNumbers:** Convert to TypeScript ([#6734](https://github.com/carbon-design-system/ibm-products/issues/6734)) ([2ac32d0](https://github.com/carbon-design-system/ibm-products/commit/2ac32d096b6bc01df000e1c534e61a574fd55e2a))
+* component token style import ([#6710](https://github.com/carbon-design-system/ibm-products/issues/6710)) ([49604de](https://github.com/carbon-design-system/ibm-products/commit/49604de6c3b15e7ed677abc27004cc5166fbff62))
+* condition builder style issues ([#6724](https://github.com/carbon-design-system/ibm-products/issues/6724)) ([37dba95](https://github.com/carbon-design-system/ibm-products/commit/37dba95fffdfce26cd5505d0451a33d82f4cb0e3))
+* **conditionbuilder:** property text to be bold ([#6658](https://github.com/carbon-design-system/ibm-products/issues/6658)) ([cfc7b39](https://github.com/carbon-design-system/ibm-products/commit/cfc7b3928b1e16847a7370413d2f52588beca03e))
+* glitches on open ([#6873](https://github.com/carbon-design-system/ibm-products/issues/6873)) ([dd74e33](https://github.com/carbon-design-system/ibm-products/commit/dd74e337cd3670201bab669035a77e026c54103d))
+* **NotificationsPanel:** remove focus trap ([#6829](https://github.com/carbon-design-system/ibm-products/issues/6829)) ([ccd0926](https://github.com/carbon-design-system/ibm-products/commit/ccd09268b98f9e1ced078086f00f00a58faf99c4))
+* **NotificationsPanel:** remove hard-coded dark theme ([#6862](https://github.com/carbon-design-system/ibm-products/issues/6862)) ([64d9b48](https://github.com/carbon-design-system/ibm-products/commit/64d9b48a8db748ba21835baa14fe047fd8aaf264))
+* pageheader subtitle truncation visibility ([#6551](https://github.com/carbon-design-system/ibm-products/issues/6551)) ([26394dd](https://github.com/carbon-design-system/ibm-products/commit/26394dd2b740f19306e8fbbbd6c2195fc5a3bbed))
+* **pageHeader:** menu button overflow issue on small screens ([#6502](https://github.com/carbon-design-system/ibm-products/issues/6502)) ([0072e42](https://github.com/carbon-design-system/ibm-products/commit/0072e424fc1f25fbf58be67f7d4d792643f26c30))
+* **useravatar:** remove data-carbon-theme related style ([#6945](https://github.com/carbon-design-system/ibm-products/issues/6945)) ([2876fb3](https://github.com/carbon-design-system/ibm-products/commit/2876fb3958cb41fae82c4d206569dbfcd0f01706))
+* **useravatar:** variable change ([#6856](https://github.com/carbon-design-system/ibm-products/issues/6856)) ([2e6fc2b](https://github.com/carbon-design-system/ibm-products/commit/2e6fc2b3066fb55de2ded947d1d15429c852c375))
+
+
+### Features
+
+* **BreadcrumbWithOverflow:** adopt overflowMenuV12 and floating ui ([#6411](https://github.com/carbon-design-system/ibm-products/issues/6411)) ([f716852](https://github.com/carbon-design-system/ibm-products/commit/f716852c979a0b9556e853fad7e7a7774b4c6579))
+* **sidepanel:** implement decorator prop ([#6511](https://github.com/carbon-design-system/ibm-products/issues/6511)) ([336a5b0](https://github.com/carbon-design-system/ibm-products/commit/336a5b0ad06051bd52080e5d7cd610feb56604c8))
+
+
+
+
+
+# [2.56.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.56.0-rc.0...@carbon/ibm-products-styles@2.56.0) (2025-02-19)
+
+**Note:** Version bump only for package @carbon/ibm-products-styles
+
+
+
+
+
 # [2.56.0-rc.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products-styles@2.50.0-rc.0...@carbon/ibm-products-styles@2.56.0-rc.0) (2025-02-10)
 
 

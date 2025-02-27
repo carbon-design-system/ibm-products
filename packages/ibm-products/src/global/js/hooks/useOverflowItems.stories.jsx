@@ -49,7 +49,7 @@ const Template = (args) => {
     <div>
       <Slider
         max={1000}
-        min={100}
+        min={200}
         value={width}
         onChange={({ value }) => widthHandler(value)}
         hideTextInput

@@ -14,46 +14,55 @@ import './_useOverflowItems.scss';
 
 export default {
   title: 'Hooks/useOverflowItems',
-  argTypes: {
-    numberOfTags: {
-      control: { type: 'range', min: 1, max: 30 },
-    },
-  },
   parameters: {
     layout: 'padded',
   },
 };
 
-const makeTags = (n) => {
-  return Array(n)
-    .fill(null)
-    .map((_, idx) => ({
-      id: idx,
-      label: `Tag ${idx + 1}`,
-    }));
-};
-
-const Template = (args) => {
-  const { numberOfTags } = args;
-  const tags = makeTags(numberOfTags);
+const Template = () => {
+  const [width, setWidth] = useState(500);
+  const [numberOfTags, setNumberOfTags] = useState(10);
   const containerRef = useRef(null);
+
+  const makeTags = (n) => {
+    return Array(n)
+      .fill(null)
+      .map((_, idx) => ({
+        id: idx,
+        label: `Tag ${idx + 1}`,
+      }));
+  };
+
+  const tags = makeTags(numberOfTags);
+
   const { visibleItems, hiddenItems, itemRefHandler } = useOverflowItems(
     tags,
     containerRef
   );
-  const [width, setWidth] = useState(500);
+
   const widthHandler = (n) => {
     setWidth(n);
   };
+
   return (
     <div>
       <Slider
+        className="slider"
         max={1000}
         min={200}
         value={width}
         onChange={({ value }) => widthHandler(value)}
         hideTextInput
         labelText="Parent container width"
+      />
+      <Slider
+        className="slider"
+        max={50}
+        min={1}
+        value={numberOfTags}
+        onChange={({ value }) => setNumberOfTags(value)}
+        hideTextInput
+        labelText="Number of total tags"
       />
       <div
         className="parent"
@@ -91,6 +100,4 @@ const Template = (args) => {
 };
 
 export const DefaultUsage = Template.bind({});
-DefaultUsage.args = {
-  numberOfTags: 20,
-};
+DefaultUsage.args = {};

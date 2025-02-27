@@ -5,10 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+.slider {
+  /* stylelint-disable-next-line carbon/layout-use */
+  margin-block-end: 1rem;
+}
+
 .parent {
   overflow: scroll;
-  /* stylelint-disable-next-line carbon/layout-use */
-  padding: 1rem;
   max-inline-size: 100%;
   scrollbar-width: none;
 }

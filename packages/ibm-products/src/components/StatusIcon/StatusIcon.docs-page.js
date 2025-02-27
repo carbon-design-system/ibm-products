@@ -11,6 +11,12 @@ import * as stories from './StatusIcon.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[
+      {
+        href: 'https://carbondesignsystem.com/patterns/status-indicator-pattern/',
+        label: 'Carbon status indicator patterns',
+      },
+    ]}
     blocks={[
       {
         story: stories.Default,

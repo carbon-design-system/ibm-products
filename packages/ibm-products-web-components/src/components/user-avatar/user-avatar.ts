@@ -82,6 +82,12 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
   @property({ reflect: true, attribute: 'background-color' })
   backgroundColor = 'order-1-cyan';
 
+  /**
+   * Set theme in which the component will be rendered.
+   */
+  @property({ reflect: true })
+  theme;
+
   render() {
     const getItem = () => {
       const iconProps = { size: iconSize[this.size] };
@@ -124,11 +130,13 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
       })} `;
     };
 
-    const { tooltipText, tooltipAlignment, size, backgroundColor } = this;
+    const { tooltipText, tooltipAlignment, size, backgroundColor, theme } =
+      this;
     const classes = classMap({
       [`${blockClass}`]: true,
       [`${blockClass}--${size}`]: size,
       [`${blockClass}--${backgroundColor}`]: backgroundColor,
+      [`${blockClass}--${theme}`]: theme,
     });
 
     const Avatar = () => html`<div class="${classes}">${getItem()}</div>`;

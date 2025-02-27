@@ -89,6 +89,12 @@ const defaultTemplate = {
       description:
         'Specify the to description of image for screen reader users',
     },
+    theme: {
+      control: {
+        type: 'select',
+      },
+      options: ['light', 'dark'],
+    },
   },
   render: (args) => {
     return html`
@@ -101,6 +107,7 @@ const defaultTemplate = {
         image=${args.image}
         image-description=${args.imageDescription}
         background-color=${args.backgroundColor}
+        theme=${args.theme}
       >
       </c4p-user-avatar>
     `;

@@ -106,36 +106,34 @@ describe('c4p-side-panel', () => {
     // ensure the preventCloseOnClickOutside property is disabled
     expect(sidePanel?.preventCloseOnClickOutside).toBeFalsy();
 
-    if (overlayElement) {
-      // add event listener `cds-side-panel-beingclosed` event
-      const eventBeforeClose = oneEvent(
-        sidePanel,
-        // getting event name ie., `cds-side-panel-beingclosed`
-        (sidePanel as any).constructor.eventBeforeClose
-      );
-      // add event listener `cds-side-panel-closed` event
-      const eventClose = oneEvent(
-        sidePanel,
-        // getting event name ie., `cds-side-panel-closed`
-        (sidePanel as any).constructor.eventClose
-      );
-      // dispatch `cds-side-panel-beingclosed` event on overlay element click
-      overlayElement?.dispatchEvent(new Event('click'));
+    // add event listener `cds-side-panel-beingclosed` event
+    const eventBeforeClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-beingclosed`
+      (sidePanel as any).constructor.eventBeforeClose
+    );
+    // add event listener `cds-side-panel-closed` event
+    const eventClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-closed`
+      (sidePanel as any).constructor.eventClose
+    );
+    // dispatch `cds-side-panel-beingclosed` event on overlay element click
+    overlayElement?.dispatchEvent(new Event('click'));
 
-      // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
-      // and take the details of events
-      const { detail: beforeCloseDetail } = await eventBeforeClose;
-      const { detail: closeDetail } = await eventClose;
+    // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
+    // and take the details of events
+    const { detail: beforeCloseDetail } = await eventBeforeClose;
+    const { detail: closeDetail } = await eventClose;
 
-      // make sure both events are triggered by overlay element
-      expect(beforeCloseDetail?.triggeredBy).toBe(overlayElement);
-      expect(closeDetail?.triggeredBy).toBe(overlayElement);
+    // make sure both events are triggered by overlay element
+    expect(beforeCloseDetail?.triggeredBy).toBe(overlayElement);
+    expect(closeDetail?.triggeredBy).toBe(overlayElement);
 
-      // expect the side panel is closed
-      expect(sidePanel?.open).toBeFalsy();
-      // expect overlay also closed
-      expect(overlayElement?.hasAttribute('open')).toBeFalsy();
-    }
+    // expect the side panel is closed
+    expect(sidePanel?.open).toBeFalsy();
+    // expect overlay also closed
+    expect(overlayElement?.hasAttribute('open')).toBeFalsy();
   });
 
   it('should close side panel on escape keydown', async () => {
@@ -166,6 +164,45 @@ describe('c4p-side-panel', () => {
     // make sure both events are triggered from document
     expect(beforeCloseDetail?.triggeredBy).toBe(document);
     expect(closeDetail?.triggeredBy).toBe(document);
+
+    // expect the side panel is closed
+    expect(sidePanel?.open).toBeFalsy();
+  });
+
+  it('should close side panel on the close button click', async () => {
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+
+    expect(sidePanel?.open).toBeTruthy();
+    expect(sidePanel?.closeIconDescription).toBe('Close');
+    // get the close button
+    const closeButton = sidePanel.shadowRoot?.querySelector('cds-icon-button');
+    // ensure the close button is present
+    expect(closeButton).toBeDefined();
+
+    // add event listener `cds-side-panel-beingclosed` event
+    const eventBeforeClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-beingclosed`
+      (sidePanel as any).constructor.eventBeforeClose
+    );
+    // add event listener `cds-side-panel-closed` event
+    const eventClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-closed`
+      (sidePanel as any).constructor.eventClose
+    );
+
+    // click on the close button
+    closeButton?.dispatchEvent(new Event('click'));
+
+    // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
+    // and take the details of events
+    const { detail: beforeCloseDetail } = await eventBeforeClose;
+    const { detail: closeDetail } = await eventClose;
+
+    // make sure both events are triggered by overlay element
+    expect(beforeCloseDetail?.triggeredBy).toBe(closeButton);
+    expect(closeDetail?.triggeredBy).toBe(closeButton);
 
     // expect the side panel is closed
     expect(sidePanel?.open).toBeFalsy();

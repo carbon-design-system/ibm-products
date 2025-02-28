@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, expect, it } from 'vitest';
-import { html, fixture } from '@open-wc/testing';
+vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
+import { expect, describe, it, vi } from 'vitest';
+import { fixture, html } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 import './index';

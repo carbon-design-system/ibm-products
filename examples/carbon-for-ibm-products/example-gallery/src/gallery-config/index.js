@@ -65,6 +65,8 @@ import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
 import imageReact16Example from './react-16-example--thumbnail.png';
 import imageReact17Example from './react-17-example--thumbnail.png';
+import InlineTipWithAnimatedMediaImage from './InlineTipWithAnimatedMedia--thumbnail.png';
+import CoachmarkWithAnimatedMediaImage from './CoachmarkWithAnimatedMedia--thumbnail.png';
 const config = [
   {
     label: 'API Key Modal',
@@ -110,11 +112,6 @@ const config = [
   {
     label: 'Coachmark-Overlay-Elements',
     directory: 'CoachmarkOverlayElements',
-    thumbnail: `url(${imageCoachmarkOverlayElements}`,
-  },
-  {
-    label: 'Coachmark-With-Animated-Media',
-    directory: 'CoachmarkWithAnimatedMedia',
     thumbnail: `url(${imageCoachmarkOverlayElements}`,
   },
   {
@@ -339,6 +336,18 @@ const config = [
     label: 'React 17 example',
     directory: 'react-17-example',
     thumbnail: `url(${imageReact17Example}`,
+  },
+
+  {
+    label: 'Coachmark-With-Animated-Media',
+    directory: 'CoachmarkWithAnimatedMedia',
+    thumbnail: `url(${CoachmarkWithAnimatedMediaImage}`,
+  },
+
+  {
+    label: 'Inlinetip-With-Animated-Media',
+    directory: 'InlineTipWithAnimatedMedia',
+    thumbnail: `url(${InlineTipWithAnimatedMediaImage}`,
   },
 ];
 

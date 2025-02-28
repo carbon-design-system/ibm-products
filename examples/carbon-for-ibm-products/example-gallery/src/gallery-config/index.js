@@ -113,6 +113,11 @@ const config = [
     thumbnail: `url(${imageCoachmarkOverlayElements}`,
   },
   {
+    label: 'Coachmark-With-Animated-Media',
+    directory: 'CoachmarkOverlayElementsWithAnimatedMedia',
+    thumbnail: `url(${imageCoachmarkOverlayElements}`,
+  },
+  {
     label: 'Coachmark-Stack',
     directory: 'CoachmarkStack',
     thumbnail: `url(${imageCoachmarkStack}`,

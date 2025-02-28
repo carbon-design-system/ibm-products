@@ -1,0 +1,12 @@
+{
+  "label": "Coachmark-Overlay-Elements-Animated-Media",
+  "package-config": {
+    "flags": {
+      "component": {
+        "CoachmarkOverlayElements": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

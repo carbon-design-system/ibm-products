@@ -1,13 +1,4 @@
-// cspell:words grafana
-
 import React from 'react';
-
-// ----------------------------------------------------
-// This is an example showing use of the
-// AboutModal component
-// from the @carbon/ibm-products component library.
-// ----------------------------------------------------
-
 import {
   CoachmarkOverlayElements,
   Coachmark,
@@ -29,10 +20,7 @@ const Anim2 = new URL(
 export const Example = () => {
   return (
     <Coachmark
-      align={'bottom'}
-      positionTune={{ x: 0, y: 0 }}
       target={<CoachmarkBeacon label="Show information" kind={'default'} />}
-      //theme={theme}
     >
       <CoachmarkOverlayElements
         renderMedia={({ playStep }) => (

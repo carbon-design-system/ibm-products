@@ -1,11 +1,3 @@
-/**
- * Copyright IBM Corp. 2023, 2024
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// Import portions of React that are needed.
 import React, {
   ForwardedRef,
   useEffect,
@@ -14,13 +6,6 @@ import React, {
   MutableRefObject,
 } from 'react';
 import lottie, { type AnimationItem } from 'lottie-web';
-
-//import { clamp } from '../../global/js/utils/clamp';
-
-
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = 'stepped-animated-media';
-const componentName = 'SteppedAnimatedMedia';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
@@ -44,14 +29,10 @@ export interface SteppedAnimatedMediaProps {
   playStep?: number;
 }
 
-/**
- * The SteppedAnimatedMedia is an Onboarding internal component and is not intended for general use.
- */
 export const SteppedAnimatedMedia = React.forwardRef(
   (
     {
       className,
-      /* TODO: add other props for SteppedAnimatedMedia, with default values if needed */
       playStep = defaults.playStep,
       filePaths,
       ...rest
@@ -111,11 +92,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
       return null;
     }
 
-    const clamp = (
-      value: number,
-      min: number,
-      max: number
-    ): number => {
+    const clamp = (value: number, min: number, max: number): number => {
       if (isNaN(value) || isNaN(min) || isNaN(max)) {
         return;
       }
@@ -129,13 +106,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
     };
 
     return (
-      <div
-        {...rest}
-        className={`${className} ${blockClass}`}
-        role="img"
-        ref={localRef}
-      />
+      <div {...rest} className={`${className}`} role="img" ref={localRef} />
     );
   }
 );
-

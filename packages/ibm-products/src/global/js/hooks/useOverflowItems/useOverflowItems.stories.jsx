@@ -8,9 +8,9 @@
 import React, { useRef, useState } from 'react';
 import { useOverflowItems } from './useOverflowItems';
 import { Tag, Slider } from '@carbon/react';
-import { Annotation } from '../../../../../core/.storybook/Annotation';
+import { Annotation } from '../../../../../../core/.storybook/Annotation';
 import { FitToWidth } from '@carbon/react/icons';
-import './_useOverflowItems.scss';
+import './_storybook-styles.scss';
 
 export default {
   title: 'Hooks/useOverflowItems',

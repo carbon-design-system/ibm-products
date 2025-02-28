@@ -138,5 +138,36 @@ describe('c4p-side-panel', () => {
     }
   });
 
-  it('', async () => {});
+  it('should close side panel on escape keydown', async () => {
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+
+    expect(sidePanel?.open).toBeTruthy();
+
+    // add event listener `cds-side-panel-beingclosed` event
+    const eventBeforeClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-beingclosed`
+      (sidePanel as any).constructor.eventBeforeClose
+    );
+    // add event listener `cds-side-panel-closed` event
+    const eventClose = oneEvent(
+      sidePanel,
+      // getting event name ie., `cds-side-panel-closed`
+      (sidePanel as any).constructor.eventClose
+    );
+    // dispatch `cds-side-panel-beingclosed` event on overlay element click
+    document?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+    // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
+    // and take the details of events
+    const { detail: beforeCloseDetail } = await eventBeforeClose;
+    const { detail: closeDetail } = await eventClose;
+
+    // make sure both events are triggered from document
+    expect(beforeCloseDetail?.triggeredBy).toBe(document);
+    expect(closeDetail?.triggeredBy).toBe(document);
+
+    // expect the side panel is closed
+    expect(sidePanel?.open).toBeFalsy();
+  });
 });

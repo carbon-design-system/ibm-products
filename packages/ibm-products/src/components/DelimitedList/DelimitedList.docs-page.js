@@ -12,6 +12,7 @@ import * as stories from './DelimitedList.stories';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref=""
     blocks={[
       {
         story: stories.delimited,

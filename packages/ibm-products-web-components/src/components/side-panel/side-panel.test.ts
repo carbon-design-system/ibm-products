@@ -7,11 +7,13 @@
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { expect, describe, it, vi } from 'vitest';
-import { fixture, html, oneEvent } from '@open-wc/testing';
+import { fixture, html, nextFrame, oneEvent } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 import './index';
 import CDSSidePanel from './side-panel';
+
+import '@carbon/web-components/es/components/text-input/index.js';
 
 const defaultProps = {
   animateTitle: true,
@@ -29,7 +31,22 @@ const defaultProps = {
 
 const blockClass = `${prefix}--side-panel`;
 
-const template = (props = defaultProps) => html`
+const getContent = (index?: number) => {
+  switch (index) {
+    case 1:
+      return html`
+        <h5>Section</h5>
+        <cds-text-input
+          label="Input A"
+          id="side-panel-text-input-a"
+        ></cds-text-input>
+      `;
+    default:
+      return html`content`;
+  }
+};
+
+const template = (props = defaultProps, children = getContent()) => html`
   <c4p-side-panel
     ?animate-title=${props.animateTitle}
     ?include-overlay=${props.includeOverlay && !props.slideIn}
@@ -43,7 +60,7 @@ const template = (props = defaultProps) => html`
     ?slide-in=${props.slideIn}
     .title=${props.title}
   >
-    content
+    ${children}
   </c4p-side-panel>
 `;
 
@@ -118,7 +135,7 @@ describe('c4p-side-panel', () => {
       // getting event name ie., `cds-side-panel-closed`
       (sidePanel as any).constructor.eventClose
     );
-    // dispatch `cds-side-panel-beingclosed` event on overlay element click
+    // dispatch `cds-side-panel-beingclosed` and `cds-side-panel-closed` events on overlay element click
     overlayElement?.dispatchEvent(new Event('click'));
 
     // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
@@ -153,7 +170,7 @@ describe('c4p-side-panel', () => {
       // getting event name ie., `cds-side-panel-closed`
       (sidePanel as any).constructor.eventClose
     );
-    // dispatch `cds-side-panel-beingclosed` event on overlay element click
+    // press the escape key
     document?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
 
     // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
@@ -206,5 +223,39 @@ describe('c4p-side-panel', () => {
 
     // expect the side panel is closed
     expect(sidePanel?.open).toBeFalsy();
+  });
+
+  it('should focus the first element', async () => {
+    const sidePanel = (await fixture(
+      template(defaultProps, getContent(1))
+    )) as CDSSidePanel;
+
+    // make sure the the sidePanel is open
+    expect(sidePanel?.open).toBeTruthy();
+    expect(sidePanel).toBeDefined();
+
+    // get the input element `side-panel-text-input-a`
+    const inputA = sidePanel?.querySelector('#side-panel-text-input-a');
+    // wait for the DOM to fully populate
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    // make sure the current focus is on input-a
+    expect(document.activeElement).toBe(inputA);
+  });
+
+  it('should focus the first element and switch to close button', async () => {
+    const sidePanel = (await fixture(
+      template(defaultProps, getContent(1))
+    )) as CDSSidePanel;
+
+    // make sure the the sidePanel is open
+    expect(sidePanel?.open).toBeTruthy();
+    expect(sidePanel).toBeDefined();
+
+    // get the input element `side-panel-text-input-a`
+    const inputA = sidePanel?.querySelector('#side-panel-text-input-a');
+    // wait for the DOM to fully populate
+    await nextFrame();
+    // make sure the current focus is on input-a
+    expect(document.activeElement).toBe(inputA);
   });
 });

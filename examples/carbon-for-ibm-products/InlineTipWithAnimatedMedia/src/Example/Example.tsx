@@ -13,10 +13,10 @@ const InlineTipAnimation = new URL(
 export const Example = () => {
   return (
     <InlineTip
-    renderMedia={({ playStep }) => (
+    renderMedia={() => (
       <SteppedAnimatedMedia
         filePaths={[InlineTipAnimation]}
-        playStep={playStep}
+        playStep={1}
       />
     )}
   />

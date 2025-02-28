@@ -1,6 +1,7 @@
 import { ArgTypes, Markdown, Meta } from '@storybook/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as UserAvatarStories from './user-avatar.stories';
+import headshot from './_story-assets/headshot.jpg';
 
 <Meta of={UserAvatarStories} />
 
@@ -8,10 +9,15 @@ import * as UserAvatarStories from './user-avatar.stories';
 
 User avatars are a representation of a user or group of users. They can be used to identify a user or indicate collaborators.
 
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/user-avatar)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/user-avatar)
+
 ## Note on theming
 
-The user avatar supports all the 4 theme variants from carbon (white, g10, g90 and g100).
-The backgroundColor and font color will adapt dynamically based on the lighter and darker themes.
+The backgroundColor and font color will adapt dynamically based on the `theme` prop.
 
 ## Getting started
 
@@ -21,16 +27,22 @@ Here's a quick example to get you started.
 
 ```javascript
 import '@carbon/ibm-products-web-components/es/components/user-avatar/index.js';
+
 ```
 
 
 ### HTML
 
+### Default
+
 ```html
-<c4p-user-avatar>
-  <!-- Content -->
-  <h5>User-avatar</h5>
-</c4p-user-avatar>
+ <c4p-user-avatar
+  name= 'Thomas J. Watson'
+  backgroundColor='order-11-purple'
+  size="lg"
+  tooltip-text='TW, Thomas J. Watson user profile'
+  tooltip-alignment="right"
+></c4p-user-avatar>
 ```
 
 ## `<c4p-user-avatar>` attributes, properties and events

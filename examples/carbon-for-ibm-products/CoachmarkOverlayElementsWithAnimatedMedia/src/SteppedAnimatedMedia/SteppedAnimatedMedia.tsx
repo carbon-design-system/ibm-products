@@ -115,7 +115,7 @@ export const SteppedAnimatedMedia = React.forwardRef(
       value: number,
       min: number,
       max: number
-    ): number | void => {
+    ): number => {
       if (isNaN(value) || isNaN(min) || isNaN(max)) {
         return;
       }

@@ -36,6 +36,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { timeAgo } from './utils';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
@@ -47,22 +48,33 @@ type DateTimeStyles = 'long' | 'short' | 'narrow';
 
 // Default values for props
 const defaults = {
-  dateTimeLocale: DefaultLocale,
   dateTimeStyle: 'long' as DateTimeStyles,
+  daysAgoText: (value) => `${value} days ago`,
   dismissAllLabel: 'Dismiss all',
   dismissSingleNotificationIconDescription: 'Dismiss',
   doNotDisturbLabel: 'Do not disturb',
   emptyStateLabel: 'You do not have any notifications',
+  hourAgoText: (value) => `${value} hour ago`,
+  hoursAgoText: (value) => `${value} hours ago`,
   illustrationTheme: 'light' as Themes,
+  minuteAgoText: (value) => `${value} minute ago`,
+  minutesAgoText: (value) => `${value} minutes ago`,
+  monthAgoText: (value) => `${value} month ago`,
+  monthsAgoText: (value) => `${value} months ago`,
+  nowText: 'Now',
   onDismissAllNotifications: () => {},
   onDismissSingleNotification: () => {},
   previousLabel: 'Previous',
   readLessLabel: 'Read less',
   readMoreLabel: 'Read more',
+  secondsAgoText: (value) => `${value} seconds ago`,
   settingsIconDescription: 'Settings',
   title: 'Notifications',
   todayLabel: 'Today',
   viewAllLabel: (value: string | number) => `View all (${value})`,
+  yearAgoText: (value) => `${value} year ago`,
+  yearsAgoText: (value) => `${value} years ago`,
+  yesterdayAtText: (value) => `Yesterday at ${value}`,
   yesterdayLabel: 'Yesterday',
 };
 
@@ -95,15 +107,24 @@ export interface NotificationsPanelProps {
 
   /**
    * The language for each notification's time stamp.
+   * Used with `dateTimeStyle`.
    */
   dateTimeLocale?: string;
 
   /**
    * The date/time format for each notification's time stamp.
+   * Used with `dateTimeLocale`.
    *
    * E.g. `long` as "6 minutes ago", `short` as "6m ago".
    */
   dateTimeStyle?: DateTimeStyles;
+
+  /**
+   * Sets the `days ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  daysAgoText?: (value: number) => string;
 
   /**
    * Label for Dismiss all button
@@ -131,9 +152,58 @@ export interface NotificationsPanelProps {
   emptyStateLabel?: string;
 
   /**
+   * Sets the `hour ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  hourAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `hours ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  hoursAgoText?: (value: number) => string;
+
+  /**
    * Determines the theme of the empty state's illustration.
    */
   illustrationTheme: Themes;
+
+  /**
+   * Sets the `minute ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  minuteAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `minutes ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  minutesAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `month ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  monthAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `months ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  monthsAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `now` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  nowText?: string;
 
   /**
    * Optional function called after clicking outside of the panel.
@@ -186,6 +256,13 @@ export interface NotificationsPanelProps {
   readMoreLabel?: string;
 
   /**
+   * Sets the `seconds ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  secondsAgoText?: (value: number) => string;
+
+  /**
    * Sets the settings icon description text
    */
   settingsIconDescription?: string;
@@ -211,6 +288,27 @@ export interface NotificationsPanelProps {
   viewAllLabel?: (value: number) => string;
 
   /**
+   * Sets the `year ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  yearAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `years ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  yearsAgoText?: (value: number) => string;
+
+  /**
+   * Sets the `Yesterday at` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
+   */
+  yesterdayAtText?: (value: number) => string;
+
+  /**
    * Sets the yesterday label text
    */
   yesterdayLabel?: string;
@@ -224,14 +322,22 @@ export let NotificationsPanel = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
       className,
       data,
-      dateTimeLocale = defaults.dateTimeLocale,
+      dateTimeLocale,
       dateTimeStyle = defaults.dateTimeStyle,
+      daysAgoText = defaults.daysAgoText,
       dismissAllLabel = defaults.dismissAllLabel,
       dismissSingleNotificationIconDescription = defaults.dismissSingleNotificationIconDescription,
       doNotDisturbDefaultToggled,
       doNotDisturbLabel = defaults.doNotDisturbLabel,
       emptyStateLabel = defaults.emptyStateLabel,
+      hourAgoText = defaults.hourAgoText,
+      hoursAgoText = defaults.hoursAgoText,
       illustrationTheme = defaults.illustrationTheme,
+      minuteAgoText = defaults.minuteAgoText,
+      minutesAgoText = defaults.minutesAgoText,
+      monthAgoText = defaults.monthAgoText,
+      monthsAgoText = defaults.monthsAgoText,
+      nowText = defaults.nowText,
       onClickOutside,
       onDismissAllNotifications = defaults.onDismissAllNotifications,
       onDismissSingleNotification = defaults.onDismissSingleNotification,
@@ -242,10 +348,14 @@ export let NotificationsPanel = React.forwardRef(
       previousLabel = defaults.previousLabel,
       readLessLabel = defaults.readLessLabel,
       readMoreLabel = defaults.readMoreLabel,
+      secondsAgoText = defaults.secondsAgoText,
       settingsIconDescription = defaults.settingsIconDescription,
       title = defaults.title,
       todayLabel = defaults.todayLabel,
       viewAllLabel = defaults.viewAllLabel,
+      yearAgoText = defaults.yearAgoText,
+      yearsAgoText = defaults.yearsAgoText,
+      yesterdayAtText = defaults.yesterdayAtText,
       yesterdayLabel = defaults.yesterdayLabel,
       triggerButtonRef,
       // Collect any other property values passed in.
@@ -504,10 +614,31 @@ export let NotificationsPanel = React.forwardRef(
           )}
           <div className={`${blockClass}__notification-content`}>
             <p className={`${blockClass}__notification-time-label`}>
-              {dateTimeFormat.relative.format(notification.timestamp, {
-                locale: supportedLocale,
-                style: dateTimeStyle,
-              })}
+              {/**
+               * If the new dateTimeLocale has been passed a value,
+               * then use the new dateTimeFormat.relative.format(),
+               * else use the deprecated timeAgo().
+               */}
+              {dateTimeLocale
+                ? dateTimeFormat.relative.format(notification.timestamp, {
+                    locale: supportedLocale,
+                    style: dateTimeStyle,
+                  })
+                : timeAgo({
+                    previousTime: notification.timestamp,
+                    secondsAgoText,
+                    minuteAgoText,
+                    minutesAgoText,
+                    hoursAgoText,
+                    hourAgoText,
+                    daysAgoText,
+                    yesterdayAtText,
+                    monthsAgoText,
+                    monthAgoText,
+                    yearsAgoText,
+                    yearAgoText,
+                    nowText,
+                  })}
             </p>
             <h6 className={notificationHeaderClassName}>
               {notification.title}
@@ -744,6 +875,11 @@ NotificationsPanel.propTypes = {
   dateTimeStyle: PropTypes.string,
 
   /**
+   * Sets the `days ago` label text
+   */
+  daysAgoText: PropTypes.func,
+
+  /**
    * Label for Dismiss all button
    */
   dismissAllLabel: PropTypes.string,
@@ -769,9 +905,44 @@ NotificationsPanel.propTypes = {
   emptyStateLabel: PropTypes.string,
 
   /**
+   * Sets the `hour ago` label text
+   */
+  hourAgoText: PropTypes.func,
+
+  /**
+   * Sets the `hours ago` label text
+   */
+  hoursAgoText: PropTypes.func,
+
+  /**
    * Determines the theme of the empty state's illustration.
    */
   illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+
+  /**
+   * Sets the `minute ago` label text
+   */
+  minuteAgoText: PropTypes.func,
+
+  /**
+   * Sets the `minutes ago` label text
+   */
+  minutesAgoText: PropTypes.func,
+
+  /**
+   * Sets the `month ago` label text
+   */
+  monthAgoText: PropTypes.func,
+
+  /**
+   * Sets the `months ago` label text
+   */
+  monthsAgoText: PropTypes.func,
+
+  /**
+   * Sets the `now` label text
+   */
+  nowText: PropTypes.string,
 
   /**
    * Optional function called after clicking outside of the panel.
@@ -824,6 +995,11 @@ NotificationsPanel.propTypes = {
   readMoreLabel: PropTypes.string,
 
   /**
+   * Sets the `seconds ago` label text
+   */
+  secondsAgoText: PropTypes.func,
+
+  /**
    * Sets the settings icon description text
    */
   settingsIconDescription: PropTypes.string,
@@ -847,6 +1023,21 @@ NotificationsPanel.propTypes = {
    * Sets the View all button text
    */
   viewAllLabel: PropTypes.func,
+
+  /**
+   * Sets the `year ago` label text
+   */
+  yearAgoText: PropTypes.func,
+
+  /**
+   * Sets the `years ago` label text
+   */
+  yearsAgoText: PropTypes.func,
+
+  /**
+   * Sets the `Yesterday at` label text
+   */
+  yesterdayAtText: PropTypes.func,
 
   /**
    * Sets the yesterday label text

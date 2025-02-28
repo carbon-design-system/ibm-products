@@ -131,6 +131,7 @@ const parameters = {
         ['Components', 'Patterns', 'Onboarding'],
         'Utils',
         ['Components'],
+        'Hooks',
         'Deprecated',
       ],
     },

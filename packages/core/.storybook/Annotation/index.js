@@ -23,7 +23,13 @@ const types = {
   },
 };
 
-export const Annotation = ({ className, type, text, children }) => {
+export const Annotation = ({
+  className,
+  type = 'layer',
+  text,
+  children,
+  icon: IconProp,
+}) => {
   const Icon = types[type].icon;
   return (
     <div
@@ -34,7 +40,7 @@ export const Annotation = ({ className, type, text, children }) => {
       )}
     >
       <div className={`${pkg.prefix}--annotation__label`}>
-        <Icon />
+        {IconProp ? <IconProp /> : <Icon />}
         {text}
       </div>
       <div className={`${pkg.prefix}--annotation__content`}>{children}</div>

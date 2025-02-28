@@ -19,6 +19,11 @@ $types: (
     background: tag.$tag-background-teal,
     color: tag.$tag-color-teal,
   ),
+  'layer': (
+    border: colors.$purple-40,
+    background: tag.$tag-background-purple,
+    color: tag.$tag-color-purple,
+  ),
 );
 
 .#{$pkg-prefix}--annotation {

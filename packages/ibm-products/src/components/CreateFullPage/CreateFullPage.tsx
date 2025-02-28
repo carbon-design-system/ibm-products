@@ -13,11 +13,13 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Section,
   Tooltip,
 } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
+  HTMLAttributes,
   ReactNode,
   createContext,
   useEffect,
@@ -200,10 +202,17 @@ type CreateFullPageBaseProps = {
    * The main title of the full page, displayed in the header area
    */
   title?: string;
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 };
 
 export type CreateFullPageProps = CreateFullPageBaseProps &
-  CreateFullPageBreadcrumbsProps;
+  CreateFullPageBreadcrumbsProps &
+  HTMLAttributes<HTMLDivElement>;
 
 interface Step {
   introStep?: boolean;
@@ -248,6 +257,7 @@ export let CreateFullPage = React.forwardRef(
       title,
       secondaryTitle,
       breadcrumbOverflowTooltipAlign = 'right',
+      headingLevel,
       ...rest
     }: CreateFullPageProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -340,9 +350,10 @@ export let CreateFullPage = React.forwardRef(
     // currently, we are not supporting the use of 'view all' toggle state
     /* istanbul ignore next */
     return (
-      <div
+      <Section
         {...rest}
         ref={ref}
+        level={headingLevel}
         className={cx(blockClass, className)}
         {...getDevtoolsProps(componentName)}
       >
@@ -429,7 +440,7 @@ export let CreateFullPage = React.forwardRef(
             </ModalFooter>
           </ComposedModal>
         </div>
-      </div>
+      </Section>
     );
   }
 );
@@ -496,6 +507,12 @@ CreateFullPage.propTypes = {
    * Specifies elements to focus on first on render.
    */
   firstFocusElement: PropTypes.string,
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
 
   /**
    * This can be used to open the component to a step other than the first step.

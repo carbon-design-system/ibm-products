@@ -68,6 +68,7 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
+    "@carbon/utilities": "^0.4.0",
     "lottie-web": "^5.12.2"
   }
 }

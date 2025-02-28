@@ -33,6 +33,44 @@ const dataOptions = {
   'Empty data set': [],
 };
 
+const dateTimeLocaleOptions = {
+  undefined: undefined,
+  bg: 'bg',
+  cs: 'cs',
+  'da-DK': 'da-DK',
+  'de-CH': 'de-CH',
+  de: 'de',
+  'en-AU': 'en-AU',
+  'en-GB': 'en-GB',
+  'en-US': 'en-US',
+  'en-ZA': 'en-ZA',
+  'es-ES': 'es-ES',
+  es: 'es',
+  et: 'et',
+  fi: 'fi',
+  'fr-CA': 'fr-CA',
+  'fr-CH': 'fr-CH',
+  fr: 'fr',
+  hu: 'hu',
+  it: 'it',
+  ja: 'ja',
+  lv: 'lv',
+  'nl-BE': 'nl-BE',
+  'nl-NL': 'nl-NL',
+  no: 'no',
+  pl: 'pl',
+  'pt-BR': 'pt-BR',
+  'pt-PT': 'pt-PT',
+  'ru-UA': 'ru-UA',
+  ru: 'ru',
+  sk: 'sk',
+  sl: 'sl',
+  th: 'th',
+  tr: 'tr',
+  'uk-UA': 'uk-UA',
+  vi: 'vi',
+};
+
 export default {
   title: 'IBM Products/Components/Notifications panel/NotificationsPanel',
   component: NotificationsPanel,
@@ -40,12 +78,24 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
+    percy: {
+      waitForTimeout: 1000,
+    },
   },
   argTypes: {
     data: {
       control: { type: 'select', labels: Object.keys(dataOptions) },
       options: Object.values(dataOptions).map((_k, i) => i),
       mapping: Object.values(dataOptions),
+    },
+    dateTimeLocale: {
+      control: { type: 'select', labels: Object.keys(dateTimeLocaleOptions) },
+      options: Object.values(dateTimeLocaleOptions).map((_k, i) => i),
+      mapping: Object.values(dateTimeLocaleOptions),
+    },
+    dateTimeStyle: {
+      options: ['long', 'short', 'narrow'],
+      control: { type: 'radio' },
     },
     docs: {
       page: () => (
@@ -57,6 +107,8 @@ export default {
 
 const defaultProps = {
   data: 0,
+  dateTimeLocale: 0,
+  dateTimeStyle: 'long',
   open: true,
   onDoNotDisturbChange: action('Toggled "Do not disturb"'),
   onViewAllClick: action('Clicked "View all"'),

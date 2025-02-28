@@ -14,6 +14,7 @@ import './index';
 import CDSSidePanel from './side-panel';
 
 import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 
 const defaultProps = {
   animateTitle: true,
@@ -45,6 +46,24 @@ const getContent = (index?: number) => {
       return html`content`;
   }
 };
+
+const getSlug = () =>
+  html`<cds-slug size="xs" alignment="bottom-right">
+    <div slot="body-text">
+      <p class="secondary">AI Explained</p>
+      <h1>84%</h1>
+      <p class="secondary bold">Confidence score</p>
+      <!-- //cspell: disable -->
+      <p class="secondary">
+        Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      </p>
+      <!-- //cspell: enable -->
+      <hr />
+      <p class="secondary">Model type</p>
+      <p class="bold">Foundation model</p>
+    </div>
+  </cds-slug>`;
 
 const template = (props = defaultProps, children = getContent()) => html`
   <c4p-side-panel
@@ -242,20 +261,20 @@ describe('c4p-side-panel', () => {
     expect(document.activeElement).toBe(inputA);
   });
 
-  it('should focus the first element and switch to close button', async () => {
+  it('should render a slug', async () => {
     const sidePanel = (await fixture(
-      template(defaultProps, getContent(1))
+      template(defaultProps, getSlug())
     )) as CDSSidePanel;
 
-    // make sure the the sidePanel is open
     expect(sidePanel?.open).toBeTruthy();
-    expect(sidePanel).toBeDefined();
+    // ensure there is a slug present
+    expect(sidePanel?._hasSlug).toBeTruthy();
 
-    // get the input element `side-panel-text-input-a`
-    const inputA = sidePanel?.querySelector('#side-panel-text-input-a');
-    // wait for the DOM to fully populate
-    await nextFrame();
-    // make sure the current focus is on input-a
-    expect(document.activeElement).toBe(inputA);
+    // locate slug element
+    const slug = sidePanel.querySelector('cds-slug') as any;
+    // expect the slug element is present
+    expect(slug).toBeDefined();
+    // expect the default slug size is xs
+    expect(slug.size).toBe('xs');
   });
 });

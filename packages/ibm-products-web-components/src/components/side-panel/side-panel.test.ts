@@ -7,10 +7,11 @@
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
 import { expect, describe, it, vi } from 'vitest';
-import { fixture, html } from '@open-wc/testing';
+import { fixture, html, oneEvent } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 import './index';
+import CDSSidePanel from './side-panel';
 
 const defaultProps = {
   animateTitle: true,
@@ -48,27 +49,77 @@ const template = (props = defaultProps) => html`
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {
-    await fixture(template());
-    const elem = document.body.querySelector('c4p-side-panel' as any);
-    expect(elem).toBeDefined();
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+
+    expect(sidePanel?.open).toBeTruthy();
+    expect(sidePanel).toBeDefined();
   });
 
   it('should render a side panel on the left', async () => {
-    const el = await fixture(
+    const sidePanel = (await fixture(
       template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT })
-    );
-    const elem = document.body.querySelector('c4p-side-panel');
-    expect(elem).toBeDefined();
-    const placement = el?.getAttribute('placement');
-    expect(placement).toBe('left');
+    )) as CDSSidePanel;
 
-    const dialogShadowEl = el?.shadowRoot?.querySelectorAll(
+    expect(sidePanel?.placement).toBe('left');
+
+    const dialogShadowEl = sidePanel?.shadowRoot?.querySelectorAll(
       `.${blockClass}`
     )?.[0];
 
     if (dialogShadowEl) {
       const transform = window.getComputedStyle(dialogShadowEl)?.transform;
       expect(transform).toBe('matrix(1, 0, 0, 1, -414, 0)');
+    }
+  });
+
+  it('should render a side panel with overlay and close when clicked outside', async () => {
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+
+    // Expect the side panel has include-overlay attribute
+    expect(sidePanel?.includeOverlay).toBeTruthy();
+
+    // get the overlay element by class .c4p--side-panel__overlay
+    const overlayElement = sidePanel?.shadowRoot?.querySelectorAll(
+      `.${blockClass}__overlay`
+    )?.[0];
+    // expect the element is present
+    expect(overlayElement).toBeDefined();
+    // ensure its tab index is -1
+    expect(overlayElement?.getAttribute('tabindex')).toBe('-1');
+    // ensure open attribute present
+    expect(overlayElement?.hasAttribute('open')).toBeTruthy();
+    // ensure the preventCloseOnClickOutside property is disabled
+    expect(sidePanel?.preventCloseOnClickOutside).toBeFalsy();
+
+    if (overlayElement) {
+      // add event listener `cds-side-panel-beingclosed` event
+      const eventBeforeClose = oneEvent(
+        sidePanel,
+        // getting event name ie., `cds-side-panel-beingclosed`
+        (sidePanel as any).constructor.eventBeforeClose
+      );
+      // add event listener `cds-side-panel-closed` event
+      const eventClose = oneEvent(
+        sidePanel,
+        // getting event name ie., `cds-side-panel-closed`
+        (sidePanel as any).constructor.eventClose
+      );
+      // dispatch `cds-side-panel-beingclosed` event on overlay element click
+      overlayElement?.dispatchEvent(new Event('click'));
+
+      // listen to `cds-side-panel-beingclosed` and `cds-side-panel-closed` event
+      // and take the details of events
+      const { detail: beforeCloseDetail } = await eventBeforeClose;
+      const { detail: closeDetail } = await eventClose;
+
+      // make sure both events are triggered by overlay element
+      expect(beforeCloseDetail?.triggeredBy).toBe(overlayElement);
+      expect(closeDetail?.triggeredBy).toBe(overlayElement);
+
+      // expect the side panel is closed
+      expect(sidePanel?.open).toBeFalsy();
+      // expect overlay also closed
+      expect(overlayElement?.hasAttribute('open')).toBeFalsy();
     }
   });
 });

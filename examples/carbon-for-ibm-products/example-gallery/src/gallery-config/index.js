@@ -114,7 +114,7 @@ const config = [
   },
   {
     label: 'Coachmark-With-Animated-Media',
-    directory: 'CoachmarkOverlayElementsWithAnimatedMedia',
+    directory: 'CoachmarkWithAnimatedMedia',
     thumbnail: `url(${imageCoachmarkOverlayElements}`,
   },
   {

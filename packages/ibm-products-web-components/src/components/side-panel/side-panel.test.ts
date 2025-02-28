@@ -72,6 +72,21 @@ describe('c4p-side-panel', () => {
     }
   });
 
+  it('should render a side panel on the right', async () => {
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
+
+    expect(sidePanel?.placement).toBe('right');
+
+    const dialogShadowEl = sidePanel?.shadowRoot?.querySelectorAll(
+      `.${blockClass}`
+    )?.[0];
+
+    if (dialogShadowEl) {
+      const transform = window.getComputedStyle(dialogShadowEl)?.transform;
+      expect(transform).toBe('matrix(1, 0, 0, 1, 414, 0)');
+    }
+  });
+
   it('should render a side panel with overlay and close when clicked outside', async () => {
     const sidePanel = (await fixture(template())) as CDSSidePanel;
 
@@ -122,4 +137,6 @@ describe('c4p-side-panel', () => {
       expect(overlayElement?.hasAttribute('open')).toBeFalsy();
     }
   });
+
+  it('', async () => {});
 });

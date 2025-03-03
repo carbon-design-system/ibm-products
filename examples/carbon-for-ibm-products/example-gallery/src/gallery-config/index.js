@@ -349,6 +349,11 @@ const config = [
     directory: 'InlineTipWithAnimatedMedia',
     thumbnail: `url(${InlineTipWithAnimatedMediaImage}`,
   },
+  {
+    label: 'Interstitial-With-Animated-Media',
+    directory: 'InterstitialScreenWithAnimatedMedia',
+    thumbnail: `url(${InlineTipWithAnimatedMediaImage}`,
+  },
 ];
 
 export default config;

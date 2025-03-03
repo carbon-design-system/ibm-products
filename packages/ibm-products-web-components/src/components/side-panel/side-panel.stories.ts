@@ -61,7 +61,7 @@ const contents = {
 
 const storyPrefix = 'side-panel-stories__';
 
-const getContent = (index) => {
+export const getContent = (index) => {
   switch (index) {
     case 1:
       return html`
@@ -168,7 +168,7 @@ const actionToolbarItems = {
   'With action toolbar': 1,
 };
 
-const getActionToolbarItems = (index) => {
+export const getActionToolbarItems = (index) => {
   switch (index) {
     case 1:
       return html`
@@ -277,7 +277,7 @@ const slugs = {
   'With Slug': 1,
 };
 
-const getSlug = (index) => {
+export const getSlug = (index) => {
   switch (index) {
     case 1:
       return html`<cds-slug size="xs" alignment="bottom-right">

@@ -3,10 +3,9 @@
   "package-config": {
     "flags": {
       "component": {
-        "CoachmarkOverlayElements": true,
-        "Coachmark":true,
-        "CoachmarkOverlayElement":true,
-        "CoachmarkBeacon":true
+        "InterstitialScreen": true,
+        "InterstitialScreenView": true,
+        "InterstitialScreenViewModule": true
       }
     }
   },

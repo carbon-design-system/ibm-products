@@ -4,7 +4,7 @@ import { InlineTip } from '@carbon/ibm-products';
 import './_example.scss';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia/SteppedAnimatedMedia';
 const InlineTipAnimation = new URL(
-  './storybook_assets/inline-tip-animation',
+  '../SteppedAnimatedMedia/assets/illustrations/inline-tip-animation.json',
   import.meta.url
 ).pathname;
 

@@ -7,9 +7,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Button } from '@carbon/react';
-// import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { ExportModal } from '.';
-// import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
@@ -18,7 +16,6 @@ export default {
   component: ExportModal,
   tags: ['autodocs'],
   parameters: {
-    // styles,
     docs: {
       page: () => (
         <StoryDocsPage

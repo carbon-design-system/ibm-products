@@ -11,7 +11,6 @@ import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
-// import mdx from './TagSet.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -133,7 +132,6 @@ export default {
   component: TagSet,
   tags: ['autodocs'],
   parameters: {
-    // docs: { page: mdx },
     styles,
     percy: {
       waitForTimeout: 1000,

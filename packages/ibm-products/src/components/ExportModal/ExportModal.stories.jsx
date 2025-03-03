@@ -32,7 +32,7 @@ export default {
               label: 'Carbon Modal usage guidelines',
             },
             {
-              href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal--overview',
+              href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal',
               label: 'Carbon Modal documentation',
             },
           ]}

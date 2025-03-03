@@ -13,9 +13,11 @@ import { prefix } from '../../globals/settings';
 import './index';
 import CDSSidePanel from './side-panel';
 import {
+  getActionItems,
   getActionToolbarItems,
   getContent,
   getSlug,
+  getSubTitle,
 } from './side-panel.stories';
 
 import '@carbon/web-components/es/components/text-input/index.js';
@@ -217,26 +219,6 @@ describe('c4p-side-panel', () => {
     expect(sidePanel?.open).toBeFalsy();
   });
 
-  // NOTE: Focus not working properly in SidePanel
-  // TODO: Include a second input this test will fail
-  // TODO: Also this fails sometimes due to timer issue
-  // it('should focus the first element', async () => {
-  //   const sidePanel = (await fixture(
-  //     template(defaultProps, getContent(1))
-  //   )) as CDSSidePanel;
-
-  //   // make sure the the sidePanel is open
-  //   expect(sidePanel?.open).toBeTruthy();
-  //   expect(sidePanel).toBeDefined();
-
-  //   // get the input element `side-panel-text-input-a`
-  //   const inputA = sidePanel?.querySelector('#side-panel-text-input-a');
-  //   // wait for the DOM to fully populate
-  //   await new Promise((resolve) => requestAnimationFrame(resolve));
-  //   // make sure the current focus is on input-a
-  //   expect(document.activeElement).toBe(inputA);
-  // });
-
   it('should render a slug', async () => {
     const sidePanel = (await fixture(
       template(defaultProps, getSlug(1))
@@ -285,15 +267,6 @@ describe('c4p-side-panel', () => {
     expect(overlayElement).not.toBeDefined();
   });
 
-  // TODO: This case failing, due to the animateTitle property is not changing
-  // it('should render a side panel with static title (no title animation)', async () => {
-  //   const sidePanel = (await fixture(
-  //     template({ ...defaultProps, animateTitle: false, label: '' })
-  //   )) as CDSSidePanel;
-
-  //   expect(sidePanel.animateTitle).toBeFalsy();
-  // });
-
   it('should call the eventNavigateBack callback', async () => {
     const prevStep = () => {
       document
@@ -333,6 +306,42 @@ describe('c4p-side-panel', () => {
     // expect the detail object of eventNavigateBack method
     const { detail } = await eventNavigateBack;
     expect(detail).toBeDefined();
+  });
+
+  it('should render subtitle text', async () => {
+    const sidePanel = (await fixture(
+      template(defaultProps, getSubTitle(1))
+    )) as CDSSidePanel;
+
+    const subTitleText = sidePanel?.querySelector(
+      `.${prefix}--side-panel__subtitle-text`
+    );
+
+    expect(subTitleText).toBeDefined();
+  });
+
+  it('should render at least one action item', async () => {
+    const sidePanel = (await fixture(
+      template(defaultProps, getActionItems(1))
+    )) as CDSSidePanel;
+
+    const actionItems = sidePanel.querySelectorAll(
+      `.${prefix}--action-set__action-button`
+    );
+
+    expect(actionItems).toHaveLength(1);
+  });
+
+  it('should render only 3 action items even if too many items exists', async () => {
+    const sidePanel = (await fixture(
+      template(defaultProps, getActionItems(6))
+    )) as CDSSidePanel;
+
+    const actionItems = sidePanel.querySelectorAll(
+      `.${prefix}--action-set__action-button`
+    );
+
+    expect(actionItems).toHaveLength(3);
   });
 
   afterEach(() => {

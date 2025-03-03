@@ -25,6 +25,7 @@ $prefix: 'c4p';
 $carbon-prefix: 'cds';
 
 @use '@carbon/ibm-products-styles/scss/components/Tearsheet/index' as *;
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
 
 $block-class: #{$prefix}--tearsheet;
 $block-class-action-set: #{$prefix}--action-set;

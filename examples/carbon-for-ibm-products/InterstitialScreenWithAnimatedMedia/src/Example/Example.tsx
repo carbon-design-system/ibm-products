@@ -39,6 +39,7 @@ export const Example = () => {
         onClose={() => {
           setShowInterstitialModal(false);
         }}
+        breakpointsWithMedia={{ xlg: 8, lg: 8 }}
         renderMedia={({ playStep }) => (
           <SteppedAnimatedMedia
             filePaths={[

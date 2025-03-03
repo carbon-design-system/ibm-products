@@ -6,7 +6,7 @@
  */
 
 import { RefObject, useRef, useState } from 'react';
-import { useResizeObserver } from './useResizeObserver';
+import { useResizeObserver } from '../useResizeObserver';
 
 type Item = {
   id: string;

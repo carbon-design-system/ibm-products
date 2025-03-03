@@ -27,14 +27,14 @@
 
 @keyframes filter-panel-entrance-left {
   0% {
-    width: 0;
+    inline-size: 0;
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     transform: translateX(calc(var(--panel-transform) * -1));
   }
 
   100% {
-    width: var(--panel-transform);
+    inline-size: var(--panel-transform);
     opacity: 1;
     transform: translateX(0);
   }
@@ -42,13 +42,13 @@
 
 @keyframes filter-panel-exit-left {
   0% {
-    width: var(--panel-transform);
+    inline-size: var(--panel-transform);
     opacity: 1;
     transform: translateX(0);
   }
 
   100% {
-    width: 0;
+    inline-size: 0;
     opacity: 0;
     /* stylelint-disable-next-line carbon/layout-use */
     transform: translateX(calc(var(--panel-transform) * -1));

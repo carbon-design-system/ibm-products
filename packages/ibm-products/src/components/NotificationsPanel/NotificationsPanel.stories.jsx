@@ -21,12 +21,13 @@ import styles from './_storybook-styles.scss?inline';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
 import { pkg } from '../../settings';
-
 import { NotificationsPanel } from '.';
 
-import data from './NotificationsPanel_data';
-
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
+
+import DocsPage from './NotificationsPanel.docs-page';
+
+import data from './NotificationsPanel_data';
 
 const dataOptions = {
   'Sample data set': data,
@@ -80,6 +81,9 @@ export default {
     layout: 'fullscreen',
     percy: {
       waitForTimeout: 1000,
+    },
+    docs: {
+      page: DocsPage,
     },
   },
   argTypes: {

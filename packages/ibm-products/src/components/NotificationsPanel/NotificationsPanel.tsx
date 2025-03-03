@@ -316,6 +316,27 @@ export interface NotificationsPanelProps {
 interface PreviousStateProps {
   open: boolean;
 }
+
+/**
+ * The `NotificationsPanel` sets expectations on the behavior for notifications,
+ * allowing the user to view and interact with them all in one place.
+ *
+ * #### Updated localization feature for the "time ago" timestamp
+ *
+ * The new localization reduces a dev's effort to apply language
+ * support for the "time ago" timestamp applied to each notification
+ * by using the new Carbon utility [dateTimeFormat()](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/dateTimeFormat/README.md) function.
+ * It will provide relative timestamps that adhere to Carbon's
+ * [date and time guidance](https://pages.github.ibm.com/carbon/ibm-products/guidelines/content/date-and-time/).
+ *
+ * **Step 1:** ignore the following _deprecated_ props: `daysAgoText`,
+ * `hourAgoText`, `hoursAgoText`, `minuteAgoText`, `minutesAgoText`,
+ * `monthAgoText`, `monthsAgoText`, `nowText`, `secondsAgoText`,
+ * `yearAgoText`, `yearsAgoText`, `yesterdayAtText`.
+ *
+ * **Step 2:** provide the `dateTimeLocale` prop with a valid locale—such as "de" or "fr-CA"—and it will do the work.
+ * You must provide a value, otherwise the deprecated props above will be used instead.
+ */
 export let NotificationsPanel = React.forwardRef(
   (
     {

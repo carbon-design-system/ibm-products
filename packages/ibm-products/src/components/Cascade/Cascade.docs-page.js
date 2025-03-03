@@ -15,7 +15,7 @@ const DocsPage = () => {
       altGuidelinesHref={[
         {
           href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/',
-          label: 'Cascade overview',
+          label: 'Cascade usage guidelines',
         },
         {
           href: 'https://carbondesignsystem.com/elements/motion/overview/',

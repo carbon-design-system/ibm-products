@@ -6,9 +6,13 @@
  */
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-import { describe, expect, it, vi } from 'vitest';
-import { render, html } from 'lit';
+import { describe, it, vi, expect } from 'vitest';
+import { fixture, html, expect as owcExpect } from '@open-wc/testing';
+import { render } from 'lit';
 import { Kind } from './types';
+import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
+import CDSFullPageError, { blockClass } from './full-page-error';
+import '@testing-library/jest-dom'; // Make sure jest-dom is imported so .toHaveClass don't give type error
 
 const defaultProps = {
   class: 'custom-class',
@@ -39,25 +43,101 @@ const elementName = 'c4p-full-page-error';
 
 describe(elementName, () => {
   it('should render full page error', async () => {
-    render(template(), document.body);
-    await Promise.resolve();
-    const element = document.body.querySelector(elementName);
+    const element = render(template(), document.body);
     expect(element).toBeDefined();
   });
 
+  // Can't figure out how to check a11y with vitest, using open-wc chai dom functions for now
+  it.skip('has no accessibility violations', async () => {
+    const element = await fixture(template());
+    // console.log('element', element.shadowRoot!.querySelector('h1'));
+    owcExpect(element).to.be.accessible();
+  });
+
   it('should render children content', async () => {
-    render(template(), document.body);
-    await Promise.resolve();
-    const element = document.body.querySelector(elementName);
-    expect(element?.hasChildNodes()).toBeTruthy();
+    const childNode = `<p>hello</p>`;
+    const element = await fixture(
+      template({ ...defaultProps, children: childNode })
+    );
+
+    expect(element.textContent?.includes(childNode)).toBe(true);
   });
 
   it('applies a class to the containing node', async () => {
-    const props = { class: 'test-class' };
-    render(template(props), document.body);
-    await Promise.resolve();
-    const element = document.body.querySelector(elementName);
+    const className = 'a-test-class';
+    const element = await fixture(
+      template({ ...defaultProps, class: className })
+    );
 
-    element?.classList.contains('test-class');
+    expect(element.hasAttribute('class')).toBe(true);
+    expect(
+      element.shadowRoot?.querySelector('[role="main"]')?.hasAttribute('class')
+    );
+    expect(element.shadowRoot?.querySelector('[role="main"]')).toHaveClass(
+      className
+    );
+  });
+
+  it('renders an error label', async () => {
+    const element: CDSFullPageError = await fixture(template());
+
+    expect(element.label).toBe(defaultProps.label);
+    expect(
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__label`)
+        ?.textContent?.includes(defaultProps.label)
+    ).toBe(true);
+  });
+
+  it('renders a description', async () => {
+    const element: CDSFullPageError = await fixture(template());
+
+    expect(element.description).toBe(defaultProps.description);
+    expect(
+      element.shadowRoot?.querySelector(`.${blockClass}__description`)
+        ?.textContent
+    ).toBe(defaultProps.description);
+  });
+
+  it('renders a title', async () => {
+    const element: CDSFullPageError = await fixture(template());
+
+    expect(element.title).toBe(defaultProps.title);
+    expect(
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__title`)
+        ?.textContent?.includes(defaultProps.title)
+    ).toBeTruthy();
+  });
+
+  it('renders custom svg illustration if kind is custom', async () => {
+    const element: CDSFullPageError = await fixture(template());
+
+    expect(element.kind).toBe(defaultProps.kind);
+    expect(
+      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
+    ).toHaveClass(`${blockClass}__svg ${blockClass}__custom`);
+  });
+
+  it('renders 404 svg illustration if kind is 404', async () => {
+    const element: CDSFullPageError = await fixture(
+      template({ ...defaultProps, kind: Kind.Error404 })
+    );
+
+    expect(element.kind).toBe(Kind.Error404);
+    expect(
+      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
+    ).toHaveClass(`${blockClass}__svg ${blockClass}__404`);
+  });
+
+  it('renders 403 svg illustration if kind is 403', async () => {
+    const element: CDSFullPageError = await fixture(
+      template({ ...defaultProps, kind: Kind.Error403 })
+    );
+
+    expect(element.kind).toBe(Kind.Error403);
+    expect(
+      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
+    ).toHaveClass(`${blockClass}__svg ${blockClass}__403`);
   });
 });

@@ -145,19 +145,7 @@ describe(componentName, () => {
       componentName
     );
   });
-  it(`renders an image with media prop`, async () => {
-    const user = userEvent.setup();
-    renderCoachmarkWithOverlayElements({
-      'data-testid': dataTestId,
-      media: { render: () => <img alt="img" /> },
-    });
-    const beaconOrButton = screen.getByRole('button', {
-      name: 'Show information',
-    });
-    await act(() => user.click(beaconOrButton));
 
-    expect(screen.getByRole('img')).toBeInTheDocument();
-  });
   it(`renders an image`, async () => {
     const user = userEvent.setup();
     renderCoachmarkWithOverlayElements({

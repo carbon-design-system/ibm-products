@@ -15,7 +15,7 @@ import { CoachmarkOverlayElements } from '.';
 import mdx from './CoachmarkOverlayElements.mdx';
 
 import styles from './_storybook-styles.scss?inline';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
+import sampleImage from './assets/sample-image.png';
 
 export default {
   title:
@@ -26,10 +26,6 @@ export default {
     children: {
       control: { type: null },
     },
-    media: {
-      control: { type: null },
-      description: 'Deprecated: Property replaced by "renderMedia"',
-    },
   },
   parameters: {
     styles,
@@ -38,9 +34,6 @@ export default {
     },
   },
 };
-const Anim1 = new URL('./assets/anim1.json', import.meta.url).pathname;
-const Anim2 = new URL('./assets/anim2.json', import.meta.url).pathname;
-
 const Template = (args) => {
   const theme = getSelectedCarbonTheme();
   return (
@@ -70,7 +63,5 @@ coachmarkOverlayElements.args = {
   nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   className: 'myOverlayElements',
-  renderMedia: ({ playStep }) => (
-    <SteppedAnimatedMedia filePaths={[Anim1, Anim2]} playStep={playStep} />
-  ),
+  renderMedia: () => <img alt="" src={sampleImage} />,
 };

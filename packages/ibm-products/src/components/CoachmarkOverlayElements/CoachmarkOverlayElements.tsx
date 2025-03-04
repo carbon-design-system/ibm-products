@@ -24,7 +24,6 @@ import { CarouselProps } from '../Carousel/Carousel';
 // Other standard imports.
 import PropTypes from 'prop-types';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { clamp } from '../../global/js/utils/clamp';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -51,16 +50,7 @@ export interface CoachmarkOverlayElementsProps {
    * managed in the parent component.
    */
   isVisible?: boolean;
-  /**
-   * The object describing an image in one of two shapes.
-   * If a single media element is required, use `{render}`.
-   * If a stepped animation is required, use `{filePaths}`.
-   * * @deprecated please use the `renderMedia` prop
-   */
-  media?: {
-    render?: () => ReactNode;
-    filePaths?: string[];
-  };
+
   /**
    * Optional prop to render any media like images or any animated media.
    */
@@ -125,7 +115,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
       className,
       children,
       isVisible = defaults.isVisible,
-      media,
       renderMedia,
       currentStep = defaults.currentStep,
       nextButtonText = defaults.nextButtonText,
@@ -143,7 +132,6 @@ export let CoachmarkOverlayElements = React.forwardRef<
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, _setCurrentProgStep] = useState(currentStep);
     const coachmark = useCoachmark();
-    const hasMedia = media || renderMedia;
 
     const setCurrentProgStep = (value) => {
       if (currentProgStep > 0 && value === 0 && buttonFocusRef.current) {
@@ -213,15 +201,7 @@ export let CoachmarkOverlayElements = React.forwardRef<
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {hasMedia && media?.render && media.render()}
-        {hasMedia && media?.filePaths && (
-          <SteppedAnimatedMedia
-            className={`${blockClass}__element-stepped-media`}
-            filePaths={media.filePaths}
-            playStep={currentProgStep}
-          />
-        )}
-        {hasMedia && renderMedia && (
+        {renderMedia && (
           <div className={`${blockClass}__element-stepped-media`}>
             {renderMediaContent}
           </div>
@@ -358,21 +338,7 @@ CoachmarkOverlayElements.propTypes = {
    * managed in the parent component.
    */
   isVisible: PropTypes.bool,
-  /**
-   * The object describing an image in one of two shapes.
-   * If a single media element is required, use `{render}`.
-   * If a stepped animation is required, use `{filePaths}`.
-   * @deprecated please use the `renderMedia` prop
-   */
-  /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ]),
+
   /**
    * The label for the Next button.
    */

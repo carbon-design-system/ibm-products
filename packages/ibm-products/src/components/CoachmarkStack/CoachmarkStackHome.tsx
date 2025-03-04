@@ -21,20 +21,8 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
 import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 import { ButtonProps } from '@carbon/react';
-import { deprecateProp } from '../../global/js/utils/props-helper';
-
-type Media =
-  | {
-      render?: () => ReactNode;
-      filePaths?: never;
-    }
-  | {
-      render?: never;
-      filePaths?: string[];
-    };
 
 interface CoachmarkStackHomeProps {
   /**
@@ -53,16 +41,7 @@ interface CoachmarkStackHomeProps {
    * If the stack home is open.
    */
   isOpen: boolean;
-  /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
-   */
-  media?: Media;
+
   /**
    * Optional prop to render any media like images or any animated media.
    */
@@ -118,7 +97,6 @@ export let CoachmarkStackHome = forwardRef<
       className,
       description,
       isOpen,
-      media,
       renderMedia,
       navLinkLabels,
       onClickNavItem,
@@ -132,8 +110,6 @@ export let CoachmarkStackHome = forwardRef<
   ) => {
     const buttonFocusRef = useRef<ButtonProps<React.ElementType> | null>(null);
     const [linkFocusIndex, setLinkFocusIndex] = useState(0);
-
-    const hasMedia = media || renderMedia;
 
     useEffect(() => {
       setTimeout(() => {
@@ -199,19 +175,11 @@ export let CoachmarkStackHome = forwardRef<
             />
             <div className={`${overlayClass}__body`}>
               <div className={`${overlayClass}-element`}>
-                {!hasMedia && (
+                {!renderMedia && (
                   <Idea size={20} className={`${blockClass}__icon-idea`} />
                 )}
 
-                {hasMedia && media?.render && media.render()}
-                {hasMedia && media?.filePaths && (
-                  <SteppedAnimatedMedia
-                    className={`${blockClass}__element-stepped-media`}
-                    filePaths={media.filePaths}
-                    playStep={0}
-                  />
-                )}
-                {hasMedia && renderMedia && (
+                {renderMedia && (
                   <div className={`${blockClass}__element-stepped-media`}>
                     {renderMedia({ playStep: 0 })}
                   </div>
@@ -296,27 +264,6 @@ CoachmarkStackHome.propTypes = {
    * If the stack home is open.
    */
   isOpen: PropTypes.bool.isRequired,
-  /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
-   * @deprecated please use the `renderMedia` prop
-   */
-  media: deprecateProp(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        render: PropTypes.func,
-      }),
-      PropTypes.shape({
-        filePaths: PropTypes.arrayOf(PropTypes.string),
-      }),
-    ]),
-    ''
-  ) as PropTypes.Validator<Media>,
 
   /**
    * The labels used to link to the stackable Coachmarks.

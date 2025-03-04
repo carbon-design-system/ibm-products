@@ -319,13 +319,15 @@ export let NotificationsPanel = React.forwardRef(
     const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
-    const [panelOpen, setPanelOpen] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
     const carbonPrefix = usePrefix();
+
     const reducedMotion = usePrefersReducedMotion();
-    const exitAnimationName = reducedMotion ? '' : 'fade-out';
+    const exitAnimationName = reducedMotion
+      ? 'notifications-panel-exit-reduced'
+      : 'notifications-panel-fade-out';
     const { shouldRender } = usePresence(
-      panelOpen,
+      open,
       notificationPanelRef as RefObject<HTMLDialogElement>,
       exitAnimationName
     );
@@ -345,7 +347,6 @@ export let NotificationsPanel = React.forwardRef(
     const handleKeydown = (event) => {
       event.stopPropagation();
       if (event.key === 'Escape') {
-        setPanelOpen(false);
         onClickOutside?.();
         setTimeout(() => {
           triggerButtonRef?.current?.focus();
@@ -356,7 +357,6 @@ export let NotificationsPanel = React.forwardRef(
     useEffect(() => {
       // initialize the notification panel to open
       if (open) {
-        setPanelOpen(true);
         const observer = new MutationObserver(() => {
           if (notificationPanelRef.current) {
             const parentElement = notificationPanelRef.current;
@@ -382,17 +382,6 @@ export let NotificationsPanel = React.forwardRef(
         }
         return () => observer.disconnect();
       }
-    }, [open]);
-
-    const onAnimationEnd = () => {
-      // initialize the notification panel to close
-      if (!open) {
-        setPanelOpen(false);
-      }
-    };
-
-    useEffect(() => {
-      setPanelOpen(open);
     }, [open]);
 
     const sortChronologically = (arr) => {
@@ -652,7 +641,6 @@ export let NotificationsPanel = React.forwardRef(
             [`${blockClass}__entrance`]: open,
             [`${blockClass}__exit`]: !open,
           })}
-          onAnimationEnd={onAnimationEnd}
           ref={
             (ref as MutableRefObject<HTMLDivElement | null>) ||
             notificationPanelRef

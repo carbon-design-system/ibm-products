@@ -175,6 +175,10 @@ function generateLog() {
     '@carbon/ibm-products-styles',
     './packages/ibm-products-styles'
   );
+  log += getChangelog(
+    '@carbon/ibm-products-web-components',
+    './packages/ibm-products-web-components'
+  );
 
   console.log(log);
 

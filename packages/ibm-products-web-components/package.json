@@ -15,6 +15,7 @@
   "files": [
     "custom-elements.json",
     "es/**/*",
+    "es-custom/**/*",
     "lib/**/*",
     "scss/**/*"
   ],
@@ -24,6 +25,7 @@
   },
   "exports": {
     "./es/*": "./es/*",
+    "./es-custom/*": "./es-custom/*",
     "./lib/*": "./lib/*",
     "./dist/*": "./dist/*",
     "./scss/*": "./scss/*",
@@ -51,7 +53,7 @@
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.57.0-rc.0",
     "@carbon/styles": "1.75.0",
-    "@carbon/web-components": "2.23.0",
+    "@carbon/web-components": "file:./package.tgz",
     "lit": "^3.1.0"
   },
   "devDependencies": {

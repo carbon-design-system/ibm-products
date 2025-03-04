@@ -1651,7 +1651,7 @@ __metadata:
     "@carbon/icons": "npm:^11.55.0"
     "@carbon/motion": "npm:^11.24.0"
     "@carbon/styles": "npm:1.75.0"
-    "@carbon/web-components": "npm:2.23.0"
+    "@carbon/web-components": "file:./package.tgz"
     "@mordech/vite-lit-loader": "npm:^0.35.0"
     "@open-wc/testing": "npm:^4.0.0"
     "@rollup/plugin-alias": "npm:^5.1.1"
@@ -1895,7 +1895,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/styles@npm:^1.75.0, @carbon/styles@npm:^1.76.0":
+"@carbon/styles@npm:^1.76.0":
   version: 1.76.0
   resolution: "@carbon/styles@npm:1.76.0"
   dependencies:
@@ -1958,18 +1958,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@carbon/web-components@npm:2.23.0"
+"@carbon/web-components@file:./package.tgz::locator=%40carbon%2Fibm-products-web-components%40workspace%3Apackages%2Fibm-products-web-components":
+  version: 2.24.0
+  resolution: "@carbon/web-components@file:./package.tgz#./package.tgz::hash=0c7b33&locator=%40carbon%2Fibm-products-web-components%40workspace%3Apackages%2Fibm-products-web-components"
   dependencies:
-    "@carbon/styles": "npm:^1.75.0"
+    "@carbon/styles": "npm:^1.76.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.5.0"
     flatpickr: "npm:4.6.13"
     lit: "npm:^3.1.0"
     lodash-es: "npm:^4.17.21"
     tslib: "npm:^2.6.3"
-  checksum: 10/7b064ace01bd253fd6e8b0bc999970767860d5f85a12722a3d1df63da69d35c308cd1a3811297b07fa8151c1f98c1242f083073b9906fce2652e4f559615e25d
+  checksum: 10/494f10af550b559bfbe575f20d75d5ab04e10f40facc4691422fdb51d4ae336d6dfc4205a63bf156221e857ccccb09c5c264ee10bb0c7bc975fb35030bbb56b7
   languageName: node
   linkType: hard
 

@@ -8,7 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { Saving } from '.';
-// import mdx from './Saving.mdx';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 
@@ -18,11 +18,11 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/save/usage/" />
+      ),
     },
-*/
   },
   argTypes: {
     successful: {

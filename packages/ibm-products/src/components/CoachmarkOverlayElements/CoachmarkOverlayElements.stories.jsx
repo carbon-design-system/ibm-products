@@ -26,10 +26,6 @@ export default {
     children: {
       control: { type: null },
     },
-    media: {
-      control: { type: null },
-      description: 'Deprecated: Property replaced by "renderMedia"',
-    },
   },
   parameters: {
     styles,

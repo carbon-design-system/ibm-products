@@ -51,9 +51,9 @@ const defaultTemplate = {
           description=${description}
           kind=${kind}
         >
-          <a class="cds--link" href="#">– Forwarding link 1</a>
+          <a class="cds--link cds--link--lg" href="#">– Forwarding link 1</a>
           <br />
-          <a class="cds--link" href="#">– Forwarding link 2</a>
+          <a class="cds--link cds--link--lg" href="#">– Forwarding link 2</a>
         </c4p-full-page-error>
       </div>
     `;

@@ -50,7 +50,6 @@ describe(elementName, () => {
   // Can't figure out how to check a11y with vitest, using open-wc chai dom functions for now
   it.skip('has no accessibility violations', async () => {
     const element = await fixture(template());
-    // console.log('element', element.shadowRoot!.querySelector('h1'));
     owcExpect(element).to.be.accessible();
   });
 

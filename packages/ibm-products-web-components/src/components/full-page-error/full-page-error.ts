@@ -26,7 +26,6 @@ const elementName = `${prefix}-${componentName}`; // c4p-full-page-error
  * FullPageError.
  *
  * @element c4p-full-page-error
- * @csspart dialog The dialog.
  */
 @customElement(elementName)
 class CDSFullPageError extends LitElement {
@@ -43,15 +42,27 @@ class CDSFullPageError extends LitElement {
     },
   };
 
+  /**
+   * Sets the label text
+   */
   @property({ type: String, reflect: true })
-  label: string = 'Label';
+  label: string = 'Error Label';
 
+  /**
+   * Sets the description text
+   */
   @property({ type: String, reflect: true })
-  description: string = 'Description goes here, this is the default';
+  description?: string;
 
+  /**
+   * Sets what kind of error it is. '404' | '403' | 'custom'
+   */
   @property({ type: String, reflect: true })
   kind: Kind = Kind.Custom;
 
+  /**
+   * Sets the title text
+   */
   @property({ type: String, reflect: true })
   title: string = 'Title';
 

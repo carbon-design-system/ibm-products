@@ -56,14 +56,8 @@ async function build() {
   };
 
   const formats = [
-    {
-      type: 'esm',
-      directory: 'es',
-    },
-    {
-      type: 'commonjs',
-      directory: 'lib',
-    },
+    { type: 'esm', directory: 'es' },
+    { type: 'commonjs', directory: 'lib' },
   ];
 
   for (const format of formats) {
@@ -134,9 +128,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
         mainFields: ['jsnext', 'module', 'main'],
         extensions: ['.js', '.ts'],
       }),
-      commonjs({
-        include: [/node_modules/],
-      }),
+      commonjs({ include: [/node_modules/] }),
       litSCSS({
         includePaths: [
           path.resolve(__dirname, '../node_modules'),
@@ -150,13 +142,7 @@ function getRollupConfig(input, rootDir, outDir, iconInput) {
           ).css;
         },
       }),
-      typescript({
-        noEmitOnError: true,
-        compilerOptions: {
-          rootDir,
-          outDir,
-        },
-      }),
+      typescript({ noEmitOnError: true, compilerOptions: { rootDir, outDir } }),
     ],
   };
 }
@@ -181,9 +167,13 @@ async function postBuild() {
     // Replace "cds" with "cds-custom" in all files
     await Promise.all(
       files.map(async (file) => {
-        const content = await fs.promises.readFile(file, 'utf8');
-        const updatedContent = content.replace(/cds/g, 'cds-custom');
-        await fs.promises.writeFile(file, updatedContent);
+        let content = await fs.promises.readFile(file, 'utf8');
+        content = content.replace(/cds/g, 'cds-custom');
+        content = content.replace(
+          /import\s+['"]@carbon\/web-components\/es\/components\/(.*?)['"]/g,
+          "import '@carbon/web-components/es-custom/components/$1'"
+        );
+        await fs.promises.writeFile(file, content);
       })
     );
   }

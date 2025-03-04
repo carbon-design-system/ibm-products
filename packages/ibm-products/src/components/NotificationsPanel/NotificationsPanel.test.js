@@ -1,3 +1,5 @@
+// cspell:words jetzt
+
 /**
  * Copyright IBM Corp. 2020, 2021
  *
@@ -183,6 +185,7 @@ describe('Notifications', () => {
           onNotificationClick: () => {},
         },
       ],
+      dateTimeLocale: 'de',
     });
     const logLink = screen.getByRole('link');
     expect(logLink).toHaveTextContent(link.text);
@@ -372,5 +375,21 @@ describe('Notifications', () => {
       `.${dismissSingleNotificationClass}`
     );
     await act(() => userEvent.click(dismissIconButtonElement));
+  });
+
+  it('should render the correct language for the specified locale', async () => {
+    renderNotifications({
+      data: [
+        {
+          id: 0,
+          type: 'informational',
+          title: 'LogRhythm connection failure',
+          timestamp: new Date(),
+        },
+      ],
+      dateTimeLocale: 'de',
+    });
+    // Will render English "now" as German "jetzt".
+    expect(screen.getByText(/jetzt/i)).toBeTruthy();
   });
 });

@@ -7,6 +7,7 @@
 
 // Carbon and package components we use.
 import { Button, Link, Toggle, IconButton, usePrefix } from '@carbon/react';
+import { dateTimeFormat } from '@carbon/utilities';
 import {
   CheckmarkFilled,
   ChevronDown,
@@ -29,21 +30,25 @@ import { NotificationsEmptyState } from '../EmptyStates';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
-import { prepareProps } from '../../global/js/utils/props-helper';
 import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
 import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
+import { prepareProps } from '../../global/js/utils/props-helper';
+import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
 
-export type Themes = 'light' | 'dark';
+const DefaultLocale = 'en-US';
+type Themes = 'light' | 'dark';
+type DateTimeStyles = 'long' | 'short' | 'narrow';
 
 // Default values for props
 const defaults = {
+  dateTimeStyle: 'long' as DateTimeStyles,
   daysAgoText: (value) => `${value} days ago`,
   dismissAllLabel: 'Dismiss all',
   dismissSingleNotificationIconDescription: 'Dismiss',
@@ -66,7 +71,7 @@ const defaults = {
   settingsIconDescription: 'Settings',
   title: 'Notifications',
   todayLabel: 'Today',
-  viewAllLabel: (value) => `View all (${value})`,
+  viewAllLabel: (value: string | number) => `View all (${value})`,
   yearAgoText: (value) => `${value} year ago`,
   yearsAgoText: (value) => `${value} years ago`,
   yesterdayAtText: (value) => `Yesterday at ${value}`,
@@ -101,7 +106,23 @@ export interface NotificationsPanelProps {
   data: Data[];
 
   /**
+   * The language for each notification's time stamp.
+   * Used with `dateTimeStyle`.
+   */
+  dateTimeLocale?: string;
+
+  /**
+   * The date/time format for each notification's time stamp.
+   * Used with `dateTimeLocale`.
+   *
+   * E.g. `long` as "6 minutes ago", `short` as "6m ago".
+   */
+  dateTimeStyle?: DateTimeStyles;
+
+  /**
    * Sets the `days ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   daysAgoText?: (value: number) => string;
 
@@ -132,11 +153,15 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `hour ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   hourAgoText?: (value: number) => string;
 
   /**
    * Sets the `hours ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   hoursAgoText?: (value: number) => string;
 
@@ -147,26 +172,36 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `minute ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   minuteAgoText?: (value: number) => string;
 
   /**
    * Sets the `minutes ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   minutesAgoText?: (value: number) => string;
 
   /**
    * Sets the `month ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   monthAgoText?: (value: number) => string;
 
   /**
    * Sets the `months ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   monthsAgoText?: (value: number) => string;
 
   /**
    * Sets the `now` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   nowText?: string;
 
@@ -222,6 +257,8 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `seconds ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   secondsAgoText?: (value: number) => string;
 
@@ -252,16 +289,22 @@ export interface NotificationsPanelProps {
 
   /**
    * Sets the `year ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yearAgoText?: (value: number) => string;
 
   /**
    * Sets the `years ago` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yearsAgoText?: (value: number) => string;
 
   /**
    * Sets the `Yesterday at` label text
+   *
+   * @deprecated use `dateTimeLocale` instead.
    */
   yesterdayAtText?: (value: number) => string;
 
@@ -273,12 +316,35 @@ export interface NotificationsPanelProps {
 interface PreviousStateProps {
   open: boolean;
 }
+
+/**
+ * The `NotificationsPanel` sets expectations on the behavior for notifications,
+ * allowing the user to view and interact with them all in one place.
+ *
+ * #### Updated localization feature for the "time ago" timestamp
+ *
+ * The new localization reduces a dev's effort to apply language
+ * support for the "time ago" timestamp applied to each notification
+ * by using the new Carbon utility [dateTimeFormat()](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/dateTimeFormat/README.md) function.
+ * It will provide relative timestamps that adhere to Carbon's
+ * [date and time guidance](https://pages.github.ibm.com/carbon/ibm-products/guidelines/content/date-and-time/).
+ *
+ * **Step 1:** ignore the following _deprecated_ props: `daysAgoText`,
+ * `hourAgoText`, `hoursAgoText`, `minuteAgoText`, `minutesAgoText`,
+ * `monthAgoText`, `monthsAgoText`, `nowText`, `secondsAgoText`,
+ * `yearAgoText`, `yearsAgoText`, `yesterdayAtText`.
+ *
+ * **Step 2:** provide the `dateTimeLocale` prop with a valid locale—such as "de" or "fr-CA"—and it will do the work.
+ * You must provide a value, otherwise the deprecated props above will be used instead.
+ */
 export let NotificationsPanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
       className,
       data,
+      dateTimeLocale,
+      dateTimeStyle = defaults.dateTimeStyle,
       daysAgoText = defaults.daysAgoText,
       dismissAllLabel = defaults.dismissAllLabel,
       dismissSingleNotificationIconDescription = defaults.dismissSingleNotificationIconDescription,
@@ -327,9 +393,9 @@ export let NotificationsPanel = React.forwardRef(
     const previousState = usePreviousValue({ open }) as
       | PreviousStateProps
       | undefined;
-
     const reducedMotion = usePrefersReducedMotion();
     const carbonPrefix = usePrefix();
+    const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -569,21 +635,31 @@ export let NotificationsPanel = React.forwardRef(
           )}
           <div className={`${blockClass}__notification-content`}>
             <p className={`${blockClass}__notification-time-label`}>
-              {timeAgo({
-                previousTime: notification.timestamp,
-                secondsAgoText,
-                minuteAgoText,
-                minutesAgoText,
-                hoursAgoText,
-                hourAgoText,
-                daysAgoText,
-                yesterdayAtText,
-                monthsAgoText,
-                monthAgoText,
-                yearsAgoText,
-                yearAgoText,
-                nowText,
-              })}
+              {/**
+               * If the new dateTimeLocale has been passed a value,
+               * then use the new dateTimeFormat.relative.format(),
+               * else use the deprecated timeAgo().
+               */}
+              {dateTimeLocale
+                ? dateTimeFormat.relative.format(notification.timestamp, {
+                    locale: supportedLocale,
+                    style: dateTimeStyle,
+                  })
+                : timeAgo({
+                    previousTime: notification.timestamp,
+                    secondsAgoText,
+                    minuteAgoText,
+                    minutesAgoText,
+                    hoursAgoText,
+                    hourAgoText,
+                    daysAgoText,
+                    yesterdayAtText,
+                    monthsAgoText,
+                    monthAgoText,
+                    yearsAgoText,
+                    yearAgoText,
+                    nowText,
+                  })}
             </p>
             <h6 className={notificationHeaderClassName}>
               {notification.title}
@@ -806,6 +882,18 @@ NotificationsPanel.propTypes = {
       onNotificationClick: PropTypes.func,
     })
   ).isRequired,
+
+  /**
+   * The language for each notification's time stamp.
+   */
+  dateTimeLocale: PropTypes.string,
+
+  /**
+   * The date/time format for each notification's time stamp.
+   *
+   * E.g. `long` as "6 minutes ago", `short` as "6m ago".
+   */
+  dateTimeStyle: PropTypes.string,
 
   /**
    * Sets the `days ago` label text

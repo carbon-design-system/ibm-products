@@ -10,7 +10,6 @@ import { describe, it, vi, expect } from 'vitest';
 import { fixture, html, expect as owcExpect } from '@open-wc/testing';
 import { render } from 'lit';
 import { Kind } from './types';
-import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
 import CDSFullPageError, { blockClass } from './full-page-error';
 import '@testing-library/jest-dom'; // Make sure jest-dom is imported so .toHaveClass don't give type error
 

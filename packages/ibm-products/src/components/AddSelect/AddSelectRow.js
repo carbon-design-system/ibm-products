@@ -128,6 +128,14 @@ export let AddSelectRow = ({
   const tabIndex = getTabIndex();
   const selected = isSelected();
   const expanded = parentSelected === item.id;
+  const sharedSelectProps = {
+    id: `add-select-modifier-${item.id}`,
+    titleText: modifiers?.title,
+    type: 'inline',
+    disabled: !isSelected(),
+    label: modifiers?.label,
+    items: modifiers?.options,
+  };
 
   return (
     <div
@@ -160,12 +168,7 @@ export let AddSelectRow = ({
                 <Layer>
                   {modifiers?.multiSelect ? (
                     <MultiSelect
-                      titleText={modifiers.title}
-                      id={`add-select-modifier-${item.id}`}
-                      type="inline"
-                      items={modifiers.options}
-                      label={modifiers.label}
-                      disabled={!isSelected()}
+                      {...sharedSelectProps}
                       initialSelectedItems={item[modifiers.id]}
                       onChange={({ selectedItems }) =>
                         modifierHandler(item.id, selectedItems)
@@ -173,12 +176,7 @@ export let AddSelectRow = ({
                     />
                   ) : (
                     <Dropdown
-                      titleText={modifiers.title}
-                      id={`add-select-modifier-${item.id}`}
-                      type="inline"
-                      items={modifiers.options}
-                      label={modifiers.label}
-                      disabled={!isSelected()}
+                      {...sharedSelectProps}
                       className={`${blockClass}-dropdown`}
                       initialSelectedItem={item[modifiers.id]}
                       onChange={({ selectedItem }) =>

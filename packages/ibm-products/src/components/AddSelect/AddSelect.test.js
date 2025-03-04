@@ -6,10 +6,11 @@
 //
 
 import { render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { act } from 'react';
 import { waitForPosition } from '../../global/js/utils/wait_for_position';
 import { AddSelect } from './AddSelect';
 import { pkg } from '../../settings';
+import userEvent from '@testing-library/user-event';
 
 const componentName = AddSelect.displayName;
 
@@ -147,6 +148,7 @@ describe(componentName, () => {
         modifiers: {
           id: 'role',
           label: 'Role',
+          title: 'Role',
           options: ['editor'],
         },
         entries: [
@@ -162,6 +164,60 @@ describe(componentName, () => {
     render(<AddSelect {...newProps} />);
     await waitForPosition();
     expect(screen.getByTitle('editor')).toBeInTheDocument();
+  });
+
+  it('renders with modifiers with multi select', async () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      items: {
+        modifiers: {
+          id: 'role',
+          label: 'Role',
+          title: 'Role',
+          options: ['editor', 'viewer', 'admin'],
+          multiSelect: true,
+        },
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            role: ['editor', 'admin'],
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
+    await waitForPosition();
+    const combobox = screen.getByRole('combobox');
+    expect(combobox).toBeInTheDocument();
+
+    const checkbox = screen
+      .getAllByRole('img')
+      ?.find(
+        (el) =>
+          el?.getAttribute('aria-labelledby') === 'control-label-test-entry-1'
+      );
+
+    await act(() => userEvent.click(checkbox));
+    expect(combobox.getAttribute('aria-disabled')).toBe(null);
+    await act(() => userEvent.click(combobox));
+    expect(combobox.getAttribute('aria-expanded')).toBe('true');
+    await waitForPosition();
+    const listbox = screen.getByRole('listbox');
+    expect(listbox?.children?.length).toBe(3);
+    const li_1 = listbox?.children?.[0];
+    const li_2 = listbox?.children?.[1];
+    const li_3 = listbox?.children?.[2];
+
+    expect(li_1?.getAttribute('aria-label')).toBe('admin');
+    expect(li_2?.getAttribute('aria-label')).toBe('editor');
+    expect(li_3?.getAttribute('aria-label')).toBe('viewer');
+    expect(li_1?.getAttribute('aria-selected')).toBe('true');
+    expect(li_2?.getAttribute('aria-selected')).toBe('true');
+    expect(li_3?.getAttribute('aria-selected')).toBe('false');
   });
 
   it('has no accessibility violations', async () => {

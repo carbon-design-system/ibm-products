@@ -18,6 +18,7 @@ export interface Modifier {
   id?: string;
   label?: string;
   options?: string[];
+  multiSelect?: boolean;
 }
 
 export interface Avatar {

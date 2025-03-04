@@ -412,6 +412,7 @@ AddSelectBody.propTypes = {
       id: PropTypes.string,
       label: PropTypes.string,
       options: PropTypes.array,
+      multiSelect: PropTypes.bool,
     }),
     sortBy: PropTypes.array,
     filterBy: PropTypes.array,

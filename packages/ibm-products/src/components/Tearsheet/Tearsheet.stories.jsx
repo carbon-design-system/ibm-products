@@ -453,6 +453,80 @@ const FirstElementDisabledTemplate = (
   );
 };
 
+const FirstElementReadOnlyTemplate = (
+  { actions, decorator, slug, ...args },
+  context
+) => {
+  const [open, setOpen] = useState(false);
+  const wiredActions =
+    actions &&
+    Array.prototype.map.call(actions, (action) => {
+      if (action.label === 'Cancel') {
+        const previousClick = action.onClick;
+        return {
+          ...action,
+          onClick: (evt) => {
+            setOpen(false);
+            previousClick(evt);
+          },
+        };
+      }
+      return action;
+    });
+
+  const ref = useRef(undefined);
+
+  useEffect(() => {
+    setTimeout(() => setOpen(context.viewMode !== 'docs'), 0);
+  }, []);
+
+  return (
+    <>
+      <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          decorator={decorator && sampleDecorator(decorator)}
+          slug={slug && sampleDecorator(slug)}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            <Form>
+              <p>Main content</p>
+              <FormGroup
+                legendId="tearsheet-form-group"
+                legendText="FormGroup Legend"
+              >
+                <TextInput
+                  id="tss-ft1"
+                  labelText="This field's value is 'read only':"
+                  readOnly={true}
+                  style={
+                    // stylelint-disable-next-line carbon/layout-use
+                    { marginBottom: '1em' }
+                  }
+                  value="Value"
+                />
+                <TextInput
+                  id="tss-ft2"
+                  labelText="Here is an entry field:"
+                  style={
+                    // stylelint-disable-next-line carbon/layout-use
+                    { marginBottom: '1em' }
+                  }
+                />
+              </FormGroup>
+            </Form>
+          </div>
+        </Tearsheet>
+      </div>
+    </>
+  );
+};
+
 // eslint-disable-next-line react/prop-types
 const StackedTemplate = (
   { mixedSizes, actions, decorator, slug, ...args },
@@ -679,6 +753,18 @@ ReturnFocusToOpenButton.args = {
 export const firstElementDisabled = FirstElementDisabledTemplate.bind({});
 firstElementDisabled.storyName = 'First Element Disabled';
 firstElementDisabled.args = {
+  closeIconDescription,
+  hasCloseIcon: true,
+  description,
+  onClose: action('onClose called'),
+  title,
+  actions: 7,
+  selectorPrimaryFocus: '#tss-ft1',
+};
+
+export const firstElementReadOnly = FirstElementReadOnlyTemplate.bind({});
+firstElementReadOnly.storyName = 'First Element ReadOnly';
+firstElementReadOnly.args = {
   closeIconDescription,
   hasCloseIcon: true,
   description,

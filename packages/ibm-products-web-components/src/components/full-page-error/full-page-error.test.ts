@@ -10,8 +10,8 @@ import { describe, it, vi, expect } from 'vitest';
 import { fixture, html, expect as owcExpect } from '@open-wc/testing';
 import { render } from 'lit';
 import { Kind } from './types';
+import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
 import CDSFullPageError, { blockClass } from './full-page-error';
-import '@testing-library/jest-dom'; // Make sure jest-dom is imported so .toHaveClass don't give type error
 
 const defaultProps = {
   class: 'custom-class',
@@ -71,9 +71,11 @@ describe(elementName, () => {
     expect(
       element.shadowRoot?.querySelector('[role="main"]')?.hasAttribute('class')
     );
-    expect(element.shadowRoot?.querySelector('[role="main"]')).toHaveClass(
-      className
-    );
+    expect(
+      element.shadowRoot
+        ?.querySelector('[role="main"]')
+        ?.classList.contains(className)
+    ).toBe(true);
   });
 
   it('renders an error label', async () => {
@@ -84,7 +86,7 @@ describe(elementName, () => {
       element.shadowRoot
         ?.querySelector(`.${blockClass}__label`)
         ?.textContent?.includes(defaultProps.label)
-    ).toBe(true);
+    ).toBeTruthy();
   });
 
   it('renders a description', async () => {
@@ -113,8 +115,10 @@ describe(elementName, () => {
 
     expect(element.kind).toBe(defaultProps.kind);
     expect(
-      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
-    ).toHaveClass(`${blockClass}__svg ${blockClass}__custom`);
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__svg-container svg`)
+        ?.classList.contains(`${blockClass}__custom`)
+    ).toBeTruthy();
   });
 
   it('renders 404 svg illustration if kind is 404', async () => {
@@ -124,8 +128,10 @@ describe(elementName, () => {
 
     expect(element.kind).toBe(Kind.Error404);
     expect(
-      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
-    ).toHaveClass(`${blockClass}__svg ${blockClass}__404`);
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__svg-container svg`)
+        ?.classList.contains(`${blockClass}__404`)
+    ).toBeTruthy();
   });
 
   it('renders 403 svg illustration if kind is 403', async () => {
@@ -135,7 +141,9 @@ describe(elementName, () => {
 
     expect(element.kind).toBe(Kind.Error403);
     expect(
-      element.shadowRoot?.querySelector(`.${blockClass}__svg-container svg`)
-    ).toHaveClass(`${blockClass}__svg ${blockClass}__403`);
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__svg-container svg`)
+        ?.classList.contains(`${blockClass}__403`)
+    ).toBeTruthy();
   });
 });

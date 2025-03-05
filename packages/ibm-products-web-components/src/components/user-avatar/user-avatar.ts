@@ -17,20 +17,15 @@ import styles from './user-avatar.scss?lit';
 import '@carbon/web-components/es/components/tooltip/index.js';
 import User from '@carbon/web-components/es/icons/user/16';
 
+const blockClass = `${prefix}--user-avatar`;
+
+const iconSize = { sm: 16, md: 20, lg: 24, xl: 32 };
+
 /**
  * Useravatar.
  *
  * @element c4p-user-avatar
  * */
-
-const blockClass = `${prefix}--user-avatar`;
-
-const iconSize = {
-  sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 32,
-};
 
 @customElement(`${prefix}-user-avatar`)
 class CDSUseravatar extends HostListenerMixin(LitElement) {

@@ -166,6 +166,7 @@ const propsWithModifiers = {
     modifiers: {
       id: 'role',
       label: 'Role',
+      title: 'Role',
       options: ['editor', 'admin'],
     },
   },

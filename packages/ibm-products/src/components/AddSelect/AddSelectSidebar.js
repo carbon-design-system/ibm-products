@@ -47,25 +47,36 @@ export let AddSelectSidebar = ({
     return getNewItem(items[selectionId]);
   });
 
-  const getTitle = (item) => (
-    <div className={`${blockClass}-accordion-title`}>
-      <div className={`${blockClass}-selected-item`}>
-        <p className={`${blockClass}-selected-item-title`}>{item.title}</p>
-        <p className={`${blockClass}-selected-item-subtitle`}>
-          {item.subtitle}
-        </p>
-      </div>
-      {hasModifiers && (
-        <div>
-          {
-            appliedModifiers.find((modifier) => modifier.id === item.id)[
-              modifiers.id
-            ]
-          }
+  const getTitle = (item) => {
+    let modifierEl;
+
+    if (hasModifiers) {
+      const _modifiers = appliedModifiers?.find(
+        (modifier) => modifier?.id === item?.id
+      )[modifiers?.id];
+
+      modifierEl = _modifiers;
+
+      if (Array.isArray(_modifiers)) {
+        modifierEl = _modifiers?.map(
+          (_modifier, index) =>
+            `${_modifier}${index + 1 !== _modifiers.length ? ', ' : ''}`
+        );
+      }
+    }
+
+    return (
+      <div className={`${blockClass}-accordion-title`}>
+        <div className={`${blockClass}-selected-item`}>
+          <p className={`${blockClass}-selected-item-title`}>{item.title}</p>
+          <p className={`${blockClass}-selected-item-subtitle`}>
+            {item.subtitle}
+          </p>
         </div>
-      )}
-    </div>
-  );
+        {hasModifiers && <div>{modifierEl}</div>}
+      </div>
+    );
+  };
 
   if (Object.keys(displayMetalPanel).length !== 0) {
     return (

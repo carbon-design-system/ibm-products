@@ -24,6 +24,7 @@ Let's walk through an example.`,
   modifiers: { // adds a modifier dropdown inside the items
     label: PropTypes.string, // label for the dropdown
     options: PropTypes.array, // list of options / values for the dropdown
+    multiSelect: PropTypes.bool // option to switch the options dropdown to multiselect
   },
   sortBy: ['title'], // designates which properties should be used to sort the column when using a hierarchy
   entries: [ // the actual list of items / entries

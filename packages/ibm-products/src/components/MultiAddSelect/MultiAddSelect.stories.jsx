@@ -155,8 +155,10 @@ export default {
         3: {
           modifiers: {
             id: 'role',
-            label: 'Role',
+            label: 'Select Roles',
+            title: 'Role',
             options: ['editor', 'viewer', 'admin'],
+            multiSelect: true,
           },
           entries: [
             {
@@ -164,20 +166,20 @@ export default {
               value: '1',
               title: 'item 1',
               subtitle: 'item 1 subtitle',
-              role: 'editor',
+              role: ['editor', 'viewer'],
             },
             {
               id: '2',
               value: '2',
               title: 'item 2',
-              role: 'editor',
+              role: ['editor'],
             },
             {
               id: '3',
               value: '3',
               title: 'item 3',
               subtitle: 'item 3 subtitle',
-              role: 'admin',
+              role: ['admin'],
             },
           ],
         },

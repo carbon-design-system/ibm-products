@@ -136,20 +136,22 @@ export default {
     percy: {
       waitForTimeout: 1000,
     },
-    page: () => (
-      <StoryDocsPage
-        altGuidelinesHref={[
-          {
-            href: 'https://carbondesignsystem.com/components/tag/usage/',
-            label: 'Carbon Tag usage guidelines',
-          },
-          {
-            href: 'https://react.carbondesignsystem.com/?path=/docs/components-tag--overview',
-            label: 'Carbon Tag documentation',
-          },
-        ]}
-      />
-    ),
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://carbondesignsystem.com/components/tag/usage/',
+              label: 'Carbon Tag usage guidelines',
+            },
+            {
+              href: 'https://react.carbondesignsystem.com/?path=/docs/components-tag--overview',
+              label: 'Carbon Tag documentation',
+            },
+          ]}
+        />
+      ),
+    },
   },
   argTypes: {
     containerWidth: {

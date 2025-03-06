@@ -318,7 +318,7 @@ export interface NotificationsPanelProps {
  * The `NotificationsPanel` sets expectations on the behavior for notifications,
  * allowing the user to view and interact with them all in one place.
  *
- * **To adopt the new localization.**
+ * **To adopt the new localization:**
  *
  * **Step 1:** Provide a locale to the `dateTimeLocale` prop, such as "de" or "fr-CA".
  *

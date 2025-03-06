@@ -8,9 +8,10 @@ import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import CDSUseravatar from './user-avatar';
 import { prefix } from '../../globals/settings';
-import User from '@carbon/web-components/es/icons/user/16.js';
 import './index';
+const mockedUserIcon = vi.fn().mockReturnValue({});
 
+vi.mock('@carbon/web-components/es/icons/user/16.js', () => mockedUserIcon);
 vi.mock('./_story-assets/headshot.jpg', () => 'mock-image-path');
 
 const blockClass = `${prefix}--user-avatar`;
@@ -123,7 +124,7 @@ describe('c4p-user-avatar', () => {
 
   it('should return an icon for the avatar image', async () => {
     const userAvatar = (await fixture(
-      template({ ...defaultProps, renderIcon: User })
+      template({ ...defaultProps, renderIcon: mockedUserIcon })
     )) as CDSUseravatar;
     const renderedSVG = userAvatar?.shadowRoot?.querySelectorAll('svg');
     expect(renderedSVG).toBeTruthy();

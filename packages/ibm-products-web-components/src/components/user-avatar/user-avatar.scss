@@ -20,7 +20,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities';
 @use 'sass:map';
 
-@use '@carbon/ibm-products-styles/scss/components/UserAvatar' as *;
+@use '@carbon/ibm-products-styles/scss/components/UserAvatar/index' as *;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';

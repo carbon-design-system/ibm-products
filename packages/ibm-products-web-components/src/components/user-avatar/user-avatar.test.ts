@@ -8,7 +8,7 @@ import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import CDSUseravatar from './user-avatar';
 import { prefix } from '../../globals/settings';
-import User from '@carbon/web-components/es/icons/user/16';
+import User from '@carbon/web-components/es/icons/user/16.js';
 import './index';
 
 vi.mock('./_story-assets/headshot.jpg', () => 'mock-image-path');

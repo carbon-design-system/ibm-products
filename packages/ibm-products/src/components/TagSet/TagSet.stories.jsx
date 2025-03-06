@@ -11,6 +11,7 @@ import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -140,6 +141,10 @@ export default {
       page: () => (
         <StoryDocsPage
           altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/tag-set/usage/',
+              label: 'TagSet usage guidelines',
+            },
             {
               href: 'https://carbondesignsystem.com/components/tag/usage/',
               label: 'Carbon Tag usage guidelines',

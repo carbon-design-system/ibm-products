@@ -30,11 +30,11 @@ import { NotificationsEmptyState } from '../EmptyStates';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useClickOutside, usePreviousValue } from '../../global/js/hooks';
 import { usePrefersReducedMotion } from '../../global/js/hooks/usePrefersReducedMotion';
+import { useClickOutside, usePresence } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { getSupportedLocale } from '../../global/js/utils/getSupportedLocale';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
 
@@ -313,9 +313,6 @@ export interface NotificationsPanelProps {
    */
   yesterdayLabel?: string;
 }
-interface PreviousStateProps {
-  open: boolean;
-}
 
 /**
  * The `NotificationsPanel` sets expectations on the behavior for notifications,
@@ -383,14 +380,19 @@ export let NotificationsPanel = React.forwardRef(
     const notificationPanelInnerRef = useRef(null);
     const startSentinel = useRef<HTMLButtonElement>(null);
     const endSentinel = useRef<HTMLButtonElement>(null);
-    const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState<Data[]>([]);
-    const previousState = usePreviousValue({ open }) as
-      | PreviousStateProps
-      | undefined;
-    const reducedMotion = usePrefersReducedMotion();
-    const carbonPrefix = usePrefix();
     const supportedLocale = getSupportedLocale(dateTimeLocale, DefaultLocale);
+    const carbonPrefix = usePrefix();
+
+    const reducedMotion = usePrefersReducedMotion();
+    const exitAnimationName = reducedMotion
+      ? 'notifications-panel-exit-reduced'
+      : 'notifications-panel-fade-out';
+    const { shouldRender } = usePresence(
+      open,
+      notificationPanelRef as RefObject<HTMLDialogElement>,
+      exitAnimationName
+    );
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -407,7 +409,6 @@ export let NotificationsPanel = React.forwardRef(
     const handleKeydown = (event) => {
       event.stopPropagation();
       if (event.key === 'Escape') {
-        setRender(false);
         onClickOutside?.();
         setTimeout(() => {
           triggerButtonRef?.current?.focus();
@@ -418,7 +419,6 @@ export let NotificationsPanel = React.forwardRef(
     useEffect(() => {
       // initialize the notification panel to open
       if (open) {
-        setRender(true);
         const observer = new MutationObserver(() => {
           if (notificationPanelRef.current) {
             const parentElement = notificationPanelRef.current;
@@ -445,19 +445,6 @@ export let NotificationsPanel = React.forwardRef(
         return () => observer.disconnect();
       }
     }, [open]);
-
-    const onAnimationEnd = () => {
-      // initialize the notification panel to close
-      if (!open) {
-        setRender(false);
-      }
-    };
-
-    useEffect(() => {
-      if (!open && previousState?.open && reducedMotion) {
-        setRender(false);
-      }
-    }, [open, previousState?.open, reducedMotion]);
 
     const sortChronologically = (arr) => {
       if (!arr || (arr && !arr.length)) {
@@ -726,7 +713,6 @@ export let NotificationsPanel = React.forwardRef(
             [`${blockClass}__entrance`]: open,
             [`${blockClass}__exit`]: !open,
           })}
-          onAnimationEnd={onAnimationEnd}
           ref={
             (ref as MutableRefObject<HTMLDivElement | null>) ||
             notificationPanelRef

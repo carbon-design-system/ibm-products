@@ -4,13 +4,14 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { expect, describe, it } from 'vitest';
+import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import CDSUseravatar from './user-avatar';
 import { prefix } from '../../globals/settings';
-import headshot from './_story-assets/headshot.jpg';
 import User from '@carbon/web-components/es/icons/user/16';
 import './index';
+
+vi.mock('./_story-assets/headshot.jpg', () => 'mock-image-path');
 
 const blockClass = `${prefix}--user-avatar`;
 
@@ -132,7 +133,7 @@ describe('c4p-user-avatar', () => {
     const userAvatar = (await fixture(
       template({
         ...defaultProps,
-        image: headshot,
+        image: 'mock-image-path',
         imageDescription: 'test alt text',
       })
     )) as CDSUseravatar;

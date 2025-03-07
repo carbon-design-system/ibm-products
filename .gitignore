@@ -5,6 +5,7 @@ packages/*/build/
 packages/*/examples/*/build/
 packages/*/scss
 es
+es-custom
 lib
 dist
 umd

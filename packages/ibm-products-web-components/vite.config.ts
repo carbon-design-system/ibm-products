@@ -24,9 +24,6 @@ export default defineConfig({
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
-    deps: {
-      inline: ['@open-wc/testing'],
-    },
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {
@@ -41,9 +38,5 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
-  },
-
-  optimizeDeps: {
-    exclude: ['@open-wc/testing'],
   },
 });

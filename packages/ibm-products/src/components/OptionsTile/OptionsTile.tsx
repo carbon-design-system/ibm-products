@@ -13,7 +13,7 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/react/icons';
-import { Layer, Toggle } from '@carbon/react';
+import { Heading, Layer, Section, Toggle } from '@carbon/react';
 import React, { MouseEvent, ReactNode, useRef, useState } from 'react';
 import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import PropTypes from 'prop-types';
@@ -112,6 +112,12 @@ export interface OptionsTileProps {
    * Provide a text explaining why the OptionsTile is in warning state.
    */
   warnText?: string;
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 // Default values for props
@@ -138,6 +144,7 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       titleId: userDefinedTitleId,
       warn,
       warnText,
+      headingLevel,
       ...rest
     } = props;
     const [closing, setClosing] = useState(false);
@@ -274,17 +281,17 @@ export let OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
       });
 
       return (
-        <div className={`${blockClass}__heading`}>
-          <h6 id={titleId} className={`${blockClass}__title`}>
+        <Section className={`${blockClass}__heading`} level={headingLevel}>
+          <Heading id={titleId} className={`${blockClass}__title`}>
             {title}
-          </h6>
+          </Heading>
           {text && (
             <span className={summaryClasses} aria-hidden={summaryHidden}>
               {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
-        </div>
+        </Section>
       );
     };
 
@@ -374,6 +381,12 @@ OptionsTile.propTypes = {
    * no toggle will be rendered.
    */
   enabled: PropTypes.bool,
+
+  /**
+   * Sets the heading level for the title element (1 = \<h1>, 2 = \<h2>, ..., 6 = \<h6>).
+   * Helps control the semantic structure of the page.
+   */
+  headingLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
 
   /**
    * Whether the OptionsTile is in invalid validation state.

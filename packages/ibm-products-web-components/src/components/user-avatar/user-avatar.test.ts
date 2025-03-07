@@ -8,7 +8,7 @@ import { expect, describe, it, vi } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
 import CDSUseravatar from './user-avatar';
 import { prefix } from '../../globals/settings';
-import './index';
+import '@carbon/ibm-products-web-components/es/components/user-avatar/index';
 const mockedUserIcon = vi.fn().mockReturnValue({});
 
 vi.mock('@carbon/web-components/es/icons/user/16.js', () => mockedUserIcon);

@@ -22,7 +22,7 @@ const DocsPage = () => {
           label: 'Carbon Modal usage guidelines',
         },
         {
-          href: 'https://react.carbondesignsystem.com/?path=/docs/modal--default',
+          href: 'https://react.carbondesignsystem.com/?path=/docs/components-modal',
           label: 'Carbon Modal documentation',
         },
       ]}

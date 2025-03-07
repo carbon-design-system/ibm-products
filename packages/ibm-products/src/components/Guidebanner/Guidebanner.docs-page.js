@@ -12,6 +12,12 @@ import * as stories from './Guidebanner.stories';
 
 export const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[
+      {
+        href: 'https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/guide-banner/usage/',
+        label: 'Guide banner usage guidelines',
+      },
+    ]}
     blocks={[
       {
         story: stories.collapsible,

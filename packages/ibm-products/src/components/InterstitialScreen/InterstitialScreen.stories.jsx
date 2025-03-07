@@ -12,7 +12,6 @@ import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
 import { InterstitialScreen } from '.';
 import mdx from './InterstitialScreen.mdx';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 import InterstitialExampleImg from './_story-assets/illustrations/interstitial-ph.png';
 
@@ -38,14 +37,10 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     renderMedia: {
-      options: ['None', 'With a static image', 'With an animation'],
+      options: ['None', 'With a static image'],
       control: { type: 'select' },
       description:
         'Optional prop to render any media like images or any animated media. This is a callback prop where you need to return the component with media to be rendered',
-    },
-    media: {
-      control: { type: null },
-      description: 'Deprecated: Property replaced by "renderMedia"',
     },
     breakpointsWithMedia: {
       description:
@@ -66,7 +61,6 @@ export default {
   },
 };
 const getSelectedMedia = (media) => {
-  console.log('Story media: ', InterstitialExampleImg);
   switch (media) {
     case 'With a static image':
       return () => (
@@ -76,17 +70,6 @@ const getSelectedMedia = (media) => {
             height: '100%',
             background: `center center / contain no-repeat url("${InterstitialExampleImg}") `,
           }}
-        />
-      );
-    case 'With an animation':
-      return ({ playStep }) => (
-        <SteppedAnimatedMedia
-          filePaths={[
-            HowACaseIsCreated1,
-            HowACaseIsCreated2,
-            HowACaseIsCreated3,
-          ]}
-          playStep={playStep}
         />
       );
     default:

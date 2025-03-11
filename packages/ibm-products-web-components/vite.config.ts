@@ -32,6 +32,9 @@ export default defineConfig({
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
+    deps: {
+      inline: ['/carbon-components/', '/@carbon/'],
+    },
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {

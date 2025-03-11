@@ -8,6 +8,7 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
@@ -38,5 +39,8 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
+  },
+  resolve: {
+    alias: [{ find: '@', replacement: '../' }],
   },
 });

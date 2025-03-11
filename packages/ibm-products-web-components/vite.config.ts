@@ -20,6 +20,9 @@ export default defineConfig({
       '/__web-dev-server__web-socket.js',
     ]),
   ],
+  resolve: {
+    dedupe: ['@carbon/ibm-products-styles'], // Ensure it resolves from root
+  },
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],

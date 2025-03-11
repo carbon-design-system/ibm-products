@@ -287,7 +287,10 @@ export let SidePanel = React.forwardRef(
     const previousState = usePreviousValue({ size, open, currentStep });
     const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
     const [doAnimateTitle, setDoAnimateTitle] = useState(true);
-    const { firstElement, keyDownListener } = useFocus(sidePanelRef);
+    const { keyDownListener, claimFocus } = useFocus(
+      sidePanelRef,
+      selectorPrimaryFocus
+    );
     const panelRefValue = sidePanelRef.current;
     const previousOpen = usePreviousValue(open);
 
@@ -632,33 +635,11 @@ export let SidePanel = React.forwardRef(
     ]);
 
     useEffect(() => {
-      if (open && animationComplete) {
-        if (
-          selectorPrimaryFocus &&
-          getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
-        ) {
-          const primeFocusEl = getSpecificElement(
-            sidePanelRef?.current,
-            selectorPrimaryFocus
-          );
-          if (
-            primeFocusEl &&
-            window?.getComputedStyle(primeFocusEl)?.display !== 'none'
-          ) {
-            setTimeout(() => primeFocusEl?.focus(), 0);
-          }
-        } else if (!slideIn) {
-          setTimeout(() => firstElement?.focus(), 0);
-        }
+      if (open && animationComplete && !slideIn) {
+        claimFocus();
       }
-    }, [
-      animationComplete,
-      firstElement,
-      open,
-      selectorPrimaryFocus,
-      sidePanelRef,
-      slideIn,
-    ]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [animationComplete, open, sidePanelRef, slideIn]);
 
     const primaryActionContainerClassNames = cx([
       `${blockClass}__actions-container`,

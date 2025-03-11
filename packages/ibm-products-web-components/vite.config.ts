@@ -20,6 +20,14 @@ export default defineConfig({
       '/__web-dev-server__web-socket.js',
     ]),
   ],
+   css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@carbon/ibm-products-styles/scss/index" as *;`, // ✅ Fix import method
+        includePaths: ["node_modules"], // ✅ Ensure node_modules SCSS is resolved
+      },
+    },
+  },
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],

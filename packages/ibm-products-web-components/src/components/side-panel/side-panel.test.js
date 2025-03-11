@@ -207,16 +207,16 @@ const template = (props = defaultProps, children = getContent(1)) => html`
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {
-    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    const sidePanel = await fixture(template());
 
     expect(sidePanel?.open).toBeTruthy();
     expect(sidePanel).toBeDefined();
   });
 
   it('should render a side panel on the left', async () => {
-    const sidePanel = (await fixture(
+    const sidePanel = await fixture(
       template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT })
-    )) as CDSSidePanel;
+    );
 
     expect(sidePanel?.placement).toBe('left');
 
@@ -231,7 +231,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a side panel on the right', async () => {
-    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    const sidePanel = await fixture(template());
 
     expect(sidePanel?.placement).toBe('right');
 
@@ -246,7 +246,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a side panel with overlay and close when clicked outside', async () => {
-    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    const sidePanel = await fixture(template());
 
     // Expect the side panel has include-overlay attribute
     expect(sidePanel?.includeOverlay).toBeTruthy();
@@ -268,13 +268,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      (sidePanel as any).constructor.eventBeforeClose
+      sidePanel.constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      (sidePanel as any).constructor.eventClose
+      sidePanel.constructor.eventClose
     );
     // dispatch `cds-side-panel-beingclosed` and `cds-side-panel-closed` events on overlay element click
     overlayElement?.dispatchEvent(new Event('click'));
@@ -295,7 +295,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should close side panel on escape keydown', async () => {
-    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    const sidePanel = await fixture(template());
 
     expect(sidePanel?.open).toBeTruthy();
 
@@ -303,13 +303,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      (sidePanel as any).constructor.eventBeforeClose
+      sidePanel.constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      (sidePanel as any).constructor.eventClose
+      sidePanel.constructor.eventClose
     );
     // press the escape key
     document?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
@@ -328,7 +328,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should close side panel on the close button click', async () => {
-    const sidePanel = (await fixture(template())) as CDSSidePanel;
+    const sidePanel = await fixture(template());
 
     expect(sidePanel?.open).toBeTruthy();
     expect(sidePanel?.closeIconDescription).toBe('Close');
@@ -341,13 +341,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      (sidePanel as any).constructor.eventBeforeClose
+      sidePanel.constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      (sidePanel as any).constructor.eventClose
+      sidePanel.constructor.eventClose
     );
 
     // click on the close button
@@ -367,16 +367,14 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a slug', async () => {
-    const sidePanel = (await fixture(
-      template(defaultProps, getSlug(1))
-    )) as CDSSidePanel;
+    const sidePanel = await fixture(template(defaultProps, getSlug(1)));
 
     expect(sidePanel?.open).toBeTruthy();
     // ensure there is a slug present
     expect(sidePanel?._hasSlug).toBeTruthy();
 
     // locate slug element
-    const slug = sidePanel.querySelector('cds-slug') as any;
+    const slug = sidePanel.querySelector('cds-slug');
     // expect the slug element is present
     expect(slug).toBeDefined();
     // expect the default slug size is xs
@@ -384,9 +382,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render navigation button', async () => {
-    const sidePanel = (await fixture(
+    const sidePanel = await fixture(
       template(defaultProps, getActionToolbarItems(1))
-    )) as CDSSidePanel;
+    );
 
     expect(sidePanel?.open).toBeTruthy();
     // get the copy button
@@ -399,9 +397,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a slide-in side panel', async () => {
-    const sidePanel = (await fixture(
+    const sidePanel = await fixture(
       template({ ...defaultProps, slideIn: true })
-    )) as CDSSidePanel;
+    );
 
     expect(sidePanel.slideIn).toBeTruthy();
     expect(sidePanel.includeOverlay).toBeFalsy();
@@ -421,7 +419,7 @@ describe('c4p-side-panel', () => {
         ?.setAttribute('current-step', '1');
     };
 
-    const sidePanel = (await fixture(
+    const sidePanel = await fixture(
       html`<c4p-side-panel
         ?animate-title=${defaultProps.animateTitle}
         ?condensed-actions=${defaultProps.condensedActions}
@@ -438,7 +436,7 @@ describe('c4p-side-panel', () => {
         .title=${defaultProps.title}
         @c4p-side-panel-navigate-back=${prevStep}
       >${getContent(1)}</<c4p-side-panel`
-    )) as CDSSidePanel;
+    );
 
     const backButton = sidePanel.shadowRoot?.querySelector(
       `.${prefix}--side-panel__navigation-back-button`
@@ -446,7 +444,7 @@ describe('c4p-side-panel', () => {
     // create event listener
     const eventNavigateBack = oneEvent(
       sidePanel,
-      (sidePanel as any).constructor.eventNavigateBack
+      sidePanel.constructor.eventNavigateBack
     );
     // dispatch the event from click of back button
     backButton?.dispatchEvent(new Event('click'));
@@ -456,9 +454,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render subtitle text', async () => {
-    const sidePanel = (await fixture(
-      template(defaultProps, getSubTitle(1))
-    )) as CDSSidePanel;
+    const sidePanel = await fixture(template(defaultProps, getSubTitle(1)));
 
     const subTitleText = sidePanel?.querySelector(
       `.${prefix}--side-panel__subtitle-text`
@@ -468,9 +464,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render at least one action item', async () => {
-    const sidePanel = (await fixture(
-      template(defaultProps, getActionItems(1))
-    )) as CDSSidePanel;
+    const sidePanel = await fixture(template(defaultProps, getActionItems(1)));
 
     const actionItems = sidePanel.querySelectorAll(
       `.${prefix}--action-set__action-button`
@@ -480,9 +474,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render only 3 action items even if too many items exists', async () => {
-    const sidePanel = (await fixture(
-      template(defaultProps, getActionItems(6))
-    )) as CDSSidePanel;
+    const sidePanel = await fixture(template(defaultProps, getActionItems(6)));
 
     const actionItems = sidePanel.querySelectorAll(
       `.${prefix}--action-set__action-button`

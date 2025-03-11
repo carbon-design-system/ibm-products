@@ -10,164 +10,18 @@ import { expect, describe, it, vi, afterEach } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
+import './index';
 import CDSSidePanel from './side-panel';
-
-const getSubTitle = (index) => {
-  switch (index) {
-    case 1:
-      return html`<div slot="subtitle">This is your subtitle slot.</div>`;
-    case 2:
-      return html`<div slot="subtitle">
-        I am your subtitle slot for <strong>adding detail</strong> that can be
-        one or two lines.
-      </div>`;
-    default:
-      return null;
-  }
-};
-
-const getSlug = (index) => {
-  switch (index) {
-    case 1:
-      return html`<cds-slug size="xs" alignment="bottom-right">
-        <div slot="body-text">
-          <p class="secondary">AI Explained</p>
-          <h1>84%</h1>
-          <p class="secondary bold">Confidence score</p>
-          <!-- //cspell: disable -->
-          <p class="secondary">
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <!-- //cspell: enable -->
-          <hr />
-          <p class="secondary">Model type</p>
-          <p class="bold">Foundation model</p>
-        </div>
-      </cds-slug>`;
-    default:
-      return null;
-  }
-};
-
-const getContent = (index) => {
-  switch (index) {
-    case 1:
-      return html`
-        <h5>Section</h5>
-        <cds-text-input
-          label="Input A"
-          id="side-panel-story-text-input-a"
-          class="text-input"
-        ></cds-text-input>
-        <cds-text-input
-          label="Input B"
-          id="side-panel-story-text-input-b"
-          class="text-input"
-        ></cds-text-input>
-      `;
-
-    default:
-      return null;
-  }
-};
-
-const getActionToolbarItems = (index) => {
-  switch (index) {
-    case 1:
-      return html`
-        <cds-button slot="action-toolbar">Copy</cds-button>
-        <cds-button
-          slot="action-toolbar"
-          aria-label="Settings"
-          has-icon-only="true"
-          kind=${BUTTON_KIND.GHOST}
-          size="sm"
-          tooltip-text="Settings"
-        >
-        </cds-button>
-        <cds-button
-          slot="action-toolbar"
-          aria-label="Delete"
-          has-icon-only="true"
-          kind=${BUTTON_KIND.GHOST}
-          size="sm"
-          tooltip-text="Delete"
-        >
-        </cds-button>
-      `;
-    default:
-      return null;
-  }
-};
-
-const getActionItems = (index) => {
-  switch (index) {
-    case 1:
-      return html`<cds-button key="p" slot="actions" kind=${BUTTON_KIND.PRIMARY}
-        >Primary</cds-button
-      >`;
-    case 2:
-      return html`
-        <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}>Ghost</cds-button>
-        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
-          >Primary</cds-button
-        >
-      `;
-    case 3:
-      return html` <cds-button slot="actions" kind=${BUTTON_KIND.DANGER}
-          >Danger</cds-button
-        >
-        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
-          >Primary</cds-button
-        >`;
-    case 4:
-      return html` <cds-button slot="actions" kind=${BUTTON_KIND.GHOST}
-          >Ghost</cds-button
-        >
-        <cds-button slot="actions" kind=${BUTTON_KIND.SECONDARY}
-          >Secondary</cds-button
-        >
-        <cds-button slot="actions" kind=${BUTTON_KIND.PRIMARY}
-          >Primary</cds-button
-        >`;
-    case 5:
-      return html`<cds-button
-          key="danger"
-          slot="actions"
-          kind=${BUTTON_KIND.DANGER}
-          >Danger</cds-button
-        >
-        <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
-          >Secondary</cds-button
-        >
-        <cds-button key="primary" slot="actions" kind=${BUTTON_KIND.PRIMARY}
-          >Primary</cds-button
-        >`;
-    case 6:
-      return html`<cds-button
-          key="danger"
-          slot="actions"
-          kind=${BUTTON_KIND.DANGER}
-          >Danger</cds-button
-        >
-        <cds-button key="tertiary" slot="actions" kind=${BUTTON_KIND.TERTIARY}
-          >Tertiary</cds-button
-        >
-        <cds-button key="secondary" slot="actions" kind=${BUTTON_KIND.SECONDARY}
-          >Secondary</cds-button
-        >
-        <cds-button key="primary" slot="actions" kind=${BUTTON_KIND.PRIMARY}
-          >Primary</cds-button
-        >`;
-    default:
-      return null;
-  }
-};
+import {
+  getActionItems,
+  getActionToolbarItems,
+  getContent,
+  getSlug,
+  getSubTitle,
+} from './side-panel.stories';
 
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/slug/index.js';
-import { BUTTON_KIND } from '@carbon/web-components/es/components/button/defs';
 
 const defaultProps = {
   animateTitle: true,
@@ -206,16 +60,16 @@ const template = (props = defaultProps, children = getContent(1)) => html`
 
 describe('c4p-side-panel', () => {
   it('should render a side panel', async () => {
-    const sidePanel = await fixture(template());
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
 
     expect(sidePanel?.open).toBeTruthy();
     expect(sidePanel).toBeDefined();
   });
 
   it('should render a side panel on the left', async () => {
-    const sidePanel = await fixture(
+    const sidePanel = (await fixture(
       template({ ...defaultProps, placement: SIDE_PANEL_PLACEMENT.LEFT })
-    );
+    )) as CDSSidePanel;
 
     expect(sidePanel?.placement).toBe('left');
 
@@ -230,7 +84,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a side panel on the right', async () => {
-    const sidePanel = await fixture(template());
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
 
     expect(sidePanel?.placement).toBe('right');
 
@@ -245,7 +99,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a side panel with overlay and close when clicked outside', async () => {
-    const sidePanel = await fixture(template());
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
 
     // Expect the side panel has include-overlay attribute
     expect(sidePanel?.includeOverlay).toBeTruthy();
@@ -267,13 +121,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      sidePanel.constructor.eventBeforeClose
+      (sidePanel as any).constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      sidePanel.constructor.eventClose
+      (sidePanel as any).constructor.eventClose
     );
     // dispatch `cds-side-panel-beingclosed` and `cds-side-panel-closed` events on overlay element click
     overlayElement?.dispatchEvent(new Event('click'));
@@ -294,7 +148,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should close side panel on escape keydown', async () => {
-    const sidePanel = await fixture(template());
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
 
     expect(sidePanel?.open).toBeTruthy();
 
@@ -302,13 +156,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      sidePanel.constructor.eventBeforeClose
+      (sidePanel as any).constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      sidePanel.constructor.eventClose
+      (sidePanel as any).constructor.eventClose
     );
     // press the escape key
     document?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
@@ -327,7 +181,7 @@ describe('c4p-side-panel', () => {
   });
 
   it('should close side panel on the close button click', async () => {
-    const sidePanel = await fixture(template());
+    const sidePanel = (await fixture(template())) as CDSSidePanel;
 
     expect(sidePanel?.open).toBeTruthy();
     expect(sidePanel?.closeIconDescription).toBe('Close');
@@ -340,13 +194,13 @@ describe('c4p-side-panel', () => {
     const eventBeforeClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-beingclosed`
-      sidePanel.constructor.eventBeforeClose
+      (sidePanel as any).constructor.eventBeforeClose
     );
     // add event listener `cds-side-panel-closed` event
     const eventClose = oneEvent(
       sidePanel,
       // getting event name ie., `cds-side-panel-closed`
-      sidePanel.constructor.eventClose
+      (sidePanel as any).constructor.eventClose
     );
 
     // click on the close button
@@ -366,14 +220,16 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a slug', async () => {
-    const sidePanel = await fixture(template(defaultProps, getSlug(1)));
+    const sidePanel = (await fixture(
+      template(defaultProps, getSlug(1))
+    )) as CDSSidePanel;
 
     expect(sidePanel?.open).toBeTruthy();
     // ensure there is a slug present
     expect(sidePanel?._hasSlug).toBeTruthy();
 
     // locate slug element
-    const slug = sidePanel.querySelector('cds-slug');
+    const slug = sidePanel.querySelector('cds-slug') as any;
     // expect the slug element is present
     expect(slug).toBeDefined();
     // expect the default slug size is xs
@@ -381,9 +237,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render navigation button', async () => {
-    const sidePanel = await fixture(
+    const sidePanel = (await fixture(
       template(defaultProps, getActionToolbarItems(1))
-    );
+    )) as CDSSidePanel;
 
     expect(sidePanel?.open).toBeTruthy();
     // get the copy button
@@ -396,9 +252,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render a slide-in side panel', async () => {
-    const sidePanel = await fixture(
+    const sidePanel = (await fixture(
       template({ ...defaultProps, slideIn: true })
-    );
+    )) as CDSSidePanel;
 
     expect(sidePanel.slideIn).toBeTruthy();
     expect(sidePanel.includeOverlay).toBeFalsy();
@@ -418,7 +274,7 @@ describe('c4p-side-panel', () => {
         ?.setAttribute('current-step', '1');
     };
 
-    const sidePanel = await fixture(
+    const sidePanel = (await fixture(
       html`<c4p-side-panel
         ?animate-title=${defaultProps.animateTitle}
         ?condensed-actions=${defaultProps.condensedActions}
@@ -435,7 +291,7 @@ describe('c4p-side-panel', () => {
         .title=${defaultProps.title}
         @c4p-side-panel-navigate-back=${prevStep}
       >${getContent(1)}</<c4p-side-panel`
-    );
+    )) as CDSSidePanel;
 
     const backButton = sidePanel.shadowRoot?.querySelector(
       `.${prefix}--side-panel__navigation-back-button`
@@ -443,7 +299,7 @@ describe('c4p-side-panel', () => {
     // create event listener
     const eventNavigateBack = oneEvent(
       sidePanel,
-      sidePanel.constructor.eventNavigateBack
+      (sidePanel as any).constructor.eventNavigateBack
     );
     // dispatch the event from click of back button
     backButton?.dispatchEvent(new Event('click'));
@@ -453,7 +309,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render subtitle text', async () => {
-    const sidePanel = await fixture(template(defaultProps, getSubTitle(1)));
+    const sidePanel = (await fixture(
+      template(defaultProps, getSubTitle(1))
+    )) as CDSSidePanel;
 
     const subTitleText = sidePanel?.querySelector(
       `.${prefix}--side-panel__subtitle-text`
@@ -463,7 +321,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render at least one action item', async () => {
-    const sidePanel = await fixture(template(defaultProps, getActionItems(1)));
+    const sidePanel = (await fixture(
+      template(defaultProps, getActionItems(1))
+    )) as CDSSidePanel;
 
     const actionItems = sidePanel.querySelectorAll(
       `.${prefix}--action-set__action-button`
@@ -473,7 +333,9 @@ describe('c4p-side-panel', () => {
   });
 
   it('should render only 3 action items even if too many items exists', async () => {
-    const sidePanel = await fixture(template(defaultProps, getActionItems(6)));
+    const sidePanel = (await fixture(
+      template(defaultProps, getActionItems(6))
+    )) as CDSSidePanel;
 
     const actionItems = sidePanel.querySelectorAll(
       `.${prefix}--action-set__action-button`

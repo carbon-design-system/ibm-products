@@ -8,6 +8,7 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
+import path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -20,6 +21,14 @@ export default defineConfig({
       '/__web-dev-server__web-socket.js',
     ]),
   ],
+  resolve: {
+    alias: {
+      'ibm-products-styles': path.resolve(
+        __dirname,
+        'node_modules/@carbon/ibm-products-styles'
+      ),
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {

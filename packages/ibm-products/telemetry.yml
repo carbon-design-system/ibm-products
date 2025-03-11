@@ -762,6 +762,8 @@ collect:
         # NonLinearReading
         - definition
         # NotificationsPanel
+        - dateTimeLocale
+        - dateTimeStyle
         - daysAgoText
         - dismissAllLabel
         - dismissSingleNotificationIconDescription
@@ -893,9 +895,6 @@ collect:
         - onRetry
         - retryLabel
         - showRetry
-        # SteppedAnimatedMedia
-        - filePaths
-        - playStep
         # StringFormatter
         - lines
         - tooltipDirection
@@ -1010,11 +1009,6 @@ collect:
         - group
         - in-progress
         - info
-        - Kinds.checked
-        - Kinds.disabled
-        - Kinds.error
-        - Kinds.indeterminate
-        - Kinds.unchecked
         - link
         - major-warning
         - minor-warning
@@ -1075,14 +1069,7 @@ collect:
         - bottom
         - top
         # General - size
-        - '"lg"'
-        - '"md"'
-        - '"sm"'
-        - '"xs"'
         - 2xl
-        - BigNumbersSize.Default
-        - BigNumbersSize.Large
-        - BigNumbersSize.XLarge
         - default
         - lg
         - md
@@ -1105,8 +1092,6 @@ collect:
         # General - theme
         - dark
         - light
-        - Themes.dark
-        - Themes.light
         # General - titleSize
         - default
         - large
@@ -1183,10 +1168,17 @@ collect:
         # ExportModal - inputType
         - password
         - text
+        # NotificationsPanel - dateTimeStyle
+        - long
+        - narrow
+        - short
         # PageHeader - fullWidthGrid
         - xl
   npm:
     dependencies: null
+  js:
+    functions: {}
+    tokens: null
   js:
     functions: {}
     tokens: null

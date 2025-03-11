@@ -11,6 +11,7 @@ import { fixture, html, oneEvent } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';
 import { prefix } from '../../globals/settings';
 import CDSSidePanel from './side-panel';
+import './index';
 
 const getSubTitle = (index) => {
   switch (index) {

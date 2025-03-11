@@ -14,12 +14,7 @@ import { InlineTip, InlineTipButton, InlineTipLink } from '.';
 
 import styles from './_storybook-styles.scss?inline';
 import InlineTipImage from './storybook_assets/inline-tip-image.png';
-const InlineTipAnimation = new URL(
-  './storybook_assets/inline-tip-animation',
-  import.meta.url
-).pathname;
 import DocsPage from './InlineTip.docs-page';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 export default {
   title: 'Experimental/Onboarding/Inline tip/InlineTip',
@@ -38,15 +33,11 @@ export default {
       control: { type: 'radio' },
     },
     renderMedia: {
-      options: ['None', 'Render a static image', 'Render an animation'],
+      options: ['None', 'Render a static image'],
       control: { type: 'radio' },
     },
     narrow: {
       control: { type: null },
-    },
-    media: {
-      control: { type: null },
-      description: 'Deprecated: Property replaced by "renderMedia"',
     },
   },
 };
@@ -91,11 +82,6 @@ const Template = (args) => {
     switch (renderMedia) {
       case 'Render a static image':
         return () => <img alt="" src={InlineTipImage} />;
-
-      case 'Render an animation':
-        return () => (
-          <SteppedAnimatedMedia filePaths={[InlineTipAnimation]} playStep={1} />
-        );
 
       default:
         return null;

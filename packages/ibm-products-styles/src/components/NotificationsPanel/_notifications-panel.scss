@@ -21,7 +21,7 @@
 $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 $block-size: 38.5rem;
 
-@keyframes fade-in {
+@keyframes notifications-panel-fade-in {
   0% {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-use
@@ -34,7 +34,7 @@ $block-size: 38.5rem;
   }
 }
 
-@keyframes fade-out {
+@keyframes notifications-panel-fade-out {
   0% {
     opacity: 1;
     transform: translateY(0);
@@ -46,17 +46,45 @@ $block-size: 38.5rem;
     transform: translateY(-$block-size); // the height of the notification panel
   }
 }
+
+@keyframes notifications-panel-entrance-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes notifications-panel-exit-reduced {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .#{$block-class}__entrance {
-  animation: fade-in $duration-moderate-02 motion(standard);
+  animation: notifications-panel-fade-in $duration-moderate-02 motion(standard);
 }
 
 .#{$block-class}__exit {
-  animation: fade-out forwards $duration-moderate-02 motion(standard);
+  animation: notifications-panel-fade-out $duration-moderate-02 motion(standard)
+    forwards;
 }
 
-.#{$block-class} {
-  @media (prefers-reduced-motion) {
-    animation: none;
+@media (prefers-reduced-motion) {
+  .#{$block-class}__entrance {
+    animation: notifications-panel-entrance-reduced $duration-moderate-01
+      motion(exit, productive) forwards;
+  }
+
+  .#{$block-class}__exit {
+    animation: notifications-panel-exit-reduced $duration-moderate-01
+      motion(exit, productive) forwards;
   }
 }
 

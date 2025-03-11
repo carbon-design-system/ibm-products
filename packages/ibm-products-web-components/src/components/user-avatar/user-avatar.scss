@@ -31,6 +31,23 @@ $block-class: #{$prefix}--user-avatar;
   @extend .#{$block-class};
   @extend .#{$block-class}__tooltip;
 }
+
+:host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-trigger {
+  padding: 0;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+:host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-content {
+  --cds-tooltip-padding-block: #{$spacing-01};
+
+  &:focus-within {
+    outline: $spacing-01 solid $focus;
+    outline-offset: 1px;
+  }
+}
+
 @mixin setBgColor($color) {
   // stylelint-disable-next-line carbon/theme-use
   background-color: $color;

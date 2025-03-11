@@ -25,6 +25,11 @@ const DocsPage = () => (
       {
         story: stories.inlineTipNarrow,
       },
+      {
+        title: 'Stackblitz example with Animated Media',
+        description: `[![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InlineTipWithAnimatedMedia)
+`,
+      },
     ]}
   />
 );

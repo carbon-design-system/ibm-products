@@ -6,6 +6,7 @@
   "main": "es/index.js",
   "module": "es/index.js",
   "type": "module",
+  "preserveSymlinks": true,
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "repository": {
     "type": "git",

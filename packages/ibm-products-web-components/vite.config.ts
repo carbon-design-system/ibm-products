@@ -22,6 +22,16 @@ export default defineConfig({
   ],
   resolve: {
     dedupe: ['@carbon/ibm-products-styles'], // Ensure it resolves from root
+    alias: {
+      '@carbon/ibm-products-styles': '/packages/ibm-products-styles',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use '@carbon/ibm-products-styles/scss/globals' as *;`,
+      },
+    },
   },
   test: {
     environment: 'happy-dom',

@@ -132,7 +132,7 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     const localRef = useRef(undefined);
     const PasswordInputRef = useRef<HTMLElement | null>(null);
     const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
-    const { keyDownListener, claimFocus } = useFocus(modalRef);
+    const { firstElement, keyDownListener, claimFocus } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
 
     useEffect(() => {
@@ -147,12 +147,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        setTimeout(() => {
-          claimFocus();
-        }, 0);
+        claimFocus();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [modalRef, open]);
+    }, [modalRef, open, firstElement]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

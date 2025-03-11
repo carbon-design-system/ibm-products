@@ -19,8 +19,8 @@ $css--plex: true !default;
 
 $prefix: 'c4p';
 $carbon-prefix: 'cds';
-@use '@carbon/ibm-products-styles/scss/components/SidePanel/_side-panel';
-@use '@carbon/ibm-products-styles/scss/components/ActionSet/action-set.scss'
+@use '@carbon/ibm-products-styles/scss/components/SidePanel/_side-panel' as *;
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/_action-set.scss'
   as *;
 @use '@carbon/ibm-products-styles/scss/components/SidePanel/side-panel-variables'
   as spv;

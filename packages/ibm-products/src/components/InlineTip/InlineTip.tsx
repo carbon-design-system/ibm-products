@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 
 import PropTypes from 'prop-types';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 import cx from 'classnames';
 import { getComponentText } from './utils';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -44,11 +43,6 @@ const defaults = {
   onClick: () => {},
   onClose: () => {},
   title: 'Use case-specific heading',
-};
-
-type MediaType = {
-  render?: () => ReactNode;
-  filePaths?: string[];
 };
 
 export interface InlineTipProps {
@@ -87,15 +81,6 @@ export interface InlineTipProps {
    * This button is not visible if `media` is specified.
    */
   expandButtonLabel?: string;
-  /**
-   * The object describing an image in one of two shapes.
-   * - If a single media element is required, use `{render}`.
-   * - If a stepped animation is required, use `{filePaths}`.
-   *
-   * Enabling `media` disables the `collapsible` feature.
-   * @deprecated please use the `renderMedia` prop
-   */
-  media?: MediaType;
   /**
    * Optional prop to render any media like images or any animated media.
    */
@@ -148,7 +133,6 @@ export let InlineTip = React.forwardRef(
       collapsible = defaults.collapsible,
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
-      media,
       renderMedia,
       narrow = defaults.narrow,
       onClick,
@@ -160,8 +144,6 @@ export let InlineTip = React.forwardRef(
     }: PropsWithChildren<InlineTipProps>,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const hasMedia = renderMedia || media;
-
     const [isCollapsed, setIsCollapsed] = useState(collapsible);
     const labelId = useRef(uuidv4()).current;
 
@@ -171,7 +153,7 @@ export let InlineTip = React.forwardRef(
     );
     let childrenToRender = children;
 
-    if (!hasMedia && collapsible && isCollapsed) {
+    if (!renderMedia && collapsible && isCollapsed) {
       childrenToRender = (
         <p className={`${blockClass}__preview-text`}>{previewText}</p>
       );
@@ -191,7 +173,7 @@ export let InlineTip = React.forwardRef(
           className,
           collapsible && `${blockClass}__collapsible`,
           isCollapsed && `${blockClass}__collapsible-collapsed`,
-          hasMedia && `${blockClass}__has-media`,
+          renderMedia && `${blockClass}__has-media`,
           [narrow ? `${blockClass}__narrow` : `${blockClass}__wide`],
           withLeftGutter && !narrow && `${blockClass}__with-left-gutter`
         )}
@@ -212,7 +194,7 @@ export let InlineTip = React.forwardRef(
         </div>
 
         {/* Hide the idea icon if is narrow and showing an image */}
-        {((!hasMedia && narrow) || !narrow) && (
+        {((!renderMedia && narrow) || !narrow) && (
           <div className={`${blockClass}__icon-idea`} tabIndex={-1}>
             <Idea size={16} />
           </div>
@@ -233,7 +215,7 @@ export let InlineTip = React.forwardRef(
           {(collapsible || tertiaryButtonLabel) && (
             <footer className={`${blockClass}__footer`}>
               {/* Disable the collapsible feature if an image is visible */}
-              {collapsible && !hasMedia && (
+              {collapsible && !renderMedia && (
                 <Button
                   className={`${blockClass}__toggle-btn`}
                   kind="ghost"
@@ -259,16 +241,7 @@ export let InlineTip = React.forwardRef(
             </footer>
           )}
         </div>
-        {hasMedia && media?.render && (
-          <div className={`${blockClass}__media`}>{media.render()}</div>
-        )}
-        {hasMedia && media?.filePaths && (
-          <SteppedAnimatedMedia
-            className={`${blockClass}__media`}
-            filePaths={media.filePaths}
-          />
-        )}
-        {hasMedia && renderMedia && (
+        {renderMedia && (
           <div className={`${blockClass}__media`}>{renderMedia()}</div>
         )}
       </div>
@@ -315,23 +288,7 @@ InlineTip.propTypes = {
    * This button is not visible if `media` is specified.
    */
   expandButtonLabel: PropTypes.string,
-  /**
-   * The object describing an image in one of two shapes.
-   * - If a single media element is required, use `{render}`.
-   * - If a stepped animation is required, use `{filePaths}`.
-   *
-   * Enabling `media` disables the `collapsible` feature.
-   * @deprecated please use the `renderMedia` prop
-   */
-  /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.string,
-    }),
-  ]),
+
   /**
    * Set to `true` to arrange the information in a format
    * that is easier to read in a limited space.

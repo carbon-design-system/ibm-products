@@ -13,7 +13,6 @@ import React, {
   PropsWithChildren,
   ReactNode,
   ForwardedRef,
-  MutableRefObject,
   RefObject,
 } from 'react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
@@ -41,7 +40,7 @@ import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 import { useIsomorphicEffect, usePreviousValue } from '../../global/js/hooks';
-import { claimFocus, useFocus } from '../../global/js/hooks/useFocus';
+import { useFocus } from '../../global/js/hooks/useFocus';
 import { TearsheetAction } from './Tearsheet';
 
 // The block part of our conventional BEM class names (bc__E--M).
@@ -278,10 +277,10 @@ export const TearsheetShell = React.forwardRef(
     const localRef = useRef(undefined);
     const resizer = useRef(null);
     const modalBodyRef = useRef(null);
-    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
+    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const { width } = useResizeObserver(resizer);
     const prevOpen = usePreviousValue(open);
-    const { firstElement, keyDownListener } = useFocus(
+    const { keyDownListener, claimFocus } = useFocus(
       modalRef,
       selectorPrimaryFocus
     );
@@ -320,19 +319,10 @@ export const TearsheetShell = React.forwardRef(
     useEffect(() => {
       if (open && position === depth) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(firstElement, modalRef, selectorPrimaryFocus);
+        claimFocus();
       }
-    }, [
-      currentStep,
-      depth,
-      firstElement,
-      modalRef,
-      modalRefValue,
-      open,
-      position,
-      selectorPrimaryFocus,
-      hasError,
-    ]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentStep, depth, modalRef, modalRefValue, open, position, hasError]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {

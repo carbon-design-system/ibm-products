@@ -385,6 +385,7 @@ const FirstElementDisabledTemplate = (
   context
 ) => {
   const [open, setOpen] = useState(false);
+  const [text, setText] = useState('');
   const wiredActions =
     actions &&
     Array.prototype.map.call(actions, (action) => {
@@ -434,7 +435,7 @@ const FirstElementDisabledTemplate = (
                     // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
-                  disabled
+                  disabled={!text?.length > 0}
                 />
                 <TextInput
                   id="tss-ft2"
@@ -443,6 +444,7 @@ const FirstElementDisabledTemplate = (
                     // stylelint-disable-next-line carbon/layout-use
                     { marginBottom: '1em' }
                   }
+                  onChange={(ev) => setText(ev?.target?.value)}
                 />
               </FormGroup>
             </Form>

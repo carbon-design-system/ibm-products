@@ -116,6 +116,7 @@ test.describe('Tearsheet @avt', () => {
       },
     });
 
+    const input1 = page.locator('#tss-ft1');
     const input2 = page.locator('#tss-ft2');
     const closeIcon = page.getByLabel('Close the tearsheet');
 
@@ -127,6 +128,13 @@ test.describe('Tearsheet @avt', () => {
 
     // Press 'Tab' key to focus the second input box
     await page.keyboard.press('Tab');
+    await expect(input2).toBeFocused();
+
+    // Type some text in the input field
+    await expect(input1).toBeDisabled();
+    await page.keyboard.type('T');
+    await expect(input1).toBeEnabled();
+    // Make sure the focus still on the input 2
     await expect(input2).toBeFocused();
   });
 

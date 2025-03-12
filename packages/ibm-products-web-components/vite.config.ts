@@ -42,5 +42,11 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
+    deps: {
+      inline: ['@carbon/ibm-products-web-components'], // Ensure it is not reloaded unexpectedly
+    },
+  },
+  optimizeDeps: {
+    include: ['@carbon/ibm-products-web-components'], // Add dependencies that cause unexpected reloads
   },
 });

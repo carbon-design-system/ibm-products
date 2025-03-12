@@ -22,7 +22,7 @@ export default defineConfig({
   ],
   test: {
     environment: 'happy-dom',
-    include: ['src/**/*.test.{ts,js}'],
+    include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser

@@ -22,6 +22,7 @@ export default defineConfig({
     ]),
   ],
   test: {
+    globals: true,
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
@@ -39,8 +40,5 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
-  },
-  resolve: {
-    alias: [{ find: '@', replacement: '../' }],
   },
 });

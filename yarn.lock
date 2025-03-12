@@ -1667,6 +1667,8 @@ __metadata:
     "@storybook/theming": "npm:^8.6.2"
     "@storybook/web-components": "npm:^8.6.2"
     "@storybook/web-components-vite": "npm:^8.6.2"
+    "@testing-library/dom": "npm:^10.4.0"
+    "@testing-library/jest-dom": "npm:^6.6.3"
     "@types/jest": "npm:^29.5.13"
     "@vitest/browser": "npm:^3.0.1"
     "@vitest/coverage-v8": "npm:^3.0.1"
@@ -1684,6 +1686,7 @@ __metadata:
     rollup: "npm:^4.27.3"
     rollup-plugin-copy: "npm:^3.5.0"
     sass: "npm:^1.80.6"
+    shadow-dom-testing-library: "npm:^1.12.0"
     storybook: "npm:^8.6.2"
     storybook-addon-accessibility-checker: "npm:^3.1.61-rc.3"
     tslib: "npm:^2.8.1"
@@ -20867,6 +20870,15 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: 10/fde1630422502fbbc19e6844346778f99d449986b2f9cdcceb8326730d2f3d9964dbcb03c02aaadaefffecd0f2c063315ebea8b3ad895914bf1afc1747fc172e
+  languageName: node
+  linkType: hard
+
+"shadow-dom-testing-library@npm:^1.12.0":
+  version: 1.12.0
+  resolution: "shadow-dom-testing-library@npm:1.12.0"
+  peerDependencies:
+    "@testing-library/dom": ">= 8"
+  checksum: 10/35dfc97d5560f0b9daca0cbaecc454465f1c811a33d4f16c3177d2aae9a1e3bf88e6acddf46c64c465d660c1fe63fe467b09239a143fc3e4ed589326050b8273
   languageName: node
   linkType: hard
 

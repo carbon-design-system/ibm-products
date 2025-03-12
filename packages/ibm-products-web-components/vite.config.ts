@@ -11,6 +11,9 @@ import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize
 import path from 'path';
 
 export default defineConfig({
+  optimizeDeps: {
+    include: ['lit', 'lit/decorators.js', 'lit/directives/class-map.js'],
+  },
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),

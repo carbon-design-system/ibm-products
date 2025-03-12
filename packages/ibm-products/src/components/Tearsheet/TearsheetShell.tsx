@@ -328,7 +328,8 @@ export const TearsheetShell = React.forwardRef(
       if (prevOpen && !open && launcherButtonRef) {
         setTimeout(() => {
           launcherButtonRef.current.focus();
-        }, 0);
+          // Delayed to avoid race condition
+        }, 50);
       }
     }, [launcherButtonRef, open, prevOpen]);
 

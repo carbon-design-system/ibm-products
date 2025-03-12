@@ -211,6 +211,9 @@ test.describe('Tearsheet @avt', () => {
     const stackInput3 = page.locator('#stacked-input-3');
 
     const openButton1 = page.getByText('Toggle tearsheet 1');
+    const openButton2 = page.getByText('Open tearsheet 2');
+    const openButton3 = page.getByText('Open tearsheet 3');
+
     // Expect the "Toggle tearsheet 1" button is focused in the Storybook
     await expect(openButton1).toBeFocused();
     // Pressing 'Enter' key to open the Tearsheet
@@ -268,16 +271,16 @@ test.describe('Tearsheet @avt', () => {
 
     // Now 3rd Tearsheet is closed and 2nd Tearsheet is in the viewport
     await expect(ts2).toBeInViewport();
-    // And the focus is switched to the first input field of 2nd Tearsheet
-    await expect(stackInput2).toBeFocused();
+    // And the focus is switched to the open button of tearsheet 3
+    await expect(openButton3).toBeFocused();
 
     // Pressing 'Escape' key to close the second Tearsheet
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });
     // Now the 2nd Tearsheet is closed and 1st Tearsheet in the viewport
     await expect(ts1).toBeInViewport();
-    // And the focus now on the 1st input field of 1st Tearsheet
-    await expect(stackInput1).toBeFocused();
+    // And the focus now on the open tearsheet 2 button
+    await expect(openButton2).toBeFocused();
 
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });

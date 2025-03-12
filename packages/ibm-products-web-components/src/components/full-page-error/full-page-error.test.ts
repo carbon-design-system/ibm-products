@@ -8,7 +8,7 @@
 import { expect, test } from 'vitest';
 import { Kind } from './types';
 import { html } from 'lit';
-import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
+// import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
 import { screen } from 'shadow-dom-testing-library';
 
 // query utilities:

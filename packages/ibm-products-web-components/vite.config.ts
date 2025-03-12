@@ -10,15 +10,7 @@ import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
 
 export default defineConfig({
-  optimizeDeps: {
-    include: [
-      // Add problematic dependencies here
-      'lit',
-      'lit-html',
-      'lit-element',
-      // Add other dependencies as needed
-    ],
-  },
+  base: '/',
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),

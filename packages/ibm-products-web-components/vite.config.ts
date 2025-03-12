@@ -11,14 +11,6 @@ import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize
 import path from 'path';
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@carbon/ibm-products-styles': path.resolve(
-        __dirname,
-        '../ibm-products-styles'
-      ),
-    },
-  },
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),

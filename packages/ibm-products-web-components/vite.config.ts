@@ -8,11 +8,16 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
+import path from 'path';
 
 export default defineConfig({
-  optimizeDeps: {
-    force: true,
-    extensions: ['ts'],
+  resolve: {
+    alias: {
+      '@carbon/ibm-products-styles': path.resolve(
+        __dirname,
+        '../ibm-products-styles'
+      ),
+    },
   },
   plugins: [
     litStyleLoader(),

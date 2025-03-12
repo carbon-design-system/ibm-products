@@ -32,7 +32,7 @@ export default defineConfig({
     browser: {
       provider: 'playwright',
       enabled: true,
-      headless: true,
+      headless: false,
       name: 'chromium',
     },
     coverage: {

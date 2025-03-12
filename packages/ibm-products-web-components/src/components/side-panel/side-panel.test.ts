@@ -6,7 +6,6 @@
  */
 
 vi.mock('@carbon/icons/lib/close/20', () => vi.fn().mockReturnValue({}));
-vi.mock('@/carbon/ibm-products-styles', () => ({}));
 import { expect, describe, it, vi, afterEach } from 'vitest';
 import { fixture, html, oneEvent } from '@open-wc/testing';
 import { SIDE_PANEL_PLACEMENT, SIDE_PANEL_SIZE } from './defs';

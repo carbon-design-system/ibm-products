@@ -137,6 +137,7 @@ declare module '@carbon/react' {
     RadioButtonGroup,
     RadioTile,
     Row,
+    Section,
     Search,
     SearchSkeleton,
     SecondaryButton,

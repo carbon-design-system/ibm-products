@@ -10,6 +10,15 @@ import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
 
 export default defineConfig({
+  optimizeDeps: {
+    include: [
+      // Add problematic dependencies here
+      'lit',
+      'lit-html',
+      'lit-element',
+      // Add other dependencies as needed
+    ],
+  },
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),
@@ -42,11 +51,5 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
-    deps: {
-      inline: ['@carbon/ibm-products-web-components'], // Ensure it is not reloaded unexpectedly
-    },
-  },
-  optimizeDeps: {
-    include: ['@carbon/ibm-products-web-components'], // Add dependencies that cause unexpected reloads
   },
 });

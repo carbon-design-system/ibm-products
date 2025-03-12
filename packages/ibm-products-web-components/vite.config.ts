@@ -39,4 +39,7 @@ export default defineConfig({
       reporter: ['text', 'html'],
     },
   },
+  esbuild: {
+    target: 'es2015', // Ensures modern JS features like dynamic import
+  },
 });

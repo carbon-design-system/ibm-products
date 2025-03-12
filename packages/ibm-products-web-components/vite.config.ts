@@ -23,7 +23,7 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.{ts,js}'],
-    exclude: [...configDefaults.exclude, '**/*.stories.ts'],
+    exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {
@@ -35,7 +35,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*'],
-      exclude: ['src/**/*.stories.{js,ts}'],
+      exclude: ['src/**/*.stories.ts'],
       reporter: ['text', 'html'],
     },
   },

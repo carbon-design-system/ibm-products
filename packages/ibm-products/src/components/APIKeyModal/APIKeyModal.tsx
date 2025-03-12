@@ -10,7 +10,7 @@ import React, {
   useRef,
   useEffect,
   forwardRef,
-  MutableRefObject,
+  RefObject,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -41,7 +41,6 @@ import { isRequiredIf } from '../../global/js/utils/props-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { APIKeyModalProps } from './APIKeyModal.types';
 import { useFocus, usePreviousValue } from '../../global/js/hooks';
-import { claimFocus } from '../../global/js/hooks/useFocus';
 
 const componentName = 'APIKeyModal';
 
@@ -132,8 +131,8 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     const blockClass = `${pkg.prefix}--apikey-modal`;
     const localRef = useRef(undefined);
     const PasswordInputRef = useRef<HTMLElement | null>(null);
-    const modalRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
-    const { firstElement, keyDownListener } = useFocus(modalRef);
+    const modalRef = (ref || localRef) as RefObject<HTMLDivElement>;
+    const { firstElement, keyDownListener, claimFocus } = useFocus(modalRef);
     const prevOpen = usePreviousValue(open);
 
     useEffect(() => {
@@ -148,13 +147,10 @@ export let APIKeyModal: React.FC<APIKeyModalProps> = forwardRef(
     useEffect(() => {
       if (open) {
         // Focusing the first element or selectorPrimaryFocus element
-        claimFocus(
-          firstElement,
-          modalRef,
-          `#${CSS.escape(apiKeyInputId?.current)}`
-        );
+        claimFocus();
       }
-    }, [firstElement, modalRef, open]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalRef, open, firstElement]);
 
     useEffect(() => {
       if (prevOpen && !open && launcherButtonRef) {
@@ -637,11 +633,6 @@ APIKeyModal.propTypes = {
    * text that displays in the secondary button when using custom steps to indicate to the user that there is a previous step
    */
   previousStepButtonText: customStepsRequiredProps(PropTypes.string),
-  /**
-   * Specify a CSS selector that matches the DOM element that should be
-   * focused when the Modal opens.
-   */
-  selectorPrimaryFocus: PropTypes.string,
   /**
    * label text that's displayed when hovering over visibility toggler to show key
    */

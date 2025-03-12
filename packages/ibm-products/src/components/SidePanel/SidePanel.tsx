@@ -11,7 +11,6 @@ import { Button, IconButton } from '@carbon/react';
 // Import portions of React that are needed.
 import React, {
   ForwardedRef,
-  MutableRefObject,
   ReactNode,
   RefObject,
   useCallback,
@@ -275,7 +274,7 @@ export let SidePanel = React.forwardRef(
   ) => {
     const [animationComplete, setAnimationComplete] = useState(false);
     const localRef = useRef<HTMLDivElement>(null);
-    const sidePanelRef = (ref || localRef) as MutableRefObject<HTMLDivElement>;
+    const sidePanelRef = (ref || localRef) as RefObject<HTMLDivElement>;
     const overlayRef = useRef<HTMLDivElement>(null);
     const innerContentRef = useRef<HTMLDivElement>(null);
     const closeRef = useRef<HTMLButtonElement>(null);

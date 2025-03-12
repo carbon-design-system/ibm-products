@@ -346,7 +346,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _checkSetOpen = () => {
     const { _sidePanel: sidePanel } = this;
     if (sidePanel && this._isOpen) {
-      if (this._reducedMotion) {
+      if (this._reducedMotion?.matches) {
         this._isOpen = false;
       } else {
         // wait until the side panel has transitioned off the screen to remove

@@ -11,6 +11,7 @@ import * as stories from './UserProfileImage.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref={[]}
     // cspell:disable-next-line
     deprecationNotice="This component will soon be deprecated, Please migrate to [UserAvatar](?path=/docs/ibm-products-components-user-avatar-useravatar--docs#migration-from-userprofileimage)."
     blocks={[

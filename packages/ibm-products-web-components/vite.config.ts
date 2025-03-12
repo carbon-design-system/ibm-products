@@ -22,8 +22,7 @@ export default defineConfig({
     ]),
   ],
   test: {
-    name: 'unit',
-    environment: 'node',
+    environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
     // Lit recommends using browser environment for testing

@@ -21,6 +21,7 @@ import path from 'path';
 import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import fs from 'fs-extra';
 
 import * as packageJson from '../package.json' assert { type: 'json' };
 
@@ -90,6 +91,8 @@ async function build() {
       sourcemap: true,
     });
   }
+
+  await postBuild();
 }
 
 const banner = `/**
@@ -162,3 +165,30 @@ build().catch((error) => {
   console.log(error);
   process.exit(1);
 });
+
+async function postBuild() {
+  const sourceDir = path.resolve(__dirname, '../es');
+
+  if (sourceDir) {
+    const targetDir = path.resolve(__dirname, '../es-custom');
+
+    // Copy `es` directory to `es-custom`
+    await fs.copy(sourceDir, targetDir);
+
+    // Find all files in the `es-custom` directory
+    const files = await globby([`${targetDir}/**/*`], { onlyFiles: true });
+
+    // Replace "cds" with "cds-custom" in all files
+    await Promise.all(
+      files.map(async (file) => {
+        let content = await fs.promises.readFile(file, 'utf8');
+        content = content.replace(/cds/g, 'cds-custom');
+        content = content.replace(
+          /import\s+['"]@carbon\/web-components\/es\/components\/(.*?)['"]/g,
+          "import '@carbon/web-components/es-custom/components/$1'"
+        );
+        await fs.promises.writeFile(file, content);
+      })
+    );
+  }
+}

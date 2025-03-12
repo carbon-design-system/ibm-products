@@ -53,7 +53,7 @@
   "dependencies": {
     "@carbon/ibm-products-styles": "^2.57.0-rc.0",
     "@carbon/styles": "1.75.0",
-    "@carbon/web-components": "2.23.0",
+    "@carbon/web-components": "2.25.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {

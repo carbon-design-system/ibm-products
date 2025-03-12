@@ -8,19 +8,18 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import * as stories from './Cascade.stories';
-import { useOf } from '@storybook/blocks';
-import { storyDocsGuidelines } from '../../global/js/utils/story-helper';
 
 const DocsPage = () => {
-  const { csfFile } = useOf('meta', ['meta']);
-
   return (
     <StoryDocsPage
       altGuidelinesHref={[
-        storyDocsGuidelines(csfFile),
         {
-          href: 'https://www.carbondesignsystem.com/guidelines/motion/overview/',
-          label: 'Carbon motion guidelines',
+          href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/cascade/',
+          label: 'Cascade usage guidelines',
+        },
+        {
+          href: 'https://carbondesignsystem.com/elements/motion/overview/',
+          label: 'Carbon Motion overview',
         },
       ]}
       blocks={[

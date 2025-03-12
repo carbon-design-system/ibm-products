@@ -1,0 +1,12 @@
+{
+  "label": "InlineTip-With-Animated-Media",
+  "package-config": {
+    "flags": {
+      "component": {
+        "InlineTip": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

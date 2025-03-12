@@ -11,6 +11,7 @@ import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  base: '/',
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),

@@ -8,10 +8,8 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  base: '/',
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),
@@ -21,7 +19,6 @@ export default defineConfig({
        * @web/dev-server. So it should be ignored by Vite */
       '/__web-dev-server__web-socket.js',
     ]),
-    tsconfigPaths(),
   ],
   test: {
     environment: 'happy-dom',
@@ -32,7 +29,7 @@ export default defineConfig({
     browser: {
       provider: 'playwright',
       enabled: true,
-      headless: false,
+      headless: true,
       name: 'chromium',
     },
     coverage: {

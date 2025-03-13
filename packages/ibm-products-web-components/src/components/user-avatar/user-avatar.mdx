@@ -44,6 +44,20 @@ import '@carbon/ibm-products-web-components/es/components/user-avatar/index.js';
 ></c4p-user-avatar>
 ```
 
+### With Icon
+An icon can be passed as a slot in `<c4p-user-avatar>` using `{ slot: 'rendericon' }`.
+```html
+ <c4p-user-avatar
+  name= 'Thomas J. Watson'
+  background-color='order-11-purple'
+  size="lg"
+  tooltip-text='TW, Thomas J. Watson user profile'
+  tooltip-alignment="right"
+>
+ ${Group({ slot: 'rendericon' })}
+</c4p-user-avatar>
+```
+
 ## `<c4p-user-avatar>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute.

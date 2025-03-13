@@ -204,6 +204,7 @@
     "userprofileimage",
     "uuidv",
     "webfonts",
-    "useravatar"
+    "useravatar",
+    "rendericon"
   ]
 }

@@ -19,8 +19,6 @@ import User from '@carbon/web-components/es/icons/user/16';
 
 const blockClass = `${prefix}--user-avatar`;
 
-const iconSize = { sm: 16, md: 20, lg: 24, xl: 32 };
-
 /**
  * Useravatar.
  *
@@ -47,12 +45,6 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
    */
   @property({ reflect: true })
   name;
-
-  /**
-   * Provide a custom icon to use if you need to use an icon other than the default one
-   */
-  @property()
-  renderIcon;
 
   /**
    * Set the size of the avatar circle
@@ -85,7 +77,6 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
 
   render() {
     const getItem = () => {
-      const iconProps = { size: iconSize[this.size] };
       if (this.image) {
         const imageClasses = classMap({
           [`${blockClass}__photo`]: true,
@@ -97,11 +88,8 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
           class="${imageClasses}"
         />`;
       }
-      if (this.renderIcon) {
-        return html`${this.renderIcon({
-          width: `${iconProps.size}`,
-          height: `${iconProps.size}`,
-        })}`;
+      if (this.querySelector('[slot="rendericon"]')) {
+        return html`<slot name="rendericon"></slot>`;
       }
       if (this.name) {
         const parts = this.name?.split(' ') || [];
@@ -118,11 +106,7 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
 
         return ''.concat(...initials);
       }
-      return html`${User({
-        slot: 'icon',
-        width: `${iconProps.size}`,
-        height: `${iconProps.size}`,
-      })} `;
+      return html`${User({ slot: 'rendericon' })} `;
     };
 
     const { tooltipText, tooltipAlignment, size, backgroundColor, theme } =

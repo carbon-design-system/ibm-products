@@ -12,13 +12,13 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
-    litStyleLoader(),
-    litTemplateLoader(),
+    // litStyleLoader(),
+    // litTemplateLoader(),
     externalizeSourceDependencies([
       /* @web/test-runner-commands needs to establish a web-socket
        * connection. It expects a file to be served from the
        * @web/dev-server. So it should be ignored by Vite */
-      '/__web-dev-server__web-socket.js',
+      '/__web-dev-server__web-socket`.js',
     ]),
   ],
   test: {

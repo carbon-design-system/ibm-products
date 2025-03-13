@@ -8,11 +8,13 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
     litStyleLoader(),
     litTemplateLoader(),
+    tsconfigPaths(),
     externalizeSourceDependencies([
       /* @web/test-runner-commands needs to establish a web-socket
        * connection. It expects a file to be served from the
@@ -20,6 +22,9 @@ export default defineConfig({
       '/__web-dev-server__web-socket.js',
     ]),
   ],
+  optimizeDeps: {
+    exclude: ['@open-wc/testing'], // Avoid pre-bundling test utilities
+  },
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],

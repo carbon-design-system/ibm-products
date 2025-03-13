@@ -7,9 +7,10 @@
 
 import { expect, test } from 'vitest';
 import { Kind } from './types';
-import { html } from 'lit';
+// import { html } from 'lit';
 // import '@carbon/ibm-products-web-components/es/components/full-page-error/full-page-error';
 import { screen } from 'shadow-dom-testing-library';
+import { fixture, html } from '@open-wc/testing';
 
 // query utilities:
 import {
@@ -38,6 +39,17 @@ const defaultProps = {
 };
 
 const elementName = 'c4p-full-page-error';
+
+const template = (props = defaultProps) =>
+  html` <c4p-full-page-error
+    class=${props.class}
+    label=${props.label}
+    title=${props.title}
+    description=${props.description}
+    kind=${props.kind}
+  >
+    ${props.children}
+  </c4p-full-page-error>`;
 
 describe(elementName, () => {
   let element: CDSFullPageError;
@@ -72,31 +84,31 @@ describe(elementName, () => {
   it('applies a class to the containing node', async () => {
     const className = 'a-test-class';
 
-    element.setAttribute('class', className);
-    document.body.appendChild(element);
+    const el = await fixture(
+      html`<c4p-full-page-error
+        class=${className}
+        label=${defaultProps.label}
+        title=${defaultProps.title}
+        description=${defaultProps.description}
+        kind=${defaultProps.kind}
+      >
+        <p>hello</p>
+      </c4p-full-page-error>`
+    );
 
-    expect(element).toHaveClass(className);
-
-    // expect(
-    //   element.shadowRoot?.querySelector('[role="main"]')?.hasAttribute('class')
-    // );
-    // expect(
-    //   element.shadowRoot
-    //     ?.querySelector('[role="main"]')
-    //     ?.classList.contains(className)
-    // ).toBe(true);
+    expect(el.hasAttribute('class')).toBeTruthy();
   });
 
-  // it('renders an error label', async () => {
-  //   const element: CDSFullPageError = await fixture(template());
+  it('renders an error label', async () => {
+    const element: CDSFullPageError = await fixture(template());
 
-  //   expect(element.label).toBe(defaultProps.label);
-  //   expect(
-  //     element.shadowRoot
-  //       ?.querySelector(`.${blockClass}__label`)
-  //       ?.textContent?.includes(defaultProps.label)
-  //   ).toBeTruthy();
-  // });
+    expect(element.label).toBe(defaultProps.label);
+    expect(
+      element.shadowRoot
+        ?.querySelector(`.${blockClass}__label`)
+        ?.textContent?.includes(defaultProps.label)
+    ).toBeTruthy();
+  });
 
   // it('renders a description', async () => {
   //   const element: CDSFullPageError = await fixture(template());

@@ -8,17 +8,16 @@
 import { defineConfig, configDefaults } from 'vitest/config';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
 import externalizeSourceDependencies from '@blockquote/rollup-plugin-externalize-source-dependencies';
-import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
-    // litStyleLoader(),
-    // litTemplateLoader(),
+    litStyleLoader(),
+    litTemplateLoader(),
     externalizeSourceDependencies([
       /* @web/test-runner-commands needs to establish a web-socket
        * connection. It expects a file to be served from the
        * @web/dev-server. So it should be ignored by Vite */
-      '/__web-dev-server__web-socket`.js',
+      '/__web-dev-server__web-socket.js',
     ]),
   ],
   test: {
@@ -39,8 +38,5 @@ export default defineConfig({
       exclude: ['src/**/*.stories.{js,ts}'],
       reporter: ['text', 'html'],
     },
-  },
-  resolve: {
-    alias: [{ find: '@', replacement: '../' }],
   },
 });

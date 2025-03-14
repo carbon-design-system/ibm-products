@@ -14207,8 +14207,8 @@ __metadata:
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.2"
     prettier-config-carbon: "npm:^0.11.0"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
+    react: "npm:^18.3.1"
+    react-dom: "npm:^18.3.1"
     rimraf: "npm:^6.0.1"
     stylelint: "npm:^16.15.0"
     stylelint-config-carbon: "npm:^1.20.0"
@@ -19909,7 +19909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0, react-dom@npm:^18.3.1":
+"react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -20059,7 +20059,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0, react@npm:^18.3.1":
+"react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:

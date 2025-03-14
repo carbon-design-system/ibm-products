@@ -137,6 +137,8 @@ jobs:
             test-c4p-wc-modules-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install
         run: yarn
+      - name: Install browsers
+        run: yarn playwright install --with-deps
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc
 

@@ -20,20 +20,10 @@ export default defineConfig({
       '/__web-dev-server__web-socket.js',
     ]),
   ],
-
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@use "@carbon/ibm-products-styles/scss/index" as *;`,
-        includePaths: ['node_modules'],
-      },
-    },
-  },
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.ts'],
     exclude: [...configDefaults.exclude],
-
     // Lit recommends using browser environment for testing
     // https://lit.dev/docs/tools/testing/#testing-in-the-browser
     browser: {

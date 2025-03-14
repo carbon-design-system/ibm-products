@@ -11,7 +11,7 @@ import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
-// import mdx from './TagSet.mdx';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import styles from './_storybook-styles.scss?inline';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -133,10 +133,29 @@ export default {
   component: TagSet,
   tags: ['autodocs'],
   parameters: {
-    // docs: { page: mdx },
     styles,
     percy: {
       waitForTimeout: 1000,
+    },
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/tag-set/usage/',
+              label: 'TagSet usage guidelines',
+            },
+            {
+              href: 'https://carbondesignsystem.com/components/tag/usage/',
+              label: 'Carbon Tag usage guidelines',
+            },
+            {
+              href: 'https://react.carbondesignsystem.com/?path=/docs/components-tag--overview',
+              label: 'Carbon Tag documentation',
+            },
+          ]}
+        />
+      ),
     },
   },
   argTypes: {

@@ -138,6 +138,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Install browsers
+        working-directory: packages/ibm-products-web-components
         run: yarn playwright install --with-deps
       - name: CI tests for products web components
         run: yarn ci-check:test:c4p-wc

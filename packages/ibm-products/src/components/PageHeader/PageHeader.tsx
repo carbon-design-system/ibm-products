@@ -20,7 +20,6 @@ import {
 import { TagProps } from '@carbon/react/lib/components/Tag/Tag';
 import React, {
   ForwardedRef,
-  JSX,
   MutableRefObject,
   PropsWithChildren,
   ReactNode,

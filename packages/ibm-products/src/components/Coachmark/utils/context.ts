@@ -10,7 +10,7 @@ import { ButtonProps } from '@carbon/react';
 import { createContext, useContext } from 'react';
 
 interface CoachmarkContextType {
-  buttonProps: ButtonProps;
+  buttonProps: ButtonProps<React.ElementType>;
   closeButtonProps: {
     onClick: () => void;
   };

@@ -6,7 +6,6 @@
 //
 
 import React, {
-  JSX,
   PropsWithChildren,
   ReactNode,
   useCallback,

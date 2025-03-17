@@ -12,6 +12,7 @@ import * as stories from './ExpressiveCard.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/components/card/expressive-card/usage/"
     blocks={[
       {
         story: stories.Default,

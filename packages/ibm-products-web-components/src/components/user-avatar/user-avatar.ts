@@ -142,8 +142,15 @@ class CDSUseravatar extends HostListenerMixin(LitElement) {
         aria-label=${tooltipText}
         class=${`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
       >
-        ${Avatar()}
-        <cds-tooltip-content id="content"> ${tooltipText} </cds-tooltip-content>
+        <button class=${`${blockClass}__tooltip-trigger`} role="button">
+          ${Avatar()}
+        </button>
+        <cds-tooltip-content
+          class=${`${blockClass}__tooltip-content`}
+          id="content"
+        >
+          ${tooltipText}
+        </cds-tooltip-content>
       </cds-tooltip>`;
     } else {
       return html` ${Avatar()}`;

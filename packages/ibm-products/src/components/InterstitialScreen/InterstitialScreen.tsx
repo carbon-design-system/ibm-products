@@ -34,7 +34,6 @@ import { ArrowRight } from '@carbon/react/icons';
 import { Carousel } from '../Carousel';
 // Other standard imports.
 import PropTypes from 'prop-types';
-import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 // Other standard imports.
 import cx from 'classnames';
 import { clamp } from '../../global/js/utils/clamp';
@@ -74,21 +73,6 @@ const defaults = {
   startButtonLabel: 'Get started',
 };
 
-type Media = {
-  breakpoints?: {
-    xlg?: number;
-    lg?: number;
-  };
-} & (
-  | {
-      render?: () => ReactNode;
-      filePaths?: never;
-    }
-  | {
-      render?: never;
-      filePaths?: string[];
-    }
-);
 type BreakpointsWithMedia = {
   xlg?: number;
   lg?: number;
@@ -138,20 +122,7 @@ export interface InterstitialScreenProps extends PropsWithChildren {
    * Specifies whether the component is currently open.
    */
   isOpen?: boolean;
-  /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
-   * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
-   *
-   * @deprecated please use the `renderMedia` prop
-   * @see {@link MEDIA_PROP_TYPE}.
-   */
-  media?: Media;
+
   /**
    * Optional prop to render any media like images or any animated media.
    */
@@ -213,7 +184,6 @@ export let InterstitialScreen = React.forwardRef<
     interstitialAriaLabel = defaults.interstitialAriaLabel,
     isFullScreen = defaults.isFullScreen,
     isOpen = defaults.isOpen,
-    media,
     renderMedia,
     breakpointsWithMedia,
     nextButtonLabel = defaults.nextButtonLabel,
@@ -235,12 +205,10 @@ export let InterstitialScreen = React.forwardRef<
   const [progStep, setProgStep] = useState(0);
   const childArray = Children.toArray(children);
   const isMultiStep = childArray.length > 1;
-  const mediaIsDefined = media?.render || media?.filePaths;
-  const hasMedia = mediaIsDefined || renderMedia;
   const bodyScrollRef = useRef<HTMLDivElement>(null);
   const mediaBreakpoints = {
-    xlg: media?.breakpoints?.xlg || breakpointsWithMedia?.xlg || 0,
-    lg: media?.breakpoints?.lg || breakpointsWithMedia?.lg || 0,
+    xlg: breakpointsWithMedia?.xlg || 0,
+    lg: breakpointsWithMedia?.lg || 0,
     md: 0,
     sm: 0,
   };
@@ -441,7 +409,7 @@ export let InterstitialScreen = React.forwardRef<
         ref={bodyScrollRef}
         tabIndex={0}
       >
-        {hasMedia ? (
+        {renderMedia ? (
           <FlexGrid fullWidth className={cx(`${blockClass}--body-grid`)}>
             <Row className={cx(`${blockClass}--body-row`)}>
               <Column
@@ -466,7 +434,7 @@ export let InterstitialScreen = React.forwardRef<
                   )}
                 </div>
               </Column>
-              {hasMedia && (
+              {renderMedia && (
                 <Column
                   xlg={mediaBreakpoints.xlg}
                   lg={mediaBreakpoints.lg}
@@ -475,15 +443,7 @@ export let InterstitialScreen = React.forwardRef<
                   className={cx(`${blockClass}--media-container`)}
                 >
                   <div className={`${blockClass}--media`}>
-                    {hasMedia && media?.render && media.render()}
-                    {hasMedia && media?.filePaths && (
-                      <SteppedAnimatedMedia
-                        className={`${blockClass}--stepped-animated-media`}
-                        filePaths={media.filePaths}
-                        playStep={progStep}
-                      />
-                    )}
-                    {hasMedia && renderMedia && (
+                    {renderMedia && (
                       <div className={`${blockClass}--stepped-animated-media`}>
                         {renderMedia({ playStep: progStep })}
                       </div>
@@ -648,35 +608,7 @@ InterstitialScreen.propTypes = {
    * Specifies whether the component is currently open.
    */
   isOpen: PropTypes.bool,
-  /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
-   * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
-   * @see {@link MEDIA_PROP_TYPE}.
-   * @deprecated please use the `renderMedia` prop
-   */
-  /**@ts-ignore*/
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-      breakpoints: PropTypes.shape({
-        xlg: PropTypes.number,
-        lg: PropTypes.number,
-      }),
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-      breakpoints: PropTypes.shape({
-        xlg: PropTypes.number,
-        lg: PropTypes.number,
-      }),
-    }),
-  ]),
+
   /**
    * The label for the Next button.
    */

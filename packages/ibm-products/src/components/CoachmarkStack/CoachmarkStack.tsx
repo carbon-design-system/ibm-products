@@ -38,13 +38,6 @@ import { CoachmarkContext } from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { useIsomorphicEffect } from '../../global/js/hooks';
 
-type Media =
-  | {
-      render?: () => ReactNode;
-    }
-  | {
-      filePaths?: string[];
-    };
 interface CoachmarkStackProps {
   /**
    * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
@@ -64,15 +57,9 @@ interface CoachmarkStackProps {
    */
   description: ReactNode;
   /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
+   * Optional prop to render any media like images or any animated media.
    */
-  media?: Media;
+  renderMedia?: (params) => ReactNode;
   /**
    * The labels used to link to the stackable Coachmarks.
    */
@@ -131,7 +118,7 @@ export let CoachmarkStack = React.forwardRef<
       onClose = defaults.onClose,
       // Pass through to CoachmarkStackHome
       description,
-      media,
+      renderMedia,
       navLinkLabels,
       portalTarget = defaults.portalTarget,
       closeButtonLabel,
@@ -324,7 +311,7 @@ export let CoachmarkStack = React.forwardRef<
             )}
             isOpen={isOpen && selectedItemNumber < 1}
             description={description}
-            media={media}
+            renderMedia={renderMedia}
             navLinkLabels={navLinkLabels}
             onClickNavItem={handleClickNavItem}
             onClose={() => {
@@ -376,24 +363,6 @@ CoachmarkStack.propTypes = {
   description: PropTypes.node.isRequired,
 
   /**
-   * The object describing an image in one of two shapes.
-   *
-   * If a single media element is required, use `{render}`.
-   *
-   * If a stepped animation is required, use `{filePaths}`.
-   *
-   * @see {@link MEDIA_PROP_TYPE}.
-   */
-  media: PropTypes.oneOfType([
-    PropTypes.shape({
-      render: PropTypes.func,
-    }),
-    PropTypes.shape({
-      filePaths: PropTypes.arrayOf(PropTypes.string),
-    }),
-  ]) as PropTypes.Validator<Media>,
-
-  /**
    * The labels used to link to the stackable Coachmarks.
    */
   navLinkLabels: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
@@ -408,6 +377,11 @@ CoachmarkStack.propTypes = {
    * The default is `document.body`.
    */
   portalTarget: PropTypes.string,
+
+  /**
+   * Optional prop to render any media like images or animated media.
+   */
+  renderMedia: PropTypes.func,
 
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.

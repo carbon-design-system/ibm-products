@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.10.0-rc.0",
+  "version": "0.11.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -15,6 +15,7 @@
   "files": [
     "custom-elements.json",
     "es/**/*",
+    "es-custom/**/*",
     "lib/**/*",
     "scss/**/*"
   ],
@@ -24,6 +25,7 @@
   },
   "exports": {
     "./es/*": "./es/*",
+    "./es-custom/*": "./es-custom/*",
     "./lib/*": "./lib/*",
     "./dist/*": "./dist/*",
     "./scss/*": "./scss/*",
@@ -49,9 +51,9 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@carbon/ibm-products-styles": "^2.57.0-rc.0",
+    "@carbon/ibm-products-styles": "^2.58.0-rc.0",
     "@carbon/styles": "1.75.0",
-    "@carbon/web-components": "2.23.0",
+    "@carbon/web-components": "2.25.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {

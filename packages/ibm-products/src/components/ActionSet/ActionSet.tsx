@@ -124,7 +124,6 @@ export const validateActionSetProps = ({ actions, size }) => {
   if (actions && actions.length) {
     const problems = [] as string[];
 
-     
     const stacking = willStack(size, actions.length);
 
     const countActions = (kind: ButtonKind) =>

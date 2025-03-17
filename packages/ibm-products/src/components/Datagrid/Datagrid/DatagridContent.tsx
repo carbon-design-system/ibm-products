@@ -261,7 +261,6 @@ export const DatagridContent = ({
           ref={gridAreaRef}
         >
           {filterProps?.variation === 'panel' && (
-            // @ts-expect-error
             <FilterPanel
               updateMethod={undefined}
               setAllFilters={undefined}

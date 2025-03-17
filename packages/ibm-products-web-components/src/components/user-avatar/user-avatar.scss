@@ -32,6 +32,31 @@ $block-class: #{$prefix}--user-avatar;
   @extend .#{$block-class}__tooltip;
 }
 
+:host(#{$prefix}-user-avatar) .#{$block-class}--xl {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--lg {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--md {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-04 + $spacing-03;
+    inline-size: $spacing-04 + $spacing-03;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--sm {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-05;
+    inline-size: $spacing-05;
+  }
+}
+
 :host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-trigger {
   padding: 0;
   border: 0;

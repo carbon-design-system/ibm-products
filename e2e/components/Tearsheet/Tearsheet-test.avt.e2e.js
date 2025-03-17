@@ -357,7 +357,7 @@ test.describe('Tearsheet @avt', () => {
     // Pressing 'Escape' key to close narrow Tearsheet
     await page.keyboard.press('Escape');
     // Now the focus is on the 1st input field of the wide Tearsheet
-    await expect(stackedInput1).toBeFocused();
+    await expect(page.getByText('Open tearsheet 2')).toBeFocused();
     // Pressing 'Escape' key to close the wide Tearheet
     await page.keyboard.press('Escape');
     await page.screenshot({ animations: 'disabled' });

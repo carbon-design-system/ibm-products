@@ -23,12 +23,8 @@ export default {
         <StoryDocsPage
           altGuidelinesHref={[
             {
-              href: 'https://carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Error pattern usage guidelines',
-            },
-            {
               href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
-              label: 'Carbon empty pattern usage guidelines',
+              label: 'Carbon Empty pattern usage guidelines',
             },
           ]}
           deprecationNotice="This component is deprecated and will be removed in the next major version. For more information, please refer to the [Carbon docs](https://carbondesignsystem.com/patterns/empty-states-pattern/)."
